@@ -74,6 +74,8 @@ const WatchPage: React.FC = () => {
   const [summaryError, setSummaryError] = useState<string | null>(null);
 
   const [commentCount, setCommentCount] = useState(0);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [shareMessage, setShareMessage] = useState('');
 
   const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
@@ -306,14 +308,47 @@ const WatchPage: React.FC = () => {
   };
   
   const handleShare = () => {
-    if(video) {
-        const videoUrl = window.location.href;
-        navigator.clipboard.writeText(videoUrl).then(() => {
-            alert('Link copied to clipboard!'); 
-        }).catch(err => {
-            console.error('Failed to copy link: ', err);
-            alert('Failed to copy link.');
-        });
+    setIsShareModalOpen(true);
+  };
+
+  const handleCopyLink = async () => {
+    if (video) {
+      const videoUrl = window.location.href;
+      try {
+        await navigator.clipboard.writeText(videoUrl);
+        setShareMessage('Link copied to clipboard!');
+        setTimeout(() => setShareMessage(''), 3000);
+      } catch (err) {
+        console.error('Failed to copy link: ', err);
+        setShareMessage('Failed to copy link.');
+        setTimeout(() => setShareMessage(''), 3000);
+      }
+    }
+  };
+
+  const handleShareToSocial = (platform: string) => {
+    if (!video) return;
+    const videoUrl = window.location.href;
+    const text = `Check out this video: ${video.title}`;
+
+    let shareUrl = '';
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(videoUrl)}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoUrl)}`;
+        break;
+      case 'reddit':
+        shareUrl = `https://reddit.com/submit?url=${encodeURIComponent(videoUrl)}&title=${encodeURIComponent(video.title)}`;
+        break;
+      case 'email':
+        shareUrl = `mailto:?subject=${encodeURIComponent(video.title)}&body=${encodeURIComponent(`${text}\n\n${videoUrl}`)}`;
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
     }
   };
 
@@ -756,10 +791,72 @@ const WatchPage: React.FC = () => {
                   <ThumbsDownIcon className={`w-5 h-5 ${disliked ? 'fill-red-600 dark:fill-red-400' : ''}`} />
                 </button>
               </div>
-              <button onClick={handleShare} className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors" aria-label="Share this video" title="Share">
-                <ShareIcon className="w-5 h-5" />
-                <span>Share</span>
-              </button>
+              <div className="relative">
+                <button onClick={handleShare} className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors" aria-label="Share this video" title="Share">
+                  <ShareIcon className="w-5 h-5" />
+                  <span>Share</span>
+                </button>
+
+                {isShareModalOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-80 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-50 animate-fade-in-fast">
+                    <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
+                      <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">Share</h3>
+                      <button onClick={() => setIsShareModalOpen(false)} className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700" aria-label="Close share modal">
+                        <XMarkIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-300" />
+                      </button>
+                    </div>
+
+                    <div className="p-4 space-y-4">
+                      <div className="flex space-x-3">
+                        <button onClick={() => handleShareToSocial('twitter')} className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+                          <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mb-2">
+                            <span className="text-white font-bold text-sm">T</span>
+                          </div>
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">Twitter</span>
+                        </button>
+                        <button onClick={() => handleShareToSocial('facebook')} className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+                          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mb-2">
+                            <span className="text-white font-bold text-sm">f</span>
+                          </div>
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">Facebook</span>
+                        </button>
+                        <button onClick={() => handleShareToSocial('reddit')} className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+                          <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mb-2">
+                            <span className="text-white font-bold text-sm">R</span>
+                          </div>
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">Reddit</span>
+                        </button>
+                        <button onClick={() => handleShareToSocial('email')} className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+                          <div className="w-10 h-10 bg-neutral-500 rounded-full flex items-center justify-center mb-2">
+                            <span className="text-white font-bold text-sm">@</span>
+                          </div>
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">Email</span>
+                        </button>
+                      </div>
+
+                      <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4">
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="text"
+                            value={window.location.href}
+                            readOnly
+                            className="flex-1 px-3 py-2 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-neutral-50 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
+                          />
+                          <button
+                            onClick={handleCopyLink}
+                            className="px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white text-sm font-medium rounded-md transition-colors"
+                          >
+                            Copy
+                          </button>
+                        </div>
+                        {shareMessage && (
+                          <p className="text-xs text-green-600 dark:text-green-400 mt-2">{shareMessage}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
               
               <div className="relative">
                 <button 

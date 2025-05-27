@@ -2,13 +2,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserPlaylistDetails } from '../types';
-import { getUserPlaylists } from '../services/mockVideoService';
-import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon } from '@heroicons/react/24/solid';
+import { getUserPlaylists, createUserPlaylist } from '../services/mockVideoService';
+import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 
 const PlaylistsPage: React.FC = () => {
   const [playlists, setPlaylists] = useState<UserPlaylistDetails[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [newPlaylistName, setNewPlaylistName] = useState('');
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -25,6 +29,35 @@ const PlaylistsPage: React.FC = () => {
     };
     fetchPlaylists();
   }, []);
+
+  const handleCreatePlaylist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPlaylistName.trim()) {
+      setCreateError('Please enter a playlist name.');
+      return;
+    }
+
+    setIsCreating(true);
+    setCreateError(null);
+
+    try {
+      const newPlaylist = await createUserPlaylist(newPlaylistName.trim());
+      setPlaylists(prev => [newPlaylist, ...prev]);
+      setIsCreateModalOpen(false);
+      setNewPlaylistName('');
+    } catch (error) {
+      console.error('Failed to create playlist:', error);
+      setCreateError('Failed to create playlist. Please try again.');
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
+    setNewPlaylistName('');
+    setCreateError(null);
+  };
 
   const renderSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
@@ -47,10 +80,10 @@ const PlaylistsPage: React.FC = () => {
           <PlaylistIconSolid className="w-7 h-7 sm:w-8 sm:h-8 text-neutral-700 dark:text-neutral-300 mr-3" aria-hidden="true" />
           <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Your Playlists</h1>
         </div>
-        <button 
+        <button
             className="flex items-center justify-center px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium rounded-full text-sm transition-colors w-full sm:w-auto"
-            title="Create a new playlist (mock)"
-            onClick={() => alert("Mock: Create new playlist!")}
+            title="Create a new playlist"
+            onClick={() => setIsCreateModalOpen(true)}
         >
           <PlusCircleIcon className="w-5 h-5 mr-2" />
           Create New Playlist
@@ -92,6 +125,62 @@ const PlaylistsPage: React.FC = () => {
           <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base max-w-md mx-auto mb-6">
             You haven't created or saved any playlists. Start organizing your favorite videos by creating a new playlist.
           </p>
+        </div>
+      )}
+
+      {/* Create Playlist Modal */}
+      {isCreateModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-2xl w-full max-w-md">
+            <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
+              <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Create New Playlist</h2>
+              <button onClick={closeCreateModal} className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700">
+                <XMarkIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-300" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreatePlaylist} className="p-4 space-y-4">
+              <div>
+                <label htmlFor="playlistName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                  Playlist Name
+                </label>
+                <input
+                  id="playlistName"
+                  type="text"
+                  value={newPlaylistName}
+                  onChange={(e) => { setNewPlaylistName(e.target.value); setCreateError(null); }}
+                  placeholder="Enter playlist name..."
+                  className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
+                  maxLength={100}
+                  autoFocus
+                />
+                {createError && (
+                  <p className="text-sm text-red-500 dark:text-red-400 mt-1">{createError}</p>
+                )}
+              </div>
+
+              <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                Privacy: Public (default)
+              </div>
+
+              <div className="flex justify-end space-x-3 pt-2">
+                <button
+                  type="button"
+                  onClick={closeCreateModal}
+                  className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={!newPlaylistName.trim() || isCreating}
+                  className="px-4 py-2 text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isCreating ? 'Creating...' : 'Create'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>

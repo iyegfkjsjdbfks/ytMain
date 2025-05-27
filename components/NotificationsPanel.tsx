@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
@@ -26,9 +26,21 @@ interface NotificationsPanelProps {
 }
 
 const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
+  const [notifications, setNotifications] = useState(mockNotifications);
+
   if (!isOpen) return null;
 
-  const hasNewNotifications = mockNotifications.some(n => n.isNew);
+  const hasNewNotifications = notifications.some(n => n.isNew);
+
+  const markAllAsRead = () => {
+    setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
+  };
+
+  const markAsRead = (id: string) => {
+    setNotifications(prev => prev.map(notification =>
+      notification.id === id ? { ...notification, isNew: false } : notification
+    ));
+  };
 
   return (
     <div
@@ -51,13 +63,13 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
       </header>
 
       <div className="flex-grow overflow-y-auto max-h-[calc(100vh-12rem)] p-1.5">
-        {mockNotifications.length > 0 ? (
+        {notifications.length > 0 ? (
           <ul className="space-y-1">
-            {mockNotifications.map((notification) => (
+            {notifications.map((notification) => (
               <li key={notification.id}>
                 <a
                   href="#" // Replace with actual link target
-                  onClick={(e) => { e.preventDefault(); /* console.log(`Notification ${notification.id} clicked`); */ onClose(); }}
+                  onClick={(e) => { e.preventDefault(); markAsRead(notification.id); onClose(); }}
                   className={`flex items-start p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors ${notification.isNew ? 'bg-sky-50 dark:bg-sky-500/10' : ''}`}
                 >
                   <notification.icon className={`w-6 h-6 mr-3 flex-shrink-0 ${notification.iconColorClass} ${notification.isNew ? '' : 'opacity-70'}`} />
@@ -88,10 +100,10 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
         )}
       </div>
       
-      {mockNotifications.length > 0 && (
+      {notifications.length > 0 && (
          <footer className="p-3 border-t border-neutral-200 dark:border-neutral-700/80 text-center">
-            <button 
-              onClick={() => { /* console.log("Mark all as read clicked"); */ onClose(); }}
+            <button
+              onClick={() => { hasNewNotifications ? markAllAsRead() : onClose(); }}
               className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors px-3 py-1.5 rounded-md hover:bg-sky-50 dark:hover:bg-sky-500/10"
             >
               {hasNewNotifications ? 'Mark all as read' : 'View all notifications'}

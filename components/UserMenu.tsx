@@ -45,7 +45,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added on
   if (!isOpen) return null;
 
   const handleSignOut = () => {
-    onClose(); // Close menu on action
+    // Clear any stored user data
+    localStorage.removeItem('youtubeCloneWatchHistory_v1');
+    localStorage.removeItem('youtubeCloneLikedVideos_v1');
+    localStorage.removeItem('youtubeCloneRecentSearches_v2');
+
+    // Show confirmation
+    const confirmed = window.confirm('Are you sure you want to sign out? This will clear your watch history, liked videos, and search history.');
+    if (confirmed) {
+      // Reload the page to reset the app state
+      window.location.reload();
+    }
+    onClose(); // Close menu
   };
 
   const handleThemeToggle = () => {
@@ -80,8 +91,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added on
         </div>
       </div>
       <div className="py-1">
-        <MenuItem to="#" icon={<UserCircleIcon />} onClick={handleGenericClick}>Switch account</MenuItem>
-        <MenuItem to="#" icon={<VideoCameraIcon />} onClick={handleGenericClick}>YouTube Studio</MenuItem>
+        <MenuItem onClick={() => { window.open('https://accounts.google.com/AccountChooser', '_blank'); handleGenericClick(); }} icon={<UserCircleIcon />}>Switch account</MenuItem>
+        <MenuItem onClick={() => { window.open('https://studio.youtube.com', '_blank'); handleGenericClick(); }} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">

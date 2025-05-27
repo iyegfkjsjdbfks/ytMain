@@ -170,9 +170,9 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                     aria-orientation="vertical" 
                     aria-labelledby="create-button"
                 >
-                    <CreateMenuItem icon={<ArrowUpTrayIcon />} onClick={() => { alert('Mock: Upload video clicked!'); handleCloseCreateMenu(); }}>Upload video</CreateMenuItem>
-                    <CreateMenuItem icon={<SignalIcon />} onClick={() => { alert('Mock: Go live clicked!'); handleCloseCreateMenu(); }}>Go live</CreateMenuItem>
-                    <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => { alert('Mock: Create post clicked!'); handleCloseCreateMenu(); }}>Create post</CreateMenuItem>
+                    <CreateMenuItem icon={<ArrowUpTrayIcon />} onClick={() => { window.open('https://studio.youtube.com/channel/upload', '_blank'); handleCloseCreateMenu(); }}>Upload video</CreateMenuItem>
+                    <CreateMenuItem icon={<SignalIcon />} onClick={() => { window.open('https://studio.youtube.com/channel/livestreaming', '_blank'); handleCloseCreateMenu(); }}>Go live</CreateMenuItem>
+                    <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => { window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu(); }}>Create post</CreateMenuItem>
                     <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
                     <CreateMenuItem 
                         icon={<LightBulbIcon />} 
