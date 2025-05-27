@@ -1,0 +1,6 @@
+{
+  "name": "YTA Studio Aug2",
+  "description": "A refactored clone of the YouTube interface, with correct pathing, theme toggling, interactive notifications, enhanced channel pages (About, Playlists, Community), Shorts feed, and search history.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
