@@ -1,49 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
-import { Video } from '../types';
-import { getWatchLaterVideos } from '../services/mockVideoService';
+import React from 'react';
+import { Video } from '../types'; // Keep Video import for explicit typing
 import VideoCard from '../components/VideoCard';
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state
+import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatchLater
 
 const WatchLaterPage: React.FC = () => {
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchWatchLater = async () => {
-      setLoading(true);
-      try {
-        const fetchedVideos = await getWatchLaterVideos();
-        setVideos(fetchedVideos);
-      } catch (error) {
-        console.error("Failed to fetch Watch Later videos:", error);
-        setVideos([]); // Set to empty on error
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWatchLater();
-  }, []);
-
-  const renderSkeleton = () => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-      {Array.from({ length: 12 }).map((_, index) => (
-        <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
-          <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg"></div>
-          <div className="p-3">
-            <div className="flex items-start space-x-3">
-              <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0"></div>
-              <div className="flex-grow space-y-1.5 pt-0.5">
-                <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6"></div>
-                <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4"></div>
-                <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+  const { watchLaterList } = useWatchLater(); // Use context
 
 
   return (
@@ -53,11 +16,9 @@ const WatchLaterPage: React.FC = () => {
         <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">Watch Later</h1>
       </div>
 
-      {loading ? (
-        renderSkeleton()
-      ) : videos.length > 0 ? (
+      {watchLaterList.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-          {videos.map(video => (
+          {watchLaterList.map((video: Video) => (
             <VideoCard key={video.id} video={video} />
           ))}
         </div>

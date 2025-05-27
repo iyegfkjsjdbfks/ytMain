@@ -2,6 +2,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Video } from '../types';
+import { useWatchLater } from '../contexts/WatchLaterContext';
+import { BookmarkIcon as BookmarkOutlineIcon } from '@heroicons/react/24/outline';
+import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
 
 
 interface VideoCardProps {
@@ -9,8 +12,20 @@ interface VideoCardProps {
 }
 
 const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
+  const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
+  const isSaved = isWatchLater(video.id);
   const channelLink = `/channel/${encodeURIComponent(video.channelName)}`;
   const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleToggleWatchLater = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent link navigation
+    e.stopPropagation(); // Stop event bubbling
+    if (isSaved) {
+      removeFromWatchLater(video.id);
+    } else {
+      addToWatchLater(video);
+    }
+  };
 
   const handleChannelNavigation = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation(); // Prevent outer link navigation
@@ -33,9 +48,21 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
             className="w-full h-full object-cover rounded-lg" 
             loading="lazy"
           />
-          <div className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded-sm">
+          <div className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded-sm z-0">
             {video.duration}
           </div>
+          <button
+            onClick={handleToggleWatchLater}
+            className="absolute top-2 right-2 p-1.5 bg-black/60 hover:bg-black/80 rounded-full text-white transition-colors z-10 group-hover:opacity-100 opacity-0 focus:opacity-100"
+            aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
+            title={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
+          >
+            {isSaved ? (
+              <BookmarkSolidIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+            ) : (
+              <BookmarkOutlineIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+            )}
+          </button>
         </div>
         <div className="p-3 flex-grow">
           <div className="flex items-start space-x-3">

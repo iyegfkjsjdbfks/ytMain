@@ -20,12 +20,14 @@ import YourDataPage from './pages/YourDataPage';
 import SettingsPage from './pages/SettingsPage'; 
 import AIContentSparkPage from './pages/AIContentSparkPage'; // New Import
 import { MiniplayerProvider } from './contexts/MiniplayerContext'; 
+import { WatchLaterProvider } from './contexts/WatchLaterContext'; // Added WatchLaterProvider import
 
 
 function App() { // Removed React.FC
   return (
     <HashRouter>
-      <MiniplayerProvider> {/* Wrap with MiniplayerProvider */}
+      <WatchLaterProvider> {/* Added WatchLaterProvider */}
+        <MiniplayerProvider> {/* Wrap with MiniplayerProvider */}
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -47,7 +49,8 @@ function App() { // Removed React.FC
             <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* New Route */}
           </Routes>
         </Layout>
-      </MiniplayerProvider>
+        </MiniplayerProvider>
+      </WatchLaterProvider> {/* Added WatchLaterProvider */}
     </HashRouter>
   );
 }
