@@ -19,6 +19,7 @@ import LibraryPage from './pages/LibraryPage';
 import YourDataPage from './pages/YourDataPage'; 
 import SettingsPage from './pages/SettingsPage'; 
 import AIContentSparkPage from './pages/AIContentSparkPage'; // New Import
+import VideoUploadPage from './pages/VideoUploadPage';
 import { MiniplayerProvider } from './contexts/MiniplayerContext'; 
 import { WatchLaterProvider } from './contexts/WatchLaterContext'; // Added WatchLaterProvider import
 
@@ -47,6 +48,7 @@ function App() { // Removed React.FC
             <Route path="/account/data" element={<YourDataPage />} /> 
             <Route path="/account/settings" element={<SettingsPage />} /> 
             <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* New Route */}
+            <Route path="/upload" element={<VideoUploadPage />} />
           </Routes>
         </Layout>
         </MiniplayerProvider>

@@ -82,8 +82,23 @@ export interface UserPlaylistDetails extends UserPlaylist {
 
 // For AI Content Spark feature
 export interface VideoIdeaResponse {
-  titles: string[];
-  concept: string; 
-  talkingPoints: string[]; 
-  tags: string[]; 
+  ideas: string[];
+  error?: string;
+}
+
+export interface VideoUploadData {
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  visibility: 'public' | 'unlisted' | 'private';
+  videoFile: File | null;
+  thumbnailFile: File | null;
+  isShorts: boolean;
+}
+
+export interface UploadProgress {
+  percentage: number;
+  status: 'idle' | 'uploading' | 'processing' | 'completed' | 'error';
+  message: string;
 }

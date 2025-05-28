@@ -1,5 +1,5 @@
 
-import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails } from '../types'; // Correct relative path
+import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types'; // Correct relative path
 
 const mockVideos: Video[] = [
   {
@@ -1054,6 +1054,79 @@ export const deleteUserPlaylist = async (playlistId: string): Promise<void> => {
   let playlists = getAllUserPlaylistsRaw();
   playlists = playlists.filter(p => p.id !== playlistId);
   localStorage.setItem(USER_PLAYLISTS_KEY, JSON.stringify(playlists));
+};
+
+// Mock service for uploading a video
+export const uploadVideo = async (
+  uploadData: VideoUploadData,
+  onProgress: (progress: UploadProgress) => void
+): Promise<Video> => {
+  return new Promise((resolve, reject) => {
+    let progress = 0;
+    
+    // Simulate upload progress
+    const uploadInterval = setInterval(() => {
+      progress += Math.random() * 15 + 5; // Random increment between 5-20%
+      
+      if (progress < 70) {
+        onProgress({
+          percentage: Math.min(progress, 70),
+          status: 'uploading',
+          message: 'Uploading video...'
+        });
+      } else if (progress < 90) {
+        onProgress({
+          percentage: Math.min(progress, 90),
+          status: 'processing',
+          message: 'Processing video...'
+        });
+      } else {
+        clearInterval(uploadInterval);
+        
+        // Create new video object
+        const newVideo: Video = {
+          id: `uploaded_${Date.now()}`,
+          title: uploadData.title,
+          thumbnailUrl: uploadData.thumbnailFile 
+            ? URL.createObjectURL(uploadData.thumbnailFile)
+            : 'https://picsum.photos/seed/uploaded/680/380',
+          channelName: 'Your Channel',
+          channelAvatarUrl: 'https://picsum.photos/seed/yourchannel/48/48',
+          views: '0 views',
+          uploadedAt: 'just now',
+          duration: uploadData.isShorts ? '0:30' : '10:45',
+          videoUrl: uploadData.videoFile ? URL.createObjectURL(uploadData.videoFile) : '',
+          description: uploadData.description,
+          category: uploadData.category,
+          isShort: uploadData.isShorts
+        };
+        
+        // Add to mock videos array (in a real app, this would be sent to server)
+        mockVideos.unshift(newVideo);
+        
+        onProgress({
+          percentage: 100,
+          status: 'completed',
+          message: 'Upload completed successfully!'
+        });
+        
+        resolve(newVideo);
+      }
+    }, 500); // Update every 500ms
+    
+    // Simulate potential error (5% chance)
+    setTimeout(() => {
+      if (Math.random() < 0.05) {
+        clearInterval(uploadInterval);
+        onProgress({
+          percentage: 0,
+          status: 'error',
+          message: 'Upload failed. Please try again.'
+        });
+        reject(new Error('Upload failed'));
+      }
+    }, 2000);
+  });
 };
 
 // Make sure all functions using MOCK_SUBSCRIBED_CHANNELS are defined after it.
