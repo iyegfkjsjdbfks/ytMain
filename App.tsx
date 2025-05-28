@@ -20,6 +20,17 @@ import YourDataPage from './pages/YourDataPage';
 import GoLivePage from './pages/GoLivePage'; // Added import for Go Live page
 import AIContentSparkPage from './pages/AIContentSparkPage'; // Added import
 import VideoUploadPage from './pages/VideoUploadPage';
+import SettingsPage from './pages/SettingsPage';
+import AnalyticsPage from './pages/AnalyticsPage';
+import CommentModerationPage from './pages/CommentModerationPage';
+import MonetizationPage from './pages/MonetizationPage';
+import ContentManagerPage from './pages/ContentManagerPage';
+import StudioDashboardPage from './pages/StudioDashboardPage';
+import CreatorStudioPage from './pages/CreatorStudioPage';
+import CommunityPage from './pages/CommunityPage';
+import PlaylistManagerPage from './pages/PlaylistManagerPage';
+import ChannelCustomizationPage from './pages/ChannelCustomizationPage';
+import VideoEditorPage from './pages/VideoEditorPage';
 import { MiniplayerProvider } from './contexts/MiniplayerContext'; 
 import { WatchLaterProvider } from './contexts/WatchLaterContext'; // Added WatchLaterProvider import
 
@@ -48,6 +59,18 @@ function App() { // Removed React.FC
                   <Route path="/your-data" element={<YourDataPage />} />
                   <Route path="/go-live" element={<GoLivePage />} /> {/* Added route for Go Live page */}
                   <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* Added route */}
+                  <Route path="/upload" element={<VideoUploadPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
+                  <Route path="/studio" element={<StudioDashboardPage />} />
+                  <Route path="/studio/analytics" element={<AnalyticsPage />} />
+                  <Route path="/studio/comments" element={<CommentModerationPage />} />
+                  <Route path="/studio/monetization" element={<MonetizationPage />} />
+                   <Route path="/studio/content" element={<ContentManagerPage />} />
+                   <Route path="/studio/creator" element={<CreatorStudioPage />} />
+                   <Route path="/studio/community" element={<CommunityPage />} />
+                    <Route path="/studio/playlists" element={<PlaylistManagerPage />} />
+                    <Route path="/studio/customization" element={<ChannelCustomizationPage />} />
+                    <Route path="/studio/editor" element={<VideoEditorPage />} />
                 </Routes>
               </Layout>
         </MiniplayerProvider>
