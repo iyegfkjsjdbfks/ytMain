@@ -10,7 +10,7 @@ import {
   PencilSquareIcon,
   CalendarDaysIcon,
   GlobeAltIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   ClockIcon,
   EyeIcon
 } from '@heroicons/react/24/outline';
@@ -328,7 +328,7 @@ const CreatorStudioPage: React.FC = () => {
                   <div className={`flex items-center text-sm ${
                     insight.change > 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
-                    <TrendingUpIcon className={`w-4 h-4 mr-1 ${
+                    <ArrowTrendingUpIcon className={`w-4 h-4 mr-1 ${
                       insight.change < 0 ? 'transform rotate-180' : ''
                     }`} />
                     {Math.abs(insight.change)}%
@@ -354,7 +354,7 @@ const CreatorStudioPage: React.FC = () => {
                       </h3>
                       {idea.trending && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                          <TrendingUpIcon className="w-3 h-3 mr-1" />
+                          <ArrowTrendingUpIcon className="w-3 h-3 mr-1" />
                           Trending
                         </span>
                       )}

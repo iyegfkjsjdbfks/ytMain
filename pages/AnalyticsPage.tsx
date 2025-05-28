@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, TrendingUpIcon, TrendingDownIcon, CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, CalendarDaysIcon } from '@heroicons/react/24/outline';
 import { Video } from '../types';
 import { getVideos } from '../services/mockVideoService';
 import { parseViewCount } from '../utils/numberUtils';
@@ -110,9 +110,9 @@ const AnalyticsPage: React.FC = () => {
               change >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             }`}>
               {change >= 0 ? (
-                <TrendingUpIcon className="w-4 h-4 mr-1" />
+                <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
               ) : (
-                <TrendingDownIcon className="w-4 h-4 mr-1" />
+                <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
               )}
               {Math.abs(change)}% vs last period
             </div>

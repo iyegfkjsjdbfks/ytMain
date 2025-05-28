@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BanknotesIcon, TrendingUpIcon, CalendarIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon, PlayIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { BanknotesIcon, ArrowTrendingUpIcon, CalendarIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon, PlayIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -309,7 +309,7 @@ const MonetizationPage: React.FC = () => {
                 {formatCurrency(metrics.totalRevenue)}
               </p>
               <p className="text-sm text-green-600 dark:text-green-400 flex items-center mt-1">
-                <TrendingUpIcon className="w-4 h-4 mr-1" />
+                <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                 +{metrics.revenueGrowth.toFixed(1)}%
               </p>
             </div>
