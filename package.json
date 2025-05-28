@@ -11,8 +11,10 @@
   "dependencies": {
     "@google/genai": "^1.1.0",
     "@heroicons/react": "^2.2.0",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "chart.js": "^4.4.9",
     "react": "^19.1.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1"
