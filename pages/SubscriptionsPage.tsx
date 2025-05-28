@@ -1,49 +1,13 @@
 
-import React, { useEffect, useState } from 'react';
-import { Video } from '../types';
-import { getSubscribedChannelNames, getVideosByChannelName } from '../services/mockVideoService';
-import { parseRelativeDate } from '../utils/dateUtils';
+import React, { useEffect } from 'react';
 import VideoCard from '../components/VideoCard';
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon'; // Using local icon
+import { useSubscriptionsFeed } from '../hooks';
 
 const SubscriptionsPage: React.FC = () => {
-  const [subscribedVideos, setSubscribedVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: subscribedVideos, loading, error } = useSubscriptionsFeed();
 
   useEffect(() => {
-    const fetchSubscriptionsFeed = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const channelNames = await getSubscribedChannelNames();
-        if (channelNames.length === 0) {
-          setSubscribedVideos([]);
-          setLoading(false);
-          return;
-        }
-
-        const videosPromises = channelNames.map(name => getVideosByChannelName(name));
-        const videosByChannel = await Promise.all(videosPromises);
-        
-        const allVideos = videosByChannel.flat();
-        
-        const sortedVideos = allVideos.sort((a, b) => 
-          parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt)
-        );
-        
-        setSubscribedVideos(sortedVideos);
-
-      } catch (err) {
-        console.error("Failed to fetch subscriptions feed:", err);
-        setError("Could not load your subscriptions feed. Please try again later.");
-        setSubscribedVideos([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSubscriptionsFeed();
     window.scrollTo(0,0);
   }, []);
 

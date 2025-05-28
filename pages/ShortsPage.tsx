@@ -1,31 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Video } from '../types';
-import { getShortsVideos } from '../services/mockVideoService';
+import React, { useRef } from 'react';
 import ShortDisplayCard from '../components/ShortDisplayCard'; // New component
+import { useShortsVideos } from '../hooks';
 
 const ShortsPage: React.FC = () => {
-  const [shorts, setShorts] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: shorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const fetchShorts = async () => {
-      setLoading(true);
-      try {
-        const fetchedShorts = await getShortsVideos();
-        setShorts(fetchedShorts);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch shorts:", err);
-        setError("Could not load shorts. Please try again later.");
-        setShorts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchShorts();
-  }, []);
 
   if (loading) {
     return (

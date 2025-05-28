@@ -1,29 +1,13 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
-import VideoCard from '../components/VideoCard';
 import { Video } from '../types';
-import { getVideos } from '../services/mockVideoService';
+import VideoCard from '../components/VideoCard';
 import CategoryChips from '../components/CategoryChips';
+import { useVideos } from '../hooks';
 
 const HomePage: React.FC = () => {
-  const [allVideos, setAllVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      setLoading(true);
-      try {
-        const fetchedVideos = await getVideos();
-        setAllVideos(fetchedVideos);
-      } catch (error) {
-        console.error("Failed to fetch videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVideos();
-  }, []);
+  const { data: videos, loading, error } = useVideos();
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
@@ -32,10 +16,10 @@ const HomePage: React.FC = () => {
 
   const filteredVideos = useMemo(() => {
     if (selectedCategory === "All") {
-      return allVideos;
+      return videos;
     }
-    return allVideos.filter(video => video.category === selectedCategory);
-  }, [allVideos, selectedCategory]);
+    return videos.filter(video => video.category === selectedCategory);
+  }, [videos, selectedCategory]);
 
 
   const renderSkeleton = () => (
@@ -63,6 +47,17 @@ const HomePage: React.FC = () => {
 
   if (loading) {
     return renderSkeleton();
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white dark:bg-neutral-950">
+        <CategoryChips onSelectCategory={handleSelectCategory} />
+        <div className="text-center py-16 text-red-600 dark:text-red-400 text-lg">
+          Failed to load videos: {error}
+        </div>
+      </div>
+    );
   }
   
   return (

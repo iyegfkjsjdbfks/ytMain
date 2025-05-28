@@ -1,48 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
-import { Video } from '../types';
-import { getVideos } from '../services/mockVideoService';
+import React, { useState } from 'react';
 import VideoCard from '../components/VideoCard';
 import { FireIcon } from '@heroicons/react/24/solid';
-import { parseViewCount } from '../utils/numberUtils';
+import { useTrendingVideos } from '../hooks';
 
 const TrendingPage: React.FC = () => {
-  const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');
-
-  useEffect(() => {
-    const fetchTrendingVideos = async () => {
-      setLoading(true);
-      try {
-        const allVideos = await getVideos();
-
-        // Sort by view count to get trending videos
-        const sortedByViews = [...allVideos].sort((a, b) => {
-          const viewsA = parseViewCount(a.views);
-          const viewsB = parseViewCount(b.views);
-          return viewsB - viewsA;
-        });
-
-        // Filter by category if not 'all'
-        let filteredVideos = sortedByViews;
-        if (activeCategory !== 'all') {
-          filteredVideos = sortedByViews.filter(video =>
-            video.category.toLowerCase().includes(activeCategory.toLowerCase())
-          );
-        }
-
-        setTrendingVideos(filteredVideos.slice(0, 50)); // Top 50 trending
-      } catch (error) {
-        console.error('Failed to fetch trending videos:', error);
-        setTrendingVideos([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTrendingVideos();
-  }, [activeCategory]);
+  const { data: trendingVideos, loading, error } = useTrendingVideos(activeCategory);
 
   const categories = [
     { id: 'all' as const, label: 'All', icon: '🔥' },
@@ -101,6 +65,16 @@ const TrendingPage: React.FC = () => {
 
       {loading ? (
         renderSkeleton()
+      ) : error ? (
+        <div className="text-center py-12 bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg">
+          <FireIcon className="w-16 h-16 text-red-400 dark:text-red-600 mx-auto mb-6" />
+          <p className="text-xl sm:text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+            Failed to load trending videos
+          </p>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-md mx-auto">
+            {error}
+          </p>
+        </div>
       ) : trendingVideos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
           {trendingVideos.map((video, index) => (
