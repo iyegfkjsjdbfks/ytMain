@@ -61,6 +61,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added on
 
   const handleThemeToggle = () => {
     toggleTheme();
+    onClose(); // Close menu after theme toggle
   }
 
   const handleGenericClick = () => {
