@@ -54,3 +54,25 @@ export const formatCount = (num: number, digits: number = 0): string => {
   
   return numStr.replace(rx, "$1") + item.symbol;
 };
+
+/**
+ * Alias for formatCount to maintain backward compatibility
+ */
+export const formatNumber = formatCount;
+
+/**
+ * Formats duration in seconds to a readable format (e.g., "2:30", "1:05:30")
+ * @param seconds The duration in seconds
+ * @returns A string representation of the duration
+ */
+export const formatDuration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+  
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  } else {
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  }
+};
