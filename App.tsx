@@ -16,9 +16,9 @@ import UserPage from './pages/UserPage';
 import PlaylistsPage from './pages/PlaylistsPage'; 
 import PlaylistDetailPage from './pages/PlaylistDetailPage'; 
 import LibraryPage from './pages/LibraryPage';
-import YourDataPage from './pages/YourDataPage'; 
-import SettingsPage from './pages/SettingsPage'; 
-import AIContentSparkPage from './pages/AIContentSparkPage'; // New Import
+import YourDataPage from './pages/YourDataPage';
+import GoLivePage from './pages/GoLivePage'; // Added import for Go Live page
+import AIContentSparkPage from './pages/AIContentSparkPage'; // Added import
 import VideoUploadPage from './pages/VideoUploadPage';
 import { MiniplayerProvider } from './contexts/MiniplayerContext'; 
 import { WatchLaterProvider } from './contexts/WatchLaterContext'; // Added WatchLaterProvider import
@@ -45,12 +45,11 @@ function App() { // Removed React.FC
             <Route path="/liked-videos" element={<LikedVideosPage />} />
             <Route path="/channel/:channelIdOrName" element={<ChannelPage />} />
             <Route path="/user/:userName" element={<UserPage />} />
-            <Route path="/account/data" element={<YourDataPage />} /> 
-            <Route path="/account/settings" element={<SettingsPage />} /> 
-            <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* New Route */}
-            <Route path="/upload" element={<VideoUploadPage />} />
-          </Routes>
-        </Layout>
+                  <Route path="/your-data" element={<YourDataPage />} />
+                  <Route path="/go-live" element={<GoLivePage />} /> {/* Added route for Go Live page */}
+                  <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* Added route */}
+                </Routes>
+              </Layout>
         </MiniplayerProvider>
       </WatchLaterProvider> {/* Added WatchLaterProvider */}
     </HashRouter>

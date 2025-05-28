@@ -171,7 +171,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                     aria-labelledby="create-button"
                 >
                     <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={handleCloseCreateMenu}>Upload video</CreateMenuItem>
-                    <CreateMenuItem icon={<SignalIcon />} onClick={() => { window.open('https://studio.youtube.com/channel/livestreaming', '_blank'); handleCloseCreateMenu(); }}>Go live</CreateMenuItem>
+                    <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={handleCloseCreateMenu}>Go live</CreateMenuItem>
                     <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => { window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu(); }}>Create post</CreateMenuItem>
                     <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
                     <CreateMenuItem 
