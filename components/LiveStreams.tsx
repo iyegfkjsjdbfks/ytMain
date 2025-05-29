@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { mockVideoService } from '../services/mockVideoService';
+import { getVideos } from '../services/mockVideoService';
 import VideoCard from './VideoCard';
 
 interface LiveStreamsProps {
@@ -17,7 +17,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
     const fetchLiveStreams = async () => {
       try {
         setLoading(true);
-        const allVideos = await mockVideoService.getVideos();
+        const allVideos = await getVideos();
         
         // Mock live streams by modifying some videos to appear as live
         const mockLiveStreams = allVideos

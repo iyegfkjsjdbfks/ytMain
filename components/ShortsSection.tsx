@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { mockVideoService } from '../services/mockVideoService'; // Assuming you have a service to fetch videos
-import { ShortsIcon } from './icons/ShortsIcon'; // Assuming you have a ShortsIcon
+import { getShortsVideos } from '../services/mockVideoService'; // Assuming you have a service to fetch videos
+import ShortsIcon from './icons/ShortsIcon'; // Assuming you have a ShortsIcon
 import ShortDisplayCard from './ShortDisplayCard'; // Assuming you have a ShortDisplayCard component
 
 interface ShortsSectionProps {
@@ -19,10 +19,9 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
       try {
         setLoading(true);
         // Assuming your video service can filter by a 'Shorts' category or similar
-        const allVideos = await mockVideoService.getVideos(); 
-        // Filter for videos that are shorts (e.g., by category or a specific flag)
-        // This is a placeholder, adjust the filtering logic as per your data structure
-        const shortsVideos = allVideos.filter(video => video.isShort || video.duration < 60).slice(0, maxShorts);
+        // Get shorts videos directly from the service
+        const allShortsVideos = await getShortsVideos(); 
+        const shortsVideos = allShortsVideos.slice(0, maxShorts);
         setShorts(shortsVideos);
         setError(null);
       } catch (err) {
@@ -84,7 +83,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
         {shorts.map(short => (
-          <ShortDisplayCard key={short.id} video={short} />
+          <ShortDisplayCard key={short.id} short={short} />
         ))}
       </div>
     </div>

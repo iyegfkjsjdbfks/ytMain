@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { mockVideoService } from '../services/mockVideoService';
-import { HistoryIcon } from './icons/HistoryIcon';
+import { getVideos } from '../services/mockVideoService';
+import HistoryIcon from './icons/HistoryIcon';
 import VideoCard from './VideoCard';
 
 interface WatchHistoryProps {
@@ -18,7 +18,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
     const fetchWatchHistory = async () => {
       try {
         setLoading(true);
-        const allVideos = await mockVideoService.getVideos();
+        const allVideos = await getVideos();
         
         // Mock watch history - in a real app, this would come from user's watch history
         // Simulate recently watched videos by taking a random subset

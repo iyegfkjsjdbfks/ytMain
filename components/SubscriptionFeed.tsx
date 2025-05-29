@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { mockVideoService } from '../services/mockVideoService';
-import { SubscriptionsIcon } from './icons/SubscriptionsIcon';
+import { getVideos } from '../services/mockVideoService';
+import SubscriptionsIcon from './icons/SubscriptionsIcon';
 import VideoCard from './VideoCard';
 
 interface SubscriptionFeedProps {
@@ -18,7 +18,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
     const fetchSubscriptionVideos = async () => {
       try {
         setLoading(true);
-        const allVideos = await mockVideoService.getVideos();
+        const allVideos = await getVideos();
         
         // Mock subscribed channels - in a real app, this would come from user data
         const subscribedChannels = [

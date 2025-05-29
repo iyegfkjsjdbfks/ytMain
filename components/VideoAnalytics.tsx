@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, EyeIcon, ThumbsUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 interface AnalyticsData {
@@ -251,7 +251,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
                 {analyticsData.engagement.likeRate.toFixed(1)}%
               </p>
             </div>
-            <ThumbsUpIcon className="w-8 h-8 text-red-500" />
+            <HandThumbUpIcon className="w-8 h-8 text-red-500" />
           </div>
         </div>
         
@@ -446,7 +446,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
                 {analyticsData.engagement.likeRate.toFixed(2)}% rate
               </p>
             </div>
-            <ThumbsUpIcon className="w-8 h-8 text-green-500" />
+            <HandThumbUpIcon className="w-8 h-8 text-green-500" />
           </div>
         </div>
         

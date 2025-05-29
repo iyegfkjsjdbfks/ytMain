@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { mockVideoService } from '../services/mockVideoService';
-import { FireIcon } from './icons/FireIcon';
+import { getVideos } from '../services/mockVideoService';
+import FireIcon from './icons/FireIcon';
 import VideoCard from './VideoCard';
 
 interface TrendingSectionProps {
@@ -18,7 +18,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = ({ maxVideos = 6 }) => {
     const fetchTrendingVideos = async () => {
       try {
         setLoading(true);
-        const allVideos = await mockVideoService.getVideos();
+        const allVideos = await getVideos();
         // Sort by views (convert string to number for sorting)
         const sortedByViews = allVideos
           .filter(video => !video.isShort) // Exclude shorts from trending

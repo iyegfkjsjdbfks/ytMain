@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ClockIcon, EyeIcon, ThumbsUpIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, EyeIcon, HandThumbUpIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 interface Video {
@@ -432,7 +432,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
                 </div>
                 <span>•</span>
                 <div className="flex items-center space-x-1">
-                  <ThumbsUpIcon className="w-3 h-3" />
+                  <HandThumbUpIcon className="w-3 h-3" />
                   <span>{video.likes}</span>
                 </div>
               </div>
