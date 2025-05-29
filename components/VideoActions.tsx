@@ -5,8 +5,9 @@ import {
   ShareIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { SaveIcon, SaveIconFilled } from '../icons/SaveIcon';
-import { formatCount } from '../utils/formatters';
+import SaveIcon from '../icons/SaveIcon';
+import SaveIconFilled from '../icons/SaveIconFilled';
+import { formatCount } from '../utils/numberUtils';
 
 interface VideoActionsProps {
   liked: boolean;
