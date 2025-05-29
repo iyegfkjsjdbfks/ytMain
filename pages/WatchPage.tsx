@@ -31,6 +31,8 @@ import { useMiniplayer } from '../contexts/MiniplayerContext';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { parseViewCount, formatCount } from '../utils/numberUtils';
 import AddCommentForm from '../components/AddCommentForm';
+import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
+import RecommendationEngine from '../components/RecommendationEngine';
 
 
 const RELATED_VIDEOS_INITIAL_COUNT = 8;
@@ -748,17 +750,37 @@ const WatchPage: React.FC = () => {
     <div className="flex flex-col lg:flex-row gap-x-6 max-w-screen-2xl mx-auto bg-white dark:bg-neutral-950">
       <div className="lg:flex-grow lg:w-[calc(100%-26rem)] xl:w-[calc(100%-28rem)]">
         <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-lg">
-          <video 
-            key={video.id} 
-            src={video.videoUrl} 
-            controls 
-            autoPlay 
-            className="w-full h-full" 
+          <AdvancedVideoPlayer
+            key={video.id}
+            src={video.videoUrl}
             poster={video.thumbnailUrl}
-            aria-label={`Video player for ${video.title}`}
-          >
-            Your browser does not support the video tag.
-          </video>
+            title={video.title}
+            autoPlay={true}
+            qualities={[
+              { label: '1080p', value: '1080p', resolution: '1920x1080' },
+              { label: '720p', value: '720p', resolution: '1280x720' },
+              { label: '480p', value: '480p', resolution: '854x480' },
+              { label: '360p', value: '360p', resolution: '640x360' }
+            ]}
+            subtitles={[
+              { id: 'en', language: 'en', label: 'English', src: `/subtitles/${video.id}_en.vtt` },
+              { id: 'es', language: 'es', label: 'Spanish', src: `/subtitles/${video.id}_es.vtt` }
+            ]}
+            chapters={[
+              { id: '1', title: 'Introduction', startTime: 0 },
+              { id: '2', title: 'Main Content', startTime: 60 },
+              { id: '3', title: 'Conclusion', startTime: 300 }
+            ]}
+            onPlay={() => addToWatchHistory(video.id)}
+            onTimeUpdate={(currentTime, duration) => {
+              // Track watch progress for recommendations
+              const watchPercentage = (currentTime / duration) * 100;
+              if (watchPercentage > 10) {
+                addToWatchHistory(video.id);
+              }
+            }}
+            className="w-full h-full"
+          />
         </div>
 
         <div className="py-3">
@@ -1062,35 +1084,15 @@ const WatchPage: React.FC = () => {
 
       <aside className="lg:w-[24rem] xl:w-[26rem] flex-shrink-0 space-y-2.5 lg:pt-0 bg-white dark:bg-neutral-950">
         <div className="sticky top-[calc(3.5rem)] z-10 bg-white dark:bg-neutral-950 pt-1 pb-2"> 
-          <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 hidden lg:block">Up next</h2>
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 hidden lg:block">Recommended for you</h2>
         </div>
-        <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto pr-1 space-y-2.5 no-scrollbar"> 
-          {displayedRelatedVideos.map(relatedVideo => (
-            <Link key={relatedVideo.id} to={`/watch/${relatedVideo.id}`} className="block group" aria-label={`Watch related video: ${relatedVideo.title}`}>
-              <div className="flex space-x-2 p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 rounded-lg transition-colors">
-                <div className="w-2/5 sm:w-1/3 lg:w-[168px] aspect-video flex-shrink-0 relative">
-                  <img src={relatedVideo.thumbnailUrl} alt={`Thumbnail for ${relatedVideo.title}`} className="w-full h-full object-cover rounded-md" loading="lazy"/>
-                  <div className="absolute bottom-1 right-1 bg-black/75 text-white text-xs px-1 py-0.5 rounded-sm">{relatedVideo.duration}</div>
-                </div>
-                <div className="flex-grow overflow-hidden pt-0.5">
-                  <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug max-h-10 overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                    {relatedVideo.title}
-                  </h3>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 mt-1 truncate transition-colors">{relatedVideo.channelName}</p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
-                    {relatedVideo.views} &bull; {relatedVideo.uploadedAt}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-          {allRelatedVideos.length > RELATED_VIDEOS_INITIAL_COUNT && !showAllRelated && (
-            <button 
-              onClick={() => setShowAllRelated(true)}
-              className="w-full mt-2 py-2 text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/70 rounded-lg transition-colors">
-              Show more
-            </button>
-          )}
+        <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto pr-1 no-scrollbar">
+          <RecommendationEngine
+            currentVideoId={video.id}
+            maxRecommendations={20}
+            onVideoSelect={(videoId) => navigate(`/watch/${videoId}`)}
+            className="space-y-2.5"
+          />
         </div>
       </aside>
     </div>

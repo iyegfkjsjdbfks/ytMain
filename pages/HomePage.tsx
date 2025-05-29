@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { Video } from '../types';
 import VideoCard from '../components/VideoCard';
 import CategoryChips from '../components/CategoryChips';
+import ShortsSection from '../components/ShortsSection';
 import { useVideos } from '../hooks';
 
 const HomePage: React.FC = () => {
@@ -63,6 +64,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-neutral-950"> {/* Added explicit background for page container */}
       <CategoryChips onSelectCategory={handleSelectCategory} />
+      <ShortsSection maxShorts={8} />
       {filteredVideos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
           {filteredVideos.map(video => (
