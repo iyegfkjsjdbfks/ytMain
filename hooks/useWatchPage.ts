@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockVideos } from '../data/mockData';
-import { mockChannels } from '../data/mockChannels';
-import { mockComments } from '../data/mockComments';
+import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
 
 interface Comment {
   id: string;
@@ -102,10 +100,8 @@ export const useWatchPage = () => {
       setLoading(true);
       
       try {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        const foundVideo = mockVideos.find(v => v.id === videoId);
+        // Load video data
+        const foundVideo = await getVideoById(videoId);
         if (!foundVideo) {
           setVideo(null);
           setLoading(false);
@@ -115,18 +111,18 @@ export const useWatchPage = () => {
         setVideo(foundVideo);
         
         // Load channel data
-        const foundChannel = mockChannels.find(c => c.id === foundVideo.channelId);
+        const foundChannel = await getChannelByName(foundVideo.channelName);
         setChannel(foundChannel || null);
         
         // Load comments
-        const videoComments = mockComments.filter(c => !c.parentId);
-        setComments(videoComments);
-        setCommentCount(videoComments.reduce((total, comment) => 
-          total + 1 + (comment.replyCount || 0), 0
-        ));
+        const videoComments = await getCommentsByVideoId(videoId);
+        const topLevelComments = videoComments.filter(c => !c.parentId);
+        setComments(topLevelComments);
+        setCommentCount(videoComments.length);
         
         // Load related videos
-        const related = mockVideos
+        const allVideos = await getVideos();
+        const related = allVideos
           .filter(v => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
