@@ -74,7 +74,7 @@ export function PageLayout<T>({
         loadingSkeleton={renderSkeleton()}
         emptyState={emptyState}
       >
-        {children}
+        {(data) => children(data)}
       </DataWrapper>
     </div>
   );

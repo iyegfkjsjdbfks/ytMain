@@ -155,11 +155,14 @@ const SearchResultsPage: React.FC = () => {
       data={sortedVideos}
       loading={loading && !!searchQuery}
       error={null}
-      emptyMessage={getEmptyMessage()}
+      emptyState={{
+        title: !searchQuery ? "Search for videos" : "No results found",
+        message: getEmptyMessage()
+      }}
       headerActions={sortFilterPanel}
       skeletonCount={12}
     >
-      <VideoGrid videos={sortedVideos} />
+      {(videos) => <VideoGrid videos={videos} />}
     </PageLayout>
   );
 };

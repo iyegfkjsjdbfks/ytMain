@@ -30,28 +30,6 @@ const HomePage: React.FC = () => {
 
   const categoryChips = <CategoryChips onSelectCategory={handleSelectCategory} />;
 
-  const homeContent = (
-    <>
-      {selectedCategory === 'All' && (
-        <>
-          <ShortsSection maxShorts={8} />
-          <WatchHistory maxVideos={4} />
-          <SubscriptionFeed maxVideos={4} />
-          <LiveStreams maxStreams={4} />
-          <TrendingSection maxVideos={6} />
-        </>
-      )}
-      {filteredVideos && filteredVideos.length > 0 && (
-        <div className="px-4">
-          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
-            {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
-          </h2>
-          <VideoGrid videos={filteredVideos} />
-        </div>
-      )}
-    </>
-  );
-  
   return (
     <PageLayout
       title="Home"
@@ -59,11 +37,34 @@ const HomePage: React.FC = () => {
       data={filteredVideos}
       loading={loading}
       error={error}
-      emptyMessage={`No videos found for "${selectedCategory}". Try selecting another category.`}
+      emptyState={{
+        title: "No videos found",
+        message: `No videos found for "${selectedCategory}". Try selecting another category.`
+      }}
       headerActions={categoryChips}
       skeletonCount={18}
     >
-      {homeContent}
+      {(data) => (
+        <>
+          {selectedCategory === 'All' && (
+            <>
+              <ShortsSection maxShorts={8} />
+              <WatchHistory maxVideos={4} />
+              <SubscriptionFeed maxVideos={4} />
+              <LiveStreams maxStreams={4} />
+              <TrendingSection maxVideos={6} />
+            </>
+          )}
+          {data && data.length > 0 && (
+            <div className="px-4">
+              <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
+                {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
+              </h2>
+              <VideoGrid videos={data} />
+            </div>
+          )}
+        </>
+      )}
     </PageLayout>
   );
 };
