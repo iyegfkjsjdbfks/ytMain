@@ -4,6 +4,10 @@ import { Video } from '../types';
 import VideoCard from '../components/VideoCard';
 import CategoryChips from '../components/CategoryChips';
 import ShortsSection from '../components/ShortsSection';
+import TrendingSection from '../components/TrendingSection';
+import SubscriptionFeed from '../components/SubscriptionFeed';
+import WatchHistory from '../components/WatchHistory';
+import LiveStreams from '../components/LiveStreams';
 import { useVideos } from '../hooks';
 
 const HomePage: React.FC = () => {
@@ -64,12 +68,25 @@ const HomePage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-neutral-950"> {/* Added explicit background for page container */}
       <CategoryChips onSelectCategory={handleSelectCategory} />
-      <ShortsSection maxShorts={8} />
+      {selectedCategory === 'All' && (
+        <>
+          <ShortsSection maxShorts={8} />
+          <WatchHistory maxVideos={4} />
+          <SubscriptionFeed maxVideos={4} />
+          <LiveStreams maxStreams={4} />
+          <TrendingSection maxVideos={6} />
+        </>
+      )}
       {filteredVideos.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-          {filteredVideos.map(video => (
-            <VideoCard key={video.id} video={video} />
-          ))}
+        <div className="px-4">
+          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
+            {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
+            {filteredVideos.map(video => (
+              <VideoCard key={video.id} video={video} />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="text-center py-16 text-neutral-600 dark:text-neutral-400 text-lg">
