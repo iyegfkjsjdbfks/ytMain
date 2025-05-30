@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  ThumbsUpIcon,
-  ThumbsDownIcon,
   ShareIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import SaveIcon from '../icons/SaveIcon';
-import SaveIconFilled from '../icons/SaveIconFilled';
+import ThumbsUpIcon from './icons/ThumbsUpIcon';
+import ThumbsDownIcon from './icons/ThumbsDownIcon';
+import SaveIcon from './icons/SaveIcon';
+import SaveIconFilled from './icons/SaveIconFilled';
 import { formatCount } from '../utils/numberUtils';
 
 interface VideoActionsProps {

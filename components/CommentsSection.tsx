@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import {
   EllipsisHorizontalIcon,
-  ThumbsUpIcon,
-  ThumbsDownIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from '@heroicons/react/24/outline';
+import ThumbsUpIcon from './icons/ThumbsUpIcon';
+import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import AddCommentForm from './AddCommentForm';
 
 interface Comment {
