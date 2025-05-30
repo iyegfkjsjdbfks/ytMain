@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { Video } from '../types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftEllipsisIcon, ArrowUturnRightIcon } from '@heroicons/react/24/solid';
 
 interface ShortDisplayCardProps {
@@ -12,6 +12,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true); // Start muted for autoplay policies
   const [showControls, setShowControls] = useState(false);
+  const navigate = useNavigate();
 
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -89,11 +90,20 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
   };
 
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Only navigate if clicking on the video area, not on interactive elements
+    const target = e.target as HTMLElement;
+    if (!target.closest('button') && !target.closest('a')) {
+      navigate(`/shorts?v=${short.id}`);
+    }
+  };
+
   return (
-    <section 
-      className="h-full w-full snap-start flex items-center justify-center relative overflow-hidden"
+    <div 
+      className="h-full w-full snap-start flex items-center justify-center relative overflow-hidden cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick}
       aria-label={`Short video: ${short.title}`}
     >
       <video
@@ -102,7 +112,10 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
         loop
         playsInline // Important for mobile
         className="w-auto h-full object-contain max-w-full max-h-full"
-        onClick={handlePlayPause}
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/shorts?v=${short.id}`);
+        }}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         poster={short.thumbnailUrl}
@@ -111,7 +124,10 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
       {/* Play/Pause button overlay (centered) */}
       {showControls && !isPlaying && (
         <button
-          onClick={handlePlayPause}
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/shorts?v=${short.id}`);
+          }}
           className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-200 z-10"
           aria-label="Play video"
         >
@@ -124,7 +140,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
         <h3 className="text-base font-semibold drop-shadow-md">{short.title}</h3>
         <Link 
             to={`/channel/${encodeURIComponent(short.channelName)}`} 
-            onClick={(e) => e.stopPropagation()} // Allow navigation without affecting video play/pause
+            onClick={(e) => {
+              e.stopPropagation();
+            }} // Allow navigation without affecting video play/pause
             className="text-sm hover:underline pointer-events-auto drop-shadow-sm"
         >
           {short.channelName}
@@ -134,7 +152,10 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
       {/* Side Action Buttons Overlay */}
       <div className="absolute right-2 bottom-20 sm:bottom-24 flex flex-col space-y-4 z-20">
         {/* Mute/Unmute Button - always visible when controls are shown, or fixed */}
-        <button onClick={toggleMute} className="p-2.5 bg-black/40 hover:bg-black/60 rounded-full transition-colors" aria-label={isMuted ? "Unmute" : "Mute"}>
+        <button onClick={(e) => {
+          e.stopPropagation();
+          toggleMute(e);
+        }} className="p-2.5 bg-black/40 hover:bg-black/60 rounded-full transition-colors" aria-label={isMuted ? "Unmute" : "Mute"}>
           {isMuted ? <SpeakerXMarkIcon className="w-6 h-6 text-white" /> : <SpeakerWaveIcon className="w-6 h-6 text-white" />}
         </button>
         
@@ -146,7 +167,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
         ].map((action) => (
           <button 
             key={action.label} 
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => {
+              e.stopPropagation();
+            }} 
             className="flex flex-col items-center p-1.5 text-white hover:bg-black/20 rounded-lg transition-colors pointer-events-auto"
             aria-label={action.label}
           >
@@ -155,7 +178,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
           </button>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

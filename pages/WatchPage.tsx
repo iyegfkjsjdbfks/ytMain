@@ -86,16 +86,16 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { setCurrentVideo } = useMiniplayer();
+  const { showMiniplayer } = useMiniplayer();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
   // Add to watch history when video loads
   React.useEffect(() => {
     if (video) {
       addToWatchHistory(video.id);
-      setCurrentVideo(video);
+      showMiniplayer(video);
     }
-  }, [video, addToWatchHistory, setCurrentVideo]);
+  }, [video, addToWatchHistory, showMiniplayer]);
   
   // Loading skeleton
   if (loading) {

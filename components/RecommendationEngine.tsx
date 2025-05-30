@@ -244,11 +244,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generateMockVideos = (): Video[] => {
     const categories = ['Technology', 'Gaming', 'Music', 'Cooking', 'Fitness', 'Education', 'News', 'Entertainment'];
     const channels = [
-      { name: 'TechReview', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face' },
-      { name: 'GameMaster', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face' },
-      { name: 'MusicVibes', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face' },
-      { name: 'CookingPro', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face' },
-      { name: 'FitnessGuru', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=40&h=40&fit=crop&crop=face' }
+      { name: 'TechReview', avatar: 'https://picsum.photos/seed/techreview/40/40' },
+      { name: 'GameMaster', avatar: 'https://picsum.photos/seed/gamemaster/40/40' },
+      { name: 'MusicVibes', avatar: 'https://picsum.photos/seed/musicvibes/40/40' },
+      { name: 'CookingPro', avatar: 'https://picsum.photos/seed/cookingpro/40/40' },
+      { name: 'FitnessGuru', avatar: 'https://picsum.photos/seed/fitnessguru/40/40' }
     ];
     
     return Array.from({ length: 50 }, (_, i) => {
@@ -260,7 +260,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       return {
         id: `rec_${i + 1}`,
         title: generateVideoTitle(category),
-        thumbnail: `https://images.unsplash.com/photo-${1500000000 + i}?w=320&h=180&fit=crop`,
+        thumbnail: `https://picsum.photos/seed/rec${i + 1}/320/180`,
         channelName: channel.name,
         channelAvatar: channel.avatar,
         views: formatViews(views),

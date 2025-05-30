@@ -1,10 +1,30 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard'; // New component
 import { useShortsVideos } from '../hooks';
 
 const ShortsPage: React.FC = () => {
   const { data: shorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  
+  // Get video ID from query parameter
+  const searchParams = new URLSearchParams(location.search);
+  const targetVideoId = searchParams.get('v');
+  
+  // Scroll to specific video when component mounts or when shorts data changes
+  useEffect(() => {
+    if (targetVideoId && shorts.length > 0 && containerRef.current) {
+      const targetIndex = shorts.findIndex(short => short.id === targetVideoId);
+      if (targetIndex !== -1) {
+        // Scroll to the target video
+        const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  }, [targetVideoId, shorts]);
 
   if (loading) {
     return (
@@ -38,7 +58,9 @@ const ShortsPage: React.FC = () => {
       aria-label="Shorts feed"
     >
       {shorts.map((short, index) => (
-        <ShortDisplayCard key={short.id || index} short={short} />
+        <div key={short.id || index} className="h-full w-full snap-start">
+          <ShortDisplayCard short={short} />
+        </div>
       ))}
     </div>
   );
