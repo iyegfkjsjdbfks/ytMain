@@ -1,0 +1,427 @@
+import React from 'react';
+import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { act, renderHook, RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { vi, MockedFunction } from 'vitest';
+import { useAppStore } from '../store';
+import { Video, Channel, UserPlaylist } from '../types';
+
+// Test Providers
+interface TestProvidersProps {
+  children: React.ReactNode;
+  initialStoreState?: Partial<ReturnType<typeof useAppStore.getState>>;
+  queryClient?: QueryClient;
+}
+
+const TestProviders: React.FC<TestProvidersProps> = ({
+  children,
+  initialStoreState,
+  queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        gcTime: 0,
+      },
+    },
+  }),
+}) => {
+  // Set initial store state if provided
+  React.useEffect(() => {
+    if (initialStoreState) {
+      useAppStore.setState(initialStoreState);
+    }
+  }, [initialStoreState]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        {children}
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
+};
+
+// Custom render function
+interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
+  initialStoreState?: Partial<ReturnType<typeof useAppStore.getState>>;
+  queryClient?: QueryClient;
+}
+
+export const renderWithProviders = (
+  ui: React.ReactElement,
+  options: CustomRenderOptions = {}
+): RenderResult => {
+  const { initialStoreState, queryClient, ...renderOptions } = options;
+
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <TestProviders
+      initialStoreState={initialStoreState}
+      queryClient={queryClient}
+    >
+      {children}
+    </TestProviders>
+  );
+
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
+};
+
+// Custom hook render function
+interface CustomRenderHookOptions<TProps> extends RenderHookOptions<TProps> {
+  initialStoreState?: Partial<ReturnType<typeof useAppStore.getState>>;
+  queryClient?: QueryClient;
+}
+
+export const renderHookWithProviders = <TResult, TProps>(
+  hook: (props: TProps) => TResult,
+  options: CustomRenderHookOptions<TProps> = {}
+) => {
+  const { initialStoreState, queryClient, ...renderHookOptions } = options;
+
+  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <TestProviders
+      initialStoreState={initialStoreState}
+      queryClient={queryClient}
+    >
+      {children}
+    </TestProviders>
+  );
+
+  return renderHook(hook, { wrapper, ...renderHookOptions });
+};
+
+// Mock Data Factories
+export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
+  id: `video_${Math.random().toString(36).substr(2, 9)}`,
+  title: 'Test Video Title',
+  description: 'Test video description',
+  thumbnail: 'https://example.com/thumbnail.jpg',
+  duration: 300,
+  views: 1000,
+  likes: 50,
+  dislikes: 5,
+  publishedAt: new Date().toISOString(),
+  channel: {
+    id: 'channel_123',
+    name: 'Test Channel',
+    avatar: 'https://example.com/avatar.jpg',
+    subscribers: 10000,
+    verified: false,
+  },
+  tags: ['test', 'video'],
+  category: 'Entertainment',
+  language: 'en',
+  isLive: false,
+  ...overrides,
+});
+
+export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => ({
+  id: `channel_${Math.random().toString(36).substr(2, 9)}`,
+  name: 'Test Channel',
+  description: 'Test channel description',
+  avatar: 'https://example.com/avatar.jpg',
+  banner: 'https://example.com/banner.jpg',
+  subscribers: 10000,
+  videos: 100,
+  verified: false,
+  joinedAt: new Date().toISOString(),
+  ...overrides,
+});
+
+export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserPlaylist => ({
+  id: `playlist_${Math.random().toString(36).substr(2, 9)}`,
+  title: 'Test Playlist',
+  description: 'Test playlist description',
+  thumbnail: 'https://example.com/thumbnail.jpg',
+  videoCount: 5,
+  isPublic: true,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  videos: Array.from({ length: 3 }, () => createMockVideo()),
+  ...overrides,
+});
+
+// Mock API Responses
+export const createMockVideoResponse = (count: number = 10) => ({
+  videos: Array.from({ length: count }, () => createMockVideo()),
+  nextPageToken: Math.random() > 0.5 ? 'next_page_token' : undefined,
+});
+
+// User Event Setup
+export const createUserEvent = () => userEvent.setup();
+
+// Store Test Utilities
+export const getStoreState = () => useAppStore.getState();
+
+export const resetStore = () => {
+  act(() => {
+    useAppStore.getState().reset();
+  });
+};
+
+export const setStoreState = (state: Partial<ReturnType<typeof useAppStore.getState>>) => {
+  act(() => {
+    useAppStore.setState(state);
+  });
+};
+
+// Mock Functions
+export const createMockFunction = <T extends (...args: any[]) => any>(
+  implementation?: T
+): MockedFunction<T> => {
+  return vi.fn(implementation) as MockedFunction<T>;
+};
+
+// Async Testing Utilities
+export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
+
+export const waitForTime = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Performance Testing Utilities
+export class PerformanceTestHelper {
+  private startTime: number = 0;
+  private endTime: number = 0;
+  private measurements: number[] = [];
+
+  start(): void {
+    this.startTime = performance.now();
+  }
+
+  end(): number {
+    this.endTime = performance.now();
+    const duration = this.endTime - this.startTime;
+    this.measurements.push(duration);
+    return duration;
+  }
+
+  getAverageTime(): number {
+    if (this.measurements.length === 0) return 0;
+    return this.measurements.reduce((sum, time) => sum + time, 0) / this.measurements.length;
+  }
+
+  getMinTime(): number {
+    return Math.min(...this.measurements);
+  }
+
+  getMaxTime(): number {
+    return Math.max(...this.measurements);
+  }
+
+  reset(): void {
+    this.measurements = [];
+    this.startTime = 0;
+    this.endTime = 0;
+  }
+
+  getMeasurements(): number[] {
+    return [...this.measurements];
+  }
+}
+
+// Memory Testing Utilities
+export const measureMemoryUsage = (): number => {
+  if ('memory' in performance) {
+    return (performance as any).memory.usedJSHeapSize;
+  }
+  return 0;
+};
+
+export const createMemoryLeakTest = (testFn: () => void, iterations: number = 100) => {
+  return async () => {
+    const initialMemory = measureMemoryUsage();
+    
+    for (let i = 0; i < iterations; i++) {
+      testFn();
+      
+      // Force garbage collection if available
+      if (global.gc) {
+        global.gc();
+      }
+      
+      await waitForNextTick();
+    }
+    
+    const finalMemory = measureMemoryUsage();
+    const memoryIncrease = finalMemory - initialMemory;
+    
+    // Memory increase should be reasonable (less than 10MB for most tests)
+    expect(memoryIncrease).toBeLessThan(10 * 1024 * 1024);
+  };
+};
+
+// Component Testing Utilities
+export const getByTestId = (container: HTMLElement, testId: string): HTMLElement => {
+  const element = container.querySelector(`[data-testid="${testId}"]`);
+  if (!element) {
+    throw new Error(`Element with test id "${testId}" not found`);
+  }
+  return element as HTMLElement;
+};
+
+export const queryByTestId = (container: HTMLElement, testId: string): HTMLElement | null => {
+  return container.querySelector(`[data-testid="${testId}"]`) as HTMLElement | null;
+};
+
+// Accessibility Testing Utilities
+export const checkAccessibility = async (container: HTMLElement) => {
+  const { axe } = await import('@axe-core/react');
+  const results = await axe(container);
+  
+  if (results.violations.length > 0) {
+    console.error('Accessibility violations:', results.violations);
+  }
+  
+  expect(results.violations).toHaveLength(0);
+};
+
+// Visual Regression Testing Utilities
+export const takeSnapshot = (component: React.ReactElement, name: string) => {
+  const { container } = renderWithProviders(component);
+  expect(container.firstChild).toMatchSnapshot(name);
+};
+
+// API Mocking Utilities
+export const mockFetch = (response: any, status: number = 200) => {
+  global.fetch = vi.fn(() =>
+    Promise.resolve({
+      ok: status >= 200 && status < 300,
+      status,
+      json: () => Promise.resolve(response),
+      text: () => Promise.resolve(JSON.stringify(response)),
+    } as Response)
+  );
+};
+
+export const mockFetchError = (error: string) => {
+  global.fetch = vi.fn(() => Promise.reject(new Error(error)));
+};
+
+// Local Storage Mocking
+export const mockLocalStorage = () => {
+  const store: Record<string, string> = {};
+  
+  global.localStorage = {
+    getItem: vi.fn((key: string) => store[key] || null),
+    setItem: vi.fn((key: string, value: string) => {
+      store[key] = value;
+    }),
+    removeItem: vi.fn((key: string) => {
+      delete store[key];
+    }),
+    clear: vi.fn(() => {
+      Object.keys(store).forEach(key => delete store[key]);
+    }),
+    length: 0,
+    key: vi.fn(),
+  };
+};
+
+// Intersection Observer Mocking
+export const mockIntersectionObserver = () => {
+  global.IntersectionObserver = vi.fn().mockImplementation((callback) => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+    root: null,
+    rootMargin: '',
+    thresholds: [],
+  }));
+};
+
+// Resize Observer Mocking
+export const mockResizeObserver = () => {
+  global.ResizeObserver = vi.fn().mockImplementation((callback) => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  }));
+};
+
+// Media Query Mocking
+export const mockMatchMedia = (matches: boolean = false) => {
+  global.matchMedia = vi.fn().mockImplementation((query) => ({
+    matches,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  }));
+};
+
+// Test Suite Helpers
+export const describeWithSetup = (
+  name: string,
+  setup: () => void,
+  tests: () => void
+) => {
+  describe(name, () => {
+    beforeEach(() => {
+      setup();
+    });
+    
+    afterEach(() => {
+      resetStore();
+      vi.clearAllMocks();
+    });
+    
+    tests();
+  });
+};
+
+// Custom Matchers
+expect.extend({
+  toBeInViewport(received: HTMLElement) {
+    const rect = received.getBoundingClientRect();
+    const isInViewport = (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+    
+    return {
+      message: () => `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
+      pass: isInViewport,
+    };
+  },
+  
+  toHaveAccessibleName(received: HTMLElement, expectedName: string) {
+    const accessibleName = received.getAttribute('aria-label') || 
+                          received.getAttribute('aria-labelledby') || 
+                          received.textContent;
+    
+    const hasExpectedName = accessibleName === expectedName;
+    
+    return {
+      message: () => `expected element to have accessible name "${expectedName}", but got "${accessibleName}"`,
+      pass: hasExpectedName,
+    };
+  },
+});
+
+// Type declarations for custom matchers
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toBeInViewport(): R;
+      toHaveAccessibleName(expectedName: string): R;
+    }
+  }
+}
+
+// Export everything for easy importing
+export {
+  render,
+  renderHook,
+  act,
+  userEvent,
+  vi,
+  MockedFunction,
+};
+
+export * from '@testing-library/react';
+export * from '@testing-library/jest-dom';
