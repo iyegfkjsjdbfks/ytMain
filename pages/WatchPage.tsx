@@ -10,6 +10,9 @@ import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { useMiniplayer } from '../contexts/MiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import WatchPageSkeleton from '../components/LoadingStates/WatchPageSkeleton';
+import VideoNotFound from '../components/ErrorStates/VideoNotFound';
+import VideoPlaybackDetails from '../components/VideoPlaybackDetails';
 
 const WatchPage: React.FC = () => {
   const {
@@ -99,77 +102,12 @@ const WatchPage: React.FC = () => {
   
   // Loading skeleton
   if (loading) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              {/* Video player skeleton */}
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse mb-4"></div>
-              
-              {/* Video title skeleton */}
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-4"></div>
-              
-              {/* Channel info skeleton */}
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-                <div className="flex-1">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1"></div>
-                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2"></div>
-                </div>
-              </div>
-              
-              {/* Comments skeleton */}
-              <div className="space-y-4">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="flex space-x-3">
-                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-                    <div className="flex-1">
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Sidebar skeleton */}
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="flex space-x-3">
-                  <div className="w-40 h-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                  <div className="flex-1">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1 w-3/4"></div>
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <WatchPageSkeleton />;
   }
   
   // Video not found
   if (!video) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Video not found</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">The video you're looking for doesn't exist or has been removed.</p>
-          <button
-            onClick={() => navigate('/')}
-            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Go to Home
-          </button>
-        </div>
-      </div>
-    );
+    return <VideoNotFound />;
   }
   
   return (
@@ -178,57 +116,29 @@ const WatchPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main content */}
           <div className="lg:col-span-2">
-            {/* Video player */}
-            <div className="mb-4">
-              <AdvancedVideoPlayer
-                src={video.videoUrl}
-                poster={video.thumbnailUrl}
-                title={video.title}
-              />
-            </div>
-            
-            {/* Video title and stats */}
-            <div className="mb-4">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                {video.title}
-              </h1>
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {formatCount(parseInt(video.views))} views • {formatDistanceToNow(video.uploadedAt)}
-                </div>
-              </div>
-            </div>
-            
-            {/* Video actions */}
-            <VideoActions
-              liked={liked}
-              disliked={disliked}
-              likeCount={mockLikeCount}
-              onLike={handleLike}
-              onDislike={handleDislike}
-              onShare={() => {}}
-              onSave={openSaveModal}
-              isSaved={isSavedToAnyList}
-              saveButtonRef={saveButtonRef}
-              isSaveModalOpen={isSaveModalOpen}
-              saveModalRef={saveModalRef}
-              saveModalLoading={saveModalLoading}
-              video={video}
-            />
-            
-            {/* Video description */}
-            <VideoDescription
+            <VideoPlaybackDetails
               video={video}
               channel={channel}
+              liked={liked}
+              disliked={disliked}
               isSubscribed={isSubscribed}
-              onSubscribe={handleSubscribe}
+              isSavedToAnyList={isSavedToAnyList}
+              mockLikeCount={mockLikeCount}
               showFullDescription={showFullDescription}
-              onToggleDescription={handleToggleDescription}
               summary={summary}
               summaryError={summaryError}
               isSummarizing={isSummarizing}
               canSummarize={canSummarize}
-              onSummarize={handleSummarizeDescription}
+              isSaveModalOpen={isSaveModalOpen}
+              saveModalLoading={saveModalLoading}
+              saveButtonRef={saveButtonRef}
+              saveModalRef={saveModalRef}
+              handleLike={handleLike}
+              handleDislike={handleDislike}
+              handleSubscribe={handleSubscribe}
+              openSaveModal={openSaveModal}
+              handleToggleDescription={handleToggleDescription}
+              handleSummarizeDescription={handleSummarizeDescription}
             />
             
             {/* Comments section */}
