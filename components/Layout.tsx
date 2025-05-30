@@ -6,11 +6,11 @@ import Miniplayer from './Miniplayer';
 import { useMiniplayer } from '../contexts/MiniplayerContext'; 
 
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+import { Outlet } from 'react-router-dom'; // Import Outlet
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+interface LayoutProps {}
+
+const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
   const miniplayerContext = useMiniplayer();
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             `}
         >
           <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
-            {children}
+            <Outlet /> {/* Render child routes */}
           </div>
         </main>
       </div>

@@ -33,6 +33,7 @@ import ChannelCustomizationPage from './pages/ChannelCustomizationPage';
 import VideoEditorPage from './pages/VideoEditorPage';
 import { MiniplayerProvider } from './contexts/MiniplayerContext'; 
 import { WatchLaterProvider } from './contexts/WatchLaterContext'; // Added WatchLaterProvider import
+import StudioLayout from './components/StudioLayout'; // Added import for StudioLayout
 
 
 function App() { // Removed React.FC
@@ -40,39 +41,41 @@ function App() { // Removed React.FC
     <HashRouter>
       <WatchLaterProvider> {/* Added WatchLaterProvider */}
         <MiniplayerProvider> {/* Wrap with MiniplayerProvider */}
-        <Layout>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/watch/:videoId" element={<WatchPage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/trending" element={<TrendingPage />} />
-            <Route path="/library" element={<LibraryPage />} />
-            <Route path="/shorts" element={<ShortsPage />} />
-            <Route path="/subscriptions" element={<SubscriptionsPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/playlists" element={<PlaylistsPage />} />
-            <Route path="/playlist/:playlistId" element={<PlaylistDetailPage />} /> 
-            <Route path="/watch-later" element={<WatchLaterPage />} />
-            <Route path="/liked-videos" element={<LikedVideosPage />} />
-            <Route path="/channel/:channelIdOrName" element={<ChannelPage />} />
-            <Route path="/user/:userName" element={<UserPage />} />
-                  <Route path="/your-data" element={<YourDataPage />} />
-                  <Route path="/go-live" element={<GoLivePage />} /> {/* Added route for Go Live page */}
-                  <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* Added route */}
-                  <Route path="/upload" element={<VideoUploadPage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-                  <Route path="/studio" element={<StudioDashboardPage />} />
-                  <Route path="/studio/analytics" element={<AnalyticsPage />} />
-                  <Route path="/studio/comments" element={<CommentModerationPage />} />
-                  <Route path="/studio/monetization" element={<MonetizationPage />} />
-                   <Route path="/studio/content" element={<ContentManagerPage />} />
-                   <Route path="/studio/creator" element={<CreatorStudioPage />} />
-                   <Route path="/studio/community" element={<CommunityPage />} />
-                    <Route path="/studio/playlists" element={<PlaylistManagerPage />} />
-                    <Route path="/studio/customization" element={<ChannelCustomizationPage />} />
-                    <Route path="/studio/editor" element={<VideoEditorPage />} />
-                </Routes>
-              </Layout>
+            <Route element={<Layout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/watch/:videoId" element={<WatchPage />} />
+              <Route path="/search" element={<SearchResultsPage />} />
+              <Route path="/trending" element={<TrendingPage />} />
+              <Route path="/library" element={<LibraryPage />} />
+              <Route path="/shorts" element={<ShortsPage />} />
+              <Route path="/subscriptions" element={<SubscriptionsPage />} />
+              <Route path="/history" element={<HistoryPage />} />
+              <Route path="/playlists" element={<PlaylistsPage />} />
+              <Route path="/playlist/:playlistId" element={<PlaylistDetailPage />} /> 
+              <Route path="/watch-later" element={<WatchLaterPage />} />
+              <Route path="/liked-videos" element={<LikedVideosPage />} />
+              <Route path="/channel/:channelIdOrName" element={<ChannelPage />} />
+              <Route path="/user/:userName" element={<UserPage />} />
+              <Route path="/your-data" element={<YourDataPage />} />
+              <Route path="/go-live" element={<GoLivePage />} /> {/* Added route for Go Live page */}
+              <Route path="/ai-content-spark" element={<AIContentSparkPage />} /> {/* Added route */}
+              <Route path="/upload" element={<VideoUploadPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+            </Route>
+            <Route path="/studio" element={<StudioLayout />}>
+              <Route index element={<StudioDashboardPage />} />
+              <Route path="analytics" element={<AnalyticsPage />} />
+              <Route path="comments" element={<CommentModerationPage />} />
+              <Route path="monetization" element={<MonetizationPage />} />
+              <Route path="content" element={<ContentManagerPage />} />
+              <Route path="creator" element={<CreatorStudioPage />} />
+              <Route path="community" element={<CommunityPage />} />
+              <Route path="playlists" element={<PlaylistManagerPage />} />
+              <Route path="customization" element={<ChannelCustomizationPage />} />
+              <Route path="editor" element={<VideoEditorPage />} />
+            </Route>
+          </Routes>
         </MiniplayerProvider>
       </WatchLaterProvider> {/* Added WatchLaterProvider */}
     </HashRouter>
