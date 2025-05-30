@@ -2,6 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard'; // New component
 import { useShortsVideos } from '../hooks';
+import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
+import ShortsPageError from '../components/ErrorStates/ShortsPageError';
+import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
 
 const ShortsPage: React.FC = () => {
   const { data: shorts, loading, error } = useShortsVideos();
@@ -27,27 +30,15 @@ const ShortsPage: React.FC = () => {
   }, [targetVideoId, shorts]);
 
   if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center bg-black">
-        <p className="text-white text-lg">Loading Shorts...</p>
-      </div>
-    );
+    return <ShortsPageSkeleton />;
   }
 
   if (error) {
-    return (
-      <div className="h-full flex items-center justify-center bg-black">
-        <p className="text-red-500 text-lg">{error}</p>
-      </div>
-    );
+    return <ShortsPageError error={error} />;
   }
 
   if (shorts.length === 0) {
-    return (
-      <div className="h-full flex items-center justify-center bg-black">
-        <p className="text-white text-lg">No shorts available right now.</p>
-      </div>
-    );
+    return <EmptyShortsState />;
   }
 
   return (

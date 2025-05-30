@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import { UserPlaylist, Video } from '../types';
 import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/mockVideoService';
 import { PlayIcon as PlaySolidIcon, QueueListIcon, ArrowsRightLeftIcon, EllipsisVerticalIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
+import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton'; // Added import
+import PlaylistEditModal from '../components/PlaylistEditModal';
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video[];
@@ -144,26 +146,7 @@ const PlaylistDetailPage: React.FC = () => {
 
 
   if (loading) {
-    return (
-      <div className="p-4 md:p-6 animate-pulse bg-white dark:bg-neutral-950">
-        <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2 mb-3"></div>
-        <div className="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3 mb-6"></div>
-        <div className="flex space-x-3 mb-8">
-            <div className="h-10 w-32 bg-neutral-200 dark:bg-neutral-700 rounded-full"></div>
-            <div className="h-10 w-32 bg-neutral-200 dark:bg-neutral-700 rounded-full"></div>
-        </div>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div key={index} className="flex items-center space-x-3 py-2.5 border-b border-neutral-200 dark:border-neutral-800">
-            <div className="w-6 text-neutral-400 dark:text-neutral-500 bg-neutral-200 dark:bg-neutral-700 h-6 rounded"></div>
-            <div className="w-28 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-md flex-shrink-0"></div>
-            <div className="flex-grow space-y-2">
-              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
-              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
+    return <PlaylistDetailSkeleton />;
   }
 
   if (error) {
@@ -180,45 +163,17 @@ const PlaylistDetailPage: React.FC = () => {
 
   return (
     <div className="p-4 md:p-6 bg-white dark:bg-neutral-950">
-      {/* Edit Modal */}
-      {isEditModalOpen && (
-        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in-fast">
-          <form 
-            ref={editModalRef}
-            onSubmit={handleSaveChanges} 
-            className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-xl w-full max-w-md space-y-4"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="edit-playlist-title-modal"
-          >
-            <h2 id="edit-playlist-title-modal" className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">Edit playlist details</h2>
-            <div>
-              <label htmlFor="playlistTitle" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Title</label>
-              <input 
-                type="text" 
-                id="playlistTitle" 
-                value={editingPlaylistTitle} 
-                onChange={(e) => setEditingPlaylistTitle(e.target.value)} 
-                className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
-                required 
-              />
-            </div>
-            <div>
-              <label htmlFor="playlistDescription" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Description</label>
-              <textarea 
-                id="playlistDescription" 
-                value={editingPlaylistDescription} 
-                onChange={(e) => setEditingPlaylistDescription(e.target.value)} 
-                rows={3}
-                className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
-              />
-            </div>
-            <div className="flex justify-end space-x-3 pt-2">
-              <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-600/80 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-md transition-colors">Cancel</button>
-              <button type="submit" disabled={!editingPlaylistTitle.trim()} className="px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 rounded-md transition-colors disabled:opacity-60">Save Changes</button>
-            </div>
-          </form>
-        </div>
+      {isEditModalOpen && playlistDetails && (
+        <PlaylistEditModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          playlistTitle={editingPlaylistTitle}
+          playlistDescription={editingPlaylistDescription}
+          onTitleChange={setEditingPlaylistTitle}
+          onDescriptionChange={setEditingPlaylistDescription}
+          onSaveChanges={handleSaveChanges}
+          modalRef={editModalRef} 
+        />
       )}
 
       <div className="mb-6 sm:mb-8">

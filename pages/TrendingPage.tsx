@@ -4,6 +4,7 @@ import { FireIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';
 import { useTrendingVideos } from '../hooks';
+import CategoryTabs, { Category } from '../components/CategoryTabs';
 
 const TrendingPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');
@@ -17,27 +18,6 @@ const TrendingPage: React.FC = () => {
     { id: 'movies' as const, label: 'Movies', icon: '🎬' },
   ];
 
-  const categoryTabs = (
-    <div className="mb-6">
-      <div className="flex space-x-1 overflow-x-auto no-scrollbar">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => setActiveCategory(category.id)}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
-              activeCategory === category.id
-                ? 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900'
-                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
-            }`}
-          >
-            <span>{category.icon}</span>
-            <span>{category.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-
   return (
     <PageLayout
       title="Trending"
@@ -49,7 +29,7 @@ const TrendingPage: React.FC = () => {
         title: "No trending videos found",
         message: "Check back later for the latest trending content."
       }}
-      headerActions={categoryTabs}
+      headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >
       {(videos) => <VideoGrid videos={videos || []} />}
     </PageLayout>

@@ -9,6 +9,7 @@ import TrendingSection from '../components/TrendingSection';
 import SubscriptionFeed from '../components/SubscriptionFeed';
 import WatchHistory from '../components/WatchHistory';
 import LiveStreams from '../components/LiveStreams';
+import HomeContent from '../components/HomeContent'; // Added import
 import { useVideos } from '../hooks';
 
 const HomePage: React.FC = () => {
@@ -45,25 +46,7 @@ const HomePage: React.FC = () => {
       skeletonCount={18}
     >
       {(data) => (
-        <>
-          {selectedCategory === 'All' && (
-            <>
-              <ShortsSection maxShorts={8} />
-              <WatchHistory maxVideos={4} />
-              <SubscriptionFeed maxVideos={4} />
-              <LiveStreams maxStreams={4} />
-              <TrendingSection maxVideos={6} />
-            </>
-          )}
-          {data && data.length > 0 && (
-            <div className="px-4">
-              <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">
-                {selectedCategory === 'All' ? 'Recommended' : selectedCategory}
-              </h2>
-              <VideoGrid videos={data} />
-            </div>
-          )}
-        </>
+        <HomeContent selectedCategory={selectedCategory} videos={data} />
       )}
     </PageLayout>
   );
