@@ -23,8 +23,8 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
         // Mock watch history - in a real app, this would come from user's watch history
         // Simulate recently watched videos by taking a random subset
         const watchedVideoIds = [
-          'video-1', 'video-3', 'video-7', 'video-12', 'video-15', 
-          'video-18', 'video-22', 'video-25', 'video-28', 'video-30'
+          '1', '2', '3', '4', '5', 
+          '6', '7', '8', '9', '10'
         ];
         
         const historyFeed = allVideos
