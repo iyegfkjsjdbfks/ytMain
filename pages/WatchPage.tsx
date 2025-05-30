@@ -3,13 +3,13 @@ import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
-import { VideoDescription } from '../components/VideoDescription';
+import VideoDescription from '../components/VideoDescription';
 import CommentsSection from '../components/CommentsSection';
 import { useWatchPage } from '../hooks/useWatchPage';
-import { numberUtils } from '../utils/numberUtils';
-import { dateUtils } from '../utils/dateUtils';
-import { useMiniplayerContext } from '../contexts/MiniplayerContext';
-import { useWatchLaterContext } from '../contexts/WatchLaterContext';
+import { formatCount } from '../utils/numberUtils';
+import { parseRelativeDate, formatDistanceToNow } from '../utils/dateUtils';
+import { useMiniplayer } from '../contexts/MiniplayerContext';
+import { useWatchLater } from '../contexts/WatchLaterContext';
 
 const WatchPage: React.FC = () => {
   const {
@@ -86,16 +86,16 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { setCurrentVideo } = useMiniplayerContext();
-  const { addToWatchLater, removeFromWatchLater } = useWatchLaterContext();
+  const { showMiniplayer } = useMiniplayer();
+  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
   // Add to watch history when video loads
   React.useEffect(() => {
     if (video) {
       addToWatchHistory(video.id);
-      setCurrentVideo(video);
+      showMiniplayer(video);
     }
-  }, [video, addToWatchHistory, setCurrentVideo]);
+  }, [video, addToWatchHistory, showMiniplayer]);
   
   // Loading skeleton
   if (loading) {
@@ -194,7 +194,7 @@ const WatchPage: React.FC = () => {
               </h1>
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {numberUtils.formatCount(parseInt(video.views))} views • {dateUtils.formatRelativeDate(video.uploadedAt)}
+                  {formatCount(parseInt(video.views))} views • {formatDistanceToNow(video.uploadedAt)}
                 </div>
               </div>
             </div>
