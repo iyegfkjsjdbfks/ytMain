@@ -1,189 +1,185 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Video } from '../types';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftEllipsisIcon, ArrowUturnRightIcon } from '@heroicons/react/24/solid';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Short } from '../types';
+import { formatNumber } from '../utils/formatters';
+import { useVideoPlayer, useVideoAutoplay } from '../hooks';
 
 interface ShortDisplayCardProps {
-  short: Video;
+  short: Short;
+  onLike?: (shortId: string) => void;
+  onComment?: (shortId: string) => void;
+  onShare?: (shortId: string) => void;
 }
 
-const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
+  short,
+  onLike,
+  onComment,
+  onShare
+}) => {
   const location = useLocation();
-  // Start unmuted on shorts page, muted elsewhere for autoplay policies
-  const [isMuted, setIsMuted] = useState(location.pathname !== '/shorts');
-  const [showControls, setShowControls] = useState(false);
-  const navigate = useNavigate();
-
-  const observer = useRef<IntersectionObserver | null>(null);
-
-  const handlePlayPause = useCallback(() => {
-    if (videoRef.current) {
-      if (videoRef.current.paused || videoRef.current.ended) {
-        videoRef.current.play().then(() => setIsPlaying(true)).catch(err => console.warn("Autoplay prevented for short:", err));
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    }
-  }, []);
+  const isOnShortsPage = location.pathname === '/shorts';
   
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent video click if clicking mute button
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-    }
-  };
-
-  useEffect(() => {
-    const currentVideoRef = videoRef.current; // Capture ref for cleanup
-
-    if (observer.current) {
-      observer.current.disconnect();
-    }
-
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (currentVideoRef) {
-                currentVideoRef.play().then(() => setIsPlaying(true)).catch(err => {
-                    // console.warn("Autoplay was prevented for short. User interaction might be required.", err);
-                    setIsPlaying(false); // Ensure isPlaying is false if autoplay fails
-                });
-            }
-          } else {
-            if (currentVideoRef) {
-              currentVideoRef.pause();
-              setIsPlaying(false);
-            }
-          }
-        });
-      },
-      { threshold: 0.7 } // Play when 70% visible
-    );
-
-    if (currentVideoRef) {
-      observer.current.observe(currentVideoRef);
-      // Initial mute state for the video element
-      currentVideoRef.muted = isMuted;
-    }
-
-    return () => {
-      if (observer.current && currentVideoRef) {
-        observer.current.unobserve(currentVideoRef);
-      }
-      if(currentVideoRef) {
-        currentVideoRef.pause(); // Ensure video is paused on unmount
-      }
-    };
-  }, [isMuted, short.id]); // Re-run if short.id changes, though less likely in a list
+  // Use the custom video player hook
+  const { videoRef, state, actions, events } = useVideoPlayer({
+    muted: !isOnShortsPage, // Unmuted on shorts page, muted elsewhere
+    loop: true,
+    playsinline: true
+  });
   
-  // Show controls briefly on mouse enter, hide on mouse leave
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  const handleMouseEnter = () => {
-    if (timeoutId) clearTimeout(timeoutId);
-    setShowControls(true);
-  };
-  const handleMouseLeave = () => {
-    timeoutId = setTimeout(() => setShowControls(false), 1000); // Hide after 1 second
-  };
-
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    // Only navigate if clicking on the video area, not on interactive elements
-    const target = e.target as HTMLElement;
-    if (!target.closest('button') && !target.closest('a')) {
-      navigate(`/shorts?v=${short.id}`);
+  // Use autoplay hook for intersection-based playback
+  const { isIntersecting } = useVideoAutoplay({
+    threshold: 0.7,
+    enabled: true
+  });
+  
+  // Sync autoplay with video player
+  React.useEffect(() => {
+    if (isIntersecting && !state.isPlaying) {
+      actions.play();
+    } else if (!isIntersecting && state.isPlaying) {
+      actions.pause();
     }
+  }, [isIntersecting, state.isPlaying, actions]);
+  
+  const handleLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onLike?.(short.id);
+  };
+
+  const handleComment = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onComment?.(short.id);
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onShare?.(short.id);
   };
 
   return (
-    <div 
-      className="h-full w-full snap-start flex items-center justify-center relative overflow-hidden cursor-pointer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleCardClick}
-      aria-label={`Short video: ${short.title}`}
-    >
+    <div className="relative w-full h-full bg-black rounded-lg overflow-hidden group cursor-pointer">
       <video
         ref={videoRef}
         src={short.videoUrl}
-        loop
-        playsInline // Important for mobile
-        className="w-auto h-full object-contain max-w-full max-h-full"
         onClick={(e) => {
           e.stopPropagation();
-          handlePlayPause();
+          actions.togglePlayPause();
         }}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        onPlay={events.onPlay}
+        onPause={events.onPause}
+        onTimeUpdate={events.onTimeUpdate}
+        onLoadedMetadata={events.onLoadedMetadata}
+        onVolumeChange={events.onVolumeChange}
+        onError={events.onError}
         poster={short.thumbnailUrl}
+        className="w-full h-full object-cover"
       />
-
-      {/* Play/Pause button overlay (centered) */}
-      {showControls && (
+      
+      {/* Play/Pause Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <button
           onClick={(e) => {
             e.stopPropagation();
-            handlePlayPause();
+            actions.togglePlayPause();
           }}
-          className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-200 z-10"
-          aria-label={isPlaying ? "Pause video" : "Play video"}
+          className={`
+            bg-black bg-opacity-50 text-white p-4 rounded-full 
+            transition-opacity duration-200
+            ${!state.isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
+            hover:bg-opacity-70
+          `}
+          aria-label={state.isPlaying ? 'Pause video' : 'Play video'}
         >
-          {isPlaying ? (
-            <PauseIcon className="w-16 h-16 text-white/80 drop-shadow-lg" />
+          {state.isPlaying ? (
+            <PauseIcon className="w-8 h-8" />
           ) : (
-            <PlayIcon className="w-16 h-16 text-white/80 drop-shadow-lg" />
+            <PlayIcon className="w-8 h-8" />
           )}
         </button>
+      </div>
+
+      {/* Video Info Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+        <div className="flex items-end justify-between">
+          <div className="flex-1 mr-4">
+            <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
+              {short.title}
+            </h3>
+            <p className="text-gray-300 text-xs">
+              {short.channelName} • {formatNumber(short.views)} views
+            </p>
+          </div>
+          
+          {/* Action Buttons */}
+          <div className="flex flex-col space-y-3">
+            {/* Mute/Unmute */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                actions.toggleMute();
+              }}
+              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
+              aria-label={state.isMuted ? 'Unmute video' : 'Mute video'}
+            >
+              {state.isMuted ? (
+                <SpeakerXMarkIcon className="w-5 h-5" />
+              ) : (
+                <SpeakerWaveIcon className="w-5 h-5" />
+              )}
+            </button>
+            
+            {/* Like */}
+            <button 
+              onClick={handleLike}
+              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
+              aria-label="Like video"
+            >
+              {short.isLiked ? (
+                <HeartIconSolid className="w-5 h-5 text-red-500" />
+              ) : (
+                <HeartIcon className="w-5 h-5" />
+              )}
+            </button>
+            
+            {/* Comment */}
+            <button 
+              onClick={handleComment}
+              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
+              aria-label="Comment on video"
+            >
+              <ChatBubbleOvalLeftIcon className="w-5 h-5" />
+            </button>
+            
+            {/* Share */}
+            <button 
+              onClick={handleShare}
+              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
+              aria-label="Share video"
+            >
+              <ShareIcon className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Loading indicator */}
+      {state.isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+        </div>
       )}
 
-      {/* Bottom Info Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent text-white z-20 pointer-events-none">
-        <h3 className="text-base font-semibold drop-shadow-md">{short.title}</h3>
-        <Link 
-            to={`/channel/${encodeURIComponent(short.channelName)}`} 
-            onClick={(e) => {
-              e.stopPropagation();
-            }} // Allow navigation without affecting video play/pause
-            className="text-sm hover:underline pointer-events-auto drop-shadow-sm"
-        >
-          {short.channelName}
-        </Link>
-      </div>
-
-      {/* Side Action Buttons Overlay */}
-      <div className="absolute right-2 bottom-20 sm:bottom-24 flex flex-col space-y-4 z-20">
-        {/* Mute/Unmute Button - always visible when controls are shown, or fixed */}
-        <button onClick={(e) => {
-          e.stopPropagation();
-          toggleMute(e);
-        }} className="p-2.5 bg-black/40 hover:bg-black/60 rounded-full transition-colors" aria-label={isMuted ? "Unmute" : "Mute"}>
-          {isMuted ? <SpeakerXMarkIcon className="w-6 h-6 text-white" /> : <SpeakerWaveIcon className="w-6 h-6 text-white" />}
-        </button>
-        
-        {/* Mock Action Buttons */}
-        {[
-          { icon: HeartIcon, label: 'Like', count: '1.2K' }, // Mock counts
-          { icon: ChatBubbleOvalLeftEllipsisIcon, label: 'Comment', count: '105' },
-          { icon: ArrowUturnRightIcon, label: 'Share', count: 'Share' },
-        ].map((action) => (
-          <button 
-            key={action.label} 
-            onClick={(e) => {
-              e.stopPropagation();
-            }} 
-            className="flex flex-col items-center p-1.5 text-white hover:bg-black/20 rounded-lg transition-colors pointer-events-auto"
-            aria-label={action.label}
-          >
-            <action.icon className="w-7 h-7 mb-0.5 drop-shadow-md" />
-            <span className="text-xs font-medium drop-shadow-sm">{action.count}</span>
-          </button>
-        ))}
-      </div>
+      {/* Error state */}
+      {state.error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
+          <p className="text-white text-sm text-center px-4">
+            {state.error}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
