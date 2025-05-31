@@ -109,6 +109,4 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
   );
 };
 
-});
-
 export default TrendingSection;
