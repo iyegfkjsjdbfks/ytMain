@@ -1,6 +1,6 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Video } from '../types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftEllipsisIcon, ArrowUturnRightIcon } from '@heroicons/react/24/solid';
 
 interface ShortDisplayCardProps {
@@ -10,7 +10,9 @@ interface ShortDisplayCardProps {
 const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true); // Start muted for autoplay policies
+  const location = useLocation();
+  // Start unmuted on shorts page, muted elsewhere for autoplay policies
+  const [isMuted, setIsMuted] = useState(location.pathname !== '/shorts');
   const [showControls, setShowControls] = useState(false);
   const navigate = useNavigate();
 
