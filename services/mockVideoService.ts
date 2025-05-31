@@ -560,10 +560,10 @@ export const getChannelLiveStreams = async (channelName: string): Promise<Video[
       isLiveNow: false, scheduledStartTime: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days from now
     },
      {
-      id: 'upcoming2', title: `Scheduled: Deep Dive into New Game Release`, thumbnailUrl: 'https://picsum.photos/seed/upcominggame/680/380', 
+      id: 'upcoming2', title: `Scheduled: Latest Gaming Trends & Reviews`, thumbnailUrl: 'https://picsum.photos/seed/upcominggame/680/380', 
       channelName: decodedChannelName, channelAvatarUrl: mockChannelsData[decodedChannelName]?.avatarUrl || 'https://picsum.photos/seed/defaultUpcomingGame/48/48', 
       views: '', uploadedAt: 'Upcoming', duration: 'UPCOMING', videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', 
-      description: `Join us as we explore the new features of 'Galaxy Warriors Online'.`, category: 'Gaming', isShort: false,
+      description: `Join us as we explore the latest gaming trends and upcoming releases.`, category: 'Gaming', isShort: false,
       isLiveNow: false, scheduledStartTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString() // 5 days from now
     }
   ];

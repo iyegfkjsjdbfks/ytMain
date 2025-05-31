@@ -111,7 +111,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
       {/* Category chips container */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-3 overflow-x-auto scrollbar-hide py-2 px-12"
+        className="flex gap-3 overflow-x-auto no-scrollbar py-2 px-12"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {categories?.map((category) => {
@@ -149,16 +149,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
         </button>
       )}
 
-      {/* Custom scrollbar styles */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
+
     </div>
   );
 };
