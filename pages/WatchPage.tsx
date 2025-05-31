@@ -3,13 +3,13 @@ import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
-import VideoDescription from '../components/VideoDescription';
+import { VideoDescription } from '../components/VideoDescription';
 import CommentsSection from '../components/CommentsSection';
 import { useWatchPage } from '../hooks/useWatchPage';
-import { formatCount } from '../utils/numberUtils';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { useMiniplayer } from '../contexts/MiniplayerContext';
-import { useWatchLater } from '../contexts/WatchLaterContext';
+import { numberUtils } from '../utils/numberUtils';
+import { dateUtils } from '../utils/dateUtils';
+import { useMiniplayerContext } from '../contexts/MiniplayerContext';
+import { useWatchLaterContext } from '../contexts/WatchLaterContext';
 
 const WatchPage: React.FC = () => {
   const {
@@ -18,7 +18,6 @@ const WatchPage: React.FC = () => {
     channel,
     comments,
     loading,
-    videoId,
     
     // Video interaction state
     liked,
@@ -87,21 +86,16 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { showMiniplayer } = useMiniplayer();
-  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const { setCurrentVideo } = useMiniplayerContext();
+  const { addToWatchLater, removeFromWatchLater } = useWatchLaterContext();
   
-  // Scroll to top when page loads or video changes
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [videoId]);
-
   // Add to watch history when video loads
   React.useEffect(() => {
     if (video) {
       addToWatchHistory(video.id);
-      showMiniplayer(video);
+      setCurrentVideo(video);
     }
-  }, [video, addToWatchHistory, showMiniplayer]);
+  }, [video, addToWatchHistory, setCurrentVideo]);
   
   // Loading skeleton
   if (loading) {
@@ -200,7 +194,7 @@ const WatchPage: React.FC = () => {
               </h1>
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {formatCount(parseInt(video.views))} views • {formatDistanceToNow(video.uploadedAt)}
+                  {numberUtils.formatCount(parseInt(video.views))} views • {dateUtils.formatRelativeDate(video.uploadedAt)}
                 </div>
               </div>
             </div>

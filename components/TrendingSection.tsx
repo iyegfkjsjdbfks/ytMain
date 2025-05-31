@@ -101,12 +101,12 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {trendingVideos.map(video => (
+        {trendingVideos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}
       </div>
     </div>
   );
-};
+});
 
 export default TrendingSection;
