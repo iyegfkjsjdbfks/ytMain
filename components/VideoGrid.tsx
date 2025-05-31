@@ -50,8 +50,6 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
       ))}
     </div>
   );
-};
-
 });
 
 export default VideoGrid;

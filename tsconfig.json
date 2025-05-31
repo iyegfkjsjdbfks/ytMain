@@ -67,9 +67,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*",
-    "vite.config.ts",
-    "vitest.config.ts"
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",
