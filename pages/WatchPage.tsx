@@ -3,11 +3,11 @@ import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
-import { VideoDescription } from '../components/VideoDescription';
+import VideoDescription from '../components/VideoDescription';
 import CommentsSection from '../components/CommentsSection';
 import { useWatchPage } from '../hooks/useWatchPage';
 import { numberUtils } from '../utils/numberUtils';
-import { dateUtils } from '../utils/dateUtils';
+import { formatDistanceToNow } from '../utils/dateUtils';
 import { useMiniplayerContext } from '../contexts/MiniplayerContext';
 import { useWatchLaterContext } from '../contexts/WatchLaterContext';
 
@@ -194,7 +194,7 @@ const WatchPage: React.FC = () => {
               </h1>
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {numberUtils.formatCount(parseInt(video.views))} views • {dateUtils.formatRelativeDate(video.uploadedAt)}
+                  {numberUtils.formatCount(parseInt(video.views))} views • {formatDistanceToNow(video.uploadedAt)}
                 </div>
               </div>
             </div>
