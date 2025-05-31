@@ -116,7 +116,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
         className="w-auto h-full object-contain max-w-full max-h-full"
         onClick={(e) => {
           e.stopPropagation();
-          navigate(`/shorts?v=${short.id}`);
+          handlePlayPause();
         }}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
@@ -124,16 +124,20 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ short }) => {
       />
 
       {/* Play/Pause button overlay (centered) */}
-      {showControls && !isPlaying && (
+      {showControls && (
         <button
           onClick={(e) => {
             e.stopPropagation();
-            navigate(`/shorts?v=${short.id}`);
+            handlePlayPause();
           }}
           className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-200 z-10"
-          aria-label="Play video"
+          aria-label={isPlaying ? "Pause video" : "Play video"}
         >
-          <PlayIcon className="w-16 h-16 text-white/80 drop-shadow-lg" />
+          {isPlaying ? (
+            <PauseIcon className="w-16 h-16 text-white/80 drop-shadow-lg" />
+          ) : (
+            <PlayIcon className="w-16 h-16 text-white/80 drop-shadow-lg" />
+          )}
         </button>
       )}
 
