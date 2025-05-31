@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import VideoCard from './VideoCard';
 import { Video } from '../types';
 
@@ -15,7 +15,7 @@ interface VideoGridProps {
   };
 }
 
-const VideoGrid: React.FC<VideoGridProps> = ({
+const VideoGrid: React.FC<VideoGridProps> = memo(({
   videos,
   className = '',
   keyPrefix = '',
@@ -51,5 +51,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({
     </div>
   );
 };
+
+});
 
 export default VideoGrid;

@@ -2,8 +2,10 @@ import React, { memo, useCallback, useMemo } from 'react';
 import { Video } from '../types';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useDropdownMenu } from '../hooks/useDropdownMenu';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { cn } from '../utils/cn';
+import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
 import {
   PlayIcon,
   ClockIcon,
@@ -93,10 +95,12 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
     }
   }, [isWatchLater, video, addToWatchLater, removeFromWatchLater]);
 
+  const { isOpen: showMenu, toggle: toggleMenu, close: closeMenu, menuRef } = useDropdownMenu();
+
   const handleMenuClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
-    // TODO: Implement dropdown menu
-  }, []);
+    toggleMenu();
+  }, [toggleMenu]);
 
   return (
     <div 
@@ -157,6 +161,70 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
             <EllipsisVerticalIcon className="w-4 h-4 text-white" />
           </button>
         </div>
+        
+        {/* Dropdown Menu */}
+        <DropdownMenu
+          isOpen={showMenu}
+          onClose={closeMenu}
+          menuRef={menuRef}
+          className="top-12 right-2"
+          position="bottom-right"
+        >
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              closeMenu();
+              // TODO: Implement add to playlist
+            }}
+            icon={<PlusIcon className="w-4 h-4" />}
+          >
+            Save to playlist
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              closeMenu();
+              // TODO: Implement share functionality
+            }}
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+              </svg>
+            }
+          >
+            Share
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              closeMenu();
+              // TODO: Implement not interested functionality
+            }}
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
+              </svg>
+            }
+          >
+            Not interested
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              closeMenu();
+              // TODO: Implement report functionality
+            }}
+            variant="danger"
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            }
+          >
+            Report
+          </DropdownMenuItem>
+        </DropdownMenu>
       </div>
       
       {/* Content */}

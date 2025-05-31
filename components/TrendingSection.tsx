@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
 import { getVideos } from '../services/mockVideoService';
@@ -9,7 +9,7 @@ interface TrendingSectionProps {
   maxVideos?: number;
 }
 
-const TrendingSection: React.FC<TrendingSectionProps> = ({ maxVideos = 6 }) => {
+const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
   const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -108,5 +108,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = ({ maxVideos = 6 }) => {
     </div>
   );
 };
+
+});
 
 export default TrendingSection;
