@@ -346,6 +346,7 @@ export const useWatchPage = () => {
     channel,
     comments,
     loading,
+    videoId,
     
     // Video interaction state
     liked,

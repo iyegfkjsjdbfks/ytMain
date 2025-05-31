@@ -328,7 +328,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative bg-black group ${className}`}
+      className={`relative bg-black group aspect-video ${className}`}
       onMouseMove={showControlsTemporarily}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >
