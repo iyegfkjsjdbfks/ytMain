@@ -114,7 +114,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
         className="flex gap-3 overflow-x-auto scrollbar-hide py-2 px-12"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {categories.map((category) => {
+        {categories?.map((category) => {
           const isSelected = category === selectedCategory;
           
           return (

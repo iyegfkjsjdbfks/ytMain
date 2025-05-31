@@ -29,7 +29,15 @@ const HomePage: React.FC = () => {
   }, [videos, selectedCategory]);
 
 
-  const categoryChips = <CategoryChips onSelectCategory={handleSelectCategory} />;
+  const categories = ['All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment', 'Education', 'Technology', 'Travel', 'Food', 'Fashion', 'Comedy', 'Science', 'Health', 'Business'];
+
+  const categoryChips = (
+    <CategoryChips 
+      categories={categories}
+      selectedCategory={selectedCategory}
+      onSelectCategory={handleSelectCategory} 
+    />
+  );
 
   return (
     <PageLayout
