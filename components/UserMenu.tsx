@@ -3,9 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,
-  ShieldCheckIcon, QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon
+  ShieldCheckIcon, QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon,
+  CheckBadgeIcon
 } from '@heroicons/react/24/outline';
-import { useTheme } from '../contexts/ThemeContext'; // Ensure correct relative path
+import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
 
 
 interface UserMenuProps {
@@ -39,8 +41,9 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
   );
 };
 
-const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added onClose to props
-  const { theme, toggleTheme } = useTheme(); // Use the theme context
+const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
+  const { theme, toggleTheme } = useTheme();
+  const { user, logout, isAuthenticated } = useAuth();
 
   if (!isOpen) return null;
 
@@ -48,6 +51,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added on
     // Clear any stored user data
     localStorage.removeItem('youtubeCloneWatchHistory_v1');
     localStorage.removeItem('youtubeCloneLikedVideos_v1');
+    // Use the auth context logout function
+    logout();
+    onClose();
     localStorage.removeItem('youtubeCloneRecentSearches_v2');
 
     // Show confirmation
@@ -75,22 +81,40 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => { // Added on
       aria-orientation="vertical"
       aria-labelledby="user-menu-button"
     >
-      <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700/80">
-        <div className="flex items-center space-x-3">
-          <img src="https://picsum.photos/seed/currentUserMenu/40/40" alt="Current User" className="w-10 h-10 rounded-full" />
-          <div>
-            <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Your Name</p>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 cursor-pointer">@yourhandle</p>
-            <Link 
-              to="/channel/YourChannelName" // Example, replace with actual dynamic channel name/ID
-              onClick={handleGenericClick} 
-              className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
-            >
-              View your channel
-            </Link>
+      {isAuthenticated && user && (
+        <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700/80">
+          <div className="flex items-center space-x-3">
+            {user.avatar ? (
+              <img src={user.avatar} alt={user.username} className="w-10 h-10 rounded-full" />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
+                <UserCircleIcon className="w-6 h-6 text-white" />
+              </div>
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center space-x-1">
+                <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 truncate">{user.username}</p>
+                {user.isVerified && (
+                  <CheckBadgeIcon className="w-4 h-4 text-blue-500 flex-shrink-0" title="Verified" />
+                )}
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{user.email}</p>
+              {user.subscriberCount !== undefined && (
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  {user.subscriberCount.toLocaleString()} subscribers
+                </p>
+              )}
+              <Link 
+                to={`/channel/${user.username}`}
+                onClick={handleGenericClick} 
+                className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
+              >
+                View your channel
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="py-1">
         <MenuItem onClick={() => { window.open('https://accounts.google.com/AccountChooser', '_blank'); handleGenericClick(); }} icon={<UserCircleIcon />}>Switch account</MenuItem>
         <MenuItem onClick={() => { window.open('https://studio.youtube.com', '_blank'); handleGenericClick(); }} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>

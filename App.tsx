@@ -4,6 +4,7 @@ import { HashRouter, createBrowserRouter, RouterProvider } from 'react-router-do
 import { routes } from './config/routes';
 import { WatchLaterProvider } from './contexts/WatchLaterContext';
 import { MiniplayerProvider } from './contexts/MiniplayerContext';
+import { AuthProvider } from './contexts/AuthContext';
 import SuspenseWrapper from './components/SuspenseWrapper';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -16,13 +17,15 @@ const router = createBrowserRouter(routes, {
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
-      <WatchLaterProvider>
-        <MiniplayerProvider>
-          <SuspenseWrapper>
-            <RouterProvider router={router} />
-          </SuspenseWrapper>
-        </MiniplayerProvider>
-      </WatchLaterProvider>
+      <AuthProvider>
+        <WatchLaterProvider>
+          <MiniplayerProvider>
+            <SuspenseWrapper>
+              <RouterProvider router={router} />
+            </SuspenseWrapper>
+          </MiniplayerProvider>
+        </WatchLaterProvider>
+      </AuthProvider>
     </ErrorBoundary>
   );
 };

@@ -3,11 +3,14 @@ import { RouteObject } from 'react-router-dom';
 import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 // Lazy load components for better performance
 const HomePage = lazy(() => import('../pages/HomePage'));
 const WatchPage = lazy(() => import('../pages/WatchPage'));
 const SearchResultsPage = lazy(() => import('../pages/SearchResultsPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 const TrendingPage = lazy(() => import('../pages/TrendingPage'));
 const ShortsPage = lazy(() => import('../pages/ShortsPage'));
 const SubscriptionsPage = lazy(() => import('../pages/SubscriptionsPage'));
@@ -175,5 +178,27 @@ export const studioRoutes: RouteObject[] = [
   },
 ];
 
+// Authentication routes (outside main layout)
+const authRoutes: RouteObject[] = [
+  {
+    path: '/login',
+    element: (
+      <ProtectedRoute requireAuth={false}>
+        <LoginPage />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: '/register',
+    element: (
+      <ProtectedRoute requireAuth={false}>
+        <RegisterPage />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorBoundary />,
+  },
+];
+
 // Combined route configuration
-export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes];
+export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes, ...authRoutes];

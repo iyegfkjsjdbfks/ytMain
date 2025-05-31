@@ -8,8 +8,10 @@ import SearchBar from './SearchBar';
 import VideoPlusIcon from './icons/VideoPlusIcon';
 import BellIcon from './icons/BellIcon';
 import UserMenu from './UserMenu';
-import NotificationsPanel from './NotificationsPanel'; 
-import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
+import NotificationsPanel from './NotificationsPanel';
+import { useAuth } from '../contexts/AuthContext';
+import Button from './forms/Button';
+import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
 
 
 interface HeaderProps {
@@ -45,9 +47,71 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
 };
 
 
+// Component for authenticated user section
+interface AuthenticatedUserSectionProps {
+  userMenuRef: React.RefObject<HTMLDivElement>;
+  userMenuButtonRef: React.RefObject<HTMLButtonElement>;
+  toggleUserMenu: () => void;
+  isUserMenuOpen: boolean;
+  handleCloseUserMenu: () => void;
+}
+
+const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
+  userMenuRef,
+  userMenuButtonRef,
+  toggleUserMenu,
+  isUserMenuOpen,
+  handleCloseUserMenu
+}) => {
+  const { user, isAuthenticated } = useAuth();
+
+  if (!isAuthenticated || !user) {
+    return (
+      <div className="flex items-center space-x-2">
+        <Link to="/login">
+          <Button
+            variant="secondary"
+            size="sm"
+            className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20"
+          >
+            <UserIcon className="w-4 h-4 mr-1" />
+            Sign in
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative" ref={userMenuRef}>
+      <button 
+        ref={userMenuButtonRef}
+        onClick={toggleUserMenu}
+        className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
+        aria-label="User account options"
+        aria-expanded={isUserMenuOpen}
+        aria-haspopup="true"
+        aria-controls="user-menu"
+        id="user-menu-button"
+        title="Your Account"
+      >
+        {user.avatar ? (
+          <img src={user.avatar} alt="User Avatar" className="w-8 h-8 rounded-full" />
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
+            <UserIcon className="w-5 h-5 text-white" />
+          </div>
+        )}
+      </button>
+      <UserMenu isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
+    </div>
+  );
+};
+
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
   const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);
   
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -206,22 +270,13 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </div>
         </div>
 
-        <div className="relative" ref={userMenuRef}>
-          <button 
-            ref={userMenuButtonRef}
-            onClick={toggleUserMenu}
-            className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
-            aria-label="User account options"
-            aria-expanded={isUserMenuOpen}
-            aria-haspopup="true"
-            aria-controls="user-menu"
-            id="user-menu-button"
-            title="Your Account"
-          >
-            <img src="https://picsum.photos/seed/currentUserHeader/32/32" alt="User Avatar" className="w-8 h-8 rounded-full" />
-          </button>
-          <UserMenu isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
-        </div>
+        <AuthenticatedUserSection 
+          userMenuRef={userMenuRef}
+          userMenuButtonRef={userMenuButtonRef}
+          toggleUserMenu={toggleUserMenu}
+          isUserMenuOpen={isUserMenuOpen}
+          handleCloseUserMenu={handleCloseUserMenu}
+        />
       </div>
     </header>
   );
