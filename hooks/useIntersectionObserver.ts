@@ -95,7 +95,7 @@ export const useIntersectionObserver = ({
  * - Configurable visibility threshold
  * - Cleanup on unmount
  */
-export const useVideoAutoplay = ({
+export const useIntersectionVideoAutoplay = ({
   threshold = 0.7,
   rootMargin = '0px',
   enabled = true

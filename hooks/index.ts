@@ -11,6 +11,7 @@ export { useVideoPlayer } from './useVideoPlayer';
 export { 
   useIntersectionObserver, 
   useLazyImage, 
-  useInfiniteScroll 
+  useInfiniteScroll,
+  useIntersectionVideoAutoplay 
 } from './useIntersectionObserver';
 export { useVideoAutoplay } from './useVideoAutoplay';
