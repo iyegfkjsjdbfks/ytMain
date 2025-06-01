@@ -70,7 +70,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full bg-black rounded-lg overflow-hidden group cursor-pointer">
+    <div className="relative w-40 h-72 bg-black rounded-lg overflow-hidden group cursor-pointer">
       <video
         ref={videoCallbackRef}
         src={short.videoUrl}

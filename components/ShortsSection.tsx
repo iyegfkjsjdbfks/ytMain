@@ -83,7 +83,9 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
       </div>
       <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
         {shorts.map(short => (
-          <ShortDisplayCard key={short.id} short={short} />
+          <Link key={short.id} to={`/shorts?v=${short.id}`} className="flex-shrink-0">
+            <ShortDisplayCard short={short} />
+          </Link>
         ))}
       </div>
     </div>
