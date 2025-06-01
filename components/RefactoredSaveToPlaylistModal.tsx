@@ -53,13 +53,13 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
     loading: saveLoading,
     error: saveError,
     execute: executeSave
-  } = useAsyncState();
+  } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
     error: createError,
     execute: executeCreate
-  } = useAsyncState();
+  } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist
   const handleSaveToExisting = async () => {

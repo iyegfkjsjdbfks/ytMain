@@ -170,7 +170,7 @@ export const useWatchPage = () => {
 
   const handleSaveToPlaylist = async (videoId: string, playlistId: string) => {
     // Simulate API call to save video to playlist
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 300));
     
     // Update the saved state
     setIsSavedToAnyList(true);

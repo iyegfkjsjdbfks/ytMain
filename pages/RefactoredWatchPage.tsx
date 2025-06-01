@@ -6,6 +6,7 @@ import { RefactoredVideoDescription } from '../components/RefactoredVideoDescrip
 import { RecommendationEngine } from '../components/RecommendationEngine';
 import { VideoActions } from '../components/VideoActions';
 import { CommentsSection } from '../components/CommentsSection';
+import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 import { useWatchPage } from '../hooks/useWatchPage';
 import { useAsyncState } from '../hooks';
 import { useMiniplayer } from '../contexts/MiniplayerContext';
@@ -163,7 +164,7 @@ const RefactoredWatchPage: React.FC = () => {
     onDislike: handleDislike,
     onShare: handleEnhancedShare,
     onSaveToWatchLater: handleSaveToWatchLater,
-    onSaveToPlaylist: () => setIsSaveModalOpen(true),
+    onSaveToPlaylist: handleSaveToPlaylist,
     loading: actionLoading
   };
   
@@ -266,6 +267,16 @@ const RefactoredWatchPage: React.FC = () => {
             </div>
           </div>
         </div>
+      )}
+      
+      {/* Save to Playlist Modal */}
+      {isSaveModalOpen && (
+        <RefactoredSaveToPlaylistModal
+          isOpen={isSaveModalOpen}
+          onClose={() => setIsSaveModalOpen(false)}
+          onSaveToPlaylist={handleSaveToPlaylist}
+          videoId={video?.id || ''}
+        />
       )}
     </StandardPageLayout>
   );
