@@ -1,5 +1,5 @@
 export { default as ActionButton } from './ActionButton';
-export { default as DropdownMenu } from './DropdownMenu';
+export { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './DropdownMenu';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
