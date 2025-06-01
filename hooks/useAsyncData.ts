@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseAsyncDataOptions<T> {
   initialData?: T;
@@ -28,13 +28,19 @@ export function useAsyncData<T>(
   const [data, setData] = useState<T>(initialData as T);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const asyncFunctionRef = useRef(asyncFunction);
+  
+  // Update ref when asyncFunction changes
+  useEffect(() => {
+    asyncFunctionRef.current = asyncFunction;
+  }, [asyncFunction]);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
     
     try {
-      const result = await asyncFunction();
+      const result = await asyncFunctionRef.current();
       setData(result);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
@@ -43,7 +49,7 @@ export function useAsyncData<T>(
     } finally {
       setLoading(false);
     }
-  }, [asyncFunction]);
+  }, []);
 
   useEffect(() => {
     fetchData();

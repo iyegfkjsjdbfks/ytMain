@@ -169,21 +169,13 @@ export const useWatchPage = () => {
   };
 
   const handleSaveToPlaylist = async (videoId: string, playlistId: string) => {
-    setSaveModalLoading(true);
-    try {
-      // Simulate API call to save video to playlist
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Update the saved state
-      setIsSavedToAnyList(true);
-      
-      // Close the modal
-      setIsSaveModalOpen(false);
-    } catch (error) {
-      console.error('Failed to save to playlist:', error);
-    } finally {
-      setSaveModalLoading(false);
-    }
+    // Simulate API call to save video to playlist
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Update the saved state
+    setIsSavedToAnyList(true);
+    
+    // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
   const handleCreatePlaylist = async (name: string, description?: string) => {

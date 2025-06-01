@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BaseModal from './BaseModal';
 import BaseForm from './BaseForm';
 import { useAsyncState } from '../hooks';
@@ -33,6 +33,21 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
 }) => {
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<string>('');
   const [showCreateForm, setShowCreateForm] = useState(false);
+  
+  // Auto-select first playlist when modal opens
+  useEffect(() => {
+    if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId) {
+      setSelectedPlaylistId(existingPlaylists[0].id);
+    }
+  }, [isOpen, existingPlaylists, selectedPlaylistId]);
+  
+  // Reset state when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedPlaylistId('');
+      setShowCreateForm(false);
+    }
+  }, [isOpen]);
   
   const {
     loading: saveLoading,
