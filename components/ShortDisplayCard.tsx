@@ -21,6 +21,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
+  const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
   
   // Use the custom video player hook
   const { videoRef, state, actions, events } = useVideoPlayer({
@@ -47,12 +48,13 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   
   // Sync autoplay with video player
   React.useEffect(() => {
-    if (isIntersecting && !state.isPlaying) {
+    if (isIntersecting && !state.isPlaying && !isManuallyPaused) {
       actions.play();
     } else if (!isIntersecting && state.isPlaying) {
       actions.pause();
+      setIsManuallyPaused(false); // Reset manual pause when leaving view
     }
-  }, [isIntersecting, state.isPlaying, actions]);
+  }, [isIntersecting, state.isPlaying, actions, isManuallyPaused]);
   
   const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -78,10 +80,6 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
       <video
         ref={videoCallbackRef}
         src={short.videoUrl}
-        onClick={(e) => {
-          e.stopPropagation();
-          actions.togglePlayPause();
-        }}
         onPlay={events.onPlay}
         onPause={events.onPause}
         onTimeUpdate={events.onTimeUpdate}
@@ -93,15 +91,23 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
       />
       
       {/* Play/Pause Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div 
+        className="absolute inset-0 flex items-center justify-center cursor-pointer"
+        onClick={(e) => {
+          e.stopPropagation();
+          if (state.isPlaying) {
+            setIsManuallyPaused(true);
+            actions.pause();
+          } else {
+            setIsManuallyPaused(false);
+            actions.play();
+          }
+        }}
+      >
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            actions.togglePlayPause();
-          }}
           className={`
             bg-black bg-opacity-50 text-white p-4 rounded-full 
-            transition-opacity duration-200
+            transition-opacity duration-200 pointer-events-none
             ${!state.isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
             hover:bg-opacity-70
           `}
@@ -114,18 +120,6 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           )}
         </button>
       </div>
-      
-      {/* Invisible clickable area for pause when playing */}
-      {state.isPlaying && (
-        <div 
-          className="absolute inset-0 cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            actions.pause();
-          }}
-          aria-label="Pause video"
-        />
-      )}
 
       {/* Video Info Overlay */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
