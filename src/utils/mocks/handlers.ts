@@ -1,5 +1,11 @@
-import { http, HttpResponse } from 'msw';
-import type { Video, Channel, Playlist, Comment } from '../../types';
+import { http, HttpResponse, delay } from 'msw';
+// import type { Video, Channel, Playlist, Comment } from '../../types';
+
+// Temporary type definitions for mock data
+type Video = any;
+type Channel = any;
+type Playlist = any;
+type Comment = any;
 
 // Mock data generators
 const generateMockVideo = (id: string, overrides: Partial<Video> = {}): Video => ({
@@ -85,7 +91,7 @@ const createYouTubeAPIResponse = <T>(items: T[], pageInfo?: { totalResults: numb
   items,
 });
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms)); // Using delay from MSW instead
 
 // Request handlers
 export const handlers = [
@@ -95,7 +101,7 @@ export const handlers = [
     const q = url.searchParams.get('q') || '';
     const maxResults = parseInt(url.searchParams.get('maxResults') || '25');
     const pageToken = url.searchParams.get('pageToken');
-    const type = url.searchParams.get('type') || 'video';
+    // const type = url.searchParams.get('type') || 'video';
     const order = url.searchParams.get('order') || 'relevance';
     
     // Simulate API delay
@@ -157,7 +163,7 @@ export const handlers = [
   http.get('https://www.googleapis.com/youtube/v3/videos', async ({ request }) => {
     const url = new URL(request.url);
     const id = url.searchParams.get('id');
-    const part = url.searchParams.get('part') || 'snippet,statistics,contentDetails';
+    // const part = url.searchParams.get('part') || 'snippet,statistics,contentDetails';
     
     await delay(Math.random() * 300 + 100);
     

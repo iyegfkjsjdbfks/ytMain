@@ -301,7 +301,16 @@ Object.defineProperty(window, 'File', {
   value: class MockFile {
     constructor(bits: BlobPart[], name: string, options?: FilePropertyBag) {
       this.name = name;
-      this.size = bits.reduce((acc, bit) => acc + (typeof bit === 'string' ? bit.length : bit.size || 0), 0);
+      this.size = bits.reduce((acc, bit) => {
+        if (typeof bit === 'string') {
+          return acc + bit.length;
+        } else if (bit instanceof ArrayBuffer) {
+          return acc + bit.byteLength;
+        } else if (bit && typeof bit === 'object' && 'size' in bit) {
+          return acc + (bit as any).size;
+        }
+        return acc;
+      }, 0);
       this.type = options?.type || '';
       this.lastModified = options?.lastModified || Date.now();
     }
@@ -316,6 +325,14 @@ Object.defineProperty(window, 'File', {
 Object.defineProperty(window, 'FileReader', {
   writable: true,
   value: class MockFileReader {
+    static readonly EMPTY = 0;
+    static readonly LOADING = 1;
+    static readonly DONE = 2;
+    
+    readonly EMPTY = 0;
+    readonly LOADING = 1;
+    readonly DONE = 2;
+    
     result: string | ArrayBuffer | null = null;
     error: DOMException | null = null;
     readyState: number = 0;
@@ -330,7 +347,7 @@ Object.defineProperty(window, 'FileReader', {
       this.result = 'mock file content';
       this.readyState = 2;
       if (this.onload) {
-        this.onload({} as ProgressEvent<FileReader>);
+        this.onload.call(this as any, {} as ProgressEvent<FileReader>);
       }
     });
 
@@ -338,7 +355,7 @@ Object.defineProperty(window, 'FileReader', {
       this.result = 'data:text/plain;base64,bW9jayBmaWxlIGNvbnRlbnQ=';
       this.readyState = 2;
       if (this.onload) {
-        this.onload({} as ProgressEvent<FileReader>);
+        this.onload.call(this as any, {} as ProgressEvent<FileReader>);
       }
     });
 
