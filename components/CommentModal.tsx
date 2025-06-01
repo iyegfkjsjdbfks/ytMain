@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BaseModal } from './BaseModal';
+import BaseModal from './BaseModal';
 import { AddCommentForm } from './AddCommentForm';
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
