@@ -13,6 +13,194 @@ interface ShortDisplayCardProps {
   onShare?: (shortId: string) => void;
 }
 
+// Extracted reusable ActionButton component
+interface ActionButtonProps {
+  onClick: (e: React.MouseEvent) => void;
+  ariaLabel: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+const ActionButton: React.FC<ActionButtonProps> = ({ 
+  onClick, 
+  ariaLabel, 
+  children, 
+  className = '' 
+}) => (
+  <button
+    onClick={onClick}
+    className={`bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors ${className}`}
+    aria-label={ariaLabel}
+  >
+    {children}
+  </button>
+);
+
+// Extracted PlayPauseOverlay component
+interface PlayPauseOverlayProps {
+  isPlaying: boolean;
+  onToggle: () => void;
+}
+
+const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }) => (
+  <div 
+    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+    onClick={(e) => {
+      e.stopPropagation();
+      onToggle();
+    }}
+  >
+    <button
+      className={`
+        bg-black bg-opacity-50 text-white p-4 rounded-full 
+        transition-opacity duration-200 pointer-events-none
+        ${!isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
+        hover:bg-opacity-70
+      `}
+      aria-label={isPlaying ? 'Pause video' : 'Play video'}
+    >
+      {isPlaying ? (
+        <PauseIcon className="w-8 h-8" />
+      ) : (
+        <PlayIcon className="w-8 h-8" />
+      )}
+    </button>
+  </div>
+);
+
+// Extracted VideoInfo component
+interface VideoInfoProps {
+  title: string;
+  channelName: string;
+  views: number;
+}
+
+const VideoInfo: React.FC<VideoInfoProps> = ({ title, channelName, views }) => (
+  <div className="flex-1 mr-4 pointer-events-auto">
+    <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
+      {title}
+    </h3>
+    <p className="text-gray-300 text-xs">
+      {channelName} • {formatNumber(views)} views
+    </p>
+  </div>
+);
+
+// Extracted ActionButtons component
+interface ActionButtonsProps {
+  isMuted: boolean;
+  isLiked: boolean;
+  onToggleMute: () => void;
+  onLike: (e: React.MouseEvent) => void;
+  onComment: (e: React.MouseEvent) => void;
+  onShare: (e: React.MouseEvent) => void;
+}
+
+const ActionButtons: React.FC<ActionButtonsProps> = ({
+  isMuted,
+  isLiked,
+  onToggleMute,
+  onLike,
+  onComment,
+  onShare
+}) => (
+  <div className="flex flex-col space-y-3 pointer-events-auto">
+    {/* Mute/Unmute */}
+    <ActionButton
+      onClick={(e) => {
+        e.stopPropagation();
+        onToggleMute();
+      }}
+      ariaLabel={isMuted ? 'Unmute video' : 'Mute video'}
+    >
+      {isMuted ? (
+        <SpeakerXMarkIcon className="w-5 h-5" />
+      ) : (
+        <SpeakerWaveIcon className="w-5 h-5" />
+      )}
+    </ActionButton>
+    
+    {/* Like */}
+    <ActionButton
+      onClick={onLike}
+      ariaLabel="Like video"
+    >
+      {isLiked ? (
+        <HeartIconSolid className="w-5 h-5 text-red-500" />
+      ) : (
+        <HeartIcon className="w-5 h-5" />
+      )}
+    </ActionButton>
+    
+    {/* Comment */}
+    <ActionButton
+      onClick={onComment}
+      ariaLabel="Comment on video"
+    >
+      <ChatBubbleOvalLeftIcon className="w-5 h-5" />
+    </ActionButton>
+    
+    {/* Share */}
+    <ActionButton
+      onClick={onShare}
+      ariaLabel="Share video"
+    >
+      <ShareIcon className="w-5 h-5" />
+    </ActionButton>
+  </div>
+);
+
+// Extracted LoadingIndicator component
+const LoadingIndicator: React.FC = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+  </div>
+);
+
+// Extracted ErrorState component
+interface ErrorStateProps {
+  error: string;
+  onRetry: () => void;
+}
+
+const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
+  <div 
+    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer"
+    onClick={(e) => {
+      e.stopPropagation();
+      onRetry();
+    }}
+  >
+    <div className="text-center">
+      <p className="text-white text-sm px-4 mb-2">
+        {error}
+      </p>
+      <p className="text-gray-300 text-xs">
+        Click to retry
+      </p>
+    </div>
+  </div>
+);
+
+// Custom hook for video autoplay logic
+const useVideoAutoplay = (
+  isIntersecting: boolean,
+  isPlaying: boolean,
+  isManuallyPaused: boolean,
+  actions: any,
+  setIsManuallyPaused: (paused: boolean) => void
+) => {
+  React.useEffect(() => {
+    if (isIntersecting && !isPlaying && !isManuallyPaused) {
+      actions.play();
+    } else if (!isIntersecting && isPlaying) {
+      actions.pause();
+      setIsManuallyPaused(false); // Reset manual pause when leaving view
+    }
+  }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused]);
+};
+
+// Main component
 const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   short,
   onLike,
@@ -46,16 +234,20 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     }
   }, [videoRef, intersectionRef]);
   
-  // Sync autoplay with video player
-  React.useEffect(() => {
-    if (isIntersecting && !state.isPlaying && !isManuallyPaused) {
-      actions.play();
-    } else if (!isIntersecting && state.isPlaying) {
-      actions.pause();
-      setIsManuallyPaused(false); // Reset manual pause when leaving view
-    }
-  }, [isIntersecting, state.isPlaying, actions, isManuallyPaused]);
+  // Use custom hook for autoplay logic
+  useVideoAutoplay(isIntersecting, state.isPlaying, isManuallyPaused, actions, setIsManuallyPaused);
   
+  // Event handlers
+  const handlePlayPauseToggle = () => {
+    if (state.isPlaying) {
+      setIsManuallyPaused(true);
+      actions.pause();
+    } else {
+      setIsManuallyPaused(false);
+      actions.play();
+    }
+  };
+
   const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
     onLike?.(short.id);
@@ -69,6 +261,10 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
     onShare?.(short.id);
+  };
+
+  const handleRetry = async () => {
+    await actions.play();
   };
 
   return (
@@ -91,128 +287,47 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
       />
       
       {/* Play/Pause Overlay */}
-      <div 
-        className="absolute inset-0 flex items-center justify-center cursor-pointer"
-        onClick={(e) => {
-          e.stopPropagation();
-          if (state.isPlaying) {
-            setIsManuallyPaused(true);
-            actions.pause();
-          } else {
-            setIsManuallyPaused(false);
-            actions.play();
-          }
-        }}
-      >
-        <button
-          className={`
-            bg-black bg-opacity-50 text-white p-4 rounded-full 
-            transition-opacity duration-200 pointer-events-none
-            ${!state.isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
-            hover:bg-opacity-70
-          `}
-          aria-label={state.isPlaying ? 'Pause video' : 'Play video'}
-        >
-          {state.isPlaying ? (
-            <PauseIcon className="w-8 h-8" />
-          ) : (
-            <PlayIcon className="w-8 h-8" />
-          )}
-        </button>
-      </div>
+      <PlayPauseOverlay 
+        isPlaying={state.isPlaying}
+        onToggle={handlePlayPauseToggle}
+      />
 
       {/* Video Info Overlay */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
         <div className="flex items-end justify-between">
-          <div className="flex-1 mr-4 pointer-events-auto">
-            <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
-              {short.title}
-            </h3>
-            <p className="text-gray-300 text-xs">
-              {short.channelName} • {formatNumber(short.views)} views
-            </p>
-          </div>
+          <VideoInfo 
+            title={short.title}
+            channelName={short.channelName}
+            views={short.views}
+          />
           
           {/* Action Buttons */}
-          <div className="flex flex-col space-y-3 pointer-events-auto">
-            {/* Mute/Unmute */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                actions.toggleMute();
-              }}
-              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
-              aria-label={state.isMuted ? 'Unmute video' : 'Mute video'}
-            >
-              {state.isMuted ? (
-                <SpeakerXMarkIcon className="w-5 h-5" />
-              ) : (
-                <SpeakerWaveIcon className="w-5 h-5" />
-              )}
-            </button>
-            
-            {/* Like */}
-            <button 
-              onClick={handleLike}
-              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
-              aria-label="Like video"
-            >
-              {short.isLiked ? (
-                <HeartIconSolid className="w-5 h-5 text-red-500" />
-              ) : (
-                <HeartIcon className="w-5 h-5" />
-              )}
-            </button>
-            
-            {/* Comment */}
-            <button 
-              onClick={handleComment}
-              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
-              aria-label="Comment on video"
-            >
-              <ChatBubbleOvalLeftIcon className="w-5 h-5" />
-            </button>
-            
-            {/* Share */}
-            <button 
-              onClick={handleShare}
-              className="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors"
-              aria-label="Share video"
-            >
-              <ShareIcon className="w-5 h-5" />
-            </button>
-          </div>
+          <ActionButtons
+            isMuted={state.isMuted}
+            isLiked={short.isLiked}
+            onToggleMute={actions.toggleMute}
+            onLike={handleLike}
+            onComment={handleComment}
+            onShare={handleShare}
+          />
         </div>
       </div>
 
       {/* Loading indicator */}
-      {state.isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-        </div>
-      )}
+      {state.isLoading && <LoadingIndicator />}
 
       {/* Error state */}
       {state.error && (
-        <div 
-          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer"
-          onClick={async (e) => {
-            e.stopPropagation();
-            await actions.play();
-          }}
-        >
-          <div className="text-center">
-            <p className="text-white text-sm px-4 mb-2">
-              {state.error}
-            </p>
-            <p className="text-gray-300 text-xs">
-              Click to retry
-            </p>
-          </div>
-        </div>
+        <ErrorState 
+          error={state.error}
+          onRetry={handleRetry}
+        />
       )}
     </div>
   );
 };
 
 export default ShortDisplayCard;
+
+// Export sub-components for reuse in other parts of the application
+export { ActionButton, PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };
