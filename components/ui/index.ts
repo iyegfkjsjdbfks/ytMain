@@ -1,14 +1,27 @@
+// Component exports
 export { default as ActionButton } from './ActionButton';
+export { Badge } from './Badge';
+export { Button } from './Button';
 export { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './DropdownMenu';
 export { default as ErrorMessage } from './ErrorMessage';
-export { default as LoadingSpinner } from './LoadingSpinner';
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
-export { Badge } from './Badge';
-export { ProgressBar } from './ProgressBar';
 export { FileUpload } from './FileUpload';
-export { Button } from './Button';
+export { default as LoadingSpinner } from './LoadingSpinner';
+export { ProgressBar } from './ProgressBar';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
-// Re-export types for convenience
+// New unified components
+export { UnifiedButton } from './UnifiedButton';
+
+// Type exports
 export type { default as ActionButtonProps } from './ActionButton';
-export type { default as LoadingSpinnerProps } from './LoadingSpinner';
+export type { BadgeProps } from './Badge';
+export type { ButtonProps } from './Button';
+export type { DropdownMenuProps } from './DropdownMenu';
 export type { default as ErrorMessageProps } from './ErrorMessage';
+export type { FileUploadProps } from './FileUpload';
+export type { default as LoadingSpinnerProps } from './LoadingSpinner';
+export type { ProgressBarProps } from './ProgressBar';
+export type { TabsProps } from './Tabs';
+
+// New unified component types
+export type { UnifiedButtonProps } from './UnifiedButton';
