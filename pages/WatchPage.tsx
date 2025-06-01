@@ -248,11 +248,11 @@ const WatchPage: React.FC = () => {
               onEditSave={handleEditSave}
               onDeleteComment={handleDeleteComment}
               onToggleLikeDislike={toggleLikeDislikeForCommentOrReply}
-              setReplyingToCommentId={setReplyingToCommentId}
-              setCurrentReplyText={setCurrentReplyText}
-              setEditingComment={setEditingComment}
-              setActiveCommentMenu={setActiveCommentMenu}
-              setExpandedReplies={setExpandedReplies}
+              onSetReplyingTo={setReplyingToCommentId}
+              onSetCurrentReplyText={setCurrentReplyText}
+              onSetEditingComment={setEditingComment}
+              onSetActiveCommentMenu={setActiveCommentMenu}
+              onSetExpandedReplies={setExpandedReplies}
             />
           </div>
           
