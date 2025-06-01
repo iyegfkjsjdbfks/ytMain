@@ -4,7 +4,8 @@ import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, Chat
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Short } from '../types';
 import { formatNumber } from '../utils/formatters';
-import { useVideoPlayer, useIntersectionObserver } from '../hooks';
+import { useVideoPlayer, useIntersectionObserver, useVideoAutoplay } from '../hooks';
+import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 
 interface ShortDisplayCardProps {
   short: Short;
@@ -13,28 +14,7 @@ interface ShortDisplayCardProps {
   onShare?: (shortId: string) => void;
 }
 
-// Extracted reusable ActionButton component
-interface ActionButtonProps {
-  onClick: (e: React.MouseEvent) => void;
-  ariaLabel: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
-const ActionButton: React.FC<ActionButtonProps> = ({ 
-  onClick, 
-  ariaLabel, 
-  children, 
-  className = '' 
-}) => (
-  <button
-    onClick={onClick}
-    className={`bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-colors ${className}`}
-    aria-label={ariaLabel}
-  >
-    {children}
-  </button>
-);
+// Video-specific components
 
 // Extracted PlayPauseOverlay component
 interface PlayPauseOverlayProps {
@@ -153,7 +133,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 // Extracted LoadingIndicator component
 const LoadingIndicator: React.FC = () => (
   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+    <LoadingSpinner size="md" color="white" />
   </div>
 );
 
@@ -164,41 +144,15 @@ interface ErrorStateProps {
 }
 
 const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
-  <div 
-    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer"
-    onClick={(e) => {
-      e.stopPropagation();
-      onRetry();
-    }}
-  >
-    <div className="text-center">
-      <p className="text-white text-sm px-4 mb-2">
-        {error}
-      </p>
-      <p className="text-gray-300 text-xs">
-        Click to retry
-      </p>
-    </div>
-  </div>
+  <ErrorMessage 
+    message={error}
+    onRetry={onRetry}
+    variant="overlay"
+    showIcon={false}
+  />
 );
 
-// Custom hook for video autoplay logic
-const useVideoAutoplay = (
-  isIntersecting: boolean,
-  isPlaying: boolean,
-  isManuallyPaused: boolean,
-  actions: any,
-  setIsManuallyPaused: (paused: boolean) => void
-) => {
-  React.useEffect(() => {
-    if (isIntersecting && !isPlaying && !isManuallyPaused) {
-      actions.play();
-    } else if (!isIntersecting && isPlaying) {
-      actions.pause();
-      setIsManuallyPaused(false); // Reset manual pause when leaving view
-    }
-  }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused]);
-};
+
 
 // Main component
 const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
@@ -235,7 +189,14 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   }, [videoRef, intersectionRef]);
   
   // Use custom hook for autoplay logic
-  useVideoAutoplay(isIntersecting, state.isPlaying, isManuallyPaused, actions, setIsManuallyPaused);
+  useVideoAutoplay({
+    isIntersecting,
+    isPlaying: state.isPlaying,
+    isManuallyPaused,
+    actions,
+    setIsManuallyPaused,
+    enableAutoplay: true
+  });
   
   // Event handlers
   const handlePlayPauseToggle = () => {
@@ -329,5 +290,5 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 
 export default ShortDisplayCard;
 
-// Export sub-components for reuse in other parts of the application
-export { ActionButton, PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };
+// Export video-specific sub-components for reuse in other parts of the application
+export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };

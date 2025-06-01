@@ -14,3 +14,4 @@ export {
   useLazyImage, 
   useInfiniteScroll 
 } from './useIntersectionObserver';
+export { useVideoAutoplay } from './useVideoAutoplay';
