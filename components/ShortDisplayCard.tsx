@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Short } from '../types';
 import { formatNumber } from '../utils/formatters';
-import { useVideoPlayer, useVideoAutoplay } from '../hooks';
+import { useVideoPlayer, useIntersectionObserver } from '../hooks';
 
 interface ShortDisplayCardProps {
   short: Short;
@@ -29,11 +29,21 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     playsinline: true
   });
   
-  // Use autoplay hook for intersection-based playback
-  const { isIntersecting } = useVideoAutoplay({
+  // Use intersection observer for autoplay
+  const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
-    enabled: true
+    rootMargin: '0px'
   });
+  
+  // Callback ref to attach both video player ref and intersection observer ref
+  const videoCallbackRef = useCallback((node: HTMLVideoElement | null) => {
+    if (videoRef.current !== node) {
+      (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = node;
+    }
+    if (intersectionRef.current !== node) {
+      (intersectionRef as React.MutableRefObject<Element | null>).current = node;
+    }
+  }, [videoRef, intersectionRef]);
   
   // Sync autoplay with video player
   React.useEffect(() => {
@@ -62,7 +72,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   return (
     <div className="relative w-full h-full bg-black rounded-lg overflow-hidden group cursor-pointer">
       <video
-        ref={videoRef}
+        ref={videoCallbackRef}
         src={short.videoUrl}
         onClick={(e) => {
           e.stopPropagation();
@@ -174,10 +184,21 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 
       {/* Error state */}
       {state.error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
-          <p className="text-white text-sm text-center px-4">
-            {state.error}
-          </p>
+        <div 
+          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer"
+          onClick={async (e) => {
+            e.stopPropagation();
+            await actions.play();
+          }}
+        >
+          <div className="text-center">
+            <p className="text-white text-sm px-4 mb-2">
+              {state.error}
+            </p>
+            <p className="text-gray-300 text-xs">
+              Click to retry
+            </p>
+          </div>
         </div>
       )}
     </div>
