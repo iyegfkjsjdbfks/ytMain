@@ -307,6 +307,10 @@ export const getLikedVideos = (): Promise<Video[]> => {
   return Promise.resolve(mockVideos.slice(0, 3));
 };
 
+export const getWatchLaterVideos = (): Promise<Video[]> => {
+  return Promise.resolve(mockVideos.slice(2, 7));
+};
+
 export const getRecentSearches = (): Promise<string[]> => {
   return Promise.resolve(['gaming setup', 'travel vlog', 'cooking tips']);
 };
