@@ -210,19 +210,7 @@ export const uploadVideo = (data: VideoUploadData): Promise<UploadProgress> => {
   return Promise.resolve({ progress: 0, status: 'uploading' });
 };
 
-// Additional missing functions
-export const getVideos = (): Promise<Video[]> => {
-  return Promise.resolve(mockVideos.filter(v => !v.isShort));
-};
-
-export const getShortsVideos = (): Promise<Video[]> => {
-  return Promise.resolve(mockVideos.filter(v => v.isShort));
-};
-
-export const getVideoById = (id: string): Promise<Video | null> => {
-  return Promise.resolve(mockVideos.find(v => v.id === id) || null);
-};
-
+// Additional missing functions (only non-duplicate ones)
 export const getChannelByName = (name: string): Promise<Channel | null> => {
   return Promise.resolve(null);
 };
@@ -241,13 +229,6 @@ export const getChannelPlaylists = (channelName: string): Promise<PlaylistSummar
 
 export const getChannelCommunityPosts = (channelName: string): Promise<CommunityPost[]> => {
   return Promise.resolve([]);
-};
-
-export const searchVideos = (query: string): Promise<Video[]> => {
-  return Promise.resolve(mockVideos.filter(v => 
-    v.title.toLowerCase().includes(query.toLowerCase()) ||
-    v.description.toLowerCase().includes(query.toLowerCase())
-  ));
 };
 
 export const getWatchHistoryVideos = (): Promise<Video[]> => {
@@ -280,4 +261,33 @@ export const updateUserPlaylistDetails = (id: string, details: Partial<UserPlayl
 
 export const getSubscribedChannelNames = (): Promise<string[]> => {
   return Promise.resolve(['Nature Explorers', 'TechLevelUp', 'CookingMaster']);
+};
+
+export const getSearchSuggestions = (query: string): Promise<string[]> => {
+  const suggestions = [
+    'gaming setup',
+    'travel vlog',
+    'cooking tips',
+    'tech review',
+    'music video',
+    'tutorial',
+    'funny moments',
+    'nature documentary'
+  ];
+  return Promise.resolve(
+    suggestions.filter(s => s.toLowerCase().includes(query.toLowerCase()))
+  );
+};
+
+export const removeRecentSearch = (searchToRemove: string): Promise<string[]> => {
+  // Mock implementation - in real app this would remove from storage
+  const currentSearches = ['gaming setup', 'travel vlog', 'cooking tips'];
+  const updatedSearches = currentSearches.filter(search => search !== searchToRemove);
+  return Promise.resolve(updatedSearches);
+};
+
+export const saveRecentSearch = (query: string): Promise<void> => {
+  // Mock implementation - in real app this would save to storage
+  console.log('Saving recent search:', query);
+  return Promise.resolve();
 };
