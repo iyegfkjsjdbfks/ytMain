@@ -125,6 +125,7 @@ const ShortsPage: React.FC = () => {
         <div key={short.id || index} className="h-full w-full snap-start">
           <ShortDisplayCard 
             short={short} 
+            isLiked={likedShorts.has(short.id)}
             onLike={handleLike}
             onComment={handleComment}
             onShare={handleShare}

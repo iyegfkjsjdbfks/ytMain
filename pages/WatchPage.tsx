@@ -208,12 +208,8 @@ const WatchPage: React.FC = () => {
               onDislike={handleDislike}
               onShare={() => {}}
               onSave={openSaveModal}
-              isSaved={isSavedToAnyList}
-              saveButtonRef={saveButtonRef}
-              isSaveModalOpen={isSaveModalOpen}
-              saveModalRef={saveModalRef}
+              isSavedToAnyList={isSavedToAnyList}
               saveModalLoading={saveModalLoading}
-              video={video}
             />
             
             {/* Video description */}

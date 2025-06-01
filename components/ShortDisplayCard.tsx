@@ -9,6 +9,7 @@ import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 
 interface ShortDisplayCardProps {
   short: Short;
+  isLiked?: boolean;
   onLike?: (shortId: string) => void;
   onComment?: (shortId: string) => void;
   onShare?: (shortId: string) => void;
@@ -155,11 +156,12 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
 
 
 // Main component
-const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
-  short,
-  onLike,
-  onComment,
-  onShare
+const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ 
+  short, 
+  isLiked = false,
+  onLike, 
+  onComment, 
+  onShare 
 }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
@@ -265,7 +267,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           {/* Action Buttons */}
           <ActionButtons
             isMuted={state.isMuted}
-            isLiked={short.isLiked}
+            isLiked={isLiked}
             onToggleMute={actions.toggleMute}
             onLike={handleLike}
             onComment={handleComment}
