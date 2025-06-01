@@ -10,7 +10,6 @@ export { useAsyncState } from './useAsyncState';
 export { useVideoPlayer } from './useVideoPlayer';
 export { 
   useIntersectionObserver, 
-  useVideoAutoplay, 
   useLazyImage, 
   useInfiniteScroll 
 } from './useIntersectionObserver';

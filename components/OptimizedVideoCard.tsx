@@ -174,7 +174,9 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
             onClick={(e) => {
               e.stopPropagation();
               closeMenu();
-              // TODO: Implement add to playlist
+              // Open save to playlist modal
+              const event = new CustomEvent('openSaveToPlaylist', { detail: { video } });
+              window.dispatchEvent(event);
             }}
             icon={<PlusIcon className="w-4 h-4" />}
           >
@@ -184,7 +186,25 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
             onClick={(e) => {
               e.stopPropagation();
               closeMenu();
-              // TODO: Implement share functionality
+              // Share video functionality
+              const shareData = {
+                title: video.title,
+                text: `Check out this video: ${video.title}`,
+                url: `${window.location.origin}/watch?v=${video.id}`
+              };
+              
+              if (navigator.share) {
+                navigator.share(shareData).catch(console.error);
+              } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(shareData.url).then(() => {
+                  alert('Video link copied to clipboard!');
+                }).catch(() => {
+                  // Final fallback: show share modal
+                  const event = new CustomEvent('openShareModal', { detail: shareData });
+                  window.dispatchEvent(event);
+                });
+              }
             }}
             icon={
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +218,23 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
             onClick={(e) => {
               e.stopPropagation();
               closeMenu();
-              // TODO: Implement not interested functionality
+              // Mark video as not interested
+              const notInterestedVideos = JSON.parse(localStorage.getItem('youtubeCloneNotInterested_v1') || '[]');
+              if (!notInterestedVideos.includes(video.id)) {
+                notInterestedVideos.push(video.id);
+                localStorage.setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
+                
+                // Dispatch event to remove video from current view
+                const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } });
+                window.dispatchEvent(event);
+                
+                // Show feedback
+                const feedback = document.createElement('div');
+                feedback.className = 'fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg z-50';
+                feedback.textContent = 'Video marked as not interested';
+                document.body.appendChild(feedback);
+                setTimeout(() => feedback.remove(), 3000);
+              }
             }}
             icon={
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +249,35 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
             onClick={(e) => {
               e.stopPropagation();
               closeMenu();
-              // TODO: Implement report functionality
+              // Report video functionality
+              const reportReasons = [
+                'Spam or misleading',
+                'Hateful or abusive content',
+                'Harmful or dangerous acts',
+                'Child safety',
+                'Promotes terrorism',
+                'Spam or scams',
+                'Infringes my rights',
+                'Captions issue'
+              ];
+              
+              const reason = prompt(`Report this video for:\n\n${reportReasons.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nEnter the number (1-${reportReasons.length}):`);
+              
+              if (reason && !isNaN(Number(reason)) && Number(reason) >= 1 && Number(reason) <= reportReasons.length) {
+                const selectedReason = reportReasons[Number(reason) - 1];
+                
+                // Store report (in real app, this would be sent to server)
+                const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
+                reports.push({
+                  videoId: video.id,
+                  reason: selectedReason,
+                  timestamp: new Date().toISOString(),
+                  videoTitle: video.title
+                });
+                localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
+                
+                alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
+              }
             }}
             variant="danger"
             icon={

@@ -206,8 +206,76 @@ export const getUserPlaylistById = (id: string): Promise<UserPlaylistDetails | n
   return Promise.resolve(null);
 };
 
-export const uploadVideo = (data: VideoUploadData): Promise<UploadProgress> => {
-  return Promise.resolve({ progress: 0, status: 'uploading' });
+export const uploadVideo = (
+  data: VideoUploadData, 
+  onProgress?: (progress: UploadProgress) => void
+): Promise<UploadProgress> => {
+  return new Promise((resolve, reject) => {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15 + 5; // Random progress between 5-20%
+      
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        
+        // Simulate saving the video
+        const newVideo: Video = {
+          id: `video-${Date.now()}`,
+          title: data.title,
+          thumbnailUrl: data.thumbnailFile ? URL.createObjectURL(data.thumbnailFile) : 'https://picsum.photos/680/380',
+          channelName: 'Your Channel',
+          channelAvatarUrl: 'https://picsum.photos/seed/user/48/48',
+          views: '0 views',
+          uploadedAt: 'Just now',
+          duration: data.isShorts ? '0:30' : '10:00',
+          videoUrl: data.videoFile ? URL.createObjectURL(data.videoFile) : '',
+          description: data.description,
+          category: data.category,
+          isShort: data.isShorts
+        };
+        
+        // Add to mock videos array
+        mockVideos.unshift(newVideo);
+        
+        // Store in localStorage for persistence
+        const userVideos = JSON.parse(localStorage.getItem('youtubeCloneUserVideos_v1') || '[]');
+        userVideos.unshift(newVideo);
+        localStorage.setItem('youtubeCloneUserVideos_v1', JSON.stringify(userVideos));
+        
+        const finalProgress: UploadProgress = {
+          percentage: 100,
+          status: 'completed',
+          message: 'Upload completed successfully!'
+        };
+        
+        if (onProgress) onProgress(finalProgress);
+        resolve(finalProgress);
+      } else {
+        const currentProgress: UploadProgress = {
+          percentage: Math.floor(progress),
+          status: 'uploading',
+          message: `Uploading... ${Math.floor(progress)}%`
+        };
+        
+        if (onProgress) onProgress(currentProgress);
+      }
+    }, 200); // Update every 200ms
+    
+    // Simulate potential upload failure (5% chance)
+    setTimeout(() => {
+      if (Math.random() < 0.05 && progress < 100) {
+        clearInterval(interval);
+        const errorProgress: UploadProgress = {
+          percentage: 0,
+          status: 'error',
+          message: 'Upload failed. Please try again.'
+        };
+        if (onProgress) onProgress(errorProgress);
+        reject(new Error('Upload failed'));
+      }
+    }, 1000);
+  });
 };
 
 // Additional missing functions (only non-duplicate ones)

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 interface VideoProject {
@@ -163,6 +163,49 @@ const VideoEditorPage: React.FC = () => {
     }]);
   };
 
+  const handleSaveProject = () => {
+    const projectData = {
+      ...currentProject,
+      clips,
+      editHistory,
+      lastSaved: new Date().toISOString()
+    };
+    
+    localStorage.setItem(`youtubeCloneProject_${currentProject.id}`, JSON.stringify(projectData));
+    
+    // Show save confirmation
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg z-50';
+    notification.textContent = 'Project saved successfully!';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+  };
+
+  const handleUndo = () => {
+    if (editHistory.length > 0) {
+      const lastAction = editHistory[editHistory.length - 1];
+      setEditHistory(prev => prev.slice(0, -1));
+      
+      // Simple undo logic - in a real app, this would be more sophisticated
+      if (lastAction.type === 'cut') {
+        // Restore original clip before split
+        const splitClips = clips.filter(c => c.id.includes('_split_'));
+        if (splitClips.length > 0) {
+          const originalId = splitClips[0].id.split('_split_')[0];
+          const originalClip = clips.find(c => c.id === originalId);
+          if (originalClip) {
+            setClips(prev => prev.filter(c => !c.id.includes('_split_') && c.id !== originalId));
+          }
+        }
+      }
+    }
+  };
+
+  const handleRedo = () => {
+    // In a real app, you'd maintain a separate redo stack
+    console.log('Redo functionality would be implemented here');
+  };
+
   const handleExport = () => {
     setIsExporting(true);
     setExportProgress(0);
@@ -173,7 +216,30 @@ const VideoEditorPage: React.FC = () => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsExporting(false);
-          alert('Video exported successfully!');
+          
+          // Create download link for exported video
+          const exportData = {
+            project: currentProject,
+            clips,
+            exportSettings: {
+              format: 'mp4',
+              quality: '1080p',
+              fps: currentProject.fps
+            },
+            exportDate: new Date().toISOString()
+          };
+          
+          const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${currentProject.name}-export-${new Date().toISOString().split('T')[0]}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          
+          alert('Video exported successfully! Export settings saved.');
           return 100;
         }
         return prev + 2;
@@ -230,13 +296,27 @@ const VideoEditorPage: React.FC = () => {
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <button className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600">
+              <button 
+                onClick={handleUndo}
+                disabled={editHistory.length === 0}
+                className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
+              >
                 <ArrowUturnLeftIcon className="w-4 h-4 mr-1" />
                 Undo
               </button>
-              <button className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600">
+              <button 
+                onClick={handleRedo}
+                className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600"
+              >
                 <ArrowUturnRightIcon className="w-4 h-4 mr-1" />
                 Redo
+              </button>
+              <button 
+                onClick={handleSaveProject}
+                className="flex items-center px-3 py-2 text-sm bg-blue-600 rounded hover:bg-blue-700"
+              >
+                <DocumentIcon className="w-4 h-4 mr-1" />
+                Save
               </button>
               <button
                 onClick={handleExport}
