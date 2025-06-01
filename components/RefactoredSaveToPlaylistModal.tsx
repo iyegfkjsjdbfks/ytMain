@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BaseModal from './BaseModal';
-import { BaseForm } from './BaseForm';
+import BaseForm from './BaseForm';
 import { useAsyncState } from '../hooks';
 import { Playlist } from '../types';
 

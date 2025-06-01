@@ -163,6 +163,67 @@ export const useWatchPage = () => {
   const openSaveModal = () => {
     setIsSaveModalOpen(true);
   };
+
+  const closeSaveModal = () => {
+    setIsSaveModalOpen(false);
+  };
+
+  const handleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+    setSaveModalLoading(true);
+    try {
+      // Simulate API call to save video to playlist
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Update the saved state
+      setIsSavedToAnyList(true);
+      
+      // Close the modal
+      setIsSaveModalOpen(false);
+    } catch (error) {
+      console.error('Failed to save to playlist:', error);
+    } finally {
+      setSaveModalLoading(false);
+    }
+  };
+
+  const handleCreatePlaylist = async (name: string, description?: string) => {
+    // Simulate API call to create new playlist
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const newPlaylist = {
+      id: `playlist-${Date.now()}`,
+      title: name,
+      description: description || '',
+      videoCount: 0,
+      thumbnailUrl: '',
+      isPrivate: false,
+      createdAt: new Date().toISOString()
+    };
+    
+    return newPlaylist;
+  };
+
+  // Mock playlists data
+  const mockPlaylists = [
+    {
+      id: 'playlist-1',
+      title: 'Watch Later',
+      description: 'Videos to watch later',
+      videoCount: 5,
+      thumbnailUrl: '',
+      isPrivate: false,
+      createdAt: '2024-01-01T00:00:00Z'
+    },
+    {
+      id: 'playlist-2',
+      title: 'Favorites',
+      description: 'My favorite videos',
+      videoCount: 12,
+      thumbnailUrl: '',
+      isPrivate: false,
+      createdAt: '2024-01-01T00:00:00Z'
+    }
+  ];
   
   // Description handlers
   const handleToggleDescription = () => {
@@ -400,6 +461,9 @@ export const useWatchPage = () => {
     handleSubscribe,
     handleShare,
     openSaveModal,
+    closeSaveModal,
+    handleSaveToPlaylist,
+    handleCreatePlaylist,
     handleToggleDescription,
     handleSummarizeDescription,
     handleMainCommentSubmitCallback,
@@ -408,6 +472,9 @@ export const useWatchPage = () => {
     handleDeleteComment,
     toggleLikeDislikeForCommentOrReply,
     addToWatchHistory,
+    
+    // Mock data
+    mockPlaylists,
     
     // Setters
     setCommentSortOrder,

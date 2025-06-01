@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StandardPageLayout } from '../components/StandardPageLayout';
-import { BaseForm } from '../components/BaseForm';
+import BaseForm from '../components/BaseForm';
 import BaseModal from '../components/BaseModal';
 import { ReusableVideoGrid } from '../components/ReusableVideoGrid';
 import { useAsyncState } from '../hooks';

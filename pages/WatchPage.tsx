@@ -5,6 +5,7 @@ import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
 import VideoDescription from '../components/VideoDescription';
 import CommentsSection from '../components/CommentsSection';
+import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 import { useWatchPage } from '../hooks/useWatchPage';
 import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
@@ -65,6 +66,11 @@ const WatchPage: React.FC = () => {
     handleDislike,
     handleSubscribe,
     openSaveModal,
+    closeSaveModal,
+    handleSaveToPlaylist,
+    handleCreatePlaylist,
+    mockPlaylists,
+    videoId,
     handleToggleDescription,
     handleSummarizeDescription,
     handleMainCommentSubmitCallback,
@@ -264,6 +270,16 @@ const WatchPage: React.FC = () => {
           </aside>
         </div>
       </div>
+      
+      {/* Save to Playlist Modal */}
+      <RefactoredSaveToPlaylistModal
+        isOpen={isSaveModalOpen}
+        onClose={closeSaveModal}
+        videoId={videoId || ''}
+        existingPlaylists={mockPlaylists}
+        onSaveToPlaylist={handleSaveToPlaylist}
+        onCreatePlaylist={handleCreatePlaylist}
+      />
     </div>
   );
 };
