@@ -70,7 +70,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   };
 
   return (
-    <div className="relative w-40 h-72 bg-black rounded-lg overflow-hidden group cursor-pointer">
+    <div className={`relative bg-black overflow-hidden group cursor-pointer ${
+      isOnShortsPage 
+        ? 'w-full h-full' 
+        : 'w-40 h-72 rounded-lg'
+    }`}>
       <video
         ref={videoCallbackRef}
         src={short.videoUrl}
@@ -124,9 +128,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
       )}
 
       {/* Video Info Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
         <div className="flex items-end justify-between">
-          <div className="flex-1 mr-4">
+          <div className="flex-1 mr-4 pointer-events-auto">
             <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
               {short.title}
             </h3>
@@ -136,7 +140,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           </div>
           
           {/* Action Buttons */}
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-3 pointer-events-auto">
             {/* Mute/Unmute */}
             <button
               onClick={(e) => {

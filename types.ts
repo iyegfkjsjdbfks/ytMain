@@ -102,3 +102,8 @@ export interface UploadProgress {
   status: 'idle' | 'uploading' | 'processing' | 'completed' | 'error';
   message: string;
 }
+
+// Type alias for shorts (videos with isShort: true)
+export type Short = Video & {
+  isShort: true;
+};
