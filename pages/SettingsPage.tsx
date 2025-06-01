@@ -224,10 +224,27 @@ const SettingsPage: React.FC = () => {
                   Your watch history helps improve your recommendations and remember where you left off.
                 </p>
                 <div className="flex space-x-2">
-                  <button className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors">
+                  <button 
+                    onClick={() => {
+                      // Clear watch history
+                      console.log('Clearing watch history');
+                      // TODO: Implement clear watch history functionality
+                      if (confirm('Are you sure you want to clear your watch history?')) {
+                        // Clear history logic here
+                      }
+                    }}
+                    className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors"
+                  >
                     Clear History
                   </button>
-                  <button className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors">
+                  <button 
+                    onClick={() => {
+                      // Pause watch history
+                      console.log('Pausing watch history');
+                      // TODO: Implement pause watch history functionality
+                    }}
+                    className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors"
+                  >
                     Pause History
                   </button>
                 </div>
@@ -238,10 +255,27 @@ const SettingsPage: React.FC = () => {
                   Your search history helps improve your search suggestions.
                 </p>
                 <div className="flex space-x-2">
-                  <button className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors">
+                  <button 
+                    onClick={() => {
+                      // Clear search history
+                      console.log('Clearing search history');
+                      // TODO: Implement clear search history functionality
+                      if (confirm('Are you sure you want to clear your search history?')) {
+                        // Clear search history logic here
+                      }
+                    }}
+                    className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors"
+                  >
                     Clear Search History
                   </button>
-                  <button className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors">
+                  <button 
+                    onClick={() => {
+                      // Pause search history
+                      console.log('Pausing search history');
+                      // TODO: Implement pause search history functionality
+                    }}
+                    className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors"
+                  >
                     Pause Search History
                   </button>
                 </div>
@@ -256,7 +290,17 @@ const SettingsPage: React.FC = () => {
                   Settings are saved automatically
                 </p>
               </div>
-              <button className="px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white text-sm font-medium rounded-lg transition-colors">
+              <button 
+                onClick={() => {
+                  // Reset all settings to defaults
+                  console.log('Resetting settings to defaults');
+                  // TODO: Implement reset to defaults functionality
+                  if (confirm('Are you sure you want to reset all settings to their default values?')) {
+                    // Reset settings logic here
+                  }
+                }}
+                className="px-4 py-2 bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white text-sm font-medium rounded-lg transition-colors"
+              >
                 Reset to Defaults
               </button>
             </div>

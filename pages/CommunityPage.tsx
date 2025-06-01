@@ -340,7 +340,15 @@ const CommunityPage: React.FC = () => {
                         <p className="text-sm text-gray-500 dark:text-gray-400">{formatDate(post.createdAt)}</p>
                       </div>
                     </div>
-                    <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <button 
+                      onClick={() => {
+                        // Show post options menu
+                        console.log('Show post options for:', post.id);
+                        // TODO: Implement post options menu (edit, delete, report, etc.)
+                      }}
+                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                      title="Post options"
+                    >
                       <EllipsisHorizontalIcon className="w-5 h-5" />
                     </button>
                   </div>
@@ -399,12 +407,28 @@ const CommunityPage: React.FC = () => {
                       <span className="text-sm">{post.likes}</span>
                     </button>
                     
-                    <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <button 
+                      onClick={() => {
+                        // Show comments for this post
+                        console.log('Show comments for post:', post.id);
+                        // TODO: Implement comment viewing functionality
+                      }}
+                      className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      title="View comments"
+                    >
                       <ChatBubbleLeftIcon className="w-5 h-5" />
                       <span className="text-sm">{post.comments}</span>
                     </button>
                     
-                    <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                    <button 
+                      onClick={() => {
+                        // Share this post
+                        console.log('Share post:', post.id);
+                        // TODO: Implement post sharing functionality
+                      }}
+                      className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                      title="Share post"
+                    >
                       <ShareIcon className="w-5 h-5" />
                       <span className="text-sm">{post.shares}</span>
                     </button>

@@ -486,7 +486,14 @@ const CreatorStudioPage: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <button 
+                          onClick={() => {
+                            console.log('Editing comment');
+                            // TODO: Open comment edit modal or inline editing
+                          }}
+                          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                          title="Edit comment"
+                        >
                           <PencilSquareIcon className="w-5 h-5" />
                         </button>
                       </div>

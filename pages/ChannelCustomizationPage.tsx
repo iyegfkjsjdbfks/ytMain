@@ -222,7 +222,25 @@ const ChannelCustomizationPage: React.FC = () => {
                         alt="Channel Art"
                         className="w-full h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
                       />
-                      <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-lg opacity-0 hover:opacity-100 transition-opacity">
+                      <button 
+                        onClick={() => {
+                          // Open file picker for channel art
+                          console.log('Opening channel art picker');
+                          // TODO: Implement channel art upload functionality
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.accept = 'image/*';
+                          input.onchange = (e) => {
+                            const file = (e.target as HTMLInputElement).files?.[0];
+                            if (file) {
+                              console.log('Selected channel art file:', file.name);
+                              // Handle file upload
+                            }
+                          };
+                          input.click();
+                        }}
+                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-lg opacity-0 hover:opacity-100 transition-opacity"
+                      >
                         <PhotoIcon className="w-8 h-8 mr-2" />
                         Change Channel Art
                       </button>
@@ -244,7 +262,26 @@ const ChannelCustomizationPage: React.FC = () => {
                           alt="Profile"
                           className="w-24 h-24 rounded-full border border-gray-200 dark:border-gray-700"
                         />
-                        <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => {
+                            // Open file picker for profile picture
+                            console.log('Opening profile picture picker');
+                            // TODO: Implement profile picture upload functionality
+                            const input = document.createElement('input');
+                            input.type = 'file';
+                            input.accept = 'image/*';
+                            input.onchange = (e) => {
+                              const file = (e.target as HTMLInputElement).files?.[0];
+                              if (file) {
+                                console.log('Selected profile picture file:', file.name);
+                                // Handle file upload
+                              }
+                            };
+                            input.click();
+                          }}
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity"
+                          title="Change profile picture"
+                        >
                           <PhotoIcon className="w-6 h-6" />
                         </button>
                       </div>
@@ -269,7 +306,25 @@ const ChannelCustomizationPage: React.FC = () => {
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         Upload a watermark to appear on your videos
                       </p>
-                      <button className="text-red-600 hover:text-red-700 text-sm font-medium">
+                      <button 
+                        onClick={() => {
+                          // Open file picker for watermark
+                          console.log('Opening watermark file picker');
+                          // TODO: Implement watermark upload functionality
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.accept = 'image/*';
+                          input.onchange = (e) => {
+                            const file = (e.target as HTMLInputElement).files?.[0];
+                            if (file) {
+                              console.log('Selected watermark file:', file.name);
+                              // Handle watermark upload
+                            }
+                          };
+                          input.click();
+                        }}
+                        className="text-red-600 hover:text-red-700 text-sm font-medium"
+                      >
                         Choose File
                       </button>
                     </div>
@@ -449,7 +504,13 @@ const ChannelCustomizationPage: React.FC = () => {
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                           Add channels you want to feature on your channel page
                         </p>
-                        <button className="text-red-600 hover:text-red-700 text-sm font-medium">
+                        <button 
+                          onClick={() => {
+                            console.log('Adding featured channels');
+                            // TODO: Open modal to select and add featured channels
+                          }}
+                          className="text-red-600 hover:text-red-700 text-sm font-medium"
+                        >
                           Add Featured Channels
                         </button>
                       </div>

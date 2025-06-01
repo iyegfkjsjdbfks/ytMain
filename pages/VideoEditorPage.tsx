@@ -551,7 +551,16 @@ const VideoEditorPage: React.FC = () => {
                           <ScissorsIcon className="w-4 h-4 mr-1" />
                           Split
                         </button>
-                        <button className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700">
+                        <button 
+                          onClick={() => {
+                            // Delete the selected clip
+                            console.log('Delete clip:', clip.id);
+                            // TODO: Implement clip deletion functionality
+                            // setClips(clips.filter(c => c.id !== clip.id));
+                          }}
+                          className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
+                          title="Delete clip"
+                        >
                           <XMarkIcon className="w-4 h-4 mr-1" />
                           Delete
                         </button>

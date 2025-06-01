@@ -414,17 +414,49 @@ const ContentManagerPage: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between mt-4">
                       <div className="flex items-center space-x-2">
-                        <button className="p-1 text-neutral-500 hover:text-blue-500 transition-colors">
+                        <button 
+                          onClick={() => {
+                            console.log('Editing video:', item.title);
+                            // TODO: Navigate to video editor or open edit modal
+                          }}
+                          className="p-1 text-neutral-500 hover:text-blue-500 transition-colors"
+                          title="Edit video"
+                        >
                           <PencilIcon className="w-4 h-4" />
                         </button>
-                        <button className="p-1 text-neutral-500 hover:text-green-500 transition-colors">
+                        <button 
+                          onClick={() => {
+                            console.log('Viewing analytics for:', item.title);
+                            // TODO: Navigate to analytics page
+                          }}
+                          className="p-1 text-neutral-500 hover:text-green-500 transition-colors"
+                          title="View analytics"
+                        >
                           <ChartBarIcon className="w-4 h-4" />
                         </button>
-                        <button className="p-1 text-neutral-500 hover:text-purple-500 transition-colors">
+                        <button 
+                          onClick={() => {
+                            console.log('Sharing video:', item.title);
+                            // TODO: Open share modal or copy link
+                            navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
+                          }}
+                          className="p-1 text-neutral-500 hover:text-purple-500 transition-colors"
+                          title="Share video"
+                        >
                           <ShareIcon className="w-4 h-4" />
                         </button>
                       </div>
-                      <button className="p-1 text-neutral-500 hover:text-red-500 transition-colors">
+                      <button 
+                        onClick={() => {
+                          console.log('Deleting video:', item.title);
+                          // TODO: Implement delete video functionality
+                          if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+                            // Delete video logic here
+                          }
+                        }}
+                        className="p-1 text-neutral-500 hover:text-red-500 transition-colors"
+                        title="Delete video"
+                      >
                         <TrashIcon className="w-4 h-4" />
                       </button>
                     </div>
@@ -467,16 +499,48 @@ const ContentManagerPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <button className="p-2 text-neutral-500 hover:text-blue-500 transition-colors">
+                    <button 
+                      onClick={() => {
+                        console.log('Editing video:', item.title);
+                        // TODO: Navigate to video editor or open edit modal
+                      }}
+                      className="p-2 text-neutral-500 hover:text-blue-500 transition-colors"
+                      title="Edit video"
+                    >
                       <PencilIcon className="w-4 h-4" />
                     </button>
-                    <button className="p-2 text-neutral-500 hover:text-green-500 transition-colors">
+                    <button 
+                      onClick={() => {
+                        console.log('Viewing analytics for:', item.title);
+                        // TODO: Navigate to analytics page
+                      }}
+                      className="p-2 text-neutral-500 hover:text-green-500 transition-colors"
+                      title="View analytics"
+                    >
                       <ChartBarIcon className="w-4 h-4" />
                     </button>
-                    <button className="p-2 text-neutral-500 hover:text-purple-500 transition-colors">
+                    <button 
+                      onClick={() => {
+                        console.log('Sharing video:', item.title);
+                        // TODO: Open share modal or copy link
+                        navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
+                      }}
+                      className="p-2 text-neutral-500 hover:text-purple-500 transition-colors"
+                      title="Share video"
+                    >
                       <ShareIcon className="w-4 h-4" />
                     </button>
-                    <button className="p-2 text-neutral-500 hover:text-red-500 transition-colors">
+                    <button 
+                      onClick={() => {
+                        console.log('Deleting video:', item.title);
+                        // TODO: Implement delete video functionality
+                        if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+                          // Delete video logic here
+                        }
+                      }}
+                      className="p-2 text-neutral-500 hover:text-red-500 transition-colors"
+                      title="Delete video"
+                    >
                       <TrashIcon className="w-4 h-4" />
                     </button>
                   </div>
