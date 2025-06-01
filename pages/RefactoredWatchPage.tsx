@@ -76,6 +76,7 @@ const RefactoredWatchPage: React.FC = () => {
     handleShare,
     handleSaveToWatchLater,
     handleSaveToPlaylist,
+    handleCreatePlaylist,
     handleToggleDescription,
     handleSummarizeDescription,
     handleAddComment,
@@ -89,6 +90,9 @@ const RefactoredWatchPage: React.FC = () => {
     handleSortComments,
     setReplyingToCommentId,
     setCurrentReplyText,
+    
+    // Mock data
+    mockPlaylists,
     setEditingComment,
     setIsSaveModalOpen
   } = useWatchPage(videoId || '');
@@ -204,6 +208,9 @@ const RefactoredWatchPage: React.FC = () => {
     onSortComments: handleSortComments,
     setReplyingToCommentId,
     setCurrentReplyText,
+    
+    // Mock data
+    mockPlaylists,
     setEditingComment
   };
   
@@ -275,6 +282,8 @@ const RefactoredWatchPage: React.FC = () => {
           isOpen={isSaveModalOpen}
           onClose={() => setIsSaveModalOpen(false)}
           onSaveToPlaylist={handleSaveToPlaylist}
+          onCreatePlaylist={handleCreatePlaylist}
+          existingPlaylists={mockPlaylists}
           videoId={video?.id || ''}
         />
       )}
