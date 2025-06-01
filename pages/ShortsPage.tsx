@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard'; // New component
+import CommentModal from '../components/CommentModal';
 import { useShortsVideos } from '../hooks';
 import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortsPageError from '../components/ErrorStates/ShortsPageError';
@@ -12,8 +13,10 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // State for tracking liked shorts
+  // State for tracking liked shorts and comment modal
   const [likedShorts, setLikedShorts] = useState<Set<string>>(new Set());
+  const [commentModalOpen, setCommentModalOpen] = useState(false);
+  const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
   
   // Get video ID from query parameter
   const searchParams = new URLSearchParams(location.search);
@@ -33,8 +36,27 @@ const ShortsPage: React.FC = () => {
   };
 
   const handleComment = (shortId: string) => {
-    // Navigate to the watch page with the short video
-    navigate(`/watch?v=${shortId}`);
+    // Find the short to get its title
+    const short = shorts.find(s => s.id === shortId);
+    setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
+    setCommentModalOpen(true);
+  };
+
+  const handleCommentSubmit = async (commentText: string) => {
+    if (!selectedShortForComment) return;
+    
+    try {
+      // TODO: Implement actual comment submission to API
+      console.log('Comment submitted for short:', selectedShortForComment.id, 'Text:', commentText);
+      // You can add API call here to submit the comment
+      
+      // Close modal and reset state
+      setCommentModalOpen(false);
+      setSelectedShortForComment(null);
+    } catch (error) {
+      console.error('Failed to submit comment:', error);
+      // Handle error (show toast, etc.)
+    }
   };
 
   const handleShare = async (shortId: string) => {
@@ -109,6 +131,18 @@ const ShortsPage: React.FC = () => {
           />
         </div>
       ))}
+      
+      {/* Comment Modal */}
+      <CommentModal
+        isOpen={commentModalOpen}
+        onClose={() => {
+          setCommentModalOpen(false);
+          setSelectedShortForComment(null);
+        }}
+        shortId={selectedShortForComment?.id || ''}
+        shortTitle={selectedShortForComment?.title}
+        onCommentSubmit={handleCommentSubmit}
+      />
     </div>
   );
 };

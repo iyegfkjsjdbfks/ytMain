@@ -14,6 +14,7 @@ export { UnifiedVideoCard } from './UnifiedVideoCard';
 
 // Modal Components
 export { default as Modal } from './Modal';
+export { default as CommentModal } from './CommentModal';
 export { default as SaveToPlaylistModal } from './SaveToPlaylistModal';
 export { default as RefactoredSaveToPlaylistModal } from './RefactoredSaveToPlaylistModal';
 

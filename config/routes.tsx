@@ -56,6 +56,10 @@ export const mainRoutes: RouteObject[] = [
         element: <WatchPage />,
       },
       {
+        path: 'watch',
+        element: <WatchPage />,
+      },
+      {
         path: 'search',
         element: <SearchResultsPage />,
       },

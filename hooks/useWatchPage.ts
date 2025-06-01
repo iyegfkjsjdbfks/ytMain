@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
 
 interface Comment {
@@ -44,8 +44,12 @@ const MIN_DESC_LENGTH_FOR_SUMMARY = 100;
 const RELATED_VIDEOS_INITIAL_COUNT = 10;
 
 export const useWatchPage = () => {
-  const { videoId } = useParams<{ videoId: string }>();
+  const { videoId: pathVideoId } = useParams<{ videoId: string }>();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  
+  // Get video ID from either path parameter or query parameter
+  const videoId = pathVideoId || searchParams.get('v');
   
   // Core data state
   const [video, setVideo] = useState<Video | null>(null);
