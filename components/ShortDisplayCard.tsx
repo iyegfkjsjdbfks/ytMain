@@ -98,7 +98,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           className={`
             bg-black bg-opacity-50 text-white p-4 rounded-full 
             transition-opacity duration-200
-            ${!state.isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
+            ${!state.isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 hover:opacity-100'}
             hover:bg-opacity-70
           `}
           aria-label={state.isPlaying ? 'Pause video' : 'Play video'}
@@ -110,6 +110,18 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           )}
         </button>
       </div>
+      
+      {/* Invisible clickable area for pause when playing */}
+      {state.isPlaying && (
+        <div 
+          className="absolute inset-0 cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.pause();
+          }}
+          aria-label="Pause video"
+        />
+      )}
 
       {/* Video Info Overlay */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
