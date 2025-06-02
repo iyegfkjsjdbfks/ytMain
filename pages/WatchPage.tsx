@@ -92,7 +92,7 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { openMiniplayer } = useMiniplayer();
+  const { openMiniplayer, showMiniplayer } = useMiniplayer();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
   // Enhanced save to playlist handler that integrates with Watch Later context
@@ -107,12 +107,12 @@ const WatchPage: React.FC = () => {
   };
   
   // Add to watch history when video loads
-  React.useEffect(() => {
-      if (video) {
-        addToWatchHistory(video.id);
-        showMiniplayer(video);
-      }
-    }, [video, addToWatchHistory, showMiniplayer]);
+    React.useEffect(() => {
+    if (video) {
+      addToWatchHistory(video.id);
+      showMiniplayer(video);
+    }
+  }, [video, addToWatchHistory, showMiniplayer]);
   
   // Loading skeleton
   if (loading) {
