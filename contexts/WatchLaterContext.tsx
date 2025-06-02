@@ -17,12 +17,12 @@ const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undef
 
 export const WatchLaterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
-    const storedList = localStorage.getItem('watchLaterList');
+    const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('watchLaterList', JSON.stringify(watchLaterList));
+    localStorage.setItem('youtubeCloneWatchLater_v1', JSON.stringify(watchLaterList));
   }, [watchLaterList]);
 
   const addToWatchLater = (video: VideoType) => {
