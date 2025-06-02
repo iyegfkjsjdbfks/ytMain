@@ -198,14 +198,15 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   }, [videoRef, intersectionRef]);
   
   // Use custom hook for autoplay logic
-  useVideoAutoplay({
-    isIntersecting,
-    isPlaying: state.isPlaying,
-    isManuallyPaused,
-    actions,
-    setIsManuallyPaused,
-    enableAutoplay: false // Disabled to prevent loading issues
-  });
+  // useVideoAutoplay disabled to prevent video loading errors
+  // useVideoAutoplay({
+  //   isIntersecting,
+  //   isPlaying: state.isPlaying,
+  //   isManuallyPaused,
+  //   actions,
+  //   setIsManuallyPaused,
+  //   enableAutoplay: false // Disabled to prevent loading issues
+  // });
   
   // Event handlers
   const handlePlayPauseToggle = () => {

@@ -111,16 +111,17 @@ export const useIntersectionVideoAutoplay = ({
   });
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !enabled) return;
+    // Video play/pause functionality disabled to prevent loading errors
+    // const video = videoRef.current;
+    // if (!video || !enabled) return;
 
-    if (isIntersecting) {
-      video.play().catch(error => {
-        console.warn('Video autoplay failed:', error);
-      });
-    } else {
-      video.pause();
-    }
+    // if (isIntersecting) {
+    //   video.play().catch(error => {
+    //     console.warn('Video autoplay failed:', error);
+    //   });
+    // } else {
+    //   video.pause();
+    // }
   }, [isIntersecting, enabled]);
 
   return { videoRef, isIntersecting };

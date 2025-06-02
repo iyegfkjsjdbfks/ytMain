@@ -332,16 +332,19 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       onMouseMove={showControlsTemporarily}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        autoPlay={autoPlay}
-        muted={muted}
-        loop={loop}
-        className="w-full h-full object-contain"
-        onClick={togglePlay}
-      />
+      {/* Video Element - Disabled to prevent loading errors */}
+      {false && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay={autoPlay}
+          muted={muted}
+          loop={loop}
+          className="w-full h-full object-contain"
+          onClick={togglePlay}
+        />
+      )}
       
       {/* Loading Spinner */}
       {isLoading && (

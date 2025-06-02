@@ -117,7 +117,7 @@ const VideoThumbnail: React.FC<{
           />
           
           {/* Video Preview (disabled to prevent loading errors) */}
-          {false && autoplay && (
+          {false && (
             <video
               ref={videoRef}
               className={cn(

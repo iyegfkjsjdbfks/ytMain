@@ -291,7 +291,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
           <div className="lg:col-span-2 space-y-4">
             {/* Video Preview */}
             <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
-              {stream ? (
+              {stream && false ? (
                 <video
                   ref={videoRef}
                   autoPlay

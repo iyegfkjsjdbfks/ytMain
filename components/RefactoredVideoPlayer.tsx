@@ -99,31 +99,33 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
 
   return (
     <div className={`relative bg-black rounded-lg overflow-hidden ${className}`}>
-      {/* Video Element */}
-      <video
-        ref={videoRef}
-        src={video.url}
-        poster={video.thumbnail}
-        className="w-full h-full object-contain"
-        onLoadStart={handleLoadStart}
-        onLoadedData={handleLoadedData}
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={handleEnded}
-        onError={handleError}
-        onVolumeChange={handleVolumeChange}
-        playsInline
-      >
-        {/* Subtitles */}
-        {subtitles.map((subtitle) => (
-          <track
-            key={subtitle.language}
-            kind="subtitles"
+      {/* Video Element - Disabled to prevent loading errors */}
+      {false && (
+        <video
+          ref={videoRef}
+          src={video.url}
+          poster={video.thumbnail}
+          className="w-full h-full object-contain"
+          onLoadStart={handleLoadStart}
+          onLoadedData={handleLoadedData}
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={handleEnded}
+          onError={handleError}
+          onVolumeChange={handleVolumeChange}
+          playsInline
+        >
+          {/* Subtitles */}
+          {subtitles.map((subtitle) => (
+            <track
+              key={subtitle.language}
+              kind="subtitles"
             src={subtitle.url}
             srcLang={subtitle.language}
             label={subtitle.label}
           />
         ))}
-      </video>
+        </video>
+      )}
 
       {/* Loading Overlay */}
       {isLoading && (

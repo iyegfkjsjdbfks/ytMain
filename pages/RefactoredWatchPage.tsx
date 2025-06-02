@@ -154,7 +154,7 @@ const RefactoredWatchPage: React.FC = () => {
       { language: 'es', label: 'Spanish', url: `/subtitles/${video.id}/es.vtt` }
     ],
     chapters: video.chapters || [],
-    autoplay: true,
+    autoplay: false,
     onTimeUpdate: (currentTime: number) => {
       // Handle time updates for analytics
       console.log('Video time update:', currentTime);

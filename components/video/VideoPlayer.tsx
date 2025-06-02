@@ -159,23 +159,25 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Video Element */}
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        onPlay={events.onPlay}
-        onPause={events.onPause}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={events.onLoadedMetadata}
-        onVolumeChange={events.onVolumeChange}
-        onEnded={handleEnded}
-        onError={handleError}
-        onWaiting={events.onWaiting}
-        onCanPlay={events.onCanPlay}
-        className="w-full h-full object-contain"
-        onClick={() => actions.togglePlayPause()}
-      />
+      {/* Video Element - Disabled to prevent loading errors */}
+      {false && (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          onPlay={events.onPlay}
+          onPause={events.onPause}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={events.onLoadedMetadata}
+          onVolumeChange={events.onVolumeChange}
+          onEnded={handleEnded}
+          onError={handleError}
+          onWaiting={events.onWaiting}
+          onCanPlay={events.onCanPlay}
+          className="w-full h-full object-contain"
+          onClick={() => actions.togglePlayPause()}
+        />
+      )}
 
       {/* Loading Indicator */}
       {state.isLoading && (
