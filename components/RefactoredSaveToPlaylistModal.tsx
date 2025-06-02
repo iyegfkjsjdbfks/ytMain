@@ -65,19 +65,23 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   const handleSaveToExisting = async () => {
     if (!selectedPlaylistId) return;
     
-    await executeSave(async () => {
+    try {
       await onSaveToPlaylist(videoId, selectedPlaylistId);
       onClose();
-    });
+    } catch (error) {
+      console.error('Error saving to playlist:', error);
+    }
   };
 
   // Handle creating new playlist
   const handleCreatePlaylist = async (formData: Record<string, any>) => {
-    await executeCreate(async () => {
+    try {
       const newPlaylist = await onCreatePlaylist(formData.name, formData.description);
       await onSaveToPlaylist(videoId, newPlaylist.id);
       onClose();
-    });
+    } catch (error) {
+      console.error('Error creating playlist:', error);
+    }
   };
 
   // Form fields for creating new playlist
