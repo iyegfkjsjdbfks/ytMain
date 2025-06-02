@@ -168,11 +168,18 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
   
   // Use the custom video player hook
-  const { videoRef, state, actions, events } = useVideoPlayer({
-    muted: !isOnShortsPage, // Unmuted on shorts page, muted elsewhere
-    loop: true,
-    playsinline: true
-  });
+  // Disabled to prevent video loading errors
+  // const { videoRef, state, actions, events } = useVideoPlayer({
+  //   muted: !isOnShortsPage, // Unmuted on shorts page, muted elsewhere
+  //   loop: true,
+  //   playsinline: true
+  // });
+  
+  // Mock video state to prevent errors
+  const videoRef = { current: null };
+  const state = { isPlaying: false, currentTime: 0, duration: 0, volume: 1, muted: false, error: null };
+  const actions = { play: () => {}, pause: () => {}, seek: () => {}, setVolume: () => {}, toggleMute: () => {} };
+  const events = { onPlay: () => {}, onPause: () => {}, onTimeUpdate: () => {}, onLoadedMetadata: () => {}, onVolumeChange: () => {}, onError: () => {} };
   
   // Use intersection observer for autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
@@ -236,18 +243,21 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         ? 'w-full h-full' 
         : 'w-40 h-72 rounded-lg'
     }`}>
-      <video
-        ref={videoCallbackRef}
-        src={short.videoUrl}
-        onPlay={events.onPlay}
-        onPause={events.onPause}
-        onTimeUpdate={events.onTimeUpdate}
-        onLoadedMetadata={events.onLoadedMetadata}
-        onVolumeChange={events.onVolumeChange}
-        onError={events.onError}
-        poster={short.thumbnailUrl}
-        className="w-full h-full object-cover"
-      />
+      {/* Video element disabled to prevent loading errors */}
+      {false && (
+        <video
+          ref={videoRef}
+          src={short.videoUrl}
+          onPlay={events.onPlay}
+          onPause={events.onPause}
+          onTimeUpdate={events.onTimeUpdate}
+          onLoadedMetadata={events.onLoadedMetadata}
+          onVolumeChange={events.onVolumeChange}
+          onError={events.onError}
+          poster={short.thumbnailUrl}
+          className="w-full h-full object-cover"
+        />
+      )}
       
       {/* Play/Pause Overlay */}
       <PlayPauseOverlay 

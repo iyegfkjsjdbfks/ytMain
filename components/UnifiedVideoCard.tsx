@@ -109,8 +109,8 @@ const VideoThumbnail: React.FC<{
             loading={optimized ? 'lazy' : 'eager'}
           />
           
-          {/* Video Preview (for autoplay) */}
-          {autoplay && (
+          {/* Video Preview (disabled to prevent loading errors) */}
+          {false && autoplay && (
             <video
               ref={videoRef}
               className={cn(
