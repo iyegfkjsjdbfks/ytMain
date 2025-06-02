@@ -294,3 +294,42 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
 };
 
 export default RefactoredVideoPlayer;
+
+return (
+  <div className={`relative ${className}`}>
+    {/* Disabled video element */}
+    {false && (
+      <video
+        ref={videoRef}
+        src={video.videoUrl}
+        className="w-full h-full object-cover"
+        muted={isMuted}
+        playsInline
+      />
+    )}
+    
+    {/* Static thumbnail */}
+    <img
+      src={video.thumbnailUrl}
+      alt={video.title}
+      className="w-full h-full object-cover"
+    />
+
+    {/* Player controls overlay */}
+    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+      <div className="flex items-center gap-4">
+        <button 
+          onClick={() => {}} // No-op
+          className="text-white hover:text-gray-200 transition-colors"
+        >
+          {isPlaying ? <PauseIcon /> : <PlayIcon />}
+        </button>
+        
+        {/* Time display */}
+        <span className="text-white text-sm">
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </span>
+      </div>
+    </div>
+  </div>
+);

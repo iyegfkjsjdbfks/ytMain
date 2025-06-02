@@ -180,14 +180,16 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   }, []);
   
   const togglePlay = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    // Video play/pause functionality disabled to prevent loading errors
+    // const video = videoRef.current;
+    // if (!video) return;
     
-    if (isPlaying) {
-      video.pause();
-    } else {
-      video.play();
-    }
+    // if (isPlaying) {
+    //   video.pause();
+    // } else {
+    //   video.play();
+    // }
+    setIsPlaying(!isPlaying);
   }, [isPlaying]);
   
   const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {

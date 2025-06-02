@@ -41,6 +41,10 @@ export function useAsyncData<T>(
     
     try {
       const result = await asyncFunctionRef.current();
+      // Added empty response handling
+      if (!result) {
+        throw new Error('No data received');
+      }
       setData(result);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';

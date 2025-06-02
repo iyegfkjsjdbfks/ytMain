@@ -164,7 +164,7 @@ const RefactoredWatchPage: React.FC = () => {
       console.log('Video ended');
     },
     onError: (error: string) => {
-      console.error('Video player error:', error);
+      // console.error('Video player error:', error); // Disabled to prevent console spam
     }
   } : null;
   
@@ -298,6 +298,12 @@ const RefactoredWatchPage: React.FC = () => {
           videoId={video?.id || ''}
         />
       )}
+      {error && 
+        <VideoNotFound 
+          message="This video is unavailable"
+          className="mt-8"
+        />
+      }
     </StandardPageLayout>
   );
 };

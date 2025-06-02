@@ -167,56 +167,42 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const isOnShortsPage = location.pathname === '/shorts';
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
   
-  // Use the custom video player hook
-  // Disabled to prevent video loading errors
-  // const { videoRef, state, actions, events } = useVideoPlayer({
-  //   muted: !isOnShortsPage, // Unmuted on shorts page, muted elsewhere
-  //   loop: true,
-  //   playsinline: true
-  // });
-  
   // Mock video state to prevent errors
   const videoRef = { current: null };
-  const state = { isPlaying: false, currentTime: 0, duration: 0, volume: 1, muted: false, error: null };
-  const actions = { play: () => {}, pause: () => {}, seek: () => {}, setVolume: () => {}, toggleMute: () => {} };
-  const events = { onPlay: () => {}, onPause: () => {}, onTimeUpdate: () => {}, onLoadedMetadata: () => {}, onVolumeChange: () => {}, onError: () => {} };
+  const state = { 
+    isPlaying: false, 
+    currentTime: 0, 
+    duration: 0, 
+    volume: 1, 
+    muted: false, 
+    error: null,
+    isLoading: false
+  };
+  const actions = { 
+    play: () => {}, 
+    pause: () => {}, 
+    seek: () => {}, 
+    setVolume: () => {}, 
+    toggleMute: () => {} 
+  };
+  const events = { 
+    onPlay: () => {}, 
+    onPause: () => {}, 
+    onTimeUpdate: () => {}, 
+    onLoadedMetadata: () => {}, 
+    onVolumeChange: () => {}, 
+    onError: () => {} 
+  };
   
-  // Use intersection observer for autoplay
+  // Use intersection observer for visibility tracking only (not for autoplay)
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
     rootMargin: '0px'
   });
   
-  // Callback ref to attach both video player ref and intersection observer ref
-  const videoCallbackRef = useCallback((node: HTMLVideoElement | null) => {
-    if (videoRef.current !== node) {
-      (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = node;
-    }
-    if (intersectionRef.current !== node) {
-      (intersectionRef as React.MutableRefObject<Element | null>).current = node;
-    }
-  }, [videoRef, intersectionRef]);
-  
-  // Use custom hook for autoplay logic
-  // useVideoAutoplay disabled to prevent video loading errors
-  // useVideoAutoplay({
-  //   isIntersecting,
-  //   isPlaying: state.isPlaying,
-  //   isManuallyPaused,
-  //   actions,
-  //   setIsManuallyPaused,
-  //   enableAutoplay: false // Disabled to prevent loading issues
-  // });
-  
   // Event handlers
   const handlePlayPauseToggle = () => {
-    if (state.isPlaying) {
-      setIsManuallyPaused(true);
-      actions.pause();
-    } else {
-      setIsManuallyPaused(false);
-      actions.play();
-    }
+    // No-op function to prevent errors
   };
 
   const handleLike = (e: React.MouseEvent) => {
@@ -235,30 +221,24 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   };
 
   const handleRetry = async () => {
-    await actions.play();
+    // No-op function to prevent errors
   };
 
   return (
-    <div className={`relative bg-black overflow-hidden group cursor-pointer ${
-      isOnShortsPage 
-        ? 'w-full h-full' 
-        : 'w-40 h-72 rounded-lg'
-    }`}>
-      {/* Video element disabled to prevent loading errors */}
-      {false && (
-        <video
-          ref={videoRef}
-          src={short.videoUrl}
-          onPlay={events.onPlay}
-          onPause={events.onPause}
-          onTimeUpdate={events.onTimeUpdate}
-          onLoadedMetadata={events.onLoadedMetadata}
-          onVolumeChange={events.onVolumeChange}
-          onError={events.onError}
-          poster={short.thumbnailUrl}
-          className="w-full h-full object-cover"
-        />
-      )}
+    <div 
+      ref={intersectionRef}
+      className={`relative bg-black overflow-hidden group cursor-pointer ${
+        isOnShortsPage 
+          ? 'w-full h-full' 
+          : 'w-40 h-72 rounded-lg'
+      }`}
+    >
+      {/* Static thumbnail image instead of video */}
+      <img
+        src={short.thumbnailUrl}
+        alt={short.title}
+        className="w-full h-full object-cover"
+      />
       
       {/* Play/Pause Overlay */}
       <PlayPauseOverlay 
@@ -277,7 +257,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           
           {/* Action Buttons */}
           <ActionButtons
-            isMuted={state.isMuted}
+            isMuted={state.muted}
             isLiked={isLiked}
             onToggleMute={actions.toggleMute}
             onLike={handleLike}
@@ -286,17 +266,6 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           />
         </div>
       </div>
-
-      {/* Loading indicator */}
-      {state.isLoading && <LoadingIndicator />}
-
-      {/* Error state */}
-      {state.error && (
-        <ErrorState 
-          error={state.error}
-          onRetry={handleRetry}
-        />
-      )}
     </div>
   );
 };

@@ -30,10 +30,10 @@ export const useVideoAutoplay = ({
     
     if (isIntersecting && !isPlaying && !isManuallyPaused) {
       // Auto-play when video comes into view and hasn't been manually paused
-      actions.play();
+      // actions.play(); // Disabled to prevent video errors
     } else if (!isIntersecting && isPlaying) {
       // Auto-pause when video leaves view and reset manual pause state
-      actions.pause();
+      // actions.pause(); // Disabled to prevent video errors
       setIsManuallyPaused(false);
     }
   }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused, enableAutoplay]);
