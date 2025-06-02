@@ -1,33 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../auth/store/authStore';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
- * Main header component with navigation, search and user controls
+ * Footer component with links to important pages and copyright information
  */
-const Header: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
-  const { user, logout } = useAuthStore();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
-
+const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-10">
+    <footer className="bg-white py-6 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo and hamburger menu */}
-          <div className="flex items-center">
-            <button className="p-2 rounded-full hover:bg-gray-200 mr-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+        <div className="flex flex-col md:flex-row md:justify-between">
+          <div className="mb-4 md:mb-0">
             <Link to="/" className="flex items-center">
               <svg viewBox="0 0 90 20" className="h-6" preserveAspectRatio="xMidYMid meet">
                 <g>
@@ -44,79 +28,96 @@ const Header: React.FC = () => {
                   <path d="M84.8657 13.8712C84.8657 14.6755 84.8892 15.2776 84.9363 15.6798C84.9833 16.0819 85.0821 16.3736 85.2326 16.5594C85.3831 16.7428 85.6136 16.8345 85.9264 16.8345C86.3474 16.8345 86.639 16.6699 86.7942 16.343C86.9518 16.0161 87.0365 15.4705 87.0506 14.7085L89.4824 14.8519C89.4965 14.9601 89.5035 15.1106 89.5035 15.3011C89.5035 16.4582 89.186 17.3237 88.5534 17.8952C87.9208 18.4667 87.0247 18.7536 85.8676 18.7536C84.4777 18.7536 83.504 18.3185 82.9466 17.446C82.3869 16.5735 82.1094 15.2259 82.1094 13.4008V11.2136C82.1094 9.33452 82.3987 7.96105 82.9772 7.09558C83.5558 6.2301 84.5459 5.79736 85.9499 5.79736C86.9165 5.79736 87.6597 5.97375 88.1771 6.32888C88.6945 6.684 89.059 7.23433 89.2707 7.98457C89.4824 8.7348 89.5882 9.76961 89.5882 11.0913V13.2362H84.8657V13.8712ZM85.2232 7.96811C85.0797 8.14449 84.9857 8.43377 84.9363 8.83593C84.8892 9.2381 84.8657 9.84722 84.8657 10.6657V11.5641H86.9283V10.6657C86.9283 9.86133 86.9001 9.25221 86.846 8.83593C86.7919 8.41966 86.6931 8.12803 86.5496 7.95635C86.4062 7.78702 86.1851 7.7 85.8864 7.7C85.5854 7.70235 85.3643 7.79172 85.2232 7.96811Z"></path>
                 </g>
               </svg>
+              <span className="ml-2 text-gray-600">YouTube Studio</span>
             </Link>
+            <p className="mt-2 text-sm text-gray-600">
+              © {currentYear} YouTube, LLC. All rights reserved.
+            </p>
           </div>
 
-          {/* Search bar */}
-          <div className="max-w-lg w-full lg:max-w-xs">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                placeholder="Search"
-                className="block w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-blue-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button 
-                type="submit" 
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </form>
-          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700 mb-3">About</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/about" className="text-sm text-gray-600 hover:text-gray-900">
+                    About YouTube
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/press" className="text-sm text-gray-600 hover:text-gray-900">
+                    Press
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/copyright" className="text-sm text-gray-600 hover:text-gray-900">
+                    Copyright
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-sm text-gray-600 hover:text-gray-900">
+                    Contact us
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Right nav items */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-full hover:bg-gray-200">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-            </button>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700 mb-3">Policies</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/terms" className="text-sm text-gray-600 hover:text-gray-900">
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacy" className="text-sm text-gray-600 hover:text-gray-900">
+                    Privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/policy" className="text-sm text-gray-600 hover:text-gray-900">
+                    Policy & Safety
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/how-youtube-works" className="text-sm text-gray-600 hover:text-gray-900">
+                    How YouTube Works
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-            {user ? (
-              <div className="relative">
-                <button className="flex items-center space-x-2">
-                  <img 
-                    src={user.avatarUrl || "https://via.placeholder.com/150"} 
-                    alt={user.displayName || "User"} 
-                    className="h-8 w-8 rounded-full object-cover"
-                  />
-                  <div className="hidden md:block text-left">
-                    <p className="text-sm font-medium">{user.displayName}</p>
-                    <p className="text-xs text-gray-500">@{user.username}</p>
-                  </div>
-                </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                  <Link to="/channel/me" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your channel</Link>
-                  <Link to="/studio" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">YouTube Studio</Link>
-                  <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
-                  <button 
-                    onClick={logout}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Sign out
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <Link 
-                to="/login" 
-                className="flex items-center text-blue-600 border border-blue-600 rounded-full px-3 py-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Sign in
-              </Link>
-            )}
+            <div className="col-span-2 md:col-span-1">
+              <h3 className="text-sm font-semibold text-gray-700 mb-3">Creators</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/creators" className="text-sm text-gray-600 hover:text-gray-900">
+                    Creator Hub
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/nextup" className="text-sm text-gray-600 hover:text-gray-900">
+                    YouTube NextUp
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/creators/benefits" className="text-sm text-gray-600 hover:text-gray-900">
+                    Creator Benefits
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/studio" className="text-sm text-gray-600 hover:text-gray-900">
+                    YouTube Studio
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </header>
+    </footer>
   );
 };
 
-export default Header;
+export default Footer;

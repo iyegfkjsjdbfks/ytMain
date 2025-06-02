@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../auth/store/authStore';
 
 /**
- * Main header component with navigation, search and user controls
+ * Studio-specific header component with studio navigation and controls
  */
-const Header: React.FC = () => {
+const StudioHeader: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
@@ -13,22 +13,22 @@ const Header: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/studio/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and hamburger menu */}
+          {/* Logo and Studio text */}
           <div className="flex items-center">
-            <button className="p-2 rounded-full hover:bg-gray-200 mr-2">
+            <button className="p-2 rounded-full hover:bg-gray-200 mr-2 md:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <Link to="/" className="flex items-center">
+            <Link to="/studio" className="flex items-center">
               <svg viewBox="0 0 90 20" className="h-6" preserveAspectRatio="xMidYMid meet">
                 <g>
                   <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
@@ -44,15 +44,16 @@ const Header: React.FC = () => {
                   <path d="M84.8657 13.8712C84.8657 14.6755 84.8892 15.2776 84.9363 15.6798C84.9833 16.0819 85.0821 16.3736 85.2326 16.5594C85.3831 16.7428 85.6136 16.8345 85.9264 16.8345C86.3474 16.8345 86.639 16.6699 86.7942 16.343C86.9518 16.0161 87.0365 15.4705 87.0506 14.7085L89.4824 14.8519C89.4965 14.9601 89.5035 15.1106 89.5035 15.3011C89.5035 16.4582 89.186 17.3237 88.5534 17.8952C87.9208 18.4667 87.0247 18.7536 85.8676 18.7536C84.4777 18.7536 83.504 18.3185 82.9466 17.446C82.3869 16.5735 82.1094 15.2259 82.1094 13.4008V11.2136C82.1094 9.33452 82.3987 7.96105 82.9772 7.09558C83.5558 6.2301 84.5459 5.79736 85.9499 5.79736C86.9165 5.79736 87.6597 5.97375 88.1771 6.32888C88.6945 6.684 89.059 7.23433 89.2707 7.98457C89.4824 8.7348 89.5882 9.76961 89.5882 11.0913V13.2362H84.8657V13.8712ZM85.2232 7.96811C85.0797 8.14449 84.9857 8.43377 84.9363 8.83593C84.8892 9.2381 84.8657 9.84722 84.8657 10.6657V11.5641H86.9283V10.6657C86.9283 9.86133 86.9001 9.25221 86.846 8.83593C86.7919 8.41966 86.6931 8.12803 86.5496 7.95635C86.4062 7.78702 86.1851 7.7 85.8864 7.7C85.5854 7.70235 85.3643 7.79172 85.2232 7.96811Z"></path>
                 </g>
               </svg>
+              <span className="ml-2 font-medium text-gray-900">Studio</span>
             </Link>
           </div>
 
           {/* Search bar */}
-          <div className="max-w-lg w-full lg:max-w-xs">
+          <div className="max-w-lg w-full mx-4">
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search in Studio"
                 className="block w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-blue-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -72,11 +73,24 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-4">
             <button className="p-2 rounded-full hover:bg-gray-200">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+
+            <button className="p-2 rounded-full hover:bg-gray-200">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
             </button>
 
-            {user ? (
+            <Link to="/studio/videos/upload" className="hidden md:flex items-center bg-blue-600 text-white rounded-sm px-4 py-2 hover:bg-blue-700 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              CREATE
+            </Link>
+
+            {user && (
               <div className="relative">
                 <button className="flex items-center space-x-2">
                   <img 
@@ -84,15 +98,18 @@ const Header: React.FC = () => {
                     alt={user.displayName || "User"} 
                     className="h-8 w-8 rounded-full object-cover"
                   />
-                  <div className="hidden md:block text-left">
+                </button>
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
+                  <div className="px-4 py-2 border-b border-gray-200">
                     <p className="text-sm font-medium">{user.displayName}</p>
                     <p className="text-xs text-gray-500">@{user.username}</p>
                   </div>
-                </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                  <Link to="/channel/me" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your channel</Link>
-                  <Link to="/studio" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">YouTube Studio</Link>
-                  <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Return to YouTube
+                  </Link>
+                  <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Settings
+                  </Link>
                   <button 
                     onClick={logout}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -101,16 +118,6 @@ const Header: React.FC = () => {
                   </button>
                 </div>
               </div>
-            ) : (
-              <Link 
-                to="/login" 
-                className="flex items-center text-blue-600 border border-blue-600 rounded-full px-3 py-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Sign in
-              </Link>
             )}
           </div>
         </div>
@@ -119,4 +126,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default StudioHeader;
