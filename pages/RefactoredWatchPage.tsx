@@ -108,6 +108,17 @@ const RefactoredWatchPage: React.FC = () => {
   const { openMiniplayer } = useMiniplayer();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
+  // Enhanced save to playlist handler that integrates with Watch Later context
+  const enhancedHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+    // Call the original handler
+    await handleSaveToPlaylist(videoId, playlistId);
+    
+    // If saving to Watch Later playlist, also add to the Watch Later context
+    if (playlistId === 'playlist-1' && video) {
+      addToWatchLater(video);
+    }
+  };
+  
   // Enhanced action handlers with error handling
   const handleEnhancedLike = async () => {
     await executeAction(async () => {
@@ -168,7 +179,7 @@ const RefactoredWatchPage: React.FC = () => {
     onDislike: handleDislike,
     onShare: handleEnhancedShare,
     onSaveToWatchLater: handleSaveToWatchLater,
-    onSaveToPlaylist: handleSaveToPlaylist,
+    onSaveToPlaylist: enhancedHandleSaveToPlaylist,
     loading: actionLoading
   };
   
@@ -281,7 +292,7 @@ const RefactoredWatchPage: React.FC = () => {
         <RefactoredSaveToPlaylistModal
           isOpen={isSaveModalOpen}
           onClose={() => setIsSaveModalOpen(false)}
-          onSaveToPlaylist={handleSaveToPlaylist}
+          onSaveToPlaylist={enhancedHandleSaveToPlaylist}
           onCreatePlaylist={handleCreatePlaylist}
           existingPlaylists={mockPlaylists}
           videoId={video?.id || ''}

@@ -92,8 +92,19 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { showMiniplayer } = useMiniplayer();
+  const { openMiniplayer } = useMiniplayer();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  
+  // Enhanced save to playlist handler that integrates with Watch Later context
+  const enhancedHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+    // Call the original handler
+    await handleSaveToPlaylist(videoId, playlistId);
+    
+    // If saving to Watch Later playlist, also add to the Watch Later context
+    if (playlistId === 'playlist-1' && video) {
+      addToWatchLater(video);
+    }
+  };
   
   // Add to watch history when video loads
   React.useEffect(() => {
@@ -277,7 +288,7 @@ const WatchPage: React.FC = () => {
         onClose={closeSaveModal}
         videoId={videoId || ''}
         existingPlaylists={mockPlaylists}
-        onSaveToPlaylist={handleSaveToPlaylist}
+        onSaveToPlaylist={enhancedHandleSaveToPlaylist}
         onCreatePlaylist={handleCreatePlaylist}
       />
     </div>

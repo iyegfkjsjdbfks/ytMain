@@ -168,9 +168,30 @@ export const useWatchPage = () => {
     setIsSaveModalOpen(false);
   };
 
+  const handleSaveToWatchLater = () => {
+    if (video) {
+      if (isInWatchLater) {
+        // Remove from watch later - this would need to be imported from context
+        // For now, just update local state
+        setIsInWatchLater(false);
+      } else {
+        // Add to watch later - this would need to be imported from context
+        // For now, just update local state
+        setIsInWatchLater(true);
+      }
+    }
+  };
+
   const handleSaveToPlaylist = async (videoId: string, playlistId: string) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
+    
+    // Check if this is the "Watch Later" playlist
+    if (playlistId === 'playlist-1' && video) {
+      // Add to watch later list - this should use the context
+      // For now, update local state to match the behavior
+      setIsInWatchLater(true);
+    }
     
     // Update the saved state
     setIsSavedToAnyList(true);
@@ -454,6 +475,7 @@ export const useWatchPage = () => {
     handleShare,
     openSaveModal,
     closeSaveModal,
+    handleSaveToWatchLater,
     handleSaveToPlaylist,
     handleCreatePlaylist,
     handleToggleDescription,
