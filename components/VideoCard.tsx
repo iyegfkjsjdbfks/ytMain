@@ -1,10 +1,12 @@
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { BookmarkIcon as BookmarkOutlineIcon } from '@heroicons/react/24/outline';
-import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
+import { buildCardClasses, buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+import { SaveIcon } from './icons/UnifiedIcon';
+import { IconButton } from './ui/Button';
+import { useToggle } from '../hooks/useCommon';
 
 
 interface VideoCardProps {
@@ -13,23 +15,27 @@ interface VideoCardProps {
 
 const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
-  const isSaved = isWatchLater(video.id);
-  const channelLink = `/channel/${encodeURIComponent(video.channelName)}`;
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
+  const navigate = useNavigate();
+
+  const videoUrl = buildVideoUrl(video.id);
+  const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
+  const avatarFallback = getAvatarFallback(video.channelName);
 
   const handleToggleWatchLater = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent link navigation
-    e.stopPropagation(); // Stop event bubbling
+    e.preventDefault();
+    e.stopPropagation();
     if (isSaved) {
       removeFromWatchLater(video.id);
     } else {
       addToWatchLater(video);
     }
+    toggleSaved();
   };
 
   const handleChannelNavigation = (e: React.MouseEvent | React.KeyboardEvent) => {
-    e.stopPropagation(); // Prevent outer link navigation
-    navigate(channelLink);
+    e.stopPropagation();
+    navigate(channelUrl);
   };
 
   const handleChannelKeyDown = (e: React.KeyboardEvent) => {
@@ -39,8 +45,8 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
   };
 
   return (
-    <Link to={`/watch/${video.id}`} className="block group" aria-label={`Watch ${video.title}`}>
-      <div className="bg-transparent dark:bg-transparent rounded-xl overflow-hidden shadow-none hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 transition-shadow duration-300 flex flex-col h-full">
+    <Link to={videoUrl} className="block group" aria-label={`Watch ${video.title}`}>
+      <div className={buildCardClasses('default', 'md', 'bg-transparent dark:bg-transparent shadow-none hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 transition-shadow duration-300 flex flex-col h-full')}>
         <div className="relative aspect-video">
           <img 
             src={video.thumbnailUrl} 
@@ -48,50 +54,54 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
             className="w-full h-full object-cover rounded-lg" 
             loading="lazy"
           />
-          <div className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded-sm z-0">
+          <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-medium">
             {video.duration}
           </div>
-          <button
+          <IconButton
             onClick={handleToggleWatchLater}
-            className="absolute top-2 right-2 p-1.5 bg-black/60 hover:bg-black/80 rounded-full text-white transition-colors z-10 group-hover:opacity-100 opacity-0 focus:opacity-100"
+            variant={isSaved ? 'primary' : 'ghost'}
+            size="sm"
+            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-10 group-hover:opacity-100 opacity-0 focus:opacity-100"
             aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
             title={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
           >
-            {isSaved ? (
-              <BookmarkSolidIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-            ) : (
-              <BookmarkOutlineIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-            )}
-          </button>
+            <SaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+          </IconButton>
         </div>
         <div className="p-3 flex-grow">
           <div className="flex items-start space-x-3">
             <div 
-              role="link"
+              role="button"
               tabIndex={0}
               onClick={handleChannelNavigation}
               onKeyDown={handleChannelKeyDown}
               className="flex-shrink-0 cursor-pointer" 
               aria-label={`Go to ${video.channelName} channel`}
             >
-              <img 
-                src={video.channelAvatarUrl} 
-                alt={`${video.channelName} channel avatar`} 
-                className="w-9 h-9 rounded-full mt-0.5" 
-                loading="lazy"
-              />
+              {video.channelAvatarUrl ? (
+                <img 
+                  src={video.channelAvatarUrl} 
+                  alt={`${video.channelName} channel avatar`} 
+                  className="w-9 h-9 rounded-full mt-0.5" 
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-9 h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600">
+                  {avatarFallback}
+                </div>
+              )}
             </div>
             <div className="flex-grow overflow-hidden">
-              <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug max-h-11 overflow-hidden text-ellipsis whitespace-normal break-words" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+              <h3 className={buildTruncateClasses(2, 'text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug')}>
                 {video.title}
               </h3>
               <div 
-                role="link"
+                role="button"
                 tabIndex={0}
                 onClick={handleChannelNavigation}
                 onKeyDown={handleChannelKeyDown}
                 className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1.5 block truncate transition-colors cursor-pointer"
-                aria-label={`Go to ${video.channelName} channel name`}
+                aria-label={`Go to ${video.channelName} channel`}
               >
                 {video.channelName}
               </div>
