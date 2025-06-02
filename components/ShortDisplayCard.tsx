@@ -181,14 +181,14 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     rootMargin: '0px'
   });
   
-  // Enable autoplay when video is in view
+  // Enable autoplay when video is in view (both on shorts page and home page)
   useVideoAutoplay({
     isIntersecting,
     isPlaying: state.isPlaying,
     isManuallyPaused,
     actions,
     setIsManuallyPaused,
-    enableAutoplay: isOnShortsPage // Only enable autoplay on shorts page
+    enableAutoplay: true // Enable autoplay on both shorts page and home page
   });
   
   // Event handlers
