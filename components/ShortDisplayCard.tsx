@@ -239,7 +239,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         poster={short.thumbnailUrl}
         className="w-full h-full object-cover"
         playsInline
-        muted={state.muted}
+        muted={state.isMuted}
         loop
         preload="metadata"
         onLoadStart={events.onLoadStart}
@@ -285,7 +285,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           
           {/* Action Buttons */}
           <ActionButtons
-            isMuted={state.muted}
+            isMuted={state.isMuted}
             isLiked={isLiked}
             onToggleMute={actions.toggleMute}
             onLike={handleLike}
