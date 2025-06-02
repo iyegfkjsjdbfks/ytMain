@@ -197,7 +197,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     isManuallyPaused,
     actions,
     setIsManuallyPaused,
-    enableAutoplay: true
+    enableAutoplay: false // Disabled to prevent loading issues
   });
   
   // Event handlers
