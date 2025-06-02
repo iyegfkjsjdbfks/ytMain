@@ -77,131 +77,244 @@ interface UseVideoPlayerReturn {
  * Reduces code duplication across video player components
  */
 export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayerReturn => {
-  // Completely disabled to prevent video loading errors
+  const {
+    autoplay = false,
+    muted = false,
+    loop = false,
+    preload = 'metadata',
+    playsinline = true,
+    initialVolume = 1,
+    initialPlaybackRate = 1,
+    initialQuality = 'auto'
+  } = options;
+
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [state] = useState<VideoPlayerState>({
+  const [state, setState] = useState<VideoPlayerState>({
     isPlaying: false,
-    isMuted: true,
-    volume: 1,
+    isMuted: muted,
+    volume: initialVolume,
     currentTime: 0,
     duration: 0,
     isFullscreen: false,
-    isLoading: false,
+    isLoading: true,
     error: null,
-    playbackRate: 1,
-    quality: 'auto',
+    playbackRate: initialPlaybackRate,
+    quality: initialQuality,
     buffered: 0
   });
 
-  // Mock video functions - disabled to prevent errors
+  // Play function
   const play = useCallback(async () => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    try {
+      await video.play();
+      setState(prev => ({ ...prev, isPlaying: true, error: null }));
+    } catch (error) {
+      console.error('Error playing video:', error);
+      setState(prev => ({ ...prev, error: 'Failed to play video', isPlaying: false }));
+    }
   }, []);
 
   const pause = useCallback(() => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.pause();
+    setState(prev => ({ ...prev, isPlaying: false }));
   }, []);
 
   const togglePlayPause = useCallback(async () => {
-    // Mock implementation - no actual video interaction
-  }, []);
+    if (state.isPlaying) {
+      pause();
+    } else {
+      await play();
+    }
+  }, [state.isPlaying, play, pause]);
 
   const mute = useCallback(() => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.muted = true;
+    setState(prev => ({ ...prev, isMuted: true }));
   }, []);
 
   const unmute = useCallback(() => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.muted = false;
+    setState(prev => ({ ...prev, isMuted: false }));
   }, []);
 
   const toggleMute = useCallback(() => {
-    // Mock implementation - no actual video interaction
-  }, []);
+    if (state.isMuted) {
+      unmute();
+    } else {
+      mute();
+    }
+  }, [state.isMuted, mute, unmute]);
 
   const setVolume = useCallback((volume: number) => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    const clampedVolume = Math.max(0, Math.min(1, volume));
+    video.volume = clampedVolume;
+    setState(prev => ({ ...prev, volume: clampedVolume }));
   }, []);
 
   const seek = useCallback((time: number) => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.currentTime = time;
+    setState(prev => ({ ...prev, currentTime: time }));
   }, []);
 
   const setPlaybackRate = useCallback((rate: number) => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.playbackRate = rate;
+    setState(prev => ({ ...prev, playbackRate: rate }));
   }, []);
 
   const setQuality = useCallback((quality: string) => {
-    // Mock implementation - no actual video interaction
+    setState(prev => ({ ...prev, quality }));
   }, []);
 
   const enterFullscreen = useCallback(async () => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    try {
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+      }
+      setState(prev => ({ ...prev, isFullscreen: true }));
+    } catch (error) {
+      console.error('Error entering fullscreen:', error);
+    }
   }, []);
 
   const exitFullscreen = useCallback(async () => {
-    // Mock implementation - no actual video interaction
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      }
+      setState(prev => ({ ...prev, isFullscreen: false }));
+    } catch (error) {
+      console.error('Error exiting fullscreen:', error);
+    }
   }, []);
 
   const toggleFullscreen = useCallback(async () => {
-    // Mock implementation - no actual video interaction
-  }, []);
+    if (state.isFullscreen) {
+      await exitFullscreen();
+    } else {
+      await enterFullscreen();
+    }
+  }, [state.isFullscreen, enterFullscreen, exitFullscreen]);
 
   const reset = useCallback(() => {
-    // Mock implementation - no actual video interaction
+    const video = videoRef.current;
+    if (!video) return;
+    
+    video.currentTime = 0;
+    video.pause();
+    setState(prev => ({
+      ...prev,
+      isPlaying: false,
+      currentTime: 0,
+      error: null
+    }));
   }, []);
 
-  // Mock event handlers - disabled to prevent video interactions
+  // Event handlers
   const events = {
     onLoadStart: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
     }, []),
 
     onLoadedMetadata: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      const video = videoRef.current;
+      if (!video) return;
+      
+      setState(prev => ({
+        ...prev,
+        duration: video.duration,
+        isLoading: false
+      }));
     }, []),
 
     onCanPlay: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isLoading: false }));
     }, []),
 
     onPlay: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isPlaying: true }));
     }, []),
 
     onPause: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isPlaying: false }));
     }, []),
 
     onTimeUpdate: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      const video = videoRef.current;
+      if (!video) return;
+      
+      setState(prev => ({ ...prev, currentTime: video.currentTime }));
     }, []),
 
     onDurationChange: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      const video = videoRef.current;
+      if (!video) return;
+      
+      setState(prev => ({ ...prev, duration: video.duration }));
     }, []),
 
     onVolumeChange: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      const video = videoRef.current;
+      if (!video) return;
+      
+      setState(prev => ({
+        ...prev,
+        volume: video.volume,
+        isMuted: video.muted
+      }));
     }, []),
 
     onError: useCallback((error: Event) => {
-      // Mock implementation - no actual video interaction
+      console.error('Video error:', error);
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to load video',
+        isLoading: false,
+        isPlaying: false
+      }));
     }, []),
 
     onEnded: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isPlaying: false, currentTime: 0 }));
     }, []),
 
     onProgress: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      const video = videoRef.current;
+      if (!video || !video.buffered.length) return;
+      
+      const buffered = video.buffered.end(video.buffered.length - 1);
+      setState(prev => ({ ...prev, buffered }));
     }, []),
 
     onWaiting: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isLoading: true }));
     }, []),
 
     onCanPlayThrough: useCallback(() => {
-      // Mock implementation - no actual video interaction
+      setState(prev => ({ ...prev, isLoading: false }));
     }, [])
   };
 

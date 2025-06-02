@@ -167,42 +167,39 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const isOnShortsPage = location.pathname === '/shorts';
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
   
-  // Mock video state to prevent errors
-  const videoRef = { current: null };
-  const state = { 
-    isPlaying: false, 
-    currentTime: 0, 
-    duration: 0, 
-    volume: 1, 
-    muted: false, 
-    error: null,
-    isLoading: false
-  };
-  const actions = { 
-    play: () => {}, 
-    pause: () => {}, 
-    seek: () => {}, 
-    setVolume: () => {}, 
-    toggleMute: () => {} 
-  };
-  const events = { 
-    onPlay: () => {}, 
-    onPause: () => {}, 
-    onTimeUpdate: () => {}, 
-    onLoadedMetadata: () => {}, 
-    onVolumeChange: () => {}, 
-    onError: () => {} 
-  };
+  // Real video player implementation
+  const { videoRef, state, actions, events } = useVideoPlayer({
+    autoplay: false,
+    muted: true,
+    loop: true,
+    playsinline: true
+  });
   
-  // Use intersection observer for visibility tracking only (not for autoplay)
+  // Use intersection observer for visibility tracking and autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
     rootMargin: '0px'
   });
   
+  // Enable autoplay when video is in view
+  useVideoAutoplay({
+    isIntersecting,
+    isPlaying: state.isPlaying,
+    isManuallyPaused,
+    actions,
+    setIsManuallyPaused,
+    enableAutoplay: isOnShortsPage // Only enable autoplay on shorts page
+  });
+  
   // Event handlers
-  const handlePlayPauseToggle = () => {
-    // No-op function to prevent errors
+  const handlePlayPauseToggle = async () => {
+    if (state.isPlaying) {
+      actions.pause();
+      setIsManuallyPaused(true);
+    } else {
+      await actions.play();
+      setIsManuallyPaused(false);
+    }
   };
 
   const handleLike = (e: React.MouseEvent) => {
@@ -221,7 +218,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   };
 
   const handleRetry = async () => {
-    // No-op function to prevent errors
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
   };
 
   return (
@@ -233,12 +232,41 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           : 'w-40 h-72 rounded-lg'
       }`}
     >
-      {/* Static thumbnail image instead of video */}
-      <img
-        src={short.thumbnailUrl}
-        alt={short.title}
+      {/* Real video element */}
+      <video
+        ref={videoRef}
+        src={short.videoUrl}
+        poster={short.thumbnailUrl}
         className="w-full h-full object-cover"
+        playsInline
+        muted={state.muted}
+        loop
+        preload="metadata"
+        onLoadStart={events.onLoadStart}
+        onLoadedMetadata={events.onLoadedMetadata}
+        onCanPlay={events.onCanPlay}
+        onPlay={events.onPlay}
+        onPause={events.onPause}
+        onTimeUpdate={events.onTimeUpdate}
+        onDurationChange={events.onDurationChange}
+        onVolumeChange={events.onVolumeChange}
+        onError={events.onError}
+        onEnded={events.onEnded}
+        onProgress={events.onProgress}
+        onWaiting={events.onWaiting}
+        onCanPlayThrough={events.onCanPlayThrough}
       />
+      
+      {/* Loading Indicator */}
+      {state.isLoading && <LoadingIndicator />}
+      
+      {/* Error State */}
+      {state.error && (
+        <ErrorState 
+          error={state.error}
+          onRetry={handleRetry}
+        />
+      )}
       
       {/* Play/Pause Overlay */}
       <PlayPauseOverlay 
