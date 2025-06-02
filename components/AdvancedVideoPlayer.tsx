@@ -342,6 +342,8 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         autoPlay={autoPlay}
         muted={muted}
         loop={loop}
+        preload="metadata"
+        crossOrigin="anonymous"
         className="w-full h-full object-contain"
         onClick={togglePlay}
       />
