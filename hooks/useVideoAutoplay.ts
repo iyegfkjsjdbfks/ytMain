@@ -7,10 +7,12 @@ interface UseVideoAutoplayProps {
   actions: {
     play: () => void;
     pause: () => void;
+    unmute: () => void;
   };
   setIsManuallyPaused: (paused: boolean) => void;
   threshold?: number; // Intersection threshold for autoplay
   enableAutoplay?: boolean; // Allow disabling autoplay entirely
+  unmuteOnAutoplay?: boolean; // Whether to unmute video when autoplay starts
 }
 
 /**
@@ -23,13 +25,18 @@ export const useVideoAutoplay = ({
   isManuallyPaused,
   actions,
   setIsManuallyPaused,
-  enableAutoplay = false
+  enableAutoplay = false,
+  unmuteOnAutoplay = false
 }: UseVideoAutoplayProps) => {
   useEffect(() => {
     if (!enableAutoplay) return;
     
     if (isIntersecting && !isPlaying && !isManuallyPaused) {
       // Auto-play when video comes into view and hasn't been manually paused
+      // Conditionally unmute the video when autoplay starts based on unmuteOnAutoplay flag
+      if (unmuteOnAutoplay) {
+        actions.unmute();
+      }
       actions.play().catch(error => {
         console.warn('Autoplay failed:', error);
         // Autoplay might be blocked by browser policy

@@ -186,9 +186,14 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     isIntersecting,
     isPlaying: state.isPlaying,
     isManuallyPaused,
-    actions,
+    actions: {
+      play: actions.play,
+      pause: actions.pause,
+      unmute: actions.unmute
+    },
     setIsManuallyPaused,
-    enableAutoplay: true // Enable autoplay on both shorts page and home page
+    enableAutoplay: true, // Enable autoplay on both shorts page and home page
+    unmuteOnAutoplay: isOnShortsPage // Only unmute on autoplay when on shorts page
   });
   
   // Event handlers
