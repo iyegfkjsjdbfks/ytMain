@@ -66,15 +66,22 @@ const VideoThumbnail: React.FC<{
     rootMargin: '50px',
   });
   
-  const {
-    videoRef,
-    isPlaying,
-    handleMouseEnter,
-    handleMouseLeave,
-  } = useVideoAutoplay({
-    enabled: autoplay && isIntersecting,
-    delay: 1000,
-  });
+  // Disabled useVideoAutoplay to prevent video loading errors
+  // const {
+  //   videoRef,
+  //   isPlaying,
+  //   handleMouseEnter,
+  //   handleMouseLeave,
+  // } = useVideoAutoplay({
+  //   enabled: autoplay && isIntersecting,
+  //   delay: 1000,
+  // });
+  
+  // Mock values to replace the disabled hook
+  const videoRef = { current: null };
+  const isPlaying = false;
+  const handleMouseEnter = () => {};
+  const handleMouseLeave = () => {};
 
   const handleClick = useCallback(() => {
     onVideoClick?.(video);

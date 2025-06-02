@@ -112,7 +112,8 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
         // Clear any previous errors on successful play
         setState(prev => ({ ...prev, error: null }));
       } catch (error) {
-        console.error('Error playing video:', error);
+        // Temporarily disabled error logging to prevent console spam
+        // console.error('Error playing video:', error);
         // Don't set persistent error for autoplay failures - they're expected
         // Only set error for actual video loading/playback issues
         if (error instanceof Error && !error.message.includes('user didn\'t interact')) {
