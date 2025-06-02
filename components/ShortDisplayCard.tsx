@@ -53,7 +53,7 @@ const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle
 interface VideoInfoProps {
   title: string;
   channelName: string;
-  views: number;
+  views: string;
 }
 
 const VideoInfo: React.FC<VideoInfoProps> = ({ title, channelName, views }) => (
@@ -62,7 +62,7 @@ const VideoInfo: React.FC<VideoInfoProps> = ({ title, channelName, views }) => (
       {title}
     </h3>
     <p className="text-gray-300 text-xs">
-      {channelName} • {formatNumber(views)} views
+      {channelName} • {views}
     </p>
   </div>
 );
