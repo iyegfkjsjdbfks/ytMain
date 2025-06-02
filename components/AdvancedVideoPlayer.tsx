@@ -180,15 +180,16 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   }, []);
   
   const togglePlay = useCallback(() => {
-    // Video play/pause functionality disabled to prevent loading errors
-    // const video = videoRef.current;
-    // if (!video) return;
+    const video = videoRef.current;
+    if (!video) return;
     
-    // if (isPlaying) {
-    //   video.pause();
-    // } else {
-    //   video.play();
-    // }
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play().catch(error => {
+        console.error('Error playing video:', error);
+      });
+    }
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
   
