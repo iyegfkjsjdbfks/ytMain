@@ -40,7 +40,7 @@ const mockVideos: Video[] = [
     views: '870K views',
     uploadedAt: '5 days ago',
     duration: '22:10',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     description: 'Check out my ultimate gaming setup for 2024!',
     category: 'Gaming',
     isShort: false,
@@ -54,7 +54,7 @@ const mockVideos: Video[] = [
     views: '10.1M views',
     uploadedAt: '6 hours ago',
     duration: '0:15',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     description: 'This cat is hilarious! 😂 #shorts #funnycat #pets',
     category: 'Shorts',
     isShort: true,
@@ -68,7 +68,7 @@ const mockVideos: Video[] = [
     views: '2.5M views',
     uploadedAt: '1 month ago',
     duration: '8:15',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     description: 'Learn how to make a delicious and easy pasta dish.',
     category: 'Cooking',
     isShort: false,
@@ -82,7 +82,7 @@ const mockVideos: Video[] = [
     views: '8.7M views',
     uploadedAt: '3 days ago',
     duration: '0:45',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     description: 'You won\'t believe this magic trick! #shorts #magic #mindblown',
     category: 'Shorts',
     isShort: true,
