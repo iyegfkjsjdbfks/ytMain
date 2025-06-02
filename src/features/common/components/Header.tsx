@@ -77,7 +77,7 @@ const Header: React.FC = () => {
             </button>
 
             {user ? (
-              <div className="relative">
+              <div className="relative group">
                 <button className="flex items-center space-x-2">
                   <img 
                     src={user.avatarUrl || "https://via.placeholder.com/150"} 
@@ -89,9 +89,10 @@ const Header: React.FC = () => {
                     <p className="text-xs text-gray-500">@{user.username}</p>
                   </div>
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-50">
                   <Link to="/channel/me" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your channel</Link>
                   <Link to="/studio" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">YouTube Studio</Link>
+                  <Link to="/video-demo" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 bg-blue-50">Video Components Demo</Link>
                   <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
                   <button 
                     onClick={logout}

@@ -14,6 +14,7 @@ const WatchPage = lazy(() => import('../features/video/pages/WatchPage'));
 const SearchResultsPage = lazy(() => import('../features/video/pages/SearchResultsPage'));
 const TrendingPage = lazy(() => import('../features/video/pages/TrendingPage'));
 const ShortsPage = lazy(() => import('../features/video/pages/ShortsPage'));
+const VideoDemo = lazy(() => import('../features/video/pages/VideoDemo'));
 
 // User feature pages
 const SubscriptionsPage = lazy(() => import('../features/user/pages/SubscriptionsPage'));
@@ -169,6 +170,10 @@ export const mainRoutes: RouteObject[] = [
           <ProtectedRoute>
             <SettingsPage />
           </ProtectedRoute>
+      },
+      {
+        path: 'video-demo',
+        element: <VideoDemo />
       },
     ],
   },
