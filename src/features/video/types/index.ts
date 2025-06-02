@@ -2,6 +2,16 @@
  * Video feature type definitions
  */
 
+export interface Channel {
+  id: string;
+  name: string;
+  avatarUrl?: string;
+  subscribers?: number;
+  isVerified?: boolean;
+}
+
+export type VideoVisibility = 'public' | 'unlisted' | 'private';
+
 export interface Video {
   id: string;
   title: string;
@@ -10,9 +20,13 @@ export interface Video {
   duration: number;
   views: number;
   likes: number;
-  publishedAt: string;
-  channelId: string;
-  channelTitle: string;
+  createdAt: string;
+  publishedAt?: string;
+  visibility: VideoVisibility;
+  channel: Channel;
+  // Keeping these for backward compatibility
+  channelId?: string;
+  channelTitle?: string;
   channelThumbnail?: string;
 }
 

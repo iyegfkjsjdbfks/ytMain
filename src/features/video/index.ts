@@ -1,5 +1,3 @@
-// Export all components, hooks, and services from the video feature
-export * from './components';
-export * from './hooks';
-export * from './services';
-export * from './types';
+// Export all video-related components, hooks, and utilities
+export * from './components/index';
+export * from './types/index';
