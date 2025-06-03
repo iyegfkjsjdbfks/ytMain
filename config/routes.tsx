@@ -30,6 +30,8 @@ const VideoUploadPage = lazy(() => import('../pages/VideoUploadPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
 
 // Studio pages
+const StudioPage = lazy(() => import('../pages/StudioPage'));
+const UploadPage = lazy(() => import('../pages/UploadPage'));
 const StudioDashboardPage = lazy(() => import('../pages/StudioDashboardPage'));
 const AnalyticsPage = lazy(() => import('../pages/AnalyticsPage'));
 const CommentModerationPage = lazy(() => import('../pages/CommentModerationPage'));
@@ -131,6 +133,14 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'settings',
         element: <SettingsPage />,
+      },
+      {
+        path: 'studio',
+        element: <StudioPage />,
+      },
+      {
+        path: 'studio/upload',
+        element: <UploadPage />,
       },
       // Account section with nested routes and dedicated layout
       {
