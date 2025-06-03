@@ -6,6 +6,8 @@ import { StudioLayout } from '../features/common/components/StudioLayout';
 import { ErrorBoundary } from '../features/common/components/ErrorBoundary';
 // Auth components
 import { ProtectedRoute } from '../features/auth';
+// Demo pages
+import YouTubeDemo from '../pages/YouTubeDemo';
 
 // Lazy load components for better performance
 // Video feature pages
@@ -56,6 +58,11 @@ const VideoEditorPage = lazy(() => import('../features/studio/pages/VideoEditorP
 
 // Route configuration for main application
 export const mainRoutes: RouteObject[] = [
+  {
+    path: '/youtube-demo',
+    element: <YouTubeDemo />,
+    errorElement: <ErrorBoundary />,
+  },
   {
     path: '/',
     element: <Layout />,
