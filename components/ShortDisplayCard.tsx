@@ -74,26 +74,24 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
     <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
       {title}
     </h3>
-    <div className="flex items-center justify-between">
-      <p className="text-gray-300 text-xs">
-        {channelName} • {views}
-      </p>
-      {onFollow && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onFollow();
-          }}
-          className={`ml-2 px-3 py-1 text-xs font-medium rounded-full transition-colors ${
-            isFollowed
-              ? 'bg-gray-600 text-white hover:bg-gray-700'
-              : 'bg-white text-black hover:bg-gray-200'
-          }`}
-        >
-          {isFollowed ? 'Following' : 'Follow'}
-        </button>
-      )}
-    </div>
+    <p className="text-gray-300 text-xs mb-2">
+      {channelName} • {views}
+    </p>
+    {onFollow && (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onFollow();
+        }}
+        className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+          isFollowed
+            ? 'bg-gray-600 text-white hover:bg-gray-700'
+            : 'bg-white text-black hover:bg-gray-200'
+        }`}
+      >
+        {isFollowed ? 'Following' : 'Follow'}
+      </button>
+    )}
   </div>
 );
 

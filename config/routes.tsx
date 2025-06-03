@@ -81,6 +81,10 @@ export const mainRoutes: RouteObject[] = [
         element: <HistoryPage />,
       },
       {
+        path: 'watch-history',
+        element: <HistoryPage />,
+      },
+      {
         path: 'playlists',
         element: <PlaylistsPage />,
       },
