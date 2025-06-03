@@ -4,18 +4,14 @@ import {
   ClockIcon,
   UserGroupIcon,
   CurrencyDollarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   VideoCameraIcon,
   PlayIcon,
   ChatBubbleLeftIcon,
-  HeartIcon,
-  ShareIcon,
-  CalendarIcon,
   BellIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon,
-  XCircleIcon,
 } from '@heroicons/react/24/outline';
 
 interface DashboardMetrics {
@@ -178,7 +174,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       id: '4',
       title: 'Analytics',
       description: 'View detailed analytics',
-      icon: TrendingUpIcon,
+      icon: ArrowTrendingUpIcon,
       action: () => console.log('View analytics'),
       color: 'bg-purple-500',
     },
@@ -257,9 +253,9 @@ export const CreatorStudioDashboard: React.FC = () => {
                   metrics.views.trend === 'up' ? 'text-green-600' : 'text-red-600'
                 }`}>
                   {metrics.views.trend === 'up' ? (
-                    <TrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   ) : (
-                    <TrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
                   )}
                   {Math.abs(metrics.views.change)}%
                 </div>
@@ -281,9 +277,9 @@ export const CreatorStudioDashboard: React.FC = () => {
                   metrics.watchTime.trend === 'up' ? 'text-green-600' : 'text-red-600'
                 }`}>
                   {metrics.watchTime.trend === 'up' ? (
-                    <TrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   ) : (
-                    <TrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
                   )}
                   {Math.abs(metrics.watchTime.change)}%
                 </div>
@@ -305,9 +301,9 @@ export const CreatorStudioDashboard: React.FC = () => {
                   metrics.subscribers.trend === 'up' ? 'text-green-600' : 'text-red-600'
                 }`}>
                   {metrics.subscribers.trend === 'up' ? (
-                    <TrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   ) : (
-                    <TrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
                   )}
                   {Math.abs(metrics.subscribers.change)}%
                 </div>
@@ -329,9 +325,9 @@ export const CreatorStudioDashboard: React.FC = () => {
                   metrics.revenue.trend === 'up' ? 'text-green-600' : 'text-red-600'
                 }`}>
                   {metrics.revenue.trend === 'up' ? (
-                    <TrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   ) : (
-                    <TrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
                   )}
                   {Math.abs(metrics.revenue.change)}%
                 </div>

@@ -6,9 +6,8 @@ import {
   UserGroupIcon,
   HeartIcon,
   ChatBubbleLeftIcon,
-  ShareIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   PlayIcon,
   CalendarDaysIcon,
   CurrencyDollarIcon,
@@ -288,7 +287,7 @@ const DashboardPage: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Total Views</p>
                 <p className="text-2xl font-bold text-gray-900">{formatNumber(stats.totalViews)}</p>
                 <p className="text-sm text-green-600 flex items-center mt-1">
-                  <TrendingUpIcon className="w-4 h-4 mr-1" />
+                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   +12.5% from last period
                 </p>
               </div>
@@ -304,7 +303,7 @@ const DashboardPage: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Subscribers</p>
                 <p className="text-2xl font-bold text-gray-900">{formatNumber(stats.totalSubscribers)}</p>
                 <p className="text-sm text-green-600 flex items-center mt-1">
-                  <TrendingUpIcon className="w-4 h-4 mr-1" />
+                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   +8.3% from last period
                 </p>
               </div>
@@ -320,7 +319,7 @@ const DashboardPage: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Watch Time</p>
                 <p className="text-2xl font-bold text-gray-900">{formatDuration(stats.totalWatchTime)}</p>
                 <p className="text-sm text-green-600 flex items-center mt-1">
-                  <TrendingUpIcon className="w-4 h-4 mr-1" />
+                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   +15.2% from last period
                 </p>
               </div>
@@ -336,7 +335,7 @@ const DashboardPage: React.FC = () => {
                 <p className="text-sm font-medium text-gray-600">Revenue</p>
                 <p className="text-2xl font-bold text-gray-900">{formatCurrency(stats.revenue)}</p>
                 <p className="text-sm text-green-600 flex items-center mt-1">
-                  <TrendingUpIcon className="w-4 h-4 mr-1" />
+                  <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
                   +22.1% from last period
                 </p>
               </div>

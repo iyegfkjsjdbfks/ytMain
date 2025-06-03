@@ -316,8 +316,8 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
         >
           <div className="max-w-4xl max-h-full p-4">
             <img
-              src={post.media[selectedImage].url}
-              alt={post.media[selectedImage].alt || 'Post image'}
+              src={post.media?.[selectedImage]?.url || ''}
+              alt={post.media?.[selectedImage]?.alt || 'Post image'}
               className="max-w-full max-h-full object-contain"
             />
           </div>
