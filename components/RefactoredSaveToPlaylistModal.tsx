@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BaseModal from './BaseModal';
 import BaseForm from './BaseForm';
 import { useAsyncState } from '../hooks';
-import { Playlist } from '../types';
+import { Playlist } from '../src/types/core';
 
 interface RefactoredSaveToPlaylistModalProps {
   isOpen: boolean;
@@ -52,13 +52,13 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   const {
     loading: saveLoading,
     error: saveError,
-    execute: executeSave
+    execute: executeSave // eslint-disable-line @typescript-eslint/no-unused-vars
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
     error: createError,
-    execute: executeCreate
+    execute: executeCreate // eslint-disable-line @typescript-eslint/no-unused-vars
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist

@@ -174,12 +174,16 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         
         if (aDaysMatch) {
           const [, num, unit] = aDaysMatch;
-          aDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+          if (num && unit) {
+            aDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+          }
         }
-        
+
         if (bDaysMatch) {
           const [, num, unit] = bDaysMatch;
-          bDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+          if (num && unit) {
+            bDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+          }
         }
         
         // Combine views and recency for trending score
@@ -215,8 +219,10 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         }
         
         // Similar duration
-        const currentDuration = parseInt(currentVideo.duration.split(':')[0]);
-        const videoDuration = parseInt(video.duration.split(':')[0]);
+        const currentDurationParts = currentVideo.duration.split(':');
+        const videoDurationParts = video.duration.split(':');
+        const currentDuration = currentDurationParts[0] ? parseInt(currentDurationParts[0]) : 0;
+        const videoDuration = videoDurationParts[0] ? parseInt(videoDurationParts[0]) : 0;
         const durationDiff = Math.abs(currentDuration - videoDuration);
         if (durationDiff < 5) similarityScore += 15;
         
@@ -233,18 +239,18 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       .slice(0, maxRecommendations);
   };
 
-  const getWatchedVideoTags = (): string[] => {
-    // Mock implementation - in real app, would fetch from video metadata
-    const commonTags = ['tutorial', 'review', 'gaming', 'music', 'tech', 'cooking', 'fitness', 'news'];
-    return commonTags.filter(() => Math.random() > 0.5);
-  };
+  // const getWatchedVideoTags = (): string[] => {
+  //   // Mock implementation - in real app, would fetch from video metadata
+  //   const commonTags = ['tutorial', 'review', 'gaming', 'music', 'tech', 'cooking', 'fitness', 'news'];
+  //   return commonTags.filter(() => Math.random() > 0.5);
+  // };
 
-  const parseDuration = (duration: string): number => {
-    const parts = duration.split(':').map(Number);
-    if (parts.length === 2) return parts[0] * 60 + parts[1];
-    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
-    return 0;
-  };
+  // const parseDuration = (duration: string): number => {
+  //   const parts = duration.split(':').map(Number);
+  //   if (parts.length === 2) return parts[0] * 60 + parts[1];
+  //   if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  //   return 0;
+  // };
 
   // Removed generateMockVideos function - now using actual videos from mockVideoService
 

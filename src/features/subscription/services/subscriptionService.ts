@@ -33,7 +33,7 @@ class SubscriptionService {
   async getSubscriptionStatus(channelId: string): Promise<Subscription | null> {
     try {
       const response = await api.get(`/api/subscriptions/status/${channelId}`);
-      return response.data;
+      return response.data as Subscription;
     } catch (error) {
       console.error('Failed to get subscription status:', error);
       return null;
@@ -79,7 +79,7 @@ class SubscriptionService {
   ): Promise<Subscription[]> {
     try {
       const response = await api.get('/api/subscriptions', filters);
-      return response.data || [];
+      return (response.data as Subscription[]) || [];
     } catch (error) {
       console.error('Failed to get subscriptions:', error);
       return [];
@@ -100,7 +100,7 @@ class SubscriptionService {
   ): Promise<Video[]> {
     try {
       const response = await api.get('/api/subscriptions/feed', filters);
-      return response.data || [];
+      return (response.data as Video[]) || [];
     } catch (error) {
       console.error('Failed to get subscription feed:', error);
       return [];
@@ -113,7 +113,7 @@ class SubscriptionService {
   async getSubscriptionStats(): Promise<SubscriptionStats> {
     try {
       const response = await api.get('/api/subscriptions/stats');
-      return response.data;
+      return response.data as SubscriptionStats;
     } catch (error) {
       console.error('Failed to get subscription stats:', error);
       return {
@@ -163,7 +163,18 @@ class SubscriptionService {
   }>> {
     try {
       const response = await api.get('/api/subscriptions/recommended', filters);
-      return response.data || [];
+      return (response.data as Array<{
+        channelId: string;
+        channelName: string;
+        channelAvatar: string;
+        channelHandle: string;
+        subscriberCount: number;
+        videoCount: number;
+        category: string;
+        description: string;
+        isVerified: boolean;
+        recentVideos: Video[];
+      }>) || [];
     } catch (error) {
       console.error('Failed to get recommended channels:', error);
       return [];
@@ -188,7 +199,7 @@ class SubscriptionService {
         q: query,
         ...filters,
       });
-      return response.data;
+      return response.data as { channels: Subscription[]; videos: Video[] };
     } catch (error) {
       console.error('Failed to search subscriptions:', error);
       return {
@@ -222,7 +233,19 @@ class SubscriptionService {
   }>> {
     try {
       const response = await api.get('/api/subscriptions/activity', filters);
-      return response.data || [];
+      return (response.data as Array<{
+        id: string;
+        type: 'upload' | 'live' | 'premiere' | 'community';
+        channelId: string;
+        channelName: string;
+        channelAvatar: string;
+        title: string;
+        description?: string;
+        thumbnail?: string;
+        url: string;
+        timestamp: string;
+        isNew: boolean;
+      }>) || [];
     } catch (error) {
       console.error('Failed to get subscription activity:', error);
       return [];
@@ -235,7 +258,7 @@ class SubscriptionService {
   async exportSubscriptions(format: 'json' | 'csv' | 'opml'): Promise<string> {
     try {
       const response = await api.get('/api/subscriptions/export', { format });
-      return response.data;
+      return response.data as string;
     } catch (error) {
       console.error('Failed to export subscriptions:', error);
       throw error;
@@ -281,7 +304,16 @@ class SubscriptionService {
   }> {
     try {
       const response = await api.get('/api/subscriptions/insights', { timeframe });
-      return response.data;
+      return response.data as {
+        growthRate: number;
+        topCategories: Array<{ category: string; count: number; percentage: number }>;
+        activityTrends: Array<{ date: string; uploads: number; views: number }>;
+        engagementMetrics: {
+          averageViewsPerVideo: number;
+          averageLikesPerVideo: number;
+          averageCommentsPerVideo: number;
+        };
+      };
     } catch (error) {
       console.error('Failed to get subscription insights:', error);
       return {

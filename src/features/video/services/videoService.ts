@@ -46,7 +46,7 @@ class VideoService {
       throw new Error(`Failed to fetch trending videos: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<Video[]>;
   }
 
   /**
@@ -64,7 +64,7 @@ class VideoService {
       throw new Error(`Failed to fetch recommended videos: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<Video[]>;
   }
 
   /**
@@ -77,7 +77,7 @@ class VideoService {
       throw new Error(`Failed to fetch video metrics: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoMetrics>;
   }
 
   /**
@@ -95,7 +95,7 @@ class VideoService {
       throw new Error(`Failed to search videos: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<Video[]>;
   }
 
   /**
@@ -113,7 +113,7 @@ class VideoService {
       throw new Error(`Failed to toggle like: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoInteractionResponse>;
   }
 
   /**
@@ -131,7 +131,7 @@ class VideoService {
       throw new Error(`Failed to toggle dislike: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoInteractionResponse>;
   }
 
   /**
@@ -149,7 +149,7 @@ class VideoService {
       throw new Error(`Failed to toggle save: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoInteractionResponse>;
   }
 
   /**
@@ -179,7 +179,7 @@ class VideoService {
       throw new Error(`Failed to get video interactions: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoInteractionResponse>;
   }
 
   /**
@@ -192,7 +192,7 @@ class VideoService {
       throw new Error(`Failed to get video stats: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoStats>;
   }
 
   /**
@@ -205,7 +205,7 @@ class VideoService {
       throw new Error(`Failed to get video engagement: ${response.statusText}`);
     }
     
-    return response.json();
+    return response.json() as Promise<VideoEngagement>;
   }
 }
 

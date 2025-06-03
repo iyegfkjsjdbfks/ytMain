@@ -160,7 +160,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       ...(type !== 'subscription' && { thumbnail: `https://picsum.photos/120/68?random=${Date.now()}` }),
       channelName: `Channel${Math.floor(Math.random() * 100)}`,
       channelAvatar: `https://picsum.photos/40/40?random=${Date.now()}`,
-      videoId: type === 'video_upload' ? `video-${Date.now()}` : undefined,
+      ...(type === 'video_upload' ? { videoId: `video-${Date.now()}` } : {}),
       timestamp: new Date().toISOString(),
       isRead: false,
       priority: type === 'live_stream' ? 'high' : 'medium'
