@@ -101,7 +101,7 @@ export async function apiRequest<T>(
 
   const requestConfig = createRequestConfig(fetchConfig);
   
-  let lastError: Error;
+  let lastError: Error | null = null;
   
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -159,7 +159,7 @@ export async function apiRequest<T>(
     throw new NetworkError('Failed to fetch data. Please check your connection.');
   }
   
-  throw lastError;
+  throw lastError || new Error('Unknown error occurred');
 }
 
 // GET request
@@ -182,7 +182,7 @@ export async function post<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'POST',
-    body: data ? JSON.stringify(data) : undefined,
+    body: data ? JSON.stringify(data) : null,
   });
 }
 
@@ -196,7 +196,7 @@ export async function put<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'PUT',
-    body: data ? JSON.stringify(data) : undefined,
+    body: data ? JSON.stringify(data) : null,
   });
 }
 
@@ -210,7 +210,7 @@ export async function patch<T>(
   return apiRequest<T>(url, {
     ...config,
     method: 'PATCH',
-    body: data ? JSON.stringify(data) : undefined,
+    body: data ? JSON.stringify(data) : null,
   });
 }
 

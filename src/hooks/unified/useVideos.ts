@@ -5,12 +5,12 @@
 
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 import { videoApi, type GetVideosParams, type VideoUploadData } from '../../services/api/videos';
-import type { Video, Short, ApiResponse } from '../../types/core';
+import type { Video, Short } from '../../types/core';
 
 // Video hooks
 export function useVideos(params: GetVideosParams = {}, config?: UseApiConfig<Video[]>) {
   return useQuery(
-    ['videos', params],
+    `videos-${JSON.stringify(params)}`,
     () => videoApi.getVideos(params),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes

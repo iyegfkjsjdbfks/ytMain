@@ -54,8 +54,10 @@ class ApiCache {
 
     // Clean up old entries
     if (this.cache.size > CONSTANTS.CACHE_CONFIG.MAX_CACHE_SIZE) {
-      const oldestKey = this.cache.keys().next().value;
-      this.cache.delete(oldestKey);
+      const oldestKey = Array.from(this.cache.keys())[0];
+      if (oldestKey) {
+        this.cache.delete(oldestKey);
+      }
     }
   }
 
@@ -109,7 +111,7 @@ export function useApi<T>(
     enabled = true,
     refetchOnMount = true,
     refetchOnWindowFocus = false,
-    cacheTime = CONSTANTS.CACHE_CONFIG.VIDEO_DATA_TTL,
+    // cacheTime = CONSTANTS.CACHE_CONFIG.VIDEO_DATA_TTL,
     staleTime = 0,
     retry = 3,
     retryDelay = 1000,
@@ -180,7 +182,7 @@ export function useApi<T>(
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
 
       // Retry logic
-      if (retryCount < retry && error.name !== 'AbortError') {
+      if (retryCount < retry && (error as Error).name !== 'AbortError') {
         retryTimeoutRef.current = setTimeout(() => {
           fetchData(retryCount + 1);
         }, retryDelay * Math.pow(2, retryCount)); // Exponential backoff

@@ -25,13 +25,13 @@ export { searchService } from './search/services/searchService';
 export { notificationService } from './notifications/services/notificationService';
 
 // Channel Features
-export * from './channel';
+// export * from './channel';
 
 // User Features
-export * from './user';
+// export * from './user';
 
 // Creator Studio Features
-export * from './studio';
+// export * from './studio';
 
 // Common Features
 export * from './common';

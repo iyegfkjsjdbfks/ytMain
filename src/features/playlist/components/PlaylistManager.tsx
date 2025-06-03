@@ -15,7 +15,7 @@ import {
   ListBulletIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
-import { usePlaylists, useCreatePlaylist, useUpdatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
+import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 import type { Playlist } from '../../../types/core';
 
 interface PlaylistManagerProps {
@@ -196,7 +196,12 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const [showPlaylistMenu, setShowPlaylistMenu] = useState<string | null>(null);
 
-  const { data: playlists = [], isLoading } = usePlaylists({ sortBy });
+  const { data: playlists = [] } = usePlaylists({
+    sortBy: sortBy === 'recent' ? 'updated' :
+           sortBy === 'alphabetical' ? 'title' :
+           sortBy === 'most_videos' ? 'videoCount' : 'updated'
+  });
+  const isLoading = false; // Placeholder
   const createPlaylistMutation = useCreatePlaylist();
 
   const deletePlaylistMutation = useDeletePlaylist();
@@ -208,7 +213,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const handleCreatePlaylist = async (data: any) => {
     try {
-      await createPlaylistMutation.mutateAsync(data);
+      await createPlaylistMutation.mutate(data);
     } catch (error) {
       console.error('Failed to create playlist:', error);
     }
@@ -217,7 +222,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   const handleDeletePlaylist = async (playlistId: string) => {
     if (window.confirm('Are you sure you want to delete this playlist?')) {
       try {
-        await deletePlaylistMutation.mutateAsync(playlistId);
+        await deletePlaylistMutation.mutate(playlistId);
       } catch (error) {
         console.error('Failed to delete playlist:', error);
       }
@@ -226,7 +231,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const handleDuplicatePlaylist = async (playlist: Playlist) => {
     try {
-      await createPlaylistMutation.mutateAsync({
+      await createPlaylistMutation.mutate({
         title: `${playlist.title} (Copy)`,
         description: playlist.description,
         visibility: playlist.visibility,

@@ -277,7 +277,10 @@ class PlaylistService {
     playlistId: string,
     videoIds: string[]
   ): Promise<ApiResponse<{ success: string[]; failed: string[] }>> {
-    return api.delete(`/api/playlists/${playlistId}/videos/bulk`, { videoIds });
+    return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
+      body: JSON.stringify({ videoIds }),
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /**

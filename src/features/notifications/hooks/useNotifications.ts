@@ -4,7 +4,7 @@ import { notificationService, type Notification } from '../services/notification
 
 export function useNotifications() {
   const queryClient = useQueryClient();
-  const [realTimeConnection, setRealTimeConnection] = useState<(() => void) | null>(null);
+  // const [realTimeConnection, setRealTimeConnection] = useState<(() => void) | null>(null);
 
   // Fetch notifications
   const { data: notifications = [], isLoading, error } = useQuery({
@@ -96,7 +96,7 @@ export function useNotifications() {
   }, []);
 
   // Calculate unread count
-  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const unreadCount = Array.isArray(notifications) ? notifications.filter((n: any) => !n.isRead).length : 0;
 
   return {
     notifications,

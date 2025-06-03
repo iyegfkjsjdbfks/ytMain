@@ -4,9 +4,7 @@ import {
   XMarkIcon,
   CheckIcon,
   TrashIcon,
-  Cog6ToothIcon,
-  EyeIcon,
-  EyeSlashIcon,
+
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
@@ -183,11 +181,11 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredNotifications = notifications.filter((notification) => {
+  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification: any) => {
     if (filter === 'unread' && notification.isRead) return false;
     if (selectedCategory !== 'all' && notification.category !== selectedCategory) return false;
     return true;
-  });
+  }) : [];
 
   const handleNotificationClick = (notification: Notification) => {
     if (!notification.isRead) {
@@ -276,14 +274,14 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <div className="flex items-center gap-2">
                 {unreadCount > 0 && (
                   <button
-                    onClick={markAllAsRead}
+                    onClick={() => markAllAsRead()}
                     className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                   >
                     Mark all read
                   </button>
                 )}
                 <button
-                  onClick={clearAll}
+                  onClick={() => clearAll()}
                   className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 >
                   Clear all
@@ -315,7 +313,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               </div>
             ) : filteredNotifications.length > 0 ? (
               <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredNotifications.map((notification) => (
+                {filteredNotifications.map((notification: any) => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}

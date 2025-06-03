@@ -123,7 +123,10 @@ class NotificationService {
    * Delete multiple notifications
    */
   async deleteMultiple(notificationIds: string[]): Promise<ApiResponse<void>> {
-    return api.delete('/api/notifications/bulk', { notificationIds });
+    return api.delete('/api/notifications/bulk', {
+      body: JSON.stringify({ notificationIds }),
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /**
@@ -131,6 +134,34 @@ class NotificationService {
    */
   async clearAll(): Promise<ApiResponse<void>> {
     return api.delete('/api/notifications/all');
+  }
+
+  /**
+   * Clear all notifications (alias)
+   */
+  async clearAllNotifications(): Promise<ApiResponse<void>> {
+    return this.clearAll();
+  }
+
+  /**
+   * Get notification settings
+   */
+  async getNotificationSettings(): Promise<ApiResponse<any>> {
+    return api.get('/api/notifications/settings');
+  }
+
+  /**
+   * Update notification settings
+   */
+  async updateNotificationSettings(settings: any): Promise<ApiResponse<any>> {
+    return api.put('/api/notifications/settings', settings);
+  }
+
+  /**
+   * Get notification statistics
+   */
+  async getNotificationStats(): Promise<ApiResponse<any>> {
+    return api.get('/api/notifications/stats');
   }
 
   /**
