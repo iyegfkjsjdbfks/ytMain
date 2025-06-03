@@ -136,20 +136,24 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
     if (isInWatchLaterList) {
       removeFromWatchLater(video.id);
       addNotification({
-        id: Date.now().toString(),
         type: 'info',
-        message: 'Removed from Watch Later',
+        data: {
+          title: 'Watch Later',
+          message: 'Removed from Watch Later'
+        },
         read: false,
-        timestamp: new Date()
+        persistent: false
       });
     } else {
       addToWatchLater(video.id);
       addNotification({
-        id: Date.now().toString(),
         type: 'success',
-        message: 'Added to Watch Later',
+        data: {
+          title: 'Watch Later',
+          message: 'Added to Watch Later'
+        },
         read: false,
-        timestamp: new Date()
+        persistent: false
       });
     }
     
@@ -168,11 +172,13 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
     } else {
       navigator.clipboard.writeText(`${window.location.origin}/watch?v=${video.id}`);
       addNotification({
-        id: Date.now().toString(),
         type: 'success',
-        message: 'Link copied to clipboard',
+        data: {
+          title: 'Share',
+          message: 'Link copied to clipboard'
+        },
         read: false,
-        timestamp: new Date()
+        persistent: false
       });
     }
     

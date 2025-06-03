@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';
+import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -126,6 +127,25 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'settings',
         element: <SettingsPage />,
+      },
+      // Account section with nested routes and dedicated layout
+      {
+        path: 'account',
+        element: <AccountLayout />,
+        children: [
+          {
+            path: 'settings',
+            element: <SettingsPage />,
+          },
+          {
+            path: 'privacy',
+            element: <SettingsPage />, // Can be replaced with dedicated privacy page later
+          },
+          {
+            path: 'data',
+            element: <YourDataPage />,
+          },
+        ],
       },
       {
         path: 'analytics',

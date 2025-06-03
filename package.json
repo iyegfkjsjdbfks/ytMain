@@ -4,9 +4,10 @@
   "description": "A modern YouTube Studio clone built with React, TypeScript, and Vite",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
+    "dev": "vite",
     "dev:client": "vite",
     "dev:api": "node server/dev-server.js",
+    "dev:full": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
     "dev:client-only": "vite",
     "build": "tsc && vite build",
     "build:analyze": "ANALYZE=true npm run build",

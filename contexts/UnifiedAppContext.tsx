@@ -134,7 +134,7 @@ interface UnifiedAppContextType {
   
   // UI actions
   toggleSidebar: () => void;
-  addNotification: (notification: StrictNotification) => void;
+  addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
   removeNotification: (id: string) => void;
 }
 
@@ -251,8 +251,8 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
     dispatch({ type: 'TOGGLE_SIDEBAR' });
   }, []);
   
-  const addNotification = useCallback((notification: StrictNotification) => {
-    const notificationWithId = {
+  const addNotification = useCallback((notification: Omit<StrictNotification, 'id' | 'timestamp'>) => {
+    const notificationWithId: StrictNotification = {
       ...notification,
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),

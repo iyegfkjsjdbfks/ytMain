@@ -2,6 +2,9 @@ import React, { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
 import { ThemeProvider } from '../contexts/ThemeContext';
+import { MiniplayerProvider } from '../contexts/MiniplayerContext';
+import { WatchLaterProvider } from '../contexts/WatchLaterContext';
+import { AuthProvider } from '../contexts/AuthContext';
 import SuspenseWrapper from '../components/SuspenseWrapper';
 import ErrorBoundary from '../components/ErrorBoundary';
 
@@ -42,20 +45,26 @@ interface RefactoredAppProvidersProps {
  * - Proper error boundaries and suspense handling
  * - Reduced provider nesting for better performance
  */
-export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({ 
-  children 
+export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
+  children
 }) => {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <UnifiedAppProvider>
-            <SuspenseWrapper fallback={<div className="flex items-center justify-center min-h-screen">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-            </div>}>
-              {children}
-            </SuspenseWrapper>
-          </UnifiedAppProvider>
+          <AuthProvider>
+            <MiniplayerProvider>
+              <WatchLaterProvider>
+                <UnifiedAppProvider>
+                  <SuspenseWrapper fallback={<div className="flex items-center justify-center min-h-screen">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                  </div>}>
+                    {children}
+                  </SuspenseWrapper>
+                </UnifiedAppProvider>
+              </WatchLaterProvider>
+            </MiniplayerProvider>
+          </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </ErrorBoundary>
@@ -77,19 +86,25 @@ interface TestAppProvidersProps {
   queryClient?: QueryClient;
 }
 
-export const TestAppProviders: React.FC<TestAppProvidersProps> = ({ 
-  children, 
-  queryClient: customQueryClient 
+export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
+  children,
+  queryClient: customQueryClient
 }) => {
   const client = customQueryClient || queryClient;
-  
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={client}>
         <ThemeProvider>
-          <UnifiedAppProvider>
-            {children}
-          </UnifiedAppProvider>
+          <AuthProvider>
+            <MiniplayerProvider>
+              <WatchLaterProvider>
+                <UnifiedAppProvider>
+                  {children}
+                </UnifiedAppProvider>
+              </WatchLaterProvider>
+            </MiniplayerProvider>
+          </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </ErrorBoundary>

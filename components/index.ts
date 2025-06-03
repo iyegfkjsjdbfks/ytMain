@@ -5,6 +5,7 @@ export { default as Header } from './Header';
 export { default as PageLayout } from './PageLayout';
 export { default as StandardPageLayout } from './StandardPageLayout';
 export { default as StudioLayout } from './StudioLayout';
+export { default as AccountLayout } from './AccountLayout';
 
 // Video Components - Unified and Legacy
 export { default as VideoCard } from './VideoCard';

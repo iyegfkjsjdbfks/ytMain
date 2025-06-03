@@ -3,6 +3,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 import { debounce, throttle } from '../utils/componentUtils';
 
+// Re-export the localStorage Set hook
+export { useLocalStorageSet, useLocalStorageSetState } from './useLocalStorageSet';
+
 /**
  * Enhanced useLocalStorage hook with error handling and type safety
  */

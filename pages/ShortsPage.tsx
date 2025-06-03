@@ -22,9 +22,36 @@ const ShortsPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Enhanced state management
-  const [likedShorts, setLikedShorts] = useLocalStorage<Set<string>>('likedShorts', new Set());
-  const [followedChannels, setFollowedChannels] = useLocalStorage<Set<string>>('followedChannels', new Set());
+  // Enhanced state management with proper Set handling and error recovery
+  const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []);
+  const [followedChannelsArray, setFollowedChannelsArray] = useLocalStorage<string[]>('followedChannels', []);
+
+  // Convert arrays to Sets for easier manipulation with comprehensive type checking
+  const likedShorts = useMemo(() => {
+    try {
+      // Ensure we have a valid array
+      const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
+      return new Set(validArray.filter(item => typeof item === 'string'));
+    } catch (error) {
+      console.warn('Error creating likedShorts Set:', error);
+      // Clear invalid data and return empty Set
+      setLikedShortsArray([]);
+      return new Set<string>();
+    }
+  }, [likedShortsArray, setLikedShortsArray]);
+
+  const followedChannels = useMemo(() => {
+    try {
+      // Ensure we have a valid array
+      const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
+      return new Set(validArray.filter(item => typeof item === 'string'));
+    } catch (error) {
+      console.warn('Error creating followedChannels Set:', error);
+      // Clear invalid data and return empty Set
+      setFollowedChannelsArray([]);
+      return new Set<string>();
+    }
+  }, [followedChannelsArray, setFollowedChannelsArray]);
   const [commentModalOpen, setCommentModalOpen] = useState(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -76,30 +103,28 @@ const ShortsPage: React.FC = () => {
     return ['all', ...uniqueCategories];
   }, [allShorts]);
   
-  // Enhanced event handlers
+  // Enhanced event handlers with proper type checking
   const handleLike = useCallback((shortId: string) => {
-    setLikedShorts(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(shortId)) {
-        newSet.delete(shortId);
+    setLikedShortsArray(prev => {
+      const currentArray = Array.isArray(prev) ? prev : [];
+      if (currentArray.includes(shortId)) {
+        return currentArray.filter(id => id !== shortId);
       } else {
-        newSet.add(shortId);
+        return [...currentArray, shortId];
       }
-      return newSet;
     });
-  }, [setLikedShorts]);
+  }, [setLikedShortsArray]);
 
   const handleFollow = useCallback((channelName: string) => {
-    setFollowedChannels(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(channelName)) {
-        newSet.delete(channelName);
+    setFollowedChannelsArray(prev => {
+      const currentArray = Array.isArray(prev) ? prev : [];
+      if (currentArray.includes(channelName)) {
+        return currentArray.filter(name => name !== channelName);
       } else {
-        newSet.add(channelName);
+        return [...currentArray, channelName];
       }
-      return newSet;
     });
-  }, [setFollowedChannels]);
+  }, [setFollowedChannelsArray]);
 
   const handleComment = useCallback((shortId: string) => {
     const short = filteredShorts.find(s => s.id === shortId);
@@ -226,6 +251,40 @@ const ShortsPage: React.FC = () => {
       console.error('Failed to copy link:', error);
     }
   };
+
+  // One-time cleanup effect to handle corrupted localStorage data
+  useEffect(() => {
+    try {
+      // Check if localStorage contains invalid data and clean it up
+      const likedShortsRaw = localStorage.getItem('likedShorts');
+      const followedChannelsRaw = localStorage.getItem('followedChannels');
+
+      if (likedShortsRaw && likedShortsRaw !== 'null') {
+        const parsed = JSON.parse(likedShortsRaw);
+        if (!Array.isArray(parsed)) {
+          console.warn('Cleaning up invalid likedShorts data');
+          localStorage.removeItem('likedShorts');
+          setLikedShortsArray([]);
+        }
+      }
+
+      if (followedChannelsRaw && followedChannelsRaw !== 'null') {
+        const parsed = JSON.parse(followedChannelsRaw);
+        if (!Array.isArray(parsed)) {
+          console.warn('Cleaning up invalid followedChannels data');
+          localStorage.removeItem('followedChannels');
+          setFollowedChannelsArray([]);
+        }
+      }
+    } catch (error) {
+      console.warn('Error during localStorage cleanup:', error);
+      // Clear all potentially corrupted data
+      localStorage.removeItem('likedShorts');
+      localStorage.removeItem('followedChannels');
+      setLikedShortsArray([]);
+      setFollowedChannelsArray([]);
+    }
+  }, []); // Run only once on mount
 
   // Enhanced useEffect hooks
   useEffect(() => {

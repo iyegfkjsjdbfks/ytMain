@@ -92,18 +92,21 @@ const SettingsPage: React.FC = () => {
   );
 
   return (
-    <div className="p-4 md:p-6 bg-white dark:bg-neutral-950 min-h-screen">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center mb-8">
-          <Cog8ToothIcon className="w-8 h-8 text-neutral-600 dark:text-neutral-400 mr-3" />
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-50">
-            Settings
-          </h1>
+    <div className="p-6">
+      <div className="mb-6">
+        <div className="flex items-center mb-2">
+          <Cog8ToothIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-400 mr-3" />
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50">
+            General Settings
+          </h2>
         </div>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          Manage your account preferences and application settings
+        </p>
+      </div>
 
-        <div className="bg-neutral-50 dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700/50 p-6">
-
-          <SettingSection title="Appearance">
+      <div className="space-y-8">
+        <SettingSection title="Appearance">
             <div className="space-y-3">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">Choose your preferred theme</p>
               <div className="flex space-x-3">
@@ -135,7 +138,7 @@ const SettingsPage: React.FC = () => {
             </div>
           </SettingSection>
 
-          <SettingSection title="Playback and Performance">
+        <SettingSection title="Playback and Performance">
             <ToggleSetting
               label="Autoplay"
               description="Automatically play the next video"
@@ -160,9 +163,9 @@ const SettingsPage: React.FC = () => {
               options={['Auto', '144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p']}
               onChange={setVideoQuality}
             />
-          </SettingSection>
+        </SettingSection>
 
-          <SettingSection title="General">
+        <SettingSection title="General">
             <SelectSetting
               label="Location"
               value={location}
@@ -181,9 +184,9 @@ const SettingsPage: React.FC = () => {
               checked={restrictedMode}
               onChange={() => setRestrictedMode(!restrictedMode)}
             />
-          </SettingSection>
+        </SettingSection>
 
-          <SettingSection title="Notifications">
+        <SettingSection title="Notifications">
             <ToggleSetting
               label="Subscriptions"
               description="Get notified about new videos from channels you subscribe to"
@@ -214,9 +217,9 @@ const SettingsPage: React.FC = () => {
               checked={notifications.mentions}
               onChange={() => handleNotificationChange('mentions')}
             />
-          </SettingSection>
+        </SettingSection>
 
-          <SettingSection title="Privacy">
+        <SettingSection title="Privacy">
             <div className="space-y-4">
               <div className="p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
                 <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-2">Watch History</h3>
@@ -281,9 +284,9 @@ const SettingsPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </SettingSection>
+        </SettingSection>
 
-          <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -304,8 +307,6 @@ const SettingsPage: React.FC = () => {
                 Reset to Defaults
               </button>
             </div>
-          </div>
-
         </div>
       </div>
     </div>
