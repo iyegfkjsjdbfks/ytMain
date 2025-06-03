@@ -46,10 +46,26 @@ export default defineConfig({
     cors: true,
     // Proxy API requests in development
     proxy: {
+      '/api/placeholder': {
+        target: 'https://picsum.photos',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api\/placeholder/, ''),
+      },
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.log('Proxy error:', err);
+            // Fallback for API errors
+            if (res && !res.headersSent) {
+              res.writeHead(200, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ error: 'API service unavailable', fallback: true }));
+            }
+          });
+        },
       },
     },
   },

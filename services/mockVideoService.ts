@@ -1,6 +1,7 @@
 
 // Mock video service with working video URLs
 import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
+import { mockApi, getPlaceholderImage, getPlaceholderVideo } from './mockApiService';
 
 const mockVideos: Video[] = [
   {
