@@ -157,7 +157,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       type,
       title: getNotificationTitle(type),
       message: getNotificationMessage(type),
-      thumbnail: type !== 'subscription' ? `https://picsum.photos/120/68?random=${Date.now()}` : undefined,
+      ...(type !== 'subscription' && { thumbnail: `https://picsum.photos/120/68?random=${Date.now()}` }),
       channelName: `Channel${Math.floor(Math.random() * 100)}`,
       channelAvatar: `https://picsum.photos/40/40?random=${Date.now()}`,
       videoId: type === 'video_upload' ? `video-${Date.now()}` : undefined,

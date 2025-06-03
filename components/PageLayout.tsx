@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataWrapper } from './DataWrapper';
-import { VideoGridSkeleton } from './LoadingStates';
+
 
 interface PageLayoutProps<T> {
   title: string;
@@ -72,7 +72,7 @@ export function PageLayout<T>({
         loading={loading}
         error={error}
         loadingSkeleton={renderSkeleton()}
-        emptyState={emptyState}
+        {...(emptyState && { emptyState })}
       >
         {(data) => children(data)}
       </DataWrapper>
