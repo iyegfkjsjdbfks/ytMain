@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
-import { AuthProvider } from '../contexts/AuthContext';
-import { WatchLaterProvider } from '../contexts/WatchLaterContext';
-import { MiniplayerProvider } from '../contexts/MiniplayerContext';
+import { UnifiedProviders } from './UnifiedProviders';
 import SuspenseWrapper from '../components/SuspenseWrapper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -28,15 +26,11 @@ interface AppProvidersProps {
 export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <WatchLaterProvider>
-          <MiniplayerProvider>
-            <SuspenseWrapper>
-              {children}
-            </SuspenseWrapper>
-          </MiniplayerProvider>
-        </WatchLaterProvider>
-      </AuthProvider>
+      <UnifiedProviders>
+        <SuspenseWrapper>
+          {children}
+        </SuspenseWrapper>
+      </UnifiedProviders>
     </QueryClientProvider>
   );
 };
