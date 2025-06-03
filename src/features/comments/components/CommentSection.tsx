@@ -30,9 +30,9 @@ interface CommentItemProps {
   isChannelOwner?: boolean;
   onReply: (parentId: string, content: string) => void;
   onReact: (commentId: string, type: 'like' | 'dislike') => void;
-  onPin?: (commentId: string) => void;
-  onHeart?: (commentId: string) => void;
-  onReport?: (commentId: string, reason: string) => void;
+  onPin?: (commentId: string) => void | undefined;
+  onHeart?: (commentId: string) => void | undefined;
+  onReport?: (commentId: string, reason: string) => void | undefined;
   level?: number;
 }
 
@@ -83,8 +83,8 @@ const CommentItem: React.FC<CommentItemProps> = ({
       {/* Avatar */}
       <div className="flex-shrink-0">
         <img
-          src={comment.userAvatar || '/default-avatar.png'}
-          alt={comment.userName}
+          src={comment.authorAvatar || '/default-avatar.png'}
+          alt={comment.authorName}
           className="w-10 h-10 rounded-full object-cover"
         />
       </div>
@@ -94,15 +94,15 @@ const CommentItem: React.FC<CommentItemProps> = ({
         {/* Header */}
         <div className="flex items-center gap-2 mb-1">
           <span className="font-medium text-sm text-gray-900 dark:text-white">
-            {comment.userName}
+            {comment.authorName}
           </span>
-          {comment.isChannelOwner && (
+          {isChannelOwner && (
             <span className="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-0.5 rounded text-gray-600 dark:text-gray-300">
               Creator
             </span>
           )}
           <span className="text-xs text-gray-500 dark:text-gray-400">
-            {formatDistanceToNow(new Date(comment.timestamp), { addSuffix: true })}
+            {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
           </span>
           {comment.isPinned && (
             <PinSolidIcon className="w-4 h-4 text-gray-500" />
@@ -120,15 +120,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => onReact(comment.id, 'like')}
-              className={`flex items-center gap-1 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                comment.isLiked ? 'text-blue-600' : 'text-gray-600 dark:text-gray-400'
-              }`}
+              className={`flex items-center gap-1 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400`}
             >
-              {comment.isLiked ? (
-                <HandThumbUpSolidIcon className="w-4 h-4" />
-              ) : (
-                <HandThumbUpIcon className="w-4 h-4" />
-              )}
+              <HandThumbUpIcon className="w-4 h-4" />
               {comment.likes > 0 && (
                 <span className="text-xs">{formatCount(comment.likes)}</span>
               )}
@@ -136,15 +130,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
 
             <button
               onClick={() => onReact(comment.id, 'dislike')}
-              className={`p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                comment.isDisliked ? 'text-red-600' : 'text-gray-600 dark:text-gray-400'
-              }`}
+              className={`p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400`}
             >
-              {comment.isDisliked ? (
-                <HandThumbDownSolidIcon className="w-4 h-4" />
-              ) : (
-                <HandThumbDownIcon className="w-4 h-4" />
-              )}
+              <HandThumbDownIcon className="w-4 h-4" />
             </button>
           </div>
 
@@ -295,7 +283,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   const [sortBy, setSortBy] = useState<'top' | 'newest'>('top');
   const [showCommentInput, setShowCommentInput] = useState(false);
 
-  const { data: comments, isLoading, error } = useVideoComments(videoId, { sortBy });
+  const { data: comments, loading, error } = useVideoComments(videoId, { sortBy });
   const createCommentMutation = useCreateComment();
   const reactToCommentMutation = useReactToComment();
 
@@ -303,7 +291,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     if (!newComment.trim()) return;
 
     try {
-      await createCommentMutation.mutateAsync({
+      await createCommentMutation.mutate({
         content: newComment,
         videoId,
       });
@@ -316,7 +304,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
   const handleReply = async (parentId: string, content: string) => {
     try {
-      await createCommentMutation.mutateAsync({
+      await createCommentMutation.mutate({
         content,
         videoId,
         parentId,
@@ -328,7 +316,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
   const handleReact = async (commentId: string, type: 'like' | 'dislike') => {
     try {
-      await reactToCommentMutation.mutateAsync({
+      await reactToCommentMutation.mutate({
         commentId,
         type,
       });
