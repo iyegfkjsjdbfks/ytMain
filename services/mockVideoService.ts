@@ -685,3 +685,6 @@ export const saveRecentSearch = (query: string): Promise<void> => {
   console.log('Saving recent search:', query);
   return Promise.resolve();
 };
+
+// Export the mockVideos array for use in other components
+export { mockVideos };
