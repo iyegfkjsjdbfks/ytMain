@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { VideoPlayer } from '../components/VideoPlayer';
+import { CommentSection } from '../../comments/components/CommentSection';
+import { VideoInteractions } from '../components/VideoInteractions';
 import { formatCount } from '../../../utils/numberUtils';
 import { formatDistanceToNow } from '../../../utils/dateUtils';
 import {
@@ -353,63 +355,13 @@ const WatchPage: React.FC = () => {
                   <span>{formatDistanceToNow(new Date(video.uploadDate))}</span>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  {/* Like/Dislike */}
-                  <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full">
-                    <button
-                      onClick={handleLike}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-l-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${
-                        isLiked ? 'text-red-600' : 'text-neutral-700 dark:text-neutral-300'
-                      }`}
-                    >
-                      {isLiked ? (
-                        <HandThumbUpSolidIcon className="w-5 h-5" />
-                      ) : (
-                        <HandThumbUpIcon className="w-5 h-5" />
-                      )}
-                      <span className="text-sm font-medium">{formatCount(video.likes + (isLiked ? 1 : 0))}</span>
-                    </button>
-                    <div className="w-px h-6 bg-neutral-300 dark:bg-neutral-600"></div>
-                    <button
-                      onClick={handleDislike}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-r-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${
-                        isDisliked ? 'text-red-600' : 'text-neutral-700 dark:text-neutral-300'
-                      }`}
-                    >
-                      {isDisliked ? (
-                        <HandThumbDownSolidIcon className="w-5 h-5" />
-                      ) : (
-                        <HandThumbDownIcon className="w-5 h-5" />
-                      )}
-                    </button>
-                  </div>
-
-                  {/* Share */}
-                  <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-                    <ShareIcon className="w-5 h-5" />
-                    <span className="text-sm font-medium">Share</span>
-                  </button>
-
-                  {/* Save */}
-                  <button
-                    onClick={handleSave}
-                    className={`flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${
-                      isSaved ? 'text-red-600' : 'text-neutral-700 dark:text-neutral-300'
-                    }`}
-                  >
-                    {isSaved ? (
-                      <BookmarkSolidIcon className="w-5 h-5" />
-                    ) : (
-                      <BookmarkIcon className="w-5 h-5" />
-                    )}
-                    <span className="text-sm font-medium">Save</span>
-                  </button>
-
-                  {/* More */}
-                  <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-                    <EllipsisHorizontalIcon className="w-5 h-5" />
-                  </button>
-                </div>
+                <VideoInteractions
+                  videoId={video.id}
+                  channelId={video.channel.id}
+                  initialLikes={video.likes}
+                  initialDislikes={video.dislikes}
+                  className="flex-wrap"
+                />
               </div>
 
               {/* Channel Info */}
@@ -482,148 +434,12 @@ const WatchPage: React.FC = () => {
               </div>
 
               {/* Comments Section */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-medium text-neutral-900 dark:text-white">
-                    {comments.length} Comments
-                  </h3>
-                  <select
-                    value={commentSortOrder}
-                    onChange={(e) => setCommentSortOrder(e.target.value as 'top' | 'newest')}
-                    className="bg-transparent text-sm text-neutral-700 dark:text-neutral-300 border-none focus:outline-none"
-                  >
-                    <option value="top">Top comments</option>
-                    <option value="newest">Newest first</option>
-                  </select>
-                </div>
-
-                {/* Add Comment */}
-                <form onSubmit={handleCommentSubmit} className="flex gap-3">
-                  <img
-                    src="https://picsum.photos/seed/currentuser/150/150"
-                    alt="Your avatar"
-                    className="w-8 h-8 rounded-full flex-shrink-0"
-                  />
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                      placeholder="Add a comment..."
-                      className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-600 focus:border-red-500 dark:focus:border-red-400 outline-none py-2 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400"
-                    />
-                    {newComment && (
-                      <div className="flex items-center gap-2 mt-2">
-                        <button
-                          type="button"
-                          onClick={() => setNewComment('')}
-                          className="px-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="submit"
-                          className="px-4 py-2 text-sm bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
-                        >
-                          Comment
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </form>
-
-                {/* Comments List */}
-                <div className="space-y-4">
-                  {comments.map((comment) => (
-                    <div key={comment.id} className="flex gap-3">
-                      <img
-                        src={comment.userAvatar}
-                        alt={comment.userName}
-                        className="w-8 h-8 rounded-full flex-shrink-0"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium text-sm text-neutral-900 dark:text-white">
-                            {comment.userName}
-                          </span>
-                          <span className="text-xs text-neutral-600 dark:text-neutral-400">
-                            {formatDistanceToNow(new Date(comment.timestamp))}
-                          </span>
-                          {comment.isPinned && (
-                            <span className="text-xs bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-1 rounded">
-                              Pinned
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
-                          {comment.content}
-                        </p>
-                        <div className="flex items-center gap-4">
-                          <button
-                            onClick={() => handleCommentLike(comment.id)}
-                            className={`flex items-center gap-1 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors ${
-                              comment.isLiked ? 'text-red-600' : 'text-neutral-600 dark:text-neutral-400'
-                            }`}
-                          >
-                            {comment.isLiked ? (
-                              <HandThumbUpSolidIcon className="w-4 h-4" />
-                            ) : (
-                              <HandThumbUpIcon className="w-4 h-4" />
-                            )}
-                            <span>{comment.likes}</span>
-                          </button>
-                          <button className="flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors">
-                            <HandThumbDownIcon className="w-4 h-4" />
-                          </button>
-                          <button className="text-xs text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors">
-                            Reply
-                          </button>
-                        </div>
-
-                        {/* Replies */}
-                        {comment.replies.length > 0 && (
-                          <div className="mt-3 space-y-3">
-                            {comment.replies.map((reply) => (
-                              <div key={reply.id} className="flex gap-3">
-                                <img
-                                  src={reply.userAvatar}
-                                  alt={reply.userName}
-                                  className="w-6 h-6 rounded-full flex-shrink-0"
-                                />
-                                <div className="flex-1">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <span className="font-medium text-sm text-neutral-900 dark:text-white">
-                                      {reply.userName}
-                                    </span>
-                                    <span className="text-xs text-neutral-600 dark:text-neutral-400">
-                                      {formatDistanceToNow(new Date(reply.timestamp))}
-                                    </span>
-                                  </div>
-                                  <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
-                                    {reply.content}
-                                  </p>
-                                  <div className="flex items-center gap-4">
-                                    <button className="flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors">
-                                      <HandThumbUpIcon className="w-4 h-4" />
-                                      <span>{reply.likes}</span>
-                                    </button>
-                                    <button className="flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors">
-                                      <HandThumbDownIcon className="w-4 h-4" />
-                                    </button>
-                                    <button className="text-xs text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-2 py-1 rounded transition-colors">
-                                      Reply
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CommentSection
+                videoId={video.id}
+                channelId={video.channel.id}
+                isChannelOwner={false} // This should be determined based on current user
+                className="mt-6"
+              />
             </div>
           </div>
 
