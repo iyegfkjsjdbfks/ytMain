@@ -9,6 +9,7 @@ import VideoPlusIcon from './icons/VideoPlusIcon';
 import BellIcon from './icons/BellIcon';
 import UserMenu from './UserMenu';
 import NotificationsPanel from './NotificationsPanel';
+import NotificationSystem from './NotificationSystem';
 import { useAuth } from '../contexts/AuthContext';
 import Button from './forms/Button';
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
@@ -249,26 +250,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             )}
         </div>
 
-        <div className="relative">
-            <button 
-              ref={notificationsButtonRef}
-              onClick={toggleNotificationsPanel}
-              className={`p-2 rounded-full text-neutral-700 dark:text-neutral-100 transition-all duration-150 ease-in-out
-                ${isNotificationsPanelOpen ? 'bg-neutral-300 dark:bg-neutral-600 scale-95' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}
-              `}
-              aria-label="Notifications"
-              aria-expanded={isNotificationsPanelOpen}
-              aria-haspopup="true"
-              aria-controls="notifications-panel" 
-              id="notifications-button"
-              title="Notifications"
-            >
-              <BellIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-            </button>
-            <div ref={notificationsPanelRef}> 
-                <NotificationsPanel isOpen={isNotificationsPanelOpen} onClose={handleCloseNotificationsPanel} />
-            </div>
-        </div>
+        {/* Enhanced Notification System */}
+        <NotificationSystem className="relative" />
 
         <AuthenticatedUserSection 
           userMenuRef={userMenuRef}
