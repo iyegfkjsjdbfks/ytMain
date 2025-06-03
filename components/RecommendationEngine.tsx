@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ClockIcon, EyeIcon, HandThumbUpIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from '../utils/dateUtils';
-
-interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
-  channelName: string;
-  channelAvatar: string;
-  views: string;
-  uploadedAt: string;
-  duration: string;
-  category: string;
-  tags: string[];
-  description: string;
-  likes: number;
-  dislikes: number;
-}
+import { mockVideos } from '../services/mockVideoService';
+import { Video } from '../types';
 
 interface UserPreferences {
   watchHistory: string[];
@@ -132,10 +118,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   };
 
   const generatePersonalizedRecommendations = async (): Promise<Video[]> => {
-    const mockVideos = generateMockVideos();
+    // Use actual videos from mockVideoService instead of generating fake ones
+    const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
     
     // Score videos based on user preferences
-    const scoredVideos = mockVideos.map(video => {
+    const scoredVideos = availableVideos.map(video => {
       let score = 0;
       
       // Boost videos from subscribed channels
@@ -148,24 +135,18 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         score += 30;
       }
       
-      // Boost videos with similar tags to watched videos
-      const watchedVideoTags = getWatchedVideoTags();
-      const commonTags = video.tags.filter(tag => watchedVideoTags.includes(tag));
-      score += commonTags.length * 10;
-      
-      // Boost popular videos
-      const viewCount = parseInt(video.views.replace(/[^0-9]/g, ''));
-      score += Math.log10(viewCount) * 5;
-      
-      // Boost recent videos
-      const daysSinceUpload = (Date.now() - new Date(video.uploadedAt).getTime()) / (1000 * 60 * 60 * 24);
-      if (daysSinceUpload < 7) score += 20;
-      else if (daysSinceUpload < 30) score += 10;
-      
-      // Penalize already watched videos
-      if (userPreferences.watchHistory.includes(video.id)) {
-        score -= 100;
+      // Boost recently uploaded videos (parse the uploadedAt string)
+      const daysAgo = parseInt(video.uploadedAt.match(/\d+/)?.[0] || '30');
+      if (daysAgo < 7) {
+        score += 20;
       }
+      
+      // Boost videos with high view count
+      const viewCount = parseInt(video.views.replace(/[^0-9]/g, '')) || 0;
+      score += Math.log10(viewCount + 1) * 5;
+      
+      // Add some randomness
+      score += Math.random() * 10;
       
       return { ...video, score };
     });
@@ -176,18 +157,34 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   };
 
   const generateTrendingRecommendations = async (): Promise<Video[]> => {
-    const mockVideos = generateMockVideos();
+    // Use actual videos from mockVideoService
+    const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
     
-    return mockVideos
+    return availableVideos
       .sort((a, b) => {
-        const aViews = parseInt(a.views.replace(/[^0-9]/g, ''));
-        const bViews = parseInt(b.views.replace(/[^0-9]/g, ''));
-        const aDays = (Date.now() - new Date(a.uploadedAt).getTime()) / (1000 * 60 * 60 * 24);
-        const bDays = (Date.now() - new Date(b.uploadedAt).getTime()) / (1000 * 60 * 60 * 24);
+        const aViews = parseInt(a.views.replace(/[^0-9]/g, '')) || 0;
+        const bViews = parseInt(b.views.replace(/[^0-9]/g, '')) || 0;
         
-        // Trending score: views per day
-        const aScore = aViews / Math.max(aDays, 1);
-        const bScore = bViews / Math.max(bDays, 1);
+        // Parse days from uploadedAt string (e.g., "2 weeks ago", "3 days ago")
+        const aDaysMatch = a.uploadedAt.match(/(\d+)\s+(day|week|month)/);
+        const bDaysMatch = b.uploadedAt.match(/(\d+)\s+(day|week|month)/);
+        
+        let aDays = 30; // default
+        let bDays = 30; // default
+        
+        if (aDaysMatch) {
+          const [, num, unit] = aDaysMatch;
+          aDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+        }
+        
+        if (bDaysMatch) {
+          const [, num, unit] = bDaysMatch;
+          bDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+        }
+        
+        // Combine views and recency for trending score
+        const aScore = aViews / Math.max(1, aDays);
+        const bScore = bViews / Math.max(1, bDays);
         
         return bScore - aScore;
       })
@@ -197,35 +194,39 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generateSimilarRecommendations = async (): Promise<Video[]> => {
     if (!currentVideoId) return generatePersonalizedRecommendations();
     
-    const mockVideos = generateMockVideos();
+    // Use actual videos from mockVideoService
+    const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
     const currentVideo = mockVideos.find(v => v.id === currentVideoId);
     
     if (!currentVideo) return generatePersonalizedRecommendations();
     
-    return mockVideos
-      .filter(video => video.id !== currentVideoId)
+    return availableVideos
       .map(video => {
-        let similarity = 0;
+        let similarityScore = 0;
         
-        // Same category
-        if (video.category === currentVideo.category) similarity += 40;
+        // Same category gets high score
+        if (video.category === currentVideo.category) {
+          similarityScore += 50;
+        }
         
-        // Same channel
-        if (video.channelName === currentVideo.channelName) similarity += 30;
-        
-        // Common tags
-        const commonTags = video.tags.filter(tag => currentVideo.tags.includes(tag));
-        similarity += commonTags.length * 15;
+        // Same channel gets medium score
+        if (video.channelName === currentVideo.channelName) {
+          similarityScore += 30;
+        }
         
         // Similar duration
-        const currentDuration = parseDuration(currentVideo.duration);
-        const videoDuration = parseDuration(video.duration);
+        const currentDuration = parseInt(currentVideo.duration.split(':')[0]);
+        const videoDuration = parseInt(video.duration.split(':')[0]);
         const durationDiff = Math.abs(currentDuration - videoDuration);
-        if (durationDiff < 120) similarity += 10; // Within 2 minutes
+        if (durationDiff < 5) similarityScore += 15;
         
-        return { ...video, similarity };
+        // Add randomness for variety
+        similarityScore += Math.random() * 10;
+        
+        return { ...video, similarityScore };
       })
-      .sort((a, b) => b.similarity - a.similarity);
+      .sort((a, b) => (b as any).similarityScore - (a as any).similarityScore)
+      .slice(0, maxRecommendations);
   };
 
   const getWatchedVideoTags = (): string[] => {
@@ -241,83 +242,9 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     return 0;
   };
 
-  const generateMockVideos = (): Video[] => {
-    const categories = ['Technology', 'Gaming', 'Music', 'Cooking', 'Fitness', 'Education', 'News', 'Entertainment'];
-    const channels = [
-      { name: 'TechReview', avatar: 'https://picsum.photos/seed/techreview/40/40' },
-      { name: 'GameMaster', avatar: 'https://picsum.photos/seed/gamemaster/40/40' },
-      { name: 'MusicVibes', avatar: 'https://picsum.photos/seed/musicvibes/40/40' },
-      { name: 'CookingPro', avatar: 'https://picsum.photos/seed/cookingpro/40/40' },
-      { name: 'FitnessGuru', avatar: 'https://picsum.photos/seed/fitnessguru/40/40' }
-    ];
-    
-    return Array.from({ length: 50 }, (_, i) => {
-      const category = categories[Math.floor(Math.random() * categories.length)];
-      const channel = channels[Math.floor(Math.random() * channels.length)];
-      const views = Math.floor(Math.random() * 10000000);
-      const likes = Math.floor(views * (0.01 + Math.random() * 0.05));
-      
-      return {
-        id: `rec_${i + 1}`,
-        title: generateVideoTitle(category),
-        thumbnail: `https://picsum.photos/seed/rec${i + 1}/320/180`,
-        channelName: channel.name,
-        channelAvatar: channel.avatar,
-        views: formatViews(views),
-        uploadedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-        duration: generateDuration(),
-        category,
-        tags: generateTags(category),
-        description: `This is a ${category.toLowerCase()} video about ${generateVideoTitle(category).toLowerCase()}`,
-        likes,
-        dislikes: Math.floor(likes * 0.1)
-      };
-    });
-  };
+  // Removed generateMockVideos function - now using actual videos from mockVideoService
 
-  const generateVideoTitle = (category: string): string => {
-    const titles = {
-      Technology: ['Latest iPhone Review', 'AI Revolution Explained', 'Best Laptops 2024', 'Tech News Update'],
-      Gaming: ['Epic Gaming Moments', 'Game Review', 'Gaming Tips & Tricks', 'Live Gaming Session'],
-      Music: ['New Music Release', 'Behind the Scenes', 'Music Production Tips', 'Artist Interview'],
-      Cooking: ['Easy Recipe Tutorial', 'Cooking Masterclass', 'Kitchen Tips', 'Food Review'],
-      Fitness: ['Workout Routine', 'Fitness Tips', 'Healthy Lifestyle', 'Exercise Tutorial'],
-      Education: ['Learn Something New', 'Educational Content', 'Study Tips', 'Knowledge Sharing'],
-      News: ['Breaking News', 'News Analysis', 'Current Events', 'News Update'],
-      Entertainment: ['Funny Moments', 'Entertainment News', 'Celebrity Interview', 'Fun Content']
-    };
-    
-    const categoryTitles = titles[category as keyof typeof titles] || titles.Entertainment;
-    return categoryTitles[Math.floor(Math.random() * categoryTitles.length)];
-  };
-
-  const generateTags = (category: string): string[] => {
-    const tagMap = {
-      Technology: ['tech', 'review', 'gadgets', 'innovation', 'software'],
-      Gaming: ['gaming', 'gameplay', 'review', 'tips', 'entertainment'],
-      Music: ['music', 'song', 'artist', 'album', 'entertainment'],
-      Cooking: ['cooking', 'recipe', 'food', 'kitchen', 'tutorial'],
-      Fitness: ['fitness', 'workout', 'health', 'exercise', 'lifestyle'],
-      Education: ['education', 'learning', 'tutorial', 'knowledge', 'study'],
-      News: ['news', 'current events', 'politics', 'world', 'breaking'],
-      Entertainment: ['entertainment', 'funny', 'comedy', 'fun', 'viral']
-    };
-    
-    const categoryTags = tagMap[category as keyof typeof tagMap] || tagMap.Entertainment;
-    return categoryTags.slice(0, Math.floor(Math.random() * 3) + 2);
-  };
-
-  const generateDuration = (): string => {
-    const minutes = Math.floor(Math.random() * 60) + 1;
-    const seconds = Math.floor(Math.random() * 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  const formatViews = (views: number): string => {
-    if (views >= 1000000) return `${(views / 1000000).toFixed(1)}M views`;
-    if (views >= 1000) return `${(views / 1000).toFixed(1)}K views`;
-    return `${views} views`;
-  };
+  // Removed helper functions for generating mock data - now using actual videos from mockVideoService
 
   const handleVideoClick = (videoId: string) => {
     // Track video selection for future recommendations
@@ -395,7 +322,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           >
             <div className="relative flex-shrink-0">
               <img
-                src={video.thumbnail}
+                src={video.thumbnailUrl}
                 alt={video.title}
                 className="w-40 h-24 object-cover rounded-lg"
               />
@@ -411,7 +338,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
               
               <div className="flex items-center space-x-2 mb-1">
                 <img
-                  src={video.channelAvatar}
+                  src={video.channelAvatarUrl}
                   alt={video.channelName}
                   className="w-6 h-6 rounded-full"
                 />
