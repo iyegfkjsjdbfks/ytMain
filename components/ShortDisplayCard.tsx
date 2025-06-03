@@ -10,9 +10,14 @@ import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 interface ShortDisplayCardProps {
   short: Short;
   isLiked?: boolean;
+  isFollowed?: boolean;
   onLike?: (shortId: string) => void;
+  onFollow?: (channelName: string) => void;
   onComment?: (shortId: string) => void;
   onShare?: (shortId: string) => void;
+  onVideoChange?: () => void;
+  onVideoEnd?: () => void;
+  isActive?: boolean;
 }
 
 // Video-specific components
@@ -54,16 +59,41 @@ interface VideoInfoProps {
   title: string;
   channelName: string;
   views: string;
+  isFollowed?: boolean;
+  onFollow?: () => void;
 }
 
-const VideoInfo: React.FC<VideoInfoProps> = ({ title, channelName, views }) => (
+const VideoInfo: React.FC<VideoInfoProps> = ({
+  title,
+  channelName,
+  views,
+  isFollowed = false,
+  onFollow
+}) => (
   <div className="flex-1 mr-4 pointer-events-auto">
     <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
       {title}
     </h3>
-    <p className="text-gray-300 text-xs">
-      {channelName} • {views}
-    </p>
+    <div className="flex items-center justify-between">
+      <p className="text-gray-300 text-xs">
+        {channelName} • {views}
+      </p>
+      {onFollow && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onFollow();
+          }}
+          className={`ml-2 px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+            isFollowed
+              ? 'bg-gray-600 text-white hover:bg-gray-700'
+              : 'bg-white text-black hover:bg-gray-200'
+          }`}
+        >
+          {isFollowed ? 'Following' : 'Follow'}
+        </button>
+      )}
+    </div>
   </div>
 );
 
@@ -156,12 +186,17 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
 
 
 // Main component
-const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({ 
-  short, 
+const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
+  short,
   isLiked = false,
-  onLike, 
-  onComment, 
-  onShare 
+  isFollowed = false,
+  onLike,
+  onFollow,
+  onComment,
+  onShare,
+  onVideoChange,
+  onVideoEnd,
+  isActive = false
 }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
@@ -228,6 +263,21 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     }
   };
 
+  const handleFollow = () => {
+    onFollow?.(short.channelName);
+  };
+
+  const handleVideoEnd = () => {
+    onVideoEnd?.();
+  };
+
+  // Notify parent when video becomes active
+  React.useEffect(() => {
+    if (isActive && onVideoChange) {
+      onVideoChange();
+    }
+  }, [isActive, onVideoChange]);
+
   return (
     <div 
       ref={intersectionRef}
@@ -256,7 +306,10 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         onDurationChange={events.onDurationChange}
         onVolumeChange={events.onVolumeChange}
         onError={events.onError}
-        onEnded={events.onEnded}
+        onEnded={(e) => {
+          events.onEnded(e);
+          handleVideoEnd();
+        }}
         onProgress={events.onProgress}
         onWaiting={events.onWaiting}
         onCanPlayThrough={events.onCanPlayThrough}
@@ -282,10 +335,12 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
       {/* Video Info Overlay */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pointer-events-none">
         <div className="flex items-end justify-between">
-          <VideoInfo 
+          <VideoInfo
             title={short.title}
             channelName={short.channelName}
             views={short.views}
+            isFollowed={isFollowed}
+            onFollow={onFollow ? handleFollow : undefined}
           />
           
           {/* Action Buttons */}

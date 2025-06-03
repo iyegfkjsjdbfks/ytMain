@@ -654,7 +654,134 @@ export const updateUserPlaylistDetails = (id: string, details: Partial<UserPlayl
 };
 
 export const getSubscribedChannelNames = (): Promise<string[]> => {
-  return Promise.resolve(['Nature Explorers', 'TechLevelUp', 'CookingMaster']);
+  try {
+    const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    const channelNames = Object.values(subscriptions).map((sub: any) => sub.channelName);
+
+    // If no subscriptions exist, create some default ones for demo
+    if (channelNames.length === 0) {
+      const defaultSubscriptions = {
+        'channel1': {
+          channelName: 'Nature Explorers',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel1/120/120',
+          subscriberCount: '2.5M',
+          isSubscribed: true,
+          notificationsEnabled: true,
+          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        'channel2': {
+          channelName: 'TechLevelUp',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel2/120/120',
+          subscriberCount: '1.8M',
+          isSubscribed: true,
+          notificationsEnabled: false,
+          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        'channel3': {
+          channelName: 'Chef Studio',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel3/120/120',
+          subscriberCount: '950K',
+          isSubscribed: true,
+          notificationsEnabled: true,
+          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+        }
+      };
+      localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(defaultSubscriptions));
+      return Promise.resolve(Object.values(defaultSubscriptions).map(sub => sub.channelName));
+    }
+
+    return Promise.resolve(channelNames);
+  } catch (error) {
+    console.error('Error getting subscribed channel names:', error);
+    return Promise.resolve(['Nature Explorers', 'TechLevelUp', 'Chef Studio']);
+  }
+};
+
+export const getSubscribedChannels = (): Promise<any[]> => {
+  try {
+    // Ensure we have default subscriptions first
+    const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+
+    // If no subscriptions exist, create default ones
+    if (Object.keys(subscriptions).length === 0) {
+      const defaultSubscriptions = {
+        'channel1': {
+          channelName: 'Nature Explorers',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel1/120/120',
+          subscriberCount: '2.5M',
+          isSubscribed: true,
+          notificationsEnabled: true,
+          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        'channel2': {
+          channelName: 'TechLevelUp',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel2/120/120',
+          subscriberCount: '1.8M',
+          isSubscribed: true,
+          notificationsEnabled: false,
+          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        'channel3': {
+          channelName: 'Chef Studio',
+          channelAvatarUrl: 'https://picsum.photos/seed/channel3/120/120',
+          subscriberCount: '950K',
+          isSubscribed: true,
+          notificationsEnabled: true,
+          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+        }
+      };
+      localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(defaultSubscriptions));
+
+      const channels = Object.entries(defaultSubscriptions).map(([id, data]: [string, any]) => ({
+        id,
+        name: data.channelName,
+        avatar: data.channelAvatarUrl,
+        subscribers: data.subscriberCount,
+        notificationsEnabled: data.notificationsEnabled || false,
+        subscribedAt: data.subscribedAt
+      }));
+      return Promise.resolve(channels);
+    }
+
+    const channels = Object.entries(subscriptions).map(([id, data]: [string, any]) => ({
+      id,
+      name: data.channelName,
+      avatar: data.channelAvatarUrl,
+      subscribers: data.subscriberCount,
+      notificationsEnabled: data.notificationsEnabled || false,
+      subscribedAt: data.subscribedAt
+    }));
+    return Promise.resolve(channels);
+  } catch (error) {
+    console.error('Error getting subscribed channels:', error);
+    return Promise.resolve([]);
+  }
+};
+
+export const updateSubscriptionNotifications = (channelId: string, enabled: boolean): Promise<void> => {
+  try {
+    const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    if (subscriptions[channelId]) {
+      subscriptions[channelId].notificationsEnabled = enabled;
+      localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+    }
+    return Promise.resolve();
+  } catch (error) {
+    console.error('Error updating subscription notifications:', error);
+    return Promise.reject(error);
+  }
+};
+
+export const unsubscribeFromChannel = (channelId: string): Promise<void> => {
+  try {
+    const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
+    delete subscriptions[channelId];
+    localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
+    return Promise.resolve();
+  } catch (error) {
+    console.error('Error unsubscribing from channel:', error);
+    return Promise.reject(error);
+  }
 };
 
 export const getSearchSuggestions = (query: string): Promise<string[]> => {
