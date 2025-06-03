@@ -7,8 +7,7 @@ import {
   HeartIcon,
   ChatBubbleLeftIcon,
   ArrowTrendingUpIcon,
-  ArrowTrendingDownIcon,
-  PlayIcon,
+
   CalendarDaysIcon,
   CurrencyDollarIcon,
   GlobeAltIcon,
@@ -16,8 +15,20 @@ import {
   ComputerDesktopIcon,
   TvIcon
 } from '@heroicons/react/24/outline';
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
+// Note: recharts and unifiedUtils imports removed due to missing dependencies
+// import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
+
+// Temporary utility functions
+const formatNumber = (num: number): string => {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+  if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+  return num.toString();
+};
+
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString();
+};
 
 interface DashboardStats {
   totalViews: number;
@@ -164,7 +175,7 @@ const DashboardPage: React.FC = () => {
       ];
 
       const mockAnalyticsData: AnalyticsData[] = Array.from({ length: 30 }, (_, i) => ({
-        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
         views: Math.floor(Math.random() * 5000) + 1000,
         watchTime: Math.floor(Math.random() * 2000) + 500,
         subscribers: Math.floor(Math.random() * 100) + 10,

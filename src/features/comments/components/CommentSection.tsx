@@ -18,6 +18,17 @@ import { formatDistanceToNow } from 'date-fns';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
 
+// Utility function to format numbers
+const formatCount = (count: number): string => {
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(1) + 'M';
+  }
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + 'K';
+  }
+  return count.toString();
+};
+
 interface CommentSectionProps {
   videoId: string;
   channelId: string;
@@ -421,10 +432,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
               </button>
               <button
                 onClick={handleCommentSubmit}
-                disabled={!newComment.trim() || createCommentMutation.isLoading}
+                disabled={!newComment.trim() || createCommentMutation.loading}
                 className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
               >
-                {createCommentMutation.isLoading ? 'Posting...' : 'Comment'}
+                {createCommentMutation.loading ? 'Posting...' : 'Comment'}
               </button>
             </div>
           )}
@@ -432,7 +443,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
       </div>
 
       {/* Comments List */}
-      {isLoading ? (
+      {loading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex gap-3 animate-pulse">

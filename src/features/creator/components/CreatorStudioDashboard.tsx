@@ -14,6 +14,19 @@ import {
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 
+// Icon wrapper components to fix type compatibility
+const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
+  <VideoCameraIcon className={className} />
+);
+
+const PlayIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
+  <PlayIcon className={className} />
+);
+
+const ArrowTrendingUpIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
+  <ArrowTrendingUpIcon className={className} />
+);
+
 interface DashboardMetrics {
   views: {
     total: number;
@@ -150,7 +163,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       id: '1',
       title: 'Upload Video',
       description: 'Upload a new video to your channel',
-      icon: VideoCameraIcon,
+      icon: VideoCameraIconWrapper,
       action: () => console.log('Upload video'),
       color: 'bg-blue-500',
     },
@@ -158,7 +171,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       id: '2',
       title: 'Go Live',
       description: 'Start a live stream',
-      icon: PlayIcon,
+      icon: PlayIconWrapper,
       action: () => console.log('Go live'),
       color: 'bg-red-500',
     },
@@ -166,7 +179,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       id: '3',
       title: 'Create Playlist',
       description: 'Organize your videos',
-      icon: PlayIcon,
+      icon: PlayIconWrapper,
       action: () => console.log('Create playlist'),
       color: 'bg-green-500',
     },
@@ -174,7 +187,7 @@ export const CreatorStudioDashboard: React.FC = () => {
       id: '4',
       title: 'Analytics',
       description: 'View detailed analytics',
-      icon: ArrowTrendingUpIcon,
+      icon: ArrowTrendingUpIconWrapper,
       action: () => console.log('View analytics'),
       color: 'bg-purple-500',
     },
