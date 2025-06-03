@@ -430,12 +430,7 @@ const ShortsPage: React.FC = () => {
         )}
       </div>
 
-      {/* Progress Indicator */}
-      <ShortsProgressIndicator
-        currentIndex={currentVideoIndex}
-        totalCount={filteredShorts.length}
-        className="absolute top-20 right-4 z-20"
-      />
+
 
 
 
