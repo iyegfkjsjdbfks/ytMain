@@ -98,23 +98,32 @@ export const generateMockVideo = (id?: string): Video => {
   const channelIndex = randomInt(0, mockChannels.length - 1);
   const titleIndex = randomInt(0, videoTitles.length - 1);
   const visibilityOptions: VideoVisibility[] = ['public', 'unlisted', 'private'];
-  
+
+  // Ensure we have valid indices
+  const selectedChannel = mockChannels[channelIndex];
+  const selectedTitle = videoTitles[titleIndex];
+  const selectedVisibility = visibilityOptions[randomInt(0, visibilityOptions.length - 1)];
+
+  if (!selectedChannel || !selectedTitle || !selectedVisibility) {
+    throw new Error('Failed to generate mock video: invalid data');
+  }
+
   return {
     id: id || `video-${Date.now()}-${randomInt(1000, 9999)}`,
-    title: videoTitles[titleIndex],
-    description: `This is a description for "${videoTitles[titleIndex]}". It provides additional context and information about the video content.`,
+    title: selectedTitle,
+    description: `This is a description for "${selectedTitle}". It provides additional context and information about the video content.`,
     thumbnailUrl: `https://picsum.photos/seed/${randomInt(1, 1000)}/640/360`,
     duration: randomInt(120, 1200),
     views: randomInt(1000, 1000000),
     likes: randomInt(100, 50000),
     createdAt: randomDate(),
-    publishedAt: Math.random() > 0.2 ? randomDate() : undefined,
-    visibility: visibilityOptions[randomInt(0, visibilityOptions.length - 1)],
-    channel: mockChannels[channelIndex],
+    publishedAt: Math.random() > 0.2 ? randomDate() : randomDate(), // Always provide a value
+    visibility: selectedVisibility,
+    channel: selectedChannel,
     // Backward compatibility
-    channelId: mockChannels[channelIndex].id,
-    channelTitle: mockChannels[channelIndex].name,
-    channelThumbnail: mockChannels[channelIndex].avatarUrl
+    channelId: selectedChannel.id,
+    channelTitle: selectedChannel.name,
+    channelThumbnail: selectedChannel.avatarUrl
   };
 };
 

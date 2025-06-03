@@ -22,19 +22,62 @@ export interface Video {
   id: string;
   title: string;
   thumbnailUrl: string;
+  thumbnail?: string; // Alternative to thumbnailUrl
   channelName: string;
   channelAvatarUrl: string;
+  channelAvatar?: string; // Alternative to channelAvatarUrl
   views: string;
+  viewCount?: number; // Alternative to views as string
   uploadedAt: string;
   duration: string;
   videoUrl: string;
   description: string;
-  category: string; // Added category
+  category: string;
   isShort?: boolean;
-  // Optional properties for live streams
   isLiveNow?: boolean;
   scheduledStartTime?: string; // ISO date string
   viewerCount?: string;
+  likes?: number;
+  dislikes?: number;
+  isLiked?: boolean;
+  isDisliked?: boolean;
+  isSaved?: boolean;
+  commentCount?: number;
+  tags?: string[];
+  privacyStatus?: 'public' | 'private' | 'unlisted';
+  publishedAt?: string; // ISO date string
+  channelId?: string;
+  // Additional metadata
+  aspectRatio?: number;
+  definition?: 'hd' | 'sd';
+  dimension?: '2d' | '3d';
+  caption?: boolean;
+  licensedContent?: boolean;
+  contentRating?: Record<string, any>;
+  projection?: 'rectangular' | '360' | '3d';
+  // Engagement
+  likeCount?: number;
+  favoriteCount?: number;
+  // Status
+  uploadStatus?: 'deleted' | 'failed' | 'processed' | 'rejected' | 'uploaded';
+  failureReason?: string;
+  rejectionReason?: string;
+  // Monetization
+  monetizationDetails?: {
+    access?: {
+      allowed: boolean;
+      exception?: string[];
+    };
+    monetizationStatus?: 'monetized' | 'ineligible' | 'limited';
+    adFormats?: string[];
+  };
+  // Localization
+  defaultAudioLanguage?: string;
+  defaultLanguage?: string;
+  localized?: {
+    title: string;
+    description: string;
+  };
 }
 
 export interface Channel {
@@ -104,6 +147,38 @@ export interface UploadProgress {
 }
 
 // Type alias for shorts (videos with isShort: true)
-export type Short = Video & {
+export type Short = Omit<Video, 'isShort'> & {
   isShort: true;
+  isVertical?: boolean;
+  // Additional Short-specific properties
+  musicInfo?: {
+    title: string;
+    artist: string;
+    coverUrl?: string;
+  };
+  // Engagement metrics specific to Shorts
+  shares?: number;
+  saves?: number;
+  // Shorts-specific features
+  hasCaptions?: boolean;
+  hasAudio?: boolean;
+  // Analytics
+  viewDuration?: number; // Average view duration in seconds
+  swipeAwayRate?: number; // Percentage of viewers who swiped away
+  // Additional metadata
+  createdTime?: string;
+  modifiedTime?: string;
+  // Privacy and status
+  visibility?: 'public' | 'private' | 'unlisted';
+  // Monetization
+  isMonetized?: boolean;
+  // Interactive elements
+  hasInteractiveElements?: boolean;
+  // Thumbnail variants
+  thumbnailOverlays?: {
+    type: 'text' | 'image' | 'time';
+    content: string;
+    position: 'top' | 'bottom' | 'left' | 'right';
+    style?: Record<string, any>;
+  }[];
 };

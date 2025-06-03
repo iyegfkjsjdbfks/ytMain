@@ -16,7 +16,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   // Match "X unit(s) ago"
   const parts = lowerDate.match(/(\d+)\s+(hour|day|week|month|year)s?\s+ago/);
   
-  if (parts) {
+  if (parts && parts[1] && parts[2]) {
     const quantity = parseInt(parts[1], 10);
     const unit = parts[2];
     let msAgo = 0;

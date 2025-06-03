@@ -1,4 +1,12 @@
-import { Video, VideoMetrics } from '../types';
+import { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
+
+interface VideoInteractionResponse {
+  isLiked: boolean;
+  isDisliked: boolean;
+  isSaved: boolean;
+  likes: number;
+  dislikes: number;
+}
 
 /**
  * Service for handling video-related API requests
@@ -85,6 +93,116 @@ class VideoService {
     
     if (!response.ok) {
       throw new Error(`Failed to search videos: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Toggle like on a video
+   */
+  async toggleLike(videoId: string): Promise<VideoInteractionResponse> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/like`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to toggle like: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Toggle dislike on a video
+   */
+  async toggleDislike(videoId: string): Promise<VideoInteractionResponse> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/dislike`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to toggle dislike: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Toggle save on a video
+   */
+  async toggleSave(videoId: string): Promise<VideoInteractionResponse> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to toggle save: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Report a video
+   */
+  async reportVideo(videoId: string, reason: string): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/report`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ reason }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to report video: ${response.statusText}`);
+    }
+  }
+
+  /**
+   * Get video interactions (likes, dislikes, saves)
+   */
+  async getVideoInteractions(videoId: string): Promise<VideoInteractionResponse> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/interactions`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to get video interactions: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Get video statistics
+   */
+  async getVideoStats(videoId: string): Promise<VideoStats> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/stats`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to get video stats: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
+  /**
+   * Get video engagement metrics
+   */
+  async getVideoEngagement(videoId: string): Promise<VideoEngagement> {
+    const response = await fetch(`${this.baseUrl}/${videoId}/engagement`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to get video engagement: ${response.statusText}`);
     }
     
     return response.json();

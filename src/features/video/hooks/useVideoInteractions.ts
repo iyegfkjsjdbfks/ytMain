@@ -65,7 +65,7 @@ export function useVideoInteractions(
         dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes,
       }));
     },
-    onError: (error, variables, context) => {
+    onError: () => {
       // Revert optimistic update on error
       if (interactionData) {
         setState({
@@ -95,7 +95,7 @@ export function useVideoInteractions(
         likes: prev.isLiked ? prev.likes - 1 : prev.likes,
       }));
     },
-    onError: (error, variables, context) => {
+    onError: () => {
       // Revert optimistic update on error
       if (interactionData) {
         setState({
@@ -122,7 +122,7 @@ export function useVideoInteractions(
         isSaved: !prev.isSaved,
       }));
     },
-    onError: (error, variables, context) => {
+    onError: () => {
       // Revert optimistic update on error
       if (interactionData) {
         setState({

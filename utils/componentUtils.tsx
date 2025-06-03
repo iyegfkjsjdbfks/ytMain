@@ -13,38 +13,38 @@ export const conditionalRender = (
 };
 
 // Safe array rendering with key generation
-export const safeArrayRender = <T>(
+export function safeArrayRender<T>(
   items: T[] | undefined | null,
   renderItem: (item: T, index: number) => ReactNode,
   keyExtractor?: (item: T, index: number) => string | number
-): ReactNode[] => {
+): ReactNode[] {
   if (!items || !Array.isArray(items)) return [];
   
   return items.map((item, index) => {
     const key = keyExtractor ? keyExtractor(item, index) : index;
-    return (
-      <div key={key}>
-        {renderItem(item, index)}
-      </div>
+    return React.createElement(
+      'div',
+      { key },
+      renderItem(item, index)
     );
   });
-};
+}
 
 // Common loading state wrapper
-export const withLoadingState = (
+export function withLoadingState(
   isLoading: boolean,
   content: ReactNode,
   loadingComponent: ReactNode
-): ReactNode => {
+): ReactNode {
   return isLoading ? loadingComponent : content;
 };
 
 // Error boundary wrapper utility
-export const withErrorBoundary = (
+export function withErrorBoundary(
   content: ReactNode,
   errorComponent: ReactNode,
   hasError: boolean
-): ReactNode => {
+): ReactNode {
   return hasError ? errorComponent : content;
 };
 
@@ -240,10 +240,12 @@ export const isExternalUrl = (url: string): boolean => {
 };
 
 // Performance utilities
-export const debounce = <T extends (...args: any[]) => any>(
+type AnyFunction = (...args: any[]) => any;
+
+export function debounce<T extends AnyFunction>(
   func: T,
   wait: number
-): ((...args: Parameters<T>) => void) => {
+): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
   
   return (...args: Parameters<T>) => {
@@ -252,10 +254,10 @@ export const debounce = <T extends (...args: any[]) => any>(
   };
 };
 
-export const throttle = <T extends (...args: any[]) => any>(
+export function throttle<T extends AnyFunction>(
   func: T,
   limit: number
-): ((...args: Parameters<T>) => void) => {
+): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
   
   return (...args: Parameters<T>) => {
@@ -295,7 +297,7 @@ export const safeLocalStorage = {
     }
   },
   
-  getJSON: <T>(key: string): T | null => {
+  getJSON: <T,>(key: string): T | null => {
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -304,7 +306,7 @@ export const safeLocalStorage = {
     }
   },
   
-  setJSON: <T>(key: string, value: T): boolean => {
+  setJSON: <T,>(key: string, value: T): boolean => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
       return true;

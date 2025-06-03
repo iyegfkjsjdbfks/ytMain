@@ -7,7 +7,6 @@ import {
   EllipsisHorizontalIcon,
   FlagIcon,
   ClipboardDocumentIcon,
-  LinkIcon,
 } from '@heroicons/react/24/outline';
 import {
   HandThumbUpIcon as HandThumbUpSolidIcon,
@@ -155,7 +154,6 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
 export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
   videoId,
-  channelId,
   initialLikes = 0,
   initialDislikes = 0,
   className = '',
@@ -171,7 +169,6 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
     isDisliked,
     isSaved,
     likes,
-    dislikes,
     isLoading,
     toggleLike,
     toggleDislike,
@@ -232,7 +229,7 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
       {/* Like/Dislike Group */}
       <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full">
         <button
-          onClick={toggleLike}
+          onClick={() => toggleLike()}
           disabled={isLoading}
           className={`${buttonClasses} rounded-l-full border-r border-gray-200 dark:border-gray-700 ${
             isLiked
@@ -249,7 +246,7 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
         </button>
 
         <button
-          onClick={toggleDislike}
+          onClick={() => toggleDislike()}
           disabled={isLoading}
           className={`${buttonClasses} rounded-r-full ${
             isDisliked
@@ -276,7 +273,7 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
 
       {/* Save Button */}
       <button
-        onClick={toggleSave}
+        onClick={() => toggleSave()}
         disabled={isLoading}
         className={`${buttonClasses} ${
           isSaved

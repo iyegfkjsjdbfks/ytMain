@@ -159,15 +159,19 @@ export const VideoEditor: React.FC = () => {
       if (clipIndex === -1) return prev;
 
       const originalClip = prev.clips[clipIndex];
+      if (!originalClip) return prev; // Additional safety check
+
       const firstPart: VideoClip = {
         ...originalClip,
         id: `${clipId}_1`,
+        name: originalClip.name || `${originalClip.name || 'Clip'} Part 1`,
         endTime: splitTime,
         duration: splitTime - originalClip.startTime,
       };
       const secondPart: VideoClip = {
         ...originalClip,
         id: `${clipId}_2`,
+        name: originalClip.name || `${originalClip.name || 'Clip'} Part 2`,
         startTime: splitTime,
         duration: originalClip.endTime - splitTime,
       };

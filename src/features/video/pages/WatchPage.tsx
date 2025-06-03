@@ -6,19 +6,11 @@ import { VideoInteractions } from '../components/VideoInteractions';
 import { formatCount } from '../../../utils/numberUtils';
 import { formatDistanceToNow } from '../../../utils/dateUtils';
 import {
-  HandThumbUpIcon,
-  HandThumbDownIcon,
-  ShareIcon,
-  BookmarkIcon,
-  FlagIcon,
   EllipsisHorizontalIcon,
   BellIcon,
   UserPlusIcon
 } from '@heroicons/react/24/outline';
 import {
-  HandThumbUpIcon as HandThumbUpSolidIcon,
-  HandThumbDownIcon as HandThumbDownSolidIcon,
-  BookmarkIcon as BookmarkSolidIcon,
   BellIcon as BellSolidIcon
 } from '@heroicons/react/24/solid';
 
@@ -326,7 +318,7 @@ const WatchPage: React.FC = () => {
               <VideoPlayer
                 videoId={video.id}
                 src={video.videoUrl || `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
-                poster={video.thumbnailUrl}
+                poster={video.thumbnail}
                 title={video.title}
                 autoplay={false}
                 className="w-full"
