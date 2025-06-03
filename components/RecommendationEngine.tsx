@@ -225,7 +225,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         
         return { ...video, similarityScore };
       })
-      .sort((a, b) => (b as any).similarityScore - (a as any).similarityScore)
+      .sort((a, b) => {
+          const aScore = 'similarityScore' in a ? (a as any).similarityScore : 0;
+          const bScore = 'similarityScore' in b ? (b as any).similarityScore : 0;
+          return bScore - aScore;
+        })
       .slice(0, maxRecommendations);
   };
 

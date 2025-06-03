@@ -6,7 +6,7 @@ import { useWatchLater } from '../contexts/WatchLaterContext';
 import { buildCardClasses, buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
-import { useToggle } from '../hooks/useCommon';
+import { useToggle } from '../hooks/unifiedHooks';
 
 
 interface VideoCardProps {

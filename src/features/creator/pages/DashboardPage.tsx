@@ -18,6 +18,7 @@ import {
   TvIcon
 } from '@heroicons/react/24/outline';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 interface DashboardStats {
   totalViews: number;
@@ -204,20 +205,9 @@ const DashboardPage: React.FC = () => {
     fetchDashboardData();
   }, [timeRange]);
 
-  const formatNumber = (num: number): string => {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num.toString();
-  };
-
+  const formatNumber = numberUtils.formatViewCount;
   const formatDuration = (minutes: number): string => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+    return dateUtils.formatDuration(minutes * 60); // Convert minutes to seconds for unified utility
   };
 
   const formatCurrency = (amount: number): string => {
