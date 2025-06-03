@@ -94,7 +94,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
           ) : (
             <>
               {isSubscribed ? 'Subscribed' : 'Subscribe'}
-              {subscriberCount && variant === 'default' && (
+              {subscriberCount && variant !== 'compact' && (
                 <span className="ml-1 opacity-75">
                   {formatSubscriberCount(subscriberCount)}
                 </span>

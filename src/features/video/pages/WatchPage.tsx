@@ -6,8 +6,6 @@ import { VideoInteractions } from '../components/VideoInteractions';
 import { formatCount } from '../../../utils/numberUtils';
 import { formatDistanceToNow } from '../../../utils/dateUtils';
 import {
-  EllipsisHorizontalIcon,
-  BellIcon,
   UserPlusIcon
 } from '@heroicons/react/24/outline';
 import {
@@ -63,16 +61,12 @@ interface RecommendedVideo {
 const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
   const [video, setVideo] = useState<Video | null>(null);
-  const [comments, setComments] = useState<Comment[]>([]);
+
   const [recommendedVideos, setRecommendedVideos] = useState<RecommendedVideo[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isDisliked, setIsDisliked] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-  const [newComment, setNewComment] = useState('');
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
+
 
   useEffect(() => {
     if (videoId) {
@@ -144,7 +138,7 @@ const WatchPage: React.FC = () => {
     }
   };
 
-  const loadComments = async (id: string) => {
+  const loadComments = async (_id: string) => {
     try {
       // Mock comments data
       const mockComments: Comment[] = [
@@ -242,51 +236,13 @@ const WatchPage: React.FC = () => {
     }
   };
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    if (isDisliked) setIsDisliked(false);
-  };
 
-  const handleDislike = () => {
-    setIsDisliked(!isDisliked);
-    if (isLiked) setIsLiked(false);
-  };
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
   };
 
-  const handleSave = () => {
-    setIsSaved(!isSaved);
-  };
 
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
-
-    const comment: Comment = {
-      id: Date.now().toString(),
-      userId: 'current-user',
-      userName: 'You',
-      userAvatar: 'https://picsum.photos/seed/currentuser/150/150',
-      content: newComment,
-      timestamp: new Date().toISOString(),
-      likes: 0,
-      isLiked: false,
-      replies: []
-    };
-
-    setComments([comment, ...comments]);
-    setNewComment('');
-  };
-
-  const handleCommentLike = (commentId: string) => {
-    setComments(comments.map(comment => 
-      comment.id === commentId 
-        ? { ...comment, isLiked: !comment.isLiked, likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1 }
-        : comment
-    ));
-  };
 
   if (loading) {
     return (

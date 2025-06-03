@@ -78,6 +78,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
     if (!match) return 0;
     
     const [, num, unit] = match;
+    if (!num || !unit) return 0;
     const value = parseInt(num);
     const multipliers = {
       second: 1,
@@ -100,7 +101,10 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   });
 
   const handleEditStart = (comment: Comment) => {
-    onSetEditingComment({ id: comment.id, parentId: comment.parentId });
+    onSetEditingComment({
+      id: comment.id,
+      ...(comment.parentId ? { parentId: comment.parentId } : {})
+    });
     setEditText(comment.commentText);
     onSetActiveCommentMenu(null);
   };

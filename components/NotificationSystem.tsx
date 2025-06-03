@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  BellIcon, 
-  XMarkIcon, 
-  CheckIcon, 
+import {
+  BellIcon,
+  XMarkIcon,
   PlayIcon,
   UserPlusIcon,
   HeartIcon,
@@ -150,7 +149,9 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
   const generateMockNotification = () => {
     const types: Notification['type'][] = ['video_upload', 'like', 'comment', 'subscription', 'live_stream'];
     const type = types[Math.floor(Math.random() * types.length)];
-    
+
+    if (!type) return; // Safety check
+
     const newNotification: Notification = {
       id: Date.now().toString(),
       type,

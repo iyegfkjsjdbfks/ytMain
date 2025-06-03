@@ -66,6 +66,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
       document.addEventListener('keydown', handleEscape);
       return () => document.removeEventListener('keydown', handleEscape);
     }
+    return undefined;
   }, [isOpen, closeOnEscape, onClose]);
 
   // Handle body scroll
@@ -76,6 +77,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
         document.body.style.overflow = 'unset';
       };
     }
+    return undefined;
   }, [isOpen, preventBodyScroll]);
 
   // Focus management

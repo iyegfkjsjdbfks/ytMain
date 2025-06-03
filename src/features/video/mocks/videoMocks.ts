@@ -123,7 +123,7 @@ export const generateMockVideo = (id?: string): Video => {
     // Backward compatibility
     channelId: selectedChannel.id,
     channelTitle: selectedChannel.name,
-    channelThumbnail: selectedChannel.avatarUrl
+    channelThumbnail: selectedChannel.avatarUrl || ''
   };
 };
 

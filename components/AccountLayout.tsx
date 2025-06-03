@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { 
   Cog8ToothIcon, 
   ShieldCheckIcon, 
@@ -12,7 +12,6 @@ import {
  * with navigation sidebar and content area.
  */
 const AccountLayout: React.FC = () => {
-  const location = useLocation();
 
   const accountNavItems = [
     {
@@ -58,8 +57,7 @@ const AccountLayout: React.FC = () => {
               <ul className="space-y-2">
                 {accountNavItems.map((item) => {
                   const Icon = item.icon;
-                  const isActive = location.pathname === item.path;
-                  
+
                   return (
                     <li key={item.path}>
                       <NavLink

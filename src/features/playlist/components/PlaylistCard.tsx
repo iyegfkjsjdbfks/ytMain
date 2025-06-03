@@ -13,7 +13,7 @@ import {
   EllipsisVerticalIcon,
   LockClosedIcon,
   EyeSlashIcon,
-  UsersIcon,
+
   ClockIcon,
   VideoCameraIcon,
   HeartIcon,
@@ -336,6 +336,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
       document.addEventListener('click', handleClickOutside);
       return () => document.removeEventListener('click', handleClickOutside);
     }
+    return undefined;
   }, [showMenu]);
 
   return (

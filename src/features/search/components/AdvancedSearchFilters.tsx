@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import {
   FunnelIcon,
   XMarkIcon,
-  CalendarIcon,
-  ClockIcon,
   VideoCameraIcon,
   UserIcon,
   PlayIcon,
@@ -37,7 +35,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   onToggle,
   className = '',
 }) => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+
 
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,

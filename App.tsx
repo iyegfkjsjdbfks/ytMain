@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
 import { routes } from './config/routes';

@@ -58,14 +58,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
 }) => {
   const {
     values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    resetForm,
-    setFieldValue
-  } = useFormState(initialValues);
+    isSubmitting,
+    setValue,
+    setError,
+    reset
+  } = useFormState({ initialValues });
+
+  // Track touched fields manually
+  const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   // Validate field
   const validateField = (field: FormField, value: any): string | null => {
@@ -78,24 +78,47 @@ const BaseForm: React.FC<BaseFormProps> = ({
     return null;
   };
 
+  // Handle field change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const fieldValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setValue(name, fieldValue);
+  };
+
+  // Handle field blur
+  const handleBlur = (fieldName: string) => {
+    setTouched(prev => ({ ...prev, [fieldName]: true }));
+    const field = fields.find(f => f.name === fieldName);
+    if (field) {
+      const error = validateField(field, values[fieldName]);
+      if (error) {
+        setError(fieldName, error);
+      }
+    }
+  };
+
   // Handle form submission
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     // Validate all fields
     const newErrors: Record<string, string> = {};
     fields.forEach(field => {
       const error = validateField(field, values[field.name]);
       if (error) {
         newErrors[field.name] = error;
+        setError(field.name, error);
       }
     });
 
+    // Mark all fields as touched
+    const allTouched: Record<string, boolean> = {};
+    fields.forEach(field => {
+      allTouched[field.name] = true;
+    });
+    setTouched(allTouched);
+
     if (Object.keys(newErrors).length > 0) {
-      // Set errors and return
-      Object.keys(newErrors).forEach(fieldName => {
-        handleBlur(fieldName);
-      });
       return;
     }
 
@@ -182,7 +205,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
             id={field.name}
             name={field.name}
             type="file"
-            onChange={(e) => setFieldValue(field.name, e.target.files?.[0] || null)}
+            onChange={(e) => setValue(field.name, e.target.files?.[0] || null)}
             onBlur={() => handleBlur(field.name)}
             required={field.required}
             disabled={field.disabled || loading}
@@ -254,10 +277,10 @@ const BaseForm: React.FC<BaseFormProps> = ({
       <div className="flex gap-3 pt-4">
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || isSubmitting}
           className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {loading ? 'Loading...' : submitLabel}
+          {loading || isSubmitting ? 'Loading...' : submitLabel}
         </button>
         
         {onCancel && (
@@ -274,7 +297,10 @@ const BaseForm: React.FC<BaseFormProps> = ({
         {showResetButton && (
           <button
             type="button"
-            onClick={resetForm}
+            onClick={() => {
+              reset();
+              setTouched({});
+            }}
             disabled={loading}
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >

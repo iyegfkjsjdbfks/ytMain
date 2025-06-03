@@ -180,7 +180,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
 
   // Match "X unit(s) ago"
   const parts = lowerDate.match(/(\d+)\s+(hour|day|week|month|year)s?\s+ago/);
-  if (parts) {
+  if (parts && parts[1]) {
     const value = parseInt(parts[1], 10);
     const unit = parts[2];
     

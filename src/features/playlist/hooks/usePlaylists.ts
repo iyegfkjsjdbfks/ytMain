@@ -5,12 +5,12 @@
 
 import { useQuery, useMutation, queryCache } from '../../../hooks/unified/useApi';
 import { playlistService, type PlaylistFilters, type CreatePlaylistData } from '../services/playlistService';
-import type { Playlist, Video } from '../../../types/core';
+import type { Playlist } from '../../../types/core';
 
 // Query hooks
 export function usePlaylists(filters: PlaylistFilters = {}) {
   return useQuery(
-    ['playlists', filters],
+    ['playlists', JSON.stringify(filters)],
     () => playlistService.getUserPlaylists(filters),
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
@@ -32,7 +32,7 @@ export function usePlaylist(playlistId: string) {
 
 export function usePlaylistVideos(playlistId: string, page: number = 1, limit: number = 50) {
   return useQuery(
-    ['playlist', playlistId, 'videos', page, limit],
+    ['playlist', playlistId, 'videos', page.toString(), limit.toString()],
     () => playlistService.getPlaylistVideos(playlistId, page, limit),
     {
       enabled: !!playlistId,
@@ -43,7 +43,7 @@ export function usePlaylistVideos(playlistId: string, page: number = 1, limit: n
 
 export function useFeaturedPlaylists(page: number = 1, limit: number = 20) {
   return useQuery(
-    ['playlists', 'featured', page, limit],
+    ['playlists', 'featured', page.toString(), limit.toString()],
     () => playlistService.getFeaturedPlaylists(page, limit),
     {
       staleTime: 10 * 60 * 1000, // 10 minutes
@@ -53,7 +53,7 @@ export function useFeaturedPlaylists(page: number = 1, limit: number = 20) {
 
 export function useRecommendedPlaylists(page: number = 1, limit: number = 20) {
   return useQuery(
-    ['playlists', 'recommended', page, limit],
+    ['playlists', 'recommended', page.toString(), limit.toString()],
     () => playlistService.getRecommendedPlaylists(page, limit),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
@@ -63,7 +63,7 @@ export function useRecommendedPlaylists(page: number = 1, limit: number = 20) {
 
 export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
   return useQuery(
-    ['playlists', 'followed', page, limit],
+    ['playlists', 'followed', page.toString(), limit.toString()],
     () => playlistService.getFollowedPlaylists(page, limit),
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
@@ -95,7 +95,7 @@ export function usePlaylistCollaborators(playlistId: string) {
 
 export function useSearchPlaylists(query: string, filters: Omit<PlaylistFilters, 'search'> = {}) {
   return useQuery(
-    ['playlists', 'search', query, filters],
+    ['playlists', 'search', query, JSON.stringify(filters)],
     () => playlistService.searchPlaylists(query, filters),
     {
       enabled: !!query && query.length > 2,

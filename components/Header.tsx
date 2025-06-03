@@ -6,9 +6,7 @@ import MenuIcon from './icons/MenuIcon';
 // UserIcon not used if avatar image is present
 import SearchBar from './SearchBar';
 import VideoPlusIcon from './icons/VideoPlusIcon';
-import BellIcon from './icons/BellIcon';
 import UserMenu from './UserMenu';
-import NotificationsPanel from './NotificationsPanel';
 import NotificationSystem from './NotificationSystem';
 import { useAuth } from '../contexts/AuthContext';
 import Button from './forms/Button';
@@ -112,7 +110,6 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
   const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);
   
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -128,11 +125,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     if (isCreateMenuOpen) setIsCreateMenuOpen(false);
   };
 
-  const toggleNotificationsPanel = () => {
-    setIsNotificationsPanelOpen(prev => !prev);
-    if (isUserMenuOpen) setIsUserMenuOpen(false);
-    if (isCreateMenuOpen) setIsCreateMenuOpen(false);
-  };
+
 
   const toggleCreateMenu = () => {
     setIsCreateMenuOpen(prev => !prev);
@@ -141,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   };
 
   const handleCloseUserMenu = useCallback(() => setIsUserMenuOpen(false), []);
-  const handleCloseNotificationsPanel = useCallback(() => setIsNotificationsPanelOpen(false), []);
+
   const handleCloseCreateMenu = useCallback(() => setIsCreateMenuOpen(false), []);
 
 

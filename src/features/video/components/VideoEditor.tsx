@@ -3,13 +3,7 @@ import {
   PlayIcon,
   PauseIcon,
   ScissorsIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowUturnLeftIcon,
-  ArrowUturnRightIcon,
   DocumentArrowDownIcon,
-  PhotoIcon,
-  MusicalNoteIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
 
@@ -59,8 +53,6 @@ interface EditorState {
 
 export const VideoEditor: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
 
   const [editorState, setEditorState] = useState<EditorState>({
     currentTime: 0,
@@ -146,12 +138,7 @@ export const VideoEditor: React.FC = () => {
     }));
   };
 
-  const seekTo = (time: number) => {
-    setEditorState(prev => ({
-      ...prev,
-      currentTime: Math.max(0, Math.min(time, prev.duration)),
-    }));
-  };
+
 
   const splitClip = (clipId: string, splitTime: number) => {
     setEditorState(prev => {

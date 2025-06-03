@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -9,14 +9,14 @@ import {
   TrashIcon,
   EyeIcon,
   EyeSlashIcon,
-  ArrowsUpDownIcon,
+
   DocumentDuplicateIcon,
   FolderIcon,
   ListBulletIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 import { usePlaylists, useCreatePlaylist, useUpdatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
-import type { Playlist, Video } from '../../../types/core';
+import type { Playlist } from '../../../types/core';
 
 interface PlaylistManagerProps {
   className?: string;
@@ -193,12 +193,12 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'recent' | 'alphabetical' | 'most_videos'>('recent');
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<string | null>(null);
+
   const [showPlaylistMenu, setShowPlaylistMenu] = useState<string | null>(null);
 
   const { data: playlists = [], isLoading } = usePlaylists({ sortBy });
   const createPlaylistMutation = useCreatePlaylist();
-  const updatePlaylistMutation = useUpdatePlaylist();
+
   const deletePlaylistMutation = useDeletePlaylist();
 
   const filteredPlaylists = playlists.filter(playlist =>
@@ -340,7 +340,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
                 <>
                   <div className="relative mb-4">
                     <img
-                      src={playlist.thumbnail || 'https://picsum.photos/300/200?random=' + playlist.id}
+                      src={playlist.thumbnailUrl || 'https://picsum.photos/300/200?random=' + playlist.id}
                       alt={playlist.title}
                       className="w-full h-32 object-cover rounded"
                     />
@@ -415,7 +415,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
               ) : (
                 <>
                   <img
-                    src={playlist.thumbnail || 'https://picsum.photos/120/80?random=' + playlist.id}
+                    src={playlist.thumbnailUrl || 'https://picsum.photos/120/80?random=' + playlist.id}
                     alt={playlist.title}
                     className="w-20 h-12 object-cover rounded mr-4"
                   />

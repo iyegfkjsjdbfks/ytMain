@@ -83,7 +83,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   
   useEffect(() => {
     if (qualities.length > 0 && !selectedQuality) {
-      setSelectedQuality(qualities[0]);
+      setSelectedQuality(qualities[0] || null);
     }
   }, [qualities, selectedQuality]);
   
@@ -267,8 +267,8 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     const video = videoRef.current;
     if (!video) return;
     
-    const currentTime = video.currentTime;
-    const wasPlaying = !video.paused;
+    // const savedCurrentTime = video.currentTime;
+    // const savedWasPlaying = !video.paused;
     
     setSelectedQuality(quality);
     onQualityChange?.(quality);
@@ -647,7 +647,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         </div>
       )}
       
-      <style jsx={true}>{`
+      <style>{`
         .slider::-webkit-slider-thumb {
           appearance: none;
           width: 16px;
@@ -656,7 +656,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
           background: #ef4444;
           cursor: pointer;
         }
-        
+
         .slider::-moz-range-thumb {
           width: 16px;
           height: 16px;
