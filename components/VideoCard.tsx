@@ -45,8 +45,8 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
   };
 
   return (
-    <Link to={videoUrl} className="block group" aria-label={`Watch ${video.title}`}>
-      <div className={buildCardClasses('default', 'md', 'bg-transparent dark:bg-transparent shadow-none hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 transition-shadow duration-300 flex flex-col h-full')}>
+    <Link to={videoUrl} className="block group cursor-pointer" aria-label={`Watch ${video.title}`}>
+      <div className="bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full">
         <div className="relative aspect-video">
           <img 
             src={video.thumbnailUrl} 
@@ -61,7 +61,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
             onClick={handleToggleWatchLater}
             variant={isSaved ? 'primary' : 'ghost'}
             size="sm"
-            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-10 group-hover:opacity-100 opacity-0 focus:opacity-100"
+            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100"
             aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
             title={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
           >
@@ -75,7 +75,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
               tabIndex={0}
               onClick={handleChannelNavigation}
               onKeyDown={handleChannelKeyDown}
-              className="flex-shrink-0 cursor-pointer" 
+              className="flex-shrink-0 cursor-pointer z-10 relative" 
               aria-label={`Go to ${video.channelName} channel`}
             >
               {video.channelAvatarUrl ? (
@@ -100,7 +100,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
                 tabIndex={0}
                 onClick={handleChannelNavigation}
                 onKeyDown={handleChannelKeyDown}
-                className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1.5 block truncate transition-colors cursor-pointer"
+                className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
                 aria-label={`Go to ${video.channelName} channel`}
               >
                 {video.channelName}
