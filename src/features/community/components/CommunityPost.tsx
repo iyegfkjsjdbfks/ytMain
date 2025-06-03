@@ -5,7 +5,6 @@ import {
   ChatBubbleLeftIcon,
   ShareIcon,
   EllipsisHorizontalIcon,
-  PhotoIcon,
   PlayIcon,
 } from '@heroicons/react/24/outline';
 import {
@@ -151,17 +150,17 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
         <div className="mb-4">
           {post.media.length === 1 ? (
             <div className="relative rounded-lg overflow-hidden">
-              {post.media[0].type === 'image' ? (
+              {post.media[0]?.type === 'image' ? (
                 <img
-                  src={post.media[0].url}
-                  alt={post.media[0].alt || 'Post image'}
+                  src={post.media[0]?.url || ''}
+                  alt={post.media[0]?.alt || 'Post image'}
                   className="w-full max-h-96 object-cover cursor-pointer"
                   onClick={() => setSelectedImage(0)}
                 />
               ) : (
                 <div className="relative">
                   <img
-                    src={post.media[0].thumbnail || post.media[0].url}
+                    src={post.media[0]?.thumbnail || post.media[0]?.url || ''}
                     alt="Video thumbnail"
                     className="w-full max-h-96 object-cover"
                   />
@@ -188,7 +187,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
                       <PlayIcon className="w-6 h-6 text-white" />
                     </div>
                   )}
-                  {index === 3 && post.media.length > 4 && (
+                  {index === 3 && post.media && post.media.length > 4 && (
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                       <span className="text-white font-semibold">
                         +{post.media.length - 4}

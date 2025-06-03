@@ -10,7 +10,7 @@ import type { Comment } from '../../../types/core';
 // Query hooks
 export function useVideoComments(videoId: string, filters: CommentFilters = {}) {
   return useQuery(
-    ['comments', 'video', videoId, filters],
+    ['comments', 'video', videoId, JSON.stringify(filters)],
     () => commentService.getVideoComments(videoId, filters),
     {
       enabled: !!videoId,
@@ -22,7 +22,7 @@ export function useVideoComments(videoId: string, filters: CommentFilters = {}) 
 
 export function useCommentReplies(commentId: string, filters: Omit<CommentFilters, 'parentId'> = {}) {
   return useQuery(
-    ['comments', 'replies', commentId, filters],
+    ['comments', 'replies', commentId, JSON.stringify(filters)],
     () => commentService.getCommentReplies(commentId, filters),
     {
       enabled: !!commentId,
@@ -55,7 +55,7 @@ export function useCommentThread(commentId: string) {
 
 export function useUserComments(userId: string, filters: Omit<CommentFilters, 'parentId'> = {}) {
   return useQuery(
-    ['comments', 'user', userId, filters],
+    ['comments', 'user', userId, JSON.stringify(filters)],
     () => commentService.getUserComments(userId, filters),
     {
       enabled: !!userId,
@@ -66,7 +66,7 @@ export function useUserComments(userId: string, filters: Omit<CommentFilters, 'p
 
 export function usePendingComments(videoId?: string, filters: CommentFilters = {}) {
   return useQuery(
-    ['comments', 'pending', videoId, filters],
+    ['comments', 'pending', videoId || '', JSON.stringify(filters)],
     () => commentService.getPendingComments(videoId, filters),
     {
       staleTime: 30 * 1000, // 30 seconds
@@ -88,7 +88,7 @@ export function useCommentStats(videoId: string) {
 
 export function useTrendingComments(timeframe: '1h' | '24h' | '7d' | '30d' = '24h', limit: number = 20) {
   return useQuery(
-    ['comments', 'trending', timeframe, limit],
+    ['comments', 'trending', timeframe, limit.toString()],
     () => commentService.getTrendingComments(timeframe, limit),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
@@ -98,7 +98,7 @@ export function useTrendingComments(timeframe: '1h' | '24h' | '7d' | '30d' = '24
 
 export function useCommentMentions(userId: string, filters: CommentFilters = {}) {
   return useQuery(
-    ['comments', 'mentions', userId, filters],
+    ['comments', 'mentions', userId, JSON.stringify(filters)],
     () => commentService.getCommentMentions(userId, filters),
     {
       enabled: !!userId,
@@ -121,7 +121,7 @@ export function useCommentAnalytics(videoId: string, timeframe: '7d' | '30d' | '
 
 export function useSearchComments(query: string, videoId?: string, filters: CommentFilters = {}) {
   return useQuery(
-    ['comments', 'search', query, videoId, filters],
+    ['comments', 'search', query, videoId || '', JSON.stringify(filters)],
     () => commentService.searchComments(query, videoId, filters),
     {
       enabled: !!query && query.length > 2,
@@ -342,7 +342,7 @@ export function useCommentManagement(videoId: string) {
   };
 }
 
-export function useCommentInteractions(commentId: string) {
+export function useCommentInteractions(_commentId: string) {
   const reactToComment = useReactToComment();
   const removeReaction = useRemoveReaction();
   const pinComment = usePinComment();
