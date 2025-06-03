@@ -107,12 +107,17 @@ const WatchPage: React.FC = () => {
   };
   
   // Add to watch history when video loads
-    React.useEffect(() => {
+  React.useEffect(() => {
     if (video) {
       addToWatchHistory(video.id);
       showMiniplayer(video);
     }
   }, [video, addToWatchHistory, showMiniplayer]);
+
+  // Scroll to top when page loads or video changes
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [videoId]);
   
   // Loading skeleton
   if (loading) {
