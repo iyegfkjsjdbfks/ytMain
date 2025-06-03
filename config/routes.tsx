@@ -127,6 +127,10 @@ export const mainRoutes: RouteObject[] = [
         path: 'settings',
         element: <SettingsPage />,
       },
+      {
+        path: 'analytics',
+        element: <AnalyticsPage />,
+      },
     ],
   },
 ];

@@ -647,7 +647,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         </div>
       )}
       
-      <style jsx>{`
+      <style jsx={true}>{`
         .slider::-webkit-slider-thumb {
           appearance: none;
           width: 16px;
