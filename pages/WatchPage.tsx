@@ -273,10 +273,9 @@ const WatchPage: React.FC = () => {
           <aside className="space-y-4">
             <RecommendationEngine
               currentVideoId={video.id}
-              currentVideoCategory={video.category}
-              videos={displayedRelatedVideos}
-              showAll={showAllRelated}
-              onToggleShowAll={() => {}}
+              onVideoSelect={(videoId) => {
+                window.location.href = `/watch?v=${videoId}`;
+              }}
             />
           </aside>
         </div>
