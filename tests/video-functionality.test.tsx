@@ -12,8 +12,8 @@ import { BrowserRouter } from 'react-router-dom';
 // Import components
 import VideoCard from '../components/VideoCard';
 import ShortDisplayCard from '../components/ShortDisplayCard';
-import VideoPlayer from '../components/VideoPlayer';
-import CommentSection from '../components/CommentSection';
+import VideoPlayer from '../components/video/VideoPlayer';
+import CommentsSection from '../components/CommentsSection';
 import { RefactoredAppProviders } from '../providers/RefactoredAppProviders';
 
 // Mock data
@@ -29,8 +29,10 @@ const mockVideo = {
   dislikes: 123,
   channelName: 'Test Channel',
   channelAvatar: 'https://example.com/avatar.jpg',
+  channelAvatarUrl: 'https://example.com/avatar.jpg',
   channelId: 'channel123',
   createdAt: '2024-01-01T00:00:00Z',
+  uploadedAt: '2024-01-01T00:00:00Z',
   category: 'Entertainment',
   tags: ['test', 'video'],
   isLiked: false,
@@ -43,13 +45,21 @@ const mockShort = {
   title: 'Test Short',
   videoUrl: 'https://example.com/short.mp4',
   thumbnailUrl: 'https://example.com/short-thumb.jpg',
-  duration: 30,
+  duration: '0:30',
   views: '50K',
   likes: 1000,
   channelName: 'Test Channel',
   channelAvatar: 'https://example.com/avatar.jpg',
+  channelAvatarUrl: 'https://example.com/avatar.jpg',
+  uploadedAt: '2024-01-15',
+  description: 'Test short video',
+  category: 'Entertainment',
+  tags: ['test', 'short'],
+  isLiked: false,
+  isDisliked: false,
+  isSaved: false,
   isVertical: true,
-  isShort: true
+  isShort: true as const
 };
 
 const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -330,7 +340,7 @@ describe('Video Functionality', () => {
     it('should render comments list', () => {
       render(
         <TestWrapper>
-          <CommentSection videoId={mockVideo.id} comments={mockComments} />
+          <CommentsSection videoId={mockVideo.id} comments={mockComments} />
         </TestWrapper>
       );
 
@@ -346,7 +356,7 @@ describe('Video Functionality', () => {
       
       render(
         <TestWrapper>
-          <CommentSection 
+          <CommentsSection 
             videoId={mockVideo.id} 
             comments={mockComments}
             onSubmitComment={onSubmitComment}
@@ -369,7 +379,7 @@ describe('Video Functionality', () => {
       
       render(
         <TestWrapper>
-          <CommentSection 
+          <CommentsSection 
             videoId={mockVideo.id} 
             comments={mockComments}
             onLikeComment={onLikeComment}
@@ -388,7 +398,7 @@ describe('Video Functionality', () => {
       
       render(
         <TestWrapper>
-          <CommentSection videoId={mockVideo.id} comments={mockComments} />
+          <CommentsSection videoId={mockVideo.id} comments={mockComments} />
         </TestWrapper>
       );
 

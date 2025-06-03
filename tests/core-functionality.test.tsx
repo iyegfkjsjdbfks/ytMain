@@ -14,12 +14,8 @@ import App from '../App';
 import HomePage from '../pages/HomePage';
 import WatchPage from '../pages/WatchPage';
 import SearchResultsPage from '../pages/SearchResultsPage';
-import ShortsPage from '../pages/ShortsPage';
-import HistoryPage from '../pages/HistoryPage';
-import { RefactoredAppProviders } from '../providers/RefactoredAppProviders';
 
 // Import hooks and utilities
-import { useVideoPlayer } from '../hooks/useVideoPlayer';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -121,7 +117,11 @@ describe('Core Application Functionality', () => {
         duration: '10:30',
         views: '1M views',
         channelName: 'Test Channel',
-        createdAt: '2024-01-01'
+        channelAvatarUrl: 'https://example.com/avatar.jpg',
+        createdAt: '2024-01-01',
+        uploadedAt: '2024-01-01T00:00:00Z',
+        description: 'Test video description',
+        category: 'Entertainment'
       };
 
       renderWithProviders(<WatchPage />);
