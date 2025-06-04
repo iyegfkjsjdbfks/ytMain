@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface TabsContextType {
   value: string;
@@ -15,7 +15,7 @@ const useTabsContext = () => {
   return context;
 };
 
-interface TabsProps {
+export interface TabsProps {
   value: string;
   onValueChange: (value: string) => void;
   children: React.ReactNode;

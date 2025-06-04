@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { buildCardClasses, buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
 import { useToggle } from '../hooks/unifiedHooks';
@@ -63,10 +63,8 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
             size="sm"
             className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100"
             aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
-            title={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
-          >
-            <SaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-          </IconButton>
+            icon={<SaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />}
+          />
         </div>
         <div className="p-3 flex-grow">
           <div className="flex items-start space-x-3">

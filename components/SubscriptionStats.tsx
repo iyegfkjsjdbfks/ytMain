@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  UserGroupIcon, 
-  BellIcon, 
+import {
+  UserGroupIcon,
   VideoCameraIcon,
-  ClockIcon 
+  ClockIcon
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 

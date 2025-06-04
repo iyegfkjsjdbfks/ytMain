@@ -234,7 +234,7 @@ export const PageLoading: React.FC<{
 export const ButtonLoading: React.FC<{
   size?: 'xs' | 'sm' | 'md';
   className?: string;
-}> = ({ size = 'sm', className }) => (
+}> = ({ size = 'sm', className = '' }) => (
   <Spinner size={size} color="white" className={className} />
 );
 

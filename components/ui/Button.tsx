@@ -13,7 +13,7 @@ export type ButtonVariant =
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -149,7 +149,7 @@ export const SubscribeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isSubscribed, loading, onClick, className }) => (
+}> = ({ isSubscribed, loading = false, onClick, className }) => (
   <Button
     variant={isSubscribed ? 'outline' : 'primary'}
     size="sm"
@@ -167,7 +167,7 @@ export const LikeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isLiked, count, loading, onClick, className }) => (
+}> = ({ isLiked, count, loading = false, onClick, className }) => (
   <Button
     variant={isLiked ? 'primary' : 'ghost'}
     size="sm"

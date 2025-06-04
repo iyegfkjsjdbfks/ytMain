@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Video } from '../types';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
 import { useToggle } from '../hooks/unifiedHooks';
-import { 
-  ClockIcon, 
-  EyeIcon, 
+import {
+  EyeIcon,
   CalendarDaysIcon,
-  PlayIcon 
+  PlayIcon
 } from '@heroicons/react/24/outline';
 
 interface SubscriptionVideoCardProps {
@@ -26,7 +25,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 }) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
   const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
-  const navigate = useNavigate();
+
 
   const videoUrl = buildVideoUrl(video.id);
   const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
@@ -43,10 +42,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
     toggleSaved();
   };
 
-  const handleChannelNavigation = (e: React.MouseEvent | React.KeyboardEvent) => {
-    e.stopPropagation();
-    navigate(channelUrl);
-  };
+
 
   if (viewType === 'list') {
     return (
@@ -85,9 +81,9 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
               {showChannel && (
                 <div className="flex items-center space-x-2 mt-2">
                   <Link to={channelUrl}>
-                    {video.channelAvatar ? (
+                    {video.channelAvatarUrl ? (
                       <img
-                        src={video.channelAvatar}
+                        src={video.channelAvatarUrl}
                         alt={video.channelName}
                         className="w-6 h-6 rounded-full object-cover"
                         loading="lazy"
@@ -129,10 +125,9 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
                 variant="ghost"
                 size="sm"
                 className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400`}
-                title={isSaved ? 'Remove from Watch Later' : 'Add to Watch Later'}
-              >
-                <SaveIcon className="w-4 h-4" />
-              </IconButton>
+                aria-label={isSaved ? 'Remove from Watch Later' : 'Add to Watch Later'}
+                icon={<SaveIcon className="w-4 h-4" />}
+              />
             </div>
           </div>
         </div>
@@ -168,10 +163,10 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 
       <div className="flex justify-between items-start">
         <div className="flex space-x-3 flex-1 min-w-0">
-          {showChannel && video.channelAvatar && (
+          {showChannel && video.channelAvatarUrl && (
             <Link to={channelUrl} className="flex-shrink-0">
               <img
-                src={video.channelAvatar}
+                src={video.channelAvatarUrl}
                 alt={video.channelName}
                 className="w-9 h-9 rounded-full object-cover"
                 loading="lazy"
@@ -209,10 +204,9 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
             variant="ghost"
             size="sm"
             className={`${isSaved ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-600 dark:text-neutral-400'} hover:text-blue-600 dark:hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity`}
-            title={isSaved ? 'Remove from Watch Later' : 'Add to Watch Later'}
-          >
-            <SaveIcon className="w-4 h-4" />
-          </IconButton>
+            aria-label={isSaved ? 'Remove from Watch Later' : 'Add to Watch Later'}
+            icon={<SaveIcon className="w-4 h-4" />}
+          />
         </div>
       </div>
     </div>

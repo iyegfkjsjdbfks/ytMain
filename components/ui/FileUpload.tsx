@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-interface FileUploadProps {
+export interface FileUploadProps {
   accept?: string;
   multiple?: boolean;
   maxSize?: number; // in bytes

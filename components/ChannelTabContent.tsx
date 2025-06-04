@@ -141,7 +141,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
         <div className="md:col-span-2">
             <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2">Description</h3>
             <p className="whitespace-pre-line leading-relaxed text-sm mb-6">
-            {channel.channelDescription || "No description available for this channel."}
+            {channel.description || "No description available for this channel."}
             </p>
              <Link to="#" className="inline-flex items-center text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-2 text-sm font-medium">
               <span>Report user</span>
@@ -152,7 +152,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
             <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2 border-b pb-2 border-neutral-300 dark:border-neutral-700">Stats</h3>
             <div className="flex items-center text-sm">
                 <CalendarDaysIcon className="w-5 h-5 mr-2.5 text-neutral-500 dark:text-neutral-400 flex-shrink-0" aria-hidden="true" />
-                <span>Joined {channel.joinDate || 'N/A'}</span>
+                <span>Joined {channel.joinedDate || 'N/A'}</span>
             </div>
              <div className="flex items-center text-sm">
                 <ChartBarIcon className="w-5 h-5 mr-2.5 text-neutral-500 dark:text-neutral-400 flex-shrink-0" aria-hidden="true" />
