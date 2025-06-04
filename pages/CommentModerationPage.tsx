@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChatBubbleLeftIcon, FunnelIcon, CheckIcon, XMarkIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
-import { Comment, Video } from '../types';
+import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
+import { Comment } from '../types';
 import { getVideos, getCommentsByVideoId } from '../services/mockVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 
@@ -39,7 +39,7 @@ const CommentModerationPage: React.FC = () => {
             videoTitle: video.title,
             videoId: video.id,
             status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,
-            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : undefined
+            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected'
           }));
           allComments.push(...commentsWithVideo);
         }

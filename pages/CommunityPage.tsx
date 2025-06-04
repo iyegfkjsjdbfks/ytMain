@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PlusIcon, PhotoIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
 interface CommunityPost {
@@ -68,20 +68,22 @@ const CommunityPage: React.FC = () => {
       ];
 
       return Array.from({ length: 12 }, (_, i) => {
-        const type = postTypes[Math.floor(Math.random() * postTypes.length)];
+        const type = postTypes[Math.floor(Math.random() * postTypes.length)] || 'text';
         const isRecent = i < 3;
         
-        let content = sampleContent[Math.floor(Math.random() * sampleContent.length)];
+        let content = sampleContent[Math.floor(Math.random() * sampleContent.length)] || 'Default content';
         let pollOptions: { id: string; text: string; votes: number }[] | undefined;
-        
+
         if (type === 'poll') {
           const poll = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          content = poll.content;
-          pollOptions = poll.options.map((option, idx) => ({
-            id: `option-${idx}`,
-            text: option,
-            votes: Math.floor(Math.random() * 500) + 50
-          }));
+          if (poll) {
+            content = poll.content;
+            pollOptions = poll.options.map((option, idx) => ({
+              id: `option-${idx}`,
+              text: option,
+              votes: Math.floor(Math.random() * 500) + 50
+            }));
+          }
         }
 
         return {
@@ -106,16 +108,16 @@ const CommunityPage: React.FC = () => {
     const generateMockStats = (posts: CommunityPost[]): CommunityStats => {
       const totalLikes = posts.reduce((sum, post) => sum + post.likes, 0);
       const totalComments = posts.reduce((sum, post) => sum + post.comments, 0);
-      const topPost = posts.reduce((top, post) => 
+      const topPost = posts.length > 0 ? posts.reduce((top, post) =>
         post.likes > top.likes ? post : top, posts[0]
-      );
+      ) : null;
 
       return {
         totalPosts: posts.length,
         totalEngagement: totalLikes + totalComments,
-        averageLikes: Math.round(totalLikes / posts.length),
-        averageComments: Math.round(totalComments / posts.length),
-        topPerformingPost: topPost.content.substring(0, 50) + '...',
+        averageLikes: posts.length > 0 ? Math.round(totalLikes / posts.length) : 0,
+        averageComments: posts.length > 0 ? Math.round(totalComments / posts.length) : 0,
+        topPerformingPost: topPost ? topPost.content.substring(0, 50) + '...' : 'No posts yet',
         reachGrowth: Math.random() * 20 + 5
       };
     };
@@ -139,7 +141,7 @@ const CommunityPage: React.FC = () => {
         id: `option-${idx}`,
         text: opt,
         votes: 0
-      })) : undefined,
+      })) : [],
       likes: 0,
       comments: 0,
       shares: 0,

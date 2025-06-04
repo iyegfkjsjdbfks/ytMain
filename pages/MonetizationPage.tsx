@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BanknotesIcon, ArrowTrendingUpIcon, CalendarIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon, PlayIcon, EyeIcon } from '@heroicons/react/24/outline';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
+import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -68,7 +68,7 @@ const MonetizationPage: React.FC = () => {
         date.setDate(date.getDate() - i);
         
         mockRevenueData.push({
-          date: date.toISOString().split('T')[0],
+          date: date.toISOString().split('T')[0] || date.toDateString(),
           adRevenue: Math.random() * 100 + 50,
           membershipRevenue: Math.random() * 30 + 10,
           superChatRevenue: Math.random() * 20 + 5,
@@ -84,6 +84,9 @@ const MonetizationPage: React.FC = () => {
         sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0
       );
       
+      const membershipRevenue = mockRevenueData.reduce((sum, day) => sum + day.membershipRevenue, 0);
+      const superChatRevenue = mockRevenueData.reduce((sum, day) => sum + day.superChatRevenue, 0);
+
       setMetrics({
         totalRevenue,
         monthlyRevenue: totalRevenue * (30 / days),
@@ -94,7 +97,9 @@ const MonetizationPage: React.FC = () => {
         clickThroughRate: Math.random() * 3 + 1,
         memberCount: Math.floor(Math.random() * 1000 + 500),
         superChatCount: Math.floor(Math.random() * 200 + 50),
-        merchandiseSales: Math.floor(Math.random() * 50 + 10)
+        merchandiseSales: Math.floor(Math.random() * 50 + 10),
+        membershipRevenue,
+        superChatRevenue
       });
       
       setLoading(false);

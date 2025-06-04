@@ -1,6 +1,6 @@
 
 // Mock video service with working video URLs
-import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
+import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
 // Removed unused imports
 
 // Helper function to create complete video objects
@@ -355,11 +355,23 @@ const mockComments: Comment[] = [
     likes: 42,
     replies: [],
     createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
+    updatedAt: '2024-01-01T00:00:00Z',
+    isLikedByCurrentUser: false,
+    isDislikedByCurrentUser: false,
+    isEdited: false,
+    replyCount: 0,
+    videoId: 'video-1',
+    authorId: 'user-1',
+    authorName: 'John Doe',
+    authorAvatar: 'https://picsum.photos/seed/user1/40/40',
+    content: 'Amazing video! The scenery is breathtaking.',
+    dislikes: 2,
+    isPinned: false,
+    isHearted: false
   }
 ];
 
-export const getCommentsByVideoId = (videoId: string): Promise<Comment[]> => {
+export const getCommentsByVideoId = (_videoId: string): Promise<Comment[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // Return all mock comments for any video ID
@@ -377,12 +389,63 @@ export const getCommunityPosts = (): Promise<CommunityPost[]> => {
   return Promise.resolve([]);
 };
 
-export const getUserPlaylists = (): Promise<UserPlaylist[]> => {
+export const getUserPlaylists = (): Promise<UserPlaylistDetails[]> => {
   return Promise.resolve([]);
 };
 
-export const getUserPlaylistById = (id: string): Promise<UserPlaylistDetails | null> => {
-  return Promise.resolve(null);
+export const getUserPlaylistById = (_id: string): Promise<UserPlaylistDetails & { videos: Video[] } | null> => {
+  // Return a mock playlist with videos for testing
+  return Promise.resolve({
+    id: 'playlist-1',
+    title: 'My Playlist',
+    description: 'A sample playlist',
+    videoIds: ['video-1', 'video-2'],
+    videoCount: 2,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    videos: [
+      {
+        id: 'video-1',
+        title: 'Sample Video 1',
+        description: 'A sample video',
+        thumbnailUrl: 'https://picsum.photos/320/180?random=1',
+        videoUrl: 'https://example.com/video1.mp4',
+        duration: '5:30',
+        views: '1,234',
+        likes: 100,
+        dislikes: 5,
+        uploadedAt: '2 days ago',
+        channelName: 'Sample Channel',
+        channelId: 'channel-1',
+        channelAvatarUrl: 'https://picsum.photos/40/40?random=1',
+        category: 'Entertainment',
+        tags: ['sample', 'video'],
+        visibility: 'public' as const,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: 'video-2',
+        title: 'Sample Video 2',
+        description: 'Another sample video',
+        thumbnailUrl: 'https://picsum.photos/320/180?random=2',
+        videoUrl: 'https://example.com/video2.mp4',
+        duration: '3:45',
+        views: '5,678',
+        likes: 200,
+        dislikes: 10,
+        uploadedAt: '1 week ago',
+        channelName: 'Sample Channel',
+        channelId: 'channel-1',
+        channelAvatarUrl: 'https://picsum.photos/40/40?random=1',
+        category: 'Education',
+        tags: ['sample', 'tutorial'],
+        visibility: 'public' as const,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+    ]
+  });
 };
 
 export const uploadVideo = (
@@ -465,7 +528,7 @@ export const uploadVideo = (
 };
 
 // Additional missing functions (only non-duplicate ones)
-export const getChannelByName = (name: string): Promise<Channel | null> => {
+export const getChannelByName = (_name: string): Promise<Channel | null> => {
   return Promise.resolve(null);
 };
 
@@ -473,15 +536,15 @@ export const getVideosByChannelName = (channelName: string): Promise<Video[]> =>
   return Promise.resolve(mockVideos.filter(v => v.channelName === channelName));
 };
 
-export const getVideosByChannelId = (channelId: string): Promise<Video[]> => {
+export const getVideosByChannelId = (_channelId: string): Promise<Video[]> => {
   return Promise.resolve([]);
 };
 
-export const getChannelPlaylists = (channelName: string): Promise<PlaylistSummary[]> => {
+export const getChannelPlaylists = (_channelName: string): Promise<PlaylistSummary[]> => {
   return Promise.resolve([]);
 };
 
-export const getChannelCommunityPosts = (channelName: string): Promise<CommunityPost[]> => {
+export const getChannelCommunityPosts = (_channelName: string): Promise<CommunityPost[]> => {
   return Promise.resolve([]);
 };
 
@@ -505,21 +568,22 @@ export const clearAllRecentSearches = (): Promise<void> => {
   return Promise.resolve();
 };
 
-export const createUserPlaylist = (name: string): Promise<UserPlaylist> => {
+export const createUserPlaylist = (name: string): Promise<UserPlaylistDetails> => {
   return Promise.resolve({
     id: '1',
     title: name,
     videoIds: [],
+    videoCount: 0,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   });
 };
 
-export const removeVideoFromPlaylist = (playlistId: string, videoId: string): Promise<void> => {
+export const removeVideoFromPlaylist = (_playlistId: string, _videoId: string): Promise<void> => {
   return Promise.resolve();
 };
 
-export const updateUserPlaylistDetails = (id: string, details: Partial<UserPlaylistDetails>): Promise<void> => {
+export const updateUserPlaylistDetails = (_id: string, _details: Partial<UserPlaylistDetails>): Promise<void> => {
   return Promise.resolve();
 };
 

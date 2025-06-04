@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Cog8ToothIcon, MoonIcon, SunIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
+import React, { useState } from 'react';
+import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { useTheme } from '../contexts/ThemeContext';
 

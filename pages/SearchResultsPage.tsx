@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MagnifyingGlassIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';
 import SortFilterPanel, { SortByType } from '../components/SortFilterPanel'; // Added import

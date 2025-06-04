@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import CommentModal from '../components/CommentModal';
 import ShortsNavigation from '../components/ShortsNavigation';
 import ShortsFilters from '../components/ShortsFilters';
-import ShortsProgressIndicator from '../components/ShortsProgressIndicator';
+
 import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
 import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortsPageError from '../components/ErrorStates/ShortsPageError';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
-import { Video } from '../types';
+import { Short } from '../types';
 import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
@@ -20,7 +20,7 @@ const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const navigate = useNavigate();
+
 
   // Enhanced state management with proper Set handling and error recovery
   const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []);
@@ -70,15 +70,23 @@ const ShortsPage: React.FC = () => {
   const searchParams = new URLSearchParams(location.search);
   const targetVideoId = searchParams.get('v');
 
-  // Filter and search shorts
-  const filteredShorts = useMemo(() => {
+  // Convert Videos to Shorts and filter
+  const filteredShorts = useMemo((): Short[] => {
     if (!allShorts) return [];
 
-    let filtered = [...allShorts];
+    // Convert Video[] to Short[] with proper type conversion
+    let converted: Short[] = allShorts
+      .filter(video => video.visibility !== 'scheduled') // Filter out scheduled videos
+      .map(video => ({
+        ...video,
+        isShort: true,
+        isVertical: true,
+        visibility: video.visibility as 'public' | 'private' | 'unlisted' // Type assertion after filtering
+      }));
 
     // Apply category filter
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(short =>
+      converted = converted.filter(short =>
         short.category.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
@@ -86,14 +94,14 @@ const ShortsPage: React.FC = () => {
     // Apply search filter
     if (debouncedSearchQuery) {
       const query = debouncedSearchQuery.toLowerCase();
-      filtered = filtered.filter(short =>
+      converted = converted.filter(short =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
         short.description.toLowerCase().includes(query)
       );
     }
 
-    return filtered;
+    return converted;
   }, [allShorts, selectedCategory, debouncedSearchQuery]);
 
   // Get unique categories for filtering
@@ -521,7 +529,7 @@ const ShortsPage: React.FC = () => {
               onComment={handleComment}
               onShare={handleShare}
               onVideoChange={() => handleVideoChange(index)}
-              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : undefined}
+              onVideoEnd={isAutoAdvanceEnabled ? handleNextVideo : () => {}}
               isActive={index === currentVideoIndex}
             />
           </div>
@@ -536,7 +544,7 @@ const ShortsPage: React.FC = () => {
           setSelectedShortForComment(null);
         }}
         shortId={selectedShortForComment?.id || ''}
-        shortTitle={selectedShortForComment?.title}
+        shortTitle={selectedShortForComment?.title || 'Short video'}
         onCommentSubmit={handleCommentSubmit}
       />
     </div>

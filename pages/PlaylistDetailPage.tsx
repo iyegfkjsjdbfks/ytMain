@@ -119,24 +119,21 @@ const PlaylistDetailPage: React.FC = () => {
     }
   };
 
-  const handleSaveChanges = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!playlistId || !editingPlaylistTitle.trim()) {
+  const handleSaveChanges = async (title: string, description: string) => {
+    if (!playlistId || !title.trim()) {
       alert("Playlist title cannot be empty.");
       return;
     }
     try {
-      const updatedPlaylist = await updateUserPlaylistDetails(playlistId, editingPlaylistTitle, editingPlaylistDescription);
-      if (updatedPlaylist && playlistDetails) {
+      await updateUserPlaylistDetails(playlistId, { title, description });
+      if (playlistDetails) {
         setPlaylistDetails(prev => prev ? ({
           ...prev,
-          title: updatedPlaylist.title,
-          description: updatedPlaylist.description,
-          updatedAt: updatedPlaylist.updatedAt,
+          title,
+          description,
+          updatedAt: new Date().toISOString(),
         }) : null);
         setIsEditModalOpen(false);
-      } else {
-          throw new Error("Failed to receive updated playlist details from service.");
       }
     } catch (err) {
       console.error("Error updating playlist details:", err);
@@ -167,21 +164,18 @@ const PlaylistDetailPage: React.FC = () => {
         <PlaylistEditModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
-          playlistTitle={editingPlaylistTitle}
-          playlistDescription={editingPlaylistDescription}
-          onTitleChange={setEditingPlaylistTitle}
-          onDescriptionChange={setEditingPlaylistDescription}
+          initialTitle={editingPlaylistTitle}
+          initialDescription={editingPlaylistDescription}
           onSaveChanges={handleSaveChanges}
-          modalRef={editModalRef} 
         />
       )}
 
       <div className="mb-6 sm:mb-8">
         <div className="flex flex-col sm:flex-row items-start md:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-3">
-          {videos.length > 0 ? (
-            <img 
-                src={videos[0].thumbnailUrl} 
-                alt={`${title} thumbnail`} 
+          {videos && videos.length > 0 ? (
+            <img
+                src={videos[0]?.thumbnailUrl}
+                alt={`${title} thumbnail`}
                 className="w-full sm:w-32 sm:h-32 md:w-48 md:h-48 object-cover rounded-lg shadow-md flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
             />
           ) : (

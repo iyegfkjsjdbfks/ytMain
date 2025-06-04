@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PlusIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 
 interface PlaylistVideo {
@@ -67,7 +67,7 @@ const PlaylistManagerPage: React.FC = () => {
 
       return Array.from({ length: count }, (_, i) => ({
         id: `video-${i + 1}`,
-        title: titles[Math.floor(Math.random() * titles.length)],
+        title: titles[Math.floor(Math.random() * titles.length)] || `Video ${i + 1}`,
         thumbnail: `https://picsum.photos/320/180?random=${i}`,
         duration: `${Math.floor(Math.random() * 20) + 5}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
         views: Math.floor(Math.random() * 100000) + 1000,
@@ -96,14 +96,15 @@ const PlaylistManagerPage: React.FC = () => {
         const videos = generateMockVideos(videoCount);
         const totalViews = videos.reduce((sum, video) => sum + video.views, 0);
         
+        const title = playlistTitles[i] || `Playlist ${i + 1}`;
         return {
           id: `playlist-${i + 1}`,
-          title: playlistTitles[i],
-          description: `A comprehensive collection of videos about ${playlistTitles[i].toLowerCase()}. Perfect for beginners and advanced learners alike.`,
+          title,
+          description: `A comprehensive collection of videos about ${title.toLowerCase()}. Perfect for beginners and advanced learners alike.`,
           thumbnail: `https://picsum.photos/480/270?random=${i + 100}`,
           videoCount,
           totalViews,
-          visibility: visibilityOptions[Math.floor(Math.random() * visibilityOptions.length)],
+          visibility: visibilityOptions[Math.floor(Math.random() * visibilityOptions.length)] || 'public',
           createdDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
           lastUpdated: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
           videos
@@ -187,11 +188,13 @@ const PlaylistManagerPage: React.FC = () => {
 
     const items = Array.from(selectedPlaylist.videos);
     const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    if (reorderedItem) {
+      items.splice(result.destination.index, 0, reorderedItem);
 
-    const updatedPlaylist = { ...selectedPlaylist, videos: items };
-    setSelectedPlaylist(updatedPlaylist);
-    setPlaylists(playlists.map(p => p.id === selectedPlaylist.id ? updatedPlaylist : p));
+      const updatedPlaylist = { ...selectedPlaylist, videos: items };
+      setSelectedPlaylist(updatedPlaylist);
+      setPlaylists(playlists.map(p => p.id === selectedPlaylist.id ? updatedPlaylist : p));
+    }
   };
 
   const getVisibilityIcon = (visibility: string) => {

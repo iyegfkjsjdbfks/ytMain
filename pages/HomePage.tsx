@@ -2,13 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { HomeIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
-import VideoGrid from '../components/VideoGrid';
 import CategoryChips from '../components/CategoryChips';
-import ShortsSection from '../components/ShortsSection';
-import TrendingSection from '../components/TrendingSection';
-import SubscriptionFeed from '../components/SubscriptionFeed';
-import WatchHistory from '../components/WatchHistory';
-import LiveStreams from '../components/LiveStreams';
 import HomeContent from '../components/HomeContent'; // Added import
 import { useVideos } from '../hooks';
 
