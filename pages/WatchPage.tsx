@@ -245,7 +245,7 @@ const WatchPage: React.FC = () => {
               summary={summary}
               summaryError={summaryError}
               isSummarizing={isSummarizing}
-              canSummarize={canSummarize}
+              canSummarize={!!canSummarize}
               onSummarize={handleSummarizeDescription}
             />
             

@@ -18,7 +18,11 @@ export interface CommunityPost {
   commentsCount: number;
 }
 
-export interface Video {
+// Re-export core Video type
+export type { Video } from './src/types/core';
+
+// Extended Video interface with additional properties for backward compatibility
+export interface ExtendedVideo {
   id: string;
   title: string;
   thumbnailUrl: string;
@@ -82,11 +86,19 @@ export interface Video {
   };
 }
 
-export interface Channel {
+// Re-export core Channel type
+export type { Channel } from './src/types/core';
+
+// Extended Channel interface for backward compatibility
+export interface ExtendedChannel {
   id: string;
   name: string;
   avatarUrl: string;
   subscribers: string;
+  subscriberCount?: string;
+  videoCount?: number;
+  isVerified?: boolean;
+  description?: string;
   joinDate?: string; // Added
   totalViews?: string; // Added
   channelDescription?: string; // Added
@@ -94,21 +106,8 @@ export interface Channel {
   communityPosts?: CommunityPost[];
 }
 
-export interface Comment {
-  id: string;
-  userAvatarUrl: string;
-  userName: string;
-  commentText: string;
-  timestamp: string;
-  likes: number;
-  isLikedByCurrentUser?: boolean;
-  isDislikedByCurrentUser?: boolean; // Added for UI state
-  isEdited?: boolean; // To mark edited comments
-  parentId?: string; // ID of the comment this is a reply to
-  replies?: Comment[]; // Array of nested replies
-  replyCount?: number; // Number of direct replies
-  replyTo?: string; // Username of the person being replied to (e.g., "@username")
-}
+// Re-export core Comment type
+export type { Comment } from './src/types/core';
 
 // User-specific playlists
 export interface UserPlaylist {
@@ -149,7 +148,7 @@ export interface UploadProgress {
 }
 
 // Type alias for shorts (videos with isShort: true)
-export type Short = Omit<Video, 'isShort'> & {
+export type Short = Omit<ExtendedVideo, 'isShort'> & {
   isShort: true;
   isVertical?: boolean;
   // Additional Short-specific properties

@@ -3,13 +3,39 @@
 import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
 // Removed unused imports
 
+// Helper function to create complete video objects
+const createMockVideo = (partial: Partial<Video>): Video => ({
+  likes: 0,
+  dislikes: 0,
+  channelId: 'default-channel',
+  tags: [],
+  visibility: 'public' as const,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  ...partial,
+  id: partial.id || `video-${Date.now()}`,
+  title: partial.title || 'Untitled Video',
+  thumbnailUrl: partial.thumbnailUrl || 'https://picsum.photos/320/180',
+  videoUrl: partial.videoUrl || 'https://example.com/video.mp4',
+  duration: partial.duration || '10:00',
+  views: partial.views || '0',
+  channelName: partial.channelName || 'Unknown Channel',
+  channelAvatarUrl: partial.channelAvatarUrl || 'https://picsum.photos/40/40',
+  uploadedAt: partial.uploadedAt || new Date().toISOString(),
+  description: partial.description || 'No description available',
+  category: partial.category || 'Entertainment'
+});
+
+// Curated mock videos - removed duplicates and kept diverse, unique content
 const mockVideos: Video[] = [
-  {
+  // Travel & Nature
+  createMockVideo({
     id: '1',
     title: 'Exploring the Alps: A Scenic Journey',
     thumbnailUrl: 'https://picsum.photos/seed/alps/680/380',
     channelName: 'Nature Explorers',
     channelAvatarUrl: 'https://picsum.photos/seed/channel1/48/48',
+    channelId: 'channel1',
     views: '1.2M views',
     uploadedAt: '2 weeks ago',
     duration: '12:34',
@@ -17,27 +43,19 @@ const mockVideos: Video[] = [
     description: 'A breathtaking journey through the Swiss Alps, showcasing stunning landscapes and wildlife.',
     category: 'Travel',
     isShort: false,
-  },
-  {
-    id: 's1', 
-    title: 'Coolest 30s Trick Shot!',
-    thumbnailUrl: 'https://picsum.photos/seed/shorttrick/380/680', 
-    channelName: 'TrickShotMasters',
-    channelAvatarUrl: 'https://picsum.photos/seed/channelShort1/48/48',
-    views: '5.3M views',
-    uploadedAt: '1 day ago',
-    duration: '0:30',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    description: 'Check out this insane trick shot! #shorts #trickshot',
-    category: 'Shorts',
-    isShort: true,
-  },
-  {
+    likes: 12000,
+    dislikes: 150,
+    tags: ['travel', 'alps', 'nature', 'scenic']
+  }),
+
+  // Gaming & Tech
+  createMockVideo({
     id: '2',
     title: 'Ultimate Gaming Setup Tour 2024',
     thumbnailUrl: 'https://picsum.photos/seed/gaming/680/380',
     channelName: 'TechLevelUp',
     channelAvatarUrl: 'https://picsum.photos/seed/channel2/48/48',
+    channelId: 'channel2',
     views: '870K views',
     uploadedAt: '5 days ago',
     duration: '22:10',
@@ -45,27 +63,19 @@ const mockVideos: Video[] = [
     description: 'Check out my ultimate gaming setup for 2024!',
     category: 'Gaming',
     isShort: false,
-  },
-  {
-    id: 's2', 
-    title: 'QuickLaughs: Funny Cat Moment',
-    thumbnailUrl: 'https://picsum.photos/seed/catshort/380/680', 
-    channelName: 'Funny Pets TV',
-    channelAvatarUrl: 'https://picsum.photos/seed/channelFunnyPets/48/48',
-    views: '10.1M views',
-    uploadedAt: '6 hours ago',
-    duration: '0:15',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    description: 'This cat is hilarious! 😂 #shorts #funnycat #pets',
-    category: 'Shorts',
-    isShort: true,
-  },
-  {
+    likes: 8700,
+    dislikes: 120,
+    tags: ['gaming', 'setup', 'tech', '2024']
+  }),
+
+  // Cooking
+  createMockVideo({
     id: '3',
     title: 'Delicious & Easy Pasta Recipe',
     thumbnailUrl: 'https://picsum.photos/seed/pasta/680/380',
     channelName: 'Chef Studio',
     channelAvatarUrl: 'https://picsum.photos/seed/channel3/48/48',
+    channelId: 'channel3',
     views: '2.5M views',
     uploadedAt: '1 month ago',
     duration: '8:15',
@@ -73,27 +83,19 @@ const mockVideos: Video[] = [
     description: 'Learn how to make a delicious and easy pasta dish.',
     category: 'Cooking',
     isShort: false,
-  },
-  {
-    id: 's3', 
-    title: 'Mind-Blowing Magic Trick',
-    thumbnailUrl: 'https://picsum.photos/seed/magicshort/380/680', 
-    channelName: 'Magic Masters',
-    channelAvatarUrl: 'https://picsum.photos/seed/channelMagic/48/48',
-    views: '8.7M views',
-    uploadedAt: '3 days ago',
-    duration: '0:45',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    description: 'You won\'t believe this magic trick! #shorts #magic #mindblown',
-    category: 'Shorts',
-    isShort: true,
-  },
-  {
+    likes: 25000,
+    dislikes: 300,
+    tags: ['cooking', 'pasta', 'recipe', 'easy']
+  }),
+
+  // Programming Education
+  createMockVideo({
     id: '4',
     title: 'Building a Modern React App from Scratch',
     thumbnailUrl: 'https://picsum.photos/seed/react/680/380',
     channelName: 'CodeMaster Pro',
     channelAvatarUrl: 'https://picsum.photos/seed/channel4/48/48',
+    channelId: 'channel4',
     views: '450K views',
     uploadedAt: '1 week ago',
     duration: '45:22',
@@ -101,13 +103,19 @@ const mockVideos: Video[] = [
     description: 'Complete tutorial on building a modern React application with TypeScript and best practices.',
     category: 'Education',
     isShort: false,
-  },
-  {
+    likes: 4500,
+    dislikes: 50,
+    tags: ['react', 'typescript', 'tutorial', 'programming']
+  }),
+
+  // Fitness
+  createMockVideo({
     id: '5',
     title: 'Morning Workout Routine - 15 Minutes',
     thumbnailUrl: 'https://picsum.photos/seed/workout/680/380',
     channelName: 'FitLife Daily',
     channelAvatarUrl: 'https://picsum.photos/seed/channel5/48/48',
+    channelId: 'channel5',
     views: '3.2M views',
     uploadedAt: '4 days ago',
     duration: '15:30',
@@ -115,21 +123,147 @@ const mockVideos: Video[] = [
     description: 'Start your day right with this energizing 15-minute morning workout routine.',
     category: 'Sports',
     isShort: false,
-  },
-  {
-    id: 's4',
-    title: 'Life Hack: Phone Organization',
-    thumbnailUrl: 'https://picsum.photos/seed/lifehack/380/680',
-    channelName: 'Quick Tips',
-    channelAvatarUrl: 'https://picsum.photos/seed/channelTips/48/48',
+    likes: 32000,
+    dislikes: 200,
+    tags: ['workout', 'fitness', 'morning', 'exercise']
+  }),
+
+  // Science
+  createMockVideo({
+    id: '6',
+    title: 'The Science Behind Black Holes',
+    thumbnailUrl: 'https://picsum.photos/seed/blackhole/680/380',
+    channelName: 'Space Academy',
+    channelAvatarUrl: 'https://picsum.photos/seed/channel6/48/48',
+    channelId: 'channel6',
+    views: '1.8M views',
+    uploadedAt: '3 weeks ago',
+    duration: '28:45',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Dive deep into the fascinating world of black holes and their impact on space-time.',
+    category: 'Science',
+    isShort: false,
+    likes: 18000,
+    dislikes: 100,
+    tags: ['science', 'space', 'blackholes', 'physics']
+  }),
+
+  // Music Education
+  createMockVideo({
+    id: '7',
+    title: 'Guitar Lesson: Master the Pentatonic Scale',
+    thumbnailUrl: 'https://picsum.photos/seed/guitar/680/380',
+    channelName: 'Music Theory Hub',
+    channelAvatarUrl: 'https://picsum.photos/seed/channel7/48/48',
+    channelId: 'channel7',
+    views: '680K views',
+    uploadedAt: '1 week ago',
+    duration: '18:12',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Learn to master the pentatonic scale with practical exercises and tips.',
+    category: 'Music',
+    isShort: false,
+    likes: 6800,
+    dislikes: 80,
+    tags: ['music', 'guitar', 'tutorial', 'scales']
+  }),
+
+  // Photography
+  createMockVideo({
+    id: '8',
+    title: 'Photography Tips: Golden Hour Portraits',
+    thumbnailUrl: 'https://picsum.photos/seed/photography/680/380',
+    channelName: 'Photo Pro Tips',
+    channelAvatarUrl: 'https://picsum.photos/seed/channel8/48/48',
+    channelId: 'channel8',
+    views: '890K views',
+    uploadedAt: '5 days ago',
+    duration: '14:30',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Master the art of golden hour portrait photography with these professional tips.',
+    category: 'Photography',
+    isShort: false,
+    likes: 8900,
+    dislikes: 90,
+    tags: ['photography', 'portraits', 'goldenhour', 'tips']
+  }),
+
+  // SHORTS - Diverse short-form content
+  createMockVideo({
+    id: 's1',
+    title: 'Amazing Basketball Trick Shot',
+    thumbnailUrl: 'https://picsum.photos/seed/basketball/380/680',
+    channelName: 'Sports Highlights',
+    channelAvatarUrl: 'https://picsum.photos/seed/sports/48/48',
+    channelId: 'channel-sports',
+    views: '5.3M views',
+    uploadedAt: '1 day ago',
+    duration: '0:30',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Incredible basketball trick shot! #shorts #basketball #sports',
+    category: 'Shorts',
+    isShort: true,
+    likes: 53000,
+    dislikes: 200,
+    tags: ['shorts', 'basketball', 'sports', 'trickshot']
+  }),
+
+  createMockVideo({
+    id: 's2',
+    title: 'Funny Cat Compilation',
+    thumbnailUrl: 'https://picsum.photos/seed/cats/380/680',
+    channelName: 'Pet Comedy',
+    channelAvatarUrl: 'https://picsum.photos/seed/pets/48/48',
+    channelId: 'channel-pets',
+    views: '10.1M views',
+    uploadedAt: '6 hours ago',
+    duration: '0:45',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Hilarious cat moments that will make you laugh! #shorts #cats #funny',
+    category: 'Shorts',
+    isShort: true,
+    likes: 101000,
+    dislikes: 500,
+    tags: ['shorts', 'cats', 'funny', 'pets']
+  }),
+
+  createMockVideo({
+    id: 's3',
+    title: 'Quick Cooking Hack',
+    thumbnailUrl: 'https://picsum.photos/seed/cookinghack/380/680',
+    channelName: 'Kitchen Hacks',
+    channelAvatarUrl: 'https://picsum.photos/seed/kitchen/48/48',
+    channelId: 'channel-kitchen',
     views: '2.8M views',
     uploadedAt: '2 days ago',
     duration: '0:35',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    description: 'Organize your phone like a pro! #shorts #lifehack #productivity',
+    description: 'This cooking hack will save you time! #shorts #cooking #lifehack',
     category: 'Shorts',
     isShort: true,
-  },
+    likes: 28000,
+    dislikes: 150,
+    tags: ['shorts', 'cooking', 'lifehack', 'kitchen']
+  }),
+
+  createMockVideo({
+    id: 's4',
+    title: 'Dance Challenge Moves',
+    thumbnailUrl: 'https://picsum.photos/seed/dance/380/680',
+    channelName: 'Dance Trends',
+    channelAvatarUrl: 'https://picsum.photos/seed/dance/48/48',
+    channelId: 'channel-dance',
+    views: '15.2M views',
+    uploadedAt: '2 hours ago',
+    duration: '0:30',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    description: 'Learn the latest viral dance moves! #shorts #dance #viral',
+    category: 'Shorts',
+    isShort: true,
+    likes: 152000,
+    dislikes: 800,
+    tags: ['shorts', 'dance', 'viral', 'trending']
+  }),
   {
     id: '6',
     title: 'The Science Behind Black Holes',
@@ -464,12 +598,14 @@ const mockChannels: Channel[] = [
     id: 'channel1',
     name: 'Nature Explorers',
     avatarUrl: 'https://picsum.photos/seed/channel1/120/120',
-    bannerUrl: 'https://picsum.photos/seed/banner1/1200/300',
+    subscribers: 2500000,
     subscriberCount: '2.5M',
     videoCount: 156,
     description: 'Exploring the world\'s most beautiful natural landscapes.',
     isVerified: true,
-    joinedDate: 'Jan 15, 2018'
+    joinedDate: 'Jan 15, 2018',
+    createdAt: '2018-01-15T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   }
 ];
 
@@ -497,7 +633,9 @@ const mockComments: Comment[] = [
     commentText: 'Amazing video! The scenery is breathtaking.',
     timestamp: '2 hours ago',
     likes: 42,
-    replies: []
+    replies: [],
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
   }
 ];
 
@@ -547,13 +685,20 @@ export const uploadVideo = (
           thumbnailUrl: data.thumbnailFile ? URL.createObjectURL(data.thumbnailFile) : 'https://picsum.photos/680/380',
           channelName: 'Your Channel',
           channelAvatarUrl: 'https://picsum.photos/seed/user/48/48',
+          channelId: 'your-channel-id',
           views: '0 views',
           uploadedAt: 'Just now',
           duration: data.isShorts ? '0:30' : '10:00',
           videoUrl: data.videoFile ? URL.createObjectURL(data.videoFile) : '',
           description: data.description,
           category: data.category,
-          isShort: data.isShorts
+          tags: data.tags,
+          likes: 0,
+          dislikes: 0,
+          visibility: data.visibility,
+          isShort: data.isShorts,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
         };
         
         // Add to mock videos array

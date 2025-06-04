@@ -69,16 +69,18 @@ export interface Video extends BaseEntity {
   uploadedAt: string;
   channelName: string;
   channelId: string;
-  channelAvatar?: string;
-  channelAvatarUrl?: string;
+  channelAvatarUrl: string;
   category: string;
   tags: string[];
-  isLive: boolean;
-  isShort: boolean;
+  isLive?: boolean;
+  isShort?: boolean;
   isLiked?: boolean;
   isDisliked?: boolean;
   isSaved?: boolean;
   visibility: VideoVisibility;
+  privacyStatus?: 'public' | 'private' | 'unlisted';
+  commentCount?: number;
+  viewCount?: number;
   monetization?: MonetizationSettings;
   analytics?: VideoAnalytics;
 }
@@ -158,19 +160,20 @@ export interface ShortMusic {
 // Channel Types
 export interface Channel extends BaseEntity {
   name: string;
-  handle: string;
+  handle?: string;
   description: string;
-  avatar: string;
+  avatarUrl: string;
   banner?: string;
-  subscriberCount: number;
+  subscribers: number;
+  subscriberCount?: string; // For display purposes
   videoCount: number;
-  totalViews: number;
+  totalViews?: number;
   isVerified: boolean;
-  joinedDate: string;
+  joinedDate?: string;
   country?: string;
-  links: SocialLinks;
-  playlists: Playlist[];
-  sections: ChannelSection[];
+  links?: SocialLinks;
+  playlists?: Playlist[];
+  sections?: ChannelSection[];
 }
 
 export interface ChannelSection {
@@ -206,18 +209,26 @@ export interface PlaylistVideo {
 
 // Comment Types
 export interface Comment extends BaseEntity {
-  content: string;
-  authorId: string;
-  authorName: string;
-  authorAvatar?: string;
-  videoId: string;
-  parentId?: string; // For replies
+  userAvatarUrl: string;
+  userName: string;
+  commentText: string;
+  timestamp: string;
   likes: number;
-  dislikes: number;
-  replies: Comment[];
-  isEdited: boolean;
-  isPinned: boolean;
-  isHearted: boolean; // Hearted by video owner
+  isLikedByCurrentUser?: boolean;
+  isDislikedByCurrentUser?: boolean;
+  isEdited?: boolean;
+  parentId?: string; // For replies
+  replies?: Comment[];
+  replyCount?: number;
+  replyTo?: string;
+  videoId?: string;
+  authorId?: string;
+  authorName?: string;
+  authorAvatar?: string;
+  content?: string; // Alias for commentText
+  dislikes?: number;
+  isPinned?: boolean;
+  isHearted?: boolean;
 }
 
 // Subscription Types

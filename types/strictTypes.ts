@@ -342,35 +342,4 @@ export interface FormComponentProps extends InteractiveComponentProps {
   onFocus?: EventHandler<React.FocusEvent>;
 }
 
-// Re-export all types for easy importing
-export type {
-  VideoMetadata,
-  VideoStats,
-  VideoFile,
-  StrictVideo,
-  ChannelBranding,
-  ChannelStats,
-  StrictChannel,
-  PlaylistSettings,
-  StrictPlaylist,
-  CommentAuthor,
-  StrictComment,
-  NotificationData,
-  StrictNotification,
-  MiniplayerVideo,
-  FormFieldValue,
-  StrictFormState,
-  FormValidationRule,
-  FormFieldConfig,
-  ApiRequestConfig,
-  ApiErrorDetails,
-  StrictApiError,
-  CacheItem,
-  CacheConfig,
-  CustomEventData,
-  StrictCustomEvent,
-  StorageItem,
-  StorageConfig,
-  AnalyticsEvent,
-  AnalyticsConfig,
-};
+// All types are already exported above with their definitions

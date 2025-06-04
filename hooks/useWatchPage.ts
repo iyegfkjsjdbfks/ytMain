@@ -27,6 +27,8 @@ interface Video {
   thumbnailUrl: string;
   videoUrl: string;
   channelId: string;
+  channelName: string;
+  channelAvatarUrl: string;
   duration: string;
   category: string;
 }
@@ -112,10 +114,16 @@ export const useWatchPage = () => {
           return;
         }
         
-        setVideo(foundVideo);
-        
+        // Ensure video has channel info
+        const videoWithChannelInfo = {
+          ...foundVideo,
+          channelName: foundVideo.channelName || 'Unknown Channel',
+          channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png'
+        };
+        setVideo(videoWithChannelInfo);
+
         // Load channel data
-        const foundChannel = await getChannelByName(foundVideo.channelName);
+        const foundChannel = await getChannelByName(foundVideo.channelName || '');
         setChannel(foundChannel || null);
         
         // Load comments
@@ -202,17 +210,23 @@ export const useWatchPage = () => {
   const handleCreatePlaylist = async (name: string, description?: string) => {
     // Simulate API call to create new playlist
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const newPlaylist = {
       id: `playlist-${Date.now()}`,
       title: name,
       description: description || '',
       videoCount: 0,
+      totalDuration: '0:00:00',
+      visibility: 'private' as const,
+      ownerId: 'user-1',
+      ownerName: 'You',
+      videos: [],
+      tags: [],
       thumbnailUrl: '',
-      isPrivate: false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
-    
+
     return newPlaylist;
   };
 
@@ -223,18 +237,30 @@ export const useWatchPage = () => {
       title: 'Watch Later',
       description: 'Videos to watch later',
       videoCount: 5,
+      totalDuration: '2:30:45',
+      visibility: 'private' as const,
+      ownerId: 'user-1',
+      ownerName: 'You',
+      videos: [],
+      tags: [],
       thumbnailUrl: '',
-      isPrivate: false,
-      createdAt: '2024-01-01T00:00:00Z'
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z'
     },
     {
       id: 'playlist-2',
       title: 'Favorites',
       description: 'My favorite videos',
       videoCount: 12,
+      totalDuration: '5:45:30',
+      visibility: 'private' as const,
+      ownerId: 'user-1',
+      ownerName: 'You',
+      videos: [],
+      tags: [],
       thumbnailUrl: '',
-      isPrivate: false,
-      createdAt: '2024-01-01T00:00:00Z'
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z'
     }
   ];
   

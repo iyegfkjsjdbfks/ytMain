@@ -41,9 +41,9 @@ interface CommentItemProps {
   isChannelOwner?: boolean;
   onReply: (parentId: string, content: string) => void;
   onReact: (commentId: string, type: 'like' | 'dislike') => void;
-  onPin?: (commentId: string) => void | Promise<void>;
-  onHeart?: (commentId: string) => void | Promise<void>;
-  onReport?: (commentId: string, reason: string) => void | Promise<void>;
+  onPin: (commentId: string) => void | Promise<void>;
+  onHeart: (commentId: string) => void | Promise<void>;
+  onReport: (commentId: string, reason: string) => void | Promise<void>;
   level?: number;
 }
 
@@ -270,8 +270,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
                     isChannelOwner={isChannelOwner}
                     onReply={onReply}
                     onReact={onReact}
-                    onHeart={onHeart}
-                    onReport={onReport}
+                    onPin={onPin || (() => {})}
+                    onHeart={onHeart || (() => {})}
+                    onReport={onReport || (() => {})}
                     level={level + 1}
                   />
                 ))}
@@ -465,8 +466,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({
               isChannelOwner={isChannelOwner}
               onReply={handleReply}
               onReact={handleReact}
-              onPin={isChannelOwner ? handlePin : undefined}
-              onHeart={isChannelOwner ? handleHeart : undefined}
+              onPin={isChannelOwner ? handlePin : () => {}}
+              onHeart={isChannelOwner ? handleHeart : () => {}}
               onReport={handleReport}
             />
           ))}

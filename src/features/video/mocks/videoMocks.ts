@@ -114,17 +114,21 @@ export const generateMockVideo = (id?: string): Video => {
     title: selectedTitle,
     description: `This is a description for "${selectedTitle}". It provides additional context and information about the video content.`,
     thumbnailUrl: `https://picsum.photos/seed/${randomInt(1, 1000)}/640/360`,
+    videoUrl: `https://example.com/video/${randomInt(1, 10000)}.mp4`,
     duration: randomInt(120, 1200).toString(),
     views: randomInt(1000, 1000000).toString(),
     likes: randomInt(100, 50000),
+    dislikes: randomInt(10, 1000),
+    category: 'Entertainment',
+    tags: ['video', 'content'],
     createdAt: randomDate(),
+    updatedAt: randomDate(),
     uploadedAt: randomDate(),
     visibility: selectedVisibility,
-    channel: selectedChannel,
     // Backward compatibility
     channelId: selectedChannel.id,
-    channelTitle: selectedChannel.name,
-    channelThumbnail: selectedChannel.avatarUrl || ''
+    channelName: selectedChannel.name,
+    channelAvatarUrl: selectedChannel.avatarUrl || ''
   };
 };
 
