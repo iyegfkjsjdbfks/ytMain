@@ -84,7 +84,7 @@ const WatchPage: React.FC = () => {
         uploadedAt: '2024-01-15T10:30:00Z',
         channelName: 'Tech Insights',
         channelId: 'tech-insights',
-        channelAvatar: 'https://picsum.photos/seed/tech-insights/150/150',
+        channelAvatarUrl: 'https://picsum.photos/seed/tech-insights/150/150',
         tags: ['React', 'JavaScript', 'Web Development', 'Programming', 'Tutorial'],
         category: 'Education',
         isLive: false,
@@ -197,7 +197,7 @@ const WatchPage: React.FC = () => {
           uploadedAt: '3 days ago',
           channelName: 'Web Dev Pro',
           channelId: 'webdevpro',
-          channelAvatar: 'https://picsum.photos/seed/webdevpro/150/150',
+          channelAvatarUrl: 'https://picsum.photos/seed/webdevpro/150/150',
           category: 'Education',
           tags: ['nextjs', 'react', 'web development'],
           isLive: false,
@@ -219,7 +219,7 @@ const WatchPage: React.FC = () => {
           uploadedAt: '1 week ago',
           channelName: 'Code Academy',
           channelId: 'codeacademy',
-          channelAvatar: 'https://picsum.photos/seed/codeacademy/150/150',
+          channelAvatarUrl: 'https://picsum.photos/seed/codeacademy/150/150',
           category: 'Education',
           tags: ['typescript', 'programming', 'types'],
           isLive: false,
@@ -241,7 +241,7 @@ const WatchPage: React.FC = () => {
           uploadedAt: '5 days ago',
           channelName: 'Testing Guru',
           channelId: 'testingguru',
-          channelAvatar: 'https://picsum.photos/seed/testingguru/150/150',
+          channelAvatarUrl: 'https://picsum.photos/seed/testingguru/150/150',
           category: 'Education',
           tags: ['react', 'testing', 'javascript'],
           isLive: false,
@@ -335,7 +335,7 @@ const WatchPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
-                    src={video.channelAvatar}
+                    src={video.channelAvatarUrl}
                     alt={video.channelName}
                     className="w-10 h-10 rounded-full"
                   />
@@ -438,7 +438,7 @@ const WatchPage: React.FC = () => {
                     </h4>
                     <div className="flex items-center gap-1 mb-1">
                       <img
-                        src={video.channelAvatar}
+                        src={video.channelAvatarUrl}
                         alt={video.channelName}
                         className="w-4 h-4 rounded-full"
                       />

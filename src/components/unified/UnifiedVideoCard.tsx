@@ -249,10 +249,10 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
   const ContentSection = () => (
     <div className={styles.content}>
       {/* Channel Avatar (for default and list variants) */}
-      {showChannel && video.channelAvatar && (variant === 'default' || variant === 'list') && (
+      {showChannel && video.channelAvatarUrl && (variant === 'default' || variant === 'list') && (
         <Link to={channelUrl} onClick={handleChannelClick} className="flex-shrink-0">
           <img
-            src={video.channelAvatar}
+            src={video.channelAvatarUrl}
             alt={video.channelName}
             className={cn('rounded-full object-cover', sizeStyle.avatar)}
           />
