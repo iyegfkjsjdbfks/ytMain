@@ -1,4 +1,5 @@
-import { Video, Channel, VideoVisibility } from '../types';
+import { Video } from '../../../types/core';
+import { Channel, VideoVisibility } from '../types';
 
 /**
  * Generate a random number between min and max (inclusive)

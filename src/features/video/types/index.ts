@@ -12,7 +12,11 @@ export interface Channel {
 
 export type VideoVisibility = 'public' | 'unlisted' | 'private';
 
-export interface Video {
+// Re-export Video from core types to avoid conflicts
+export { Video } from '../../../types/core';
+
+// Legacy Video interface - deprecated, use Video from core instead
+export interface LegacyVideo {
   id: string;
   title: string;
   description: string;

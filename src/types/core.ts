@@ -70,10 +70,14 @@ export interface Video extends BaseEntity {
   channelName: string;
   channelId: string;
   channelAvatar?: string;
+  channelAvatarUrl?: string;
   category: string;
   tags: string[];
   isLive: boolean;
   isShort: boolean;
+  isLiked?: boolean;
+  isDisliked?: boolean;
+  isSaved?: boolean;
   visibility: VideoVisibility;
   monetization?: MonetizationSettings;
   analytics?: VideoAnalytics;
