@@ -5,7 +5,7 @@ interface UseVideoAutoplayProps {
   isPlaying: boolean;
   isManuallyPaused: boolean;
   actions: {
-    play: () => void;
+    play: () => Promise<void>;
     pause: () => void;
     unmute: () => void;
   };
@@ -37,7 +37,7 @@ export const useVideoAutoplay = ({
       if (unmuteOnAutoplay) {
         actions.unmute();
       }
-      actions.play().catch(error => {
+      actions.play().catch((error: Error) => {
         console.warn('Autoplay failed:', error);
         // Autoplay might be blocked by browser policy
       });

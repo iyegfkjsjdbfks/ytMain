@@ -26,8 +26,7 @@ export function useModal({
   defaultOpen = false,
   onOpen,
   onClose,
-  closeOnEscape = true,
-  closeOnOutsideClick = true
+  closeOnEscape = true
 }: UseModalOptions = {}): UseModalReturn {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -91,7 +90,7 @@ export function useModal({
 /**
  * Hook for managing multiple modals with string keys
  */
-export function useModals<T extends string>(modalKeys: T[]) {
+export function useModals<T extends string>() {
   const [openModals, setOpenModals] = useState<Set<T>>(new Set());
 
   const openModal = useCallback((key: T) => {

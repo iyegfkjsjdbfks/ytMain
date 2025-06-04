@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 import { Video } from '../types';
 import { getVideos } from '../services/mockVideoService';
 import { parseViewCount } from '../utils/numberUtils';
@@ -281,7 +281,7 @@ const AnalyticsPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {analyticsData.videoPerformance.map((item, index) => (
+              {analyticsData.videoPerformance.map((item) => (
                 <tr key={item.video.id} className="border-b border-neutral-100 dark:border-neutral-700/50 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-3">

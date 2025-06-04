@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Video } from '../types';
-import { getVideos, getVideosByChannelId } from '../services/mockVideoService';
+import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
+import { Video, ContentItem } from '../types';
+import { getVideos } from '../services/mockVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
-interface ContentItem extends Video {
-  status: 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted';
-  scheduledDate?: string;
-  lastModified: string;
-}
+
 
 type ViewMode = 'grid' | 'list';
 type FilterType = 'all' | 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted';
@@ -72,18 +68,20 @@ const ContentManagerPage: React.FC = () => {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'newest':
-          return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+          return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
         case 'oldest':
-          return new Date(a.uploadDate).getTime() - new Date(b.uploadDate).getTime();
+          return new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime();
         case 'mostViews':
-          return b.views - a.views;
+          return parseInt(b.views) - parseInt(a.views);
         case 'leastViews':
-          return a.views - b.views;
+          return parseInt(a.views) - parseInt(b.views);
         case 'alphabetical':
           return a.title.localeCompare(b.title);
         case 'duration':
-          return parseInt(b.duration.split(':')[0]) * 60 + parseInt(b.duration.split(':')[1]) - 
-                 (parseInt(a.duration.split(':')[0]) * 60 + parseInt(a.duration.split(':')[1]));
+          const aDurationParts = a.duration?.split(':') || ['0', '0'];
+          const bDurationParts = b.duration?.split(':') || ['0', '0'];
+          return parseInt(bDurationParts[0]) * 60 + parseInt(bDurationParts[1]) -
+                 (parseInt(aDurationParts[0]) * 60 + parseInt(aDurationParts[1]));
         default:
           return 0;
       }
@@ -130,8 +128,6 @@ const ContentManagerPage: React.FC = () => {
             case 'delete':
               return null; // Will be filtered out
             case 'duplicate':
-              // Add duplicated item
-              const duplicated = { ...item, id: `${item.id}-copy`, title: `${item.title} (Copy)` };
               return item;
             default:
               return item;
@@ -150,8 +146,8 @@ const ContentManagerPage: React.FC = () => {
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
           status: 'draft' as const,
-          uploadDate: new Date().toISOString(),
-          views: 0
+          uploadedAt: new Date().toISOString(),
+          views: '0'
         }));
       setContent(prev => [...prev, ...duplicatedItems]);
     }
@@ -404,11 +400,11 @@ const ContentManagerPage: React.FC = () => {
                       <div className="flex items-center text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
                         <span className="flex items-center">
                           <EyeIcon className="w-3 h-3 mr-1" />
-                          {formatNumber(item.views)}
+                          {formatNumber(parseInt(item.views))}
                         </span>
                         <span className="flex items-center">
                           <ClockIcon className="w-3 h-3 mr-1" />
-                          {parseRelativeDate(item.uploadDate)}
+                          {parseRelativeDate(item.uploadedAt)}
                         </span>
                       </div>
                     </div>
@@ -488,10 +484,10 @@ const ContentManagerPage: React.FC = () => {
                     <div className="flex items-center space-x-4 mt-1">
                       {getStatusBadge(item.status, item.scheduledDate)}
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
-                        {formatNumber(item.views)} views
+                        {formatNumber(parseInt(item.views))} views
                       </span>
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
-                        {parseRelativeDate(item.uploadDate)}
+                        {parseRelativeDate(item.uploadedAt)}
                       </span>
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
                         {item.duration}

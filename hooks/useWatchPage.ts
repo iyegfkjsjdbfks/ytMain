@@ -80,16 +80,14 @@ export const useWatchPage = () => {
   
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [saveModalLoading, setSaveModalLoading] = useState(false);
-  
+
   // AI Summary state
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string>('');
   const [isSummarizing, setIsSummarizing] = useState(false);
-  
+
   // Related videos state
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
-  const [showAllRelated, setShowAllRelated] = useState(false);
   
   // Refs
   const saveButtonRef = useRef<HTMLButtonElement>(null);
@@ -124,12 +122,38 @@ export const useWatchPage = () => {
 
         // Load channel data
         const foundChannel = await getChannelByName(foundVideo.channelName || '');
-        setChannel(foundChannel || null);
+        if (foundChannel) {
+          // Ensure channel has required subscriberCount property
+          const channelWithSubscriberCount = {
+            ...foundChannel,
+            subscriberCount: foundChannel.subscriberCount || foundChannel.subscribers?.toString() || '0'
+          };
+          setChannel(channelWithSubscriberCount);
+        } else {
+          setChannel(null);
+        }
         
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
         const topLevelComments = videoComments.filter(c => !c.parentId);
-        setComments(topLevelComments);
+        // Ensure comments have all required properties
+        const commentsWithDefaults = topLevelComments.map(comment => ({
+          ...comment,
+          isLikedByCurrentUser: comment.isLikedByCurrentUser ?? false,
+          isDislikedByCurrentUser: comment.isDislikedByCurrentUser ?? false,
+          isEdited: comment.isEdited ?? false,
+          replies: comment.replies ?? [],
+          replyCount: comment.replyCount ?? 0,
+          content: comment.content ?? comment.commentText,
+          dislikes: comment.dislikes ?? 0,
+          isPinned: comment.isPinned ?? false,
+          isHearted: comment.isHearted ?? false,
+          videoId: comment.videoId ?? videoId,
+          authorId: comment.authorId ?? '',
+          authorName: comment.authorName ?? comment.userName,
+          authorAvatar: comment.authorAvatar ?? comment.userAvatarUrl
+        }));
+        setComments(commentsWithDefaults);
         setCommentCount(videoComments.length);
         
         // Load related videos
@@ -190,7 +214,7 @@ export const useWatchPage = () => {
     }
   };
 
-  const handleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+  const handleSaveToPlaylist = async (playlistId: string) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
     
@@ -442,7 +466,7 @@ export const useWatchPage = () => {
   };
   
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
-  const displayedRelatedVideos = showAllRelated ? allRelatedVideos : allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
+  const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
   
   return {
     // Core data
@@ -474,18 +498,16 @@ export const useWatchPage = () => {
     
     // Modal and loading state
     isSaveModalOpen,
-    saveModalLoading,
-    
+
     // AI Summary state
     summary,
     summaryError,
     isSummarizing,
     canSummarize,
-    
+
     // Related videos
     allRelatedVideos,
     displayedRelatedVideos,
-    showAllRelated,
     
     // Refs
     saveButtonRef,

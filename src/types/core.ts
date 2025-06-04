@@ -87,6 +87,13 @@ export interface Video extends BaseEntity {
 
 export type VideoVisibility = 'public' | 'unlisted' | 'private' | 'scheduled';
 
+// Content Management Types
+export interface ContentItem extends Video {
+  status: 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted';
+  scheduledDate?: string;
+  lastModified: string;
+}
+
 export interface MonetizationSettings {
   enabled: boolean;
   adBreaks: AdBreak[];
@@ -165,7 +172,7 @@ export interface Channel extends BaseEntity {
   avatarUrl: string;
   banner?: string;
   subscribers: number;
-  subscriberCount?: string; // For display purposes
+  subscriberCount: string; // For display purposes
   videoCount: number;
   totalViews?: number;
   isVerified: boolean;
@@ -214,21 +221,21 @@ export interface Comment extends BaseEntity {
   commentText: string;
   timestamp: string;
   likes: number;
-  isLikedByCurrentUser?: boolean;
-  isDislikedByCurrentUser?: boolean;
-  isEdited?: boolean;
+  isLikedByCurrentUser: boolean;
+  isDislikedByCurrentUser: boolean;
+  isEdited: boolean;
   parentId?: string; // For replies
-  replies?: Comment[];
-  replyCount?: number;
+  replies: Comment[];
+  replyCount: number;
   replyTo?: string;
-  videoId?: string;
-  authorId?: string;
-  authorName?: string;
-  authorAvatar?: string;
-  content?: string; // Alias for commentText
-  dislikes?: number;
-  isPinned?: boolean;
-  isHearted?: boolean;
+  videoId: string;
+  authorId: string;
+  authorName: string;
+  authorAvatar: string;
+  content: string; // Alias for commentText
+  dislikes: number;
+  isPinned: boolean;
+  isHearted: boolean;
 }
 
 // Subscription Types
