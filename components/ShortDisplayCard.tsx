@@ -1,9 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Short } from '../types';
-import { formatNumber } from '../utils/formatters';
 import { useVideoPlayer, useIntersectionObserver, useVideoAutoplay } from '../hooks';
 import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 
@@ -59,8 +58,8 @@ interface VideoInfoProps {
   title: string;
   channelName: string;
   views: string;
-  isFollowed?: boolean;
-  onFollow?: () => void;
+  isFollowed: boolean;
+  onFollow: (() => void) | undefined;
 }
 
 const VideoInfo: React.FC<VideoInfoProps> = ({
@@ -277,11 +276,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   }, [isActive, onVideoChange]);
 
   return (
-    <div 
-      ref={intersectionRef}
+    <div
+      ref={intersectionRef as React.RefObject<HTMLDivElement>}
       className={`relative bg-black overflow-hidden group cursor-pointer ${
-        isOnShortsPage 
-          ? 'w-full h-full' 
+        isOnShortsPage
+          ? 'w-full h-full'
           : 'w-40 h-72 rounded-lg'
       }`}
     >
@@ -300,12 +299,12 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         onCanPlay={events.onCanPlay}
         onPlay={events.onPlay}
         onPause={events.onPause}
-        onTimeUpdate={events.onTimeUpdate}
+        onTimeUpdate={() => events.onTimeUpdate()}
         onDurationChange={events.onDurationChange}
         onVolumeChange={events.onVolumeChange}
-        onError={events.onError}
-        onEnded={(e) => {
-          events.onEnded(e);
+        onError={(e) => events.onError(e.nativeEvent)}
+        onEnded={() => {
+          events.onEnded();
           handleVideoEnd();
         }}
         onProgress={events.onProgress}

@@ -30,7 +30,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   poster,
   qualities = [],
   subtitles = [],
-  chapters = [],
   autoplay = false,
   muted = false,
   loop = false,
@@ -137,18 +136,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   // Custom event handlers
-  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    events.onTimeUpdate(e);
+  const handleTimeUpdate = () => {
+    events.onTimeUpdate();
     onTimeUpdate?.(state.currentTime);
   };
 
-  const handleEnded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    events.onEnded?.(e);
+  const handleEnded = () => {
+    events.onEnded();
     onEnded?.();
   };
 
   const handleError = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    events.onError(e);
+    events.onError(e.nativeEvent);
     onError?.(state.error || 'Video playback error');
   };
 

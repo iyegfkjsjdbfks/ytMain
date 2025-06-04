@@ -32,7 +32,6 @@ const positionClasses = {
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   isOpen,
-  onClose,
   children,
   className = '',
   position = 'bottom-right',

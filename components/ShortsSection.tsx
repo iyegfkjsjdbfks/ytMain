@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Video } from '../types';
+import { Short } from '../types';
 import { getShortsVideos } from '../services/mockVideoService'; // Assuming you have a service to fetch videos
 import ShortsIcon from './icons/ShortsIcon'; // Assuming you have a ShortsIcon
 import ShortDisplayCard from './ShortDisplayCard'; // Assuming you have a ShortDisplayCard component
@@ -10,7 +10,7 @@ interface ShortsSectionProps {
 }
 
 const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
-  const [shorts, setShorts] = useState<Video[]>([]);
+  const [shorts, setShorts] = useState<Short[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,9 +20,19 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         setLoading(true);
         // Assuming your video service can filter by a 'Shorts' category or similar
         // Get shorts videos directly from the service
-        const allShortsVideos = await getShortsVideos(); 
+        const allShortsVideos = await getShortsVideos();
         const shortsVideos = allShortsVideos.slice(0, maxShorts);
-        setShorts(shortsVideos);
+
+        // Convert Video objects to Short objects
+        const convertedShorts: Short[] = shortsVideos.map(video => ({
+          ...video,
+          duration: '0:60', // Shorts are typically 60 seconds or less
+          isShort: true as const,
+          isVertical: true,
+          visibility: video.visibility === 'scheduled' ? 'public' : video.visibility as 'public' | 'private' | 'unlisted'
+        }));
+
+        setShorts(convertedShorts);
         setError(null);
       } catch (err) {
         console.error('Failed to fetch shorts:', err);

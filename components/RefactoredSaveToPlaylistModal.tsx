@@ -36,7 +36,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   
   // Auto-select first playlist when modal opens
   useEffect(() => {
-    if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId) {
+    if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId && existingPlaylists[0]) {
       setSelectedPlaylistId(existingPlaylists[0].id);
     }
   }, [isOpen, existingPlaylists, selectedPlaylistId]);
@@ -51,14 +51,12 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   
   const {
     loading: saveLoading,
-    error: saveError,
-    execute: executeSave // eslint-disable-line @typescript-eslint/no-unused-vars
+    error: saveError
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
-    error: createError,
-    execute: executeCreate // eslint-disable-line @typescript-eslint/no-unused-vars
+    error: createError
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist

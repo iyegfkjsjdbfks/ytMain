@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { unifiedApiService, ApiError, NetworkError } from '../services/unifiedApiService';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 // Unified state management hook
 export interface AsyncState<T> {
@@ -84,7 +83,7 @@ export function useApi<T>(
     dependencies = [],
   } = options;
 
-  const [state, { setData, setLoading, setError, reset }] = useAsyncState<T>();
+  const [state, { setData, setLoading, setError }] = useAsyncState<T>();
   const retryCountRef = useRef(0);
   const refreshIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const mountedRef = useRef(true);
@@ -146,6 +145,7 @@ export function useApi<T>(
         }
       };
     }
+    return undefined;
   }, [refreshInterval, fetchData]);
 
   // Cleanup
@@ -439,7 +439,9 @@ export function useIntersectionObserver(
     
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
+        if (entry) {
+          setIsIntersecting(entry.isIntersecting);
+        }
       },
       options
     );

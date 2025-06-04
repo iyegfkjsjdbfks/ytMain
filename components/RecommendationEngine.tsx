@@ -84,7 +84,10 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     [...watchHistory, ...likedVideos].forEach(videoId => {
       Object.keys(categoryMap).forEach(key => {
         if (videoId.toLowerCase().includes(key)) {
-          categories.add(categoryMap[key]);
+          const category = categoryMap[key as keyof typeof categoryMap];
+          if (category) {
+            categories.add(category);
+          }
         }
       });
     });

@@ -32,6 +32,7 @@ export const useDropdownMenu = () => {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
+    return undefined;
   }, [isOpen]);
 
   // Close menu on escape key
@@ -46,6 +47,7 @@ export const useDropdownMenu = () => {
       document.addEventListener('keydown', handleEscapeKey);
       return () => document.removeEventListener('keydown', handleEscapeKey);
     }
+    return undefined;
   }, [isOpen]);
 
   return {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode, useReducer, useCallback } from 'react';
-import { User } from '../types';
+import { User } from '../src/types/core';
 import { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
 
 // Unified App State Interface
@@ -162,19 +162,44 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   // Auth actions
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     dispatch({ type: 'SET_AUTH_LOADING', payload: true });
-    
+
     try {
-      // Simulate API call
+      // Simulate API call - password validation would happen here
+      if (password.length < 6) {
+        return false;
+      }
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Mock successful login
       const mockUser: User = {
         id: '1',
-        username: email.split('@')[0],
+        username: email.split('@')[0] || 'user',
         email,
+        displayName: email.split('@')[0] || 'user',
         avatar: 'https://via.placeholder.com/40',
         isVerified: false,
+        subscriberCount: 0,
+        preferences: {
+          theme: 'system',
+          language: 'en',
+          autoplay: true,
+          notifications: {
+            email: true,
+            push: true,
+            subscriptions: true,
+            comments: true,
+            likes: true,
+            mentions: true
+          },
+          privacy: {
+            showSubscriptions: true,
+            showLikedVideos: true,
+            showWatchHistory: true,
+            allowComments: true
+          }
+        },
         createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
       
       localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));

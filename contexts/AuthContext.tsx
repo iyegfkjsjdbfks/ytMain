@@ -67,26 +67,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       // Mock authentication - in real app, this would be an API call
       if (email && password.length >= 6) {
+        const username = email.split('@')[0] || 'user';
         const mockUser: User = {
           id: `user_${Date.now()}`,
-          username: email.split('@')[0],
+          username,
           email,
-          avatar: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&background=random`,
+          avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: Math.random() > 0.5,
           subscriberCount: Math.floor(Math.random() * 10000),
           createdAt: new Date().toISOString()
         };
         
-        const mockToken = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        
+        const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+
         // Store in localStorage
         localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
         localStorage.setItem('youtube_clone_token', mockToken);
-        
+
         setUser(mockUser);
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('Login error:', error);
@@ -99,7 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (username: string, email: string, password: string): Promise<boolean> => {
     try {
       setIsLoading(true);
-      
+
       // Mock registration - in real app, this would be an API call
       if (username && email && password.length >= 6) {
         const mockUser: User = {
@@ -111,8 +112,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           subscriberCount: 0,
           createdAt: new Date().toISOString()
         };
-        
-        const mockToken = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+        const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
         
         // Store in localStorage
         localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));

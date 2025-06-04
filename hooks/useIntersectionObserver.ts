@@ -46,14 +46,16 @@ export const useIntersectionObserver = ({
 
   const updateEntry = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
-    
+
+    if (!entry) return;
+
     if (frozen.current && entry.isIntersecting) {
       return;
     }
-    
+
     setEntry(entry);
     setIsIntersecting(entry.isIntersecting);
-    
+
     if (freezeOnceVisible && entry.isIntersecting) {
       frozen.current = true;
     }
