@@ -6,8 +6,8 @@ import {
   HeartIcon,
   ChatBubbleLeftIcon,
   ShareIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   GlobeAltIcon,
   DevicePhoneMobileIcon,
   ComputerDesktopIcon,
@@ -65,7 +65,7 @@ interface MetricCardProps {
   title: string;
   value: string | number;
   change?: number;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<any>;
   iconColor: string;
   format?: 'number' | 'duration' | 'percentage' | 'currency';
 }
@@ -108,9 +108,9 @@ const MetricCard: React.FC<MetricCardProps> = ({
               change >= 0 ? 'text-green-600' : 'text-red-600'
             }`}>
               {change >= 0 ? (
-                <TrendingUpIcon className="w-4 h-4 mr-1" />
+                <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
               ) : (
-                <TrendingDownIcon className="w-4 h-4 mr-1" />
+                <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
               )}
               {Math.abs(change).toFixed(1)}%
             </div>
@@ -139,7 +139,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
       clickThroughRate: 12.5, // percentage
     },
     timeSeriesData: Array.from({ length: 30 }, (_, i) => ({
-      date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
       views: Math.floor(Math.random() * 50000) + 20000,
       watchTime: Math.floor(Math.random() * 2000000) + 500000,
       subscribers: Math.floor(Math.random() * 500) + 100,

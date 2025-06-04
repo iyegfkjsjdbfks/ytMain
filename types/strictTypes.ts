@@ -342,7 +342,7 @@ export interface FormComponentProps extends InteractiveComponentProps {
   onFocus?: EventHandler<React.FocusEvent>;
 }
 
-// Export all types for easy importing
+// Re-export all types for easy importing
 export type {
   VideoMetadata,
   VideoStats,

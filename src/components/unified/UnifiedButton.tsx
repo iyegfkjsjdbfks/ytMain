@@ -5,7 +5,7 @@
 
 import React, { forwardRef } from 'react';
 import { cn } from '../../lib/utils';
-import { LoadingSpinner } from '../ui';
+import LoadingSpinner from '../../../components/ui/LoadingSpinner';
 
 // Button variant types
 export type ButtonVariant = 

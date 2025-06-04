@@ -25,7 +25,9 @@ const VideoCard: React.FC<VideoCardProps> = ({
     views,
     createdAt,
     duration,
-    channel,
+    channelName,
+    channelAvatarUrl,
+    channelId,
     description
   } = video;
 
@@ -39,9 +41,10 @@ const VideoCard: React.FC<VideoCardProps> = ({
     ? formatDistanceToNow(new Date(createdAt), { addSuffix: true }) 
     : '';
   
-  const formattedViews = views > 999 
-    ? `${(views / 1000).toFixed(1)}K` 
-    : views.toString();
+  const viewsNumber = typeof views === 'string' ? parseInt(views, 10) : views;
+  const formattedViews = viewsNumber > 999
+    ? `${(viewsNumber / 1000).toFixed(1)}K`
+    : viewsNumber.toString();
 
   const formatDuration = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -69,7 +72,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
               className="w-full h-full object-cover rounded"
             />
             <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
-              {formatDuration(duration)}
+              {formatDuration(typeof duration === 'string' ? parseInt(duration, 10) : duration)}
             </div>
           </Link>
         </div>
@@ -77,8 +80,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
           <Link to={`/watch/${id}`} className="block">
             <h3 className="font-medium text-sm line-clamp-2 mb-1">{title}</h3>
           </Link>
-          <Link to={`/channel/${channel.id}`} className="block">
-            <p className="text-xs text-gray-600">{channel.name}</p>
+          <Link to={`/channel/${channelId}`} className="block">
+            <p className="text-xs text-gray-600">{channelName}</p>
           </Link>
           <p className="text-xs text-gray-600">{formattedViews} views • {formattedDate}</p>
         </div>
@@ -101,7 +104,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
                 className="w-full h-full object-cover rounded"
               />
               <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
-                {formatDuration(duration)}
+                {formatDuration(typeof duration === 'string' ? parseInt(duration, 10) : duration)}
               </div>
             </Link>
           </div>
@@ -155,16 +158,16 @@ const VideoCard: React.FC<VideoCardProps> = ({
             className="w-full aspect-video object-cover rounded-lg"
           />
           <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
-            {formatDuration(duration)}
+            {formatDuration(typeof duration === 'string' ? parseInt(duration, 10) : duration)}
           </div>
         </Link>
       </div>
       <div className="mt-2 flex">
-        {channel.avatarUrl && (
-          <Link to={`/channel/${channel.id}`} className="flex-shrink-0 mr-2">
-            <img 
-              src={channel.avatarUrl} 
-              alt={channel.name} 
+        {channelAvatarUrl && (
+          <Link to={`/channel/${channelId}`} className="flex-shrink-0 mr-2">
+            <img
+              src={channelAvatarUrl}
+              alt={channelName}
               className="w-9 h-9 rounded-full"
             />
           </Link>
@@ -173,8 +176,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
           <Link to={`/watch/${id}`} className="block">
             <h3 className="font-medium line-clamp-2 mb-1">{title}</h3>
           </Link>
-          <Link to={`/channel/${channel.id}`} className="block">
-            <p className="text-sm text-gray-600">{channel.name}</p>
+          <Link to={`/channel/${channelId}`} className="block">
+            <p className="text-sm text-gray-600">{channelName}</p>
           </Link>
           <p className="text-sm text-gray-600">{formattedViews} views • {formattedDate}</p>
         </div>

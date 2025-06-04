@@ -15,8 +15,15 @@ import {
   ComputerDesktopIcon,
   TvIcon
 } from '@heroicons/react/24/outline';
-// Note: recharts and unifiedUtils imports removed due to missing dependencies
-// import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// Mock chart components since recharts is not available
+const ResponsiveContainer = ({ children, width, height }: any) => (
+  <div style={{ width, height }}>{children}</div>
+);
+const PieChart = ({ children }: any) => <div className="flex items-center justify-center h-full">{children}</div>;
+const Pie = ({ data }: any) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
+const Cell = ({ fill }: any) => null;
+const Tooltip = ({ formatter }: any) => null;
+const Legend = () => null;
 // import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
@@ -233,9 +240,15 @@ const DashboardPage: React.FC = () => {
     fetchDashboardData();
   }, [timeRange]);
 
-  const formatNumber = numberUtils.formatViewCount;
+  const formatNumber = (num: number): string => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
   const formatDuration = (minutes: number): string => {
-    return dateUtils.formatDuration(minutes * 60); // Convert minutes to seconds for unified utility
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
   const formatCurrency = (amount: number): string => {

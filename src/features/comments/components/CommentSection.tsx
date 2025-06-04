@@ -6,13 +6,13 @@ import {
   EllipsisVerticalIcon,
   FlagIcon,
   HeartIcon,
-  PinIcon,
+  MapPinIcon,
 } from '@heroicons/react/24/outline';
 import {
   HandThumbUpIcon as HandThumbUpSolidIcon,
   HandThumbDownIcon as HandThumbDownSolidIcon,
   HeartIcon as HeartSolidIcon,
-  PinIcon as PinSolidIcon,
+  MapPinIcon as PinSolidIcon,
 } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
@@ -41,9 +41,9 @@ interface CommentItemProps {
   isChannelOwner?: boolean;
   onReply: (parentId: string, content: string) => void;
   onReact: (commentId: string, type: 'like' | 'dislike') => void;
-  onPin?: (commentId: string) => void | undefined;
-  onHeart?: (commentId: string) => void | undefined;
-  onReport?: (commentId: string, reason: string) => void | undefined;
+  onPin?: (commentId: string) => void | Promise<void>;
+  onHeart?: (commentId: string) => void | Promise<void>;
+  onReport?: (commentId: string, reason: string) => void | Promise<void>;
   level?: number;
 }
 
@@ -190,7 +190,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
                     }}
                     className="w-full px-3 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
                   >
-                    <PinIcon className="w-4 h-4" />
+                    <MapPinIcon className="w-4 h-4" />
                     {comment.isPinned ? 'Unpin' : 'Pin'}
                   </button>
                 )}

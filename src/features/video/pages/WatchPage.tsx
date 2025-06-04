@@ -293,7 +293,7 @@ const WatchPage: React.FC = () => {
               <VideoPlayer
                 videoId={video.id}
                 src={video.videoUrl || `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
-                poster={video.thumbnail}
+                poster={video.thumbnailUrl}
                 title={video.title}
                 autoplay={false}
                 className="w-full"
@@ -317,7 +317,7 @@ const WatchPage: React.FC = () => {
               {/* Video Stats and Actions */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-                  <span>{formatCount(video.views)} views</span>
+                  <span>{formatCount(typeof video.views === 'string' ? parseInt(video.views, 10) : video.views)} views</span>
                   <span>•</span>
                   <span>{formatDistanceToNow(new Date(video.uploadedAt))}</span>
                 </div>
@@ -382,7 +382,7 @@ const WatchPage: React.FC = () => {
               <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
                 <div className="text-sm text-neutral-700 dark:text-neutral-300">
                   <div className="flex items-center gap-2 mb-2 text-neutral-900 dark:text-white font-medium">
-                    <span>{formatCount(video.views)} views</span>
+                    <span>{formatCount(typeof video.views === 'string' ? parseInt(video.views, 10) : video.views)} views</span>
                     <span>•</span>
                     <span>{formatDistanceToNow(new Date(video.uploadedAt))}</span>
                   </div>

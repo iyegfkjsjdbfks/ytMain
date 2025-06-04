@@ -1,7 +1,7 @@
 
 // Mock video service with working video URLs
 import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylist, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
-import { mockApi, getPlaceholderImage, getPlaceholderVideo } from './mockApiService';
+// Removed unused imports
 
 const mockVideos: Video[] = [
   {
@@ -463,7 +463,6 @@ const mockChannels: Channel[] = [
   {
     id: 'channel1',
     name: 'Nature Explorers',
-    handle: '@natureexplorers',
     avatarUrl: 'https://picsum.photos/seed/channel1/120/120',
     bannerUrl: 'https://picsum.photos/seed/banner1/1200/300',
     subscriberCount: '2.5M',
@@ -493,10 +492,9 @@ export const getChannelById = (id: string): Promise<Channel | null> => {
 const mockComments: Comment[] = [
   {
     id: 'comment1',
-    videoId: '1',
-    author: 'John Doe',
-    authorAvatar: 'https://picsum.photos/seed/user1/40/40',
-    content: 'Amazing video! The scenery is breathtaking.',
+    userAvatarUrl: 'https://picsum.photos/seed/user1/40/40',
+    userName: 'John Doe',
+    commentText: 'Amazing video! The scenery is breathtaking.',
     timestamp: '2 hours ago',
     likes: 42,
     replies: []
@@ -506,8 +504,8 @@ const mockComments: Comment[] = [
 export const getCommentsByVideoId = (videoId: string): Promise<Comment[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const comments = mockComments.filter(c => c.videoId === videoId);
-      resolve(comments);
+      // Return all mock comments for any video ID
+      resolve(mockComments);
     }, 100);
   });
 };
@@ -643,7 +641,13 @@ export const clearAllRecentSearches = (): Promise<void> => {
 };
 
 export const createUserPlaylist = (name: string): Promise<UserPlaylist> => {
-  return Promise.resolve({ id: '1', name, videoCount: 0, thumbnailUrl: '' });
+  return Promise.resolve({
+    id: '1',
+    title: name,
+    videoIds: [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  });
 };
 
 export const removeVideoFromPlaylist = (playlistId: string, videoId: string): Promise<void> => {

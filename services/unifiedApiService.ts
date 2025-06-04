@@ -1,4 +1,5 @@
-import { Video, Channel, Playlist, Comment } from '../types';
+import { Video, Channel, Comment } from '../types';
+import { Playlist } from '../src/types/core';
 
 // Unified API Configuration
 interface ApiConfig {
@@ -11,7 +12,7 @@ interface ApiConfig {
 
 const defaultConfig: ApiConfig = {
   baseUrl: process.env.REACT_APP_API_BASE_URL || 'https://api.youtube.com/v3',
-  apiKey: process.env.REACT_APP_YOUTUBE_API_KEY,
+  apiKey: process.env.REACT_APP_YOUTUBE_API_KEY || '',
   timeout: 10000,
   retryAttempts: 3,
   retryDelay: 1000,
@@ -265,13 +266,12 @@ class UnifiedApiService {
     maxResults?: number;
     pageToken?: string;
   } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
-    const queryParams = new URLSearchParams({
-      part: 'snippet,statistics,contentDetails',
-      chart: 'mostPopular',
-      regionCode: 'US',
-      maxResults: '25',
-      ...params,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.set('part', 'snippet,statistics,contentDetails');
+    queryParams.set('chart', 'mostPopular');
+    queryParams.set('regionCode', 'US');
+    queryParams.set('maxResults', String(params.maxResults || 25));
+    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
 
     const cacheKey = `videos:${queryParams.toString()}`;
     return this.makeRequest(`/videos?${queryParams}`, {}, cacheKey, 10 * 60 * 1000);
@@ -283,13 +283,13 @@ class UnifiedApiService {
     order?: string;
     type?: string;
   } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
-    const queryParams = new URLSearchParams({
-      part: 'snippet',
-      q: query,
-      type: 'video',
-      maxResults: '25',
-      ...params,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.set('part', 'snippet');
+    queryParams.set('q', query);
+    queryParams.set('type', params.type || 'video');
+    queryParams.set('maxResults', String(params.maxResults || 25));
+    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
+    if (params.order) queryParams.set('order', params.order);
 
     const cacheKey = `search:${query}:${queryParams.toString()}`;
     return this.makeRequest(`/search?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);
@@ -313,7 +313,12 @@ class UnifiedApiService {
       throw new ApiError('Channel not found', 404, 'CHANNEL_NOT_FOUND');
     }
 
-    return response.items[0];
+    const channel = response.items[0];
+    if (!channel) {
+      throw new ApiError('Channel not found', 404, 'CHANNEL_NOT_FOUND');
+    }
+
+    return channel;
   }
 
   async getPlaylist(playlistId: string): Promise<Playlist> {
@@ -342,13 +347,12 @@ class UnifiedApiService {
     pageToken?: string;
     order?: string;
   } = {}): Promise<{ items: Comment[]; nextPageToken?: string }> {
-    const queryParams = new URLSearchParams({
-      part: 'snippet,replies',
-      videoId,
-      maxResults: '20',
-      order: 'relevance',
-      ...params,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.set('part', 'snippet,replies');
+    queryParams.set('videoId', videoId);
+    queryParams.set('maxResults', String(params.maxResults || 20));
+    queryParams.set('order', params.order || 'relevance');
+    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
 
     const cacheKey = `comments:${videoId}:${queryParams.toString()}`;
     return this.makeRequest(`/commentThreads?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);

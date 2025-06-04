@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import LoadingSpinner from '../../../components/LoadingSpinner';
+import LoadingSpinner from '../../../../components/ui/LoadingSpinner';
 
 interface ProtectedRouteProps {
   children: ReactNode;

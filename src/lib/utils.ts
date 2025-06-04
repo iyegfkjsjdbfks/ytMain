@@ -60,6 +60,17 @@ export function clamp(num: number, min: number, max: number): number {
   return Math.min(Math.max(num, min), max);
 }
 
+/**
+ * Alias for formatNumber for backward compatibility
+ * @param num - The number to format
+ * @param decimals - Number of decimal places to show (default: 1)
+ * @returns Formatted number as string with suffix
+ */
+export function formatCount(num: number | string, decimals: number = 1): string {
+  const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
+  return formatNumber(numValue, decimals);
+}
+
 // =================================
 // 3. Date & Time Utilities
 // =================================
@@ -91,7 +102,7 @@ export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
   const target = new Date(date);
   const diffInSeconds = Math.floor((now.getTime() - target.getTime()) / 1000);
-  
+
   const intervals = {
     year: 31536000,
     month: 2592000,
@@ -101,15 +112,24 @@ export function formatRelativeTime(date: Date | string): string {
     minute: 60,
     second: 1
   };
-  
+
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
       return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
     }
   }
-  
+
   return 'just now';
+}
+
+/**
+ * Alias for formatRelativeTime for backward compatibility
+ * @param date - Date object or date string
+ * @returns Relative time string
+ */
+export function getTimeAgo(date: Date | string): string {
+  return formatRelativeTime(date);
 }
 
 /**

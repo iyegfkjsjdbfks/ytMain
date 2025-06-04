@@ -46,6 +46,8 @@ export interface Video {
   tags?: string[];
   privacyStatus?: 'public' | 'private' | 'unlisted';
   publishedAt?: string; // ISO date string
+  createdAt?: string; // ISO date string
+  visibility?: 'public' | 'private' | 'unlisted';
   channelId?: string;
   // Additional metadata
   aspectRatio?: number;

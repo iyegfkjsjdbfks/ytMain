@@ -80,7 +80,9 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const sortedVideos = [...filteredVideos].sort((a, b) => {
     switch (sortBy) {
       case 'views':
-        return b.views - a.views;
+        const aViews = typeof a.views === 'string' ? parseInt(a.views, 10) : a.views;
+        const bViews = typeof b.views === 'string' ? parseInt(b.views, 10) : b.views;
+        return bViews - aViews;
       case 'comments':
         // If we had comments count, we'd use it here
         return 0;
@@ -198,7 +200,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
                       className="w-full h-full object-cover rounded"
                     />
                     <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
-                      {Math.floor(video.duration / 60)}:{(video.duration % 60).toString().padStart(2, '0')}
+                      {Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) / 60)}:{((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) % 60).toString().padStart(2, '0')}
                     </div>
                   </div>
                   
