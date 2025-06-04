@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import {
   FlagIcon,
   EyeIcon,
-  EyeSlashIcon,
-  TrashIcon,
   CheckIcon,
   XMarkIcon,
   ExclamationTriangleIcon,

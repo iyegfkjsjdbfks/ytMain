@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Comment, Video } from '../../../types/core';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CommentSection } from '../../comments/components/CommentSection';
 import { VideoInteractions } from '../components/VideoInteractions';
@@ -12,57 +13,18 @@ import {
   BellIcon as BellSolidIcon
 } from '@heroicons/react/24/solid';
 
-interface Video {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  videoUrl: string;
-  duration: number;
-  views: number;
-  likes: number;
-  dislikes: number;
-  uploadDate: string;
-  channel: {
-    id: string;
-    name: string;
-    avatar: string;
-    subscribers: number;
-    isVerified: boolean;
-  };
-  tags: string[];
-  category: string;
-}
 
-interface Comment {
-  id: string;
-  userId: string;
-  userName: string;
-  userAvatar: string;
-  content: string;
-  timestamp: string;
-  likes: number;
-  replies: Comment[];
-  isLiked: boolean;
-  isPinned?: boolean;
-}
 
-interface RecommendedVideo {
-  id: string;
-  title: string;
-  thumbnail: string;
-  channelName: string;
-  channelAvatar: string;
-  views: string;
-  uploadedAt: string;
-  duration: string;
-}
+
+
+
 
 const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
   const [video, setVideo] = useState<Video | null>(null);
 
-  const [recommendedVideos, setRecommendedVideos] = useState<RecommendedVideo[]>([]);
+  const [recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -113,22 +75,23 @@ const WatchPage: React.FC = () => {
 • Discord Community: https://discord.gg/reactdev
 
 🏷️ Tags: #React #JavaScript #WebDevelopment #Programming #Tutorial`,
-        thumbnail: 'https://picsum.photos/seed/react-tutorial/1280/720',
+        thumbnailUrl: 'https://picsum.photos/seed/react-tutorial/1280/720',
         videoUrl: '/api/placeholder/video',
-        duration: 3420, // 57 minutes
-        views: 125847,
+        duration: '57:00',
+        views: '125,847',
         likes: 8934,
         dislikes: 127,
-        uploadDate: '2024-01-15T10:30:00Z',
-        channel: {
-          id: 'tech-insights',
-          name: 'Tech Insights',
-          avatar: 'https://picsum.photos/seed/tech-insights/150/150',
-          subscribers: 892000,
-          isVerified: true
-        },
+        uploadedAt: '2024-01-15T10:30:00Z',
+        channelName: 'Tech Insights',
+        channelId: 'tech-insights',
+        channelAvatar: 'https://picsum.photos/seed/tech-insights/150/150',
         tags: ['React', 'JavaScript', 'Web Development', 'Programming', 'Tutorial'],
-        category: 'Education'
+        category: 'Education',
+        isLive: false,
+        isShort: false,
+        visibility: 'public' as const,
+        createdAt: '2024-01-15T10:30:00Z',
+        updatedAt: '2024-01-15T10:30:00Z'
       };
       setVideo(mockVideo);
     } catch (error) {
@@ -144,48 +107,68 @@ const WatchPage: React.FC = () => {
       const mockComments: Comment[] = [
         {
           id: '1',
-          userId: 'user1',
-          userName: 'Sarah Developer',
-          userAvatar: 'https://picsum.photos/seed/sarah/150/150',
+          authorId: 'user1',
+          authorName: 'Sarah Developer',
+          authorAvatar: 'https://picsum.photos/seed/sarah/150/150',
           content: 'This is exactly what I needed! The custom hooks section was particularly helpful. Thanks for the clear explanations!',
-          timestamp: '2024-01-16T14:30:00Z',
+          createdAt: '2024-01-16T14:30:00Z',
+          updatedAt: '2024-01-16T14:30:00Z',
+          videoId: videoId || 'default-video',
           likes: 234,
-          isLiked: false,
+          dislikes: 2,
           isPinned: true,
+          isEdited: false,
+          isHearted: false,
           replies: [
             {
               id: '1-1',
-              userId: 'tech-insights',
-              userName: 'Tech Insights',
-              userAvatar: 'https://picsum.photos/seed/tech-insights/150/150',
+              authorId: 'tech-insights',
+              authorName: 'Tech Insights',
+              authorAvatar: 'https://picsum.photos/seed/tech-insights/150/150',
               content: 'Thank you Sarah! Glad it helped. More advanced React content coming soon!',
-              timestamp: '2024-01-16T15:45:00Z',
+              createdAt: '2024-01-16T15:45:00Z',
+              updatedAt: '2024-01-16T15:45:00Z',
+              videoId: videoId || 'default-video',
+              parentId: '1',
               likes: 45,
-              isLiked: false,
+              dislikes: 0,
+              isPinned: false,
+              isEdited: false,
+              isHearted: true,
               replies: []
             }
           ]
         },
         {
           id: '2',
-          userId: 'user2',
-          userName: 'Mike Frontend',
-          userAvatar: 'https://picsum.photos/seed/mike/150/150',
+          authorId: 'user2',
+          authorName: 'Mike Frontend',
+          authorAvatar: 'https://picsum.photos/seed/mike/150/150',
           content: 'Great tutorial! Could you do a follow-up on React Server Components?',
-          timestamp: '2024-01-16T16:20:00Z',
+          createdAt: '2024-01-16T16:20:00Z',
+          updatedAt: '2024-01-16T16:20:00Z',
+          videoId: videoId || 'default-video',
           likes: 89,
-          isLiked: false,
+          dislikes: 1,
+          isPinned: false,
+          isEdited: false,
+          isHearted: false,
           replies: []
         },
         {
           id: '3',
-          userId: 'user3',
-          userName: 'Alex CodeMaster',
-          userAvatar: 'https://picsum.photos/seed/alex/150/150',
+          authorId: 'user3',
+          authorName: 'Alex CodeMaster',
+          authorAvatar: 'https://picsum.photos/seed/alex/150/150',
           content: 'The performance optimization section saved me hours of debugging. Subscribed!',
-          timestamp: '2024-01-16T18:10:00Z',
+          createdAt: '2024-01-16T18:10:00Z',
+          updatedAt: '2024-01-16T18:10:00Z',
+          videoId: videoId || 'default-video',
           likes: 156,
-          isLiked: false,
+          dislikes: 3,
+          isPinned: false,
+          isEdited: false,
+          isHearted: false,
           replies: []
         }
       ];
@@ -198,36 +181,72 @@ const WatchPage: React.FC = () => {
   const loadRecommendations = async () => {
     try {
       // Mock recommended videos
-      const mockRecommendations: RecommendedVideo[] = [
+      const mockRecommendations: Video[] = [
         {
           id: 'rec1',
+          createdAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
           title: 'Next.js 14 Complete Guide',
-          thumbnail: 'https://picsum.photos/seed/nextjs/320/180',
-          channelName: 'Web Dev Pro',
-          channelAvatar: 'https://picsum.photos/seed/webdevpro/150/150',
+          description: 'Complete guide to Next.js 14',
+          thumbnailUrl: 'https://picsum.photos/seed/nextjs/320/180',
+          videoUrl: 'https://example.com/video/rec1',
+          duration: '45:32',
           views: '89K views',
+          likes: 1200,
+          dislikes: 15,
           uploadedAt: '3 days ago',
-          duration: '45:32'
+          channelName: 'Web Dev Pro',
+          channelId: 'webdevpro',
+          channelAvatar: 'https://picsum.photos/seed/webdevpro/150/150',
+          category: 'Education',
+          tags: ['nextjs', 'react', 'web development'],
+          isLive: false,
+          isShort: false,
+          visibility: 'public'
         },
         {
           id: 'rec2',
+          createdAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
           title: 'TypeScript Advanced Types',
-          thumbnail: 'https://picsum.photos/seed/typescript/320/180',
-          channelName: 'Code Academy',
-          channelAvatar: 'https://picsum.photos/seed/codeacademy/150/150',
+          description: 'Advanced TypeScript types tutorial',
+          thumbnailUrl: 'https://picsum.photos/seed/typescript/320/180',
+          videoUrl: 'https://example.com/video/rec2',
+          duration: '32:18',
           views: '156K views',
+          likes: 2100,
+          dislikes: 25,
           uploadedAt: '1 week ago',
-          duration: '32:18'
+          channelName: 'Code Academy',
+          channelId: 'codeacademy',
+          channelAvatar: 'https://picsum.photos/seed/codeacademy/150/150',
+          category: 'Education',
+          tags: ['typescript', 'programming', 'types'],
+          isLive: false,
+          isShort: false,
+          visibility: 'public'
         },
         {
           id: 'rec3',
+          createdAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
           title: 'React Testing Library Tutorial',
-          thumbnail: 'https://picsum.photos/seed/testing/320/180',
-          channelName: 'Testing Guru',
-          channelAvatar: 'https://picsum.photos/seed/testingguru/150/150',
+          description: 'Learn React Testing Library',
+          thumbnailUrl: 'https://picsum.photos/seed/testing/320/180',
+          videoUrl: 'https://example.com/video/rec3',
+          duration: '28:45',
           views: '67K views',
+          likes: 890,
+          dislikes: 12,
           uploadedAt: '5 days ago',
-          duration: '28:45'
+          channelName: 'Testing Guru',
+          channelId: 'testingguru',
+          channelAvatar: 'https://picsum.photos/seed/testingguru/150/150',
+          category: 'Education',
+          tags: ['react', 'testing', 'javascript'],
+          isLive: false,
+          isShort: false,
+          visibility: 'public'
         }
       ];
       setRecommendedVideos(mockRecommendations);
@@ -300,12 +319,12 @@ const WatchPage: React.FC = () => {
                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
                   <span>{formatCount(video.views)} views</span>
                   <span>•</span>
-                  <span>{formatDistanceToNow(new Date(video.uploadDate))}</span>
+                  <span>{formatDistanceToNow(new Date(video.uploadedAt))}</span>
                 </div>
 
                 <VideoInteractions
                   videoId={video.id}
-                  channelId={video.channel.id}
+                  channelId={video.channelId}
                   initialLikes={video.likes}
                   initialDislikes={video.dislikes}
                   className="flex-wrap"
@@ -316,23 +335,23 @@ const WatchPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
-                    src={video.channel.avatar}
-                    alt={video.channel.name}
+                    src={video.channelAvatar}
+                    alt={video.channelName}
                     className="w-10 h-10 rounded-full"
                   />
                   <div>
                     <div className="flex items-center gap-1">
                       <h3 className="font-medium text-neutral-900 dark:text-white">
-                        {video.channel.name}
+                        {video.channelName}
                       </h3>
-                      {video.channel.isVerified && (
+                      {video.channelId && (
                         <svg className="w-4 h-4 text-neutral-600 dark:text-neutral-400" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
                         </svg>
                       )}
                     </div>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      {formatCount(video.channel.subscribers)} subscribers
+                      {formatCount(1000000)} subscribers
                     </p>
                   </div>
                 </div>
@@ -365,7 +384,7 @@ const WatchPage: React.FC = () => {
                   <div className="flex items-center gap-2 mb-2 text-neutral-900 dark:text-white font-medium">
                     <span>{formatCount(video.views)} views</span>
                     <span>•</span>
-                    <span>{formatDistanceToNow(new Date(video.uploadDate))}</span>
+                    <span>{formatDistanceToNow(new Date(video.uploadedAt))}</span>
                   </div>
                   <div className={`whitespace-pre-wrap ${
                     showFullDescription ? '' : 'line-clamp-3'
@@ -384,7 +403,7 @@ const WatchPage: React.FC = () => {
               {/* Comments Section */}
               <CommentSection
                 videoId={video.id}
-                channelId={video.channel.id}
+                channelId={video.channelId}
                 isChannelOwner={false} // This should be determined based on current user
                 className="mt-6"
               />
@@ -405,7 +424,7 @@ const WatchPage: React.FC = () => {
                 >
                   <div className="relative flex-shrink-0">
                     <img
-                      src={video.thumbnail}
+                      src={video.thumbnailUrl}
                       alt={video.title}
                       className="w-40 h-24 object-cover rounded-lg"
                     />

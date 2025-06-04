@@ -30,6 +30,24 @@ const formatDate = (date: Date): string => {
   return date.toLocaleDateString();
 };
 
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(amount);
+};
+
+const formatDuration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+  return `${minutes}:${secs.toString().padStart(2, '0')}`;
+};
+
 interface DashboardStats {
   totalViews: number;
   totalSubscribers: number;
@@ -362,35 +380,17 @@ const DashboardPage: React.FC = () => {
           {/* Views Over Time */}
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Views Over Time</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={analyticsData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" tickFormatter={(value) => new Date(value).toLocaleDateString()} />
-                <YAxis tickFormatter={formatNumber} />
-                <Tooltip 
-                  labelFormatter={(value) => new Date(value).toLocaleDateString()}
-                  formatter={(value: number) => [formatNumber(value), 'Views']}
-                />
-                <Area type="monotone" dataKey="views" stroke="#3B82F6" fill="#3B82F6" fillOpacity={0.3} />
-              </AreaChart>
-            </ResponsiveContainer>
+            <div className="w-full h-[300px] bg-gray-100 rounded-lg flex items-center justify-center">
+              <p className="text-gray-500">Views Chart Placeholder</p>
+            </div>
           </div>
 
           {/* Revenue Over Time */}
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Revenue Over Time</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={analyticsData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" tickFormatter={(value) => new Date(value).toLocaleDateString()} />
-                <YAxis tickFormatter={(value) => `$${value}`} />
-                <Tooltip 
-                  labelFormatter={(value) => new Date(value).toLocaleDateString()}
-                  formatter={(value: number) => [formatCurrency(value), 'Revenue']}
-                />
-                <Line type="monotone" dataKey="revenue" stroke="#10B981" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="w-full h-[300px] bg-gray-100 rounded-lg flex items-center justify-center">
+              <p className="text-gray-500">Revenue Chart Placeholder</p>
+            </div>
           </div>
         </div>
 

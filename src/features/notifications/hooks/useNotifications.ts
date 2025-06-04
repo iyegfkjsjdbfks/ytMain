@@ -4,7 +4,7 @@ import { notificationService, type Notification } from '../services/notification
 
 export function useNotifications() {
   const queryClient = useQueryClient();
-  // const [realTimeConnection, setRealTimeConnection] = useState<(() => void) | null>(null);
+  const [realTimeConnection, setRealTimeConnection] = useState<(() => void) | null>(null);
 
   // Fetch notifications
   const { data: notifications = [], isLoading, error } = useQuery({
