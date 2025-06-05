@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import {
   CloudArrowUpIcon,
   VideoCameraIcon,
-  DocumentTextIcon,
   EyeIcon,
   GlobeAltIcon,
   LockClosedIcon,
-  UserGroupIcon,
   XMarkIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline';
@@ -91,7 +89,7 @@ const UploadPage: React.FC = () => {
     simulateUpload(newFile);
   };
 
-  const simulateUpload = (file: UploadedFile) => {
+  const simulateUpload = (_file: UploadedFile) => {
     const interval = setInterval(() => {
       setUploadedFile(prev => {
         if (!prev) return null;
@@ -133,7 +131,7 @@ const UploadPage: React.FC = () => {
     if (file) {
       const fakeEvent = {
         target: { files: [file] }
-      } as React.ChangeEvent<HTMLInputElement>;
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
   };
@@ -358,7 +356,7 @@ const UploadPage: React.FC = () => {
                           type="text"
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                          onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                           className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                           placeholder="Add a tag"
                         />

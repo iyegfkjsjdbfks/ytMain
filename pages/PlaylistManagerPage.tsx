@@ -39,7 +39,7 @@ const PlaylistManagerPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'title' | 'created' | 'updated' | 'views'>('updated');
   const [filterVisibility, setFilterVisibility] = useState<'all' | 'public' | 'unlisted' | 'private'>('all');
@@ -360,7 +360,8 @@ const PlaylistManagerPage: React.FC = () => {
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedPlaylist(playlist);
-                              setShowEditModal(true);
+                              // TODO: Implement edit modal
+                              console.log('Edit playlist:', playlist.title);
                             }}
                             className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
                           >

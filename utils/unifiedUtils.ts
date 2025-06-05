@@ -397,14 +397,9 @@ export const utils = {
 };
 
 // Export individual utilities for tree-shaking
-export {
-  dateUtils,
-  numberUtils,
-  stringUtils,
-  mediaUtils,
-  validationUtils,
-  arrayUtils,
-  storageUtils,
-  performanceUtils,
-  errorUtils
-};
+// All utilities are already exported individually above
+
+// Direct exports for backward compatibility
+export const formatDuration = dateUtils.formatDuration;
+export const formatViewCount = numberUtils.formatViewCount;
+export const formatTimeAgo = dateUtils.formatTimeAgo;

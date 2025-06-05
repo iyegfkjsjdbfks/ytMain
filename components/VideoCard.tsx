@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Video } from '../types';
+import { Video } from '../src/types/core';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 import { SaveIcon } from './icons/UnifiedIcon';

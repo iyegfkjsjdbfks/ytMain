@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;

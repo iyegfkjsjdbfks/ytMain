@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
-import { Video, ContentItem } from '../types';
+import { ContentItem } from '../types';
 import { getVideos } from '../services/mockVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
@@ -30,12 +30,18 @@ const ContentManagerPage: React.FC = () => {
       setLoading(true);
       try {
         const videos = await getVideos();
-        const contentItems: ContentItem[] = videos.map(video => ({
-          ...video,
-          status: Math.random() > 0.8 ? 'draft' : Math.random() > 0.9 ? 'scheduled' : Math.random() > 0.95 ? 'private' : 'published',
-          scheduledDate: Math.random() > 0.9 ? new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString() : undefined,
-          lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
-        }));
+        const contentItems: ContentItem[] = videos.map(video => {
+          const status = Math.random() > 0.8 ? 'draft' : Math.random() > 0.9 ? 'scheduled' : Math.random() > 0.95 ? 'private' : 'published';
+          const item: ContentItem = {
+            ...video,
+            status: status as 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted',
+            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
+          };
+          if (Math.random() > 0.9) {
+            item.scheduledDate = new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString();
+          }
+          return item;
+        });
         setContent(contentItems);
       } catch (error) {
         console.error('Failed to fetch content:', error);
@@ -80,8 +86,8 @@ const ContentManagerPage: React.FC = () => {
         case 'duration':
           const aDurationParts = a.duration?.split(':') || ['0', '0'];
           const bDurationParts = b.duration?.split(':') || ['0', '0'];
-          return parseInt(bDurationParts[0]) * 60 + parseInt(bDurationParts[1]) -
-                 (parseInt(aDurationParts[0]) * 60 + parseInt(aDurationParts[1]));
+          return parseInt(bDurationParts[0] || '0') * 60 + parseInt(bDurationParts[1] || '0') -
+                 (parseInt(aDurationParts[0] || '0') * 60 + parseInt(aDurationParts[1] || '0'));
         default:
           return 0;
       }

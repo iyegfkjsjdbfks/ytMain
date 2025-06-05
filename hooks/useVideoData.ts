@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Video } from '../types';
+import { Video } from '../src/types/core';
 import { getVideos, getVideosByChannelName, getSubscribedChannelNames } from '../services/mockVideoService';
 import { parseViewCount } from '../utils/numberUtils';
 import { parseRelativeDate } from '../utils/dateUtils';

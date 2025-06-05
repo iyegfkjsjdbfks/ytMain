@@ -41,9 +41,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   columns = 'auto',
   gap = 'md',
   showChannelName = true,
-  showDuration = true,
-  showViews = true,
-  showUploadDate = true,
+
   onVideoClick,
   className = '',
   emptyMessage = 'No videos found',
@@ -131,11 +129,9 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
         <VideoComponent
           key={video.id}
           video={video}
-          showChannelName={showChannelName}
-          showDuration={showDuration}
-          showViews={showViews}
-          showUploadDate={showUploadDate}
-          onClick={onVideoClick ? () => onVideoClick(video) : undefined}
+          showChannel={showChannelName}
+          showDescription={false}
+          {...(onVideoClick && { onClick: () => onVideoClick(video) })}
         />
       ))}
     </div>

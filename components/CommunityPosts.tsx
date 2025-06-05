@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -6,7 +6,6 @@ import {
   EllipsisHorizontalIcon,
   PhotoIcon,
   VideoCameraIcon,
-  PollIcon,
   LinkIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -59,7 +58,6 @@ interface CommunityPostsProps {
 }
 
 const CommunityPosts: React.FC<CommunityPostsProps> = ({
-  channelId,
   posts,
   onLike,
   onComment,
@@ -94,7 +92,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     switch (type) {
       case 'image': return <PhotoIcon className="w-4 h-4" />;
       case 'video': return <VideoCameraIcon className="w-4 h-4" />;
-      case 'poll': return <PollIcon className="w-4 h-4" />;
+      case 'poll': return <ChatBubbleLeftIcon className="w-4 h-4" />;
       case 'link': return <LinkIcon className="w-4 h-4" />;
       default: return null;
     }

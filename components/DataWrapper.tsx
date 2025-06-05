@@ -62,3 +62,5 @@ export function DataWrapper<T>({
 
   return <>{children(data)}</>;
 }
+
+export default DataWrapper;

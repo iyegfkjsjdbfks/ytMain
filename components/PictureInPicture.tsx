@@ -30,12 +30,10 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   videoUrl,
   isVisible,
   onClose,
-  onExpand,
   className = ''
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [volume, setVolume] = useState(50);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -124,12 +122,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
     }
   };
 
-  const handleVolumeChange = (newVolume: number) => {
-    setVolume(newVolume);
-    if (videoRef.current) {
-      videoRef.current.volume = newVolume / 100;
-    }
-  };
+
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     if (videoRef.current && duration > 0) {

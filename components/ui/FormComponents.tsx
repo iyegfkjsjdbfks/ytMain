@@ -18,7 +18,7 @@ export type InputVariant = 'default' | 'filled' | 'outlined';
 export type InputSize = 'sm' | 'md' | 'lg';
 
 // Input component props
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>, BaseFieldProps {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   leftIcon?: React.ReactNode;
@@ -27,14 +27,14 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 // Textarea component props
-export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>, BaseFieldProps {
+export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'required' | 'className'>, BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
 // Select component props
-export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'>, BaseFieldProps {
+export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
   options: Array<{ value: string; label: string; disabled?: boolean }>;
@@ -42,12 +42,12 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 }
 
 // Checkbox component props
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>, BaseFieldProps {
+export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
   size?: InputSize;
 }
 
 // Radio component props
-export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>, BaseFieldProps {
+export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
   size?: InputSize;
   options: Array<{ value: string; label: string; disabled?: boolean }>;
 }
@@ -89,7 +89,7 @@ const FieldError: React.FC<{
   className?: string;
 }> = ({ error, className }) => {
   if (!error) return null;
-  
+
   return (
     <p className={cn('mt-1 text-sm text-red-600', className)}>
       {error}
@@ -103,7 +103,7 @@ const FieldHint: React.FC<{
   className?: string;
 }> = ({ hint, className }) => {
   if (!hint) return null;
-  
+
   return (
     <p className={cn('mt-1 text-sm text-gray-500', className)}>
       {hint}
@@ -148,25 +148,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
   return (
     <div className="w-full">
       {label && (
-        <FieldLabel htmlFor={inputId} required={required} className={labelClassName}>
+        <FieldLabel
+          htmlFor={inputId}
+          {...(required !== undefined && { required })}
+          {...(labelClassName && { className: labelClassName })}
+        >
           {label}
         </FieldLabel>
       )}
-      
+
       <div className="relative">
         {leftIcon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <div className="text-gray-400">{leftIcon}</div>
           </div>
         )}
-        
+
         <input
           ref={ref}
           id={inputId}
           className={inputClasses}
           {...props}
         />
-        
+
         {(rightIcon || loading) && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
             {loading ? (
@@ -177,9 +181,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
           </div>
         )}
       </div>
-      
-      <FieldError error={error} className={errorClassName} />
-      <FieldHint hint={hint} className={hintClassName} />
+
+      {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
+      {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
     </div>
   );
 });
@@ -227,20 +231,24 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
   return (
     <div className="w-full">
       {label && (
-        <FieldLabel htmlFor={textareaId} required={required} className={labelClassName}>
+        <FieldLabel
+          htmlFor={textareaId}
+          {...(required !== undefined && { required })}
+          {...(labelClassName && { className: labelClassName })}
+        >
           {label}
         </FieldLabel>
       )}
-      
+
       <textarea
         ref={ref}
         id={textareaId}
         className={textareaClasses}
         {...props}
       />
-      
-      <FieldError error={error} className={errorClassName} />
-      <FieldHint hint={hint} className={hintClassName} />
+
+      {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
+      {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
     </div>
   );
 });
@@ -282,11 +290,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
   return (
     <div className="w-full">
       {label && (
-        <FieldLabel htmlFor={selectId} required={required} className={labelClassName}>
+        <FieldLabel
+          htmlFor={selectId}
+          {...(required !== undefined && { required })}
+          {...(labelClassName && { className: labelClassName })}
+        >
           {label}
         </FieldLabel>
       )}
-      
+
       <div className="relative">
         <select
           ref={ref}
@@ -309,16 +321,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
             </option>
           ))}
         </select>
-        
+
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </div>
-      
-      <FieldError error={error} className={errorClassName} />
-      <FieldHint hint={hint} className={hintClassName} />
+
+      {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
+      {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
     </div>
   );
 });
@@ -371,15 +383,19 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
         
         {label && (
           <div className="ml-2 flex-1">
-            <FieldLabel htmlFor={checkboxId} required={required} className={cn('mb-0', labelClassName)}>
+            <FieldLabel
+              htmlFor={checkboxId}
+              {...(required !== undefined && { required })}
+              className={cn('mb-0', labelClassName)}
+            >
               {label}
             </FieldLabel>
           </div>
         )}
       </div>
-      
-      <FieldError error={error} className={errorClassName} />
-      <FieldHint hint={hint} className={hintClassName} />
+
+      {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
+      {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
     </div>
   );
 });
@@ -420,15 +436,18 @@ export const RadioGroup: React.FC<RadioProps> = ({
   return (
     <div className={cn('w-full', className)}>
       {label && (
-        <FieldLabel required={required} className={labelClassName}>
+        <FieldLabel
+          {...(required !== undefined && { required })}
+          {...(labelClassName && { className: labelClassName })}
+        >
           {label}
         </FieldLabel>
       )}
-      
+
       <div className="space-y-2">
         {options.map((option) => {
           const radioId = `${name}-${option.value}`;
-          
+
           return (
             <div key={option.value} className="flex items-center">
               <input
@@ -455,9 +474,9 @@ export const RadioGroup: React.FC<RadioProps> = ({
           );
         })}
       </div>
-      
-      <FieldError error={error} className={errorClassName} />
-      <FieldHint hint={hint} className={hintClassName} />
+
+      {error && <FieldError error={error} {...(errorClassName && { className: errorClassName })} />}
+      {hint && <FieldHint hint={hint} {...(hintClassName && { className: hintClassName })} />}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Video as VideoType } from '../types'; // Import the Video type
+import { Video as VideoType } from '../src/types/core'; // Import the Video type
 
 // Use the Video type for items in the watch later list
 // We can alias it to VideoItem if preferred, or just use VideoType directly.

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { debounce, throttle, safeLocalStorage } from '../utils/componentUtils';
+import { throttle, safeLocalStorage } from '../utils/componentUtils';
 
 // Common hook patterns
 
@@ -302,7 +302,7 @@ export const useIntersectionObserver = (
     if (!element) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setEntry(entry),
+      ([entry]) => setEntry(entry || null),
       options
     );
 

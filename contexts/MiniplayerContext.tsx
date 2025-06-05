@@ -1,6 +1,6 @@
 
 import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
-import { Video } from '../types';
+import { Video } from '../src/types/core';
 
 interface MiniplayerContextType {
   miniplayerVideo: Video | null;

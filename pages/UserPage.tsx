@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
 import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { Video } from '../types';
@@ -175,10 +175,10 @@ const UserPage: React.FC = () => {
               </button>
 
               {isSubscribed && (
-                <button 
+                <button
                   onClick={() => {
                     // Toggle notification settings for this channel
-                    console.log('Toggle notifications for channel:', channelData?.name);
+                    console.log('Toggle notifications for channel:', decodedUserName);
                     // TODO: Implement notification toggle functionality
                   }}
                   className="p-2.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-full transition-colors"

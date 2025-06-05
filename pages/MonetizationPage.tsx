@@ -46,6 +46,8 @@ interface MonetizationMetrics {
   memberCount: number;
   superChatCount: number;
   merchandiseSales: number;
+  membershipRevenue: number;
+  superChatRevenue: number;
 }
 
 const MonetizationPage: React.FC = () => {

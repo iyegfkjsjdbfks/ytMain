@@ -5,16 +5,15 @@ import { useUnifiedAppState } from '../hooks/useRefactoredHooks';
 import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { cn } from '../utils/cn';
-import { 
-  PlayIcon, 
-  ClockIcon, 
-  EyeIcon, 
-  HeartIcon, 
+import {
+  PlayIcon,
+  ClockIcon,
+  EyeIcon,
   BookmarkIcon,
   ShareIcon,
-  EllipsisVerticalIcon 
+  EllipsisVerticalIcon
 } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon, BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
+import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
 
 export interface ConsolidatedVideoCardProps {
   video: Video;
@@ -246,9 +245,9 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
       {/* Channel Info */}
       {showChannel && (
         <div className="flex items-center space-x-2">
-          {video.channelAvatar && (
+          {video.channelAvatarUrl && (
             <img
-              src={video.channelAvatar}
+              src={video.channelAvatarUrl}
               alt={video.channelName}
               className={cn('rounded-full object-cover', sizeClass.avatar)}
             />

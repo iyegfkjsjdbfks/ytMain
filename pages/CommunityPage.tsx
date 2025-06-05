@@ -8,7 +8,7 @@ interface CommunityPost {
   content: string;
   imageUrl?: string;
   videoUrl?: string;
-  pollOptions?: { id: string; text: string; votes: number }[];
+  pollOptions: { id: string; text: string; votes: number }[];
   likes: number;
   comments: number;
   shares: number;
@@ -90,8 +90,8 @@ const CommunityPage: React.FC = () => {
           id: `post-${i + 1}`,
           type,
           content,
-          imageUrl: type === 'image' ? `https://picsum.photos/600/400?random=${i}` : undefined,
-          pollOptions,
+          imageUrl: type === 'image' ? `https://picsum.photos/600/400?random=${i}` : '',
+          pollOptions: pollOptions || [],
           likes: Math.floor(Math.random() * 2000) + (isRecent ? 500 : 100),
           comments: Math.floor(Math.random() * 300) + (isRecent ? 50 : 10),
           shares: Math.floor(Math.random() * 100) + (isRecent ? 20 : 5),
@@ -109,7 +109,7 @@ const CommunityPage: React.FC = () => {
       const totalLikes = posts.reduce((sum, post) => sum + post.likes, 0);
       const totalComments = posts.reduce((sum, post) => sum + post.comments, 0);
       const topPost = posts.length > 0 ? posts.reduce((top, post) =>
-        post.likes > top.likes ? post : top, posts[0]
+        post.likes > (top?.likes || 0) ? post : top, posts[0]
       ) : null;
 
       return {

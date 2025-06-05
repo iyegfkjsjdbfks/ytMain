@@ -2,15 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BellIcon, CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 
-interface Channel {
-  id: string;
-  name: string;
-  avatarUrl: string;
-  subscribers: string;
-  isSubscribed: boolean;
-  notificationsEnabled: boolean;
-  description?: string;
-}
+
 
 interface SubscriptionManagerProps {
   channelName: string;

@@ -9,13 +9,25 @@ export interface PlaylistSummary {
 
 export interface CommunityPost {
   id: string;
-  channelName: string;
-  channelAvatarUrl: string;
-  timestamp: string;
-  textContent: string; 
+  type: 'text' | 'image' | 'poll';
+  content: string;
   imageUrl?: string;
+  pollOptions?: { id: string; text: string; votes: number }[];
   likes: number;
-  commentsCount: number;
+  comments: number;
+  shares: number;
+  isLiked: boolean;
+  createdAt: Date;
+  engagement: {
+    views: number;
+    clickThroughRate: number;
+  };
+  // Legacy fields for backward compatibility
+  channelName?: string;
+  channelAvatarUrl?: string;
+  timestamp?: string;
+  textContent?: string;
+  commentsCount?: number;
 }
 
 // Re-export core Video type

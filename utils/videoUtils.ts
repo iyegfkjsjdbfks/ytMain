@@ -1,11 +1,11 @@
-import { Video } from '../types';
+import { Video } from '../src/types/core';
 
 export function getVideoThumbnail(video: Video): string {
-  return video.thumbnail || video.thumbnailUrl || '';
+  return video.thumbnailUrl || '';
 }
 
 export function getChannelAvatar(video: Video): string {
-  return video.channelAvatar || video.channelAvatarUrl || '';
+  return video.channelAvatarUrl || '';
 }
 
 export function getViewCount(video: Video): string | number {
@@ -25,18 +25,17 @@ export function formatViewCount(count: number): string {
 }
 
 export function isVideoLive(video: Video): boolean {
-  return !!video.isLiveNow || !!video.scheduledStartTime;
+  return !!video.isLive;
 }
 
 export function getVideoDuration(video: Video): string {
   if (isVideoLive(video)) {
-    return video.viewerCount ? `${video.viewerCount} watching` : 'Live';
+    return video.viewCount ? `${video.viewCount} watching` : 'Live';
   }
   return video.duration || '';
 }
 
 export function getVideoAspectRatio(video: Video): number {
-  if (video.aspectRatio) return video.aspectRatio;
   return video.isShort ? 9 / 16 : 16 / 9;
 }
 
@@ -59,14 +58,11 @@ export function getVideoTags(video: Video): string[] {
 }
 
 export function getVideoUploadDate(video: Video): string {
-  return video.publishedAt || video.uploadedAt || '';
+  return video.uploadedAt || '';
 }
 
 export function isVideoMonetized(video: Video): boolean {
-  return !!(
-    video.monetizationDetails?.access?.allowed ||
-    video.monetizationDetails?.monetizationStatus === 'monetized'
-  );
+  return !!(video.monetization?.enabled);
 }
 
 export function getVideoDimensions(video: Video): { width: number; height: number } {

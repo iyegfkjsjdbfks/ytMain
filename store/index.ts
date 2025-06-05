@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { Video, Channel, UserPlaylist } from '../types';
+import { Video, Channel } from '../src/types/core';
+import { UserPlaylist } from '../types';
 
 // App State Interface
 interface AppState {
@@ -169,11 +170,11 @@ const initialState: AppState = {
 };
 
 // Create Store
-export const useAppStore = create<AppState & AppActions>()()
-  (devtools(
+export const useAppStore = create<AppState & AppActions>()(
+  devtools(
     persist(
       subscribeWithSelector(
-        immer((set, get) => ({
+        immer((set) => ({
           ...initialState,
           
           // UI Actions
@@ -220,19 +221,19 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           addToWatchLater: (video) => set((state) => {
-            const exists = state.videos.watchLater.find(v => v.id === video.id);
+            const exists = state.videos.watchLater.find((v: Video) => v.id === video.id);
             if (!exists) {
               state.videos.watchLater.unshift(video);
             }
           }),
           
           removeFromWatchLater: (videoId) => set((state) => {
-            state.videos.watchLater = state.videos.watchLater.filter(v => v.id !== videoId);
+            state.videos.watchLater = state.videos.watchLater.filter((v: Video) => v.id !== videoId);
           }),
           
           addToHistory: (video) => set((state) => {
             // Remove if already exists
-            state.videos.history = state.videos.history.filter(v => v.id !== video.id);
+            state.videos.history = state.videos.history.filter((v: Video) => v.id !== video.id);
             // Add to beginning
             state.videos.history.unshift(video);
             // Keep only last 100 videos
@@ -246,14 +247,14 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           likeVideo: (video) => set((state) => {
-            const exists = state.videos.liked.find(v => v.id === video.id);
+            const exists = state.videos.liked.find((v: Video) => v.id === video.id);
             if (!exists) {
               state.videos.liked.unshift(video);
             }
           }),
           
           unlikeVideo: (videoId) => set((state) => {
-            state.videos.liked = state.videos.liked.filter(v => v.id !== videoId);
+            state.videos.liked = state.videos.liked.filter((v: Video) => v.id !== videoId);
           }),
           
           // Channel Actions
@@ -262,14 +263,14 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           subscribeToChannel: (channel) => set((state) => {
-            const exists = state.channels.subscribed.find(c => c.id === channel.id);
+            const exists = state.channels.subscribed.find((c: any) => c.id === channel.id);
             if (!exists) {
               state.channels.subscribed.push(channel);
             }
           }),
           
           unsubscribeFromChannel: (channelId) => set((state) => {
-            state.channels.subscribed = state.channels.subscribed.filter(c => c.id !== channelId);
+            state.channels.subscribed = state.channels.subscribed.filter((c: any) => c.id !== channelId);
           }),
           
           // Playlist Actions
@@ -288,7 +289,7 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           updatePlaylist: (id, updates) => set((state) => {
-            const index = state.playlists.findIndex(p => p.id === id);
+            const index = state.playlists.findIndex((p: any) => p.id === id);
             if (index !== -1) {
               Object.assign(state.playlists[index], updates, {
                 updatedAt: new Date().toISOString(),
@@ -297,13 +298,13 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           deletePlaylist: (id) => set((state) => {
-            state.playlists = state.playlists.filter(p => p.id !== id);
+            state.playlists = state.playlists.filter((p: any) => p.id !== id);
           }),
           
           addVideoToPlaylist: (playlistId, video) => set((state) => {
-            const playlist = state.playlists.find(p => p.id === playlistId);
+            const playlist = state.playlists.find((p: any) => p.id === playlistId);
             if (playlist) {
-              const exists = playlist.videos?.find(v => v.id === video.id);
+              const exists = playlist.videos?.find((v: Video) => v.id === video.id);
               if (!exists) {
                 if (!playlist.videos) playlist.videos = [];
                 playlist.videos.push(video);
@@ -314,9 +315,9 @@ export const useAppStore = create<AppState & AppActions>()()
           }),
           
           removeVideoFromPlaylist: (playlistId, videoId) => set((state) => {
-            const playlist = state.playlists.find(p => p.id === playlistId);
+            const playlist = state.playlists.find((p: any) => p.id === playlistId);
             if (playlist && playlist.videos) {
-              playlist.videos = playlist.videos.filter(v => v.id !== videoId);
+              playlist.videos = playlist.videos.filter((v: Video) => v.id !== videoId);
               playlist.videoCount = playlist.videos.length;
               playlist.updatedAt = new Date().toISOString();
             }

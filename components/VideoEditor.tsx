@@ -5,14 +5,9 @@ import {
   ScissorsIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
-  PhotoIcon,
   DocumentTextIcon,
   AdjustmentsHorizontalIcon,
-  ArrowUturnLeftIcon,
-  ArrowUturnRightIcon,
   CloudArrowDownIcon,
-  EyeDropperIcon,
-  SparklesIcon
 } from '@heroicons/react/24/outline';
 
 export interface VideoClip {
@@ -74,18 +69,15 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   
   // Editing state
   const [clips, setClips] = useState<VideoClip[]>([]);
-  const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([]);
+  const [audioTracks] = useState<AudioTrack[]>([]);
   const [textOverlays, setTextOverlays] = useState<TextOverlay[]>([]);
   const [filters, setFilters] = useState<VideoFilter[]>([]);
   const [trimStart, setTrimStart] = useState(0);
   const [trimEnd, setTrimEnd] = useState(0);
   
   // UI state
-  const [selectedClip, setSelectedClip] = useState<string | null>(null);
   const [selectedText, setSelectedText] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [undoStack, setUndoStack] = useState<any[]>([]);
-  const [redoStack, setRedoStack] = useState<any[]>([]);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

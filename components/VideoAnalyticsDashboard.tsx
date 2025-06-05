@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  EyeIcon,
   ClockIcon,
   HeartIcon,
   ChatBubbleLeftIcon,
   ShareIcon,
-  UserGroupIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-  CalendarDaysIcon,
-  GlobeAltIcon,
-  DevicePhoneMobileIcon,
-  ComputerDesktopIcon,
-  ChartBarIcon
+  ArrowTrendingUpIcon,
+  EyeIcon,
+  ChartBarIcon,
 } from '@heroicons/react/24/outline';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -464,7 +458,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
           <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
               <div className="flex items-center space-x-2 mb-2">
-                <TrendingUpIcon className="w-5 h-5 text-green-500" />
+                <ArrowTrendingUpIcon className="w-5 h-5 text-green-500" />
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400">CTR</span>
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -518,7 +512,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-2 mb-2">
-              <TrendingUpIcon className="w-5 h-5 text-blue-500" />
+              <ArrowTrendingUpIcon className="w-5 h-5 text-blue-500" />
               <span className="text-sm font-medium text-gray-600 dark:text-gray-400">RPM</span>
             </div>
             <div className="text-2xl font-bold text-gray-900 dark:text-white">

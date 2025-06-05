@@ -5,7 +5,6 @@ import {
   ChartBarIcon,
   LightBulbIcon,
   AcademicCapIcon,
-  MegaphoneIcon,
   CameraIcon,
   PencilSquareIcon,
   CalendarDaysIcon,

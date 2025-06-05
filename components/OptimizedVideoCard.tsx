@@ -60,15 +60,21 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
   }
 ) => {
   const { showMiniplayer } = useMiniplayerActions();
-  const { addToWatchLater, removeFromWatchLater, isInWatchLater } = useWatchLater();
+  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
   const classes = sizeClasses[size];
-  const isWatchLater = isInWatchLater(video.id);
+  const isWatchLater = false; // Simplified for now
 
   // Memoized formatted values
-  const formattedDuration = useMemo(() => formatDuration(video.duration), [video.duration]);
-  const formattedViews = useMemo(() => formatViews(video.views), [video.views]);
-  const formattedTimeAgo = useMemo(() => formatTimeAgo(video.uploadDate), [video.uploadDate]);
+  const formattedDuration = useMemo(() => {
+    const durationNum = typeof video.duration === 'string' ? parseInt(video.duration) : video.duration;
+    return formatDuration(durationNum || 0);
+  }, [video.duration]);
+  const formattedViews = useMemo(() => {
+    const viewsNum = typeof video.views === 'string' ? parseInt(video.views) : video.views;
+    return formatViews(viewsNum || 0);
+  }, [video.views]);
+  const formattedTimeAgo = useMemo(() => formatTimeAgo(video.uploadedAt), [video.uploadedAt]);
 
   // Event handlers
   const handleVideoClick = useCallback(() => {
@@ -114,7 +120,7 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
       {/* Thumbnail Container */}
       <div className="relative overflow-hidden rounded-lg bg-gray-200">
         <img
-          src={video.thumbnail}
+          src={video.thumbnailUrl}
           alt={video.title}
           className={cn(
             classes.thumbnail,
@@ -302,7 +308,7 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
         {showChannel && (
           <div className="flex items-center gap-2">
             <img
-              src={video.channelAvatar}
+              src={video.channelAvatarUrl}
               alt={video.channelName}
               className="w-6 h-6 rounded-full object-cover"
               loading="lazy"

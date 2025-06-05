@@ -67,7 +67,19 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*"
+    "tests/**/*",
+    "*.ts",
+    "*.tsx",
+    "components/**/*",
+    "pages/**/*",
+    "hooks/**/*",
+    "utils/**/*",
+    "services/**/*",
+    "contexts/**/*",
+    "store/**/*",
+    "types/**/*",
+    "config/**/*",
+    "providers/**/*"
   ],
   "exclude": [
     "node_modules",
@@ -76,7 +88,13 @@
     "coverage",
     "public",
     "*.config.js",
-    "*.config.cjs"
+    "*.config.cjs",
+    "*.config.ts",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.workspace.ts",
+    "postcss.config.js",
+    "tailwind.config.js"
   ],
   "references": [
     {

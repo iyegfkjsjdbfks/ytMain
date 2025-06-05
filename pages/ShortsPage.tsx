@@ -55,7 +55,7 @@ const ShortsPage: React.FC = () => {
   const [commentModalOpen, setCommentModalOpen] = useState(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [isAutoAdvanceEnabled, setIsAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
+  const [isAutoAdvanceEnabled] = useLocalStorage('autoAdvanceShorts', true);
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,8 +1,8 @@
-import { Video } from '../types';
+import { Video } from '../src/types/core';
 
 export function calculateEngagementRate(video: Video): number {
-  if (!video.likeCount || !video.viewCount) return 0;
-  return (video.likeCount / video.viewCount) * 100;
+  if (!video.likes || !video.viewCount) return 0;
+  return (video.likes / video.viewCount) * 100;
 }
 
 export function formatEngagementRate(rate: number): string {
@@ -11,17 +11,24 @@ export function formatEngagementRate(rate: number): string {
 
 export function getAudienceRetention(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
-  return video.viewDuration ? Math.min(100, (video.viewDuration / 60) * 100) : 0;
+  // Parse duration string to get seconds
+  const durationParts = video.duration.split(':');
+  const totalSeconds = durationParts.length === 2
+    ? (parseInt(durationParts[0] || '0') || 0) * 60 + (parseInt(durationParts[1] || '0') || 0)
+    : (parseInt(durationParts[0] || '0') || 0);
+  return totalSeconds ? Math.min(100, (totalSeconds / 60) * 100) : 0;
 }
 
 export function getImpressionsCTR(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
-  return video.viewCount ? Math.min(100, (video.viewCount / 1000) * 2) : 0;
+  const viewCount = parseInt((video.views || '0').replace(/,/g, '')) || 0;
+  return viewCount ? Math.min(100, (viewCount / 1000) * 2) : 0;
 }
 
 export function getWatchTime(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
-  return video.viewCount ? video.viewCount * 2.5 : 0;
+  const viewCount = parseInt((video.views || '0').replace(/,/g, '')) || 0;
+  return viewCount ? viewCount * 2.5 : 0;
 }
 
 export function formatWatchTime(seconds: number): string {

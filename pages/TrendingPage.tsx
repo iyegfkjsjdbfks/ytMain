@@ -4,7 +4,7 @@ import { FireIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';
 import { useTrendingVideos } from '../hooks';
-import CategoryTabs, { Category } from '../components/CategoryTabs';
+import CategoryTabs from '../components/CategoryTabs';
 
 const TrendingPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');

@@ -33,8 +33,10 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     if (src.includes('/api/placeholder/')) {
       const parts = src.split('/');
       const dimensions = parts[parts.length - 1];
-      const [w, h] = dimensions.split('x').map(Number);
-      return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
+      if (dimensions && dimensions.includes('x')) {
+        const [w, h] = dimensions.split('x').map(Number);
+        return `https://picsum.photos/${w || width}/${h || height}?random=${Math.floor(Math.random() * 1000)}`;
+      }
     }
     
     // Generate a picsum URL as fallback

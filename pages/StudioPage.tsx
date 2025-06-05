@@ -4,16 +4,14 @@ import {
   VideoCameraIcon,
   ChartBarIcon,
   CogIcon,
-  DocumentTextIcon,
-  UserGroupIcon,
-  CurrencyDollarIcon,
+
   BellIcon,
   PlayIcon,
   EyeIcon,
   HeartIcon,
   ChatBubbleLeftIcon,
   ArrowUpIcon,
-  ArrowDownIcon,
+
   PlusIcon
 } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';

@@ -27,7 +27,6 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   children,
   initialValues = {},
   validationSchema = {},
-  onSubmit,
 }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -237,9 +236,9 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
     return (
       <FormField
         name={name}
-        label={label}
-        required={required}
-        helpText={helpText}
+        {...(label && { label })}
+        {...(required !== undefined && { required })}
+        {...(helpText && { helpText })}
       >
         {input}
       </FormField>
@@ -331,9 +330,9 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
     return (
       <FormField
         name={name}
-        label={label}
-        required={required}
-        helpText={helpText}
+        {...(label && { label })}
+        {...(required !== undefined && { required })}
+        {...(helpText && { helpText })}
       >
         {textarea}
       </FormField>
@@ -434,9 +433,9 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
     return (
       <FormField
         name={name}
-        label={label}
-        required={required}
-        helpText={helpText}
+        {...(label && { label })}
+        {...(required !== undefined && { required })}
+        {...(helpText && { helpText })}
       >
         {select}
       </FormField>
@@ -482,9 +481,8 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
 
   return (
     <FormProvider
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      {...(initialValues && { initialValues })}
+      {...(validationSchema && { validationSchema })}
     >
       <form
         onSubmit={handleSubmit}
@@ -509,16 +507,7 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
   );
 };
 
-// Export all components
-export {
-  FormProvider,
-  useFormContext,
-  FormField,
-  UnifiedInput,
-  UnifiedTextarea,
-  UnifiedSelect,
-  UnifiedForm,
-};
+
 
 // Type exports
 export type {

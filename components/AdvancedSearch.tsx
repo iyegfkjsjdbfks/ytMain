@@ -6,7 +6,6 @@ import {
   ClockIcon,
   CalendarDaysIcon,
   VideoCameraIcon,
-  SpeakerWaveIcon,
   AdjustmentsHorizontalIcon
 } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';

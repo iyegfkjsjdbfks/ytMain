@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useMemo } from 'react';
 import { Video } from '../types';
 
 // State interface
@@ -136,7 +136,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         return {
           ...state,
           currentIndex: nextIndex,
-          currentVideo: state.queue[nextIndex],
+          currentVideo: state.queue[nextIndex] || null,
           currentTime: 0,
         };
       }
@@ -149,7 +149,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         return {
           ...state,
           currentIndex: prevIndex,
-          currentVideo: state.queue[prevIndex],
+          currentVideo: state.queue[prevIndex] || null,
           currentTime: 0,
         };
       }
@@ -161,7 +161,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         return {
           ...state,
           currentIndex: action.payload,
-          currentVideo: state.queue[action.payload],
+          currentVideo: state.queue[action.payload] || null,
           currentTime: 0,
         };
       }

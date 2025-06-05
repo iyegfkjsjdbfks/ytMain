@@ -117,9 +117,9 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const generateRandomNotification = () => {
-    const types: Notification['type'][] = ['video_upload', 'comment_reply', 'like', 'live_stream'];
-    const randomType = types[Math.floor(Math.random() * types.length)];
-    
+    const types: Notification['type'][] = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
+    const randomType = types[Math.floor(Math.random() * types.length)] || 'video_upload';
+
     const newNotification: Notification = {
       id: Date.now().toString(),
       type: randomType,
@@ -143,6 +143,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       case 'comment_reply': return 'New reply to your comment';
       case 'like': return 'Someone liked your video';
       case 'live_stream': return 'Live stream started';
+      case 'subscription': return 'New subscriber';
+      case 'community_post': return 'New community post';
       default: return 'New notification';
     }
   };
@@ -168,16 +170,26 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         'is now live: "Live Q&A Session"',
         'started streaming: "Gaming Marathon"',
         'is live: "Special Announcement"'
+      ],
+      subscription: [
+        'subscribed to your channel',
+        'is now following you',
+        'joined your community'
+      ],
+      community_post: [
+        'posted in the community',
+        'shared a new update',
+        'created a poll'
       ]
     };
-    
+
     const typeMessages = messages[type] || ['sent you a notification'];
-    return typeMessages[Math.floor(Math.random() * typeMessages.length)];
+    return typeMessages[Math.floor(Math.random() * typeMessages.length)] || 'sent you a notification';
   };
 
   const getRandomChannelName = (): string => {
     const names = ['TechGuru', 'CreativeStudio', 'GameMaster', 'MusicVibes', 'CookingPro', 'FitnessExpert'];
-    return names[Math.floor(Math.random() * names.length)];
+    return names[Math.floor(Math.random() * names.length)] || 'Unknown Channel';
   };
 
   const markAsRead = (notificationId: string) => {

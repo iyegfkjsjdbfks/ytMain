@@ -628,12 +628,4 @@ export interface AnalyticsEvent extends CustomEvent {
   };
 }
 
-// Export all types as a namespace for convenience
-export namespace Types {
-  export type { User, Video, Playlist, Comment, Notification };
-  export type { VideoAnalytics, EngagementMetrics, AudienceMetrics };
-  export type { ApiResponse, ApiError, PaginationInfo };
-  export type { FormField, FormState, ValidationRule };
-  export type { ThemeConfig, AuthContextType, MiniplayerContextType };
-  export type { UseApiReturn, UseFormReturn };
-}
+// All types are already exported individually above

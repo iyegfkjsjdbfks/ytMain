@@ -1,8 +1,8 @@
 import React, { memo, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
-import { formatDuration, formatViewCount, formatTimeAgo } from '../utils/format';
-import { useVideoAutoplay } from '../hooks/useVideoAutoplay';
+import { formatDuration, formatViewCount, formatTimeAgo } from '../utils/unifiedUtils';
+
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { cn } from '../utils/cn';
 import { UnifiedButton } from './ui/UnifiedButton';
@@ -54,17 +54,17 @@ const sizeClasses = {
 const VideoThumbnail: React.FC<{
   video: Video;
   size: keyof typeof sizeClasses;
-  autoplay: boolean;
   optimized: boolean;
   onVideoClick?: (video: Video) => void;
-}> = memo(({ video, size, autoplay, optimized, onVideoClick }) => {
+}> = memo(({ video, size, optimized, onVideoClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   
-  const { elementRef, isIntersecting } = useIntersectionObserver({
+  const { ref: elementRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '50px',
   });
+  const divRef = elementRef as React.RefObject<HTMLDivElement>;
   
   // Disabled useVideoAutoplay to prevent video loading errors
   // const {
@@ -88,11 +88,11 @@ const VideoThumbnail: React.FC<{
   }, [onVideoClick, video]);
 
   const shouldShowVideo = optimized ? isIntersecting : true;
-  const thumbnailUrl = imageError ? '/placeholder-thumbnail.jpg' : video.thumbnail;
+  const thumbnailUrl = imageError ? '/placeholder-thumbnail.jpg' : video.thumbnailUrl;
 
   return (
     <div 
-      ref={elementRef}
+      ref={divRef}
       className={cn(
         'relative overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800 cursor-pointer group',
         sizeClasses[size].thumbnail
@@ -136,7 +136,7 @@ const VideoThumbnail: React.FC<{
           {/* Duration Badge */}
           {video.duration && (
             <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-1.5 py-0.5 rounded">
-              {formatDuration(video.duration)}
+              {formatDuration(typeof video.duration === 'string' ? parseInt(video.duration) : video.duration)}
             </div>
           )}
           
@@ -177,9 +177,9 @@ const VideoMetadata: React.FC<{
     <div className="space-y-1">
       {showChannel && (
         <div className="flex items-center space-x-2">
-          {video.channelAvatar && (
+          {video.channelAvatarUrl && (
             <img
-              src={video.channelAvatar}
+              src={video.channelAvatarUrl}
               alt={video.channelName}
               className="w-6 h-6 rounded-full"
               loading="lazy"
@@ -199,13 +199,13 @@ const VideoMetadata: React.FC<{
       
       <div className={cn('flex items-center space-x-2', sizeClasses[size].metadata)}>
         {showViews && video.views && (
-          <span>{formatViewCount(video.views)} views</span>
+          <span>{formatViewCount(typeof video.views === 'string' ? parseInt(video.views) : video.views)} views</span>
         )}
-        {showViews && showTimestamp && video.views && video.publishedAt && (
+        {showViews && showTimestamp && video.views && video.uploadedAt && (
           <span>•</span>
         )}
-        {showTimestamp && video.publishedAt && (
-          <span>{formatTimeAgo(video.publishedAt)}</span>
+        {showTimestamp && video.uploadedAt && (
+          <span>{formatTimeAgo(video.uploadedAt)}</span>
         )}
       </div>
     </div>
@@ -272,10 +272,10 @@ export const UnifiedVideoCard: React.FC<UnifiedVideoCardProps> = memo(({
   showChannel = true,
   showDescription = false,
   showViews = true,
-  showDuration = true,
+
   showTimestamp = true,
   optimized = true,
-  autoplay = false,
+
   className,
   onVideoClick,
   onChannelClick,
@@ -290,9 +290,8 @@ export const UnifiedVideoCard: React.FC<UnifiedVideoCardProps> = memo(({
       <VideoThumbnail
         video={video}
         size={size}
-        autoplay={autoplay}
         optimized={optimized}
-        onVideoClick={onVideoClick}
+        {...(onVideoClick && { onVideoClick })}
       />
       
       <div className={cn('flex-1', isCompactVariant ? 'min-w-0' : '')}>
@@ -328,14 +327,14 @@ export const UnifiedVideoCard: React.FC<UnifiedVideoCardProps> = memo(({
             showChannel={showChannel}
             showViews={showViews}
             showTimestamp={showTimestamp}
-            onChannelClick={onChannelClick}
+            {...(onChannelClick && { onChannelClick })}
           />
         </div>
         
         {showActions && (
           <VideoActions
             video={video}
-            onActionClick={onActionClick}
+            {...(onActionClick && { onActionClick })}
           />
         )}
       </div>

@@ -4,9 +4,6 @@ import {
   UserMinusIcon,
   MagnifyingGlassIcon,
   CheckIcon,
-  EyeIcon,
-  CalendarDaysIcon,
-  PlayIcon,
   Squares2X2Icon,
   ListBulletIcon
 } from '@heroicons/react/24/outline';
@@ -71,7 +68,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           subscribedAt: data.subscribedAt,
           notificationsEnabled: data.notificationsEnabled,
           lastVideoUpload: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-          category: ['Gaming', 'Music', 'Education', 'Entertainment', 'Technology'][Math.floor(Math.random() * 5)],
+          category: (['Gaming', 'Music', 'Education', 'Entertainment', 'Technology'][Math.floor(Math.random() * 5)]) || 'Entertainment',
           description: `Welcome to ${data.channelName}! We create amazing content for our viewers.`,
           isLive: Math.random() > 0.9,
           recentVideos: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, i) => ({

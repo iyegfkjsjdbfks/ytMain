@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BellIcon } from '@heroicons/react/24/outline';
 import { SummarizeIcon } from './icons/SummarizeIcon';
 import { formatCount } from '../utils/numberUtils';
-import { useAsyncState } from '../hooks';
+
 
 interface Channel {
   id: string;
@@ -278,11 +278,11 @@ const RefactoredVideoDescription: React.FC<RefactoredVideoDescriptionProps> = ({
       
       {/* AI Summary Section */}
       <div className="mt-4">
-        <AISummarySection 
+        <AISummarySection
           canSummarize={canSummarize}
           isSummarizing={isSummarizing}
-          summary={summary}
-          summaryError={summaryError}
+          summary={summary || ''}
+          summaryError={summaryError || ''}
           onSummarizeDescription={onSummarizeDescription}
         />
       </div>

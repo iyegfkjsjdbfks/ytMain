@@ -2,17 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
-  EllipsisHorizontalIcon,
   FlagIcon,
   PencilIcon,
   TrashIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  PinIcon,
-  ShieldCheckIcon,
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon, PinIcon as PinSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Comment {
@@ -60,7 +57,6 @@ interface EnhancedCommentSystemProps {
 }
 
 const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
-  videoId,
   comments,
   currentUserId,
   isChannelOwner = false,
@@ -197,7 +193,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
               )}
 
               {comment.isPinned && (
-                <PinSolidIcon className="w-4 h-4 text-blue-500" />
+                <span className="text-blue-500 text-xs">📌</span>
               )}
 
               <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -318,8 +314,9 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                       <button
                         onClick={() => onPinComment(comment.id)}
                         className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                        title="Pin comment"
                       >
-                        <PinIcon className="w-4 h-4" />
+                        📌
                       </button>
                     )}
 
@@ -378,7 +375,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   placeholder={`Reply to ${comment.authorName}...`}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={2}
-                  onKeyPress={(e) => {
+                  onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
                       handleSubmitReply(comment.id, e.currentTarget.value);

@@ -9,8 +9,7 @@ import {
   ShareIcon,
   EllipsisVerticalIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
-  UserPlusIcon
+  ChevronDownIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 

@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { Button } from '../components/ui/Button';
-import VideoGrid from '../components/VideoGrid';
+
 import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
 import SubscriptionStats from '../components/SubscriptionStats';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
-import { Video } from '../types';
 import {
   ViewColumnsIcon,
   Bars3Icon,

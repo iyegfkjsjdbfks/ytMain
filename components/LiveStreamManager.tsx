@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, ShareIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 
 interface LiveStreamSettings {
@@ -227,22 +227,24 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
       'How long have you been doing this?',
       'Your setup is incredible!'
     ];
-    
-    const username = usernames[Math.floor(Math.random() * usernames.length)];
-    const message = messages[Math.floor(Math.random() * messages.length)];
+
+    const username = usernames[Math.floor(Math.random() * usernames.length)] || 'Anonymous';
+    const message = messages[Math.floor(Math.random() * messages.length)] || 'Hello!';
     const isDonation = Math.random() > 0.95;
-    
+
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
-      username,
+      username: username,
       message: isDonation ? `${message} 💰` : message,
       timestamp: new Date().toISOString(),
       isModerator: Math.random() > 0.9,
       isOwner: false,
-      donation: isDonation ? {
-        amount: Math.floor(Math.random() * 50) + 5,
-        currency: 'USD'
-      } : undefined
+      ...(isDonation && {
+        donation: {
+          amount: Math.floor(Math.random() * 50) + 5,
+          currency: 'USD'
+        }
+      })
     };
     
     setChatMessages(prev => [...prev.slice(-49), newMessage]);
@@ -291,7 +293,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
           <div className="lg:col-span-2 space-y-4">
             {/* Video Preview */}
             <div className="relative bg-black rounded-lg overflow-hidden aspect-video">
-              {stream && false ? (
+              {stream ? (
                 <video
                   ref={videoRef}
                   autoPlay

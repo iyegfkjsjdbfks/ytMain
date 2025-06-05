@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { useVideoPlayer } from '../hooks';
-import { Video, VideoQuality, Subtitle, Chapter } from '../types';
+import { Video } from '../src/types/core';
+import { VideoQuality, Subtitle, Chapter } from '../components/video/VideoPlayer';
 
 interface RefactoredVideoPlayerProps {
   video: Video;
@@ -33,50 +34,12 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
   chapters = [],
   autoplay = false,
   muted = false,
-  onTimeUpdate,
-  onEnded,
-  onError,
   className = ''
 }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  
   // Use the custom video player hook
-  const {
-    // State
-    isPlaying,
-    isMuted,
-    volume,
-    currentTime,
-    duration,
-    isFullscreen,
-    isLoading,
-    error,
-    playbackRate,
-    quality,
-    
-    // Actions
-    togglePlayPause,
-    toggleMute,
-    setVolume,
-    seekTo,
-    toggleFullscreen,
-    setPlaybackRate,
-    setQuality,
-    
-    // Event handlers
-    handleLoadStart,
-    handleLoadedData,
-    handleTimeUpdate,
-    handleEnded,
-    handleError,
-    handleVolumeChange
-  } = useVideoPlayer({
-    videoRef,
+  const { videoRef, state, actions } = useVideoPlayer({
     autoplay,
-    muted,
-    onTimeUpdate,
-    onEnded,
-    onError
+    muted
   });
 
   // Format time for display
@@ -90,8 +53,8 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
   const getCurrentChapter = (): Chapter | undefined => {
     return chapters.find((chapter, index) => {
       const nextChapter = chapters[index + 1];
-      return currentTime >= chapter.startTime && 
-             (!nextChapter || currentTime < nextChapter.startTime);
+      return state.currentTime >= chapter.startTime &&
+             (!nextChapter || state.currentTime < nextChapter.startTime);
     });
   };
 
@@ -103,43 +66,37 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
       {false && (
         <video
           ref={videoRef}
-          src={video.url}
-          poster={video.thumbnail}
+          src={video.videoUrl}
+          poster={video.thumbnailUrl}
           className="w-full h-full object-contain"
-          onLoadStart={handleLoadStart}
-          onLoadedData={handleLoadedData}
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={handleEnded}
-          onError={handleError}
-          onVolumeChange={handleVolumeChange}
           playsInline
         >
           {/* Subtitles */}
-          {subtitles.map((subtitle) => (
+          {subtitles.map((subtitle, index) => (
             <track
-              key={subtitle.language}
+              key={index}
               kind="subtitles"
-            src={subtitle.url}
-            srcLang={subtitle.language}
-            label={subtitle.label}
-          />
-        ))}
+              src={subtitle.src}
+              srcLang={subtitle.srcLang}
+              label={subtitle.label}
+            />
+          ))}
         </video>
       )}
 
       {/* Loading Overlay */}
-      {isLoading && (
+      {state.isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
         </div>
       )}
 
       {/* Error Overlay */}
-      {error && (
+      {state.error && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
           <div className="text-center text-white p-6">
             <div className="text-xl mb-2">⚠️</div>
-            <div className="text-sm">{error}</div>
+            <div className="text-sm">{state.error}</div>
             <button
               onClick={() => videoRef.current?.load()}
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
@@ -164,9 +121,9 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
           <input
             type="range"
             min={0}
-            max={duration}
-            value={currentTime}
-            onChange={(e) => seekTo(Number(e.target.value))}
+            max={state.duration}
+            value={state.currentTime}
+            onChange={(e) => actions.seek(Number(e.target.value))}
             className="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
           />
           
@@ -177,7 +134,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
                 <div
                   key={chapter.startTime}
                   className="absolute w-1 h-2 bg-yellow-400 rounded"
-                  style={{ left: `${(chapter.startTime / duration) * 100}%` }}
+                  style={{ left: `${(chapter.startTime / state.duration) * 100}%` }}
                   title={chapter.title}
                 />
               ))}
@@ -190,11 +147,11 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
           <div className="flex items-center space-x-4">
             {/* Play/Pause */}
             <button
-              onClick={togglePlayPause}
+              onClick={actions.togglePlayPause}
               className="hover:text-blue-400 transition-colors"
-              aria-label={isPlaying ? 'Pause' : 'Play'}
+              aria-label={state.isPlaying ? 'Pause' : 'Play'}
             >
-              {isPlaying ? (
+              {state.isPlaying ? (
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
@@ -208,11 +165,11 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
             {/* Volume */}
             <div className="flex items-center space-x-2">
               <button
-                onClick={toggleMute}
+                onClick={actions.toggleMute}
                 className="hover:text-blue-400 transition-colors"
-                aria-label={isMuted ? 'Unmute' : 'Mute'}
+                aria-label={state.isMuted ? 'Unmute' : 'Mute'}
               >
-                {isMuted ? (
+                {state.isMuted ? (
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.617.816L4.846 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.846l3.537-3.816a1 1 0 011.617.816zM16.707 9.293a1 1 0 010 1.414L15.414 12l1.293 1.293a1 1 0 01-1.414 1.414L14 13.414l-1.293 1.293a1 1 0 01-1.414-1.414L12.586 12l-1.293-1.293a1 1 0 011.414-1.414L14 10.586l1.293-1.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -228,23 +185,23 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
                 min={0}
                 max={1}
                 step={0.1}
-                value={volume}
-                onChange={(e) => setVolume(Number(e.target.value))}
+                value={state.volume}
+                onChange={(e) => actions.setVolume(Number(e.target.value))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
             {/* Time Display */}
             <div className="text-sm">
-              {formatTime(currentTime)} / {formatTime(duration)}
+              {formatTime(state.currentTime)} / {formatTime(state.duration)}
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
             {/* Playback Speed */}
             <select
-              value={playbackRate}
-              onChange={(e) => setPlaybackRate(Number(e.target.value))}
+              value={state.playbackRate}
+              onChange={(e) => actions.setPlaybackRate(Number(e.target.value))}
               className="bg-transparent text-white text-sm border border-gray-600 rounded px-2 py-1"
             >
               <option value={0.5}>0.5x</option>
@@ -258,8 +215,8 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
             {/* Quality */}
             {qualities.length > 0 && (
               <select
-                value={quality}
-                onChange={(e) => setQuality(e.target.value)}
+                value={state.quality}
+                onChange={(e) => actions.setQuality(e.target.value)}
                 className="bg-transparent text-white text-sm border border-gray-600 rounded px-2 py-1"
               >
                 {qualities.map((q) => (
@@ -272,11 +229,11 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
 
             {/* Fullscreen */}
             <button
-              onClick={toggleFullscreen}
+              onClick={actions.toggleFullscreen}
               className="hover:text-blue-400 transition-colors"
-              aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              aria-label={state.isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
-              {isFullscreen ? (
+              {state.isFullscreen ? (
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clipRule="evenodd" />
                 </svg>
@@ -294,42 +251,3 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
 };
 
 export default RefactoredVideoPlayer;
-
-return (
-  <div className={`relative ${className}`}>
-    {/* Disabled video element */}
-    {false && (
-      <video
-        ref={videoRef}
-        src={video.videoUrl}
-        className="w-full h-full object-cover"
-        muted={isMuted}
-        playsInline
-      />
-    )}
-    
-    {/* Static thumbnail */}
-    <img
-      src={video.thumbnailUrl}
-      alt={video.title}
-      className="w-full h-full object-cover"
-    />
-
-    {/* Player controls overlay */}
-    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-      <div className="flex items-center gap-4">
-        <button 
-          onClick={() => {}} // No-op
-          className="text-white hover:text-gray-200 transition-colors"
-        >
-          {isPlaying ? <PauseIcon /> : <PlayIcon />}
-        </button>
-        
-        {/* Time display */}
-        <span className="text-white text-sm">
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </span>
-      </div>
-    </div>
-  </div>
-);

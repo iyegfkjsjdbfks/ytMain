@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { StandardPageLayout } from '../components/StandardPageLayout';
-import { RefactoredVideoPlayer } from '../components/RefactoredVideoPlayer';
-import { RefactoredVideoDescription } from '../components/RefactoredVideoDescription';
-import { RecommendationEngine } from '../components/RecommendationEngine';
-import { VideoActions } from '../components/VideoActions';
-import { CommentsSection } from '../components/CommentsSection';
+import StandardPageLayout from '../components/StandardPageLayout';
+import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
+import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
+import RecommendationEngine from '../components/RecommendationEngine';
+import VideoActions from '../components/VideoActions';
+import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 import { useWatchPage } from '../hooks/useWatchPage';
 import { useAsyncState } from '../hooks';
@@ -30,7 +30,7 @@ import { useWatchLater } from '../contexts/WatchLaterContext';
  */
 
 const RefactoredWatchPage: React.FC = () => {
-  const { videoId } = useParams<{ videoId: string }>();
+  useParams<{ videoId: string }>();
   
   // Use the existing watch page hook for data management
   const {
@@ -44,7 +44,7 @@ const RefactoredWatchPage: React.FC = () => {
     liked,
     disliked,
     isSubscribed,
-    isInWatchLater,
+
     isSavedToAnyList,
     mockLikeCount,
     
@@ -62,7 +62,6 @@ const RefactoredWatchPage: React.FC = () => {
     
     // Modal and loading state
     isSaveModalOpen,
-    saveModalLoading,
     
     // AI Summary state
     summary,
@@ -74,86 +73,91 @@ const RefactoredWatchPage: React.FC = () => {
     handleDislike,
     handleSubscribe,
     handleShare,
-    handleSaveToWatchLater,
+
     handleSaveToPlaylist,
     handleCreatePlaylist,
     handleToggleDescription,
     handleSummarizeDescription,
-    handleAddComment,
-    handleReplyToComment,
-    handleEditComment,
+    handleMainCommentSubmitCallback,
+    handleReplySubmit,
+    handleEditSave,
     handleDeleteComment,
-    handleLikeComment,
-    handleDislikeComment,
-    handleToggleCommentMenu,
-    handleToggleReplies,
-    handleSortComments,
+    toggleLikeDislikeForCommentOrReply,
+    openSaveModal,
     setReplyingToCommentId,
     setCurrentReplyText,
     
     // Mock data
     mockPlaylists,
-    setEditingComment,
-    setIsSaveModalOpen
-  } = useWatchPage(videoId || '');
-  
+    setEditingComment
+  } = useWatchPage();
+
   // Async state for additional operations
   const {
-    loading: actionLoading,
-    error: actionError,
-    execute: executeAction
-  } = useAsyncState();
-  
+    error: actionError
+  } = useAsyncState(async () => {});
+
   // Context hooks
-  const { openMiniplayer } = useMiniplayer();
-  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const { addToWatchLater } = useWatchLater();
   
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+  const enhancedHandleSaveToPlaylist = async (playlistId: string) => {
     // Call the original handler
-    await handleSaveToPlaylist(videoId, playlistId);
-    
+    await handleSaveToPlaylist(playlistId);
+
     // If saving to Watch Later playlist, also add to the Watch Later context
     if (playlistId === 'playlist-1' && video) {
-      addToWatchLater(video);
+      // Convert video to core Video type
+      const coreVideo = {
+        ...video,
+        likes: video.likes || 0,
+        dislikes: video.dislikes || 0,
+        tags: video.tags || [],
+        visibility: (video.visibility || 'public') as 'public' | 'unlisted' | 'private' | 'scheduled',
+        commentCount: video.commentCount || 0,
+        viewCount: parseInt(video.views.replace(/[^0-9]/g, '')) || 0
+      };
+      addToWatchLater(coreVideo);
     }
   };
   
   // Enhanced action handlers with error handling
-  const handleEnhancedLike = async () => {
-    await executeAction(async () => {
-      await handleLike();
-    });
+  const handleEnhancedLike = () => {
+    handleLike();
   };
-  
-  const handleEnhancedSubscribe = async () => {
-    await executeAction(async () => {
-      await handleSubscribe();
-    });
+
+  const handleEnhancedSubscribe = () => {
+    handleSubscribe();
   };
-  
-  const handleEnhancedShare = async () => {
-    await executeAction(async () => {
-      await handleShare();
-    });
+
+  const handleEnhancedShare = () => {
+    handleShare();
   };
   
   // Video player configuration
   const videoPlayerProps = video ? {
     video: {
       ...video,
-      url: video.url || `https://example.com/video/${video.id}.mp4`
+      url: video.videoUrl || `https://example.com/video/${video.id}.mp4`,
+      likes: 0,
+      dislikes: 0,
+      tags: [],
+      visibility: 'public' as 'public' | 'unlisted' | 'private' | 'scheduled',
+      commentCount: 0,
+      viewCount: parseInt(video.views.replace(/[^0-9]/g, '')) || 0,
+      createdAt: video.uploadedAt,
+      updatedAt: video.uploadedAt
     },
     qualities: [
-      { label: '1080p', url: `${video.url}?quality=1080p` },
-      { label: '720p', url: `${video.url}?quality=720p` },
-      { label: '480p', url: `${video.url}?quality=480p` }
+      { label: '1080p', value: '1080p', url: `${video.videoUrl}?quality=1080p`, height: 1080 },
+      { label: '720p', value: '720p', url: `${video.videoUrl}?quality=720p`, height: 720 },
+      { label: '480p', value: '480p', url: `${video.videoUrl}?quality=480p`, height: 480 }
     ],
     subtitles: [
       { language: 'en', label: 'English', url: `/subtitles/${video.id}/en.vtt` },
       { language: 'es', label: 'Spanish', url: `/subtitles/${video.id}/es.vtt` }
     ],
-    chapters: video.chapters || [],
+    chapters: [],
     autoplay: false,
     onTimeUpdate: (currentTime: number) => {
       // Handle time updates for analytics
@@ -173,20 +177,17 @@ const RefactoredWatchPage: React.FC = () => {
     liked,
     disliked,
     likeCount: mockLikeCount,
-    isInWatchLater,
     isSavedToAnyList,
     onLike: handleEnhancedLike,
     onDislike: handleDislike,
     onShare: handleEnhancedShare,
-    onSaveToWatchLater: handleSaveToWatchLater,
-    onSaveToPlaylist: enhancedHandleSaveToPlaylist,
-    loading: actionLoading
+    onSave: openSaveModal
   };
   
   // Video description configuration
   const videoDescriptionProps = {
     video: video!,
-    channel,
+    channel: channel!,
     isSubscribed,
     showFullDescription,
     summary,
@@ -195,6 +196,7 @@ const RefactoredWatchPage: React.FC = () => {
     canSummarize: true,
     onSubscribe: handleEnhancedSubscribe,
     onToggleDescription: handleToggleDescription,
+    onSummarize: handleSummarizeDescription,
     onSummarizeDescription: handleSummarizeDescription
   };
   
@@ -202,27 +204,24 @@ const RefactoredWatchPage: React.FC = () => {
   const commentsSectionProps = {
     comments,
     commentCount,
-    sortOrder: commentSortOrder,
+    commentSortOrder,
     replyingToCommentId,
     currentReplyText,
     editingComment,
     activeCommentMenu,
     expandedReplies,
-    onAddComment: handleAddComment,
-    onReplyToComment: handleReplyToComment,
-    onEditComment: handleEditComment,
+    maxCommentLength: 500,
+    onCommentSubmit: handleMainCommentSubmitCallback,
+    onReplySubmit: handleReplySubmit,
+    onEditSave: handleEditSave,
     onDeleteComment: handleDeleteComment,
-    onLikeComment: handleLikeComment,
-    onDislikeComment: handleDislikeComment,
-    onToggleCommentMenu: handleToggleCommentMenu,
-    onToggleReplies: handleToggleReplies,
-    onSortComments: handleSortComments,
-    setReplyingToCommentId,
-    setCurrentReplyText,
-    
-    // Mock data
-    mockPlaylists,
-    setEditingComment
+    onToggleLikeDislike: toggleLikeDislikeForCommentOrReply,
+    onSortChange: setCommentSortOrder,
+    onSetReplyingTo: setReplyingToCommentId,
+    onSetCurrentReplyText: setCurrentReplyText,
+    onSetEditingComment: setEditingComment,
+    onSetActiveCommentMenu: setActiveCommentMenu,
+    onSetExpandedReplies: setExpandedReplies
   };
   
   // Error message for action errors
@@ -235,7 +234,7 @@ const RefactoredWatchPage: React.FC = () => {
   return (
     <StandardPageLayout
       loading={loading}
-      error={!loading && !video ? 'Video not found' : undefined}
+      error={!loading && !video ? 'Video not found' : null}
       isEmpty={false}
       className="max-w-7xl mx-auto"
     >
@@ -275,9 +274,9 @@ const RefactoredWatchPage: React.FC = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-4">
-              <RecommendationEngine 
+              <RecommendationEngine
                 currentVideoId={video.id}
-                onVideoSelect={(selectedVideo) => {
+                onVideoSelect={(selectedVideo: any) => {
                   // Handle video selection
                   window.location.href = `/watch?v=${selectedVideo.id}`;
                 }}
@@ -291,18 +290,17 @@ const RefactoredWatchPage: React.FC = () => {
       {isSaveModalOpen && (
         <RefactoredSaveToPlaylistModal
           isOpen={isSaveModalOpen}
-          onClose={() => setIsSaveModalOpen(false)}
+          onClose={() => closeSaveModal()}
           onSaveToPlaylist={enhancedHandleSaveToPlaylist}
           onCreatePlaylist={handleCreatePlaylist}
           existingPlaylists={mockPlaylists}
           videoId={video?.id || ''}
         />
       )}
-      {error && 
-        <VideoNotFound 
-          message="This video is unavailable"
-          className="mt-8"
-        />
+      {actionError &&
+        <div className="mt-8 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-red-600 dark:text-red-400 text-sm">This video is unavailable</p>
+        </div>
       }
     </StandardPageLayout>
   );

@@ -58,8 +58,8 @@ const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data 
         size={cardSize}
         showChannel={showChannel}
         showDescription={showDescription}
-        onClick={onVideoClick}
-        onChannelClick={onChannelClick}
+        {...(onVideoClick && { onClick: onVideoClick })}
+        {...(onChannelClick && { onChannelClick })}
       />
     </div>
   );
@@ -144,8 +144,8 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
     () => ({
       videos,
       columnsPerRow,
-      onVideoClick,
-      onChannelClick,
+      ...(onVideoClick && { onVideoClick }),
+      ...(onChannelClick && { onChannelClick }),
       cardSize,
       showChannel,
       showDescription,

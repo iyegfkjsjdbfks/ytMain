@@ -8,12 +8,7 @@ import {
   SpeakerXMarkIcon,
   PhotoIcon,
   VideoCameraIcon,
-  DocumentTextIcon,
-  TagIcon,
-  GlobeAltIcon,
-  EyeSlashIcon,
-  UserGroupIcon,
-  ClockIcon
+  TagIcon
 } from '@heroicons/react/24/outline';
 
 export interface VideoUploadData {
@@ -21,8 +16,8 @@ export interface VideoUploadData {
   description: string;
   tags: string[];
   category: string;
-  thumbnail?: File;
-  customThumbnail?: string;
+  thumbnail?: File | null;
+  customThumbnail?: string | null;
   visibility: 'public' | 'unlisted' | 'private' | 'scheduled';
   scheduledDate?: string;
   monetization: boolean;
@@ -79,18 +74,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals'
   ];
 
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'es', name: 'Spanish' },
-    { code: 'fr', name: 'French' },
-    { code: 'de', name: 'German' },
-    { code: 'it', name: 'Italian' },
-    { code: 'pt', name: 'Portuguese' },
-    { code: 'ru', name: 'Russian' },
-    { code: 'ja', name: 'Japanese' },
-    { code: 'ko', name: 'Korean' },
-    { code: 'zh', name: 'Chinese' }
-  ];
+
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -485,8 +469,8 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
                     <button
                       onClick={() => setUploadData(prev => ({
                         ...prev,
-                        thumbnail: undefined,
-                        customThumbnail: undefined
+                        thumbnail: null,
+                        customThumbnail: null
                       }))}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                     >

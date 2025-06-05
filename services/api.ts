@@ -1,4 +1,4 @@
-import { Video, Channel, UserPlaylist, Comment, CommunityPost } from '../types';
+import { Video, Channel, UserPlaylist } from '../types';
 
 // API Configuration
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://api.youtube.com/v3';
@@ -185,23 +185,22 @@ const generateMockVideo = (id: string, overrides: Partial<Video> = {}): Video =>
   id,
   title: `Sample Video ${id}`,
   description: 'This is a sample video description for testing purposes.',
-  thumbnail: `https://picsum.photos/320/180?random=${id}`,
-  duration: Math.floor(Math.random() * 3600) + 60,
-  views: Math.floor(Math.random() * 1000000),
+  thumbnailUrl: `https://picsum.photos/320/180?random=${id}`,
+  videoUrl: `https://example.com/video/${id}.mp4`,
+  duration: `${Math.floor(Math.random() * 60)}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+  views: `${Math.floor(Math.random() * 1000000).toLocaleString()}`,
   likes: Math.floor(Math.random() * 50000),
   dislikes: Math.floor(Math.random() * 1000),
-  publishedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
-  channel: {
-    id: `channel_${Math.floor(Math.random() * 100)}`,
-    name: `Channel ${Math.floor(Math.random() * 100)}`,
-    avatar: `https://picsum.photos/40/40?random=${Math.floor(Math.random() * 100)}`,
-    subscribers: Math.floor(Math.random() * 1000000),
-    verified: Math.random() > 0.5,
-  },
+  uploadedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
+  channelId: `channel_${Math.floor(Math.random() * 100)}`,
+  channelName: `Channel ${Math.floor(Math.random() * 100)}`,
+  channelAvatarUrl: `https://picsum.photos/40/40?random=${Math.floor(Math.random() * 100)}`,
   tags: ['sample', 'video', 'test'],
   category: 'Entertainment',
-  language: 'en',
   isLive: Math.random() > 0.9,
+  visibility: 'public' as const,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   ...overrides,
 });
 
@@ -209,12 +208,14 @@ const generateMockChannel = (id: string, overrides: Partial<Channel> = {}): Chan
   id,
   name: `Channel ${id}`,
   description: 'This is a sample channel description.',
-  avatar: `https://picsum.photos/80/80?random=${id}`,
+  avatarUrl: `https://picsum.photos/80/80?random=${id}`,
   banner: `https://picsum.photos/1280/320?random=${id}`,
   subscribers: Math.floor(Math.random() * 1000000),
-  videos: Math.floor(Math.random() * 1000),
-  verified: Math.random() > 0.5,
-  joinedAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
+  subscriberCount: `${Math.floor(Math.random() * 1000)}K`,
+  videoCount: Math.floor(Math.random() * 1000),
+  isVerified: Math.random() > 0.5,
+  createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
+  updatedAt: new Date().toISOString(),
   ...overrides,
 });
 

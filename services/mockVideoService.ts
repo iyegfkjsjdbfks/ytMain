@@ -1,6 +1,7 @@
 
 // Mock video service with working video URLs
-import { Video, Channel, Comment, PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
+import { Video, Channel, Comment } from '../src/types/core';
+import { PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
 // Removed unused imports
 
 // Helper function to create complete video objects

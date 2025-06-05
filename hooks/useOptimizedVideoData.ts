@@ -27,18 +27,22 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
     id: `video-${Date.now()}-${index}`,
     title: `Sample Video ${index + 1} ${category ? `- ${category}` : ''}`,
     description: `This is a sample video description for video ${index + 1}`,
-    thumbnail: `https://picsum.photos/320/180?random=${index}`,
-    duration: Math.floor(Math.random() * 600) + 60, // 1-10 minutes
-    views: Math.floor(Math.random() * 1000000),
-    uploadDate: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+    thumbnailUrl: `https://picsum.photos/320/180?random=${index}`,
+    videoUrl: `https://example.com/video-${index}.mp4`,
+    duration: `${Math.floor(Math.random() * 600) + 60}`, // 1-10 minutes as string
+    views: `${Math.floor(Math.random() * 1000000)}`,
+    uploadedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
     channelName: `Channel ${Math.floor(Math.random() * 100)}`,
-    channelAvatar: `https://picsum.photos/40/40?random=${index + 1000}`,
+    channelAvatarUrl: `https://picsum.photos/40/40?random=${index + 1000}`,
     category: category || ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
     tags: [`tag${index}`, `sample`, category || 'general'].filter(Boolean),
     likes: Math.floor(Math.random() * 10000),
     dislikes: Math.floor(Math.random() * 1000),
     isLive: Math.random() > 0.9,
     channelId: `channel-${Math.floor(Math.random() * 100)}`,
+    isSaved: false,
+    isLiked: false,
+    isDisliked: false,
   }));
 };
 

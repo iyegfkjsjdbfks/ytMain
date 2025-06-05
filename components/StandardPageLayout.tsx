@@ -1,5 +1,5 @@
 import React from 'react';
-import { VideoGridSkeleton, ErrorState } from './LoadingStates';
+import { ErrorState } from './LoadingStates';
 import LoadingSpinner from './LoadingSpinner';
 
 interface StandardPageLayoutProps {
@@ -52,7 +52,6 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     <ErrorState
       title="Something went wrong"
       message={error || 'An unexpected error occurred'}
-      onRetry={() => window.location.reload()}
     />
   );
 

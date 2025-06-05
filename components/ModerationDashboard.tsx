@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   ShieldCheckIcon,
-  ExclamationTriangleIcon,
-  EyeIcon,
-  EyeSlashIcon,
   TrashIcon,
   CheckIcon,
   XMarkIcon,
@@ -12,7 +9,6 @@ import {
   VideoCameraIcon,
   UserIcon,
   ClockIcon,
-  FunnelIcon,
   MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from '../utils/dateUtils';

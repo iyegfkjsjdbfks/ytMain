@@ -5,10 +5,8 @@ import {
   VideoCameraIcon,
   CurrencyDollarIcon,
   ChatBubbleLeftRightIcon,
-  Cog8ToothIcon,
   DocumentTextIcon,
   UserGroupIcon,
-  BellIcon,
   EyeIcon,
   ClockIcon,
   HeartIcon,
@@ -80,15 +78,17 @@ const StudioDashboardPage: React.FC = () => {
         totalShares: Math.floor(Math.random() * 50000) + 5000
       };
 
-      const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => ({
-        id: `video-${i + 1}`,
-        title: [
+      const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => {
+        const titles = [
           'How to Build a React App from Scratch',
           'Advanced TypeScript Tips and Tricks',
           'Web Development Best Practices 2024',
           'Creating Beautiful UI Components',
           'JavaScript Performance Optimization'
-        ][i],
+        ];
+        return {
+        id: `video-${i + 1}`,
+        title: titles[i] || `Video ${i + 1}`,
         thumbnail: `https://picsum.photos/320/180?random=${i + 1}`,
         views: Math.floor(Math.random() * 100000) + 1000,
         likes: Math.floor(Math.random() * 5000) + 100,
@@ -96,7 +96,8 @@ const StudioDashboardPage: React.FC = () => {
         uploadDate: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
         duration: Math.floor(Math.random() * 1800) + 300,
         status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any
-      }));
+        };
+      });
 
       setTimeout(() => {
         setStats(mockStats);

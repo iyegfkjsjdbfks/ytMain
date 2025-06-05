@@ -1,14 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
 import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/mockVideoService';
-import VideoCard from '../components/VideoCard';
-import UserIcon from '../components/icons/UserIcon'; // Fallback
-import BellIcon from '../components/icons/BellIcon'; 
-import { ChevronRightIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
-import { LightBulbIcon, CalendarDaysIcon, ChartBarIcon, SignalSlashIcon } from '@heroicons/react/24/outline'; // Added SignalSlashIcon
-import { parseRelativeDate } from '../utils/dateUtils'; // Import the utility
+
 import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
 import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabs from '../components/ChannelTabs';
