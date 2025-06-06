@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useMiniplayer } from '../contexts/MiniplayerContext';
 import StandardPageLayout from '../components/StandardPageLayout';
 import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
 import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
@@ -177,7 +176,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Initialize state with proper types
   const [videoState, setVideoState] = useState<Video>(propVideo || mockVideo);
   const [isLoading, setIsLoading] = useState(propLoading || false);
-  const [error, setError] = useState<Error | null>(propError || null);
   
   // Video interaction state
   const [isLiked, setIsLiked] = useState(propVideo?.isLiked ?? false);
