@@ -87,14 +87,7 @@ const CommunityPage: React.FC = () => {
         : post
     ));
   };
-  const [posts, setPosts] = useState<CommunityPost[]>([]);
-  const [stats, setStats] = useState<CommunityStats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [showCreatePost, setShowCreatePost] = useState(false);
-  const [newPostType, setNewPostType] = useState<'text' | 'image' | 'poll'>('text');
-  const [newPostContent, setNewPostContent] = useState('');
-  const [pollOptions, setPollOptions] = useState(['', '']);
-  const [selectedTab, setSelectedTab] = useState<'posts' | 'analytics'>('posts');
+
 
   // Generate mock data
   useEffect(() => {
@@ -423,7 +416,8 @@ const CommunityPage: React.FC = () => {
                     
                     <button 
                       onClick={() => {
-                        // Show comments for this post                      }}
+                        // Show comments for this post
+                      }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       title="View comments"
                     >
@@ -433,7 +427,8 @@ const CommunityPage: React.FC = () => {
                     
                     <button 
                       onClick={() => {
-                        // Share this post                      }}
+                        // Share this post
+                      }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                       title="Share post"
                     >
