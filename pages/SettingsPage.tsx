@@ -5,6 +5,69 @@ import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { useTheme } from '../contexts/ThemeContext';
 
+const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+    <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
+    <div className="space-y-4">
+      {children}
+    </div>
+  </div>
+);
+
+const ToggleSetting: React.FC<{
+  label: string;
+  description?: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}> = ({ label, description, checked, onChange }) => (
+  <div className="flex items-center justify-between py-2">
+    <div className="flex-1">
+      <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+        {label}
+      </label>
+      {description && (
+        <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
+          {description}
+        </p>
+      )}
+    </div>
+    <button
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
+        checked ? 'bg-sky-600' : 'bg-neutral-200 dark:bg-neutral-600'
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          checked ? 'translate-x-6' : 'translate-x-1'
+        }`}
+      />
+    </button>
+  </div>
+);
+
+const SelectSetting: React.FC<{
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void
+}> = ({ label, value, options, onChange }) => (
+  <div className="flex items-center justify-between py-2">
+    <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+      {label}
+    </label>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+    >
+      {options.map(option => (
+        <option key={option} value={option}>{option}</option>
+      ))}
+    </select>
+  </div>
+);
+
 const SettingsPage: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [autoplay, setAutoplay] = useState(true);
@@ -29,68 +92,7 @@ const SettingsPage: React.FC = () => {
     }));
   };
 
-  const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-    <div className="mb-8">
-      <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4 border-b border-neutral-200 dark:border-neutral-700 pb-2">
-        {title}
-      </h2>
-      <div className="space-y-4">
-        {children}
-      </div>
-    </div>
-  );
 
-  const ToggleSetting: React.FC<{
-    label: string;
-    description?: string;
-    checked: boolean;
-    onChange: () => void
-  }> = ({ label, description, checked, onChange }) => (
-    <div className="flex items-center justify-between py-2">
-      <div className="flex-1">
-        <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200 cursor-pointer">
-          {label}
-        </label>
-        {description && (
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">{description}</p>
-        )}
-      </div>
-      <button
-        onClick={onChange}
-        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 ${
-          checked ? 'bg-sky-600' : 'bg-neutral-300 dark:bg-neutral-600'
-        }`}
-      >
-        <span
-          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-            checked ? 'translate-x-6' : 'translate-x-1'
-          }`}
-        />
-      </button>
-    </div>
-  );
-
-  const SelectSetting: React.FC<{
-    label: string;
-    value: string;
-    options: string[];
-    onChange: (value: string) => void
-  }> = ({ label, value, options, onChange }) => (
-    <div className="flex items-center justify-between py-2">
-      <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-        {label}
-      </label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-      >
-        {options.map(option => (
-          <option key={option} value={option}>{option}</option>
-        ))}
-      </select>
-    </div>
-  );
 
   return (
     <div className="p-6">
@@ -106,7 +108,7 @@ const SettingsPage: React.FC = () => {
         </p>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         <SettingSection title="Appearance">
             <div className="space-y-3">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">Choose your preferred theme</p>
@@ -144,19 +146,19 @@ const SettingsPage: React.FC = () => {
               label="Autoplay"
               description="Automatically play the next video"
               checked={autoplay}
-              onChange={() => setAutoplay(!autoplay)}
+              onChange={setAutoplay}
             />
             <ToggleSetting
               label="Annotations and in-video notifications"
               description="Show annotations and notifications on videos"
               checked={annotations}
-              onChange={() => setAnnotations(!annotations)}
+              onChange={setAnnotations}
             />
             <ToggleSetting
               label="Always show captions"
               description="Show captions on all videos when available"
               checked={captions}
-              onChange={() => setCaptions(!captions)}
+              onChange={setCaptions}
             />
             <SelectSetting
               label="Video quality"
@@ -183,7 +185,7 @@ const SettingsPage: React.FC = () => {
               label="Restricted Mode"
               description="Filter out potentially mature content"
               checked={restrictedMode}
-              onChange={() => setRestrictedMode(!restrictedMode)}
+              onChange={setRestrictedMode}
             />
         </SettingSection>
 
@@ -192,31 +194,31 @@ const SettingsPage: React.FC = () => {
               label="Subscriptions"
               description="Get notified about new videos from channels you subscribe to"
               checked={notifications.subscriptions}
-              onChange={() => handleNotificationChange('subscriptions')}
+              onChange={(checked) => setNotifications(prev => ({ ...prev, subscriptions: checked }))}
             />
             <ToggleSetting
               label="Recommended videos"
               description="Get notified about videos we think you'll like"
               checked={notifications.recommendedVideos}
-              onChange={() => handleNotificationChange('recommendedVideos')}
+              onChange={(checked) => setNotifications(prev => ({ ...prev, recommendedVideos: checked }))}
             />
             <ToggleSetting
               label="Activity on my channel"
               description="Get notified about comments, likes, and new subscribers"
               checked={notifications.activityOnMyChannel}
-              onChange={() => handleNotificationChange('activityOnMyChannel')}
+              onChange={(checked) => setNotifications(prev => ({ ...prev, activityOnMyChannel: checked }))}
             />
             <ToggleSetting
               label="Replies to my comments"
               description="Get notified when someone replies to your comments"
               checked={notifications.repliesComments}
-              onChange={() => handleNotificationChange('repliesComments')}
+              onChange={(checked) => setNotifications(prev => ({ ...prev, repliesComments: checked }))}
             />
             <ToggleSetting
               label="Mentions"
               description="Get notified when someone mentions you"
               checked={notifications.mentions}
-              onChange={() => handleNotificationChange('mentions')}
+              onChange={(checked) => setNotifications(prev => ({ ...prev, mentions: checked }))}
             />
         </SettingSection>
 
@@ -230,7 +232,8 @@ const SettingsPage: React.FC = () => {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => {
-                      // Clear watch history                      if (confirm('Are you sure you want to clear your watch history?')) {
+                      // Clear watch history
+                      if (confirm('Are you sure you want to clear your watch history?')) {
                         // Clear history logic here
                       }
                     }}
@@ -255,7 +258,8 @@ const SettingsPage: React.FC = () => {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => {
-                      // Clear search history                      if (confirm('Are you sure you want to clear your search history?')) {
+                      // Clear search history
+                      if (confirm('Are you sure you want to clear your search history?')) {
                         // Clear search history logic here
                       }
                     }}
@@ -265,7 +269,8 @@ const SettingsPage: React.FC = () => {
                   </button>
                   <button 
                     onClick={() => {
-                      // Pause search history                    }}
+                      // Pause search history
+                    }}
                     className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors"
                   >
                     Pause Search History

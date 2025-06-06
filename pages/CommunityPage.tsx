@@ -30,7 +30,63 @@ interface CommunityStats {
   reachGrowth: number;
 }
 
+const formatDate = (date: Date) => {
+  const now = new Date();
+  const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+  
+  if (diffInHours < 1) return 'Just now';
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
+  return date.toLocaleDateString();
+};
+
 const CommunityPage: React.FC = () => {
+  const [posts, setPosts] = useState<CommunityPost[]>([]);
+  const [newPostContent, setNewPostContent] = useState('');
+  const [newPostType, setNewPostType] = useState<'text' | 'image' | 'poll'>('text');
+  const [pollOptions, setPollOptions] = useState(['', '']);
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<'posts' | 'analytics'>('posts');
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<CommunityStats | null>(null);
+
+  const handleCreatePost = () => {
+    if (!newPostContent.trim()) return;
+
+    const newPost: CommunityPost = {
+      id: `post-${Date.now()}`,
+      type: newPostType,
+      content: newPostContent,
+      imageUrl: newPostType === 'image' ? '/api/placeholder/600/400' : undefined,
+      pollOptions: newPostType === 'poll' ? pollOptions.filter(opt => opt.trim()).map((opt, idx) => ({
+        id: `option-${idx}`,
+        text: opt,
+        votes: 0
+      })) : [],
+      likes: 0,
+      comments: 0,
+      shares: 0,
+      isLiked: false,
+      createdAt: new Date(),
+      engagement: {
+        views: 0,
+        clickThroughRate: 0
+      }
+    };
+
+    setPosts([newPost, ...posts]);
+    setNewPostContent('');
+    setPollOptions(['', '']);
+    setShowCreatePost(false);
+  };
+
+  const toggleLike = (postId: string) => {
+    setPosts(posts.map(post => 
+      post.id === postId 
+        ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
+        : post
+    ));
+  };
   const [posts, setPosts] = useState<CommunityPost[]>([]);
   const [stats, setStats] = useState<CommunityStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -131,52 +187,9 @@ const CommunityPage: React.FC = () => {
     }, 1000);
   }, []);
 
-  const handleCreatePost = () => {
-    if (!newPostContent.trim()) return;
 
-    const newPost: CommunityPost = {
-      id: `post-${Date.now()}`,
-      type: newPostType,
-      content: newPostContent,
-      pollOptions: newPostType === 'poll' ? pollOptions.filter(opt => opt.trim()).map((opt, idx) => ({
-        id: `option-${idx}`,
-        text: opt,
-        votes: 0
-      })) : [],
-      likes: 0,
-      comments: 0,
-      shares: 0,
-      isLiked: false,
-      createdAt: new Date(),
-      engagement: {
-        views: 0,
-        clickThroughRate: 0
-      }
-    };
 
-    setPosts([newPost, ...posts]);
-    setNewPostContent('');
-    setPollOptions(['', '']);
-    setShowCreatePost(false);
-  };
 
-  const toggleLike = (postId: string) => {
-    setPosts(posts.map(post => 
-      post.id === postId 
-        ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
-        : post
-    ));
-  };
-
-  const formatDate = (date: Date) => {
-    const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
-    return date.toLocaleDateString();
-  };
 
   if (loading) {
     return (
@@ -345,7 +358,8 @@ const CommunityPage: React.FC = () => {
                     </div>
                     <button 
                       onClick={() => {
-                        // Show post options menu                      }}
+                        // Show post options menu
+                      }}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                       title="Post options"
                     >

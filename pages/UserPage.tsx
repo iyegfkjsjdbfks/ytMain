@@ -178,7 +178,8 @@ const UserPage: React.FC = () => {
               {isSubscribed && (
                 <button
                   onClick={() => {
-                    // Toggle notification settings for this channel                  }}
+                    // Toggle notification settings for this channel
+                  }}
                   className="p-2.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-full transition-colors"
                   title="Notification settings"
                 >

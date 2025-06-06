@@ -34,7 +34,8 @@ const CommentModal: React.FC<CommentModalProps> = ({
       if (onCommentSubmit) {
         await onCommentSubmit(text);
       } else {
-        // Default behavior - you can implement API call here      }
+        // Default behavior - you can implement API call here
+      }
       
       setCommentText('');
       onClose();

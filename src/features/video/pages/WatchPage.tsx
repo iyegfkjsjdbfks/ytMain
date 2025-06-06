@@ -227,6 +227,16 @@ const WatchPage: React.FC = () => {
                 onTimeUpdate={(currentTime, duration) => {
                   // Track watch progress
                   }}
-                onPlay={() => };
+                onPlay={() => {
+                  // Handle play event
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default WatchPage;

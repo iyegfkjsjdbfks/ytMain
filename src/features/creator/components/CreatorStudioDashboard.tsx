@@ -165,7 +165,9 @@ export const CreatorStudioDashboard: React.FC = () => {
       title: 'Upload Video',
       description: 'Upload a new video to your channel',
       icon: VideoCameraIconWrapper,
-      action: () => ,
+      action: () => {
+        // Handle upload video action
+      },
       color: 'bg-purple-500',
     },
   ];
