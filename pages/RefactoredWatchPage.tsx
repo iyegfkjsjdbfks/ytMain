@@ -127,33 +127,55 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   video: propVideo,
   error: propError,
   loading: propLoading,
-  handleLike: propHandleLike,
-  handleSubscribe: propHandleSubscribe,
-  handleShare,
-  handleDislike,
-  handleAddToWatchLater: propHandleAddToWatchLater,
-  handleSummarizeDescription,
-  handleToggleDescription,
-  handleMainCommentSubmitCallback,
-  handleReplySubmit,
-  handleEditSave,
-  handleDeleteComment,
-  toggleLikeDislikeForCommentOrReply,
-  setReplyingToCommentId: propSetReplyingToCommentId,
-  setCurrentReplyText: propSetCurrentReplyText,
-  setEditingComment: propSetEditingComment,
-  setActiveCommentMenu: propSetActiveCommentMenu,
-  setExpandedReplies: propSetExpandedReplies,
-  closeSaveModal: propCloseSaveModal,
-  handleSaveToPlaylist: propHandleSaveToPlaylist,
-  handleCreatePlaylist: propHandleCreatePlaylist,
-}): React.ReactElement => {
+  handleLike: propHandleLike = () => {},
+  handleSubscribe: propHandleSubscribe = () => {},
+  handleShare = () => {},
+  handleDislike = () => {},
+  handleAddToWatchLater: propHandleAddToWatchLater = () => {},
+  handleSummarizeDescription = async () => '',
+  handleToggleDescription = () => {},
+  handleMainCommentSubmitCallback = () => {},
+  handleReplySubmit = () => {},
+  handleEditSave = () => {},
+  handleDeleteComment = () => {},
+  toggleLikeDislikeForCommentOrReply = () => {},
+  setReplyingToCommentId: propSetReplyingToCommentId = () => {},
+  setCurrentReplyText: propSetCurrentReplyText = () => {},
+  setEditingComment: propSetEditingComment = () => {},
+  setActiveCommentMenu: propSetActiveCommentMenu = () => {},
+  setExpandedReplies: propSetExpandedReplies = () => {},
+  closeSaveModal: propCloseSaveModal = () => {},
+  handleSaveToPlaylist: propHandleSaveToPlaylist = async () => {},
+  handleCreatePlaylist: propHandleCreatePlaylist = async () => {}
+}) => {
   const { useState, useCallback } = React;
   
   // Use provided video or fallback to mock video
   const video = propVideo || mockVideo;
   const error = propError || null;
   const loading = propLoading || false;
+  
+  // Local state
+  const [isLiked, setIsLiked] = useState(video.isLiked ?? false);
+  const [isDisliked, setIsDisliked] = useState(video.isDisliked ?? false);
+  const [isSubscribed, setIsSubscribed] = useState(video.isSubscribed ?? false);
+  const [isSaved, setIsSaved] = useState(video.isSavedToAnyList ?? false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [isSummaryLoading, setIsSummaryLoading] = useState(false);
+  const [summary, setSummary] = useState('');
+  const [summaryError, setSummaryError] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
+  const [currentReplyText, setCurrentReplyText] = useState('');
+  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
+  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
+  const [expandedReplies, setExpandedReplies] = useState<string[]>([]);
+  const [playlists, setPlaylists] = useState<Array<{ id: string; name: string; isPrivate: boolean }>>([]);
+  const [isLoadingPlaylists, setIsLoadingPlaylists] = useState(false);
+  const [playlistsError, setPlaylistsError] = useState<string | null>(null);
   
   // State management
   const [isLiked, setIsLiked] = useState(video.isLiked ?? false);
