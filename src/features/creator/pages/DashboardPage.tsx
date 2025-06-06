@@ -115,7 +115,7 @@ const DashboardPage: React.FC = () => {
   });
 
   const [topVideos, setTopVideos] = useState<VideoPerformance[]>([]);
-  const [analyticsData, setAnalyticsData] = useState<AnalyticsData[]>([]);
+
   const [audienceData, setAudienceData] = useState<AudienceData[]>([]);
   const [deviceData, setDeviceData] = useState<DeviceData[]>([]);
 
@@ -199,14 +199,7 @@ const DashboardPage: React.FC = () => {
         }
       ];
 
-      const mockAnalyticsData: AnalyticsData[] = Array.from({ length: 30 }, (_, i) => ({
-        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
-        views: Math.floor(Math.random() * 5000) + 1000,
-        watchTime: Math.floor(Math.random() * 2000) + 500,
-        subscribers: Math.floor(Math.random() * 100) + 10,
-        revenue: Math.floor(Math.random() * 200) + 50,
-        engagement: Math.floor(Math.random() * 10) + 5
-      }));
+
 
       const mockAudienceData: AudienceData[] = [
         { country: 'United States', percentage: 35, views: 157500 },
@@ -231,7 +224,7 @@ const DashboardPage: React.FC = () => {
 
       setStats(mockStats);
       setTopVideos(mockTopVideos);
-      setAnalyticsData(mockAnalyticsData);
+
       setAudienceData(mockAudienceData);
       setDeviceData(mockDeviceData);
       setLoading(false);

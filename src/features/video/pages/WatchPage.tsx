@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Comment, Video } from '../../../types/core';
+import { Video } from '../../../types/core';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CommentSection } from '../../comments/components/CommentSection';
 import { VideoInteractions } from '../components/VideoInteractions';
@@ -33,7 +33,7 @@ const WatchPage: React.FC = () => {
   useEffect(() => {
     if (videoId) {
       loadVideoData(videoId);
-      loadComments(videoId);
+      // loadComments(videoId); // Removed as comments are handled by CommentSection component
       loadRecommendations();
     }
   }, [videoId]);

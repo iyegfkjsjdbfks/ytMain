@@ -15,7 +15,6 @@ import HomePage from '../pages/HomePage';
 import WatchPage from '../pages/WatchPage';
 
 // Import hooks and utilities
-import { useTheme } from '../contexts/ThemeContext';
 
 // Test utilities
 const createTestQueryClient = () => new QueryClient({

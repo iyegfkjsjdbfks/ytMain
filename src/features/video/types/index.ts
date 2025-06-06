@@ -2,6 +2,10 @@
  * Video feature type definitions
  */
 
+// Re-export types from core to avoid conflicts
+export type { Video, VideoVisibility } from '../../../types/core';
+import type { VideoVisibility as VideoVisibilityType } from '../../../types/core';
+
 export interface Channel {
   id: string;
   name: string;
@@ -9,9 +13,6 @@ export interface Channel {
   subscribers?: number;
   isVerified?: boolean;
 }
-
-// Re-export types from core to avoid conflicts
-export type { Video, VideoVisibility } from '../../../types/core';
 
 // Legacy Video interface - deprecated, use Video from core instead
 export interface LegacyVideo {
@@ -24,7 +25,7 @@ export interface LegacyVideo {
   likes: number;
   createdAt: string;
   publishedAt?: string;
-  visibility: VideoVisibility;
+  visibility: VideoVisibilityType;
   channel: Channel;
   // Keeping these for backward compatibility
   channelId?: string;
