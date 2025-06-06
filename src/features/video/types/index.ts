@@ -10,10 +10,8 @@ export interface Channel {
   isVerified?: boolean;
 }
 
-export type VideoVisibility = 'public' | 'unlisted' | 'private';
-
-// Re-export Video from core types to avoid conflicts
-export type { Video } from '../../../types/core';
+// Re-export types from core to avoid conflicts
+export type { Video, VideoVisibility } from '../../../types/core';
 
 // Legacy Video interface - deprecated, use Video from core instead
 export interface LegacyVideo {

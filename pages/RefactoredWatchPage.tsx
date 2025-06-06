@@ -292,7 +292,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       console.error('Error adding to watch later:', err);
     }
   }, [video, addToWatchLater]);
-  }, [video, addToWatchLater]);
   
   // Handle saving to a specific playlist
   const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
@@ -459,23 +458,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       console.error('Error adding to watch later:', err);
     }
   }, [video, propHandleAddToWatchLater, addToWatchLater]);
-  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [currentReplyText, setCurrentReplyText] = useState('');
-  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
-  const [actionError, setActionError] = useState<Error | null>(null);
-  const [summary, setSummary] = useState<string | null>(null);
-  const [summaryError, setSummaryError] = useState<Error | null>(null);
-  const [isSummarizing, setIsSummarizing] = useState(false);
+
   const { videoId = '' } = useParams<{ videoId: string }>();
   const {
     video = mockVideo,
   } = {}; // TODO: Replace with actual data fetching logic
-  
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(saveModalOpen || false);
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(() => {
