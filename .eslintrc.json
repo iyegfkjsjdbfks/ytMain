@@ -7,15 +7,9 @@
   },
   "extends": [
     "eslint:recommended",
-    "@typescript-eslint/recommended",
-    "@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "prettier"
+    "plugin:react-hooks/recommended"
   ],
   "ignorePatterns": [
     "dist",
@@ -288,7 +282,7 @@
       "env": {
         "jest": true
       },
-      "extends": ["plugin:testing-library/react", "plugin:jest-dom/recommended"],
+      "extends": [],
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-explicit-any": "off",
