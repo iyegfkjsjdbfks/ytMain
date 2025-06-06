@@ -79,6 +79,7 @@ const ShortsPage: React.FC = () => {
       .filter(video => video.visibility !== 'scheduled') // Filter out scheduled videos
       .map(video => ({
         ...video,
+        duration: 60, // Convert duration to number for shorts
         isShort: true,
         isVertical: true,
         visibility: video.visibility as 'public' | 'private' | 'unlisted' // Type assertion after filtering

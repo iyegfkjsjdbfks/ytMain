@@ -89,12 +89,7 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}
         onSave={openSaveModal}
-
-        saveButtonRef={saveButtonRef}
-        isSaveModalOpen={isSaveModalOpen}
-        saveModalRef={saveModalRef}
         saveModalLoading={saveModalLoading}
-        video={video} // Pass the whole video object if VideoActions needs more details
       />
 
       {/* Video description */}
@@ -110,7 +105,7 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
           {...(summaryError !== null && summaryError !== undefined && { summaryError })}
           isSummarizing={isSummarizing || false}
           canSummarize={canSummarize || false}
-          onSummarize={handleSummarizeDescription}
+          onSummarizeDescription={handleSummarizeDescription}
         />
       )}
     </>
