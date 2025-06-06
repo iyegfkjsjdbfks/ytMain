@@ -83,7 +83,18 @@ const RefactoredContentManagerPage: React.FC = () => {
     loading: actionLoading,
     error: actionError,
     execute: executeAction
-  } = useAsyncState(async () => {});
+  } = {
+    loading: false,
+    error: null,
+    execute: async (action: () => Promise<void>) => {
+      try {
+        await action();
+      } catch (error) {
+        console.error('Action failed:', error);
+        // Handle error if needed
+      }
+    }
+  };
   
   // Filter videos based on active tab
   const filteredVideos = videos.filter(video => {

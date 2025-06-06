@@ -1,0 +1,246 @@
+
+> youtube-studio-clone@2.0.0 build
+> tsc && vite build
+
+components/ShortsSection.tsx(27,15): error TS2322: Type '{ duration: string; isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; views: string; ... 35 more ...; updatedAt: string; }[]' is not assignable to type 'Short[]'.
+  Type '{ duration: string; isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; views: string; ... 35 more ...; updatedAt: string; }' is not assignable to type 'Short' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Type '{ duration: string; isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; views: string; ... 35 more ...; updatedAt: string; }' is not assignable to type 'Omit<ExtendedVideo, "isShort">' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'definition' are incompatible.
+        Type 'string' is not assignable to type '"hd" | "sd"'.
+components/VideoPlaybackDetails.tsx(40,3): error TS6133: 'isSavedToAnyList' is declared but its value is never read.
+components/VideoPlaybackDetails.tsx(93,9): error TS2322: Type '{ liked: boolean; disliked: boolean; likeCount: number; onLike: () => void; onDislike: () => void; onShare: () => void; onSave: () => void; saveButtonRef: RefObject<HTMLButtonElement>; isSaveModalOpen: boolean; saveModalRef: RefObject<...>; saveModalLoading: boolean; video: Video; }' is not assignable to type 'IntrinsicAttributes & VideoActionsProps'.
+  Property 'saveButtonRef' does not exist on type 'IntrinsicAttributes & VideoActionsProps'.
+components/VideoPlaybackDetails.tsx(113,11): error TS2375: Type '{ isSummarizing: boolean; canSummarize: boolean; onSummarize: (() => void) | undefined; summaryError?: string; summary?: string; video: Video; channel: Channel; isSubscribed: boolean; onSubscribe: () => void; showFullDescription: boolean; onToggleDescription: () => void; }' is not assignable to type 'IntrinsicAttributes & VideoDescriptionProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Property 'onSummarize' does not exist on type 'IntrinsicAttributes & VideoDescriptionProps'. Did you mean 'canSummarize'?
+hooks/useOptimizedVideoData.ts(26,3): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; uploadedAt: string; channelName: string; channelAvatarUrl: string; category: string | undefined; ... 7 more ...; isDisliked: false; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; uploadedAt: string; channelName: string; channelAvatarUrl: string; category: string | undefined; ... 7 more ...; isDisliked: false; }' is missing the following properties from type 'Video': visibility, createdAt, updatedAt
+hooks/useOptimizedVideoData.ts(153,32): error TS2379: Argument of type '{ category: string | undefined; limit: number; enableCache: true; }' is not assignable to parameter of type 'UseVideoDataOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'category' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+hooks/useRefactoredHooks.ts(1,44): error TS6133: 'useMemo' is declared but its value is never read.
+hooks/useRefactoredHooks.ts(2,1): error TS6192: All imports in import declaration are unused.
+hooks/useRefactoredHooks.ts(4,1): error TS6192: All imports in import declaration are unused.
+hooks/useRefactoredHooks.ts(74,13): error TS7030: Not all code paths return a value.
+hooks/useRefactoredHooks.ts(209,25): error TS18048: 'entry' is possibly 'undefined'.
+hooks/useRefactoredHooks.ts(286,5): error TS2339: Property 'user' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(287,5): error TS2339: Property 'isAuthenticated' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(288,5): error TS2339: Property 'theme' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(289,5): error TS2339: Property 'miniplayerVideo' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(290,5): error TS2339: Property 'isMiniplayerOpen' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(291,5): error TS2339: Property 'watchLaterVideos' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(292,5): error TS2339: Property 'sidebarCollapsed' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(293,5): error TS2339: Property 'notifications' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(296,5): error TS2339: Property 'toggleTheme' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(297,5): error TS2339: Property 'setMiniplayerVideo' does not exist on type 'UnifiedAppContextType'.
+hooks/useRefactoredHooks.ts(338,48): error TS7006: Parameter 'n' implicitly has an 'any' type.
+pages/OptimizedHomePage.tsx(82,9): error TS6133: 'toggleSection' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(7,17): error TS6133: 'UploadProgress' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(50,18): error TS6133: 'setVideos' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(51,25): error TS6133: 'setVideosLoading' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(52,23): error TS6133: 'setVideosError' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(53,26): error TS6133: 'setUploadProgress' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(59,30): error TS6133: 'formData' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(63,30): error TS6133: 'id' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(63,42): error TS6133: 'formData' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(67,30): error TS6133: 'id' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(71,40): error TS6133: 'id' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(71,52): error TS6133: 'visibility' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(98,22): error TS2339: Property 'status' does not exist on type 'Video'.
+pages/RefactoredContentManagerPage.tsx(171,25): error TS2554: Expected 0 arguments, but got 1.
+pages/RefactoredContentManagerPage.tsx(182,25): error TS2554: Expected 0 arguments, but got 1.
+pages/RefactoredContentManagerPage.tsx(194,25): error TS2554: Expected 0 arguments, but got 1.
+pages/RefactoredContentManagerPage.tsx(201,9): error TS6133: 'handleVisibilityToggle' is declared but its value is never read.
+pages/RefactoredContentManagerPage.tsx(202,25): error TS2554: Expected 0 arguments, but got 1.
+pages/RefactoredContentManagerPage.tsx(228,9): error TS6133: 'ManagementVideoCard' is declared but its value is never read.
+pages/RefactoredWatchPage.tsx(12,1): error TS6133: 'useMiniplayer' is declared but its value is never read.
+pages/RefactoredWatchPage.tsx(113,22): error TS2339: Property 'likes' does not exist on type 'Video'.
+pages/RefactoredWatchPage.tsx(114,25): error TS2339: Property 'dislikes' does not exist on type 'Video'.
+pages/RefactoredWatchPage.tsx(115,21): error TS2339: Property 'tags' does not exist on type 'Video'.
+pages/RefactoredWatchPage.tsx(116,28): error TS2339: Property 'visibility' does not exist on type 'Video'.
+pages/RefactoredWatchPage.tsx(117,29): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+pages/RefactoredWatchPage.tsx(120,23): error TS2345: Argument of type '{ likes: any; dislikes: any; tags: any; visibility: "public" | "unlisted" | "private" | "scheduled"; commentCount: any; viewCount: number; id: string; title: string; description: string; ... 8 more ...; category: string; }' is not assignable to parameter of type 'Video'.
+  Type '{ likes: any; dislikes: any; tags: any; visibility: "public" | "private" | "unlisted" | "scheduled"; commentCount: any; viewCount: number; id: string; title: string; description: string; views: string; ... 7 more ...; category: string; }' is missing the following properties from type 'Video': createdAt, updatedAt
+pages/RefactoredWatchPage.tsx(170,15): error TS6133: 'error' is declared but its value is never read.
+pages/RefactoredWatchPage.tsx(219,19): error TS2552: Cannot find name 'setCommentSortOrder'. Did you mean 'commentSortOrder'?
+pages/RefactoredWatchPage.tsx(223,29): error TS2552: Cannot find name 'setActiveCommentMenu'. Did you mean 'activeCommentMenu'?
+pages/RefactoredWatchPage.tsx(224,27): error TS2552: Cannot find name 'setExpandedReplies'. Did you mean 'expandedReplies'?
+pages/RefactoredWatchPage.tsx(251,18): error TS2322: Type '{ video: { url: string; likes: number; dislikes: number; tags: never[]; visibility: "public" | "private" | "unlisted" | "scheduled"; commentCount: number; viewCount: number; createdAt: string; ... 12 more ...; category: string; }; ... 6 more ...; onError: (error: string) => void; }' is not assignable to type 'RefactoredVideoPlayerProps'.
+  Types of property 'subtitles' are incompatible.
+    Type '{ language: string; label: string; url: string; }[]' is not assignable to type 'Subtitle[]'.
+      Type '{ language: string; label: string; url: string; }' is missing the following properties from type 'Subtitle': src, srcLang
+pages/RefactoredWatchPage.tsx(293,26): error TS2552: Cannot find name 'closeSaveModal'. Did you mean 'openSaveModal'?
+pages/ShortsPage.tsx(78,9): error TS2322: Type '{ isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; ... 35 more ...; updatedAt: string; }[]' is not assignable to type 'Short[]'.
+  Type '{ isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; ... 35 more ...; updatedAt: string; }' is not assignable to type 'Short' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Type '{ isShort: true; isVertical: true; visibility: "public" | "private" | "unlisted"; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; ... 35 more ...; updatedAt: string; }' is not assignable to type 'Omit<ExtendedVideo, "isShort">' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+      Types of property 'definition' are incompatible.
+        Type 'string' is not assignable to type '"hd" | "sd"'.
+pages/VideoEditorPage.tsx(33,26): error TS6133: 'setCurrentProject' is declared but its value is never read.
+pages/VideoEditorPage.tsx(189,11): error TS18048: 'lastAction' is possibly 'undefined'.
+pages/VideoEditorPage.tsx(193,30): error TS2532: Object is possibly 'undefined'.
+pages/VideoEditorPage.tsx(563,28): error TS2304: Cannot find name 'XMarkIcon'.
+pages/VideoEditorPage.tsx(580,62): error TS6133: 'index' is declared but its value is never read.
+pages/WatchPage.tsx(27,5): error TS6133: 'isInWatchLater' is declared but its value is never read.
+pages/WatchPage.tsx(45,5): error TS2339: Property 'saveModalLoading' does not exist on type '{ video: Video | null; channel: Channel | null; comments: Comment[]; loading: boolean; videoId: string | null; liked: boolean; disliked: boolean; isSubscribed: boolean; ... 45 more ...; navigate: NavigateFunction; }'.
+pages/WatchPage.tsx(54,5): error TS6133: 'displayedRelatedVideos' is declared but its value is never read.
+pages/WatchPage.tsx(55,5): error TS2339: Property 'showAllRelated' does not exist on type '{ video: Video | null; channel: Channel | null; comments: Comment[]; loading: boolean; videoId: string | null; liked: boolean; disliked: boolean; isSubscribed: boolean; ... 45 more ...; navigate: NavigateFunction; }'.
+pages/WatchPage.tsx(55,5): error TS6133: 'showAllRelated' is declared but its value is never read.
+pages/WatchPage.tsx(58,5): error TS6133: 'saveButtonRef' is declared but its value is never read.
+pages/WatchPage.tsx(59,5): error TS6133: 'saveModalRef' is declared but its value is never read.
+pages/WatchPage.tsx(95,11): error TS2339: Property 'openMiniplayer' does not exist on type 'MiniplayerContextType'.
+pages/WatchPage.tsx(95,11): error TS6133: 'openMiniplayer' is declared but its value is never read.
+pages/WatchPage.tsx(96,28): error TS6133: 'removeFromWatchLater' is declared but its value is never read.
+pages/WatchPage.tsx(101,41): error TS2554: Expected 1 arguments, but got 2.
+pages/WatchPage.tsx(105,23): error TS2345: Argument of type 'Video' is not assignable to parameter of type 'import("C:/Users/hp/Documents/GitHub/ytastudioaug4/src/types/core").Video'.
+  Type 'Video' is missing the following properties from type 'Video': likes, dislikes, tags, visibility, and 2 more.
+pages/WatchPage.tsx(113,22): error TS2345: Argument of type 'Video' is not assignable to parameter of type 'import("C:/Users/hp/Documents/GitHub/ytastudioaug4/src/types/core").Video'.
+  Type 'Video' is missing the following properties from type 'Video': likes, dislikes, tags, visibility, and 2 more.
+pages/WatchPage.tsx(249,15): error TS2322: Type '{ video: Video; channel: Channel | null; isSubscribed: boolean; onSubscribe: () => void; showFullDescription: boolean; onToggleDescription: () => void; summary: string; summaryError: string; isSummarizing: boolean; canSummarize: boolean; onSummarize: () => Promise<...>; }' is not assignable to type 'IntrinsicAttributes & VideoDescriptionProps'.
+  Property 'onSummarize' does not exist on type 'IntrinsicAttributes & VideoDescriptionProps'. Did you mean 'canSummarize'?
+providers/AppProviders.tsx(11,7): error TS2353: Object literal may only specify known properties, and 'cacheTime' does not exist in type 'OmitKeyof<QueryObserverOptions<unknown, Error, unknown, unknown, readonly unknown[], never>, "suspense" | "queryKey", "strictly">'.
+services/api.ts(242,9): error TS2375: Type '{ videos: Video[]; nextPageToken: string | undefined; }' is not assignable to type '{ videos: Video[]; nextPageToken?: string; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'nextPageToken' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+services/api.ts(334,11): error TS2353: Object literal may only specify known properties, and 'avatar' does not exist in type '{ id: string; name: string; avatarUrl?: string; subscribers?: number; isVerified?: boolean; }'.
+services/api.ts(338,9): error TS2322: Type 'number' is not assignable to type 'string'.
+services/api.ts(341,9): error TS2322: Type 'number' is not assignable to type 'string'.
+services/api.ts(371,9): error TS2375: Type '{ videos: Video[]; nextPageToken: string | undefined; }' is not assignable to type '{ videos: Video[]; nextPageToken?: string; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'nextPageToken' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+services/api.ts(468,9): error TS2353: Object literal may only specify known properties, and 'avatar' does not exist in type 'Channel'.
+services/api.ts(497,15): error TS2353: Object literal may only specify known properties, and 'avatar' does not exist in type '{ id: string; name: string; avatarUrl?: string; subscribers?: number; isVerified?: boolean; }'.
+services/api.ts(504,9): error TS2375: Type '{ videos: Video[]; nextPageToken: string | undefined; }' is not assignable to type '{ videos: Video[]; nextPageToken?: string; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'nextPageToken' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+services/api.ts(564,11): error TS6133: 'cacheKey' is declared but its value is never read.
+services/api.ts(575,13): error TS2353: Object literal may only specify known properties, and 'thumbnail' does not exist in type 'UserPlaylist'.
+services/api.ts(586,13): error TS2353: Object literal may only specify known properties, and 'thumbnail' does not exist in type 'UserPlaylist'.
+services/mockApiService.ts(31,5): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+services/mockApiService.ts(106,35): error TS6133: 'videoId' is declared but its value is never read.
+services/mockApiService.ts(162,5): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+services/mockApiService.ts(198,47): error TS2532: Object is possibly 'undefined'.
+services/mockApiService.ts(224,19): error TS2532: Object is possibly 'undefined'.
+services/mockApiService.ts(234,45): error TS2532: Object is possibly 'undefined'.
+services/mockApiService.ts(235,57): error TS2532: Object is possibly 'undefined'.
+services/unifiedApiService.ts(198,7): error TS2375: Type 'RequestInit & { url: string; }' is not assignable to type '{ url: string; headers: { 'Content-Type': string; } | { 'Content-Type': string; } | { length: number; toString(): string; toLocaleString(): string; toLocaleString(locales: string | string[], options?: Intl.NumberFormatOptions & Intl.DateTimeFormatOptions): string; ... 32 more ...; 'Content-Type': string; } | { ...; ...' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'headers' are incompatible.
+    Type 'HeadersInit' is not assignable to type '{ 'Content-Type': string; } | { 'Content-Type': string; } | { length: number; toString(): string; toLocaleString(): string; toLocaleString(locales: string | string[], options?: (NumberFormatOptions & DateTimeFormatOptions) | undefined): string; ... 32 more ...; 'Content-Type': string; } | { ...; }'.
+      Type 'Record<string, string>' is not assignable to type '{ 'Content-Type': string; } | { 'Content-Type': string; } | { length: number; toString(): string; toLocaleString(): string; toLocaleString(locales: string | string[], options?: (NumberFormatOptions & DateTimeFormatOptions) | undefined): string; ... 32 more ...; 'Content-Type': string; } | { ...; }'.
+        Type 'Record<string, string>' is missing the following properties from type '{ length: number; toString(): string; toLocaleString(): string; toLocaleString(locales: string | string[], options?: (NumberFormatOptions & DateTimeFormatOptions) | undefined): string; ... 32 more ...; 'Content-Type': string; }': length, pop, push, concat, and 30 more.
+services/unifiedApiService.ts(342,5): error TS2322: Type 'Playlist | undefined' is not assignable to type 'Playlist'.
+  Type 'undefined' is not assignable to type 'Playlist'.
+src/components/unified/UnifiedVideoCard.tsx(8,34): error TS6133: 'formatDuration' is declared but its value is never read.
+src/features/auth/store/authStore.ts(20,53): error TS6133: 'get' is declared but its value is never read.
+src/features/comments/components/CommentSection.tsx(12,22): error TS6133: 'HandThumbUpSolidIcon' is declared but its value is never read.
+src/features/comments/components/CommentSection.tsx(13,24): error TS6133: 'HandThumbDownSolidIcon' is declared but its value is never read.
+src/features/comments/components/CommentSection.tsx(22,7): error TS6133: 'formatCount' is declared but its value is never read.
+src/features/comments/components/CommentSection.tsx(290,3): error TS6133: 'channelId' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(24,15): error TS6133: 'fill' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(25,18): error TS6133: 'formatter' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(30,7): error TS6133: 'formatNumber' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(36,7): error TS6133: 'formatDate' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(40,7): error TS6133: 'formatCurrency' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(47,7): error TS6133: 'formatDuration' is declared but its value is never read.
+src/features/creator/pages/DashboardPage.tsx(118,10): error TS6133: 'analyticsData' is declared but its value is never read.
+src/features/notifications/hooks/useNotifications.ts(7,10): error TS6133: 'realTimeConnection' is declared but its value is never read.
+src/features/playlist/components/PlaylistManager.tsx(234,43): error TS2379: Argument of type '{ title: string; description: string | undefined; visibility: PlaylistVisibility; tags: string[]; }' is not assignable to parameter of type 'CreatePlaylistData' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'description' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/features/search/components/AdvancedSearchFilters.tsx(1,1): error TS6133: 'useState' is declared but its value is never read.
+src/features/video/pages/WatchPage.tsx(27,10): error TS6133: 'comments' is declared but its value is never read.
+src/features/video/pages/WatchPage.tsx(123,13): error TS2740: Type '{ id: string; authorId: string; authorName: string; authorAvatar: string; content: string; createdAt: string; updatedAt: string; videoId: string; parentId: string; likes: number; dislikes: number; isPinned: false; isEdited: false; isHearted: true; replies: never[]; }' is missing the following properties from type 'Comment': userAvatarUrl, userName, commentText, timestamp, and 3 more.
+src/features/video/pages/WatchPage.tsx(142,9): error TS2740: Type '{ id: string; authorId: string; authorName: string; authorAvatar: string; content: string; createdAt: string; updatedAt: string; videoId: string; likes: number; dislikes: number; isPinned: false; isEdited: false; isHearted: false; replies: never[]; }' is missing the following properties from type 'Comment': userAvatarUrl, userName, commentText, timestamp, and 3 more.
+src/features/video/pages/WatchPage.tsx(158,9): error TS2740: Type '{ id: string; authorId: string; authorName: string; authorAvatar: string; content: string; createdAt: string; updatedAt: string; videoId: string; likes: number; dislikes: number; isPinned: false; isEdited: false; isHearted: false; replies: never[]; }' is missing the following properties from type 'Comment': userAvatarUrl, userName, commentText, timestamp, and 3 more.
+src/lib/youtube-utils.ts(5,5): error TS2687: All declarations of 'onYouTubeIframeAPIReady' must have identical modifiers.
+src/services/api/videos.ts(73,73): error TS2353: Object literal may only specify known properties, and 'category' does not exist in type 'PaginatedRequest'.
+tests/core-functionality.test.tsx(7,26): error TS6133: 'fireEvent' is declared but its value is never read.
+tests/core-functionality.test.tsx(7,46): error TS6133: 'within' is declared but its value is never read.
+tests/core-functionality.test.tsx(16,1): error TS6133: 'SearchResultsPage' is declared but its value is never read.
+tests/core-functionality.test.tsx(19,1): error TS6133: 'useAuth' is declared but its value is never read.
+tests/core-functionality.test.tsx(20,1): error TS6133: 'useTheme' is declared but its value is never read.
+tests/core-functionality.test.tsx(112,13): error TS6133: 'mockVideo' is declared but its value is never read.
+tests/video-functionality.test.tsx(6,44): error TS6133: 'afterEach' is declared but its value is never read.
+tests/video-functionality.test.tsx(7,26): error TS6133: 'fireEvent' is declared but its value is never read.
+tests/video-functionality.test.tsx(141,40): error TS2322: Type '{ video: { id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; channelName: string; channelAvatarUrl: string; ... 9 more ...; isSaved: boolean; }; onLike: Mock<...>; }' is not assignable to type 'IntrinsicAttributes & VideoCardProps'.
+  Property 'onLike' does not exist on type 'IntrinsicAttributes & VideoCardProps'.
+tests/video-functionality.test.tsx(223,24): error TS2322: Type '{ videoId: string; }' is not assignable to type 'IntrinsicAttributes & VideoPlayerProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & VideoPlayerProps'.
+tests/video-functionality.test.tsx(238,24): error TS2322: Type '{ videoId: string; }' is not assignable to type 'IntrinsicAttributes & VideoPlayerProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & VideoPlayerProps'.
+tests/video-functionality.test.tsx(260,24): error TS2322: Type '{ videoId: string; }' is not assignable to type 'IntrinsicAttributes & VideoPlayerProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & VideoPlayerProps'.
+tests/video-functionality.test.tsx(277,16): error TS2540: Cannot assign to 'fullscreenElement' because it is a read-only property.
+tests/video-functionality.test.tsx(283,24): error TS2322: Type '{ videoId: string; }' is not assignable to type 'IntrinsicAttributes & VideoPlayerProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & VideoPlayerProps'.
+tests/video-functionality.test.tsx(298,24): error TS2322: Type '{ videoId: string; }' is not assignable to type 'IntrinsicAttributes & VideoPlayerProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & VideoPlayerProps'.
+tests/video-functionality.test.tsx(372,28): error TS2322: Type '{ videoId: string; comments: { id: string; userAvatarUrl: string; userName: string; commentText: string; timestamp: string; likes: number; isLikedByCurrentUser: boolean; isDislikedByCurrentUser: boolean; ... 12 more ...; updatedAt: string; }[]; }' is not assignable to type 'IntrinsicAttributes & CommentsSectionProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & CommentsSectionProps'.
+tests/video-functionality.test.tsx(389,13): error TS2322: Type '{ videoId: string; comments: { id: string; userAvatarUrl: string; userName: string; commentText: string; timestamp: string; likes: number; isLikedByCurrentUser: boolean; isDislikedByCurrentUser: boolean; ... 12 more ...; updatedAt: string; }[]; onSubmitComment: Mock<...>; }' is not assignable to type 'IntrinsicAttributes & CommentsSectionProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & CommentsSectionProps'.
+tests/video-functionality.test.tsx(412,13): error TS2322: Type '{ videoId: string; comments: { id: string; userAvatarUrl: string; userName: string; commentText: string; timestamp: string; likes: number; isLikedByCurrentUser: boolean; isDislikedByCurrentUser: boolean; ... 12 more ...; updatedAt: string; }[]; onLikeComment: Mock<...>; }' is not assignable to type 'IntrinsicAttributes & CommentsSectionProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & CommentsSectionProps'.
+tests/video-functionality.test.tsx(420,24): error TS2345: Argument of type 'HTMLElement | undefined' is not assignable to parameter of type 'Element'.
+  Type 'undefined' is not assignable to type 'Element'.
+tests/video-functionality.test.tsx(430,28): error TS2322: Type '{ videoId: string; comments: { id: string; userAvatarUrl: string; userName: string; commentText: string; timestamp: string; likes: number; isLikedByCurrentUser: boolean; isDislikedByCurrentUser: boolean; ... 12 more ...; updatedAt: string; }[]; }' is not assignable to type 'IntrinsicAttributes & CommentsSectionProps'.
+  Property 'videoId' does not exist on type 'IntrinsicAttributes & CommentsSectionProps'.
+tests/video-functionality.test.tsx(435,24): error TS2345: Argument of type 'HTMLElement | undefined' is not assignable to parameter of type 'Element'.
+  Type 'undefined' is not assignable to type 'Element'.
+tests/video-functionality.test.tsx(449,55): error TS2322: Type '{ key: string; video: { id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; channelName: string; ... 10 more ...; isSaved: boolean; }; variant: string; }' is not assignable to type 'IntrinsicAttributes & VideoCardProps'.
+  Property 'variant' does not exist on type 'IntrinsicAttributes & VideoCardProps'.
+utils/componentOptimizations.ts(10,3): error TS2322: Type 'MemoExoticComponent<ComponentType<P>>' is not assignable to type 'ComponentType<P>'.
+  Type 'MemoExoticComponent<ComponentType<P>>' is not assignable to type 'FunctionComponent<P>'.
+    Types of parameters 'props' and 'props' are incompatible.
+      Type 'P' is not assignable to type '(PropsWithoutRef<P> & RefAttributes<Component<P, any, any>>) | PropsWithRef<P>'.
+        Type 'object' is not assignable to type '(PropsWithoutRef<P> & RefAttributes<Component<P, any, any>>) | PropsWithRef<P>'.
+          Type 'P' is not assignable to type 'PropsWithoutRef<P> & RefAttributes<Component<P, any, any>>'.
+            Type 'object' is not assignable to type 'PropsWithoutRef<P> & RefAttributes<Component<P, any, any>>'.
+              Type 'object' is not assignable to type 'PropsWithoutRef<P>'.
+                Type 'P' is not assignable to type 'PropsWithoutRef<P>'.
+                  Type 'object' is not assignable to type 'PropsWithoutRef<P>'.
+utils/componentOptimizations.ts(18,3): error TS6133: 'fallback' is declared but its value is never read.
+utils/componentOptimizations.ts(130,45): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'PropsWithoutRef<P> & { ref: ForwardedRef<any>; }' is not assignable to parameter of type '(Attributes & P) | null | undefined'.
+      Type 'PropsWithoutRef<P> & { ref: ForwardedRef<any>; }' is not assignable to type 'Attributes & P'.
+        Type 'PropsWithoutRef<P> & { ref: ForwardedRef<any>; }' is not assignable to type 'P'.
+          'PropsWithoutRef<P> & { ref: ForwardedRef<any>; }' is assignable to the constraint of type 'P', but 'P' could be instantiated with a different subtype of constraint 'object'.
+utils/imageUtils.ts(18,20): error TS18048: 'dimensions' is possibly 'undefined'.
+utils/imageUtils.ts(169,57): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+utils/imageUtils.ts(169,82): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+utils/imageUtils.ts(256,16): error TS2532: Object is possibly 'undefined'.
+utils/imageUtils.ts(257,16): error TS2532: Object is possibly 'undefined'.
+utils/imageUtils.ts(258,16): error TS2532: Object is possibly 'undefined'.
+utils/performance.ts(47,73): error TS2339: Property 'navigationStart' does not exist on type 'PerformanceNavigationTiming'.
+utils/performance.ts(61,11): error TS2375: Type '{ name: string; startTime: number; metadata: Record<string, any> | undefined; }' is not assignable to type 'PerformanceMetric' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'metadata' are incompatible.
+    Type 'Record<string, any> | undefined' is not assignable to type 'Record<string, any>'.
+      Type 'undefined' is not assignable to type 'Record<string, any>'.
+utils/performance.ts(69,42): error TS2774: This condition will always return true since this function is always defined. Did you mean to call it instead?
+utils/performance.ts(89,42): error TS2774: This condition will always return true since this function is always defined. Did you mean to call it instead?
+utils/performance.ts(89,70): error TS2774: This condition will always return true since this function is always defined. Did you mean to call it instead?
+utils/performance.ts(110,42): error TS2774: This condition will always return true since this function is always defined. Did you mean to call it instead?
+utils/performance.ts(140,7): error TS2532: Object is possibly 'undefined'.
+utils/performance.ts(220,30): error TS2347: Untyped function calls may not accept type arguments.
+utils/performance.ts(220,56): error TS7006: Parameter 'props' implicitly has an 'any' type.
+utils/performance.ts(220,63): error TS7006: Parameter 'ref' implicitly has an 'any' type.
+utils/performance.ts(240,11): error TS6133: 'target' is declared but its value is never read.
+utils/testing.tsx(141,10): error TS2352: Conversion of type 'Mock<[], any>' to type 'MockedFunction<T>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type 'Mock<[], any>' is not comparable to type 'Mock<Parameters<T>, ReturnType<T>>'.
+    Types of property 'mock' are incompatible.
+      Type 'MockContext<[], any>' is not comparable to type 'MockContext<Parameters<T>, ReturnType<T>>'.
+        Type '[]' is not comparable to type 'Parameters<T>'.
+utils/unifiedUtils.ts(149,18): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+utils/unifiedUtils.ts(217,8): error TS2322: Type 'T | undefined' is not assignable to type 'T'.
+  'T' could be instantiated with an arbitrary type which could be unrelated to 'T | undefined'.
+utils/unifiedUtils.ts(217,21): error TS2322: Type 'T | undefined' is not assignable to type 'T'.
+  'T' could be instantiated with an arbitrary type which could be unrelated to 'T | undefined'.
