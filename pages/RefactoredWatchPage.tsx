@@ -389,18 +389,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const { videoId = '' } = useParams<{ videoId: string }>();
   const {
     video = mockVideo,
+  } = {}; // TODO: Replace with actual data fetching logic
+  
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(saveModalOpen || false);
   const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [isSummarizing, setIsSummarizing] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [currentReplyText, setCurrentReplyText] = useState('');
-  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
-  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [summaryError, setSummaryError] = useState<Error | null>(null);
 
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(() => {
@@ -734,6 +727,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       id: 'current-user-id',
       name: 'Current User',
       avatarUrl: ''
+    },
+    playerSettings: {
       isFullscreen: false,
       showCaptions: true,
       captions: video?.captions?.map((caption) => ({
