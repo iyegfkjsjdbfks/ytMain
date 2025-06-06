@@ -2,6 +2,13 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { Video as CoreVideo } from '../src/types/core';
+import StandardPageLayout from '../components/StandardPageLayout';
+import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
+import VideoActions from '../components/VideoActions';
+import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
+import CommentsSection from '../components/CommentsSection';
+import RecommendationEngine from '../components/RecommendationEngine';
+import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 
 // Define interfaces for our data structures
 interface Channel {
@@ -58,6 +65,12 @@ type Video = CoreVideo & {
   updatedAt?: string;
   channel?: Channel;
 };
+
+interface Playlist {
+  id: string;
+  name: string;
+  isPrivate: boolean;
+}
 
 interface RefactoredWatchPageProps {
   video?: Video;
@@ -131,7 +144,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleSubscribe: propHandleSubscribe = () => {},
   handleShare = () => {},
   handleDislike = () => {},
-  handleAddToWatchLater: propHandleAddToWatchLater = () => {},
   handleSummarizeDescription = async () => '',
   handleToggleDescription = () => {},
   handleMainCommentSubmitCallback = () => {},
@@ -139,14 +151,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleEditSave = () => {},
   handleDeleteComment = () => {},
   toggleLikeDislikeForCommentOrReply = () => {},
-  setReplyingToCommentId: propSetReplyingToCommentId = () => {},
-  setCurrentReplyText: propSetCurrentReplyText = () => {},
-  setEditingComment: propSetEditingComment = () => {},
-  setActiveCommentMenu: propSetActiveCommentMenu = () => {},
-  setExpandedReplies: propSetExpandedReplies = () => {},
-  closeSaveModal: propCloseSaveModal = () => {},
-  handleSaveToPlaylist: propHandleSaveToPlaylist = async () => {},
-  handleCreatePlaylist: propHandleCreatePlaylist = async () => {}
+  closeSaveModal = () => {}
 }) => {
   const { useState, useCallback } = React;
   
@@ -172,33 +177,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [currentReplyText, setCurrentReplyText] = useState('');
   const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<string[]>([]);
-  const [playlists, setPlaylists] = useState<Array<{ id: string; name: string; isPrivate: boolean }>>([]);
+  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState('');
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [isLoadingPlaylists, setIsLoadingPlaylists] = useState(false);
   const [playlistsError, setPlaylistsError] = useState<string | null>(null);
   
-  // State management
-  const [isLiked, setIsLiked] = useState(video.isLiked ?? false);
-  const [isDisliked, setIsDisliked] = useState(video.isDisliked ?? false);
-  const [isSubscribed, setIsSubscribed] = useState(video.isSubscribed ?? false);
-  const [isSaved, setIsSaved] = useState(video.isSavedToAnyList ?? false);
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [isSummaryLoading, setIsSummaryLoading] = useState(false);
-  const [summary, setSummary] = useState('');
-  const [summaryError, setSummaryError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [currentReplyText, setCurrentReplyText] = useState('');
-  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
-  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<string[]>([]);
-  const [playlists, setPlaylists] = useState<Array<{ id: string; name: string; isPrivate: boolean }>>([]);
-  const [isLoadingPlaylists, setIsLoadingPlaylists] = useState(false);
-  const [playlistsError, setPlaylistsError] = useState<string | null>(null);
-
   // Use provided video or fallback to mock video
   const video = propVideo || mockVideo;
   const error = propError || null;
@@ -209,6 +193,19 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(async () => {
+    if (!video?.id) return;
+    
+    try {
+      await addToWatchLater(video);
+      setIsSaved(true);
+    } catch (err) {
+      setActionError('Failed to add to watch later');
+      console.error('Error adding to watch later:', err);
+    }
+  }, [video, addToWatchLater]);
+  
+  // Handle saving to a specific playlist
+  const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
     if (!video?.id) return;
     
     try {
@@ -343,13 +340,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   const closeSaveModal = useCallback(() => {
     setIsSaveModalOpen(false);
-    if (propCloseSaveModal) {
-      propCloseSaveModal();
-    }
-  }, [propCloseSaveModal]);
+  }, []);
   
-  // Handle add to watch later
-  const { addToWatchLater } = useWatchLater();
   const handleAddToWatchLater = useCallback(async () => {
     if (!video?.id) return;
     
@@ -698,7 +690,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   };
 
   // Comments section configuration
-  const commentsSectionProps = {
+  const commentsSectionProps = video ? {
     comments: comments || [],
     sortOrder: commentSortOrder,
     onSortChange: setCommentSortOrder,
@@ -731,7 +723,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     playerSettings: {
       isFullscreen: false,
       showCaptions: true,
-      captions: video?.captions?.map((caption) => ({
+      captions: video.captions?.map((caption) => ({
         id: caption.id,
         language: {
           code: caption.language.code,
@@ -758,11 +750,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       onError: (error: string) => {
         console.error('Video player error:', error);
         setActionError(new Error(error));
-      },
+      }
     }
-  : null;
+  } : null;
 
-// Video actions configuration
+  // Video actions configuration
 const videoActionsProps = {
   liked,
   disliked,
