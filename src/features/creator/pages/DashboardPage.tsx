@@ -21,8 +21,8 @@ const ResponsiveContainer = ({ children, width, height }: any) => (
 );
 const PieChart = ({ children }: any) => <div className="flex items-center justify-center h-full">{children}</div>;
 const Pie = ({ data }: any) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = ({ fill }: { fill?: string }) => null;
-const Tooltip = ({ formatter }: { formatter?: any }) => null;
+const Cell = () => null;
+const Tooltip = () => null;
 const Legend = () => null;
 // import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 

@@ -963,10 +963,11 @@ const videoDescriptionProps = {
 
   // Video player props
   const videoPlayerProps = {
-    src: video?.videoUrl || '',
-    poster: video?.thumbnailUrl || '',
-    title: video?.title || '',
-    duration: video?.duration || '0:00',
+    video: videoState,
+    src: videoState?.videoUrl || '',
+    poster: videoState?.thumbnailUrl || '',
+    title: videoState?.title || '',
+    duration: videoState?.duration || '0:00',
     isPlaying: true,
     isMuted: false,
     volume: 1,
@@ -996,16 +997,16 @@ const videoDescriptionProps = {
 
   // Video actions props
   const videoActionsProps = {
-    likes: video?.likes || 0,
-    dislikes: video?.dislikes || 0,
-    isLiked: video?.isLiked || false,
-    isDisliked: video?.isDisliked || false,
-    isSubscribed: video?.isSubscribed || false,
-    isSaved: video?.isSavedToAnyList || false,
-    onLike: () => propHandleLike(video?.id || ''),
-    onDislike: () => propHandleDislike(video?.id || ''),
-    onSubscribe: () => propHandleSubscribe(video?.channelId || ''),
-    onShare: () => propHandleShare(video?.id || ''),
+    likes: videoState?.likes || 0,
+    dislikes: videoState?.dislikes || 0,
+    isLiked: videoState?.isLiked || false,
+    isDisliked: videoState?.isDisliked || false,
+    isSubscribed: videoState?.isSubscribed || false,
+    isSaved: videoState?.isSavedToAnyList || false,
+    onLike: () => propHandleLike(videoState?.id || ''),
+    onDislike: () => propHandleDislike(videoState?.id || ''),
+    onSubscribe: () => propHandleSubscribe(videoState?.channelId || ''),
+    onShare: () => propHandleShare(videoState?.id || ''),
     onSave: () => setIsSaveModalOpen(true),
     onAddToWatchLater: handleAddToWatchLater,
     onComment: () => {
@@ -1019,15 +1020,15 @@ const videoDescriptionProps = {
 
   // Video description props
   const videoDescriptionProps = {
-    title: video?.title || '',
-    viewCount: video?.viewCount || 0,
-    uploadedAt: video?.uploadedAt || new Date().toISOString(),
-    description: video?.description || '',
-    channel: video?.channel || {
-      id: video?.channelId || '',
-      name: video?.channelName || 'Unknown Channel',
-      avatarUrl: video?.channelAvatarUrl || '',
-      isSubscribed: video?.isSubscribed || false
+    title: videoState?.title || '',
+    viewCount: videoState?.views || 0,
+    uploadedAt: videoState?.uploadedAt || new Date().toISOString(),
+    description: videoState?.description || '',
+    channel: videoState?.channel || {
+      id: videoState?.channelId || '',
+      name: videoState?.channelName || 'Unknown Channel',
+      avatarUrl: videoState?.channelAvatarUrl || '',
+      isSubscribed: videoState?.isSubscribed || false
     },
     showFullDescription: isDescriptionExpanded,
     onToggleDescription: () => {
@@ -1039,7 +1040,7 @@ const videoDescriptionProps = {
     onSummarize: handleSummarize,
     summaryError: summaryError || null,
     onSubscribe: () => propHandleSubscribe(videoState?.channel?.id || ''),
-    isSubscribed: video?.isSubscribed || false
+    isSubscribed: videoState?.isSubscribed || false
   };
 
   // Save to playlist modal props
@@ -1047,17 +1048,18 @@ const videoDescriptionProps = {
     isOpen: isSaveModalOpen,
     onClose: () => {
       setIsSaveModalOpen(false);
-      propCloseSaveModal();
     },
     onSave: handleSaveToPlaylist,
     playlists: [], // Empty array as we don't have mock playlists
     selectedPlaylistId: '',
     onSelectPlaylist: () => {},
     onCreatePlaylist: handleCreatePlaylist,
-    videoId: video?.id || ''
+    videoId: videoState?.id || '',
+    existingPlaylists: [],
+    onSaveToPlaylist: handleSaveToPlaylist
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <StandardPageLayout>
         <div className="flex justify-center items-center h-64">
@@ -1067,17 +1069,17 @@ const videoDescriptionProps = {
     );
   }
   
-  if (error) {
+  if (errorState) {
     return (
       <StandardPageLayout>
         <div className="p-4 text-red-600 dark:text-red-400">
-          {error}
+          {errorState.message}
         </div>
       </StandardPageLayout>
     );
   }
   
-  if (!video) {
+  if (!videoState) {
     return (
       <StandardPageLayout>
         <div className="p-4">
@@ -1099,11 +1101,11 @@ const videoDescriptionProps = {
           
           {/* Video info */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold mb-2">{video.title}</h1>
+            <h1 className="text-2xl font-bold mb-2">{videoState.title}</h1>
             <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-              <span>{video.viewCount} views</span>
+              <span>{videoState.views} views</span>
               <span className="mx-2">•</span>
-              <span>{new Date(video.uploadedAt || '').toLocaleDateString()}</span>
+              <span>{new Date(videoState.uploadedAt || '').toLocaleDateString()}</span>
             </div>
           </div>
           
@@ -1126,7 +1128,7 @@ const videoDescriptionProps = {
         {/* Sidebar - Recommendations */}
         <div className="w-full lg:w-80 flex-shrink-0">
           <RecommendationEngine
-            currentVideoId={video.id}
+            currentVideoId={videoState.id}
             onVideoSelect={(videoId: string) => {
               // Handle video selection
               console.log('Selected video:', videoId);

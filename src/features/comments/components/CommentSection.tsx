@@ -8,6 +8,10 @@ import {
   HeartIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline';
+import {
+  MapPinIcon as PinSolidIcon,
+  HeartIcon as HeartSolidIcon,
+} from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from 'date-fns';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';

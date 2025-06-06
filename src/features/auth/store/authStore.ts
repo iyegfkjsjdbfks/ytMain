@@ -17,7 +17,7 @@ interface AuthStore extends AuthState {
  * Replaces the previous context-based approach with a more
  * efficient and easier to use state management solution
  */
-export const useAuthStore = create<AuthStore>((set, get) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   isAuthenticated: false,
   isLoading: true,
