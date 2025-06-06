@@ -28,7 +28,7 @@ export class MockApiService {
     ];
     
     const index = id ? parseInt(id) % videos.length : Math.floor(Math.random() * videos.length);
-    return videos[index];
+    return videos[index] || videos[0] || '';
   }
 
   // Generate mock video data
@@ -103,7 +103,7 @@ export class MockApiService {
   }
 
   // Generate mock comment data
-  generateMockComment(id: string, videoId: string): any {
+  generateMockComment(id: string, _videoId: string): any {
     const authors = [
       'VideoLover123', 'TechEnthusiast', 'NatureFan', 'MusicAddict', 'Gamer4Life',
       'ArtAppreciator', 'FoodieExplorer', 'TravelBug', 'ScienceGeek', 'FitnessFreak'
@@ -159,7 +159,7 @@ export class MockApiService {
       'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
       'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals'
     ];
-    return categories[Math.floor(Math.random() * categories.length)];
+    return categories[Math.floor(Math.random() * categories.length)] || 'General';
   }
 
   private generateRandomTags(): string[] {
@@ -191,11 +191,12 @@ export class MockApiService {
 
     const index = parseInt(id) % titles.length;
     const videoCount = Math.floor(Math.random() * 50) + 5;
+    const title = titles[index] || 'Default Playlist';
 
     return {
       id,
-      title: titles[index],
-      description: `A curated collection of ${titles[index].toLowerCase()}`,
+      title,
+      description: `A curated collection of ${title.toLowerCase()}`,
       thumbnailUrl: this.getPlaceholderImage(320, 180, id),
       videoCount,
       visibility: Math.random() > 0.5 ? 'public' : 'private',
@@ -217,12 +218,13 @@ export class MockApiService {
     const index = parseInt(id.replace('channel-', '')) % names.length;
     const subscriberCount = Math.floor(Math.random() * 1000000) + 1000;
     const videoCount = Math.floor(Math.random() * 500) + 10;
+    const name = names[index] || 'Default Channel';
 
     return {
       id,
-      name: names[index],
-      handle: `@${names[index].toLowerCase()}`,
-      description: `Welcome to ${names[index]}! We create amazing content for our viewers.`,
+      name,
+      handle: `@${name.toLowerCase()}`,
+      description: `Welcome to ${name}! We create amazing content for our viewers.`,
       avatarUrl: this.getPlaceholderImage(80, 80, id),
       bannerUrl: this.getPlaceholderImage(1280, 320, `${id}-banner`),
       subscriberCount,
@@ -231,8 +233,8 @@ export class MockApiService {
       joinedDate: new Date(Date.now() - Math.random() * 5 * 365 * 24 * 60 * 60 * 1000).toISOString(),
       location: 'Global',
       links: [
-        { title: 'Website', url: `https://${names[index].toLowerCase()}.com` },
-        { title: 'Twitter', url: `https://twitter.com/${names[index].toLowerCase()}` }
+        { title: 'Website', url: `https://${name.toLowerCase()}.com` },
+        { title: 'Twitter', url: `https://twitter.com/${name.toLowerCase()}` }
       ]
     };
   }

@@ -184,12 +184,12 @@ class UnifiedApiService {
     cacheKey?: string,
     cacheTTL?: number
   ): Promise<T> {
-    let config = {
+    let config: RequestInit & { url: string } = {
       ...options,
       url: `${this.config.baseUrl}${endpoint}`,
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers,
+        ...(options.headers as Record<string, string>),
       },
     };
 
@@ -339,7 +339,12 @@ class UnifiedApiService {
       throw new ApiError('Playlist not found', 404, 'PLAYLIST_NOT_FOUND');
     }
 
-    return response.items[0];
+    const playlist = response.items[0];
+    if (!playlist) {
+      throw new ApiError('Playlist not found', 404, 'PLAYLIST_NOT_FOUND');
+    }
+    
+    return playlist;
   }
 
   async getComments(videoId: string, params: {

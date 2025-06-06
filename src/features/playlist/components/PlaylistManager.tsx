@@ -233,9 +233,9 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     try {
       await createPlaylistMutation.mutate({
         title: `${playlist.title} (Copy)`,
-        description: playlist.description,
+        ...(playlist.description && { description: playlist.description }),
         visibility: playlist.visibility,
-        tags: playlist.tags || [],
+        ...(playlist.tags && { tags: playlist.tags }),
       });
     } catch (error) {
       console.error('Failed to duplicate playlist:', error);

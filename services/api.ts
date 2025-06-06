@@ -501,9 +501,10 @@ export class ChannelService {
           })
         );
         
+        const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
         return {
           videos,
-          nextPageToken: Math.random() > 0.4 ? `token_${Date.now()}` : undefined,
+          ...(nextPageToken && { nextPageToken }),
         };
       }
 
@@ -561,8 +562,6 @@ export class ChannelService {
 
 export class PlaylistService {
   static async getUserPlaylists(userId: string): Promise<UserPlaylist[]> {
-    const cacheKey = `user_playlists_${userId}`;
-    
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
