@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  ReactNode  } from 'react';
+import React, { ReactNode } from 'react';
 
 /**
  * Safely render an array of items as React components
