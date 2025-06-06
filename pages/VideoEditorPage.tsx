@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
@@ -186,10 +186,10 @@ const VideoEditorPage: React.FC = () => {
       setEditHistory(prev => prev.slice(0, -1));
       
       // Simple undo logic - in a real app, this would be more sophisticated
-      if (lastAction.type === 'cut') {
+      if (lastAction && lastAction.type === 'cut') {
         // Restore original clip before split
         const splitClips = clips.filter(c => c.id.includes('_split_'));
-        if (splitClips.length > 0) {
+        if (splitClips.length > 0 && splitClips[0]) {
           const originalId = splitClips[0].id.split('_split_')[0];
           const originalClip = clips.find(c => c.id === originalId);
           if (originalClip) {
@@ -577,7 +577,7 @@ const VideoEditorPage: React.FC = () => {
           <div className="border-t border-gray-700 p-4">
             <h3 className="text-lg font-semibold mb-4">Edit History</h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
-              {editHistory.slice(-10).reverse().map((action, index) => (
+              {editHistory.slice(-10).reverse().map((action, _index) => (
                 <div key={action.timestamp} className="text-xs text-gray-400 p-2 bg-gray-700 rounded">
                   <div className="font-medium capitalize">{action.type}</div>
                   <div>{action.description}</div>

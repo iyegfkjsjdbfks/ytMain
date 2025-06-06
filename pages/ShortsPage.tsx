@@ -77,13 +77,16 @@ const ShortsPage: React.FC = () => {
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
       .filter(video => video.visibility !== 'scheduled') // Filter out scheduled videos
-      .map(video => ({
-        ...video,
-        duration: 60, // Convert duration to number for shorts
-        isShort: true,
-        isVertical: true,
-        visibility: video.visibility as 'public' | 'private' | 'unlisted' // Type assertion after filtering
-      }));
+      .map(video => {
+        const { duration: _, ...videoWithoutDuration } = video; // Remove duration from video
+        const shortVideo: Short = {
+          ...videoWithoutDuration,
+          duration: 60, // Convert duration to number for shorts
+          isVertical: true,
+          visibility: video.visibility as 'public' | 'private' | 'unlisted' // Type assertion after filtering
+        };
+        return shortVideo;
+      });
 
     // Apply category filter
     if (selectedCategory !== 'all') {
