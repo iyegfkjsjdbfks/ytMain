@@ -582,6 +582,8 @@ export class PlaylistService {
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
+        // Using userId for development mock data
+        console.log(`Fetching playlists for user: ${userId}`);
         
         return [
           {
