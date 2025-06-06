@@ -106,21 +106,6 @@ describe('Core Application Functionality', () => {
 
   describe('3. Video Playback Functionality', () => {
     it('should initialize video player correctly', async () => {
-      const mockVideo = {
-        id: 'test123',
-        title: 'Test Video',
-        videoUrl: 'https://example.com/video.mp4',
-        thumbnailUrl: 'https://example.com/thumb.jpg',
-        duration: '10:30',
-        views: '1M views',
-        channelName: 'Test Channel',
-        channelAvatarUrl: 'https://example.com/avatar.jpg',
-        createdAt: '2024-01-01',
-        uploadedAt: '2024-01-01T00:00:00Z',
-        description: 'Test video description',
-        category: 'Entertainment'
-      };
-
       renderWithProviders(<WatchPage />);
       
       // Check if video element is rendered

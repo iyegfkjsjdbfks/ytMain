@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { notificationService, type Notification } from '../services/notificationService';
 
 export function useNotifications() {
   const queryClient = useQueryClient();
-  const [realTimeConnection, setRealTimeConnection] = useState<(() => void) | null>(null);
 
   // Fetch notifications
   const { data: notifications = [], isLoading, error } = useQuery({
@@ -78,8 +77,6 @@ export function useNotifications() {
         console.error('Real-time notification error:', error);
       }
     );
-
-    setRealTimeConnection(() => cleanup);
 
     return () => {
       if (cleanup) {
