@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Short } from '../types';
+import { Short } from '../src/types/core';
 import { getShortsVideos } from '../services/mockVideoService'; // Assuming you have a service to fetch videos
 import ShortsIcon from './icons/ShortsIcon'; // Assuming you have a ShortsIcon
 import ShortDisplayCard from './ShortDisplayCard'; // Assuming you have a ShortDisplayCard component

@@ -22,24 +22,9 @@ interface Playlist {
 
 // Use a local interface that extends the core Video type
 interface LocalVideo extends Video {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
-  thumbnail: string;
-  views: string;
   timestamp: string;
-  channel: Channel;
-  likes: string;
-  dislikes: string;
-  isLiked?: boolean;
-  isDisliked?: boolean;
   isSubscribed?: boolean;
   isSavedToAnyList?: boolean;
-  captions?: Array<{
-    language: string;
-    url: string;
-  }>;
   recommendations?: Video[];
 }
 
@@ -54,8 +39,6 @@ const mockVideo: Video = {
   videoUrl: 'https://example.com/video.mp4',
   duration: '10:30',
   views: '1,234,567',
-  likes: 123000,
-  dislikes: 1200,
   uploadedAt: '2023-05-15T12:00:00Z',
   channelName: 'Sample Channel',
   channelId: '1',
@@ -68,28 +51,6 @@ const mockVideo: Video = {
     isVerified: true,
   },
   category: 'Entertainment',
-  tags: ['sample', 'video', 'test'],
-  visibility: 'public',
-  commentCount: 150,
-  viewCount: 1234567,
-  isLiked: false,
-  isDisliked: false,
-  isSaved: false,
-  captions: [
-    {
-      id: '1',
-      language: { code: 'en', name: 'English' },
-      label: 'English',
-      url: '/captions/en.vtt',
-    },
-    {
-      id: '2', 
-      language: { code: 'es', name: 'Spanish' },
-      label: 'Spanish',
-      url: '/captions/es.vtt',
-    },
-  ],
-  relatedVideos: [],
 };
 
 interface RefactoredWatchPageProps {
@@ -130,28 +91,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   toggleLikeDislikeForCommentOrReply: propToggleLikeDislikeForCommentOrReply = async () => {},
 }) => {
   const { useState, useCallback } = React;
-
-  // State management
-  const [videoState, setVideoState] = useState<Video>(propVideo);
-  const [isLoading, setIsLoading] = useState<boolean>(propLoading);
-  const [errorState, setErrorState] = useState<Error | null>(propError);
-  const [isLiked, setIsLiked] = useState<boolean>(propVideo.isLiked || false);
-  const [isDisliked, setIsDisliked] = useState<boolean>(propVideo.isDisliked || false);
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(propVideo.isSubscribed || false);
-  const [isSaved, setIsSaved] = useState<boolean>(propVideo.isSavedToAnyList || false);
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState<boolean>(false);
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [currentReplyText, setCurrentReplyText] = useState<string>('');
-  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
-  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<string[]>([]);
-  const [selectedPlaylistId, setSelectedPlaylistId] = useState<string>('');
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [isLoadingPlaylists, setIsLoadingPlaylists] = useState<boolean>(false);
-  const [playlistsError, setPlaylistsError] = useState<string | null>(null);
   const [isSummaryLoading, setIsSummaryLoading] = useState<boolean>(false);
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
@@ -442,10 +381,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   // ... other handler functions with similar patterns ...
   
-  const closeSaveModal = useCallback(() => {
-    setIsSaveModalOpen(false);
-  }, []);
-  
   const handleAddToWatchLater = useCallback(async () => {
     if (!video?.id) return;
     
@@ -496,16 +431,9 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       channelName: video.channelName || '',
       channelAvatarUrl: video.channelAvatarUrl || '',
       duration: video.duration || '0:00',
-      likes: video.likes || 0,
-      dislikes: video.dislikes || 0,
-      tags: video.tags || [],
-      visibility: video.visibility || 'public',
-      commentCount: video.commentCount || 0,
-      viewCount: video.viewCount || 0,
       category: video.category || 'Education',
       createdAt: video.createdAt || new Date().toISOString(),
       updatedAt: video.updatedAt || new Date().toISOString(),
-      status: video.status || 'published',
     };
 
     if (video.id) {
