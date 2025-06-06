@@ -8,29 +8,11 @@ import RefactoredVideoDescription from '../components/RefactoredVideoDescription
 import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Video } from '../src/types/core';
+import { Video, Channel, Comment } from '../src/types/core';
+import VideoActions from '../components/VideoActions';
+import RecommendationEngine from '../components/RecommendationEngine';
 
 // Define interfaces for our data structures
-interface Channel {
-  id: string;
-  name: string;
-  avatarUrl: string;
-  subscribers?: number;
-  isSubscribed?: boolean;
-  isVerified?: boolean;
-}
-
-interface Comment {
-  id: string;
-  author: string;
-  text: string;
-  likes: number;
-  timestamp: string;
-  isLiked?: boolean;
-  isDisliked?: boolean;
-  replies?: Comment[];
-}
-
 interface Playlist {
   id: string;
   title: string;
@@ -38,7 +20,8 @@ interface Playlist {
   thumbnail: string;
 }
 
-interface Video {
+// Use a local interface that extends the core Video type
+interface LocalVideo extends Video {
   id: string;
   title: string;
   description: string;
@@ -1052,10 +1035,10 @@ const videoDescriptionProps = {
       propHandleToggleDescription();
     },
     summary: summary || '',
-    isSummarizing,
+    isSummarizing: isSummaryLoading,
     onSummarize: handleSummarize,
-    summaryError: summaryError?.message || null,
-    onSubscribe: () => propHandleSubscribe(video?.channelId || ''),
+    summaryError: summaryError || null,
+    onSubscribe: () => propHandleSubscribe(videoState?.channel?.id || ''),
     isSubscribed: video?.isSubscribed || false
   };
 
