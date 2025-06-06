@@ -88,6 +88,7 @@ export const useWatchPage = () => {
   
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [saveModalLoading, setSaveModalLoading] = useState(false);
 
   // AI Summary state
   const [summary, setSummary] = useState<string>('');
@@ -506,6 +507,7 @@ export const useWatchPage = () => {
     
     // Modal and loading state
     isSaveModalOpen,
+    saveModalLoading,
 
     // AI Summary state
     summary,

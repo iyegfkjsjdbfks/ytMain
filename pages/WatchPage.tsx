@@ -51,7 +51,7 @@ const WatchPage: React.FC = () => {
     canSummarize,
     
     // Related videos
-    displayedRelatedVideos,
+    // displayedRelatedVideos,
     // showAllRelated, // unused
     // Refs
     // saveButtonRef, // unused
