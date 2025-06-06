@@ -92,7 +92,7 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { openMiniplayer, showMiniplayer } = useMiniplayer();
+  const { showMiniplayer } = useMiniplayer();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
   // Enhanced save to playlist handler that integrates with Watch Later context

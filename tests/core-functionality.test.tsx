@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -13,10 +13,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from '../App';
 import HomePage from '../pages/HomePage';
 import WatchPage from '../pages/WatchPage';
-import SearchResultsPage from '../pages/SearchResultsPage';
 
 // Import hooks and utilities
-import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 // Test utilities

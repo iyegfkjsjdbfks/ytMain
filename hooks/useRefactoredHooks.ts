@@ -283,18 +283,11 @@ export function usePrevious<T>(value: T): T | undefined {
  */
 export function useUnifiedAppState() {
   const {
-    user,
-    isAuthenticated,
-    theme,
-    miniplayerVideo,
-    isMiniplayerOpen,
-    watchLaterVideos,
-    sidebarCollapsed,
-    notifications,
+    state,
     login,
     logout,
-    toggleTheme,
-    setMiniplayerVideo,
+    setTheme,
+    openMiniplayer,
     toggleMiniplayer,
     addToWatchLater,
     removeFromWatchLater,
@@ -305,36 +298,36 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user,
-    isAuthenticated,
+    user: state.user,
+    isAuthenticated: state.isAuthenticated,
     login,
     logout,
     
     // Theme state
-    theme,
-    toggleTheme,
-    isDarkMode: theme === 'dark',
+    theme: state.theme,
+    setTheme,
+    isDarkMode: state.theme === 'dark',
     
     // Miniplayer state
-    miniplayerVideo,
-    isMiniplayerOpen,
-    setMiniplayerVideo,
+    miniplayerVideo: state.miniplayerVideo,
+    isMiniplayerOpen: state.isMiniplayerOpen,
+    openMiniplayer,
     toggleMiniplayer,
     
     // Watch Later state
-    watchLaterVideos,
+    watchLaterVideos: state.watchLaterVideos,
     addToWatchLater,
     removeFromWatchLater,
-    isInWatchLater: (videoId: string) => watchLaterVideos.includes(videoId),
+    isInWatchLater: (videoId: string) => state.watchLaterVideos.includes(videoId),
     
     // UI state
-    sidebarCollapsed,
+    sidebarCollapsed: state.sidebarCollapsed,
     toggleSidebar,
     
     // Notifications
-    notifications,
+    notifications: state.notifications,
     addNotification,
     removeNotification,
-    hasUnreadNotifications: notifications.some(n => !n.read)
+    hasUnreadNotifications: state.notifications.some(n => !n.read)
   };
 }

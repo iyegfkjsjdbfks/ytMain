@@ -106,7 +106,7 @@ const RefactoredContentManagerPage: React.FC = () => {
       case 'private':
         return video.visibility === 'private';
       case 'drafts':
-        return video.status === 'draft';
+        return video.privacyStatus === 'private' || video.visibility === 'private';
       default:
         return true;
     }

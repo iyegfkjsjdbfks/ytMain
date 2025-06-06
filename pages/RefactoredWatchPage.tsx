@@ -1,7 +1,14 @@
-import * as React from 'react';
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useMiniplayer } from '../contexts/MiniplayerContext';
+import StandardPageLayout from '../components/StandardPageLayout';
+import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
+import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
+import CommentsSection from '../components/CommentsSection';
+import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Video } from '../src/types/core';
 
 // Define interfaces for our data structures
 interface Channel {
@@ -56,12 +63,20 @@ interface Video {
 // Mock data for initial rendering
 const mockVideo: Video = {
   id: '1',
+  createdAt: '2023-05-15T12:00:00Z',
+  updatedAt: '2023-05-15T12:00:00Z',
   title: 'Sample Video',
   description: 'This is a sample video description.',
+  thumbnailUrl: 'https://via.placeholder.com/1280x720',
+  videoUrl: 'https://example.com/video.mp4',
   duration: '10:30',
-  thumbnail: 'https://via.placeholder.com/1280x720',
   views: '1,234,567',
-  timestamp: '2023-05-15T12:00:00Z',
+  likes: 123000,
+  dislikes: 1200,
+  uploadedAt: '2023-05-15T12:00:00Z',
+  channelName: 'Sample Channel',
+  channelId: '1',
+  channelAvatarUrl: 'https://via.placeholder.com/48',
   channel: {
     id: '1',
     name: 'Sample Channel',
@@ -69,17 +84,29 @@ const mockVideo: Video = {
     subscribers: 1200000,
     isVerified: true,
   },
-  likes: '123K',
-  dislikes: '1.2K',
+  category: 'Entertainment',
+  tags: ['sample', 'video', 'test'],
+  visibility: 'public',
+  commentCount: 150,
+  viewCount: 1234567,
   isLiked: false,
   isDisliked: false,
-  isSubscribed: false,
-  isSavedToAnyList: false,
+  isSaved: false,
   captions: [
-    { language: 'English', url: '/captions/en.vtt' },
-    { language: 'Spanish', url: '/captions/es.vtt' },
+    {
+      id: '1',
+      language: { code: 'en', name: 'English' },
+      label: 'English',
+      url: '/captions/en.vtt',
+    },
+    {
+      id: '2', 
+      language: { code: 'es', name: 'Spanish' },
+      label: 'Spanish',
+      url: '/captions/es.vtt',
+    },
   ],
-  recommendations: [],
+  relatedVideos: [],
 };
 
 interface RefactoredWatchPageProps {
@@ -279,6 +306,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   // Get watch later context
   const { addToWatchLater } = useWatchLater();
+  
+  // Close save modal function
+  const closeSaveModal = useCallback(() => {
+    setIsSaveModalOpen(false);
+  }, []);
   
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(async () => {
