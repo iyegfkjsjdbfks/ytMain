@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useMemo } from 'react';
+import * as React from 'react';
+import {  createContext, useContext, useReducer, useMemo  } from 'react';
 import { Video } from '../types';
 
 // State interface

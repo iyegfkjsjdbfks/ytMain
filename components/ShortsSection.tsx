@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import {  useEffect, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { Short } from '../src/types/core';
 import { getShortsVideos } from '../services/mockVideoService'; // Assuming you have a service to fetch videos

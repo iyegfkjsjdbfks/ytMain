@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import * as React from 'react';
+import {  useEffect, useRef  } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface BaseModalProps {

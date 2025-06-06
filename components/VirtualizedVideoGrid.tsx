@@ -1,4 +1,5 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useMemo, useCallback, useState, useEffect  } from 'react';
 import { FixedSizeGrid as Grid } from 'react-window';
 import { Video } from '../types';
 import OptimizedVideoCard from './OptimizedVideoCard';

@@ -1,4 +1,5 @@
-import React, { createContext, useContext, ReactNode, useReducer, useCallback } from 'react';
+import * as React from 'react';
+import {  createContext, useContext, ReactNode, useReducer, useCallback  } from 'react';
 import { User } from '../src/types/core';
 import { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
 

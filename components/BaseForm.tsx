@@ -1,4 +1,5 @@
-import React, { FormEvent, ReactNode } from 'react';
+import * as React from 'react';
+import {  FormEvent, ReactNode  } from 'react';
 import { useFormState } from '../hooks';
 
 interface FormField {

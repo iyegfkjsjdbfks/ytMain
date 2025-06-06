@@ -1,4 +1,5 @@
-import React, { forwardRef, ReactNode, ButtonHTMLAttributes, InputHTMLAttributes } from 'react';
+import * as React from 'react';
+import {  forwardRef, ReactNode, ButtonHTMLAttributes, InputHTMLAttributes  } from 'react';
 import { cn } from '../../utils/cn';
 import { 
   ExclamationTriangleIcon, 

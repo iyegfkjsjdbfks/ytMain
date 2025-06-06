@@ -1,5 +1,6 @@
 
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import * as React from 'react';
+import {  useRef, useEffect, useState, useCallback  } from 'react';
 import { cn } from '../utils/cn';
 
 interface CategoryChipsProps {

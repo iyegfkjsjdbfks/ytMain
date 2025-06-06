@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
+import {  useState, useEffect, useRef  } from 'react';
 import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 

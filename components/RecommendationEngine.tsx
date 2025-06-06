@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { ClockIcon, EyeIcon, HandThumbUpIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { mockVideos } from '../services/mockVideoService';

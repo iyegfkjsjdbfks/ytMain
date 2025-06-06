@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import * as React from 'react';
+import {  useState, useEffect, useRef, useCallback  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from './icons/SearchIcon';
 import SearchSuggestions from './SearchSuggestions';
