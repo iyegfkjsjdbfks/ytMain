@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState, useEffect, memo  } from 'react';
+import React, { useState, useEffect, memo   } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
 import { getVideos } from '../services/mockVideoService';

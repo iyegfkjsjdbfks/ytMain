@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  memo, useCallback, useMemo  } from 'react';
+import React, { memo, useCallback, useMemo   } from 'react';
 import { Video } from '../types';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';

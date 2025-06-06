@@ -132,11 +132,9 @@ const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
   },
   events: {
     onReady: (event) => {
-      console.log('Player is ready', event);
-    },
+      },
     onStateChange: (event) => {
-      console.log('Player state changed:', event.data);
-    },
+      },
   },
 });
 

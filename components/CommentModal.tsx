@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState  } from 'react';
+import React, { useState   } from 'react';
 import BaseModal from './BaseModal';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
@@ -35,10 +34,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
       if (onCommentSubmit) {
         await onCommentSubmit(text);
       } else {
-        // Default behavior - you can implement API call here
-        console.log('Comment submitted for short:', shortId, 'Text:', text);
-        // TODO: Implement actual comment submission to API
-      }
+        // Default behavior - you can implement API call here      }
       
       setCommentText('');
       onClose();

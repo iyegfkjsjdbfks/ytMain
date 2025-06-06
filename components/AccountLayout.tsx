@@ -95,8 +95,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle account backup
-                    console.log('Initiating account backup...');
-                  }}
+                    }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Download account data
@@ -104,8 +103,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle password change
-                    console.log('Redirecting to password change...');
-                  }}
+                    }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Change password
@@ -113,8 +111,7 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle two-factor auth
-                    console.log('Setting up 2FA...');
-                  }}
+                    }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Enable 2FA

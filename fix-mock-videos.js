@@ -9,8 +9,6 @@ const content = fs.readFileSync(filePath, 'utf8');
 const videoPattern = /{\s*id:\s*'([^']+)',\s*title:\s*'([^']+)',[\s\S]*?}/g;
 const matches = [...content.matchAll(videoPattern)];
 
-console.log(`Found ${matches.length} videos to fix`);
-
 // Create the replacement content
 const fixedVideos = matches.map((match, index) => {
   const fullMatch = match[0];
@@ -40,5 +38,3 @@ const fixedVideos = matches.map((match, index) => {
   })`;
 }).join(',\n');
 
-console.log('Generated fixed videos array');
-console.log('Please manually replace the mockVideos array in the file');

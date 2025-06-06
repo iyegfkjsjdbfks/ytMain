@@ -145,8 +145,7 @@ export function useVideoInteractions(
     mutationFn: (reason: string) => videoService.reportVideo(videoId, reason),
     onSuccess: () => {
       // Show success message
-      console.log('Video reported successfully');
-    },
+      },
   });
 
   return {

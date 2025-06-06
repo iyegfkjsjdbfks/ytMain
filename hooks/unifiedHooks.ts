@@ -466,16 +466,14 @@ export function usePerformanceMonitor(name: string) {
     return () => {
       const duration = Date.now() - startTimeRef.current;
       if (process.env.NODE_ENV === 'development') {
-        console.log(`[Performance] ${name}: ${duration}ms`);
-      }
+        }
     };
   }, [name]);
   
   const mark = useCallback((label: string) => {
     const duration = Date.now() - startTimeRef.current;
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[Performance] ${name} - ${label}: ${duration}ms`);
-    }
+      }
   }, [name]);
   
   return { mark };

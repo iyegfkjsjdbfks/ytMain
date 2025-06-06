@@ -9,8 +9,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.join(__dirname, '..');
 
-console.log('🔧 Fixing proxy errors...\n');
-
 // 1. Update vite.config.ts to handle proxy errors better
 const viteConfigPath = path.join(rootDir, 'vite.config.ts');
 if (fs.existsSync(viteConfigPath)) {
@@ -18,13 +16,10 @@ if (fs.existsSync(viteConfigPath)) {
   
   // Check if proxy error handling is already added
   if (!viteConfig.includes('configure: (proxy, options)')) {
-    console.log('✅ Vite config already updated');
-  } else {
-    console.log('✅ Vite config proxy handling is configured');
-  }
+    } else {
+    }
 } else {
-  console.log('❌ vite.config.ts not found');
-}
+  }
 
 // 2. Create a simple fallback service
 const fallbackServicePath = path.join(rootDir, 'services', 'fallbackService.ts');
@@ -62,8 +57,6 @@ export default { createFallbackUrl, isApiAvailable };
 `;
 
 fs.writeFileSync(fallbackServicePath, fallbackServiceContent);
-console.log('✅ Created fallback service');
-
 // 3. Create a development environment checker
 const envCheckerPath = path.join(rootDir, 'utils', 'envChecker.ts');
 const envCheckerContent = `// Environment checker utility
@@ -106,8 +99,6 @@ export default {
 `;
 
 fs.writeFileSync(envCheckerPath, envCheckerContent);
-console.log('✅ Created environment checker');
-
 // 4. Update package.json to include fallback script
 const packageJsonPath = path.join(rootDir, 'package.json');
 if (fs.existsSync(packageJsonPath)) {
@@ -116,10 +107,8 @@ if (fs.existsSync(packageJsonPath)) {
   if (!packageJson.scripts['dev:fallback']) {
     packageJson.scripts['dev:fallback'] = 'VITE_USE_FALLBACKS=true vite';
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    console.log('✅ Added fallback development script');
-  } else {
-    console.log('✅ Fallback script already exists');
-  }
+    } else {
+    }
 }
 
 // 5. Create a simple instructions file
@@ -176,11 +165,3 @@ npm run dev:fallback  # Uses fallback URLs for all placeholders
 `;
 
 fs.writeFileSync(instructionsPath, instructionsContent);
-console.log('✅ Created quick fix instructions');
-
-console.log('\n🎉 Proxy error fixes applied successfully!');
-console.log('\n📋 Next steps:');
-console.log('1. Run: npm install');
-console.log('2. Run: npm run dev (or npm run dev:client-only if issues persist)');
-console.log('3. Check QUICK_FIX.md for detailed instructions');
-console.log('\n✨ Your YouTube clone should now work perfectly!');

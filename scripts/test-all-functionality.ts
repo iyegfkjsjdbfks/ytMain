@@ -31,8 +31,6 @@ class TestRunner {
   private startTime: number = Date.now();
 
   async runAllTests(): Promise<void> {
-    console.log('🚀 Starting comprehensive functionality tests...\n');
-
     // Core functionality tests
     await this.runTestSuite('Core Application Functionality', [
       'tests/core-functionality.test.tsx'
@@ -71,7 +69,6 @@ class TestRunner {
   }
 
   private async runTestSuite(suiteName: string, testPatterns: string[]): Promise<void> {
-    console.log(`📋 Running ${suiteName}...`);
     const suiteStartTime = Date.now();
     
     const suite: TestSuite = {
@@ -116,9 +113,7 @@ class TestRunner {
       suite.skippedTests = suite.tests.filter(t => t.status === 'skipped').length;
       suite.duration = Date.now() - suiteStartTime;
 
-      console.log(`✅ ${suite.passedTests}/${suite.totalTests} tests passed in ${suite.duration}ms\n`);
-
-    } catch (error) {
+      } catch (error) {
       console.error(`❌ Failed to run ${suiteName}:`, error);
       suite.tests.push({
         name: suiteName,
@@ -191,32 +186,16 @@ class TestRunner {
     const totalSkipped = this.results.reduce((sum, suite) => sum + suite.skippedTests, 0);
 
     // Console report
-    console.log('\n' + '='.repeat(80));
-    console.log('📊 COMPREHENSIVE TEST REPORT');
-    console.log('='.repeat(80));
-    console.log(`⏱️  Total Duration: ${totalDuration}ms`);
-    console.log(`📈 Total Tests: ${totalTests}`);
-    console.log(`✅ Passed: ${totalPassed} (${((totalPassed/totalTests)*100).toFixed(1)}%)`);
-    console.log(`❌ Failed: ${totalFailed} (${((totalFailed/totalTests)*100).toFixed(1)}%)`);
-    console.log(`⏭️  Skipped: ${totalSkipped} (${((totalSkipped/totalTests)*100).toFixed(1)}%)`);
-    console.log('='.repeat(80));
-
     // Detailed suite results
     for (const suite of this.results) {
       const passRate = ((suite.passedTests / suite.totalTests) * 100).toFixed(1);
-      console.log(`\n📋 ${suite.name}`);
-      console.log(`   Tests: ${suite.totalTests} | Passed: ${suite.passedTests} | Failed: ${suite.failedTests} | Pass Rate: ${passRate}%`);
-      
       if (suite.failedTests > 0) {
-        console.log('   ❌ Failed Tests:');
         suite.tests
           .filter(test => test.status === 'failed')
           .forEach(test => {
-            console.log(`      - ${test.name}`);
             if (test.errors && test.errors.length > 0) {
               test.errors.forEach(error => {
-                console.log(`        Error: ${error.substring(0, 100)}...`);
-              });
+                });
             }
           });
       }
@@ -245,17 +224,13 @@ class TestRunner {
     }
 
     fs.writeFileSync(reportPath, JSON.stringify(reportData, null, 2));
-    console.log(`\n📄 Detailed report saved to: ${reportPath}`);
-
     // Generate HTML report
     this.generateHtmlReport(reportData, reportsDir);
 
     // Exit with appropriate code
     if (totalFailed > 0) {
-      console.log('\n❌ Some tests failed. Please review the report above.');
       process.exit(1);
     } else {
-      console.log('\n🎉 All tests passed successfully!');
       process.exit(0);
     }
   }
@@ -336,8 +311,7 @@ class TestRunner {
 
     const htmlPath = path.join(reportsDir, 'test-report.html');
     fs.writeFileSync(htmlPath, htmlContent);
-    console.log(`📄 HTML report saved to: ${htmlPath}`);
-  }
+    }
 }
 
 // Run the tests

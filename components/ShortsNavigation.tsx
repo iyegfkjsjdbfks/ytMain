@@ -19,7 +19,6 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
   const handlePrevious = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Previous button clicked, canGoPrevious:', canGoPrevious);
     if (canGoPrevious) {
       onPrevious();
     }
@@ -28,7 +27,6 @@ const ShortsNavigation: React.FC<ShortsNavigationProps> = ({
   const handleNext = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Next button clicked, canGoNext:', canGoNext);
     if (canGoNext) {
       onNext();
     }

@@ -79,8 +79,6 @@ class CodebaseRefactorer {
   }
 
   async runRefactoring(): Promise<void> {
-    console.log('🔧 Starting comprehensive codebase refactoring...\n');
-
     // Sort tasks by priority
     const sortedTasks = this.tasks.sort((a, b) => {
       const priorityOrder = { high: 3, medium: 2, low: 1 };
@@ -95,15 +93,10 @@ class CodebaseRefactorer {
   }
 
   private async executeTask(task: RefactorTask): Promise<void> {
-    console.log(`🔄 Executing: ${task.name}`);
-    console.log(`   Description: ${task.description}`);
-    console.log(`   Priority: ${task.priority.toUpperCase()}`);
-
     try {
       await task.execute();
       this.completedTasks.push(task.name);
-      console.log(`✅ Completed: ${task.name}\n`);
-    } catch (error) {
+      } catch (error) {
       this.failedTasks.push(task.name);
       console.error(`❌ Failed: ${task.name}`);
       console.error(`   Error: ${error instanceof Error ? error.message : String(error)}\n`);
@@ -459,31 +452,26 @@ export interface ErrorWithSeverity extends AppError {
 
   private async consolidateHooks(): Promise<void> {
     // Implementation for consolidating duplicate hooks
-    console.log('   Consolidating custom hooks...');
     // This would involve analyzing hook files and merging duplicates
   }
 
   private async optimizePerformance(): Promise<void> {
     // Implementation for performance optimizations
-    console.log('   Adding performance optimizations...');
     // This would involve adding React.memo, useMemo, useCallback where appropriate
   }
 
   private async standardizeErrorHandling(): Promise<void> {
     // Implementation for error handling standardization
-    console.log('   Standardizing error handling...');
     // This would involve creating consistent error boundaries and handling patterns
   }
 
   private async improveAccessibility(): Promise<void> {
     // Implementation for accessibility improvements
-    console.log('   Improving accessibility features...');
     // This would involve adding ARIA labels, keyboard navigation, etc.
   }
 
   private async optimizeBundleSize(): Promise<void> {
     // Implementation for bundle size optimization
-    console.log('   Optimizing bundle size...');
     // This would involve implementing code splitting and lazy loading
   }
 
@@ -521,31 +509,15 @@ export interface ErrorWithSeverity extends AppError {
     const failedCount = this.failedTasks.length;
     const successRate = ((completedCount / totalTasks) * 100).toFixed(1);
 
-    console.log('\n' + '='.repeat(80));
-    console.log('📊 REFACTORING REPORT');
-    console.log('='.repeat(80));
-    console.log(`📈 Total Tasks: ${totalTasks}`);
-    console.log(`✅ Completed: ${completedCount} (${successRate}%)`);
-    console.log(`❌ Failed: ${failedCount}`);
-    console.log('='.repeat(80));
-
     if (this.completedTasks.length > 0) {
-      console.log('\n✅ Completed Tasks:');
-      this.completedTasks.forEach(task => console.log(`   - ${task}`));
-    }
+      this.completedTasks.forEach(task => }
 
     if (this.failedTasks.length > 0) {
-      console.log('\n❌ Failed Tasks:');
-      this.failedTasks.forEach(task => console.log(`   - ${task}`));
-    }
+      this.failedTasks.forEach(task => }
 
-    console.log('\n🎉 Refactoring process completed!');
-    
     if (failedCount > 0) {
-      console.log('⚠️  Some tasks failed. Please review the errors above.');
       process.exit(1);
     } else {
-      console.log('✨ All refactoring tasks completed successfully!');
       process.exit(0);
     }
   }

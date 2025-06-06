@@ -744,7 +744,6 @@ export const removeRecentSearch = (searchToRemove: string): Promise<string[]> =>
 
 export const saveRecentSearch = (query: string): Promise<void> => {
   // Mock implementation - in real app this would save to storage
-  console.log('Saving recent search:', query);
   return Promise.resolve();
 };
 

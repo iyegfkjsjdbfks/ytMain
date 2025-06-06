@@ -58,7 +58,6 @@ export default defineConfig({
         secure: false,
         configure: (proxy, options) => {
           proxy.on('error', (err, req, res) => {
-            console.log('Proxy error:', err);
             // Fallback for API errors
             if (res && !res.headersSent) {
               res.writeHead(200, { 'Content-Type': 'application/json' });

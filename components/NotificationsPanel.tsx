@@ -1,6 +1,5 @@
 
-import * as React from 'react';
-import {  useState  } from 'react';
+import React, { useState   } from 'react';
 import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {

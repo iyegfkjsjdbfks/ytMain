@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState  } from 'react';
+import React, { useState   } from 'react';
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -136,8 +135,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
                 className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => {
                   // Open image in modal/lightbox
-                  console.log('Open image:', image);
-                }}
+                  }}
               />
             ))}
           </div>

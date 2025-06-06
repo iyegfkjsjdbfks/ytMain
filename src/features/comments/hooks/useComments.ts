@@ -258,8 +258,7 @@ export function useReportComment() {
     ({ commentId, reason, description }) => commentService.reportComment(commentId, reason, description),
     {
       onSuccess: () => {
-        console.log('Comment reported successfully');
-      },
+        },
     }
   );
 }

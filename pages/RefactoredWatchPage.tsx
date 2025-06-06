@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState, useEffect, useCallback, useRef  } from 'react';
+import React, { useState, useEffect, useCallback, useRef   } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -413,8 +412,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const { videoId = '' } = useParams<{ videoId: string }>();
   const {
     video = mockVideo,
-  } = {}; // TODO: Replace with actual data fetching logic
-
+  } = {};
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(() => {
     if (!video) return;
@@ -520,7 +518,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
     try {
       // Implementation for saving to playlist
-      console.log(`Saving video to playlist: ${playlistId}`);
       // Close the modal if it exists
       if (closeSaveModal) {
         closeSaveModal();
@@ -1060,8 +1057,7 @@ const videoDescriptionProps = {
             currentVideoId={videoState.id}
             onVideoSelect={(videoId: string) => {
               // Handle video selection
-              console.log('Selected video:', videoId);
-            }}
+              }}
           />
         </div>
       </div>

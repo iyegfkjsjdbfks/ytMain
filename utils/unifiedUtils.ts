@@ -338,8 +338,7 @@ export const performanceUtils = {
     const duration = performance.now() - start;
     
     if (label) {
-      console.log(`${label} took ${duration.toFixed(2)}ms`);
-    }
+      }
     
     return { result, duration };
   }

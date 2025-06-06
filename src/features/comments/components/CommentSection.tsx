@@ -329,18 +329,15 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
   const handlePin = async (commentId: string) => {
     // Implementation for pinning comments
-    console.log('Pin comment:', commentId);
-  };
+    };
 
   const handleHeart = async (commentId: string) => {
     // Implementation for hearting comments
-    console.log('Heart comment:', commentId);
-  };
+    };
 
   const handleReport = async (commentId: string, reason: string) => {
     // Implementation for reporting comments
-    console.log('Report comment:', commentId, reason);
-  };
+    };
 
   if (error) {
     return (

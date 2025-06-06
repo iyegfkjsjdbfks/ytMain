@@ -284,10 +284,6 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Development API server running on http://localhost:${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🎥 Videos API: http://localhost:${PORT}/api/videos`);
-  console.log(`📱 Shorts API: http://localhost:${PORT}/api/shorts`);
-});
+  });
 
 export default app;

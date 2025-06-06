@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import React, { useState, useEffect   } from 'react';
 import { Link } from 'react-router-dom';
 import {
   UserGroupIcon,
@@ -487,10 +486,7 @@ const CreatorStudioPage: React.FC = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         <button 
-                          onClick={() => {
-                            console.log('Editing comment');
-                            // TODO: Open comment edit modal or inline editing
-                          }}
+                          onClick={() => {                          }}
                           className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                           title="Edit comment"
                         >

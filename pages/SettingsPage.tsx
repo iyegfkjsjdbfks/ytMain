@@ -230,10 +230,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => {
-                      // Clear watch history
-                      console.log('Clearing watch history');
-                      // TODO: Implement clear watch history functionality
-                      if (confirm('Are you sure you want to clear your watch history?')) {
+                      // Clear watch history                      if (confirm('Are you sure you want to clear your watch history?')) {
                         // Clear history logic here
                       }
                     }}
@@ -243,10 +240,7 @@ const SettingsPage: React.FC = () => {
                   </button>
                   <button 
                     onClick={() => {
-                      // Pause watch history
-                      console.log('Pausing watch history');
-                      // TODO: Implement pause watch history functionality
-                    }}
+                      // Pause watch history                    }}
                     className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors"
                   >
                     Pause History
@@ -261,10 +255,7 @@ const SettingsPage: React.FC = () => {
                 <div className="flex space-x-2">
                   <button 
                     onClick={() => {
-                      // Clear search history
-                      console.log('Clearing search history');
-                      // TODO: Implement clear search history functionality
-                      if (confirm('Are you sure you want to clear your search history?')) {
+                      // Clear search history                      if (confirm('Are you sure you want to clear your search history?')) {
                         // Clear search history logic here
                       }
                     }}
@@ -274,10 +265,7 @@ const SettingsPage: React.FC = () => {
                   </button>
                   <button 
                     onClick={() => {
-                      // Pause search history
-                      console.log('Pausing search history');
-                      // TODO: Implement pause search history functionality
-                    }}
+                      // Pause search history                    }}
                     className="px-3 py-1 text-xs border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors"
                   >
                     Pause Search History
@@ -296,10 +284,7 @@ const SettingsPage: React.FC = () => {
               </div>
               <button 
                 onClick={() => {
-                  // Reset all settings to defaults
-                  console.log('Resetting settings to defaults');
-                  // TODO: Implement reset to defaults functionality
-                  if (confirm('Are you sure you want to reset all settings to their default values?')) {
+                  // Reset all settings to defaults                  if (confirm('Are you sure you want to reset all settings to their default values?')) {
                     // Reset settings logic here
                   }
                 }}

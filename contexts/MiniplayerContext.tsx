@@ -1,6 +1,5 @@
 
-import * as React from 'react';
-import {  createContext, useState, useContext, useCallback, ReactNode  } from 'react';
+import React, { createContext, useState, useContext, useCallback, ReactNode   } from 'react';
 import { Video } from '../src/types/core';
 
 interface MiniplayerContextType {

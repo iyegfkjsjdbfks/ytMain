@@ -471,8 +471,7 @@ export const useWatchPage = () => {
   // Utility functions
   const addToWatchHistory = (videoId: string) => {
     // Add to watch history logic
-    console.log('Added to watch history:', videoId);
-  };
+    };
   
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
   const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);

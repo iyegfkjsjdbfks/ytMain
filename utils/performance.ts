@@ -24,8 +24,7 @@ class PerformanceMonitor {
     try {
       const paintObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
-          console.log(`🎨 ${entry.name}: ${entry.startTime.toFixed(2)}ms`);
-        });
+          });
       });
       paintObserver.observe({ entryTypes: ['paint'] });
       this.observers.push(paintObserver);
@@ -38,15 +37,7 @@ class PerformanceMonitor {
       const navigationObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry: any) => {
           const navigation = entry as PerformanceNavigationTiming;
-          console.log('🚀 Navigation Metrics:', {
-            'DNS Lookup': `${(navigation.domainLookupEnd - navigation.domainLookupStart).toFixed(2)}ms`,
-            'TCP Connection': `${(navigation.connectEnd - navigation.connectStart).toFixed(2)}ms`,
-            'Request': `${(navigation.responseStart - navigation.requestStart).toFixed(2)}ms`,
-            'Response': `${(navigation.responseEnd - navigation.responseStart).toFixed(2)}ms`,
-            'DOM Processing': `${(navigation.domContentLoadedEventEnd - navigation.responseEnd).toFixed(2)}ms`,
-            'Total Load Time': `${(navigation.loadEventEnd - navigation.navigationStart).toFixed(2)}ms`,
           });
-        });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
       this.observers.push(navigationObserver);
@@ -95,8 +86,7 @@ class PerformanceMonitor {
     if (duration > 100) {
       console.warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
     } else if (duration > 16) {
-      console.log(`⏱️ ${name}: ${duration.toFixed(2)}ms`, metric.metadata);
-    }
+      }
 
     return duration;
   }
@@ -126,7 +116,6 @@ class PerformanceMonitor {
 
     const metrics = this.getMetrics();
     if (metrics.length === 0) {
-      console.log('📊 No performance metrics recorded');
       return;
     }
 
@@ -146,13 +135,7 @@ class PerformanceMonitor {
       const min = Math.min(...durations);
       const max = Math.max(...durations);
       
-      console.log(`${name}:`, {
-        count: durations.length,
-        average: `${avg.toFixed(2)}ms`,
-        min: `${min.toFixed(2)}ms`,
-        max: `${max.toFixed(2)}ms`,
       });
-    });
     
     console.groupEnd();
   }
@@ -259,20 +242,15 @@ export const analyzeBundleSize = () => {
   const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
   
   console.group('📦 Bundle Analysis');
-  console.log('Scripts:', scripts.length);
-  console.log('Stylesheets:', styles.length);
-  
   // Estimate bundle sizes (this is approximate)
   scripts.forEach((script: any) => {
     if (script.src && !script.src.includes('chrome-extension')) {
-      console.log(`Script: ${script.src}`);
-    }
+      }
   });
   
   styles.forEach((style: any) => {
     if (style.href && !style.href.includes('chrome-extension')) {
-      console.log(`Stylesheet: ${style.href}`);
-    }
+      }
   });
   
   console.groupEnd();
@@ -287,13 +265,7 @@ export const monitorMemoryUsage = () => {
   
   const memory = (window.performance as any).memory;
   
-  console.log('💾 Memory Usage:', {
-    'Used JS Heap': `${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)} MB`,
-    'Total JS Heap': `${(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)} MB`,
-    'JS Heap Limit': `${(memory.jsHeapSizeLimit / 1024 / 1024).toFixed(2)} MB`,
-    'Usage %': `${((memory.usedJSHeapSize / memory.jsHeapSizeLimit) * 100).toFixed(2)}%`,
-  });
-};
+  };
 
 // React import (assuming it's available globally or imported elsewhere)
 declare const React: any;

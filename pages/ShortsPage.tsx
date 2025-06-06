@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useRef, useState, useEffect, useCallback, useMemo  } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useMemo   } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import CommentModal from '../components/CommentModal';
@@ -148,11 +147,7 @@ const ShortsPage: React.FC = () => {
   const handleCommentSubmit = useCallback(async (commentText: string) => {
     if (!selectedShortForComment) return;
 
-    try {
-      // TODO: Implement actual comment submission to API
-      console.log('Comment submitted for short:', selectedShortForComment.id, 'Text:', commentText);
-
-      // Close modal and reset state
+    try {      // Close modal and reset state
       setCommentModalOpen(false);
       setSelectedShortForComment(null);
     } catch (error) {
@@ -185,7 +180,6 @@ const ShortsPage: React.FC = () => {
   const handleNextVideo = useCallback(() => {
     if (currentVideoIndex < filteredShorts.length - 1) {
       const nextIndex = currentVideoIndex + 1;
-      console.log('Navigating to next video:', nextIndex);
       handleVideoChange(nextIndex);
     }
   }, [currentVideoIndex, filteredShorts.length, handleVideoChange]);
@@ -193,7 +187,6 @@ const ShortsPage: React.FC = () => {
   const handlePreviousVideo = useCallback(() => {
     if (currentVideoIndex > 0) {
       const prevIndex = currentVideoIndex - 1;
-      console.log('Navigating to previous video:', prevIndex);
       handleVideoChange(prevIndex);
     }
   }, [currentVideoIndex, handleVideoChange]);
@@ -259,8 +252,7 @@ const ShortsPage: React.FC = () => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here
-      console.log('Link copied to clipboard!');
-    } catch (error) {
+      } catch (error) {
       console.error('Failed to copy link:', error);
     }
   };

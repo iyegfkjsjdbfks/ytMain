@@ -205,20 +205,14 @@ const PlaylistDetailPage: React.FC = () => {
         
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
           <button 
-            onClick={() => {
-              console.log('Playing all videos in playlist');
-              // TODO: Start playing all videos in the playlist from the beginning
-            }}
+            onClick={() => {            }}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 dark:bg-neutral-100 dark:hover:bg-neutral-200 text-white dark:text-black font-medium rounded-full text-sm transition-colors"
           >
             <PlaySolidIcon className="w-5 h-5 mr-2" />
             Play All
           </button>
           <button 
-            onClick={() => {
-              console.log('Shuffling playlist');
-              // TODO: Shuffle the playlist order and start playing
-            }}
+            onClick={() => {            }}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-100 font-medium rounded-full text-sm transition-colors"
           >
             <ArrowsRightLeftIcon className="w-5 h-5 mr-2 transform scale-x-[-1]" /> {/* Mirrored for shuffle */}

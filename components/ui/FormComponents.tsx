@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  forwardRef, InputHTMLAttributes, TextareaHTMLAttributes  } from 'react';
+import React, { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import { cn } from '../../utils/cn';
 
 // Base form field props

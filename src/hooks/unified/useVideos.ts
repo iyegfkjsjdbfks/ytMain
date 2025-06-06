@@ -179,8 +179,7 @@ export function useUploadVideo() {
     ({ file, data }) => videoApi.uploadVideo(file, data),
     {
       onSuccess: (data) => {
-        console.log('Video uploaded successfully:', data.id);
-      },
+        },
       onError: (error) => {
         console.error('Video upload failed:', error.message);
       },
@@ -193,8 +192,7 @@ export function useUpdateVideo() {
     ({ videoId, data }) => videoApi.updateVideo(videoId, data),
     {
       onSuccess: (data) => {
-        console.log('Video updated successfully:', data.id);
-      },
+        },
     }
   );
 }
@@ -204,8 +202,7 @@ export function useDeleteVideo() {
     (videoId) => videoApi.deleteVideo(videoId),
     {
       onSuccess: (_, videoId) => {
-        console.log('Video deleted successfully:', videoId);
-      },
+        },
     }
   );
 }
@@ -215,8 +212,7 @@ export function useLikeVideo() {
     (videoId) => videoApi.likeVideo(videoId),
     {
       onSuccess: (_, videoId) => {
-        console.log('Video liked:', videoId);
-      },
+        },
     }
   );
 }
@@ -226,8 +222,7 @@ export function useUnlikeVideo() {
     (videoId) => videoApi.unlikeVideo(videoId),
     {
       onSuccess: (_, videoId) => {
-        console.log('Video unliked:', videoId);
-      },
+        },
     }
   );
 }
@@ -237,8 +232,7 @@ export function useSaveVideo() {
     (videoId) => videoApi.saveVideo(videoId),
     {
       onSuccess: (_, videoId) => {
-        console.log('Video saved:', videoId);
-      },
+        },
     }
   );
 }
@@ -248,8 +242,7 @@ export function useUnsaveVideo() {
     (videoId) => videoApi.unsaveVideo(videoId),
     {
       onSuccess: (_, videoId) => {
-        console.log('Video unsaved:', videoId);
-      },
+        },
     }
   );
 }
@@ -265,8 +258,7 @@ export function useReportVideo() {
     ({ videoId, reason, description }) => videoApi.reportVideo(videoId, reason, description),
     {
       onSuccess: () => {
-        console.log('Video reported successfully');
-      },
+        },
     }
   );
 }

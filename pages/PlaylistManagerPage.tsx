@@ -360,10 +360,7 @@ const PlaylistManagerPage: React.FC = () => {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              setSelectedPlaylist(playlist);
-                              // TODO: Implement edit modal
-                              console.log('Edit playlist:', playlist.title);
-                            }}
+                              setSelectedPlaylist(playlist);                              }}
                             className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
                           >
                             <PencilIcon className="w-4 h-4" />

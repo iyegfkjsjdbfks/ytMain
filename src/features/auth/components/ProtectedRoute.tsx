@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  ReactNode, useEffect  } from 'react';
+import React, { ReactNode, useEffect   } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import LoadingSpinner from '../../../../components/ui/LoadingSpinner';

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  memo, useState, useCallback  } from 'react';
+import React, { memo, useState, useCallback   } from 'react';
 import { Link } from 'react-router-dom';
 import { Video } from '../types';
 import { useUnifiedAppState } from '../hooks/useRefactoredHooks';

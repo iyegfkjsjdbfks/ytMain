@@ -81,8 +81,7 @@ function log(message, level = 'info') {
     verbose: '🔍'
   }[level] || '📝';
   
-  console.log(`${prefix} [${timestamp}] ${message}`);
-}
+  }
 
 function createBackup() {
   if (CONFIG.dryRun) {

@@ -16,22 +16,18 @@ const VideoDemo: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'components' | 'studio'>('components');
 
   const handleVideoClick = (video: Video) => {
-    console.log('Video clicked:', video);
     alert(`Video clicked: ${video.title}`);
   };
 
   const handleVideoEdit = (videoId: string) => {
-    console.log('Edit video:', videoId);
     alert(`Edit video: ${videoId}`);
   };
 
   const handleVideoDelete = (videoId: string) => {
-    console.log('Delete video:', videoId);
     alert(`Delete video: ${videoId}`);
   };
 
   const handleVisibilityChange = (videoId: string, visibility: VideoVisibility) => {
-    console.log('Visibility changed:', videoId, visibility);
     alert(`Changed visibility of ${videoId} to ${visibility}`);
   };
 

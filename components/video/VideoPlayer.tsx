@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState, useRef, useEffect  } from 'react';
+import React, { useState, useRef, useEffect   } from 'react';
 import { useVideoPlayer } from '../../hooks';
 import { LoadingSpinner, ErrorMessage } from '../ui';
 import VideoControls from './VideoControls';
@@ -127,14 +126,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const handleQualityChange = (quality: string) => {
     setCurrentQuality(quality);
     // In a real implementation, you would switch video sources here
-    console.log('Quality changed to:', quality);
-  };
+    };
 
   const handleSubtitleChange = (subtitle: string | null) => {
     setCurrentSubtitle(subtitle);
     // In a real implementation, you would enable/disable subtitle tracks here
-    console.log('Subtitle changed to:', subtitle);
-  };
+    };
 
   // Custom event handlers
   const handleTimeUpdate = () => {

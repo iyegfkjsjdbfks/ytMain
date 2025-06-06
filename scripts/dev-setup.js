@@ -21,15 +21,9 @@ const checkApiServer = () => {
 
 // Start development servers
 const startDevelopment = () => {
-  console.log('🚀 Starting YouTube Clone Development Environment...\n');
-  
   const needsApiServer = checkApiServer();
   
   if (needsApiServer) {
-    console.log('📡 Starting API server on http://localhost:8000');
-    console.log('🎨 Starting Vite dev server on http://localhost:3000');
-    console.log('');
-    
     // Start both servers concurrently
     const devProcess = spawn('npm', ['run', 'dev'], {
       stdio: 'inherit',
@@ -43,13 +37,9 @@ const startDevelopment = () => {
     });
     
     devProcess.on('close', (code) => {
-      console.log(`\n🛑 Development servers stopped with code ${code}`);
       process.exit(code);
     });
   } else {
-    console.log('🎨 Starting Vite dev server only on http://localhost:3000');
-    console.log('');
-    
     // Start only Vite server
     const devProcess = spawn('npm', ['run', 'dev:client-only'], {
       stdio: 'inherit',
@@ -63,7 +53,6 @@ const startDevelopment = () => {
     });
     
     devProcess.on('close', (code) => {
-      console.log(`\n🛑 Vite server stopped with code ${code}`);
       process.exit(code);
     });
   }
@@ -71,12 +60,10 @@ const startDevelopment = () => {
 
 // Handle process termination
 process.on('SIGINT', () => {
-  console.log('\n\n👋 Shutting down development servers...');
   process.exit(0);
 });
 
 process.on('SIGTERM', () => {
-  console.log('\n\n👋 Shutting down development servers...');
   process.exit(0);
 });
 

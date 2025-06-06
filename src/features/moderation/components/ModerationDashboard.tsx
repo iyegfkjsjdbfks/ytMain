@@ -157,7 +157,6 @@ export const ModerationDashboard: React.FC = () => {
   };
 
   const handleModerationAction = (itemId: string, action: ModerationAction) => {
-    console.log('Moderation action:', { itemId, action });
     // In a real app, this would make an API call
   };
 

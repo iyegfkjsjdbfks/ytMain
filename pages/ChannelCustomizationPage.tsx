@@ -93,7 +93,6 @@ const ChannelCustomizationPage: React.FC = () => {
 
   const handleSave = () => {
     // Simulate API call
-    console.log('Saving channel customization:', branding);
     setUnsavedChanges(false);
     alert('Channel customization saved successfully!');
   };
@@ -225,16 +224,12 @@ const ChannelCustomizationPage: React.FC = () => {
                       />
                       <button 
                         onClick={() => {
-                          // Open file picker for channel art
-                          console.log('Opening channel art picker');
-                          // TODO: Implement channel art upload functionality
-                          const input = document.createElement('input');
+                          // Open file picker for channel art                          const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
                           input.onchange = (e) => {
                             const file = (e.target as HTMLInputElement).files?.[0];
                             if (file) {
-                              console.log('Selected channel art file:', file.name);
                               // Handle file upload
                             }
                           };
@@ -265,16 +260,12 @@ const ChannelCustomizationPage: React.FC = () => {
                         />
                         <button 
                           onClick={() => {
-                            // Open file picker for profile picture
-                            console.log('Opening profile picture picker');
-                            // TODO: Implement profile picture upload functionality
-                            const input = document.createElement('input');
+                            // Open file picker for profile picture                            const input = document.createElement('input');
                             input.type = 'file';
                             input.accept = 'image/*';
                             input.onchange = (e) => {
                               const file = (e.target as HTMLInputElement).files?.[0];
                               if (file) {
-                                console.log('Selected profile picture file:', file.name);
                                 // Handle file upload
                               }
                             };
@@ -309,16 +300,12 @@ const ChannelCustomizationPage: React.FC = () => {
                       </p>
                       <button 
                         onClick={() => {
-                          // Open file picker for watermark
-                          console.log('Opening watermark file picker');
-                          // TODO: Implement watermark upload functionality
-                          const input = document.createElement('input');
+                          // Open file picker for watermark                          const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
                           input.onchange = (e) => {
                             const file = (e.target as HTMLInputElement).files?.[0];
                             if (file) {
-                              console.log('Selected watermark file:', file.name);
                               // Handle watermark upload
                             }
                           };
@@ -506,10 +493,7 @@ const ChannelCustomizationPage: React.FC = () => {
                           Add channels you want to feature on your channel page
                         </p>
                         <button 
-                          onClick={() => {
-                            console.log('Adding featured channels');
-                            // TODO: Open modal to select and add featured channels
-                          }}
+                          onClick={() => {                          }}
                           className="text-red-600 hover:text-red-700 text-sm font-medium"
                         >
                           Add Featured Channels

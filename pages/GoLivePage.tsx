@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  useState, useRef, useEffect  } from 'react';
+import React, { useState, useRef, useEffect   } from 'react';
 
 const GoLivePage: React.FC = () => {
   const [streamTitle, setStreamTitle] = useState('');
@@ -28,8 +27,7 @@ const GoLivePage: React.FC = () => {
         }
         setIsStreaming(true);
         // Here you would typically connect to a streaming server (e.g., RTMP server)
-        console.log('Streaming started with settings:', { streamTitle, streamDescription, privacy });
-      } catch (error) {
+        } catch (error) {
         console.error('Error accessing media devices.', error);
         alert('Could not access camera and microphone. Please check permissions.');
       }
@@ -47,8 +45,7 @@ const GoLivePage: React.FC = () => {
     }
     setIsStreaming(false);
     mediaStreamRef.current = null;
-    console.log('Streaming stopped.');
-  };
+    };
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl">

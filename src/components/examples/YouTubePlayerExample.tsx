@@ -62,7 +62,6 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
             },
             events: {
               onReady: async (event) => {
-                console.log('YouTube Player Ready', event);
                 if (!isMounted) return;
                 
                 // Start progress tracking

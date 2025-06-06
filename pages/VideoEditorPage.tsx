@@ -203,8 +203,7 @@ const VideoEditorPage: React.FC = () => {
 
   const handleRedo = () => {
     // In a real app, you'd maintain a separate redo stack
-    console.log('Redo functionality would be implemented here');
-  };
+    };
 
   const handleExport = () => {
     setIsExporting(true);
@@ -553,10 +552,7 @@ const VideoEditorPage: React.FC = () => {
                         </button>
                         <button 
                           onClick={() => {
-                            // Delete the selected clip
-                            console.log('Delete clip:', clip.id);
-                            // TODO: Implement clip deletion functionality
-                            // setClips(clips.filter(c => c.id !== clip.id));
+                            // Delete the selected clip                            // setClips(clips.filter(c => c.id !== clip.id));
                           }}
                           className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
                           title="Delete clip"

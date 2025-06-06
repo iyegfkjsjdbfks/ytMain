@@ -124,8 +124,7 @@ export const componentPerformance = {
         
         return () => {
           const endTime = performance.now();
-          console.log(`🔍 ${componentName} render time: ${(endTime - startTime).toFixed(2)}ms`);
-        };
+          };
       });
       
       return React.createElement(Component, { ...props, ref });
@@ -140,8 +139,6 @@ export const componentPerformance = {
       const startTime = performance.now();
       const cleanup = effect();
       const endTime = performance.now();
-      
-      console.log(`⚡ ${name} execution time: ${(endTime - startTime).toFixed(2)}ms`);
       
       return cleanup;
     }, deps);

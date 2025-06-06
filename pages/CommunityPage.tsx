@@ -345,10 +345,7 @@ const CommunityPage: React.FC = () => {
                     </div>
                     <button 
                       onClick={() => {
-                        // Show post options menu
-                        console.log('Show post options for:', post.id);
-                        // TODO: Implement post options menu (edit, delete, report, etc.)
-                      }}
+                        // Show post options menu                      }}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                       title="Post options"
                     >
@@ -412,10 +409,7 @@ const CommunityPage: React.FC = () => {
                     
                     <button 
                       onClick={() => {
-                        // Show comments for this post
-                        console.log('Show comments for post:', post.id);
-                        // TODO: Implement comment viewing functionality
-                      }}
+                        // Show comments for this post                      }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       title="View comments"
                     >
@@ -425,10 +419,7 @@ const CommunityPage: React.FC = () => {
                     
                     <button 
                       onClick={() => {
-                        // Share this post
-                        console.log('Share post:', post.id);
-                        // TODO: Implement post sharing functionality
-                      }}
+                        // Share this post                      }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                       title="Share post"
                     >
