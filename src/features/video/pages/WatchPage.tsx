@@ -24,7 +24,7 @@ const WatchPage: React.FC = () => {
   const [video, setVideo] = useState<Video | null>(null);
 
   const [recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
-  const [comments, setComments] = useState<Comment[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -101,110 +101,7 @@ const WatchPage: React.FC = () => {
     }
   };
 
-  const loadComments = async (_id: string) => {
-    try {
-      // Mock comments data
-      const mockComments: Comment[] = [
-        {
-          id: '1',
-          authorId: 'user1',
-          authorName: 'Sarah Developer',
-          authorAvatar: 'https://picsum.photos/seed/sarah/150/150',
-          userAvatarUrl: 'https://picsum.photos/seed/sarah/150/150',
-          userName: 'Sarah Developer',
-          commentText: 'This is exactly what I needed! The custom hooks section was particularly helpful. Thanks for the clear explanations!',
-          content: 'This is exactly what I needed! The custom hooks section was particularly helpful. Thanks for the clear explanations!',
-          timestamp: '2024-01-16T14:30:00Z',
-          createdAt: '2024-01-16T14:30:00Z',
-          updatedAt: '2024-01-16T14:30:00Z',
-          videoId: videoId || 'default-video',
-          likes: 234,
-          dislikes: 2,
-          isLikedByCurrentUser: false,
-          isDislikedByCurrentUser: false,
-          isPinned: true,
-          isEdited: false,
-          isHearted: false,
-          replyCount: 1,
-          replies: [
-            {
-              id: '1-1',
-              authorId: 'tech-insights',
-              authorName: 'Tech Insights',
-              authorAvatar: 'https://picsum.photos/seed/tech-insights/150/150',
-              userAvatarUrl: 'https://picsum.photos/seed/tech-insights/150/150',
-              userName: 'Tech Insights',
-              commentText: 'Thank you Sarah! Glad it helped. More advanced React content coming soon!',
-              content: 'Thank you Sarah! Glad it helped. More advanced React content coming soon!',
-              timestamp: '2024-01-16T15:45:00Z',
-              createdAt: '2024-01-16T15:45:00Z',
-              updatedAt: '2024-01-16T15:45:00Z',
-              videoId: videoId || 'default-video',
-              parentId: '1',
-              likes: 45,
-              dislikes: 0,
-              isLikedByCurrentUser: false,
-              isDislikedByCurrentUser: false,
-              isPinned: false,
-              isEdited: false,
-              isHearted: true,
-              replyCount: 0,
-              replies: []
-            }
-          ]
-        },
-        {
-          id: '2',
-          authorId: 'user2',
-          authorName: 'Mike Frontend',
-          authorAvatar: 'https://picsum.photos/seed/mike/150/150',
-          userAvatarUrl: 'https://picsum.photos/seed/mike/150/150',
-          userName: 'Mike Frontend',
-          commentText: 'Great tutorial! Could you do a follow-up on React Server Components?',
-          content: 'Great tutorial! Could you do a follow-up on React Server Components?',
-          timestamp: '2024-01-16T16:20:00Z',
-          createdAt: '2024-01-16T16:20:00Z',
-          updatedAt: '2024-01-16T16:20:00Z',
-          videoId: videoId || 'default-video',
-          likes: 89,
-          dislikes: 1,
-          isLikedByCurrentUser: false,
-          isDislikedByCurrentUser: false,
-          isPinned: false,
-          isEdited: false,
-          isHearted: false,
-          replyCount: 0,
-          replies: []
-        },
-        {
-          id: '3',
-          authorId: 'user3',
-          authorName: 'Alex CodeMaster',
-          authorAvatar: 'https://picsum.photos/seed/alex/150/150',
-          userAvatarUrl: 'https://picsum.photos/seed/alex/150/150',
-          userName: 'Alex CodeMaster',
-          commentText: 'The performance optimization section saved me hours of debugging. Subscribed!',
-          content: 'The performance optimization section saved me hours of debugging. Subscribed!',
-          timestamp: '2024-01-16T18:10:00Z',
-          createdAt: '2024-01-16T18:10:00Z',
-          updatedAt: '2024-01-16T18:10:00Z',
-          videoId: videoId || 'default-video',
-          likes: 156,
-          dislikes: 3,
-          isLikedByCurrentUser: false,
-          isDislikedByCurrentUser: false,
-          isPinned: false,
-          isEdited: false,
-          isHearted: false,
-          replyCount: 0,
-          replies: []
-        }
-      ];
-      setComments(mockComments);
-    } catch (error) {
-      console.error('Error loading comments:', error);
-    }
-  };
+
 
   const loadRecommendations = async () => {
     try {
