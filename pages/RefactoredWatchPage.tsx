@@ -194,7 +194,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [currentReplyText, setCurrentReplyText] = useState('');
   const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
+  const [expandedReplies, setExpandedReplies] = useState<string[]>([]);
   
   // Playlist state
   const [selectedPlaylistId, setSelectedPlaylistId] = useState('');
@@ -221,16 +221,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setIsSaved(propVideo.isSavedToAnyList ?? false);
     }
     setIsLoading(propLoading || false);
-    setError(propError || null);
   }, [propVideo, propLoading, propError]);
   
   // Get watch later context
   const { addToWatchLater } = useWatchLater();
   
-  // Close save modal function
-  const closeSaveModal = useCallback(() => {
-    setIsSaveModalOpen(false);
-  }, []);
+
   
   // Handle add to watch later
   const handleAddToWatchLater = useCallback(async () => {
@@ -252,18 +248,25 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     try {
       const videoToAdd: Video = {
         id: video.id,
+        createdAt: video.createdAt || new Date().toISOString(),
+        updatedAt: video.updatedAt || new Date().toISOString(),
         title: video.title || 'Untitled Video',
         description: video.description || '',
         duration: video.duration || '0:00',
         thumbnailUrl: video.thumbnailUrl || '',
         videoUrl: video.videoUrl || '',
-        viewCount: video.viewCount || 0,
+        views: video.views || '0',
+        likes: video.likes || 0,
+        dislikes: video.dislikes || 0,
         channelName: video.channelName || 'Unknown Channel',
         channelAvatarUrl: video.channelAvatarUrl || '',
         uploadedAt: video.uploadedAt || new Date().toISOString(),
         channelId: video.channelId || 'unknown-channel',
-        status: video.status || 'public',
-        ...video
+        category: video.category || 'Entertainment',
+        tags: video.tags || [],
+        visibility: video.visibility || 'public',
+        commentCount: video.commentCount || 0,
+        viewCount: video.viewCount || 0
       };
       
       if (propHandleAddToWatchLater) {
