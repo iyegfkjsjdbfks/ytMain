@@ -5,6 +5,7 @@
 
 import { useQuery, useMutation, queryCache } from '../../../hooks/unified/useApi';
 import { playlistService, type PlaylistFilters, type CreatePlaylistData } from '../services/playlistService';
+
 import type { Playlist } from '../../../types/core';
 
 // Query hooks
@@ -15,7 +16,7 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
       refetchOnWindowFocus: true,
-    }
+    },
   );
 }
 
@@ -26,7 +27,7 @@ export function usePlaylist(playlistId: string) {
     {
       enabled: !!playlistId,
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -37,7 +38,7 @@ export function usePlaylistVideos(playlistId: string, page: number = 1, limit: n
     {
       enabled: !!playlistId,
       staleTime: 3 * 60 * 1000, // 3 minutes
-    }
+    },
   );
 }
 
@@ -47,7 +48,7 @@ export function useFeaturedPlaylists(page: number = 1, limit: number = 20) {
     () => playlistService.getFeaturedPlaylists(page, limit),
     {
       staleTime: 10 * 60 * 1000, // 10 minutes
-    }
+    },
   );
 }
 
@@ -57,7 +58,7 @@ export function useRecommendedPlaylists(page: number = 1, limit: number = 20) {
     () => playlistService.getRecommendedPlaylists(page, limit),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -67,7 +68,7 @@ export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
     () => playlistService.getFollowedPlaylists(page, limit),
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
-    }
+    },
   );
 }
 
@@ -78,7 +79,7 @@ export function usePlaylistStats(playlistId: string) {
     {
       enabled: !!playlistId,
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -89,7 +90,7 @@ export function usePlaylistCollaborators(playlistId: string) {
     {
       enabled: !!playlistId,
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -100,7 +101,7 @@ export function useSearchPlaylists(query: string, filters: Omit<PlaylistFilters,
     {
       enabled: !!query && query.length > 2,
       staleTime: 3 * 60 * 1000, // 3 minutes
-    }
+    },
   );
 }
 
@@ -113,7 +114,7 @@ export function useCreatePlaylist() {
         // Invalidate playlists cache
         queryCache.invalidate('playlists');
       },
-    }
+    },
   );
 }
 
@@ -126,7 +127,7 @@ export function useUpdatePlaylist() {
         queryCache.invalidate(`playlist:${id}`);
         queryCache.invalidate('playlists');
       },
-    }
+    },
   );
 }
 
@@ -139,7 +140,7 @@ export function useDeletePlaylist() {
         queryCache.invalidate(`playlist:${playlistId}`);
         queryCache.invalidate('playlists');
       },
-    }
+    },
   );
 }
 
@@ -152,7 +153,7 @@ export function useAddVideoToPlaylist() {
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
       },
-    }
+    },
   );
 }
 
@@ -165,7 +166,7 @@ export function useRemoveVideoFromPlaylist() {
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
       },
-    }
+    },
   );
 }
 
@@ -177,7 +178,7 @@ export function useReorderPlaylistVideos() {
         // Invalidate playlist videos cache
         queryCache.invalidate(`playlist:${playlistId}:videos`);
       },
-    }
+    },
   );
 }
 
@@ -189,7 +190,7 @@ export function useDuplicatePlaylist() {
         // Invalidate playlists cache
         queryCache.invalidate('playlists');
       },
-    }
+    },
   );
 }
 
@@ -201,7 +202,7 @@ export function useFollowPlaylist() {
         // Invalidate followed playlists cache
         queryCache.invalidate('playlists:followed');
       },
-    }
+    },
   );
 }
 
@@ -213,7 +214,7 @@ export function useUnfollowPlaylist() {
         // Invalidate followed playlists cache
         queryCache.invalidate('playlists:followed');
       },
-    }
+    },
   );
 }
 
@@ -226,7 +227,7 @@ export function useBulkAddVideos() {
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
       },
-    }
+    },
   );
 }
 
@@ -239,7 +240,7 @@ export function useBulkRemoveVideos() {
         queryCache.invalidate(`playlist:${playlistId}:videos`);
         queryCache.invalidate(`playlist:${playlistId}`);
       },
-    }
+    },
   );
 }
 
@@ -252,7 +253,7 @@ export function useUploadPlaylistThumbnail() {
         queryCache.invalidate(`playlist:${playlistId}`);
         queryCache.invalidate('playlists');
       },
-    }
+    },
   );
 }
 

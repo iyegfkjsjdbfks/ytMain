@@ -3,22 +3,27 @@
  * Consolidates all video card variants into a single, comprehensive component
  */
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  memo, useState  } from 'react';
-import { Link } from 'react-router-dom';
-import { cn, formatRelativeTime, formatDuration } from '../../lib/utils';
-import { Video } from '../../types/core';
-import { UnifiedButton } from './UnifiedButton';
-import { 
-  PlayIcon, 
-  EyeIcon, 
+
+import {
+  PlayIcon,
+  EyeIcon,
   ClockIcon,
   HeartIcon,
   ShareIcon,
   BookmarkIcon,
-  EllipsisVerticalIcon
+  EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+import { cn, formatRelativeTime } from '../../lib/utils';
+
+import { UnifiedButton } from './UnifiedButton';
+
+import type { Video } from '../../types/core';
+
 
 export type VideoCardVariant = 'default' | 'compact' | 'list' | 'grid' | 'shorts';
 export type VideoCardSize = 'sm' | 'md' | 'lg';
@@ -174,7 +179,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
             className={cn(
               'w-full h-full object-cover transition-all duration-300',
               'group-hover:scale-105',
-              !imageLoaded && 'bg-neutral-200 dark:bg-neutral-800 animate-pulse'
+              !imageLoaded && 'bg-neutral-200 dark:bg-neutral-800 animate-pulse',
             )}
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
@@ -185,7 +190,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
             <PlayIcon className="w-8 h-8 text-neutral-400" />
           </div>
         )}
-        
+
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
           <PlayIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -223,7 +228,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
                 <HeartIcon className="w-4 h-4" />
               )}
             </UnifiedButton>
-            
+
             <UnifiedButton
               variant="ghost"
               size="xs"
@@ -232,7 +237,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
             >
               <BookmarkIcon className={cn('w-4 h-4', isSaved && 'fill-current')} />
             </UnifiedButton>
-            
+
             <UnifiedButton
               variant="ghost"
               size="xs"
@@ -267,7 +272,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
           <h3 className={cn(
             styles.title,
             sizeStyle.title,
-            'hover:text-red-600 dark:hover:text-red-400 transition-colors'
+            'hover:text-red-600 dark:hover:text-red-400 transition-colors',
           )}>
             {video.title}
           </h3>
@@ -275,8 +280,8 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
 
         {/* Channel Name */}
         {showChannel && (
-          <Link 
-            to={channelUrl} 
+          <Link
+            to={channelUrl}
             onClick={handleChannelClick}
             className={cn(styles.meta, 'hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors')}
           >
@@ -292,7 +297,7 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
               <span>{video.views}</span>
             </div>
           )}
-          
+
           {showDate && (
             <div className="flex items-center space-x-1">
               <ClockIcon className="w-3 h-3" />
@@ -321,13 +326,13 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
   );
 
   return (
-    <article 
+    <article
       className={cn(
         'group transition-all duration-200 hover:shadow-lg',
         variant === 'shorts' && 'bg-black text-white rounded-lg overflow-hidden',
         variant === 'list' && 'hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-lg',
         styles.container,
-        className
+        className,
       )}
       data-video-id={video.id}
       data-testid={`${keyPrefix}-${video.id}`}

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef   } from 'react';
+
 import {
   BellIcon,
   XMarkIcon,
@@ -8,7 +10,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
+
 import { useNotifications } from '../hooks/useNotifications';
+
 import type { Notification } from '../services/notificationService';
 
 interface NotificationCenterProps {
@@ -104,7 +108,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
                   {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
                 </span>
                 {!notification.isRead && (
-                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                  <span className="w-2 h-2 bg-blue-600 rounded-full" />
                 )}
               </div>
             </div>
@@ -182,8 +186,12 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   }, []);
 
   const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification: any) => {
-    if (filter === 'unread' && notification.isRead) return false;
-    if (selectedCategory !== 'all' && notification.category !== selectedCategory) return false;
+    if (filter === 'unread' && notification.isRead) {
+return false;
+}
+    if (selectedCategory !== 'all' && notification.category !== selectedCategory) {
+return false;
+}
     return true;
   }) : [];
 
@@ -191,11 +199,11 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     if (!notification.isRead) {
       markAsRead(notification.id);
     }
-    
+
     if (notification.actionUrl) {
       window.location.href = notification.actionUrl;
     }
-    
+
     setIsOpen(false);
   };
 
@@ -219,7 +227,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         ) : (
           <BellIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
         )}
-        
+
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {unreadCount > 99 ? '99+' : unreadCount}

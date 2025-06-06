@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+
 import {
   HandThumbUpIcon,
   HandThumbDownIcon,
@@ -13,11 +14,11 @@ import {
   MapPinIcon as PinSolidIcon,
   HeartIcon as HeartSolidIcon,
 } from '@heroicons/react/24/solid';
-
 import { formatDistanceToNow } from 'date-fns';
-import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
-import type { Comment } from '../../../types/core';
 
+import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
+
+import type { Comment } from '../../../types/core';
 
 
 interface CommentSectionProps {
@@ -75,8 +76,12 @@ const CommentItem: React.FC<CommentItemProps> = ({
   };
 
   const formatCount = (count: number): string => {
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    if (count >= 1000000) {
+return `${(count / 1000000).toFixed(1)}M`;
+}
+    if (count >= 1000) {
+return `${(count / 1000).toFixed(1)}K`;
+}
     return count.toString();
   };
 
@@ -122,7 +127,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => onReact(comment.id, 'like')}
-              className={`flex items-center gap-1 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400`}
+              className={'flex items-center gap-1 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'}
             >
               <HandThumbUpIcon className="w-4 h-4" />
               {comment.likes > 0 && (
@@ -132,7 +137,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 
             <button
               onClick={() => onReact(comment.id, 'dislike')}
-              className={`p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400`}
+              className={'p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-400'}
             >
               <HandThumbDownIcon className="w-4 h-4" />
             </button>
@@ -290,7 +295,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   const reactToCommentMutation = useReactToComment();
 
   const handleCommentSubmit = async () => {
-    if (!newComment.trim()) return;
+    if (!newComment.trim()) {
+return;
+}
 
     try {
       await createCommentMutation.mutate({
@@ -327,15 +334,15 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     }
   };
 
-  const handlePin = async (commentId: string) => {
+  const handlePin = async (_commentId: string) => {
     // Implementation for pinning comments
     };
 
-  const handleHeart = async (commentId: string) => {
+  const handleHeart = async (_commentId: string) => {
     // Implementation for hearting comments
     };
 
-  const handleReport = async (commentId: string, reason: string) => {
+  const handleReport = async (_commentId: string, _reason: string) => {
     // Implementation for reporting comments
     };
 
@@ -435,11 +442,11 @@ const CommentSection: React.FC<CommentSectionProps> = ({
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="flex gap-3 animate-pulse">
-              <div className="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+              <div className="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full" />
               <div className="flex-1 space-y-2">
-                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/4"></div>
-                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/4" />
+                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4" />
+                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2" />
               </div>
             </div>
           ))}

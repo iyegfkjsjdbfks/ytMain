@@ -1,6 +1,10 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import type React from 'react';
+
+import { NavLink, Link } from 'react-router-dom';
+
 import { useAuthStore } from '../../auth/store/authStore';
+
+// Fix missing Link import
 
 /**
  * Studio sidebar component with navigation specific to YouTube Studio
@@ -15,9 +19,9 @@ const StudioSidebar: React.FC = () => {
         {user && (
           <div className="mb-6">
             <div className="flex items-center mb-4">
-              <img 
-                src={user.avatarUrl || "https://via.placeholder.com/150"} 
-                alt={user.displayName || "Channel"} 
+              <img
+                src={user.avatarUrl || 'https://via.placeholder.com/150'}
+                alt={user.displayName || 'Channel'}
                 className="h-10 w-10 rounded-full object-cover"
               />
               <div className="ml-3">
@@ -36,12 +40,12 @@ const StudioSidebar: React.FC = () => {
 
         {/* Main navigation */}
         <nav className="space-y-1">
-          <NavLink 
-            to="/studio" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -53,12 +57,12 @@ const StudioSidebar: React.FC = () => {
             Dashboard
           </NavLink>
 
-          <NavLink 
-            to="/studio/content" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/content"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -69,12 +73,12 @@ const StudioSidebar: React.FC = () => {
             Content
           </NavLink>
 
-          <NavLink 
-            to="/studio/analytics" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/analytics"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -85,12 +89,12 @@ const StudioSidebar: React.FC = () => {
             Analytics
           </NavLink>
 
-          <NavLink 
-            to="/studio/comments" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/comments"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -101,12 +105,12 @@ const StudioSidebar: React.FC = () => {
             Comments
           </NavLink>
 
-          <NavLink 
-            to="/studio/subtitles" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/subtitles"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -117,12 +121,12 @@ const StudioSidebar: React.FC = () => {
             Subtitles
           </NavLink>
 
-          <NavLink 
-            to="/studio/copyright" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/copyright"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -133,12 +137,12 @@ const StudioSidebar: React.FC = () => {
             Copyright
           </NavLink>
 
-          <NavLink 
-            to="/studio/monetization" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/monetization"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -149,12 +153,12 @@ const StudioSidebar: React.FC = () => {
             Monetization
           </NavLink>
 
-          <NavLink 
-            to="/studio/customization" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/customization"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -165,12 +169,12 @@ const StudioSidebar: React.FC = () => {
             Customization
           </NavLink>
 
-          <NavLink 
-            to="/studio/audio-library" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/studio/audio-library"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                isActive 
-                  ? 'bg-gray-800 text-white' 
+                isActive
+                  ? 'bg-gray-800 text-white'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`
             }
@@ -188,12 +192,12 @@ const StudioSidebar: React.FC = () => {
             Settings
           </h3>
           <nav className="mt-2 space-y-1">
-            <NavLink 
-              to="/studio/settings/channel" 
-              className={({ isActive }) => 
+            <NavLink
+              to="/studio/settings/channel"
+              className={({ isActive }) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                  isActive 
-                    ? 'bg-gray-800 text-white' 
+                  isActive
+                    ? 'bg-gray-800 text-white'
                     : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                 }`
               }
@@ -204,12 +208,12 @@ const StudioSidebar: React.FC = () => {
               Channel
             </NavLink>
 
-            <NavLink 
-              to="/studio/settings/upload-defaults" 
-              className={({ isActive }) => 
+            <NavLink
+              to="/studio/settings/upload-defaults"
+              className={({ isActive }) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                  isActive 
-                    ? 'bg-gray-800 text-white' 
+                  isActive
+                    ? 'bg-gray-800 text-white'
                     : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                 }`
               }
@@ -220,12 +224,12 @@ const StudioSidebar: React.FC = () => {
               Upload defaults
             </NavLink>
 
-            <NavLink 
-              to="/studio/settings/community" 
-              className={({ isActive }) => 
+            <NavLink
+              to="/studio/settings/community"
+              className={({ isActive }) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                  isActive 
-                    ? 'bg-gray-800 text-white' 
+                  isActive
+                    ? 'bg-gray-800 text-white'
                     : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                 }`
               }
@@ -241,8 +245,5 @@ const StudioSidebar: React.FC = () => {
     </aside>
   );
 };
-
-// Fix missing Link import
-import { Link } from 'react-router-dom';
 
 export default StudioSidebar;

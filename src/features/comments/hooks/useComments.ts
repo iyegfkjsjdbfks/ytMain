@@ -5,6 +5,7 @@
 
 import { useQuery, useMutation, queryCache } from '../../../hooks/unified/useApi';
 import { commentService, type CommentFilters, type CreateCommentData } from '../services/commentService';
+
 import type { Comment } from '../../../types/core';
 
 // Query hooks
@@ -16,7 +17,7 @@ export function useVideoComments(videoId: string, filters: CommentFilters = {}) 
       enabled: !!videoId,
       staleTime: 30 * 1000, // 30 seconds
       refetchOnWindowFocus: true,
-    }
+    },
   );
 }
 
@@ -27,7 +28,7 @@ export function useCommentReplies(commentId: string, filters: Omit<CommentFilter
     {
       enabled: !!commentId,
       staleTime: 60 * 1000, // 1 minute
-    }
+    },
   );
 }
 
@@ -38,7 +39,7 @@ export function useComment(commentId: string) {
     {
       enabled: !!commentId,
       staleTime: 2 * 60 * 1000, // 2 minutes
-    }
+    },
   );
 }
 
@@ -49,7 +50,7 @@ export function useCommentThread(commentId: string) {
     {
       enabled: !!commentId,
       staleTime: 60 * 1000, // 1 minute
-    }
+    },
   );
 }
 
@@ -60,7 +61,7 @@ export function useUserComments(userId: string, filters: Omit<CommentFilters, 'p
     {
       enabled: !!userId,
       staleTime: 2 * 60 * 1000, // 2 minutes
-    }
+    },
   );
 }
 
@@ -71,7 +72,7 @@ export function usePendingComments(videoId?: string, filters: CommentFilters = {
     {
       staleTime: 30 * 1000, // 30 seconds
       refetchOnWindowFocus: true,
-    }
+    },
   );
 }
 
@@ -82,7 +83,7 @@ export function useCommentStats(videoId: string) {
     {
       enabled: !!videoId,
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -92,7 +93,7 @@ export function useTrendingComments(timeframe: '1h' | '24h' | '7d' | '30d' = '24
     () => commentService.getTrendingComments(timeframe, limit),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
-    }
+    },
   );
 }
 
@@ -104,7 +105,7 @@ export function useCommentMentions(userId: string, filters: CommentFilters = {})
       enabled: !!userId,
       staleTime: 60 * 1000, // 1 minute
       refetchOnWindowFocus: true,
-    }
+    },
   );
 }
 
@@ -115,7 +116,7 @@ export function useCommentAnalytics(videoId: string, timeframe: '7d' | '30d' | '
     {
       enabled: !!videoId,
       staleTime: 10 * 60 * 1000, // 10 minutes
-    }
+    },
   );
 }
 
@@ -126,7 +127,7 @@ export function useSearchComments(query: string, videoId?: string, filters: Comm
     {
       enabled: !!query && query.length > 2,
       staleTime: 2 * 60 * 1000, // 2 minutes
-    }
+    },
   );
 }
 
@@ -144,7 +145,7 @@ export function useCreateComment() {
         }
         queryCache.invalidate(`comments:stats:${videoId}`);
       },
-    }
+    },
   );
 }
 
@@ -162,7 +163,7 @@ export function useUpdateComment() {
           queryCache.invalidate(`comments:replies:${updatedComment.parentId}`);
         }
       },
-    }
+    },
   );
 }
 
@@ -175,7 +176,7 @@ export function useDeleteComment() {
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments');
       },
-    }
+    },
   );
 }
 
@@ -187,7 +188,7 @@ export function useReactToComment() {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       },
-    }
+    },
   );
 }
 
@@ -199,7 +200,7 @@ export function useRemoveReaction() {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       },
-    }
+    },
   );
 }
 
@@ -212,7 +213,7 @@ export function usePinComment() {
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments:video');
       },
-    }
+    },
   );
 }
 
@@ -225,7 +226,7 @@ export function useUnpinComment() {
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments:video');
       },
-    }
+    },
   );
 }
 
@@ -237,7 +238,7 @@ export function useHeartComment() {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       },
-    }
+    },
   );
 }
 
@@ -249,7 +250,7 @@ export function useUnheartComment() {
         // Invalidate comment cache
         queryCache.invalidate(`comment:${commentId}`);
       },
-    }
+    },
   );
 }
 
@@ -259,7 +260,7 @@ export function useReportComment() {
     {
       onSuccess: () => {
         },
-    }
+    },
   );
 }
 
@@ -272,7 +273,7 @@ export function useModerateComment() {
         queryCache.invalidate(`comment:${commentId}`);
         queryCache.invalidate('comments:pending');
       },
-    }
+    },
   );
 }
 
@@ -285,7 +286,7 @@ export function useBulkModerateComments() {
         queryCache.invalidate('comments:pending');
         queryCache.invalidate('comments');
       },
-    }
+    },
   );
 }
 
@@ -298,7 +299,7 @@ export function useAutoModerateComments() {
         queryCache.invalidate(`comments:video:${videoId}`);
         queryCache.invalidate('comments:pending');
       },
-    }
+    },
   );
 }
 
@@ -310,7 +311,7 @@ export function useMarkMentionsAsRead() {
         // Invalidate mentions cache
         queryCache.invalidate('comments:mentions');
       },
-    }
+    },
   );
 }
 

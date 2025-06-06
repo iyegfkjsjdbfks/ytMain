@@ -12,7 +12,9 @@ declare global {
  * @returns Video ID or null if not found
  */
 export function getYouTubeVideoId(url: string | null | undefined): string | null {
-  if (!url) return null;
+  if (!url) {
+return null;
+}
 
   try {
     // Handle youtu.be URLs (shortened)
@@ -24,7 +26,7 @@ export function getYouTubeVideoId(url: string | null | undefined): string | null
     // Handle regular YouTube URLs
     const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
     const match = url.match(regExp);
-    return match && match[1] ? match[1].substring(0, 11) : null;
+    return match?.[1] ? match[1].substring(0, 11) : null;
   } catch (e) {
     console.error('Error extracting YouTube video ID:', e);
     return null;
@@ -48,7 +50,7 @@ export class YouTubePlayer {
         onReady?: (event: any) => void;
         onStateChange?: (event: any) => void;
       };
-    } = {}
+    } = {},
   ) {
     this.initPlayer();
   }
@@ -63,8 +65,8 @@ export class YouTubePlayer {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       const firstScriptTag = document.getElementsByTagName('script')[0];
-      
-      if (firstScriptTag && firstScriptTag.parentNode) {
+
+      if (firstScriptTag?.parentNode) {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       } else {
         // Fallback to appending to the document head if firstScriptTag is not available
@@ -80,7 +82,7 @@ export class YouTubePlayer {
   private async initPlayer() {
     try {
       await this.loadYouTubeAPI();
-      
+
       // Wait for YT.Player to be available
       const checkYT = () => {
         return new Promise<void>((resolve) => {
@@ -310,7 +312,7 @@ export function embedYouTubeVideo(
     modestbranding?: boolean;
     rel?: boolean;
     showinfo?: boolean;
-  } = {}
+  } = {},
 ): YouTubePlayer {
   // Validate container exists
   if (!document.getElementById(containerId)) {
@@ -339,14 +341,16 @@ export function embedYouTubeVideo(
       origin: window.location.origin,
     },
   };
-  
+
   return new YouTubePlayer(containerId, videoId, playerOptions);
 }
 
 // Type-safe function to check if a string is a valid YouTube URL
 export function isYouTubeUrl(url: string): boolean {
-  if (!url) return false;
-  
+  if (!url) {
+return false;
+}
+
   const patterns = [
     /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
     /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([^?]+)/,
@@ -360,12 +364,14 @@ export function isYouTubeUrl(url: string): boolean {
 
 // Type-safe function to get video ID from various YouTube URL formats
 export function extractVideoIdFromUrl(url: string | null | undefined): string | null {
-  if (!url) return null;
+  if (!url) {
+return null;
+}
 
-  type Pattern = {
+  interface Pattern {
     regex: RegExp;
     getter: (match: RegExpMatchArray) => string | null;
-  };
+  }
 
   const patterns: Pattern[] = [
     // youtu.be/ID

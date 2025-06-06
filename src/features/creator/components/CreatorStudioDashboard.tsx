@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import {
   EyeIcon,
   ClockIcon,
@@ -8,7 +9,6 @@ import {
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon,
   VideoCameraIcon,
-  PlayIcon,
   ChatBubbleLeftIcon,
   BellIcon,
   ExclamationTriangleIcon,
@@ -20,13 +20,7 @@ const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className })
   <VideoCameraIcon className={className} />
 );
 
-const PlayIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
-  <PlayIcon className={className} />
-);
 
-const ArrowTrendingUpIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
-  <ArrowTrendingUpIcon className={className} />
-);
 
 interface DashboardMetrics {
   views: {
@@ -173,8 +167,12 @@ export const CreatorStudioDashboard: React.FC = () => {
   ];
 
   const formatNumber = (num: number): string => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
@@ -218,7 +216,7 @@ export const CreatorStudioDashboard: React.FC = () => {
               Manage your channel and track performance
             </p>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <select
               value={timeRange}

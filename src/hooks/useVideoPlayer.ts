@@ -86,7 +86,9 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
   // Set up event listeners
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const handlePlay = () => {
       setState(prev => ({ ...prev, isPlaying: true }));
@@ -158,7 +160,7 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
     video.autoplay = autoplay;
     video.muted = muted;
     video.loop = loop;
-  
+
     if (controls) {
       video.controls = true;
     }
@@ -170,18 +172,18 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
     video.addEventListener('durationchange', handleDurationChange);
     video.addEventListener('volumechange', handleVolumeChange);
     video.addEventListener('ratechange', handlePlaybackRateChange);
-    video.addEventListener('enterpictureinpicture', () => 
-      setState(prev => ({ ...prev, isPictureInPicture: true }))
+    video.addEventListener('enterpictureinpicture', () =>
+      setState(prev => ({ ...prev, isPictureInPicture: true })),
     );
-    video.addEventListener('leavepictureinpicture', () => 
-      setState(prev => ({ ...prev, isPictureInPicture: false }))
+    video.addEventListener('leavepictureinpicture', () =>
+      setState(prev => ({ ...prev, isPictureInPicture: false })),
     );
     video.addEventListener('error', handleError);
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('waiting', handleWaiting);
     video.addEventListener('playing', handlePlaying);
     video.addEventListener('ended', () => onEnded?.());
-    
+
     document.addEventListener('fullscreenchange', handleFullscreenChange);
 
     // Clean up
@@ -192,18 +194,18 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
       video.removeEventListener('durationchange', handleDurationChange);
       video.removeEventListener('volumechange', handleVolumeChange);
       video.removeEventListener('ratechange', handlePlaybackRateChange);
-      video.removeEventListener('enterpictureinpicture', () => 
-        setState(prev => ({ ...prev, isPictureInPicture: true }))
+      video.removeEventListener('enterpictureinpicture', () =>
+        setState(prev => ({ ...prev, isPictureInPicture: true })),
       );
-      video.removeEventListener('leavepictureinpicture', () => 
-        setState(prev => ({ ...prev, isPictureInPicture: false }))
+      video.removeEventListener('leavepictureinpicture', () =>
+        setState(prev => ({ ...prev, isPictureInPicture: false })),
       );
       video.removeEventListener('error', handleError);
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('waiting', handleWaiting);
       video.removeEventListener('playing', handlePlaying);
       video.removeEventListener('ended', () => onEnded?.());
-      
+
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, [
@@ -385,7 +387,7 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
   return {
     // State
     ...state,
-    
+
     // Controls
     play,
     pause,

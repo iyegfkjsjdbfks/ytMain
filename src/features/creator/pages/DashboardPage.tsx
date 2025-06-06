@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import {
   ChartBarIcon,
   EyeIcon,
@@ -14,7 +15,7 @@ import {
   GlobeAltIcon,
   DevicePhoneMobileIcon,
   ComputerDesktopIcon,
-  TvIcon
+  TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
 const ResponsiveContainer = ({ children, width, height }: any) => (
@@ -22,13 +23,12 @@ const ResponsiveContainer = ({ children, width, height }: any) => (
 );
 const PieChart = ({ children }: any) => <div className="flex items-center justify-center h-full">{children}</div>;
 const Pie = ({ data }: any) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = () => null;
-const Tooltip = () => null;
-const Legend = () => null;
+const Cell = (_props: any) => null;
+const Tooltip = (_props: any) => null;
+const Legend = (_props: any) => null;
 // import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
-
 
 
 interface DashboardStats {
@@ -56,7 +56,6 @@ interface VideoPerformance {
 }
 
 
-
 interface AudienceData {
   country: string;
   percentage: number;
@@ -80,7 +79,7 @@ const DashboardPage: React.FC = () => {
     revenue: 0,
     avgViewDuration: 0,
     engagement: 0,
-    clickThroughRate: 0
+    clickThroughRate: 0,
   });
 
   const [topVideos, setTopVideos] = useState<VideoPerformance[]>([]);
@@ -92,7 +91,7 @@ const DashboardPage: React.FC = () => {
     // Simulate API call
     const fetchDashboardData = async () => {
       setLoading(true);
-      
+
       // Mock data based on time range
       const mockStats: DashboardStats = {
         totalViews: timeRange === '7d' ? 125000 : timeRange === '30d' ? 450000 : timeRange === '90d' ? 1200000 : 5800000,
@@ -102,7 +101,7 @@ const DashboardPage: React.FC = () => {
         revenue: timeRange === '7d' ? 850 : timeRange === '30d' ? 3200 : timeRange === '90d' ? 9500 : 42000,
         avgViewDuration: 4.2,
         engagement: 8.5,
-        clickThroughRate: 12.3
+        clickThroughRate: 12.3,
       };
 
       const mockTopVideos: VideoPerformance[] = [
@@ -116,7 +115,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-15',
           thumbnail: 'https://picsum.photos/320/180?random=1',
           revenue: 1250,
-          watchTime: 95000
+          watchTime: 95000,
         },
         {
           id: '2',
@@ -128,7 +127,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-10',
           thumbnail: 'https://picsum.photos/320/180?random=2',
           revenue: 890,
-          watchTime: 78000
+          watchTime: 78000,
         },
         {
           id: '3',
@@ -140,7 +139,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2024-01-05',
           thumbnail: 'https://picsum.photos/320/180?random=3',
           revenue: 670,
-          watchTime: 58000
+          watchTime: 58000,
         },
         {
           id: '4',
@@ -152,7 +151,7 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2023-12-28',
           thumbnail: 'https://picsum.photos/320/180?random=4',
           revenue: 540,
-          watchTime: 45000
+          watchTime: 45000,
         },
         {
           id: '5',
@@ -164,10 +163,9 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2023-12-20',
           thumbnail: 'https://picsum.photos/320/180?random=5',
           revenue: 420,
-          watchTime: 35000
-        }
+          watchTime: 35000,
+        },
       ];
-
 
 
       const mockAudienceData: AudienceData[] = [
@@ -178,14 +176,14 @@ const DashboardPage: React.FC = () => {
         { country: 'Germany', percentage: 7, views: 31500 },
         { country: 'India', percentage: 6, views: 27000 },
         { country: 'France', percentage: 5, views: 22500 },
-        { country: 'Others', percentage: 9, views: 40500 }
+        { country: 'Others', percentage: 9, views: 40500 },
       ];
 
       const mockDeviceData: DeviceData[] = [
         { device: 'Mobile', percentage: 65, color: '#3B82F6' },
         { device: 'Desktop', percentage: 28, color: '#10B981' },
         { device: 'Tablet', percentage: 5, color: '#F59E0B' },
-        { device: 'TV', percentage: 2, color: '#EF4444' }
+        { device: 'TV', percentage: 2, color: '#EF4444' },
       ];
 
       // Simulate loading delay
@@ -203,8 +201,12 @@ const DashboardPage: React.FC = () => {
   }, [timeRange]);
 
   const formatNumber = (num: number): string => {
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)  }M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)  }K`;
+}
     return num.toString();
   };
   const formatDuration = (minutes: number): string => {
@@ -216,7 +218,7 @@ const DashboardPage: React.FC = () => {
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
     }).format(amount);
   };
 
@@ -225,24 +227,24 @@ const DashboardPage: React.FC = () => {
       <div className="min-h-screen bg-gray-50 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
+            <div className="h-8 bg-gray-200 rounded w-64 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="bg-white p-6 rounded-lg shadow">
-                  <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-                  <div className="h-8 bg-gray-200 rounded w-32 mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-16"></div>
+                  <div className="h-4 bg-gray-200 rounded w-24 mb-2" />
+                  <div className="h-8 bg-gray-200 rounded w-32 mb-2" />
+                  <div className="h-3 bg-gray-200 rounded w-16" />
                 </div>
               ))}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white p-6 rounded-lg shadow">
-                <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
-                <div className="h-64 bg-gray-200 rounded"></div>
+                <div className="h-6 bg-gray-200 rounded w-32 mb-4" />
+                <div className="h-64 bg-gray-200 rounded" />
               </div>
               <div className="bg-white p-6 rounded-lg shadow">
-                <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
-                <div className="h-64 bg-gray-200 rounded"></div>
+                <div className="h-6 bg-gray-200 rounded w-32 mb-4" />
+                <div className="h-64 bg-gray-200 rounded" />
               </div>
             </div>
           </div>
@@ -260,7 +262,7 @@ const DashboardPage: React.FC = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Creator Dashboard</h1>
             <p className="text-gray-600">Track your channel's performance and growth</p>
           </div>
-          
+
           {/* Time Range Selector */}
           <div className="flex bg-white rounded-lg shadow-sm border mt-4 sm:mt-0">
             {(['7d', '30d', '90d', '1y'] as const).map((range) => (
@@ -275,8 +277,8 @@ const DashboardPage: React.FC = () => {
                   range === '7d' ? 'rounded-l-lg' : range === '1y' ? 'rounded-r-lg' : ''
                 }`}
               >
-                {range === '7d' ? 'Last 7 days' : 
-                 range === '30d' ? 'Last 30 days' : 
+                {range === '7d' ? 'Last 7 days' :
+                 range === '30d' ? 'Last 30 days' :
                  range === '90d' ? 'Last 90 days' : 'Last year'}
               </button>
             ))}
@@ -384,10 +386,10 @@ const DashboardPage: React.FC = () => {
                   </div>
                   <div className="flex items-center">
                     <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full" 
+                      <div
+                        className="bg-blue-600 h-2 rounded-full"
                         style={{ width: `${country.percentage}%` }}
-                      ></div>
+                       />
                     </div>
                     <span className="text-sm font-medium text-gray-900 w-8">{country.percentage}%</span>
                   </div>

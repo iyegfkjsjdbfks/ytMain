@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { useParams } from 'react-router-dom';
 
 /**
@@ -6,7 +7,7 @@ import { useParams } from 'react-router-dom';
  */
 const UserPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
-  
+
   return (
     <div className="container mx-auto py-6">
       <h1 className="text-2xl font-bold mb-6">User Profile</h1>

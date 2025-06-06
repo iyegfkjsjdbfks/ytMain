@@ -1,4 +1,5 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
+import { Component } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -20,7 +21,7 @@ export class ErrorBoundary extends Component<Props, State> {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
@@ -29,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
@@ -37,7 +38,7 @@ export class ErrorBoundary extends Component<Props, State> {
     // You can also log the error to an error reporting service
     console.error('Error caught by ErrorBoundary:', error, errorInfo);
     this.setState({
-      errorInfo
+      errorInfo,
     });
   }
 

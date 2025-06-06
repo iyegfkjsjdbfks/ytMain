@@ -5,10 +5,7 @@
 
 import * as React from 'react';
 import {  useState  } from 'react';
-import { Link } from 'react-router-dom';
-import { cn, formatRelativeTime } from '../../../lib/utils';
-import { UnifiedButton } from '../../../components/unified';
-import type { Playlist } from '../../../types/core';
+
 import {
   PlayIcon,
   EllipsisVerticalIcon,
@@ -24,6 +21,12 @@ import {
   DocumentDuplicateIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+import { UnifiedButton } from '../../../components/unified';
+import { cn, formatRelativeTime } from '../../../lib/utils';
+
+import type { Playlist } from '../../../types/core';
 
 export interface PlaylistCardProps {
   playlist: Playlist;
@@ -102,7 +105,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         <div className={cn(
           'relative overflow-hidden bg-neutral-200 dark:bg-neutral-800',
           variant === 'compact' ? 'aspect-video w-32' : 'aspect-video w-full',
-          'rounded-lg'
+          'rounded-lg',
         )}>
           {!imageError && playlist.thumbnailUrl ? (
             <img
@@ -111,7 +114,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
               className={cn(
                 'w-full h-full object-cover transition-all duration-300',
                 'group-hover:scale-105',
-                !imageLoaded && 'opacity-0'
+                !imageLoaded && 'opacity-0',
               )}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
@@ -158,14 +161,14 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
   const ContentSection = () => (
     <div className={cn(
       'flex-1 min-w-0',
-      variant === 'compact' ? 'ml-3' : 'mt-3'
+      variant === 'compact' ? 'ml-3' : 'mt-3',
     )}>
       {/* Title */}
       <Link to={playlistUrl} className="block">
         <h3 className={cn(
           'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
           'hover:text-red-600 dark:hover:text-red-400 transition-colors',
-          variant === 'compact' ? 'text-sm' : 'text-base'
+          variant === 'compact' ? 'text-sm' : 'text-base',
         )}>
           {playlist.title}
         </h3>
@@ -178,7 +181,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
           className={cn(
             'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100',
             'transition-colors block mt-1',
-            variant === 'compact' ? 'text-xs' : 'text-sm'
+            variant === 'compact' ? 'text-xs' : 'text-sm',
           )}
         >
           {playlist.ownerName}
@@ -196,7 +199,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
       <div className={cn(
         'flex items-center space-x-3 mt-2',
         variant === 'compact' ? 'text-xs' : 'text-sm',
-        'text-neutral-500 dark:text-neutral-400'
+        'text-neutral-500 dark:text-neutral-400',
       )}>
         <div className="flex items-center space-x-1">
           <VideoCameraIcon className="w-3 h-3" />
@@ -242,7 +245,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         {/* Follow/Unfollow button */}
         {!isOwner && (
           <UnifiedButton
-            variant={isFollowed ? "secondary" : "primary"}
+            variant={isFollowed ? 'secondary' : 'primary'}
             size="sm"
             onClick={handleAction(() => isFollowed ? onUnfollow?.(playlist) : onFollow?.(playlist))}
           >
@@ -346,7 +349,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         'group transition-all duration-200',
         variant === 'compact' ? 'flex items-start' : 'flex flex-col',
         variant === 'detailed' && 'p-4 bg-white dark:bg-neutral-800 rounded-lg shadow-sm hover:shadow-md',
-        className
+        className,
       )}
       data-playlist-id={playlist.id}
     >

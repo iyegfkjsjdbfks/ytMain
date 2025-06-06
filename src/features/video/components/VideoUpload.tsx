@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef  } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 interface VideoUploadProps {
@@ -15,7 +16,7 @@ interface VideoUploadProps {
 const VideoUpload: React.FC<VideoUploadProps> = ({
   onUploadComplete,
   allowedTypes = ['video/mp4', 'video/webm', 'video/ogg'],
-  maxSizeMB = 100
+  maxSizeMB = 100,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -65,7 +66,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
     const selectedFile = e.target.files?.[0];
-    
+
     if (selectedFile && validateFile(selectedFile)) {
       setFile(selectedFile);
     }
@@ -76,7 +77,9 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
   };
 
   const handleUpload = async () => {
-    if (!file) return;
+    if (!file) {
+return;
+}
 
     setUploading(true);
     setProgress(0);
@@ -103,11 +106,11 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 
       clearInterval(interval);
       setProgress(100);
-      
+
       setTimeout(() => {
         setUploading(false);
         setFile(null);
-        
+
         if (onUploadComplete) {
           onUploadComplete(videoId);
         } else {
@@ -129,7 +132,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div 
+      <div
         className={`border-2 border-dashed rounded-lg p-8 text-center ${
           isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
         } ${file ? 'bg-gray-50' : ''}`}
@@ -139,18 +142,18 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
       >
         {!file ? (
           <div className="space-y-4">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-16 w-16 mx-auto text-gray-400" 
-              fill="none" 
-              viewBox="0 0 24 24" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 mx-auto text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={1.5} 
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
               />
             </svg>
             <h3 className="text-lg font-medium">Drag and drop video to upload</h3>
@@ -178,18 +181,18 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-center">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-8 w-8 text-green-500 mr-2" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-green-500 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M5 13l4 4L19 7" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
                 />
               </svg>
               <span className="text-lg font-medium">{file.name}</span>
@@ -197,7 +200,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
             <p className="text-sm text-gray-500">
               {(file.size / (1024 * 1024)).toFixed(2)} MB • {file.type}
             </p>
-            
+
             {uploading ? (
               <div className="w-full">
                 <div className="relative pt-1">
@@ -214,10 +217,10 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
                     </div>
                   </div>
                   <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
-                    <div 
-                      style={{ width: `${progress}%` }} 
+                    <div
+                      style={{ width: `${progress}%` }}
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-300"
-                    ></div>
+                     />
                   </div>
                 </div>
               </div>
@@ -242,22 +245,22 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
           </div>
         )}
       </div>
-      
+
       {error && (
         <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
           <div className="flex">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5 text-red-400 mr-2" 
-              fill="none" 
-              viewBox="0 0 24 24" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-red-400 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
             <p className="text-sm text-red-600">{error}</p>

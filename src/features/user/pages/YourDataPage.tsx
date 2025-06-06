@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 /**
  * YourDataPage component for displaying and managing user data and privacy settings

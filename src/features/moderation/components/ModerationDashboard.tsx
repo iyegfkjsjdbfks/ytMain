@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import {
   FlagIcon,
   EyeIcon,
@@ -134,17 +135,23 @@ export const ModerationDashboard: React.FC = () => {
   ];
 
   const filteredItems = moderationItems.filter(item => {
-    if (item.status !== selectedTab) return false;
-    if (filterSeverity !== 'all' && item.severity !== filterSeverity) return false;
-    if (filterType !== 'all' && item.type !== filterType) return false;
+    if (item.status !== selectedTab) {
+return false;
+}
+    if (filterSeverity !== 'all' && item.severity !== filterSeverity) {
+return false;
+}
+    if (filterType !== 'all' && item.type !== filterType) {
+return false;
+}
     return true;
   });
 
   const handleSelectItem = (itemId: string) => {
-    setSelectedItems(prev => 
-      prev.includes(itemId) 
+    setSelectedItems(prev =>
+      prev.includes(itemId)
         ? prev.filter(id => id !== itemId)
-        : [...prev, itemId]
+        : [...prev, itemId],
     );
   };
 
@@ -156,7 +163,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const handleModerationAction = (itemId: string, action: ModerationAction) => {
+  const handleModerationAction = (_itemId: string, _action: ModerationAction) => {
     // In a real app, this would make an API call
   };
 
@@ -206,7 +213,7 @@ export const ModerationDashboard: React.FC = () => {
               Review and moderate reported content
             </p>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
               <ExclamationTriangleIcon className="w-4 h-4" />
@@ -228,7 +235,7 @@ export const ModerationDashboard: React.FC = () => {
               <ClockIcon className="w-8 h-8 text-orange-500" />
             </div>
           </div>
-          
+
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
@@ -240,7 +247,7 @@ export const ModerationDashboard: React.FC = () => {
               <CheckIcon className="w-8 h-8 text-green-500" />
             </div>
           </div>
-          
+
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
@@ -252,7 +259,7 @@ export const ModerationDashboard: React.FC = () => {
               <XMarkIcon className="w-8 h-8 text-red-500" />
             </div>
           </div>
-          
+
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
@@ -285,7 +292,7 @@ export const ModerationDashboard: React.FC = () => {
               ))}
             </nav>
           </div>
-          
+
           <div className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -300,7 +307,7 @@ export const ModerationDashboard: React.FC = () => {
                   <option value="high">High</option>
                   <option value="critical">Critical</option>
                 </select>
-                
+
                 <select
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
@@ -313,7 +320,7 @@ export const ModerationDashboard: React.FC = () => {
                   <option value="community_post">Community Posts</option>
                 </select>
               </div>
-              
+
               {selectedItems.length > 0 && (
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -352,11 +359,11 @@ export const ModerationDashboard: React.FC = () => {
               </span>
             </div>
           </div>
-          
+
           <div className="divide-y divide-gray-200 dark:divide-gray-700">
             {filteredItems.map((item) => {
               const TypeIcon = getTypeIcon(item.type);
-              
+
               return (
                 <div key={item.id} className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   <div className="flex items-start gap-4">
@@ -366,7 +373,7 @@ export const ModerationDashboard: React.FC = () => {
                       onChange={() => handleSelectItem(item.id)}
                       className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
-                    
+
                     {item.thumbnail && (
                       <img
                         src={item.thumbnail}
@@ -374,7 +381,7 @@ export const ModerationDashboard: React.FC = () => {
                         className="w-20 h-12 object-cover rounded"
                       />
                     )}
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">
                         <TypeIcon className="w-4 h-4 text-gray-500" />
@@ -385,15 +392,15 @@ export const ModerationDashboard: React.FC = () => {
                           {item.type.replace('_', ' ')}
                         </span>
                       </div>
-                      
+
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">
                         {item.title}
                       </h3>
-                      
+
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         {item.content}
                       </p>
-                      
+
                       <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-3">
                         <span>By {item.author.name}</span>
                         <span>Reported by {item.reportedBy.name}</span>
@@ -405,7 +412,7 @@ export const ModerationDashboard: React.FC = () => {
                           </>
                         )}
                       </div>
-                      
+
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleModerationAction(item.id, { action: 'approve' })}
@@ -439,7 +446,7 @@ export const ModerationDashboard: React.FC = () => {
               );
             })}
           </div>
-          
+
           {filteredItems.length === 0 && (
             <div className="p-12 text-center">
               <ShieldCheckIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />

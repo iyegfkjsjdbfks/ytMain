@@ -1,5 +1,7 @@
-import React from 'react';
+import type React from 'react';
+
 import { NavLink } from 'react-router-dom';
+
 import { useAuthStore } from '../../auth/store/authStore';
 
 /**
@@ -13,12 +15,12 @@ const Sidebar: React.FC = () => {
       <div className="p-4">
         <nav className="space-y-1">
           {/* Main navigation links */}
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                isActive 
-                  ? 'text-red-700 bg-red-50' 
+                isActive
+                  ? 'text-red-700 bg-red-50'
                   : 'text-gray-700 hover:bg-gray-100'
               }`
             }
@@ -30,12 +32,12 @@ const Sidebar: React.FC = () => {
             Home
           </NavLink>
 
-          <NavLink 
-            to="/trending" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/trending"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                isActive 
-                  ? 'text-red-700 bg-red-50' 
+                isActive
+                  ? 'text-red-700 bg-red-50'
                   : 'text-gray-700 hover:bg-gray-100'
               }`
             }
@@ -46,12 +48,12 @@ const Sidebar: React.FC = () => {
             Trending
           </NavLink>
 
-          <NavLink 
-            to="/shorts" 
-            className={({ isActive }) => 
+          <NavLink
+            to="/shorts"
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                isActive 
-                  ? 'text-red-700 bg-red-50' 
+                isActive
+                  ? 'text-red-700 bg-red-50'
                   : 'text-gray-700 hover:bg-gray-100'
               }`
             }
@@ -65,12 +67,12 @@ const Sidebar: React.FC = () => {
           {/* Authenticated user links */}
           {isAuthenticated && (
             <>
-              <NavLink 
-                to="/subscriptions" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/subscriptions"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -87,12 +89,12 @@ const Sidebar: React.FC = () => {
                 </h3>
               </div>
 
-              <NavLink 
-                to="/history" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/history"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -103,12 +105,12 @@ const Sidebar: React.FC = () => {
                 History
               </NavLink>
 
-              <NavLink 
-                to="/watch-later" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/watch-later"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -119,12 +121,12 @@ const Sidebar: React.FC = () => {
                 Watch Later
               </NavLink>
 
-              <NavLink 
-                to="/liked-videos" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/liked-videos"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -135,12 +137,12 @@ const Sidebar: React.FC = () => {
                 Liked Videos
               </NavLink>
 
-              <NavLink 
-                to="/playlists" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/playlists"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -157,12 +159,12 @@ const Sidebar: React.FC = () => {
                 </h3>
               </div>
 
-              <NavLink 
-                to="/studio" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/studio"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -173,12 +175,12 @@ const Sidebar: React.FC = () => {
                 YouTube Studio
               </NavLink>
 
-              <NavLink 
-                to="/upload" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/upload"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -189,12 +191,12 @@ const Sidebar: React.FC = () => {
                 Upload Video
               </NavLink>
 
-              <NavLink 
-                to="/go-live" 
-                className={({ isActive }) => 
+              <NavLink
+                to="/go-live"
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
-                    isActive 
-                      ? 'text-red-700 bg-red-50' 
+                    isActive
+                      ? 'text-red-700 bg-red-50'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
@@ -213,7 +215,7 @@ const Sidebar: React.FC = () => {
               <p className="text-sm text-gray-600 mb-2">
                 Sign in to like videos, comment, and subscribe.
               </p>
-              <NavLink 
+              <NavLink
                 to="/login"
                 className="flex items-center justify-center px-4 py-2 border border-blue-600 rounded-full text-blue-600 text-sm font-medium hover:bg-blue-50"
               >

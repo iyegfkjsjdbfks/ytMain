@@ -1,4 +1,4 @@
-import { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
+import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -19,11 +19,11 @@ class VideoService {
    */
   async getVideo(videoId: string): Promise<Video> {
     const response = await fetch(`${this.baseUrl}/${videoId}`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch video: ${response.statusText}`);
     }
-    
+
     return response.json();
   }
 
@@ -33,19 +33,19 @@ class VideoService {
   async getTrendingVideos(category?: string, limit: number = 20): Promise<Video[]> {
     const url = new URL(this.baseUrl);
     url.pathname += '/trending';
-    
+
     if (category) {
       url.searchParams.append('category', category);
     }
-    
+
     url.searchParams.append('limit', limit.toString());
-    
+
     const response = await fetch(url.toString());
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch trending videos: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<Video[]>;
   }
 
@@ -57,13 +57,13 @@ class VideoService {
     url.pathname += '/recommended';
     url.searchParams.append('videoId', videoId);
     url.searchParams.append('limit', limit.toString());
-    
+
     const response = await fetch(url.toString());
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch recommended videos: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<Video[]>;
   }
 
@@ -72,11 +72,11 @@ class VideoService {
    */
   async getVideoMetrics(videoId: string): Promise<VideoMetrics> {
     const response = await fetch(`${this.baseUrl}/${videoId}/metrics`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch video metrics: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoMetrics>;
   }
 
@@ -88,13 +88,13 @@ class VideoService {
     url.pathname += '/search';
     url.searchParams.append('q', query);
     url.searchParams.append('limit', limit.toString());
-    
+
     const response = await fetch(url.toString());
-    
+
     if (!response.ok) {
       throw new Error(`Failed to search videos: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<Video[]>;
   }
 
@@ -108,11 +108,11 @@ class VideoService {
         'Content-Type': 'application/json',
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to toggle like: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoInteractionResponse>;
   }
 
@@ -126,11 +126,11 @@ class VideoService {
         'Content-Type': 'application/json',
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to toggle dislike: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoInteractionResponse>;
   }
 
@@ -144,11 +144,11 @@ class VideoService {
         'Content-Type': 'application/json',
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to toggle save: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoInteractionResponse>;
   }
 
@@ -163,7 +163,7 @@ class VideoService {
       },
       body: JSON.stringify({ reason }),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to report video: ${response.statusText}`);
     }
@@ -174,11 +174,11 @@ class VideoService {
    */
   async getVideoInteractions(videoId: string): Promise<VideoInteractionResponse> {
     const response = await fetch(`${this.baseUrl}/${videoId}/interactions`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to get video interactions: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoInteractionResponse>;
   }
 
@@ -187,11 +187,11 @@ class VideoService {
    */
   async getVideoStats(videoId: string): Promise<VideoStats> {
     const response = await fetch(`${this.baseUrl}/${videoId}/stats`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to get video stats: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoStats>;
   }
 
@@ -200,11 +200,11 @@ class VideoService {
    */
   async getVideoEngagement(videoId: string): Promise<VideoEngagement> {
     const response = await fetch(`${this.baseUrl}/${videoId}/engagement`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to get video engagement: ${response.statusText}`);
     }
-    
+
     return response.json() as Promise<VideoEngagement>;
   }
 }

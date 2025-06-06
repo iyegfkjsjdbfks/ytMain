@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 /**
  * GoLivePage component for starting and managing live streams

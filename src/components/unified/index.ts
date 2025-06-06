@@ -4,7 +4,7 @@
  */
 
 // Button Components
-export { 
+export {
   UnifiedButton,
   PrimaryButton,
   SecondaryButton,
@@ -13,7 +13,7 @@ export {
   LinkButton,
   type UnifiedButtonProps,
   type ButtonVariant,
-  type ButtonSize
+  type ButtonSize,
 } from './UnifiedButton';
 
 // Video Card Components
@@ -21,7 +21,7 @@ export {
   UnifiedVideoCard,
   type UnifiedVideoCardProps,
   type VideoCardVariant,
-  type VideoCardSize
+  type VideoCardSize,
 } from './UnifiedVideoCard';
 
 // Re-export common types

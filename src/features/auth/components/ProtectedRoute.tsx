@@ -1,7 +1,11 @@
-import React, { ReactNode, useEffect   } from 'react';
+import type { ReactNode } from 'react';
+import type React from 'react';
+import { useEffect   } from 'react';
+
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
+
 import LoadingSpinner from '../../../../components/ui/LoadingSpinner';
+import { useAuthStore } from '../store/authStore';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -32,12 +36,12 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   // For routes that require authentication (most app routes)
   if (requireAuth && !isAuthenticated) {
-    return <Navigate to={redirectTo || "/login"} state={{ from: location }} replace />;
+    return <Navigate to={redirectTo || '/login'} state={{ from: location }} replace />;
   }
 
   // For routes that should NOT be accessible when authenticated (login/register)
   if (!requireAuth && isAuthenticated) {
-    return <Navigate to={redirectTo || "/"} replace />;
+    return <Navigate to={redirectTo || '/'} replace />;
   }
 
   return <>{children}</>;

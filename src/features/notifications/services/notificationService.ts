@@ -4,6 +4,7 @@
  */
 
 import { api } from '../../../services/api/base';
+
 import type { ApiResponse } from '../../../types/core';
 
 export interface Notification {
@@ -79,7 +80,7 @@ class NotificationService {
    * Get user notifications
    */
   async getNotifications(
-    filters: NotificationFilters = {}
+    filters: NotificationFilters = {},
   ): Promise<ApiResponse<Notification[]>> {
     return api.get('/api/notifications', filters);
   }
@@ -125,7 +126,7 @@ class NotificationService {
   async deleteMultiple(notificationIds: string[]): Promise<ApiResponse<void>> {
     return api.delete('/api/notifications/bulk', {
       body: JSON.stringify({ notificationIds }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 
@@ -175,7 +176,7 @@ class NotificationService {
    * Update notification preferences
    */
   async updatePreferences(
-    preferences: Partial<NotificationPreferences>
+    preferences: Partial<NotificationPreferences>,
   ): Promise<ApiResponse<NotificationPreferences>> {
     return api.put('/api/notifications/preferences', preferences);
   }
@@ -184,7 +185,7 @@ class NotificationService {
    * Subscribe to push notifications
    */
   async subscribeToPush(
-    subscription: PushSubscription
+    subscription: PushSubscription,
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/push/subscribe', {
       endpoint: subscription.endpoint,
@@ -207,7 +208,7 @@ class NotificationService {
    */
   async testNotification(
     type: 'email' | 'push' | 'sms',
-    message?: string
+    message?: string,
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/test', { type, message });
   }
@@ -216,7 +217,7 @@ class NotificationService {
    * Create notification (admin/system use)
    */
   async createNotification(
-    data: CreateNotificationData
+    data: CreateNotificationData,
   ): Promise<ApiResponse<Notification>> {
     return api.post('/api/notifications', data);
   }
@@ -226,7 +227,7 @@ class NotificationService {
    */
   async sendBulkNotifications(
     userIds: string[],
-    notification: Omit<CreateNotificationData, 'userId'>
+    notification: Omit<CreateNotificationData, 'userId'>,
   ): Promise<ApiResponse<{ sent: number; failed: number }>> {
     return api.post('/api/notifications/bulk', {
       userIds,
@@ -263,7 +264,7 @@ class NotificationService {
    * Get notification analytics
    */
   async getAnalytics(
-    timeframe: '7d' | '30d' | '90d' = '30d'
+    timeframe: '7d' | '30d' | '90d' = '30d',
   ): Promise<ApiResponse<{
     totalSent: number;
     totalRead: number;
@@ -297,7 +298,7 @@ class NotificationService {
    */
   async scheduleNotification(
     data: CreateNotificationData,
-    scheduledFor: string
+    scheduledFor: string,
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/schedule', {
       ...data,
@@ -309,7 +310,7 @@ class NotificationService {
    * Cancel scheduled notification
    */
   async cancelScheduledNotification(
-    notificationId: string
+    notificationId: string,
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/notifications/schedule/${notificationId}`);
   }
@@ -331,7 +332,7 @@ class NotificationService {
    */
   async snoozeNotification(
     notificationId: string,
-    snoozeUntil: string
+    snoozeUntil: string,
   ): Promise<ApiResponse<void>> {
     return api.patch(`/api/notifications/${notificationId}/snooze`, {
       snoozeUntil,
@@ -342,7 +343,7 @@ class NotificationService {
    * Get notification delivery status
    */
   async getDeliveryStatus(
-    notificationId: string
+    notificationId: string,
   ): Promise<ApiResponse<{
     email?: { status: 'sent' | 'delivered' | 'failed'; timestamp: string };
     push?: { status: 'sent' | 'delivered' | 'failed'; timestamp: string };
@@ -355,7 +356,7 @@ class NotificationService {
    * Archive old notifications
    */
   async archiveOldNotifications(
-    olderThan: string
+    olderThan: string,
   ): Promise<ApiResponse<{ archived: number }>> {
     return api.post('/api/notifications/archive', { olderThan });
   }
@@ -364,7 +365,7 @@ class NotificationService {
    * Get notification digest
    */
   async getDigest(
-    period: 'daily' | 'weekly' | 'monthly'
+    period: 'daily' | 'weekly' | 'monthly',
   ): Promise<ApiResponse<{
     period: string;
     summary: {
@@ -387,7 +388,7 @@ class NotificationService {
    */
   async exportNotifications(
     format: 'csv' | 'json',
-    filters: NotificationFilters = {}
+    filters: NotificationFilters = {},
   ): Promise<ApiResponse<string>> {
     return api.get('/api/notifications/export', { format, ...filters });
   }
@@ -397,10 +398,10 @@ class NotificationService {
    */
   subscribeToRealTime(
     onNotification: (notification: Notification) => void,
-    onError?: (error: Error) => void
+    onError?: (error: Error) => void,
   ): () => void {
     const ws = new WebSocket(`${api.createUrl('/api/notifications/ws').replace('http', 'ws')}`);
-    
+
     ws.onmessage = (event) => {
       try {
         const notification = JSON.parse(event.data);

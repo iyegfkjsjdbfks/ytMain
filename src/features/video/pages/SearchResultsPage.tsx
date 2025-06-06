@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { useSearchParams } from 'react-router-dom';
 
 /**
@@ -7,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
-  
+
   return (
     <div className="container mx-auto py-6">
       <h1 className="text-2xl font-bold mb-6">Search Results</h1>

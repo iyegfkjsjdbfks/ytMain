@@ -38,7 +38,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,
-    value: SearchFilters[K]
+    value: SearchFilters[K],
   ) => {
     onFiltersChange({
       ...filters,
@@ -50,7 +50,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     const newFeatures = filters.features.includes(feature)
       ? filters.features.filter(f => f !== feature)
       : [...filters.features, feature];
-    
+
     updateFilter('features', newFeatures);
   };
 
@@ -80,13 +80,27 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
   const getActiveFilterCount = () => {
     let count = 0;
-    if (filters.type !== 'all') count++;
-    if (filters.uploadDate !== 'any') count++;
-    if (filters.duration !== 'any') count++;
-    if (filters.features.length > 0) count += filters.features.length;
-    if (filters.sortBy !== 'relevance') count++;
-    if (filters.quality !== 'any') count++;
-    if (filters.captions !== 'any') count++;
+    if (filters.type !== 'all') {
+count++;
+}
+    if (filters.uploadDate !== 'any') {
+count++;
+}
+    if (filters.duration !== 'any') {
+count++;
+}
+    if (filters.features.length > 0) {
+count += filters.features.length;
+}
+    if (filters.sortBy !== 'relevance') {
+count++;
+}
+    if (filters.quality !== 'any') {
+count++;
+}
+    if (filters.captions !== 'any') {
+count++;
+}
     return count;
   };
 

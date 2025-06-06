@@ -1,7 +1,6 @@
 import { VideoCard } from '@/components/molecules/VideoCard';
 import { cn } from '@/lib/utils';
-
-import { VideoGridProps as VideoGridPropsBase } from '@/types';
+import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 
 export interface VideoGridProps extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
   onVideoMoreClick: (videoId: string) => void;
@@ -19,7 +18,7 @@ export const VideoGrid = ({
       <div
         className={cn(
           'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4',
-          className
+          className,
         )}
       >
         {Array.from({ length: skeletonCount }).map((_, i) => (
@@ -34,7 +33,7 @@ export const VideoGrid = ({
     <div
       className={cn(
         'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4',
-        className
+        className,
       )}
     >
       {videos.map((video) => (

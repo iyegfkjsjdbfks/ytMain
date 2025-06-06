@@ -4,6 +4,7 @@
  */
 
 import { CONSTANTS } from '../../lib/constants';
+
 import type { ApiResponse, PaginationInfo } from '../../types/core';
 
 // API Configuration
@@ -30,7 +31,7 @@ export class ApiError extends Error {
     message: string,
     public status: number,
     public code?: string,
-    public details?: any
+    public details?: any,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -54,7 +55,7 @@ export class TimeoutError extends Error {
 // Utility functions
 export function createApiUrl(endpoint: string, params?: Record<string, any>): string {
   const url = new URL(endpoint, API_BASE_URL);
-  
+
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -66,7 +67,7 @@ export function createApiUrl(endpoint: string, params?: Record<string, any>): st
       }
     });
   }
-  
+
   return url.toString();
 }
 
@@ -90,7 +91,7 @@ export function createRequestConfig(config: RequestConfig = {}): RequestInit {
 // Request wrapper with timeout and retry logic
 export async function apiRequest<T>(
   url: string,
-  config: RequestConfig = {}
+  config: RequestConfig = {},
 ): Promise<ApiResponse<T>> {
   const {
     timeout = API_TIMEOUT,
@@ -100,22 +101,22 @@ export async function apiRequest<T>(
   } = config;
 
   const requestConfig = createRequestConfig(fetchConfig);
-  
+
   let lastError: Error | null = null;
-  
+
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       // Create timeout promise
       const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => reject(new TimeoutError()), timeout);
       });
-      
+
       // Make the request
       const response = await Promise.race([
         fetch(url, requestConfig),
         timeoutPromise,
       ]);
-      
+
       // Handle HTTP errors
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -123,42 +124,42 @@ export async function apiRequest<T>(
           errorData.message || `HTTP ${response.status}: ${response.statusText}`,
           response.status,
           errorData.code,
-          errorData.details
+          errorData.details,
         );
       }
-      
+
       // Parse response
       const data = await response.json();
       return data;
-      
+
     } catch (error) {
       lastError = error as Error;
-      
+
       // Don't retry on certain errors
       if (
-        error instanceof ApiError && 
+        error instanceof ApiError &&
         (error.status >= 400 && error.status < 500)
       ) {
         throw error;
       }
-      
+
       // If this is the last attempt, throw the error
       if (attempt === retries) {
         break;
       }
-      
+
       // Wait before retrying
       if (retryDelay > 0) {
         await new Promise(resolve => setTimeout(resolve, retryDelay));
       }
     }
   }
-  
+
   // Convert network errors
   if (lastError instanceof TypeError) {
     throw new NetworkError('Failed to fetch data. Please check your connection.');
   }
-  
+
   throw lastError || new Error('Unknown error occurred');
 }
 
@@ -166,7 +167,7 @@ export async function apiRequest<T>(
 export async function get<T>(
   endpoint: string,
   params?: Record<string, any>,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint, params);
   return apiRequest<T>(url, { ...config, method: 'GET' });
@@ -176,7 +177,7 @@ export async function get<T>(
 export async function post<T>(
   endpoint: string,
   data?: any,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -190,7 +191,7 @@ export async function post<T>(
 export async function put<T>(
   endpoint: string,
   data?: any,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -204,7 +205,7 @@ export async function put<T>(
 export async function patch<T>(
   endpoint: string,
   data?: any,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -217,7 +218,7 @@ export async function patch<T>(
 // DELETE request
 export async function del<T>(
   endpoint: string,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, { ...config, method: 'DELETE' });
@@ -228,19 +229,19 @@ export async function upload<T>(
   endpoint: string,
   file: File,
   additionalData?: Record<string, any>,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   const formData = new FormData();
-  
+
   formData.append('file', file);
-  
+
   if (additionalData) {
     Object.entries(additionalData).forEach(([key, value]) => {
       formData.append(key, String(value));
     });
   }
-  
+
   return apiRequest<T>(url, {
     ...config,
     method: 'POST',
@@ -256,7 +257,7 @@ export async function upload<T>(
 export async function getPaginated<T>(
   endpoint: string,
   params: PaginatedRequest = {},
-  config?: RequestConfig
+  config?: RequestConfig,
 ): Promise<ApiResponse<T[]> & { pagination: PaginationInfo }> {
   const {
     page = 1,
@@ -265,14 +266,14 @@ export async function getPaginated<T>(
     sortOrder = 'desc',
     ...otherParams
   } = params;
-  
+
   const queryParams = {
     page,
     limit: Math.min(limit, CONSTANTS.PAGINATION.MAX_PAGE_SIZE),
     ...(sortBy && { sortBy, sortOrder }),
     ...otherParams,
   };
-  
+
   return get<T[]>(endpoint, queryParams, config) as Promise<
     ApiResponse<T[]> & { pagination: PaginationInfo }
   >;

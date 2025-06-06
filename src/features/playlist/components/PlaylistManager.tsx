@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -15,7 +16,9 @@ import {
   ListBulletIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
+
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
+
 import type { Playlist } from '../../../types/core';
 
 interface PlaylistManagerProps {
@@ -43,8 +46,10 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title.trim()) return;
-    
+    if (!formData.title.trim()) {
+return;
+}
+
     onSubmit(formData);
     setFormData({
       title: '',
@@ -73,7 +78,9 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
     }));
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -81,7 +88,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           Create New Playlist
         </h3>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -199,7 +206,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   const { data: playlists = [] } = usePlaylists({
     sortBy: sortBy === 'recent' ? 'updated' :
            sortBy === 'alphabetical' ? 'title' :
-           sortBy === 'most_videos' ? 'videoCount' : 'updated'
+           sortBy === 'most_videos' ? 'videoCount' : 'updated',
   });
   const isLoading = false; // Placeholder
   const createPlaylistMutation = useCreatePlaylist();
@@ -208,7 +215,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const filteredPlaylists = playlists.filter(playlist =>
     playlist.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    playlist.description?.toLowerCase().includes(searchQuery.toLowerCase())
+    playlist.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleCreatePlaylist = async (data: any) => {
@@ -267,7 +274,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
             Organize and manage your video playlists
           </p>
         </div>
-        
+
         <button
           onClick={() => setShowCreateModal(true)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -289,7 +296,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
             className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
         </div>
-        
+
         <div className="flex items-center gap-4">
           <select
             value={sortBy}
@@ -300,7 +307,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
             <option value="alphabetical">Alphabetical</option>
             <option value="most_videos">Most videos</option>
           </select>
-          
+
           <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg">
             <button
               onClick={() => setViewMode('grid')}
@@ -323,14 +330,14 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-4 animate-pulse">
-              <div className="w-full h-32 bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-              <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-2"></div>
-              <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3"></div>
+              <div className="w-full h-32 bg-gray-300 dark:bg-gray-700 rounded mb-4" />
+              <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-2" />
+              <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3" />
             </div>
           ))}
         </div>
       ) : filteredPlaylists.length > 0 ? (
-        <div className={viewMode === 'grid' 
+        <div className={viewMode === 'grid'
           ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
           : 'space-y-4'
         }>
@@ -345,7 +352,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
                 <>
                   <div className="relative mb-4">
                     <img
-                      src={playlist.thumbnailUrl || 'https://picsum.photos/300/200?random=' + playlist.id}
+                      src={playlist.thumbnailUrl || `https://picsum.photos/300/200?random=${  playlist.id}`}
                       alt={playlist.title}
                       className="w-full h-32 object-cover rounded"
                     />
@@ -356,7 +363,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
                       {playlist.videoCount || 0} videos
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 dark:text-white truncate">
@@ -374,7 +381,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="relative">
                       <button
                         onClick={() => setShowPlaylistMenu(showPlaylistMenu === playlist.id ? null : playlist.id)}
@@ -382,7 +389,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
                       >
                         <EllipsisVerticalIcon className="w-5 h-5 text-gray-500" />
                       </button>
-                      
+
                       {showPlaylistMenu === playlist.id && (
                         <div className="absolute right-0 top-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2 z-10 min-w-[160px]">
                           <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2">
@@ -420,7 +427,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
               ) : (
                 <>
                   <img
-                    src={playlist.thumbnailUrl || 'https://picsum.photos/120/80?random=' + playlist.id}
+                    src={playlist.thumbnailUrl || `https://picsum.photos/120/80?random=${  playlist.id}`}
                     alt={playlist.title}
                     className="w-20 h-12 object-cover rounded mr-4"
                   />

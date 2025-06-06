@@ -4,7 +4,9 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+
 import { CONSTANTS } from '../../lib/constants';
+
 import type { ApiResponse } from '../../types/core';
 
 // Hook configuration
@@ -63,7 +65,9 @@ class ApiCache {
 
   get<T>(key: string): T | undefined {
     const entry = this.cache.get(key);
-    if (!entry) return undefined;
+    if (!entry) {
+return undefined;
+}
 
     const now = Date.now();
     const age = now - entry.timestamp;
@@ -79,7 +83,9 @@ class ApiCache {
 
   isStale(key: string): boolean {
     const entry = this.cache.get(key);
-    if (!entry) return true;
+    if (!entry) {
+return true;
+}
 
     const now = Date.now();
     const age = now - entry.timestamp;
@@ -104,7 +110,7 @@ const apiCache = new ApiCache();
 export function useApi<T>(
   queryKey: string | string[],
   queryFn: () => Promise<ApiResponse<T>>,
-  config: UseApiConfig<T> = {}
+  config: UseApiConfig<T> = {},
 ): UseApiReturn<T> {
   const {
     initialData,
@@ -141,7 +147,9 @@ export function useApi<T>(
 
   // Fetch function
   const fetchData = useCallback(async (retryCount = 0): Promise<void> => {
-    if (!enabled || !mountedRef.current) return;
+    if (!enabled || !mountedRef.current) {
+return;
+}
 
     // Cancel previous request
     if (abortControllerRef.current) {
@@ -155,8 +163,10 @@ export function useApi<T>(
 
     try {
       const response = await queryFn();
-      
-      if (!mountedRef.current) return;
+
+      if (!mountedRef.current) {
+return;
+}
 
       const newData = response.data;
       const timestamp = Date.now();
@@ -177,7 +187,9 @@ export function useApi<T>(
       onSuccess?.(newData);
 
     } catch (error) {
-      if (!mountedRef.current) return;
+      if (!mountedRef.current) {
+return;
+}
 
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
 
@@ -209,10 +221,10 @@ export function useApi<T>(
   // Mutate function (optimistic updates)
   const mutate = useCallback((data: T): void => {
     const timestamp = Date.now();
-    
+
     // Update cache
     apiCache.set(cacheKey, data, staleTime);
-    
+
     // Update state
     setState(prev => ({
       ...prev,
@@ -243,7 +255,9 @@ export function useApi<T>(
 
   // Window focus refetch
   useEffect(() => {
-    if (!refetchOnWindowFocus) return;
+    if (!refetchOnWindowFocus) {
+return;
+}
 
     const handleFocus = () => {
       if (state.isStale) {
@@ -259,11 +273,11 @@ export function useApi<T>(
   useEffect(() => {
     return () => {
       mountedRef.current = false;
-      
+
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
-      
+
       if (retryTimeoutRef.current) {
         clearTimeout(retryTimeoutRef.current);
       }
@@ -282,7 +296,7 @@ export function useApi<T>(
 export function useQuery<T>(
   queryKey: string | string[],
   queryFn: () => Promise<ApiResponse<T>>,
-  config?: UseApiConfig<T>
+  config?: UseApiConfig<T>,
 ) {
   return useApi(queryKey, queryFn, config);
 }
@@ -293,7 +307,7 @@ export function useMutation<T, TVariables = any>(
     onSuccess?: (data: T, variables: TVariables) => void;
     onError?: (error: Error, variables: TVariables) => void;
     onSettled?: (data: T | undefined, error: Error | null, variables: TVariables) => void;
-  } = {}
+  } = {},
 ) {
   const [state, setState] = useState<{
     data: T | undefined;
@@ -310,7 +324,7 @@ export function useMutation<T, TVariables = any>(
 
     try {
       const response = await mutationFn(variables);
-      const data = response.data;
+      const { data } = response;
 
       setState({ data, loading: false, error: null });
       config.onSuccess?.(data, variables);
@@ -319,7 +333,7 @@ export function useMutation<T, TVariables = any>(
       return data;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
-      
+
       setState(prev => ({ ...prev, loading: false, error: errorMessage }));
       config.onError?.(error instanceof Error ? error : new Error(errorMessage), variables);
       config.onSettled?.(undefined, error instanceof Error ? error : new Error(errorMessage), variables);

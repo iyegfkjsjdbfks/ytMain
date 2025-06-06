@@ -4,6 +4,7 @@
  */
 
 import { api } from '../../../services/api/base';
+
 import type { Comment, ApiResponse } from '../../../types/core';
 
 export interface CreateCommentData {
@@ -42,7 +43,7 @@ class CommentService {
    */
   async getVideoComments(
     videoId: string,
-    filters: CommentFilters = {}
+    filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/videos/${videoId}/comments`, filters);
   }
@@ -52,7 +53,7 @@ class CommentService {
    */
   async getCommentReplies(
     commentId: string,
-    filters: Omit<CommentFilters, 'parentId'> = {}
+    filters: Omit<CommentFilters, 'parentId'> = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/comments/${commentId}/replies`, filters);
   }
@@ -136,7 +137,7 @@ class CommentService {
   async reportComment(
     commentId: string,
     reason: string,
-    description?: string
+    description?: string,
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${commentId}/report`, {
       reason,
@@ -149,7 +150,7 @@ class CommentService {
    */
   async getUserComments(
     userId: string,
-    filters: Omit<CommentFilters, 'parentId'> = {}
+    filters: Omit<CommentFilters, 'parentId'> = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/comments`, filters);
   }
@@ -159,7 +160,7 @@ class CommentService {
    */
   async getPendingComments(
     videoId?: string,
-    filters: CommentFilters = {}
+    filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     const params = videoId ? { videoId, ...filters } : filters;
     return api.get('/api/comments/pending', params);
@@ -179,7 +180,7 @@ class CommentService {
   async bulkModerateComments(
     commentIds: string[],
     action: CommentModerationAction['action'],
-    reason?: string
+    reason?: string,
   ): Promise<ApiResponse<{ success: string[]; failed: string[] }>> {
     return api.post('/api/comments/bulk-moderate', {
       commentIds,
@@ -194,7 +195,7 @@ class CommentService {
   async searchComments(
     query: string,
     videoId?: string,
-    filters: CommentFilters = {}
+    filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     const params = { query, ...(videoId && { videoId }), ...filters };
     return api.get('/api/comments/search', params);
@@ -226,7 +227,7 @@ class CommentService {
    */
   async getTrendingComments(
     timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
-    limit: number = 20
+    limit: number = 20,
   ): Promise<ApiResponse<Comment[]>> {
     return api.get('/api/comments/trending', { timeframe, limit });
   }
@@ -261,7 +262,7 @@ class CommentService {
    */
   async getCommentMentions(
     userId: string,
-    filters: CommentFilters = {}
+    filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/mentions`, filters);
   }
@@ -278,7 +279,7 @@ class CommentService {
    */
   async getCommentAnalytics(
     videoId: string,
-    timeframe: '7d' | '30d' | '90d' = '30d'
+    timeframe: '7d' | '30d' | '90d' = '30d',
   ): Promise<ApiResponse<{
     totalComments: number;
     commentsOverTime: Array<{ date: string; count: number }>;
@@ -300,7 +301,7 @@ class CommentService {
       enableToxicityDetection: boolean;
       enableLanguageFilter: boolean;
       customKeywords?: string[];
-    }
+    },
   ): Promise<ApiResponse<{
     processed: number;
     flagged: number;
@@ -315,7 +316,7 @@ class CommentService {
    */
   async exportComments(
     videoId: string,
-    format: 'csv' | 'json' | 'xlsx'
+    format: 'csv' | 'json' | 'xlsx',
   ): Promise<ApiResponse<string>> {
     return api.get(`/api/videos/${videoId}/comments/export`, { format });
   }

@@ -1,5 +1,6 @@
 // This file is currently empty but kept for future subscription hook implementations
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { subscriptionService } from '../services/subscriptionService';
 
 export interface SubscriptionData {
@@ -13,7 +14,7 @@ export interface SubscriptionData {
 
 export function useSubscription(channelId: string) {
   const queryClient = useQueryClient();
-  
+
   const { data: subscription, isLoading: isQueryLoading } = useQuery({
     queryKey: ['subscription', channelId],
     queryFn: () => subscriptionService.getSubscriptionStatus(channelId),

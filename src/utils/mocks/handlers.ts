@@ -103,33 +103,33 @@ export const handlers = [
     const pageToken = url.searchParams.get('pageToken');
     // const type = url.searchParams.get('type') || 'video';
     const order = url.searchParams.get('order') || 'relevance';
-    
+
     // Simulate API delay
     await delay(Math.random() * 500 + 200);
-    
+
     let filteredVideos = mockVideos;
-    
+
     // Filter by search query
     if (q) {
-      filteredVideos = mockVideos.filter(video => 
+      filteredVideos = mockVideos.filter(video =>
         video.title.toLowerCase().includes(q.toLowerCase()) ||
         video.description.toLowerCase().includes(q.toLowerCase()) ||
-        video.channelTitle.toLowerCase().includes(q.toLowerCase())
+        video.channelTitle.toLowerCase().includes(q.toLowerCase()),
       );
     }
-    
+
     // Sort by order
     if (order === 'date') {
       filteredVideos.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
     } else if (order === 'viewCount') {
       filteredVideos.sort((a, b) => b.views - a.views);
     }
-    
+
     // Paginate
     const startIndex = pageToken ? parseInt(pageToken) * maxResults : 0;
     const endIndex = startIndex + maxResults;
     const paginatedVideos = filteredVideos.slice(startIndex, endIndex);
-    
+
     // Transform to YouTube API format
     const items = paginatedVideos.map(video => ({
       kind: 'youtube#searchResult',
@@ -152,29 +152,29 @@ export const handlers = [
         liveBroadcastContent: video.isLive ? 'live' : 'none',
       },
     }));
-    
+
     return HttpResponse.json(createYouTubeAPIResponse(items, {
       totalResults: filteredVideos.length,
       resultsPerPage: maxResults,
     }));
   }),
-  
+
   // YouTube Data API - Get video details
   http.get('https://www.googleapis.com/youtube/v3/videos', async ({ request }) => {
     const url = new URL(request.url);
     const id = url.searchParams.get('id');
     // const part = url.searchParams.get('part') || 'snippet,statistics,contentDetails';
-    
+
     await delay(Math.random() * 300 + 100);
-    
+
     if (!id) {
       return HttpResponse.json({ error: { message: 'Missing required parameter: id' } }, { status: 400 });
     }
-    
+
     const videoIds = id.split(',');
     const videos = videoIds.map(videoId => {
       const video = mockVideos.find(v => v.id === videoId) || generateMockVideo(videoId);
-      
+
       return {
         kind: 'youtube#video',
         etag: `mock-etag-${video.id}`,
@@ -213,26 +213,26 @@ export const handlers = [
         },
       };
     });
-    
+
     return HttpResponse.json(createYouTubeAPIResponse(videos));
   }),
-  
+
   // YouTube Data API - Get channel details
   http.get('https://www.googleapis.com/youtube/v3/channels', async ({ request }) => {
     const url = new URL(request.url);
     const id = url.searchParams.get('id');
     const forUsername = url.searchParams.get('forUsername');
-    
+
     await delay(Math.random() * 300 + 100);
-    
+
     if (!id && !forUsername) {
       return HttpResponse.json({ error: { message: 'Missing required parameter: id or forUsername' } }, { status: 400 });
     }
-    
+
     const channelIds = id ? id.split(',') : [forUsername!];
     const channels = channelIds.map(channelId => {
       const channel = mockChannels.find(c => c.id === channelId) || generateMockChannel(channelId);
-      
+
       return {
         kind: 'youtube#channel',
         etag: `mock-etag-${channel.id}`,
@@ -268,32 +268,32 @@ export const handlers = [
         },
       };
     });
-    
+
     return HttpResponse.json(createYouTubeAPIResponse(channels));
   }),
-  
+
   // YouTube Data API - Get playlists
   http.get('https://www.googleapis.com/youtube/v3/playlists', async ({ request }) => {
     const url = new URL(request.url);
     const channelId = url.searchParams.get('channelId');
     const id = url.searchParams.get('id');
     const maxResults = parseInt(url.searchParams.get('maxResults') || '25');
-    
+
     await delay(Math.random() * 300 + 100);
-    
+
     let filteredPlaylists = mockPlaylists;
-    
+
     if (channelId) {
       filteredPlaylists = mockPlaylists.filter(playlist => playlist.channelId === channelId);
     }
-    
+
     if (id) {
       const playlistIds = id.split(',');
       filteredPlaylists = mockPlaylists.filter(playlist => playlistIds.includes(playlist.id));
     }
-    
+
     const paginatedPlaylists = filteredPlaylists.slice(0, maxResults);
-    
+
     const items = paginatedPlaylists.map(playlist => ({
       kind: 'youtube#playlist',
       etag: `mock-etag-${playlist.id}`,
@@ -317,26 +317,26 @@ export const handlers = [
         itemCount: playlist.videoCount,
       },
     }));
-    
+
     return HttpResponse.json(createYouTubeAPIResponse(items));
   }),
-  
+
   // YouTube Data API - Get comments
   http.get('https://www.googleapis.com/youtube/v3/commentThreads', async ({ request }) => {
     const url = new URL(request.url);
     const videoId = url.searchParams.get('videoId');
     const maxResults = parseInt(url.searchParams.get('maxResults') || '20');
-    
+
     await delay(Math.random() * 400 + 200);
-    
+
     if (!videoId) {
       return HttpResponse.json({ error: { message: 'Missing required parameter: videoId' } }, { status: 400 });
     }
-    
+
     const videoComments = mockComments
       .filter(comment => !comment.parentId)
       .slice(0, maxResults);
-    
+
     const items = videoComments.map(comment => ({
       kind: 'youtube#commentThread',
       etag: `mock-etag-${comment.id}`,
@@ -365,20 +365,20 @@ export const handlers = [
         isPublic: true,
       },
     }));
-    
+
     return HttpResponse.json(createYouTubeAPIResponse(items));
   }),
-  
+
   // Gemini AI API - Mock responses
   http.post('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', async ({ request }) => {
     await delay(Math.random() * 1000 + 500);
-    
+
     const body = await request.json() as any;
     const prompt = body.contents?.[0]?.parts?.[0]?.text || '';
-    
+
     // Generate mock AI responses based on prompt keywords
     let mockResponse = 'This is a mock AI response. ';
-    
+
     if (prompt.toLowerCase().includes('title')) {
       mockResponse = 'Here are some engaging video title suggestions: "10 Amazing Tips", "The Ultimate Guide", "You Won\'t Believe What Happens Next"';
     } else if (prompt.toLowerCase().includes('description')) {
@@ -390,7 +390,7 @@ export const handlers = [
     } else {
       mockResponse = 'I\'m a mock AI assistant. I can help you with content creation, optimization, and analysis for your YouTube videos.';
     }
-    
+
     return HttpResponse.json({
       candidates: [
         {
@@ -446,7 +446,7 @@ export const handlers = [
       },
     });
   }),
-  
+
   // Error simulation handlers
   http.get('https://www.googleapis.com/youtube/v3/error-test', () => {
     return HttpResponse.json(
@@ -463,10 +463,10 @@ export const handlers = [
           ],
         },
       },
-      { status: 403 }
+      { status: 403 },
     );
   }),
-  
+
   // Network error simulation
   http.get('https://www.googleapis.com/youtube/v3/network-error', () => {
     return HttpResponse.error();

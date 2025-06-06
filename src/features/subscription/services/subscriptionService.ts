@@ -1,4 +1,5 @@
 import { api } from '../../../services/api/base';
+
 import type { ApiResponse } from '../../../types/core';
 import type { Video } from '../../../types/video';
 
@@ -59,7 +60,7 @@ class SubscriptionService {
    */
   async updateNotificationLevel(
     channelId: string,
-    level: 'all' | 'personalized' | 'none'
+    level: 'all' | 'personalized' | 'none',
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
       notificationLevel: level,
@@ -75,7 +76,7 @@ class SubscriptionService {
       category?: string;
       limit?: number;
       offset?: number;
-    } = {}
+    } = {},
   ): Promise<Subscription[]> {
     try {
       const response = await api.get('/api/subscriptions', filters);
@@ -96,7 +97,7 @@ class SubscriptionService {
       timeframe?: '24h' | '7d' | '30d';
       includeShorts?: boolean;
       includeLive?: boolean;
-    } = {}
+    } = {},
   ): Promise<Video[]> {
     try {
       const response = await api.get('/api/subscriptions/feed', filters);
@@ -135,7 +136,7 @@ class SubscriptionService {
     updates: Array<{
       channelId: string;
       notificationLevel: 'all' | 'personalized' | 'none';
-    }>
+    }>,
   ): Promise<ApiResponse<void>> {
     return api.patch('/api/subscriptions/bulk-notifications', { updates });
   }
@@ -148,7 +149,7 @@ class SubscriptionService {
       category?: string;
       limit?: number;
       excludeSubscribed?: boolean;
-    } = {}
+    } = {},
   ): Promise<Array<{
     channelId: string;
     channelName: string;
@@ -189,7 +190,7 @@ class SubscriptionService {
     filters: {
       includeVideos?: boolean;
       limit?: number;
-    } = {}
+    } = {},
   ): Promise<{
     channels: Subscription[];
     videos: Video[];
@@ -217,7 +218,7 @@ class SubscriptionService {
       timeframe?: '1h' | '6h' | '24h' | '7d';
       types?: Array<'upload' | 'live' | 'premiere' | 'community'>;
       limit?: number;
-    } = {}
+    } = {},
   ): Promise<Array<{
     id: string;
     type: 'upload' | 'live' | 'premiere' | 'community';
@@ -270,7 +271,7 @@ class SubscriptionService {
    */
   async importSubscriptions(
     file: File,
-    format: 'json' | 'csv' | 'opml'
+    format: 'json' | 'csv' | 'opml',
   ): Promise<ApiResponse<{
     imported: number;
     skipped: number;
@@ -291,7 +292,7 @@ class SubscriptionService {
    * Get subscription trends and insights
    */
   async getSubscriptionInsights(
-    timeframe: '7d' | '30d' | '90d' = '30d'
+    timeframe: '7d' | '30d' | '90d' = '30d',
   ): Promise<{
     growthRate: number;
     topCategories: Array<{ category: string; count: number; percentage: number }>;

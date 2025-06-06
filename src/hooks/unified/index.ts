@@ -11,7 +11,7 @@ export {
   queryCache,
   type UseApiConfig,
   type UseApiState,
-  type UseApiReturn
+  type UseApiReturn,
 } from './useApi';
 
 // Video hooks
@@ -41,7 +41,7 @@ export {
   useReportVideo,
   useVideoCategories,
   useVideoWithRelated,
-  useHomePageData
+  useHomePageData,
 } from './useVideos';
 
 // Re-export types

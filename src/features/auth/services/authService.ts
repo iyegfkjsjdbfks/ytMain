@@ -1,4 +1,4 @@
-import { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
+import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
 
 /**
  * Service for handling authentication-related API requests
@@ -56,7 +56,7 @@ class AuthService {
    */
   async logout(): Promise<void> {
     const tokens = this.getTokens();
-    
+
     if (tokens?.refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
@@ -71,7 +71,7 @@ class AuthService {
         console.error('Error during logout:', error);
       }
     }
-    
+
     this.clearTokens();
   }
 
@@ -80,18 +80,18 @@ class AuthService {
    */
   async getCurrentUser(): Promise<User | null> {
     const tokens = this.getTokens();
-    
+
     if (!tokens?.accessToken) {
       return null;
     }
-    
+
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
         headers: {
           'Authorization': `Bearer ${tokens.accessToken}`,
         },
       });
-      
+
       if (!response.ok) {
         if (response.status === 401) {
           // Token expired, try to refresh
@@ -103,7 +103,7 @@ class AuthService {
         }
         throw new Error('Failed to get user data');
       }
-      
+
       return response.json();
     } catch (error) {
       console.error('Error fetching current user:', error);
@@ -123,12 +123,12 @@ class AuthService {
         },
         body: JSON.stringify({ refreshToken }),
       });
-      
+
       if (!response.ok) {
         this.clearTokens();
         return null;
       }
-      
+
       const tokens = await response.json();
       this.setTokens(tokens);
       return tokens;
@@ -154,7 +154,7 @@ class AuthService {
     if (!tokensString) {
       return null;
     }
-    
+
     try {
       return JSON.parse(tokensString) as AuthTokens;
     } catch (error) {
@@ -178,7 +178,7 @@ class AuthService {
     if (!tokens) {
       return false;
     }
-    
+
     // Check if token is expired
     return tokens.expiresAt > Date.now();
   }

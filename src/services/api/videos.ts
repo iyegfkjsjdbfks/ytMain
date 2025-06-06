@@ -4,6 +4,7 @@
  */
 
 import { api, type PaginatedRequest } from './base';
+
 import type { Video, Short, ApiResponse, SearchFilters } from '../../types/core';
 
 // Video service interfaces
@@ -67,8 +68,8 @@ export const videoApi = {
    * Get videos by category
    */
   async getVideosByCategory(
-    category: string, 
-    params: PaginatedRequest = {}
+    category: string,
+    params: PaginatedRequest = {},
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/category', { ...params, category } as PaginatedRequest & { category: string });
   },
@@ -105,8 +106,8 @@ export const videoApi = {
    * Get related videos
    */
   async getRelatedVideos(
-    videoId: string, 
-    params: PaginatedRequest = {}
+    videoId: string,
+    params: PaginatedRequest = {},
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>(`/api/videos/${videoId}/related`, params);
   },
@@ -115,8 +116,8 @@ export const videoApi = {
    * Upload a new video
    */
   async uploadVideo(
-    videoFile: File, 
-    data: VideoUploadData
+    videoFile: File,
+    data: VideoUploadData,
   ): Promise<ApiResponse<Video>> {
     return api.upload<Video>('/api/videos/upload', videoFile, data);
   },
@@ -125,8 +126,8 @@ export const videoApi = {
    * Update video metadata
    */
   async updateVideo(
-    videoId: string, 
-    data: Partial<VideoUploadData>
+    videoId: string,
+    data: Partial<VideoUploadData>,
   ): Promise<ApiResponse<Video>> {
     return api.put<Video>(`/api/videos/${videoId}`, data);
   },
@@ -170,9 +171,9 @@ export const videoApi = {
    * Report a video
    */
   async reportVideo(
-    videoId: string, 
-    reason: string, 
-    description?: string
+    videoId: string,
+    reason: string,
+    description?: string,
   ): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/report`, { reason, description });
   },

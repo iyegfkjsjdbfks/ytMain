@@ -1,23 +1,12 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
+
 import { useParams, Link } from 'react-router-dom';
-import { Video } from '../../../types/core';
+
 import { VideoPlayer } from '../components/VideoPlayer';
-import { CommentSection } from '../../comments/components/CommentSection';
-import { VideoInteractions } from '../components/VideoInteractions';
-import { formatCount } from '../../../utils/numberUtils';
-import { formatDistanceToNow } from '../../../utils/dateUtils';
-import {
-  UserPlusIcon
-} from '@heroicons/react/24/outline';
-import {
-  BellIcon as BellSolidIcon
-} from '@heroicons/react/24/solid';
 
-
-
-
-
+import type { Video } from '../../../types/core';
 
 
 const WatchPage: React.FC = () => {
@@ -27,7 +16,7 @@ const WatchPage: React.FC = () => {
   const [recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
 
   const [loading, setLoading] = useState(true);
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showFullDescription, _setShowFullDescription] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
 
@@ -92,7 +81,7 @@ const WatchPage: React.FC = () => {
         isShort: false,
         visibility: 'public' as const,
         createdAt: '2024-01-15T10:30:00Z',
-        updatedAt: '2024-01-15T10:30:00Z'
+        updatedAt: '2024-01-15T10:30:00Z',
       };
       setVideo(mockVideo);
     } catch (error) {
@@ -101,7 +90,6 @@ const WatchPage: React.FC = () => {
       setLoading(false);
     }
   };
-
 
 
   const loadRecommendations = async () => {
@@ -128,7 +116,7 @@ const WatchPage: React.FC = () => {
           tags: ['nextjs', 'react', 'web development'],
           isLive: false,
           isShort: false,
-          visibility: 'public'
+          visibility: 'public',
         },
         {
           id: 'rec2',
@@ -150,7 +138,7 @@ const WatchPage: React.FC = () => {
           tags: ['typescript', 'programming', 'types'],
           isLive: false,
           isShort: false,
-          visibility: 'public'
+          visibility: 'public',
         },
         {
           id: 'rec3',
@@ -172,8 +160,8 @@ const WatchPage: React.FC = () => {
           tags: ['react', 'testing', 'javascript'],
           isLive: false,
           isShort: false,
-          visibility: 'public'
-        }
+          visibility: 'public',
+        },
       ];
       setRecommendedVideos(mockRecommendations);
     } catch (error) {
@@ -182,17 +170,15 @@ const WatchPage: React.FC = () => {
   };
 
 
-
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
   };
 
 
-
   if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600" />
       </div>
     );
   }
@@ -218,7 +204,7 @@ const WatchPage: React.FC = () => {
             <div className="bg-black rounded-lg overflow-hidden mb-4">
               <VideoPlayer
                 videoId={video.id}
-                src={video.videoUrl || `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                src={video.videoUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
                 poster={video.thumbnailUrl}
                 title={video.title}
                 autoplay={false}

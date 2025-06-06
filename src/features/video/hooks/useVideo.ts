@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { videoService } from '../services/videoService';
 
 // Video query key factory

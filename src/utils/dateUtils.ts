@@ -11,41 +11,41 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
   try {
     const now = new Date();
     const targetDate = new Date(date);
-    
+
     if (isNaN(targetDate.getTime())) {
       return 'Invalid date';
     }
-    
+
     const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000);
-    
+
     if (diffInSeconds < 0) {
       return 'in the future';
     }
-    
+
     if (diffInSeconds < 60) {
       return 'just now';
     }
-    
+
     if (diffInSeconds < 3600) {
       const minutes = Math.floor(diffInSeconds / 60);
       return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
     }
-    
+
     if (diffInSeconds < 86400) {
       const hours = Math.floor(diffInSeconds / 3600);
       return `${hours} hour${hours === 1 ? '' : 's'} ago`;
     }
-    
+
     if (diffInSeconds < 2592000) {
       const days = Math.floor(diffInSeconds / 86400);
       return `${days} day${days === 1 ? '' : 's'} ago`;
     }
-    
+
     if (diffInSeconds < 31536000) {
       const months = Math.floor(diffInSeconds / 2592000);
       return `${months} month${months === 1 ? '' : 's'} ago`;
     }
-    
+
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years} year${years === 1 ? '' : 's'} ago`;
   } catch (error) {
@@ -63,41 +63,41 @@ export const formatShortDistanceToNow = (date: string | Date | number): string =
   try {
     const now = new Date();
     const targetDate = new Date(date);
-    
+
     if (isNaN(targetDate.getTime())) {
       return 'Invalid';
     }
-    
+
     const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000);
-    
+
     if (diffInSeconds < 0) {
       return 'future';
     }
-    
+
     if (diffInSeconds < 60) {
       return 'now';
     }
-    
+
     if (diffInSeconds < 3600) {
       const minutes = Math.floor(diffInSeconds / 60);
       return `${minutes}m ago`;
     }
-    
+
     if (diffInSeconds < 86400) {
       const hours = Math.floor(diffInSeconds / 3600);
       return `${hours}h ago`;
     }
-    
+
     if (diffInSeconds < 2592000) {
       const days = Math.floor(diffInSeconds / 86400);
       return `${days}d ago`;
     }
-    
+
     if (diffInSeconds < 31536000) {
       const months = Math.floor(diffInSeconds / 2592000);
       return `${months}mo ago`;
     }
-    
+
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years}y ago`;
   } catch (error) {
@@ -115,17 +115,17 @@ export const formatShortDistanceToNow = (date: string | Date | number): string =
 export const formatDate = (date: string | Date | number, options?: Intl.DateTimeFormatOptions): string => {
   try {
     const targetDate = new Date(date);
-    
+
     if (isNaN(targetDate.getTime())) {
       return 'Invalid date';
     }
-    
+
     const defaultOptions: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     };
-    
+
     return targetDate.toLocaleDateString('en-US', options || defaultOptions);
   } catch (error) {
     console.error('Error formatting date:', error);
@@ -142,16 +142,16 @@ export const formatDate = (date: string | Date | number, options?: Intl.DateTime
 export const formatTime = (date: string | Date | number, options?: Intl.DateTimeFormatOptions): string => {
   try {
     const targetDate = new Date(date);
-    
+
     if (isNaN(targetDate.getTime())) {
       return 'Invalid time';
     }
-    
+
     const defaultOptions: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
       minute: '2-digit',
     };
-    
+
     return targetDate.toLocaleTimeString('en-US', options || defaultOptions);
   } catch (error) {
     console.error('Error formatting time:', error);
@@ -166,7 +166,7 @@ export const formatTime = (date: string | Date | number, options?: Intl.DateTime
  */
 export const parseRelativeDate = (relativeDate: string | null | undefined): number => {
   const now = new Date().getTime();
-  
+
   // Safety check for null or undefined input
   if (relativeDate == null) {
     return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago as a fallback
@@ -174,16 +174,16 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
 
   const lowerDate = relativeDate.toLowerCase();
 
-  if (lowerDate === "just now") {
+  if (lowerDate === 'just now') {
     return now;
   }
 
   // Match "X unit(s) ago"
   const parts = lowerDate.match(/(\d+)\s+(hour|day|week|month|year)s?\s+ago/);
-  if (parts && parts[1]) {
+  if (parts?.[1]) {
     const value = parseInt(parts[1], 10);
     const unit = parts[2];
-    
+
     switch (unit) {
       case 'hour':
         return now - (value * 60 * 60 * 1000);
@@ -203,9 +203,9 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   // Attempt to parse as a direct date string as a fallback
   const directDate = new Date(relativeDate).getTime();
   if (!isNaN(directDate)) {
-    return directDate; 
+    return directDate;
   }
-  
+
   // Final fallback for unparsable dates: treat as very old
   return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago
 };

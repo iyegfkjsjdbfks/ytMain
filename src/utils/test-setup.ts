@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterEach, beforeAll, afterAll, vi } from 'vitest';
+
 import { server } from './mocks/server';
 
 // Cleanup after each test case (e.g. clearing jsdom)
@@ -328,11 +329,11 @@ Object.defineProperty(window, 'FileReader', {
     static readonly EMPTY = 0;
     static readonly LOADING = 1;
     static readonly DONE = 2;
-    
+
     readonly EMPTY = 0;
     readonly LOADING = 1;
     readonly DONE = 2;
-    
+
     result: string | ArrayBuffer | null = null;
     error: DOMException | null = null;
     readyState: number = 0;
@@ -412,10 +413,10 @@ expect.extend({
   },
 
   toHaveAccessibleName(received: Element, expectedName: string) {
-    const accessibleName = received.getAttribute('aria-label') || 
-                          received.getAttribute('aria-labelledby') || 
+    const accessibleName = received.getAttribute('aria-label') ||
+                          received.getAttribute('aria-labelledby') ||
                           received.textContent;
-    
+
     const hasExpectedName = accessibleName === expectedName;
 
     return {

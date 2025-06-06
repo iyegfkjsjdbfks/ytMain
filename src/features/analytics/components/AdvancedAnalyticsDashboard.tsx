@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useMemo  } from 'react';
+
 import {
   EyeIcon,
   ClockIcon,
@@ -80,8 +81,10 @@ const MetricCard: React.FC<MetricCardProps> = ({
   format = 'number',
 }) => {
   const formatValue = (val: string | number) => {
-    if (typeof val === 'string') return val;
-    
+    if (typeof val === 'string') {
+return val;
+}
+
     switch (format) {
       case 'duration':
         const hours = Math.floor(val / 3600);
@@ -234,7 +237,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
               Track your channel's performance and audience insights
             </p>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <select
               value={timeRange}
@@ -246,7 +249,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
               <option value="90d">Last 90 days</option>
               <option value="1y">Last year</option>
             </select>
-            
+
             <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
               <CalendarIcon className="w-4 h-4" />
               Export Report
@@ -309,7 +312,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Simple chart representation */}
           <div className="h-64 flex items-end justify-between gap-1">
             {chartData.slice(-14).map((item, index) => (
@@ -363,7 +366,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Audience Demographics
             </h3>
-            
+
             <div className="space-y-6">
               {/* Age Groups */}
               <div>

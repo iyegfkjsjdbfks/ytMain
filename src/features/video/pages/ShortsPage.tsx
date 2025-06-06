@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 /**
  * ShortsPage component for displaying short-form vertical videos

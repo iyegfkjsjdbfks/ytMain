@@ -1,5 +1,5 @@
-import { Video } from '../../../types/core';
-import { Channel, VideoVisibility } from '../types';
+import type { Video } from '../../../types/core';
+import type { Channel, VideoVisibility } from '../types';
 
 /**
  * Generate a random number between min and max (inclusive)
@@ -15,13 +15,13 @@ const randomDate = (monthsBack = 12): string => {
   const now = new Date();
   const randomMonths = randomInt(0, monthsBack);
   const randomDays = randomInt(0, 30);
-  
+
   const date = new Date(
     now.getFullYear(),
     now.getMonth() - randomMonths,
-    now.getDate() - randomDays
+    now.getDate() - randomDays,
   );
-  
+
   return date.toISOString();
 };
 
@@ -34,36 +34,36 @@ export const mockChannels: Channel[] = [
     name: 'Tech Insights',
     avatarUrl: 'https://via.placeholder.com/150/3498db/FFFFFF?text=TI',
     subscribers: 1250000,
-    isVerified: true
+    isVerified: true,
   },
   {
     id: 'channel-2',
     name: 'Gaming Universe',
     avatarUrl: 'https://via.placeholder.com/150/e74c3c/FFFFFF?text=GU',
     subscribers: 876000,
-    isVerified: true
+    isVerified: true,
   },
   {
     id: 'channel-3',
     name: 'Creative Studio',
     avatarUrl: 'https://via.placeholder.com/150/2ecc71/FFFFFF?text=CS',
     subscribers: 450000,
-    isVerified: false
+    isVerified: false,
   },
   {
     id: 'channel-4',
     name: 'Daily Vlogs',
     avatarUrl: 'https://via.placeholder.com/150/f39c12/FFFFFF?text=DV',
     subscribers: 220000,
-    isVerified: false
+    isVerified: false,
   },
   {
     id: 'channel-5',
     name: 'Science Explained',
     avatarUrl: 'https://via.placeholder.com/150/9b59b6/FFFFFF?text=SE',
     subscribers: 1800000,
-    isVerified: true
-  }
+    isVerified: true,
+  },
 ];
 
 /**
@@ -89,7 +89,7 @@ const videoTitles = [
   'Creating a Dark Mode Toggle with CSS Variables',
   'Web Development Roadmap for 2025',
   'Testing React Components with Jest and Testing Library',
-  'CSS-in-JS Solutions Compared'
+  'CSS-in-JS Solutions Compared',
 ];
 
 /**
@@ -128,7 +128,7 @@ export const generateMockVideo = (id?: string): Video => {
     // Backward compatibility
     channelId: selectedChannel.id,
     channelName: selectedChannel.name,
-    channelAvatarUrl: selectedChannel.avatarUrl || ''
+    channelAvatarUrl: selectedChannel.avatarUrl || '',
   };
 };
 
@@ -136,8 +136,8 @@ export const generateMockVideo = (id?: string): Video => {
  * Generate an array of mock videos
  */
 export const generateMockVideos = (count = 12): Video[] => {
-  return Array.from({ length: count }, (_, index) => 
-    generateMockVideo(`video-${index + 1}`)
+  return Array.from({ length: count }, (_, index) =>
+    generateMockVideo(`video-${index + 1}`),
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 /**
  * HistoryPage component for displaying user's watch history

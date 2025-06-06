@@ -4,6 +4,7 @@
  */
 
 import { api } from '../../../services/api/base';
+
 import type { Playlist, Video, ApiResponse } from '../../../types/core';
 
 export interface CreatePlaylistData {
@@ -57,7 +58,7 @@ class PlaylistService {
   async getPlaylistVideos(
     playlistId: string,
     page: number = 1,
-    limit: number = 50
+    limit: number = 50,
   ): Promise<ApiResponse<Video[]>> {
     return api.get(`/api/playlists/${playlistId}/videos`, { page, limit });
   }
@@ -99,7 +100,7 @@ class PlaylistService {
    */
   async removeVideoFromPlaylist(
     playlistId: string,
-    videoId: string
+    videoId: string,
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}/videos/${videoId}`);
   }
@@ -118,7 +119,7 @@ class PlaylistService {
    */
   async duplicatePlaylist(
     playlistId: string,
-    newTitle?: string
+    newTitle?: string,
   ): Promise<ApiResponse<Playlist>> {
     return api.post(`/api/playlists/${playlistId}/duplicate`, {
       title: newTitle,
@@ -131,7 +132,7 @@ class PlaylistService {
   async getUserPublicPlaylists(
     userId: string,
     page: number = 1,
-    limit: number = 20
+    limit: number = 20,
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get(`/api/users/${userId}/playlists`, { page, limit });
   }
@@ -141,7 +142,7 @@ class PlaylistService {
    */
   async searchPlaylists(
     query: string,
-    filters: Omit<PlaylistFilters, 'search'> = {}
+    filters: Omit<PlaylistFilters, 'search'> = {},
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/playlists/search', { query, ...filters });
   }
@@ -151,7 +152,7 @@ class PlaylistService {
    */
   async getFeaturedPlaylists(
     page: number = 1,
-    limit: number = 20
+    limit: number = 20,
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/playlists/featured', { page, limit });
   }
@@ -161,7 +162,7 @@ class PlaylistService {
    */
   async isVideoInPlaylist(
     playlistId: string,
-    videoId: string
+    videoId: string,
   ): Promise<ApiResponse<boolean>> {
     return api.get(`/api/playlists/${playlistId}/videos/${videoId}/exists`);
   }
@@ -183,7 +184,7 @@ class PlaylistService {
    */
   async exportPlaylist(
     playlistId: string,
-    format: 'json' | 'csv' | 'm3u'
+    format: 'json' | 'csv' | 'm3u',
   ): Promise<ApiResponse<string>> {
     return api.get(`/api/playlists/${playlistId}/export`, { format });
   }
@@ -193,7 +194,7 @@ class PlaylistService {
    */
   async importPlaylist(
     file: File,
-    format: 'json' | 'csv' | 'm3u'
+    format: 'json' | 'csv' | 'm3u',
   ): Promise<ApiResponse<Playlist>> {
     return api.upload('/api/playlists/import', file, { format });
   }
@@ -203,7 +204,7 @@ class PlaylistService {
    */
   async getRecommendedPlaylists(
     page: number = 1,
-    limit: number = 20
+    limit: number = 20,
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/playlists/recommendations', { page, limit });
   }
@@ -224,7 +225,7 @@ class PlaylistService {
    */
   async getFollowedPlaylists(
     page: number = 1,
-    limit: number = 20
+    limit: number = 20,
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/playlists/followed', { page, limit });
   }
@@ -235,7 +236,7 @@ class PlaylistService {
   async addCollaborator(
     playlistId: string,
     userId: string,
-    permissions: ('view' | 'edit' | 'manage')[]
+    permissions: Array<'view' | 'edit' | 'manage'>,
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/playlists/${playlistId}/collaborators`, {
       userId,
@@ -245,7 +246,7 @@ class PlaylistService {
 
   async removeCollaborator(
     playlistId: string,
-    userId: string
+    userId: string,
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}/collaborators/${userId}`);
   }
@@ -253,13 +254,13 @@ class PlaylistService {
   /**
    * Get playlist collaborators
    */
-  async getPlaylistCollaborators(playlistId: string): Promise<ApiResponse<{
+  async getPlaylistCollaborators(playlistId: string): Promise<ApiResponse<Array<{
     userId: string;
     username: string;
     avatar?: string;
     permissions: string[];
     addedAt: string;
-  }[]>> {
+  }>>> {
     return api.get(`/api/playlists/${playlistId}/collaborators`);
   }
 
@@ -268,18 +269,18 @@ class PlaylistService {
    */
   async bulkAddVideos(
     playlistId: string,
-    videoIds: string[]
+    videoIds: string[],
   ): Promise<ApiResponse<{ success: string[]; failed: string[] }>> {
     return api.post(`/api/playlists/${playlistId}/videos/bulk`, { videoIds });
   }
 
   async bulkRemoveVideos(
     playlistId: string,
-    videoIds: string[]
+    videoIds: string[],
   ): Promise<ApiResponse<{ success: string[]; failed: string[] }>> {
     return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
       body: JSON.stringify({ videoIds }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 
@@ -295,7 +296,7 @@ class PlaylistService {
    */
   async uploadThumbnail(
     playlistId: string,
-    thumbnail: File
+    thumbnail: File,
   ): Promise<ApiResponse<string>> {
     return api.upload(`/api/playlists/${playlistId}/thumbnail`, thumbnail);
   }

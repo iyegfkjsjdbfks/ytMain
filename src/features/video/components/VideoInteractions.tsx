@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+
 import {
   HandThumbUpIcon,
   HandThumbDownIcon,
@@ -14,6 +15,7 @@ import {
   HandThumbDownIcon as HandThumbDownSolidIcon,
   BookmarkIcon as BookmarkSolidIcon,
 } from '@heroicons/react/24/solid';
+
 import { useVideoInteractions } from '../hooks/useVideoInteractions';
 
 interface VideoInteractionsProps {
@@ -60,7 +62,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   const shareToSocial = (platform: string) => {
     const url = encodeURIComponent(getShareUrl());
     const title = encodeURIComponent(videoTitle);
-    
+
     const shareUrls = {
       twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
@@ -76,7 +78,9 @@ const ShareModal: React.FC<ShareModalProps> = ({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -192,8 +196,12 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
   }, []);
 
   const formatCount = (count: number): string => {
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    if (count >= 1000000) {
+return `${(count / 1000000).toFixed(1)}M`;
+}
+    if (count >= 1000) {
+return `${(count / 1000).toFixed(1)}K`;
+}
     return count.toString();
   };
 
@@ -221,8 +229,8 @@ export const VideoInteractions: React.FC<VideoInteractionsProps> = ({
 
   const buttonClasses = `${getSizeClasses()} font-medium rounded-full transition-all duration-200 flex items-center gap-2 disabled:opacity-50`;
 
-  const containerClasses = layout === 'vertical' 
-    ? 'flex flex-col gap-2' 
+  const containerClasses = layout === 'vertical'
+    ? 'flex flex-col gap-2'
     : 'flex items-center gap-2 flex-wrap';
 
   return (

@@ -9,22 +9,24 @@
  * @returns A string representation of the number with suffix.
  */
 export const formatCount = (num: number, digits: number = 0): string => {
-  if (isNaN(num) || num < 0) return '0';
-  
+  if (isNaN(num) || num < 0) {
+return '0';
+}
+
   const lookup = [
-    { value: 1, symbol: "" },
-    { value: 1e3, symbol: "K" },
-    { value: 1e6, symbol: "M" },
-    { value: 1e9, symbol: "B" },
-    { value: 1e12, symbol: "T" }
+    { value: 1, symbol: '' },
+    { value: 1e3, symbol: 'K' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e9, symbol: 'B' },
+    { value: 1e12, symbol: 'T' },
   ];
-  
+
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-  const item = lookup.slice().reverse().find(function(item) {
+  const item = lookup.slice().reverse().find((item) => {
     return num >= item.value;
   });
-  
-  return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+
+  return item ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0';
 };
 
 /**
@@ -38,17 +40,19 @@ export const formatNumber = formatCount;
  * @returns A string representation of the duration
  */
 export const formatDuration = (seconds: number): string => {
-  if (isNaN(seconds) || seconds < 0) return '0:00';
-  
+  if (isNaN(seconds) || seconds < 0) {
+return '0:00';
+}
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);
-  
+
   if (hours > 0) {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  } else {
-    return `${minutes}:${secs.toString().padStart(2, '0')}`;
   }
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+
 };
 
 /**
@@ -57,7 +61,9 @@ export const formatDuration = (seconds: number): string => {
  * @returns A string with comma separators
  */
 export const formatWithCommas = (num: number): string => {
-  if (isNaN(num)) return '0';
+  if (isNaN(num)) {
+return '0';
+}
   return num.toLocaleString();
 };
 
@@ -68,7 +74,9 @@ export const formatWithCommas = (num: number): string => {
  * @returns Formatted percentage string
  */
 export const formatPercentage = (value: number, decimals: number = 1): string => {
-  if (isNaN(value)) return '0%';
+  if (isNaN(value)) {
+return '0%';
+}
   return `${value.toFixed(decimals)}%`;
 };
 
@@ -78,13 +86,17 @@ export const formatPercentage = (value: number, decimals: number = 1): string =>
  * @returns Formatted file size string
  */
 export const formatFileSize = (bytes: number): string => {
-  if (isNaN(bytes) || bytes < 0) return '0 B';
-  
+  if (isNaN(bytes) || bytes < 0) {
+return '0 B';
+}
+
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
-  
-  if (i === 0) return `${bytes} ${sizes[i]}`;
-  
+
+  if (i === 0) {
+return `${bytes} ${sizes[i]}`;
+}
+
   const formatted = (bytes / Math.pow(1024, i)).toFixed(1);
   return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted} ${sizes[i]}`;
 };

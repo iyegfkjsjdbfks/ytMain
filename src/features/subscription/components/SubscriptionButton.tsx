@@ -1,7 +1,9 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { BellIcon, BellSlashIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+
 import { useSubscription } from '../hooks/useSubscription';
 
 interface SubscriptionButtonProps {
@@ -24,7 +26,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   variant = 'default',
 }) => {
   const [showNotificationMenu, setShowNotificationMenu] = useState(false);
-  
+
   const {
     isSubscribed,
     notificationLevel,
@@ -48,9 +50,15 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   };
 
   const formatSubscriberCount = (count?: number): string => {
-    if (!count) return '';
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    if (!count) {
+return '';
+}
+    if (count >= 1000000) {
+return `${(count / 1000000).toFixed(1)}M`;
+}
+    if (count >= 1000) {
+return `${(count / 1000).toFixed(1)}K`;
+}
     return count.toString();
   };
 
@@ -119,7 +127,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
                 <div className="px-4 py-2 text-sm font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700">
                   Notifications
                 </div>
-                
+
                 <button
                   onClick={() => handleNotificationChange('all')}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${
@@ -206,7 +214,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
               <div className="px-4 py-2 text-sm font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700">
                 Notifications for {channelName}
               </div>
-              
+
               <button
                 onClick={() => handleNotificationChange('all')}
                 className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 ${

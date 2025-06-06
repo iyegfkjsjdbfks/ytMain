@@ -1,9 +1,11 @@
-import { formatNumber, getTimeAgo } from '@/lib/utils';
-import { Button } from '@/components/atoms/Button';
-import { cn } from '@/lib/utils';
-import { User, MoreVertical } from 'lucide-react';
 import { useState } from 'react';
+
+import { User, MoreVertical } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+import { Button } from '@/components/atoms/Button';
+import { formatNumber, getTimeAgo, cn } from '@/lib/utils';
+import type { VideoCardProps as VideoCardPropsBase } from '@/types';
 
 // Simple image component since we're not using Next.js
 const Image = ({
@@ -36,8 +38,6 @@ const Image = ({
     />
   );
 };
-
-import { VideoCardProps as VideoCardPropsBase } from '@/types';
 
 export interface VideoCardProps extends Omit<VideoCardPropsBase, 'onMoreClick'> {
   onMoreClick: (videoId: string) => void;
@@ -73,7 +73,7 @@ export const VideoCard = ({
             fill
             className={cn(
               'object-cover transition-transform duration-300',
-              isHovered ? 'scale-105' : 'scale-100'
+              isHovered ? 'scale-105' : 'scale-100',
             )}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
@@ -82,7 +82,7 @@ export const VideoCard = ({
           {formatDuration(duration)}
         </div>
       </div>
-      
+
       <div className="flex space-x-2">
         {showChannelInfo && (
           <Link to={`/channel/${channelId}`} className="shrink-0">
@@ -103,7 +103,7 @@ export const VideoCard = ({
             </div>
           </Link>
         )}
-        
+
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between">
             <h3 className="font-medium text-sm line-clamp-2">
@@ -115,13 +115,13 @@ export const VideoCard = ({
               variant="ghost"
               size="icon"
               className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
-              onClick={() => onMoreClick?.(id)}
+              onClick={() => onMoreClick(id)}
             >
               <MoreVertical className="h-4 w-4" />
               <span className="sr-only">More options</span>
             </Button>
           </div>
-          
+
           {showChannelInfo && (
             <div className="text-xs text-muted-foreground">
               <Link to={`/channel/${channelId}`} className="hover:text-foreground">
@@ -129,7 +129,7 @@ export const VideoCard = ({
               </Link>
             </div>
           )}
-          
+
           <div className="flex items-center text-xs text-muted-foreground">
             <span>{formatNumber(viewCount)} views</span>
             <span className="mx-1">•</span>
@@ -146,7 +146,7 @@ function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
-  
+
   return [h, m, s]
     .filter((v, i) => v > 0 || i > 0)
     .map(v => v.toString().padStart(2, '0'))

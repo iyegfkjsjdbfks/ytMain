@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+
 import {
   VideoCameraIcon,
   MicrophoneIcon,
@@ -179,7 +180,9 @@ export const LiveStreamStudio: React.FC = () => {
   };
 
   const sendChatMessage = () => {
-    if (!chatMessage.trim()) return;
+    if (!chatMessage.trim()) {
+return;
+}
 
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -214,7 +217,7 @@ export const LiveStreamStudio: React.FC = () => {
             {isStreaming && (
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
                   <span className="text-red-600 font-medium">LIVE</span>
                 </div>
                 <span className="text-gray-600 dark:text-gray-400">
@@ -255,7 +258,7 @@ export const LiveStreamStudio: React.FC = () => {
               {/* Stream Overlay */}
               {isStreaming && (
                 <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                   LIVE
                 </div>
               )}
@@ -395,7 +398,7 @@ export const LiveStreamStudio: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Live Chat
               </h3>
-              
+
               <div
                 ref={chatContainerRef}
                 className="h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3"
@@ -404,8 +407,8 @@ export const LiveStreamStudio: React.FC = () => {
                   <div key={message.id} className="text-sm">
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`font-medium ${
-                        message.isOwner ? 'text-red-600' : 
-                        message.isModerator ? 'text-green-600' : 
+                        message.isOwner ? 'text-red-600' :
+                        message.isModerator ? 'text-green-600' :
                         'text-gray-900 dark:text-white'
                       }`}>
                         {message.username}

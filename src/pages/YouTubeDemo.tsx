@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
 
@@ -12,17 +13,17 @@ const YouTubeDemo: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!videoUrl.trim()) {
       setError('Please enter a YouTube URL');
       return;
     }
-    
+
     if (!isYouTubeUrl(videoUrl)) {
       setError('Please enter a valid YouTube URL');
       return;
     }
-    
+
     const id = getYouTubeVideoId(videoUrl);
     if (id) {
       setVideoId(id);
@@ -35,7 +36,7 @@ const YouTubeDemo: React.FC = () => {
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <h1 className="text-3xl font-bold mb-6">YouTube Player Demo</h1>
-      
+
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <form onSubmit={handleSubmit} className="mb-6">
           <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -56,7 +57,7 @@ const YouTubeDemo: React.FC = () => {
               Load Video
             </button>
           </div>
-          
+
           <div className="flex flex-wrap gap-6">
             <label className="flex items-center space-x-2">
               <input
@@ -67,7 +68,7 @@ const YouTubeDemo: React.FC = () => {
               />
               <span>Use Custom Controls</span>
             </label>
-            
+
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -79,16 +80,16 @@ const YouTubeDemo: React.FC = () => {
             </label>
           </div>
         </form>
-        
+
         <div className="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden">
-          <YouTubePlayerExample 
+          <YouTubePlayerExample
             videoId={videoId}
             controls={!useCustomControls}
             autoplay={autoplay}
             className="w-full h-full"
           />
         </div>
-        
+
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <h2 className="text-xl font-semibold mb-3">Current Video Info</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -99,9 +100,9 @@ const YouTubeDemo: React.FC = () => {
             <div>
               <h3 className="font-medium text-gray-700">Video URL:</h3>
               <p className="break-all">
-                <a 
-                  href={`https://www.youtube.com/watch?v=${videoId}`} 
-                  target="_blank" 
+                <a
+                  href={`https://www.youtube.com/watch?v=${videoId}`}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"
                 >
@@ -112,10 +113,10 @@ const YouTubeDemo: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4">How to Use</h2>
-        
+
         <div className="prose max-w-none">
           <h3 className="text-xl font-semibold mt-4">Basic Usage</h3>
           <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
@@ -143,7 +144,7 @@ player.playVideo();
 player.pauseVideo();
 player.seekTo(60); // Seek to 1 minute`}
           </pre>
-          
+
           <h3 className="text-xl font-semibold mt-6">Using the React Component</h3>
           <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
             {`import { YouTubePlayerExample } from './components/examples/YouTubePlayerExample';

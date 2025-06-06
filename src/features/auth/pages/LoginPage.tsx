@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect  } from 'react';
+
 import { LoginForm } from '../components/LoginForm';
 import { useAuthStore } from '../store/authStore';
 

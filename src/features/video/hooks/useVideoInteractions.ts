@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { videoService } from '../services/videoService';
 
 interface VideoInteractionState {
@@ -20,10 +22,10 @@ interface UseVideoInteractionsOptions {
 
 export function useVideoInteractions(
   videoId: string,
-  options: UseVideoInteractionsOptions = {}
+  options: UseVideoInteractionsOptions = {},
 ) {
   const queryClient = useQueryClient();
-  
+
   const [state, setState] = useState<VideoInteractionState>({
     isLiked: options.initialIsLiked || false,
     isDisliked: options.initialIsDisliked || false,

@@ -1,8 +1,11 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { useAuthStore } from '../store/authStore';
-import { RegisterData } from '../types';
+
+import type { RegisterData } from '../types';
 
 /**
  * Registration form component with validation and error handling
@@ -10,16 +13,16 @@ import { RegisterData } from '../types';
 export const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
   const { register, error } = useAuthStore();
-  
+
   const [formData, setFormData] = useState<RegisterData>({
     username: '',
     email: '',
     password: '',
     displayName: '',
   });
-  
+
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   const [formErrors, setFormErrors] = useState({
     username: '',
     email: '',
@@ -27,9 +30,9 @@ export const RegisterForm: React.FC = () => {
     confirmPassword: '',
     displayName: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const validateForm = (): boolean => {
     let isValid = true;
     const errors = {
@@ -39,7 +42,7 @@ export const RegisterForm: React.FC = () => {
       confirmPassword: '',
       displayName: '',
     };
-    
+
     // Username validation
     if (!formData.username) {
       errors.username = 'Username is required';
@@ -48,13 +51,13 @@ export const RegisterForm: React.FC = () => {
       errors.username = 'Username must be at least 3 characters';
       isValid = false;
     }
-    
+
     // Display name validation
     if (!formData.displayName) {
       errors.displayName = 'Display name is required';
       isValid = false;
     }
-    
+
     // Email validation
     if (!formData.email) {
       errors.email = 'Email is required';
@@ -63,7 +66,7 @@ export const RegisterForm: React.FC = () => {
       errors.email = 'Email is invalid';
       isValid = false;
     }
-    
+
     // Password validation
     if (!formData.password) {
       errors.password = 'Password is required';
@@ -72,20 +75,20 @@ export const RegisterForm: React.FC = () => {
       errors.password = 'Password must be at least 8 characters';
       isValid = false;
     }
-    
+
     // Confirm password validation
     if (formData.password !== confirmPassword) {
       errors.confirmPassword = 'Passwords do not match';
       isValid = false;
     }
-    
+
     setFormErrors(errors);
     return isValid;
   };
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    
+
     if (name === 'confirmPassword') {
       setConfirmPassword(value);
     } else {
@@ -95,16 +98,16 @@ export const RegisterForm: React.FC = () => {
       });
     }
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       await register(formData);
       navigate('/');
@@ -114,17 +117,17 @@ export const RegisterForm: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Create an Account</h2>
-      
+
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
           {error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -145,7 +148,7 @@ export const RegisterForm: React.FC = () => {
             <p className="text-red-500 text-xs mt-1">{formErrors.username}</p>
           )}
         </div>
-        
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="displayName">
             Display Name
@@ -165,7 +168,7 @@ export const RegisterForm: React.FC = () => {
             <p className="text-red-500 text-xs mt-1">{formErrors.displayName}</p>
           )}
         </div>
-        
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             Email
@@ -185,7 +188,7 @@ export const RegisterForm: React.FC = () => {
             <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
           )}
         </div>
-        
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
             Password
@@ -205,7 +208,7 @@ export const RegisterForm: React.FC = () => {
             <p className="text-red-500 text-xs mt-1">{formErrors.password}</p>
           )}
         </div>
-        
+
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
             Confirm Password
@@ -225,7 +228,7 @@ export const RegisterForm: React.FC = () => {
             <p className="text-red-500 text-xs mt-1">{formErrors.confirmPassword}</p>
           )}
         </div>
-        
+
         <button
           type="submit"
           className={`w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${
@@ -235,7 +238,7 @@ export const RegisterForm: React.FC = () => {
         >
           {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </button>
-        
+
         <div className="text-center mt-4">
           <span className="text-gray-600">Already have an account?</span>{' '}
           <a href="/login" className="text-blue-600 hover:text-blue-800">

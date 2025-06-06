@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -140,14 +141,17 @@ export const VideoEditor: React.FC = () => {
   };
 
 
-
   const splitClip = (clipId: string, splitTime: number) => {
     setEditorState(prev => {
       const clipIndex = prev.clips.findIndex(c => c.id === clipId);
-      if (clipIndex === -1) return prev;
+      if (clipIndex === -1) {
+return prev;
+}
 
       const originalClip = prev.clips[clipIndex];
-      if (!originalClip) return prev; // Additional safety check
+      if (!originalClip) {
+return prev;
+} // Additional safety check
 
       const firstPart: VideoClip = {
         ...originalClip,
@@ -183,7 +187,9 @@ export const VideoEditor: React.FC = () => {
   };
 
   const addTextOverlay = () => {
-    if (!newTextOverlay.text?.trim()) return;
+    if (!newTextOverlay.text?.trim()) {
+return;
+}
 
     const overlay: TextOverlay = {
       id: `text_${Date.now()}`,
@@ -264,12 +270,12 @@ export const VideoEditor: React.FC = () => {
                 className="max-w-full max-h-full"
                 poster="https://picsum.photos/800/450?random=3"
               />
-              
+
               {/* Text Overlays Preview */}
               {editorState.textOverlays
-                .filter(overlay => 
-                  editorState.currentTime >= overlay.startTime && 
-                  editorState.currentTime <= overlay.endTime
+                .filter(overlay =>
+                  editorState.currentTime >= overlay.startTime &&
+                  editorState.currentTime <= overlay.endTime,
                 )
                 .map(overlay => (
                   <div
@@ -304,7 +310,7 @@ export const VideoEditor: React.FC = () => {
                   <PlayIcon className="w-6 h-6" />
                 )}
               </button>
-              
+
               <span className="text-sm font-mono text-gray-600 dark:text-gray-400">
                 {formatTime(editorState.currentTime)} / {formatTime(editorState.duration)}
               </span>
@@ -416,7 +422,7 @@ export const VideoEditor: React.FC = () => {
                 className="absolute top-0 bottom-0 w-0.5 bg-red-500 pointer-events-none"
                 style={{ left: `${editorState.currentTime * editorState.zoom * 10}px` }}
               >
-                <div className="w-3 h-3 bg-red-500 rounded-full -ml-1.5 -mt-1"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full -ml-1.5 -mt-1" />
               </div>
             </div>
           </div>
@@ -445,7 +451,7 @@ export const VideoEditor: React.FC = () => {
                     setEditorState(prev => ({
                       ...prev,
                       clips: prev.clips.map(clip =>
-                        clip.id === prev.selectedClip ? { ...clip, volume } : clip
+                        clip.id === prev.selectedClip ? { ...clip, volume } : clip,
                       ),
                     }));
                   }}
@@ -484,7 +490,7 @@ export const VideoEditor: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Add Text Overlay
             </h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

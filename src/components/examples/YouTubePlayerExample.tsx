@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useRef, useState  } from 'react';
+
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
 
 interface YouTubePlayerExampleProps {
@@ -37,13 +38,17 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
 
   // Initialize player
   useEffect(() => {
-    if (!videoId) return;
+    if (!videoId) {
+return;
+}
 
     const playerElement = document.getElementById('youtube-player');
-    if (!playerElement) return;
+    if (!playerElement) {
+return;
+}
 
     let isMounted = true;
-    
+
     const initializePlayer = async () => {
       try {
         const player = new YouTubePlayer(
@@ -62,8 +67,10 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
             },
             events: {
               onReady: async (event) => {
-                if (!isMounted) return;
-                
+                if (!isMounted) {
+return;
+}
+
                 // Start progress tracking
                 progressInterval.current = setInterval(async () => {
                   if (playerRef.current && isMounted) {
@@ -74,7 +81,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
                         playerRef.current.getVolume(),
                         playerRef.current.isMuted(),
                       ]);
-                      
+
                       if (isMounted) {
                         setCurrentTime(time);
                         setDuration(dur);
@@ -88,13 +95,15 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
                 }, 500);
               },
               onStateChange: (event) => {
-                if (!isMounted) return;
+                if (!isMounted) {
+return;
+}
                 const state = event.data;
                 setPlayerState(state);
                 setIsPlaying(state === YouTubePlayerState.PLAYING);
               },
             },
-          }
+          },
         );
 
         if (isMounted) {
@@ -112,12 +121,12 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
     // Cleanup
     return () => {
       isMounted = false;
-      
+
       if (progressInterval.current) {
         clearInterval(progressInterval.current);
         progressInterval.current = null;
       }
-      
+
       if (playerRef.current) {
         playerRef.current.destroy();
         playerRef.current = null;
@@ -127,8 +136,10 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
 
   // Player control methods
   const togglePlay = async () => {
-    if (!playerRef.current) return;
-    
+    if (!playerRef.current) {
+return;
+}
+
     try {
       if (isPlaying) {
         await playerRef.current.pauseVideo();
@@ -142,8 +153,10 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   };
 
   const toggleMute = async () => {
-    if (!playerRef.current) return;
-    
+    if (!playerRef.current) {
+return;
+}
+
     try {
       if (isMuted) {
         await playerRef.current.unMute();
@@ -158,11 +171,13 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   };
 
   const handleSeek = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!playerRef.current) return;
-    
+    if (!playerRef.current) {
+return;
+}
+
     const newTime = parseFloat(e.target.value);
     setCurrentTime(newTime);
-    
+
     try {
       await playerRef.current.seekTo(newTime, true);
     } catch (error) {
@@ -171,14 +186,16 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   };
 
   const handleVolumeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!playerRef.current) return;
-    
+    if (!playerRef.current) {
+return;
+}
+
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
-    
+
     try {
       await playerRef.current.setVolume(newVolume);
-      
+
       // Update mute state based on volume
       if (newVolume === 0) {
         setIsMuted(true);
@@ -193,7 +210,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
   return (
     <div className={`youtube-player-container ${className}`}>
       <div id="youtube-player" className="w-full" />
-      
+
       {/* Custom Controls */}
       {!controls && (
         <div className="mt-2 bg-gray-100 p-2 rounded">
@@ -205,7 +222,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
             >
               {isPlaying ? '⏸' : '▶️'}
             </button>
-            
+
             <div className="flex-1">
               <input
                 type="range"
@@ -217,11 +234,11 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
                 aria-label="Seek"
               />
             </div>
-            
+
             <div className="text-sm text-gray-600 w-20 text-right">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
-            
+
             <button
               onClick={toggleMute}
               className="p-2 rounded-full hover:bg-gray-200"
@@ -229,7 +246,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
             >
               {isMuted ? '🔇' : volume > 50 ? '🔊' : '🔉'}
             </button>
-            
+
             <div className="w-24">
               <input
                 type="range"
@@ -242,7 +259,7 @@ export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
               />
             </div>
           </div>
-          
+
           <div className="text-xs text-gray-500">
             Player State: {YouTubePlayerState[playerState || -1]}
           </div>

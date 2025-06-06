@@ -1,5 +1,7 @@
 import { useEffect, useCallback } from 'react';
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { notificationService, type Notification } from '../services/notificationService';
 
 export function useNotifications() {
@@ -75,7 +77,7 @@ export function useNotifications() {
       handleRealTimeNotification,
       (error) => {
         console.error('Real-time notification error:', error);
-      }
+      },
     );
 
     return () => {

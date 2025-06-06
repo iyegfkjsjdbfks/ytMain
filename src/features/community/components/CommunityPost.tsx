@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import {
   HandThumbUpIcon,
   HandThumbDownIcon,
@@ -23,12 +24,12 @@ export interface CommunityPostData {
   isVerified: boolean;
   content: string;
   type: 'text' | 'image' | 'video' | 'poll' | 'quiz';
-  media?: {
+  media?: Array<{
     type: 'image' | 'video';
     url: string;
     thumbnail?: string;
     alt?: string;
-  }[];
+  }>;
   poll?: {
     question: string;
     options: Array<{
@@ -76,8 +77,12 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const formatCount = (count: number): string => {
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    if (count >= 1000000) {
+return `${(count / 1000000).toFixed(1)}M`;
+}
+    if (count >= 1000) {
+return `${(count / 1000).toFixed(1)}K`;
+}
     return count.toString();
   };
 
@@ -317,8 +322,8 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
         >
           <div className="max-w-4xl max-h-full p-4">
             <img
-              src={post.media?.[selectedImage]?.url || ''}
-              alt={post.media?.[selectedImage]?.alt || 'Post image'}
+              src={post.media[selectedImage]?.url || ''}
+              alt={post.media[selectedImage]?.alt || 'Post image'}
               className="max-w-full max-h-full object-contain"
             />
           </div>

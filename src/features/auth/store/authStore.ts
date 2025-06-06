@@ -1,6 +1,8 @@
 import { create } from 'zustand';
-import { AuthState, LoginCredentials, RegisterData, User } from '../types';
+
 import { authService } from '../services/authService';
+
+import type { AuthState, LoginCredentials, RegisterData, User } from '../types';
 
 interface AuthStore extends AuthState {
   login: (credentials: LoginCredentials) => Promise<User>;
@@ -23,19 +25,19 @@ export const useAuthStore = create<AuthStore>((set) => ({
   isLoading: true,
   error: null,
 
-  setUser: (user) => set({ 
-    user, 
+  setUser: (user) => set({
+    user,
     isAuthenticated: !!user,
-    error: null
+    error: null,
   }),
 
   setError: (error) => set({ error }),
-  
+
   setLoading: (isLoading) => set({ isLoading }),
 
   login: async (credentials) => {
     set({ isLoading: true, error: null });
-    
+
     try {
       const user = await authService.login(credentials);
       set({ user, isAuthenticated: true, isLoading: false });
@@ -49,7 +51,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   register: async (data) => {
     set({ isLoading: true, error: null });
-    
+
     try {
       const user = await authService.register(data);
       set({ user, isAuthenticated: true, isLoading: false });
@@ -63,7 +65,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   logout: async () => {
     set({ isLoading: true });
-    
+
     try {
       await authService.logout();
     } finally {
@@ -73,20 +75,20 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   checkAuth: async () => {
     set({ isLoading: true });
-    
+
     try {
       const user = await authService.getCurrentUser();
-      set({ 
-        user, 
+      set({
+        user,
         isAuthenticated: !!user,
-        isLoading: false 
+        isLoading: false,
       });
     } catch (error) {
       console.error('Auth check failed:', error);
-      set({ 
-        user: null, 
-        isAuthenticated: false, 
-        isLoading: false 
+      set({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
       });
     }
   },

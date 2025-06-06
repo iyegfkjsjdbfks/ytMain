@@ -3,8 +3,10 @@
  * Refactored video hooks using the new unified API system
  */
 
-import { useQuery, useMutation, type UseApiConfig } from './useApi';
 import { videoApi, type GetVideosParams, type VideoUploadData } from '../../services/api/videos';
+
+import { useQuery, useMutation, type UseApiConfig } from './useApi';
+
 import type { Video, Short } from '../../types/core';
 
 // Video hooks
@@ -15,7 +17,7 @@ export function useVideos(params: GetVideosParams = {}, config?: UseApiConfig<Vi
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -27,7 +29,7 @@ export function useVideo(videoId: string, config?: UseApiConfig<Video>) {
       enabled: !!videoId,
       staleTime: 10 * 60 * 1000, // 10 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -39,7 +41,7 @@ export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
       staleTime: 2 * 60 * 1000, // 2 minutes
       refetchOnWindowFocus: true,
       ...config,
-    }
+    },
   );
 }
 
@@ -50,7 +52,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -62,7 +64,7 @@ export function useVideosByCategory(category: string, config?: UseApiConfig<Vide
       enabled: !!category,
       staleTime: 5 * 60 * 1000, // 5 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -74,7 +76,7 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
       staleTime: 1 * 60 * 1000, // 1 minute
       refetchOnWindowFocus: true,
       ...config,
-    }
+    },
   );
 }
 
@@ -86,7 +88,7 @@ export function useRelatedVideos(videoId: string, config?: UseApiConfig<Video[]>
       enabled: !!videoId,
       staleTime: 10 * 60 * 1000, // 10 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -98,7 +100,7 @@ export function useRecommendations(config?: UseApiConfig<Video[]>) {
       staleTime: 5 * 60 * 1000, // 5 minutes
       refetchOnWindowFocus: true,
       ...config,
-    }
+    },
   );
 }
 
@@ -109,7 +111,7 @@ export function useWatchHistory(config?: UseApiConfig<Video[]>) {
     {
       staleTime: 1 * 60 * 1000, // 1 minute
       ...config,
-    }
+    },
   );
 }
 
@@ -120,7 +122,7 @@ export function useLikedVideos(config?: UseApiConfig<Video[]>) {
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -131,7 +133,7 @@ export function useSavedVideos(config?: UseApiConfig<Video[]>) {
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -144,7 +146,7 @@ export function useShorts(config?: UseApiConfig<Short[]>) {
       staleTime: 2 * 60 * 1000, // 2 minutes
       refetchOnWindowFocus: true,
       ...config,
-    }
+    },
   );
 }
 
@@ -156,7 +158,7 @@ export function useTrendingShorts(config?: UseApiConfig<Short[]>) {
       staleTime: 1 * 60 * 1000, // 1 minute
       refetchOnWindowFocus: true,
       ...config,
-    }
+    },
   );
 }
 
@@ -169,7 +171,7 @@ export function useSearchVideos(query: string, config?: UseApiConfig<Video[]>) {
       enabled: !!query && query.length > 2,
       staleTime: 5 * 60 * 1000, // 5 minutes
       ...config,
-    }
+    },
   );
 }
 
@@ -183,7 +185,7 @@ export function useUploadVideo() {
       onError: (error) => {
         console.error('Video upload failed:', error.message);
       },
-    }
+    },
   );
 }
 
@@ -193,7 +195,7 @@ export function useUpdateVideo() {
     {
       onSuccess: (data) => {
         },
-    }
+    },
   );
 }
 
@@ -203,7 +205,7 @@ export function useDeleteVideo() {
     {
       onSuccess: (_, videoId) => {
         },
-    }
+    },
   );
 }
 
@@ -213,7 +215,7 @@ export function useLikeVideo() {
     {
       onSuccess: (_, videoId) => {
         },
-    }
+    },
   );
 }
 
@@ -223,7 +225,7 @@ export function useUnlikeVideo() {
     {
       onSuccess: (_, videoId) => {
         },
-    }
+    },
   );
 }
 
@@ -233,7 +235,7 @@ export function useSaveVideo() {
     {
       onSuccess: (_, videoId) => {
         },
-    }
+    },
   );
 }
 
@@ -243,13 +245,13 @@ export function useUnsaveVideo() {
     {
       onSuccess: (_, videoId) => {
         },
-    }
+    },
   );
 }
 
 export function useIncrementViews() {
   return useMutation<void, string>(
-    (videoId) => videoApi.incrementViews(videoId)
+    (videoId) => videoApi.incrementViews(videoId),
   );
 }
 
@@ -259,7 +261,7 @@ export function useReportVideo() {
     {
       onSuccess: () => {
         },
-    }
+    },
   );
 }
 
@@ -271,7 +273,7 @@ export function useVideoCategories(config?: UseApiConfig<string[]>) {
     {
       staleTime: 60 * 60 * 1000, // 1 hour
       ...config,
-    }
+    },
   );
 }
 

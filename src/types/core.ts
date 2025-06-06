@@ -334,7 +334,7 @@ export interface SearchFilters {
   duration?: 'short' | 'medium' | 'long';
   uploadDate?: 'hour' | 'today' | 'week' | 'month' | 'year';
   sortBy?: 'relevance' | 'upload_date' | 'view_count' | 'rating';
-  features?: ('live' | 'hd' | 'subtitles' | 'creative_commons')[];
+  features?: Array<'live' | 'hd' | 'subtitles' | 'creative_commons'>;
 }
 
 // API Response Types
@@ -383,7 +383,7 @@ export interface FormField {
   type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   required?: boolean;
   placeholder?: string;
-  options?: { label: string; value: string }[];
+  options?: Array<{ label: string; value: string }>;
   validation?: ValidationRule[];
 }
 

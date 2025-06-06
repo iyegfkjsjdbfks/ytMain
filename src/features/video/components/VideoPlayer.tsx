@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -9,7 +10,7 @@ import {
   ArrowsPointingInIcon,
   Cog6ToothIcon,
   ForwardIcon,
-  BackwardIcon
+  BackwardIcon,
 } from '@heroicons/react/24/outline';
 
 interface VideoPlayerProps {
@@ -58,7 +59,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   onPlay,
   onPause,
   onEnded,
-  useYouTube = false
+  useYouTube = false,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     showControls: true,
     buffered: 0,
     playbackRate: 1,
-    quality: 'auto'
+    quality: 'auto',
   });
 
   const [showSettings, setShowSettings] = useState(false);
@@ -84,7 +85,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   // If using YouTube, render iframe
   if (useYouTube || (!src && videoId)) {
     const videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&start=${Math.floor(startTime)}&enablejsapi=1&origin=${window.location.origin}`;
-    
+
     return (
       <div className={`video-player-container ${className}`}>
         <div className="video-player-wrapper relative">
@@ -103,7 +104,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const handleLoadedMetadata = () => {
       setState(prev => ({ ...prev, duration: video.duration }));
@@ -114,8 +117,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
 
     const handleTimeUpdate = () => {
-      const currentTime = video.currentTime;
-      const duration = video.duration;
+      const { currentTime } = video;
+      const { duration } = video;
       setState(prev => ({ ...prev, currentTime }));
       onTimeUpdate?.(currentTime, duration);
     };
@@ -146,7 +149,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setState(prev => ({
         ...prev,
         volume: video.volume,
-        isMuted: video.muted
+        isMuted: video.muted,
       }));
     };
 
@@ -173,7 +176,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleFullscreenChange = () => {
       setState(prev => ({
         ...prev,
-        isFullscreen: !!document.fullscreenElement
+        isFullscreen: !!document.fullscreenElement,
       }));
     };
 
@@ -185,7 +188,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const togglePlay = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     if (state.isPlaying) {
       video.pause();
@@ -196,28 +201,36 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const seek = (time: number) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
 
   const setVolume = (volume: number) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.volume = Math.max(0, Math.min(1, volume));
   };
 
   const toggleMute = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.muted = !video.muted;
   };
 
   const toggleFullscreen = async () => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+return;
+}
 
     try {
       if (state.isFullscreen) {
@@ -232,7 +245,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const setPlaybackRate = (rate: number) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.playbackRate = rate;
     setState(prev => ({ ...prev, playbackRate: rate }));
@@ -240,7 +255,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const progressBar = progressRef.current;
-    if (!progressBar) return;
+    if (!progressBar) {
+return;
+}
 
     const rect = progressBar.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -251,11 +268,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const showControlsTemporarily = () => {
     setState(prev => ({ ...prev, showControls: true }));
-    
+
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
     }
-    
+
     controlsTimeoutRef.current = setTimeout(() => {
       if (state.isPlaying) {
         setState(prev => ({ ...prev, showControls: false }));
@@ -304,7 +321,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {/* Loading Overlay */}
       {!state.duration && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
         </div>
       )}
 
