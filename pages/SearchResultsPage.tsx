@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState, useMemo } from 'react';
+import * as React from 'react';
+import {  useEffect, useState, useMemo  } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';

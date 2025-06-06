@@ -1,4 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react';
+import * as React from 'react';
+import {  useState, useRef, useCallback  } from 'react';
 import { VideoUploadData, UploadProgress } from '../types';
 import { uploadVideo } from '../services/mockVideoService';
 import { useNavigate } from 'react-router-dom';

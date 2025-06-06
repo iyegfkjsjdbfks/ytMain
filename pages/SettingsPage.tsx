@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { useTheme } from '../contexts/ThemeContext';

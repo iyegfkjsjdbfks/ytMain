@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
 import { ContentItem } from '../types';
 import { getVideos } from '../services/mockVideoService';

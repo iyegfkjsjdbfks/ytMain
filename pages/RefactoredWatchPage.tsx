@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import * as React from 'react';
+import {  useState, useEffect, useCallback, useRef  } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import StandardPageLayout from '../components/StandardPageLayout';

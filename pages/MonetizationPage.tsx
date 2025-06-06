@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {

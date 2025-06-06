@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Video } from '../../../types/core';
 import { VideoPlayer } from '../components/VideoPlayer';

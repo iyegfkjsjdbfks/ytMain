@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, Suspense } from 'react';
+import * as React from 'react';
+import {  useState, useMemo, useCallback, Suspense  } from 'react';
 import { HomeIcon } from '@heroicons/react/24/solid';
 import { useHomeVideos } from '../hooks/useOptimizedVideoData';
 import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';

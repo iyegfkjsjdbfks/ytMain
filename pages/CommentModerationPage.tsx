@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
 import { Comment } from '../types';
 import { getVideos, getCommentsByVideoId } from '../services/mockVideoService';

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { LoginCredentials } from '../types';

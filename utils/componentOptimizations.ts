@@ -1,4 +1,5 @@
-import React, { ComponentType, memo, useMemo } from 'react';
+import * as React from 'react';
+import {  ComponentType, memo, useMemo  } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison

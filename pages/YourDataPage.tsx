@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/mockVideoService';
 

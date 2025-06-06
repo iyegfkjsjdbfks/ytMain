@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import { generateVideoIdeas } from '../services/geminiService';
 import { VideoIdeaResponse } from '../types';
 import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';

@@ -1,5 +1,6 @@
 
-import React, { useState, useMemo } from 'react';
+import * as React from 'react';
+import {  useState, useMemo  } from 'react';
 import { HomeIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
 import CategoryChips from '../components/CategoryChips';

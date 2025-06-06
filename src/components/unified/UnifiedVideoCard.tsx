@@ -3,7 +3,8 @@
  * Consolidates all video card variants into a single, comprehensive component
  */
 
-import React, { memo, useState } from 'react';
+import * as React from 'react';
+import {  memo, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { cn, formatRelativeTime, formatDuration } from '../../lib/utils';
 import { Video } from '../../types/core';

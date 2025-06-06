@@ -3,7 +3,8 @@
  * Displays playlist information with actions
  */
 
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { cn, formatRelativeTime } from '../../../lib/utils';
 import { UnifiedButton } from '../../../components/unified';

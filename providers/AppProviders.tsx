@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import * as React from 'react';
+import {  ReactNode  } from 'react';
 import { UnifiedProviders } from './UnifiedProviders';
 import SuspenseWrapper from '../components/SuspenseWrapper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

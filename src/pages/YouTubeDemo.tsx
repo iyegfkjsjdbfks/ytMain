@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
 

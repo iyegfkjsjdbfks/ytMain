@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import StandardPageLayout from '../components/StandardPageLayout';
 import BaseForm from '../components/BaseForm';
 import BaseModal from '../components/BaseModal';

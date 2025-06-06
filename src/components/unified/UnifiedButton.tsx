@@ -3,7 +3,8 @@
  * Consolidates all button variants into a single, comprehensive component
  */
 
-import React, { forwardRef } from 'react';
+import * as React from 'react';
+import {  forwardRef  } from 'react';
 import { cn } from '../../lib/utils';
 import LoadingSpinner from '../../../components/ui/LoadingSpinner';
 

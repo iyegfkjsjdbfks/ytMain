@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import * as React from 'react';
+import {  useState  } from 'react';
 import { FireIcon } from '@heroicons/react/24/solid';
 import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';

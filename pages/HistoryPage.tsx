@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import {  useEffect, useState  } from 'react';
 import { Video } from '../types';
 import { getWatchHistoryVideos } from '../services/mockVideoService';
 import VideoCard from '../components/VideoCard';

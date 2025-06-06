@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import {  useEffect, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { Video, UserPlaylistDetails } from '../types';
 import { 

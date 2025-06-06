@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
 import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';

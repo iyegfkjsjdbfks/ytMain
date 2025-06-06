@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import {  useEffect, useState  } from 'react';
 import { useParams } from 'react-router-dom';
 import { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
 import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/mockVideoService';

@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
+import * as React from 'react';
+import {  useRef, useState, useEffect, useCallback, useMemo  } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import CommentModal from '../components/CommentModal';

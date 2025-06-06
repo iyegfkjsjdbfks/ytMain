@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import * as React from 'react';
+import {  ReactNode  } from 'react';
 import { AuthProvider } from '../contexts/AuthContext';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { MiniplayerProvider } from '../contexts/MiniplayerContext';

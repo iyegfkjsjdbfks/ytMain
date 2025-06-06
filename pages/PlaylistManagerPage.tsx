@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import {  useState, useEffect  } from 'react';
 import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 
