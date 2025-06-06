@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { Short } from '../types';
+import { Short } from '../src/types/core';
 import { useVideoPlayer, useIntersectionObserver, useVideoAutoplay } from '../hooks';
 import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 

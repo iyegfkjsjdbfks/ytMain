@@ -9,7 +9,7 @@ import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
 import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortsPageError from '../components/ErrorStates/ShortsPageError';
 import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
-import { Short } from '../types';
+import { Short } from '../src/types/core';
 import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
