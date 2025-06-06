@@ -24,6 +24,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
 }) => {
   const [commentText, setCommentText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // shortId is currently not used but kept for future functionality
 
   const handleCommentSubmit = async (text: string) => {
     if (!text.trim()) return;
