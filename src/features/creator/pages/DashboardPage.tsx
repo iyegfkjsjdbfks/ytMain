@@ -21,21 +21,12 @@ const ResponsiveContainer = ({ children, width, height }: any) => (
 );
 const PieChart = ({ children }: any) => <div className="flex items-center justify-center h-full">{children}</div>;
 const Pie = ({ data }: any) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = ({ fill }: any) => null;
-const Tooltip = ({ formatter }: any) => null;
+const Cell = ({ fill }: { fill?: string }) => null;
+const Tooltip = ({ formatter }: { formatter?: any }) => null;
 const Legend = () => null;
 // import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
-const formatNumber = (num: number): string => {
-  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-  if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-  return num.toString();
-};
-
-const formatDate = (date: Date): string => {
-  return date.toLocaleDateString();
-};
 
 
 

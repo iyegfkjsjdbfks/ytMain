@@ -8,26 +8,12 @@ import {
   HeartIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline';
-import {
-  HandThumbUpIcon as HandThumbUpSolidIcon,
-  HandThumbDownIcon as HandThumbDownSolidIcon,
-  HeartIcon as HeartSolidIcon,
-  MapPinIcon as PinSolidIcon,
-} from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from 'date-fns';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
 
-// Utility function to format numbers
-const formatCount = (count: number): string => {
-  if (count >= 1000000) {
-    return (count / 1000000).toFixed(1) + 'M';
-  }
-  if (count >= 1000) {
-    return (count / 1000).toFixed(1) + 'K';
-  }
-  return count.toString();
-};
+
 
 interface CommentSectionProps {
   videoId: string;
@@ -287,7 +273,6 @@ const CommentItem: React.FC<CommentItemProps> = ({
 
 const CommentSection: React.FC<CommentSectionProps> = ({
   videoId,
-  channelId,
   isChannelOwner = false,
   className = '',
 }) => {
