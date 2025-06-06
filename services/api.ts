@@ -239,9 +239,10 @@ export class VideoService {
           })
         );
         
+        const nextPageToken = Math.random() > 0.3 ? `token_${Date.now()}` : undefined;
         return {
           videos,
-          nextPageToken: Math.random() > 0.3 ? `token_${Date.now()}` : undefined,
+          ...(nextPageToken && { nextPageToken }),
         };
       }
 
@@ -275,9 +276,9 @@ export class VideoService {
         channel: {
           id: item.snippet.channelId,
           name: item.snippet.channelTitle,
-          avatar: '', // Would need separate API call
+          avatarUrl: '', // Would need separate API call
           subscribers: 0,
-          verified: false,
+          isVerified: false,
         },
         views: 0, // Would need separate API call
         likes: 0,
@@ -331,14 +332,14 @@ export class VideoService {
         channel: {
           id: item.snippet.channelId,
           name: item.snippet.channelTitle,
-          avatar: '',
+          avatarUrl: '',
           subscribers: 0,
-          verified: false,
+          isVerified: false,
         },
-        views: parseInt(item.statistics.viewCount || '0'),
+        views: item.statistics.viewCount || '0',
         likes: parseInt(item.statistics.likeCount || '0'),
         dislikes: parseInt(item.statistics.dislikeCount || '0'),
-        duration: this.parseDuration(item.contentDetails.duration),
+        duration: this.parseDuration(item.contentDetails.duration).toString(),
         tags: item.snippet.tags || [],
         category: item.snippet.categoryId,
         language: item.snippet.defaultLanguage || 'en',
@@ -368,9 +369,10 @@ export class VideoService {
           })
         );
         
+        const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
         return {
           videos,
-          nextPageToken: Math.random() > 0.5 ? `token_${Date.now()}` : undefined,
+          ...(nextPageToken && { nextPageToken }),
         };
       }
 
@@ -400,9 +402,9 @@ export class VideoService {
         channel: {
           id: item.snippet.channelId,
           name: item.snippet.channelTitle,
-          avatar: '',
+          avatarUrl: '',
           subscribers: 0,
-          verified: false,
+          isVerified: false,
         },
         views: 0,
         likes: 0,
@@ -465,11 +467,11 @@ export class ChannelService {
         id: item.id,
         name: item.snippet.title,
         description: item.snippet.description,
-        avatar: item.snippet.thumbnails.medium.url,
+        avatarUrl: item.snippet.thumbnails.medium.url,
         banner: item.brandingSettings?.image?.bannerExternalUrl || '',
         subscribers: parseInt(item.statistics.subscriberCount || '0'),
-        videos: parseInt(item.statistics.videoCount || '0'),
-        verified: false, // Would need to check separately
+        videoCount: parseInt(item.statistics.videoCount || '0'),
+        isVerified: false, // Would need to check separately
         joinedAt: item.snippet.publishedAt,
       };
     } catch (error) {
@@ -494,9 +496,9 @@ export class ChannelService {
             channel: {
               id: channelId,
               name: `Channel ${channelId}`,
-              avatar: `https://picsum.photos/40/40?random=${channelId}`,
+              avatarUrl: `https://picsum.photos/40/40?random=${channelId}`,
               subscribers: Math.floor(Math.random() * 1000000),
-              verified: Math.random() > 0.5,
+              isVerified: Math.random() > 0.5,
             },
           })
         );
@@ -535,9 +537,9 @@ export class ChannelService {
         channel: {
           id: item.snippet.channelId,
           name: item.snippet.channelTitle,
-          avatar: '',
+          avatarUrl: '',
           subscribers: 0,
-          verified: false,
+          isVerified: false,
         },
         views: 0,
         likes: 0,
@@ -571,23 +573,17 @@ export class PlaylistService {
             id: 'playlist_1',
             title: 'Watch Later',
             description: 'Videos to watch later',
-            thumbnail: 'https://picsum.photos/320/180?random=playlist1',
-            videoCount: 15,
-            isPublic: false,
+            videoIds: Array.from({ length: 15 }, (_, i) => `playlist_video_${i}`),
             createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date().toISOString(),
-            videos: Array.from({ length: 5 }, (_, i) => generateMockVideo(`playlist_video_${i}`)),
           },
           {
             id: 'playlist_2',
             title: 'Favorites',
             description: 'My favorite videos',
-            thumbnail: 'https://picsum.photos/320/180?random=playlist2',
-            videoCount: 8,
-            isPublic: true,
+            videoIds: Array.from({ length: 8 }, (_, i) => `favorite_video_${i}`),
             createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-            videos: Array.from({ length: 3 }, (_, i) => generateMockVideo(`favorite_video_${i}`)),
           },
         ];
       }
