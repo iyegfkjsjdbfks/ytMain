@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -176,6 +176,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Initialize state with proper types
   const [videoState, setVideoState] = useState<Video>(propVideo || mockVideo);
   const [isLoading, setIsLoading] = useState(propLoading || false);
+  const [errorState, setErrorState] = useState<Error | null>(propError || null);
   
   // Video interaction state
   const [isLiked, setIsLiked] = useState(propVideo?.isLiked ?? false);
@@ -221,10 +222,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setIsSaved(propVideo.isSavedToAnyList ?? false);
     }
     setIsLoading(propLoading || false);
+    setErrorState(propError);
   }, [propVideo, propLoading, propError]);
-  
-  // Get watch later context
-  const { addToWatchLater } = useWatchLater();
   
 
   
