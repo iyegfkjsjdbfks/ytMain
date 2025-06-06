@@ -24,7 +24,7 @@ const WatchPage: React.FC = () => {
     liked,
     disliked,
     isSubscribed,
-    isInWatchLater,
+    // isInWatchLater, // unused
     isSavedToAnyList,
     mockLikeCount,
     
@@ -52,11 +52,10 @@ const WatchPage: React.FC = () => {
     
     // Related videos
     displayedRelatedVideos,
-    showAllRelated,
-    
+    // showAllRelated, // unused
     // Refs
-    saveButtonRef,
-    saveModalRef,
+    // saveButtonRef, // unused
+    // saveModalRef, // unused
     
     // Constants
     MAX_COMMENT_LENGTH,
@@ -93,12 +92,13 @@ const WatchPage: React.FC = () => {
   } = useWatchPage();
   
   const { showMiniplayer } = useMiniplayer();
-  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const { addToWatchLater } = useWatchLater();
+  // removeFromWatchLater is unused in this component
   
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {
+  const enhancedHandleSaveToPlaylist = async (_videoId: string, playlistId: string) => {
     // Call the original handler
-    await handleSaveToPlaylist(videoId, playlistId);
+    await handleSaveToPlaylist(playlistId);
     
     // If saving to Watch Later playlist, also add to the Watch Later context
     if (playlistId === 'playlist-1' && video) {
@@ -246,7 +246,7 @@ const WatchPage: React.FC = () => {
               summaryError={summaryError}
               isSummarizing={isSummarizing}
               canSummarize={!!canSummarize}
-              onSummarize={handleSummarizeDescription}
+              onSummarizeDescription={handleSummarizeDescription}
             />
             
             {/* Comments section */}

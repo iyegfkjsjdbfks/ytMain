@@ -31,6 +31,14 @@ interface Video {
   channelAvatarUrl: string;
   duration: string;
   category: string;
+  likes: number;
+  dislikes: number;
+  tags: string[];
+  visibility: 'public' | 'private' | 'unlisted';
+  isLive?: boolean;
+  isShort?: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface Channel {
