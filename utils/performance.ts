@@ -1,4 +1,5 @@
 // Performance monitoring utilities for React components
+import * as React from 'react';
 
 interface PerformanceMetric {
   name: string;
@@ -200,7 +201,7 @@ export function withPerformanceMonitoring<P extends object>(
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
   
-  const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
+  const MonitoredComponent = React.forwardRef((props: P, ref: any) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
     
     React.useEffect(() => {
