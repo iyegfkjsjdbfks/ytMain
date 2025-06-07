@@ -4,8 +4,8 @@ import StandardPageLayout from '../components/StandardPageLayout';
 import BaseForm from '../components/BaseForm';
 import BaseModal from '../components/BaseModal';
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
-import { useAsyncState } from '../hooks/useAsyncState';
-import { Video, UploadProgress } from '../types';
+
+import { Video } from '../types';
 import VideoCard from '../components/VideoCard';
 import { Button } from '../components/ui/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/Tabs';
@@ -48,10 +48,10 @@ interface VideoEditFormData {
 
 const RefactoredContentManagerPage: React.FC = () => {
   // Mock content manager hook implementation
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [videosLoading, setVideosLoading] = useState(false);
-  const [videosError, setVideosError] = useState<string | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<Record<string, any>>({});
+  const [videos, _setVideos] = useState<Video[]>([]);
+  const [videosLoading, _setVideosLoading] = useState(false);
+  const [videosError, _setVideosError] = useState<string | null>(null);
+  const [uploadProgress, _setUploadProgress] = useState<Record<string, any>>({});
 
   const refreshVideos = async () => {
     // Mock implementation

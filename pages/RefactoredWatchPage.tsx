@@ -460,7 +460,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onDeleteComment: handleDeleteComment,
     onToggleLikeDislike: (_id: string, _parentId: string | undefined, _action: 'like' | 'dislike') => {}, // TODO: Implement comment like/dislike functionality
     onSortChange: setCommentSortOrder,
-    onSetReplyingTo: (id: string | null, text?: string) => setReplyingToCommentId(id),
+    onSetReplyingTo: (id: string | null, _text?: string) => setReplyingToCommentId(id),
     onSetCurrentReplyText: setCurrentReplyText,
     onSetEditingComment: setEditingComment,
     onSetActiveCommentMenu: setActiveCommentMenu,
