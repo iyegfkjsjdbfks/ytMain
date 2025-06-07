@@ -32,6 +32,7 @@ const mockVideo: Video = {
   likes: 12345,
   dislikes: 123,
   uploadedAt: '2023-05-15T12:00:00Z',
+  publishedAt: '2023-05-15T12:00:00Z',
   channelName: 'Sample Channel',
   channelId: '1',
   channelAvatarUrl: 'https://via.placeholder.com/48',
@@ -45,6 +46,11 @@ const mockVideo: Video = {
   category: 'Entertainment',
   tags: ['sample', 'video', 'entertainment'],
   visibility: 'public' as const,
+  commentCount: 150,
+  isLive: false,
+  isShort: false,
+  isUpcoming: false,
+  isPremiere: false
 };
 
 interface RefactoredWatchPageProps {
@@ -79,13 +85,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isSavedToAnyList, setIsSavedToAnyList] = useState(false);
   const [openSaveModal, setOpenSaveModal] = useState(false);
-  const [saveButtonRef, setSaveButtonRef] = useState<HTMLButtonElement | null>(null);
-  const [saveModalRef, setSaveModalRef] = useState<HTMLDivElement | null>(null);
+
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [isSummarizing, setIsSummarizing] = useState(false);
-  const [canSummarize, setCanSummarize] = useState(true);
   const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
   const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
