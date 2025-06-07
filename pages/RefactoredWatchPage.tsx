@@ -86,15 +86,18 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [canSummarize, setCanSummarize] = useState(true);
-  const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'oldest' | 'popular'>('newest');
+  const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
   const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
   const [actionError, setActionError] = useState<string | null>(null);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
+  // Add missing closeSaveModal function
   const closeSaveModal = useCallback(() => {
     setOpenSaveModal(false);
   }, []);
+
+
 
   // Get data from hooks
   const {
@@ -265,7 +268,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       if (playlistId === 'playlist-1' && videoState) {
         const now = new Date().toISOString();
         const coreVideo: Video = {
-          ...videoState,
           id: videoState.id,
           title: videoState.title || 'Untitled Video',
           description: videoState.description || '',
@@ -273,11 +275,28 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           videoUrl: videoState.videoUrl || videoState.url || '',
           duration: videoState.duration || '0:00',
           views: videoState.views || '0',
+          likes: videoState.likes || 0,
+          dislikes: videoState.dislikes || 0,
           uploadedAt: videoState.uploadedAt || videoState.createdAt || new Date().toISOString(),
+          publishedAt: videoState.publishedAt || videoState.createdAt || new Date().toISOString(),
           channelName: videoState.channelName || 'Unknown Channel',
           channelId: videoState.channelId || '',
           channelAvatarUrl: videoState.channelAvatarUrl || '',
+          channel: {
+            id: videoState.channelId || '',
+            name: videoState.channelName || 'Unknown Channel',
+            avatarUrl: videoState.channelAvatarUrl || '',
+            subscribers: 0,
+            isVerified: false
+          },
           category: videoState.category || 'Entertainment',
+          tags: videoState.tags || [],
+          visibility: (videoState.visibility as 'public' | 'unlisted' | 'private') || 'public',
+          commentCount: videoState.commentCount || 0,
+          isLive: videoState.isLive || false,
+          isUpcoming: videoState.isUpcoming || false,
+          isPremiere: videoState.isPremiere || false,
+          isShort: videoState.isShort || false,
           createdAt: now,
           updatedAt: now
         };
@@ -498,11 +517,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     );
   }
   
-  if (errorState) {
+  if (propError) {
     return (
       <StandardPageLayout>
         <div className="p-4 text-red-600 dark:text-red-400">
-          {errorState.message}
+          {propError.message}
         </div>
       </StandardPageLayout>
     );
