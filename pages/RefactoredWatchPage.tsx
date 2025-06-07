@@ -89,8 +89,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleMainCommentSubmit: propHandleMainCommentSubmit = async () => ({} as Comment),
   handleReplySubmit: propHandleReplySubmit = async () => ({} as Comment),
   handleEditSave: propHandleEditSave = async () => {},
-  handleDeleteComment: propHandleDeleteComment = async () => {},
-  toggleLikeDislikeForCommentOrReply: propToggleLikeDislikeForCommentOrReply = async (commentId: string, action: boolean) => {},
+  // Removed unused comment-related props
 }) => {
   const { useState, useCallback } = React;
   const [isSummaryLoading] = useState<boolean>(false);
