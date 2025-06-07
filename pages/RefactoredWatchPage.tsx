@@ -107,7 +107,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments] = useState<Comment[]>([]);
   const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
   const [currentReplyText, setCurrentReplyText] = useState<string>('');
@@ -149,7 +149,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setIsSavedToAnyList(false); // Default value as property doesn't exist on Video type
     }
     setIsLoading(propLoading);
-    setError(propError);
+    // setError(propError); // Removed as setError is not defined
   }, [propVideo, propLoading, propError]);
 
   // Handle video like
