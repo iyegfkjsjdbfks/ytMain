@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-// import { useMiniplayer } from '../contexts/MiniplayerContext'; // Unused
+import { useAuth } from '../contexts/AuthContext';
 import StandardPageLayout from '../components/StandardPageLayout';
-import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
-import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
-import CommentsSection from '../components/CommentsSection';
+import { RefactoredVideoPlayer } from '../components/RefactoredVideoPlayer';
+import { RefactoredVideoDescription } from '../components/RefactoredVideoDescription';
+import { CommentsSection } from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
-// Removed unused LoadingSpinner import
+import { ReusableVideoGrid } from '../components/ReusableVideoGrid';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 import { Video, Comment } from '../src/types/core';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
+import { useWatchPage } from '../hooks/useWatchPage';
+import { useRefactoredHooks } from '../hooks/useRefactoredHooks';
 
 // Removed unused Playlist interface
 
@@ -71,33 +74,49 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Removed unused handleEditSave prop
   // Removed unused comment-related props
 }) => {
-  const { useState, useCallback } = React;
-  // Removed unused isSummaryLoading state
-  const [summary] = useState<string>('');
-  const [summaryError, setSummaryError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
   const [liked] = useState<boolean>(false);
   const [disliked] = useState<boolean>(false);
-  // Removed unused isLiked and isDisliked state variables
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-  const [isSavedToAnyList, setIsSavedToAnyList] = useState<boolean>(false);
-  // Removed unused isSaved state variable
-  const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
-  const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
-  const [comments] = useState<Comment[]>([]);
-  const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [currentReplyText, setCurrentReplyText] = useState<string>('');
-  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSavedToAnyList, setIsSavedToAnyList] = useState(false);
+  const [openSaveModal, setOpenSaveModal] = useState(false);
+  const [saveButtonRef, setSaveButtonRef] = useState<HTMLButtonElement | null>(null);
+  const [saveModalRef, setSaveModalRef] = useState<HTMLDivElement | null>(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [summary, setSummary] = useState<string | null>(null);
+  const [summaryError, setSummaryError] = useState<string | null>(null);
+  const [isSummarizing, setIsSummarizing] = useState(false);
+  const [canSummarize, setCanSummarize] = useState(true);
+  const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'oldest' | 'popular'>('newest');
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
-  const [videoState, setVideoState] = useState<Video | null>(propVideo);
-  const [errorState, setErrorState] = useState<Error | null>(propError);
-  const [isLoading, setIsLoading] = useState<boolean>(propLoading);
+  const [expandedReplies, setExpandedReplies] = useState<Set<string>>(new Set());
+  const [actionError, setActionError] = useState<string | null>(null);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
-  // Miniplayer hook - unused
-  // const { showMiniplayer } = useMiniplayer();
+  const closeSaveModal = useCallback(() => {
+    setOpenSaveModal(false);
+  }, []);
+
+  // Get data from hooks
+  const {
+    videoState,
+    setVideoState,
+    isLoading,
+    setIsLoading,
+    comments,
+    setComments,
+    commentCount,
+    setCommentCount,
+    relatedVideos,
+    setRelatedVideos,
+    currentReplyText,
+    setCurrentReplyText,
+    replyingToCommentId,
+    setReplyingToCommentId,
+    editingComment,
+    setEditingComment,
+    maxCommentLength,
+    setMaxCommentLength
+  } = useRefactoredHooks();
 
   // Watch later hook
   const { addToWatchLater } = useWatchLater();
@@ -257,23 +276,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           id: videoState.id,
           title: videoState.title || 'Untitled Video',
           description: videoState.description || '',
-          views: videoState.views || '0',
-          uploadedAt: videoState.uploadedAt || now,
           thumbnailUrl: videoState.thumbnailUrl || '',
-          videoUrl: videoState.videoUrl || '',
-          channelId: videoState.channelId || 'unknown-channel',
-          channelName: videoState.channelName || 'Unknown Channel',
-          channelAvatarUrl: videoState.channelAvatarUrl || '',
+          videoUrl: videoState.videoUrl || videoState.url || '',
           duration: videoState.duration || '0:00',
-          category: videoState.category || 'Other',
-          likes: 0,
-          dislikes: 0,
-          tags: [],
-          visibility: 'public',
-          commentCount: 0,
-          viewCount: 0,
+          views: videoState.views || '0',
+          uploadedAt: videoState.uploadedAt || videoState.createdAt || new Date().toISOString(),
+          channelName: videoState.channelName || 'Unknown Channel',
+          channelId: videoState.channelId || '',
+          channelAvatarUrl: videoState.channelAvatarUrl || '',
+          category: videoState.category || 'Entertainment',
           createdAt: now,
-          updatedAt: now,
+          updatedAt: now
         };
 
         if (addToWatchLater) {
@@ -433,39 +446,28 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
       setExpandedReplies(updater);
     },
-    playerSettings: {
-      isFullscreen: false,
-      showCaptions: true,
-      captions: videoState.captions?.map((caption: any) => ({
-        id: caption.id,
-        language: {
-          code: caption.language.code,
-          name: caption.language.name,
-        },
-        label: caption.label,
-        url: caption.url,
-        isAutoGenerated: caption.isAutoGenerated || false,
-      })) || [],
-      currentCaption: null,
-      onCaptionChange: () => {},
-      onPlaybackRateChange: () => {},
-      onVolumeChange: () => {},
-      onToggleMute: () => {},
-      onToggleTheaterMode: () => {},
-      onToggleMiniPlayer: () => {},
-      onToggleFullscreen: () => {},
-      onTimeUpdate: () => {
-        // Handle time update
-      },
-      onEnded: () => {
-        // Handle video end
-      },
-      onError: (error: string) => {
-        console.error('Video player error:', error);
-        setActionError(error);
-      }
-    }
-  } : null;
+  } : {
+    comments: [],
+    commentCount: 0,
+    commentSortOrder: 'top' as const,
+    replyingToCommentId: null,
+    currentReplyText: '',
+    editingComment: null,
+    activeCommentMenu: null,
+    expandedReplies: {},
+    maxCommentLength: 500,
+    onCommentSubmit: () => {},
+    onReplySubmit: () => {},
+    onEditSave: () => {},
+    onDeleteComment: () => {},
+    onToggleLikeDislike: () => {},
+    onSortChange: () => {},
+    onSetReplyingTo: () => {},
+    onSetCurrentReplyText: () => {},
+    onSetEditingComment: () => {},
+    onSetActiveCommentMenu: () => {},
+    onSetExpandedReplies: () => {},
+  };
 
 
 
