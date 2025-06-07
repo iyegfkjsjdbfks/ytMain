@@ -24,7 +24,7 @@ export interface Comment {
   replyCount?: number;
 }
 
-interface CommentsSectionProps {
+export interface CommentsSectionProps {
   comments: Comment[];
   commentCount: number;
   commentSortOrder: 'top' | 'newest';

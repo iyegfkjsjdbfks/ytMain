@@ -121,7 +121,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     id: propVideo?.channelId || '1',
     name: propVideo?.channelName || 'Sample Channel',
     avatarUrl: propVideo?.channelAvatarUrl || 'https://via.placeholder.com/48',
-    subscribers: 1200000,
+    subscriberCount: '1.2M',
     isVerified: true,
   };
 
@@ -428,8 +428,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     video: videoState!,
     channel: channel!,
     showFullDescription,
-    summary: summary || undefined,
-    summaryError: summaryError,
+    ...(summary && { summary }),
+    ...(summaryError && { summaryError }),
     isSummarizing,
     canSummarize: true,
     onToggleDescription: handleToggleDescription,
@@ -439,7 +439,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   };
 
   // Comments section configuration
-  const commentsSectionProps: import('../components/CommentsSection').CommentsSectionProps = videoState ? {
+  const commentsSectionProps: React.ComponentProps<typeof CommentsSection> = videoState ? {
     comments: comments || [],
     commentCount: (comments || []).length,
     commentSortOrder: commentSortOrder,
