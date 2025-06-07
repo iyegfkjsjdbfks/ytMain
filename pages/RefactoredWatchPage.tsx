@@ -8,7 +8,7 @@ import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 // Removed unused ReusableVideoGrid import
 // Removed unused LoadingSpinner import
-import { Video, UserPlaylist, UserPlaylistDetails, Playlist } from '../src/types/core';
+import { Video, Playlist, PlaylistVisibility } from '../src/types/core';
 import type { Comment } from '../components/CommentsSection';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
@@ -221,12 +221,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       // Return a mock playlist for now
       return {
         id: `playlist-${Date.now()}`,
-        name,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        title: name,
         description: description || '',
         videoCount: 0,
-        isPrivate: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        totalDuration: '0:00',
+        visibility: 'private' as PlaylistVisibility,
+        ownerId: 'current-user',
+        ownerName: 'Current User',
+        videos: [],
+        tags: []
       } as Playlist;
     } catch (error) {
       console.error('Error creating playlist:', error);
@@ -455,10 +460,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onDeleteComment: handleDeleteComment,
     onToggleLikeDislike: (_id: string, _parentId: string | undefined, _action: 'like' | 'dislike') => {}, // TODO: Implement comment like/dislike functionality
     onSortChange: setCommentSortOrder,
-    onSetReplyingTo: setReplyingToCommentId as (id: string | null, text?: string) => void,
+    onSetReplyingTo: (id: string | null, text?: string) => setReplyingToCommentId(id),
     onSetCurrentReplyText: setCurrentReplyText,
     onSetEditingComment: setEditingComment,
-    onSetActiveCommentMenu: setActiveCommentMenu as (id: string | null) => void,
+    onSetActiveCommentMenu: setActiveCommentMenu,
     onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
       const currentRecord = Array.from(expandedReplies).reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>);
       const newRecord = updater(currentRecord);
