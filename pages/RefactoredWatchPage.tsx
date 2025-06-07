@@ -9,7 +9,7 @@ import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylis
 // Removed unused ReusableVideoGrid import
 // Removed unused LoadingSpinner import
 import { Video, Playlist, PlaylistVisibility } from '../src/types/core';
-import type { Comment } from '../components/CommentsSection';
+import type { Comment, CommentsSectionProps } from '../components/CommentsSection';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
 // Removed unused useWatchPage import
@@ -69,10 +69,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   video: propVideo = mockVideo,
   error: propError = null,
   loading: propLoading = false,
-  handleLike: propHandleLike = async () => {},
-  handleDislike: propHandleDislike = async () => {},
-  handleSubscribe: propHandleSubscribe = async () => {},
-  handleShare = () => {},
+  handleLike: propHandleLike = async (_videoId: string) => {},
+  handleDislike: propHandleDislike = async (_videoId: string) => {},
+  handleSubscribe: propHandleSubscribe = async (_channelId: string) => {},
+  handleShare = (_videoId: string) => {},
   // Removed duplicate handleAddToWatchLater
   // Removed unused handleSaveToPlaylist
   // Removed unused props: handleCreatePlaylist, handleSummarizeDescription, handleToggleDescription, handleMainCommentSubmit, handleReplySubmit
@@ -444,7 +444,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   };
 
   // Comments section configuration
-  const commentsSectionProps: React.ComponentProps<typeof CommentsSection> = videoState ? {
+  const commentsSectionProps: CommentsSectionProps = videoState ? {
     comments: comments || [],
     commentCount: (comments || []).length,
     commentSortOrder: commentSortOrder,
@@ -455,7 +455,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     expandedReplies: Array.from(expandedReplies).reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>),
     maxCommentLength: 500,
     onCommentSubmit: handleMainCommentSubmitCallback,
-    onReplySubmit: handleReplySubmit,
+    onReplySubmit: (parentId: string) => handleReplySubmit(parentId, currentReplyText),
     onEditSave: handleEditSave,
     onDeleteComment: handleDeleteComment,
     onToggleLikeDislike: (_id: string, _parentId: string | undefined, _action: 'like' | 'dislike') => {}, // TODO: Implement comment like/dislike functionality
@@ -465,7 +465,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onSetEditingComment: setEditingComment,
     onSetActiveCommentMenu: setActiveCommentMenu,
     onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
-      const currentRecord = Array.from(expandedReplies).reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>);
+      const currentRecord: Record<string, boolean> = {};
+      expandedReplies.forEach(id => {
+        currentRecord[id] = true;
+      });
       const newRecord = updater(currentRecord);
       const newSet = new Set(Object.keys(newRecord).filter(key => newRecord[key]));
       setExpandedReplies(newSet);
@@ -480,17 +483,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     activeCommentMenu: null,
     expandedReplies: {},
     maxCommentLength: 500,
-    onCommentSubmit: () => {},
-    onReplySubmit: () => {},
-    onEditSave: () => {},
-    onDeleteComment: () => {},
-    onToggleLikeDislike: () => {},
-    onSortChange: () => {},
-    onSetReplyingTo: () => {},
-    onSetCurrentReplyText: () => {},
-    onSetEditingComment: () => {},
-    onSetActiveCommentMenu: () => {},
-    onSetExpandedReplies: () => {},
+    onCommentSubmit: (_commentText: string) => {},
+    onReplySubmit: (_parentId: string) => {},
+    onEditSave: (_commentId: string, _newText: string, _parentId?: string) => {},
+    onDeleteComment: (_commentId: string, _parentId?: string) => {},
+    onToggleLikeDislike: (_id: string, _parentId: string | undefined, _action: 'like' | 'dislike') => {},
+    onSortChange: (_order: 'top' | 'newest') => {},
+    onSetReplyingTo: (_commentId: string | null, _text?: string) => {},
+    onSetCurrentReplyText: (_text: string) => {},
+    onSetEditingComment: (_comment: { id: string; parentId?: string } | null) => {},
+    onSetActiveCommentMenu: (_commentId: string | null) => {},
+    onSetExpandedReplies: (_updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {},
   };
 
 
