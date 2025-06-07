@@ -63,14 +63,7 @@ interface RefactoredWatchPageProps {
   handleShare?: (videoId: string) => void;
   handleAddToWatchLater?: (video: Video) => Promise<void>;
   handleSaveToPlaylist?: (videoId: string, playlistId: string) => Promise<void>;
-  handleCreatePlaylist?: (name: string, isPrivate: boolean) => Promise<void>;
-  handleSummarizeDescription?: (videoId: string) => Promise<string>;
-  handleToggleDescription?: () => void;
-  handleMainCommentSubmit?: (videoId: string, text: string) => Promise<Comment>;
-  handleReplySubmit?: (commentId: string, text: string) => Promise<Comment>;
-  handleEditSave?: (commentId: string, text: string) => Promise<void>;
-  handleDeleteComment?: (commentId: string) => Promise<void>;
-  toggleLikeDislikeForCommentOrReply?: (commentId: string, isLike: boolean) => Promise<void>;
+  // Removed unused comment-related props from interface
 }
 
 const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
@@ -83,27 +76,22 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleShare = (videoId: string) => {},
   handleAddToWatchLater: propHandleAddToWatchLater = async () => {},
   handleSaveToPlaylist: propHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {},
-  handleCreatePlaylist: propHandleCreatePlaylist = async (name: string, isPrivate: boolean) => {},
-  handleSummarizeDescription: propHandleSummarizeDescription = async (videoId: string) => '',
-  handleToggleDescription: propHandleToggleDescription = () => {},
-  handleMainCommentSubmit: propHandleMainCommentSubmit = async () => ({} as Comment),
-  handleReplySubmit: propHandleReplySubmit = async () => ({} as Comment),
-  handleEditSave: propHandleEditSave = async () => {},
+  // Removed unused props: handleCreatePlaylist, handleSummarizeDescription, handleToggleDescription, handleMainCommentSubmit, handleReplySubmit
+  // Removed unused handleEditSave prop
   // Removed unused comment-related props
 }) => {
   const { useState, useCallback } = React;
-  const [isSummaryLoading] = useState<boolean>(false);
+  // Removed unused isSummaryLoading state
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
   const [liked] = useState<boolean>(false);
   const [disliked] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isDisliked, setIsDisliked] = useState<boolean>(false);
+  // Removed unused isLiked and isDisliked state variables
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [isSavedToAnyList, setIsSavedToAnyList] = useState<boolean>(false);
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+  // Removed unused isSaved state variable
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
   const [comments] = useState<Comment[]>([]);
@@ -142,8 +130,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         viewCount: typeof propVideo.views === 'string' ? parseInt(propVideo.views) || 0 : propVideo.viewCount || 0
       };
       setVideoState(updatedVideo);
-      setIsLiked(propVideo.isLiked || false);
-      setIsDisliked(propVideo.isDisliked || false);
+      // TODO: Handle like/dislike state from video props
       setIsSubscribed(false); // Default value as property doesn't exist on Video type
       setIsSavedToAnyList(false); // Default value as property doesn't exist on Video type
     }
@@ -156,8 +143,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     if (!videoState?.id) return;
     try {
       await propHandleLike(videoState.id);
-      setIsLiked(true);
-      setIsDisliked(false);
+      // TODO: Update UI state when like functionality is implemented
     } catch (err) {
       setActionError('Failed to like video');
     }
@@ -168,8 +154,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     if (!videoState?.id) return;
     try {
       await propHandleDislike(videoState.id);
-      setIsDisliked(true);
-      setIsLiked(false);
+      // TODO: Update UI state when dislike functionality is implemented
     } catch (err) {
       setActionError('Failed to dislike video');
     }
@@ -191,7 +176,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     if (!videoState) return;
     try {
       await addToWatchLater(videoState);
-      setIsSaved(true);
+      // TODO: Update UI state when save functionality is implemented
     } catch (err) {
       setActionError('Failed to add to watch later');
     }
@@ -215,10 +200,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   useEffect(() => {
     if (propVideo) {
       setVideoState(propVideo);
-      setIsLiked(false); // TODO: Add proper liked state from video
-      setIsDisliked(false); // TODO: Add proper disliked state from video
+      // TODO: Initialize proper state from video props
       setIsSubscribed(false); // TODO: Add proper subscribed state from video
-      setIsSaved(false); // TODO: Add proper saved state from video
     }
     setIsLoading(propLoading || false);
     setErrorState(propError);
@@ -444,8 +427,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onReplySubmit: handleReplySubmit,
     onEditSave: handleEditSave,
     onDelete: handleDeleteComment,
-    onLike: (commentId: string) => propToggleLikeDislikeForCommentOrReply(commentId, true),
-    onDislike: (commentId: string) => propToggleLikeDislikeForCommentOrReply(commentId, false),
+    onLike: () => {}, // TODO: Implement comment like functionality
+    onDislike: () => {}, // TODO: Implement comment dislike functionality
     replyingToCommentId: replyingToCommentId || undefined,
     onSetReplyingToCommentId: setReplyingToCommentId as (id: string | null) => void,
     currentReplyText: currentReplyText || '',
