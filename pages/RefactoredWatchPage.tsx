@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef   } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 // import { useMiniplayer } from '../contexts/MiniplayerContext'; // Unused
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -7,7 +6,7 @@ import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
 import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
 import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
-import LoadingSpinner from '../components/LoadingSpinner';
+// Removed unused LoadingSpinner import
 import { Video, Comment } from '../src/types/core';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
@@ -288,7 +287,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       console.error('Error saving to playlist:', error);
       setActionError(error instanceof Error ? error.message : 'Error saving to playlist');
     }
-  }, [videoState, propHandleSaveToPlaylist, addToWatchLater]);
+  }, [videoState, addToWatchLater]);
 
 
 
@@ -402,8 +401,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     summary: summary || undefined,
     summaryError: summaryError,
     isSummarizing,
+    canSummarize: true,
     onToggleDescription: handleToggleDescription,
     onSummarize: handleSummarize,
+    onSummarizeDescription: handleSummarize,
     onSubscribe: handleEnhancedSubscribe,
     isSubscribed,
   };
