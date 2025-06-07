@@ -63,7 +63,7 @@ interface RefactoredWatchPageProps {
   handleShare?: (videoId: string) => void;
   handleAddToWatchLater?: (video: Video) => Promise<void>;
   handleSaveToPlaylist?: (videoId: string, playlistId: string) => Promise<void>;
-  handleCreatePlaylist?: (name: string, videoId: string) => Promise<void>;
+  handleCreatePlaylist?: (name: string, isPrivate: boolean) => Promise<void>;
   handleSummarizeDescription?: (videoId: string) => Promise<string>;
   handleToggleDescription?: () => void;
   handleMainCommentSubmit?: (videoId: string, text: string) => Promise<Comment>;
@@ -83,7 +83,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleShare = (videoId: string) => {},
   handleAddToWatchLater: propHandleAddToWatchLater = async () => {},
   handleSaveToPlaylist: propHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {},
-  handleCreatePlaylist: propHandleCreatePlaylist = async () => {},
+  handleCreatePlaylist: propHandleCreatePlaylist = async (name: string, isPrivate: boolean) => {},
   handleSummarizeDescription: propHandleSummarizeDescription = async (videoId: string) => '',
   handleToggleDescription: propHandleToggleDescription = () => {},
   handleMainCommentSubmit: propHandleMainCommentSubmit = async () => ({} as Comment),
@@ -100,8 +100,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [disliked, setDisliked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isDisliked, setIsDisliked] = useState<boolean>(false);
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [isSavedToAnyList, setIsSavedToAnyList] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -207,12 +210,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Handle creating new playlist
   const handleCreateNewPlaylist = useCallback(async (name: string) => {
     try {
-      await propHandleCreatePlaylist(name, videoState.id);
+      await propHandleCreatePlaylist(name, false); // Default to public playlist
       setIsSaveModalOpen(false);
     } catch (err) {
       setActionError('Failed to create playlist');
     }
-  }, [propHandleCreatePlaylist, videoState.id]);
+  }, [propHandleCreatePlaylist]);
   
   // State variables already declared above - removing duplicate declarations
   
@@ -225,22 +228,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [selectedPlaylistId, setSelectedPlaylistId] = useState('');
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [isLoadingPlaylists, setIsLoadingPlaylists] = useState(false);
-  const [playlistsError, setPlaylistsError] = useState<string | null>(null);
   
-  // Loading and error states
-  const [isSummaryLoading, setIsSummaryLoading] = useState(false);
-  const [summary, setSummary] = useState('');
-  const [summaryError, setSummaryError] = useState<string | null>(null);
-  // actionError already declared above
+  // Loading and error states (already declared above)
   
   // Update state when props change
   useEffect(() => {
     if (propVideo) {
       setVideoState(propVideo);
-      setIsLiked(propVideo.isLiked ?? false);
-      setIsDisliked(propVideo.isDisliked ?? false);
-      setIsSubscribed(propVideo.isSubscribed ?? false);
-      setIsSaved(propVideo.isSavedToAnyList ?? false);
+      setIsLiked(false); // TODO: Add proper liked state from video
+      setIsDisliked(false); // TODO: Add proper disliked state from video
+      setIsSubscribed(false); // TODO: Add proper subscribed state from video
+      setIsSaved(false); // TODO: Add proper saved state from video
     }
     setIsLoading(propLoading || false);
     setErrorState(propError);
@@ -262,51 +260,18 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     }
   }, [propHandleCreatePlaylist]);
   
-  // Handle comment submission
-  const handleMainCommentSubmit = useCallback((commentText: string) => {
-    if (propHandleMainCommentSubmitCallback) {
-      propHandleMainCommentSubmitCallback(commentText);
-    }
-  }, [propHandleMainCommentSubmitCallback]);
+
+
+
   
-  // Handle reply submission
-  const handleReply = useCallback((commentId: string, replyText: string) => {
-    if (propHandleReplySubmit) {
-      propHandleReplySubmit(commentId, replyText);
-    }
-    setReplyingToCommentId(null);
-    setCurrentReplyText('');
-  }, [propHandleReplySubmit]);
-  
-  // Handle edit save
-  const handleEdit = useCallback((commentId: string, newText: string) => {
-    if (propHandleEditSave) {
-      propHandleEditSave(commentId, newText);
-    }
-    setEditingComment(null);
-  }, [propHandleEditSave]);
-  
-  // Handle delete comment
-  const handleDelete = useCallback((commentId: string) => {
-    if (propHandleDeleteComment) {
-      propHandleDeleteComment(commentId);
-    }
-  }, [propHandleDeleteComment]);
+
   
   // Toggle like/dislike for comment or reply
   const toggleLikeDislike = useCallback((commentId: string, action: 'like' | 'dislike') => {
     if (propToggleLikeDislikeForCommentOrReply) {
-      propToggleLikeDislikeForCommentOrReply(commentId, action);
+      propToggleLikeDislikeForCommentOrReply(commentId, action === 'like');
     }
   }, [propToggleLikeDislikeForCommentOrReply]);
-  
-  // Toggle description expansion
-  const toggleDescription = useCallback(() => {
-    setIsDescriptionExpanded(prev => !prev);
-    if (propHandleToggleDescription) {
-      propHandleToggleDescription();
-    }
-  }, [propHandleToggleDescription]);
   
   // Handle summarize description
   const handleSummarize = useCallback(async () => {
@@ -376,15 +341,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setActionError(error instanceof Error ? error.message : 'Error saving to playlist');
     }
   }, [videoState, propHandleSaveToPlaylist, addToWatchLater]);
-
-
-
-  // Define missing prop functions
-  const propHandleMainCommentSubmitCallback = useCallback((commentText: string) => {
-    console.log('Submitting comment:', commentText);
-  }, []);
-
-
 
 
 
