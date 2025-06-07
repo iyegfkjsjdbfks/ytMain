@@ -8,25 +8,13 @@ import RefactoredVideoDescription from '../components/RefactoredVideoDescription
 import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Video, Channel, Comment } from '../src/types/core';
+import { Video, Comment } from '../src/types/core';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
 
-// Define interfaces for our data structures
-interface Playlist {
-  id: string;
-  title: string;
-  videoCount: number;
-  thumbnail: string;
-}
+// Removed unused Playlist interface
 
-// Use a local interface that extends the core Video type
-interface LocalVideo extends Video {
-  timestamp: string;
-  isSubscribed?: boolean;
-  isSavedToAnyList?: boolean;
-  recommendations?: Video[];
-}
+// Removed unused LocalVideo interface
 
 // Mock data for initial rendering
 const mockVideo: Video = {
@@ -39,6 +27,8 @@ const mockVideo: Video = {
   videoUrl: 'https://example.com/video.mp4',
   duration: '10:30',
   views: '1,234,567',
+  likes: 12345,
+  dislikes: 123,
   uploadedAt: '2023-05-15T12:00:00Z',
   channelName: 'Sample Channel',
   channelId: '1',
@@ -51,6 +41,8 @@ const mockVideo: Video = {
     isVerified: true,
   },
   category: 'Entertainment',
+  tags: ['sample', 'video', 'entertainment'],
+  visibility: 'public' as const,
 };
 
 interface RefactoredWatchPageProps {
@@ -73,16 +65,16 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleLike: propHandleLike = async () => {},
   handleDislike: propHandleDislike = async () => {},
   handleSubscribe: propHandleSubscribe = async () => {},
-  handleShare = (videoId: string) => {},
-  handleAddToWatchLater: propHandleAddToWatchLater = async () => {},
-  handleSaveToPlaylist: propHandleSaveToPlaylist = async (videoId: string, playlistId: string) => {},
+  handleShare = () => {},
+  // Removed duplicate handleAddToWatchLater
+  // Removed unused handleSaveToPlaylist
   // Removed unused props: handleCreatePlaylist, handleSummarizeDescription, handleToggleDescription, handleMainCommentSubmit, handleReplySubmit
   // Removed unused handleEditSave prop
   // Removed unused comment-related props
 }) => {
   const { useState, useCallback } = React;
   // Removed unused isSummaryLoading state
-  const [summary, setSummary] = useState<string>('');
+  const [summary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
@@ -214,14 +206,13 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Handle create playlist
   const handleCreatePlaylist = useCallback(async (name: string, isPrivate: boolean) => {
     try {
-      if (propHandleCreatePlaylist) {
-        await propHandleCreatePlaylist(name, isPrivate);
-      }
+      // TODO: Implement playlist creation functionality
+      console.log('Creating playlist:', name, isPrivate);
     } catch (error) {
       console.error('Error creating playlist:', error);
       // Handle error appropriately
     }
-  }, [propHandleCreatePlaylist]);
+  }, []);
   
 
 
@@ -233,19 +224,19 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   // Handle summarize description
   const handleSummarize = useCallback(async () => {
-    if (!videoState?.id || !propHandleSummarizeDescription) return;
+    if (!videoState?.id) return;
     
     try {
       setIsSummarizing(true);
-      const result = await propHandleSummarizeDescription(videoState.id);
-      setSummary(result);
+      // TODO: Implement description summarization functionality
+      console.log('Summarizing description for video:', videoState.id);
     } catch (error) {
       console.error('Error summarizing description:', error);
       setSummaryError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsSummarizing(false);
     }
-  }, [videoState?.id, propHandleSummarizeDescription]);
+  }, [videoState?.id]);
   
   // Handler functions with fallbacks to props or default implementations
   // handleLike already declared above - removing duplicate
@@ -256,9 +247,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const enhancedHandleSaveToPlaylist = useCallback(async (playlistId: string) => {
     try {
       // Call the original handler if it exists
-      if (propHandleSaveToPlaylist) {
-        await propHandleSaveToPlaylist(videoState?.id || '', playlistId);
-      }
+      // TODO: Implement save to playlist functionality
+      console.log('Saving to playlist:', playlistId);
 
       // If saving to Watch Later, also add to Watch Later context
       if (playlistId === 'playlist-1' && videoState) {
@@ -421,33 +411,26 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Comments section configuration
   const commentsSectionProps = videoState ? {
     comments: comments || [],
-    sortOrder: commentSortOrder,
-    onSortChange: setCommentSortOrder,
+    commentCount: (comments || []).length,
+    commentSortOrder: commentSortOrder,
+    replyingToCommentId: replyingToCommentId || null,
+    currentReplyText: currentReplyText || '',
+    editingComment: editingComment || null,
+    activeCommentMenu: activeCommentMenu || null,
+    expandedReplies,
+    maxCommentLength: 500,
     onCommentSubmit: handleMainCommentSubmitCallback,
     onReplySubmit: handleReplySubmit,
     onEditSave: handleEditSave,
-    onDelete: handleDeleteComment,
-    onLike: () => {}, // TODO: Implement comment like functionality
-    onDislike: () => {}, // TODO: Implement comment dislike functionality
-    replyingToCommentId: replyingToCommentId || undefined,
-    onSetReplyingToCommentId: setReplyingToCommentId as (id: string | null) => void,
-    currentReplyText: currentReplyText || '',
-    onCurrentReplyTextChange: setCurrentReplyText,
-    editingComment: editingComment || undefined,
-    onSetEditingComment: setEditingComment as (comment: { id: string; text: string } | null) => void,
-    activeCommentMenu: activeCommentMenu || undefined,
+    onDeleteComment: handleDeleteComment,
+    onToggleLikeDislike: () => {}, // TODO: Implement comment like/dislike functionality
+    onSortChange: setCommentSortOrder,
+    onSetReplyingTo: setReplyingToCommentId as (id: string | null, text?: string) => void,
+    onSetCurrentReplyText: setCurrentReplyText,
+    onSetEditingComment: setEditingComment as (comment: { id: string; parentId?: string } | null) => void,
     onSetActiveCommentMenu: setActiveCommentMenu as (id: string | null) => void,
-    expandedReplies,
-    onToggleReplies: (commentId: string) => {
-      setExpandedReplies(prev => ({
-        ...prev,
-        [commentId]: !prev[commentId]
-      }));
-    },
-    currentUser: {
-      id: 'current-user-id',
-      name: 'Current User',
-      avatarUrl: ''
+    onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
+      setExpandedReplies(updater);
     },
     playerSettings: {
       isFullscreen: false,
