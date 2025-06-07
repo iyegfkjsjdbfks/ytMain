@@ -8,7 +8,7 @@ import ThumbsUpIcon from './icons/ThumbsUpIcon';
 import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import AddCommentForm from './AddCommentForm';
 
-interface Comment {
+export interface Comment {
   id: string;
   parentId?: string;
   userAvatarUrl: string;

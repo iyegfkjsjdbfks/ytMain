@@ -8,7 +8,8 @@ import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
 // Removed unused ReusableVideoGrid import
 // Removed unused LoadingSpinner import
-import { Video, Comment } from '../src/types/core';
+import { Video, UserPlaylist, UserPlaylistDetails, Playlist } from '../src/types/core';
+import type { Comment } from '../components/CommentsSection';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
 // Removed unused useWatchPage import
@@ -108,7 +109,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [comments] = useState<Comment[]>([]);
   const [currentReplyText, setCurrentReplyText] = useState('');
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
-  const [editingComment, setEditingComment] = useState<string | null>(null);
+  const [editingComment, setEditingComment] = useState<{ id: string; parentId?: string } | null>(null);
 
   // Watch later hook
   const { addToWatchLater } = useWatchLater();
@@ -213,7 +214,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Handler functions already declared above - removing duplicates
   
   // Handle create playlist
-  const handleCreatePlaylist = useCallback(async (name: string, description?: string) => {
+  const handleCreatePlaylist = useCallback(async (name: string, description?: string): Promise<Playlist> => {
     try {
       // TODO: Implement playlist creation functionality
       console.log('Creating playlist:', name, description);
@@ -226,7 +227,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         isPrivate: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
-      };
+      } as Playlist;
     } catch (error) {
       console.error('Error creating playlist:', error);
       throw error;
@@ -263,7 +264,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // handleSubscribe and handleAddToWatchLater already declared above - removing duplicates
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = useCallback(async (videoId: string, playlistId: string) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: string, playlistId: string) => {
     try {
       // Call the original handler if it exists
       // TODO: Implement save to playlist functionality
@@ -438,7 +439,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   };
 
   // Comments section configuration
-  const commentsSectionProps = videoState ? {
+  const commentsSectionProps: import('../components/CommentsSection').CommentsSectionProps = videoState ? {
     comments: comments || [],
     commentCount: (comments || []).length,
     commentSortOrder: commentSortOrder,
@@ -446,28 +447,23 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     currentReplyText: currentReplyText || '',
     editingComment: editingComment || null,
     activeCommentMenu: activeCommentMenu || null,
-    expandedReplies,
+    expandedReplies: Array.from(expandedReplies).reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>),
     maxCommentLength: 500,
     onCommentSubmit: handleMainCommentSubmitCallback,
     onReplySubmit: handleReplySubmit,
     onEditSave: handleEditSave,
     onDeleteComment: handleDeleteComment,
-    onToggleLikeDislike: () => {}, // TODO: Implement comment like/dislike functionality
+    onToggleLikeDislike: (_id: string, _parentId: string | undefined, _action: 'like' | 'dislike') => {}, // TODO: Implement comment like/dislike functionality
     onSortChange: setCommentSortOrder,
     onSetReplyingTo: setReplyingToCommentId as (id: string | null, text?: string) => void,
     onSetCurrentReplyText: setCurrentReplyText,
-    onSetEditingComment: setEditingComment as (comment: { id: string; parentId?: string } | null) => void,
+    onSetEditingComment: setEditingComment,
     onSetActiveCommentMenu: setActiveCommentMenu as (id: string | null) => void,
-    onSetExpandedReplies: (commentId: string) => {
-      setExpandedReplies(prev => {
-        const newSet = new Set(prev);
-        if (newSet.has(commentId)) {
-          newSet.delete(commentId);
-        } else {
-          newSet.add(commentId);
-        }
-        return newSet;
-      });
+    onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
+      const currentRecord = Array.from(expandedReplies).reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>);
+      const newRecord = updater(currentRecord);
+      const newSet = new Set(Object.keys(newRecord).filter(key => newRecord[key]));
+      setExpandedReplies(newSet);
     },
   } : {
     comments: [],
