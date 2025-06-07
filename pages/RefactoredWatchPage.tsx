@@ -93,13 +93,13 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   toggleLikeDislikeForCommentOrReply: propToggleLikeDislikeForCommentOrReply = async (commentId: string, action: boolean) => {},
 }) => {
   const { useState, useCallback } = React;
-  const [isSummaryLoading, setIsSummaryLoading] = useState<boolean>(false);
+  const [isSummaryLoading] = useState<boolean>(false);
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
-  const [liked, setLiked] = useState<boolean>(false);
-  const [disliked, setDisliked] = useState<boolean>(false);
+  const [liked] = useState<boolean>(false);
+  const [disliked] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isDisliked, setIsDisliked] = useState<boolean>(false);
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
@@ -122,12 +122,9 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // const { showMiniplayer } = useMiniplayer();
 
   // Watch later hook
-  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const { addToWatchLater } = useWatchLater();
 
-  // Save modal close function
-  const closeSaveModal = useCallback(() => {
-    setIsSaveModalOpen(false);
-  }, []);
+  // Removed unused closeSaveModal function
 
   // Mock channel data
   const channel = {
@@ -148,15 +145,16 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setVideoState(updatedVideo);
       setIsLiked(propVideo.isLiked || false);
       setIsDisliked(propVideo.isDisliked || false);
-      setIsSubscribed(propVideo.isSubscribed || false);
-      setIsSavedToAnyList(propVideo.isSavedToAnyList || false);
+      setIsSubscribed(false); // Default value as property doesn't exist on Video type
+      setIsSavedToAnyList(false); // Default value as property doesn't exist on Video type
     }
-    setLoadingState(propLoading);
-    setErrorState(propError);
+    setIsLoading(propLoading);
+    setError(propError);
   }, [propVideo, propLoading, propError]);
 
   // Handle video like
   const handleLike = useCallback(async () => {
+    if (!videoState?.id) return;
     try {
       await propHandleLike(videoState.id);
       setIsLiked(true);
@@ -164,10 +162,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     } catch (err) {
       setActionError('Failed to like video');
     }
-  }, [propHandleLike, videoState.id]);
+  }, [propHandleLike, videoState?.id]);
 
   // Handle video dislike
   const handleDislike = useCallback(async () => {
+    if (!videoState?.id) return;
     try {
       await propHandleDislike(videoState.id);
       setIsDisliked(true);
@@ -175,20 +174,22 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     } catch (err) {
       setActionError('Failed to dislike video');
     }
-  }, [propHandleDislike, videoState.id]);
+  }, [propHandleDislike, videoState?.id]);
 
   // Handle channel subscription
   const handleSubscribe = useCallback(async () => {
+    if (!videoState?.channel?.id) return;
     try {
       await propHandleSubscribe(videoState.channel.id);
       setIsSubscribed(true);
     } catch (err) {
       setActionError('Failed to subscribe to channel');
     }
-  }, [propHandleSubscribe, videoState.channel.id]);
+  }, [propHandleSubscribe, videoState?.channel?.id]);
 
   // Handle adding video to watch later
   const handleAddToWatchLater = useCallback(async () => {
+    if (!videoState) return;
     try {
       await addToWatchLater(videoState);
       setIsSaved(true);
@@ -197,37 +198,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     }
   }, [addToWatchLater, videoState]);
 
-  // Handle saving to playlist
-  const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
-    try {
-      await propHandleSaveToPlaylist(videoState.id, playlistId);
-      setIsSaveModalOpen(false);
-    } catch (err) {
-      setActionError('Failed to save to playlist');
-    }
-  }, [propHandleSaveToPlaylist, videoState.id]);
+  // Removed unused handleSaveToPlaylist function
 
-  // Handle creating new playlist
-  const handleCreateNewPlaylist = useCallback(async (name: string) => {
-    try {
-      await propHandleCreatePlaylist(name, false); // Default to public playlist
-      setIsSaveModalOpen(false);
-    } catch (err) {
-      setActionError('Failed to create playlist');
-    }
-  }, [propHandleCreatePlaylist]);
+  // Handle creating new playlist - removed as unused
   
   // State variables already declared above - removing duplicate declarations
   
   // UI state (some variables already declared above)
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   
   // Comment state (already declared above)
   
-  // Playlist state
-  const [selectedPlaylistId, setSelectedPlaylistId] = useState('');
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [isLoadingPlaylists, setIsLoadingPlaylists] = useState(false);
+  // Playlist state - removed unused selectedPlaylistId
   
   // Loading and error states (already declared above)
   
@@ -266,12 +247,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
 
   
-  // Toggle like/dislike for comment or reply
-  const toggleLikeDislike = useCallback((commentId: string, action: 'like' | 'dislike') => {
-    if (propToggleLikeDislikeForCommentOrReply) {
-      propToggleLikeDislikeForCommentOrReply(commentId, action === 'like');
-    }
-  }, [propToggleLikeDislikeForCommentOrReply]);
+  // Toggle like/dislike functionality removed as unused
   
   // Handle summarize description
   const handleSummarize = useCallback(async () => {
@@ -404,23 +380,21 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   }, [handleDislike]);
 
   // Video player configuration
-  const videoPlayerProps = videoState
-    ? {
-        video: videoState,
-        autoplay: true,
-        muted: false,
-        onTimeUpdate: (_currentTime: number) => {
-          // Handle time update
-        },
-        onEnded: () => {
-          // Handle video end
-        },
-        onError: (error: string) => {
-          console.error('Video player error:', error);
-          setActionError(error);
-        },
-      }
-    : null;
+  const videoPlayerProps = {
+    video: videoState!,
+    autoplay: true,
+    muted: false,
+    onTimeUpdate: (_currentTime: number) => {
+      // Handle time update
+    },
+    onEnded: () => {
+      // Handle video end
+    },
+    onError: (error: string) => {
+      console.error('Video player error:', error);
+      setActionError(error);
+    },
+  };
 
   // Video actions configuration
   const videoActionsProps = {
