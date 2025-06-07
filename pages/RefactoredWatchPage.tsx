@@ -104,18 +104,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     setIsLoading,
     comments,
     setComments,
-    commentCount,
-    setCommentCount,
-    relatedVideos,
-    setRelatedVideos,
     currentReplyText,
     setCurrentReplyText,
     replyingToCommentId,
     setReplyingToCommentId,
     editingComment,
-    setEditingComment,
-    maxCommentLength,
-    setMaxCommentLength
+    setEditingComment
   } = useRefactoredHooks();
 
   // Watch later hook
@@ -214,7 +208,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setIsSubscribed(false); // TODO: Add proper subscribed state from video
     }
     setIsLoading(propLoading || false);
-    setErrorState(propError);
   }, [propVideo, propLoading, propError]);
   
 
@@ -443,8 +436,16 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onSetCurrentReplyText: setCurrentReplyText,
     onSetEditingComment: setEditingComment as (comment: { id: string; parentId?: string } | null) => void,
     onSetActiveCommentMenu: setActiveCommentMenu as (id: string | null) => void,
-    onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
-      setExpandedReplies(updater);
+    onSetExpandedReplies: (commentId: string) => {
+      setExpandedReplies(prev => {
+        const newSet = new Set(prev);
+        if (newSet.has(commentId)) {
+          newSet.delete(commentId);
+        } else {
+          newSet.add(commentId);
+        }
+        return newSet;
+      });
     },
   } : {
     comments: [],
