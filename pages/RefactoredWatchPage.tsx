@@ -166,7 +166,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     try {
       await propHandleDislike(videoState.id);
       // TODO: Update UI state when dislike functionality is implemented
-    } catch (err) {
+    } catch (actionErr) {
       setActionError('Failed to dislike video');
     }
   }, [propHandleDislike, videoState?.id]);
@@ -279,8 +279,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           videoUrl: videoState.videoUrl || videoState.url || '',
           duration: videoState.duration || '0:00',
           views: videoState.views || '0',
-          likes: videoState.likes || 0,
-          dislikes: videoState.dislikes || 0,
+          likes: mockVideo.likes || 0,
+          dislikes: mockVideo.dislikes || 0,
           uploadedAt: videoState.uploadedAt || videoState.createdAt || new Date().toISOString(),
           publishedAt: videoState.publishedAt || videoState.createdAt || new Date().toISOString(),
           channelName: videoState.channelName || 'Unknown Channel',
@@ -294,9 +294,9 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
             isVerified: false
           },
           category: videoState.category || 'Entertainment',
-          tags: videoState.tags || [],
-          visibility: (videoState.visibility as 'public' | 'unlisted' | 'private') || 'public',
-          commentCount: videoState.commentCount || 0,
+          tags: mockVideo.tags || [],
+          visibility: mockVideo.visibility || 'public',
+          commentCount: mockVideo.commentCount || 0,
           isLive: videoState.isLive || false,
           isUpcoming: videoState.isUpcoming || false,
           isPremiere: videoState.isPremiere || false,
