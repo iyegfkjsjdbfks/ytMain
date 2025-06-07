@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef   } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useMiniplayer } from '../contexts/MiniplayerContext';
+// import { useMiniplayer } from '../contexts/MiniplayerContext'; // Unused
 import StandardPageLayout from '../components/StandardPageLayout';
 import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
 import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
@@ -90,7 +90,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleReplySubmit: propHandleReplySubmit = async () => ({} as Comment),
   handleEditSave: propHandleEditSave = async () => {},
   handleDeleteComment: propHandleDeleteComment = async () => {},
-  toggleLikeDislikeForCommentOrReply: propToggleLikeDislikeForCommentOrReply = async () => {},
+  toggleLikeDislikeForCommentOrReply: propToggleLikeDislikeForCommentOrReply = async (commentId: string, action: boolean) => {},
 }) => {
   const { useState, useCallback } = React;
   const [isSummaryLoading, setIsSummaryLoading] = useState<boolean>(false);
@@ -113,13 +113,18 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
   const [videoState, setVideoState] = useState<Video | null>(propVideo);
   const [errorState, setErrorState] = useState<Error | null>(propError);
-  const [loadingState, setLoadingState] = useState<boolean>(propLoading);
+  const [isLoading, setIsLoading] = useState<boolean>(propLoading);
 
-  // Miniplayer hook
-  const { showMiniplayer } = useMiniplayer();
+  // Miniplayer hook - unused
+  // const { showMiniplayer } = useMiniplayer();
 
   // Watch later hook
-  const { addToWatchLater } = useWatchLater();
+  const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+
+  // Save modal close function
+  const closeSaveModal = useCallback(() => {
+    setIsSaveModalOpen(false);
+  }, []);
 
   // Mock channel data
   const channel = {
@@ -133,13 +138,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Sync props with state
   useEffect(() => {
     if (propVideo) {
-      setVideoState(propVideo);
+      const updatedVideo = {
+        ...propVideo,
+        viewCount: typeof propVideo.views === 'string' ? parseInt(propVideo.views) || 0 : propVideo.viewCount || 0
+      };
+      setVideoState(updatedVideo);
       setIsLiked(propVideo.isLiked || false);
       setIsDisliked(propVideo.isDisliked || false);
       setIsSubscribed(propVideo.isSubscribed || false);
-      setIsSaved(propVideo.isSavedToAnyList || false);
+      setIsSavedToAnyList(propVideo.isSavedToAnyList || false);
     }
-    setIsLoading(propLoading);
+    setLoadingState(propLoading);
     setErrorState(propError);
   }, [propVideo, propLoading, propError]);
 
@@ -205,20 +214,9 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     }
   }, [propHandleCreatePlaylist, videoState.id]);
   
-  // Initialize state with proper types
-  const [videoState, setVideoState] = useState<Video>(propVideo || mockVideo);
-  const [isLoading, setIsLoading] = useState(propLoading || false);
-  const [errorState, setErrorState] = useState<Error | null>(propError || null);
+  // State variables already declared above - removing duplicate declarations
   
-  // Video interaction state
-  const [isLiked, setIsLiked] = useState(propVideo?.isLiked ?? false);
-  const [isDisliked, setIsDisliked] = useState(propVideo?.isDisliked ?? false);
-  const [isSubscribed, setIsSubscribed] = useState(propVideo?.isSubscribed ?? false);
-  const [isSaved, setIsSaved] = useState(propVideo?.isSavedToAnyList ?? false);
-  
-  // UI state
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
+  // UI state (some variables already declared above)
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   
   // Comment state (already declared above)
@@ -233,10 +231,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [isSummaryLoading, setIsSummaryLoading] = useState(false);
   const [summary, setSummary] = useState('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
-  
-  // Watch later hook
-  const { addToWatchLater } = useWatchLater();
+  // actionError already declared above
   
   // Update state when props change
   useEffect(() => {
@@ -253,70 +248,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
 
   
-  // Handle add to watch later
-  const handleAddToWatchLater = useCallback(async () => {
-    if (!video?.id) return;
-    
-    try {
-      await addToWatchLater(video);
-      setIsSaved(true);
-    } catch (err) {
-      setActionError('Failed to add to watch later');
-      console.error('Error adding to watch later:', err);
-    }
-  }, [video, addToWatchLater]);
-  
-  // Handle saving to a specific playlist
-  const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
-    if (!video?.id) return;
-    
-    try {
-      const videoToAdd: Video = {
-        id: video.id,
-        createdAt: video.createdAt || new Date().toISOString(),
-        updatedAt: video.updatedAt || new Date().toISOString(),
-        title: video.title || 'Untitled Video',
-        description: video.description || '',
-        duration: video.duration || '0:00',
-        thumbnailUrl: video.thumbnailUrl || '',
-        videoUrl: video.videoUrl || '',
-        views: video.views || '0',
-        likes: video.likes || 0,
-        dislikes: video.dislikes || 0,
-        channelName: video.channelName || 'Unknown Channel',
-        channelAvatarUrl: video.channelAvatarUrl || '',
-        uploadedAt: video.uploadedAt || new Date().toISOString(),
-        channelId: video.channelId || 'unknown-channel',
-        category: video.category || 'Entertainment',
-        tags: video.tags || [],
-        visibility: video.visibility || 'public',
-        commentCount: video.commentCount || 0,
-        viewCount: video.viewCount || 0
-      };
-      
-      if (propHandleAddToWatchLater) {
-        await propHandleAddToWatchLater(videoToAdd);
-      } else if (addToWatchLater) {
-        await addToWatchLater(videoToAdd);
-      }
-    } catch (err) {
-      console.error('Error adding to watch later:', err);
-      // Handle error appropriately
-    }
-  }, [video, propHandleAddToWatchLater, addToWatchLater]);
-  
-  // Handle save to playlist
-  const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
-    try {
-      if (propHandleSaveToPlaylist) {
-        await propHandleSaveToPlaylist(playlistId);
-      }
-      setIsSaveModalOpen(false);
-    } catch (error) {
-      console.error('Error saving to playlist:', error);
-      // Handle error appropriately
-    }
-  }, [propHandleSaveToPlaylist]);
+  // Handler functions already declared above - removing duplicates
   
   // Handle create playlist
   const handleCreatePlaylist = useCallback(async (name: string, isPrivate: boolean) => {
@@ -378,11 +310,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   
   // Handle summarize description
   const handleSummarize = useCallback(async () => {
-    if (!video?.id || !propHandleSummarizeDescription) return;
+    if (!videoState?.id || !propHandleSummarizeDescription) return;
     
     try {
       setIsSummarizing(true);
-      const result = await propHandleSummarizeDescription(video.id);
+      const result = await propHandleSummarizeDescription(videoState.id);
       setSummary(result);
     } catch (error) {
       console.error('Error summarizing description:', error);
@@ -390,49 +322,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     } finally {
       setIsSummarizing(false);
     }
-  }, [video?.id, propHandleSummarizeDescription]);
+  }, [videoState?.id, propHandleSummarizeDescription]);
   
   // Handler functions with fallbacks to props or default implementations
-  const handleLike = useCallback((videoId: string) => {
-    if (propHandleLike) {
-      propHandleLike(videoId);
-    }
-  }, [propHandleLike]);
+  // handleLike already declared above - removing duplicate
   
-  const handleSubscribe = useCallback((channelId: string) => {
-    if (propHandleSubscribe) {
-      propHandleSubscribe(channelId);
-    }
-  }, [propHandleSubscribe]);
-  
-  // ... other handler functions with similar patterns ...
-  
-  const handleAddToWatchLater = useCallback(async () => {
-    if (!videoState?.id) return;
-    
-    try {
-      const videoToAdd: Video = {
-        ...videoState,
-        title: videoState.title || 'Untitled Video',
-        description: videoState.description || '',
-        duration: videoState.duration || '0:00',
-        thumbnailUrl: videoState.thumbnailUrl || '',
-        videoUrl: videoState.videoUrl || '',
-        viewCount: videoState.viewCount || 0,
-        channelName: videoState.channelName || 'Unknown Channel',
-        channelAvatarUrl: videoState.channelAvatarUrl || '',
-        uploadedAt: videoState.uploadedAt || new Date().toISOString()
-      };
-      
-      if (propHandleAddToWatchLater) {
-        await propHandleAddToWatchLater(videoToAdd);
-      } else if (addToWatchLater) {
-        await addToWatchLater(videoToAdd);
-      }
-    } catch (err) {
-      console.error('Error adding to watch later:', err);
-    }
-  }, [videoState, propHandleAddToWatchLater, addToWatchLater]);
+  // handleSubscribe and handleAddToWatchLater already declared above - removing duplicates
 
   // Enhanced save to playlist handler that integrates with Watch Later context
   const enhancedHandleSaveToPlaylist = useCallback(async (playlistId: string) => {
