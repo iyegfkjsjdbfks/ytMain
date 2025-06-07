@@ -265,10 +265,13 @@ export const storageUtils = {
   get: <T>(key: string, defaultValue?: T): T | null => {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue || null;
+      if (item !== null) {
+        return JSON.parse(item) as T;
+      }
+      return defaultValue !== undefined ? defaultValue : null;
     } catch (error) {
       console.warn('Failed to read from localStorage:', error);
-      return defaultValue || null;
+      return defaultValue !== undefined ? defaultValue : null;
     }
   },
   
