@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef   } from 'react';
 import { useParams } from 'react-router-dom';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useMiniplayer } from '../contexts/MiniplayerContext';
 import StandardPageLayout from '../components/StandardPageLayout';
 import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
 import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
@@ -60,6 +61,7 @@ interface RefactoredWatchPageProps {
   handleDislike?: (videoId: string) => Promise<void>;
   handleSubscribe?: (channelId: string) => Promise<void>;
   handleShare?: (videoId: string) => void;
+  handleAddToWatchLater?: (video: Video) => Promise<void>;
   handleSaveToPlaylist?: (videoId: string, playlistId: string) => Promise<void>;
   handleCreatePlaylist?: (name: string, videoId: string) => Promise<void>;
   handleSummarizeDescription?: (videoId: string) => Promise<string>;
@@ -79,6 +81,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   handleDislike: propHandleDislike = async () => {},
   handleSubscribe: propHandleSubscribe = async () => {},
   handleShare = () => {},
+  handleAddToWatchLater: propHandleAddToWatchLater = async () => {},
   handleSaveToPlaylist: propHandleSaveToPlaylist = async () => {},
   handleCreatePlaylist: propHandleCreatePlaylist = async () => {},
   handleSummarizeDescription: propHandleSummarizeDescription = async () => '',
@@ -94,9 +97,38 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [summary, setSummary] = useState<string>('');
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+  const [liked, setLiked] = useState<boolean>(false);
+  const [disliked, setDisliked] = useState<boolean>(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [isSavedToAnyList, setIsSavedToAnyList] = useState<boolean>(false);
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
+  const [isSummarizing, setIsSummarizing] = useState<boolean>(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
+  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
+  const [currentReplyText, setCurrentReplyText] = useState<string>('');
+  const [editingComment, setEditingComment] = useState<{ id: string; text: string } | null>(null);
+  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
+  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
+  const [videoState, setVideoState] = useState<Video | null>(propVideo);
+  const [errorState, setErrorState] = useState<Error | null>(propError);
+  const [loadingState, setLoadingState] = useState<boolean>(propLoading);
+
+  // Miniplayer hook
+  const { showMiniplayer } = useMiniplayer();
 
   // Watch later hook
   const { addToWatchLater } = useWatchLater();
+
+  // Mock channel data
+  const channel = {
+    id: propVideo?.channelId || '1',
+    name: propVideo?.channelName || 'Sample Channel',
+    avatarUrl: propVideo?.channelAvatarUrl || 'https://via.placeholder.com/48',
+    subscribers: 1200000,
+    isVerified: true,
+  };
 
   // Sync props with state
   useEffect(() => {
@@ -360,7 +392,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       setSummary(result);
     } catch (error) {
       console.error('Error summarizing description:', error);
-      // Handle error appropriately
+      setSummaryError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsSummarizing(false);
     }
@@ -407,64 +439,33 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     } catch (err) {
       console.error('Error adding to watch later:', err);
     }
-  }, [video, propHandleAddToWatchLater, addToWatchLater]);
-
-  const { videoId = '' } = useParams<{ videoId: string }>();
-  const {
-    video = mockVideo,
-  } = {};
-  // Handle add to watch later
-  const handleAddToWatchLater = useCallback(() => {
-    if (!video) return;
-
-    const videoToAdd: Video = {
-      ...video,
-      id: video.id || '',
-      title: video.title || 'Untitled',
-      description: video.description || '',
-      views: video.views || '0',
-      uploadedAt: video.uploadedAt || new Date().toISOString(),
-      thumbnailUrl: video.thumbnailUrl || '',
-      videoUrl: video.videoUrl || '',
-      channelId: video.channelId || '',
-      channelName: video.channelName || '',
-      channelAvatarUrl: video.channelAvatarUrl || '',
-      duration: video.duration || '0:00',
-      category: video.category || 'Education',
-      createdAt: video.createdAt || new Date().toISOString(),
-      updatedAt: video.updatedAt || new Date().toISOString(),
-    };
-
-    if (video.id) {
-      addToWatchLater(videoToAdd);
-    }
-  }, [video, addToWatchLater]);
+  }, [videoState, propHandleAddToWatchLater, addToWatchLater]);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
   const enhancedHandleSaveToPlaylist = useCallback(async (playlistId: string) => {
     try {
       // Call the original handler if it exists
-      if (handleSaveToPlaylist) {
-        await handleSaveToPlaylist(playlistId);
+      if (propHandleSaveToPlaylist) {
+        await propHandleSaveToPlaylist(videoState?.id || '', playlistId);
       }
 
       // If saving to Watch Later, also add to Watch Later context
-      if (playlistId === 'playlist-1' && video) {
+      if (playlistId === 'playlist-1' && videoState) {
         const now = new Date().toISOString();
         const coreVideo: Video = {
-          ...video,
-          id: video.id,
-          title: video.title || 'Untitled Video',
-          description: video.description || '',
-          views: video.views || '0',
-          uploadedAt: video.uploadedAt || now,
-          thumbnailUrl: video.thumbnailUrl || '',
-          videoUrl: video.videoUrl || '',
-          channelId: video.channelId || 'unknown-channel',
-          channelName: video.channelName || 'Unknown Channel',
-          channelAvatarUrl: video.channelAvatarUrl || '',
-          duration: video.duration || '0:00',
-          category: video.category || 'Other',
+          ...videoState,
+          id: videoState.id,
+          title: videoState.title || 'Untitled Video',
+          description: videoState.description || '',
+          views: videoState.views || '0',
+          uploadedAt: videoState.uploadedAt || now,
+          thumbnailUrl: videoState.thumbnailUrl || '',
+          videoUrl: videoState.videoUrl || '',
+          channelId: videoState.channelId || 'unknown-channel',
+          channelName: videoState.channelName || 'Unknown Channel',
+          channelAvatarUrl: videoState.channelAvatarUrl || '',
+          duration: videoState.duration || '0:00',
+          category: videoState.category || 'Other',
           likes: 0,
           dislikes: 0,
           tags: [],
@@ -473,95 +474,51 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           viewCount: 0,
           createdAt: now,
           updatedAt: now,
-          status: 'published',
         };
 
         if (addToWatchLater) {
           await addToWatchLater(coreVideo);
         }
       }
+      
+      // Close the modal
+      setIsSaveModalOpen(false);
     } catch (error) {
       console.error('Error saving to playlist:', error);
+      setActionError(error instanceof Error ? error.message : 'Error saving to playlist');
     }
-  }, [video, handleSaveToPlaylist, addToWatchLater]);
+  }, [videoState, propHandleSaveToPlaylist, addToWatchLater]);
 
-  // Handle watch later
-  const handleAddToWatchLater = useCallback(async () => {
-    if (!video) return;
 
-    const videoToAdd: Video = {
-      ...video,
-      id: video.id,
-      title: video.title,
-      description: video.description || '',
-      views: video.views || '0',
-      uploadedAt: video.uploadedAt || new Date().toISOString(),
-      thumbnailUrl: video.thumbnailUrl || '',
-      videoUrl: video.videoUrl || '',
-      channelId: video.channelId || '',
-      channelName: video.channelName || 'Unknown Channel',
-      channelAvatarUrl: video.channelAvatarUrl || '',
-      duration: video.duration || '0:00',
-      category: video.category || 'Other',
-      likes: 0,
-      dislikes: 0,
-      tags: [],
-      visibility: 'public',
-      createdAt: video.createdAt || new Date().toISOString(),
-      updatedAt: video.updatedAt || new Date().toISOString(),
-    };
 
-    await addToWatchLater(videoToAdd);
-  }, [video, addToWatchLater]);
+  // Define missing prop functions
+  const propHandleMainCommentSubmitCallback = useCallback((commentText: string) => {
+    console.log('Submitting comment:', commentText);
+  }, []);
 
-  // Handle save to playlist
-  const handleSaveToPlaylist = useCallback(async (playlistId: string) => {
-    try {
-      // Implementation for saving to playlist
-      // Close the modal if it exists
-      if (closeSaveModal) {
-        closeSaveModal();
-      }
-    } catch (error) {
-      console.error('Error saving to playlist:', error);
-    }
-  }, [closeSaveModal]);
 
-  // Handle miniplayer
-  const handleMiniplayer = useCallback(() => {
-    if (!video) return;
 
-    const now = new Date().toISOString();
-    const videoForMiniplayer: Video = {
-      ...video,
-      id: video.id,
-      title: video.title || 'Untitled Video',
-      description: video.description || '',
-      views: video.views || '0',
-      uploadedAt: video.uploadedAt || now,
-      thumbnailUrl: video.thumbnailUrl || '',
-      videoUrl: video.videoUrl || '',
-      channelId: video.channelId || 'unknown-channel',
-      channelName: video.channelName || 'Unknown Channel',
-      channelAvatarUrl: video.channelAvatarUrl || '',
-      duration: video.duration || '0:00',
-      category: video.category || 'Other',
-      likes: 0,
-      dislikes: 0,
-      tags: [],
-      visibility: 'public',
-      commentCount: 0,
-      viewCount: 0,
-      createdAt: now,
-      updatedAt: now,
-      status: 'published',
-    };
 
-    // Show miniplayer if the function exists
-    if (showMiniplayer) {
-      showMiniplayer(videoForMiniplayer);
-    }
-  }, [video, showMiniplayer]);
+
+  const handleDeleteComment = useCallback((commentId: string) => {
+    console.log('Deleting comment:', commentId);
+  }, []);
+
+  const handleMainCommentSubmitCallback = useCallback((commentText: string) => {
+    console.log('Submitting main comment:', commentText);
+  }, []);
+
+  const handleReplySubmit = useCallback((commentId: string, replyText: string) => {
+    console.log('Submitting reply:', commentId, replyText);
+  }, []);
+
+  const handleEditSave = useCallback((commentId: string, newText: string) => {
+    console.log('Editing comment:', commentId, newText);
+  }, []);
+
+  const handleToggleDescription = useCallback(() => {
+    setShowFullDescription(!showFullDescription);
+  }, [showFullDescription]);
 
   // Enhanced action handlers with error handling
   const handleEnhancedLike = useCallback(() => {
@@ -569,7 +526,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       handleLike();
     } catch (err) {
       console.error('Error liking video:', err);
-      setActionError(err as Error);
+      setActionError(err instanceof Error ? err.message : 'An error occurred');
     }
   }, [handleLike]);
 
@@ -578,25 +535,27 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       handleSubscribe();
     } catch (err) {
       console.error('Error subscribing to channel:', err);
-      setActionError(err as Error);
+      setActionError(err instanceof Error ? err.message : 'An error occurred');
     }
   }, [handleSubscribe]);
 
   const handleEnhancedShare = useCallback(() => {
     try {
-      handleShare();
+      if (video?.id) {
+        handleShare(video.id);
+      }
     } catch (err) {
       console.error('Error sharing video:', err);
-      setActionError(err as Error);
+      setActionError(err instanceof Error ? err.message : 'An error occurred');
     }
-  }, [handleShare]);
+  }, [handleShare, video?.id]);
 
   const handleEnhancedDislike = useCallback(() => {
     try {
       handleDislike();
     } catch (err) {
       console.error('Error disliking video:', err);
-      setActionError(err as Error);
+      setActionError(err instanceof Error ? err.message : 'An error occurred');
     }
   }, [handleDislike]);
 
@@ -604,11 +563,11 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const videoPlayerProps = video
     ? {
         video: {
-          ...video,
-          captions: video.captions || [],
-          duration: video.duration || '0:00',
-          thumbnailUrl: video.thumbnailUrl || '',
-          videoUrl: video.videoUrl || '',
+          ...videoState,
+          captions: videoState.captions || [],
+          duration: videoState.duration || '0:00',
+          thumbnailUrl: videoState.thumbnailUrl || '',
+          videoUrl: videoState.videoUrl || '',
         },
         autoPlay: true,
         showControls: true,
@@ -620,7 +579,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         isMiniPlayer: false,
         isFullscreen: false,
         showCaptions: true,
-        captions: video?.captions?.map((caption) => ({
+        captions: videoState?.captions?.map((caption: any) => ({
           id: caption.id,
           language: {
             code: caption.language.code,
@@ -638,7 +597,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         onToggleTheaterMode: () => {},
         onToggleMiniPlayer: () => {},
         onToggleFullscreen: () => {},
-        onTimeUpdate: (currentTime: number) => {
+        onTimeUpdate: () => {
           // Handle time update
         },
         onEnded: () => {
@@ -646,7 +605,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         },
         onError: (error: string) => {
           console.error('Video player error:', error);
-          setActionError(new Error(error));
+          setActionError(error);
         },
       }
     : null;
@@ -657,10 +616,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     disliked,
     isSubscribed,
     isSavedToAnyList,
-    likeCount: video?.likes || 0,
-    dislikeCount: video?.dislikes || 0,
-    commentCount: video?.commentCount || 0,
-    viewCount: video?.viewCount || 0,
+    likeCount: videoState?.likes || 0,
+    dislikeCount: videoState?.dislikes || 0,
+    commentCount: videoState?.commentCount || 0,
+    viewCount: videoState?.viewCount || 0,
     onLike: handleEnhancedLike,
     onDislike: handleEnhancedDislike,
     onSubscribe: handleEnhancedSubscribe,
@@ -675,31 +634,15 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     },
   };
 
-  // Handle summarize description
-  const handleSummarize = useCallback(async () => {
-    if (!video?.description) return;
 
-    setIsSummarizing(true);
-    setSummaryError(null);
-
-    try {
-      const result = await handleSummarizeDescription();
-      setSummary(result);
-    } catch (err) {
-      console.error('Error summarizing description:', err);
-      setSummaryError(err as Error);
-    } finally {
-      setIsSummarizing(false);
-    }
-  }, [video?.description, handleSummarizeDescription]);
 
   // Video description configuration
   const videoDescriptionProps = {
-    video: video!,
+    video: videoState!,
     channel: channel!,
     showFullDescription,
     summary: summary || undefined,
-    summaryError: summaryError?.message,
+    summaryError: summaryError,
     isSummarizing,
     onToggleDescription: handleToggleDescription,
     onSummarize: handleSummarize,
@@ -708,7 +651,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   };
 
   // Comments section configuration
-  const commentsSectionProps = video ? {
+  const commentsSectionProps = videoState ? {
     comments: comments || [],
     sortOrder: commentSortOrder,
     onSortChange: setCommentSortOrder,
@@ -716,8 +659,8 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onReplySubmit: handleReplySubmit,
     onEditSave: handleEditSave,
     onDelete: handleDeleteComment,
-    onLike: toggleLikeDislikeForCommentOrReply,
-    onDislike: toggleLikeDislikeForCommentOrReply,
+    onLike: (commentId: string) => propToggleLikeDislikeForCommentOrReply(commentId, true),
+    onDislike: (commentId: string) => propToggleLikeDislikeForCommentOrReply(commentId, false),
     replyingToCommentId: replyingToCommentId || undefined,
     onSetReplyingToCommentId: setReplyingToCommentId as (id: string | null) => void,
     currentReplyText: currentReplyText || '',
@@ -741,7 +684,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     playerSettings: {
       isFullscreen: false,
       showCaptions: true,
-      captions: video.captions?.map((caption) => ({
+      captions: videoState.captions?.map((caption: any) => ({
         id: caption.id,
         language: {
           code: caption.language.code,
@@ -759,7 +702,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       onToggleTheaterMode: () => {},
       onToggleMiniPlayer: () => {},
       onToggleFullscreen: () => {},
-      onTimeUpdate: (currentTime: number) => {
+      onTimeUpdate: () => {
         // Handle time update
       },
       onEnded: () => {
@@ -767,207 +710,12 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
       },
       onError: (error: string) => {
         console.error('Video player error:', error);
-        setActionError(new Error(error));
+        setActionError(error);
       }
     }
   } : null;
 
-  // Video actions configuration
-const videoActionsProps = {
-  liked,
-  disliked,
-  isSubscribed,
-  isSavedToAnyList,
-  likeCount: video?.likes || 0,
-  dislikeCount: video?.dislikes || 0,
-  commentCount: video?.commentCount || 0,
-  viewCount: video?.viewCount || 0,
-  onLike: handleEnhancedLike,
-  onDislike: handleEnhancedDislike,
-  onSubscribe: handleEnhancedSubscribe,
-  onShare: handleEnhancedShare,
-  onSave: () => setIsSaveModalOpen(true),
-  onAddToWatchLater: handleAddToWatchLater,
-  onComment: () => {
-    // Handle comment action
-  },
-  onMore: () => {
-    // Handle more options
-  },
-};
 
-// Handle summarize description
-const handleSummarize = useCallback(async () => {
-  if (!video?.description) return;
-
-  setIsSummarizing(true);
-  setSummaryError(null);
-
-  try {
-    const result = await handleSummarizeDescription();
-    setSummary(result);
-  } catch (err) {
-    console.error('Error summarizing description:', err);
-    setSummaryError(err as Error);
-  } finally {
-    setIsSummarizing(false);
-  }
-}, [video?.description, handleSummarizeDescription]);
-
-// Video description configuration
-const videoDescriptionProps = {
-  video: video!,
-  channel: channel!,
-  showFullDescription,
-  summary: summary || undefined,
-  summaryError: summaryError?.message,
-  isSummarizing,
-  onToggleDescription: handleToggleDescription,
-  onSummarize: handleSummarize,
-  onSubscribe: handleEnhancedSubscribe,
-  isSubscribed,
-};
-
-// Comments section configuration
-  // Prepare comments section props
-  const commentsSectionProps = {
-    comments: [], // Initialize with empty array or actual comments data
-    sortOrder: commentSortOrder,
-    onSortChange: (order: 'top' | 'newest') => setCommentSortOrder(order),
-    onCommentSubmit: (commentText: string) => {
-      if (propHandleMainCommentSubmitCallback) {
-        propHandleMainCommentSubmitCallback(commentText);
-      }
-    },
-    onReplySubmit: (commentId: string, replyText: string) => {
-      if (propHandleReplySubmit) {
-        propHandleReplySubmit(commentId, replyText);
-      }
-    },
-    onEditSave: (commentId: string, newText: string) => {
-      if (propHandleEditSave) {
-        propHandleEditSave(commentId, newText);
-      }
-    },
-    onDelete: (commentId: string) => {
-      if (propHandleDeleteComment) {
-        propHandleDeleteComment(commentId);
-      }
-    },
-    onLike: (commentId: string) => {
-      if (propToggleLikeDislikeForCommentOrReply) {
-        propToggleLikeDislikeForCommentOrReply(commentId, 'like');
-      }
-    },
-    onDislike: (commentId: string) => {
-      if (propToggleLikeDislikeForCommentOrReply) {
-        propToggleLikeDislikeForCommentOrReply(commentId, 'dislike');
-      }
-    },
-    replyingToCommentId: replyingToCommentId || undefined,
-    onSetReplyingToCommentId: (id: string | null) => setReplyingToCommentId(id),
-    currentReplyText: currentReplyText || '',
-    onCurrentReplyTextChange: (text: string) => setCurrentReplyText(text),
-    editingComment: editingComment || undefined,
-    onSetEditingComment: (comment: { id: string; text: string } | null) => setEditingComment(comment),
-    activeCommentMenu: activeCommentMenu || undefined,
-    onSetActiveCommentMenu: (id: string | null) => setActiveCommentMenu(id),
-    expandedReplies: expandedReplies || [],
-    onToggleReplies: (commentId: string) => {
-      setExpandedReplies(prev => 
-        prev.includes(commentId)
-          ? prev.filter(id => id !== commentId)
-          : [...prev, commentId]
-      );
-    },
-    currentUser: {
-      id: 'current-user-id',
-      name: 'Current User',
-      avatarUrl: ''
-    }
-  };
-
-  // Video player props
-  const videoPlayerProps = {
-    video: videoState,
-    src: videoState?.videoUrl || '',
-    poster: videoState?.thumbnailUrl || '',
-    title: videoState?.title || '',
-    duration: videoState?.duration || '0:00',
-    isPlaying: true,
-    isMuted: false,
-    volume: 1,
-    playbackRate: 1,
-    currentTime: 0,
-    isFullscreen: false,
-    isTheaterMode: false,
-    isMiniPlayer: false,
-    showControls: true,
-    onPlay: () => {},
-    onPause: () => {},
-    onSeek: () => {},
-    onEnded: () => {},
-    onError: (error: string) => {
-      console.error('Video error:', error);
-      setActionError('Error playing video');
-    },
-    onCaptionChange: () => {},
-    onPlaybackRateChange: () => {},
-    onVolumeChange: () => {},
-    onToggleMute: () => {},
-    onToggleTheaterMode: () => {},
-    onToggleMiniPlayer: () => {},
-    onToggleFullscreen: () => {},
-    onTimeUpdate: () => {}
-  };
-
-  // Video actions props
-  const videoActionsProps = {
-    likes: videoState?.likes || 0,
-    dislikes: videoState?.dislikes || 0,
-    isLiked: videoState?.isLiked || false,
-    isDisliked: videoState?.isDisliked || false,
-    isSubscribed: videoState?.isSubscribed || false,
-    isSaved: videoState?.isSavedToAnyList || false,
-    onLike: () => propHandleLike(videoState?.id || ''),
-    onDislike: () => propHandleDislike(videoState?.id || ''),
-    onSubscribe: () => propHandleSubscribe(videoState?.channelId || ''),
-    onShare: () => propHandleShare(videoState?.id || ''),
-    onSave: () => setIsSaveModalOpen(true),
-    onAddToWatchLater: handleAddToWatchLater,
-    onComment: () => {
-      const commentsSection = document.getElementById('comments-section');
-      if (commentsSection) {
-        commentsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    onMore: () => {}
-  };
-
-  // Video description props
-  const videoDescriptionProps = {
-    title: videoState?.title || '',
-    viewCount: videoState?.views || 0,
-    uploadedAt: videoState?.uploadedAt || new Date().toISOString(),
-    description: videoState?.description || '',
-    channel: videoState?.channel || {
-      id: videoState?.channelId || '',
-      name: videoState?.channelName || 'Unknown Channel',
-      avatarUrl: videoState?.channelAvatarUrl || '',
-      isSubscribed: videoState?.isSubscribed || false
-    },
-    showFullDescription: isDescriptionExpanded,
-    onToggleDescription: () => {
-      setIsDescriptionExpanded(!isDescriptionExpanded);
-      propHandleToggleDescription();
-    },
-    summary: summary || '',
-    isSummarizing: isSummaryLoading,
-    onSummarize: handleSummarize,
-    summaryError: summaryError || null,
-    onSubscribe: () => propHandleSubscribe(videoState?.channel?.id || ''),
-    isSubscribed: videoState?.isSubscribed || false
-  };
 
   // Save to playlist modal props
   const saveToPlaylistModalProps = {
@@ -975,14 +723,14 @@ const videoDescriptionProps = {
     onClose: () => {
       setIsSaveModalOpen(false);
     },
-    onSave: handleSaveToPlaylist,
+    onSave: enhancedHandleSaveToPlaylist,
     playlists: [], // Empty array as we don't have mock playlists
     selectedPlaylistId: '',
     onSelectPlaylist: () => {},
     onCreatePlaylist: handleCreatePlaylist,
     videoId: videoState?.id || '',
     existingPlaylists: [],
-    onSaveToPlaylist: handleSaveToPlaylist
+    onSaveToPlaylist: enhancedHandleSaveToPlaylist
   };
 
   if (isLoading) {
