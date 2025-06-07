@@ -331,3 +331,6 @@ export function useUnifiedAppState() {
     hasUnreadNotifications: state.notifications.some(n => !n.read)
   };
 }
+
+// Export useRefactoredHooks as an alias to useUnifiedAppState
+export const useRefactoredHooks = useUnifiedAppState;

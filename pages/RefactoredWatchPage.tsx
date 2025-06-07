@@ -105,19 +105,19 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
 
   // Get data from hooks
   const {
-    videoState,
-    setVideoState,
-    isLoading,
-    setIsLoading,
-    comments,
-    setComments,
-    currentReplyText,
-    setCurrentReplyText,
-    replyingToCommentId,
-    setReplyingToCommentId,
-    editingComment,
-    setEditingComment
+    miniplayerVideo,
+    isMiniplayerOpen,
+    openMiniplayer,
+    toggleMiniplayer
   } = useRefactoredHooks();
+
+  // Local state for video page
+  const [videoState, setVideoState] = useState(propVideo || mockVideo);
+  const [isLoading, setIsLoading] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [currentReplyText, setCurrentReplyText] = useState('');
+  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
+  const [editingComment, setEditingComment] = useState<string | null>(null);
 
   // Watch later hook
   const { addToWatchLater } = useWatchLater();
