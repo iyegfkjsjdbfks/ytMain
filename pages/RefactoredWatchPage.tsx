@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useAuth } from '../contexts/AuthContext';
+// Removed unused useAuth import
 import StandardPageLayout from '../components/StandardPageLayout';
-import { RefactoredVideoPlayer } from '../components/RefactoredVideoPlayer';
-import { RefactoredVideoDescription } from '../components/RefactoredVideoDescription';
-import { CommentsSection } from '../components/CommentsSection';
+import RefactoredVideoPlayer from '../components/RefactoredVideoPlayer';
+import RefactoredVideoDescription from '../components/RefactoredVideoDescription';
+import CommentsSection from '../components/CommentsSection';
 import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
-import { ReusableVideoGrid } from '../components/ReusableVideoGrid';
-import { LoadingSpinner } from '../components/LoadingSpinner';
+// Removed unused ReusableVideoGrid import
+// Removed unused LoadingSpinner import
 import { Video, Comment } from '../src/types/core';
 import VideoActions from '../components/VideoActions';
 import RecommendationEngine from '../components/RecommendationEngine';
-import { useWatchPage } from '../hooks/useWatchPage';
-import { useRefactoredHooks } from '../hooks/useRefactoredHooks';
+// Removed unused useWatchPage import
+// Removed unused useRefactoredHooks import
 
 // Removed unused Playlist interface
 
@@ -48,9 +48,7 @@ const mockVideo: Video = {
   visibility: 'public' as const,
   commentCount: 150,
   isLive: false,
-  isShort: false,
-  isUpcoming: false,
-  isPremiere: false
+  isShort: false
 };
 
 interface RefactoredWatchPageProps {
@@ -84,10 +82,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [disliked] = useState<boolean>(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isSavedToAnyList, setIsSavedToAnyList] = useState(false);
-  const [openSaveModal, setOpenSaveModal] = useState(false);
+  // Removed unused openSaveModal state
 
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [summary, setSummary] = useState<string | null>(null);
+  const [summary] = useState<string | null>(null);
   const [summaryError, setSummaryError] = useState<string | null>(null);
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [commentSortOrder, setCommentSortOrder] = useState<'newest' | 'top'>('top');
@@ -97,24 +95,17 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
   // Add missing closeSaveModal function
-  const closeSaveModal = useCallback(() => {
-    setOpenSaveModal(false);
-  }, []);
+  // Removed unused closeSaveModal function
 
 
 
   // Get data from hooks
-  const {
-    miniplayerVideo,
-    isMiniplayerOpen,
-    openMiniplayer,
-    toggleMiniplayer
-  } = useRefactoredHooks();
+  // Removed unused miniplayer destructuring
 
   // Local state for video page
   const [videoState, setVideoState] = useState(propVideo || mockVideo);
   const [isLoading, setIsLoading] = useState(false);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments] = useState<Comment[]>([]);
   const [currentReplyText, setCurrentReplyText] = useState('');
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
   const [editingComment, setEditingComment] = useState<string | null>(null);
@@ -222,13 +213,23 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // Handler functions already declared above - removing duplicates
   
   // Handle create playlist
-  const handleCreatePlaylist = useCallback(async (name: string, isPrivate: boolean) => {
+  const handleCreatePlaylist = useCallback(async (name: string, description?: string) => {
     try {
       // TODO: Implement playlist creation functionality
-      console.log('Creating playlist:', name, isPrivate);
+      console.log('Creating playlist:', name, description);
+      // Return a mock playlist for now
+      return {
+        id: `playlist-${Date.now()}`,
+        name,
+        description: description || '',
+        videoCount: 0,
+        isPrivate: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
     } catch (error) {
       console.error('Error creating playlist:', error);
-      // Handle error appropriately
+      throw error;
     }
   }, []);
   
@@ -262,7 +263,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
   // handleSubscribe and handleAddToWatchLater already declared above - removing duplicates
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = useCallback(async (playlistId: string) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (videoId: string, playlistId: string) => {
     try {
       // Call the original handler if it exists
       // TODO: Implement save to playlist functionality
@@ -276,7 +277,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           title: videoState.title || 'Untitled Video',
           description: videoState.description || '',
           thumbnailUrl: videoState.thumbnailUrl || '',
-          videoUrl: videoState.videoUrl || videoState.url || '',
+          videoUrl: videoState.videoUrl || '',
           duration: videoState.duration || '0:00',
           views: videoState.views || '0',
           likes: mockVideo.likes || 0,
@@ -298,8 +299,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
           visibility: mockVideo.visibility || 'public',
           commentCount: mockVideo.commentCount || 0,
           isLive: videoState.isLive || false,
-          isUpcoming: videoState.isUpcoming || false,
-          isPremiere: videoState.isPremiere || false,
+          // Removed isUpcoming and isPremiere as they don't exist on Video type
           isShort: videoState.isShort || false,
           createdAt: now,
           updatedAt: now
@@ -432,7 +432,6 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     isSummarizing,
     canSummarize: true,
     onToggleDescription: handleToggleDescription,
-    onSummarize: handleSummarize,
     onSummarizeDescription: handleSummarize,
     onSubscribe: handleEnhancedSubscribe,
     isSubscribed,
@@ -501,14 +500,10 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     onClose: () => {
       setIsSaveModalOpen(false);
     },
-    onSave: enhancedHandleSaveToPlaylist,
-    playlists: [], // Empty array as we don't have mock playlists
-    selectedPlaylistId: '',
-    onSelectPlaylist: () => {},
-    onCreatePlaylist: handleCreatePlaylist,
     videoId: videoState?.id || '',
     existingPlaylists: [],
-    onSaveToPlaylist: enhancedHandleSaveToPlaylist
+    onSaveToPlaylist: enhancedHandleSaveToPlaylist,
+    onCreatePlaylist: handleCreatePlaylist
   };
 
   if (isLoading) {
@@ -581,7 +576,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
         <div className="w-full lg:w-80 flex-shrink-0">
           <RecommendationEngine
             currentVideoId={videoState.id}
-            onVideoSelect={(videoId: string) => {
+            onVideoSelect={(_videoId: string) => {
               // Handle video selection
               }}
           />
