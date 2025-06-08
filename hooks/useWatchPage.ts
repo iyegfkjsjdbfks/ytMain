@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
+import { VideoVisibility } from '../types';
 
 interface Comment {
   id: string;
@@ -34,7 +35,7 @@ interface Video {
   likes: number;
   dislikes: number;
   tags: string[];
-  visibility: 'public' | 'private' | 'unlisted';
+  visibility: VideoVisibility;
   isLive?: boolean;
   isShort?: boolean;
   createdAt: string;
@@ -88,7 +89,7 @@ export const useWatchPage = () => {
   
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [saveModalLoading, setSaveModalLoading] = useState(false);
+  const [saveModalLoading] = useState(false);
 
   // AI Summary state
   const [summary, setSummary] = useState<string>('');
