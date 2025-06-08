@@ -132,9 +132,9 @@ class PerformanceMonitor {
     }, {} as Record<string, number[]>);
 
     Object.entries(grouped).forEach(([_name, durations]) => {
-      const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
-      const _min = Math.min(...durations);
-      const _max = Math.max(...durations);
+      // const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+      // const _min = Math.min(...durations);
+      // const _max = Math.max(...durations);
       
       });
     
@@ -264,7 +264,7 @@ export const monitorMemoryUsage = () => {
     return;
   }
   
-  const _memory = (window.performance as any).memory;
+  // const _memory = (window.performance as any).memory;
   
   };
 

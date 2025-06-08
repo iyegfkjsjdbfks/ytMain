@@ -15,7 +15,7 @@ export function withMemo<P extends object>(
  */
 export function withLazyLoading<P extends object>(
   importFunc: () => Promise<{ default: ComponentType<P> }>,
-  fallback?: React.ComponentType
+  _fallback?: React.ComponentType
 ): React.LazyExoticComponent<ComponentType<P>> {
   return React.lazy(importFunc);
 }
@@ -123,6 +123,7 @@ export const componentPerformance = {
         
         return () => {
           const _endTime = performance.now();
+          // console.log(`${componentName} render time: ${_endTime - _startTime}ms`);
           };
       });
       
@@ -138,6 +139,7 @@ export const componentPerformance = {
       const _startTime = performance.now();
       const cleanup = effect();
       const _endTime = performance.now();
+      // console.log(`${_name} execution time: ${_endTime - _startTime}ms`);
       
       return cleanup;
     }, deps);
