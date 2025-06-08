@@ -37,7 +37,7 @@ class PerformanceMonitor {
     try {
       const navigationObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry: any) => {
-          const _navigation = entry as PerformanceNavigationTiming;
+          const __navigation = entry as PerformanceNavigationTiming;
           });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });

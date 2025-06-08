@@ -37,17 +37,17 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
   liked,
   disliked,
   isSubscribed,
-  isSavedToAnyList,
+  isSavedToAnyList: _isSavedToAnyList,
   mockLikeCount,
   showFullDescription,
   summary,
   summaryError,
   isSummarizing,
   canSummarize,
-  isSaveModalOpen,
+  isSaveModalOpen: _isSaveModalOpen,
   saveModalLoading,
-  saveButtonRef,
-  saveModalRef,
+  saveButtonRef: _saveButtonRef,
+  saveModalRef: _saveModalRef,
   handleLike,
   handleDislike,
   handleSubscribe,
@@ -85,6 +85,7 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
         liked={liked}
         disliked={disliked}
         likeCount={mockLikeCount}
+        isSavedToAnyList={_isSavedToAnyList}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}
@@ -105,7 +106,7 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
           {...(summaryError !== null && summaryError !== undefined && { summaryError })}
           isSummarizing={isSummarizing || false}
           canSummarize={canSummarize || false}
-          onSummarizeDescription={handleSummarizeDescription}
+          onSummarizeDescription={handleSummarizeDescription || (() => {})}
         />
       )}
     </>

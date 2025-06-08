@@ -170,9 +170,9 @@ const WatchPage: React.FC = () => {
   };
 
 
-  const _handleSubscribe = () => {
-    setIsSubscribed(!isSubscribed);
-  };
+  // const _handleSubscribe = () => {
+  //   setIsSubscribed(!isSubscribed);
+  // };
 
 
   if (loading) {

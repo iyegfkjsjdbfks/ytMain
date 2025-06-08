@@ -18,7 +18,7 @@ interface CommentModalProps {
 const CommentModal: React.FC<CommentModalProps> = ({
   isOpen,
   onClose,
-  shortId,
+  shortId: _shortId,
   shortTitle,
   onCommentSubmit
 }) => {

@@ -7,7 +7,7 @@ export function withMemo<P extends object>(
   Component: ComponentType<P>,
   areEqual?: (prevProps: P, nextProps: P) => boolean
 ): ComponentType<P> {
-  return memo(Component, areEqual) as ComponentType<P>;
+  return memo(Component, areEqual) as unknown as ComponentType<P>;
 }
 
 /**
@@ -116,14 +116,14 @@ export const componentPerformance = {
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
     return forwardRef<any, P>((props, ref) => {
-      const _componentName = name || Component.displayName || Component.name || 'Component';
+      const __componentName = name || Component.displayName || Component.name || 'Component';
       
       React.useEffect(() => {
-        const _startTime = performance.now();
+        const __startTime = performance.now();
         
         return () => {
-          const _endTime = performance.now();
-          // console.log(`${_componentName} render time: ${_endTime - _startTime}ms`);
+          const __endTime = performance.now();
+          // console.log(`${__componentName} render time: ${__endTime - __startTime}ms`);
           };
       });
       
@@ -134,12 +134,12 @@ export const componentPerformance = {
   /**
    * Hook to measure effect execution time
    */
-  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, _name = 'Effect') => {
+  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, __name = 'Effect') => {
     React.useEffect(() => {
-      const _startTime = performance.now();
+      const __startTime = performance.now();
       const cleanup = effect();
-      const _endTime = performance.now();
-      // console.log(`${_name} execution time: ${_endTime - _startTime}ms`);
+      const __endTime = performance.now();
+      // console.log(`${__name} execution time: ${__endTime - __startTime}ms`);
       
       return cleanup;
     }, deps);
