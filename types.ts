@@ -1,4 +1,7 @@
 
+// Import VideoVisibility type
+export type { VideoVisibility } from './src/types/core';
+
 // Define interfaces for PlaylistSummary and CommunityPost first as Channel uses them
 export interface PlaylistSummary {
   id: string;
@@ -63,7 +66,7 @@ export interface ExtendedVideo {
   privacyStatus?: 'public' | 'private' | 'unlisted';
   publishedAt?: string; // ISO date string
   createdAt?: string; // ISO date string
-  visibility?: 'public' | 'private' | 'unlisted';
+  visibility?: VideoVisibility;
   channelId?: string;
   // Additional metadata
   aspectRatio?: number;
@@ -186,7 +189,7 @@ export type Short = Omit<ExtendedVideo, 'isShort'> & {
   createdTime?: string;
   modifiedTime?: string;
   // Privacy and status
-  visibility?: 'public' | 'private' | 'unlisted';
+  visibility?: VideoVisibility;
   // Monetization
   isMonetized?: boolean;
   // Interactive elements
