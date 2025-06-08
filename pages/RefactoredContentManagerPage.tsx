@@ -210,12 +210,12 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
   
   // Handle video visibility toggle
-  const _handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
-    await executeAction(async () => {
-      await toggleVideoVisibility(videoId, newVisibility);
-      await refreshVideos();
-    });
-  };
+  // const _handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
+  //   await executeAction(async () => {
+  //     await toggleVideoVisibility(videoId, newVisibility);
+  //     await refreshVideos();
+  //   });
+  // };
   
   // Open edit modal
   const openEditModal = (video: Video) => {
@@ -237,55 +237,55 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
   
   // Custom video card with management actions
-  const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (
-    <div className="relative group">
-      <VideoCard video={video} />
-      
-      {/* Management Overlay */}
-      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
-        <Button
-          size="sm"
-          variant="secondary"
-          onClick={() => openEditModal(video)}
-          disabled={actionLoading}
-        >
-          Edit
-        </Button>
-        <Button
-          size="sm"
-          variant="danger"
-          onClick={() => handleVideoDelete(video.id)}
-          disabled={actionLoading}
-        >
-          Delete
-        </Button>
-      </div>
-      
-      {/* Status Badge */}
-      <div className="absolute top-2 right-2">
-        <Badge 
-          variant={video.visibility === 'public' ? 'default' : 'secondary'}
-          className="text-xs"
-        >
-          {video.visibility}
-        </Badge>
-      </div>
-      
-      {/* Upload Progress */}
-      {uploadProgress[video.id] && (
-        <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/75">
-          <ProgressBar
-            value={uploadProgress[video.id].progress || 0}
-            size="sm"
-            className="h-1"
-          />
-          <p className="text-white text-xs mt-1">
-            {uploadProgress[video.id].status}
-          </p>
-        </div>
-      )}
-    </div>
-  );
+  // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (
+  //   <div className="relative group">
+  //     <VideoCard video={video} />
+  //     
+  //     {/* Management Overlay */}
+  //     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
+  //       <Button
+  //         size="sm"
+  //         variant="secondary"
+  //         onClick={() => openEditModal(video)}
+  //         disabled={actionLoading}
+  //       >
+  //         Edit
+  //       </Button>
+  //       <Button
+  //         size="sm"
+  //         variant="danger"
+  //         onClick={() => handleVideoDelete(video.id)}
+  //         disabled={actionLoading}
+  //       >
+  //         Delete
+  //       </Button>
+  //     </div>
+  //     
+  //     {/* Status Badge */}
+  //     <div className="absolute top-2 right-2">
+  //       <Badge 
+  //         variant={video.visibility === 'public' ? 'default' : 'secondary'}
+  //         className="text-xs"
+  //       >
+  //         {video.visibility}
+  //       </Badge>
+  //     </div>
+  //     
+  //     {/* Upload Progress */}
+  //     {uploadProgress[video.id] && (
+  //       <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/75">
+  //         <ProgressBar
+  //           value={uploadProgress[video.id].progress || 0}
+  //           size="sm"
+  //           className="h-1"
+  //         />
+  //         <p className="text-white text-xs mt-1">
+  //           {uploadProgress[video.id].status}
+  //         </p>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
   
   // Tab counts
   const tabCounts = {

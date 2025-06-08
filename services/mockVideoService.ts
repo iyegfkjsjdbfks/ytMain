@@ -130,7 +130,7 @@ const mockVideos: Video[] = [
   }),
 
   // Science
-  __createMockVideo({
+  ___createMockVideo({
     id: '6',
     title: 'The Science Behind Black Holes',
     thumbnailUrl: 'https://picsum.photos/seed/blackhole/680/380',
@@ -150,7 +150,7 @@ const mockVideos: Video[] = [
   }),
 
   // Music Education
-  __createMockVideo({
+  ___createMockVideo({
     id: '7',
     title: 'Guitar Lesson: Master the Pentatonic Scale',
     thumbnailUrl: 'https://picsum.photos/seed/guitar/680/380',
@@ -170,7 +170,7 @@ const mockVideos: Video[] = [
   }),
 
   // Photography
-  __createMockVideo({
+  ___createMockVideo({
     id: '8',
     title: 'Photography Tips: Golden Hour Portraits',
     thumbnailUrl: 'https://picsum.photos/seed/photography/680/380',
@@ -190,7 +190,7 @@ const mockVideos: Video[] = [
   }),
 
   // SHORTS - Diverse short-form content
-  __createMockVideo({
+  ___createMockVideo({
     id: 's1',
     title: 'Amazing Basketball Trick Shot',
     thumbnailUrl: 'https://picsum.photos/seed/basketball/380/680',
@@ -209,7 +209,7 @@ const mockVideos: Video[] = [
     tags: ['shorts', 'basketball', 'sports', 'trickshot']
   }),
 
-  __createMockVideo({
+  ___createMockVideo({
     id: 's2',
     title: 'Funny Cat Compilation',
     thumbnailUrl: 'https://picsum.photos/seed/cats/380/680',
@@ -228,7 +228,7 @@ const mockVideos: Video[] = [
     tags: ['shorts', 'cats', 'funny', 'pets']
   }),
 
-  __createMockVideo({
+  ___createMockVideo({
     id: 's3',
     title: 'Quick Cooking Hack',
     thumbnailUrl: 'https://picsum.photos/seed/cookinghack/380/680',
@@ -247,7 +247,7 @@ const mockVideos: Video[] = [
     tags: ['shorts', 'cooking', 'lifehack', 'kitchen']
   }),
 
-  __createMockVideo({
+  ___createMockVideo({
     id: 's4',
     title: 'Dance Challenge Moves',
     thumbnailUrl: 'https://picsum.photos/seed/dance/380/680',

@@ -260,7 +260,8 @@ const ChannelCustomizationPage: React.FC = () => {
                         />
                         <button 
                           onClick={() => {
-                            // Open file picker for profile picture                            const input = document.createElement('input');
+                            // Open file picker for profile picture
+                            const input = document.createElement('input');
                             input.type = 'file';
                             input.accept = 'image/*';
                             input.onchange = (e) => {
@@ -300,7 +301,8 @@ const ChannelCustomizationPage: React.FC = () => {
                       </p>
                       <button 
                         onClick={() => {
-                          // Open file picker for watermark                          const input = document.createElement('input');
+                          // Open file picker for watermark
+                          const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
                           input.onchange = (e) => {

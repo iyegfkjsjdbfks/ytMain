@@ -49,7 +49,7 @@ class APICache {
   }
 }
 
-const _apiCache = new APICache();
+const apiCache = new APICache();
 
 // Request Queue for Rate Limiting
 class RequestQueue {
