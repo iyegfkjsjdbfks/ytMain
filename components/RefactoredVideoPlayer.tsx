@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useVideoPlayer } from '../hooks';
 import { Video } from '../src/types/core';
 import { VideoQuality, Subtitle, Chapter } from '../components/video/VideoPlayer';
