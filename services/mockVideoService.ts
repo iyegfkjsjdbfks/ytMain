@@ -742,7 +742,7 @@ export const removeRecentSearch = (searchToRemove: string): Promise<string[]> =>
   return Promise.resolve(updatedSearches);
 };
 
-export const saveRecentSearch = (query: string): Promise<void> => {
+export const saveRecentSearch = (_query: string): Promise<void> => {
   // Mock implementation - in real app this would save to storage
   return Promise.resolve();
 };

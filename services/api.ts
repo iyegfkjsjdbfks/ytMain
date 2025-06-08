@@ -578,7 +578,7 @@ export class ChannelService {
 }
 
 export class PlaylistService {
-  static async getUserPlaylists(userId: string): Promise<UserPlaylist[]> {
+  static async getUserPlaylists(_userId: string): Promise<UserPlaylist[]> {
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));

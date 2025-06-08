@@ -13,10 +13,10 @@ const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
   const [video, setVideo] = useState<Video | null>(null);
 
-  const [recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
+  const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
 
   const [loading, setLoading] = useState(true);
-  const [showFullDescription, _setShowFullDescription] = useState(false);
+  const [_showFullDescription, _setShowFullDescription] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
 
@@ -170,7 +170,7 @@ const WatchPage: React.FC = () => {
   };
 
 
-  const handleSubscribe = () => {
+  const _handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
   };
 
@@ -210,7 +210,7 @@ const WatchPage: React.FC = () => {
                 autoplay={false}
                 className="w-full"
                 useYouTube={false}
-                onTimeUpdate={(currentTime, duration) => {
+                onTimeUpdate={(_currentTime, _duration) => {
                   // Track watch progress
                   }}
                 onPlay={() => {

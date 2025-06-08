@@ -7,7 +7,7 @@ export function withMemo<P extends object>(
   Component: ComponentType<P>,
   areEqual?: (prevProps: P, nextProps: P) => boolean
 ): ComponentType<P> {
-  return memo(Component, areEqual);
+  return memo(Component, areEqual) as ComponentType<P>;
 }
 
 /**
@@ -116,14 +116,14 @@ export const componentPerformance = {
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
     return forwardRef<any, P>((props, ref) => {
-      const componentName = name || Component.displayName || Component.name || 'Component';
+      const _componentName = name || Component.displayName || Component.name || 'Component';
       
       React.useEffect(() => {
         const _startTime = performance.now();
         
         return () => {
           const _endTime = performance.now();
-          // console.log(`${componentName} render time: ${_endTime - _startTime}ms`);
+          // console.log(`${_componentName} render time: ${_endTime - _startTime}ms`);
           };
       });
       

@@ -58,7 +58,7 @@ class PerformanceMonitor {
     
     this.metrics.set(name, metric);
     
-    if (typeof window !== 'undefined' && window.performance && window.performance.mark) {
+    if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
       performance.mark(`${name}-start`);
     }
   }
@@ -78,7 +78,7 @@ class PerformanceMonitor {
     metric.endTime = endTime;
     metric.duration = duration;
 
-    if (typeof window !== 'undefined' && window.performance && window.performance.mark && window.performance.measure) {
+    if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function' && typeof window.performance.measure === 'function') {
       performance.mark(`${name}-end`);
       performance.measure(name, `${name}-start`, `${name}-end`);
     }
@@ -98,7 +98,7 @@ class PerformanceMonitor {
 
   clearMetrics(): void {
     this.metrics.clear();
-    if (typeof window !== 'undefined' && window.performance && window.performance.clearMarks) {
+    if (typeof window !== 'undefined' && window.performance && typeof window.performance.clearMarks === 'function') {
       performance.clearMarks();
       performance.clearMeasures();
     }
@@ -124,14 +124,16 @@ class PerformanceMonitor {
     
     // Group by name and calculate averages
     const grouped = metrics.reduce((acc, metric) => {
-      if (!acc[metric.name]) {
+      if (metric.name && !acc[metric.name]) {
         acc[metric.name] = [];
       }
-      acc[metric.name!].push(metric.duration!);
+      if (metric.name && metric.duration !== undefined) {
+        acc[metric.name].push(metric.duration);
+      }
       return acc;
     }, {} as Record<string, number[]>);
 
-    Object.entries(grouped).forEach(([_name, durations]) => {
+    Object.entries(grouped).forEach(([_name, _durations]) => {
       // const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
       // const _min = Math.min(...durations);
       // const _max = Math.max(...durations);

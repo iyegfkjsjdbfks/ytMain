@@ -66,7 +66,7 @@ return;
               origin: window.location.origin,
             },
             events: {
-              onReady: async (event) => {
+              onReady: async (_event) => {
                 if (!isMounted) {
 return;
 }

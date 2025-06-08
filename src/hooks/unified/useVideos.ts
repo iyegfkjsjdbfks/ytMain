@@ -180,7 +180,7 @@ export function useUploadVideo() {
   return useMutation<Video, { file: File; data: VideoUploadData }>(
     ({ file, data }) => videoApi.uploadVideo(file, data),
     {
-      onSuccess: (data) => {
+      onSuccess: (_data) => {
         },
       onError: (error) => {
         console.error('Video upload failed:', error.message);
@@ -193,7 +193,7 @@ export function useUpdateVideo() {
   return useMutation<Video, { videoId: string; data: Partial<VideoUploadData> }>(
     ({ videoId, data }) => videoApi.updateVideo(videoId, data),
     {
-      onSuccess: (data) => {
+      onSuccess: (_data) => {
         },
     },
   );
@@ -203,7 +203,7 @@ export function useDeleteVideo() {
   return useMutation<void, string>(
     (videoId) => videoApi.deleteVideo(videoId),
     {
-      onSuccess: (_, videoId) => {
+      onSuccess: (_, _videoId) => {
         },
     },
   );
@@ -213,7 +213,7 @@ export function useLikeVideo() {
   return useMutation<void, string>(
     (videoId) => videoApi.likeVideo(videoId),
     {
-      onSuccess: (_, videoId) => {
+      onSuccess: (_, _videoId) => {
         },
     },
   );
@@ -223,7 +223,7 @@ export function useUnlikeVideo() {
   return useMutation<void, string>(
     (videoId) => videoApi.unlikeVideo(videoId),
     {
-      onSuccess: (_, videoId) => {
+      onSuccess: (_, _videoId) => {
         },
     },
   );
@@ -233,7 +233,7 @@ export function useSaveVideo() {
   return useMutation<void, string>(
     (videoId) => videoApi.saveVideo(videoId),
     {
-      onSuccess: (_, videoId) => {
+      onSuccess: (_, _videoId) => {
         },
     },
   );
@@ -243,7 +243,7 @@ export function useUnsaveVideo() {
   return useMutation<void, string>(
     (videoId) => videoApi.unsaveVideo(videoId),
     {
-      onSuccess: (_, videoId) => {
+      onSuccess: (_, _videoId) => {
         },
     },
   );
