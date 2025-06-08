@@ -57,19 +57,19 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const uploadVideo = async (formData: VideoUploadFormData) => {
+  const uploadVideo = async (_formData: VideoUploadFormData) => {
     // Mock implementation
   };
 
-  const updateVideo = async (id: string, formData: VideoEditFormData) => {
+  const updateVideo = async (_id: string, _formData: VideoEditFormData) => {
     // Mock implementation
   };
 
-  const deleteVideo = async (id: string) => {
+  const deleteVideo = async (_id: string) => {
     // Mock implementation
   };
 
-  const toggleVideoVisibility = async (id: string, visibility: string) => {
+  const toggleVideoVisibility = async (_id: string, _visibility: string) => {
     // Mock implementation
   };
   
@@ -210,7 +210,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
   
   // Handle video visibility toggle
-  const handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
+  const _handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
     await executeAction(async () => {
       await toggleVideoVisibility(videoId, newVisibility);
       await refreshVideos();
@@ -237,7 +237,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
   
   // Custom video card with management actions
-  const ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (
+  const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (
     <div className="relative group">
       <VideoCard video={video} />
       

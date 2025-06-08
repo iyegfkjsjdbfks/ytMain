@@ -31,7 +31,7 @@ interface EditAction {
 }
 
 const VideoEditorPage: React.FC = () => {
-  const [currentProject, setCurrentProject] = useState<VideoProject>({
+  const [currentProject, _setCurrentProject] = useState<VideoProject>({
     id: '1',
     name: 'My Video Project',
     duration: 180,

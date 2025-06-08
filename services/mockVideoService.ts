@@ -5,7 +5,7 @@ import { PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, U
 // Removed unused imports
 
 // Helper function to create complete video objects
-const createMockVideo = (partial: Partial<Video>): Video => ({
+const _createMockVideo = (partial: Partial<Video>): Video => ({
   likes: 0,
   dislikes: 0,
   channelId: 'default-channel',
@@ -30,7 +30,7 @@ const createMockVideo = (partial: Partial<Video>): Video => ({
 // Curated mock videos - removed duplicates and kept diverse, unique content
 const mockVideos: Video[] = [
   // Travel & Nature
-  createMockVideo({
+  _createMockVideo({
     id: '1',
     title: 'Exploring the Alps: A Scenic Journey',
     thumbnailUrl: 'https://picsum.photos/seed/alps/680/380',
@@ -50,7 +50,7 @@ const mockVideos: Video[] = [
   }),
 
   // Gaming & Tech
-  createMockVideo({
+  _createMockVideo({
     id: '2',
     title: 'Ultimate Gaming Setup Tour 2024',
     thumbnailUrl: 'https://picsum.photos/seed/gaming/680/380',
@@ -70,7 +70,7 @@ const mockVideos: Video[] = [
   }),
 
   // Cooking
-  createMockVideo({
+  _createMockVideo({
     id: '3',
     title: 'Delicious & Easy Pasta Recipe',
     thumbnailUrl: 'https://picsum.photos/seed/pasta/680/380',
@@ -90,7 +90,7 @@ const mockVideos: Video[] = [
   }),
 
   // Programming Education
-  createMockVideo({
+  _createMockVideo({
     id: '4',
     title: 'Building a Modern React App from Scratch',
     thumbnailUrl: 'https://picsum.photos/seed/react/680/380',
@@ -110,7 +110,7 @@ const mockVideos: Video[] = [
   }),
 
   // Fitness
-  createMockVideo({
+  _createMockVideo({
     id: '5',
     title: 'Morning Workout Routine - 15 Minutes',
     thumbnailUrl: 'https://picsum.photos/seed/workout/680/380',

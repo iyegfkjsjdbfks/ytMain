@@ -57,7 +57,7 @@ const CommunityPage: React.FC = () => {
       id: `post-${Date.now()}`,
       type: newPostType,
       content: newPostContent,
-      imageUrl: newPostType === 'image' ? '/api/placeholder/600/400' : undefined,
+      ...(newPostType === 'image' && { imageUrl: '/api/placeholder/600/400' }),
       pollOptions: newPostType === 'poll' ? pollOptions.filter(opt => opt.trim()).map((opt, idx) => ({
         id: `option-${idx}`,
         text: opt,

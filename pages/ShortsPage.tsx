@@ -144,7 +144,7 @@ const ShortsPage: React.FC = () => {
     setCommentModalOpen(true);
   }, [filteredShorts]);
 
-  const handleCommentSubmit = useCallback(async (commentText: string) => {
+  const handleCommentSubmit = useCallback(async (_commentText: string) => {
     if (!selectedShortForComment) return;
 
     try {      // Close modal and reset state

@@ -80,7 +80,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     refetch();
   }, [refetch]);
 
-  const toggleSection = useCallback((section: keyof typeof showSections) => {
+  const _toggleSection = useCallback((section: keyof typeof showSections) => {
     setShowSections(prev => ({
       ...prev,
       [section]: !prev[section],
