@@ -1,5 +1,5 @@
 // Performance monitoring utilities for React components
-import * as React from 'react';
+
 
 interface PerformanceMetric {
   name: string;
@@ -24,7 +24,7 @@ class PerformanceMonitor {
     // Observe paint metrics
     try {
       const paintObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry) => {
+        list.getEntries().forEach((_entry) => {
           });
       });
       paintObserver.observe({ entryTypes: ['paint'] });
@@ -37,7 +37,7 @@ class PerformanceMonitor {
     try {
       const navigationObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry: any) => {
-          const navigation = entry as PerformanceNavigationTiming;
+          const _navigation = entry as PerformanceNavigationTiming;
           });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
@@ -53,12 +53,12 @@ class PerformanceMonitor {
     const metric: PerformanceMetric = {
       name,
       startTime: performance.now(),
-      metadata,
+      metadata: metadata || {},
     };
     
     this.metrics.set(name, metric);
     
-    if (typeof window !== 'undefined' && window.performance?.mark) {
+    if (typeof window !== 'undefined' && window.performance && window.performance.mark) {
       performance.mark(`${name}-start`);
     }
   }
@@ -78,7 +78,7 @@ class PerformanceMonitor {
     metric.endTime = endTime;
     metric.duration = duration;
 
-    if (typeof window !== 'undefined' && window.performance?.mark && window.performance?.measure) {
+    if (typeof window !== 'undefined' && window.performance && window.performance.mark && window.performance.measure) {
       performance.mark(`${name}-end`);
       performance.measure(name, `${name}-start`, `${name}-end`);
     }
@@ -98,7 +98,7 @@ class PerformanceMonitor {
 
   clearMetrics(): void {
     this.metrics.clear();
-    if (typeof window !== 'undefined' && window.performance?.clearMarks) {
+    if (typeof window !== 'undefined' && window.performance && window.performance.clearMarks) {
       performance.clearMarks();
       performance.clearMeasures();
     }
@@ -127,14 +127,14 @@ class PerformanceMonitor {
       if (!acc[metric.name]) {
         acc[metric.name] = [];
       }
-      acc[metric.name].push(metric.duration!);
+      acc[metric.name!].push(metric.duration!);
       return acc;
     }, {} as Record<string, number[]>);
 
-    Object.entries(grouped).forEach(([name, durations]) => {
-      const avg = durations.reduce((a, b) => a + b, 0) / durations.length;
-      const min = Math.min(...durations);
-      const max = Math.max(...durations);
+    Object.entries(grouped).forEach(([_name, durations]) => {
+      const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+      const _min = Math.min(...durations);
+      const _max = Math.max(...durations);
       
       });
     
@@ -221,7 +221,7 @@ export function withPerformanceMonitoring<P extends object>(
 
 // Utility functions
 export const measureRenderTime = (componentName: string) => {
-  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (_target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
     
     descriptor.value = function (...args: any[]) {
@@ -264,7 +264,7 @@ export const monitorMemoryUsage = () => {
     return;
   }
   
-  const memory = (window.performance as any).memory;
+  const _memory = (window.performance as any).memory;
   
   };
 

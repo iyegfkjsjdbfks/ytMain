@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {  ComponentType, memo, useMemo  } from 'react';
+import React, { ComponentType, memo, useMemo, forwardRef } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
@@ -116,29 +115,29 @@ export const componentPerformance = {
    * HOC to measure component render time
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
-    return React.forwardRef<any, P>((props, ref) => {
+    return forwardRef<any, P>((props, ref) => {
       const componentName = name || Component.displayName || Component.name || 'Component';
       
       React.useEffect(() => {
-        const startTime = performance.now();
+        const _startTime = performance.now();
         
         return () => {
-          const endTime = performance.now();
+          const _endTime = performance.now();
           };
       });
       
-      return React.createElement(Component, { ...props, ref });
+      return React.createElement(Component, { ...props, ref } as any);
     });
   },
   
   /**
    * Hook to measure effect execution time
    */
-  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, name = 'Effect') => {
+  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, _name = 'Effect') => {
     React.useEffect(() => {
-      const startTime = performance.now();
+      const _startTime = performance.now();
       const cleanup = effect();
-      const endTime = performance.now();
+      const _endTime = performance.now();
       
       return cleanup;
     }, deps);

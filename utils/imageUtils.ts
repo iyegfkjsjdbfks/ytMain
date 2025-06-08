@@ -15,7 +15,7 @@ export const getImageWithFallback = (
   if (primaryUrl.includes('/api/placeholder/')) {
     const parts = primaryUrl.split('/');
     const dimensions = parts[parts.length - 1];
-    const [w, h] = dimensions.split('x').map(Number);
+    const [w, h] = dimensions?.split('x').map(Number) || [];
     return `https://picsum.photos/${w || width || 320}/${h || height || 180}?random=${Math.floor(Math.random() * 1000)}`;
   }
   
@@ -166,7 +166,7 @@ export const getContrastColor = (backgroundColor: string): string => {
   const rgb = backgroundColor.match(/\d+/g);
   if (!rgb) return '#000000';
   
-  const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+  const brightness = (parseInt(rgb[0] || '0') * 299 + parseInt(rgb[1] || '0') * 587 + parseInt(rgb[2] || '0') * 114) / 1000;
   return brightness > 128 ? '#000000' : '#ffffff';
 };
 
@@ -253,9 +253,9 @@ export const extractDominantColor = (imageUrl: string): Promise<string> => {
         const data = imageData.data;
         
         for (let i = 0; i < data.length; i += 4) {
-          r += data[i];
-          g += data[i + 1];
-          b += data[i + 2];
+          r += data[i] || 0;
+          g += data[i + 1] || 0;
+          b += data[i + 2] || 0;
         }
         
         const pixelCount = data.length / 4;
