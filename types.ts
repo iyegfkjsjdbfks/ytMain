@@ -1,6 +1,7 @@
 
-// Import VideoVisibility type
-export type { VideoVisibility } from './src/types/core';
+// Import and re-export VideoVisibility type
+import type { VideoVisibility } from './src/types/core';
+export type { VideoVisibility };
 
 // Define interfaces for PlaylistSummary and CommunityPost first as Channel uses them
 export interface PlaylistSummary {

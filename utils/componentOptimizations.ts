@@ -116,12 +116,15 @@ export const componentPerformance = {
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
     return forwardRef<any, P>((props, ref) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _componentName = name || Component.displayName || Component.name || 'Component';
       
       React.useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const _startTime = performance.now();
         
         return () => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const _endTime = performance.now();
           // console.log(`${_componentName} render time: ${_endTime - _startTime}ms`);
           };
@@ -136,8 +139,10 @@ export const componentPerformance = {
    */
   useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, _name = 'Effect') => {
     React.useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _startTime = performance.now();
       const cleanup = effect();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _endTime = performance.now();
       // console.log(`${_name} execution time: ${_endTime - _startTime}ms`);
       
