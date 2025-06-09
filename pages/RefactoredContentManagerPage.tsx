@@ -62,9 +62,9 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const deleteVideo = async (_id: string) => {
-    // Mock implementation
-  };
+  // const deleteVideo = async (_id: string) => {
+  //   // Mock implementation
+  // };
 
   // const toggleVideoVisibility = async (_id: string, _visibility: string) => {
   //   // Mock implementation
@@ -221,17 +221,17 @@ const RefactoredContentManagerPage: React.FC = () => {
   // };
   
   // Get initial values for edit form
-  // const getEditFormInitialValues = () => {
-  //   if (!selectedVideo) return {};
-  //   
-  //   return {
-  //     title: selectedVideo.title,
-  //     description: selectedVideo.description || '',
-  //     tags: selectedVideo.tags?.join(', ') || '',
-  //     category: selectedVideo.category || '',
-  //     visibility: selectedVideo.visibility || 'public'
-  //   };
-  // };
+  const getEditFormInitialValues = () => {
+    if (!selectedVideo) return {};
+    
+    return {
+      title: selectedVideo.title,
+      description: selectedVideo.description || '',
+      tags: selectedVideo.tags?.join(', ') || '',
+      category: selectedVideo.category || '',
+      visibility: selectedVideo.visibility || 'public'
+    };
+  };
   
   // Custom video card with management actions
   // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (

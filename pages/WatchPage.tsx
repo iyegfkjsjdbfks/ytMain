@@ -109,7 +109,7 @@ const WatchPage: React.FC = () => {
   // Add to watch history when video loads
   React.useEffect(() => {
     if (video) {
-      addToWatchHistory(video.id);
+      addToWatchHistory();
       showMiniplayer(video);
     }
   }, [video, addToWatchHistory, showMiniplayer]);

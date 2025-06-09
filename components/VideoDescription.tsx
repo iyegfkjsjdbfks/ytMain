@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BellIcon } from '@heroicons/react/24/outline';
 import { SummarizeIcon } from './icons/SummarizeIcon';
 import { formatCount } from '../utils/numberUtils';
+import { VideoVisibility } from '../types';
 
 interface Channel {
   id: string;
@@ -28,7 +29,7 @@ interface Video {
   likes: number;
   dislikes: number;
   tags: string[];
-  visibility: 'public' | 'private' | 'unlisted';
+  visibility: VideoVisibility;
   isLive?: boolean;
   isShort?: boolean;
   createdAt: string;

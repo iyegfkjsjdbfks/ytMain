@@ -506,7 +506,6 @@ export const useWatchPage = () => {
     
     // Modal and loading state
     isSaveModalOpen,
-    saveModalLoading,
 
     // AI Summary state
     summary,

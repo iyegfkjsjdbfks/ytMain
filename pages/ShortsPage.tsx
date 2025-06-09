@@ -80,7 +80,7 @@ const ShortsPage: React.FC = () => {
       .map(video => {
         const shortVideo: Short = {
           ...video,
-          duration: typeof video.duration === 'number' ? video.duration.toString() : video.duration || '60',
+          duration: typeof video.duration === 'number' ? video.duration : parseInt(video.duration) || 60,
           isShort: true as const,
           isVertical: true,
           visibility: video.visibility,

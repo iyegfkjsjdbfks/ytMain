@@ -34,7 +34,7 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
     uploadedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
     channelName: `Channel ${Math.floor(Math.random() * 100)}`,
     channelAvatarUrl: `https://picsum.photos/40/40?random=${index + 1000}`,
-    category: category || ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
+    category: category ?? ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
     tags: [`tag${index}`, `sample`, category || 'general'].filter(Boolean),
     likes: Math.floor(Math.random() * 10000),
     dislikes: Math.floor(Math.random() * 1000),
@@ -154,7 +154,7 @@ export const useOptimizedVideoData = ({
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    category: category || undefined,
+    category,
     limit: 24,
     enableCache: true,
   });
