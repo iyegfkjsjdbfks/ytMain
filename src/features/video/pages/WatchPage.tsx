@@ -17,7 +17,7 @@ const WatchPage: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
   const [_showFullDescription, _setShowFullDescription] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  // const [isSubscribed, setIsSubscribed] = useState(false);
 
 
   useEffect(() => {

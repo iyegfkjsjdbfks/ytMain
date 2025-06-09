@@ -241,8 +241,8 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
       const duplicateData: CreatePlaylistData = {
         title: `${playlist.title} (Copy)`,
         visibility: playlist.visibility,
-        description: playlist.description || undefined,
-        tags: playlist.tags || undefined,
+        ...(playlist.description && { description: playlist.description }),
+        ...(playlist.tags && { tags: playlist.tags }),
       };
       await createPlaylistMutation.mutate(duplicateData);
     } catch (error) {
