@@ -37,7 +37,7 @@ class PerformanceMonitor {
     try {
       const navigationObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry: any) => {
-          const __navigation = entry as PerformanceNavigationTiming;
+          const _navigation = entry as PerformanceNavigationTiming;
           });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
@@ -127,7 +127,7 @@ class PerformanceMonitor {
       if (metric.name && !acc[metric.name]) {
         acc[metric.name] = [];
       }
-      if (metric.name && metric.duration !== undefined) {
+      if (metric.name && metric.duration !== undefined && acc[metric.name]) {
         acc[metric.name].push(metric.duration);
       }
       return acc;

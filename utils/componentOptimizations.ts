@@ -116,14 +116,14 @@ export const componentPerformance = {
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
     return forwardRef<any, P>((props, ref) => {
-      const __componentName = name || Component.displayName || Component.name || 'Component';
+      const _componentName = name || Component.displayName || Component.name || 'Component';
       
       React.useEffect(() => {
-        const __startTime = performance.now();
+        const _startTime = performance.now();
         
         return () => {
-          const __endTime = performance.now();
-          // console.log(`${__componentName} render time: ${__endTime - __startTime}ms`);
+          const _endTime = performance.now();
+          // console.log(`${_componentName} render time: ${_endTime - _startTime}ms`);
           };
       });
       
@@ -134,12 +134,12 @@ export const componentPerformance = {
   /**
    * Hook to measure effect execution time
    */
-  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, __name = 'Effect') => {
+  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, _name = 'Effect') => {
     React.useEffect(() => {
-      const __startTime = performance.now();
+      const _startTime = performance.now();
       const cleanup = effect();
-      const __endTime = performance.now();
-      // console.log(`${__name} execution time: ${__endTime - __startTime}ms`);
+      const _endTime = performance.now();
+      // console.log(`${_name} execution time: ${_endTime - _startTime}ms`);
       
       return cleanup;
     }, deps);

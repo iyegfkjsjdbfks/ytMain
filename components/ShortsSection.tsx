@@ -26,7 +26,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         // Convert Video objects to Short objects
         const convertedShorts: Short[] = shortsVideos.map(video => ({
           ...video,
-          duration: video.duration || '60',
+          duration: typeof video.duration === 'string' ? parseInt(video.duration) || 60 : video.duration || 60,
           isShort: true as const,
           isVertical: true,
           visibility: video.visibility === 'scheduled' ? 'public' : video.visibility,

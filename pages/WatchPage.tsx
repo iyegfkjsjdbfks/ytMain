@@ -42,7 +42,6 @@ const WatchPage: React.FC = () => {
     
     // Modal and loading state
     isSaveModalOpen,
-    saveModalLoading,
     
     // AI Summary state
     summary,
