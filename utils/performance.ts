@@ -129,7 +129,7 @@ class PerformanceMonitor {
         acc[metric.name] = [];
       }
       if (metric.name && metric.duration !== undefined && acc[metric.name]) {
-        acc[metric.name].push(metric.duration);
+        acc[metric.name]!.push(metric.duration);
       }
       return acc;
     }, {} as Record<string, number[]>);
