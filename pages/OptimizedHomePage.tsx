@@ -36,7 +36,7 @@ const categories = [
 const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showSections, setShowSections] = useState({
+  const [showSections] = useState({
     shorts: true,
     trending: true,
     subscriptions: true,

@@ -6,11 +6,8 @@ import BaseModal from '../components/BaseModal';
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
 
 import { Video } from '../types';
-import VideoCard from '../components/VideoCard';
 import { Button } from '../components/ui/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/Tabs';
-import { Badge } from '../components/ui/Badge';
-import { ProgressBar } from '../components/ui/ProgressBar';
 
 /**
  * Refactored Content Manager Page
@@ -51,7 +48,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   const [videos, _setVideos] = useState<Video[]>([]);
   const [videosLoading, _setVideosLoading] = useState(false);
   const [videosError, _setVideosError] = useState<string | null>(null);
-  const [uploadProgress, _setUploadProgress] = useState<Record<string, any>>({});
+  const [, _setUploadProgress] = useState<Record<string, any>>({});
 
   const refreshVideos = async () => {
     // Mock implementation
@@ -69,9 +66,9 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const toggleVideoVisibility = async (_id: string, _visibility: string) => {
-    // Mock implementation
-  };
+  // const toggleVideoVisibility = async (_id: string, _visibility: string) => {
+  //   // Mock implementation
+  // };
   
   // Modal and form state
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -200,14 +197,14 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
   
   // Handle video delete
-  const handleVideoDelete = async (videoId: string) => {
-    if (!confirm('Are you sure you want to delete this video?')) return;
-    
-    await executeAction(async () => {
-      await deleteVideo(videoId);
-      await refreshVideos();
-    });
-  };
+  // const handleVideoDelete = async (videoId: string) => {
+  //   if (!confirm('Are you sure you want to delete this video?')) return;
+  //   
+  //   await executeAction(async () => {
+  //     await deleteVideo(videoId);
+  //     await refreshVideos();
+  //   });
+  // };
   
   // Handle video visibility toggle
   // const _handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
@@ -218,23 +215,23 @@ const RefactoredContentManagerPage: React.FC = () => {
   // };
   
   // Open edit modal
-  const openEditModal = (video: Video) => {
-    setSelectedVideo(video);
-    setIsEditModalOpen(true);
-  };
+  // const openEditModal = (video: Video) => {
+  //   setSelectedVideo(video);
+  //   setIsEditModalOpen(true);
+  // };
   
   // Get initial values for edit form
-  const getEditFormInitialValues = () => {
-    if (!selectedVideo) return {};
-    
-    return {
-      title: selectedVideo.title,
-      description: selectedVideo.description || '',
-      tags: selectedVideo.tags?.join(', ') || '',
-      category: selectedVideo.category || '',
-      visibility: selectedVideo.visibility || 'public'
-    };
-  };
+  // const getEditFormInitialValues = () => {
+  //   if (!selectedVideo) return {};
+  //   
+  //   return {
+  //     title: selectedVideo.title,
+  //     description: selectedVideo.description || '',
+  //     tags: selectedVideo.tags?.join(', ') || '',
+  //     category: selectedVideo.category || '',
+  //     visibility: selectedVideo.visibility || 'public'
+  //   };
+  // };
   
   // Custom video card with management actions
   // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
 import { VideoVisibility } from '../types';
@@ -89,7 +89,6 @@ export const useWatchPage = () => {
   
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [saveModalLoading] = useState(false);
 
   // AI Summary state
   const [summary, setSummary] = useState<string>('');
@@ -470,7 +469,7 @@ export const useWatchPage = () => {
   };
   
   // Utility functions
-  const addToWatchHistory = (videoId: string) => {
+  const addToWatchHistory = () => {
     // Add to watch history logic
     };
   

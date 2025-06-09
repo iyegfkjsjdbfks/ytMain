@@ -43,6 +43,9 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
     isSaved: false,
     isLiked: false,
     isDisliked: false,
+    visibility: 'public' as const,
+    createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString()
   }));
 };
 
@@ -151,7 +154,7 @@ export const useOptimizedVideoData = ({
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    category,
+    category: category || undefined,
     limit: 24,
     enableCache: true,
   });
