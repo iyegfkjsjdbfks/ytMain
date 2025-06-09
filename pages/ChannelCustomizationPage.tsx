@@ -224,7 +224,8 @@ const ChannelCustomizationPage: React.FC = () => {
                       />
                       <button 
                         onClick={() => {
-                          // Open file picker for channel art                          const input = document.createElement('input');
+                          // Open file picker for channel art
+                          const input = document.createElement('input');
                           input.type = 'file';
                           input.accept = 'image/*';
                           input.onchange = (e) => {
