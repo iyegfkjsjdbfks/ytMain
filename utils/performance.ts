@@ -37,8 +37,9 @@ class PerformanceMonitor {
     try {
       const navigationObserver = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry: any) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const _navigation = entry as PerformanceNavigationTiming;
+          // Performance monitoring disabled
+          // const navigation = entry as PerformanceNavigationTiming;
+          // console.log('Navigation timing:', navigation);
           });
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
