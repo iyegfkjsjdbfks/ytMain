@@ -114,7 +114,7 @@ export const componentPerformance = {
   /**
    * HOC to measure component render time
    */
-  withRenderTime: <P extends object>(Component: ComponentType<P>, name?: string) => {
+  withRenderTime: <P extends object>(Component: ComponentType<P>, _name?: string) => {
     return forwardRef<any, P>((props, ref) => {
       React.useEffect(() => {
         // Performance monitoring disabled

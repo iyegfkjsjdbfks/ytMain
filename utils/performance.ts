@@ -36,9 +36,9 @@ class PerformanceMonitor {
     // Observe navigation metrics
     try {
       const navigationObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry: any) => {
+        list.getEntries().forEach((_entry: any) => {
           // Performance monitoring disabled
-          // const navigation = entry as PerformanceNavigationTiming;
+          // const navigation = _entry as PerformanceNavigationTiming;
           // console.log('Navigation timing:', navigation);
           });
       });
