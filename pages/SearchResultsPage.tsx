@@ -1,109 +1,96 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Video } from '../types';
 import { searchVideos } from '../services/mockVideoService';
-import { searchCombined } from '../services/googleSearchService';
-import { Video } from '../types/video';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+import { searchYouTubeVideos } from '../services/googleSearchService';
 import VideoCard from '../components/VideoCard';
 import YouTubeVideoCard from '../components/YouTubeVideoCard';
 import PageLayout from '../components/PageLayout';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
-
-
-
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const [videos, setVideos] = useState<Video[]>([]);
-  const [youtubeVideos, setYoutubeVideos] = useState<YouTubeSearchResult[]>([]);
+  const [youtubeVideos, setYoutubeVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [youtubeLoading, setYoutubeLoading] = useState(true);
   const [sortBy, setSortBy] = useState<'relevance' | 'date' | 'views'>('relevance');
-  const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState<'all' | 'local' | 'youtube'>('all');
+  const [showSortDropdown, setShowSortDropdown] = useState(false);
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      if (query) {
-        setLoading(true);
-        setYoutubeLoading(true);
-        
-        try {
-          // Search both local and YouTube videos in parallel
-          const [localResults, combinedResults] = await Promise.allSettled([
-            searchVideos(query),
-            searchCombined(query)
-          ]);
-          
-          // Handle local results
-          if (localResults.status === 'fulfilled') {
-            setVideos(localResults.value);
-          } else {
-            console.error('Error searching local videos:', localResults.reason);
-            setVideos([]);
-          }
-          
-          // Handle YouTube results
-          if (combinedResults.status === 'fulfilled') {
-            setYoutubeVideos(combinedResults.value.youtubeVideos);
-          } else {
-            console.error('Error searching YouTube videos:', combinedResults.reason);
-            setYoutubeVideos([]);
-          }
-        } catch (error) {
-          console.error('Error in search:', error);
-          setVideos([]);
-          setYoutubeVideos([]);
-        } finally {
-          setLoading(false);
-          setYoutubeLoading(false);
-        }
-      } else {
-        setVideos([]);
-        setYoutubeVideos([]);
+    const fetchResults = async () => {
+      if (!query) return;
+      
+      setLoading(true);
+      setYoutubeLoading(true);
+      
+      try {
+        // Search local videos
+        const localResults = await searchVideos(query);
+        setVideos(localResults);
+      } catch (error) {
+        console.error('Error searching local videos:', error);
+      } finally {
         setLoading(false);
+      }
+      
+      try {
+        // Search YouTube videos
+        const youtubeResults = await searchYouTubeVideos(query);
+        setYoutubeVideos(youtubeResults);
+      } catch (error) {
+        console.error('Error searching YouTube videos:', error);
+      } finally {
         setYoutubeLoading(false);
       }
     };
 
-    fetchVideos();
+    fetchResults();
   }, [query]);
 
-  const sortedVideos = [...videos].sort((a, b) => {
-    switch (sortBy) {
-      case 'date':
-        return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
-      case 'views':
-        return b.views - a.views;
-      case 'relevance':
-      default:
-        // Simple relevance based on title match
-        const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
-        const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
-        return bRelevance - aRelevance;
-    }
-  });
-
-  const sortedYouTubeVideos = [...youtubeVideos].sort((a, b) => {
-    switch (sortBy) {
-      case 'date':
-        if (a.uploadedAt && b.uploadedAt) {
-          return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
+  const sortedVideos = useMemo(() => {
+    const sortVideos = (videos: Video[]) => {
+      return [...videos].sort((a, b) => {
+        switch (sortBy) {
+          case 'date':
+            return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+          case 'views':
+            return b.views - a.views;
+          case 'relevance':
+          default:
+            // Simple relevance based on title match
+            const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
+            const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
+            return bRelevance - aRelevance;
         }
-        return 0;
-      case 'views':
-        // YouTube API doesn't provide view count in search results
-        return 0;
-      case 'relevance':
-      default:
-        // YouTube results are already sorted by relevance from the API
-        return 0;
-    }
-  });
+      });
+    };
 
-  const getDisplayVideos = () => {
+    return sortVideos(videos);
+  }, [videos, sortBy, query]);
+
+  const sortedYouTubeVideos = useMemo(() => {
+    const sortVideos = (videos: any[]) => {
+      return [...videos].sort((a, b) => {
+        switch (sortBy) {
+          case 'date':
+            return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+          case 'views':
+            return parseInt(b.viewCount || '0') - parseInt(a.viewCount || '0');
+          case 'relevance':
+          default:
+            return 0; // YouTube API already returns by relevance
+        }
+      });
+    };
+
+    return sortVideos(youtubeVideos);
+  }, [youtubeVideos, sortBy]);
+
+  const displayVideos = useMemo(() => {
     switch (activeTab) {
       case 'local':
         return { local: sortedVideos, youtube: [] };
@@ -113,39 +100,77 @@ const SearchResultsPage: React.FC = () => {
       default:
         return { local: sortedVideos, youtube: sortedYouTubeVideos };
     }
-  };
+  }, [activeTab, sortedVideos, sortedYouTubeVideos]);
 
-  const displayVideos = getDisplayVideos();
-  const totalResults = displayVideos.local.length + displayVideos.youtube.length;
+  const totalResults = videos.length + youtubeVideos.length;
 
-
+  if (!query) {
+    return (
+      <PageLayout
+        title="Search"
+        data={[]}
+        loading={false}
+        error={null}
+      >
+        {() => (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="text-center py-12">
+              <div className="text-neutral-500 dark:text-neutral-400">
+                <svg className="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <h3 className="text-lg font-medium mb-2">Enter a search term</h3>
+                <p>Use the search bar above to find videos.</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </PageLayout>
+    );
+  }
 
   if (loading && youtubeLoading) {
     return (
-      <PageLayout>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="animate-pulse">
-            <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-64 mb-6"></div>
+      <PageLayout
+        title={`Search results for "${query}"`}
+        data={[]}
+        loading={true}
+        error={null}
+      >
+        {() => (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="space-y-4">
-                  <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded"></div>
-                    <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden animate-pulse">
+                  <div className="aspect-video bg-neutral-200 dark:bg-neutral-700"></div>
+                  <div className="p-4 space-y-3">
+                    <div className="space-y-2">
+                      <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-full"></div>
+                      <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3"></div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-8 h-8 bg-neutral-200 dark:bg-neutral-700 rounded-full"></div>
+                      <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        )}
       </PageLayout>
     );
   }
 
   return (
-    <PageLayout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <PageLayout
+      title={`Search results for "${query}"`}
+      data={videos}
+      loading={loading}
+      error={null}
+    >
+      {() => (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
             Search results for "{query}" ({totalResults} results)
@@ -299,7 +324,8 @@ const SearchResultsPage: React.FC = () => {
             )}
           </div>
         )}
-      </div>
+        </div>
+      )}
     </PageLayout>
   );
 };
