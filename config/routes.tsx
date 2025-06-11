@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import React, { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';
@@ -28,6 +28,7 @@ const GoLivePage = lazy(() => import('../pages/GoLivePage'));
 const AIContentSparkPage = lazy(() => import('../pages/AIContentSparkPage'));
 const VideoUploadPage = lazy(() => import('../pages/VideoUploadPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
+const AdminPage = lazy(() => import('../pages/AdminPage'));
 
 // Studio pages
 const StudioPage = lazy(() => import('../pages/StudioPage'));
@@ -133,6 +134,10 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'settings',
         element: <SettingsPage />,
+      },
+      {
+        path: 'admin',
+        element: <AdminPage />,
       },
       {
         path: 'studio',

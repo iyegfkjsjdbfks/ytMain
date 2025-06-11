@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Video } from '../types';
 import { searchVideos } from '../services/mockVideoService';
-import { searchYouTubeVideos } from '../services/googleSearchService';
+import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import VideoCard from '../components/VideoCard';
 import YouTubeVideoCard from '../components/YouTubeVideoCard';
 import PageLayout from '../components/PageLayout';
@@ -13,7 +13,8 @@ const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const [videos, setVideos] = useState<Video[]>([]);
-  const [youtubeVideos, setYoutubeVideos] = useState<any[]>([]);
+  const [youtubeVideos, setYoutubeVideos] = useState<YouTubeSearchResult[]>([]);
+  const [googleSearchVideos, setGoogleSearchVideos] = useState<GoogleSearchResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [youtubeLoading, setYoutubeLoading] = useState(true);
   const [sortBy, setSortBy] = useState<'relevance' | 'date' | 'views'>('relevance');
@@ -28,22 +29,16 @@ const SearchResultsPage: React.FC = () => {
       setYoutubeLoading(true);
       
       try {
-        // Search local videos
-        const localResults = await searchVideos(query);
-        setVideos(localResults);
+        // Use combined search function
+        const results = await searchCombined(query, searchVideos);
+        
+        setVideos(results.localVideos);
+        setYoutubeVideos(results.youtubeVideos || []);
+        setGoogleSearchVideos(results.googleSearchVideos || []);
       } catch (error) {
-        console.error('Error searching local videos:', error);
+        console.error('Error in combined search:', error);
       } finally {
         setLoading(false);
-      }
-      
-      try {
-        // Search YouTube videos
-        const youtubeResults = await searchYouTubeVideos(query);
-        setYoutubeVideos(youtubeResults);
-      } catch (error) {
-        console.error('Error searching YouTube videos:', error);
-      } finally {
         setYoutubeLoading(false);
       }
     };
@@ -56,9 +51,9 @@ const SearchResultsPage: React.FC = () => {
       return [...videos].sort((a, b) => {
         switch (sortBy) {
           case 'date':
-            return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+            return new Date(b.uploadedAt || b.uploadDate).getTime() - new Date(a.uploadedAt || a.uploadDate).getTime();
           case 'views':
-            return b.views - a.views;
+            return (b.views || 0) - (a.views || 0);
           case 'relevance':
           default:
             // Simple relevance based on title match
@@ -73,13 +68,13 @@ const SearchResultsPage: React.FC = () => {
   }, [videos, sortBy, query]);
 
   const sortedYouTubeVideos = useMemo(() => {
-    const sortVideos = (videos: any[]) => {
+    const sortVideos = (videos: YouTubeSearchResult[]) => {
       return [...videos].sort((a, b) => {
         switch (sortBy) {
           case 'date':
-            return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+            return new Date(b.uploadedAt || '').getTime() - new Date(a.uploadedAt || '').getTime();
           case 'views':
-            return parseInt(b.viewCount || '0') - parseInt(a.viewCount || '0');
+            return 0; // YouTube Data API doesn't provide view count in search
           case 'relevance':
           default:
             return 0; // YouTube API already returns by relevance
@@ -90,19 +85,37 @@ const SearchResultsPage: React.FC = () => {
     return sortVideos(youtubeVideos);
   }, [youtubeVideos, sortBy]);
 
+  const sortedGoogleSearchVideos = useMemo(() => {
+    const sortVideos = (videos: GoogleSearchResult[]) => {
+      return [...videos].sort((a, b) => {
+        switch (sortBy) {
+          case 'date':
+            return new Date(b.uploadedAt || '').getTime() - new Date(a.uploadedAt || '').getTime();
+          case 'views':
+            return 0; // Google Search doesn't provide reliable view counts
+          case 'relevance':
+          default:
+            return 0; // Google Search already returns by relevance
+        }
+      });
+    };
+
+    return sortVideos(googleSearchVideos);
+  }, [googleSearchVideos, sortBy]);
+
   const displayVideos = useMemo(() => {
     switch (activeTab) {
       case 'local':
-        return { local: sortedVideos, youtube: [] };
+        return { local: sortedVideos, youtube: [], googleSearch: [] };
       case 'youtube':
-        return { local: [], youtube: sortedYouTubeVideos };
+        return { local: [], youtube: sortedYouTubeVideos, googleSearch: sortedGoogleSearchVideos };
       case 'all':
       default:
-        return { local: sortedVideos, youtube: sortedYouTubeVideos };
+        return { local: sortedVideos, youtube: sortedYouTubeVideos, googleSearch: sortedGoogleSearchVideos };
     }
-  }, [activeTab, sortedVideos, sortedYouTubeVideos]);
+  }, [activeTab, sortedVideos, sortedYouTubeVideos, sortedGoogleSearchVideos]);
 
-  const totalResults = videos.length + youtubeVideos.length;
+  const totalResults = videos.length + youtubeVideos.length + googleSearchVideos.length;
 
   if (!query) {
     return (
@@ -207,7 +220,7 @@ const SearchResultsPage: React.FC = () => {
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
                 }`}
               >
-                YouTube ({youtubeVideos.length})
+                YouTube ({youtubeVideos.length + googleSearchVideos.length})
               </button>
             </div>
             
@@ -308,6 +321,51 @@ const SearchResultsPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {displayVideos.youtube.map((video) => (
                     <YouTubeVideoCard key={video.videoId} video={video} />
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Google Search Videos Section */}
+            {displayVideos.googleSearch.length > 0 && (
+              <div>
+                {activeTab === 'all' && (
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    YouTube Videos (Google Search) ({displayVideos.googleSearch.length})
+                    {youtubeLoading && (
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-green-500 border-t-transparent ml-2"></div>
+                    )}
+                  </h2>
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {displayVideos.googleSearch.map((video) => (
+                    <div key={video.videoId} className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-md transition-shadow">
+                      <div className="aspect-video bg-neutral-100 dark:bg-neutral-700">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${video.videoId}`}
+                          title={video.title}
+                          className="w-full h-full"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 mb-2">
+                          {video.title}
+                        </h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-2">
+                          {video.description}
+                        </p>
+                        <div className="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
+                          <span>{video.channelTitle}</span>
+                          {video.uploadedAt && (
+                            <span>{new Date(video.uploadedAt).toLocaleDateString()}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
