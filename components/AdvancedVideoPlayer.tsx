@@ -343,12 +343,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       {isYouTubeVideo ? (
         <iframe
           ref={iframeRef}
-          src={`${src}?autoplay=${autoPlay ? 1 : 0}&mute=${muted ? 1 : 0}&controls=1&rel=0&modestbranding=1`}
+          src={`${src}?autoplay=${autoPlay ? 1 : 0}&mute=${muted ? 1 : 0}&controls=1&rel=0&modestbranding=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&fs=1&cc_load_policy=1&iv_load_policy=3&disablekb=0`}
           className="w-full h-full"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           title={title || 'YouTube Video'}
+          loading="lazy"
         />
       ) : (
         <video

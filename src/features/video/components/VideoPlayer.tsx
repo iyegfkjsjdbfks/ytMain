@@ -84,7 +84,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   // If using YouTube, render iframe
   if (useYouTube || (!src && videoId)) {
-    const videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&start=${Math.floor(startTime)}&enablejsapi=1&origin=${window.location.origin}`;
+    const videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&start=${Math.floor(startTime)}&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&controls=1&rel=0&modestbranding=1&playsinline=1&fs=1&cc_load_policy=1&iv_load_policy=3&disablekb=0&widget_referrer=${encodeURIComponent(window.location.origin)}`;
 
     return (
       <div className={`video-player-container ${className}`}>
@@ -92,9 +92,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           <iframe
             src={videoUrl}
             title={title || `Video ${videoId}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             className="w-full aspect-video"
+            loading="lazy"
+            frameBorder="0"
             onLoad={onReady}
           />
         </div>

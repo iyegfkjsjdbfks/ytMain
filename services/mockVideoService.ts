@@ -276,19 +276,23 @@ export const getVideos = (): Promise<Video[]> => {
 
 // Helper function to convert YouTube search result to Video object
 const createYouTubeVideoObject = (youtubeId: string): Video => {
+  // Extract actual YouTube video ID by removing 'youtube-' prefix if present
+  const actualYouTubeId = youtubeId.startsWith('youtube-') ? youtubeId.substring(8) : youtubeId;
+  
   return {
     id: youtubeId,
     title: 'YouTube Video',
     description: 'This is a YouTube video playing within the app.',
-    thumbnail: `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`,
+    thumbnail: `https://img.youtube.com/vi/${actualYouTubeId}/maxresdefault.jpg`,
     duration: 0, // Will be updated by player
     views: '0',
     likes: 0,
     dislikes: 0,
     comments: 0,
     shares: 0,
-    url: `https://www.youtube.com/embed/${youtubeId}`,
-    embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
+    url: `https://www.youtube.com/embed/${actualYouTubeId}`,
+    videoUrl: `https://www.youtube.com/embed/${actualYouTubeId}`,
+    embedUrl: `https://www.youtube.com/embed/${actualYouTubeId}`,
     channelId: 'youtube-channel',
     channelName: 'YouTube',
     channelAvatar: '/youtube-avatar.png',

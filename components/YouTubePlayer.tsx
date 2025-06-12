@@ -175,7 +175,12 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           rel: 0,
           enablejsapi: 1,
           origin: window.location.origin,
-          playsinline: 1
+          playsinline: 1,
+          fs: 1, // Enable fullscreen button
+          cc_load_policy: 1, // Show closed captions by default
+          iv_load_policy: 3, // Hide video annotations
+          disablekb: 0, // Enable keyboard controls
+          widget_referrer: window.location.origin
         },
         events: {
           onReady: (event) => {
