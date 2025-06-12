@@ -6,6 +6,8 @@ import { searchVideos } from '../services/mockVideoService';
 import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import VideoCard from '../components/VideoCard';
 import YouTubeVideoCard from '../components/YouTubeVideoCard';
+import VideoGrid from '../components/VideoGrid';
+import YouTubeVideoGrid from '../components/YouTubeVideoGrid';
 import PageLayout from '../components/PageLayout';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
@@ -152,8 +154,8 @@ const SearchResultsPage: React.FC = () => {
       >
         {() => (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {Array.from({ length: 8 }).map((_, index) => (
+            <div className="grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+              {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index} className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden animate-pulse">
                   <div className="aspect-video bg-neutral-200 dark:bg-neutral-700"></div>
                   <div className="p-4 space-y-3">
@@ -298,11 +300,7 @@ const SearchResultsPage: React.FC = () => {
                     Local Videos ({displayVideos.local.length})
                   </h2>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {displayVideos.local.map((video) => (
-                    <VideoCard key={video.id} video={video} />
-                  ))}
-                </div>
+                <VideoGrid videos={displayVideos.local} keyPrefix="local" />
               </div>
             )}
             
@@ -318,11 +316,7 @@ const SearchResultsPage: React.FC = () => {
                     )}
                   </h2>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {displayVideos.youtube.map((video) => (
-                    <YouTubeVideoCard key={video.videoId} video={video} />
-                  ))}
-                </div>
+                <YouTubeVideoGrid videos={displayVideos.youtube} keyPrefix="youtube" />
               </div>
             )}
             
@@ -338,36 +332,7 @@ const SearchResultsPage: React.FC = () => {
                     )}
                   </h2>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {displayVideos.googleSearch.map((video) => (
-                    <div key={video.videoId} className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-md transition-shadow">
-                      <div className="aspect-video bg-neutral-100 dark:bg-neutral-700">
-                        <iframe
-                          src={`https://www.youtube.com/embed/${video.videoId}`}
-                          title={video.title}
-                          className="w-full h-full"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
-                      <div className="p-4">
-                        <h3 className="font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 mb-2">
-                          {video.title}
-                        </h3>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-2">
-                          {video.description}
-                        </p>
-                        <div className="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
-                          <span>{video.channelTitle}</span>
-                          {video.uploadedAt && (
-                            <span>{new Date(video.uploadedAt).toLocaleDateString()}</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <YouTubeVideoGrid videos={displayVideos.googleSearch} keyPrefix="google-search" />
               </div>
             )}
             

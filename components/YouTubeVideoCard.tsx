@@ -1,8 +1,8 @@
 // YouTube Video Card component for displaying YouTube search results
 import React, { useState } from 'react';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+import { YouTubeSearchResult } from '../src/types/youtube';
 import YouTubePlayer from './YouTubePlayer';
-import { PlayIcon } from '@heroicons/react/24/solid';
+import { PlayIcon } from './icons/UnifiedIcon';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -13,14 +13,19 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   const [showPlayer, setShowPlayer] = useState(false);
   const [isPlayerLoading, setIsPlayerLoading] = useState(false);
 
-  const handlePlayClick = () => {
+  const handlePlayClick = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
     setIsPlayerLoading(true);
-    setShowPlayer(true);
-    // Reset loading state after a short delay
-    setTimeout(() => setIsPlayerLoading(false), 1000);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setShowPlayer(true);
+    } finally {
+      setIsPlayerLoading(false);
+    }
   };
 
-  const handleClosePlayer = () => {
+  const handleClosePlayer = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
     setShowPlayer(false);
     setIsPlayerLoading(false);
   };
@@ -61,10 +66,26 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
     }
   };
 
+  const handleCardClick = () => {
+    window.open(video.videoUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <div className={`bg-white dark:bg-neutral-900 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-neutral-200 dark:border-neutral-800 ${className}`}>
+    <div 
+      className={`bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full cursor-pointer group ${className}`}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      aria-label={`Watch ${video.title} on YouTube`}
+    >
       {/* Video Thumbnail/Player Section */}
-      <div className="relative aspect-video bg-neutral-100 dark:bg-neutral-800">
+      <div className="relative aspect-video">
         {showPlayer ? (
           <div className="relative w-full h-full">
             <YouTubePlayer 
@@ -91,7 +112,7 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
             <img
               src={video.thumbnailUrl}
               alt={video.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg"
               loading="lazy"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -129,50 +150,26 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
       </div>
       
       {/* Video Info Section */}
-      <div className="p-4">
-        {/* Title */}
-        <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm line-clamp-2 mb-2 leading-tight">
-          {video.title}
-        </h3>
-        
-        {/* Channel and metadata */}
-        <div className="space-y-1">
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">
-            {video.channelName}
-          </p>
-          
-          {formatUploadDate(video.uploadedAt) && (
-            <p className="text-neutral-500 dark:text-neutral-500 text-xs">
-              {formatUploadDate(video.uploadedAt)}
+      <div className="p-3 flex-grow">
+        <div className="flex items-start space-x-3">
+          <div className="flex-shrink-0">
+            <div className="w-9 h-9 rounded-full mt-0.5 bg-red-600 flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+          </div>
+          <div className="flex-grow overflow-hidden">
+            <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug line-clamp-2">
+              {video.title}
+            </h3>
+            <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5 block truncate">
+              {video.channelName}
+            </div>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400">
+              YouTube • {formatUploadDate(video.uploadedAt)}
             </p>
-          )}
-        </div>
-        
-        {/* Description preview */}
-        {video.description && (
-          <p className="text-neutral-600 dark:text-neutral-400 text-xs mt-2 line-clamp-2 leading-relaxed">
-            {video.description}
-          </p>
-        )}
-        
-        {/* Action buttons */}
-        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-800">
-          <button
-            onClick={handlePlayClick}
-            className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-          >
-            <PlayIcon className="w-4 h-4" />
-            Play
-          </button>
-          
-          <a
-            href={video.videoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-sm font-medium py-2 px-3 rounded-lg transition-colors text-center"
-          >
-            Open in YouTube
-          </a>
+          </div>
         </div>
       </div>
     </div>
