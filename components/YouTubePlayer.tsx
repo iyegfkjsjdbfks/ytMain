@@ -5,19 +5,22 @@ import { YouTubeSearchResult } from '../services/googleSearchService';
 // YouTube Player API types
 declare global {
   interface Window {
-    YT: {
-      Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
-      PlayerState: {
-        UNSTARTED: number;
-        ENDED: number;
-        PLAYING: number;
-        PAUSED: number;
-        BUFFERING: number;
-        CUED: number;
-      };
-    };
+    YT: typeof YT;
     onYouTubeIframeAPIReady?: () => void;
   }
+}
+
+// Define YT namespace
+interface YT {
+  Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
+  PlayerState: {
+    UNSTARTED: number;
+    ENDED: number;
+    PLAYING: number;
+    PAUSED: number;
+    BUFFERING: number;
+    CUED: number;
+  };
 }
 
 interface YTPlayerConfig {

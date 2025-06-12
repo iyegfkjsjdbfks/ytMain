@@ -53,9 +53,15 @@ const SearchResultsPage: React.FC = () => {
       return [...videos].sort((a, b) => {
         switch (sortBy) {
           case 'date':
-            return new Date(b.uploadedAt || b.uploadDate).getTime() - new Date(a.uploadedAt || a.uploadDate).getTime();
+            // Handle both uploadedAt and uploadDate properties
+            const dateA = a.uploadedAt || '';
+            const dateB = b.uploadedAt || '';
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
           case 'views':
-            return (b.views || 0) - (a.views || 0);
+            // Convert string views to number if needed
+            const viewsA = typeof a.views === 'string' ? parseInt(a.views) || 0 : (a.views || 0);
+            const viewsB = typeof b.views === 'string' ? parseInt(b.views) || 0 : (b.views || 0);
+            return viewsB - viewsA;
           case 'relevance':
           default:
             // Simple relevance based on title match
