@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { YouTubeSearchResult } from '../services/googleSearchService';
+import { buildVideoUrl } from '../utils/componentUtils';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -52,8 +53,11 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   };
 
   const handleCardClick = () => {
+    // Extract clean video ID (remove any prefix like 'youtube-' or 'google-search-')
+    const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
+    
     // Navigate to watch page with YouTube video ID
-    const watchUrl = buildVideoUrl(video.id);
+    const watchUrl = buildVideoUrl(cleanVideoId);
     navigate(watchUrl);
   };
 

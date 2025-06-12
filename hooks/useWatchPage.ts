@@ -61,8 +61,8 @@ export const useWatchPage = () => {
   
   // Get video ID from either path parameter or query parameter
   const rawVideoId = pathVideoId || searchParams.get('v');
-  // Remove 'google-search-' prefix if it exists (from search results)
-  const videoId = rawVideoId?.replace(/^google-search-/, '') || null;
+  // Remove any prefix like 'youtube-' or 'google-search-' if it exists (from search results)
+  const videoId = rawVideoId?.replace(/^(youtube-|google-search-)/, '') || null;
   
   // Core data state
   const [video, setVideo] = useState<Video | null>(null);
