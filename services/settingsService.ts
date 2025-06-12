@@ -1,6 +1,6 @@
 // Settings service for managing application preferences
 
-export type YouTubeSearchProvider = 'youtube-api' | 'google-search';
+export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
 
 export interface AppSettings {
   youtubeSearchProvider: YouTubeSearchProvider;
@@ -58,4 +58,9 @@ export const isGoogleSearchAvailable = (): boolean => {
 export const isYouTubeApiAvailable = (): boolean => {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   return !!apiKey;
+};
+
+// Check if hybrid mode is available (both APIs configured)
+export const isHybridModeAvailable = (): boolean => {
+  return isYouTubeApiAvailable() && isGoogleSearchAvailable();
 };

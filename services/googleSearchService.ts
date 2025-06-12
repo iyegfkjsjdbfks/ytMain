@@ -282,21 +282,51 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
     const { getYouTubeSearchProvider } = await import('./settingsService');
     const provider = getYouTubeSearchProvider();
     
-    // Search local videos and YouTube videos in parallel
-    const [localVideos, youtubeResults] = await Promise.all([
-      searchLocalVideos(query),
-      provider === 'google-search' 
-        ? searchYouTubeWithGoogleSearch(query)
-        : searchYouTubeVideos(query)
-    ]);
+    // Search local videos first
+    const localVideos = await searchLocalVideos(query);
     
-    if (provider === 'google-search') {
+    let youtubeResults: YouTubeSearchResult[] | GoogleSearchResult[];
+    
+    if (provider === 'hybrid') {
+      // Hybrid mode: try YouTube API first, fallback to Custom Search on quota error
+      try {
+        youtubeResults = await searchYouTubeVideos(query);
+        return {
+          localVideos,
+          youtubeVideos: youtubeResults as YouTubeSearchResult[],
+          googleSearchVideos: []
+        };
+      } catch (error: any) {
+        console.warn('YouTube API failed, falling back to Custom Search:', error.message);
+        // Check if it's a quota error or similar API limit issue
+        if (error.message?.includes('quota') || 
+            error.message?.includes('limit') || 
+            error.message?.includes('exceeded') ||
+            error.status === 403) {
+          try {
+            youtubeResults = await searchYouTubeWithGoogleSearch(query);
+            return {
+              localVideos,
+              youtubeVideos: [],
+              googleSearchVideos: youtubeResults as GoogleSearchResult[]
+            };
+          } catch (fallbackError) {
+            console.error('Both YouTube API and Custom Search failed:', fallbackError);
+            throw fallbackError;
+          }
+        } else {
+          throw error;
+        }
+      }
+    } else if (provider === 'google-search') {
+      youtubeResults = await searchYouTubeWithGoogleSearch(query);
       return {
         localVideos,
         youtubeVideos: [],
         googleSearchVideos: youtubeResults as GoogleSearchResult[]
       };
     } else {
+      youtubeResults = await searchYouTubeVideos(query);
       return {
         localVideos,
         youtubeVideos: youtubeResults as YouTubeSearchResult[],

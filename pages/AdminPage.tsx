@@ -4,7 +4,8 @@ import {
   saveSettings, 
   YouTubeSearchProvider,
   isGoogleSearchAvailable,
-  isYouTubeApiAvailable 
+  isYouTubeApiAvailable,
+  isHybridModeAvailable
 } from '../services/settingsService';
 
 const AdminPage: React.FC = () => {
@@ -40,6 +41,7 @@ const AdminPage: React.FC = () => {
 
   const youtubeApiAvailable = isYouTubeApiAvailable();
   const googleSearchAvailable = isGoogleSearchAvailable();
+  const hybridModeAvailable = isHybridModeAvailable();
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -129,6 +131,44 @@ const AdminPage: React.FC = () => {
                       </p>
                     </div>
                   </div>
+
+                  {/* Hybrid Mode Option */}
+                  <div className="flex items-start">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="hybrid-mode"
+                        name="search-provider"
+                        type="radio"
+                        checked={provider === 'hybrid'}
+                        onChange={() => handleProviderChange('hybrid')}
+                        disabled={!hybridModeAvailable || isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="hybrid-mode" className="font-medium text-gray-700">
+                        Hybrid Mode (YouTube API + Custom Search Fallback)
+                        {!hybridModeAvailable && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                            Not Configured
+                          </span>
+                        )}
+                        {hybridModeAvailable && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Recommended
+                          </span>
+                        )}
+                      </label>
+                      <p className="text-gray-500">
+                        Uses YouTube Data API v3 first for optimal results, then automatically switches to Google Custom Search when quota is reached.
+                        {!hybridModeAvailable && (
+                          <span className="block mt-1 text-red-600">
+                            Requires both VITE_YOUTUBE_API_KEY and VITE_GOOGLE_SEARCH_API_KEY + VITE_GOOGLE_SEARCH_ENGINE_ID in environment variables.
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Save Message */}
@@ -153,6 +193,9 @@ const AdminPage: React.FC = () => {
                     </p>
                     <p>
                       <strong>Google Custom Search:</strong> Add both <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_API_KEY</code> and <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_ENGINE_ID</code> to your .env.local file.
+                    </p>
+                    <p>
+                      <strong>Hybrid Mode:</strong> Requires all three environment variables above. Provides the best user experience by using YouTube API first, then falling back to Custom Search when quota limits are reached.
                     </p>
                     <p className="text-xs">
                       Restart the development server after adding environment variables.
