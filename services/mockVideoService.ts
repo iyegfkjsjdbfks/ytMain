@@ -274,11 +274,61 @@ export const getVideos = (): Promise<Video[]> => {
   });
 };
 
+// Helper function to convert YouTube search result to Video object
+const createYouTubeVideoObject = (youtubeId: string): Video => {
+  return {
+    id: youtubeId,
+    title: 'YouTube Video',
+    description: 'This is a YouTube video playing within the app.',
+    thumbnail: `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`,
+    duration: 0, // Will be updated by player
+    views: 0,
+    likes: 0,
+    dislikes: 0,
+    comments: 0,
+    shares: 0,
+    url: `https://www.youtube.com/embed/${youtubeId}`,
+    embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
+    channelId: 'youtube-channel',
+    channelName: 'YouTube',
+    channelAvatar: '/youtube-avatar.png',
+    channelAvatarUrl: '/youtube-avatar.png',
+    tags: ['youtube'],
+    category: 'entertainment' as any,
+    visibility: 'public' as any,
+    monetization: {} as any,
+    analytics: {} as any,
+    processing: {} as any,
+    quality: [],
+    captions: [],
+    chapters: [],
+    cards: [],
+    uploadedAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    isShort: false,
+    isYouTube: true
+  };
+};
+
 export const getVideoById = (id: string): Promise<Video | null> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const video = mockVideos.find(v => v.id === id) || null;
-      resolve(video);
+      // First check if it's a local video
+      const localVideo = mockVideos.find(v => v.id === id);
+      if (localVideo) {
+        resolve(localVideo);
+        return;
+      }
+      
+      // If not found in local videos, treat as YouTube video ID
+      // YouTube video IDs are typically 11 characters long
+      if (id && id.length >= 10) {
+        const youtubeVideo = createYouTubeVideoObject(id);
+        resolve(youtubeVideo);
+      } else {
+        resolve(null);
+      }
     }, 100);
   });
 };

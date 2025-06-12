@@ -306,7 +306,7 @@ const SearchResultsPage: React.FC = () => {
             
             {/* YouTube Videos Section */}
             {displayVideos.youtube.length > 0 && (
-              <div>
+              <div className="px-4">
                 {activeTab === 'all' && (
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
                     <span className="w-2 h-2 bg-red-500 rounded-full"></span>
@@ -322,7 +322,7 @@ const SearchResultsPage: React.FC = () => {
             
             {/* Google Search Videos Section */}
             {displayVideos.googleSearch.length > 0 && (
-              <div>
+              <div className="px-4">
                 {activeTab === 'all' && (
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>

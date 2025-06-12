@@ -1,8 +1,13 @@
 // YouTube Video Card component for displaying YouTube search results
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { YouTubeSearchResult } from '../src/types/youtube';
 import YouTubePlayer from './YouTubePlayer';
-import { PlayIcon } from '@heroicons/react/24/outline';
+import { PlayIcon } from '@heroicons/react/24/solid';
+import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatCount } from '../utils/numberUtils';
+import { buildVideoUrl } from '../utils/componentUtils';
+import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -12,6 +17,8 @@ interface YouTubeVideoCardProps {
 const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }) => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [isPlayerLoading, setIsPlayerLoading] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
 
   const handlePlayClick = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click
@@ -67,7 +74,9 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   };
 
   const handleCardClick = () => {
-    window.open(video.videoUrl, '_blank', 'noopener,noreferrer');
+    // Navigate to watch page with YouTube video ID
+    const watchUrl = buildVideoUrl(video.id);
+    navigate(watchUrl);
   };
 
   return (

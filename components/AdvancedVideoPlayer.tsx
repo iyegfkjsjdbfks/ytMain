@@ -75,9 +75,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const [currentChapter, setCurrentChapter] = useState<Chapter | null>(null);
   
   const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  
+  // Check if the source is a YouTube video
+  const isYouTubeVideo = src.includes('youtube.com/embed/') || src.includes('youtu.be/');
   
   const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
   
@@ -335,18 +339,30 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       onMouseMove={showControlsTemporarily}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >
-      {/* Video Element */}
-      <video
-        ref={videoRef}
-        src={src}
-        poster={poster}
-        autoPlay={autoPlay}
-        muted={muted}
-        loop={loop}
-        preload="metadata"
-        className="w-full h-full object-contain"
-        onClick={togglePlay}
-      />
+      {/* Video Element or YouTube Iframe */}
+      {isYouTubeVideo ? (
+        <iframe
+          ref={iframeRef}
+          src={`${src}?autoplay=${autoPlay ? 1 : 0}&mute=${muted ? 1 : 0}&controls=1&rel=0&modestbranding=1`}
+          className="w-full h-full"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={title || 'YouTube Video'}
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay={autoPlay}
+          muted={muted}
+          loop={loop}
+          preload="metadata"
+          className="w-full h-full object-contain"
+          onClick={togglePlay}
+        />
+      )}
       
       {/* Loading Spinner */}
       {isLoading && (
@@ -373,10 +389,11 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         </div>
       )}
       
-      {/* Controls Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-opacity duration-300 ${
-        showControls ? 'opacity-100' : 'opacity-0'
-      }`}>
+      {/* Controls Overlay - Hide for YouTube videos */}
+      {!isYouTubeVideo && (
+        <div className={`absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-opacity duration-300 ${
+          showControls ? 'opacity-100' : 'opacity-0'
+        }`}>
         {/* Center Play/Pause Button */}
         <div className="absolute inset-0 flex items-center justify-center">
           <button
@@ -540,7 +557,8 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      )}
       
       {/* Settings Panel */}
       {showSettings && (

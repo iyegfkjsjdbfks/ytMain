@@ -23,8 +23,8 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
     sm: 2,
     md: 3,
     lg: 4,
-    xl: 5,
-    '2xl': 6
+    xl: 4,
+    '2xl': 5
   }
 }) => {
   const getGridClasses = () => {
@@ -44,7 +44,7 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
     <div className={getGridClasses()}>
       {videos.map((video, index) => (
         <YouTubeVideoCard 
-          key={keyPrefix ? `${keyPrefix}-${video.videoId}` : `${video.videoId}-${index}`} 
+          key={keyPrefix ? `${keyPrefix}-${video.id || video.videoId || index}` : `${video.id || video.videoId || index}`} 
           video={video} 
         />
       ))}
