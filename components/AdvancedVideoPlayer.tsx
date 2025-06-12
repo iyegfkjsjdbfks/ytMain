@@ -81,7 +81,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const progressRef = useRef<HTMLDivElement>(null);
   
   // Check if the source is a YouTube video
-  const isYouTubeVideo = src.includes('youtube.com/embed/') || src.includes('youtu.be/');
+  const isYouTubeVideo = src && (src.includes('youtube.com/embed/') || src.includes('youtu.be/'));
   
   const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
   

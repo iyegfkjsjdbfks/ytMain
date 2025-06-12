@@ -132,7 +132,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
       >
         <div className="text-sm" id="video-description-content">
           <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            {video.uploadedAt} &bull; {video.views.split(' ')[0]} views
+            {video.uploadedAt} &bull; {typeof video.views === 'string' && video.views.includes(' ') ? video.views.split(' ')[0] : video.views} views
           </span>
           <br/>
           {video.description}

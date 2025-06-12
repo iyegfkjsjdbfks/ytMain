@@ -282,7 +282,7 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     description: 'This is a YouTube video playing within the app.',
     thumbnail: `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`,
     duration: 0, // Will be updated by player
-    views: 0,
+    views: '0',
     likes: 0,
     dislikes: 0,
     comments: 0,
