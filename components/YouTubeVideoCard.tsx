@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { YouTubeSearchResult } from '../src/types/youtube';
 import YouTubePlayer from './YouTubePlayer';
-import { PlayIcon } from './icons/UnifiedIcon';
+import { PlayIcon } from '@heroicons/react/24/outline';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
