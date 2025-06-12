@@ -52,8 +52,8 @@ export function PageLayout<T>({
   );
 
   return (
-    <div className={`p-4 md:p-6 bg-white dark:bg-neutral-950 ${className}`}>
-      <div className="flex items-center justify-between mb-6 sm:mb-8">
+    <div className={`p-2 md:p-3 bg-white dark:bg-neutral-950 ${className}`}>
+      <div className="flex items-center justify-between mb-1 sm:mb-1">
         <div className="flex items-center">
           {icon && <div className="w-7 h-7 sm:w-8 sm:h-8 mr-3">{icon}</div>}
           <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">

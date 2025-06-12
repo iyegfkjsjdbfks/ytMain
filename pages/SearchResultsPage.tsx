@@ -185,7 +185,7 @@ const SearchResultsPage: React.FC = () => {
       error={null}
     >
       {() => (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto -mt-4">
         <div className="flex items-center justify-between">
           <div></div>
           
@@ -288,7 +288,7 @@ const SearchResultsPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="space-y-4 mt-2">
+          <div className="space-y-4">
             {/* Local Videos Section */}
             {displayVideos.local.length > 0 && (
               <div>
