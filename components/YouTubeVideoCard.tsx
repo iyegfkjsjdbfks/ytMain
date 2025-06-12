@@ -1,7 +1,6 @@
 // YouTube Video Card component for displaying YouTube search results
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { YouTubeSearchResult } from '../src/types/youtube';
 import YouTubePlayer from './YouTubePlayer';
 import { PlayIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from '../utils/dateUtils';
