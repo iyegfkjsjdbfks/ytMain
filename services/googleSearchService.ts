@@ -225,8 +225,17 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
     const youtubeResults = data.items.map(convertToYouTubeResult);
     
     return youtubeResults;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error searching YouTube videos:', error);
+    
+    // Check if it's a quota error and throw it to allow hybrid mode to catch and handle it
+    if (error.message?.includes('quota') || 
+        error.message?.includes('limit') || 
+        error.message?.includes('exceeded') ||
+        (error.status === 403)) {
+      throw error;
+    }
+    
     return [];
   }
 };
@@ -248,7 +257,7 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     searchUrl.searchParams.set('cx', engineId);
     searchUrl.searchParams.set('q', `${query} site:youtube.com`);
     searchUrl.searchParams.set('num', '10');
-    searchUrl.searchParams.set('searchType', 'image'); // This helps get video thumbnails
+    // Remove searchType parameter as it's not supported for general web search
     
     const response = await fetch(searchUrl.toString());
     

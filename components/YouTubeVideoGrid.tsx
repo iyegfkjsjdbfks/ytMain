@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import YouTubeVideoCard from './YouTubeVideoCard';
-import { YouTubeVideo } from '../types';
+import { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubeVideoGridProps {
-  videos: YouTubeVideo[];
+  videos: YouTubeSearchResult[];
   className?: string;
   keyPrefix?: string;
   columns?: {

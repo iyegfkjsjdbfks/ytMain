@@ -1,6 +1,7 @@
 
 import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
+import YouTubePlayer from '../components/YouTubePlayer';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
 import VideoDescription from '../components/VideoDescription';
@@ -11,6 +12,8 @@ import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { useMiniplayer } from '../contexts/MiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
+import { YouTubeSearchResult } from '../services/googleSearchService';
 
 const WatchPage: React.FC = () => {
   const {
@@ -201,11 +204,32 @@ const WatchPage: React.FC = () => {
           <div className="lg:col-span-2">
             {/* Video player */}
             <div className="mb-4">
-              <AdvancedVideoPlayer
-                src={video.videoUrl}
-                poster={video.thumbnailUrl}
-                title={video.title}
-              />
+              {isYouTubeUrl(video.videoUrl) ? (
+                <YouTubePlayer
+                  video={{
+                    id: getYouTubeVideoId(video.videoUrl) || '',
+                    title: video.title,
+                    description: video.description,
+                    thumbnailUrl: video.thumbnailUrl,
+                    channelName: video.channelName,
+                    views: video.views,
+                    uploadedAt: video.uploadedAt,
+                    duration: video.duration,
+                    videoUrl: video.videoUrl,
+                    embedUrl: `https://www.youtube.com/embed/${getYouTubeVideoId(video.videoUrl)}`
+                  } as YouTubeSearchResult}
+                  width="100%"
+                  height={480}
+                  controls={true}
+                  autoplay={false}
+                />
+              ) : (
+                <AdvancedVideoPlayer
+                  src={video.videoUrl}
+                  poster={video.thumbnailUrl}
+                  title={video.title}
+                />
+              )}
             </div>
             
             {/* Video title and stats */}

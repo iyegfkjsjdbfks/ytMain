@@ -9,7 +9,7 @@ export interface AppSettings {
 const SETTINGS_KEY = 'yt-studio-settings';
 
 const defaultSettings: AppSettings = {
-  youtubeSearchProvider: 'youtube-api'
+  youtubeSearchProvider: 'hybrid'
 };
 
 // Get current settings from localStorage

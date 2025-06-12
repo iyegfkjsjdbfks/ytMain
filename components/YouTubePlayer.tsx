@@ -16,7 +16,7 @@ declare global {
         CUED: number;
       };
     };
-    onYouTubeIframeAPIReady: () => void;
+    onYouTubeIframeAPIReady?: () => void;
   }
 }
 
@@ -107,7 +107,10 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
   // Extract video ID from the video object
-  const videoId = video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
+  const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || '';
+  
+  // Validate video ID
+  const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
 
   // Load YouTube IFrame API
   useEffect(() => {
@@ -155,12 +158,25 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Initialize player when API is ready
   useEffect(() => {
-    if (!isAPIReady || !playerRef.current || !videoId) return;
+    if (!isAPIReady || !playerRef.current || !isValidVideoId) return;
+
+    let isMounted = true;
 
     try {
       // Destroy existing player if any
       if (ytPlayerRef.current) {
-        ytPlayerRef.current.destroy();
+        try {
+          ytPlayerRef.current.destroy();
+        } catch (error) {
+          console.warn('Error destroying previous player:', error);
+        }
+        ytPlayerRef.current = null;
+      }
+
+      // Ensure the container element exists and is empty
+      const container = document.getElementById(playerIdRef.current);
+      if (container) {
+        container.innerHTML = '';
       }
 
       // Create new player
@@ -180,17 +196,21 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           cc_load_policy: 1, // Show closed captions by default
           iv_load_policy: 3, // Hide video annotations
           disablekb: 0, // Enable keyboard controls
-          widget_referrer: window.location.origin
+          widget_referrer: window.location.origin,
+          host: window.location.protocol + '//' + window.location.host
         },
         events: {
           onReady: (event) => {
-            setIsPlayerReady(true);
-            setPlayerError(null);
+            if (isMounted) {
+              setIsPlayerReady(true);
+              setPlayerError(null);
+            }
           },
           onStateChange: (event) => {
             // Handle state changes if needed
           },
           onError: (event) => {
+            if (!isMounted) return;
             const errorMessages: { [key: number]: string } = {
               2: 'Invalid video ID',
               5: 'HTML5 player error',
@@ -198,31 +218,40 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               101: 'Video not available in embedded players',
               150: 'Video not available in embedded players'
             };
-            setPlayerError(errorMessages[event.data] || 'Unknown player error');
+            const message = errorMessages[event.data] || 'Unknown error occurred';
+            setPlayerError(message);
           }
         }
       });
     } catch (error) {
       console.error('Error creating YouTube player:', error);
-      setPlayerError('Failed to load video player');
+      if (isMounted) {
+        setPlayerError('Failed to load video player');
+      }
     }
 
     return () => {
+      isMounted = false;
       if (ytPlayerRef.current) {
         try {
-          ytPlayerRef.current.destroy();
+          // Check if the player element still exists before destroying
+          const playerElement = document.getElementById(playerIdRef.current);
+          if (playerElement && playerElement.parentNode) {
+            ytPlayerRef.current.destroy();
+          }
         } catch (error) {
-          console.error('Error destroying YouTube player:', error);
+          console.warn('Error destroying YouTube player:', error);
         }
+        ytPlayerRef.current = null;
       }
     };
   }, [isAPIReady, videoId, height, width, autoplay, controls]);
 
-  if (!videoId) {
+  if (!isValidVideoId) {
     return (
       <div className={`bg-gray-100 dark:bg-gray-800 rounded-lg p-4 ${className}`}>
         <p className="text-gray-600 dark:text-gray-400 text-center">
-          Invalid YouTube video
+          Invalid YouTube video ID
         </p>
       </div>
     );
