@@ -147,14 +147,14 @@ const SearchResultsPage: React.FC = () => {
   if (loading && youtubeLoading) {
     return (
       <PageLayout
-        title={`Search results for "${query}"`}
+        title=""
         data={[]}
         loading={true}
         error={null}
       >
         {() => (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            <div className="grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
               {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index} className="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden animate-pulse">
                   <div className="aspect-video bg-neutral-200 dark:bg-neutral-700"></div>
@@ -179,17 +179,15 @@ const SearchResultsPage: React.FC = () => {
 
   return (
     <PageLayout
-      title={`Search results for "${query}"`}
+      title=""
       data={videos}
       loading={loading}
       error={null}
     >
       {() => (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-            Search results for "{query}" ({totalResults} results)
-          </h1>
+        <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between">
+          <div></div>
           
           <div className="flex items-center gap-4">
             {/* Tab Navigation */}
@@ -290,12 +288,12 @@ const SearchResultsPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-4 mt-2">
             {/* Local Videos Section */}
             {displayVideos.local.length > 0 && (
               <div>
                 {activeTab === 'all' && (
-                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
                     <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                     Local Videos ({displayVideos.local.length})
                   </h2>
@@ -306,9 +304,9 @@ const SearchResultsPage: React.FC = () => {
             
             {/* YouTube Videos Section */}
             {displayVideos.youtube.length > 0 && (
-              <div className="px-4">
+              <div>
                 {activeTab === 'all' && (
-                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
                     <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                     YouTube Videos ({displayVideos.youtube.length})
                     {youtubeLoading && (
@@ -322,9 +320,9 @@ const SearchResultsPage: React.FC = () => {
             
             {/* Google Search Videos Section */}
             {displayVideos.googleSearch.length > 0 && (
-              <div className="px-4">
+              <div>
                 {activeTab === 'all' && (
-                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                     YouTube Videos (Google Search) ({displayVideos.googleSearch.length})
                     {youtubeLoading && (

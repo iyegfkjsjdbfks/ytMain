@@ -1,12 +1,7 @@
 // YouTube Video Card component for displaying YouTube search results
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import YouTubePlayer from './YouTubePlayer';
-import { PlayIcon } from '@heroicons/react/24/solid';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { formatCount } from '../utils/numberUtils';
-import { buildVideoUrl } from '../utils/componentUtils';
-import type { YouTubeSearchResult } from '../services/googleSearchService';
+import { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -14,27 +9,11 @@ interface YouTubeVideoCardProps {
 }
 
 const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }) => {
-  const [showPlayer, setShowPlayer] = useState(false);
-  const [isPlayerLoading, setIsPlayerLoading] = useState(false);
-  const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
 
-  const handlePlayClick = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click
-    setIsPlayerLoading(true);
-    try {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setShowPlayer(true);
-    } finally {
-      setIsPlayerLoading(false);
-    }
-  };
-
-  const handleClosePlayer = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click
-    setShowPlayer(false);
-    setIsPlayerLoading(false);
-  };
+  // Extract video ID from the video object
+  const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || video.id || '';
+  const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
 
   const formatDuration = (duration?: string) => {
     if (!duration) return null;
@@ -92,69 +71,30 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
       }}
       aria-label={`Watch ${video.title} on YouTube`}
     >
-      {/* Video Thumbnail/Player Section */}
+      {/* YouTube Embed Player Section */}
       <div className="relative aspect-video">
-        {showPlayer ? (
-          <div className="relative w-full h-full">
-            <YouTubePlayer 
-              video={video}
-              width="100%"
-              height="100%"
-              autoplay={true}
-              className="absolute inset-0"
-            />
-            {/* Close button */}
-            <button
-              onClick={handleClosePlayer}
-              className="absolute top-2 right-2 z-10 bg-black/70 hover:bg-black/90 text-white rounded-full p-2 transition-colors"
-              aria-label="Close player"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+        {isValidVideoId ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&enablejsapi=1`}
+            title={video.title}
+            className="w-full h-full rounded-lg"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            loading="lazy"
+          />
         ) : (
-          <div className="relative w-full h-full group cursor-pointer" onClick={handlePlayClick}>
-            {/* Thumbnail */}
-            <img
-              src={video.thumbnailUrl}
-              alt={video.title}
-              className="w-full h-full object-cover rounded-lg"
-              loading="lazy"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = 'https://img.youtube.com/vi/default/mqdefault.jpg';
-              }}
-            />
-            
-            {/* Play button overlay */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-              <div className="bg-red-600 hover:bg-red-700 rounded-full p-3 transform group-hover:scale-110 transition-transform shadow-lg">
-                {isPlayerLoading ? (
-                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
-                ) : (
-                  <PlayIcon className="w-6 h-6 text-white ml-0.5" />
-                )}
-              </div>
-            </div>
-            
-            {/* Duration badge */}
-            {formatDuration(video.duration) && (
-              <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
-                {formatDuration(video.duration)}
-              </div>
-            )}
-            
-            {/* YouTube badge */}
-            <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
-              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+          <div className="w-full h-full bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+            <div className="text-center text-gray-600 dark:text-gray-400">
+              <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
-              YouTube
+              <p className="text-sm">Video unavailable</p>
             </div>
           </div>
         )}
+        
+
       </div>
       
       {/* Video Info Section */}
