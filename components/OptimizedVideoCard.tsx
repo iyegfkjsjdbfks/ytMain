@@ -134,7 +134,7 @@ const sizeClasses = {
 };
 
 const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
-  {
+  ({
     video,
     size = 'md',
     showChannel = true,
@@ -145,8 +145,7 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
     lazy = true,
     priority = 'low',
     index = 0,
-  }
-) => {
+  }) => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
   
