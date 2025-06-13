@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
-import YouTubePlayer from '../components/YouTubePlayer';
+import OptimizedYouTubePlayer from '../components/OptimizedYouTubePlayer';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
 import VideoDescription from '../components/VideoDescription';
@@ -205,19 +205,11 @@ const WatchPage: React.FC = () => {
             {/* Video player */}
             <div className="mb-4">
               {isYouTubeUrl(video.videoUrl) ? (
-                <YouTubePlayer
-                  video={{
-                    id: getYouTubeVideoId(video.videoUrl) || '',
-                    title: video.title,
-                    description: video.description,
-                    thumbnailUrl: video.thumbnailUrl,
-                    channelName: video.channelName,
-                    uploadedAt: video.uploadedAt,
-                    duration: video.duration,
-                    videoUrl: video.videoUrl,
-                    embedUrl: `https://www.youtube.com/embed/${getYouTubeVideoId(video.videoUrl)}`,
-                    isYouTube: true
-                  } as YouTubeSearchResult}
+                <OptimizedYouTubePlayer
+                  videoId={getYouTubeVideoId(video.videoUrl) || ''}
+                  title={video.title}
+                  autoplay={true}
+                  priority={true}
                   width="100%"
                   height={480}
                   controls={true}

@@ -36,23 +36,20 @@ const EmptySearchState = React.memo(() => (
 // Main component
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const query = searchParams.get('q') || '';
-  const debouncedQuery = useDebounce(query, 300); // Debounce search for 300ms
+  const debouncedQuery = useDebounce(query, 300);
   
   // Consolidated state
   const [searchState, setSearchState] = useState<SearchState>({
     videos: [],
     youtubeVideos: [],
     googleSearchVideos: [],
-    loading: true,
-    youtubeLoading: true
+    loading: false,
+    youtubeLoading: false
   });
-  
-  const [sortBy, setSortBy] = useState<'relevance' | 'date' | 'views'>('relevance');
-  const [activeTab, setActiveTab] = useState<'all' | 'local' | 'youtube'>('all');
-  const [showSortDropdown, setShowSortDropdown] = useState(false);
 
-  // Memoized search function
+  // Memoized search function with performance monitoring
   const performSearch = useCallback(async (searchQuery: string) => {
     if (!searchQuery) {
       setSearchState({
@@ -65,21 +62,30 @@ const SearchResultsPage: React.FC = () => {
       return;
     }
     
+    performanceMonitor.startMeasure('search-results-load');
     setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
     
     try {
-      const results = await searchCombined(searchQuery, searchVideos);
+      // Parallel search execution for better performance
+      const [localResults, youtubeResults, googleResults] = await Promise.allSettled([
+        searchVideos(searchQuery),
+        searchYouTubeVideos(searchQuery),
+        searchGoogleVideos(searchQuery)
+      ]);
       
       setSearchState({
-        videos: results.localVideos,
-        youtubeVideos: results.youtubeVideos || [],
-        googleSearchVideos: results.googleSearchVideos || [],
+        videos: localResults.status === 'fulfilled' ? localResults.value : [],
+        youtubeVideos: youtubeResults.status === 'fulfilled' ? youtubeResults.value : [],
+        googleSearchVideos: googleResults.status === 'fulfilled' ? googleResults.value : [],
         loading: false,
         youtubeLoading: false
       });
+      
+      performanceMonitor.endMeasure('search-results-load');
     } catch (error) {
-      console.error('Error in combined search:', error);
+      console.error('Error in search:', error);
       setSearchState(prev => ({ ...prev, loading: false, youtubeLoading: false }));
+      performanceMonitor.endMeasure('search-results-load');
     }
   }, []);
 
@@ -88,166 +94,43 @@ const SearchResultsPage: React.FC = () => {
     performSearch(debouncedQuery);
   }, [debouncedQuery, performSearch]);
 
-  // Memoized sorted results
-  const sortedResults = useSortedResults(
-    searchState.videos,
-    searchState.youtubeVideos,
-    searchState.googleSearchVideos,
-    sortBy,
-    debouncedQuery
-  );
+  // Combine all results for the optimized component
+  const allResults = useMemo((): CombinedSearchResult[] => {
+    return [
+      ...searchState.videos.map(v => ({ ...v, source: 'local' as const })),
+      ...searchState.youtubeVideos.map(v => ({ ...v, source: 'youtube' as const })),
+      ...searchState.googleSearchVideos.map(v => ({ ...v, source: 'google' as const }))
+    ];
+  }, [searchState.videos, searchState.youtubeVideos, searchState.googleSearchVideos]);
 
-  // Memoized display videos
-  const displayVideos = useDisplayVideos(sortedResults, activeTab);
-
-  // Memoized total results
-  const totalResults = useMemo(() => {
-    return searchState.videos.length + searchState.youtubeVideos.length + searchState.googleSearchVideos.length;
-  }, [searchState.videos.length, searchState.youtubeVideos.length, searchState.googleSearchVideos.length]);
-
-  // Memoized handlers
-  const handleTabChange = useCallback((tab: 'all' | 'local' | 'youtube') => {
-    setActiveTab(tab);
-  }, []);
-
-  const handleSortChange = useCallback((sort: string) => {
-    setSortBy(sort as 'relevance' | 'date' | 'views');
-    setShowSortDropdown(false);
-  }, []);
-
-  const toggleSortDropdown = useCallback(() => {
-    setShowSortDropdown(prev => !prev);
-  }, []);
-
-  // Early returns for different states
+  // Early return for empty query
   if (!query) {
     return (
-      <PageLayout title="Search" data={[]} loading={false} error={null}>
-        {() => (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <EmptySearchState />
-          </div>
-        )}
-      </PageLayout>
-    );
-  }
-
-  if (searchState.loading && searchState.youtubeLoading) {
-    return (
-      <PageLayout title="" data={[]} loading={true} error={null}>
-        {() => (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <LoadingSkeleton />
-          </div>
-        )}
-      </PageLayout>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <EmptySearchState />
+      </div>
     );
   }
 
   return (
-    <PageLayout title="" data={searchState.videos} loading={searchState.loading} error={null}>
-      {() => (
-        <div className="max-w-7xl mx-auto -mt-4">
-          <div className="flex items-center justify-between">
-            <div></div>
-            
-            <div className="flex items-center gap-4">
-              {/* Tab Navigation */}
-              <div className="flex bg-neutral-100 dark:bg-neutral-800 rounded-lg p-1">
-                <TabButton
-                  active={activeTab === 'all'}
-                  onClick={() => handleTabChange('all')}
-                >
-                  All ({totalResults})
-                </TabButton>
-                <TabButton
-                  active={activeTab === 'local'}
-                  onClick={() => handleTabChange('local')}
-                >
-                  Local ({searchState.videos.length})
-                </TabButton>
-                <TabButton
-                  active={activeTab === 'youtube'}
-                  onClick={() => handleTabChange('youtube')}
-                >
-                  YouTube ({searchState.youtubeVideos.length + searchState.googleSearchVideos.length})
-                </TabButton>
-              </div>
-              
-              <SortDropdown
-                sortBy={sortBy}
-                showDropdown={showSortDropdown}
-                onToggle={toggleSortDropdown}
-                onSort={handleSortChange}
-              />
-            </div>
-          </div>
-          
-          {totalResults === 0 ? (
-            <NoResultsState loading={searchState.loading} youtubeLoading={searchState.youtubeLoading} />
-          ) : (
-            <div className="space-y-4">
-              {/* Local Videos Section */}
-              {displayVideos.local.length > 0 && (
-                <div>
-                  {activeTab === 'all' && (
-                    <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      Local Videos ({displayVideos.local.length})
-                    </h2>
-                  )}
-                  <VideoGrid videos={displayVideos.local} keyPrefix="local" />
-                </div>
-              )}
-              
-              {/* YouTube Videos Section */}
-              {displayVideos.youtube.length > 0 && (
-                <div>
-                  {activeTab === 'all' && (
-                    <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                      YouTube Videos ({displayVideos.youtube.length})
-                      {searchState.youtubeLoading && (
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-red-500 border-t-transparent ml-2"></div>
-                      )}
-                    </h2>
-                  )}
-                  <YouTubeVideoGrid videos={displayVideos.youtube} keyPrefix="youtube" />
-                </div>
-              )}
-              
-              {/* Google Search Videos Section */}
-              {displayVideos.googleSearch.length > 0 && (
-                <div>
-                  {activeTab === 'all' && (
-                    <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      YouTube Videos (Google Search) ({displayVideos.googleSearch.length})
-                      {searchState.youtubeLoading && (
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-green-500 border-t-transparent ml-2"></div>
-                      )}
-                    </h2>
-                  )}
-                  <YouTubeVideoGrid videos={displayVideos.googleSearch} keyPrefix="google-search" />
-                </div>
-              )}
-              
-              {/* Loading states */}
-              {(searchState.loading || searchState.youtubeLoading) && (
-                <div className="text-center py-8">
-                  <div className="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-neutral-400 border-t-transparent"></div>
-                    {searchState.loading && searchState.youtubeLoading ? 'Loading videos...' : searchState.loading ? 'Loading local videos...' : 'Loading YouTube videos...'}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-    </PageLayout>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <OptimizedSearchResults
+        query={debouncedQuery}
+        results={allResults}
+        loading={searchState.loading || searchState.youtubeLoading}
+        onVideoClick={(video) => {
+          if ('videoId' in video) {
+            // YouTube video
+            navigate(`/watch?v=${video.videoId}`);
+          } else {
+            // Local video
+            navigate(`/watch?v=${video.id}`);
+          }
+        }}
+      />
+    </div>
   );
 };
 
 // Export with memo for performance
-export default withMemo(SearchResultsPage, memoComparisons.shallow);
+export default React.memo(SearchResultsPage);
