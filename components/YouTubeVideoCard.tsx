@@ -16,22 +16,7 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || video.id || '';
   const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
 
-  const formatDuration = (duration?: string) => {
-    if (!duration) return null;
-    
-    // Parse ISO 8601 duration format (PT4M13S) to readable format
-    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-    if (!match) return duration;
-    
-    const hours = parseInt(match[1] || '0');
-    const minutes = parseInt(match[2] || '0');
-    const seconds = parseInt(match[3] || '0');
-    
-    if (hours > 0) {
-      return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
+  // Helper function to format duration is now imported from utils
 
   const formatUploadDate = (uploadDate?: string) => {
     if (!uploadDate) return null;

@@ -212,11 +212,11 @@ const WatchPage: React.FC = () => {
                     description: video.description,
                     thumbnailUrl: video.thumbnailUrl,
                     channelName: video.channelName,
-                    views: video.views,
                     uploadedAt: video.uploadedAt,
                     duration: video.duration,
                     videoUrl: video.videoUrl,
-                    embedUrl: `https://www.youtube.com/embed/${getYouTubeVideoId(video.videoUrl)}`
+                    embedUrl: `https://www.youtube.com/embed/${getYouTubeVideoId(video.videoUrl)}`,
+                    isYouTube: true
                   } as YouTubeSearchResult}
                   width="100%"
                   height={480}

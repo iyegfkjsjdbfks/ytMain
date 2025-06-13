@@ -98,12 +98,18 @@ const SearchResultsPage: React.FC = () => {
       return [...videos].sort((a, b) => {
         switch (sortBy) {
           case 'date':
-            return new Date(b.uploadedAt || '').getTime() - new Date(a.uploadedAt || '').getTime();
+            // Handle both uploadedAt and uploadDate properties
+            const dateA = a.uploadedAt || '';
+            const dateB = b.uploadedAt || '';
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
           case 'views':
-            return 0; // Google Search doesn't provide reliable view counts
+            // Convert string views to number if needed
+            const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/[^0-9]/g, '')) || 0 : 0;
+            const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/[^0-9]/g, '')) || 0 : 0;
+            return viewsB - viewsA;
           case 'relevance':
           default:
-            return 0; // Google Search already returns by relevance
+            return 0; // Google Search API already returns by relevance
         }
       });
     };
