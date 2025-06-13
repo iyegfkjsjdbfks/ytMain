@@ -292,22 +292,17 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     channelId: 'youtube-channel',
     channelName: 'YouTube',
     channelAvatarUrl: '/youtube-avatar.png',
-    channelAvatarUrl: '/youtube-avatar.png',
     tags: ['youtube'],
     category: 'entertainment',
     visibility: 'public' as const,
     monetization: {} as any,
     analytics: {} as any,
-    processing: {} as any,
-    quality: [],
-    captions: [],
-    chapters: [],
-    cards: [],
+
+
     uploadedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isShort: false,
-    isYouTube: true
+    isShort: false
   };
 };
 
