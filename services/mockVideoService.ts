@@ -284,7 +284,6 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     title: 'YouTube Video',
     description: 'This is a YouTube video playing within the app.',
     thumbnailUrl: `https://img.youtube.com/vi/${actualYouTubeId}/maxresdefault.jpg`,
-    thumbnail: `https://img.youtube.com/vi/${actualYouTubeId}/maxresdefault.jpg`,
     duration: '0:00',
     views: '0',
     likes: 0,

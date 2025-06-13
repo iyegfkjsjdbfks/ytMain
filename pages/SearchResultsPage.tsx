@@ -4,8 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Video } from '../types';
 import { searchVideos } from '../services/mockVideoService';
 import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
-import VideoCard from '../components/VideoCard';
-import YouTubeVideoCard from '../components/YouTubeVideoCard';
+// VideoCard and YouTubeVideoCard imports removed as they're not used in this component
 import VideoGrid from '../components/VideoGrid';
 import YouTubeVideoGrid from '../components/YouTubeVideoGrid';
 import PageLayout from '../components/PageLayout';
@@ -103,10 +102,8 @@ const SearchResultsPage: React.FC = () => {
             const dateB = b.uploadedAt || '';
             return new Date(dateB).getTime() - new Date(dateA).getTime();
           case 'views':
-            // Convert string views to number if needed
-            const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/[^0-9]/g, '')) || 0 : 0;
-            const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/[^0-9]/g, '')) || 0 : 0;
-            return viewsB - viewsA;
+            // Google search results don't have views data, return as-is
+            return 0;
           case 'relevance':
           default:
             return 0; // Google Search API already returns by relevance

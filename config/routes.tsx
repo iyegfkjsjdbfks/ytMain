@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import Layout from '../components/Layout';
 import StudioLayout from '../components/StudioLayout';

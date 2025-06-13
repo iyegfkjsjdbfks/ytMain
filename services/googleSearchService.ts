@@ -154,7 +154,7 @@ const convertToYouTubeResult = (item: YouTubeSearchItem): YouTubeSearchResult =>
     channelName: item.snippet.channelTitle,
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
-    duration: undefined, // Duration requires additional API call
+    duration: '0:00', // Duration requires additional API call
     uploadedAt: item.snippet.publishedAt,
     isYouTube: true as const
   };
@@ -175,8 +175,8 @@ const convertToGoogleSearchResult = (item: GoogleSearchItem): GoogleSearchResult
     channelName: item.displayLink.replace('www.youtube.com › ', ''),
     videoUrl: item.link,
     embedUrl: videoObject?.embedurl || `https://www.youtube.com/embed/${videoId}`,
-    duration: videoObject?.duration,
-    uploadedAt: videoObject?.uploaddate,
+    duration: videoObject?.duration || '0:00',
+    uploadedAt: videoObject?.uploaddate || new Date().toISOString(),
     isYouTube: true as const,
     source: 'google-search' as const
   };
