@@ -1,10 +1,5 @@
 // Type-safe YouTube URL handling
-declare global {
-  interface Window {
-    YT: any;
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
+// YT interface is declared in components/YouTubePlayer.tsx
 
 /**
  * Extracts the video ID from a YouTube URL

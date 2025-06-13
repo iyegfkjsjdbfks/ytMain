@@ -24,6 +24,7 @@ declare global {
 }
 
 // YT Player interfaces
+interface YT {
   Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
   PlayerState: {
     UNSTARTED: number;
@@ -117,7 +118,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
   const [isAPIReady, setIsAPIReady] = useState(false);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [, setIsPlayerReady] = useState(false);
   const [playerError, setPlayerError] = useState<string | null>(null);
   const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
@@ -215,16 +216,16 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           host: window.location.protocol + '//' + window.location.host
         },
         events: {
-          onReady: (event) => {
+          onReady: (_event: any) => {
             if (isMounted) {
               setIsPlayerReady(true);
               setPlayerError(null);
             }
           },
-          onStateChange: (event) => {
+          onStateChange: (_event: any) => {
             // Handle state changes if needed
           },
-          onError: (event) => {
+          onError: (event: any) => {
             if (!isMounted) return;
             const errorMessages: { [key: number]: string } = {
               2: 'Invalid video ID',
