@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { splitVendorChunkPlugin, defineConfig } from 'vite';
-import { compression } from 'vite-plugin-compression';
+import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 // https://vitejs.dev/config/
@@ -19,12 +19,12 @@ export default defineConfig({
     }),
     splitVendorChunkPlugin(),
     // Gzip compression for production
-    compression({
+    viteCompression({
       algorithm: 'gzip',
       ext: '.gz',
     }),
     // Brotli compression for production
-    compression({
+    viteCompression({
       algorithm: 'brotliCompress',
       ext: '.br',
     }),
@@ -146,10 +146,10 @@ export default defineConfig({
           if (id.includes('/pages/')) {
             return 'pages';
           }
-          if (id.includes('/components/video/') || id.includes('VideoPlayer') || id.includes('YouTubePlayer')) {
+          if (id.includes('/components/video/') || id.includes('VideoPlayer') || id.includes('YouTubePlayer') || id.includes('OptimizedVideoPlayer') || id.includes('OptimizedYouTubePlayer')) {
             return 'video-components';
           }
-          if (id.includes('/components/') && (id.includes('VideoCard') || id.includes('VideoGrid'))) {
+          if (id.includes('/components/') && (id.includes('VideoCard') || id.includes('VideoGrid') || id.includes('OptimizedVideoCard') || id.includes('OptimizedSearchResults'))) {
             return 'video-listing';
           }
           if (id.includes('/hooks/')) {
@@ -158,18 +158,6 @@ export default defineConfig({
           if (id.includes('/services/')) {
             return 'services';
           }
-        },
-          ],
-          'pages': [
-            './pages/HomePage.tsx',
-            './pages/OptimizedHomePage.tsx',
-            './pages/WatchPage.tsx',
-            './pages/SearchResultsPage.tsx',
-          ],
-          'services': [
-            './services/api.ts',
-            './services/geminiService.ts',
-          ],
         },
         
         // Asset naming
@@ -193,21 +181,6 @@ export default defineConfig({
         entryFileNames: 'js/[name]-[hash].js',
       },
     },
-    
-    // Terser options for better minification
-    terserOptions: {
-      compress: {
-        drop_console: process.env.NODE_ENV === 'production',
-        drop_debugger: process.env.NODE_ENV === 'production',
-        pure_funcs: process.env.NODE_ENV === 'production' ? ['console.log'] : [],
-      },
-      mangle: {
-        safari10: true,
-      },
-    },
-    
-    // Chunk size warning limit
-    chunkSizeWarningLimit: 1000,
   },
   
   // CSS configuration
@@ -232,6 +205,8 @@ export default defineConfig({
       '@heroicons/react/24/solid',
       'zustand',
       '@tanstack/react-query',
+      'react-window',
+      'react-window-infinite-loader',
     ],
     exclude: [
       // Exclude large dependencies that should be loaded dynamically
