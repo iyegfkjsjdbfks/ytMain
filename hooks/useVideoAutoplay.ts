@@ -46,7 +46,7 @@ export const useVideoAutoplay = ({
       actions.pause();
       setIsManuallyPaused(false);
     }
-  }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused, enableAutoplay]);
+  }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused, enableAutoplay, unmuteOnAutoplay]);
 };
 
 export default useVideoAutoplay;

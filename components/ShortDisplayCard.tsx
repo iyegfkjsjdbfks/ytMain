@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Short } from '../src/types/core';
-import { useVideoPlayer, useIntersectionObserver, useVideoAutoplay } from '../hooks';
+import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
+import { useIntersectionObserver, useVideoAutoplay } from '../hooks';
 import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
 
 interface ShortDisplayCardProps {
@@ -200,12 +201,20 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
   
   // Real video player implementation
-  const { videoRef, state, actions, events } = useVideoPlayer({
+  const videoPlayer = useVideoPlayer({
     autoplay: false,
     muted: true,
-    loop: true,
-    playsinline: true
+    loop: true
   });
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Set video ref when component mounts
+  useEffect(() => {
+    if (videoRef.current) {
+      videoPlayer.setVideoRef(videoRef.current);
+    }
+  }, [videoPlayer]);
   
   // Use intersection observer for visibility tracking and autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
@@ -216,12 +225,12 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   // Enable autoplay when video is in view (both on shorts page and home page)
   useVideoAutoplay({
     isIntersecting,
-    isPlaying: state.isPlaying,
+    isPlaying: videoPlayer.isPlaying,
     isManuallyPaused,
     actions: {
-      play: actions.play,
-      pause: actions.pause,
-      unmute: actions.unmute
+      play: videoPlayer.play,
+      pause: videoPlayer.pause,
+      unmute: videoPlayer.unmute
     },
     setIsManuallyPaused,
     enableAutoplay: true, // Enable autoplay on both shorts page and home page
@@ -230,11 +239,11 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   
   // Event handlers
   const handlePlayPauseToggle = async () => {
-    if (state.isPlaying) {
-      actions.pause();
+    if (videoPlayer.isPlaying) {
+      videoPlayer.pause();
       setIsManuallyPaused(true);
     } else {
-      await actions.play();
+      await videoPlayer.play();
       setIsManuallyPaused(false);
     }
   };
@@ -291,41 +300,28 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         poster={short.thumbnailUrl}
         className="w-full h-full object-cover"
         playsInline
-        muted={state.isMuted}
+        muted={videoPlayer.isMuted}
         loop
         preload="metadata"
-        onLoadStart={events.onLoadStart}
-        onLoadedMetadata={events.onLoadedMetadata}
-        onCanPlay={events.onCanPlay}
-        onPlay={events.onPlay}
-        onPause={events.onPause}
-        onTimeUpdate={() => events.onTimeUpdate()}
-        onDurationChange={events.onDurationChange}
-        onVolumeChange={events.onVolumeChange}
-        onError={(e) => events.onError(e.nativeEvent)}
         onEnded={() => {
-          events.onEnded();
           handleVideoEnd();
         }}
-        onProgress={events.onProgress}
-        onWaiting={events.onWaiting}
-        onCanPlayThrough={events.onCanPlayThrough}
       />
       
       {/* Loading Indicator */}
-      {state.isLoading && <LoadingIndicator />}
+      {videoPlayer.isLoading && <LoadingIndicator />}
       
       {/* Error State */}
-      {state.error && (
+      {videoPlayer.error && (
         <ErrorState 
-          error={state.error}
+          error={videoPlayer.error.message}
           onRetry={handleRetry}
         />
       )}
       
       {/* Play/Pause Overlay */}
       <PlayPauseOverlay 
-        isPlaying={state.isPlaying}
+        isPlaying={videoPlayer.isPlaying}
         onToggle={handlePlayPauseToggle}
       />
 
@@ -342,9 +338,9 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           
           {/* Action Buttons */}
           <ActionButtons
-            isMuted={state.isMuted}
+            isMuted={videoPlayer.isMuted}
             isLiked={isLiked}
-            onToggleMute={actions.toggleMute}
+            onToggleMute={videoPlayer.toggleMute}
             onLike={handleLike}
             onComment={handleComment}
             onShare={handleShare}
