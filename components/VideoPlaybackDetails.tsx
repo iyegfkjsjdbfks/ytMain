@@ -1,9 +1,11 @@
 import React from 'react';
 import AdvancedVideoPlayer from './AdvancedVideoPlayer';
+import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 import VideoActions from './VideoActions';
 import VideoDescription from './VideoDescription';
 import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
+import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { Video, Channel } from '../types'; // Assuming types are defined in types.ts
 
 interface VideoPlaybackDetailsProps {
@@ -61,11 +63,23 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
     <>
       {/* Video player */}
       <div className="mb-4">
-        <AdvancedVideoPlayer
-          src={video.videoUrl}
-          poster={video.thumbnailUrl}
-          title={video.title}
-        />
+        {isYouTubeUrl(video.videoUrl) ? (
+          <YouTubePlayerWrapper
+            videoId={getYouTubeVideoId(video.videoUrl) || ''}
+            title={video.title}
+            autoplay={false}
+            priority={true}
+            width="100%"
+            height={480}
+            controls={true}
+          />
+        ) : (
+          <AdvancedVideoPlayer
+            src={video.videoUrl}
+            poster={video.thumbnailUrl}
+            title={video.title}
+          />
+        )}
       </div>
 
       {/* Video title and stats */}
