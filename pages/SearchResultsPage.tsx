@@ -1,15 +1,14 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
-import { searchVideos } from '../services/mockVideoService';
-import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
-// VideoCard and YouTubeVideoCard imports removed as they're not used in this component
-import VideoGrid from '../components/VideoGrid';
-import YouTubeVideoGrid from '../components/YouTubeVideoGrid';
-import PageLayout from '../components/PageLayout';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { withMemo, memoComparisons } from '../utils/componentOptimizations';
+import { useDebounce } from '../hooks/useDebounce';
+import { searchVideos } from '../services/videoService';
+import { searchYouTubeVideos, searchGoogleVideos, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import OptimizedSearchResults from '../components/OptimizedSearchResults';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { performanceMonitor } from '../utils/performance';
+import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 // Types for better performance
 interface SearchState {
