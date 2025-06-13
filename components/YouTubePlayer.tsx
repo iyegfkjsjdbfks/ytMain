@@ -212,8 +212,8 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           // cc_load_policy: 1, // Show closed captions by default (not supported in playerVars)
           iv_load_policy: 3, // Hide video annotations
           disablekb: 0, // Enable keyboard controls
-          widget_referrer: window.location.origin,
-          host: window.location.protocol + '//' + window.location.host
+          widget_referrer: window.location.origin
+          // host: window.location.protocol + '//' + window.location.host // Not supported in playerVars
         },
         events: {
           onReady: (_event: any) => {
