@@ -288,7 +288,6 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     views: '0',
     likes: 0,
     dislikes: 0,
-    url: `https://www.youtube.com/embed/${actualYouTubeId}`,
     videoUrl: `https://www.youtube.com/embed/${actualYouTubeId}`,
     embedUrl: `https://www.youtube.com/embed/${actualYouTubeId}`,
     channelId: 'youtube-channel',
