@@ -112,8 +112,15 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
       await video.play();
       setState(prev => ({ ...prev, isPlaying: true, error: null }));
     } catch (error) {
-      console.error('Error playing video:', error);
-      setState(prev => ({ ...prev, error: 'Failed to play video', isPlaying: false }));
+      // Handle AbortError gracefully - this is common when play() is interrupted by pause()
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        // This is expected behavior, don't log as error
+        console.debug('Play request was interrupted:', error.message);
+        setState(prev => ({ ...prev, isPlaying: false }));
+      } else {
+        console.error('Error playing video:', error);
+        setState(prev => ({ ...prev, error: 'Failed to play video', isPlaying: false }));
+      }
     }
   }, []);
 

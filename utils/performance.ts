@@ -65,12 +65,18 @@ class PerformanceMonitor {
     }
   }
 
+  hasMetric(name: string): boolean {
+    return this.metrics.has(name);
+  }
+
   endMeasure(name: string): number | null {
     if (!this.isEnabled) return null;
 
     const metric = this.metrics.get(name);
     if (!metric) {
-      console.warn(`Performance metric '${name}' not found`);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`Performance metric '${name}' not found`);
+      }
       return null;
     }
 
@@ -161,7 +167,10 @@ export function usePerformanceMonitor(componentName: string) {
   };
 
   const endRender = () => {
-    return performanceMonitor.endMeasure(`${componentName}-render`);
+    const metricName = `${componentName}-render`;
+    return performanceMonitor.hasMetric(metricName) 
+      ? performanceMonitor.endMeasure(metricName) 
+      : null;
   };
 
   const measureAsync = async <T>(operationName: string, operation: () => Promise<T>): Promise<T> => {
@@ -169,10 +178,14 @@ export function usePerformanceMonitor(componentName: string) {
     performanceMonitor.startMeasure(fullName);
     try {
       const result = await operation();
-      performanceMonitor.endMeasure(fullName);
+      if (performanceMonitor.hasMetric(fullName)) {
+        performanceMonitor.endMeasure(fullName);
+      }
       return result;
     } catch (error) {
-      performanceMonitor.endMeasure(fullName);
+      if (performanceMonitor.hasMetric(fullName)) {
+        performanceMonitor.endMeasure(fullName);
+      }
       throw error;
     }
   };
@@ -182,10 +195,14 @@ export function usePerformanceMonitor(componentName: string) {
     performanceMonitor.startMeasure(fullName);
     try {
       const result = operation();
-      performanceMonitor.endMeasure(fullName);
+      if (performanceMonitor.hasMetric(fullName)) {
+        performanceMonitor.endMeasure(fullName);
+      }
       return result;
     } catch (error) {
-      performanceMonitor.endMeasure(fullName);
+      if (performanceMonitor.hasMetric(fullName)) {
+        performanceMonitor.endMeasure(fullName);
+      }
       throw error;
     }
   };
@@ -229,9 +246,12 @@ export const measureRenderTime = (componentName: string) => {
     const originalMethod = descriptor.value;
     
     descriptor.value = function (...args: any[]) {
-      performanceMonitor.startMeasure(`${componentName}-${propertyKey}`);
+      const metricName = `${componentName}-${propertyKey}`;
+      performanceMonitor.startMeasure(metricName);
       const result = originalMethod.apply(this, args);
-      performanceMonitor.endMeasure(`${componentName}-${propertyKey}`);
+      if (performanceMonitor.hasMetric(metricName)) {
+        performanceMonitor.endMeasure(metricName);
+      }
       return result;
     };
     

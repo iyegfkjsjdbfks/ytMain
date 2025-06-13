@@ -1,8 +1,10 @@
 // YouTube Video Card component for displaying YouTube search results
+// YouTube Video Card component for displaying YouTube search results
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { YouTubeSearchResult } from '../services/googleSearchService';
 import { buildVideoUrl } from '../utils/componentUtils';
+import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -63,14 +65,13 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
       {/* YouTube Embed Player Section */}
       <div className="relative aspect-video">
         {isValidVideoId ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&enablejsapi=1`}
-            title={video.title}
-            className="w-full h-full rounded-lg"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            loading="lazy"
+          <YouTubePlayerWrapper
+            videoId={videoId}
+            width="100%"
+            height="100%"
+            className="rounded-lg"
+            lazy={true}
+            preload="metadata"
           />
         ) : (
           <div className="w-full h-full bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
@@ -82,8 +83,6 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
             </div>
           </div>
         )}
-        
-
       </div>
       
       {/* Video Info Section */}

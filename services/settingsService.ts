@@ -1,15 +1,18 @@
 // Settings service for managing application preferences
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
+export type YouTubePlayerType = 'optimized' | 'iframe-api';
 
 export interface AppSettings {
   youtubeSearchProvider: YouTubeSearchProvider;
+  youtubePlayerType: YouTubePlayerType;
 }
 
 const SETTINGS_KEY = 'yt-studio-settings';
 
 const defaultSettings: AppSettings = {
-  youtubeSearchProvider: 'hybrid'
+  youtubeSearchProvider: 'hybrid',
+  youtubePlayerType: 'optimized'
 };
 
 // Get current settings from localStorage
@@ -44,6 +47,18 @@ export const getYouTubeSearchProvider = (): YouTubeSearchProvider => {
 export const setYouTubeSearchProvider = (provider: YouTubeSearchProvider): void => {
   const settings = getSettings();
   settings.youtubeSearchProvider = provider;
+  saveSettings(settings);
+};
+
+// Get current YouTube player type
+export const getYouTubePlayerType = (): YouTubePlayerType => {
+  return getSettings().youtubePlayerType;
+};
+
+// Set YouTube player type
+export const setYouTubePlayerType = (playerType: YouTubePlayerType): void => {
+  const settings = getSettings();
+  settings.youtubePlayerType = playerType;
   saveSettings(settings);
 };
 

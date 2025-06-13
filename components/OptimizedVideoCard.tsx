@@ -50,7 +50,10 @@ const LazyImage: React.FC<{
 
   const handleLoad = useCallback(() => {
     setLoaded(true);
-    performanceMonitor.endMeasure(`image-load-${src}`);
+    const metricName = `image-load-${src}`;
+    if (performanceMonitor.hasMetric(metricName)) {
+      performanceMonitor.endMeasure(metricName);
+    }
   }, [src]);
 
   const handleError = useCallback(() => {
@@ -171,7 +174,9 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
     } else {
       showMiniplayer(video);
     }
-    performanceMonitor.endMeasure('video-card-click');
+    if (performanceMonitor.hasMetric('video-card-click')) {
+      performanceMonitor.endMeasure('video-card-click');
+    }
   }, [onClick, video, showMiniplayer]);
 
   const handleChannelClick = useCallback((e: React.MouseEvent) => {

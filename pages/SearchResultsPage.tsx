@@ -4,7 +4,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useDebounce } from '../hooks/useDebounce';
 import { searchVideos } from '../services/mockVideoService';
-import { searchYouTubeVideos, searchGoogleVideos, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import { searchYouTubeVideos, searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { performanceMonitor } from '../utils/performance';
@@ -67,25 +67,34 @@ const SearchResultsPage: React.FC = () => {
     
     try {
       // Parallel search execution for better performance
-      const [localResults, youtubeResults, googleResults] = await Promise.allSettled([
+      const [localResults, combinedResults] = await Promise.allSettled([
         searchVideos(searchQuery),
-        searchYouTubeVideos(searchQuery),
-        searchGoogleVideos(searchQuery)
+        searchCombined(searchQuery, searchVideos)
       ]);
+      
+      const combinedData = combinedResults.status === 'fulfilled' ? combinedResults.value : {
+        localVideos: [],
+        youtubeVideos: [],
+        googleSearchVideos: []
+      };
       
       setSearchState({
         videos: localResults.status === 'fulfilled' ? localResults.value : [],
-        youtubeVideos: youtubeResults.status === 'fulfilled' ? youtubeResults.value : [],
-        googleSearchVideos: googleResults.status === 'fulfilled' ? googleResults.value : [],
+        youtubeVideos: combinedData.youtubeVideos,
+        googleSearchVideos: combinedData.googleSearchVideos || [],
         loading: false,
         youtubeLoading: false
       });
       
-      performanceMonitor.endMeasure('search-results-load');
+      if (performanceMonitor.hasMetric('search-results-load')) {
+        performanceMonitor.endMeasure('search-results-load');
+      }
     } catch (error) {
       console.error('Error in search:', error);
       setSearchState(prev => ({ ...prev, loading: false, youtubeLoading: false }));
-      performanceMonitor.endMeasure('search-results-load');
+      if (performanceMonitor.hasMetric('search-results-load')) {
+        performanceMonitor.endMeasure('search-results-load');
+      }
     }
   }, []);
 
@@ -115,9 +124,12 @@ const SearchResultsPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <OptimizedSearchResults
-        query={debouncedQuery}
-        results={allResults}
+        videos={searchState.videos}
+        youtubeVideos={searchState.youtubeVideos}
+        googleSearchVideos={searchState.googleSearchVideos}
         loading={searchState.loading || searchState.youtubeLoading}
+        query={debouncedQuery}
+        sortBy="relevance"
         onVideoClick={(video) => {
           if ('videoId' in video) {
             // YouTube video

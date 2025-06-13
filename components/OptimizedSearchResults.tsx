@@ -127,9 +127,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     performanceMonitor.startMeasure('search-results-processing');
     
     const combined = [
-      ...videos.map(v => ({ ...v, source: 'local' as const })),
-      ...youtubeVideos.map(v => ({ ...v, source: 'youtube' as const })),
-      ...googleSearchVideos.map(v => ({ ...v, source: 'google' as const }))
+      ...(videos || []).map(v => ({ ...v, source: 'local' as const })),
+      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const })),
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google' as const }))
     ];
 
     let sorted = combined;
@@ -137,7 +137,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       sorted = sortingFunctions[sortBy as keyof typeof sortingFunctions](combined, debouncedQuery);
     }
 
-    performanceMonitor.endMeasure('search-results-processing');
+    if (performanceMonitor.hasMetric('search-results-processing')) {
+      performanceMonitor.endMeasure('search-results-processing');
+    }
     return sorted;
   }, [videos, youtubeVideos, googleSearchVideos, sortBy, debouncedQuery]);
 

@@ -90,7 +90,10 @@ const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
   }, [videoId]);
 
   const handleLoadedData = useCallback(() => {
-    const duration = performanceMonitor.endMeasure(`video-load-${videoId}`);
+    const metricName = `video-load-${videoId}`;
+    const duration = performanceMonitor.hasMetric(metricName) 
+      ? performanceMonitor.endMeasure(metricName) 
+      : null;
     if (duration && duration > 3000) {
       console.warn(`Slow video load detected: ${duration}ms for video ${videoId}`);
     }

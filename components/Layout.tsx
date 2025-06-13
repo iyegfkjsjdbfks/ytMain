@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocati
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Miniplayer from './Miniplayer'; 
-import { useMiniplayer } from '../contexts/MiniplayerContext'; 
+import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext'; 
 
 
 import { Outlet } from 'react-router-dom'; // Import Outlet
@@ -12,7 +12,7 @@ interface LayoutProps {}
 
 const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
-  const miniplayerContext = useMiniplayer();
+  const miniplayerContext = useOptimizedMiniplayer();
   const navigate = useNavigate();
   const location = useLocation(); // Get current location
 

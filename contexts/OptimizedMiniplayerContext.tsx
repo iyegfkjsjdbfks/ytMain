@@ -224,7 +224,7 @@ export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({
     setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
   }), []);
 
-  const value = useMemo(() => ({ state, actions }), [state, actions]);
+  const value = useMemo(() => ({ state, actions }), [state]);
 
   return (
     <MiniplayerContext.Provider value={value}>

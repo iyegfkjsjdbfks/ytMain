@@ -3,7 +3,7 @@ import {  ReactNode  } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
 import { ThemeProvider } from '../contexts/ThemeContext';
-import { MiniplayerProvider } from '../contexts/MiniplayerContext';
+import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
 import { WatchLaterProvider } from '../contexts/WatchLaterContext';
 import { AuthProvider } from '../contexts/AuthContext';
 import SuspenseWrapper from '../components/SuspenseWrapper';
@@ -54,7 +54,7 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AuthProvider>
-            <MiniplayerProvider>
+            <OptimizedMiniplayerProvider>
               <WatchLaterProvider>
                 <UnifiedAppProvider>
                   <SuspenseWrapper fallback={<div className="flex items-center justify-center min-h-screen">
@@ -64,7 +64,7 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
                   </SuspenseWrapper>
                 </UnifiedAppProvider>
               </WatchLaterProvider>
-            </MiniplayerProvider>
+            </OptimizedMiniplayerProvider>
           </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
@@ -98,13 +98,13 @@ export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
       <QueryClientProvider client={client}>
         <ThemeProvider>
           <AuthProvider>
-            <MiniplayerProvider>
+            <OptimizedMiniplayerProvider>
               <WatchLaterProvider>
                 <UnifiedAppProvider>
                   {children}
                 </UnifiedAppProvider>
               </WatchLaterProvider>
-            </MiniplayerProvider>
+            </OptimizedMiniplayerProvider>
           </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>

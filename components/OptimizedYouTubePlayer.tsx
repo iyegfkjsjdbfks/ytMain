@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
@@ -45,23 +45,24 @@ const loadYouTubeAPI = (): Promise<void> => {
     youtubeAPILoading = true;
     performanceMonitor.startMeasure('youtube-api-load');
 
-    // Create script tag
-    const script = document.createElement('script');
-    script.src = 'https://www.youtube.com/iframe_api';
-    script.async = true;
+    // Create script tag as per official documentation
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
-    // Global callback for YouTube API
+    // Global callback for YouTube API - must be on window object
     (window as any).onYouTubeIframeAPIReady = () => {
       youtubeAPILoaded = true;
       youtubeAPILoading = false;
-      performanceMonitor.endMeasure('youtube-api-load');
+      if (performanceMonitor.hasMetric('youtube-api-load')) {
+        performanceMonitor.endMeasure('youtube-api-load');
+      }
       
       // Execute all pending callbacks
       youtubeAPICallbacks.forEach(callback => callback());
       youtubeAPICallbacks.length = 0;
     };
-
-    document.head.appendChild(script);
   });
 };
 
@@ -136,21 +137,26 @@ const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
     return !lazy || shouldLoad || isIntersecting;
   }, [lazy, shouldLoad, isIntersecting]);
 
-  // Player configuration
+  // Player configuration following official API documentation
   const playerVars = useMemo(() => {
-    return {
+    const vars: any = {
       autoplay: autoplay ? 1 : 0,
-      mute: muted ? 1 : 0,
       controls: controls ? 1 : 0,
-      loop: loop ? 1 : 0,
-      start: start || undefined,
-      end: end || undefined,
-      quality,
       rel: 0, // Don't show related videos
       modestbranding: 1, // Modest YouTube branding
       playsinline: 1, // Play inline on mobile
       enablejsapi: 1, // Enable JavaScript API
+      origin: window.location.origin, // Add origin to fix postMessage error
     };
+    
+    // Add optional parameters only if they have values
+    if (muted) vars.mute = 1;
+    if (loop) vars.loop = 1;
+    if (start !== undefined) vars.start = start;
+    if (end !== undefined) vars.end = end;
+    if (quality !== 'default') vars.quality = quality;
+    
+    return vars;
   }, [autoplay, muted, controls, loop, start, end, quality]);
 
   // Load YouTube API when needed
@@ -167,26 +173,37 @@ const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
 
   // Initialize player when API is ready
   useEffect(() => {
-    if (shouldLoadPlayer && apiReady && !playerLoaded && playerRef.current) {
+    if (shouldLoadPlayer && apiReady && !playerLoaded && playerRef.current && (window as any).YT?.Player) {
       performanceMonitor.startMeasure(`youtube-player-init-${videoId}`);
       
+      // Ensure the player div has an ID (required by YouTube API)
+      const playerId = `youtube-player-${videoId}-${Date.now()}`;
+      if (!playerRef.current.id) {
+        playerRef.current.id = playerId;
+      }
+      
       try {
-        playerInstanceRef.current = new (window as any).YT.Player(playerRef.current, {
-          width,
-          height,
+        // Create player instance following official API documentation
+        playerInstanceRef.current = new (window as any).YT.Player(playerRef.current.id, {
+          height: typeof height === 'number' ? height.toString() : height,
+          width: typeof width === 'number' ? width.toString() : width,
           videoId,
           playerVars,
           events: {
             onReady: (event: any) => {
-              performanceMonitor.endMeasure(`youtube-player-init-${videoId}`);
+              const metricName = `youtube-player-init-${videoId}`;
+              if (performanceMonitor.hasMetric(metricName)) {
+                performanceMonitor.endMeasure(metricName);
+              }
               setPlayerLoaded(true);
+              setError(null); // Clear any previous errors
               onReady?.(event);
             },
             onStateChange: (event: any) => {
               onStateChange?.(event);
             },
             onError: (event: any) => {
-              console.error('YouTube player error:', event);
+              console.error('YouTube player error:', event, 'Video ID:', videoId);
               setError('Video playback error');
               onError?.(event);
             }
@@ -209,7 +226,7 @@ const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
         playerInstanceRef.current = null;
       }
     };
-  }, [shouldLoadPlayer, apiReady, playerLoaded, videoId, width, height, playerVars, onReady, onStateChange, onError]);
+  }, [shouldLoadPlayer, apiReady, playerLoaded, videoId, width, height, playerVars]);
 
   // Handle manual load
   const handleLoad = useCallback(() => {

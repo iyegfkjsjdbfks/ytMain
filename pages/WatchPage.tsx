@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
-import OptimizedYouTubePlayer from '../components/OptimizedYouTubePlayer';
+import YouTubePlayerWrapper from '../components/YouTubePlayerWrapper';
 import RecommendationEngine from '../components/RecommendationEngine';
 import VideoActions from '../components/VideoActions';
 import VideoDescription from '../components/VideoDescription';
@@ -10,7 +10,7 @@ import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylis
 import { useWatchPage } from '../hooks/useWatchPage';
 import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
-import { useMiniplayer } from '../contexts/MiniplayerContext';
+import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
 import { YouTubeSearchResult } from '../services/googleSearchService';
@@ -93,7 +93,7 @@ const WatchPage: React.FC = () => {
     navigate,
   } = useWatchPage();
   
-  const { showMiniplayer } = useMiniplayer();
+  const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater } = useWatchLater();
   // removeFromWatchLater is unused in this component
   
@@ -205,15 +205,14 @@ const WatchPage: React.FC = () => {
             {/* Video player */}
             <div className="mb-4">
               {isYouTubeUrl(video.videoUrl) ? (
-                <OptimizedYouTubePlayer
+                <YouTubePlayerWrapper
                   videoId={getYouTubeVideoId(video.videoUrl) || ''}
                   title={video.title}
-                  autoplay={true}
+                  autoplay={false}
                   priority={true}
                   width="100%"
                   height={480}
                   controls={true}
-                  autoplay={false}
                 />
               ) : (
                 <AdvancedVideoPlayer

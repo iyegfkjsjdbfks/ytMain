@@ -3,6 +3,7 @@ import {
   getSettings, 
   saveSettings, 
   YouTubeSearchProvider,
+  YouTubePlayerType,
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
   isHybridModeAvailable
@@ -10,6 +11,7 @@ import {
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');
+  const [playerType, setPlayerType] = useState<YouTubePlayerType>('optimized');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -17,6 +19,7 @@ const AdminPage: React.FC = () => {
     // Load current settings
     const settings = getSettings();
     setProvider(settings.youtubeSearchProvider);
+    setPlayerType(settings.youtubePlayerType);
   }, []);
 
   const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
@@ -32,6 +35,26 @@ const AdminPage: React.FC = () => {
     } catch (error) {
       console.error('Error saving settings:', error);
       setSaveMessage('Error saving settings. Please try again.');
+    } finally {
+      setIsSaving(false);
+      // Clear message after 3 seconds
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+  const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType) => {
+    setIsSaving(true);
+    setSaveMessage('');
+    
+    try {
+      const settings = getSettings();
+      settings.youtubePlayerType = newPlayerType;
+      saveSettings(settings);
+      setPlayerType(newPlayerType);
+      setSaveMessage('Player type updated successfully!');
+    } catch (error) {
+      console.error('Error saving player type:', error);
+      setSaveMessage('Error saving player type. Please try again.');
     } finally {
       setIsSaving(false);
       // Clear message after 3 seconds
@@ -170,17 +193,82 @@ const AdminPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Save Message */}
-                {saveMessage && (
-                  <div className={`mt-4 p-3 rounded-md ${
-                    saveMessage.includes('Error') 
-                      ? 'bg-red-50 text-red-700 border border-red-200' 
-                      : 'bg-green-50 text-green-700 border border-green-200'
-                  }`}>
-                    {saveMessage}
+              {/* YouTube Player Type Section */}
+              <div>
+                <h2 className="text-lg font-medium text-gray-900 mb-4">
+                  YouTube Player Type
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                  Choose which YouTube player implementation to use for video playback.
+                </p>
+
+                <div className="space-y-4">
+                  {/* Optimized Player Option */}
+                  <div className="flex items-start">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="optimized-player"
+                        name="player-type"
+                        type="radio"
+                        checked={playerType === 'optimized'}
+                        onChange={() => handlePlayerTypeChange('optimized')}
+                        disabled={isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="optimized-player" className="font-medium text-gray-700">
+                        Optimized Player
+                        <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          Current
+                        </span>
+                      </label>
+                      <p className="text-gray-500">
+                        Enhanced YouTube player with lazy loading, performance monitoring, and error handling.
+                      </p>
+                    </div>
                   </div>
-                )}
+
+                  {/* IFrame API Player Option */}
+                  <div className="flex items-start">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="iframe-api-player"
+                        name="player-type"
+                        type="radio"
+                        checked={playerType === 'iframe-api'}
+                        onChange={() => handlePlayerTypeChange('iframe-api')}
+                        disabled={isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="iframe-api-player" className="font-medium text-gray-700">
+                        IFrame API Player
+                        <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                          New
+                        </span>
+                      </label>
+                      <p className="text-gray-500">
+                        Pure YouTube IFrame API implementation with full API access and advanced controls.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Save Message */}
+              {saveMessage && (
+                <div className={`mt-4 p-3 rounded-md ${
+                  saveMessage.includes('Error') 
+                    ? 'bg-red-50 text-red-700 border border-red-200' 
+                    : 'bg-green-50 text-green-700 border border-green-200'
+                }`}>
+                  {saveMessage}
+                </div>
+              )}
 
                 {/* API Configuration Help */}
                 <div className="mt-6 p-4 bg-blue-50 rounded-md">

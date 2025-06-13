@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
 import { VideoVisibility } from '../types';
@@ -471,9 +471,9 @@ export const useWatchPage = () => {
   };
   
   // Utility functions
-  const addToWatchHistory = () => {
+  const addToWatchHistory = useCallback(() => {
     // Add to watch history logic
-    };
+    }, []);
   
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
   const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
