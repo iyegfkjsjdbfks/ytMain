@@ -291,7 +291,7 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     videoUrl: `https://www.youtube.com/embed/${actualYouTubeId}`,
     channelId: 'youtube-channel',
     channelName: 'YouTube',
-    channelAvatar: '/youtube-avatar.png',
+    channelAvatarUrl: '/youtube-avatar.png',
     channelAvatarUrl: '/youtube-avatar.png',
     tags: ['youtube'],
     category: 'entertainment',
