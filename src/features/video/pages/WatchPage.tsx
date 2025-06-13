@@ -5,6 +5,8 @@ import {  useState, useEffect  } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import { VideoPlayer } from '../components/VideoPlayer';
+import YouTubePlayerWrapper from '../../../components/YouTubePlayerWrapper';
+import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
 
 import type { Video } from '../../../types/core';
 
@@ -202,21 +204,33 @@ const WatchPage: React.FC = () => {
           <div className="lg:col-span-2">
             {/* Video Player */}
             <div className="bg-black rounded-lg overflow-hidden mb-4">
-              <VideoPlayer
-                videoId={video.id}
-                src={video.videoUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
-                poster={video.thumbnailUrl}
-                title={video.title}
-                autoplay={false}
-                className="w-full"
-                useYouTube={false}
-                onTimeUpdate={(_currentTime, _duration) => {
-                  // Track watch progress
+              {isYouTubeUrl(video.videoUrl || '') ? (
+                <YouTubePlayerWrapper
+                  videoId={getYouTubeVideoId(video.videoUrl || '') || video.id}
+                  title={video.title}
+                  autoplay={false}
+                  priority={true}
+                  width="100%"
+                  height={480}
+                  controls={true}
+                />
+              ) : (
+                <VideoPlayer
+                  videoId={video.id}
+                  src={video.videoUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
+                  poster={video.thumbnailUrl}
+                  title={video.title}
+                  autoplay={false}
+                  className="w-full"
+                  useYouTube={false}
+                  onTimeUpdate={(_currentTime, _duration) => {
+                    // Track watch progress
+                    }}
+                  onPlay={() => {
+                    // Handle play event
                   }}
-                onPlay={() => {
-                  // Handle play event
-                }}
-              />
+                />
+              )}
             </div>
           </div>
         </div>
