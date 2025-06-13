@@ -2,7 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { splitVendorChunkPlugin } from 'vite';
+import { splitVendorChunkPlugin, defineConfig } from 'vite';
+import { compression } from 'vite-plugin-compression';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,14 +14,37 @@ export default defineConfig({
       fastRefresh: true,
       // Include .tsx files
       include: '**/*.{jsx,tsx}',
+      // Enable automatic JSX runtime
+      jsxRuntime: 'automatic',
     }),
     splitVendorChunkPlugin(),
+    // Gzip compression for production
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
+    // Brotli compression for production
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+    }),
+    // HTML optimization
+    createHtmlPlugin({
+      minify: true,
+      inject: {
+        data: {
+          title: 'YouTube Studio Clone',
+          description: 'A modern YouTube Studio clone built with React, TypeScript, and Vite',
+        },
+      },
+    }),
     // Bundle analyzer (only in build mode)
     process.env.ANALYZE && visualizer({
       filename: 'dist/stats.html',
       open: true,
       gzipSize: true,
       brotliSize: true,
+      template: 'treemap',
     }),
   ].filter(Boolean),
   
@@ -76,6 +101,15 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: process.env.NODE_ENV === 'development',
     minify: 'terser',
+    cssCodeSplit: true,
+    reportCompressedSize: false, // Faster builds
+    chunkSizeWarningLimit: 1000,
+    terserOptions: {
+      compress: {
+        drop_console: process.env.NODE_ENV === 'production',
+        drop_debugger: true,
+      },
+    },
     
     // Rollup options
     rollupOptions: {
@@ -84,20 +118,47 @@ export default defineConfig({
       },
       output: {
         // Manual chunk splitting for better caching
-        manualChunks: {
+        manualChunks: (id) => {
           // Vendor chunks
-          'react-vendor': ['react', 'react-dom'],
-          'router-vendor': ['react-router-dom'],
-          'ui-vendor': ['@heroicons/react'],
-          'state-vendor': ['zustand'],
-          'query-vendor': ['@tanstack/react-query'],
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('react-router')) {
+              return 'router-vendor';
+            }
+            if (id.includes('@heroicons') || id.includes('lucide-react')) {
+              return 'ui-vendor';
+            }
+            if (id.includes('zustand')) {
+              return 'state-vendor';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'query-vendor';
+            }
+            if (id.includes('chart.js') || id.includes('react-chartjs')) {
+              return 'chart-vendor';
+            }
+            return 'vendor';
+          }
           
-          // App chunks
-          'components': [
-            './components/VideoCard.tsx',
-            './components/OptimizedVideoCard.tsx',
-            './components/VirtualizedVideoGrid.tsx',
-            './components/CategoryChips.tsx',
+          // App chunks by feature
+          if (id.includes('/pages/')) {
+            return 'pages';
+          }
+          if (id.includes('/components/video/') || id.includes('VideoPlayer') || id.includes('YouTubePlayer')) {
+            return 'video-components';
+          }
+          if (id.includes('/components/') && (id.includes('VideoCard') || id.includes('VideoGrid'))) {
+            return 'video-listing';
+          }
+          if (id.includes('/hooks/')) {
+            return 'hooks';
+          }
+          if (id.includes('/services/')) {
+            return 'services';
+          }
+        },
           ],
           'pages': [
             './pages/HomePage.tsx',

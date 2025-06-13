@@ -1,10 +1,13 @@
-import React, { memo, useCallback, useMemo   } from 'react';
+import React, { memo, useMemo, useCallback, useState, useRef } from 'react';
 import { Video } from '../types';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useDropdownMenu } from '../hooks/useDropdownMenu';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { cn } from '../utils/cn';
+import { withMemo } from '../utils/componentOptimizations';
+import { performanceMonitor } from '../utils/performance';
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
 import {
   PlayIcon,
@@ -22,7 +25,89 @@ interface OptimizedVideoCardProps {
   className?: string;
   onClick?: (video: Video) => void;
   onChannelClick?: (channelId: string) => void;
+  lazy?: boolean;
+  priority?: 'high' | 'low';
+  index?: number;
 }
+
+// Lazy image component with intersection observer
+const LazyImage: React.FC<{
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: 'high' | 'low';
+  lazy?: boolean;
+}> = memo(({ src, alt, className, priority = 'low', lazy = true }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+  
+  const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '50px',
+    triggerOnce: true
+  });
+
+  const handleLoad = useCallback(() => {
+    setLoaded(true);
+    performanceMonitor.endMeasure(`image-load-${src}`);
+  }, [src]);
+
+  const handleError = useCallback(() => {
+    setError(true);
+    setLoaded(true);
+  }, []);
+
+  const shouldLoad = !lazy || priority === 'high' || isIntersecting;
+
+  React.useEffect(() => {
+    if (shouldLoad && !loaded && !error) {
+      performanceMonitor.startMeasure(`image-load-${src}`);
+    }
+  }, [shouldLoad, loaded, error, src]);
+
+  return (
+    <div ref={intersectionRef} className={`relative overflow-hidden ${className}`}>
+      {shouldLoad ? (
+        <>
+          <img
+            ref={imgRef}
+            src={src}
+            alt={alt}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={handleLoad}
+            onError={handleError}
+            loading={priority === 'high' ? 'eager' : 'lazy'}
+          />
+          {!loaded && !error && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          )}
+          {error && (
+            <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">
+          <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      )}
+    </div>
+  );
+});
+
+LazyImage.displayName = 'LazyImage';
 
 const sizeClasses = {
   sm: {
@@ -48,7 +133,7 @@ const sizeClasses = {
   },
 };
 
-const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
+const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
   {
     video,
     size = 'md',
@@ -57,6 +142,9 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
     className,
     onClick,
     onChannelClick,
+    lazy = true,
+    priority = 'low',
+    index = 0,
   }
 ) => {
   const { showMiniplayer } = useMiniplayerActions();
@@ -76,13 +164,15 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
   }, [video.views]);
   const formattedTimeAgo = useMemo(() => formatTimeAgo(video.uploadedAt), [video.uploadedAt]);
 
-  // Event handlers
+  // Event handlers with performance monitoring
   const handleVideoClick = useCallback(() => {
+    performanceMonitor.startMeasure('video-card-click');
     if (onClick) {
       onClick(video);
     } else {
       showMiniplayer(video);
     }
+    performanceMonitor.endMeasure('video-card-click');
   }, [onClick, video, showMiniplayer]);
 
   const handleChannelClick = useCallback((e: React.MouseEvent) => {
@@ -119,14 +209,15 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
     >
       {/* Thumbnail Container */}
       <div className="relative overflow-hidden rounded-lg bg-gray-200">
-        <img
+        <LazyImage
           src={video.thumbnailUrl}
           alt={video.title}
           className={cn(
             classes.thumbnail,
-            'w-full object-cover transition-transform group-hover:scale-110'
+            'transition-transform group-hover:scale-110'
           )}
-          loading="lazy"
+          priority={index < 4 ? 'high' : priority}
+          lazy={lazy}
         />
         
         {/* Duration Badge */}
@@ -359,4 +450,19 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo((
 
 OptimizedVideoCard.displayName = 'OptimizedVideoCard';
 
-export default OptimizedVideoCard;
+// Export with enhanced memoization
+export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
+  return (
+    prevProps.video.id === nextProps.video.id &&
+    prevProps.video.title === nextProps.video.title &&
+    prevProps.video.thumbnailUrl === nextProps.video.thumbnailUrl &&
+    prevProps.video.views === nextProps.video.views &&
+    prevProps.video.uploadedAt === nextProps.video.uploadedAt &&
+    prevProps.size === nextProps.size &&
+    prevProps.showChannel === nextProps.showChannel &&
+    prevProps.showDescription === nextProps.showDescription &&
+    prevProps.priority === nextProps.priority &&
+    prevProps.lazy === nextProps.lazy &&
+    prevProps.index === nextProps.index
+  );
+});

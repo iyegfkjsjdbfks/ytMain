@@ -1,0 +1,313 @@
+import React, { memo, useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { performanceMonitor } from '../utils/performance';
+import { withMemo } from '../utils/componentOptimizations';
+
+interface OptimizedYouTubePlayerProps {
+  videoId: string;
+  width?: number | string;
+  height?: number | string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  loop?: boolean;
+  start?: number;
+  end?: number;
+  quality?: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080' | 'highres' | 'default';
+  className?: string;
+  onReady?: (event: any) => void;
+  onStateChange?: (event: any) => void;
+  onError?: (event: any) => void;
+  lazy?: boolean;
+  preload?: 'none' | 'metadata' | 'auto';
+  placeholder?: React.ReactNode;
+}
+
+// YouTube API loading state
+let youtubeAPILoaded = false;
+let youtubeAPILoading = false;
+const youtubeAPICallbacks: (() => void)[] = [];
+
+// Load YouTube API dynamically
+const loadYouTubeAPI = (): Promise<void> => {
+  return new Promise((resolve) => {
+    if (youtubeAPILoaded) {
+      resolve();
+      return;
+    }
+
+    youtubeAPICallbacks.push(resolve);
+
+    if (youtubeAPILoading) {
+      return;
+    }
+
+    youtubeAPILoading = true;
+    performanceMonitor.startMeasure('youtube-api-load');
+
+    // Create script tag
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    script.async = true;
+
+    // Global callback for YouTube API
+    (window as any).onYouTubeIframeAPIReady = () => {
+      youtubeAPILoaded = true;
+      youtubeAPILoading = false;
+      performanceMonitor.endMeasure('youtube-api-load');
+      
+      // Execute all pending callbacks
+      youtubeAPICallbacks.forEach(callback => callback());
+      youtubeAPICallbacks.length = 0;
+    };
+
+    document.head.appendChild(script);
+  });
+};
+
+// Default placeholder component
+const DefaultPlaceholder: React.FC<{ videoId: string; onClick: () => void }> = memo(({ videoId, onClick }) => {
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  
+  return (
+    <div 
+      className="relative w-full h-full bg-black flex items-center justify-center cursor-pointer group"
+      onClick={onClick}
+    >
+      <img
+        src={thumbnailUrl}
+        alt="Video thumbnail"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+        <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+          <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
+      <div className="absolute bottom-4 left-4 text-white text-sm bg-black bg-opacity-50 px-2 py-1 rounded">
+        Click to load video
+      </div>
+    </div>
+  );
+});
+
+DefaultPlaceholder.displayName = 'DefaultPlaceholder';
+
+// Main component
+const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
+  videoId,
+  width = '100%',
+  height = '100%',
+  autoplay = false,
+  muted = false,
+  controls = true,
+  loop = false,
+  start,
+  end,
+  quality = 'default',
+  className = '',
+  onReady,
+  onStateChange,
+  onError,
+  lazy = true,
+  preload = 'metadata',
+  placeholder
+}) => {
+  const [playerLoaded, setPlayerLoaded] = useState(false);
+  const [apiReady, setApiReady] = useState(youtubeAPILoaded);
+  const [shouldLoad, setShouldLoad] = useState(!lazy);
+  const [error, setError] = useState<string | null>(null);
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const playerInstanceRef = useRef<any>(null);
+
+  // Intersection observer for lazy loading
+  const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '100px',
+    triggerOnce: true
+  });
+
+  // Determine if player should be loaded
+  const shouldLoadPlayer = useMemo(() => {
+    return !lazy || shouldLoad || isIntersecting;
+  }, [lazy, shouldLoad, isIntersecting]);
+
+  // Player configuration
+  const playerVars = useMemo(() => {
+    return {
+      autoplay: autoplay ? 1 : 0,
+      mute: muted ? 1 : 0,
+      controls: controls ? 1 : 0,
+      loop: loop ? 1 : 0,
+      start: start || undefined,
+      end: end || undefined,
+      quality,
+      rel: 0, // Don't show related videos
+      modestbranding: 1, // Modest YouTube branding
+      playsinline: 1, // Play inline on mobile
+      enablejsapi: 1, // Enable JavaScript API
+    };
+  }, [autoplay, muted, controls, loop, start, end, quality]);
+
+  // Load YouTube API when needed
+  useEffect(() => {
+    if (shouldLoadPlayer && !apiReady) {
+      loadYouTubeAPI().then(() => {
+        setApiReady(true);
+      }).catch((err) => {
+        console.error('Failed to load YouTube API:', err);
+        setError('Failed to load YouTube player');
+      });
+    }
+  }, [shouldLoadPlayer, apiReady]);
+
+  // Initialize player when API is ready
+  useEffect(() => {
+    if (shouldLoadPlayer && apiReady && !playerLoaded && playerRef.current) {
+      performanceMonitor.startMeasure(`youtube-player-init-${videoId}`);
+      
+      try {
+        playerInstanceRef.current = new (window as any).YT.Player(playerRef.current, {
+          width,
+          height,
+          videoId,
+          playerVars,
+          events: {
+            onReady: (event: any) => {
+              performanceMonitor.endMeasure(`youtube-player-init-${videoId}`);
+              setPlayerLoaded(true);
+              onReady?.(event);
+            },
+            onStateChange: (event: any) => {
+              onStateChange?.(event);
+            },
+            onError: (event: any) => {
+              console.error('YouTube player error:', event);
+              setError('Video playback error');
+              onError?.(event);
+            }
+          }
+        });
+      } catch (err) {
+        console.error('Failed to initialize YouTube player:', err);
+        setError('Failed to initialize player');
+      }
+    }
+
+    // Cleanup
+    return () => {
+      if (playerInstanceRef.current) {
+        try {
+          playerInstanceRef.current.destroy();
+        } catch (err) {
+          console.error('Error destroying YouTube player:', err);
+        }
+        playerInstanceRef.current = null;
+      }
+    };
+  }, [shouldLoadPlayer, apiReady, playerLoaded, videoId, width, height, playerVars, onReady, onStateChange, onError]);
+
+  // Handle manual load
+  const handleLoad = useCallback(() => {
+    setShouldLoad(true);
+  }, []);
+
+  // Player methods
+  const playerMethods = useMemo(() => ({
+    play: () => playerInstanceRef.current?.playVideo(),
+    pause: () => playerInstanceRef.current?.pauseVideo(),
+    stop: () => playerInstanceRef.current?.stopVideo(),
+    seekTo: (seconds: number) => playerInstanceRef.current?.seekTo(seconds),
+    setVolume: (volume: number) => playerInstanceRef.current?.setVolume(volume),
+    mute: () => playerInstanceRef.current?.mute(),
+    unMute: () => playerInstanceRef.current?.unMute(),
+    getPlayerState: () => playerInstanceRef.current?.getPlayerState(),
+    getCurrentTime: () => playerInstanceRef.current?.getCurrentTime(),
+    getDuration: () => playerInstanceRef.current?.getDuration(),
+  }), []);
+
+  // Expose player methods via ref
+  React.useImperativeHandle(playerRef, () => playerMethods, [playerMethods]);
+
+  if (error) {
+    return (
+      <div className={`flex items-center justify-center bg-gray-100 ${className}`} style={{ width, height }}>
+        <div className="text-center p-4">
+          <svg className="w-12 h-12 text-red-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="text-gray-600 text-sm">{error}</p>
+          <button 
+            onClick={() => {
+              setError(null);
+              setShouldLoad(true);
+            }}
+            className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      ref={intersectionRef}
+      className={`relative ${className}`} 
+      style={{ width, height }}
+    >
+      {shouldLoadPlayer ? (
+        <>
+          <div ref={playerRef} className="w-full h-full" />
+          {!playerLoaded && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                <p className="text-gray-600 text-sm">Loading player...</p>
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        placeholder || <DefaultPlaceholder videoId={videoId} onClick={handleLoad} />
+      )}
+    </div>
+  );
+};
+
+// Export with memoization
+export default withMemo(OptimizedYouTubePlayer, (prevProps, nextProps) => {
+  return (
+    prevProps.videoId === nextProps.videoId &&
+    prevProps.width === nextProps.width &&
+    prevProps.height === nextProps.height &&
+    prevProps.autoplay === nextProps.autoplay &&
+    prevProps.muted === nextProps.muted &&
+    prevProps.controls === nextProps.controls &&
+    prevProps.loop === nextProps.loop &&
+    prevProps.start === nextProps.start &&
+    prevProps.end === nextProps.end &&
+    prevProps.quality === nextProps.quality &&
+    prevProps.lazy === nextProps.lazy &&
+    prevProps.preload === nextProps.preload
+  );
+});
+
+// Export player methods type for external use
+export type YouTubePlayerMethods = {
+  play: () => void;
+  pause: () => void;
+  stop: () => void;
+  seekTo: (seconds: number) => void;
+  setVolume: (volume: number) => void;
+  mute: () => void;
+  unMute: () => void;
+  getPlayerState: () => number;
+  getCurrentTime: () => number;
+  getDuration: () => number;
+};
