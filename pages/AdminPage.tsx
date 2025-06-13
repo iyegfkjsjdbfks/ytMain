@@ -270,25 +270,24 @@ const AdminPage: React.FC = () => {
                 </div>
               )}
 
-                {/* API Configuration Help */}
-                <div className="mt-6 p-4 bg-blue-50 rounded-md">
-                  <h3 className="text-sm font-medium text-blue-900 mb-2">
-                    API Configuration Help
-                  </h3>
-                  <div className="text-sm text-blue-700 space-y-2">
-                    <p>
-                      <strong>YouTube Data API v3:</strong> Add <code className="bg-blue-100 px-1 rounded">VITE_YOUTUBE_API_KEY</code> to your .env.local file.
-                    </p>
-                    <p>
-                      <strong>Google Custom Search:</strong> Add both <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_API_KEY</code> and <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_ENGINE_ID</code> to your .env.local file.
-                    </p>
-                    <p>
-                      <strong>Hybrid Mode:</strong> Requires all three environment variables above. Provides the best user experience by using YouTube API first, then falling back to Custom Search when quota limits are reached.
-                    </p>
-                    <p className="text-xs">
-                      Restart the development server after adding environment variables.
-                    </p>
-                  </div>
+              {/* API Configuration Help */}
+              <div className="mt-6 p-4 bg-blue-50 rounded-md">
+                <h3 className="text-sm font-medium text-blue-900 mb-2">
+                  API Configuration Help
+                </h3>
+                <div className="text-sm text-blue-700 space-y-2">
+                  <p>
+                    <strong>YouTube Data API v3:</strong> Add <code className="bg-blue-100 px-1 rounded">VITE_YOUTUBE_API_KEY</code> to your .env.local file.
+                  </p>
+                  <p>
+                    <strong>Google Custom Search:</strong> Add both <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_API_KEY</code> and <code className="bg-blue-100 px-1 rounded">VITE_GOOGLE_SEARCH_ENGINE_ID</code> to your .env.local file.
+                  </p>
+                  <p>
+                    <strong>Hybrid Mode:</strong> Requires all three environment variables above. Provides the best user experience by using YouTube API first, then falling back to Custom Search when quota limits are reached.
+                  </p>
+                  <p className="text-xs">
+                    Restart the development server after adding environment variables.
+                  </p>
                 </div>
               </div>
             </div>
