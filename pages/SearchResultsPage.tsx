@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useDebounce } from '../hooks/useDebounce';
-import { searchVideos } from '../services/videoService';
+import { searchVideos } from '../services/mockVideoService';
 import { searchYouTubeVideos, searchGoogleVideos, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import LoadingSpinner from '../components/LoadingSpinner';
