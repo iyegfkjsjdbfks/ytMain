@@ -1,4 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Video, Channel, Comment, Playlist } from '../types/core';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 
 // Re-export the localStorage Set hook
@@ -73,7 +76,6 @@ export function useThrottle<T>(value: T, delay: number): T {
     if (Date.now() >= lastExecuted.current + delay) {
       lastExecuted.current = Date.now();
       setThrottledValue(value);
-      return;
     } else {
       const timer = setTimeout(() => {
         lastExecuted.current = Date.now();
@@ -204,7 +206,8 @@ export function useIntersectionObserver(
     const element = ref.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
       if (entry) {
         setIsIntersecting(entry.isIntersecting);
       }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode   } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Video as VideoType } from '../src/types/core'; // Import the Video type
 
 // Use the Video type for items in the watch later list
@@ -15,7 +15,7 @@ interface WatchLaterContextType {
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const WatchLaterProvider = ({ children }: { children: ReactNode }) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
     const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];

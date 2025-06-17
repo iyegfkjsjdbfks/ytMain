@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useMemo   } from 'react';
+import { createContext, useContext, useReducer, useMemo, ReactNode } from 'react';
 import { Video } from '../types';
 
 // State interface
@@ -199,10 +199,10 @@ const MiniplayerContext = createContext<MiniplayerContextValue | null>(null);
 
 // Provider component
 interface MiniplayerProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const OptimizedMiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children }) => {
+export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProps) => {
   const [state, dispatch] = useReducer(miniplayerReducer, initialState);
 
   // Memoized actions to prevent unnecessary re-renders

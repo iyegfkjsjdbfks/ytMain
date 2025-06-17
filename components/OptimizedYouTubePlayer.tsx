@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo, memo, ReactNode } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
@@ -20,7 +20,7 @@ interface OptimizedYouTubePlayerProps {
   onError?: (event: any) => void;
   lazy?: boolean;
   preload?: 'none' | 'metadata' | 'auto';
-  placeholder?: React.ReactNode;
+  placeholder?: ReactNode;
 }
 
 // YouTube API loading state
@@ -67,7 +67,7 @@ const loadYouTubeAPI = (): Promise<void> => {
 };
 
 // Default placeholder component
-const DefaultPlaceholder: React.FC<{ videoId: string; onClick: () => void }> = memo(({ videoId, onClick }) => {
+const DefaultPlaceholder = memo(({ videoId, onClick }: { videoId: string; onClick: () => void }) => {
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   
   return (
@@ -98,7 +98,7 @@ const DefaultPlaceholder: React.FC<{ videoId: string; onClick: () => void }> = m
 DefaultPlaceholder.displayName = 'DefaultPlaceholder';
 
 // Main component
-const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
+const OptimizedYouTubePlayer = ({
   videoId,
   width = '100%',
   height = '100%',
@@ -129,7 +129,7 @@ const OptimizedYouTubePlayer: React.FC<OptimizedYouTubePlayerProps> = ({
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '100px',
-    triggerOnce: true
+    freezeOnceVisible: true
   });
 
   // Determine if player should be loaded

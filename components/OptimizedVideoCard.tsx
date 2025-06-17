@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback, useState, useRef } from 'react';
+import { memo, useMemo, useCallback, useState, useRef, useEffect, MouseEvent } from 'react';
 import { Video } from '../types';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
@@ -31,13 +31,13 @@ interface OptimizedVideoCardProps {
 }
 
 // Lazy image component with intersection observer
-const LazyImage: React.FC<{
+const LazyImage = memo<{
   src: string;
   alt: string;
   className?: string;
   priority?: 'high' | 'low';
   lazy?: boolean;
-}> = memo(({ src, alt, className, priority = 'low', lazy = true }) => {
+}>(({ src, alt, className, priority = 'low', lazy = true }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -45,7 +45,7 @@ const LazyImage: React.FC<{
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '50px',
-    triggerOnce: true
+    freezeOnceVisible: true
   });
 
   const handleLoad = useCallback(() => {
@@ -63,14 +63,14 @@ const LazyImage: React.FC<{
 
   const shouldLoad = !lazy || priority === 'high' || isIntersecting;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (shouldLoad && !loaded && !error) {
       performanceMonitor.startMeasure(`image-load-${src}`);
     }
   }, [shouldLoad, loaded, error, src]);
 
   return (
-    <div ref={intersectionRef} className={`relative overflow-hidden ${className}`}>
+    <div ref={intersectionRef as any} className={`relative overflow-hidden ${className}`}>
       {shouldLoad ? (
         <>
           <img
@@ -136,7 +136,7 @@ const sizeClasses = {
   },
 };
 
-const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
+const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   ({
     video,
     size = 'md',
@@ -179,14 +179,14 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
     }
   }, [onClick, video, showMiniplayer]);
 
-  const handleChannelClick = useCallback((e: React.MouseEvent) => {
+  const handleChannelClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     if (onChannelClick) {
       onChannelClick(video.channelId);
     }
   }, [onChannelClick, video.channelId]);
 
-  const handleWatchLaterToggle = useCallback((e: React.MouseEvent) => {
+  const handleWatchLaterToggle = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     if (isWatchLater) {
       removeFromWatchLater(video.id);
@@ -197,7 +197,7 @@ const OptimizedVideoCard: React.FC<OptimizedVideoCardProps> = memo(
 
   const { isOpen: showMenu, toggle: toggleMenu, close: closeMenu, menuRef } = useDropdownMenu();
 
-  const handleMenuClick = useCallback((e: React.MouseEvent) => {
+  const handleMenuClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     toggleMenu();
   }, [toggleMenu]);

@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   }, [isSidebarOpen]);
 
   const handleMaximizeMiniplayer = (videoId: string) => {
-    miniplayerContext.hideMiniplayer(); 
+    miniplayerContext.actions.hideMiniplayer(); 
     navigate(`/watch/${videoId}`);
   };
 
@@ -57,10 +57,10 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
           </div>
         </main>
       </div>
-      {miniplayerContext.isMiniplayerVisible && miniplayerContext.miniplayerVideo && (
+      {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && (
         <Miniplayer
-          video={miniplayerContext.miniplayerVideo}
-          onClose={miniplayerContext.clearMiniplayer} 
+          video={miniplayerContext.state.currentVideo}
+          onClose={miniplayerContext.actions.hideMiniplayer} 
           onMaximize={handleMaximizeMiniplayer}
         />
       )}

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef, ReactNode, Ref } from 'react';
 import { getYouTubePlayerType } from '../services/settingsService';
 import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
 import IFrameAPIYouTubePlayer, { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
@@ -21,7 +21,7 @@ interface YouTubePlayerWrapperProps {
   onError?: (event: any) => void;
   lazy?: boolean;
   preload?: 'none' | 'metadata' | 'auto';
-  placeholder?: React.ReactNode;
+  placeholder?: ReactNode;
   // IFrame API specific props
   onPlaybackQualityChange?: (event: any) => void;
   onPlaybackRateChange?: (event: any) => void;
@@ -40,7 +40,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
     // Use IFrame API Player
     return (
       <IFrameAPIYouTubePlayer
-        ref={ref as React.Ref<IFrameAPIYouTubePlayerMethods>}
+        ref={ref as Ref<IFrameAPIYouTubePlayerMethods>}
         videoId={props.videoId}
         width={props.width}
         height={props.height}
@@ -63,7 +63,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
   // Use Optimized Player (default)
   return (
     <OptimizedYouTubePlayer
-      ref={ref as React.Ref<YouTubePlayerMethods>}
+      ref={ref as Ref<YouTubePlayerMethods>}
       videoId={props.videoId}
       width={props.width}
       height={props.height}

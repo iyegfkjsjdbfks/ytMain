@@ -6,7 +6,7 @@ import { routes } from './config/routes';
 // Create router with our route configuration and future flags
 const router = createBrowserRouter(routes, {
   future: {
-    v7_startTransition: true,
+    // v7_startTransition: true, // Not supported in current React Router version
   },
 });
 

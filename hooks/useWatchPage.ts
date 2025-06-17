@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
 import { VideoVisibility } from '../types';

@@ -1,4 +1,4 @@
-import React, { ReactNode   } from 'react';
+import { ReactNode, RefObject, MouseEvent } from 'react';
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
@@ -7,11 +7,11 @@ interface DropdownMenuProps {
   children: ReactNode;
   className?: string;
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  menuRef?: React.RefObject<HTMLDivElement>;
+  menuRef?: RefObject<HTMLDivElement>;
 }
 
 interface DropdownMenuItemProps {
-  onClick?: (e: React.MouseEvent) => void;
+  onClick?: (e: MouseEvent) => void;
   children: ReactNode;
   className?: string;
   variant?: 'default' | 'danger';
@@ -30,13 +30,14 @@ const positionClasses = {
   'bottom-right': 'top-full right-0 mt-2',
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({
+const DropdownMenu = ({
   isOpen,
+  onClose,
   children,
   className = '',
   position = 'bottom-right',
   menuRef,
-}) => {
+}: DropdownMenuProps) => {
   if (!isOpen) return null;
 
   return (
@@ -53,14 +54,14 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   );
 };
 
-const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
+const DropdownMenuItem = ({
   onClick,
   children,
   className = '',
   variant = 'default',
   icon,
   disabled = false,
-}) => {
+}: DropdownMenuItemProps) => {
   const variantClasses = {
     default: 'text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700',
     danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20',
@@ -83,9 +84,9 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   );
 };
 
-const DropdownMenuSeparator: React.FC<DropdownMenuSeparatorProps> = ({
+const DropdownMenuSeparator = ({
   className = '',
-}) => {
+}: DropdownMenuSeparatorProps) => {
   return (
     <hr className={cn('my-2 border-gray-200 dark:border-gray-600', className)} />
   );

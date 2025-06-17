@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback, useState, useEffect } from 'react';
+import React, { memo, useMemo, useState, useEffect } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import { Video } from '../types';
 import { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
@@ -6,6 +6,37 @@ import { withMemo } from '../utils/componentOptimizations';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import OptimizedVideoCard from './OptimizedVideoCard';
 import { performanceMonitor } from '../utils/performance';
+
+// Helper function to convert search results to Video type
+const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
+  if ('views' in item && 'likes' in item) {
+    // Already a Video type
+    return item as Video;
+  }
+  
+  // Convert YouTubeSearchResult or GoogleSearchResult to Video
+  const searchResult = item as YouTubeSearchResult | GoogleSearchResult;
+  return {
+    id: searchResult.id,
+    title: searchResult.title,
+    description: searchResult.description,
+    thumbnailUrl: searchResult.thumbnailUrl,
+    videoUrl: searchResult.videoUrl,
+    duration: searchResult.duration || '0:00',
+    views: '0', // Default value since search results don't have view counts
+    likes: 0,
+    dislikes: 0,
+    uploadedAt: searchResult.uploadedAt || new Date().toISOString(),
+    channelName: searchResult.channelName,
+    channelId: '', // Default empty since search results don't have channel IDs
+    channelAvatarUrl: '', // Default empty
+    category: '',
+    tags: [],
+    visibility: 'public' as const, // Default visibility
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  } as Video;
+};
 
 interface OptimizedSearchResultsProps {
   videos: Video[];
@@ -84,10 +115,12 @@ const VirtualizedItem: React.FC<VirtualizedItemProps> = memo(({ index, style, da
     );
   }
 
+  const convertedVideo = convertToVideo(item);
+  
   return (
     <div style={style} className="p-2">
       <OptimizedVideoCard
-        video={item}
+        video={convertedVideo}
         onClick={() => onVideoClick(item)}
         lazy={true}
       />

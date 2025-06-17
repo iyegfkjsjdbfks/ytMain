@@ -1,4 +1,4 @@
-import React from 'react';
+import { RefObject } from 'react';
 import AdvancedVideoPlayer from './AdvancedVideoPlayer';
 import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 import VideoActions from './VideoActions';
@@ -23,8 +23,8 @@ interface VideoPlaybackDetailsProps {
   canSummarize?: boolean;
   isSaveModalOpen: boolean;
   saveModalLoading: boolean;
-  saveButtonRef: React.RefObject<HTMLButtonElement>;
-  saveModalRef: React.RefObject<HTMLDivElement>;
+  saveButtonRef: RefObject<HTMLButtonElement>;
+  saveModalRef: RefObject<HTMLDivElement>;
   handleLike: () => void;
   handleDislike: () => void;
   handleSubscribe: () => void;
@@ -33,30 +33,31 @@ interface VideoPlaybackDetailsProps {
   handleSummarizeDescription?: () => void; // Optional as per VideoDescription
 }
 
-const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
-  video,
-  channel,
-  liked,
-  disliked,
-  isSubscribed,
-  isSavedToAnyList: _isSavedToAnyList,
-  mockLikeCount,
-  showFullDescription,
-  summary,
-  summaryError,
-  isSummarizing,
-  canSummarize,
-  isSaveModalOpen: _isSaveModalOpen,
-  saveModalLoading,
-  saveButtonRef: _saveButtonRef,
-  saveModalRef: _saveModalRef,
-  handleLike,
-  handleDislike,
-  handleSubscribe,
-  openSaveModal,
-  handleToggleDescription,
-  handleSummarizeDescription,
-}) => {
+const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
+  const {
+    video,
+    channel,
+    liked,
+    disliked,
+    isSubscribed,
+    isSavedToAnyList: _isSavedToAnyList,
+    mockLikeCount,
+    showFullDescription,
+    summary,
+    summaryError,
+    isSummarizing,
+    canSummarize,
+    isSaveModalOpen: _isSaveModalOpen,
+    saveModalLoading,
+    saveButtonRef: _saveButtonRef,
+    saveModalRef: _saveModalRef,
+    handleLike,
+    handleDislike,
+    handleSubscribe,
+    openSaveModal,
+    handleToggleDescription,
+    handleSummarizeDescription,
+  } = props;
   if (!video) return null; // Should be handled by parent, but good practice
 
   return (
@@ -99,28 +100,26 @@ const VideoPlaybackDetails: React.FC<VideoPlaybackDetailsProps> = ({
         liked={liked}
         disliked={disliked}
         likeCount={mockLikeCount}
-        isSavedToAnyList={_isSavedToAnyList}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}
         onSave={openSaveModal}
-        saveModalLoading={saveModalLoading}
       />
 
       {/* Video description */}
       {channel && (
         <VideoDescription
+          isSummarizing={isSummarizing}
+          canSummarize={canSummarize}
+          onSummarize={handleSummarizeDescription}
+          summaryError={summaryError || undefined}
+          summary={summary || undefined}
           video={video}
           channel={channel}
           isSubscribed={isSubscribed}
           onSubscribe={handleSubscribe}
           showFullDescription={showFullDescription}
           onToggleDescription={handleToggleDescription}
-          {...(summary !== null && summary !== undefined && { summary })}
-          {...(summaryError !== null && summaryError !== undefined && { summaryError })}
-          isSummarizing={isSummarizing || false}
-          canSummarize={canSummarize || false}
-          onSummarizeDescription={handleSummarizeDescription || (() => {})}
         />
       )}
     </>

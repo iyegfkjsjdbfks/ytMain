@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useRef, useState, useEffect } from 'react';
+import { memo, useCallback, useMemo, useRef, useState, useEffect, SyntheticEvent } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
@@ -33,7 +33,7 @@ interface VideoState {
   isMuted: boolean;
 }
 
-const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
+const OptimizedVideoPlayer = ({
   videoId,
   title = '',
   thumbnail,
@@ -121,7 +121,7 @@ const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
     onEnded?.();
   }, [onEnded]);
 
-  const handleError = useCallback((event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+  const handleError = useCallback((event: SyntheticEvent<HTMLVideoElement, Event>) => {
     const error = (event.target as HTMLVideoElement).error;
     const errorMessage = error ? `Video error: ${error.code} - ${error.message}` : 'Unknown video error';
     

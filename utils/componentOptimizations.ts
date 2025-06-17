@@ -1,4 +1,4 @@
-import React, { ComponentType, memo, useMemo, forwardRef } from 'react';
+import { ComponentType, memo, useMemo, forwardRef, lazy, createElement, useEffect, EffectCallback, DependencyList, LazyExoticComponent } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
@@ -15,9 +15,9 @@ export function withMemo<P extends object>(
  */
 export function withLazyLoading<P extends object>(
   importFunc: () => Promise<{ default: ComponentType<P> }>,
-  _fallback?: React.ComponentType
-): React.LazyExoticComponent<ComponentType<P>> {
-  return React.lazy(importFunc);
+  _fallback?: ComponentType<any>
+): LazyExoticComponent<ComponentType<P>> {
+  return lazy(importFunc);
 }
 
 /**
@@ -116,7 +116,7 @@ export const componentPerformance = {
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, _name?: string) => {
     return forwardRef<any, P>((props, ref) => {
-      React.useEffect(() => {
+      useEffect(() => {
         // Performance monitoring disabled
         // const startTime = performance.now();
         
@@ -127,15 +127,15 @@ export const componentPerformance = {
           };
       });
       
-      return React.createElement(Component, { ...props, ref } as any);
+      return createElement(Component, { ...props, ref } as any);
     });
   },
   
   /**
    * Hook to measure effect execution time
    */
-  useMeasuredEffect: (effect: React.EffectCallback, deps: React.DependencyList, _effectName = 'Effect') => {
-    React.useEffect(() => {
+  useMeasuredEffect: (effect: EffectCallback, deps: DependencyList, _effectName = 'Effect') => {
+    useEffect(() => {
       // Performance monitoring disabled
       // const startTime = performance.now();
       const cleanup = effect();

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, useImperativeHandle, forwardRef } from 'react';
+import { useEffect, useRef, useState, useCallback, useImperativeHandle, forwardRef } from 'react';
 
 interface IFrameAPIYouTubePlayerProps {
   videoId: string;
@@ -102,7 +102,11 @@ const loadYouTubeIFrameAPI = (): Promise<void> => {
     script.src = 'https://www.youtube.com/iframe_api';
     script.async = true;
     const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode?.insertBefore(script, firstScriptTag);
+    if (firstScriptTag && firstScriptTag.parentNode) {
+      firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
+    } else {
+      document.head.appendChild(script);
+    }
   });
 };
 
