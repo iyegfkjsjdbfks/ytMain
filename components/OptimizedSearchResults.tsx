@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState, useEffect } from 'react';
+import React, { memo, useMemo, useState, useEffect, useCallback } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import { Video } from '../types';
 import { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
