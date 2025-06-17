@@ -113,13 +113,13 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
           isSummarizing={isSummarizing}
           canSummarize={canSummarize}
           onSummarizeDescription={handleSummarizeDescription}
-          summaryError={summaryError}
-          summary={summary}
+          summaryError={summaryError || undefined}
+          summary={summary || undefined}
           video={video}
           channel={channel}
           isSubscribed={isSubscribed}
-          onSubscribe={handleSubscribe}
           showFullDescription={showFullDescription}
+          onSubscribe={handleSubscribe}
           onToggleDescription={handleToggleDescription}
         />
       )}

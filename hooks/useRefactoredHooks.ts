@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Video, Channel, Comment, Playlist } from '../types/core';
+import React, { useState, useEffect, useRef } from 'react';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
+import { Video, Channel, Comment } from '../src/types/core';
+import { useLocalStorageSet, useLocalStorageSetState } from '../hooks/useLocalStorage';
 
 // Re-export the localStorage Set hook
 export { useLocalStorageSet, useLocalStorageSetState } from './useLocalStorageSet';
@@ -208,7 +207,7 @@ export function useIntersectionObserver(
 
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      if (entry) {
+      if (entry !== undefined) {
         setIsIntersecting(entry.isIntersecting);
       }
     }, options);
@@ -295,6 +294,7 @@ export function useUnifiedAppState() {
     toggleMiniplayer,
     addToWatchLater,
     removeFromWatchLater,
+    isInWatchLater,
     toggleSidebar,
     addNotification,
     removeNotification
@@ -322,7 +322,7 @@ export function useUnifiedAppState() {
     watchLaterVideos: state.watchLaterVideos,
     addToWatchLater,
     removeFromWatchLater,
-    isInWatchLater: (videoId: string) => state.watchLaterVideos.includes(videoId),
+    isInWatchLater,
     
     // UI state
     sidebarCollapsed: state.sidebarCollapsed,
@@ -332,7 +332,7 @@ export function useUnifiedAppState() {
     notifications: state.notifications,
     addNotification,
     removeNotification,
-    hasUnreadNotifications: state.notifications.some(n => !n.read)
+    hasUnreadNotifications: state.notifications.some((n: any) => !n.read)
   };
 }
 
