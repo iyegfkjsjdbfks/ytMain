@@ -1,10 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
-import { Video, Channel, Comment } from '../src/types/core';
-import { useLocalStorageSet, useLocalStorageSetState } from '../hooks/useLocalStorage';
-
-// Re-export the localStorage Set hook
-export { useLocalStorageSet, useLocalStorageSetState } from './useLocalStorageSet';
 
 /**
  * Enhanced useLocalStorage hook with error handling and type safety

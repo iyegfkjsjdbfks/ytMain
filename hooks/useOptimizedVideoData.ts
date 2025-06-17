@@ -40,7 +40,7 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
       channelName: `Channel ${Math.floor(Math.random() * 100)}`,
       channelId: `channel-${Math.floor(Math.random() * 100)}`,
       channelAvatarUrl: `https://picsum.photos/40/40?random=${index + 1000}`,
-      category: (category ?? ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)]) as string,
+      category: category || ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
       tags: [`tag${index}`, `sample`, category || 'general'].filter(Boolean),
       isLive: Math.random() > 0.9,
       isShort: false,
@@ -172,7 +172,7 @@ export const useHomeVideos = (category?: string) => {
 
 export const useTrendingVideos = () => {
   return useOptimizedVideoData({
-    category: 'trending' as string,
+    category: 'trending',
     limit: 20,
     enableCache: true,
     refetchInterval: 10 * 60 * 1000, // Refresh every 10 minutes
