@@ -5,34 +5,14 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   HeartIcon,
-  ChatBubbleLeftIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
   ShareIcon,
   EllipsisVerticalIcon,
   ChevronUpIcon,
   ChevronDownIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-
-export interface Short {
-  id: string;
-  title: string;
-  description: string;
-  videoUrl: string;
-  thumbnailUrl: string;
-  channelId: string;
-  channelName: string;
-  channelAvatar: string;
-  channelVerified: boolean;
-  views: number;
-  likes: number;
-  comments: number;
-  shares: number;
-  duration: number;
-  uploadedAt: string;
-  hashtags: string[];
-  isLiked: boolean;
-  isSubscribed: boolean;
-}
+import type { Short } from '../src/types/core';
 
 interface ShortsPlayerProps {
   shorts: Short[];

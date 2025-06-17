@@ -46,7 +46,7 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
     visibility: 'public' as const,
     createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString()
-  }))
+  } as Video))
 };
 
 export const useOptimizedVideoData = ({

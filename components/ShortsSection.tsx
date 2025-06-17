@@ -1,9 +1,9 @@
-import React, { useEffect, useState   } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Short } from '../src/types/core';
-import { getShortsVideos } from '../services/mockVideoService'; // Assuming you have a service to fetch videos
-import ShortsIcon from './icons/ShortsIcon'; // Assuming you have a ShortsIcon
-import ShortDisplayCard from './ShortDisplayCard'; // Assuming you have a ShortDisplayCard component
+import type { Short } from '../src/types/core';
+import { getShortsVideos } from '../services/mockVideoService';
+import ShortsIcon from './icons/ShortsIcon';
+import ShortDisplayCard from './ShortDisplayCard';
 
 interface ShortsSectionProps {
   maxShorts?: number;
@@ -27,11 +27,14 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         const convertedShorts: Short[] = shortsVideos.map(video => ({
           ...video,
           duration: parseInt(video.duration) || 60, // Convert string duration to number
-          isShort: true as const,
           isVertical: true,
           visibility: video.visibility === 'scheduled' ? 'public' : video.visibility,
           createdAt: video.createdAt || new Date().toISOString(),
-          updatedAt: video.updatedAt || new Date().toISOString()
+          updatedAt: video.updatedAt || new Date().toISOString(),
+          // Ensure all required Short properties are present
+          isShort: true,
+          effects: [],
+          music: undefined
         }));
 
         setShorts(convertedShorts);

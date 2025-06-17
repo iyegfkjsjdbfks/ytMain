@@ -100,6 +100,7 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
         liked={liked}
         disliked={disliked}
         likeCount={mockLikeCount}
+        isSavedToAnyList={_isSavedToAnyList || false}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}
@@ -111,9 +112,9 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
         <VideoDescription
           isSummarizing={isSummarizing}
           canSummarize={canSummarize}
-          onSummarize={handleSummarizeDescription}
-          summaryError={summaryError || undefined}
-          summary={summary || undefined}
+          onSummarizeDescription={handleSummarizeDescription}
+          summaryError={summaryError}
+          summary={summary}
           video={video}
           channel={channel}
           isSubscribed={isSubscribed}
