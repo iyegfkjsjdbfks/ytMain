@@ -154,7 +154,7 @@ export const useOptimizedVideoData = ({
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    category: category || undefined,
+    category,
     limit: 24,
     enableCache: true,
   });

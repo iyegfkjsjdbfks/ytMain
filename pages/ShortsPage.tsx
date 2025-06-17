@@ -83,10 +83,10 @@ const ShortsPage: React.FC = () => {
           duration: typeof video.duration === 'number' ? video.duration : parseInt(video.duration) || 60,
           isShort: true as const,
           isVertical: true,
-          visibility: video.visibility,
+          visibility: video.visibility as 'public' | 'private' | 'unlisted',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString()
-        };
+        } as Short;
         return shortVideo;
       });
 
