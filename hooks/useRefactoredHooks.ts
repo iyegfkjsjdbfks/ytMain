@@ -323,11 +323,10 @@ export function useUnifiedAppState() {
     sidebarCollapsed: state.sidebarCollapsed,
     toggleSidebar,
     
-    // Notifications
+    // Notifications state
     notifications: state.notifications,
     addNotification,
-    removeNotification,
-    hasUnreadNotifications: state.notifications.some((n: any) => !n.read)
+    removeNotification
   };
 }
 
