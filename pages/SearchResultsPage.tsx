@@ -102,14 +102,7 @@ const SearchResultsPage: React.FC = () => {
     performSearch(debouncedQuery);
   }, [debouncedQuery, performSearch]);
 
-  // Combine all results for the optimized component
-  const combinedResults = useMemo((): CombinedSearchResult[] => {
-    return [
-      ...searchState.videos.map(v => ({ ...v, source: 'local' as const })),
-      ...searchState.youtubeVideos.map(v => ({ ...v, source: 'youtube' as const })),
-      ...searchState.googleSearchVideos.map(v => ({ ...v, source: 'google' as const }))
-    ];
-  }, [searchState.videos, searchState.youtubeVideos, searchState.googleSearchVideos]);
+
 
   // Early return for empty query
   if (!query) {

@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, Ref } from 'react';
+import { forwardRef, ReactNode, Ref } from 'react';
 import { getYouTubePlayerType } from '../services/settingsService';
 import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
 import IFrameAPIYouTubePlayer, { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
