@@ -16,7 +16,6 @@ import {
   isYouTubeApiAvailable,
   isHybridModeAvailable
 } from '../services/settingsService';
-import React, { useState, useEffect } from 'react';
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
 
 const AdminPage: React.FC = () => {
