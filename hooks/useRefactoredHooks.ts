@@ -297,34 +297,34 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user: state.user,
-    isAuthenticated: state.isAuthenticated,
+    user: state.auth?.user,
+    isAuthenticated: state.auth?.isAuthenticated || false,
     login,
     logout,
     
     // Theme state
-    theme: state.theme,
+    theme: state.ui?.theme || 'light',
     setTheme,
-    isDarkMode: state.theme === 'dark',
+    isDarkMode: (state.ui?.theme || 'light') === 'dark',
     
     // Miniplayer state
-    miniplayerVideo: state.miniplayerVideo,
-    isMiniplayerOpen: state.isMiniplayerOpen,
+    miniplayerVideo: state.miniplayer?.video,
+    isMiniplayerOpen: state.miniplayer?.isOpen || false,
     openMiniplayer,
     toggleMiniplayer,
     
     // Watch Later state
-    watchLaterVideos: state.watchLaterVideos,
+    watchLaterVideos: state.watchLater?.videos || [],
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
     
     // UI state
-    sidebarCollapsed: state.sidebarCollapsed,
+    sidebarCollapsed: state.ui?.sidebarCollapsed || false,
     toggleSidebar,
     
     // Notifications state
-    notifications: state.notifications,
+    notifications: state.notifications?.items || [],
     addNotification,
     removeNotification
   };
