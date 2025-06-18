@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo, memo, ReactNode } from 'react';
+import React from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
@@ -277,7 +278,7 @@ const OptimizedYouTubePlayer = ({
 
   return (
     <div 
-      ref={intersectionRef}
+      ref={intersectionRef as React.RefObject<HTMLDivElement>}
       className={`relative ${className}`} 
       style={{ width, height }}
     >

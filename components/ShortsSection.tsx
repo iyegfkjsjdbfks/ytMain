@@ -24,18 +24,21 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         const shortsVideos = allShortsVideos.slice(0, maxShorts);
 
         // Convert Video objects to Short objects
-        const convertedShorts: Short[] = shortsVideos.map(video => ({
-          ...video,
-          duration: parseInt(video.duration) || 60, // Convert string duration to number
-          isVertical: true,
-          visibility: video.visibility === 'scheduled' ? 'public' : video.visibility as 'public' | 'private' | 'unlisted',
-          createdAt: video.createdAt || new Date().toISOString(),
-          updatedAt: video.updatedAt || new Date().toISOString(),
-          // Ensure all required Short properties are present
-          isShort: true,
-          effects: [],
-          music: undefined
-        } as Short));
+        const convertedShorts: Short[] = shortsVideos.map(video => {
+          const { duration: videoDuration, ...videoWithoutDuration } = video;
+          return {
+             ...videoWithoutDuration,
+             duration: parseInt(videoDuration) || 60, // Convert string duration to number
+             isVertical: true,
+             visibility: (video.visibility === 'scheduled' ? 'public' : video.visibility) as 'public' | 'private' | 'unlisted',
+             createdAt: video.createdAt || new Date().toISOString(),
+             updatedAt: video.updatedAt || new Date().toISOString(),
+             // Ensure all required Short properties are present
+             isShort: true,
+             effects: [],
+             music: undefined
+           } satisfies Short;
+        });
 
         setShorts(convertedShorts);
         setError(null);

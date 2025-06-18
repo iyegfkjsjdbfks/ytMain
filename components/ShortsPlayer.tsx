@@ -5,11 +5,11 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   HeartIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
   ShareIcon,
   EllipsisVerticalIcon,
   ChevronUpIcon,
-  ChevronDownIcon
+  ChevronDownIcon,
+  ChatBubbleLeftIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import type { Short } from '../src/types/core';
@@ -247,14 +247,14 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
         {/* Channel Info */}
         <div className="flex items-center space-x-3 mb-3">
           <img
-            src={currentShort.channelAvatar}
+            src={currentShort.channelAvatarUrl}
             alt={currentShort.channelName}
             className="w-10 h-10 rounded-full"
           />
           <div className="flex-1">
             <div className="flex items-center space-x-2">
               <span className="text-white font-medium">{currentShort.channelName}</span>
-              {currentShort.channelVerified && (
+              {currentShort.channel?.isVerified && (
                 <div className="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center">
                   <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -262,17 +262,15 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
                 </div>
               )}
             </div>
-            <p className="text-gray-300 text-sm">{formatNumber(currentShort.views)} views</p>
+            <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views) || 0)} views</p>
           </div>
           
-          {!currentShort.isSubscribed && (
-            <button
-              onClick={() => onSubscribe(currentShort.channelId)}
-              className="bg-white text-black px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
-            >
-              Subscribe
-            </button>
-          )}
+          <button
+            onClick={() => onSubscribe(currentShort.channelId)}
+            className="bg-white text-black px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+          >
+            Subscribe
+          </button>
         </div>
 
         {/* Video Title & Description */}
@@ -288,14 +286,14 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
         </div>
 
         {/* Hashtags */}
-        {currentShort.hashtags.length > 0 && (
+        {currentShort.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
-            {currentShort.hashtags.slice(0, 3).map((hashtag, index) => (
+            {currentShort.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
                 className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer"
               >
-                #{hashtag}
+                #{tag}
               </span>
             ))}
           </div>
@@ -334,7 +332,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
             <ChatBubbleLeftIcon className="w-6 h-6" />
           </button>
           <span className="text-white text-xs mt-1">
-            {formatNumber(currentShort.comments)}
+            {formatNumber(currentShort.commentCount || 0)}
           </span>
         </div>
 
@@ -347,7 +345,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
             <ShareIcon className="w-6 h-6" />
           </button>
           <span className="text-white text-xs mt-1">
-            {formatNumber(currentShort.shares)}
+            {formatNumber(currentShort.analytics?.engagement?.shares || 0)}
           </span>
         </div>
 
