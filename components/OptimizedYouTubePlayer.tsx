@@ -49,7 +49,11 @@ const loadYouTubeAPI = (): Promise<void> => {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    if (firstScriptTag && firstScriptTag.parentNode) {
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    } else {
+      document.head.appendChild(tag);
+    }
 
     // Global callback for YouTube API - must be on window object
     (window as any).onYouTubeIframeAPIReady = () => {
@@ -114,15 +118,14 @@ const OptimizedYouTubePlayer = ({
   onStateChange,
   onError,
   lazy = true,
-  preload = 'metadata',
   placeholder
-}) => {
+}: OptimizedYouTubePlayerProps) => {
   const [playerLoaded, setPlayerLoaded] = useState(false);
   const [apiReady, setApiReady] = useState(youtubeAPILoaded);
   const [shouldLoad, setShouldLoad] = useState(!lazy);
   const [error, setError] = useState<string | null>(null);
   const playerRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null); // Removed unused variable
   const playerInstanceRef = useRef<any>(null);
 
   // Intersection observer for lazy loading
@@ -185,8 +188,8 @@ const OptimizedYouTubePlayer = ({
       try {
         // Create player instance following official API documentation
         playerInstanceRef.current = new (window as any).YT.Player(playerRef.current.id, {
-          height: typeof height === 'number' ? height.toString() : height,
-          width: typeof width === 'number' ? width.toString() : width,
+          height: typeof height === 'number' ? height.toString() : (height as string),
+          width: typeof width === 'number' ? width.toString() : (width as string),
           videoId,
           playerVars,
           events: {

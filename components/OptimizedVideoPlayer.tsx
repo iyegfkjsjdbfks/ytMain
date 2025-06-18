@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useRef, useState, useEffect, SyntheticEvent } from 'react';
+import { useCallback, useMemo, useRef, useState, useEffect, SyntheticEvent } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
@@ -49,7 +49,7 @@ const OptimizedVideoPlayer = ({
   onError,
   lazy = true,
   preload = 'metadata'
-}) => {
+}: OptimizedVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [videoState, setVideoState] = useState<VideoState>({

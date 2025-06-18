@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState, useEffect, useCallback } from 'react';
+import React, { memo, useMemo, useState, useEffect } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import { Video } from '../types';
 import { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
@@ -257,6 +257,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       <div className="relative">
         <List
           height={containerHeight}
+          width="100%"
           itemCount={allResults.length}
           itemSize={itemHeight}
           itemData={listData}
@@ -268,7 +269,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
         
         {/* Load more trigger */}
         {hasMore && (
-          <div ref={loadMoreRef} className="h-20 flex items-center justify-center">
+          <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className="h-20 flex items-center justify-center">
             {loading ? (
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
             ) : (
