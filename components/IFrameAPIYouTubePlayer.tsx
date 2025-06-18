@@ -160,7 +160,11 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
       return;
     }
 
-    console.log('Initializing YouTube player...', { videoId, playerId: playerIdRef.current });
+    // Generate a fresh player ID for this render
+    const playerId = `youtube-player-${videoId}-${Date.now()}`;
+    playerIdRef.current = playerId;
+
+    console.log('Initializing YouTube player...', { videoId, playerId });
     
     try {
       // Build player variables
@@ -188,8 +192,8 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
       if (end !== undefined) playerVars.end = end;
 
       // Create the player
-      console.log('Creating YouTube player with ID:', playerIdRef.current);
-      playerInstanceRef.current = new (window as any).YT.Player(playerIdRef.current, {
+      console.log('Creating YouTube player with ID:', playerId);
+      playerInstanceRef.current = new (window as any).YT.Player(playerId, {
         height: typeof height === 'number' ? height.toString() : height,
         width: typeof width === 'number' ? width.toString() : width,
         videoId,
