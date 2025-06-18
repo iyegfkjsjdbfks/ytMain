@@ -13,7 +13,7 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+
 
 const WatchPage: React.FC = () => {
   const {
@@ -207,9 +207,7 @@ const WatchPage: React.FC = () => {
               {isYouTubeUrl(video.videoUrl) ? (
                 <YouTubePlayerWrapper
                   videoId={getYouTubeVideoId(video.videoUrl) || ''}
-                  title={video.title}
                   autoplay={false}
-                  priority={true}
                   width="100%"
                   height={480}
                   controls={true}

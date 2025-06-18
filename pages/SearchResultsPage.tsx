@@ -4,11 +4,10 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useDebounce } from '../hooks/useDebounce';
 import { searchVideos } from '../services/mockVideoService';
-import { searchYouTubeVideos, searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
-import LoadingSpinner from '../components/LoadingSpinner';
 import { performanceMonitor } from '../utils/performance';
-import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 // Types for better performance
 interface SearchState {
@@ -104,7 +103,7 @@ const SearchResultsPage: React.FC = () => {
   }, [debouncedQuery, performSearch]);
 
   // Combine all results for the optimized component
-  const allResults = useMemo((): CombinedSearchResult[] => {
+  const combinedResults = useMemo((): CombinedSearchResult[] => {
     return [
       ...searchState.videos.map(v => ({ ...v, source: 'local' as const })),
       ...searchState.youtubeVideos.map(v => ({ ...v, source: 'youtube' as const })),

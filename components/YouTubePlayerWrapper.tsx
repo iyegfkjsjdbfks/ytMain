@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, Ref, useState, useEffect, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, ReactNode, Ref } from 'react';
 import { getYouTubePlayerType } from '../services/settingsService';
 import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
 import IFrameAPIYouTubePlayer, { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
@@ -45,14 +45,14 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
   
   // Create mock video object for YouTubePlayer component
   const createMockVideo = (videoId: string): YouTubeSearchResult => ({
-    id: { videoId },
-    snippet: {
-      title: 'Video',
-      description: '',
-      thumbnails: { default: { url: '', width: 120, height: 90 } },
-      channelTitle: '',
-      publishedAt: new Date().toISOString()
-    }
+    id: videoId,
+    title: 'Video',
+    description: '',
+    thumbnailUrl: '',
+    channelName: '',
+    videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    embedUrl: `https://www.youtube.com/embed/${videoId}`,
+    isYouTube: true as const
   });
 
   switch (playerType) {

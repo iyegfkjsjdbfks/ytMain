@@ -70,6 +70,7 @@ export function useThrottle<T>(value: T, delay: number): T {
     if (Date.now() >= lastExecuted.current + delay) {
       lastExecuted.current = Date.now();
       setThrottledValue(value);
+      return;
     } else {
       const timer = setTimeout(() => {
         lastExecuted.current = Date.now();
@@ -297,34 +298,34 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user: state.auth?.user,
-    isAuthenticated: state.auth?.isAuthenticated || false,
+    user: state.user,
+    isAuthenticated: state.isAuthenticated || false,
     login,
     logout,
     
     // Theme state
-    theme: state.ui?.theme || 'light',
+    theme: state.theme || 'light',
     setTheme,
-    isDarkMode: (state.ui?.theme || 'light') === 'dark',
+    isDarkMode: (state.theme || 'light') === 'dark',
     
     // Miniplayer state
-    miniplayerVideo: state.miniplayer?.video,
-    isMiniplayerOpen: state.miniplayer?.isOpen || false,
+    miniplayerVideo: state.miniplayerVideo,
+    isMiniplayerOpen: state.isMiniplayerOpen || false,
     openMiniplayer,
     toggleMiniplayer,
     
     // Watch Later state
-    watchLaterVideos: state.watchLater?.videos || [],
+    watchLaterVideos: state.watchLaterVideos || [],
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
     
     // UI state
-    sidebarCollapsed: state.ui?.sidebarCollapsed || false,
+    sidebarCollapsed: state.sidebarCollapsed || false,
     toggleSidebar,
     
     // Notifications state
-    notifications: state.notifications?.items || [],
+    notifications: state.notifications || [],
     addNotification,
     removeNotification
   };

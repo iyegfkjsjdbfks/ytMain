@@ -62,9 +62,7 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
         {isYouTubeUrl(video.videoUrl) ? (
           <YouTubePlayerWrapper
             videoId={getYouTubeVideoId(video.videoUrl) || ''}
-            title={video.title}
             autoplay={false}
-            priority={true}
             width="100%"
             height={480}
             controls={true}
@@ -109,11 +107,11 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
           channel={channel}
           isSubscribed={isSubscribed}
           showFullDescription={showFullDescription}
-          isSummarizing={isSummarizing}
-          canSummarize={canSummarize}
+          isSummarizing={isSummarizing || false}
+          canSummarize={canSummarize || false}
           onSubscribe={handleSubscribe}
           onToggleDescription={handleToggleDescription}
-          onSummarizeDescription={handleSummarizeDescription}
+          onSummarizeDescription={handleSummarizeDescription || (() => {})}
           {...(summaryError !== null && summaryError !== undefined && { summaryError })}
           {...(summary !== null && summary !== undefined && { summary })}
         />
