@@ -19,7 +19,9 @@ export { default as VirtualizedVideoGrid } from './VirtualizedVideoGrid';
 
 // Video Player Components
 export { default as AdvancedVideoPlayer } from './AdvancedVideoPlayer';
+export { default as BasicVideoPlayer } from './BasicVideoPlayer';
 export { default as RefactoredVideoPlayer } from './RefactoredVideoPlayer';
+export { default as YouTubePlayerWrapper } from './YouTubePlayerWrapper';
 export { default as VideoDescription } from './VideoDescription';
 export { default as RefactoredVideoDescription } from './RefactoredVideoDescription';
 export { default as VideoActions } from './VideoActions';

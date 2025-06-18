@@ -1,18 +1,13 @@
 
 import React from 'react';
-import AdvancedVideoPlayer from '../components/AdvancedVideoPlayer';
-import YouTubePlayerWrapper from '../components/YouTubePlayerWrapper';
-import RecommendationEngine from '../components/RecommendationEngine';
-import VideoActions from '../components/VideoActions';
-import VideoDescription from '../components/VideoDescription';
-import CommentsSection from '../components/CommentsSection';
-import RefactoredSaveToPlaylistModal from '../components/RefactoredSaveToPlaylistModal';
+import { AdvancedVideoPlayer, BasicVideoPlayer, RefactoredVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import { useWatchPage } from '../hooks/useWatchPage';
 import { formatCount } from '../utils/numberUtils';
 import { formatDistanceToNow } from '../utils/dateUtils';
+import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { getLocalVideoPlayerType } from '../services/settingsService';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
 
 
 const WatchPage: React.FC = () => {
@@ -212,13 +207,36 @@ const WatchPage: React.FC = () => {
                   height={480}
                   controls={true}
                 />
-              ) : (
-                <AdvancedVideoPlayer
-                  src={video.videoUrl}
-                  poster={video.thumbnailUrl}
-                  title={video.title}
-                />
-              )}
+              ) : (() => {
+                const localPlayerType = getLocalVideoPlayerType();
+                switch (localPlayerType) {
+                  case 'basic-video':
+                    return (
+                      <BasicVideoPlayer
+                        src={video.videoUrl}
+                        poster={video.thumbnailUrl}
+                        title={video.title}
+                      />
+                    );
+                  case 'refactored-video':
+                    return (
+                      <RefactoredVideoPlayer
+                        video={video}
+                        autoplay={false}
+                        muted={false}
+                      />
+                    );
+                  case 'advanced-video':
+                  default:
+                    return (
+                      <AdvancedVideoPlayer
+                        src={video.videoUrl}
+                        poster={video.thumbnailUrl}
+                        title={video.title}
+                      />
+                    );
+                }
+              })()}
             </div>
             
             {/* Video title and stats */}
