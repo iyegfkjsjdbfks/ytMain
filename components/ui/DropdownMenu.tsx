@@ -32,7 +32,6 @@ const positionClasses = {
 
 const DropdownMenu = ({
   isOpen,
-  onClose,
   children,
   className = '',
   position = 'bottom-right',
