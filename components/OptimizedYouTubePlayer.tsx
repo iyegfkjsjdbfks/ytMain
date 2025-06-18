@@ -57,6 +57,8 @@ const loadYouTubeAPI = (): Promise<void> => {
     }
 
     // Global callback for YouTube API - must be on window object
+    // Preserve any existing callback
+    const originalCallback = (window as any).onYouTubeIframeAPIReady;
     (window as any).onYouTubeIframeAPIReady = () => {
       youtubeAPILoaded = true;
       youtubeAPILoading = false;
@@ -67,6 +69,11 @@ const loadYouTubeAPI = (): Promise<void> => {
       // Execute all pending callbacks
       youtubeAPICallbacks.forEach(callback => callback());
       youtubeAPICallbacks.length = 0;
+      
+      // Call the original callback if it exists
+      if (originalCallback && typeof originalCallback === 'function') {
+        originalCallback();
+      }
     };
   });
 };

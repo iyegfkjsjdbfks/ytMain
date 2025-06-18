@@ -68,8 +68,15 @@ export class YouTubePlayer {
         document.head.appendChild(tag);
       }
 
+      // Preserve any existing callback
+      const originalCallback = window.onYouTubeIframeAPIReady;
       window.onYouTubeIframeAPIReady = () => {
         resolve();
+        
+        // Call the original callback if it exists
+        if (originalCallback && typeof originalCallback === 'function') {
+          originalCallback();
+        }
       };
     });
   }

@@ -89,12 +89,18 @@ const loadYouTubeIFrameAPI = (): Promise<void> => {
 
     isYouTubeAPILoading = true;
 
-    // Set up the global callback
+    // Set up the global callback, preserving any existing callback
+    const originalCallback = (window as any).onYouTubeIframeAPIReady;
     (window as any).onYouTubeIframeAPIReady = () => {
       isYouTubeAPILoaded = true;
       isYouTubeAPILoading = false;
       apiLoadCallbacks.forEach(callback => callback());
       apiLoadCallbacks.length = 0;
+      
+      // Call the original callback if it exists
+      if (originalCallback && typeof originalCallback === 'function') {
+        originalCallback();
+      }
     };
 
     // Load the API script
