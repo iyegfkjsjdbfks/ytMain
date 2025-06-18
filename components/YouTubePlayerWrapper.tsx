@@ -62,8 +62,8 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
         <IFrameAPIYouTubePlayer
           ref={ref as Ref<IFrameAPIYouTubePlayerMethods>}
           videoId={props.videoId}
-          width={props.width}
-          height={props.height}
+          width={props.width ?? undefined}
+          height={props.height ?? undefined}
           autoplay={props.autoplay}
           muted={props.muted}
           controls={props.controls}
@@ -88,7 +88,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
           muted={props.muted}
           loop={props.loop}
           className={props.className}
-          onPlay={props.onReady}
+          onPlay={props.onReady ? () => props.onReady?.({}) : undefined}
           onPause={() => {}}
           onEnded={() => {}}
         />
@@ -99,8 +99,8 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       return (
         <YouTubePlayer
           video={createMockVideo(props.videoId)}
-          width={props.width}
-          height={props.height}
+          width={props.width ?? undefined}
+          height={props.height ?? undefined}
           autoplay={props.autoplay}
           controls={props.controls}
           className={props.className}
@@ -118,7 +118,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
           width={props.width}
           height={props.height}
           className={props.className}
-          onPlay={props.onReady}
+          onPlay={props.onReady ? () => props.onReady?.({}) : undefined}
           onError={props.onError}
           lazy={props.lazy}
           preload={props.preload}
@@ -130,10 +130,9 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       // Use Optimized YouTube Player (default) - Best balance of features and performance
       return (
         <OptimizedYouTubePlayer
-          ref={ref as Ref<YouTubePlayerMethods>}
           videoId={props.videoId}
-          width={props.width}
-          height={props.height}
+          width={props.width ?? undefined}
+          height={props.height ?? undefined}
           autoplay={props.autoplay}
           muted={props.muted}
           controls={props.controls}

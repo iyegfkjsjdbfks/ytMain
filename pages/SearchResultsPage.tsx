@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Video } from '../types';
 import { useDebounce } from '../hooks/useDebounce';
@@ -18,8 +18,7 @@ interface SearchState {
   youtubeLoading: boolean;
 }
 
-// Combined search results type
-type CombinedSearchResult = Video | YouTubeSearchResult | GoogleSearchResult;
+
 
 // Memoized empty state component
 const EmptySearchState = React.memo(() => (
