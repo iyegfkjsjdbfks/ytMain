@@ -198,15 +198,15 @@ const AdminPage: React.FC = () => {
               {/* YouTube Player Type Section */}
               <div>
                 <h2 className="text-lg font-medium text-gray-900 mb-4">
-                  YouTube Player Type
+                  Choose Video Player Type
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
-                  Choose which YouTube player implementation to use for video playback.
+                  Choose which video player implementation to use for video playback.
                 </p>
 
                 <div className="space-y-4">
                   {/* Optimized Player Option */}
-                  <div className="flex items-start">
+                  <div className="flex items-start p-3 rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="flex items-center h-5">
                       <input
                         id="optimized-player"
@@ -215,24 +215,24 @@ const AdminPage: React.FC = () => {
                         checked={playerType === 'optimized'}
                         onChange={() => handlePlayerTypeChange('optimized')}
                         disabled={isSaving}
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50 mt-1"
                       />
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor="optimized-player" className="font-medium text-gray-700">
-                        Optimized Player
+                        Optimized YouTube Player
                         <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                           Current
                         </span>
                       </label>
-                      <p className="text-gray-500">
-                        Enhanced YouTube player with lazy loading, performance monitoring, and error handling.
+                      <p className="text-gray-500 mt-1">
+                        Best balance of features and performance. Recommended for most use cases with lazy loading and custom controls.
                       </p>
                     </div>
                   </div>
 
                   {/* IFrame API Player Option */}
-                  <div className="flex items-start">
+                  <div className="flex items-start p-3 rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="flex items-center h-5">
                       <input
                         id="iframe-api-player"
@@ -241,7 +241,7 @@ const AdminPage: React.FC = () => {
                         checked={playerType === 'iframe-api'}
                         onChange={() => handlePlayerTypeChange('iframe-api')}
                         disabled={isSaving}
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50 mt-1"
                       />
                     </div>
                     <div className="ml-3 text-sm">
@@ -251,8 +251,77 @@ const AdminPage: React.FC = () => {
                           New
                         </span>
                       </label>
-                      <p className="text-gray-500">
-                        Pure YouTube IFrame API implementation with full API access and advanced controls.
+                      <p className="text-gray-500 mt-1">
+                        Full YouTube API integration with advanced features like playback quality control and detailed event handling.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Advanced Player Option */}
+                  <div className="flex items-start p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="advanced-player"
+                        name="player-type"
+                        type="radio"
+                        checked={playerType === 'advanced'}
+                        onChange={() => handlePlayerTypeChange('advanced')}
+                        disabled={isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50 mt-1"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="advanced-player" className="font-medium text-gray-700">
+                        Advanced Video Player
+                      </label>
+                      <p className="text-gray-500 mt-1">
+                        Feature-rich player with advanced controls, subtitles, and custom video file support. Best for professional applications.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Simple YouTube Player Option */}
+                  <div className="flex items-start p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="youtube-player"
+                        name="player-type"
+                        type="radio"
+                        checked={playerType === 'youtube-player'}
+                        onChange={() => handlePlayerTypeChange('youtube-player')}
+                        disabled={isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50 mt-1"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="youtube-player" className="font-medium text-gray-700">
+                        Simple YouTube Player
+                      </label>
+                      <p className="text-gray-500 mt-1">
+                        Lightweight YouTube integration with basic controls. Perfect for simple video display needs.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Optimized Video Player Option */}
+                  <div className="flex items-start p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="optimized-video-player"
+                        name="player-type"
+                        type="radio"
+                        checked={playerType === 'optimized-video'}
+                        onChange={() => handlePlayerTypeChange('optimized-video')}
+                        disabled={isSaving}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50 mt-1"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="optimized-video-player" className="font-medium text-gray-700">
+                        Optimized Video Player
+                      </label>
+                      <p className="text-gray-500 mt-1">
+                        High-performance player optimized for speed and minimal resource usage. Best for performance-critical applications.
                       </p>
                     </div>
                   </div>

@@ -1,7 +1,7 @@
 // Settings service for managing application preferences
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
-export type YouTubePlayerType = 'optimized' | 'iframe-api';
+export type YouTubePlayerType = 'optimized' | 'iframe-api' | 'advanced' | 'youtube-player' | 'optimized-video';
 
 export interface AppSettings {
   youtubeSearchProvider: YouTubeSearchProvider;
