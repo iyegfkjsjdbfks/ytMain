@@ -66,30 +66,20 @@ export default defineConfig({
   // Development server configuration
   server: {
     port: 3000,
-    host: true,
-    open: true,
-    cors: true,
-    // Proxy API requests in development
+    host: true, // Listen on all addresses
+    open: true, // Open browser on server start
+    cors: true, // Enable CORS
+    // Add headers for YouTube iframe compatibility
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+      'Cross-Origin-Opener-Policy': 'unsafe-none',
+    },
+    // Proxy configuration for API calls
     proxy: {
-      '/api/placeholder': {
-        target: 'https://picsum.photos',
-        changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path.replace(/^\/api\/placeholder/, ''),
-      },
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
-        configure: (proxy, options) => {
-          proxy.on('error', (err, req, res) => {
-            // Fallback for API errors
-            if (res && !res.headersSent) {
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ error: 'API service unavailable', fallback: true }));
-            }
-          });
-        },
       },
     },
   },
