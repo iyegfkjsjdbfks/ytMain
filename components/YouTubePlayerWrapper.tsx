@@ -62,20 +62,20 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
         <IFrameAPIYouTubePlayer
           ref={ref as Ref<IFrameAPIYouTubePlayerMethods>}
           videoId={props.videoId}
-          width={props.width ?? undefined}
-          height={props.height ?? undefined}
-          autoplay={props.autoplay}
-          muted={props.muted}
-          controls={props.controls}
-          loop={props.loop}
-          start={props.start}
-          end={props.end}
-          className={props.className}
-          onReady={props.onReady}
-          onStateChange={props.onStateChange}
-          onError={props.onError}
-          onPlaybackQualityChange={props.onPlaybackQualityChange}
-          onPlaybackRateChange={props.onPlaybackRateChange}
+          {...(props.width !== undefined && { width: props.width })}
+          {...(props.height !== undefined && { height: props.height })}
+          {...(props.autoplay !== undefined && { autoplay: props.autoplay })}
+          {...(props.muted !== undefined && { muted: props.muted })}
+          {...(props.controls !== undefined && { controls: props.controls })}
+          {...(props.loop !== undefined && { loop: props.loop })}
+          {...(props.start !== undefined && { start: props.start })}
+          {...(props.end !== undefined && { end: props.end })}
+          {...(props.className !== undefined && { className: props.className })}
+          {...(props.onReady !== undefined && { onReady: props.onReady })}
+          {...(props.onStateChange !== undefined && { onStateChange: props.onStateChange })}
+          {...(props.onError !== undefined && { onError: props.onError })}
+          {...(props.onPlaybackQualityChange !== undefined && { onPlaybackQualityChange: props.onPlaybackQualityChange })}
+          {...(props.onPlaybackRateChange !== undefined && { onPlaybackRateChange: props.onPlaybackRateChange })}
         />
       );
 
@@ -84,11 +84,11 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       return (
         <AdvancedVideoPlayer
           src={getYouTubeUrl(props.videoId)}
-          autoPlay={props.autoplay}
-          muted={props.muted}
-          loop={props.loop}
-          className={props.className}
-          onPlay={props.onReady ? () => props.onReady?.({}) : undefined}
+          {...(props.autoplay !== undefined && { autoPlay: props.autoplay })}
+          {...(props.muted !== undefined && { muted: props.muted })}
+          {...(props.loop !== undefined && { loop: props.loop })}
+          {...(props.className !== undefined && { className: props.className })}
+          {...(props.onReady && { onPlay: () => props.onReady?.({}) })}
           onPause={() => {}}
           onEnded={() => {}}
         />
@@ -99,11 +99,11 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       return (
         <YouTubePlayer
           video={createMockVideo(props.videoId)}
-          width={props.width ?? undefined}
-          height={props.height ?? undefined}
-          autoplay={props.autoplay}
-          controls={props.controls}
-          className={props.className}
+          {...(props.width !== undefined && { width: props.width })}
+          {...(props.height !== undefined && { height: props.height })}
+          {...(props.autoplay !== undefined && { autoplay: props.autoplay })}
+          {...(props.controls !== undefined && { controls: props.controls })}
+          {...(props.className !== undefined && { className: props.className })}
         />
       );
 
@@ -112,16 +112,16 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       return (
         <OptimizedVideoPlayer
           videoId={props.videoId}
-          autoplay={props.autoplay}
-          muted={props.muted}
-          controls={props.controls}
-          width={props.width}
-          height={props.height}
-          className={props.className}
-          onPlay={props.onReady ? () => props.onReady?.({}) : undefined}
-          onError={props.onError}
-          lazy={props.lazy}
-          preload={props.preload}
+          {...(props.autoplay !== undefined && { autoplay: props.autoplay })}
+          {...(props.muted !== undefined && { muted: props.muted })}
+          {...(props.controls !== undefined && { controls: props.controls })}
+          {...(props.width !== undefined && { width: props.width })}
+          {...(props.height !== undefined && { height: props.height })}
+          {...(props.className !== undefined && { className: props.className })}
+          {...(props.onReady && { onPlay: () => props.onReady?.({}) })}
+          {...(props.onError !== undefined && { onError: props.onError })}
+          {...(props.lazy !== undefined && { lazy: props.lazy })}
+          {...(props.preload !== undefined && { preload: props.preload })}
         />
       );
 
@@ -131,22 +131,22 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
       return (
         <OptimizedYouTubePlayer
           videoId={props.videoId}
-          width={props.width ?? undefined}
-          height={props.height ?? undefined}
-          autoplay={props.autoplay}
-          muted={props.muted}
-          controls={props.controls}
-          loop={props.loop}
-          start={props.start}
-          end={props.end}
-          quality={props.quality}
-          className={props.className}
-          onReady={props.onReady}
-          onStateChange={props.onStateChange}
-          onError={props.onError}
-          lazy={props.lazy}
-          preload={props.preload}
-          placeholder={props.placeholder}
+          {...(props.width !== undefined && { width: props.width })}
+          {...(props.height !== undefined && { height: props.height })}
+          {...(props.autoplay !== undefined && { autoplay: props.autoplay })}
+          {...(props.muted !== undefined && { muted: props.muted })}
+          {...(props.controls !== undefined && { controls: props.controls })}
+          {...(props.loop !== undefined && { loop: props.loop })}
+          {...(props.start !== undefined && { start: props.start })}
+          {...(props.end !== undefined && { end: props.end })}
+          {...(props.quality !== undefined && { quality: props.quality })}
+          {...(props.className !== undefined && { className: props.className })}
+          {...(props.onReady !== undefined && { onReady: props.onReady })}
+          {...(props.onStateChange !== undefined && { onStateChange: props.onStateChange })}
+          {...(props.onError !== undefined && { onError: props.onError })}
+          {...(props.lazy !== undefined && { lazy: props.lazy })}
+          {...(props.preload !== undefined && { preload: props.preload })}
+          {...(props.placeholder !== undefined && { placeholder: props.placeholder })}
         />
       );
   }
