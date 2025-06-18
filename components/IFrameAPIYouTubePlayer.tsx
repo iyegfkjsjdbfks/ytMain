@@ -141,7 +141,7 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
   const [error, setError] = useState<string | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
   const playerInstanceRef = useRef<any>(null);
-  const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
+  const playerIdRef = useRef(`youtube-player-${videoId}-${Date.now()}`);
 
   // Load YouTube API on mount
   useEffect(() => {
@@ -155,8 +155,13 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
 
   // Initialize player when API is ready
   useEffect(() => {
-    if (!isAPIReady || !playerRef.current || !videoId) return;
+    if (!isAPIReady || !playerRef.current || !videoId) {
+      console.log('Player initialization skipped:', { isAPIReady, hasPlayerRef: !!playerRef.current, videoId });
+      return;
+    }
 
+    console.log('Initializing YouTube player...', { videoId, playerId: playerIdRef.current });
+    
     try {
       // Build player variables
       const playerVars: any = {
@@ -183,6 +188,7 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
       if (end !== undefined) playerVars.end = end;
 
       // Create the player
+      console.log('Creating YouTube player with ID:', playerIdRef.current);
       playerInstanceRef.current = new (window as any).YT.Player(playerIdRef.current, {
         height: typeof height === 'number' ? height.toString() : height,
         width: typeof width === 'number' ? width.toString() : width,
@@ -227,7 +233,7 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
       });
     } catch (err) {
       console.error('Error creating YouTube player:', err);
-      setError('Failed to create YouTube player');
+      setError(`Failed to create YouTube player: ${err instanceof Error ? err.message : 'Unknown error'}`);
     }
 
     // Cleanup function
