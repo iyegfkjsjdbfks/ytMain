@@ -364,13 +364,15 @@ const AdminPage: React.FC = () => {
                 </div>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {getVideoPlayersByCategory('youtube').map((config) => 
-                    renderPlayerCard(
-                      config,
-                      playerType === config.type,
-                      () => handlePlayerTypeChange(config.type as YouTubePlayerType)
-                    )
-                  )}
+                  {getVideoPlayersByCategory('youtube').map((config) => (
+                    <div key={config.type}>
+                      {renderPlayerCard(
+                        config,
+                        playerType === config.type,
+                        () => handlePlayerTypeChange(config.type as YouTubePlayerType)
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -389,13 +391,15 @@ const AdminPage: React.FC = () => {
                 </div>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {getVideoPlayersByCategory('local').map((config) => 
-                    renderPlayerCard(
-                      config,
-                      localPlayerType === config.type,
-                      () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType)
-                    )
-                  )}
+                  {getVideoPlayersByCategory('local').map((config) => (
+                    <div key={config.type}>
+                      {renderPlayerCard(
+                        config,
+                        localPlayerType === config.type,
+                        () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType)
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
