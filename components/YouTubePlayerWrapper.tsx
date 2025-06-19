@@ -39,6 +39,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
   ref
 ) => {
   const playerType = getYouTubePlayerType();
+  console.log('YouTubePlayerWrapper rendering with playerType:', playerType);
 
   // Convert videoId to YouTube URL for non-YouTube specific players
   const getYouTubeUrl = (videoId: string) => `https://www.youtube.com/watch?v=${videoId}`;

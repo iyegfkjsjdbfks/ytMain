@@ -155,14 +155,18 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
 
   // Initialize player when API is ready
   useEffect(() => {
+    console.log('IFrameAPIYouTubePlayer useEffect running:', { isAPIReady, hasPlayerRef: !!playerRef.current, videoId });
     if (!isAPIReady || !playerRef.current || !videoId) {
       console.log('Player initialization skipped:', { isAPIReady, hasPlayerRef: !!playerRef.current, videoId });
       return;
     }
 
-    // Generate a fresh player ID for this render
-    const playerId = `youtube-player-${videoId}-${Date.now()}`;
-    playerIdRef.current = playerId;
+    // Use existing div ID if available, otherwise generate a new one
+    let playerId = playerIdRef.current;
+    if (!playerId || !document.getElementById(playerId)) {
+      playerId = `youtube-player-${videoId}-${Date.now()}`;
+      playerIdRef.current = playerId;
+    }
 
     console.log('Initializing YouTube player...', { videoId, playerId });
     
