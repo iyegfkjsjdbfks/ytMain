@@ -5,7 +5,7 @@ import {
   YouTubeSearchProvider,
   YouTubePlayerType,
   LocalVideoPlayerType,
-  VideoPlayerType,
+
   VideoPlayerConfig,
   VIDEO_PLAYER_CONFIGS,
   getVideoPlayersByCategory,
@@ -16,7 +16,7 @@ import {
   isYouTubeApiAvailable,
   isHybridModeAvailable
 } from '../services/settingsService';
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');

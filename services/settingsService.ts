@@ -23,7 +23,6 @@ export interface AppSettings {
   defaultVideoPlayerCategory: 'youtube' | 'local';
 }
 
-const SETTINGS_KEY = 'yt-studio-settings';
 
 const defaultSettings: AppSettings = {
   youtubeSearchProvider: 'hybrid',

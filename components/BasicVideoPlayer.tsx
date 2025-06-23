@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Video } from '../src/types/core';
 
 interface BasicVideoPlayerProps {
   src: string;
@@ -43,7 +42,7 @@ const BasicVideoPlayer: React.FC<BasicVideoPlayerProps> = ({
 
     const handleLoadStart = () => setIsLoading(true);
     const handleCanPlay = () => setIsLoading(false);
-    const handleError = (e: Event) => {
+    const handleError = () => {
       setHasError(true);
       setIsLoading(false);
       onError?.('Failed to load video');
