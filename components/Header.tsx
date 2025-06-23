@@ -1,16 +1,17 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import YouTubeLogo from './icons/YouTubeLogo';
-import MenuIcon from './icons/MenuIcon';
-// UserIcon not used if avatar image is present
-import SearchBar from './SearchBar';
-import VideoPlusIcon from './icons/VideoPlusIcon';
-import UserMenu from './UserMenu';
-import NotificationSystem from './NotificationSystem';
+import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
+
 import { useAuth } from '../contexts/AuthContext';
 import Button from './forms/Button';
-import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
+import MenuIcon from './icons/MenuIcon';
+import VideoPlusIcon from './icons/VideoPlusIcon';
+import YouTubeLogo from './icons/YouTubeLogo';
+import NotificationSystem from './NotificationSystem';
+import SearchBar from './SearchBar';
+import UserMenu from './UserMenu';
+// UserIcon not used if avatar image is present
 
 
 interface HeaderProps {

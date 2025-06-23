@@ -1,15 +1,16 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import HomeIcon from './icons/HomeIcon';
+import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
+
+import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';
+import HistoryIcon from './icons/HistoryIcon';
+import HomeIcon from './icons/HomeIcon';
+import PlaylistIcon from './icons/PlaylistIcon';
+import PlaylistPlayIcon from './icons/PlaylistPlayIcon';
 import ShortsIcon from './icons/ShortsIcon';
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
-import HistoryIcon from './icons/HistoryIcon';
-import ClockIcon from './icons/ClockIcon';
-import PlaylistPlayIcon from './icons/PlaylistPlayIcon';
-import PlaylistIcon from './icons/PlaylistIcon'; 
-import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
 
 
 interface SidebarProps {

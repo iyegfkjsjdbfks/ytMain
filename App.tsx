@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
 import { routes } from './config/routes';
+import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
 
 // Create router with our route configuration and future flags
 const router = createBrowserRouter(routes, {
