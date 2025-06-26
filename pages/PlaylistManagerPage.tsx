@@ -1,7 +1,10 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+import type { DropResult } from 'react-beautiful-dnd';
 
 interface PlaylistVideo {
   id: string;
@@ -47,23 +50,23 @@ const PlaylistManagerPage: React.FC = () => {
   const [newPlaylist, setNewPlaylist] = useState({
     title: '',
     description: '',
-    visibility: 'public' as 'public' | 'unlisted' | 'private'
+    visibility: 'public' as 'public' | 'unlisted' | 'private',
   });
 
   // Generate mock data
   useEffect(() => {
     const generateMockVideos = (count: number): PlaylistVideo[] => {
       const titles = [
-        "Getting Started with React Hooks",
-        "Advanced TypeScript Patterns",
-        "Building Responsive Layouts",
-        "State Management Best Practices",
-        "Performance Optimization Tips",
-        "Testing React Components",
-        "CSS Grid vs Flexbox",
-        "Modern JavaScript Features",
-        "API Integration Strategies",
-        "Deployment and DevOps"
+        'Getting Started with React Hooks',
+        'Advanced TypeScript Patterns',
+        'Building Responsive Layouts',
+        'State Management Best Practices',
+        'Performance Optimization Tips',
+        'Testing React Components',
+        'CSS Grid vs Flexbox',
+        'Modern JavaScript Features',
+        'API Integration Strategies',
+        'Deployment and DevOps',
       ];
 
       return Array.from({ length: count }, (_, i) => ({
@@ -72,31 +75,31 @@ const PlaylistManagerPage: React.FC = () => {
         thumbnail: `https://picsum.photos/320/180?random=${i}`,
         duration: `${Math.floor(Math.random() * 20) + 5}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
         views: Math.floor(Math.random() * 100000) + 1000,
-        uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000)
+        uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
       }));
     };
 
     const generateMockPlaylists = (): Playlist[] => {
       const playlistTitles = [
-        "React Tutorial Series",
-        "JavaScript Fundamentals",
-        "Web Development Tips",
-        "CSS Masterclass",
-        "Node.js Backend",
-        "Database Design",
-        "Mobile Development",
-        "DevOps and Deployment",
-        "UI/UX Design Principles",
-        "Programming Challenges"
+        'React Tutorial Series',
+        'JavaScript Fundamentals',
+        'Web Development Tips',
+        'CSS Masterclass',
+        'Node.js Backend',
+        'Database Design',
+        'Mobile Development',
+        'DevOps and Deployment',
+        'UI/UX Design Principles',
+        'Programming Challenges',
       ];
 
-      const visibilityOptions: ('public' | 'unlisted' | 'private')[] = ['public', 'unlisted', 'private'];
+      const visibilityOptions: Array<'public' | 'unlisted' | 'private'> = ['public', 'unlisted', 'private'];
 
       return Array.from({ length: 8 }, (_, i) => {
         const videoCount = Math.floor(Math.random() * 15) + 3;
         const videos = generateMockVideos(videoCount);
         const totalViews = videos.reduce((sum, video) => sum + video.views, 0);
-        
+
         const title = playlistTitles[i] || `Playlist ${i + 1}`;
         return {
           id: `playlist-${i + 1}`,
@@ -108,7 +111,7 @@ const PlaylistManagerPage: React.FC = () => {
           visibility: visibilityOptions[Math.floor(Math.random() * visibilityOptions.length)] || 'public',
           createdDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
           lastUpdated: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-          videos
+          videos,
         };
       }).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
     };
@@ -120,7 +123,7 @@ const PlaylistManagerPage: React.FC = () => {
         totalViews: playlists.reduce((sum, playlist) => sum + playlist.totalViews, 0),
         publicPlaylists: playlists.filter(p => p.visibility === 'public').length,
         privatePlaylists: playlists.filter(p => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter(p => p.visibility === 'unlisted').length
+        unlistedPlaylists: playlists.filter(p => p.visibility === 'unlisted').length,
       };
     };
 
@@ -155,7 +158,9 @@ const PlaylistManagerPage: React.FC = () => {
     });
 
   const handleCreatePlaylist = () => {
-    if (!newPlaylist.title.trim()) return;
+    if (!newPlaylist.title.trim()) {
+return;
+}
 
     const playlist: Playlist = {
       id: `playlist-${Date.now()}`,
@@ -167,7 +172,7 @@ const PlaylistManagerPage: React.FC = () => {
       visibility: newPlaylist.visibility,
       createdDate: new Date(),
       lastUpdated: new Date(),
-      videos: []
+      videos: [],
     };
 
     setPlaylists([playlist, ...playlists]);
@@ -185,7 +190,9 @@ const PlaylistManagerPage: React.FC = () => {
   };
 
   const handleDragEnd = (result: DropResult) => {
-    if (!result.destination || !selectedPlaylist) return;
+    if (!result.destination || !selectedPlaylist) {
+return;
+}
 
     const items = Array.from(selectedPlaylist.videos);
     const [reorderedItem] = items.splice(result.source.index, 1);
@@ -215,7 +222,7 @@ const PlaylistManagerPage: React.FC = () => {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -224,13 +231,13 @@ const PlaylistManagerPage: React.FC = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6">
-                  <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                  <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
                 </div>
               ))}
             </div>
@@ -291,7 +298,7 @@ const PlaylistManagerPage: React.FC = () => {
                 <PlusIcon className="w-5 h-5" />
                 <span>Create Playlist</span>
               </button>
-              
+
               <input
                 type="text"
                 placeholder="Search playlists..."
@@ -299,7 +306,7 @@ const PlaylistManagerPage: React.FC = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
-              
+
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
@@ -310,7 +317,7 @@ const PlaylistManagerPage: React.FC = () => {
                 <option value="title">Title</option>
                 <option value="views">Views</option>
               </select>
-              
+
               <select
                 value={filterVisibility}
                 onChange={(e) => setFilterVisibility(e.target.value as any)}
@@ -360,7 +367,8 @@ const PlaylistManagerPage: React.FC = () => {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              setSelectedPlaylist(playlist);                              }}
+                              setSelectedPlaylist(playlist);
+}}
                             className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
                           >
                             <PencilIcon className="w-4 h-4" />
@@ -388,13 +396,13 @@ const PlaylistManagerPage: React.FC = () => {
             {selectedPlaylist ? (
               <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{selectedPlaylist.title}</h3>
-                
+
                 <div className="space-y-4 mb-6">
                   <div>
                     <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Description:</span>
                     <p className="text-sm text-gray-900 dark:text-white mt-1">{selectedPlaylist.description}</p>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-gray-500 dark:text-gray-400">Videos:</span>
@@ -474,7 +482,7 @@ const PlaylistManagerPage: React.FC = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Create New Playlist</h3>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
@@ -486,7 +494,7 @@ const PlaylistManagerPage: React.FC = () => {
                     placeholder="Enter playlist title"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
                   <textarea
@@ -497,7 +505,7 @@ const PlaylistManagerPage: React.FC = () => {
                     placeholder="Enter playlist description"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Visibility</label>
                   <select
@@ -511,7 +519,7 @@ const PlaylistManagerPage: React.FC = () => {
                   </select>
                 </div>
               </div>
-              
+
               <div className="flex justify-end space-x-3 mt-6">
                 <button
                   onClick={() => setShowCreateModal(false)}

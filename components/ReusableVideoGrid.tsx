@@ -1,8 +1,11 @@
-import React from 'react';
-import { Video } from '../types';
-import VideoCard from './VideoCard';
-import OptimizedVideoCard from './OptimizedVideoCard';
+import type React from 'react';
+
 import { VideoGridSkeleton } from './LoadingStates';
+import OptimizedVideoCard from './OptimizedVideoCard';
+import VideoCard from './VideoCard';
+
+import type { Video } from '../types';
+
 
 interface ReusableVideoGridProps {
   videos: Video[];
@@ -30,7 +33,7 @@ interface ReusableVideoGridProps {
  * - Empty states
  * - Optimized vs standard video cards
  * - Customizable display options
- * 
+ *
  * Eliminates code duplication across pages that display video grids
  */
 const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
@@ -46,7 +49,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   className = '',
   emptyMessage = 'No videos found',
   emptyIcon,
-  skeletonCount = 18
+  skeletonCount = 18,
 }) => {
   // Grid column classes
   const getGridColumns = () => {

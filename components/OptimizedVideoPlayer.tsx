@@ -1,7 +1,9 @@
-import { useCallback, useMemo, useRef, useState, useEffect, SyntheticEvent } from 'react';
+import type { SyntheticEvent } from 'react';
+import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
+
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
+import { performanceMonitor } from '../utils/performance';
 
 interface OptimizedVideoPlayerProps {
   videoId: string;
@@ -48,7 +50,7 @@ const OptimizedVideoPlayer = ({
   onEnded,
   onError,
   lazy = true,
-  preload = 'metadata'
+  preload = 'metadata',
 }: OptimizedVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,14 +63,14 @@ const OptimizedVideoPlayer = ({
     currentTime: 0,
     duration: 0,
     volume: 1,
-    isMuted: muted
+    isMuted: muted,
   });
 
   // Intersection observer for lazy loading
   const { isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '50px',
-    freezeOnceVisible: false
+    freezeOnceVisible: false,
   });
 
   // Determine if video should be loaded
@@ -78,9 +80,11 @@ const OptimizedVideoPlayer = ({
 
   // Video source URL (mock implementation)
   const videoSrc = useMemo(() => {
-    if (!shouldLoad) return '';
+    if (!shouldLoad) {
+return '';
+}
     // In a real app, this would be the actual video URL
-    return `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`;
+    return 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
   }, [shouldLoad, videoId]);
 
   // Memoized event handlers
@@ -91,18 +95,18 @@ const OptimizedVideoPlayer = ({
 
   const handleLoadedData = useCallback(() => {
     const metricName = `video-load-${videoId}`;
-    const duration = performanceMonitor.hasMetric(metricName) 
-      ? performanceMonitor.endMeasure(metricName) 
+    const duration = performanceMonitor.hasMetric(metricName)
+      ? performanceMonitor.endMeasure(metricName)
       : null;
     if (duration && duration > 3000) {
       console.warn(`Slow video load detected: ${duration}ms for video ${videoId}`);
     }
-    
+
     setVideoState(prev => ({
       ...prev,
       isLoaded: true,
       isBuffering: false,
-      duration: videoRef.current?.duration || 0
+      duration: videoRef.current?.duration || 0,
     }));
   }, [videoId]);
 
@@ -122,16 +126,16 @@ const OptimizedVideoPlayer = ({
   }, [onEnded]);
 
   const handleError = useCallback((event: SyntheticEvent<HTMLVideoElement, Event>) => {
-    const error = (event.target as HTMLVideoElement).error;
+    const { error } = (event.target as HTMLVideoElement);
     const errorMessage = error ? `Video error: ${error.code} - ${error.message}` : 'Unknown video error';
-    
+
     setVideoState(prev => ({
       ...prev,
       error: errorMessage,
       isBuffering: false,
-      isLoaded: false
+      isLoaded: false,
     }));
-    
+
     onError?.(error);
   }, [onError]);
 
@@ -139,7 +143,7 @@ const OptimizedVideoPlayer = ({
     if (videoRef.current) {
       setVideoState(prev => ({
         ...prev,
-        currentTime: videoRef.current?.currentTime || 0
+        currentTime: videoRef.current?.currentTime || 0,
       }));
     }
   }, []);
@@ -149,7 +153,7 @@ const OptimizedVideoPlayer = ({
       setVideoState(prev => ({
         ...prev,
         volume: videoRef.current?.volume || 0,
-        isMuted: videoRef.current?.muted || false
+        isMuted: videoRef.current?.muted || false,
       }));
     }
   }, []);
@@ -252,10 +256,10 @@ const OptimizedVideoPlayer = ({
             )}
             Your browser does not support the video tag.
           </video>
-          
+
           {videoState.isBuffering && (
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white" />
             </div>
           )}
         </>

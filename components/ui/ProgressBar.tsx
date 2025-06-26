@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 export interface ProgressBarProps {
   value: number; // 0-100

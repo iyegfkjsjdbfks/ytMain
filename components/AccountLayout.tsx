@@ -1,11 +1,12 @@
-import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-import { 
-  Cog8ToothIcon, 
-  ShieldCheckIcon, 
+import type React from 'react';
+
+import {
+  Cog8ToothIcon,
+  ShieldCheckIcon,
   DocumentTextIcon,
-  UserCircleIcon 
+  UserCircleIcon,
 } from '@heroicons/react/24/outline';
+import { Outlet, NavLink } from 'react-router-dom';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages
@@ -18,20 +19,20 @@ const AccountLayout: React.FC = () => {
       path: '/account/settings',
       label: 'General Settings',
       icon: Cog8ToothIcon,
-      description: 'Manage your account preferences'
+      description: 'Manage your account preferences',
     },
     {
       path: '/account/privacy',
       label: 'Privacy & Security',
       icon: ShieldCheckIcon,
-      description: 'Control your privacy settings'
+      description: 'Control your privacy settings',
     },
     {
       path: '/account/data',
       label: 'Your Data',
       icon: DocumentTextIcon,
-      description: 'Download and manage your data'
-    }
+      description: 'Download and manage your data',
+    },
   ];
 
   return (

@@ -1,11 +1,12 @@
-import { ComponentType, memo, useMemo, forwardRef, lazy, createElement, useEffect, EffectCallback, DependencyList, LazyExoticComponent } from 'react';
+import type { ComponentType, EffectCallback, DependencyList, LazyExoticComponent } from 'react';
+import { memo, useMemo, forwardRef, lazy, createElement, useEffect } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
  */
 export function withMemo<P extends object>(
   Component: ComponentType<P>,
-  areEqual?: (prevProps: P, nextProps: P) => boolean
+  areEqual?: (prevProps: P, nextProps: P) => boolean,
 ): ComponentType<P> {
   return memo(Component, areEqual) as unknown as ComponentType<P>;
 }
@@ -15,7 +16,7 @@ export function withMemo<P extends object>(
  */
 export function withLazyLoading<P extends object>(
   importFunc: () => Promise<{ default: ComponentType<P> }>,
-  _fallback?: ComponentType<any>
+  _fallback?: ComponentType<any>,
 ): LazyExoticComponent<ComponentType<P>> {
   return lazy(importFunc);
 }
@@ -44,40 +45,40 @@ export const memoComparisons = {
   shallow: <P extends object>(prevProps: P, nextProps: P): boolean => {
     const prevKeys = Object.keys(prevProps);
     const nextKeys = Object.keys(nextProps);
-    
+
     if (prevKeys.length !== nextKeys.length) {
       return false;
     }
-    
+
     for (const key of prevKeys) {
       if (prevProps[key as keyof P] !== nextProps[key as keyof P]) {
         return false;
       }
     }
-    
+
     return true;
   },
-  
+
   /**
    * Deep comparison for props (use sparingly)
    */
   deep: <P extends object>(prevProps: P, nextProps: P): boolean => {
     return JSON.stringify(prevProps) === JSON.stringify(nextProps);
   },
-  
+
   /**
    * Comparison that ignores specific props
    */
-  ignoring: <P extends object>(ignoredProps: (keyof P)[]) => 
+  ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (prevProps: P, nextProps: P): boolean => {
       const filteredPrev = { ...prevProps };
       const filteredNext = { ...nextProps };
-      
+
       ignoredProps.forEach(prop => {
         delete filteredPrev[prop];
         delete filteredNext[prop];
       });
-      
+
       return memoComparisons.shallow(filteredPrev, filteredNext);
     },
 };
@@ -90,11 +91,15 @@ export const listOptimizations = {
    * Generate stable keys for list items
    */
   generateKey: (item: any, index: number, prefix = 'item'): string => {
-    if (item.id) return `${prefix}-${item.id}`;
-    if (item.key) return `${prefix}-${item.key}`;
+    if (item.id) {
+return `${prefix}-${item.id}`;
+}
+    if (item.key) {
+return `${prefix}-${item.key}`;
+}
     return `${prefix}-${index}`;
   },
-  
+
   /**
    * Chunk large arrays for better performance
    */
@@ -119,18 +124,18 @@ export const componentPerformance = {
       useEffect(() => {
         // Performance monitoring disabled
         // const startTime = performance.now();
-        
+
         return () => {
           // const endTime = performance.now();
           // const componentName = name || Component.displayName || Component.name || 'Component';
           // console.log(`${componentName} render time: ${endTime - startTime}ms`);
           };
       });
-      
+
       return createElement(Component, { ...props, ref } as any);
     });
   },
-  
+
   /**
    * Hook to measure effect execution time
    */
@@ -141,7 +146,7 @@ export const componentPerformance = {
       const cleanup = effect();
       // const endTime = performance.now();
       // console.log(`${_effectName} execution time: ${endTime - startTime}ms`);
-      
+
       return cleanup;
     }, deps);
   },
@@ -162,7 +167,7 @@ export const bundleOptimizations = {
       return null;
     }
   },
-  
+
   /**
    * Preload component for better UX
    */

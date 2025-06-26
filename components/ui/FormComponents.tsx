@@ -1,4 +1,7 @@
-import React, { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import type React from 'react';
+import { forwardRef } from 'react';
+
 import { cn } from '../../utils/cn';
 
 // Base form field props
@@ -88,7 +91,9 @@ const FieldError: React.FC<{
   error?: string;
   className?: string;
 }> = ({ error, className }) => {
-  if (!error) return null;
+  if (!error) {
+return null;
+}
 
   return (
     <p className={cn('mt-1 text-sm text-red-600', className)}>
@@ -102,7 +107,9 @@ const FieldHint: React.FC<{
   hint?: string;
   className?: string;
 }> = ({ hint, className }) => {
-  if (!hint) return null;
+  if (!hint) {
+return null;
+}
 
   return (
     <p className={cn('mt-1 text-sm text-gray-500', className)}>
@@ -130,11 +137,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
     id,
     ...props
   },
-  ref
+  ref,
 ) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
-  
+
   const inputClasses = cn(
     baseInputStyles,
     sizeStyles[size],
@@ -142,7 +149,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
     leftIcon && 'pl-10',
     rightIcon && 'pr-10',
-    className
+    className,
   );
 
   return (
@@ -207,25 +214,25 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
     id,
     ...props
   },
-  ref
+  ref,
 ) => {
   const textareaId = id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
-  
+
   const resizeClasses = {
     none: 'resize-none',
     vertical: 'resize-y',
     horizontal: 'resize-x',
     both: 'resize',
   };
-  
+
   const textareaClasses = cn(
     baseInputStyles,
     sizeStyles[size],
     variantStyles[variant],
     resizeClasses[resize],
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
-    className
+    className,
   );
 
   return (
@@ -273,18 +280,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
     id,
     ...props
   },
-  ref
+  ref,
 ) => {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
-  
+
   const selectClasses = cn(
     baseInputStyles,
     sizeStyles[size],
     variantStyles[variant],
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
     'pr-10 appearance-none bg-no-repeat bg-right',
-    className
+    className,
   );
 
   return (
@@ -352,22 +359,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
     id,
     ...props
   },
-  ref
+  ref,
 ) => {
   const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
-  
+
   const sizeClasses = {
     sm: 'h-3 w-3',
     md: 'h-4 w-4',
     lg: 'h-5 w-5',
   };
-  
+
   const checkboxClasses = cn(
     'rounded border-gray-300 text-red-600 focus:ring-red-500',
     sizeClasses[size],
     hasError && 'border-red-500',
-    className
+    className,
   );
 
   return (
@@ -380,7 +387,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
           className={checkboxClasses}
           {...props}
         />
-        
+
         {label && (
           <div className="ml-2 flex-1">
             <FieldLabel
@@ -420,17 +427,17 @@ export const RadioGroup: React.FC<RadioProps> = ({
   ...props
 }) => {
   const hasError = !!error;
-  
+
   const sizeClasses = {
     sm: 'h-3 w-3',
     md: 'h-4 w-4',
     lg: 'h-5 w-5',
   };
-  
+
   const radioClasses = cn(
     'border-gray-300 text-red-600 focus:ring-red-500',
     sizeClasses[size],
-    hasError && 'border-red-500'
+    hasError && 'border-red-500',
   );
 
   return (
@@ -465,7 +472,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
                 htmlFor={radioId}
                 className={cn(
                   'ml-2 text-sm text-gray-700',
-                  option.disabled && 'opacity-50 cursor-not-allowed'
+                  option.disabled && 'opacity-50 cursor-not-allowed',
                 )}
               >
                 {option.label}
@@ -502,7 +509,7 @@ export const FormActions: React.FC<{
     center: 'justify-center',
     right: 'justify-end',
   };
-  
+
   return (
     <div className={cn('flex gap-3 pt-4', alignClasses[align], className)}>
       {children}

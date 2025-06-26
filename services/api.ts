@@ -1,4 +1,4 @@
-import { Video, Channel, UserPlaylist } from '../types';
+import type { Video, Channel, UserPlaylist } from '../types';
 
 // API Configuration
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://api.youtube.com/v3';
@@ -25,7 +25,9 @@ class APICache {
 
   get(key: string): any | null {
     const item = this.cache.get(key);
-    if (!item) return null;
+    if (!item) {
+return null;
+}
 
     const isExpired = Date.now() - item.timestamp > item.duration;
     if (isExpired) {
@@ -66,7 +68,7 @@ class RequestQueue {
           const result = await request();
           resolve(result);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       });
       this.process();
@@ -74,7 +76,9 @@ class RequestQueue {
   }
 
   private async process(): Promise<void> {
-    if (this.processing || this.queue.length === 0) return;
+    if (this.processing || this.queue.length === 0) {
+return;
+}
 
     this.processing = true;
 
@@ -113,12 +117,14 @@ class HTTPClient {
     url: string,
     options: RequestInit = {},
     cacheKey?: string,
-    cacheDuration?: number
+    cacheDuration?: number,
   ): Promise<T> {
     // Check cache first
     if (cacheKey) {
       const cached = apiCache.get(cacheKey);
-      if (cached) return cached;
+      if (cached) {
+return cached;
+}
     }
 
     const response = await fetch(url, {
@@ -146,10 +152,10 @@ class HTTPClient {
   async get<T>(
     url: string,
     cacheKey?: string,
-    cacheDuration?: number
+    cacheDuration?: number,
   ): Promise<T> {
     return requestQueue.add(() =>
-      this.request<T>(url, { method: 'GET' }, cacheKey, cacheDuration)
+      this.request<T>(url, { method: 'GET' }, cacheKey, cacheDuration),
     );
   }
 
@@ -158,7 +164,7 @@ class HTTPClient {
       this.request<T>(url, {
         method: 'POST',
         body: JSON.stringify(data),
-      })
+      }),
     );
   }
 
@@ -167,13 +173,13 @@ class HTTPClient {
       this.request<T>(url, {
         method: 'PUT',
         body: JSON.stringify(data),
-      })
+      }),
     );
   }
 
   async delete<T>(url: string): Promise<T> {
     return requestQueue.add(() =>
-      this.request<T>(url, { method: 'DELETE' })
+      this.request<T>(url, { method: 'DELETE' }),
     );
   }
 }
@@ -227,21 +233,21 @@ export class VideoService {
   static async getVideos(
     category: string = 'home',
     limit: number = 20,
-    pageToken?: string
+    pageToken?: string,
   ): Promise<{ videos: Video[]; nextPageToken?: string }> {
     const cacheKey = `videos_${category}_${limit}_${pageToken || 'first'}`;
-    
+
     try {
       // In development, return mock data
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
-        
-        const videos = Array.from({ length: limit }, (_, i) => 
+
+        const videos = Array.from({ length: limit }, (_, i) =>
           generateMockVideo(`${category}_${i}_${Date.now()}`, {
             category: category === 'home' ? 'Entertainment' : category,
-          })
+          }),
         );
-        
+
         const nextPageToken = Math.random() > 0.3 ? `token_${Date.now()}` : undefined;
         return {
           videos,
@@ -255,11 +261,11 @@ export class VideoService {
       url.searchParams.set('maxResults', limit.toString());
       url.searchParams.set('key', API_KEY || '');
       url.searchParams.set('type', 'video');
-      
+
       if (pageToken) {
         url.searchParams.set('pageToken', pageToken);
       }
-      
+
       if (category !== 'home') {
         url.searchParams.set('q', category);
       }
@@ -267,7 +273,7 @@ export class VideoService {
       const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
-        CACHE_DURATION.MEDIUM
+        CACHE_DURATION.MEDIUM,
       );
 
       const videos: Video[] = response.items?.map((item: any) => ({
@@ -285,7 +291,7 @@ export class VideoService {
         commentCount: 0,
         publishedAt: item.snippet.publishedAt,
         tags: item.snippet.tags || [],
-        category: category,
+        category,
         license: 'youtube',
         visibility: 'public' as const,
         isLive: false,
@@ -307,7 +313,7 @@ export class VideoService {
 
   static async getVideoById(id: string): Promise<Video | null> {
     const cacheKey = `video_${id}`;
-    
+
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 200));
@@ -322,11 +328,13 @@ export class VideoService {
       const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
-        CACHE_DURATION.LONG
+        CACHE_DURATION.LONG,
       );
 
       const item = response.items?.[0];
-      if (!item) return null;
+      if (!item) {
+return null;
+}
 
       return {
         id: item.id.videoId,
@@ -361,21 +369,21 @@ export class VideoService {
   static async searchVideos(
     query: string,
     limit: number = 20,
-    pageToken?: string
+    pageToken?: string,
   ): Promise<{ videos: Video[]; nextPageToken?: string }> {
     const cacheKey = `search_${query}_${limit}_${pageToken || 'first'}`;
-    
+
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
-        
-        const videos = Array.from({ length: Math.min(limit, 15) }, (_, i) => 
+
+        const videos = Array.from({ length: Math.min(limit, 15) }, (_, i) =>
           generateMockVideo(`search_${query}_${i}`, {
             title: `${query} - Video ${i + 1}`,
             description: `Search result for "${query}" - Video ${i + 1}`,
-          })
+          }),
         );
-        
+
         const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
         return {
           videos,
@@ -389,7 +397,7 @@ export class VideoService {
       url.searchParams.set('key', API_KEY || '');
       url.searchParams.set('type', 'video');
       url.searchParams.set('q', query);
-      
+
       if (pageToken) {
         url.searchParams.set('pageToken', pageToken);
       }
@@ -397,7 +405,7 @@ export class VideoService {
       const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
-        CACHE_DURATION.SHORT
+        CACHE_DURATION.SHORT,
       );
 
       const videos: Video[] = response.items?.map((item: any) => ({
@@ -439,12 +447,14 @@ export class VideoService {
   private static parseDuration(duration: string): number {
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-    if (!match) return 0;
-    
+    if (!match) {
+return 0;
+}
+
     const hours = parseInt(match[1] || '0');
     const minutes = parseInt(match[2] || '0');
     const seconds = parseInt(match[3] || '0');
-    
+
     return hours * 3600 + minutes * 60 + seconds;
   }
 }
@@ -452,7 +462,7 @@ export class VideoService {
 export class ChannelService {
   static async getChannel(id: string): Promise<Channel | null> {
     const cacheKey = `channel_${id}`;
-    
+
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 200));
@@ -467,11 +477,13 @@ export class ChannelService {
       const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
-        CACHE_DURATION.LONG
+        CACHE_DURATION.LONG,
       );
 
       const item = response.items?.[0];
-      if (!item) return null;
+      if (!item) {
+return null;
+}
 
       return {
         id: item.id,
@@ -495,15 +507,15 @@ export class ChannelService {
   static async getChannelVideos(
     channelId: string,
     limit: number = 20,
-    pageToken?: string
+    pageToken?: string,
   ): Promise<{ videos: Video[]; nextPageToken?: string }> {
     const cacheKey = `channel_videos_${channelId}_${limit}_${pageToken || 'first'}`;
-    
+
     try {
       if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, 400));
-        
-        const videos = Array.from({ length: limit }, (_, i) => 
+
+        const videos = Array.from({ length: limit }, (_, i) =>
           generateMockVideo(`${channelId}_video_${i}`, {
             channel: {
               id: channelId,
@@ -512,9 +524,9 @@ export class ChannelService {
               subscribers: Math.floor(Math.random() * 1000000),
               isVerified: Math.random() > 0.5,
             },
-          })
+          }),
         );
-        
+
         const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
         return {
           videos,
@@ -529,7 +541,7 @@ export class ChannelService {
       url.searchParams.set('type', 'video');
       url.searchParams.set('channelId', channelId);
       url.searchParams.set('order', 'date');
-      
+
       if (pageToken) {
         url.searchParams.set('pageToken', pageToken);
       }
@@ -537,7 +549,7 @@ export class ChannelService {
       const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
-        CACHE_DURATION.MEDIUM
+        CACHE_DURATION.MEDIUM,
       );
 
       const videos: Video[] = response.items?.map((item: any) => ({

@@ -56,7 +56,7 @@ export const YT_PLAYER_STATE = {
   PLAYING: 1,
   PAUSED: 2,
   BUFFERING: 3,
-  CUED: 5
+  CUED: 5,
 } as const;
 
 // YouTube Player Errors
@@ -65,13 +65,13 @@ export const YT_PLAYER_ERROR = {
   HTML5_ERROR: 5,
   VIDEO_NOT_FOUND: 100,
   EMBED_NOT_ALLOWED: 101,
-  EMBED_NOT_ALLOWED_DISGUISE: 150
+  EMBED_NOT_ALLOWED_DISGUISE: 150,
 } as const;
 
 // Global YouTube API state
 let isYouTubeAPILoaded = false;
 let isYouTubeAPILoading = false;
-const apiLoadCallbacks: (() => void)[] = [];
+const apiLoadCallbacks: Array<() => void> = [];
 
 // Load YouTube IFrame API
 const loadYouTubeIFrameAPI = (): Promise<void> => {
@@ -96,7 +96,7 @@ const loadYouTubeIFrameAPI = (): Promise<void> => {
       isYouTubeAPILoading = false;
       apiLoadCallbacks.forEach(callback => callback());
       apiLoadCallbacks.length = 0;
-      
+
       // Call the original callback if it exists
       if (originalCallback && typeof originalCallback === 'function') {
         originalCallback();
@@ -108,7 +108,7 @@ const loadYouTubeIFrameAPI = (): Promise<void> => {
     script.src = 'https://www.youtube.com/iframe_api';
     script.async = true;
     const firstScriptTag = document.getElementsByTagName('script')[0];
-    if (firstScriptTag && firstScriptTag.parentNode) {
+    if (firstScriptTag?.parentNode) {
       firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
     } else {
       document.head.appendChild(script);
@@ -132,9 +132,9 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
     onStateChange,
     onError,
     onPlaybackQualityChange,
-    onPlaybackRateChange
+    onPlaybackRateChange,
   },
-  ref
+  ref,
 ) => {
   const [isAPIReady, setIsAPIReady] = useState(isYouTubeAPILoaded);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
@@ -169,7 +169,7 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
     }
 
     console.log('Initializing YouTube player...', { videoId, playerId });
-    
+
     try {
       // Build player variables
       const playerVars: any = {
@@ -183,17 +183,23 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
         modestbranding: 1, // Modest branding
         playsinline: 1, // Play inline on iOS
         rel: 0, // Don't show related videos from other channels
-        origin: window.location.origin
+        origin: window.location.origin,
       };
 
       // Add optional parameters
-      if (muted) playerVars.mute = 1;
+      if (muted) {
+playerVars.mute = 1;
+}
       if (loop) {
         playerVars.loop = 1;
         playerVars.playlist = videoId; // Required for loop to work
       }
-      if (start !== undefined) playerVars.start = start;
-      if (end !== undefined) playerVars.end = end;
+      if (start !== undefined) {
+playerVars.start = start;
+}
+      if (end !== undefined) {
+playerVars.end = end;
+}
 
       // Create the player
       console.log('Creating YouTube player with ID:', playerId);
@@ -214,7 +220,7 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
           onError: (event: any) => {
             const errorCode = event.data;
             let errorMessage = 'Video playback error';
-            
+
             switch (errorCode) {
               case YT_PLAYER_ERROR.INVALID_PARAM:
                 errorMessage = 'Invalid parameter value';
@@ -230,14 +236,14 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
                 errorMessage = 'Video cannot be embedded';
                 break;
             }
-            
+
             console.error('YouTube IFrame API error:', errorCode, errorMessage);
             setError(errorMessage);
             onError?.(event);
           },
-          onPlaybackQualityChange: onPlaybackQualityChange,
-          onPlaybackRateChange: onPlaybackRateChange
-        }
+          onPlaybackQualityChange,
+          onPlaybackRateChange,
+        },
       });
     } catch (err) {
       console.error('Error creating YouTube player:', err);
@@ -262,29 +268,29 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
     play: () => playerInstanceRef.current?.playVideo(),
     pause: () => playerInstanceRef.current?.pauseVideo(),
     stop: () => playerInstanceRef.current?.stopVideo(),
-    seekTo: (seconds: number, allowSeekAhead = true) => 
+    seekTo: (seconds: number, allowSeekAhead = true) =>
       playerInstanceRef.current?.seekTo(seconds, allowSeekAhead),
     setVolume: (volume: number) => playerInstanceRef.current?.setVolume(volume),
     mute: () => playerInstanceRef.current?.mute(),
     unMute: () => playerInstanceRef.current?.unMute(),
     isMuted: () => playerInstanceRef.current?.isMuted() || false,
-    setSize: (width: number, height: number) => 
+    setSize: (width: number, height: number) =>
       playerInstanceRef.current?.setSize(width, height),
     getVideoUrl: () => playerInstanceRef.current?.getVideoUrl() || '',
     getEmbedCode: () => playerInstanceRef.current?.getVideoEmbedCode() || '',
     getOptions: (module?: string) => playerInstanceRef.current?.getOptions(module),
-    setOption: (module: string, option: string, value: any) => 
+    setOption: (module: string, option: string, value: any) =>
       playerInstanceRef.current?.setOption(module, option, value),
-    setPlaybackRate: (suggestedRate: number) => 
+    setPlaybackRate: (suggestedRate: number) =>
       playerInstanceRef.current?.setPlaybackRate(suggestedRate),
     getPlaybackRate: () => playerInstanceRef.current?.getPlaybackRate() || 1,
-    getAvailablePlaybackRates: () => 
+    getAvailablePlaybackRates: () =>
       playerInstanceRef.current?.getAvailablePlaybackRates() || [1],
-    setLoop: (loopPlaylists: boolean) => 
+    setLoop: (loopPlaylists: boolean) =>
       playerInstanceRef.current?.setLoop(loopPlaylists),
-    setShuffle: (shufflePlaylist: boolean) => 
+    setShuffle: (shufflePlaylist: boolean) =>
       playerInstanceRef.current?.setShuffle(shufflePlaylist),
-    getVideoLoadedFraction: () => 
+    getVideoLoadedFraction: () =>
       playerInstanceRef.current?.getVideoLoadedFraction() || 0,
     getPlayerState: () => playerInstanceRef.current?.getPlayerState() || -1,
     getCurrentTime: () => playerInstanceRef.current?.getCurrentTime() || 0,
@@ -292,11 +298,11 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
     getVideoData: () => playerInstanceRef.current?.getVideoData() || {},
     getPlaylist: () => playerInstanceRef.current?.getPlaylist() || [],
     getPlaylistIndex: () => playerInstanceRef.current?.getPlaylistIndex() || 0,
-    getAvailableQualityLevels: () => 
+    getAvailableQualityLevels: () =>
       playerInstanceRef.current?.getAvailableQualityLevels() || [],
     getPlaybackQuality: () => playerInstanceRef.current?.getPlaybackQuality() || 'auto',
-    setPlaybackQuality: (suggestedQuality: string) => 
-      playerInstanceRef.current?.setPlaybackQuality(suggestedQuality)
+    setPlaybackQuality: (suggestedQuality: string) =>
+      playerInstanceRef.current?.setPlaybackQuality(suggestedQuality),
   };
 
   // Expose methods via ref
@@ -311,14 +317,14 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
 
   if (error) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-100 ${className}`}
         style={{ width, height }}
       >
         <div className="text-center p-4">
           <div className="text-red-600 mb-2">⚠️</div>
           <p className="text-sm text-gray-600 mb-2">{error}</p>
-          <button 
+          <button
             onClick={handleRetry}
             className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
           >
@@ -334,22 +340,22 @@ const IFrameAPIYouTubePlayer = forwardRef<IFrameAPIYouTubePlayerMethods, IFrameA
       {!isAPIReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2" />
             <p className="text-sm text-gray-600">Loading YouTube API...</p>
           </div>
         </div>
       )}
-      
+
       {isAPIReady && !isPlayerReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2" />
             <p className="text-sm text-gray-600">Initializing player...</p>
           </div>
         </div>
       )}
-      
-      <div 
+
+      <div
         ref={playerRef}
         id={playerIdRef.current}
         className="w-full h-full"

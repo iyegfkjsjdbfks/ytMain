@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef, useCallback, useMemo, memo, ReactNode } from 'react';
-import React from 'react';
+import type { ReactNode } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { performanceMonitor } from '../utils/performance';
 import { withMemo } from '../utils/componentOptimizations';
+import { performanceMonitor } from '../utils/performance';
 
 interface OptimizedYouTubePlayerProps {
   videoId: string;
@@ -27,7 +28,7 @@ interface OptimizedYouTubePlayerProps {
 // YouTube API loading state
 let youtubeAPILoaded = false;
 let youtubeAPILoading = false;
-const youtubeAPICallbacks: (() => void)[] = [];
+const youtubeAPICallbacks: Array<() => void> = [];
 
 // Load YouTube API dynamically
 const loadYouTubeAPI = (): Promise<void> => {
@@ -50,7 +51,7 @@ const loadYouTubeAPI = (): Promise<void> => {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     const firstScriptTag = document.getElementsByTagName('script')[0];
-    if (firstScriptTag && firstScriptTag.parentNode) {
+    if (firstScriptTag?.parentNode) {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     } else {
       document.head.appendChild(tag);
@@ -65,11 +66,11 @@ const loadYouTubeAPI = (): Promise<void> => {
       if (performanceMonitor.hasMetric('youtube-api-load')) {
         performanceMonitor.endMeasure('youtube-api-load');
       }
-      
+
       // Execute all pending callbacks
       youtubeAPICallbacks.forEach(callback => callback());
       youtubeAPICallbacks.length = 0;
-      
+
       // Call the original callback if it exists
       if (originalCallback && typeof originalCallback === 'function') {
         originalCallback();
@@ -81,9 +82,9 @@ const loadYouTubeAPI = (): Promise<void> => {
 // Default placeholder component
 const DefaultPlaceholder = memo(({ videoId, onClick }: { videoId: string; onClick: () => void }) => {
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  
+
   return (
-    <div 
+    <div
       className="relative w-full h-full bg-black flex items-center justify-center cursor-pointer group"
       onClick={onClick}
     >
@@ -126,7 +127,7 @@ const OptimizedYouTubePlayer = ({
   onStateChange,
   onError,
   lazy = true,
-  placeholder
+  placeholder,
 }: OptimizedYouTubePlayerProps) => {
   const [playerLoaded, setPlayerLoaded] = useState(false);
   const [apiReady, setApiReady] = useState(youtubeAPILoaded);
@@ -140,7 +141,7 @@ const OptimizedYouTubePlayer = ({
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '100px',
-    freezeOnceVisible: true
+    freezeOnceVisible: true,
   });
 
   // Determine if player should be loaded
@@ -159,14 +160,24 @@ const OptimizedYouTubePlayer = ({
       enablejsapi: 1, // Enable JavaScript API
       origin: window.location.origin, // Add origin to fix postMessage error
     };
-    
+
     // Add optional parameters only if they have values
-    if (muted) vars.mute = 1;
-    if (loop) vars.loop = 1;
-    if (start !== undefined) vars.start = start;
-    if (end !== undefined) vars.end = end;
-    if (quality !== 'default') vars.quality = quality;
-    
+    if (muted) {
+vars.mute = 1;
+}
+    if (loop) {
+vars.loop = 1;
+}
+    if (start !== undefined) {
+vars.start = start;
+}
+    if (end !== undefined) {
+vars.end = end;
+}
+    if (quality !== 'default') {
+vars.quality = quality;
+}
+
     return vars;
   }, [autoplay, muted, controls, loop, start, end, quality]);
 
@@ -186,18 +197,18 @@ const OptimizedYouTubePlayer = ({
   useEffect(() => {
     if (shouldLoadPlayer && apiReady && !playerLoaded && playerRef.current && (window as any).YT?.Player) {
       performanceMonitor.startMeasure(`youtube-player-init-${videoId}`);
-      
+
       // Ensure the player div has an ID (required by YouTube API)
       const playerId = `youtube-player-${videoId}-${Date.now()}`;
       if (!playerRef.current.id) {
         playerRef.current.id = playerId;
       }
-      
+
       try {
         // Create player instance following official API documentation
         playerInstanceRef.current = new (window as any).YT.Player(playerRef.current.id, {
-          height: typeof height === 'number' ? height.toString() : (height as string),
-          width: typeof width === 'number' ? width.toString() : (width as string),
+          height: typeof height === 'number' ? height.toString() : (height),
+          width: typeof width === 'number' ? width.toString() : (width),
           videoId,
           playerVars,
           events: {
@@ -217,8 +228,8 @@ const OptimizedYouTubePlayer = ({
               console.error('YouTube player error:', event, 'Video ID:', videoId);
               setError('Video playback error');
               onError?.(event);
-            }
-          }
+            },
+          },
         });
       } catch (err) {
         console.error('Failed to initialize YouTube player:', err);
@@ -269,7 +280,7 @@ const OptimizedYouTubePlayer = ({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p className="text-gray-600 text-sm">{error}</p>
-          <button 
+          <button
             onClick={() => {
               setError(null);
               setShouldLoad(true);
@@ -284,9 +295,9 @@ const OptimizedYouTubePlayer = ({
   }
 
   return (
-    <div 
+    <div
       ref={intersectionRef as React.RefObject<HTMLDivElement>}
-      className={`relative ${className}`} 
+      className={`relative ${className}`}
       style={{ width, height }}
     >
       {shouldLoadPlayer ? (
@@ -295,7 +306,7 @@ const OptimizedYouTubePlayer = ({
           {!playerLoaded && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
               <div className="text-center">
-                <div className="w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                <div className="w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
                 <p className="text-gray-600 text-sm">Loading player...</p>
               </div>
             </div>
@@ -327,7 +338,7 @@ export default withMemo(OptimizedYouTubePlayer, (prevProps, nextProps) => {
 });
 
 // Export player methods type for external use
-export type YouTubePlayerMethods = {
+export interface YouTubePlayerMethods {
   play: () => void;
   pause: () => void;
   stop: () => void;
@@ -338,4 +349,4 @@ export type YouTubePlayerMethods = {
   getPlayerState: () => number;
   getCurrentTime: () => number;
   getDuration: () => number;
-};
+}

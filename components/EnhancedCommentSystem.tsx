@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -7,9 +9,10 @@ import {
   TrashIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  ExclamationTriangleIcon
+  ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Comment {
@@ -72,7 +75,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
   onReportComment,
   onModerateComment,
   onSortChange,
-  className = ''
+  className = '',
 }) => {
   const [newComment, setNewComment] = useState('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
@@ -91,7 +94,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     'Inappropriate content',
     'Copyright infringement',
     'Violence or dangerous content',
-    'Other'
+    'Other',
   ];
 
   useEffect(() => {
@@ -144,9 +147,9 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toString();
   };
@@ -177,7 +180,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
               <span className="font-medium text-gray-900 dark:text-white">
                 {comment.authorName}
               </span>
-              
+
               {comment.authorVerified && (
                 <div className="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center">
                   <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -260,8 +263,8 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   <button
                     onClick={() => onLikeComment(comment.id)}
                     className={`flex items-center space-x-1 text-sm transition-colors ${
-                      comment.isLiked 
-                        ? 'text-blue-600 dark:text-blue-400' 
+                      comment.isLiked
+                        ? 'text-blue-600 dark:text-blue-400'
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                   >
@@ -276,8 +279,8 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   <button
                     onClick={() => onDislikeComment(comment.id)}
                     className={`text-sm transition-colors ${
-                      comment.isDisliked 
-                        ? 'text-red-600 dark:text-red-400' 
+                      comment.isDisliked
+                        ? 'text-red-600 dark:text-red-400'
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                   >
@@ -470,7 +473,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           {formatNumber(comments.length)} Comments
         </h3>
-        
+
         <select
           value={sortBy}
           onChange={(e) => onSortChange(e.target.value as any)}
@@ -530,7 +533,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Report Comment
             </h3>
-            
+
             <div className="space-y-3 mb-6">
               {reportReasons.map((reason) => (
                 <label key={reason} className="flex items-center">
@@ -546,7 +549,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                 </label>
               ))}
             </div>
-            
+
             <div className="flex space-x-3">
               <button
                 onClick={() => {

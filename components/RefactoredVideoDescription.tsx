@@ -1,8 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+
 import { BellIcon } from '@heroicons/react/24/outline';
-import { SummarizeIcon } from './icons/SummarizeIcon';
+import { Link } from 'react-router-dom';
+
 import { formatCount } from '../utils/numberUtils';
+
+import { SummarizeIcon } from './icons/SummarizeIcon';
 
 
 interface Channel {
@@ -37,7 +40,7 @@ interface RefactoredVideoDescriptionProps {
 
 /**
  * Refactored Video Description Component
- * 
+ *
  * This component demonstrates improved patterns:
  * - Extracted reusable sub-components
  * - Better separation of concerns
@@ -55,21 +58,21 @@ interface ChannelInfoProps {
 
 const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
-  
+
   return (
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center space-x-3">
         <Link to={channelLink} className="flex-shrink-0">
-          <img 
-            src={channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'} 
-            alt={`${channel?.name || 'Unknown'} channel avatar`} 
+          <img
+            src={channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
+            alt={`${channel?.name || 'Unknown'} channel avatar`}
             className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-700"
           />
         </Link>
-        
+
         <div className="min-w-0 flex-grow">
-          <Link 
-            to={channelLink} 
+          <Link
+            to={channelLink}
             className="text-sm font-semibold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block truncate"
           >
             {channel?.name || 'Unknown Channel'}
@@ -78,14 +81,14 @@ const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubs
             )}
           </Link>
           <p className="text-xs text-gray-600 dark:text-gray-400">
-            {channel?.subscriberCount 
-              ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, '')))} subscribers` 
+            {channel?.subscriberCount
+              ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, '')))} subscribers`
               : 'No subscriber data'
             }
           </p>
         </div>
       </div>
-      
+
       <div className="flex items-center space-x-2">
         <SubscribeButton isSubscribed={isSubscribed} onSubscribe={onSubscribe} />
         {isSubscribed && <NotificationButton />}
@@ -102,11 +105,11 @@ interface SubscribeButtonProps {
 
 const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }) => {
   return (
-    <button 
+    <button
       onClick={onSubscribe}
       className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
-        isSubscribed 
-          ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' 
+        isSubscribed
+          ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
           : 'bg-red-600 text-white hover:bg-red-700 shadow-lg hover:shadow-xl'
       }`}
       aria-pressed={isSubscribed}
@@ -119,9 +122,9 @@ const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubsc
 // Reusable Notification Button Component
 const NotificationButton: React.FC = () => {
   return (
-    <button 
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors" 
-      aria-label="Manage notifications for this channel" 
+    <button
+      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+      aria-label="Manage notifications for this channel"
       title="Notifications"
     >
       <BellIcon className="w-5 h-5" />
@@ -136,42 +139,42 @@ interface DescriptionContentProps {
   onToggleDescription: () => void;
 }
 
-const DescriptionContent: React.FC<DescriptionContentProps> = ({ 
-  video, 
-  showFullDescription, 
-  onToggleDescription 
+const DescriptionContent: React.FC<DescriptionContentProps> = ({
+  video,
+  showFullDescription,
+  onToggleDescription,
 }) => {
   const shouldShowToggle = video.description.length > 150 || video.description.includes('\n');
-  
+
   return (
     <div className="space-y-2">
       {/* Video Metadata */}
       <div className="text-sm font-medium text-gray-800 dark:text-gray-200">
         {video.uploadedAt} • {video.views.split(' ')[0]} views
       </div>
-      
+
       {/* Description Text */}
-      <div 
+      <div
         className={`text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed cursor-pointer transition-all duration-300 ${
           !showFullDescription ? 'max-h-20 overflow-hidden' : ''
         }`}
         onClick={onToggleDescription}
-        role="button" 
-        tabIndex={0} 
-        onKeyDown={(e) => { 
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onToggleDescription();
           }
         }}
-        aria-expanded={showFullDescription} 
+        aria-expanded={showFullDescription}
         aria-controls="video-description-content"
       >
         <div className="text-sm" id="video-description-content">
           {video.description}
         </div>
       </div>
-      
+
       {/* Show More/Less Button */}
       {shouldShowToggle && (
         <button
@@ -199,10 +202,12 @@ const AISummarySection: React.FC<AISummarySectionProps> = ({
   isSummarizing,
   summary,
   summaryError,
-  onSummarizeDescription
+  onSummarizeDescription,
 }) => {
-  if (!canSummarize) return null;
-  
+  if (!canSummarize) {
+return null;
+}
+
   return (
     <div className="space-y-3">
       {/* Summarize Button */}
@@ -210,7 +215,7 @@ const AISummarySection: React.FC<AISummarySectionProps> = ({
         onClick={onSummarizeDescription}
         disabled={isSummarizing}
         className="flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-700 dark:text-blue-300 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105"
-        aria-label="Summarize video description with AI" 
+        aria-label="Summarize video description with AI"
         title="Summarize with AI"
       >
         <SummarizeIcon className="w-5 h-5" />
@@ -258,24 +263,24 @@ const RefactoredVideoDescription: React.FC<RefactoredVideoDescriptionProps> = ({
   canSummarize,
   onSubscribe,
   onToggleDescription,
-  onSummarizeDescription
+  onSummarizeDescription,
 }) => {
   return (
     <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mt-4 shadow-sm border border-gray-200 dark:border-gray-700">
       {/* Channel Information */}
-      <ChannelInfo 
+      <ChannelInfo
         channel={channel}
         isSubscribed={isSubscribed}
         onSubscribe={onSubscribe}
       />
-      
+
       {/* Video Description */}
-      <DescriptionContent 
+      <DescriptionContent
         video={video}
         showFullDescription={showFullDescription}
         onToggleDescription={onToggleDescription}
       />
-      
+
       {/* AI Summary Section */}
       <div className="mt-4">
         <AISummarySection

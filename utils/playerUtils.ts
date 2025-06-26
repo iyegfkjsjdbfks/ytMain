@@ -1,4 +1,4 @@
-import { Video } from '../types';
+import type { Video } from '../types';
 
 export interface PlayerState {
   // Playback state
@@ -8,34 +8,34 @@ export interface PlayerState {
   currentTime: number;
   duration: number;
   playbackRate: number;
-  
+
   // Player modes
   isFullscreen: boolean;
   isTheaterMode: boolean;
   isMiniPlayer: boolean;
   isPip: boolean;
-  
+
   // UI state
   showControls: boolean;
   isSettingsMenuOpen: boolean;
   activeSettingsTab?: 'quality' | 'playback' | 'subtitles' | 'speed' | undefined;
-  
+
   // Media state
   buffered: TimeRanges | null;
   error: MediaError | null;
   isLoading: boolean;
   hasEnded: boolean;
-  
+
   // Quality and tracks
   quality: string;
   audioTrack: string;
   subtitleTrack: string;
-  
+
   // Player metadata
   isLive: boolean;
   isSeeking: boolean;
   isBuffering: boolean;
-  
+
   // Player capabilities
   canPlay: boolean;
   canPlayThrough: boolean;
@@ -52,7 +52,7 @@ const getBrowserCapabilities = () => {
       supportsPictureInPicture: false,
     };
   }
-  
+
   return {
     supportsFullscreen: !!document.fullscreenEnabled,
     supportsPictureInPicture: 'pictureInPictureEnabled' in document,
@@ -68,34 +68,34 @@ export const getInitialPlayerState = (): PlayerState => ({
   currentTime: 0,
   duration: 0,
   playbackRate: 1,
-  
+
   // Player modes
   isFullscreen: false,
   isTheaterMode: false,
   isMiniPlayer: false,
   isPip: false,
-  
+
   // UI state
   showControls: true,
   isSettingsMenuOpen: false,
   activeSettingsTab: undefined,
-  
+
   // Media state
   buffered: null,
   error: null,
   isLoading: false,
   hasEnded: false,
-  
+
   // Quality and tracks
   quality: 'auto',
   audioTrack: 'default',
   subtitleTrack: 'none',
-  
+
   // Player metadata
   isLive: false,
   isSeeking: false,
   isBuffering: false,
-  
+
   // Player capabilities
   canPlay: false,
   canPlayThrough: false,
@@ -115,17 +115,17 @@ export function formatTime(seconds: number | undefined | null): string {
   if (seconds == null || isNaN(seconds) || !isFinite(seconds) || seconds < 0) {
     return '0:00';
   }
-  
+
   const totalSeconds = Math.floor(seconds);
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
-  
+
   // Handle hours if present
   if (h > 0) {
     return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   }
-  
+
   // Default to MM:SS format
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
@@ -136,18 +136,24 @@ export function formatTime(seconds: number | undefined | null): string {
  * @returns The number of seconds, or 0 if invalid
  */
 export function parseTimeString(timeString: string | undefined | null): number {
-  if (!timeString) return 0;
-  
+  if (!timeString) {
+return 0;
+}
+
   const parts = timeString.split(':');
-  if (!parts.length) return 0;
-  
+  if (!parts.length) {
+return 0;
+}
+
   // Helper function to safely parse number from string
   const safeParse = (str: string | undefined, radix = 10): number => {
-    if (str === undefined) return NaN;
+    if (str === undefined) {
+return NaN;
+}
     const num = radix === 10 ? parseFloat(str) : parseInt(str, radix);
     return isNaN(num) ? NaN : num;
   };
-  
+
   try {
     // Handle each part of the time string
     const parsePart = (index: number): number => {
@@ -160,27 +166,27 @@ export function parseTimeString(timeString: string | undefined | null): number {
         const hours = parsePart(0);
         const minutes = parsePart(1);
         const seconds = parsePart(2);
-        
+
         if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
           return 0;
         }
-        
+
         return hours * 3600 + minutes * 60 + seconds;
-        
+
       case 2: // MM:SS format
         const mins = parsePart(0);
         const secs = parsePart(1);
-        
+
         if (isNaN(mins) || isNaN(secs)) {
           return 0;
         }
-        
+
         return mins * 60 + secs;
-        
+
       case 1: // Just seconds
         const sec = parsePart(0);
         return isNaN(sec) ? 0 : sec;
-        
+
       default:
         return 0;
     }
@@ -233,7 +239,7 @@ export function getVideoQualityOptions(video: Partial<Video> = {}): VideoQuality
   try {
     // Default to highest quality if not specified
     const maxQuality = (video.definition || 'hd2160') as VideoQuality;
-    
+
     // If the video's max quality isn't in our known qualities, return default options
     if (!QUALITY_ORDER.includes(maxQuality)) {
       console.warn(`Unknown video quality: ${maxQuality}`);
@@ -243,9 +249,9 @@ export function getVideoQualityOptions(video: Partial<Video> = {}): VideoQuality
         { label: '1080p', value: 'hd1080' },
       ];
     }
-    
+
     const maxIndex = QUALITY_ORDER.indexOf(maxQuality);
-    
+
     // Generate quality options up to the video's maximum quality
     return QUALITY_ORDER
       .filter((_, index) => index <= maxIndex)
@@ -299,11 +305,13 @@ export function getPlaybackRateOptions(): PlaybackRateOption[] {
  */
 export function findClosestPlaybackRate(rate: number): PlaybackRateOption {
   const options = getPlaybackRateOptions();
-  
+
   // If exact match exists, return it
   const exactMatch = options.find(opt => opt.value === rate);
-  if (exactMatch) return exactMatch;
-  
+  if (exactMatch) {
+return exactMatch;
+}
+
   // Otherwise find the closest rate
   return options.reduce((prev, curr) => {
     return (Math.abs(curr.value - rate) < Math.abs(prev.value - rate) ? curr : prev);
@@ -320,31 +328,35 @@ export interface VideoChapter {
 
 export function getVideoChapters(video: Partial<Video>): VideoChapter[] {
   // In a real app, this would parse the video's chapter data
-  if (!video.duration) return [];
-  
+  if (!video.duration) {
+return [];
+}
+
   try {
     const duration = parseDuration(video.duration);
-    if (duration <= 0) return [];
-    
+    if (duration <= 0) {
+return [];
+}
+
     // Generate some sample chapters if none exist
     const chapterCount = Math.min(Math.max(1, Math.floor(duration / 60)), 10); // 1-10 chapters
     const chapterDuration = duration / chapterCount;
-    
+
     // Only include thumbnailUrl if it exists
     const chapterData: Omit<VideoChapter, 'start' | 'end' | 'title'> = {
-      description: `Chapter of the video`,
+      description: 'Chapter of the video',
     };
-    
+
     if (video.thumbnailUrl) {
       chapterData.thumbnailUrl = video.thumbnailUrl;
     }
-    
+
     return Array.from({ length: chapterCount }, (_, i) => ({
       ...chapterData,
       start: Math.floor(i * chapterDuration),
       end: Math.min(Math.floor((i + 1) * chapterDuration), duration),
       title: `Chapter ${i + 1}`,
-      description: `Chapter ${i + 1} of the video`
+      description: `Chapter ${i + 1} of the video`,
     }));
   } catch (error) {
     console.error('Error generating video chapters:', error);
@@ -353,11 +365,13 @@ export function getVideoChapters(video: Partial<Video>): VideoChapter[] {
 }
 
 function parseDuration(duration: string): number {
-  if (!duration) return 0;
-  
+  if (!duration) {
+return 0;
+}
+
   // Simple duration parser - in a real app, use a proper parser
   const parts = duration.split(':');
-  
+
   try {
     if (parts.length === 3) {
       const [h, m, s] = parts.map(Number);
@@ -373,7 +387,7 @@ function parseDuration(duration: string): number {
   } catch (error) {
     console.error('Error parsing duration:', error);
   }
-  
+
   return 0;
 }
 
@@ -409,7 +423,7 @@ export function getVideoCaptions(video?: Partial<Video>): VideoCaption[] {
       return video.captions.map((caption, index) => {
         const languageCode = caption.language?.code || 'en';
         const languageName = caption.language?.name || 'English';
-        
+
         return {
           id: caption.id || `caption-${index}`,
           label: caption.label || languageName,
@@ -469,24 +483,24 @@ export function getVideoEndScreenItems(video?: Partial<Video>): EndScreenItem[] 
   try {
     // Default count of recommended videos to show
     const count = 4;
-    
+
     // If no video is provided, return empty array
     if (!video) {
       return [];
     }
-    
+
     // In a real app, this would fetch recommended videos based on the current video
     // For now, generate some sample recommendations
     return Array.from({ length: count }, (_, i) => {
       const videoNum = i + 1;
       const isLive = Math.random() > 0.8; // 20% chance of being a live video
       const viewCount = Math.floor(Math.random() * 10000000);
-      const viewCountText = viewCount > 1000000 
-        ? `${(viewCount / 1000000).toFixed(1)}M` 
-        : viewCount > 1000 
-          ? `${Math.floor(viewCount / 1000)}K` 
+      const viewCountText = viewCount > 1000000
+        ? `${(viewCount / 1000000).toFixed(1)}M`
+        : viewCount > 1000
+          ? `${Math.floor(viewCount / 1000)}K`
           : viewCount.toString();
-      
+
       return {
         id: `endscreen-${video.id || 'unknown'}-${i}`,
         title: video.title ? `${video.title} - Related ${videoNum}` : `Recommended Video ${videoNum}`,

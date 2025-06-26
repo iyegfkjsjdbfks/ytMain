@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useCallback, useState   } from 'react';
+import type React from 'react';
+import { createContext, useContext, useCallback, useState   } from 'react';
+
 import { cn } from '../../utils/cn';
 import { UnifiedButton } from '../ui/UnifiedButton';
 
@@ -116,15 +118,15 @@ export const FormField: React.FC<FormFieldProps> = ({
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
-      
+
       {children}
-      
+
       {error && (
         <p className="text-sm text-red-600 dark:text-red-400">
           {error}
         </p>
       )}
-      
+
       {helpText && !error && (
         <p className="text-sm text-neutral-500 dark:text-neutral-400">
           {helpText}
@@ -199,7 +201,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
       'pl-10': leftIcon,
       'pr-10': rightIcon,
     },
-    className
+    className,
   );
 
   const input = (
@@ -211,7 +213,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
           </span>
         </div>
       )}
-      
+
       <input
         {...props}
         id={name}
@@ -221,7 +223,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
         onBlur={handleBlur}
         className={inputClasses}
       />
-      
+
       {rightIcon && (
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <span className="text-neutral-400 dark:text-neutral-500">
@@ -311,7 +313,7 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
     {
       'border-red-500 focus:border-red-500 focus:ring-red-500': error,
     },
-    className
+    className,
   );
 
   const textarea = (
@@ -394,7 +396,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
     {
       'border-red-500 focus:border-red-500 focus:ring-red-500': error,
     },
-    className
+    className,
   );
 
   const select = (
@@ -408,7 +410,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
         onBlur={handleBlur}
         className={selectClasses}
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+          backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")',
         }}
       >
         {placeholder && (
@@ -465,7 +467,9 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!onSubmit) return;
+    if (!onSubmit) {
+return;
+}
 
     setIsSubmitting(true);
     try {
@@ -490,7 +494,7 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
         noValidate
       >
         {children}
-        
+
         {onSubmit && (
           <div className="flex justify-end">
             <UnifiedButton
@@ -506,7 +510,6 @@ export const UnifiedForm: React.FC<UnifiedFormProps> = ({
     </FormProvider>
   );
 };
-
 
 
 // Type exports

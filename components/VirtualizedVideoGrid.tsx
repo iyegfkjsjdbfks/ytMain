@@ -1,9 +1,15 @@
-import React, { useMemo, useCallback, useState, useEffect   } from 'react';
+import type React from 'react';
+import { useMemo, useCallback, useState, useEffect   } from 'react';
+
 import { FixedSizeGrid as Grid } from 'react-window';
-import { Video } from '../types';
-import OptimizedVideoCard from './OptimizedVideoCard';
-import LoadingSpinner from './LoadingSpinner';
+
 import { cn } from '../utils/cn';
+
+import LoadingSpinner from './LoadingSpinner';
+import OptimizedVideoCard from './OptimizedVideoCard';
+
+import type { Video } from '../types';
+
 
 interface VirtualizedVideoGridProps {
   videos: Video[];
@@ -87,7 +93,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
       md: 320,
       lg: 360,
     };
-    
+
     const cardHeights = {
       sm: 240,
       md: 280,
@@ -97,11 +103,11 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
     const cardWidth = cardWidths[cardSize];
     const cardHeight = cardHeights[cardSize];
     const gap = 16; // 1rem gap
-    
+
     const availableWidth = containerSize.width - gap;
     const cols = Math.max(1, Math.floor(availableWidth / (cardWidth + gap)));
     const actualColumnWidth = Math.floor(availableWidth / cols);
-    
+
     return {
       columnsPerRow: cols,
       columnWidth: actualColumnWidth,
@@ -113,7 +119,9 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
 
   // Handle container resize
   useEffect(() => {
-    if (!containerRef) return;
+    if (!containerRef) {
+return;
+}
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -129,14 +137,16 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
   // Handle infinite scrolling
   const handleScroll = useCallback(
     ({ scrollTop, scrollHeight, clientHeight }: any) => {
-      if (!hasMore || loading || !onLoadMore) return;
+      if (!hasMore || loading || !onLoadMore) {
+return;
+}
 
       const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
       if (scrollPercentage > 0.8) {
         onLoadMore();
       }
     },
-    [hasMore, loading, onLoadMore]
+    [hasMore, loading, onLoadMore],
   );
 
   // Grid item data
@@ -150,7 +160,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
       showChannel,
       showDescription,
     }),
-    [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription]
+    [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription],
   );
 
   if (videos.length === 0 && !loading) {
@@ -187,14 +197,14 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
             >
               {GridItem}
             </Grid>
-            
+
             {/* Loading indicator */}
             {loading && (
               <div className="flex justify-center py-8">
                 <LoadingSpinner size="lg" />
               </div>
             )}
-            
+
             {/* Load more button */}
             {hasMore && !loading && onLoadMore && (
               <div className="flex justify-center py-8">

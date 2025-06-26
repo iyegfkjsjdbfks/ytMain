@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
-import { Video } from '../src/types/core';
+
 import { getVideos, getVideosByChannelName, getSubscribedChannelNames } from '../services/mockVideoService';
-import { parseViewCount } from '../utils/numberUtils';
 import { parseRelativeDate } from '../utils/dateUtils';
+import { parseViewCount } from '../utils/numberUtils';
+
 import { useAsyncData } from './useAsyncData';
+
+import type { Video } from '../src/types/core';
 
 /**
  * Hook for fetching all videos
@@ -19,7 +22,7 @@ export function useVideos() {
 export function useTrendingVideos(category: string = 'all') {
   const fetchTrendingVideos = useCallback(async (): Promise<Video[]> => {
     const allVideos = await getVideos();
-    
+
     // Sort by view count to get trending videos
     const sortedByViews = [...allVideos].sort((a, b) => {
       const viewsA = parseViewCount(a.views);
@@ -31,16 +34,16 @@ export function useTrendingVideos(category: string = 'all') {
     let filteredVideos = sortedByViews;
     if (category !== 'all') {
       filteredVideos = sortedByViews.filter(video =>
-        video.category.toLowerCase().includes(category.toLowerCase())
+        video.category.toLowerCase().includes(category.toLowerCase()),
       );
     }
 
     return filteredVideos.slice(0, 50); // Top 50 trending
   }, [category]);
 
-  return useAsyncData<Video[]>(fetchTrendingVideos, { 
-    initialData: [], 
-    dependencies: [category] 
+  return useAsyncData<Video[]>(fetchTrendingVideos, {
+    initialData: [],
+    dependencies: [category],
   });
 }
 
@@ -56,14 +59,14 @@ export function useSubscriptionsFeed() {
 
     const videosPromises = channelNames.map(name => getVideosByChannelName(name));
     const videosByChannel = await Promise.all(videosPromises);
-    
+
     const allVideos = videosByChannel.flat();
-    
+
     // Sort by upload date
-    const sortedVideos = allVideos.sort((a, b) => 
-      parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt)
+    const sortedVideos = allVideos.sort((a, b) =>
+      parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt),
     );
-    
+
     return sortedVideos;
   }, []);
 
@@ -74,12 +77,12 @@ export function useSubscriptionsFeed() {
  * Hook for fetching videos by channel name
  */
 export function useChannelVideos(channelName: string) {
-  const fetchChannelVideos = useCallback(() => 
-    getVideosByChannelName(channelName), [channelName]
+  const fetchChannelVideos = useCallback(() =>
+    getVideosByChannelName(channelName), [channelName],
   );
 
-  return useAsyncData<Video[]>(fetchChannelVideos, { 
-    initialData: [], 
-    dependencies: [channelName] 
+  return useAsyncData<Video[]>(fetchChannelVideos, {
+    initialData: [],
+    dependencies: [channelName],
   });
 }

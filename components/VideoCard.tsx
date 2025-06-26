@@ -1,12 +1,16 @@
 
 import React from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
-import { Video } from '../src/types/core';
+
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useToggle } from '../hooks/unifiedHooks';
 import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
-import { useToggle } from '../hooks/unifiedHooks';
+
+import type { Video } from '../src/types/core';
 
 
 interface VideoCardProps {
@@ -48,10 +52,10 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
     <Link to={videoUrl} className="block group cursor-pointer" aria-label={`Watch ${video.title}`}>
       <div className="bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full">
         <div className="relative aspect-video">
-          <img 
-            src={video.thumbnailUrl} 
-            alt={`Thumbnail for ${video.title}`} 
-            className="w-full h-full object-cover rounded-lg" 
+          <img
+            src={video.thumbnailUrl}
+            alt={`Thumbnail for ${video.title}`}
+            className="w-full h-full object-cover rounded-lg"
             loading="lazy"
           />
           <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-medium">
@@ -68,19 +72,19 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
         </div>
         <div className="p-3 flex-grow">
           <div className="flex items-start space-x-3">
-            <div 
+            <div
               role="button"
               tabIndex={0}
               onClick={handleChannelNavigation}
               onKeyDown={handleChannelKeyDown}
-              className="flex-shrink-0 cursor-pointer z-10 relative" 
+              className="flex-shrink-0 cursor-pointer z-10 relative"
               aria-label={`Go to ${video.channelName} channel`}
             >
               {video.channelAvatarUrl ? (
-                <img 
-                  src={video.channelAvatarUrl} 
-                  alt={`${video.channelName} channel avatar`} 
-                  className="w-9 h-9 rounded-full mt-0.5" 
+                <img
+                  src={video.channelAvatarUrl}
+                  alt={`${video.channelName} channel avatar`}
+                  className="w-9 h-9 rounded-full mt-0.5"
                   loading="lazy"
                 />
               ) : (
@@ -93,7 +97,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
               <h3 className={buildTruncateClasses(2, 'text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug')}>
                 {video.title}
               </h3>
-              <div 
+              <div
                 role="button"
                 tabIndex={0}
                 onClick={handleChannelNavigation}

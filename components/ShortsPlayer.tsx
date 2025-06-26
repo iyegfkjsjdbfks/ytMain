@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -9,9 +11,10 @@ import {
   EllipsisVerticalIcon,
   ChevronUpIcon,
   ChevronDownIcon,
-  ChatBubbleLeftIcon
+  ChatBubbleLeftIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+
 import type { Short } from '../src/types/core';
 
 interface ShortsPlayerProps {
@@ -33,7 +36,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
   onSubscribe,
   onComment,
   onShare,
-  className = ''
+  className = '',
 }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -49,7 +52,9 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const handleTimeUpdate = () => {
       const progress = (video.currentTime / video.duration) * 100;
@@ -84,7 +89,9 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     // Auto-play when short changes
     if (isPlaying) {
@@ -122,7 +129,9 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 
   const togglePlay = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     if (isPlaying) {
       video.pause();
@@ -134,7 +143,9 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
 
   const toggleMute = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.muted = !isMuted;
     setIsMuted(!isMuted);
@@ -157,25 +168,29 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
   const handleSeek = (e: React.MouseEvent) => {
     const video = videoRef.current;
     const progressBar = progressRef.current;
-    if (!video || !progressBar) return;
+    if (!video || !progressBar) {
+return;
+}
 
     const rect = progressBar.getBoundingClientRect();
     const clickY = e.clientY - rect.top;
     const newTime = ((rect.height - clickY) / rect.height) * video.duration;
-    
+
     video.currentTime = newTime;
   };
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toString();
   };
 
-  if (!currentShort) return null;
+  if (!currentShort) {
+return null;
+}
 
   return (
     <div className={`relative w-full h-screen bg-black overflow-hidden ${className}`} ref={containerRef}>
@@ -194,12 +209,12 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
       {/* Loading Spinner */}
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
       {/* Progress Bar */}
-      <div 
+      <div
         ref={progressRef}
         className="absolute right-2 top-20 bottom-20 w-1 bg-white/30 rounded-full cursor-pointer"
         onClick={handleSeek}
@@ -219,7 +234,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
         >
           <ChevronUpIcon className="w-6 h-6" />
         </button>
-        
+
         <button
           onClick={() => navigateShort('down')}
           disabled={currentIndex === shorts.length - 1}
@@ -264,7 +279,7 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
             </div>
             <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views) || 0)} views</p>
           </div>
-          
+
           <button
             onClick={() => onSubscribe(currentShort.channelId)}
             className="bg-white text-black px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
@@ -307,8 +322,8 @@ const ShortsPlayer: React.FC<ShortsPlayerProps> = ({
           <button
             onClick={() => onLike(currentShort.id)}
             className={`p-3 rounded-full transition-colors ${
-              currentShort.isLiked 
-                ? 'bg-red-500 text-white' 
+              currentShort.isLiked
+                ? 'bg-red-500 text-white'
                 : 'bg-black/50 text-white hover:bg-black/70'
             }`}
           >

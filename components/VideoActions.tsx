@@ -1,13 +1,18 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import {
   ShareIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import ThumbsUpIcon from './icons/ThumbsUpIcon';
-import ThumbsDownIcon from './icons/ThumbsDownIcon';
+
+import { formatCount } from '../utils/numberUtils';
+
 import SaveIcon from './icons/SaveIcon';
 import SaveIconFilled from './icons/SaveIconFilled';
-import { formatCount } from '../utils/numberUtils';
+import ThumbsDownIcon from './icons/ThumbsDownIcon';
+import ThumbsUpIcon from './icons/ThumbsUpIcon';
+
 
 interface VideoActionsProps {
   liked: boolean;
@@ -34,17 +39,19 @@ const ShareModal: React.FC<ShareModalProps> = ({
   onClose,
   onShareToSocial,
   onCopyLink,
-  shareMessage
+  shareMessage,
 }) => {
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div className="absolute top-full right-0 mt-2 w-80 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl z-50 animate-fade-in-fast">
       <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700">
         <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">Share</h3>
-        <button 
-          onClick={onClose} 
-          className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700" 
+        <button
+          onClick={onClose}
+          className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700"
           aria-label="Close share modal"
         >
           <XMarkIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-300" />
@@ -53,8 +60,8 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
       <div className="p-4 space-y-4">
         <div className="flex space-x-3">
-          <button 
-            onClick={() => onShareToSocial('twitter')} 
+          <button
+            onClick={() => onShareToSocial('twitter')}
             className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
           >
             <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mb-2">
@@ -62,8 +69,8 @@ const ShareModal: React.FC<ShareModalProps> = ({
             </div>
             <span className="text-xs text-neutral-600 dark:text-neutral-400">Twitter</span>
           </button>
-          <button 
-            onClick={() => onShareToSocial('facebook')} 
+          <button
+            onClick={() => onShareToSocial('facebook')}
             className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
           >
             <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mb-2">
@@ -71,8 +78,8 @@ const ShareModal: React.FC<ShareModalProps> = ({
             </div>
             <span className="text-xs text-neutral-600 dark:text-neutral-400">Facebook</span>
           </button>
-          <button 
-            onClick={() => onShareToSocial('reddit')} 
+          <button
+            onClick={() => onShareToSocial('reddit')}
             className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
           >
             <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mb-2">
@@ -80,8 +87,8 @@ const ShareModal: React.FC<ShareModalProps> = ({
             </div>
             <span className="text-xs text-neutral-600 dark:text-neutral-400">Reddit</span>
           </button>
-          <button 
-            onClick={() => onShareToSocial('email')} 
+          <button
+            onClick={() => onShareToSocial('email')}
             className="flex flex-col items-center p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
           >
             <div className="w-10 h-10 bg-neutral-500 rounded-full flex items-center justify-center mb-2">
@@ -124,7 +131,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
   onDislike,
   onShare,
   onSave,
-  saveModalLoading = false
+  saveModalLoading = false,
 }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [shareMessage, setShareMessage] = useState<string>('');
@@ -138,7 +145,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
   const handleShareToSocial = (platform: string) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
-    
+
     let shareUrl = '';
     switch (platform) {
       case 'twitter':
@@ -154,7 +161,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
         shareUrl = `mailto:?subject=${title}&body=${url}`;
         break;
     }
-    
+
     if (shareUrl) {
       window.open(shareUrl, '_blank', 'width=600,height=400');
     }
@@ -189,18 +196,18 @@ const VideoActions: React.FC<VideoActionsProps> = ({
     <div className="flex items-center space-x-1.5 sm:space-x-2 overflow-x-auto no-scrollbar relative">
       {/* Like/Dislike Button Group */}
       <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full">
-        <button 
+        <button
           onClick={onLike}
           className={`flex items-center space-x-1.5 pl-3.5 pr-3 py-2 rounded-l-full text-sm font-medium transition-colors
-            ${liked ? 'text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-500/10 hover:bg-sky-200 dark:hover:bg-sky-500/20' : 'text-neutral-800 dark:text-neutral-50 hover:bg-neutral-200 dark:hover:bg-neutral-700/70'}`} 
+            ${liked ? 'text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-500/10 hover:bg-sky-200 dark:hover:bg-sky-500/20' : 'text-neutral-800 dark:text-neutral-50 hover:bg-neutral-200 dark:hover:bg-neutral-700/70'}`}
           aria-pressed={liked}
           title="Like"
         >
           <ThumbsUpIcon className={`w-5 h-5 ${liked ? 'fill-sky-600 dark:fill-sky-400' : ''}`} />
           <span>{formatCount(likeCount)}</span>
         </button>
-        <div className="h-5 w-px bg-neutral-300 dark:bg-neutral-600/80"></div>
-        <button 
+        <div className="h-5 w-px bg-neutral-300 dark:bg-neutral-600/80" />
+        <button
           onClick={onDislike}
           className={`hover:bg-neutral-200 dark:hover:bg-neutral-700/70 px-3 py-2 rounded-r-full text-sm font-medium transition-colors
             ${disliked ? 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-500/10 hover:bg-red-200 dark:hover:bg-red-500/20' : 'text-neutral-800 dark:text-neutral-50'}`}
@@ -213,10 +220,10 @@ const VideoActions: React.FC<VideoActionsProps> = ({
 
       {/* Share Button */}
       <div className="relative share-modal-container">
-        <button 
-          onClick={handleShare} 
-          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors" 
-          aria-label="Share this video" 
+        <button
+          onClick={handleShare}
+          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors"
+          aria-label="Share this video"
           title="Share"
         >
           <ShareIcon className="w-5 h-5" />
@@ -231,16 +238,16 @@ const VideoActions: React.FC<VideoActionsProps> = ({
           shareMessage={shareMessage}
         />
       </div>
-      
+
       {/* Save Button */}
       <div className="relative">
-        <button 
+        <button
           ref={saveButtonRef}
-          onClick={onSave} 
+          onClick={onSave}
           disabled={saveModalLoading}
-          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60" 
-          aria-label="Save this video to a playlist" 
-          title={isSavedToAnyList ? "Edit saved playlists" : "Save to playlist"}
+          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60"
+          aria-label="Save this video to a playlist"
+          title={isSavedToAnyList ? 'Edit saved playlists' : 'Save to playlist'}
         >
           {isSavedToAnyList ? <SaveIconFilled className="w-5 h-5" /> : <SaveIcon className="w-5 h-5" />}
           <span>{isSavedToAnyList ? 'Saved' : 'Save'}</span>

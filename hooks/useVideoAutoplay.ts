@@ -26,11 +26,13 @@ export const useVideoAutoplay = ({
   actions,
   setIsManuallyPaused,
   enableAutoplay = false,
-  unmuteOnAutoplay = false
+  unmuteOnAutoplay = false,
 }: UseVideoAutoplayProps) => {
   useEffect(() => {
-    if (!enableAutoplay) return;
-    
+    if (!enableAutoplay) {
+return;
+}
+
     if (isIntersecting && !isPlaying && !isManuallyPaused) {
       // Auto-play when video comes into view and hasn't been manually paused
       // Conditionally unmute the video when autoplay starts based on unmuteOnAutoplay flag

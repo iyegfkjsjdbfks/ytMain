@@ -50,16 +50,18 @@ class PerformanceMonitor {
   }
 
   startMeasure(name: string, metadata?: Record<string, any>): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     const metric: PerformanceMetric = {
       name,
       startTime: performance.now(),
       metadata: metadata || {},
     };
-    
+
     this.metrics.set(name, metric);
-    
+
     if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
       performance.mark(`${name}-start`);
     }
@@ -70,7 +72,9 @@ class PerformanceMonitor {
   }
 
   endMeasure(name: string): number | null {
-    if (!this.isEnabled) return null;
+    if (!this.isEnabled) {
+return null;
+}
 
     const metric = this.metrics.get(name);
     if (!metric) {
@@ -82,7 +86,7 @@ class PerformanceMonitor {
 
     const endTime = performance.now();
     const duration = endTime - metric.startTime;
-    
+
     metric.endTime = endTime;
     metric.duration = duration;
 
@@ -114,14 +118,18 @@ class PerformanceMonitor {
 
   getAverageTime(name: string): number | null {
     const metrics = this.getMetrics().filter(m => m.name === name);
-    if (metrics.length === 0) return null;
-    
+    if (metrics.length === 0) {
+return null;
+}
+
     const total = metrics.reduce((sum, m) => sum + (m.duration || 0), 0);
     return total / metrics.length;
   }
 
   logSummary(): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     const metrics = this.getMetrics();
     if (metrics.length === 0) {
@@ -129,7 +137,7 @@ class PerformanceMonitor {
     }
 
     console.group('📊 Performance Summary');
-    
+
     // Group by name and calculate averages
     const grouped = metrics.reduce((acc, metric) => {
       if (metric.name && !acc[metric.name]) {
@@ -145,9 +153,9 @@ class PerformanceMonitor {
       // const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
       // const _min = Math.min(...durations);
       // const _max = Math.max(...durations);
-      
+
       });
-    
+
     console.groupEnd();
   }
 
@@ -168,8 +176,8 @@ export function usePerformanceMonitor(componentName: string) {
 
   const endRender = () => {
     const metricName = `${componentName}-render`;
-    return performanceMonitor.hasMetric(metricName) 
-      ? performanceMonitor.endMeasure(metricName) 
+    return performanceMonitor.hasMetric(metricName)
+      ? performanceMonitor.endMeasure(metricName)
       : null;
   };
 
@@ -218,13 +226,13 @@ export function usePerformanceMonitor(componentName: string) {
 // Higher-order component for automatic performance monitoring
 export function withPerformanceMonitoring<P extends object>(
   WrappedComponent: React.ComponentType<P>,
-  componentName?: string
+  componentName?: string,
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
-  
+
   const MonitoredComponent = React.forwardRef((props: P, ref: any) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
-    
+
     React.useEffect(() => {
       startRender();
       return () => {
@@ -236,7 +244,7 @@ export function withPerformanceMonitoring<P extends object>(
   });
 
   MonitoredComponent.displayName = `withPerformanceMonitoring(${displayName})`;
-  
+
   return MonitoredComponent;
 }
 
@@ -244,7 +252,7 @@ export function withPerformanceMonitoring<P extends object>(
 export const measureRenderTime = (componentName: string) => {
   return (_target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
-    
+
     descriptor.value = function (...args: any[]) {
       const metricName = `${componentName}-${propertyKey}`;
       performanceMonitor.startMeasure(metricName);
@@ -254,30 +262,32 @@ export const measureRenderTime = (componentName: string) => {
       }
       return result;
     };
-    
+
     return descriptor;
   };
 };
 
 // Bundle size analyzer
 export const analyzeBundleSize = () => {
-  if (typeof window === 'undefined') return;
-  
+  if (typeof window === 'undefined') {
+return;
+}
+
   const scripts = Array.from(document.querySelectorAll('script[src]'));
   const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
-  
+
   console.group('📦 Bundle Analysis');
   // Estimate bundle sizes (this is approximate)
   scripts.forEach((script: any) => {
     if (script.src && !script.src.includes('chrome-extension')) {
       }
   });
-  
+
   styles.forEach((style: any) => {
     if (style.href && !style.href.includes('chrome-extension')) {
       }
   });
-  
+
   console.groupEnd();
 };
 
@@ -287,9 +297,9 @@ export const monitorMemoryUsage = () => {
     console.warn('Memory monitoring not supported in this browser');
     return;
   }
-  
+
   // const _memory = (window.performance as any).memory;
-  
+
   };
 
 // React import (assuming it's available globally or imported elsewhere)

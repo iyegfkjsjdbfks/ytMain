@@ -1,7 +1,11 @@
-import React, { ReactNode } from 'react';
-import { UnifiedProviders } from './UnifiedProviders';
-import SuspenseWrapper from '../components/SuspenseWrapper';
+import type { ReactNode } from 'react';
+import type React from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import SuspenseWrapper from '../components/SuspenseWrapper';
+
+import { UnifiedProviders } from './UnifiedProviders';
 
 // Create a client for React Query
 const queryClient = new QueryClient({

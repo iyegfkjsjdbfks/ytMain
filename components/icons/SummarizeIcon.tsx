@@ -1,10 +1,10 @@
-import React from 'react';
+import type React from 'react';
 
 interface SummarizeIconProps {
   className?: string;
 }
 
-export const SummarizeIcon: React.FC<SummarizeIconProps> = ({ className = "w-6 h-6" }) => {
+export const SummarizeIcon: React.FC<SummarizeIconProps> = ({ className = 'w-6 h-6' }) => {
   return (
     <svg
       className={className}

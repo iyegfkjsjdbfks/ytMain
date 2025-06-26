@@ -24,9 +24,9 @@ export class MockApiService {
       'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
       'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
     ];
-    
+
     const index = id ? parseInt(id) % videos.length : Math.floor(Math.random() * videos.length);
     return videos[index] || videos[0] || '';
   }
@@ -43,12 +43,12 @@ export class MockApiService {
       'Fitness Workout Routine',
       'Art Tutorial: Digital Painting',
       'Gaming Highlights',
-      'Science Explained Simply'
+      'Science Explained Simply',
     ];
 
     const channels = [
       'NatureWorld', 'CodeMaster', 'TravelBuddy', 'ChefExpert', 'MusicLive',
-      'TechReviewer', 'FitnessPro', 'ArtStudio', 'GameZone', 'ScienceHub'
+      'TechReviewer', 'FitnessPro', 'ArtStudio', 'GameZone', 'ScienceHub',
     ];
 
     const descriptions = [
@@ -61,7 +61,7 @@ export class MockApiService {
       'Complete workout routine for all fitness levels with expert guidance.',
       'Step-by-step digital art tutorial for beginners and advanced artists.',
       'Epic gaming moments and highlights from the latest popular games.',
-      'Complex scientific concepts explained in simple, easy-to-understand terms.'
+      'Complex scientific concepts explained in simple, easy-to-understand terms.',
     ];
 
     const index = parseInt(id) % titles.length;
@@ -87,7 +87,7 @@ export class MockApiService {
       category: this.getRandomCategory(),
       tags: this.generateRandomTags(),
       isLive: Math.random() > 0.95,
-      subscriberCount: Math.floor(Math.random() * 1000000) + 1000
+      subscriberCount: Math.floor(Math.random() * 1000000) + 1000,
     };
   }
 
@@ -98,7 +98,7 @@ export class MockApiService {
       ...video,
       duration: Math.floor(Math.random() * 60) + 15, // 15-75 seconds
       hashtags: ['#shorts', '#viral', '#trending', ...this.generateRandomTags().slice(0, 3)],
-      isShort: true
+      isShort: true,
     };
   }
 
@@ -106,7 +106,7 @@ export class MockApiService {
   generateMockComment(id: string, _videoId: string): any {
     const authors = [
       'VideoLover123', 'TechEnthusiast', 'NatureFan', 'MusicAddict', 'Gamer4Life',
-      'ArtAppreciator', 'FoodieExplorer', 'TravelBug', 'ScienceGeek', 'FitnessFreak'
+      'ArtAppreciator', 'FoodieExplorer', 'TravelBug', 'ScienceGeek', 'FitnessFreak',
     ];
 
     const comments = [
@@ -119,7 +119,7 @@ export class MockApiService {
       'This helped me so much with my project. Thank you!',
       'Your explanation is so clear and easy to understand.',
       'I\'ve been waiting for a video like this. Perfect timing!',
-      'This is exactly what I needed to see today.'
+      'This is exactly what I needed to see today.',
     ];
 
     const index = parseInt(id) % authors.length;
@@ -143,7 +143,7 @@ export class MockApiService {
       replies: [],
       moderationStatus: 'approved' as const,
       mentions: [],
-      hashtags: []
+      hashtags: [],
     };
   }
 
@@ -157,7 +157,7 @@ export class MockApiService {
     const categories = [
       'Education', 'Entertainment', 'Gaming', 'Music', 'News & Politics',
       'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
-      'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals'
+      'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals',
     ];
     return categories[Math.floor(Math.random() * categories.length)] || 'General';
   }
@@ -166,9 +166,9 @@ export class MockApiService {
     const allTags = [
       'tutorial', 'review', 'vlog', 'music', 'gaming', 'tech', 'science',
       'nature', 'travel', 'food', 'art', 'fitness', 'education', 'entertainment',
-      'comedy', 'news', 'sports', 'diy', 'howto', 'tips', 'tricks', 'guide'
+      'comedy', 'news', 'sports', 'diy', 'howto', 'tips', 'tricks', 'guide',
     ];
-    
+
     const numTags = Math.floor(Math.random() * 5) + 3;
     const shuffled = allTags.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, numTags);
@@ -186,7 +186,7 @@ export class MockApiService {
       'Workout Routines',
       'Art Inspiration',
       'Gaming Highlights',
-      'Science Documentaries'
+      'Science Documentaries',
     ];
 
     const index = parseInt(id) % titles.length;
@@ -204,7 +204,7 @@ export class MockApiService {
       updatedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
       creatorId: `user-${index}`,
       creatorName: `Creator${index}`,
-      views: Math.floor(Math.random() * 10000) + 100
+      views: Math.floor(Math.random() * 10000) + 100,
     };
   }
 
@@ -212,7 +212,7 @@ export class MockApiService {
   generateMockChannel(id: string): any {
     const names = [
       'TechMaster', 'NatureExplorer', 'MusicMaven', 'GameGuru', 'ArtisticSoul',
-      'FoodieAdventure', 'TravelDiaries', 'ScienceSimplified', 'FitnessJourney', 'ComedyCentral'
+      'FoodieAdventure', 'TravelDiaries', 'ScienceSimplified', 'FitnessJourney', 'ComedyCentral',
     ];
 
     const index = parseInt(id.replace('channel-', '')) % names.length;
@@ -234,8 +234,8 @@ export class MockApiService {
       location: 'Global',
       links: [
         { title: 'Website', url: `https://${name.toLowerCase()}.com` },
-        { title: 'Twitter', url: `https://twitter.com/${name.toLowerCase()}` }
-      ]
+        { title: 'Twitter', url: `https://twitter.com/${name.toLowerCase()}` },
+      ],
     };
   }
 
@@ -256,19 +256,19 @@ export class MockApiService {
 export const mockApi = MockApiService.getInstance();
 
 // Helper functions for common use cases
-export const getPlaceholderImage = (width: number, height: number, seed?: string | number) => 
+export const getPlaceholderImage = (width: number, height: number, seed?: string | number) =>
   mockApi.getPlaceholderImage(width, height, seed);
 
-export const getPlaceholderVideo = (id?: string) => 
+export const getPlaceholderVideo = (id?: string) =>
   mockApi.getPlaceholderVideo(id);
 
-export const generateMockVideos = (count: number) => 
+export const generateMockVideos = (count: number) =>
   Array.from({ length: count }, (_, i) => mockApi.generateMockVideo(i.toString()));
 
-export const generateMockShorts = (count: number) => 
+export const generateMockShorts = (count: number) =>
   Array.from({ length: count }, (_, i) => mockApi.generateMockShort(i.toString()));
 
-export const generateMockComments = (count: number, videoId: string) => 
+export const generateMockComments = (count: number, videoId: string) =>
   Array.from({ length: count }, (_, i) => mockApi.generateMockComment(i.toString(), videoId));
 
 export default mockApi;

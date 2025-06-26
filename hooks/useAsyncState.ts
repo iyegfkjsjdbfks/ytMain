@@ -19,19 +19,19 @@ interface UseAsyncStateOptions {
 export const useAsyncState = <T>(
   asyncFunction: () => Promise<T>,
   dependencies: any[] = [],
-  options: UseAsyncStateOptions = {}
+  options: UseAsyncStateOptions = {},
 ) => {
   const { initialLoading = true, onSuccess, onError } = options;
-  
+
   const [state, setState] = useState<AsyncState<T>>({
     data: null,
     loading: initialLoading,
-    error: null
+    error: null,
   });
 
   const execute = useCallback(async () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
-    
+
     try {
       const result = await asyncFunction();
       setState({ data: result, loading: false, error: null });
@@ -69,7 +69,7 @@ export const useAsyncState = <T>(
     reset,
     setData,
     setError,
-    isIdle: !state.loading && !state.error && !state.data
+    isIdle: !state.loading && !state.error && !state.data,
   };
 };
 

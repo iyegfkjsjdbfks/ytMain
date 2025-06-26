@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ShortsFiltersProps {
@@ -12,10 +13,12 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
   categories,
   selectedCategory,
   onCategoryChange,
-  onClose
+  onClose,
 }) => {
   const formatCategoryName = (category: string) => {
-    if (category === 'all') return 'All';
+    if (category === 'all') {
+return 'All';
+}
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
 
@@ -32,7 +35,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
             <XMarkIcon className="w-4 h-4" />
           </button>
         </div>
-        
+
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <button
@@ -48,7 +51,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
             </button>
           ))}
         </div>
-        
+
         {selectedCategory !== 'all' && (
           <button
             onClick={() => onCategoryChange('all')}

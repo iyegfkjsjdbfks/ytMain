@@ -1,13 +1,15 @@
-import React from 'react';
-import { 
-  PlayIcon, 
-  PauseIcon, 
-  SpeakerWaveIcon, 
+import type React from 'react';
+
+import {
+  PlayIcon,
+  PauseIcon,
+  SpeakerWaveIcon,
   SpeakerXMarkIcon,
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
 } from '@heroicons/react/24/outline';
+
 import { ActionButton } from '../ui';
 
 interface VideoControlsProps {
@@ -43,7 +45,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
   onFullscreenToggle,
   onPlaybackRateChange,
   onSettingsToggle,
-  className = ''
+  className = '',
 }) => {
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -67,11 +69,11 @@ const VideoControls: React.FC<VideoControlsProps> = ({
   return (
     <div className={`bg-gradient-to-t from-black/80 to-transparent p-4 ${className}`}>
       {/* Progress Bar */}
-      <div 
+      <div
         className="w-full h-1 bg-gray-600 rounded-full cursor-pointer mb-4 group"
         onClick={handleProgressClick}
       >
-        <div 
+        <div
           className="h-full bg-red-600 rounded-full relative group-hover:h-1.5 transition-all"
           style={{ width: `${progress}%` }}
         >
@@ -107,7 +109,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
                 <SpeakerWaveIcon className="w-5 h-5" />
               )}
             </ActionButton>
-            
+
             <input
               type="range"
               min="0"

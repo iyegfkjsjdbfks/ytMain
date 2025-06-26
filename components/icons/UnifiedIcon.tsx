@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 // Base icon props interface
 export interface IconProps {
@@ -150,10 +150,10 @@ export const ClockIcon: React.FC<IconProps> = (props) => (
 );
 
 // YouTube Logo as a special case
-export const YouTubeLogo: React.FC<IconProps & { variant?: 'full' | 'icon' }> = ({ 
-  className = 'h-6', 
+export const YouTubeLogo: React.FC<IconProps & { variant?: 'full' | 'icon' }> = ({
+  className = 'h-6',
   variant = 'full',
-  ...props 
+  ...props
 }) => {
   if (variant === 'icon') {
     return (

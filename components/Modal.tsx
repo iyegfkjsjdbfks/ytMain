@@ -1,4 +1,6 @@
-import React, { useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useEffect, useRef   } from 'react';
+
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
@@ -53,7 +55,9 @@ const Modal: React.FC<ModalProps> = ({
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   const sizeClasses = {
     sm: 'max-w-sm',

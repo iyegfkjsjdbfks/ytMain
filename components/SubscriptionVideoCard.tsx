@@ -1,16 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Video } from '../types';
-import { useWatchLater } from '../contexts/WatchLaterContext';
-import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
-import { SaveIcon } from './icons/UnifiedIcon';
-import { IconButton } from './ui/Button';
-import { useToggle } from '../hooks/unifiedHooks';
+import type React from 'react';
+
 import {
   EyeIcon,
   CalendarDaysIcon,
-  PlayIcon
+  PlayIcon,
 } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
+
+import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useToggle } from '../hooks/unifiedHooks';
+import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
+
+import { SaveIcon } from './icons/UnifiedIcon';
+import { IconButton } from './ui/Button';
+
+import type { Video } from '../types';
+
 
 interface SubscriptionVideoCardProps {
   video: Video;
@@ -18,10 +23,10 @@ interface SubscriptionVideoCardProps {
   showChannel?: boolean;
 }
 
-const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({ 
-  video, 
+const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
+  video,
   viewType = 'grid',
-  showChannel = true 
+  showChannel = true,
 }) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
   const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
@@ -43,7 +48,6 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
   };
 
 
-
   if (viewType === 'list') {
     return (
       <div className="flex space-x-4 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900 rounded-lg transition-colors">
@@ -61,7 +65,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
             </div>
             {video.isLive && (
               <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded flex items-center space-x-1">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 <span>LIVE</span>
               </div>
             )}
@@ -94,7 +98,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
                       </div>
                     )}
                   </Link>
-                  <Link 
+                  <Link
                     to={channelUrl}
                     className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                   >
@@ -151,7 +155,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
           </div>
           {video.isLive && (
             <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded flex items-center space-x-1">
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
               <span>LIVE</span>
             </div>
           )}
@@ -182,7 +186,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
             </Link>
 
             {showChannel && (
-              <Link 
+              <Link
                 to={channelUrl}
                 className="block text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors mt-1"
               >

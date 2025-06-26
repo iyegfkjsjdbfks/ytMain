@@ -1,8 +1,13 @@
-import React, { useState, useEffect   } from 'react';
-import BaseModal from './BaseModal';
-import BaseForm from './BaseForm';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import { useAsyncState } from '../hooks';
-import { Playlist } from '../src/types/core';
+
+
+import BaseForm from './BaseForm';
+import BaseModal from './BaseModal';
+
+import type { Playlist } from '../src/types/core';
 
 interface RefactoredSaveToPlaylistModalProps {
   isOpen: boolean;
@@ -15,12 +20,12 @@ interface RefactoredSaveToPlaylistModalProps {
 
 /**
  * Refactored Save to Playlist Modal demonstrating the use of reusable components
- * 
+ *
  * This modal shows how the new reusable components reduce code duplication:
  * - BaseModal handles modal functionality (overlay, escape key, focus management)
  * - BaseForm handles form state, validation, and submission
  * - useAsyncState manages loading and error states
- * 
+ *
  * Compare this with the original SaveToPlaylistModal to see the reduction in boilerplate
  */
 const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps> = ({
@@ -29,18 +34,18 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
   videoId,
   existingPlaylists,
   onSaveToPlaylist,
-  onCreatePlaylist
+  onCreatePlaylist,
 }) => {
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<string>('');
   const [showCreateForm, setShowCreateForm] = useState(false);
-  
+
   // Auto-select first playlist when modal opens
   useEffect(() => {
     if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId && existingPlaylists[0]) {
       setSelectedPlaylistId(existingPlaylists[0].id);
     }
   }, [isOpen, existingPlaylists, selectedPlaylistId]);
-  
+
   // Reset state when modal closes
   useEffect(() => {
     if (!isOpen) {
@@ -48,21 +53,23 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
       setShowCreateForm(false);
     }
   }, [isOpen]);
-  
+
   const {
     loading: saveLoading,
-    error: saveError
+    error: saveError,
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
-    error: createError
+    error: createError,
   } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist
   const handleSaveToExisting = async () => {
-    if (!selectedPlaylistId) return;
-    
+    if (!selectedPlaylistId) {
+return;
+}
+
     try {
       await onSaveToPlaylist(videoId, selectedPlaylistId);
       onClose();
@@ -91,18 +98,22 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
       placeholder: 'Enter playlist name',
       required: true,
       validation: (value: string) => {
-        if (value.length < 3) return 'Playlist name must be at least 3 characters';
-        if (value.length > 100) return 'Playlist name must be less than 100 characters';
+        if (value.length < 3) {
+return 'Playlist name must be at least 3 characters';
+}
+        if (value.length > 100) {
+return 'Playlist name must be less than 100 characters';
+}
         return null;
-      }
+      },
     },
     {
       name: 'description',
       label: 'Description (Optional)',
       type: 'textarea' as const,
       placeholder: 'Enter playlist description',
-      rows: 3
-    }
+      rows: 3,
+    },
   ];
 
   const modalFooter = (
@@ -113,7 +124,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
       >
         Cancel
       </button>
-      
+
       {!showCreateForm && (
         <>
           <button
@@ -122,7 +133,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
           >
             Create New Playlist
           </button>
-          
+
           <button
             onClick={handleSaveToExisting}
             disabled={!selectedPlaylistId || saveLoading}
@@ -168,7 +179,7 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Select a playlist
             </label>
-            
+
             {existingPlaylists.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-gray-500 dark:text-gray-400 mb-4">

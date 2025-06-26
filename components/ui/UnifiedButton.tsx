@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { cn } from '../../utils/cn';
 
 interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -88,7 +89,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
     'inline-flex items-center justify-center font-medium transition-all duration-150 ease-in-out',
     'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
     'dark:focus-visible:ring-offset-neutral-900',
-    
+
     // Conditional styles
     {
       'border': !isActionVariant,
@@ -96,11 +97,11 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
       'opacity-70 cursor-not-allowed': isDisabled,
       'font-semibold': !isLinkVariant,
     },
-    
+
     // Size and variant classes
     !isLinkVariant && sizeClasses[size],
     variantClasses[variant],
-    roundedClasses[rounded]
+    roundedClasses[rounded],
   );
 
   const iconSize = iconSizeClasses[size];
@@ -114,22 +115,22 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
       {...props}
     >
       {loading && (
-        <LoadingSpinner 
+        <LoadingSpinner
           size={cn(
             spinnerSize,
-            children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : ''
-          )} 
+            children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '',
+          )}
         />
       )}
-      
+
       {leftIcon && !loading && (
         <span className={cn(iconSize, children ? 'mr-2' : '')}>
           {leftIcon}
         </span>
       )}
-      
+
       {children}
-      
+
       {rightIcon && !loading && (
         <span className={cn(iconSize, children ? 'ml-2' : '')}>
           {rightIcon}

@@ -1,7 +1,11 @@
 import { useCallback } from 'react';
-import { Video } from '../src/types/core';
+
 import { getVideos, getShortsVideos } from '../services/mockVideoService';
+
 import { useAsyncData } from './useAsyncData';
+
+import type { Video } from '../src/types/core';
+
 
 /**
  * Hook for fetching different types of videos

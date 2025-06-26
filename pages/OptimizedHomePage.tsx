@@ -1,13 +1,16 @@
 import * as React from 'react';
 import {  useState, useMemo, useCallback, Suspense  } from 'react';
+
 import { HomeIcon } from '@heroicons/react/24/solid';
-import { useHomeVideos } from '../hooks/useOptimizedVideoData';
-import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';
+
 import CategoryChips from '../components/CategoryChips';
-import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorBoundary from '../components/ErrorBoundary';
+import LoadingSpinner from '../components/LoadingSpinner';
+import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';
+import { useHomeVideos } from '../hooks/useOptimizedVideoData';
 import { cn } from '../utils/cn';
-import { Video } from '../types';
+
+import type { Video } from '../types';
 
 // Lazy load additional sections
 const ShortsSection = React.lazy(() => import('../components/ShortsSection'));
@@ -116,7 +119,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
               <HomeIcon className="w-8 h-8 text-blue-500" />
               <h1 className="text-2xl font-bold text-gray-900">Home</h1>
             </div>
-            
+
             <div className="flex items-center gap-4">
               {/* View Mode Toggle */}
               <div className="flex bg-gray-100 rounded-lg p-1">
@@ -126,7 +129,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
                     'px-3 py-1 rounded text-sm font-medium transition-colors',
                     viewMode === 'grid'
                       ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
+                      : 'text-gray-600 hover:text-gray-900',
                   )}
                 >
                   Grid
@@ -137,13 +140,13 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
                     'px-3 py-1 rounded text-sm font-medium transition-colors',
                     viewMode === 'list'
                       ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
+                      : 'text-gray-600 hover:text-gray-900',
                   )}
                 >
                   List
                 </button>
               </div>
-              
+
               {/* Refresh Button */}
               <button
                 onClick={handleRefresh}
@@ -193,7 +196,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
                 {filteredVideos.length} videos
               </span>
             </div>
-            
+
             {loading && filteredVideos.length === 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {Array.from({ length: 12 }).map((_, index) => (

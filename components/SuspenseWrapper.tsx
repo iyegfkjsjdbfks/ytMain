@@ -1,4 +1,7 @@
-import React, { Suspense, ReactNode   } from 'react';
+import type { ReactNode   } from 'react';
+import type React from 'react';
+import { Suspense   } from 'react';
+
 import LoadingSpinner from './LoadingSpinner';
 
 interface SuspenseWrapperProps {
@@ -12,9 +15,9 @@ const DefaultFallback: React.FC = () => (
   </div>
 );
 
-const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({ 
-  children, 
-  fallback = <DefaultFallback /> 
+const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
+  children,
+  fallback = <DefaultFallback />,
 }) => {
   return (
     <Suspense fallback={fallback}>

@@ -1,13 +1,15 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,
   QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon,
-  CheckBadgeIcon
+  CheckBadgeIcon,
 } from '@heroicons/react/24/outline';
-import { useTheme } from '../contexts/ThemeContext';
+import { Link } from 'react-router-dom';
+
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 
 interface UserMenuProps {
@@ -45,7 +47,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuth();
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   const handleSignOut = () => {
     // Clear any stored user data
@@ -68,11 +72,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
   const handleThemeToggle = () => {
     toggleTheme();
     onClose(); // Close menu after theme toggle
-  }
+  };
 
   const handleGenericClick = () => {
     onClose(); // Close menu on any item click
-  }
+  };
 
   return (
     <div
@@ -104,9 +108,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
                   {user.subscriberCount.toLocaleString()} subscribers
                 </p>
               )}
-              <Link 
+              <Link
                 to={`/channel/${user.username}`}
-                onClick={handleGenericClick} 
+                onClick={handleGenericClick}
                 className="text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-0.5 block"
               >
                 View your channel
@@ -116,8 +120,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
         </div>
       )}
       <div className="py-1">
-        <MenuItem onClick={() => { window.open('https://accounts.google.com/AccountChooser', '_blank'); handleGenericClick(); }} icon={<UserCircleIcon />}>Switch account</MenuItem>
-        <MenuItem onClick={() => { window.open('https://studio.youtube.com', '_blank'); handleGenericClick(); }} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>
+        <MenuItem onClick={() => {
+ window.open('https://accounts.google.com/AccountChooser', '_blank'); handleGenericClick();
+}} icon={<UserCircleIcon />}>Switch account</MenuItem>
+        <MenuItem onClick={() => {
+ window.open('https://studio.youtube.com', '_blank'); handleGenericClick();
+}} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">

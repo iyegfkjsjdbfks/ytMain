@@ -1,11 +1,13 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState  } from 'react';
+
+import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
-import { UserPlaylistDetails } from '../types';
+
 import { getUserPlaylists, createUserPlaylist } from '../services/mockVideoService';
-import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
+
+import type { UserPlaylistDetails } from '../types';
 
 const PlaylistsPage: React.FC = () => {
   const [playlists, setPlaylists] = useState<UserPlaylistDetails[]>([]);
@@ -22,7 +24,7 @@ const PlaylistsPage: React.FC = () => {
         const fetchedPlaylists = await getUserPlaylists();
         setPlaylists(fetchedPlaylists);
       } catch (error) {
-        console.error("Failed to fetch user playlists:", error);
+        console.error('Failed to fetch user playlists:', error);
         setPlaylists([]);
       } finally {
         setLoading(false);
@@ -64,10 +66,10 @@ const PlaylistsPage: React.FC = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
       {Array.from({ length: 5 }).map((_, index) => (
         <div key={index} className="bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm animate-pulse">
-          <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-t-xl"></div>
+          <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-t-xl" />
           <div className="p-3 sm:p-4">
-            <div className="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mb-1.5"></div>
-            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
+            <div className="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mb-1.5" />
+            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
           </div>
         </div>
       ))}
@@ -98,9 +100,9 @@ const PlaylistsPage: React.FC = () => {
           {playlists.map(playlist => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
-                <img 
-                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'} 
-                  alt={`Thumbnail for ${playlist.title}`} 
+                <img
+                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
+                  alt={`Thumbnail for ${playlist.title}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -149,7 +151,9 @@ const PlaylistsPage: React.FC = () => {
                   id="playlistName"
                   type="text"
                   value={newPlaylistName}
-                  onChange={(e) => { setNewPlaylistName(e.target.value); setCreateError(null); }}
+                  onChange={(e) => {
+ setNewPlaylistName(e.target.value); setCreateError(null);
+}}
                   placeholder="Enter playlist name..."
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
                   maxLength={100}

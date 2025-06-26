@@ -1,13 +1,16 @@
-import React from 'react';
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import type React from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook, RenderHookOptions } from '@testing-library/react';
+import { render, act, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi, MockedFunction } from 'vitest';
+import { BrowserRouter } from 'react-router-dom';
+import { vi } from 'vitest';
+
 // Store import removed to fix circular dependency
-import { Video, Channel } from '../src/types/core';
-import { UserPlaylist } from '../types';
+import type { Video, Channel } from '../src/types/core';
+import type { UserPlaylist } from '../types';
+import type { RenderOptions, RenderResult, RenderHookOptions } from '@testing-library/react';
+import type { MockedFunction } from 'vitest';
 
 // Test Providers
 interface TestProvidersProps {
@@ -42,7 +45,7 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
 
 export const renderWithProviders = (
   ui: React.ReactElement,
-  options: CustomRenderOptions = {}
+  options: CustomRenderOptions = {},
 ): RenderResult => {
   const { queryClient, ...renderOptions } = options;
 
@@ -62,7 +65,7 @@ interface CustomRenderHookOptions<TProps> extends RenderHookOptions<TProps> {
 
 export const renderHookWithProviders = <TResult, TProps>(
   hook: (props: TProps) => TResult,
-  options: CustomRenderHookOptions<TProps> = {}
+  options: CustomRenderHookOptions<TProps> = {},
 ) => {
   const { queryClient, ...renderHookOptions } = options;
 
@@ -136,7 +139,7 @@ export const createUserEvent = () => userEvent.setup();
 
 // Mock Functions
 export const createMockFunction = <T extends (...args: any[]) => any>(
-  implementation?: T
+  implementation?: T,
 ): MockedFunction<T> => {
   return vi.fn(implementation || (() => {})) as MockedFunction<T>;
 };
@@ -164,7 +167,9 @@ export class PerformanceTestHelper {
   }
 
   getAverageTime(): number {
-    if (this.measurements.length === 0) return 0;
+    if (this.measurements.length === 0) {
+return 0;
+}
     return this.measurements.reduce((sum, time) => sum + time, 0) / this.measurements.length;
   }
 
@@ -190,7 +195,7 @@ export class PerformanceTestHelper {
 // Memory Testing Utilities
 export const measureMemoryUsage = (): number => {
   if ('memory' in performance) {
-    return (performance as any).memory.usedJSHeapSize;
+    return (performance as Performance & { memory: { usedJSHeapSize: number } }).memory.usedJSHeapSize;
   }
   return 0;
 };
@@ -198,21 +203,21 @@ export const measureMemoryUsage = (): number => {
 export const createMemoryLeakTest = (testFn: () => void, iterations: number = 100) => {
   return async () => {
     const initialMemory = measureMemoryUsage();
-    
+
     for (let i = 0; i < iterations; i++) {
       testFn();
-      
+
       // Force garbage collection if available
       if (global.gc) {
         global.gc();
       }
-      
+
       await waitForNextTick();
     }
-    
+
     const finalMemory = measureMemoryUsage();
     const memoryIncrease = finalMemory - initialMemory;
-    
+
     // Memory increase should be reasonable (less than 10MB for most tests)
     expect(memoryIncrease).toBeLessThan(10 * 1024 * 1024);
   };
@@ -228,7 +233,7 @@ export const getByTestId = (container: HTMLElement, testId: string): HTMLElement
 };
 
 export const queryByTestId = (container: HTMLElement, testId: string): HTMLElement | null => {
-  return container.querySelector(`[data-testid="${testId}"]`) as HTMLElement | null;
+  return container.querySelector(`[data-testid="${testId}"]`);
 };
 
 // Accessibility Testing Utilities
@@ -261,7 +266,7 @@ export const mockFetch = (response: any, status: number = 200) => {
       status,
       json: () => Promise.resolve(response),
       text: () => Promise.resolve(JSON.stringify(response)),
-    } as Response)
+    } as Response),
   );
 };
 
@@ -272,9 +277,9 @@ export const mockFetchError = (error: string) => {
 // Local Storage Mocking
 export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
-  
+
   global.localStorage = {
-    getItem: vi.fn((key: string) => store[key] || null),
+    getItem: vi.fn((key: string) => store[key] ?? null),
     setItem: vi.fn((key: string, value: string) => {
       store[key] = value;
     }),
@@ -312,7 +317,7 @@ export const mockResizeObserver = () => {
 
 // Media Query Mocking
 export const mockMatchMedia = (matches: boolean = false) => {
-  global.matchMedia = vi.fn().mockImplementation((query) => ({
+  global.matchMedia = vi.fn().mockImplementation((query: string) => ({
     matches,
     media: query,
     onchange: null,
@@ -328,17 +333,17 @@ export const mockMatchMedia = (matches: boolean = false) => {
 export const describeWithSetup = (
   name: string,
   setup: () => void,
-  tests: () => void
+  tests: () => void,
 ) => {
   describe(name, () => {
     beforeEach(() => {
       setup();
     });
-    
+
     afterEach(() => {
       vi.clearAllMocks();
     });
-    
+
     tests();
   });
 };
@@ -353,20 +358,20 @@ expect.extend({
       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
-    
+
     return {
       message: () => `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
       pass: isInViewport,
     };
   },
-  
+
   toHaveAccessibleName(received: HTMLElement, expectedName: string) {
-    const accessibleName = received.getAttribute('aria-label') || 
-                          received.getAttribute('aria-labelledby') || 
+    const accessibleName = received.getAttribute('aria-label') ??
+                          received.getAttribute('aria-labelledby') ??
                           received.textContent;
-    
+
     const hasExpectedName = accessibleName === expectedName;
-    
+
     return {
       message: () => `expected element to have accessible name "${expectedName}", but got "${accessibleName}"`,
       pass: hasExpectedName,

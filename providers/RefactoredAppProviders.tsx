@@ -1,13 +1,15 @@
-import * as React from 'react';
-import {  ReactNode  } from 'react';
+import type * as React from 'react';
+import type {  ReactNode  } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
-import { ThemeProvider } from '../contexts/ThemeContext';
-import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
-import { WatchLaterProvider } from '../contexts/WatchLaterContext';
-import { AuthProvider } from '../contexts/AuthContext';
-import SuspenseWrapper from '../components/SuspenseWrapper';
+
 import ErrorBoundary from '../components/ErrorBoundary';
+import SuspenseWrapper from '../components/SuspenseWrapper';
+import { AuthProvider } from '../contexts/AuthContext';
+import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
+import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
+import { WatchLaterProvider } from '../contexts/WatchLaterContext';
 
 // Create a single, optimized QueryClient instance
 const queryClient = new QueryClient({
@@ -18,8 +20,10 @@ const queryClient = new QueryClient({
       retry: (failureCount, error) => {
         // Don't retry on 4xx errors
         if (error && typeof error === 'object' && 'status' in error) {
-          const status = (error as any).status;
-          if (status >= 400 && status < 500) return false;
+          const { status } = (error as any);
+          if (status >= 400 && status < 500) {
+return false;
+}
         }
         return failureCount < 2;
       },
@@ -39,7 +43,7 @@ interface RefactoredAppProvidersProps {
 /**
  * Refactored AppProviders component that consolidates all application providers
  * into a single, optimized provider hierarchy.
- * 
+ *
  * Features:
  * - Unified context management through UnifiedAppProvider
  * - Optimized React Query configuration
@@ -47,7 +51,7 @@ interface RefactoredAppProvidersProps {
  * - Reduced provider nesting for better performance
  */
 export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
-  children
+  children,
 }) => {
   return (
     <ErrorBoundary>
@@ -58,7 +62,7 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
               <WatchLaterProvider>
                 <UnifiedAppProvider>
                   <SuspenseWrapper fallback={<div className="flex items-center justify-center min-h-screen">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
                   </div>}>
                     {children}
                   </SuspenseWrapper>
@@ -89,7 +93,7 @@ interface TestAppProvidersProps {
 
 export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
   children,
-  queryClient: customQueryClient
+  queryClient: customQueryClient,
 }) => {
   const client = customQueryClient || queryClient;
 

@@ -1,19 +1,22 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState  } from 'react';
-import { Link } from 'react-router-dom';
-import { Video, UserPlaylistDetails } from '../types';
-import { 
-  getWatchHistoryVideos, 
-  getWatchLaterVideos, 
-  getUserPlaylists, 
-  getLikedVideos 
-} from '../services/mockVideoService';
-import VideoCard from '../components/VideoCard';
-import LocalHistoryIcon from '../components/icons/HistoryIcon'; // Renamed to avoid clash with Heroicons
-import CustomPlaylistIcon from '../components/icons/PlaylistIcon'; // Use custom playlist icon
+
 import { ClockIcon as OutlineClockIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as SolidHeartIcon, QueueListIcon as SolidQueueListIcon, PlayIcon as SolidPlayIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+import LocalHistoryIcon from '../components/icons/HistoryIcon'; // Renamed to avoid clash with Heroicons
+import CustomPlaylistIcon from '../components/icons/PlaylistIcon'; // Use custom playlist icon
+import VideoCard from '../components/VideoCard';
+import {
+  getWatchHistoryVideos,
+  getWatchLaterVideos,
+  getUserPlaylists,
+  getLikedVideos,
+} from '../services/mockVideoService';
+
+import type { Video, UserPlaylistDetails } from '../types';
 
 const MAX_HORIZONTAL_VIDEOS = 8;
 const MAX_PLAYLISTS_GRID = 6;
@@ -35,17 +38,17 @@ const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, chil
     const numSkeletons = isPlaylistSection ? (itemCount || 4) : (itemCount || MAX_HORIZONTAL_VIDEOS / 2);
     return Array.from({ length: numSkeletons }).map((_, index) => (
       <div key={index} className={`animate-pulse ${isPlaylistSection ? 'w-full' : 'w-48 md:w-52 lg:w-56 flex-shrink-0'}`}>
-        <div className={`aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg ${isPlaylistSection ? 'mb-2' : ''}`}></div>
+        <div className={`aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg ${isPlaylistSection ? 'mb-2' : ''}`} />
         {isPlaylistSection && (
           <>
-            <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mt-1.5"></div>
-            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2 mt-1"></div>
+            <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4 mt-1.5" />
+            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2 mt-1" />
           </>
         )}
         {!isPlaylistSection && (
           <>
-             <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6 mt-2"></div>
-             <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4 mt-1"></div>
+             <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6 mt-2" />
+             <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4 mt-1" />
           </>
         )}
       </div>
@@ -91,12 +94,12 @@ function LibraryPage() { // Removed React.FC
   const [watchLaterVideos, setWatchLaterVideos] = useState<Video[]>([]);
   const [userPlaylists, setUserPlaylists] = useState<UserPlaylistDetails[]>([]);
   const [likedVideos, setLikedVideos] = useState<Video[]>([]);
-  
+
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [loadingWatchLater, setLoadingWatchLater] = useState(true);
   const [loadingPlaylists, setLoadingPlaylists] = useState(true);
   const [loadingLiked, setLoadingLiked] = useState(true);
-  
+
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -104,33 +107,33 @@ function LibraryPage() { // Removed React.FC
       try {
         setLoadingHistory(true);
         getWatchHistoryVideos().then(data => setHistoryVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingHistory(false));
-        
+
         setLoadingWatchLater(true);
         getWatchLaterVideos().then(data => setWatchLaterVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingWatchLater(false));
-        
+
         setLoadingPlaylists(true);
         getUserPlaylists().then(data => {
           const sortedPlaylists = data.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
           setUserPlaylists(sortedPlaylists.slice(0, MAX_PLAYLISTS_GRID));
         }).finally(() => setLoadingPlaylists(false));
-        
+
         setLoadingLiked(true);
         getLikedVideos().then(data => setLikedVideos(data.slice(0, MAX_HORIZONTAL_VIDEOS))).finally(() => setLoadingLiked(false));
 
       } catch (err) {
-        console.error("Error fetching library data:", err);
-        setError("Could not load library content. Please try again later.");
+        console.error('Error fetching library data:', err);
+        setError('Could not load library content. Please try again later.');
         // Individual loading states will handle UI for sections that might have loaded
       }
     };
     fetchAllData();
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
 
   if (error) {
     return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}</div>;
   }
-  
+
   const overallLoading = loadingHistory || loadingWatchLater || loadingPlaylists || loadingLiked;
 
   return (
@@ -177,7 +180,7 @@ function LibraryPage() { // Removed React.FC
           ))}
         </div>
       </LibrarySection>
-      
+
       {/* Playlists Section */}
       <LibrarySection
         title="Playlists"
@@ -193,9 +196,9 @@ function LibraryPage() { // Removed React.FC
           {userPlaylists.map(playlist => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
-                <img 
-                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'} 
-                  alt={`Thumbnail for ${playlist.title}`} 
+                <img
+                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
+                  alt={`Thumbnail for ${playlist.title}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -234,11 +237,11 @@ function LibraryPage() { // Removed React.FC
           ))}
         </div>
       </LibrarySection>
-      
+
        {/* Fallback if all sections are empty after loading */}
-       {!overallLoading && !loadingHistory && !historyVideos.length && 
-        !loadingWatchLater && !watchLaterVideos.length && 
-        !loadingPlaylists && !userPlaylists.length && 
+       {!overallLoading && !loadingHistory && !historyVideos.length &&
+        !loadingWatchLater && !watchLaterVideos.length &&
+        !loadingPlaylists && !userPlaylists.length &&
         !loadingLiked && !likedVideos.length && !error && (
         <div className="text-center py-10">
           <SolidQueueListIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-500 mx-auto mb-4" />

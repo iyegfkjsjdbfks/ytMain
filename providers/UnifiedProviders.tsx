@@ -1,8 +1,9 @@
-import * as React from 'react';
-import {  ReactNode  } from 'react';
+import type * as React from 'react';
+import type {  ReactNode  } from 'react';
+
 import { AuthProvider } from '../contexts/AuthContext';
-import { ThemeProvider } from '../contexts/ThemeContext';
 import { MiniplayerProvider } from '../contexts/MiniplayerContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import { WatchLaterProvider } from '../contexts/WatchLaterContext';
 
 interface UnifiedProvidersProps {

@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
-import type { Short } from '../src/types/core';
+
 import { getShortsVideos } from '../services/mockVideoService';
+
 import ShortsIcon from './icons/ShortsIcon';
 import ShortDisplayCard from './ShortDisplayCard';
+
+import type { Short } from '../src/types/core';
 
 interface ShortsSectionProps {
   maxShorts?: number;
@@ -29,13 +33,13 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              ...video,
              duration: parseInt(video.duration) || 60, // Convert string duration to number
              isVertical: true,
-             visibility: (video.visibility === 'scheduled' ? 'public' : video.visibility) as 'public' | 'private' | 'unlisted',
+             visibility: (video.visibility === 'scheduled' ? 'public' : video.visibility),
              createdAt: video.createdAt || new Date().toISOString(),
              updatedAt: video.updatedAt || new Date().toISOString(),
              // Ensure all required Short properties are present
              isShort: true,
              effects: [],
-             music: undefined
+             music: undefined,
            } as any as Short;
           return shortVideo;
         });
@@ -62,7 +66,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         </div>
         <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-700 scrollbar-track-transparent">
           {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index} className="w-40 h-72 bg-neutral-200 dark:bg-neutral-800 rounded-lg animate-pulse flex-shrink-0"></div>
+            <div key={index} className="w-40 h-72 bg-neutral-200 dark:bg-neutral-800 rounded-lg animate-pulse flex-shrink-0" />
           ))}
         </div>
       </div>

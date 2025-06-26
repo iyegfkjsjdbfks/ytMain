@@ -1,4 +1,6 @@
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import type React from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -17,7 +19,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return storedTheme;
       }
     } catch (e) {
-      console.error("Error reading theme from localStorage", e);
+      console.error('Error reading theme from localStorage', e);
     }
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
@@ -26,7 +28,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     try {
       localStorage.setItem('theme', theme);
     } catch (e) {
-      console.error("Error saving theme to localStorage", e);
+      console.error('Error saving theme to localStorage', e);
     }
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');

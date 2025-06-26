@@ -63,7 +63,7 @@ interface UseVideoPlayerReturn {
 
 /**
  * Custom hook for video player functionality
- * 
+ *
  * Provides comprehensive video player state management and controls:
  * - Play/pause functionality
  * - Volume and mute controls
@@ -73,7 +73,7 @@ interface UseVideoPlayerReturn {
  * - Quality selection
  * - Loading and error states
  * - Event handlers for all video events
- * 
+ *
  * Reduces code duplication across video player components
  */
 export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayerReturn => {
@@ -85,7 +85,7 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
     playsinline = true,
     initialVolume = 1,
     initialPlaybackRate = 1,
-    initialQuality = 'auto'
+    initialQuality = 'auto',
   } = options;
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -100,14 +100,16 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
     error: null,
     playbackRate: initialPlaybackRate,
     quality: initialQuality,
-    buffered: 0
+    buffered: 0,
   });
 
   // Play function
   const play = useCallback(async () => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     try {
       await video.play();
       setState(prev => ({ ...prev, isPlaying: true, error: null }));
@@ -126,8 +128,10 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const pause = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.pause();
     setState(prev => ({ ...prev, isPlaying: false }));
   }, []);
@@ -142,16 +146,20 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const mute = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.muted = true;
     setState(prev => ({ ...prev, isMuted: true }));
   }, []);
 
   const unmute = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.muted = false;
     setState(prev => ({ ...prev, isMuted: false }));
   }, []);
@@ -166,8 +174,10 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const setVolume = useCallback((volume: number) => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     const clampedVolume = Math.max(0, Math.min(1, volume));
     video.volume = clampedVolume;
     setState(prev => ({ ...prev, volume: clampedVolume }));
@@ -175,16 +185,20 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const seek = useCallback((time: number) => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.currentTime = time;
     setState(prev => ({ ...prev, currentTime: time }));
   }, []);
 
   const setPlaybackRate = useCallback((rate: number) => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.playbackRate = rate;
     setState(prev => ({ ...prev, playbackRate: rate }));
   }, []);
@@ -195,8 +209,10 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const enterFullscreen = useCallback(async () => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     try {
       if (video.requestFullscreen) {
         await video.requestFullscreen();
@@ -228,15 +244,17 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
   const reset = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.currentTime = 0;
     video.pause();
     setState(prev => ({
       ...prev,
       isPlaying: false,
       currentTime: 0,
-      error: null
+      error: null,
     }));
   }, []);
 
@@ -248,12 +266,14 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
     onLoadedMetadata: useCallback(() => {
       const video = videoRef.current;
-      if (!video) return;
-      
+      if (!video) {
+return;
+}
+
       setState(prev => ({
         ...prev,
         duration: video.duration,
-        isLoading: false
+        isLoading: false,
       }));
     }, []),
 
@@ -271,26 +291,32 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
     onTimeUpdate: useCallback(() => {
       const video = videoRef.current;
-      if (!video) return;
-      
+      if (!video) {
+return;
+}
+
       setState(prev => ({ ...prev, currentTime: video.currentTime }));
     }, []),
 
     onDurationChange: useCallback(() => {
       const video = videoRef.current;
-      if (!video) return;
-      
+      if (!video) {
+return;
+}
+
       setState(prev => ({ ...prev, duration: video.duration }));
     }, []),
 
     onVolumeChange: useCallback(() => {
       const video = videoRef.current;
-      if (!video) return;
-      
+      if (!video) {
+return;
+}
+
       setState(prev => ({
         ...prev,
         volume: video.volume,
-        isMuted: video.muted
+        isMuted: video.muted,
       }));
     }, []),
 
@@ -300,7 +326,7 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
         ...prev,
         error: 'Failed to load video',
         isLoading: false,
-        isPlaying: false
+        isPlaying: false,
       }));
     }, []),
 
@@ -310,8 +336,10 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
     onProgress: useCallback(() => {
       const video = videoRef.current;
-      if (!video || !video.buffered.length) return;
-      
+      if (!video?.buffered.length) {
+return;
+}
+
       const buffered = video.buffered.end(video.buffered.length - 1);
       setState(prev => ({ ...prev, buffered }));
     }, []),
@@ -322,7 +350,7 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
 
     onCanPlayThrough: useCallback(() => {
       setState(prev => ({ ...prev, isLoading: false }));
-    }, [])
+    }, []),
   };
 
   // Mock useEffect hooks - disabled to prevent video interactions
@@ -351,9 +379,9 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
       enterFullscreen,
       exitFullscreen,
       toggleFullscreen,
-      reset
+      reset,
     },
-    events
+    events,
   };
 };
 

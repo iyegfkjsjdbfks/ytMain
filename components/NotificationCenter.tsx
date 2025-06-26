@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef   } from 'react';
+
 import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 interface Notification {
@@ -29,7 +32,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
   useEffect(() => {
     loadNotifications();
-    
+
     // Simulate real-time notifications
     const interval = setInterval(() => {
       if (Math.random() < 0.1) { // 10% chance every 30 seconds
@@ -78,7 +81,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         videoThumbnail: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=120&h=68&fit=crop',
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=abc123'
+        actionUrl: '/watch?v=abc123',
       },
       {
         id: '2',
@@ -89,7 +92,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         channelAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
         timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=def456'
+        actionUrl: '/watch?v=def456',
       },
       {
         id: '3',
@@ -101,7 +104,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         videoThumbnail: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=68&fit=crop',
         timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
         isRead: true,
-        actionUrl: '/watch?v=live123'
+        actionUrl: '/watch?v=live123',
       },
       {
         id: '4',
@@ -111,13 +114,13 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
         channelName: 'YouTube',
         channelAvatar: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=40&h=40&fit=crop',
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-        isRead: true
-      }
+        isRead: true,
+      },
     ];
   };
 
   const generateRandomNotification = () => {
-    const types: Notification['type'][] = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
+    const types: Array<Notification['type']> = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
     const randomType = types[Math.floor(Math.random() * types.length)] || 'video_upload';
 
     const newNotification: Notification = {
@@ -128,7 +131,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       channelName: getRandomChannelName(),
       channelAvatar: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=40&h=40&fit=crop&crop=face`,
       timestamp: new Date().toISOString(),
-      isRead: false
+      isRead: false,
     };
 
     const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
@@ -154,33 +157,33 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       video_upload: [
         'uploaded: "Amazing Tutorial - You Need to See This!"',
         'uploaded: "Breaking News - Latest Updates"',
-        'uploaded: "Epic Compilation - Best Moments"'
+        'uploaded: "Epic Compilation - Best Moments"',
       ],
       comment_reply: [
         'replied to your comment on "Tutorial Video"',
         'mentioned you in a comment',
-        'replied to your comment on "Review Video"'
+        'replied to your comment on "Review Video"',
       ],
       like: [
         'liked your video "My Latest Creation"',
         'and 10 others liked your comment',
-        'liked your community post'
+        'liked your community post',
       ],
       live_stream: [
         'is now live: "Live Q&A Session"',
         'started streaming: "Gaming Marathon"',
-        'is live: "Special Announcement"'
+        'is live: "Special Announcement"',
       ],
       subscription: [
         'subscribed to your channel',
         'is now following you',
-        'joined your community'
+        'joined your community',
       ],
       community_post: [
         'posted in the community',
         'shared a new update',
-        'created a poll'
-      ]
+        'created a poll',
+      ],
     };
 
     const typeMessages = messages[type] || ['sent you a notification'];
@@ -193,8 +196,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const markAsRead = (notificationId: string) => {
-    const updatedNotifications = notifications.map(n => 
-      n.id === notificationId ? { ...n, isRead: true } : n
+    const updatedNotifications = notifications.map(n =>
+      n.id === notificationId ? { ...n, isRead: true } : n,
     );
     setNotifications(updatedNotifications);
     setUnreadCount(prev => Math.max(0, prev - 1));
@@ -218,7 +221,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
-  const filteredNotifications = filter === 'unread' 
+  const filteredNotifications = filter === 'unread'
     ? notifications.filter(n => !n.isRead)
     : notifications;
 
@@ -265,7 +268,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                 <XMarkIcon className="w-5 h-5" />
               </button>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div className="flex space-x-2">
                 <button
@@ -289,7 +292,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                   Unread ({unreadCount})
                 </button>
               </div>
-              
+
               {unreadCount > 0 && (
                 <button
                   onClick={markAllAsRead}
@@ -321,7 +324,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                       alt={notification.channelName}
                       className="w-10 h-10 rounded-full flex-shrink-0"
                     />
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -331,7 +334,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                               {notification.title}
                             </p>
                             {!notification.isRead && (
-                              <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                              <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
                             )}
                           </div>
                           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
@@ -341,7 +344,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                             {formatDistanceToNow(new Date(notification.timestamp))} ago
                           </p>
                         </div>
-                        
+
                         <div className="flex items-center space-x-1 ml-2">
                           {!notification.isRead && (
                             <button
@@ -361,7 +364,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                           </button>
                         </div>
                       </div>
-                      
+
                       {notification.videoThumbnail && (
                         <img
                           src={notification.videoThumbnail}

@@ -1,13 +1,18 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Video } from '../types';
-import { useDebounce } from '../hooks/useDebounce';
-import { searchVideos } from '../services/mockVideoService';
-import { searchCombined, YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
-import OptimizedSearchResults from '../components/OptimizedSearchResults';
-import { performanceMonitor } from '../utils/performance';
+
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+
+import OptimizedSearchResults from '../components/OptimizedSearchResults';
+import { useDebounce } from '../hooks/useDebounce';
+import { searchCombined } from '../services/googleSearchService';
+import { searchVideos } from '../services/mockVideoService';
+import { performanceMonitor } from '../utils/performance';
+
+import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import type { Video } from '../types';
+
 
 // Types for better performance
 interface SearchState {
@@ -17,7 +22,6 @@ interface SearchState {
   loading: boolean;
   youtubeLoading: boolean;
 }
-
 
 
 // Memoized empty state component
@@ -37,14 +41,14 @@ const SearchResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const query = searchParams.get('q') || '';
   const debouncedQuery = useDebounce(query, 300);
-  
+
   // Consolidated state
   const [searchState, setSearchState] = useState<SearchState>({
     videos: [],
     youtubeVideos: [],
     googleSearchVideos: [],
     loading: false,
-    youtubeLoading: false
+    youtubeLoading: false,
   });
 
   // Memoized search function with performance monitoring
@@ -55,35 +59,35 @@ const SearchResultsPage: React.FC = () => {
         youtubeVideos: [],
         googleSearchVideos: [],
         loading: false,
-        youtubeLoading: false
+        youtubeLoading: false,
       });
       return;
     }
-    
+
     performanceMonitor.startMeasure('search-results-load');
     setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
-    
+
     try {
       // Parallel search execution for better performance
       const [localResults, combinedResults] = await Promise.allSettled([
         searchVideos(searchQuery),
-        searchCombined(searchQuery, searchVideos)
+        searchCombined(searchQuery, searchVideos),
       ]);
-      
+
       const combinedData = combinedResults.status === 'fulfilled' ? combinedResults.value : {
         localVideos: [],
         youtubeVideos: [],
-        googleSearchVideos: []
+        googleSearchVideos: [],
       };
-      
+
       setSearchState({
         videos: localResults.status === 'fulfilled' ? localResults.value : [],
         youtubeVideos: combinedData.youtubeVideos,
         googleSearchVideos: combinedData.googleSearchVideos || [],
         loading: false,
-        youtubeLoading: false
+        youtubeLoading: false,
       });
-      
+
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
       }
@@ -100,7 +104,6 @@ const SearchResultsPage: React.FC = () => {
   useEffect(() => {
     performSearch(debouncedQuery);
   }, [debouncedQuery, performSearch]);
-
 
 
   // Early return for empty query

@@ -1,5 +1,5 @@
 // Google Custom Search API service for YouTube video search
-import { Video } from '../types';
+import type { Video } from '../types';
 
 // Types for Google Custom Search JSON API response
 interface GoogleSearchItem {
@@ -144,8 +144,8 @@ export interface CombinedSearchResult {
 
 // Convert YouTube Data API result to YouTube video result
 const convertToYouTubeResult = (item: YouTubeSearchItem): YouTubeSearchResult => {
-  const videoId = item.id.videoId;
-  
+  const { videoId } = item.id;
+
   return {
     id: `youtube-${videoId}`,
     title: item.snippet.title,
@@ -156,7 +156,7 @@ const convertToYouTubeResult = (item: YouTubeSearchItem): YouTubeSearchResult =>
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
     duration: '0:00', // Duration requires additional API call
     uploadedAt: item.snippet.publishedAt,
-    isYouTube: true as const
+    isYouTube: true as const,
   };
 };
 
@@ -166,7 +166,7 @@ const convertToGoogleSearchResult = (item: GoogleSearchItem): GoogleSearchResult
   const videoId = extractVideoIdFromUrl(item.link);
   const thumbnailUrl = item.pagemap?.cse_thumbnail?.[0]?.src || '';
   const videoObject = item.pagemap?.videoobject?.[0];
-  
+
   return {
     id: `google-search-${videoId || item.cacheId || Math.random().toString(36)}`,
     title: item.title.replace(/ - YouTube$/, ''),
@@ -178,7 +178,7 @@ const convertToGoogleSearchResult = (item: GoogleSearchItem): GoogleSearchResult
     duration: videoObject?.duration || '0:00',
     uploadedAt: videoObject?.uploaddate || new Date().toISOString(),
     isYouTube: true as const,
-    source: 'google-search' as const
+    source: 'google-search' as const,
   };
 };
 
@@ -193,12 +193,12 @@ const extractVideoIdFromUrl = (url: string): string | null => {
 export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchResult[]> => {
   // Check for YouTube API key in environment variables
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-  
+
   if (!apiKey) {
     console.warn('YouTube Data API key not configured');
     return [];
   }
-  
+
   try {
     const searchUrl = new URL('https://www.googleapis.com/youtube/v3/search');
     searchUrl.searchParams.set('key', apiKey);
@@ -207,35 +207,35 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
     searchUrl.searchParams.set('type', 'video');
     searchUrl.searchParams.set('maxResults', '10');
     searchUrl.searchParams.set('order', 'relevance');
-    
+
     const response = await fetch(searchUrl.toString());
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(`YouTube API error: ${response.status} - ${errorText}`);
     }
-    
+
     const data: YouTubeSearchResponse = await response.json();
-    
+
     if (!data.items || data.items.length === 0) {
       return [];
     }
-    
+
     // Convert YouTube API results to our format
     const youtubeResults = data.items.map(convertToYouTubeResult);
-    
+
     return youtubeResults;
   } catch (error: any) {
     console.error('Error searching YouTube videos:', error);
-    
+
     // Check if it's a quota error and throw it to allow hybrid mode to catch and handle it
-    if (error.message?.includes('quota') || 
-        error.message?.includes('limit') || 
+    if (error.message?.includes('quota') ||
+        error.message?.includes('limit') ||
         error.message?.includes('exceeded') ||
         (error.status === 403)) {
       throw error;
     }
-    
+
     return [];
   }
 };
@@ -245,12 +245,12 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
   // Check for Google Custom Search API key and engine ID
   const apiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
   const engineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
-  
+
   if (!apiKey || !engineId) {
     console.warn('Google Custom Search API key or engine ID not configured');
     return [];
   }
-  
+
   try {
     const searchUrl = new URL('https://www.googleapis.com/customsearch/v1');
     searchUrl.searchParams.set('key', apiKey);
@@ -258,25 +258,25 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     searchUrl.searchParams.set('q', `${query} site:youtube.com`);
     searchUrl.searchParams.set('num', '10');
     // Remove searchType parameter as it's not supported for general web search
-    
+
     const response = await fetch(searchUrl.toString());
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(`Google Custom Search API error: ${response.status} - ${errorText}`);
     }
-    
+
     const data: GoogleSearchResponse = await response.json();
-    
+
     if (!data.items || data.items.length === 0) {
       return [];
     }
-    
+
     // Filter for YouTube video results and convert to our format
     const youtubeResults = data.items
       .filter(item => item.link.includes('youtube.com/watch'))
       .map(convertToGoogleSearchResult);
-    
+
     return youtubeResults;
   } catch (error) {
     console.error('Error searching YouTube with Google Custom Search:', error);
@@ -290,26 +290,26 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
     // Import settings service dynamically to avoid circular dependencies
     const { getYouTubeSearchProvider } = await import('./settingsService');
     const provider = getYouTubeSearchProvider();
-    
+
     // Search local videos first
     const localVideos = await searchLocalVideos(query);
-    
+
     let youtubeResults: YouTubeSearchResult[] | GoogleSearchResult[];
-    
+
     if (provider === 'hybrid') {
       // Hybrid mode: try YouTube API first, fallback to Custom Search on quota error
       try {
         youtubeResults = await searchYouTubeVideos(query);
         return {
           localVideos,
-          youtubeVideos: youtubeResults as YouTubeSearchResult[],
-          googleSearchVideos: []
+          youtubeVideos: youtubeResults,
+          googleSearchVideos: [],
         };
       } catch (error: any) {
         console.warn('YouTube API failed, falling back to Custom Search:', error.message);
         // Check if it's a quota error or similar API limit issue
-        if (error.message?.includes('quota') || 
-            error.message?.includes('limit') || 
+        if (error.message?.includes('quota') ||
+            error.message?.includes('limit') ||
             error.message?.includes('exceeded') ||
             error.status === 403) {
           try {
@@ -317,7 +317,7 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
             return {
               localVideos,
               youtubeVideos: [],
-              googleSearchVideos: youtubeResults as GoogleSearchResult[]
+              googleSearchVideos: youtubeResults as GoogleSearchResult[],
             };
           } catch (fallbackError) {
             console.error('Both YouTube API and Custom Search failed:', fallbackError);
@@ -332,14 +332,14 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
       return {
         localVideos,
         youtubeVideos: [],
-        googleSearchVideos: youtubeResults as GoogleSearchResult[]
+        googleSearchVideos: youtubeResults as GoogleSearchResult[],
       };
     } else {
       youtubeResults = await searchYouTubeVideos(query);
       return {
         localVideos,
-        youtubeVideos: youtubeResults as YouTubeSearchResult[],
-        googleSearchVideos: []
+        youtubeVideos: youtubeResults,
+        googleSearchVideos: [],
       };
     }
   } catch (error) {
@@ -349,7 +349,7 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
     return {
       localVideos,
       youtubeVideos: [],
-      googleSearchVideos: []
+      googleSearchVideos: [],
     };
   }
 };

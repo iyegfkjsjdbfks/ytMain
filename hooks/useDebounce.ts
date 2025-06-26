@@ -32,7 +32,7 @@ export function useDebounce<T>(value: T, delay: number): T {
 export function useDebouncedCallback<T extends (...args: any[]) => any>(
   callback: T,
   delay: number,
-  deps: React.DependencyList = []
+  deps: React.DependencyList = [],
 ): T {
   const timeoutRef = useRef<NodeJS.Timeout>();
 
@@ -46,7 +46,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
         callback(...args);
       }, delay);
     },
-    [callback, delay, ...deps]
+    [callback, delay, ...deps],
   ) as T;
 
   // Cleanup on unmount
@@ -69,13 +69,13 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
  */
 export function useDebouncedSearch<T>(
   searchFunction: (query: string) => Promise<T[]>,
-  delay: number = 300
+  delay: number = 300,
 ) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const debouncedQuery = useDebounce(query, delay);
   const abortControllerRef = useRef<AbortController>();
 
@@ -138,6 +138,6 @@ export function useDebouncedSearch<T>(
     results,
     loading,
     error,
-    clearSearch
+    clearSearch,
   };
 }

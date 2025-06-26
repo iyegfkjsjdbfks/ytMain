@@ -1,11 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { Short } from '../src/types/core';
-import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
+import { useLocation } from 'react-router-dom';
+
 import { useIntersectionObserver, useVideoAutoplay } from '../hooks';
+import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
+
 import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
+
+import type { Short } from '../src/types/core';
 
 interface ShortDisplayCardProps {
   short: Short;
@@ -29,7 +33,7 @@ interface PlayPauseOverlayProps {
 }
 
 const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }) => (
-  <div 
+  <div
     className="absolute inset-0 flex items-center justify-center cursor-pointer"
     onClick={(e) => {
       e.stopPropagation();
@@ -68,7 +72,7 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
   channelName,
   views,
   isFollowed = false,
-  onFollow
+  onFollow,
 }) => (
   <div className="flex-1 mr-4 pointer-events-auto">
     <h3 className="text-white font-medium text-sm mb-1 line-clamp-2">
@@ -111,7 +115,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onToggleMute,
   onLike,
   onComment,
-  onShare
+  onShare,
 }) => (
   <div className="flex flex-col space-y-3 pointer-events-auto">
     {/* Mute/Unmute */}
@@ -128,7 +132,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         <SpeakerWaveIcon className="w-5 h-5" />
       )}
     </ActionButton>
-    
+
     {/* Like */}
     <ActionButton
       onClick={onLike}
@@ -140,7 +144,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         <HeartIcon className="w-5 h-5" />
       )}
     </ActionButton>
-    
+
     {/* Comment */}
     <ActionButton
       onClick={onComment}
@@ -148,7 +152,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     >
       <ChatBubbleOvalLeftIcon className="w-5 h-5" />
     </ActionButton>
-    
+
     {/* Share */}
     <ActionButton
       onClick={onShare}
@@ -173,14 +177,13 @@ interface ErrorStateProps {
 }
 
 const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
-  <ErrorMessage 
+  <ErrorMessage
     message={error}
     onRetry={onRetry}
     variant="overlay"
     showIcon={false}
   />
 );
-
 
 
 // Main component
@@ -194,34 +197,34 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   onShare,
   onVideoChange,
   onVideoEnd,
-  isActive = false
+  isActive = false,
 }) => {
   const location = useLocation();
   const isOnShortsPage = location.pathname === '/shorts';
   const [isManuallyPaused, setIsManuallyPaused] = React.useState(false);
-  
+
   // Real video player implementation
   const videoPlayer = useVideoPlayer({
     autoplay: false,
     muted: true,
-    loop: true
+    loop: true,
   });
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   // Set video ref when component mounts
   useEffect(() => {
     if (videoRef.current) {
       videoPlayer.setVideoRef(videoRef.current);
     }
   }, [videoPlayer]);
-  
+
   // Use intersection observer for visibility tracking and autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
-    rootMargin: '0px'
+    rootMargin: '0px',
   });
-  
+
   // Enable autoplay when video is in view (both on shorts page and home page)
   useVideoAutoplay({
     isIntersecting,
@@ -230,13 +233,13 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     actions: {
       play: videoPlayer.play,
       pause: videoPlayer.pause,
-      unmute: videoPlayer.unmute
+      unmute: videoPlayer.unmute,
     },
     setIsManuallyPaused,
     enableAutoplay: true, // Enable autoplay on both shorts page and home page
-    unmuteOnAutoplay: isOnShortsPage // Only unmute on autoplay when on shorts page
+    unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page
   });
-  
+
   // Event handlers
   const handlePlayPauseToggle = async () => {
     if (videoPlayer.isPlaying) {
@@ -307,20 +310,20 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
           handleVideoEnd();
         }}
       />
-      
+
       {/* Loading Indicator */}
       {videoPlayer.isLoading && <LoadingIndicator />}
-      
+
       {/* Error State */}
       {videoPlayer.error && (
-        <ErrorState 
+        <ErrorState
           error={videoPlayer.error.message}
           onRetry={handleRetry}
         />
       )}
-      
+
       {/* Play/Pause Overlay */}
-      <PlayPauseOverlay 
+      <PlayPauseOverlay
         isPlaying={videoPlayer.isPlaying}
         onToggle={handlePlayPauseToggle}
       />
@@ -335,7 +338,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
             isFollowed={isFollowed}
             onFollow={onFollow ? handleFollow : undefined}
           />
-          
+
           {/* Action Buttons */}
           <ActionButtons
             isMuted={videoPlayer.isMuted}

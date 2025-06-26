@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode   } from 'react';
+import type { ReactNode   } from 'react';
+import type React from 'react';
+import { createContext, useContext, useState, useEffect   } from 'react';
 
 interface User {
   id: string;
@@ -44,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const storedUser = localStorage.getItem('youtube_clone_user');
         const token = localStorage.getItem('youtube_clone_token');
-        
+
         if (storedUser && token) {
           setUser(JSON.parse(storedUser));
         }
@@ -64,7 +66,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setIsLoading(true);
-      
+
       // Mock authentication - in real app, this would be an API call
       if (email && password.length >= 6) {
         const username = email.split('@')[0] || 'user';
@@ -75,9 +77,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: Math.random() > 0.5,
           subscriberCount: Math.floor(Math.random() * 10000),
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
         };
-        
+
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
 
         // Store in localStorage
@@ -110,19 +112,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           avatar: `https://ui-avatars.com/api/?name=${username}&background=random`,
           isVerified: false,
           subscriberCount: 0,
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
         };
 
         const mockToken = `token_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-        
+
         // Store in localStorage
         localStorage.setItem('youtube_clone_user', JSON.stringify(mockUser));
         localStorage.setItem('youtube_clone_token', mockToken);
-        
+
         setUser(mockUser);
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('Registration error:', error);
@@ -140,12 +142,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const updateProfile = async (updates: Partial<User>): Promise<boolean> => {
     try {
-      if (!user) return false;
-      
+      if (!user) {
+return false;
+}
+
       const updatedUser = { ...user, ...updates };
       localStorage.setItem('youtube_clone_user', JSON.stringify(updatedUser));
       setUser(updatedUser);
-      
+
       return true;
     } catch (error) {
       console.error('Profile update error:', error);
@@ -160,7 +164,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout,
-    updateProfile
+    updateProfile,
   };
 
   return (

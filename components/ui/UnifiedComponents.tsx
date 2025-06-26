@@ -1,12 +1,16 @@
-import React, { forwardRef, ReactNode, ButtonHTMLAttributes, InputHTMLAttributes   } from 'react';
-import { cn } from '../../utils/cn';
-import { 
-  ExclamationTriangleIcon, 
-  CheckCircleIcon, 
+import type { ReactNode, ButtonHTMLAttributes, InputHTMLAttributes   } from 'react';
+import type React from 'react';
+import { forwardRef   } from 'react';
+
+import {
+  ExclamationTriangleIcon,
+  CheckCircleIcon,
   InformationCircleIcon,
   XMarkIcon,
-  ArrowPathIcon
+  ArrowPathIcon,
 } from '@heroicons/react/24/outline';
+
+import { cn } from '../../utils/cn';
 
 // Unified Button Component
 export interface UnifiedButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -33,20 +37,20 @@ const buttonSizes = {
 };
 
 export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
-  ({ 
-    variant = 'primary', 
-    size = 'md', 
-    loading = false, 
-    icon, 
+  ({
+    variant = 'primary',
+    size = 'md',
+    loading = false,
+    icon,
     iconPosition = 'left',
     fullWidth = false,
-    className, 
-    children, 
+    className,
+    children,
     disabled,
-    ...props 
+    ...props
   }, ref) => {
     const isDisabled = disabled || loading;
-    
+
     return (
       <button
         ref={ref}
@@ -55,7 +59,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
           buttonVariants[variant],
           buttonSizes[size],
           fullWidth && 'w-full',
-          className
+          className,
         )}
         disabled={isDisabled}
         {...props}
@@ -72,7 +76,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
         )}
       </button>
     );
-  }
+  },
 );
 
 UnifiedButton.displayName = 'UnifiedButton';
@@ -88,25 +92,25 @@ export interface UnifiedInputProps extends InputHTMLAttributes<HTMLInputElement>
 }
 
 export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
-  ({ 
-    label, 
-    error, 
-    helperText, 
-    leftIcon, 
-    rightIcon, 
+  ({
+    label,
+    error,
+    helperText,
+    leftIcon,
+    rightIcon,
     fullWidth = false,
-    className, 
+    className,
     id,
-    ...props 
+    ...props
   }, ref) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
     const hasError = !!error;
-    
+
     return (
       <div className={cn('space-y-1', fullWidth && 'w-full')}>
         {label && (
-          <label 
-            htmlFor={inputId} 
+          <label
+            htmlFor={inputId}
             className="block text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             {label}
@@ -123,12 +127,12 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
             id={inputId}
             className={cn(
               'block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200',
-              hasError 
-                ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500' 
+              hasError
+                ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
                 : 'border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
-              className
+              className,
             )}
             {...props}
           />
@@ -149,7 +153,7 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 UnifiedInput.displayName = 'UnifiedInput';
@@ -194,7 +198,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         cardShadow[shadow],
         border && 'border border-gray-200 dark:border-gray-700',
         hover && 'hover:shadow-md hover:scale-[1.02]',
-        className
+        className,
       )}
     >
       {children}
@@ -253,12 +257,12 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
 }) => {
   const styles = alertStyles[type];
   const { IconComponent } = styles;
-  
+
   return (
     <div className={cn(
       'rounded-md border p-4',
       styles.container,
-      className
+      className,
     )}>
       <div className="flex">
         <div className="flex-shrink-0">
@@ -282,7 +286,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
                 className={cn(
                   'inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors',
                   styles.icon,
-                  'hover:bg-black/5 dark:hover:bg-white/5'
+                  'hover:bg-black/5 dark:hover:bg-white/5',
                 )}
                 onClick={onDismiss}
               >
@@ -318,13 +322,13 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
   className,
 }) => {
   const sizeClass = loadingSizes[size];
-  
+
   const renderLoader = () => {
     switch (type) {
       case 'spinner':
         return (
-          <ArrowPathIcon 
-            className={cn(sizeClass, 'animate-spin text-gray-400', className)} 
+          <ArrowPathIcon
+            className={cn(sizeClass, 'animate-spin text-gray-400', className)}
           />
         );
       case 'dots':
@@ -335,7 +339,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
                 key={i}
                 className={cn(
                   'bg-gray-400 rounded-full animate-pulse',
-                  size === 'sm' ? 'w-1 h-1' : size === 'md' ? 'w-2 h-2' : 'w-3 h-3'
+                  size === 'sm' ? 'w-1 h-1' : size === 'md' ? 'w-2 h-2' : 'w-3 h-3',
                 )}
                 style={{
                   animationDelay: `${i * 0.2}s`,
@@ -347,19 +351,19 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
         );
       case 'pulse':
         return (
-          <div 
+          <div
             className={cn(
               'bg-gray-300 dark:bg-gray-600 rounded animate-pulse',
               sizeClass,
-              className
-            )} 
+              className,
+            )}
           />
         );
       default:
         return null;
     }
   };
-  
+
   return (
     <div className="flex items-center justify-center space-x-2">
       {renderLoader()}
@@ -399,24 +403,26 @@ export const UnifiedModal: React.FC<UnifiedModalProps> = ({
   showCloseButton = true,
   className,
 }) => {
-  if (!isOpen) return null;
-  
+  if (!isOpen) {
+return null;
+}
+
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget && closeOnOverlayClick) {
       onClose();
     }
   };
-  
+
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
       onClick={handleOverlayClick}
     >
-      <div 
+      <div
         className={cn(
           'bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full',
           modalSizes[size],
-          className
+          className,
         )}
       >
         {(title || showCloseButton) && (

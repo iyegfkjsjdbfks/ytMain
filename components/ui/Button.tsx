@@ -1,13 +1,16 @@
-import React, { forwardRef   } from 'react';
+import type React from 'react';
+import { forwardRef   } from 'react';
+
 import { cn } from '../../utils/cn';
+
 import { ButtonLoading } from './LoadingStates';
 
 // Button variants and sizes
-export type ButtonVariant = 
-  | 'primary' 
-  | 'secondary' 
-  | 'outline' 
-  | 'ghost' 
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
   | 'danger'
   | 'link';
 
@@ -65,7 +68,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
     className = '',
     ...props
   },
-  ref
+  ref,
 ) => {
   const isDisabled = disabled || loading;
 
@@ -78,7 +81,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
     roundedClasses[rounded],
     fullWidth && 'w-full',
     variant === 'link' && 'inline',
-    className
+    className,
   );
 
   return (
@@ -125,7 +128,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((
     className,
     ...props
   },
-  ref
+  ref,
 ) => {
   return (
     <Button

@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { cn } from '../../utils/cn';
 
 // Base loading props interface
@@ -42,7 +43,7 @@ export const Spinner: React.FC<LoadingProps> = ({
         'animate-spin rounded-full border-2 border-current border-t-transparent',
         sizeClass,
         colorClass,
-        className
+        className,
       )}
       role="status"
       aria-label="Loading"
@@ -68,7 +69,7 @@ export const DotsLoader: React.FC<LoadingProps> = ({
             'rounded-full animate-pulse',
             dotSize,
             colorClass,
-            'bg-current'
+            'bg-current',
           )}
           style={{
             animationDelay: `${i * 0.2}s`,
@@ -119,7 +120,7 @@ export const Skeleton: React.FC<{
         width,
         height,
         roundedClass,
-        className
+        className,
       )}
       role="status"
       aria-label="Loading"

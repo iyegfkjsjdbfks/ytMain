@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect   } from 'react';
-import { 
-  Cog6ToothIcon, 
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
+import {
+  Cog6ToothIcon,
   CheckIcon,
   PlayIcon,
   SpeakerWaveIcon,
@@ -8,7 +10,7 @@ import {
   ForwardIcon,
   BackwardIcon,
   ArrowsPointingOutIcon,
-  ArrowsPointingInIcon
+  ArrowsPointingInIcon,
 } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
@@ -53,7 +55,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
     { label: '1.25x', value: 1.25 },
     { label: '1.5x', value: 1.5 },
     { label: '1.75x', value: 1.75 },
-    { label: '2x', value: 2 }
+    { label: '2x', value: 2 },
   ],
   currentSpeed = 1,
   onSpeedChange,
@@ -65,7 +67,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   onFullscreenToggle,
   isPictureInPicture = false,
   onPictureInPictureToggle,
-  className = ''
+  className = '',
 }) => {
   const [showSettings, setShowSettings] = useState(false);
   const [activePanel, setActivePanel] = useState<'main' | 'quality' | 'speed'>('main');
@@ -111,7 +113,6 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   };
 
 
-
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       {/* Play/Pause Button */}
@@ -124,8 +125,8 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
           <PlayIcon className={`w-6 h-6 ${isPlaying ? 'hidden' : 'block'}`} />
           <div className={`w-6 h-6 ${isPlaying ? 'block' : 'hidden'}`}>
             <div className="flex space-x-1">
-              <div className="w-1.5 h-6 bg-white rounded-sm"></div>
-              <div className="w-1.5 h-6 bg-white rounded-sm"></div>
+              <div className="w-1.5 h-6 bg-white rounded-sm" />
+              <div className="w-1.5 h-6 bg-white rounded-sm" />
             </div>
           </div>
         </button>
@@ -164,7 +165,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
 
         {/* Volume Slider */}
         {showVolumeSlider && (
-          <div 
+          <div
             className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/80 backdrop-blur-sm rounded-lg p-3"
             onMouseLeave={() => setShowVolumeSlider(false)}
           >
@@ -185,7 +186,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
       </div>
 
       {/* Spacer */}
-      <div className="flex-1"></div>
+      <div className="flex-1" />
 
       {/* Picture-in-Picture */}
       {onPictureInPictureToggle && (
@@ -197,7 +198,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
           aria-label="Picture in Picture"
         >
           <div className="w-5 h-5 border-2 border-white rounded relative">
-            <div className="absolute top-0 right-0 w-2 h-1.5 border border-white bg-white/20 rounded-sm"></div>
+            <div className="absolute top-0 right-0 w-2 h-1.5 border border-white bg-white/20 rounded-sm" />
           </div>
         </button>
       )}

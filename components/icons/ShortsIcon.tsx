@@ -1,6 +1,6 @@
-import React from 'react';
+import type React from 'react';
 
-const ShortsIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const ShortsIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
   <svg
     className={className}
     viewBox="0 0 24 24"

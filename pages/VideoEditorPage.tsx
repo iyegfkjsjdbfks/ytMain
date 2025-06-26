@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import { useState, useRef, useEffect } from 'react';
+
 import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
@@ -38,7 +39,7 @@ const VideoEditorPage: React.FC = () => {
     resolution: '1920x1080',
     fps: 30,
     lastModified: new Date(),
-    thumbnail: '/api/placeholder/320/180'
+    thumbnail: '/api/placeholder/320/180',
   });
 
   const [clips, setClips] = useState<TimelineClip[]>([
@@ -50,7 +51,7 @@ const VideoEditorPage: React.FC = () => {
       duration: 120,
       track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 80
+      volume: 80,
     },
     {
       id: '2',
@@ -59,7 +60,7 @@ const VideoEditorPage: React.FC = () => {
       startTime: 0,
       duration: 180,
       track: 1,
-      volume: 40
+      volume: 40,
     },
     {
       id: '3',
@@ -69,7 +70,7 @@ const VideoEditorPage: React.FC = () => {
       duration: 30,
       track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 90
+      volume: 90,
     },
     {
       id: '4',
@@ -77,8 +78,8 @@ const VideoEditorPage: React.FC = () => {
       name: 'Title Text',
       startTime: 5,
       duration: 10,
-      track: 2
-    }
+      track: 2,
+    },
   ]);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -126,40 +127,44 @@ const VideoEditorPage: React.FC = () => {
 
   const handleClipSplit = (clipId: string, splitTime: number) => {
     const clip = clips.find(c => c.id === clipId);
-    if (!clip) return;
+    if (!clip) {
+return;
+}
 
     const relativeTime = splitTime - clip.startTime;
-    if (relativeTime <= 0 || relativeTime >= clip.duration) return;
+    if (relativeTime <= 0 || relativeTime >= clip.duration) {
+return;
+}
 
     const newClip: TimelineClip = {
       ...clip,
       id: `${clipId}_split_${Date.now()}`,
       startTime: clip.startTime + relativeTime,
-      duration: clip.duration - relativeTime
+      duration: clip.duration - relativeTime,
     };
 
     setClips(prev => [
       ...prev.filter(c => c.id !== clipId),
       { ...clip, duration: relativeTime },
-      newClip
+      newClip,
     ]);
 
     setEditHistory(prev => [...prev, {
       type: 'cut',
       timestamp: Date.now(),
-      description: `Split ${clip.name} at ${formatTime(splitTime)}`
+      description: `Split ${clip.name} at ${formatTime(splitTime)}`,
     }]);
   };
 
   const handleVolumeChange = (clipId: string, volume: number) => {
-    setClips(prev => prev.map(clip => 
-      clip.id === clipId ? { ...clip, volume } : clip
+    setClips(prev => prev.map(clip =>
+      clip.id === clipId ? { ...clip, volume } : clip,
     ));
 
     setEditHistory(prev => [...prev, {
       type: 'volume',
       timestamp: Date.now(),
-      description: `Changed volume to ${volume}%`
+      description: `Changed volume to ${volume}%`,
     }]);
   };
 
@@ -168,11 +173,11 @@ const VideoEditorPage: React.FC = () => {
       ...currentProject,
       clips,
       editHistory,
-      lastSaved: new Date().toISOString()
+      lastSaved: new Date().toISOString(),
     };
-    
+
     localStorage.setItem(`youtubeCloneProject_${currentProject.id}`, JSON.stringify(projectData));
-    
+
     // Show save confirmation
     const notification = document.createElement('div');
     notification.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg z-50';
@@ -185,7 +190,7 @@ const VideoEditorPage: React.FC = () => {
     if (editHistory.length > 0) {
       const lastAction = editHistory[editHistory.length - 1];
       setEditHistory(prev => prev.slice(0, -1));
-      
+
       // Simple undo logic - in a real app, this would be more sophisticated
       if (lastAction && lastAction.type === 'cut') {
         // Restore original clip before split
@@ -215,7 +220,7 @@ const VideoEditorPage: React.FC = () => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsExporting(false);
-          
+
           // Create download link for exported video
           const exportData = {
             project: currentProject,
@@ -223,11 +228,11 @@ const VideoEditorPage: React.FC = () => {
             exportSettings: {
               format: 'mp4',
               quality: '1080p',
-              fps: currentProject.fps
+              fps: currentProject.fps,
             },
-            exportDate: new Date().toISOString()
+            exportDate: new Date().toISOString(),
           };
-          
+
           const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
@@ -237,7 +242,7 @@ const VideoEditorPage: React.FC = () => {
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          
+
           alert('Video exported successfully! Export settings saved.');
           return 100;
         }
@@ -295,7 +300,7 @@ const VideoEditorPage: React.FC = () => {
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <button 
+              <button
                 onClick={handleUndo}
                 disabled={editHistory.length === 0}
                 className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
@@ -303,14 +308,14 @@ const VideoEditorPage: React.FC = () => {
                 <ArrowUturnLeftIcon className="w-4 h-4 mr-1" />
                 Undo
               </button>
-              <button 
+              <button
                 onClick={handleRedo}
                 className="flex items-center px-3 py-2 text-sm bg-gray-700 rounded hover:bg-gray-600"
               >
                 <ArrowUturnRightIcon className="w-4 h-4 mr-1" />
                 Redo
               </button>
-              <button 
+              <button
                 onClick={handleSaveProject}
                 className="flex items-center px-3 py-2 text-sm bg-blue-600 rounded hover:bg-blue-700"
               >
@@ -344,7 +349,7 @@ const VideoEditorPage: React.FC = () => {
               >
                 <source src="/api/placeholder/video" type="video/mp4" />
               </video>
-              
+
               {/* Video Controls Overlay */}
               <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
@@ -438,7 +443,7 @@ const VideoEditorPage: React.FC = () => {
                       </span>
                     </div>
                   ))}
-                  
+
                   {/* Playhead */}
                   <div
                     className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
@@ -466,7 +471,7 @@ const VideoEditorPage: React.FC = () => {
                           } ${getClipColor(clip.type)}`}
                           style={{
                             left: `${(clip.startTime / currentProject.duration) * 100}%`,
-                            width: `${(clip.duration / currentProject.duration) * 100}%`
+                            width: `${(clip.duration / currentProject.duration) * 100}%`,
                           }}
                           onClick={() => handleClipSelect(clip.id)}
                           onDoubleClick={() => handleClipSplit(clip.id, currentTime)}
@@ -497,13 +502,15 @@ const VideoEditorPage: React.FC = () => {
           {/* Properties Panel */}
           <div className="p-4">
             <h3 className="text-lg font-semibold mb-4">Properties</h3>
-            
+
             {selectedClip ? (
               <div className="space-y-4">
                 {(() => {
                   const clip = clips.find(c => c.id === selectedClip);
-                  if (!clip) return null;
-                  
+                  if (!clip) {
+return null;
+}
+
                   return (
                     <>
                       <div>
@@ -515,7 +522,7 @@ const VideoEditorPage: React.FC = () => {
                           readOnly
                         />
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm text-gray-400 mb-1">Duration</label>
                         <input
@@ -525,7 +532,7 @@ const VideoEditorPage: React.FC = () => {
                           readOnly
                         />
                       </div>
-                      
+
                       {clip.volume !== undefined && (
                         <div>
                           <label className="block text-sm text-gray-400 mb-1">
@@ -541,7 +548,7 @@ const VideoEditorPage: React.FC = () => {
                           />
                         </div>
                       )}
-                      
+
                       <div className="flex space-x-2">
                         <button
                           onClick={() => handleClipSplit(clip.id, currentTime)}
@@ -550,7 +557,7 @@ const VideoEditorPage: React.FC = () => {
                           <ScissorsIcon className="w-4 h-4 mr-1" />
                           Split
                         </button>
-                        <button 
+                        <button
                           onClick={() => {
                             // Delete the selected clip                            // setClips(clips.filter(c => c.id !== clip.id));
                           }}

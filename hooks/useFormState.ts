@@ -26,7 +26,7 @@ interface UseFormStateReturn<T> {
 export function useFormState<T extends Record<string, any>>({
   initialValues,
   validate,
-  onSubmit
+  onSubmit,
 }: UseFormStateOptions<T>): UseFormStateReturn<T> {
   const [values, setValuesState] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
@@ -79,13 +79,15 @@ export function useFormState<T extends Record<string, any>>({
     if (validate) {
       const validationErrors = validate(values);
       setErrors(validationErrors);
-      
+
       if (Object.keys(validationErrors).length > 0) {
         return;
       }
     }
 
-    if (!onSubmit) return;
+    if (!onSubmit) {
+return;
+}
 
     setIsSubmitting(true);
     try {
@@ -111,6 +113,6 @@ export function useFormState<T extends Record<string, any>>({
     clearError,
     clearErrors,
     handleSubmit,
-    reset
+    reset,
   };
 }

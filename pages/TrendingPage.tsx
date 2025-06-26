@@ -1,11 +1,13 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { FireIcon } from '@heroicons/react/24/solid';
+
+import CategoryTabs from '../components/CategoryTabs';
 import PageLayout from '../components/PageLayout';
 import VideoGrid from '../components/VideoGrid';
 import { useTrendingVideos } from '../hooks';
-import CategoryTabs from '../components/CategoryTabs';
 
 const TrendingPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'music' | 'gaming' | 'news' | 'movies'>('all');
@@ -27,8 +29,8 @@ const TrendingPage: React.FC = () => {
       loading={loading}
       error={error}
       emptyState={{
-        title: "No trending videos found",
-        message: "Check back later for the latest trending content."
+        title: 'No trending videos found',
+        message: 'Check back later for the latest trending content.',
       }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >

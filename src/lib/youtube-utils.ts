@@ -72,7 +72,7 @@ export class YouTubePlayer {
       const originalCallback = window.onYouTubeIframeAPIReady;
       window.onYouTubeIframeAPIReady = () => {
         resolve();
-        
+
         // Call the original callback if it exists
         if (originalCallback && typeof originalCallback === 'function') {
           originalCallback();
@@ -132,7 +132,7 @@ export class YouTubePlayer {
           this.player.playVideo();
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -147,7 +147,7 @@ export class YouTubePlayer {
           this.player.pauseVideo();
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -162,7 +162,7 @@ export class YouTubePlayer {
           this.player.stopVideo();
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -177,7 +177,7 @@ export class YouTubePlayer {
           this.player.seekTo(seconds, allowSeekAhead);
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -193,7 +193,7 @@ export class YouTubePlayer {
           const time = this.player.getCurrentTime();
           resolve(time);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -208,7 +208,7 @@ export class YouTubePlayer {
           const duration = this.player.getDuration();
           resolve(duration);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -223,7 +223,7 @@ export class YouTubePlayer {
           const volume = this.player.getVolume();
           resolve(volume);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -238,7 +238,7 @@ export class YouTubePlayer {
           this.player.setVolume(volume);
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -253,7 +253,7 @@ export class YouTubePlayer {
           const isMuted = this.player.isMuted();
           resolve(isMuted);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -268,7 +268,7 @@ export class YouTubePlayer {
           this.player.mute();
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));
@@ -283,7 +283,7 @@ export class YouTubePlayer {
           this.player.unMute();
           resolve();
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         }
       } else {
         reject(new Error('YouTube player not initialized'));

@@ -1,8 +1,12 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import { ClockIcon, EyeIcon, HandThumbUpIcon } from '@heroicons/react/24/outline';
-import { formatDistanceToNow } from '../utils/dateUtils';
+
 import { mockVideos } from '../services/mockVideoService';
-import { Video } from '../types';
+import { formatDistanceToNow } from '../utils/dateUtils';
+
+import type { Video } from '../types';
 
 interface UserPreferences {
   watchHistory: string[];
@@ -24,7 +28,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   currentVideoId,
   maxRecommendations = 20,
   onVideoSelect,
-  className = ''
+  className = '',
 }) => {
   const [recommendations, setRecommendations] = useState<Video[]>([]);
   const [userPreferences, setUserPreferences] = useState<UserPreferences>({
@@ -33,7 +37,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     subscribedChannels: [],
     preferredCategories: [],
     watchTime: {},
-    searchHistory: []
+    searchHistory: [],
   });
   const [isLoading, setIsLoading] = useState(true);
   const [recommendationType, setRecommendationType] = useState<'personalized' | 'trending' | 'similar'>('personalized');
@@ -50,17 +54,17 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
       const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
       const watchTime = JSON.parse(localStorage.getItem('youtubeCloneWatchTime_v1') || '{}');
-      
+
       const subscribedChannels = Object.keys(subscriptions).filter(channelId => subscriptions[channelId].isSubscribed);
       const preferredCategories = extractPreferredCategories(watchHistory, likedVideos);
-      
+
       setUserPreferences({
         watchHistory,
         likedVideos,
         subscribedChannels,
         preferredCategories,
         watchTime,
-        searchHistory
+        searchHistory,
       });
     } catch (error) {
       console.error('Error loading user preferences:', error);
@@ -77,9 +81,9 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       'fit': 'Fitness',
       'edu': 'Education',
       'news': 'News',
-      'ent': 'Entertainment'
+      'ent': 'Entertainment',
     };
-    
+
     const categories = new Set<string>();
     [...watchHistory, ...likedVideos].forEach(videoId => {
       Object.keys(categoryMap).forEach(key => {
@@ -91,7 +95,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         }
       });
     });
-    
+
     return Array.from(categories);
   };
 
@@ -99,7 +103,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     setIsLoading(true);
     try {
       let videos: Video[] = [];
-      
+
       switch (recommendationType) {
         case 'personalized':
           videos = await generatePersonalizedRecommendations();
@@ -111,7 +115,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           videos = await generateSimilarRecommendations();
           break;
       }
-      
+
       setRecommendations(videos.slice(0, maxRecommendations));
     } catch (error) {
       console.error('Error generating recommendations:', error);
@@ -123,37 +127,37 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generatePersonalizedRecommendations = async (): Promise<Video[]> => {
     // Use actual videos from mockVideoService instead of generating fake ones
     const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
-    
+
     // Score videos based on user preferences
     const scoredVideos = availableVideos.map(video => {
       let score = 0;
-      
+
       // Boost videos from subscribed channels
       if (userPreferences.subscribedChannels.includes(video.channelName)) {
         score += 50;
       }
-      
+
       // Boost videos in preferred categories
       if (userPreferences.preferredCategories.includes(video.category)) {
         score += 30;
       }
-      
+
       // Boost recently uploaded videos (parse the uploadedAt string)
       const daysAgo = parseInt(video.uploadedAt.match(/\d+/)?.[0] || '30');
       if (daysAgo < 7) {
         score += 20;
       }
-      
+
       // Boost videos with high view count
       const viewCount = parseInt(video.views.replace(/[^0-9]/g, '')) || 0;
       score += Math.log10(viewCount + 1) * 5;
-      
+
       // Add some randomness
       score += Math.random() * 10;
-      
+
       return { ...video, score };
     });
-    
+
     return scoredVideos
       .sort((a, b) => b.score - a.score)
       .filter(video => !userPreferences.watchHistory.includes(video.id));
@@ -162,19 +166,19 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generateTrendingRecommendations = async (): Promise<Video[]> => {
     // Use actual videos from mockVideoService
     const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
-    
+
     return availableVideos
       .sort((a, b) => {
         const aViews = parseInt(a.views.replace(/[^0-9]/g, '')) || 0;
         const bViews = parseInt(b.views.replace(/[^0-9]/g, '')) || 0;
-        
+
         // Parse days from uploadedAt string (e.g., "2 weeks ago", "3 days ago")
         const aDaysMatch = a.uploadedAt.match(/(\d+)\s+(day|week|month)/);
         const bDaysMatch = b.uploadedAt.match(/(\d+)\s+(day|week|month)/);
-        
+
         let aDays = 30; // default
         let bDays = 30; // default
-        
+
         if (aDaysMatch) {
           const [, num, unit] = aDaysMatch;
           if (num && unit) {
@@ -188,50 +192,56 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             bDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
           }
         }
-        
+
         // Combine views and recency for trending score
         const aScore = aViews / Math.max(1, aDays);
         const bScore = bViews / Math.max(1, bDays);
-        
+
         return bScore - aScore;
       })
       .slice(0, maxRecommendations);
   };
 
   const generateSimilarRecommendations = async (): Promise<Video[]> => {
-    if (!currentVideoId) return generatePersonalizedRecommendations();
-    
+    if (!currentVideoId) {
+return generatePersonalizedRecommendations();
+}
+
     // Use actual videos from mockVideoService
     const availableVideos = mockVideos.filter(video => video.id !== currentVideoId);
     const currentVideo = mockVideos.find(v => v.id === currentVideoId);
-    
-    if (!currentVideo) return generatePersonalizedRecommendations();
-    
+
+    if (!currentVideo) {
+return generatePersonalizedRecommendations();
+}
+
     return availableVideos
       .map(video => {
         let similarityScore = 0;
-        
+
         // Same category gets high score
         if (video.category === currentVideo.category) {
           similarityScore += 50;
         }
-        
+
         // Same channel gets medium score
         if (video.channelName === currentVideo.channelName) {
           similarityScore += 30;
         }
-        
+
         // Similar duration
         const currentDurationParts = currentVideo.duration.split(':');
         const videoDurationParts = video.duration.split(':');
         const currentDuration = currentDurationParts[0] ? parseInt(currentDurationParts[0]) : 0;
         const videoDuration = videoDurationParts[0] ? parseInt(videoDurationParts[0]) : 0;
         const durationDiff = Math.abs(currentDuration - videoDuration);
-        if (durationDiff < 5) similarityScore += 15;
-        
+        if (durationDiff < 5) {
+similarityScore += 15;
+}
+
         // Add randomness for variety
         similarityScore += Math.random() * 10;
-        
+
         return { ...video, similarityScore };
       })
       .sort((a, b) => {
@@ -263,7 +273,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     // Track video selection for future recommendations
     const updatedHistory = [videoId, ...userPreferences.watchHistory.filter(id => id !== videoId)].slice(0, 100);
     localStorage.setItem('youtubeCloneWatchHistory_v1', JSON.stringify(updatedHistory));
-    
+
     onVideoSelect?.(videoId);
   };
 
@@ -272,11 +282,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       <div className={`space-y-4 ${className}`}>
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="flex space-x-3 animate-pulse">
-            <div className="w-40 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+            <div className="w-40 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
-              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
-              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3"></div>
+              <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3" />
             </div>
           </div>
         ))}
@@ -343,12 +353,12 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
                 {video.duration}
               </div>
             </div>
-            
+
             <div className="flex-1 min-w-0">
               <h4 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 mb-1">
                 {video.title}
               </h4>
-              
+
               <div className="flex items-center space-x-2 mb-1">
                 <img
                   src={video.channelAvatarUrl}
@@ -359,7 +369,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
                   {video.channelName}
                 </p>
               </div>
-              
+
               <div className="flex items-center space-x-2 text-xs text-neutral-500 dark:text-neutral-500">
                 <div className="flex items-center space-x-1">
                   <EyeIcon className="w-3 h-3" />
@@ -376,7 +386,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
                   <span>{video.likes}</span>
                 </div>
               </div>
-              
+
               {video.tags && video.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {video.tags.slice(0, 3).map((tag) => (

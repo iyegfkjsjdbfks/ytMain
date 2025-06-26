@@ -1,7 +1,10 @@
-import React, { useState   } from 'react';
-import BaseModal from './BaseModal';
+import type React from 'react';
+import { useState } from 'react';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+
+import BaseModal from './BaseModal';
+
 
 interface CommentModalProps {
   isOpen: boolean;
@@ -20,15 +23,17 @@ const CommentModal: React.FC<CommentModalProps> = ({
   onClose,
   shortId: _shortId,
   shortTitle,
-  onCommentSubmit
+  onCommentSubmit,
 }) => {
   const [commentText, setCommentText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality
 
   const handleCommentSubmit = async (text: string) => {
-    if (!text.trim()) return;
-    
+    if (!text.trim()) {
+return;
+}
+
     setIsSubmitting(true);
     try {
       // Call the provided submit handler or default behavior
@@ -37,7 +42,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
       } else {
         // Default behavior - you can implement API call here
       }
-      
+
       setCommentText('');
       onClose();
     } catch (error) {
@@ -83,7 +88,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
             <span>Commenting on: {shortTitle}</span>
           </div>
         )}
-        
+
         <div>
           <label htmlFor="comment-text" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Your comment

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import { useParams, Link } from 'react-router-dom';
 
-import { VideoPlayer } from '../components/VideoPlayer';
 import YouTubePlayerWrapper from '../../../../components/YouTubePlayerWrapper';
 import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
+import { VideoPlayer } from '../components/VideoPlayer';
 
 import type { Video } from '../../../types/core';
 

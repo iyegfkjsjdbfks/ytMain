@@ -1,4 +1,6 @@
-import React, { useState   } from 'react';
+import type React from 'react';
+import { useState   } from 'react';
+
 import {
   ClockIcon,
   HeartIcon,
@@ -8,7 +10,6 @@ import {
   EyeIcon,
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
-import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,6 +22,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
+import { Line, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +33,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
 );
 
 export interface VideoAnalytics {
@@ -39,7 +41,7 @@ export interface VideoAnalytics {
   title: string;
   thumbnail: string;
   publishedAt: string;
-  
+
   // Core metrics
   views: number;
   likes: number;
@@ -47,26 +49,26 @@ export interface VideoAnalytics {
   comments: number;
   shares: number;
   subscribers: number;
-  
+
   // Engagement metrics
   averageViewDuration: number; // in seconds
   totalWatchTime: number; // in seconds
   clickThroughRate: number; // percentage
   engagementRate: number; // percentage
-  
+
   // Time series data
   viewsOverTime: Array<{ date: string; views: number }>;
   watchTimeOverTime: Array<{ date: string; watchTime: number }>;
-  
+
   // Demographics
   ageGroups: Array<{ range: string; percentage: number }>;
   genderDistribution: Array<{ gender: string; percentage: number }>;
   topCountries: Array<{ country: string; views: number; percentage: number }>;
-  
+
   // Device/Platform data
   deviceTypes: Array<{ device: string; percentage: number }>;
   trafficSources: Array<{ source: string; percentage: number }>;
-  
+
   // Revenue (if monetized)
   revenue?: {
     total: number;
@@ -86,15 +88,15 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   analytics,
   timeRange,
   onTimeRangeChange,
-  className = ''
+  className = '',
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'engagement' | 'revenue'>('overview');
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toLocaleString();
   };
@@ -103,7 +105,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
-    
+
     if (hours > 0) {
       return `${hours}h ${minutes}m ${secs}s`;
     } else if (minutes > 0) {
@@ -115,7 +117,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
     }).format(amount);
   };
 
@@ -230,7 +232,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               Published {new Date(analytics.publishedAt).toLocaleDateString()}
             </p>
-            
+
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">

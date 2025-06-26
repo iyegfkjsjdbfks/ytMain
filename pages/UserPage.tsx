@@ -1,11 +1,14 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
-import { useParams } from 'react-router-dom';
-import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
+
 import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { Video } from '../types';
-import { getVideos } from '../services/mockVideoService';
+import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
+import { useParams } from 'react-router-dom';
+
 import VideoCard from '../components/VideoCard';
+import { getVideos } from '../services/mockVideoService';
+
+import type { Video } from '../types';
 
 const UserPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
@@ -26,7 +29,7 @@ const UserPage: React.FC = () => {
         // Filter videos by channel name (mock implementation)
         const filteredVideos = allVideos.filter(video =>
           video.channelName.toLowerCase().includes(decodedUserName.toLowerCase()) ||
-          Math.random() > 0.7 // Random selection for demo
+          Math.random() > 0.7, // Random selection for demo
         ).slice(0, 12);
         setUserVideos(filteredVideos);
       } catch (error) {
@@ -60,10 +63,10 @@ const UserPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {Array.from({ length: 8 }).map((_, index) => (
                   <div key={index} className="bg-neutral-100 dark:bg-neutral-800 rounded-lg animate-pulse">
-                    <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+                    <div className="aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
                     <div className="p-3 space-y-2">
-                      <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded"></div>
-                      <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
+                      <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded" />
+                      <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
                     </div>
                   </div>
                 ))}
@@ -134,7 +137,7 @@ const UserPage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-neutral-950 min-h-screen">
       {/* Channel Header */}
-      <div className="bg-gradient-to-r from-sky-400 to-blue-500 h-32 sm:h-48"></div>
+      <div className="bg-gradient-to-r from-sky-400 to-blue-500 h-32 sm:h-48" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Channel Info */}

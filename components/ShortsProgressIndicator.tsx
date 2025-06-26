@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 interface ShortsProgressIndicatorProps {
   currentIndex: number;
@@ -9,9 +9,11 @@ interface ShortsProgressIndicatorProps {
 const ShortsProgressIndicator: React.FC<ShortsProgressIndicatorProps> = ({
   currentIndex,
   totalCount,
-  className = ''
+  className = '',
 }) => {
-  if (totalCount <= 1) return null;
+  if (totalCount <= 1) {
+return null;
+}
 
   const progress = ((currentIndex + 1) / totalCount) * 100;
   const displayIndex = currentIndex + 1;
@@ -22,15 +24,15 @@ const ShortsProgressIndicator: React.FC<ShortsProgressIndicatorProps> = ({
       <div className="bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full">
         {displayIndex} / {totalCount}
       </div>
-      
+
       {/* Progress bar */}
       <div className="w-1 h-20 bg-white/20 rounded-full overflow-hidden">
-        <div 
+        <div
           className="w-full bg-white rounded-full transition-all duration-300 ease-out"
           style={{ height: `${progress}%` }}
         />
       </div>
-      
+
       {/* Dots indicator for smaller counts */}
       {totalCount <= 10 && (
         <div className="flex flex-col space-y-1">

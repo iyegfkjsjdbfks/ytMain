@@ -1,9 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+
 import { BellIcon } from '@heroicons/react/24/outline';
-import { SummarizeIcon } from './icons/SummarizeIcon';
+import { Link } from 'react-router-dom';
+
 import { formatCount } from '../utils/numberUtils';
-import { VideoVisibility } from '../types';
+
+import { SummarizeIcon } from './icons/SummarizeIcon';
+
+import type { VideoVisibility } from '../types';
 
 interface Channel {
   id: string;
@@ -61,7 +65,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
   canSummarize,
   onSubscribe,
   onToggleDescription,
-  onSummarizeDescription
+  onSummarizeDescription,
 }) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
@@ -71,15 +75,15 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center space-x-2">
           <Link to={channelLink} className="flex-shrink-0">
-            <img 
-              src={channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'} 
-              alt={`${channel?.name || 'Unknown'} channel avatar`} 
+            <img
+              src={channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
+              alt={`${channel?.name || 'Unknown'} channel avatar`}
               className="w-10 h-10 rounded-full object-cover"
             />
           </Link>
           <div className="min-w-0 flex-grow">
-            <Link 
-              to={channelLink} 
+            <Link
+              to={channelLink}
               className="text-sm font-medium text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors block truncate"
             >
               {channel?.name || 'Unknown Channel'}
@@ -93,11 +97,11 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <button 
+          <button
             onClick={onSubscribe}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              isSubscribed 
-                ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600' 
+              isSubscribed
+                ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
                 : 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200'
             }`}
             aria-pressed={isSubscribed}
@@ -105,9 +109,9 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
             {isSubscribed ? 'Subscribed' : 'Subscribe'}
           </button>
           {isSubscribed && (
-            <button 
-              className="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/70 text-neutral-700 dark:text-neutral-200" 
-              aria-label="Manage notifications for this channel" 
+            <button
+              className="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/70 text-neutral-700 dark:text-neutral-200"
+              aria-label="Manage notifications for this channel"
               title="Notifications"
             >
               <BellIcon className="w-5 h-5"/>
@@ -117,17 +121,19 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
       </div>
 
       {/* Video Description */}
-      <div 
+      <div
         className={`text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap leading-relaxed cursor-pointer ${
           !showFullDescription ? 'max-h-20 overflow-hidden' : ''
         }`}
         onClick={onToggleDescription}
-        role="button" 
-        tabIndex={0} 
-        onKeyDown={(e) => { 
-          if (e.key === 'Enter' || e.key === ' ') onToggleDescription();
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+onToggleDescription();
+}
         }}
-        aria-expanded={showFullDescription} 
+        aria-expanded={showFullDescription}
         aria-controls="video-description-content"
       >
         <div className="text-sm" id="video-description-content">
@@ -138,15 +144,17 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
           {video.description}
         </div>
       </div>
-      
+
       {/* Show More/Less Button */}
-      {(video.description.length > 150 || video.description.includes('\n')) && ( 
-        <span 
+      {(video.description.length > 150 || video.description.includes('\n')) && (
+        <span
           onClick={onToggleDescription}
-          role="button" 
-          tabIndex={0} 
-          onKeyDown={(e) => { 
-            if (e.key === 'Enter' || e.key === ' ') onToggleDescription();
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+onToggleDescription();
+}
           }}
           className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-neutral-50 font-semibold mt-1.5 block cursor-pointer"
         >
@@ -161,7 +169,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
             onClick={onSummarizeDescription}
             disabled={isSummarizing}
             className="flex items-center space-x-1.5 bg-sky-500/10 dark:bg-sky-400/10 hover:bg-sky-500/20 dark:hover:bg-sky-400/20 text-sky-700 dark:text-sky-300 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-            aria-label="Summarize video description with AI" 
+            aria-label="Summarize video description with AI"
             title="Summarize with AI"
           >
             <SummarizeIcon className="w-5 h-5" />

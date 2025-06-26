@@ -1,4 +1,4 @@
-import { Video } from '../src/types/core';
+import type { Video } from '../src/types/core';
 
 export function getVideoThumbnail(video: Video): string {
   return video.thumbnailUrl || '';
@@ -9,8 +9,12 @@ export function getChannelAvatar(video: Video): string {
 }
 
 export function getViewCount(video: Video): string | number {
-  if (video.views) return video.views;
-  if (video.viewCount !== undefined) return formatViewCount(video.viewCount);
+  if (video.views) {
+return video.views;
+}
+  if (video.viewCount !== undefined) {
+return formatViewCount(video.viewCount);
+}
   return 0;
 }
 
@@ -40,8 +44,10 @@ export function getVideoAspectRatio(video: Video): number {
 }
 
 export function getVideoPrivacyBadge(video: Video): string | null {
-  if (!video.privacyStatus) return null;
-  
+  if (!video.privacyStatus) {
+return null;
+}
+
   switch (video.privacyStatus) {
     case 'private':
       return 'Private';
@@ -53,7 +59,9 @@ export function getVideoPrivacyBadge(video: Video): string | null {
 }
 
 export function getVideoTags(video: Video): string[] {
-  if (!video.tags || !Array.isArray(video.tags)) return [];
+  if (!video.tags.length) {
+    return [];
+  }
   return video.tags.slice(0, 5); // Return first 5 tags
 }
 
@@ -70,6 +78,6 @@ export function getVideoDimensions(video: Video): { width: number; height: numbe
   const width = 1280; // Default width
   return {
     width,
-    height: Math.round(width / aspectRatio)
+    height: Math.round(width / aspectRatio),
   };
 }

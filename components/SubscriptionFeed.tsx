@@ -1,9 +1,15 @@
-import React, { useEffect, useState   } from 'react';
+import type React from 'react';
+import { useEffect, useState   } from 'react';
+
 import { Link } from 'react-router-dom';
-import { Video } from '../types';
+
 import { getVideos } from '../services/mockVideoService';
+
+
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
 import VideoCard from './VideoCard';
+
+import type { Video } from '../types';
 
 interface SubscriptionFeedProps {
   maxVideos?: number;
@@ -19,32 +25,32 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
       try {
         setLoading(true);
         const allVideos = await getVideos();
-        
+
         // Mock subscribed channels - in a real app, this would come from user data
         const subscribedChannels = [
           'Nature Explorers',
-          'TechLevelUp', 
+          'TechLevelUp',
           'Chef Studio',
           'Science Explained',
           'Fitness Journey',
-          'Music Vibes'
+          'Music Vibes',
         ];
-        
+
         // Filter videos from subscribed channels and sort by upload date
         const subscriptionFeed = allVideos
           .filter(video => subscribedChannels.includes(video.channelName) && !video.isShort)
           .sort((a, b) => {
             // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
-            const timeA = a.uploadedAt.includes('hour') ? 1 : 
+            const timeA = a.uploadedAt.includes('hour') ? 1 :
                          a.uploadedAt.includes('day') ? parseInt(a.uploadedAt) || 7 :
                          a.uploadedAt.includes('week') ? (parseInt(a.uploadedAt) || 1) * 7 : 30;
-            const timeB = b.uploadedAt.includes('hour') ? 1 : 
+            const timeB = b.uploadedAt.includes('hour') ? 1 :
                          b.uploadedAt.includes('day') ? parseInt(b.uploadedAt) || 7 :
                          b.uploadedAt.includes('week') ? (parseInt(b.uploadedAt) || 1) * 7 : 30;
             return timeA - timeB;
           })
           .slice(0, maxVideos);
-        
+
         setSubscriptionVideos(subscriptionFeed);
         setError(null);
       } catch (err) {
@@ -68,14 +74,14 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
-              <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg"></div>
+              <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
               <div className="p-3">
                 <div className="flex items-start space-x-3">
-                  <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0"></div>
+                  <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0" />
                   <div className="flex-grow space-y-1.5 pt-0.5">
-                    <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6"></div>
-                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4"></div>
-                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2"></div>
+                    <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
+                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
+                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
                   </div>
                 </div>
               </div>
@@ -107,7 +113,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
         </div>
         <div className="text-center py-8 text-neutral-600 dark:text-neutral-400">
           <p className="mb-2">No new videos from your subscriptions</p>
-          <Link 
+          <Link
             to="/trending"
             className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 font-medium"
           >
@@ -125,7 +131,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
           <SubscriptionsIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
           <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Latest from your subscriptions</h2>
         </div>
-        <Link 
+        <Link
           to="/subscriptions"
           className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
         >

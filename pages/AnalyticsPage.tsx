@@ -1,8 +1,12 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
-import { Video } from '../types';
+
 import { getVideos } from '../services/mockVideoService';
 import { parseViewCount } from '../utils/numberUtils';
+
+import type { Video } from '../types';
 
 interface AnalyticsData {
   totalViews: number;
@@ -18,7 +22,7 @@ interface AnalyticsData {
     subscribers: number[];
     labels: string[];
   };
-  videoPerformance: {
+  videoPerformance: Array<{
     video: Video;
     views: number;
     likes: number;
@@ -26,7 +30,7 @@ interface AnalyticsData {
     watchTime: number;
     ctr: number; // Click-through rate
     retention: number; // Average view duration percentage
-  }[];
+  }>;
 }
 
 const AnalyticsPage: React.FC = () => {
@@ -40,7 +44,7 @@ const AnalyticsPage: React.FC = () => {
       setLoading(true);
       try {
         const videos = await getVideos();
-        
+
         // Generate mock analytics data
         const mockAnalytics: AnalyticsData = {
           totalViews: videos.reduce((sum, video) => sum + parseViewCount(video.views), 0),
@@ -58,7 +62,7 @@ const AnalyticsPage: React.FC = () => {
               const date = new Date();
               date.setDate(date.getDate() - (29 - i));
               return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            })
+            }),
           },
           videoPerformance: videos.slice(0, 10).map(video => ({
             video,
@@ -67,10 +71,10 @@ const AnalyticsPage: React.FC = () => {
             comments: Math.floor(Math.random() * 500) + 10,
             watchTime: Math.floor(Math.random() * 300) + 60,
             ctr: Math.random() * 10 + 2,
-            retention: Math.random() * 40 + 40
-          }))
+            retention: Math.random() * 40 + 40,
+          })),
         };
-        
+
         setAnalyticsData(mockAnalytics);
       } catch (error) {
         console.error('Failed to fetch analytics data:', error);
@@ -83,13 +87,19 @@ const AnalyticsPage: React.FC = () => {
   }, [timeRange]);
 
   const formatNumber = (num: number): string => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
   const formatDuration = (hours: number): string => {
-    if (hours >= 24) return `${Math.floor(hours / 24)}d ${hours % 24}h`;
+    if (hours >= 24) {
+return `${Math.floor(hours / 24)}d ${hours % 24}h`;
+}
     return `${hours}h`;
   };
 
@@ -157,13 +167,13 @@ const AnalyticsPage: React.FC = () => {
     return (
       <div className="p-6 space-y-6">
         <div className="animate-pulse">
-          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6"></div>
+          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
             ))}
           </div>
-          <div className="h-80 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+          <div className="h-80 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
         </div>
       </div>
     );

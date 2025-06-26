@@ -152,7 +152,7 @@ export interface Card {
   pollOptions?: string[];
 }
 
-export type VideoCategory = 
+export type VideoCategory =
   | 'Entertainment'
   | 'Education'
   | 'Gaming'
@@ -226,18 +226,18 @@ export interface AudienceMetrics {
 }
 
 export interface DemographicData {
-  ageGroups: { range: string; percentage: number }[];
+  ageGroups: Array<{ range: string; percentage: number }>;
   gender: { male: number; female: number; other: number };
 }
 
 export interface GeographicData {
-  countries: { country: string; percentage: number; views: number }[];
-  cities: { city: string; country: string; percentage: number }[];
+  countries: Array<{ country: string; percentage: number; views: number }>;
+  cities: Array<{ city: string; country: string; percentage: number }>;
 }
 
 export interface DeviceData {
-  types: { device: string; percentage: number }[];
-  operatingSystems: { os: string; percentage: number }[];
+  types: Array<{ device: string; percentage: number }>;
+  operatingSystems: Array<{ os: string; percentage: number }>;
 }
 
 export interface PlaybackLocationData {
@@ -343,7 +343,7 @@ export interface Notification extends BaseEntity {
   metadata?: Record<string, any>;
 }
 
-export type NotificationType = 
+export type NotificationType =
   | 'new_video'
   | 'live_stream'
   | 'comment'
@@ -391,7 +391,7 @@ export interface SearchFilters {
   uploadDate?: 'hour' | 'today' | 'week' | 'month' | 'year';
   sortBy?: 'relevance' | 'date' | 'views' | 'rating';
   quality?: 'hd' | '4k';
-  features?: ('live' | 'hd' | '4k' | 'subtitles' | 'creative_commons')[];
+  features?: Array<'live' | 'hd' | '4k' | 'subtitles' | 'creative_commons'>;
 }
 
 // API Types
@@ -426,7 +426,7 @@ export interface FormField {
   type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'date';
   required: boolean;
   placeholder?: string;
-  options?: { value: string; label: string }[];
+  options?: Array<{ value: string; label: string }>;
   validation?: ValidationRule[];
   defaultValue?: any;
 }
@@ -594,7 +594,7 @@ export type Nullable<T> = T | null;
 
 export type ValueOf<T> = T[keyof T];
 
-export type ArrayElement<T> = T extends (infer U)[] ? U : never;
+export type ArrayElement<T> = T extends Array<infer U> ? U : never;
 
 export type PromiseType<T> = T extends Promise<infer U> ? U : never;
 

@@ -1,9 +1,12 @@
 
-import React from 'react';
-import { Video } from '../types'; // Keep Video import for explicit typing
-import VideoCard from '../components/VideoCard';
+import type React from 'react';
+
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state
+
+import VideoCard from '../components/VideoCard';
 import { useWatchLater } from '../contexts/WatchLaterContext'; // Import useWatchLater
+
+import type { Video } from '../types'; // Keep Video import for explicit typing
 
 const WatchLaterPage: React.FC = () => {
   const { watchLaterList } = useWatchLater(); // Use context

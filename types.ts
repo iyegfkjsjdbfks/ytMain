@@ -1,6 +1,7 @@
 
 // Import and re-export VideoVisibility type
 import type { VideoVisibility } from './src/types/core';
+
 export type { VideoVisibility };
 
 // Define interfaces for PlaylistSummary and CommunityPost first as Channel uses them
@@ -16,7 +17,7 @@ export interface CommunityPost {
   type: 'text' | 'image' | 'poll';
   content: string;
   imageUrl?: string;
-  pollOptions?: { id: string; text: string; votes: number }[];
+  pollOptions?: Array<{ id: string; text: string; votes: number }>;
   likes: number;
   comments: number;
   shares: number;
@@ -196,10 +197,10 @@ export type Short = Omit<ExtendedVideo, 'isShort'> & {
   // Interactive elements
   hasInteractiveElements?: boolean;
   // Thumbnail variants
-  thumbnailOverlays?: {
+  thumbnailOverlays?: Array<{
     type: 'text' | 'image' | 'time';
     content: string;
     position: 'top' | 'bottom' | 'left' | 'right';
     style?: Record<string, any>;
-  }[];
+  }>;
 };

@@ -1,7 +1,9 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/mockVideoService';
 
 const YourDataPage: React.FC = () => {
@@ -12,7 +14,7 @@ const YourDataPage: React.FC = () => {
   const [dataVisibility, setDataVisibility] = useState({
     watchHistory: true,
     searchHistory: true,
-    likedVideos: true
+    likedVideos: true,
   });
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const YourDataPage: React.FC = () => {
         const [watchHistory, likedVideos, searchHistory] = await Promise.all([
           getWatchHistoryVideos(),
           getLikedVideos(),
-          getRecentSearches()
+          getRecentSearches(),
         ]);
 
         setWatchHistoryCount(watchHistory.length);
@@ -69,7 +71,7 @@ const YourDataPage: React.FC = () => {
   const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
     setDataVisibility(prev => ({
       ...prev,
-      [dataType]: !prev[dataType]
+      [dataType]: !prev[dataType],
     }));
   };
 
@@ -79,7 +81,7 @@ const YourDataPage: React.FC = () => {
       likedVideos: JSON.parse(localStorage.getItem('youtubeCloneLikedVideos_v1') || '[]'),
       searchHistory: JSON.parse(localStorage.getItem('youtubeCloneRecentSearches_v2') || '[]'),
       userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'),
-      exportDate: new Date().toISOString()
+      exportDate: new Date().toISOString(),
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });

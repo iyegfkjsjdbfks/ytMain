@@ -1,8 +1,10 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { CheckIcon } from '@heroicons/react/24/solid';
+
 import { useTheme } from '../contexts/ThemeContext';
 
 const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
@@ -82,13 +84,13 @@ const SettingsPage: React.FC = () => {
     recommendedVideos: false,
     activityOnMyChannel: true,
     repliesComments: true,
-    mentions: true
+    mentions: true,
   });
 
   const handleNotificationChange = (key: keyof typeof notifications) => {
     setNotifications(prev => ({
       ...prev,
-      [key]: !prev[key]
+      [key]: !prev[key],
     }));
   };
 

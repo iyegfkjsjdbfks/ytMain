@@ -21,7 +21,6 @@ const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className })
 );
 
 
-
 interface DashboardMetrics {
   views: {
     total: number;

@@ -1,7 +1,7 @@
 
-import React from 'react';
+import type React from 'react';
 
-const FireIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const FireIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (
   <svg
     className={className}
     fill="none"
@@ -25,4 +25,3 @@ const FireIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) =
 );
 
 export default FireIcon;
-    

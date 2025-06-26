@@ -1,5 +1,7 @@
-import { createContext, useContext, useReducer, useMemo, ReactNode } from 'react';
-import { Video } from '../types';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useReducer, useMemo } from 'react';
+
+import type { Video } from '../types';
 
 // State interface
 interface MiniplayerState {
@@ -55,7 +57,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         currentVideo: action.payload,
         isPlaying: true,
       };
-    
+
     case 'HIDE_MINIPLAYER':
       return {
         ...state,
@@ -64,62 +66,62 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         isPlaying: false,
         currentTime: 0,
       };
-    
+
     case 'TOGGLE_PLAY':
       return {
         ...state,
         isPlaying: !state.isPlaying,
       };
-    
+
     case 'SET_PLAYING':
       return {
         ...state,
         isPlaying: action.payload,
       };
-    
+
     case 'SET_VOLUME':
       return {
         ...state,
         volume: Math.max(0, Math.min(1, action.payload)),
       };
-    
+
     case 'SET_CURRENT_TIME':
       return {
         ...state,
         currentTime: action.payload,
       };
-    
+
     case 'SET_DURATION':
       return {
         ...state,
         duration: action.payload,
       };
-    
+
     case 'TOGGLE_MAXIMIZE':
       return {
         ...state,
         isMaximized: !state.isMaximized,
       };
-    
+
     case 'SET_MAXIMIZED':
       return {
         ...state,
         isMaximized: action.payload,
       };
-    
+
     case 'SET_QUEUE':
       return {
         ...state,
         queue: action.payload,
         currentIndex: action.payload.length > 0 ? 0 : -1,
       };
-    
+
     case 'ADD_TO_QUEUE':
       return {
         ...state,
         queue: [...state.queue, action.payload],
       };
-    
+
     case 'REMOVE_FROM_QUEUE': {
       const newQueue = state.queue.filter(video => video.id !== action.payload);
       const newIndex = state.currentIndex >= newQueue.length ? newQueue.length - 1 : state.currentIndex;
@@ -129,7 +131,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         currentIndex: newIndex,
       };
     }
-    
+
     case 'NEXT_VIDEO': {
       const nextIndex = state.currentIndex + 1;
       if (nextIndex < state.queue.length) {
@@ -142,7 +144,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       }
       return state;
     }
-    
+
     case 'PREVIOUS_VIDEO': {
       const prevIndex = state.currentIndex - 1;
       if (prevIndex >= 0) {
@@ -155,7 +157,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       }
       return state;
     }
-    
+
     case 'SET_CURRENT_INDEX':
       if (action.payload >= 0 && action.payload < state.queue.length) {
         return {
@@ -166,7 +168,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
         };
       }
       return state;
-    
+
     default:
       return state;
   }

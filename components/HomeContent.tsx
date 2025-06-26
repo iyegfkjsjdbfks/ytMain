@@ -1,11 +1,13 @@
-import React from 'react';
-import VideoGrid from './VideoGrid';
-import ShortsSection from './ShortsSection';
-import TrendingSection from './TrendingSection';
-import SubscriptionFeed from './SubscriptionFeed';
-import WatchHistory from './WatchHistory';
+import type React from 'react';
+
 import LiveStreams from './LiveStreams';
-import { Video } from '../types'; // Assuming Video type is in types.ts
+import ShortsSection from './ShortsSection';
+import SubscriptionFeed from './SubscriptionFeed';
+import TrendingSection from './TrendingSection';
+import VideoGrid from './VideoGrid';
+import WatchHistory from './WatchHistory';
+
+import type { Video } from '../types'; // Assuming Video type is in types.ts
 
 interface HomeContentProps {
   selectedCategory: string;

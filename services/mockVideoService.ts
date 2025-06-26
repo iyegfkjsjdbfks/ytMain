@@ -1,7 +1,7 @@
 
 // Mock video service with working video URLs
-import { Video, Channel, Comment } from '../src/types/core';
-import { PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
+import type { Video, Channel, Comment } from '../src/types/core';
+import type { PlaylistSummary, CommunityPost, UserPlaylistDetails, VideoUploadData, UploadProgress } from '../types';
 // Removed unused imports
 
 // Helper function to create complete video objects
@@ -24,7 +24,7 @@ const ___createMockVideo = (partial: Partial<Video>): Video => ({
   channelAvatarUrl: partial.channelAvatarUrl || 'https://picsum.photos/40/40',
   uploadedAt: partial.uploadedAt || new Date().toISOString(),
   description: partial.description || 'No description available',
-  category: partial.category || 'Entertainment'
+  category: partial.category || 'Entertainment',
 });
 
 // Curated mock videos - removed duplicates and kept diverse, unique content
@@ -46,7 +46,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 12000,
     dislikes: 150,
-    tags: ['travel', 'alps', 'nature', 'scenic']
+    tags: ['travel', 'alps', 'nature', 'scenic'],
   }),
 
   // Gaming & Tech
@@ -66,7 +66,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 8700,
     dislikes: 120,
-    tags: ['gaming', 'setup', 'tech', '2024']
+    tags: ['gaming', 'setup', 'tech', '2024'],
   }),
 
   // Cooking
@@ -86,7 +86,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 25000,
     dislikes: 300,
-    tags: ['cooking', 'pasta', 'recipe', 'easy']
+    tags: ['cooking', 'pasta', 'recipe', 'easy'],
   }),
 
   // Programming Education
@@ -106,7 +106,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 4500,
     dislikes: 50,
-    tags: ['react', 'typescript', 'tutorial', 'programming']
+    tags: ['react', 'typescript', 'tutorial', 'programming'],
   }),
 
   // Fitness
@@ -126,7 +126,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 32000,
     dislikes: 200,
-    tags: ['workout', 'fitness', 'morning', 'exercise']
+    tags: ['workout', 'fitness', 'morning', 'exercise'],
   }),
 
   // Science
@@ -146,7 +146,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 18000,
     dislikes: 100,
-    tags: ['science', 'space', 'blackholes', 'physics']
+    tags: ['science', 'space', 'blackholes', 'physics'],
   }),
 
   // Music Education
@@ -166,7 +166,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 6800,
     dislikes: 80,
-    tags: ['music', 'guitar', 'tutorial', 'scales']
+    tags: ['music', 'guitar', 'tutorial', 'scales'],
   }),
 
   // Photography
@@ -186,7 +186,7 @@ const mockVideos: Video[] = [
     isShort: false,
     likes: 8900,
     dislikes: 90,
-    tags: ['photography', 'portraits', 'goldenhour', 'tips']
+    tags: ['photography', 'portraits', 'goldenhour', 'tips'],
   }),
 
   // SHORTS - Diverse short-form content
@@ -206,7 +206,7 @@ const mockVideos: Video[] = [
     isShort: true,
     likes: 53000,
     dislikes: 200,
-    tags: ['shorts', 'basketball', 'sports', 'trickshot']
+    tags: ['shorts', 'basketball', 'sports', 'trickshot'],
   }),
 
   ___createMockVideo({
@@ -225,7 +225,7 @@ const mockVideos: Video[] = [
     isShort: true,
     likes: 101000,
     dislikes: 500,
-    tags: ['shorts', 'cats', 'funny', 'pets']
+    tags: ['shorts', 'cats', 'funny', 'pets'],
   }),
 
   ___createMockVideo({
@@ -244,7 +244,7 @@ const mockVideos: Video[] = [
     isShort: true,
     likes: 28000,
     dislikes: 150,
-    tags: ['shorts', 'cooking', 'lifehack', 'kitchen']
+    tags: ['shorts', 'cooking', 'lifehack', 'kitchen'],
   }),
 
   ___createMockVideo({
@@ -263,8 +263,8 @@ const mockVideos: Video[] = [
     isShort: true,
     likes: 152000,
     dislikes: 800,
-    tags: ['shorts', 'dance', 'viral', 'trending']
-  })
+    tags: ['shorts', 'dance', 'viral', 'trending'],
+  }),
 ];
 
 // Export functions
@@ -278,7 +278,7 @@ export const getVideos = (): Promise<Video[]> => {
 const createYouTubeVideoObject = (youtubeId: string): Video => {
   // Extract actual YouTube video ID by removing 'youtube-' prefix if present
   const actualYouTubeId = youtubeId.startsWith('youtube-') ? youtubeId.substring(8) : youtubeId;
-  
+
   return {
     id: youtubeId,
     title: 'YouTube Video',
@@ -302,7 +302,7 @@ const createYouTubeVideoObject = (youtubeId: string): Video => {
     uploadedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    isShort: false
+    isShort: false,
   };
 };
 
@@ -315,7 +315,7 @@ export const getVideoById = (id: string): Promise<Video | null> => {
         resolve(localVideo);
         return;
       }
-      
+
       // If not found in local videos, treat as YouTube video ID
       // YouTube video IDs are typically 11 characters long
       if (id && id.length >= 10) {
@@ -349,9 +349,9 @@ export const getVideosByCategory = (category: string): Promise<Video[]> => {
 export const searchVideos = (query: string): Promise<Video[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const filtered = mockVideos.filter(video => 
+      const filtered = mockVideos.filter(video =>
         video.title.toLowerCase().includes(query.toLowerCase()) ||
-        video.description.toLowerCase().includes(query.toLowerCase())
+        video.description.toLowerCase().includes(query.toLowerCase()),
       );
       resolve(filtered);
     }, 100);
@@ -371,8 +371,8 @@ const mockChannels: Channel[] = [
     isVerified: true,
     joinedDate: 'Jan 15, 2018',
     createdAt: '2018-01-15T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
-  }
+    updatedAt: '2024-01-01T00:00:00Z',
+  },
 ];
 
 export const getChannels = (): Promise<Channel[]> => {
@@ -413,8 +413,8 @@ const mockComments: Comment[] = [
     content: 'Amazing video! The scenery is breathtaking.',
     dislikes: 2,
     isPinned: false,
-    isHearted: false
-  }
+    isHearted: false,
+  },
 ];
 
 export const getCommentsByVideoId = (_videoId: string): Promise<Comment[]> => {
@@ -489,24 +489,24 @@ export const getUserPlaylistById = (_id: string): Promise<UserPlaylistDetails & 
         visibility: 'public' as const,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-      }
-    ]
+      },
+    ],
   });
 };
 
 export const uploadVideo = (
-  data: VideoUploadData, 
-  onProgress?: (progress: UploadProgress) => void
+  data: VideoUploadData,
+  onProgress?: (progress: UploadProgress) => void,
 ): Promise<UploadProgress> => {
   return new Promise((resolve, reject) => {
     let progress = 0;
     const interval = setInterval(() => {
       progress += Math.random() * 15 + 5; // Random progress between 5-20%
-      
+
       if (progress >= 100) {
         progress = 100;
         clearInterval(interval);
-        
+
         // Simulate saving the video
         const newVideo: Video = {
           id: `video-${Date.now()}`,
@@ -527,36 +527,40 @@ export const uploadVideo = (
           visibility: data.visibility,
           isShort: data.isShorts,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
-        
+
         // Add to mock videos array
         mockVideos.unshift(newVideo);
-        
+
         // Store in localStorage for persistence
         const userVideos = JSON.parse(localStorage.getItem('youtubeCloneUserVideos_v1') || '[]');
         userVideos.unshift(newVideo);
         localStorage.setItem('youtubeCloneUserVideos_v1', JSON.stringify(userVideos));
-        
+
         const finalProgress: UploadProgress = {
           percentage: 100,
           status: 'completed',
-          message: 'Upload completed successfully!'
+          message: 'Upload completed successfully!',
         };
-        
-        if (onProgress) onProgress(finalProgress);
+
+        if (onProgress) {
+onProgress(finalProgress);
+}
         resolve(finalProgress);
       } else {
         const currentProgress: UploadProgress = {
           percentage: Math.floor(progress),
           status: 'uploading',
-          message: `Uploading... ${Math.floor(progress)}%`
+          message: `Uploading... ${Math.floor(progress)}%`,
         };
-        
-        if (onProgress) onProgress(currentProgress);
+
+        if (onProgress) {
+onProgress(currentProgress);
+}
       }
     }, 200); // Update every 200ms
-    
+
     // Simulate potential upload failure (5% chance)
     setTimeout(() => {
       if (Math.random() < 0.05 && progress < 100) {
@@ -564,9 +568,11 @@ export const uploadVideo = (
         const errorProgress: UploadProgress = {
           percentage: 0,
           status: 'error',
-          message: 'Upload failed. Please try again.'
+          message: 'Upload failed. Please try again.',
         };
-        if (onProgress) onProgress(errorProgress);
+        if (onProgress) {
+onProgress(errorProgress);
+}
         reject(new Error('Upload failed'));
       }
     }, 1000);
@@ -621,7 +627,7 @@ export const createUserPlaylist = (name: string): Promise<UserPlaylistDetails> =
     videoIds: [],
     videoCount: 0,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   });
 };
 
@@ -647,7 +653,7 @@ export const getSubscribedChannelNames = (): Promise<string[]> => {
           subscriberCount: '2.5M',
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
         },
         'channel2': {
           channelName: 'TechLevelUp',
@@ -655,7 +661,7 @@ export const getSubscribedChannelNames = (): Promise<string[]> => {
           subscriberCount: '1.8M',
           isSubscribed: true,
           notificationsEnabled: false,
-          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
+          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
         },
         'channel3': {
           channelName: 'Chef Studio',
@@ -663,8 +669,8 @@ export const getSubscribedChannelNames = (): Promise<string[]> => {
           subscriberCount: '950K',
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-        }
+          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        },
       };
       localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(defaultSubscriptions));
       return Promise.resolve(Object.values(defaultSubscriptions).map(sub => sub.channelName));
@@ -691,7 +697,7 @@ export const getSubscribedChannels = (): Promise<any[]> => {
           subscriberCount: '2.5M',
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+          subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
         },
         'channel2': {
           channelName: 'TechLevelUp',
@@ -699,7 +705,7 @@ export const getSubscribedChannels = (): Promise<any[]> => {
           subscriberCount: '1.8M',
           isSubscribed: true,
           notificationsEnabled: false,
-          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
+          subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
         },
         'channel3': {
           channelName: 'Chef Studio',
@@ -707,8 +713,8 @@ export const getSubscribedChannels = (): Promise<any[]> => {
           subscriberCount: '950K',
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-        }
+          subscribedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        },
       };
       localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(defaultSubscriptions));
 
@@ -718,7 +724,7 @@ export const getSubscribedChannels = (): Promise<any[]> => {
         avatar: data.channelAvatarUrl,
         subscribers: data.subscriberCount,
         notificationsEnabled: data.notificationsEnabled || false,
-        subscribedAt: data.subscribedAt
+        subscribedAt: data.subscribedAt,
       }));
       return Promise.resolve(channels);
     }
@@ -729,7 +735,7 @@ export const getSubscribedChannels = (): Promise<any[]> => {
       avatar: data.channelAvatarUrl,
       subscribers: data.subscriberCount,
       notificationsEnabled: data.notificationsEnabled || false,
-      subscribedAt: data.subscribedAt
+      subscribedAt: data.subscribedAt,
     }));
     return Promise.resolve(channels);
   } catch (error) {
@@ -773,10 +779,10 @@ export const getSearchSuggestions = (query: string): Promise<string[]> => {
     'music video',
     'tutorial',
     'funny moments',
-    'nature documentary'
+    'nature documentary',
   ];
   return Promise.resolve(
-    suggestions.filter(s => s.toLowerCase().includes(query.toLowerCase()))
+    suggestions.filter(s => s.toLowerCase().includes(query.toLowerCase())),
   );
 };
 

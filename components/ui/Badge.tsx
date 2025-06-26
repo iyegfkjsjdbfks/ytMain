@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 export interface BadgeProps {
   children: React.ReactNode;
@@ -22,14 +22,14 @@ const sizeClasses = {
   lg: 'px-3 py-1.5 text-base',
 };
 
-export const Badge: React.FC<BadgeProps> = ({ 
-  children, 
-  variant = 'default', 
-  size = 'md', 
-  className = '' 
+export const Badge: React.FC<BadgeProps> = ({
+  children,
+  variant = 'default',
+  size = 'md',
+  className = '',
 }) => {
   return (
-    <span 
+    <span
       className={`inline-flex items-center font-medium rounded-full ${
         variantClasses[variant]
       } ${

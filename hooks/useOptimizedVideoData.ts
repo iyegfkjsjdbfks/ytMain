@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Video } from '../types';
+
+import type { Video } from '../types';
 
 interface UseVideoDataOptions {
   category?: string;
@@ -41,7 +42,7 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
       channelId: `channel-${Math.floor(Math.random() * 100)}`,
       channelAvatarUrl: `https://picsum.photos/40/40?random=${index + 1000}`,
       category: category || ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
-      tags: [`tag${index}`, `sample`, category || 'general'].filter(Boolean),
+      tags: [`tag${index}`, 'sample', category || 'general'].filter(Boolean),
       isLive: Math.random() > 0.9,
       isShort: false,
       isSaved: false,
@@ -54,9 +55,9 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
       commentCount: Math.floor(Math.random() * 1000),
       viewCount: Math.floor(Math.random() * 1000000),
       createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString()
+      updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
     } as Video;
-  })
+  });
 };
 
 export const useOptimizedVideoData = ({
@@ -95,7 +96,7 @@ export const useOptimizedVideoData = ({
 
       // Generate mock data
       const newVideos = generateMockVideos(limit, category);
-      
+
       // Simulate pagination
       if (pageNum > 3) {
         setHasMore(false);
@@ -142,7 +143,9 @@ export const useOptimizedVideoData = ({
 
   // Auto-refetch interval
   useEffect(() => {
-    if (!refetchInterval) return;
+    if (!refetchInterval) {
+return;
+}
 
     const interval = setInterval(() => {
       refetch();

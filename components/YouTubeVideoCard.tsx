@@ -1,10 +1,14 @@
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
-import React from 'react';
+import type React from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+
 import { buildVideoUrl } from '../utils/componentUtils';
+
 import YouTubePlayerWrapper from './YouTubePlayerWrapper';
+
+import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubeVideoCardProps {
   video: YouTubeSearchResult;
@@ -21,18 +25,28 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   // Helper function to format duration is now imported from utils
 
   const formatUploadDate = (uploadDate?: string) => {
-    if (!uploadDate) return null;
-    
+    if (!uploadDate) {
+return null;
+}
+
     try {
       const date = new Date(uploadDate);
       const now = new Date();
       const diffTime = Math.abs(now.getTime() - date.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
-      if (diffDays === 1) return '1 day ago';
-      if (diffDays < 7) return `${diffDays} days ago`;
-      if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-      if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+
+      if (diffDays === 1) {
+return '1 day ago';
+}
+      if (diffDays < 7) {
+return `${diffDays} days ago`;
+}
+      if (diffDays < 30) {
+return `${Math.floor(diffDays / 7)} weeks ago`;
+}
+      if (diffDays < 365) {
+return `${Math.floor(diffDays / 30)} months ago`;
+}
       return `${Math.floor(diffDays / 365)} years ago`;
     } catch {
       return uploadDate;
@@ -42,14 +56,14 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
   const handleCardClick = () => {
     // Extract clean video ID (remove any prefix like 'youtube-' or 'google-search-')
     const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
-    
+
     // Navigate to watch page with YouTube video ID
     const watchUrl = buildVideoUrl(cleanVideoId);
     navigate(watchUrl);
   };
 
   return (
-    <div 
+    <div
       className={`bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full cursor-pointer group ${className}`}
       onClick={handleCardClick}
       role="button"
@@ -84,7 +98,7 @@ const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = 
           </div>
         )}
       </div>
-      
+
       {/* Video Info Section */}
       <div className="p-3 flex-grow">
         <div className="flex items-start space-x-3">

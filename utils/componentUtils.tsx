@@ -1,4 +1,6 @@
-import React, { ReactNode   } from 'react';
+import type { ReactNode   } from 'react';
+import React from 'react';
+
 import { cn } from './cn';
 
 // Common component patterns and utilities
@@ -7,7 +9,7 @@ import { cn } from './cn';
 export const conditionalRender = (
   condition: boolean,
   component: ReactNode,
-  fallback?: ReactNode
+  fallback?: ReactNode,
 ): ReactNode => {
   return condition ? component : fallback || null;
 };
@@ -16,16 +18,18 @@ export const conditionalRender = (
 export function safeArrayRender<T>(
   items: T[] | undefined | null,
   renderItem: (item: T, index: number) => ReactNode,
-  keyExtractor?: (item: T, index: number) => string | number
+  keyExtractor?: (item: T, index: number) => string | number,
 ): ReactNode[] {
-  if (!items || !Array.isArray(items)) return [];
-  
+  if (!items || !Array.isArray(items)) {
+return [];
+}
+
   return items.map((item, index) => {
     const key = keyExtractor ? keyExtractor(item, index) : index;
     return React.createElement(
       'div',
       { key },
-      renderItem(item, index)
+      renderItem(item, index),
     );
   });
 }
@@ -34,45 +38,45 @@ export function safeArrayRender<T>(
 export function withLoadingState(
   isLoading: boolean,
   content: ReactNode,
-  loadingComponent: ReactNode
+  loadingComponent: ReactNode,
 ): ReactNode {
   return isLoading ? loadingComponent : content;
-};
+}
 
 // Error boundary wrapper utility
 export function withErrorBoundary(
   content: ReactNode,
   errorComponent: ReactNode,
-  hasError: boolean
+  hasError: boolean,
 ): ReactNode {
   return hasError ? errorComponent : content;
-};
+}
 
 // Common class name builders
 export const buildCardClasses = (
   variant: 'default' | 'elevated' | 'outlined' = 'default',
   size: 'sm' | 'md' | 'lg' = 'md',
-  className?: string
+  className?: string,
 ): string => {
   const baseClasses = 'rounded-lg transition-all duration-200';
-  
+
   const variantClasses = {
     default: 'bg-white shadow-sm hover:shadow-md',
     elevated: 'bg-white shadow-md hover:shadow-lg',
     outlined: 'bg-white border border-gray-200 hover:border-gray-300',
   };
-  
+
   const sizeClasses = {
     sm: 'p-3',
     md: 'p-4',
     lg: 'p-6',
   };
-  
+
   return cn(
     baseClasses,
     variantClasses[variant],
     sizeClasses[size],
-    className
+    className,
   );
 };
 
@@ -88,7 +92,7 @@ export const getAvatarFallback = (name: string): string => {
 
 export const buildAvatarClasses = (
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md',
-  className?: string
+  className?: string,
 ): string => {
   const sizeClasses = {
     xs: 'w-6 h-6 text-xs',
@@ -97,11 +101,11 @@ export const buildAvatarClasses = (
     lg: 'w-12 h-12 text-lg',
     xl: 'w-16 h-16 text-xl',
   };
-  
+
   return cn(
     'rounded-full bg-gray-200 flex items-center justify-center font-medium text-gray-600',
     sizeClasses[size],
-    className
+    className,
   );
 };
 
@@ -109,15 +113,17 @@ export const buildAvatarClasses = (
 export const truncateText = (
   text: string,
   maxLength: number,
-  suffix: string = '...'
+  suffix: string = '...',
 ): string => {
-  if (text.length <= maxLength) return text;
+  if (text.length <= maxLength) {
+return text;
+}
   return text.slice(0, maxLength - suffix.length) + suffix;
 };
 
 export const buildTruncateClasses = (
   lines: 1 | 2 | 3 | 4 = 1,
-  className?: string
+  className?: string,
 ): string => {
   const truncateClasses = {
     1: 'truncate',
@@ -125,22 +131,24 @@ export const buildTruncateClasses = (
     3: 'line-clamp-3',
     4: 'line-clamp-4',
   };
-  
+
   return cn(truncateClasses[lines], className);
 };
 
 // Focus management utilities
 export const trapFocus = (element: HTMLElement): (() => void) => {
   const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
-  
+
   const firstElement = focusableElements[0] as HTMLElement;
   const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-  
+
   const handleTabKey = (e: KeyboardEvent) => {
-    if (e.key !== 'Tab') return;
-    
+    if (e.key !== 'Tab') {
+return;
+}
+
     if (e.shiftKey) {
       if (document.activeElement === firstElement) {
         lastElement.focus();
@@ -153,10 +161,10 @@ export const trapFocus = (element: HTMLElement): (() => void) => {
       }
     }
   };
-  
+
   element.addEventListener('keydown', handleTabKey);
   firstElement?.focus();
-  
+
   return () => {
     element.removeEventListener('keydown', handleTabKey);
   };
@@ -167,13 +175,13 @@ export const buildResponsiveClasses = (
   mobile: string,
   tablet?: string,
   desktop?: string,
-  className?: string
+  className?: string,
 ): string => {
   return cn(
     mobile,
     tablet && `md:${tablet}`,
     desktop && `lg:${desktop}`,
-    className
+    className,
   );
 };
 
@@ -181,26 +189,26 @@ export const buildResponsiveClasses = (
 export const buildTransitionClasses = (
   type: 'fade' | 'slide' | 'scale' | 'bounce' = 'fade',
   duration: 'fast' | 'normal' | 'slow' = 'normal',
-  className?: string
+  className?: string,
 ): string => {
   const durationClasses = {
     fast: 'duration-150',
     normal: 'duration-300',
     slow: 'duration-500',
   };
-  
+
   const typeClasses = {
     fade: 'transition-opacity',
     slide: 'transition-transform',
     scale: 'transition-transform',
     bounce: 'transition-all',
   };
-  
+
   return cn(
     'transition-all ease-in-out',
     typeClasses[type],
     durationClasses[duration],
-    className
+    className,
   );
 };
 
@@ -244,22 +252,22 @@ type AnyFunction = (...args: any[]) => any;
 
 export function debounce<T extends AnyFunction>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
-};
+}
 
 export function throttle<T extends AnyFunction>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
@@ -267,7 +275,7 @@ export function throttle<T extends AnyFunction>(
       setTimeout(() => (inThrottle = false), limit);
     }
   };
-};
+}
 
 // Local storage utilities with error handling
 export const safeLocalStorage = {
@@ -278,7 +286,7 @@ export const safeLocalStorage = {
       return null;
     }
   },
-  
+
   setItem: (key: string, value: string): boolean => {
     try {
       localStorage.setItem(key, value);
@@ -287,7 +295,7 @@ export const safeLocalStorage = {
       return false;
     }
   },
-  
+
   removeItem: (key: string): boolean => {
     try {
       localStorage.removeItem(key);
@@ -296,8 +304,8 @@ export const safeLocalStorage = {
       return false;
     }
   },
-  
-  getJSON: <T,>(key: string): T | null => {
+
+  getJSON: <T, >(key: string): T | null => {
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -305,8 +313,8 @@ export const safeLocalStorage = {
       return null;
     }
   },
-  
-  setJSON: <T,>(key: string, value: T): boolean => {
+
+  setJSON: <T, >(key: string, value: T): boolean => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
       return true;

@@ -1,13 +1,14 @@
 
 import React from 'react';
+
 import { AdvancedVideoPlayer, BasicVideoPlayer, RefactoredVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
-import { useWatchPage } from '../hooks/useWatchPage';
-import { formatCount } from '../utils/numberUtils';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
-import { getLocalVideoPlayerType } from '../services/settingsService';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useWatchPage } from '../hooks/useWatchPage';
+import { getLocalVideoPlayerType } from '../services/settingsService';
+import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatCount } from '../utils/numberUtils';
 
 
 const WatchPage: React.FC = () => {
@@ -17,7 +18,7 @@ const WatchPage: React.FC = () => {
     channel,
     comments,
     loading,
-    
+
     // Video interaction state
     liked,
     disliked,
@@ -25,38 +26,38 @@ const WatchPage: React.FC = () => {
     // isInWatchLater, // unused
     isSavedToAnyList,
     mockLikeCount,
-    
+
     // UI state
     showFullDescription,
     commentCount,
     commentSortOrder,
-    
+
     // Comment interaction state
     replyingToCommentId,
     currentReplyText,
     editingComment,
     activeCommentMenu,
     expandedReplies,
-    
+
     // Modal and loading state
     isSaveModalOpen,
-    
+
     // AI Summary state
     summary,
     summaryError,
     isSummarizing,
     canSummarize,
-    
+
     // Related videos
     // displayedRelatedVideos,
     // showAllRelated, // unused
     // Refs
     // saveButtonRef, // unused
     // saveModalRef, // unused
-    
+
     // Constants
     MAX_COMMENT_LENGTH,
-    
+
     // Handlers
     handleLike,
     handleDislike,
@@ -75,7 +76,7 @@ const WatchPage: React.FC = () => {
     handleDeleteComment,
     toggleLikeDislikeForCommentOrReply,
     addToWatchHistory,
-    
+
     // Setters
     setCommentSortOrder,
     setReplyingToCommentId,
@@ -83,26 +84,26 @@ const WatchPage: React.FC = () => {
     setEditingComment,
     setActiveCommentMenu,
     setExpandedReplies,
-    
+
     // Navigation
     navigate,
   } = useWatchPage();
-  
+
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater } = useWatchLater();
   // removeFromWatchLater is unused in this component
-  
+
   // Enhanced save to playlist handler that integrates with Watch Later context
   const enhancedHandleSaveToPlaylist = async (_videoId: string, playlistId: string) => {
     // Call the original handler
     await handleSaveToPlaylist(playlistId);
-    
+
     // If saving to Watch Later playlist, also add to the Watch Later context
     if (playlistId === 'playlist-1' && video) {
       addToWatchLater(video);
     }
   };
-  
+
   // Add to watch history when video loads
   React.useEffect(() => {
     if (video) {
@@ -115,7 +116,7 @@ const WatchPage: React.FC = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [videoId]);
-  
+
   // Loading skeleton
   if (loading) {
     return (
@@ -124,45 +125,45 @@ const WatchPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
               {/* Video player skeleton */}
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse mb-4"></div>
-              
+              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse mb-4" />
+
               {/* Video title skeleton */}
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-4"></div>
-              
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-4" />
+
               {/* Channel info skeleton */}
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
                 <div className="flex-1">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1"></div>
-                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
                 </div>
               </div>
-              
+
               {/* Comments skeleton */}
               <div className="space-y-4">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="flex space-x-3">
-                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
                     <div className="flex-1">
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4"></div>
+                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" />
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            
+
             {/* Sidebar skeleton */}
             <div className="space-y-4">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="flex space-x-3">
-                  <div className="w-40 h-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                  <div className="w-40 h-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
                   <div className="flex-1">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1 w-3/4"></div>
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1 w-3/4" />
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
                   </div>
                 </div>
               ))}
@@ -172,7 +173,7 @@ const WatchPage: React.FC = () => {
       </div>
     );
   }
-  
+
   // Video not found
   if (!video) {
     return (
@@ -190,7 +191,7 @@ const WatchPage: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -238,7 +239,7 @@ const WatchPage: React.FC = () => {
                 }
               })()}
             </div>
-            
+
             {/* Video title and stats */}
             <div className="mb-4">
               <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -250,7 +251,7 @@ const WatchPage: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Video actions */}
             <VideoActions
               liked={liked}
@@ -262,7 +263,7 @@ const WatchPage: React.FC = () => {
               onSave={openSaveModal}
               isSavedToAnyList={isSavedToAnyList}
             />
-            
+
             {/* Video description */}
             <VideoDescription
               video={video}
@@ -277,7 +278,7 @@ const WatchPage: React.FC = () => {
               canSummarize={!!canSummarize}
               onSummarizeDescription={handleSummarizeDescription}
             />
-            
+
             {/* Comments section */}
             <CommentsSection
               comments={comments}
@@ -302,7 +303,7 @@ const WatchPage: React.FC = () => {
               onSetExpandedReplies={setExpandedReplies}
             />
           </div>
-          
+
           {/* Sidebar - Related videos */}
           <aside className="space-y-4">
             <RecommendationEngine
@@ -314,7 +315,7 @@ const WatchPage: React.FC = () => {
           </aside>
         </div>
       </div>
-      
+
       {/* Save to Playlist Modal */}
       <RefactoredSaveToPlaylistModal
         isOpen={isSaveModalOpen}

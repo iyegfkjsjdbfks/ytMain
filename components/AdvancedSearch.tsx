@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 import {
   MagnifyingGlassIcon,
   FunnelIcon,
@@ -6,7 +8,7 @@ import {
   ClockIcon,
   CalendarDaysIcon,
   VideoCameraIcon,
-  AdjustmentsHorizontalIcon
+  AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +30,7 @@ interface AdvancedSearchProps {
 const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   onSearch,
   initialQuery = '',
-  className = ''
+  className = '',
 }) => {
   const [query, setQuery] = useState(initialQuery);
   const [showFilters, setShowFilters] = useState(false);
@@ -40,7 +42,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     type: 'any',
     quality: 'any',
     features: [],
-    sortBy: 'relevance'
+    sortBy: 'relevance',
   });
 
   const searchRef = useRef<HTMLDivElement>(null);
@@ -79,12 +81,12 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       'programming basics',
       'coding interview',
       'algorithm tutorial',
-      'data structures'
+      'data structures',
     ];
 
     const filtered = mockSuggestions
-      .filter(suggestion => 
-        suggestion.toLowerCase().includes(searchQuery.toLowerCase())
+      .filter(suggestion =>
+        suggestion.toLowerCase().includes(searchQuery.toLowerCase()),
       )
       .slice(0, 8);
 
@@ -102,19 +104,31 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       onSearch(finalQuery, filters);
       setShowSuggestions(false);
       setShowFilters(false);
-      
+
       // Navigate to search results
       const searchParams = new URLSearchParams();
       searchParams.set('q', finalQuery);
-      
+
       // Add filters to URL if they're not default
-      if (filters.duration !== 'any') searchParams.set('duration', filters.duration);
-      if (filters.uploadDate !== 'any') searchParams.set('upload_date', filters.uploadDate);
-      if (filters.type !== 'any') searchParams.set('type', filters.type);
-      if (filters.quality !== 'any') searchParams.set('quality', filters.quality);
-      if (filters.features.length > 0) searchParams.set('features', filters.features.join(','));
-      if (filters.sortBy !== 'relevance') searchParams.set('sort_by', filters.sortBy);
-      
+      if (filters.duration !== 'any') {
+searchParams.set('duration', filters.duration);
+}
+      if (filters.uploadDate !== 'any') {
+searchParams.set('upload_date', filters.uploadDate);
+}
+      if (filters.type !== 'any') {
+searchParams.set('type', filters.type);
+}
+      if (filters.quality !== 'any') {
+searchParams.set('quality', filters.quality);
+}
+      if (filters.features.length > 0) {
+searchParams.set('features', filters.features.join(','));
+}
+      if (filters.sortBy !== 'relevance') {
+searchParams.set('sort_by', filters.sortBy);
+}
+
       navigate(`/search?${searchParams.toString()}`);
     }
   };
@@ -133,7 +147,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       ...prev,
       features: prev.features.includes(feature)
         ? prev.features.filter(f => f !== feature)
-        : [...prev.features, feature]
+        : [...prev.features, feature],
     }));
   };
 
@@ -144,7 +158,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       type: 'any',
       quality: 'any',
       features: [],
-      sortBy: 'relevance'
+      sortBy: 'relevance',
     });
   };
 
@@ -174,7 +188,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
               className="w-full px-4 py-2 pl-10 pr-12 border border-gray-300 dark:border-gray-600 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            
+
             {query && (
               <button
                 onClick={() => setQuery('')}
@@ -340,7 +354,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                 { id: '4k', label: '4K' },
                 { id: '360', label: '360°' },
                 { id: 'location', label: 'Location' },
-                { id: 'hdr', label: 'HDR' }
+                { id: 'hdr', label: 'HDR' },
               ].map((feature) => (
                 <label key={feature.id} className="flex items-center space-x-2 cursor-pointer">
                   <input

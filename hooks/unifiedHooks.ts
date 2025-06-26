@@ -69,7 +69,7 @@ export interface UseApiOptions {
 
 export function useApi<T>(
   apiCall: () => Promise<T>,
-  options: UseApiOptions = {}
+  options: UseApiOptions = {},
 ): AsyncState<T> & {
   refetch: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -89,7 +89,9 @@ export function useApi<T>(
   const mountedRef = useRef(true);
 
   const fetchData = useCallback(async () => {
-    if (!mountedRef.current) return;
+    if (!mountedRef.current) {
+return;
+}
 
     setLoading(true);
     setError(null);
@@ -101,10 +103,12 @@ export function useApi<T>(
         retryCountRef.current = 0;
       }
     } catch (error) {
-      if (!mountedRef.current) return;
+      if (!mountedRef.current) {
+return;
+}
 
       const apiError = error as Error;
-      
+
       if (retryOnError && retryCountRef.current < maxRetries) {
         retryCountRef.current++;
         setTimeout(() => {
@@ -193,7 +197,7 @@ export interface FormActions<T extends Record<string, any>> {
 
 export function useForm<T extends Record<string, any>>(
   initialValues: T,
-  validators?: { [K in keyof T]?: (value: T[K]) => string | null }
+  validators?: { [K in keyof T]?: (value: T[K]) => string | null },
 ): [FormState<T>, FormActions<T>] {
   const [state, setState] = useState<FormState<T>>(() => {
     const fields = {} as { [K in keyof T]: FormField<T[K]> };
@@ -220,11 +224,11 @@ export function useForm<T extends Record<string, any>>(
         ...newFields[field],
         value,
         dirty: value !== initialValues[field],
-        error: validators?.[field] ? validators[field]!(value) : null,
+        error: validators?.[field] ? validators[field](value) : null,
       };
-      
+
       const isValid = Object.values(newFields).every(f => !f.error);
-      
+
       return {
         ...prev,
         fields: newFields,
@@ -238,7 +242,7 @@ export function useForm<T extends Record<string, any>>(
       const newFields = { ...prev.fields };
       newFields[field] = { ...newFields[field], error };
       const isValid = Object.values(newFields).every(f => !f.error);
-      
+
       return {
         ...prev,
         fields: newFields,
@@ -251,7 +255,7 @@ export function useForm<T extends Record<string, any>>(
     setState(prev => {
       const newFields = { ...prev.fields };
       newFields[field] = { ...newFields[field], touched };
-      
+
       return {
         ...prev,
         fields: newFields,
@@ -289,28 +293,32 @@ export function useForm<T extends Record<string, any>>(
   }, [initialValues]);
 
   const validate = useCallback(() => {
-    if (!validators) return true;
-    
+    if (!validators) {
+return true;
+}
+
     let isValid = true;
     setState(prev => {
       const newFields = { ...prev.fields };
-      
+
       for (const key in validators) {
         const validator = validators[key];
         if (validator) {
           const error = validator(newFields[key].value);
           newFields[key] = { ...newFields[key], error };
-          if (error) isValid = false;
+          if (error) {
+isValid = false;
+}
         }
       }
-      
+
       return {
         ...prev,
         fields: newFields,
         isValid,
       };
     });
-    
+
     return isValid;
   }, [validators]);
 
@@ -319,20 +327,20 @@ export function useForm<T extends Record<string, any>>(
       if (e) {
         e.preventDefault();
       }
-      
+
       if (!validate()) {
         return;
       }
-      
+
       setSubmitting(true);
       setSubmitError(null);
-      
+
       try {
         const values = {} as T;
         for (const key in state.fields) {
           values[key] = state.fields[key].value;
         }
-        
+
         await onSubmit(values);
       } catch (error) {
         setSubmitError(error instanceof Error ? error.message : 'An error occurred');
@@ -360,39 +368,39 @@ export function useForm<T extends Record<string, any>>(
 // Unified toggle hook
 export function useToggle(initialValue = false): [boolean, () => void, (value: boolean) => void] {
   const [value, setValue] = useState(initialValue);
-  
+
   const toggle = useCallback(() => {
     setValue(prev => !prev);
   }, []);
-  
+
   const setToggle = useCallback((newValue: boolean) => {
     setValue(newValue);
   }, []);
-  
+
   return [value, toggle, setToggle];
 }
 
 // Unified debounce hook
 export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-    
+
     return () => {
       clearTimeout(handler);
     };
   }, [value, delay]);
-  
+
   return debouncedValue;
 }
 
 // Unified local storage hook
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -403,7 +411,7 @@ export function useLocalStorage<T>(
       return initialValue;
     }
   });
-  
+
   const setValue = useCallback((value: T | ((prev: T) => T)) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
@@ -413,7 +421,7 @@ export function useLocalStorage<T>(
       console.error(`Error setting localStorage key "${key}":`, error);
     }
   }, [key, storedValue]);
-  
+
   const removeValue = useCallback(() => {
     try {
       window.localStorage.removeItem(key);
@@ -422,59 +430,61 @@ export function useLocalStorage<T>(
       console.error(`Error removing localStorage key "${key}":`, error);
     }
   }, [key, initialValue]);
-  
+
   return [storedValue, setValue, removeValue];
 }
 
 // Unified intersection observer hook
 export function useIntersectionObserver(
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ): [React.RefObject<HTMLElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const targetRef = useRef<HTMLElement>(null);
-  
+
   useEffect(() => {
     const target = targetRef.current;
-    if (!target) return;
-    
+    if (!target) {
+return;
+}
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry) {
           setIsIntersecting(entry.isIntersecting);
         }
       },
-      options
+      options,
     );
-    
+
     observer.observe(target);
-    
+
     return () => {
       observer.unobserve(target);
     };
   }, [options]);
-  
+
   return [targetRef, isIntersecting];
 }
 
 // Performance monitoring hook
 export function usePerformanceMonitor(name: string) {
   const startTimeRef = useRef<number>(Date.now());
-  
+
   useEffect(() => {
     startTimeRef.current = Date.now();
-    
+
     return () => {
       // const __duration = Date.now() - startTimeRef.current;
       if (process.env.NODE_ENV === 'development') {
         }
     };
   }, [name]);
-  
+
   const mark = useCallback((__label: string) => {
     // const __duration = Date.now() - startTimeRef.current;
     if (process.env.NODE_ENV === 'development') {
       }
   }, [name]);
-  
+
   return { mark };
 }

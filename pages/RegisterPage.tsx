@@ -1,10 +1,12 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import YouTubeLogo from '../components/icons/YouTubeLogo';
+
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
+import YouTubeLogo from '../components/icons/YouTubeLogo';
+import { useAuth } from '../contexts/AuthContext';
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +16,7 @@ const RegisterPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
-  
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -57,7 +59,7 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!validateForm()) {
       return;
     }

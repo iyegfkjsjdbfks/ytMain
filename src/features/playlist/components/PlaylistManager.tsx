@@ -18,8 +18,9 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
-import type { CreatePlaylistData } from '../services/playlistService';
+
 import type { Playlist } from '../../../types/core';
+import type { CreatePlaylistData } from '../services/playlistService';
 
 interface PlaylistManagerProps {
   className?: string;

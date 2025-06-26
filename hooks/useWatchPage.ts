@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
-import { VideoVisibility } from '../types';
+
+import type { VideoVisibility } from '../types';
 
 interface Comment {
   id: string;
@@ -58,37 +61,37 @@ export const useWatchPage = () => {
   const { videoId: pathVideoId } = useParams<{ videoId: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   // Get video ID from either path parameter or query parameter
   const rawVideoId = pathVideoId || searchParams.get('v');
   // Remove any prefix like 'youtube-' or 'google-search-' if it exists (from search results)
   const videoId = rawVideoId?.replace(/^(youtube-|google-search-)/, '') || null;
-  
+
   // Core data state
   const [video, setVideo] = useState<Video | null>(null);
   const [channel, setChannel] = useState<Channel | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Video interaction state
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isInWatchLater, setIsInWatchLater] = useState(false);
   const [isSavedToAnyList, setIsSavedToAnyList] = useState(false);
-  
+
   // UI state
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
   const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
-  
+
   // Comment interaction state
   const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
   const [currentReplyText, setCurrentReplyText] = useState('');
   const [editingComment, setEditingComment] = useState<{ id: string; parentId?: string } | null>(null);
   const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
   const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
-  
+
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
@@ -99,21 +102,23 @@ export const useWatchPage = () => {
 
   // Related videos state
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
-  
+
   // Refs
   const saveButtonRef = useRef<HTMLButtonElement>(null);
   const saveModalRef = useRef<HTMLDivElement>(null);
-  
+
   // Mock like count
   const mockLikeCount = 15420;
-  
+
   // Load video data
   useEffect(() => {
     const loadVideoData = async () => {
-      if (!videoId) return;
-      
+      if (!videoId) {
+return;
+}
+
       setLoading(true);
-      
+
       try {
         // Load video data
         const foundVideo = await getVideoById(videoId);
@@ -122,12 +127,12 @@ export const useWatchPage = () => {
           setLoading(false);
           return;
         }
-        
+
         // Ensure video has channel info
         const videoWithChannelInfo = {
           ...foundVideo,
           channelName: foundVideo.channelName || 'Unknown Channel',
-          channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png'
+          channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png',
         };
         setVideo(videoWithChannelInfo);
 
@@ -137,13 +142,13 @@ export const useWatchPage = () => {
           // Ensure channel has required subscriberCount property
           const channelWithSubscriberCount = {
             ...foundChannel,
-            subscriberCount: foundChannel.subscriberCount || foundChannel.subscribers?.toString() || '0'
+            subscriberCount: foundChannel.subscriberCount || foundChannel.subscribers?.toString() || '0',
           };
           setChannel(channelWithSubscriberCount);
         } else {
           setChannel(null);
         }
-        
+
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
         const topLevelComments = videoComments.filter(c => !c.parentId);
@@ -162,47 +167,51 @@ export const useWatchPage = () => {
           videoId: comment.videoId ?? videoId,
           authorId: comment.authorId ?? '',
           authorName: comment.authorName ?? comment.userName,
-          authorAvatar: comment.authorAvatar ?? comment.userAvatarUrl
+          authorAvatar: comment.authorAvatar ?? comment.userAvatarUrl,
         }));
         setComments(commentsWithDefaults);
         setCommentCount(videoComments.length);
-        
+
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
           .filter(v => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
-        
+
       } catch (error) {
         console.error('Error loading video data:', error);
       } finally {
         setLoading(false);
       }
     };
-    
+
     loadVideoData();
   }, [videoId]);
-  
+
   // Video interaction handlers
   const handleLike = () => {
     setLiked(!liked);
-    if (disliked) setDisliked(false);
+    if (disliked) {
+setDisliked(false);
+}
   };
-  
+
   const handleDislike = () => {
     setDisliked(!disliked);
-    if (liked) setLiked(false);
+    if (liked) {
+setLiked(false);
+}
   };
-  
+
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
   };
-  
+
   const handleShare = () => {
     // Share logic handled in VideoActions component
   };
-  
+
   const openSaveModal = () => {
     setIsSaveModalOpen(true);
   };
@@ -228,17 +237,17 @@ export const useWatchPage = () => {
   const handleSaveToPlaylist = async (playlistId: string) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
-    
+
     // Check if this is the "Watch Later" playlist
     if (playlistId === 'playlist-1' && video) {
       // Add to watch later list - this should use the context
       // For now, update local state to match the behavior
       setIsInWatchLater(true);
     }
-    
+
     // Update the saved state
     setIsSavedToAnyList(true);
-    
+
     // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
@@ -259,7 +268,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     return newPlaylist;
@@ -280,7 +289,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-01T00:00:00Z'
+      updatedAt: '2024-01-01T00:00:00Z',
     },
     {
       id: 'playlist-2',
@@ -295,28 +304,30 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-01T00:00:00Z'
-    }
+      updatedAt: '2024-01-01T00:00:00Z',
+    },
   ];
-  
+
   // Description handlers
   const handleToggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
-  
+
   const handleSummarizeDescription = async () => {
-    if (!video?.description) return;
-    
+    if (!video?.description) {
+return;
+}
+
     setIsSummarizing(true);
     setSummaryError('');
-    
+
     try {
       // Simulate AI summarization
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Mock summary
       const mockSummary = `This video discusses ${video.title.toLowerCase()}. The content covers key points about the topic, providing viewers with valuable insights and information. The creator explains the main concepts in an accessible way, making it suitable for both beginners and those with some background knowledge.`;
-      
+
       setSummary(mockSummary);
     } catch (error) {
       setSummaryError('Failed to generate summary. Please try again later.');
@@ -324,11 +335,13 @@ export const useWatchPage = () => {
       setIsSummarizing(false);
     }
   };
-  
+
   // Comment handlers
   const handleMainCommentSubmitCallback = (commentText: string) => {
-    if (!commentText.trim()) return;
-    
+    if (!commentText.trim()) {
+return;
+}
+
     const newComment: Comment = {
       id: `comment-${Date.now()}`,
       userAvatarUrl: 'https://picsum.photos/seed/currentUserComment/40/40',
@@ -342,19 +355,23 @@ export const useWatchPage = () => {
       replies: [],
       replyCount: 0,
     };
-    
+
     setComments(prev => [newComment, ...prev]);
     setCommentCount(prev => prev + 1);
   };
-  
+
   const handleReplySubmit = (parentId: string) => {
-    if (!currentReplyText.trim()) return;
+    if (!currentReplyText.trim()) {
+return;
+}
     const parentComment = comments.find(c => c.id === parentId);
-    if (!parentComment) return;
-    
+    if (!parentComment) {
+return;
+}
+
     const newReply: Comment = {
       id: `reply-${Date.now()}`,
-      parentId: parentId,
+      parentId,
       userAvatarUrl: 'https://picsum.photos/seed/currentUserReply/32/32',
       userName: 'You',
       commentText: currentReplyText.trim(),
@@ -365,7 +382,7 @@ export const useWatchPage = () => {
       isEdited: false,
       replyTo: parentComment.userName,
     };
-    
+
     setComments(prevComments => prevComments.map(c => {
       if (c.id === parentId) {
         return {
@@ -379,18 +396,20 @@ export const useWatchPage = () => {
     setCurrentReplyText('');
     setReplyingToCommentId(null);
   };
-  
+
   const handleEditSave = (commentId: string, newText: string, parentId?: string) => {
-    if (!newText.trim()) return;
-    
-    const updateCommentState = (prevComments: Comment[]): Comment[] => 
+    if (!newText.trim()) {
+return;
+}
+
+    const updateCommentState = (prevComments: Comment[]): Comment[] =>
       prevComments.map(comment => {
-        if (comment.id === commentId && comment.parentId === parentId) { 
-          return { 
-            ...comment, 
-            commentText: newText.trim(), 
-            isEdited: true, 
-            timestamp: 'Just now (edited)' 
+        if (comment.id === commentId && comment.parentId === parentId) {
+          return {
+            ...comment,
+            commentText: newText.trim(),
+            isEdited: true,
+            timestamp: 'Just now (edited)',
           };
         }
         if (comment.replies && comment.replies.length > 0) {
@@ -398,14 +417,16 @@ export const useWatchPage = () => {
         }
         return comment;
       });
-    
+
     setComments(updateCommentState);
     setEditingComment(null);
   };
-  
+
   const handleDeleteComment = (commentId: string, parentId?: string) => {
-    if (!window.confirm("Are you sure you want to delete this comment? This action cannot be undone.")) return;
-    
+    if (!window.confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
+return;
+}
+
     const deleteCommentFromList = (list: Comment[], idToDelete: string, parentOfDeleted?: string): Comment[] => {
       return list.reduce((acc, comment) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
@@ -426,11 +447,11 @@ export const useWatchPage = () => {
         return acc;
       }, [] as Comment[]);
     };
-    
+
     setComments(prevComments => deleteCommentFromList(prevComments, commentId, parentId));
     setActiveCommentMenu(null);
   };
-  
+
   const toggleLikeDislikeForCommentOrReply = (id: string, parentId: string | undefined, action: 'like' | 'dislike') => {
     const updateList = (list: Comment[]): Comment[] => {
       return list.map(item => {
@@ -438,46 +459,48 @@ export const useWatchPage = () => {
           let newLiked = item.isLikedByCurrentUser;
           let newDisliked = item.isDislikedByCurrentUser;
           let newLikes = item.likes;
-          
+
           if (action === 'like') {
             newLiked = !item.isLikedByCurrentUser;
             newLikes = newLiked ? item.likes + 1 : item.likes - 1;
-            if (newLiked && newDisliked) newDisliked = false;
-          } else { 
+            if (newLiked && newDisliked) {
+newDisliked = false;
+}
+          } else {
             newDisliked = !item.isDislikedByCurrentUser;
             if (newDisliked && newLiked) {
               newLiked = false;
               newLikes = item.likes - 1;
             }
           }
-          
+
           return {
             ...item,
             isLikedByCurrentUser: newLiked,
             isDislikedByCurrentUser: newDisliked,
-            likes: newLikes
+            likes: newLikes,
           };
         }
-        
+
         if (item.replies) {
           return { ...item, replies: updateList(item.replies) };
         }
-        
+
         return item;
       });
     };
-    
+
     setComments(updateList);
   };
-  
+
   // Utility functions
   const addToWatchHistory = useCallback(() => {
     // Add to watch history logic
     }, []);
-  
+
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
   const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
-  
+
   return {
     // Core data
     video,
@@ -485,7 +508,7 @@ export const useWatchPage = () => {
     comments,
     loading,
     videoId,
-    
+
     // Video interaction state
     liked,
     disliked,
@@ -493,19 +516,19 @@ export const useWatchPage = () => {
     isInWatchLater,
     isSavedToAnyList,
     mockLikeCount,
-    
+
     // UI state
     showFullDescription,
     commentCount,
     commentSortOrder,
-    
+
     // Comment interaction state
     replyingToCommentId,
     currentReplyText,
     editingComment,
     activeCommentMenu,
     expandedReplies,
-    
+
     // Modal and loading state
     isSaveModalOpen,
 
@@ -518,14 +541,14 @@ export const useWatchPage = () => {
     // Related videos
     allRelatedVideos,
     displayedRelatedVideos,
-    
+
     // Refs
     saveButtonRef,
     saveModalRef,
-    
+
     // Constants
     MAX_COMMENT_LENGTH,
-    
+
     // Handlers
     handleLike,
     handleDislike,
@@ -544,10 +567,10 @@ export const useWatchPage = () => {
     handleDeleteComment,
     toggleLikeDislikeForCommentOrReply,
     addToWatchHistory,
-    
+
     // Mock data
     mockPlaylists,
-    
+
     // Setters
     setCommentSortOrder,
     setReplyingToCommentId,
@@ -555,7 +578,7 @@ export const useWatchPage = () => {
     setEditingComment,
     setActiveCommentMenu,
     setExpandedReplies,
-    
+
     // Navigation
     navigate,
   };

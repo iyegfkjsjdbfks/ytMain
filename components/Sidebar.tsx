@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+
 import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
+import { Link, useLocation } from 'react-router-dom';
 
 import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';
@@ -26,9 +27,9 @@ interface NavItemProps {
 }
 
 const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
-  const isActive = currentPath === to || 
-                   (to === "/" && (currentPath.startsWith("/watch") || currentPath.startsWith("/channel") || currentPath.startsWith("/search") || currentPath.startsWith("/library"))); 
-  
+  const isActive = currentPath === to ||
+                   (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
+
   return (
     <Link
       to={to}
@@ -48,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const location = useLocation();
 
   return (
-    <aside 
+    <aside
       className={`fixed top-14 left-0 z-40 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 transition-transform duration-300 ease-in-out w-60 border-r border-neutral-200 dark:border-neutral-800 overflow-y-auto pb-4
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
         md:translate-x-0 md:w-60 
@@ -94,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
              <NavItem to="/settings" icon={<CogIcon className="w-5 h-5"/>} label="Settings" currentPath={location.pathname} title="Settings"/>
           </nav>
         </div>
-      
+
         <div className="px-4 pt-4 border-t border-neutral-200 dark:border-neutral-700/70">
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">&copy; ${new Date().getFullYear()} YouTube Clone.</p>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Inspired by YouTube.</p>

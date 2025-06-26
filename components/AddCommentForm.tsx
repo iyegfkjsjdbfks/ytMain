@@ -1,4 +1,6 @@
-import React, { useState, useRef   } from 'react';
+import type React from 'react';
+import { useState, useRef } from 'react';
+
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 interface AddCommentFormProps {
@@ -18,7 +20,9 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!commentText.trim() || commentText.length > maxCommentLength) return;
+    if (!commentText.trim() || commentText.length > maxCommentLength) {
+return;
+}
     onCommentSubmit(commentText.trim());
     setCommentText('');
     setIsFocused(false);
@@ -39,10 +43,10 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({
 
   return (
     <div className="flex items-start space-x-3">
-      <img 
-        src={currentUserAvatarUrl} 
-        alt="Your avatar" 
-        className="w-10 h-10 rounded-full flex-shrink-0" 
+      <img
+        src={currentUserAvatarUrl}
+        alt="Your avatar"
+        className="w-10 h-10 rounded-full flex-shrink-0"
       />
       <div className="flex-grow">
         <form onSubmit={handleSubmit} className="w-full">
@@ -63,15 +67,15 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({
                 {commentText.length}/{maxCommentLength}
               </span>
               <div className="space-x-2">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={handleCancel}
                   className="px-3 py-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700/70 rounded-full transition-colors"
                 >
                   Cancel
                 </button>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={!isCommentValid}
                   className="px-4 py-1.5 text-xs font-medium bg-sky-500 hover:bg-sky-600 dark:bg-sky-600 dark:hover:bg-sky-500 text-white rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                 >

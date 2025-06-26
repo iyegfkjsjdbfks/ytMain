@@ -1,6 +1,10 @@
-import React, { memo } from 'react';
+import type React from 'react';
+import { memo } from 'react';
+
 import VideoCard from './VideoCard';
-import { Video } from '../types';
+
+import type { Video } from '../types';
+
 
 interface VideoGridProps {
   videos: Video[];
@@ -24,8 +28,8 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
     md: 3,
     lg: 4,
     xl: 5,
-    '2xl': 6
-  }
+    '2xl': 6,
+  },
 }) => {
   const getGridClasses = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
@@ -34,18 +38,18 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
       columns.md && `md:grid-cols-${columns.md}`,
       columns.lg && `lg:grid-cols-${columns.lg}`,
       columns.xl && `xl:grid-cols-${columns.xl}`,
-      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`
+      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`,
     ].filter(Boolean).join(' ');
-    
+
     return `${baseClasses} ${responsiveClasses} ${className}`;
   };
 
   return (
     <div className={getGridClasses()}>
       {videos.map((video, index) => (
-        <VideoCard 
-          key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`} 
-          video={video} 
+        <VideoCard
+          key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
+          video={video}
         />
       ))}
     </div>

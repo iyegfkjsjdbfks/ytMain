@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { 
-  getSubscribedChannels, 
-  updateSubscriptionNotifications, 
-  unsubscribeFromChannel 
+
+import {
+  getSubscribedChannels,
+  updateSubscriptionNotifications,
+  unsubscribeFromChannel,
 } from '../services/mockVideoService';
 
 export interface SubscribedChannel {
@@ -36,17 +37,19 @@ export function useSubscriptions() {
   const toggleNotifications = useCallback(async (channelId: string) => {
     try {
       const channel = channels.find(c => c.id === channelId);
-      if (!channel) return;
+      if (!channel) {
+return;
+}
 
       const newNotificationState = !channel.notificationsEnabled;
       await updateSubscriptionNotifications(channelId, newNotificationState);
-      
-      setChannels(prev => 
-        prev.map(c => 
-          c.id === channelId 
+
+      setChannels(prev =>
+        prev.map(c =>
+          c.id === channelId
             ? { ...c, notificationsEnabled: newNotificationState }
-            : c
-        )
+            : c,
+        ),
       );
     } catch (err) {
       console.error('Error updating notification settings:', err);
@@ -86,7 +89,7 @@ export function useSubscriptions() {
     unsubscribe,
     isSubscribed,
     getChannelNotificationState,
-    totalSubscriptions: channels.length
+    totalSubscriptions: channels.length,
   };
 }
 

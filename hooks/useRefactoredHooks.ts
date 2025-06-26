@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 
 /**
@@ -6,7 +8,7 @@ import { useUnifiedApp } from '../contexts/UnifiedAppContext';
  */
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -71,14 +73,14 @@ export function useThrottle<T>(value: T, delay: number): T {
       lastExecuted.current = Date.now();
       setThrottledValue(value);
       return;
-    } else {
+    }
       const timer = setTimeout(() => {
         lastExecuted.current = Date.now();
         setThrottledValue(value);
       }, delay);
 
       return () => clearTimeout(timer);
-    }
+
   }, [value, delay]);
 
   return throttledValue;
@@ -88,7 +90,7 @@ export function useThrottle<T>(value: T, delay: number): T {
  * Enhanced useToggle hook with callback support
  */
 export function useToggle(
-  initialValue: boolean = false
+  initialValue: boolean = false,
 ): [boolean, () => void, (value: boolean) => void] {
   const [value, setValue] = useState(initialValue);
 
@@ -116,14 +118,14 @@ export function useArray<T>(initialArray: T[] = []) {
     setArray(arr => [
       ...arr.slice(0, index),
       newElement,
-      ...arr.slice(index + 1)
+      ...arr.slice(index + 1),
     ]);
   }, []);
 
   const remove = useCallback((index: number) => {
     setArray(arr => [
       ...arr.slice(0, index),
-      ...arr.slice(index + 1)
+      ...arr.slice(index + 1),
     ]);
   }, []);
 
@@ -138,7 +140,7 @@ export function useArray<T>(initialArray: T[] = []) {
     filter,
     update,
     remove,
-    clear
+    clear,
   };
 }
 
@@ -147,7 +149,7 @@ export function useArray<T>(initialArray: T[] = []) {
  */
 export function useAsync<T, E = string>(
   asyncFunction: () => Promise<T>,
-  immediate: boolean = true
+  immediate: boolean = true,
 ) {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
   const [data, setData] = useState<T | null>(null);
@@ -184,7 +186,7 @@ export function useAsync<T, E = string>(
     isIdle: status === 'idle',
     isPending: status === 'pending',
     isSuccess: status === 'success',
-    isError: status === 'error'
+    isError: status === 'error',
   };
 }
 
@@ -192,14 +194,16 @@ export function useAsync<T, E = string>(
  * Enhanced useIntersectionObserver hook
  */
 export function useIntersectionObserver(
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ): [React.RefObject<HTMLElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element) {
+return;
+}
 
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
@@ -222,7 +226,7 @@ export function useIntersectionObserver(
  * Enhanced useClickOutside hook
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-  handler: () => void
+  handler: () => void,
 ): React.RefObject<T> {
   const ref = useRef<T>(null);
 
@@ -269,11 +273,11 @@ export function useMediaQuery(query: string): boolean {
  */
 export function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T>();
-  
+
   useEffect(() => {
     ref.current = value;
   });
-  
+
   return ref.current;
 }
 
@@ -293,7 +297,7 @@ export function useUnifiedAppState() {
     isInWatchLater,
     toggleSidebar,
     addNotification,
-    removeNotification
+    removeNotification,
   } = useUnifiedApp();
 
   return {
@@ -302,32 +306,32 @@ export function useUnifiedAppState() {
     isAuthenticated: state.isAuthenticated || false,
     login,
     logout,
-    
+
     // Theme state
     theme: state.theme || 'light',
     setTheme,
     isDarkMode: (state.theme || 'light') === 'dark',
-    
+
     // Miniplayer state
     miniplayerVideo: state.miniplayerVideo,
     isMiniplayerOpen: state.isMiniplayerOpen || false,
     openMiniplayer,
     toggleMiniplayer,
-    
+
     // Watch Later state
     watchLaterVideos: state.watchLaterVideos || [],
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
-    
+
     // UI state
     sidebarCollapsed: state.sidebarCollapsed || false,
     toggleSidebar,
-    
+
     // Notifications state
     notifications: state.notifications || [],
     addNotification,
-    removeNotification
+    removeNotification,
   };
 }
 

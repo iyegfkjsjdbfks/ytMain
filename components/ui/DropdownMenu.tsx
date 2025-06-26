@@ -1,4 +1,5 @@
-import { ReactNode, RefObject, MouseEvent } from 'react';
+import type { ReactNode, RefObject, MouseEvent } from 'react';
+
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
@@ -37,7 +38,9 @@ const DropdownMenu = ({
   position = 'bottom-right',
   menuRef,
 }: DropdownMenuProps) => {
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div
@@ -45,7 +48,7 @@ const DropdownMenu = ({
       className={cn(
         'absolute z-50 min-w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2',
         positionClasses[position],
-        className
+        className,
       )}
     >
       {children}
@@ -74,7 +77,7 @@ const DropdownMenuItem = ({
         'w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors',
         variantClasses[variant],
         disabled && 'opacity-50 cursor-not-allowed',
-        className
+        className,
       )}
     >
       {icon && <span className="flex-shrink-0">{icon}</span>}

@@ -1,20 +1,23 @@
-import React, { useRef, useState, useEffect, useCallback, useMemo   } from 'react';
-import { useLocation } from 'react-router-dom';
-import ShortDisplayCard from '../components/ShortDisplayCard';
-import CommentModal from '../components/CommentModal';
-import ShortsNavigation from '../components/ShortsNavigation';
-import ShortsFilters from '../components/ShortsFilters';
+import type React from 'react';
+import { useRef, useState, useEffect, useCallback, useMemo   } from 'react';
 
-import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
-import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
-import ShortsPageError from '../components/ErrorStates/ShortsPageError';
-import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
-import { Short } from '../src/types/core';
 import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
-  XMarkIcon
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { useLocation } from 'react-router-dom';
+
+import CommentModal from '../components/CommentModal';
+import EmptyShortsState from '../components/ErrorStates/EmptyShortsState';
+import ShortsPageError from '../components/ErrorStates/ShortsPageError';
+import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
+import ShortDisplayCard from '../components/ShortDisplayCard';
+import ShortsFilters from '../components/ShortsFilters';
+import ShortsNavigation from '../components/ShortsNavigation';
+import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
+
+import type { Short } from '../src/types/core';
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
@@ -72,7 +75,9 @@ const ShortsPage: React.FC = () => {
 
   // Convert Videos to Shorts and filter
   const filteredShorts = useMemo((): Short[] => {
-    if (!allShorts) return [];
+    if (!allShorts) {
+return [];
+}
 
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
@@ -85,7 +90,7 @@ const ShortsPage: React.FC = () => {
           isVertical: true,
           visibility: video.visibility as 'public' | 'private' | 'unlisted',
           createdAt: video.createdAt || new Date().toISOString(),
-          updatedAt: video.updatedAt || new Date().toISOString()
+          updatedAt: video.updatedAt || new Date().toISOString(),
         } as Short;
         return shortVideo;
       });
@@ -93,7 +98,7 @@ const ShortsPage: React.FC = () => {
     // Apply category filter
     if (selectedCategory !== 'all') {
       converted = converted.filter(short =>
-        short.category.toLowerCase() === selectedCategory.toLowerCase()
+        short.category.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
@@ -103,7 +108,7 @@ const ShortsPage: React.FC = () => {
       converted = converted.filter(short =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
-        short.description.toLowerCase().includes(query)
+        short.description.toLowerCase().includes(query),
       );
     }
 
@@ -112,20 +117,22 @@ const ShortsPage: React.FC = () => {
 
   // Get unique categories for filtering
   const categories = useMemo(() => {
-    if (!allShorts) return [];
+    if (!allShorts) {
+return [];
+}
     const uniqueCategories = [...new Set(allShorts.map(short => short.category))];
     return ['all', ...uniqueCategories];
   }, [allShorts]);
-  
+
   // Enhanced event handlers with proper type checking
   const handleLike = useCallback((shortId: string) => {
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
         return currentArray.filter(id => id !== shortId);
-      } else {
-        return [...currentArray, shortId];
       }
+        return [...currentArray, shortId];
+
     });
   }, [setLikedShortsArray]);
 
@@ -134,9 +141,9 @@ const ShortsPage: React.FC = () => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
         return currentArray.filter(name => name !== channelName);
-      } else {
-        return [...currentArray, channelName];
       }
+        return [...currentArray, channelName];
+
     });
   }, [setFollowedChannelsArray]);
 
@@ -147,7 +154,9 @@ const ShortsPage: React.FC = () => {
   }, [filteredShorts]);
 
   const handleCommentSubmit = useCallback(async (_commentText: string) => {
-    if (!selectedShortForComment) return;
+    if (!selectedShortForComment) {
+return;
+}
 
     try {      // Close modal and reset state
       setCommentModalOpen(false);
@@ -173,7 +182,7 @@ const ShortsPage: React.FC = () => {
         targetElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
-          inline: 'nearest'
+          inline: 'nearest',
         });
       }
     }
@@ -210,7 +219,9 @@ const ShortsPage: React.FC = () => {
   }, []);
 
   const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
-    if (commentModalOpen) return;
+    if (commentModalOpen) {
+return;
+}
 
     switch (event.key) {
       case 'ArrowUp':
@@ -233,12 +244,12 @@ const ShortsPage: React.FC = () => {
 
   const handleShare = async (shortId: string) => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'Check out this Short!',
-          url: shareUrl
+          url: shareUrl,
         });
       } catch (error) {
         // Fallback to clipboard if share fails
@@ -323,7 +334,9 @@ const ShortsPage: React.FC = () => {
 
   // Set up intersection observer to track which video is currently in view
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {
+return;
+}
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -346,8 +359,8 @@ const ShortsPage: React.FC = () => {
       {
         root: containerRef.current,
         threshold: 0.5,
-        rootMargin: '0px'
-      }
+        rootMargin: '0px',
+      },
     );
 
     // Observe all video elements
@@ -495,9 +508,6 @@ const ShortsPage: React.FC = () => {
           />
         )}
       </div>
-
-
-
 
 
       {/* Navigation Controls */}

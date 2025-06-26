@@ -1,4 +1,6 @@
-import React, { FormEvent, ReactNode   } from 'react';
+import type { FormEvent, ReactNode } from 'react';
+import React from 'react';
+
 import { useFormState } from '../hooks';
 
 interface FormField {
@@ -7,7 +9,7 @@ interface FormField {
   type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   placeholder?: string;
   required?: boolean;
-  options?: { value: string; label: string }[];
+  options?: Array<{ value: string; label: string }>;
   validation?: (value: any) => string | null;
   disabled?: boolean;
   accept?: string; // for file inputs
@@ -38,7 +40,7 @@ interface BaseFormProps {
  * - Error and success messages
  * - Consistent styling
  * - Support for various input types
- * 
+ *
  * Reduces code duplication for form implementations across the app
  */
 const BaseForm: React.FC<BaseFormProps> = ({
@@ -54,14 +56,14 @@ const BaseForm: React.FC<BaseFormProps> = ({
   initialValues = {},
   children,
   showResetButton = false,
-  resetLabel = 'Reset'
+  resetLabel = 'Reset',
 }) => {
   const {
     values,
     isSubmitting,
     setValue,
     setError,
-    reset
+    reset,
   } = useFormState({ initialValues });
 
   // Track touched fields manually
@@ -134,8 +136,8 @@ const BaseForm: React.FC<BaseFormProps> = ({
       w-full px-3 py-2 border rounded-lg transition-colors
       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
       disabled:bg-gray-100 disabled:cursor-not-allowed
-      ${fieldError 
-        ? 'border-red-500 bg-red-50 dark:bg-red-900/20' 
+      ${fieldError
+        ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
         : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700'
       }
       text-gray-900 dark:text-white
@@ -251,7 +253,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
       {/* Form fields */}
       {fields.map(field => {
         const fieldError = touched[field.name] ? validateField(field, values[field.name]) : null;
-        
+
         return (
           <div key={field.name} className="space-y-2">
             {field.type !== 'checkbox' && (
@@ -260,9 +262,9 @@ const BaseForm: React.FC<BaseFormProps> = ({
                 {field.required && <span className="text-red-500 ml-1">*</span>}
               </label>
             )}
-            
+
             {renderField(field)}
-            
+
             {fieldError && (
               <p className="text-red-500 text-sm">{fieldError}</p>
             )}
@@ -282,7 +284,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
         >
           {loading || isSubmitting ? 'Loading...' : submitLabel}
         </button>
-        
+
         {onCancel && (
           <button
             type="button"
@@ -293,7 +295,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
             {cancelLabel}
           </button>
         )}
-        
+
         {showResetButton && (
           <button
             type="button"

@@ -1,7 +1,8 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import { BellIcon, CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
-
 
 
 interface SubscriptionManagerProps {
@@ -17,7 +18,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
   channelAvatarUrl,
   channelId,
   subscriberCount,
-  onSubscriptionChange
+  onSubscriptionChange,
 }) => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -39,7 +40,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
     try {
       const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
       const newSubscriptionStatus = !isSubscribed;
-      
+
       if (newSubscriptionStatus) {
         subscriptions[channelId] = {
           channelName,
@@ -47,18 +48,18 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
           subscriberCount,
           isSubscribed: true,
           notificationsEnabled: true,
-          subscribedAt: new Date().toISOString()
+          subscribedAt: new Date().toISOString(),
         };
         setNotificationsEnabled(true);
       } else {
         delete subscriptions[channelId];
         setNotificationsEnabled(false);
       }
-      
+
       localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptions));
       setIsSubscribed(newSubscriptionStatus);
       onSubscriptionChange?.(newSubscriptionStatus);
-      
+
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 500));
     } catch (error) {
@@ -94,12 +95,12 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
             <CheckIcon className="w-4 h-4" />
             <span>Subscribed</span>
           </button>
-          
+
           <div className="relative">
             <button
               onClick={() => setShowNotificationMenu(!showNotificationMenu)}
               className={`p-2 rounded-full transition-colors ${
-                notificationsEnabled 
+                notificationsEnabled
                   ? 'bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-800 hover:bg-neutral-700 dark:hover:bg-neutral-300'
                   : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700'
               }`}
@@ -111,7 +112,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
                 <BellIcon className="w-4 h-4" />
               )}
             </button>
-            
+
             {showNotificationMenu && (
               <div className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg z-50 py-1">
                 <button

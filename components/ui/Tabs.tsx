@@ -1,4 +1,5 @@
-import React, { createContext, useContext   } from 'react';
+import type React from 'react';
+import { createContext, useContext   } from 'react';
 
 interface TabsContextType {
   value: string;
@@ -79,7 +80,7 @@ interface TabsContentProps {
 
 export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className = '' }) => {
   const { value: activeValue } = useTabsContext();
-  
+
   if (activeValue !== value) {
     return null;
   }

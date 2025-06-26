@@ -1,6 +1,6 @@
-# YouTube Studio Clone
+# YoutubeX Studio Clone
 
-A modern, high-performance YouTube Studio clone built with React, TypeScript, and Vite. This application demonstrates advanced React patterns, state management, and performance optimization techniques.
+A modern, high-performance YoutubeX Studio clone built with React, TypeScript, and Vite. This application demonstrates advanced React patterns, state management, and performance optimization techniques.
 
 ## 🚀 Features
 

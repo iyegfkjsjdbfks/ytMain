@@ -1,6 +1,10 @@
-import React, { memo } from 'react';
+import type React from 'react';
+import { memo } from 'react';
+
 import YouTubeVideoCard from './YouTubeVideoCard';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+
+import type { YouTubeSearchResult } from '../services/googleSearchService';
+
 
 interface YouTubeVideoGridProps {
   videos: YouTubeSearchResult[];
@@ -24,8 +28,8 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
     md: 2,
     lg: 3,
     xl: 3,
-    '2xl': 4
-  }
+    '2xl': 4,
+  },
 }) => {
   const getGridClasses = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
@@ -34,9 +38,9 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
       columns.md && `md:grid-cols-${columns.md}`,
       columns.lg && `lg:grid-cols-${columns.lg}`,
       columns.xl && `xl:grid-cols-${columns.xl}`,
-      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`
+      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`,
     ].filter(Boolean).join(' ');
-    
+
     return `${baseClasses} ${responsiveClasses} ${className}`;
   };
 
@@ -46,9 +50,9 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
         // Generate a stable key using available identifiers
         const videoKey = video.id || (video as any).videoId || `video-${index}`;
         return (
-          <YouTubeVideoCard 
-            key={keyPrefix ? `${keyPrefix}-${videoKey}` : videoKey} 
-            video={video} 
+          <YouTubeVideoCard
+            key={keyPrefix ? `${keyPrefix}-${videoKey}` : videoKey}
+            video={video}
           />
         );
       })}

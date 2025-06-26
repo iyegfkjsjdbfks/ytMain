@@ -1,6 +1,9 @@
 
-import React, { createContext, useState, useContext, useCallback, ReactNode   } from 'react';
-import { Video } from '../src/types/core';
+import type { ReactNode   } from 'react';
+import type React from 'react';
+import { createContext, useState, useContext, useCallback   } from 'react';
+
+import type { Video } from '../src/types/core';
 
 interface MiniplayerContextType {
   miniplayerVideo: Video | null;
@@ -24,7 +27,7 @@ export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children
   const hideMiniplayer = useCallback(() => {
     setIsVisible(false);
   }, []);
-  
+
   const clearMiniplayer = useCallback(() => {
     setCurrentVideo(null);
     setIsVisible(false);

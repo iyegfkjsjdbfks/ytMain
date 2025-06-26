@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
@@ -38,9 +39,11 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   onSubtitleChange,
   autoplay,
   onAutoplayChange,
-  className = ''
+  className = '',
 }) => {
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div className={`absolute bottom-16 right-4 bg-black bg-opacity-90 text-white rounded-lg p-4 min-w-64 z-50 ${className}`}>

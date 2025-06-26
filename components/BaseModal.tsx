@@ -1,4 +1,6 @@
-import React, { useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useEffect, useRef   } from 'react';
+
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface BaseModalProps {
@@ -23,7 +25,7 @@ interface BaseModalProps {
  * - Customizable sizes and styling
  * - Optional footer and header
  * - Overlay click and escape key handling
- * 
+ *
  * Reduces code duplication for modal implementations across the app
  */
 const BaseModal: React.FC<BaseModalProps> = ({
@@ -38,7 +40,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   footer,
   className = '',
   overlayClassName = '',
-  preventBodyScroll = true
+  preventBodyScroll = true,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -97,7 +99,9 @@ const BaseModal: React.FC<BaseModalProps> = ({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   return (
     <div
@@ -106,7 +110,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
-      
+
       {/* Modal */}
       <div
         ref={modalRef}

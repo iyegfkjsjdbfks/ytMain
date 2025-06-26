@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, useCallback, RefObject } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 interface UseIntersectionObserverOptions {
   threshold?: number | number[];
@@ -16,20 +17,20 @@ interface UseIntersectionObserverReturn {
 
 /**
  * Custom hook for Intersection Observer API
- * 
+ *
  * Provides:
  * - Element visibility detection
  * - Configurable thresholds and margins
  * - Option to freeze state once visible
  * - Access to full IntersectionObserverEntry
- * 
+ *
  * Common use cases:
  * - Video autoplay when in viewport
  * - Lazy loading images
  * - Infinite scrolling
  * - Analytics tracking
  * - Animation triggers
- * 
+ *
  * Reduces code duplication for intersection-based functionality
  */
 export const useIntersectionObserver = ({
@@ -37,7 +38,7 @@ export const useIntersectionObserver = ({
   root = null,
   rootMargin = '0%',
   freezeOnceVisible = false,
-  initialIsIntersecting = false
+  initialIsIntersecting = false,
 }: UseIntersectionObserverOptions = {}): UseIntersectionObserverReturn => {
   const ref = useRef<Element>(null);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -47,7 +48,9 @@ export const useIntersectionObserver = ({
   const updateEntry = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
 
-    if (!entry) return;
+    if (!entry) {
+return;
+}
 
     if (frozen.current && entry.isIntersecting) {
       return;
@@ -91,7 +94,7 @@ export const useIntersectionObserver = ({
 
 /**
  * Specialized hook for video autoplay based on visibility
- * 
+ *
  * Automatically handles:
  * - Video play/pause based on visibility
  * - Configurable visibility threshold
@@ -100,7 +103,7 @@ export const useIntersectionObserver = ({
 export const useIntersectionVideoAutoplay = ({
   threshold = 0.7,
   rootMargin = '0px',
-  enabled = true
+  enabled = true,
 }: {
   threshold?: number;
   rootMargin?: string;
@@ -109,7 +112,7 @@ export const useIntersectionVideoAutoplay = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isIntersecting } = useIntersectionObserver({
     threshold,
-    rootMargin
+    rootMargin,
   });
 
   useEffect(() => {
@@ -135,7 +138,7 @@ export const useIntersectionVideoAutoplay = ({
 export const useLazyImage = ({
   src,
   threshold = 0.1,
-  rootMargin = '50px'
+  rootMargin = '50px',
 }: {
   src: string;
   threshold?: number;
@@ -144,11 +147,11 @@ export const useLazyImage = ({
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
     rootMargin,
-    freezeOnceVisible: true
+    freezeOnceVisible: true,
   });
 
   useEffect(() => {
@@ -174,7 +177,7 @@ export const useLazyImage = ({
     error,
     isIntersecting,
     onLoad: handleLoad,
-    onError: handleError
+    onError: handleError,
   };
 };
 
@@ -186,7 +189,7 @@ export const useInfiniteScroll = ({
   isFetchingNextPage = false,
   fetchNextPage,
   threshold = 1.0,
-  rootMargin = '100px'
+  rootMargin = '100px',
 }: {
   hasNextPage?: boolean;
   isFetchingNextPage?: boolean;
@@ -196,7 +199,7 @@ export const useInfiniteScroll = ({
 }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
-    rootMargin
+    rootMargin,
   });
 
   useEffect(() => {

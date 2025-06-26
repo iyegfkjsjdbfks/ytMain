@@ -1,21 +1,25 @@
 import React, { memo, useMemo, useState, useEffect } from 'react';
+
 import { FixedSizeList as List } from 'react-window';
-import { Video } from '../types';
-import { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
-import { withMemo } from '../utils/componentOptimizations';
+
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import OptimizedVideoCard from './OptimizedVideoCard';
+import { withMemo } from '../utils/componentOptimizations';
 import { performanceMonitor } from '../utils/performance';
+
+import OptimizedVideoCard from './OptimizedVideoCard';
+
+import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import type { Video } from '../types';
 
 // Helper function to convert search results to Video type
 const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
   if ('views' in item && 'likes' in item) {
     // Already a Video type
-    return item as Video;
+    return item;
   }
-  
+
   // Convert YouTubeSearchResult or GoogleSearchResult to Video
-  const searchResult = item as YouTubeSearchResult | GoogleSearchResult;
+  const searchResult = item;
   return {
     id: searchResult.id,
     title: searchResult.title,
@@ -34,7 +38,7 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     tags: [],
     visibility: 'public' as const, // Default visibility
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   } as Video;
 };
 
@@ -54,7 +58,7 @@ interface VirtualizedItemProps {
   index: number;
   style: React.CSSProperties;
   data: {
-    items: (Video | YouTubeSearchResult | GoogleSearchResult)[];
+    items: Array<Video | YouTubeSearchResult | GoogleSearchResult>;
     onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
     itemHeight: number;
   };
@@ -99,7 +103,7 @@ const sortingFunctions = {
       const viewsB = typeof b.views === 'string' ? parseInt(b.views) || 0 : (b.views || 0);
       return viewsB - viewsA;
     });
-  }
+  },
 };
 
 // Virtualized item component
@@ -110,13 +114,13 @@ const VirtualizedItem: React.FC<VirtualizedItemProps> = memo(({ index, style, da
   if (!item) {
     return (
       <div style={style} className="p-4">
-        <div className="animate-pulse bg-gray-200 h-48 rounded"></div>
+        <div className="animate-pulse bg-gray-200 h-48 rounded" />
       </div>
     );
   }
 
   const convertedVideo = convertToVideo(item);
-  
+
   return (
     <div style={style} className="p-2">
       <OptimizedVideoCard
@@ -140,29 +144,29 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   sortBy,
   onVideoClick,
   onLoadMore,
-  hasMore = false
+  hasMore = false,
 }) => {
   const [containerHeight, setContainerHeight] = useState(600);
   const [itemHeight] = useState(280); // Fixed height for each item
   const containerRef = React.useRef<HTMLDivElement>(null);
-  
+
   // Debounce query for performance
   const debouncedQuery = useDebounce(query, 300);
-  
+
   // Intersection observer for infinite scroll
   const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '100px'
+    rootMargin: '100px',
   });
 
   // Combine and sort all results
   const allResults = useMemo(() => {
     performanceMonitor.startMeasure('search-results-processing');
-    
+
     const combined = [
       ...(videos || []).map(v => ({ ...v, source: 'local' as const })),
       ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google' as const }))
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google' as const })),
     ];
 
     let sorted = combined;
@@ -202,7 +206,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   const listData = useMemo(() => ({
     items: allResults,
     onVideoClick,
-    itemHeight
+    itemHeight,
   }), [allResults, onVideoClick, itemHeight]);
 
   // Loading skeleton
@@ -210,9 +214,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
       {Array.from({ length: 12 }).map((_, index) => (
         <div key={index} className="animate-pulse">
-          <div className="bg-gray-200 h-48 rounded-lg mb-2"></div>
-          <div className="bg-gray-200 h-4 rounded mb-2"></div>
-          <div className="bg-gray-200 h-3 rounded w-3/4"></div>
+          <div className="bg-gray-200 h-48 rounded-lg mb-2" />
+          <div className="bg-gray-200 h-4 rounded mb-2" />
+          <div className="bg-gray-200 h-3 rounded w-3/4" />
         </div>
       ))}
     </div>
@@ -266,12 +270,12 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
         >
           {VirtualizedItem}
         </List>
-        
+
         {/* Load more trigger */}
         {hasMore && (
           <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className="h-20 flex items-center justify-center">
             {loading ? (
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
             ) : (
               <button
                 onClick={onLoadMore}

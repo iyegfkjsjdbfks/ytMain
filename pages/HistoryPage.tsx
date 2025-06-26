@@ -1,11 +1,13 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState  } from 'react';
-import { Video } from '../types';
-import { getWatchHistoryVideos } from '../services/mockVideoService';
-import VideoCard from '../components/VideoCard';
+
 import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
 import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';
+import VideoCard from '../components/VideoCard';
+import { getWatchHistoryVideos } from '../services/mockVideoService';
+
+import type { Video } from '../types';
 
 const HistoryPage: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -18,7 +20,7 @@ const HistoryPage: React.FC = () => {
         const fetchedVideos = await getWatchHistoryVideos();
         setVideos(fetchedVideos);
       } catch (error) {
-        console.error("Failed to fetch watch history:", error);
+        console.error('Failed to fetch watch history:', error);
         setVideos([]);
       } finally {
         setLoading(false);

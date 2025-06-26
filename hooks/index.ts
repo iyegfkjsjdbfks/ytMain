@@ -9,10 +9,10 @@ export { useLocalStorage } from './useLocalStorage';
 export { useAsyncState } from './useAsyncState';
 export { useVideoPlayer } from './useVideoPlayer';
 export { useSubscriptions } from './useSubscriptions';
-export { 
-  useIntersectionObserver, 
-  useLazyImage, 
+export {
+  useIntersectionObserver,
+  useLazyImage,
   useInfiniteScroll,
-  useIntersectionVideoAutoplay 
+  useIntersectionVideoAutoplay,
 } from './useIntersectionObserver';
 export { useVideoAutoplay } from './useVideoAutoplay';

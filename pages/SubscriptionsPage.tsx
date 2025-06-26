@@ -1,22 +1,24 @@
 
-import React, { useEffect, useState, useMemo   } from 'react';
-import { Link } from 'react-router-dom';
-import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
-import { Button } from '../components/ui/Button';
+import type React from 'react';
+import { useEffect, useState, useMemo   } from 'react';
 
-import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
-import SubscriptionStats from '../components/SubscriptionStats';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
-import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
 import {
   ViewColumnsIcon,
   Bars3Icon,
   AdjustmentsHorizontalIcon,
   BellIcon,
-  UserGroupIcon
+  UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
+import SubscriptionStats from '../components/SubscriptionStats';
+import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
+import { Button } from '../components/ui/Button';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
+import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
 
 type TabType = 'all' | 'today' | 'week' | 'unwatched' | 'live' | 'posts';
 type SortType = 'latest' | 'popular' | 'oldest';
@@ -29,7 +31,7 @@ const SubscriptionsPage: React.FC = () => {
     loading: channelsLoading,
     error: channelsError,
     toggleNotifications,
-    unsubscribe
+    unsubscribe,
   } = useSubscriptions();
 
   const [activeTab, setActiveTab] = useState<TabType>('all');
@@ -42,7 +44,9 @@ const SubscriptionsPage: React.FC = () => {
   }, []);
 
   const filteredVideos = useMemo(() => {
-    if (!subscribedVideos) return [];
+    if (!subscribedVideos) {
+return [];
+}
 
     let filtered = [...subscribedVideos];
 
@@ -110,7 +114,7 @@ const SubscriptionsPage: React.FC = () => {
       totalChannels: subscribedChannels.length,
       notificationsEnabled,
       totalVideos,
-      newVideosToday
+      newVideosToday,
     };
   }, [subscribedChannels, subscribedVideos]);
 
@@ -304,14 +308,14 @@ const SubscriptionsPage: React.FC = () => {
                 <SubscriptionsIcon className="w-16 h-16 text-neutral-400 dark:text-neutral-600 mx-auto mb-4" />
                 <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
                   {activeTab === 'all'
-                    ? "No new videos from your subscriptions"
+                    ? 'No new videos from your subscriptions'
                     : `No ${activeTab} videos from your subscriptions`
                   }
                 </h2>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                   {subscribedChannels.length === 0
-                    ? "Subscribe to channels to see their latest videos here."
-                    : "Check back later for new content from your subscribed channels."
+                    ? 'Subscribe to channels to see their latest videos here.'
+                    : 'Check back later for new content from your subscribed channels.'
                   }
                 </p>
                 {subscribedChannels.length === 0 && (

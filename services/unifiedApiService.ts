@@ -1,5 +1,5 @@
-import { Video, Channel, Comment } from '../types';
-import { Playlist } from '../src/types/core';
+import type { Playlist } from '../src/types/core';
+import type { Video, Channel, Comment } from '../types';
 
 // Unified API Configuration
 interface ApiConfig {
@@ -33,7 +33,9 @@ class UnifiedCache {
 
   get<T>(key: string): T | null {
     const item = this.cache.get(key);
-    if (!item) return null;
+    if (!item) {
+return null;
+}
 
     const isExpired = Date.now() - item.timestamp > item.ttl;
     if (isExpired) {
@@ -69,7 +71,7 @@ export class ApiError extends Error {
     message: string,
     public status?: number,
     public code?: string,
-    public details?: any
+    public details?: any,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -151,7 +153,7 @@ class UnifiedApiService {
     endpoint: string,
     options: RequestInit = {},
     cacheKey?: string,
-    cacheTTL?: number
+    cacheTTL?: number,
   ): Promise<T> {
     // Check cache first
     if (cacheKey) {
@@ -182,7 +184,7 @@ class UnifiedApiService {
     endpoint: string,
     options: RequestInit,
     cacheKey?: string,
-    cacheTTL?: number
+    cacheTTL?: number,
   ): Promise<T> {
     let config: RequestInit & { url: string } = {
       ...options,
@@ -199,7 +201,7 @@ class UnifiedApiService {
     }
 
     let lastError: Error;
-    
+
     for (let attempt = 0; attempt <= this.config.retryAttempts; attempt++) {
       try {
         const controller = new AbortController();
@@ -221,7 +223,7 @@ class UnifiedApiService {
           throw new ApiError(
             `HTTP ${response.status}: ${response.statusText}`,
             response.status,
-            'HTTP_ERROR'
+            'HTTP_ERROR',
           );
         }
 
@@ -248,8 +250,8 @@ class UnifiedApiService {
 
         // Wait before retry
         if (attempt < this.config.retryAttempts) {
-          await new Promise(resolve => 
-            setTimeout(resolve, this.config.retryDelay * Math.pow(2, attempt))
+          await new Promise(resolve =>
+            setTimeout(resolve, this.config.retryDelay * Math.pow(2, attempt)),
           );
         }
       }
@@ -271,7 +273,9 @@ class UnifiedApiService {
     queryParams.set('chart', 'mostPopular');
     queryParams.set('regionCode', 'US');
     queryParams.set('maxResults', String(params.maxResults || 25));
-    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
+    if (params.pageToken) {
+queryParams.set('pageToken', params.pageToken);
+}
 
     const cacheKey = `videos:${queryParams.toString()}`;
     return this.makeRequest(`/videos?${queryParams}`, {}, cacheKey, 10 * 60 * 1000);
@@ -288,8 +292,12 @@ class UnifiedApiService {
     queryParams.set('q', query);
     queryParams.set('type', params.type || 'video');
     queryParams.set('maxResults', String(params.maxResults || 25));
-    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
-    if (params.order) queryParams.set('order', params.order);
+    if (params.pageToken) {
+queryParams.set('pageToken', params.pageToken);
+}
+    if (params.order) {
+queryParams.set('order', params.order);
+}
 
     const cacheKey = `search:${query}:${queryParams.toString()}`;
     return this.makeRequest(`/search?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);
@@ -306,7 +314,7 @@ class UnifiedApiService {
       `/channels?${queryParams}`,
       {},
       cacheKey,
-      30 * 60 * 1000
+      30 * 60 * 1000,
     );
 
     if (!response.items || response.items.length === 0) {
@@ -332,7 +340,7 @@ class UnifiedApiService {
       `/playlists?${queryParams}`,
       {},
       cacheKey,
-      15 * 60 * 1000
+      15 * 60 * 1000,
     );
 
     if (!response.items || response.items.length === 0) {
@@ -343,7 +351,7 @@ class UnifiedApiService {
     if (!playlist) {
       throw new ApiError('Playlist not found', 404, 'PLAYLIST_NOT_FOUND');
     }
-    
+
     return playlist;
   }
 
@@ -357,7 +365,9 @@ class UnifiedApiService {
     queryParams.set('videoId', videoId);
     queryParams.set('maxResults', String(params.maxResults || 20));
     queryParams.set('order', params.order || 'relevance');
-    if (params.pageToken) queryParams.set('pageToken', params.pageToken);
+    if (params.pageToken) {
+queryParams.set('pageToken', params.pageToken);
+}
 
     const cacheKey = `comments:${videoId}:${queryParams.toString()}`;
     return this.makeRequest(`/commentThreads?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);

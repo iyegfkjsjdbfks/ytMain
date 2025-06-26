@@ -1,14 +1,6 @@
-import { memo, useMemo, useCallback, useState, useRef, useEffect, MouseEvent } from 'react';
-import { Video } from '../types';
-import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
-import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useDropdownMenu } from '../hooks/useDropdownMenu';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
-import { cn } from '../utils/cn';
-import { withMemo } from '../utils/componentOptimizations';
-import { performanceMonitor } from '../utils/performance';
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
+import type { MouseEvent } from 'react';
+import { memo, useMemo, useCallback, useState, useRef, useEffect } from 'react';
+
 import {
   PlayIcon,
   ClockIcon,
@@ -16,6 +8,20 @@ import {
   PlusIcon,
   CheckIcon,
 } from '@heroicons/react/24/outline';
+
+import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
+import { useWatchLater } from '../contexts/WatchLaterContext';
+import { useDropdownMenu } from '../hooks/useDropdownMenu';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { cn } from '../utils/cn';
+import { withMemo } from '../utils/componentOptimizations';
+import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
+import { performanceMonitor } from '../utils/performance';
+
+import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
+
+import type { Video } from '../types';
+
 
 interface OptimizedVideoCardProps {
   video: Video;
@@ -41,11 +47,11 @@ const LazyImage = memo<{
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-  
+
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     rootMargin: '50px',
-    freezeOnceVisible: true
+    freezeOnceVisible: true,
   });
 
   const handleLoad = useCallback(() => {
@@ -151,7 +157,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   }) => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
-  
+
   const classes = sizeClasses[size];
   const isWatchLater = false; // Simplified for now
 
@@ -203,11 +209,11 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   }, [toggleMenu]);
 
   return (
-    <div 
+    <div
       className={cn(
         classes.container,
         'group cursor-pointer transition-transform hover:scale-105',
-        className
+        className,
       )}
       onClick={handleVideoClick}
     >
@@ -218,29 +224,29 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
           alt={video.title}
           className={cn(
             classes.thumbnail,
-            'transition-transform group-hover:scale-110'
+            'transition-transform group-hover:scale-110',
           )}
           priority={index < 4 ? 'high' : priority}
           lazy={lazy}
         />
-        
+
         {/* Duration Badge */}
         <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
           {formattedDuration}
         </div>
-        
+
         {/* Live Badge */}
         {video.isLive && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-medium">
             LIVE
           </div>
         )}
-        
+
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
           <PlayIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
         </div>
-        
+
         {/* Action Buttons */}
         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
           <button
@@ -262,7 +268,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
             <EllipsisVerticalIcon className="w-4 h-4 text-white" />
           </button>
         </div>
-        
+
         {/* Dropdown Menu */}
         <DropdownMenu
           isOpen={showMenu}
@@ -291,9 +297,9 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               const shareData = {
                 title: video.title,
                 text: `Check out this video: ${video.title}`,
-                url: `${window.location.origin}/watch?v=${video.id}`
+                url: `${window.location.origin}/watch?v=${video.id}`,
               };
-              
+
               if (navigator.share) {
                 navigator.share(shareData).catch(console.error);
               } else {
@@ -324,11 +330,11 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               if (!notInterestedVideos.includes(video.id)) {
                 notInterestedVideos.push(video.id);
                 localStorage.setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
-                
+
                 // Dispatch event to remove video from current view
                 const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } });
                 window.dispatchEvent(event);
-                
+
                 // Show feedback
                 const feedback = document.createElement('div');
                 feedback.className = 'fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg z-50';
@@ -359,24 +365,24 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 'Promotes terrorism',
                 'Spam or scams',
                 'Infringes my rights',
-                'Captions issue'
+                'Captions issue',
               ];
-              
+
               const reason = prompt(`Report this video for:\n\n${reportReasons.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nEnter the number (1-${reportReasons.length}):`);
-              
+
               if (reason && !isNaN(Number(reason)) && Number(reason) >= 1 && Number(reason) <= reportReasons.length) {
                 const selectedReason = reportReasons[Number(reason) - 1];
-                
+
                 // Store report (in real app, this would be sent to server)
                 const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
                 reports.push({
                   videoId: video.id,
                   reason: selectedReason,
                   timestamp: new Date().toISOString(),
-                  videoTitle: video.title
+                  videoTitle: video.title,
                 });
                 localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
-                
+
                 alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
               }
             }}
@@ -391,14 +397,14 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
           </DropdownMenuItem>
         </DropdownMenu>
       </div>
-      
+
       {/* Content */}
       <div className="mt-3 space-y-2">
         {/* Title */}
         <h3 className={cn(classes.title, 'hover:text-blue-600 transition-colors')}>
           {video.title}
         </h3>
-        
+
         {/* Channel Info */}
         {showChannel && (
           <div className="flex items-center gap-2">
@@ -412,28 +418,28 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               onClick={handleChannelClick}
               className={cn(
                 classes.channel,
-                'hover:text-gray-900 transition-colors truncate'
+                'hover:text-gray-900 transition-colors truncate',
               )}
             >
               {video.channelName}
             </button>
           </div>
         )}
-        
+
         {/* Meta Info */}
         <div className={cn(classes.meta, 'flex items-center gap-1')}>
           <span>{formattedViews} views</span>
           <span>•</span>
           <span>{formattedTimeAgo}</span>
         </div>
-        
+
         {/* Description */}
         {showDescription && video.description && (
           <p className={cn(classes.meta, 'line-clamp-2 mt-2')}>
             {video.description}
           </p>
         )}
-        
+
         {/* Tags */}
         {video.tags && video.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2">

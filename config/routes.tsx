@@ -1,10 +1,13 @@
 import { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
-import Layout from '../components/Layout';
-import StudioLayout from '../components/StudioLayout';
+
+
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
+import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
+import StudioLayout from '../components/StudioLayout';
+
+import type { RouteObject } from 'react-router-dom';
 
 // Lazy load components for better performance
 const HomePage = lazy(() => import('../pages/HomePage'));
@@ -169,6 +172,11 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'analytics',
         element: <AnalyticsPage />,
+      },
+      // Redirect for legacy content-manager route
+      {
+        path: 'content-manager',
+        element: <ContentManagerPage />,
       },
     ],
   },

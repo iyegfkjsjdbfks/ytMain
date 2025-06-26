@@ -1,11 +1,14 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState  } from 'react';
-import { Video } from '../types';
-import { getLikedVideos } from '../services/mockVideoService';
-import VideoCard from '../components/VideoCard';
+
 import { HeartIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version
+
 import LikedVideosPageSkeleton from '../components/LoadingStates/LikedVideosPageSkeleton';
+import VideoCard from '../components/VideoCard';
+import { getLikedVideos } from '../services/mockVideoService';
+
+import type { Video } from '../types';
 
 const LikedVideosPage: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -18,7 +21,7 @@ const LikedVideosPage: React.FC = () => {
         const fetchedVideos = await getLikedVideos();
         setVideos(fetchedVideos);
       } catch (error) {
-        console.error("Failed to fetch liked videos:", error);
+        console.error('Failed to fetch liked videos:', error);
         setVideos([]);
       } finally {
         setLoading(false);

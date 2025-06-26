@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+
 import { throttle, safeLocalStorage } from '../utils/componentUtils';
 
 // Common hook patterns
@@ -6,7 +7,7 @@ import { throttle, safeLocalStorage } from '../utils/componentUtils';
 // Enhanced local storage hook with error handling
 export const useLocalStorage = <T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     const item = safeLocalStorage.getJSON<T>(key);
@@ -23,7 +24,7 @@ export const useLocalStorage = <T>(
         console.error(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue]
+    [key, storedValue],
   );
 
   const removeValue = useCallback(() => {
@@ -58,11 +59,11 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args: any[]) => any>(
   callback: T,
-  delay: number
+  delay: number,
 ): T => {
   const throttledCallback = useMemo(
     () => throttle(callback, delay),
-    [callback, delay]
+    [callback, delay],
   );
 
   return throttledCallback as T;
@@ -79,7 +80,7 @@ export const usePrevious = <T>(value: T): T | undefined => {
 
 // Toggle hook
 export const useToggle = (
-  initialValue: boolean = false
+  initialValue: boolean = false,
 ): [boolean, () => void, (value: boolean) => void] => {
   const [value, setValue] = useState(initialValue);
 
@@ -91,7 +92,7 @@ export const useToggle = (
 
 // Counter hook
 export const useCounter = (
-  initialValue: number = 0
+  initialValue: number = 0,
 ): {
   count: number;
   increment: () => void;
@@ -111,7 +112,7 @@ export const useCounter = (
 
 // Array state hook
 export const useArray = <T>(
-  initialArray: T[] = []
+  initialArray: T[] = [],
 ): {
   array: T[];
   set: (array: T[]) => void;
@@ -159,7 +160,7 @@ export const useArray = <T>(
 // Async state hook
 export const useAsync = <T, E = string>(
   asyncFunction: () => Promise<T>,
-  immediate: boolean = true
+  immediate: boolean = true,
 ): {
   execute: () => Promise<void>;
   loading: boolean;
@@ -195,7 +196,7 @@ export const useAsync = <T, E = string>(
 // Click outside hook
 export const useClickOutside = (
   ref: React.RefObject<HTMLElement>,
-  handler: (event: MouseEvent | TouchEvent) => void
+  handler: (event: MouseEvent | TouchEvent) => void,
 ): void => {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
@@ -224,12 +225,12 @@ export const useKeyPress = (
     shift?: boolean;
     alt?: boolean;
     meta?: boolean;
-  } = {}
+  } = {},
 ): void => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       const { ctrl = false, shift = false, alt = false, meta = false } = options;
-      
+
       if (
         event.key === targetKey &&
         event.ctrlKey === ctrl &&
@@ -274,7 +275,9 @@ export const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {
+return;
+}
 
     const media = window.matchMedia(query);
     setMatches(media.matches);
@@ -293,17 +296,19 @@ export const useMediaQuery = (query: string): boolean => {
 // Intersection observer hook
 export const useIntersectionObserver = (
   elementRef: React.RefObject<Element>,
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ): IntersectionObserverEntry | null => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+return;
+}
 
     const observer = new IntersectionObserver(
       ([entry]) => setEntry(entry || null),
-      options
+      options,
     );
 
     observer.observe(element);
@@ -335,7 +340,7 @@ export const useScrollPosition = (): { x: number; y: number } => {
 // Form validation hook
 export const useFormValidation = <T extends Record<string, any>>(
   initialValues: T,
-  validationRules: Partial<Record<keyof T, (value: any) => string | null>>
+  validationRules: Partial<Record<keyof T, (value: any) => string | null>>,
 ): {
   values: T;
   errors: Partial<Record<keyof T, string>>;
@@ -352,20 +357,20 @@ export const useFormValidation = <T extends Record<string, any>>(
       const rule = validationRules[name];
       return rule ? rule(value) : null;
     },
-    [validationRules]
+    [validationRules],
   );
 
   const handleChange = useCallback(
     (name: keyof T, value: any) => {
       setValues(prev => ({ ...prev, [name]: value }));
-      
+
       const error = validateField(name, value);
       setErrors(prev => ({
         ...prev,
         [name]: error,
       }));
     },
-    [validateField]
+    [validateField],
   );
 
   const validateAll = useCallback((): boolean => {
@@ -391,7 +396,7 @@ export const useFormValidation = <T extends Record<string, any>>(
         onSubmit(values);
       }
     },
-    [values, validateAll]
+    [values, validateAll],
   );
 
   const reset = useCallback(() => {

@@ -1,14 +1,17 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState  } from 'react';
+
 import { useParams } from 'react-router-dom';
-import { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
+
+
+import ChannelHeader from '../components/ChannelHeader';
+import ChannelTabContent from '../components/ChannelTabContent';
+import ChannelTabs from '../components/ChannelTabs';
+import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
 import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/mockVideoService';
 
-import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-import ChannelHeader from '../components/ChannelHeader';
-import ChannelTabs from '../components/ChannelTabs';
-import ChannelTabContent from '../components/ChannelTabContent';
+import type { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
 
 
 const ChannelPage: React.FC = () => {
@@ -19,14 +22,14 @@ const ChannelPage: React.FC = () => {
   const [channelCommunityPosts, setChannelCommunityPosts] = useState<CommunityPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState('HOME'); 
-  const [isSubscribed, setIsSubscribed] = useState(false); 
+  const [activeTab, setActiveTab] = useState('HOME');
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const tabs = [
     { id: 'HOME', label: 'Home' },
     { id: 'VIDEOS', label: 'Videos' },
-    { id: 'SHORTS', label: 'Shorts'},
-    { id: 'LIVE', label: 'Live'},
+    { id: 'SHORTS', label: 'Shorts' },
+    { id: 'LIVE', label: 'Live' },
     { id: 'PLAYLISTS', label: 'Playlists' },
     { id: 'COMMUNITY', label: 'Community' },
     { id: 'ABOUT', label: 'About' },
@@ -35,30 +38,30 @@ const ChannelPage: React.FC = () => {
   useEffect(() => {
     const fetchChannelData = async () => {
       if (!channelIdOrName) {
-        setError("Channel identifier is missing.");
+        setError('Channel identifier is missing.');
         setLoading(false);
         return;
       }
       setLoading(true);
       setError(null);
       setActiveTab('HOME'); // Reset to home on new channel load
-      setIsSubscribed(Math.random() > 0.5); 
+      setIsSubscribed(Math.random() > 0.5);
 
       try {
         const decodedName = decodeURIComponent(channelIdOrName);
         const fetchedChannel = await getChannelByName(decodedName);
-        
+
         if (fetchedChannel) {
           setChannel(fetchedChannel);
           // Fetch all data concurrently
           const [
-            fetchedVideos, 
-            fetchedPlaylists, 
-            fetchedCommunityPosts
+            fetchedVideos,
+            fetchedPlaylists,
+            fetchedCommunityPosts,
           ] = await Promise.all([
             getVideosByChannelName(fetchedChannel.name),
             getChannelPlaylists(fetchedChannel.name),
-            getChannelCommunityPosts(fetchedChannel.name)
+            getChannelCommunityPosts(fetchedChannel.name),
           ]);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);
@@ -72,8 +75,8 @@ const ChannelPage: React.FC = () => {
           setChannelCommunityPosts([]);
         }
       } catch (err) {
-        console.error("Error fetching channel data:", err);
-        setError("Failed to load channel data. Please try again later.");
+        console.error('Error fetching channel data:', err);
+        setError('Failed to load channel data. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -101,7 +104,7 @@ const ChannelPage: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader 
+      <ChannelHeader
         channel={channel}
         videoCount={videos.length}
         isSubscribed={isSubscribed}
@@ -111,13 +114,13 @@ const ChannelPage: React.FC = () => {
       <div className="px-4 md:px-6 lg:px-8">
         <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
       </div>
-      
+
       <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"> {/* Reduced py for less space */}
-        <ChannelTabContent 
-          activeTab={activeTab} 
+        <ChannelTabContent
+          activeTab={activeTab}
           channel={channel}
-          videos={videos} 
-          playlists={channelPlaylists} 
+          videos={videos}
+          playlists={channelPlaylists}
           communityPosts={channelCommunityPosts}
           onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
         />

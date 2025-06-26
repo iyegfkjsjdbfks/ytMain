@@ -1,4 +1,6 @@
-import React, { useState   } from 'react';
+import type React from 'react';
+import { useState } from 'react';
+
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -6,9 +8,10 @@ import {
   EllipsisHorizontalIcon,
   PhotoIcon,
   VideoCameraIcon,
-  LinkIcon
+  LinkIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface CommunityPost {
@@ -63,7 +66,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   onComment,
   onShare,
   onVote,
-  className = ''
+  className = '',
 }) => {
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
@@ -81,9 +84,9 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toString();
   };
@@ -101,8 +104,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   const renderPostContent = (post: CommunityPost) => {
     const isExpanded = expandedPosts.has(post.id);
     const shouldTruncate = post.content.length > 200;
-    const displayContent = shouldTruncate && !isExpanded 
-      ? post.content.substring(0, 200) + '...' 
+    const displayContent = shouldTruncate && !isExpanded
+      ? `${post.content.substring(0, 200)  }...`
       : post.content;
 
     return (
@@ -170,8 +173,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
             </h4>
             <div className="space-y-2">
               {post.poll.options.map((option) => {
-                const percentage = post.poll!.totalVotes > 0 
-                  ? (option.votes / post.poll!.totalVotes) * 100 
+                const percentage = post.poll!.totalVotes > 0
+                  ? (option.votes / post.poll!.totalVotes) * 100
                   : 0;
                 const isSelected = post.poll!.userVote === option.id;
 
@@ -180,8 +183,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
                     key={option.id}
                     onClick={() => onVote?.(post.id, option.id)}
                     className={`w-full text-left p-3 rounded-lg border transition-colors ${
-                      isSelected 
-                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
+                      isSelected
+                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
                         : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                   >
@@ -316,8 +319,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
               <button
                 onClick={() => onLike(post.id)}
                 className={`flex items-center space-x-2 transition-colors ${
-                  post.isLiked 
-                    ? 'text-red-500' 
+                  post.isLiked
+                    ? 'text-red-500'
                     : 'text-gray-500 dark:text-gray-400 hover:text-red-500'
                 }`}
               >

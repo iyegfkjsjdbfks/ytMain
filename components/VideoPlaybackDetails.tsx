@@ -1,12 +1,15 @@
-import { RefObject } from 'react';
+import type { RefObject } from 'react';
+
+import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatCount } from '../utils/numberUtils';
+
 import AdvancedVideoPlayer from './AdvancedVideoPlayer';
-import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 import VideoActions from './VideoActions';
 import VideoDescription from './VideoDescription';
-import { formatCount } from '../utils/numberUtils';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
-import { Video, Channel } from '../types'; // Assuming types are defined in types.ts
+import YouTubePlayerWrapper from './YouTubePlayerWrapper';
+
+import type { Video, Channel } from '../types'; // Assuming types are defined in types.ts
 
 interface VideoPlaybackDetailsProps {
   video: Video;
@@ -53,7 +56,9 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
     handleToggleDescription,
     handleSummarizeDescription,
   } = props;
-  if (!video) return null; // Should be handled by parent, but good practice
+  if (!video) {
+return null;
+} // Should be handled by parent, but good practice
 
   return (
     <>

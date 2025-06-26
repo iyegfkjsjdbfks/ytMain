@@ -1,12 +1,15 @@
 
-import * as React from 'react';
+import type * as React from 'react';
 import {  useEffect, useState, useRef  } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { UserPlaylist, Video } from '../types';
-import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/mockVideoService';
+
 import { PlayIcon as PlaySolidIcon, QueueListIcon, ArrowsRightLeftIcon, EllipsisVerticalIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
+import { useParams, Link } from 'react-router-dom';
+
 import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton'; // Added import
 import PlaylistEditModal from '../components/PlaylistEditModal';
+import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/mockVideoService';
+
+import type { UserPlaylist, Video } from '../types';
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video[];
@@ -28,7 +31,7 @@ const PlaylistDetailPage: React.FC = () => {
 
   const fetchPlaylistData = async () => {
     if (!playlistId) {
-      setError("Playlist ID is missing.");
+      setError('Playlist ID is missing.');
       setLoading(false);
       return;
     }
@@ -41,20 +44,20 @@ const PlaylistDetailPage: React.FC = () => {
         setEditingPlaylistTitle(fetchedDetails.title);
         setEditingPlaylistDescription(fetchedDetails.description || '');
       } else {
-        setError("Playlist not found.");
+        setError('Playlist not found.');
         setPlaylistDetails(null);
       }
     } catch (err) {
-      console.error("Error fetching playlist details:", err);
-      setError("Failed to load playlist details.");
+      console.error('Error fetching playlist details:', err);
+      setError('Failed to load playlist details.');
     } finally {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchPlaylistData();
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [playlistId]);
 
   // Close video action menu on click outside
@@ -86,8 +89,10 @@ const PlaylistDetailPage: React.FC = () => {
   };
 
   const handleRemoveVideo = async (videoIdToRemove: string) => {
-    if (!playlistId || !playlistDetails) return;
-    
+    if (!playlistId || !playlistDetails) {
+return;
+}
+
     const confirmed = window.confirm(`Are you sure you want to remove this video from "${playlistDetails.title}"?`);
     if (!confirmed) {
         setActiveVideoMenuId(null);
@@ -97,7 +102,9 @@ const PlaylistDetailPage: React.FC = () => {
     try {
       await removeVideoFromPlaylist(playlistId, videoIdToRemove);
       setPlaylistDetails(prevDetails => {
-        if (!prevDetails) return null;
+        if (!prevDetails) {
+return null;
+}
         return {
           ...prevDetails,
           videos: prevDetails.videos.filter(v => v.id !== videoIdToRemove),
@@ -107,8 +114,8 @@ const PlaylistDetailPage: React.FC = () => {
       });
       setActiveVideoMenuId(null); // Close menu
     } catch (err) {
-      console.error("Failed to remove video from playlist:", err);
-      alert("Error removing video. Please try again."); // Or use a more sophisticated notification
+      console.error('Failed to remove video from playlist:', err);
+      alert('Error removing video. Please try again.'); // Or use a more sophisticated notification
     }
   };
 
@@ -122,7 +129,7 @@ const PlaylistDetailPage: React.FC = () => {
 
   const handleSaveChanges = async (title: string, description: string) => {
     if (!playlistId || !title.trim()) {
-      alert("Playlist title cannot be empty.");
+      alert('Playlist title cannot be empty.');
       return;
     }
     try {
@@ -137,8 +144,8 @@ const PlaylistDetailPage: React.FC = () => {
         setIsEditModalOpen(false);
       }
     } catch (err) {
-      console.error("Error updating playlist details:", err);
-      alert("Error saving changes. Please try again.");
+      console.error('Error updating playlist details:', err);
+      alert('Error saving changes. Please try again.');
     }
   };
 
@@ -188,13 +195,13 @@ const PlaylistDetailPage: React.FC = () => {
             <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">{title}</h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">Your playlist</p>
             <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              {videoCount} video{videoCount !== 1 ? 's' : ''} &bull; 
+              {videoCount} video{videoCount !== 1 ? 's' : ''} &bull;
               Last updated {new Date(updatedAt).toLocaleDateString()}
             </p>
             {description && <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 line-clamp-2">{description}</p>}
-            <button 
+            <button
               id="edit-playlist-button"
-              onClick={handleOpenEditModal} 
+              onClick={handleOpenEditModal}
               className="mt-2.5 flex items-center text-xs text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 font-medium"
               title="Edit playlist title and description"
              >
@@ -202,16 +209,16 @@ const PlaylistDetailPage: React.FC = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
-          <button 
+          <button
             onClick={() => {            }}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 dark:bg-neutral-100 dark:hover:bg-neutral-200 text-white dark:text-black font-medium rounded-full text-sm transition-colors"
           >
             <PlaySolidIcon className="w-5 h-5 mr-2" />
             Play All
           </button>
-          <button 
+          <button
             onClick={() => {            }}
             className="flex items-center justify-center px-5 py-2.5 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-100 font-medium rounded-full text-sm transition-colors"
           >
@@ -240,7 +247,7 @@ const PlaylistDetailPage: React.FC = () => {
                 </div>
               </Link>
               <div className="relative ml-2 flex-shrink-0">
-                <button 
+                <button
                   onClick={(e) => handleToggleVideoMenu(video.id, e)}
                   className="p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                   aria-label="More actions for this video"
@@ -249,13 +256,13 @@ const PlaylistDetailPage: React.FC = () => {
                   <EllipsisVerticalIcon className="w-5 h-5" />
                 </button>
                 {activeVideoMenuId === video.id && (
-                  <div 
+                  <div
                     ref={videoMenuRef}
                     className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md shadow-lg z-50 py-1 animate-fade-in-fast"
                     role="menu"
                   >
-                    <button 
-                      onClick={() => handleRemoveVideo(video.id)} 
+                    <button
+                      onClick={() => handleRemoveVideo(video.id)}
                       className="w-full flex items-center px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
                       role="menuitem"
                     >

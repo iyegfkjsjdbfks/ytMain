@@ -1,5 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState  } from 'react';
+
 import { PhotoIcon, PaintBrushIcon, EyeIcon, DocumentTextIcon, LinkIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
@@ -42,18 +43,18 @@ const ChannelCustomizationPage: React.FC = () => {
       website: '',
       twitter: '',
       instagram: '',
-      facebook: ''
+      facebook: '',
     },
     channelLayout: 'default',
     watermark: '',
-    endScreenTemplate: 'default'
+    endScreenTemplate: 'default',
   });
 
   const [stats] = useState<ChannelStats>({
     subscribers: 125000,
     totalViews: 2500000,
     videosCount: 156,
-    joinDate: 'Jan 15, 2020'
+    joinDate: 'Jan 15, 2020',
   });
 
   const [activeTab, setActiveTab] = useState<'branding' | 'layout' | 'info' | 'featured'>('branding');
@@ -68,7 +69,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: string) => {
     setBranding(prev => ({
       ...prev,
-      socialLinks: { ...prev.socialLinks, [platform]: value }
+      socialLinks: { ...prev.socialLinks, [platform]: value },
     }));
     setUnsavedChanges(true);
   };
@@ -77,7 +78,7 @@ const ChannelCustomizationPage: React.FC = () => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
-        channelKeywords: [...prev.channelKeywords, keyword.trim()]
+        channelKeywords: [...prev.channelKeywords, keyword.trim()],
       }));
       setUnsavedChanges(true);
     }
@@ -86,7 +87,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleKeywordRemove = (keyword: string) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter(k => k !== keyword)
+      channelKeywords: prev.channelKeywords.filter(k => k !== keyword),
     }));
     setUnsavedChanges(true);
   };
@@ -105,9 +106,9 @@ const ChannelCustomizationPage: React.FC = () => {
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toString();
   };
@@ -162,7 +163,7 @@ const ChannelCustomizationPage: React.FC = () => {
                 { id: 'branding', label: 'Branding', icon: PaintBrushIcon },
                 { id: 'layout', label: 'Layout', icon: DocumentTextIcon },
                 { id: 'info', label: 'Basic Info', icon: DocumentTextIcon },
-                { id: 'featured', label: 'Featured Content', icon: LinkIcon }
+                { id: 'featured', label: 'Featured Content', icon: LinkIcon },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -210,7 +211,7 @@ const ChannelCustomizationPage: React.FC = () => {
               {activeTab === 'branding' && (
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Branding</h2>
-                  
+
                   {/* Channel Art */}
                   <div className="mb-8">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -222,7 +223,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         alt="Channel Art"
                         className="w-full h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
                       />
-                      <button 
+                      <button
                         onClick={() => {
                           // Open file picker for channel art
                           const input = document.createElement('input');
@@ -259,7 +260,7 @@ const ChannelCustomizationPage: React.FC = () => {
                           alt="Profile"
                           className="w-24 h-24 rounded-full border border-gray-200 dark:border-gray-700"
                         />
-                        <button 
+                        <button
                           onClick={() => {
                             // Open file picker for profile picture
                             const input = document.createElement('input');
@@ -300,7 +301,7 @@ const ChannelCustomizationPage: React.FC = () => {
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         Upload a watermark to appear on your videos
                       </p>
-                      <button 
+                      <button
                         onClick={() => {
                           // Open file picker for watermark
                           const input = document.createElement('input');
@@ -327,7 +328,7 @@ const ChannelCustomizationPage: React.FC = () => {
               {activeTab === 'layout' && (
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Channel Layout</h2>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
@@ -337,7 +338,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         {[
                           { id: 'default', name: 'Default', description: 'Standard YouTube layout' },
                           { id: 'compact', name: 'Compact', description: 'More videos visible' },
-                          { id: 'showcase', name: 'Showcase', description: 'Highlight featured content' }
+                          { id: 'showcase', name: 'Showcase', description: 'Highlight featured content' },
                         ].map((layout) => (
                           <button
                             key={layout.id}
@@ -378,7 +379,7 @@ const ChannelCustomizationPage: React.FC = () => {
               {activeTab === 'info' && (
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Basic Information</h2>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -468,7 +469,7 @@ const ChannelCustomizationPage: React.FC = () => {
               {activeTab === 'featured' && (
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Featured Content</h2>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -495,7 +496,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                           Add channels you want to feature on your channel page
                         </p>
-                        <button 
+                        <button
                           onClick={() => {                          }}
                           className="text-red-600 hover:text-red-700 text-sm font-medium"
                         >

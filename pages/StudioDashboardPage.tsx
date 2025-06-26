@@ -1,6 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
-import { Link } from 'react-router-dom';
+
 import {
   ChartBarIcon,
   VideoCameraIcon,
@@ -11,10 +11,12 @@ import {
   EyeIcon,
   ClockIcon,
   HeartIcon,
-  ShareIcon
+  ShareIcon,
 } from '@heroicons/react/24/outline';
-import { formatNumber, formatDuration } from '../utils/numberUtils';
+import { Link } from 'react-router-dom';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatNumber, formatDuration } from '../utils/numberUtils';
 
 interface DashboardStats {
   totalViews: number;
@@ -56,9 +58,9 @@ const StudioDashboardPage: React.FC = () => {
     avgWatchTime: 0,
     totalComments: 0,
     totalLikes: 0,
-    totalShares: 0
+    totalShares: 0,
   });
-  
+
   const [recentVideos, setRecentVideos] = useState<RecentVideo[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -66,7 +68,7 @@ const StudioDashboardPage: React.FC = () => {
     // Simulate API call to fetch dashboard data
     const fetchDashboardData = async () => {
       setLoading(true);
-      
+
       // Mock data generation
       const mockStats: DashboardStats = {
         totalViews: Math.floor(Math.random() * 10000000) + 1000000,
@@ -76,7 +78,7 @@ const StudioDashboardPage: React.FC = () => {
         avgWatchTime: Math.floor(Math.random() * 600) + 120,
         totalComments: Math.floor(Math.random() * 100000) + 10000,
         totalLikes: Math.floor(Math.random() * 500000) + 50000,
-        totalShares: Math.floor(Math.random() * 50000) + 5000
+        totalShares: Math.floor(Math.random() * 50000) + 5000,
       };
 
       const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => {
@@ -85,7 +87,7 @@ const StudioDashboardPage: React.FC = () => {
           'Advanced TypeScript Tips and Tricks',
           'Web Development Best Practices 2024',
           'Creating Beautiful UI Components',
-          'JavaScript Performance Optimization'
+          'JavaScript Performance Optimization',
         ];
         return {
         id: `video-${i + 1}`,
@@ -96,7 +98,7 @@ const StudioDashboardPage: React.FC = () => {
         comments: Math.floor(Math.random() * 500) + 10,
         uploadDate: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
         duration: Math.floor(Math.random() * 1800) + 300,
-        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any
+        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any,
         };
       });
 
@@ -116,43 +118,43 @@ const StudioDashboardPage: React.FC = () => {
       description: 'Share your content with the world',
       icon: <VideoCameraIcon className="w-6 h-6" />,
       link: '/upload',
-      color: 'bg-red-500 hover:bg-red-600'
+      color: 'bg-red-500 hover:bg-red-600',
     },
     {
       title: 'Analytics',
       description: 'Track your channel performance',
       icon: <ChartBarIcon className="w-6 h-6" />,
       link: '/analytics',
-      color: 'bg-blue-500 hover:bg-blue-600'
+      color: 'bg-blue-500 hover:bg-blue-600',
     },
     {
       title: 'Content Manager',
       description: 'Manage your videos and playlists',
       icon: <DocumentTextIcon className="w-6 h-6" />,
-      link: '/content-manager',
-      color: 'bg-green-500 hover:bg-green-600'
+      link: '/studio/content',
+      color: 'bg-green-500 hover:bg-green-600',
     },
     {
       title: 'Monetization',
       description: 'Track earnings and revenue',
       icon: <CurrencyDollarIcon className="w-6 h-6" />,
       link: '/monetization',
-      color: 'bg-yellow-500 hover:bg-yellow-600'
+      color: 'bg-yellow-500 hover:bg-yellow-600',
     },
     {
       title: 'Comments',
       description: 'Moderate and respond to comments',
       icon: <ChatBubbleLeftRightIcon className="w-6 h-6" />,
       link: '/comment-moderation',
-      color: 'bg-purple-500 hover:bg-purple-600'
+      color: 'bg-purple-500 hover:bg-purple-600',
     },
     {
       title: 'Go Live',
       description: 'Start a live stream',
       icon: <UserGroupIcon className="w-6 h-6" />,
       link: '/go-live',
-      color: 'bg-pink-500 hover:bg-pink-600'
-    }
+      color: 'bg-pink-500 hover:bg-pink-600',
+    },
   ];
 
   const getStatusColor = (status: string) => {
@@ -170,15 +172,15 @@ const StudioDashboardPage: React.FC = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-neutral-700 rounded w-1/4 mb-8"></div>
+            <div className="h-8 bg-gray-200 dark:bg-neutral-700 rounded w-1/4 mb-8" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="h-24 bg-gray-200 dark:bg-neutral-700 rounded-lg"></div>
+                <div key={i} className="h-24 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
               ))}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg"></div>
-              <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg"></div>
+              <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
+              <div className="h-96 bg-gray-200 dark:bg-neutral-700 rounded-lg" />
             </div>
           </div>
         </div>
@@ -330,7 +332,7 @@ const StudioDashboardPage: React.FC = () => {
                 Recent Videos
               </h2>
               <Link
-                to="/content-manager"
+                to="/studio/content"
                 className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
               >
                 View All

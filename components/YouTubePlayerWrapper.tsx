@@ -1,12 +1,17 @@
-import { forwardRef, ReactNode, Ref } from 'react';
+import type { ReactNode, Ref } from 'react';
+import { forwardRef } from 'react';
+
 import { getYouTubePlayerType } from '../services/settingsService';
-import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
-import IFrameAPIYouTubePlayer, { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
+
 import AdvancedVideoPlayer from './AdvancedVideoPlayer';
-import YouTubePlayer from './YouTubePlayer';
+import IFrameAPIYouTubePlayer from './IFrameAPIYouTubePlayer';
 import OptimizedVideoPlayer from './OptimizedVideoPlayer';
-import { YouTubePlayerMethods } from './OptimizedYouTubePlayer';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
+import YouTubePlayer from './YouTubePlayer';
+
+import type { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
+import type { YouTubePlayerMethods } from './OptimizedYouTubePlayer';
+import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubePlayerWrapperProps {
   videoId: string;
@@ -36,14 +41,14 @@ export type YouTubePlayerWrapperMethods = YouTubePlayerMethods & IFrameAPIYouTub
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
   props,
-  ref
+  ref,
 ) => {
   const playerType = getYouTubePlayerType();
   console.log('YouTubePlayerWrapper rendering with playerType:', playerType);
 
   // Convert videoId to YouTube URL for non-YouTube specific players
   const getYouTubeUrl = (videoId: string) => `https://www.youtube.com/watch?v=${videoId}`;
-  
+
   // Create mock video object for YouTubePlayer component
   const createMockVideo = (videoId: string): YouTubeSearchResult => ({
     id: videoId,
@@ -53,7 +58,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
     channelName: '',
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
-    isYouTube: true as const
+    isYouTube: true as const,
   });
 
   switch (playerType) {

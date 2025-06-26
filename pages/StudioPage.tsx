@@ -1,6 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
-import { Link } from 'react-router-dom';
+
 import {
   VideoCameraIcon,
   ChartBarIcon,
@@ -13,11 +13,13 @@ import {
   ChatBubbleLeftIcon,
   ArrowUpIcon,
 
-  PlusIcon
+  PlusIcon,
 } from '@heroicons/react/24/outline';
 import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
-import { UnifiedButton } from '../components/ui/UnifiedButton';
+import { Link } from 'react-router-dom';
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
+import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface StudioVideo {
   id: string;
@@ -52,10 +54,10 @@ const StudioPage: React.FC = () => {
     // Mock data loading
     const loadStudioData = async () => {
       setLoading(true);
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Mock videos data
       const mockVideos: StudioVideo[] = [
         {
@@ -68,7 +70,7 @@ const StudioPage: React.FC = () => {
           comments: 156,
           uploadDate: '2024-01-15',
           duration: '12:34',
-          visibility: 'public'
+          visibility: 'public',
         },
         {
           id: '2',
@@ -80,7 +82,7 @@ const StudioPage: React.FC = () => {
           comments: 89,
           uploadDate: '2024-01-10',
           duration: '8:45',
-          visibility: 'public'
+          visibility: 'public',
         },
         {
           id: '3',
@@ -92,8 +94,8 @@ const StudioPage: React.FC = () => {
           comments: 0,
           uploadDate: '2024-01-20',
           duration: '15:22',
-          visibility: 'private'
-        }
+          visibility: 'private',
+        },
       ];
 
       // Mock analytics data
@@ -104,7 +106,7 @@ const StudioPage: React.FC = () => {
         totalRevenue: 1250.50,
         viewsChange: 12.5,
         subscribersChange: 8.3,
-        recentViews: [1200, 1500, 1800, 2100, 1900, 2300, 2500]
+        recentViews: [1200, 1500, 1800, 2100, 1900, 2300, 2500],
       };
 
       setVideos(mockVideos);
@@ -116,8 +118,12 @@ const StudioPage: React.FC = () => {
   }, []);
 
   const formatNumber = (num: number): string => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
@@ -137,29 +143,29 @@ const StudioPage: React.FC = () => {
       description: 'Upload and publish new content',
       icon: <VideoCameraIcon className="w-6 h-6" />,
       link: '/studio/upload',
-      color: 'bg-red-500 hover:bg-red-600'
+      color: 'bg-red-500 hover:bg-red-600',
     },
     {
       title: 'Go Live',
       description: 'Start a live stream',
       icon: <PlayIcon className="w-6 h-6" />,
       link: '/studio/live',
-      color: 'bg-blue-500 hover:bg-blue-600'
+      color: 'bg-blue-500 hover:bg-blue-600',
     },
     {
       title: 'Create Short',
       description: 'Upload a short video',
       icon: <VideoCameraIconSolid className="w-6 h-6" />,
       link: '/studio/shorts',
-      color: 'bg-purple-500 hover:bg-purple-600'
+      color: 'bg-purple-500 hover:bg-purple-600',
     },
     {
       title: 'Analytics',
       description: 'View detailed analytics',
       icon: <ChartBarIcon className="w-6 h-6" />,
       link: '/studio/analytics',
-      color: 'bg-green-500 hover:bg-green-600'
-    }
+      color: 'bg-green-500 hover:bg-green-600',
+    },
   ];
 
   if (loading) {
@@ -167,13 +173,13 @@ const StudioPage: React.FC = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+                <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
               ))}
             </div>
-            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg" />
           </div>
         </div>
       </div>
@@ -191,7 +197,7 @@ const StudioPage: React.FC = () => {
               YouTube Studio
             </h1>
           </div>
-          
+
           <div className="flex items-center space-x-3">
             <UnifiedButton variant="outline" size="sm">
               <BellIcon className="w-4 h-4 mr-2" />
@@ -346,7 +352,7 @@ const StudioPage: React.FC = () => {
                     Upload Video
                   </UnifiedButton>
                 </div>
-                
+
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>

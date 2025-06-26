@@ -1,5 +1,8 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 interface AnalyticsData {
@@ -69,7 +72,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       const mockData = generateMockAnalyticsData(videoId);
       setAnalyticsData(mockData);
     } catch (error) {
@@ -87,7 +90,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     const shares = Math.floor(baseViews * (0.005 + Math.random() * 0.02));
     const watchTime = Math.floor(baseViews * (120 + Math.random() * 300)); // seconds
     const averageViewDuration = 120 + Math.random() * 180;
-    
+
     return {
       videoId,
       title: `Video Analytics for ${videoId}`,
@@ -110,12 +113,12 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           '35-44': Math.floor(Math.random() * 20) + 15,
           '45-54': Math.floor(Math.random() * 15) + 10,
           '55-64': Math.floor(Math.random() * 10) + 5,
-          '65+': Math.floor(Math.random() * 5)
+          '65+': Math.floor(Math.random() * 5),
         },
         genders: {
           'Male': 45 + Math.random() * 20,
           'Female': 35 + Math.random() * 20,
-          'Other': Math.random() * 5
+          'Other': Math.random() * 5,
         },
         countries: {
           'United States': 25 + Math.random() * 20,
@@ -124,35 +127,35 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           'Canada': 5 + Math.random() * 8,
           'Australia': 3 + Math.random() * 5,
           'Germany': 3 + Math.random() * 5,
-          'Other': 20 + Math.random() * 15
-        }
+          'Other': 20 + Math.random() * 15,
+        },
       },
       devices: {
         mobile: 60 + Math.random() * 20,
         desktop: 25 + Math.random() * 15,
         tablet: 8 + Math.random() * 7,
-        tv: 2 + Math.random() * 5
+        tv: 2 + Math.random() * 5,
       },
       trafficSources: {
         search: 30 + Math.random() * 20,
         suggested: 25 + Math.random() * 15,
         external: 15 + Math.random() * 10,
         direct: 10 + Math.random() * 10,
-        playlist: 5 + Math.random() * 10
+        playlist: 5 + Math.random() * 10,
       },
       revenueData: {
         estimatedRevenue: Math.floor(baseViews * (0.001 + Math.random() * 0.005)),
         rpm: 1 + Math.random() * 4,
         cpm: 2 + Math.random() * 8,
-        adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2))
+        adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)),
       },
       engagement: {
         likeRate: (likes / baseViews) * 100,
         dislikeRate: (dislikes / baseViews) * 100,
         commentRate: (comments / baseViews) * 100,
         shareRate: (shares / baseViews) * 100,
-        subscribeRate: Math.random() * 2
-      }
+        subscribeRate: Math.random() * 2,
+      },
     };
   };
 
@@ -167,8 +170,12 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
   };
 
   const formatNumber = (num: number): string => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
@@ -176,7 +183,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
-    
+
     if (hours > 0) {
       return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
@@ -187,7 +194,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(amount);
   };
 
@@ -195,13 +202,13 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return (
       <div className={`p-6 ${className}`}>
         <div className="animate-pulse space-y-6">
-          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3"></div>
+          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/3" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-24 bg-neutral-200 dark:bg-neutral-700 rounded"></div>
+              <div key={i} className="h-24 bg-neutral-200 dark:bg-neutral-700 rounded" />
             ))}
           </div>
-          <div className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded"></div>
+          <div className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded" />
         </div>
       </div>
     );
@@ -230,7 +237,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
             <EyeIcon className="w-8 h-8 text-blue-500" />
           </div>
         </div>
-        
+
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
             <div>
@@ -242,7 +249,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
             <ClockIcon className="w-8 h-8 text-green-500" />
           </div>
         </div>
-        
+
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
             <div>
@@ -254,7 +261,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
             <HandThumbUpIcon className="w-8 h-8 text-red-500" />
           </div>
         </div>
-        
+
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
             <div>
@@ -278,7 +285,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
               className="bg-blue-500 rounded-t flex-1 transition-all hover:bg-blue-600"
               style={{ height: `${(value / 100) * 100}%` }}
               title={`${(index * 5)}% - ${value.toFixed(1)}% retention`}
-            ></div>
+             />
           ))}
         </div>
         <div className="flex justify-between text-sm text-neutral-600 dark:text-neutral-400 mt-2">
@@ -302,7 +309,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
                   <div
                     className="bg-blue-500 h-2 rounded-full"
                     style={{ width: `${percentage}%` }}
-                  ></div>
+                   />
                 </div>
                 <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-12">
                   {percentage.toFixed(1)}%
@@ -330,7 +337,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
                     <div
                       className="bg-green-500 h-2 rounded-full"
                       style={{ width: `${percentage}%` }}
-                    ></div>
+                     />
                   </div>
                   <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
                     {percentage}%
@@ -352,7 +359,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
                     <div
                       className="bg-purple-500 h-2 rounded-full"
                       style={{ width: `${percentage}%` }}
-                    ></div>
+                     />
                   </div>
                   <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100 w-10">
                     {percentage.toFixed(1)}%
@@ -449,7 +456,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
             <HandThumbUpIcon className="w-8 h-8 text-green-500" />
           </div>
         </div>
-        
+
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
             <div>
@@ -464,7 +471,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
             <ChatBubbleLeftIcon className="w-8 h-8 text-blue-500" />
           </div>
         </div>
-        
+
         <div className="bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center justify-between">
             <div>
@@ -494,7 +501,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
               Published {formatDistanceToNow(new Date(analyticsData.publishedAt))} ago
             </p>
           </div>
-          
+
           <div className="flex space-x-2">
             {(['7d', '28d', '90d', '365d'] as const).map((range) => (
               <button

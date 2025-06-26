@@ -28,7 +28,7 @@ const defaultSettings: AppSettings = {
   youtubeSearchProvider: 'hybrid',
   youtubePlayerType: 'optimized',
   localVideoPlayerType: 'advanced-video',
-  defaultVideoPlayerCategory: 'youtube'
+  defaultVideoPlayerCategory: 'youtube',
 };
 
 // Video Player Configurations
@@ -42,7 +42,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Lazy Loading', 'Custom Controls', 'Performance Monitoring', 'Intersection Observer'],
     useCases: ['General YouTube video playback', 'Video grids', 'Performance-critical apps'],
     performance: 'high',
-    complexity: 'moderate'
+    complexity: 'moderate',
   },
   'iframe-api': {
     type: 'iframe-api',
@@ -52,7 +52,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Full YouTube API', 'Quality Control', 'Advanced Events', 'Playback Control'],
     useCases: ['Professional video apps', 'Advanced playback control', 'Custom player interfaces'],
     performance: 'medium',
-    complexity: 'advanced'
+    complexity: 'advanced',
   },
   'advanced': {
     type: 'advanced',
@@ -62,7 +62,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Advanced Controls', 'Quality Selection', 'Subtitle Support', 'Chapter Navigation'],
     useCases: ['Professional applications', 'Educational content', 'Training platforms'],
     performance: 'medium',
-    complexity: 'advanced'
+    complexity: 'advanced',
   },
   'youtube-player': {
     type: 'youtube-player',
@@ -72,7 +72,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Basic Controls', 'Lightweight', 'Simple Integration', 'Fast Loading'],
     useCases: ['Simple video display', 'Embedded content', 'Minimal resource usage'],
     performance: 'high',
-    complexity: 'simple'
+    complexity: 'simple',
   },
   'optimized-video': {
     type: 'optimized-video',
@@ -82,7 +82,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['High Performance', 'Minimal Resources', 'Fast Rendering', 'Optimized Loading'],
     useCases: ['Performance-critical applications', 'Mobile devices', 'Low-bandwidth scenarios'],
     performance: 'high',
-    complexity: 'simple'
+    complexity: 'simple',
   },
   // Local Video Players
   'advanced-video': {
@@ -93,7 +93,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Quality Selection', 'Subtitle Support', 'Chapter Navigation', 'Fullscreen', 'Custom Controls'],
     useCases: ['Local video files', 'Educational content', 'Professional video playback', 'Training materials'],
     performance: 'medium',
-    complexity: 'advanced'
+    complexity: 'advanced',
   },
   'basic-video': {
     type: 'basic-video',
@@ -103,7 +103,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Basic Controls', 'HTML5 Video', 'Lightweight', 'Cross-browser Support'],
     useCases: ['Simple local video playback', 'Basic media display', 'Lightweight applications'],
     performance: 'high',
-    complexity: 'simple'
+    complexity: 'simple',
   },
   'refactored-video': {
     type: 'refactored-video',
@@ -113,8 +113,8 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     features: ['Custom Hooks', 'Modern React Patterns', 'State Management', 'Reusable Components'],
     useCases: ['Modern React applications', 'Component reusability', 'Custom video experiences'],
     performance: 'high',
-    complexity: 'moderate'
-  }
+    complexity: 'moderate',
+  },
 };
 
 export const getSettings = (): AppSettings => {

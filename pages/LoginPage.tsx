@@ -1,22 +1,25 @@
-import React, { useState   } from 'react';
+import type React from 'react';
+import { useState   } from 'react';
+
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import YouTubeLogo from '../components/icons/YouTubeLogo';
+
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
+import YouTubeLogo from '../components/icons/YouTubeLogo';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Get the intended destination or default to home
-  const from = (location.state as any)?.from?.pathname || '/';
+  const from = (location.state)?.from?.pathname || '/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const LoginPage: React.FC = () => {
   const handleDemoLogin = async () => {
     setError('');
     setIsLoading(true);
-    
+
     try {
       const success = await login('demo@youtube.com', 'password123');
       if (success) {

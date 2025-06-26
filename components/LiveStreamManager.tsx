@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef   } from 'react';
+
 import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 
@@ -44,7 +46,7 @@ interface LiveStreamManagerProps {
 const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   onStreamStart,
   onStreamEnd,
-  className = ''
+  className = '',
 }) => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -56,7 +58,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     category: 'Gaming',
     privacy: 'public',
     enableChat: true,
-    enableDonations: true
+    enableDonations: true,
   });
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
@@ -66,13 +68,13 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     messages: 0,
     duration: 0,
     peakViewers: 0,
-    totalDonations: 0
+    totalDonations: 0,
   });
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [showChat, setShowChat] = useState(true);
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const streamStartTime = useRef<number>(0);
@@ -84,8 +86,12 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
       if (stream) {
         stream.getTracks().forEach(track => track.stop());
       }
-      if (statsInterval.current) clearInterval(statsInterval.current);
-      if (chatInterval.current) clearInterval(chatInterval.current);
+      if (statsInterval.current) {
+clearInterval(statsInterval.current);
+}
+      if (chatInterval.current) {
+clearInterval(chatInterval.current);
+}
     };
   }, [stream]);
 
@@ -102,15 +108,15 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
         video: {
           width: { ideal: 1920 },
           height: { ideal: 1080 },
-          frameRate: { ideal: 30 }
+          frameRate: { ideal: 30 },
         },
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
-          autoGainControl: true
-        }
+          autoGainControl: true,
+        },
       });
-      
+
       setStream(mediaStream);
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
@@ -128,39 +134,39 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
       await setupStream();
       return;
     }
-    
+
     if (!settings.title.trim()) {
       alert('Please enter a stream title');
       return;
     }
-    
+
     setIsStreaming(true);
     streamStartTime.current = Date.now();
-    
+
     // Start stats tracking
     statsInterval.current = setInterval(() => {
       setStats(prev => {
         const newViewers = Math.floor(Math.random() * 50) + prev.viewers + (Math.random() > 0.7 ? 1 : -1);
         const viewers = Math.max(0, newViewers);
         const duration = Math.floor((Date.now() - streamStartTime.current) / 1000);
-        
+
         return {
           ...prev,
           viewers,
           duration,
           peakViewers: Math.max(prev.peakViewers, viewers),
-          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0)
+          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0),
         };
       });
     }, 2000);
-    
+
     // Start chat simulation
     chatInterval.current = setInterval(() => {
       if (Math.random() > 0.7) {
         generateRandomChatMessage();
       }
     }, 3000);
-    
+
     onStreamStart?.(settings);
   };
 
@@ -176,22 +182,22 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   const stopStream = () => {
     setIsStreaming(false);
     setIsPaused(false);
-    
+
     if (stream) {
       stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
-    
+
     if (statsInterval.current) {
       clearInterval(statsInterval.current);
       statsInterval.current = null;
     }
-    
+
     if (chatInterval.current) {
       clearInterval(chatInterval.current);
       chatInterval.current = null;
     }
-    
+
     onStreamEnd?.(stats);
   };
 
@@ -225,7 +231,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
       'This is so cool!',
       'Thanks for streaming!',
       'How long have you been doing this?',
-      'Your setup is incredible!'
+      'Your setup is incredible!',
     ];
 
     const username = usernames[Math.floor(Math.random() * usernames.length)] || 'Anonymous';
@@ -234,7 +240,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
 
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
-      username: username,
+      username,
       message: isDonation ? `${message} 💰` : message,
       timestamp: new Date().toISOString(),
       isModerator: Math.random() > 0.9,
@@ -242,31 +248,33 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
       ...(isDonation && {
         donation: {
           amount: Math.floor(Math.random() * 50) + 5,
-          currency: 'USD'
-        }
-      })
+          currency: 'USD',
+        },
+      }),
     };
-    
+
     setChatMessages(prev => [...prev.slice(-49), newMessage]);
     setStats(prev => ({
       ...prev,
       messages: prev.messages + 1,
-      totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0)
+      totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0),
     }));
   };
 
   const sendChatMessage = () => {
-    if (!newMessage.trim()) return;
-    
+    if (!newMessage.trim()) {
+return;
+}
+
     const message: ChatMessage = {
       id: Date.now().toString(),
       username: 'You',
       message: newMessage,
       timestamp: new Date().toISOString(),
       isModerator: false,
-      isOwner: true
+      isOwner: true,
     };
-    
+
     setChatMessages(prev => [...prev.slice(-49), message]);
     setStats(prev => ({ ...prev, messages: prev.messages + 1 }));
     setNewMessage('');
@@ -276,7 +284,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    
+
     if (hours > 0) {
       return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
@@ -310,12 +318,12 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                   </div>
                 </div>
               )}
-              
+
               {/* Stream Status Overlay */}
               {isStreaming && (
                 <div className="absolute top-4 left-4 flex items-center space-x-4">
                   <div className="flex items-center space-x-2 bg-red-600 text-white px-3 py-1 rounded-full">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                     <span className="text-sm font-medium">LIVE</span>
                   </div>
                   <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
@@ -323,7 +331,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                   </div>
                 </div>
               )}
-              
+
               {/* Stream Stats Overlay */}
               {isStreaming && (
                 <div className="absolute top-4 right-4 space-y-2">
@@ -338,7 +346,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                 </div>
               )}
             </div>
-            
+
             {/* Stream Controls */}
             <div className="flex items-center justify-between bg-white dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-center space-x-3">
@@ -369,7 +377,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                     </button>
                   </div>
                 )}
-                
+
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={toggleAudio}
@@ -386,7 +394,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                       <MicrophoneIcon className="w-5 h-5" />
                     )}
                   </button>
-                  
+
                   <button
                     onClick={toggleVideo}
                     className={`p-2 rounded-lg transition-colors ${
@@ -404,7 +412,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                   </button>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setShowChat(!showChat)}
@@ -413,7 +421,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                   <ChatBubbleLeftIcon className="w-5 h-5" />
                   <span>Chat</span>
                 </button>
-                
+
                 <button
                   onClick={() => setShowSettings(!showSettings)}
                   className="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 px-3 py-2 rounded-lg transition-colors"
@@ -423,12 +431,12 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                 </button>
               </div>
             </div>
-            
+
             {/* Stream Settings */}
             {showSettings && (
               <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 space-y-4">
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Stream Settings</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
@@ -442,7 +450,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                       placeholder="Enter stream title"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                       Category
@@ -457,7 +465,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                       ))}
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                       Privacy
@@ -472,7 +480,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                       <option value="private">Private</option>
                     </select>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4">
                     <label className="flex items-center space-x-2">
                       <input
@@ -483,7 +491,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Chat</span>
                     </label>
-                    
+
                     <label className="flex items-center space-x-2">
                       <input
                         type="checkbox"
@@ -495,7 +503,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                     </label>
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     Description
@@ -511,7 +519,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
               </div>
             )}
           </div>
-          
+
           {/* Chat and Stats Sidebar */}
           {showChat && (
             <div className="space-y-4">
@@ -545,13 +553,13 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                   </div>
                 </div>
               )}
-              
+
               {/* Live Chat */}
               <div className="bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 flex flex-col h-96">
                 <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
                   <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Live Chat</h3>
                 </div>
-                
+
                 <div
                   ref={chatContainerRef}
                   className="flex-1 overflow-y-auto p-4 space-y-2"
@@ -590,7 +598,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
                     ))
                   )}
                 </div>
-                
+
                 <div className="p-4 border-t border-neutral-200 dark:border-neutral-700">
                   <div className="flex space-x-2">
                     <input

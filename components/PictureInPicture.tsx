@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import {
   XMarkIcon,
   PlayIcon,
@@ -6,7 +8,7 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   ArrowsPointingOutIcon,
-  ArrowTopRightOnSquareIcon
+  ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +32,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   videoUrl,
   isVisible,
   onClose,
-  className = ''
+  className = '',
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -50,14 +52,14 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
       if (isDragging && containerRef.current) {
         const newX = e.clientX - dragOffset.x;
         const newY = e.clientY - dragOffset.y;
-        
+
         // Keep within viewport bounds
         const maxX = window.innerWidth - containerRef.current.offsetWidth;
         const maxY = window.innerHeight - containerRef.current.offsetHeight;
-        
+
         setPosition({
           x: Math.max(0, Math.min(newX, maxX)),
-          y: Math.max(0, Math.min(newY, maxY))
+          y: Math.max(0, Math.min(newY, maxY)),
         });
       }
     };
@@ -79,7 +81,9 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const updateTime = () => setCurrentTime(video.currentTime);
     const updateDuration = () => setDuration(video.duration);
@@ -98,7 +102,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
       const rect = containerRef.current.getBoundingClientRect();
       setDragOffset({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
       });
       setIsDragging(true);
     }
@@ -123,7 +127,6 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   };
 
 
-
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     if (videoRef.current && duration > 0) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -145,7 +148,9 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
     onClose();
   };
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+return null;
+}
 
   return (
     <div
@@ -156,7 +161,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        cursor: isDragging ? 'grabbing' : 'grab'
+        cursor: isDragging ? 'grabbing' : 'grab',
       }}
       onMouseDown={handleMouseDown}
     >
@@ -210,7 +215,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
                   >
                     <XMarkIcon className="w-3 h-3" />
                   </button>
-                  
+
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -282,7 +287,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
                         <SpeakerWaveIcon className="w-4 h-4" />
                       )}
                     </button>
-                    
+
                     {duration > 0 && (
                       <span>
                         {formatTime(currentTime)} / {formatTime(duration)}

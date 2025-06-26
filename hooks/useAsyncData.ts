@@ -21,15 +21,15 @@ interface UseAsyncDataReturn<T> {
  */
 export function useAsyncData<T>(
   asyncFunction: () => Promise<T>,
-  options: UseAsyncDataOptions<T> = {}
+  options: UseAsyncDataOptions<T> = {},
 ): UseAsyncDataReturn<T> {
   const { initialData, dependencies = [] } = options;
-  
+
   const [data, setData] = useState<T>(initialData as T);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const asyncFunctionRef = useRef(asyncFunction);
-  
+
   // Update ref when asyncFunction changes
   useEffect(() => {
     asyncFunctionRef.current = asyncFunction;
@@ -38,7 +38,7 @@ export function useAsyncData<T>(
   const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const result = await asyncFunctionRef.current();
       // Added empty response handling
@@ -66,6 +66,6 @@ export function useAsyncData<T>(
     loading,
     error,
     refetch,
-    setData
+    setData,
   };
 }

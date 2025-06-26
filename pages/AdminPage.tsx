@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  getSettings, 
-  saveSettings, 
-  YouTubeSearchProvider,
-  YouTubePlayerType,
-  LocalVideoPlayerType,
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
-  VideoPlayerConfig,
+import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+
+import {
+  getSettings,
+  saveSettings,
   VIDEO_PLAYER_CONFIGS,
   getVideoPlayersByCategory,
   getAllVideoPlayers,
@@ -14,9 +13,16 @@ import {
   setDefaultVideoPlayerCategory,
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
-  isHybridModeAvailable
+  isHybridModeAvailable,
 } from '../services/settingsService';
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+
+import type {
+  YouTubeSearchProvider,
+  YouTubePlayerType,
+  LocalVideoPlayerType,
+
+  VideoPlayerConfig } from '../services/settingsService';
+
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');
@@ -39,7 +45,7 @@ const AdminPage: React.FC = () => {
   const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
     setIsSaving(true);
     setSaveMessage('');
-    
+
     try {
       const settings = getSettings();
       settings.youtubeSearchProvider = newProvider;
@@ -59,7 +65,7 @@ const AdminPage: React.FC = () => {
   const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType) => {
     setIsSaving(true);
     setSaveMessage('');
-    
+
     try {
       const settings = getSettings();
       settings.youtubePlayerType = newPlayerType;
@@ -79,7 +85,7 @@ const AdminPage: React.FC = () => {
   const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType) => {
     setIsSaving(true);
     setSaveMessage('');
-    
+
     try {
       setLocalVideoPlayerType(newPlayerType);
       setLocalPlayerType(newPlayerType);
@@ -97,7 +103,7 @@ const AdminPage: React.FC = () => {
   const handleDefaultCategoryChange = async (newCategory: 'youtube' | 'local') => {
     setIsSaving(true);
     setSaveMessage('');
-    
+
     try {
       setDefaultVideoPlayerCategory(newCategory);
       setDefaultCategory(newCategory);
@@ -136,16 +142,16 @@ const AdminPage: React.FC = () => {
     };
 
     const getCategoryIcon = (category: string) => {
-      return category === 'youtube' ? 
-        <PlayIcon className="h-5 w-5 text-red-500" /> : 
+      return category === 'youtube' ?
+        <PlayIcon className="h-5 w-5 text-red-500" /> :
         <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
     };
 
     return (
-      <div 
+      <div
         className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
-          isSelected 
-            ? 'border-blue-500 bg-blue-50 shadow-md' 
+          isSelected
+            ? 'border-blue-500 bg-blue-50 shadow-md'
             : 'border-gray-200 bg-white hover:border-gray-300'
         }`}
         onClick={onSelect}
@@ -164,9 +170,9 @@ const AdminPage: React.FC = () => {
             </span>
           </div>
         </div>
-        
+
         <p className="text-sm text-gray-600 mb-3">{config.description}</p>
-        
+
         <div className="mb-3">
           <h4 className="text-sm font-medium text-gray-700 mb-1">Features:</h4>
           <div className="flex flex-wrap gap-1">
@@ -177,7 +183,7 @@ const AdminPage: React.FC = () => {
             ))}
           </div>
         </div>
-        
+
         <div>
           <h4 className="text-sm font-medium text-gray-700 mb-1">Best for:</h4>
           <ul className="text-xs text-gray-600 list-disc list-inside">
@@ -186,11 +192,11 @@ const AdminPage: React.FC = () => {
             ))}
           </ul>
         </div>
-        
+
         {isSelected && (
           <div className="absolute top-2 right-2">
             <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <div className="w-2 h-2 bg-white rounded-full" />
             </div>
           </div>
         )}
@@ -216,7 +222,7 @@ const AdminPage: React.FC = () => {
                 { id: 'overview', name: 'Overview', icon: CogIcon },
                 { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
                 { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
-                { id: 'search', name: 'Search Settings', icon: SparklesIcon }
+                { id: 'search', name: 'Search Settings', icon: SparklesIcon },
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -241,8 +247,8 @@ const AdminPage: React.FC = () => {
             {/* Save Message */}
             {saveMessage && (
               <div className={`mb-6 p-4 rounded-md ${
-                saveMessage.includes('Error') 
-                  ? 'bg-red-50 border border-red-200 text-red-700' 
+                saveMessage.includes('Error')
+                  ? 'bg-red-50 border border-red-200 text-red-700'
                   : 'bg-green-50 border border-green-200 text-green-700'
               }`}>
                 {saveMessage}
@@ -362,14 +368,14 @@ const AdminPage: React.FC = () => {
                     Choose which YouTube player implementation to use for YouTube video playback.
                   </p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {getVideoPlayersByCategory('youtube').map((config) => 
+                  {getVideoPlayersByCategory('youtube').map((config) =>
                     renderPlayerCard(
                       config,
                       playerType === config.type,
-                      () => handlePlayerTypeChange(config.type as YouTubePlayerType)
-                    )
+                      () => handlePlayerTypeChange(config.type as YouTubePlayerType),
+                    ),
                   )}
                 </div>
               </div>
@@ -387,14 +393,14 @@ const AdminPage: React.FC = () => {
                     Choose which player implementation to use for local video files and custom video sources.
                   </p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {getVideoPlayersByCategory('local').map((config) => 
+                  {getVideoPlayersByCategory('local').map((config) =>
                     renderPlayerCard(
                       config,
                       localPlayerType === config.type,
-                      () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType)
-                    )
+                      () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType),
+                    ),
                   )}
                 </div>
               </div>

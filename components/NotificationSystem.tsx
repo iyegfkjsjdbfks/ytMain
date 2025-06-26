@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef   } from 'react';
+
 import {
   BellIcon,
   XMarkIcon,
@@ -6,9 +8,10 @@ import {
   UserPlusIcon,
   HeartIcon,
   ChatBubbleLeftIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Notification {
@@ -38,7 +41,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
 
   useEffect(() => {
     loadNotifications();
-    
+
     // Simulate real-time notifications
     const interval = setInterval(() => {
       if (Math.random() > 0.8) { // 20% chance every 30 seconds
@@ -95,7 +98,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         videoId: 'tech-review-1',
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
         isRead: false,
-        priority: 'medium'
+        priority: 'medium',
       },
       {
         id: '2',
@@ -105,7 +108,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         thumbnail: 'https://picsum.photos/120/68?random=2',
         timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
         isRead: false,
-        priority: 'low'
+        priority: 'low',
       },
       {
         id: '3',
@@ -118,7 +121,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         videoId: 'my-video-1',
         timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
         isRead: true,
-        priority: 'medium'
+        priority: 'medium',
       },
       {
         id: '4',
@@ -129,7 +132,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         channelAvatar: 'https://picsum.photos/40/40?random=4',
         timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
         isRead: true,
-        priority: 'medium'
+        priority: 'medium',
       },
       {
         id: '5',
@@ -141,16 +144,18 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         channelAvatar: 'https://picsum.photos/40/40?random=5',
         timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
         isRead: false,
-        priority: 'high'
-      }
+        priority: 'high',
+      },
     ];
   };
 
   const generateMockNotification = () => {
-    const types: Notification['type'][] = ['video_upload', 'like', 'comment', 'subscription', 'live_stream'];
+    const types: Array<Notification['type']> = ['video_upload', 'like', 'comment', 'subscription', 'live_stream'];
     const type = types[Math.floor(Math.random() * types.length)];
 
-    if (!type) return; // Safety check
+    if (!type) {
+return;
+} // Safety check
 
     const newNotification: Notification = {
       id: Date.now().toString(),
@@ -163,7 +168,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       ...(type === 'video_upload' ? { videoId: `video-${Date.now()}` } : {}),
       timestamp: new Date().toISOString(),
       isRead: false,
-      priority: type === 'live_stream' ? 'high' : 'medium'
+      priority: type === 'live_stream' ? 'high' : 'medium',
     };
 
     setNotifications(prev => {
@@ -197,8 +202,8 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
 
   const markAsRead = (notificationId: string) => {
     setNotifications(prev => {
-      const updated = prev.map(n => 
-        n.id === notificationId ? { ...n, isRead: true } : n
+      const updated = prev.map(n =>
+        n.id === notificationId ? { ...n, isRead: true } : n,
       );
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
@@ -232,8 +237,8 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     }
   };
 
-  const filteredNotifications = filter === 'all' 
-    ? notifications 
+  const filteredNotifications = filter === 'all'
+    ? notifications
     : notifications.filter(n => !n.isRead);
 
   return (
@@ -249,7 +254,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         ) : (
           <BellIcon className="w-6 h-6" />
         )}
-        
+
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {unreadCount > 99 ? '99+' : unreadCount}

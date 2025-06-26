@@ -1,19 +1,23 @@
-import React, { memo, useState, useCallback   } from 'react';
-import { Link } from 'react-router-dom';
-import { Video } from '../types';
-import { useUnifiedAppState } from '../hooks/useRefactoredHooks';
-import { formatCount } from '../utils/numberUtils';
-import { formatDistanceToNow } from '../utils/dateUtils';
-import { cn } from '../utils/cn';
+import type React from 'react';
+import { memo, useState, useCallback   } from 'react';
+
 import {
   PlayIcon,
   ClockIcon,
   EyeIcon,
   BookmarkIcon,
   ShareIcon,
-  EllipsisVerticalIcon
+  EllipsisVerticalIcon,
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+import { useUnifiedAppState } from '../hooks/useRefactoredHooks';
+import { cn } from '../utils/cn';
+import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatCount } from '../utils/numberUtils';
+
+import type { Video } from '../types';
 
 export interface ConsolidatedVideoCardProps {
   video: Video;
@@ -39,29 +43,29 @@ const sizeClasses = {
     thumbnail: 'h-32',
     title: 'text-sm',
     metadata: 'text-xs',
-    avatar: 'w-6 h-6'
+    avatar: 'w-6 h-6',
   },
   md: {
     container: 'max-w-sm',
     thumbnail: 'h-40',
     title: 'text-base',
     metadata: 'text-sm',
-    avatar: 'w-8 h-8'
+    avatar: 'w-8 h-8',
   },
   lg: {
     container: 'max-w-md',
     thumbnail: 'h-48',
     title: 'text-lg',
     metadata: 'text-sm',
-    avatar: 'w-10 h-10'
+    avatar: 'w-10 h-10',
   },
   xl: {
     container: 'max-w-lg',
     thumbnail: 'h-56',
     title: 'text-xl',
     metadata: 'text-base',
-    avatar: 'w-12 h-12'
-  }
+    avatar: 'w-12 h-12',
+  },
 };
 
 const variantClasses = {
@@ -71,12 +75,12 @@ const variantClasses = {
   grid: 'flex flex-col space-y-2',
   shorts: 'flex flex-col space-y-2 aspect-[9/16]',
   channel: 'flex flex-col space-y-2 bg-gray-50 dark:bg-gray-800 rounded-lg p-3',
-  playlist: 'flex flex-row space-x-3 items-start bg-gray-50 dark:bg-gray-800 rounded-lg p-3'
+  playlist: 'flex flex-row space-x-3 items-start bg-gray-50 dark:bg-gray-800 rounded-lg p-3',
 };
 
 /**
  * ConsolidatedVideoCard - A unified video card component that replaces all video card variants
- * 
+ *
  * Features:
  * - Multiple variants for different use cases
  * - Responsive sizing options
@@ -100,17 +104,17 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
   className,
   onVideoClick,
   onChannelClick,
-  onActionClick
+  onActionClick,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  
-  const { 
-    isInWatchLater, 
-    addToWatchLater, 
+
+  const {
+    isInWatchLater,
+    addToWatchLater,
     removeFromWatchLater,
-    addNotification 
+    addNotification,
   } = useUnifiedAppState();
 
   const sizeClass = sizeClasses[size];
@@ -131,17 +135,17 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
   const handleWatchLaterToggle = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (isInWatchLaterList) {
       removeFromWatchLater(video.id);
       addNotification({
         type: 'info',
         data: {
           title: 'Watch Later',
-          message: 'Removed from Watch Later'
+          message: 'Removed from Watch Later',
         },
         read: false,
-        persistent: false
+        persistent: false,
       });
     } else {
       addToWatchLater(video.id);
@@ -149,24 +153,24 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
         type: 'success',
         data: {
           title: 'Watch Later',
-          message: 'Added to Watch Later'
+          message: 'Added to Watch Later',
         },
         read: false,
-        persistent: false
+        persistent: false,
       });
     }
-    
+
     onActionClick?.('watchLater', video);
   }, [isInWatchLaterList, removeFromWatchLater, addToWatchLater, video, addNotification, onActionClick]);
 
   const handleShare = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (navigator.share) {
       navigator.share({
         title: video.title,
-        url: `${window.location.origin}/watch?v=${video.id}`
+        url: `${window.location.origin}/watch?v=${video.id}`,
       });
     } else {
       navigator.clipboard.writeText(`${window.location.origin}/watch?v=${video.id}`);
@@ -174,13 +178,13 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
         type: 'success',
         data: {
           title: 'Share',
-          message: 'Link copied to clipboard'
+          message: 'Link copied to clipboard',
         },
         read: false,
-        persistent: false
+        persistent: false,
       });
     }
-    
+
     onActionClick?.('share', video);
   }, [video, addNotification, onActionClick]);
 
@@ -188,11 +192,11 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
   const channelUrl = `/channel/${encodeURIComponent(video.channelName)}`;
 
   const thumbnailContent = (
-    <div 
+    <div
       className={cn(
         'relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden group',
         sizeClass.thumbnail,
-        isCompact ? 'flex-shrink-0 w-40' : 'w-full aspect-video'
+        isCompact ? 'flex-shrink-0 w-40' : 'w-full aspect-video',
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -204,7 +208,7 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
           className={cn(
             'w-full h-full object-cover transition-all duration-300',
             imageLoaded ? 'opacity-100' : 'opacity-0',
-            isHovered && autoplay ? 'scale-105' : 'scale-100'
+            isHovered && autoplay ? 'scale-105' : 'scale-100',
           )}
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageError(true)}
@@ -215,14 +219,14 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
           <PlayIcon className="w-8 h-8 text-gray-500" />
         </div>
       )}
-      
+
       {/* Duration Badge */}
       {showDuration && video.duration && (
         <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
           {video.duration}
         </div>
       )}
-      
+
       {/* Hover Overlay */}
       {isHovered && (
         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
@@ -237,11 +241,11 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
       {/* Title */}
       <h3 className={cn(
         'font-medium text-gray-900 dark:text-white line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors',
-        sizeClass.title
+        sizeClass.title,
       )}>
         {video.title}
       </h3>
-      
+
       {/* Channel Info */}
       {showChannel && (
         <div className="flex items-center space-x-2">
@@ -257,20 +261,20 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
             onClick={handleChannelClick}
             className={cn(
               'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors',
-              sizeClass.metadata
+              sizeClass.metadata,
             )}
           >
             {video.channelName}
           </Link>
         </div>
       )}
-      
+
       {/* Video Stats */}
       <div className={cn('flex items-center space-x-2 text-gray-500 dark:text-gray-400', sizeClass.metadata)}>
         {showViews && (
           <span className="flex items-center space-x-1">
             <EyeIcon className="w-4 h-4" />
-            <span>{formatCount(parseInt(video.views))}</span>
+            <span>{formatCount(parseInt(video.views, 10))}</span>
           </span>
         )}
         {showTimestamp && (
@@ -280,7 +284,7 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
           </span>
         )}
       </div>
-      
+
       {/* Description */}
       {showDescription && video.description && (
         <p className={cn('text-gray-600 dark:text-gray-400 line-clamp-2', sizeClass.metadata)}>
@@ -303,7 +307,7 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
           <BookmarkIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         )}
       </button>
-      
+
       <button
         onClick={handleShare}
         className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -311,7 +315,7 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
       >
         <ShareIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
       </button>
-      
+
       <button
         onClick={(e) => {
           e.preventDefault();
@@ -331,7 +335,7 @@ export const ConsolidatedVideoCard: React.FC<ConsolidatedVideoCardProps> = memo(
       <Link to={videoUrl} onClick={handleVideoClick} className="block">
         {thumbnailContent}
       </Link>
-      
+
       {metadataContent}
       {actionsContent}
     </div>

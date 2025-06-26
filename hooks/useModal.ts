@@ -26,7 +26,7 @@ export function useModal({
   defaultOpen = false,
   onOpen,
   onClose,
-  closeOnEscape = true
+  closeOnEscape = true,
 }: UseModalOptions = {}): UseModalReturn {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -50,7 +50,9 @@ export function useModal({
 
   // Handle escape key
   useEffect(() => {
-    if (!closeOnEscape || !isOpen) return;
+    if (!closeOnEscape || !isOpen) {
+return;
+}
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -82,8 +84,8 @@ export function useModal({
     toggle,
     modalProps: {
       isOpen,
-      onClose: close
-    }
+      onClose: close,
+    },
   };
 }
 
@@ -131,6 +133,6 @@ export function useModals<T extends string>() {
     toggleModal,
     closeAllModals,
     isModalOpen,
-    openModals: Array.from(openModals)
+    openModals: Array.from(openModals),
   };
 }

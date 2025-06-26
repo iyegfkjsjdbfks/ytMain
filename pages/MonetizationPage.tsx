@@ -1,7 +1,7 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
-import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,6 +14,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
+import { Line, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +25,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
 );
 
 interface RevenueData {
@@ -61,32 +62,32 @@ const MonetizationPage: React.FC = () => {
   useEffect(() => {
     const generateMockData = () => {
       setLoading(true);
-      
+
       // Generate mock revenue data
       const days = timeRange === '7d' ? 7 : timeRange === '30d' ? 30 : timeRange === '90d' ? 90 : 365;
       const mockRevenueData: RevenueData[] = [];
-      
+
       for (let i = days - 1; i >= 0; i--) {
         const date = new Date();
         date.setDate(date.getDate() - i);
-        
+
         mockRevenueData.push({
           date: date.toISOString().split('T')[0] || date.toDateString(),
           adRevenue: Math.random() * 100 + 50,
           membershipRevenue: Math.random() * 30 + 10,
           superChatRevenue: Math.random() * 20 + 5,
           merchandiseRevenue: Math.random() * 15 + 2,
-          sponsorshipRevenue: Math.random() * 200 + 100
+          sponsorshipRevenue: Math.random() * 200 + 100,
         });
       }
-      
+
       setRevenueData(mockRevenueData);
-      
+
       // Generate mock metrics
-      const totalRevenue = mockRevenueData.reduce((sum, day) => 
-        sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0
+      const totalRevenue = mockRevenueData.reduce((sum, day) =>
+        sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0,
       );
-      
+
       const membershipRevenue = mockRevenueData.reduce((sum, day) => sum + day.membershipRevenue, 0);
       const superChatRevenue = mockRevenueData.reduce((sum, day) => sum + day.superChatRevenue, 0);
 
@@ -102,9 +103,9 @@ const MonetizationPage: React.FC = () => {
         superChatCount: Math.floor(Math.random() * 200 + 50),
         merchandiseSales: Math.floor(Math.random() * 50 + 10),
         membershipRevenue,
-        superChatRevenue
+        superChatRevenue,
       });
-      
+
       setLoading(false);
     };
 
@@ -115,7 +116,7 @@ const MonetizationPage: React.FC = () => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(amount);
   };
 
@@ -126,7 +127,7 @@ const MonetizationPage: React.FC = () => {
   const getRevenueChartData = () => {
     const labels = revenueData.map(data => {
       const date = new Date(data.date);
-      return timeRange === '7d' || timeRange === '30d' 
+      return timeRange === '7d' || timeRange === '30d'
         ? date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
         : date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
     });
@@ -139,42 +140,44 @@ const MonetizationPage: React.FC = () => {
           data: revenueData.map(d => d.adRevenue),
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          tension: 0.4
+          tension: 0.4,
         },
         {
           label: 'Membership Revenue',
           data: revenueData.map(d => d.membershipRevenue),
           borderColor: 'rgb(16, 185, 129)',
           backgroundColor: 'rgba(16, 185, 129, 0.1)',
-          tension: 0.4
+          tension: 0.4,
         },
         {
           label: 'Super Chat',
           data: revenueData.map(d => d.superChatRevenue),
           borderColor: 'rgb(245, 158, 11)',
           backgroundColor: 'rgba(245, 158, 11, 0.1)',
-          tension: 0.4
+          tension: 0.4,
         },
         {
           label: 'Sponsorships',
           data: revenueData.map(d => d.sponsorshipRevenue),
           borderColor: 'rgb(139, 92, 246)',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
-          tension: 0.4
-        }
-      ]
+          tension: 0.4,
+        },
+      ],
     };
   };
 
   const getRevenueSourcesData = () => {
-    if (!revenueData.length) return { labels: [], datasets: [] };
-    
+    if (!revenueData.length) {
+return { labels: [], datasets: [] };
+}
+
     const totals = revenueData.reduce((acc, day) => ({
       adRevenue: acc.adRevenue + day.adRevenue,
       membershipRevenue: acc.membershipRevenue + day.membershipRevenue,
       superChatRevenue: acc.superChatRevenue + day.superChatRevenue,
       merchandiseRevenue: acc.merchandiseRevenue + day.merchandiseRevenue,
-      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue
+      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue,
     }), { adRevenue: 0, membershipRevenue: 0, superChatRevenue: 0, merchandiseRevenue: 0, sponsorshipRevenue: 0 });
 
     return {
@@ -186,25 +189,25 @@ const MonetizationPage: React.FC = () => {
             totals.membershipRevenue,
             totals.superChatRevenue,
             totals.merchandiseRevenue,
-            totals.sponsorshipRevenue
+            totals.sponsorshipRevenue,
           ],
           backgroundColor: [
             'rgba(59, 130, 246, 0.8)',
             'rgba(16, 185, 129, 0.8)',
             'rgba(245, 158, 11, 0.8)',
             'rgba(239, 68, 68, 0.8)',
-            'rgba(139, 92, 246, 0.8)'
+            'rgba(139, 92, 246, 0.8)',
           ],
           borderColor: [
             'rgb(59, 130, 246)',
             'rgb(16, 185, 129)',
             'rgb(245, 158, 11)',
             'rgb(239, 68, 68)',
-            'rgb(139, 92, 246)'
+            'rgb(139, 92, 246)',
           ],
-          borderWidth: 2
-        }
-      ]
+          borderWidth: 2,
+        },
+      ],
     };
   };
 
@@ -216,8 +219,8 @@ const MonetizationPage: React.FC = () => {
         position: 'top' as const,
         labels: {
           usePointStyle: true,
-          padding: 20
-        }
+          padding: 20,
+        },
       },
       tooltip: {
         mode: 'index' as const,
@@ -225,23 +228,23 @@ const MonetizationPage: React.FC = () => {
         callbacks: {
           label: (context: any) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
-          }
-        }
-      }
+          },
+        },
+      },
     },
     scales: {
       x: {
         grid: {
-          display: false
-        }
+          display: false,
+        },
       },
       y: {
         beginAtZero: true,
         ticks: {
-          callback: (value: any) => formatCurrency(value)
-        }
-      }
-    }
+          callback: (value: any) => formatCurrency(value),
+        },
+      },
+    },
   };
 
   const doughnutOptions = {
@@ -252,8 +255,8 @@ const MonetizationPage: React.FC = () => {
         position: 'bottom' as const,
         labels: {
           usePointStyle: true,
-          padding: 20
-        }
+          padding: 20,
+        },
       },
       tooltip: {
         callbacks: {
@@ -261,25 +264,25 @@ const MonetizationPage: React.FC = () => {
             const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   };
 
   if (loading || !metrics) {
     return (
       <div className="p-6 space-y-6">
         <div className="animate-pulse">
-          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6"></div>
+          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+              <div key={i} className="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
             ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="h-96 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
-            <div className="h-96 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+            <div className="h-96 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
+            <div className="h-96 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
           </div>
         </div>
       </div>

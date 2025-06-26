@@ -1,8 +1,13 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import { useVideoPlayer } from '../../hooks';
 import { LoadingSpinner, ErrorMessage } from '../ui';
+
 import VideoControls from './VideoControls';
-import VideoSettings, { VideoQuality, Subtitle } from './VideoSettings';
+import VideoSettings from './VideoSettings';
+
+import type { VideoQuality, Subtitle } from './VideoSettings';
 
 interface Chapter {
   title: string;
@@ -36,7 +41,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   onTimeUpdate,
   onEnded,
   onError,
-  className = ''
+  className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -52,7 +57,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     autoplay,
     muted,
     loop,
-    playsinline: true
+    playsinline: true,
   });
 
   // Handle fullscreen changes
@@ -97,7 +102,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   const handleFullscreenToggle = async () => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {
+return;
+}
 
     try {
       if (isFullscreen) {
@@ -150,7 +157,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative bg-black overflow-hidden group ${className}`}
       onMouseMove={handleMouseMove}
@@ -185,7 +192,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       {/* Error State */}
       {state.error && (
-        <ErrorMessage 
+        <ErrorMessage
           message={state.error}
           onRetry={() => actions.play()}
           variant="overlay"
@@ -193,7 +200,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       )}
 
       {/* Video Controls */}
-      <div 
+      <div
         className={`absolute bottom-0 left-0 right-0 transition-opacity duration-300 ${
           showControls || !state.isPlaying ? 'opacity-100' : 'opacity-0'
         }`}

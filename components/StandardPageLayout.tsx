@@ -1,6 +1,7 @@
-import React from 'react';
-import { ErrorState } from './LoadingStates';
+import type React from 'react';
+
 import LoadingSpinner from './LoadingSpinner';
+import { ErrorState } from './LoadingStates';
 
 interface StandardPageLayoutProps {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ interface StandardPageLayoutProps {
  * - Error states with retry functionality
  * - Empty states with custom messaging
  * - Consistent header structure
- * 
+ *
  * Reduces code duplication across pages by providing a unified layout structure
  */
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
@@ -38,7 +39,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
   errorComponent,
   emptyComponent,
   className = '',
-  containerClassName = 'container mx-auto px-4 py-6'
+  containerClassName = 'container mx-auto px-4 py-6',
 }) => {
   // Default loading component
   const defaultLoadingComponent = (
@@ -103,11 +104,11 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
         {/* Content Area */}
         <div className="relative">
           {loading && (loadingComponent || defaultLoadingComponent)}
-          
+
           {!loading && error && (errorComponent || defaultErrorComponent)}
-          
+
           {!loading && !error && isEmpty && (emptyComponent || defaultEmptyComponent)}
-          
+
           {!loading && !error && !isEmpty && children}
         </div>
       </div>

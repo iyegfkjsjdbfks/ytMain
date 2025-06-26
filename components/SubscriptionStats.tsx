@@ -1,11 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+
 import {
   UserGroupIcon,
   VideoCameraIcon,
-  ClockIcon
+  ClockIcon,
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 interface SubscriptionStatsProps {
   totalChannels: number;
@@ -20,7 +21,7 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
   notificationsEnabled,
   totalVideos,
   newVideosToday,
-  className = ''
+  className = '',
 }) => {
   const stats = [
     {
@@ -28,29 +29,29 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
       value: totalChannels,
       icon: UserGroupIcon,
       color: 'text-blue-600 dark:text-blue-400',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20'
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
     },
     {
       label: 'With Notifications',
       value: notificationsEnabled,
       icon: BellIconSolid,
       color: 'text-yellow-600 dark:text-yellow-400',
-      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20'
+      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
     },
     {
       label: 'Total Videos',
       value: totalVideos,
       icon: VideoCameraIcon,
       color: 'text-green-600 dark:text-green-400',
-      bgColor: 'bg-green-50 dark:bg-green-900/20'
+      bgColor: 'bg-green-50 dark:bg-green-900/20',
     },
     {
       label: 'New Today',
       value: newVideosToday,
       icon: ClockIcon,
       color: 'text-red-600 dark:text-red-400',
-      bgColor: 'bg-red-50 dark:bg-red-900/20'
-    }
+      bgColor: 'bg-red-50 dark:bg-red-900/20',
+    },
   ];
 
   if (totalChannels === 0) {
@@ -64,7 +65,7 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
           <p className="text-red-600 dark:text-red-300 mb-4">
             Subscribe to channels to see their latest videos and build your personalized feed.
           </p>
-          <Link 
+          <Link
             to="/trending"
             className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
           >
@@ -81,7 +82,7 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
       {stats.map((stat, index) => {
         const IconComponent = stat.icon;
         return (
-          <div 
+          <div
             key={index}
             className={`p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 ${stat.bgColor} transition-transform hover:scale-105`}
           >

@@ -1,9 +1,15 @@
-import React from 'react';
-import { Video, PlaylistSummary, CommunityPost, Channel } from '../types';
-import VideoCard from './VideoCard';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+
 import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+
+
 import { parseRelativeDate } from '../utils/dateUtils';
+
+import VideoCard from './VideoCard';
+
+import type { Video, PlaylistSummary, CommunityPost, Channel } from '../types';
+
 
 interface ChannelTabContentProps {
   activeTab: string;
@@ -14,21 +20,21 @@ interface ChannelTabContentProps {
   onPlaylistTabSelect: () => void;
 }
 
-const ChannelTabContent: React.FC<ChannelTabContentProps> = ({ 
-  activeTab, 
+const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
+  activeTab,
   channel,
-  videos, 
-  playlists, 
+  videos,
+  playlists,
   communityPosts,
-  onPlaylistTabSelect
+  onPlaylistTabSelect,
 }) => {
 
   const renderHomeTab = () => {
-    const popularVideos = [...videos].sort((a,b) => parseInt(b.views.replace(/,/g, '')) - parseInt(a.views.replace(/,/g, ''))).slice(0,5);
+    const popularVideos = [...videos].sort((a, b) => parseInt(b.views.replace(/,/g, ''), 10) - parseInt(a.views.replace(/,/g, ''), 10)).slice(0, 5);
     const recentVideos = [...videos]
       .sort((a, b) => parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt))
       .slice(0, 10);
-    
+
     return (
       <div className="space-y-8 pt-4">
         {popularVideos.length > 0 && (
@@ -70,7 +76,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
     }
     return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no {isShorts ? 'Shorts' : 'videos'} yet.</p>;
   };
-  
+
   const renderPlaylistsTab = (isHomePageSlice: boolean = false) => {
     const playlistsToRender = isHomePageSlice ? playlists.slice(0, 4) : playlists;
      if (playlistsToRender.length > 0) {
@@ -79,9 +85,9 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
           {playlistsToRender.map(playlist => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-xl overflow-hidden">
-                <img 
-                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'} 
-                  alt={`Thumbnail for ${playlist.title}`} 
+                <img
+                  src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
+                  alt={`Thumbnail for ${playlist.title}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -106,7 +112,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
     }
     return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no playlists yet.</p>;
   };
-  
+
   const renderCommunityTab = () => {
     if (communityPosts.length > 0) {
       return (
@@ -135,13 +141,15 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
   };
 
   const renderAboutTab = () => {
-    if (!channel) return null;
+    if (!channel) {
+return null;
+}
     return (
       <div className="max-w-3xl py-6 text-neutral-800 dark:text-neutral-200 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6">
         <div className="md:col-span-2">
             <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2">Description</h3>
             <p className="whitespace-pre-line leading-relaxed text-sm mb-6">
-            {channel.description || "No description available for this channel."}
+            {channel.description || 'No description available for this channel.'}
             </p>
              <Link to="#" className="inline-flex items-center text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 mt-2 text-sm font-medium">
               <span>Report user</span>

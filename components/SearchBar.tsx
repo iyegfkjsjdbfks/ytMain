@@ -1,17 +1,21 @@
 
-import React, { useState, useEffect, useRef, useCallback   } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SearchIcon from './icons/SearchIcon';
-import SearchSuggestions from './SearchSuggestions';
-import ClockIcon from './icons/ClockIcon'; // For recent searches
+import type React from 'react';
+import { useState, useEffect, useRef, useCallback   } from 'react';
+
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
-import { 
-  getSearchSuggestions, 
-  saveRecentSearch, 
+import { useNavigate } from 'react-router-dom';
+
+import {
+  getSearchSuggestions,
+  saveRecentSearch,
   getRecentSearches,
   removeRecentSearch,
-  clearAllRecentSearches
+  clearAllRecentSearches,
 } from '../services/mockVideoService';
+
+import ClockIcon from './icons/ClockIcon'; // For recent searches
+import SearchIcon from './icons/SearchIcon';
+import SearchSuggestions from './SearchSuggestions';
 
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -25,7 +29,7 @@ const SearchBar: React.FC = () => {
 
 
   const fetchSuggestionsDebounced = useCallback(async (currentQuery: string) => {
-    if (currentQuery.trim().length > 1) { 
+    if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
       setShowSuggestions(fetched.length > 0);
@@ -43,7 +47,7 @@ const SearchBar: React.FC = () => {
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       fetchSuggestionsDebounced(query);
-    }, 300); 
+    }, 300);
 
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
@@ -51,15 +55,17 @@ const SearchBar: React.FC = () => {
   const handleSearch = (searchQuery: string) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
-      setQuery(trimmedQuery); 
+      setQuery(trimmedQuery);
       setShowSuggestions(false);
       setShowRecentSearches(false);
       saveRecentSearch(trimmedQuery);
       navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
-      if(inputRef.current) inputRef.current.blur(); // Optionally blur input after search
+      if (inputRef.current) {
+inputRef.current.blur();
+} // Optionally blur input after search
     }
   };
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSearch(query);
@@ -88,7 +94,7 @@ const SearchBar: React.FC = () => {
       setShowRecentSearches(false);
     }
   };
-  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
@@ -115,7 +121,7 @@ const SearchBar: React.FC = () => {
     setRecentSearches([]);
     setShowRecentSearches(false);
   };
-  
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
@@ -132,9 +138,9 @@ const SearchBar: React.FC = () => {
   const isDropdownOpen = (showSuggestions && suggestions.length > 0) || (showRecentSearches && recentSearches.length > 0);
 
   const inputBorderRadiusClass = isDropdownOpen
-    ? 'rounded-t-xl rounded-b-none border-b-transparent dark:border-b-transparent' 
+    ? 'rounded-t-xl rounded-b-none border-b-transparent dark:border-b-transparent'
     : 'rounded-l-full';
-  
+
   const buttonBorderRadiusClass = isDropdownOpen
     ? 'rounded-tr-xl rounded-br-none border-b-transparent dark:border-b-transparent'
     : 'rounded-r-full';
@@ -158,7 +164,7 @@ const SearchBar: React.FC = () => {
           `}
           aria-label="Search YouTube"
           aria-autocomplete="list"
-          aria-controls={showSuggestions ? "search-suggestions-listbox" : (showRecentSearches ? "recent-searches-listbox" : undefined)}
+          aria-controls={showSuggestions ? 'search-suggestions-listbox' : (showRecentSearches ? 'recent-searches-listbox' : undefined)}
           aria-expanded={isDropdownOpen}
         />
         <button
@@ -183,7 +189,7 @@ const SearchBar: React.FC = () => {
           </div>
       )}
       {showRecentSearches && recentSearches.length > 0 && (
-        <ul 
+        <ul
           id="recent-searches-listbox"
           className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
           role="listbox"
@@ -198,8 +204,8 @@ const SearchBar: React.FC = () => {
                 <ClockIcon className="w-4 h-4 mr-3 text-neutral-500 dark:text-neutral-400 flex-shrink-0" />
                 <span>{searchTerm}</span>
               </button>
-              <button 
-                onClick={(e) => handleRemoveRecentSearch(searchTerm, e)} 
+              <button
+                onClick={(e) => handleRemoveRecentSearch(searchTerm, e)}
                 className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label={`Remove ${searchTerm} from recent searches`}
                 title="Remove"
@@ -209,7 +215,7 @@ const SearchBar: React.FC = () => {
             </li>
           ))}
            <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
-                <button 
+                <button
                     onClick={handleClearAllRecent}
                     className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
                 >

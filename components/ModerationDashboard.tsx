@@ -1,4 +1,6 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import {
   ShieldCheckIcon,
   TrashIcon,
@@ -9,8 +11,9 @@ import {
   VideoCameraIcon,
   UserIcon,
   ClockIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface ModerationItem {
@@ -22,7 +25,7 @@ export interface ModerationItem {
   reportCount: number;
   reportedAt: string;
   reportedBy: string[];
-  
+
   // Content details
   content: {
     id: string;
@@ -37,7 +40,7 @@ export interface ModerationItem {
     likes?: number;
     comments?: number;
   };
-  
+
   // AI Analysis
   aiAnalysis?: {
     toxicityScore: number;
@@ -45,7 +48,7 @@ export interface ModerationItem {
     confidence: number;
     suggestedAction: 'approve' | 'review' | 'remove';
   };
-  
+
   // Moderation history
   moderationHistory: Array<{
     action: string;
@@ -65,7 +68,7 @@ interface ModerationDashboardProps {
 const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   onModerate,
   onBulkModerate,
-  className = ''
+  className = '',
 }) => {
   const [items, setItems] = useState<ModerationItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
@@ -103,15 +106,15 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
           views: 15000,
           likes: 200,
-          comments: 45
+          comments: 45,
         },
         aiAnalysis: {
           toxicityScore: 0.75,
           categories: ['harassment', 'hate_speech'],
           confidence: 0.85,
-          suggestedAction: 'review'
+          suggestedAction: 'review',
         },
-        moderationHistory: []
+        moderationHistory: [],
       },
       {
         id: '2',
@@ -129,13 +132,13 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorName: 'Anonymous User',
           authorAvatar: 'https://picsum.photos/40/40?random=2',
           createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-          likes: 0
+          likes: 0,
         },
         aiAnalysis: {
           toxicityScore: 0.92,
           categories: ['hate_speech', 'harassment'],
           confidence: 0.95,
-          suggestedAction: 'remove'
+          suggestedAction: 'remove',
         },
         moderationHistory: [
           {
@@ -143,9 +146,9 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
             moderatorId: 'ai_system',
             moderatorName: 'AI Moderator',
             timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
-            reason: 'High toxicity score detected'
-          }
-        ]
+            reason: 'High toxicity score detected',
+          },
+        ],
       },
       {
         id: '3',
@@ -161,20 +164,26 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorId: 'user456',
           authorName: 'Suspicious Account',
           authorAvatar: 'https://picsum.photos/40/40?random=3',
-          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
         },
-        moderationHistory: []
-      }
+        moderationHistory: [],
+      },
     ];
-    
+
     setItems(mockItems);
   };
 
   const filteredItems = items
     .filter(item => {
-      if (filterStatus !== 'all' && item.status !== filterStatus) return false;
-      if (filterType !== 'all' && item.type !== filterType) return false;
-      if (filterPriority !== 'all' && item.priority !== filterPriority) return false;
+      if (filterStatus !== 'all' && item.status !== filterStatus) {
+return false;
+}
+      if (filterType !== 'all' && item.type !== filterType) {
+return false;
+}
+      if (filterPriority !== 'all' && item.priority !== filterPriority) {
+return false;
+}
       if (searchQuery && !item.content.title?.toLowerCase().includes(searchQuery.toLowerCase()) &&
           !item.content.text?.toLowerCase().includes(searchQuery.toLowerCase()) &&
           !item.content.authorName.toLowerCase().includes(searchQuery.toLowerCase())) {
@@ -200,12 +209,12 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
 
   const handleModerate = (itemId: string, action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
-    setItems(prev => prev.map(item => 
-      item.id === itemId 
-        ? { 
-            ...item, 
-            status: action === 'approve' ? 'approved' : 
-                   action === 'reject' ? 'rejected' : 
+    setItems(prev => prev.map(item =>
+      item.id === itemId
+        ? {
+            ...item,
+            status: action === 'approve' ? 'approved' :
+                   action === 'reject' ? 'rejected' :
                    action === 'remove' ? 'removed' : 'flagged',
             moderationHistory: [
               ...item.moderationHistory,
@@ -214,11 +223,11 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
                 moderatorId: 'current_user',
                 moderatorName: 'Current Moderator',
                 timestamp: new Date().toISOString(),
-                reason: moderationReason
-              }
-            ]
+                reason: moderationReason,
+              },
+            ],
           }
-        : item
+        : item,
     ));
     setShowModerationModal(null);
     setModerationReason('');
@@ -227,15 +236,15 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   const handleBulkAction = (action: 'approve' | 'reject' | 'remove') => {
     const itemIds = Array.from(selectedItems);
     onBulkModerate(itemIds, action);
-    
-    setItems(prev => prev.map(item => 
+
+    setItems(prev => prev.map(item =>
       selectedItems.has(item.id)
-        ? { 
-            ...item, 
-            status: action === 'approve' ? 'approved' : 
-                   action === 'reject' ? 'rejected' : 'removed'
+        ? {
+            ...item,
+            status: action === 'approve' ? 'approved' :
+                   action === 'reject' ? 'rejected' : 'removed',
           }
-        : item
+        : item,
     ));
     setSelectedItems(new Set());
   };
@@ -303,7 +312,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
             { label: 'Pending', count: items.filter(i => i.status === 'pending').length, color: 'text-yellow-600' },
             { label: 'Flagged', count: items.filter(i => i.status === 'flagged').length, color: 'text-red-600' },
             { label: 'Critical', count: items.filter(i => i.priority === 'critical').length, color: 'text-red-600' },
-            { label: 'Total Reports', count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' }
+            { label: 'Total Reports', count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
@@ -385,7 +394,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
             <span className="text-blue-800 dark:text-blue-200">
               {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''} selected
             </span>
-            
+
             <div className="flex space-x-3">
               <button
                 onClick={() => handleBulkAction('approve')}
@@ -527,7 +536,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
                       <CheckIcon className="w-4 h-4" />
                       <span>Approve</span>
                     </button>
-                    
+
                     <button
                       onClick={() => {
                         setShowModerationModal(item.id);
@@ -537,7 +546,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
                       <XMarkIcon className="w-4 h-4" />
                       <span>Reject</span>
                     </button>
-                    
+
                     <button
                       onClick={() => handleModerate(item.id, 'remove')}
                       className="flex items-center space-x-1 px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
@@ -565,7 +574,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Moderation Action
             </h3>
-            
+
             <textarea
               value={moderationReason}
               onChange={(e) => setModerationReason(e.target.value)}
@@ -573,7 +582,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"
             />
-            
+
             <div className="flex space-x-3">
               <button
                 onClick={() => setShowModerationModal(null)}

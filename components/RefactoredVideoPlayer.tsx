@@ -1,7 +1,9 @@
-import React from 'react';
+import type React from 'react';
+
 import { useVideoPlayer } from '../hooks';
-import { Video } from '../src/types/core';
-import { VideoQuality, Subtitle, Chapter } from '../components/video/VideoPlayer';
+
+import type { VideoQuality, Subtitle, Chapter } from './video/VideoPlayer';
+import type { Video } from '../src/types/core';
 
 interface RefactoredVideoPlayerProps {
   video: Video;
@@ -18,13 +20,13 @@ interface RefactoredVideoPlayerProps {
 
 /**
  * Refactored Video Player demonstrating the use of the useVideoPlayer hook
- * 
+ *
  * This component shows how the custom hook reduces code duplication:
  * - useVideoPlayer manages all video state (playing, muted, currentTime, etc.)
  * - Centralized video event handlers
  * - Simplified component logic focused on UI rendering
  * - Consistent video player behavior across the app
- * 
+ *
  * Compare this with the original AdvancedVideoPlayer to see the reduction in complexity
  */
 const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
@@ -34,12 +36,12 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
   chapters = [],
   autoplay = false,
   muted = false,
-  className = ''
+  className = '',
 }) => {
   // Use the custom video player hook
   const { videoRef, state, actions } = useVideoPlayer({
     autoplay,
-    muted
+    muted,
   });
 
   // Format time for display
@@ -87,7 +89,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
       {/* Loading Overlay */}
       {state.isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
         </div>
       )}
 
@@ -126,7 +128,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
             onChange={(e) => actions.seek(Number(e.target.value))}
             className="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
           />
-          
+
           {/* Chapter Markers */}
           {chapters.length > 0 && (
             <div className="relative mt-1">
@@ -179,7 +181,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
                   </svg>
                 )}
               </button>
-              
+
               <input
                 type="range"
                 min={0}

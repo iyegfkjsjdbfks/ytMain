@@ -1,7 +1,7 @@
 
-import React from 'react';
+import type React from 'react';
 
-const SearchIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const SearchIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
   <svg
     className={className}
     fill="none"
@@ -19,4 +19,3 @@ const SearchIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" })
 );
 
 export default SearchIcon;
-    

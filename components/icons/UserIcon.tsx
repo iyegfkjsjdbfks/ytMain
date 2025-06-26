@@ -1,7 +1,7 @@
 
-import React from 'react';
+import type React from 'react';
 
-const UserIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const UserIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (
   <svg
     className={className}
     fill="none"
@@ -19,4 +19,3 @@ const UserIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) =
 );
 
 export default UserIcon;
-    

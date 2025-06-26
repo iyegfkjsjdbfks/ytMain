@@ -1,6 +1,6 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef  } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import {
   CloudArrowUpIcon,
   VideoCameraIcon,
@@ -8,10 +8,12 @@ import {
   GlobeAltIcon,
   LockClosedIcon,
   XMarkIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
 } from '@heroicons/react/24/outline';
-import { UnifiedButton } from '../components/ui/UnifiedButton';
+import { useNavigate } from 'react-router-dom';
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
+import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface UploadedFile {
   file: File;
@@ -46,19 +48,21 @@ const UploadPage: React.FC = () => {
     thumbnail: null,
     monetization: false,
     commentsEnabled: true,
-    ageRestriction: false
+    ageRestriction: false,
   });
   const [tagInput, setTagInput] = useState('');
 
   const categories = [
     'Entertainment', 'Education', 'Gaming', 'Music', 'News & Politics',
     'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
-    'Comedy', 'Film & Animation', 'Autos & Vehicles'
+    'Comedy', 'Film & Animation', 'Autos & Vehicles',
   ];
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+return;
+}
 
     // Validate file type
     if (!file.type.startsWith('video/')) {
@@ -77,13 +81,13 @@ const UploadPage: React.FC = () => {
       file,
       preview,
       progress: 0,
-      status: 'uploading'
+      status: 'uploading',
     };
 
     setUploadedFile(newFile);
     setMetadata(prev => ({
       ...prev,
-      title: file.name.replace(/\.[^/.]+$/, '') // Remove file extension
+      title: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
     }));
 
     // Simulate upload progress
@@ -93,22 +97,24 @@ const UploadPage: React.FC = () => {
   const simulateUpload = (_file: UploadedFile) => {
     const interval = setInterval(() => {
       setUploadedFile(prev => {
-        if (!prev) return null;
-        
+        if (!prev) {
+return null;
+}
+
         const newProgress = prev.progress + Math.random() * 10;
-        
+
         if (newProgress >= 100) {
           clearInterval(interval);
           return {
             ...prev,
             progress: 100,
-            status: 'processing'
+            status: 'processing',
           };
         }
-        
+
         return {
           ...prev,
-          progress: newProgress
+          progress: newProgress,
         };
       });
     }, 200);
@@ -117,7 +123,7 @@ const UploadPage: React.FC = () => {
     setTimeout(() => {
       setUploadedFile(prev => prev ? {
         ...prev,
-        status: 'completed'
+        status: 'completed',
       } : null);
     }, 5000);
   };
@@ -131,7 +137,7 @@ const UploadPage: React.FC = () => {
     const file = event.dataTransfer.files[0];
     if (file) {
       const fakeEvent = {
-        target: { files: [file] }
+        target: { files: [file] },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
@@ -141,7 +147,7 @@ const UploadPage: React.FC = () => {
     if (tagInput.trim() && !metadata.tags.includes(tagInput.trim())) {
       setMetadata(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()]
+        tags: [...prev.tags, tagInput.trim()],
       }));
       setTagInput('');
     }
@@ -150,7 +156,7 @@ const UploadPage: React.FC = () => {
   const removeTag = (tagToRemove: string) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter(tag => tag !== tagToRemove),
     }));
   };
 
@@ -190,7 +196,7 @@ const UploadPage: React.FC = () => {
               Upload Video
             </h1>
           </div>
-          
+
           <UnifiedButton
             variant="ghost"
             onClick={() => navigate('/studio')}
@@ -261,7 +267,7 @@ const UploadPage: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   {uploadedFile.status !== 'completed' && (
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div
@@ -373,12 +379,12 @@ const UploadPage: React.FC = () => {
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                         Choose when to publish and who can see your video
                       </h3>
-                      
+
                       <div className="space-y-3">
                         {[
                           { value: 'public', label: 'Public', description: 'Anyone can search for and view' },
                           { value: 'unlisted', label: 'Unlisted', description: 'Anyone with the link can view' },
-                          { value: 'private', label: 'Private', description: 'Only you can view' }
+                          { value: 'private', label: 'Private', description: 'Only you can view' },
                         ].map(option => (
                           <label
                             key={option.value}
@@ -436,7 +442,7 @@ const UploadPage: React.FC = () => {
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                         Monetization
                       </h3>
-                      
+
                       <label className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                         <input
                           type="checkbox"
@@ -479,7 +485,7 @@ const UploadPage: React.FC = () => {
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                 Publish Options
               </h3>
-              
+
               <div className="space-y-4">
                 <UnifiedButton
                   variant="primary"
@@ -489,11 +495,11 @@ const UploadPage: React.FC = () => {
                 >
                   Publish
                 </UnifiedButton>
-                
+
                 <UnifiedButton variant="outline" fullWidth>
                   Save as Draft
                 </UnifiedButton>
-                
+
                 <UnifiedButton variant="ghost" fullWidth>
                   Schedule for Later
                 </UnifiedButton>

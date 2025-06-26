@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, RectangleStackIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 import { PlayIcon as PlayIconSolid, PauseIcon as PauseIconSolid } from '@heroicons/react/24/solid';
 
@@ -54,13 +56,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   onPause,
   onEnded,
   onQualityChange,
-  className = ''
+  className = '',
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   // const volumeRef = useRef<HTMLDivElement>(null);
-  
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -77,23 +79,25 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const [showChapters, setShowChapters] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragTime, setDragTime] = useState(0);
-  
+
   const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
-  
+
   const formatTime = (time: number): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);
-    
+
     if (hours > 0) {
       return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
-  
+
   const togglePlay = useCallback(() => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) {
+return;
+}
+
     if (isPlaying) {
       videoRef.current.pause();
       onPause?.();
@@ -102,24 +106,26 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       onPlay?.();
     }
   }, [isPlaying, onPlay, onPause]);
-  
+
   const handleTimeUpdate = useCallback(() => {
-    if (!videoRef.current || isDragging) return;
-    
+    if (!videoRef.current || isDragging) {
+return;
+}
+
     const current = videoRef.current.currentTime;
     const total = videoRef.current.duration;
-    
+
     setCurrentTime(current);
     setDuration(total);
     onTimeUpdate?.(current, total);
-    
+
     // Update buffered
     if (videoRef.current.buffered.length > 0) {
       const bufferedEnd = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
       setBuffered((bufferedEnd / total) * 100);
     }
   }, [isDragging, onTimeUpdate]);
-  
+
   const handleLoadStart = () => setIsLoading(true);
   const handleCanPlay = () => setIsLoading(false);
   const handlePlay = () => setIsPlaying(true);
@@ -128,64 +134,74 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     setIsPlaying(false);
     onEnded?.();
   };
-  
+
   const seekTo = (time: number) => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+return;
+}
     videoRef.current.currentTime = time;
     setCurrentTime(time);
   };
-  
+
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!progressRef.current || !videoRef.current) return;
-    
+    if (!progressRef.current || !videoRef.current) {
+return;
+}
+
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = clickX / rect.width;
     const newTime = percentage * duration;
-    
+
     seekTo(newTime);
   };
-  
+
   const handleProgressMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     handleProgressClick(e);
   };
-  
+
   const handleProgressMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging || !progressRef.current) return;
-    
+    if (!isDragging || !progressRef.current) {
+return;
+}
+
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
     const newTime = percentage * duration;
-    
+
     setDragTime(newTime);
   }, [isDragging, duration]);
-  
+
   const handleProgressMouseUp = useCallback(() => {
     if (isDragging) {
       seekTo(dragTime);
       setIsDragging(false);
     }
   }, [isDragging, dragTime]);
-  
+
   const changeVolume = (newVolume: number) => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) {
+return;
+}
+
     const clampedVolume = Math.max(0, Math.min(1, newVolume));
     setVolume(clampedVolume);
     videoRef.current.volume = clampedVolume;
-    
+
     if (clampedVolume === 0) {
       setIsMuted(true);
     } else if (isMuted) {
       setIsMuted(false);
     }
   };
-  
+
   const toggleMute = () => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) {
+return;
+}
+
     if (isMuted) {
       videoRef.current.volume = volume;
       setIsMuted(false);
@@ -194,10 +210,12 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       setIsMuted(true);
     }
   };
-  
+
   const toggleFullscreen = async () => {
-    if (!containerRef.current) return;
-    
+    if (!containerRef.current) {
+return;
+}
+
     try {
       if (!document.fullscreenElement) {
         await containerRef.current.requestFullscreen();
@@ -210,52 +228,56 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       console.error('Fullscreen error:', error);
     }
   };
-  
+
   const changePlaybackRate = (rate: number) => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+return;
+}
     videoRef.current.playbackRate = rate;
     setPlaybackRate(rate);
   };
-  
+
   const changeQuality = (quality: VideoQuality) => {
-    if (!videoRef.current) return;
-    
-    const currentTime = videoRef.current.currentTime;
+    if (!videoRef.current) {
+return;
+}
+
+    const { currentTime } = videoRef.current;
     const wasPlaying = !videoRef.current.paused;
-    
+
     setCurrentQuality(quality);
     onQualityChange?.(quality);
-    
+
     // In a real implementation, you would change the video source here
     // For now, we'll just update the state
-    
+
     // Restore playback position
     videoRef.current.currentTime = currentTime;
     if (wasPlaying) {
       videoRef.current.play();
     }
   };
-  
+
   const changeSubtitle = (subtitle: Subtitle | null) => {
     setCurrentSubtitle(subtitle);
     // In a real implementation, you would enable/disable subtitle tracks here
   };
-  
+
   const jumpToChapter = (chapter: Chapter) => {
     seekTo(chapter.startTime);
     setShowChapters(false);
   };
-  
+
   const skipForward = () => {
     const newTime = Math.min(currentTime + 10, duration);
     seekTo(newTime);
   };
-  
+
   const skipBackward = () => {
     const newTime = Math.max(currentTime - 10, 0);
     seekTo(newTime);
   };
-  
+
   const showControlsTemporarily = () => {
     setShowControls(true);
     // Hide controls after 3 seconds of inactivity
@@ -265,18 +287,20 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       }
     }, 3000);
   };
-  
+
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-    
+    if (!video) {
+return;
+}
+
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
     video.addEventListener('ended', handleEnded);
-    
+
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadstart', handleLoadStart);
@@ -286,12 +310,12 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       video.removeEventListener('ended', handleEnded);
     };
   }, [handleTimeUpdate]);
-  
+
   useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleProgressMouseMove);
       document.addEventListener('mouseup', handleProgressMouseUp);
-      
+
       return () => {
         document.removeEventListener('mousemove', handleProgressMouseMove);
         document.removeEventListener('mouseup', handleProgressMouseUp);
@@ -299,20 +323,22 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     }
     return () => {}; // Empty cleanup for when not dragging
   }, [isDragging, handleProgressMouseMove, handleProgressMouseUp]);
-  
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
-    
+
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
-  
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!containerRef.current?.contains(document.activeElement)) return;
-      
+      if (!containerRef.current?.contains(document.activeElement)) {
+return;
+}
+
       switch (e.code) {
         case 'Space':
           e.preventDefault();
@@ -344,13 +370,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
           break;
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [togglePlay, volume, toggleMute, toggleFullscreen]);
-  
+
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
-  
+
   return (
     <div
       ref={containerRef}
@@ -370,14 +396,14 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         className="w-full h-full object-contain"
         onClick={togglePlay}
       />
-      
+
       {/* Loading Spinner */}
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
         </div>
       )}
-      
+
       {/* Controls Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
         {/* Center Play/Pause Button */}
@@ -393,7 +419,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
             )}
           </button>
         </div>
-        
+
         {/* Bottom Controls */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           {/* Progress Bar */}
@@ -409,27 +435,27 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                 className="absolute top-0 left-0 h-full bg-white bg-opacity-50 rounded-full"
                 style={{ width: `${buffered}%` }}
               />
-              
+
               {/* Current Progress */}
               <div
                 className="absolute top-0 left-0 h-full bg-red-500 rounded-full"
                 style={{ width: `${isDragging ? (dragTime / duration) * 100 : progressPercentage}%` }}
               />
-              
+
               {/* Progress Handle */}
               <div
                 className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 style={{ left: `${isDragging ? (dragTime / duration) * 100 : progressPercentage}%`, marginLeft: '-8px' }}
               />
             </div>
-            
+
             {/* Time Display */}
             <div className="flex justify-between text-white text-sm mt-1">
               <span>{formatTime(isDragging ? dragTime : currentTime)}</span>
               <span>{formatTime(duration)}</span>
             </div>
           </div>
-          
+
           {/* Control Buttons */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -444,7 +470,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                   <PlayIcon className="w-6 h-6" />
                 )}
               </button>
-              
+
               {/* Skip Backward */}
               <button
                 onClick={skipBackward}
@@ -452,7 +478,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               >
                 <BackwardIcon className="w-6 h-6" />
               </button>
-              
+
               {/* Skip Forward */}
               <button
                 onClick={skipForward}
@@ -460,7 +486,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               >
                 <ForwardIcon className="w-6 h-6" />
               </button>
-              
+
               {/* Volume */}
               <div className="flex items-center space-x-2">
                 <button
@@ -473,7 +499,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                     <SpeakerWaveIcon className="w-6 h-6" />
                   )}
                 </button>
-                
+
                 <div className="w-20">
                   <input
                     type="range"
@@ -486,13 +512,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                   />
                 </div>
               </div>
-              
+
               {/* Time Display */}
               <span className="text-white text-sm">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
             </div>
-            
+
             <div className="flex items-center space-x-2">
               {/* Chapters */}
               {chapters.length > 0 && (
@@ -503,7 +529,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                   <RectangleStackIcon className="w-6 h-6" />
                 </button>
               )}
-              
+
               {/* Settings */}
               <button
                 onClick={() => setShowSettings(!showSettings)}
@@ -511,7 +537,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               >
                 <Cog6ToothIcon className="w-6 h-6" />
               </button>
-              
+
               {/* Fullscreen */}
               <button
                 onClick={toggleFullscreen}
@@ -527,7 +553,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
           </div>
         </div>
       </div>
-      
+
       {/* Chapters Panel */}
       {showChapters && chapters.length > 0 && (
         <div className="absolute bottom-20 left-4 bg-black bg-opacity-90 text-white rounded-lg p-4 max-w-sm max-h-64 overflow-y-auto">
@@ -561,12 +587,12 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
           </div>
         </div>
       )}
-      
+
       {/* Settings Panel */}
       {showSettings && (
         <div className="absolute bottom-20 right-4 bg-black bg-opacity-90 text-white rounded-lg p-4 min-w-64">
           <h3 className="text-lg font-semibold mb-4">Settings</h3>
-          
+
           {/* Playback Speed */}
           <div className="mb-4">
             <h4 className="text-sm font-medium mb-2">Playback Speed</h4>
@@ -584,7 +610,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               ))}
             </div>
           </div>
-          
+
           {/* Quality */}
           {qualities.length > 0 && (
             <div className="mb-4">
@@ -604,7 +630,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               </div>
             </div>
           )}
-          
+
           {/* Subtitles */}
           {subtitles.length > 0 && (
             <div>
@@ -634,7 +660,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
           )}
         </div>
       )}
-      
+
       <style>{`
         .slider::-webkit-slider-thumb {
           appearance: none;

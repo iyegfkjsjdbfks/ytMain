@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -58,7 +60,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   videoFile,
   onSave,
   onCancel,
-  className = ''
+  className = '',
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -66,7 +68,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   const [volume, setVolume] = useState(100);
   const [isMuted, setIsMuted] = useState(false);
   const [activeTab, setActiveTab] = useState<'trim' | 'audio' | 'text' | 'filters' | 'effects'>('trim');
-  
+
   // Editing state
   const [clips, setClips] = useState<VideoClip[]>([]);
   const [audioTracks] = useState<AudioTrack[]>([]);
@@ -74,7 +76,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   const [filters, setFilters] = useState<VideoFilter[]>([]);
   const [trimStart, setTrimStart] = useState(0);
   const [trimEnd, setTrimEnd] = useState(0);
-  
+
   // UI state
   const [selectedText, setSelectedText] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -87,19 +89,21 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const handleLoadedMetadata = () => {
       setDuration(video.duration);
       setTrimEnd(video.duration);
-      
+
       // Create initial clip
       const initialClip: VideoClip = {
         id: 'main',
         startTime: 0,
         endTime: video.duration,
         duration: video.duration,
-        thumbnail: generateThumbnail(0)
+        thumbnail: generateThumbnail(0),
       };
       setClips([initialClip]);
     };
@@ -124,7 +128,9 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
 
   const togglePlay = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     if (isPlaying) {
       video.pause();
@@ -136,7 +142,9 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
 
   const seekTo = (time: number) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.currentTime = Math.max(0, Math.min(time, duration));
     setCurrentTime(video.currentTime);
@@ -144,7 +152,9 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
 
   const handleTimelineClick = (e: React.MouseEvent) => {
     const timeline = timelineRef.current;
-    if (!timeline) return;
+    if (!timeline) {
+return;
+}
 
     const rect = timeline.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -163,15 +173,15 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
       fontFamily: 'Arial',
       startTime: currentTime,
       endTime: currentTime + 5,
-      animation: 'fade'
+      animation: 'fade',
     };
     setTextOverlays(prev => [...prev, newText]);
     setSelectedText(newText.id);
   };
 
   const updateTextOverlay = (id: string, updates: Partial<TextOverlay>) => {
-    setTextOverlays(prev => prev.map(text => 
-      text.id === id ? { ...text, ...updates } : text
+    setTextOverlays(prev => prev.map(text =>
+      text.id === id ? { ...text, ...updates } : text,
     ));
   };
 
@@ -185,16 +195,16 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
       id: `filter-${Date.now()}`,
       name: type.charAt(0).toUpperCase() + type.slice(1),
       type,
-      value: type === 'brightness' || type === 'contrast' ? 100 : 
-             type === 'saturation' ? 100 : 
-             type === 'blur' ? 0 : 50
+      value: type === 'brightness' || type === 'contrast' ? 100 :
+             type === 'saturation' ? 100 :
+             type === 'blur' ? 0 : 50,
     };
     setFilters(prev => [...prev, newFilter]);
   };
 
   const updateFilter = (id: string, value: number) => {
-    setFilters(prev => prev.map(filter => 
-      filter.id === id ? { ...filter, value } : filter
+    setFilters(prev => prev.map(filter =>
+      filter.id === id ? { ...filter, value } : filter,
     ));
   };
 
@@ -208,24 +218,24 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
       startTime: trimStart,
       endTime: trimEnd,
       duration: trimEnd - trimStart,
-      thumbnail: generateThumbnail(trimStart)
+      thumbnail: generateThumbnail(trimStart),
     };
     setClips([newClip]);
   };
 
   const exportVideo = async () => {
     setIsProcessing(true);
-    
+
     try {
       // In a real implementation, this would use WebCodecs API or similar
       // to actually process the video with all the applied effects
-      
+
       // Simulate processing time
       await new Promise(resolve => setTimeout(resolve, 3000));
-      
+
       // Create a mock processed video blob
       const processedBlob = new Blob([videoFile], { type: 'video/mp4' });
-      
+
       const metadata = {
         clips,
         audioTracks,
@@ -233,9 +243,9 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
         filters,
         trimStart,
         trimEnd,
-        duration: trimEnd - trimStart
+        duration: trimEnd - trimStart,
       };
-      
+
       onSave(processedBlob, metadata);
     } catch (error) {
       console.error('Error exporting video:', error);
@@ -258,7 +268,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
       </div>
-      
+
       <div
         ref={timelineRef}
         className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded cursor-pointer"
@@ -272,22 +282,22 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
               className="bg-blue-500 h-full flex items-center justify-center text-white text-xs"
               style={{
                 left: `${(clip.startTime / duration) * 100}%`,
-                width: `${(clip.duration / duration) * 100}%`
+                width: `${(clip.duration / duration) * 100}%`,
               }}
             >
               Clip {index + 1}
             </div>
           ))}
         </div>
-        
+
         {/* Playhead */}
         <div
           className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
           style={{ left: `${(currentTime / duration) * 100}%` }}
         >
-          <div className="absolute -top-2 -left-2 w-4 h-4 bg-red-500 rounded-full"></div>
+          <div className="absolute -top-2 -left-2 w-4 h-4 bg-red-500 rounded-full" />
         </div>
-        
+
         {/* Trim markers */}
         {activeTab === 'trim' && (
           <>
@@ -302,7 +312,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           </>
         )}
       </div>
-      
+
       {/* Controls */}
       <div className="flex items-center justify-center space-x-4 mt-4">
         <button
@@ -315,21 +325,21 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
             <PlayIcon className="w-5 h-5" />
           )}
         </button>
-        
+
         <button
           onClick={() => seekTo(currentTime - 10)}
           className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
         >
           ⏪
         </button>
-        
+
         <button
           onClick={() => seekTo(currentTime + 10)}
           className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
         >
           ⏩
         </button>
-        
+
         <button
           onClick={() => setIsMuted(!isMuted)}
           className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
@@ -340,7 +350,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
             <SpeakerWaveIcon className="w-5 h-5" />
           )}
         </button>
-        
+
         <input
           type="range"
           min="0"
@@ -356,7 +366,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
   const renderTrimPanel = () => (
     <div className="space-y-4">
       <h3 className="font-medium text-gray-900 dark:text-white">Trim Video</h3>
-      
+
       <div className="space-y-3">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -375,7 +385,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
             {formatTime(trimStart)}
           </div>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             End Time
@@ -394,13 +404,13 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           </div>
         </div>
       </div>
-      
+
       <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Duration: {formatTime(trimEnd - trimStart)}
         </p>
       </div>
-      
+
       <button
         onClick={trimVideo}
         className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
@@ -421,7 +431,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           Add Text
         </button>
       </div>
-      
+
       <div className="space-y-3">
         {textOverlays.map((text) => (
           <div
@@ -453,14 +463,16 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           </div>
         ))}
       </div>
-      
+
       {selectedText && (
         <div className="border-t pt-4 space-y-3">
           <h4 className="font-medium text-gray-900 dark:text-white">Edit Text</h4>
           {(() => {
             const text = textOverlays.find(t => t.id === selectedText);
-            if (!text) return null;
-            
+            if (!text) {
+return null;
+}
+
             return (
               <div className="space-y-3">
                 <input
@@ -470,7 +482,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                   placeholder="Enter text"
                 />
-                
+
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -485,7 +497,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
                       className="w-full"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Color
@@ -511,7 +523,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
       <div className="flex items-center justify-between">
         <h3 className="font-medium text-gray-900 dark:text-white">Filters & Effects</h3>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-2">
         {['brightness', 'contrast', 'saturation', 'blur', 'sepia', 'grayscale'].map((filterType) => (
           <button
@@ -523,7 +535,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
           </button>
         ))}
       </div>
-      
+
       <div className="space-y-3">
         {filters.map((filter) => (
           <div key={filter.id} className="p-3 border border-gray-200 dark:border-gray-700 rounded">
@@ -571,7 +583,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
             />
             <canvas ref={canvasRef} className="hidden" />
           </div>
-          
+
           {renderTimeline()}
         </div>
 
@@ -615,7 +627,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
             >
               {isProcessing ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   <span>Processing...</span>
                 </>
               ) : (
@@ -625,7 +637,7 @@ const VideoEditor: React.FC<VideoEditorProps> = ({
                 </>
               )}
             </button>
-            
+
             <button
               onClick={onCancel}
               className="w-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"

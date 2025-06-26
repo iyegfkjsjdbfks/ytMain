@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useCallback   } from 'react';
+import type React from 'react';
+import { useState, useEffect, useCallback   } from 'react';
+
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Miniplayer from './Miniplayer'; 
-import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext'; 
-
-
 import { Outlet } from 'react-router-dom'; // Import Outlet
+
+import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
+
+import Header from './Header';
+import Miniplayer from './Miniplayer';
+import Sidebar from './Sidebar';
+
 
 interface LayoutProps {}
 
@@ -19,7 +22,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen(prev => !prev);
   }, []);
-  
+
   useEffect(() => {
     const handleResize = () => {
       // Optional: adjust sidebar based on resize
@@ -31,7 +34,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   }, [isSidebarOpen]);
 
   const handleMaximizeMiniplayer = (videoId: string) => {
-    miniplayerContext.actions.hideMiniplayer(); 
+    miniplayerContext.actions.hideMiniplayer();
     navigate(`/watch/${videoId}`);
   };
 
@@ -42,9 +45,9 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   return (
     <div className="flex flex-col h-screen">
       <Header toggleSidebar={toggleSidebar} />
-      <div className="flex flex-1 pt-14"> 
+      <div className="flex flex-1 pt-14">
         <Sidebar isOpen={isSidebarOpen} />
-        <main 
+        <main
           id="main-content"
           role="main"
           className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950
@@ -60,7 +63,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
       {miniplayerContext.state.isVisible && miniplayerContext.state.currentVideo && (
         <Miniplayer
           video={miniplayerContext.state.currentVideo}
-          onClose={miniplayerContext.actions.hideMiniplayer} 
+          onClose={miniplayerContext.actions.hideMiniplayer}
           onMaximize={handleMaximizeMiniplayer}
         />
       )}

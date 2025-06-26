@@ -1,11 +1,13 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
-import { ContentItem } from '../types';
+
 import { getVideos } from '../services/mockVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
+import type { ContentItem } from '../types';
 
 
 type ViewMode = 'grid' | 'list';
@@ -36,7 +38,7 @@ const ContentManagerPage: React.FC = () => {
           const item: ContentItem = {
             ...video,
             status: status as 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted',
-            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
+            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
           };
           if (Math.random() > 0.9) {
             item.scheduledDate = new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString();
@@ -64,10 +66,10 @@ const ContentManagerPage: React.FC = () => {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(item => 
+      filtered = filtered.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase()))
+        (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())),
       );
     }
 
@@ -124,7 +126,7 @@ const ContentManagerPage: React.FC = () => {
       return;
     }
 
-    setContent(prevContent => 
+    setContent(prevContent =>
       prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           switch (action) {
@@ -141,7 +143,7 @@ const ContentManagerPage: React.FC = () => {
           }
         }
         return item;
-      }).filter(Boolean) as ContentItem[]
+      }).filter(Boolean) as ContentItem[],
     );
 
     if (action === 'duplicate') {
@@ -154,7 +156,7 @@ const ContentManagerPage: React.FC = () => {
           title: `${item.title} (Copy)`,
           status: 'draft' as const,
           uploadedAt: new Date().toISOString(),
-          views: '0'
+          views: '0',
         }));
       setContent(prev => [...prev, ...duplicatedItems]);
     }
@@ -164,21 +166,23 @@ const ContentManagerPage: React.FC = () => {
   };
 
   const handleSchedule = () => {
-    if (!scheduleDate || !scheduleTime) return;
+    if (!scheduleDate || !scheduleTime) {
+return;
+}
 
     const scheduledDateTime = new Date(`${scheduleDate}T${scheduleTime}`).toISOString();
-    
-    setContent(prevContent => 
+
+    setContent(prevContent =>
       prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           return {
             ...item,
             status: 'scheduled' as const,
-            scheduledDate: scheduledDateTime
+            scheduledDate: scheduledDateTime,
           };
         }
         return item;
-      })
+      }),
     );
 
     setSelectedItems(new Set());
@@ -189,8 +193,8 @@ const ContentManagerPage: React.FC = () => {
   };
 
   const getStatusBadge = (status: string, scheduledDate?: string) => {
-    const baseClasses = "px-2 py-1 rounded-full text-xs font-medium";
-    
+    const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
+
     switch (status) {
       case 'published':
         return <span className={`${baseClasses} bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400`}>Published</span>;
@@ -213,7 +217,9 @@ const ContentManagerPage: React.FC = () => {
   };
 
   const getFilterCount = (filterType: FilterType) => {
-    if (filterType === 'all') return content.length;
+    if (filterType === 'all') {
+return content.length;
+}
     return content.filter(item => item.status === filterType).length;
   };
 
@@ -221,10 +227,10 @@ const ContentManagerPage: React.FC = () => {
     return (
       <div className="p-6 space-y-6">
         <div className="animate-pulse">
-          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6"></div>
+          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+              <div key={i} className="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
             ))}
           </div>
         </div>
@@ -417,22 +423,23 @@ const ContentManagerPage: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between mt-4">
                       <div className="flex items-center space-x-2">
-                        <button 
+                        <button
                           onClick={() => {                          }}
                           className="p-1 text-neutral-500 hover:text-blue-500 transition-colors"
                           title="Edit video"
                         >
                           <PencilIcon className="w-4 h-4" />
                         </button>
-                        <button 
+                        <button
                           onClick={() => {                          }}
                           className="p-1 text-neutral-500 hover:text-green-500 transition-colors"
                           title="View analytics"
                         >
                           <ChartBarIcon className="w-4 h-4" />
                         </button>
-                        <button 
-                          onClick={() => {                            navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
                           }}
                           className="p-1 text-neutral-500 hover:text-purple-500 transition-colors"
                           title="Share video"
@@ -440,8 +447,9 @@ const ContentManagerPage: React.FC = () => {
                           <ShareIcon className="w-4 h-4" />
                         </button>
                       </div>
-                      <button 
-                        onClick={() => {                          if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+                      <button
+                        onClick={() => {
+                          if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                             // Delete video logic here
                           }
                         }}
@@ -490,30 +498,32 @@ const ContentManagerPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <button 
+                    <button
                       onClick={() => {                      }}
                       className="p-2 text-neutral-500 hover:text-blue-500 transition-colors"
                       title="Edit video"
                     >
                       <PencilIcon className="w-4 h-4" />
                     </button>
-                    <button 
+                    <button
                       onClick={() => {                      }}
                       className="p-2 text-neutral-500 hover:text-green-500 transition-colors"
                       title="View analytics"
                     >
                       <ChartBarIcon className="w-4 h-4" />
                     </button>
-                    <button 
-                      onClick={() => {                        navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(`https://youtube.com/watch?v=${item.id}`);
                       }}
                       className="p-2 text-neutral-500 hover:text-purple-500 transition-colors"
                       title="Share video"
                     >
                       <ShareIcon className="w-4 h-4" />
                     </button>
-                    <button 
-                      onClick={() => {                        if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+                    <button
+                      onClick={() => {
+                        if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                           // Delete video logic here
                         }
                       }}

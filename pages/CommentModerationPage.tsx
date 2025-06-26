@@ -1,9 +1,12 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useEffect  } from 'react';
+
 import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
-import { Comment } from '../types';
+
 import { getVideos, getCommentsByVideoId } from '../services/mockVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
+
+import type { Comment } from '../types';
 
 interface CommentWithVideo extends Comment {
   videoTitle: string;
@@ -31,7 +34,7 @@ const CommentModerationPage: React.FC = () => {
       try {
         const videos = await getVideos();
         const allComments: CommentWithVideo[] = [];
-        
+
         // Fetch comments for each video
         for (const video of videos.slice(0, 5)) { // Limit to first 5 videos for demo
           const videoComments = await getCommentsByVideoId(video.id);
@@ -40,11 +43,11 @@ const CommentModerationPage: React.FC = () => {
             videoTitle: video.title,
             videoId: video.id,
             status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,
-            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected'
+            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected',
           }));
           allComments.push(...commentsWithVideo);
         }
-        
+
         setComments(allComments);
       } catch (error) {
         console.error('Failed to fetch comments:', error);
@@ -70,10 +73,10 @@ const CommentModerationPage: React.FC = () => {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(comment => 
+      filtered = filtered.filter(comment =>
         comment.commentText.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase())
+        comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
 
@@ -118,7 +121,7 @@ const CommentModerationPage: React.FC = () => {
   };
 
   const handleBulkAction = (action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments => 
+    setComments(prevComments =>
       prevComments.map(comment => {
         if (selectedComments.has(comment.id)) {
           if (action === 'delete') {
@@ -126,18 +129,18 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden'
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden',
           };
         }
         return comment;
-      }).filter(Boolean) as CommentWithVideo[]
+      }).filter(Boolean) as CommentWithVideo[],
     );
     setSelectedComments(new Set());
     setShowBulkActions(false);
   };
 
   const handleSingleAction = (commentId: string, action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments => 
+    setComments(prevComments =>
       prevComments.map(comment => {
         if (comment.id === commentId) {
           if (action === 'delete') {
@@ -145,17 +148,17 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden'
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden',
           };
         }
         return comment;
-      }).filter(Boolean) as CommentWithVideo[]
+      }).filter(Boolean) as CommentWithVideo[],
     );
   };
 
   const getStatusBadge = (status: string, flaggedReason?: string) => {
-    const baseClasses = "px-2 py-1 rounded-full text-xs font-medium";
-    
+    const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
+
     if (flaggedReason) {
       return (
         <span className={`${baseClasses} bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400`}>
@@ -180,8 +183,12 @@ const CommentModerationPage: React.FC = () => {
   };
 
   const getFilterCount = (filterType: FilterType) => {
-    if (filterType === 'all') return comments.length;
-    if (filterType === 'flagged') return comments.filter(c => c.flaggedReason).length;
+    if (filterType === 'all') {
+return comments.length;
+}
+    if (filterType === 'flagged') {
+return comments.filter(c => c.flaggedReason).length;
+}
     return comments.filter(c => c.status === filterType).length;
   };
 
@@ -189,10 +196,10 @@ const CommentModerationPage: React.FC = () => {
     return (
       <div className="p-6 space-y-6">
         <div className="animate-pulse">
-          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6"></div>
+          <div className="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/4 mb-6" />
           <div className="space-y-4">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg"></div>
+              <div key={i} className="h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg" />
             ))}
           </div>
         </div>

@@ -1,13 +1,16 @@
-import React, { useState, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useEffect   } from 'react';
+
 import {
   BellIcon,
   UserMinusIcon,
   MagnifyingGlassIcon,
   CheckIcon,
   Squares2X2Icon,
-  ListBulletIcon
+  ListBulletIcon,
 } from '@heroicons/react/24/outline';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface SubscriptionData {
@@ -77,8 +80,8 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
             thumbnail: `https://picsum.photos/320/180?random=${channelId}-${i}`,
             views: Math.floor(Math.random() * 1000000),
             uploadedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-            duration: `${Math.floor(Math.random() * 20) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`
-          }))
+            duration: `${Math.floor(Math.random() * 20) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+          })),
         }));
         setSubscriptions(subscriptionsList);
       }
@@ -109,8 +112,8 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
         if (subscriptionsData[channelId]) {
           subscriptionsData[channelId].notificationsEnabled = enabled;
           localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(subscriptionsData));
-          setSubscriptions(prev => prev.map(sub => 
-            sub.channelId === channelId ? { ...sub, notificationsEnabled: enabled } : sub
+          setSubscriptions(prev => prev.map(sub =>
+            sub.channelId === channelId ? { ...sub, notificationsEnabled: enabled } : sub,
           ));
         }
       }
@@ -142,7 +145,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
         case 'live':
           return sub.isLive;
         case 'recent_uploads':
-          return sub.lastVideoUpload && 
+          return sub.lastVideoUpload &&
                  new Date(sub.lastVideoUpload).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000;
         default:
           return true;
@@ -165,9 +168,9 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
+      return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
+      return `${(num / 1000).toFixed(1)  }K`;
     }
     return num.toString();
   };
@@ -216,7 +219,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
               className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             />
           )}
-          
+
           <div className="relative">
             <img
               src={subscription.channelAvatar}
@@ -243,7 +246,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
                 <CheckIcon className="w-4 h-4 text-blue-500" />
               )}
             </div>
-            
+
             <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-1">
               <span>{formatNumber(subscription.subscriberCount)} subscribers</span>
               <span>{subscription.videoCount} videos</span>
@@ -310,7 +313,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
                     {video.duration}
                   </div>
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
                     {video.title}
@@ -390,7 +393,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
             <span className="text-blue-800 dark:text-blue-200">
               {selectedSubscriptions.size} channel{selectedSubscriptions.size !== 1 ? 's' : ''} selected
             </span>
-            
+
             <div className="flex space-x-3">
               <button
                 onClick={() => handleBulkNotifications(true)}
@@ -467,7 +470,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               You won't get notifications about new videos from this channel.
             </p>
-            
+
             <div className="flex space-x-3">
               <button
                 onClick={() => setShowUnsubscribeModal(null)}

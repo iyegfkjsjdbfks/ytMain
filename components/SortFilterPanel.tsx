@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect   } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect   } from 'react';
+
 import { CheckIcon } from '@heroicons/react/24/solid';
+
 import AdjustmentsHorizontalIcon from './icons/AdjustmentsHorizontalIcon';
 
 export type SortByType = 'relevance' | 'uploadDate' | 'viewCount';
 
-export const sortOptions: { value: SortByType; label: string }[] = [
+export const sortOptions: Array<{ value: SortByType; label: string }> = [
   { value: 'relevance', label: 'Relevance' },
   { value: 'uploadDate', label: 'Upload date' },
   { value: 'viewCount', label: 'View count' },
@@ -45,7 +48,9 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
     setShowPanel(false);
   };
 
-  if (disabled) return null;
+  if (disabled) {
+return null;
+}
 
   return (
     <div className="relative">
@@ -77,8 +82,8 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
               key={option.value}
               onClick={() => handleSortOptionClick(option.value)}
               className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between
-                ${currentSortBy === option.value 
-                  ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-medium' 
+                ${currentSortBy === option.value
+                  ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-medium'
                   : 'text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'
                 } transition-colors`}
               role="menuitemradio"

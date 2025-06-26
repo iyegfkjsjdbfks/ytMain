@@ -1,6 +1,8 @@
 // YouTube IFrame Player component using YouTube IFrame API
-import React, { useEffect, useRef, useState } from 'react';
-import { YouTubeSearchResult } from '../services/googleSearchService';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 // Define YT namespace
 interface YT {
@@ -113,7 +115,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   height = 315,
   autoplay = false,
   controls = true,
-  className = ''
+  className = '',
 }) => {
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
@@ -124,7 +126,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Extract video ID from the video object
   const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || '';
-  
+
   // Validate video ID
   const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
 
@@ -153,7 +155,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     const script = document.createElement('script');
     script.src = 'https://www.youtube.com/iframe_api';
     script.async = true;
-    
+
     const originalCallback = window.onYouTubeIframeAPIReady;
     window.onYouTubeIframeAPIReady = () => {
       setIsAPIReady(true);
@@ -161,7 +163,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
         originalCallback();
       }
     };
-    
+
     document.head.appendChild(script);
 
     return () => {
@@ -174,7 +176,9 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Initialize player when API is ready
   useEffect(() => {
-    if (!isAPIReady || !playerRef.current || !isValidVideoId) return;
+    if (!isAPIReady || !playerRef.current || !isValidVideoId) {
+return;
+}
 
     let isMounted = true;
 
@@ -212,7 +216,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           // cc_load_policy: 1, // Show closed captions by default (not supported in playerVars)
           iv_load_policy: 3, // Hide video annotations
           disablekb: 0, // Enable keyboard controls
-          widget_referrer: window.location.origin
+          widget_referrer: window.location.origin,
           // host: window.location.protocol + '//' + window.location.host // Not supported in playerVars
         },
         events: {
@@ -226,18 +230,20 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             // Handle state changes if needed
           },
           onError: (event: any) => {
-            if (!isMounted) return;
+            if (!isMounted) {
+return;
+}
             const errorMessages: { [key: number]: string } = {
               2: 'Invalid video ID',
               5: 'HTML5 player error',
               100: 'Video not found or private',
               101: 'Video not available in embedded players',
-              150: 'Video not available in embedded players'
+              150: 'Video not available in embedded players',
             };
             const message = errorMessages[event.data] || 'Unknown error occurred';
             setPlayerError(message);
-          }
-        }
+          },
+        },
       });
     } catch (error) {
       console.error('Error creating YouTube player:', error);
@@ -288,18 +294,18 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       {!isAPIReady && (
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
           <div className="text-gray-600 dark:text-gray-400 text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2" />
             <p>Loading YouTube player...</p>
           </div>
         </div>
       )}
-      <div 
+      <div
         ref={playerRef}
         id={playerIdRef.current}
         className="w-full"
-        style={{ 
+        style={{
           minHeight: typeof height === 'number' ? `${height}px` : height,
-          opacity: isAPIReady ? 1 : 0
+          opacity: isAPIReady ? 1 : 0,
         }}
       />
     </div>

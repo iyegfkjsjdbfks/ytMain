@@ -1,12 +1,14 @@
-import { Video } from '../src/types/core';
+import type { Video } from '../src/types/core';
 
 export function calculateEngagementRate(video: Video): number {
-  if (!video.likes || !video.viewCount) return 0;
+  if (!video.likes || !video.viewCount) {
+return 0;
+}
   return (video.likes / video.viewCount) * 100;
 }
 
 export function formatEngagementRate(rate: number): string {
-  return rate.toFixed(2) + '%';
+  return `${rate.toFixed(2)  }%`;
 }
 
 export function getAudienceRetention(video: Video): number {
@@ -14,27 +16,27 @@ export function getAudienceRetention(video: Video): number {
   // Parse duration string to get seconds
   const durationParts = video.duration.split(':');
   const totalSeconds = durationParts.length === 2
-    ? (parseInt(durationParts[0] || '0') || 0) * 60 + (parseInt(durationParts[1] || '0') || 0)
-    : (parseInt(durationParts[0] || '0') || 0);
+    ? (parseInt(durationParts[0] ?? '0', 10) || 0) * 60 + (parseInt(durationParts[1] ?? '0', 10) || 0)
+    : (parseInt(durationParts[0] ?? '0', 10) || 0);
   return totalSeconds ? Math.min(100, (totalSeconds / 60) * 100) : 0;
 }
 
 export function getImpressionsCTR(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
-  const viewCount = parseInt((video.views || '0').replace(/,/g, '')) || 0;
+  const viewCount = parseInt((video.views ?? '0').replace(/,/g, ''), 10) || 0;
   return viewCount ? Math.min(100, (viewCount / 1000) * 2) : 0;
 }
 
 export function getWatchTime(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
-  const viewCount = parseInt((video.views || '0').replace(/,/g, '')) || 0;
+  const viewCount = parseInt((video.views ?? '0').replace(/,/g, ''), 10) || 0;
   return viewCount ? viewCount * 2.5 : 0;
 }
 
 export function formatWatchTime(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
-  
+
   if (hours > 0) {
     return `${hours}h ${minutes}m`;
   }

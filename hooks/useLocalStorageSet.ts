@@ -4,14 +4,14 @@ import { useState, useCallback, useMemo } from 'react';
  * Custom hook for storing and managing Sets in localStorage
  * Since localStorage can only store strings, this hook handles the conversion
  * between Set objects and arrays for proper serialization.
- * 
+ *
  * @param key - The localStorage key
  * @param initialValue - Initial Set value (defaults to empty Set)
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
 export function useLocalStorageSet<T>(
   key: string,
-  initialValue: Set<T> = new Set()
+  initialValue: Set<T> = new Set(),
 ): [
   Set<T>,
   (item: T) => void,
@@ -102,7 +102,7 @@ export function useLocalStorageSet<T>(
  */
 export function useLocalStorageSetState<T>(
   key: string,
-  initialValue: Set<T> = new Set()
+  initialValue: Set<T> = new Set(),
 ): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {
     try {
@@ -125,13 +125,13 @@ export function useLocalStorageSetState<T>(
       const prevSet = new Set(prev);
       const newSet = updater(prevSet);
       const newItems = Array.from(newSet);
-      
+
       try {
         localStorage.setItem(key, JSON.stringify(newItems));
       } catch (error) {
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
-      
+
       return newItems;
     });
   }, [key]);

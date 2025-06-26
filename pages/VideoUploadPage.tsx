@@ -1,14 +1,17 @@
-import * as React from 'react';
+import type * as React from 'react';
 import {  useState, useRef, useCallback  } from 'react';
-import { VideoUploadData, UploadProgress } from '../types';
-import { uploadVideo } from '../services/mockVideoService';
+
 import { useNavigate } from 'react-router-dom';
+
+import { uploadVideo } from '../services/mockVideoService';
+
+import type { VideoUploadData, UploadProgress } from '../types';
 
 const VideoUploadPage: React.FC = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
-  
+
   const [uploadData, setUploadData] = useState<VideoUploadData>({
     title: '',
     description: '',
@@ -17,15 +20,15 @@ const VideoUploadPage: React.FC = () => {
     visibility: 'public',
     videoFile: null,
     thumbnailFile: null,
-    isShorts: false
+    isShorts: false,
   });
-  
+
   const [progress, setProgress] = useState<UploadProgress>({
     percentage: 0,
     status: 'idle',
-    message: ''
+    message: '',
   });
-  
+
   const [tagInput, setTagInput] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDragOver, setIsDragOver] = useState(false);
@@ -33,20 +36,20 @@ const VideoUploadPage: React.FC = () => {
   const categories = [
     'Entertainment', 'Music', 'Gaming', 'Sports', 'News & Politics',
     'Education', 'Science & Technology', 'Comedy', 'Film & Animation',
-    'Howto & Style', 'Travel & Events', 'Pets & Animals'
+    'Howto & Style', 'Travel & Events', 'Pets & Animals',
   ];
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!uploadData.title.trim()) {
       newErrors.title = 'Title is required';
     }
-    
+
     if (!uploadData.videoFile) {
       newErrors.videoFile = 'Please select a video file';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -57,7 +60,7 @@ const VideoUploadPage: React.FC = () => {
       ...prev,
       videoFile: file,
       isShorts,
-      title: prev.title || file.name.replace(/\.[^/.]+$/, '')
+      title: prev.title || file.name.replace(/\.[^/.]+$/, ''),
     }));
     setErrors(prev => ({ ...prev, videoFile: '' }));
   };
@@ -75,10 +78,10 @@ const VideoUploadPage: React.FC = () => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     const videoFile = files.find(file => file.type.startsWith('video/'));
-    
+
     if (videoFile) {
       handleFileSelect(videoFile);
     }
@@ -88,7 +91,7 @@ const VideoUploadPage: React.FC = () => {
     if (tagInput.trim() && !uploadData.tags.includes(tagInput.trim())) {
       setUploadData(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()]
+        tags: [...prev.tags, tagInput.trim()],
       }));
       setTagInput('');
     }
@@ -97,32 +100,34 @@ const VideoUploadPage: React.FC = () => {
   const handleRemoveTag = (tagToRemove: string) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter(tag => tag !== tagToRemove),
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) return;
-    
+
+    if (!validateForm()) {
+return;
+}
+
     try {
       setProgress({ percentage: 0, status: 'uploading', message: 'Starting upload...' });
-      
+
       await uploadVideo(uploadData, (progressData) => {
         setProgress(progressData);
       });
-      
+
       setProgress({ percentage: 100, status: 'completed', message: 'Upload completed successfully!' });
-      
+
       setTimeout(() => {
         navigate('/');
       }, 2000);
     } catch (error) {
-      setProgress({ 
-        percentage: 0, 
-        status: 'error', 
-        message: 'Upload failed. Please try again.' 
+      setProgress({
+        percentage: 0,
+        status: 'error',
+        message: 'Upload failed. Please try again.',
       });
     }
   };
@@ -134,14 +139,14 @@ const VideoUploadPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Upload Video
           </h1>
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Video Upload Area */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Video File *
               </label>
-              
+
               {!uploadData.videoFile ? (
                 <div
                   className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
@@ -200,18 +205,20 @@ const VideoUploadPage: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               <input
                 ref={fileInputRef}
                 type="file"
                 accept="video/*"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file) handleFileSelect(file);
+                  if (file) {
+handleFileSelect(file);
+}
                 }}
                 className="hidden"
               />
-              
+
               {errors.videoFile && (
                 <p className="text-sm text-red-600">{errors.videoFile}</p>
               )}
@@ -256,7 +263,7 @@ const VideoUploadPage: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Thumbnail
               </label>
-              
+
               {uploadData.thumbnailFile ? (
                 <div className="flex items-center space-x-4">
                   <img
@@ -281,7 +288,7 @@ const VideoUploadPage: React.FC = () => {
                   Upload Thumbnail
                 </button>
               )}
-              
+
               <input
                 ref={thumbnailInputRef}
                 type="file"
@@ -357,7 +364,7 @@ const VideoUploadPage: React.FC = () => {
                   Add
                 </button>
               </div>
-              
+
               {uploadData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {uploadData.tags.map((tag, index) => (

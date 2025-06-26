@@ -1,4 +1,6 @@
-import React, { useState, useRef, useCallback   } from 'react';
+import type React from 'react';
+import { useState, useRef, useCallback   } from 'react';
+
 import {
   CloudArrowUpIcon,
   XMarkIcon,
@@ -8,7 +10,7 @@ import {
   SpeakerXMarkIcon,
   PhotoIcon,
   VideoCameraIcon,
-  TagIcon
+  TagIcon,
 } from '@heroicons/react/24/outline';
 
 export interface VideoUploadData {
@@ -41,7 +43,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   onCancel,
   maxSizeGB = 2,
   allowedFormats = ['video/mp4', 'video/webm', 'video/mov', 'video/avi'],
-  className = ''
+  className = '',
 }) => {
   const [step, setStep] = useState<'upload' | 'details' | 'processing'>('upload');
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -50,7 +52,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  
+
   const [uploadData, setUploadData] = useState<VideoUploadData>({
     title: '',
     description: '',
@@ -61,7 +63,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     ageRestriction: false,
     commentsEnabled: true,
     likesVisible: true,
-    language: 'en'
+    language: 'en',
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,9 +73,8 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const categories = [
     'Education', 'Entertainment', 'Gaming', 'Music', 'News & Politics',
     'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
-    'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals'
+    'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals',
   ];
-
 
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -89,10 +90,10 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     const videoFile = files.find(file => allowedFormats.includes(file.type));
-    
+
     if (videoFile) {
       handleFileSelect(videoFile);
     }
@@ -113,18 +114,18 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }
 
     setVideoFile(file);
-    
+
     // Create preview URL
     const previewUrl = URL.createObjectURL(file);
     setVideoPreview(previewUrl);
-    
+
     // Auto-generate title from filename
     const fileName = file.name.replace(/\.[^/.]+$/, '');
     setUploadData(prev => ({
       ...prev,
-      title: prev.title || fileName
+      title: prev.title || fileName,
     }));
-    
+
     setStep('details');
   };
 
@@ -137,11 +138,11 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
 
   const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
+    if (file?.type.startsWith('image/')) {
       setUploadData(prev => ({
         ...prev,
         thumbnail: file,
-        customThumbnail: URL.createObjectURL(file)
+        customThumbnail: URL.createObjectURL(file),
       }));
     }
   };
@@ -150,7 +151,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
       setUploadData(prev => ({
         ...prev,
-        tags: [...prev.tags, tag.trim()]
+        tags: [...prev.tags, tag.trim()],
       }));
     }
   };
@@ -158,16 +159,18 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const removeTag = (tagToRemove: string) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter(tag => tag !== tagToRemove),
     }));
   };
 
   const handleSubmit = async () => {
-    if (!videoFile) return;
-    
+    if (!videoFile) {
+return;
+}
+
     setStep('processing');
     setUploadProgress(0);
-    
+
     try {
       // Simulate upload progress
       const progressInterval = setInterval(() => {
@@ -181,7 +184,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
       }, 500);
 
       await onUpload(videoFile, uploadData);
-      
+
       clearInterval(progressInterval);
       setUploadProgress(100);
     } catch (error) {
@@ -191,16 +194,20 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   };
 
   const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) {
+return '0 Bytes';
+}
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`;
   };
 
   const getVideoDuration = (): string => {
-    if (!videoRef.current) return '0:00';
-    const duration = videoRef.current.duration;
+    if (!videoRef.current) {
+return '0:00';
+}
+    const { duration } = videoRef.current;
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -229,22 +236,22 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
           }`}
         >
           <CloudArrowUpIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          
+
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
             Drag and drop video files to upload
           </h3>
-          
+
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Your videos will be private until you publish them.
           </p>
-          
+
           <button
             onClick={() => fileInputRef.current?.click()}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
           >
             SELECT FILES
           </button>
-          
+
           <input
             ref={fileInputRef}
             type="file"
@@ -252,7 +259,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
             onChange={handleFileInputChange}
             className="hidden"
           />
-          
+
           <div className="mt-6 text-sm text-gray-500 dark:text-gray-400">
             <p>Maximum file size: {maxSizeGB}GB</p>
             <p>Supported formats: MP4, WebM, MOV, AVI</p>
@@ -470,7 +477,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
                       onClick={() => setUploadData(prev => ({
                         ...prev,
                         thumbnail: null,
-                        customThumbnail: null
+                        customThumbnail: null,
                       }))}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                     >

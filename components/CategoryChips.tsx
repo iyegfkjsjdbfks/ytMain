@@ -1,5 +1,7 @@
 
-import React, { useRef, useEffect, useState, useCallback   } from 'react';
+import type React from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
+
 import { cn } from '../utils/cn';
 
 interface CategoryChipsProps {
@@ -22,7 +24,9 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   // Check scroll position and update button states
   const checkScrollPosition = useCallback(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container) {
+return;
+}
 
     const { scrollLeft, scrollWidth, clientWidth } = container;
     setCanScrollLeft(scrollLeft > 0);
@@ -32,8 +36,10 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   // Scroll functions
   const scrollLeft = useCallback(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
-    
+    if (!container) {
+return;
+}
+
     container.scrollBy({
       left: -200,
       behavior: 'smooth',
@@ -42,8 +48,10 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
 
   const scrollRight = useCallback(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
-    
+    if (!container) {
+return;
+}
+
     container.scrollBy({
       left: 200,
       behavior: 'smooth',
@@ -53,11 +61,13 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   // Set up scroll event listener
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container) {
+return;
+}
 
     checkScrollPosition();
     container.addEventListener('scroll', checkScrollPosition);
-    
+
     // Check on resize
     const resizeObserver = new ResizeObserver(checkScrollPosition);
     resizeObserver.observe(container);
@@ -71,17 +81,21 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
   // Scroll to selected category when it changes
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container) {
+return;
+}
 
     const selectedButton = container.querySelector(`[data-category="${selectedCategory}"]`) as HTMLElement;
-    if (!selectedButton) return;
+    if (!selectedButton) {
+return;
+}
 
     const containerRect = container.getBoundingClientRect();
     const buttonRect = selectedButton.getBoundingClientRect();
-    
+
     // Check if button is fully visible
-    const isVisible = 
-      buttonRect.left >= containerRect.left && 
+    const isVisible =
+      buttonRect.left >= containerRect.left &&
       buttonRect.right <= containerRect.right;
 
     if (!isVisible) {
@@ -116,7 +130,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
       >
         {categories?.map((category) => {
           const isSelected = category === selectedCategory;
-          
+
           return (
             <button
               key={category}
@@ -127,7 +141,7 @@ const CategoryChips: React.FC<CategoryChipsProps> = ({
                 'hover:scale-105 active:scale-95',
                 isSelected
                   ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200',
               )}
             >
               {category}

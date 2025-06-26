@@ -1,5 +1,7 @@
 
-import React, { useState   } from 'react';
+import type React from 'react';
+import { useState   } from 'react';
+
 import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
@@ -15,7 +17,7 @@ interface NotificationItem {
 const mockNotifications: NotificationItem[] = [
   { id: '1', icon: VideoCameraIcon, iconColorClass: 'text-red-500', title: 'New video from TechLevelUp!', description: "'Ultimate Gaming Setup Tour 2024' was just uploaded.", time: '15m ago', isNew: true },
   { id: '2', icon: ChatBubbleLeftRightIcon, iconColorClass: 'text-blue-500', title: 'Comment reply', description: "Alice W. replied to your comment on 'Exploring the Alps'.", time: '1h ago', isNew: true },
-  { id: '3', icon: BellAlertIcon, iconColorClass: 'text-yellow-500', title: 'Subscription update', description: "Nature Explorers just went live!", time: '3h ago' },
+  { id: '3', icon: BellAlertIcon, iconColorClass: 'text-yellow-500', title: 'Subscription update', description: 'Nature Explorers just went live!', time: '3h ago' },
   { id: '4', icon: VideoCameraIcon, iconColorClass: 'text-red-500', title: 'Recommended for you', description: "Check out 'Delicious & Easy Pasta Recipe' by Chef Studio.", time: 'Yesterday' },
 ];
 
@@ -28,7 +30,9 @@ interface NotificationsPanelProps {
 const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
   const [notifications, setNotifications] = useState(mockNotifications);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   const hasNewNotifications = notifications.some(n => n.isNew);
 
@@ -38,7 +42,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
 
   const markAsRead = (id: string) => {
     setNotifications(prev => prev.map(notification =>
-      notification.id === id ? { ...notification, isNew: false } : notification
+      notification.id === id ? { ...notification, isNew: false } : notification,
     ));
   };
 
@@ -69,7 +73,9 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
               <li key={notification.id}>
                 <a
                   href="#" // Replace with actual link target
-                  onClick={(e) => { e.preventDefault(); markAsRead(notification.id); onClose(); }}
+                  onClick={(e) => {
+ e.preventDefault(); markAsRead(notification.id); onClose();
+}}
                   className={`flex items-start p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors ${notification.isNew ? 'bg-sky-50 dark:bg-sky-500/10' : ''}`}
                 >
                   <notification.icon className={`w-6 h-6 mr-3 flex-shrink-0 ${notification.iconColorClass} ${notification.isNew ? '' : 'opacity-70'}`} />
@@ -85,7 +91,7 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
                     </p>
                   </div>
                   {notification.isNew && (
-                    <div className="w-2 h-2 bg-sky-500 rounded-full ml-2 mt-1 flex-shrink-0" aria-label="New notification"></div>
+                    <div className="w-2 h-2 bg-sky-500 rounded-full ml-2 mt-1 flex-shrink-0" aria-label="New notification" />
                   )}
                 </a>
               </li>
@@ -99,11 +105,13 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
           </div>
         )}
       </div>
-      
+
       {notifications.length > 0 && (
          <footer className="p-3 border-t border-neutral-200 dark:border-neutral-700/80 text-center">
             <button
-              onClick={() => { hasNewNotifications ? markAllAsRead() : onClose(); }}
+              onClick={() => {
+ hasNewNotifications ? markAllAsRead() : onClose();
+}}
               className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors px-3 py-1.5 rounded-md hover:bg-sky-50 dark:hover:bg-sky-500/10"
             >
               {hasNewNotifications ? 'Mark all as read' : 'View all notifications'}
