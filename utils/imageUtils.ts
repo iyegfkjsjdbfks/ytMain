@@ -180,7 +180,7 @@ export const getContrastColor = (backgroundColor: string): string => {
 return '#000000';
 }
 
-  const brightness = (parseInt(rgb[0] || '0') * 299 + parseInt(rgb[1] || '0') * 587 + parseInt(rgb[2] || '0') * 114) / 1000;
+  const brightness = (parseInt(rgb[0] || '0', 10) * 299 + parseInt(rgb[1] || '0', 10) * 587 + parseInt(rgb[2] || '0', 10) * 114) / 1000;
   return brightness > 128 ? '#000000' : '#ffffff';
 };
 

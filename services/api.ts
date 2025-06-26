@@ -343,8 +343,8 @@ return null;
         thumbnailUrl: item.snippet.thumbnails.medium.url,
         duration: this.parseDuration(item.contentDetails.duration).toString(),
         views: (item.statistics.viewCount || '0').toString(),
-        likes: parseInt(item.statistics.likeCount || '0') || 0,
-        dislikes: parseInt(item.statistics.dislikeCount || '0') || 0,
+        likes: parseInt(item.statistics.likeCount || '0', 10) || 0,
+        dislikes: parseInt(item.statistics.dislikeCount || '0', 10) || 0,
         uploadedAt: item.snippet.publishedAt || new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -451,9 +451,9 @@ return null;
 return 0;
 }
 
-    const hours = parseInt(match[1] || '0');
-    const minutes = parseInt(match[2] || '0');
-    const seconds = parseInt(match[3] || '0');
+    const hours = parseInt(match[1] || '0', 10);
+      const minutes = parseInt(match[2] || '0', 10);
+      const seconds = parseInt(match[3] || '0', 10);
 
     return hours * 3600 + minutes * 60 + seconds;
   }
@@ -491,9 +491,9 @@ return null;
         description: item.snippet.description,
         avatarUrl: item.snippet.thumbnails.medium.url,
         banner: item.brandingSettings?.image?.bannerExternalUrl || '',
-        subscribers: parseInt(item.statistics.subscriberCount || '0'),
-        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0') / 1000)}K`,
-        videoCount: parseInt(item.statistics.videoCount || '0'),
+        subscribers: parseInt(item.statistics.subscriberCount || '0', 10),
+        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0', 10) / 1000)}K`,
+        videoCount: parseInt(item.statistics.videoCount || '0', 10),
         isVerified: false, // Would need to check separately
         createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString(),

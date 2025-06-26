@@ -134,7 +134,7 @@ const RefactoredWatchPage: React.FC<RefactoredWatchPageProps> = ({
     if (propVideo) {
       const updatedVideo = {
         ...propVideo,
-        viewCount: typeof propVideo.views === 'string' ? parseInt(propVideo.views) || 0 : propVideo.viewCount || 0,
+        viewCount: typeof propVideo.views === 'string' ? parseInt(propVideo.views, 10) || 0 : propVideo.viewCount || 0,
         createdAt: propVideo.createdAt || new Date().toISOString(),
         updatedAt: propVideo.updatedAt || new Date().toISOString(),
       };

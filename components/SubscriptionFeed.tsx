@@ -42,11 +42,11 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
           .sort((a, b) => {
             // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
             const timeA = a.uploadedAt.includes('hour') ? 1 :
-                         a.uploadedAt.includes('day') ? parseInt(a.uploadedAt) || 7 :
-                         a.uploadedAt.includes('week') ? (parseInt(a.uploadedAt) || 1) * 7 : 30;
+                         a.uploadedAt.includes('day') ? parseInt(a.uploadedAt, 10) || 7 :
+                         a.uploadedAt.includes('week') ? (parseInt(a.uploadedAt, 10) || 1) * 7 : 30;
             const timeB = b.uploadedAt.includes('hour') ? 1 :
-                         b.uploadedAt.includes('day') ? parseInt(b.uploadedAt) || 7 :
-                         b.uploadedAt.includes('week') ? (parseInt(b.uploadedAt) || 1) * 7 : 30;
+                         b.uploadedAt.includes('day') ? parseInt(b.uploadedAt, 10) || 7 :
+                         b.uploadedAt.includes('week') ? (parseInt(b.uploadedAt, 10) || 1) * 7 : 30;
             return timeA - timeB;
           })
           .slice(0, maxVideos);

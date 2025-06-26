@@ -247,7 +247,7 @@ const WatchPage: React.FC = () => {
               </h1>
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {formatCount(parseInt(video.views))} views • {formatDistanceToNow(video.uploadedAt)}
+                  {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
                 </div>
               </div>
             </div>

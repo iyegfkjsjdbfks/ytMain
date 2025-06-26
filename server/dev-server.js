@@ -35,7 +35,7 @@ const generateMockVideo = (id) => {
     'TechReviewer', 'FitnessPro', 'ArtStudio', 'GameZone', 'ScienceHub'
   ];
 
-  const index = parseInt(id) % titles.length;
+  const index = parseInt(id, 10) % titles.length;
   const views = Math.floor(Math.random() * 1000000) + 1000;
   const likes = Math.floor(views * 0.05);
 
@@ -69,7 +69,7 @@ app.get('/api/health', (req, res) => {
 // Videos
 app.get('/api/videos', (req, res) => {
   const { limit = 20, category, search } = req.query;
-  const videos = Array.from({ length: parseInt(limit) }, (_, i) => generateMockVideo(i.toString()));
+  const videos = Array.from({ length: parseInt(limit, 10) }, (_, i) => generateMockVideo(i.toString()));
   
   let filteredVideos = videos;
   
@@ -95,7 +95,7 @@ app.get('/api/videos/:id', (req, res) => {
 // Shorts
 app.get('/api/shorts', (req, res) => {
   const { limit = 10 } = req.query;
-  const shorts = Array.from({ length: parseInt(limit) }, (_, i) => ({
+  const shorts = Array.from({ length: parseInt(limit, 10) }, (_, i) => ({
     ...generateMockVideo(`short-${i}`),
     duration: Math.floor(Math.random() * 60) + 15, // 15-75 seconds
     hashtags: ['#shorts', '#viral', '#trending'],
@@ -122,7 +122,7 @@ app.get('/api/videos/:id/comments', (req, res) => {
     'This deserves way more views. Underrated channel!'
   ];
   
-  const comments = Array.from({ length: parseInt(limit) }, (_, i) => ({
+  const comments = Array.from({ length: parseInt(limit, 10) }, (_, i) => ({
     id: `comment-${videoId}-${i}`,
     content: commentTexts[i % commentTexts.length],
     authorId: `user-${i}`,
@@ -166,7 +166,7 @@ app.get('/api/search', (req, res) => {
   const { q: query, limit = 20, type = 'video' } = req.query;
   
   if (type === 'video') {
-    const videos = Array.from({ length: parseInt(limit) }, (_, i) => generateMockVideo(`search-${i}`));
+    const videos = Array.from({ length: parseInt(limit, 10) }, (_, i) => generateMockVideo(`search-${i}`));
     const filteredVideos = query 
       ? videos.filter(v => v.title.toLowerCase().includes(query.toLowerCase()))
       : videos;
@@ -180,7 +180,7 @@ app.get('/api/search', (req, res) => {
 // Trending
 app.get('/api/trending', (req, res) => {
   const { limit = 20, category = 'all' } = req.query;
-  const videos = Array.from({ length: parseInt(limit) }, (_, i) => ({
+  const videos = Array.from({ length: parseInt(limit, 10) }, (_, i) => ({
     ...generateMockVideo(`trending-${i}`),
     trending: true,
     trendingRank: i + 1
