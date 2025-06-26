@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react';
-import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo, type ReactNode } from 'react';
 
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { withMemo } from '../utils/componentOptimizations';
