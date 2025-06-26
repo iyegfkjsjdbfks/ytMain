@@ -27,7 +27,7 @@ export class MockApiService {
       'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
     ];
 
-    const index = id ? parseInt(id) % videos.length : Math.floor(Math.random() * videos.length);
+    const index = id ? parseInt(id, 10) % videos.length : Math.floor(Math.random() * videos.length);
     return videos[index] || videos[0] || '';
   }
 
@@ -64,7 +64,7 @@ export class MockApiService {
       'Complex scientific concepts explained in simple, easy-to-understand terms.',
     ];
 
-    const index = parseInt(id) % titles.length;
+    const index = parseInt(id, 10) % titles.length;
     const views = Math.floor(Math.random() * 1000000) + 1000;
     const likes = Math.floor(views * 0.05);
     const uploadDate = new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000);
@@ -122,8 +122,8 @@ export class MockApiService {
       'This is exactly what I needed to see today.',
     ];
 
-    const index = parseInt(id) % authors.length;
-    const commentIndex = parseInt(id) % comments.length;
+    const index = parseInt(id, 10) % authors.length;
+  const commentIndex = parseInt(id, 10) % comments.length;
 
     return {
       id,
@@ -189,7 +189,7 @@ export class MockApiService {
       'Science Documentaries',
     ];
 
-    const index = parseInt(id) % titles.length;
+    const index = parseInt(id, 10) % titles.length;
     const videoCount = Math.floor(Math.random() * 50) + 5;
     const title = titles[index] || 'Default Playlist';
 

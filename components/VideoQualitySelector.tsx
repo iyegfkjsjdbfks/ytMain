@@ -176,7 +176,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 min="0"
                 max="100"
                 value={volume}
-                onChange={(e) => onVolumeChange?.(parseInt(e.target.value))}
+                onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
                 style={{ writingMode: 'vertical-lr' as const, WebkitAppearance: 'slider-vertical' }}
               />

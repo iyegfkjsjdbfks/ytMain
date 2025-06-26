@@ -1,5 +1,4 @@
-import type { FormEvent, ReactNode } from 'react';
-import React from 'react';
+import React, { type FormEvent, type ReactNode } from 'react';
 
 import { useFormState } from '../hooks';
 

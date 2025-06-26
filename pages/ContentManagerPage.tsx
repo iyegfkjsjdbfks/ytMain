@@ -81,16 +81,16 @@ const ContentManagerPage: React.FC = () => {
         case 'oldest':
           return new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime();
         case 'mostViews':
-          return parseInt(b.views) - parseInt(a.views);
+          return parseInt(b.views, 10) - parseInt(a.views, 10);
         case 'leastViews':
-          return parseInt(a.views) - parseInt(b.views);
+          return parseInt(a.views, 10) - parseInt(b.views, 10);
         case 'alphabetical':
           return a.title.localeCompare(b.title);
         case 'duration':
           const aDurationParts = a.duration?.split(':') || ['0', '0'];
           const bDurationParts = b.duration?.split(':') || ['0', '0'];
-          return parseInt(bDurationParts[0] || '0') * 60 + parseInt(bDurationParts[1] || '0') -
-                 (parseInt(aDurationParts[0] || '0') * 60 + parseInt(aDurationParts[1] || '0'));
+          return parseInt(bDurationParts[0] || '0', 10) * 60 + parseInt(bDurationParts[1] || '0', 10) -
+          (parseInt(aDurationParts[0] || '0', 10) * 60 + parseInt(aDurationParts[1] || '0', 10));
         default:
           return 0;
       }
@@ -413,7 +413,7 @@ return content.length;
                       <div className="flex items-center text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
                         <span className="flex items-center">
                           <EyeIcon className="w-3 h-3 mr-1" />
-                          {formatNumber(parseInt(item.views))}
+                          {formatNumber(parseInt(item.views, 10))}
                         </span>
                         <span className="flex items-center">
                           <ClockIcon className="w-3 h-3 mr-1" />
@@ -487,7 +487,7 @@ return content.length;
                     <div className="flex items-center space-x-4 mt-1">
                       {getStatusBadge(item.status, item.scheduledDate)}
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
-                        {formatNumber(parseInt(item.views))} views
+                        {formatNumber(parseInt(item.views, 10))} views
                       </span>
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
                         {parseRelativeDate(item.uploadedAt)}

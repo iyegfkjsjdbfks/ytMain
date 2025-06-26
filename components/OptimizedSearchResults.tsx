@@ -99,8 +99,8 @@ const sortingFunctions = {
   },
   views: (items: any[]) => {
     return items.sort((a, b) => {
-      const viewsA = typeof a.views === 'string' ? parseInt(a.views) || 0 : (a.views || 0);
-      const viewsB = typeof b.views === 'string' ? parseInt(b.views) || 0 : (b.views || 0);
+      const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
+      const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
       return viewsB - viewsA;
     });
   },

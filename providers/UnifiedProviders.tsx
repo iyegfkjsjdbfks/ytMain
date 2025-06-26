@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type {  ReactNode  } from 'react';
+import type { ReactNode } from 'react';
 
 import { AuthProvider } from '../contexts/AuthContext';
 import { MiniplayerProvider } from '../contexts/MiniplayerContext';
