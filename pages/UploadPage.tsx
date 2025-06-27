@@ -419,7 +419,7 @@ return null;
                     </div>
 
                     <div className="space-y-4">
-                      <label htmlFor="comments-enabled" className="flex items-center">
+                      <label htmlFor="comments-enabled" className="flex items-center text-gray-900 dark:text-white">
                         <input
                           type="checkbox"
                           id="comments-enabled"
@@ -427,7 +427,7 @@ return null;
                           onChange={(e) => setMetadata(prev => ({ ...prev, commentsEnabled: e.target.checked }))}
                           className="mr-3"
                         />
-                        <span className="text-gray-900 dark:text-white">Allow comments</span>
+                        Allow comments
                       </label>
 
                       <label htmlFor="age-restriction" className="flex items-center">
