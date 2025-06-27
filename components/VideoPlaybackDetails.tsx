@@ -1,4 +1,4 @@
-import type { RefObject } from 'react';
+import React, { type RefObject } from 'react';
 
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';

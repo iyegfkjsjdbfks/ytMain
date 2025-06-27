@@ -1,16 +1,13 @@
-import type { ReactNode, Ref } from 'react';
-import { forwardRef } from 'react';
+import { forwardRef, type ReactNode, type Ref } from 'react';
 
 import { getYouTubePlayerType } from '../services/settingsService';
 
 import AdvancedVideoPlayer from './AdvancedVideoPlayer';
-import IFrameAPIYouTubePlayer from './IFrameAPIYouTubePlayer';
+import IFrameAPIYouTubePlayer, { type IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
 import OptimizedVideoPlayer from './OptimizedVideoPlayer';
-import OptimizedYouTubePlayer from './OptimizedYouTubePlayer';
+import OptimizedYouTubePlayer, { type YouTubePlayerMethods } from './OptimizedYouTubePlayer';
 import YouTubePlayer from './YouTubePlayer';
 
-import type { IFrameAPIYouTubePlayerMethods } from './IFrameAPIYouTubePlayer';
-import type { YouTubePlayerMethods } from './OptimizedYouTubePlayer';
 import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 interface YouTubePlayerWrapperProps {

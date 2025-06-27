@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 

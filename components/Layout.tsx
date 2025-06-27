@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useCallback   } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
 import { Outlet } from 'react-router-dom'; // Import Outlet
