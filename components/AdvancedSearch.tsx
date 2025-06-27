@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -346,7 +345,7 @@ searchParams.set('sort_by', filters.sortBy);
 
           {/* Features */}
           <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label htmlFor="features-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
               Features
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">

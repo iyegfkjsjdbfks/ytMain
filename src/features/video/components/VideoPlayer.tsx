@@ -88,7 +88,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (useYouTube || (!src && videoId)) {
       return;
     }
-    
+
     const video = videoRef.current;
     if (!video) {
       return;

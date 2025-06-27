@@ -127,7 +127,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
                 </div>
               </div>
               <p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-wrap mb-3 leading-relaxed">{post.textContent}</p>
-              {post.imageUrl && <img src={post.imageUrl} alt="Community post image" className="rounded-md max-h-96 w-full object-cover my-3 border border-neutral-200 dark:border-neutral-700" />}
+              {post.imageUrl && <img src={post.imageUrl} alt="Community post" className="rounded-md max-h-96 w-full object-cover my-3 border border-neutral-200 dark:border-neutral-700" />}
               <div className="flex items-center text-xs text-neutral-500 dark:text-neutral-400 space-x-4">
                 <span>{post.likes} Likes</span>
                 <span>{post.commentsCount} Comments</span>
