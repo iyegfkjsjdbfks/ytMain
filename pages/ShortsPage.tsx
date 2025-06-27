@@ -1,5 +1,5 @@
 
-import { useRef, useState, useEffect, useCallback, useMemo, type FC } from 'react';
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   MagnifyingGlassIcon,

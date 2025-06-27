@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, type FC } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, RectangleStackIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 import { PlayIcon as PlayIconSolid, PauseIcon as PauseIconSolid } from '@heroicons/react/24/solid';

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, type FC } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 interface BasicVideoPlayerProps {
   src: string;

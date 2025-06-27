@@ -1,5 +1,5 @@
 
-import { createContext, useState, useContext, useCallback, type ReactNode, type FC } from 'react';
+import { createContext, useState, useContext, useCallback, type ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
 

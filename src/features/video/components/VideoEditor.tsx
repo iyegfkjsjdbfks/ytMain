@@ -507,20 +507,20 @@ return;
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Font Size
-                  </label>
+                  </div>
                   <input
                     type="number"
                     value={newTextOverlay.fontSize || 24}
-                    onChange={(e) => setNewTextOverlay(prev => ({ ...prev, fontSize: parseInt(e.target.value) }))}
+                    onChange={(e) => setNewTextOverlay(prev => ({ ...prev, fontSize: parseInt(e.target.value, 10) }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Color
-                  </label>
+                  </div>
                   <input
                     type="color"
                     value={newTextOverlay.color || '#ffffff'}

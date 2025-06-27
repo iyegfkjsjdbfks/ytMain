@@ -1,5 +1,5 @@
 
-import { useRef, useEffect, useState, useCallback, type FC } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 import { cn } from '../utils/cn';
 

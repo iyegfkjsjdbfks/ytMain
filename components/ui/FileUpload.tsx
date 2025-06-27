@@ -1,4 +1,4 @@
-import { useRef, useState, type FC } from 'react';
+import { useRef, useState } from 'react';
 
 import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 

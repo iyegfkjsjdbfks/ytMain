@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes, type FC } from 'react';
+import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
 
 import {
   ExclamationTriangleIcon,

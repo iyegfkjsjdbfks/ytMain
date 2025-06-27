@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useMemo, type FC } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import {
   ViewColumnsIcon,

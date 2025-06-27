@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type FC } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 

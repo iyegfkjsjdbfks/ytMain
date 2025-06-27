@@ -119,9 +119,9 @@ return null;
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Visibility
-            </label>
+            </div>
             <select
               value={formData.visibility}
               onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value as any }))}
@@ -134,9 +134,9 @@ return null;
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Tags
-            </label>
+            </div>
             <div className="flex gap-2 mb-2">
               <input
                 type="text"

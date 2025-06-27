@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, useCallback, type FC } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 import { useNavigate } from 'react-router-dom';

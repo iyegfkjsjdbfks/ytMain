@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   ShieldCheckIcon,

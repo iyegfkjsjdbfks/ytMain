@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, type FC } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 import {
   CloudArrowUpIcon,
