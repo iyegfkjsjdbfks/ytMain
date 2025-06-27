@@ -325,7 +325,12 @@ export function fileToBase64(file: File): Promise<string> {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error instanceof Error ? error : new Error(error?.toString() || 'Unknown error'));
+    reader.onerror = (error) => {
+      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader
+        ? 'File reading failed'
+        : 'Unknown error';
+      reject(new Error(errorMessage));
+    };
   });
 }
 
