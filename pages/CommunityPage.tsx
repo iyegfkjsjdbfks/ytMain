@@ -135,8 +135,7 @@ return;
 
         if (type === 'poll') {
           const poll = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          if (poll) {
-            content = poll.content;
+          content = poll.content;
             pollOptions = poll.options.map((option, idx) => ({
               id: `option-${idx}`,
               text: option,

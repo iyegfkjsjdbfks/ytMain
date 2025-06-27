@@ -509,11 +509,7 @@ export interface ErrorWithSeverity extends AppError {
     const failedCount = this.failedTasks.length;
     const successRate = ((completedCount / totalTasks) * 100).toFixed(1);
 
-    if (this.completedTasks.length > 0) {
-      this.completedTasks.forEach(task => }
-
-    if (this.failedTasks.length > 0) {
-      this.failedTasks.forEach(task => }
+     
 
     if (failedCount > 0) {
       process.exit(1);

@@ -361,10 +361,10 @@ return null;
                           </span>
                         ))}
                       </div>
-                      <div className="flex space-x-2">
+                      <label htmlFor="video-tags-input" className="flex space-x-2">
                         <input
                           type="text"
-                          id="video-tags"
+                          id="video-tags-input"
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}

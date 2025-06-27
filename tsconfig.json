@@ -80,7 +80,8 @@
     "store/**/*",
     "types/**/*",
     "config/**/*",
-    "providers/**/*"
+    "providers/**/*",
+    "scripts/**/*"
   ],
   "exclude": [
     "node_modules",

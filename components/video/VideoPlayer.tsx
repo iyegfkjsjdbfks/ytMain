@@ -220,20 +220,6 @@ return;
           onSettingsToggle={() => setShowSettings(!showSettings)}
         />
       </div>
-
-      {/* Video Settings */}
-      <VideoSettings
-        isOpen={showSettings}
-        onClose={() => setShowSettings(false)}
-        qualities={qualities}
-        currentQuality={currentQuality}
-        onQualityChange={handleQualityChange}
-        subtitles={subtitles}
-        currentSubtitle={currentSubtitle}
-        onSubtitleChange={handleSubtitleChange}
-        autoplay={autoplayNext}
-        onAutoplayChange={setAutoplayNext}
-      />
     </div>
   );
 };

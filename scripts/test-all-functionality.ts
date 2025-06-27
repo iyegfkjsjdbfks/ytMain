@@ -33,35 +33,35 @@ class TestRunner {
   async runAllTests(): Promise<void> {
     // Core functionality tests
     await this.runTestSuite('Core Application Functionality', [
-      'tests/core-functionality.test.tsx'
+      'tests/core-functionality.test.tsx',
     ]);
 
     // Video functionality tests
     await this.runTestSuite('Video Functionality', [
-      'tests/video-functionality.test.tsx'
+      'tests/video-functionality.test.tsx',
     ]);
 
     // Component tests
     await this.runTestSuite('Component Tests', [
       'src/components/**/*.test.tsx',
-      'src/components/**/*.test.ts'
+      'src/components/**/*.test.ts',
     ]);
 
     // Hook tests
     await this.runTestSuite('Custom Hooks', [
       'src/hooks/**/*.test.ts',
-      'src/hooks/**/*.test.tsx'
+      'src/hooks/**/*.test.tsx',
     ]);
 
     // Service tests
     await this.runTestSuite('Services and APIs', [
       'src/services/**/*.test.ts',
-      'src/lib/**/*.test.ts'
+      'src/lib/**/*.test.ts',
     ]);
 
     // Integration tests
     await this.runTestSuite('Integration Tests', [
-      'tests/integration/**/*.test.tsx'
+      'tests/integration/**/*.test.tsx',
     ]);
 
     // Generate comprehensive report
@@ -70,7 +70,7 @@ class TestRunner {
 
   private async runTestSuite(suiteName: string, testPatterns: string[]): Promise<void> {
     const suiteStartTime = Date.now();
-    
+
     const suite: TestSuite = {
       name: suiteName,
       tests: [],
@@ -78,7 +78,7 @@ class TestRunner {
       passedTests: 0,
       failedTests: 0,
       skippedTests: 0,
-      duration: 0
+      duration: 0,
     };
 
     try {
@@ -86,22 +86,22 @@ class TestRunner {
       for (const pattern of testPatterns) {
         try {
           const command = `npm run test -- "${pattern}" --reporter=json`;
-          const output = execSync(command, { 
+          const output = execSync(command, {
             encoding: 'utf8',
-            timeout: 60000 // 1 minute timeout per test pattern
+            timeout: 60000, // 1 minute timeout per test pattern
           });
-          
+
           // Parse test results
           const results = this.parseTestOutput(output);
           suite.tests.push(...results);
-          
+
         } catch (error) {
           console.warn(`⚠️  Warning: Some tests in ${pattern} failed or timed out`);
           suite.tests.push({
             name: pattern,
             status: 'failed',
             duration: 0,
-            errors: [error instanceof Error ? error.message : String(error)]
+            errors: [error instanceof Error ? error.message : String(error)],
           });
         }
       }
@@ -119,7 +119,7 @@ class TestRunner {
         name: suiteName,
         status: 'failed',
         duration: Date.now() - suiteStartTime,
-        errors: [error instanceof Error ? error.message : String(error)]
+        errors: [error instanceof Error ? error.message : String(error)],
       });
     }
 
@@ -128,20 +128,20 @@ class TestRunner {
 
   private parseTestOutput(output: string): TestResult[] {
     const results: TestResult[] = [];
-    
+
     try {
       // Try to parse JSON output from test runner
       const jsonOutput = JSON.parse(output);
-      
+
       if (jsonOutput.testResults) {
         for (const testFile of jsonOutput.testResults) {
           for (const test of testFile.assertionResults || []) {
             results.push({
               name: test.title || test.fullName,
-              status: test.status === 'passed' ? 'passed' : 
+              status: test.status === 'passed' ? 'passed' :
                      test.status === 'skipped' ? 'skipped' : 'failed',
               duration: test.duration || 0,
-              errors: test.failureMessages || []
+              errors: test.failureMessages || [],
             });
           }
         }
@@ -149,8 +149,8 @@ class TestRunner {
     } catch (error) {
       // Fallback: parse text output
       const lines = output.split('\n');
-      let currentTest = '';
-      
+      const currentTest = '';
+
       for (const line of lines) {
         if (line.includes('✓') || line.includes('PASS')) {
           const testName = line.replace(/[✓✗]/g, '').trim();
@@ -158,7 +158,7 @@ class TestRunner {
             results.push({
               name: testName,
               status: 'passed',
-              duration: 0
+              duration: 0,
             });
           }
         } else if (line.includes('✗') || line.includes('FAIL')) {
@@ -168,7 +168,7 @@ class TestRunner {
               name: testName,
               status: 'failed',
               duration: 0,
-              errors: ['Test failed']
+              errors: ['Test failed'],
             });
           }
         }
@@ -210,13 +210,13 @@ class TestRunner {
         totalPassed,
         totalFailed,
         totalSkipped,
-        passRate: ((totalPassed / totalTests) * 100).toFixed(1)
+        passRate: ((totalPassed / totalTests) * 100).toFixed(1),
       },
-      suites: this.results
+      suites: this.results,
     };
 
     const reportPath = path.join(process.cwd(), 'test-reports', 'comprehensive-test-report.json');
-    
+
     // Ensure reports directory exists
     const reportsDir = path.dirname(reportPath);
     if (!fs.existsSync(reportsDir)) {
