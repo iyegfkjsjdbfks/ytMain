@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, type FC } from 'react';
 
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 

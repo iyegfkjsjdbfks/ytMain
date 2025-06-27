@@ -437,9 +437,9 @@ return;
           {editorState.selectedClip ? (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Volume
-                </label>
+                </div>
                 <input
                   type="range"
                   min="0"
@@ -493,9 +493,9 @@ return;
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Text
-                </label>
+                </div>
                 <input
                   type="text"
                   value={newTextOverlay.text || ''}
@@ -510,6 +510,10 @@ return;
                   <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Font Size
                   </div>
+                  <div>
+                  <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Font Size
+                  </div>
                   <input
                     type="number"
                     value={newTextOverlay.fontSize || 24}
@@ -517,7 +521,9 @@ return;
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
+                </div>
                 <div>
+                  <div>
                   <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Color
                   </div>
@@ -527,6 +533,7 @@ return;
                     onChange={(e) => setNewTextOverlay(prev => ({ ...prev, color: e.target.value }))}
                     className="w-full h-10 border border-gray-300 dark:border-gray-600 rounded-md"
                   />
+                </div>
                 </div>
               </div>
 

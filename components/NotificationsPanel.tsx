@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
 
 import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -111,7 +110,7 @@ return null;
             <button
               onClick={() => {
                 if (hasNewNotifications) {
-                  void markAllAsRead();
+                  markAllAsRead();
                 } else {
                   onClose();
                 }
