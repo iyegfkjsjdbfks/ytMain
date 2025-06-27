@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useEffect, useState, useMemo   } from 'react';
+import { useEffect, useState, useMemo, type FC } from 'react';
 
 import {
   ViewColumnsIcon,
@@ -84,7 +83,7 @@ return [];
     // Sort videos
     switch (sortBy) {
       case 'popular':
-        filtered.sort((a, b) => parseInt(b.views.replace(/[^\d]/g, '')) - parseInt(a.views.replace(/[^\d]/g, '')));
+        filtered.sort((a, b) => parseInt(b.views.replace(/[^\d]/g, ''), 10) - parseInt(a.views.replace(/[^\d]/g, ''), 10));
         break;
       case 'oldest':
         filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());

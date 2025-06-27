@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 
 import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 
