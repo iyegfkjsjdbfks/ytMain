@@ -10,7 +10,7 @@ import { useDebounce } from '../hooks/useDebounce';
 import { searchCombined } from '../services/googleSearchService';
 import { performanceMonitor } from '../utils/performance';
 
- 
+
 import type { Video } from '../types';
 
 

@@ -136,11 +136,11 @@ return;
         if (type === 'poll') {
           const poll = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
           content = poll.content;
-            pollOptions = poll.options.map((option, idx) => ({
-              id: `option-${idx}`,
-              text: option,
-              votes: Math.floor(Math.random() * 500) + 50,
-            }));
+          pollOptions = poll.options.map((option, idx) => ({
+            id: `option-${idx}`,
+            text: option,
+            votes: Math.floor(Math.random() * 500) + 50,
+          }));
           }
         }
 

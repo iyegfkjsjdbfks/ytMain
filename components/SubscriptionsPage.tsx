@@ -40,6 +40,8 @@ interface SubscriptionsPageProps {
   className?: string;
 }
 
+const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }) => {
+
  
 
   const filterSubscriptions = () => {

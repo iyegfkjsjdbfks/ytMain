@@ -7,7 +7,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
 interface RefactorTask {
   name: string;
@@ -31,50 +30,50 @@ class CodebaseRefactorer {
         name: 'consolidate-components',
         description: 'Consolidate duplicate components into unified versions',
         priority: 'high',
-        execute: this.consolidateComponents.bind(this)
+        execute: this.consolidateComponents.bind(this),
       },
       {
         name: 'optimize-imports',
         description: 'Optimize and standardize import statements',
         priority: 'high',
-        execute: this.optimizeImports.bind(this)
+        execute: this.optimizeImports.bind(this),
       },
       {
         name: 'enhance-type-safety',
         description: 'Improve TypeScript type definitions and usage',
         priority: 'high',
-        execute: this.enhanceTypeSafety.bind(this)
+        execute: this.enhanceTypeSafety.bind(this),
       },
       {
         name: 'consolidate-hooks',
         description: 'Merge duplicate custom hooks',
         priority: 'medium',
-        execute: this.consolidateHooks.bind(this)
+        execute: this.consolidateHooks.bind(this),
       },
       {
         name: 'optimize-performance',
         description: 'Add React.memo, useMemo, and useCallback optimizations',
         priority: 'medium',
-        execute: this.optimizePerformance.bind(this)
+        execute: this.optimizePerformance.bind(this),
       },
       {
         name: 'standardize-error-handling',
         description: 'Implement consistent error handling patterns',
         priority: 'medium',
-        execute: this.standardizeErrorHandling.bind(this)
+        execute: this.standardizeErrorHandling.bind(this),
       },
       {
         name: 'improve-accessibility',
         description: 'Enhance accessibility features across components',
         priority: 'low',
-        execute: this.improveAccessibility.bind(this)
+        execute: this.improveAccessibility.bind(this),
       },
       {
         name: 'optimize-bundle-size',
         description: 'Implement code splitting and lazy loading',
         priority: 'low',
-        execute: this.optimizeBundleSize.bind(this)
-      }
+        execute: this.optimizeBundleSize.bind(this),
+      },
     ];
   }
 
@@ -283,7 +282,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
   private async optimizeImports(): Promise<void> {
     // Find all TypeScript/JavaScript files
     const files = this.findFiles(['src'], ['.ts', '.tsx'], ['node_modules', 'dist', 'build']);
-    
+
     for (const file of files) {
       await this.optimizeFileImports(file);
     }
@@ -340,16 +339,16 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
 
     // Sort imports: React first, then libraries, then local imports
     const reactImports = importLines.filter(line => line.includes("'react'") || line.includes('"react"'));
-    const libraryImports = importLines.filter(line => 
-      !line.includes("'react'") && 
-      !line.includes('"react"') && 
-      !line.includes('./') && 
+    const libraryImports = importLines.filter(line =>
+      !line.includes("'react'") &&
+      !line.includes('"react"') &&
+      !line.includes('./') &&
       !line.includes('../') &&
-      line.trim().startsWith('import ')
+      line.trim().startsWith('import '),
     );
-    const localImports = importLines.filter(line => 
-      (line.includes('./') || line.includes('../')) && 
-      line.trim().startsWith('import ')
+    const localImports = importLines.filter(line =>
+      (line.includes('./') || line.includes('../')) &&
+      line.trim().startsWith('import '),
     );
     const emptyLines = importLines.filter(line => line.trim() === '');
 
@@ -357,7 +356,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
       ...reactImports.sort(),
       ...libraryImports.sort(),
       ...localImports.sort(),
-      ...emptyLines.slice(0, 1) // Keep one empty line after imports
+      ...emptyLines.slice(0, 1), // Keep one empty line after imports
     ];
 
     return [...sortedImports, ...otherLines].join('\n');
@@ -509,7 +508,6 @@ export interface ErrorWithSeverity extends AppError {
     const failedCount = this.failedTasks.length;
     const successRate = ((completedCount / totalTasks) * 100).toFixed(1);
 
-     
 
     if (failedCount > 0) {
       process.exit(1);

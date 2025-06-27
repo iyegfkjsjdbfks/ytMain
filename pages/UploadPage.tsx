@@ -361,7 +361,7 @@ return null;
                           </span>
                         ))}
                       </div>
-                      <label htmlFor="video-tags-input" className="flex space-x-2">
+                      <label htmlFor="video-tags-input" className="flex space-x-2"></label>
                         <input
                           type="text"
                           id="video-tags-input"
@@ -375,8 +375,6 @@ return null;
                           Add
                         </UnifiedButton>
                       </div>
-                    </div>
-                  </TabsContent>
 
                   <TabsContent value="visibility" className="space-y-6">
                     <div>
