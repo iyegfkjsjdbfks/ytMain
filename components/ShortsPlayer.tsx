@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   PlayIcon,
@@ -277,7 +276,7 @@ return null;
                 </div>
               )}
             </div>
-            <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views) || 0)} views</p>
+            <p className="text-gray-300 text-sm">{formatNumber(parseInt(currentShort.views, 10) || 0)} views</p>
           </div>
 
           <button

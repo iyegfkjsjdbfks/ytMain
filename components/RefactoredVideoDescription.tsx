@@ -82,7 +82,7 @@ const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubs
           </Link>
           <p className="text-xs text-gray-600 dark:text-gray-400">
             {channel?.subscriberCount
-              ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, '')))} subscribers`
+              ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, ''), 10))} subscribers`
               : 'No subscriber data'
             }
           </p>

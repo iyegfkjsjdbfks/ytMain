@@ -21,7 +21,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSu
         aria-label="Search suggestions"
     >
       {suggestions.map((suggestion, index) => (
-        <li key={index} role="option" aria-selected="false">
+        <li key={index}>
           <button
             onClick={() => onSuggestionClick(suggestion)}
             className="w-full text-left px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors flex items-center"

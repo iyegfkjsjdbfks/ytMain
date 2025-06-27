@@ -143,13 +143,13 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       }
 
       // Boost recently uploaded videos (parse the uploadedAt string)
-      const daysAgo = parseInt(video.uploadedAt.match(/\d+/)?.[0] || '30');
+      const daysAgo = parseInt(video.uploadedAt.match(/\d+/)?.[0] || '30', 10);
       if (daysAgo < 7) {
         score += 20;
       }
 
       // Boost videos with high view count
-      const viewCount = parseInt(video.views.replace(/[^0-9]/g, '')) || 0;
+      const viewCount = parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0;
       score += Math.log10(viewCount + 1) * 5;
 
       // Add some randomness
@@ -169,8 +169,8 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
     return availableVideos
       .sort((a, b) => {
-        const aViews = parseInt(a.views.replace(/[^0-9]/g, '')) || 0;
-        const bViews = parseInt(b.views.replace(/[^0-9]/g, '')) || 0;
+        const aViews = parseInt(a.views.replace(/[^0-9]/g, ''), 10) || 0;
+        const bViews = parseInt(b.views.replace(/[^0-9]/g, ''), 10) || 0;
 
         // Parse days from uploadedAt string (e.g., "2 weeks ago", "3 days ago")
         const aDaysMatch = a.uploadedAt.match(/(\d+)\s+(day|week|month)/);
@@ -182,14 +182,14 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         if (aDaysMatch) {
           const [, num, unit] = aDaysMatch;
           if (num && unit) {
-            aDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+            aDays = parseInt(num, 10) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
           }
         }
 
         if (bDaysMatch) {
           const [, num, unit] = bDaysMatch;
           if (num && unit) {
-            bDays = parseInt(num) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
+            bDays = parseInt(num, 10) * (unit === 'week' ? 7 : unit === 'month' ? 30 : 1);
           }
         }
 
@@ -232,8 +232,8 @@ return generatePersonalizedRecommendations();
         // Similar duration
         const currentDurationParts = currentVideo.duration.split(':');
         const videoDurationParts = video.duration.split(':');
-        const currentDuration = currentDurationParts[0] ? parseInt(currentDurationParts[0]) : 0;
-        const videoDuration = videoDurationParts[0] ? parseInt(videoDurationParts[0]) : 0;
+        const currentDuration = currentDurationParts[0] ? parseInt(currentDurationParts[0], 10) : 0;
+        const videoDuration = videoDurationParts[0] ? parseInt(videoDurationParts[0], 10) : 0;
         const durationDiff = Math.abs(currentDuration - videoDuration);
         if (durationDiff < 5) {
 similarityScore += 15;

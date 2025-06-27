@@ -162,11 +162,11 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 
   // Memoized formatted values
   const formattedDuration = useMemo(() => {
-    const durationNum = typeof video.duration === 'string' ? parseInt(video.duration) : video.duration;
+    const durationNum = typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration;
     return formatDuration(durationNum || 0);
   }, [video.duration]);
   const formattedViews = useMemo(() => {
-    const viewsNum = typeof video.views === 'string' ? parseInt(video.views) : video.views;
+    const viewsNum = typeof video.views === 'string' ? parseInt(video.views, 10) : video.views;
     return formatViews(viewsNum || 0);
   }, [video.views]);
   const formattedTimeAgo = useMemo(() => formatTimeAgo(video.uploadedAt), [video.uploadedAt]);

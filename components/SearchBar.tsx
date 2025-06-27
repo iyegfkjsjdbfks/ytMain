@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useState, useEffect, useRef, useCallback   } from 'react';
+import React, { useState, useEffect, useRef, useCallback   } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 import { useNavigate } from 'react-router-dom';
@@ -196,7 +195,7 @@ inputRef.current.blur();
           aria-label="Recent searches"
         >
           {recentSearches.map((searchTerm, index) => (
-            <li key={`${searchTerm}-${index}`} role="option" aria-selected="false" className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
+            <li key={`${searchTerm}-${index}`} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
               <button
                 onClick={() => handleSearch(searchTerm)}
                 className="flex items-center flex-grow text-left"

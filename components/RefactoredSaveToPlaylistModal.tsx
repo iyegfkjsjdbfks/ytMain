@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useAsyncState } from '../hooks';
 
@@ -176,7 +175,7 @@ return 'Playlist name must be less than 100 characters';
         /* Select existing playlist */
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="select-playlist" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Select a playlist
             </label>
 
@@ -197,9 +196,11 @@ return 'Playlist name must be less than 100 characters';
                 {existingPlaylists.map((playlist) => (
                   <label
                     key={playlist.id}
+                    htmlFor={`playlist-${playlist.id}`}
                     className="flex items-center p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
                   >
                     <input
+                      id={`playlist-${playlist.id}`}
                       type="radio"
                       name="playlist"
                       value={playlist.id}

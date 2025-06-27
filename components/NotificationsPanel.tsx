@@ -73,8 +73,10 @@ return null;
                 <a
                   href="#" // Replace with actual link target
                   onClick={(e) => {
- e.preventDefault(); markAsRead(notification.id); onClose();
-}}
+                    e.preventDefault();
+                    void markAsRead(notification.id);
+                    void onClose();
+                  }}
                   className={`flex items-start p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors ${notification.isNew ? 'bg-sky-50 dark:bg-sky-500/10' : ''}`}
                 >
                   <notification.icon className={`w-6 h-6 mr-3 flex-shrink-0 ${notification.iconColorClass} ${notification.isNew ? '' : 'opacity-70'}`} />
@@ -109,8 +111,12 @@ return null;
          <footer className="p-3 border-t border-neutral-200 dark:border-neutral-700/80 text-center">
             <button
               onClick={() => {
- hasNewNotifications ? markAllAsRead() : onClose();
-}}
+                if (hasNewNotifications) {
+                  void markAllAsRead();
+                } else {
+                  void onClose();
+                }
+              }}
               className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors px-3 py-1.5 rounded-md hover:bg-sky-50 dark:hover:bg-sky-500/10"
             >
               {hasNewNotifications ? 'Mark all as read' : 'View all notifications'}

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   BellIcon,
@@ -66,7 +65,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           channelName: data.channelName,
           channelAvatar: data.channelAvatarUrl,
           channelVerified: Math.random() > 0.7,
-          subscriberCount: parseInt(data.subscriberCount?.replace(/[^\d]/g, '') || '0') || Math.floor(Math.random() * 1000000),
+          subscriberCount: parseInt(data.subscriberCount?.replace(/[^\d]/g, '') || '0', 10) || Math.floor(Math.random() * 1000000),
           videoCount: Math.floor(Math.random() * 500) + 10,
           subscribedAt: data.subscribedAt,
           notificationsEnabled: data.notificationsEnabled,
@@ -168,9 +167,9 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
-      return `${(num / 1000000).toFixed(1)  }M`;
+      return `${(num / 1000000).toFixed(1)}M`;
     } else if (num >= 1000) {
-      return `${(num / 1000).toFixed(1)  }K`;
+      return `${(num / 1000).toFixed(1)}K`;
     }
     return num.toString();
   };
