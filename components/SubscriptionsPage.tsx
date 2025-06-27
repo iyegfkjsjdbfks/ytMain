@@ -66,3 +66,19 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           channelAvatar: data.channelAvatarUrl,
           channelVerified: Math.random() > 0.7,
           subscriberCount: parseInt(data.subscriberCount?.replace(/[^\d]/g, '') || '0', 10) || Math.floor(Math.random() * 1000000),
+          videoCount: data.videoCount || Math.floor(Math.random() * 1000),
+          subscribedAt: data.subscribedAt || new Date().toISOString(),
+          notificationsEnabled: data.notificationsEnabled || false,
+          lastVideoUpload: data.lastVideoUpload,
+          category: data.category || 'Entertainment',
+          description: data.description || 'A channel about various topics.',
+          isLive: data.isLive || false,
+          recentVideos: data.recentVideos || [],
+        }));
+        setSubscriptions(subscriptionsList);
+      }
+    } catch (error) {
+      console.error('Failed to load subscriptions from localStorage:', error);
+      setSubscriptions([]); // Ensure subscriptions are empty on error
+    }
+  };

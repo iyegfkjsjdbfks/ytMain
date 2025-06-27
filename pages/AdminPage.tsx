@@ -15,13 +15,6 @@ import {
   isHybridModeAvailable,
 } from '../services/settingsService';
 
-import type {
-  YouTubeSearchProvider,
-  YouTubePlayerType,
-  LocalVideoPlayerType,
-
-  VideoPlayerConfig } from '../services/settingsService';
-
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');

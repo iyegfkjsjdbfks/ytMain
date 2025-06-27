@@ -1,4 +1,3 @@
-import type React from 'react';
 import { useState } from 'react';
 
 import { PhotoIcon, PaintBrushIcon, EyeIcon, DocumentTextIcon, LinkIcon, GlobeAltIcon } from '@heroicons/react/24/outline';

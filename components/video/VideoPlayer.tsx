@@ -4,7 +4,6 @@ import { useVideoPlayer } from '../../hooks';
 import { LoadingSpinner, ErrorMessage } from '../ui';
 
 import VideoControls from './VideoControls';
-import VideoSettings from './VideoSettings';
 
 import type { VideoQuality, Subtitle } from './VideoSettings';
 
