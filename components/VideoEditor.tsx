@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   PlayIcon,
@@ -356,7 +355,7 @@ return;
           min="0"
           max="100"
           value={volume}
-          onChange={(e) => setVolume(parseInt(e.target.value))}
+          onChange={(e) => setVolume(parseInt(e.target.value, 10))}
           className="w-20"
         />
       </div>
@@ -369,11 +368,12 @@ return;
 
       <div className="space-y-3">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="trim-start-time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Start Time
           </label>
           <input
             type="range"
+            id="trim-start-time"
             min="0"
             max={duration}
             step="0.1"
@@ -387,11 +387,12 @@ return;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="trim-end-time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             End Time
           </label>
           <input
             type="range"
+            id="trim-end-time"
             min="0"
             max={duration}
             step="0.1"
@@ -485,25 +486,27 @@ return null;
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="text-font-size" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Font Size
                     </label>
                     <input
                       type="range"
+                      id="text-font-size"
                       min="12"
                       max="72"
                       value={text.fontSize}
-                      onChange={(e) => updateTextOverlay(text.id, { fontSize: parseInt(e.target.value) })}
+                      onChange={(e) => updateTextOverlay(text.id, { fontSize: parseInt(e.target.value, 10) })}
                       className="w-full"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="text-color" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Color
                     </label>
                     <input
                       type="color"
+                      id="text-color"
                       value={text.color}
                       onChange={(e) => updateTextOverlay(text.id, { color: e.target.value })}
                       className="w-full h-8 rounded"
@@ -555,7 +558,7 @@ return null;
               min="0"
               max={filter.type === 'blur' ? 10 : 200}
               value={filter.value}
-              onChange={(e) => updateFilter(filter.id, parseInt(e.target.value))}
+              onChange={(e) => updateFilter(filter.id, parseInt(e.target.value, 10))}
               className="w-full"
             />
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">

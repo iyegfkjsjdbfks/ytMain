@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -139,9 +138,9 @@ const LoginPage: React.FC = () => {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+                <Link to="/forgot-password" className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -181,11 +180,11 @@ const LoginPage: React.FC = () => {
           <div className="mt-6">
             <div className="text-center text-xs text-gray-500 dark:text-gray-400">
               By signing in, you agree to our{' '}
-              <a href="#" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+              <a href="/terms-of-service" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a href="#" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+              <a href="/privacy-policy" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
                 Privacy Policy
               </a>
             </div>

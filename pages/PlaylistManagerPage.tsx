@@ -1,5 +1,4 @@
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -485,9 +484,10 @@ return;
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                  <label htmlFor="new-playlist-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
                   <input
                     type="text"
+                    id="new-playlist-title"
                     value={newPlaylist.title}
                     onChange={(e) => setNewPlaylist({ ...newPlaylist, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -496,8 +496,9 @@ return;
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                  <label htmlFor="new-playlist-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
                   <textarea
+                    id="new-playlist-description"
                     value={newPlaylist.description}
                     onChange={(e) => setNewPlaylist({ ...newPlaylist, description: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
@@ -507,8 +508,9 @@ return;
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Visibility</label>
+                  <label htmlFor="new-playlist-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Visibility</label>
                   <select
+                    id="new-playlist-visibility"
                     value={newPlaylist.visibility}
                     onChange={(e) => setNewPlaylist({ ...newPlaylist, visibility: e.target.value as any })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"

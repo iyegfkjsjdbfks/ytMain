@@ -140,7 +140,7 @@ const VideoThumbnail: React.FC<{
           {/* Duration Badge */}
           {video.duration && (
             <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-1.5 py-0.5 rounded">
-              {formatDuration(typeof video.duration === 'string' ? parseInt(video.duration) : video.duration)}
+              {formatDuration(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration)}
             </div>
           )}
 
@@ -203,7 +203,7 @@ const VideoMetadata: React.FC<{
 
       <div className={cn('flex items-center space-x-2', sizeClasses[size].metadata)}>
         {showViews && video.views && (
-          <span>{formatViewCount(typeof video.views === 'string' ? parseInt(video.views) : video.views)} views</span>
+          <span>{formatViewCount(typeof video.views === 'string' ? parseInt(video.views, 10) : video.views)} views</span>
         )}
         {showViews && showTimestamp && video.views && video.uploadedAt && (
           <span>•</span>

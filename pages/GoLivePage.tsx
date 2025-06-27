@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const GoLivePage: React.FC = () => {
   const [streamTitle, setStreamTitle] = useState('');

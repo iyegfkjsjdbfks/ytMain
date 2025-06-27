@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 
 import { BellIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
@@ -92,7 +92,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
               )}
             </Link>
             <p className="text-xs text-neutral-600 dark:text-neutral-400">
-              {channel?.subscriberCount ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, '')))} subscribers` : 'No subscriber data'}
+              {channel?.subscriberCount ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, ''), 10))} subscribers` : 'No subscriber data'}
             </p>
           </div>
         </div>

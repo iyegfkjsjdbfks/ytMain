@@ -1,5 +1,4 @@
-import type * as React from 'react';
-import {  useState  } from 'react';
+import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -208,13 +207,19 @@ const RegisterPage: React.FC = () => {
               <div className="ml-3 text-sm">
                 <label htmlFor="accept-terms" className="text-gray-700 dark:text-gray-300">
                   I agree to the{' '}
-                  <a href="#" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+                  <Link
+                    to="/terms-of-service"
+                    className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
+                  >
                     Terms of Service
-                  </a>{' '}
+                  </Link>{' '}
                   and{' '}
-                  <a href="#" className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+                  <Link
+                    to="/privacy-policy"
+                    className="text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
+                  >
                     Privacy Policy
-                  </a>
+                  </Link>
                 </label>
               </div>
             </div>

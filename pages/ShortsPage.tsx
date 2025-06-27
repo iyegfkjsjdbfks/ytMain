@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useRef, useState, useEffect, useCallback, useMemo   } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useMemo   } from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -85,7 +84,7 @@ return [];
       .map(video => {
         const shortVideo: Short = {
           ...video,
-          duration: typeof video.duration === 'number' ? video.duration : parseInt(video.duration) || 60,
+          duration: typeof video.duration === 'number' ? video.duration : parseInt(video.duration, 10) || 60,
           isShort: true as const,
           isVertical: true,
           visibility: video.visibility as 'public' | 'private' | 'unlisted',

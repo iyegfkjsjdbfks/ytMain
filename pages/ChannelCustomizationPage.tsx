@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { PhotoIcon, PaintBrushIcon, EyeIcon, DocumentTextIcon, LinkIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
@@ -214,7 +213,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Channel Art */}
                   <div className="mb-8">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="channel-art" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Channel Art
                     </label>
                     <div className="relative">
@@ -250,7 +249,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Profile Picture */}
                   <div className="mb-8">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="profile-picture" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Profile Picture
                     </label>
                     <div className="flex items-center space-x-4">
@@ -293,7 +292,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Watermark */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label id="video-watermark-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Video Watermark
                     </label>
                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
@@ -310,12 +309,13 @@ const ChannelCustomizationPage: React.FC = () => {
                           input.onchange = (e) => {
                             const file = (e.target as HTMLInputElement).files?.[0];
                             if (file) {
-                              // Handle watermark upload
+                              // Handle file upload
                             }
                           };
                           input.click();
                         }}
                         className="text-red-600 hover:text-red-700 text-sm font-medium"
+                        aria-labelledby="video-watermark-label"
                       >
                         Choose File
                       </button>
@@ -331,10 +331,10 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                      <label id="layout-style-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                         Layout Style
                       </label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
                         {[
                           { id: 'default', name: 'Default', description: 'Standard YouTube layout' },
                           { id: 'compact', name: 'Compact', description: 'More videos visible' },
@@ -348,6 +348,8 @@ const ChannelCustomizationPage: React.FC = () => {
                                 ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
                                 : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                             }`}
+                            role="radio"
+                            aria-checked={branding.channelLayout === layout.id}
                           >
                             <h3 className="font-medium text-gray-900 dark:text-white">{layout.name}</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{layout.description}</p>
@@ -357,10 +359,11 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="end-screen-template" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         End Screen Template
                       </label>
                       <select
+                        id="end-screen-template"
                         value={branding.endScreenTemplate}
                         onChange={(e) => handleInputChange('endScreenTemplate', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -382,11 +385,12 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="channel-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Channel Name
                       </label>
                       <input
                         type="text"
+                        id="channel-name"
                         value={branding.channelName}
                         onChange={(e) => handleInputChange('channelName', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -395,10 +399,11 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="channel-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Channel Description
                       </label>
                       <textarea
+                        id="channel-description"
                         value={branding.channelDescription}
                         onChange={(e) => handleInputChange('channelDescription', e.target.value)}
                         rows={4}
@@ -408,7 +413,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="channel-keywords" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Channel Keywords
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
@@ -429,6 +434,7 @@ const ChannelCustomizationPage: React.FC = () => {
                       </div>
                       <input
                         type="text"
+                        id="channel-keywords"
                         placeholder="Add a keyword and press Enter"
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         onKeyPress={(e) => {
@@ -441,17 +447,18 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+                      <label id="social-links-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
                         Social Links
                       </label>
-                      <div className="space-y-4">
+                      <div className="space-y-4" aria-labelledby="social-links-label">
                         {Object.entries(branding.socialLinks).map(([platform, url]) => (
                           <div key={platform}>
-                            <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1 capitalize">
+                            <label htmlFor={`${platform}-link`} className="block text-sm text-gray-600 dark:text-gray-400 mb-1 capitalize">
                               {platform}
                             </label>
                             <input
                               type="url"
+                              id={`${platform}-link`}
                               value={url}
                               onChange={(e) => handleSocialLinkChange(platform as keyof ChannelBranding['socialLinks'], e.target.value)}
                               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -472,11 +479,12 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="channel-trailer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Channel Trailer
                       </label>
                       <input
                         type="text"
+                        id="channel-trailer"
                         value={branding.channelTrailer}
                         onChange={(e) => handleInputChange('channelTrailer', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -488,7 +496,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label id="featured-channels-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Featured Channels
                       </label>
                       <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
@@ -499,6 +507,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         <button
                           onClick={() => {                          }}
                           className="text-red-600 hover:text-red-700 text-sm font-medium"
+                          aria-labelledby="featured-channels-label"
                         >
                           Add Featured Channels
                         </button>
