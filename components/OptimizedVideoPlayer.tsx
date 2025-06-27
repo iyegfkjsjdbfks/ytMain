@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState, useEffect, type SyntheticEvent } from 'react';
+import { useCallback, useMemo, useRef, useState, useEffect, type SyntheticEvent } from 'react';
 
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { withMemo } from '../utils/componentOptimizations';

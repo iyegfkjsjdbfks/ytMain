@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback, useState, useRef, useEffect, type MouseEvent } from 'react';
+import { memo, useMemo, useCallback, useState, useRef, useEffect, type MouseEvent } from 'react';
 
 import {
   PlayIcon,

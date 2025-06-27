@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
