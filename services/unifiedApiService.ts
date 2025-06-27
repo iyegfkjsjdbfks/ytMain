@@ -257,7 +257,7 @@ class UnifiedApiService {
       }
     }
 
-    throw lastError!;
+    throw lastError instanceof Error ? lastError : new Error(String(lastError));
   }
 
   // Unified API methods

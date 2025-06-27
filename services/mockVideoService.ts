@@ -754,7 +754,7 @@ export const updateSubscriptionNotifications = (channelId: string, enabled: bool
     return Promise.resolve();
   } catch (error) {
     console.error('Error updating subscription notifications:', error);
-    return Promise.reject(error);
+    return Promise.reject(error instanceof Error ? error : new Error(String(error)));
   }
 };
 
@@ -766,7 +766,7 @@ export const unsubscribeFromChannel = (channelId: string): Promise<void> => {
     return Promise.resolve();
   } catch (error) {
     console.error('Error unsubscribing from channel:', error);
-    return Promise.reject(error);
+    return Promise.reject(error instanceof Error ? error : new Error(String(error)));
   }
 };
 

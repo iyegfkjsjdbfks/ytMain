@@ -215,7 +215,7 @@ export class MockApiService {
       'FoodieAdventure', 'TravelDiaries', 'ScienceSimplified', 'FitnessJourney', 'ComedyCentral',
     ];
 
-    const index = parseInt(id.replace('channel-', '')) % names.length;
+    const index = parseInt(id.replace('channel-', ''), 10) % names.length;
     const subscriberCount = Math.floor(Math.random() * 1000000) + 1000;
     const videoCount = Math.floor(Math.random() * 500) + 10;
     const name = names[index] || 'Default Channel';

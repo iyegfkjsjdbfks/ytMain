@@ -260,7 +260,7 @@ handleFileSelect(file);
 
             {/* Thumbnail Upload */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="thumbnail-upload" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Thumbnail
               </label>
 
@@ -306,7 +306,7 @@ handleFileSelect(file);
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Category */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label htmlFor="video-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Category
                 </label>
                 <select
@@ -322,7 +322,7 @@ handleFileSelect(file);
 
               {/* Visibility */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label htmlFor="video-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Visibility
                 </label>
                 <select
@@ -339,7 +339,7 @@ handleFileSelect(file);
 
             {/* Tags */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="video-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Tags
               </label>
               <div className="flex space-x-2">

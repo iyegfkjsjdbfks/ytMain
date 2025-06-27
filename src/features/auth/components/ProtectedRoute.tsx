@@ -1,6 +1,4 @@
-import type React from 'react';
-import type { ReactNode } from 'react';
-import { useEffect   } from 'react';
+import { useEffect, type FC, type ReactNode } from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
 
