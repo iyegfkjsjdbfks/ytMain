@@ -143,7 +143,7 @@ return;
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Video Upload Area */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="video-file" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Video File *
               </label>
 
@@ -226,7 +226,7 @@ handleFileSelect(file);
 
             {/* Title */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="video-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Title *
               </label>
               <input
@@ -246,7 +246,7 @@ handleFileSelect(file);
 
             {/* Description */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="video-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Description
               </label>
               <textarea

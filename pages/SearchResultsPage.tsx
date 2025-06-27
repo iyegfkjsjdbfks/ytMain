@@ -1,13 +1,13 @@
 
 
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect, useCallback, type FC, memo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
+
 import { searchCombined } from '../services/googleSearchService';
-import { searchVideos } from '../services/mockVideoService';
 import { performanceMonitor } from '../utils/performance';
 
 import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';

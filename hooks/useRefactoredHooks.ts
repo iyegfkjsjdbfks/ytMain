@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type RefObject, type MouseEvent } from 'react';
 
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 

@@ -1,9 +1,6 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type FC } from 'react';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService';
-
-
 
 // YouTube Player API types
 declare global {

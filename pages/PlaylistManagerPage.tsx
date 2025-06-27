@@ -2,9 +2,7 @@
 import { useState, useEffect } from 'react';
 
 import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
-import type { DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, type DropResult } from 'react-beautiful-dnd';
 
 interface PlaylistVideo {
   id: string;

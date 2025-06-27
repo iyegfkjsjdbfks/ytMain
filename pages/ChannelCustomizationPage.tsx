@@ -216,7 +216,7 @@ const ChannelCustomizationPage: React.FC = () => {
                   <div className="mb-8">
                     <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Channel Art
-                    </label>
+                    </div>
                     <div className="relative">
                       <img
                         src={branding.channelArt}
@@ -252,7 +252,7 @@ const ChannelCustomizationPage: React.FC = () => {
                   <div className="mb-8">
                     <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Profile Picture
-                    </label>
+                    </div>
                     <div className="flex items-center space-x-4">
                       <div className="relative">
                         <img
@@ -295,7 +295,7 @@ const ChannelCustomizationPage: React.FC = () => {
                   <div>
                     <div id="video-watermark-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Video Watermark
-                    </label>
+                    </div>
                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
                       <PhotoIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
@@ -334,7 +334,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     <div>
                       <div id="layout-style-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                         Layout Style
-                      </label>
+                      </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
                         {[
                           { id: 'default', name: 'Default', description: 'Standard YouTube layout' },
@@ -450,7 +450,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     <div>
                       <div id="social-links-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
                         Social Links
-                      </label>
+                      </div>
                       <div className="space-y-4" aria-labelledby="social-links-label">
                         {Object.entries(branding.socialLinks).map(([platform, url]) => (
                           <div key={platform}>
@@ -499,7 +499,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     <div>
                       <div id="featured-channels-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Featured Channels
-                      </label>
+                      </div>
                       <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
                         <GlobeAltIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">

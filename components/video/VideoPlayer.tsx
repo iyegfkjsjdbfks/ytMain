@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type FC } from 'react';
 
 import { useVideoPlayer } from '../../hooks';
 import { LoadingSpinner, ErrorMessage } from '../ui';
 
 import VideoControls from './VideoControls';
-import VideoSettings from './VideoSettings';
-
 import type { VideoQuality, Subtitle } from './VideoSettings';
+import VideoSettings from './VideoSettings';
 
 interface Chapter {
   title: string;

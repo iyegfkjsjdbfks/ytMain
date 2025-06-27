@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useCallback, useState } from 'react';
+import { createContext, useContext, useCallback, useState, type FC } from 'react';
 
 import { cn } from '../../utils/cn';
 import { UnifiedButton } from '../ui/UnifiedButton';

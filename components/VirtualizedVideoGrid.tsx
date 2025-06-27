@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
+import { useMemo, useCallback, useState, useEffect, type FC } from 'react';
 
 import { FixedSizeGrid as Grid } from 'react-window';
 

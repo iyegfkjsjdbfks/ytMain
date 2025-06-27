@@ -514,7 +514,7 @@ return null;
                   return (
                     <>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-1">Clip Name</label>
+                        <div className="block text-sm text-gray-400 mb-1">Clip Name</div>
                         <input
                           type="text"
                           value={clip.name}
@@ -524,7 +524,7 @@ return null;
                       </div>
 
                       <div>
-                        <label className="block text-sm text-gray-400 mb-1">Duration</label>
+                        <div className="block text-sm text-gray-400 mb-1">Duration</div>
                         <input
                           type="text"
                           value={formatTime(clip.duration)}
@@ -535,15 +535,15 @@ return null;
 
                       {clip.volume !== undefined && (
                         <div>
-                          <label className="block text-sm text-gray-400 mb-1">
+                          <div className="block text-sm text-gray-400 mb-1">
                             Volume: {clip.volume}%
-                          </label>
+                          </div>
                           <input
                             type="range"
                             min="0"
                             max="100"
                             value={clip.volume}
-                            onChange={(e) => handleVolumeChange(clip.id, parseInt(e.target.value))}
+                            onChange={(e) => handleVolumeChange(clip.id, parseInt(e.target.value, 10))}
                             className="w-full"
                           />
                         </div>

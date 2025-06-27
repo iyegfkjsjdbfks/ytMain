@@ -288,11 +288,12 @@ return null;
 
                   <TabsContent value="details" className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="video-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Title (required)
                       </label>
                       <input
                         type="text"
+                        id="video-title"
                         value={metadata.title}
                         onChange={(e) => setMetadata(prev => ({ ...prev, title: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -305,10 +306,11 @@ return null;
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="video-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Description
                       </label>
                       <textarea
+                        id="video-description"
                         value={metadata.description}
                         onChange={(e) => setMetadata(prev => ({ ...prev, description: e.target.value }))}
                         rows={6}
@@ -322,10 +324,11 @@ return null;
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="video-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Category
                       </label>
                       <select
+                        id="video-category"
                         value={metadata.category}
                         onChange={(e) => setMetadata(prev => ({ ...prev, category: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -339,7 +342,7 @@ return null;
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="video-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Tags
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
@@ -361,6 +364,7 @@ return null;
                       <div className="flex space-x-2">
                         <input
                           type="text"
+                          id="video-tags"
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
@@ -415,9 +419,10 @@ return null;
                     </div>
 
                     <div className="space-y-4">
-                      <label className="flex items-center">
+                      <label htmlFor="comments-enabled" className="flex items-center">
                         <input
                           type="checkbox"
+                          id="comments-enabled"
                           checked={metadata.commentsEnabled}
                           onChange={(e) => setMetadata(prev => ({ ...prev, commentsEnabled: e.target.checked }))}
                           className="mr-3"
@@ -425,9 +430,10 @@ return null;
                         <span className="text-gray-900 dark:text-white">Allow comments</span>
                       </label>
 
-                      <label className="flex items-center">
+                      <label htmlFor="age-restriction" className="flex items-center">
                         <input
                           type="checkbox"
+                          id="age-restriction"
                           checked={metadata.ageRestriction}
                           onChange={(e) => setMetadata(prev => ({ ...prev, ageRestriction: e.target.checked }))}
                           className="mr-3"
@@ -443,9 +449,10 @@ return null;
                         Monetization
                       </h3>
 
-                      <label className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                      <label htmlFor="monetization-enabled" className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                         <input
                           type="checkbox"
+                          id="monetization-enabled"
                           checked={metadata.monetization}
                           onChange={(e) => setMetadata(prev => ({ ...prev, monetization: e.target.checked }))}
                           className="mr-3"

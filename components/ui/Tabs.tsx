@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext, type FC, type ReactNode } from 'react';
 
 interface TabsContextType {
   value: string;
