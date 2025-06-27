@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 

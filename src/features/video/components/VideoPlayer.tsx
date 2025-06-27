@@ -82,33 +82,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showSettings, setShowSettings] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
 
-  // If using YouTube, render iframe
-  if (useYouTube || (!src && videoId)) {
-    const videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&start=${Math.floor(startTime)}&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&controls=1&rel=0&modestbranding=1&playsinline=1&fs=1&cc_load_policy=1&iv_load_policy=3&disablekb=0&widget_referrer=${encodeURIComponent(window.location.origin)}`;
-
-    return (
-      <div className={`video-player-container ${className}`}>
-        <div className="video-player-wrapper relative">
-          <iframe
-            src={videoUrl}
-            title={title || `Video ${videoId}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="w-full aspect-video"
-            loading="lazy"
-            frameBorder="0"
-            onLoad={onReady}
-          />
-        </div>
-      </div>
-    );
-  }
-
+  // Move all hooks before conditional returns
   useEffect(() => {
+    // Only run for custom video player, not YouTube
+    if (useYouTube || (!src && videoId)) {
+      return;
+    }
+    
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     const handleLoadedMetadata = () => {
       setState(prev => ({ ...prev, duration: video.duration }));
@@ -172,7 +156,7 @@ return;
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('volumechange', handleVolumeChange);
     };
-  }, [onTimeUpdate, onPlay, onPause, onEnded, onReady, startTime]);
+  }, [onTimeUpdate, onPlay, onPause, onEnded, onReady, startTime, useYouTube, src, videoId]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -188,6 +172,29 @@ return;
     };
   }, []);
 
+  // If using YouTube, render iframe
+  if (useYouTube || (!src && videoId)) {
+    const videoUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&start=${Math.floor(startTime)}&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&controls=1&rel=0&modestbranding=1&playsinline=1&fs=1&cc_load_policy=1&iv_load_policy=3&disablekb=0&widget_referrer=${encodeURIComponent(window.location.origin)}`;
+
+    return (
+      <div className={`video-player-container ${className}`}>
+        <div className="video-player-wrapper relative">
+          <iframe
+            src={videoUrl}
+            title={title || `Video ${videoId}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full aspect-video"
+            loading="lazy"
+            frameBorder="0"
+            onLoad={onReady}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Rest of the component for custom video player
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) {
@@ -462,10 +469,11 @@ return;
                   <div className="space-y-3">
                     {/* Playback Speed */}
                     <div>
-                      <label className="text-white text-sm font-medium block mb-1">
+                      <label htmlFor="playback-speed" className="text-white text-sm font-medium block mb-1">
                         Playback Speed
                       </label>
                       <select
+                        id="playback-speed"
                         value={state.playbackRate}
                         onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
                         className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"
@@ -483,10 +491,11 @@ return;
 
                     {/* Quality */}
                     <div>
-                      <label className="text-white text-sm font-medium block mb-1">
+                      <label htmlFor="video-quality" className="text-white text-sm font-medium block mb-1">
                         Quality
                       </label>
                       <select
+                        id="video-quality"
                         value={state.quality}
                         onChange={(e) => setState(prev => ({ ...prev, quality: e.target.value }))}
                         className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"

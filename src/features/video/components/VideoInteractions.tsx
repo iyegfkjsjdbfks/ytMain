@@ -101,10 +101,11 @@ return null;
 
         {/* Start time input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="start-time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Start at (optional)
           </label>
           <input
+            id="start-time"
             type="text"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
