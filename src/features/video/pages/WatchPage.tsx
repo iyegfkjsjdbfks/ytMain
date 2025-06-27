@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import type { Video } from '../../../types/core';
 
 
-const WatchPage: React.FC = () => {
+const WatchPage: FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
   const [video, setVideo] = useState<Video | null>(null);
 

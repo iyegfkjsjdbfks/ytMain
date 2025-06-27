@@ -255,8 +255,8 @@ export function isFunction(value: any): value is (...args: any[]) => any {
  */
 export function isValidUrl(str: string): boolean {
   try {
-    new URL(str);
-    return true;
+    const url = new URL(str);
+    return Boolean(url);
   } catch {
     return false;
   }
@@ -325,7 +325,7 @@ export function fileToBase64(file: File): Promise<string> {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error instanceof Error ? error : new Error(String(error)));
+    reader.onerror = (error) => reject(error instanceof Error ? error : new Error(error?.toString() || 'Unknown error'));
   });
 }
 
