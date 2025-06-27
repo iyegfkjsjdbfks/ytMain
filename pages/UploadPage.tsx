@@ -361,8 +361,6 @@ return null;
                           </span>
                         ))}
                       </div>
-
-                  <TabsContent value="visibility" className="space-y-6">
                     <div>
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
                         Choose when to publish and who can see your video
