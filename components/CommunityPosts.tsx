@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   HeartIcon,
@@ -149,7 +148,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
           <div className="relative cursor-pointer group">
             <img
               src={post.videoThumbnail}
-              alt={post.videoTitle}
+              alt="Video thumbnail"
               className="w-full h-48 object-cover rounded-lg"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors rounded-lg flex items-center justify-center">

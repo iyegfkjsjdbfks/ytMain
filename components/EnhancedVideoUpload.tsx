@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -426,10 +425,11 @@ return '0:00';
 
             {/* Title */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="video-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Title *
               </label>
               <input
+                id="video-title"
                 type="text"
                 value={uploadData.title}
                 onChange={(e) => setUploadData(prev => ({ ...prev, title: e.target.value }))}
@@ -444,10 +444,11 @@ return '0:00';
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="video-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Description
               </label>
               <textarea
+                id="video-description"
                 value={uploadData.description}
                 onChange={(e) => setUploadData(prev => ({ ...prev, description: e.target.value }))}
                 placeholder="Tell viewers about your video"
@@ -462,7 +463,7 @@ return '0:00';
 
             {/* Thumbnail */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="thumbnail-upload" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Thumbnail
               </label>
               <div className="flex items-center space-x-4">
@@ -498,6 +499,7 @@ return '0:00';
                 </button>
 
                 <input
+                  id="thumbnail-upload"
                   ref={thumbnailInputRef}
                   type="file"
                   accept="image/*"
@@ -512,10 +514,11 @@ return '0:00';
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="video-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Category
               </label>
               <select
+                id="video-category"
                 value={uploadData.category}
                 onChange={(e) => setUploadData(prev => ({ ...prev, category: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -529,11 +532,12 @@ return '0:00';
 
             {/* Tags */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="video-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Tags
               </label>
               <div className="space-y-2">
                 <input
+                  id="video-tags"
                   type="text"
                   placeholder="Add tags to help people find your video"
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"

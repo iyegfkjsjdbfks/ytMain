@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   EllipsisHorizontalIcon,

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -266,11 +265,12 @@ searchParams.set('sort_by', filters.sortBy);
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Duration Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="duration-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <ClockIcon className="w-4 h-4 inline mr-1" />
                 Duration
               </label>
               <select
+                id="duration-filter"
                 value={filters.duration}
                 onChange={(e) => setFilters(prev => ({ ...prev, duration: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -284,11 +284,12 @@ searchParams.set('sort_by', filters.sortBy);
 
             {/* Upload Date Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="upload-date-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <CalendarDaysIcon className="w-4 h-4 inline mr-1" />
                 Upload date
               </label>
               <select
+                id="upload-date-filter"
                 value={filters.uploadDate}
                 onChange={(e) => setFilters(prev => ({ ...prev, uploadDate: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -304,11 +305,12 @@ searchParams.set('sort_by', filters.sortBy);
 
             {/* Type Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="type-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <VideoCameraIcon className="w-4 h-4 inline mr-1" />
                 Type
               </label>
               <select
+                id="type-filter"
                 value={filters.type}
                 onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -323,11 +325,12 @@ searchParams.set('sort_by', filters.sortBy);
 
             {/* Sort By */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="sort-by-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 <AdjustmentsHorizontalIcon className="w-4 h-4 inline mr-1" />
                 Sort by
               </label>
               <select
+                id="sort-by-filter"
                 value={filters.sortBy}
                 onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -356,8 +359,9 @@ searchParams.set('sort_by', filters.sortBy);
                 { id: 'location', label: 'Location' },
                 { id: 'hdr', label: 'HDR' },
               ].map((feature) => (
-                <label key={feature.id} className="flex items-center space-x-2 cursor-pointer">
+                <label key={feature.id} htmlFor={feature.id} className="flex items-center space-x-2 cursor-pointer">
                   <input
+                    id={feature.id}
                     type="checkbox"
                     checked={filters.features.includes(feature.id)}
                     onChange={() => toggleFeature(feature.id)}

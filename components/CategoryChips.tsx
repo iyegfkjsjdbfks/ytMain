@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import { cn } from '../utils/cn';
 

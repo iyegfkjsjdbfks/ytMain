@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 
 import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
@@ -87,7 +87,7 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-xl overflow-hidden">
                 <img
                   src={playlist.thumbnailUrl || 'https://picsum.photos/seed/playlistplaceholder/320/180'}
-                  alt={`Thumbnail for ${playlist.title}`}
+                  alt={playlist.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

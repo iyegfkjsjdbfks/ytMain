@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
 import { Link } from 'react-router-dom';
