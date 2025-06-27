@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, type FC } from 'react';
 
 import {
   PlayIcon,
