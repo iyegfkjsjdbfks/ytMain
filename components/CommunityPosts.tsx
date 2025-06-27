@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   HeartIcon,
@@ -134,7 +133,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
               <img
                 key={index}
                 src={image}
-                alt={`Post image ${index + 1}`}
+                alt={`Post ${index + 1}`}
                 className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => {
                   // Open image in modal/lightbox

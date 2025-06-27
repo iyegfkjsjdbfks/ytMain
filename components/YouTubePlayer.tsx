@@ -3,18 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService';
 
-// Define YT namespace
-interface YT {
-  Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
-  PlayerState: {
-    UNSTARTED: number;
-    ENDED: number;
-    PLAYING: number;
-    PAUSED: number;
-    BUFFERING: number;
-    CUED: number;
-  };
-}
+
 
 // YouTube Player API types
 declare global {

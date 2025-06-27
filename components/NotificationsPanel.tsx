@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -71,12 +70,10 @@ return null;
           <ul className="space-y-1">
             {notifications.map((notification) => (
               <li key={notification.id}>
-                <a
-                  href="#" // Replace with actual link target
-                  onClick={(e) => {
-                    e.preventDefault();
-                    void markAsRead(notification.id);
-                    void onClose();
+                <button
+                  onClick={() => {
+                    markAsRead(notification.id);
+                    onClose();
                   }}
                   className={`flex items-start p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors ${notification.isNew ? 'bg-sky-50 dark:bg-sky-500/10' : ''}`}
                 >
@@ -115,7 +112,7 @@ return null;
                 if (hasNewNotifications) {
                   void markAllAsRead();
                 } else {
-                  void onClose();
+                  onClose();
                 }
               }}
               className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors px-3 py-1.5 rounded-md hover:bg-sky-50 dark:hover:bg-sky-500/10"

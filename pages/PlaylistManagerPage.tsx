@@ -1,4 +1,4 @@
-import type React from 'react';
+
 import { useState, useEffect } from 'react';
 
 import { PlusIcon, PencilIcon, TrashIcon, EyeSlashIcon, GlobeAltIcon, LockClosedIcon, UserGroupIcon } from '@heroicons/react/24/outline';

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 

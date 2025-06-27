@@ -549,7 +549,7 @@ return content.length;
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                <label htmlFor="schedule-date" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                   Date
                 </label>
                 <input
@@ -561,7 +561,7 @@ return content.length;
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                <label htmlFor="schedule-time" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                   Time
                 </label>
                 <input

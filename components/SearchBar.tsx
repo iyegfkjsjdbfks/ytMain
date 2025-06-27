@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { useState, useEffect, useRef, useCallback   } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 import { useNavigate } from 'react-router-dom';
@@ -165,7 +164,6 @@ inputRef.current.blur();
           aria-label="Search YouTube"
           aria-autocomplete="list"
           aria-controls={showSuggestions ? 'search-suggestions-listbox' : (showRecentSearches ? 'recent-searches-listbox' : undefined)}
-          aria-expanded={isDropdownOpen}
         />
         <button
           type="submit"
@@ -192,7 +190,6 @@ inputRef.current.blur();
         <ul
           id="recent-searches-listbox"
           className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
-          role="listbox"
           aria-label="Recent searches"
         >
           {recentSearches.map((searchTerm, index) => (

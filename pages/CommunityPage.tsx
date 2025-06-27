@@ -381,7 +381,7 @@ return;
                     {post.type === 'poll' && post.pollOptions && (
                       <div className="space-y-2 mt-3">
                         {post.pollOptions.map((option) => {
-                          const { pollOptions } = post;
+                          
                           const totalVotes = pollOptions.reduce((sum, opt) => sum + opt.votes, 0);
                           const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
 

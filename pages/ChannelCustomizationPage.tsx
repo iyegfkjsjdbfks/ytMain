@@ -214,7 +214,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Channel Art */}
                   <div className="mb-8">
-                    <label htmlFor="channel-art" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Channel Art
                     </label>
                     <div className="relative">
@@ -250,7 +250,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Profile Picture */}
                   <div className="mb-8">
-                    <label htmlFor="profile-picture" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <div className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Profile Picture
                     </label>
                     <div className="flex items-center space-x-4">
@@ -293,7 +293,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   {/* Watermark */}
                   <div>
-                    <label id="video-watermark-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <div id="video-watermark-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Video Watermark
                     </label>
                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
@@ -332,7 +332,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label id="layout-style-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                      <div id="layout-style-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                         Layout Style
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
@@ -448,7 +448,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label id="social-links-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+                      <div id="social-links-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
                         Social Links
                       </label>
                       <div className="space-y-4" aria-labelledby="social-links-label">
@@ -497,7 +497,7 @@ const ChannelCustomizationPage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label id="featured-channels-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <div id="featured-channels-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Featured Channels
                       </label>
                       <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
