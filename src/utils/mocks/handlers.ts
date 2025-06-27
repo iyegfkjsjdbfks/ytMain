@@ -99,7 +99,7 @@ export const handlers = [
   http.get('https://www.googleapis.com/youtube/v3/search', async ({ request }) => {
     const url = new URL(request.url);
     const q = url.searchParams.get('q') || '';
-    const maxResults = parseInt(url.searchParams.get('maxResults') || '25');
+    const maxResults = parseInt(url.searchParams.get('maxResults') || '25', 10);
     const pageToken = url.searchParams.get('pageToken');
     // const type = url.searchParams.get('type') || 'video';
     const order = url.searchParams.get('order') || 'relevance';
@@ -126,7 +126,7 @@ export const handlers = [
     }
 
     // Paginate
-    const startIndex = pageToken ? parseInt(pageToken) * maxResults : 0;
+    const startIndex = pageToken ? parseInt(pageToken, 10) * maxResults : 0;
     const endIndex = startIndex + maxResults;
     const paginatedVideos = filteredVideos.slice(startIndex, endIndex);
 
@@ -277,7 +277,7 @@ export const handlers = [
     const url = new URL(request.url);
     const channelId = url.searchParams.get('channelId');
     const id = url.searchParams.get('id');
-    const maxResults = parseInt(url.searchParams.get('maxResults') || '25');
+    const maxResults = parseInt(url.searchParams.get('maxResults') || '25', 10);
 
     await delay(Math.random() * 300 + 100);
 
@@ -325,7 +325,7 @@ export const handlers = [
   http.get('https://www.googleapis.com/youtube/v3/commentThreads', async ({ request }) => {
     const url = new URL(request.url);
     const videoId = url.searchParams.get('videoId');
-    const maxResults = parseInt(url.searchParams.get('maxResults') || '20');
+    const maxResults = parseInt(url.searchParams.get('maxResults') || '20', 10);
 
     await delay(Math.random() * 400 + 200);
 

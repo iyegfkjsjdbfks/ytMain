@@ -1,5 +1,4 @@
-import type { ComponentType, EffectCallback, DependencyList, LazyExoticComponent } from 'react';
-import { memo, useMemo, forwardRef, lazy, createElement, useEffect } from 'react';
+import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type ComponentType, type EffectCallback, type DependencyList, type LazyExoticComponent } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
