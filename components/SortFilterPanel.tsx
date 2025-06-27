@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type FC } from 'react';
 
 import { CheckIcon } from '@heroicons/react/24/solid';
 

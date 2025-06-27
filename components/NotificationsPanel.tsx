@@ -92,7 +92,7 @@ return null;
                   {notification.isNew && (
                     <div className="w-2 h-2 bg-sky-500 rounded-full ml-2 mt-1 flex-shrink-0" aria-label="New notification" />
                   )}
-                </a>
+                </button>
               </li>
             ))}
           </ul>

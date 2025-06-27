@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, type FC } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
