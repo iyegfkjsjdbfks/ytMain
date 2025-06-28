@@ -13,7 +13,6 @@ import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } fro
 import { performanceMonitor } from '../utils/performance';
 import type { Video } from '../types';
 
-
 // Types for better performance
 interface SearchState {
   videos: Video[];
