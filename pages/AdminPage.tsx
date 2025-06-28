@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 import {
@@ -13,6 +12,10 @@ import {
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
   isHybridModeAvailable,
+  type YouTubeSearchProvider,
+  type YouTubePlayerType,
+  type LocalVideoPlayerType,
+  type VideoPlayerConfig,
 } from '../services/settingsService';
 
 

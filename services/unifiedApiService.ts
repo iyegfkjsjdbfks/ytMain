@@ -200,7 +200,7 @@ class UnifiedApiService {
       config = interceptor(config);
     }
 
-    let lastError: Error;
+    let lastError: Error | undefined;
 
     for (let attempt = 0; attempt <= this.config.retryAttempts; attempt++) {
       try {
@@ -257,7 +257,7 @@ class UnifiedApiService {
       }
     }
 
-    throw lastError instanceof Error ? lastError : new Error(String(lastError));
+    throw lastError instanceof Error ? lastError : new Error('Request failed after all retry attempts');
   }
 
   // Unified API methods

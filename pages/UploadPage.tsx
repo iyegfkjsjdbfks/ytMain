@@ -1,5 +1,4 @@
-import type * as React from 'react';
-import {  useState, useRef  } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -441,14 +440,12 @@ return null;
                           onChange={(e) => setMetadata(prev => ({ ...prev, monetization: e.target.checked }))}
                           className="mr-3"
                         />
-                        <div>
                           <p className="font-medium text-gray-900 dark:text-white">
                             Enable monetization
                           </p>
                           <p className="text-sm text-gray-600 dark:text-gray-400">
                             Allow ads to be shown on your video
                           </p>
-                        </div>
                       </label>
                     </div>
                   </TabsContent>

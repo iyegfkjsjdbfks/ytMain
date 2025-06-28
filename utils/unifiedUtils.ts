@@ -406,7 +406,9 @@ export const performanceUtils = {
 export const errorUtils = {
   createError: (message: string, code?: string, details?: unknown): Error => {
     const error = new Error(message) as Error & { code?: string; details?: unknown };
-    error.code = code;
+    if (code !== undefined) {
+      error.code = code;
+    }
     error.details = details;
     return error;
   },

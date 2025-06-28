@@ -12,6 +12,7 @@ import { performanceMonitor } from '../utils/performance';
 
 
 import type { Video } from '../types';
+import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 
 
 // Types for better performance

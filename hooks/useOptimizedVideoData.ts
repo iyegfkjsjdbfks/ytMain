@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-
 import type { Video } from '../types';
 
 interface UseVideoDataOptions {
@@ -48,12 +47,7 @@ const generateMockVideos = (count: number, category?: string): Video[] => {
       isSaved: false,
       isLiked: false,
       isDisliked: false,
-      isHearted: false,
-      isPinned: false,
-      isEdited: false,
       visibility: 'public' as const,
-      commentCount: Math.floor(Math.random() * 1000),
-      viewCount: Math.floor(Math.random() * 1000000),
       createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
     } as Video;
@@ -167,7 +161,7 @@ return;
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    ...(category !== undefined && { category }),
+    category,
     limit: 24,
     enableCache: true,
   });

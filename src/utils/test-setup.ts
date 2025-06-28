@@ -4,6 +4,13 @@ import { afterEach, beforeAll, afterAll, vi } from 'vitest';
 
 import { server } from './mocks/server';
 
+// Global type declarations
+declare global {
+  var testUtils: {
+    mockConsole: () => () => void;
+  };
+}
+
 // Cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
   cleanup();
@@ -435,7 +442,5 @@ declare global {
     }
   }
 
-  const testUtils: {
-    mockConsole: () => () => void;
-  };
+
 }

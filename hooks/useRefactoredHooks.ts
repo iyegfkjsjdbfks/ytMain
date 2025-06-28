@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef, useCallback, type MouseEvent } from 'react';
-
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 
 /**
@@ -73,13 +72,13 @@ export function useThrottle<T>(value: T, delay: number): T {
       setThrottledValue(value);
       return;
     }
-      const timer = setTimeout(() => {
-        lastExecuted.current = Date.now();
-        setThrottledValue(value);
-      }, delay);
+    
+    const timer = setTimeout(() => {
+      lastExecuted.current = Date.now();
+      setThrottledValue(value);
+    }, delay);
 
-      return () => clearTimeout(timer);
-
+    return () => clearTimeout(timer);
   }, [value, delay]);
 
   return throttledValue;
@@ -302,33 +301,33 @@ export function useUnifiedAppState() {
   return {
     // Auth state
     user: state.user,
-    isAuthenticated: state.isAuthenticated || false,
+    isAuthenticated: state.isAuthenticated,
     login,
     logout,
 
     // Theme state
-    theme: state.theme || 'light',
+    theme: state.theme,
     setTheme,
-    isDarkMode: (state.theme || 'light') === 'dark',
+    isDarkMode: state.theme === 'dark',
 
     // Miniplayer state
     miniplayerVideo: state.miniplayerVideo,
-    isMiniplayerOpen: state.isMiniplayerOpen || false,
+    isMiniplayerOpen: state.isMiniplayerOpen,
     openMiniplayer,
     toggleMiniplayer,
 
     // Watch Later state
-    watchLaterVideos: state.watchLaterVideos || [],
+    watchLaterVideos: state.watchLaterVideos,
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
 
     // UI state
-    sidebarCollapsed: state.sidebarCollapsed || false,
+    sidebarCollapsed: state.sidebarCollapsed,
     toggleSidebar,
 
     // Notifications state
-    notifications: state.notifications || [],
+    notifications: state.notifications,
     addNotification,
     removeNotification,
   };

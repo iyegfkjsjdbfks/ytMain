@@ -1,5 +1,4 @@
-import type React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import {
   BellIcon,
   UserMinusIcon,
@@ -17,6 +16,7 @@ export interface SubscriptionData {
   channelId: string;
   channelName: string;
   channelAvatar: string;
+  channelArt?: string;
   channelVerified: boolean;
   subscriberCount: number;
   videoCount: number;

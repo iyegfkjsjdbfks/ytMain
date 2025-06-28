@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import { useVideoPlayer } from '../../hooks';
 import { LoadingSpinner, ErrorMessage } from '../ui';
 

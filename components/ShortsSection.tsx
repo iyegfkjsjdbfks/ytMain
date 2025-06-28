@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getShortsVideos } from '../services/mockVideoService';
@@ -30,17 +29,48 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
         // Convert Video objects to Short objects
         const convertedShorts: Short[] = shortsVideos.map(video => {
           const shortVideo: Short = {
-             ...video,
+             id: video.id,
+             title: video.title,
+             description: video.description,
+             thumbnailUrl: video.thumbnailUrl,
+             videoUrl: video.videoUrl,
              duration: parseInt(video.duration, 10) || 60, // Convert string duration to number
+             views: video.views,
+             likes: video.likes,
+             dislikes: video.dislikes,
+             uploadedAt: video.uploadedAt,
+             publishedAt: video.publishedAt,
+             channelName: video.channelName,
+             channelId: video.channelId,
+             channelAvatarUrl: video.channelAvatarUrl,
+             channel: video.channel,
+             category: video.category,
+             tags: video.tags,
+             isLive: video.isLive,
+             isShort: video.isShort,
+             isLiked: video.isLiked,
+             isDisliked: video.isDisliked,
+             isSaved: video.isSaved,
+             isHearted: video.isHearted,
+             isPinned: video.isPinned,
+             isEdited: video.isEdited,
+             visibility: video.visibility,
+             privacyStatus: video.privacyStatus,
+             commentCount: video.commentCount,
+             viewCount: video.viewCount,
+             monetization: video.monetization,
+             analytics: video.analytics,
+             definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
+             captions: video.captions,
+             subtitles: video.subtitles,
+             nextPageToken: video.nextPageToken,
+             createdAt: video.createdAt,
+             updatedAt: video.updatedAt,
              isVertical: true,
-             visibility: (video.visibility === 'scheduled' ? 'public' : video.visibility),
-             createdAt: video.createdAt || new Date().toISOString(),
-             updatedAt: video.updatedAt || new Date().toISOString(),
              // Ensure all required Short properties are present
-             isShort: true,
              effects: [],
              music: undefined,
-           } as any as Short;
+           };
           return shortVideo;
         });
 
