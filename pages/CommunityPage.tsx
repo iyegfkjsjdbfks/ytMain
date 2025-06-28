@@ -134,14 +134,13 @@ return;
         let pollOptions: Array<{ id: string; text: string; votes: number }> | undefined;
 
         if (type === 'poll') {
-          const poll = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          content = poll.content;
-          pollOptions = poll.options.map((option, idx) => ({
+          const { content: pollContent, options: pollOptionsData } = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
+          content = pollContent;
+          pollOptions = pollOptionsData.map((option, idx) => ({
             id: `option-${idx}`,
             text: option,
             votes: Math.floor(Math.random() * 500) + 50,
           }));
-          }
         }
 
         return {
