@@ -108,7 +108,6 @@ const LazyImage = memo<{
             onError={handleError}
             loading={priority === 'high' ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority={priority === 'high' ? 'high' : 'low'}
           />
           {!loaded && !error && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
