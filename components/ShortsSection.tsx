@@ -68,8 +68,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              updatedAt: video.updatedAt,
              isVertical: true,
              // Ensure all required Short properties are present
-             effects: [],
-             music: undefined,
+             effects: []
            };
           return shortVideo;
         });
