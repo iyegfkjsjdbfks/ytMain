@@ -6,7 +6,7 @@ import { server } from './mocks/server';
 
 // Global type declarations
 declare global {
-  var testUtils: {
+  let testUtils: {
     mockConsole: () => () => void;
   };
 }

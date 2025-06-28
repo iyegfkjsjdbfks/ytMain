@@ -8,11 +8,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
 import { VideoService } from '../services/api';
-import { searchCombined } from '../services/googleSearchService';
+import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
 import { performanceMonitor } from '../utils/performance';
-
-
-import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import type { Video } from '../types';
 
 
