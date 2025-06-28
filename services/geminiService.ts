@@ -10,13 +10,13 @@ import type { VideoIdeaResponse } from '../types'; // Import the new type
 let ai: GoogleGenAI;
 try {
     // Ensure API_KEY is available in the environment. The `!` asserts it's present.
-    // If process.env.API_KEY is undefined, this will throw an error, which is caught.
-    if (!process.env.API_KEY) {
-        throw new Error('API_KEY environment variable is not set.');
+    // If import.meta.env.VITE_API_KEY is undefined, this will throw an error, which is caught.
+    if (!import.meta.env.VITE_API_KEY) {
+        throw new Error('VITE_API_KEY environment variable is not set.');
     }
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
 } catch (e: any) {
-    console.error('Failed to initialize GoogleGenAI. Ensure API_KEY is set in process.env.', e.message);
+    console.error('Failed to initialize GoogleGenAI. Ensure VITE_API_KEY is set in import.meta.env.', e.message);
     // Subsequent calls will fail if `ai` is not initialized.
     // The functions below will check for `ai` and throw if it's missing.
 }

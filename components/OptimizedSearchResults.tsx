@@ -289,7 +289,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       </div>
 
       {/* Performance indicator (development only) */}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.MODE === 'development' && (
         <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white text-xs p-2 rounded">
           {allResults.length} items rendered
         </div>

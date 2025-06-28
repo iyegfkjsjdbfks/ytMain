@@ -11,8 +11,8 @@ interface ApiConfig {
 }
 
 const defaultConfig: ApiConfig = {
-  baseUrl: process.env.REACT_APP_API_BASE_URL || 'https://api.youtube.com/v3',
-  apiKey: process.env.REACT_APP_YOUTUBE_API_KEY || '',
+  baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://api.youtube.com/v3',
+  apiKey: import.meta.env.VITE_YOUTUBE_API_KEY || '',
   timeout: 10000,
   retryAttempts: 3,
   retryDelay: 1000,

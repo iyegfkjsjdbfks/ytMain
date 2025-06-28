@@ -12,7 +12,7 @@ interface PerformanceMetric {
 class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetric> = new Map();
   private observers: PerformanceObserver[] = [];
-  private isEnabled: boolean = process.env.NODE_ENV === 'development';
+  private isEnabled: boolean = import.meta.env.MODE === 'development';
 
   constructor() {
     if (this.isEnabled && typeof window !== 'undefined' && 'PerformanceObserver' in window) {
@@ -78,7 +78,7 @@ return null;
 
     const metric = this.metrics.get(name);
     if (!metric) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         console.warn(`Performance metric '${name}' not found`);
       }
       return null;

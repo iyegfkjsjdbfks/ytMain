@@ -475,14 +475,14 @@ export function usePerformanceMonitor(name: string) {
 
     return () => {
       // const __duration = Date.now() - startTimeRef.current;
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         }
     };
   }, [name]);
 
   const mark = useCallback((__label: string) => {
     // const __duration = Date.now() - startTimeRef.current;
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       }
   }, [name]);
 

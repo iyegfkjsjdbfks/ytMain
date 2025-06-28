@@ -1,8 +1,8 @@
 import type { Video, Channel, UserPlaylist } from '../types';
 
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://api.youtube.com/v3';
-const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.youtube.com/v3';
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 // Cache Configuration
 const CACHE_DURATION = {
@@ -239,7 +239,7 @@ export class VideoService {
 
     try {
       // In development, return mock data
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
 
         const videos = Array.from({ length: limit }, (_, i) =>
@@ -315,7 +315,7 @@ export class VideoService {
     const cacheKey = `video_${id}`;
 
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 200));
         return generateMockVideo(id);
       }
@@ -374,7 +374,7 @@ return null;
     const cacheKey = `search_${query}_${limit}_${pageToken || 'first'}`;
 
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
 
         const videos = Array.from({ length: Math.min(limit, 15) }, (_, i) =>
@@ -464,7 +464,7 @@ export class ChannelService {
     const cacheKey = `channel_${id}`;
 
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 200));
         return generateMockChannel(id);
       }
@@ -512,7 +512,7 @@ return null;
     const cacheKey = `channel_videos_${channelId}_${limit}_${pageToken || 'first'}`;
 
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 400));
 
         const videos = Array.from({ length: limit }, (_, i) =>
@@ -592,7 +592,7 @@ return null;
 export class PlaylistService {
   static async getUserPlaylists(_userId: string): Promise<UserPlaylist[]> {
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
         // Using userId for development mock data
         return [
