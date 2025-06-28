@@ -55,7 +55,7 @@ export function useNotifications() {
 
     // Show browser notification if permission granted
     if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-      void new Notification(notification.title, {
+      new Notification(notification.title, {
         body: notification.message,
         icon: notification.fromUserAvatar || '/favicon.ico',
         tag: notification.id,
