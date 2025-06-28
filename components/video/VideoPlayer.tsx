@@ -32,6 +32,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   poster,
   qualities = [],
   subtitles = [],
+  chapters = [],
   autoplay = false,
   muted = false,
   loop = false,

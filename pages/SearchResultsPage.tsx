@@ -8,6 +8,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
 import { searchCombined } from '../services/googleSearchService';
+import { VideoService } from '../services/api';
 import { performanceMonitor } from '../utils/performance';
 
 
@@ -71,8 +72,8 @@ const SearchResultsPage: React.FC = () => {
     try {
       // Parallel search execution for better performance
       const [localResults, combinedResults] = await Promise.allSettled([
-        searchVideos(searchQuery),
-        searchCombined(searchQuery, searchVideos),
+        VideoService.searchVideos(searchQuery).then(result => result.videos),
+        searchCombined(searchQuery, (query) => VideoService.searchVideos(query).then(result => result.videos)),
       ]);
 
       const combinedData = combinedResults.status === 'fulfilled' ? combinedResults.value : {

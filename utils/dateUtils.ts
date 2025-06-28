@@ -54,7 +54,7 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago
 };
 
-export const formatDistanceToNow = (date: string | Date): string => {
+export const formatDistanceToNow = (date: string | Date, options?: { addSuffix?: boolean }): string => {
   const now = new Date();
   const targetDate = typeof date === 'string' ? new Date(date) : date;
 
@@ -71,19 +71,27 @@ export const formatDistanceToNow = (date: string | Date): string => {
   const diffMonths = Math.floor(diffDays / 30);
   const diffYears = Math.floor(diffDays / 365);
 
+  let result: string;
   if (diffSeconds < 60) {
-    return 'just now';
+    result = 'just now';
   } else if (diffMinutes < 60) {
-    return `${diffMinutes} minute${diffMinutes !== 1 ? 's' : ''} ago`;
+    result = `${diffMinutes} minute${diffMinutes !== 1 ? 's' : ''}`;
   } else if (diffHours < 24) {
-    return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+    result = `${diffHours} hour${diffHours !== 1 ? 's' : ''}`;
   } else if (diffDays < 7) {
-    return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+    result = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
   } else if (diffWeeks < 4) {
-    return `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''} ago`;
+    result = `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''}`;
   } else if (diffMonths < 12) {
-    return `${diffMonths} month${diffMonths !== 1 ? 's' : ''} ago`;
+    result = `${diffMonths} month${diffMonths !== 1 ? 's' : ''}`;
+  } else {
+    result = `${diffYears} year${diffYears !== 1 ? 's' : ''}`;
   }
-    return `${diffYears} year${diffYears !== 1 ? 's' : ''} ago`;
 
+  // Add 'ago' suffix unless it's 'just now' or addSuffix is explicitly false
+  if (result !== 'just now' && options?.addSuffix !== false) {
+    result += ' ago';
+  }
+
+  return result;
 };

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-
 import {
   CloudArrowUpIcon,
   VideoCameraIcon,
@@ -137,7 +136,10 @@ return null;
     if (file) {
       const fakeEvent = {
         target: { files: [file] },
-      } as unknown as React.ChangeEvent<HTMLInputElement>;
+        currentTarget: { files: [file] },
+        preventDefault: () => {},
+        stopPropagation: () => {},
+      } as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
   };

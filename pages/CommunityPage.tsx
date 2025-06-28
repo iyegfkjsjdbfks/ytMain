@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
@@ -9,7 +8,7 @@ interface CommunityPost {
   content: string;
   imageUrl?: string;
   videoUrl?: string;
-  pollOptions: Array<{ id: string; text: string; votes: number }>;
+  pollOptions?: Array<{ id: string; text: string; votes: number }>;
   likes: number;
   comments: number;
   shares: number;
