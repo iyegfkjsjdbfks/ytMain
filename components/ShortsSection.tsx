@@ -56,8 +56,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              isVertical: true,
              definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
              // Ensure all required Short properties are present
-             effects: [],
-             music: undefined,
+             effects: []
            };
           return shortVideo;
         });
