@@ -57,7 +57,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              visibility: video.visibility,
              privacyStatus: video.privacyStatus,
              commentCount: video.commentCount,
-             viewCount: video.viewCount,
+             viewCount: video.viewCount || 0,
              monetization: video.monetization,
              analytics: video.analytics,
              definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
