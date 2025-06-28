@@ -43,6 +43,7 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
     liked,
     disliked,
     isSubscribed,
+    isSavedToAnyList,
     mockLikeCount,
     showFullDescription,
     summary,

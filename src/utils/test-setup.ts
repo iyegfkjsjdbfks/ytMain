@@ -7,9 +7,7 @@ import { server } from './mocks/server';
 // Global type declarations
 declare global {
   var testUtils: {
-    mockConsole: () => {
-      restore: () => void;
-    };
+    mockConsole: () => () => void;
   };
 }
 
@@ -444,7 +442,4 @@ declare global {
     }
   }
 
-  const testUtils: {
-    mockConsole: () => () => void;
-  };
 }

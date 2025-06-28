@@ -89,7 +89,9 @@ const LazyImage = memo<{
         }
       }, 5000); // 5 second timeout
       
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
   }, [shouldLoad, loaded, error, src, handleError]);
 
