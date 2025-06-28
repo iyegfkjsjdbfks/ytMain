@@ -39,7 +39,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              likes: video.likes,
              dislikes: video.dislikes,
              uploadedAt: video.uploadedAt,
-             publishedAt: video.publishedAt,
+             publishedAt: video.publishedAt || video.uploadedAt,
              channelName: video.channelName,
              channelId: video.channelId,
              channelAvatarUrl: video.channelAvatarUrl,
