@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
+
 import type { Video } from '../types';
 
 interface UseVideoDataOptions {
@@ -161,7 +162,7 @@ return;
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    ...(category && { category }),
+    category,
     limit: 24,
     enableCache: true,
   });

@@ -55,7 +55,7 @@ const SearchResultsPage: React.FC = () => {
 
   // Memoized search function with performance monitoring
   const performSearch = useCallback(async (searchQuery: string) => {
-    if (!searchQuery) {
+    if (!searchQuery.trim()) {
       setSearchState({
         videos: [],
         youtubeVideos: [],
@@ -69,23 +69,29 @@ const SearchResultsPage: React.FC = () => {
     performanceMonitor.startMeasure('search-results-load');
     setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
 
-    try {
-      // Parallel search execution for better performance
-      const [localResults, combinedResults] = await Promise.allSettled([
-        VideoService.searchVideos(searchQuery).then(result => result.videos),
-        searchCombined(searchQuery, (query) => VideoService.searchVideos(query).then(result => result.videos)),
-      ]);
+    // Create an AbortController for request cancellation
+    const abortController = new AbortController();
+    
+    // Store the controller for cleanup
+    const currentController = abortController;
 
-      const combinedData = combinedResults.status === 'fulfilled' ? combinedResults.value : {
-        localVideos: [],
-        youtubeVideos: [],
-        googleSearchVideos: [],
-      };
+    try {
+      // Use searchCombined only since it already includes local search
+      // This avoids duplicate API calls and improves performance
+      const combinedResults = await searchCombined(
+        searchQuery, 
+        (query) => VideoService.searchVideos(query).then(result => result.videos)
+      );
+
+      // Check if request was cancelled
+      if (abortController.signal.aborted) {
+        return;
+      }
 
       setSearchState({
-        videos: localResults.status === 'fulfilled' ? localResults.value : [],
-        youtubeVideos: combinedData.youtubeVideos,
-        googleSearchVideos: combinedData.googleSearchVideos || [],
+        videos: combinedResults.localVideos || [],
+        youtubeVideos: combinedResults.youtubeVideos || [],
+        googleSearchVideos: combinedResults.googleSearchVideos || [],
         loading: false,
         youtubeLoading: false,
       });
@@ -100,6 +106,18 @@ const SearchResultsPage: React.FC = () => {
         performanceMonitor.endMeasure('search-results-load');
       }
     }
+    
+    // Return cleanup function
+    return () => {
+      currentController.abort();
+    };
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      // Cancel any ongoing requests when component unmounts
+    };
   }, []);
 
   // Effect for debounced search

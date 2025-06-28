@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { getShortsVideos } from '../services/mockVideoService';
@@ -39,36 +40,22 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              likes: video.likes,
              dislikes: video.dislikes,
              uploadedAt: video.uploadedAt,
-             publishedAt: video.publishedAt || video.uploadedAt,
              channelName: video.channelName,
-             channelId: video.channelId,
-             channelAvatarUrl: video.channelAvatarUrl,
-             channel: video.channel || { id: video.channelId, name: video.channelName },
              category: video.category,
              tags: video.tags,
-             isLive: video.isLive ?? false,
+             isLive: video.isLive,
              isShort: video.isShort,
              isLiked: video.isLiked,
              isDisliked: video.isDisliked,
              isSaved: video.isSaved,
-             isHearted: video.isHearted,
-             isPinned: video.isPinned,
-             isEdited: video.isEdited,
              visibility: video.visibility,
-             privacyStatus: video.privacyStatus,
-             commentCount: video.commentCount,
-             viewCount: video.viewCount || 0,
-             monetization: video.monetization,
-             analytics: video.analytics,
-             definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
-             captions: video.captions,
-             subtitles: video.subtitles,
-             nextPageToken: video.nextPageToken,
              createdAt: video.createdAt,
              updatedAt: video.updatedAt,
              isVertical: true,
+             definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
              // Ensure all required Short properties are present
-             effects: []
+             effects: [],
+             music: undefined,
            };
           return shortVideo;
         });

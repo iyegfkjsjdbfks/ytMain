@@ -98,7 +98,7 @@ return null;
         liked={liked}
         disliked={disliked}
         likeCount={mockLikeCount}
-        isSavedToAnyList={false}
+        isSavedToAnyList={isSavedToAnyList}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}

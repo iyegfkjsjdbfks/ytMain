@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, MouseEvent } from 'react';
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 
 /**
@@ -301,33 +301,33 @@ export function useUnifiedAppState() {
   return {
     // Auth state
     user: state.user,
-    isAuthenticated: state.isAuthenticated,
+    isAuthenticated: state.isAuthenticated || false,
     login,
     logout,
 
     // Theme state
-    theme: state.theme,
+    theme: state.theme || 'light',
     setTheme,
-    isDarkMode: state.theme === 'dark',
+    isDarkMode: (state.theme || 'light') === 'dark',
 
     // Miniplayer state
     miniplayerVideo: state.miniplayerVideo,
-    isMiniplayerOpen: state.isMiniplayerOpen,
+    isMiniplayerOpen: state.isMiniplayerOpen || false,
     openMiniplayer,
     toggleMiniplayer,
 
     // Watch Later state
-    watchLaterVideos: state.watchLaterVideos,
+    watchLaterVideos: state.watchLaterVideos || [],
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
 
     // UI state
-    sidebarCollapsed: state.sidebarCollapsed,
+    sidebarCollapsed: state.sidebarCollapsed || false,
     toggleSidebar,
 
     // Notifications state
-    notifications: state.notifications,
+    notifications: state.notifications || [],
     addNotification,
     removeNotification,
   };

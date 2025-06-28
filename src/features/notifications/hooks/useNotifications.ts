@@ -60,11 +60,6 @@ export function useNotifications() {
         icon: notification.fromUserAvatar || '/favicon.ico',
         tag: notification.id,
       });
-      
-      // Auto-close notification after 5 seconds
-      setTimeout(() => {
-        browserNotification.close();
-      }, 5000);
     }
 
     // Play notification sound (optional)

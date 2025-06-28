@@ -21,6 +21,9 @@ import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/Drop
 
 import type { Video } from '../types';
 
+// Simple image cache to prevent repeated loading
+const imageCache = new Set<string>();
+const failedImages = new Set<string>();
 
 interface OptimizedVideoCardProps {
   video: Video;
@@ -43,8 +46,8 @@ const LazyImage = memo<{
   priority?: 'high' | 'low';
   lazy?: boolean;
 }>(({ src, alt, className, priority = 'low', lazy = true }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(() => imageCache.has(src));
+  const [error, setError] = useState(() => failedImages.has(src));
   const imgRef = useRef<HTMLImageElement>(null);
 
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
@@ -55,6 +58,7 @@ const LazyImage = memo<{
 
   const handleLoad = useCallback(() => {
     setLoaded(true);
+    imageCache.add(src); // Cache successful loads
     const metricName = `image-load-${src}`;
     if (performanceMonitor.hasMetric(metricName)) {
       performanceMonitor.endMeasure(metricName);
@@ -64,15 +68,30 @@ const LazyImage = memo<{
   const handleError = useCallback(() => {
     setError(true);
     setLoaded(true);
-  }, []);
+    failedImages.add(src); // Cache failed loads to avoid retrying
+    const metricName = `image-load-${src}`;
+    if (performanceMonitor.hasMetric(metricName)) {
+      performanceMonitor.endMeasure(metricName);
+    }
+  }, [src]);
 
   const shouldLoad = !lazy || priority === 'high' || isIntersecting;
 
   useEffect(() => {
-    if (shouldLoad && !loaded && !error) {
+    if (shouldLoad && !loaded && !error && !imageCache.has(src) && !failedImages.has(src)) {
       performanceMonitor.startMeasure(`image-load-${src}`);
+      
+      // Set a timeout to prevent indefinite loading
+      const timeoutId = setTimeout(() => {
+        if (!loaded && !error) {
+          console.warn(`Image loading timeout for: ${src}`);
+          handleError();
+        }
+      }, 5000); // 5 second timeout
+      
+      return () => clearTimeout(timeoutId);
     }
-  }, [shouldLoad, loaded, error, src]);
+  }, [shouldLoad, loaded, error, src, handleError]);
 
   return (
     <div ref={intersectionRef as any} className={`relative overflow-hidden ${className}`}>
@@ -88,6 +107,8 @@ const LazyImage = memo<{
             onLoad={handleLoad}
             onError={handleError}
             loading={priority === 'high' ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={priority === 'high' ? 'high' : 'low'}
           />
           {!loaded && !error && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">

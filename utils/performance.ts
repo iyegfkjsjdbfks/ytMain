@@ -95,11 +95,17 @@ return null;
       performance.measure(name, `${name}-start`, `${name}-end`);
     }
 
-    // Log slow operations
-    if (duration > 100) {
+    // Log slow operations with different thresholds for different operation types
+    const getThreshold = (operationName: string): number => {
+      if (operationName.startsWith('image-load')) return 2000; // 2s for images
+      if (operationName.includes('search')) return 1500; // 1.5s for search
+      return 100; // Default 100ms
+    };
+
+    const threshold = getThreshold(name);
+    if (duration > threshold) {
       console.warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
-    } else if (duration > 16) {
-      }
+    }
 
     return duration;
   }
