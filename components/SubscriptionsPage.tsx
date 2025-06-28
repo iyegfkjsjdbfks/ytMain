@@ -41,7 +41,3 @@ interface SubscriptionsPageProps {
 }
 
 const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' }) => {
-
- 
-
-  
