@@ -504,8 +504,6 @@ export interface ErrorWithSeverity extends AppError {
   }
 
   private generateRefactoringReport(): void {
-    const totalTasks = this.tasks.length;
-    const completedCount = this.completedTasks.length;
     const failedCount = this.failedTasks.length;
 
 
