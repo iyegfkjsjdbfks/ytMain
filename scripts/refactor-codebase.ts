@@ -297,7 +297,9 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
     const matches = content.matchAll(importRegex);
 
     for (const match of matches) {
-      if (!match[1]) continue;
+      if (!match[1]) {
+continue;
+}
       const imports = match[1].split(',').map(imp => imp.trim());
       const usedImports = imports.filter(imp => {
         const importName = imp.replace(/\s+as\s+\w+/, '').trim();

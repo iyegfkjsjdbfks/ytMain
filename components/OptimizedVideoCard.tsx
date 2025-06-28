@@ -80,7 +80,7 @@ const LazyImage = memo<{
   useEffect(() => {
     if (shouldLoad && !loaded && !error && !imageCache.has(src) && !failedImages.has(src)) {
       performanceMonitor.startMeasure(`image-load-${src}`);
-      
+
       // Set a timeout to prevent indefinite loading
       const timeoutId = setTimeout(() => {
         if (!loaded && !error) {
@@ -88,12 +88,12 @@ const LazyImage = memo<{
           handleError();
         }
       }, 5000); // 5 second timeout
-      
+
       return () => {
         clearTimeout(timeoutId);
       };
     }
-    
+
     // Return empty cleanup function for else case
     return () => {};
   }, [shouldLoad, loaded, error, src, handleError]);

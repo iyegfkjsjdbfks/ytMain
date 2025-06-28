@@ -68,9 +68,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
           poster={video.thumbnailUrl}
           className="w-full h-full object-contain"
           playsInline
-        >
-
-        </video>
+        />
       )}
 
       {/* Loading Overlay */}
@@ -200,8 +198,6 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
               <option value={1.5}>1.5x</option>
               <option value={2}>2x</option>
             </select>
-
-
 
             {/* Fullscreen */}
             <button

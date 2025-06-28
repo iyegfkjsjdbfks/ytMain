@@ -7,13 +7,13 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
-import { searchCombined } from '../services/googleSearchService';
 import { VideoService } from '../services/api';
+import { searchCombined } from '../services/googleSearchService';
 import { performanceMonitor } from '../utils/performance';
 
 
-import type { Video } from '../types';
 import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
+import type { Video } from '../types';
 
 
 // Types for better performance
@@ -71,7 +71,7 @@ const SearchResultsPage: React.FC = () => {
 
     // Create an AbortController for request cancellation
     const abortController = new AbortController();
-    
+
     // Store the controller for cleanup
     const currentController = abortController;
 
@@ -79,8 +79,8 @@ const SearchResultsPage: React.FC = () => {
       // Use searchCombined only since it already includes local search
       // This avoids duplicate API calls and improves performance
       const combinedResults = await searchCombined(
-        searchQuery, 
-        (query) => VideoService.searchVideos(query).then(result => result.videos)
+        searchQuery,
+        (query) => VideoService.searchVideos(query).then(result => result.videos),
       );
 
       // Check if request was cancelled
@@ -106,7 +106,7 @@ const SearchResultsPage: React.FC = () => {
         performanceMonitor.endMeasure('search-results-load');
       }
     }
-    
+
     // Return cleanup function
     return () => {
       currentController.abort();

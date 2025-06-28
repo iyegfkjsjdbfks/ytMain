@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import type React from 'react';
+import { useState, useRef } from 'react';
+
 import {
   CloudArrowUpIcon,
   VideoCameraIcon,
@@ -139,11 +141,11 @@ return null;
         0: file,
         length: 1,
         item: (index: number) => index === 0 ? file : null,
-        [Symbol.iterator]: function* () {
+        *[Symbol.iterator] () {
           yield file;
-        }
+        },
       } as FileList;
-      
+
       const fakeEvent = {
         target: { files: fileList },
         currentTarget: { files: fileList },
@@ -164,7 +166,6 @@ return null;
       handleFileSelect(fakeEvent);
     }
   };
-
 
 
   const removeTag = (tagToRemove: string) => {
