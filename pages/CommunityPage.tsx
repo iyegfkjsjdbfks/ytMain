@@ -131,13 +131,16 @@ return;
         let pollOptions: Array<{ id: string; text: string; votes: number }> | undefined;
 
         if (type === 'poll') {
-          const { content: pollContentValue, options: pollOptionsData } = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          content = pollContentValue;
-          pollOptions = pollOptionsData.map((option, idx) => ({
-            id: `option-${idx}`,
-            text: option,
-            votes: Math.floor(Math.random() * 500) + 50,
-          }));
+          const pollQuestion = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
+          if (pollQuestion) {
+            const { content: pollContentValue, options: pollOptionsData } = pollQuestion;
+            content = pollContentValue;
+            pollOptions = pollOptionsData.map((option: string, idx: number) => ({
+              id: `option-${idx}`,
+              text: option,
+              votes: Math.floor(Math.random() * 500) + 50,
+            }));
+          }
         }
 
         return {
@@ -376,7 +379,7 @@ return;
                     {post.type === 'poll' && post.pollOptions && (
                       <div className="space-y-2 mt-3">
                         {post.pollOptions.map((option) => {
-                          const { pollOptions } = post;
+                          const pollOptions = post.pollOptions!;
                           const totalVotes = pollOptions.reduce((sum, opt) => sum + opt.votes, 0);
                           const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
 

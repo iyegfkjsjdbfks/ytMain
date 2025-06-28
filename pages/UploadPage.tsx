@@ -48,7 +48,7 @@ const UploadPage: React.FC = () => {
     commentsEnabled: true,
     ageRestriction: false,
   });
-  const [tagInput, setTagInput] = useState('');
+  // const [tagInput, setTagInput] = useState(''); // Commented out as unused
 
   const categories = [
     'Entertainment', 'Education', 'Gaming', 'Music', 'News & Politics',
@@ -134,11 +134,32 @@ return null;
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file) {
+      // Create a proper FileList-like object
+      const fileList = {
+        0: file,
+        length: 1,
+        item: (index: number) => index === 0 ? file : null,
+        [Symbol.iterator]: function* () {
+          yield file;
+        }
+      } as FileList;
+      
       const fakeEvent = {
-        target: { files: [file] },
-        currentTarget: { files: [file] },
+        target: { files: fileList },
+        currentTarget: { files: fileList },
         preventDefault: () => {},
         stopPropagation: () => {},
+        nativeEvent: new Event('change'),
+        bubbles: false,
+        cancelable: false,
+        defaultPrevented: false,
+        eventPhase: 0,
+        isTrusted: false,
+        timeStamp: Date.now(),
+        type: 'change',
+        persist: () => {},
+        isDefaultPrevented: () => false,
+        isPropagationStopped: () => false,
       } as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
