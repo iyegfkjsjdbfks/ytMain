@@ -9,6 +9,7 @@ import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
 import { VideoService } from '../services/api';
 import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
+
 import { performanceMonitor } from '../utils/performance';
 import type { Video } from '../types';
 
