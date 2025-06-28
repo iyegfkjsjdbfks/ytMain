@@ -149,7 +149,6 @@ class TestRunner {
     } catch (error) {
       // Fallback: parse text output
       const lines = output.split('\n');
-      const currentTest = '';
 
       for (const line of lines) {
         if (line.includes('✓') || line.includes('PASS')) {
@@ -188,13 +187,12 @@ class TestRunner {
     // Console report
     // Detailed suite results
     for (const suite of this.results) {
-      const passRate = ((suite.passedTests / suite.totalTests) * 100).toFixed(1);
       if (suite.failedTests > 0) {
         suite.tests
           .filter(test => test.status === 'failed')
           .forEach(test => {
             if (test.errors && test.errors.length > 0) {
-              test.errors.forEach(error => {
+              test.errors.forEach(() => {
                 });
             }
           });

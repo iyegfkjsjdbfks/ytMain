@@ -297,6 +297,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
     const matches = content.matchAll(importRegex);
 
     for (const match of matches) {
+      if (!match[1]) continue;
       const imports = match[1].split(',').map(imp => imp.trim());
       const usedImports = imports.filter(imp => {
         const importName = imp.replace(/\s+as\s+\w+/, '').trim();
@@ -506,7 +507,6 @@ export interface ErrorWithSeverity extends AppError {
     const totalTasks = this.tasks.length;
     const completedCount = this.completedTasks.length;
     const failedCount = this.failedTasks.length;
-    const successRate = ((completedCount / totalTasks) * 100).toFixed(1);
 
 
     if (failedCount > 0) {

@@ -126,14 +126,13 @@ return;
 
       return Array.from({ length: 12 }, (_, i) => {
         const type = postTypes[Math.floor(Math.random() * postTypes.length)] || 'text';
-        const isRecent = i < 3;
 
         let content = sampleContent[Math.floor(Math.random() * sampleContent.length)] || 'Default content';
         let pollOptions: Array<{ id: string; text: string; votes: number }> | undefined;
 
         if (type === 'poll') {
-          const { content: pollContent, options: pollOptionsData } = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
-          content = pollContent;
+          const { content: pollContentValue, options: pollOptionsData } = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
+          content = pollContentValue;
           pollOptions = pollOptionsData.map((option, idx) => ({
             id: `option-${idx}`,
             text: option,
@@ -147,13 +146,13 @@ return;
           content,
           imageUrl: type === 'image' ? `https://picsum.photos/600/400?random=${i}` : '',
           pollOptions: pollOptions || [],
-          likes: Math.floor(Math.random() * 2000) + (isRecent ? 500 : 100),
-          comments: Math.floor(Math.random() * 300) + (isRecent ? 50 : 10),
-          shares: Math.floor(Math.random() * 100) + (isRecent ? 20 : 5),
+          likes: Math.floor(Math.random() * 2000) + (i < 3 ? 500 : 100),
+          comments: Math.floor(Math.random() * 300) + (i < 3 ? 50 : 10),
+          shares: Math.floor(Math.random() * 100) + (i < 3 ? 20 : 5),
           isLiked: Math.random() > 0.7,
           createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
           engagement: {
-            views: Math.floor(Math.random() * 10000) + (isRecent ? 2000 : 500),
+            views: Math.floor(Math.random() * 10000) + (i < 3 ? 2000 : 500),
             clickThroughRate: Math.random() * 15 + 2,
           },
         };

@@ -2,13 +2,11 @@ import type React from 'react';
 
 import { useVideoPlayer } from '../hooks';
 
-import type { VideoQuality, Subtitle, Chapter } from './video/VideoPlayer';
+import type { Chapter } from './video/VideoPlayer';
 import type { Video } from '../src/types/core';
 
 interface RefactoredVideoPlayerProps {
   video: Video;
-  qualities?: VideoQuality[];
-  subtitles?: Subtitle[];
   chapters?: Chapter[];
   autoplay?: boolean;
   muted?: boolean;
@@ -31,8 +29,6 @@ interface RefactoredVideoPlayerProps {
  */
 const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
   video,
-  qualities = [],
-  subtitles = [],
   chapters = [],
   autoplay = false,
   muted = false,
@@ -73,16 +69,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
           className="w-full h-full object-contain"
           playsInline
         >
-          {/* Subtitles */}
-          {subtitles.map((subtitle, index) => (
-            <track
-              key={index}
-              kind="subtitles"
-              src={subtitle.src}
-              srcLang={subtitle.srcLang}
-              label={subtitle.label}
-            />
-          ))}
+
         </video>
       )}
 
@@ -214,20 +201,7 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
               <option value={2}>2x</option>
             </select>
 
-            {/* Quality */}
-            {qualities.length > 0 && (
-              <select
-                value={state.quality}
-                onChange={(e) => actions.setQuality(e.target.value)}
-                className="bg-transparent text-white text-sm border border-gray-600 rounded px-2 py-1"
-              >
-                {qualities.map((q) => (
-                  <option key={q.label} value={q.label}>
-                    {q.label}
-                  </option>
-                ))}
-              </select>
-            )}
+
 
             {/* Fullscreen */}
             <button

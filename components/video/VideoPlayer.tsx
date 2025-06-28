@@ -4,7 +4,7 @@ import { LoadingSpinner, ErrorMessage } from '../ui';
 
 import VideoControls from './VideoControls';
 
-import type { VideoQuality, Subtitle } from './VideoSettings';
+
 
 interface Chapter {
   title: string;
@@ -15,9 +15,6 @@ interface Chapter {
 interface VideoPlayerProps {
   src: string;
   poster?: string;
-  qualities?: VideoQuality[];
-  subtitles?: Subtitle[];
-  chapters?: Chapter[];
   autoplay?: boolean;
   muted?: boolean;
   loop?: boolean;
@@ -30,9 +27,6 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   src,
   poster,
-  qualities = [],
-  subtitles = [],
-  chapters = [],
   autoplay = false,
   muted = false,
   loop = false,
@@ -44,10 +38,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
-  const [currentQuality, setCurrentQuality] = useState(qualities[0]?.value || 'auto');
-  const [currentSubtitle, setCurrentSubtitle] = useState<string | null>(null);
-  const [autoplayNext, setAutoplayNext] = useState(true);
+
   const [playbackRate, setPlaybackRate] = useState(1);
   const [controlsTimeout, setControlsTimeout] = useState<NodeJS.Timeout | null>(null);
 
@@ -128,15 +119,7 @@ return;
     }
   };
 
-  const handleQualityChange = (quality: string) => {
-    setCurrentQuality(quality);
-    // In a real implementation, you would switch video sources here
-    };
 
-  const handleSubtitleChange = (subtitle: string | null) => {
-    setCurrentSubtitle(subtitle);
-    // In a real implementation, you would enable/disable subtitle tracks here
-    };
 
   // Custom event handlers
   const handleTimeUpdate = () => {
@@ -217,7 +200,7 @@ return;
           onSeek={handleSeek}
           onFullscreenToggle={handleFullscreenToggle}
           onPlaybackRateChange={handlePlaybackRateChange}
-          onSettingsToggle={() => setShowSettings(!showSettings)}
+          onSettingsToggle={() => {}}
         />
       </div>
     </div>
@@ -225,4 +208,4 @@ return;
 };
 
 export default VideoPlayer;
-export type { VideoQuality, Subtitle, Chapter };
+export type { Chapter };

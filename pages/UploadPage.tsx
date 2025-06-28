@@ -144,15 +144,7 @@ return null;
     }
   };
 
-  const addTag = () => {
-    if (tagInput.trim() && !metadata.tags.includes(tagInput.trim())) {
-      setMetadata(prev => ({
-        ...prev,
-        tags: [...prev.tags, tagInput.trim()],
-      }));
-      setTagInput('');
-    }
-  };
+
 
   const removeTag = (tagToRemove: string) => {
     setMetadata(prev => ({
