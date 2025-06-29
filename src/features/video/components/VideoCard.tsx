@@ -31,6 +31,10 @@ const VideoCard: React.FC<VideoCardProps> = ({
     channelAvatarUrl,
     channelId,
     description,
+    viewCount,
+    likeCount,
+    commentCount,
+    publishedAt,
   } = video;
 
   const handleClick = () => {
@@ -39,14 +43,25 @@ const VideoCard: React.FC<VideoCardProps> = ({
     }
   };
 
-  const formattedDate = createdAt
-    ? formatDistanceToNow(new Date(createdAt), { addSuffix: true })
+  const formattedDate = publishedAt || createdAt
+    ? formatDistanceToNow(new Date(publishedAt || createdAt), { addSuffix: true })
     : '';
 
-  const viewsNumber = typeof views === 'string' ? parseInt(views, 10) : views;
-  const formattedViews = viewsNumber > 999
-    ? `${(viewsNumber / 1000).toFixed(1)}K`
-    : viewsNumber.toString();
+  // Use viewCount if available, fallback to views
+  const actualViewCount = viewCount || (typeof views === 'string' ? parseInt(views, 10) : views) || 0;
+  const formattedViews = actualViewCount > 999999
+    ? `${(actualViewCount / 1000000).toFixed(1)}M`
+    : actualViewCount > 999
+    ? `${(actualViewCount / 1000).toFixed(1)}K`
+    : actualViewCount.toString();
+
+  const formattedLikes = likeCount && likeCount > 999
+    ? `${(likeCount / 1000).toFixed(1)}K`
+    : likeCount?.toString() || '0';
+
+  const formattedComments = commentCount && commentCount > 999
+    ? `${(commentCount / 1000).toFixed(1)}K`
+    : commentCount?.toString() || '0';
 
   const formatDuration = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -86,6 +101,26 @@ const VideoCard: React.FC<VideoCardProps> = ({
             <p className="text-xs text-gray-600">{channelName}</p>
           </Link>
           <p className="text-xs text-gray-600">{formattedViews} views • {formattedDate}</p>
+          {(likeCount || commentCount) && (
+            <div className="flex items-center space-x-3 text-xs text-gray-500 mt-1">
+              {likeCount && (
+                <span className="flex items-center">
+                  <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                  </svg>
+                  {formattedLikes}
+                </span>
+              )}
+              {commentCount && (
+                <span className="flex items-center">
+                  <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                  </svg>
+                  {formattedComments}
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -182,6 +217,26 @@ const VideoCard: React.FC<VideoCardProps> = ({
             <p className="text-sm text-gray-600">{channelName}</p>
           </Link>
           <p className="text-sm text-gray-600">{formattedViews} views • {formattedDate}</p>
+          {(likeCount || commentCount) && (
+            <div className="flex items-center space-x-4 text-sm text-gray-500 mt-1">
+              {likeCount && (
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                  </svg>
+                  {formattedLikes}
+                </span>
+              )}
+              {commentCount && (
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                  </svg>
+                  {formattedComments}
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
