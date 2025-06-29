@@ -353,14 +353,62 @@ return;
     }, []),
   };
 
-  // Mock useEffect hooks - disabled to prevent video interactions
+  // Set up video element and event listeners
   useEffect(() => {
-    // Mock implementation - no actual fullscreen interaction
-  }, []);
+    const video = videoRef.current;
+    if (!video) return;
 
+    // Set initial properties
+    video.autoplay = autoplay;
+    video.muted = muted;
+    video.loop = loop;
+    video.preload = preload;
+    video.playsInline = playsinline;
+    video.volume = initialVolume;
+    video.playbackRate = initialPlaybackRate;
+
+    // Attach event listeners
+    video.addEventListener('loadstart', events.onLoadStart);
+    video.addEventListener('loadedmetadata', events.onLoadedMetadata);
+    video.addEventListener('canplay', events.onCanPlay);
+    video.addEventListener('play', events.onPlay);
+    video.addEventListener('pause', events.onPause);
+    video.addEventListener('timeupdate', events.onTimeUpdate);
+    video.addEventListener('durationchange', events.onDurationChange);
+    video.addEventListener('volumechange', events.onVolumeChange);
+    video.addEventListener('error', events.onError);
+    video.addEventListener('ended', events.onEnded);
+    video.addEventListener('progress', events.onProgress);
+    video.addEventListener('waiting', events.onWaiting);
+    video.addEventListener('canplaythrough', events.onCanPlayThrough);
+
+    // Cleanup function
+    return () => {
+      video.removeEventListener('loadstart', events.onLoadStart);
+      video.removeEventListener('loadedmetadata', events.onLoadedMetadata);
+      video.removeEventListener('canplay', events.onCanPlay);
+      video.removeEventListener('play', events.onPlay);
+      video.removeEventListener('pause', events.onPause);
+      video.removeEventListener('timeupdate', events.onTimeUpdate);
+      video.removeEventListener('durationchange', events.onDurationChange);
+      video.removeEventListener('volumechange', events.onVolumeChange);
+      video.removeEventListener('error', events.onError);
+      video.removeEventListener('ended', events.onEnded);
+      video.removeEventListener('progress', events.onProgress);
+      video.removeEventListener('waiting', events.onWaiting);
+      video.removeEventListener('canplaythrough', events.onCanPlayThrough);
+    };
+  }, [autoplay, muted, loop, preload, playsinline, initialVolume, initialPlaybackRate, events]);
+
+  // Handle fullscreen changes
   useEffect(() => {
-    // Mock implementation - no actual video element initialization
-  }, [autoplay, muted, loop, preload, playsinline, initialVolume, initialPlaybackRate]);
+    const handleFullscreenChange = () => {
+      setState(prev => ({ ...prev, isFullscreen: !!document.fullscreenElement }));
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   return {
     videoRef,
