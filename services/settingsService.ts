@@ -1,8 +1,8 @@
 // Settings service for managing application preferences
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
-export type YouTubePlayerType = 'optimized' | 'iframe-api' | 'advanced' | 'youtube-player' | 'optimized-video';
-export type LocalVideoPlayerType = 'advanced-video' | 'basic-video' | 'refactored-video';
+export type YouTubePlayerType = 'youtube-player';
+export type LocalVideoPlayerType = 'refactored-video';
 export type VideoPlayerType = YouTubePlayerType | LocalVideoPlayerType;
 
 export interface VideoPlayerConfig {
@@ -26,44 +26,14 @@ export interface AppSettings {
 
 const defaultSettings: AppSettings = {
   youtubeSearchProvider: 'hybrid',
-  youtubePlayerType: 'optimized',
-  localVideoPlayerType: 'advanced-video',
+  youtubePlayerType: 'youtube-player',
+  localVideoPlayerType: 'refactored-video',
   defaultVideoPlayerCategory: 'youtube',
 };
 
 // Video Player Configurations
 export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = {
   // YouTube Players
-  'optimized': {
-    type: 'optimized',
-    category: 'youtube',
-    name: 'Optimized YouTube Player',
-    description: 'Best balance of features and performance with lazy loading and custom controls',
-    features: ['Lazy Loading', 'Custom Controls', 'Performance Monitoring', 'Intersection Observer'],
-    useCases: ['General YouTube video playback', 'Video grids', 'Performance-critical apps'],
-    performance: 'high',
-    complexity: 'moderate',
-  },
-  'iframe-api': {
-    type: 'iframe-api',
-    category: 'youtube',
-    name: 'IFrame API Player',
-    description: 'Full YouTube API integration with advanced features and detailed event handling',
-    features: ['Full YouTube API', 'Quality Control', 'Advanced Events', 'Playback Control'],
-    useCases: ['Professional video apps', 'Advanced playback control', 'Custom player interfaces'],
-    performance: 'medium',
-    complexity: 'advanced',
-  },
-  'advanced': {
-    type: 'advanced',
-    category: 'youtube',
-    name: 'Advanced YouTube Player',
-    description: 'Feature-rich player with advanced controls and professional features',
-    features: ['Advanced Controls', 'Quality Selection', 'Subtitle Support', 'Chapter Navigation'],
-    useCases: ['Professional applications', 'Educational content', 'Training platforms'],
-    performance: 'medium',
-    complexity: 'advanced',
-  },
   'youtube-player': {
     type: 'youtube-player',
     category: 'youtube',
@@ -74,37 +44,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     performance: 'high',
     complexity: 'simple',
   },
-  'optimized-video': {
-    type: 'optimized-video',
-    category: 'youtube',
-    name: 'Optimized Video Player',
-    description: 'High-performance player optimized for speed and minimal resource usage',
-    features: ['High Performance', 'Minimal Resources', 'Fast Rendering', 'Optimized Loading'],
-    useCases: ['Performance-critical applications', 'Mobile devices', 'Low-bandwidth scenarios'],
-    performance: 'high',
-    complexity: 'simple',
-  },
   // Local Video Players
-  'advanced-video': {
-    type: 'advanced-video',
-    category: 'local',
-    name: 'Advanced Video Player',
-    description: 'Feature-rich HTML5 video player with advanced controls, subtitles, and quality selection',
-    features: ['Quality Selection', 'Subtitle Support', 'Chapter Navigation', 'Fullscreen', 'Custom Controls'],
-    useCases: ['Local video files', 'Educational content', 'Professional video playback', 'Training materials'],
-    performance: 'medium',
-    complexity: 'advanced',
-  },
-  'basic-video': {
-    type: 'basic-video',
-    category: 'local',
-    name: 'Basic Video Player',
-    description: 'Simple HTML5 video player with essential controls for local video files',
-    features: ['Basic Controls', 'HTML5 Video', 'Lightweight', 'Cross-browser Support'],
-    useCases: ['Simple local video playback', 'Basic media display', 'Lightweight applications'],
-    performance: 'high',
-    complexity: 'simple',
-  },
   'refactored-video': {
     type: 'refactored-video',
     category: 'local',

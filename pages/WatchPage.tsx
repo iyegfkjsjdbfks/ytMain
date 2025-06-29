@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { AdvancedVideoPlayer, BasicVideoPlayer, RefactoredVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
+import { RefactoredVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useWatchPage } from '../hooks/useWatchPage';
@@ -211,14 +211,6 @@ const WatchPage: React.FC = () => {
               ) : (() => {
                 const localPlayerType = getLocalVideoPlayerType();
                 switch (localPlayerType) {
-                  case 'basic-video':
-                    return (
-                      <BasicVideoPlayer
-                        src={video.videoUrl}
-                        poster={video.thumbnailUrl}
-                        title={video.title}
-                      />
-                    );
                   case 'refactored-video':
                     return (
                       <RefactoredVideoPlayer
@@ -227,10 +219,10 @@ const WatchPage: React.FC = () => {
                         muted={false}
                       />
                     );
-                  case 'advanced-video':
+                  case 'refactored-video':
                   default:
                     return (
-                      <AdvancedVideoPlayer
+                      <RefactoredVideoPlayer
                         src={video.videoUrl}
                         poster={video.thumbnailUrl}
                         title={video.title}

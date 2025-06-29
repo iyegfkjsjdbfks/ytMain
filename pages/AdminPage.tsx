@@ -22,8 +22,8 @@ import {
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');
-  const [playerType, setPlayerType] = useState<YouTubePlayerType>('optimized');
-  const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('advanced-video');
+  const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
+  const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('refactored-video');
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview'>('overview');
   const [isSaving, setIsSaving] = useState(false);

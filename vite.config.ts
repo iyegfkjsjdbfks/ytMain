@@ -136,7 +136,7 @@ export default defineConfig({
           if (id.includes('/pages/')) {
             return 'pages';
           }
-          if (id.includes('/components/video/') || id.includes('VideoPlayer') || id.includes('YouTubePlayer') || id.includes('OptimizedVideoPlayer') || id.includes('OptimizedYouTubePlayer')) {
+          if (id.includes('/components/video/') || id.includes('VideoPlayer') || id.includes('YouTubePlayer')) {
             return 'video-components';
           }
           if (id.includes('/components/') && (id.includes('VideoCard') || id.includes('VideoGrid') || id.includes('OptimizedVideoCard') || id.includes('OptimizedSearchResults'))) {

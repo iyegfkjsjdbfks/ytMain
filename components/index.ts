@@ -18,13 +18,8 @@ export { default as ReusableVideoGrid } from './ReusableVideoGrid';
 export { default as VirtualizedVideoGrid } from './VirtualizedVideoGrid';
 
 // Video Player Components
-export { default as AdvancedVideoPlayer } from './AdvancedVideoPlayer';
-export { default as BasicVideoPlayer } from './BasicVideoPlayer';
 export { default as RefactoredVideoPlayer } from './RefactoredVideoPlayer';
 export { default as YouTubePlayerWrapper } from './YouTubePlayerWrapper';
-export { default as OptimizedVideoPlayer } from './OptimizedVideoPlayer';
-export { default as OptimizedYouTubePlayer } from './OptimizedYouTubePlayer';
-export { default as IFrameAPIYouTubePlayer } from './IFrameAPIYouTubePlayer';
 export { default as YouTubePlayer } from './YouTubePlayer';
 export { default as VideoDescription } from './VideoDescription';
 export { default as RefactoredVideoDescription } from './RefactoredVideoDescription';
