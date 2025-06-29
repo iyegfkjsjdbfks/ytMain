@@ -1,0 +1,622 @@
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  PlayIcon,
+  PauseIcon,
+  SpeakerWaveIcon,
+  SpeakerXMarkIcon,
+  ArrowsPointingOutIcon,
+  ArrowsPointingInIcon,
+  Cog6ToothIcon,
+  ForwardIcon,
+  BackwardIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
+} from '@heroicons/react/24/outline';
+
+import { useVideoPlayer } from '../hooks';
+import type { Video } from '../types';
+
+interface Chapter {
+  title: string;
+  startTime: number;
+  endTime: number;
+}
+
+interface AdvancedVideoPlayerProps {
+  video: Video;
+  chapters?: Chapter[];
+  autoplay?: boolean;
+  muted?: boolean;
+  className?: string;
+  onTimeUpdate?: (currentTime: number) => void;
+  onEnded?: () => void;
+  onPlay?: () => void;
+  onPause?: () => void;
+}
+
+interface VideoQuality {
+  label: string;
+  value: string;
+  resolution: string;
+}
+
+const VIDEO_QUALITIES: VideoQuality[] = [
+  { label: 'Auto', value: 'auto', resolution: 'Auto' },
+  { label: '1080p', value: '1080p', resolution: '1920x1080' },
+  { label: '720p', value: '720p', resolution: '1280x720' },
+  { label: '480p', value: '480p', resolution: '854x480' },
+  { label: '360p', value: '360p', resolution: '640x360' },
+  { label: '240p', value: '240p', resolution: '426x240' },
+];
+
+const PLAYBACK_RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
+const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
+  video,
+  chapters = [],
+  autoplay = false,
+  muted = false,
+  className = '',
+  onTimeUpdate,
+  onEnded,
+  onPlay,
+  onPause,
+}) => {
+  // Use the custom video player hook
+  const { videoRef, state, actions } = useVideoPlayer({
+    autoplay,
+    muted,
+    onTimeUpdate,
+    onEnded,
+    onPlay,
+    onPause,
+  });
+
+  // Local state for UI controls
+  const [showControls, setShowControls] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showQualityMenu, setShowQualityMenu] = useState(false);
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+  const [showChapters, setShowChapters] = useState(false);
+  const [selectedQuality, setSelectedQuality] = useState('auto');
+  const [isDragging, setIsDragging] = useState(false);
+  const [previewTime, setPreviewTime] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
+  const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
+  const [autoplayNext, setAutoplayNext] = useState(true);
+  const [annotations, setAnnotations] = useState(true);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const settingsRef = useRef<HTMLDivElement>(null);
+
+  // Format time for display
+  const formatTime = (time: number): string => {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = Math.floor(time % 60);
+    
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  // Get current chapter
+  const getCurrentChapter = (): Chapter | undefined => {
+    return chapters.find(
+      (chapter) => state.currentTime >= chapter.startTime && state.currentTime < chapter.endTime
+    );
+  };
+
+  // Handle progress bar interaction
+  const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!progressRef.current || !state.duration) return;
+    
+    const rect = progressRef.current.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * state.duration;
+    actions.seek(newTime);
+  }, [state.duration, actions]);
+
+  const handleProgressMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!progressRef.current || !state.duration) return;
+    
+    const rect = progressRef.current.getBoundingClientRect();
+    const hoverX = e.clientX - rect.left;
+    const hoverTime = (hoverX / rect.width) * state.duration;
+    setPreviewTime(hoverTime);
+    setShowPreview(true);
+  }, [state.duration]);
+
+  const handleProgressMouseLeave = useCallback(() => {
+    setShowPreview(false);
+  }, []);
+
+  // Keyboard shortcuts
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (!videoRef.current) return;
+    
+    switch (e.code) {
+      case 'Space':
+        e.preventDefault();
+        actions.togglePlayPause();
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        actions.seek(Math.max(0, state.currentTime - 10));
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        actions.seek(Math.min(state.duration, state.currentTime + 10));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        actions.setVolume(Math.min(1, state.volume + 0.1));
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        actions.setVolume(Math.max(0, state.volume - 0.1));
+        break;
+      case 'KeyM':
+        e.preventDefault();
+        actions.toggleMute();
+        break;
+      case 'KeyF':
+        e.preventDefault();
+        actions.toggleFullscreen();
+        break;
+      case 'Comma':
+        if (e.shiftKey) {
+          e.preventDefault();
+          actions.setPlaybackRate(Math.max(0.25, state.playbackRate - 0.25));
+        }
+        break;
+      case 'Period':
+        if (e.shiftKey) {
+          e.preventDefault();
+          actions.setPlaybackRate(Math.min(2, state.playbackRate + 0.25));
+        }
+        break;
+    }
+  }, [actions, state.currentTime, state.duration, state.volume, state.playbackRate]);
+
+  // Auto-hide controls
+  const resetControlsTimeout = useCallback(() => {
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    
+    setShowControls(true);
+    
+    if (state.isPlaying) {
+      controlsTimeoutRef.current = setTimeout(() => {
+        setShowControls(false);
+      }, 3000);
+    }
+  }, [state.isPlaying]);
+
+  // Handle mouse movement to show controls
+  const handleMouseMove = useCallback(() => {
+    resetControlsTimeout();
+  }, [resetControlsTimeout]);
+
+  // Handle click outside settings
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (settingsRef.current && !settingsRef.current.contains(e.target as Node)) {
+      setShowSettings(false);
+      setShowQualityMenu(false);
+      setShowSpeedMenu(false);
+    }
+  }, []);
+
+  // Chapter navigation
+  const goToChapter = useCallback((chapter: Chapter) => {
+    actions.seek(chapter.startTime);
+    setShowChapters(false);
+  }, [actions]);
+
+  // Skip forward/backward
+  const skipForward = useCallback(() => {
+    actions.seek(Math.min(state.duration, state.currentTime + 10));
+  }, [actions, state.currentTime, state.duration]);
+
+  const skipBackward = useCallback(() => {
+    actions.seek(Math.max(0, state.currentTime - 10));
+  }, [actions, state.currentTime]);
+
+  // Picture-in-picture
+  const togglePictureInPicture = useCallback(async () => {
+    if (!videoRef.current) return;
+    
+    try {
+      if (document.pictureInPictureElement) {
+        await document.exitPictureInPicture();
+      } else {
+        await videoRef.current.requestPictureInPicture();
+      }
+    } catch (error) {
+      console.error('Picture-in-picture failed:', error);
+    }
+  }, []);
+
+  // Effects
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('click', handleClickOutside);
+      if (controlsTimeoutRef.current) {
+        clearTimeout(controlsTimeoutRef.current);
+      }
+    };
+  }, [handleKeyDown, handleClickOutside]);
+
+  useEffect(() => {
+    resetControlsTimeout();
+  }, [state.isPlaying, resetControlsTimeout]);
+
+  const currentChapter = getCurrentChapter();
+  const progressPercentage = state.duration ? (state.currentTime / state.duration) * 100 : 0;
+  const volumePercentage = state.volume * 100;
+  const bufferPercentage = state.buffered * 100;
+
+  return (
+    <div 
+      ref={containerRef}
+      className={`relative bg-black rounded-lg overflow-hidden group ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setShowControls(false)}
+    >
+      {/* Video Element */}
+      <video
+        ref={videoRef}
+        src={video.videoUrl}
+        poster={video.thumbnail}
+        className="w-full h-full object-contain"
+        onClick={actions.togglePlayPause}
+        onDoubleClick={actions.toggleFullscreen}
+      />
+
+      {/* Loading Overlay */}
+      {state.loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+        </div>
+      )}
+
+      {/* Error Overlay */}
+      {state.error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="text-white text-center">
+            <p className="text-lg mb-2">Video Error</p>
+            <p className="text-sm opacity-75">{state.error}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Chapter Indicator */}
+      {currentChapter && (
+        <div className="absolute top-4 left-4 bg-black bg-opacity-75 text-white px-3 py-1 rounded text-sm">
+          {currentChapter.title}
+        </div>
+      )}
+
+      {/* Controls Overlay */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          showControls || !state.isPlaying ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        {/* Center Play/Pause Button */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <button
+            onClick={actions.togglePlayPause}
+            className="bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-4 rounded-full transition-all duration-200 transform hover:scale-110"
+          >
+            {state.isPlaying ? (
+              <PauseIcon className="w-8 h-8" />
+            ) : (
+              <PlayIcon className="w-8 h-8 ml-1" />
+            )}
+          </button>
+        </div>
+
+        {/* Bottom Controls */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+          {/* Progress Bar */}
+          <div className="mb-4">
+            <div 
+              ref={progressRef}
+              className="relative h-2 bg-white bg-opacity-30 rounded-full cursor-pointer group"
+              onClick={handleProgressClick}
+              onMouseMove={handleProgressMouseMove}
+              onMouseLeave={handleProgressMouseLeave}
+            >
+              {/* Buffer Bar */}
+              <div 
+                className="absolute top-0 left-0 h-full bg-white bg-opacity-50 rounded-full"
+                style={{ width: `${bufferPercentage}%` }}
+              />
+              
+              {/* Progress Bar */}
+              <div 
+                className="absolute top-0 left-0 h-full bg-red-600 rounded-full"
+                style={{ width: `${progressPercentage}%` }}
+              />
+              
+              {/* Progress Handle */}
+              <div 
+                className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ left: `calc(${progressPercentage}% - 8px)` }}
+              />
+              
+              {/* Chapter Markers */}
+              {chapters.map((chapter, index) => {
+                const markerPosition = state.duration ? (chapter.startTime / state.duration) * 100 : 0;
+                return (
+                  <div
+                    key={index}
+                    className="absolute top-0 w-0.5 h-full bg-white bg-opacity-75"
+                    style={{ left: `${markerPosition}%` }}
+                    title={chapter.title}
+                  />
+                );
+              })}
+              
+              {/* Time Preview */}
+              {showPreview && (
+                <div 
+                  className="absolute bottom-full mb-2 px-2 py-1 bg-black bg-opacity-75 text-white text-xs rounded whitespace-nowrap transform -translate-x-1/2"
+                  style={{ left: `${(previewTime / state.duration) * 100}%` }}
+                >
+                  {formatTime(previewTime)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Control Buttons */}
+          <div className="flex items-center justify-between text-white">
+            <div className="flex items-center space-x-2">
+              {/* Play/Pause */}
+              <button
+                onClick={actions.togglePlayPause}
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+              >
+                {state.isPlaying ? (
+                  <PauseIcon className="w-6 h-6" />
+                ) : (
+                  <PlayIcon className="w-6 h-6" />
+                )}
+              </button>
+
+              {/* Skip Backward */}
+              <button
+                onClick={skipBackward}
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                title="Skip backward 10s"
+              >
+                <BackwardIcon className="w-6 h-6" />
+              </button>
+
+              {/* Skip Forward */}
+              <button
+                onClick={skipForward}
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                title="Skip forward 10s"
+              >
+                <ForwardIcon className="w-6 h-6" />
+              </button>
+
+              {/* Volume */}
+              <div className="flex items-center group">
+                <button
+                  onClick={actions.toggleMute}
+                  className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                >
+                  {state.isMuted || state.volume === 0 ? (
+                    <SpeakerXMarkIcon className="w-6 h-6" />
+                  ) : (
+                    <SpeakerWaveIcon className="w-6 h-6" />
+                  )}
+                </button>
+                
+                <div className="w-0 group-hover:w-20 overflow-hidden transition-all duration-200">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={volumePercentage}
+                    onChange={(e) => actions.setVolume(Number(e.target.value) / 100)}
+                    className="w-20 h-1 bg-white bg-opacity-30 rounded-lg appearance-none cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Time Display */}
+              <span className="text-sm font-mono">
+                {formatTime(state.currentTime)} / {formatTime(state.duration)}
+              </span>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              {/* Chapters */}
+              {chapters.length > 0 && (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowChapters(!showChapters)}
+                    className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                    title="Chapters"
+                  >
+                    <span className="text-sm">Chapters</span>
+                  </button>
+                  
+                  {showChapters && (
+                    <div className="absolute bottom-full right-0 mb-2 w-64 max-h-48 overflow-y-auto bg-black bg-opacity-90 rounded-lg">
+                      {chapters.map((chapter, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToChapter(chapter)}
+                          className="w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors border-b border-white border-opacity-20 last:border-b-0"
+                        >
+                          <div className="text-sm font-medium">{chapter.title}</div>
+                          <div className="text-xs opacity-75">
+                            {formatTime(chapter.startTime)} - {formatTime(chapter.endTime)}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Picture-in-Picture */}
+              <button
+                onClick={togglePictureInPicture}
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                title="Picture-in-picture"
+              >
+                <span className="text-sm">PiP</span>
+              </button>
+
+              {/* Settings */}
+              <div className="relative" ref={settingsRef}>
+                <button
+                  onClick={() => setShowSettings(!showSettings)}
+                  className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+                >
+                  <Cog6ToothIcon className="w-6 h-6" />
+                </button>
+                
+                {showSettings && (
+                  <div className="absolute bottom-full right-0 mb-2 w-64 bg-black bg-opacity-90 rounded-lg overflow-hidden">
+                    {/* Quality Settings */}
+                    <div className="border-b border-white border-opacity-20">
+                      <button
+                        onClick={() => setShowQualityMenu(!showQualityMenu)}
+                        className="w-full flex items-center justify-between p-3 hover:bg-white hover:bg-opacity-20 transition-colors"
+                      >
+                        <span>Quality</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm opacity-75">{selectedQuality}</span>
+                          <ChevronUpIcon className={`w-4 h-4 transition-transform ${showQualityMenu ? 'rotate-180' : ''}`} />
+                        </div>
+                      </button>
+                      
+                      {showQualityMenu && (
+                        <div className="bg-black bg-opacity-50">
+                          {VIDEO_QUALITIES.map((quality) => (
+                            <button
+                              key={quality.value}
+                              onClick={() => {
+                                setSelectedQuality(quality.value);
+                                actions.setPlaybackQuality(quality.value);
+                                setShowQualityMenu(false);
+                              }}
+                              className={`w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors ${
+                                selectedQuality === quality.value ? 'bg-white bg-opacity-20' : ''
+                              }`}
+                            >
+                              <div className="flex justify-between">
+                                <span>{quality.label}</span>
+                                <span className="text-sm opacity-75">{quality.resolution}</span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Speed Settings */}
+                    <div className="border-b border-white border-opacity-20">
+                      <button
+                        onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+                        className="w-full flex items-center justify-between p-3 hover:bg-white hover:bg-opacity-20 transition-colors"
+                      >
+                        <span>Playback Speed</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm opacity-75">{state.playbackRate}x</span>
+                          <ChevronUpIcon className={`w-4 h-4 transition-transform ${showSpeedMenu ? 'rotate-180' : ''}`} />
+                        </div>
+                      </button>
+                      
+                      {showSpeedMenu && (
+                        <div className="bg-black bg-opacity-50">
+                          {PLAYBACK_RATES.map((rate) => (
+                            <button
+                              key={rate}
+                              onClick={() => {
+                                actions.setPlaybackRate(rate);
+                                setShowSpeedMenu(false);
+                              }}
+                              className={`w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors ${
+                                state.playbackRate === rate ? 'bg-white bg-opacity-20' : ''
+                              }`}
+                            >
+                              {rate}x
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Other Settings */}
+                    <div className="p-3 space-y-3">
+                      <label className="flex items-center justify-between cursor-pointer">
+                        <span>Subtitles/CC</span>
+                        <input
+                          type="checkbox"
+                          checked={subtitlesEnabled}
+                          onChange={(e) => setSubtitlesEnabled(e.target.checked)}
+                          className="rounded"
+                        />
+                      </label>
+                      
+                      <label className="flex items-center justify-between cursor-pointer">
+                        <span>Autoplay</span>
+                        <input
+                          type="checkbox"
+                          checked={autoplayNext}
+                          onChange={(e) => setAutoplayNext(e.target.checked)}
+                          className="rounded"
+                        />
+                      </label>
+                      
+                      <label className="flex items-center justify-between cursor-pointer">
+                        <span>Annotations</span>
+                        <input
+                          type="checkbox"
+                          checked={annotations}
+                          onChange={(e) => setAnnotations(e.target.checked)}
+                          className="rounded"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Fullscreen */}
+              <button
+                onClick={actions.toggleFullscreen}
+                className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
+              >
+                {state.isFullscreen ? (
+                  <ArrowsPointingInIcon className="w-6 h-6" />
+                ) : (
+                  <ArrowsPointingOutIcon className="w-6 h-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdvancedVideoPlayer;
