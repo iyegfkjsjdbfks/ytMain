@@ -212,20 +212,12 @@ const WatchPage: React.FC = () => {
                 const localPlayerType = getLocalVideoPlayerType();
                 switch (localPlayerType) {
                   case 'refactored-video':
+                  default:
                     return (
                       <RefactoredVideoPlayer
                         video={video}
                         autoplay={false}
                         muted={false}
-                      />
-                    );
-                  case 'refactored-video':
-                  default:
-                    return (
-                      <RefactoredVideoPlayer
-                        src={video.videoUrl}
-                        poster={video.thumbnailUrl}
-                        title={video.title}
                       />
                     );
                 }
