@@ -60,16 +60,14 @@ const RefactoredVideoPlayer: React.FC<RefactoredVideoPlayerProps> = ({
 
   return (
     <div className={`relative bg-black rounded-lg overflow-hidden ${className}`}>
-      {/* Video Element - Disabled to prevent loading errors */}
-      {false && (
-        <video
-          ref={videoRef}
-          src={video.videoUrl}
-          poster={video.thumbnailUrl}
-          className="w-full h-full object-contain"
-          playsInline
-        />
-      )}
+      {/* Video Element */}
+      <video
+        ref={videoRef}
+        src={video.videoUrl}
+        poster={video.thumbnailUrl}
+        className="w-full h-full object-contain"
+        playsInline
+      />
 
       {/* Loading Overlay */}
       {state.isLoading && (
