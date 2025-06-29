@@ -43,7 +43,6 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
     liked,
     disliked,
     isSubscribed,
-    isSavedToAnyList,
     mockLikeCount,
     showFullDescription,
     summary,
@@ -99,7 +98,7 @@ return null;
         liked={liked}
         disliked={disliked}
         likeCount={mockLikeCount}
-        isSavedToAnyList={isSavedToAnyList}
+        isSavedToAnyList={false}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef } from 'react';
+import { type default as React, useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,

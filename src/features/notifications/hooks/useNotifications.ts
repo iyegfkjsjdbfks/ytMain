@@ -60,6 +60,7 @@ export function useNotifications() {
         icon: notification.fromUserAvatar || '/favicon.ico',
         tag: notification.id,
       });
+      // Notification is created for side effects
     }
 
     // Play notification sound (optional)
@@ -120,7 +121,7 @@ export function useNotificationSettings() {
   });
 
   const updateSettingsMutation = useMutation({
-    mutationFn: (newSettings: any) => notificationService.updateNotificationSettings(newSettings),
+    mutationFn: (newSettings: NotificationSettings) => notificationService.updateNotificationSettings(newSettings),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notification-settings'] });
     },

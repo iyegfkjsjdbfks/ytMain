@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import { type default as React, useState, useEffect } from 'react';
 
 import {
   UserGroupIcon,

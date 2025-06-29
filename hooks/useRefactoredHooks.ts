@@ -230,7 +230,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
   const ref = useRef<T>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: Event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         handler();
       }
@@ -302,33 +302,33 @@ export function useUnifiedAppState() {
   return {
     // Auth state
     user: state.user,
-    isAuthenticated: state.isAuthenticated || false,
+    isAuthenticated: state.isAuthenticated,
     login,
     logout,
 
     // Theme state
-    theme: state.theme || 'light',
+    theme: state.theme,
     setTheme,
-    isDarkMode: (state.theme || 'light') === 'dark',
+    isDarkMode: state.theme === 'dark',
 
     // Miniplayer state
     miniplayerVideo: state.miniplayerVideo,
-    isMiniplayerOpen: state.isMiniplayerOpen || false,
+    isMiniplayerOpen: state.isMiniplayerOpen,
     openMiniplayer,
     toggleMiniplayer,
 
     // Watch Later state
-    watchLaterVideos: state.watchLaterVideos || [],
+    watchLaterVideos: state.watchLaterVideos,
     addToWatchLater,
     removeFromWatchLater,
     isInWatchLater,
 
     // UI state
-    sidebarCollapsed: state.sidebarCollapsed || false,
+    sidebarCollapsed: state.sidebarCollapsed,
     toggleSidebar,
 
     // Notifications state
-    notifications: state.notifications || [],
+    notifications: state.notifications,
     addNotification,
     removeNotification,
   };
