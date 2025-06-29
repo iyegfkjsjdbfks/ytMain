@@ -1,8 +1,8 @@
 // Settings service for managing application preferences
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
-export type YouTubePlayerType = 'youtube-player';
-export type LocalVideoPlayerType = 'refactored-video';
+export type YouTubePlayerType = 'youtube-player' | 'youtube-player-wrapper';
+export type LocalVideoPlayerType = 'advanced-video-player' | 'video-player';
 export type VideoPlayerType = YouTubePlayerType | LocalVideoPlayerType;
 
 export interface VideoPlayerConfig {
@@ -26,8 +26,8 @@ export interface AppSettings {
 
 const defaultSettings: AppSettings = {
   youtubeSearchProvider: 'hybrid',
-  youtubePlayerType: 'youtube-player',
-  localVideoPlayerType: 'refactored-video',
+  youtubePlayerType: 'youtube-player-wrapper',
+  localVideoPlayerType: 'advanced-video-player',
   defaultVideoPlayerCategory: 'youtube',
 };
 
@@ -37,23 +37,43 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
   'youtube-player': {
     type: 'youtube-player',
     category: 'youtube',
-    name: 'Simple YouTube Player',
-    description: 'Lightweight YouTube integration with basic controls for simple needs',
-    features: ['Basic Controls', 'Lightweight', 'Simple Integration', 'Fast Loading'],
-    useCases: ['Simple video display', 'Embedded content', 'Minimal resource usage'],
+    name: 'YouTube Player',
+    description: 'Direct YouTube player component with basic YouTube API integration',
+    features: ['YouTube API Integration', 'Basic Controls', 'Lightweight', 'Simple Setup'],
+    useCases: ['Simple YouTube video embedding', 'Basic playback needs', 'Minimal configuration'],
     performance: 'high',
     complexity: 'simple',
   },
-  // Local Video Players
-  'refactored-video': {
-    type: 'refactored-video',
-    category: 'local',
-    name: 'Refactored Video Player',
-    description: 'Modern video player built with custom hooks and optimized React patterns',
-    features: ['Custom Hooks', 'Modern React Patterns', 'State Management', 'Reusable Components'],
-    useCases: ['Modern React applications', 'Component reusability', 'Custom video experiences'],
+  'youtube-player-wrapper': {
+    type: 'youtube-player-wrapper',
+    category: 'youtube',
+    name: 'YouTube Player Wrapper',
+    description: 'Enhanced YouTube player with additional wrapper functionality and controls',
+    features: ['Enhanced Controls', 'Wrapper Functionality', 'YouTube API', 'Custom Events', 'Error Handling'],
+    useCases: ['Advanced YouTube integration', 'Custom player controls', 'Enhanced user experience'],
     performance: 'high',
     complexity: 'moderate',
+  },
+  // Local Video Players
+  'advanced-video-player': {
+    type: 'advanced-video-player',
+    category: 'local',
+    name: 'Advanced Video Player',
+    description: 'Feature-rich video player with advanced controls and modern React patterns',
+    features: ['Advanced Controls', 'Custom Hooks', 'State Management', 'Quality Selection', 'Fullscreen Support'],
+    useCases: ['Professional video applications', 'Advanced playback features', 'Custom video experiences'],
+    performance: 'high',
+    complexity: 'advanced',
+  },
+  'video-player': {
+    type: 'video-player',
+    category: 'local',
+    name: 'Standard Video Player',
+    description: 'Standard HTML5 video player with essential controls and React integration',
+    features: ['HTML5 Video', 'Standard Controls', 'React Integration', 'Responsive Design'],
+    useCases: ['Standard video playback', 'Simple local videos', 'Basic video needs'],
+    performance: 'medium',
+    complexity: 'simple',
   },
 };
 
