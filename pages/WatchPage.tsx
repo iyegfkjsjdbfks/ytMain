@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { RefactoredVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
+import { AdvancedVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useWatchPage } from '../hooks/useWatchPage';
@@ -214,7 +214,7 @@ const WatchPage: React.FC = () => {
                   case 'refactored-video':
                   default:
                     return (
-                      <RefactoredVideoPlayer
+                      <AdvancedVideoPlayer
                         video={video}
                         autoplay={false}
                         muted={false}

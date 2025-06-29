@@ -4,7 +4,7 @@ import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 
-import RefactoredVideoPlayer from './RefactoredVideoPlayer';
+import AdvancedVideoPlayer from './AdvancedVideoPlayer';
 import VideoActions from './VideoActions';
 import VideoDescription from './VideoDescription';
 import YouTubePlayerWrapper from './YouTubePlayerWrapper';
@@ -73,7 +73,7 @@ return null;
             controls={true}
           />
         ) : (
-          <RefactoredVideoPlayer
+          <AdvancedVideoPlayer
             src={video.videoUrl}
             poster={video.thumbnailUrl}
             title={video.title}
