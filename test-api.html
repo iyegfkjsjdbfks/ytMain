@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test Results</h1>
+    <div id="results"></div>
+    
+    <script>
+        const API_KEY = 'AIzaSyDo2zq98fZbNEgjkdsYGAZs-CJcfSBz9OQ';
+        const ENGINE_ID = '61201925358ea4e83';
+        const YOUTUBE_API_KEY = 'AIzaSyBUsybQzukGdy3O6a7_IT2DFJVAnPYlF0U';
+        const resultsDiv = document.getElementById('results');
+        
+        function log(message) {
+            console.log(message);
+            resultsDiv.innerHTML += '<p>' + message + '</p>';
+        }
+        
+        async function testGoogleCustomSearch() {
+            try {
+                const searchUrl = new URL('https://www.googleapis.com/customsearch/v1');
+                searchUrl.searchParams.set('key', API_KEY);
+                searchUrl.searchParams.set('cx', ENGINE_ID);
+                searchUrl.searchParams.set('q', 'javascript tutorial site:youtube.com');
+                searchUrl.searchParams.set('num', '3');
+
+                log('Testing Google Custom Search API...');
+                log('URL: ' + searchUrl.toString());
+                
+                const response = await fetch(searchUrl.toString());
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    log('API Error: ' + response.status + ' ' + errorText);
+                    return;
+                }
+
+                const data = await response.json();
+                log('=== Google Custom Search Response ===');
+                log('Total Results: ' + (data.searchInformation?.totalResults || 'N/A'));
+                log('Items found: ' + (data.items?.length || 0));
+                
+                if (data.items && data.items.length > 0) {
+                    data.items.forEach((item, index) => {
+                        log(`--- Item ${index + 1} ---`);
+                        log('Title: ' + item.title);
+                        log('Link: ' + item.link);
+                        log('Snippet: ' + item.snippet);
+                        if (item.pagemap) {
+                            log('Pagemap: ' + JSON.stringify(item.pagemap, null, 2));
+                        } else {
+                            log('Pagemap: None');
+                        }
+                    });
+                }
+            } catch (error) {
+                log('Error testing Google Custom Search: ' + error.message);
+            }
+        }
+
+        async function testYouTubeAPI() {
+            try {
+                const searchUrl = new URL('https://www.googleapis.com/youtube/v3/search');
+                searchUrl.searchParams.set('key', YOUTUBE_API_KEY);
+                searchUrl.searchParams.set('part', 'snippet');
+                searchUrl.searchParams.set('q', 'javascript tutorial');
+                searchUrl.searchParams.set('type', 'video');
+                searchUrl.searchParams.set('maxResults', '3');
+
+                log('\n\nTesting YouTube Data API...');
+                log('URL: ' + searchUrl.toString());
+                
+                const response = await fetch(searchUrl.toString());
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    log('YouTube API Error: ' + response.status + ' ' + errorText);
+                    return;
+                }
+
+                const data = await response.json();
+                log('=== YouTube API Response ===');
+                log('Items found: ' + (data.items?.length || 0));
+                
+                if (data.items && data.items.length > 0) {
+                    const videoIds = data.items.map(item => item.id.videoId);
+                    log('Video IDs: ' + videoIds.join(', '));
+                    
+                    // Test video details API
+                    const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
+                    detailsUrl.searchParams.set('key', YOUTUBE_API_KEY);
+                    detailsUrl.searchParams.set('part', 'snippet,statistics,contentDetails');
+                    detailsUrl.searchParams.set('id', videoIds.join(','));
+                    
+                    const detailsResponse = await fetch(detailsUrl.toString());
+                    if (detailsResponse.ok) {
+                        const detailsData = await detailsResponse.json();
+                        log('=== Video Details ===');
+                        detailsData.items.forEach((video, index) => {
+                            log(`--- Video ${index + 1} ---`);
+                            log('Title: ' + video.snippet.title);
+                            log('View Count: ' + (video.statistics.viewCount || 'N/A'));
+                            log('Like Count: ' + (video.statistics.likeCount || 'N/A'));
+                            log('Comment Count: ' + (video.statistics.commentCount || 'N/A'));
+                            log('Duration: ' + (video.contentDetails.duration || 'N/A'));
+                        });
+                    } else {
+                        log('Failed to fetch video details: ' + detailsResponse.status);
+                    }
+                }
+            } catch (error) {
+                log('Error testing YouTube API: ' + error.message);
+            }
+        }
+        
+        // Run tests when page loads
+        window.onload = function() {
+            testGoogleCustomSearch().then(() => {
+                return testYouTubeAPI();
+            });
+        };
+    </script>
+</body>
+</html>

@@ -25,7 +25,7 @@ export interface Settings {
 
 
 const defaultSettings: Settings = {
-  youtubeSearchProvider: 'youtube-api',
+  youtubeSearchProvider: 'google-search',
   youtubePlayerType: 'youtube-player',
   localVideoPlayerType: 'advanced-video-player',
   defaultVideoPlayerCategory: 'youtube',
