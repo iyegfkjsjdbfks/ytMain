@@ -1,4 +1,5 @@
-import { memo, useMemo, useCallback, useState, useRef, useEffect, type MouseEvent } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { MouseEvent } from 'react';
 
 import {
   PlayIcon,
@@ -6,6 +7,7 @@ import {
   EllipsisVerticalIcon,
   PlusIcon,
   CheckIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
@@ -16,8 +18,10 @@ import { cn } from '../utils/cn';
 import { withMemo } from '../utils/componentOptimizations';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';
+import { isYouTubeUrl } from '../src/lib/youtube-utils';
 
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
+import YouTubePlayer from './YouTubePlayer';
 
 import type { Video } from '../types';
 
@@ -181,9 +185,11 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   }) => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const [isPlayingInline, setIsPlayingInline] = useState(false);
 
   const classes = sizeClasses[size];
   const isWatchLater = false; // Simplified for now
+  const isYouTube = isYouTubeUrl(video.videoUrl || '');
 
   // Memoized formatted values
   const formattedDuration = useMemo(() => {
@@ -199,7 +205,10 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
   // Event handlers with performance monitoring
   const handleVideoClick = useCallback(() => {
     performanceMonitor.startMeasure('video-card-click');
-    if (onClick) {
+    if (isYouTube && !isPlayingInline) {
+      // For YouTube videos, start inline playback
+      setIsPlayingInline(true);
+    } else if (onClick) {
       onClick(video);
     } else {
       showMiniplayer(video);
@@ -207,7 +216,17 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
     if (performanceMonitor.hasMetric('video-card-click')) {
       performanceMonitor.endMeasure('video-card-click');
     }
-  }, [onClick, video, showMiniplayer]);
+  }, [onClick, video, showMiniplayer, isYouTube, isPlayingInline]);
+
+  const handleCloseInlinePlayer = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    setIsPlayingInline(false);
+  }, []);
+
+  const handlePlayInline = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    setIsPlayingInline(true);
+  }, []);
 
   const handleChannelClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -243,64 +262,105 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
     >
       {/* Thumbnail Container */}
       <div className="relative overflow-hidden rounded-lg bg-gray-200">
-        <LazyImage
-          src={video.thumbnailUrl}
-          alt={video.title}
-          className={cn(
-            classes.thumbnail,
-            'transition-transform group-hover:scale-110',
-          )}
-          priority={index < 4 ? 'high' : priority}
-          lazy={lazy}
-        />
+        {isPlayingInline && isYouTube ? (
+          /* YouTube Player for inline playback */
+          <div className="relative">
+            <YouTubePlayer
+              video={video}
+              width="100%"
+              height={size === 'sm' ? 180 : size === 'md' ? 200 : 240}
+              autoplay={true}
+              controls={true}
+              className={classes.thumbnail}
+            />
+            {/* Close button for inline player */}
+            <button
+              onClick={handleCloseInlinePlayer}
+              className="absolute top-2 right-2 p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors z-10"
+              title="Close player"
+            >
+              <XMarkIcon className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        ) : (
+          /* Regular thumbnail */
+          <>
+            <LazyImage
+              src={video.thumbnailUrl}
+              alt={video.title}
+              className={cn(
+                classes.thumbnail,
+                'transition-transform group-hover:scale-110',
+              )}
+              priority={index < 4 ? 'high' : priority}
+              lazy={lazy}
+            />
 
-        {/* Duration Badge */}
-        <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
-          {formattedDuration}
-        </div>
+            {/* Duration Badge */}
+            <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
+              {formattedDuration}
+            </div>
 
-        {/* Live Badge */}
-        {video.isLive && (
-          <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-medium">
-            LIVE
+            {/* Live Badge */}
+            {video.isLive && (
+              <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-medium">
+                LIVE
+              </div>
+            )}
+
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+              {isYouTube ? (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handlePlayInline}
+                    className="p-2 bg-red-600 hover:bg-red-700 rounded-full transition-colors"
+                    title="Play inline"
+                  >
+                    <PlayIcon className="w-6 h-6 text-white" />
+                  </button>
+                  <span className="text-white text-sm font-medium">Play on YouTube</span>
+                </div>
+              ) : (
+                <PlayIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              )}
+            </div>
+          </>
+        )}
+
+        {/* Action Buttons - Hide when inline player is active */}
+        {!isPlayingInline && (
+          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
+            <button
+              onClick={handleWatchLaterToggle}
+              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
+              title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
+            >
+              {isWatchLater ? (
+                <CheckIcon className="w-4 h-4 text-white" />
+              ) : (
+                <ClockIcon className="w-4 h-4 text-white" />
+              )}
+            </button>
+            <button
+              onClick={handleMenuClick}
+              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
+              title="More options"
+            >
+              <EllipsisVerticalIcon className="w-4 h-4 text-white" />
+            </button>
           </div>
         )}
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
-          <PlayIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-        </div>
-
-        {/* Action Buttons */}
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
-          <button
-            onClick={handleWatchLaterToggle}
-            className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
-            title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
+        {/* Dropdown Menu - Hide when inline player is active */}
+        {!isPlayingInline && (
+          <DropdownMenu
+            isOpen={showMenu}
+            onClose={closeMenu}
+            menuRef={menuRef}
+            className="top-12 right-2"
+            position="bottom-right"
           >
-            {isWatchLater ? (
-              <CheckIcon className="w-4 h-4 text-white" />
-            ) : (
-              <ClockIcon className="w-4 h-4 text-white" />
-            )}
-          </button>
-          <button
-            onClick={handleMenuClick}
-            className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
-            title="More options"
-          >
-            <EllipsisVerticalIcon className="w-4 h-4 text-white" />
-          </button>
-        </div>
-
-        {/* Dropdown Menu */}
-        <DropdownMenu
-          isOpen={showMenu}
-          onClose={closeMenu}
-          menuRef={menuRef}
-          className="top-12 right-2"
-          position="bottom-right"
-        >
           <DropdownMenuItem
             onClick={(e) => {
               e.stopPropagation();
@@ -377,49 +437,50 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            onClick={(e) => {
-              e.stopPropagation();
-              closeMenu();
-              // Report video functionality
-              const reportReasons = [
-                'Spam or misleading',
-                'Hateful or abusive content',
-                'Harmful or dangerous acts',
-                'Child safety',
-                'Promotes terrorism',
-                'Spam or scams',
-                'Infringes my rights',
-                'Captions issue',
-              ];
+              onClick={(e) => {
+                e.stopPropagation();
+                closeMenu();
+                // Report video functionality
+                const reportReasons = [
+                  'Spam or misleading',
+                  'Hateful or abusive content',
+                  'Harmful or dangerous acts',
+                  'Child safety',
+                  'Promotes terrorism',
+                  'Spam or scams',
+                  'Infringes my rights',
+                  'Captions issue',
+                ];
 
-              const reason = prompt(`Report this video for:\n\n${reportReasons.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nEnter the number (1-${reportReasons.length}):`);
+                const reason = prompt(`Report this video for:\n\n${reportReasons.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nEnter the number (1-${reportReasons.length}):`);
 
-              if (reason && !isNaN(Number(reason)) && Number(reason) >= 1 && Number(reason) <= reportReasons.length) {
-                const selectedReason = reportReasons[Number(reason) - 1];
+                if (reason && !isNaN(Number(reason)) && Number(reason) >= 1 && Number(reason) <= reportReasons.length) {
+                  const selectedReason = reportReasons[Number(reason) - 1];
 
-                // Store report (in real app, this would be sent to server)
-                const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
-                reports.push({
-                  videoId: video.id,
-                  reason: selectedReason,
-                  timestamp: new Date().toISOString(),
-                  videoTitle: video.title,
-                });
-                localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
+                  // Store report (in real app, this would be sent to server)
+                  const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
+                  reports.push({
+                    videoId: video.id,
+                    reason: selectedReason,
+                    timestamp: new Date().toISOString(),
+                    videoTitle: video.title,
+                  });
+                  localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
 
-                alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
+                  alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
+                }
+              }}
+              variant="danger"
+              icon={
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
               }
-            }}
-            variant="danger"
-            icon={
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            }
-          >
-            Report
-          </DropdownMenuItem>
+            >
+              Report
+            </DropdownMenuItem>
         </DropdownMenu>
+        )}
       </div>
 
       {/* Content */}

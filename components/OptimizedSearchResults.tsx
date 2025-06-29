@@ -232,7 +232,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
   // Loading skeleton
   const LoadingSkeleton = memo(() => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
       {Array.from({ length: 20 }).map((_, index) => (
         <div key={index} className="animate-pulse">
           <div className="bg-gray-200 dark:bg-gray-700 aspect-video rounded-lg mb-3" />
@@ -283,7 +283,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       <div className="relative">
         {/* Desktop/Tablet Grid View */}
         <div className="hidden sm:block">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
             {allResults.map((item, index) => (
               <GridItem
                 key={`${item.id}-${index}`}
