@@ -2,7 +2,7 @@ import { useState, useEffect, type FC } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
 
-import YouTubePlayerWrapper from '../../../../components/YouTubePlayerWrapper';
+import { YouTubePlayer } from '../../../../components/YouTubePlayer';
 import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
 import { VideoPlayer } from '../components/VideoPlayer';
 
@@ -203,7 +203,7 @@ const WatchPage: FC = () => {
             {/* Video Player */}
             <div className="bg-black rounded-lg overflow-hidden mb-4">
               {isYouTubeUrl(video.videoUrl || '') ? (
-                <YouTubePlayerWrapper
+                <YouTubePlayer
                   videoId={getYouTubeVideoId(video.videoUrl || '') || video.id}
                   autoplay={false}
                   width="100%"

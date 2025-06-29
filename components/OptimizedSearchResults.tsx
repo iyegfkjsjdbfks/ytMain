@@ -106,7 +106,28 @@ const sortingFunctions = {
   },
 };
 
-// Virtualized item component
+// Grid item component for responsive grid layout
+const GridItem: React.FC<{
+  item: Video | YouTubeSearchResult | GoogleSearchResult;
+  onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
+}> = memo(({ item, onVideoClick }) => {
+  const convertedVideo = convertToVideo(item);
+
+  return (
+    <div className="group">
+      <OptimizedVideoCard
+        video={convertedVideo}
+        onClick={() => onVideoClick(item)}
+        lazy={true}
+        size="md"
+        showChannel={true}
+        className="transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+      />
+    </div>
+  );
+});
+
+// Virtualized item component for mobile view
 const VirtualizedItem: React.FC<VirtualizedItemProps> = memo(({ index, style, data }) => {
   const { items, onVideoClick } = data;
   const item = items[index];
@@ -211,12 +232,13 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
   // Loading skeleton
   const LoadingSkeleton = memo(() => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
-      {Array.from({ length: 12 }).map((_, index) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+      {Array.from({ length: 20 }).map((_, index) => (
         <div key={index} className="animate-pulse">
-          <div className="bg-gray-200 h-48 rounded-lg mb-2" />
-          <div className="bg-gray-200 h-4 rounded mb-2" />
-          <div className="bg-gray-200 h-3 rounded w-3/4" />
+          <div className="bg-gray-200 dark:bg-gray-700 aspect-video rounded-lg mb-3" />
+          <div className="bg-gray-200 dark:bg-gray-700 h-4 rounded mb-2" />
+          <div className="bg-gray-200 dark:bg-gray-700 h-3 rounded w-3/4 mb-1" />
+          <div className="bg-gray-200 dark:bg-gray-700 h-3 rounded w-1/2" />
         </div>
       ))}
     </div>
@@ -248,40 +270,56 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   return (
     <div ref={containerRef} className="w-full">
       {/* Results header */}
-      <div className="flex items-center justify-between mb-4 px-4">
-        <div className="text-sm text-gray-600">
+      <div className="flex items-center justify-between mb-6 px-4">
+        <div className="text-sm text-gray-600 dark:text-gray-400">
           {allResults.length} results for "{debouncedQuery}"
         </div>
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-gray-500 dark:text-gray-500">
           Sorted by {sortBy}
         </div>
       </div>
 
-      {/* Virtualized results */}
+      {/* Grid layout for desktop/tablet, virtualized list for mobile */}
       <div className="relative">
-        <List
-          height={containerHeight}
-          width="100%"
-          itemCount={allResults.length}
-          itemSize={itemHeight}
-          itemData={listData}
-          overscanCount={5} // Render 5 extra items for smooth scrolling
-          className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
-        >
-          {VirtualizedItem}
-        </List>
+        {/* Desktop/Tablet Grid View */}
+        <div className="hidden sm:block">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4">
+            {allResults.map((item, index) => (
+              <GridItem
+                key={`${item.id}-${index}`}
+                item={item}
+                onVideoClick={onVideoClick}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Virtualized List View */}
+        <div className="block sm:hidden">
+          <List
+            height={containerHeight}
+            width="100%"
+            itemCount={allResults.length}
+            itemSize={itemHeight}
+            itemData={listData}
+            overscanCount={5}
+            className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+          >
+            {VirtualizedItem}
+          </List>
+        </div>
 
         {/* Load more trigger */}
         {hasMore && (
-          <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className="h-20 flex items-center justify-center">
+          <div ref={loadMoreRef as React.RefObject<HTMLDivElement>} className="h-20 flex items-center justify-center mt-8">
             {loading ? (
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-600" />
             ) : (
               <button
                 onClick={onLoadMore}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
               >
-                Load More
+                Load More Videos
               </button>
             )}
           </div>
@@ -290,8 +328,8 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
 
       {/* Performance indicator (development only) */}
       {import.meta.env.MODE === 'development' && (
-        <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white text-xs p-2 rounded">
-          {allResults.length} items rendered
+        <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white text-xs p-2 rounded z-50">
+          {allResults.length} items • Grid: {window.innerWidth >= 640 ? 'ON' : 'OFF'}
         </div>
       )}
     </div>
