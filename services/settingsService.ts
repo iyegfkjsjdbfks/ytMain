@@ -2,8 +2,7 @@
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
 export type YouTubePlayerType = 'youtube-player' | 'youtube-player-wrapper';
-export type LocalVideoPlayerType = 'advanced-video-player' | 'video-player';
-export type VideoPlayerType = YouTubePlayerType | LocalVideoPlayerType;
+export type VideoPlayerType = YouTubePlayerType;
 
 export interface VideoPlayerConfig {
   type: VideoPlayerType;
@@ -16,18 +15,16 @@ export interface VideoPlayerConfig {
   complexity: 'simple' | 'moderate' | 'advanced';
 }
 
-export interface AppSettings {
+export interface Settings {
   youtubeSearchProvider: YouTubeSearchProvider;
   youtubePlayerType: YouTubePlayerType;
-  localVideoPlayerType: LocalVideoPlayerType;
   defaultVideoPlayerCategory: 'youtube' | 'local';
 }
 
 
-const defaultSettings: AppSettings = {
-  youtubeSearchProvider: 'hybrid',
-  youtubePlayerType: 'youtube-player-wrapper',
-  localVideoPlayerType: 'advanced-video-player',
+const defaultSettings: Settings = {
+  youtubeSearchProvider: 'youtube-api',
+  youtubePlayerType: 'youtube-player',
   defaultVideoPlayerCategory: 'youtube',
 };
 
@@ -65,16 +62,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     performance: 'high',
     complexity: 'advanced',
   },
-  'video-player': {
-    type: 'video-player',
-    category: 'local',
-    name: 'Standard Video Player',
-    description: 'Standard HTML5 video player with essential controls and React integration',
-    features: ['HTML5 Video', 'Standard Controls', 'React Integration', 'Responsive Design'],
-    useCases: ['Standard video playback', 'Simple local videos', 'Basic video needs'],
-    performance: 'medium',
-    complexity: 'simple',
-  },
+
 };
 
 export const getSettings = (): AppSettings => {
@@ -102,14 +90,7 @@ export const setYouTubePlayerType = (playerType: YouTubePlayerType): void => {
   saveSettings({ ...settings, youtubePlayerType: playerType });
 };
 
-export const getLocalVideoPlayerType = (): LocalVideoPlayerType => {
-  return getSettings().localVideoPlayerType;
-};
 
-export const setLocalVideoPlayerType = (playerType: LocalVideoPlayerType): void => {
-  const settings = getSettings();
-  saveSettings({ ...settings, localVideoPlayerType: playerType });
-};
 
 export const getDefaultVideoPlayerCategory = (): 'youtube' | 'local' => {
   return getSettings().defaultVideoPlayerCategory;

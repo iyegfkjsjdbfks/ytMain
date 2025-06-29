@@ -1,11 +1,11 @@
 
 import React from 'react';
 
-import { AdvancedVideoPlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
+import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useWatchPage } from '../hooks/useWatchPage';
-import { getLocalVideoPlayerType } from '../services/settingsService';
+import { getYouTubePlayerType } from '../services/settingsService';
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
@@ -200,28 +200,38 @@ const WatchPage: React.FC = () => {
           <div className="lg:col-span-2">
             {/* Video player */}
             <div className="mb-4">
-              {isYouTubeUrl(video.videoUrl) ? (
-                <YouTubePlayerWrapper
-                  videoId={getYouTubeVideoId(video.videoUrl) || ''}
-                  autoplay={false}
-                  width="100%"
-                  height={480}
-                  controls={true}
-                />
-              ) : (() => {
-                const localPlayerType = getLocalVideoPlayerType();
-                switch (localPlayerType) {
-                  case 'refactored-video':
-                  default:
+              {isYouTubeUrl(video.videoUrl) ? (() => {
+                const youtubePlayerType = getYouTubePlayerType();
+                const videoId = getYouTubeVideoId(video.videoUrl) || '';
+                
+                switch (youtubePlayerType) {
+                  case 'youtube-player':
                     return (
-                      <AdvancedVideoPlayer
+                      <YouTubePlayer
                         video={video}
                         autoplay={false}
                         muted={false}
                       />
                     );
+                  case 'youtube-player-wrapper':
+                  default:
+                    return (
+                      <YouTubePlayerWrapper
+                        videoId={videoId}
+                        autoplay={false}
+                        width="100%"
+                        height={480}
+                        controls={true}
+                      />
+                    );
                 }
-              })()}
+              })() : (
+                <AdvancedVideoPlayer
+                  video={video}
+                  autoplay={false}
+                  muted={false}
+                />
+              )}
             </div>
 
             {/* Video title and stats */}

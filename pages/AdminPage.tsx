@@ -1,6 +1,6 @@
 import { type default as React, useState, useEffect } from 'react';
 
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 import {
   getSettings,
@@ -8,14 +8,14 @@ import {
   VIDEO_PLAYER_CONFIGS,
   getVideoPlayersByCategory,
   getAllVideoPlayers,
-  setLocalVideoPlayerType,
+
   setDefaultVideoPlayerCategory,
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
   isHybridModeAvailable,
   type YouTubeSearchProvider,
   type YouTubePlayerType,
-  type LocalVideoPlayerType,
+
   type VideoPlayerConfig,
 } from '../services/settingsService';
 
@@ -23,9 +23,9 @@ import {
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');
   const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
-  const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('refactored-video');
+
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
-  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview'>('overview');
+  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'overview'>('overview');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -34,7 +34,7 @@ const AdminPage: React.FC = () => {
     const settings = getSettings();
     setProvider(settings.youtubeSearchProvider);
     setPlayerType(settings.youtubePlayerType);
-    setLocalPlayerType(settings.localVideoPlayerType);
+
     setDefaultCategory(settings.defaultVideoPlayerCategory);
   }, []);
 
@@ -78,23 +78,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType) => {
-    setIsSaving(true);
-    setSaveMessage('');
 
-    try {
-      setLocalVideoPlayerType(newPlayerType);
-      setLocalPlayerType(newPlayerType);
-      setSaveMessage('Local video player type updated successfully!');
-    } catch (error) {
-      console.error('Error saving local player type:', error);
-      setSaveMessage('Error saving local player type. Please try again.');
-    } finally {
-      setIsSaving(false);
-      // Clear message after 3 seconds
-      setTimeout(() => setSaveMessage(''), 3000);
-    }
-  };
 
   const handleDefaultCategoryChange = async (newCategory: 'youtube' | 'local') => {
     setIsSaving(true);
@@ -138,9 +122,7 @@ const AdminPage: React.FC = () => {
     };
 
     const getCategoryIcon = (category: string) => {
-      return category === 'youtube' ?
-        <PlayIcon className="h-5 w-5 text-red-500" /> :
-        <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
+      return <PlayIcon className="h-5 w-5 text-red-500" />;
     };
 
     return (
@@ -217,7 +199,6 @@ const AdminPage: React.FC = () => {
               {[
                 { id: 'overview', name: 'Overview', icon: CogIcon },
                 { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
-                { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
                 { id: 'search', name: 'Search Settings', icon: SparklesIcon },
               ].map((tab) => {
                 const Icon = tab.icon;
@@ -268,12 +249,9 @@ const AdminPage: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-sm font-medium text-gray-600">YouTube Player:</span>
-                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[playerType].name}</span>
+                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[playerType]?.name || 'Loading...'}</span>
                       </div>
-                      <div>
-                        <span className="text-sm font-medium text-gray-600">Local Video Player:</span>
-                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[localPlayerType].name}</span>
-                      </div>
+
                       <div>
                         <span className="text-sm font-medium text-gray-600">Default Category:</span>
                         <span className="ml-2 text-sm text-gray-900 capitalize">{defaultCategory}</span>
@@ -330,15 +308,7 @@ const AdminPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center">
-                      <VideoCameraIcon className="h-8 w-8 text-blue-500" />
-                      <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-600">Local Players</p>
-                        <p className="text-2xl font-semibold text-gray-900">{getVideoPlayersByCategory('local').length}</p>
-                      </div>
-                    </div>
-                  </div>
+
                   <div className="bg-white border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center">
                       <SparklesIcon className="h-8 w-8 text-green-500" />
@@ -377,30 +347,7 @@ const AdminPage: React.FC = () => {
               </div>
             )}
 
-            {/* Local Video Players Tab */}
-            {activeTab === 'local-players' && (
-              <div className="space-y-6">
-                <div>
-                  <h2 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
-                    <VideoCameraIcon className="h-5 w-5 mr-2 text-blue-500" />
-                    Local Video Players
-                  </h2>
-                  <p className="text-sm text-gray-600 mb-6">
-                    Choose which player implementation to use for local video files and custom video sources.
-                  </p>
-                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {getVideoPlayersByCategory('local').map((config) =>
-                    renderPlayerCard(
-                      config,
-                      localPlayerType === config.type,
-                      () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType),
-                    ),
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Search Settings Tab */}
             {activeTab === 'search' && (

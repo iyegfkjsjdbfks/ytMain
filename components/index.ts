@@ -11,7 +11,7 @@ export { default as AccountLayout } from './AccountLayout';
 export { default as VideoCard } from './VideoCard';
 export { default as OptimizedVideoCard } from './OptimizedVideoCard';
 export { default as ShortDisplayCard } from './ShortDisplayCard';
-export { default as VideoPlayer } from './video/VideoPlayer';
+
 export { UnifiedVideoCard } from './UnifiedVideoCard';
 export { default as VideoGrid } from './VideoGrid';
 export { default as ReusableVideoGrid } from './ReusableVideoGrid';

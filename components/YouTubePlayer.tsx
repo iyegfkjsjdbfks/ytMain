@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService';
+import type { Video } from '../src/types/core';
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
 // YouTube Player API types
 declare global {
@@ -86,7 +88,7 @@ interface YTPlayer {
 }
 
 interface YouTubePlayerProps {
-  video: YouTubeSearchResult;
+  video: YouTubeSearchResult | Video;
   width?: string | number;
   height?: string | number;
   autoplay?: boolean;
@@ -110,7 +112,17 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
   // Extract video ID from the video object
-  const videoId = video.embedUrl?.split('/embed/')[1]?.split('?')[0] || '';
+  const videoId = (() => {
+    // Handle YouTubeSearchResult type
+    if ('embedUrl' in video && video.embedUrl) {
+      return video.embedUrl.split('/embed/')[1]?.split('?')[0] || '';
+    }
+    // Handle Video type
+    if ('videoUrl' in video && video.videoUrl) {
+      return getYouTubeVideoId(video.videoUrl) || '';
+    }
+    return '';
+  })();
 
   // Validate video ID
   const isValidVideoId = videoId && videoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoId);
