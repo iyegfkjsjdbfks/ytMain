@@ -87,6 +87,7 @@ interface YouTubeSearchItem {
       default: { url: string; width: number; height: number };
       medium: { url: string; width: number; height: number };
       high: { url: string; width: number; height: number };
+      maxres?: { url: string; width: number; height: number };
     };
     channelTitle: string;
     liveBroadcastContent: string;
@@ -106,6 +107,85 @@ interface YouTubeSearchResponse {
   items: YouTubeSearchItem[];
 }
 
+// Enhanced YouTube Video Details API response
+interface YouTubeVideoDetails {
+  id: string;
+  snippet: {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
+      high: { url: string; width: number; height: number };
+      standard?: { url: string; width: number; height: number };
+      maxres?: { url: string; width: number; height: number };
+    };
+    channelTitle: string;
+    tags?: string[];
+    categoryId: string;
+    liveBroadcastContent: string;
+    defaultLanguage?: string;
+    defaultAudioLanguage?: string;
+  };
+  statistics: {
+    viewCount: string;
+    likeCount?: string;
+    dislikeCount?: string;
+    favoriteCount?: string;
+    commentCount?: string;
+  };
+  contentDetails: {
+    duration: string;
+    dimension: string;
+    definition: string;
+    caption: string;
+    licensedContent: boolean;
+    regionRestriction?: {
+      allowed?: string[];
+      blocked?: string[];
+    };
+    contentRating?: Record<string, string>;
+    projection?: string;
+  };
+}
+
+interface YouTubeVideoDetailsResponse {
+  kind: string;
+  etag: string;
+  items: YouTubeVideoDetails[];
+}
+
+// YouTube Channel Details API response
+interface YouTubeChannelDetails {
+  id: string;
+  snippet: {
+    title: string;
+    description: string;
+    customUrl?: string;
+    publishedAt: string;
+    thumbnails: {
+      default: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
+      high: { url: string; width: number; height: number };
+    };
+    country?: string;
+  };
+  statistics: {
+    viewCount: string;
+    subscriberCount: string;
+    hiddenSubscriberCount: boolean;
+    videoCount: string;
+  };
+}
+
+interface YouTubeChannelDetailsResponse {
+  kind: string;
+  etag: string;
+  items: YouTubeChannelDetails[];
+}
+
 // YouTube video result type
 export interface YouTubeSearchResult {
   id: string;
@@ -113,10 +193,18 @@ export interface YouTubeSearchResult {
   description: string;
   thumbnailUrl: string;
   channelName: string;
+  channelId: string;
+  channelAvatarUrl?: string;
   videoUrl: string;
   embedUrl: string;
   duration?: string;
   uploadedAt?: string;
+  viewCount?: number;
+  likeCount?: number;
+  dislikeCount?: number;
+  commentCount?: number;
+  tags?: string[];
+  categoryId?: string;
   isYouTube: true;
 }
 
@@ -127,10 +215,18 @@ export interface GoogleSearchResult {
   description: string;
   thumbnailUrl: string;
   channelName: string;
+  channelId?: string;
+  channelAvatarUrl?: string;
   videoUrl: string;
   embedUrl: string;
   duration?: string;
   uploadedAt?: string;
+  viewCount?: number;
+  likeCount?: number;
+  dislikeCount?: number;
+  commentCount?: number;
+  tags?: string[];
+  categoryId?: string;
   isYouTube: true;
   source: 'google-search';
 }
@@ -142,41 +238,81 @@ export interface CombinedSearchResult {
   googleSearchVideos?: GoogleSearchResult[];
 }
 
-// Convert YouTube Data API result to YouTube video result
-const convertToYouTubeResult = (item: YouTubeSearchItem): YouTubeSearchResult => {
+// Convert YouTube Data API result to YouTube video result with enhanced metadata
+const convertToYouTubeResult = (
+  item: YouTubeSearchItem,
+  videoDetails?: YouTubeVideoDetails,
+  channelDetails?: YouTubeChannelDetails
+): YouTubeSearchResult => {
   const { videoId } = item.id;
+  const thumbnailUrl = videoDetails?.snippet.thumbnails.maxres?.url ||
+                      videoDetails?.snippet.thumbnails.high?.url ||
+                      item.snippet.thumbnails.medium?.url ||
+                      item.snippet.thumbnails.default.url;
+
+  const duration = videoDetails?.contentDetails.duration ?
+                  formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
+                  '0:00';
 
   return {
     id: `youtube-${videoId}`,
-    title: item.snippet.title,
-    description: item.snippet.description,
-    thumbnailUrl: item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default.url,
+    title: videoDetails?.snippet.title || item.snippet.title,
+    description: videoDetails?.snippet.description || item.snippet.description,
+    thumbnailUrl,
     channelName: item.snippet.channelTitle,
+    channelId: item.snippet.channelId,
+    channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
+                     channelDetails?.snippet.thumbnails.default?.url,
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
-    duration: '0:00', // Duration requires additional API call
+    duration,
     uploadedAt: item.snippet.publishedAt,
+    viewCount: videoDetails?.statistics.viewCount ? parseInt(videoDetails.statistics.viewCount, 10) : undefined,
+    likeCount: videoDetails?.statistics.likeCount ? parseInt(videoDetails.statistics.likeCount, 10) : undefined,
+    dislikeCount: videoDetails?.statistics.dislikeCount ? parseInt(videoDetails.statistics.dislikeCount, 10) : undefined,
+    commentCount: videoDetails?.statistics.commentCount ? parseInt(videoDetails.statistics.commentCount, 10) : undefined,
+    tags: videoDetails?.snippet.tags,
+    categoryId: videoDetails?.snippet.categoryId,
     isYouTube: true as const,
   };
 };
 
-// Convert Google Custom Search result to YouTube video result
-const convertToGoogleSearchResult = (item: GoogleSearchItem): GoogleSearchResult => {
+// Convert Google Custom Search result to YouTube video result with enhanced metadata
+const convertToGoogleSearchResult = (
+  item: GoogleSearchItem,
+  videoDetails?: YouTubeVideoDetails,
+  channelDetails?: YouTubeChannelDetails
+): GoogleSearchResult => {
   // Extract video ID from YouTube URL
   const videoId = extractVideoIdFromUrl(item.link);
-  const thumbnailUrl = item.pagemap?.cse_thumbnail?.[0]?.src || '';
+  const thumbnailUrl = videoDetails?.snippet.thumbnails.maxres?.url ||
+                      videoDetails?.snippet.thumbnails.high?.url ||
+                      item.pagemap?.cse_thumbnail?.[0]?.src || '';
   const videoObject = item.pagemap?.videoobject?.[0];
+
+  const duration = videoDetails?.contentDetails.duration ?
+                  formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
+                  (videoObject?.duration || '0:00');
 
   return {
     id: `google-search-${videoId || item.cacheId || Math.random().toString(36)}`,
-    title: item.title.replace(/ - YouTube$/, ''),
-    description: item.snippet,
+    title: videoDetails?.snippet.title || item.title.replace(/ - YouTube$/, ''),
+    description: videoDetails?.snippet.description || item.snippet,
     thumbnailUrl,
-    channelName: item.displayLink.replace('www.youtube.com › ', ''),
+    channelName: videoDetails?.snippet.channelTitle || item.displayLink.replace(/^www\.youtube\.com\s*[›>]?\s*/, '') || 'YouTube',
+    channelId: videoDetails?.snippet.channelId,
+    channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
+                     channelDetails?.snippet.thumbnails.default?.url,
     videoUrl: item.link,
     embedUrl: videoObject?.embedurl || `https://www.youtube.com/embed/${videoId}`,
-    duration: videoObject?.duration || '0:00',
-    uploadedAt: videoObject?.uploaddate || new Date().toISOString(),
+    duration,
+    uploadedAt: videoDetails?.snippet.publishedAt || videoObject?.uploaddate || new Date().toISOString(),
+    viewCount: videoDetails?.statistics.viewCount ? parseInt(videoDetails.statistics.viewCount, 10) : undefined,
+    likeCount: videoDetails?.statistics.likeCount ? parseInt(videoDetails.statistics.likeCount, 10) : undefined,
+    dislikeCount: videoDetails?.statistics.dislikeCount ? parseInt(videoDetails.statistics.dislikeCount, 10) : undefined,
+    commentCount: videoDetails?.statistics.commentCount ? parseInt(videoDetails.statistics.commentCount, 10) : undefined,
+    tags: videoDetails?.snippet.tags,
+    categoryId: videoDetails?.snippet.categoryId,
     isYouTube: true as const,
     source: 'google-search' as const,
   };
@@ -189,7 +325,97 @@ const extractVideoIdFromUrl = (url: string): string | null => {
   return match ? (match[1] || null) : null;
 };
 
-// Search YouTube videos using YouTube Data API v3
+// Helper function to parse ISO 8601 duration to seconds
+const parseDuration = (duration: string): number => {
+  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return 0;
+  
+  const hours = parseInt(match[1] || '0', 10);
+  const minutes = parseInt(match[2] || '0', 10);
+  const seconds = parseInt(match[3] || '0', 10);
+  
+  return hours * 3600 + minutes * 60 + seconds;
+};
+
+// Helper function to format duration from seconds to MM:SS or HH:MM:SS
+const formatDuration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+  return `${minutes}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Fetch detailed video information from YouTube Data API v3
+const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTubeVideoDetails>> => {
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  if (!apiKey || videoIds.length === 0) {
+    return new Map();
+  }
+
+  try {
+    const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
+    detailsUrl.searchParams.set('key', apiKey);
+    detailsUrl.searchParams.set('part', 'snippet,statistics,contentDetails');
+    detailsUrl.searchParams.set('id', videoIds.join(','));
+
+    const response = await fetch(detailsUrl.toString());
+    if (!response.ok) {
+      console.warn('Failed to fetch video details:', response.status);
+      return new Map();
+    }
+
+    const data: YouTubeVideoDetailsResponse = await response.json();
+    const detailsMap = new Map<string, YouTubeVideoDetails>();
+    
+    data.items.forEach(item => {
+      detailsMap.set(item.id, item);
+    });
+    
+    return detailsMap;
+  } catch (error) {
+    console.error('Error fetching video details:', error);
+    return new Map();
+  }
+};
+
+// Fetch channel information from YouTube Data API v3
+const fetchChannelDetails = async (channelIds: string[]): Promise<Map<string, YouTubeChannelDetails>> => {
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  if (!apiKey || channelIds.length === 0) {
+    return new Map();
+  }
+
+  try {
+    const channelUrl = new URL('https://www.googleapis.com/youtube/v3/channels');
+    channelUrl.searchParams.set('key', apiKey);
+    channelUrl.searchParams.set('part', 'snippet,statistics');
+    channelUrl.searchParams.set('id', channelIds.join(','));
+
+    const response = await fetch(channelUrl.toString());
+    if (!response.ok) {
+      console.warn('Failed to fetch channel details:', response.status);
+      return new Map();
+    }
+
+    const data: YouTubeChannelDetailsResponse = await response.json();
+    const channelMap = new Map<string, YouTubeChannelDetails>();
+    
+    data.items.forEach(item => {
+      channelMap.set(item.id, item);
+    });
+    
+    return channelMap;
+  } catch (error) {
+    console.error('Error fetching channel details:', error);
+    return new Map();
+  }
+};
+
+// Search YouTube videos using YouTube Data API v3 with enhanced metadata
 export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchResult[]> => {
   // Check for YouTube API key in environment variables
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -221,8 +447,22 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
       return [];
     }
 
-    // Convert YouTube API results to our format
-    const youtubeResults = data.items.map(convertToYouTubeResult);
+    // Extract video IDs and channel IDs for batch fetching
+    const videoIds = data.items.map(item => item.id.videoId);
+    const channelIds = [...new Set(data.items.map(item => item.snippet.channelId))];
+
+    // Fetch enhanced metadata in parallel
+    const [videoDetailsMap, channelDetailsMap] = await Promise.all([
+      fetchVideoDetails(videoIds),
+      fetchChannelDetails(channelIds)
+    ]);
+
+    // Convert YouTube API results to our format with enhanced metadata
+    const youtubeResults = data.items.map(item => {
+      const videoDetails = videoDetailsMap.get(item.id.videoId);
+      const channelDetails = channelDetailsMap.get(item.snippet.channelId);
+      return convertToYouTubeResult(item, videoDetails, channelDetails);
+    });
 
     return youtubeResults;
   } catch (error: any) {
@@ -240,7 +480,7 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
   }
 };
 
-// Search YouTube videos using Google Custom Search JSON API
+// Search YouTube videos using Google Custom Search JSON API with enhanced metadata
 export const searchYouTubeWithGoogleSearch = async (query: string): Promise<GoogleSearchResult[]> => {
   // Check for Google Custom Search API key and engine ID
   const apiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
@@ -272,10 +512,43 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
       return [];
     }
 
-    // Filter for YouTube video results and convert to our format
-    const youtubeResults = data.items
-      .filter(item => item.link.includes('youtube.com/watch'))
-      .map(convertToGoogleSearchResult);
+    // Filter for YouTube video results
+    const youtubeItems = data.items.filter(item => item.link.includes('youtube.com/watch'));
+    
+    // Extract video IDs for enhanced metadata fetching
+    const videoIds = youtubeItems
+      .map(item => extractVideoIdFromUrl(item.link))
+      .filter((id): id is string => id !== null);
+
+    let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
+    let channelDetailsMap = new Map<string, YouTubeChannelDetails>();
+
+    // Try to fetch enhanced metadata if YouTube API is available
+    const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+    if (youtubeApiKey && videoIds.length > 0) {
+      try {
+        videoDetailsMap = await fetchVideoDetails(videoIds);
+        
+        // Extract unique channel IDs from video details
+        const channelIds = [...new Set(
+          Array.from(videoDetailsMap.values()).map(video => video.snippet.channelId)
+        )];
+        
+        if (channelIds.length > 0) {
+          channelDetailsMap = await fetchChannelDetails(channelIds);
+        }
+      } catch (error) {
+        console.warn('Failed to fetch enhanced metadata for Google Search results:', error);
+      }
+    }
+
+    // Convert to our format with enhanced metadata when available
+    const youtubeResults = youtubeItems.map(item => {
+      const videoId = extractVideoIdFromUrl(item.link);
+      const videoDetails = videoId ? videoDetailsMap.get(videoId) : undefined;
+      const channelDetails = videoDetails ? channelDetailsMap.get(videoDetails.snippet.channelId) : undefined;
+      return convertToGoogleSearchResult(item, videoDetails, channelDetails);
+    });
 
     return youtubeResults;
   } catch (error) {
