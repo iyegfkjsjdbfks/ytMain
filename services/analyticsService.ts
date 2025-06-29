@@ -39,7 +39,7 @@ const DEFAULT_CONFIG: AnalyticsConfig = {
   batchSize: 10,
   flushInterval: 30000, // 30 seconds
   maxStoredEvents: 1000,
-  enableDebugMode: false
+  enableDebugMode: false,
 };
 
 class AnalyticsService {
@@ -48,7 +48,7 @@ class AnalyticsService {
   private eventQueue: AnalyticsEvent[] = [];
   private flushTimer?: NodeJS.Timeout;
   private pageLoadTime: number;
-  private listeners: ((event: AnalyticsEvent) => void)[] = [];
+  private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
   constructor(config: Partial<AnalyticsConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -68,7 +68,7 @@ class AnalyticsService {
       events: [],
       userAgent: navigator.userAgent,
       referrer: document.referrer,
-      userId: this.getCurrentUserId()
+      userId: this.getCurrentUserId(),
     };
   }
 
@@ -131,7 +131,7 @@ class AnalyticsService {
             domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
             firstPaint: this.getFirstPaint(),
             firstContentfulPaint: this.getFirstContentfulPaint(),
-            largestContentfulPaint: this.getLargestContentfulPaint()
+            largestContentfulPaint: this.getLargestContentfulPaint(),
           }, 'performance');
         }
       }, 0);
@@ -162,7 +162,7 @@ class AnalyticsService {
         observer.disconnect();
       });
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
-      
+
       // Timeout after 10 seconds
       setTimeout(() => {
         observer.disconnect();
@@ -195,7 +195,7 @@ class AnalyticsService {
       entries.forEach((entry: any) => {
         this.track('first_input_delay', {
           value: entry.processingStart - entry.startTime,
-          inputType: entry.name
+          inputType: entry.name,
         }, 'performance');
       });
       fidObserver.disconnect();
@@ -210,14 +210,14 @@ class AnalyticsService {
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
-        stack: event.error?.stack
+        stack: event.error?.stack,
       }, 'error');
     });
 
     window.addEventListener('unhandledrejection', (event) => {
       this.track('unhandled_promise_rejection', {
         reason: event.reason,
-        stack: event.reason?.stack
+        stack: event.reason?.stack,
       }, 'error');
     });
   }
@@ -231,7 +231,7 @@ class AnalyticsService {
         this.track('page_view', {
           from: currentPath,
           to: newPath,
-          referrer: document.referrer
+          referrer: document.referrer,
         }, 'navigation');
         currentPath = newPath;
         this.session.pageViews++;
@@ -263,8 +263,10 @@ class AnalyticsService {
   }
 
   private loadStoredEvents() {
-    if (!this.config.enableLocalStorage) return;
-    
+    if (!this.config.enableLocalStorage) {
+return;
+}
+
     try {
       const stored = localStorage.getItem('analytics_events');
       if (stored) {
@@ -279,9 +281,9 @@ class AnalyticsService {
 
   // Public API
   track(
-    eventName: string, 
-    properties: Record<string, any> = {}, 
-    category: AnalyticsEvent['category'] = 'user_action'
+    eventName: string,
+    properties: Record<string, any> = {},
+    category: AnalyticsEvent['category'] = 'user_action',
   ) {
     const event: AnalyticsEvent = {
       name: eventName,
@@ -291,17 +293,17 @@ class AnalyticsService {
         userAgent: navigator.userAgent,
         viewport: {
           width: window.innerWidth,
-          height: window.innerHeight
+          height: window.innerHeight,
         },
         screen: {
           width: screen.width,
-          height: screen.height
-        }
+          height: screen.height,
+        },
       },
       timestamp: Date.now(),
       sessionId: this.session.id,
       userId: this.session.userId,
-      category
+      category,
     };
 
     this.eventQueue.push(event);
@@ -322,21 +324,21 @@ class AnalyticsService {
   trackPageView(path?: string) {
     this.track('page_view', {
       path: path || window.location.pathname,
-      title: document.title
+      title: document.title,
     }, 'navigation');
   }
 
   trackClick(element: string, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
-      ...properties
+      ...properties,
     });
   }
 
   trackVideoEvent(action: string, videoId: string, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
-      ...properties
+      ...properties,
     }, 'video');
   }
 
@@ -344,7 +346,7 @@ class AnalyticsService {
     this.track('search', {
       query,
       results,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
   }
 
@@ -355,7 +357,7 @@ class AnalyticsService {
   trackPerformance(metric: string, value: number, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
-      ...properties
+      ...properties,
     }, 'performance');
   }
 
@@ -370,13 +372,15 @@ class AnalyticsService {
     this.track('session_end', {
       duration: this.session.endTime - this.session.startTime,
       pageViews: this.session.pageViews,
-      eventCount: this.session.events.length
+      eventCount: this.session.events.length,
     });
   }
 
   // Data management
   async flush(immediate = false) {
-    if (this.eventQueue.length === 0) return;
+    if (this.eventQueue.length === 0) {
+return;
+}
 
     const eventsToSend = [...this.eventQueue];
     this.eventQueue = [];
@@ -387,7 +391,7 @@ class AnalyticsService {
         const existingEvents = localStorage.getItem('analytics_events');
         const allEvents = existingEvents ? JSON.parse(existingEvents) : [];
         allEvents.push(...eventsToSend);
-        
+
         // Keep only the most recent events
         const recentEvents = allEvents.slice(-this.config.maxStoredEvents);
         localStorage.setItem('analytics_events', JSON.stringify(recentEvents));
@@ -403,13 +407,13 @@ class AnalyticsService {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` })
+            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
           },
           body: JSON.stringify({
             events: eventsToSend,
-            session: this.session
+            session: this.session,
           }),
-          keepalive: immediate // Use keepalive for page unload
+          keepalive: immediate, // Use keepalive for page unload
         });
 
         if (response.ok && this.config.enableLocalStorage) {
@@ -430,15 +434,15 @@ class AnalyticsService {
   }
 
   getEvents(category?: AnalyticsEvent['category']): AnalyticsEvent[] {
-    const events = this.session.events;
+    const { events } = this.session;
     return category ? events.filter(e => e.category === category) : events;
   }
 
   getEventStats() {
-    const events = this.session.events;
+    const { events } = this.session;
     const now = Date.now();
     const oneHourAgo = now - (60 * 60 * 1000);
-    
+
     return {
       total: events.length,
       lastHour: events.filter(e => e.timestamp > oneHourAgo).length,
@@ -448,10 +452,10 @@ class AnalyticsService {
         error: events.filter(e => e.category === 'error').length,
         navigation: events.filter(e => e.category === 'navigation').length,
         video: events.filter(e => e.category === 'video').length,
-        engagement: events.filter(e => e.category === 'engagement').length
+        engagement: events.filter(e => e.category === 'engagement').length,
       },
       sessionDuration: now - this.session.startTime,
-      pageViews: this.session.pageViews
+      pageViews: this.session.pageViews,
     };
   }
 
@@ -480,11 +484,11 @@ class AnalyticsService {
   destroy() {
     this.endSession();
     this.flush(true);
-    
+
     if (this.flushTimer) {
       clearInterval(this.flushTimer);
     }
-    
+
     this.listeners = [];
   }
 }
@@ -494,7 +498,7 @@ export const analyticsService = new AnalyticsService({
   enableRemoteTracking: process.env.NODE_ENV === 'production',
   enableDebugMode: process.env.NODE_ENV === 'development',
   apiEndpoint: process.env.VITE_ANALYTICS_ENDPOINT,
-  apiKey: process.env.VITE_ANALYTICS_API_KEY
+  apiKey: process.env.VITE_ANALYTICS_API_KEY,
 });
 
 export default AnalyticsService;

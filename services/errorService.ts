@@ -34,13 +34,13 @@ const DEFAULT_CONFIG: ErrorServiceConfig = {
   enableRemoteLogging: false,
   enableLocalStorage: true,
   maxStoredErrors: 100,
-  enablePerformanceTracking: true
+  enablePerformanceTracking: true,
 };
 
 class ErrorService {
   private config: ErrorServiceConfig;
   private errors: Map<string, ErrorReport> = new Map();
-  private listeners: ((error: ErrorReport) => void)[] = [];
+  private listeners: Array<(error: ErrorReport) => void> = [];
   private sessionId: string;
 
   constructor(config: Partial<ErrorServiceConfig> = {}) {
@@ -67,9 +67,9 @@ class ErrorService {
           timestamp: Date.now(),
           additionalData: {
             lineno: event.lineno,
-            colno: event.colno
-          }
-        }
+            colno: event.colno,
+          },
+        },
       });
     });
 
@@ -83,9 +83,9 @@ class ErrorService {
         context: {
           timestamp: Date.now(),
           additionalData: {
-            reason: event.reason
-          }
-        }
+            reason: event.reason,
+          },
+        },
       });
     });
 
@@ -102,7 +102,7 @@ class ErrorService {
       try {
         const response = await originalFetch(...args);
         const duration = performance.now() - startTime;
-        
+
         if (!response.ok) {
           this.captureError({
             message: `Network Error: ${response.status} ${response.statusText}`,
@@ -114,12 +114,12 @@ class ErrorService {
               additionalData: {
                 status: response.status,
                 statusText: response.statusText,
-                duration
-              }
-            }
+                duration,
+              },
+            },
           });
         }
-        
+
         return response;
       } catch (error) {
         const duration = performance.now() - startTime;
@@ -133,9 +133,9 @@ class ErrorService {
             url: typeof args[0] === 'string' ? args[0] : args[0].url,
             additionalData: {
               duration,
-              error: error instanceof Error ? error.message : String(error)
-            }
-          }
+              error: error instanceof Error ? error.message : String(error),
+            },
+          },
         });
         throw error;
       }
@@ -151,14 +151,14 @@ class ErrorService {
   }) {
     const errorId = this.generateErrorId(errorData.message, errorData.stack);
     const existingError = this.errors.get(errorId);
-    
+
     const context: ErrorContext = {
       userId: this.getCurrentUserId(),
       sessionId: this.sessionId,
       userAgent: navigator.userAgent,
       url: window.location.href,
       timestamp: Date.now(),
-      ...errorData.context
+      ...errorData.context,
     };
 
     if (existingError) {
@@ -175,9 +175,9 @@ class ErrorService {
         severity: errorData.severity,
         context,
         resolved: false,
-        occurrenceCount: 1
+        occurrenceCount: 1,
       };
-      
+
       this.errors.set(errorId, errorReport);
       this.notifyListeners(errorReport);
     }
@@ -216,7 +216,7 @@ class ErrorService {
       const logMethod = this.getConsoleMethod(error.severity);
       logMethod(`[ErrorService] ${error.type.toUpperCase()}: ${error.message}`, {
         error,
-        stack: error.stack
+        stack: error.stack,
       });
     }
 
@@ -246,7 +246,7 @@ class ErrorService {
       const errorsArray = Array.from(this.errors.values())
         .sort((a, b) => b.context.timestamp - a.context.timestamp)
         .slice(0, this.config.maxStoredErrors);
-      
+
       localStorage.setItem('errorService_errors', JSON.stringify(errorsArray));
     } catch (error) {
       console.warn('Failed to save errors to localStorage:', error);
@@ -254,8 +254,10 @@ class ErrorService {
   }
 
   private loadStoredErrors() {
-    if (!this.config.enableLocalStorage) return;
-    
+    if (!this.config.enableLocalStorage) {
+return;
+}
+
     try {
       const stored = localStorage.getItem('errorService_errors');
       if (stored) {
@@ -270,16 +272,18 @@ class ErrorService {
   }
 
   private async sendToRemote(error: ErrorReport) {
-    if (!this.config.apiEndpoint) return;
-    
+    if (!this.config.apiEndpoint) {
+return;
+}
+
     try {
       await fetch(this.config.apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` })
+          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
         },
-        body: JSON.stringify(error)
+        body: JSON.stringify(error),
       });
     } catch (networkError) {
       console.warn('Failed to send error to remote service:', networkError);
@@ -347,8 +351,8 @@ class ErrorService {
       severity: 'medium',
       context: {
         timestamp: Date.now(),
-        additionalData: { field, value }
-      }
+        additionalData: { field, value },
+      },
     });
   }
 
@@ -360,8 +364,8 @@ class ErrorService {
       context: {
         timestamp: Date.now(),
         url: endpoint,
-        additionalData: { status }
-      }
+        additionalData: { status },
+      },
     });
   }
 
@@ -372,8 +376,8 @@ class ErrorService {
       severity: 'medium',
       context: {
         timestamp: Date.now(),
-        additionalData: { metric, value }
-      }
+        additionalData: { metric, value },
+      },
     });
   }
 
@@ -382,7 +386,7 @@ class ErrorService {
     const now = Date.now();
     const oneHourAgo = now - (60 * 60 * 1000);
     const oneDayAgo = now - (24 * 60 * 60 * 1000);
-    
+
     return {
       total: errors.length,
       unresolved: this.getUnresolvedErrors().length,
@@ -393,14 +397,14 @@ class ErrorService {
         network: this.getErrorsByType('network').length,
         validation: this.getErrorsByType('validation').length,
         api: this.getErrorsByType('api').length,
-        performance: this.getErrorsByType('performance').length
+        performance: this.getErrorsByType('performance').length,
       },
       bySeverity: {
         low: this.getErrorsBySeverity('low').length,
         medium: this.getErrorsBySeverity('medium').length,
         high: this.getErrorsBySeverity('high').length,
-        critical: this.getErrorsBySeverity('critical').length
-      }
+        critical: this.getErrorsBySeverity('critical').length,
+      },
     };
   }
 }
@@ -412,7 +416,7 @@ export const errorService = new ErrorService({
   enableLocalStorage: true,
   maxStoredErrors: 100,
   apiEndpoint: process.env.VITE_ERROR_REPORTING_ENDPOINT,
-  apiKey: process.env.VITE_ERROR_REPORTING_API_KEY
+  apiKey: process.env.VITE_ERROR_REPORTING_API_KEY,
 });
 
 export default ErrorService;
