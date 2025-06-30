@@ -47,12 +47,11 @@ class AnalyticsService {
   private session: UserSession;
   private eventQueue: AnalyticsEvent[] = [];
   private flushTimer?: NodeJS.Timeout;
-  private pageLoadTime: number;
   private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
   constructor(config: Partial<AnalyticsConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
-    this.pageLoadTime = performance.now();
+    // pageLoadTime = performance.now(); // Not used yet
     this.session = this.initializeSession();
     this.setupEventListeners();
     this.startFlushTimer();
