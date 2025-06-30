@@ -27,19 +27,19 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     thumbnailUrl: searchResult.thumbnailUrl,
     videoUrl: searchResult.videoUrl,
     duration: searchResult.duration || '0:00',
-    views: searchResult.viewCount ? searchResult.viewCount.toLocaleString() : '0',
-    likes: searchResult.likeCount || 0,
-    dislikes: searchResult.dislikeCount || 0,
+    views: '0',
+    likes: 0,
+    dislikes: 0,
     uploadedAt: searchResult.uploadedAt || new Date().toISOString(),
     channelName: searchResult.channelName,
     channelId: searchResult.channelId || '',
     channelAvatarUrl: searchResult.channelAvatarUrl || '',
-    category: searchResult.categoryId || '',
-    tags: searchResult.tags || [],
-    visibility: 'public' as const, // Default visibility
+    category: '',
+    tags: [],
+    visibility: 'public' as const,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-  } as Video;
+  };
 };
 
 interface OptimizedSearchResultsProps {
