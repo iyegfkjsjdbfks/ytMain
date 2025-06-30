@@ -18,7 +18,7 @@ import { cn } from '../utils/cn';
 import { withMemo } from '../utils/componentOptimizations';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';
-import { isYouTubeUrl } from '../src/lib/youtube-utils';
+import { isYouTubeUrl } from '../lib/youtube-utils';
 
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
 import YouTubePlayer from './YouTubePlayer';
@@ -509,6 +509,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
             menuRef={menuRef}
             className="top-12 right-2"
             position="bottom-right"
+            role="menu"
+            aria-label="Video options menu"
           >
           <DropdownMenuItem
             onClick={(e) => {
@@ -519,6 +521,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               window.dispatchEvent(event);
             }}
             icon={<PlusIcon className="w-4 h-4" />}
+            role="menuitem"
+            aria-label="Save video to playlist"
           >
             Save to playlist
           </DropdownMenuItem>
@@ -551,6 +555,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
               </svg>
             }
+            role="menuitem"
+            aria-label="Share video"
           >
             Share
           </DropdownMenuItem>
@@ -581,6 +587,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
               </svg>
             }
+            role="menuitem"
+            aria-label="Mark as not interested"
           >
             Not interested
           </DropdownMenuItem>
@@ -625,6 +633,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
               }
+              role="menuitem"
+              aria-label="Report video"
             >
               Report
             </DropdownMenuItem>
@@ -633,7 +643,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
       </div>
 
       {/* Content */}
-      <div className="mt-3 space-y-2">
+      <article className="mt-3 space-y-2">
         {/* Title */}
         <h3 className={cn(classes.title, 'hover:text-blue-600 transition-colors')}>
           {video.title}
@@ -652,8 +662,9 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               onClick={handleChannelClick}
               className={cn(
                 classes.channel,
-                'hover:text-gray-900 transition-colors truncate',
+                'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded',
               )}
+              aria-label={`Go to ${video.channelName} channel`}
             >
               {video.channelName}
             </button>
@@ -661,33 +672,36 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         )}
 
         {/* Meta Info */}
-        <div className={cn(classes.meta, 'flex items-center gap-1')}>
-          <span>{formattedViews} views</span>
-          <span>•</span>
-          <span>{formattedTimeAgo}</span>
+        <div className={cn(classes.meta, 'flex items-center gap-1')} role="text">
+          <span aria-label={`${formattedViews} views`}>{formattedViews} views</span>
+          <span aria-hidden="true">•</span>
+          <time dateTime={video.uploadedAt} aria-label={`Published ${formattedTimeAgo}`}>
+            {formattedTimeAgo}
+          </time>
         </div>
 
         {/* Description */}
         {showDescription && video.description && (
-          <p className={cn(classes.meta, 'line-clamp-2 mt-2')}>
+          <p className={cn(classes.meta, 'line-clamp-2 mt-2')} role="text">
             {video.description}
           </p>
         )}
 
         {/* Tags */}
         {video.tags && video.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-2">
+          <div className="flex flex-wrap gap-1 mt-2" role="list" aria-label="Video tags">
             {video.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+                role="listitem"
               >
                 #{tag}
               </span>
             ))}
           </div>
         )}
-      </div>
+      </article>
     </div>
   );
 });
