@@ -125,7 +125,7 @@ class ErrorService {
         const duration = performance.now() - startTime;
         this.captureError({
           message: `Network Request Failed: ${error}`,
-          stack: error instanceof Error ? error.stack : undefined,
+          ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
           type: 'network',
           severity: 'high',
           context: {

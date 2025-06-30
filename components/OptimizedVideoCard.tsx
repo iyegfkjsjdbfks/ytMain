@@ -84,40 +84,7 @@ interface OptimizedVideoCardProps {
   index?: number;
 }
 
-// State management with reducer
-type VideoCardState = {
-  isPlayingInline: boolean;
-  isLoading: boolean;
-  error: string | null;
-  showMenu: boolean;
-};
 
-type VideoCardAction = 
-  | { type: 'PLAY_INLINE' }
-  | { type: 'STOP_INLINE' }
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'TOGGLE_MENU' }
-  | { type: 'CLOSE_MENU' };
-
-const videoCardReducer = (state: VideoCardState, action: VideoCardAction): VideoCardState => {
-  switch (action.type) {
-    case 'PLAY_INLINE':
-      return { ...state, isPlayingInline: true, error: null };
-    case 'STOP_INLINE':
-      return { ...state, isPlayingInline: false };
-    case 'SET_LOADING':
-      return { ...state, isLoading: action.payload };
-    case 'SET_ERROR':
-      return { ...state, error: action.payload, isLoading: false };
-    case 'TOGGLE_MENU':
-      return { ...state, showMenu: !state.showMenu };
-    case 'CLOSE_MENU':
-      return { ...state, showMenu: false };
-    default:
-      return state;
-  }
-};
 
 // Enhanced lazy image component with retry mechanism
 interface LazyImageProps {

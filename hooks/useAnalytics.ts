@@ -33,7 +33,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 
   const { trackAsyncOperation, measureFunction } = usePerformanceMonitor(
     opts.componentName || 'Unknown',
-    { enableRenderTracking: opts.trackPerformance },
+    { enableRenderTracking: opts.trackPerformance ?? false },
   );
 
   // Track page views

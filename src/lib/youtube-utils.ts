@@ -61,6 +61,14 @@ interface YTPlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string[];
   getPlaylistIndex(): number;
+  setLoop(loopPlaylists: boolean): void;
+  setShuffle(shufflePlaylist: boolean): void;
+  getVolume(): number;
+  setVolume(volume: number): void;
+  mute(): void;
+  unMute(): void;
+  isMuted(): boolean;
+  setSize(width: number, height: number): object;
   getPlaybackRate(): number;
   setPlaybackRate(suggestedRate: number): void;
   getAvailablePlaybackRates(): number[];

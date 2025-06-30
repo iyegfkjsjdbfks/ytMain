@@ -162,8 +162,8 @@ return;
 // Specialized hooks for different video types
 export const useHomeVideos = (category?: string) => {
   return useOptimizedVideoData({
-    category,
-    limit: 24,
+    category: category ?? 'trending',
+    limit: 8,
     enableCache: true,
   });
 };
