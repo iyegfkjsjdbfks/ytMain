@@ -87,7 +87,26 @@ describe('CommunityPage', () => {
     const mockCreatePost = vi.fn();
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
-      posts: [],
+      user: null,
+      isAuthenticated: false,
+      login: vi.fn(),
+      logout: vi.fn(),
+      theme: 'light' as const,
+      setTheme: vi.fn(),
+      isDarkMode: false,
+      miniplayerVideo: null,
+      isMiniplayerOpen: false,
+      openMiniplayer: vi.fn(),
+      toggleMiniplayer: vi.fn(),
+      watchLaterVideos: [],
+      addToWatchLater: vi.fn(),
+      removeFromWatchLater: vi.fn(),
+      isInWatchLater: vi.fn(),
+      sidebarCollapsed: false,
+      toggleSidebar: vi.fn(),
+      notifications: [],
+      addNotification: vi.fn(),
+      removeNotification: vi.fn(),
       loading: false,
       error: null,
       createPost: mockCreatePost,
@@ -113,7 +132,30 @@ describe('CommunityPage', () => {
     const mockLikePost = vi.fn();
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
-      posts: [
+      user: null,
+      isAuthenticated: false,
+      login: vi.fn(),
+      logout: vi.fn(),
+      theme: 'light' as const,
+      setTheme: vi.fn(),
+      isDarkMode: false,
+      miniplayerVideo: null,
+      isMiniplayerOpen: false,
+      openMiniplayer: vi.fn(),
+      toggleMiniplayer: vi.fn(),
+      watchLaterVideos: [],
+      addToWatchLater: vi.fn(),
+      removeFromWatchLater: vi.fn(),
+      isInWatchLater: vi.fn(),
+      sidebarCollapsed: false,
+      toggleSidebar: vi.fn(),
+      notifications: [
+        {
+          id: '1',
+          message: 'Test post content',
+          type: 'success' as const,
+          timestamp: Date.now(),
+        },
         {
           id: '1',
           author: 'Test User',
@@ -134,7 +176,9 @@ describe('CommunityPage', () => {
     renderWithQueryClient(<CommunityPage />);
 
     const likeButtons = screen.getAllByLabelText(/like post/i);
-    fireEvent.click(likeButtons[0]);
+    if (likeButtons[0]) {
+      fireEvent.click(likeButtons[0]);
+    }
 
     await waitFor(() => {
       expect(mockLikePost).toHaveBeenCalledWith('1');
@@ -145,7 +189,26 @@ describe('CommunityPage', () => {
     const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
-      posts: [],
+      user: null,
+      isAuthenticated: false,
+      login: vi.fn(),
+      logout: vi.fn(),
+      theme: 'light' as const,
+      setTheme: vi.fn(),
+      isDarkMode: false,
+      miniplayerVideo: null,
+      isMiniplayerOpen: false,
+      openMiniplayer: vi.fn(),
+      toggleMiniplayer: vi.fn(),
+      watchLaterVideos: [],
+      addToWatchLater: vi.fn(),
+      removeFromWatchLater: vi.fn(),
+      isInWatchLater: vi.fn(),
+      sidebarCollapsed: false,
+      toggleSidebar: vi.fn(),
+      notifications: [],
+      addNotification: vi.fn(),
+      removeNotification: vi.fn(),
       loading: true,
       error: null,
       createPost: vi.fn(),
@@ -162,7 +225,26 @@ describe('CommunityPage', () => {
     const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
-      posts: [],
+      user: null,
+      isAuthenticated: false,
+      login: vi.fn(),
+      logout: vi.fn(),
+      theme: 'light' as const,
+      setTheme: vi.fn(),
+      isDarkMode: false,
+      miniplayerVideo: null,
+      isMiniplayerOpen: false,
+      openMiniplayer: vi.fn(),
+      toggleMiniplayer: vi.fn(),
+      watchLaterVideos: [],
+      addToWatchLater: vi.fn(),
+      removeFromWatchLater: vi.fn(),
+      isInWatchLater: vi.fn(),
+      sidebarCollapsed: false,
+      toggleSidebar: vi.fn(),
+      notifications: [],
+      addNotification: vi.fn(),
+      removeNotification: vi.fn(),
       loading: false,
       error: 'Failed to load posts',
       createPost: vi.fn(),
