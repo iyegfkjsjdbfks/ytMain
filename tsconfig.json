@@ -6,6 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "downlevelIteration": true,
+    "types": ["vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -71,6 +72,7 @@
     "tests/**/*",
     "*.ts",
     "*.tsx",
+    "vite-env.d.ts",
     "components/**/*",
     "pages/**/*",
     "hooks/**/*",

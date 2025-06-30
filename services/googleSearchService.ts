@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
 import type { Video } from '../types';
 
@@ -530,9 +531,9 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
         videoDetailsMap = await fetchVideoDetails(videoIds);
         
         // Extract unique channel IDs from video details
-        const channelIds = [...new Set(
+        const channelIds = Array.from(new Set(
           Array.from(videoDetailsMap.values()).map(video => video.snippet.channelId)
-        )];
+        ));
         
         if (channelIds.length > 0) {
           channelDetailsMap = await fetchChannelDetails(channelIds);

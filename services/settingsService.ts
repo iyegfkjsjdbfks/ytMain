@@ -1,4 +1,5 @@
-// Settings service for managing application preferences
+/// <reference types="vite/client" />
+// Settings service for managing application settings
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
 export type YouTubePlayerType = 'youtube-player';
@@ -55,7 +56,7 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
   },
 };
 
-export const getSettings = (): AppSettings => {
+export const getSettings = (): Settings => {
   const stored = localStorage.getItem('appSettings');
   if (stored) {
     try {
@@ -67,7 +68,7 @@ export const getSettings = (): AppSettings => {
   return defaultSettings;
 };
 
-export const saveSettings = (settings: AppSettings): void => {
+export const saveSettings = (settings: Settings): void => {
   localStorage.setItem('appSettings', JSON.stringify(settings));
 };
 

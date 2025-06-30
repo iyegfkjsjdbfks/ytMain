@@ -13,7 +13,7 @@ import type { Video } from '../types';
 
 // Helper function to convert search results to Video type
 const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult): Video => {
-  if ('views' in item && 'likes' in item) {
+  if ('views' in item && 'likes' in item && 'visibility' in item) {
     // Already a Video type
     return item;
   }
@@ -23,7 +23,7 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
   return {
     id: searchResult.id,
     title: searchResult.title,
-    description: searchResult.description,
+    description: searchResult.description || '',
     thumbnailUrl: searchResult.thumbnailUrl,
     videoUrl: searchResult.videoUrl,
     duration: searchResult.duration || '0:00',
@@ -32,13 +32,11 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     dislikes: 0,
     uploadedAt: searchResult.uploadedAt || new Date().toISOString(),
     channelName: searchResult.channelName,
-    channelId: searchResult.channelId || '',
+    channelId: searchResult.channelId || 'unknown',
     channelAvatarUrl: searchResult.channelAvatarUrl || '',
     category: '',
     tags: [],
     visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
   };
 };
 
