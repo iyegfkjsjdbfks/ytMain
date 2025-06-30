@@ -27,15 +27,15 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     thumbnailUrl: searchResult.thumbnailUrl,
     videoUrl: searchResult.videoUrl,
     duration: searchResult.duration || '0:00',
-    views: '0', // Default value since search results don't have view counts
-    likes: 0,
-    dislikes: 0,
+    views: searchResult.viewCount ? searchResult.viewCount.toLocaleString() : '0',
+    likes: searchResult.likeCount || 0,
+    dislikes: searchResult.dislikeCount || 0,
     uploadedAt: searchResult.uploadedAt || new Date().toISOString(),
     channelName: searchResult.channelName,
-    channelId: '', // Default empty since search results don't have channel IDs
-    channelAvatarUrl: '', // Default empty
-    category: '',
-    tags: [],
+    channelId: searchResult.channelId || '',
+    channelAvatarUrl: searchResult.channelAvatarUrl || '',
+    category: searchResult.categoryId || '',
+    tags: searchResult.tags || [],
     visibility: 'public' as const, // Default visibility
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
