@@ -37,8 +37,6 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     category: '',
     tags: [],
     visibility: 'public' as const,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
   };
 };
 
@@ -187,7 +185,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     const combined = [
       ...(videos || []).map(v => ({ ...v, source: 'local' as const })),
       ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const })),
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google' as const })),
     ];
 
     let sorted = combined;

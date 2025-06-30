@@ -76,8 +76,8 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         <div className="flex items-center space-x-2">
           <Link to={channelLink} className="flex-shrink-0">
             <img
-              src={channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
-              alt={`${channel?.name || 'Unknown'} channel avatar`}
+              src={video.channelAvatarUrl || channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
+              alt={`${video.channelName || channel?.name || 'Unknown'} channel avatar`}
               className="w-10 h-10 rounded-full object-cover"
             />
           </Link>

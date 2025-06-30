@@ -257,7 +257,44 @@ class UnifiedDataService {
           const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
           if (youtubeVideos.length > 0) {
             console.log(`Successfully fetched YouTube video:`, youtubeVideos[0]);
-            const normalized = await metadataNormalizationService.normalizeYouTubeVideo(youtubeVideos[0]);
+            // Convert already processed YouTube video to unified format
+            const processedVideo = youtubeVideos[0];
+            const normalized: UnifiedVideoMetadata = {
+              id: processedVideo.id,
+              title: processedVideo.title,
+              description: processedVideo.description,
+              thumbnailUrl: processedVideo.thumbnailUrl,
+              videoUrl: processedVideo.videoUrl,
+              views: processedVideo.viewCount,
+              viewsFormatted: this.formatViews(processedVideo.viewCount),
+              likes: processedVideo.likeCount,
+              dislikes: processedVideo.dislikeCount,
+              commentCount: processedVideo.commentCount,
+              channel: {
+                id: processedVideo.channelId,
+                name: processedVideo.channelName,
+                avatarUrl: processedVideo.channelAvatarUrl || processedVideo.channel?.avatarUrl || '',
+                subscribers: 0, // Will be fetched separately if needed
+                subscribersFormatted: '0 subscribers',
+                isVerified: processedVideo.channel?.isVerified || false,
+              },
+              duration: processedVideo.duration,
+              publishedAt: processedVideo.publishedAt,
+              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt),
+              category: processedVideo.category,
+              tags: processedVideo.tags,
+              isLive: processedVideo.isLive,
+              isShort: processedVideo.isShort,
+              visibility: processedVideo.visibility,
+              source: 'youtube',
+              metadata: {
+                quality: 'hd',
+                definition: 'hd',
+                captions: false,
+                language: 'en',
+                license: 'youtube',
+              },
+            };
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
@@ -285,7 +322,44 @@ class UnifiedDataService {
         try {
           const youtubeVideos = await youtubeService.fetchVideos([id]);
           if (youtubeVideos.length > 0) {
-            const normalized = await metadataNormalizationService.normalizeYouTubeVideo(youtubeVideos[0]);
+            // Convert already processed YouTube video to unified format
+            const processedVideo = youtubeVideos[0];
+            const normalized: UnifiedVideoMetadata = {
+              id: processedVideo.id,
+              title: processedVideo.title,
+              description: processedVideo.description,
+              thumbnailUrl: processedVideo.thumbnailUrl,
+              videoUrl: processedVideo.videoUrl,
+              views: processedVideo.viewCount,
+              viewsFormatted: this.formatViews(processedVideo.viewCount),
+              likes: processedVideo.likeCount,
+              dislikes: processedVideo.dislikeCount,
+              commentCount: processedVideo.commentCount,
+              channel: {
+                id: processedVideo.channelId,
+                name: processedVideo.channelName,
+                avatarUrl: processedVideo.channelAvatarUrl,
+                subscribers: 0,
+                subscribersFormatted: '0 subscribers',
+                isVerified: processedVideo.channel?.isVerified || false,
+              },
+              duration: processedVideo.duration,
+              publishedAt: processedVideo.publishedAt,
+              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt),
+              category: processedVideo.category,
+              tags: processedVideo.tags,
+              isLive: processedVideo.isLive,
+              isShort: processedVideo.isShort,
+              visibility: processedVideo.visibility,
+              source: 'youtube',
+              metadata: {
+                quality: 'hd',
+                definition: 'hd',
+                captions: false,
+                language: 'en',
+                license: 'youtube',
+              },
+            };
             this.setCachedData(cacheKey, normalized);
             return normalized;
           }
@@ -559,6 +633,39 @@ class UnifiedDataService {
    */
   getConfig(): UnifiedDataConfig {
     return { ...this.config };
+  }
+
+  // Utility methods
+
+  private formatViews(count: number): string {
+    if (count >= 1000000000) return `${(count / 1000000000).toFixed(1)}B views`;
+    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M views`;
+    if (count >= 1000) return `${(count / 1000).toFixed(1)}K views`;
+    return `${count} views`;
+  }
+
+  private formatTimeAgo(dateString: string): string {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    
+    const seconds = Math.floor(diffMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    
+    if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
+    if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
+    if (weeks > 0) return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return 'Just now';
   }
 }
 

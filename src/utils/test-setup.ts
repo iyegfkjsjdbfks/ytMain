@@ -379,8 +379,6 @@ Object.defineProperty(window, 'FileReader', {
 });
 
 // Set up environment variables for tests
-// Note: import.meta.env is handled by Vite automatically in test mode
-// These process.env assignments are for Node.js test environment compatibility
 process.env.NODE_ENV = 'test';
 process.env.VITE_APP_ENV = 'test';
 process.env.VITE_USE_MOCK_DATA = 'true';

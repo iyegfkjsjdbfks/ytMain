@@ -137,11 +137,14 @@ class MetadataNormalizationService {
    * Normalize YouTube video data to unified format
    */
   async normalizeYouTubeVideo(youtubeVideo: any, channelData?: any): Promise<UnifiedVideoMetadata> {
+    console.log('normalizeYouTubeVideo - Full input data structure:', youtubeVideo);
     console.log('normalizeYouTubeVideo - Input data:', {
       videoId: youtubeVideo.id,
       channelTitle: youtubeVideo.snippet?.channelTitle,
       channelId: youtubeVideo.snippet?.channelId,
-      title: youtubeVideo.snippet?.title
+      title: youtubeVideo.snippet?.title,
+      hasSnippet: !!youtubeVideo.snippet,
+      snippetKeys: youtubeVideo.snippet ? Object.keys(youtubeVideo.snippet) : 'no snippet'
     });
     
     const viewCount = parseInt(youtubeVideo.statistics?.viewCount || '0', 10);

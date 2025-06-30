@@ -268,11 +268,11 @@ const AdminPage: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-sm font-medium text-gray-600">YouTube Player:</span>
-                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[playerType]?.name || 'Unknown'}</span>
+                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[playerType].name}</span>
                       </div>
                       <div>
                         <span className="text-sm font-medium text-gray-600">Local Video Player:</span>
-                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[localPlayerType]?.name || 'Unknown'}</span>
+                        <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[localPlayerType].name}</span>
                       </div>
                       <div>
                         <span className="text-sm font-medium text-gray-600">Default Category:</span>

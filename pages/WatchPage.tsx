@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
+import VideoMetadata from '../components/VideoMetadata';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useWatchPage } from '../hooks/useWatchPage';
@@ -92,6 +93,9 @@ const WatchPage: React.FC = () => {
   const { showMiniplayer } = useMiniplayerActions();
   const { addToWatchLater } = useWatchLater();
   // removeFromWatchLater is unused in this component
+
+  // Local state for video metadata expansion
+  const [metadataExpanded, setMetadataExpanded] = React.useState(false);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
   const enhancedHandleSaveToPlaylist = async (_videoId: string, playlistId: string) => {
@@ -271,6 +275,13 @@ const WatchPage: React.FC = () => {
               isSummarizing={isSummarizing}
               canSummarize={!!canSummarize}
               onSummarizeDescription={handleSummarizeDescription}
+            />
+
+            {/* Enhanced Video Metadata */}
+            <VideoMetadata
+              video={video}
+              expanded={metadataExpanded}
+              onToggleExpanded={() => setMetadataExpanded(!metadataExpanded)}
             />
 
             {/* Comments section */}

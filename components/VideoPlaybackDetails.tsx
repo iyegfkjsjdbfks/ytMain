@@ -74,7 +74,9 @@ return null;
           />
         ) : (
           <AdvancedVideoPlayer
-            video={video}
+            src={video.videoUrl}
+            poster={video.thumbnailUrl}
+            title={video.title}
           />
         )}
       </div>

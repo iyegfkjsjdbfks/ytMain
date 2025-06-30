@@ -146,6 +146,20 @@ export interface Video extends BaseEntity {
   // For backward compatibility
   channelTitle?: string;
   channelThumbnail?: string;
+  // Enhanced metadata from YouTube API
+  metadata?: {
+    defaultLanguage?: string;
+    uploadLocation?: string;
+    recordingDate?: string;
+    actualStartTime?: string;
+    actualEndTime?: string;
+    scheduledStartTime?: string;
+    concurrentViewers?: string;
+    embeddable?: boolean;
+    publicStatsViewable?: boolean;
+    madeForKids?: boolean;
+    selfDeclaredMadeForKids?: boolean;
+  };
 }
 
 export type VideoVisibility = 'public' | 'unlisted' | 'private' | 'scheduled';

@@ -109,7 +109,7 @@ class YouTubeService {
 
     try {
       const url = this.buildUrl('videos', {
-        part: 'snippet,statistics,contentDetails',
+        part: 'snippet,statistics,contentDetails,status,recordingDetails,liveStreamingDetails,localizations,topicDetails',
         id: videoIds.join(',')
       });
 
@@ -124,40 +124,124 @@ class YouTubeService {
 
       const data: YouTubeVideoResponse = await response.json();
       
-      const videos: Video[] = data.items.map(item => ({
-        id: item.id,
-        title: item.snippet.title,
-        description: item.snippet.description,
-        thumbnailUrl: item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.high?.url || '',
-        duration: this.parseDuration(item.contentDetails.duration),
-        views: item.statistics.viewCount || '0',
-        viewCount: parseInt(item.statistics.viewCount || '0', 10),
-        likes: parseInt(item.statistics.likeCount || '0', 10),
-        likeCount: parseInt(item.statistics.likeCount || '0', 10),
-        dislikes: parseInt(item.statistics.dislikeCount || '0', 10),
-        dislikeCount: parseInt(item.statistics.dislikeCount || '0', 10),
-        commentCount: parseInt(item.statistics.commentCount || '0', 10),
-        publishedAt: item.snippet.publishedAt,
-        uploadedAt: item.snippet.publishedAt,
-        channelId: item.snippet.channelId,
-        channelName: item.snippet.channelTitle,
-        channelAvatarUrl: '',
-        category: item.snippet.categoryId || 'Unknown',
-        tags: item.snippet.tags || [],
-        visibility: 'public' as const,
-        isLive: false,
-        isShort: false,
-        createdAt: item.snippet.publishedAt,
-        updatedAt: new Date().toISOString(),
-        videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
-        // Additional required fields for Video type compatibility
-        channel: {
-          id: item.snippet.channelId,
-          name: item.snippet.channelTitle,
-          avatarUrl: '',
-          isVerified: false
+      // Create videos with comprehensive metadata
+      const videos: Video[] = data.items.map(item => {
+        const contentDetails = item.contentDetails;
+        const snippet = item.snippet;
+        const statistics = item.statistics;
+        const status = (item as any).status;
+        const recordingDetails = (item as any).recordingDetails;
+        const liveStreamingDetails = (item as any).liveStreamingDetails;
+        const topicDetails = (item as any).topicDetails;
+        
+        return {
+          id: item.id,
+          title: snippet.title,
+          description: snippet.description,
+          thumbnailUrl: snippet.thumbnails.medium?.url || snippet.thumbnails.high?.url || '',
+          duration: this.parseDuration(contentDetails.duration),
+          views: statistics.viewCount || '0',
+          viewCount: parseInt(statistics.viewCount || '0', 10),
+          likes: parseInt(statistics.likeCount || '0', 10),
+          likeCount: parseInt(statistics.likeCount || '0', 10),
+          dislikes: parseInt(statistics.dislikeCount || '0', 10),
+          dislikeCount: parseInt(statistics.dislikeCount || '0', 10),
+          commentCount: parseInt(statistics.commentCount || '0', 10),
+          publishedAt: snippet.publishedAt,
+          uploadedAt: snippet.publishedAt,
+          channelId: snippet.channelId,
+          channelName: snippet.channelTitle,
+          channelAvatarUrl: '',
+          category: this.getCategoryName(snippet.categoryId),
+          tags: snippet.tags || [],
+          visibility: this.mapPrivacyStatus(status?.privacyStatus) as any,
+          isLive: snippet.liveBroadcastContent === 'live' || liveStreamingDetails?.actualStartTime,
+          isShort: this.isShortVideo(contentDetails.duration),
+          createdAt: snippet.publishedAt,
+          updatedAt: new Date().toISOString(),
+          videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
+          
+          // Enhanced metadata
+          privacyStatus: status?.privacyStatus || 'public',
+          definition: contentDetails.definition,
+          license: status?.license,
+          
+          // Statistics object
+          statistics: {
+            viewCount: parseInt(statistics.viewCount || '0', 10),
+            likeCount: parseInt(statistics.likeCount || '0', 10),
+            dislikeCount: parseInt(statistics.dislikeCount || '0', 10),
+            favoriteCount: parseInt(statistics.favoriteCount || '0', 10),
+            commentCount: parseInt(statistics.commentCount || '0', 10),
+          },
+          
+          // Content details
+          contentDetails: {
+            duration: contentDetails.duration,
+            dimension: contentDetails.dimension,
+            definition: contentDetails.definition,
+            caption: contentDetails.caption,
+            licensedContent: contentDetails.licensedContent || false,
+            contentRating: contentDetails.contentRating || {},
+            projection: contentDetails.projection || 'rectangular',
+          },
+          
+          // Topic details
+          topicDetails: {
+            topicIds: topicDetails?.topicIds || [],
+            relevantTopicIds: topicDetails?.relevantTopicIds || [],
+            topicCategories: topicDetails?.topicCategories || [],
+          },
+          
+          // Channel object
+          channel: {
+            id: snippet.channelId,
+            name: snippet.channelTitle,
+            avatarUrl: '',
+            isVerified: false
+          },
+          
+          // Additional metadata for watch page
+          metadata: {
+            defaultLanguage: snippet.defaultLanguage,
+            uploadLocation: recordingDetails?.location,
+            recordingDate: recordingDetails?.recordingDate,
+            actualStartTime: liveStreamingDetails?.actualStartTime,
+            actualEndTime: liveStreamingDetails?.actualEndTime,
+            scheduledStartTime: liveStreamingDetails?.scheduledStartTime,
+            concurrentViewers: liveStreamingDetails?.concurrentViewers,
+            embeddable: status?.embeddable,
+            publicStatsViewable: status?.publicStatsViewable,
+            madeForKids: status?.madeForKids,
+            selfDeclaredMadeForKids: status?.selfDeclaredMadeForKids,
+          }
+        };
+      });
+
+      // Fetch channel data for all unique channels to get avatars
+      const uniqueChannelIds = [...new Set(data.items.map(item => item.snippet.channelId))];
+      const channelPromises = uniqueChannelIds.map(channelId => 
+        this.fetchChannel(channelId).catch(() => null)
+      );
+      const channels = await Promise.all(channelPromises);
+      
+      // Create a map of channel ID to channel data
+      const channelMap = new Map();
+      channels.forEach(channel => {
+        if (channel) {
+          channelMap.set(channel.id, channel);
         }
-      }));
+      });
+      
+      // Update videos with channel avatar URLs
+      videos.forEach(video => {
+        const channelData = channelMap.get(video.channelId);
+        if (channelData) {
+          video.channelAvatarUrl = channelData.avatarUrl;
+          video.channel.avatarUrl = channelData.avatarUrl;
+          video.channel.isVerified = channelData.isVerified;
+        }
+      });
 
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
       return videos;
@@ -259,6 +343,81 @@ class YouTubeService {
       return `${(count / 1000).toFixed(1)}K`;
     }
     return count.toString();
+  }
+
+  /**
+   * Determine if video is a YouTube Short based on duration
+   */
+  private isShortVideo(duration: string): boolean {
+    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+    if (!match) return false;
+    
+    const hours = parseInt(match[1]?.replace('H', '') || '0', 10);
+    const minutes = parseInt(match[2]?.replace('M', '') || '0', 10);
+    const seconds = parseInt(match[3]?.replace('S', '') || '0', 10);
+    
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    return totalSeconds <= 60; // YouTube Shorts are 60 seconds or less
+  }
+
+  /**
+   * Map YouTube privacy status to our visibility type
+   */
+  private mapPrivacyStatus(privacyStatus: string): string {
+    switch (privacyStatus) {
+      case 'public':
+        return 'public';
+      case 'unlisted':
+        return 'unlisted';
+      case 'private':
+        return 'private';
+      case 'scheduled':
+        return 'scheduled';
+      default:
+        return 'public';
+    }
+  }
+
+  /**
+   * Get category name from category ID
+   */
+  private getCategoryName(categoryId: string): string {
+    const categories: Record<string, string> = {
+      '1': 'Film & Animation',
+      '2': 'Autos & Vehicles',
+      '10': 'Music',
+      '15': 'Pets & Animals',
+      '17': 'Sports',
+      '18': 'Short Movies',
+      '19': 'Travel & Events',
+      '20': 'Gaming',
+      '21': 'Videoblogging',
+      '22': 'People & Blogs',
+      '23': 'Comedy',
+      '24': 'Entertainment',
+      '25': 'News & Politics',
+      '26': 'Howto & Style',
+      '27': 'Education',
+      '28': 'Science & Technology',
+      '29': 'Nonprofits & Activism',
+      '30': 'Movies',
+      '31': 'Anime/Animation',
+      '32': 'Action/Adventure',
+      '33': 'Classics',
+      '34': 'Comedy',
+      '35': 'Documentary',
+      '36': 'Drama',
+      '37': 'Family',
+      '38': 'Foreign',
+      '39': 'Horror',
+      '40': 'Sci-Fi/Fantasy',
+      '41': 'Thriller',
+      '42': 'Shorts',
+      '43': 'Shows',
+      '44': 'Trailers'
+    };
+    
+    return categories[categoryId] || 'Entertainment';
   }
 
   /**

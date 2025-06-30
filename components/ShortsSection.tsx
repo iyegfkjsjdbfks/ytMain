@@ -41,15 +41,13 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              dislikes: video.dislikes,
              uploadedAt: video.uploadedAt,
              channelName: video.channelName,
-             channelId: video.channelId,
-             channelAvatarUrl: video.channelAvatarUrl,
              category: video.category,
              tags: video.tags,
-             isLive: video.isLive ?? false,
-             isShort: video.isShort ?? true,
-             isLiked: video.isLiked ?? false,
-             isDisliked: video.isDisliked ?? false,
-             isSaved: video.isSaved ?? false,
+             isLive: video.isLive,
+             isShort: video.isShort,
+             isLiked: video.isLiked,
+             isDisliked: video.isDisliked,
+             isSaved: video.isSaved,
              visibility: video.visibility,
              createdAt: video.createdAt,
              updatedAt: video.updatedAt,
@@ -57,6 +55,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
              // Ensure all required Short properties are present
              effects: [],
+             music: undefined,
            };
           return shortVideo;
         });
