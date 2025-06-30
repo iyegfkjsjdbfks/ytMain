@@ -1,5 +1,5 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { MouseEvent } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState, useReducer } from 'react';
+import type { MouseEvent, KeyboardEvent } from 'react';
 
 import {
   PlayIcon,
@@ -25,13 +25,59 @@ import YouTubePlayer from './YouTubePlayer';
 
 import type { Video } from '../types';
 
-// Simple image cache to prevent repeated loading
-const imageCache = new Set<string>();
+// Enhanced image cache manager with size limits and cleanup
+class ImageCacheManager {
+  private cache = new Map<string, { timestamp: number; url: string }>();
+  private readonly maxSize = 100;
+  private readonly maxAge = 30 * 60 * 1000; // 30 minutes
+
+  add(url: string) {
+    this.cleanup();
+    this.cache.set(url, { timestamp: Date.now(), url });
+  }
+
+  has(url: string): boolean {
+    const entry = this.cache.get(url);
+    if (!entry) return false;
+    
+    if (Date.now() - entry.timestamp > this.maxAge) {
+      this.cache.delete(url);
+      return false;
+    }
+    return true;
+  }
+
+  private cleanup() {
+    if (this.cache.size >= this.maxSize) {
+      const entries = Array.from(this.cache.entries())
+        .sort(([,a], [,b]) => a.timestamp - b.timestamp);
+      
+      // Remove oldest 20% of entries
+      const toRemove = Math.floor(this.maxSize * 0.2);
+      for (let i = 0; i < toRemove; i++) {
+        this.cache.delete(entries[i][0]);
+      }
+    }
+  }
+}
+
+const imageCache = new ImageCacheManager();
 const failedImages = new Set<string>();
+
+// Enhanced type definitions
+interface VideoCardSize {
+  container: string;
+  thumbnail: string;
+  title: string;
+  channel: string;
+  meta: string;
+}
+
+type VideoCardSizeVariant = 'sm' | 'md' | 'lg';
 
 interface OptimizedVideoCardProps {
   video: Video;
-  size?: 'sm' | 'md' | 'lg';
+  size?: VideoCardSizeVariant;
   showChannel?: boolean;
   showDescription?: boolean;
   className?: string;
@@ -42,17 +88,79 @@ interface OptimizedVideoCardProps {
   index?: number;
 }
 
-// Lazy image component with intersection observer
-const LazyImage = memo<{
+// Video data validation
+const validateVideo = (video: Video): video is Required<Pick<Video, 'id' | 'title' | 'thumbnailUrl' | 'channelName'>> & Video => {
+  return !!(video.id && video.title && video.thumbnailUrl && video.channelName);
+};
+
+// Debounced callback hook
+const useDebouncedCallback = <T extends (...args: any[]) => any>(
+  callback: T,
+  delay: number
+): T => {
+  const timeoutRef = useRef<NodeJS.Timeout>();
+  
+  return useCallback((...args: Parameters<T>) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    timeoutRef.current = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  }, [callback, delay]) as T;
+};
+
+// State management with reducer
+type VideoCardState = {
+  isPlayingInline: boolean;
+  isLoading: boolean;
+  error: string | null;
+  showMenu: boolean;
+};
+
+type VideoCardAction = 
+  | { type: 'PLAY_INLINE' }
+  | { type: 'STOP_INLINE' }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'TOGGLE_MENU' }
+  | { type: 'CLOSE_MENU' };
+
+const videoCardReducer = (state: VideoCardState, action: VideoCardAction): VideoCardState => {
+  switch (action.type) {
+    case 'PLAY_INLINE':
+      return { ...state, isPlayingInline: true, error: null };
+    case 'STOP_INLINE':
+      return { ...state, isPlayingInline: false };
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload, isLoading: false };
+    case 'TOGGLE_MENU':
+      return { ...state, showMenu: !state.showMenu };
+    case 'CLOSE_MENU':
+      return { ...state, showMenu: false };
+    default:
+      return state;
+  }
+};
+
+// Enhanced lazy image component with retry mechanism
+interface LazyImageProps {
   src: string;
   alt: string;
   className?: string;
   priority?: 'high' | 'low';
   lazy?: boolean;
-}>(({ src, alt, className, priority = 'low', lazy = true }) => {
+}
+
+const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low', lazy = true }) => {
   const [loaded, setLoaded] = useState(() => imageCache.has(src));
   const [error, setError] = useState(() => failedImages.has(src));
+  const [retryCount, setRetryCount] = useState(0);
   const imgRef = useRef<HTMLImageElement>(null);
+  const maxRetries = 2;
 
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
@@ -62,7 +170,8 @@ const LazyImage = memo<{
 
   const handleLoad = useCallback(() => {
     setLoaded(true);
-    imageCache.add(src); // Cache successful loads
+    setError(false);
+    imageCache.add(src);
     const metricName = `image-load-${src}`;
     if (performanceMonitor.hasMetric(metricName)) {
       performanceMonitor.endMeasure(metricName);
@@ -70,14 +179,27 @@ const LazyImage = memo<{
   }, [src]);
 
   const handleError = useCallback(() => {
-    setError(true);
-    setLoaded(true);
-    failedImages.add(src); // Cache failed loads to avoid retrying
-    const metricName = `image-load-${src}`;
-    if (performanceMonitor.hasMetric(metricName)) {
-      performanceMonitor.endMeasure(metricName);
+    if (retryCount < maxRetries) {
+      setRetryCount(prev => prev + 1);
+      // Retry after exponential backoff delay
+      setTimeout(() => {
+        setError(false);
+        setLoaded(false);
+        // Force reload by updating src
+        if (imgRef.current) {
+          imgRef.current.src = `${src}?retry=${retryCount + 1}`;
+        }
+      }, 1000 * Math.pow(2, retryCount));
+    } else {
+      setError(true);
+      setLoaded(true);
+      failedImages.add(src);
+      const metricName = `image-load-${src}`;
+      if (performanceMonitor.hasMetric(metricName)) {
+        performanceMonitor.endMeasure(metricName);
+      }
     }
-  }, [src]);
+  }, [src, retryCount, maxRetries]);
 
   const shouldLoad = !lazy || priority === 'high' || isIntersecting;
 
@@ -204,17 +326,21 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 
   // Event handlers with performance monitoring
   const handleVideoClick = useCallback(() => {
-    performanceMonitor.startMeasure('video-card-click');
-    if (isYouTube && !isPlayingInline) {
-      // For YouTube videos, start inline playback
-      setIsPlayingInline(true);
-    } else if (onClick) {
-      onClick(video);
-    } else {
-      showMiniplayer(video);
-    }
-    if (performanceMonitor.hasMetric('video-card-click')) {
-      performanceMonitor.endMeasure('video-card-click');
+    try {
+      performanceMonitor.startMeasure('video-card-click');
+      if (isYouTube && !isPlayingInline) {
+        // For YouTube videos, start inline playback
+        setIsPlayingInline(true);
+      } else if (onClick) {
+        onClick(video);
+      } else {
+        showMiniplayer(video);
+      }
+      if (performanceMonitor.hasMetric('video-card-click')) {
+        performanceMonitor.endMeasure('video-card-click');
+      }
+    } catch (error) {
+      console.error('Failed to handle video click:', error);
     }
   }, [onClick, video, showMiniplayer, isYouTube, isPlayingInline]);
 
@@ -230,19 +356,34 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 
   const handleChannelClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    if (onChannelClick) {
-      onChannelClick(video.channelId);
+    try {
+      if (onChannelClick) {
+        onChannelClick(video.channelId);
+      }
+    } catch (error) {
+      console.error('Failed to navigate to channel:', error);
     }
   }, [onChannelClick, video.channelId]);
 
   const handleWatchLaterToggle = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    if (isWatchLater) {
-      removeFromWatchLater(video.id);
-    } else {
-      addToWatchLater(video);
+    try {
+      if (isWatchLater) {
+        removeFromWatchLater(video.id);
+      } else {
+        addToWatchLater(video);
+      }
+    } catch (error) {
+      console.error('Failed to toggle watch later:', error);
     }
   }, [isWatchLater, video, addToWatchLater, removeFromWatchLater]);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleVideoClick();
+    }
+  }, [handleVideoClick]);
 
   const { isOpen: showMenu, toggle: toggleMenu, close: closeMenu, menuRef } = useDropdownMenu();
 
@@ -259,6 +400,10 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         className,
       )}
       onClick={handleVideoClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`Play video: ${video.title}`}
     >
       {/* Thumbnail Container */}
       <div className="relative overflow-hidden rounded-lg bg-gray-200">
@@ -333,8 +478,9 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex gap-1">
             <button
               onClick={handleWatchLaterToggle}
-              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
+              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
+              aria-label={isWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
             >
               {isWatchLater ? (
                 <CheckIcon className="w-4 h-4 text-white" />
@@ -344,8 +490,11 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
             </button>
             <button
               onClick={handleMenuClick}
-              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors"
+              className="p-1.5 bg-black bg-opacity-60 hover:bg-opacity-80 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title="More options"
+              aria-label="More options"
+              aria-expanded={showMenu}
+              aria-haspopup="menu"
             >
               <EllipsisVerticalIcon className="w-4 h-4 text-white" />
             </button>
