@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, type Ref } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import { getYouTubePlayerType } from '../services/settingsService';
 
 
@@ -34,13 +34,12 @@ export type YouTubePlayerWrapperMethods = {};
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
   props,
-  ref,
+  _ref,
 ) => {
   const playerType = getYouTubePlayerType();
   console.log('YouTubePlayerWrapper rendering with playerType:', playerType);
 
-  // Convert videoId to YouTube URL for non-YouTube specific players
-  const getYouTubeUrl = (videoId: string) => `https://www.youtube.com/watch?v=${videoId}`;
+
 
   // Create mock video object for YouTubePlayer component
   const createMockVideo = (videoId: string): YouTubeSearchResult => ({
@@ -49,8 +48,12 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
     description: '',
     thumbnailUrl: '',
     channelName: '',
+    channelId: '',
+    channelAvatarUrl: '',
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
+    duration: '0:00',
+    uploadedAt: new Date().toISOString(),
     isYouTube: true as const,
   });
 

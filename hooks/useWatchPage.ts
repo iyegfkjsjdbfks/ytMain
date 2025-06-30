@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -103,9 +103,7 @@ export const useWatchPage = () => {
   // Related videos state
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
 
-  // Refs
-  const saveButtonRef = useRef<HTMLButtonElement>(null);
-  const saveModalRef = useRef<HTMLDivElement>(null);
+
 
   // Mock like count
   const mockLikeCount = 15420;
@@ -542,9 +540,7 @@ newDisliked = false;
     allRelatedVideos,
     displayedRelatedVideos,
 
-    // Refs
-    saveButtonRef,
-    saveModalRef,
+
 
     // Constants
     MAX_COMMENT_LENGTH,

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getShortsVideos } from '../services/mockVideoService';
@@ -41,21 +40,42 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              dislikes: video.dislikes,
              uploadedAt: video.uploadedAt,
              channelName: video.channelName,
+             channelId: video.channelId || 'unknown',
+             channelAvatarUrl: video.channelAvatarUrl || '',
              category: video.category,
              tags: video.tags,
-             isLive: video.isLive,
-             isShort: video.isShort,
-             isLiked: video.isLiked,
-             isDisliked: video.isDisliked,
-             isSaved: video.isSaved,
              visibility: video.visibility,
              createdAt: video.createdAt,
              updatedAt: video.updatedAt,
              isVertical: true,
-             definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
-             // Ensure all required Short properties are present
              effects: [],
-             music: undefined,
+             // Only include optional properties if they have values
+             ...(video.publishedAt && { publishedAt: video.publishedAt }),
+             ...(video.channel && { channel: video.channel }),
+             ...(video.isLive !== undefined && { isLive: video.isLive }),
+             ...(video.isShort !== undefined && { isShort: video.isShort }),
+             ...(video.isLiked !== undefined && { isLiked: video.isLiked }),
+             ...(video.isDisliked !== undefined && { isDisliked: video.isDisliked }),
+             ...(video.isSaved !== undefined && { isSaved: video.isSaved }),
+             ...(video.isHearted !== undefined && { isHearted: video.isHearted }),
+             ...(video.isPinned !== undefined && { isPinned: video.isPinned }),
+             ...(video.isEdited !== undefined && { isEdited: video.isEdited }),
+             ...(video.privacyStatus && { privacyStatus: video.privacyStatus }),
+             ...(video.commentCount !== undefined && { commentCount: video.commentCount }),
+             ...(video.viewCount !== undefined && { viewCount: video.viewCount }),
+             ...(video.monetization && { monetization: video.monetization }),
+             ...(video.analytics && { analytics: video.analytics }),
+             ...(video.definition && { definition: video.definition }),
+             ...(video.captions && { captions: video.captions }),
+             ...(video.subtitles && { subtitles: video.subtitles }),
+             ...(video.nextPageToken && { nextPageToken: video.nextPageToken }),
+             ...(video.relatedVideos && { relatedVideos: video.relatedVideos }),
+             ...(video.saveModalLoading !== undefined && { saveModalLoading: video.saveModalLoading }),
+             ...(video.showAllRelated !== undefined && { showAllRelated: video.showAllRelated }),
+             ...(video.saveButtonRef && { saveButtonRef: video.saveButtonRef }),
+             ...(video.saveModalRef && { saveModalRef: video.saveModalRef }),
+             ...(video.channelTitle && { channelTitle: video.channelTitle }),
+             ...(video.channelThumbnail && { channelThumbnail: video.channelThumbnail })
            };
           return shortVideo;
         });

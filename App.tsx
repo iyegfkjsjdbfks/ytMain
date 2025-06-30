@@ -6,11 +6,7 @@ import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
 
 // Create router with our route configuration
-const router = createBrowserRouter(routes, {
-  future: {
-    v7_startTransition: true,
-  },
-});
+const router = createBrowserRouter(routes);
 
 /**
  * Main application component that sets up the refactored provider structure

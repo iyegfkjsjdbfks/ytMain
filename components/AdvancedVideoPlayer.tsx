@@ -10,7 +10,6 @@ import {
   ForwardIcon,
   BackwardIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
 } from '@heroicons/react/24/outline';
 
 import { useVideoPlayer } from '../hooks';
@@ -79,7 +78,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const [showChapters, setShowChapters] = useState(false);
   const [selectedQuality, setSelectedQuality] = useState('auto');
-  const [isDragging, setIsDragging] = useState(false);
+  const [, setIsDragging] = useState(false);
   const [previewTime, setPreviewTime] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
   const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
@@ -275,14 +274,14 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       <video
         ref={videoRef}
         src={video.videoUrl}
-        poster={video.thumbnail}
+        poster={video.thumbnailUrl}
         className="w-full h-full object-contain"
         onClick={actions.togglePlayPause}
         onDoubleClick={actions.toggleFullscreen}
       />
 
       {/* Loading Overlay */}
-      {state.loading && (
+      {state.isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
         </div>
@@ -514,7 +513,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                               key={quality.value}
                               onClick={() => {
                                 setSelectedQuality(quality.value);
-                                actions.setPlaybackQuality(quality.value);
+                                actions.setQuality(quality.value);
                                 setShowQualityMenu(false);
                               }}
                               className={`w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors ${

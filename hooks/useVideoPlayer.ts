@@ -23,6 +23,10 @@ interface VideoPlayerOptions {
   initialVolume?: number;
   initialPlaybackRate?: number;
   initialQuality?: string;
+  onTimeUpdate?: (currentTime: number) => void;
+  onEnded?: () => void;
+  onPlay?: () => void;
+  onPause?: () => void;
 }
 
 interface UseVideoPlayerReturn {

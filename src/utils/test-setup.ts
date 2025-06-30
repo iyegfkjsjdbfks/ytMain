@@ -6,7 +6,7 @@ import { server } from './mocks/server';
 
 // Global type declarations
 declare global {
-  const testUtils: {
+  var testUtils: {
     mockConsole: () => {
       restore: () => void;
     };
@@ -396,10 +396,12 @@ global.testUtils = {
     console.error = vi.fn();
     console.warn = vi.fn();
 
-    return () => {
-      console.log = originalLog;
-      console.error = originalError;
-      console.warn = originalWarn;
+    return {
+      restore: () => {
+        console.log = originalLog;
+        console.error = originalError;
+        console.warn = originalWarn;
+      }
     };
   },
 };
@@ -444,7 +446,5 @@ declare global {
     }
   }
 
-  const testUtils: {
-    mockConsole: () => () => void;
-  };
+
 }
