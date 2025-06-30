@@ -55,7 +55,10 @@ class ImageCacheManager {
       // Remove oldest 20% of entries
       const toRemove = Math.floor(this.maxSize * 0.2);
       for (let i = 0; i < toRemove; i++) {
-        this.cache.delete(entries[i][0]);
+        const entry = entries[i];
+        if (entry && entry[0]) {
+          this.cache.delete(entry[0]);
+        }
       }
     }
   }
@@ -65,13 +68,6 @@ const imageCache = new ImageCacheManager();
 const failedImages = new Set<string>();
 
 // Enhanced type definitions
-interface VideoCardSize {
-  container: string;
-  thumbnail: string;
-  title: string;
-  channel: string;
-  meta: string;
-}
 
 type VideoCardSizeVariant = 'sm' | 'md' | 'lg';
 
@@ -87,29 +83,6 @@ interface OptimizedVideoCardProps {
   priority?: 'high' | 'low';
   index?: number;
 }
-
-// Video data validation
-const validateVideo = (video: Video): video is Required<Pick<Video, 'id' | 'title' | 'thumbnailUrl' | 'channelName'>> & Video => {
-  return !!(video.id && video.title && video.thumbnailUrl && video.channelName);
-};
-
-// Debounced callback hook
-const useDebouncedCallback = <T extends (...args: any[]) => any>(
-  callback: T,
-  delay: number
-): T => {
-  const timeoutRef = useRef<NodeJS.Timeout>();
-  
-  return useCallback((...args: Parameters<T>) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    
-    timeoutRef.current = setTimeout(() => {
-      callback(...args);
-    }, delay);
-  }, [callback, delay]) as T;
-};
 
 // State management with reducer
 type VideoCardState = {
@@ -509,7 +482,6 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
             menuRef={menuRef}
             className="top-12 right-2"
             position="bottom-right"
-            role="menu"
             aria-label="Video options menu"
           >
           <DropdownMenuItem
@@ -521,7 +493,6 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               window.dispatchEvent(event);
             }}
             icon={<PlusIcon className="w-4 h-4" />}
-            role="menuitem"
             aria-label="Save video to playlist"
           >
             Save to playlist
@@ -555,7 +526,6 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
               </svg>
             }
-            role="menuitem"
             aria-label="Share video"
           >
             Share
@@ -587,7 +557,6 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
               </svg>
             }
-            role="menuitem"
             aria-label="Mark as not interested"
           >
             Not interested
@@ -633,7 +602,6 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
               }
-              role="menuitem"
               aria-label="Report video"
             >
               Report
