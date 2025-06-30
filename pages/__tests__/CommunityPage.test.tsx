@@ -107,9 +107,6 @@ describe('CommunityPage', () => {
       notifications: [],
       addNotification: vi.fn(),
       removeNotification: vi.fn(),
-      createPost: mockCreatePost,
-      likePost: vi.fn(),
-      addComment: vi.fn(),
     });
 
     renderWithQueryClient(<CommunityPage />);
@@ -148,24 +145,7 @@ describe('CommunityPage', () => {
       sidebarCollapsed: false,
       toggleSidebar: vi.fn(),
       notifications: [
-        {
-          id: '1',
-          message: 'Test post content',
-          type: 'success' as const,
-          timestamp: new Date().toISOString(),
-        },
-        {
-          id: '2',
-          message: 'Another test post',
-          type: 'info' as const,
-          timestamp: '2024-01-02T00:00:00Z',
-        },
       ],
-      loading: false,
-      error: null,
-      createPost: vi.fn(),
-      likePost: mockLikePost,
-      addComment: vi.fn(),
     });
 
     renderWithQueryClient(<CommunityPage />);
@@ -204,9 +184,6 @@ describe('CommunityPage', () => {
       notifications: [],
       addNotification: vi.fn(),
       removeNotification: vi.fn(),
-      createPost: vi.fn(),
-      likePost: vi.fn(),
-      addComment: vi.fn(),
     });
 
     renderWithQueryClient(<CommunityPage />);
@@ -238,9 +215,6 @@ describe('CommunityPage', () => {
       notifications: [],
       addNotification: vi.fn(),
       removeNotification: vi.fn(),
-      createPost: vi.fn(),
-      likePost: vi.fn(),
-      addComment: vi.fn(),
     });
 
     renderWithQueryClient(<CommunityPage />);
