@@ -54,7 +54,11 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago
 };
 
-export const formatDistanceToNow = (date: string | Date, options?: { addSuffix?: boolean }): string => {
+export const formatDistanceToNow = (date: string | Date | undefined, options?: { addSuffix?: boolean }): string => {
+  if (!date) {
+    return 'Unknown date';
+  }
+  
   const now = new Date();
   const targetDate = typeof date === 'string' ? new Date(date) : date;
 

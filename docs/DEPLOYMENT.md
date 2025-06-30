@@ -785,10 +785,10 @@ server {
    export const healthCheck = {
      status: 'healthy',
      timestamp: new Date().toISOString(),
-     version: process.env.VITE_APP_VERSION,
+     version: import.meta.env.VITE_APP_VERSION,
      uptime: process.uptime(),
      memory: process.memoryUsage(),
-     environment: process.env.NODE_ENV
+     environment: import.meta.env.MODE
    };
    ```
 

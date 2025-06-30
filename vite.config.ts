@@ -2,12 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { splitVendorChunkPlugin, defineConfig } from 'vite';
+import { splitVendorChunkPlugin } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       // Enable React Fast Refresh
@@ -76,6 +76,22 @@ export default defineConfig({
     },
     // Proxy configuration for API calls
     proxy: {
+      '/api/youtube': {
+        target: 'https://www.googleapis.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/youtube/, '/youtube'),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('YouTube API proxy error:', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Proxying request to:', proxyReq.path);
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Proxy response status:', proxyRes.statusCode, 'for:', req.url);
+          });
+        },
+      },
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
@@ -89,14 +105,14 @@ export default defineConfig({
     target: 'esnext',
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: process.env.NODE_ENV === 'development',
+    sourcemap: mode === 'development',
     minify: 'terser',
     cssCodeSplit: true,
     reportCompressedSize: false, // Faster builds
     chunkSizeWarningLimit: 1000,
     terserOptions: {
       compress: {
-        drop_console: process.env.NODE_ENV === 'production',
+        drop_console: mode === 'production',
         drop_debugger: true,
       },
     },
@@ -238,4 +254,4 @@ export default defineConfig({
   worker: {
     format: 'es',
   },
-});
+}));

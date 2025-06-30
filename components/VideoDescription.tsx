@@ -86,7 +86,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
               to={channelLink}
               className="text-sm font-medium text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors block truncate"
             >
-              {channel?.name || 'Unknown Channel'}
+              {video.channelName || channel?.name || 'Unknown Channel'}
               {channel?.isVerified && (
                 <span className="ml-1 text-neutral-500 dark:text-neutral-400" title="Verified channel">✓</span>
               )}

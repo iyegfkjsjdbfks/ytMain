@@ -2,135 +2,28 @@ import { useState, useEffect } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
 
-import { YouTubePlayer } from '../../../../components/YouTubePlayer';
+import YouTubePlayer from '../../../../components/YouTubePlayer';
 import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
+import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
 
 import type { Video } from '../../../types/core';
 
 const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
-  const [video, setVideo] = useState<Video | null>(null);
+  const { data: unifiedVideo, loading, error } = useUnifiedVideo(videoId);
+  const video = unifiedVideo?.data;
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
-
-  const [loading, setLoading] = useState(true);
   const [_showFullDescription, _setShowFullDescription] = useState(false);
-  // const [isSubscribed, setIsSubscribed] = useState(false);
-
 
   useEffect(() => {
     if (videoId) {
-      loadVideoData(videoId);
-      // loadComments(videoId); // Removed as comments are handled by CommentSection component
       loadRecommendations();
     }
   }, [videoId]);
 
-  const loadVideoData = async (id: string) => {
-    setLoading(true);
-    try {
-      // Mock video data with enhanced metadata
-      const mockVideo: Video = {
-        id,
-        title: 'Advanced React Patterns and Best Practices 2024',
-        description: `In this comprehensive tutorial, we'll explore advanced React patterns that every developer should know in 2024. We'll cover:
-
-🔥 Key Topics:
-• Custom Hooks and Advanced Hook Patterns
-• Compound Components
-• Render Props vs Children as Functions
-• Higher-Order Components (HOCs)
-• Context API Best Practices
-• Performance Optimization Techniques
-• Error Boundaries and Suspense
-• TypeScript Integration
-
-⏰ Timestamps:
-0:00 Introduction
-2:30 Custom Hooks Deep Dive
-8:15 Compound Components Pattern
-15:45 Render Props Explained
-22:10 HOCs in Modern React
-28:30 Context API Mastery
-35:20 Performance Tips
-42:15 Error Handling
-48:30 TypeScript Best Practices
-55:00 Conclusion
-
-📚 Resources:
-• GitHub Repository: https://github.com/example/react-patterns
-• Documentation: https://reactpatterns.dev
-• Discord Community: https://discord.gg/reactdev
-
-🏷️ Tags: #React #JavaScript #WebDevelopment #Programming #Tutorial`,
-        thumbnailUrl: 'https://picsum.photos/seed/react-tutorial/1280/720',
-        videoUrl: '/api/placeholder/video',
-        duration: 3420, // 57 minutes in seconds
-        views: 125847, // Legacy field
-        viewCount: 125847,
-        likes: 8934, // Legacy field
-        likeCount: 8934,
-        dislikeCount: 127,
-        commentCount: 342,
-        dislikes: 127,
-        uploadedAt: '2024-01-15T10:30:00Z',
-        publishedAt: '2024-01-15T10:30:00Z',
-        channelName: 'Tech Insights',
-        channelId: 'tech-insights',
-        channelAvatarUrl: 'https://picsum.photos/seed/tech-insights/150/150',
-        tags: ['React', 'JavaScript', 'Web Development', 'Programming', 'Tutorial'],
-        category: 'Education',
-        isLive: false,
-        isShort: false,
-        visibility: 'public' as const,
-        createdAt: '2024-01-15T10:30:00Z',
-        updatedAt: '2024-01-15T10:30:00Z',
-        // Enhanced metadata fields
-        license: 'Standard YouTube License',
-        isUpcoming: false,
-        isLiveContent: false,
-        isFamilySafe: true,
-        allowedRegions: [],
-        blockedRegions: [],
-        isAgeRestricted: false,
-        embeddable: true,
-        defaultLanguage: 'en',
-        defaultAudioLanguage: 'en',
-        recordingStatus: 'recorded',
-        uploadStatus: 'processed',
-        privacyStatus: 'public',
-        selfDeclaredMadeForKids: false,
-        statistics: {
-          viewCount: 125847,
-          likeCount: 8934,
-          dislikeCount: 127,
-          favoriteCount: 0,
-          commentCount: 342,
-        },
-        topicDetails: {
-          topicIds: [],
-          relevantTopicIds: [],
-          topicCategories: [],
-        },
-        contentDetails: {
-          duration: 'PT57M0S',
-          dimension: '2d',
-          definition: 'hd',
-          caption: 'false',
-          licensedContent: false,
-          contentRating: {},
-          projection: 'rectangular',
-        },
-      };
-      setVideo(mockVideo);
-    } catch (error) {
-      console.error('Error loading video:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
 
   const loadRecommendations = async () => {
@@ -145,8 +38,8 @@ const WatchPage: React.FC = () => {
           description: 'Learn how to test React components effectively with React Testing Library and Jest.',
           thumbnailUrl: 'https://picsum.photos/seed/react-testing/1280/720',
           videoUrl: '/api/placeholder/video2',
-          duration: 1725,
-          views: 67000,
+          duration: '1725',
+          views: '67000',
           viewCount: 67000,
           likes: 890,
           likeCount: 890,
@@ -273,11 +166,47 @@ const WatchPage: React.FC = () => {
                 {video.title}
               </h1>
 
+              {/* Channel Metadata Section - Mirroring search results styling */}
+              <div className="flex items-center gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-700">
+                {/* Channel Avatar */}
+                <Link to={`/channel/${video.channel?.id || video.channelId}`} className="flex-shrink-0">
+                  <img
+                    src={video.channel?.avatarUrl || video.channelAvatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
+                    alt={video.channel?.name || video.channelName}
+                    className="w-9 h-9 rounded-full object-cover"
+                  />
+                </Link>
+                
+                {/* Channel Info */}
+                <div className="flex-1 min-w-0">
+                  <Link
+                    to={`/channel/${video.channel?.id || video.channelId}`}
+                    className="font-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block"
+                  >
+                    {video.channel?.name || video.channelName}
+                  </Link>
+                  <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    {/* Subscriber Count */}
+                    <span>
+                      {video.channel?.subscribersFormatted || '0 subscribers'}
+                    </span>
+                    <span>•</span>
+                    {/* View Count */}
+                    <span>
+                      {video.viewsFormatted || '0 views'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Subscribe Button */}
+                <button className="px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium">
+                  Subscribe
+                </button>
+              </div>
+
               {/* Video Stats and Actions */}
               <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-                  <span>{(video.viewCount || video.views || 0).toLocaleString()} views</span>
-                  <span>•</span>
                   <span>{new Date(video.publishedAt || video.uploadedAt || video.createdAt).toLocaleDateString()}</span>
                 </div>
 
@@ -312,31 +241,25 @@ const WatchPage: React.FC = () => {
 
               {/* Channel Information */}
               <div className="flex items-start gap-4">
-                <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
+                <Link to={`/channel/${video.channel?.id || video.channelId}`} className="flex-shrink-0">
                   <img
-                    src={video.channelAvatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
-                    alt={video.channelName}
+                    src={video.channel?.avatarUrl || video.channelAvatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
+                    alt={video.channel?.name || video.channelName}
                     className="w-12 h-12 rounded-full object-cover"
                   />
                 </Link>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Link
-                        to={`/channel/${video.channelId}`}
-                        className="font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                      >
-                        {video.channelName}
-                      </Link>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                        {video.statistics?.viewCount ? `${video.statistics.viewCount.toLocaleString()} total views` : 'Channel'}
-                      </p>
-                    </div>
-
-                    <button className="px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium">
-                      Subscribe
-                    </button>
+                  <div>
+                    <Link
+                      to={`/channel/${video.channel?.id || video.channelId}`}
+                      className="font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                    >
+                      {video.channel?.name || video.channelName}
+                    </Link>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      {video.channel?.subscribersFormatted || '0 subscribers'} • {video.viewsFormatted || '0 views'}
+                    </p>
                   </div>
 
                   {/* Video Description */}
@@ -360,24 +283,82 @@ const WatchPage: React.FC = () => {
                     )}
 
                     {/* Additional Metadata */}
-                    <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-neutral-600 dark:text-neutral-400">
-                      <div>
-                        <span className="font-medium">Category:</span> {video.category}
-                      </div>
-                      {video.commentCount && (
+                    <div className="mt-4 space-y-3">
+                      {/* Basic Stats */}
+                      <div className="grid grid-cols-2 gap-4 text-xs text-neutral-600 dark:text-neutral-400">
                         <div>
-                          <span className="font-medium">Comments:</span> {video.commentCount.toLocaleString()}
+                          <span className="font-medium">Category:</span> {video.category}
+                        </div>
+                        <div>
+                          <span className="font-medium">Duration:</span> {video.duration || '0:00'}
+                        </div>
+                        <div>
+                          <span className="font-medium">Views:</span> {video.viewsFormatted}
+                        </div>
+                        <div>
+                          <span className="font-medium">Likes:</span> {(video.likes || 0).toLocaleString()}
+                        </div>
+                        {video.commentCount && (
+                          <div>
+                            <span className="font-medium">Comments:</span> {video.commentCount.toLocaleString()}
+                          </div>
+                        )}
+                        <div>
+                          <span className="font-medium">Source:</span> {video.source || 'local'}
+                        </div>
+                      </div>
+                      
+                      {/* YouTube Specific Metadata */}
+                      {video.source === 'youtube' && (
+                        <div className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
+                          <h4 className="font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2">YouTube Metadata</h4>
+                          <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400">
+                            <div>
+                              <span className="font-medium">Published:</span> {video.publishedAtFormatted}
+                            </div>
+                            <div>
+                              <span className="font-medium">Quality:</span> {video.metadata?.definition || 'Unknown'}
+                            </div>
+                            <div>
+                              <span className="font-medium">Captions:</span> {video.metadata?.captions ? 'Available' : 'None'}
+                            </div>
+                            <div>
+                              <span className="font-medium">License:</span> {video.metadata?.license || 'Standard'}
+                            </div>
+                          </div>
                         </div>
                       )}
-                      <div>
-                        <span className="font-medium">License:</span> {video.license || 'Standard YouTube License'}
-                      </div>
-                      <div>
-                        <span className="font-medium">Duration:</span> {typeof video.duration === 'number' ?
-                          `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` :
-                          video.duration
-                        }
-                      </div>
+                      
+                      {/* Channel Metadata */}
+                      {video.channel && (
+                        <div className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
+                          <h4 className="font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2">Channel Details</h4>
+                          <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400">
+                            <div>
+                              <span className="font-medium">Channel ID:</span> {video.channel.id}
+                            </div>
+                            <div>
+                              <span className="font-medium">Subscribers:</span> {video.channel.subscribersFormatted}
+                            </div>
+                            <div>
+                              <span className="font-medium">Verified:</span> {video.channel.isVerified ? 'Yes' : 'No'}
+                            </div>
+                            <div>
+                              <span className="font-medium">Name:</span> {video.channel.name}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Debug Info */}
+                      <details className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
+                        <summary className="cursor-pointer text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200">
+                          Raw Video Data (Debug)
+                        </summary>
+                        <pre className="mt-2 p-2 bg-neutral-100 dark:bg-neutral-700 rounded text-xs overflow-auto max-h-40 text-neutral-700 dark:text-neutral-300">
+                          {JSON.stringify(video, null, 2)}
+                        </pre>
+                      </details>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
+import { youtubeService } from '../../../services/api/youtubeService';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -206,6 +207,70 @@ class VideoService {
     }
 
     return response.json() as Promise<VideoEngagement>;
+  }
+
+  /**
+   * Fetch YouTube video metadata directly from YouTube API
+   * @param videoIds Array of YouTube video IDs
+   * @returns Promise resolving to array of Video objects with YouTube metadata
+   */
+  async getYouTubeVideos(videoIds: string[]): Promise<Video[]> {
+    try {
+      return await youtubeService.fetchVideos(videoIds);
+    } catch (error) {
+      console.error('Error fetching YouTube videos:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetch single YouTube video metadata
+   * @param videoId YouTube video ID
+   * @returns Promise resolving to Video object or null
+   */
+  async getYouTubeVideo(videoId: string): Promise<Video | null> {
+    try {
+      const videos = await youtubeService.fetchVideos([videoId]);
+      return videos[0] || null;
+    } catch (error) {
+      console.error('Error fetching YouTube video:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Enhanced video fetching that combines local data with YouTube metadata
+   * @param videoId Video ID
+   * @returns Promise resolving to Video with enriched metadata
+   */
+  async getEnhancedVideo(videoId: string): Promise<Video> {
+    try {
+      // First try to get YouTube metadata
+      const youtubeVideo = await this.getYouTubeVideo(videoId);
+      
+      if (youtubeVideo) {
+        // If YouTube data is available, use it with local interactions
+        try {
+          const interactions = await this.getVideoInteractions(videoId);
+          return {
+            ...youtubeVideo,
+            isLiked: interactions.isLiked,
+            isDisliked: interactions.isDisliked,
+            isSaved: interactions.isSaved,
+          };
+        } catch (interactionError) {
+          // If interactions fail, return YouTube data without local state
+          console.warn('Failed to fetch local video interactions:', interactionError);
+          return youtubeVideo;
+        }
+      }
+      
+      // Fallback to local API if YouTube data is not available
+      return await this.getVideo(videoId);
+    } catch (error) {
+      console.error('Error fetching enhanced video:', error);
+      throw error;
+    }
   }
 }
 

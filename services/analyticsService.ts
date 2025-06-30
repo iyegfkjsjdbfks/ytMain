@@ -494,10 +494,10 @@ return;
 
 // Create singleton instance
 export const analyticsService = new AnalyticsService({
-  enableRemoteTracking: process.env.NODE_ENV === 'production',
-  enableDebugMode: process.env.NODE_ENV === 'development',
-  apiEndpoint: process.env.VITE_ANALYTICS_ENDPOINT,
-  apiKey: process.env.VITE_ANALYTICS_API_KEY,
+  enableRemoteTracking: import.meta.env.MODE === 'production',
+  enableDebugMode: import.meta.env.MODE === 'development',
+  apiEndpoint: import.meta.env.VITE_ANALYTICS_ENDPOINT,
+  apiKey: import.meta.env.VITE_ANALYTICS_API_KEY,
 });
 
 export default AnalyticsService;

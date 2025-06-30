@@ -411,12 +411,12 @@ return;
 
 // Create singleton instance
 export const errorService = new ErrorService({
-  enableConsoleLogging: process.env.NODE_ENV === 'development',
-  enableRemoteLogging: process.env.NODE_ENV === 'production',
+  enableConsoleLogging: import.meta.env.MODE === 'development',
+  enableRemoteLogging: import.meta.env.MODE === 'production',
   enableLocalStorage: true,
   maxStoredErrors: 100,
-  apiEndpoint: process.env.VITE_ERROR_REPORTING_ENDPOINT,
-  apiKey: process.env.VITE_ERROR_REPORTING_API_KEY,
+  apiEndpoint: import.meta.env.VITE_ERROR_REPORTING_ENDPOINT,
+  apiKey: import.meta.env.VITE_ERROR_REPORTING_API_KEY,
 });
 
 export default ErrorService;

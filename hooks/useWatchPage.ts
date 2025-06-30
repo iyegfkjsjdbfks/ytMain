@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
+import { unifiedDataService } from '../src/services/unifiedDataService';
 
 import type { VideoVisibility } from '../types';
 
@@ -57,6 +58,34 @@ const MAX_COMMENT_LENGTH = 500;
 const MIN_DESC_LENGTH_FOR_SUMMARY = 100;
 const RELATED_VIDEOS_INITIAL_COUNT = 10;
 
+// YouTube video detection patterns
+const YOUTUBE_URL_PATTERNS = [
+  /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([\w-]+)/i,
+  /youtube/i, // Simple fallback for any mention of 'youtube'
+];
+
+// Type guard to detect YouTube videos
+const isYouTubeVideo = (video: Video | null): boolean => {
+  if (!video) return false;
+  
+  // Check video URL
+  if (video.videoUrl && YOUTUBE_URL_PATTERNS.some(pattern => pattern.test(video.videoUrl))) {
+    return true;
+  }
+  
+  // Check video ID (if it has youtube- prefix or similar patterns)
+  if (video.id && /youtube|yt-/i.test(video.id)) {
+    return true;
+  }
+  
+  // Check thumbnail URL for YouTube patterns
+  if (video.thumbnailUrl && /youtube|ytimg/i.test(video.thumbnailUrl)) {
+    return true;
+  }
+  
+  return false;
+};
+
 export const useWatchPage = () => {
   const { videoId: pathVideoId } = useParams<{ videoId: string }>();
   const [searchParams] = useSearchParams();
@@ -64,8 +93,8 @@ export const useWatchPage = () => {
 
   // Get video ID from either path parameter or query parameter
   const rawVideoId = pathVideoId || searchParams.get('v');
-  // Remove any prefix like 'youtube-' or 'google-search-' if it exists (from search results)
-  const videoId = rawVideoId?.replace(/^(youtube-|google-search-)/, '') || null;
+  // Keep the original video ID for unified service (it handles YouTube prefixes internally)
+  const videoId = rawVideoId || null;
 
   // Core data state
   const [video, setVideo] = useState<Video | null>(null);
@@ -117,20 +146,70 @@ return;
       setLoading(true);
 
       try {
-        // Load video data
-        const foundVideo = await getVideoById(videoId);
+        console.log(`useWatchPage: Loading video data for ID: ${videoId}`);
+        
+        // Try unified data service first (handles both local and YouTube)
+        let foundVideo = null;
+        let isFromUnifiedService = false;
+        
+        try {
+          const unifiedVideo = await unifiedDataService.getVideoById(videoId);
+          if (unifiedVideo) {
+            // Convert unified video format to expected format
+            foundVideo = {
+              id: unifiedVideo.id,
+              title: unifiedVideo.title,
+              description: unifiedVideo.description,
+              views: unifiedVideo.views.toString(),
+              uploadedAt: unifiedVideo.publishedAt,
+              thumbnailUrl: unifiedVideo.thumbnailUrl,
+              videoUrl: unifiedVideo.videoUrl || `https://www.youtube.com/watch?v=${unifiedVideo.id.replace('youtube-', '')}`,
+              channelId: unifiedVideo.channel.id,
+              channelName: unifiedVideo.channel.name,
+              channelAvatarUrl: unifiedVideo.channel.avatarUrl,
+              duration: unifiedVideo.duration,
+              category: unifiedVideo.category || 'General',
+              likes: unifiedVideo.likes,
+              dislikes: unifiedVideo.dislikes || 0,
+              tags: unifiedVideo.tags || [],
+              visibility: 'public' as VideoVisibility,
+              isLive: unifiedVideo.isLive || false,
+              isShort: unifiedVideo.isShort || false,
+              createdAt: unifiedVideo.publishedAt,
+              updatedAt: unifiedVideo.publishedAt,
+            };
+            isFromUnifiedService = true;
+            console.log('Successfully loaded video from unified service:', foundVideo);
+          }
+        } catch (error) {
+          console.warn('Failed to load from unified service, trying mock service:', error);
+        }
+        
+        // Fallback to mock service if unified service didn't find the video
+        if (!foundVideo) {
+          const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
+          foundVideo = await getVideoById(cleanVideoId);
+          console.log('Loaded video from mock service:', foundVideo);
+        }
+        
         if (!foundVideo) {
           setVideo(null);
           setLoading(false);
           return;
         }
 
-        // Ensure video has channel info
+        // Ensure video has channel info - preserve existing channel name if available
         const videoWithChannelInfo = {
           ...foundVideo,
           channelName: foundVideo.channelName || 'Unknown Channel',
           channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png',
         };
+        
+        console.log('Final video with channel info:', {
+          channelName: videoWithChannelInfo.channelName,
+          channelId: videoWithChannelInfo.channelId,
+          channelAvatarUrl: videoWithChannelInfo.channelAvatarUrl
+        });
         setVideo(videoWithChannelInfo);
 
         // Load channel data
@@ -497,6 +576,9 @@ newDisliked = false;
 
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
   const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
+  
+  // YouTube video detection flag
+  const isYouTubeVideoFlag = isYouTubeVideo(video);
 
   return {
     // Core data
@@ -539,6 +621,8 @@ newDisliked = false;
     allRelatedVideos,
     displayedRelatedVideos,
 
+    // YouTube video detection
+    isYouTubeVideo: isYouTubeVideoFlag,
 
     // Constants
     MAX_COMMENT_LENGTH,
