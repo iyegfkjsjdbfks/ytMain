@@ -9,9 +9,8 @@ import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../hooks/useDebounce';
 import { VideoService } from '../services/api';
 import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
-import { searchVideos as searchMockVideos } from '../services/mockVideoService';
-import { performanceMonitor } from '../utils/performance';
 
+import { performanceMonitor } from '../utils/performance';
 import type { Video } from '../types';
 
 
@@ -79,7 +78,7 @@ const SearchResultsPage: React.FC = () => {
       // This avoids duplicate API calls and improves performance
       const combinedResults = await searchCombined(
         searchQuery,
-        (query) => searchMockVideos(query),
+        (query) => VideoService.searchVideos(query).then(result => result.videos),
       );
 
       // Check if request was cancelled

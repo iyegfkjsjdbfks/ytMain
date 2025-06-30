@@ -203,7 +203,7 @@ const WatchPage: React.FC = () => {
               {isYouTubeUrl(video.videoUrl) ? (() => {
                 const youtubePlayerType = getYouTubePlayerType();
                 const videoId = getYouTubeVideoId(video.videoUrl) || '';
-                
+
                 switch (youtubePlayerType) {
                   case 'youtube-player':
                     return (

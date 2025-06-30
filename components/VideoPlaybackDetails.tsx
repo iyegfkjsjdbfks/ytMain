@@ -1,3 +1,5 @@
+import { type RefObject } from 'react';
+
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
@@ -24,6 +26,8 @@ interface VideoPlaybackDetailsProps {
   canSummarize?: boolean;
   isSaveModalOpen: boolean;
   saveModalLoading: boolean;
+  saveButtonRef: RefObject<HTMLButtonElement>;
+  saveModalRef: RefObject<HTMLDivElement>;
   handleLike: () => void;
   handleDislike: () => void;
   handleSubscribe: () => void;

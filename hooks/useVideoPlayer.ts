@@ -23,10 +23,10 @@ interface VideoPlayerOptions {
   initialVolume?: number;
   initialPlaybackRate?: number;
   initialQuality?: string;
-  onTimeUpdate?: (currentTime: number) => void;
-  onEnded?: () => void;
-  onPlay?: () => void;
-  onPause?: () => void;
+  onTimeUpdate?: ((currentTime: number) => void) | undefined;
+  onEnded?: (() => void) | undefined;
+  onPlay?: (() => void) | undefined;
+  onPause?: (() => void) | undefined;
 }
 
 interface UseVideoPlayerReturn {
@@ -360,7 +360,9 @@ return;
   // Set up video element and event listeners
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     // Set initial properties
     video.autoplay = autoplay;

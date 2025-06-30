@@ -9,9 +9,9 @@ export const ENV = {
 // API Configuration
 export const API_CONFIG = {
   BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001',
-  TIMEOUT: parseInt(import.meta.env.VITE_API_TIMEOUT || '10000'),
-  RETRY_ATTEMPTS: parseInt(import.meta.env.VITE_API_RETRY_ATTEMPTS || '3'),
-  RETRY_DELAY: parseInt(import.meta.env.VITE_API_RETRY_DELAY || '1000'),
+  TIMEOUT: parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10),
+  RETRY_ATTEMPTS: parseInt(import.meta.env.VITE_API_RETRY_ATTEMPTS || '3', 10),
+  RETRY_DELAY: parseInt(import.meta.env.VITE_API_RETRY_DELAY || '1000', 10),
 
   // External APIs
   YOUTUBE_API_KEY: import.meta.env.VITE_YOUTUBE_API_KEY || '',
@@ -20,38 +20,38 @@ export const API_CONFIG = {
   GOOGLE_SEARCH_ENGINE_ID: import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID || '',
 
   // Rate limiting
-  RATE_LIMIT_REQUESTS: parseInt(import.meta.env.VITE_RATE_LIMIT_REQUESTS || '100'),
-  RATE_LIMIT_WINDOW: parseInt(import.meta.env.VITE_RATE_LIMIT_WINDOW || '60000'), // 1 minute
+  RATE_LIMIT_REQUESTS: parseInt(import.meta.env.VITE_RATE_LIMIT_REQUESTS || '100', 10),
+  RATE_LIMIT_WINDOW: parseInt(import.meta.env.VITE_RATE_LIMIT_WINDOW || '60000', 10), // 1 minute
 } as const;
 
 // Performance Configuration
 export const PERFORMANCE_CONFIG = {
   // Caching
-  CACHE_TTL: parseInt(import.meta.env.VITE_CACHE_TTL || '300000'), // 5 minutes
-  CACHE_MAX_SIZE: parseInt(import.meta.env.VITE_CACHE_MAX_SIZE || '100'),
+  CACHE_TTL: parseInt(import.meta.env.VITE_CACHE_TTL || '300000', 10), // 5 minutes
+  CACHE_MAX_SIZE: parseInt(import.meta.env.VITE_CACHE_MAX_SIZE || '100', 10),
 
   // Video loading
-  VIDEO_PRELOAD_COUNT: parseInt(import.meta.env.VITE_VIDEO_PRELOAD_COUNT || '5'),
-  VIDEO_CACHE_SIZE: parseInt(import.meta.env.VITE_VIDEO_CACHE_SIZE || '50'),
+  VIDEO_PRELOAD_COUNT: parseInt(import.meta.env.VITE_VIDEO_PRELOAD_COUNT || '5', 10),
+  VIDEO_CACHE_SIZE: parseInt(import.meta.env.VITE_VIDEO_CACHE_SIZE || '50', 10),
 
   // Pagination
-  DEFAULT_PAGE_SIZE: parseInt(import.meta.env.VITE_DEFAULT_PAGE_SIZE || '20'),
-  MAX_PAGE_SIZE: parseInt(import.meta.env.VITE_MAX_PAGE_SIZE || '100'),
+  DEFAULT_PAGE_SIZE: parseInt(import.meta.env.VITE_DEFAULT_PAGE_SIZE || '20', 10),
+  MAX_PAGE_SIZE: parseInt(import.meta.env.VITE_MAX_PAGE_SIZE || '100', 10),
 
   // Performance monitoring
   PERFORMANCE_SAMPLE_RATE: parseFloat(import.meta.env.VITE_PERFORMANCE_SAMPLE_RATE || '0.1'),
   PERFORMANCE_BUDGET: {
-    LCP: parseInt(import.meta.env.VITE_PERFORMANCE_LCP_BUDGET || '2500'),
-    FCP: parseInt(import.meta.env.VITE_PERFORMANCE_FCP_BUDGET || '1800'),
+    LCP: parseInt(import.meta.env.VITE_PERFORMANCE_LCP_BUDGET || '2500', 10),
+    FCP: parseInt(import.meta.env.VITE_PERFORMANCE_FCP_BUDGET || '1800', 10),
     CLS: parseFloat(import.meta.env.VITE_PERFORMANCE_CLS_BUDGET || '0.1'),
-    TTFB: parseInt(import.meta.env.VITE_PERFORMANCE_TTFB_BUDGET || '800'),
+    TTFB: parseInt(import.meta.env.VITE_PERFORMANCE_TTFB_BUDGET || '800', 10),
   },
 
   // Bundle size limits (in KB)
   BUNDLE_SIZE_BUDGET: {
-    MAIN: parseInt(import.meta.env.VITE_BUNDLE_MAIN_BUDGET || '500'),
-    VENDOR: parseInt(import.meta.env.VITE_BUNDLE_VENDOR_BUDGET || '1000'),
-    CHUNK: parseInt(import.meta.env.VITE_BUNDLE_CHUNK_BUDGET || '200'),
+    MAIN: parseInt(import.meta.env.VITE_BUNDLE_MAIN_BUDGET || '500', 10),
+    VENDOR: parseInt(import.meta.env.VITE_BUNDLE_VENDOR_BUDGET || '1000', 10),
+    CHUNK: parseInt(import.meta.env.VITE_BUNDLE_CHUNK_BUDGET || '200', 10),
   },
 } as const;
 
@@ -69,9 +69,9 @@ export const ANALYTICS_CONFIG = {
   TRACK_ERRORS: import.meta.env.VITE_TRACK_ERRORS !== 'false',
 
   // Data retention
-  LOCAL_STORAGE_TTL: parseInt(import.meta.env.VITE_ANALYTICS_LOCAL_TTL || '604800000'), // 7 days
-  BATCH_SIZE: parseInt(import.meta.env.VITE_ANALYTICS_BATCH_SIZE || '10'),
-  FLUSH_INTERVAL: parseInt(import.meta.env.VITE_ANALYTICS_FLUSH_INTERVAL || '30000'), // 30 seconds
+  LOCAL_STORAGE_TTL: parseInt(import.meta.env.VITE_ANALYTICS_LOCAL_TTL || '604800000', 10), // 7 days
+  BATCH_SIZE: parseInt(import.meta.env.VITE_ANALYTICS_BATCH_SIZE || '10', 10),
+  FLUSH_INTERVAL: parseInt(import.meta.env.VITE_ANALYTICS_FLUSH_INTERVAL || '30000', 10), // 30 seconds
 } as const;
 
 // Error Handling Configuration
@@ -93,8 +93,8 @@ export const ERROR_CONFIG = {
   ],
 
   // Rate limiting for error reports
-  MAX_ERRORS_PER_SESSION: parseInt(import.meta.env.VITE_MAX_ERRORS_PER_SESSION || '50'),
-  ERROR_THROTTLE_MS: parseInt(import.meta.env.VITE_ERROR_THROTTLE_MS || '1000'),
+  MAX_ERRORS_PER_SESSION: parseInt(import.meta.env.VITE_MAX_ERRORS_PER_SESSION || '50', 10),
+  ERROR_THROTTLE_MS: parseInt(import.meta.env.VITE_ERROR_THROTTLE_MS || '1000', 10),
 } as const;
 
 // Feature Flags
@@ -128,17 +128,17 @@ export const UI_CONFIG = {
   THEME_STORAGE_KEY: 'yt-theme-preference',
 
   // Layout
-  SIDEBAR_WIDTH: parseInt(import.meta.env.VITE_SIDEBAR_WIDTH || '280'),
-  HEADER_HEIGHT: parseInt(import.meta.env.VITE_HEADER_HEIGHT || '64'),
-  FOOTER_HEIGHT: parseInt(import.meta.env.VITE_FOOTER_HEIGHT || '80'),
+  SIDEBAR_WIDTH: parseInt(import.meta.env.VITE_SIDEBAR_WIDTH || '280', 10),
+  HEADER_HEIGHT: parseInt(import.meta.env.VITE_HEADER_HEIGHT || '64', 10),
+  FOOTER_HEIGHT: parseInt(import.meta.env.VITE_FOOTER_HEIGHT || '80', 10),
 
   // Video player
   DEFAULT_VOLUME: parseFloat(import.meta.env.VITE_DEFAULT_VOLUME || '0.8'),
   DEFAULT_QUALITY: import.meta.env.VITE_DEFAULT_QUALITY || 'auto',
-  AUTOPLAY_DELAY: parseInt(import.meta.env.VITE_AUTOPLAY_DELAY || '3000'),
+  AUTOPLAY_DELAY: parseInt(import.meta.env.VITE_AUTOPLAY_DELAY || '3000', 10),
 
   // Animations
-  ANIMATION_DURATION: parseInt(import.meta.env.VITE_ANIMATION_DURATION || '300'),
+  ANIMATION_DURATION: parseInt(import.meta.env.VITE_ANIMATION_DURATION || '300', 10),
   REDUCED_MOTION: import.meta.env.VITE_REDUCED_MOTION === 'true',
 
   // Responsive breakpoints
@@ -168,12 +168,12 @@ export const STORAGE_CONFIG = {
   },
 
   // Storage limits
-  MAX_HISTORY_ITEMS: parseInt(import.meta.env.VITE_MAX_HISTORY_ITEMS || '1000'),
-  MAX_SEARCH_HISTORY: parseInt(import.meta.env.VITE_MAX_SEARCH_HISTORY || '100'),
-  MAX_CACHE_SIZE_MB: parseInt(import.meta.env.VITE_MAX_CACHE_SIZE_MB || '50'),
+  MAX_HISTORY_ITEMS: parseInt(import.meta.env.VITE_MAX_HISTORY_ITEMS || '1000', 10),
+  MAX_SEARCH_HISTORY: parseInt(import.meta.env.VITE_MAX_SEARCH_HISTORY || '100', 10),
+  MAX_CACHE_SIZE_MB: parseInt(import.meta.env.VITE_MAX_CACHE_SIZE_MB || '50', 10),
 
   // Cleanup intervals
-  CLEANUP_INTERVAL: parseInt(import.meta.env.VITE_STORAGE_CLEANUP_INTERVAL || '86400000'), // 24 hours
+  CLEANUP_INTERVAL: parseInt(import.meta.env.VITE_STORAGE_CLEANUP_INTERVAL || '86400000', 10), // 24 hours
   CACHE_CLEANUP_THRESHOLD: parseFloat(import.meta.env.VITE_CACHE_CLEANUP_THRESHOLD || '0.8'), // 80%
 } as const;
 
@@ -183,17 +183,17 @@ export const SECURITY_CONFIG = {
   CSP_ENABLED: import.meta.env.VITE_CSP_ENABLED === 'true',
 
   // API Security
-  API_KEY_ROTATION_INTERVAL: parseInt(import.meta.env.VITE_API_KEY_ROTATION_INTERVAL || '86400000'), // 24 hours
+  API_KEY_ROTATION_INTERVAL: parseInt(import.meta.env.VITE_API_KEY_ROTATION_INTERVAL || '86400000', 10), // 24 hours
 
   // Input validation
-  MAX_INPUT_LENGTH: parseInt(import.meta.env.VITE_MAX_INPUT_LENGTH || '1000'),
+  MAX_INPUT_LENGTH: parseInt(import.meta.env.VITE_MAX_INPUT_LENGTH || '1000', 10),
   ALLOWED_FILE_TYPES: (import.meta.env.VITE_ALLOWED_FILE_TYPES || 'jpg,jpeg,png,gif,webp,mp4,webm').split(','),
-  MAX_FILE_SIZE_MB: parseInt(import.meta.env.VITE_MAX_FILE_SIZE_MB || '10'),
+  MAX_FILE_SIZE_MB: parseInt(import.meta.env.VITE_MAX_FILE_SIZE_MB || '10', 10),
 
   // Rate limiting
-  SEARCH_RATE_LIMIT: parseInt(import.meta.env.VITE_SEARCH_RATE_LIMIT || '10'), // per minute
-  COMMENT_RATE_LIMIT: parseInt(import.meta.env.VITE_COMMENT_RATE_LIMIT || '5'), // per minute
-  LIKE_RATE_LIMIT: parseInt(import.meta.env.VITE_LIKE_RATE_LIMIT || '30'), // per minute
+  SEARCH_RATE_LIMIT: parseInt(import.meta.env.VITE_SEARCH_RATE_LIMIT || '10', 10), // per minute
+  COMMENT_RATE_LIMIT: parseInt(import.meta.env.VITE_COMMENT_RATE_LIMIT || '5', 10), // per minute
+  LIKE_RATE_LIMIT: parseInt(import.meta.env.VITE_LIKE_RATE_LIMIT || '30', 10), // per minute
 } as const;
 
 // Development Configuration
@@ -206,7 +206,7 @@ export const DEV_CONFIG = {
   CONSOLE_LOGS: ENV.DEV || import.meta.env.VITE_CONSOLE_LOGS === 'true',
 
   // Testing
-  MOCK_DELAY: parseInt(import.meta.env.VITE_MOCK_DELAY || '500'),
+  MOCK_DELAY: parseInt(import.meta.env.VITE_MOCK_DELAY || '500', 10),
   MOCK_ERROR_RATE: parseFloat(import.meta.env.VITE_MOCK_ERROR_RATE || '0.1'),
 
   // Debug tools

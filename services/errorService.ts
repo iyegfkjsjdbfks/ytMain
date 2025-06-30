@@ -1,17 +1,17 @@
 interface ErrorContext {
-  userId?: string;
+  userId?: string | undefined;
   sessionId?: string;
   userAgent?: string;
   url?: string;
   timestamp: number;
-  componentStack?: string;
+  componentStack?: string | undefined;
   additionalData?: Record<string, any>;
 }
 
 interface ErrorReport {
   id: string;
   message: string;
-  stack?: string;
+  stack?: string | undefined;
   type: 'javascript' | 'network' | 'validation' | 'api' | 'performance';
   severity: 'low' | 'medium' | 'high' | 'critical';
   context: ErrorContext;
@@ -24,8 +24,8 @@ interface ErrorServiceConfig {
   enableRemoteLogging: boolean;
   enableLocalStorage: boolean;
   maxStoredErrors: number;
-  apiEndpoint?: string;
-  apiKey?: string;
+  apiEndpoint?: string | undefined;
+  apiKey?: string | undefined;
   enablePerformanceTracking: boolean;
 }
 
@@ -110,7 +110,7 @@ class ErrorService {
             severity: response.status >= 500 ? 'high' : 'medium',
             context: {
               timestamp: Date.now(),
-              url: typeof args[0] === 'string' ? args[0] : args[0].url,
+              url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
               additionalData: {
                 status: response.status,
                 statusText: response.statusText,
@@ -130,7 +130,7 @@ class ErrorService {
           severity: 'high',
           context: {
             timestamp: Date.now(),
-            url: typeof args[0] === 'string' ? args[0] : args[0].url,
+            url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
             additionalData: {
               duration,
               error: error instanceof Error ? error.message : String(error),

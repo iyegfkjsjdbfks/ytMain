@@ -396,12 +396,10 @@ global.testUtils = {
     console.error = vi.fn();
     console.warn = vi.fn();
 
-    return {
-      restore: () => {
-        console.log = originalLog;
-        console.error = originalError;
-        console.warn = originalWarn;
-      }
+    return () => {
+      console.log = originalLog;
+      console.error = originalError;
+      console.warn = originalWarn;
     };
   },
 };
@@ -446,5 +444,7 @@ declare global {
     }
   }
 
-
+  const testUtils: {
+    mockConsole: () => () => void;
+  };
 }

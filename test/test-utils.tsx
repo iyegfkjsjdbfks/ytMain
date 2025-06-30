@@ -1,6 +1,7 @@
-import React, { ReactElement } from 'react';
-import { render, RenderOptions } from '@testing-library/react';
+import React, { type ReactElement } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, type RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -19,10 +20,10 @@ export const mockVideo = (overrides = {}) => ({
     id: 'channel-1',
     name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
-    subscribers: 10000
+    subscribers: 10000,
   },
   url: 'https://example.com/video.mp4',
-  ...overrides
+  ...overrides,
 });
 
 export const mockUser = (overrides = {}) => ({
@@ -35,9 +36,9 @@ export const mockUser = (overrides = {}) => ({
   preferences: {
     theme: 'light',
     autoplay: true,
-    quality: 'auto'
+    quality: 'auto',
   },
-  ...overrides
+  ...overrides,
 });
 
 export const mockComment = (overrides = {}) => ({
@@ -47,7 +48,7 @@ export const mockComment = (overrides = {}) => ({
   timestamp: '2024-01-01T00:00:00Z',
   likes: 10,
   replies: [],
-  ...overrides
+  ...overrides,
 });
 
 export const mockPost = (overrides = {}) => ({
@@ -58,7 +59,7 @@ export const mockPost = (overrides = {}) => ({
   likes: 10,
   comments: 5,
   avatar: 'https://example.com/avatar.jpg',
-  ...overrides
+  ...overrides,
 });
 
 // Test providers wrapper
@@ -68,27 +69,26 @@ interface AllTheProvidersProps {
   initialEntries?: string[];
 }
 
-const AllTheProviders = ({ 
-  children, 
+const AllTheProviders = ({
+  children,
   queryClient,
-  initialEntries = ['/'] 
 }: AllTheProvidersProps) => {
   const testQueryClient = queryClient || new QueryClient({
     defaultOptions: {
       queries: {
         retry: false,
-        cacheTime: 0,
-        staleTime: 0
+        gcTime: 0,
+        staleTime: 0,
       },
       mutations: {
-        retry: false
-      }
+        retry: false,
+      },
     },
     logger: {
       log: () => {},
       warn: () => {},
-      error: () => {}
-    }
+      error: () => {},
+    },
   });
 
   return (
@@ -108,20 +108,19 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
 
 const customRender = (
   ui: ReactElement,
-  options: CustomRenderOptions = {}
+  options: CustomRenderOptions = {},
 ) => {
   const { queryClient, initialEntries, ...renderOptions } = options;
-  
+
   return render(ui, {
     wrapper: ({ children }) => (
-      <AllTheProviders 
-        queryClient={queryClient} 
-        initialEntries={initialEntries}
+      <AllTheProviders
+        queryClient={queryClient || undefined}
       >
         {children}
       </AllTheProviders>
     ),
-    ...renderOptions
+    ...renderOptions,
   });
 };
 
@@ -131,21 +130,21 @@ export const mockIntersectionObserver = () => {
   mockIntersectionObserver.mockReturnValue({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn()
+    disconnect: vi.fn(),
   });
-  
+
   Object.defineProperty(window, 'IntersectionObserver', {
     writable: true,
     configurable: true,
-    value: mockIntersectionObserver
+    value: mockIntersectionObserver,
   });
-  
+
   Object.defineProperty(global, 'IntersectionObserver', {
     writable: true,
     configurable: true,
-    value: mockIntersectionObserver
+    value: mockIntersectionObserver,
   });
-  
+
   return mockIntersectionObserver;
 };
 
@@ -154,15 +153,15 @@ export const mockResizeObserver = () => {
   mockResizeObserver.mockReturnValue({
     observe: vi.fn(),
     unobserve: vi.fn(),
-    disconnect: vi.fn()
+    disconnect: vi.fn(),
   });
-  
+
   Object.defineProperty(window, 'ResizeObserver', {
     writable: true,
     configurable: true,
-    value: mockResizeObserver
+    value: mockResizeObserver,
   });
-  
+
   return mockResizeObserver;
 };
 
@@ -175,20 +174,20 @@ export const mockMatchMedia = (matches = false) => {
     removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn()
+    dispatchEvent: vi.fn(),
   }));
-  
+
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: mockMatchMedia
+    value: mockMatchMedia,
   });
-  
+
   return mockMatchMedia;
 };
 
 export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
-  
+
   const mockStorage = {
     getItem: vi.fn((key: string) => store[key] || null),
     setItem: vi.fn((key: string, value: string) => {
@@ -201,20 +200,20 @@ export const mockLocalStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn()
+    key: vi.fn(),
   };
-  
+
   Object.defineProperty(window, 'localStorage', {
     value: mockStorage,
-    writable: true
+    writable: true,
   });
-  
+
   return mockStorage;
 };
 
 export const mockSessionStorage = () => {
   const store: Record<string, string> = {};
-  
+
   const mockStorage = {
     getItem: vi.fn((key: string) => store[key] || null),
     setItem: vi.fn((key: string, value: string) => {
@@ -227,21 +226,21 @@ export const mockSessionStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn()
+    key: vi.fn(),
   };
-  
+
   Object.defineProperty(window, 'sessionStorage', {
     value: mockStorage,
-    writable: true
+    writable: true,
   });
-  
+
   return mockStorage;
 };
 
 // Mock fetch with response helpers
 export const mockFetch = () => {
   const mockFetch = vi.fn();
-  
+
   const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
     status: options.status ?? 200,
@@ -249,16 +248,16 @@ export const mockFetch = () => {
     text: vi.fn().mockResolvedValue(JSON.stringify(data)),
     blob: vi.fn().mockResolvedValue(new Blob([JSON.stringify(data)])),
     headers: new Headers(),
-    statusText: 'OK'
+    statusText: 'OK',
   });
-  
+
   mockFetch.mockResolvedValue(mockResponse({}));
-  
+
   Object.defineProperty(global, 'fetch', {
     value: mockFetch,
-    writable: true
+    writable: true,
   });
-  
+
   return { mockFetch, mockResponse };
 };
 
@@ -275,15 +274,15 @@ export const mockPerformance = () => {
     memory: {
       usedJSHeapSize: 1000000,
       totalJSHeapSize: 2000000,
-      jsHeapSizeLimit: 4000000
-    }
+      jsHeapSizeLimit: 4000000,
+    },
   };
-  
+
   Object.defineProperty(global, 'performance', {
     value: mockPerformance,
-    writable: true
+    writable: true,
   });
-  
+
   return mockPerformance;
 };
 
@@ -291,14 +290,14 @@ export const mockPerformance = () => {
 export const mockURL = () => {
   const mockURL = {
     createObjectURL: vi.fn(() => 'blob:mock-url'),
-    revokeObjectURL: vi.fn()
+    revokeObjectURL: vi.fn(),
   };
-  
+
   Object.defineProperty(global, 'URL', {
     value: mockURL,
-    writable: true
+    writable: true,
   });
-  
+
   return mockURL;
 };
 
@@ -317,19 +316,19 @@ export const mockVideoElement = () => {
     playbackRate: 1,
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn()
+    dispatchEvent: vi.fn(),
   };
-  
+
   Object.defineProperty(global.HTMLMediaElement.prototype, 'play', {
     value: mockVideo.play,
-    writable: true
+    writable: true,
   });
-  
+
   Object.defineProperty(global.HTMLMediaElement.prototype, 'pause', {
     value: mockVideo.pause,
-    writable: true
+    writable: true,
   });
-  
+
   return mockVideo;
 };
 
@@ -343,18 +342,18 @@ export const createMockQueryClient = () => {
     defaultOptions: {
       queries: {
         retry: false,
-        cacheTime: 0,
-        staleTime: 0
+        gcTime: 0,
+        staleTime: 0,
       },
       mutations: {
-        retry: false
-      }
+        retry: false,
+      },
     },
     logger: {
       log: () => {},
       warn: () => {},
-      error: () => {}
-    }
+      error: () => {},
+    },
   });
 };
 
@@ -369,7 +368,7 @@ export const setupTestEnvironment = () => {
   mockURL();
   mockVideoElement();
   mockFetch();
-  
+
   // Mock console methods to reduce noise in tests
   vi.spyOn(console, 'log').mockImplementation(() => {});
   vi.spyOn(console, 'warn').mockImplementation(() => {});

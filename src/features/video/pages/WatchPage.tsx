@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import { useParams, Link } from 'react-router-dom';
 
 import { YouTubePlayer } from '../../../../components/YouTubePlayer';
 import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
-import { VideoPlayer } from '../components/VideoPlayer';
 import VideoCard from '../components/VideoCard';
+import { VideoPlayer } from '../components/VideoPlayer';
 
 import type { Video } from '../../../types/core';
 
@@ -106,12 +107,12 @@ const WatchPage: React.FC = () => {
           likeCount: 8934,
           dislikeCount: 127,
           favoriteCount: 0,
-          commentCount: 342
+          commentCount: 342,
         },
         topicDetails: {
           topicIds: [],
           relevantTopicIds: [],
-          topicCategories: []
+          topicCategories: [],
         },
         contentDetails: {
           duration: 'PT57M0S',
@@ -120,8 +121,8 @@ const WatchPage: React.FC = () => {
           caption: 'false',
           licensedContent: false,
           contentRating: {},
-          projection: 'rectangular'
-        }
+          projection: 'rectangular',
+        },
       };
       setVideo(mockVideo);
     } catch (error) {
@@ -181,12 +182,12 @@ const WatchPage: React.FC = () => {
             likeCount: 890,
             dislikeCount: 12,
             favoriteCount: 0,
-            commentCount: 156
+            commentCount: 156,
           },
           topicDetails: {
             topicIds: [],
             relevantTopicIds: [],
-            topicCategories: []
+            topicCategories: [],
           },
           contentDetails: {
             duration: 'PT28M45S',
@@ -195,8 +196,8 @@ const WatchPage: React.FC = () => {
             caption: 'false',
             licensedContent: false,
             contentRating: {},
-            projection: 'rectangular'
-          }
+            projection: 'rectangular',
+          },
         },
       ];
       setRecommendedVideos(mockRecommendations);
@@ -279,7 +280,7 @@ const WatchPage: React.FC = () => {
                   <span>•</span>
                   <span>{new Date(video.publishedAt || video.uploadedAt || video.createdAt).toLocaleDateString()}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   {/* Like Button */}
                   <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
@@ -288,7 +289,7 @@ const WatchPage: React.FC = () => {
                     </svg>
                     <span>{(video.likeCount || video.likes || 0).toLocaleString()}</span>
                   </button>
-                  
+
                   {/* Dislike Button */}
                   {video.dislikeCount && (
                     <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
@@ -298,7 +299,7 @@ const WatchPage: React.FC = () => {
                       <span>{video.dislikeCount.toLocaleString()}</span>
                     </button>
                   )}
-                  
+
                   {/* Share Button */}
                   <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,11 +319,11 @@ const WatchPage: React.FC = () => {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                 </Link>
-                
+
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <div>
-                      <Link 
+                      <Link
                         to={`/channel/${video.channelId}`}
                         className="font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       >
@@ -332,18 +333,18 @@ const WatchPage: React.FC = () => {
                         {video.statistics?.viewCount ? `${video.statistics.viewCount.toLocaleString()} total views` : 'Channel'}
                       </p>
                     </div>
-                    
+
                     <button className="px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium">
                       Subscribe
                     </button>
                   </div>
-                  
+
                   {/* Video Description */}
                   <div className="mt-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                     <div className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap">
                       {video.description}
                     </div>
-                    
+
                     {/* Tags */}
                     {video.tags && video.tags.length > 0 && (
                       <div className="mt-4 flex flex-wrap gap-2">
@@ -357,7 +358,7 @@ const WatchPage: React.FC = () => {
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Additional Metadata */}
                     <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-neutral-600 dark:text-neutral-400">
                       <div>
@@ -372,8 +373,8 @@ const WatchPage: React.FC = () => {
                         <span className="font-medium">License:</span> {video.license || 'Standard YouTube License'}
                       </div>
                       <div>
-                        <span className="font-medium">Duration:</span> {typeof video.duration === 'number' ? 
-                          `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` : 
+                        <span className="font-medium">Duration:</span> {typeof video.duration === 'number' ?
+                          `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` :
                           video.duration
                         }
                       </div>

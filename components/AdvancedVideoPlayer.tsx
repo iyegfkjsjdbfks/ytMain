@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -13,6 +14,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useVideoPlayer } from '../hooks';
+
 import type { Video } from '../types';
 
 interface Chapter {
@@ -78,13 +80,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const [showChapters, setShowChapters] = useState(false);
   const [selectedQuality, setSelectedQuality] = useState('auto');
-  const [, setIsDragging] = useState(false);
+  // const [isDragging] = useState(false); // Not used yet
   const [previewTime, setPreviewTime] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
   const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
   const [autoplayNext, setAutoplayNext] = useState(true);
   const [annotations, setAnnotations] = useState(true);
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -95,7 +97,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);
-    
+
     if (hours > 0) {
       return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
@@ -105,14 +107,16 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   // Get current chapter
   const getCurrentChapter = (): Chapter | undefined => {
     return chapters.find(
-      (chapter) => state.currentTime >= chapter.startTime && state.currentTime < chapter.endTime
+      (chapter) => state.currentTime >= chapter.startTime && state.currentTime < chapter.endTime,
     );
   };
 
   // Handle progress bar interaction
   const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!progressRef.current || !state.duration) return;
-    
+    if (!progressRef.current || !state.duration) {
+return;
+}
+
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const newTime = (clickX / rect.width) * state.duration;
@@ -120,8 +124,10 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   }, [state.duration, actions]);
 
   const handleProgressMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!progressRef.current || !state.duration) return;
-    
+    if (!progressRef.current || !state.duration) {
+return;
+}
+
     const rect = progressRef.current.getBoundingClientRect();
     const hoverX = e.clientX - rect.left;
     const hoverTime = (hoverX / rect.width) * state.duration;
@@ -135,8 +141,10 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
 
   // Keyboard shortcuts
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) {
+return;
+}
+
     switch (e.code) {
       case 'Space':
         e.preventDefault();
@@ -186,9 +194,9 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
     }
-    
+
     setShowControls(true);
-    
+
     if (state.isPlaying) {
       controlsTimeoutRef.current = setTimeout(() => {
         setShowControls(false);
@@ -227,8 +235,10 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
 
   // Picture-in-picture
   const togglePictureInPicture = useCallback(async () => {
-    if (!videoRef.current) return;
-    
+    if (!videoRef.current) {
+return;
+}
+
     try {
       if (document.pictureInPictureElement) {
         await document.exitPictureInPicture();
@@ -244,7 +254,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('click', handleClickOutside);
-    
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('click', handleClickOutside);
@@ -264,7 +274,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const bufferPercentage = state.buffered * 100;
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative bg-black rounded-lg overflow-hidden group ${className}`}
       onMouseMove={handleMouseMove}
@@ -283,7 +293,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       {/* Loading Overlay */}
       {state.isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
         </div>
       )}
 
@@ -305,7 +315,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
       )}
 
       {/* Controls Overlay */}
-      <div 
+      <div
         className={`absolute inset-0 transition-opacity duration-300 ${
           showControls || !state.isPlaying ? 'opacity-100' : 'opacity-0'
         }`}
@@ -328,7 +338,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
           {/* Progress Bar */}
           <div className="mb-4">
-            <div 
+            <div
               ref={progressRef}
               className="relative h-2 bg-white bg-opacity-30 rounded-full cursor-pointer group"
               onClick={handleProgressClick}
@@ -336,23 +346,23 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
               onMouseLeave={handleProgressMouseLeave}
             >
               {/* Buffer Bar */}
-              <div 
+              <div
                 className="absolute top-0 left-0 h-full bg-white bg-opacity-50 rounded-full"
                 style={{ width: `${bufferPercentage}%` }}
               />
-              
+
               {/* Progress Bar */}
-              <div 
+              <div
                 className="absolute top-0 left-0 h-full bg-red-600 rounded-full"
                 style={{ width: `${progressPercentage}%` }}
               />
-              
+
               {/* Progress Handle */}
-              <div 
+              <div
                 className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 style={{ left: `calc(${progressPercentage}% - 8px)` }}
               />
-              
+
               {/* Chapter Markers */}
               {chapters.map((chapter, index) => {
                 const markerPosition = state.duration ? (chapter.startTime / state.duration) * 100 : 0;
@@ -365,10 +375,10 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                   />
                 );
               })}
-              
+
               {/* Time Preview */}
               {showPreview && (
-                <div 
+                <div
                   className="absolute bottom-full mb-2 px-2 py-1 bg-black bg-opacity-75 text-white text-xs rounded whitespace-nowrap transform -translate-x-1/2"
                   style={{ left: `${(previewTime / state.duration) * 100}%` }}
                 >
@@ -423,7 +433,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                     <SpeakerWaveIcon className="w-6 h-6" />
                   )}
                 </button>
-                
+
                 <div className="w-0 group-hover:w-20 overflow-hidden transition-all duration-200">
                   <input
                     type="range"
@@ -453,7 +463,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                   >
                     <span className="text-sm">Chapters</span>
                   </button>
-                  
+
                   {showChapters && (
                     <div className="absolute bottom-full right-0 mb-2 w-64 max-h-48 overflow-y-auto bg-black bg-opacity-90 rounded-lg">
                       {chapters.map((chapter, index) => (
@@ -490,7 +500,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                 >
                   <Cog6ToothIcon className="w-6 h-6" />
                 </button>
-                
+
                 {showSettings && (
                   <div className="absolute bottom-full right-0 mb-2 w-64 bg-black bg-opacity-90 rounded-lg overflow-hidden">
                     {/* Quality Settings */}
@@ -505,7 +515,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                           <ChevronUpIcon className={`w-4 h-4 transition-transform ${showQualityMenu ? 'rotate-180' : ''}`} />
                         </div>
                       </button>
-                      
+
                       {showQualityMenu && (
                         <div className="bg-black bg-opacity-50">
                           {VIDEO_QUALITIES.map((quality) => (
@@ -542,7 +552,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                           <ChevronUpIcon className={`w-4 h-4 transition-transform ${showSpeedMenu ? 'rotate-180' : ''}`} />
                         </div>
                       </button>
-                      
+
                       {showSpeedMenu && (
                         <div className="bg-black bg-opacity-50">
                           {PLAYBACK_RATES.map((rate) => (
@@ -574,7 +584,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                           className="rounded"
                         />
                       </label>
-                      
+
                       <label className="flex items-center justify-between cursor-pointer">
                         <span>Autoplay</span>
                         <input
@@ -584,7 +594,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
                           className="rounded"
                         />
                       </label>
-                      
+
                       <label className="flex items-center justify-between cursor-pointer">
                         <span>Annotations</span>
                         <input

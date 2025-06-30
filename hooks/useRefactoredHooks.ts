@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-
 import { useUnifiedApp } from '../contexts/UnifiedAppContext';
 
 /**
@@ -73,7 +72,7 @@ export function useThrottle<T>(value: T, delay: number): T {
       setThrottledValue(value);
       return;
     }
-
+    
     const timer = setTimeout(() => {
       lastExecuted.current = Date.now();
       setThrottledValue(value);

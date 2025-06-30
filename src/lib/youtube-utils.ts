@@ -175,6 +175,9 @@ export class YouTubePlayer {
 
       await checkYT();
 
+      if (!window.YT) {
+        throw new Error('YouTube API not available');
+      }
       this.player = new window.YT.Player(this.elementId, {
         height: this.options.height || '360',
         width: this.options.width || '640',

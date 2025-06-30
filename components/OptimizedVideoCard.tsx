@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { memo, useCallback, useEffect, useMemo, useRef, useState, useReducer } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent, KeyboardEvent } from 'react';
 
 import {

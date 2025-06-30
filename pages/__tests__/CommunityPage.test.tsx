@@ -141,10 +141,10 @@ describe('CommunityPage', () => {
     });
   });
 
-  it('displays loading state', () => {
-    const { useRefactoredHooks } = require('../../hooks/useRefactoredHooks');
+  it('displays loading state', async () => {
+    const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
-    vi.mocked(useRefactoredHooks.useRefactoredHooks).mockReturnValue({
+    vi.mocked(useRefactoredHooks).mockReturnValue({
       posts: [],
       loading: true,
       error: null,
@@ -158,10 +158,10 @@ describe('CommunityPage', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
-  it('displays error state', () => {
-    const { useRefactoredHooks } = require('../../hooks/useRefactoredHooks');
+  it('displays error state', async () => {
+    const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
 
-    vi.mocked(useRefactoredHooks.useRefactoredHooks).mockReturnValue({
+    vi.mocked(useRefactoredHooks).mockReturnValue({
       posts: [],
       loading: false,
       error: 'Failed to load posts',

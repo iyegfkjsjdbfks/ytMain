@@ -104,7 +104,6 @@ export const useWatchPage = () => {
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
 
 
-
   // Mock like count
   const mockLikeCount = 15420;
 
@@ -539,7 +538,6 @@ newDisliked = false;
     // Related videos
     allRelatedVideos,
     displayedRelatedVideos,
-
 
 
     // Constants

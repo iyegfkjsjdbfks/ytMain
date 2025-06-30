@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { ReactNode, RefObject, MouseEvent } from 'react';
+
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {

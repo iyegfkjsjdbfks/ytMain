@@ -71,6 +71,31 @@ export interface Video extends BaseEntity {
   channelName: string;
   channelId: string;
   channelAvatarUrl: string;
+  // Additional properties needed by components
+  likeCount?: number;
+  dislikeCount?: number;
+  license?: string;
+  statistics?: {
+    viewCount: number;
+    likeCount: number;
+    dislikeCount: number;
+    favoriteCount: number;
+    commentCount: number;
+  };
+  topicDetails?: {
+    topicIds: string[];
+    relevantTopicIds: string[];
+    topicCategories: string[];
+  };
+  contentDetails?: {
+    duration: string;
+    dimension: string;
+    definition: string;
+    caption: string;
+    licensedContent: boolean;
+    contentRating: Record<string, any>;
+    projection: string;
+  };
   channel?: {
     id: string;
     name: string;

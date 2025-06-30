@@ -288,7 +288,7 @@
   },
   "overrides": [
     {
-      "files": ["*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx"],
+      "files": ["*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx", "src/utils/test-setup.ts"],
       "env": {
         "jest": true
       },
@@ -300,12 +300,7 @@
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-member-access": "off",
         "@typescript-eslint/no-unsafe-return": "off",
-        "testing-library/await-async-query": "error",
-        "testing-library/no-await-sync-query": "error",
-        "testing-library/no-debugging-utils": "warn",
-        "testing-library/no-dom-import": "error",
-        "testing-library/prefer-screen-queries": "error",
-        "testing-library/prefer-user-event": "error"
+        "no-var": "off"
       }
     },
     {

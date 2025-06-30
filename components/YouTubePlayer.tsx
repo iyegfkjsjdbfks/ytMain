@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+
 import type { YouTubeSearchResult } from '../services/googleSearchService';
 import type { Video } from '../src/types/core';
-import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
 // YouTube Player API types
 declare global {
   interface Window {
-    YT: YT;
+    YT?: YT;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
@@ -197,6 +198,9 @@ return;
       }
 
       // Create new player
+      if (!window.YT) {
+        throw new Error('YouTube API not available');
+      }
       ytPlayerRef.current = new window.YT.Player(playerIdRef.current, {
         height,
         width,

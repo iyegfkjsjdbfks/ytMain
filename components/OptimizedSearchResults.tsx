@@ -20,7 +20,6 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
 
   // Convert YouTubeSearchResult or GoogleSearchResult to Video
   const searchResult = item;
-  const now = new Date().toISOString();
   return {
     id: searchResult.id,
     title: searchResult.title,
@@ -31,15 +30,13 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
     views: '0',
     likes: 0,
     dislikes: 0,
-    uploadedAt: searchResult.uploadedAt || now,
+    uploadedAt: searchResult.uploadedAt || new Date().toISOString(),
     channelName: searchResult.channelName,
     channelId: searchResult.channelId || 'unknown',
     channelAvatarUrl: searchResult.channelAvatarUrl || '',
     category: '',
     tags: [],
     visibility: 'public' as const,
-    createdAt: now,
-    updatedAt: now,
   };
 };
 
@@ -225,7 +222,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   }, [isIntersecting, hasMore, loading, onLoadMore]);
 
   // Memoized data for virtualized list
-  const listData = useMemo((): VirtualizedItemProps['data'] => ({
+  const listData = useMemo(() => ({
     items: allResults,
     onVideoClick,
     itemHeight,

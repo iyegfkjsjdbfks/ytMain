@@ -1,4 +1,5 @@
 import { forwardRef, type ReactNode } from 'react';
+
 import { getYouTubePlayerType } from '../services/settingsService';
 
 
@@ -30,7 +31,7 @@ interface YouTubePlayerWrapperProps {
 }
 
 // Union type for player methods
-export type YouTubePlayerWrapperMethods = {};
+export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
   props,
@@ -38,7 +39,6 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 ) => {
   const playerType = getYouTubePlayerType();
   console.log('YouTubePlayerWrapper rendering with playerType:', playerType);
-
 
 
   // Create mock video object for YouTubePlayer component

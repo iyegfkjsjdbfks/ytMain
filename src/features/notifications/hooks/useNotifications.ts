@@ -55,12 +55,11 @@ export function useNotifications() {
 
     // Show browser notification if permission granted
     if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-      const browserNotification = new Notification(notification.title, {
+      new Notification(notification.title, {
         body: notification.message,
         icon: notification.fromUserAvatar || '/favicon.ico',
         tag: notification.id,
       });
-      // Notification is created for side effects
     }
 
     // Play notification sound (optional)
@@ -121,7 +120,7 @@ export function useNotificationSettings() {
   });
 
   const updateSettingsMutation = useMutation({
-    mutationFn: (newSettings: NotificationSettings) => notificationService.updateNotificationSettings(newSettings),
+    mutationFn: (newSettings: any) => notificationService.updateNotificationSettings(newSettings),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notification-settings'] });
     },

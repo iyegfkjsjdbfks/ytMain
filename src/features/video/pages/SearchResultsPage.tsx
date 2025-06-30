@@ -1,9 +1,10 @@
-import type React from 'react';
+import { useState, useEffect } from 'react';
 
-import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
 import { searchCombined } from '../../../../services/googleSearchService';
 import VideoCard from '../components/VideoCard';
+
 import type { Video } from '../../../types/core';
 
 /**
@@ -17,7 +18,9 @@ const SearchResultsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!query) return;
+    if (!query) {
+return;
+}
 
     const performSearch = async () => {
       setLoading(true);
@@ -63,12 +66,12 @@ const SearchResultsPage: React.FC = () => {
               likeCount: video.likeCount || 0,
               dislikeCount: video.dislikeCount || 0,
               favoriteCount: 0,
-              commentCount: video.commentCount || 0
+              commentCount: video.commentCount || 0,
             },
             topicDetails: {
               topicIds: [],
               relevantTopicIds: [],
-              topicCategories: []
+              topicCategories: [],
             },
             contentDetails: {
               duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) % 60}S`,
@@ -77,12 +80,12 @@ const SearchResultsPage: React.FC = () => {
               caption: 'false',
               licensedContent: false,
               contentRating: {},
-              projection: 'rectangular'
+              projection: 'rectangular',
             },
             // Legacy fields for compatibility
             views: video.viewCount || 0,
             likes: video.likeCount || 0,
-            createdAt: video.uploadedAt
+            createdAt: video.uploadedAt,
           })),
           ...results.googleSearchVideos.map(video => ({
             id: video.id,
@@ -121,12 +124,12 @@ const SearchResultsPage: React.FC = () => {
               likeCount: video.likeCount || 0,
               dislikeCount: video.dislikeCount || 0,
               favoriteCount: 0,
-              commentCount: video.commentCount || 0
+              commentCount: video.commentCount || 0,
             },
             topicDetails: {
               topicIds: [],
               relevantTopicIds: [],
-              topicCategories: []
+              topicCategories: [],
             },
             contentDetails: {
               duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) % 60}S`,
@@ -135,13 +138,13 @@ const SearchResultsPage: React.FC = () => {
               caption: 'false',
               licensedContent: false,
               contentRating: {},
-              projection: 'rectangular'
+              projection: 'rectangular',
             },
             // Legacy fields for compatibility
             views: video.viewCount || 0,
             likes: video.likeCount || 0,
-            createdAt: video.uploadedAt
-          }))
+            createdAt: video.uploadedAt,
+          })),
         ];
         setVideos(videoResults);
       } catch (err) {
@@ -165,26 +168,26 @@ const SearchResultsPage: React.FC = () => {
       <p className="text-gray-600 mb-4">
         {query ? `Showing results for: "${query}"` : 'No search query provided'}
       </p>
-      
+
       {loading && (
         <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
           <span className="ml-2 text-gray-600">Searching...</span>
         </div>
       )}
-      
+
       {error && (
         <div className="p-4 bg-red-50 rounded-lg border border-red-200 text-red-700 mb-4">
           <p>Error: {error}</p>
         </div>
       )}
-      
+
       {!loading && !error && videos.length === 0 && query && (
         <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200 text-yellow-700">
           <p>No videos found for "{query}". Try a different search term.</p>
         </div>
       )}
-      
+
       {!loading && videos.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {videos.map((video) => (
@@ -196,7 +199,7 @@ const SearchResultsPage: React.FC = () => {
           ))}
         </div>
       )}
-      
+
       {!query && (
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 text-blue-700">
           <p>Enter a search query to find videos.</p>

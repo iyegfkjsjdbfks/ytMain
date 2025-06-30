@@ -2,11 +2,10 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import { analyticsService } from '../services/analyticsService';
+import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
 
 import { usePerformanceMonitor } from './usePerformanceMonitor';
 
-import type { AnalyticsEvent } from '../services/analyticsService';
 
 interface UseAnalyticsOptions {
   trackPageViews?: boolean;

@@ -3,7 +3,7 @@ interface AnalyticsEvent {
   properties?: Record<string, any>;
   timestamp: number;
   sessionId: string;
-  userId?: string;
+  userId?: string | undefined;
   category: 'user_action' | 'performance' | 'error' | 'navigation' | 'video' | 'engagement';
 }
 
@@ -15,7 +15,7 @@ interface UserSession {
   events: AnalyticsEvent[];
   userAgent: string;
   referrer: string;
-  userId?: string;
+  userId?: string | undefined;
 }
 
 interface AnalyticsConfig {
@@ -23,8 +23,8 @@ interface AnalyticsConfig {
   enableRemoteTracking: boolean;
   enablePerformanceTracking: boolean;
   enableErrorTracking: boolean;
-  apiEndpoint?: string;
-  apiKey?: string;
+  apiEndpoint?: string | undefined;
+  apiKey?: string | undefined;
   batchSize: number;
   flushInterval: number; // milliseconds
   maxStoredEvents: number;
@@ -47,7 +47,7 @@ class AnalyticsService {
   private session: UserSession;
   private eventQueue: AnalyticsEvent[] = [];
   private flushTimer?: NodeJS.Timeout;
-  private pageLoadTime: number;
+  // private pageLoadTime: number; // Not used yet
   private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
   constructor(config: Partial<AnalyticsConfig> = {}) {
@@ -242,16 +242,16 @@ class AnalyticsService {
     window.addEventListener('popstate', checkForRouteChange);
 
     // Override pushState and replaceState to catch programmatic navigation
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
+    const originalPushState = history.pushState.bind(history);
+    const originalReplaceState = history.replaceState.bind(history);
 
-    history.pushState = function(...args) {
-      originalPushState.apply(history, args);
+    history.pushState = (...args) => {
+      originalPushState(...args);
       setTimeout(checkForRouteChange, 0);
     };
 
-    history.replaceState = function(...args) {
-      originalReplaceState.apply(history, args);
+    history.replaceState = (...args) => {
+      originalReplaceState(...args);
       setTimeout(checkForRouteChange, 0);
     };
   }

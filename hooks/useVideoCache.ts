@@ -109,7 +109,7 @@ throw new Error('Failed to fetch video');
         return response.json();
       },
       staleTime: opts.staleTime,
-      cacheTime: opts.cacheTime,
+      gcTime: opts.cacheTime,
     });
   }, [queryClient, opts.staleTime, opts.cacheTime]);
 
@@ -229,7 +229,7 @@ throw new Error('Failed to fetch video');
       return response.json();
     },
     staleTime: opts.staleTime,
-    cacheTime: opts.cacheTime,
+    gcTime: opts.cacheTime,
     enabled: !!videoId,
   });
 };
