@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState, useReducer } from 'react';
 import type { MouseEvent, KeyboardEvent } from 'react';
 
@@ -18,7 +19,7 @@ import { cn } from '../utils/cn';
 import { withMemo } from '../utils/componentOptimizations';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';
-import { isYouTubeUrl } from '../lib/youtube-utils';
+import { isYouTubeUrl } from '../src/lib/youtube-utils';
 
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
 import YouTubePlayer from './YouTubePlayer';

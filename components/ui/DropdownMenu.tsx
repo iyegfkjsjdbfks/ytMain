@@ -1,5 +1,5 @@
+import * as React from 'react';
 import type { ReactNode, RefObject, MouseEvent } from 'react';
-
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
@@ -12,7 +12,7 @@ interface DropdownMenuProps {
 }
 
 interface DropdownMenuItemProps {
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
   className?: string;
   variant?: 'default' | 'danger';

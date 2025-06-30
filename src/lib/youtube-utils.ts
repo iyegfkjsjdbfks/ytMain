@@ -1,5 +1,79 @@
-// Type-safe YouTube URL handling
-// YT interface is declared in components/YouTubePlayer.tsx
+// YouTube utilities for video handling and API integration
+
+// YouTube API type declarations
+interface YT {
+  Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
+  PlayerState: {
+    UNSTARTED: number;
+    ENDED: number;
+    PLAYING: number;
+    PAUSED: number;
+    BUFFERING: number;
+    CUED: number;
+  };
+}
+
+interface YTPlayerConfig {
+  height: string | number;
+  width: string | number;
+  videoId: string;
+  playerVars?: {
+    autoplay?: 0 | 1;
+    controls?: 0 | 1;
+    disablekb?: 0 | 1;
+    enablejsapi?: 0 | 1;
+    end?: number;
+    fs?: 0 | 1;
+    hl?: string;
+    iv_load_policy?: 1 | 3;
+    list?: string;
+    listType?: 'playlist' | 'user_uploads';
+    loop?: 0 | 1;
+    modestbranding?: 0 | 1;
+    origin?: string;
+    playlist?: string;
+    playsinline?: 0 | 1;
+    rel?: 0 | 1;
+    start?: number;
+    widget_referrer?: string;
+  };
+  events?: {
+    onReady?: (event: { target: YTPlayer }) => void;
+    onStateChange?: (event: { target: YTPlayer; data: number }) => void;
+    onPlaybackQualityChange?: (event: { target: YTPlayer; data: string }) => void;
+    onPlaybackRateChange?: (event: { target: YTPlayer; data: number }) => void;
+    onError?: (event: { target: YTPlayer; data: number }) => void;
+    onApiChange?: (event: { target: YTPlayer }) => void;
+  };
+}
+
+interface YTPlayer {
+  playVideo(): void;
+  pauseVideo(): void;
+  stopVideo(): void;
+  seekTo(seconds: number, allowSeekAhead?: boolean): void;
+  clearVideo(): void;
+  getVideoLoadedFraction(): number;
+  getPlayerState(): number;
+  getCurrentTime(): number;
+  getDuration(): number;
+  getVideoUrl(): string;
+  getVideoEmbedCode(): string;
+  getPlaylist(): string[];
+  getPlaylistIndex(): number;
+  getPlaybackRate(): number;
+  setPlaybackRate(suggestedRate: number): void;
+  getAvailablePlaybackRates(): number[];
+  destroy(): void;
+}
+
+// Extend Window interface to include YT
+declare global {
+  interface Window {
+    YT?: YT;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
 
 /**
  * Extracts the video ID from a YouTube URL
