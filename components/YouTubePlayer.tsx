@@ -140,10 +140,27 @@ return;
         ytPlayerRef.current = null;
       }
 
-      // Ensure the container element exists and is empty
+      // Ensure the container element exists and is properly prepared
       const container = document.getElementById(playerIdRef.current);
       if (container) {
-        container.innerHTML = '';
+        // Clear any existing content safely using innerHTML to avoid removeChild errors
+        try {
+          container.innerHTML = '';
+        } catch (error) {
+          console.debug('Error clearing container:', error);
+          // Fallback: try to remove children one by one with error handling
+          try {
+            while (container.firstChild) {
+              if (container.contains(container.firstChild)) {
+                container.removeChild(container.firstChild);
+              } else {
+                break; // Exit if child is no longer in container
+              }
+            }
+          } catch (fallbackError) {
+            console.debug('Fallback container clearing failed:', fallbackError);
+          }
+        }
       }
 
       // Create new player
@@ -206,13 +223,17 @@ return;
       isMounted = false;
       if (ytPlayerRef.current) {
         try {
-          // Check if the player element still exists before destroying
+          // More robust check for player element existence
           const playerElement = document.getElementById(playerIdRef.current);
-          if (playerElement && playerElement.parentNode) {
-            ytPlayerRef.current.destroy();
+          if (playerElement && playerElement.parentNode && document.body.contains(playerElement)) {
+            // Additional check to ensure the player is still valid
+            if (typeof ytPlayerRef.current.destroy === 'function') {
+              ytPlayerRef.current.destroy();
+            }
           }
         } catch (error) {
-          console.warn('Error destroying YouTube player:', error);
+          // Silently handle cleanup errors to prevent console spam
+          console.debug('YouTube player cleanup:', error);
         }
         ytPlayerRef.current = null;
       }
