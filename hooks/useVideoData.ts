@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { getVideos, getVideosByChannelName, getSubscribedChannelNames } from '../services/mockVideoService';
+import { getVideos, getVideosByChannelName, getSubscribedChannelNames } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { parseViewCount } from '../utils/numberUtils';
 

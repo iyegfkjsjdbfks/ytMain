@@ -6,7 +6,7 @@ import { HeartIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid 
 
 import LikedVideosPageSkeleton from '../components/LoadingStates/LikedVideosPageSkeleton';
 import VideoCard from '../components/VideoCard';
-import { getLikedVideos } from '../services/mockVideoService';
+import { getLikedVideos } from '../services/realVideoService';
 
 import type { Video } from '../types';
 

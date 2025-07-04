@@ -238,19 +238,28 @@ export class VideoService {
     const cacheKey = `videos_${category}_${limit}_${pageToken || 'first'}`;
 
     try {
-      // In development, return mock data
+      // In development, return real sample videos
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
 
-        const videos = Array.from({ length: limit }, (_, i) =>
-          generateMockVideo(`${category}_${i}_${Date.now()}`, {
-            category: category === 'home' ? 'Entertainment' : category,
-          }),
-        );
+        // Import real video service
+        const { getVideos, getVideosByCategory } = await import('./realVideoService');
 
-        const nextPageToken = Math.random() > 0.3 ? `token_${Date.now()}` : undefined;
+        let videos;
+        if (category === 'home') {
+          videos = await getVideos();
+        } else {
+          videos = await getVideosByCategory(category);
+        }
+
+        // Limit results and add pagination simulation
+        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0') : 0;
+        const endIndex = Math.min(startIndex + limit, videos.length);
+        const paginatedVideos = videos.slice(startIndex, endIndex);
+
+        const nextPageToken = endIndex < videos.length ? `token_${endIndex}` : undefined;
         return {
-          videos,
+          videos: paginatedVideos,
           ...(nextPageToken && { nextPageToken }),
         };
       }
@@ -317,7 +326,10 @@ export class VideoService {
     try {
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 200));
-        return generateMockVideo(id);
+
+        // Import real video service
+        const { getVideoById } = await import('./realVideoService');
+        return await getVideoById(id);
       }
 
       const url = new URL(`${API_BASE_URL}/videos`);

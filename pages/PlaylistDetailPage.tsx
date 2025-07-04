@@ -7,7 +7,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton'; // Added import
 import PlaylistEditModal from '../components/PlaylistEditModal';
-import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/mockVideoService';
+import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/realVideoService';
 
 import type { UserPlaylist, Video } from '../types';
 

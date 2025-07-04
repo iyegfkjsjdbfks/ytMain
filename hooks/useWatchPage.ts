@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/mockVideoService';
+import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/realVideoService';
 import { unifiedDataService } from '../src/services/unifiedDataService';
 
 import type { VideoVisibility } from '../types';

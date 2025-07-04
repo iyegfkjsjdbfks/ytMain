@@ -3,7 +3,7 @@ import {  useState, useRef, useCallback  } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { uploadVideo } from '../services/mockVideoService';
+import { uploadVideo } from '../services/realVideoService';
 
 import type { VideoUploadData, UploadProgress } from '../types';
 

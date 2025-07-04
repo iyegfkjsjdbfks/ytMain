@@ -6,7 +6,7 @@ import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, Information
 import { useParams } from 'react-router-dom';
 
 import VideoCard from '../components/VideoCard';
-import { getVideos } from '../services/mockVideoService';
+import { getVideos } from '../services/realVideoService';
 
 import type { Video } from '../types';
 

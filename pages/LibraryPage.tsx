@@ -14,7 +14,7 @@ import {
   getWatchLaterVideos,
   getUserPlaylists,
   getLikedVideos,
-} from '../services/mockVideoService';
+} from '../services/realVideoService';
 
 import type { Video, UserPlaylistDetails } from '../types';
 

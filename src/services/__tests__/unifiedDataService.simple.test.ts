@@ -19,7 +19,7 @@ vi.mock('../metadataNormalizationService', () => ({
   }
 }));
 
-vi.mock('../../../services/mockVideoService', () => ({
+vi.mock('../../../services/realVideoService', () => ({
   getVideos: vi.fn(),
   getShortsVideos: vi.fn(),
   getVideosByCategory: vi.fn(),
