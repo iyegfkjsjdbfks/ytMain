@@ -55,14 +55,14 @@ export class TimeoutError extends Error {
 // Utility functions
 export function createApiUrl(endpoint: string, params?: Record<string, any>): string {
   let fullUrl: string;
-  
+
   // Handle relative base URLs (like '/api/youtube/v3') and absolute URLs
   if (API_BASE_URL.startsWith('http://') || API_BASE_URL.startsWith('https://')) {
     // Absolute URL - use new URL() constructor
     const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL : `${API_BASE_URL}/`;
     const relativeEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
     const url = new URL(relativeEndpoint, baseUrl);
-    
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -74,14 +74,14 @@ export function createApiUrl(endpoint: string, params?: Record<string, any>): st
         }
       });
     }
-    
+
     return url.toString();
-  } else {
+  }
     // Relative URL - use string concatenation
     const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL : `${API_BASE_URL}/`;
     const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
     fullUrl = `${baseUrl}${cleanEndpoint}`;
-    
+
     if (params) {
       const searchParams = new URLSearchParams();
       Object.entries(params).forEach(([key, value]) => {
@@ -98,9 +98,9 @@ export function createApiUrl(endpoint: string, params?: Record<string, any>): st
         fullUrl += `?${queryString}`;
       }
     }
-    
+
     return fullUrl;
-  }
+
 }
 
 export function createRequestConfig(config: RequestConfig = {}): RequestInit {

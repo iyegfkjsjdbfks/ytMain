@@ -3,9 +3,9 @@
  * Refactored video hooks using the new unified metadata system
  */
 
-import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
-import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
 import { videoApi, type VideoUploadData } from '../../services/api/videos';
+import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
+import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
 
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 
@@ -15,7 +15,7 @@ import type { Video, Short } from '../../types/core';
 export function useUnifiedVideos(
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
-  config?: UseApiConfig<UnifiedVideoMetadata[]>
+  config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
     ['unified-videos', limit, JSON.stringify(filters)],
@@ -48,7 +48,7 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
 export function useUnifiedTrendingVideos(
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
-  config?: UseApiConfig<UnifiedVideoMetadata[]>
+  config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
     ['unified-trending', limit, JSON.stringify(filters)],
@@ -159,7 +159,7 @@ export function useSavedVideos(config?: UseApiConfig<Video[]>) {
 // Unified Shorts hooks
 export function useUnifiedShorts(
   limit: number = 30,
-  config?: UseApiConfig<UnifiedVideoMetadata[]>
+  config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
     ['unified-shorts', String(limit)],
@@ -205,7 +205,7 @@ export function useUnifiedSearchVideos(
   query: string,
   filters: UnifiedSearchFilters = {},
   limit: number = 50,
-  config?: UseApiConfig<UnifiedVideoMetadata[]>
+  config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
     ['unified-search', query, JSON.stringify(filters), String(limit)],

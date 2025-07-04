@@ -138,9 +138,9 @@ export const getVideos = async () => sampleVideos;
 export const getVideoById = async (id: string) => sampleVideos.find(v => v.id === id) || null;
 export const getShortsVideos = async () => sampleVideos.filter(v => v.isShort);
 export const getVideosByCategory = async (category: string) => sampleVideos.filter(v => v.category === category);
-export const searchVideos = async (query: string) => sampleVideos.filter(v => 
-  v.title.toLowerCase().includes(query.toLowerCase()) || 
-  v.description.toLowerCase().includes(query.toLowerCase())
+export const searchVideos = async (query: string) => sampleVideos.filter(v =>
+  v.title.toLowerCase().includes(query.toLowerCase()) ||
+  v.description.toLowerCase().includes(query.toLowerCase()),
 );
 
 // Channel and playlist functions (simplified for now)
@@ -164,7 +164,7 @@ export const getRecentSearches = async () => ['animation', 'blender', 'short fil
 export const clearAllRecentSearches = async () => {};
 
 // Search functions
-export const getSearchSuggestions = async (query: string) => 
+export const getSearchSuggestions = async (query: string) =>
   ['animation', 'blender', 'short film', 'sample video'].filter(s => s.includes(query.toLowerCase()));
 export const removeRecentSearch = async (_search: string) => [];
 export const saveRecentSearch = async (_query: string) => {};
@@ -176,7 +176,7 @@ export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress
     { percentage: 25, status: 'uploading' as const, message: 'Uploading video file...' },
     { percentage: 50, status: 'uploading' as const, message: 'Processing video...' },
     { percentage: 75, status: 'processing' as const, message: 'Generating thumbnail...' },
-    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' }
+    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' },
   ];
 
   for (const step of progressSteps) {

@@ -28,10 +28,10 @@ export function useAsyncData<T>(
   const [data, setData] = useState<T>(initialData as T);
   const [loading, setLoading] = useState(!initialData); // Don't show loading if we have initial data
   const [error, setError] = useState<string | null>(null);
-  
+
   // Use a stable reference to prevent infinite re-renders
   const asyncFunctionRef = useRef(asyncFunction);
-  
+
   // Only update ref if function actually changed (prevent unnecessary updates)
   useEffect(() => {
     asyncFunctionRef.current = asyncFunction;
@@ -70,10 +70,10 @@ export function useAsyncData<T>(
       // Delay fetch to improve initial render performance
       const timeoutId = setTimeout(fetchData, 100);
       return () => clearTimeout(timeoutId);
-    } else {
+    }
       fetchData();
       return undefined; // Explicit return for all code paths
-    }
+
   }, [fetchData, JSON.stringify(dependencies)]);
 
   const refetch = useCallback(() => fetchData(), [fetchData]);

@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
-import type { Video } from '../types';
 import { getVideos, getVideosByCategory } from '../services/realVideoService';
+
+import type { Video } from '../types';
 
 interface UseVideoDataOptions {
   category?: string;
@@ -26,9 +27,9 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 // Real video data fetcher
 const fetchRealVideos = async (category?: string): Promise<Video[]> => {
   if (category && category !== 'all') {
-    return await getVideosByCategory(category);
+    return getVideosByCategory(category);
   }
-  return await getVideos();
+  return getVideos();
 };
 
 export const useOptimizedVideoData = ({

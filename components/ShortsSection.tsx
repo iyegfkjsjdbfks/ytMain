@@ -45,16 +45,16 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              channelAvatarUrl: video.channelAvatarUrl,
              category: video.category,
              tags: video.tags,
-             isLive: video.isLive ?? false,
+             isLive: false, // Real sample videos don't have isLive property, default to false
              isShort: video.isShort ?? true,
-             isLiked: video.isLiked ?? false,
-             isDisliked: video.isDisliked ?? false,
-             isSaved: video.isSaved ?? false,
+             isLiked: false, // Real sample videos don't track user interactions, default to false
+             isDisliked: false, // Real sample videos don't track user interactions, default to false
+             isSaved: false, // Real sample videos don't track user interactions, default to false
              visibility: video.visibility,
              createdAt: video.createdAt,
              updatedAt: video.updatedAt,
              isVertical: true,
-             definition: (video.definition === 'hd' || video.definition === 'sd') ? video.definition : 'hd',
+             definition: 'hd', // Default to HD since real sample videos don't specify definition
              // Ensure all required Short properties are present
              effects: [],
            };

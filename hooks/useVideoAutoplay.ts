@@ -42,8 +42,8 @@ return;
       actions.play().catch((error: Error) => {
         // More specific handling for common video playback issues
         const errorMessage = error.message || String(error);
-        
-        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') || 
+
+        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
             errorMessage.includes('ERR_NETWORK')) {
           console.info('Autoplay skipped due to network/cache issues:', errorMessage);
         } else {

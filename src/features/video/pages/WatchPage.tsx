@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import YouTubePlayer from '../../../../components/YouTubePlayer';
+import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
 import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
 
 import type { Video } from '../../../types/core';
 
@@ -23,7 +23,6 @@ const WatchPage: React.FC = () => {
       loadRecommendations();
     }
   }, [videoId]);
-
 
 
   const loadRecommendations = async () => {
@@ -176,7 +175,7 @@ const WatchPage: React.FC = () => {
                     className="w-9 h-9 rounded-full object-cover"
                   />
                 </Link>
-                
+
                 {/* Channel Info */}
                 <div className="flex-1 min-w-0">
                   <Link
@@ -307,7 +306,7 @@ const WatchPage: React.FC = () => {
                           <span className="font-medium">Source:</span> {video.source || 'local'}
                         </div>
                       </div>
-                      
+
                       {/* YouTube Specific Metadata */}
                       {video.source === 'youtube' && (
                         <div className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
@@ -328,7 +327,7 @@ const WatchPage: React.FC = () => {
                           </div>
                         </div>
                       )}
-                      
+
                       {/* Channel Metadata */}
                       {video.channel && (
                         <div className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
@@ -349,7 +348,7 @@ const WatchPage: React.FC = () => {
                           </div>
                         </div>
                       )}
-                      
+
                       {/* Debug Info */}
                       <details className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
                         <summary className="cursor-pointer text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200">

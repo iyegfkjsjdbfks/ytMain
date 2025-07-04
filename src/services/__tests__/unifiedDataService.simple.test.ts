@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { unifiedDataService } from '../unifiedDataService';
 
 // Mock dependencies
@@ -6,8 +7,8 @@ vi.mock('../api/youtubeService', () => ({
   youtubeService: {
     fetchVideos: vi.fn(),
     fetchChannel: vi.fn(),
-    clearCache: vi.fn()
-  }
+    clearCache: vi.fn(),
+  },
 }));
 
 vi.mock('../metadataNormalizationService', () => ({
@@ -15,8 +16,8 @@ vi.mock('../metadataNormalizationService', () => ({
     normalizeLocalVideo: vi.fn(),
     normalizeYouTubeVideo: vi.fn(),
     normalizeLocalChannel: vi.fn(),
-    normalizeYouTubeChannel: vi.fn()
-  }
+    normalizeYouTubeChannel: vi.fn(),
+  },
 }));
 
 vi.mock('../../../services/realVideoService', () => ({
@@ -25,7 +26,7 @@ vi.mock('../../../services/realVideoService', () => ({
   getVideosByCategory: vi.fn(),
   searchVideos: vi.fn(),
   getVideoById: vi.fn(),
-  getChannelById: vi.fn()
+  getChannelById: vi.fn(),
 }));
 
 describe('UnifiedDataService', () => {
@@ -37,7 +38,7 @@ describe('UnifiedDataService', () => {
   describe('Basic Functionality', () => {
     it('should have correct default configuration', () => {
       const config = unifiedDataService.getConfig();
-      
+
       expect(config.sources.local).toBe(true);
       expect(config.sources.youtube).toBe(true);
       expect(config.caching.enabled).toBe(true);
@@ -47,7 +48,7 @@ describe('UnifiedDataService', () => {
     it('should allow configuration updates', () => {
       unifiedDataService.updateConfig({
         sources: { local: true, youtube: false },
-        caching: { enabled: false, ttl: 0 }
+        caching: { enabled: false, ttl: 0 },
       });
 
       const config = unifiedDataService.getConfig();
@@ -64,7 +65,7 @@ describe('UnifiedDataService', () => {
   describe('API Methods', () => {
     it('should call getTrendingVideos without errors', async () => {
       const result = await unifiedDataService.getTrendingVideos(10);
-      
+
       expect(result).toBeDefined();
       expect(result.data).toBeDefined();
       expect(Array.isArray(result.data)).toBe(true);
@@ -74,7 +75,7 @@ describe('UnifiedDataService', () => {
 
     it('should call searchVideos with query', async () => {
       const result = await unifiedDataService.searchVideos('test query', {}, 10);
-      
+
       expect(result).toBeDefined();
       expect(result.data).toBeDefined();
       expect(Array.isArray(result.data)).toBe(true);
@@ -82,21 +83,21 @@ describe('UnifiedDataService', () => {
 
     it('should handle getVideoById calls', async () => {
       const result = await unifiedDataService.getVideoById('test-video');
-      
+
       // Should either return video data or null, not throw
       expect(result === null || typeof result === 'object').toBe(true);
     });
 
     it('should handle getChannelById calls', async () => {
       const result = await unifiedDataService.getChannelById('test-channel');
-      
+
       // Should either return channel data or null, not throw
       expect(result === null || typeof result === 'object').toBe(true);
     });
 
     it('should handle getShortsVideos calls', async () => {
       const result = await unifiedDataService.getShortsVideos(20);
-      
+
       expect(result).toBeDefined();
       expect(result.data).toBeDefined();
       expect(Array.isArray(result.data)).toBe(true);

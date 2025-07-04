@@ -291,7 +291,7 @@ return false;
     const initializeState = () => {
       // Set loading to false immediately for faster perceived performance
       dispatch({ type: 'SET_AUTH_LOADING', payload: false });
-      
+
       try {
         // Initialize auth state
         const storedUser = localStorage.getItem('youtube_clone_user');

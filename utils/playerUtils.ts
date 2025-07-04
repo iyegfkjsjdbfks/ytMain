@@ -162,7 +162,7 @@ return NaN;
     };
 
     switch (parts.length) {
-      case 3: // HH:MM:SS format
+      case 3: { // HH:MM:SS format
         const hours = parsePart(0);
         const minutes = parsePart(1);
         const seconds = parsePart(2);
@@ -172,8 +172,9 @@ return NaN;
         }
 
         return hours * 3600 + minutes * 60 + seconds;
+      }
 
-      case 2: // MM:SS format
+      case 2: { // MM:SS format
         const mins = parsePart(0);
         const secs = parsePart(1);
 
@@ -182,10 +183,12 @@ return NaN;
         }
 
         return mins * 60 + secs;
+      }
 
-      case 1: // Just seconds
+      case 1: { // Just seconds
         const sec = parsePart(0);
         return isNaN(sec) ? 0 : sec;
+      }
 
       default:
         return 0;

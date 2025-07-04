@@ -1,8 +1,8 @@
 import type * as React from 'react';
 import {  useState  } from 'react';
 
+import { realVideos } from '../../../../services/realVideoService';
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
-import { realVideos } from '../../../services/realVideoService';
 
 import type { Video, VideoVisibility } from '../types';
 

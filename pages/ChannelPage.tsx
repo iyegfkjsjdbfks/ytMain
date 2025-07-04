@@ -13,7 +13,7 @@ import {
   getChannelByName,
   getVideosByChannelName,
   getChannelPlaylists,
-  getChannelCommunityPosts
+  getChannelCommunityPosts,
 } from '../services/realVideoService';
 
 import type { Video, Channel, PlaylistSummary, CommunityPost } from '../types';

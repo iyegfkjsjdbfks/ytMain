@@ -272,7 +272,7 @@ export class VideoService {
 
       return {
         videos,
-        nextPageToken: response.nextPageToken,
+        nextPageToken: response.nextPageToken || undefined,
       };
     } catch (error) {
       console.error('Error fetching videos:', error);

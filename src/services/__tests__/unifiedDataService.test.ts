@@ -1,8 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { unifiedDataService } from '../unifiedDataService';
+
+import * as realVideoService from '../../../services/realVideoService';
 import { youtubeService } from '../api/youtubeService';
 import { metadataNormalizationService } from '../metadataNormalizationService';
-import * as realVideoService from '../../../services/realVideoService';
+import { unifiedDataService } from '../unifiedDataService';
 
 // Mock dependencies
 vi.mock('../api/youtubeService');
@@ -26,7 +27,7 @@ describe('UnifiedDataService', () => {
   describe('Constructor and Configuration', () => {
     it('should initialize with default configuration', () => {
       const config = unifiedDataService.getConfig();
-      
+
       expect(config.sources.local).toBe(true);
       expect(config.sources.youtube).toBe(true);
       expect(config.limits.local).toBe(25);
@@ -40,7 +41,7 @@ describe('UnifiedDataService', () => {
       const customService = new UnifiedDataService({
         sources: { local: false, youtube: true },
         limits: { youtube: 50 },
-        mixing: { strategy: 'source-priority' }
+        mixing: { strategy: 'source-priority' },
       });
 
       const config = customService.getConfig();
@@ -53,7 +54,7 @@ describe('UnifiedDataService', () => {
     it('should update configuration dynamically', () => {
       service.updateConfig({
         sources: { local: false, youtube: true },
-        caching: { enabled: false, ttl: 0 }
+        caching: { enabled: false, ttl: 0 },
       });
 
       const config = service.getConfig();
@@ -67,7 +68,7 @@ describe('UnifiedDataService', () => {
       // Mock local video service
       mockVideoServiceModule.getVideos.mockResolvedValue([
         { id: 'local-1', title: 'Local Video 1' } as any,
-        { id: 'local-2', title: 'Local Video 2' } as any
+        { id: 'local-2', title: 'Local Video 2' } as any,
       ]);
       mockVideoServiceModule.getShortsVideos.mockResolvedValue([]);
       mockVideoServiceModule.getVideosByCategory.mockResolvedValue([]);
@@ -75,7 +76,7 @@ describe('UnifiedDataService', () => {
       // Mock metadata normalization
       mockMetadataService.normalizeLocalVideo.mockImplementation((video: any) => ({
         ...video,
-        source: 'local'
+        source: 'local',
       }));
     });
 
@@ -90,9 +91,9 @@ describe('UnifiedDataService', () => {
 
     it('should filter by type when specified', async () => {
       mockVideoServiceModule.getShortsVideos.mockResolvedValue([
-        { id: 'short-1', title: 'Short Video 1', isShort: true } as any
+        { id: 'short-1', title: 'Short Video 1', isShort: true } as any,
       ]);
-      
+
       const result = await service.getTrendingVideos(10, { type: 'short' });
 
       expect(mockVideoServiceModule.getShortsVideos).toHaveBeenCalled();
@@ -101,9 +102,9 @@ describe('UnifiedDataService', () => {
 
     it('should filter by category when specified', async () => {
       mockVideoServiceModule.getVideosByCategory.mockResolvedValue([
-        { id: 'music-1', title: 'Music Video 1', category: 'Music' } as any
+        { id: 'music-1', title: 'Music Video 1', category: 'Music' } as any,
       ]);
-      
+
       const result = await service.getTrendingVideos(10, { category: 'Music' });
 
       expect(mockVideoServiceModule.getVideosByCategory).toHaveBeenCalledWith('Music');
@@ -120,7 +121,7 @@ describe('UnifiedDataService', () => {
 
     it('should handle errors gracefully', async () => {
       mockVideoServiceModule.getVideos.mockRejectedValue(new Error('Local service error'));
-      
+
       const result = await service.getTrendingVideos(10);
 
       // Should still return a valid response structure even with errors
@@ -157,12 +158,12 @@ describe('UnifiedDataService', () => {
   describe('searchVideos', () => {
     beforeEach(() => {
       mockVideoServiceModule.searchVideos.mockResolvedValue([
-        { id: 'search-1', title: 'Search Result 1' } as any
+        { id: 'search-1', title: 'Search Result 1' } as any,
       ]);
-      
+
       mockMetadataService.normalizeLocalVideo.mockImplementation((video: any) => ({
         ...video,
-        source: 'local'
+        source: 'local',
       }));
     });
 
@@ -176,7 +177,7 @@ describe('UnifiedDataService', () => {
 
     it('should return trending videos for empty query', async () => {
       mockVideoServiceModule.getVideos.mockResolvedValue([
-        { id: 'trending-1', title: 'Trending Video 1' } as any
+        { id: 'trending-1', title: 'Trending Video 1' } as any,
       ]);
 
       const result = await service.searchVideos('', {}, 10);
@@ -188,7 +189,7 @@ describe('UnifiedDataService', () => {
     it('should apply filters to search results', async () => {
       mockVideoServiceModule.searchVideos.mockResolvedValue([
         { id: 'search-1', title: 'Search Result 1', isShort: true, category: 'Music' } as any,
-        { id: 'search-2', title: 'Search Result 2', isShort: false, category: 'Gaming' } as any
+        { id: 'search-2', title: 'Search Result 2', isShort: false, category: 'Gaming' } as any,
       ]);
 
       const result = await service.searchVideos('test', { type: 'short', category: 'Music' }, 10);
@@ -199,7 +200,7 @@ describe('UnifiedDataService', () => {
 
     it('should handle search errors gracefully', async () => {
       mockVideoServiceModule.searchVideos.mockRejectedValue(new Error('Search error'));
-      
+
       const result = await service.searchVideos('test query', {}, 10);
 
       expect(result.data).toBeDefined();
@@ -304,7 +305,7 @@ describe('UnifiedDataService', () => {
   describe('getShortsVideos', () => {
     it('should delegate to getTrendingVideos with shorts filter', async () => {
       const getTrendingVideosSpy = vi.spyOn(service, 'getTrendingVideos');
-      
+
       await service.getShortsVideos(30);
 
       expect(getTrendingVideosSpy).toHaveBeenCalledWith(30, { type: 'short' });
@@ -314,17 +315,17 @@ describe('UnifiedDataService', () => {
   describe('Video Mixing Strategies', () => {
     const localVideos = [
       { id: 'local-1', title: 'Local 1', views: 1000 },
-      { id: 'local-2', title: 'Local 2', views: 2000 }
+      { id: 'local-2', title: 'Local 2', views: 2000 },
     ];
 
     const youtubeVideos = [
       { id: 'yt-1', title: 'YouTube 1', views: 1500 },
-      { id: 'yt-2', title: 'YouTube 2', views: 2500 }
+      { id: 'yt-2', title: 'YouTube 2', views: 2500 },
     ];
 
     it('should mix videos using round-robin strategy', async () => {
       service.updateConfig({ mixing: { strategy: 'round-robin' } });
-      
+
       // Use private method through service instance
       const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
 
@@ -336,13 +337,13 @@ describe('UnifiedDataService', () => {
     });
 
     it('should mix videos using source-priority strategy', async () => {
-      service.updateConfig({ 
-        mixing: { 
+      service.updateConfig({
+        mixing: {
           strategy: 'source-priority',
-          sourcePriority: ['local', 'youtube']
-        } 
+          sourcePriority: ['local', 'youtube'],
+        },
       });
-      
+
       const mixedVideos = (service as any).mixVideoResults(localVideos, youtubeVideos, 4);
 
       expect(mixedVideos).toHaveLength(4);
@@ -354,18 +355,18 @@ describe('UnifiedDataService', () => {
 
     it('should mix videos using relevance strategy', async () => {
       service.updateConfig({ mixing: { strategy: 'relevance' } });
-      
+
       const videosWithEngagement = [
         { ...localVideos[0], likes: 100, commentCount: 10 },
         { ...localVideos[1], likes: 200, commentCount: 20 },
         { ...youtubeVideos[0], likes: 150, commentCount: 15 },
-        { ...youtubeVideos[1], likes: 250, commentCount: 25 }
+        { ...youtubeVideos[1], likes: 250, commentCount: 25 },
       ];
-      
+
       const mixedVideos = (service as any).mixVideoResults(
-        videosWithEngagement.slice(0, 2), 
-        videosWithEngagement.slice(2), 
-        4
+        videosWithEngagement.slice(0, 2),
+        videosWithEngagement.slice(2),
+        4,
       );
 
       expect(mixedVideos).toHaveLength(4);
@@ -377,7 +378,7 @@ describe('UnifiedDataService', () => {
     it('should clear all cache', () => {
       service.setCachedData = vi.fn();
       service.clearCache();
-      
+
       // Test by trying to get cached data
       const result = service.getCachedData('test-key');
       expect(result).toBeNull();
@@ -388,9 +389,9 @@ describe('UnifiedDataService', () => {
       (service as any).setCachedData('video:123', { id: '123' });
       (service as any).setCachedData('channel:456', { id: '456' });
       (service as any).setCachedData('trending:data', { data: [] });
-      
+
       service.clearCache('video:');
-      
+
       // Video cache should be cleared, others should remain
       expect((service as any).getCachedData('video:123')).toBeNull();
       // Note: We can't easily test that others remain without exposing cache internals
@@ -398,15 +399,15 @@ describe('UnifiedDataService', () => {
 
     it('should respect cache TTL', async () => {
       service.updateConfig({ caching: { enabled: true, ttl: 100 } });
-      
+
       (service as any).setCachedData('test-key', { data: 'test' });
-      
+
       // Should get cached data immediately
       expect((service as any).getCachedData('test-key')).toEqual({ data: 'test' });
-      
+
       // Wait for cache to expire
       await new Promise(resolve => setTimeout(resolve, 150));
-      
+
       // Should return null after expiry
       expect((service as any).getCachedData('test-key')).toBeNull();
     });

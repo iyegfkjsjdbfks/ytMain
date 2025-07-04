@@ -14,9 +14,9 @@ import type { Video } from '../src/types/core';
 export function useVideos() {
   const fetchVideos = useCallback(() => getVideos(), []);
   // Provide empty array as initial data to show UI immediately
-  return useAsyncData<Video[]>(fetchVideos, { 
+  return useAsyncData<Video[]>(fetchVideos, {
     initialData: [],
-    dependencies: []
+    dependencies: [],
   });
 }
 
@@ -74,9 +74,9 @@ export function useSubscriptionsFeed() {
     return sortedVideos;
   }, []);
 
-  return useAsyncData<Video[]>(fetchSubscriptionsFeed, { 
+  return useAsyncData<Video[]>(fetchSubscriptionsFeed, {
     initialData: [],
-    dependencies: []
+    dependencies: [],
   });
 }
 

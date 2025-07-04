@@ -30,7 +30,7 @@ class PerformanceMonitor {
       });
       paintObserver.observe({ entryTypes: ['paint'] });
       this.observers.push(paintObserver);
-    } catch (e) {
+    } catch {
       // PerformanceObserver not supported
     }
 
@@ -45,7 +45,7 @@ class PerformanceMonitor {
       });
       navigationObserver.observe({ entryTypes: ['navigation'] });
       this.observers.push(navigationObserver);
-    } catch (e) {
+    } catch {
       // PerformanceObserver not supported
     }
   }

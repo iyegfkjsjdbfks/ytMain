@@ -1,8 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
+import type React from 'react';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+
+import { unifiedDataService } from '../../../services/unifiedDataService';
 import {
   useUnifiedVideos,
   useUnifiedVideo,
@@ -10,9 +13,8 @@ import {
   useUnifiedShorts,
   useUnifiedSearchVideos,
   useVideoWithRelated,
-  useHomePageData
+  useHomePageData,
 } from '../useVideos';
-import { unifiedDataService } from '../../../services/unifiedDataService';
 
 // Mock the unified data service
 vi.mock('../../../services/unifiedDataService');
@@ -50,14 +52,14 @@ describe('Unified Video Hooks', () => {
       const mockResponse = {
         data: [
           { id: 'video-1', title: 'Test Video 1', source: 'local' },
-          { id: 'video-2', title: 'Test Video 2', source: 'youtube' }
+          { id: 'video-2', title: 'Test Video 2', source: 'youtube' },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false }
+          youtube: { count: 1, hasMore: false },
         },
         totalCount: 2,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
@@ -65,7 +67,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideos(50, { category: 'Music' }),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -86,7 +88,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideos(50),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -103,17 +105,17 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
 
       const { Wrapper } = createWrapper();
       const filters = { category: 'Gaming', type: 'video' as const };
-      
+
       renderHook(
         () => useUnifiedVideos(25, filters),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -128,7 +130,7 @@ describe('Unified Video Hooks', () => {
         id: 'test-video',
         title: 'Test Video',
         description: 'Test description',
-        source: 'local'
+        source: 'local',
       };
 
       mockUnifiedDataService.getVideoById.mockResolvedValue(mockVideo);
@@ -136,7 +138,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideo('test-video'),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -155,7 +157,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideo('nonexistent-video'),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -171,7 +173,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       renderHook(
         () => useUnifiedVideo(''),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       expect(mockUnifiedDataService.getVideoById).not.toHaveBeenCalled();
@@ -184,7 +186,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideo('test-video'),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -201,14 +203,14 @@ describe('Unified Video Hooks', () => {
       const mockResponse = {
         data: [
           { id: 'trending-1', title: 'Trending Video 1' },
-          { id: 'trending-2', title: 'Trending Video 2' }
+          { id: 'trending-2', title: 'Trending Video 2' },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false }
+          youtube: { count: 1, hasMore: false },
         },
         totalCount: 2,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
@@ -216,7 +218,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedTrendingVideos(30, { sortBy: 'views' }),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -232,7 +234,7 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
@@ -240,7 +242,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedTrendingVideos(),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -257,14 +259,14 @@ describe('Unified Video Hooks', () => {
       const mockResponse = {
         data: [
           { id: 'short-1', title: 'Short Video 1', isShort: true },
-          { id: 'short-2', title: 'Short Video 2', isShort: true }
+          { id: 'short-2', title: 'Short Video 2', isShort: true },
         ],
         sources: {
           local: { count: 2, hasMore: false },
-          youtube: { count: 0, hasMore: false }
+          youtube: { count: 0, hasMore: false },
         },
         totalCount: 2,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getShortsVideos.mockResolvedValue(mockResponse);
@@ -272,7 +274,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedShorts(20),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -289,14 +291,14 @@ describe('Unified Video Hooks', () => {
       const mockResponse = {
         data: [
           { id: 'search-1', title: 'Search Result 1' },
-          { id: 'search-2', title: 'Search Result 2' }
+          { id: 'search-2', title: 'Search Result 2' },
         ],
         sources: {
           local: { count: 1, hasMore: false },
-          youtube: { count: 1, hasMore: false }
+          youtube: { count: 1, hasMore: false },
         },
         totalCount: 2,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.searchVideos.mockResolvedValue(mockResponse);
@@ -304,7 +306,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedSearchVideos('test query', { category: 'Tech' }, 25),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -314,7 +316,7 @@ describe('Unified Video Hooks', () => {
       expect(mockUnifiedDataService.searchVideos).toHaveBeenCalledWith(
         'test query',
         { category: 'Tech' },
-        25
+        25,
       );
       expect(result.current.data?.data).toEqual(mockResponse.data);
     });
@@ -323,7 +325,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       renderHook(
         () => useUnifiedSearchVideos('a'), // Query too short
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       expect(mockUnifiedDataService.searchVideos).not.toHaveBeenCalled();
@@ -333,7 +335,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       renderHook(
         () => useUnifiedSearchVideos(''),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       expect(mockUnifiedDataService.searchVideos).not.toHaveBeenCalled();
@@ -346,7 +348,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedSearchVideos('test query'),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -363,12 +365,12 @@ describe('Unified Video Hooks', () => {
       it('should fetch video and related videos', async () => {
         const mockVideo = {
           id: 'main-video',
-          title: 'Main Video'
+          title: 'Main Video',
         };
 
         const mockRelatedVideos = [
           { id: 'related-1', title: 'Related Video 1' },
-          { id: 'related-2', title: 'Related Video 2' }
+          { id: 'related-2', title: 'Related Video 2' },
         ];
 
         // This test would require mocking the videoApi dependency
@@ -376,7 +378,7 @@ describe('Unified Video Hooks', () => {
         const { Wrapper } = createWrapper();
         const { result } = renderHook(
           () => useVideoWithRelated('main-video'),
-          { wrapper: Wrapper }
+          { wrapper: Wrapper },
         );
 
         expect(result.current.video).toBeDefined();
@@ -392,7 +394,7 @@ describe('Unified Video Hooks', () => {
         const { Wrapper } = createWrapper();
         const { result } = renderHook(
           () => useHomePageData(),
-          { wrapper: Wrapper }
+          { wrapper: Wrapper },
         );
 
         expect(result.current.trending).toBeDefined();
@@ -409,14 +411,14 @@ describe('Unified Video Hooks', () => {
     it('should apply custom configuration options', async () => {
       const customConfig = {
         staleTime: 30000,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
       };
 
       const mockResponse = {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
@@ -424,7 +426,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideos(50, {}, customConfig),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {
@@ -439,13 +441,13 @@ describe('Unified Video Hooks', () => {
   describe('Loading States', () => {
     it('should show loading state initially', () => {
       mockUnifiedDataService.getTrendingVideos.mockImplementation(
-        () => new Promise(() => {}) // Never resolves
+        () => new Promise(() => {}), // Never resolves
       );
 
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideos(),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       expect(result.current.loading).toBe(true);
@@ -460,7 +462,7 @@ describe('Unified Video Hooks', () => {
         data: [],
         sources: { local: { count: 0, hasMore: false }, youtube: { count: 0, hasMore: false } },
         totalCount: 0,
-        hasMore: false
+        hasMore: false,
       };
 
       mockUnifiedDataService.getTrendingVideos.mockResolvedValue(mockResponse);
@@ -468,7 +470,7 @@ describe('Unified Video Hooks', () => {
       const { Wrapper } = createWrapper();
       const { result } = renderHook(
         () => useUnifiedVideos(),
-        { wrapper: Wrapper }
+        { wrapper: Wrapper },
       );
 
       await waitFor(() => {

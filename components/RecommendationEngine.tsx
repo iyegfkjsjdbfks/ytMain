@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Video } from '../types';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import { realVideos } from '../services/realVideoService';
+
 import OptimizedVideoCard from './OptimizedVideoCard';
+
+import type { Video } from '../types';
+
 
 interface RecommendationEngineProps {
   userId?: string;
@@ -34,7 +39,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     try {
       // Use real videos for recommendations
       const availableVideos = realVideos.filter(video =>
-        !currentVideo || video.id !== currentVideo.id
+        !currentVideo || video.id !== currentVideo.id,
       );
 
       // Simple recommendation logic using dummy data
@@ -53,7 +58,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   if (loading) {
     return (
       <div className="flex justify-center items-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
       </div>
     );
   }

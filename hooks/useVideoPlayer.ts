@@ -127,9 +127,9 @@ return;
         // More specific error handling for network and cache issues
         const errorMessage = error instanceof Error ? error.message : String(error);
         console.warn('Video playback issue:', errorMessage);
-        
+
         // Don't treat network/cache errors as critical errors
-        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') || 
+        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
             errorMessage.includes('ERR_NETWORK')) {
           console.info('Video may be temporarily unavailable due to network/cache issues');
           setState(prev => ({ ...prev, isPlaying: false }));

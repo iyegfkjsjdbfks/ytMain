@@ -1,6 +1,8 @@
-import { api, ApiError } from './base';
-import type { Video, Channel, ApiResponse } from '../../types/core';
 import { CACHE_CONFIG } from '../../lib/constants';
+
+import { ApiError } from './base';
+
+import type { Video, Channel } from '../../types/core';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -66,13 +68,15 @@ class YouTubeService {
 
   private buildUrl(endpoint: string, params: Record<string, string>): string {
     // Use proxy endpoint in development to avoid CORS issues
-    const baseUrl = import.meta.env.MODE === 'development' 
-      ? window.location.origin + '/api/youtube/v3/'
+    const baseUrl = import.meta.env.MODE === 'development'
+      ? `${window.location.origin  }/api/youtube/v3/`
       : 'https://www.googleapis.com/youtube/v3/';
-    
+
     const url = new URL(endpoint, baseUrl);
     Object.entries(params).forEach(([key, value]) => {
-      if (value) url.searchParams.set(key, value);
+      if (value) {
+url.searchParams.set(key, value);
+}
     });
     url.searchParams.set('key', API_KEY || '');
     return url.toString();
@@ -101,16 +105,20 @@ class YouTubeService {
    * @returns Promise resolving to array of Video objects
    */
   async fetchVideos(videoIds: string[]): Promise<Video[]> {
-    if (!videoIds.length) return [];
-    
+    if (!videoIds.length) {
+return [];
+}
+
     const cacheKey = `videos_${videoIds.join(',')}`;
     const cached = this.getCachedData<Video[]>(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+return cached;
+}
 
     try {
       const url = this.buildUrl('videos', {
         part: 'snippet,statistics,contentDetails,status,recordingDetails,liveStreamingDetails,localizations,topicDetails',
-        id: videoIds.join(',')
+        id: videoIds.join(','),
       });
 
       const response = await fetch(url);
@@ -118,22 +126,22 @@ class YouTubeService {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
           response.status,
-          'youtube_api_error'
+          'youtube_api_error',
         );
       }
 
       const data: YouTubeVideoResponse = await response.json();
-      
+
       // Create videos with comprehensive metadata
       const videos: Video[] = data.items.map(item => {
-        const contentDetails = item.contentDetails;
-        const snippet = item.snippet;
-        const statistics = item.statistics;
-        const status = (item as any).status;
-        const recordingDetails = (item as any).recordingDetails;
-        const liveStreamingDetails = (item as any).liveStreamingDetails;
-        const topicDetails = (item as any).topicDetails;
-        
+        const { contentDetails } = item;
+        const { snippet } = item;
+        const { statistics } = item;
+        const { status } = (item as any);
+        const { recordingDetails } = (item as any);
+        const { liveStreamingDetails } = (item as any);
+        const { topicDetails } = (item as any);
+
         return {
           id: item.id,
           title: snippet.title,
@@ -160,12 +168,12 @@ class YouTubeService {
           createdAt: snippet.publishedAt,
           updatedAt: new Date().toISOString(),
           videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
-          
+
           // Enhanced metadata
           privacyStatus: status?.privacyStatus || 'public',
           definition: contentDetails.definition,
           license: status?.license,
-          
+
           // Statistics object
           statistics: {
             viewCount: parseInt(statistics.viewCount || '0', 10),
@@ -174,7 +182,7 @@ class YouTubeService {
             favoriteCount: parseInt(statistics.favoriteCount || '0', 10),
             commentCount: parseInt(statistics.commentCount || '0', 10),
           },
-          
+
           // Content details
           contentDetails: {
             duration: contentDetails.duration,
@@ -185,22 +193,22 @@ class YouTubeService {
             contentRating: contentDetails.contentRating || {},
             projection: contentDetails.projection || 'rectangular',
           },
-          
+
           // Topic details
           topicDetails: {
             topicIds: topicDetails?.topicIds || [],
             relevantTopicIds: topicDetails?.relevantTopicIds || [],
             topicCategories: topicDetails?.topicCategories || [],
           },
-          
+
           // Channel object
           channel: {
             id: snippet.channelId,
             name: snippet.channelTitle,
             avatarUrl: '',
-            isVerified: false
+            isVerified: false,
           },
-          
+
           // Additional metadata for watch page
           metadata: {
             defaultLanguage: snippet.defaultLanguage,
@@ -214,17 +222,17 @@ class YouTubeService {
             publicStatsViewable: status?.publicStatsViewable,
             madeForKids: status?.madeForKids,
             selfDeclaredMadeForKids: status?.selfDeclaredMadeForKids,
-          }
+          },
         };
       });
 
       // Fetch channel data for all unique channels to get avatars
       const uniqueChannelIds = [...new Set(data.items.map(item => item.snippet.channelId))];
-      const channelPromises = uniqueChannelIds.map(channelId => 
-        this.fetchChannel(channelId).catch(() => null)
+      const channelPromises = uniqueChannelIds.map(channelId =>
+        this.fetchChannel(channelId).catch(() => null),
       );
       const channels = await Promise.all(channelPromises);
-      
+
       // Create a map of channel ID to channel data
       const channelMap = new Map();
       channels.forEach(channel => {
@@ -232,7 +240,7 @@ class YouTubeService {
           channelMap.set(channel.id, channel);
         }
       });
-      
+
       // Update videos with channel avatar URLs
       videos.forEach(video => {
         const channelData = channelMap.get(video.channelId);
@@ -260,16 +268,20 @@ class YouTubeService {
    * @returns Promise resolving to Channel object or null
    */
   async fetchChannel(channelId: string): Promise<Channel | null> {
-    if (!channelId) return null;
-    
+    if (!channelId) {
+return null;
+}
+
     const cacheKey = `channel_${channelId}`;
     const cached = this.getCachedData<Channel>(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+return cached;
+}
 
     try {
       const url = this.buildUrl('channels', {
         part: 'snippet,statistics',
-        id: channelId
+        id: channelId,
       });
 
       const response = await fetch(url);
@@ -277,14 +289,16 @@ class YouTubeService {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
           response.status,
-          'youtube_api_error'
+          'youtube_api_error',
         );
       }
 
       const data: YouTubeChannelResponse = await response.json();
       const item = data.items[0];
-      
-      if (!item) return null;
+
+      if (!item) {
+return null;
+}
 
       const channel: Channel = {
         id: item.id,
@@ -300,7 +314,7 @@ class YouTubeService {
         joinedDate: item.snippet.publishedAt,
         country: item.snippet.country,
         createdAt: item.snippet.publishedAt,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       };
 
       this.setCachedData(cacheKey, channel, CACHE_CONFIG.USER_DATA_TTL);
@@ -320,7 +334,9 @@ class YouTubeService {
    */
   private parseDuration(duration: string): string {
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
+    if (!match) {
+return '0:00';
+}
 
     const hours = parseInt(match[1]?.replace('H', '') || '0', 10);
     const minutes = parseInt(match[2]?.replace('M', '') || '0', 10);
@@ -350,12 +366,14 @@ class YouTubeService {
    */
   private isShortVideo(duration: string): boolean {
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    if (!match) return false;
-    
+    if (!match) {
+return false;
+}
+
     const hours = parseInt(match[1]?.replace('H', '') || '0', 10);
     const minutes = parseInt(match[2]?.replace('M', '') || '0', 10);
     const seconds = parseInt(match[3]?.replace('S', '') || '0', 10);
-    
+
     const totalSeconds = hours * 3600 + minutes * 60 + seconds;
     return totalSeconds <= 60; // YouTube Shorts are 60 seconds or less
   }
@@ -414,9 +432,9 @@ class YouTubeService {
       '41': 'Thriller',
       '42': 'Shorts',
       '43': 'Shows',
-      '44': 'Trailers'
+      '44': 'Trailers',
     };
-    
+
     return categories[categoryId] || 'Entertainment';
   }
 

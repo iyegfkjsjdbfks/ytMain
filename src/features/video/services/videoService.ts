@@ -1,5 +1,6 @@
-import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
 import { youtubeService } from '../../../services/api/youtubeService';
+
+import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -247,7 +248,7 @@ class VideoService {
     try {
       // First try to get YouTube metadata
       const youtubeVideo = await this.getYouTubeVideo(videoId);
-      
+
       if (youtubeVideo) {
         // If YouTube data is available, use it with local interactions
         try {
@@ -264,7 +265,7 @@ class VideoService {
           return youtubeVideo;
         }
       }
-      
+
       // Fallback to local API if YouTube data is not available
       return await this.getVideo(videoId);
     } catch (error) {

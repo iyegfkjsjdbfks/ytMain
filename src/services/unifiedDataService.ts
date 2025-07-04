@@ -1,10 +1,11 @@
-import { youtubeService } from './api/youtubeService';
-import { 
-  metadataNormalizationService, 
-  type UnifiedVideoMetadata, 
-  type UnifiedChannelMetadata 
-} from './metadataNormalizationService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
+
+import { youtubeService } from './api/youtubeService';
+import {
+  metadataNormalizationService,
+  type UnifiedVideoMetadata,
+  type UnifiedChannelMetadata,
+} from './metadataNormalizationService';
 
 /**
  * Configuration for unified data fetching
@@ -25,7 +26,7 @@ interface UnifiedDataConfig {
   };
   mixing: {
     strategy: 'round-robin' | 'source-priority' | 'relevance';
-    sourcePriority?: ('local' | 'youtube')[];
+    sourcePriority?: Array<'local' | 'youtube'>;
   };
 }
 
@@ -59,7 +60,7 @@ export interface UnifiedSearchFilters {
   uploadDate?: 'hour' | 'today' | 'week' | 'month' | 'year';
   sortBy?: 'relevance' | 'date' | 'views' | 'rating';
   type?: 'video' | 'short' | 'live';
-  sources?: ('local' | 'youtube')[];
+  sources?: Array<'local' | 'youtube'>;
 }
 
 /**
@@ -103,18 +104,18 @@ class UnifiedDataService {
    */
   async getTrendingVideos(
     limit: number = 50,
-    filters: UnifiedSearchFilters = {}
+    filters: UnifiedSearchFilters = {},
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
     const cacheKey = `trending:${JSON.stringify({ limit, filters })}`;
     const cached = this.getCachedData<UnifiedDataResponse<UnifiedVideoMetadata>>(cacheKey);
-    
+
     if (cached) {
       return cached;
     }
 
     const sources = filters.sources || Object.keys(this.config.sources).filter(
-      key => this.config.sources[key as keyof typeof this.config.sources]
-    ) as ('local' | 'youtube')[];
+      key => this.config.sources[key as keyof typeof this.config.sources],
+    ) as Array<'local' | 'youtube'>;
 
     const results = await Promise.allSettled([
       ...(sources.includes('local') ? [this.fetchLocalTrendingVideos(filters)] : []),
@@ -156,7 +157,7 @@ class UnifiedDataService {
   async searchVideos(
     query: string,
     filters: UnifiedSearchFilters = {},
-    limit: number = 50
+    limit: number = 50,
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
     if (!query.trim()) {
       return this.getTrendingVideos(limit, filters);
@@ -164,14 +165,14 @@ class UnifiedDataService {
 
     const cacheKey = `search:${query}:${JSON.stringify({ filters, limit })}`;
     const cached = this.getCachedData<UnifiedDataResponse<UnifiedVideoMetadata>>(cacheKey);
-    
+
     if (cached) {
       return cached;
     }
 
     const sources = filters.sources || Object.keys(this.config.sources).filter(
-      key => this.config.sources[key as keyof typeof this.config.sources]
-    ) as ('local' | 'youtube')[];
+      key => this.config.sources[key as keyof typeof this.config.sources],
+    ) as Array<'local' | 'youtube'>;
 
     const results = await Promise.allSettled([
       ...(sources.includes('local') ? [this.searchLocalVideos(query, filters)] : []),
@@ -215,18 +216,18 @@ class UnifiedDataService {
     if (id.startsWith('youtube-')) {
       return id.substring(8); // Remove 'youtube-' prefix
     }
-    
+
     // Handle URLs that might be passed as IDs
     const youtubeId = getYouTubeVideoId(id);
     if (youtubeId) {
       return youtubeId;
     }
-    
+
     // Check if it's already a valid YouTube video ID (11 characters)
     if (id.length === 11 && /^[a-zA-Z0-9_-]+$/.test(id)) {
       return id;
     }
-    
+
     return null;
   }
 
@@ -236,7 +237,7 @@ class UnifiedDataService {
   async getVideoById(id: string): Promise<UnifiedVideoMetadata | null> {
     const cacheKey = `video:${id}`;
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
-    
+
     if (cached) {
       return cached;
     }
@@ -245,7 +246,7 @@ class UnifiedDataService {
 
     // Check if this is a YouTube video ID
     const youtubeId = this.extractYouTubeId(id);
-    
+
     if (youtubeId) {
       // This is a YouTube video, try YouTube first
       console.log(`Detected YouTube video ID: ${youtubeId}`);
@@ -254,7 +255,7 @@ class UnifiedDataService {
           console.log(`Fetching YouTube video with ID: ${youtubeId}`);
           const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
           if (youtubeVideos.length > 0) {
-            console.log(`Successfully fetched YouTube video:`, youtubeVideos[0]);
+            console.log('Successfully fetched YouTube video:', youtubeVideos[0]);
             // Convert already processed YouTube video to unified format
             const processedVideo = youtubeVideos[0];
             if (!processedVideo) {
@@ -369,7 +370,7 @@ class UnifiedDataService {
   async getChannelById(id: string): Promise<UnifiedChannelMetadata | null> {
     const cacheKey = `channel:${id}`;
     const cached = this.getCachedData<UnifiedChannelMetadata>(cacheKey);
-    
+
     if (cached) {
       return cached;
     }
@@ -412,7 +413,7 @@ class UnifiedDataService {
       // For now, we'll use search with popular terms
       const trendingQueries = ['trending', 'popular', 'viral', 'latest'];
       const randomQuery = trendingQueries[Math.floor(Math.random() * trendingQueries.length)];
-      
+
       if (randomQuery) {
         return this.searchYouTubeVideos(randomQuery, filters);
       }
@@ -444,9 +445,9 @@ class UnifiedDataService {
   // Video mixing strategies
 
   private mixVideoResults(
-    localVideos: UnifiedVideoMetadata[], 
-    youtubeVideos: UnifiedVideoMetadata[], 
-    limit: number
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number,
   ): UnifiedVideoMetadata[] {
     switch (this.config.mixing.strategy) {
       case 'round-robin':
@@ -461,13 +462,13 @@ class UnifiedDataService {
   }
 
   private roundRobinMix(
-    localVideos: UnifiedVideoMetadata[], 
-    youtubeVideos: UnifiedVideoMetadata[], 
-    limit: number
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number,
   ): UnifiedVideoMetadata[] {
     const mixed: UnifiedVideoMetadata[] = [];
     const maxLength = Math.max(localVideos.length, youtubeVideos.length);
-    
+
     for (let i = 0; i < maxLength && mixed.length < limit; i++) {
       if (i < localVideos.length && localVideos[i]) {
         mixed.push(localVideos[i]!);
@@ -476,67 +477,75 @@ class UnifiedDataService {
         mixed.push(youtubeVideos[i]!);
       }
     }
-    
+
     return mixed;
   }
 
   private sourcePriorityMix(
-    localVideos: UnifiedVideoMetadata[], 
-    youtubeVideos: UnifiedVideoMetadata[], 
-    limit: number
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number,
   ): UnifiedVideoMetadata[] {
     const priority = this.config.mixing.sourcePriority || ['local', 'youtube'];
     const mixed: UnifiedVideoMetadata[] = [];
-    
+
     for (const source of priority) {
       const videos = source === 'local' ? localVideos : youtubeVideos;
       const remainingLimit = limit - mixed.length;
       mixed.push(...videos.slice(0, remainingLimit));
-      
-      if (mixed.length >= limit) break;
+
+      if (mixed.length >= limit) {
+        break;
+      }
     }
-    
+
     return mixed;
   }
 
   private relevanceMix(
-    localVideos: UnifiedVideoMetadata[], 
-    youtubeVideos: UnifiedVideoMetadata[], 
-    limit: number
+    localVideos: UnifiedVideoMetadata[],
+    youtubeVideos: UnifiedVideoMetadata[],
+    limit: number,
   ): UnifiedVideoMetadata[] {
     // Combine all videos and sort by relevance (views, likes, recency)
     const allVideos = [...localVideos, ...youtubeVideos];
-    
+
     allVideos.sort((a, b) => {
       // Simple relevance scoring based on views and engagement
       const scoreA = a.views + (a.likes * 10) + (a.commentCount * 5);
       const scoreB = b.views + (b.likes * 10) + (b.commentCount * 5);
       return scoreB - scoreA;
     });
-    
+
     return allVideos.slice(0, limit);
   }
 
   // Cache management
 
   private getCachedData<T>(key: string): T | null {
-    if (!this.config.caching.enabled) return null;
-    
+    if (!this.config.caching.enabled) {
+      return null;
+    }
+
     const cached = this.cache.get(key);
-    if (!cached) return null;
-    
+    if (!cached) {
+      return null;
+    }
+
     const isExpired = Date.now() - cached.timestamp > this.config.caching.ttl;
     if (isExpired) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return cached.data as T;
   }
 
   private setCachedData(key: string, data: any): void {
-    if (!this.config.caching.enabled) return;
-    
+    if (!this.config.caching.enabled) {
+      return;
+    }
+
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -551,7 +560,7 @@ class UnifiedDataService {
       this.cache.clear();
       return;
     }
-    
+
     const regex = new RegExp(pattern);
     for (const key of this.cache.keys()) {
       if (regex.test(key)) {
@@ -577,19 +586,27 @@ class UnifiedDataService {
   // Utility methods
 
   private formatViews(count: number): string {
-    if (count >= 1000000000) return `${(count / 1000000000).toFixed(1)}B views`;
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M views`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K views`;
+    if (count >= 1000000000) {
+      return `${(count / 1000000000).toFixed(1)}B views`;
+    }
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M views`;
+    }
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}K views`;
+    }
     return `${count} views`;
   }
 
   private formatTimeAgo(dateString: string): string {
-    if (!dateString) return '';
-    
+    if (!dateString) {
+      return '';
+    }
+
     const date = new Date(dateString);
     const now = new Date();
     const diffMs = now.getTime() - date.getTime();
-    
+
     const seconds = Math.floor(diffMs / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
@@ -597,13 +614,25 @@ class UnifiedDataService {
     const weeks = Math.floor(days / 7);
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
-    
-    if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
-    if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
-    if (weeks > 0) return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
-    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+
+    if (years > 0) {
+      return `${years} year${years > 1 ? 's' : ''} ago`;
+    }
+    if (months > 0) {
+      return `${months} month${months > 1 ? 's' : ''} ago`;
+    }
+    if (weeks > 0) {
+      return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+    }
+    if (days > 0) {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+    if (hours > 0) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    }
+    if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    }
     return 'Just now';
   }
 }

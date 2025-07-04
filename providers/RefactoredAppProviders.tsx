@@ -1,7 +1,7 @@
 
 import type { ReactNode } from 'react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import FastLoadingSpinner from '../components/FastLoadingSpinner';
@@ -12,6 +12,8 @@ import { ThemeProvider } from '../contexts/ThemeContext';
 import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
 import { WatchLaterProvider } from '../contexts/WatchLaterContext';
 import { queryClient } from '../hooks/useQueryClient';
+
+import type { QueryClient } from '@tanstack/react-query';
 
 interface RefactoredAppProvidersProps {
   children: ReactNode;

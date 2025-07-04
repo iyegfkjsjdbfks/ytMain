@@ -401,7 +401,7 @@ global.testUtils = {
         console.log = originalLog;
         console.error = originalError;
         console.warn = originalWarn;
-      }
+      },
     };
   },
 };

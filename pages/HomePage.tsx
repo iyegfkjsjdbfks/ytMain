@@ -29,9 +29,9 @@ const HomePage: React.FC = () => {
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [
-    'All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment', 
-    'Education', 'Technology', 'Travel', 'Food', 'Fashion', 
-    'Comedy', 'Science', 'Health', 'Business'
+    'All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment',
+    'Education', 'Technology', 'Travel', 'Food', 'Fashion',
+    'Comedy', 'Science', 'Health', 'Business',
   ], []);
 
   const categoryChips = useMemo(() => (

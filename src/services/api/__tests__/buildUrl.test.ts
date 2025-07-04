@@ -6,13 +6,15 @@ class TestableYouTubeService {
   // Copy the exact buildUrl implementation from the original service
   public buildUrl(endpoint: string, params: Record<string, string>): string {
     // Use proxy endpoint in development to avoid CORS issues
-    const baseUrl = import.meta.env.MODE === 'development' 
-      ? window.location.origin + '/api/youtube/v3/'
+    const baseUrl = import.meta.env.MODE === 'development'
+      ? `${window.location.origin  }/api/youtube/v3/`
       : 'https://www.googleapis.com/youtube/v3/';
-    
+
     const url = new URL(endpoint, baseUrl);
     Object.entries(params).forEach(([key, value]) => {
-      if (value) url.searchParams.set(key, value);
+      if (value) {
+url.searchParams.set(key, value);
+}
     });
     url.searchParams.set('key', import.meta.env.VITE_YOUTUBE_API_KEY || '');
     return url.toString();
@@ -33,7 +35,7 @@ describe('buildUrl function with different MODE values', () => {
     // Restore original environment
     Object.defineProperty(import.meta, 'env', {
       value: originalEnv,
-      configurable: true
+      configurable: true,
     });
     global.window = originalWindow;
   });
@@ -43,25 +45,25 @@ describe('buildUrl function with different MODE values', () => {
       // Mock window.location for development mode
       vi.stubGlobal('window', {
         location: {
-          origin: 'http://localhost:3000'
-        }
+          origin: 'http://localhost:3000',
+        },
       });
-      
+
       // Mock import.meta.env for development
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
           MODE: 'development',
-          VITE_YOUTUBE_API_KEY: 'test-dev-api-key'
+          VITE_YOUTUBE_API_KEY: 'test-dev-api-key',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should use proxy endpoint for videos in development mode', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet,statistics,contentDetails',
-        id: 'video123'
+        id: 'video123',
       });
 
       expect(url).toContain('http://localhost:3000/api/youtube/v3/videos');
@@ -73,7 +75,7 @@ describe('buildUrl function with different MODE values', () => {
     it('should use proxy endpoint for channels in development mode', () => {
       const url = testService.buildUrl('channels', {
         part: 'snippet,statistics',
-        id: 'UC123456789'
+        id: 'UC123456789',
       });
 
       expect(url).toContain('http://localhost:3000/api/youtube/v3/channels');
@@ -85,13 +87,13 @@ describe('buildUrl function with different MODE values', () => {
     it('should work with different localhost ports', () => {
       vi.stubGlobal('window', {
         location: {
-          origin: 'http://localhost:5173'
-        }
+          origin: 'http://localhost:5173',
+        },
       });
 
       const url = testService.buildUrl('search', {
         part: 'snippet',
-        q: 'test query'
+        q: 'test query',
       });
 
       expect(url).toContain('http://localhost:5173/api/youtube/v3/search');
@@ -105,16 +107,16 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'production',
-          VITE_YOUTUBE_API_KEY: 'prod-api-key-123'
+          VITE_YOUTUBE_API_KEY: 'prod-api-key-123',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should use direct Google API endpoint for videos in production mode', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet,statistics,contentDetails',
-        id: 'video456'
+        id: 'video456',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/videos');
@@ -127,7 +129,7 @@ describe('buildUrl function with different MODE values', () => {
     it('should use direct Google API endpoint for channels in production mode', () => {
       const url = testService.buildUrl('channels', {
         part: 'snippet,statistics',
-        id: 'UC987654321'
+        id: 'UC987654321',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/channels');
@@ -143,16 +145,16 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'test',
-          VITE_YOUTUBE_API_KEY: 'test-api-key-456'
+          VITE_YOUTUBE_API_KEY: 'test-api-key-456',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should use direct Google API endpoint in test mode', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet',
-        id: 'testVideo'
+        id: 'testVideo',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/videos');
@@ -167,16 +169,16 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'staging',
-          VITE_YOUTUBE_API_KEY: 'staging-api-key-789'
+          VITE_YOUTUBE_API_KEY: 'staging-api-key-789',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should use direct Google API endpoint for custom build modes', () => {
       const url = testService.buildUrl('channels', {
         part: 'snippet',
-        forUsername: 'testchannel'
+        forUsername: 'testchannel',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/channels');
@@ -192,9 +194,9 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'production',
-          VITE_YOUTUBE_API_KEY: 'test-key'
+          VITE_YOUTUBE_API_KEY: 'test-key',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
@@ -203,7 +205,7 @@ describe('buildUrl function with different MODE values', () => {
         part: 'snippet',
         q: 'test search with spaces & symbols',
         type: 'video',
-        order: 'relevance'
+        order: 'relevance',
       });
 
       expect(url).toContain('q=test+search+with+spaces+%26+symbols');
@@ -216,7 +218,7 @@ describe('buildUrl function with different MODE values', () => {
         part: 'snippet',
         id: 'video123',
         maxResults: '',
-        order: ''
+        order: '',
       });
 
       expect(url).toContain('part=snippet');
@@ -229,7 +231,7 @@ describe('buildUrl function with different MODE values', () => {
     it('should handle multiple video IDs correctly', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet,statistics',
-        id: 'video1,video2,video3'
+        id: 'video1,video2,video3',
       });
 
       expect(url).toContain('id=video1%2Cvideo2%2Cvideo3');
@@ -237,7 +239,7 @@ describe('buildUrl function with different MODE values', () => {
 
     it('should always add API key parameter', () => {
       const url = testService.buildUrl('videos', {
-        part: 'snippet'
+        part: 'snippet',
       });
 
       expect(url).toContain('key=test-key');
@@ -250,20 +252,20 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'production',
-          VITE_YOUTUBE_API_KEY: undefined
+          VITE_YOUTUBE_API_KEY: undefined,
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should handle missing API key gracefully', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet',
-        id: 'video123'
+        id: 'video123',
       });
 
       expect(url).toContain('key=');
-      
+
       // Verify the URL is still valid
       const urlObject = new URL(url);
       expect(urlObject.searchParams.get('key')).toBe('');
@@ -278,21 +280,21 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'production',
-          VITE_YOUTUBE_API_KEY: 'valid-key'
+          VITE_YOUTUBE_API_KEY: 'valid-key',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should generate valid URLs that can be parsed', () => {
       const url = testService.buildUrl('videos', {
         part: 'snippet,statistics,contentDetails',
-        id: 'testVideo123'
+        id: 'testVideo123',
       });
 
       // Should not throw when creating URL object
       expect(() => new URL(url)).not.toThrow();
-      
+
       const urlObject = new URL(url);
       expect(urlObject.protocol).toBe('https:');
       expect(urlObject.hostname).toBe('www.googleapis.com');
@@ -304,7 +306,7 @@ describe('buildUrl function with different MODE values', () => {
         part: 'snippet',
         q: 'javascript tutorial',
         type: 'video',
-        maxResults: '25'
+        maxResults: '25',
       });
 
       const urlObject = new URL(url);
@@ -322,15 +324,15 @@ describe('buildUrl function with different MODE values', () => {
         value: {
           ...originalEnv,
           MODE: 'production',
-          VITE_YOUTUBE_API_KEY: 'edge-case-key'
+          VITE_YOUTUBE_API_KEY: 'edge-case-key',
         },
-        configurable: true
+        configurable: true,
       });
     });
 
     it('should handle empty endpoint', () => {
       const url = testService.buildUrl('', {
-        part: 'snippet'
+        part: 'snippet',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/');
@@ -346,7 +348,7 @@ describe('buildUrl function with different MODE values', () => {
 
     it('should handle special characters in endpoint', () => {
       const url = testService.buildUrl('search', {
-        part: 'snippet'
+        part: 'snippet',
       });
 
       expect(url).toContain('https://www.googleapis.com/youtube/v3/search');
@@ -357,23 +359,23 @@ describe('buildUrl function with different MODE values', () => {
     it('should maintain consistent URL format across different modes', () => {
       const params = {
         part: 'snippet,statistics',
-        id: 'testVideo'
+        id: 'testVideo',
       };
 
       // Test development mode
       vi.stubGlobal('window', {
-        location: { origin: 'http://localhost:3000' }
+        location: { origin: 'http://localhost:3000' },
       });
       Object.defineProperty(import.meta, 'env', {
         value: { ...originalEnv, MODE: 'development', VITE_YOUTUBE_API_KEY: 'dev-key' },
-        configurable: true
+        configurable: true,
       });
       const devUrl = testService.buildUrl('videos', params);
 
       // Test production mode
       Object.defineProperty(import.meta, 'env', {
         value: { ...originalEnv, MODE: 'production', VITE_YOUTUBE_API_KEY: 'prod-key' },
-        configurable: true
+        configurable: true,
       });
       const prodUrl = testService.buildUrl('videos', params);
 
@@ -383,7 +385,7 @@ describe('buildUrl function with different MODE values', () => {
 
       expect(devUrlObj.searchParams.get('part')).toBe(prodUrlObj.searchParams.get('part'));
       expect(devUrlObj.searchParams.get('id')).toBe(prodUrlObj.searchParams.get('id'));
-      
+
       // But different base URLs
       expect(devUrl).toContain('localhost:3000/api/youtube/v3/');
       expect(prodUrl).toContain('googleapis.com/youtube/v3/');
@@ -391,20 +393,20 @@ describe('buildUrl function with different MODE values', () => {
 
     it('should preserve API key security in all modes', () => {
       const modes = ['development', 'production', 'test', 'staging'];
-      
+
       modes.forEach(mode => {
         Object.defineProperty(import.meta, 'env', {
-          value: { 
-            ...originalEnv, 
-            MODE: mode, 
-            VITE_YOUTUBE_API_KEY: `${mode}-secret-key` 
+          value: {
+            ...originalEnv,
+            MODE: mode,
+            VITE_YOUTUBE_API_KEY: `${mode}-secret-key`,
           },
-          configurable: true
+          configurable: true,
         });
 
         if (mode === 'development') {
           vi.stubGlobal('window', {
-            location: { origin: 'http://localhost:3000' }
+            location: { origin: 'http://localhost:3000' },
           });
         }
 
