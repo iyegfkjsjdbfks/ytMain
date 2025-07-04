@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
@@ -370,12 +370,6 @@ describe('Unified Video Hooks', () => {
           { id: 'related-1', title: 'Related Video 1' },
           { id: 'related-2', title: 'Related Video 2' }
         ];
-
-        // Mock the videoApi for related videos (this hook uses legacy API)
-        const mockVideoApi = {
-          getVideo: vi.fn().mockResolvedValue({ data: mockVideo, success: true }),
-          getRelatedVideos: vi.fn().mockResolvedValue({ data: mockRelatedVideos, success: true })
-        };
 
         // This test would require mocking the videoApi dependency
         // For now, we'll test the structure

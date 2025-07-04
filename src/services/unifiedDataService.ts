@@ -1,4 +1,4 @@
-import type { Video as LocalVideo, Channel as LocalChannel } from '../types/core';
+import type { Video as LocalVideo } from '../types/core';
 import { youtubeService } from './api/youtubeService';
 import { 
   metadataNormalizationService, 

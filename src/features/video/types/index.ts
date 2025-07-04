@@ -3,8 +3,6 @@
  */
 
 // Re-export types from core to avoid conflicts
-import type { VideoVisibility as VideoVisibilityType } from '../../../types/core';
-
 export type { Video, VideoVisibility } from '../../../types/core';
 
 export interface Channel {

@@ -63,16 +63,6 @@ describe('UnifiedDataService', () => {
   });
 
   describe('getTrendingVideos', () => {
-    const mockLocalVideos = [
-      { id: 'local-1', title: 'Local Video 1', source: 'local' },
-      { id: 'local-2', title: 'Local Video 2', source: 'local' }
-    ];
-
-    const mockYoutubeVideos = [
-      { id: 'yt-1', title: 'YouTube Video 1', source: 'youtube' },
-      { id: 'yt-2', title: 'YouTube Video 2', source: 'youtube' }
-    ];
-
     beforeEach(() => {
       // Mock local video service
       mockVideoServiceModule.getVideos.mockResolvedValue([

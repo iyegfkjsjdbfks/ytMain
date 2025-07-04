@@ -150,7 +150,6 @@ return;
         
         // Try unified data service first (handles both local and YouTube)
         let foundVideo = null;
-        let isFromUnifiedService = false;
         
         try {
           const unifiedVideo = await unifiedDataService.getVideoById(videoId);
