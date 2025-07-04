@@ -1,6 +1,6 @@
 
 import type * as React from 'react';
-import {  useState, useMemo  } from 'react';
+import {  useState, useMemo, useCallback  } from 'react';
 
 import { HomeIcon } from '@heroicons/react/24/solid';
 
@@ -13,28 +13,34 @@ const HomePage: React.FC = () => {
   const { data: videos, loading, error } = useVideos();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const handleSelectCategory = (category: string) => {
+  const handleSelectCategory = useCallback((category: string) => {
     setSelectedCategory(category);
     window.scrollTo(0, 0); // Scroll to top on category change
-  };
+  }, []);
 
   const filteredVideos = useMemo(() => {
+    if (!videos || videos.length === 0) {
+      return [];
+    }
     if (selectedCategory === 'All') {
       return videos;
     }
     return videos.filter(video => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
+  const categories = useMemo(() => [
+    'All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment', 
+    'Education', 'Technology', 'Travel', 'Food', 'Fashion', 
+    'Comedy', 'Science', 'Health', 'Business'
+  ], []);
 
-  const categories = ['All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment', 'Education', 'Technology', 'Travel', 'Food', 'Fashion', 'Comedy', 'Science', 'Health', 'Business'];
-
-  const categoryChips = (
+  const categoryChips = useMemo(() => (
     <CategoryChips
       categories={categories}
       selectedCategory={selectedCategory}
       onSelectCategory={handleSelectCategory}
     />
-  );
+  ), [categories, selectedCategory, handleSelectCategory]);
 
   return (
     <PageLayout

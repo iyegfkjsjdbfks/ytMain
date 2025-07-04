@@ -67,8 +67,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     port: 3000,
     host: true, // Listen on all addresses
-    open: true, // Open browser on server start
+    open: false, // Don't auto-open browser to prevent reload loops
     cors: true, // Enable CORS
+    // Optimize HMR to prevent reload loops
+    hmr: {
+      overlay: false, // Disable error overlay that might cause reloads
+    },
     // Add headers for YouTube iframe compatibility
     headers: {
       'Cross-Origin-Embedder-Policy': 'unsafe-none',

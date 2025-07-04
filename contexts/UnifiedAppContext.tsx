@@ -140,16 +140,10 @@ interface UnifiedAppContextType {
 }
 
 // Create Context
-const UnifiedAppContext = createContext<UnifiedAppContextType | undefined>(undefined);
+export const UnifiedAppContext = createContext<UnifiedAppContextType | undefined>(undefined);
 
-// Custom Hook
-export const useUnifiedApp = () => {
-  const context = useContext(UnifiedAppContext);
-  if (context === undefined) {
-    throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
-  }
-  return context;
-};
+// Custom Hook with consistent export for Fast Refresh - moved to separate file to avoid Fast Refresh issues
+// See hooks/useUnifiedApp.ts;
 
 // Provider Props
 interface UnifiedAppProviderProps {
@@ -301,22 +295,38 @@ return false;
         const token = localStorage.getItem('youtube_clone_token');
 
         if (storedUser && token) {
-          dispatch({ type: 'SET_USER', payload: JSON.parse(storedUser) });
+          try {
+            const user = JSON.parse(storedUser);
+            dispatch({ type: 'SET_USER', payload: user });
+          } catch (parseError) {
+            console.warn('Failed to parse stored user data, clearing:', parseError);
+            localStorage.removeItem('youtube_clone_user');
+            localStorage.removeItem('youtube_clone_token');
+          }
         }
 
         // Initialize theme
         const storedTheme = localStorage.getItem('youtube_clone_theme') as 'light' | 'dark' | 'system';
-        if (storedTheme) {
+        if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {
           dispatch({ type: 'SET_THEME', payload: storedTheme });
         }
 
         // Initialize watch later
         const storedWatchLater = localStorage.getItem('youtube_clone_watch_later');
         if (storedWatchLater) {
-          const watchLaterVideos = JSON.parse(storedWatchLater);
-          watchLaterVideos.forEach((videoId: string) => {
-            dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
-          });
+          try {
+            const watchLaterVideos = JSON.parse(storedWatchLater);
+            if (Array.isArray(watchLaterVideos)) {
+              watchLaterVideos.forEach((videoId: string) => {
+                if (typeof videoId === 'string') {
+                  dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
+                }
+              });
+            }
+          } catch (parseError) {
+            console.warn('Failed to parse stored watch later data, clearing:', parseError);
+            localStorage.removeItem('youtube_clone_watch_later');
+          }
         }
       } catch (error) {
         console.error('Failed to initialize app state:', error);

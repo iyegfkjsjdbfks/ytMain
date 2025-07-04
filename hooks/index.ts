@@ -9,6 +9,8 @@ export { useLocalStorage } from './useLocalStorage';
 export { useAsyncState } from './useAsyncState';
 export { useVideoPlayer } from './useVideoPlayer';
 export { useSubscriptions } from './useSubscriptions';
+export { useUnifiedApp } from './useUnifiedApp';
+export { useQueryClient } from './useQueryClient';
 export {
   useIntersectionObserver,
   useLazyImage,

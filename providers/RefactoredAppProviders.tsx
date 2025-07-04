@@ -10,31 +10,7 @@ import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerCont
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
 import { WatchLaterProvider } from '../contexts/WatchLaterContext';
-
-// Create a single, optimized QueryClient instance
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes
-      retry: (failureCount, error) => {
-        // Don't retry on 4xx errors
-        if (error && typeof error === 'object' && 'status' in error) {
-          const { status } = (error as any);
-          if (status >= 400 && status < 500) {
-return false;
-}
-        }
-        return failureCount < 2;
-      },
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: true,
-    },
-    mutations: {
-      retry: 1,
-    },
-  },
-});
+import { queryClient } from '../hooks/useQueryClient';
 
 interface RefactoredAppProvidersProps {
   children: ReactNode;
@@ -75,12 +51,6 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
     </ErrorBoundary>
   );
 };
-
-/**
- * Hook to access the QueryClient instance
- * Useful for imperative cache operations
- */
-export const useQueryClient = () => queryClient;
 
 /**
  * Provider for testing environments

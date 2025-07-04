@@ -28,12 +28,14 @@ export function useAsyncData<T>(
   const [data, setData] = useState<T>(initialData as T);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Use a stable reference to prevent infinite re-renders
   const asyncFunctionRef = useRef(asyncFunction);
-
-  // Update ref when asyncFunction changes
+  
+  // Only update ref if function actually changed (prevent unnecessary updates)
   useEffect(() => {
     asyncFunctionRef.current = asyncFunction;
-  }, [asyncFunction]);
+  });
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -41,23 +43,30 @@ export function useAsyncData<T>(
 
     try {
       const result = await asyncFunctionRef.current();
-      // Added empty response handling
-      if (!result) {
-        throw new Error('No data received');
+      // Handle empty or null results gracefully
+      if (result === null || result === undefined) {
+        console.warn('useAsyncData: Received null/undefined result, using initial data');
+        setData(initialData as T);
+      } else {
+        setData(result);
       }
-      setData(result);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       console.error('useAsyncData error:', err);
+      // On error, use initial data if available
+      if (initialData !== undefined) {
+        setData(initialData as T);
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [initialData]);
 
+  // Use a more stable dependencies array to prevent infinite re-renders
   useEffect(() => {
     fetchData();
-  }, [fetchData, ...dependencies]);
+  }, [fetchData, JSON.stringify(dependencies)]);
 
   const refetch = useCallback(() => fetchData(), [fetchData]);
 
