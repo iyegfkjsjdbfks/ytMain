@@ -183,14 +183,14 @@ return;
             console.log('Successfully loaded video from unified service:', foundVideo);
           }
         } catch (error) {
-          console.warn('Failed to load from unified service, trying mock service:', error);
+          console.warn('Failed to load from unified service, trying real video service:', error);
         }
 
-        // Fallback to mock service if unified service didn't find the video
+        // Fallback to real video service if unified service didn't find the video
         if (!foundVideo) {
           const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
           foundVideo = await getVideoById(cleanVideoId);
-          console.log('Loaded video from mock service:', foundVideo);
+          console.log('Loaded video from real video service:', foundVideo);
         }
 
         if (!foundVideo) {

@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
 import type { Video } from '../types';
+import { getVideos, getVideosByCategory } from '../services/realVideoService';
 
 interface UseVideoDataOptions {
   category?: string;
@@ -22,37 +23,12 @@ interface UseVideoDataReturn {
 const videoCache = new Map<string, { data: Video[]; timestamp: number }>();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-// Mock data generator for development
-const generateMockVideos = (count: number, category?: string): Video[] => {
-  return Array.from({ length: count }, (_, index) => {
-    const uploadedAt = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString();
-    return {
-      id: `video-${Date.now()}-${index}`,
-      title: `Sample Video ${index + 1} ${category ? `- ${category}` : ''}`,
-      description: `This is a sample video description for video ${index + 1}`,
-      thumbnailUrl: `https://picsum.photos/320/180?random=${index}`,
-      videoUrl: `https://example.com/video-${index}.mp4`,
-      duration: `${Math.floor(Math.random() * 600) + 60}`, // 1-10 minutes as string
-      views: `${Math.floor(Math.random() * 1000000)}`,
-      likes: Math.floor(Math.random() * 10000),
-      dislikes: Math.floor(Math.random() * 1000),
-      uploadedAt,
-      publishedAt: uploadedAt,
-      channelName: `Channel ${Math.floor(Math.random() * 100)}`,
-      channelId: `channel-${Math.floor(Math.random() * 100)}`,
-      channelAvatarUrl: `https://picsum.photos/40/40?random=${index + 1000}`,
-      category: category || ['Technology', 'Gaming', 'Music', 'Education', 'Entertainment'][Math.floor(Math.random() * 5)],
-      tags: [`tag${index}`, 'sample', category || 'general'].filter(Boolean),
-      isLive: Math.random() > 0.9,
-      isShort: false,
-      isSaved: false,
-      isLiked: false,
-      isDisliked: false,
-      visibility: 'public' as const,
-      createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-    } as Video;
-  });
+// Real video data fetcher
+const fetchRealVideos = async (category?: string): Promise<Video[]> => {
+  if (category && category !== 'all') {
+    return await getVideosByCategory(category);
+  }
+  return await getVideos();
 };
 
 export const useOptimizedVideoData = ({
@@ -89,13 +65,17 @@ export const useOptimizedVideoData = ({
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Generate mock data
-      const newVideos = generateMockVideos(limit, category);
+      // Fetch real video data
+      const allVideos = await fetchRealVideos(category);
 
-      // Simulate pagination
-      if (pageNum > 3) {
+      // Simulate pagination with real videos
+      const startIndex = (pageNum - 1) * limit;
+      const endIndex = startIndex + limit;
+      const newVideos = allVideos.slice(startIndex, endIndex);
+
+      // Check if there are more videos
+      if (endIndex >= allVideos.length) {
         setHasMore(false);
-        return;
       }
 
       const updatedData = append ? [...data, ...newVideos] : newVideos;
