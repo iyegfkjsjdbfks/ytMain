@@ -89,7 +89,7 @@ inputRef.current.blur();
 
   const handleInputFocus = () => {
     if (query.trim() === '') {
-      loadRecentSearches();
+      void loadRecentSearches();
     } else if (suggestions.length > 0) {
       setShowSuggestions(true);
       setShowRecentSearches(false);
@@ -100,7 +100,7 @@ inputRef.current.blur();
     const newQuery = e.target.value;
     setQuery(newQuery);
     if (newQuery.trim() === '') {
-      loadRecentSearches(); // Load recent if input becomes empty
+      void loadRecentSearches(); // Load recent if input becomes empty
     } else {
       setShowRecentSearches(false); // Hide recent if user starts typing
       // Suggestions will be handled by the debounced useEffect
@@ -165,7 +165,13 @@ inputRef.current.blur();
           `}
           aria-label="Search YouTube"
           aria-autocomplete="list"
-          aria-controls={showSuggestions ? 'search-suggestions-listbox' : (showRecentSearches ? 'recent-searches-listbox' : undefined)}
+          aria-controls={
+            showSuggestions 
+              ? 'search-suggestions-listbox' 
+              : showRecentSearches 
+                ? 'recent-searches-listbox' 
+                : undefined
+          }
         />
         <button
           type="submit"
@@ -194,8 +200,8 @@ inputRef.current.blur();
           className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
           aria-label="Recent searches"
         >
-          {recentSearches.map((searchTerm, index) => (
-            <li key={`${searchTerm}-${index}`} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
+          {recentSearches.map((searchTerm) => (
+            <li key={searchTerm} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
               <button
                 onClick={() => handleSearch(searchTerm)}
                 className="flex items-center flex-grow text-left"
