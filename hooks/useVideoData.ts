@@ -56,25 +56,28 @@ export function useTrendingVideos(category: string = 'all') {
  */
 export function useSubscriptionsFeed() {
   const fetchSubscriptionsFeed = useCallback(async (): Promise<Video[]> => {
-    const channelNames = await getSubscribedChannelNames();
+    const channelNames: string[] = await getSubscribedChannelNames();
     if (channelNames.length === 0) {
       return [];
     }
 
-    const videosPromises = channelNames.map(name => getVideosByChannelName(name));
+    const videosPromises = channelNames.map((name: string) => getVideosByChannelName(name));
     const videosByChannel = await Promise.all(videosPromises);
 
-    const allVideos = videosByChannel.flat();
+    const allVideos: Video[] = videosByChannel.flat();
 
     // Sort by upload date
-    const sortedVideos = allVideos.sort((a, b) =>
+    const sortedVideos = allVideos.sort((a: Video, b: Video) =>
       parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt),
     );
 
     return sortedVideos;
   }, []);
 
-  return useAsyncData<Video[]>(fetchSubscriptionsFeed, { initialData: [] });
+  return useAsyncData<Video[]>(fetchSubscriptionsFeed, { 
+    initialData: [],
+    dependencies: []
+  });
 }
 
 /**

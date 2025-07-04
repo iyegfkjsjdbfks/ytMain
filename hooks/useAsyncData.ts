@@ -72,6 +72,7 @@ export function useAsyncData<T>(
       return () => clearTimeout(timeoutId);
     } else {
       fetchData();
+      return undefined; // Explicit return for all code paths
     }
   }, [fetchData, JSON.stringify(dependencies)]);
 
