@@ -40,6 +40,14 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const isShortsPage = location.pathname === '/shorts';
   const mainContentPaddingClass = isShortsPage ? 'p-0' : 'p-3 sm:p-4 md:p-5 lg:p-6';
 
+  // Calculate sidebar margin based on state and screen size
+  const getSidebarMargin = () => {
+    if (isSidebarOpen) {
+      return 'md:ml-60';
+    }
+    return 'ml-0';
+  };
+
   return (
     <div className="flex flex-col h-screen">
       <Header toggleSidebar={toggleSidebar} />
@@ -48,10 +56,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
         <main
           id="main-content"
           role="main"
-          className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950
-            ${isSidebarOpen && window.innerWidth >= 768 ? 'md:ml-60' : 'ml-0'} 
-            ${isShortsPage ? 'overflow-hidden' : ''} // Prevent scroll on main if shorts page
-            `}
+          className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}
         >
           <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
             <Outlet /> {/* Render child routes */}

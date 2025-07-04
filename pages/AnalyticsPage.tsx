@@ -42,17 +42,15 @@ const AnalyticsPage: React.FC = () => {
     const fetchAnalyticsData = async () => {
       setLoading(true);
       try {
-        const videos = await getVideos();
-
-        // Generate mock analytics data
+        // Generate mock analytics data without fetching videos
         const mockAnalytics: AnalyticsData = {
-          totalViews: videos.reduce((sum, video) => sum + parseViewCount(video.views), 0),
-          totalVideos: videos.length,
+          totalViews: Math.floor(Math.random() * 1000000) + 100000,
+          totalVideos: Math.floor(Math.random() * 100) + 10,
           totalWatchTime: Math.floor(Math.random() * 10000) + 5000, // Mock hours
           totalLikes: Math.floor(Math.random() * 50000) + 10000,
           totalComments: Math.floor(Math.random() * 5000) + 1000,
           subscriberGrowth: Math.floor(Math.random() * 1000) + 100,
-          topPerformingVideo: videos[0] || null,
+          topPerformingVideo: null, // No local videos available
           recentPerformance: {
             views: Array.from({ length: 30 }, () => Math.floor(Math.random() * 10000) + 1000),
             watchTime: Array.from({ length: 30 }, () => Math.floor(Math.random() * 500) + 100),
@@ -63,15 +61,7 @@ const AnalyticsPage: React.FC = () => {
               return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
             }),
           },
-          videoPerformance: videos.slice(0, 10).map(video => ({
-            video,
-            views: parseViewCount(video.views),
-            likes: Math.floor(Math.random() * 5000) + 100,
-            comments: Math.floor(Math.random() * 500) + 10,
-            watchTime: Math.floor(Math.random() * 300) + 60,
-            ctr: Math.random() * 10 + 2,
-            retention: Math.random() * 40 + 40,
-          })),
+          videoPerformance: [], // No local videos available
         };
 
         setAnalyticsData(mockAnalytics);

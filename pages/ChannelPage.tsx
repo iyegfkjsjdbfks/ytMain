@@ -9,7 +9,7 @@ import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabContent from '../components/ChannelTabContent';
 import ChannelTabs from '../components/ChannelTabs';
 import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChannelCommunityPosts } from '../services/mockVideoService';
+import { unifiedDataService } from '../src/services/unifiedDataService';
 
 import type { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
 

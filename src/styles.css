@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Click Fix Styles - Ensure all interactive elements are clickable */
+button, 
+[role="button"],
+.cursor-pointer,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Remove any global pointer-events none that might be blocking clicks */
+* {
+  pointer-events: auto;
+}
+
+/* Ensure proper z-index for interactive elements */
+button,
+[role="button"],
+.cursor-pointer {
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix for any potential overlay issues */
+body::before,
+body::after,
+html::before,
+html::after {
+  pointer-events: none;
+}
+
+/* Ensure React root doesn't block events */
+#root {
+  pointer-events: auto;
+}
+
+/* Fix for any modal or overlay issues */
+.modal-overlay,
+.backdrop,
+[data-backdrop] {
+  pointer-events: auto;
+}
+
+.modal-overlay > *,
+.backdrop > * {
+  pointer-events: auto;
+}
+
 /* Custom styles */
 body {
   font-family: 'Roboto', sans-serif; /* YouTube uses Roboto */

@@ -1,6 +1,6 @@
 import type React from 'react';
 
-import { cn } from '../src/lib/utils';
+import { cn } from '../utils/cn';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
