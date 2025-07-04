@@ -201,6 +201,11 @@ export default {
 export const removeVideoFromPlaylist = async (_playlistId: string, _videoId: string) => {};
 export const updateUserPlaylistDetails = async (_playlistId: string, _details: any) => {};
 
+// Subscription management functions (simplified for now)
+export const getSubscribedChannels = async () => [];
+export const updateSubscriptionNotifications = async (_channelId: string, _enabled: boolean) => {};
+export const unsubscribeFromChannel = async (_channelId: string) => {};
+
 // Export sample videos for compatibility
 export const realVideos = sampleVideos;
 export const getSubscribedChannelNames = async () => ['blender-foundation', 'sample-channel'];

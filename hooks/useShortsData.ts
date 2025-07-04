@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { getShortsVideos } from '../services/mockVideoService';
+import { getShortsVideos } from '../services/realVideoService';
 
 import { useAsyncData } from './useAsyncData';
 

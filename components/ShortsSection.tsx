@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { getShortsVideos } from '../services/mockVideoService';
+import { getShortsVideos } from '../services/realVideoService';
 
 import ShortsIcon from './icons/ShortsIcon';
 import ShortDisplayCard from './ShortDisplayCard';

@@ -10,7 +10,7 @@ import {
   getRecentSearches,
   removeRecentSearch,
   clearAllRecentSearches,
-} from '../services/mockVideoService';
+} from '../services/realVideoService';
 
 import ClockIcon from './icons/ClockIcon'; // For recent searches
 import SearchIcon from './icons/SearchIcon';

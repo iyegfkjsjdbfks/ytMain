@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { getVideos } from '../services/mockVideoService';
+import { getVideos } from '../services/realVideoService';
 
 
 import HistoryIcon from './icons/HistoryIcon';

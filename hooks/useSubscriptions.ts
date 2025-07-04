@@ -4,7 +4,7 @@ import {
   getSubscribedChannels,
   updateSubscriptionNotifications,
   unsubscribeFromChannel,
-} from '../services/mockVideoService';
+} from '../services/realVideoService';
 
 export interface SubscribedChannel {
   id: string;
