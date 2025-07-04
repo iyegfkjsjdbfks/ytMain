@@ -27,6 +27,17 @@ const SearchBar: React.FC = memo(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 
 
+  const loadRecentSearches = useCallback(async () => {
+    const fetchedRecent = await getRecentSearches();
+    setRecentSearches(fetchedRecent);
+    if (fetchedRecent.length > 0) {
+      setShowRecentSearches(true);
+      setShowSuggestions(false); // Ensure suggestions are hidden
+    } else {
+      setShowRecentSearches(false);
+    }
+  }, []);
+
   const fetchSuggestionsDebounced = useCallback(async (currentQuery: string) => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
@@ -38,10 +49,10 @@ const SearchBar: React.FC = memo(() => {
       setShowSuggestions(false);
       // If query becomes empty, try to show recent searches
       if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {
-        loadRecentSearches();
+        void loadRecentSearches();
       }
     }
-  }, []);
+  }, [loadRecentSearches]);
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
@@ -74,16 +85,7 @@ inputRef.current.blur();
     handleSearch(suggestion);
   };
 
-  const loadRecentSearches = async () => {
-    const fetchedRecent = await getRecentSearches();
-    setRecentSearches(fetchedRecent);
-    if (fetchedRecent.length > 0) {
-      setShowRecentSearches(true);
-      setShowSuggestions(false); // Ensure suggestions are hidden
-    } else {
-      setShowRecentSearches(false);
-    }
-  };
+
 
   const handleInputFocus = () => {
     if (query.trim() === '') {
