@@ -49,7 +49,7 @@ const SearchBar: React.FC = memo(() => {
       setShowSuggestions(false);
       // If query becomes empty, try to show recent searches
       if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {
-        void loadRecentSearches();
+        loadRecentSearches().catch(console.error);
       }
     }
   }, [loadRecentSearches]);
@@ -89,7 +89,7 @@ inputRef.current.blur();
 
   const handleInputFocus = () => {
     if (query.trim() === '') {
-      void loadRecentSearches();
+      loadRecentSearches().catch(console.error);
     } else if (suggestions.length > 0) {
       setShowSuggestions(true);
       setShowRecentSearches(false);
@@ -100,7 +100,7 @@ inputRef.current.blur();
     const newQuery = e.target.value;
     setQuery(newQuery);
     if (newQuery.trim() === '') {
-      void loadRecentSearches(); // Load recent if input becomes empty
+      loadRecentSearches().catch(console.error); // Load recent if input becomes empty
     } else {
       setShowRecentSearches(false); // Hide recent if user starts typing
       // Suggestions will be handled by the debounced useEffect
@@ -166,10 +166,10 @@ inputRef.current.blur();
           aria-label="Search YouTube"
           aria-autocomplete="list"
           aria-controls={
-            showSuggestions 
-              ? 'search-suggestions-listbox' 
-              : showRecentSearches 
-                ? 'recent-searches-listbox' 
+            showSuggestions
+              ? 'search-suggestions-listbox'
+              : showRecentSearches
+                ? 'recent-searches-listbox'
                 : undefined
           }
         />
@@ -211,7 +211,7 @@ inputRef.current.blur();
               </button>
               <button
                 onClick={(e) => {
-                  void handleRemoveRecentSearch(searchTerm, e);
+                  handleRemoveRecentSearch(searchTerm, e).catch(console.error);
                 }}
                 className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label={`Remove ${searchTerm} from recent searches`}
@@ -224,7 +224,7 @@ inputRef.current.blur();
            <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
                 <button
                     onClick={(e) => {
-                      void handleClearAllRecent(e);
+                      handleClearAllRecent(e).catch(console.error);
                     }}
                     className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
                 >
