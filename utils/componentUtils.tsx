@@ -307,7 +307,5 @@ export default {
   buildChannelUrl,
   buildPlaylistUrl,
   isExternalUrl,
-  debounce,
-  throttle,
   safeLocalStorage,
 };

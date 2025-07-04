@@ -40,8 +40,16 @@ return;
         actions.unmute();
       }
       actions.play().catch((error: Error) => {
-        console.warn('Autoplay failed:', error);
-        // Autoplay might be blocked by browser policy
+        // More specific handling for common video playback issues
+        const errorMessage = error.message || String(error);
+        
+        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') || 
+            errorMessage.includes('ERR_NETWORK')) {
+          console.info('Autoplay skipped due to network/cache issues:', errorMessage);
+        } else {
+          console.warn('Autoplay failed:', errorMessage);
+        }
+        // Autoplay might be blocked by browser policy or network issues
       });
     } else if (!isIntersecting && isPlaying) {
       // Auto-pause when video leaves view and reset manual pause state
