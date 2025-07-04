@@ -1,5 +1,5 @@
-import type React from 'react';
-import { useState, useRef } from 'react';
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import React, { useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,

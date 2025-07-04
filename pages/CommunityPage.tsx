@@ -1,5 +1,5 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, no-duplicate-imports
+import React, { useState, useEffect } from 'react';
 
 import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
