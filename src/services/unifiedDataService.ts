@@ -611,6 +611,3 @@ class UnifiedDataService {
 // Export singleton instance
 export const unifiedDataService = new UnifiedDataService();
 export default unifiedDataService;
-
-// Export types
-export type { UnifiedDataConfig, UnifiedSearchFilters, UnifiedDataResponse };

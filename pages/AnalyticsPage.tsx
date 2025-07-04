@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { ChartBarIcon, EyeIcon, ClockIcon, UserGroupIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 
-import { getVideos } from '../services/mockVideoService';
+import { youtubeService } from '../src/services/api/youtubeService';
 import { parseViewCount } from '../utils/numberUtils';
 
 import type { Video } from '../types';
