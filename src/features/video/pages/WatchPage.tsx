@@ -134,7 +134,7 @@ const WatchPage: React.FC = () => {
               {isYouTubeUrl(video.videoUrl || '') ? (
                 <YouTubePlayer
                   videoId={getYouTubeVideoId(video.videoUrl || '') || video.id}
-                  autoplay={false}
+                  autoplay={true}
                   width="100%"
                   height={480}
                   controls={true}
@@ -145,7 +145,7 @@ const WatchPage: React.FC = () => {
                   src={video.videoUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
                   poster={video.thumbnailUrl}
                   title={video.title}
-                  autoplay={false}
+                  autoplay={true}
                   className="w-full"
                   useYouTube={false}
                   onTimeUpdate={(_currentTime, _duration) => {

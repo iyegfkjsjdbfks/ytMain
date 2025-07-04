@@ -213,14 +213,14 @@ const WatchPage: React.FC = () => {
                     return (
                       <YouTubePlayer
                         video={video}
-                        autoplay={false}
+                        autoplay={true}
                       />
                     );
                   default:
                     return (
                       <YouTubePlayerWrapper
                         videoId={videoId}
-                        autoplay={false}
+                        autoplay={true}
                         width="100%"
                         height={480}
                         controls={true}
@@ -230,8 +230,8 @@ const WatchPage: React.FC = () => {
               })() : (
                 <AdvancedVideoPlayer
                   video={video}
-                  autoplay={false}
-                  muted={false}
+                  autoplay={true}
+                  muted={true}
                 />
               )}
             </div>

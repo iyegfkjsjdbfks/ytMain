@@ -172,6 +172,7 @@ return;
         videoId,
         playerVars: {
           autoplay: autoplay ? 1 : 0,
+          mute: autoplay ? 1 : 0, // Mute for autoplay to comply with browser policies
           controls: controls ? 1 : 0,
           modestbranding: 1,
           rel: 0,
@@ -186,14 +187,63 @@ return;
           // host: window.location.protocol + '//' + window.location.host // Not supported in playerVars
         },
         events: {
-          onReady: (_event: any) => {
+          onReady: (event: any) => {
             if (isMounted) {
               setIsPlayerReady(true);
               setPlayerError(null);
+
+              // Try to autoplay if autoplay is enabled
+              if (autoplay) {
+                try {
+                  console.log('Attempting to autoplay YouTube video...');
+                  event.target.playVideo();
+
+                  // Fallback: try again after a short delay if not playing
+                  setTimeout(() => {
+                    try {
+                      const playerState = event.target.getPlayerState();
+                      if (playerState !== 1) { // 1 = playing
+                        console.log('Retrying autoplay...');
+                        event.target.playVideo();
+                      }
+                    } catch (retryError) {
+                      console.warn('Autoplay retry failed:', retryError);
+                    }
+                  }, 1000);
+                } catch (error) {
+                  console.warn('Autoplay failed:', error);
+                }
+              }
             }
           },
-          onStateChange: (_event: any) => {
+          onStateChange: (event: any) => {
             // Handle state changes if needed
+            console.log('YouTube player state changed:', event.data);
+
+            // Unmute video after autoplay starts (state 1 = playing)
+            if (autoplay && event.data === 1) {
+              setTimeout(() => {
+                try {
+                  console.log('Unmuting video after autoplay...');
+                  event.target.unMute();
+
+                  // Resume playback after unmuting in case it paused
+                  setTimeout(() => {
+                    try {
+                      const currentState = event.target.getPlayerState();
+                      if (currentState !== 1) { // If not playing
+                        console.log('Resuming playback after unmute...');
+                        event.target.playVideo();
+                      }
+                    } catch (playError) {
+                      console.warn('Failed to resume playback after unmute:', playError);
+                    }
+                  }, 100); // Short delay to let unmute complete
+                } catch (error) {
+                  console.warn('Failed to unmute video:', error);
+                }
+              }, 1000);
+            }
           },
           onError: (event: any) => {
             if (!isMounted) {
@@ -207,6 +257,7 @@ return;
               150: 'Video not available in embedded players',
             };
             const message = errorMessages[event.data] || 'Unknown error occurred';
+            console.error('YouTube player error:', message, event.data);
             setPlayerError(message);
           },
         },
