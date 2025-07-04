@@ -223,7 +223,7 @@ inputRef.current.blur();
       )}
     </div>
   );
-};
+});
 
 SearchBar.displayName = 'SearchBar';
 
