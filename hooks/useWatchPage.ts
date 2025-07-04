@@ -189,8 +189,40 @@ return;
         // Fallback to real video service if unified service didn't find the video
         if (!foundVideo) {
           const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
-          foundVideo = await getVideoById(cleanVideoId);
-          console.log('Loaded video from real video service:', foundVideo);
+
+          // Check if this looks like a YouTube video ID (11 characters, alphanumeric)
+          const isYouTubeVideoId = cleanVideoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(cleanVideoId);
+
+          if (isYouTubeVideoId) {
+            // Create a YouTube video object
+            foundVideo = {
+              id: cleanVideoId,
+              title: 'YouTube Video',
+              description: 'Loading video details...',
+              thumbnailUrl: `https://img.youtube.com/vi/${cleanVideoId}/mqdefault.jpg`,
+              videoUrl: `https://www.youtube.com/watch?v=${cleanVideoId}`,
+              duration: '0:00',
+              views: '0',
+              likes: 0,
+              dislikes: 0,
+              uploadedAt: new Date().toISOString(),
+              channelName: 'YouTube',
+              channelId: 'youtube',
+              channelAvatarUrl: '/default-avatar.png',
+              category: 'General',
+              tags: [],
+              visibility: 'public' as VideoVisibility,
+              isLive: false,
+              isShort: false,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            };
+            console.log('Created YouTube video object for ID:', cleanVideoId);
+          } else {
+            // Try real video service for non-YouTube videos
+            foundVideo = await getVideoById(cleanVideoId);
+            console.log('Loaded video from real video service:', foundVideo);
+          }
         }
 
         if (!foundVideo) {
