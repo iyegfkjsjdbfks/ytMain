@@ -1,4 +1,3 @@
-import type { Video as LocalVideo } from '../types/core';
 import { youtubeService } from './api/youtubeService';
 import { 
   metadataNormalizationService, 
@@ -402,7 +401,7 @@ class UnifiedDataService {
 
   // Private methods for fetching from specific sources
 
-  private async fetchLocalTrendingVideos(filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
+  private async fetchLocalTrendingVideos(_filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     // Local trending videos disabled - returning empty array
     return [];
   }
