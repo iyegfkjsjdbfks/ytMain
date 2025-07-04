@@ -170,7 +170,7 @@ export const removeRecentSearch = async (_search: string) => [];
 export const saveRecentSearch = async (_query: string) => {};
 
 // Upload simulation
-export const uploadVideo = async (data: VideoUploadData, onProgress?: (progress: UploadProgress) => void): Promise<void> => {
+export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress: UploadProgress) => void): Promise<void> => {
   const progressSteps = [
     { percentage: 0, status: 'uploading' as const, message: 'Starting upload...' },
     { percentage: 25, status: 'uploading' as const, message: 'Uploading video file...' },
