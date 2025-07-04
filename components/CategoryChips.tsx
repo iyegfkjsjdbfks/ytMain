@@ -1,7 +1,7 @@
 
 import { useRef, useEffect, useState, useCallback } from 'react';
 
-import { cn } from '../utils/cn';
+import { cn } from '../src/lib/utils';
 
 interface CategoryChipsProps {
   categories: string[];

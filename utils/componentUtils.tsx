@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 
-import { cn } from './cn';
+import { cn } from '../src/lib/utils';
 
 // Common component patterns and utilities
 

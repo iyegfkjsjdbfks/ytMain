@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo, memo } from 'react';
 
 import {
   PlayIcon,
@@ -654,4 +654,4 @@ return null;
   );
 };
 
-export default VideoEditor;
+export default memo(VideoEditor);

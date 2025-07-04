@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, no-duplicate-imports
 import React, { useState, useRef } from 'react';
 
 import {

@@ -15,7 +15,7 @@ import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useDropdownMenu } from '../hooks/useDropdownMenu';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { isYouTubeUrl } from '../src/lib/youtube-utils';
-import { cn } from '../utils/cn';
+import { cn } from '../src/lib/utils';
 import { withMemo } from '../utils/componentOptimizations';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';

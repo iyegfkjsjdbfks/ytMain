@@ -1,7 +1,8 @@
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, no-duplicate-imports
+import React, { useState, useEffect, memo, lazy, Suspense } from 'react';
 
 import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
+// Register Chart.js components when needed
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,7 +15,10 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
-import { Line, Doughnut } from 'react-chartjs-2';
+
+// Lazy load Chart.js components for better performance
+const LazyLineChart = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Line })));
+const LazyDoughnutChart = lazy(() => import('react-chartjs-2').then(module => ({ default: module.Doughnut })));
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +31,7 @@ ChartJS.register(
   Legend,
   ArcElement,
 );
+
 
 interface RevenueData {
   date: string;
@@ -401,7 +406,9 @@ return { labels: [], datasets: [] };
             </select>
           </div>
           <div className="h-80">
-            <Line data={getRevenueChartData()} options={chartOptions} />
+            <Suspense fallback={<div className="flex items-center justify-center h-full">Loading chart...</div>}>
+              <LazyLineChart data={getRevenueChartData()} options={chartOptions} />
+            </Suspense>
           </div>
         </div>
 
@@ -411,7 +418,9 @@ return { labels: [], datasets: [] };
             Revenue Sources
           </h2>
           <div className="h-80">
-            <Doughnut data={getRevenueSourcesData()} options={doughnutOptions} />
+            <Suspense fallback={<div className="flex items-center justify-center h-full">Loading chart...</div>}>
+              <LazyDoughnutChart data={getRevenueSourcesData()} options={doughnutOptions} />
+            </Suspense>
           </div>
         </div>
       </div>
@@ -523,4 +532,4 @@ return { labels: [], datasets: [] };
   );
 };
 
-export default MonetizationPage;
+export default memo(MonetizationPage);

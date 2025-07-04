@@ -8,7 +8,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';
 import { useHomeVideos } from '../hooks/useOptimizedVideoData';
-import { cn } from '../utils/cn';
+import { cn } from '../src/lib/utils';
 
 import type { Video } from '../types';
 
