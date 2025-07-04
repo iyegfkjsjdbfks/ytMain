@@ -310,7 +310,7 @@ const WatchPage: React.FC = () => {
           {/* Sidebar - Related videos */}
           <aside className="space-y-4">
             <RecommendationEngine
-              currentVideoId={video.id}
+              currentVideo={video}
               onVideoSelect={(videoId) => {
                 window.location.href = `/watch?v=${videoId}`;
               }}
