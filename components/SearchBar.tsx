@@ -68,7 +68,7 @@ const SearchBar: React.FC = memo(() => {
       setQuery(trimmedQuery);
       setShowSuggestions(false);
       setShowRecentSearches(false);
-      saveRecentSearch(trimmedQuery);
+      void saveRecentSearch(trimmedQuery);
       navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
       if (inputRef.current) {
 inputRef.current.blur();
@@ -84,8 +84,6 @@ inputRef.current.blur();
   const handleSuggestionClick = (suggestion: string) => {
     handleSearch(suggestion);
   };
-
-
 
   const handleInputFocus = () => {
     if (query.trim() === '') {
@@ -166,11 +164,11 @@ inputRef.current.blur();
           aria-label="Search YouTube"
           aria-autocomplete="list"
           aria-controls={
-            showSuggestions
-              ? 'search-suggestions-listbox'
-              : showRecentSearches
-                ? 'recent-searches-listbox'
-                : undefined
+            (() => {
+              if (showSuggestions) return 'search-suggestions-listbox';
+              if (showRecentSearches) return 'recent-searches-listbox';
+              return undefined;
+            })()
           }
         />
         <button
