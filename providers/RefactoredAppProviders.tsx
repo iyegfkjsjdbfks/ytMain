@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ErrorBoundary from '../components/ErrorBoundary';
+import FastLoadingSpinner from '../components/FastLoadingSpinner';
 import SuspenseWrapper from '../components/SuspenseWrapper';
 import { AuthProvider } from '../contexts/AuthContext';
 import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
@@ -37,9 +38,7 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
             <OptimizedMiniplayerProvider>
               <WatchLaterProvider>
                 <UnifiedAppProvider>
-                  <SuspenseWrapper fallback={<div className="flex items-center justify-center min-h-screen">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
-                  </div>}>
+                  <SuspenseWrapper fallback={<FastLoadingSpinner />}>
                     {children}
                   </SuspenseWrapper>
                 </UnifiedAppProvider>

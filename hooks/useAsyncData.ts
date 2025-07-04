@@ -26,7 +26,7 @@ export function useAsyncData<T>(
   const { initialData, dependencies = [] } = options;
 
   const [data, setData] = useState<T>(initialData as T);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialData); // Don't show loading if we have initial data
   const [error, setError] = useState<string | null>(null);
   
   // Use a stable reference to prevent infinite re-renders
@@ -64,8 +64,15 @@ export function useAsyncData<T>(
   }, [initialData]);
 
   // Use a more stable dependencies array to prevent infinite re-renders
+  // Also delay execution slightly if we have initial data to improve perceived performance
   useEffect(() => {
-    fetchData();
+    if (initialData) {
+      // Delay fetch to improve initial render performance
+      const timeoutId = setTimeout(fetchData, 100);
+      return () => clearTimeout(timeoutId);
+    } else {
+      fetchData();
+    }
   }, [fetchData, JSON.stringify(dependencies)]);
 
   const refetch = useCallback(() => fetchData(), [fetchData]);

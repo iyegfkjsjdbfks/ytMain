@@ -13,7 +13,11 @@ import type { Video } from '../src/types/core';
  */
 export function useVideos() {
   const fetchVideos = useCallback(() => getVideos(), []);
-  return useAsyncData<Video[]>(fetchVideos, { initialData: [] });
+  // Provide empty array as initial data to show UI immediately
+  return useAsyncData<Video[]>(fetchVideos, { 
+    initialData: [],
+    dependencies: []
+  });
 }
 
 /**

@@ -113,6 +113,16 @@ export const getLikedVideos = async () => dummyVideos.slice(1, 3);
 export const getWatchLaterVideos = async () => dummyVideos.slice(0, 3);
 export const getRecentSearches = async () => ['nature', 'coding', 'cooking'];
 export const clearAllRecentSearches = async () => {};
+
+// Default video data service
+export default {
+  getVideos,
+  getVideoById,
+  getShortsVideos,
+  searchVideos,
+  getChannels,
+  getVideosByChannelName,
+};
 export const createUserPlaylist = async (name: string) => ({ id: '1', title: name, videoIds: [], videoCount: 0, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() });
 export const removeVideoFromPlaylist = async (_playlistId: string, _videoId: string) => {};
 export const updateUserPlaylistDetails = async (_id: string, _details: any) => {};

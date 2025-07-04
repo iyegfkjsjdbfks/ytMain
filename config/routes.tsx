@@ -1,16 +1,17 @@
 import { lazy } from 'react';
 
-
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import StudioLayout from '../components/StudioLayout';
+// Import HomePage directly for faster initial load
+import HomePage from '../pages/HomePage';
 
 import type { RouteObject } from 'react-router-dom';
 
-// Lazy load components for better performance
-const HomePage = lazy(() => import('../pages/HomePage'));
+// Lazy load secondary components for better performance
+// HomePage is loaded directly for faster initial render
 const WatchPage = lazy(() => import('../pages/WatchPage'));
 const SearchResultsPage = lazy(() => import('../pages/SearchResultsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));

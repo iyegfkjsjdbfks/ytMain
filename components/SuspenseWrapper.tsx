@@ -1,17 +1,13 @@
 import { Suspense, type ReactNode } from 'react';
 
-import LoadingSpinner from './LoadingSpinner';
+import FastLoadingSpinner from './FastLoadingSpinner';
 
 interface SuspenseWrapperProps {
   children: ReactNode;
   fallback?: ReactNode;
 }
 
-const DefaultFallback: React.FC = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <LoadingSpinner size="lg" />
-  </div>
-);
+const DefaultFallback: React.FC = () => <FastLoadingSpinner />;
 
 const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
   children,

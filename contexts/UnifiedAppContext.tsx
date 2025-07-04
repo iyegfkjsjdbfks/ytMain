@@ -289,6 +289,9 @@ return false;
   // Initialize state from localStorage
   React.useEffect(() => {
     const initializeState = () => {
+      // Set loading to false immediately for faster perceived performance
+      dispatch({ type: 'SET_AUTH_LOADING', payload: false });
+      
       try {
         // Initialize auth state
         const storedUser = localStorage.getItem('youtube_clone_user');
@@ -311,27 +314,27 @@ return false;
           dispatch({ type: 'SET_THEME', payload: storedTheme });
         }
 
-        // Initialize watch later
-        const storedWatchLater = localStorage.getItem('youtube_clone_watch_later');
-        if (storedWatchLater) {
-          try {
-            const watchLaterVideos = JSON.parse(storedWatchLater);
-            if (Array.isArray(watchLaterVideos)) {
-              watchLaterVideos.forEach((videoId: string) => {
-                if (typeof videoId === 'string') {
-                  dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
-                }
-              });
+        // Initialize watch later asynchronously to not block initial render
+        setTimeout(() => {
+          const storedWatchLater = localStorage.getItem('youtube_clone_watch_later');
+          if (storedWatchLater) {
+            try {
+              const watchLaterVideos = JSON.parse(storedWatchLater);
+              if (Array.isArray(watchLaterVideos)) {
+                watchLaterVideos.forEach((videoId: string) => {
+                  if (typeof videoId === 'string') {
+                    dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
+                  }
+                });
+              }
+            } catch (parseError) {
+              console.warn('Failed to parse stored watch later data, clearing:', parseError);
+              localStorage.removeItem('youtube_clone_watch_later');
             }
-          } catch (parseError) {
-            console.warn('Failed to parse stored watch later data, clearing:', parseError);
-            localStorage.removeItem('youtube_clone_watch_later');
           }
-        }
+        }, 0);
       } catch (error) {
         console.error('Failed to initialize app state:', error);
-      } finally {
-        dispatch({ type: 'SET_AUTH_LOADING', payload: false });
       }
     };
 
