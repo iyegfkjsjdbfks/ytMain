@@ -268,8 +268,6 @@ setIsNotificationsPanelOpen(false);
       </div>
     </header>
   );
-};
-
 });
 
 Header.displayName = 'Header';
