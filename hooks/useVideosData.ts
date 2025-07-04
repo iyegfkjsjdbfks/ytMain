@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 
 import { getVideos, getShortsVideos } from '../services/mockVideoService';
 import { unifiedDataService } from '../src/services/unifiedDataService';
-import type { UnifiedVideoMetadata } from '../src/services/metadataNormalizationService';
 
 import { useAsyncData } from './useAsyncData';
 
+import type { UnifiedVideoMetadata } from '../src/services/metadataNormalizationService';
 import type { Video } from '../src/types/core';
 
 
@@ -16,7 +16,7 @@ import type { Video } from '../src/types/core';
  */
 export function useVideosData(
   type: 'trending' | 'shorts' | 'all' = 'all',
-  useUnified: boolean = true
+  useUnified: boolean = true,
 ) {
   const fetchVideos = useCallback(async () => {
     if (useUnified) {
@@ -54,7 +54,7 @@ export function useVideosData(
  */
 export function useUnifiedVideosData(
   type: 'trending' | 'shorts' | 'all' = 'all',
-  limit: number = 50
+  limit: number = 50,
 ) {
   const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
     switch (type) {

@@ -8,7 +8,6 @@ import type { Video } from '../src/types/core';
 // YouTube Player API types
 
 
-
 interface YTPlayer {
   playVideo(): void;
   pauseVideo(): void;
@@ -79,7 +78,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Load YouTube IFrame API
   useEffect(() => {
-    if (window.YT && window.YT.Player) {
+    if (window.YT?.Player) {
       setIsAPIReady(true);
       return;
     }
@@ -88,7 +87,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     if (document.querySelector('script[src*="youtube.com/iframe_api"]')) {
       // Script is loading, wait for it
       const checkAPI = () => {
-        if (window.YT && window.YT.Player) {
+        if (window.YT?.Player) {
           setIsAPIReady(true);
         } else {
           setTimeout(checkAPI, 100);

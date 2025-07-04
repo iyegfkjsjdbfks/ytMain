@@ -66,23 +66,25 @@ const YOUTUBE_URL_PATTERNS = [
 
 // Type guard to detect YouTube videos
 const isYouTubeVideo = (video: Video | null): boolean => {
-  if (!video) return false;
-  
+  if (!video) {
+return false;
+}
+
   // Check video URL
   if (video.videoUrl && YOUTUBE_URL_PATTERNS.some(pattern => pattern.test(video.videoUrl))) {
     return true;
   }
-  
+
   // Check video ID (if it has youtube- prefix or similar patterns)
   if (video.id && /youtube|yt-/i.test(video.id)) {
     return true;
   }
-  
+
   // Check thumbnail URL for YouTube patterns
   if (video.thumbnailUrl && /youtube|ytimg/i.test(video.thumbnailUrl)) {
     return true;
   }
-  
+
   return false;
 };
 
@@ -147,10 +149,10 @@ return;
 
       try {
         console.log(`useWatchPage: Loading video data for ID: ${videoId}`);
-        
+
         // Try unified data service first (handles both local and YouTube)
         let foundVideo = null;
-        
+
         try {
           const unifiedVideo = await unifiedDataService.getVideoById(videoId);
           if (unifiedVideo) {
@@ -183,14 +185,14 @@ return;
         } catch (error) {
           console.warn('Failed to load from unified service, trying mock service:', error);
         }
-        
+
         // Fallback to mock service if unified service didn't find the video
         if (!foundVideo) {
           const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
           foundVideo = await getVideoById(cleanVideoId);
           console.log('Loaded video from mock service:', foundVideo);
         }
-        
+
         if (!foundVideo) {
           setVideo(null);
           setLoading(false);
@@ -203,11 +205,11 @@ return;
           channelName: foundVideo.channelName || 'Unknown Channel',
           channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png',
         };
-        
+
         console.log('Final video with channel info:', {
           channelName: videoWithChannelInfo.channelName,
           channelId: videoWithChannelInfo.channelId,
-          channelAvatarUrl: videoWithChannelInfo.channelAvatarUrl
+          channelAvatarUrl: videoWithChannelInfo.channelAvatarUrl,
         });
         setVideo(videoWithChannelInfo);
 
@@ -575,7 +577,7 @@ newDisliked = false;
 
   const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
   const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
-  
+
   // YouTube video detection flag
   const isYouTubeVideoFlag = isYouTubeVideo(video);
 

@@ -1,7 +1,5 @@
 import { forwardRef, type ReactNode } from 'react';
 
-import { getYouTubePlayerType } from '../services/settingsService';
-
 
 import YouTubePlayer from './YouTubePlayer';
 

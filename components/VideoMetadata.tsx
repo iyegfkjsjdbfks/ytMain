@@ -1,7 +1,8 @@
-import React from 'react';
-import { 
-  ClockIcon, 
-  EyeIcon, 
+import type React from 'react';
+
+import {
+  ClockIcon,
+  EyeIcon,
   HandThumbUpIcon,
   ChatBubbleLeftIcon,
   GlobeAltIcon,
@@ -11,8 +12,9 @@ import {
   CameraIcon,
   LanguageIcon,
   TvIcon,
-  BoltIcon
+  BoltIcon,
 } from '@heroicons/react/24/outline';
+
 import type { Video } from '../src/types/core';
 
 interface VideoMetadataProps {
@@ -21,27 +23,35 @@ interface VideoMetadataProps {
   onToggleExpanded?: () => void;
 }
 
-const VideoMetadata: React.FC<VideoMetadataProps> = ({ 
-  video, 
-  expanded = false, 
-  onToggleExpanded 
+const VideoMetadata: React.FC<VideoMetadataProps> = ({
+  video,
+  expanded = false,
+  onToggleExpanded,
 }) => {
   const formatDate = (dateString: string) => {
-    if (!dateString) return 'N/A';
+    if (!dateString) {
+return 'N/A';
+}
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
   const formatNumber = (num: number) => {
-    if (num >= 1000000000) return `${(num / 1000000000).toFixed(1)}B`;
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000000) {
+return `${(num / 1000000000).toFixed(1)}B`;
+}
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
@@ -60,26 +70,26 @@ const VideoMetadata: React.FC<VideoMetadataProps> = ({
       icon: EyeIcon,
       label: 'Views',
       value: formatNumber(video.viewCount || parseInt(video.views) || 0),
-      color: 'text-blue-600 dark:text-blue-400'
+      color: 'text-blue-600 dark:text-blue-400',
     },
     {
       icon: HandThumbUpIcon,
       label: 'Likes',
       value: formatNumber(video.likes || video.likeCount || 0),
-      color: 'text-green-600 dark:text-green-400'
+      color: 'text-green-600 dark:text-green-400',
     },
     {
       icon: ChatBubbleLeftIcon,
       label: 'Comments',
       value: formatNumber(video.commentCount || video.statistics?.commentCount || 0),
-      color: 'text-purple-600 dark:text-purple-400'
+      color: 'text-purple-600 dark:text-purple-400',
     },
     {
       icon: ClockIcon,
       label: 'Duration',
       value: video.duration || 'N/A',
-      color: 'text-orange-600 dark:text-orange-400'
-    }
+      color: 'text-orange-600 dark:text-orange-400',
+    },
   ];
 
   const detailedMetadata = [
@@ -87,50 +97,50 @@ const VideoMetadata: React.FC<VideoMetadataProps> = ({
       icon: CalendarIcon,
       label: 'Published',
       value: formatDate(video.publishedAt || video.uploadedAt),
-      condition: video.publishedAt || video.uploadedAt
+      condition: video.publishedAt || video.uploadedAt,
     },
     {
       icon: TagIcon,
       label: 'Category',
       value: video.category,
-      condition: video.category
+      condition: video.category,
     },
     {
       icon: TvIcon,
       label: 'Quality',
       value: getVideoQuality(),
-      condition: video.definition || video.contentDetails?.definition
+      condition: video.definition || video.contentDetails?.definition,
     },
     {
       icon: LanguageIcon,
       label: 'Language',
       value: video.metadata?.defaultLanguage || 'Not specified',
-      condition: video.metadata?.defaultLanguage
+      condition: video.metadata?.defaultLanguage,
     },
     {
       icon: GlobeAltIcon,
       label: 'Privacy',
       value: video.privacyStatus || video.visibility || 'Public',
-      condition: true
+      condition: true,
     },
     {
       icon: ShieldCheckIcon,
       label: 'Content Rating',
       value: video.metadata?.madeForKids ? 'Made for Kids' : 'General Audience',
-      condition: video.metadata?.madeForKids !== undefined
+      condition: video.metadata?.madeForKids !== undefined,
     },
     {
       icon: CameraIcon,
       label: 'Dimension',
       value: video.contentDetails?.dimension === '2d' ? '2D' : '3D/VR',
-      condition: video.contentDetails?.dimension
+      condition: video.contentDetails?.dimension,
     },
     {
       icon: BoltIcon,
       label: 'Type',
       value: video.isLive ? 'Live Stream' : video.isShort ? 'YouTube Short' : 'Regular Video',
-      condition: true
-    }
+      condition: true,
+    },
   ];
 
   const streamingDetails = video.metadata?.actualStartTime || video.metadata?.scheduledStartTime || video.metadata?.actualEndTime;
@@ -170,7 +180,7 @@ const VideoMetadata: React.FC<VideoMetadataProps> = ({
           <h4 className="text-md font-medium text-neutral-900 dark:text-white mb-3">
             Detailed Information
           </h4>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {detailedMetadata.filter(item => item.condition).map((item, index) => (
               <div key={index} className="flex items-start space-x-2">

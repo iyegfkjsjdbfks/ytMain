@@ -12,10 +12,10 @@ import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
+import LoadingSpinner from '../components/LoadingSpinner';
 import SubscriptionStats from '../components/SubscriptionStats';
 import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
 import { Button } from '../components/ui/Button';
-import LoadingSpinner from '../components/LoadingSpinner';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
 

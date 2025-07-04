@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+// / <reference types="vite/client" />
 // Settings service for managing application settings
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';

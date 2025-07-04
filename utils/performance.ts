@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+// / <reference types="vite/client" />
 // Performance monitoring utilities for React components
 
 

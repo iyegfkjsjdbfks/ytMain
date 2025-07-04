@@ -14,11 +14,11 @@ import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useDropdownMenu } from '../hooks/useDropdownMenu';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { isYouTubeUrl } from '../src/lib/youtube-utils';
 import { cn } from '../utils/cn';
 import { withMemo } from '../utils/componentOptimizations';
 import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';
-import { isYouTubeUrl } from '../src/lib/youtube-utils';
 
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
 import YouTubePlayer from './YouTubePlayer';
@@ -38,8 +38,10 @@ class ImageCacheManager {
 
   has(url: string): boolean {
     const entry = this.cache.get(url);
-    if (!entry) return false;
-    
+    if (!entry) {
+return false;
+}
+
     if (Date.now() - entry.timestamp > this.maxAge) {
       this.cache.delete(url);
       return false;
@@ -50,13 +52,13 @@ class ImageCacheManager {
   private cleanup() {
     if (this.cache.size >= this.maxSize) {
       const entries = Array.from(this.cache.entries())
-        .sort(([,a], [,b]) => a.timestamp - b.timestamp);
-      
+        .sort(([, a], [, b]) => a.timestamp - b.timestamp);
+
       // Remove oldest 20% of entries
       const toRemove = Math.floor(this.maxSize * 0.2);
       for (let i = 0; i < toRemove; i++) {
         const entry = entries[i];
-        if (entry && entry[0]) {
+        if (entry?.[0]) {
           this.cache.delete(entry[0]);
         }
       }
@@ -83,7 +85,6 @@ interface OptimizedVideoCardProps {
   priority?: 'high' | 'low';
   index?: number;
 }
-
 
 
 // Enhanced lazy image component with retry mechanism

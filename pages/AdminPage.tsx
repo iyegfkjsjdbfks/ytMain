@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import React, { useState, useEffect } from 'react';
 
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
@@ -546,8 +547,4 @@ const AdminPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default AdminPage;
+  

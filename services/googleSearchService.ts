@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+// / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
 import type { Video } from '../types';
 
@@ -243,7 +243,7 @@ export interface CombinedSearchResult {
 const convertToYouTubeResult = (
   item: YouTubeSearchItem,
   videoDetails?: YouTubeVideoDetails,
-  channelDetails?: YouTubeChannelDetails
+  channelDetails?: YouTubeChannelDetails,
 ): YouTubeSearchResult => {
   const { videoId } = item.id;
   const thumbnailUrl = videoDetails?.snippet.thumbnails.maxres?.url ||
@@ -283,7 +283,7 @@ const convertToYouTubeResult = (
 const convertToGoogleSearchResult = (
   item: GoogleSearchItem,
   videoDetails?: YouTubeVideoDetails,
-  channelDetails?: YouTubeChannelDetails
+  channelDetails?: YouTubeChannelDetails,
 ): GoogleSearchResult => {
   // Extract video ID from YouTube URL
   const videoId = extractVideoIdFromUrl(item.link);
@@ -331,12 +331,14 @@ const extractVideoIdFromUrl = (url: string): string | null => {
 // Helper function to parse ISO 8601 duration to seconds
 const parseDuration = (duration: string): number => {
   const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return 0;
-  
+  if (!match) {
+return 0;
+}
+
   const hours = parseInt(match[1] || '0', 10);
   const minutes = parseInt(match[2] || '0', 10);
   const seconds = parseInt(match[3] || '0', 10);
-  
+
   return hours * 3600 + minutes * 60 + seconds;
 };
 
@@ -345,7 +347,7 @@ const formatDuration = (seconds: number): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
-  
+
   if (hours > 0) {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
@@ -373,11 +375,11 @@ const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTub
 
     const data: YouTubeVideoDetailsResponse = await response.json();
     const detailsMap = new Map<string, YouTubeVideoDetails>();
-    
+
     data.items.forEach(item => {
       detailsMap.set(item.id, item);
     });
-    
+
     return detailsMap;
   } catch (error) {
     console.error('Error fetching video details:', error);
@@ -406,11 +408,11 @@ const fetchChannelDetails = async (channelIds: string[]): Promise<Map<string, Yo
 
     const data: YouTubeChannelDetailsResponse = await response.json();
     const channelMap = new Map<string, YouTubeChannelDetails>();
-    
+
     data.items.forEach(item => {
       channelMap.set(item.id, item);
     });
-    
+
     return channelMap;
   } catch (error) {
     console.error('Error fetching channel details:', error);
@@ -457,7 +459,7 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
     // Fetch enhanced metadata in parallel
     const [videoDetailsMap, channelDetailsMap] = await Promise.all([
       fetchVideoDetails(videoIds),
-      fetchChannelDetails(channelIds)
+      fetchChannelDetails(channelIds),
     ]);
 
     // Convert YouTube API results to our format with enhanced metadata
@@ -517,7 +519,7 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
 
     // Filter for YouTube video results
     const youtubeItems = data.items.filter(item => item.link.includes('youtube.com/watch'));
-    
+
     // Extract video IDs for enhanced metadata fetching
     const videoIds = youtubeItems
       .map(item => extractVideoIdFromUrl(item.link))
@@ -531,12 +533,12 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     if (youtubeApiKey && videoIds.length > 0) {
       try {
         videoDetailsMap = await fetchVideoDetails(videoIds);
-        
+
         // Extract unique channel IDs from video details
         const channelIds = Array.from(new Set(
-          Array.from(videoDetailsMap.values()).map(video => video.snippet.channelId)
+          Array.from(videoDetailsMap.values()).map(video => video.snippet.channelId),
         ));
-        
+
         if (channelIds.length > 0) {
           channelDetailsMap = await fetchChannelDetails(channelIds);
         }
@@ -593,7 +595,7 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
             return {
               localVideos,
               youtubeVideos: [],
-              googleSearchVideos: youtubeResults as GoogleSearchResult[],
+              googleSearchVideos: youtubeResults,
             };
           } catch (fallbackError) {
             console.error('Both YouTube API and Custom Search failed:', fallbackError);
@@ -608,7 +610,7 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
       return {
         localVideos,
         youtubeVideos: [],
-        googleSearchVideos: youtubeResults as GoogleSearchResult[],
+        googleSearchVideos: youtubeResults,
       };
     } else {
       youtubeResults = await searchYouTubeVideos(query);

@@ -58,7 +58,7 @@ export const formatDistanceToNow = (date: string | Date | undefined, options?: {
   if (!date) {
     return 'Unknown date';
   }
-  
+
   const now = new Date();
   const targetDate = typeof date === 'string' ? new Date(date) : date;
 
