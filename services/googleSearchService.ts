@@ -255,6 +255,9 @@ const convertToYouTubeResult = (
                   formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
                   '0:00';
 
+  const channelAvatarUrl = channelDetails?.snippet.thumbnails.medium?.url ||
+                          channelDetails?.snippet.thumbnails.default?.url;
+
   return {
     id: `youtube-${videoId}`,
     title: videoDetails?.snippet.title || item.snippet.title,
@@ -262,19 +265,17 @@ const convertToYouTubeResult = (
     thumbnailUrl,
     channelName: item.snippet.channelTitle,
     channelId: item.snippet.channelId,
-    channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
-                     channelDetails?.snippet.thumbnails.default?.url ||
-                     undefined,
+    ...(channelAvatarUrl && { channelAvatarUrl }),
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
     duration,
     uploadedAt: item.snippet.publishedAt,
-    viewCount: videoDetails?.statistics.viewCount ? parseInt(videoDetails.statistics.viewCount, 10) : undefined,
-    likeCount: videoDetails?.statistics.likeCount ? parseInt(videoDetails.statistics.likeCount, 10) : undefined,
-    dislikeCount: videoDetails?.statistics.dislikeCount ? parseInt(videoDetails.statistics.dislikeCount, 10) : undefined,
-    commentCount: videoDetails?.statistics.commentCount ? parseInt(videoDetails.statistics.commentCount, 10) : undefined,
-    tags: videoDetails?.snippet.tags,
-    categoryId: videoDetails?.snippet.categoryId,
+    ...(videoDetails?.statistics.viewCount && { viewCount: parseInt(videoDetails.statistics.viewCount, 10) }),
+    ...(videoDetails?.statistics.likeCount && { likeCount: parseInt(videoDetails.statistics.likeCount, 10) }),
+    ...(videoDetails?.statistics.dislikeCount && { dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10) }),
+    ...(videoDetails?.statistics.commentCount && { commentCount: parseInt(videoDetails.statistics.commentCount, 10) }),
+    ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
+    ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
     isYouTube: true as const,
   };
 };
@@ -296,26 +297,28 @@ const convertToGoogleSearchResult = (
                   formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
                   (videoObject?.duration || '0:00');
 
+  const channelId = videoDetails?.snippet.channelId;
+  const channelAvatarUrl = channelDetails?.snippet.thumbnails.medium?.url ||
+                          channelDetails?.snippet.thumbnails.default?.url;
+
   return {
     id: `google-search-${videoId || item.cacheId || Math.random().toString(36)}`,
     title: videoDetails?.snippet.title || item.title.replace(/ - YouTube$/, ''),
     description: videoDetails?.snippet.description || item.snippet,
     thumbnailUrl,
     channelName: videoDetails?.snippet.channelTitle || item.displayLink.replace(/^www\.youtube\.com\s*[›>]?\s*/, '') || 'YouTube',
-    channelId: videoDetails?.snippet.channelId || undefined,
-    channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
-                     channelDetails?.snippet.thumbnails.default?.url ||
-                     undefined,
+    ...(channelId && { channelId }),
+    ...(channelAvatarUrl && { channelAvatarUrl }),
     videoUrl: item.link,
     embedUrl: videoObject?.embedurl || `https://www.youtube.com/embed/${videoId}`,
     duration,
     uploadedAt: videoDetails?.snippet.publishedAt || videoObject?.uploaddate || new Date().toISOString(),
-    viewCount: videoDetails?.statistics.viewCount ? parseInt(videoDetails.statistics.viewCount, 10) : undefined,
-    likeCount: videoDetails?.statistics.likeCount ? parseInt(videoDetails.statistics.likeCount, 10) : undefined,
-    dislikeCount: videoDetails?.statistics.dislikeCount ? parseInt(videoDetails.statistics.dislikeCount, 10) : undefined,
-    commentCount: videoDetails?.statistics.commentCount ? parseInt(videoDetails.statistics.commentCount, 10) : undefined,
-    tags: videoDetails?.snippet.tags,
-    categoryId: videoDetails?.snippet.categoryId,
+    ...(videoDetails?.statistics.viewCount && { viewCount: parseInt(videoDetails.statistics.viewCount, 10) }),
+    ...(videoDetails?.statistics.likeCount && { likeCount: parseInt(videoDetails.statistics.likeCount, 10) }),
+    ...(videoDetails?.statistics.dislikeCount && { dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10) }),
+    ...(videoDetails?.statistics.commentCount && { commentCount: parseInt(videoDetails.statistics.commentCount, 10) }),
+    ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
+    ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
     isYouTube: true as const,
     source: 'google-search' as const,
   };

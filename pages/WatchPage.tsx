@@ -214,10 +214,8 @@ const WatchPage: React.FC = () => {
                       <YouTubePlayer
                         video={video}
                         autoplay={false}
-                        muted={false}
                       />
                     );
-                  case 'youtube-player-wrapper':
                   default:
                     return (
                       <YouTubePlayerWrapper

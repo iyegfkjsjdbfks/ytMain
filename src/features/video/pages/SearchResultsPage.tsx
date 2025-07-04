@@ -26,27 +26,34 @@ return;
       setLoading(true);
       setError(null);
       try {
-        const results = await searchCombined(query);
+        // Mock local video search function
+        const searchLocalVideos = async (_searchQuery: string): Promise<Video[]> => {
+          // Return empty array for now - this would normally search local videos
+          return [];
+        };
+
+        const results = await searchCombined(query, searchLocalVideos);
         // Convert search results to Video format
         const videoResults: Video[] = [
           ...results.youtubeVideos.map(video => ({
             id: video.id,
             title: video.title,
             description: video.description,
-            duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration,
             thumbnailUrl: video.thumbnailUrl,
-            channelId: video.channelId || '',
+            videoUrl: video.videoUrl,
+            duration: video.duration || '0:00',
+            views: video.viewCount?.toString() || '0',
+            likes: video.likeCount || 0,
+            dislikes: video.dislikeCount || 0,
+            uploadedAt: video.uploadedAt || new Date().toISOString(),
             channelName: video.channelName,
-            channelAvatarUrl: video.channelAvatarUrl,
-            viewCount: video.viewCount || 0,
-            likeCount: video.likeCount || 0,
-            dislikeCount: video.dislikeCount || 0,
-            commentCount: video.commentCount || 0,
-            publishedAt: video.uploadedAt,
+            channelId: video.channelId || '',
+            channelAvatarUrl: video.channelAvatarUrl || '',
+            category: video.categoryId || 'Entertainment',
             tags: video.tags || [],
-            category: video.categoryId || '',
-            license: 'Standard YouTube License',
             visibility: 'public' as const,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
             isLive: false,
             isUpcoming: false,
             isLiveContent: false,
@@ -74,7 +81,7 @@ return;
               topicCategories: [],
             },
             contentDetails: {
-              duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) % 60}S`,
+              duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration || 0) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration || 0) % 60}S`,
               dimension: '2d',
               definition: 'hd',
               caption: 'false',
@@ -82,12 +89,8 @@ return;
               contentRating: {},
               projection: 'rectangular',
             },
-            // Legacy fields for compatibility
-            views: video.viewCount || 0,
-            likes: video.likeCount || 0,
-            createdAt: video.uploadedAt,
           })),
-          ...results.googleSearchVideos.map(video => ({
+          ...(results.googleSearchVideos || []).map(video => ({
             id: video.id,
             title: video.title,
             description: video.description,
@@ -132,7 +135,7 @@ return;
               topicCategories: [],
             },
             contentDetails: {
-              duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration) % 60}S`,
+              duration: `PT${Math.floor((typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration || 0) / 60)}M${(typeof video.duration === 'string' ? parseInt(video.duration, 10) : video.duration || 0) % 60}S`,
               dimension: '2d',
               definition: 'hd',
               caption: 'false',
@@ -140,10 +143,6 @@ return;
               contentRating: {},
               projection: 'rectangular',
             },
-            // Legacy fields for compatibility
-            views: video.viewCount || 0,
-            likes: video.likeCount || 0,
-            createdAt: video.uploadedAt,
           })),
         ];
         setVideos(videoResults);

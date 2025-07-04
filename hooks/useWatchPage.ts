@@ -179,7 +179,7 @@ return;
               createdAt: unifiedVideo.publishedAt,
               updatedAt: unifiedVideo.publishedAt,
             };
-            isFromUnifiedService = true;
+
             console.log('Successfully loaded video from unified service:', foundVideo);
           }
         } catch (error) {
