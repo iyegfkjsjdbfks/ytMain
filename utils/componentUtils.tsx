@@ -109,7 +109,7 @@ export const buildAvatarClasses = (
 };
 
 // Text truncation utilities - using shared utility
-export { truncate as truncateText } from '../src/lib/utils';
+export { truncateText } from './formatters';
 
 export const buildTruncateClasses = (
   lines: 1 | 2 | 3 | 4 = 1,
@@ -295,7 +295,6 @@ export default {
   buildCardClasses,
   getAvatarFallback,
   buildAvatarClasses,
-  truncateText,
   buildTruncateClasses,
   trapFocus,
   buildResponsiveClasses,

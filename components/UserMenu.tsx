@@ -150,7 +150,7 @@ return null;
       </div>
     </div>
   );
-};
+});
 
 UserMenu.displayName = 'UserMenu';
 
