@@ -5,7 +5,6 @@ import {
   type UnifiedVideoMetadata, 
   type UnifiedChannelMetadata 
 } from './metadataNormalizationService';
-import * as mockVideoService from '../../services/mockVideoService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 
 /**
@@ -33,12 +32,12 @@ interface UnifiedDataConfig {
 
 const defaultConfig: UnifiedDataConfig = {
   sources: {
-    local: true,
+    local: false,
     youtube: true,
   },
   limits: {
-    local: 25,
-    youtube: 25,
+    local: 0,
+    youtube: 50,
     total: 50,
   },
   caching: {
@@ -46,8 +45,8 @@ const defaultConfig: UnifiedDataConfig = {
     ttl: 10 * 60 * 1000, // 10 minutes
   },
   mixing: {
-    strategy: 'round-robin',
-    sourcePriority: ['local', 'youtube'],
+    strategy: 'source-priority',
+    sourcePriority: ['youtube'],
   },
 };
 
@@ -306,21 +305,7 @@ class UnifiedDataService {
         }
       }
     } else {
-      // Try local first for non-YouTube IDs
-      if (this.config.sources.local) {
-        try {
-          const localVideo = await mockVideoService.getVideoById(id);
-          if (localVideo) {
-            const normalized = metadataNormalizationService.normalizeLocalVideo(localVideo);
-            this.setCachedData(cacheKey, normalized);
-            return normalized;
-          }
-        } catch (error) {
-          console.warn('Failed to fetch local video:', error);
-        }
-      }
-      
-      // Fallback to YouTube for local IDs
+      // For non-YouTube IDs, try YouTube search as fallback
       if (this.config.sources.youtube) {
         try {
           const youtubeVideos = await youtubeService.fetchVideos([id]);
@@ -390,20 +375,6 @@ class UnifiedDataService {
       return cached;
     }
 
-    // Try local first
-    if (this.config.sources.local) {
-      try {
-        const localChannel = await mockVideoService.getChannelById(id);
-        if (localChannel) {
-          const normalized = metadataNormalizationService.normalizeLocalChannel(localChannel);
-          this.setCachedData(cacheKey, normalized);
-          return normalized;
-        }
-      } catch (error) {
-        console.warn('Failed to fetch local channel:', error);
-      }
-    }
-
     // Try YouTube
     if (this.config.sources.youtube) {
       try {
@@ -432,24 +403,8 @@ class UnifiedDataService {
   // Private methods for fetching from specific sources
 
   private async fetchLocalTrendingVideos(filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
-    try {
-      let videos: LocalVideo[];
-      
-      if (filters.type === 'short') {
-        videos = await mockVideoService.getShortsVideos();
-      } else if (filters.category) {
-        videos = await mockVideoService.getVideosByCategory(filters.category);
-      } else {
-        videos = await mockVideoService.getVideos();
-      }
-
-      return videos.map(video => 
-        metadataNormalizationService.normalizeLocalVideo(video)
-      );
-    } catch (error) {
-      console.error('Failed to fetch local trending videos:', error);
-      return [];
-    }
+    // Local trending videos disabled - returning empty array
+    return [];
   }
 
   private async fetchYouTubeTrendingVideos(filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
@@ -470,30 +425,9 @@ class UnifiedDataService {
   }
 
   private async searchLocalVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
-    try {
-      const videos = await mockVideoService.searchVideos(query);
-      let filteredVideos = videos;
-
-      // Apply filters
-      if (filters.type === 'short') {
-        filteredVideos = filteredVideos.filter(v => v.isShort);
-      } else if (filters.type === 'live') {
-        filteredVideos = filteredVideos.filter(v => v.isLive);
-      }
-
-      if (filters.category) {
-        filteredVideos = filteredVideos.filter(v => 
-          v.category.toLowerCase() === filters.category?.toLowerCase()
-        );
-      }
-
-      return filteredVideos.map(video => 
-        metadataNormalizationService.normalizeLocalVideo(video)
-      );
-    } catch (error) {
-      console.error('Failed to search local videos:', error);
-      return [];
-    }
+    // Local video search disabled - returning empty array
+    console.log('Local video search disabled for query:', query, filters);
+    return [];
   }
 
   private async searchYouTubeVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
