@@ -210,7 +210,9 @@ inputRef.current.blur();
                 <span>{searchTerm}</span>
               </button>
               <button
-                onClick={(e) => handleRemoveRecentSearch(searchTerm, e)}
+                onClick={(e) => {
+                  void handleRemoveRecentSearch(searchTerm, e);
+                }}
                 className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label={`Remove ${searchTerm} from recent searches`}
                 title="Remove"
@@ -221,7 +223,9 @@ inputRef.current.blur();
           ))}
            <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
                 <button
-                    onClick={handleClearAllRecent}
+                    onClick={(e) => {
+                      void handleClearAllRecent(e);
+                    }}
                     className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"
                 >
                     Clear all recent searches
