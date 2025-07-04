@@ -1,4 +1,5 @@
 import type React from 'react';
+import { useMemo } from 'react';
 
 import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
@@ -29,11 +30,17 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
   onPlaylistTabSelect,
 }) => {
 
-  const renderHomeTab = () => {
-    const popularVideos = [...videos].sort((a, b) => parseInt(b.views.replace(/,/g, ''), 10) - parseInt(a.views.replace(/,/g, ''), 10)).slice(0, 5);
-    const recentVideos = [...videos]
+  const popularVideos = useMemo(() => {
+    return [...videos].sort((a, b) => parseInt(b.views.replace(/,/g, ''), 10) - parseInt(a.views.replace(/,/g, ''), 10)).slice(0, 5);
+  }, [videos]);
+
+  const recentVideos = useMemo(() => {
+    return [...videos]
       .sort((a, b) => parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt))
       .slice(0, 10);
+  }, [videos]);
+
+  const renderHomeTab = () => {
 
     return (
       <div className="space-y-8 pt-4">
@@ -64,7 +71,9 @@ const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
   };
 
   const renderVideosTab = (isShorts: boolean = false) => {
-    const filteredVideos = videos.filter(v => isShorts ? v.isShort : !v.isShort);
+    const filteredVideos = useMemo(() => {
+      return videos.filter(v => isShorts ? v.isShort : !v.isShort);
+    }, [videos, isShorts]);
     if (filteredVideos.length > 0) {
       return (
         <div className={`grid grid-cols-1 ${isShorts ? 'xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7' : 'xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} 2xl:${isShorts ? 'grid-cols-8' : 'grid-cols-5'} gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 pt-4`}>

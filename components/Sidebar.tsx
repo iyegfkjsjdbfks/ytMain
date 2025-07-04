@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 
 import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
 import { Link, useLocation } from 'react-router-dom';
@@ -45,7 +45,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
 });
 NavItem.displayName = 'NavItem'; // For better debugging
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
   const location = useLocation();
 
   return (
@@ -103,6 +103,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       </div>
     </aside>
   );
-};
+});
+
+Sidebar.displayName = 'Sidebar';
 
 export default Sidebar;

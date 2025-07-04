@@ -15,7 +15,7 @@ import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
 import SubscriptionStats from '../components/SubscriptionStats';
 import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
 import { Button } from '../components/ui/Button';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
 

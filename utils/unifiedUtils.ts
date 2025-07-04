@@ -110,12 +110,7 @@ return '0%';
 
 // String Utilities
 export const stringUtils = {
-  truncate: (text: string, maxLength: number, suffix: string = '...'): string => {
-    if (text.length <= maxLength) {
-return text;
-}
-    return text.substring(0, maxLength - suffix.length) + suffix;
-  },
+  // truncate function moved to src/lib/utils.ts to avoid duplication
 
   capitalize: (text: string): string => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();

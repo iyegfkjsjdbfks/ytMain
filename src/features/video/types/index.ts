@@ -15,24 +15,7 @@ export interface Channel {
   isVerified?: boolean;
 }
 
-// Legacy Video interface - deprecated, use Video from core instead
-export interface LegacyVideo {
-  id: string;
-  title: string;
-  description: string;
-  thumbnailUrl: string;
-  duration: number;
-  views: number;
-  likes: number;
-  createdAt: string;
-  publishedAt?: string;
-  visibility: VideoVisibilityType;
-  channel: Channel;
-  // Keeping these for backward compatibility
-  channelId?: string;
-  channelTitle?: string;
-  channelThumbnail?: string;
-}
+
 
 export interface VideoMetrics {
   views: number;

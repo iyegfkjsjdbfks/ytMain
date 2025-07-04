@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
 
-import LoadingSpinner from '../../../../components/ui/LoadingSpinner';
+import LoadingSpinner from '../../../../components/LoadingSpinner';
 import { useAuthStore } from '../store/authStore';
 
 interface ProtectedRouteProps {

@@ -12,7 +12,7 @@ export { default as VideoCard } from './VideoCard';
 export { default as OptimizedVideoCard } from './OptimizedVideoCard';
 export { default as ShortDisplayCard } from './ShortDisplayCard';
 
-export { UnifiedVideoCard } from './UnifiedVideoCard';
+
 export { default as VideoGrid } from './VideoGrid';
 export { default as ReusableVideoGrid } from './ReusableVideoGrid';
 export { default as VirtualizedVideoGrid } from './VirtualizedVideoGrid';
@@ -117,7 +117,7 @@ export {
 export { default as DataWrapper } from './DataWrapper';
 
 // Type exports
-export type { UnifiedVideoCardProps } from './UnifiedVideoCard';
+
 export type {
   FormContextValue,
   FormProviderProps,

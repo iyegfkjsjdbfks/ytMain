@@ -38,7 +38,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
   _ref,
 ) => {
   const playerType = getYouTubePlayerType();
-  console.log('YouTubePlayerWrapper rendering with playerType:', playerType);
+  // YouTubePlayerWrapper rendering with playerType
 
 
   // Create mock video object for YouTubePlayer component

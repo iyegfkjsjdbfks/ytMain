@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 import {
   HeartIcon,
@@ -438,23 +438,27 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     );
   };
 
-  // Filter and sort comments
-  const topLevelComments = comments.filter(comment => !comment.parentId);
-  const pinnedComments = topLevelComments.filter(comment => comment.isPinned);
-  const regularComments = topLevelComments.filter(comment => !comment.isPinned);
+  // Filter and sort comments with memoization
+  const sortedComments = useMemo(() => {
+    const topLevelComments = comments.filter(comment => !comment.parentId);
+    const pinnedComments = topLevelComments.filter(comment => comment.isPinned);
+    const regularComments = topLevelComments.filter(comment => !comment.isPinned);
 
-  const sortedComments = [...pinnedComments, ...regularComments.sort((a, b) => {
-    switch (sortBy) {
-      case 'newest':
-        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-      case 'oldest':
-        return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
-      case 'popular':
-        return b.likes - a.likes;
-      default:
-        return 0;
-    }
-  })];
+    const sorted = regularComments.sort((a, b) => {
+      switch (sortBy) {
+        case 'newest':
+          return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+        case 'oldest':
+          return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
+        case 'popular':
+          return b.likes - a.likes;
+        default:
+          return 0;
+      }
+    });
+
+    return [...pinnedComments, ...sorted];
+  }, [comments, sortBy]);
 
   if (!commentsEnabled) {
     return (

@@ -108,17 +108,8 @@ export const buildAvatarClasses = (
   );
 };
 
-// Text truncation utilities
-export const truncateText = (
-  text: string,
-  maxLength: number,
-  suffix: string = '...',
-): string => {
-  if (text.length <= maxLength) {
-return text;
-}
-  return text.slice(0, maxLength - suffix.length) + suffix;
-};
+// Text truncation utilities - using shared utility
+export { truncate as truncateText } from '../src/lib/utils';
 
 export const buildTruncateClasses = (
   lines: 1 | 2 | 3 | 4 = 1,
@@ -246,35 +237,8 @@ export const isExternalUrl = (url: string): boolean => {
   return url.startsWith('http://') || url.startsWith('https://');
 };
 
-// Performance utilities
-type AnyFunction = (...args: any[]) => any;
-
-export function debounce<T extends AnyFunction>(
-  func: T,
-  wait: number,
-): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
-
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-
-export function throttle<T extends AnyFunction>(
-  func: T,
-  limit: number,
-): (...args: Parameters<T>) => void {
-  let inThrottle: boolean;
-
-  return (...args: Parameters<T>) => {
-    if (!inThrottle) {
-      func(...args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
-    }
-  };
-}
+// Performance utilities - using shared utilities
+export { debounce, throttle } from '../src/lib/utils';
 
 // Local storage utilities with error handling
 export const safeLocalStorage = {

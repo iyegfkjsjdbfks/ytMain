@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ import ClockIcon from './icons/ClockIcon'; // For recent searches
 import SearchIcon from './icons/SearchIcon';
 import SearchSuggestions from './SearchSuggestions';
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC = memo(() => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
@@ -224,5 +224,7 @@ inputRef.current.blur();
     </div>
   );
 };
+
+SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;

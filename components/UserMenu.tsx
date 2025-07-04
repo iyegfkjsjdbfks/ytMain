@@ -1,5 +1,6 @@
 
 import type React from 'react';
+import { memo } from 'react';
 
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,
@@ -43,7 +44,7 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
   );
 };
 
-const UserMenu: React.FC<UserMenuProps> = ({ isOpen, onClose }) => {
+const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuth();
 
@@ -150,5 +151,7 @@ return null;
     </div>
   );
 };
+
+UserMenu.displayName = 'UserMenu';
 
 export default UserMenu;

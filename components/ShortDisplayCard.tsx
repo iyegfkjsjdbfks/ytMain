@@ -7,7 +7,8 @@ import { useLocation } from 'react-router-dom';
 import { useIntersectionObserver, useVideoAutoplay } from '../hooks';
 import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
 
-import { ActionButton, LoadingSpinner, ErrorMessage } from './ui';
+import LoadingSpinner from './LoadingSpinner';
+import { ActionButton, ErrorMessage } from './ui';
 
 import type { Short } from '../src/types/core';
 

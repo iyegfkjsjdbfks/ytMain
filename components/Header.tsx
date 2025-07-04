@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, memo } from 'react';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
 import { Link } from 'react-router-dom';
@@ -110,7 +110,7 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
   );
 };
 
-const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
   const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);
@@ -269,5 +269,9 @@ setIsNotificationsPanelOpen(false);
     </header>
   );
 };
+
+});
+
+Header.displayName = 'Header';
 
 export default Header;
