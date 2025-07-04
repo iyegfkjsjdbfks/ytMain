@@ -2,12 +2,7 @@ import type * as React from 'react';
 import {  useState  } from 'react';
 
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
-import {
-  mockFeaturedVideos,
-  mockRecommendedVideos,
-  mockTrendingVideos,
-  mockUserVideos,
-} from '../mocks/videoMocks';
+import { realVideos } from '../../../services/realVideoService';
 
 import type { Video, VideoVisibility } from '../types';
 
@@ -66,24 +61,24 @@ const VideoDemo: React.FC = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video Card (Default)</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {mockFeaturedVideos[0] && <VideoCard video={mockFeaturedVideos[0]} onClick={handleVideoClick} />}
-              {mockFeaturedVideos[1] && <VideoCard video={mockFeaturedVideos[1]} onClick={handleVideoClick} />}
+              {realVideos[0] && <VideoCard video={realVideos[0]} onClick={handleVideoClick} />}
+              {realVideos[1] && <VideoCard video={realVideos[1]} onClick={handleVideoClick} />}
             </div>
           </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video Card (Compact)</h2>
             <div className="max-w-md">
-              {mockFeaturedVideos[2] && (
+              {realVideos[2] && (
                 <VideoCard
-                  video={mockFeaturedVideos[2]}
+                  video={realVideos[2]}
                   variant="compact"
                   onClick={handleVideoClick}
                 />
               )}
-              {mockFeaturedVideos[3] && (
+              {realVideos[3] && (
                 <VideoCard
-                  video={mockFeaturedVideos[3]}
+                  video={realVideos[3]}
                   variant="compact"
                   onClick={handleVideoClick}
                 />
@@ -94,9 +89,9 @@ const VideoDemo: React.FC = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video Card (Studio)</h2>
             <div className="max-w-4xl">
-              {mockFeaturedVideos[4] && (
+              {realVideos[4] && (
                 <VideoCard
-                  video={mockFeaturedVideos[4]}
+                  video={realVideos[4]}
                   variant="studio"
                   onClick={handleVideoClick}
                 />
@@ -106,10 +101,10 @@ const VideoDemo: React.FC = () => {
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video Grid</h2>
-            {mockFeaturedVideos.length > 0 && (
+            {realVideos.length > 0 && (
               <VideoGrid
                 title="Featured Videos"
-                videos={mockFeaturedVideos}
+                videos={realVideos}
                 columns={4}
                 showMoreLink="/videos/featured"
                 onVideoClick={handleVideoClick}
@@ -119,9 +114,9 @@ const VideoDemo: React.FC = () => {
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video List (Grid Layout)</h2>
-            {mockRecommendedVideos.length > 0 && (
+            {realVideos.length > 0 && (
               <VideoList
-                videos={mockRecommendedVideos}
+                videos={realVideos}
                 layout="grid"
                 onVideoClick={handleVideoClick}
               />
@@ -130,9 +125,9 @@ const VideoDemo: React.FC = () => {
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">Video List (List Layout)</h2>
-            {mockTrendingVideos.length > 0 && (
+            {realVideos.length > 0 && (
               <VideoList
-                videos={mockTrendingVideos.slice(0, 4)}
+                videos={realVideos.slice(0, 4)}
                 layout="list"
                 variant="compact"
                 onVideoClick={handleVideoClick}
@@ -151,9 +146,9 @@ const VideoDemo: React.FC = () => {
       ) : (
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4">Studio Video Grid</h2>
-          {mockUserVideos.length > 0 && (
+          {realVideos.length > 0 && (
             <StudioVideoGrid
-              videos={mockUserVideos}
+              videos={realVideos}
               title="Your Videos"
               onEdit={handleVideoEdit}
               onDelete={handleVideoDelete}

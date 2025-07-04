@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Video } from '../types';
-import { mockVideos } from '../services/mockVideoService';
+import { realVideos } from '../services/realVideoService';
 import OptimizedVideoCard from './OptimizedVideoCard';
 
 interface RecommendationEngineProps {
@@ -32,8 +32,8 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generateRecommendations = async () => {
     setLoading(true);
     try {
-      // Use dummy videos for recommendations
-      const availableVideos = mockVideos.filter(video => 
+      // Use real videos for recommendations
+      const availableVideos = realVideos.filter(video =>
         !currentVideo || video.id !== currentVideo.id
       );
 

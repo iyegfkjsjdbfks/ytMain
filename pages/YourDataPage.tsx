@@ -4,7 +4,7 @@ import {  useState, useEffect  } from 'react';
 
 import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
-import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/mockVideoService';
+import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
 
 const YourDataPage: React.FC = () => {
   const [watchHistoryCount, setWatchHistoryCount] = useState(0);

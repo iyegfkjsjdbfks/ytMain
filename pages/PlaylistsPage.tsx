@@ -5,7 +5,7 @@ import {  useEffect, useState  } from 'react';
 import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
-import { getUserPlaylists, createUserPlaylist } from '../services/mockVideoService';
+import { getUserPlaylists, createUserPlaylist } from '../services/realVideoService';
 
 import type { UserPlaylistDetails } from '../types';
 

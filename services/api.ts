@@ -186,47 +186,7 @@ return cached;
 
 const httpClient = new HTTPClient();
 
-// Mock Data Generators (for development)
-const generateMockVideo = (id: string, overrides: Partial<Video> = {}): Video => ({
-  id,
-  title: `Sample Video ${id}`,
-  description: 'This is a sample video description for testing purposes.',
-  thumbnailUrl: `https://picsum.photos/320/180?random=${id}`,
-  duration: `${Math.floor(Math.random() * 300) + 60}`,
-      views: `${Math.floor(Math.random() * 1000000)}`,
-  likes: Math.floor(Math.random() * 50000),
-  dislikes: Math.floor(Math.random() * 1000),
-  uploadedAt: new Date().toISOString(),
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-
-  videoUrl: `https://example.com/video/${id}.mp4`,
-  channelId: `channel_${Math.floor(Math.random() * 100)}`,
-  channelName: `Channel ${Math.floor(Math.random() * 100)}`,
-  channelAvatarUrl: `https://picsum.photos/40/40?random=${Math.floor(Math.random() * 100)}`,
-  tags: ['sample', 'video', 'test'],
-  category: 'Entertainment' as any,
-  visibility: 'public' as any,
-  monetization: {} as any,
-  analytics: {} as any,
-  captions: [] as any,
-  ...overrides,
-});
-
-const generateMockChannel = (id: string, overrides: Partial<Channel> = {}): Channel => ({
-  id,
-  name: `Channel ${id}`,
-  description: 'This is a sample channel description.',
-  avatarUrl: `https://picsum.photos/80/80?random=${id}`,
-  banner: `https://picsum.photos/1280/320?random=${id}`,
-  subscribers: Math.floor(Math.random() * 1000000),
-  subscriberCount: `${Math.floor(Math.random() * 1000)}K`,
-  videoCount: Math.floor(Math.random() * 1000),
-  isVerified: Math.random() > 0.5,
-  createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString(),
-  updatedAt: new Date().toISOString(),
-  ...overrides,
-});
+// Note: Mock data generators removed - now using real video service
 
 // API Service Classes
 export class VideoService {
@@ -389,12 +349,9 @@ return null;
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
 
-        const videos = Array.from({ length: Math.min(limit, 15) }, (_, i) =>
-          generateMockVideo(`search_${query}_${i}`, {
-            title: `${query} - Video ${i + 1}`,
-            description: `Search result for "${query}" - Video ${i + 1}`,
-          }),
-        );
+        // Import real video service
+        const { searchVideos } = await import('./realVideoService');
+        const videos = await searchVideos(query);
 
         const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
         return {
@@ -527,17 +484,9 @@ return null;
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 400));
 
-        const videos = Array.from({ length: limit }, (_, i) =>
-          generateMockVideo(`${channelId}_video_${i}`, {
-            channel: {
-              id: channelId,
-              name: `Channel ${channelId}`,
-              avatarUrl: `https://picsum.photos/40/40?random=${channelId}`,
-              subscribers: Math.floor(Math.random() * 1000000),
-              isVerified: Math.random() > 0.5,
-            },
-          }),
-        );
+        // Import real video service
+        const { getVideosByChannelName } = await import('./realVideoService');
+        const videos = await getVideosByChannelName(channelId);
 
         const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
         return {

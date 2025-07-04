@@ -206,6 +206,16 @@ export const getSubscribedChannels = async () => [];
 export const updateSubscriptionNotifications = async (_channelId: string, _enabled: boolean) => {};
 export const unsubscribeFromChannel = async (_channelId: string) => {};
 
+// Playlist creation function (simplified for now)
+export const createUserPlaylist = async (_name: string, _description?: string) => ({
+  id: `playlist-${Date.now()}`,
+  name: _name,
+  description: _description || '',
+  videos: [],
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+});
+
 // Export sample videos for compatibility
 export const realVideos = sampleVideos;
 export const getSubscribedChannelNames = async () => ['blender-foundation', 'sample-channel'];

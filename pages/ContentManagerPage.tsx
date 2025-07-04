@@ -3,7 +3,7 @@ import {  useState, useEffect  } from 'react';
 
 import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
 
-import { getVideos } from '../services/mockVideoService';
+import { getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
