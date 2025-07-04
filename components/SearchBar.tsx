@@ -56,7 +56,7 @@ const SearchBar: React.FC = memo(() => {
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      fetchSuggestionsDebounced(query);
+      fetchSuggestionsDebounced(query).catch(console.error);
     }, 300);
 
     return () => clearTimeout(debounceTimer);
@@ -68,7 +68,8 @@ const SearchBar: React.FC = memo(() => {
       setQuery(trimmedQuery);
       setShowSuggestions(false);
       setShowRecentSearches(false);
-      void saveRecentSearch(trimmedQuery);
+
+      saveRecentSearch(trimmedQuery).catch(console.error);
       navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
       if (inputRef.current) {
 inputRef.current.blur();
@@ -165,10 +166,14 @@ inputRef.current.blur();
           aria-autocomplete="list"
           aria-controls={
             (() => {
-              if (showSuggestions) return 'search-suggestions-listbox';
-              if (showRecentSearches) return 'recent-searches-listbox';
-              return undefined;
-            })()
+               if (showSuggestions) {
+                 return 'search-suggestions-listbox';
+               }
+               if (showRecentSearches) {
+                 return 'recent-searches-listbox';
+               }
+               return undefined;
+             })()
           }
         />
         <button

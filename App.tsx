@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
 
-// Create router with our route configuration and future flags
+// Create router with our route configuration and supported future flags
 const router = createBrowserRouter(routes, {
   future: {
-    v7_startTransition: true,
+    // Only include future flags supported in react-router-dom v6.20.1
     v7_fetcherPersist: true,
     v7_normalizeFormMethod: true,
     v7_partialHydration: true,
@@ -30,12 +30,7 @@ const router = createBrowserRouter(routes, {
 const App: React.FC = () => {
   return (
     <RefactoredAppProviders>
-      <RouterProvider 
-        router={router} 
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </RefactoredAppProviders>
   );
 };

@@ -11,7 +11,7 @@ export const useLocalStorage = <T>(
 ): [T, (value: T | ((val: T) => T)) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     const item = safeLocalStorage.getJSON<T>(key);
-    return item !== null ? item : initialValue;
+    return item ?? initialValue;
   });
 
   const setValue = useCallback(
@@ -57,7 +57,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args: any[]) => any>(
+export const useThrottle = <T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number,
 ): T => {
@@ -186,7 +186,7 @@ export const useAsync = <T, E = string>(
 
   useEffect(() => {
     if (immediate) {
-      execute();
+      execute().catch(console.error);
     }
   }, [execute, immediate]);
 
@@ -276,8 +276,8 @@ export const useMediaQuery = (query: string): boolean => {
 
   useEffect(() => {
     if (typeof window === 'undefined') {
-return;
-}
+      return;
+    }
 
     const media = window.matchMedia(query);
     setMatches(media.matches);
@@ -303,11 +303,11 @@ export const useIntersectionObserver = (
   useEffect(() => {
     const element = elementRef.current;
     if (!element) {
-return;
-}
+      return;
+    }
 
     const observer = new IntersectionObserver(
-      ([entry]) => setEntry(entry || null),
+      ([entry]) => setEntry(entry ?? null),
       options,
     );
 
@@ -338,14 +338,14 @@ export const useScrollPosition = (): { x: number; y: number } => {
 };
 
 // Form validation hook
-export const useFormValidation = <T extends Record<string, any>>(
+export const useFormValidation = <T extends Record<string, unknown>>(
   initialValues: T,
-  validationRules: Partial<Record<keyof T, (value: any) => string | null>>,
+  validationRules: Partial<Record<keyof T, (value: unknown) => string | null>>,
 ): {
   values: T;
   errors: Partial<Record<keyof T, string>>;
   isValid: boolean;
-  handleChange: (name: keyof T, value: any) => void;
+  handleChange: (name: keyof T, value: unknown) => void;
   handleSubmit: (onSubmit: (values: T) => void) => (e: React.FormEvent) => void;
   reset: () => void;
 } => {
@@ -353,7 +353,7 @@ export const useFormValidation = <T extends Record<string, any>>(
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
 
   const validateField = useCallback(
-    (name: keyof T, value: any): string | null => {
+    (name: keyof T, value: unknown): string | null => {
       const rule = validationRules[name];
       return rule ? rule(value) : null;
     },
@@ -361,7 +361,7 @@ export const useFormValidation = <T extends Record<string, any>>(
   );
 
   const handleChange = useCallback(
-    (name: keyof T, value: any) => {
+    (name: keyof T, value: unknown) => {
       setValues(prev => ({ ...prev, [name]: value }));
 
       const error = validateField(name, value);
@@ -383,6 +383,7 @@ export const useFormValidation = <T extends Record<string, any>>(
         newErrors[key as keyof T] = error;
         isFormValid = false;
       }
+      return undefined;
     });
 
     setErrors(newErrors);
@@ -395,6 +396,7 @@ export const useFormValidation = <T extends Record<string, any>>(
       if (validateAll()) {
         onSubmit(values);
       }
+      return undefined;
     },
     [values, validateAll],
   );

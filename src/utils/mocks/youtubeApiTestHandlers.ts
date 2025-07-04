@@ -142,6 +142,18 @@ export const youtubeApiTestHandlers = [
             resultsPerPage: items.length,
           },
         });
+
+      default:
+        // Default case - return empty response
+        return HttpResponse.json({
+          kind: 'youtube#videoListResponse',
+          etag: 'mock-etag',
+          items: [],
+          pageInfo: {
+            totalResults: 0,
+            resultsPerPage: 0,
+          },
+        });
     }
   }),
 

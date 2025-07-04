@@ -5,6 +5,7 @@ export { Button } from './Button';
 export { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './DropdownMenu';
 export { default as ErrorMessage } from './ErrorMessage';
 export { FileUpload } from './FileUpload';
+export { Loading as LoadingSpinner, Spinner, DotsLoader, PulseLoader, Skeleton } from './LoadingStates';
 export { ProgressBar } from './ProgressBar';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
@@ -18,6 +19,7 @@ export type { ButtonProps } from './Button';
 export type { DropdownMenuProps } from './DropdownMenu';
 export type { default as ErrorMessageProps } from './ErrorMessage';
 export type { FileUploadProps } from './FileUpload';
+export type { LoadingProps as LoadingSpinnerProps } from './LoadingStates';
 export type { ProgressBarProps } from './ProgressBar';
 export type { TabsProps } from './Tabs';
 

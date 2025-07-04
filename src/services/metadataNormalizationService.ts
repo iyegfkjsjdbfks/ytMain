@@ -124,11 +124,11 @@ class MetadataNormalizationService {
       visibility: localVideo.visibility || 'public',
       source: 'local',
       metadata: {
-        quality: localVideo.definition,
-        definition: localVideo.contentDetails?.definition,
+        quality: localVideo.definition || undefined,
+        definition: localVideo.contentDetails?.definition || undefined,
         captions: Boolean(localVideo.captions?.length || localVideo.subtitles?.length),
-        language: localVideo.contentDetails?.caption,
-        license: localVideo.license,
+        language: localVideo.contentDetails?.caption || undefined,
+        license: localVideo.license || undefined,
       },
     };
   }
@@ -166,7 +166,7 @@ class MetadataNormalizationService {
     
     const subscriberCount = channel?.subscribers || 0;
     
-    const normalizedVideo = {
+    const normalizedVideo: UnifiedVideoMetadata = {
       id: youtubeVideo.id,
       title: youtubeVideo.snippet?.title || '',
       description: youtubeVideo.snippet?.description || '',
@@ -220,17 +220,17 @@ class MetadataNormalizationService {
     return {
       id: localChannel.id,
       name: localChannel.name,
-      handle: localChannel.handle,
+      handle: localChannel.handle || undefined,
       description: localChannel.description || '',
       avatarUrl: localChannel.avatarUrl,
-      bannerUrl: localChannel.banner,
+      bannerUrl: localChannel.banner || undefined,
       subscribers: localChannel.subscribers || 0,
       subscribersFormatted: localChannel.subscriberCount || this.formatSubscribers(localChannel.subscribers || 0),
       videoCount: localChannel.videoCount || 0,
       totalViews: localChannel.totalViews || 0,
       isVerified: localChannel.isVerified || false,
-      joinedDate: localChannel.joinedDate,
-      country: localChannel.country,
+      joinedDate: localChannel.joinedDate || undefined,
+      country: localChannel.country || undefined,
       source: 'local',
     };
   }

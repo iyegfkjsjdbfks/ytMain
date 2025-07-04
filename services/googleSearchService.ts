@@ -263,7 +263,8 @@ const convertToYouTubeResult = (
     channelName: item.snippet.channelTitle,
     channelId: item.snippet.channelId,
     channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
-                     channelDetails?.snippet.thumbnails.default?.url,
+                     channelDetails?.snippet.thumbnails.default?.url ||
+                     undefined,
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
     duration,
@@ -301,9 +302,10 @@ const convertToGoogleSearchResult = (
     description: videoDetails?.snippet.description || item.snippet,
     thumbnailUrl,
     channelName: videoDetails?.snippet.channelTitle || item.displayLink.replace(/^www\.youtube\.com\s*[›>]?\s*/, '') || 'YouTube',
-    channelId: videoDetails?.snippet.channelId,
+    channelId: videoDetails?.snippet.channelId || undefined,
     channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
-                     channelDetails?.snippet.thumbnails.default?.url,
+                     channelDetails?.snippet.thumbnails.default?.url ||
+                     undefined,
     videoUrl: item.link,
     embedUrl: videoObject?.embedurl || `https://www.youtube.com/embed/${videoId}`,
     duration,

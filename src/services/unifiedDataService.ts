@@ -259,17 +259,20 @@ class UnifiedDataService {
             console.log(`Successfully fetched YouTube video:`, youtubeVideos[0]);
             // Convert already processed YouTube video to unified format
             const processedVideo = youtubeVideos[0];
+            if (!processedVideo) {
+              return null;
+            }
             const normalized: UnifiedVideoMetadata = {
               id: processedVideo.id,
               title: processedVideo.title,
               description: processedVideo.description,
               thumbnailUrl: processedVideo.thumbnailUrl,
               videoUrl: processedVideo.videoUrl,
-              views: processedVideo.viewCount,
-              viewsFormatted: this.formatViews(processedVideo.viewCount),
-              likes: processedVideo.likeCount,
-              dislikes: processedVideo.dislikeCount,
-              commentCount: processedVideo.commentCount,
+              views: processedVideo.viewCount || 0,
+              viewsFormatted: this.formatViews(processedVideo.viewCount || 0),
+              likes: processedVideo.likeCount || 0,
+              dislikes: processedVideo.dislikeCount || 0,
+              commentCount: processedVideo.commentCount || 0,
               channel: {
                 id: processedVideo.channelId,
                 name: processedVideo.channelName,
@@ -279,12 +282,12 @@ class UnifiedDataService {
                 isVerified: processedVideo.channel?.isVerified || false,
               },
               duration: processedVideo.duration,
-              publishedAt: processedVideo.publishedAt,
-              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt),
+              publishedAt: processedVideo.publishedAt || new Date().toISOString(),
+              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt || new Date().toISOString()),
               category: processedVideo.category,
               tags: processedVideo.tags,
-              isLive: processedVideo.isLive,
-              isShort: processedVideo.isShort,
+              isLive: processedVideo.isLive || false,
+              isShort: processedVideo.isShort || false,
               visibility: processedVideo.visibility,
               source: 'youtube',
               metadata: {
@@ -324,32 +327,35 @@ class UnifiedDataService {
           if (youtubeVideos.length > 0) {
             // Convert already processed YouTube video to unified format
             const processedVideo = youtubeVideos[0];
+            if (!processedVideo) {
+              return null;
+            }
             const normalized: UnifiedVideoMetadata = {
               id: processedVideo.id,
               title: processedVideo.title,
               description: processedVideo.description,
               thumbnailUrl: processedVideo.thumbnailUrl,
               videoUrl: processedVideo.videoUrl,
-              views: processedVideo.viewCount,
-              viewsFormatted: this.formatViews(processedVideo.viewCount),
-              likes: processedVideo.likeCount,
-              dislikes: processedVideo.dislikeCount,
-              commentCount: processedVideo.commentCount,
+              views: processedVideo.viewCount || 0,
+              viewsFormatted: this.formatViews(processedVideo.viewCount || 0),
+              likes: processedVideo.likeCount || 0,
+              dislikes: processedVideo.dislikeCount || 0,
+              commentCount: processedVideo.commentCount || 0,
               channel: {
                 id: processedVideo.channelId,
                 name: processedVideo.channelName,
-                avatarUrl: processedVideo.channelAvatarUrl,
+                avatarUrl: processedVideo.channelAvatarUrl || '',
                 subscribers: 0,
                 subscribersFormatted: '0 subscribers',
                 isVerified: processedVideo.channel?.isVerified || false,
               },
               duration: processedVideo.duration,
-              publishedAt: processedVideo.publishedAt,
-              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt),
+              publishedAt: processedVideo.publishedAt || new Date().toISOString(),
+              publishedAtFormatted: this.formatTimeAgo(processedVideo.publishedAt || new Date().toISOString()),
               category: processedVideo.category,
               tags: processedVideo.tags,
-              isLive: processedVideo.isLive,
-              isShort: processedVideo.isShort,
+              isLive: processedVideo.isLive || false,
+              isShort: processedVideo.isShort || false,
               visibility: processedVideo.visibility,
               source: 'youtube',
               metadata: {
@@ -530,11 +536,11 @@ class UnifiedDataService {
     const maxLength = Math.max(localVideos.length, youtubeVideos.length);
     
     for (let i = 0; i < maxLength && mixed.length < limit; i++) {
-      if (i < localVideos.length) {
-        mixed.push(localVideos[i]);
+      if (i < localVideos.length && localVideos[i]) {
+        mixed.push(localVideos[i]!);
       }
-      if (i < youtubeVideos.length && mixed.length < limit) {
-        mixed.push(youtubeVideos[i]);
+      if (i < youtubeVideos.length && mixed.length < limit && youtubeVideos[i]) {
+        mixed.push(youtubeVideos[i]!);
       }
     }
     
