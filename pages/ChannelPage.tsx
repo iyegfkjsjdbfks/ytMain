@@ -9,7 +9,12 @@ import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabContent from '../components/ChannelTabContent';
 import ChannelTabs from '../components/ChannelTabs';
 import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-import { unifiedDataService } from '../src/services/unifiedDataService';
+import {
+  getChannelByName,
+  getVideosByChannelName,
+  getChannelPlaylists,
+  getChannelCommunityPosts
+} from '../services/realVideoService';
 
 import type { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
 
@@ -59,18 +64,34 @@ const ChannelPage: React.FC = () => {
             fetchedPlaylists,
             fetchedCommunityPosts,
           ] = await Promise.all([
-            getVideosByChannelName(fetchedChannel.name),
-            getChannelPlaylists(fetchedChannel.name),
-            getChannelCommunityPosts(fetchedChannel.name),
+            getVideosByChannelName(fetchedChannel.name || decodedName),
+            getChannelPlaylists(fetchedChannel.name || decodedName),
+            getChannelCommunityPosts(fetchedChannel.name || decodedName),
           ]);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);
           setChannelCommunityPosts(fetchedCommunityPosts);
 
         } else {
-          setError(`Channel "${decodedName}" not found.`);
-          setChannel(null);
-          setVideos([]);
+          // Create a mock channel if not found
+          const mockChannel = {
+            id: decodedName,
+            name: decodedName,
+            description: `Channel for ${decodedName}`,
+            avatarUrl: 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=CH',
+            banner: 'https://via.placeholder.com/1280/320/4ECDC4/FFFFFF?text=Channel+Banner',
+            subscribers: 0,
+            subscriberCount: '0',
+            videoCount: 0,
+            isVerified: false,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          };
+          setChannel(mockChannel);
+
+          // Fetch videos for the channel name
+          const fetchedVideos = await getVideosByChannelName(decodedName);
+          setVideos(fetchedVideos);
           setChannelPlaylists([]);
           setChannelCommunityPosts([]);
         }

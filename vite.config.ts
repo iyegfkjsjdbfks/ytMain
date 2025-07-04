@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { splitVendorChunkPlugin } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
@@ -10,14 +9,11 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react({
-      // Enable React Fast Refresh
-      fastRefresh: true,
       // Include .tsx files
       include: '**/*.{jsx,tsx}',
       // Enable automatic JSX runtime
       jsxRuntime: 'automatic',
     }),
-    splitVendorChunkPlugin(),
     // Gzip compression for production
     viteCompression({
       algorithm: 'gzip',
@@ -39,14 +35,14 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     // Bundle analyzer (only in build mode)
-    process.env.ANALYZE && visualizer({
+    ...(process.env.ANALYZE ? [visualizer({
       filename: 'dist/stats.html',
       open: true,
       gzipSize: true,
       brotliSize: true,
       template: 'treemap',
-    }),
-  ].filter(Boolean),
+    })] : []),
+  ],
   
   resolve: {
     alias: {
@@ -88,7 +84,7 @@ export default defineConfig(({ mode }) => ({
           proxy.on('error', (err, _req, _res) => {
             console.log('YouTube API proxy error:', err);
           });
-          proxy.on('proxyReq', (proxyReq, req, _res) => {
+          proxy.on('proxyReq', (proxyReq, _req, _res) => {
             console.log('Proxying request to:', proxyReq.path);
           });
           proxy.on('proxyRes', (proxyRes, req, _res) => {
@@ -178,7 +174,8 @@ export default defineConfig(({ mode }) => ({
           return `js/${facadeModuleId}-[hash].js`;
         },
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split('.') || [];
+          const fileName = assetInfo.names?.[0] || 'asset';
+          const info = fileName.split('.');
           const ext = info[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext || '')) {
             return `images/[name]-[hash][extname]`;
