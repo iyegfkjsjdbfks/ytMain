@@ -114,13 +114,32 @@ This guide will help you set up the Google Custom Search API to enable YouTube v
 
 Once configured, the following features will be available:
 
-- ✅ Search YouTube videos alongside local videos
-- ✅ Embedded YouTube player with iframe API
-- ✅ Playable videos within the application
-- ✅ YouTube video metadata (title, channel, description)
-- ✅ Thumbnail previews
-- ✅ Separate tabs for local vs YouTube results
-- ✅ Combined search results view
+- ✅ **Real YouTube Recommendations**: Watch page sidebar shows YouTube videos related to current video
+- ✅ **Intelligent Search**: Recommendations based on video title, category, and tags
+- ✅ **Live YouTube Integration**: Direct links to YouTube videos
+- ✅ **Fallback System**: Uses sample videos if API is not configured
+- ✅ **Visual Indicators**: Shows when YouTube API is active vs fallback mode
+- ✅ **Auto-Detection**: Automatically detects API configuration status
+
+## Testing Your Setup
+
+### Method 1: Check Browser Console
+1. Open browser developer tools (F12)
+2. Navigate to any watch page (e.g., `/watch/sample-1`)
+3. Look for console messages:
+   - ✅ `"🎯 YouTube API Configuration Status"` - Shows config status
+   - ✅ `"Fetching YouTube recommendations for: [video title]"` - API working
+   - ⚠️ `"Google Custom Search API credentials not configured"` - Setup needed
+
+### Method 2: Visual Indicators
+1. Go to any watch page
+2. Look at the "Recommended for you" section:
+   - ✅ Green dot with "Live YouTube API" = API working
+   - 🔵 Blue dot with "Fetching from YouTube..." = Loading from API
+   - ⚪ No indicator = Using fallback sample videos
+
+### Method 3: Test Page
+Open `/test-api.html` in your browser to run direct API tests.
 
 ## Support
 

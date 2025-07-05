@@ -1,6 +1,7 @@
 // / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
 import type { Video } from '../types';
+import { googleSearchVideoStore } from './googleSearchVideoStore';
 
 // Types for Google Custom Search JSON API response
 interface GoogleSearchItem {
@@ -557,6 +558,10 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
       const channelDetails = videoDetails ? channelDetailsMap.get(videoDetails.snippet.channelId) : undefined;
       return convertToGoogleSearchResult(item, videoDetails, channelDetails);
     });
+
+    // Store Google Custom Search results for individual access
+    googleSearchVideoStore.storeVideos(youtubeResults);
+    console.log(`📦 Stored ${youtubeResults.length} Google Custom Search videos for individual access`);
 
     return youtubeResults;
   } catch (error) {

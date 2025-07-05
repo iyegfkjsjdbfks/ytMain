@@ -54,11 +54,11 @@ return `${Math.floor(diffDays / 30)} months ago`;
   };
 
   const handleCardClick = () => {
-    // Extract clean video ID (remove any prefix like 'youtube-' or 'google-search-')
-    const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
+    // Use the full video ID to preserve the source context (google-search- or youtube- prefix)
+    const fullVideoId = video.id;
 
-    // Navigate to watch page with YouTube video ID
-    const watchUrl = buildVideoUrl(cleanVideoId);
+    // Navigate to watch page with full video ID to preserve metadata source
+    const watchUrl = buildVideoUrl(fullVideoId);
     navigate(watchUrl);
   };
 

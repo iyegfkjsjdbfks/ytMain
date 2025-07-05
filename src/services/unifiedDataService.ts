@@ -6,6 +6,7 @@ import {
   type UnifiedVideoMetadata,
   type UnifiedChannelMetadata,
 } from './metadataNormalizationService';
+import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 
 /**
  * Configuration for unified data fetching
@@ -217,6 +218,11 @@ class UnifiedDataService {
       return id.substring(8); // Remove 'youtube-' prefix
     }
 
+    // Handle google-search-prefixed IDs (e.g., google-search-YQHsXMglC9A)
+    if (id.startsWith('google-search-')) {
+      return id.substring(14); // Remove 'google-search-' prefix
+    }
+
     // Handle URLs that might be passed as IDs
     const youtubeId = getYouTubeVideoId(id);
     if (youtubeId) {
@@ -239,13 +245,76 @@ class UnifiedDataService {
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
 
     if (cached) {
+      console.log(`UnifiedDataService: Returning cached video for ID: ${id}`);
       return cached;
     }
 
     console.log(`UnifiedDataService: Getting video by ID: ${id}`);
 
+    // Check if this is a Google Custom Search video first
+    if (id.startsWith('google-search-')) {
+      console.log(`🔍 Checking Google Custom Search store for: ${id}`);
+      const googleSearchVideo = googleSearchVideoStore.getVideo(id);
+      
+      if (googleSearchVideo) {
+        console.log(`✅ Found Google Custom Search video: ${googleSearchVideo.title}`);
+        console.log('Google Custom Search metadata:', {
+          id: googleSearchVideo.id,
+          title: googleSearchVideo.title,
+          channelName: googleSearchVideo.channelName,
+          channelAvatarUrl: googleSearchVideo.channelAvatarUrl,
+          views: googleSearchVideo.viewCount,
+          source: 'Google Custom Search JSON API'
+        });
+
+        // Convert Google Custom Search result to unified format
+        const normalized: UnifiedVideoMetadata = {
+          id: googleSearchVideo.id,
+          title: googleSearchVideo.title,
+          description: googleSearchVideo.description || '',
+          thumbnailUrl: googleSearchVideo.thumbnailUrl || '',
+          videoUrl: googleSearchVideo.videoUrl || `https://www.youtube.com/watch?v=${googleSearchVideo.id.replace('google-search-', '')}`,
+          views: googleSearchVideo.viewCount || 0,
+          viewsFormatted: this.formatViews(googleSearchVideo.viewCount || 0),
+          likes: googleSearchVideo.likeCount || 0,
+          dislikes: googleSearchVideo.dislikeCount || 0,
+          commentCount: googleSearchVideo.commentCount || 0,
+          channel: {
+            id: googleSearchVideo.channelId || '',
+            name: googleSearchVideo.channelName || 'YouTube Channel',
+            avatarUrl: googleSearchVideo.channelAvatarUrl || '',
+            subscribers: 0,
+            subscribersFormatted: '0 subscribers',
+            isVerified: googleSearchVideo.channelName?.includes('VEVO') || googleSearchVideo.channelName?.includes('Official') || false,
+          },
+          duration: googleSearchVideo.duration || '0:00',
+          publishedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+          publishedAtFormatted: this.formatTimeAgo(googleSearchVideo.uploadedAt || new Date().toISOString()),
+          category: googleSearchVideo.categoryId || 'General',
+          tags: googleSearchVideo.tags || [],
+          isLive: false,
+          isShort: false,
+          visibility: 'public' as const,
+          source: 'external' as const,
+          metadata: {
+            quality: 'hd',
+            definition: 'high'
+          },
+        };
+
+        // Cache the result
+        this.setCachedData(cacheKey, normalized);
+        return normalized;
+      } else {
+        console.log(`❌ Google Custom Search video not found in store: ${id}`);
+        // Continue to YouTube API as fallback
+      }
+    }
+
     // Check if this is a YouTube video ID
     const youtubeId = this.extractYouTubeId(id);
+
+    console.log(`UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`);
 
     if (youtubeId) {
       // This is a YouTube video, try YouTube first
@@ -255,9 +324,20 @@ class UnifiedDataService {
           console.log(`Fetching YouTube video with ID: ${youtubeId}`);
           const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
           if (youtubeVideos.length > 0) {
-            console.log('Successfully fetched YouTube video:', youtubeVideos[0]);
+            const video = youtubeVideos[0];
+            console.log('Successfully fetched YouTube video:', video);
+            if (video) {
+              console.log('Video metadata details:', {
+                id: video.id,
+                title: video.title,
+                channelName: video.channelName,
+                channelAvatarUrl: video.channelAvatarUrl,
+                views: video.viewCount,
+                source: 'YouTube Data API v3'
+              });
+            }
             // Convert already processed YouTube video to unified format
-            const processedVideo = youtubeVideos[0];
+            const processedVideo = video;
             if (!processedVideo) {
               return null;
             }
