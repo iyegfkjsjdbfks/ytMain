@@ -2,6 +2,7 @@
 // Google Custom Search API service for YouTube video search
 import type { Video } from '../types';
 import { googleSearchVideoStore } from './googleSearchVideoStore';
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 // Types for Google Custom Search JSON API response
 interface GoogleSearchItem {
@@ -360,6 +361,12 @@ const formatDuration = (seconds: number): string => {
 
 // Fetch detailed video information from YouTube Data API v3
 const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTubeVideoDetails>> => {
+  // Check if YouTube Data API is blocked by admin settings
+  if (isYouTubeDataApiBlocked()) {
+    console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+    return new Map();
+  }
+
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || videoIds.length === 0) {
     return new Map();

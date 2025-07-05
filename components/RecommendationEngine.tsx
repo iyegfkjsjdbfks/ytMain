@@ -32,13 +32,13 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     return currentVideo?.id || currentVideoId;
   }, [currentVideo?.id, currentVideoId]);
 
-  // Check if YouTube Search API is configured
+  // Check if Google Custom Search API is configured
   useEffect(() => {
     const configured = youtubeSearchService.isConfigured();
     setUseYouTubeAPI(configured);
-    console.log('🎯 YouTube API Configuration Status:', configured ? '✅ Configured' : '❌ Not configured');
+    console.log('🎯 Google Custom Search API Configuration Status:', configured ? '✅ Configured' : '❌ Not configured');
     if (configured) {
-      console.log('✅ YouTube recommendations will use live API');
+      console.log('✅ YouTube recommendations will ALWAYS use Google Custom Search JSON API');
     } else {
       console.log('⚠️ YouTube recommendations will use fallback sample videos');
     }
@@ -50,26 +50,43 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     try {
       let recommendedVideos: Video[] = [];
 
-      if (useYouTubeAPI && currentVideo) {
-        // Use YouTube Search API for real recommendations
-        console.log('🔍 Fetching YouTube recommendations for video:', {
-          id: currentVideo.id,
-          title: currentVideo.title,
-          category: currentVideo.category,
-          tags: currentVideo.tags,
-          channelName: currentVideo.channelName
+      if (useYouTubeAPI) {
+        // ALWAYS use Google Custom Search JSON API for ALL recommendations
+        // regardless of the source of the current video
+        console.log('🔍 Fetching YouTube recommendations using Google Custom Search JSON API for video:', {
+          id: currentVideo?.id,
+          title: currentVideo?.title,
+          category: currentVideo?.category,
+          tags: currentVideo?.tags,
+          channelName: currentVideo?.channelName
         });
-        
-        recommendedVideos = await youtubeSearchService.searchRelatedVideos(
-          currentVideo,
-          maxRecommendations
-        );
 
-        console.log(`📺 YouTube API returned ${recommendedVideos.length} recommendations`);
+        if (currentVideo) {
+          // Use the current video context for related video search
+          recommendedVideos = await youtubeSearchService.searchRelatedVideos(
+            currentVideo,
+            maxRecommendations
+          );
+        } else if (currentVideoId) {
+          // If no current video object but we have an ID, do a generic search
+          const searchQuery = `youtube videos`;
+          recommendedVideos = await youtubeSearchService.searchVideos(
+            searchQuery,
+            maxRecommendations
+          );
+        } else {
+          // Fallback to a generic search for popular content
+          recommendedVideos = await youtubeSearchService.searchVideos(
+            'trending youtube videos',
+            maxRecommendations
+          );
+        }
 
-        // If YouTube API returns no results, fall back to real videos
+        console.log(`📺 Google Custom Search JSON API returned ${recommendedVideos.length} recommendations`);
+
+        // If Google Custom Search API returns no results, fall back to real videos
         if (recommendedVideos.length === 0) {
-          console.log('⚠️ No YouTube API results, falling back to real videos');
+          console.log('⚠️ No Google Custom Search API results, falling back to real videos');
           const availableVideos = realVideos.filter(video =>
             !activeVideoId || video.id !== activeVideoId,
           );
@@ -119,7 +136,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     } finally {
       setLoading(false);
     }
-  }, [activeVideoId, currentVideo, maxRecommendations, useYouTubeAPI]);
+  }, [activeVideoId, currentVideo, currentVideoId, maxRecommendations, useYouTubeAPI]);
 
   // Use stable dependencies to prevent infinite re-renders
   useEffect(() => {
@@ -131,6 +148,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       onVideoSelect(video.id);
     } else {
       // Default behavior - navigate to watch page
+      // Ensure we preserve the video ID exactly as it is (with google-search- prefix if it has one)
       window.location.href = `/watch?v=${video.id}`;
     }
   }, [onVideoSelect]);
@@ -145,7 +163,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           {useYouTubeAPI && (
             <div className="flex items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              <span>Fetching from YouTube...</span>
+              <span>Fetching from Google Custom Search...</span>
             </div>
           )}
         </div>
@@ -178,14 +196,14 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         {useYouTubeAPI && (
           <div className="flex items-center space-x-1 text-xs text-green-600 dark:text-green-400">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span>Live YouTube API</span>
+            <span>Live Google Custom Search JSON API</span>
           </div>
         )}
       </div>
       <div className="space-y-3">
         {recommendations.map((video) => (
           <div key={video.id} className="cursor-pointer" onClick={() => handleVideoClick(video)}>
-            {useYouTubeAPI && video.videoUrl?.includes('youtube.com') ? (
+            {useYouTubeAPI ? (
               <EnhancedYouTubeVideoCard
                 video={video}
                 onVideoSelect={onVideoSelect}

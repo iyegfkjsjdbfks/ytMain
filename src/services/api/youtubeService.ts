@@ -1,6 +1,7 @@
 import { CACHE_CONFIG } from '../../lib/constants';
 
 import { ApiError } from './base';
+import { isYouTubeDataApiBlocked } from '../../utils/youtubeApiUtils';
 
 import type { Video, Channel } from '../../types/core';
 
@@ -105,9 +106,15 @@ url.searchParams.set(key, value);
    * @returns Promise resolving to array of Video objects
    */
   async fetchVideos(videoIds: string[]): Promise<Video[]> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      return [];
+    }
+
     if (!videoIds.length) {
-return [];
-}
+      return [];
+    }
 
     const cacheKey = `videos_${videoIds.join(',')}`;
     const cached = this.getCachedData<Video[]>(cacheKey);
@@ -268,9 +275,15 @@ return cached;
    * @returns Promise resolving to Channel object or null
    */
   async fetchChannel(channelId: string): Promise<Channel | null> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      return null;
+    }
+
     if (!channelId) {
-return null;
-}
+      return null;
+    }
 
     const cacheKey = `channel_${channelId}`;
     const cached = this.getCachedData<Channel>(cacheKey);
