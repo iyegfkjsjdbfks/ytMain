@@ -242,6 +242,7 @@ class UnifiedDataService {
    * Get video by ID from any source
    */
   async getVideoById(id: string): Promise<UnifiedVideoMetadata | null> {
+    console.log(`🚀 UnifiedDataService.getVideoById called with ID: ${id}`);
     const cacheKey = `video:${id}`;
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
 
@@ -255,7 +256,9 @@ class UnifiedDataService {
     // Check if this is a Google Custom Search video first
     if (id.startsWith('google-search-')) {
       console.log(`🔍 Detected Google Custom Search video ID: ${id}`);
+      console.log(`🔍 Checking googleSearchVideoStore for video: ${id}`);
       const googleSearchVideo = googleSearchVideoStore.getVideo(id);
+      console.log(`🔍 googleSearchVideoStore.getVideo result:`, googleSearchVideo);
       
       if (googleSearchVideo) {
         console.log(`✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`);
@@ -316,7 +319,12 @@ class UnifiedDataService {
         
         try {
           console.log(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${youtubeId}`);
+          console.log(`🔄 About to call fetchSingleVideoFromGoogleSearch function...`);
+          console.log(`🔄 Function type:`, typeof fetchSingleVideoFromGoogleSearch);
+          console.log(`🔄 Function exists:`, !!fetchSingleVideoFromGoogleSearch);
+
           const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
+          console.log(`🔄 fetchSingleVideoFromGoogleSearch returned:`, googleSearchVideo);
           if (googleSearchVideo) {
             console.log(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
             
@@ -360,7 +368,13 @@ class UnifiedDataService {
             return normalized;
           }
         } catch (error) {
-          console.error('Failed to fetch video from Google Custom Search API:', error);
+          console.error('❌ Failed to fetch video from Google Custom Search API:', error);
+          console.error('Error details:', {
+            message: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
+            videoId: youtubeId,
+            originalId: id
+          });
         }
         
         // If Google Custom Search API fails, continue to YouTube API as fallback

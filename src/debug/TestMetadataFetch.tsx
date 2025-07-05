@@ -1,0 +1,156 @@
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { unifiedDataService } from '../services/unifiedDataService';
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
+
+const TestMetadataFetch: React.FC = () => {
+  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Test with standard React Query hook
+  const { data: reactQueryData, isLoading: reactQueryLoading, error: reactQueryError } = useQuery({
+    queryKey: ['test-video', 'google-search-bnVUHWCynig'],
+    queryFn: async () => {
+      console.log('🔍 React Query: Fetching video...');
+      const video = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
+      console.log('📊 React Query: Result:', video);
+      return video;
+    },
+    enabled: true,
+  });
+
+  const testDirectGoogleSearch = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      console.log('🔍 Testing direct Google Custom Search API call...');
+
+      // Check environment variables first
+      const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
+      const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
+      console.log('🔑 API Key available:', !!searchApiKey);
+      console.log('🔍 Search Engine ID available:', !!searchEngineId);
+
+      const result = await fetchSingleVideoFromGoogleSearch('bnVUHWCynig');
+      console.log('📊 Direct API result:', result);
+      setResult({ type: 'direct', data: result });
+    } catch (err) {
+      console.error('❌ Direct API error:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const testUnifiedDataService = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    try {
+      console.log('🔍 Testing unified data service...');
+      console.log('🔍 Environment variables check:');
+      console.log('  - VITE_GOOGLE_SEARCH_API_KEY:', !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY);
+      console.log('  - VITE_GOOGLE_SEARCH_ENGINE_ID:', !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID);
+
+      const result = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
+      console.log('📊 Unified service result:', result);
+      setResult({ type: 'unified', data: result });
+    } catch (err) {
+      console.error('❌ Unified service error:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Test Metadata Fetch</h1>
+
+      {/* React Query Test Results */}
+      <div className="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded">
+        <h2 className="text-lg font-semibold mb-4">React Query Test (Auto-running)</h2>
+        <div className="space-y-2">
+          <p><strong>Loading:</strong> {reactQueryLoading ? 'Yes' : 'No'}</p>
+          <p><strong>Error:</strong> {reactQueryError ? String(reactQueryError) : 'None'}</p>
+          <p><strong>Data:</strong> {reactQueryData ? `Found: ${reactQueryData.title}` : 'None'}</p>
+        </div>
+        {reactQueryData && (
+          <details className="mt-4">
+            <summary className="cursor-pointer font-medium">Raw React Query Data</summary>
+            <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">
+              {JSON.stringify(reactQueryData, null, 2)}
+            </pre>
+          </details>
+        )}
+      </div>
+
+      <div className="space-y-4 mb-6">
+        <button
+          onClick={testDirectGoogleSearch}
+          disabled={loading}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+        >
+          Test Direct Google Custom Search API
+        </button>
+
+        <button
+          onClick={testUnifiedDataService}
+          disabled={loading}
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50"
+        >
+          Test Unified Data Service
+        </button>
+      </div>
+
+      {loading && (
+        <div className="text-blue-600">Loading...</div>
+      )}
+
+      {error && (
+        <div className="text-red-600 bg-red-50 p-4 rounded">
+          <strong>Error:</strong> {error}
+        </div>
+      )}
+
+      {result && (
+        <div className="bg-gray-50 p-4 rounded">
+          <h3 className="font-bold mb-2">
+            Result from {result.type === 'direct' ? 'Direct Google API' : 'Unified Data Service'}:
+          </h3>
+          
+          {result.data ? (
+            <div className="space-y-2">
+              <p><strong>Title:</strong> {result.data.title || 'N/A'}</p>
+              <p><strong>Description:</strong> {result.data.description || 'N/A'}</p>
+              <p><strong>Video URL:</strong> {result.data.videoUrl || 'N/A'}</p>
+              <p><strong>Source:</strong> {result.data.source || 'N/A'}</p>
+              {result.data.thumbnailUrl && (
+                <div>
+                  <strong>Thumbnail:</strong>
+                  <br />
+                  <img src={result.data.thumbnailUrl} alt="Thumbnail" className="max-w-xs mt-2" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-red-600">No data returned</p>
+          )}
+          
+          <details className="mt-4">
+            <summary className="cursor-pointer font-medium">Raw Data</summary>
+            <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">
+              {JSON.stringify(result.data, null, 2)}
+            </pre>
+          </details>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TestMetadataFetch;

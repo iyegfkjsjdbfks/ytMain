@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Google Custom Search API</title>
+</head>
+<body>
+    <h1>Test Google Custom Search API</h1>
+    <button onclick="testGoogleSearch()">Test API Call</button>
+    <div id="results"></div>
+
+    <script>
+        async function testGoogleSearch() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = 'Testing...';
+            
+            try {
+                const searchApiKey = 'AIzaSyDo2zq98fZbNEgjkdsYGAZs-CJcfSBz9OQ';
+                const searchEngineId = '61201925358ea4e83';
+                const youtubeVideoId = 'bnVUHWCynig';
+                
+                const searchQuery = `site:youtube.com/watch ${youtubeVideoId}`;
+                const searchUrl = new URL('https://www.googleapis.com/customsearch/v1');
+                searchUrl.searchParams.set('key', searchApiKey);
+                searchUrl.searchParams.set('cx', searchEngineId);
+                searchUrl.searchParams.set('q', searchQuery);
+                searchUrl.searchParams.set('num', '1');
+                
+                console.log('Search URL:', searchUrl.toString());
+                
+                const response = await fetch(searchUrl.toString());
+                const data = await response.json();
+                
+                console.log('API Response:', data);
+                
+                if (data.error) {
+                    resultsDiv.innerHTML = `<pre style="color: red;">Error: ${JSON.stringify(data.error, null, 2)}</pre>`;
+                } else if (data.items && data.items.length > 0) {
+                    const item = data.items[0];
+                    resultsDiv.innerHTML = `
+                        <div style="color: green;">
+                            <h3>Success!</h3>
+                            <p><strong>Title:</strong> ${item.title}</p>
+                            <p><strong>Link:</strong> ${item.link}</p>
+                            <p><strong>Snippet:</strong> ${item.snippet}</p>
+                        </div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `<pre style="color: orange;">No results found</pre>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = `<pre style="color: red;">Error: ${error.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>

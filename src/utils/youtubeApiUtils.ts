@@ -10,9 +10,13 @@ import { getYouTubeSearchProvider } from '../../services/settingsService';
  */
 export function isYouTubeDataApiBlocked(): boolean {
   const provider = getYouTubeSearchProvider();
+  console.log(`🔒 YouTube API Blocking Check: Current provider = "${provider}"`);
   
   // Block YouTube Data API when Google Custom Search is selected as the sole provider
-  return provider === 'google-search';
+  const isBlocked = provider === 'google-search';
+  console.log(`🔒 YouTube API Blocked: ${isBlocked}`);
+  
+  return isBlocked;
 }
 
 /**

@@ -662,13 +662,17 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
 // Fetch a single video by YouTube ID from Google Custom Search
 export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): Promise<GoogleSearchResult | null> => {
   console.log(`🔍 Fetching single video from Google Custom Search: ${youtubeVideoId}`);
-  
+
   try {
     const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
     const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
 
+    console.log(`🔑 API Key available: ${!!searchApiKey}`);
+    console.log(`🔍 Search Engine ID available: ${!!searchEngineId}`);
+
     if (!searchApiKey || !searchEngineId) {
       console.error('Google Custom Search API not configured');
+      console.error(`Missing API Key: ${!searchApiKey}, Missing Engine ID: ${!searchEngineId}`);
       return null;
     }
 
@@ -683,12 +687,22 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     console.log(`🌐 Google Custom Search URL: ${searchUrl.toString()}`);
 
     const response = await fetch(searchUrl.toString());
+    console.log(`📡 Response status: ${response.status} ${response.statusText}`);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ Google Custom Search API error: ${response.status} ${response.statusText}`);
+      console.error(`❌ Error details: ${errorText}`);
       throw new Error(`Google Custom Search API error: ${response.statusText}`);
     }
 
     const data = await response.json();
-    console.log('📥 Google Custom Search API Response:', data);
+    console.log('📥 Google Custom Search API Response:', JSON.stringify(data, null, 2));
+    console.log('📊 Search info:', {
+      totalResults: data.searchInformation?.totalResults,
+      itemsCount: data.items?.length || 0,
+      searchTime: data.searchInformation?.searchTime
+    });
 
     if (!data.items || data.items.length === 0) {
       console.log(`❌ No Google Custom Search results found for video ID: ${youtubeVideoId}`);
@@ -703,28 +717,108 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       return null;
     }
 
-    // Convert to GoogleSearchResult format
+    console.log('🔍 Raw Google Search Item:', JSON.stringify(item, null, 2));
+    
+    // Try to extract metadata from the YouTube page if available
+    let enhancedMetadata: YouTubeVideoDetails | null = null;
+    let channelMetadata: YouTubeChannelDetails | null = null;
+    
+    // If we have YouTube API access and it's not blocked, try to get enhanced metadata
+    const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+    if (youtubeApiKey && !isYouTubeDataApiBlocked()) {
+      try {
+        console.log('🎯 Attempting to get enhanced metadata from YouTube API...');
+        console.log('🔑 YouTube API Key available:', !!youtubeApiKey);
+        console.log('🔒 YouTube API blocked check passed');
+        
+        const videoDetailsMap = await fetchVideoDetails([youtubeVideoId]);
+        enhancedMetadata = videoDetailsMap.get(youtubeVideoId) || null;
+        
+        if (enhancedMetadata) {
+          console.log('✅ Enhanced metadata found:', enhancedMetadata.snippet.title);
+          console.log('📊 Real view count:', parseInt(enhancedMetadata.statistics.viewCount).toLocaleString());
+          const channelDetailsMap = await fetchChannelDetails([enhancedMetadata.snippet.channelId]);
+          channelMetadata = channelDetailsMap.get(enhancedMetadata.snippet.channelId) || null;
+        } else {
+          console.log('❌ No enhanced metadata found from YouTube API');
+        }
+      } catch (error) {
+        console.warn('⚠️ Failed to get enhanced metadata, using Google Search data only:', error);
+      }
+    } else {
+      console.log('❌ YouTube API access denied:');
+      console.log('  - API Key available:', !!youtubeApiKey);
+      console.log('  - API Blocked:', isYouTubeDataApiBlocked());
+      console.log('  - Will use Google Custom Search data only');
+    }
+
+    // Parse the title to remove " - YouTube" suffix
+    const cleanTitle = (item.title || 'YouTube Video')
+      .replace(/ - YouTube$/, '')
+      .replace(/\s*\|\s*YouTube$/, '');
+
+    // Extract channel name from title or use enhanced metadata
+    const channelName = enhancedMetadata?.snippet.channelTitle || 
+                       extractChannelFromTitle(item.title) || 
+                       'YouTube Channel';
+
+    console.log('🔍 Building result with data sources:');
+    console.log('  📝 Title source:', enhancedMetadata ? 'YouTube API' : 'Google Search');
+    console.log('  📺 Channel source:', enhancedMetadata ? 'YouTube API' : 'Extracted from title');
+    console.log('  📊 View count source:', enhancedMetadata ? 'YouTube API (real)' : 'Not available');
+    console.log('  🖼️ Thumbnail source:', enhancedMetadata ? 'YouTube API (high-res)' : 'Google Search');
+
+    // Use enhanced metadata or fallback to extracted/placeholder values
     const result: GoogleSearchResult = {
       id: `google-search-${youtubeVideoId}`,
-      title: item.title || 'YouTube Video',
-      description: item.snippet || '',
-      thumbnailUrl: item.pagemap?.cse_thumbnail?.[0]?.src || item.pagemap?.cse_image?.[0]?.src || '',
+      title: cleanTitle,
+      description: enhancedMetadata?.snippet.description || item.snippet || '',
+      thumbnailUrl: enhancedMetadata?.snippet.thumbnails.maxres?.url ||
+                   enhancedMetadata?.snippet.thumbnails.high?.url ||
+                   enhancedMetadata?.snippet.thumbnails.medium?.url ||
+                   item.pagemap?.cse_thumbnail?.[0]?.src || 
+                   item.pagemap?.cse_image?.[0]?.src || 
+                   `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
       videoUrl: item.link,
       embedUrl: `https://www.youtube.com/embed/${youtubeVideoId}`,
-      uploadedAt: new Date().toISOString(), // Google Custom Search doesn't provide upload date
-      channelName: extractChannelFromTitle(item.title) || 'YouTube Channel',
-      channelId: `channel-${youtubeVideoId}`,
-      channelAvatarUrl: generateChannelAvatarUrl(extractChannelFromTitle(item.title) || 'YouTube Channel'),
-      duration: 'Unknown',
-      viewCount: Math.floor(Math.random() * 1000000), // Estimated views since Google Custom Search doesn't provide this
-      likeCount: Math.floor(Math.random() * 10000),
-      dislikeCount: Math.floor(Math.random() * 1000),
-      commentCount: Math.floor(Math.random() * 5000),
-      categoryId: 'General',
-      tags: [],
+      uploadedAt: enhancedMetadata?.snippet.publishedAt || 
+                 item.pagemap?.videoobject?.[0]?.uploaddate || 
+                 new Date().toISOString(),
+      channelName: channelName,
+      channelId: enhancedMetadata?.snippet.channelId || `channel-${youtubeVideoId}`,
+      channelAvatarUrl: channelMetadata?.snippet.thumbnails.medium?.url ||
+                       channelMetadata?.snippet.thumbnails.default?.url ||
+                       generateChannelAvatarUrl(channelName),
+      duration: enhancedMetadata?.contentDetails.duration ? 
+               formatDuration(parseDuration(enhancedMetadata.contentDetails.duration)) :
+               item.pagemap?.videoobject?.[0]?.duration || 
+               'Unknown',
+      ...(enhancedMetadata?.statistics.viewCount && { 
+        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10) 
+      }),
+      ...(enhancedMetadata?.statistics.likeCount && { 
+        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10) 
+      }),
+      ...(enhancedMetadata?.statistics.dislikeCount && { 
+        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10) 
+      }),
+      ...(enhancedMetadata?.statistics.commentCount && { 
+        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10) 
+      }),
+      categoryId: enhancedMetadata?.snippet.categoryId || 'General',
+      tags: enhancedMetadata?.snippet.tags || [],
       isYouTube: true as const,
       source: 'google-search' as const,
     };
+
+    console.log('📦 Final result summary:');
+    console.log(`  🆔 ID: ${result.id}`);
+    console.log(`  📝 Title: ${result.title}`);
+    console.log(`  📺 Channel: ${result.channelName}`);
+    console.log(`  📊 Views: ${result.viewCount ? result.viewCount.toLocaleString() : 'Not available'}`);
+    console.log(`  ⏱️ Duration: ${result.duration}`);
+    console.log(`  🎯 Source: ${result.source}`);
+    console.log(`  🔗 URL: ${result.videoUrl}`);
 
     console.log(`✅ Successfully fetched video from Google Custom Search:`, result.title);
     
@@ -741,20 +835,30 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
 
 // Helper function to extract channel name from video title
 function extractChannelFromTitle(title: string): string | null {
+  // Remove " - YouTube" suffix first
+  const cleanTitle = title.replace(/ - YouTube$/, '').replace(/\s*\|\s*YouTube$/, '');
+  
   // Try to extract channel name from common title patterns
   const patterns = [
-    / - (.+)$/,  // "Video Title - Channel Name"
-    /by (.+)$/,  // "Video Title by Channel Name"
-    /\| (.+)$/,  // "Video Title | Channel Name"
+    / - ([^-]+)$/,     // "Video Title - Channel Name"
+    /by ([^|]+)$/i,    // "Video Title by Channel Name"
+    /\| ([^|]+)$/,     // "Video Title | Channel Name"
+    /: ([^:]+)$/,      // "Video Title: Channel Name"
+    /\(([^)]+)\)$/,    // "Video Title (Channel Name)"
   ];
 
   for (const pattern of patterns) {
-    const match = title.match(pattern);
+    const match = cleanTitle.match(pattern);
     if (match && match[1]) {
-      return match[1].trim();
+      const channelName = match[1].trim();
+      // Filter out common non-channel words
+      if (!['YouTube', 'Video', 'Official', 'HD', '4K', '2024', '2023'].includes(channelName)) {
+        return channelName;
+      }
     }
   }
 
+  // If no pattern matches, try to extract from the URL or displayLink
   return null;
 }
 

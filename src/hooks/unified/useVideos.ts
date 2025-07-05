@@ -7,6 +7,7 @@ import { videoApi, type VideoUploadData } from '../../services/api/videos';
 import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
 import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
 
+import { useQuery as useReactQuery, useMutation as useReactQueryMutation } from '@tanstack/react-query';
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 
 import type { Video, Short } from '../../types/core';
@@ -32,21 +33,42 @@ export function useUnifiedVideos(
 
 export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVideoMetadata>) {
   console.log(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
-  
-  return useQuery(
-    ['unified-video', videoId],
-    async () => {
-      console.log(`🔍 useUnifiedVideo: Fetching video with ID: ${videoId}`);
+  console.log(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
+
+  // Use standard React Query hook instead of custom one
+  const result = useReactQuery({
+    queryKey: ['unified-video', videoId, Date.now()], // Add timestamp to force fresh fetch
+    queryFn: async () => {
+      console.log(`🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`);
+
+      // Clear any existing cache for this video first
+      if (videoId.startsWith('google-search-')) {
+        console.log(`🗑️ Clearing cache for Google Search video: ${videoId}`);
+        unifiedDataService.clearCache(`video:${videoId}`);
+      }
+
       const video = await unifiedDataService.getVideoById(videoId);
       console.log(`📊 useUnifiedVideo: Result for ${videoId}:`, video ? `Found: ${video.title}` : 'Not found');
-      return video ? { data: video, success: true, message: 'Video fetched successfully' } : null;
+      return video;
     },
-    {
-      enabled: !!videoId,
-      staleTime: 10 * 60 * 1000, // 10 minutes
-      ...config,
-    },
-  );
+    enabled: !!videoId,
+    staleTime: 0, // Always consider data stale
+    gcTime: 0, // Don't cache the result
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
+
+  // Convert React Query result to match our custom hook format
+  const customResult = {
+    data: result.data,
+    loading: result.isLoading,
+    error: result.error ? String(result.error) : null,
+    isStale: result.isStale,
+    lastUpdated: result.dataUpdatedAt,
+  };
+
+  console.log(`🎬 useUnifiedVideo hook result:`, customResult);
+  return customResult;
 }
 
 export function useUnifiedTrendingVideos(

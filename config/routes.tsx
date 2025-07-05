@@ -48,6 +48,9 @@ const PlaylistManagerPage = lazy(() => import('../pages/PlaylistManagerPage'));
 const ChannelCustomizationPage = lazy(() => import('../pages/ChannelCustomizationPage'));
 const VideoEditorPage = lazy(() => import('../pages/VideoEditorPage'));
 
+// Debug components
+const TestMetadataFetch = lazy(() => import('../src/debug/TestMetadataFetch'));
+
 // Route configuration for main application
 export const mainRoutes: RouteObject[] = [
   {
@@ -134,6 +137,10 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'upload',
         element: <VideoUploadPage />,
+      },
+      {
+        path: 'debug-metadata',
+        element: <TestMetadataFetch />,
       },
       {
         path: 'settings',

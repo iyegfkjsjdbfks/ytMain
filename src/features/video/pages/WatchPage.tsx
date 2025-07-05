@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 
 import YouTubePlayer from '../../../../components/YouTubePlayer';
 import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
@@ -11,11 +11,19 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import type { Video } from '../../../types/core';
 
 const WatchPage: React.FC = () => {
-  const { videoId } = useParams<{ videoId: string }>();
-  console.log(`🎬 WatchPage: Rendering with videoId: ${videoId}`);
-  
-  const { data: video, loading } = useUnifiedVideo(videoId || '');
+  const { videoId: paramVideoId } = useParams<{ videoId: string }>();
+  const [searchParams] = useSearchParams();
+
+  // Get video ID from either URL params or query string
+  const videoId = paramVideoId || searchParams.get('v') || '';
+  console.log(`🎬 WatchPage: Rendering with videoId: ${videoId} (from ${paramVideoId ? 'params' : 'query'})`);
+
+  const { data: video, loading } = useUnifiedVideo(videoId, {
+    staleTime: 0, // Force fresh data
+  });
   console.log(`📊 WatchPage: Video data received:`, video ? `${video.title} (${video.source})` : 'No video');
+  console.log(`📊 WatchPage: Video object:`, video);
+  console.log(`📊 WatchPage: Video truthy:`, !!video);
   console.log(`⏳ WatchPage: Loading state: ${loading}`);
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
@@ -59,7 +67,7 @@ const WatchPage: React.FC = () => {
           isShort: false,
           visibility: 'public',
           license: 'Standard YouTube License',
-          isFamilySafe: true,
+          embeddable: true,
           allowedRegions: [],
           blockedRegions: [],
           isAgeRestricted: false,
@@ -114,11 +122,124 @@ const WatchPage: React.FC = () => {
   }
 
   if (!video) {
+    const testGoogleSearchFallback = async () => {
+      try {
+        console.log('🧪 Testing Google Custom Search fallback manually...');
+        
+        // Check current provider setting
+        const { getYouTubeSearchProvider } = await import('../../../services/settingsService');
+        const currentProvider = getYouTubeSearchProvider();
+        console.log('⚙️ Current YouTube Search Provider:', currentProvider);
+        
+        // Check if YouTube API is blocked
+        const { isYouTubeDataApiBlocked } = await import('../../../utils/youtubeApiUtils');
+        const isBlocked = isYouTubeDataApiBlocked();
+        console.log('🔒 YouTube Data API Blocked:', isBlocked);
+        
+        // Clear any cached data first
+        const { unifiedDataService } = await import('../../../services/unifiedDataService');
+        unifiedDataService.clearCache('video:google-search-bnVUHWCynig');
+        unifiedDataService.clearCache('unified-video');
+        console.log('🗑️ Cleared cache for google-search-bnVUHWCynig');
+        
+        const result = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
+        console.log('🧪 Test result:', result);
+        
+        if (result) {
+          const viewsInfo = result.viewCount ? `${result.viewCount.toLocaleString()} views` : 'Views: Not available';
+          alert(`✅ Test Success!\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}\nTitle: ${result.title}\n${viewsInfo}\nChannel: ${result.channel?.name}\nSource: ${result.source}`);
+        } else {
+          alert(`❌ Test failed: No video found\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}`);
+        }
+      } catch (error) {
+        console.error('🧪 Test error:', error);
+        alert(`❌ Test error: ${error}`);
+      }
+    };
+
+    const clearCacheAndRefresh = async () => {
+      try {
+        console.log('🗑️ Clearing all caches and refreshing...');
+
+        // Clear unified data service cache
+        const { unifiedDataService } = await import('../../../services/unifiedDataService');
+        unifiedDataService.clearCache(); // Clear all cache
+        console.log('✅ Unified data service cache cleared');
+
+        // Clear Google Search video store
+        const { googleSearchVideoStore } = await import('../../../../services/googleSearchVideoStore');
+        googleSearchVideoStore.clear();
+        console.log('✅ Google Search video store cleared');
+
+        // Clear React Query cache
+        const { queryClient } = await import('../../../../hooks/useQueryClient');
+        queryClient.clear();
+        console.log('✅ React Query cache cleared');
+
+        // Clear browser storage
+        localStorage.removeItem('google-search-videos');
+        sessionStorage.clear();
+        console.log('✅ Browser storage cleared');
+
+        console.log('🔄 Reloading page...');
+        window.location.reload();
+      } catch (error) {
+        console.error('❌ Cache clear error:', error);
+      }
+    };
+
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Video not found</h1>
-          <Link to="/" className="text-red-600 hover:text-red-700">Go back to home</Link>
+      <div className="min-h-screen bg-white dark:bg-neutral-900 p-6">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+            {loading ? 'Loading video...' : 'Video not found'}
+          </h1>
+          
+          {/* Debug Information Panel */}
+          <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6">
+            <h2 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">🔍 Debug Information</h2>
+            <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <div><strong>Video ID from URL:</strong> {videoId}</div>
+              <div><strong>Loading State:</strong> {loading ? 'Yes' : 'No'}</div>
+              <div><strong>Hook Response:</strong> {video ? 'Video found' : 'null'}</div>
+              <div><strong>Video Data:</strong> {video ? JSON.stringify(video, null, 2) : 'null'}</div>
+              <div><strong>Environment Check:</strong></div>
+              <div className="ml-4">
+                <div>VITE_GOOGLE_SEARCH_API_KEY: {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY ? '✅ Set' : '❌ Missing'}</div>
+                <div>VITE_GOOGLE_SEARCH_ENGINE_ID: {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID ? '✅ Set' : '❌ Missing'}</div>
+                <div>VITE_YOUTUBE_API_KEY: {import.meta.env.VITE_YOUTUBE_API_KEY ? '✅ Set' : '❌ Missing'}</div>
+              </div>
+              <div><strong>⚠️ Note:</strong> YouTube API is blocked when Google Custom Search is selected in admin panel</div>
+              <div><strong>💡 Expected:</strong> Google Custom Search should provide basic metadata, but view counts may not be available</div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <button 
+              onClick={testGoogleSearchFallback}
+              className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              🧪 Test Google Custom Search Fallback
+            </button>
+            
+            <button 
+              onClick={clearCacheAndRefresh}
+              className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+            >
+              🗑️ Clear Cache & Refresh
+            </button>
+            
+            <Link 
+              to="/" 
+              className="block w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center"
+            >
+              ← Go back to home
+            </Link>
+          </div>
+          
+          <div className="mt-6 text-xs text-neutral-500 dark:text-neutral-400">
+            <p>💡 <strong>Tip:</strong> Open browser developer tools (F12) to see detailed console logs</p>
+          </div>
         </div>
       </div>
     );
