@@ -22,6 +22,9 @@ interface GoogleSearchItem {
       width: string;
       height: string;
     }>;
+    cse_image?: Array<{
+      src: string;
+    }>;
     videoobject?: Array<{
       embedurl?: string;
       playertype?: string;
@@ -29,6 +32,43 @@ interface GoogleSearchItem {
       height?: string;
       duration?: string;
       uploaddate?: string;
+      name?: string;
+      description?: string;
+      thumbnailurl?: string;
+      channelid?: string;
+      interactioncount?: string;
+      viewcount?: string;
+      watchcount?: string;
+      likecount?: string;
+      dislikecount?: string;
+      commentcount?: string;
+      subscribercount?: string;
+      genre?: string;
+      keywords?: string;
+      contentrating?: string;
+      isfamilyfriendly?: string;
+    }>;
+    metatags?: Array<{
+      'og:title'?: string;
+      'og:description'?: string;
+      'og:image'?: string;
+      'og:url'?: string;
+      'og:video:duration'?: string;
+      'og:video:tag'?: string;
+      'twitter:title'?: string;
+      'twitter:description'?: string;
+      'twitter:image'?: string;
+      'youtube-client-name'?: string;
+      'youtube-client-version'?: string;
+      'theme-color'?: string;
+    }>;
+    person?: Array<{
+      name?: string;
+      url?: string;
+    }>;
+    organization?: Array<{
+      name?: string;
+      url?: string;
     }>;
   };
 }
@@ -282,7 +322,7 @@ const convertToYouTubeResult = (
   };
 };
 
-// Convert Google Custom Search result to YouTube video result with enhanced metadata
+// Convert Google Custom Search result to YouTube video result with YouTube API as primary, Google Custom Search as fallback
 const convertToGoogleSearchResult = (
   item: GoogleSearchItem,
   videoDetails?: YouTubeVideoDetails,
@@ -290,35 +330,197 @@ const convertToGoogleSearchResult = (
 ): GoogleSearchResult => {
   // Extract video ID from YouTube URL
   const videoId = extractVideoIdFromUrl(item.link);
+
+  // Enhanced metadata extraction from Google Custom Search API
+  const videoObject = item.pagemap?.videoobject?.[0];
+  const metaTags = item.pagemap?.metatags?.[0];
+  const person = item.pagemap?.person?.[0];
+  const organization = item.pagemap?.organization?.[0];
+
+  // Extract thumbnail from multiple sources
   const thumbnailUrl = videoDetails?.snippet.thumbnails.maxres?.url ||
                       videoDetails?.snippet.thumbnails.high?.url ||
-                      item.pagemap?.cse_thumbnail?.[0]?.src || '';
-  const videoObject = item.pagemap?.videoobject?.[0];
+                      metaTags?.['og:image'] ||
+                      metaTags?.['twitter:image'] ||
+                      videoObject?.thumbnailurl ||
+                      item.pagemap?.cse_thumbnail?.[0]?.src ||
+                      item.pagemap?.cse_image?.[0]?.src ||
+                      `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
+  // Extract duration from multiple sources
   const duration = videoDetails?.contentDetails.duration ?
                   formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
-                  (videoObject?.duration || '0:00');
+                  metaTags?.['og:video:duration'] ||
+                  videoObject?.duration ||
+                  '0:00';
 
-  const channelId = videoDetails?.snippet.channelId;
-  const channelAvatarUrl = channelDetails?.snippet.thumbnails.medium?.url ||
-                          channelDetails?.snippet.thumbnails.default?.url;
+  // Extract enhanced metadata
+  const title = (videoDetails?.snippet.title ||
+                metaTags?.['og:title'] ||
+                videoObject?.name ||
+                item.title || 'YouTube Video')
+    .replace(/ - YouTube$/, '')
+    .replace(/\s*\|\s*YouTube$/, '');
+
+  const description = videoDetails?.snippet.description ||
+                     metaTags?.['og:description'] ||
+                     metaTags?.['twitter:description'] ||
+                     videoObject?.description ||
+                     item.snippet || '';
+
+  const channelName = videoDetails?.snippet.channelTitle ||
+                     person?.name ||
+                     organization?.name ||
+                     item.displayLink.replace(/^www\.youtube\.com\s*[›>]?\s*/, '') ||
+                     'YouTube';
+
+  const uploadedAt = videoDetails?.snippet.publishedAt ||
+                    videoObject?.uploaddate ||
+                    new Date().toISOString();
+
+  // Extract view count and other statistics from multiple sources
+  let viewCount: number | undefined;
+  let likeCount: number | undefined;
+  let dislikeCount: number | undefined;
+  let commentCount: number | undefined;
+
+  if (videoDetails?.statistics.viewCount) {
+    viewCount = parseInt(videoDetails.statistics.viewCount, 10);
+    likeCount = videoDetails.statistics.likeCount ? parseInt(videoDetails.statistics.likeCount, 10) : undefined;
+    dislikeCount = videoDetails.statistics.dislikeCount ? parseInt(videoDetails.statistics.dislikeCount, 10) : undefined;
+    commentCount = videoDetails.statistics.commentCount ? parseInt(videoDetails.statistics.commentCount, 10) : undefined;
+  } else {
+    // Try to extract from Google Custom Search videoobject
+    if (videoObject?.viewcount) {
+      const parsed = parseInt(videoObject.viewcount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        viewCount = parsed;
+      }
+    } else if (videoObject?.watchcount) {
+      const parsed = parseInt(videoObject.watchcount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        viewCount = parsed;
+      }
+    } else if (videoObject?.interactioncount) {
+      const parsed = parseInt(videoObject.interactioncount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        viewCount = parsed;
+      }
+    }
+
+    // Try to extract view count from snippet text (e.g., "1.2M views")
+    if (!viewCount && item.snippet) {
+      const viewsMatch = item.snippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+      if (viewsMatch && viewsMatch[1]) {
+        const viewsText = viewsMatch[1];
+        let multiplier = 1;
+        if (viewsText.includes('K')) multiplier = 1000;
+        else if (viewsText.includes('M')) multiplier = 1000000;
+        else if (viewsText.includes('B')) multiplier = 1000000000;
+
+        const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+        if (!isNaN(baseNumber)) {
+          viewCount = Math.round(baseNumber * multiplier);
+        }
+      }
+    }
+
+    // Try to extract view count from title and htmlSnippet as well
+    if (!viewCount && item.title) {
+      const titleViewsMatch = item.title.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+      if (titleViewsMatch && titleViewsMatch[1]) {
+        const viewsText = titleViewsMatch[1];
+        let multiplier = 1;
+        if (viewsText.includes('K')) multiplier = 1000;
+        else if (viewsText.includes('M')) multiplier = 1000000;
+        else if (viewsText.includes('B')) multiplier = 1000000000;
+
+        const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+        if (!isNaN(baseNumber)) {
+          viewCount = Math.round(baseNumber * multiplier);
+        }
+      }
+    }
+
+    if (!viewCount && item.htmlSnippet) {
+      const htmlSnippet = item.htmlSnippet.replace(/<[^>]*>/g, '');
+      const htmlViewsMatch = htmlSnippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+      if (htmlViewsMatch && htmlViewsMatch[1]) {
+        const viewsText = htmlViewsMatch[1];
+        let multiplier = 1;
+        if (viewsText.includes('K')) multiplier = 1000;
+        else if (viewsText.includes('M')) multiplier = 1000000;
+        else if (viewsText.includes('B')) multiplier = 1000000000;
+
+        const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+        if (!isNaN(baseNumber)) {
+          viewCount = Math.round(baseNumber * multiplier);
+        }
+      }
+    }
+
+    // Extract other statistics from videoobject
+    if (videoObject?.likecount) {
+      const parsed = parseInt(videoObject.likecount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        likeCount = parsed;
+      }
+    }
+
+    if (videoObject?.dislikecount) {
+      const parsed = parseInt(videoObject.dislikecount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        dislikeCount = parsed;
+      }
+    }
+
+    if (videoObject?.commentcount) {
+      const parsed = parseInt(videoObject.commentcount.replace(/[^\d]/g, ''), 10);
+      if (!isNaN(parsed)) {
+        commentCount = parsed;
+      }
+    }
+  }
+
+  const channelId = videoDetails?.snippet.channelId || videoObject?.channelid || `channel-${videoId}`;
 
   return {
     id: `google-search-${videoId || item.cacheId || Math.random().toString(36)}`,
-    title: videoDetails?.snippet.title || item.title.replace(/ - YouTube$/, ''),
-    description: videoDetails?.snippet.description || item.snippet,
-    thumbnailUrl,
-    channelName: videoDetails?.snippet.channelTitle || item.displayLink.replace(/^www\.youtube\.com\s*[›>]?\s*/, '') || 'YouTube',
-    ...(channelId && { channelId }),
-    ...(channelAvatarUrl && { channelAvatarUrl }),
+    title: videoDetails?.snippet.title || title,
+    description: videoDetails?.snippet.description || description,
+    thumbnailUrl: videoDetails?.snippet.thumbnails.maxres?.url ||
+                 videoDetails?.snippet.thumbnails.high?.url ||
+                 videoDetails?.snippet.thumbnails.medium?.url ||
+                 thumbnailUrl,
+    channelName: videoDetails?.snippet.channelTitle || channelName,
+    channelId: videoDetails?.snippet.channelId || channelId || `channel-${videoId}`,
+    channelAvatarUrl: channelDetails?.snippet.thumbnails.medium?.url ||
+                     channelDetails?.snippet.thumbnails.default?.url ||
+                     generateChannelAvatarUrl(videoDetails?.snippet.channelTitle || channelName),
     videoUrl: item.link,
     embedUrl: videoObject?.embedurl || `https://www.youtube.com/embed/${videoId}`,
-    duration,
-    uploadedAt: videoDetails?.snippet.publishedAt || videoObject?.uploaddate || new Date().toISOString(),
-    ...(videoDetails?.statistics.viewCount && { viewCount: parseInt(videoDetails.statistics.viewCount, 10) }),
-    ...(videoDetails?.statistics.likeCount && { likeCount: parseInt(videoDetails.statistics.likeCount, 10) }),
-    ...(videoDetails?.statistics.dislikeCount && { dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10) }),
-    ...(videoDetails?.statistics.commentCount && { commentCount: parseInt(videoDetails.statistics.commentCount, 10) }),
+    duration: videoDetails?.contentDetails.duration ?
+             formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
+             duration,
+    uploadedAt: videoDetails?.snippet.publishedAt || uploadedAt,
+    // Use YouTube API statistics if available, otherwise fall back to extracted values
+    ...(videoDetails?.statistics.viewCount && {
+      viewCount: parseInt(videoDetails.statistics.viewCount, 10)
+    }),
+    ...(videoDetails?.statistics.likeCount && {
+      likeCount: parseInt(videoDetails.statistics.likeCount, 10)
+    }),
+    ...(videoDetails?.statistics.dislikeCount && {
+      dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10)
+    }),
+    ...(videoDetails?.statistics.commentCount && {
+      commentCount: parseInt(videoDetails.statistics.commentCount, 10)
+    }),
+    // If YouTube API data not available, use extracted values from Google Custom Search
+    ...(!videoDetails?.statistics.viewCount && viewCount && { viewCount }),
+    ...(!videoDetails?.statistics.likeCount && likeCount && { likeCount }),
+    ...(!videoDetails?.statistics.dislikeCount && dislikeCount && { dislikeCount }),
+    ...(!videoDetails?.statistics.commentCount && commentCount && { commentCount }),
     ...(videoDetails?.snippet.tags && { tags: videoDetails.snippet.tags }),
     ...(videoDetails?.snippet.categoryId && { categoryId: videoDetails.snippet.categoryId }),
     isYouTube: true as const,
@@ -359,13 +561,18 @@ const formatDuration = (seconds: number): string => {
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
-// Fetch detailed video information from YouTube Data API v3
+// Fetch detailed video information from YouTube Data API v3 (with blocking check)
 const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTubeVideoDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
     return new Map();
   }
+  return fetchVideoDetailsInternal(videoIds);
+};
+
+// Internal function to fetch video details without blocking check
+const fetchVideoDetailsInternal = async (videoIds: string[]): Promise<Map<string, YouTubeVideoDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || videoIds.length === 0) {
@@ -398,13 +605,18 @@ const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTub
   }
 };
 
-// Fetch channel information from YouTube Data API v3
+// Fetch channel information from YouTube Data API v3 (with blocking check)
 const fetchChannelDetails = async (channelIds: string[]): Promise<Map<string, YouTubeChannelDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
     return new Map();
   }
+  return fetchChannelDetailsInternal(channelIds);
+};
+
+// Internal function to fetch channel details without blocking check
+const fetchChannelDetailsInternal = async (channelIds: string[]): Promise<Map<string, YouTubeChannelDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || channelIds.length === 0) {
@@ -723,90 +935,252 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     let enhancedMetadata: YouTubeVideoDetails | null = null;
     let channelMetadata: YouTubeChannelDetails | null = null;
     
-    // If we have YouTube API access and it's not blocked, try to get enhanced metadata
+    // Use YouTube API for enhanced metadata when available
+    // Even when Google Custom Search is selected as search provider, we can use YouTube API for individual video metadata
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-    if (youtubeApiKey && !isYouTubeDataApiBlocked()) {
+    const shouldUseYouTubeApi = !!youtubeApiKey;
+
+    if (shouldUseYouTubeApi) {
       try {
-        console.log('🎯 Attempting to get enhanced metadata from YouTube API...');
+        console.log('🎯 Using YouTube API for enhanced metadata...');
         console.log('🔑 YouTube API Key available:', !!youtubeApiKey);
-        console.log('🔒 YouTube API blocked check passed');
+        console.log('💡 Note: Using YouTube API for metadata even with Google Custom Search selected');
         
-        const videoDetailsMap = await fetchVideoDetails([youtubeVideoId]);
+        const videoDetailsMap = await fetchVideoDetailsInternal([youtubeVideoId]);
         enhancedMetadata = videoDetailsMap.get(youtubeVideoId) || null;
-        
+
         if (enhancedMetadata) {
           console.log('✅ Enhanced metadata found:', enhancedMetadata.snippet.title);
           console.log('📊 Real view count:', parseInt(enhancedMetadata.statistics.viewCount).toLocaleString());
-          const channelDetailsMap = await fetchChannelDetails([enhancedMetadata.snippet.channelId]);
+          const channelDetailsMap = await fetchChannelDetailsInternal([enhancedMetadata.snippet.channelId]);
           channelMetadata = channelDetailsMap.get(enhancedMetadata.snippet.channelId) || null;
+
+          if (channelMetadata) {
+            console.log('✅ Channel metadata found from YouTube API:', channelMetadata.snippet.title);
+            console.log('👥 Subscriber count:', parseInt(channelMetadata.statistics.subscriberCount).toLocaleString());
+          }
         } else {
-          console.log('❌ No enhanced metadata found from YouTube API');
+          console.log('❌ No enhanced metadata found from YouTube API, will use Google Custom Search fallback');
         }
       } catch (error) {
-        console.warn('⚠️ Failed to get enhanced metadata, using Google Search data only:', error);
+        console.warn('⚠️ YouTube API failed, falling back to Google Custom Search metadata:', error);
       }
     } else {
-      console.log('❌ YouTube API access denied:');
-      console.log('  - API Key available:', !!youtubeApiKey);
-      console.log('  - API Blocked:', isYouTubeDataApiBlocked());
-      console.log('  - Will use Google Custom Search data only');
+      console.log('❌ YouTube API Key not available, using Google Custom Search metadata only');
     }
 
+    // Enhanced metadata extraction from Google Custom Search API
+    const videoObject = item.pagemap?.videoobject?.[0];
+    const metaTags = item.pagemap?.metatags?.[0];
+    const person = item.pagemap?.person?.[0];
+    const organization = item.pagemap?.organization?.[0];
+
     // Parse the title to remove " - YouTube" suffix
-    const cleanTitle = (item.title || 'YouTube Video')
+    const cleanTitle = (enhancedMetadata?.snippet.title ||
+                       metaTags?.['og:title'] ||
+                       videoObject?.name ||
+                       item.title || 'YouTube Video')
       .replace(/ - YouTube$/, '')
       .replace(/\s*\|\s*YouTube$/, '');
 
-    // Extract channel name from title or use enhanced metadata
-    const channelName = enhancedMetadata?.snippet.channelTitle || 
-                       extractChannelFromTitle(item.title) || 
+    // Extract channel name from multiple sources
+    const channelName = enhancedMetadata?.snippet.channelTitle ||
+                       person?.name ||
+                       organization?.name ||
+                       extractChannelFromTitle(item.title) ||
                        'YouTube Channel';
 
-    console.log('🔍 Building result with data sources:');
-    console.log('  📝 Title source:', enhancedMetadata ? 'YouTube API' : 'Google Search');
-    console.log('  📺 Channel source:', enhancedMetadata ? 'YouTube API' : 'Extracted from title');
-    console.log('  📊 View count source:', enhancedMetadata ? 'YouTube API (real)' : 'Not available');
-    console.log('  🖼️ Thumbnail source:', enhancedMetadata ? 'YouTube API (high-res)' : 'Google Search');
+    // Extract description from multiple sources
+    const description = enhancedMetadata?.snippet.description ||
+                       metaTags?.['og:description'] ||
+                       metaTags?.['twitter:description'] ||
+                       videoObject?.description ||
+                       item.snippet || '';
 
-    // Use enhanced metadata or fallback to extracted/placeholder values
+    // Extract duration from multiple sources
+    const duration = enhancedMetadata?.contentDetails.duration ?
+                    formatDuration(parseDuration(enhancedMetadata.contentDetails.duration)) :
+                    metaTags?.['og:video:duration'] ||
+                    videoObject?.duration ||
+                    'Unknown';
+
+    // Extract view count from multiple sources
+    let viewCount: number | undefined;
+    let likeCount: number | undefined;
+    let dislikeCount: number | undefined;
+    let commentCount: number | undefined;
+
+    if (enhancedMetadata?.statistics.viewCount) {
+      viewCount = parseInt(enhancedMetadata.statistics.viewCount, 10);
+      likeCount = enhancedMetadata.statistics.likeCount ? parseInt(enhancedMetadata.statistics.likeCount, 10) : undefined;
+      dislikeCount = enhancedMetadata.statistics.dislikeCount ? parseInt(enhancedMetadata.statistics.dislikeCount, 10) : undefined;
+      commentCount = enhancedMetadata.statistics.commentCount ? parseInt(enhancedMetadata.statistics.commentCount, 10) : undefined;
+    } else {
+      // Try to extract from Google Custom Search videoobject
+      if (videoObject?.viewcount) {
+        const parsed = parseInt(videoObject.viewcount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          viewCount = parsed;
+        }
+      } else if (videoObject?.watchcount) {
+        const parsed = parseInt(videoObject.watchcount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          viewCount = parsed;
+        }
+      } else if (videoObject?.interactioncount) {
+        // Try to parse interaction count as view count
+        const parsed = parseInt(videoObject.interactioncount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          viewCount = parsed;
+        }
+      }
+
+      // Try to extract view count from snippet text (e.g., "1.2M views")
+      if (!viewCount && item.snippet) {
+        const viewsMatch = item.snippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+        if (viewsMatch && viewsMatch[1]) {
+          const viewsText = viewsMatch[1];
+          let multiplier = 1;
+          if (viewsText.includes('K')) multiplier = 1000;
+          else if (viewsText.includes('M')) multiplier = 1000000;
+          else if (viewsText.includes('B')) multiplier = 1000000000;
+
+          const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+          if (!isNaN(baseNumber)) {
+            viewCount = Math.round(baseNumber * multiplier);
+            console.log(`✅ Extracted view count from snippet: ${viewCount.toLocaleString()}`);
+          }
+        }
+      }
+
+      // Try to extract view count from title (sometimes included)
+      if (!viewCount && item.title) {
+        const titleViewsMatch = item.title.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+        if (titleViewsMatch && titleViewsMatch[1]) {
+          const viewsText = titleViewsMatch[1];
+          let multiplier = 1;
+          if (viewsText.includes('K')) multiplier = 1000;
+          else if (viewsText.includes('M')) multiplier = 1000000;
+          else if (viewsText.includes('B')) multiplier = 1000000000;
+
+          const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+          if (!isNaN(baseNumber)) {
+            viewCount = Math.round(baseNumber * multiplier);
+            console.log(`✅ Extracted view count from title: ${viewCount.toLocaleString()}`);
+          }
+        }
+      }
+
+      // Try to extract view count from htmlSnippet (HTML version of snippet)
+      if (!viewCount && item.htmlSnippet) {
+        const htmlSnippet = item.htmlSnippet.replace(/<[^>]*>/g, ''); // Remove HTML tags
+        const htmlViewsMatch = htmlSnippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
+        if (htmlViewsMatch && htmlViewsMatch[1]) {
+          const viewsText = htmlViewsMatch[1];
+          let multiplier = 1;
+          if (viewsText.includes('K')) multiplier = 1000;
+          else if (viewsText.includes('M')) multiplier = 1000000;
+          else if (viewsText.includes('B')) multiplier = 1000000000;
+
+          const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
+          if (!isNaN(baseNumber)) {
+            viewCount = Math.round(baseNumber * multiplier);
+            console.log(`✅ Extracted view count from HTML snippet: ${viewCount.toLocaleString()}`);
+          }
+        }
+      }
+
+      // Extract like/dislike counts from videoobject
+      if (videoObject?.likecount) {
+        const parsed = parseInt(videoObject.likecount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          likeCount = parsed;
+        }
+      }
+
+      if (videoObject?.dislikecount) {
+        const parsed = parseInt(videoObject.dislikecount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          dislikeCount = parsed;
+        }
+      }
+
+      if (videoObject?.commentcount) {
+        const parsed = parseInt(videoObject.commentcount.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(parsed)) {
+          commentCount = parsed;
+        }
+      }
+    }
+
+    // Extract thumbnail from multiple sources
+    const thumbnailUrl = enhancedMetadata?.snippet.thumbnails.maxres?.url ||
+                        enhancedMetadata?.snippet.thumbnails.high?.url ||
+                        enhancedMetadata?.snippet.thumbnails.medium?.url ||
+                        metaTags?.['og:image'] ||
+                        metaTags?.['twitter:image'] ||
+                        videoObject?.thumbnailurl ||
+                        item.pagemap?.cse_thumbnail?.[0]?.src ||
+                        item.pagemap?.cse_image?.[0]?.src ||
+                        `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`;
+
+    // Extract upload date from multiple sources
+    const uploadedAt = enhancedMetadata?.snippet.publishedAt ||
+                      videoObject?.uploaddate ||
+                      new Date().toISOString();
+
+    // Extract tags from multiple sources
+    const tags = enhancedMetadata?.snippet.tags ||
+                (metaTags?.['og:video:tag'] ? [metaTags['og:video:tag']] : []) ||
+                [];
+
+    console.log('🔍 Building result with data sources:');
+    console.log('  📝 Title source:', enhancedMetadata ? 'YouTube API' : 'Google Custom Search');
+    console.log('  📺 Channel source:', enhancedMetadata ? 'YouTube API' : 'Google Custom Search');
+    console.log('  📊 View count source:', enhancedMetadata ? 'YouTube API (real)' : 'Google Custom Search (extracted)');
+    console.log('  🖼️ Thumbnail source:', enhancedMetadata ? 'YouTube API (high-res)' : 'Google Custom Search');
+    console.log('  👥 Subscriber count source:', channelMetadata ? 'YouTube API (real)' : 'Not available');
+
+    // Build result using YouTube API data as primary, Google Custom Search as fallback
     const result: GoogleSearchResult = {
       id: `google-search-${youtubeVideoId}`,
-      title: cleanTitle,
-      description: enhancedMetadata?.snippet.description || item.snippet || '',
+      title: enhancedMetadata?.snippet.title || cleanTitle,
+      description: enhancedMetadata?.snippet.description || description,
       thumbnailUrl: enhancedMetadata?.snippet.thumbnails.maxres?.url ||
                    enhancedMetadata?.snippet.thumbnails.high?.url ||
                    enhancedMetadata?.snippet.thumbnails.medium?.url ||
-                   item.pagemap?.cse_thumbnail?.[0]?.src || 
-                   item.pagemap?.cse_image?.[0]?.src || 
-                   `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
+                   thumbnailUrl,
       videoUrl: item.link,
       embedUrl: `https://www.youtube.com/embed/${youtubeVideoId}`,
-      uploadedAt: enhancedMetadata?.snippet.publishedAt || 
-                 item.pagemap?.videoobject?.[0]?.uploaddate || 
-                 new Date().toISOString(),
-      channelName: channelName,
-      channelId: enhancedMetadata?.snippet.channelId || `channel-${youtubeVideoId}`,
+      uploadedAt: enhancedMetadata?.snippet.publishedAt || uploadedAt,
+      channelName: enhancedMetadata?.snippet.channelTitle || channelName,
+      channelId: enhancedMetadata?.snippet.channelId || videoObject?.channelid || `channel-${youtubeVideoId}`,
       channelAvatarUrl: channelMetadata?.snippet.thumbnails.medium?.url ||
                        channelMetadata?.snippet.thumbnails.default?.url ||
-                       generateChannelAvatarUrl(channelName),
-      duration: enhancedMetadata?.contentDetails.duration ? 
+                       generateChannelAvatarUrl(enhancedMetadata?.snippet.channelTitle || channelName),
+      duration: enhancedMetadata?.contentDetails.duration ?
                formatDuration(parseDuration(enhancedMetadata.contentDetails.duration)) :
-               item.pagemap?.videoobject?.[0]?.duration || 
-               'Unknown',
-      ...(enhancedMetadata?.statistics.viewCount && { 
-        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10) 
+               duration,
+      // Use YouTube API statistics if available, otherwise fall back to extracted values
+      ...(enhancedMetadata?.statistics.viewCount && {
+        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10)
       }),
-      ...(enhancedMetadata?.statistics.likeCount && { 
-        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10) 
+      ...(enhancedMetadata?.statistics.likeCount && {
+        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10)
       }),
-      ...(enhancedMetadata?.statistics.dislikeCount && { 
-        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10) 
+      ...(enhancedMetadata?.statistics.dislikeCount && {
+        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10)
       }),
-      ...(enhancedMetadata?.statistics.commentCount && { 
-        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10) 
+      ...(enhancedMetadata?.statistics.commentCount && {
+        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10)
       }),
+      // If YouTube API data not available, use extracted values from Google Custom Search
+      ...(!enhancedMetadata?.statistics.viewCount && viewCount && { viewCount }),
+      ...(!enhancedMetadata?.statistics.likeCount && likeCount && { likeCount }),
+      ...(!enhancedMetadata?.statistics.dislikeCount && dislikeCount && { dislikeCount }),
+      ...(!enhancedMetadata?.statistics.commentCount && commentCount && { commentCount }),
       categoryId: enhancedMetadata?.snippet.categoryId || 'General',
-      tags: enhancedMetadata?.snippet.tags || [],
+      tags: enhancedMetadata?.snippet.tags || tags,
       isYouTube: true as const,
       source: 'google-search' as const,
     };
@@ -817,6 +1191,29 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     console.log(`  📺 Channel: ${result.channelName}`);
     console.log(`  📊 Views: ${result.viewCount ? result.viewCount.toLocaleString() : 'Not available'}`);
     console.log(`  ⏱️ Duration: ${result.duration}`);
+    console.log(`  📄 Description: ${result.description.substring(0, 100)}...`);
+    console.log(`  🏷️ Tags: ${result.tags?.join(', ') || 'None'}`);
+    console.log(`  🎯 Data Source: ${enhancedMetadata ? 'YouTube API (primary) + Google Custom Search (fallback)' : 'Google Custom Search Only'}`);
+
+    // Debug: Show what data was extracted
+    console.log('🔍 Metadata extraction summary:');
+    console.log(`  - YouTube API metadata: ${enhancedMetadata ? 'Available' : 'Not available'}`);
+    console.log(`  - YouTube API channel data: ${channelMetadata ? 'Available' : 'Not available'}`);
+    console.log(`  - Google Custom Search VideoObject: ${videoObject ? 'Available' : 'None'}`);
+    console.log(`  - Google Custom Search MetaTags: ${metaTags ? 'Available' : 'None'}`);
+    console.log(`  - Final view count: ${result.viewCount ? result.viewCount.toLocaleString() : 'None'} (${enhancedMetadata?.statistics.viewCount ? 'YouTube API' : viewCount ? 'Google Custom Search' : 'Not available'})`);
+    console.log(`  - Final like count: ${result.likeCount ? result.likeCount.toLocaleString() : 'None'} (${enhancedMetadata?.statistics.likeCount ? 'YouTube API' : likeCount ? 'Google Custom Search' : 'Not available'})`);
+
+    // Debug: Log Google Custom Search data when YouTube API is not available
+    if (!enhancedMetadata) {
+      console.log('🔍 Google Custom Search fallback data:');
+      console.log('  - Full pagemap data:', JSON.stringify(item.pagemap, null, 2));
+      console.log('  - Text sources for extraction:', {
+        title: item.title,
+        snippet: item.snippet,
+        htmlSnippet: item.htmlSnippet
+      });
+    }
     console.log(`  🎯 Source: ${result.source}`);
     console.log(`  🔗 URL: ${result.videoUrl}`);
 

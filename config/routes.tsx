@@ -50,6 +50,7 @@ const VideoEditorPage = lazy(() => import('../pages/VideoEditorPage'));
 
 // Debug components
 const TestMetadataFetch = lazy(() => import('../src/debug/TestMetadataFetch'));
+const GoogleSearchStoreDebug = lazy(() => import('../src/debug/GoogleSearchStoreDebug'));
 
 // Route configuration for main application
 export const mainRoutes: RouteObject[] = [
@@ -141,6 +142,10 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'debug-metadata',
         element: <TestMetadataFetch />,
+      },
+      {
+        path: 'debug-google-search',
+        element: <GoogleSearchStoreDebug />,
       },
       {
         path: 'settings',

@@ -18,10 +18,63 @@ const WatchPage: React.FC = () => {
   const videoId = paramVideoId || searchParams.get('v') || '';
   console.log(`🎬 WatchPage: Rendering with videoId: ${videoId} (from ${paramVideoId ? 'params' : 'query'})`);
 
-  const { data: video, loading } = useUnifiedVideo(videoId, {
+  const { data: video, loading, error } = useUnifiedVideo(videoId, {
     staleTime: 0, // Force fresh data
   });
   console.log(`📊 WatchPage: Video data received:`, video ? `${video.title} (${video.source})` : 'No video');
+  console.log(`📊 WatchPage: Loading state:`, loading);
+  console.log(`📊 WatchPage: Error state:`, error);
+
+  // Debug metadata fields
+  if (video) {
+    console.log(`📊 WatchPage: Metadata debug:`, {
+      title: video.title,
+      channelName: video.channel?.name,
+      channelAvatar: video.channel?.avatarUrl,
+      subscribers: video.channel?.subscribersFormatted,
+      views: video.viewsFormatted,
+      likes: video.likes,
+      dislikes: video.dislikes,
+      publishedAt: video.publishedAt,
+      source: video.source
+    });
+    
+    // Enhanced debugging for Google Custom Search videos
+    if (video.source === 'google-search') {
+      console.log(`🔍 Google Custom Search Video Debug:`, {
+        id: video.id,
+        title: video.title,
+        description: video.description?.substring(0, 100) + '...',
+        channel: {
+          id: video.channel?.id,
+          name: video.channel?.name,
+          avatarUrl: video.channel?.avatarUrl,
+          subscribers: video.channel?.subscribersFormatted,
+          isVerified: video.channel?.isVerified
+        },
+        stats: {
+          views: video.views,
+          viewsFormatted: video.viewsFormatted,
+          likes: video.likes,
+          dislikes: video.dislikes,
+          commentCount: video.commentCount
+        },
+        metadata: {
+          duration: video.duration,
+          publishedAt: video.publishedAt,
+          publishedAtFormatted: video.publishedAtFormatted,
+          category: video.category,
+          tags: video.tags,
+          source: video.source
+        },
+        technicalData: {
+          videoUrl: video.videoUrl,
+          thumbnailUrl: video.thumbnailUrl,
+          visibility: video.visibility
+        }
+      });
+    }
+  }
   console.log(`📊 WatchPage: Video object:`, video);
   console.log(`📊 WatchPage: Video truthy:`, !!video);
   console.log(`⏳ WatchPage: Loading state: ${loading}`);
@@ -38,72 +91,137 @@ const WatchPage: React.FC = () => {
 
   const loadRecommendations = async () => {
     try {
-      // Mock recommended videos with enhanced metadata
-      const mockRecommendations: Video[] = [
-        {
-          id: 'rec1',
-          createdAt: '2024-01-10T14:20:00Z',
-          updatedAt: '2024-01-10T14:20:00Z',
-          title: 'React Testing Library Complete Guide',
-          description: 'Learn how to test React components effectively with React Testing Library and Jest.',
-          thumbnailUrl: 'https://picsum.photos/seed/react-testing/1280/720',
-          videoUrl: '/api/placeholder/video2',
-          duration: '1725',
-          views: '67000',
-          viewCount: 67000,
-          likes: 890,
-          likeCount: 890,
-          dislikeCount: 12,
-          commentCount: 156,
-          dislikes: 12,
-          uploadedAt: '2024-01-10T14:20:00Z',
-          publishedAt: '2024-01-10T14:20:00Z',
-          channelName: 'Testing Guru',
-          channelId: 'testingguru',
-          channelAvatarUrl: 'https://picsum.photos/seed/testingguru/150/150',
-          category: 'Education',
-          tags: ['react', 'testing', 'javascript'],
-          isLive: false,
-          isShort: false,
-          visibility: 'public',
-          license: 'Standard YouTube License',
-          embeddable: true,
-          allowedRegions: [],
-          blockedRegions: [],
-          isAgeRestricted: false,
-          embeddable: true,
-          defaultLanguage: 'en',
-          defaultAudioLanguage: 'en',
-          recordingStatus: 'recorded',
-          uploadStatus: 'processed',
-          privacyStatus: 'public',
-          selfDeclaredMadeForKids: false,
-          statistics: {
-            viewCount: 67000,
-            likeCount: 890,
-            dislikeCount: 12,
-            favoriteCount: 0,
-            commentCount: 156,
-          },
-          topicDetails: {
-            topicIds: [],
-            relevantTopicIds: [],
-            topicCategories: [],
-          },
-          contentDetails: {
-            duration: 'PT28M45S',
-            dimension: '2d',
-            definition: 'hd',
-            caption: 'false',
-            licensedContent: false,
-            contentRating: {},
-            projection: 'rectangular',
-          },
+      console.log('🎯 Loading recommendations using unified data service...');
+      console.log('🎯 Current videoId:', videoId);
+
+      // Import the unified data service
+      const { unifiedDataService } = await import('../../../services/unifiedDataService');
+      console.log('✅ Unified data service imported successfully');
+
+      // Get trending videos as recommendations (using hybrid YouTube API + Google Custom Search)
+      console.log('🔄 Calling getTrendingVideos...');
+      const response = await unifiedDataService.getTrendingVideos(10, {});
+      console.log('📊 Unified service response:', response);
+
+      const unifiedVideos = response.data;
+      console.log(`📺 Loaded ${unifiedVideos.length} recommendations with unified metadata`);
+      console.log('📺 First few recommendations:', unifiedVideos.slice(0, 3).map(v => ({ id: v.id, title: v.title })));
+
+      // Convert UnifiedVideoMetadata to Video format for compatibility
+      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({
+        id: unifiedVideo.id,
+        createdAt: unifiedVideo.publishedAt,
+        updatedAt: unifiedVideo.publishedAt,
+        title: unifiedVideo.title,
+        description: unifiedVideo.description,
+        thumbnailUrl: unifiedVideo.thumbnailUrl,
+        videoUrl: unifiedVideo.videoUrl,
+        duration: unifiedVideo.duration,
+        views: unifiedVideo.viewsFormatted,
+        viewCount: unifiedVideo.views,
+        likes: unifiedVideo.likes,
+        likeCount: unifiedVideo.likes,
+        dislikeCount: unifiedVideo.dislikes,
+        commentCount: unifiedVideo.commentCount,
+        dislikes: unifiedVideo.dislikes,
+        uploadedAt: unifiedVideo.publishedAt,
+        publishedAt: unifiedVideo.publishedAt,
+        channelName: unifiedVideo.channel.name,
+        channelId: unifiedVideo.channel.id,
+        channelAvatarUrl: unifiedVideo.channel.avatarUrl,
+        category: unifiedVideo.category,
+        tags: unifiedVideo.tags,
+        isLive: unifiedVideo.isLive,
+        isShort: unifiedVideo.isShort,
+        visibility: unifiedVideo.visibility,
+        statistics: {
+          viewCount: unifiedVideo.views,
+          likeCount: unifiedVideo.likes,
+          dislikeCount: unifiedVideo.dislikes,
+          favoriteCount: 0,
+          commentCount: unifiedVideo.commentCount,
         },
-      ];
-      setRecommendedVideos(mockRecommendations);
+        topicDetails: {
+          topicIds: [],
+          relevantTopicIds: [],
+          topicCategories: [],
+        },
+        contentDetails: {
+          duration: unifiedVideo.duration,
+          dimension: '2d',
+          definition: unifiedVideo.metadata?.quality === 'hd' ? 'hd' : 'sd',
+          caption: 'false',
+          licensedContent: false,
+          contentRating: {},
+          projection: 'rectangular',
+        },
+      }));
+
+      console.log('✅ Recommendations converted to Video format:', convertedRecommendations.map(v => ({
+        id: v.id,
+        title: v.title,
+        views: v.viewCount,
+        source: v.id.startsWith('google-search-') ? 'Google Custom Search' : 'YouTube API'
+      })));
+
+      setRecommendedVideos(convertedRecommendations);
+      console.log('✅ Recommendations state updated, length:', convertedRecommendations.length);
     } catch (error) {
-      console.error('Error loading recommendations:', error);
+      console.error('❌ Error loading recommendations:', error);
+      console.error('❌ Error details:', error);
+
+      // Fallback to a simple mock video for testing
+      const fallbackVideo: Video = {
+        id: 'fallback-1',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        title: 'Fallback Test Video',
+        description: 'This is a fallback video for testing',
+        thumbnailUrl: 'https://picsum.photos/320/180',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        duration: '3:30',
+        views: '1M',
+        viewCount: 1000000,
+        likes: 1000,
+        likeCount: 1000,
+        dislikeCount: 10,
+        commentCount: 100,
+        dislikes: 10,
+        uploadedAt: new Date().toISOString(),
+        publishedAt: new Date().toISOString(),
+        channelName: 'Test Channel',
+        channelId: 'test-channel',
+        channelAvatarUrl: 'https://picsum.photos/48/48',
+        category: 'Entertainment',
+        tags: ['test'],
+        isLive: false,
+        isShort: false,
+        visibility: 'public',
+        statistics: {
+          viewCount: 1000000,
+          likeCount: 1000,
+          dislikeCount: 10,
+          favoriteCount: 0,
+          commentCount: 100,
+        },
+        topicDetails: {
+          topicIds: [],
+          relevantTopicIds: [],
+          topicCategories: [],
+        },
+        contentDetails: {
+          duration: 'PT3M30S',
+          dimension: '2d',
+          definition: 'hd',
+          caption: 'false',
+          licensedContent: false,
+          contentRating: {},
+          projection: 'rectangular',
+        },
+      };
+
+      setRecommendedVideos([fallbackVideo]);
+      console.log('✅ Fallback video set for testing');
     }
   };
 
@@ -125,28 +243,49 @@ const WatchPage: React.FC = () => {
     const testGoogleSearchFallback = async () => {
       try {
         console.log('🧪 Testing Google Custom Search fallback manually...');
-        
+        console.log('🎯 Current video ID:', videoId);
+
         // Check current provider setting
-        const { getYouTubeSearchProvider } = await import('../../../services/settingsService');
+        const { getYouTubeSearchProvider } = await import('../../../../services/settingsService');
         const currentProvider = getYouTubeSearchProvider();
         console.log('⚙️ Current YouTube Search Provider:', currentProvider);
-        
+
         // Check if YouTube API is blocked
         const { isYouTubeDataApiBlocked } = await import('../../../utils/youtubeApiUtils');
         const isBlocked = isYouTubeDataApiBlocked();
         console.log('🔒 YouTube Data API Blocked:', isBlocked);
-        
+
+        // Check what's in the Google Search video store
+        const { googleSearchVideoStore } = await import('../../../../services/googleSearchVideoStore');
+        const allVideos = googleSearchVideoStore.getAllVideos();
+        console.log('📦 Videos in Google Search store:', allVideos.length);
+        console.log('📦 Store contents:', allVideos.map((v: any) => ({ id: v.id, title: v.title })));
+
+        // Check if our specific video is in the store
+        const specificVideo = googleSearchVideoStore.getVideo(videoId);
+        console.log('🔍 Specific video in store:', specificVideo);
+
+        // Try to fetch the video directly from Google Custom Search API
+        if (!specificVideo && videoId.startsWith('google-search-')) {
+          const youtubeId = videoId.replace('google-search-', '');
+          console.log('🌐 Attempting to fetch from Google Custom Search API with YouTube ID:', youtubeId);
+
+          const { fetchSingleVideoFromGoogleSearch } = await import('../../../../services/googleSearchService');
+          const fetchedVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
+          console.log('🌐 Fetched video result:', fetchedVideo);
+        }
+
         // Clear any cached data first
         const { unifiedDataService } = await import('../../../services/unifiedDataService');
-        unifiedDataService.clearCache('video:google-search-bnVUHWCynig');
+        unifiedDataService.clearCache(`video:${videoId}`);
         unifiedDataService.clearCache('unified-video');
-        console.log('🗑️ Cleared cache for google-search-bnVUHWCynig');
-        
-        const result = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
+        console.log(`🗑️ Cleared cache for ${videoId}`);
+
+        const result = await unifiedDataService.getVideoById(videoId);
         console.log('🧪 Test result:', result);
         
         if (result) {
-          const viewsInfo = result.viewCount ? `${result.viewCount.toLocaleString()} views` : 'Views: Not available';
+          const viewsInfo = result.views ? `${result.views.toLocaleString()} views` : 'Views: Not available';
           alert(`✅ Test Success!\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}\nTitle: ${result.title}\n${viewsInfo}\nChannel: ${result.channel?.name}\nSource: ${result.source}`);
         } else {
           alert(`❌ Test failed: No video found\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}`);
@@ -201,6 +340,7 @@ const WatchPage: React.FC = () => {
             <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
               <div><strong>Video ID from URL:</strong> {videoId}</div>
               <div><strong>Loading State:</strong> {loading ? 'Yes' : 'No'}</div>
+              <div><strong>Error State:</strong> {error || 'None'}</div>
               <div><strong>Hook Response:</strong> {video ? 'Video found' : 'null'}</div>
               <div><strong>Video Data:</strong> {video ? JSON.stringify(video, null, 2) : 'null'}</div>
               <div><strong>Environment Check:</strong></div>
@@ -211,6 +351,38 @@ const WatchPage: React.FC = () => {
               </div>
               <div><strong>⚠️ Note:</strong> YouTube API is blocked when Google Custom Search is selected in admin panel</div>
               <div><strong>💡 Expected:</strong> Google Custom Search should provide basic metadata, but view counts may not be available</div>
+            </div>
+
+            {/* Manual Retry Button */}
+            <div className="mt-4">
+              <button
+                onClick={async () => {
+                  if (videoId.startsWith('google-search-')) {
+                    const youtubeId = videoId.replace('google-search-', '');
+                    console.log('🔄 Manual retry: Attempting to fetch video:', youtubeId);
+
+                    try {
+                      const { fetchSingleVideoFromGoogleSearch } = await import('../../../../services/googleSearchService');
+                      const result = await fetchSingleVideoFromGoogleSearch(youtubeId);
+                      console.log('🔄 Manual retry result:', result);
+
+                      if (result) {
+                        alert(`✅ Video fetched successfully!\nTitle: ${result.title}\nChannel: ${result.channelName}`);
+                        // Refresh the page to load the video
+                        window.location.reload();
+                      } else {
+                        alert('❌ Failed to fetch video from Google Custom Search API');
+                      }
+                    } catch (error) {
+                      console.error('Manual retry error:', error);
+                      alert(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+                    }
+                  }
+                }}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                🔄 Retry Fetch Video
+              </button>
             </div>
           </div>
 
@@ -429,21 +601,26 @@ const WatchPage: React.FC = () => {
                       </div>
 
                       {/* YouTube Specific Metadata */}
-                      {video.source === 'youtube' && (
+                      {(video.source === 'youtube' || video.source === 'google-search') && (
                         <div className="pt-3 border-t border-neutral-200 dark:border-neutral-600">
-                          <h4 className="font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2">YouTube Metadata</h4>
+                          <h4 className="font-medium text-sm text-neutral-800 dark:text-neutral-200 mb-2">
+                            {video.source === 'google-search' ? 'Google Custom Search Metadata' : 'YouTube Metadata'}
+                          </h4>
                           <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-400">
                             <div>
                               <span className="font-medium">Published:</span> {video.publishedAtFormatted}
                             </div>
                             <div>
-                              <span className="font-medium">Quality:</span> {video.metadata?.definition || 'Unknown'}
+                              <span className="font-medium">Quality:</span> {video.metadata?.definition || 'HD'}
                             </div>
                             <div>
                               <span className="font-medium">Captions:</span> {video.metadata?.captions ? 'Available' : 'None'}
                             </div>
                             <div>
                               <span className="font-medium">License:</span> {video.metadata?.license || 'Standard'}
+                            </div>
+                            <div>
+                              <span className="font-medium">Source:</span> {video.source === 'google-search' ? 'Google Custom Search JSON API' : 'YouTube Data API v3'}
                             </div>
                           </div>
                         </div>
@@ -492,14 +669,30 @@ const WatchPage: React.FC = () => {
               Recommended Videos
             </h3>
             <div className="space-y-4">
-              {_recommendedVideos.map((recommendedVideo) => (
-                <VideoCard
-                  key={recommendedVideo.id}
-                  video={recommendedVideo}
-                  variant="compact"
-                  onClick={() => {}}
-                />
-              ))}
+              {(() => {
+                console.log('🎬 Rendering recommendations, count:', _recommendedVideos.length);
+                return null;
+              })()}
+              {_recommendedVideos.length === 0 ? (
+                <div className="text-neutral-500 dark:text-neutral-400 text-sm">
+                  Loading recommendations...
+                </div>
+              ) : (
+                _recommendedVideos.map((recommendedVideo) => {
+                  console.log('🎬 Rendering recommendation:', recommendedVideo.id, recommendedVideo.title);
+                  return (
+                    <VideoCard
+                      key={recommendedVideo.id}
+                      video={recommendedVideo}
+                      variant="compact"
+                      onClick={() => {
+                        console.log('🎬 Recommendation clicked:', recommendedVideo.id);
+                        window.location.href = `/watch?v=${recommendedVideo.id}`;
+                      }}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </div>

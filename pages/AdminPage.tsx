@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports, no-duplicate-imports
 import React, { useState, useEffect } from 'react';
 
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon, BugAntIcon } from '@heroicons/react/24/outline';
 
 import {
   getSettings,
@@ -33,9 +33,16 @@ const AdminPage: React.FC = () => {
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
   const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
-  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview'>('overview');
+  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'google-search-debug'>('overview');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
+
+  // Google Search Debug state
+  const [storeVideos, setStoreVideos] = useState<any[]>([]);
+  const [testVideoId, setTestVideoId] = useState('bnVUHWCynig');
+  const [testResult, setTestResult] = useState<any>(null);
+  const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Load current settings
@@ -46,7 +53,90 @@ const AdminPage: React.FC = () => {
     setDefaultCategory(settings.defaultVideoPlayerCategory);
     setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
     setEnabledLocalPlayersState(getEnabledLocalPlayers());
+
+    // Load Google Search store videos
+    loadStoreVideos();
   }, []);
+
+  const loadStoreVideos = async () => {
+    try {
+      const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
+      const videos = googleSearchVideoStore.getAllVideos();
+      setStoreVideos(videos);
+    } catch (error) {
+      console.error('Failed to load store videos:', error);
+    }
+  };
+
+  const handleTestFetch = async () => {
+    setLoading(true);
+    try {
+      console.log(`🧪 Testing fetch for video ID: ${testVideoId}`);
+
+      // Check environment variables first
+      const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
+      const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
+      console.log('🔑 API Key available:', !!searchApiKey);
+      console.log('🔍 Search Engine ID available:', !!searchEngineId);
+
+      if (!searchApiKey || !searchEngineId) {
+        setTestResult({
+          error: 'Google Custom Search API not configured',
+          details: {
+            apiKey: !!searchApiKey,
+            engineId: !!searchEngineId
+          }
+        });
+        return;
+      }
+
+      const { fetchSingleVideoFromGoogleSearch } = await import('../services/googleSearchService');
+      const result = await fetchSingleVideoFromGoogleSearch(testVideoId);
+      setTestResult(result);
+
+      // Refresh store videos
+      await loadStoreVideos();
+    } catch (error) {
+      console.error('Test fetch error:', error);
+      setTestResult({ error: error.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTestUnifiedService = async () => {
+    setLoading(true);
+    try {
+      console.log(`🧪 Testing unified service for video ID: google-search-${testVideoId}`);
+
+      // Import unified data service
+      const { unifiedDataService } = await import('../src/services/unifiedDataService');
+
+      // Clear cache first
+      unifiedDataService.clearCache(`video:google-search-${testVideoId}`);
+
+      // Test the unified service
+      const result = await unifiedDataService.getVideoById(`google-search-${testVideoId}`);
+      setUnifiedServiceTest(result);
+
+      console.log('🧪 Unified service result:', result);
+    } catch (error) {
+      console.error('Unified service test error:', error);
+      setUnifiedServiceTest({ error: error.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClearStore = async () => {
+    try {
+      const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
+      googleSearchVideoStore.clear();
+      await loadStoreVideos();
+    } catch (error) {
+      console.error('Failed to clear store:', error);
+    }
+  };
 
   const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
     setIsSaving(true);
@@ -282,6 +372,7 @@ const AdminPage: React.FC = () => {
                 { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
                 { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
                 { id: 'search', name: 'Search Settings', icon: SparklesIcon },
+                { id: 'google-search-debug', name: 'Google Search Debug', icon: BugAntIcon },
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -636,6 +727,134 @@ const AdminPage: React.FC = () => {
                       Restart the development server after adding environment variables.
                     </p>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Google Search Debug Tab */}
+            {activeTab === 'google-search-debug' && (
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
+                    <BugAntIcon className="h-5 w-5 mr-2 text-purple-500" />
+                    Google Search Store Debug
+                  </h2>
+                  <p className="text-sm text-gray-600 mb-6">
+                    Debug and manage Google Custom Search video store, test API functionality, and troubleshoot metadata issues.
+                  </p>
+                </div>
+
+                {/* API Configuration Check */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">API Configuration</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center">
+                      <span className="w-48">Google Search API Key:</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        import.meta.env.VITE_GOOGLE_SEARCH_API_KEY ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY ? '✅ Set' : '❌ Missing'}
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="w-48">Google Search Engine ID:</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID ? '✅ Set' : '❌ Missing'}
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="w-48">YouTube API Key:</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        import.meta.env.VITE_YOUTUBE_API_KEY ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {import.meta.env.VITE_YOUTUBE_API_KEY ? '✅ Set' : '❌ Missing'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Store Statistics */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Store Statistics</h3>
+                  <p className="text-sm text-gray-600 mb-4">Videos in store: {storeVideos.length}</p>
+                  <button
+                    onClick={handleClearStore}
+                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                  >
+                    Clear Store
+                  </button>
+                </div>
+
+                {/* Test Video Fetch */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Test Video Fetch</h3>
+                  <div className="flex gap-2 mb-4">
+                    <input
+                      type="text"
+                      value={testVideoId}
+                      onChange={(e) => setTestVideoId(e.target.value)}
+                      placeholder="YouTube Video ID"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button
+                      onClick={handleTestFetch}
+                      disabled={loading}
+                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Testing...' : 'Test Direct Fetch'}
+                    </button>
+                    <button
+                      onClick={handleTestUnifiedService}
+                      disabled={loading}
+                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Testing...' : 'Test Unified Service'}
+                    </button>
+                  </div>
+
+                  {testResult && (
+                    <div className="mt-4 p-3 bg-white rounded border">
+                      <h4 className="font-semibold mb-2">Direct Fetch Result:</h4>
+                      <pre className="text-sm overflow-auto bg-gray-100 p-2 rounded max-h-64">
+                        {JSON.stringify(testResult, null, 2)}
+                      </pre>
+                    </div>
+                  )}
+
+                  {unifiedServiceTest && (
+                    <div className="mt-4 p-3 bg-white rounded border">
+                      <h4 className="font-semibold mb-2">Unified Service Result:</h4>
+                      <pre className="text-sm overflow-auto bg-gray-100 p-2 rounded max-h-64">
+                        {JSON.stringify(unifiedServiceTest, null, 2)}
+                      </pre>
+                    </div>
+                  )}
+                </div>
+
+                {/* Store Contents */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Videos in Store</h3>
+                  {storeVideos.length === 0 ? (
+                    <p className="text-gray-500">No videos in store</p>
+                  ) : (
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                      {storeVideos.map((video, index) => (
+                        <div key={index} className="bg-white p-3 rounded border">
+                          <div className="font-medium text-sm">{video.title}</div>
+                          <div className="text-xs text-gray-600 mt-1">
+                            <div>ID: {video.id}</div>
+                            <div>Channel: {video.channelName}</div>
+                            <div>URL: {video.videoUrl}</div>
+                            {video.viewCount && (
+                              <div>Views: {video.viewCount.toLocaleString()}</div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}

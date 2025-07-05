@@ -6,15 +6,21 @@ import { getYouTubeSearchProvider } from '../../services/settingsService';
 
 /**
  * Check if YouTube Data API v3 should be blocked based on the current provider setting
+ * Now updated to prioritize YouTube Data API v3 as primary source
  * @returns true if YouTube Data API should be blocked, false otherwise
  */
 export function isYouTubeDataApiBlocked(): boolean {
   const provider = getYouTubeSearchProvider();
   console.log(`🔒 YouTube API Blocking Check: Current provider = "${provider}"`);
   
-  // Block YouTube Data API when Google Custom Search is selected as the sole provider
-  const isBlocked = provider === 'google-search';
+  // Only block YouTube Data API if API key is not available
+  // Allow YouTube API as primary source with Google Custom Search as fallback
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const isBlocked = !apiKey;
+  
+  console.log(`🔒 YouTube API Available: ${!!apiKey}`);
   console.log(`🔒 YouTube API Blocked: ${isBlocked}`);
+  console.log(`🎯 Strategy: YouTube Data API (primary) → Google Custom Search (fallback)`);
   
   return isBlocked;
 }
@@ -32,7 +38,7 @@ export function isYouTubeDataApiAllowed(): boolean {
  * @returns Warning message string
  */
 export function getYouTubeApiBlockedMessage(): string {
-  return 'YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider. Please change the provider in admin settings to use YouTube Data API features.';
+  return 'YouTube Data API v3 is not available (missing API key). Using Google Custom Search JSON API as fallback for metadata.';
 }
 
 /**

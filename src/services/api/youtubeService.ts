@@ -42,6 +42,31 @@ interface YouTubeVideoResponse {
   nextPageToken?: string;
 }
 
+interface YouTubeSearchResponse {
+  items: Array<{
+    id: {
+      kind: string;
+      videoId: string;
+    };
+    snippet: {
+      title: string;
+      description: string;
+      thumbnails: {
+        medium: { url: string };
+        high?: { url: string };
+      };
+      publishedAt: string;
+      channelId: string;
+      channelTitle: string;
+    };
+  }>;
+  nextPageToken?: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+}
+
 interface YouTubeChannelResponse {
   items: Array<{
     id: string;
@@ -106,9 +131,8 @@ url.searchParams.set(key, value);
    * @returns Promise resolving to array of Video objects
    */
   async fetchVideos(videoIds: string[]): Promise<Video[]> {
-    // Check if YouTube Data API is blocked by admin settings
-    if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+    if (!API_KEY) {
+      console.warn('YouTube Data API v3 key not available. Metadata fetching will use fallback methods.');
       return [];
     }
 
@@ -275,9 +299,8 @@ return cached;
    * @returns Promise resolving to Channel object or null
    */
   async fetchChannel(channelId: string): Promise<Channel | null> {
-    // Check if YouTube Data API is blocked by admin settings
-    if (isYouTubeDataApiBlocked()) {
-      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+    if (!API_KEY) {
+      console.warn('YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.');
       return null;
     }
 
@@ -449,6 +472,82 @@ return false;
     };
 
     return categories[categoryId] || 'Entertainment';
+  }
+
+  /**
+   * Search for videos using YouTube Data API v3
+   * @param query Search query
+   * @param options Search options
+   * @returns Promise resolving to array of Video objects
+   */
+  async searchVideos(query: string, options: {
+    maxResults?: number;
+    type?: string;
+    order?: string;
+    videoDuration?: string;
+    publishedAfter?: string;
+    forRecommendations?: boolean;
+  } = {}): Promise<Video[]> {
+    if (!API_KEY) {
+      console.warn('YouTube Data API v3 key not available. Video search will use fallback methods.');
+      return [];
+    }
+
+    if (!query.trim()) {
+      return [];
+    }
+    
+    console.log('🎯 Using YouTube Data API v3 as primary source for video search');
+    if (options.forRecommendations) {
+      console.log('🚀 Search for recommendations using YouTube Data API v3');
+    }
+
+    const cacheKey = `search_${query}_${JSON.stringify(options)}`;
+    const cached = this.getCachedData<Video[]>(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
+    try {
+      // First, search for video IDs
+      const searchUrl = this.buildUrl('search', {
+        part: 'snippet',
+        q: query,
+        type: options.type || 'video',
+        order: options.order || 'relevance',
+        maxResults: String(options.maxResults || 25),
+        videoDuration: options.videoDuration || 'any',
+        publishedAfter: options.publishedAfter || '',
+      });
+
+      const searchResponse = await fetch(searchUrl);
+      if (!searchResponse.ok) {
+        throw new ApiError(
+          `YouTube Search API error: ${searchResponse.statusText}`,
+          searchResponse.status,
+          'youtube_search_error',
+        );
+      }
+
+      const searchData: YouTubeSearchResponse = await searchResponse.json();
+      const videoIds = searchData.items.map(item => item.id.videoId);
+
+      if (videoIds.length === 0) {
+        return [];
+      }
+
+      // Fetch full video details
+      const videos = await this.fetchVideos(videoIds);
+
+      this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
+      return videos;
+    } catch (error) {
+      console.error('Error searching videos:', error);
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      throw new ApiError('Failed to search videos', 500, 'searchVideosError', error);
+    }
   }
 
   /**

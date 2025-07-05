@@ -35,27 +35,24 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
   console.log(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
   console.log(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
 
-  // Use standard React Query hook instead of custom one
+  // Use standard React Query hook with proper caching
   const result = useReactQuery({
-    queryKey: ['unified-video', videoId, Date.now()], // Add timestamp to force fresh fetch
+    queryKey: ['unified-video', videoId], // Stable cache key
     queryFn: async () => {
       console.log(`🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`);
-
-      // Clear any existing cache for this video first
-      if (videoId.startsWith('google-search-')) {
-        console.log(`🗑️ Clearing cache for Google Search video: ${videoId}`);
-        unifiedDataService.clearCache(`video:${videoId}`);
-      }
 
       const video = await unifiedDataService.getVideoById(videoId);
       console.log(`📊 useUnifiedVideo: Result for ${videoId}:`, video ? `Found: ${video.title}` : 'Not found');
       return video;
     },
     enabled: !!videoId,
-    staleTime: 0, // Always consider data stale
-    gcTime: 0, // Don't cache the result
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
+    staleTime: 5 * 60 * 1000, // 5 minutes - reasonable cache time
+    gcTime: 10 * 60 * 1000, // 10 minutes - keep in cache longer
+    refetchOnMount: false, // Don't refetch on mount if we have cached data
+    refetchOnWindowFocus: false, // Don't refetch on window focus
+    retry: 3, // Retry failed requests
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+    ...config, // Allow overriding these settings
   });
 
   // Convert React Query result to match our custom hook format
@@ -65,6 +62,7 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
     error: result.error ? String(result.error) : null,
     isStale: result.isStale,
     lastUpdated: result.dataUpdatedAt,
+    refetch: result.refetch, // Expose refetch function
   };
 
   console.log(`🎬 useUnifiedVideo hook result:`, customResult);

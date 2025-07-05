@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { youtubeSearchService } from '../services/youtubeSearchService';
+import { getYouTubeSearchProvider } from '../services/settingsService';
 
 import OptimizedVideoCard from './OptimizedVideoCard';
 import EnhancedYouTubeVideoCard from './EnhancedYouTubeVideoCard';
@@ -25,22 +26,41 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 }) => {
   const [recommendations, setRecommendations] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
-  const [useYouTubeAPI, setUseYouTubeAPI] = useState(false);
+  const [useGoogleCustomSearch, setUseGoogleCustomSearch] = useState(false);
+  const [searchProvider, setSearchProvider] = useState<string>('google-search');
 
   // Determine the current video ID from either prop
   const activeVideoId = useMemo(() => {
     return currentVideo?.id || currentVideoId;
   }, [currentVideo?.id, currentVideoId]);
 
-  // Check if Google Custom Search API is configured
+  // Check API configuration and determine strategy
   useEffect(() => {
-    const configured = youtubeSearchService.isConfigured();
-    setUseYouTubeAPI(configured);
-    console.log('🎯 Google Custom Search API Configuration Status:', configured ? '✅ Configured' : '❌ Not configured');
-    if (configured) {
-      console.log('✅ YouTube recommendations will ALWAYS use Google Custom Search JSON API');
+    const provider = getYouTubeSearchProvider();
+    const googleSearchConfigured = youtubeSearchService.isConfigured();
+    const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+    
+    setSearchProvider(provider);
+    
+    // NEW STRATEGY: Google Custom Search for discovery, YouTube Data API v3 for metadata
+    const shouldUseGoogleCustomSearch = googleSearchConfigured; // Use Google Custom Search for discovery
+    
+    setUseGoogleCustomSearch(shouldUseGoogleCustomSearch);
+    
+    console.log('🎯 NEW STRATEGY - Discovery and Metadata Configuration:');
+    console.log('   Admin Selected Provider:', provider);
+    console.log('   🔍 DISCOVERY: Google Custom Search API', googleSearchConfigured ? '✅ Available (DEFAULT)' : '❌ Not configured');
+    console.log('   📋 METADATA: YouTube Data API v3', youtubeApiKey ? '✅ Available (PRIMARY)' : '❌ Missing');
+    console.log('   Strategy: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
+    
+    if (googleSearchConfigured && youtubeApiKey) {
+      console.log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata');
+    } else if (googleSearchConfigured) {
+      console.log('⚠️ Google Custom Search discovery only (YouTube API metadata not available)');
+    } else if (youtubeApiKey) {
+      console.log('⚠️ YouTube Data API v3 only (Google Custom Search discovery not available)');
     } else {
-      console.log('⚠️ YouTube recommendations will use fallback sample videos');
+      console.log('❌ No APIs available - will use local video fallback');
     }
   }, []);
 
@@ -50,10 +70,9 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     try {
       let recommendedVideos: Video[] = [];
 
-      if (useYouTubeAPI) {
-        // ALWAYS use Google Custom Search JSON API for ALL recommendations
-        // regardless of the source of the current video
-        console.log('🔍 Fetching YouTube recommendations using Google Custom Search JSON API for video:', {
+      if (useGoogleCustomSearch) {
+        console.log('🎯 Using NEW STRATEGY: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
+        console.log('🔍 Current video context:', {
           id: currentVideo?.id,
           title: currentVideo?.title,
           category: currentVideo?.category,
@@ -61,36 +80,76 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           channelName: currentVideo?.channelName
         });
 
+        // Use unified data service which implements the new priority strategy
+        const { unifiedDataService } = await import('../src/services/unifiedDataService');
+        console.log('🔄 Unified data service imported successfully');
+
         if (currentVideo) {
-          // Use the current video context for related video search
-          recommendedVideos = await youtubeSearchService.searchRelatedVideos(
-            currentVideo,
-            maxRecommendations
-          );
-        } else if (currentVideoId) {
-          // If no current video object but we have an ID, do a generic search
-          const searchQuery = `youtube videos`;
-          recommendedVideos = await youtubeSearchService.searchVideos(
-            searchQuery,
-            maxRecommendations
-          );
+          // Search for related videos based on current video
+          const searchQuery = currentVideo.title || currentVideo.channelName || 'trending videos';
+          console.log('🔍 Searching for related videos with query:', searchQuery);
+          const searchResponse = await unifiedDataService.searchVideos(searchQuery, {}, maxRecommendations);
+          console.log('📊 Search response from unified service:', searchResponse);
+          const unifiedVideos = searchResponse.data;
+          console.log('📺 Unified videos from search:', unifiedVideos.length);
+
+          // Convert UnifiedVideoMetadata to Video format
+          recommendedVideos = unifiedVideos.map((unifiedVideo) => ({
+            id: unifiedVideo.id,
+            title: unifiedVideo.title,
+            description: unifiedVideo.description,
+            thumbnailUrl: unifiedVideo.thumbnailUrl,
+            videoUrl: unifiedVideo.videoUrl,
+            duration: unifiedVideo.duration,
+            views: unifiedVideo.viewsFormatted,
+            viewCount: unifiedVideo.views,
+            channelName: unifiedVideo.channel.name,
+            channelId: unifiedVideo.channel.id,
+            channelAvatarUrl: unifiedVideo.channel.avatarUrl,
+            uploadedAt: unifiedVideo.publishedAt,
+            category: unifiedVideo.category,
+            tags: unifiedVideo.tags,
+            isLive: unifiedVideo.isLive,
+            isShort: unifiedVideo.isShort,
+          }));
         } else {
-          // Fallback to a generic search for popular content
-          recommendedVideos = await youtubeSearchService.searchVideos(
-            'trending youtube videos',
-            maxRecommendations
-          );
+          // Get trending videos as recommendations
+          console.log('🔍 Getting trending videos using unified service...');
+          const trendingResponse = await unifiedDataService.getTrendingVideos(maxRecommendations);
+          const unifiedVideos = trendingResponse.data;
+
+          // Convert UnifiedVideoMetadata to Video format
+          recommendedVideos = unifiedVideos.map((unifiedVideo) => ({
+            id: unifiedVideo.id,
+            title: unifiedVideo.title,
+            description: unifiedVideo.description,
+            thumbnailUrl: unifiedVideo.thumbnailUrl,
+            videoUrl: unifiedVideo.videoUrl,
+            duration: unifiedVideo.duration,
+            views: unifiedVideo.viewsFormatted,
+            viewCount: unifiedVideo.views,
+            channelName: unifiedVideo.channel.name,
+            channelId: unifiedVideo.channel.id,
+            channelAvatarUrl: unifiedVideo.channel.avatarUrl,
+            uploadedAt: unifiedVideo.publishedAt,
+            category: unifiedVideo.category,
+            tags: unifiedVideo.tags,
+            isLive: unifiedVideo.isLive,
+            isShort: unifiedVideo.isShort,
+          }));
         }
 
-        console.log(`📺 Google Custom Search JSON API returned ${recommendedVideos.length} recommendations`);
+        console.log(`📋 Unified service returned ${recommendedVideos.length} recommendations using discovery + metadata strategy`);
 
-        // If Google Custom Search API returns no results, fall back to real videos
+        // Fallback to local videos only if both APIs fail
         if (recommendedVideos.length === 0) {
-          console.log('⚠️ No Google Custom Search API results, falling back to real videos');
+          console.log('⚠️ No results from Google Custom Search discovery or YouTube Data API v3 metadata, falling back to local videos');
           const availableVideos = realVideos.filter(video =>
             !activeVideoId || video.id !== activeVideoId,
           );
           recommendedVideos = availableVideos.slice(0, maxRecommendations);
+        } else {
+          console.log(`✅ Using ${recommendedVideos.length} recommendations from discovery + metadata strategy`);
         }
       } else {
         // Fallback to real videos with basic recommendation logic
@@ -136,7 +195,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     } finally {
       setLoading(false);
     }
-  }, [activeVideoId, currentVideo, currentVideoId, maxRecommendations, useYouTubeAPI]);
+  }, [activeVideoId, currentVideo, currentVideoId, maxRecommendations, useGoogleCustomSearch, searchProvider]);
 
   // Use stable dependencies to prevent infinite re-renders
   useEffect(() => {
@@ -160,10 +219,10 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Recommended for you
           </h3>
-          {useYouTubeAPI && (
+          {useGoogleCustomSearch && (
             <div className="flex items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              <span>Fetching from Google Custom Search...</span>
+              <span>Google Custom Search discovery + YouTube Data API v3 metadata...</span>
             </div>
           )}
         </div>
@@ -193,17 +252,17 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           Recommended for you
         </h3>
-        {useYouTubeAPI && (
+        {useGoogleCustomSearch && (
           <div className="flex items-center space-x-1 text-xs text-green-600 dark:text-green-400">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span>Live Google Custom Search JSON API</span>
+            <span>Google Custom Search Discovery + YouTube Data API v3 Metadata ({searchProvider})</span>
           </div>
         )}
       </div>
       <div className="space-y-3">
         {recommendations.map((video) => (
           <div key={video.id} className="cursor-pointer" onClick={() => handleVideoClick(video)}>
-            {useYouTubeAPI ? (
+            {useGoogleCustomSearch ? (
               <EnhancedYouTubeVideoCard
                 video={video}
                 onVideoSelect={onVideoSelect}
