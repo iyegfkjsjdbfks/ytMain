@@ -1,5 +1,5 @@
-import React from 'react';
 import { memo } from 'react';
+
 import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -16,7 +16,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
   video,
   onVideoSelect,
   showChannel = true,
-  size = 'md'
+  size = 'md',
 }) => {
   const handleClick = () => {
     if (onVideoSelect) {
@@ -53,28 +53,28 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
       thumbnail: 'w-40 h-24 flex-shrink-0',
       content: 'flex-1 min-w-0',
       title: 'text-sm font-medium line-clamp-2',
-      meta: 'text-xs text-gray-600'
+      meta: 'text-xs text-gray-600',
     },
     md: {
       container: 'flex gap-3',
       thumbnail: 'w-48 h-28 flex-shrink-0',
       content: 'flex-1 min-w-0',
       title: 'text-base font-medium line-clamp-2',
-      meta: 'text-sm text-gray-600'
+      meta: 'text-sm text-gray-600',
     },
     lg: {
       container: 'block',
       thumbnail: 'w-full h-48',
       content: 'mt-3',
       title: 'text-lg font-semibold line-clamp-2',
-      meta: 'text-sm text-gray-600'
-    }
+      meta: 'text-sm text-gray-600',
+    },
   };
 
   const classes = sizeClasses[size];
 
   return (
-    <article 
+    <article
       className={`${classes.container} cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors`}
       onClick={handleClick}
       role="button"
@@ -95,7 +95,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
           loading="lazy"
         />
-        
+
         {/* Duration and View Count Badges */}
         {video.duration && video.duration !== '00:00' && (
           <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded font-medium">
@@ -104,7 +104,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
         )}
 
         {/* View Count Badge on Thumbnail */}
-        {video.views && parseInt(video.views.toString()) > 0 && (
+        {video.views && parseInt(video.views.toString(), 10) > 0 && (
           <div className="absolute bottom-1 left-1 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1">
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
@@ -190,7 +190,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
               {formatTimeAgo(video.uploadedAt)}
             </time>
           </div>
-          
+
           {/* Category and Additional Info */}
           <div className="flex items-center gap-1 flex-wrap">
             {video.category && video.category !== 'General' && (

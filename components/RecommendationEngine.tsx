@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { realVideos } from '../services/realVideoService';
 import { youtubeSearchService } from '../services/youtubeSearchService';
 
-import OptimizedVideoCard from './OptimizedVideoCard';
 import EnhancedYouTubeVideoCard from './EnhancedYouTubeVideoCard';
+import OptimizedVideoCard from './OptimizedVideoCard';
 
 import type { Video } from '../types';
 
@@ -58,27 +58,27 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           title: currentVideo?.title,
           category: currentVideo?.category,
           tags: currentVideo?.tags,
-          channelName: currentVideo?.channelName
+          channelName: currentVideo?.channelName,
         });
 
         if (currentVideo) {
           // Use the current video context for related video search
           recommendedVideos = await youtubeSearchService.searchRelatedVideos(
             currentVideo,
-            maxRecommendations
+            maxRecommendations,
           );
         } else if (currentVideoId) {
           // If no current video object but we have an ID, do a generic search
-          const searchQuery = `youtube videos`;
+          const searchQuery = 'youtube videos';
           recommendedVideos = await youtubeSearchService.searchVideos(
             searchQuery,
-            maxRecommendations
+            maxRecommendations,
           );
         } else {
           // Fallback to a generic search for popular content
           recommendedVideos = await youtubeSearchService.searchVideos(
             'trending youtube videos',
-            maxRecommendations
+            maxRecommendations,
           );
         }
 
@@ -101,19 +101,19 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
         // Simple recommendation logic - prioritize similar categories if available
         let recommended: Video[] = [];
-        
+
         if (currentVideo?.category) {
           // First, try to get videos from the same category
           const sameCategory = availableVideos.filter(
-            video => video.category === currentVideo.category
+            video => video.category === currentVideo.category,
           );
           recommended = [...sameCategory];
         }
-        
+
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
           const remaining = availableVideos.filter(
-            video => !recommended.find(r => r.id === video.id)
+            video => !recommended.find(r => r.id === video.id),
           );
           recommended = [...recommended, ...remaining];
         }
@@ -126,7 +126,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       setRecommendations(recommendedVideos);
     } catch (error) {
       console.error('Error generating recommendations:', error);
-      
+
       // Fallback to real videos in case of error
       const availableVideos = realVideos.filter(video =>
         !activeVideoId || video.id !== activeVideoId,

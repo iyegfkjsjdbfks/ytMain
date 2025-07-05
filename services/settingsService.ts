@@ -225,9 +225,8 @@ export const isPlayerEnabled = (playerType: VideoPlayerType): boolean => {
 
   if (config.category === 'youtube') {
     return settings.enabledYouTubePlayers.includes(playerType as YouTubePlayerType);
-  } else {
-    return settings.enabledLocalPlayers.includes(playerType as LocalVideoPlayerType);
   }
+  return settings.enabledLocalPlayers.includes(playerType as LocalVideoPlayerType);
 };
 
 // Get current YouTube search provider

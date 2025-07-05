@@ -172,7 +172,6 @@ return;
         videoId,
         playerVars: {
           autoplay: autoplay ? 1 : 0,
-          mute: autoplay ? 1 : 0, // Mute for autoplay to comply with browser policies
           controls: controls ? 1 : 0,
           modestbranding: 1,
           rel: 0,
@@ -196,6 +195,8 @@ return;
               if (autoplay) {
                 try {
                   console.log('Attempting to autoplay YouTube video...');
+                  // Mute first for better autoplay compliance
+                  event.target.mute();
                   event.target.playVideo();
 
                   // Fallback: try again after a short delay if not playing

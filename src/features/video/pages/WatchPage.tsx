@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import YouTubePlayer from '../../../../components/YouTubePlayer';
 import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
-import { getYouTubeVideoId, isYouTubeUrl } from '../../../lib/youtube-utils';
+import { isYouTubeUrl } from '../../../lib/youtube-utils';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
@@ -12,8 +12,11 @@ import type { Video } from '../../../types/core';
 
 const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
-  const { data: unifiedVideo, loading, error } = useUnifiedVideo(videoId);
-  const video = unifiedVideo?.data;
+  console.log(`🎬 WatchPage: Rendering with videoId: ${videoId}`);
+
+  const { data: video, loading } = useUnifiedVideo(videoId || '');
+  console.log('📊 WatchPage: Video data received:', video ? `${video.title} (${video.source})` : 'No video');
+  console.log(`⏳ WatchPage: Loading state: ${loading}`);
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
   const [_showFullDescription, _setShowFullDescription] = useState(false);
@@ -56,8 +59,6 @@ const WatchPage: React.FC = () => {
           isShort: false,
           visibility: 'public',
           license: 'Standard YouTube License',
-          isUpcoming: false,
-          isLiveContent: false,
           isFamilySafe: true,
           allowedRegions: [],
           blockedRegions: [],
@@ -133,7 +134,7 @@ const WatchPage: React.FC = () => {
             <div className="bg-black rounded-lg overflow-hidden mb-4">
               {isYouTubeUrl(video.videoUrl || '') ? (
                 <YouTubePlayer
-                  videoId={getYouTubeVideoId(video.videoUrl || '') || video.id}
+                  video={video as any}
                   autoplay={true}
                   width="100%"
                   height={480}
@@ -168,10 +169,10 @@ const WatchPage: React.FC = () => {
               {/* Channel Metadata Section - Mirroring search results styling */}
               <div className="flex items-center gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-700">
                 {/* Channel Avatar */}
-                <Link to={`/channel/${video.channel?.id || video.channelId}`} className="flex-shrink-0">
+                <Link to={`/channel/${video.channel?.id}`} className="flex-shrink-0">
                   <img
-                    src={video.channel?.avatarUrl || video.channelAvatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
-                    alt={video.channel?.name || video.channelName}
+                    src={video.channel?.avatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
+                    alt={video.channel?.name}
                     className="w-9 h-9 rounded-full object-cover"
                   />
                 </Link>
@@ -179,10 +180,10 @@ const WatchPage: React.FC = () => {
                 {/* Channel Info */}
                 <div className="flex-1 min-w-0">
                   <Link
-                    to={`/channel/${video.channel?.id || video.channelId}`}
+                    to={`/channel/${video.channel?.id}`}
                     className="font-medium text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors block"
                   >
-                    {video.channel?.name || video.channelName}
+                    {video.channel?.name}
                   </Link>
                   <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                     {/* Subscriber Count */}
@@ -206,7 +207,7 @@ const WatchPage: React.FC = () => {
               {/* Video Stats and Actions */}
               <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-                  <span>{new Date(video.publishedAt || video.uploadedAt || video.createdAt).toLocaleDateString()}</span>
+                  <span>{new Date(video.publishedAt).toLocaleDateString()}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -215,16 +216,16 @@ const WatchPage: React.FC = () => {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5" />
                     </svg>
-                    <span>{(video.likeCount || video.likes || 0).toLocaleString()}</span>
+                    <span>{(video.likes || 0).toLocaleString()}</span>
                   </button>
 
                   {/* Dislike Button */}
-                  {video.dislikeCount && (
+                  {video.dislikes && (
                     <button className="flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
                       <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L9 7m5 3v10M9 7H6a2 2 0 00-2 2v8a2 2 0 002 2h2.5" />
                       </svg>
-                      <span>{video.dislikeCount.toLocaleString()}</span>
+                      <span>{video.dislikes.toLocaleString()}</span>
                     </button>
                   )}
 
@@ -240,10 +241,10 @@ const WatchPage: React.FC = () => {
 
               {/* Channel Information */}
               <div className="flex items-start gap-4">
-                <Link to={`/channel/${video.channel?.id || video.channelId}`} className="flex-shrink-0">
+                <Link to={`/channel/${video.channel?.id}`} className="flex-shrink-0">
                   <img
-                    src={video.channel?.avatarUrl || video.channelAvatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
-                    alt={video.channel?.name || video.channelName}
+                    src={video.channel?.avatarUrl || 'https://picsum.photos/seed/default-channel/150/150'}
+                    alt={video.channel?.name}
                     className="w-12 h-12 rounded-full object-cover"
                   />
                 </Link>
@@ -251,10 +252,10 @@ const WatchPage: React.FC = () => {
                 <div className="flex-1 min-w-0">
                   <div>
                     <Link
-                      to={`/channel/${video.channel?.id || video.channelId}`}
+                      to={`/channel/${video.channel?.id}`}
                       className="font-semibold text-neutral-900 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
                     >
-                      {video.channel?.name || video.channelName}
+                      {video.channel?.name}
                     </Link>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
                       {video.channel?.subscribersFormatted || '0 subscribers'} • {video.viewsFormatted || '0 views'}
@@ -267,10 +268,9 @@ const WatchPage: React.FC = () => {
                       {video.description}
                     </div>
 
-                    {/* Tags */}
-                    {video.tags && video.tags.length > 0 && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {video.tags.map((tag, index) => (
+                    {/* Tags */}                        {video.tags && video.tags.length > 0 && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {video.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
                             className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"

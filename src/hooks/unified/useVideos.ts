@@ -31,10 +31,14 @@ export function useUnifiedVideos(
 }
 
 export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVideoMetadata>) {
+  console.log(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
+
   return useQuery(
     ['unified-video', videoId],
     async () => {
+      console.log(`🔍 useUnifiedVideo: Fetching video with ID: ${videoId}`);
       const video = await unifiedDataService.getVideoById(videoId);
+      console.log(`📊 useUnifiedVideo: Result for ${videoId}:`, video ? `Found: ${video.title}` : 'Not found');
       return video ? { data: video, success: true, message: 'Video fetched successfully' } : null;
     },
     {

@@ -69,7 +69,7 @@ return `${(num / 1000).toFixed(1)}K`;
     {
       icon: EyeIcon,
       label: 'Views',
-      value: formatNumber(video.viewCount || parseInt(video.views) || 0),
+      value: formatNumber(video.viewCount || parseInt(video.views, 10) || 0),
       color: 'text-blue-600 dark:text-blue-400',
     },
     {
@@ -250,7 +250,7 @@ return `${(num / 1000).toFixed(1)}K`;
                   <div>
                     <span className="text-neutral-600 dark:text-neutral-400">Peak Viewers:</span>
                     <span className="ml-2 text-neutral-900 dark:text-white">
-                      {formatNumber(parseInt(video.metadata.concurrentViewers))}
+                      {formatNumber(parseInt(video.metadata.concurrentViewers, 10))}
                     </span>
                   </div>
                 )}

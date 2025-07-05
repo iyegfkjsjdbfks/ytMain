@@ -1,9 +1,9 @@
 // Test script to verify admin page YouTube API selection fix
-import { 
-  setYouTubeSearchProvider, 
+import {
+  setYouTubeSearchProvider,
   getYouTubeSearchProvider,
   isYouTubeApiConfigured,
-  isYouTubeApiAvailable 
+  isYouTubeApiAvailable,
 } from './services/settingsService';
 
 function testAdminPageFix() {
