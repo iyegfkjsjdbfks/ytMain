@@ -11,6 +11,13 @@ import {
   getAllVideoPlayers,
   setLocalVideoPlayerType,
   setDefaultVideoPlayerCategory,
+  getEnabledYouTubePlayers,
+  getEnabledLocalPlayers,
+  setEnabledYouTubePlayers,
+  setEnabledLocalPlayers,
+  toggleYouTubePlayer,
+  toggleLocalPlayer,
+  isPlayerEnabled,
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
   isHybridModeAvailable,
@@ -26,6 +33,8 @@ const AdminPage: React.FC = () => {
   const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
   const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('advanced-video-player');
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
+  const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
+  const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
   const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview'>('overview');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
@@ -37,6 +46,8 @@ const AdminPage: React.FC = () => {
     setPlayerType(settings.youtubePlayerType);
     setLocalPlayerType(settings.localVideoPlayerType);
     setDefaultCategory(settings.defaultVideoPlayerCategory);
+    setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
+    setEnabledLocalPlayersState(getEnabledLocalPlayers());
   }, []);
 
   const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
@@ -115,11 +126,45 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType) => {
+    setIsSaving(true);
+    setSaveMessage('');
+
+    try {
+      toggleYouTubePlayer(playerType);
+      setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
+      setSaveMessage('YouTube player settings updated successfully!');
+    } catch (error) {
+      console.error('Error toggling YouTube player:', error);
+      setSaveMessage('Error updating YouTube player settings. Please try again.');
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+  const handleToggleLocalPlayer = async (playerType: LocalVideoPlayerType) => {
+    setIsSaving(true);
+    setSaveMessage('');
+
+    try {
+      toggleLocalPlayer(playerType);
+      setEnabledLocalPlayersState(getEnabledLocalPlayers());
+      setSaveMessage('Local player settings updated successfully!');
+    } catch (error) {
+      console.error('Error toggling local player:', error);
+      setSaveMessage('Error updating local player settings. Please try again.');
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
   const youtubeApiAvailable = isYouTubeApiAvailable();
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
-  const renderPlayerCard = (config: VideoPlayerConfig, isSelected: boolean, onSelect: () => void) => {
+  const renderPlayerCard = (config: VideoPlayerConfig, isSelected: boolean, isEnabled: boolean, onSelect: () => void, onToggleEnabled: () => void) => {
     const getPerformanceColor = (performance: string) => {
       switch (performance) {
         case 'high': return 'text-green-600 bg-green-100';
@@ -157,8 +202,26 @@ const AdminPage: React.FC = () => {
           <div className="flex items-center space-x-2">
             {getCategoryIcon(config.category)}
             <h3 className="text-lg font-semibold text-gray-900">{config.name}</h3>
+            <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+              isEnabled ? 'text-green-600 bg-green-100' : 'text-gray-600 bg-gray-100'
+            }`}>
+              {isEnabled ? 'Enabled' : 'Disabled'}
+            </span>
           </div>
-          <div className="flex space-x-2">
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleEnabled();
+              }}
+              className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                isEnabled
+                  ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                  : 'bg-green-100 text-green-600 hover:bg-green-200'
+              }`}
+            >
+              {isEnabled ? 'Disable' : 'Enable'}
+            </button>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${getPerformanceColor(config.performance)}`}>
               {config.performance} performance
             </span>
@@ -279,6 +342,14 @@ const AdminPage: React.FC = () => {
                         <span className="text-sm font-medium text-gray-600">Default Category:</span>
                         <span className="ml-2 text-sm text-gray-900 capitalize">{defaultCategory}</span>
                       </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-600">Enabled YouTube Players:</span>
+                        <span className="ml-2 text-sm text-gray-900">{enabledYouTubePlayers.length}</span>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-600">Enabled Local Players:</span>
+                        <span className="ml-2 text-sm text-gray-900">{enabledLocalPlayers.length}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -327,7 +398,10 @@ const AdminPage: React.FC = () => {
                       <PlayIcon className="h-8 w-8 text-red-500" />
                       <div className="ml-3">
                         <p className="text-sm font-medium text-gray-600">YouTube Players</p>
-                        <p className="text-2xl font-semibold text-gray-900">{getVideoPlayersByCategory('youtube').length}</p>
+                        <p className="text-2xl font-semibold text-gray-900">
+                          {enabledYouTubePlayers.length} / {getVideoPlayersByCategory('youtube').length}
+                        </p>
+                        <p className="text-xs text-gray-500">Enabled / Total</p>
                       </div>
                     </div>
                   </div>
@@ -336,7 +410,10 @@ const AdminPage: React.FC = () => {
                       <VideoCameraIcon className="h-8 w-8 text-blue-500" />
                       <div className="ml-3">
                         <p className="text-sm font-medium text-gray-600">Local Players</p>
-                        <p className="text-2xl font-semibold text-gray-900">{getVideoPlayersByCategory('local').length}</p>
+                        <p className="text-2xl font-semibold text-gray-900">
+                          {enabledLocalPlayers.length} / {getVideoPlayersByCategory('local').length}
+                        </p>
+                        <p className="text-xs text-gray-500">Enabled / Total</p>
                       </div>
                     </div>
                   </div>
@@ -371,7 +448,9 @@ const AdminPage: React.FC = () => {
                     renderPlayerCard(
                       config,
                       playerType === config.type,
+                      enabledYouTubePlayers.includes(config.type as YouTubePlayerType),
                       () => handlePlayerTypeChange(config.type as YouTubePlayerType),
+                      () => handleToggleYouTubePlayer(config.type as YouTubePlayerType),
                     ),
                   )}
                 </div>
@@ -396,7 +475,9 @@ const AdminPage: React.FC = () => {
                     renderPlayerCard(
                       config,
                       localPlayerType === config.type,
+                      enabledLocalPlayers.includes(config.type as LocalVideoPlayerType),
                       () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType),
+                      () => handleToggleLocalPlayer(config.type as LocalVideoPlayerType),
                     ),
                   )}
                 </div>

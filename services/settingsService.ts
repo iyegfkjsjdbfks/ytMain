@@ -2,8 +2,8 @@
 // Settings service for managing application settings
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
-export type YouTubePlayerType = 'youtube-player';
-export type LocalVideoPlayerType = 'advanced-video-player';
+export type YouTubePlayerType = 'youtube-player' | 'youtube-player-wrapper' | 'youtube-player-example';
+export type LocalVideoPlayerType = 'advanced-video-player' | 'video-player' | 'shorts-player' | 'short-display-card';
 export type VideoPlayerType = YouTubePlayerType | LocalVideoPlayerType;
 
 export interface VideoPlayerConfig {
@@ -22,6 +22,8 @@ export interface Settings {
   youtubePlayerType: YouTubePlayerType;
   localVideoPlayerType: LocalVideoPlayerType;
   defaultVideoPlayerCategory: 'youtube' | 'local';
+  enabledYouTubePlayers: YouTubePlayerType[];
+  enabledLocalPlayers: LocalVideoPlayerType[];
 }
 
 
@@ -30,6 +32,8 @@ const defaultSettings: Settings = {
   youtubePlayerType: 'youtube-player',
   localVideoPlayerType: 'advanced-video-player',
   defaultVideoPlayerCategory: 'youtube',
+  enabledYouTubePlayers: ['youtube-player', 'youtube-player-wrapper'],
+  enabledLocalPlayers: ['advanced-video-player', 'video-player'],
 };
 
 // Video Player Configurations
@@ -44,15 +48,65 @@ export const VIDEO_PLAYER_CONFIGS: Record<VideoPlayerType, VideoPlayerConfig> = 
     performance: 'high',
     complexity: 'simple',
   },
+  'youtube-player-wrapper': {
+    type: 'youtube-player-wrapper',
+    category: 'youtube',
+    name: 'YouTube Player Wrapper',
+    description: 'Simplified wrapper component that provides easy-to-use props interface for YouTube Player',
+    features: ['Simplified API', 'Props-based configuration', 'Mock video object creation', 'YouTube Player integration'],
+    useCases: ['Quick YouTube embedding', 'Simplified integration', 'Video cards', 'Component reusability'],
+    performance: 'high',
+    complexity: 'simple',
+  },
+  'youtube-player-example': {
+    type: 'youtube-player-example',
+    category: 'youtube',
+    name: 'YouTube Player Example',
+    description: 'Educational/demo implementation showcasing YouTube player capabilities and usage patterns',
+    features: ['Demo functionality', 'Player state tracking', 'Control examples', 'Progress monitoring', 'Educational code'],
+    useCases: ['Development demos', 'Testing', 'Learning examples', 'Prototyping'],
+    performance: 'medium',
+    complexity: 'simple',
+  },
   'advanced-video-player': {
     type: 'advanced-video-player',
     category: 'local',
     name: 'Advanced Video Player',
     description: 'Feature-rich video player with advanced controls and modern React patterns for local video files',
-    features: ['Advanced Controls', 'Custom Hooks', 'State Management', 'Quality Selection', 'Fullscreen Support'],
-    useCases: ['Local video files', 'Advanced playback features', 'Custom video experiences'],
+    features: ['Advanced Controls', 'Custom Hooks', 'State Management', 'Quality Selection', 'Fullscreen Support', 'Chapter Support'],
+    useCases: ['Local video files', 'Advanced playback features', 'Custom video experiences', 'Professional video playback'],
     performance: 'high',
     complexity: 'advanced',
+  },
+  'video-player': {
+    type: 'video-player',
+    category: 'local',
+    name: 'Video Player',
+    description: 'Hybrid player supporting both YouTube embeds and local videos with custom controls overlay',
+    features: ['Dual-mode operation', 'YouTube iframe support', 'HTML5 video', 'Custom controls', 'Fullscreen support', 'Time tracking'],
+    useCases: ['Mixed content', 'Flexible video sources', 'Alternative watch page', 'Unified video interface'],
+    performance: 'high',
+    complexity: 'moderate',
+  },
+  'shorts-player': {
+    type: 'shorts-player',
+    category: 'local',
+    name: 'Shorts Player',
+    description: 'Dedicated player optimized for short-form vertical videos with mobile-first design',
+    features: ['Vertical video optimization', 'Swipe navigation', 'Mobile-first design', 'Auto-loop', 'Social interactions'],
+    useCases: ['Short-form content', 'Vertical videos', 'Mobile viewing', 'Social media style videos', 'TikTok-like experience'],
+    performance: 'high',
+    complexity: 'moderate',
+  },
+  'short-display-card': {
+    type: 'short-display-card',
+    category: 'local',
+    name: 'Short Display Card',
+    description: 'Individual short video player with social features and intersection observer autoplay',
+    features: ['Intersection observer autoplay', 'Social action buttons', 'Loading states', 'Manual pause tracking', 'Muted autoplay'],
+    useCases: ['Shorts feed', 'Home page shorts', 'Social video cards', 'Auto-playing video previews'],
+    performance: 'high',
+    complexity: 'moderate',
   },
 };
 
@@ -109,6 +163,70 @@ export const getVideoPlayersByCategory = (category: 'youtube' | 'local'): VideoP
 
 export const getAllVideoPlayers = (): VideoPlayerConfig[] => {
   return Object.values(VIDEO_PLAYER_CONFIGS);
+};
+
+// Enabled Players Management
+export const getEnabledYouTubePlayers = (): YouTubePlayerType[] => {
+  return getSettings().enabledYouTubePlayers;
+};
+
+export const getEnabledLocalPlayers = (): LocalVideoPlayerType[] => {
+  return getSettings().enabledLocalPlayers;
+};
+
+export const setEnabledYouTubePlayers = (players: YouTubePlayerType[]): void => {
+  const settings = getSettings();
+  saveSettings({ ...settings, enabledYouTubePlayers: players });
+};
+
+export const setEnabledLocalPlayers = (players: LocalVideoPlayerType[]): void => {
+  const settings = getSettings();
+  saveSettings({ ...settings, enabledLocalPlayers: players });
+};
+
+export const toggleYouTubePlayer = (playerType: YouTubePlayerType): void => {
+  const settings = getSettings();
+  const enabled = settings.enabledYouTubePlayers;
+  const isEnabled = enabled.includes(playerType);
+
+  if (isEnabled) {
+    // Don't allow disabling if it's the only enabled player
+    if (enabled.length > 1) {
+      settings.enabledYouTubePlayers = enabled.filter(p => p !== playerType);
+    }
+  } else {
+    settings.enabledYouTubePlayers = [...enabled, playerType];
+  }
+
+  saveSettings(settings);
+};
+
+export const toggleLocalPlayer = (playerType: LocalVideoPlayerType): void => {
+  const settings = getSettings();
+  const enabled = settings.enabledLocalPlayers;
+  const isEnabled = enabled.includes(playerType);
+
+  if (isEnabled) {
+    // Don't allow disabling if it's the only enabled player
+    if (enabled.length > 1) {
+      settings.enabledLocalPlayers = enabled.filter(p => p !== playerType);
+    }
+  } else {
+    settings.enabledLocalPlayers = [...enabled, playerType];
+  }
+
+  saveSettings(settings);
+};
+
+export const isPlayerEnabled = (playerType: VideoPlayerType): boolean => {
+  const settings = getSettings();
+  const config = VIDEO_PLAYER_CONFIGS[playerType];
+
+  if (config.category === 'youtube') {
+    return settings.enabledYouTubePlayers.includes(playerType as YouTubePlayerType);
+  } else {
+    return settings.enabledLocalPlayers.includes(playerType as LocalVideoPlayerType);
+  }
 };
 
 // Get current YouTube search provider
