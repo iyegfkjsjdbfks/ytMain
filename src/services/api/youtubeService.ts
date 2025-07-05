@@ -1,7 +1,7 @@
 import { CACHE_CONFIG } from '../../lib/constants';
-import { isYouTubeDataApiBlocked } from '../../utils/youtubeApiUtils';
 
 import { ApiError } from './base';
+import { isYouTubeDataApiBlocked } from '../../utils/youtubeApiUtils';
 
 import type { Video, Channel } from '../../types/core';
 

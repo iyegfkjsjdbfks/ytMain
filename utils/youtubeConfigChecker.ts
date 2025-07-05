@@ -61,20 +61,20 @@ export const testYouTubeAPI = async (): Promise<{
 }> => {
   try {
     const results = await youtubeSearchService.searchVideos('javascript tutorial', 3);
-
+    
     if (results.length > 0) {
       return {
         success: true,
         message: 'YouTube Search API is working correctly',
         results: results.length,
       };
-    }
+    } else {
       return {
         success: false,
         message: 'API responded but returned no results',
         results: 0,
       };
-
+    }
   } catch (error) {
     return {
       success: false,
@@ -89,16 +89,16 @@ export const testYouTubeAPI = async (): Promise<{
  */
 export const logConfigStatus = (): void => {
   const config = checkYouTubeAPIConfig();
-
+  
   console.group('🎯 YouTube API Configuration Status');
   console.log('Configured:', config.isConfigured ? '✅' : '❌');
   console.log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
   console.log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
-
+  
   console.group('📋 Recommendations:');
   config.recommendations.forEach(rec => console.log(`• ${rec}`));
   console.groupEnd();
-
+  
   console.groupEnd();
 };
 

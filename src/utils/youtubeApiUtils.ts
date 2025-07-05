@@ -10,7 +10,7 @@ import { getYouTubeSearchProvider } from '../../services/settingsService';
  */
 export function isYouTubeDataApiBlocked(): boolean {
   const provider = getYouTubeSearchProvider();
-
+  
   // Block YouTube Data API when Google Custom Search is selected as the sole provider
   return provider === 'google-search';
 }
@@ -40,13 +40,13 @@ export function getYouTubeApiBlockedMessage(): string {
  */
 export async function conditionalYouTubeApiCall<T>(
   apiCall: () => Promise<T>,
-  fallbackValue: T | null = null,
+  fallbackValue: T | null = null
 ): Promise<T | null> {
   if (isYouTubeDataApiBlocked()) {
     console.warn(getYouTubeApiBlockedMessage());
     return fallbackValue;
   }
-
+  
   try {
     return await apiCall();
   } catch (error) {
@@ -63,13 +63,13 @@ export async function conditionalYouTubeApiCall<T>(
  */
 export function conditionalYouTubeOperation<T>(
   operation: () => T,
-  fallbackValue: T,
+  fallbackValue: T
 ): T {
   if (isYouTubeDataApiBlocked()) {
     console.warn(getYouTubeApiBlockedMessage());
     return fallbackValue;
   }
-
+  
   try {
     return operation();
   } catch (error) {

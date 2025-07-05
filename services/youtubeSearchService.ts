@@ -4,7 +4,6 @@
  */
 
 import { API_CONFIG } from '../config';
-
 import type { Video } from '../types';
 
 interface YouTubeSearchItem {
@@ -94,7 +93,7 @@ class YouTubeSearchService {
     const thumbnail = item.pagemap?.cse_thumbnail?.[0];
 
     // Enhanced channel name extraction with multiple patterns
-    const channelNameMatch = item.snippet.match(/by (.+?) ·/) ||
+    const channelNameMatch = item.snippet.match(/by (.+?) ·/) || 
                            item.snippet.match(/(.+?) -/) ||
                            item.snippet.match(/^([^-]+)/) ||
                            item.title.match(/(.+?) -/) ||
@@ -103,30 +102,30 @@ class YouTubeSearchService {
 
     // Enhanced channel avatar extraction
     let channelAvatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(channelName)}&size=88&background=ff0000&color=ffffff&bold=true&font-size=0.4`; // Better fallback
-
+    
     // Try to extract channel ID from the video URL for better avatar
     const channelIdMatch = item.link.match(/channel\/([^\/&?]+)/);
     if (channelIdMatch?.[1]) {
-      channelAvatarUrl = 'https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj';
+      channelAvatarUrl = `https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj`;
     }
-
+    
     // Try to get channel avatar from pagemap (this is the most reliable source)
     if (item.pagemap?.cse_image) {
-      const channelImage = item.pagemap.cse_image.find((img: any) =>
-        img.src?.includes('yt3.ggpht.com') ||
+      const channelImage = item.pagemap.cse_image.find((img: any) => 
+        img.src?.includes('yt3.ggpht.com') || 
         img.src?.includes('youtube.com/channel') ||
         img.src?.includes('googleusercontent.com') ||
-        (img.src && !img.src.includes('vi/') && !img.src.includes('maxresdefault') && img.src.includes('youtube')),
+        (img.src && !img.src.includes('vi/') && !img.src.includes('maxresdefault') && img.src.includes('youtube'))
       );
       if (channelImage?.src) {
         channelAvatarUrl = channelImage.src;
       }
     }
-
+    
     // Enhanced: If we still have the fallback, try to use a better YouTube default avatar
     if (channelAvatarUrl.includes('ui-avatars.com')) {
       // Use YouTube's default channel avatar style
-      channelAvatarUrl = 'https://yt3.ggpht.com/ytc/default_avatar.jpg';
+      channelAvatarUrl = `https://yt3.ggpht.com/ytc/default_avatar.jpg`;
     }
 
     // Enhanced view count extraction with multiple patterns
@@ -136,15 +135,15 @@ class YouTubeSearchService {
       /(\d+) view/i,
       /([\d,]+)\s*views?/i, // Handle cases with varying whitespace
       /(\d+,\d+,\d+) views?/i, // Handle large numbers with commas
-      /(\d+\.\d+[KMB]) views?/i, // Handle decimal notation
+      /(\d+\.\d+[KMB]) views?/i // Handle decimal notation
     ];
-
+    
     let views = '0';
     let viewCount = 0;
     for (const pattern of viewsPatterns) {
       const match = item.snippet.match(pattern) || item.title.match(pattern);
       if (match?.[1]) {
-        const viewString = match[1].replace(/,/g, '');
+        let viewString = match[1].replace(/,/g, '');
         // Convert K, M, B notation to numbers
         if (viewString.includes('K')) {
           viewCount = Math.floor(parseFloat(viewString) * 1000);
@@ -162,7 +161,7 @@ class YouTubeSearchService {
         break;
       }
     }
-
+    
     // If we still don't have views, try to extract from meta tags
     if (views === '0' && metaTags) {
       const metaViewCount = (metaTags as any).viewCount || (metaTags as any)['video:view_count'];
@@ -171,7 +170,7 @@ class YouTubeSearchService {
         views = viewCount.toString();
       }
     }
-
+    
     // Fallback: Generate realistic view count if none found
     if (views === '0') {
       viewCount = Math.floor(Math.random() * 1000000) + 10000; // Random between 10K and 1M
@@ -206,15 +205,15 @@ class YouTubeSearchService {
         /(\d+) days? ago/i,
         /(\d+) weeks? ago/i,
         /(\d+) months? ago/i,
-        /(\d+) years? ago/i,
+        /(\d+) years? ago/i
       ];
-
+      
       for (const pattern of timePatterns) {
         const match = item.snippet.match(pattern);
         if (match?.[1]) {
           const value = parseInt(match[1], 10);
           const now = new Date();
-
+          
           if (pattern.source.includes('hour')) {
             now.setHours(now.getHours() - value);
           } else if (pattern.source.includes('day')) {
@@ -226,7 +225,7 @@ class YouTubeSearchService {
           } else if (pattern.source.includes('year')) {
             now.setFullYear(now.getFullYear() - value);
           }
-
+          
           uploadedAt = now.toISOString();
           break;
         }
@@ -247,15 +246,15 @@ class YouTubeSearchService {
     }
 
     // Enhanced title extraction
-    const title = videoObject?.name ||
-                 metaTags?.['og:title'] ||
+    const title = videoObject?.name || 
+                 metaTags?.['og:title'] || 
                  item.title.replace(/- YouTube$/, '').trim() ||
                  'YouTube Video';
 
     // Enhanced description extraction
-    const description = videoObject?.description ||
-                       metaTags?.['og:description'] ||
-                       item.snippet ||
+    const description = videoObject?.description || 
+                       metaTags?.['og:description'] || 
+                       item.snippet || 
                        'No description available';
 
     // Extract tags from various sources
@@ -263,7 +262,7 @@ class YouTubeSearchService {
     if (metaTags?.['og:video:tag']) {
       tags.push(...metaTags['og:video:tag'].split(',').map(tag => tag.trim()));
     }
-
+    
     // Enhanced category detection
     let category = 'General';
     const categoryPatterns = [
@@ -276,9 +275,9 @@ class YouTubeSearchService {
       { pattern: /sport|football|basketball|soccer/i, category: 'Sports' },
       { pattern: /travel|vacation|adventure/i, category: 'Travel' },
       { pattern: /food|recipe|cooking|chef/i, category: 'Food' },
-      { pattern: /movie|film|trailer|cinema/i, category: 'Movies' },
+      { pattern: /movie|film|trailer|cinema/i, category: 'Movies' }
     ];
-
+    
     const combinedText = `${title} ${description} ${tags.join(' ')}`.toLowerCase();
     for (const { pattern, category: cat } of categoryPatterns) {
       if (pattern.test(combinedText)) {
@@ -288,24 +287,24 @@ class YouTubeSearchService {
     }
 
     console.log('🔍 Enhanced metadata extracted:', {
-      title: `${title.substring(0, 50)  }...`,
+      title: title.substring(0, 50) + '...',
       channelName,
       views,
       duration,
       category,
       tagsCount: tags.length,
-      thumbnailUrl: `${thumbnailUrl.substring(0, 50)  }...`,
+      thumbnailUrl: thumbnailUrl.substring(0, 50) + '...'
     });
 
     console.log('🎬 Enhanced Metadata Extraction for:', {
       videoId,
       title,
       channelName,
-      channelAvatarUrl: `${channelAvatarUrl.substring(0, 50)  }...`,
+      channelAvatarUrl: channelAvatarUrl.substring(0, 50) + '...',
       views,
       viewCount,
       duration,
-      category,
+      category
     });
 
     return {
@@ -352,7 +351,7 @@ class YouTubeSearchService {
         'top videos this week',
         'most watched videos',
         'recommended videos',
-        'youtube trending',
+        'youtube trending'
       ];
       const selectedQuery = fallbackQueries[Math.floor(Math.random() * fallbackQueries.length)];
       return selectedQuery || 'popular videos';
@@ -363,9 +362,9 @@ class YouTubeSearchService {
       const titleWords = currentVideo.title
         .toLowerCase()
         .split(/\s+/)
-        .filter(word =>
-          word.length > 3 &&
-          !['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'man', 'end', 'few', 'got', 'let', 'put', 'say', 'she', 'too', 'use'].includes(word),
+        .filter(word => 
+          word.length > 3 && 
+          !['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'man', 'end', 'few', 'got', 'let', 'put', 'say', 'she', 'too', 'use'].includes(word)
         )
         .slice(0, 3); // Take first 3 meaningful words
 
@@ -411,7 +410,7 @@ class YouTubeSearchService {
    */
   async searchRelatedVideos(
     currentVideo: Video,
-    maxResults: number = 10,
+    maxResults: number = 10
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
       console.warn('Google Custom Search API credentials not configured');
@@ -421,15 +420,15 @@ class YouTubeSearchService {
     try {
       // Generate search query based on current video
       const query = this.generateSearchQuery(currentVideo);
-
+      
       console.log('🔍 Generated search query:', query);
       console.log('📊 Based on video context:', {
         title: currentVideo.title,
         category: currentVideo.category,
         tags: currentVideo.tags,
-        channelName: currentVideo.channelName,
+        channelName: currentVideo.channelName
       });
-
+      
       // Build search URL
       const searchUrl = new URL(this.baseUrl);
       searchUrl.searchParams.set('key', this.apiKey);
@@ -443,7 +442,7 @@ class YouTubeSearchService {
       console.log('🌐 Searching YouTube with URL:', searchUrl.toString());
 
       const response = await fetch(searchUrl.toString());
-
+      
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Google Custom Search API error:', response.status, errorText);
@@ -477,7 +476,7 @@ class YouTubeSearchService {
         .map((item, index) => this.convertToVideo(item, index))
         .filter(video => {
           // Exclude the current video from recommendations
-          const isDifferent = video.id !== currentVideo.id &&
+          const isDifferent = video.id !== currentVideo.id && 
                              !video.videoUrl.includes(currentVideo.id);
           if (!isDifferent) {
             console.log('🚫 Filtering out current video:', video.title);
@@ -489,7 +488,7 @@ class YouTubeSearchService {
       if (videos.length > 0) {
         console.log('📺 Sample recommendations:', videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl })));
       }
-
+      
       return videos;
 
     } catch (error) {
@@ -503,7 +502,7 @@ class YouTubeSearchService {
    */
   async searchVideos(
     query: string,
-    maxResults: number = 10,
+    maxResults: number = 10
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
       console.warn('Google Custom Search API credentials not configured');
@@ -520,7 +519,7 @@ class YouTubeSearchService {
       // searchUrl.searchParams.set('safe', 'moderate'); // Invalid parameter
 
       const response = await fetch(searchUrl.toString());
-
+      
       if (!response.ok) {
         throw new Error(`Search failed: ${response.status}`);
       }
@@ -550,7 +549,7 @@ class YouTubeSearchService {
    */
   async getTrendingVideos(
     category: string = 'popular',
-    maxResults: number = 10,
+    maxResults: number = 10
   ): Promise<Video[]> {
     const trendingQueries = {
       music: 'trending music videos',
@@ -560,7 +559,7 @@ class YouTubeSearchService {
       sports: 'trending sports videos',
       entertainment: 'trending entertainment videos',
       education: 'trending educational videos',
-      popular: 'trending videos today',
+      popular: 'trending videos today'
     };
 
     const query = trendingQueries[category as keyof typeof trendingQueries] || trendingQueries.popular;

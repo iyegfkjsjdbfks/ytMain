@@ -13,9 +13,9 @@ import type { Video } from '../../../types/core';
 const WatchPage: React.FC = () => {
   const { videoId } = useParams<{ videoId: string }>();
   console.log(`🎬 WatchPage: Rendering with videoId: ${videoId}`);
-
+  
   const { data: video, loading } = useUnifiedVideo(videoId || '');
-  console.log('📊 WatchPage: Video data received:', video ? `${video.title} (${video.source})` : 'No video');
+  console.log(`📊 WatchPage: Video data received:`, video ? `${video.title} (${video.source})` : 'No video');
   console.log(`⏳ WatchPage: Loading state: ${loading}`);
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);

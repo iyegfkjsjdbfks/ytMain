@@ -1,14 +1,13 @@
-import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
-import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 
 import { youtubeService } from './api/youtubeService';
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import {
   metadataNormalizationService,
   type UnifiedVideoMetadata,
   type UnifiedChannelMetadata,
 } from './metadataNormalizationService';
-
+import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 
 /**
  * Configuration for unified data fetching
@@ -257,7 +256,7 @@ class UnifiedDataService {
     if (id.startsWith('google-search-')) {
       console.log(`🔍 Detected Google Custom Search video ID: ${id}`);
       const googleSearchVideo = googleSearchVideoStore.getVideo(id);
-
+      
       if (googleSearchVideo) {
         console.log(`✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`);
         console.log('📊 Google Custom Search metadata:', {
@@ -266,7 +265,7 @@ class UnifiedDataService {
           channelName: googleSearchVideo.channelName,
           channelAvatarUrl: googleSearchVideo.channelAvatarUrl,
           views: googleSearchVideo.viewCount,
-          source: 'Google Custom Search JSON API',
+          source: 'Google Custom Search JSON API'
         });
 
         // Convert Google Custom Search result to unified format
@@ -300,27 +299,27 @@ class UnifiedDataService {
           source: 'external' as const,
           metadata: {
             quality: 'hd',
-            definition: 'high',
+            definition: 'high'
           },
         };
 
         // Cache the result
         this.setCachedData(cacheKey, normalized);
         return normalized;
-      }
+      } else {
         console.log(`❌ Google Custom Search video not found in store: ${id}`);
-
+        
         // Try to fetch the video directly from Google Custom Search API
-        console.log('🌐 Attempting to fetch video directly from Google Custom Search API');
+        console.log(`🌐 Attempting to fetch video directly from Google Custom Search API`);
         const youtubeId = id.replace('google-search-', '');
         console.log(`📋 Extracted YouTube ID: ${youtubeId}`);
-
+        
         try {
           console.log(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${youtubeId}`);
           const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
           if (googleSearchVideo) {
             console.log(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
-
+            
             // Convert to unified format
             const normalized: UnifiedVideoMetadata = {
               id: googleSearchVideo.id,
@@ -352,7 +351,7 @@ class UnifiedDataService {
               source: 'external' as const,
               metadata: {
                 quality: 'hd',
-                definition: 'high',
+                definition: 'high'
               },
             };
 
@@ -363,10 +362,10 @@ class UnifiedDataService {
         } catch (error) {
           console.error('Failed to fetch video from Google Custom Search API:', error);
         }
-
+        
         // If Google Custom Search API fails, continue to YouTube API as fallback
         console.log(`🔄 Continuing to YouTube API as fallback for: ${id}`);
-
+      }
     }
 
     // Check if this is a YouTube video ID
@@ -391,7 +390,7 @@ class UnifiedDataService {
                 channelName: video.channelName,
                 channelAvatarUrl: video.channelAvatarUrl,
                 views: video.viewCount,
-                source: 'YouTube Data API v3',
+                source: 'YouTube Data API v3'
               });
             }
             // Convert already processed YouTube video to unified format

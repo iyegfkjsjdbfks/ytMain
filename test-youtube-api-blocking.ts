@@ -1,8 +1,8 @@
 // Test script to verify YouTube Data API blocking functionality
 import { setYouTubeSearchProvider, getYouTubeSearchProvider } from './services/settingsService';
-import { youtubeSearchService } from './services/youtubeSearchService';
-import { youtubeService } from './src/services/api/youtubeService';
 import { isYouTubeDataApiBlocked, isYouTubeDataApiAllowed } from './src/utils/youtubeApiUtils';
+import { youtubeService } from './src/services/api/youtubeService';
+import { youtubeSearchService } from './services/youtubeSearchService';
 
 async function testYouTubeApiBlocking() {
   console.log('=== YouTube Data API Blocking Test ===\n');

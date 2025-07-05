@@ -1,7 +1,6 @@
-import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
-
 import type { Playlist } from '../src/types/core';
 import type { Video, Channel, Comment } from '../types';
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 // Unified API Configuration
 interface ApiConfig {

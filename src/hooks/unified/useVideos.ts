@@ -32,7 +32,7 @@ export function useUnifiedVideos(
 
 export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVideoMetadata>) {
   console.log(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
-
+  
   return useQuery(
     ['unified-video', videoId],
     async () => {

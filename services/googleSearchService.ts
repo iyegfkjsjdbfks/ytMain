@@ -1,10 +1,8 @@
 // / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
-import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
-
-import { googleSearchVideoStore } from './googleSearchVideoStore';
-
 import type { Video } from '../types';
+import { googleSearchVideoStore } from './googleSearchVideoStore';
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 // Types for Google Custom Search JSON API response
 interface GoogleSearchItem {
@@ -664,7 +662,7 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
 // Fetch a single video by YouTube ID from Google Custom Search
 export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): Promise<GoogleSearchResult | null> => {
   console.log(`🔍 Fetching single video from Google Custom Search: ${youtubeVideoId}`);
-
+  
   try {
     const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
     const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
@@ -698,7 +696,7 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     }
 
     const item = data.items[0];
-
+    
     // Verify this is actually the video we're looking for
     if (!item.link.includes(youtubeVideoId)) {
       console.log(`❌ Found video does not match requested ID: ${youtubeVideoId}`);
@@ -728,11 +726,11 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       source: 'google-search' as const,
     };
 
-    console.log('✅ Successfully fetched video from Google Custom Search:', result.title);
-
+    console.log(`✅ Successfully fetched video from Google Custom Search:`, result.title);
+    
     // Store the video for future use
     googleSearchVideoStore.storeVideo(result);
-
+    
     return result;
 
   } catch (error) {
