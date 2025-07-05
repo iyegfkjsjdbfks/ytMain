@@ -1,6 +1,7 @@
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 
 import { youtubeService } from './api/youtubeService';
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import {
   metadataNormalizationService,
   type UnifiedVideoMetadata,
@@ -307,7 +308,61 @@ class UnifiedDataService {
         return normalized;
       } else {
         console.log(`❌ Google Custom Search video not found in store: ${id}`);
-        // Continue to YouTube API as fallback
+        
+        // Try to fetch the video directly from Google Custom Search API
+        console.log(`🔍 Attempting to fetch video directly from Google Custom Search API`);
+        const youtubeId = id.replace('google-search-', '');
+        
+        try {
+          const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
+          if (googleSearchVideo) {
+            console.log(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
+            
+            // Convert to unified format
+            const normalized: UnifiedVideoMetadata = {
+              id: googleSearchVideo.id,
+              title: googleSearchVideo.title,
+              description: googleSearchVideo.description || '',
+              thumbnailUrl: googleSearchVideo.thumbnailUrl || '',
+              videoUrl: googleSearchVideo.videoUrl || `https://www.youtube.com/watch?v=${youtubeId}`,
+              views: googleSearchVideo.viewCount || 0,
+              viewsFormatted: this.formatViews(googleSearchVideo.viewCount || 0),
+              likes: googleSearchVideo.likeCount || 0,
+              dislikes: googleSearchVideo.dislikeCount || 0,
+              commentCount: googleSearchVideo.commentCount || 0,
+              channel: {
+                id: googleSearchVideo.channelId || '',
+                name: googleSearchVideo.channelName || 'YouTube Channel',
+                avatarUrl: googleSearchVideo.channelAvatarUrl || '',
+                subscribers: 0,
+                subscribersFormatted: '0 subscribers',
+                isVerified: googleSearchVideo.channelName?.includes('VEVO') || googleSearchVideo.channelName?.includes('Official') || false,
+              },
+              duration: googleSearchVideo.duration || '0:00',
+              publishedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+              publishedAtFormatted: this.formatTimeAgo(googleSearchVideo.uploadedAt || new Date().toISOString()),
+              category: googleSearchVideo.categoryId || 'General',
+              tags: googleSearchVideo.tags || [],
+              isLive: false,
+              isShort: false,
+              visibility: 'public' as const,
+              source: 'external' as const,
+              metadata: {
+                quality: 'hd',
+                definition: 'high'
+              },
+            };
+
+            // Cache the result
+            this.setCachedData(cacheKey, normalized);
+            return normalized;
+          }
+        } catch (error) {
+          console.error('Failed to fetch video from Google Custom Search API:', error);
+        }
+        
+        // If Google Custom Search API fails, continue to YouTube API as fallback
+        console.log(`🔄 Continuing to YouTube API as fallback for: ${id}`);
       }
     }
 
