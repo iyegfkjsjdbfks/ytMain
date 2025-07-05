@@ -1,5 +1,6 @@
 import type { Playlist } from '../src/types/core';
 import type { Video, Channel, Comment } from '../types';
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 // Unified API Configuration
 interface ApiConfig {
@@ -268,6 +269,11 @@ class UnifiedApiService {
     maxResults?: number;
     pageToken?: string;
   } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      return { items: [] };
+    }
     const queryParams = new URLSearchParams();
     queryParams.set('part', 'snippet,statistics,contentDetails');
     queryParams.set('chart', 'mostPopular');
@@ -287,6 +293,11 @@ queryParams.set('pageToken', params.pageToken);
     order?: string;
     type?: string;
   } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      return { items: [] };
+    }
     const queryParams = new URLSearchParams();
     queryParams.set('part', 'snippet');
     queryParams.set('q', query);
@@ -304,6 +315,11 @@ queryParams.set('order', params.order);
   }
 
   async getChannel(channelId: string): Promise<Channel> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      throw new Error('YouTube Data API is disabled');
+    }
     const queryParams = new URLSearchParams({
       part: 'snippet,statistics,brandingSettings',
       id: channelId,
@@ -330,6 +346,11 @@ queryParams.set('order', params.order);
   }
 
   async getPlaylist(playlistId: string): Promise<Playlist> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      throw new Error('YouTube Data API is disabled');
+    }
     const queryParams = new URLSearchParams({
       part: 'snippet,status',
       id: playlistId,
@@ -360,6 +381,11 @@ queryParams.set('order', params.order);
     pageToken?: string;
     order?: string;
   } = {}): Promise<{ items: Comment[]; nextPageToken?: string }> {
+    // Check if YouTube Data API is blocked by admin settings
+    if (isYouTubeDataApiBlocked()) {
+      console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+      return { items: [] };
+    }
     const queryParams = new URLSearchParams();
     queryParams.set('part', 'snippet,replies');
     queryParams.set('videoId', videoId);

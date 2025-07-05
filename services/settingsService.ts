@@ -1,5 +1,6 @@
 // / <reference types="vite/client" />
 // Settings service for managing application settings
+import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
 
 export type YouTubeSearchProvider = 'youtube-api' | 'google-search' | 'hybrid';
 export type YouTubePlayerType = 'youtube-player' | 'youtube-player-wrapper' | 'youtube-player-example';
@@ -248,13 +249,18 @@ export const isGoogleSearchAvailable = (): boolean => {
   return !!(apiKey && engineId);
 };
 
-// Check if YouTube Data API is available
-export const isYouTubeApiAvailable = (): boolean => {
+// Check if YouTube Data API is configured (has API key)
+export const isYouTubeApiConfigured = (): boolean => {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   return !!apiKey;
 };
 
+// Check if YouTube Data API is available for use (configured and not blocked)
+export const isYouTubeApiAvailable = (): boolean => {
+  return isYouTubeApiConfigured() && !isYouTubeDataApiBlocked();
+};
+
 // Check if hybrid mode is available (both APIs configured)
 export const isHybridModeAvailable = (): boolean => {
-  return isYouTubeApiAvailable() && isGoogleSearchAvailable();
+  return isYouTubeApiConfigured() && isGoogleSearchAvailable();
 };

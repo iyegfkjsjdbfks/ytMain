@@ -400,6 +400,12 @@ const fetchVideoDetails = async (videoIds: string[]): Promise<Map<string, YouTub
 
 // Fetch channel information from YouTube Data API v3
 const fetchChannelDetails = async (channelIds: string[]): Promise<Map<string, YouTubeChannelDetails>> => {
+  // Check if YouTube Data API is blocked by admin settings
+  if (isYouTubeDataApiBlocked()) {
+    console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+    return new Map();
+  }
+
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || channelIds.length === 0) {
     return new Map();
@@ -433,6 +439,12 @@ const fetchChannelDetails = async (channelIds: string[]): Promise<Map<string, Yo
 
 // Search YouTube videos using YouTube Data API v3 with enhanced metadata
 export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchResult[]> => {
+  // Check if YouTube Data API is blocked by admin settings
+  if (isYouTubeDataApiBlocked()) {
+    console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
+    return [];
+  }
+
   // Check for YouTube API key in environment variables
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -539,9 +551,9 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
     let channelDetailsMap = new Map<string, YouTubeChannelDetails>();
 
-    // Try to fetch enhanced metadata if YouTube API is available
+    // Try to fetch enhanced metadata if YouTube API is available and not blocked
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-    if (youtubeApiKey && videoIds.length > 0) {
+    if (youtubeApiKey && videoIds.length > 0 && !isYouTubeDataApiBlocked()) {
       try {
         videoDetailsMap = await fetchVideoDetails(videoIds);
 

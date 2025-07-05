@@ -20,6 +20,7 @@ import {
   isPlayerEnabled,
   isGoogleSearchAvailable,
   isYouTubeApiAvailable,
+  isYouTubeApiConfigured,
   isHybridModeAvailable,
   type YouTubeSearchProvider,
   type YouTubePlayerType,
@@ -160,6 +161,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  const youtubeApiConfigured = isYouTubeApiConfigured();
   const youtubeApiAvailable = isYouTubeApiAvailable();
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
@@ -507,24 +509,39 @@ const AdminPage: React.FC = () => {
                         type="radio"
                         checked={provider === 'youtube-api'}
                         onChange={() => handleProviderChange('youtube-api')}
-                        disabled={!youtubeApiAvailable || isSaving}
+                        disabled={!youtubeApiConfigured || isSaving}
                         className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 disabled:opacity-50"
                       />
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor="youtube-api" className="font-medium text-gray-700">
                         YouTube Data API v3
-                        {!youtubeApiAvailable && (
+                        {!youtubeApiConfigured && (
                           <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                             Not Configured
+                          </span>
+                        )}
+                        {youtubeApiConfigured && !youtubeApiAvailable && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Disabled
+                          </span>
+                        )}
+                        {youtubeApiAvailable && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Available
                           </span>
                         )}
                       </label>
                       <p className="text-gray-500">
                         Official YouTube API with detailed video information and metadata.
-                        {!youtubeApiAvailable && (
+                        {!youtubeApiConfigured && (
                           <span className="block mt-1 text-red-600">
                             Missing VITE_YOUTUBE_API_KEY in environment variables.
+                          </span>
+                        )}
+                        {youtubeApiConfigured && !youtubeApiAvailable && provider === 'google-search' && (
+                          <span className="block mt-1 text-yellow-600">
+                            YouTube Data API is disabled when Google Custom Search is selected. Switch to enable YouTube API features.
                           </span>
                         )}
                       </p>
