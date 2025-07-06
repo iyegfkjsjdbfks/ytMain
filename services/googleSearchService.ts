@@ -601,7 +601,8 @@ const fetchVideoDetailsInternal = async (videoIds: string[]): Promise<Map<string
 
     const response = await fetch(detailsUrl.toString());
     if (!response.ok) {
-      console.warn('Failed to fetch video details:', response.status);
+      console.warn(`Failed to fetch video details: ${response.status} ${response.statusText}`);
+      console.warn('This is expected when using Google Custom Search as fallback - video metadata will come from search results');
       return new Map();
     }
 
@@ -645,7 +646,8 @@ const fetchChannelDetailsInternal = async (channelIds: string[]): Promise<Map<st
 
     const response = await fetch(channelUrl.toString());
     if (!response.ok) {
-      console.warn('Failed to fetch channel details:', response.status);
+      console.warn(`Failed to fetch channel details: ${response.status} ${response.statusText}`);
+      console.warn('This is expected when using Google Custom Search as fallback - channel metadata will come from search results');
       return new Map();
     }
 

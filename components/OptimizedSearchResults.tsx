@@ -5,9 +5,9 @@ import { FixedSizeList as List } from 'react-window';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { withMemo } from '../utils/componentOptimizations';
 import { performanceMonitor } from '../utils/performance';
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
 import OptimizedVideoCard from './OptimizedVideoCard';
-import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 import { mediaUtils } from '../utils/unifiedUtils';
 
 import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
@@ -116,17 +116,63 @@ const GridItem: React.FC<{
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
 }> = memo(({ item, onVideoClick }) => {
   const convertedVideo = convertToVideo(item);
+  
+  // Extract YouTube video ID for player
+  const extractVideoId = (video: Video) => {
+    let videoId = getYouTubeVideoId(video.videoUrl);
+    if (!videoId) {
+      videoId = video.id;
+      if (videoId && videoId.includes('-')) {
+        const parts = videoId.split('-');
+        const lastPart = parts[parts.length - 1];
+        if (lastPart && lastPart.length === 11) {
+          videoId = lastPart;
+        }
+      }
+    }
+    return videoId && videoId.length === 11 ? videoId : null;
+  };
+  
+  const videoId = extractVideoId(convertedVideo);
 
   return (
     <div className="group">
-      <OptimizedVideoCard
-        video={convertedVideo}
-        onClick={() => onVideoClick(item)}
-        lazy={true}
-        size="md"
-        showChannel={true}
-        className="transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-      />
+      {videoId ? (
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <div className="relative aspect-video bg-black">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0`}
+              title={convertedVideo.title}
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+          <div className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+              {convertedVideo.title}
+            </h3>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="mb-1">{convertedVideo.channelName}</p>
+              <div className="flex items-center space-x-2">
+                <span>{convertedVideo.views} views</span>
+                <span>•</span>
+                <span>{new Date(convertedVideo.uploadedAt).toLocaleDateString()}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <OptimizedVideoCard
+          video={convertedVideo}
+          onClick={() => onVideoClick(item)}
+          lazy={true}
+          size="md"
+          showChannel={true}
+          className="transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+        />
+      )}
     </div>
   );
 });
@@ -137,30 +183,6 @@ const YouTubeSearchResultCard: React.FC<{
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
 }> = memo(({ item, onVideoClick }) => {
   const convertedVideo = convertToVideo(item);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [userInteracted, setUserInteracted] = useState(false);
-  
-  const handlePlayerStateChange = useCallback((event: any) => {
-    // YouTube player states: -1 (unstarted), 0 (ended), 1 (playing), 2 (paused), 3 (buffering), 5 (cued)
-    const state = event.data;
-    setIsPlaying(state === 1); // 1 means playing
-    
-    // Hide duration when user actually interacts with video (playing or buffering)
-    if (state === 3 || state === 1) {
-      // Video is either playing or buffering, so user has interacted with it
-      setUserInteracted(true);
-    }
-    
-    // Show duration again when video ends
-    if (state === 0) {
-      setUserInteracted(false);
-    }
-  }, []);
-  
-  const handlePlayerReady = useCallback(() => {
-    // Don't set userInteracted to true on ready - only when user actually plays
-    // This allows the duration to show initially
-  }, []);
   
   const formatDuration = (duration: string | number) => {
     if (typeof duration === 'string') return duration;
@@ -201,40 +223,77 @@ const YouTubeSearchResultCard: React.FC<{
     }
   };
 
+  // Extract YouTube video ID for player
+  const extractVideoId = (video: Video) => {
+    // Try to get video ID from videoUrl first
+    let videoId = getYouTubeVideoId(video.videoUrl);
+    
+    if (!videoId) {
+      // If no ID from URL, try to extract from the video ID itself
+      videoId = video.id;
+      
+      // Clean up video ID to ensure it's just the 11-character YouTube ID
+      if (videoId && videoId.includes('-')) {
+        // Handle cases like "google-search-xyz" or "youtube-xyz"
+        const parts = videoId.split('-');
+        const lastPart = parts[parts.length - 1];
+        if (lastPart && lastPart.length === 11) {
+          videoId = lastPart;
+        }
+      }
+    }
+    
+    return videoId && videoId.length === 11 ? videoId : null;
+  };
+  
+  const videoId = extractVideoId(convertedVideo);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Prevent navigation when clicking on video player
+    if (videoId && (e.target as HTMLElement).closest('iframe, [id*="youtube-player"]')) {
+      e.stopPropagation();
+      return;
+    }
+    onVideoClick(item);
+  };
+
   return (
     <div 
       className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
-      onClick={() => onVideoClick(item)}
+      onClick={handleCardClick}
     >
-      {/* Thumbnail */}
+      {/* YouTube Player or Thumbnail */}
       <div className="relative flex-shrink-0">
         <div className="w-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
-          {(() => {
-            const videoId = mediaUtils.extractVideoId(convertedVideo.videoUrl || convertedVideo.id);
-            return videoId ? (
-              <YouTubePlayerWrapper
-                videoId={videoId}
-                className="w-full h-full rounded-xl"
-                controls={true}
-                lazy={true}
-                autoplay={false}
-                onStateChange={handlePlayerStateChange}
-                onReady={handlePlayerReady}
+          {videoId ? (
+            <div 
+              className="w-full h-full" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}
+                title={convertedVideo.title}
+                className="w-full h-full border-0 rounded-xl"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
               />
-            ) : (
+            </div>
+          ) : (
+            <>
               <img
                 src={convertedVideo.thumbnailUrl}
                 alt={convertedVideo.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                 loading="lazy"
               />
-            );
-          })()} 
-          {/* Duration badge - show when video is not playing and user hasn't interacted with it */}
-          {convertedVideo.duration && convertedVideo.duration !== '0:00' && !isPlaying && !userInteracted && (
-            <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
-              {formatDuration(convertedVideo.duration)}
-            </div>
+              {/* Duration badge */}
+              {convertedVideo.duration && convertedVideo.duration !== '0:00' && (
+                <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-1.5 py-0.5 rounded-sm font-medium">
+                  {formatDuration(convertedVideo.duration)}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -280,14 +339,55 @@ const VirtualizedItem: React.FC<VirtualizedItemProps> = memo(({ index, style, da
   }
 
   const convertedVideo = convertToVideo(item);
+  
+  // Extract YouTube video ID for player
+  const extractVideoId = (video: Video) => {
+    let videoId = getYouTubeVideoId(video.videoUrl);
+    if (!videoId) {
+      videoId = video.id;
+      if (videoId && videoId.includes('-')) {
+        const parts = videoId.split('-');
+        const lastPart = parts[parts.length - 1];
+        if (lastPart && lastPart.length === 11) {
+          videoId = lastPart;
+        }
+      }
+    }
+    return videoId && videoId.length === 11 ? videoId : null;
+  };
+  
+  const videoId = extractVideoId(convertedVideo);
 
   return (
     <div style={style} className="p-2">
-      <OptimizedVideoCard
-        video={convertedVideo}
-        onClick={() => onVideoClick(item)}
-        lazy={true}
-      />
+      {videoId ? (
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+          <div className="relative aspect-video bg-black">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0`}
+              title={convertedVideo.title}
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+          <div className="p-3">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-2 mb-1">
+              {convertedVideo.title}
+            </h3>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              <p className="mb-1">{convertedVideo.channelName}</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <OptimizedVideoCard
+          video={convertedVideo}
+          onClick={() => onVideoClick(item)}
+          lazy={true}
+        />
+      )}
     </div>
   );
 });

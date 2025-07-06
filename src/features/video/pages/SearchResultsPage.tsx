@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { searchForSearchResultsPage } from '../../../../services/googleSearchService';
-import VideoCard from '../components/VideoCard';
-import HoverAutoplayVideoCard from '../../../../components/HoverAutoplayVideoCard';
+import { getYouTubeVideoId } from '../../../lib/youtube-utils';
 
 import type { Video } from '../../../types/core';
 
@@ -190,13 +189,69 @@ return;
 
       {!loading && videos.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {videos.map((video) => (
-            <HoverAutoplayVideoCard
-              key={video.id}
-              video={video}
-              className=""
-            />
-          ))}
+          {videos.map((video) => {
+            // Extract YouTube video ID from the video object using utility function
+            let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
+            
+            // Clean up video ID to ensure it's just the 11-character YouTube ID
+            if (videoId && videoId.includes('-')) {
+              // Handle cases like "google-search-xyz" or "youtube-xyz"
+              const parts = videoId.split('-');
+              const lastPart = parts[parts.length - 1];
+              if (lastPart && lastPart.length === 11) {
+                videoId = lastPart;
+              }
+            }
+            
+            console.log('Video ID for', video.title, ':', videoId);
+            
+            return (
+              <div key={video.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                {/* YouTube Player */}
+                <div className="relative aspect-video bg-black rounded-t-lg overflow-hidden">
+                  {videoId && videoId.length === 11 ? (
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
+                      title={video.title}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
+                      <div className="text-center text-gray-600 dark:text-gray-400">
+                        <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <p className="text-sm">Video unavailable</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Video Info */}
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+                    {video.title}
+                  </h3>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="mb-1">{video.channelName}</p>
+                    <div className="flex items-center space-x-2">
+                      <span>{video.views} views</span>
+                      <span>•</span>
+                      <span>{new Date(video.uploadedAt).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                  {video.description && (
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2">
+                      {video.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 

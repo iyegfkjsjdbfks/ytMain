@@ -147,24 +147,15 @@ return;
 
       // Ensure the container element exists and is properly prepared
       const container = document.getElementById(playerIdRef.current);
-      if (container) {
-        // Clear any existing content safely using innerHTML to avoid removeChild errors
+      if (container && document.body.contains(container)) {
+        // Clear any existing content safely
         try {
-          container.innerHTML = '';
+          // Check if container is still in DOM before clearing
+          if (container.parentNode) {
+            container.innerHTML = '';
+          }
         } catch (error) {
           console.debug('Error clearing container:', error);
-          // Fallback: try to remove children one by one with error handling
-          try {
-            while (container.firstChild) {
-              if (container.contains(container.firstChild)) {
-                container.removeChild(container.firstChild);
-              } else {
-                break; // Exit if child is no longer in container
-              }
-            }
-          } catch (fallbackError) {
-            console.debug('Fallback container clearing failed:', fallbackError);
-          }
         }
       }
 
@@ -185,11 +176,9 @@ return;
           origin: window.location.origin,
           playsinline: 1,
           fs: 1, // Enable fullscreen button
-          // cc_load_policy: 1, // Show closed captions by default (not supported in playerVars)
           iv_load_policy: 3, // Hide video annotations
           disablekb: 0, // Enable keyboard controls
-          widget_referrer: window.location.origin,
-          // host: window.location.protocol + '//' + window.location.host // Not supported in playerVars
+          // Remove widget_referrer as it might cause origin issues
         },
         events: {
           onReady: (event: any) => {
@@ -282,8 +271,15 @@ return;
               150: 'Video not available in embedded players',
             };
             const message = errorMessages[event.data] || 'Unknown error occurred';
-            console.error('YouTube player error:', message, event.data);
-            setPlayerError(message);
+            
+            // For embedding errors (101, 150), show a more user-friendly message
+            if (event.data === 101 || event.data === 150) {
+              console.debug('Video cannot be embedded, this is expected for some videos');
+              setPlayerError('This video cannot be played here. Click to watch on YouTube.');
+            } else {
+              console.error('YouTube player error:', message, event.data);
+              setPlayerError(message);
+            }
 
             // Call the external onError callback if provided
             if (onError) {
@@ -307,19 +303,16 @@ return;
       isMounted = false;
       if (ytPlayerRef.current) {
         try {
-          // More robust check for player element existence
-          const playerElement = document.getElementById(playerIdRef.current);
-          if (playerElement && playerElement.parentNode && document.body.contains(playerElement)) {
-            // Additional check to ensure the player is still valid
-            if (typeof ytPlayerRef.current.destroy === 'function') {
-              ytPlayerRef.current.destroy();
-            }
+          // Check if player still exists and has destroy method
+          if (typeof ytPlayerRef.current.destroy === 'function') {
+            ytPlayerRef.current.destroy();
           }
         } catch (error) {
-          // Silently handle cleanup errors to prevent console spam
-          console.debug('YouTube player cleanup:', error);
+          // Silently handle cleanup errors
+          console.debug('YouTube player cleanup error:', error);
+        } finally {
+          ytPlayerRef.current = null;
         }
-        ytPlayerRef.current = null;
       }
     };
   }, [isAPIReady, videoId, height, width, autoplay, controls]);
@@ -345,7 +338,7 @@ return;
   }
 
   return (
-    <div className={`absolute inset-0 ${className}`}>
+    <div className={`relative w-full h-full ${className}`}>
       {!isAPIReady && (
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
           <div className="text-gray-600 dark:text-gray-400 text-center">
