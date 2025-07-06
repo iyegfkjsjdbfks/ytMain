@@ -39,7 +39,7 @@ const CommentModerationPage: React.FC = () => {
         for (const video of videos.slice(0, 5)) { // Limit to first 5 videos for demo
           const videoComments = await getCommentsByVideoId(video.id);
           const commentsWithVideo = videoComments.map(comment => ({
-            ...comment,
+            ...(comment as any),
             videoTitle: video.title,
             videoId: video.id,
             status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,

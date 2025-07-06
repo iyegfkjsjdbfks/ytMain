@@ -64,9 +64,9 @@ const ChannelPage: React.FC = () => {
             fetchedPlaylists,
             fetchedCommunityPosts,
           ] = await Promise.all([
-            getVideosByChannelName(fetchedChannel.name || decodedName),
-            getChannelPlaylists(fetchedChannel.name || decodedName),
-            getChannelCommunityPosts(fetchedChannel.name || decodedName),
+            getVideosByChannelName((fetchedChannel as any).name || decodedName),
+            getChannelPlaylists((fetchedChannel as any).name || decodedName),
+            getChannelCommunityPosts((fetchedChannel as any).name || decodedName),
           ]);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);

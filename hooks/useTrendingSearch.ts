@@ -38,17 +38,10 @@ const convertSearchResultToVideo = (
     updatedAt: new Date().toISOString(),
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
-    isFamilySafe: true,
-    allowedRegions: [],
-    blockedRegions: [],
-    isAgeRestricted: false,
-    embeddable: true,
-    defaultLanguage: 'en',
-    defaultAudioLanguage: 'en',
-    recordingStatus: 'recorded',
-    uploadStatus: 'processed',
-    privacyStatus: 'public',
-    selfDeclaredMadeForKids: false,
+    // Properties removed from Video type that don't exist
+    // allowedRegions, blockedRegions, isAgeRestricted, embeddable, 
+    // defaultLanguage, defaultAudioLanguage, recordingStatus, 
+    // uploadStatus, selfDeclaredMadeForKids - these are not part of Video interface
     statistics: {
       viewCount: result.viewCount || 0,
       likeCount: result.likeCount || 0,

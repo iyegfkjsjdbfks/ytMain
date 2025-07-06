@@ -113,7 +113,7 @@ function LibraryPage() { // Removed React.FC
 
         setLoadingPlaylists(true);
         getUserPlaylists().then(data => {
-          const sortedPlaylists = data.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+          const sortedPlaylists = data.sort((a, b) => new Date((b as any).updatedAt).getTime() - new Date((a as any).updatedAt).getTime());
           setUserPlaylists(sortedPlaylists.slice(0, MAX_PLAYLISTS_GRID));
         }).finally(() => setLoadingPlaylists(false));
 

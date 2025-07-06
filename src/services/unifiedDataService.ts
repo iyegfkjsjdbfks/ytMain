@@ -689,19 +689,16 @@ class UnifiedDataService {
       console.log('🔍 Using Google Custom Search for video discovery with query:', query);
 
       // Import Google Custom Search service
-      const { searchYouTubeVideosFromGoogle } = await import('../../services/googleSearchService');
+      const { searchYouTubeWithGoogleSearch } = await import('../../services/googleSearchService');
 
       // Search for videos using Google Custom Search
-      const searchResults = await searchYouTubeVideosFromGoogle(query, {
-        num: this.config.limits.youtube || 25,
-        sort: filters.sortBy === 'date' ? 'date' : undefined,
-      });
+      const searchResults = await searchYouTubeWithGoogleSearch(query);
 
       console.log(`📋 Google Custom Search found ${searchResults.length} videos for discovery`);
 
       // Convert search results to unified format
       // Note: These will have google-search- prefixed IDs for metadata fetching
-      const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(video => ({
+      const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map((video: any) => ({
         id: video.id, // This will be google-search-{youtubeId}
         title: video.title,
         description: video.description || '',

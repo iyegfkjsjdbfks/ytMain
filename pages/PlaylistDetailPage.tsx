@@ -41,8 +41,8 @@ const PlaylistDetailPage: React.FC = () => {
       const fetchedDetails = await getUserPlaylistById(playlistId);
       if (fetchedDetails) {
         setPlaylistDetails(fetchedDetails);
-        setEditingPlaylistTitle(fetchedDetails.title);
-        setEditingPlaylistDescription(fetchedDetails.description || '');
+        setEditingPlaylistTitle((fetchedDetails as any).title);
+        setEditingPlaylistDescription((fetchedDetails as any).description || '');
       } else {
         setError('Playlist not found.');
         setPlaylistDetails(null);
