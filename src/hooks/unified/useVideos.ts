@@ -20,7 +20,7 @@ export function useUnifiedVideos(
   config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
-    ['unified-videos', limit, JSON.stringify(filters)],
+    ['unified-videos', String(limit), JSON.stringify(filters)],
     async () => {
       const response = await unifiedDataService.getTrendingVideos(limit, filters);
       return { data: response.data, success: true, message: 'Videos fetched successfully' };
@@ -76,7 +76,7 @@ export function useUnifiedTrendingVideos(
   config?: UseApiConfig<UnifiedVideoMetadata[]>,
 ) {
   return useQuery(
-    ['unified-trending', limit, JSON.stringify(filters)],
+    ['unified-trending', String(limit), JSON.stringify(filters)],
     async () => {
       const response = await unifiedDataService.getTrendingVideos(limit, filters);
       return { data: response.data, success: true, message: 'Trending videos fetched successfully' };

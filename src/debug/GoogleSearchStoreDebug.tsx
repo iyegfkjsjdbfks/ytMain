@@ -46,7 +46,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
       setStoreVideos(videos);
     } catch (error) {
       console.error('Test fetch error:', error);
-      setTestResult({ error: error.message });
+      setTestResult({ error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);
     }
@@ -75,7 +75,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
       console.log('🧪 Unified service result:', result);
     } catch (error) {
       console.error('Unified service test error:', error);
-      setUnifiedServiceTest({ error: error.message });
+      setUnifiedServiceTest({ error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);
     }

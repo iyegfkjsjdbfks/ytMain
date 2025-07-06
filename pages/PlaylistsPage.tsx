@@ -45,7 +45,14 @@ const PlaylistsPage: React.FC = () => {
 
     try {
       const newPlaylist = await createUserPlaylist(newPlaylistName.trim());
-      setPlaylists(prev => [newPlaylist, ...prev]);
+      // Ensure the new playlist has all required UserPlaylistDetails properties
+      const playlistWithDetails: UserPlaylistDetails = {
+        ...newPlaylist,
+        videoCount: newPlaylist.videoIds?.length || 0,
+        title: newPlaylist.name || newPlaylist.title || newPlaylistName.trim(),
+        videoIds: newPlaylist.videoIds || [],
+      };
+      setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {

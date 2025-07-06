@@ -245,7 +245,7 @@ return cached;
 
           // Additional metadata for watch page
           metadata: {
-            defaultLanguage: snippet.defaultLanguage || undefined,
+            defaultLanguage: snippet.defaultLanguage || 'en',
             uploadLocation: recordingDetails?.location,
             recordingDate: recordingDetails?.recordingDate,
             actualStartTime: liveStreamingDetails?.actualStartTime,
@@ -278,7 +278,7 @@ return cached;
       // Update videos with channel avatar URLs
       videos.forEach(video => {
         const channelData = channelMap.get(video.channelId);
-        if (channelData) {
+        if (channelData && video.channel) {
           video.channelAvatarUrl = channelData.avatarUrl;
           video.channel.avatarUrl = channelData.avatarUrl;
           video.channel.isVerified = channelData.isVerified;

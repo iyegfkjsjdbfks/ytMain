@@ -17,7 +17,35 @@ import type { Video } from '../types';
  * Compare this with the original TrendingPage to see the reduction in boilerplate
  */
 const RefactoredTrendingPage: React.FC = () => {
-  const { data: videos, loading, error } = useVideosData('trending');
+  const { data: unifiedVideos, loading, error } = useVideosData('trending');
+
+  // Convert UnifiedVideoMetadata to Video format for compatibility
+  const videos: Video[] = unifiedVideos ? unifiedVideos.map(video => ({
+    id: video.id,
+    title: video.title,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    videoUrl: video.videoUrl,
+    duration: video.duration,
+    views: video.viewsFormatted,
+    viewCount: video.views,
+    likes: video.likes,
+    likeCount: video.likes,
+    dislikes: video.dislikes || 0,
+    dislikeCount: video.dislikes || 0,
+    commentCount: video.commentCount,
+    uploadedAt: video.publishedAt,
+    channelName: video.channel.name,
+    channelId: video.channel.id,
+    channelAvatarUrl: video.channel.avatarUrl,
+    category: video.category || 'General',
+    tags: video.tags || [],
+    visibility: video.visibility as 'public' | 'private' | 'unlisted' | 'scheduled',
+    isLive: video.isLive,
+    isShort: video.isShort,
+    createdAt: video.publishedAt,
+    updatedAt: video.publishedAt,
+  })) : [];
 
   const handleVideoClick = (video: Video) => {
     // Navigate to video or handle click

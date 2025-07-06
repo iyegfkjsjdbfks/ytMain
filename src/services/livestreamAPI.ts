@@ -5,20 +5,16 @@ import type {
   LivePoll, 
   QAQuestion,
   ChatModerationAction,
-  StreamReplay
+  StreamReplay,
+  LiveStreamSettings,
+  LiveStreamStats,
+  LiveStreamMonetization,
+  StreamPlatform
 } from '../types/livestream';
 
 /**
  * Pure service for live streaming API operations without React dependencies
  */
-
-// Mock streaming platforms for multi-platform support
-const STREAMING_PLATFORMS = {
-  YOUTUBE: 'youtube',
-  TWITCH: 'twitch', 
-  FACEBOOK: 'facebook',
-  CUSTOM_RTMP: 'custom_rtmp'
-} as const;
 
 // Mock data storage
 let mockStreams: LiveStream[] = [];
@@ -36,6 +32,50 @@ export const streamAPI = {
    * Create a new live stream
    */
   async createStream(streamData: Partial<LiveStream>): Promise<LiveStream> {
+    const defaultSettings: LiveStreamSettings = {
+      enableChat: true,
+      enableSuperChat: true,
+      enablePolls: true,
+      enableQA: true,
+      chatMode: 'live',
+      slowMode: 0,
+      subscribersOnly: false,
+      moderationLevel: 'moderate',
+      quality: '1080p',
+      bitrate: 5000,
+      frameRate: 30,
+      enableRecording: true,
+      enableMultiplatform: false,
+      platforms: [{ name: 'youtube', enabled: true }]
+    };
+
+    const defaultStats: LiveStreamStats = {
+      viewers: 0,
+      peakViewers: 0,
+      averageViewers: 0,
+      duration: 0,
+      likes: 0,
+      dislikes: 0,
+      chatMessages: 0,
+      superChatAmount: 0,
+      superChatCount: 0,
+      pollVotes: 0,
+      qaQuestions: 0,
+      streamHealth: 'good',
+      bitrate: 5000,
+      frameDrops: 0,
+      latency: 2000
+    };
+
+    const defaultMonetization: LiveStreamMonetization = {
+      totalRevenue: 0,
+      superChatRevenue: 0,
+      adRevenue: 0,
+      membershipRevenue: 0,
+      donationRevenue: 0,
+      superChats: []
+    };
+
     const stream: LiveStream = {
       id: `stream_${Date.now()}`,
       title: streamData.title || 'Untitled Stream',
@@ -47,39 +87,15 @@ export const streamAPI = {
       tags: streamData.tags || [],
       visibility: streamData.visibility || 'public',
       status: 'scheduled',
-      currentViewers: 0,
-      totalViews: 0,
-      duration: 0,
-      createdAt: new Date(),
-      scheduledStartTime: streamData.scheduledStartTime || new Date(),
-      startedAt: undefined,
-      endedAt: undefined,
-      settings: {
-        enableChat: true,
-        enableSuperChat: true,
-        enablePolls: true,
-        enableQA: true,
-        chatMode: 'live' as const,
-        moderationLevel: 'medium' as const,
-        subscriberOnlyChat: false,
-        slowModeDelay: 0,
-        maxMessageLength: 200,
-        allowLinks: false,
-        allowEmotes: true,
-        autoModeration: true,
-        profanityFilter: true,
-        spamProtection: true,
-        ...streamData.settings
-      },
-      platforms: streamData.platforms || ['youtube'],
-      monetization: {
-        enableSuperChat: streamData.settings?.enableSuperChat || true,
-        enableMemberships: false,
-        enableDonations: false,
-        minimumSuperChatAmount: 1,
-        currency: 'USD',
-        totalRevenue: 0
-      }
+      scheduledStartTime: streamData.scheduledStartTime,
+      actualStartTime: undefined,
+      endTime: undefined,
+      creatorId: streamData.creatorId || 'user_123',
+      creatorName: streamData.creatorName || 'Streamer',
+      creatorAvatar: streamData.creatorAvatar || '/api/placeholder/40/40',
+      settings: { ...defaultSettings, ...streamData.settings },
+      stats: { ...defaultStats, ...streamData.stats },
+      monetization: { ...defaultMonetization, ...streamData.monetization }
     };
 
     mockStreams.push(stream);
@@ -98,7 +114,7 @@ export const streamAPI = {
    */
   async getUserStreams(userId: string): Promise<LiveStream[]> {
     // In a real implementation, filter by userId
-    return mockStreams;
+    return mockStreams.filter(stream => stream.creatorId === userId);
   },
 
   /**
@@ -110,7 +126,16 @@ export const streamAPI = {
       throw new Error('Stream not found');
     }
 
-    mockStreams[streamIndex] = { ...mockStreams[streamIndex], ...updates };
+    const currentStream = mockStreams[streamIndex];
+    mockStreams[streamIndex] = { 
+      ...currentStream, 
+      ...updates,
+      // Ensure required fields aren't overwritten with undefined
+      id: currentStream.id,
+      creatorId: updates.creatorId || currentStream.creatorId,
+      creatorName: updates.creatorName || currentStream.creatorName,
+      creatorAvatar: updates.creatorAvatar || currentStream.creatorAvatar
+    };
     return mockStreams[streamIndex];
   },
 
@@ -125,7 +150,7 @@ export const streamAPI = {
 
     const updatedStream = await this.updateStream(id, {
       status: 'live',
-      startedAt: new Date()
+      actualStartTime: new Date()
     });
 
     return updatedStream;
@@ -141,18 +166,21 @@ export const streamAPI = {
     }
 
     const endTime = new Date();
-    const duration = stream.startedAt ? 
-      Math.floor((endTime.getTime() - stream.startedAt.getTime()) / 1000) : 0;
+    const duration = stream.actualStartTime ? 
+      Math.floor((endTime.getTime() - stream.actualStartTime.getTime()) / 1000) : 0;
 
     const updatedStream = await this.updateStream(id, {
       status: 'ended',
-      endedAt: endTime,
-      duration
+      endTime: endTime,
+      stats: {
+        ...stream.stats,
+        duration
+      }
     });
 
     // Create replay
-    if (stream.startedAt) {
-      await this.createReplay(id, stream.title, duration);
+    if (stream.actualStartTime) {
+      await replayAPI.createReplay(id, stream.title, duration);
     }
 
     return updatedStream;
@@ -176,14 +204,13 @@ export const chatAPI = {
   async sendMessage(streamId: string, message: string, userId: string, username: string): Promise<ChatMessage> {
     const chatMessage: ChatMessage = {
       id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-      streamId,
       userId,
       username,
       message,
       timestamp: new Date(),
       type: 'message',
-      isModerated: false,
       isModerator: false,
+      isOwner: false,
       isVerified: false,
       badges: []
     };
@@ -198,14 +225,10 @@ export const chatAPI = {
   async sendSuperChat(streamId: string, message: string, amount: number, userId: string, username: string): Promise<SuperChat> {
     const superChat: SuperChat = {
       id: `super_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-      streamId,
-      userId,
-      username,
-      message,
       amount,
       currency: 'USD',
-      timestamp: new Date(),
-      isHighlighted: amount >= 10,
+      message,
+      color: amount >= 10 ? '#ff4444' : '#4444ff',
       duration: Math.min(amount * 1000, 300000) // Max 5 minutes
     };
 
@@ -214,14 +237,13 @@ export const chatAPI = {
     // Also add as chat message
     const chatMessage: ChatMessage = {
       id: `msg_super_${Date.now()}`,
-      streamId,
       userId,
       username,
       message,
       timestamp: new Date(),
       type: 'super_chat',
-      isModerated: false,
       isModerator: false,
+      isOwner: false,
       isVerified: false,
       badges: [],
       superChat
@@ -235,8 +257,8 @@ export const chatAPI = {
    * Get chat messages for a stream
    */
   async getChatMessages(streamId: string, limit = 50): Promise<ChatMessage[]> {
+    // In a real implementation, filter by streamId
     return mockChatMessages
-      .filter(msg => msg.streamId === streamId)
       .slice(-limit)
       .sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
   },
@@ -247,17 +269,25 @@ export const chatAPI = {
   async moderateMessage(messageId: string, action: ChatModerationAction): Promise<void> {
     const messageIndex = mockChatMessages.findIndex(msg => msg.id === messageId);
     if (messageIndex !== -1) {
+      const message = mockChatMessages[messageIndex];
       switch (action.type) {
         case 'delete':
-          mockChatMessages.splice(messageIndex, 1);
+          message.deleted = true;
+          message.deletedBy = action.moderatorId;
           break;
         case 'timeout':
-          mockChatMessages[messageIndex].isModerated = true;
+          message.deleted = true;
+          message.deletedBy = action.moderatorId;
           break;
         case 'ban':
           // Remove all messages from this user
-          const userId = mockChatMessages[messageIndex].userId;
-          mockChatMessages = mockChatMessages.filter(msg => msg.userId !== userId);
+          const userId = message.userId;
+          mockChatMessages.forEach(msg => {
+            if (msg.userId === userId) {
+              msg.deleted = true;
+              msg.deletedBy = action.moderatorId;
+            }
+          });
           break;
       }
     }
