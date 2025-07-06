@@ -84,11 +84,6 @@ const AllTheProviders = ({
         retry: false,
       },
     },
-    logger: {
-      log: () => {},
-      warn: () => {},
-      error: () => {},
-    },
   });
 
   return (
@@ -115,7 +110,7 @@ const customRender = (
   return render(ui, {
     wrapper: ({ children }) => (
       <AllTheProviders
-        queryClient={queryClient || undefined}
+        queryClient={queryClient}
       >
         {children}
       </AllTheProviders>
@@ -348,11 +343,6 @@ export const createMockQueryClient = () => {
       mutations: {
         retry: false,
       },
-    },
-    logger: {
-      log: () => {},
-      warn: () => {},
-      error: () => {},
     },
   });
 };

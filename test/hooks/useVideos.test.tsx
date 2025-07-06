@@ -4,8 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-
-import { unifiedDataService } from '@services/unifiedDataService';
+import { unifiedDataService } from '../../src/services/unifiedDataService';
 import {
   useUnifiedVideos,
   useUnifiedVideo,
@@ -14,10 +13,10 @@ import {
   useUnifiedSearchVideos,
   useVideoWithRelated,
   useHomePageData,
-} from '@hooks/unified/useVideos';
+} from '../../src/hooks/unified/useVideos';
 
 // Mock the unified data service
-vi.mock('@services/unifiedDataService');
+vi.mock('../../src/services/unifiedDataService');
 
 const mockUnifiedDataService = vi.mocked(unifiedDataService);
 

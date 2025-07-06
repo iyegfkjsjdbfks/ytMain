@@ -23,17 +23,7 @@
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/pages/*": ["./src/pages/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/services/*": ["./src/services/*"],
-      "@/store/*": ["./src/store/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/assets/*": ["./src/assets/*"],
-      "@/lib/*": ["./src/lib/*"]
+      "@/*": ["./src/*"]
     },
 
     /* Additional options */
@@ -62,28 +52,7 @@
     /* Module resolution */
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": [
-    "src/**/*",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*",
-    "test/**/*",
-    "*.ts",
-    "*.tsx",
-    "vite-env.d.ts",
-    "components/**/*",
-    "pages/**/*",
-    "hooks/**/*",
-    "utils/**/*",
-    "services/**/*",
-    "contexts/**/*",
-    "store/**/*",
-    "types/**/*",
-    "config/**/*",
-    "providers/**/*",
-    "scripts/**/*"
-  ],
+  "include": ["src", "test"],
   "exclude": [
     "node_modules",
     "dist",

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 
-import ErrorBoundary from '@components/ErrorBoundary';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 // Mock console.error to avoid noise in test output
 const originalError = console.error;
