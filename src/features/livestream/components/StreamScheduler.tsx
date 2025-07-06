@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import type { LiveStream } from '../../../types/livestream';
-import { liveStreamService } from '../../../services/liveStreamService';
+import { liveStreamService } from '../../../services/livestreamAPI';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: LiveStream) => void;
@@ -52,25 +52,8 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   ];
 
   useEffect(() => {
-    // Load scheduled streams - for now, just use empty array
-    // In a real implementation, this would load from the service
-    setScheduledStreams([]);
-
-    const handleStreamUpdated = (stream: LiveStream) => {
-      setScheduledStreams(prev => prev.map(s => s.id === stream.id ? stream : s));
-    };
-
-    const handleStreamDeleted = (streamId: string) => {
-      setScheduledStreams(prev => prev.filter(s => s.id !== streamId));
-    };
-
-    liveStreamService.on('stream_updated', handleStreamUpdated);
-    liveStreamService.on('stream_deleted', handleStreamDeleted);
-
-    return () => {
-      liveStreamService.off('stream_updated', handleStreamUpdated);
-      liveStreamService.off('stream_deleted', handleStreamDeleted);
-    };
+    // Load scheduled streams
+    liveStreamService.scheduling.getScheduledStreams().then(setScheduledStreams);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,7 +71,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       };
 
       // Create a new scheduled stream using the existing createStream method
-      const stream = await liveStreamService.createStream(streamData);
+      const stream = await liveStreamService.streams.createStream(streamData);
 
       setScheduledStreams(prev => {
         if (editingStream) {
@@ -122,7 +105,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const handleStartStream = async (streamId: string) => {
     try {
       // Start the scheduled stream
-      await liveStreamService.startStream(streamId);
+      await liveStreamService.streams.startStream(streamId);
     } catch (error) {
       console.error('Failed to start stream:', error);
     }

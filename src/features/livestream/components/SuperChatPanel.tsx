@@ -7,8 +7,8 @@ import {
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
 
-import type { SuperChat, ChatMessage } from '../../../types/livestream';
-import { liveStreamService } from '../../../services/liveStreamService';
+import type { SuperChat } from '../../../types/livestream';
+import { liveStreamService } from '../../../services/livestreamAPI';
 
 interface SuperChatPanelProps {
   streamId: string;
@@ -37,38 +37,32 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   ];
 
   useEffect(() => {
-    const handleSuperChat = (message: ChatMessage) => {
-      if (message.superChat && message.type === 'super_chat') {
-        setSuperChats(prev => [message.superChat!, ...prev]);
-        setTotalRevenue(prev => prev + message.superChat!.amount);
-      }
-    };
-
-    liveStreamService.on('chat_message', handleSuperChat);
-
-    // Load existing super chats
-    const existingMessages = liveStreamService.getChatMessages(streamId);
-    const existingSuperChats = existingMessages
-      .filter(msg => msg.superChat)
-      .map(msg => msg.superChat!)
-      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-    
-    setSuperChats(existingSuperChats);
-    setTotalRevenue(existingSuperChats.reduce((sum, sc) => sum + sc.amount, 0));
-
-    return () => {
-      liveStreamService.off('chat_message', handleSuperChat);
-    };
+    // Load existing super chats from API
+    liveStreamService.chat.getChatMessages(streamId).then(messages => {
+      const existingSuperChats = messages
+        .filter(msg => msg.superChat)
+        .map(msg => msg.superChat!)
+        .sort((a, b) => {
+          const aTime = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+          const bTime = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+          return bTime - aTime;
+        });
+      
+      setSuperChats(existingSuperChats);
+      setTotalRevenue(existingSuperChats.reduce((sum, sc) => sum + sc.amount, 0));
+    });
   }, [streamId]);
 
   const handleSendSuperChat = async () => {
     if (!newSuperChat.message.trim() || newSuperChat.amount < 1) return;
 
     try {
-      await liveStreamService.sendSuperChat(
+      await liveStreamService.chat.sendSuperChat(
         streamId, 
         newSuperChat.message.trim(),
-        newSuperChat.amount
+        newSuperChat.amount,
+        'user_123',
+        'Current User'
       );
 
       setNewSuperChat({ amount: 5, message: '' });
@@ -276,7 +270,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                     {superChat.username}
                   </span>
                   <span className="text-xs text-gray-500">
-                    {formatTimestamp(superChat.timestamp)}
+                    {formatTimestamp(superChat.timestamp || new Date())}
                   </span>
                 </div>
                 <div className={`px-2 py-1 rounded text-white text-sm font-bold ${getTierColor(superChat.amount)}`}>

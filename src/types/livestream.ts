@@ -93,14 +93,14 @@ export interface ChatMessage {
 
 export interface SuperChat {
   id: string;
+  userId?: string;
+  username?: string;
   amount: number;
   currency: string;
   message: string;
+  timestamp?: Date;
   color: string;
-  duration: number; // seconds to pin
-  userId: string;
-  username: string;
-  timestamp: Date;
+  duration: number;
 }
 
 export interface ChatBadge {
@@ -119,14 +119,14 @@ export interface MembershipInfo {
 
 export interface LivePoll {
   id: string;
+  streamId?: string;
   question: string;
   options: PollOption[];
-  duration: number; // seconds
-  startTime: Date;
-  endTime?: Date;
-  totalVotes: number;
   isActive: boolean;
-  createdBy: string;
+  totalVotes: number;
+  createdAt: Date;
+  duration: number; // in milliseconds
+  endedAt?: Date;
 }
 
 export interface PollOption {
@@ -138,15 +138,17 @@ export interface PollOption {
 
 export interface QAQuestion {
   id: string;
-  question: string;
-  askedBy: string;
+  streamId?: string;
   userId: string;
-  timestamp: Date;
-  likes: number;
-  answered: boolean;
-  answeredAt?: Date;
+  username: string;
+  question: string;
   answer?: string;
-  pinned: boolean;
+  answered: boolean;
+  isAnswered?: boolean;
+  timestamp: Date;
+  answeredAt?: Date;
+  isHighlighted: boolean;
+  upvotes?: number;
 }
 
 export interface ChatModerationAction {
@@ -162,13 +164,13 @@ export interface StreamReplay {
   id: string;
   streamId: string;
   title: string;
+  description?: string;
   thumbnailUrl: string;
   videoUrl: string;
   duration: number;
-  chatMessages: ChatMessage[];
-  highlights: StreamHighlight[];
-  stats: LiveStreamStats;
   createdAt: Date;
+  views: number;
+  isProcessing?: boolean;
 }
 
 export interface StreamHighlight {

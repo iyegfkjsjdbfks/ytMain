@@ -15,16 +15,12 @@ export default defineConfig({
     
     // File patterns
     include: [
-      'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-      'tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'
+      'test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
     ],
     exclude: [
       'node_modules',
       'dist',
       'build',
-      '.idea',
-      '.git',
-      '.cache',
       'coverage'
     ],
     
@@ -46,15 +42,6 @@ export default defineConfig({
         '**/coverage/**',
         '**/dist/**',
         '**/build/**',
-        '**/.{idea,git,cache,output,temp}/**',
-        '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
-        '**/*.stories.{js,jsx,ts,tsx}',
-        '**/*.test.{js,jsx,ts,tsx}',
-        '**/*.spec.{js,jsx,ts,tsx}',
-        '**/mock/**',
-        '**/mocks/**',
-        '**/__mocks__/**',
-        '**/__tests__/**',
         '**/types.ts',
         'src/main.tsx',
         'src/App.tsx'

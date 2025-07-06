@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   QuestionMarkCircleIcon,
   HeartIcon,
@@ -7,8 +7,7 @@ import {
   MicrophoneIcon,
 } from '@heroicons/react/24/outline';
 
-import type { QAQuestion } from '../../../types/livestream';
-import { liveStreamService } from '../../../services/liveStreamService';
+import { useLiveQA } from '../../../hooks/useLiveStream';
 
 interface LiveQAProps {
   streamId: string;
@@ -21,47 +20,17 @@ const LiveQA: React.FC<LiveQAProps> = ({
   isOwner,
   className = '',
 }) => {
-  const [questions, setQuestions] = useState<QAQuestion[]>([]);
+  const { questions, submitQuestion, answerQuestion, upvoteQuestion } = useLiveQA(streamId);
   const [newQuestion, setNewQuestion] = useState('');
   const [filter, setFilter] = useState<'all' | 'unanswered' | 'answered' | 'pinned'>('all');
   const [answerMode, setAnswerMode] = useState<string | null>(null);
   const [answerText, setAnswerText] = useState('');
 
-  useEffect(() => {
-    const handleQuestionAdded = (question: QAQuestion) => {
-      setQuestions(prev => [question, ...prev]);
-    };
-
-    const handleQuestionUpdated = (question: QAQuestion) => {
-      setQuestions(prev => prev.map(q => q.id === question.id ? question : q));
-    };
-
-    const handleQuestionLiked = (data: { questionId: string; likes: number }) => {
-      setQuestions(prev => prev.map(q => 
-        q.id === data.questionId ? { ...q, likes: data.likes } : q
-      ));
-    };
-
-    liveStreamService.on('qa_question_added', handleQuestionAdded);
-    liveStreamService.on('qa_question_updated', handleQuestionUpdated);
-    liveStreamService.on('qa_question_liked', handleQuestionLiked);
-
-    // Load existing questions
-    const existingQuestions = liveStreamService.getQuestions(streamId);
-    setQuestions(existingQuestions);
-
-    return () => {
-      liveStreamService.off('qa_question_added', handleQuestionAdded);
-      liveStreamService.off('qa_question_updated', handleQuestionUpdated);
-      liveStreamService.off('qa_question_liked', handleQuestionLiked);
-    };
-  }, [streamId]);
-
   const handleSubmitQuestion = async () => {
     if (!newQuestion.trim()) return;
 
     try {
-      await liveStreamService.submitQuestion(streamId, newQuestion.trim());
+      await submitQuestion(newQuestion.trim());
       setNewQuestion('');
     } catch (error) {
       console.error('Failed to submit question:', error);
@@ -70,8 +39,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
   const handleLikeQuestion = async (questionId: string) => {
     try {
-      // TODO: Implement like functionality in service
-      console.log('Like question:', questionId);
+      await upvoteQuestion(questionId);
     } catch (error) {
       console.error('Failed to like question:', error);
     }
@@ -90,7 +58,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     if (!answerText.trim()) return;
 
     try {
-      await liveStreamService.answerQuestion(streamId, questionId, answerText.trim());
+      await answerQuestion(questionId, answerText.trim());
       setAnswerMode(null);
       setAnswerText('');
     } catch (error) {
@@ -112,19 +80,21 @@ const LiveQA: React.FC<LiveQAProps> = ({
       case 'answered':
         return question.answered;
       case 'pinned':
-        return question.pinned;
+        return question.isHighlighted; // Use isHighlighted as pinned
       default:
         return true;
     }
   });
 
   const sortedQuestions = filteredQuestions.sort((a, b) => {
-    // Pinned questions first
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
+    // Highlighted questions first
+    if (a.isHighlighted && !b.isHighlighted) return -1;
+    if (!a.isHighlighted && b.isHighlighted) return 1;
     
-    // Then by likes
-    if (a.likes !== b.likes) return b.likes - a.likes;
+    // Then by upvotes
+    const aUpvotes = a.upvotes || 0;
+    const bUpvotes = b.upvotes || 0;
+    if (aUpvotes !== bUpvotes) return bUpvotes - aUpvotes;
     
     // Then by timestamp
     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
@@ -169,7 +139,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
           { key: 'all', label: 'All', count: questions.length },
           { key: 'unanswered', label: 'Unanswered', count: questions.filter(q => !q.answered).length },
           { key: 'answered', label: 'Answered', count: questions.filter(q => q.answered).length },
-          { key: 'pinned', label: 'Pinned', count: questions.filter(q => q.pinned).length },
+          { key: 'pinned', label: 'Pinned', count: questions.filter(q => q.isHighlighted).length },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -191,7 +161,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
           <div
             key={question.id}
             className={`p-4 border rounded-lg ${
-              question.pinned ? 'border-yellow-300 bg-yellow-50' :
+              question.isHighlighted ? 'border-yellow-300 bg-yellow-50' :
               question.answered ? 'border-green-300 bg-green-50' :
               'border-gray-200 bg-white'
             }`}
@@ -199,17 +169,17 @@ const LiveQA: React.FC<LiveQAProps> = ({
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center space-x-2">
                 <img
-                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${question.askedBy}`}
-                  alt={question.askedBy}
+                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${question.username}`}
+                  alt={question.username}
                   className="w-6 h-6 rounded-full"
                 />
                 <span className="font-medium text-sm text-gray-900">
-                  {question.askedBy}
+                  {question.username}
                 </span>
                 <span className="text-xs text-gray-500">
                   {formatTimestamp(question.timestamp)}
                 </span>
-                {question.pinned && (
+                {question.isHighlighted && (
                   <span className="text-yellow-500 text-xs font-bold">📌</span>
                 )}
                 {question.answered && (
@@ -222,9 +192,9 @@ const LiveQA: React.FC<LiveQAProps> = ({
                   <button
                     onClick={() => handlePinQuestion(question.id)}
                     className={`p-1 rounded hover:bg-gray-100 ${
-                      question.pinned ? 'text-yellow-500' : 'text-gray-400'
+                      question.isHighlighted ? 'text-yellow-500' : 'text-gray-400'
                     }`}
-                    title={question.pinned ? 'Unpin question' : 'Pin question'}
+                    title={question.isHighlighted ? 'Unpin question' : 'Pin question'}
                   >
                     <span className="text-yellow-500">📌</span>
                   </button>
@@ -296,7 +266,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
                 className="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors"
               >
                 <HeartIcon className="w-4 h-4" />
-                <span className="text-sm">{question.likes}</span>
+                <span className="text-sm">{question.upvotes || 0}</span>
               </button>
 
               <div className="flex items-center space-x-2 text-xs text-gray-500">

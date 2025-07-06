@@ -22,11 +22,13 @@ import {
   getAllPageConfigurations,
   getPageDisplayName,
   getPlayerUsageByPage,
+  setPagePlayerConfig,
   type YouTubeSearchProvider,
   type YouTubePlayerType,
   type LocalVideoPlayerType,
   type VideoPlayerConfig,
   type PageType,
+  type PagePlayerConfig,
 } from '../services/settingsService';
 
 
@@ -47,6 +49,7 @@ const AdminPage: React.FC = () => {
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
+  const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   
   // YouTube Metadata Debug state
   const [youtubeMetadataTest, setYoutubeMetadataTest] = useState<any>(null);
@@ -561,6 +564,10 @@ const AdminPage: React.FC = () => {
   };
 
   const pageConfigurations = getAllPageConfigurations();
+
+  const handleDefaultCategoryChange = (category: 'youtube' | 'local') => {
+    setDefaultCategory(category);
+  };
 
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   PlusIcon,
   ClockIcon,
@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import type { LivePoll } from '../../../types/livestream';
-import { liveStreamService } from '../../../services/liveStreamService';
+import { useLivePolls } from '../../../hooks/useLiveStream';
 
 interface LivePollsProps {
   streamId: string;
@@ -22,7 +22,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
   isOwner,
   className = '',
 }) => {
-  const [polls, setPolls] = useState<LivePoll[]>([]);
+  const { polls, createPoll, votePoll } = useLivePolls(streamId);
   const [activePoll, setActivePoll] = useState<LivePoll | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newPoll, setNewPoll] = useState({
@@ -31,67 +31,11 @@ const LivePolls: React.FC<LivePollsProps> = ({
     duration: 60, // seconds
   });
 
-  useEffect(() => {
-    const handlePollCreated = (poll: LivePoll) => {
-      setPolls(prev => [...prev, poll]);
-      if (poll.isActive) {
-        setActivePoll(poll);
-      }
-    };
-
-    const handlePollUpdated = (poll: LivePoll) => {
-      setPolls(prev => prev.map(p => p.id === poll.id ? poll : p));
-      if (poll.isActive) {
-        setActivePoll(poll);
-      } else if (activePoll?.id === poll.id) {
-        setActivePoll(null);
-      }
-    };
-
-    const handlePollVote = (data: { pollId: string; optionId: string }) => {
-      setPolls(prev => prev.map(poll => {
-        if (poll.id === data.pollId) {
-          const updatedOptions = poll.options.map(option => {
-            if (option.id === data.optionId) {
-              return { ...option, votes: option.votes + 1 };
-            }
-            return option;
-          });
-          const totalVotes = updatedOptions.reduce((sum, opt) => sum + opt.votes, 0);
-          const updatedOptionsWithPercentage = updatedOptions.map(option => ({
-            ...option,
-            percentage: totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0,
-          }));
-          const updatedPoll = { 
-            ...poll, 
-            options: updatedOptionsWithPercentage,
-            totalVotes 
-          };
-          if (activePoll?.id === poll.id) {
-            setActivePoll(updatedPoll);
-          }
-          return updatedPoll;
-        }
-        return poll;
-      }));
-    };
-
-    liveStreamService.on('poll_created', handlePollCreated);
-    liveStreamService.on('poll_updated', handlePollUpdated);
-    liveStreamService.on('poll_vote', handlePollVote);
-
-    // Load existing polls - for now, just use empty array
-    // In a real implementation, this would load from the service
-    setPolls([]);
-    const active = polls.find((p: LivePoll) => p.isActive);
-    if (active) setActivePoll(active);
-
-    return () => {
-      liveStreamService.off('poll_created', handlePollCreated);
-      liveStreamService.off('poll_updated', handlePollUpdated);
-      liveStreamService.off('poll_vote', handlePollVote);
-    };
-  }, [streamId, activePoll?.id]);
+  // Set active poll from the polls returned by the hook
+  React.useEffect(() => {
+    const active = polls.find(p => p.isActive);
+    setActivePoll(active || null);
+  }, [polls]);
 
   const handleCreatePoll = async () => {
     if (!newPoll.question.trim() || newPoll.options.some(opt => !opt.trim())) {
@@ -99,11 +43,9 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
 
     try {
-      await liveStreamService.createPoll(
-        streamId, 
+      await createPoll(
         newPoll.question,
-        newPoll.options.filter(opt => opt.trim()),
-        newPoll.duration
+        newPoll.options.filter(opt => opt.trim())
       );
 
       setNewPoll({ question: '', options: ['', ''], duration: 60 });
@@ -115,7 +57,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
   const handleVote = async (pollId: string, optionId: string) => {
     try {
-      await liveStreamService.votePoll(pollId, optionId);
+      await votePoll(pollId, optionId);
     } catch (error) {
       console.error('Failed to vote:', error);
     }
@@ -159,8 +101,9 @@ const LivePolls: React.FC<LivePollsProps> = ({
   };
 
   const getTimeRemaining = (poll: LivePoll) => {
-    if (!poll.isActive || !poll.endTime) return 0;
-    return Math.max(0, Math.floor((poll.endTime.getTime() - Date.now()) / 1000));
+    if (!poll.isActive) return 0;
+    const endTime = new Date(poll.createdAt.getTime() + poll.duration);
+    return Math.max(0, Math.floor((endTime.getTime() - Date.now()) / 1000));
   };
 
   return (
