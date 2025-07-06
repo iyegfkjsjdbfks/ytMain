@@ -1,12 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
-import type { 
-  LiveStream, 
-  ChatMessage, 
-  LivePoll, 
-  QAQuestion,
-  ChatModerationAction
-} from '../types/livestream';
+
 import { liveStreamService } from '../services/livestreamAPI';
+
+import type {
+  LiveStream,
+  ChatMessage,
+  LivePoll,
+  QAQuestion,
+  ChatModerationAction,
+} from '../types/livestream';
 
 /**
  * Hook for managing live stream state and operations
@@ -71,7 +73,7 @@ export const useLiveStream = () => {
     createStream,
     startStream,
     endStream,
-    setStream
+    setStream,
   };
 };
 
@@ -83,13 +85,15 @@ export const useLiveChat = (streamId?: string) => {
   const [isConnected, setIsConnected] = useState(false);
 
   const sendMessage = useCallback(async (message: string) => {
-    if (!streamId) return;
+    if (!streamId) {
+return;
+}
     try {
       const chatMessage = await liveStreamService.chat.sendMessage(
-        streamId, 
-        message, 
-        'user_123', 
-        'Current User'
+        streamId,
+        message,
+        'user_123',
+        'Current User',
       );
       setMessages(prev => [...prev, chatMessage]);
       return chatMessage;
@@ -100,14 +104,16 @@ export const useLiveChat = (streamId?: string) => {
   }, [streamId]);
 
   const sendSuperChat = useCallback(async (message: string, amount: number) => {
-    if (!streamId) return;
+    if (!streamId) {
+return;
+}
     try {
       const superChat = await liveStreamService.chat.sendSuperChat(
         streamId,
         message,
         amount,
         'user_123',
-        'Current User'
+        'Current User',
       );
       return superChat;
     } catch (err) {
@@ -130,10 +136,10 @@ export const useLiveChat = (streamId?: string) => {
     if (streamId) {
       // Simulate WebSocket connection
       setIsConnected(true);
-      
+
       // Load initial messages
       liveStreamService.chat.getChatMessages(streamId).then(setMessages);
-      
+
       // Simulate receiving messages
       const interval = setInterval(() => {
         if (Math.random() > 0.7) {
@@ -147,7 +153,7 @@ export const useLiveChat = (streamId?: string) => {
             isModerator: false,
             isOwner: false,
             isVerified: false,
-            badges: []
+            badges: [],
           };
           setMessages(prev => [...prev, randomMessage]);
         }
@@ -166,7 +172,7 @@ export const useLiveChat = (streamId?: string) => {
     isConnected,
     sendMessage,
     sendSuperChat,
-    moderateMessage
+    moderateMessage,
   };
 };
 
@@ -177,7 +183,9 @@ export const useLivePolls = (streamId?: string) => {
   const [polls, setPolls] = useState<LivePoll[]>([]);
 
   const createPoll = useCallback(async (question: string, options: string[]) => {
-    if (!streamId) return;
+    if (!streamId) {
+return;
+}
     try {
       const poll = await liveStreamService.polls.createPoll(streamId, question, options);
       setPolls(prev => [...prev, poll]);
@@ -191,8 +199,8 @@ export const useLivePolls = (streamId?: string) => {
   const votePoll = useCallback(async (pollId: string, optionId: string) => {
     try {
       const updatedPoll = await liveStreamService.polls.votePoll(pollId, optionId);
-      setPolls(prev => prev.map(poll => 
-        poll.id === pollId ? updatedPoll : poll
+      setPolls(prev => prev.map(poll =>
+        poll.id === pollId ? updatedPoll : poll,
       ));
       return updatedPoll;
     } catch (err) {
@@ -204,8 +212,8 @@ export const useLivePolls = (streamId?: string) => {
   const endPoll = useCallback(async (pollId: string) => {
     try {
       const updatedPoll = await liveStreamService.polls.endPoll(pollId);
-      setPolls(prev => prev.map(poll => 
-        poll.id === pollId ? updatedPoll : poll
+      setPolls(prev => prev.map(poll =>
+        poll.id === pollId ? updatedPoll : poll,
       ));
       return updatedPoll;
     } catch (err) {
@@ -224,7 +232,7 @@ export const useLivePolls = (streamId?: string) => {
     polls,
     createPoll,
     votePoll,
-    endPoll
+    endPoll,
   };
 };
 
@@ -235,13 +243,15 @@ export const useLiveQA = (streamId?: string) => {
   const [questions, setQuestions] = useState<QAQuestion[]>([]);
 
   const submitQuestion = useCallback(async (question: string) => {
-    if (!streamId) return;
+    if (!streamId) {
+return;
+}
     try {
       const qaQuestion = await liveStreamService.qa.submitQuestion(
         streamId,
         question,
         'user_123',
-        'Current User'
+        'Current User',
       );
       setQuestions(prev => [...prev, qaQuestion]);
       return qaQuestion;
@@ -254,8 +264,8 @@ export const useLiveQA = (streamId?: string) => {
   const answerQuestion = useCallback(async (questionId: string, answer: string) => {
     try {
       const updatedQuestion = await liveStreamService.qa.answerQuestion(questionId, answer);
-      setQuestions(prev => prev.map(q => 
-        q.id === questionId ? updatedQuestion : q
+      setQuestions(prev => prev.map(q =>
+        q.id === questionId ? updatedQuestion : q,
       ));
       return updatedQuestion;
     } catch (err) {
@@ -267,8 +277,8 @@ export const useLiveQA = (streamId?: string) => {
   const upvoteQuestion = useCallback(async (questionId: string) => {
     try {
       const updatedQuestion = await liveStreamService.qa.upvoteQuestion(questionId);
-      setQuestions(prev => prev.map(q => 
-        q.id === questionId ? updatedQuestion : q
+      setQuestions(prev => prev.map(q =>
+        q.id === questionId ? updatedQuestion : q,
       ));
       return updatedQuestion;
     } catch (err) {
@@ -287,6 +297,6 @@ export const useLiveQA = (streamId?: string) => {
     questions,
     submitQuestion,
     answerQuestion,
-    upvoteQuestion
+    upvoteQuestion,
   };
 };

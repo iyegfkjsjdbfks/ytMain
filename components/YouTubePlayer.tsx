@@ -271,7 +271,7 @@ return;
               150: 'Video not available in embedded players',
             };
             const message = errorMessages[event.data] || 'Unknown error occurred';
-            
+
             // For embedding errors (101, 150), show a more user-friendly message
             if (event.data === 101 || event.data === 150) {
               console.debug('Video cannot be embedded, this is expected for some videos');

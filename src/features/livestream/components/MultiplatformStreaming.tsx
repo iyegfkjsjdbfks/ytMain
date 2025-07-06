@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import {
   GlobeAltIcon,
   ExclamationCircleIcon,
@@ -135,7 +137,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
     setPlatforms(prev => prev.map(platform => {
       if (platform.name === platformName) {
         const enabled = !platform.enabled;
-        
+
         // Update platform stats when toggling
         setPlatformStats(prevStats => {
           const prevStat = prevStats[platformName];
@@ -158,7 +160,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
 
   const handleUpdatePlatformSettings = (
     platformName: StreamPlatform['name'],
-    settings: Partial<StreamPlatform['settings']>
+    settings: Partial<StreamPlatform['settings']>,
   ) => {
     setPlatforms(prev => prev.map(platform => {
       if (platform.name === platformName) {
@@ -217,7 +219,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
           <GlobeAltIcon className="w-5 h-5 text-gray-600" />
           <span className="font-medium text-gray-900">Multi-Platform Streaming</span>
         </div>
-        
+
         <div className="flex items-center space-x-4 text-sm">
           <div className="flex items-center space-x-1">
             <EyeIcon className="w-4 h-4 text-gray-500" />
@@ -237,9 +239,11 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
         {platforms.map((platform) => {
           const config = getPlatformConfig(platform.name);
           const stats = platformStats[platform.name];
-          
-          if (!stats) return null;
-          
+
+          if (!stats) {
+return null;
+}
+
           return (
             <div
               key={platform.name}
@@ -260,7 +264,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setShowSettings(showSettings === platform.name ? null : platform.name)}
@@ -268,7 +272,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                   >
                     <Cog6ToothIcon className="w-4 h-4" />
                   </button>
-                  
+
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
@@ -279,7 +283,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                     />
                     <div className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 ${
                       isStreaming ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}></div>
+                    }`} />
                   </label>
                 </div>
               </div>
@@ -318,7 +322,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                       />
                     </div>
                   )}
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Quality
@@ -333,7 +337,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                       ))}
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Bitrate (kbps)
@@ -350,7 +354,7 @@ const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                       Max for {config.displayName}: {config.maxBitrate} kbps
                     </p>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <input
                       type="checkbox"

@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -29,24 +31,26 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
     if (video.id.startsWith('google-search-')) {
       return video.id.replace('google-search-', '');
     }
-    
+
     // Try to extract from videoUrl if available
     if (video.videoUrl) {
       return getYouTubeVideoId(video.videoUrl);
     }
-    
+
     // If id looks like a YouTube video ID (11 characters)
     if (video.id.length === 11 && /^[a-zA-Z0-9_-]+$/.test(video.id)) {
       return video.id;
     }
-    
+
     return null;
   };
 
   const videoId = getVideoId(video);
 
   const formatDuration = (duration: string | number) => {
-    if (typeof duration === 'string') return duration;
+    if (typeof duration === 'string') {
+return duration;
+}
     if (typeof duration === 'number') {
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
@@ -69,7 +73,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    
+
     // Clear any existing hide timeout
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
@@ -86,7 +90,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    
+
     // Clear the hover timeout if user leaves before delay completes
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
@@ -112,7 +116,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
   }, []);
 
   return (
-    <div 
+    <div
       className={`group cursor-pointer ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -128,27 +132,27 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
               className="absolute inset-0 w-full h-full object-cover rounded-xl"
               loading="lazy"
             />
-            
+
             {/* Animated preview overlay */}
             {showPreview && videoId && (
               <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden">
                 {/* Enhanced preview effect with animated elements */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 via-transparent to-red-600/20 animate-pulse" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/30" />
-                
+
                 {/* Animated play icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-red-600 bg-opacity-90 rounded-full p-4 transform scale-110 animate-pulse">
-                    <svg 
-                      className="w-10 h-10 text-white animate-pulse" 
-                      fill="currentColor" 
+                    <svg
+                      className="w-10 h-10 text-white animate-pulse"
+                      fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   </div>
                 </div>
-                
+
                 {/* Preview indicators */}
                 <div className="absolute top-3 left-3 flex gap-2">
                   <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
@@ -158,7 +162,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
                     HD
                   </div>
                 </div>
-                
+
                 {/* Animated progress bar */}
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
@@ -167,14 +171,14 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
                 </div>
               </div>
             )}
-            
+
             {/* Play button overlay - shown on hover when not in preview mode */}
             {isHovered && !showPreview && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-all duration-200">
                 <div className="bg-black bg-opacity-70 rounded-full p-3 transform scale-110 transition-transform duration-200">
-                  <svg 
-                    className="w-8 h-8 text-white" 
-                    fill="currentColor" 
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M8 5v14l11-7z"/>
@@ -182,7 +186,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
                 </div>
               </div>
             )}
-            
+
             {/* Duration Badge */}
             {video.duration && video.duration !== '0:00' && (
               <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-all duration-200 ${
@@ -191,7 +195,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
                 {formatDuration(video.duration)}
               </div>
             )}
-            
+
             {/* Hover indicator during delay */}
             {isHovered && !showPreview && videoId && (
               <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-sm font-medium animate-fade-in">
@@ -252,12 +256,12 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
                 } catch {
                   return 'Recently';
                 }
-              })()} 
+              })()}
             </span>
           </div>
         </div>
       </div>
-      
+
       {/* Custom CSS animations */}
       <style>{`
         @keyframes fade-in {

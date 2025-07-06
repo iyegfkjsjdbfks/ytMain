@@ -1,9 +1,9 @@
 import React, { memo, useMemo, useState, useEffect, useCallback } from 'react';
 
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { withMemo } from '../utils/componentOptimizations';
 import { performanceMonitor } from '../utils/performance';
-import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
 import OptimizedVideoCard from './OptimizedVideoCard';
 
@@ -128,9 +128,11 @@ const YouTubeSearchResultCard: React.FC<{
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
 }> = memo(({ item, onVideoClick }) => {
   const convertedVideo = convertToVideo(item);
-  
+
   const formatDuration = (duration: string | number) => {
-    if (typeof duration === 'string') return duration;
+    if (typeof duration === 'string') {
+return duration;
+}
     if (typeof duration === 'number') {
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
@@ -156,12 +158,22 @@ const YouTubeSearchResultCard: React.FC<{
       const date = new Date(dateStr);
       const now = new Date();
       const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-      
-      if (diffInSeconds < 60) return 'Just now';
-      if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-      if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-      if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-      if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+
+      if (diffInSeconds < 60) {
+return 'Just now';
+}
+      if (diffInSeconds < 3600) {
+return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+}
+      if (diffInSeconds < 86400) {
+return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+}
+      if (diffInSeconds < 2592000) {
+return `${Math.floor(diffInSeconds / 86400)} days ago`;
+}
+      if (diffInSeconds < 31536000) {
+return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+}
       return `${Math.floor(diffInSeconds / 31536000)} years ago`;
     } catch {
       return 'Recently';
@@ -180,7 +192,7 @@ const YouTubeSearchResultCard: React.FC<{
   };
 
   return (
-    <div 
+    <div
       className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
       onClick={handleCardClick}
     >
@@ -188,8 +200,8 @@ const YouTubeSearchResultCard: React.FC<{
       <div className="relative flex-shrink-0">
         <div className="w-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
           {videoId ? (
-            <div 
-              className="w-full h-full" 
+            <div
+              className="w-full h-full"
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
@@ -226,7 +238,7 @@ const YouTubeSearchResultCard: React.FC<{
         <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {convertedVideo.title}
         </h3>
-        
+
         {/* Minimal metadata line - YouTube style */}
         <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
           <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
@@ -306,7 +318,9 @@ const FiltersModal: React.FC<{
   filters: SearchFilters;
   onFiltersChange: (filters: SearchFilters) => void;
 }> = memo(({ isOpen, onClose, filters, onFiltersChange }) => {
-  if (!isOpen) return null;
+  if (!isOpen) {
+return null;
+}
 
   const updateFilter = (key: keyof SearchFilters, value: any) => {
     onFiltersChange({ ...filters, [key]: value });
@@ -557,7 +571,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   const applyFilters = useCallback((results: any[], filters: SearchFilters) => {
     return results.filter(item => {
       const video = 'duration' in item ? item : convertToVideo(item);
-      
+
       // Duration filter
       if (filters.duration !== 'any') {
         if (typeof video.duration === 'string') {
@@ -565,27 +579,39 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
           if (parts.length === 2 && parts[0] && parts[1]) {
             const minutes = parseInt(parts[0], 10);
             const totalSeconds = minutes * 60 + parseInt(parts[1], 10);
-            
+
             switch (filters.duration) {
               case 'short':
-                if (totalSeconds > 240) return false; // Under 4 minutes
+                if (totalSeconds > 240) {
+return false;
+} // Under 4 minutes
                 break;
               case 'medium':
-                if (totalSeconds <= 240 || totalSeconds > 1200) return false; // 4-20 minutes
+                if (totalSeconds <= 240 || totalSeconds > 1200) {
+return false;
+} // 4-20 minutes
                 break;
               case 'long':
-                if (totalSeconds <= 1200) return false; // Over 20 minutes
+                if (totalSeconds <= 1200) {
+return false;
+} // Over 20 minutes
                 break;
             }
           }
         }
       }
-      
+
       // Features filter
-      if (filters.features.live && !video.isLive) return false;
-      if (filters.features.hd && !video.title.toLowerCase().includes('hd')) return false;
-      if (filters.features.subtitles && !video.title.toLowerCase().includes('subtitle')) return false;
-      
+      if (filters.features.live && !video.isLive) {
+return false;
+}
+      if (filters.features.hd && !video.title.toLowerCase().includes('hd')) {
+return false;
+}
+      if (filters.features.subtitles && !video.title.toLowerCase().includes('subtitle')) {
+return false;
+}
+
       return true;
     });
   }, []);
@@ -703,60 +729,60 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       {/* YouTube-style filter tabs */}
       <div className="mb-4 px-4">
         <div className="flex items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
-          <button 
+          <button
             onClick={() => setActiveTab('all')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'all' 
+              activeTab === 'all'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             All
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('videos')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'videos' 
+              activeTab === 'videos'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Videos
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('channels')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'channels' 
+              activeTab === 'channels'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Channels
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('playlists')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'playlists' 
+              activeTab === 'playlists'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Playlists
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('live')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'live' 
+              activeTab === 'live'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Live
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('shorts')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'shorts' 
+              activeTab === 'shorts'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
@@ -764,7 +790,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
             Shorts
           </button>
           <div className="flex-shrink-0 w-px h-6 bg-gray-300 dark:bg-gray-600 mx-2" />
-          <button 
+          <button
             onClick={() => setIsFiltersOpen(true)}
             className="flex-shrink-0 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-1"
           >

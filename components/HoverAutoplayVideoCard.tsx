@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import type React from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -19,7 +21,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
   const [iframeKey, setIframeKey] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   // Configuration constants
   const HOVER_DELAY = 500; // Delay before showing video preview in milliseconds
   const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds
@@ -33,24 +35,26 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
     if (video.id.startsWith('google-search-')) {
       return video.id.replace('google-search-', '');
     }
-    
+
     // Try to extract from videoUrl if available
     if (video.videoUrl) {
       return getYouTubeVideoId(video.videoUrl);
     }
-    
+
     // If id looks like a YouTube video ID (11 characters)
     if (video.id.length === 11 && /^[a-zA-Z0-9_-]+$/.test(video.id)) {
       return video.id;
     }
-    
+
     return null;
   };
 
   const videoId = getVideoId(video);
 
   const formatDuration = (duration: string | number) => {
-    if (typeof duration === 'string') return duration;
+    if (typeof duration === 'string') {
+return duration;
+}
     if (typeof duration === 'number') {
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
@@ -73,7 +77,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    
+
     // Clear any existing hide timeout
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
@@ -91,7 +95,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    
+
     // Clear the hover timeout if user leaves before delay completes
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
@@ -105,7 +109,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
       setIsMuted(true);
     }, HIDE_DELAY);
   };
-  
+
   // Handle iframe errors
   const handleIframeError = () => {
     console.warn('YouTube iframe failed to load for video:', videoId);
@@ -135,7 +139,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
   }, []);
 
   return (
-    <div 
+    <div
       className={`group cursor-pointer ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -153,7 +157,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
               }`}
               loading="lazy"
             />
-            
+
             {/* YouTube iframe - shown on hover */}
             {showIframe && videoId && (
               <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
@@ -165,14 +169,14 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
                   allow="autoplay; encrypted-media"
                   allowFullScreen={false}
                   loading="lazy"
-                  style={{ 
+                  style={{
                     pointerEvents: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onError={handleIframeError}
                 />
-                
+
                 {/* Mute/Unmute Button */}
                 <button
                   onClick={toggleMute}
@@ -194,8 +198,8 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
                 </button>
               </div>
             )}
-            
-            
+
+
             {/* Duration Badge */}
             {video.duration && video.duration !== '0:00' && (
               <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-opacity duration-200 ${
@@ -204,7 +208,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
                 {formatDuration(video.duration)}
               </div>
             )}
-            
+
             {/* Hover indicator */}
             {isHovered && !showIframe && videoId && (
               <div className={`absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-sm font-medium ${
@@ -261,7 +265,7 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
                 } catch {
                   return 'Recently';
                 }
-              })()} 
+              })()}
             </span>
           </div>
         </div>

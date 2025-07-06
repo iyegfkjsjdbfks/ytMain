@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import { unifiedDataService } from '../../src/services/unifiedDataService';
 import {
   useUnifiedVideos,
   useUnifiedVideo,
@@ -14,6 +13,7 @@ import {
   useVideoWithRelated,
   useHomePageData,
 } from '../../src/hooks/unified/useVideos';
+import { unifiedDataService } from '../../src/services/unifiedDataService';
 
 // Mock the unified data service
 vi.mock('../../src/services/unifiedDataService');
@@ -27,7 +27,7 @@ const createWrapper = () => {
       queries: {
         retry: false,
         staleTime: 0,
-        cacheTime: 0,
+        gcTime: 0,
       },
     },
   });
@@ -50,8 +50,66 @@ describe('Unified Video Hooks', () => {
     it('should fetch trending videos successfully', async () => {
       const mockResponse = {
         data: [
-          { id: 'video-1', title: 'Test Video 1', source: 'local' },
-          { id: 'video-2', title: 'Test Video 2', source: 'youtube' },
+          {
+            id: 'video-1',
+            title: 'Test Video 1',
+            description: 'Test description 1',
+            thumbnailUrl: 'https://example.com/thumb1.jpg',
+            videoUrl: 'https://example.com/video1',
+            views: 1000,
+            viewsFormatted: '1K views',
+            likes: 10,
+            dislikes: 0,
+            commentCount: 5,
+            channel: {
+              id: 'channel-1',
+              name: 'Test Channel 1',
+              avatarUrl: 'https://example.com/avatar1.jpg',
+              subscribers: 1000,
+              subscribersFormatted: '1K subscribers',
+              isVerified: false,
+            },
+            duration: '10:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '1 day ago',
+            category: 'Entertainment',
+            tags: ['test'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'local' as const,
+            metadata: {},
+          },
+          {
+            id: 'video-2',
+            title: 'Test Video 2',
+            description: 'Test description 2',
+            thumbnailUrl: 'https://example.com/thumb2.jpg',
+            videoUrl: 'https://example.com/video2',
+            views: 2000,
+            viewsFormatted: '2K views',
+            likes: 20,
+            dislikes: 0,
+            commentCount: 10,
+            channel: {
+              id: 'channel-2',
+              name: 'Test Channel 2',
+              avatarUrl: 'https://example.com/avatar2.jpg',
+              subscribers: 2000,
+              subscribersFormatted: '2K subscribers',
+              isVerified: false,
+            },
+            duration: '5:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '2 days ago',
+            category: 'Gaming',
+            tags: ['test', 'gaming'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
         ],
         sources: {
           local: { count: 1, hasMore: false },
@@ -129,7 +187,31 @@ describe('Unified Video Hooks', () => {
         id: 'test-video',
         title: 'Test Video',
         description: 'Test description',
-        source: 'local',
+        thumbnailUrl: 'https://example.com/thumb.jpg',
+        videoUrl: 'https://example.com/video',
+        views: 1000,
+        viewsFormatted: '1K views',
+        likes: 10,
+        dislikes: 0,
+        commentCount: 5,
+        channel: {
+          id: 'channel-1',
+          name: 'Test Channel',
+          avatarUrl: 'https://example.com/avatar.jpg',
+          subscribers: 1000,
+          subscribersFormatted: '1K subscribers',
+          isVerified: false,
+        },
+        duration: '10:00',
+        publishedAt: new Date().toISOString(),
+        publishedAtFormatted: '1 day ago',
+        category: 'Entertainment',
+        tags: ['test'],
+        isLive: false,
+        isShort: false,
+        visibility: 'public' as const,
+        source: 'local' as const,
+        metadata: {},
       };
 
       mockUnifiedDataService.getVideoById.mockResolvedValue(mockVideo);
@@ -145,8 +227,7 @@ describe('Unified Video Hooks', () => {
       });
 
       expect(mockUnifiedDataService.getVideoById).toHaveBeenCalledWith('test-video');
-      expect(result.current.data?.data).toEqual(mockVideo);
-      expect(result.current.data?.success).toBe(true);
+      expect(result.current.data).toEqual(mockVideo);
       expect(result.current.loading).toBe(false);
     });
 
@@ -201,8 +282,66 @@ describe('Unified Video Hooks', () => {
     it('should fetch trending videos with proper caching', async () => {
       const mockResponse = {
         data: [
-          { id: 'trending-1', title: 'Trending Video 1' },
-          { id: 'trending-2', title: 'Trending Video 2' },
+          {
+            id: 'trending-1',
+            title: 'Trending Video 1',
+            description: 'Description 1',
+            thumbnailUrl: 'https://example.com/thumb1.jpg',
+            videoUrl: 'https://example.com/video1',
+            views: 1000,
+            viewsFormatted: '1K views',
+            likes: 10,
+            dislikes: 0,
+            commentCount: 5,
+            channel: {
+              id: 'channel-1',
+              name: 'Channel 1',
+              avatarUrl: 'https://example.com/avatar1.jpg',
+              subscribers: 1000,
+              subscribersFormatted: '1K subscribers',
+              isVerified: false,
+            },
+            duration: '10:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '1 day ago',
+            category: 'Entertainment',
+            tags: ['trending'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
+          {
+            id: 'trending-2',
+            title: 'Trending Video 2',
+            description: 'Description 2',
+            thumbnailUrl: 'https://example.com/thumb2.jpg',
+            videoUrl: 'https://example.com/video2',
+            views: 2000,
+            viewsFormatted: '2K views',
+            likes: 20,
+            dislikes: 0,
+            commentCount: 10,
+            channel: {
+              id: 'channel-2',
+              name: 'Channel 2',
+              avatarUrl: 'https://example.com/avatar2.jpg',
+              subscribers: 2000,
+              subscribersFormatted: '2K subscribers',
+              isVerified: false,
+            },
+            duration: '5:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '2 days ago',
+            category: 'Gaming',
+            tags: ['trending', 'gaming'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
         ],
         sources: {
           local: { count: 1, hasMore: false },
@@ -257,8 +396,66 @@ describe('Unified Video Hooks', () => {
     it('should fetch shorts videos', async () => {
       const mockResponse = {
         data: [
-          { id: 'short-1', title: 'Short Video 1', isShort: true },
-          { id: 'short-2', title: 'Short Video 2', isShort: true },
+          {
+            id: 'short-1',
+            title: 'Short Video 1',
+            description: 'Short description 1',
+            thumbnailUrl: 'https://example.com/short1.jpg',
+            videoUrl: 'https://example.com/short1',
+            views: 1000,
+            viewsFormatted: '1K views',
+            likes: 50,
+            dislikes: 0,
+            commentCount: 10,
+            channel: {
+              id: 'channel-1',
+              name: 'Short Channel',
+              avatarUrl: 'https://example.com/avatar1.jpg',
+              subscribers: 5000,
+              subscribersFormatted: '5K subscribers',
+              isVerified: false,
+            },
+            duration: '0:30',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '1 hour ago',
+            category: 'Entertainment',
+            tags: ['shorts'],
+            isLive: false,
+            isShort: true,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
+          {
+            id: 'short-2',
+            title: 'Short Video 2',
+            description: 'Short description 2',
+            thumbnailUrl: 'https://example.com/short2.jpg',
+            videoUrl: 'https://example.com/short2',
+            views: 2000,
+            viewsFormatted: '2K views',
+            likes: 100,
+            dislikes: 0,
+            commentCount: 20,
+            channel: {
+              id: 'channel-2',
+              name: 'Short Channel 2',
+              avatarUrl: 'https://example.com/avatar2.jpg',
+              subscribers: 10000,
+              subscribersFormatted: '10K subscribers',
+              isVerified: true,
+            },
+            duration: '0:45',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '2 hours ago',
+            category: 'Comedy',
+            tags: ['shorts', 'funny'],
+            isLive: false,
+            isShort: true,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
         ],
         sources: {
           local: { count: 2, hasMore: false },
@@ -289,8 +486,66 @@ describe('Unified Video Hooks', () => {
     it('should search videos with query', async () => {
       const mockResponse = {
         data: [
-          { id: 'search-1', title: 'Search Result 1' },
-          { id: 'search-2', title: 'Search Result 2' },
+          {
+            id: 'search-1',
+            title: 'Search Result 1',
+            description: 'Search description 1',
+            thumbnailUrl: 'https://example.com/search1.jpg',
+            videoUrl: 'https://example.com/search1',
+            views: 1000,
+            viewsFormatted: '1K views',
+            likes: 50,
+            dislikes: 0,
+            commentCount: 10,
+            channel: {
+              id: 'channel-1',
+              name: 'Search Channel 1',
+              avatarUrl: 'https://example.com/avatar1.jpg',
+              subscribers: 5000,
+              subscribersFormatted: '5K subscribers',
+              isVerified: false,
+            },
+            duration: '10:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '1 day ago',
+            category: 'Tech',
+            tags: ['search', 'tech'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
+          {
+            id: 'search-2',
+            title: 'Search Result 2',
+            description: 'Search description 2',
+            thumbnailUrl: 'https://example.com/search2.jpg',
+            videoUrl: 'https://example.com/search2',
+            views: 2000,
+            viewsFormatted: '2K views',
+            likes: 100,
+            dislikes: 0,
+            commentCount: 20,
+            channel: {
+              id: 'channel-2',
+              name: 'Search Channel 2',
+              avatarUrl: 'https://example.com/avatar2.jpg',
+              subscribers: 10000,
+              subscribersFormatted: '10K subscribers',
+              isVerified: true,
+            },
+            duration: '5:00',
+            publishedAt: new Date().toISOString(),
+            publishedAtFormatted: '2 days ago',
+            category: 'Tech',
+            tags: ['search', 'tech', 'tutorial'],
+            isLive: false,
+            isShort: false,
+            visibility: 'public' as const,
+            source: 'youtube' as const,
+            metadata: {},
+          },
         ],
         sources: {
           local: { count: 1, hasMore: false },
@@ -362,15 +617,7 @@ describe('Unified Video Hooks', () => {
   describe('Combined Hooks', () => {
     describe('useVideoWithRelated', () => {
       it('should fetch video and related videos', async () => {
-        const mockVideo = {
-          id: 'main-video',
-          title: 'Main Video',
-        };
-
-        const mockRelatedVideos = [
-          { id: 'related-1', title: 'Related Video 1' },
-          { id: 'related-2', title: 'Related Video 2' },
-        ];
+        // Mock video data would be needed for this test
 
         // This test would require mocking the videoApi dependency
         // For now, we'll test the structure

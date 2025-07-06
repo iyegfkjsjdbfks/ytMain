@@ -77,25 +77,25 @@ const SearchResultsPage: React.FC = () => {
       // Import settings to check current provider
       const { getYouTubeSearchProvider } = await import('../services/settingsService');
       const provider = getYouTubeSearchProvider();
-      
+
       console.log(`🔍 Search provider: ${provider}`);
-      
+
       // When Hybrid Mode is selected, prioritize Google Custom Search API for discovery
       // as per user requirement and rule
       if (provider === 'hybrid') {
         console.log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
-        
+
         // Use Google Custom Search for discovery with YouTube API for metadata enhancement
         const combinedResults = await searchCombined(
           searchQuery,
           (query) => VideoService.searchVideos(query).then(result => result.videos),
         );
-        
+
         // Check if request was cancelled
         if (abortController.signal.aborted) {
           return;
         }
-        
+
         setSearchState({
           videos: combinedResults.localVideos || [],
           youtubeVideos: combinedResults.youtubeVideos || [],
@@ -109,12 +109,12 @@ const SearchResultsPage: React.FC = () => {
           searchQuery,
           (query) => VideoService.searchVideos(query).then(result => result.videos),
         );
-        
+
         // Check if request was cancelled
         if (abortController.signal.aborted) {
           return;
         }
-        
+
         setSearchState({
           videos: combinedResults.localVideos || [],
           youtubeVideos: combinedResults.youtubeVideos || [],

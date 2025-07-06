@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 import {
   VideoCameraIcon,
   MicrophoneIcon,
@@ -18,15 +20,17 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { useLiveStream } from '../../../hooks/useLiveStream';
+
+import {
+  AdvancedLiveChat,
+  LivePolls,
+  LiveQA,
+  SuperChatPanel,
+  StreamScheduler,
+  MultiplatformStreaming,
+} from '.';
+
 import type { LiveStream, StreamPlatform } from '../../../types/livestream';
-import { 
-  AdvancedLiveChat, 
-  LivePolls, 
-  LiveQA, 
-  SuperChatPanel, 
-  StreamScheduler, 
-  MultiplatformStreaming 
-} from './';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;
@@ -43,7 +47,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'polls' | 'qa' | 'superchat' | 'schedule' | 'multiplatform'>('chat');
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const { createStream, startStream, endStream } = useLiveStream();
 
@@ -158,17 +162,17 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       const newStream = await createStream(streamData);
 
       setCurrentStream(newStream);
-      
+
       // Start streaming
       await startStream(newStream.id);
       setIsStreaming(true);
-      
+
       // Enable multiplatform if configured
       if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
         const enabledPlatforms = streamSettings.platforms
           .filter(p => p.enabled)
           .map(p => p.name);
-        
+
         // TODO: Implement multiplatform streaming
         console.log('Multiplatform streaming enabled for:', enabledPlatforms);
       }
@@ -180,13 +184,15 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   };
 
   const handleEndStream = async () => {
-    if (!currentStream) return;
+    if (!currentStream) {
+return;
+}
 
     try {
       const replay = await endStream(currentStream.id);
       setIsStreaming(false);
       setCurrentStream(null);
-      
+
       if (stream) {
         stream.getTracks().forEach(track => track.stop());
         setStream(null);
@@ -222,7 +228,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
   // Listen for stream stats updates
   useEffect(() => {
-    if (!currentStream) return;
+    if (!currentStream) {
+return;
+}
 
     // TODO: Implement real-time stats updates
     const interval = setInterval(() => {
@@ -230,7 +238,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         setStats(prev => ({
           ...prev,
           viewers: Math.floor(Math.random() * 1000) + 100,
-          duration: prev.duration + 1
+          duration: prev.duration + 1,
         }));
       }
     }, 1000);
@@ -266,7 +274,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           <div className="flex items-center space-x-2">
             {isStreaming && (
               <div className="flex items-center space-x-2 text-red-500">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium">LIVE</span>
               </div>
             )}
@@ -419,7 +427,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
               playsInline
               className="w-full h-full object-cover"
             />
-            
+
             {!isPreviewing && !isStreaming && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
                 <div className="text-center">
@@ -442,8 +450,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   <button
                     onClick={toggleVideo}
                     className={`p-2 rounded-lg transition-colors ${
-                      isVideoEnabled 
-                        ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      isVideoEnabled
+                        ? 'bg-gray-700 hover:bg-gray-600 text-white'
                         : 'bg-red-600 hover:bg-red-700 text-white'
                     }`}
                   >
@@ -456,8 +464,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                   <button
                     onClick={toggleAudio}
                     className={`p-2 rounded-lg transition-colors ${
-                      isAudioEnabled 
-                        ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      isAudioEnabled
+                        ? 'bg-gray-700 hover:bg-gray-600 text-white'
                         : 'bg-red-600 hover:bg-red-700 text-white'
                     }`}
                   >
@@ -478,7 +486,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                       Stop Preview
                     </button>
                   )}
-                  
+
                   {!isStreaming ? (
                     <button
                       onClick={handleStartStream}
@@ -576,21 +584,21 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           {/* Tab Content */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
             {activeTab === 'chat' && currentStream && (
-              <AdvancedLiveChat 
-                streamId={currentStream.id} 
+              <AdvancedLiveChat
+                streamId={currentStream.id}
                 isOwner={true}
                 isModerator={true}
               />
             )}
             {activeTab === 'polls' && currentStream && (
-              <LivePolls 
-                streamId={currentStream.id} 
+              <LivePolls
+                streamId={currentStream.id}
                 isOwner={true}
               />
             )}
             {activeTab === 'qa' && currentStream && (
-              <LiveQA 
-                streamId={currentStream.id} 
+              <LiveQA
+                streamId={currentStream.id}
                 isOwner={true}
               />
             )}
@@ -609,7 +617,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
                 isStreaming={isStreaming}
               />
             )}
-            
+
             {!currentStream && activeTab !== 'schedule' && activeTab !== 'multiplatform' && (
               <div className="p-6 text-center">
                 <p className="text-gray-500">Start a stream to access this feature</p>

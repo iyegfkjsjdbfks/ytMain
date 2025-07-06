@@ -1,5 +1,4 @@
-import type * as React from 'react';
-import {  useState  } from 'react';
+import React, { useState } from 'react';
 
 import BaseForm from '../components/BaseForm';
 import BaseModal from '../components/BaseModal';

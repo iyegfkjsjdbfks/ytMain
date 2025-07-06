@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   PlusIcon,
   ClockIcon,
@@ -8,8 +9,9 @@ import {
   StopIcon,
 } from '@heroicons/react/24/outline';
 
-import type { LivePoll } from '../../../types/livestream';
 import { useLivePolls } from '../../../hooks/useLiveStream';
+
+import type { LivePoll } from '../../../types/livestream';
 
 interface LivePollsProps {
   streamId: string;
@@ -45,7 +47,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     try {
       await createPoll(
         newPoll.question,
-        newPoll.options.filter(opt => opt.trim())
+        newPoll.options.filter(opt => opt.trim()),
       );
 
       setNewPoll({ question: '', options: ['', ''], duration: 60 });
@@ -101,7 +103,9 @@ const LivePolls: React.FC<LivePollsProps> = ({
   };
 
   const getTimeRemaining = (poll: LivePoll) => {
-    if (!poll.isActive) return 0;
+    if (!poll.isActive) {
+return 0;
+}
     const endTime = new Date(poll.createdAt.getTime() + poll.duration);
     return Math.max(0, Math.floor((endTime.getTime() - Date.now()) / 1000));
   };
@@ -294,7 +298,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
                 </div>
 
                 <div className="mt-2 text-xs text-gray-500">
-                  Total votes: {poll.totalVotes} • 
+                  Total votes: {poll.totalVotes} •
                   Duration: {formatDuration(poll.duration)}
                 </div>
               </div>

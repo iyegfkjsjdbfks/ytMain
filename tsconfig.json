@@ -52,7 +52,23 @@
     /* Module resolution */
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "test"],
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "*.ts",
+    "*.tsx",
+    "components/**/*",
+    "config/**/*",
+    "contexts/**/*",
+    "hooks/**/*",
+    "pages/**/*",
+    "providers/**/*",
+    "scripts/**/*",
+    "services/**/*",
+    "store/**/*",
+    "types/**/*",
+    "utils/**/*"
+  ],
   "exclude": [
     "node_modules",
     "dist",
@@ -63,10 +79,19 @@
     "*.config.cjs",
     "*.config.ts",
     "vite.config.ts",
+    "vite.config.proxy.ts",
     "vitest.config.ts",
     "vitest.workspace.ts",
     "postcss.config.js",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "debug-*.html",
+    "debug-*.js",
+    "test-*.html",
+    "test-*.js",
+    "test-*.ts",
+    "verify-*.js",
+    "fix-*.js",
+    "reset-*.js"
   ],
   "references": [
     {

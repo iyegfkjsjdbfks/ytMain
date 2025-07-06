@@ -110,7 +110,12 @@ const customRender = (
   return render(ui, {
     wrapper: ({ children }) => (
       <AllTheProviders
-        queryClient={queryClient}
+        queryClient={queryClient || new QueryClient({
+          defaultOptions: {
+            queries: { retry: false, gcTime: 0, staleTime: 0 },
+            mutations: { retry: false },
+          },
+        })}
       >
         {children}
       </AllTheProviders>

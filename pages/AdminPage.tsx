@@ -22,13 +22,11 @@ import {
   getAllPageConfigurations,
   getPageDisplayName,
   getPlayerUsageByPage,
-  setPagePlayerConfig,
   type YouTubeSearchProvider,
   type YouTubePlayerType,
   type LocalVideoPlayerType,
   type VideoPlayerConfig,
   type PageType,
-  type PagePlayerConfig,
 } from '../services/settingsService';
 
 
@@ -50,7 +48,7 @@ const AdminPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
-  
+
   // YouTube Metadata Debug state
   const [youtubeMetadataTest, setYoutubeMetadataTest] = useState<any>(null);
   const [proxyTest, setProxyTest] = useState<any>(null);
@@ -155,7 +153,7 @@ const AdminPage: React.FC = () => {
   const checkEnvironment = () => {
     const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const proxyUrl = `${window.location.origin}/api/youtube/v3/videos`;
-    
+
     setEnvironmentCheck({
       mode: isDevelopment ? 'Development' : 'Production',
       host: window.location.hostname,
@@ -175,15 +173,15 @@ const AdminPage: React.FC = () => {
     try {
       const testVideoId = 'bnVUHWCynig';
       const proxyUrl = `/api/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${testVideoId}`;
-      
+
       console.log('🔄 Testing proxy endpoint:', proxyUrl);
-      
+
       const response = await fetch(proxyUrl);
-      
+
       if (response.ok) {
         const data = await response.json();
-        
-        if (data.items && data.items[0]) {
+
+        if (data.items?.[0]) {
           const video = data.items[0];
           setProxyTest({
             success: true,
@@ -192,8 +190,8 @@ const AdminPage: React.FC = () => {
             video: {
               title: video.snippet.title,
               channel: video.snippet.channelTitle,
-              views: parseInt(video.statistics.viewCount).toLocaleString(),
-              likes: parseInt(video.statistics.likeCount || 0).toLocaleString(),
+              views: parseInt(video.statistics.viewCount, 10).toLocaleString(),
+              likes: parseInt(video.statistics.likeCount || 0, 10).toLocaleString(),
               published: video.snippet.publishedAt,
               duration: video.contentDetails.duration,
             },
@@ -235,11 +233,11 @@ const AdminPage: React.FC = () => {
       const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
       const testVideoId = 'bnVUHWCynig';
       const directUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&part=snippet,statistics,contentDetails&id=${testVideoId}`;
-      
+
       console.log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
-      
+
       const response = await fetch(directUrl);
-      
+
       if (response.ok) {
         const data = await response.json();
         setDirectApiTest({
@@ -274,16 +272,16 @@ const AdminPage: React.FC = () => {
     setLoading(true);
     try {
       console.log('🔄 Testing YouTube metadata fetch using app services...');
-      
+
       // Import unified data service
       const { unifiedDataService } = await import('../src/services/unifiedDataService');
-      
+
       // Clear cache first
       unifiedDataService.clearCache(`video:${testVideoId}`);
-      
+
       // Test the unified service
       const video = await unifiedDataService.getVideoById(testVideoId);
-      
+
       if (video) {
         setYoutubeMetadataTest({
           success: true,
@@ -438,7 +436,7 @@ const AdminPage: React.FC = () => {
 
   const renderPlayerCard = (config: VideoPlayerConfig, isSelected: boolean, isEnabled: boolean, onSelect: () => void, onToggleEnabled: () => void) => {
     const usedOnPages = getPlayerUsageByPage(config.type);
-    
+
     const getPerformanceColor = (performance: string) => {
       switch (performance) {
         case 'high': return 'text-green-600 bg-green-100';
@@ -642,7 +640,7 @@ const AdminPage: React.FC = () => {
                     <PlayIcon className="h-6 w-6 mr-3 text-red-500" />
                     YouTube Players
                   </h3>
-                  
+
                   {/* Pages within YouTube Category */}
                   <div className="space-y-6">
                     <div>
@@ -682,10 +680,10 @@ const AdminPage: React.FC = () => {
                         {getVideoPlayersByCategory('youtube').map((config) => {
                           const isCurrentPlayer = config.type === playerType;
                           const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
-                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page => 
-                            pageConfigurations[page].youtubePlayer === config.type
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
+                            pageConfigurations[page].youtubePlayer === config.type,
                           );
-                          
+
                           return (
                             <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
                               isCurrentPlayer
@@ -721,9 +719,9 @@ const AdminPage: React.FC = () => {
                                   {isEnabled ? 'Disable' : 'Enable'}
                                 </button>
                               </div>
-                              
+
                               <p className="text-sm text-gray-600 mb-3">{config.description}</p>
-                              
+
                               {usedOnPages.length > 0 && (
                                 <div className="mb-3 p-3 bg-red-100 rounded-lg border border-red-200">
                                   <h6 className="text-sm font-medium text-red-900 mb-2">Currently Used On:</h6>
@@ -736,7 +734,7 @@ const AdminPage: React.FC = () => {
                                   </div>
                                 </div>
                               )}
-                              
+
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
@@ -773,7 +771,7 @@ const AdminPage: React.FC = () => {
                     <VideoCameraIcon className="h-6 w-6 mr-3 text-blue-500" />
                     Local Video Players
                   </h3>
-                  
+
                   {/* Pages within Local Video Category */}
                   <div className="space-y-6">
                     <div>
@@ -813,10 +811,10 @@ const AdminPage: React.FC = () => {
                         {getVideoPlayersByCategory('local').map((config) => {
                           const isCurrentPlayer = config.type === localPlayerType;
                           const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
-                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page => 
-                            pageConfigurations[page].localPlayer === config.type
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
+                            pageConfigurations[page].localPlayer === config.type,
                           );
-                          
+
                           return (
                             <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
                               isCurrentPlayer
@@ -852,9 +850,9 @@ const AdminPage: React.FC = () => {
                                   {isEnabled ? 'Disable' : 'Enable'}
                                 </button>
                               </div>
-                              
+
                               <p className="text-sm text-gray-600 mb-3">{config.description}</p>
-                              
+
                               {usedOnPages.length > 0 && (
                                 <div className="mb-3 p-3 bg-blue-100 rounded-lg border border-blue-200">
                                   <h6 className="text-sm font-medium text-blue-900 mb-2">Currently Used On:</h6>
@@ -867,7 +865,7 @@ const AdminPage: React.FC = () => {
                                   </div>
                                 </div>
                               )}
-                              
+
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
@@ -1052,10 +1050,11 @@ const AdminPage: React.FC = () => {
                     Set the keyword that will be used to search and display results when the app loads initially.
                   </p>
                   <div className="space-y-3">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="initial-search-keyword" className="block text-sm font-medium text-gray-700">
                       Keyword
                     </label>
                     <input
+                      id="initial-search-keyword"
                       type="text"
                       value={initialSearchKeyword}
                       onChange={(e) => setInitialSearchKeywordState(e.target.value)}
@@ -1344,7 +1343,7 @@ const AdminPage: React.FC = () => {
                   <p className="text-sm text-gray-600 mb-6">
                     Test YouTube Data API v3 for metadata fetching, proxy configuration, and debugging issues.
                   </p>
-                  
+
                   {/* Environment Check */}
                   <div className="mb-6">
                     <button
@@ -1353,7 +1352,7 @@ const AdminPage: React.FC = () => {
                     >
                       🔧 Check Environment
                     </button>
-                    
+
                     {environmentCheck && (
                       <div className="mt-4 p-3 bg-white rounded border">
                         <h4 className="font-semibold mb-2">Environment Configuration:</h4>
@@ -1377,7 +1376,7 @@ const AdminPage: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Test Buttons */}
                   <div className="flex gap-2 mb-4">
                     <button
@@ -1408,7 +1407,7 @@ const AdminPage: React.FC = () => {
                       🗑️ Clear Results
                     </button>
                   </div>
-                  
+
                   {/* Test Results */}
                   <div className="space-y-4">
                     {/* Proxy Test Results */}
@@ -1443,14 +1442,14 @@ const AdminPage: React.FC = () => {
                         <details className="mt-2">
                           <summary className="cursor-pointer text-sm text-gray-600">Show Full Response</summary>
                           <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
-                            {typeof proxyTest.fullResponse === 'object' 
-                              ? JSON.stringify(proxyTest.fullResponse, null, 2) 
+                            {typeof proxyTest.fullResponse === 'object'
+                              ? JSON.stringify(proxyTest.fullResponse, null, 2)
                               : proxyTest.fullResponse}
                           </pre>
                         </details>
                       </div>
                     )}
-                    
+
                     {/* Direct API Test Results */}
                     {directApiTest && (
                       <div className={`p-3 rounded border ${
@@ -1467,14 +1466,14 @@ const AdminPage: React.FC = () => {
                         <details className="mt-2">
                           <summary className="cursor-pointer text-sm text-gray-600">Show Full Response</summary>
                           <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
-                            {typeof directApiTest.fullResponse === 'object' 
-                              ? JSON.stringify(directApiTest.fullResponse, null, 2) 
+                            {typeof directApiTest.fullResponse === 'object'
+                              ? JSON.stringify(directApiTest.fullResponse, null, 2)
                               : directApiTest.fullResponse}
                           </pre>
                         </details>
                       </div>
                     )}
-                    
+
                     {/* App Metadata Test Results */}
                     {youtubeMetadataTest && (
                       <div className={`p-3 rounded border ${

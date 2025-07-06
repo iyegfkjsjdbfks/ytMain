@@ -1,5 +1,4 @@
-import type * as React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 

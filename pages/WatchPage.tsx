@@ -132,7 +132,7 @@ const WatchPage: React.FC = () => {
 
               {/* Video title skeleton */}
               <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" />
-              
+
               {/* Metadata and actions skeleton */}
               <div className="flex items-center justify-between mb-4">
                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" />
@@ -268,7 +268,7 @@ const WatchPage: React.FC = () => {
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
               </div>
-              
+
               {/* Video actions - moved to same line as metadata */}
               <VideoActions
                 liked={liked}
@@ -342,7 +342,7 @@ const WatchPage: React.FC = () => {
           </aside>
         </div>
       </div>
-      
+
       {/* Save to Playlist Modal */}
       <RefactoredSaveToPlaylistModal
         isOpen={isSaveModalOpen}

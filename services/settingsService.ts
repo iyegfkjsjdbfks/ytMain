@@ -345,16 +345,16 @@ export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] =>
   const pageConfigs = getAllPageConfigurations();
   const config = VIDEO_PLAYER_CONFIGS[playerType];
   const pages: PageType[] = [];
-  
+
   Object.entries(pageConfigs).forEach(([page, pageConfig]) => {
-    const isUsed = config.category === 'youtube' 
+    const isUsed = config.category === 'youtube'
       ? pageConfig.youtubePlayer === playerType
       : pageConfig.localPlayer === playerType;
-    
+
     if (isUsed) {
       pages.push(page as PageType);
     }
   });
-  
+
   return pages;
 };

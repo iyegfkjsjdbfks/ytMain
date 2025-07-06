@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
-import * as realVideoService from '../../src/services/realVideoService';
 import { youtubeService } from '../../src/services/api/youtubeService';
 import { metadataNormalizationService } from '../../src/services/metadataNormalizationService';
+import * as realVideoService from '../../src/services/realVideoService';
 import { unifiedDataService } from '../../src/services/unifiedDataService';
 
 // Mock dependencies
@@ -12,7 +12,10 @@ vi.mock('../../src/services/realVideoService');
 
 const mockYoutubeService = vi.mocked(youtubeService);
 const mockMetadataService = vi.mocked(metadataNormalizationService);
-const realVideoServiceModule = vi.mocked(realVideoService);
+const mockVideoServiceModule = vi.mocked(realVideoService);
+
+// Use the main service instance for testing
+const service = unifiedDataService;
 
 describe('UnifiedDataService', () => {
   beforeEach(() => {
@@ -38,7 +41,7 @@ describe('UnifiedDataService', () => {
     });
 
     it('should allow custom configuration', () => {
-      const customService = new UnifiedDataService({
+      const customService = new (unifiedDataService.constructor as any)({
         sources: { local: false, youtube: true },
         limits: { youtube: 50 },
         mixing: { strategy: 'source-priority' },
@@ -376,11 +379,11 @@ describe('UnifiedDataService', () => {
 
   describe('Cache Management', () => {
     it('should clear all cache', () => {
-      service.setCachedData = vi.fn();
+      (service as any).setCachedData = vi.fn();
       service.clearCache();
 
-      // Test by trying to get cached data
-      const result = service.getCachedData('test-key');
+      // Test that cache is cleared
+      const result = (service as any).getCachedData('test-key');
       expect(result).toBeNull();
     });
 

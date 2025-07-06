@@ -1,8 +1,8 @@
 import React, { memo, useMemo, useState, useEffect } from 'react';
 
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { performanceMonitor } from '../utils/performance';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { performanceMonitor } from '../utils/performance';
 
 import type { YouTubeSearchResult, GoogleSearchResult } from '../services/googleSearchService';
 import type { Video } from '../types';
@@ -116,9 +116,11 @@ const YouTubeSearchResultCard: React.FC<{
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
 }> = memo(({ item, onVideoClick }) => {
   const convertedVideo = convertToVideo(item);
-  
+
   const formatDuration = (duration: string | number) => {
-    if (typeof duration === 'string') return duration;
+    if (typeof duration === 'string') {
+return duration;
+}
     if (typeof duration === 'number') {
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
@@ -144,12 +146,22 @@ const YouTubeSearchResultCard: React.FC<{
       const date = new Date(dateStr);
       const now = new Date();
       const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-      
-      if (diffInSeconds < 60) return 'Just now';
-      if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-      if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-      if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-      if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+
+      if (diffInSeconds < 60) {
+return 'Just now';
+}
+      if (diffInSeconds < 3600) {
+return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+}
+      if (diffInSeconds < 86400) {
+return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+}
+      if (diffInSeconds < 2592000) {
+return `${Math.floor(diffInSeconds / 86400)} days ago`;
+}
+      if (diffInSeconds < 31536000) {
+return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+}
       return `${Math.floor(diffInSeconds / 31536000)} years ago`;
     } catch {
       return 'Recently';
@@ -168,7 +180,7 @@ const YouTubeSearchResultCard: React.FC<{
   };
 
   return (
-    <div 
+    <div
       className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
       onClick={handleCardClick}
     >
@@ -176,8 +188,8 @@ const YouTubeSearchResultCard: React.FC<{
       <div className="relative flex-shrink-0">
         <div className="w-full sm:w-[480px] h-[270px] sm:h-[270px] aspect-video sm:aspect-auto bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
           {videoId ? (
-            <div 
-              className="w-full h-full" 
+            <div
+              className="w-full h-full"
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
@@ -214,7 +226,7 @@ const YouTubeSearchResultCard: React.FC<{
         <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-white line-clamp-2 leading-6 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {convertedVideo.title}
         </h3>
-        
+
         {/* Minimal metadata line - YouTube style */}
         <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
           <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
@@ -369,20 +381,20 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       {/* YouTube-style filter tabs */}
       <div className="mb-4 px-4">
         <div className="flex items-center gap-3 mb-4 overflow-x-auto scrollbar-hide">
-          <button 
+          <button
             onClick={() => setActiveTab('all')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'all' 
+              activeTab === 'all'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             All
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('videos')}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'videos' 
+              activeTab === 'videos'
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}

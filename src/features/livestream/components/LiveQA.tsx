@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
+
 import {
   QuestionMarkCircleIcon,
   HeartIcon,
@@ -27,7 +29,9 @@ const LiveQA: React.FC<LiveQAProps> = ({
   const [answerText, setAnswerText] = useState('');
 
   const handleSubmitQuestion = async () => {
-    if (!newQuestion.trim()) return;
+    if (!newQuestion.trim()) {
+return;
+}
 
     try {
       await submitQuestion(newQuestion.trim());
@@ -55,7 +59,9 @@ const LiveQA: React.FC<LiveQAProps> = ({
   };
 
   const handleAnswerQuestion = async (questionId: string) => {
-    if (!answerText.trim()) return;
+    if (!answerText.trim()) {
+return;
+}
 
     try {
       await answerQuestion(questionId, answerText.trim());
@@ -88,14 +94,20 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
   const sortedQuestions = filteredQuestions.sort((a, b) => {
     // Highlighted questions first
-    if (a.isHighlighted && !b.isHighlighted) return -1;
-    if (!a.isHighlighted && b.isHighlighted) return 1;
-    
+    if (a.isHighlighted && !b.isHighlighted) {
+return -1;
+}
+    if (!a.isHighlighted && b.isHighlighted) {
+return 1;
+}
+
     // Then by upvotes
     const aUpvotes = a.upvotes || 0;
     const bUpvotes = b.upvotes || 0;
-    if (aUpvotes !== bUpvotes) return bUpvotes - aUpvotes;
-    
+    if (aUpvotes !== bUpvotes) {
+return bUpvotes - aUpvotes;
+}
+
     // Then by timestamp
     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
   });
@@ -292,8 +304,8 @@ const LiveQA: React.FC<LiveQAProps> = ({
           <QuestionMarkCircleIcon className="w-12 h-12 mx-auto mb-3 text-gray-300" />
           <p>No questions yet</p>
           <p className="text-sm mt-1">
-            {filter === 'all' 
-              ? "Be the first to ask a question!"
+            {filter === 'all'
+              ? 'Be the first to ask a question!'
               : `No ${filter} questions found.`}
           </p>
         </div>

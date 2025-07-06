@@ -816,7 +816,7 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
     const { getYouTubeSearchProvider } = await import('./settingsService');
     const currentProvider = getYouTubeSearchProvider();
-    
+
     // Always try YouTube API for metadata if available (regardless of provider selection)
     if (youtubeApiKey && videoIds.length > 0) {
       try {
@@ -1281,13 +1281,13 @@ multiplier = 1000000000;
     console.log('  👥 Subscriber count source:', channelMetadata ? 'YouTube API (real)' : 'Not available');
 
     // Determine view count and format for display
-    const finalViewCount = enhancedMetadata?.statistics.viewCount 
+    const finalViewCount = enhancedMetadata?.statistics.viewCount
       ? parseInt(enhancedMetadata.statistics.viewCount, 10)
       : viewCount || 0;
     const views = formatViewCount(finalViewCount);
 
     // Determine if this is a YouTube Short based on duration
-    const durationSeconds = enhancedMetadata?.contentDetails.duration 
+    const durationSeconds = enhancedMetadata?.contentDetails.duration
       ? parseDuration(enhancedMetadata.contentDetails.duration)
       : parseDuration(duration || 'PT0S');
     const isShort = durationSeconds > 0 && durationSeconds <= 60;

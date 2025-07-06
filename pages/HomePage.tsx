@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
             <div className="text-6xl mb-4">🔥</div>
             <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No {currentKeyword} videos found</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              {selectedCategory === 'All' 
+              {selectedCategory === 'All'
                 ? `Unable to load ${currentKeyword} videos at the moment. Please try again later.`
                 : `No ${currentKeyword} videos found for "${selectedCategory}". Try selecting another category.`}
             </p>

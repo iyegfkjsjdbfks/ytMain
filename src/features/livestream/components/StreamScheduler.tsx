@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import {
   CalendarIcon,
   ClockIcon,
@@ -7,8 +8,9 @@ import {
   PencilIcon,
 } from '@heroicons/react/24/outline';
 
-import type { LiveStream } from '../../../types/livestream';
 import { liveStreamService } from '../../../services/livestreamAPI';
+
+import type { LiveStream } from '../../../types/livestream';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: LiveStream) => void;
@@ -48,7 +50,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const categories = [
     'Gaming', 'Just Chatting', 'Music', 'Art', 'Science & Technology',
     'Sports', 'Travel & Outdoors', 'Food & Cooking', 'Beauty & Fashion',
-    'Entertainment', 'Education', 'News & Politics', 'Other'
+    'Entertainment', 'Education', 'News & Politics', 'Other',
   ];
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.title.trim() || !formData.scheduledStartTime) {
       return;
     }
@@ -76,9 +78,9 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       setScheduledStreams(prev => {
         if (editingStream) {
           return prev.map(s => s.id === stream.id ? stream : s);
-        } else {
-          return [...prev, stream];
         }
+          return [...prev, stream];
+
       });
 
       onStreamScheduled?.(stream);
@@ -134,7 +136,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       category: stream.category,
       tags: stream.tags,
       visibility: stream.visibility,
-      scheduledStartTime: stream.scheduledStartTime 
+      scheduledStartTime: stream.scheduledStartTime
         ? new Date(stream.scheduledStartTime).toISOString().slice(0, 16)
         : '',
       thumbnailUrl: stream.thumbnailUrl,
@@ -148,7 +150,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     if (newTag.trim() && !formData.tags.includes(newTag.trim()) && formData.tags.length < 10) {
       setFormData(prev => ({
         ...prev,
-        tags: [...prev.tags, newTag.trim()]
+        tags: [...prev.tags, newTag.trim()],
       }));
       setNewTag('');
     }
@@ -157,7 +159,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const removeTag = (tagToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter(tag => tag !== tagToRemove),
     }));
   };
 
@@ -174,20 +176,28 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const getTimeUntilStream = (scheduledTime: Date) => {
     const now = new Date();
     const diff = scheduledTime.getTime() - now.getTime();
-    
-    if (diff <= 0) return 'Starting now';
-    
+
+    if (diff <= 0) {
+return 'Starting now';
+}
+
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    if (days > 0) return `${days}d ${hours}h`;
-    if (hours > 0) return `${hours}h ${minutes}m`;
+
+    if (days > 0) {
+return `${days}d ${hours}h`;
+}
+    if (hours > 0) {
+return `${hours}h ${minutes}m`;
+}
     return `${minutes}m`;
   };
 
   const isStreamStartable = (stream: LiveStream) => {
-    if (!stream.scheduledStartTime) return false;
+    if (!stream.scheduledStartTime) {
+return false;
+}
     const now = new Date();
     const scheduledTime = new Date(stream.scheduledStartTime);
     const diff = scheduledTime.getTime() - now.getTime();
@@ -204,7 +214,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             {scheduledStreams.length} scheduled
           </span>
         </div>
-        
+
         <button
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="flex items-center space-x-1 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
@@ -219,10 +229,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
         <form onSubmit={handleSubmit} className="mb-6 p-4 bg-gray-50 rounded-lg border">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-title" className="block text-sm font-medium text-gray-700 mb-1">
                 Stream Title *
               </label>
               <input
+                id="stream-title"
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
@@ -233,10 +244,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-category" className="block text-sm font-medium text-gray-700 mb-1">
                 Category
               </label>
               <select
+                id="stream-category"
                 value={formData.category}
                 onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -248,10 +260,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-description" className="block text-sm font-medium text-gray-700 mb-1">
                 Description
               </label>
               <textarea
+                id="stream-description"
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 placeholder="Describe your stream..."
@@ -261,10 +274,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-start-time" className="block text-sm font-medium text-gray-700 mb-1">
                 Scheduled Start Time *
               </label>
               <input
+                id="stream-start-time"
                 type="datetime-local"
                 value={formData.scheduledStartTime}
                 onChange={(e) => setFormData(prev => ({ ...prev, scheduledStartTime: e.target.value }))}
@@ -275,10 +289,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-visibility" className="block text-sm font-medium text-gray-700 mb-1">
                 Visibility
               </label>
               <select
+                id="stream-visibility"
                 value={formData.visibility}
                 onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -290,11 +305,12 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stream-tags" className="block text-sm font-medium text-gray-700 mb-1">
                 Tags
               </label>
               <div className="flex space-x-2 mb-2">
                 <input
+                  id="stream-tags"
                   type="text"
                   value={newTag}
                   onChange={(e) => setNewTag(e.target.value)}
@@ -374,11 +390,11 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                       {stream.visibility}
                     </span>
                   </div>
-                  
+
                   {stream.description && (
                     <p className="text-sm text-gray-600 mb-2">{stream.description}</p>
                   )}
-                  
+
                   <div className="flex items-center space-x-4 text-sm text-gray-500">
                     <div className="flex items-center space-x-1">
                       <ClockIcon className="w-4 h-4" />
@@ -393,7 +409,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                       {stream.scheduledStartTime && getTimeUntilStream(stream.scheduledStartTime)}
                     </span>
                   </div>
-                  
+
                   {stream.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-2">
                       {stream.tags.slice(0, 3).map((tag) => (
@@ -423,14 +439,14 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
                       <span>Go Live</span>
                     </button>
                   )}
-                  
+
                   <button
                     onClick={() => handleEditStream(stream)}
                     className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
                   >
                     <PencilIcon className="w-4 h-4" />
                   </button>
-                  
+
                   <button
                     onClick={() => handleDeleteStream(stream.id)}
                     className="p-2 text-red-400 hover:text-red-600 rounded-lg hover:bg-red-50"

@@ -1,10 +1,44 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { youtubeService } from '@services/api/youtubeService';
+import { youtubeService } from '../../src/services/api/youtubeService';
 
 // Mock fetch globally
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
+
+// Define mock responses at module level so they're accessible everywhere
+const mockYouTubeVideoResponse = {
+  items: [
+    {
+      id: 'test-video-1',
+      snippet: {
+        title: 'Test Video 1',
+        description: 'Test description 1',
+        thumbnails: {
+          medium: { url: 'https://example.com/thumb1.jpg' },
+          high: { url: 'https://example.com/thumb1_hq.jpg' },
+        },
+        publishedAt: '2023-01-01T00:00:00Z',
+        channelId: 'test-channel-1',
+        channelTitle: 'Test Channel 1',
+        tags: ['test', 'video'],
+        categoryId: '10',
+      },
+      statistics: {
+        viewCount: '1000',
+        likeCount: '100',
+        dislikeCount: '5',
+        commentCount: '20',
+      },
+      contentDetails: {
+        duration: 'PT5M30S',
+        dimension: '2d',
+        definition: 'hd',
+        caption: 'false',
+      },
+    },
+  ],
+};
 
 describe('YouTubeService', () => {
   beforeEach(() => {
@@ -17,38 +51,6 @@ describe('YouTubeService', () => {
   });
 
   describe('fetchVideos', () => {
-    const mockYouTubeVideoResponse = {
-      items: [
-        {
-          id: 'test-video-1',
-          snippet: {
-            title: 'Test Video 1',
-            description: 'Test description 1',
-            thumbnails: {
-              medium: { url: 'https://example.com/thumb1.jpg' },
-              high: { url: 'https://example.com/thumb1_hq.jpg' },
-            },
-            publishedAt: '2023-01-01T00:00:00Z',
-            channelId: 'test-channel-1',
-            channelTitle: 'Test Channel 1',
-            tags: ['test', 'video'],
-            categoryId: '10',
-          },
-          statistics: {
-            viewCount: '1000',
-            likeCount: '100',
-            dislikeCount: '5',
-            commentCount: '20',
-          },
-          contentDetails: {
-            duration: 'PT5M30S',
-            dimension: '2d',
-            definition: 'hd',
-            caption: 'false',
-          },
-        },
-      ],
-    };
 
     it('should fetch videos successfully', async () => {
       mockFetch.mockResolvedValueOnce({
@@ -121,7 +123,7 @@ describe('YouTubeService', () => {
           items: [{
             ...mockYouTubeVideoResponse.items[0],
             contentDetails: {
-              ...mockYouTubeVideoResponse.items[0].contentDetails,
+              ...mockYouTubeVideoResponse.items[0]!.contentDetails,
               duration: testCase.input,
             },
           }],
@@ -133,7 +135,7 @@ describe('YouTubeService', () => {
         });
 
         const result = await youtubeService.fetchVideos(['test-video']);
-        expect(result[0].duration).toBe(testCase.expected);
+        expect(result[0]?.duration).toBe(testCase.expected);
       }
     });
   });
@@ -222,7 +224,7 @@ describe('YouTubeService', () => {
           items: [{
             ...mockYouTubeChannelResponse.items[0],
             statistics: {
-              ...mockYouTubeChannelResponse.items[0].statistics,
+              ...mockYouTubeChannelResponse.items[0]!.statistics,
               subscriberCount: testCase.input.toString(),
             },
           }],
@@ -306,7 +308,7 @@ describe('YouTubeService', () => {
 
     afterEach(() => {
       // Restore original environment
-      import.meta.env = originalEnv;
+      Object.assign(import.meta.env, originalEnv);
       global.window = originalWindow;
     });
 
@@ -474,7 +476,7 @@ describe('YouTubeService', () => {
         expect.stringContaining('key='),
       );
       // Should still make the request but with empty key
-      const callUrl = mockFetch.mock.calls[0][0] as string;
+      const callUrl = mockFetch.mock.calls[0]?.[0] as string;
       const url = new URL(callUrl);
       expect(url.searchParams.get('key')).toBe('');
     });
@@ -496,7 +498,7 @@ describe('YouTubeService', () => {
 
       await youtubeService.fetchVideos(['video1', 'video2', 'video3']);
 
-      const callUrl = mockFetch.mock.calls[0][0] as string;
+      const callUrl = mockFetch.mock.calls[0]?.[0] as string;
       const url = new URL(callUrl);
 
       expect(url.searchParams.get('part')).toBe('snippet,statistics,contentDetails');
@@ -537,7 +539,7 @@ describe('YouTubeService', () => {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
           snippet: {
-            ...mockYouTubeVideoResponse.items[0].snippet,
+            ...mockYouTubeVideoResponse.items[0]!.snippet,
             thumbnails: {},
           },
         }],
@@ -549,7 +551,7 @@ describe('YouTubeService', () => {
       });
 
       const result = await youtubeService.fetchVideos(['test-video']);
-      expect(result[0].thumbnailUrl).toBe('');
+      expect(result[0]?.thumbnailUrl).toBe('');
     });
 
     it('should handle missing statistics', async () => {
@@ -566,9 +568,9 @@ describe('YouTubeService', () => {
       });
 
       const result = await youtubeService.fetchVideos(['test-video']);
-      expect(result[0].viewCount).toBe(0);
-      expect(result[0].likes).toBe(0);
-      expect(result[0].commentCount).toBe(0);
+      expect(result[0]?.viewCount).toBe(0);
+      expect(result[0]?.likes).toBe(0);
+      expect(result[0]?.commentCount).toBe(0);
     });
 
     it('should handle invalid duration format', async () => {
@@ -576,7 +578,7 @@ describe('YouTubeService', () => {
         items: [{
           ...mockYouTubeVideoResponse.items[0],
           contentDetails: {
-            ...mockYouTubeVideoResponse.items[0].contentDetails,
+            ...mockYouTubeVideoResponse.items[0]!.contentDetails,
             duration: 'INVALID',
           },
         }],
@@ -588,7 +590,7 @@ describe('YouTubeService', () => {
       });
 
       const result = await youtubeService.fetchVideos(['test-video']);
-      expect(result[0].duration).toBe('0:00');
+      expect(result[0]?.duration).toBe('0:00');
     });
   });
 });

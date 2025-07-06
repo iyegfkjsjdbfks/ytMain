@@ -70,7 +70,7 @@ return;
             videoUrl: video.videoUrl || `https://www.youtube.com/watch?v=${video.id}`,
             channelId: video.channelId || '',
             channelName: video.channelName,
-            channelAvatarUrl: video.channelAvatarUrl,
+            channelAvatarUrl: video.channelAvatarUrl || '',
             views: video.viewCount?.toString() || '0',
             likes: video.likeCount || 0,
             dislikes: video.dislikeCount || 0,
@@ -132,7 +132,7 @@ return;
           {videos.map((video) => {
             // Extract YouTube video ID from the video object using utility function
             let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
-            
+
             // Clean up video ID to ensure it's just the 11-character YouTube ID
             if (videoId && videoId.includes('-')) {
               // Handle cases like "google-search-xyz" or "youtube-xyz"
@@ -142,9 +142,9 @@ return;
                 videoId = lastPart;
               }
             }
-            
+
             console.log('Video ID for', video.title, ':', videoId);
-            
+
             return (
               <div key={video.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 {/* YouTube Player */}
@@ -169,7 +169,7 @@ return;
                     </div>
                   )}
                 </div>
-                
+
                 {/* Video Info */}
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">

@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
 import {
   PaperAirplaneIcon,
   EllipsisVerticalIcon,
@@ -12,12 +14,13 @@ import {
   StarIcon as StarSolidIcon,
 } from '@heroicons/react/24/solid';
 
-import type { 
-  ChatMessage, 
-  ChatModerationAction,
-  ChatBadge 
-} from '../../../types/livestream';
 import { useLiveChat } from '../../../hooks/useLiveStream';
+
+import type {
+  ChatMessage,
+  ChatModerationAction,
+  ChatBadge,
+} from '../../../types/livestream';
 
 interface AdvancedLiveChatProps {
   streamId: string;
@@ -38,7 +41,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
   const [selectedMessage, setSelectedMessage] = useState<string | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [chatFilter, setChatFilter] = useState<'all' | 'super_chat' | 'moderators'>('all');
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -61,7 +64,9 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
   }, [slowModeTimer]);
 
   const handleSendMessage = async () => {
-    if (!newMessage.trim() || slowModeTimer > 0) return;
+    if (!newMessage.trim() || slowModeTimer > 0) {
+return;
+}
 
     try {
       await sendMessage(newMessage.trim());
@@ -81,12 +86,12 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
 
   const handleModerationAction = async (messageId: string, action: ChatModerationAction['type']) => {
     try {
-      await moderateMessage(messageId, { 
+      await moderateMessage(messageId, {
         type: action,
         userId: '',
         moderatorId: '',
         reason: 'Moderated by chat moderator',
-        timestamp: new Date()
+        timestamp: new Date(),
       } as ChatModerationAction);
       setSelectedMessage(null);
     } catch (error) {
@@ -129,11 +134,13 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
       );
     }
 
-    const filteredOut = 
+    const filteredOut =
       (chatFilter === 'super_chat' && message.type !== 'super_chat') ||
       (chatFilter === 'moderators' && !message.isModerator && !message.isOwner);
 
-    if (filteredOut) return null;
+    if (filteredOut) {
+return null;
+}
 
     return (
       <div
@@ -167,7 +174,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
                 {formatTimestamp(message.timestamp)}
               </span>
             </div>
-            
+
             {message.superChat && (
               <div className="mb-2 p-2 bg-yellow-100 rounded-lg border border-yellow-200">
                 <div className="flex items-center justify-between mb-1">
@@ -178,18 +185,18 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
                 </div>
               </div>
             )}
-            
+
             <p className="text-sm text-gray-800 break-words">
               {message.message}
             </p>
-            
+
             {message.edited && (
               <span className="text-xs text-gray-500 italic">
                 (edited {formatTimestamp(message.editedAt!)})
               </span>
             )}
           </div>
-          
+
           {(isModerator || isOwner) && (
             <div className="opacity-0 group-hover:opacity-100 transition-opacity">
               <button
@@ -198,7 +205,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
               >
                 <EllipsisVerticalIcon className="w-4 h-4" />
               </button>
-              
+
               {selectedMessage === message.id && (
                 <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border z-10">
                   <div className="py-1">
@@ -232,8 +239,12 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
   };
 
   const filteredMessages = messages.filter(message => {
-    if (chatFilter === 'super_chat') return message.type === 'super_chat';
-    if (chatFilter === 'moderators') return message.isModerator || message.isOwner;
+    if (chatFilter === 'super_chat') {
+return message.type === 'super_chat';
+}
+    if (chatFilter === 'moderators') {
+return message.isModerator || message.isOwner;
+}
     return true;
   });
 
@@ -248,7 +259,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
             {messages.length} messages
           </span>
         </div>
-        
+
         <div className="flex space-x-1">
           <button
             onClick={() => setChatFilter('all')}
@@ -297,7 +308,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={slowModeTimer > 0 ? `Slow mode (${slowModeTimer}s)` : "Say something..."}
+              placeholder={slowModeTimer > 0 ? `Slow mode (${slowModeTimer}s)` : 'Say something...'}
               disabled={slowModeTimer > 0}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
@@ -320,14 +331,14 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
               </div>
             )}
           </div>
-          
+
           <button
             onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
           >
             <FaceSmileIcon className="w-5 h-5" />
           </button>
-          
+
           <button
             onClick={handleSendMessage}
             disabled={!newMessage.trim() || slowModeTimer > 0}
@@ -336,7 +347,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
             <PaperAirplaneIcon className="w-5 h-5" />
           </button>
         </div>
-        
+
         {slowModeTimer > 0 && (
           <div className="mt-2 text-xs text-gray-500">
             You can send another message in {slowModeTimer} seconds

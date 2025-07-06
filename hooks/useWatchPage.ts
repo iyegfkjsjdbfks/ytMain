@@ -247,10 +247,10 @@ return;
           // Ensure channel has required subscriberCount property
           const channelWithSubscriberCount = {
             ...(foundChannel as any),
-            subscriberCount: 'subscriberCount' in foundChannel 
-              ? (foundChannel as any).subscriberCount 
-              : ('subscribers' in foundChannel && (foundChannel as any).subscribers 
-                ? (foundChannel as any).subscribers.toString() 
+            subscriberCount: 'subscriberCount' in foundChannel
+              ? (foundChannel as any).subscriberCount
+              : ('subscribers' in foundChannel && (foundChannel as any).subscribers
+                ? (foundChannel as any).subscribers.toString()
                 : '0'),
           };
           setChannel(channelWithSubscriberCount);

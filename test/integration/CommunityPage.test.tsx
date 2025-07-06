@@ -146,6 +146,8 @@ describe('CommunityPage', () => {
       toggleSidebar: vi.fn(),
       notifications: [
       ],
+      addNotification: vi.fn(),
+      removeNotification: vi.fn(),
     });
 
     renderWithQueryClient(<CommunityPage />);

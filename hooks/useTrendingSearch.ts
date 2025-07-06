@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
 import { VideoService } from '../services/api';
+import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
 import { getInitialSearchKeyword } from '../services/settingsService';
 
 import type { Video } from '../types';
@@ -12,8 +12,8 @@ const convertSearchResultToVideo = (
   index: number,
 ): Video => {
   // Generate a unique ID that preserves the source information
-  const videoId = result.id.startsWith('youtube-') || result.id.startsWith('google-search-') 
-    ? result.id 
+  const videoId = result.id.startsWith('youtube-') || result.id.startsWith('google-search-')
+    ? result.id
     : `trending-${result.id}-${index}`;
 
   return {
@@ -39,8 +39,8 @@ const convertSearchResultToVideo = (
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
     // Properties removed from Video type that don't exist
-    // allowedRegions, blockedRegions, isAgeRestricted, embeddable, 
-    // defaultLanguage, defaultAudioLanguage, recordingStatus, 
+    // allowedRegions, blockedRegions, isAgeRestricted, embeddable,
+    // defaultLanguage, defaultAudioLanguage, recordingStatus,
     // uploadStatus, selfDeclaredMadeForKids - these are not part of Video interface
     statistics: {
       viewCount: result.viewCount || 0,
@@ -76,12 +76,12 @@ interface UseInitialSearchResult {
 /**
  * Hook for fetching videos based on the initial search keyword from settings.
  * Uses the configurable keyword (default: 'trending') to search for videos.
- * 
+ *
  * For HOME PAGE behavior:
  * - In hybrid mode: Uses YouTube Data API first, then Google Custom Search as fallback
  * - In google-search mode: Uses Google Custom Search for discovery with YouTube API for metadata
  * - In youtube-api mode: Uses YouTube Data API only
- * 
+ *
  * This respects the Hybrid Mode settings and automatically refetches when
  * the keyword is updated in the admin settings.
  */
@@ -111,19 +111,19 @@ export function useTrendingSearch(): UseInitialSearchResult {
       });
 
       // Combine all results and convert to Video format
-      const allResults: (YouTubeSearchResult | GoogleSearchResult)[] = [
+      const allResults: Array<YouTubeSearchResult | GoogleSearchResult> = [
         ...(combinedResults.youtubeVideos || []),
         ...(combinedResults.googleSearchVideos || []),
       ];
 
       // Convert search results to Video format
-      const convertedVideos = allResults.map((result, index) => 
-        convertSearchResultToVideo(result, index)
+      const convertedVideos = allResults.map((result, index) =>
+        convertSearchResultToVideo(result, index),
       );
 
       // Add local videos if any
       const localVideos = combinedResults.localVideos || [];
-      
+
       // Combine and sort by view count (trending)
       const allVideos = [...localVideos, ...convertedVideos];
       const sortedVideos = allVideos.sort((a, b) => {

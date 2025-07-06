@@ -17,13 +17,13 @@ import type { Video, Short } from '../../types/core';
 export function useUnifiedVideos(
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
-  config?: UseApiConfig<UnifiedVideoMetadata[]>,
+  config?: UseApiConfig<{ data: UnifiedVideoMetadata[]; success: boolean; message: string }>,
 ) {
   return useQuery(
     ['unified-videos', String(limit), JSON.stringify(filters)],
     async () => {
       const response = await unifiedDataService.getTrendingVideos(limit, filters);
-      return { data: response.data, success: true, message: 'Videos fetched successfully' };
+      return { data: { data: response.data, success: true, message: 'Videos fetched successfully' }, success: true };
     },
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
@@ -73,13 +73,13 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
 export function useUnifiedTrendingVideos(
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
-  config?: UseApiConfig<UnifiedVideoMetadata[]>,
+  config?: UseApiConfig<{ data: UnifiedVideoMetadata[]; success: boolean; message: string }>,
 ) {
   return useQuery(
     ['unified-trending', String(limit), JSON.stringify(filters)],
     async () => {
       const response = await unifiedDataService.getTrendingVideos(limit, filters);
-      return { data: response.data, success: true, message: 'Trending videos fetched successfully' };
+      return { data: { data: response.data, success: true, message: 'Trending videos fetched successfully' }, success: true };
     },
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
@@ -184,13 +184,13 @@ export function useSavedVideos(config?: UseApiConfig<Video[]>) {
 // Unified Shorts hooks
 export function useUnifiedShorts(
   limit: number = 30,
-  config?: UseApiConfig<UnifiedVideoMetadata[]>,
+  config?: UseApiConfig<{ data: UnifiedVideoMetadata[]; success: boolean; message: string }>,
 ) {
   return useQuery(
     ['unified-shorts', String(limit)],
     async () => {
       const response = await unifiedDataService.getShortsVideos(limit);
-      return { data: response.data, success: true, message: 'Shorts fetched successfully' };
+      return { data: { data: response.data, success: true, message: 'Shorts fetched successfully' }, success: true };
     },
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
@@ -230,13 +230,13 @@ export function useUnifiedSearchVideos(
   query: string,
   filters: UnifiedSearchFilters = {},
   limit: number = 50,
-  config?: UseApiConfig<UnifiedVideoMetadata[]>,
+  config?: UseApiConfig<{ data: UnifiedVideoMetadata[]; success: boolean; message: string }>,
 ) {
   return useQuery(
     ['unified-search', query, JSON.stringify(filters), String(limit)],
     async () => {
       const response = await unifiedDataService.searchVideos(query, filters, limit);
-      return { data: response.data, success: true, message: 'Search results fetched successfully' };
+      return { data: { data: response.data, success: true, message: 'Search results fetched successfully' }, success: true };
     },
     {
       enabled: !!query && query.length > 2,

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import type React from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
@@ -82,17 +83,17 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         if (currentVideo) {
           // Generate intelligent search query based on current video
           let searchQuery = '';
-          
+
           // Extract meaningful words from title (remove common words)
           const titleWords = currentVideo.title
             .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters
             .split(' ')
-            .filter(word => 
-              word.length > 3 && 
-              !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase())
+            .filter(word =>
+              word.length > 3 &&
+              !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()),
             )
             .slice(0, 3); // Take first 3 meaningful words
-          
+
           if (titleWords.length > 0) {
             searchQuery = titleWords.join(' ');
           } else if (currentVideo.channelName) {
@@ -102,15 +103,15 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           } else {
             searchQuery = 'trending youtube videos';
           }
-          
+
           console.log('🔍 Searching for related videos with intelligent query:', searchQuery);
           console.log('🔍 Generated from video:', { title: currentVideo.title, channel: currentVideo.channelName, category: currentVideo.category });
-          
+
           // Use Google Custom Search directly for better recommendations
           const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
           const googleSearchResults = await searchYouTubeWithGoogleSearch(searchQuery);
           console.log('📊 Google Custom Search returned:', googleSearchResults.length, 'results');
-          
+
           // Convert Google Custom Search results to Video format
           recommendedVideos = googleSearchResults.map((googleVideo) => ({
             id: googleVideo.id,
@@ -143,7 +144,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
           const trendingResults = await searchYouTubeWithGoogleSearch('popular trending youtube videos 2024');
           console.log('📊 Google Custom Search trending results:', trendingResults.length);
-          
+
           // Convert Google Custom Search results to Video format
           recommendedVideos = trendingResults.map((googleVideo) => ({
             id: googleVideo.id,
@@ -308,7 +309,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           )}
         </div>
       </div>
-      
+
       {/* YouTube-style video grid - more compact spacing */}
       <div className="space-y-2">
         {recommendations.map((video) => (

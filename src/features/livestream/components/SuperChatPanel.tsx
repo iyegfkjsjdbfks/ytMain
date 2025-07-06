@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import {
   CurrencyDollarIcon,
   HeartIcon,
@@ -7,8 +9,9 @@ import {
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
 
-import type { SuperChat } from '../../../types/livestream';
 import { liveStreamService } from '../../../services/livestreamAPI';
+
+import type { SuperChat } from '../../../types/livestream';
 
 interface SuperChatPanelProps {
   streamId: string;
@@ -47,22 +50,24 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
           const bTime = b.timestamp ? new Date(b.timestamp).getTime() : 0;
           return bTime - aTime;
         });
-      
+
       setSuperChats(existingSuperChats);
       setTotalRevenue(existingSuperChats.reduce((sum, sc) => sum + sc.amount, 0));
     });
   }, [streamId]);
 
   const handleSendSuperChat = async () => {
-    if (!newSuperChat.message.trim() || newSuperChat.amount < 1) return;
+    if (!newSuperChat.message.trim() || newSuperChat.amount < 1) {
+return;
+}
 
     try {
       await liveStreamService.chat.sendSuperChat(
-        streamId, 
+        streamId,
         newSuperChat.message.trim(),
         newSuperChat.amount,
         'user_123',
-        'Current User'
+        'Current User',
       );
 
       setNewSuperChat({ amount: 5, message: '' });
@@ -117,7 +122,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
             {formatCurrency(totalRevenue)}
           </span>
         </div>
-        
+
         <button
           onClick={() => setShowSendForm(!showSendForm)}
           className="flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 text-sm"
@@ -141,7 +146,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                     key={tier.amount}
                     onClick={() => setNewSuperChat(prev => ({ ...prev, amount: tier.amount }))}
                     className={`p-2 rounded-lg text-white text-sm font-medium transition-all ${
-                      newSuperChat.amount === tier.amount 
+                      newSuperChat.amount === tier.amount
                         ? `${tier.color} ring-2 ring-offset-2 ring-blue-500`
                         : `${tier.color} opacity-75 hover:opacity-100`
                     }`}
@@ -245,7 +250,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
       {/* Recent Super Chats */}
       <div className="space-y-3 max-h-64 overflow-y-auto">
         <h3 className="font-medium text-gray-900">Recent Super Chats</h3>
-        
+
         {superChats.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             <CurrencyDollarIcon className="w-12 h-12 mx-auto mb-3 text-gray-300" />
@@ -277,9 +282,9 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
                   {formatCurrency(superChat.amount)}
                 </div>
               </div>
-              
+
               <p className="text-gray-800">{superChat.message}</p>
-              
+
               <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
                 <span>
                   Pinned for {Math.floor(getTierDuration(superChat.amount) / 60)} minutes

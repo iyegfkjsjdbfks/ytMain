@@ -272,48 +272,50 @@ class UnifiedDataService {
         const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
         if (youtubeVideos.length > 0) {
           const video = youtubeVideos[0];
-          console.log('✅ Successfully fetched metadata from YouTube Data API v3 (primary source):', video.title);
+          if (video) {
+            console.log('✅ Successfully fetched metadata from YouTube Data API v3 (primary source):', video.title);
 
-          // Convert to unified format with original ID preserved
-          const normalized: UnifiedVideoMetadata = {
-            id, // Keep original ID format (with prefix if it had one)
-            title: video.title,
-            description: video.description,
-            thumbnailUrl: video.thumbnailUrl,
-            videoUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
-            views: video.viewCount || 0,
-            viewsFormatted: this.formatViews(video.viewCount || 0),
-            likes: video.likeCount || 0,
-            dislikes: video.dislikeCount || 0,
-            commentCount: video.commentCount || 0,
-            channel: {
-              id: video.channelId,
-              name: video.channelName,
-              avatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName)}&size=88&background=ff0000&color=ffffff&bold=true`,
-              subscribers: 0,
-              subscribersFormatted: '0 subscribers',
-              isVerified: false,
-            },
-            duration: video.duration,
-            publishedAt: video.publishedAt,
-            publishedAtFormatted: this.formatTimeAgo(video.publishedAt),
-            category: video.category,
-            tags: video.tags,
-            isLive: video.isLive || false,
-            isShort: video.isShort || false,
-            visibility: video.visibility,
-            source: 'youtube' as const, // Metadata source is YouTube
-            metadata: {
-              quality: 'hd',
-              definition: 'hd',
-              captions: false,
-              language: 'en',
-              license: 'youtube',
-            },
-          };
+            // Convert to unified format with original ID preserved
+            const normalized: UnifiedVideoMetadata = {
+              id, // Keep original ID format (with prefix if it had one)
+              title: video.title || '',
+              description: video.description || '',
+              thumbnailUrl: video.thumbnailUrl || '',
+              videoUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
+              views: video.viewCount || 0,
+              viewsFormatted: this.formatViews(video.viewCount || 0),
+              likes: video.likeCount || 0,
+              dislikes: video.dislikeCount || 0,
+              commentCount: video.commentCount || 0,
+              channel: {
+                id: video.channelId || '',
+                name: video.channelName || '',
+                avatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
+                subscribers: 0,
+                subscribersFormatted: '0 subscribers',
+                isVerified: false,
+              },
+              duration: video.duration || '0:00',
+              publishedAt: video.publishedAt || new Date().toISOString(),
+              publishedAtFormatted: this.formatTimeAgo(video.publishedAt || new Date().toISOString()),
+              category: video.category || 'Entertainment',
+              tags: video.tags || [],
+              isLive: video.isLive || false,
+              isShort: video.isShort || false,
+              visibility: video.visibility || 'public',
+              source: 'youtube' as const, // Metadata source is YouTube
+              metadata: {
+                quality: 'hd',
+                definition: 'hd',
+                captions: false,
+                language: 'en',
+                license: 'youtube',
+              },
+            };
 
-          this.setCachedData(cacheKey, normalized);
-          return normalized;
+            this.setCachedData(cacheKey, normalized);
+            return normalized;
+          }
         }
       } catch (error) {
         console.warn('⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:', error);
@@ -684,7 +686,7 @@ class UnifiedDataService {
    * NEW: Search using Google Custom Search for discovery
    * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
    */
-  private async searchGoogleCustomSearchVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
+  private async searchGoogleCustomSearchVideos(query: string, _filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       console.log('🔍 Using Google Custom Search for video discovery with query:', query);
 
@@ -770,7 +772,7 @@ class UnifiedDataService {
                          filters.uploadDate === 'week' ? new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() :
                          filters.uploadDate === 'month' ? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() :
                          filters.uploadDate === 'year' ? new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString() :
-                         undefined
+                         new Date().toISOString(),
         }),
         forRecommendations: filters.forRecommendations || false,
       });
