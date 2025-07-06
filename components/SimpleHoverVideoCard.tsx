@@ -18,7 +18,6 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Configuration constants
-  const HOVER_DELAY = 300; // Reduced delay for better responsiveness
   const HIDE_DELAY = 150;  // Delay before hiding preview
 
   // Extract YouTube video ID from the video

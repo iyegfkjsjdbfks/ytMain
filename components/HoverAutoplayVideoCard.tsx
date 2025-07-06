@@ -21,9 +21,8 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   // Configuration constants
-  const HOVER_DELAY = 500; // Delay before showing video preview
-  const HIDE_DELAY = 100;  // Delay before hiding video preview
-  const PREVIEW_DURATION = 30; // Duration of video preview in seconds
+  const HOVER_DELAY = 500; // Delay before showing video preview in milliseconds
+  const HIDE_DELAY = 100; // Delay before hiding video preview in milliseconds
 
   // Extract YouTube video ID from the video
   const getVideoId = (video: Video): string | null => {
