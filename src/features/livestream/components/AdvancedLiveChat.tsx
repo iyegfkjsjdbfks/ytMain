@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   PaperAirplaneIcon,
   EllipsisVerticalIcon,
@@ -17,7 +17,7 @@ import type {
   ChatModerationAction,
   ChatBadge 
 } from '../../../types/livestream';
-import { liveStreamService } from '../../../services/liveStreamService';
+import { useLiveChat } from '../../../hooks/useLiveStream';
 
 interface AdvancedLiveChatProps {
   streamId: string;
