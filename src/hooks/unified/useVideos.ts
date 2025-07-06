@@ -3,11 +3,12 @@
  * Refactored video hooks using the new unified metadata system
  */
 
+import { useQuery as useReactQuery } from '@tanstack/react-query';
+
 import { videoApi, type VideoUploadData } from '../../services/api/videos';
 import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
 import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
 
-import { useQuery as useReactQuery, useMutation as useReactQueryMutation } from '@tanstack/react-query';
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 
 import type { Video, Short } from '../../types/core';
@@ -65,7 +66,7 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
     refetch: result.refetch, // Expose refetch function
   };
 
-  console.log(`🎬 useUnifiedVideo hook result:`, customResult);
+  console.log('🎬 useUnifiedVideo hook result:', customResult);
   return customResult;
 }
 

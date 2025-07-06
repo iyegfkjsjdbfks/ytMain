@@ -18,7 +18,6 @@ interface VideoPlaybackDetailsProps {
   disliked: boolean;
   isSubscribed: boolean;
   isSavedToAnyList: boolean;
-  mockLikeCount: number;
   showFullDescription: boolean;
   summary?: string | null;
   summaryError?: string | null;
@@ -43,7 +42,6 @@ const VideoPlaybackDetails = (props: VideoPlaybackDetailsProps) => {
     liked,
     disliked,
     isSubscribed,
-    mockLikeCount,
     showFullDescription,
     summary,
     summaryError,
@@ -95,7 +93,7 @@ return null;
       <VideoActions
         liked={liked}
         disliked={disliked}
-        likeCount={mockLikeCount}
+        likeCount={video.likes || 0}
         isSavedToAnyList={false}
         onLike={handleLike}
         onDislike={handleDislike}

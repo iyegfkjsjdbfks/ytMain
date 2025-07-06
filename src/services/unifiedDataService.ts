@@ -1,15 +1,15 @@
+import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
+import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 
 import { youtubeService } from './api/youtubeService';
-import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
-
-const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 import {
   metadataNormalizationService,
   type UnifiedVideoMetadata,
   type UnifiedChannelMetadata,
 } from './metadataNormalizationService';
-import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
+
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 /**
  * Configuration for unified data fetching
@@ -180,8 +180,8 @@ class UnifiedDataService {
     ) as Array<'local' | 'youtube'>;
 
     // NEW DISCOVERY STRATEGY: Use Google Custom Search for discovery by default
-    console.log(`🎯 NEW DISCOVERY STRATEGY: Google Custom Search for video discovery`);
-    
+    console.log('🎯 NEW DISCOVERY STRATEGY: Google Custom Search for video discovery');
+
     const results = await Promise.allSettled([
       ...(sources.includes('local') ? [this.searchLocalVideos(query, filters)] : []),
       ...(sources.includes('youtube') ? [this.searchGoogleCustomSearchVideos(query, filters)] : []),
@@ -259,7 +259,7 @@ class UnifiedDataService {
     }
 
     console.log(`🔍 UnifiedDataService: Getting video by ID: ${id}`);
-    console.log(`🎯 NEW METADATA STRATEGY: YouTube Data API v3 (primary metadata) → Google Custom Search (fallback metadata)`);
+    console.log('🎯 NEW METADATA STRATEGY: YouTube Data API v3 (primary metadata) → Google Custom Search (fallback metadata)');
 
     // Extract YouTube ID from any prefixed format
     const youtubeId = this.extractYouTubeId(id) || id;
@@ -273,10 +273,10 @@ class UnifiedDataService {
         if (youtubeVideos.length > 0) {
           const video = youtubeVideos[0];
           console.log('✅ Successfully fetched metadata from YouTube Data API v3 (primary source):', video.title);
-          
+
           // Convert to unified format with original ID preserved
           const normalized: UnifiedVideoMetadata = {
-            id: id, // Keep original ID format (with prefix if it had one)
+            id, // Keep original ID format (with prefix if it had one)
             title: video.title,
             description: video.description,
             thumbnailUrl: video.thumbnailUrl,
@@ -311,7 +311,7 @@ class UnifiedDataService {
               license: 'youtube',
             },
           };
-          
+
           this.setCachedData(cacheKey, normalized);
           return normalized;
         }
@@ -323,13 +323,13 @@ class UnifiedDataService {
     }
 
     // STEP 2: Fallback to Google Custom Search for metadata
-    console.log(`🎯 Step 2: Falling back to Google Custom Search for metadata`);
-    
+    console.log('🎯 Step 2: Falling back to Google Custom Search for metadata');
+
     if (id.startsWith('google-search-')) {
       console.log(`🔍 Checking googleSearchVideoStore for video: ${id}`);
       const googleSearchVideo = googleSearchVideoStore.getVideo(id);
-      console.log(`🔍 googleSearchVideoStore.getVideo result:`, googleSearchVideo);
-      
+      console.log('🔍 googleSearchVideoStore.getVideo result:', googleSearchVideo);
+
       if (googleSearchVideo) {
         console.log(`✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`);
         console.log('📊 Google Custom Search metadata:', {
@@ -338,7 +338,7 @@ class UnifiedDataService {
           channelName: googleSearchVideo.channelName,
           channelAvatarUrl: googleSearchVideo.channelAvatarUrl,
           views: googleSearchVideo.viewCount,
-          source: 'Google Custom Search JSON API'
+          source: 'Google Custom Search JSON API',
         });
 
         // Convert Google Custom Search result to unified format
@@ -372,46 +372,46 @@ class UnifiedDataService {
           source: 'google-search' as const,
           metadata: {
             quality: 'hd',
-            definition: 'high'
+            definition: 'high',
           },
         };
 
         // Cache the result
         this.setCachedData(cacheKey, normalized);
         return normalized;
-      } else {
+      }
         console.log(`❌ Google Custom Search video not found in store: ${id}`);
-        
-        // Try to fetch the video directly from Google Custom Search API
-        console.log(`🌐 Attempting to fetch video directly from Google Custom Search API`);
-        const youtubeId = id.replace('google-search-', '');
-        console.log(`📋 Extracted YouTube ID: ${youtubeId}`);
-        
-        try {
-          console.log(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${youtubeId}`);
-          console.log(`🔄 About to call fetchSingleVideoFromGoogleSearch function...`);
-          console.log(`🔄 Function type:`, typeof fetchSingleVideoFromGoogleSearch);
-          console.log(`🔄 Function exists:`, !!fetchSingleVideoFromGoogleSearch);
 
-          const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
-          console.log(`🔄 fetchSingleVideoFromGoogleSearch returned:`, googleSearchVideo);
+        // Try to fetch the video directly from Google Custom Search API
+        console.log('🌐 Attempting to fetch video directly from Google Custom Search API');
+        const extractedYoutubeId = id.replace('google-search-', '');
+        console.log(`📋 Extracted YouTube ID: ${extractedYoutubeId}`);
+
+        try {
+          console.log(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${extractedYoutubeId}`);
+          console.log('🔄 About to call fetchSingleVideoFromGoogleSearch function...');
+          console.log('🔄 Function type:', typeof fetchSingleVideoFromGoogleSearch);
+          console.log('🔄 Function exists:', !!fetchSingleVideoFromGoogleSearch);
+
+          const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(extractedYoutubeId);
+          console.log('🔄 fetchSingleVideoFromGoogleSearch returned:', googleSearchVideo);
           if (googleSearchVideo) {
             console.log(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
-            
+
             // Convert to unified format
             const normalized: UnifiedVideoMetadata = {
               id: googleSearchVideo.id,
               title: googleSearchVideo.title,
               description: googleSearchVideo.description || '',
               thumbnailUrl: googleSearchVideo.thumbnailUrl || '',
-              videoUrl: googleSearchVideo.videoUrl || `https://www.youtube.com/watch?v=${youtubeId}`,
+              videoUrl: googleSearchVideo.videoUrl || `https://www.youtube.com/watch?v=${extractedYoutubeId}`,
               views: googleSearchVideo.viewCount || 0,
               viewsFormatted: this.formatViews(googleSearchVideo.viewCount || 0),
               likes: googleSearchVideo.likeCount || 0,
               dislikes: googleSearchVideo.dislikeCount || 0,
               commentCount: googleSearchVideo.commentCount || 0,
               channel: {
-                id: googleSearchVideo.channelId || `channel-${youtubeId}`,
+                id: googleSearchVideo.channelId || `channel-${extractedYoutubeId}`,
                 name: googleSearchVideo.channelName || 'YouTube Channel',
                 avatarUrl: googleSearchVideo.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
                 subscribers: 0,
@@ -429,7 +429,7 @@ class UnifiedDataService {
               source: 'google-search' as const,
               metadata: {
                 quality: 'hd',
-                definition: 'high'
+                definition: 'high',
               },
             };
 
@@ -442,8 +442,8 @@ class UnifiedDataService {
           console.error('Error details:', {
             message: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
-            videoId: youtubeId,
-            originalId: id
+            videoId: extractedYoutubeId,
+            originalId: id,
           });
 
           // Check if YouTube API is available as fallback
@@ -457,12 +457,11 @@ class UnifiedDataService {
 
         // If Google Custom Search API fails, continue to YouTube API as fallback (only if YouTube API is not blocked)
         console.log(`🔄 Continuing to YouTube API as fallback for: ${id}`);
-      }
+
     }
 
     // Check if this is a YouTube video ID
-    const youtubeId = this.extractYouTubeId(id);
-
+    // youtubeId is already declared earlier in the function scope
     console.log(`UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`);
 
     if (youtubeId) {
@@ -487,7 +486,7 @@ class UnifiedDataService {
                 channelName: video.channelName,
                 channelAvatarUrl: video.channelAvatarUrl,
                 views: video.viewCount,
-                source: 'YouTube Data API v3'
+                source: 'YouTube Data API v3',
               });
             }
             // Convert already processed YouTube video to unified format
@@ -649,19 +648,19 @@ class UnifiedDataService {
   private async fetchYouTubeTrendingVideos(filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       console.log('🎯 NEW DISCOVERY STRATEGY: Google Custom Search (primary discovery) with YouTube Data API v3 metadata');
-      
+
       // NEW STRATEGY: Use Google Custom Search for discovery by default
       const { getYouTubeSearchProvider } = await import('../../services/settingsService');
       const provider = getYouTubeSearchProvider();
-      
+
       console.log(`📋 Admin selected provider: ${provider}`);
-      console.log(`🔍 Using Google Custom Search for video discovery (default strategy)`);
-      
+      console.log('🔍 Using Google Custom Search for video discovery (default strategy)');
+
       // Try Google Custom Search for discovery first
       return this.searchGoogleCustomSearchVideos('trending videos', filters);
     } catch (error) {
       console.error('Failed to fetch trending videos from Google Custom Search:', error);
-      
+
       // Fallback to YouTube Data API v3 for discovery if Google Custom Search fails
       if (API_KEY) {
         console.log('🔄 Falling back to YouTube Data API v3 for discovery');
@@ -688,18 +687,18 @@ class UnifiedDataService {
   private async searchGoogleCustomSearchVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       console.log('🔍 Using Google Custom Search for video discovery with query:', query);
-      
+
       // Import Google Custom Search service
       const { searchYouTubeVideosFromGoogle } = await import('../../services/googleSearchService');
-      
+
       // Search for videos using Google Custom Search
       const searchResults = await searchYouTubeVideosFromGoogle(query, {
         num: this.config.limits.youtube || 25,
-        sort: filters.sortBy === 'date' ? 'date' : undefined
+        sort: filters.sortBy === 'date' ? 'date' : undefined,
       });
-      
+
       console.log(`📋 Google Custom Search found ${searchResults.length} videos for discovery`);
-      
+
       // Convert search results to unified format
       // Note: These will have google-search- prefixed IDs for metadata fetching
       const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(video => ({
@@ -732,10 +731,10 @@ class UnifiedDataService {
         source: 'google-search' as const, // Discovery source
         metadata: {
           quality: 'hd',
-          definition: 'high'
+          definition: 'high',
         },
       }));
-      
+
       console.log(`✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`);
       return unifiedVideos;
     } catch (error) {
@@ -747,7 +746,7 @@ class UnifiedDataService {
   private async searchYouTubeVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       console.log('🎯 Using YouTube Data API v3 for video discovery (fallback)');
-      
+
       // Check if YouTube API is available
       if (!API_KEY) {
         console.log('YouTube API key not available for discovery fallback');
@@ -755,16 +754,16 @@ class UnifiedDataService {
       }
 
       console.log('🚀 Searching YouTube videos using YouTube Data API v3 for query:', query, filters);
-      
+
       // Use the YouTube search service
       const searchResults = await youtubeService.searchVideos(query, {
         maxResults: this.config.limits.youtube || 25,
         type: filters.type === 'short' ? 'video' : filters.type || 'video',
-        order: filters.sortBy === 'date' ? 'date' : 
-               filters.sortBy === 'views' ? 'viewCount' : 
+        order: filters.sortBy === 'date' ? 'date' :
+               filters.sortBy === 'views' ? 'viewCount' :
                filters.sortBy === 'rating' ? 'rating' : 'relevance',
-        videoDuration: filters.duration === 'short' ? 'short' : 
-                      filters.duration === 'long' ? 'long' : 
+        videoDuration: filters.duration === 'short' ? 'short' :
+                      filters.duration === 'long' ? 'long' :
                       filters.duration === 'medium' ? 'medium' : 'any',
         publishedAfter: filters.uploadDate === 'hour' ? new Date(Date.now() - 60 * 60 * 1000).toISOString() :
                        filters.uploadDate === 'today' ? new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() :
@@ -772,7 +771,7 @@ class UnifiedDataService {
                        filters.uploadDate === 'month' ? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() :
                        filters.uploadDate === 'year' ? new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString() :
                        undefined,
-        forRecommendations: filters.forRecommendations || false
+        forRecommendations: filters.forRecommendations || false,
       });
 
       // Convert search results to unified format

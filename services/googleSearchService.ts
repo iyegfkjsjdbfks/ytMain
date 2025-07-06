@@ -1,8 +1,10 @@
 // / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
-import type { Video } from '../types';
-import { googleSearchVideoStore } from './googleSearchVideoStore';
 import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';
+
+import { googleSearchVideoStore } from './googleSearchVideoStore';
+
+import type { Video } from '../types';
 
 // Types for Google Custom Search JSON API response
 interface GoogleSearchItem {
@@ -411,12 +413,16 @@ const convertToGoogleSearchResult = (
     // Try to extract view count from snippet text (e.g., "1.2M views")
     if (!viewCount && item.snippet) {
       const viewsMatch = item.snippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-      if (viewsMatch && viewsMatch[1]) {
+      if (viewsMatch?.[1]) {
         const viewsText = viewsMatch[1];
         let multiplier = 1;
-        if (viewsText.includes('K')) multiplier = 1000;
-        else if (viewsText.includes('M')) multiplier = 1000000;
-        else if (viewsText.includes('B')) multiplier = 1000000000;
+        if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
         const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
         if (!isNaN(baseNumber)) {
@@ -428,12 +434,16 @@ const convertToGoogleSearchResult = (
     // Try to extract view count from title and htmlSnippet as well
     if (!viewCount && item.title) {
       const titleViewsMatch = item.title.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-      if (titleViewsMatch && titleViewsMatch[1]) {
+      if (titleViewsMatch?.[1]) {
         const viewsText = titleViewsMatch[1];
         let multiplier = 1;
-        if (viewsText.includes('K')) multiplier = 1000;
-        else if (viewsText.includes('M')) multiplier = 1000000;
-        else if (viewsText.includes('B')) multiplier = 1000000000;
+        if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
         const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
         if (!isNaN(baseNumber)) {
@@ -445,12 +455,16 @@ const convertToGoogleSearchResult = (
     if (!viewCount && item.htmlSnippet) {
       const htmlSnippet = item.htmlSnippet.replace(/<[^>]*>/g, '');
       const htmlViewsMatch = htmlSnippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-      if (htmlViewsMatch && htmlViewsMatch[1]) {
+      if (htmlViewsMatch?.[1]) {
         const viewsText = htmlViewsMatch[1];
         let multiplier = 1;
-        if (viewsText.includes('K')) multiplier = 1000;
-        else if (viewsText.includes('M')) multiplier = 1000000;
-        else if (viewsText.includes('B')) multiplier = 1000000000;
+        if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
         const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
         if (!isNaN(baseNumber)) {
@@ -505,16 +519,16 @@ const convertToGoogleSearchResult = (
     uploadedAt: videoDetails?.snippet.publishedAt || uploadedAt,
     // Use YouTube API statistics if available, otherwise fall back to extracted values
     ...(videoDetails?.statistics.viewCount && {
-      viewCount: parseInt(videoDetails.statistics.viewCount, 10)
+      viewCount: parseInt(videoDetails.statistics.viewCount, 10),
     }),
     ...(videoDetails?.statistics.likeCount && {
-      likeCount: parseInt(videoDetails.statistics.likeCount, 10)
+      likeCount: parseInt(videoDetails.statistics.likeCount, 10),
     }),
     ...(videoDetails?.statistics.dislikeCount && {
-      dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10)
+      dislikeCount: parseInt(videoDetails.statistics.dislikeCount, 10),
     }),
     ...(videoDetails?.statistics.commentCount && {
-      commentCount: parseInt(videoDetails.statistics.commentCount, 10)
+      commentCount: parseInt(videoDetails.statistics.commentCount, 10),
     }),
     // If YouTube API data not available, use extracted values from Google Custom Search
     ...(!videoDetails?.statistics.viewCount && viewCount && { viewCount }),
@@ -671,7 +685,8 @@ export const searchYouTubeVideos = async (query: string): Promise<YouTubeSearchR
     searchUrl.searchParams.set('part', 'snippet');
     searchUrl.searchParams.set('q', query);
     searchUrl.searchParams.set('type', 'video');
-    searchUrl.searchParams.set('maxResults', '10');
+    searchUrl.searchParams.set('maxResults', '50');
+    console.log('🔍 YouTube API search URL:', searchUrl.toString());
     searchUrl.searchParams.set('order', 'relevance');
 
     const response = await fetch(searchUrl.toString());
@@ -737,6 +752,7 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     searchUrl.searchParams.set('cx', engineId);
     searchUrl.searchParams.set('q', `${query} site:youtube.com`);
     searchUrl.searchParams.set('num', '10');
+    console.log('🔍 Google Custom Search URL:', searchUrl.toString());
     // Remove searchType parameter as it's not supported for general web search
 
     const response = await fetch(searchUrl.toString());
@@ -763,11 +779,17 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
     let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
     let channelDetailsMap = new Map<string, YouTubeChannelDetails>();
 
-    // Try to fetch enhanced metadata if YouTube API is available and not blocked
+    // Always try to fetch enhanced metadata with YouTube API first, then fallback to Google Custom Search
+    // This implements the user rule: "use youtube data api to fetch and show metadata and google custom search api as a fallback for metadata everywhere"
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-    if (youtubeApiKey && videoIds.length > 0 && !isYouTubeDataApiBlocked()) {
+    const { getYouTubeSearchProvider } = await import('./settingsService');
+    const currentProvider = getYouTubeSearchProvider();
+    
+    // Always try YouTube API for metadata if available (regardless of provider selection)
+    if (youtubeApiKey && videoIds.length > 0) {
       try {
-        videoDetailsMap = await fetchVideoDetails(videoIds);
+        console.log(`🎯 Using YouTube Data API v3 for metadata enhancement (provider: ${currentProvider})`);
+        videoDetailsMap = await fetchVideoDetailsInternal(videoIds);
 
         // Extract unique channel IDs from video details
         const channelIds = Array.from(new Set(
@@ -775,11 +797,14 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
         ));
 
         if (channelIds.length > 0) {
-          channelDetailsMap = await fetchChannelDetails(channelIds);
+          channelDetailsMap = await fetchChannelDetailsInternal(channelIds);
         }
+        console.log(`✅ Enhanced YouTube API metadata fetched for ${videoDetailsMap.size} videos`);
       } catch (error) {
-        console.warn('Failed to fetch enhanced metadata for Google Search results:', error);
+        console.warn('⚠️ YouTube API metadata fetch failed, using Google Custom Search metadata as fallback:', error);
       }
+    } else {
+      console.log('⚠️ YouTube API not available for metadata enhancement, using Google Custom Search metadata only');
     }
 
     // Convert to our format with enhanced metadata when available
@@ -801,58 +826,64 @@ export const searchYouTubeWithGoogleSearch = async (query: string): Promise<Goog
   }
 };
 
-// Combined search function that searches both local videos and YouTube
-export const searchCombined = async (query: string, searchLocalVideos: (query: string) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+// Search function specifically for home page - respects hybrid mode preference
+export const searchForHomePage = async (query: string, searchLocalVideos: (query: string) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+  console.log('🏠 searchForHomePage called with query:', query);
   try {
     // Import settings service dynamically to avoid circular dependencies
     const { getYouTubeSearchProvider } = await import('./settingsService');
     const provider = getYouTubeSearchProvider();
+    console.log('🎯 YouTube search provider for home page:', provider);
 
     // Search local videos first
     const localVideos = await searchLocalVideos(query);
+    console.log('📁 Local videos found:', localVideos.length);
 
     let youtubeResults: YouTubeSearchResult[] | GoogleSearchResult[];
 
     if (provider === 'hybrid') {
-      // Hybrid mode: try YouTube API first, fallback to Custom Search on quota error
+      // Hybrid mode for HOME PAGE: Use YouTube Data API first, then Google Custom Search as fallback
+      console.log('🔄 Hybrid Mode (Home Page): Trying YouTube Data API first, then Google Custom Search as fallback');
       try {
+        console.log('🎯 Step 1: Attempting YouTube Data API search...');
         youtubeResults = await searchYouTubeVideos(query);
+        console.log('✅ YouTube Data API search successful:', youtubeResults.length, 'results');
         return {
           localVideos,
           youtubeVideos: youtubeResults,
           googleSearchVideos: [],
         };
-      } catch (error: any) {
-        console.warn('YouTube API failed, falling back to Custom Search:', error.message);
-        // Check if it's a quota error or similar API limit issue
-        if (error.message?.includes('quota') ||
-            error.message?.includes('limit') ||
-            error.message?.includes('exceeded') ||
-            error.status === 403) {
-          try {
-            youtubeResults = await searchYouTubeWithGoogleSearch(query);
-            return {
-              localVideos,
-              youtubeVideos: [],
-              googleSearchVideos: youtubeResults,
-            };
-          } catch (fallbackError) {
-            console.error('Both YouTube API and Custom Search failed:', fallbackError);
-            throw fallbackError;
-          }
-        } else {
-          throw error;
+      } catch (youtubeError: any) {
+        console.warn('🚨 YouTube Data API failed, falling back to Google Custom Search:', youtubeError.message);
+        try {
+          console.log('🎯 Step 2: Attempting Google Custom Search as fallback...');
+          youtubeResults = await searchYouTubeWithGoogleSearch(query);
+          console.log('✅ Google Custom Search fallback successful:', youtubeResults.length, 'results');
+          return {
+            localVideos,
+            youtubeVideos: [],
+            googleSearchVideos: youtubeResults,
+          };
+        } catch (fallbackError: any) {
+          console.error('❌ Both YouTube Data API and Google Custom Search failed in hybrid mode (home page)');
+          console.error('YouTube API Error:', youtubeError.message);
+          console.error('Google Search Error:', fallbackError.message);
+          throw new Error(`Hybrid mode failed on home page: YouTube API (${youtubeError.message}), Google Search (${fallbackError.message})`);
         }
       }
     } else if (provider === 'google-search') {
+      console.log('🔍 Using Google Custom Search for home page');
       youtubeResults = await searchYouTubeWithGoogleSearch(query);
+      console.log('✅ Google Custom Search results:', youtubeResults.length);
       return {
         localVideos,
         youtubeVideos: [],
         googleSearchVideos: youtubeResults,
       };
     } else {
+      console.log('🎯 Using YouTube Data API for home page');
       youtubeResults = await searchYouTubeVideos(query);
+      console.log('✅ YouTube Data API results:', youtubeResults.length);
       return {
         localVideos,
         youtubeVideos: youtubeResults,
@@ -860,8 +891,8 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
       };
     }
   } catch (error) {
-    console.error('Error in combined search:', error);
-    // Return local results only if YouTube search fails
+    console.error('Error in home page search:', error);
+    // Return local results only if both searches fail
     const localVideos = await searchLocalVideos(query);
     return {
       localVideos,
@@ -869,6 +900,70 @@ export const searchCombined = async (query: string, searchLocalVideos: (query: s
       googleSearchVideos: [],
     };
   }
+};
+
+// Search function specifically for search results page - always uses Google Custom Search for discovery
+export const searchForSearchResultsPage = async (query: string, searchLocalVideos: (query: string) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+  console.log('🔍 searchForSearchResultsPage called with query:', query);
+  try {
+    // Import settings service dynamically to avoid circular dependencies
+    const { getYouTubeSearchProvider } = await import('./settingsService');
+    const provider = getYouTubeSearchProvider();
+    console.log('🎯 YouTube search provider for search results page:', provider);
+
+    // Search local videos first
+    const localVideos = await searchLocalVideos(query);
+    console.log('📁 Local videos found:', localVideos.length);
+
+    let youtubeResults: YouTubeSearchResult[] | GoogleSearchResult[];
+
+    // For search results page, always use Google Custom Search for discovery
+    // with YouTube Data API for metadata enhancement (as per user requirements)
+    console.log('🔍 Search Results Page: Using Google Custom Search for discovery with YouTube API metadata enhancement');
+    try {
+      youtubeResults = await searchYouTubeWithGoogleSearch(query);
+      console.log('✅ Google Custom Search results with YouTube API metadata:', youtubeResults.length);
+      return {
+        localVideos,
+        youtubeVideos: [],
+        googleSearchVideos: youtubeResults,
+      };
+    } catch (error: any) {
+      console.error('❌ Google Custom Search failed on search results page:', error.message);
+      // If Google Custom Search fails, still try YouTube API as last resort
+      if (provider !== 'google-search') {
+        try {
+          console.log('🎯 Last resort: Trying YouTube Data API...');
+          youtubeResults = await searchYouTubeVideos(query);
+          console.log('✅ YouTube API last resort results:', youtubeResults.length);
+          return {
+            localVideos,
+            youtubeVideos: youtubeResults,
+            googleSearchVideos: [],
+          };
+        } catch (youtubeError) {
+          console.error('❌ YouTube API also failed:', youtubeError);
+        }
+      }
+      throw error;
+    }
+  } catch (error) {
+    console.error('Error in search results page search:', error);
+    // Return local results only if all searches fail
+    const localVideos = await searchLocalVideos(query);
+    return {
+      localVideos,
+      youtubeVideos: [],
+      googleSearchVideos: [],
+    };
+  }
+};
+
+// Legacy combined search function - kept for backward compatibility
+export const searchCombined = async (query: string, searchLocalVideos: (query: string) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+  console.log('🔍 searchCombined called with query (legacy):', query);
+  // Default to search results page behavior for backward compatibility
+  return searchForSearchResultsPage(query, searchLocalVideos);
 };
 
 // Fetch a single video by YouTube ID from Google Custom Search
@@ -913,7 +1008,7 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     console.log('📊 Search info:', {
       totalResults: data.searchInformation?.totalResults,
       itemsCount: data.items?.length || 0,
-      searchTime: data.searchInformation?.searchTime
+      searchTime: data.searchInformation?.searchTime,
     });
 
     if (!data.items || data.items.length === 0) {
@@ -922,7 +1017,7 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     }
 
     const item = data.items[0];
-    
+
     // Verify this is actually the video we're looking for
     if (!item.link.includes(youtubeVideoId)) {
       console.log(`❌ Found video does not match requested ID: ${youtubeVideoId}`);
@@ -930,11 +1025,11 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
     }
 
     console.log('🔍 Raw Google Search Item:', JSON.stringify(item, null, 2));
-    
+
     // Try to extract metadata from the YouTube page if available
     let enhancedMetadata: YouTubeVideoDetails | null = null;
     let channelMetadata: YouTubeChannelDetails | null = null;
-    
+
     // Use YouTube API for enhanced metadata when available
     // Even when Google Custom Search is selected as search provider, we can use YouTube API for individual video metadata
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -945,19 +1040,19 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
         console.log('🎯 Using YouTube API for enhanced metadata...');
         console.log('🔑 YouTube API Key available:', !!youtubeApiKey);
         console.log('💡 Note: Using YouTube API for metadata even with Google Custom Search selected');
-        
+
         const videoDetailsMap = await fetchVideoDetailsInternal([youtubeVideoId]);
         enhancedMetadata = videoDetailsMap.get(youtubeVideoId) || null;
 
         if (enhancedMetadata) {
           console.log('✅ Enhanced metadata found:', enhancedMetadata.snippet.title);
-          console.log('📊 Real view count:', parseInt(enhancedMetadata.statistics.viewCount).toLocaleString());
+          console.log('📊 Real view count:', parseInt(enhancedMetadata.statistics.viewCount, 10).toLocaleString());
           const channelDetailsMap = await fetchChannelDetailsInternal([enhancedMetadata.snippet.channelId]);
           channelMetadata = channelDetailsMap.get(enhancedMetadata.snippet.channelId) || null;
 
           if (channelMetadata) {
             console.log('✅ Channel metadata found from YouTube API:', channelMetadata.snippet.title);
-            console.log('👥 Subscriber count:', parseInt(channelMetadata.statistics.subscriberCount).toLocaleString());
+            console.log('👥 Subscriber count:', parseInt(channelMetadata.statistics.subscriberCount, 10).toLocaleString());
           }
         } else {
           console.log('❌ No enhanced metadata found from YouTube API, will use Google Custom Search fallback');
@@ -1038,12 +1133,16 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       // Try to extract view count from snippet text (e.g., "1.2M views")
       if (!viewCount && item.snippet) {
         const viewsMatch = item.snippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-        if (viewsMatch && viewsMatch[1]) {
+        if (viewsMatch?.[1]) {
           const viewsText = viewsMatch[1];
           let multiplier = 1;
-          if (viewsText.includes('K')) multiplier = 1000;
-          else if (viewsText.includes('M')) multiplier = 1000000;
-          else if (viewsText.includes('B')) multiplier = 1000000000;
+          if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
           const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
           if (!isNaN(baseNumber)) {
@@ -1056,12 +1155,16 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       // Try to extract view count from title (sometimes included)
       if (!viewCount && item.title) {
         const titleViewsMatch = item.title.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-        if (titleViewsMatch && titleViewsMatch[1]) {
+        if (titleViewsMatch?.[1]) {
           const viewsText = titleViewsMatch[1];
           let multiplier = 1;
-          if (viewsText.includes('K')) multiplier = 1000;
-          else if (viewsText.includes('M')) multiplier = 1000000;
-          else if (viewsText.includes('B')) multiplier = 1000000000;
+          if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
           const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
           if (!isNaN(baseNumber)) {
@@ -1075,12 +1178,16 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       if (!viewCount && item.htmlSnippet) {
         const htmlSnippet = item.htmlSnippet.replace(/<[^>]*>/g, ''); // Remove HTML tags
         const htmlViewsMatch = htmlSnippet.match(/(\d+(?:\.\d+)?[KMB]?)\s*views?/i);
-        if (htmlViewsMatch && htmlViewsMatch[1]) {
+        if (htmlViewsMatch?.[1]) {
           const viewsText = htmlViewsMatch[1];
           let multiplier = 1;
-          if (viewsText.includes('K')) multiplier = 1000;
-          else if (viewsText.includes('M')) multiplier = 1000000;
-          else if (viewsText.includes('B')) multiplier = 1000000000;
+          if (viewsText.includes('K')) {
+multiplier = 1000;
+} else if (viewsText.includes('M')) {
+multiplier = 1000000;
+} else if (viewsText.includes('B')) {
+multiplier = 1000000000;
+}
 
           const baseNumber = parseFloat(viewsText.replace(/[KMB]/i, ''));
           if (!isNaN(baseNumber)) {
@@ -1163,16 +1270,16 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
                duration,
       // Use YouTube API statistics if available, otherwise fall back to extracted values
       ...(enhancedMetadata?.statistics.viewCount && {
-        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10)
+        viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10),
       }),
       ...(enhancedMetadata?.statistics.likeCount && {
-        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10)
+        likeCount: parseInt(enhancedMetadata.statistics.likeCount, 10),
       }),
       ...(enhancedMetadata?.statistics.dislikeCount && {
-        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10)
+        dislikeCount: parseInt(enhancedMetadata.statistics.dislikeCount, 10),
       }),
       ...(enhancedMetadata?.statistics.commentCount && {
-        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10)
+        commentCount: parseInt(enhancedMetadata.statistics.commentCount, 10),
       }),
       // If YouTube API data not available, use extracted values from Google Custom Search
       ...(!enhancedMetadata?.statistics.viewCount && viewCount && { viewCount }),
@@ -1211,17 +1318,17 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
       console.log('  - Text sources for extraction:', {
         title: item.title,
         snippet: item.snippet,
-        htmlSnippet: item.htmlSnippet
+        htmlSnippet: item.htmlSnippet,
       });
     }
     console.log(`  🎯 Source: ${result.source}`);
     console.log(`  🔗 URL: ${result.videoUrl}`);
 
-    console.log(`✅ Successfully fetched video from Google Custom Search:`, result.title);
-    
+    console.log('✅ Successfully fetched video from Google Custom Search:', result.title);
+
     // Store the video for future use
     googleSearchVideoStore.storeVideo(result);
-    
+
     return result;
 
   } catch (error) {
@@ -1234,7 +1341,7 @@ export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: string): 
 function extractChannelFromTitle(title: string): string | null {
   // Remove " - YouTube" suffix first
   const cleanTitle = title.replace(/ - YouTube$/, '').replace(/\s*\|\s*YouTube$/, '');
-  
+
   // Try to extract channel name from common title patterns
   const patterns = [
     / - ([^-]+)$/,     // "Video Title - Channel Name"
@@ -1246,7 +1353,7 @@ function extractChannelFromTitle(title: string): string | null {
 
   for (const pattern of patterns) {
     const match = cleanTitle.match(pattern);
-    if (match && match[1]) {
+    if (match?.[1]) {
       const channelName = match[1].trim();
       // Filter out common non-channel words
       if (!['YouTube', 'Video', 'Official', 'HD', '4K', '2024', '2023'].includes(channelName)) {

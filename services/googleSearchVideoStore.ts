@@ -96,7 +96,7 @@ class GoogleSearchVideoStore {
     try {
       const data = localStorage.getItem(this.storageKey);
       if (data) {
-        const entries: [string, GoogleSearchResult][] = JSON.parse(data);
+        const entries: Array<[string, GoogleSearchResult]> = JSON.parse(data);
         this.videos = new Map(entries);
         console.log(`📂 Loaded ${this.videos.size} Google Search videos from storage`);
       }

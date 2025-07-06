@@ -68,6 +68,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*",
+    "test/**/*",
     "*.ts",
     "*.tsx",
     "vite-env.d.ts",

@@ -55,11 +55,13 @@ export function useNotifications() {
 
     // Show browser notification if permission granted
     if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-      new Notification(notification.title, {
+      const browserNotification = new Notification(notification.title, {
         body: notification.message,
         icon: notification.fromUserAvatar || '/favicon.ico',
         tag: notification.id,
       });
+      // Auto-close after 5 seconds
+      setTimeout(() => browserNotification.close(), 5000);
     }
 
     // Play notification sound (optional)

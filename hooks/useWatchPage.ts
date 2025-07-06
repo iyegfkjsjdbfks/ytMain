@@ -134,10 +134,6 @@ export const useWatchPage = () => {
   // Related videos state
   const [allRelatedVideos, setAllRelatedVideos] = useState<Video[]>([]);
 
-
-  // Mock like count
-  const mockLikeCount = 15420;
-
   // Load video data
   useEffect(() => {
     const loadVideoData = async () => {
@@ -627,7 +623,6 @@ newDisliked = false;
     isSubscribed,
     isInWatchLater,
     isSavedToAnyList,
-    mockLikeCount,
 
     // UI state
     showFullDescription,

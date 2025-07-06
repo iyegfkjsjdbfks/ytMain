@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
+
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
+import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 
 const GoogleSearchStoreDebug: React.FC = () => {
   const [storeVideos, setStoreVideos] = useState<any[]>([]);
@@ -31,8 +32,8 @@ const GoogleSearchStoreDebug: React.FC = () => {
           error: 'Google Custom Search API not configured',
           details: {
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId
-          }
+            engineId: !!searchEngineId,
+          },
         });
         return;
       }
@@ -83,7 +84,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Google Search Store Debug</h1>
-      
+
       {/* API Configuration Check */}
       <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6">
         <h2 className="text-lg font-semibold mb-2">API Configuration</h2>
@@ -132,7 +133,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
             {loading ? 'Testing...' : 'Test Unified Service'}
           </button>
         </div>
-        
+
         {testResult && (
           <div className="mt-4 p-3 bg-white dark:bg-gray-700 rounded">
             <h3 className="font-semibold mb-2">Direct Fetch Result:</h3>

@@ -1,0 +1,242 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+
+import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+
+import type { Video } from '../types';
+
+interface HoverAutoplayVideoCardProps {
+  video: Video;
+  className?: string;
+}
+
+const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [showIframe, setShowIframe] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Configuration constants
+  const HOVER_DELAY = 500; // Delay before showing video preview
+  const HIDE_DELAY = 100;  // Delay before hiding video preview
+  const PREVIEW_DURATION = 30; // Duration of video preview in seconds
+
+  // Extract YouTube video ID from the video
+  const getVideoId = (video: Video): string | null => {
+    // Try to extract from video.id if it has prefixes
+    if (video.id.startsWith('youtube-')) {
+      return video.id.replace('youtube-', '');
+    }
+    if (video.id.startsWith('google-search-')) {
+      return video.id.replace('google-search-', '');
+    }
+    
+    // Try to extract from videoUrl if available
+    if (video.videoUrl) {
+      return getYouTubeVideoId(video.videoUrl);
+    }
+    
+    // If id looks like a YouTube video ID (11 characters)
+    if (video.id.length === 11 && /^[a-zA-Z0-9_-]+$/.test(video.id)) {
+      return video.id;
+    }
+    
+    return null;
+  };
+
+  const videoId = getVideoId(video);
+
+  const formatDuration = (duration: string | number) => {
+    if (typeof duration === 'string') return duration;
+    if (typeof duration === 'number') {
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration % 60;
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    return '0:00';
+  };
+
+  const formatViews = (views: string | number) => {
+    const num = typeof views === 'string' ? parseInt(views, 10) || 0 : views || 0;
+    if (num >= 1000000000) {
+      return `${(num / 1000000000).toFixed(1)}B`;
+    } else if (num >= 1000000) {
+      return `${(num / 1000000).toFixed(1)}M`;
+    } else if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}K`;
+    }
+    return num.toString();
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    
+    // Clear any existing hide timeout
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+
+    // Only show iframe if we have a valid video ID and no previous errors
+    if (videoId && !hasError) {
+      // Set a timeout to show the iframe after hovering for configured delay
+      hoverTimeoutRef.current = setTimeout(() => {
+        setShowIframe(true);
+      }, HOVER_DELAY);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    
+    // Clear the hover timeout if user leaves before delay completes
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+
+    // Hide iframe after a brief delay to prevent flickering
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowIframe(false);
+    }, HIDE_DELAY);
+  };
+  
+  // Handle iframe errors
+  const handleIframeError = () => {
+    console.warn('YouTube iframe failed to load for video:', videoId);
+    setHasError(true);
+    setShowIframe(false);
+  };
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div 
+      className={`group cursor-pointer ${className}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Video Thumbnail/Player */}
+      <div className="relative mb-3">
+        <Link to={`/watch/${video.id}`}>
+          <div className="relative w-full" style={{ height: '250px' }}>
+            {/* Thumbnail - always visible as background */}
+            <img
+              src={video.thumbnailUrl}
+              alt={video.title}
+              className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
+                showIframe ? 'opacity-0' : 'opacity-100 group-hover:rounded-lg'
+              }`}
+              loading="lazy"
+            />
+            
+            {/* YouTube iframe - shown on hover */}
+            {showIframe && videoId && (
+              <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden bg-black">
+                <iframe
+                  key={`hover-${videoId}`} // Force remount to prevent DOM issues
+                  src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&start=0&end=30&loop=1&playlist=${videoId}&origin=${encodeURIComponent(window.location.origin)}&enablejsapi=0`}
+                  title={`Preview: ${video.title}`}
+                  className="w-full h-full border-0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  style={{ 
+                    pointerEvents: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onError={handleIframeError}
+                />
+                
+              </div>
+            )}
+            
+            
+            {/* Duration Badge */}
+            {video.duration && video.duration !== '0:00' && (
+              <div className={`absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded-sm font-medium transition-opacity duration-200 ${
+                showIframe ? 'opacity-0' : 'opacity-100'
+              }`}>
+                {formatDuration(video.duration)}
+              </div>
+            )}
+            
+            {/* Hover indicator */}
+            {isHovered && !showIframe && videoId && (
+              <div className={`absolute top-2 left-2 text-white text-xs px-2 py-1 rounded-sm font-medium ${
+                hasError ? 'bg-gray-600' : 'bg-red-600'
+              }`}>
+                {hasError ? 'Thumbnail Only' : 'Preview'}
+              </div>
+            )}
+          </div>
+        </Link>
+      </div>
+
+      {/* Video Info */}
+      <div className="flex gap-3">
+        {/* Channel Avatar */}
+        {video.channelAvatarUrl && (
+          <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
+            <img
+              src={video.channelAvatarUrl}
+              alt={video.channelName}
+              className="w-9 h-9 rounded-full object-cover"
+            />
+          </Link>
+        )}
+
+        {/* Video Details */}
+        <div className="flex-1 min-w-0">
+          {/* Video Title */}
+          <Link to={`/watch/${video.id}`}>
+            <h3 className="font-medium text-black dark:text-white line-clamp-2 text-sm leading-5 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {video.title}
+            </h3>
+          </Link>
+
+          {/* Channel Name */}
+          <Link to={`/channel/${video.channelId}`}>
+            <p className="text-gray-600 dark:text-gray-400 text-sm hover:text-gray-800 dark:hover:text-white transition-colors">
+              {video.channelName}
+            </p>
+          </Link>
+
+          {/* Views and Upload Time */}
+          <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+            <span>{formatViews(video.views)} views</span>
+            <span className="mx-1">•</span>
+            <span>
+              {(() => {
+                try {
+                  const date = new Date(video.uploadedAt);
+                  if (isNaN(date.getTime())) {
+                    return 'Recently';
+                  }
+                  return formatDistanceToNow(date, { addSuffix: true });
+                } catch {
+                  return 'Recently';
+                }
+              })()} 
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HoverAutoplayVideoCard;

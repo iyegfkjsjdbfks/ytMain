@@ -1,12 +1,11 @@
-import type React from 'react';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
-import { youtubeSearchService } from '../services/youtubeSearchService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
+import { youtubeSearchService } from '../services/youtubeSearchService';
 
-import OptimizedVideoCard from './OptimizedVideoCard';
 import EnhancedYouTubeVideoCard from './EnhancedYouTubeVideoCard';
+import OptimizedVideoCard from './OptimizedVideoCard';
 
 import type { Video } from '../types';
 
@@ -39,20 +38,20 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     const provider = getYouTubeSearchProvider();
     const googleSearchConfigured = youtubeSearchService.isConfigured();
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-    
+
     setSearchProvider(provider);
-    
+
     // NEW STRATEGY: Google Custom Search for discovery, YouTube Data API v3 for metadata
     const shouldUseGoogleCustomSearch = googleSearchConfigured; // Use Google Custom Search for discovery
-    
+
     setUseGoogleCustomSearch(shouldUseGoogleCustomSearch);
-    
+
     console.log('🎯 NEW STRATEGY - Discovery and Metadata Configuration:');
     console.log('   Admin Selected Provider:', provider);
     console.log('   🔍 DISCOVERY: Google Custom Search API', googleSearchConfigured ? '✅ Available (DEFAULT)' : '❌ Not configured');
     console.log('   📋 METADATA: YouTube Data API v3', youtubeApiKey ? '✅ Available (PRIMARY)' : '❌ Missing');
     console.log('   Strategy: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
-    
+
     if (googleSearchConfigured && youtubeApiKey) {
       console.log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata');
     } else if (googleSearchConfigured) {
@@ -71,85 +70,109 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       let recommendedVideos: Video[] = [];
 
       if (useGoogleCustomSearch) {
-        console.log('🎯 Using NEW STRATEGY: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
+        console.log('🎯 Using DIRECT STRATEGY: Google Custom Search API for YouTube recommendations');
         console.log('🔍 Current video context:', {
           id: currentVideo?.id,
           title: currentVideo?.title,
           category: currentVideo?.category,
           tags: currentVideo?.tags,
-          channelName: currentVideo?.channelName
+          channelName: currentVideo?.channelName,
         });
 
-        // Use unified data service which implements the new priority strategy
-        const { unifiedDataService } = await import('../src/services/unifiedDataService');
-        console.log('🔄 Unified data service imported successfully');
-
         if (currentVideo) {
-          // Search for related videos based on current video
-          const searchQuery = currentVideo.title || currentVideo.channelName || 'trending videos';
-          console.log('🔍 Searching for related videos with query:', searchQuery);
-          const searchResponse = await unifiedDataService.searchVideos(searchQuery, {}, maxRecommendations);
-          console.log('📊 Search response from unified service:', searchResponse);
-          const unifiedVideos = searchResponse.data;
-          console.log('📺 Unified videos from search:', unifiedVideos.length);
-
-          // Convert UnifiedVideoMetadata to Video format
-          recommendedVideos = unifiedVideos.map((unifiedVideo) => ({
-            id: unifiedVideo.id,
-            title: unifiedVideo.title,
-            description: unifiedVideo.description,
-            thumbnailUrl: unifiedVideo.thumbnailUrl,
-            videoUrl: unifiedVideo.videoUrl,
-            duration: unifiedVideo.duration,
-            views: unifiedVideo.viewsFormatted,
-            viewCount: unifiedVideo.views,
-            channelName: unifiedVideo.channel.name,
-            channelId: unifiedVideo.channel.id,
-            channelAvatarUrl: unifiedVideo.channel.avatarUrl,
-            uploadedAt: unifiedVideo.publishedAt,
-            category: unifiedVideo.category,
-            tags: unifiedVideo.tags,
-            isLive: unifiedVideo.isLive,
-            isShort: unifiedVideo.isShort,
-          }));
+          // Generate intelligent search query based on current video
+          let searchQuery = '';
+          
+          // Extract meaningful words from title (remove common words)
+          const titleWords = currentVideo.title
+            .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters
+            .split(' ')
+            .filter(word => 
+              word.length > 3 && 
+              !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase())
+            )
+            .slice(0, 3); // Take first 3 meaningful words
+          
+          if (titleWords.length > 0) {
+            searchQuery = titleWords.join(' ');
+          } else if (currentVideo.channelName) {
+            searchQuery = currentVideo.channelName;
+          } else if (currentVideo.category && currentVideo.category !== 'General') {
+            searchQuery = currentVideo.category;
+          } else {
+            searchQuery = 'trending youtube videos';
+          }
+          
+          console.log('🔍 Searching for related videos with intelligent query:', searchQuery);
+          console.log('🔍 Generated from video:', { title: currentVideo.title, channel: currentVideo.channelName, category: currentVideo.category });
+          
+          // Use Google Custom Search directly for better recommendations
+          const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
+          const googleSearchResults = await searchYouTubeWithGoogleSearch(searchQuery);
+          console.log('📊 Google Custom Search returned:', googleSearchResults.length, 'results');
+          
+          // Convert Google Custom Search results to Video format
+          recommendedVideos = googleSearchResults.map((googleVideo) => ({
+            id: googleVideo.id,
+            title: googleVideo.title,
+            description: googleVideo.description,
+            thumbnailUrl: googleVideo.thumbnailUrl,
+            videoUrl: googleVideo.videoUrl,
+            duration: googleVideo.duration,
+            views: googleVideo.viewCount?.toString() || '0',
+            viewCount: googleVideo.viewCount || 0,
+            channelName: googleVideo.channelName,
+            channelId: googleVideo.channelId || `channel-${googleVideo.id}`,
+            channelAvatarUrl: googleVideo.channelAvatarUrl,
+            uploadedAt: googleVideo.uploadedAt,
+            category: googleVideo.categoryId || 'Entertainment',
+            tags: googleVideo.tags || [],
+            isLive: googleVideo.isLive || false,
+            isShort: false,
+            likes: googleVideo.likeCount || 0,
+            dislikes: googleVideo.dislikeCount || 0,
+          })).slice(0, maxRecommendations);
         } else {
-          // Get trending videos as recommendations
-          console.log('🔍 Getting trending videos using unified service...');
-          const trendingResponse = await unifiedDataService.getTrendingVideos(maxRecommendations);
-          const unifiedVideos = trendingResponse.data;
-
-          // Convert UnifiedVideoMetadata to Video format
-          recommendedVideos = unifiedVideos.map((unifiedVideo) => ({
-            id: unifiedVideo.id,
-            title: unifiedVideo.title,
-            description: unifiedVideo.description,
-            thumbnailUrl: unifiedVideo.thumbnailUrl,
-            videoUrl: unifiedVideo.videoUrl,
-            duration: unifiedVideo.duration,
-            views: unifiedVideo.viewsFormatted,
-            viewCount: unifiedVideo.views,
-            channelName: unifiedVideo.channel.name,
-            channelId: unifiedVideo.channel.id,
-            channelAvatarUrl: unifiedVideo.channel.avatarUrl,
-            uploadedAt: unifiedVideo.publishedAt,
-            category: unifiedVideo.category,
-            tags: unifiedVideo.tags,
-            isLive: unifiedVideo.isLive,
-            isShort: unifiedVideo.isShort,
-          }));
+          // Get trending videos using Google Custom Search
+          console.log('🔍 Getting trending videos using Google Custom Search...');
+          const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
+          const trendingResults = await searchYouTubeWithGoogleSearch('popular trending youtube videos 2024');
+          console.log('📊 Google Custom Search trending results:', trendingResults.length);
+          
+          // Convert Google Custom Search results to Video format
+          recommendedVideos = trendingResults.map((googleVideo) => ({
+            id: googleVideo.id,
+            title: googleVideo.title,
+            description: googleVideo.description,
+            thumbnailUrl: googleVideo.thumbnailUrl,
+            videoUrl: googleVideo.videoUrl,
+            duration: googleVideo.duration,
+            views: googleVideo.viewCount?.toString() || '0',
+            viewCount: googleVideo.viewCount || 0,
+            channelName: googleVideo.channelName,
+            channelId: googleVideo.channelId || `channel-${googleVideo.id}`,
+            channelAvatarUrl: googleVideo.channelAvatarUrl,
+            uploadedAt: googleVideo.uploadedAt,
+            category: googleVideo.categoryId || 'Entertainment',
+            tags: googleVideo.tags || [],
+            isLive: googleVideo.isLive || false,
+            isShort: false,
+            likes: googleVideo.likeCount || 0,
+            dislikes: googleVideo.dislikeCount || 0,
+          })).slice(0, maxRecommendations);
         }
 
-        console.log(`📋 Unified service returned ${recommendedVideos.length} recommendations using discovery + metadata strategy`);
+        console.log(`📋 Google Custom Search returned ${recommendedVideos.length} recommendations`);
 
-        // Fallback to local videos only if both APIs fail
+        // Fallback to local videos only if Google Custom Search fails
         if (recommendedVideos.length === 0) {
-          console.log('⚠️ No results from Google Custom Search discovery or YouTube Data API v3 metadata, falling back to local videos');
+          console.log('⚠️ No results from Google Custom Search, falling back to local videos');
           const availableVideos = realVideos.filter(video =>
             !activeVideoId || video.id !== activeVideoId,
           );
           recommendedVideos = availableVideos.slice(0, maxRecommendations);
         } else {
-          console.log(`✅ Using ${recommendedVideos.length} recommendations from discovery + metadata strategy`);
+          console.log(`✅ Using ${recommendedVideos.length} recommendations from Google Custom Search`);
         }
       } else {
         // Fallback to real videos with basic recommendation logic
@@ -160,19 +183,19 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
         // Simple recommendation logic - prioritize similar categories if available
         let recommended: Video[] = [];
-        
+
         if (currentVideo?.category) {
           // First, try to get videos from the same category
           const sameCategory = availableVideos.filter(
-            video => video.category === currentVideo.category
+            video => video.category === currentVideo.category,
           );
           recommended = [...sameCategory];
         }
-        
+
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
           const remaining = availableVideos.filter(
-            video => !recommended.find(r => r.id === video.id)
+            video => !recommended.find(r => r.id === video.id),
           );
           recommended = [...recommended, ...remaining];
         }
@@ -185,7 +208,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
       setRecommendations(recommendedVideos);
     } catch (error) {
       console.error('Error generating recommendations:', error);
-      
+
       // Fallback to real videos in case of error
       const availableVideos = realVideos.filter(video =>
         !activeVideoId || video.id !== activeVideoId,
@@ -214,20 +237,31 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
   if (loading) {
     return (
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Recommended for you
-          </h3>
-          {useGoogleCustomSearch && (
-            <div className="flex items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              <span>Google Custom Search discovery + YouTube Data API v3 metadata...</span>
-            </div>
-          )}
+      <div className="space-y-0">
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+              Recommended for you
+            </h3>
+            {useGoogleCustomSearch && (
+              <div className="flex items-center space-x-1 text-xs text-blue-600 dark:text-blue-400">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                <span>Loading...</span>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
+        <div className="space-y-2">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex gap-2 p-1">
+              <div className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
+              <div className="flex-1 min-w-0">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -235,10 +269,12 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
   if (recommendations.length === 0) {
     return (
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Recommended for you
-        </h3>
+      <div className="space-y-0">
+        <div className="mb-4">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            Recommended for you
+          </h3>
+        </div>
         <div className="text-center py-8 text-gray-500">
           No recommendations available
         </div>
@@ -247,19 +283,24 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Recommended for you
-        </h3>
-        {useGoogleCustomSearch && (
-          <div className="flex items-center space-x-1 text-xs text-green-600 dark:text-green-400">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span>Google Custom Search Discovery + YouTube Data API v3 Metadata ({searchProvider})</span>
-          </div>
-        )}
+    <div className="space-y-0">
+      {/* YouTube-style section header - more compact */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            Recommended for you
+          </h3>
+          {useGoogleCustomSearch && (
+            <div className="flex items-center space-x-1 text-xs text-green-600 dark:text-green-400">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span>Live</span>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="space-y-3">
+      
+      {/* YouTube-style video grid - more compact spacing */}
+      <div className="space-y-2">
         {recommendations.map((video) => (
           <div key={video.id} className="cursor-pointer" onClick={() => handleVideoClick(video)}>
             {useGoogleCustomSearch ? (

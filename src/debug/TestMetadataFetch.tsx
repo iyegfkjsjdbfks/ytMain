@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
-import { unifiedDataService } from '../services/unifiedDataService';
+
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
+import { unifiedDataService } from '../services/unifiedDataService';
 
 const TestMetadataFetch: React.FC = () => {
   const [result, setResult] = useState<any>(null);
@@ -122,7 +124,7 @@ const TestMetadataFetch: React.FC = () => {
           <h3 className="font-bold mb-2">
             Result from {result.type === 'direct' ? 'Direct Google API' : 'Unified Data Service'}:
           </h3>
-          
+
           {result.data ? (
             <div className="space-y-2">
               <p><strong>Title:</strong> {result.data.title || 'N/A'}</p>
@@ -140,7 +142,7 @@ const TestMetadataFetch: React.FC = () => {
           ) : (
             <p className="text-red-600">No data returned</p>
           )}
-          
+
           <details className="mt-4">
             <summary className="cursor-pointer font-medium">Raw Data</summary>
             <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">

@@ -74,25 +74,55 @@ const SearchResultsPage: React.FC = () => {
     const currentController = abortController;
 
     try {
-      // Use searchCombined only since it already includes local search
-      // This avoids duplicate API calls and improves performance
-      const combinedResults = await searchCombined(
-        searchQuery,
-        (query) => VideoService.searchVideos(query).then(result => result.videos),
-      );
-
-      // Check if request was cancelled
-      if (abortController.signal.aborted) {
-        return;
+      // Import settings to check current provider
+      const { getYouTubeSearchProvider } = await import('../services/settingsService');
+      const provider = getYouTubeSearchProvider();
+      
+      console.log(`🔍 Search provider: ${provider}`);
+      
+      // When Hybrid Mode is selected, prioritize Google Custom Search API for discovery
+      // as per user requirement and rule
+      if (provider === 'hybrid') {
+        console.log('🔄 Hybrid Mode: Using Google Custom Search API for discovery with YouTube API metadata fallback');
+        
+        // Use Google Custom Search for discovery with YouTube API for metadata enhancement
+        const combinedResults = await searchCombined(
+          searchQuery,
+          (query) => VideoService.searchVideos(query).then(result => result.videos),
+        );
+        
+        // Check if request was cancelled
+        if (abortController.signal.aborted) {
+          return;
+        }
+        
+        setSearchState({
+          videos: combinedResults.localVideos || [],
+          youtubeVideos: combinedResults.youtubeVideos || [],
+          googleSearchVideos: combinedResults.googleSearchVideos || [],
+          loading: false,
+          youtubeLoading: false,
+        });
+      } else {
+        // Use the original combined search for other modes
+        const combinedResults = await searchCombined(
+          searchQuery,
+          (query) => VideoService.searchVideos(query).then(result => result.videos),
+        );
+        
+        // Check if request was cancelled
+        if (abortController.signal.aborted) {
+          return;
+        }
+        
+        setSearchState({
+          videos: combinedResults.localVideos || [],
+          youtubeVideos: combinedResults.youtubeVideos || [],
+          googleSearchVideos: combinedResults.googleSearchVideos || [],
+          loading: false,
+          youtubeLoading: false,
+        });
       }
-
-      setSearchState({
-        videos: combinedResults.localVideos || [],
-        youtubeVideos: combinedResults.youtubeVideos || [],
-        googleSearchVideos: combinedResults.googleSearchVideos || [],
-        loading: false,
-        youtubeLoading: false,
-      });
 
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
@@ -134,7 +164,7 @@ const SearchResultsPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
       <OptimizedSearchResults
         videos={searchState.videos}
         youtubeVideos={searchState.youtubeVideos}
@@ -144,10 +174,10 @@ const SearchResultsPage: React.FC = () => {
         sortBy="relevance"
         onVideoClick={(video) => {
           if ('videoId' in video) {
-            // YouTube video
-            navigate(`/watch?v=${video.videoId}`);
+            // YouTube video - use google-search prefix for search results
+            navigate(`/watch?v=google-search-${video.videoId}`);
           } else {
-            // Local video
+            // Local video or converted video
             navigate(`/watch?v=${video.id}`);
           }
         }}

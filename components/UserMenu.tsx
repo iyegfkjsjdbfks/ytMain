@@ -1,6 +1,5 @@
 
-import type React from 'react';
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,

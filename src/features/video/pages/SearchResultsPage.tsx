@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-import { searchCombined } from '../../../../services/googleSearchService';
+import { searchForSearchResultsPage } from '../../../../services/googleSearchService';
 import VideoCard from '../components/VideoCard';
 
 import type { Video } from '../../../types/core';
@@ -32,7 +32,7 @@ return;
           return [];
         };
 
-        const results = await searchCombined(query, searchLocalVideos);
+        const results = await searchForSearchResultsPage(query, searchLocalVideos);
         // Convert search results to Video format
         const videoResults: Video[] = [
           ...results.youtubeVideos.map(video => ({

@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports, no-duplicate-imports
 import React, { useState, useEffect } from 'react';
 
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon, BugAntIcon } from '@heroicons/react/24/outline';
@@ -19,21 +18,29 @@ import {
   isYouTubeApiAvailable,
   isYouTubeApiConfigured,
   isHybridModeAvailable,
+  getInitialSearchKeyword,
+  setInitialSearchKeyword,
+  getAllPageConfigurations,
+  getPageDisplayName,
+  getPlayerUsageByPage,
+  setPagePlayerConfig,
   type YouTubeSearchProvider,
   type YouTubePlayerType,
   type LocalVideoPlayerType,
   type VideoPlayerConfig,
+  type PageType,
+  type PagePlayerConfig,
 } from '../services/settingsService';
 
 
 const AdminPage: React.FC = () => {
-  const [provider, setProvider] = useState<YouTubeSearchProvider>('youtube-api');
+  const [provider, setProvider] = useState<YouTubeSearchProvider>('hybrid');
   const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
   const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('advanced-video-player');
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
   const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
-  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'google-search-debug'>('overview');
+  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'google-search-debug' | 'player-config'>('overview');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -43,6 +50,7 @@ const AdminPage: React.FC = () => {
   const [testResult, setTestResult] = useState<any>(null);
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
 
   useEffect(() => {
     // Load current settings
@@ -53,6 +61,7 @@ const AdminPage: React.FC = () => {
     setDefaultCategory(settings.defaultVideoPlayerCategory);
     setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
     setEnabledLocalPlayersState(getEnabledLocalPlayers());
+    setInitialSearchKeywordState(getInitialSearchKeyword());
 
     // Load Google Search store videos
     loadStoreVideos();
@@ -84,8 +93,8 @@ const AdminPage: React.FC = () => {
           error: 'Google Custom Search API not configured',
           details: {
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId
-          }
+            engineId: !!searchEngineId,
+          },
         });
         return;
       }
@@ -96,7 +105,7 @@ const AdminPage: React.FC = () => {
 
       // Refresh store videos
       await loadStoreVideos();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Test fetch error:', error);
       setTestResult({ error: error.message });
     } finally {
@@ -120,7 +129,7 @@ const AdminPage: React.FC = () => {
       setUnifiedServiceTest(result);
 
       console.log('🧪 Unified service result:', result);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Unified service test error:', error);
       setUnifiedServiceTest({ error: error.message });
     } finally {
@@ -248,12 +257,30 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  const handleSaveInitialSearchKeyword = async () => {
+    setIsSaving(true);
+    setSaveMessage('');
+
+    try {
+      setInitialSearchKeyword(initialSearchKeyword);
+      setSaveMessage('Initial search keyword updated successfully!');
+    } catch (error) {
+      console.error('Error saving initial search keyword:', error);
+      setSaveMessage('Error saving initial search keyword. Please try again.');
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
   const youtubeApiConfigured = isYouTubeApiConfigured();
   const youtubeApiAvailable = isYouTubeApiAvailable();
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
   const renderPlayerCard = (config: VideoPlayerConfig, isSelected: boolean, isEnabled: boolean, onSelect: () => void, onToggleEnabled: () => void) => {
+    const usedOnPages = getPlayerUsageByPage(config.type);
+    
     const getPerformanceColor = (performance: string) => {
       switch (performance) {
         case 'high': return 'text-green-600 bg-green-100';
@@ -296,6 +323,11 @@ const AdminPage: React.FC = () => {
             }`}>
               {isEnabled ? 'Enabled' : 'Disabled'}
             </span>
+            {isSelected && (
+              <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-600 text-white">
+                ACTIVE
+              </span>
+            )}
           </div>
           <div className="flex items-center space-x-2">
             <button
@@ -321,6 +353,26 @@ const AdminPage: React.FC = () => {
         </div>
 
         <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+
+        {/* Page Usage Information */}
+        {usedOnPages.length > 0 && (
+          <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <h4 className="text-sm font-medium text-blue-900 mb-2 flex items-center">
+              <CogIcon className="h-4 w-4 mr-1" />
+              Currently Used On:
+            </h4>
+            <div className="flex flex-wrap gap-1">
+              {usedOnPages.map((page) => (
+                <span key={page} className="px-2 py-1 text-xs bg-blue-600 text-white rounded font-medium">
+                  {getPageDisplayName(page)}
+                </span>
+              ))}
+            </div>
+            <p className="text-xs text-blue-700 mt-1">
+              {config.category === 'youtube' ? 'For YouTube videos' : 'For local/custom videos'}
+            </p>
+          </div>
+        )}
 
         <div className="mb-3">
           <h4 className="text-sm font-medium text-gray-700 mb-1">Features:</h4>
@@ -353,6 +405,31 @@ const AdminPage: React.FC = () => {
     );
   };
 
+  const pageConfigurations = getAllPageConfigurations();
+  
+  const handlePagePlayerChange = async (page: PageType, playerType: VideoPlayerType, category: 'youtube' | 'local') => {
+    setIsSaving(true);
+    setSaveMessage('');
+
+    try {
+      const currentConfig = pageConfigurations[page];
+      const newConfig: PagePlayerConfig = {
+        ...currentConfig,
+        [category === 'youtube' ? 'youtubePlayer' : 'localPlayer']: playerType,
+      };
+      
+      setPagePlayerConfig(page, newConfig);
+      setSaveMessage(`${getPageDisplayName(page)} player configuration updated successfully!`);
+    } catch (error) {
+      console.error('Error updating page player configuration:', error);
+      setSaveMessage('Error updating page player configuration. Please try again.');
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setSaveMessage(''), 3000);
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -369,6 +446,7 @@ const AdminPage: React.FC = () => {
             <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
               {[
                 { id: 'overview', name: 'Overview', icon: CogIcon },
+                { id: 'player-config', name: 'Player Configuration', icon: PlayIcon },
                 { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
                 { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
                 { id: 'search', name: 'Search Settings', icon: SparklesIcon },
@@ -402,6 +480,283 @@ const AdminPage: React.FC = () => {
                   : 'bg-green-50 border border-green-200 text-green-700'
               }`}>
                 {saveMessage}
+              </div>
+            )}
+
+            {/* Player Configuration Tab */}
+            {activeTab === 'player-config' && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
+                    <CogIcon className="h-5 w-5 mr-2 text-purple-500" />
+                    Video Player Configuration
+                  </h2>
+                  <p className="text-sm text-gray-600 mb-6">
+                    Configure video players by category and page. Currently used players are highlighted in each section.
+                  </p>
+                </div>
+
+                {/* 1. YouTube Players Category */}
+                <div className="bg-red-50 rounded-lg p-6 border border-red-200">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                    <PlayIcon className="h-6 w-6 mr-3 text-red-500" />
+                    YouTube Players
+                  </h3>
+                  
+                  {/* Pages within YouTube Category */}
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using YouTube Players:</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType[]).map((page) => {
+                          const pageConfig = pageConfigurations[page];
+                          const isCurrentGlobalPlayer = pageConfig.youtubePlayer === playerType;
+                          return (
+                            <div key={page} className={`bg-white border-2 rounded-lg p-4 transition-colors ${
+                              isCurrentGlobalPlayer ? 'border-red-500 bg-red-50' : 'border-gray-200 hover:border-red-300'
+                            }`}>
+                              <h5 className="font-semibold text-gray-800 mb-2 flex items-center">
+                                <SparklesIcon className="h-4 w-4 mr-1 text-green-500" />
+                                {getPageDisplayName(page)}
+                              </h5>
+                              <div className="text-sm">
+                                <div className="font-medium text-gray-900">
+                                  {VIDEO_PLAYER_CONFIGS[pageConfig.youtubePlayer].name}
+                                </div>
+                                {isCurrentGlobalPlayer && (
+                                  <span className="inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full bg-red-600 text-white">
+                                    ACTIVE GLOBAL
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Available YouTube Players */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-4">Available YouTube Video Players:</h4>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {getVideoPlayersByCategory('youtube').map((config) => {
+                          const isCurrentPlayer = config.type === playerType;
+                          const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page => 
+                            pageConfigurations[page].youtubePlayer === config.type
+                          );
+                          
+                          return (
+                            <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
+                              isCurrentPlayer
+                                ? 'border-red-500 bg-red-50 shadow-md'
+                                : 'border-gray-200 bg-white hover:border-red-300'
+                            }`} onClick={() => handlePlayerTypeChange(config.type as YouTubePlayerType)}>
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="flex items-center space-x-2">
+                                  <PlayIcon className="h-5 w-5 text-red-500" />
+                                  <h5 className="text-lg font-semibold text-gray-900">{config.name}</h5>
+                                  {isCurrentPlayer && (
+                                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-red-600 text-white">
+                                      CURRENT GLOBAL
+                                    </span>
+                                  )}
+                                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                    isEnabled ? 'text-green-600 bg-green-100' : 'text-gray-600 bg-gray-100'
+                                  }`}>
+                                    {isEnabled ? 'Enabled' : 'Disabled'}
+                                  </span>
+                                </div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleToggleYouTubePlayer(config.type as YouTubePlayerType);
+                                  }}
+                                  className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                                    isEnabled
+                                      ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                                      : 'bg-green-100 text-green-600 hover:bg-green-200'
+                                  }`}
+                                >
+                                  {isEnabled ? 'Disable' : 'Enable'}
+                                </button>
+                              </div>
+                              
+                              <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+                              
+                              {usedOnPages.length > 0 && (
+                                <div className="mb-3 p-3 bg-red-100 rounded-lg border border-red-200">
+                                  <h6 className="text-sm font-medium text-red-900 mb-2">Currently Used On:</h6>
+                                  <div className="flex flex-wrap gap-1">
+                                    {usedOnPages.map((page) => (
+                                      <span key={page} className="px-2 py-1 text-xs bg-red-600 text-white rounded font-medium">
+                                        {getPageDisplayName(page)}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                  <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
+                                  <div className="flex flex-wrap gap-1">
+                                    {config.features.slice(0, 3).map((feature, index) => (
+                                      <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
+                                        {feature}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div>
+                                  <h6 className="text-sm font-medium text-gray-700 mb-1">Performance:</h6>
+                                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                    config.performance === 'high' ? 'text-green-600 bg-green-100' :
+                                    config.performance === 'medium' ? 'text-yellow-600 bg-yellow-100' :
+                                    'text-red-600 bg-red-100'
+                                  }`}>
+                                    {config.performance} performance
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Local Video Players Category */}
+                <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                    <VideoCameraIcon className="h-6 w-6 mr-3 text-blue-500" />
+                    Local Video Players
+                  </h3>
+                  
+                  {/* Pages within Local Video Category */}
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using Local Video Players:</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType[]).map((page) => {
+                          const pageConfig = pageConfigurations[page];
+                          const isCurrentGlobalPlayer = pageConfig.localPlayer === localPlayerType;
+                          return (
+                            <div key={page} className={`bg-white border-2 rounded-lg p-4 transition-colors ${
+                              isCurrentGlobalPlayer ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
+                            }`}>
+                              <h5 className="font-semibold text-gray-800 mb-2 flex items-center">
+                                <SparklesIcon className="h-4 w-4 mr-1 text-green-500" />
+                                {getPageDisplayName(page)}
+                              </h5>
+                              <div className="text-sm">
+                                <div className="font-medium text-gray-900">
+                                  {VIDEO_PLAYER_CONFIGS[pageConfig.localPlayer].name}
+                                </div>
+                                {isCurrentGlobalPlayer && (
+                                  <span className="inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full bg-blue-600 text-white">
+                                    ACTIVE GLOBAL
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Available Local Video Players */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-4">Available Local Video Players:</h4>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {getVideoPlayersByCategory('local').map((config) => {
+                          const isCurrentPlayer = config.type === localPlayerType;
+                          const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
+                          const usedOnPages = getPlayerUsageByPage(config.type).filter(page => 
+                            pageConfigurations[page].localPlayer === config.type
+                          );
+                          
+                          return (
+                            <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
+                              isCurrentPlayer
+                                ? 'border-blue-500 bg-blue-50 shadow-md'
+                                : 'border-gray-200 bg-white hover:border-blue-300'
+                            }`} onClick={() => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType)}>
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="flex items-center space-x-2">
+                                  <VideoCameraIcon className="h-5 w-5 text-blue-500" />
+                                  <h5 className="text-lg font-semibold text-gray-900">{config.name}</h5>
+                                  {isCurrentPlayer && (
+                                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-600 text-white">
+                                      CURRENT GLOBAL
+                                    </span>
+                                  )}
+                                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                    isEnabled ? 'text-green-600 bg-green-100' : 'text-gray-600 bg-gray-100'
+                                  }`}>
+                                    {isEnabled ? 'Enabled' : 'Disabled'}
+                                  </span>
+                                </div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleToggleLocalPlayer(config.type as LocalVideoPlayerType);
+                                  }}
+                                  className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                                    isEnabled
+                                      ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                                      : 'bg-green-100 text-green-600 hover:bg-green-200'
+                                  }`}
+                                >
+                                  {isEnabled ? 'Disable' : 'Enable'}
+                                </button>
+                              </div>
+                              
+                              <p className="text-sm text-gray-600 mb-3">{config.description}</p>
+                              
+                              {usedOnPages.length > 0 && (
+                                <div className="mb-3 p-3 bg-blue-100 rounded-lg border border-blue-200">
+                                  <h6 className="text-sm font-medium text-blue-900 mb-2">Currently Used On:</h6>
+                                  <div className="flex flex-wrap gap-1">
+                                    {usedOnPages.map((page) => (
+                                      <span key={page} className="px-2 py-1 text-xs bg-blue-600 text-white rounded font-medium">
+                                        {getPageDisplayName(page)}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                  <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
+                                  <div className="flex flex-wrap gap-1">
+                                    {config.features.slice(0, 3).map((feature, index) => (
+                                      <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
+                                        {feature}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div>
+                                  <h6 className="text-sm font-medium text-gray-700 mb-1">Performance:</h6>
+                                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                    config.performance === 'high' ? 'text-green-600 bg-green-100' :
+                                    config.performance === 'medium' ? 'text-yellow-600 bg-yellow-100' :
+                                    'text-red-600 bg-red-100'
+                                  }`}>
+                                    {config.performance} performance
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -580,8 +935,49 @@ const AdminPage: React.FC = () => {
                 <div>
                   <h2 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
                     <SparklesIcon className="h-5 w-5 mr-2 text-green-500" />
-                    YouTube Search Provider
+                    Search Settings
                   </h2>
+                  <p className="text-sm text-gray-600 mb-6">
+                    Configure search provider and initial search keyword for the homepage.
+                  </p>
+                </div>
+
+                {/* Initial Search Keyword Section */}
+                <div className="bg-blue-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <SparklesIcon className="h-5 w-5 mr-2 text-blue-500" />
+                    Initial Search Keyword
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Set the keyword that will be used to search and display results when the app loads initially.
+                  </p>
+                  <div className="space-y-3">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Keyword
+                    </label>
+                    <input
+                      type="text"
+                      value={initialSearchKeyword}
+                      onChange={(e) => setInitialSearchKeywordState(e.target.value)}
+                      placeholder="Enter keyword for initial search (e.g., trending, music, gaming)"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                    <button
+                      onClick={handleSaveInitialSearchKeyword}
+                      disabled={isSaving || !initialSearchKeyword.trim()}
+                      className="mt-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {isSaving ? 'Saving...' : 'Save Keyword'}
+                    </button>
+                    <p className="text-xs text-gray-500">
+                      Current keyword: <span className="font-medium">{getInitialSearchKeyword()}</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* YouTube Search Provider Section */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">YouTube Search Provider</h3>
                   <p className="text-sm text-gray-600 mb-6">
                     Choose which API to use for searching YouTube videos.
                   </p>

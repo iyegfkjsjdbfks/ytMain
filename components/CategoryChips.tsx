@@ -136,11 +136,10 @@ return;
               data-category={category}
               onClick={() => onSelectCategory(category)}
               className={cn(
-                'flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap',
-                'hover:scale-105 active:scale-95',
+                'flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
                 isSelected
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200',
+                  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
               )}
             >
               {category}

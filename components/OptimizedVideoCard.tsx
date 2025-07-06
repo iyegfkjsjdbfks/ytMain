@@ -1,5 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { MouseEvent, KeyboardEvent } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
 
 import {
   PlayIcon,
@@ -608,7 +607,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         )}
 
         {/* Meta Info */}
-        <div className={cn(classes.meta, 'flex items-center gap-1')} role="text">
+        <div className={cn(classes.meta, 'flex items-center gap-1')}>
           <span aria-label={`${formattedViews} views`}>{formattedViews} views</span>
           <span aria-hidden="true">•</span>
           <time dateTime={video.uploadedAt} aria-label={`Published ${formattedTimeAgo}`}>
@@ -618,7 +617,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 
         {/* Description */}
         {showDescription && video.description && (
-          <p className={cn(classes.meta, 'line-clamp-2 mt-2')} role="text">
+          <p className={cn(classes.meta, 'line-clamp-2 mt-2')}>
             {video.description}
           </p>
         )}

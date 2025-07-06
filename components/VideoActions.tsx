@@ -192,28 +192,28 @@ const VideoActions: React.FC<VideoActionsProps> = ({
   }, [isShareModalOpen]);
 
   return (
-    <div className="flex items-center space-x-1.5 sm:space-x-2 overflow-x-auto no-scrollbar relative">
+    <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar relative">
       {/* Like/Dislike Button Group */}
       <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full">
         <button
           onClick={onLike}
-          className={`flex items-center space-x-1.5 pl-3.5 pr-3 py-2 rounded-l-full text-sm font-medium transition-colors
+          className={`flex items-center space-x-1.5 pl-3 pr-2.5 py-2 rounded-l-full text-sm font-medium transition-colors
             ${liked ? 'text-sky-600 dark:text-sky-400 bg-sky-100 dark:bg-sky-500/10 hover:bg-sky-200 dark:hover:bg-sky-500/20' : 'text-neutral-800 dark:text-neutral-50 hover:bg-neutral-200 dark:hover:bg-neutral-700/70'}`}
           aria-pressed={liked}
           title="Like"
         >
-          <ThumbsUpIcon className={`w-5 h-5 ${liked ? 'fill-sky-600 dark:fill-sky-400' : ''}`} />
-          <span>{formatCount(likeCount)}</span>
+          <ThumbsUpIcon className={`w-4 h-4 ${liked ? 'fill-sky-600 dark:fill-sky-400' : ''}`} />
+          <span className="text-xs">{formatCount(likeCount)}</span>
         </button>
         <div className="h-5 w-px bg-neutral-300 dark:bg-neutral-600/80" />
         <button
           onClick={onDislike}
-          className={`hover:bg-neutral-200 dark:hover:bg-neutral-700/70 px-3 py-2 rounded-r-full text-sm font-medium transition-colors
+          className={`hover:bg-neutral-200 dark:hover:bg-neutral-700/70 px-2.5 py-2 rounded-r-full text-sm font-medium transition-colors
             ${disliked ? 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-500/10 hover:bg-red-200 dark:hover:bg-red-500/20' : 'text-neutral-800 dark:text-neutral-50'}`}
           aria-pressed={disliked}
           title="Dislike"
         >
-          <ThumbsDownIcon className={`w-5 h-5 ${disliked ? 'fill-red-600 dark:fill-red-400' : ''}`} />
+          <ThumbsDownIcon className={`w-4 h-4 ${disliked ? 'fill-red-600 dark:fill-red-400' : ''}`} />
         </button>
       </div>
 
@@ -221,12 +221,12 @@ const VideoActions: React.FC<VideoActionsProps> = ({
       <div className="relative share-modal-container">
         <button
           onClick={handleShare}
-          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors"
+          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3 py-2 rounded-full text-sm font-medium transition-colors"
           aria-label="Share this video"
           title="Share"
         >
-          <ShareIcon className="w-5 h-5" />
-          <span>Share</span>
+          <ShareIcon className="w-4 h-4" />
+          <span className="text-xs">Share</span>
         </button>
 
         <ShareModal
@@ -244,12 +244,12 @@ const VideoActions: React.FC<VideoActionsProps> = ({
           ref={saveButtonRef}
           onClick={onSave}
           disabled={saveModalLoading}
-          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3.5 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60"
+          className="flex items-center space-x-1.5 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-50 px-3 py-2 rounded-full text-sm font-medium transition-colors disabled:opacity-60"
           aria-label="Save this video to a playlist"
           title={isSavedToAnyList ? 'Edit saved playlists' : 'Save to playlist'}
         >
-          {isSavedToAnyList ? <SaveIconFilled className="w-5 h-5" /> : <SaveIcon className="w-5 h-5" />}
-          <span>{isSavedToAnyList ? 'Saved' : 'Save'}</span>
+          {isSavedToAnyList ? <SaveIconFilled className="w-4 h-4" /> : <SaveIcon className="w-4 h-4" />}
+          <span className="text-xs">{isSavedToAnyList ? 'Saved' : 'Save'}</span>
         </button>
       </div>
     </div>

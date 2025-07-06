@@ -21,13 +21,13 @@ const WatchPage: React.FC = () => {
   const { data: video, loading, error } = useUnifiedVideo(videoId, {
     staleTime: 0, // Force fresh data
   });
-  console.log(`📊 WatchPage: Video data received:`, video ? `${video.title} (${video.source})` : 'No video');
-  console.log(`📊 WatchPage: Loading state:`, loading);
-  console.log(`📊 WatchPage: Error state:`, error);
+  console.log('📊 WatchPage: Video data received:', video ? `${video.title} (${video.source})` : 'No video');
+  console.log('📊 WatchPage: Loading state:', loading);
+  console.log('📊 WatchPage: Error state:', error);
 
   // Debug metadata fields
   if (video) {
-    console.log(`📊 WatchPage: Metadata debug:`, {
+    console.log('📊 WatchPage: Metadata debug:', {
       title: video.title,
       channelName: video.channel?.name,
       channelAvatar: video.channel?.avatarUrl,
@@ -36,28 +36,28 @@ const WatchPage: React.FC = () => {
       likes: video.likes,
       dislikes: video.dislikes,
       publishedAt: video.publishedAt,
-      source: video.source
+      source: video.source,
     });
-    
+
     // Enhanced debugging for Google Custom Search videos
     if (video.source === 'google-search') {
-      console.log(`🔍 Google Custom Search Video Debug:`, {
+      console.log('🔍 Google Custom Search Video Debug:', {
         id: video.id,
         title: video.title,
-        description: video.description?.substring(0, 100) + '...',
+        description: `${video.description?.substring(0, 100)  }...`,
         channel: {
           id: video.channel?.id,
           name: video.channel?.name,
           avatarUrl: video.channel?.avatarUrl,
           subscribers: video.channel?.subscribersFormatted,
-          isVerified: video.channel?.isVerified
+          isVerified: video.channel?.isVerified,
         },
         stats: {
           views: video.views,
           viewsFormatted: video.viewsFormatted,
           likes: video.likes,
           dislikes: video.dislikes,
-          commentCount: video.commentCount
+          commentCount: video.commentCount,
         },
         metadata: {
           duration: video.duration,
@@ -65,18 +65,18 @@ const WatchPage: React.FC = () => {
           publishedAtFormatted: video.publishedAtFormatted,
           category: video.category,
           tags: video.tags,
-          source: video.source
+          source: video.source,
         },
         technicalData: {
           videoUrl: video.videoUrl,
           thumbnailUrl: video.thumbnailUrl,
-          visibility: video.visibility
-        }
+          visibility: video.visibility,
+        },
       });
     }
   }
-  console.log(`📊 WatchPage: Video object:`, video);
-  console.log(`📊 WatchPage: Video truthy:`, !!video);
+  console.log('📊 WatchPage: Video object:', video);
+  console.log('📊 WatchPage: Video truthy:', !!video);
   console.log(`⏳ WatchPage: Loading state: ${loading}`);
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
@@ -161,7 +161,7 @@ const WatchPage: React.FC = () => {
         id: v.id,
         title: v.title,
         views: v.viewCount,
-        source: v.id.startsWith('google-search-') ? 'Google Custom Search' : 'YouTube API'
+        source: v.id.startsWith('google-search-') ? 'Google Custom Search' : 'YouTube API',
       })));
 
       setRecommendedVideos(convertedRecommendations);
@@ -283,7 +283,7 @@ const WatchPage: React.FC = () => {
 
         const result = await unifiedDataService.getVideoById(videoId);
         console.log('🧪 Test result:', result);
-        
+
         if (result) {
           const viewsInfo = result.views ? `${result.views.toLocaleString()} views` : 'Views: Not available';
           alert(`✅ Test Success!\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}\nTitle: ${result.title}\n${viewsInfo}\nChannel: ${result.channel?.name}\nSource: ${result.source}`);
@@ -333,7 +333,7 @@ const WatchPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
             {loading ? 'Loading video...' : 'Video not found'}
           </h1>
-          
+
           {/* Debug Information Panel */}
           <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6">
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">🔍 Debug Information</h2>
@@ -387,28 +387,28 @@ const WatchPage: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <button 
+            <button
               onClick={testGoogleSearchFallback}
               className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
               🧪 Test Google Custom Search Fallback
             </button>
-            
-            <button 
+
+            <button
               onClick={clearCacheAndRefresh}
               className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
             >
               🗑️ Clear Cache & Refresh
             </button>
-            
-            <Link 
-              to="/" 
+
+            <Link
+              to="/"
               className="block w-full px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium text-center"
             >
               ← Go back to home
             </Link>
           </div>
-          
+
           <div className="mt-6 text-xs text-neutral-500 dark:text-neutral-400">
             <p>💡 <strong>Tip:</strong> Open browser developer tools (F12) to see detailed console logs</p>
           </div>

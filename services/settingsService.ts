@@ -18,6 +18,12 @@ export interface VideoPlayerConfig {
   complexity: 'simple' | 'moderate' | 'advanced';
 }
 
+export interface PagePlayerConfig {
+  youtubePlayer: YouTubePlayerType;
+  localPlayer: LocalVideoPlayerType;
+  defaultCategory: 'youtube' | 'local';
+}
+
 export interface Settings {
   youtubeSearchProvider: YouTubeSearchProvider;
   youtubePlayerType: YouTubePlayerType;
@@ -25,16 +31,40 @@ export interface Settings {
   defaultVideoPlayerCategory: 'youtube' | 'local';
   enabledYouTubePlayers: YouTubePlayerType[];
   enabledLocalPlayers: LocalVideoPlayerType[];
+  initialSearchKeyword?: string;
+  pageConfigurations?: {
+    watchPage: PagePlayerConfig;
+    homePage: PagePlayerConfig;
+    searchResultsPage: PagePlayerConfig;
+  };
 }
 
 
 const defaultSettings: Settings = {
-  youtubeSearchProvider: 'google-search',
+  youtubeSearchProvider: 'hybrid',
   youtubePlayerType: 'youtube-player',
   localVideoPlayerType: 'advanced-video-player',
   defaultVideoPlayerCategory: 'youtube',
   enabledYouTubePlayers: ['youtube-player', 'youtube-player-wrapper'],
   enabledLocalPlayers: ['advanced-video-player', 'video-player'],
+  initialSearchKeyword: 'trending',
+  pageConfigurations: {
+    watchPage: {
+      youtubePlayer: 'youtube-player',
+      localPlayer: 'video-player',
+      defaultCategory: 'youtube',
+    },
+    homePage: {
+      youtubePlayer: 'youtube-player',
+      localPlayer: 'advanced-video-player',
+      defaultCategory: 'youtube',
+    },
+    searchResultsPage: {
+      youtubePlayer: 'youtube-player-wrapper',
+      localPlayer: 'advanced-video-player',
+      defaultCategory: 'youtube',
+    },
+  },
 };
 
 // Video Player Configurations
@@ -225,14 +255,15 @@ export const isPlayerEnabled = (playerType: VideoPlayerType): boolean => {
 
   if (config.category === 'youtube') {
     return settings.enabledYouTubePlayers.includes(playerType as YouTubePlayerType);
-  } else {
-    return settings.enabledLocalPlayers.includes(playerType as LocalVideoPlayerType);
   }
+    return settings.enabledLocalPlayers.includes(playerType as LocalVideoPlayerType);
+
 };
 
 // Get current YouTube search provider
 export const getYouTubeSearchProvider = (): YouTubeSearchProvider => {
-  return getSettings().youtubeSearchProvider;
+  // Always use hybrid mode to ensure fallback mechanism works
+  return 'hybrid';
 };
 
 // Set YouTube search provider
@@ -263,4 +294,67 @@ export const isYouTubeApiAvailable = (): boolean => {
 // Check if hybrid mode is available (both APIs configured)
 export const isHybridModeAvailable = (): boolean => {
   return isYouTubeApiConfigured() && isGoogleSearchAvailable();
+};
+
+// Get initial search keyword
+export const getInitialSearchKeyword = (): string => {
+  return getSettings().initialSearchKeyword || 'trending';
+};
+
+// Set initial search keyword
+export const setInitialSearchKeyword = (keyword: string): void => {
+  const settings = getSettings();
+  saveSettings({ ...settings, initialSearchKeyword: keyword });
+};
+
+// Page-specific configuration management
+export type PageType = 'watchPage' | 'homePage' | 'searchResultsPage';
+
+export const getPagePlayerConfig = (page: PageType): PagePlayerConfig => {
+  const settings = getSettings();
+  return settings.pageConfigurations?.[page] || defaultSettings.pageConfigurations![page];
+};
+
+export const setPagePlayerConfig = (page: PageType, config: PagePlayerConfig): void => {
+  const settings = getSettings();
+  const pageConfigurations = settings.pageConfigurations || defaultSettings.pageConfigurations!;
+  saveSettings({
+    ...settings,
+    pageConfigurations: {
+      ...pageConfigurations,
+      [page]: config,
+    },
+  });
+};
+
+export const getAllPageConfigurations = (): Record<PageType, PagePlayerConfig> => {
+  const settings = getSettings();
+  return settings.pageConfigurations || defaultSettings.pageConfigurations!;
+};
+
+export const getPageDisplayName = (page: PageType): string => {
+  const displayNames: Record<PageType, string> = {
+    watchPage: 'WatchPage',
+    homePage: 'HomePage',
+    searchResultsPage: 'SearchResultsPage',
+  };
+  return displayNames[page];
+};
+
+export const getPlayerUsageByPage = (playerType: VideoPlayerType): PageType[] => {
+  const pageConfigs = getAllPageConfigurations();
+  const config = VIDEO_PLAYER_CONFIGS[playerType];
+  const pages: PageType[] = [];
+  
+  Object.entries(pageConfigs).forEach(([page, pageConfig]) => {
+    const isUsed = config.category === 'youtube' 
+      ? pageConfig.youtubePlayer === playerType
+      : pageConfig.localPlayer === playerType;
+    
+    if (isUsed) {
+      pages.push(page as PageType);
+    }
+  });
+  
+  return pages;
 };

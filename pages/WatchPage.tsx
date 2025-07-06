@@ -26,7 +26,6 @@ const WatchPage: React.FC = () => {
     isSubscribed,
     // isInWatchLater, // unused
     isSavedToAnyList,
-    mockLikeCount,
 
     // UI state
     showFullDescription,
@@ -125,22 +124,38 @@ const WatchPage: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
+        <div className="max-w-[1280px] mx-auto px-4 py-4">
+          <div className="flex flex-col xl:flex-row gap-6">
+            <div className="flex-1 max-w-full xl:max-w-[854px]">
               {/* Video player skeleton */}
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse mb-4" />
+              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" />
 
               {/* Video title skeleton */}
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-4" />
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" />
+              
+              {/* Metadata and actions skeleton */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" />
+                <div className="flex space-x-2">
+                  <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+                  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+                  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+                </div>
+              </div>
 
-              {/* Channel info skeleton */}
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-                <div className="flex-1">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
-                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+              {/* Description skeleton */}
+              <div className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full" />
+                  <div className="flex-1">
+                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
+                    <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2" />
+                  </div>
+                  <div className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" />
+                </div>
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded" />
+                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4" />
                 </div>
               </div>
 
@@ -160,17 +175,20 @@ const WatchPage: React.FC = () => {
             </div>
 
             {/* Sidebar skeleton */}
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="flex space-x-3">
-                  <div className="w-40 h-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-                  <div className="flex-1">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1 w-3/4" />
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+            <div className="xl:w-[402px] xl:flex-shrink-0">
+              <div className="space-y-2">
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" />
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="flex gap-2 p-1">
+                    <div className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
+                    <div className="flex-1 min-w-0">
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
+                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -198,67 +216,71 @@ const WatchPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main content */}
-          <div className="lg:col-span-2">
-            {/* Video player */}
-            <div className="mb-4">
-              {isYouTubeUrl(video.videoUrl) ? (() => {
-                const youtubePlayerType = getYouTubePlayerType();
-                const videoId = getYouTubeVideoId(video.videoUrl) || '';
+      <div className="max-w-[1280px] mx-auto px-4 py-4">
+        <div className="flex flex-col xl:flex-row gap-6">
+          {/* Main content - Video player and details */}
+          <div className="flex-1 max-w-full xl:max-w-[854px]">
+            {/* Video player container */}
+            <div className="relative w-full mb-4">
+              <div className="aspect-video bg-black rounded-xl overflow-hidden">
+                {isYouTubeUrl(video.videoUrl) ? (() => {
+                  const youtubePlayerType = getYouTubePlayerType();
+                  const videoId = getYouTubeVideoId(video.videoUrl) || '';
 
-                switch (youtubePlayerType) {
-                  case 'youtube-player':
-                    return (
-                      <YouTubePlayer
-                        video={video}
-                        autoplay={true}
-                      />
-                    );
-                  default:
-                    return (
-                      <YouTubePlayerWrapper
-                        videoId={videoId}
-                        autoplay={true}
-                        width="100%"
-                        height={480}
-                        controls={true}
-                      />
-                    );
-                }
-              })() : (
-                <AdvancedVideoPlayer
-                  video={video}
-                  autoplay={true}
-                  muted={true}
-                />
-              )}
-            </div>
-
-            {/* Video title and stats */}
-            <div className="mb-4">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                {video.title}
-              </h1>
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
-                </div>
+                  switch (youtubePlayerType) {
+                    case 'youtube-player':
+                      return (
+                        <YouTubePlayer
+                          video={video}
+                          autoplay={true}
+                        />
+                      );
+                    default:
+                      return (
+                        <YouTubePlayerWrapper
+                          videoId={videoId}
+                          autoplay={true}
+                          width="100%"
+                          height="100%"
+                          controls={true}
+                        />
+                      );
+                  }
+                })() : (
+                  <AdvancedVideoPlayer
+                    video={video}
+                    autoplay={true}
+                    muted={true}
+                  />
+                )}
               </div>
             </div>
 
-            {/* Video actions */}
-            <VideoActions
-              liked={liked}
-              disliked={disliked}
-              likeCount={mockLikeCount}
-              onLike={handleLike}
-              onDislike={handleDislike}
-              onShare={() => {}}
-              onSave={openSaveModal}
-              isSavedToAnyList={isSavedToAnyList}
-            />
+            {/* Video title */}
+            <div className="mb-3">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                {video.title}
+              </h1>
+            </div>
+
+            {/* Video metadata and actions combined */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
+              </div>
+              
+              {/* Video actions - moved to same line as metadata */}
+              <VideoActions
+                liked={liked}
+                disliked={disliked}
+                likeCount={video.likes || 0}
+                onLike={handleLike}
+                onDislike={handleDislike}
+                onShare={() => {}}
+                onSave={openSaveModal}
+                isSavedToAnyList={isSavedToAnyList}
+              />
+            </div>
 
             {/* Video description */}
             <VideoDescription
@@ -308,17 +330,19 @@ const WatchPage: React.FC = () => {
           </div>
 
           {/* Sidebar - Related videos */}
-          <aside className="space-y-4">
-            <RecommendationEngine
-              currentVideo={video}
-              onVideoSelect={(videoId) => {
-                window.location.href = `/watch?v=${videoId}`;
-              }}
-            />
+          <aside className="xl:w-[402px] xl:flex-shrink-0">
+            <div className="xl:sticky xl:top-4">
+              <RecommendationEngine
+                currentVideo={video}
+                onVideoSelect={(videoId) => {
+                  window.location.href = `/watch?v=${videoId}`;
+                }}
+              />
+            </div>
           </aside>
         </div>
       </div>
-
+      
       {/* Save to Playlist Modal */}
       <RefactoredSaveToPlaylistModal
         isOpen={isSaveModalOpen}

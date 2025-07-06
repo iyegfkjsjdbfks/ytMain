@@ -377,7 +377,6 @@ export const useFormValidation = <T extends Record<string, unknown>>(
     const newErrors: Partial<Record<keyof T, string>> = {};
     let isFormValid = true;
 
-    // eslint-disable-next-line consistent-return
     Object.keys(values).forEach(key => {
       const error = validateField(key as keyof T, values[key as keyof T]);
       if (error) {
@@ -391,7 +390,6 @@ export const useFormValidation = <T extends Record<string, unknown>>(
   }, [values, validateField]);
 
   const handleSubmit = useCallback(
-    // eslint-disable-next-line consistent-return
     (onSubmit: (values: T) => void) => (e: React.FormEvent) => {
       e.preventDefault();
       if (validateAll()) {

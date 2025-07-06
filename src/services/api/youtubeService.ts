@@ -1,7 +1,6 @@
 import { CACHE_CONFIG } from '../../lib/constants';
 
 import { ApiError } from './base';
-import { isYouTubeDataApiBlocked } from '../../utils/youtubeApiUtils';
 
 import type { Video, Channel } from '../../types/core';
 
@@ -496,7 +495,7 @@ return false;
     if (!query.trim()) {
       return [];
     }
-    
+
     console.log('🎯 Using YouTube Data API v3 as primary source for video search');
     if (options.forRecommendations) {
       console.log('🚀 Search for recommendations using YouTube Data API v3');

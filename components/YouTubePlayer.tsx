@@ -43,15 +43,21 @@ interface YouTubePlayerProps {
   autoplay?: boolean;
   controls?: boolean;
   className?: string;
+  onReady?: (event: any) => void;
+  onStateChange?: (event: any) => void;
+  onError?: (event: any) => void;
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   video,
   width = '100%',
-  height = 315,
+  height = '100%',
   autoplay = false,
   controls = true,
   className = '',
+  onReady,
+  onStateChange,
+  onError,
 }) => {
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
@@ -191,6 +197,15 @@ return;
               setIsPlayerReady(true);
               setPlayerError(null);
 
+              // Call the external onReady callback if provided
+              if (onReady) {
+                try {
+                  onReady(event);
+                } catch (error) {
+                  console.warn('Error in onReady callback:', error);
+                }
+              }
+
               // Try to autoplay if autoplay is enabled
               if (autoplay) {
                 try {
@@ -220,6 +235,15 @@ return;
           onStateChange: (event: any) => {
             // Handle state changes if needed
             console.log('YouTube player state changed:', event.data);
+
+            // Call the external onStateChange callback if provided
+            if (onStateChange) {
+              try {
+                onStateChange(event);
+              } catch (error) {
+                console.warn('Error in onStateChange callback:', error);
+              }
+            }
 
             // Unmute video after autoplay starts (state 1 = playing)
             if (autoplay && event.data === 1) {
@@ -260,6 +284,15 @@ return;
             const message = errorMessages[event.data] || 'Unknown error occurred';
             console.error('YouTube player error:', message, event.data);
             setPlayerError(message);
+
+            // Call the external onError callback if provided
+            if (onError) {
+              try {
+                onError(event);
+              } catch (error) {
+                console.warn('Error in onError callback:', error);
+              }
+            }
           },
         },
       });
@@ -312,7 +345,7 @@ return;
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`absolute inset-0 ${className}`}>
       {!isAPIReady && (
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
           <div className="text-gray-600 dark:text-gray-400 text-center">
@@ -324,9 +357,8 @@ return;
       <div
         ref={playerRef}
         id={playerIdRef.current}
-        className="w-full"
+        className="w-full h-full"
         style={{
-          minHeight: typeof height === 'number' ? `${height}px` : height,
           opacity: isAPIReady ? 1 : 0,
         }}
       />

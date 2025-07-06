@@ -70,10 +70,10 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
   return (
-    <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3 mt-3">
+    <div className="bg-neutral-100 dark:bg-neutral-800 rounded-xl p-4 mt-4">
       {/* Channel Info */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center space-x-3">
           <Link to={channelLink} className="flex-shrink-0">
             <img
               src={video.channelAvatarUrl || channel?.avatarUrl || 'https://picsum.photos/seed/defaultChannel/40/40'}
@@ -84,7 +84,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
           <div className="min-w-0 flex-grow">
             <Link
               to={channelLink}
-              className="text-sm font-medium text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors block truncate"
+              className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors block truncate"
             >
               {video.channelName || channel?.name || 'Unknown Channel'}
               {channel?.isVerified && (
@@ -99,7 +99,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         <div className="flex items-center space-x-2">
           <button
             onClick={onSubscribe}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
               isSubscribed
                 ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600'
                 : 'bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200'

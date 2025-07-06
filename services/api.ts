@@ -214,7 +214,7 @@ export class VideoService {
         }
 
         // Limit results and add pagination simulation
-        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0') : 0;
+        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0', 10) : 0;
         const endIndex = Math.min(startIndex + limit, videos.length);
         const paginatedVideos = videos.slice(startIndex, endIndex);
 
