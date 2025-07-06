@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, RocketLaunchIcon, BugAntIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon } from '@heroicons/react/24/outline';
 
 import {
   getSettings,
