@@ -51,6 +51,9 @@ const PlaylistsPage: React.FC = () => {
         videoCount: newPlaylist.videoIds?.length || 0,
         title: newPlaylist.name || newPlaylist.title || newPlaylistName.trim(),
         videoIds: newPlaylist.videoIds || [],
+        updatedAt: newPlaylist.updatedAt || new Date().toISOString(),
+        createdAt: newPlaylist.createdAt || new Date().toISOString(),
+        thumbnailUrl: newPlaylist.thumbnailUrl || undefined,
       };
       setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
@@ -159,8 +162,9 @@ const PlaylistsPage: React.FC = () => {
                   type="text"
                   value={newPlaylistName}
                   onChange={(e) => {
- setNewPlaylistName(e.target.value); setCreateError(null);
-}}
+                    setNewPlaylistName(e.target.value);
+                    setCreateError(null);
+                  }}
                   placeholder="Enter playlist name..."
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50"
                   maxLength={100}

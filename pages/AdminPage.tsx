@@ -29,6 +29,14 @@ import {
   type PageType,
 } from '../services/settingsService';
 
+interface StoreVideo {
+  id: string;
+  title: string;
+  channelName: string;
+  videoUrl: string;
+  viewCount?: number;
+}
+
 
 const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('hybrid');
@@ -41,7 +49,7 @@ const AdminPage: React.FC = () => {
   const [saveMessage, setSaveMessage] = useState('');
 
   // Google Search Debug state
-  const [storeVideos, setStoreVideos] = useState<any[]>([]);
+  const [storeVideos, setStoreVideos] = useState<StoreVideo[]>([]);
   const [testVideoId, setTestVideoId] = useState('bnVUHWCynig');
   const [testResult, setTestResult] = useState<any>(null);
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
@@ -1534,12 +1542,12 @@ const AdminPage: React.FC = () => {
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       {storeVideos.map((video, index) => (
                         <div key={index} className="bg-white p-3 rounded border">
-                          <div className="font-medium text-sm">{video.title}</div>
+                          <div className="font-medium text-sm">{video.title || 'Unknown Title'}</div>
                           <div className="text-xs text-gray-600 mt-1">
-                            <div>ID: {video.id}</div>
-                            <div>Channel: {video.channelName}</div>
-                            <div>URL: {video.videoUrl}</div>
-                            {video.viewCount && (
+                            <div>ID: {video.id || 'Unknown ID'}</div>
+                            <div>Channel: {video.channelName || 'Unknown Channel'}</div>
+                            <div>URL: {video.videoUrl || 'No URL'}</div>
+                            {video.viewCount && typeof video.viewCount === 'number' && (
                               <div>Views: {video.viewCount.toLocaleString()}</div>
                             )}
                           </div>

@@ -201,12 +201,12 @@ export function useIntersectionObserver(
   useEffect(() => {
     const element = ref.current;
     if (!element) {
-return;
-}
+      return;
+    }
 
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      if (entry !== undefined) {
+      if (entry) {
         setIsIntersecting(entry.isIntersecting);
       }
     }, options);
@@ -284,53 +284,40 @@ export function usePrevious<T>(value: T): T | undefined {
  * Enhanced useUnifiedAppState hook that provides commonly used app state
  */
 export function useUnifiedAppState() {
-  const {
-    state,
-    login,
-    logout,
-    setTheme,
-    openMiniplayer,
-    toggleMiniplayer,
-    addToWatchLater,
-    removeFromWatchLater,
-    isInWatchLater,
-    toggleSidebar,
-    addNotification,
-    removeNotification,
-  } = useUnifiedApp();
-
+  const context = useUnifiedApp();
+  
   return {
     // Auth state
-    user: state.user,
-    isAuthenticated: state.isAuthenticated,
-    login,
-    logout,
+    user: context.state.user,
+    isAuthenticated: context.state.isAuthenticated,
+    login: context.login,
+    logout: context.logout,
 
     // Theme state
-    theme: state.theme,
-    setTheme,
-    isDarkMode: state.theme === 'dark',
+    theme: context.state.theme,
+    setTheme: context.setTheme,
+    isDarkMode: context.state.theme === 'dark',
 
     // Miniplayer state
-    miniplayerVideo: state.miniplayerVideo,
-    isMiniplayerOpen: state.isMiniplayerOpen,
-    openMiniplayer,
-    toggleMiniplayer,
+    miniplayerVideo: context.state.miniplayerVideo,
+    isMiniplayerOpen: context.state.isMiniplayerOpen,
+    openMiniplayer: context.openMiniplayer,
+    toggleMiniplayer: context.toggleMiniplayer,
 
     // Watch Later state
-    watchLaterVideos: state.watchLaterVideos,
-    addToWatchLater,
-    removeFromWatchLater,
-    isInWatchLater,
+    watchLaterVideos: context.state.watchLaterVideos,
+    addToWatchLater: context.addToWatchLater,
+    removeFromWatchLater: context.removeFromWatchLater,
+    isInWatchLater: context.isInWatchLater,
 
     // UI state
-    sidebarCollapsed: state.sidebarCollapsed,
-    toggleSidebar,
+    sidebarCollapsed: context.state.sidebarCollapsed,
+    toggleSidebar: context.toggleSidebar,
 
     // Notifications state
-    notifications: state.notifications,
-    addNotification,
-    removeNotification,
+    notifications: context.state.notifications,
+    addNotification: context.addNotification,
+    removeNotification: context.removeNotification,
   };
 }
 
