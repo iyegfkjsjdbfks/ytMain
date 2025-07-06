@@ -55,7 +55,6 @@ const AdminPage: React.FC = () => {
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
-  const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
 
   // YouTube Metadata Debug state
   const [youtubeMetadataTest, setYoutubeMetadataTest] = useState<any>(null);
@@ -80,7 +79,17 @@ const AdminPage: React.FC = () => {
   const loadStoreVideos = async () => {
     try {
       const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
-      const videos = googleSearchVideoStore.getAllVideos();
+      const googleVideos = googleSearchVideoStore.getAllVideos();
+      
+      // Convert GoogleSearchResult[] to StoreVideo[]
+      const videos: StoreVideo[] = googleVideos.map(video => ({
+        id: video.id,
+        title: video.title,
+        channelName: video.channelName,
+        videoUrl: video.videoUrl,
+        viewCount: video.viewCount || 0
+      }));
+      
       setStoreVideos(videos);
     } catch (error) {
       console.error('Failed to load store videos:', error);
@@ -570,10 +579,6 @@ const AdminPage: React.FC = () => {
   };
 
   const pageConfigurations = getAllPageConfigurations();
-
-  const handleDefaultCategoryChange = (category: 'youtube' | 'local') => {
-    setDefaultCategory(category);
-  };
 
 
   return (
