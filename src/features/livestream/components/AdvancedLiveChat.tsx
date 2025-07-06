@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   PaperAirplaneIcon,
   EllipsisVerticalIcon,
@@ -32,7 +32,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
   isModerator,
   className = '',
 }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const { messages, sendMessage, moderateMessage } = useLiveChat(streamId);
   const [newMessage, setNewMessage] = useState('');
   const [slowModeTimer, setSlowModeTimer] = useState(0);
   const [selectedMessage, setSelectedMessage] = useState<string | null>(null);
@@ -51,34 +51,6 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  // Subscribe to chat messages
-  useEffect(() => {
-    const handleNewMessage = (message: ChatMessage) => {
-      setMessages(prev => [...prev, message]);
-    };
-
-    const handleMessageDeleted = (data: { messageId: string; deletedBy: string }) => {
-      setMessages(prev => 
-        prev.map(msg => 
-          msg.id === data.messageId 
-            ? { ...msg, deleted: true, deletedBy: data.deletedBy }
-            : msg
-        )
-      );
-    };
-
-    liveStreamService.on('chat_message', handleNewMessage);
-    liveStreamService.on('message_deleted', handleMessageDeleted);
-
-    // Load initial messages
-    setMessages(liveStreamService.getChatMessages(streamId));
-
-    return () => {
-      liveStreamService.off('chat_message', handleNewMessage);
-      liveStreamService.off('message_deleted', handleMessageDeleted);
-    };
-  }, [streamId]);
-
   // Handle slow mode timer
   useEffect(() => {
     if (slowModeTimer > 0) {
@@ -92,7 +64,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
     if (!newMessage.trim() || slowModeTimer > 0) return;
 
     try {
-      await liveStreamService.sendChatMessage(streamId, newMessage.trim());
+      await sendMessage(newMessage.trim());
       setNewMessage('');
       setSlowModeTimer(5); // 5 second slow mode
     } catch (error) {
@@ -109,7 +81,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
 
   const handleModerationAction = async (messageId: string, action: ChatModerationAction['type']) => {
     try {
-      await liveStreamService.moderateMessage(streamId, messageId, { 
+      await moderateMessage(messageId, { 
         type: action,
         userId: '',
         moderatorId: '',
