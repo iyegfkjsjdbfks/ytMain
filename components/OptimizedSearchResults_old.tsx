@@ -594,7 +594,7 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   const tabFilteredResults = useMemo(() => {
     switch (activeTab) {
       case 'videos':
-        return allResults.filter(item => {
+        return allResults.filter(_ => {
           // For videos tab, show all video content
           return true; // All our current content are videos
         });

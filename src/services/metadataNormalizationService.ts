@@ -52,7 +52,7 @@ export interface UnifiedVideoMetadata {
   visibility: 'public' | 'unlisted' | 'private' | 'scheduled';
 
   // Source information
-  source: 'local' | 'youtube' | 'external';
+  source: 'local' | 'youtube' | 'external' | 'google-search';
 
   // Additional metadata
   metadata: {

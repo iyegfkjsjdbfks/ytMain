@@ -160,6 +160,8 @@ export interface Video extends BaseEntity {
     madeForKids?: boolean;
     selfDeclaredMadeForKids?: boolean;
   };
+  // Source information
+  source?: 'local' | 'youtube' | 'external' | 'google-search';
 }
 
 export type VideoVisibility = 'public' | 'unlisted' | 'private' | 'scheduled';

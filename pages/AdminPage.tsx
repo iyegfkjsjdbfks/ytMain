@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 import {
   getSettings,
@@ -9,7 +9,6 @@ import {
   getVideoPlayersByCategory,
   getAllVideoPlayers,
   setLocalVideoPlayerType,
-  setDefaultVideoPlayerCategory,
   getEnabledYouTubePlayers,
   getEnabledLocalPlayers,
   toggleYouTubePlayer,
@@ -30,6 +29,7 @@ import {
   type VideoPlayerConfig,
   type PageType,
   type PagePlayerConfig,
+  type VideoPlayerType,
 } from '../services/settingsService';
 
 
@@ -37,7 +37,6 @@ const AdminPage: React.FC = () => {
   const [provider, setProvider] = useState<YouTubeSearchProvider>('hybrid');
   const [playerType, setPlayerType] = useState<YouTubePlayerType>('youtube-player');
   const [localPlayerType, setLocalPlayerType] = useState<LocalVideoPlayerType>('advanced-video-player');
-  const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
   const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
   const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'api-testing' | 'player-config'>('overview');
@@ -51,6 +50,7 @@ const AdminPage: React.FC = () => {
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
+  const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   
   // YouTube Metadata Debug state
   const [youtubeMetadataTest, setYoutubeMetadataTest] = useState<any>(null);
@@ -64,7 +64,6 @@ const AdminPage: React.FC = () => {
     setProvider(settings.youtubeSearchProvider);
     setPlayerType(settings.youtubePlayerType);
     setLocalPlayerType(settings.localVideoPlayerType);
-    setDefaultCategory(settings.defaultVideoPlayerCategory);
     setEnabledYouTubePlayersState(getEnabledYouTubePlayers());
     setEnabledLocalPlayersState(getEnabledLocalPlayers());
     setInitialSearchKeywordState(getInitialSearchKeyword());
@@ -383,24 +382,6 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const handleDefaultCategoryChange = async (newCategory: 'youtube' | 'local') => {
-    setIsSaving(true);
-    setSaveMessage('');
-
-    try {
-      setDefaultVideoPlayerCategory(newCategory);
-      setDefaultCategory(newCategory);
-      setSaveMessage('Default video player category updated successfully!');
-    } catch (error) {
-      console.error('Error saving default category:', error);
-      setSaveMessage('Error saving default category. Please try again.');
-    } finally {
-      setIsSaving(false);
-      // Clear message after 3 seconds
-      setTimeout(() => setSaveMessage(''), 3000);
-    }
-  };
-
   const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType) => {
     setIsSaving(true);
     setSaveMessage('');
@@ -584,27 +565,9 @@ const AdminPage: React.FC = () => {
   };
 
   const pageConfigurations = getAllPageConfigurations();
-  
-  const handlePagePlayerChange = async (page: PageType, playerType: VideoPlayerType, category: 'youtube' | 'local') => {
-    setIsSaving(true);
-    setSaveMessage('');
 
-    try {
-      const currentConfig = pageConfigurations[page];
-      const newConfig: PagePlayerConfig = {
-        ...currentConfig,
-        [category === 'youtube' ? 'youtubePlayer' : 'localPlayer']: playerType,
-      };
-      
-      setPagePlayerConfig(page, newConfig);
-      setSaveMessage(`${getPageDisplayName(page)} player configuration updated successfully!`);
-    } catch (error) {
-      console.error('Error updating page player configuration:', error);
-      setSaveMessage('Error updating page player configuration. Please try again.');
-    } finally {
-      setIsSaving(false);
-      setTimeout(() => setSaveMessage(''), 3000);
-    }
+  const handleDefaultCategoryChange = (category: 'youtube' | 'local') => {
+    setDefaultCategory(category);
   };
 
 
@@ -962,10 +925,6 @@ const AdminPage: React.FC = () => {
                         <span className="ml-2 text-sm text-gray-900">{VIDEO_PLAYER_CONFIGS[localPlayerType].name}</span>
                       </div>
                       <div>
-                        <span className="text-sm font-medium text-gray-600">Default Category:</span>
-                        <span className="ml-2 text-sm text-gray-900 capitalize">{defaultCategory}</span>
-                      </div>
-                      <div>
                         <span className="text-sm font-medium text-gray-600">Enabled YouTube Players:</span>
                         <span className="ml-2 text-sm text-gray-900">{enabledYouTubePlayers.length}</span>
                       </div>
@@ -976,42 +935,6 @@ const AdminPage: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Default Category Selection */}
-                  <div className="bg-blue-50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                      <RocketLaunchIcon className="h-5 w-5 mr-2" />
-                      Default Video Player Category
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Choose which type of video player to use by default in your application.
-                    </p>
-                    <div className="space-y-3">
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="default-category"
-                          value="youtube"
-                          checked={defaultCategory === 'youtube'}
-                          onChange={() => handleDefaultCategoryChange('youtube')}
-                          disabled={isSaving}
-                          className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                        />
-                        <span className="ml-3 text-sm font-medium text-gray-700">YouTube Players</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="default-category"
-                          value="local"
-                          checked={defaultCategory === 'local'}
-                          onChange={() => handleDefaultCategoryChange('local')}
-                          disabled={isSaving}
-                          className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                        />
-                        <span className="ml-3 text-sm font-medium text-gray-700">Local Video Players</span>
-                      </label>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Quick Stats */}

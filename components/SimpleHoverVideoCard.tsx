@@ -259,7 +259,7 @@ const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, clas
       </div>
       
       {/* Custom CSS animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from {
             opacity: 0;

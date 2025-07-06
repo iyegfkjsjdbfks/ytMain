@@ -118,24 +118,28 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             description: googleVideo.description,
             thumbnailUrl: googleVideo.thumbnailUrl,
             videoUrl: googleVideo.videoUrl,
-            duration: googleVideo.duration,
-            views: googleVideo.viewCount?.toString() || '0',
+            duration: googleVideo.duration || '0:00',
+            views: googleVideo.views,
             viewCount: googleVideo.viewCount || 0,
             channelName: googleVideo.channelName,
-            channelId: googleVideo.channelId || `channel-${googleVideo.id}`,
-            channelAvatarUrl: googleVideo.channelAvatarUrl,
-            uploadedAt: googleVideo.uploadedAt,
+            channelId: googleVideo.channelId || '',
+            channelAvatarUrl: googleVideo.channelAvatarUrl || '',
             category: googleVideo.categoryId || 'Entertainment',
             tags: googleVideo.tags || [],
-            isLive: googleVideo.isLive || false,
-            isShort: false,
             likes: googleVideo.likeCount || 0,
             dislikes: googleVideo.dislikeCount || 0,
-          })).slice(0, maxRecommendations);
+            uploadedAt: googleVideo.uploadedAt || new Date().toISOString(),
+            isShort: googleVideo.isShort || false,
+            isLive: false, // GoogleSearchResult doesn't have isLive property
+            commentCount: googleVideo.commentCount || 0,
+            // Required Video interface properties
+            visibility: 'public' as const,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          }));
         } else {
           // Get trending videos using Google Custom Search
           console.log('🔍 Getting trending videos using Google Custom Search...');
-          const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
           const trendingResults = await searchYouTubeWithGoogleSearch('popular trending youtube videos 2024');
           console.log('📊 Google Custom Search trending results:', trendingResults.length);
           
@@ -146,20 +150,25 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             description: googleVideo.description,
             thumbnailUrl: googleVideo.thumbnailUrl,
             videoUrl: googleVideo.videoUrl,
-            duration: googleVideo.duration,
-            views: googleVideo.viewCount?.toString() || '0',
+            duration: googleVideo.duration || '0:00',
+            views: googleVideo.views,
             viewCount: googleVideo.viewCount || 0,
             channelName: googleVideo.channelName,
-            channelId: googleVideo.channelId || `channel-${googleVideo.id}`,
-            channelAvatarUrl: googleVideo.channelAvatarUrl,
-            uploadedAt: googleVideo.uploadedAt,
+            channelId: googleVideo.channelId || '',
+            channelAvatarUrl: googleVideo.channelAvatarUrl || '',
             category: googleVideo.categoryId || 'Entertainment',
             tags: googleVideo.tags || [],
-            isLive: googleVideo.isLive || false,
-            isShort: false,
             likes: googleVideo.likeCount || 0,
             dislikes: googleVideo.dislikeCount || 0,
-          })).slice(0, maxRecommendations);
+            uploadedAt: googleVideo.uploadedAt || new Date().toISOString(),
+            isShort: googleVideo.isShort || false,
+            isLive: false, // GoogleSearchResult doesn't have isLive property
+            commentCount: googleVideo.commentCount || 0,
+            // Required Video interface properties
+            visibility: 'public' as const,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          }));
         }
 
         console.log(`📋 Google Custom Search returned ${recommendedVideos.length} recommendations`);

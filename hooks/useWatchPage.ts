@@ -247,7 +247,11 @@ return;
           // Ensure channel has required subscriberCount property
           const channelWithSubscriberCount = {
             ...foundChannel,
-            subscriberCount: foundChannel.subscriberCount || foundChannel.subscribers?.toString() || '0',
+            subscriberCount: 'subscriberCount' in foundChannel 
+              ? foundChannel.subscriberCount 
+              : ('subscribers' in foundChannel && foundChannel.subscribers 
+                ? foundChannel.subscribers.toString() 
+                : '0'),
           };
           setChannel(channelWithSubscriberCount);
         } else {
@@ -256,23 +260,23 @@ return;
 
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
-        const topLevelComments = videoComments.filter(c => !c.parentId);
+        const topLevelComments = videoComments.filter((c: any) => !('parentId' in c) || !c.parentId);
         // Ensure comments have all required properties
-        const commentsWithDefaults = topLevelComments.map(comment => ({
+        const commentsWithDefaults = topLevelComments.map((comment: any) => ({
           ...comment,
-          isLikedByCurrentUser: comment.isLikedByCurrentUser ?? false,
-          isDislikedByCurrentUser: comment.isDislikedByCurrentUser ?? false,
-          isEdited: comment.isEdited ?? false,
-          replies: comment.replies ?? [],
-          replyCount: comment.replyCount ?? 0,
-          content: comment.content ?? comment.commentText,
-          dislikes: comment.dislikes ?? 0,
-          isPinned: comment.isPinned ?? false,
-          isHearted: comment.isHearted ?? false,
-          videoId: comment.videoId ?? videoId,
-          authorId: comment.authorId ?? '',
-          authorName: comment.authorName ?? comment.userName,
-          authorAvatar: comment.authorAvatar ?? comment.userAvatarUrl,
+          isLikedByCurrentUser: 'isLikedByCurrentUser' in comment ? comment.isLikedByCurrentUser : false,
+          isDislikedByCurrentUser: 'isDislikedByCurrentUser' in comment ? comment.isDislikedByCurrentUser : false,
+          isEdited: 'isEdited' in comment ? comment.isEdited : false,
+          replies: 'replies' in comment ? comment.replies : [],
+          replyCount: 'replyCount' in comment ? comment.replyCount : 0,
+          content: 'content' in comment ? comment.content : ('commentText' in comment ? comment.commentText : ''),
+          dislikes: 'dislikes' in comment ? comment.dislikes : 0,
+          isPinned: 'isPinned' in comment ? comment.isPinned : false,
+          isHearted: 'isHearted' in comment ? comment.isHearted : false,
+          videoId: 'videoId' in comment ? comment.videoId : videoId,
+          authorId: 'authorId' in comment ? comment.authorId : '',
+          authorName: 'authorName' in comment ? comment.authorName : ('userName' in comment ? comment.userName : ''),
+          authorAvatar: 'authorAvatar' in comment ? comment.authorAvatar : ('userAvatarUrl' in comment ? comment.userAvatarUrl : ''),
         }));
         setComments(commentsWithDefaults);
         setCommentCount(videoComments.length);
