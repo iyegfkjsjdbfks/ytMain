@@ -40,7 +40,7 @@ const AdminPage: React.FC = () => {
   const [defaultCategory, setDefaultCategory] = useState<'youtube' | 'local'>('youtube');
   const [enabledYouTubePlayers, setEnabledYouTubePlayersState] = useState<YouTubePlayerType[]>([]);
   const [enabledLocalPlayers, setEnabledLocalPlayersState] = useState<LocalVideoPlayerType[]>([]);
-  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'google-search-debug' | 'player-config'>('overview');
+  const [activeTab, setActiveTab] = useState<'search' | 'youtube-players' | 'local-players' | 'overview' | 'api-testing' | 'player-config'>('overview');
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -51,6 +51,12 @@ const AdminPage: React.FC = () => {
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [initialSearchKeyword, setInitialSearchKeywordState] = useState<string>('');
+  
+  // YouTube Metadata Debug state
+  const [youtubeMetadataTest, setYoutubeMetadataTest] = useState<any>(null);
+  const [proxyTest, setProxyTest] = useState<any>(null);
+  const [directApiTest, setDirectApiTest] = useState<any>(null);
+  const [environmentCheck, setEnvironmentCheck] = useState<any>(null);
 
   useEffect(() => {
     // Load current settings
@@ -145,6 +151,178 @@ const AdminPage: React.FC = () => {
     } catch (error) {
       console.error('Failed to clear store:', error);
     }
+  };
+
+  // YouTube Metadata Debug handlers
+  const checkEnvironment = () => {
+    const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const proxyUrl = `${window.location.origin}/api/youtube/v3/videos`;
+    
+    setEnvironmentCheck({
+      mode: isDevelopment ? 'Development' : 'Production',
+      host: window.location.hostname,
+      port: window.location.port,
+      protocol: window.location.protocol,
+      origin: window.location.origin,
+      proxyUrl,
+      proxyActive: isDevelopment,
+      youtubeApiKey: !!import.meta.env.VITE_YOUTUBE_API_KEY,
+      googleSearchApiKey: !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY,
+      googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID,
+    });
+  };
+
+  const testProxyEndpoint = async () => {
+    setLoading(true);
+    try {
+      const testVideoId = 'bnVUHWCynig';
+      const proxyUrl = `/api/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${testVideoId}`;
+      
+      console.log('🔄 Testing proxy endpoint:', proxyUrl);
+      
+      const response = await fetch(proxyUrl);
+      
+      if (response.ok) {
+        const data = await response.json();
+        
+        if (data.items && data.items[0]) {
+          const video = data.items[0];
+          setProxyTest({
+            success: true,
+            status: response.status,
+            url: proxyUrl,
+            video: {
+              title: video.snippet.title,
+              channel: video.snippet.channelTitle,
+              views: parseInt(video.statistics.viewCount).toLocaleString(),
+              likes: parseInt(video.statistics.likeCount || 0).toLocaleString(),
+              published: video.snippet.publishedAt,
+              duration: video.contentDetails.duration,
+            },
+            fullResponse: data,
+          });
+        } else {
+          setProxyTest({
+            success: false,
+            status: response.status,
+            url: proxyUrl,
+            error: 'No video data in response',
+            fullResponse: data,
+          });
+        }
+      } else {
+        const errorText = await response.text();
+        setProxyTest({
+          success: false,
+          status: response.status,
+          url: proxyUrl,
+          error: `${response.status} ${response.statusText}`,
+          fullResponse: errorText,
+        });
+      }
+    } catch (error: any) {
+      setProxyTest({
+        success: false,
+        error: error.message,
+        note: 'This might indicate proxy configuration issues or that the dev server is not running.',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const testDirectAPI = async () => {
+    setLoading(true);
+    try {
+      const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+      const testVideoId = 'bnVUHWCynig';
+      const directUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&part=snippet,statistics,contentDetails&id=${testVideoId}`;
+      
+      console.log('🔄 Testing direct API:', directUrl.replace(apiKey, '[API_KEY]'));
+      
+      const response = await fetch(directUrl);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setDirectApiTest({
+          success: true,
+          status: response.status,
+          url: directUrl.replace(apiKey, '[API_KEY]'),
+          note: 'Direct API call succeeded (CORS allowed)',
+          fullResponse: data,
+        });
+      } else {
+        const errorData = await response.json();
+        setDirectApiTest({
+          success: false,
+          status: response.status,
+          url: directUrl.replace(apiKey, '[API_KEY]'),
+          error: `${response.status} ${response.statusText}`,
+          fullResponse: errorData,
+        });
+      }
+    } catch (error: any) {
+      setDirectApiTest({
+        success: false,
+        error: error.message,
+        note: 'This is expected due to CORS restrictions. The proxy should handle this.',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const testYouTubeMetadataFetch = async () => {
+    setLoading(true);
+    try {
+      console.log('🔄 Testing YouTube metadata fetch using app services...');
+      
+      // Import unified data service
+      const { unifiedDataService } = await import('../src/services/unifiedDataService');
+      
+      // Clear cache first
+      unifiedDataService.clearCache(`video:${testVideoId}`);
+      
+      // Test the unified service
+      const video = await unifiedDataService.getVideoById(testVideoId);
+      
+      if (video) {
+        setYoutubeMetadataTest({
+          success: true,
+          video: {
+            id: video.id,
+            title: video.title,
+            channel: video.channel.name,
+            views: video.viewsFormatted,
+            source: video.source,
+            channelAvatar: video.channel.avatarUrl,
+            publishedAt: video.publishedAtFormatted,
+            duration: video.duration,
+          },
+          fullVideo: video,
+        });
+      } else {
+        setYoutubeMetadataTest({
+          success: false,
+          error: 'No video data returned from app service',
+        });
+      }
+    } catch (error: any) {
+      setYoutubeMetadataTest({
+        success: false,
+        error: error.message,
+        stack: error.stack,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const clearYouTubeMetadataTests = () => {
+    setYoutubeMetadataTest(null);
+    setProxyTest(null);
+    setDirectApiTest(null);
+    setEnvironmentCheck(null);
   };
 
   const handleProviderChange = async (newProvider: YouTubeSearchProvider) => {
@@ -450,7 +628,7 @@ const AdminPage: React.FC = () => {
                 { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
                 { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
                 { id: 'search', name: 'Search Settings', icon: SparklesIcon },
-                { id: 'google-search-debug', name: 'Google Search Debug', icon: BugAntIcon },
+                { id: 'api-testing', name: 'API Testing', icon: BugAntIcon },
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -1127,16 +1305,16 @@ const AdminPage: React.FC = () => {
               </div>
             )}
 
-            {/* Google Search Debug Tab */}
-            {activeTab === 'google-search-debug' && (
+            {/* API Testing Tab */}
+            {activeTab === 'api-testing' && (
               <div className="space-y-6">
                 <div>
                   <h2 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
                     <BugAntIcon className="h-5 w-5 mr-2 text-purple-500" />
-                    Google Search Store Debug
+                    API Testing & Debugging
                   </h2>
                   <p className="text-sm text-gray-600 mb-6">
-                    Debug and manage Google Custom Search video store, test API functionality, and troubleshoot metadata issues.
+                    Test and debug both Google Custom Search API and YouTube Data API v3, manage video store, and troubleshoot metadata issues.
                   </p>
                 </div>
 
@@ -1183,9 +1361,15 @@ const AdminPage: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Test Video Fetch */}
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold mb-4">Test Video Fetch</h3>
+                {/* Google Custom Search API Tests */}
+                <div className="bg-orange-50 rounded-lg p-6 border border-orange-200">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <span className="text-xl mr-2">🔍</span>
+                    Google Custom Search API Tests
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Test Google Custom Search JSON API for video discovery and metadata fetching.
+                  </p>
                   <div className="flex gap-2 mb-4">
                     <input
                       type="text"
@@ -1197,22 +1381,22 @@ const AdminPage: React.FC = () => {
                     <button
                       onClick={handleTestFetch}
                       disabled={loading}
-                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 transition-colors"
+                      className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50 transition-colors"
                     >
-                      {loading ? 'Testing...' : 'Test Direct Fetch'}
+                      {loading ? 'Testing...' : '🔍 Google Search Direct'}
                     </button>
                     <button
                       onClick={handleTestUnifiedService}
                       disabled={loading}
-                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 transition-colors"
+                      className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:opacity-50 transition-colors"
                     >
-                      {loading ? 'Testing...' : 'Test Unified Service'}
+                      {loading ? 'Testing...' : '🔄 Google Search Unified'}
                     </button>
                   </div>
 
                   {testResult && (
                     <div className="mt-4 p-3 bg-white rounded border">
-                      <h4 className="font-semibold mb-2">Direct Fetch Result:</h4>
+                      <h4 className="font-semibold mb-2">🔍 Google Custom Search Direct API Result:</h4>
                       <pre className="text-sm overflow-auto bg-gray-100 p-2 rounded max-h-64">
                         {JSON.stringify(testResult, null, 2)}
                       </pre>
@@ -1221,12 +1405,203 @@ const AdminPage: React.FC = () => {
 
                   {unifiedServiceTest && (
                     <div className="mt-4 p-3 bg-white rounded border">
-                      <h4 className="font-semibold mb-2">Unified Service Result:</h4>
+                      <h4 className="font-semibold mb-2">🔄 Google Custom Search Unified Service Result:</h4>
                       <pre className="text-sm overflow-auto bg-gray-100 p-2 rounded max-h-64">
                         {JSON.stringify(unifiedServiceTest, null, 2)}
                       </pre>
                     </div>
                   )}
+                </div>
+
+                {/* YouTube Data API Tests */}
+                <div className="bg-red-50 rounded-lg p-6 border border-red-200">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <span className="text-xl mr-2">📺</span>
+                    YouTube Data API v3 Tests
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-6">
+                    Test YouTube Data API v3 for metadata fetching, proxy configuration, and debugging issues.
+                  </p>
+                  
+                  {/* Environment Check */}
+                  <div className="mb-6">
+                    <button
+                      onClick={checkEnvironment}
+                      className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
+                    >
+                      🔧 Check Environment
+                    </button>
+                    
+                    {environmentCheck && (
+                      <div className="mt-4 p-3 bg-white rounded border">
+                        <h4 className="font-semibold mb-2">Environment Configuration:</h4>
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <strong>Mode:</strong> {environmentCheck.mode}<br/>
+                            <strong>Host:</strong> {environmentCheck.host}<br/>
+                            <strong>Port:</strong> {environmentCheck.port}<br/>
+                            <strong>Origin:</strong> {environmentCheck.origin}
+                          </div>
+                          <div>
+                            <strong>Proxy Active:</strong> {environmentCheck.proxyActive ? '✅ Yes' : '❌ No'}<br/>
+                            <strong>YouTube API Key:</strong> {environmentCheck.youtubeApiKey ? '✅ Set' : '❌ Missing'}<br/>
+                            <strong>Google Search API:</strong> {environmentCheck.googleSearchApiKey ? '✅ Set' : '❌ Missing'}<br/>
+                            <strong>Search Engine ID:</strong> {environmentCheck.googleSearchEngineId ? '✅ Set' : '❌ Missing'}
+                          </div>
+                        </div>
+                        <div className="mt-3 text-sm text-gray-600">
+                          <strong>Proxy URL:</strong> <code className="bg-gray-100 px-1 rounded">{environmentCheck.proxyUrl}</code>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Test Buttons */}
+                  <div className="flex gap-2 mb-4">
+                    <button
+                      onClick={testProxyEndpoint}
+                      disabled={loading}
+                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Testing...' : '🔗 YouTube API Proxy'}
+                    </button>
+                    <button
+                      onClick={testDirectAPI}
+                      disabled={loading}
+                      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Testing...' : '🌐 YouTube API Direct'}
+                    </button>
+                    <button
+                      onClick={testYouTubeMetadataFetch}
+                      disabled={loading}
+                      className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800 disabled:opacity-50 transition-colors"
+                    >
+                      {loading ? 'Testing...' : '📊 YouTube API App'}
+                    </button>
+                    <button
+                      onClick={clearYouTubeMetadataTests}
+                      className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
+                    >
+                      🗑️ Clear Results
+                    </button>
+                  </div>
+                  
+                  {/* Test Results */}
+                  <div className="space-y-4">
+                    {/* Proxy Test Results */}
+                    {proxyTest && (
+                      <div className={`p-3 rounded border ${
+                        proxyTest.success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'
+                      }`}>
+                        <h4 className="font-semibold mb-2 flex items-center">
+                          {proxyTest.success ? '✅' : '❌'} YouTube Data API v3 Proxy Test
+                        </h4>
+                        {proxyTest.success ? (
+                          <div>
+                            <div className="grid grid-cols-2 gap-4 mb-3">
+                              <div>
+                                <strong>Title:</strong> {proxyTest.video.title}<br/>
+                                <strong>Channel:</strong> {proxyTest.video.channel}<br/>
+                                <strong>Views:</strong> {proxyTest.video.views}
+                              </div>
+                              <div>
+                                <strong>Likes:</strong> {proxyTest.video.likes}<br/>
+                                <strong>Published:</strong> {proxyTest.video.published}<br/>
+                                <strong>Duration:</strong> {proxyTest.video.duration}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <strong>Error:</strong> {proxyTest.error}<br/>
+                            {proxyTest.note && <div className="text-sm text-gray-600 mt-1">{proxyTest.note}</div>}
+                          </div>
+                        )}
+                        <details className="mt-2">
+                          <summary className="cursor-pointer text-sm text-gray-600">Show Full Response</summary>
+                          <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
+                            {typeof proxyTest.fullResponse === 'object' 
+                              ? JSON.stringify(proxyTest.fullResponse, null, 2) 
+                              : proxyTest.fullResponse}
+                          </pre>
+                        </details>
+                      </div>
+                    )}
+                    
+                    {/* Direct API Test Results */}
+                    {directApiTest && (
+                      <div className={`p-3 rounded border ${
+                        directApiTest.success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'
+                      }`}>
+                        <h4 className="font-semibold mb-2 flex items-center">
+                          {directApiTest.success ? '✅' : '❌'} YouTube Data API v3 Direct Test
+                        </h4>
+                        <div>
+                          <strong>Status:</strong> {directApiTest.status}<br/>
+                          {directApiTest.error && <div><strong>Error:</strong> {directApiTest.error}</div>}
+                          {directApiTest.note && <div className="text-sm text-gray-600 mt-1">{directApiTest.note}</div>}
+                        </div>
+                        <details className="mt-2">
+                          <summary className="cursor-pointer text-sm text-gray-600">Show Full Response</summary>
+                          <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
+                            {typeof directApiTest.fullResponse === 'object' 
+                              ? JSON.stringify(directApiTest.fullResponse, null, 2) 
+                              : directApiTest.fullResponse}
+                          </pre>
+                        </details>
+                      </div>
+                    )}
+                    
+                    {/* App Metadata Test Results */}
+                    {youtubeMetadataTest && (
+                      <div className={`p-3 rounded border ${
+                        youtubeMetadataTest.success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'
+                      }`}>
+                        <h4 className="font-semibold mb-2 flex items-center">
+                          {youtubeMetadataTest.success ? '✅' : '❌'} YouTube Data API v3 App Integration Test
+                        </h4>
+                        {youtubeMetadataTest.success ? (
+                          <div>
+                            <div className="grid grid-cols-2 gap-4 mb-3">
+                              <div>
+                                <strong>ID:</strong> {youtubeMetadataTest.video.id}<br/>
+                                <strong>Title:</strong> {youtubeMetadataTest.video.title}<br/>
+                                <strong>Channel:</strong> {youtubeMetadataTest.video.channel}<br/>
+                                <strong>Views:</strong> {youtubeMetadataTest.video.views}
+                              </div>
+                              <div>
+                                <strong>Source:</strong> {youtubeMetadataTest.video.source}<br/>
+                                <strong>Published:</strong> {youtubeMetadataTest.video.publishedAt}<br/>
+                                <strong>Duration:</strong> {youtubeMetadataTest.video.duration}<br/>
+                                <strong>Has Avatar:</strong> {youtubeMetadataTest.video.channelAvatar ? '✅ Yes' : '❌ No'}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <strong>Error:</strong> {youtubeMetadataTest.error}<br/>
+                            {youtubeMetadataTest.stack && (
+                              <details className="mt-2">
+                                <summary className="cursor-pointer text-sm text-gray-600">Show Stack Trace</summary>
+                                <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
+                                  {youtubeMetadataTest.stack}
+                                </pre>
+                              </details>
+                            )}
+                          </div>
+                        )}
+                        {youtubeMetadataTest.success && (
+                          <details className="mt-2">
+                            <summary className="cursor-pointer text-sm text-gray-600">Show Full Video Object</summary>
+                            <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded mt-2 max-h-32">
+                              {JSON.stringify(youtubeMetadataTest.fullVideo, null, 2)}
+                            </pre>
+                          </details>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Store Contents */}
