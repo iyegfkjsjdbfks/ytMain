@@ -267,12 +267,14 @@ export interface GoogleSearchResult {
   duration?: string;
   uploadedAt?: string;
   viewCount?: number;
+  views: string; // Formatted view count string
   likeCount?: number;
   dislikeCount?: number;
   commentCount?: number;
   tags?: string[];
   categoryId?: string;
   isYouTube: true;
+  isShort?: boolean; // Whether the video is a YouTube Short
   source: 'google-search';
 }
 
@@ -498,6 +500,18 @@ multiplier = 1000000000;
 
   const channelId = videoDetails?.snippet.channelId || videoObject?.channelid || `channel-${videoId}`;
 
+  // Determine if this is a YouTube Short based on duration
+  const durationSeconds = videoDetails?.contentDetails.duration ?
+                         parseDuration(videoDetails.contentDetails.duration) :
+                         parseDuration(duration || 'PT0S');
+  const isShort = durationSeconds > 0 && durationSeconds <= 60;
+
+  // Format views for display
+  const finalViewCount = videoDetails?.statistics.viewCount ?
+                        parseInt(videoDetails.statistics.viewCount, 10) :
+                        viewCount || 0;
+  const views = formatViewCount(finalViewCount);
+
   return {
     id: `google-search-${videoId || item.cacheId || Math.random().toString(36)}`,
     title: videoDetails?.snippet.title || title,
@@ -517,6 +531,8 @@ multiplier = 1000000000;
              formatDuration(parseDuration(videoDetails.contentDetails.duration)) :
              duration,
     uploadedAt: videoDetails?.snippet.publishedAt || uploadedAt,
+    views,
+    isShort,
     // Use YouTube API statistics if available, otherwise fall back to extracted values
     ...(videoDetails?.statistics.viewCount && {
       viewCount: parseInt(videoDetails.statistics.viewCount, 10),
@@ -573,6 +589,20 @@ const formatDuration = (seconds: number): string => {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Helper function to format view count for display
+const formatViewCount = (viewCount: number): string => {
+  if (viewCount >= 1000000000) {
+    return `${(viewCount / 1000000000).toFixed(1).replace(/\.0$/, '')}B`;
+  }
+  if (viewCount >= 1000000) {
+    return `${(viewCount / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
+  }
+  if (viewCount >= 1000) {
+    return `${(viewCount / 1000).toFixed(1).replace(/\.0$/, '')}K`;
+  }
+  return viewCount.toString();
 };
 
 // Fetch detailed video information from YouTube Data API v3 (with blocking check)
@@ -1250,6 +1280,18 @@ multiplier = 1000000000;
     console.log('  🖼️ Thumbnail source:', enhancedMetadata ? 'YouTube API (high-res)' : 'Google Custom Search');
     console.log('  👥 Subscriber count source:', channelMetadata ? 'YouTube API (real)' : 'Not available');
 
+    // Determine view count and format for display
+    const finalViewCount = enhancedMetadata?.statistics.viewCount 
+      ? parseInt(enhancedMetadata.statistics.viewCount, 10)
+      : viewCount || 0;
+    const views = formatViewCount(finalViewCount);
+
+    // Determine if this is a YouTube Short based on duration
+    const durationSeconds = enhancedMetadata?.contentDetails.duration 
+      ? parseDuration(enhancedMetadata.contentDetails.duration)
+      : parseDuration(duration || 'PT0S');
+    const isShort = durationSeconds > 0 && durationSeconds <= 60;
+
     // Build result using YouTube API data as primary, Google Custom Search as fallback
     const result: GoogleSearchResult = {
       id: `google-search-${youtubeVideoId}`,
@@ -1270,6 +1312,8 @@ multiplier = 1000000000;
       duration: enhancedMetadata?.contentDetails.duration ?
                formatDuration(parseDuration(enhancedMetadata.contentDetails.duration)) :
                duration,
+      views,
+      isShort,
       // Use YouTube API statistics if available, otherwise fall back to extracted values
       ...(enhancedMetadata?.statistics.viewCount && {
         viewCount: parseInt(enhancedMetadata.statistics.viewCount, 10),

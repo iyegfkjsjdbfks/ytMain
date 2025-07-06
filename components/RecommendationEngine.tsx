@@ -140,6 +140,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         } else {
           // Get trending videos using Google Custom Search
           console.log('🔍 Getting trending videos using Google Custom Search...');
+          const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
           const trendingResults = await searchYouTubeWithGoogleSearch('popular trending youtube videos 2024');
           console.log('📊 Google Custom Search trending results:', trendingResults.length);
           

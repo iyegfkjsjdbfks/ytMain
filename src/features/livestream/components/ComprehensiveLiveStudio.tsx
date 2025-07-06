@@ -3,22 +3,13 @@ import {
   VideoCameraIcon,
   MicrophoneIcon,
   StopIcon,
-  PlayIcon,
-  PauseIcon,
   Cog6ToothIcon,
   ChatBubbleLeftRightIcon,
   EyeIcon,
   HeartIcon,
-  ShareIcon,
   SignalIcon,
   ClockIcon,
-  CalendarIcon,
-  GlobeAltIcon,
-  LockClosedIcon,
-  EyeSlashIcon,
   CurrencyDollarIcon,
-  QuestionMarkCircleIcon,
-  ChartBarIcon,
 } from '@heroicons/react/24/outline';
 import {
   VideoCameraIcon as VideoCameraSolidIcon,
@@ -26,8 +17,8 @@ import {
   PlayIcon as PlaySolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { useLiveStream, liveStreamService } from '../../services/liveStreamService';
-import type { LiveStream, StreamPlatform } from '../../types/livestream';
+import { useLiveStream, liveStreamService } from '../../../services/liveStreamService';
+import type { LiveStream, StreamPlatform } from '../../../types/livestream';
 import AdvancedLiveChat from './AdvancedLiveChat';
 import LivePolls from './LivePolls';
 import LiveQA from './LiveQA';
@@ -573,33 +564,37 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           {/* Tab Content */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
             {activeTab === 'chat' && currentStream && (
-              <AdvancedLiveChat streamId={currentStream.id} />
+              <AdvancedLiveChat 
+                streamId={currentStream.id} 
+                isOwner={true}
+                isModerator={true}
+              />
             )}
             {activeTab === 'polls' && currentStream && (
-              <LivePolls streamId={currentStream.id} />
+              <LivePolls 
+                streamId={currentStream.id} 
+                isOwner={true}
+              />
             )}
             {activeTab === 'qa' && currentStream && (
-              <LiveQA streamId={currentStream.id} />
+              <LiveQA 
+                streamId={currentStream.id} 
+                isOwner={true}
+              />
             )}
             {activeTab === 'superchat' && currentStream && (
               <SuperChatPanel streamId={currentStream.id} />
             )}
             {activeTab === 'schedule' && (
               <StreamScheduler
-                onSchedule={(scheduledTime) => 
-                  setStreamSettings(prev => ({ ...prev, scheduledStartTime: scheduledTime }))
-                }
+                onStreamScheduled={(stream) => {
+                  console.log('Stream scheduled:', stream);
+                }}
               />
             )}
             {activeTab === 'multiplatform' && (
               <MultiplatformStreaming
-                platforms={streamSettings.platforms}
-                onPlatformsChange={(platforms) => 
-                  setStreamSettings(prev => ({ ...prev, platforms }))
-                }
-                onToggleMultiplatform={(enabled) =>
-                  setStreamSettings(prev => ({ ...prev, enableMultiplatform: enabled }))
-                }
+                isStreaming={isStreaming}
               />
             )}
             

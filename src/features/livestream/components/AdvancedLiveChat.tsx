@@ -85,6 +85,7 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
       const timer = setTimeout(() => setSlowModeTimer(slowModeTimer - 1), 1000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [slowModeTimer]);
 
   const handleSendMessage = async () => {

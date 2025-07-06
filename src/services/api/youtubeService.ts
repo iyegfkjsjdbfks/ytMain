@@ -23,6 +23,7 @@ interface YouTubeVideoResponse {
       tags?: string[];
       categoryId: string;
       defaultLanguage?: string;
+      liveBroadcastContent?: string;
     };
     statistics: {
       viewCount: string;
@@ -36,6 +37,9 @@ interface YouTubeVideoResponse {
       dimension: string;
       definition: string;
       caption: string;
+      licensedContent?: boolean;
+      contentRating?: Record<string, string>;
+      projection?: string;
     };
   }>;
   nextPageToken?: string;
@@ -241,7 +245,7 @@ return cached;
 
           // Additional metadata for watch page
           metadata: {
-            defaultLanguage: snippet.defaultLanguage,
+            defaultLanguage: snippet.defaultLanguage || undefined,
             uploadLocation: recordingDetails?.location,
             recordingDate: recordingDetails?.recordingDate,
             actualStartTime: liveStreamingDetails?.actualStartTime,
@@ -347,7 +351,7 @@ return null;
         totalViews: parseInt(item.statistics.viewCount || '0', 10),
         isVerified: false, // Would need additional API call or manual verification
         joinedDate: item.snippet.publishedAt,
-        country: item.snippet.country,
+        country: item.snippet.country || 'Unknown',
         createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString(),
       };

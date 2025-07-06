@@ -38,7 +38,6 @@ const convertSearchResultToVideo = (
     updatedAt: new Date().toISOString(),
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
-    isLiveContent: false,
     isFamilySafe: true,
     allowedRegions: [],
     blockedRegions: [],

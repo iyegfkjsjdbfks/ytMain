@@ -761,20 +761,22 @@ class UnifiedDataService {
         type: filters.type === 'short' ? 'video' : filters.type || 'video',
         order: filters.sortBy === 'date' ? 'date' :
                filters.sortBy === 'views' ? 'viewCount' :
-               filters.sortBy === 'rating' ? 'rating' : 'relevance',
+               filters.sortBy === 'rating' ? 'rating' :
+               'relevance',
         videoDuration: filters.duration === 'short' ? 'short' :
+                      filters.duration === 'medium' ? 'medium' :
                       filters.duration === 'long' ? 'long' :
-                      filters.duration === 'medium' ? 'medium' : 'any',
-        publishedAfter: filters.uploadDate === 'hour' ? new Date(Date.now() - 60 * 60 * 1000).toISOString() :
-                       filters.uploadDate === 'today' ? new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() :
-                       filters.uploadDate === 'week' ? new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() :
-                       filters.uploadDate === 'month' ? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() :
-                       filters.uploadDate === 'year' ? new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString() :
-                       undefined,
+                      'any',
+        ...(filters.uploadDate && {
+          publishedAfter: filters.uploadDate === 'hour' ? new Date(Date.now() - 60 * 60 * 1000).toISOString() :
+                         filters.uploadDate === 'today' ? new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() :
+                         filters.uploadDate === 'week' ? new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() :
+                         filters.uploadDate === 'month' ? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() :
+                         filters.uploadDate === 'year' ? new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString() :
+                         undefined
+        }),
         forRecommendations: filters.forRecommendations || false,
       });
-
-      // Convert search results to unified format
       const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(video => ({
         id: video.id,
         title: video.title,
