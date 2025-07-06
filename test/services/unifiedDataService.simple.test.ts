@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import { unifiedDataService } from '../unifiedDataService';
+import { unifiedDataService } from '@services/unifiedDataService';
 
 // Mock dependencies
-vi.mock('../api/youtubeService', () => ({
+vi.mock('@services/api/youtubeService', () => ({
   youtubeService: {
     fetchVideos: vi.fn(),
     fetchChannel: vi.fn(),
@@ -11,7 +11,7 @@ vi.mock('../api/youtubeService', () => ({
   },
 }));
 
-vi.mock('../metadataNormalizationService', () => ({
+vi.mock('@services/metadataNormalizationService', () => ({
   metadataNormalizationService: {
     normalizeLocalVideo: vi.fn(),
     normalizeYouTubeVideo: vi.fn(),
@@ -20,7 +20,7 @@ vi.mock('../metadataNormalizationService', () => ({
   },
 }));
 
-vi.mock('../../../services/realVideoService', () => ({
+vi.mock('@services/realVideoService', () => ({
   getVideos: vi.fn(),
   getShortsVideos: vi.fn(),
   getVideosByCategory: vi.fn(),

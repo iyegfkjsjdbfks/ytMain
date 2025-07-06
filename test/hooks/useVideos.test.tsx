@@ -5,7 +5,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 
-import { unifiedDataService } from '../../../services/unifiedDataService';
+import { unifiedDataService } from '@services/unifiedDataService';
 import {
   useUnifiedVideos,
   useUnifiedVideo,
@@ -14,10 +14,10 @@ import {
   useUnifiedSearchVideos,
   useVideoWithRelated,
   useHomePageData,
-} from '../useVideos';
+} from '@hooks/unified/useVideos';
 
 // Mock the unified data service
-vi.mock('../../../services/unifiedDataService');
+vi.mock('@services/unifiedDataService');
 
 const mockUnifiedDataService = vi.mocked(unifiedDataService);
 

@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
-import * as realVideoService from '../../../services/realVideoService';
-import { youtubeService } from '../api/youtubeService';
-import { metadataNormalizationService } from '../metadataNormalizationService';
-import { unifiedDataService } from '../unifiedDataService';
+import * as realVideoService from '@services/realVideoService';
+import { youtubeService } from '@services/api/youtubeService';
+import { metadataNormalizationService } from '@services/metadataNormalizationService';
+import { unifiedDataService } from '@services/unifiedDataService';
 
 // Mock dependencies
-vi.mock('../api/youtubeService');
-vi.mock('../metadataNormalizationService');
-vi.mock('../../../services/realVideoService');
+vi.mock('@services/api/youtubeService');
+vi.mock('@services/metadataNormalizationService');
+vi.mock('@services/realVideoService');
 
 const mockYoutubeService = vi.mocked(youtubeService);
 const mockMetadataService = vi.mocked(metadataNormalizationService);

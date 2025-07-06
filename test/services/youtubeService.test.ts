@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import { youtubeService } from '../youtubeService';
+import { youtubeService } from '@services/api/youtubeService';
 
 // Mock fetch globally
 const mockFetch = vi.fn();
