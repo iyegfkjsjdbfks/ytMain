@@ -8,32 +8,24 @@ import {
   ArrowsPointingInIcon,
   Cog6ToothIcon,
   ShareIcon,
-  HeartIcon,
-  HandThumbsUpIcon,
-  HandThumbsDownIcon,
+  HandThumbUpIcon,
+  HandThumbDownIcon,
   ChatBubbleLeftRightIcon,
-  UserGroupIcon,
   EyeIcon,
-  GiftIcon,
-  QuestionMarkCircleIcon,
-  ChartBarIcon,
   BellIcon,
-  UserPlusIcon,
 } from '@heroicons/react/24/outline';
 import {
-  HeartIcon as HeartSolidIcon,
-  HandThumbsUpIcon as ThumbsUpSolidIcon,
+  HandThumbUpIcon as ThumbsUpSolidIcon,
   BellIcon as BellSolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { useLiveStream, useLiveChat } from '../../../hooks/useLiveStream';
+import { useLiveStream } from '../../../hooks/useLiveStream';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import AdvancedLiveChat from './AdvancedLiveChat';
 import LivePolls from './LivePolls';
 import LiveQA from './LiveQA';
 import SuperChatPanel from './SuperChatPanel';
 
-import type { LiveStream, ChatMessage } from '../../../types/livestream';
 
 interface LiveStreamViewerProps {
   streamId: string;
@@ -66,18 +58,15 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [showControls, setShowControls] = useState(true);
+  const [showControls] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [selectedQuality, setSelectedQuality] = useState('1080p');
   const [showChat, setShowChat] = useState(true);
   const [showPolls, setShowPolls] = useState(false);
   const [showQA, setShowQA] = useState(false);
   const [showSuperChat, setShowSuperChat] = useState(false);
-  const [chatMessage, setChatMessage] = useState('');
   
   const { stream, isLoading: streamLoading, setStream } = useLiveStream();
-  const { messages, sendMessage, sendSuperChat } = useLiveChat(streamId);
   
   // Fetch stream data when component mounts
   useEffect(() => {
@@ -121,7 +110,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      setCurrentTime(video.currentTime);
+      // Video time update
     };
 
     const handleLoadedMetadata = () => {
@@ -234,13 +223,6 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
     }));
   };
 
-  const handleChatSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (chatMessage.trim()) {
-      sendMessage(chatMessage);
-      setChatMessage('');
-    }
-  };
 
   const formatViewerCount = (count: number) => {
     if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
@@ -450,7 +432,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
                   {viewerStats.isLiked ? (
                     <ThumbsUpSolidIcon className="h-4 w-4" />
                   ) : (
-                    <HandThumbsUpIcon className="h-4 w-4" />
+                    <HandThumbUpIcon className="h-4 w-4" />
                   )}
                   <span className="text-sm">{formatViewerCount(viewerStats.likes)}</span>
                 </button>
@@ -463,7 +445,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  <HandThumbsDownIcon className="h-4 w-4" />
+                  <HandThumbDownIcon className="h-4 w-4" />
                 </button>
               </div>
 
@@ -509,9 +491,8 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
             <div className="flex-1">
               <AdvancedLiveChat
                 streamId={streamId}
-                messages={messages}
-                onSendMessage={sendMessage}
-                onSendSuperChat={sendSuperChat}
+                isOwner={false}
+                isModerator={false}
                 className="h-96"
               />
             </div>
@@ -567,12 +548,14 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
                 {showPolls && (
                   <LivePolls
                     streamId={streamId}
+                    isOwner={false}
                     className="p-4"
                   />
                 )}
                 {showQA && (
                   <LiveQA
                     streamId={streamId}
+                    isOwner={false}
                     className="p-4"
                   />
                 )}

@@ -8,14 +8,10 @@ import {
   CurrencyDollarIcon,
   ClockIcon,
   SignalIcon,
-  UserGroupIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
 } from '@heroicons/react/24/outline';
 
-import { liveStreamService } from '../../../services/livestreamAPI';
-
-import type { LiveStream, LiveStreamStats } from '../../../types/livestream';
+import type { LiveStreamStats } from '../../../types/livestream';
 
 interface StreamAnalyticsDashboardProps {
   streamId?: string;

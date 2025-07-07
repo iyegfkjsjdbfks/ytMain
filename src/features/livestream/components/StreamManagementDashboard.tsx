@@ -33,7 +33,7 @@ interface StreamAction {
   id: string;
   type: 'start' | 'stop' | 'edit' | 'delete' | 'duplicate' | 'analytics' | 'share';
   label: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string | undefined }>;
   color: string;
   disabled?: boolean;
 }
@@ -46,7 +46,6 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   const [selectedStreams, setSelectedStreams] = useState<string[]>([]);
   const [filter, setFilter] = useState<'all' | 'live' | 'scheduled' | 'ended'>('all');
   const [sortBy, setSortBy] = useState<'date' | 'viewers' | 'duration' | 'revenue'>('date');
-  const [showBulkActions, setShowBulkActions] = useState(false);
   const [editingStream, setEditingStream] = useState<LiveStream | null>(null);
 
   useEffect(() => {
@@ -249,35 +248,35 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         id: 'edit',
         type: 'edit',
         label: 'Edit',
-        icon: PencilIcon,
+        icon: PencilIcon as React.ComponentType<{ className?: string | undefined }>,
         color: 'text-blue-600 hover:text-blue-800',
       },
       {
         id: 'duplicate',
         type: 'duplicate',
         label: 'Duplicate',
-        icon: DocumentDuplicateIcon,
+        icon: DocumentDuplicateIcon as React.ComponentType<{ className?: string | undefined }>,
         color: 'text-green-600 hover:text-green-800',
       },
       {
         id: 'analytics',
         type: 'analytics',
         label: 'Analytics',
-        icon: ChartBarIcon,
+        icon: ChartBarIcon as React.ComponentType<{ className?: string | undefined }>,
         color: 'text-purple-600 hover:text-purple-800',
       },
       {
         id: 'share',
         type: 'share',
         label: 'Share',
-        icon: ShareIcon,
+        icon: ShareIcon as React.ComponentType<{ className?: string | undefined }>,
         color: 'text-indigo-600 hover:text-indigo-800',
       },
       {
         id: 'delete',
         type: 'delete',
         label: 'Delete',
-        icon: TrashIcon,
+        icon: TrashIcon as React.ComponentType<{ className?: string | undefined }>,
         color: 'text-red-600 hover:text-red-800',
       },
     ];
@@ -288,7 +287,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           id: 'stop',
           type: 'stop',
           label: 'End Stream',
-          icon: StopIcon,
+          icon: StopIcon as React.ComponentType<{ className?: string | undefined }>,
           color: 'text-red-600 hover:text-red-800',
         },
         ...baseActions.filter(a => a.id !== 'delete'),
@@ -301,7 +300,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           id: 'start',
           type: 'start',
           label: 'Start Now',
-          icon: PlayIcon,
+          icon: PlayIcon as React.ComponentType<{ className?: string | undefined }>,
           color: 'text-green-600 hover:text-green-800',
         },
         ...baseActions,
