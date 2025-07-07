@@ -73,7 +73,7 @@ const getHealthColor = (health: StreamHealth): string => {
     fair: 'text-yellow-600',
     poor: 'text-red-600',
   };
-  return healthColors[health] || 'text-gray-600';
+  return healthColors[health];
 };
 
 const getMetricValue = (point: HistoricalDataPoint, metric: MetricType): number => {
@@ -187,7 +187,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon, subtitle, tre
       </div>
       {icon}
     </div>
-    {(subtitle || trend) && (
+    {(subtitle ?? trend) && (
       <div className="mt-2 flex items-center text-sm">
         {trend}
         {subtitle && <span className="text-gray-600">{subtitle}</span>}
@@ -218,8 +218,8 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
-        {moments.map((moment, index) => (
-          <div key={`moment-${moment.timestamp}-${index}`} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
+        {moments.map((moment) => (
+          <div key={`moment-${moment.type}-${moment.timestamp}`} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
             <div className="flex items-center space-x-3">
               {getIcon(moment.type)}
               <div>
@@ -250,8 +250,8 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Top Countries</h4>
         <div className="space-y-2">
-          {demographics.countries.slice(0, 3).map((country, index) => (
-            <div key={`country-${country.name}-${index}`} className="flex items-center justify-between">
+          {demographics.countries.slice(0, 3).map((country) => (
+            <div key={`country-${country.name}`} className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">{country.name}</span>
               <div className="flex items-center space-x-2">
                 <div className="w-16 bg-gray-200 rounded-full h-2">
@@ -270,8 +270,8 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Devices</h4>
         <div className="grid grid-cols-2 gap-2">
-          {demographics.devices.map((device, index) => (
-            <div key={`device-${device.type}-${index}`} className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
+          {demographics.devices.map((device) => (
+            <div key={`device-${device.type}`} className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
               <div className="text-sm font-medium">{device.percentage}%</div>
               <div className="text-xs text-gray-600 dark:text-gray-400">{device.type}</div>
             </div>
