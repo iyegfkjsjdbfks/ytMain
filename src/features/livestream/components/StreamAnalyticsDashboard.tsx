@@ -13,30 +13,49 @@ import {
 
 import type { LiveStreamStats } from '../../../types/livestream';
 
+/**
+ * Props for the StreamAnalyticsDashboard component
+ */
 interface StreamAnalyticsDashboardProps {
+  /** Optional stream ID to fetch analytics for */
   streamId?: string;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Historical data point structure for charts
+ */
 interface HistoricalDataPoint {
+  /** ISO timestamp */
   time: string;
+  /** Count value for viewers metric */
   count?: number;
+  /** Rate value for engagement metric */
   rate?: number;
+  /** Amount value for revenue metric */
   amount?: number;
 }
 
+/**
+ * Complete analytics data structure
+ */
 interface AnalyticsData {
+  /** Real-time stream statistics */
   realTimeStats: LiveStreamStats;
+  /** Historical data for charts */
   historicalData: {
     viewers: Array<{ time: string; count: number }>;
     engagement: Array<{ time: string; rate: number }>;
     revenue: Array<{ time: string; amount: number }>;
   };
+  /** Audience demographic information */
   demographics: {
     countries: Array<{ name: string; percentage: number }>;
     devices: Array<{ type: string; percentage: number }>;
     ageGroups: Array<{ range: string; percentage: number }>;
   };
+  /** Notable moments during the stream */
   topMoments: Array<{
     timestamp: number;
     type: 'peak_viewers' | 'super_chat' | 'viral_moment';
@@ -45,8 +64,13 @@ interface AnalyticsData {
   }>;
 }
 
+/** Time range options for analytics display */
 type TimeRange = 'live' | '1h' | '24h' | '7d';
+
+/** Metric types for chart visualization */
 type MetricType = 'viewers' | 'engagement' | 'revenue';
+
+/** Stream health status indicators */
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
@@ -103,7 +127,7 @@ const generateMockAnalytics = (): AnalyticsData => ({
     superChatCount: 23,
     pollVotes: 456,
     qaQuestions: 34,
-    streamHealth: 'excellent' as StreamHealth,
+    streamHealth: 'excellent',
     bitrate: 4500,
     frameDrops: 0,
     latency: 1800,
@@ -167,36 +191,98 @@ const generateMockAnalytics = (): AnalyticsData => ({
   ],
 });
 
+// Custom hook for analytics data management
+const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') => {
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchAnalytics = useCallback(async (): Promise<void> => {
+    if (!streamId) {
+      setAnalytics(null);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    
+    try {
+      // Mock analytics data - in production, this would come from the API
+      // await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API delay
+      const mockAnalytics = generateMockAnalytics();
+      setAnalytics(mockAnalytics);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch analytics';
+      console.error('Failed to fetch analytics:', err);
+      setError(errorMessage);
+      setAnalytics(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [streamId]);
+
+  useEffect(() => {
+    void fetchAnalytics();
+
+    // Update analytics every 30 seconds for live streams
+    const interval = setInterval(() => {
+      void fetchAnalytics();
+    }, 30000);
+    
+    return () => {
+      clearInterval(interval);
+    };
+  }, [fetchAnalytics, timeRange]);
+
+  return { analytics, loading, error, refetch: fetchAnalytics };
+};
+
 // Sub-components for better modularity
+
+/**
+ * Props for the StatsCard component
+ */
 interface StatsCardProps {
+  /** Card title/label */
   title: string;
+  /** Main value to display */
   value: string | number;
+  /** Icon component */
   icon: React.ReactNode;
+  /** Optional subtitle text */
   subtitle?: string;
+  /** Optional trend indicator */
   trend?: React.ReactNode;
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }) => (
-  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">{title}</p>
-        <p className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="flex-1">
+        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{title}</p>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
           {typeof value === 'number' ? formatNumber(value) : value}
         </p>
       </div>
-      {icon}
+      <div className="flex-shrink-0 ml-4">
+        {icon}
+      </div>
     </div>
-    {(subtitle ?? trend) && (
-      <div className="mt-2 flex items-center text-sm">
+    {(subtitle || trend) && (
+      <div className="mt-3 flex items-center text-sm">
         {trend}
-        {subtitle && <span className="text-gray-600">{subtitle}</span>}
+        {subtitle && <span className="text-gray-600 dark:text-gray-400">{subtitle}</span>}
       </div>
     )}
   </div>
 );
 
+/**
+ * Props for the TopMoments component
+ */
 interface TopMomentsProps {
+  /** Array of notable stream moments */
   moments: AnalyticsData['topMoments'];
 }
 
@@ -214,23 +300,49 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
     }
   };
 
+  const formatMomentValue = (moment: AnalyticsData['topMoments'][0]): string => {
+    switch (moment.type) {
+      case 'super_chat':
+        return `$${moment.value.toFixed(2)}`;
+      default:
+        return formatNumber(moment.value);
+    }
+  };
+
+  if (moments.length === 0) {
+    return (
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
+        <div className="text-center text-gray-500 dark:text-gray-400 py-8">
+          <ChartBarIcon className="h-8 w-8 mx-auto mb-2" />
+          <p>No notable moments yet</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
         {moments.map((moment) => (
-          <div key={`moment-${moment.type}-${moment.timestamp}`} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
+          <div 
+            key={`moment-${moment.type}-${moment.timestamp}`} 
+            className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+          >
             <div className="flex items-center space-x-3">
               {getIcon(moment.type)}
               <div>
-                <p className="text-sm font-medium text-gray-900 dark:text-white">{moment.description}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  {moment.description}
+                </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">
                   {formatDuration(moment.timestamp)}
                 </p>
               </div>
             </div>
             <div className="text-sm font-bold text-gray-900 dark:text-white">
-              {moment.type === 'super_chat' ? `$${moment.value}` : formatNumber(moment.value)}
+              {formatMomentValue(moment)}
             </div>
           </div>
         ))}
@@ -239,28 +351,36 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
   );
 };
 
+/**
+ * Props for the Demographics component
+ */
 interface DemographicsProps {
+  /** Audience demographic data */
   demographics: AnalyticsData['demographics'];
 }
 
 const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
-  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Audience Demographics</h3>
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div>
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Top Countries</h4>
-        <div className="space-y-2">
+        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Top Countries</h4>
+        <div className="space-y-3">
           {demographics.countries.slice(0, 3).map((country) => (
             <div key={`country-${country.name}`} className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">{country.name}</span>
-              <div className="flex items-center space-x-2">
-                <div className="w-16 bg-gray-200 rounded-full h-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                {country.name}
+              </span>
+              <div className="flex items-center space-x-3">
+                <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                   <div
-                    className="bg-blue-500 h-2 rounded-full"
+                    className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${country.percentage}%` }}
                   />
                 </div>
-                <span className="text-sm font-medium">{country.percentage}%</span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white min-w-[2rem] text-right">
+                  {country.percentage}%
+                </span>
               </div>
             </div>
           ))}
@@ -268,12 +388,19 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
       </div>
 
       <div>
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Devices</h4>
-        <div className="grid grid-cols-2 gap-2">
+        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Devices</h4>
+        <div className="grid grid-cols-2 gap-3">
           {demographics.devices.map((device) => (
-            <div key={`device-${device.type}`} className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
-              <div className="text-sm font-medium">{device.percentage}%</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">{device.type}</div>
+            <div 
+              key={`device-${device.type}`} 
+              className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <div className="text-lg font-bold text-gray-900 dark:text-white">
+                {device.percentage}%
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                {device.type}
+              </div>
             </div>
           ))}
         </div>
@@ -282,81 +409,78 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
   </div>
 );
 
+/**
+ * StreamAnalyticsDashboard Component
+ * 
+ * A comprehensive analytics dashboard for live stream data visualization.
+ * Features real-time statistics, historical data charts, audience demographics,
+ * and top moments tracking.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <StreamAnalyticsDashboard 
+ *   streamId="stream_123" 
+ *   className="w-full"
+ * />
+ * ```
+ */
+
 const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
   streamId,
   className = '',
 }) => {
-  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<TimeRange>('live');
   const [selectedMetric, setSelectedMetric] = useState<MetricType>('viewers');
-
-  const fetchAnalytics = useCallback(() => {
-    if (!streamId) {
-      return Promise.resolve();
-    }
-
-    setLoading(true);
-    return new Promise<void>((resolve) => {
-      try {
-        // Mock analytics data - in production, this would come from the API
-        const mockAnalytics = generateMockAnalytics();
-        setAnalytics(mockAnalytics);
-        resolve();
-      } catch (error) {
-        console.error('Failed to fetch analytics:', error);
-        resolve();
-      } finally {
-        setLoading(false);
-      }
-    });
-  }, [streamId]);
-
-  useEffect(() => {
-    fetchAnalytics().catch(console.error);
-
-    // Update analytics every 30 seconds for live streams
-    const interval = setInterval(() => {
-      fetchAnalytics().catch(console.error);
-    }, 30000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [fetchAnalytics, timeRange]);
+  
+  const { analytics, loading } = useStreamAnalytics(streamId, timeRange);
 
   const chartData = useMemo(() => {
     if (!analytics) {
       return [];
     }
 
-    const rawData = analytics.historicalData[selectedMetric].slice(-20);
-    const maxValue = Math.max(...rawData.map(p => getMetricValue(p, selectedMetric)));
+    try {
+      const rawData = analytics.historicalData[selectedMetric]?.slice(-20) || [];
+      if (rawData.length === 0) {
+        return [];
+      }
 
-    return rawData.map((point, index) => {
-      const value = getMetricValue(point, selectedMetric);
-      const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
+      const maxValue = Math.max(...rawData.map(p => getMetricValue(p, selectedMetric))) || 1;
 
-      return {
-        index,
-        height,
-        value,
-        time: point.time,
-        id: `chart-${selectedMetric}-${index}`,
-      };
-    });
+      return rawData.map((point, index) => {
+        const value = getMetricValue(point, selectedMetric);
+        const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
+
+        return {
+          index,
+          height: Math.max(height, 2), // Minimum height for visibility
+          value,
+          time: point.time,
+          id: `chart-${selectedMetric}-${index}`,
+        };
+      });
+    } catch (error) {
+      console.error('Error generating chart data:', error);
+      return [];
+    }
   }, [analytics, selectedMetric]);
 
   if (loading) {
     return (
       <div className={`p-6 ${className}`}>
         <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/3" />
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={`loading-card-${i}`} className="h-24 bg-gray-200 rounded" />
+              <div key={`loading-card-${i}`} className="h-24 bg-gray-200 dark:bg-gray-700 rounded" />
             ))}
           </div>
-          <div className="h-64 bg-gray-200 rounded" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
+          </div>
+          <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded" />
         </div>
       </div>
     );
@@ -365,9 +489,10 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
   if (!analytics) {
     return (
       <div className={`p-6 ${className}`}>
-        <div className="text-center text-gray-500">
-          <ChartBarIcon className="h-12 w-12 mx-auto mb-4" />
-          <p>No analytics data available</p>
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          <ChartBarIcon className="h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500" />
+          <h3 className="text-lg font-medium mb-2">No analytics data available</h3>
+          <p className="text-sm">Analytics will appear here once your stream is live.</p>
         </div>
       </div>
     );
@@ -386,7 +511,8 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
             onChange={(e) => {
               setTimeRange(e.target.value as TimeRange);
             }}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            aria-label="Select time range"
           >
             <option value="live">Live</option>
             <option value="1h">Last Hour</option>
@@ -416,8 +542,8 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
           icon={<ClockIcon className="h-8 w-8 text-purple-500" />}
           trend={
             <>
-              <SignalIcon className={`h-4 w-4 mr-1 ${getHealthColor(analytics.realTimeStats.streamHealth as StreamHealth)}`} />
-              <span className={getHealthColor(analytics.realTimeStats.streamHealth as StreamHealth)}>
+              <SignalIcon className={`h-4 w-4 mr-1 ${getHealthColor(analytics.realTimeStats.streamHealth)}`} />
+              <span className={getHealthColor(analytics.realTimeStats.streamHealth)}>
                 {analytics.realTimeStats.streamHealth}
               </span>
             </>
@@ -447,7 +573,7 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Viewer Chart */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Viewer Trends</h3>
             <select
@@ -455,23 +581,34 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
               onChange={(e) => {
                 setSelectedMetric(e.target.value as MetricType);
               }}
-              className="px-3 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              aria-label="Select metric to display"
             >
               <option value="viewers">Viewers</option>
               <option value="engagement">Engagement</option>
               <option value="revenue">Revenue</option>
             </select>
           </div>
-          <div className="h-64 flex items-end justify-between space-x-1">
-            {chartData.map((point) => (
-              <div
-                key={point.id}
-                className="bg-blue-500 rounded-t"
-                style={{ height: `${point.height}%`, width: '4%' }}
-                title={`${point.value} at ${new Date(point.time).toLocaleTimeString()}`}
-              />
-            ))}
-          </div>
+          {chartData.length > 0 ? (
+            <div className="h-64 flex items-end justify-between space-x-1" role="img" aria-label={`${selectedMetric} chart`}>
+              {chartData.map((point) => (
+                <div
+                  key={point.id}
+                  className="bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer"
+                  style={{ height: `${point.height}%`, width: '4%' }}
+                  title={`${point.value} at ${new Date(point.time).toLocaleTimeString()}`}
+                  role="presentation"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+              <div className="text-center">
+                <ChartBarIcon className="h-8 w-8 mx-auto mb-2" />
+                <p>No chart data available</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Demographics */}
