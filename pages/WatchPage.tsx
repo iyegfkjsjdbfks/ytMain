@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { memo, useMemo, useCallback } from 'react';
 
 import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import VideoMetadata from '../components/VideoMetadata';
@@ -11,6 +10,81 @@ import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 
+// Memoized skeleton component to prevent re-rendering
+const LoadingSkeleton = memo(() => (
+  <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="max-w-[1280px] mx-auto px-4 py-4">
+      <div className="flex flex-col xl:flex-row gap-6">
+        <div className="flex-1 max-w-full xl:max-w-[854px]">
+          {/* Video player skeleton */}
+          <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" />
+
+          {/* Video title skeleton */}
+          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" />
+
+          {/* Metadata and actions skeleton */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" />
+            <div className="flex space-x-2">
+              <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+              <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+              <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+            </div>
+          </div>
+
+          {/* Description skeleton */}
+          <div className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full" />
+              <div className="flex-1">
+                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
+                <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2" />
+              </div>
+              <div className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" />
+            </div>
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded" />
+              <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4" />
+            </div>
+          </div>
+
+          {/* Comments skeleton */}
+          <div className="space-y-4">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex space-x-3">
+                <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+                <div className="flex-1">
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sidebar skeleton */}
+        <div className="xl:w-[402px] xl:flex-shrink-0">
+          <div className="space-y-2">
+            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" />
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex gap-2 p-1">
+                <div className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
+                <div className="flex-1 min-w-0">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+));
+
+LoadingSkeleton.displayName = 'LoadingSkeleton';
 
 const WatchPage: React.FC = () => {
   const {
@@ -97,7 +171,7 @@ const WatchPage: React.FC = () => {
   const [metadataExpanded, setMetadataExpanded] = React.useState(false);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = async (_videoId: string, playlistId: string) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: string, playlistId: string) => {
     // Call the original handler
     await handleSaveToPlaylist(playlistId);
 
@@ -105,7 +179,7 @@ const WatchPage: React.FC = () => {
     if (playlistId === 'playlist-1' && video) {
       addToWatchLater(video);
     }
-  };
+  }, [addToWatchLater, handleSaveToPlaylist, video]);
 
   // Add to watch history when video loads
   React.useEffect(() => {
@@ -122,78 +196,7 @@ const WatchPage: React.FC = () => {
 
   // Loading skeleton
   if (loading) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
-        <div className="max-w-[1280px] mx-auto px-4 py-4">
-          <div className="flex flex-col xl:flex-row gap-6">
-            <div className="flex-1 max-w-full xl:max-w-[854px]">
-              {/* Video player skeleton */}
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse mb-4" />
-
-              {/* Video title skeleton */}
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-3" />
-
-              {/* Metadata and actions skeleton */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-48" />
-                <div className="flex space-x-2">
-                  <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-                  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-                  <div className="h-9 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-                </div>
-              </div>
-
-              {/* Description skeleton */}
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-xl p-4 mb-4 animate-pulse">
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full" />
-                  <div className="flex-1">
-                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
-                    <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2" />
-                  </div>
-                  <div className="h-9 w-24 bg-gray-300 dark:bg-gray-600 rounded-full" />
-                </div>
-                <div className="space-y-2">
-                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded" />
-                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4" />
-                </div>
-              </div>
-
-              {/* Comments skeleton */}
-              <div className="space-y-4">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="flex space-x-3">
-                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-                    <div className="flex-1">
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2 w-1/4" />
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-1" />
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Sidebar skeleton */}
-            <div className="xl:w-[402px] xl:flex-shrink-0">
-              <div className="space-y-2">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" />
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex gap-2 p-1">
-                    <div className="w-[168px] h-[94px] bg-gray-200 dark:bg-gray-700 rounded-md animate-pulse" />
-                    <div className="flex-1 min-w-0">
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2" />
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4 mb-1" />
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <LoadingSkeleton />;
   }
 
   // Video not found
