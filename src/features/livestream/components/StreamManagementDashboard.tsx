@@ -33,7 +33,7 @@ interface StreamAction {
   id: string;
   type: 'start' | 'stop' | 'edit' | 'delete' | 'duplicate' | 'analytics' | 'share';
   label: string;
-  icon: React.ComponentType<{ className?: string | undefined }>;
+  icon: React.ComponentType<any>;
   color: string;
   disabled?: boolean;
 }
@@ -46,7 +46,6 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   const [selectedStreams, setSelectedStreams] = useState<string[]>([]);
   const [filter, setFilter] = useState<'all' | 'live' | 'scheduled' | 'ended'>('all');
   const [sortBy, setSortBy] = useState<'date' | 'viewers' | 'duration' | 'revenue'>('date');
-  const [editingStream, setEditingStream] = useState<LiveStream | null>(null);
 
   useEffect(() => {
     const fetchStreams = async () => {
@@ -322,7 +321,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           // Refresh streams
           break;
         case 'edit':
-          setEditingStream(stream);
+          // Edit functionality would open a modal
+          console.log('Edit stream:', stream.id);
           break;
         case 'duplicate':
           const duplicatedStream = await liveStreamService.streams.createStream({

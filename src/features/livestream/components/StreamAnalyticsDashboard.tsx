@@ -8,7 +8,7 @@ import {
   CurrencyDollarIcon,
   ClockIcon,
   SignalIcon,
-  ArrowTrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
 } from '@heroicons/react/24/outline';
 
 import type { LiveStreamStats } from '../../../types/livestream';

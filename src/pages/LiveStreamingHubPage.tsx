@@ -21,8 +21,8 @@ interface QuickAction {
 
 const LiveStreamingHubPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isLive, setIsLive] = useState(false);
-  const [viewerCount, setViewerCount] = useState(1247);
+  const [isLive] = useState(false);
+  const [viewerCount] = useState(1247);
 
   const quickActions: QuickAction[] = [
     {
@@ -119,15 +119,16 @@ const LiveStreamingHubPage: React.FC = () => {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {quickActions.map((action, index) => (
-            <UnifiedCard key={index} className="cursor-pointer hover:shadow-lg transition-shadow" onClick={action.action} hover={true}>
-              <div className="p-6">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                    {action.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
-                      {action.title}
+            <div key={index} onClick={action.action} className="cursor-pointer">
+              <UnifiedCard className="hover:shadow-lg transition-shadow" hover={true}>
+                <div className="p-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                      {action.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                        {action.title}
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {action.description}
@@ -136,6 +137,7 @@ const LiveStreamingHubPage: React.FC = () => {
                 </div>
               </div>
             </UnifiedCard>
+            </div>
           ))}
         </div>
 
@@ -247,7 +249,7 @@ const LiveStreamingHubPage: React.FC = () => {
 
           {/* Live Viewer Tab */}
           <TabsContent value="viewer">
-            <LiveStreamViewer />
+            <LiveStreamViewer streamId="demo-stream-1" />
           </TabsContent>
 
           {/* Settings Tab */}
