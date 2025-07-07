@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
+
 import {
   Cog6ToothIcon,
   VideoCameraIcon,
@@ -185,15 +187,21 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
       const newSettings = { ...prev };
       const keys = path.split('.');
       let current: any = newSettings;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         const key = keys[i];
-        if (key && !current[key]) current[key] = {};
-        if (key) current = current[key];
+        if (key && !current[key]) {
+current[key] = {};
+}
+        if (key) {
+current = current[key];
+}
       }
-      
+
       const finalKey = keys[keys.length - 1];
-      if (finalKey) current[finalKey] = value;
+      if (finalKey) {
+current[finalKey] = value;
+}
       return newSettings;
     });
   };
@@ -207,10 +215,10 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
   const handlePlatformToggle = (platformId: string) => {
     const currentPlatforms = settings.settings?.platforms || [];
     const platformExists = currentPlatforms.find(p => p.name === platformId);
-    
+
     if (platformExists) {
-      const updatedPlatforms = currentPlatforms.map(p => 
-        p.name === platformId ? { ...p, enabled: !p.enabled } : p
+      const updatedPlatforms = currentPlatforms.map(p =>
+        p.name === platformId ? { ...p, enabled: !p.enabled } : p,
       );
       updateSettings('settings.platforms', updatedPlatforms);
     } else {
@@ -384,7 +392,7 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
 
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Recording & Archive</h3>
-        
+
         <label className="flex items-center space-x-3">
           <input
             type="checkbox"
@@ -404,7 +412,7 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
     <div className="space-y-6">
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Chat Features</h3>
-        
+
         <label className="flex items-center space-x-3">
           <input
             type="checkbox"
@@ -462,7 +470,7 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
 
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Interactive Features</h3>
-        
+
         <label className="flex items-center space-x-3">
           <input
             type="checkbox"
@@ -546,7 +554,7 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
                     </p>
                   </div>
                 </div>
-                
+
                 <label className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -559,7 +567,7 @@ const StreamSettings: React.FC<StreamSettingsProps> = ({
                   </span>
                 </label>
               </div>
-              
+
               {platform.requiresAuth && isPlatformEnabled(platform.id) && (
                 <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800">
                   <p className="text-sm text-yellow-800 dark:text-yellow-200">

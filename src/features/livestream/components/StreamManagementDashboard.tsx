@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   PlayIcon,
@@ -229,7 +230,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
             },
           },
         ];
-        
+
         setStreams(mockStreams);
       } catch (error) {
         console.error('Failed to fetch streams:', error);
@@ -397,7 +398,9 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   };
 
   const filteredStreams = streams.filter(stream => {
-    if (filter === 'all') return true;
+    if (filter === 'all') {
+return true;
+}
     return stream.status === filter;
   });
 
@@ -419,15 +422,21 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   });
 
   const formatNumber = (num: number) => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) {
+return `${(num / 1000000).toFixed(1)}M`;
+}
+    if (num >= 1000) {
+return `${(num / 1000).toFixed(1)}K`;
+}
     return num.toString();
   };
 
   const formatDuration = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    if (hours > 0) return `${hours}h ${minutes}m`;
+    if (hours > 0) {
+return `${hours}h ${minutes}m`;
+}
     return `${minutes}m`;
   };
 
@@ -435,10 +444,10 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     return (
       <div className={`p-6 ${className}`}>
         <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+          <div className="h-8 bg-gray-200 rounded w-1/3" />
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-20 bg-gray-200 rounded"></div>
+              <div key={i} className="h-20 bg-gray-200 rounded" />
             ))}
           </div>
         </div>
@@ -471,7 +480,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
             <option value="scheduled">Scheduled</option>
             <option value="ended">Ended</option>
           </select>
-          
+
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
@@ -545,24 +554,24 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
                     <span className="ml-1 capitalize">{stream.status}</span>
                   </div>
                 </div>
-                
+
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
                   {stream.description}
                 </p>
-                
+
                 <div className="flex items-center space-x-6 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">
                     <EyeIcon className="h-4 w-4" />
                     <span>{formatNumber(stream.stats.peakViewers)} peak viewers</span>
                   </div>
-                  
+
                   {stream.stats.duration > 0 && (
                     <div className="flex items-center space-x-1">
                       <ClockIcon className="h-4 w-4" />
                       <span>{formatDuration(stream.stats.duration)}</span>
                     </div>
                   )}
-                  
+
                   {stream.monetization.totalRevenue > 0 && (
                     <div className="flex items-center space-x-1">
                       <span className="text-green-600 font-medium">
@@ -570,7 +579,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
                       </span>
                     </div>
                   )}
-                  
+
                   <div className="flex items-center space-x-1">
                     <CalendarIcon className="h-4 w-4" />
                     <span>
@@ -595,7 +604,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
                     <action.icon className="h-4 w-4" />
                   </button>
                 ))}
-                
+
                 {getStreamActions(stream).length > 3 && (
                   <div className="relative">
                     <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600">

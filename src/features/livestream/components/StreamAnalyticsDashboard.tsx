@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import type React from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   ChartBarIcon,
@@ -206,7 +207,7 @@ const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') =>
 
     setLoading(true);
     setError(null);
-    
+
     try {
       // Mock analytics data - in production, this would come from the API
       // await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API delay
@@ -229,7 +230,7 @@ const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') =>
     const interval = setInterval(() => {
       void fetchAnalytics();
     }, 30000);
-    
+
     return () => {
       clearInterval(interval);
     };
@@ -326,8 +327,8 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
         {moments.map((moment) => (
-          <div 
-            key={`moment-${moment.type}-${moment.timestamp}`} 
+          <div
+            key={`moment-${moment.type}-${moment.timestamp}`}
             className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
           >
             <div className="flex items-center space-x-3">
@@ -391,8 +392,8 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Devices</h4>
         <div className="grid grid-cols-2 gap-3">
           {demographics.devices.map((device) => (
-            <div 
-              key={`device-${device.type}`} 
+            <div
+              key={`device-${device.type}`}
               className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
             >
               <div className="text-lg font-bold text-gray-900 dark:text-white">
@@ -411,16 +412,16 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
 
 /**
  * StreamAnalyticsDashboard Component
- * 
+ *
  * A comprehensive analytics dashboard for live stream data visualization.
  * Features real-time statistics, historical data charts, audience demographics,
  * and top moments tracking.
- * 
+ *
  * @component
  * @example
  * ```tsx
- * <StreamAnalyticsDashboard 
- *   streamId="stream_123" 
+ * <StreamAnalyticsDashboard
+ *   streamId="stream_123"
  *   className="w-full"
  * />
  * ```
@@ -432,7 +433,7 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
 }) => {
   const [timeRange, setTimeRange] = useState<TimeRange>('live');
   const [selectedMetric, setSelectedMetric] = useState<MetricType>('viewers');
-  
+
   const { analytics, loading } = useStreamAnalytics(streamId, timeRange);
 
   const chartData = useMemo(() => {

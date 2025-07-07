@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs';
-import { UnifiedCard } from '../../components/ui/UnifiedComponents';
-import { Button } from '../../components/ui/Button';
-import { Badge } from '../../components/ui/Badge';
+import type React from 'react';
+import { useState } from 'react';
+
 import { Play, Settings, BarChart3, Eye, Users, Calendar, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { Badge } from '../../components/ui/Badge';
+import { Button } from '../../components/ui/Button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs';
+import { UnifiedCard } from '../../components/ui/UnifiedComponents';
+
+
 // Import live streaming components
+import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer';
 import StreamAnalyticsDashboard from '../features/livestream/components/StreamAnalyticsDashboard';
 import StreamManagementDashboard from '../features/livestream/components/StreamManagementDashboard';
-import LiveStreamViewer from '../features/livestream/components/LiveStreamViewer';
 
 interface QuickAction {
   title: string;
@@ -30,26 +34,26 @@ const LiveStreamingHubPage: React.FC = () => {
       description: 'Start streaming immediately',
       icon: <Play className="h-5 w-5" />,
       action: () => window.location.href = '/go-live',
-      variant: 'default'
+      variant: 'default',
     },
     {
       title: 'Schedule Stream',
       description: 'Plan your next live stream',
       icon: <Calendar className="h-5 w-5" />,
-      action: () => setActiveTab('management')
+      action: () => setActiveTab('management'),
     },
     {
       title: 'Stream Settings',
       description: 'Configure your streaming setup',
       icon: <Settings className="h-5 w-5" />,
-      action: () => setActiveTab('settings')
+      action: () => setActiveTab('settings'),
     },
     {
       title: 'View Analytics',
       description: 'Check your streaming performance',
       icon: <BarChart3 className="h-5 w-5" />,
-      action: () => setActiveTab('analytics')
-    }
+      action: () => setActiveTab('analytics'),
+    },
   ];
 
   const liveStreams = [
@@ -59,15 +63,15 @@ const LiveStreamingHubPage: React.FC = () => {
       thumbnail: '/api/placeholder/320/180',
       viewers: 1247,
       duration: '2:34:15',
-      status: 'live' as const
+      status: 'live' as const,
     },
     {
-      id: '2', 
+      id: '2',
       title: 'Q&A Session with Viewers',
       thumbnail: '/api/placeholder/320/180',
       viewers: 892,
       duration: '1:15:30',
-      status: 'live' as const
+      status: 'live' as const,
     },
     {
       id: '3',
@@ -75,8 +79,8 @@ const LiveStreamingHubPage: React.FC = () => {
       thumbnail: '/api/placeholder/320/180',
       viewers: 2156,
       duration: '3:45:22',
-      status: 'live' as const
-    }
+      status: 'live' as const,
+    },
   ];
 
   return (
@@ -202,8 +206,8 @@ const LiveStreamingHubPage: React.FC = () => {
                   {liveStreams.map((stream) => (
                     <div key={stream.id} className="relative group cursor-pointer">
                       <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
-                        <img 
-                          src={stream.thumbnail} 
+                        <img
+                          src={stream.thumbnail}
                           alt={stream.title}
                           className="w-full h-full object-cover"
                         />

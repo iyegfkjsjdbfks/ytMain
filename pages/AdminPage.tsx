@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon } from '@heroicons/react/24/outline';
 
@@ -80,16 +81,16 @@ const AdminPage: React.FC = () => {
     try {
       const { googleSearchVideoStore } = await import('../services/googleSearchVideoStore');
       const googleVideos = googleSearchVideoStore.getAllVideos();
-      
+
       // Convert GoogleSearchResult[] to StoreVideo[]
       const videos: StoreVideo[] = googleVideos.map(video => ({
         id: video.id,
         title: video.title,
         channelName: video.channelName,
         videoUrl: video.videoUrl,
-        viewCount: video.viewCount || 0
+        viewCount: video.viewCount || 0,
       }));
-      
+
       setStoreVideos(videos);
     } catch (error) {
       console.error('Failed to load store videos:', error);

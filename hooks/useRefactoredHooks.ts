@@ -285,7 +285,7 @@ export function usePrevious<T>(value: T): T | undefined {
  */
 export function useUnifiedAppState() {
   const context = useUnifiedApp();
-  
+
   return {
     // Auth state
     user: context.state.user,

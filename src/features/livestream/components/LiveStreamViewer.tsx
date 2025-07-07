@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import type React from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 import {
   PlayIcon,
   PauseIcon,
@@ -21,6 +23,7 @@ import {
 
 import { useLiveStream } from '../../../hooks/useLiveStream';
 import { liveStreamService } from '../../../services/livestreamAPI';
+
 import AdvancedLiveChat from './AdvancedLiveChat';
 import LivePolls from './LivePolls';
 import LiveQA from './LiveQA';
@@ -65,9 +68,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   const [showPolls, setShowPolls] = useState(false);
   const [showQA, setShowQA] = useState(false);
   const [showSuperChat, setShowSuperChat] = useState(false);
-  
+
   const { stream, isLoading: streamLoading, setStream } = useLiveStream();
-  
+
   // Fetch stream data when component mounts
   useEffect(() => {
     const fetchStream = async () => {
@@ -78,12 +81,12 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
         console.error('Failed to fetch stream:', error);
       }
     };
-    
+
     if (streamId) {
       fetchStream();
     }
   }, [streamId, setStream]);
-  
+
   const [viewerStats, setViewerStats] = useState<ViewerStats>({
     currentViewers: 1247,
     totalViews: 15432,
@@ -107,7 +110,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     const handleTimeUpdate = () => {
       // Video time update
@@ -140,7 +145,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   const togglePlayPause = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     if (isPlaying) {
       video.pause();
@@ -152,7 +159,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   const toggleMute = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.muted = !isMuted;
     setIsMuted(!isMuted);
@@ -160,7 +169,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   const handleVolumeChange = (newVolume: number) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     video.volume = newVolume;
     setVolume(newVolume);
@@ -169,7 +180,9 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   const toggleFullscreen = () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+return;
+}
 
     if (!isFullscreen) {
       if (video.requestFullscreen) {
@@ -225,8 +238,12 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
 
   const formatViewerCount = (count: number) => {
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    if (count >= 1000000) {
+return `${(count / 1000000).toFixed(1)}M`;
+}
+    if (count >= 1000) {
+return `${(count / 1000).toFixed(1)}K`;
+}
     return count.toString();
   };
 
@@ -234,7 +251,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
     return (
       <div className={`bg-black aspect-video rounded-lg flex items-center justify-center ${className}`}>
         <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4" />
           <p>Loading stream...</p>
         </div>
       </div>
@@ -270,7 +287,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
           {/* Live Badge */}
           <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
-            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
             <span>LIVE</span>
           </div>
 
