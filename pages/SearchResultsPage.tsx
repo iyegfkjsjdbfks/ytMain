@@ -1,6 +1,5 @@
 
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams, useNavigate } from 'react-router-dom';
@@ -13,7 +12,6 @@ import { performanceMonitor } from '../utils/performance';
 
 import type { Video } from '../types';
 
-
 // Types for better performance
 interface SearchState {
   videos: Video[];
@@ -23,9 +21,8 @@ interface SearchState {
   youtubeLoading: boolean;
 }
 
-
 // Memoized empty state component
-const EmptySearchState = React.memo(() => (
+const EmptySearchState = memo(() => (
   <div className="text-center py-12">
     <div className="text-neutral-500 dark:text-neutral-400">
       <MagnifyingGlassIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
@@ -34,6 +31,8 @@ const EmptySearchState = React.memo(() => (
     </div>
   </div>
 ));
+
+EmptySearchState.displayName = 'EmptySearchState';
 
 // Main component
 const SearchResultsPage: React.FC = () => {

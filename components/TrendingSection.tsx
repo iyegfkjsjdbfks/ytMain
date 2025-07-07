@@ -1,9 +1,9 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback, useMemo } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import { getVideos } from '../services/realVideoService';
-
+import { withPerformanceOptimization } from '../utils/performanceOptimizations';
 
 import FireIcon from './icons/FireIcon';
 import VideoCard from './VideoCard';
@@ -14,20 +14,55 @@ interface TrendingSectionProps {
   maxVideos?: number;
 }
 
+// Memoized VideoCard for better performance
+const MemoizedVideoCard = memo(VideoCard);
+
 const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }) => {
   const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchTrendingVideos = useCallback(async () => {
+    try {
+      setLoading(true);
+      const allVideos = await getVideos();
+      // Sort by views (convert string to number for sorting)
+      const sortedByViews = allVideos
+        .filter(video => !video.isShort) // Exclude shorts from trending
+        .sort((a, b) => {
+          const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
+          const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
+          return viewsB - viewsA;
+        })
+        .slice(0, maxVideos);
+
+      setTrendingVideos(sortedByViews);
+    } catch (err) {
+      setError('Failed to load trending videos');
+      console.error('Error fetching trending videos:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [maxVideos]);
+
   useEffect(() => {
-    const fetchTrendingVideos = async () => {
-      try {
-        setLoading(true);
-        const allVideos = await getVideos();
-        // Sort by views (convert string to number for sorting)
-        const sortedByViews = allVideos
-          .filter(video => !video.isShort) // Exclude shorts from trending
-          .sort((a, b) => {
+    fetchTrendingVideos();
+  }, [fetchTrendingVideos]);
+
+  // Memoized video grid to prevent unnecessary re-renders
+  const videoGrid = useMemo(() => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {trendingVideos.map((video) => (
+        <MemoizedVideoCard
+          key={video.id}
+          video={video}
+          size="medium"
+          showChannel={true}
+          showDescription={false}
+        />
+      ))}
+    </div>
+  ), [trendingVideos]);
             const viewsA = parseFloat(a.views.replace(/[^0-9.]/g, ''));
             const viewsB = parseFloat(b.views.replace(/[^0-9.]/g, ''));
             return viewsB - viewsA;

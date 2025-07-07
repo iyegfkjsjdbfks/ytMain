@@ -179,6 +179,14 @@ const WatchPage: React.FC = () => {
     if (playlistId === 'playlist-1' && video) {
       addToWatchLater(video);
     }
+  }, [handleSaveToPlaylist, video, addToWatchLater]);
+    // Call the original handler
+    await handleSaveToPlaylist(playlistId);
+
+    // If saving to Watch Later playlist, also add to the Watch Later context
+    if (playlistId === 'playlist-1' && video) {
+      addToWatchLater(video);
+    }
   }, [addToWatchLater, handleSaveToPlaylist, video]);
 
   // Add to watch history when video loads

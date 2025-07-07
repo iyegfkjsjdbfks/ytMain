@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import type React from 'react';
 
 import CategoryChips from '../components/CategoryChips';
@@ -7,6 +7,9 @@ import { useTrendingSearch } from '../hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
 
 import type { Video } from '../types';
+
+// Memoized video card to prevent unnecessary re-renders
+const MemoizedVideoCard = memo(HoverAutoplayVideoCard);
 
 const HomePage: React.FC = () => {
   const { data: videos, loading, error } = useTrendingSearch();
@@ -88,7 +91,7 @@ const HomePage: React.FC = () => {
           /* Video Grid with Enhanced Hover Effects - YouTube style */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-6 gap-y-8">
             {filteredVideos.map((video: Video) => (
-<HoverAutoplayVideoCard
+              <MemoizedVideoCard
                 key={video.id}
                 video={video}
                 className=""
