@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   ChartBarIcon,
@@ -74,7 +73,7 @@ const getHealthColor = (health: StreamHealth): string => {
     fair: 'text-yellow-600',
     poor: 'text-red-600',
   };
-  return healthColors[health] ?? 'text-gray-600';
+  return healthColors[health] || 'text-gray-600';
 };
 
 const getMetricValue = (point: HistoricalDataPoint, metric: MetricType): number => {
@@ -204,13 +203,13 @@ interface TopMomentsProps {
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
   const getIcon = (type: string): React.ReactNode => {
     switch (type) {
-      case 'peak_viewers': 
+      case 'peak_viewers':
         return <EyeIcon className="h-5 w-5 text-blue-500" />;
-      case 'super_chat': 
+      case 'super_chat':
         return <CurrencyDollarIcon className="h-5 w-5 text-yellow-500" />;
-      case 'viral_moment': 
+      case 'viral_moment':
         return <TrendingUpIcon className="h-5 w-5 text-green-500" />;
-      default: 
+      default:
         return <ChartBarIcon className="h-5 w-5 text-gray-500" />;
     }
   };
@@ -292,29 +291,33 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
   const [timeRange, setTimeRange] = useState<TimeRange>('live');
   const [selectedMetric, setSelectedMetric] = useState<MetricType>('viewers');
 
-  const fetchAnalytics = useCallback(async () => {
+  const fetchAnalytics = useCallback(() => {
     if (!streamId) {
-      return;
+      return Promise.resolve();
     }
 
     setLoading(true);
-    try {
-      // Mock analytics data - in production, this would come from the API
-      const mockAnalytics = generateMockAnalytics();
-      setAnalytics(mockAnalytics);
-    } catch (error) {
-      console.error('Failed to fetch analytics:', error);
-    } finally {
-      setLoading(false);
-    }
+    return new Promise<void>((resolve) => {
+      try {
+        // Mock analytics data - in production, this would come from the API
+        const mockAnalytics = generateMockAnalytics();
+        setAnalytics(mockAnalytics);
+        resolve();
+      } catch (error) {
+        console.error('Failed to fetch analytics:', error);
+        resolve();
+      } finally {
+        setLoading(false);
+      }
+    });
   }, [streamId]);
 
   useEffect(() => {
-    void fetchAnalytics();
+    fetchAnalytics().catch(console.error);
 
     // Update analytics every 30 seconds for live streams
     const interval = setInterval(() => {
-      void fetchAnalytics();
+      fetchAnalytics().catch(console.error);
     }, 30000);
     return () => {
       clearInterval(interval);
@@ -333,10 +336,10 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
       const value = getMetricValue(point, selectedMetric);
       const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
 
-      return { 
-        index, 
-        height, 
-        value, 
+      return {
+        index,
+        height,
+        value,
         time: point.time,
         id: `chart-${selectedMetric}-${index}`,
       };
