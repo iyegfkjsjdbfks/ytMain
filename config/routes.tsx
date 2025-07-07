@@ -29,6 +29,7 @@ const PlaylistDetailPage = lazy(() => import('../pages/PlaylistDetailPage'));
 const LibraryPage = lazy(() => import('../pages/LibraryPage'));
 const YourDataPage = lazy(() => import('../pages/YourDataPage'));
 const GoLivePage = lazy(() => import('../pages/GoLivePage'));
+const LiveStreamingHubPage = lazy(() => import('../src/pages/LiveStreamingHubPage'));
 const AIContentSparkPage = lazy(() => import('../pages/AIContentSparkPage'));
 const VideoUploadPage = lazy(() => import('../pages/VideoUploadPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
@@ -130,6 +131,14 @@ export const mainRoutes: RouteObject[] = [
       {
         path: 'go-live',
         element: <GoLivePage />,
+      },
+      {
+        path: 'live-hub',
+        element: <LiveStreamingHubPage />,
+      },
+      {
+        path: 'live',
+        element: <LiveStreamingHubPage />,
       },
       {
         path: 'ai-content-spark',
