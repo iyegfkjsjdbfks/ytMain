@@ -1,13 +1,8 @@
-import { useState, useEffect, memo, useCallback, useMemo } from 'react';
-
+import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-
 import { getVideos } from '../services/realVideoService';
-import { withPerformanceOptimization } from '../utils/performanceOptimizations';
-
 import FireIcon from './icons/FireIcon';
 import VideoCard from './VideoCard';
-
 import type { Video } from '../types';
 
 interface TrendingSectionProps {
@@ -37,6 +32,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
         .slice(0, maxVideos);
 
       setTrendingVideos(sortedByViews);
+      setError(null);
     } catch (err) {
       setError('Failed to load trending videos');
       console.error('Error fetching trending videos:', err);
@@ -56,31 +52,12 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
         <MemoizedVideoCard
           key={video.id}
           video={video}
-          size="medium"
           showChannel={true}
           showDescription={false}
         />
       ))}
     </div>
   ), [trendingVideos]);
-            const viewsA = parseFloat(a.views.replace(/[^0-9.]/g, ''));
-            const viewsB = parseFloat(b.views.replace(/[^0-9.]/g, ''));
-            return viewsB - viewsA;
-          })
-          .slice(0, maxVideos);
-
-        setTrendingVideos(sortedByViews);
-        setError(null);
-      } catch (err) {
-        console.error('Failed to fetch trending videos:', err);
-        setError('Could not load trending videos at this time.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTrendingVideos();
-  }, [maxVideos]);
 
   if (loading) {
     return (

@@ -25,10 +25,10 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     if (!isVisible) return;
 
     const interval = setInterval(() => {
-      const allMetrics = performanceMonitor.getAllMetrics();
+      const allMetrics = performanceMonitor.getMetrics();
       const formattedMetrics: PerformanceMetric[] = Object.entries(allMetrics).map(([name, value]) => ({
         name,
-        value,
+        value: typeof value === 'number' ? value : 0,
         timestamp: Date.now(),
         type: name.includes('render') ? 'render' : 
               name.includes('api') ? 'api' :
@@ -149,8 +149,8 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
           </button>
           <button
             onClick={() => {
-              const report = performanceMonitor.generateReport();
-              console.table(report);
+              const metrics = performanceMonitor.getMetrics();
+              console.table(metrics);
             }}
             className="text-xs text-blue-400 hover:text-blue-300"
           >
