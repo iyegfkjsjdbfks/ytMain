@@ -336,7 +336,7 @@ export function useOptimizedForm<T extends Record<string, any>>(
 ) {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
+  const [touched, setTouchedState] = useState<Partial<Record<keyof T, boolean>>>({});
 
   const setValue = useCallback((name: keyof T, value: any) => {
     setValues(prev => ({ ...prev, [name]: value }));
@@ -349,13 +349,13 @@ export function useOptimizedForm<T extends Record<string, any>>(
   }, [validationRules]);
 
   const setTouched = useCallback((name: keyof T, isTouched: boolean = true) => {
-    setTouched(prev => ({ ...prev, [name]: isTouched }));
+    setTouchedState(prev => ({ ...prev, [name]: isTouched }));
   }, []);
 
   const reset = useCallback(() => {
     setValues(initialValues);
     setErrors({});
-    setTouched({});
+    setTouchedState({});
   }, [initialValues]);
 
   const validate = useCallback(() => {
