@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type React from 'react';
 
 import {
   EyeIcon,

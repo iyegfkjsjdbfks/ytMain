@@ -7,7 +7,7 @@
  */
 
 // @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import type {
   LiveStream,
   ChatMessage,
@@ -214,7 +214,7 @@ export const chatAPI = {
   /**
    * Send a chat message
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   async sendMessage(streamId: string, message: string, userId: string, username: string): Promise<ChatMessage> {
     const chatMessage: ChatMessage = {
       id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
