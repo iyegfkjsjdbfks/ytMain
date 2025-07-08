@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import type React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
