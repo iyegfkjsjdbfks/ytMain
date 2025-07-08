@@ -56,7 +56,6 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
         <MemoizedVideoCard
           key={video.id}
           video={video}
-          showChannel={true}
         />
       ))}
     </div>

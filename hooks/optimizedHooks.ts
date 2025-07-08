@@ -187,8 +187,10 @@ export function useOptimizedIntersectionObserver(
       if (node) {
         observer.current = new IntersectionObserver(
           ([entry]) => {
-            setIsIntersecting(entry.isIntersecting);
-            setEntry(entry);
+            if (entry) {
+              setIsIntersecting(entry.isIntersecting);
+              setEntry(entry);
+            }
           },
           {
             threshold: 0.1,
