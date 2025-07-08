@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useMemo } from 'react';
+
 import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 import { parseRelativeDate } from '../utils/dateUtils';
-import type { Channel, Video, PlaylistSummary, CommunityPost } from '../types';
+
 import VideoCard from './VideoCard';
+
+import type { Channel, Video, PlaylistSummary, CommunityPost } from '../types';
 
 
 interface ChannelTabContentProps {
