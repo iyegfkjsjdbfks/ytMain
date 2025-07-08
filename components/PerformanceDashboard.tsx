@@ -37,7 +37,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
               name.includes('api') ? 'api' :
               name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation',
       }));
-      
+
       setMetrics(formattedMetrics.slice(-20)); // Keep last 20 metrics
     }, 1000);
 

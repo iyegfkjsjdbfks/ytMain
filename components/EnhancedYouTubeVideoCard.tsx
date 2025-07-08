@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import type React from 'react';
+import { memo } from 'react';
 
 import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';

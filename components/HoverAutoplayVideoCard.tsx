@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
