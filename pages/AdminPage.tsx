@@ -1,4 +1,4 @@
-import type React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon } from '@heroicons/react/24/outline';
 
