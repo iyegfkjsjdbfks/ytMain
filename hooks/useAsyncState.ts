@@ -6,9 +6,9 @@ interface AsyncState<T> {
   error: string | null;
 }
 
-interface UseAsyncStateOptions {
+interface UseAsyncStateOptions<T> {
   initialLoading?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: T) => void;
   onError?: (error: string) => void;
 }
 
@@ -19,7 +19,7 @@ interface UseAsyncStateOptions {
 export const useAsyncState = <T>(
   asyncFunction: () => Promise<T>,
   dependencies: any[] = [],
-  options: UseAsyncStateOptions = {},
+  options: UseAsyncStateOptions<T> = {},
 ) => {
   const { initialLoading = true, onSuccess, onError } = options;
 
