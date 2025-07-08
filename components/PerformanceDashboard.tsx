@@ -1,4 +1,4 @@
-import type React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import { performanceMonitor } from '../utils/performance';
 
