@@ -1,13 +1,8 @@
-import type React from 'react';
-import { useState, useEffect, memo, useCallback, useMemo } from 'react';
-
+import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-
 import { getVideos } from '../services/realVideoService';
-
 import FireIcon from './icons/FireIcon';
 import VideoCard from './VideoCard';
-
 import type { Video } from '../types';
 
 interface TrendingSectionProps {
@@ -51,7 +46,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
   }, [fetchTrendingVideos]);
 
   // Memoized video grid to prevent unnecessary re-renders
-  const videoGrid = useMemo(() =>
+  const videoGrid = useMemo(() => 
     trendingVideos.map((video) => (
       <MemoizedVideoCard
         key={video.id}

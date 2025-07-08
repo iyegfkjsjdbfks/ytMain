@@ -11,12 +11,11 @@ const YourDataPage: React.FC = () => {
   const [likedVideosCount, setLikedVideosCount] = useState(0);
   const [searchHistoryCount, setSearchHistoryCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  // Stable initial state to prevent unnecessary re-renders
-  const [dataVisibility, setDataVisibility] = useState(() => ({
+  const [dataVisibility, setDataVisibility] = useState({
     watchHistory: true,
     searchHistory: true,
     likedVideos: true,
-  }));
+  });
 
   useEffect(() => {
     const fetchDataCounts = async () => {

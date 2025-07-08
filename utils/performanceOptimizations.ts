@@ -84,7 +84,7 @@ export const lazyWithFallback = {
    * Create a lazy component
    */
   create: <P extends object>(
-    importFunc: () => Promise<{ default: ComponentType<P> }>,
+    importFunc: () => Promise<{ default: ComponentType<P> }>
   ) => {
     return lazy(importFunc);
   },
@@ -111,7 +111,7 @@ export const hookOptimizations = {
    */
   useOptimizedCallback: <T extends (...args: any[]) => any>(
     callback: T,
-    deps: any[],
+    deps: any[]
   ): T => useCallback(callback, deps),
 
   /**
@@ -120,7 +120,7 @@ export const hookOptimizations = {
   useExpensiveComputation: <T>(
     computeFn: () => T,
     deps: any[],
-    shouldRecompute?: (newDeps: any[], oldDeps: any[]) => boolean,
+    shouldRecompute?: (newDeps: any[], oldDeps: any[]) => boolean
   ): T => {
     return useMemo(() => {
       if (shouldRecompute) {
@@ -140,15 +140,9 @@ export const listOptimizations = {
    * Generate stable keys for list items
    */
   generateStableKey: (item: any, index: number, prefix = 'item'): string => {
-    if (item.id) {
-return `${prefix}-${item.id}`;
-}
-    if (item.key) {
-return `${prefix}-${item.key}`;
-}
-    if (item.name) {
-return `${prefix}-${item.name}`;
-}
+    if (item.id) return `${prefix}-${item.id}`;
+    if (item.key) return `${prefix}-${item.key}`;
+    if (item.name) return `${prefix}-${item.name}`;
     return `${prefix}-${index}`;
   },
 
@@ -169,7 +163,7 @@ return `${prefix}-${item.name}`;
   getVisibleItems: <T>(
     items: T[],
     startIndex: number,
-    visibleCount: number,
+    visibleCount: number
   ): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
   },
@@ -196,7 +190,7 @@ export const imageOptimizations = {
    */
   createLazyImageObserver: (
     callback: (entry: IntersectionObserverEntry) => void,
-    options?: IntersectionObserverInit,
+    options?: IntersectionObserverInit
   ): IntersectionObserver => {
     return new IntersectionObserver((entries) => {
       entries.forEach(callback);
@@ -216,7 +210,7 @@ export const bundleOptimizations = {
    * Dynamic import with error handling
    */
   dynamicImport: async <T>(
-    importFunc: () => Promise<T>,
+    importFunc: () => Promise<T>
   ): Promise<T | null> => {
     try {
       return await importFunc();
@@ -231,7 +225,7 @@ export const bundleOptimizations = {
    */
   selectiveImport: <T, K extends keyof T>(
     module: T,
-    keys: K[],
+    keys: K[]
   ): Pick<T, K> => {
     const result = {} as Pick<T, K>;
     keys.forEach(key => {
@@ -250,7 +244,7 @@ export const eventOptimizations = {
    */
   throttle: <T extends (...args: any[]) => any>(
     func: T,
-    delay: number,
+    delay: number
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
     let lastExecTime = 0;
@@ -262,9 +256,7 @@ export const eventOptimizations = {
         func(...args);
         lastExecTime = currentTime;
       } else {
-        if (timeoutId) {
-clearTimeout(timeoutId);
-}
+        if (timeoutId) clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
           func(...args);
           lastExecTime = Date.now();
@@ -278,14 +270,12 @@ clearTimeout(timeoutId);
    */
   debounce: <T extends (...args: any[]) => any>(
     func: T,
-    delay: number,
+    delay: number
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
 
     return ((...args: any[]) => {
-      if (timeoutId) {
-clearTimeout(timeoutId);
-}
+      if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func(...args), delay);
     }) as T;
   },
@@ -297,7 +287,7 @@ clearTimeout(timeoutId);
     element: Element,
     event: string,
     handler: EventListener,
-    options?: AddEventListenerOptions,
+    options?: AddEventListenerOptions
   ): void => {
     element.addEventListener(event, handler, {
       passive: true,
@@ -320,7 +310,7 @@ export const memoryOptimizations = {
     delete: (key: K) => boolean;
   } => {
     const cache = new WeakMap<K, V>();
-
+    
     return {
       get: (key: K) => cache.get(key),
       set: (key: K, value: V) => cache.set(key, value),
@@ -334,7 +324,7 @@ export const memoryOptimizations = {
    */
   createLRUCache: <K, V>(maxSize: number) => {
     const cache = new Map<K, V>();
-
+    
     return {
       get: (key: K): V | undefined => {
         if (cache.has(key)) {
