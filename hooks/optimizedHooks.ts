@@ -35,7 +35,7 @@ export function useOptimizedDebounce<T>(value: T, delay: number): T {
 export function useOptimizedThrottle<T>(
   value: T,
   delay: number,
-  options: { leading?: boolean; trailing?: boolean } = {}
+  options: { leading?: boolean; trailing?: boolean } = {},
 ): T {
   const { leading = true, trailing = true } = options;
   const [throttledValue, setThrottledValue] = useState<T>(value);
@@ -74,7 +74,7 @@ export function useOptimizedThrottle<T>(
  */
 export function useOptimizedLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -96,7 +96,7 @@ export function useOptimizedLocalStorage<T>(
         console.error(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue]
+    [key, storedValue],
   );
 
   const removeValue = useCallback(() => {
@@ -127,7 +127,7 @@ export function useOptimizedAsync<T>(
     immediate?: boolean;
     onSuccess?: (data: T) => void;
     onError?: (error: Error) => void;
-  } = {}
+  } = {},
 ): AsyncState<T> & { execute: () => Promise<void>; reset: () => void } {
   const { immediate = true, onSuccess, onError } = options;
   const [state, setState] = useState<AsyncState<T>>({
@@ -168,7 +168,7 @@ export function useOptimizedAsync<T>(
  */
 export function useOptimizedIntersectionObserver(
   options: IntersectionObserverInit = {},
-  dependencies: any[] = []
+  dependencies: any[] = [],
 ): {
   ref: (node: Element | null) => void;
   isIntersecting: boolean;
@@ -196,13 +196,13 @@ export function useOptimizedIntersectionObserver(
             threshold: 0.1,
             rootMargin: '50px',
             ...options,
-          }
+          },
         );
 
         observer.current.observe(node);
       }
     },
-    [options, ...dependencies]
+    [options, ...dependencies],
   );
 
   useEffect(() => {
@@ -220,7 +220,7 @@ export function useOptimizedIntersectionObserver(
  * Enhanced toggle hook with multiple states
  */
 export function useOptimizedToggle(
-  initialValue: boolean = false
+  initialValue: boolean = false,
 ): [boolean, () => void, (value: boolean) => void, () => void, () => void] {
   const [value, setValue] = useState(initialValue);
 
@@ -285,15 +285,14 @@ export function useOptimizedArray<T>(initialArray: T[] = []) {
 export function useOptimizedMemo<T>(
   factory: () => T,
   deps: any[],
-  compare?: (a: any[], b: any[]) => boolean
+  compare?: (a: any[], b: any[]) => boolean,
 ): T {
   const memoizedValue = useMemo(factory, deps);
+  const lastDeps = useRef<any[]>(deps);
+  const lastValue = useRef<T>(memoizedValue);
 
   // If custom comparison is provided, use it
   if (compare) {
-    const lastDeps = useRef<any[]>(deps);
-    const lastValue = useRef<T>(memoizedValue);
-
     if (!compare(lastDeps.current, deps)) {
       lastValue.current = factory();
       lastDeps.current = deps;
@@ -310,7 +309,7 @@ export function useOptimizedMemo<T>(
  */
 export function useOptimizedCallback<T extends (...args: any[]) => any>(
   callback: T,
-  deps: any[]
+  deps: any[],
 ): T {
   const callbackRef = useRef<T>(callback);
   const depsRef = useRef<any[]>(deps);
@@ -332,7 +331,7 @@ export function useOptimizedCallback<T extends (...args: any[]) => any>(
  */
 export function useOptimizedForm<T extends Record<string, any>>(
   initialValues: T,
-  validationRules?: Partial<Record<keyof T, (value: any) => string | null>>
+  validationRules?: Partial<Record<keyof T, (value: any) => string | null>>,
 ) {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
@@ -340,10 +339,10 @@ export function useOptimizedForm<T extends Record<string, any>>(
 
   const setValue = useCallback((name: keyof T, value: any) => {
     setValues(prev => ({ ...prev, [name]: value }));
-    
+
     // Validate field if rules exist
     if (validationRules?.[name]) {
-      const error = validationRules[name]!(value);
+      const error = validationRules[name](value);
       setErrors(prev => ({ ...prev, [name]: error || undefined }));
     }
   }, [validationRules]);
@@ -359,7 +358,9 @@ export function useOptimizedForm<T extends Record<string, any>>(
   }, [initialValues]);
 
   const validate = useCallback(() => {
-    if (!validationRules) return true;
+    if (!validationRules) {
+return true;
+}
 
     const newErrors: Partial<Record<keyof T, string>> = {};
     let isValid = true;

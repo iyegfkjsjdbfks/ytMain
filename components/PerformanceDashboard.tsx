@@ -17,13 +17,15 @@ interface PerformanceDashboardProps {
 
 const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
   isVisible = false,
-  position = 'top-right'
+  position = 'top-right',
 }) => {
   const [metrics, setMetrics] = useState<PerformanceMetric[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible) {
+      return;
+    }
 
     const interval = setInterval(() => {
       const allMetrics = performanceMonitor.getMetrics();
@@ -31,9 +33,9 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
         name,
         value: typeof value === 'number' ? value : 0,
         timestamp: Date.now(),
-        type: name.includes('render') ? 'render' : 
+        type: name.includes('render') ? 'render' :
               name.includes('api') ? 'api' :
-              name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation'
+              name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation',
       }));
       
       setMetrics(formattedMetrics.slice(-20)); // Keep last 20 metrics
@@ -76,7 +78,9 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
 
   const apiCallsCount = metrics.filter(m => m.type === 'api').length;
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className={`fixed ${getPositionClasses()} z-50 font-mono text-xs`}>
