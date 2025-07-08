@@ -79,7 +79,7 @@
     "*.config.cjs",
     "*.config.ts",
     "vite.config.ts",
-    "vite.config.proxy.ts",
+    
     "vitest.config.ts",
     "vitest.workspace.ts",
     "postcss.config.js",
