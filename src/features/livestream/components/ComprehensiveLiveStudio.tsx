@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import type React from 'react';
 
 import {
   VideoCameraIcon,
@@ -352,10 +351,11 @@ return;
           <div className="border-t pt-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="stream-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Stream Title *
                 </label>
                 <input
+                  id="stream-title"
                   type="text"
                   value={streamSettings.title}
                   onChange={(e) => setStreamSettings(prev => ({ ...prev, title: e.target.value }))}
@@ -365,10 +365,11 @@ return;
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="stream-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Category
                 </label>
                 <select
+                  id="stream-category"
                   value={streamSettings.category}
                   onChange={(e) => setStreamSettings(prev => ({ ...prev, category: e.target.value }))}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -384,10 +385,11 @@ return;
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="stream-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Visibility
                 </label>
                 <select
+                  id="stream-visibility"
                   value={streamSettings.visibility}
                   onChange={(e) => setStreamSettings(prev => ({ ...prev, visibility: e.target.value as any }))}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -400,10 +402,11 @@ return;
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="stream-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Description
               </label>
               <textarea
+                id="stream-description"
                 value={streamSettings.description}
                 onChange={(e) => setStreamSettings(prev => ({ ...prev, description: e.target.value }))}
                 placeholder="Describe your stream..."

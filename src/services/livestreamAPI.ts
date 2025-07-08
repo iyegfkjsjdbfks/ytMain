@@ -6,6 +6,7 @@
  * Note: Some strict TypeScript checks are bypassed for mock implementation simplicity
  */
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
 import type {

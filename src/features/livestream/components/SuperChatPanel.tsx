@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import type React from 'react';
 
 import {
   CurrencyDollarIcon,
@@ -137,7 +136,7 @@ return;
         <div className="mb-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border">
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="superchat-amount-input" className="block text-sm font-medium text-gray-700 mb-2">
                 Amount
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -157,9 +156,10 @@ return;
               </div>
               <div className="mt-2">
                 <input
+                  id="superchat-amount-input"
                   type="number"
                   value={newSuperChat.amount}
-                  onChange={(e) => setNewSuperChat(prev => ({ ...prev, amount: parseInt(e.target.value) || 1 }))}
+                  onChange={(e) => setNewSuperChat(prev => ({ ...prev, amount: parseInt(e.target.value, 10) || 1 }))}
                   min="1"
                   max="500"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -169,10 +169,11 @@ return;
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="superchat-message" className="block text-sm font-medium text-gray-700 mb-1">
                 Message
               </label>
               <textarea
+                id="superchat-message"
                 value={newSuperChat.message}
                 onChange={(e) => setNewSuperChat(prev => ({ ...prev, message: e.target.value }))}
                 placeholder="Add a message to your Super Chat..."

@@ -1,10 +1,8 @@
-import React, { useMemo } from 'react';
-
-import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 
 import { parseRelativeDate } from '../utils/dateUtils';
-
 import VideoCard from './VideoCard';
 
 import type { Channel, Video, PlaylistSummary, CommunityPost } from '../types';
@@ -19,14 +17,14 @@ interface ChannelTabContentProps {
   onPlaylistTabSelect: () => void;
 }
 
-const ChannelTabContent: React.FC<ChannelTabContentProps> = ({
+const ChannelTabContent = ({
   activeTab,
   channel,
   videos,
   playlists,
   communityPosts,
   onPlaylistTabSelect,
-}) => {
+}: ChannelTabContentProps) => {
 
   const popularVideos = useMemo(() => {
     return [...videos].sort((a, b) => parseInt(b.views.replace(/,/g, ''), 10) - parseInt(a.views.replace(/,/g, ''), 10)).slice(0, 5);

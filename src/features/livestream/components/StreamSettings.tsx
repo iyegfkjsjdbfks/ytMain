@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type React from 'react';
 
 import {
   Cog6ToothIcon,
@@ -240,10 +239,11 @@ current[finalKey] = value;
   const renderGeneralTab = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="stream-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Stream Title *
         </label>
         <input
+          id="stream-title"
           type="text"
           value={settings.title || ''}
           onChange={(e) => updateSettings('title', e.target.value)}
@@ -253,10 +253,11 @@ current[finalKey] = value;
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="stream-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Description
         </label>
         <textarea
+          id="stream-description"
           value={settings.description || ''}
           onChange={(e) => updateSettings('description', e.target.value)}
           rows={4}
@@ -267,10 +268,11 @@ current[finalKey] = value;
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="stream-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Category
           </label>
           <select
+            id="stream-category"
             value={settings.category || 'Gaming'}
             onChange={(e) => updateSettings('category', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -282,10 +284,11 @@ current[finalKey] = value;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="stream-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Visibility
           </label>
           <select
+            id="stream-visibility"
             value={settings.visibility || 'public'}
             onChange={(e) => updateSettings('visibility', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -298,10 +301,11 @@ current[finalKey] = value;
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="stream-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Tags (comma separated)
         </label>
         <input
+          id="stream-tags"
           type="text"
           value={settings.tags?.join(', ') || ''}
           onChange={(e) => updateSettings('tags', e.target.value.split(',').map(tag => tag.trim()).filter(Boolean))}
@@ -344,10 +348,11 @@ current[finalKey] = value;
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="resolution" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Resolution
           </label>
           <select
+            id="resolution"
             value={settings.settings?.quality || '1080p'}
             onChange={(e) => updateSettings('settings.quality', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -361,10 +366,11 @@ current[finalKey] = value;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="bitrate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Bitrate (kbps)
           </label>
           <input
+            id="bitrate"
             type="number"
             value={settings.settings?.bitrate || 4500}
             onChange={(e) => updateSettings('settings.bitrate', parseInt(e.target.value))}
@@ -375,10 +381,11 @@ current[finalKey] = value;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="frame-rate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Frame Rate (fps)
           </label>
           <select
+            id="frame-rate"
             value={settings.settings?.frameRate || 30}
             onChange={(e) => updateSettings('settings.frameRate', parseInt(e.target.value))}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -393,8 +400,9 @@ current[finalKey] = value;
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Recording & Archive</h3>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="enable-recording" className="flex items-center space-x-3">
           <input
+            id="enable-recording"
             type="checkbox"
             checked={settings.settings?.enableRecording || false}
             onChange={(e) => updateSettings('settings.enableRecording', e.target.checked)}
@@ -413,8 +421,9 @@ current[finalKey] = value;
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Chat Features</h3>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="enable-chat" className="flex items-center space-x-3">
           <input
+            id="enable-chat"
             type="checkbox"
             checked={settings.settings?.enableChat || false}
             onChange={(e) => updateSettings('settings.enableChat', e.target.checked)}
@@ -425,8 +434,9 @@ current[finalKey] = value;
           </span>
         </label>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="enable-super-chat" className="flex items-center space-x-3">
           <input
+            id="enable-super-chat"
             type="checkbox"
             checked={settings.settings?.enableSuperChat || false}
             onChange={(e) => updateSettings('settings.enableSuperChat', e.target.checked)}
@@ -437,8 +447,9 @@ current[finalKey] = value;
           </span>
         </label>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="subscribers-only" className="flex items-center space-x-3">
           <input
+            id="subscribers-only"
             type="checkbox"
             checked={settings.settings?.subscribersOnly || false}
             onChange={(e) => updateSettings('settings.subscribersOnly', e.target.checked)}
@@ -451,12 +462,13 @@ current[finalKey] = value;
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="slow-mode-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Slow Mode (seconds between messages)
         </label>
         <select
+          id="slow-mode-select"
           value={settings.settings?.slowMode || 0}
-          onChange={(e) => updateSettings('settings.slowMode', parseInt(e.target.value))}
+          onChange={(e) => updateSettings('settings.slowMode', parseInt(e.target.value, 10))}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value={0}>Off</option>
@@ -466,13 +478,13 @@ current[finalKey] = value;
           <option value={60}>1 minute</option>
           <option value={300}>5 minutes</option>
         </select>
-      </div>
 
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Interactive Features</h3>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="enable-polls" className="flex items-center space-x-3">
           <input
+            id="enable-polls"
             type="checkbox"
             checked={settings.settings?.enablePolls || false}
             onChange={(e) => updateSettings('settings.enablePolls', e.target.checked)}
@@ -483,8 +495,9 @@ current[finalKey] = value;
           </span>
         </label>
 
-        <label className="flex items-center space-x-3">
+        <label htmlFor="enable-qa" className="flex items-center space-x-3">
           <input
+            id="enable-qa"
             type="checkbox"
             checked={settings.settings?.enableQA || false}
             onChange={(e) => updateSettings('settings.enableQA', e.target.checked)}
@@ -504,8 +517,9 @@ current[finalKey] = value;
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Moderation Level</h3>
         <div className="space-y-3">
           {moderationLevels.map(level => (
-            <label key={level.value} className="flex items-start space-x-3">
+            <label htmlFor="moderation-level" key={level.value} className="flex items-start space-x-3">
               <input
+                id="moderation-level"
                 type="radio"
                 name="moderationLevel"
                 value={level.value}
@@ -555,8 +569,9 @@ current[finalKey] = value;
                   </div>
                 </div>
 
-                <label className="flex items-center space-x-2">
+                <label htmlFor={`platform-toggle-${platform.id}`} className="flex items-center space-x-2">
                   <input
+                    id={`platform-toggle-${platform.id}`}
                     type="checkbox"
                     checked={isPlatformEnabled(platform.id)}
                     onChange={() => handlePlatformToggle(platform.id)}

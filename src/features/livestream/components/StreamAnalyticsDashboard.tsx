@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import type React from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   ChartBarIcon,
@@ -224,11 +223,11 @@ const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') =>
   }, [streamId]);
 
   useEffect(() => {
-    void fetchAnalytics();
+    fetchAnalytics();
 
     // Update analytics every 30 seconds for live streams
     const interval = setInterval(() => {
-      void fetchAnalytics();
+      fetchAnalytics();
     }, 30000);
 
     return () => {

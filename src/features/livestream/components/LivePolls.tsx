@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, type FC } from 'react';
 
 import {
   PlusIcon,
@@ -34,7 +34,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
   });
 
   // Set active poll from the polls returned by the hook
-  React.useEffect(() => {
+  useEffect(() => {
     const active = polls.find(p => p.isActive);
     setActivePoll(active || null);
   }, [polls]);
@@ -133,10 +133,11 @@ return 0;
         <div className="mb-4 p-4 bg-gray-50 rounded-lg border">
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="poll-question" className="block text-sm font-medium text-gray-700 mb-1">
                 Question
               </label>
               <input
+                id="poll-question"
                 type="text"
                 value={newPoll.question}
                 onChange={(e) => setNewPoll(prev => ({ ...prev, question: e.target.value }))}
@@ -146,13 +147,14 @@ return 0;
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="poll-option-1" className="block text-sm font-medium text-gray-700 mb-2">
                 Options
               </label>
               <div className="space-y-2">
                 {newPoll.options.map((option, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <input
+                      id={`poll-option-${index + 1}`}
                       type="text"
                       value={option}
                       onChange={(e) => updateOption(index, e.target.value)}
@@ -181,13 +183,14 @@ return 0;
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="poll-duration" className="block text-sm font-medium text-gray-700 mb-1">
                 Duration (seconds)
               </label>
               <input
+                id="poll-duration"
                 type="number"
                 value={newPoll.duration}
-                onChange={(e) => setNewPoll(prev => ({ ...prev, duration: parseInt(e.target.value) || 60 }))}
+                onChange={(e) => setNewPoll(prev => ({ ...prev, duration: parseInt(e.target.value, 10) || 60 }))}
                 min="30"
                 max="600"
                 className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

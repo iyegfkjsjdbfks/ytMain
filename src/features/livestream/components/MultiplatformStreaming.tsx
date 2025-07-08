@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import type React from 'react';
 
 import {
   GlobeAltIcon,
@@ -273,8 +272,9 @@ return null;
                     <Cog6ToothIcon className="w-4 h-4" />
                   </button>
 
-                  <label className="relative inline-flex items-center cursor-pointer">
+                  <label htmlFor={`toggle-${platform.name}`} className="relative inline-flex items-center cursor-pointer">
                     <input
+                      id={`toggle-${platform.name}`}
                       type="checkbox"
                       checked={platform.enabled}
                       onChange={() => handleTogglePlatform(platform.name)}
@@ -310,10 +310,11 @@ return null;
                 <div className="mt-4 pt-4 border-t border-gray-200 space-y-3">
                   {config.requiresStreamKey && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor={`stream-key-${platform.name}`} className="block text-sm font-medium text-gray-700 mb-1">
                         Stream Key
                       </label>
                       <input
+                        id={`stream-key-${platform.name}`}
                         type="password"
                         value={platform.streamKey || ''}
                         onChange={(e) => handleUpdateStreamKey(platform.name, e.target.value)}
@@ -324,10 +325,11 @@ return null;
                   )}
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor={`quality-${platform.name}`} className="block text-sm font-medium text-gray-700 mb-1">
                       Quality
                     </label>
                     <select
+                      id={`quality-${platform.name}`}
                       value={platform.settings?.quality || '1080p'}
                       onChange={(e) => handleUpdatePlatformSettings(platform.name, { quality: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
@@ -339,13 +341,14 @@ return null;
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor={`bitrate-${platform.name}`} className="block text-sm font-medium text-gray-700 mb-1">
                       Bitrate (kbps)
                     </label>
                     <input
+                      id={`bitrate-${platform.name}`}
                       type="number"
                       value={platform.settings?.bitrate || 3000}
-                      onChange={(e) => handleUpdatePlatformSettings(platform.name, { bitrate: parseInt(e.target.value) })}
+                      onChange={(e) => handleUpdatePlatformSettings(platform.name, { bitrate: parseInt(e.target.value, 10) })}
                       min="1000"
                       max={config.maxBitrate}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
