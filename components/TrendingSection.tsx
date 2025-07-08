@@ -46,18 +46,14 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
   }, [fetchTrendingVideos]);
 
   // Memoized video grid to prevent unnecessary re-renders
-  const videoGrid = useMemo(() => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {trendingVideos.map((video) => (
-        <MemoizedVideoCard
-          key={video.id}
-          video={video}
-          showChannel={true}
-          showDescription={false}
-        />
-      ))}
-    </div>
-  ), [trendingVideos]);
+  const videoGrid = useMemo(() => 
+    trendingVideos.map((video) => (
+      <MemoizedVideoCard
+        key={video.id}
+        video={video}
+      />
+    ))
+  , [trendingVideos]);
 
   if (loading) {
     return (
@@ -118,9 +114,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {trendingVideos.map((video) => (
-          <VideoCard key={video.id} video={video} />
-        ))}
+        {videoGrid}
       </div>
     </div>
   );

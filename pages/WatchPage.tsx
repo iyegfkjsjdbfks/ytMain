@@ -1,5 +1,4 @@
-import React, { memo, useMemo, useCallback } from 'react';
-
+import React, { memo, useCallback } from 'react';
 import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescription, VideoActions, CommentsSection, RefactoredSaveToPlaylistModal, RecommendationEngine } from '../components';
 import VideoMetadata from '../components/VideoMetadata';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
@@ -98,7 +97,6 @@ const WatchPage: React.FC = () => {
     liked,
     disliked,
     isSubscribed,
-    // isInWatchLater, // unused
     isSavedToAnyList,
 
     // UI state
@@ -121,13 +119,6 @@ const WatchPage: React.FC = () => {
     summaryError,
     isSummarizing,
     canSummarize,
-
-    // Related videos
-    // displayedRelatedVideos,
-    // showAllRelated, // unused
-    // Refs
-    // saveButtonRef, // unused
-    // saveModalRef, // unused
 
     // Constants
     MAX_COMMENT_LENGTH,
@@ -180,14 +171,6 @@ const WatchPage: React.FC = () => {
       addToWatchLater(video);
     }
   }, [handleSaveToPlaylist, video, addToWatchLater]);
-    // Call the original handler
-    await handleSaveToPlaylist(playlistId);
-
-    // If saving to Watch Later playlist, also add to the Watch Later context
-    if (playlistId === 'playlist-1' && video) {
-      addToWatchLater(video);
-    }
-  }, [addToWatchLater, handleSaveToPlaylist, video]);
 
   // Add to watch history when video loads
   React.useEffect(() => {

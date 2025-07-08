@@ -1,5 +1,5 @@
 import { memo, useMemo, useCallback, lazy, Suspense } from 'react';
-import type { ComponentType, ReactNode } from 'react';
+import type { ComponentType } from 'react';
 
 // Performance optimization utilities
 
@@ -81,35 +81,12 @@ export const withPerformanceOptimization = {
  */
 export const lazyWithFallback = {
   /**
-   * Lazy load component with loading fallback
+   * Create a lazy component
    */
-  withSpinner: <P extends object>(
-    importFunc: () => Promise<{ default: ComponentType<P> }>,
-    fallback?: ReactNode
+  create: <P extends object>(
+    importFunc: () => Promise<{ default: ComponentType<P> }>
   ) => {
-    const LazyComponent = lazy(importFunc);
-    
-    return (props: P) => (
-      <Suspense fallback={fallback || <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto" />}>
-        <LazyComponent {...props} />
-      </Suspense>
-    );
-  },
-
-  /**
-   * Lazy load with skeleton fallback
-   */
-  withSkeleton: <P extends object>(
-    importFunc: () => Promise<{ default: ComponentType<P> }>,
-    SkeletonComponent: ComponentType
-  ) => {
-    const LazyComponent = lazy(importFunc);
-    
-    return (props: P) => (
-      <Suspense fallback={<SkeletonComponent />}>
-        <LazyComponent {...props} />
-      </Suspense>
-    );
+    return lazy(importFunc);
   },
 };
 
@@ -363,7 +340,9 @@ export const memoryOptimizations = {
           cache.delete(key);
         } else if (cache.size >= maxSize) {
           const firstKey = cache.keys().next().value;
-          cache.delete(firstKey);
+          if (firstKey !== undefined) {
+            cache.delete(firstKey);
+          }
         }
         cache.set(key, value);
       },
