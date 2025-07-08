@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
