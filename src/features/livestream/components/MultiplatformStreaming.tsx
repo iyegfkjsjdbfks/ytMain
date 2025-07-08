@@ -273,6 +273,7 @@ return null;
                   </button>
 
                   <label htmlFor={`toggle-${platform.name}`} className="relative inline-flex items-center cursor-pointer">
+                    <span className="sr-only">Toggle {platform.name}</span>
                     <input
                       id={`toggle-${platform.name}`}
                       type="checkbox"
