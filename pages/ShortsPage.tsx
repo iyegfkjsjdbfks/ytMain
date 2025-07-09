@@ -341,7 +341,9 @@ return;
     if (commentModalOpen || showSearch || showFilters) {
       return;
     }
-    setTouchStartY(event.touches[0].clientY);
+    if (event.touches && event.touches[0]) {
+      setTouchStartY(event.touches[0].clientY);
+    }
   }, [commentModalOpen, showSearch, showFilters]);
 
   const handleTouchEnd = useCallback((event: TouchEvent) => {
@@ -349,22 +351,24 @@ return;
       return;
     }
 
-    const touchEndY = event.changedTouches[0].clientY;
-    const deltaY = touchStartY - touchEndY;
-    const minSwipeDistance = 50;
+    if (event.changedTouches && event.changedTouches[0]) {
+      const touchEndY = event.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+      const minSwipeDistance = 50;
 
-    if (Math.abs(deltaY) > minSwipeDistance) {
-      setIsScrolling(true);
-      if (deltaY > 0) {
-        // Swiped up - next video
-        handleNextVideo();
-      } else {
-        // Swiped down - previous video
-        handlePreviousVideo();
+      if (Math.abs(deltaY) > minSwipeDistance) {
+        setIsScrolling(true);
+        if (deltaY > 0) {
+          // Swiped up - next video
+          handleNextVideo();
+        } else {
+          // Swiped down - previous video
+          handlePreviousVideo();
+        }
+        
+        // Reset scrolling flag after a delay
+        setTimeout(() => setIsScrolling(false), 500);
       }
-      
-      // Reset scrolling flag after a delay
-      setTimeout(() => setIsScrolling(false), 500);
     }
     
     setTouchStartY(null);
@@ -383,6 +387,7 @@ return;
       container.addEventListener('wheel', handleWheel, { passive: false });
       return () => container.removeEventListener('wheel', handleWheel);
     }
+    return () => {}; // Return empty cleanup function if no container
   }, [handleWheel]);
 
   // Add touch event listeners for mobile navigation
@@ -396,6 +401,7 @@ return;
         container.removeEventListener('touchend', handleTouchEnd);
       };
     }
+    return () => {}; // Return empty cleanup function if no container
   }, [handleTouchStart, handleTouchEnd]);
 
   // Scroll to specific video when component mounts or when shorts data changes
