@@ -22,6 +22,7 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { liveStreamService } from '../../../services/livestreamAPI';
+import { logger } from '../../../utils/logger';
 
 import type { LiveStream } from '../../../types/livestream';
 
@@ -232,7 +233,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
 
         setStreams(mockStreams);
       } catch (error) {
-        console.error('Failed to fetch streams:', error);
+        logger.error('Failed to fetch streams:', error);
       } finally {
         setLoading(false);
       }
@@ -322,7 +323,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           break;
         case 'edit':
           // Edit functionality would open a modal
-          console.log('Edit stream:', stream.id);
+          logger.debug('Edit stream:', stream.id);
           break;
         case 'duplicate':
           const duplicatedStream = await liveStreamService.streams.createStream({
@@ -340,15 +341,15 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           break;
         case 'analytics':
           // Navigate to analytics page
-          console.log('Navigate to analytics for stream:', stream.id);
+          logger.debug('Navigate to analytics for stream:', stream.id);
           break;
         case 'share':
           // Open share modal
-          console.log('Share stream:', stream.id);
+          logger.debug('Share stream:', stream.id);
           break;
       }
     } catch (error) {
-      console.error('Failed to perform action:', error);
+      logger.error('Failed to perform action:', error);
     }
   };
 
@@ -363,11 +364,11 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           break;
         case 'archive':
           // Archive selected streams
-          console.log('Archive streams:', selectedStreams);
+          logger.debug('Archive streams:', selectedStreams);
           break;
       }
     } catch (error) {
-      console.error('Failed to perform bulk action:', error);
+      logger.error('Failed to perform bulk action:', error);
     }
   };
 
