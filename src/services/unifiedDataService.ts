@@ -537,10 +537,10 @@ class UnifiedDataService {
             return normalized;
           }
         } catch (error) {
-          console.warn('Failed to fetch YouTube video:', error);
+          logger.warn('Failed to fetch YouTube video:', error);
         }
       } else if (youtubeApiBlocked) {
-        console.log('🔒 YouTube API is blocked by admin settings (Google Custom Search selected). Skipping YouTube API fetch.');
+        logger.debug('🔒 YouTube API is blocked by admin settings (Google Custom Search selected). Skipping YouTube API fetch.');
       }
     } else {
       // For non-YouTube IDs, try YouTube search as fallback
@@ -596,12 +596,12 @@ class UnifiedDataService {
             return normalized;
           }
         } catch (error) {
-          console.warn('Failed to fetch YouTube video as fallback:', error);
+          logger.warn('Failed to fetch YouTube video as fallback:', error);
         }
       }
     }
 
-    console.warn(`No video found for ID: ${id}`);
+    logger.warn(`No video found for ID: ${id}`);
     return null;
   }
 
@@ -626,7 +626,7 @@ class UnifiedDataService {
           return normalized;
         }
       } catch (error) {
-        console.warn('Failed to fetch YouTube channel:', error);
+        logger.warn('Failed to fetch YouTube channel:', error);
       }
     }
 
@@ -650,23 +650,23 @@ class UnifiedDataService {
 
   private async fetchYouTubeTrendingVideos(filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
-      console.log('🎯 NEW DISCOVERY STRATEGY: Google Custom Search (primary discovery) with YouTube Data API v3 metadata');
+      logger.debug('🎯 NEW DISCOVERY STRATEGY: Google Custom Search (primary discovery) with YouTube Data API v3 metadata');
 
       // NEW STRATEGY: Use Google Custom Search for discovery by default
       const { getYouTubeSearchProvider } = await import('../../services/settingsService');
       const provider = getYouTubeSearchProvider();
 
-      console.log(`📋 Admin selected provider: ${provider}`);
-      console.log('🔍 Using Google Custom Search for video discovery (default strategy)');
+      logger.debug(`📋 Admin selected provider: ${provider}`);
+      logger.debug('🔍 Using Google Custom Search for video discovery (default strategy)');
 
       // Try Google Custom Search for discovery first
       return this.searchGoogleCustomSearchVideos('trending videos', filters);
     } catch (error) {
-      console.error('Failed to fetch trending videos from Google Custom Search:', error);
+      logger.error('Failed to fetch trending videos from Google Custom Search:', error);
 
       // Fallback to YouTube Data API v3 for discovery if Google Custom Search fails
       if (API_KEY) {
-        console.log('🔄 Falling back to YouTube Data API v3 for discovery');
+        logger.debug('🔄 Falling back to YouTube Data API v3 for discovery');
         const trendingQueries = ['trending', 'popular', 'music', 'gaming', 'tech', 'news'];
         const randomQuery = trendingQueries[Math.floor(Math.random() * trendingQueries.length)];
         if (randomQuery) {
@@ -679,7 +679,7 @@ class UnifiedDataService {
 
   private async searchLocalVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     // Local video search disabled - returning empty array
-    console.log('Local video search disabled for query:', query, filters);
+    logger.debug('Local video search disabled for query:', query, filters);
     return [];
   }
 
@@ -689,7 +689,7 @@ class UnifiedDataService {
    */
   private async searchGoogleCustomSearchVideos(query: string, _filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
-      console.log('🔍 Using Google Custom Search for video discovery with query:', query);
+      logger.debug('🔍 Using Google Custom Search for video discovery with query:', query);
 
       // Import Google Custom Search service
       const { searchYouTubeWithGoogleSearch } = await import('../../services/googleSearchService');
@@ -697,7 +697,7 @@ class UnifiedDataService {
       // Search for videos using Google Custom Search
       const searchResults = await searchYouTubeWithGoogleSearch(query);
 
-      console.log(`📋 Google Custom Search found ${searchResults.length} videos for discovery`);
+      logger.debug(`📋 Google Custom Search found ${searchResults.length} videos for discovery`);
 
       // Convert search results to unified format
       // Note: These will have google-search- prefixed IDs for metadata fetching
@@ -735,25 +735,25 @@ class UnifiedDataService {
         },
       }));
 
-      console.log(`✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`);
+      logger.debug(`✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`);
       return unifiedVideos;
     } catch (error) {
-      console.error('Failed to search videos using Google Custom Search:', error);
+      logger.error('Failed to search videos using Google Custom Search:', error);
       return [];
     }
   }
 
   private async searchYouTubeVideos(query: string, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
-      console.log('🎯 Using YouTube Data API v3 for video discovery (fallback)');
+      logger.debug('🎯 Using YouTube Data API v3 for video discovery (fallback)');
 
       // Check if YouTube API is available
       if (!API_KEY) {
-        console.log('YouTube API key not available for discovery fallback');
+        logger.debug('YouTube API key not available for discovery fallback');
         return [];
       }
 
-      console.log('🚀 Searching YouTube videos using YouTube Data API v3 for query:', query, filters);
+      logger.debug('🚀 Searching YouTube videos using YouTube Data API v3 for query:', query, filters);
 
       // Use the YouTube search service
       const searchResults = await youtubeService.searchVideos(query, {
@@ -814,10 +814,10 @@ class UnifiedDataService {
         },
       }));
 
-      console.log(`Found ${unifiedVideos.length} YouTube videos for query: ${query}`);
+      logger.debug(`Found ${unifiedVideos.length} YouTube videos for query: ${query}`);
       return unifiedVideos;
     } catch (error) {
-      console.error('Failed to search YouTube videos:', error);
+      logger.error('Failed to search YouTube videos:', error);
       return [];
     }
   }

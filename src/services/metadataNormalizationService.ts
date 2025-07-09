@@ -1,4 +1,5 @@
 import { youtubeService } from './api/youtubeService';
+import { logger } from '../utils/logger';
 
 import type { Video as LocalVideo, Channel as LocalChannel } from '../types/core';
 
@@ -138,8 +139,8 @@ class MetadataNormalizationService {
    * Normalize YouTube video data to unified format
    */
   async normalizeYouTubeVideo(youtubeVideo: any, channelData?: any): Promise<UnifiedVideoMetadata> {
-    console.log('normalizeYouTubeVideo - Full input data structure:', youtubeVideo);
-    console.log('normalizeYouTubeVideo - Input data:', {
+    logger.debug('normalizeYouTubeVideo - Full input data structure:', youtubeVideo);
+    logger.debug('normalizeYouTubeVideo - Input data:', {
       videoId: youtubeVideo.id,
       channelTitle: youtubeVideo.snippet?.channelTitle,
       channelId: youtubeVideo.snippet?.channelId,
@@ -157,11 +158,11 @@ class MetadataNormalizationService {
     let channel = channelData;
     if (!channel && youtubeVideo.snippet?.channelId) {
       try {
-        console.log(`Fetching channel data for channelId: ${youtubeVideo.snippet.channelId}`);
+        logger.debug(`Fetching channel data for channelId: ${youtubeVideo.snippet.channelId}`);
         channel = await youtubeService.fetchChannel(youtubeVideo.snippet.channelId);
-        console.log('Fetched channel data:', channel);
+        logger.debug('Fetched channel data:', channel);
       } catch (error) {
-        console.warn('Failed to fetch channel data:', error);
+        logger.warn('Failed to fetch channel data:', error);
       }
     }
 
@@ -204,7 +205,7 @@ class MetadataNormalizationService {
       },
     };
 
-    console.log('normalizeYouTubeVideo - Final normalized data:', {
+    logger.debug('normalizeYouTubeVideo - Final normalized data:', {
       id: normalizedVideo.id,
       channelName: normalizedVideo.channel.name,
       channelId: normalizedVideo.channel.id,
@@ -276,7 +277,7 @@ class MetadataNormalizationService {
           normalized.push(await this.normalizeYouTubeVideo(data));
         }
       } catch (error) {
-        console.error(`Failed to normalize ${source} video:`, error);
+        logger.error(`Failed to normalize ${source} video:`, error);
         // Continue processing other videos
       }
     }

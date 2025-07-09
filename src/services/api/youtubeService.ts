@@ -3,6 +3,7 @@ import { CACHE_CONFIG } from '../../lib/constants';
 import { ApiError } from './base';
 
 import type { Video, Channel } from '../../types/core';
+import { logger } from '../../utils/logger';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -135,7 +136,7 @@ url.searchParams.set(key, value);
    */
   async fetchVideos(videoIds: string[]): Promise<Video[]> {
     if (!API_KEY) {
-      console.warn('YouTube Data API v3 key not available. Metadata fetching will use fallback methods.');
+      logger.warn('YouTube Data API v3 key not available. Metadata fetching will use fallback methods.');
       return [];
     }
 
@@ -288,7 +289,7 @@ return cached;
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
       return videos;
     } catch (error) {
-      console.error('Error fetching videos:', error);
+      logger.error('Error fetching videos:', error);
       if (error instanceof ApiError) {
         throw error;
       }
@@ -303,7 +304,7 @@ return cached;
    */
   async fetchChannel(channelId: string): Promise<Channel | null> {
     if (!API_KEY) {
-      console.warn('YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.');
+      logger.warn('YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.');
       return null;
     }
 
@@ -359,7 +360,7 @@ return null;
       this.setCachedData(cacheKey, channel, CACHE_CONFIG.USER_DATA_TTL);
       return channel;
     } catch (error) {
-      console.error('Error fetching channel:', error);
+      logger.error('Error fetching channel:', error);
       if (error instanceof ApiError) {
         throw error;
       }
@@ -492,7 +493,7 @@ return false;
     forRecommendations?: boolean;
   } = {}): Promise<Video[]> {
     if (!API_KEY) {
-      console.warn('YouTube Data API v3 key not available. Video search will use fallback methods.');
+      logger.warn('YouTube Data API v3 key not available. Video search will use fallback methods.');
       return [];
     }
 
@@ -500,9 +501,9 @@ return false;
       return [];
     }
 
-    console.log('🎯 Using YouTube Data API v3 as primary source for video search');
+    logger.debug('🎯 Using YouTube Data API v3 as primary source for video search');
     if (options.forRecommendations) {
-      console.log('🚀 Search for recommendations using YouTube Data API v3');
+      logger.debug('🚀 Search for recommendations using YouTube Data API v3');
     }
 
     const cacheKey = `search_${query}_${JSON.stringify(options)}`;
@@ -545,7 +546,7 @@ return false;
       this.setCachedData(cacheKey, videos, CACHE_CONFIG.VIDEO_DATA_TTL);
       return videos;
     } catch (error) {
-      console.error('Error searching videos:', error);
+      logger.error('Error searching videos:', error);
       if (error instanceof ApiError) {
         throw error;
       }

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { authService } from '../services/authService';
+import { logger } from '../../../utils/logger';
 
 import type { AuthState, LoginCredentials, RegisterData, User } from '../types';
 
@@ -84,7 +85,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         isLoading: false,
       });
     } catch (error) {
-      console.error('Auth check failed:', error);
+      logger.error('Auth check failed:', error);
       set({
         user: null,
         isAuthenticated: false,
