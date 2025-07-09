@@ -1,5 +1,7 @@
 // YouTube utilities for video handling and API integration
 
+import { logger } from '../utils/logger';
+
 // YouTube API type declarations
 interface YT {
   Player: new (elementId: string, config: YTPlayerConfig) => YTPlayer;
@@ -105,7 +107,7 @@ return null;
     const match = url.match(regExp);
     return match?.[1] ? match[1].substring(0, 11) : null;
   } catch (e) {
-    console.error('Error extracting YouTube video ID:', e);
+    logger.error('Error extracting YouTube video ID:', e);
     return null;
   }
 }
@@ -205,7 +207,7 @@ export class YouTubePlayer {
         },
       });
     } catch (error) {
-      console.error('Error initializing YouTube player:', error);
+      logger.error('Error initializing YouTube player:', error);
     }
   }
 
@@ -493,7 +495,7 @@ return null;
         }
       }
     } catch (e) {
-      console.warn('Error parsing YouTube URL:', e);
+      logger.warn('Error parsing YouTube URL:', e);
       continue;
     }
   }

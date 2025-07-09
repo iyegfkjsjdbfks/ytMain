@@ -1,4 +1,5 @@
 import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
+import { logger } from '../../../utils/logger';
 
 /**
  * Service for handling authentication-related API requests
@@ -68,7 +69,7 @@ class AuthService {
           body: JSON.stringify({ refreshToken: tokens.refreshToken }),
         });
       } catch (error) {
-        console.error('Error during logout:', error);
+        logger.error('Error during logout:', error);
       }
     }
 
@@ -106,7 +107,7 @@ class AuthService {
 
       return response.json();
     } catch (error) {
-      console.error('Error fetching current user:', error);
+      logger.error('Error fetching current user:', error);
       return null;
     }
   }
@@ -133,7 +134,7 @@ class AuthService {
       this.setTokens(tokens);
       return tokens;
     } catch (error) {
-      console.error('Error refreshing token:', error);
+      logger.error('Error refreshing token:', error);
       this.clearTokens();
       return null;
     }
@@ -158,7 +159,7 @@ class AuthService {
     try {
       return JSON.parse(tokensString) as AuthTokens;
     } catch (error) {
-      console.error('Error parsing auth tokens:', error);
+      logger.error('Error parsing auth tokens:', error);
       return null;
     }
   }

@@ -16,6 +16,7 @@ import {
   ListBulletIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
+import { logger } from '../../../utils/logger';
 
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 
@@ -223,7 +224,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     try {
       await createPlaylistMutation.mutate(data);
     } catch (error) {
-      console.error('Failed to create playlist:', error);
+      logger.error('Failed to create playlist:', error);
     }
   };
 
@@ -232,7 +233,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
       try {
         await deletePlaylistMutation.mutate(playlistId);
       } catch (error) {
-        console.error('Failed to delete playlist:', error);
+        logger.error('Failed to delete playlist:', error);
       }
     }
   };
@@ -247,7 +248,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
       };
       await createPlaylistMutation.mutate(duplicateData);
     } catch (error) {
-      console.error('Failed to duplicate playlist:', error);
+      logger.error('Failed to duplicate playlist:', error);
     }
   };
 

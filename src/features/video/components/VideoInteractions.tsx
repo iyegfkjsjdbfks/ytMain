@@ -10,6 +10,7 @@ import {
   FlagIcon,
   ClipboardDocumentIcon,
 } from '@heroicons/react/24/outline';
+import { logger } from '../../../utils/logger';
 import {
   HandThumbUpIcon as HandThumbUpSolidIcon,
   HandThumbDownIcon as HandThumbDownSolidIcon,
@@ -50,7 +51,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
+      logger.error('Failed to copy to clipboard:', error);
     }
   };
 

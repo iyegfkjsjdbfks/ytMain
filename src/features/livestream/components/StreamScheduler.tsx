@@ -8,6 +8,8 @@ import {
   PencilIcon,
 } from '@heroicons/react/24/outline';
 
+import { logger } from '../../../utils/logger';
+
 import { liveStreamService } from '../../../services/livestreamAPI';
 
 import type { LiveStream } from '../../../types/livestream';
@@ -86,7 +88,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       onStreamScheduled?.(stream);
       resetForm();
     } catch (error) {
-      console.error('Failed to schedule stream:', error);
+      logger.error('Failed to schedule stream:', error);
     }
   };
 
@@ -100,7 +102,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       // In a real implementation, this would call a delete API
       setScheduledStreams(prev => prev.filter(s => s.id !== streamId));
     } catch (error) {
-      console.error('Failed to delete stream:', error);
+      logger.error('Failed to delete stream:', error);
     }
   };
 
@@ -109,7 +111,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       // Start the scheduled stream
       await liveStreamService.streams.startStream(streamId);
     } catch (error) {
-      console.error('Failed to start stream:', error);
+      logger.error('Failed to start stream:', error);
     }
   };
 

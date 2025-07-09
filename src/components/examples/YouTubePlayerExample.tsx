@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import {  useEffect, useRef, useState  } from 'react';
+import { logger } from '../../utils/logger';
 
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
 
@@ -89,7 +90,7 @@ return;
                         setIsMuted(muted);
                       }
                     } catch (error) {
-                      console.error('Error updating player state:', error);
+                      logger.error('Error updating player state:', error);
                     }
                   }
                 }, 500);
@@ -112,7 +113,7 @@ return;
           player.destroy();
         }
       } catch (error) {
-        console.error('Failed to initialize YouTube player:', error);
+        logger.error('Failed to initialize YouTube player:', error);
       }
     };
 
@@ -148,7 +149,7 @@ return;
       }
       setIsPlaying(!isPlaying);
     } catch (error) {
-      console.error('Error toggling play/pause:', error);
+      logger.error('Error toggling play/pause:', error);
     }
   };
 
@@ -166,7 +167,7 @@ return;
         setIsMuted(true);
       }
     } catch (error) {
-      console.error('Error toggling mute:', error);
+      logger.error('Error toggling mute:', error);
     }
   };
 
@@ -181,7 +182,7 @@ return;
     try {
       await playerRef.current.seekTo(newTime, true);
     } catch (error) {
-      console.error('Error seeking video:', error);
+      logger.error('Error seeking video:', error);
     }
   };
 
@@ -203,7 +204,7 @@ return;
         setIsMuted(false);
       }
     } catch (error) {
-      console.error('Error setting volume:', error);
+      logger.error('Error setting volume:', error);
     }
   };
 

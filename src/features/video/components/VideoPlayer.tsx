@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+import { logger } from '../../../utils/logger';
 
 import {
   PlayIcon,
@@ -248,7 +249,7 @@ return;
         await container.requestFullscreen();
       }
     } catch (error) {
-      console.error('Fullscreen error:', error);
+      logger.error('Fullscreen error:', error);
     }
   };
 

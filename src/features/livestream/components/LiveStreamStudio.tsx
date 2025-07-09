@@ -13,6 +13,7 @@ import {
   ShareIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline';
+import { logger } from '../../../utils/logger';
 import {
   VideoCameraIcon as VideoCameraSolidIcon,
   MicrophoneIcon as MicrophoneSolidIcon,
@@ -130,7 +131,7 @@ export const LiveStreamStudio: React.FC = () => {
       }
       setIsPreviewing(true);
     } catch (error) {
-      console.error('Error accessing camera:', error);
+      logger.error('Error accessing camera:', error);
       alert('Could not access camera/microphone. Please check permissions.');
     }
   };

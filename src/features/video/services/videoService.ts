@@ -1,6 +1,7 @@
 import { youtubeService } from '../../../services/api/youtubeService';
 
 import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
+import { logger } from '../../../utils/logger';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -219,7 +220,7 @@ class VideoService {
     try {
       return await youtubeService.fetchVideos(videoIds);
     } catch (error) {
-      console.error('Error fetching YouTube videos:', error);
+      logger.error('Error fetching YouTube videos:', error);
       throw error;
     }
   }
@@ -234,7 +235,7 @@ class VideoService {
       const videos = await youtubeService.fetchVideos([videoId]);
       return videos[0] || null;
     } catch (error) {
-      console.error('Error fetching YouTube video:', error);
+      logger.error('Error fetching YouTube video:', error);
       return null;
     }
   }
@@ -261,7 +262,7 @@ class VideoService {
           };
         } catch (interactionError) {
           // If interactions fail, return YouTube data without local state
-          console.warn('Failed to fetch local video interactions:', interactionError);
+          logger.warn('Failed to fetch local video interactions:', interactionError);
           return youtubeVideo;
         }
       }
@@ -269,7 +270,7 @@ class VideoService {
       // Fallback to local API if YouTube data is not available
       return await this.getVideo(videoId);
     } catch (error) {
-      console.error('Error fetching enhanced video:', error);
+      logger.error('Error fetching enhanced video:', error);
       throw error;
     }
   }

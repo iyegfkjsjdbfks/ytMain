@@ -8,6 +8,7 @@ import {
   ClockIcon,
   MicrophoneIcon,
 } from '@heroicons/react/24/outline';
+import { logger } from '../../../utils/logger';
 
 import { useLiveQA } from '../../../hooks/useLiveStream';
 
@@ -37,7 +38,7 @@ return;
       await submitQuestion(newQuestion.trim());
       setNewQuestion('');
     } catch (error) {
-      console.error('Failed to submit question:', error);
+      logger.error('Failed to submit question:', error);
     }
   };
 
@@ -45,16 +46,16 @@ return;
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
-      console.error('Failed to like question:', error);
+      logger.error('Failed to like question:', error);
     }
   };
 
   const handlePinQuestion = async (questionId: string) => {
     try {
       // TODO: Implement pin functionality in service
-      console.log('Pin question:', questionId);
+      logger.debug('Pin question:', questionId);
     } catch (error) {
-      console.error('Failed to pin question:', error);
+      logger.error('Failed to pin question:', error);
     }
   };
 
@@ -68,7 +69,7 @@ return;
       setAnswerMode(null);
       setAnswerText('');
     } catch (error) {
-      console.error('Failed to answer question:', error);
+      logger.error('Failed to answer question:', error);
     }
   };
 

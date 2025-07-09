@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
+import { logger } from '../../../utils/logger';
 
 import {
   HandThumbUpIcon,
@@ -307,7 +308,7 @@ return;
       setNewComment('');
       setShowCommentInput(false);
     } catch (error) {
-      console.error('Failed to post comment:', error);
+      logger.error('Failed to post comment:', error);
     }
   };
 
@@ -319,7 +320,7 @@ return;
         parentId,
       });
     } catch (error) {
-      console.error('Failed to post reply:', error);
+      logger.error('Failed to post reply:', error);
     }
   };
 
@@ -330,7 +331,7 @@ return;
         type,
       });
     } catch (error) {
-      console.error('Failed to react to comment:', error);
+      logger.error('Failed to react to comment:', error);
     }
   };
 

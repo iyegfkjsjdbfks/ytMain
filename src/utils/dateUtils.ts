@@ -2,6 +2,8 @@
  * Date and time formatting utilities
  */
 
+import { logger } from './logger';
+
 /**
  * Formats a date to a relative time string (e.g., "2 hours ago")
  * @param date Date object, date string, or timestamp
@@ -49,7 +51,7 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years} year${years === 1 ? '' : 's'} ago`;
   } catch (error) {
-    console.error('Error formatting date:', error);
+    logger.error('Error formatting date:', error);
     return 'Invalid date';
   }
 };
@@ -101,7 +103,7 @@ export const formatShortDistanceToNow = (date: string | Date | number): string =
     const years = Math.floor(diffInSeconds / 31536000);
     return `${years}y ago`;
   } catch (error) {
-    console.error('Error formatting date:', error);
+    logger.error('Error formatting date:', error);
     return 'Invalid';
   }
 };
@@ -154,7 +156,7 @@ export const formatTime = (date: string | Date | number, options?: Intl.DateTime
 
     return targetDate.toLocaleTimeString('en-US', options || defaultOptions);
   } catch (error) {
-    console.error('Error formatting time:', error);
+    logger.error('Error formatting time:', error);
     return 'Invalid time';
   }
 };

@@ -2,6 +2,7 @@ import { api } from '../../../services/api/base';
 
 import type { ApiResponse } from '../../../types/core';
 import type { Video } from '../../../types/video';
+import { logger } from '../../../utils/logger';
 
 export interface Subscription {
   id: string;
@@ -36,7 +37,7 @@ class SubscriptionService {
       const response = await api.get(`/api/subscriptions/status/${channelId}`);
       return response.data as Subscription;
     } catch (error) {
-      console.error('Failed to get subscription status:', error);
+      logger.error('Failed to get subscription status:', error);
       return null;
     }
   }
@@ -82,7 +83,7 @@ class SubscriptionService {
       const response = await api.get('/api/subscriptions', filters);
       return (response.data as Subscription[]) || [];
     } catch (error) {
-      console.error('Failed to get subscriptions:', error);
+      logger.error('Failed to get subscriptions:', error);
       return [];
     }
   }
@@ -103,7 +104,7 @@ class SubscriptionService {
       const response = await api.get('/api/subscriptions/feed', filters);
       return (response.data as Video[]) || [];
     } catch (error) {
-      console.error('Failed to get subscription feed:', error);
+      logger.error('Failed to get subscription feed:', error);
       return [];
     }
   }
@@ -116,7 +117,7 @@ class SubscriptionService {
       const response = await api.get('/api/subscriptions/stats');
       return response.data as SubscriptionStats;
     } catch (error) {
-      console.error('Failed to get subscription stats:', error);
+      logger.error('Failed to get subscription stats:', error);
       return {
         totalSubscriptions: 0,
         newSubscriptionsToday: 0,
@@ -177,7 +178,7 @@ class SubscriptionService {
         recentVideos: Video[];
       }>) || [];
     } catch (error) {
-      console.error('Failed to get recommended channels:', error);
+      logger.error('Failed to get recommended channels:', error);
       return [];
     }
   }
@@ -202,7 +203,7 @@ class SubscriptionService {
       });
       return response.data as { channels: Subscription[]; videos: Video[] };
     } catch (error) {
-      console.error('Failed to search subscriptions:', error);
+      logger.error('Failed to search subscriptions:', error);
       return {
         channels: [],
         videos: [],
@@ -248,7 +249,7 @@ class SubscriptionService {
         isNew: boolean;
       }>) || [];
     } catch (error) {
-      console.error('Failed to get subscription activity:', error);
+      logger.error('Failed to get subscription activity:', error);
       return [];
     }
   }
@@ -261,7 +262,7 @@ class SubscriptionService {
       const response = await api.get('/api/subscriptions/export', { format });
       return response.data as string;
     } catch (error) {
-      console.error('Failed to export subscriptions:', error);
+      logger.error('Failed to export subscriptions:', error);
       throw error;
     }
   }
@@ -316,7 +317,7 @@ class SubscriptionService {
         };
       };
     } catch (error) {
-      console.error('Failed to get subscription insights:', error);
+      logger.error('Failed to get subscription insights:', error);
       return {
         growthRate: 0,
         topCategories: [],
