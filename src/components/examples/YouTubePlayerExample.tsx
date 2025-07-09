@@ -1,5 +1,5 @@
-import type * as React from 'react';
-import {  useEffect, useRef, useState  } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { FC, ChangeEvent } from 'react';
 import { logger } from '../../utils/logger';
 
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
@@ -13,7 +13,7 @@ interface YouTubePlayerExampleProps {
   className?: string;
 }
 
-export const YouTubePlayerExample: React.FC<YouTubePlayerExampleProps> = ({
+export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   videoId,
   width = 800,
   height = 450,
@@ -171,7 +171,7 @@ return;
     }
   };
 
-  const handleSeek = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSeek = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!playerRef.current) {
 return;
 }
@@ -186,7 +186,7 @@ return;
     }
   };
 
-  const handleVolumeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVolumeChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!playerRef.current) {
 return;
 }

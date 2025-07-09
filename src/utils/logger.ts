@@ -23,7 +23,7 @@ class Logger {
   constructor(config: Partial<LoggerConfig> = {}) {
     this.config = {
       level: 'info',
-      enableConsole: import.meta.env.DEV,
+      enableConsole: typeof window !== 'undefined' && window.location.hostname === 'localhost',
       enableRemote: false,
       ...config,
     };
@@ -33,7 +33,7 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(level: LogLevel, message: string, ...args: any[]): string {
+  private formatMessage(level: LogLevel, message: string, ..._args: any[]): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
     return `${prefix} ${message}`;
@@ -80,7 +80,7 @@ class Logger {
     }
   }
 
-  private sendToRemoteService(message: string, error: Error): void {
+  private sendToRemoteService(_message: string, _error: Error): void {
     // Implement remote logging service integration here
     // For example: Sentry, LogRocket, etc.
   }

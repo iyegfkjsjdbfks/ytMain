@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import type { FC } from 'react';
 
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
-import { logger } from '../../utils/logger';
+import { logger } from '../utils/logger';
 
-const GoogleSearchStoreDebug: React.FC = () => {
+const GoogleSearchStoreDebug: FC = () => {
   const [storeVideos, setStoreVideos] = useState<any[]>([]);
   const [testVideoId, setTestVideoId] = useState('bnVUHWCynig');
   const [unifiedServiceTest, setUnifiedServiceTest] = useState<any>(null);
