@@ -130,7 +130,7 @@ export const formatDate = (date: string | Date | number, options?: Intl.DateTime
 
     return targetDate.toLocaleDateString('en-US', options || defaultOptions);
   } catch (error) {
-    console.error('Error formatting date:', error);
+    logger.error('Error formatting date:', error);
     return 'Invalid date';
   }
 };

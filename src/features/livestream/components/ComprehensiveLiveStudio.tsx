@@ -612,7 +612,7 @@ return;
             {activeTab === 'schedule' && (
               <StreamScheduler
                 onStreamScheduled={(stream) => {
-                  console.log('Stream scheduled:', stream);
+                  logger.debug('Stream scheduled:', stream);
                 }}
               />
             )}
