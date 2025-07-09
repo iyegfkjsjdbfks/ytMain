@@ -5,6 +5,7 @@ import { useParams, Link, useSearchParams } from 'react-router-dom';
 import YouTubePlayer from '../../../../components/YouTubePlayer';
 import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
 import { isYouTubeUrl } from '../../../lib/youtube-utils';
+import { logger } from '../../../utils/logger';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
@@ -16,18 +17,18 @@ const WatchPage: React.FC = () => {
 
   // Get video ID from either URL params or query string
   const videoId = paramVideoId || searchParams.get('v') || '';
-  console.log(`🎬 WatchPage: Rendering with videoId: ${videoId} (from ${paramVideoId ? 'params' : 'query'})`);
+  logger.debug(`🎬 WatchPage: Rendering with videoId: ${videoId} (from ${paramVideoId ? 'params' : 'query'})`);
 
   const { data: video, loading, error } = useUnifiedVideo(videoId, {
     staleTime: 0, // Force fresh data
   });
-  console.log('📊 WatchPage: Video data received:', video ? `${video.title} (${video.source})` : 'No video');
-  console.log('📊 WatchPage: Loading state:', loading);
-  console.log('📊 WatchPage: Error state:', error);
+  logger.debug('📊 WatchPage: Video data received:', video ? `${video.title} (${video.source})` : 'No video');
+  logger.debug('📊 WatchPage: Loading state:', loading);
+  logger.debug('📊 WatchPage: Error state:', error);
 
   // Debug metadata fields
   if (video) {
-    console.log('📊 WatchPage: Metadata debug:', {
+    logger.debug('📊 WatchPage: Metadata debug:', {
       title: video.title,
       channelName: video.channel?.name,
       channelAvatar: video.channel?.avatarUrl,
@@ -41,7 +42,7 @@ const WatchPage: React.FC = () => {
 
     // Enhanced debugging for Google Custom Search videos
     if (video.source === 'google-search') {
-      console.log('🔍 Google Custom Search Video Debug:', {
+      logger.debug('🔍 Google Custom Search Video Debug:', {
         id: video.id,
         title: video.title,
         description: `${video.description?.substring(0, 100)  }...`,
@@ -75,9 +76,9 @@ const WatchPage: React.FC = () => {
       });
     }
   }
-  console.log('📊 WatchPage: Video object:', video);
-  console.log('📊 WatchPage: Video truthy:', !!video);
-  console.log(`⏳ WatchPage: Loading state: ${loading}`);
+  logger.debug('📊 WatchPage: Video object:', video);
+  logger.debug('📊 WatchPage: Video truthy:', !!video);
+  logger.debug(`⏳ WatchPage: Loading state: ${loading}`);
 
   const [_recommendedVideos, setRecommendedVideos] = useState<Video[]>([]);
   const [_showFullDescription, _setShowFullDescription] = useState(false);
@@ -91,21 +92,21 @@ const WatchPage: React.FC = () => {
 
   const loadRecommendations = async () => {
     try {
-      console.log('🎯 Loading recommendations using unified data service...');
-      console.log('🎯 Current videoId:', videoId);
+      logger.debug('🎯 Loading recommendations using unified data service...');
+      logger.debug('🎯 Current videoId:', videoId);
 
       // Import the unified data service
       const { unifiedDataService } = await import('../../../services/unifiedDataService');
-      console.log('✅ Unified data service imported successfully');
+      logger.debug('✅ Unified data service imported successfully');
 
       // Get trending videos as recommendations (using hybrid YouTube API + Google Custom Search)
-      console.log('🔄 Calling getTrendingVideos...');
+      logger.debug('🔄 Calling getTrendingVideos...');
       const response = await unifiedDataService.getTrendingVideos(10, {});
-      console.log('📊 Unified service response:', response);
+      logger.debug('📊 Unified service response:', response);
 
       const unifiedVideos = response.data;
-      console.log(`📺 Loaded ${unifiedVideos.length} recommendations with unified metadata`);
-      console.log('📺 First few recommendations:', unifiedVideos.slice(0, 3).map(v => ({ id: v.id, title: v.title })));
+      logger.debug(`📺 Loaded ${unifiedVideos.length} recommendations with unified metadata`);
+      logger.debug('📺 First few recommendations:', unifiedVideos.slice(0, 3).map(v => ({ id: v.id, title: v.title })));
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
       const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({
@@ -157,7 +158,7 @@ const WatchPage: React.FC = () => {
         },
       }));
 
-      console.log('✅ Recommendations converted to Video format:', convertedRecommendations.map(v => ({
+      logger.debug('✅ Recommendations converted to Video format:', convertedRecommendations.map(v => ({
         id: v.id,
         title: v.title,
         views: v.viewCount,
@@ -165,10 +166,10 @@ const WatchPage: React.FC = () => {
       })));
 
       setRecommendedVideos(convertedRecommendations);
-      console.log('✅ Recommendations state updated, length:', convertedRecommendations.length);
+      logger.debug('✅ Recommendations state updated, length:', convertedRecommendations.length);
     } catch (error) {
-      console.error('❌ Error loading recommendations:', error);
-      console.error('❌ Error details:', error);
+      logger.error('❌ Error loading recommendations:', error);
+      logger.error('❌ Error details:', error);
 
       // Fallback to a simple mock video for testing
       const fallbackVideo: Video = {
@@ -221,7 +222,7 @@ const WatchPage: React.FC = () => {
       };
 
       setRecommendedVideos([fallbackVideo]);
-      console.log('✅ Fallback video set for testing');
+      logger.debug('✅ Fallback video set for testing');
     }
   };
 
@@ -242,47 +243,47 @@ const WatchPage: React.FC = () => {
   if (!video) {
     const testGoogleSearchFallback = async () => {
       try {
-        console.log('🧪 Testing Google Custom Search fallback manually...');
-        console.log('🎯 Current video ID:', videoId);
+        logger.debug('🧪 Testing Google Custom Search fallback manually...');
+        logger.debug('🎯 Current video ID:', videoId);
 
         // Check current provider setting
         const { getYouTubeSearchProvider } = await import('../../../../services/settingsService');
         const currentProvider = getYouTubeSearchProvider();
-        console.log('⚙️ Current YouTube Search Provider:', currentProvider);
+        logger.debug('⚙️ Current YouTube Search Provider:', currentProvider);
 
         // Check if YouTube API is blocked
         const { isYouTubeDataApiBlocked } = await import('../../../utils/youtubeApiUtils');
         const isBlocked = isYouTubeDataApiBlocked();
-        console.log('🔒 YouTube Data API Blocked:', isBlocked);
+        logger.debug('🔒 YouTube Data API Blocked:', isBlocked);
 
         // Check what's in the Google Search video store
         const { googleSearchVideoStore } = await import('../../../../services/googleSearchVideoStore');
         const allVideos = googleSearchVideoStore.getAllVideos();
-        console.log('📦 Videos in Google Search store:', allVideos.length);
-        console.log('📦 Store contents:', allVideos.map((v: any) => ({ id: v.id, title: v.title })));
+        logger.debug('📦 Videos in Google Search store:', allVideos.length);
+        logger.debug('📦 Store contents:', allVideos.map((v: any) => ({ id: v.id, title: v.title })));
 
         // Check if our specific video is in the store
         const specificVideo = googleSearchVideoStore.getVideo(videoId);
-        console.log('🔍 Specific video in store:', specificVideo);
+        logger.debug('🔍 Specific video in store:', specificVideo);
 
         // Try to fetch the video directly from Google Custom Search API
         if (!specificVideo && videoId.startsWith('google-search-')) {
           const youtubeId = videoId.replace('google-search-', '');
-          console.log('🌐 Attempting to fetch from Google Custom Search API with YouTube ID:', youtubeId);
+          logger.debug('🌐 Attempting to fetch from Google Custom Search API with YouTube ID:', youtubeId);
 
           const { fetchSingleVideoFromGoogleSearch } = await import('../../../../services/googleSearchService');
           const fetchedVideo = await fetchSingleVideoFromGoogleSearch(youtubeId);
-          console.log('🌐 Fetched video result:', fetchedVideo);
+          logger.debug('🌐 Fetched video result:', fetchedVideo);
         }
 
         // Clear any cached data first
         const { unifiedDataService } = await import('../../../services/unifiedDataService');
         unifiedDataService.clearCache(`video:${videoId}`);
         unifiedDataService.clearCache('unified-video');
-        console.log(`🗑️ Cleared cache for ${videoId}`);
+        logger.debug(`🗑️ Cleared cache for ${videoId}`);
 
         const result = await unifiedDataService.getVideoById(videoId);
-        console.log('🧪 Test result:', result);
+        logger.debug('🧪 Test result:', result);
 
         if (result) {
           const viewsInfo = result.views ? `${result.views.toLocaleString()} views` : 'Views: Not available';
@@ -291,39 +292,39 @@ const WatchPage: React.FC = () => {
           alert(`❌ Test failed: No video found\nProvider: ${currentProvider}\nYouTube API Blocked: ${isBlocked}`);
         }
       } catch (error) {
-        console.error('🧪 Test error:', error);
+        logger.error('🧪 Test error:', error);
         alert(`❌ Test error: ${error}`);
       }
     };
 
     const clearCacheAndRefresh = async () => {
       try {
-        console.log('🗑️ Clearing all caches and refreshing...');
+        logger.debug('🗑️ Clearing all caches and refreshing...');
 
         // Clear unified data service cache
         const { unifiedDataService } = await import('../../../services/unifiedDataService');
         unifiedDataService.clearCache(); // Clear all cache
-        console.log('✅ Unified data service cache cleared');
+        logger.debug('✅ Unified data service cache cleared');
 
         // Clear Google Search video store
         const { googleSearchVideoStore } = await import('../../../../services/googleSearchVideoStore');
         googleSearchVideoStore.clear();
-        console.log('✅ Google Search video store cleared');
+        logger.debug('✅ Google Search video store cleared');
 
         // Clear React Query cache
         const { queryClient } = await import('../../../../hooks/useQueryClient');
         queryClient.clear();
-        console.log('✅ React Query cache cleared');
+        logger.debug('✅ React Query cache cleared');
 
         // Clear browser storage
         localStorage.removeItem('google-search-videos');
         sessionStorage.clear();
-        console.log('✅ Browser storage cleared');
+        logger.debug('✅ Browser storage cleared');
 
-        console.log('🔄 Reloading page...');
+        logger.debug('🔄 Reloading page...');
         window.location.reload();
       } catch (error) {
-        console.error('❌ Cache clear error:', error);
+        logger.error('❌ Cache clear error:', error);
       }
     };
 
@@ -359,12 +360,12 @@ const WatchPage: React.FC = () => {
                 onClick={async () => {
                   if (videoId.startsWith('google-search-')) {
                     const youtubeId = videoId.replace('google-search-', '');
-                    console.log('🔄 Manual retry: Attempting to fetch video:', youtubeId);
+                    logger.debug('🔄 Manual retry: Attempting to fetch video:', youtubeId);
 
                     try {
                       const { fetchSingleVideoFromGoogleSearch } = await import('../../../../services/googleSearchService');
                       const result = await fetchSingleVideoFromGoogleSearch(youtubeId);
-                      console.log('🔄 Manual retry result:', result);
+                      logger.debug('🔄 Manual retry result:', result);
 
                       if (result) {
                         alert(`✅ Video fetched successfully!\nTitle: ${result.title}\nChannel: ${result.channelName}`);
@@ -374,7 +375,7 @@ const WatchPage: React.FC = () => {
                         alert('❌ Failed to fetch video from Google Custom Search API');
                       }
                     } catch (error) {
-                      console.error('Manual retry error:', error);
+                      logger.error('Manual retry error:', error);
                       alert(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
                     }
                   }
@@ -670,7 +671,7 @@ const WatchPage: React.FC = () => {
             </h3>
             <div className="space-y-4">
               {(() => {
-                console.log('🎬 Rendering recommendations, count:', _recommendedVideos.length);
+                logger.debug('🎬 Rendering recommendations, count:', _recommendedVideos.length);
                 return null;
               })()}
               {_recommendedVideos.length === 0 ? (
@@ -679,14 +680,14 @@ const WatchPage: React.FC = () => {
                 </div>
               ) : (
                 _recommendedVideos.map((recommendedVideo) => {
-                  console.log('🎬 Rendering recommendation:', recommendedVideo.id, recommendedVideo.title);
+                  logger.debug('🎬 Rendering recommendation:', recommendedVideo.id, recommendedVideo.title);
                   return (
                     <VideoCard
                       key={recommendedVideo.id}
                       video={recommendedVideo}
                       variant="compact"
                       onClick={() => {
-                        console.log('🎬 Recommendation clicked:', recommendedVideo.id);
+                        logger.debug('🎬 Recommendation clicked:', recommendedVideo.id);
                         window.location.href = `/watch?v=${recommendedVideo.id}`;
                       }}
                     />

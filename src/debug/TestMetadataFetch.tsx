@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { unifiedDataService } from '../services/unifiedDataService';
+import { logger } from '../utils/logger';
 
 const TestMetadataFetch: React.FC = () => {
   const [result, setResult] = useState<any>(null);
@@ -14,9 +15,9 @@ const TestMetadataFetch: React.FC = () => {
   const { data: reactQueryData, isLoading: reactQueryLoading, error: reactQueryError } = useQuery({
     queryKey: ['test-video', 'google-search-bnVUHWCynig'],
     queryFn: async () => {
-      console.log('🔍 React Query: Fetching video...');
+      logger.debug('🔍 React Query: Fetching video...');
       const video = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
-      console.log('📊 React Query: Result:', video);
+      logger.debug('📊 React Query: Result:', video);
       return video;
     },
     enabled: true,
@@ -28,19 +29,19 @@ const TestMetadataFetch: React.FC = () => {
     setResult(null);
 
     try {
-      console.log('🔍 Testing direct Google Custom Search API call...');
+      logger.debug('🔍 Testing direct Google Custom Search API call...');
 
       // Check environment variables first
       const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
       const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
-      console.log('🔑 API Key available:', !!searchApiKey);
-      console.log('🔍 Search Engine ID available:', !!searchEngineId);
+      logger.debug('🔑 API Key available:', !!searchApiKey);
+      logger.debug('🔍 Search Engine ID available:', !!searchEngineId);
 
       const result = await fetchSingleVideoFromGoogleSearch('bnVUHWCynig');
-      console.log('📊 Direct API result:', result);
+      logger.debug('📊 Direct API result:', result);
       setResult({ type: 'direct', data: result });
     } catch (err) {
-      console.error('❌ Direct API error:', err);
+      logger.error('❌ Direct API error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -53,16 +54,16 @@ const TestMetadataFetch: React.FC = () => {
     setResult(null);
 
     try {
-      console.log('🔍 Testing unified data service...');
-      console.log('🔍 Environment variables check:');
-      console.log('  - VITE_GOOGLE_SEARCH_API_KEY:', !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY);
-      console.log('  - VITE_GOOGLE_SEARCH_ENGINE_ID:', !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID);
+      logger.debug('🔍 Testing unified data service...');
+      logger.debug('🔍 Environment variables check:');
+      logger.debug('  - VITE_GOOGLE_SEARCH_API_KEY:', !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY);
+      logger.debug('  - VITE_GOOGLE_SEARCH_ENGINE_ID:', !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID);
 
       const result = await unifiedDataService.getVideoById('google-search-bnVUHWCynig');
-      console.log('📊 Unified service result:', result);
+      logger.debug('📊 Unified service result:', result);
       setResult({ type: 'unified', data: result });
     } catch (err) {
-      console.error('❌ Unified service error:', err);
+      logger.error('❌ Unified service error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);

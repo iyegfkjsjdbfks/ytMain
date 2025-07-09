@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { logger } from '../../../utils/logger';
 
 import {
   VideoCameraIcon,
@@ -102,7 +103,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       }
       setIsPreviewing(true);
     } catch (error) {
-      console.error('Failed to access media devices:', error);
+      logger.error('Failed to access media devices:', error);
       alert('Could not access camera and microphone. Please check permissions.');
     }
   };
@@ -173,11 +174,11 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           .map(p => p.name);
 
         // TODO: Implement multiplatform streaming
-        console.log('Multiplatform streaming enabled for:', enabledPlatforms);
+        logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
       }
 
     } catch (error) {
-      console.error('Failed to start stream:', error);
+      logger.error('Failed to start stream:', error);
       alert('Failed to start stream. Please try again.');
     }
   };
@@ -201,7 +202,7 @@ return;
       // Show stream summary
       alert(`Stream ended! Replay saved: ${replay.title}`);
     } catch (error) {
-      console.error('Failed to end stream:', error);
+      logger.error('Failed to end stream:', error);
     }
   };
 

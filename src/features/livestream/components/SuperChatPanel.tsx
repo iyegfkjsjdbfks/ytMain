@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { liveStreamService } from '../../../services/livestreamAPI';
+import { logger } from '../../../utils/logger';
 
 import type { SuperChat } from '../../../types/livestream';
 
@@ -72,7 +73,7 @@ return;
       setNewSuperChat({ amount: 5, message: '' });
       setShowSendForm(false);
     } catch (error) {
-      console.error('Failed to send Super Chat:', error);
+      logger.error('Failed to send Super Chat:', error);
     }
   };
 

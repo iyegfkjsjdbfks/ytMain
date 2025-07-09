@@ -143,7 +143,7 @@ return;
               }
             }
 
-            console.log('Video ID for', video.title, ':', videoId);
+            // Video ID logging removed for cleaner output
 
             return (
               <div key={video.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
