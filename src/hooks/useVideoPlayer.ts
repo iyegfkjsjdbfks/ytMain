@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { logger } from '../utils/logger';
 
 export interface VideoPlayerOptions {
   autoplay?: boolean;
@@ -234,17 +235,17 @@ return;
       // Handle AbortError gracefully - this is common when play() is interrupted by pause()
       if (error instanceof DOMException && error.name === 'AbortError') {
         // This is expected behavior, don't log as error
-        console.debug('Play request was interrupted:', error.message);
+        logger.debug('Play request was interrupted:', error.message);
         setState(prev => ({ ...prev, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
         const errorMessage = error instanceof Error ? error.message : String(error);
-        console.warn('Video playback issue:', errorMessage);
+        logger.warn('Video playback issue:', errorMessage);
 
         // Don't treat network/cache errors as critical errors
         if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
             errorMessage.includes('ERR_NETWORK')) {
-          console.info('Video may be temporarily unavailable due to network/cache issues');
+          logger.info('Video may be temporarily unavailable due to network/cache issues');
           setState(prev => ({ ...prev, isPlaying: false }));
         } else {
           setState(prev => ({ ...prev, error: error as Error }));
@@ -367,7 +368,7 @@ return;
       try {
         await videoRef.current.requestPictureInPicture();
       } catch (error) {
-        console.error('Error entering Picture-in-Picture:', error);
+        logger.error('Error entering Picture-in-Picture:', error);
         setState(prev => ({ ...prev, error: error as Error }));
         onError?.(error as Error);
       }
@@ -380,7 +381,7 @@ return;
       try {
         await document.exitPictureInPicture();
       } catch (error) {
-        console.error('Error exiting Picture-in-Picture:', error);
+        logger.error('Error exiting Picture-in-Picture:', error);
         setState(prev => ({ ...prev, error: error as Error }));
         onError?.(error as Error);
       }

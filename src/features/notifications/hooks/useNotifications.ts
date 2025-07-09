@@ -3,6 +3,7 @@ import { useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { notificationService, type Notification } from '../services/notificationService';
+import { logger } from '../../../utils/logger';
 
 export function useNotifications() {
   const queryClient = useQueryClient();
@@ -78,7 +79,7 @@ export function useNotifications() {
     const cleanup = notificationService.subscribeToRealTime(
       handleRealTimeNotification,
       (error) => {
-        console.error('Real-time notification error:', error);
+        logger.error('Real-time notification error:', error);
       },
     );
 

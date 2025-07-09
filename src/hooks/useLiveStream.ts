@@ -192,7 +192,7 @@ return;
       setPolls(prev => [...prev, poll]);
       return poll;
     } catch (err) {
-      console.error('Failed to create poll:', err);
+      logger.error('Failed to create poll:', err);
       throw err;
     }
   }, [streamId]);
@@ -205,7 +205,7 @@ return;
       ));
       return updatedPoll;
     } catch (err) {
-      console.error('Failed to vote on poll:', err);
+      logger.error('Failed to vote on poll:', err);
       throw err;
     }
   }, []);
@@ -218,7 +218,7 @@ return;
       ));
       return updatedPoll;
     } catch (err) {
-      console.error('Failed to end poll:', err);
+      logger.error('Failed to end poll:', err);
       throw err;
     }
   }, []);
@@ -257,7 +257,7 @@ return;
       setQuestions(prev => [...prev, qaQuestion]);
       return qaQuestion;
     } catch (err) {
-      console.error('Failed to submit question:', err);
+      logger.error('Failed to submit question:', err);
       throw err;
     }
   }, [streamId]);
@@ -270,7 +270,7 @@ return;
       ));
       return updatedQuestion;
     } catch (err) {
-      console.error('Failed to answer question:', err);
+      logger.error('Failed to answer question:', err);
       throw err;
     }
   }, []);
@@ -283,7 +283,7 @@ return;
       ));
       return updatedQuestion;
     } catch (err) {
-      console.error('Failed to upvote question:', err);
+      logger.error('Failed to upvote question:', err);
       throw err;
     }
   }, []);

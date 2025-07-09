@@ -8,6 +8,7 @@ import { useQuery as useReactQuery } from '@tanstack/react-query';
 import { videoApi, type VideoUploadData } from '../../services/api/videos';
 import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
 import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
+import { logger } from '../../utils/logger';
 
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
 
@@ -33,17 +34,17 @@ export function useUnifiedVideos(
 }
 
 export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVideoMetadata>) {
-  console.log(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
-  console.log(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
+  logger.debug(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
+  logger.debug(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
 
   // Use standard React Query hook with proper caching
   const result = useReactQuery({
     queryKey: ['unified-video', videoId], // Stable cache key
     queryFn: async () => {
-      console.log(`🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`);
+      logger.debug(`🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`);
 
       const video = await unifiedDataService.getVideoById(videoId);
-      console.log(`📊 useUnifiedVideo: Result for ${videoId}:`, video ? `Found: ${video.title}` : 'Not found');
+      logger.debug(`📊 useUnifiedVideo: Result for ${videoId}:`, video ? `Found: ${video.title}` : 'Not found');
       return video;
     },
     enabled: !!videoId,
@@ -66,7 +67,7 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
     refetch: result.refetch, // Expose refetch function
   };
 
-  console.log('🎬 useUnifiedVideo hook result:', customResult);
+  logger.debug('🎬 useUnifiedVideo hook result:', customResult);
   return customResult;
 }
 
@@ -267,7 +268,7 @@ export function useUploadVideo() {
       onSuccess: (_data) => {
         },
       onError: (error) => {
-        console.error('Video upload failed:', error.message);
+        logger.error('Video upload failed:', error.message);
       },
     },
   );
