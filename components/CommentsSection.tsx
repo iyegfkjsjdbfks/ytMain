@@ -228,28 +228,50 @@ return 0;
                 </div>
 
                 <button
-                  onClick={() => onToggleLikeDislike(comment.id, comment.parentId, 'like')}
-                  className={`hover:text-neutral-700 dark:hover:text-neutral-200 flex items-center ${
-                    comment.isLikedByCurrentUser ? 'text-sky-600 dark:text-sky-400' : ''
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                      onToggleLikeDislike(comment.id, comment.parentId, 'like');
+                    } catch (error) {
+                      console.error('Error toggling like:', error);
+                    }
+                  }}
+                  className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center space-x-1 ${
+                    comment.isLikedByCurrentUser 
+                      ? 'text-sky-600 dark:text-sky-400' 
+                      : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
                   }`}
                   title="Like comment"
                   aria-pressed={comment.isLikedByCurrentUser}
-                  disabled={comment.userName === 'You'}
+                  type="button"
                 >
-                  <ThumbsUpIcon className={`w-4 h-4 mr-1 ${
+                  <ThumbsUpIcon className={`w-4 h-4 ${
                     comment.isLikedByCurrentUser ? 'fill-sky-600 dark:fill-sky-400' : ''
                   }`}/>
-                  {comment.likes > 0 ? comment.likes : ''}
+                  {comment.likes > 0 && (
+                    <span className="text-xs font-medium">{comment.likes}</span>
+                  )}
                 </button>
 
                 <button
-                  onClick={() => onToggleLikeDislike(comment.id, comment.parentId, 'dislike')}
-                  className={`hover:text-neutral-700 dark:hover:text-neutral-200 flex items-center ${
-                    comment.isDislikedByCurrentUser ? 'text-red-500 dark:text-red-400' : ''
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                      onToggleLikeDislike(comment.id, comment.parentId, 'dislike');
+                    } catch (error) {
+                      console.error('Error toggling dislike:', error);
+                    }
+                  }}
+                  className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center ${
+                    comment.isDislikedByCurrentUser 
+                      ? 'text-red-500 dark:text-red-400' 
+                      : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
                   }`}
                   title="Dislike comment"
                   aria-pressed={comment.isDislikedByCurrentUser}
-                  disabled={comment.userName === 'You'}
+                  type="button"
                 >
                   <ThumbsDownIcon className={`w-4 h-4 ${
                     comment.isDislikedByCurrentUser ? 'fill-red-500 dark:fill-red-400' : ''

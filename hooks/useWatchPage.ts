@@ -570,14 +570,22 @@ return;
           let newLikes = item.likes;
 
           if (action === 'like') {
+            // Toggle like state
             newLiked = !item.isLikedByCurrentUser;
+            
+            // Update like count based on new like state
             newLikes = newLiked ? item.likes + 1 : item.likes - 1;
-            if (newLiked && newDisliked) {
-newDisliked = false;
-}
-          } else {
+            
+            // If liking and was previously disliked, remove dislike
+            if (newLiked && item.isDislikedByCurrentUser) {
+              newDisliked = false;
+            }
+          } else if (action === 'dislike') {
+            // Toggle dislike state
             newDisliked = !item.isDislikedByCurrentUser;
-            if (newDisliked && newLiked) {
+            
+            // If disliking and was previously liked, remove like and decrease count
+            if (newDisliked && item.isLikedByCurrentUser) {
               newLiked = false;
               newLikes = item.likes - 1;
             }
@@ -587,7 +595,7 @@ newDisliked = false;
             ...item,
             isLikedByCurrentUser: newLiked,
             isDislikedByCurrentUser: newDisliked,
-            likes: newLikes,
+            likes: Math.max(0, newLikes), // Ensure likes never go below 0
           };
         }
 
