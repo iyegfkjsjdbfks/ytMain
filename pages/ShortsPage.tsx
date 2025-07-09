@@ -605,7 +605,7 @@ return;
 
 
       {/* Navigation Controls */}
-      <div className="absolute right-20 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
+      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
         <ShortsNavigation
           onPrevious={handlePreviousVideo}
           onNext={handleNextVideo}
