@@ -478,6 +478,7 @@ current[finalKey] = value;
           <option value={60}>1 minute</option>
           <option value={300}>5 minutes</option>
         </select>
+      </div>
 
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white">Interactive Features</h3>
