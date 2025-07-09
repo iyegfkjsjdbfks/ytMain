@@ -1,6 +1,7 @@
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
+import { logger } from '../utils/logger';
 
 import { youtubeService } from './api/youtubeService';
 import {
@@ -180,7 +181,7 @@ class UnifiedDataService {
     ) as Array<'local' | 'youtube'>;
 
     // NEW DISCOVERY STRATEGY: Use Google Custom Search for discovery by default
-    console.log('🎯 NEW DISCOVERY STRATEGY: Google Custom Search for video discovery');
+    logger.debug('🎯 NEW DISCOVERY STRATEGY: Google Custom Search for video discovery');
 
     const results = await Promise.allSettled([
       ...(sources.includes('local') ? [this.searchLocalVideos(query, filters)] : []),
@@ -249,31 +250,31 @@ class UnifiedDataService {
    * NEW STRATEGY: Always prioritize YouTube Data API v3 for metadata, regardless of video source
    */
   async getVideoById(id: string): Promise<UnifiedVideoMetadata | null> {
-    console.log(`🚀 UnifiedDataService.getVideoById called with ID: ${id}`);
+    logger.debug(`🚀 UnifiedDataService.getVideoById called with ID: ${id}`);
     const cacheKey = `video:${id}`;
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
 
     if (cached) {
-      console.log(`✅ UnifiedDataService: Returning cached video for ID: ${id}`);
+      logger.debug(`✅ UnifiedDataService: Returning cached video for ID: ${id}`);
       return cached;
     }
 
-    console.log(`🔍 UnifiedDataService: Getting video by ID: ${id}`);
-    console.log('🎯 NEW METADATA STRATEGY: YouTube Data API v3 (primary metadata) → Google Custom Search (fallback metadata)');
+    logger.debug(`🔍 UnifiedDataService: Getting video by ID: ${id}`);
+    logger.debug('🎯 NEW METADATA STRATEGY: YouTube Data API v3 (primary metadata) → Google Custom Search (fallback metadata)');
 
     // Extract YouTube ID from any prefixed format
     const youtubeId = this.extractYouTubeId(id) || id;
-    console.log(`📋 Extracted YouTube ID for metadata: ${youtubeId}`);
+    logger.debug(`📋 Extracted YouTube ID for metadata: ${youtubeId}`);
 
     // STEP 1: Always try YouTube Data API v3 first for metadata (regardless of source)
     if (API_KEY && youtubeId) {
-      console.log(`🎯 Step 1: Attempting metadata fetch from YouTube Data API v3 with ID: ${youtubeId}`);
+      logger.debug(`🎯 Step 1: Attempting metadata fetch from YouTube Data API v3 with ID: ${youtubeId}`);
       try {
         const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
         if (youtubeVideos.length > 0) {
           const video = youtubeVideos[0];
           if (video) {
-            console.log('✅ Successfully fetched metadata from YouTube Data API v3 (primary source):', video.title);
+            logger.debug('✅ Successfully fetched metadata from YouTube Data API v3 (primary source):', video.title);
 
             // Convert to unified format with original ID preserved
             const normalized: UnifiedVideoMetadata = {
@@ -318,23 +319,23 @@ class UnifiedDataService {
           }
         }
       } catch (error) {
-        console.warn('⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:', error);
+        logger.warn('⚠️ YouTube Data API v3 failed for metadata, falling back to Google Custom Search:', error);
       }
     } else if (!API_KEY) {
-      console.log('⚠️ YouTube Data API v3 key not available, using Google Custom Search for metadata');
+      logger.debug('⚠️ YouTube Data API v3 key not available, using Google Custom Search for metadata');
     }
 
     // STEP 2: Fallback to Google Custom Search for metadata
-    console.log('🎯 Step 2: Falling back to Google Custom Search for metadata');
+    logger.debug('🎯 Step 2: Falling back to Google Custom Search for metadata');
 
     if (id.startsWith('google-search-')) {
-      console.log(`🔍 Checking googleSearchVideoStore for video: ${id}`);
+      logger.debug(`🔍 Checking googleSearchVideoStore for video: ${id}`);
       const googleSearchVideo = googleSearchVideoStore.getVideo(id);
-      console.log('🔍 googleSearchVideoStore.getVideo result:', googleSearchVideo);
+      logger.debug('🔍 googleSearchVideoStore.getVideo result:', googleSearchVideo);
 
       if (googleSearchVideo) {
-        console.log(`✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`);
-        console.log('📊 Google Custom Search metadata:', {
+        logger.debug(`✅ Found Google Custom Search video in store: ${googleSearchVideo.title}`);
+        logger.debug('📊 Google Custom Search metadata:', {
           id: googleSearchVideo.id,
           title: googleSearchVideo.title,
           channelName: googleSearchVideo.channelName,
@@ -382,23 +383,23 @@ class UnifiedDataService {
         this.setCachedData(cacheKey, normalized);
         return normalized;
       }
-        console.log(`❌ Google Custom Search video not found in store: ${id}`);
+        logger.debug(`❌ Google Custom Search video not found in store: ${id}`);
 
         // Try to fetch the video directly from Google Custom Search API
-        console.log('🌐 Attempting to fetch video directly from Google Custom Search API');
+        logger.debug('🌐 Attempting to fetch video directly from Google Custom Search API');
         const extractedYoutubeId = id.replace('google-search-', '');
-        console.log(`📋 Extracted YouTube ID: ${extractedYoutubeId}`);
+        logger.debug(`📋 Extracted YouTube ID: ${extractedYoutubeId}`);
 
         try {
-          console.log(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${extractedYoutubeId}`);
-          console.log('🔄 About to call fetchSingleVideoFromGoogleSearch function...');
-          console.log('🔄 Function type:', typeof fetchSingleVideoFromGoogleSearch);
-          console.log('🔄 Function exists:', !!fetchSingleVideoFromGoogleSearch);
+          logger.debug(`🔄 Calling fetchSingleVideoFromGoogleSearch with ID: ${extractedYoutubeId}`);
+          logger.debug('🔄 About to call fetchSingleVideoFromGoogleSearch function...');
+          logger.debug('🔄 Function type:', typeof fetchSingleVideoFromGoogleSearch);
+          logger.debug('🔄 Function exists:', !!fetchSingleVideoFromGoogleSearch);
 
           const googleSearchVideo = await fetchSingleVideoFromGoogleSearch(extractedYoutubeId);
-          console.log('🔄 fetchSingleVideoFromGoogleSearch returned:', googleSearchVideo);
+          logger.debug('🔄 fetchSingleVideoFromGoogleSearch returned:', googleSearchVideo);
           if (googleSearchVideo) {
-            console.log(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
+            logger.debug(`✅ Successfully fetched video from Google Custom Search API: ${googleSearchVideo.title}`);
 
             // Convert to unified format
             const normalized: UnifiedVideoMetadata = {
@@ -440,8 +441,8 @@ class UnifiedDataService {
             return normalized;
           }
         } catch (error) {
-          console.error('❌ Failed to fetch video from Google Custom Search API:', error);
-          console.error('Error details:', {
+          logger.error('❌ Failed to fetch video from Google Custom Search API:', error);
+          logger.error('Error details:', {
             message: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
             videoId: extractedYoutubeId,
@@ -451,38 +452,38 @@ class UnifiedDataService {
           // Check if YouTube API is available as fallback
           const { isYouTubeDataApiBlocked } = await import('../utils/youtubeApiUtils');
           if (isYouTubeDataApiBlocked()) {
-            console.error(`❌ Google Custom Search failed and YouTube API is blocked. No fallback available for video: ${id}`);
-            console.error('💡 Suggestion: Check Google Custom Search API configuration or enable YouTube API as fallback');
+            logger.error(`❌ Google Custom Search failed and YouTube API is blocked. No fallback available for video: ${id}`);
+            logger.error('💡 Suggestion: Check Google Custom Search API configuration or enable YouTube API as fallback');
             return null; // Return null immediately since no fallback is available
           }
         }
 
         // If Google Custom Search API fails, continue to YouTube API as fallback (only if YouTube API is not blocked)
-        console.log(`🔄 Continuing to YouTube API as fallback for: ${id}`);
+        logger.debug(`🔄 Continuing to YouTube API as fallback for: ${id}`);
 
     }
 
     // Check if this is a YouTube video ID
     // youtubeId is already declared earlier in the function scope
-    console.log(`UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`);
+    logger.debug(`UnifiedDataService: Extracted YouTube ID: ${youtubeId} from ${id}`);
 
     if (youtubeId) {
       // Check if YouTube API is blocked by admin settings
       const { isYouTubeDataApiBlocked } = await import('../utils/youtubeApiUtils');
       const youtubeApiBlocked = isYouTubeDataApiBlocked();
 
-      console.log(`Detected YouTube video ID: ${youtubeId}`);
-      console.log(`YouTube API blocked by admin settings: ${youtubeApiBlocked}`);
+      logger.debug(`Detected YouTube video ID: ${youtubeId}`);
+      logger.debug(`YouTube API blocked by admin settings: ${youtubeApiBlocked}`);
 
       if (this.config.sources.youtube && !youtubeApiBlocked) {
         try {
-          console.log(`Fetching YouTube video with ID: ${youtubeId}`);
+          logger.debug(`Fetching YouTube video with ID: ${youtubeId}`);
           const youtubeVideos = await youtubeService.fetchVideos([youtubeId]);
           if (youtubeVideos.length > 0) {
             const video = youtubeVideos[0];
-            console.log('Successfully fetched YouTube video:', video);
+            logger.debug('Successfully fetched YouTube video:', video);
             if (video) {
-              console.log('Video metadata details:', {
+              logger.debug('Video metadata details:', {
                 id: video.id,
                 title: video.title,
                 channelName: video.channelName,

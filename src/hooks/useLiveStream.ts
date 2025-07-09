@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { logger } from '../utils/logger';
 
 import { liveStreamService } from '../services/livestreamAPI';
 
@@ -98,7 +99,7 @@ return;
       setMessages(prev => [...prev, chatMessage]);
       return chatMessage;
     } catch (err) {
-      console.error('Failed to send message:', err);
+      logger.error('Failed to send message:', err);
       throw err;
     }
   }, [streamId]);
@@ -117,7 +118,7 @@ return;
       );
       return superChat;
     } catch (err) {
-      console.error('Failed to send Super Chat:', err);
+      logger.error('Failed to send Super Chat:', err);
       throw err;
     }
   }, [streamId]);
@@ -127,7 +128,7 @@ return;
       await liveStreamService.chat.moderateMessage(messageId, action);
       setMessages(prev => prev.filter(msg => msg.id !== messageId));
     } catch (err) {
-      console.error('Failed to moderate message:', err);
+      logger.error('Failed to moderate message:', err);
       throw err;
     }
   }, []);

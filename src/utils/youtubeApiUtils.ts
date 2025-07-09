@@ -1,4 +1,5 @@
 import { getYouTubeSearchProvider } from '../../services/settingsService';
+import { logger } from './logger';
 
 /**
  * Utility functions for managing YouTube Data API usage based on admin settings
@@ -11,16 +12,16 @@ import { getYouTubeSearchProvider } from '../../services/settingsService';
  */
 export function isYouTubeDataApiBlocked(): boolean {
   const provider = getYouTubeSearchProvider();
-  console.log(`🔒 YouTube API Blocking Check: Current provider = "${provider}"`);
+  logger.debug(`🔒 YouTube API Blocking Check: Current provider = "${provider}"`);
 
   // Only block YouTube Data API if API key is not available
   // Allow YouTube API as primary source with Google Custom Search as fallback
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   const isBlocked = !apiKey;
 
-  console.log(`🔒 YouTube API Available: ${!!apiKey}`);
-  console.log(`🔒 YouTube API Blocked: ${isBlocked}`);
-  console.log('🎯 Strategy: YouTube Data API (primary) → Google Custom Search (fallback)');
+  logger.debug(`🔒 YouTube API Available: ${!!apiKey}`);
+  logger.debug(`🔒 YouTube API Blocked: ${isBlocked}`);
+  logger.debug('🎯 Strategy: YouTube Data API (primary) → Google Custom Search (fallback)');
 
   return isBlocked;
 }
@@ -53,14 +54,14 @@ export async function conditionalYouTubeApiCall<T>(
   fallbackValue: T | null = null,
 ): Promise<T | null> {
   if (isYouTubeDataApiBlocked()) {
-    console.warn(getYouTubeApiBlockedMessage());
+    logger.warn(getYouTubeApiBlockedMessage());
     return fallbackValue;
   }
 
   try {
     return await apiCall();
   } catch (error) {
-    console.error('YouTube Data API call failed:', error);
+    logger.error('YouTube Data API call failed:', error);
     return fallbackValue;
   }
 }
@@ -76,14 +77,14 @@ export function conditionalYouTubeOperation<T>(
   fallbackValue: T,
 ): T {
   if (isYouTubeDataApiBlocked()) {
-    console.warn(getYouTubeApiBlockedMessage());
+    logger.warn(getYouTubeApiBlockedMessage());
     return fallbackValue;
   }
 
   try {
     return operation();
   } catch (error) {
-    console.error('YouTube Data API operation failed:', error);
+    logger.error('YouTube Data API operation failed:', error);
     return fallbackValue;
   }
 }

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { logger } from '../../../utils/logger';
 
 import {
   PaperAirplaneIcon,
@@ -72,7 +73,7 @@ return;
       setNewMessage('');
       setSlowModeTimer(5); // 5 second slow mode
     } catch (error) {
-      console.error('Failed to send message:', error);
+      logger.error('Failed to send message:', error);
     }
   };
 
@@ -94,7 +95,7 @@ return;
       } as ChatModerationAction);
       setSelectedMessage(null);
     } catch (error) {
-      console.error('Moderation action failed:', error);
+      logger.error('Moderation action failed:', error);
     }
   };
 
