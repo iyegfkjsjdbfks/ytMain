@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
+import { logger } from '../../utils/logger';
 
 const GoogleSearchStoreDebug: React.FC = () => {
   const [storeVideos, setStoreVideos] = useState<any[]>([]);
@@ -19,13 +20,13 @@ const GoogleSearchStoreDebug: React.FC = () => {
   const handleTestFetch = async () => {
     setLoading(true);
     try {
-      console.log(`🧪 Testing fetch for video ID: ${testVideoId}`);
+      logger.debug(`🧪 Testing fetch for video ID: ${testVideoId}`);
 
       // Check environment variables first
       const searchApiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
       const searchEngineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
-      console.log('🔑 API Key available:', !!searchApiKey);
-      console.log('🔍 Search Engine ID available:', !!searchEngineId);
+      logger.debug('🔑 API Key available:', !!searchApiKey);
+      logger.debug('🔍 Search Engine ID available:', !!searchEngineId);
 
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
@@ -45,7 +46,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
       const videos = googleSearchVideoStore.getAllVideos();
       setStoreVideos(videos);
     } catch (error) {
-      console.error('Test fetch error:', error);
+      logger.error('Test fetch error:', error);
       setTestResult({ error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);
@@ -60,7 +61,7 @@ const GoogleSearchStoreDebug: React.FC = () => {
   const handleTestUnifiedService = async () => {
     setLoading(true);
     try {
-      console.log(`🧪 Testing unified service for video ID: google-search-${testVideoId}`);
+      logger.debug(`🧪 Testing unified service for video ID: google-search-${testVideoId}`);
 
       // Import unified data service
       const { unifiedDataService } = await import('../services/unifiedDataService');
@@ -72,9 +73,9 @@ const GoogleSearchStoreDebug: React.FC = () => {
       const result = await unifiedDataService.getVideoById(`google-search-${testVideoId}`);
       setUnifiedServiceTest(result);
 
-      console.log('🧪 Unified service result:', result);
+      logger.debug('🧪 Unified service result:', result);
     } catch (error) {
-      console.error('Unified service test error:', error);
+      logger.error('Unified service test error:', error);
       setUnifiedServiceTest({ error: error instanceof Error ? error.message : String(error) });
     } finally {
       setLoading(false);

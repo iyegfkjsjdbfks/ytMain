@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useLivePolls } from '../../../hooks/useLiveStream';
+import { logger } from '../../../utils/logger';
 
 import type { LivePoll } from '../../../types/livestream';
 
@@ -53,7 +54,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
       setNewPoll({ question: '', options: ['', ''], duration: 60 });
       setShowCreateForm(false);
     } catch (error) {
-      console.error('Failed to create poll:', error);
+      logger.error('Failed to create poll:', error);
     }
   };
 
@@ -61,16 +62,16 @@ const LivePolls: React.FC<LivePollsProps> = ({
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
-      console.error('Failed to vote:', error);
+      logger.error('Failed to vote:', error);
     }
   };
 
   const handleEndPoll = async (pollId: string) => {
     try {
       // TODO: Implement end poll functionality
-      console.log('End poll:', pollId);
+      logger.debug('End poll:', pollId);
     } catch (error) {
-      console.error('Failed to end poll:', error);
+      logger.error('Failed to end poll:', error);
     }
   };
 
