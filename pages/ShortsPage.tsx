@@ -304,11 +304,99 @@ return;
     }
   }, []); // Run only once on mount
 
+  // Touch handling for mobile scroll navigation
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  // Wheel event handler for scroll navigation
+  const handleWheel = useCallback((event: WheelEvent) => {
+    if (commentModalOpen || showSearch || showFilters || isScrolling) {
+      return;
+    }
+
+    // Prevent default scroll behavior
+    event.preventDefault();
+    
+    // Determine scroll direction
+    const deltaY = event.deltaY;
+    
+    // Add debouncing to prevent rapid scrolling
+    if (Math.abs(deltaY) > 50) {
+      setIsScrolling(true);
+      if (deltaY > 0) {
+        // Scrolling down - next video
+        handleNextVideo();
+      } else {
+        // Scrolling up - previous video
+        handlePreviousVideo();
+      }
+      
+      // Reset scrolling flag after a delay
+      setTimeout(() => setIsScrolling(false), 500);
+    }
+  }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
+
+  // Touch event handlers for mobile navigation
+  const handleTouchStart = useCallback((event: TouchEvent) => {
+    if (commentModalOpen || showSearch || showFilters) {
+      return;
+    }
+    setTouchStartY(event.touches[0].clientY);
+  }, [commentModalOpen, showSearch, showFilters]);
+
+  const handleTouchEnd = useCallback((event: TouchEvent) => {
+    if (commentModalOpen || showSearch || showFilters || touchStartY === null || isScrolling) {
+      return;
+    }
+
+    const touchEndY = event.changedTouches[0].clientY;
+    const deltaY = touchStartY - touchEndY;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(deltaY) > minSwipeDistance) {
+      setIsScrolling(true);
+      if (deltaY > 0) {
+        // Swiped up - next video
+        handleNextVideo();
+      } else {
+        // Swiped down - previous video
+        handlePreviousVideo();
+      }
+      
+      // Reset scrolling flag after a delay
+      setTimeout(() => setIsScrolling(false), 500);
+    }
+    
+    setTouchStartY(null);
+  }, [commentModalOpen, showSearch, showFilters, touchStartY, isScrolling, handleNextVideo, handlePreviousVideo]);
+
   // Enhanced useEffect hooks
   useEffect(() => {
     document.addEventListener('keydown', handleKeyboardNavigation);
     return () => document.removeEventListener('keydown', handleKeyboardNavigation);
   }, [handleKeyboardNavigation]);
+
+  // Add wheel event listener for scroll navigation
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      return () => container.removeEventListener('wheel', handleWheel);
+    }
+  }, [handleWheel]);
+
+  // Add touch event listeners for mobile navigation
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('touchstart', handleTouchStart, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd, { passive: true });
+      return () => {
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchend', handleTouchEnd);
+      };
+    }
+  }, [handleTouchStart, handleTouchEnd]);
 
   // Scroll to specific video when component mounts or when shorts data changes
   useEffect(() => {
