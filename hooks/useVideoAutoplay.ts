@@ -51,10 +51,10 @@ return;
         }
         // Autoplay might be blocked by browser policy or network issues
       });
-    } else if (!isIntersecting && isPlaying) {
-      // Auto-pause when video leaves view and reset manual pause state
+    } else if (!isIntersecting && isPlaying && !isManuallyPaused) {
+      // Only auto-pause when video leaves view if it wasn't manually paused
+      // Don't reset manual pause state to preserve user intent
       actions.pause();
-      setIsManuallyPaused(false);
     }
   }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused, enableAutoplay, unmuteOnAutoplay]);
 };

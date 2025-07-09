@@ -243,12 +243,16 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
 
   // Event handlers
   const handlePlayPauseToggle = async () => {
-    if (videoPlayer.isPlaying) {
-      videoPlayer.pause();
-      setIsManuallyPaused(true);
-    } else {
-      await videoPlayer.play();
-      setIsManuallyPaused(false);
+    try {
+      if (videoPlayer.isPlaying) {
+        videoPlayer.pause();
+        setIsManuallyPaused(true);
+      } else {
+        await videoPlayer.play();
+        setIsManuallyPaused(false);
+      }
+    } catch (error) {
+      console.warn('Error toggling play/pause:', error);
     }
   };
 
@@ -302,11 +306,12 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
         ref={videoRef}
         src={short.videoUrl}
         poster={short.thumbnailUrl}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover cursor-pointer"
         playsInline
         muted={videoPlayer.isMuted}
         loop
         preload="metadata"
+        onClick={handlePlayPauseToggle}
         onEnded={() => {
           handleVideoEnd();
         }}
