@@ -7,6 +7,7 @@ import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 import Header from './Header';
 import Miniplayer from './Miniplayer';
 import Sidebar from './Sidebar';
+import MinimizedSidebar from './MinimizedSidebar';
 
 
 interface LayoutProps {}
@@ -17,9 +18,34 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const navigate = useNavigate();
   const location = useLocation(); // Get current location
 
+  // Check if current page is watch page
+  const isWatchPage = location.pathname.startsWith('/watch');
+  
+  // For watch page, start with minimized sidebar by default
+  const [isMinimized, setIsMinimized] = useState(isWatchPage);
+
   const toggleSidebar = useCallback(() => {
-    setIsSidebarOpen(prev => !prev);
-  }, []);
+    if (isWatchPage) {
+      // On watch page, toggle between minimized and expanded
+      setIsMinimized(prev => !prev);
+      setIsSidebarOpen(true); // Always keep sidebar visible on watch page
+    } else {
+      // On other pages, toggle visibility
+      setIsSidebarOpen(prev => !prev);
+      setIsMinimized(false); // Reset minimized state
+    }
+  }, [isWatchPage]);
+
+  useEffect(() => {
+    // Update sidebar state when navigating to/from watch page
+    if (isWatchPage) {
+      setIsMinimized(true);
+      setIsSidebarOpen(true);
+    } else {
+      setIsMinimized(false);
+      setIsSidebarOpen(window.innerWidth >= 768);
+    }
+  }, [isWatchPage]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,17 +68,31 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
 
   // Calculate sidebar margin based on state and screen size
   const getSidebarMargin = () => {
-    if (isSidebarOpen) {
-      return 'md:ml-60';
+    if (isWatchPage) {
+      // On watch page, use minimized or expanded sidebar
+      return isMinimized ? 'md:ml-16' : 'md:ml-60';
+    } else {
+      // On other pages, use normal sidebar behavior
+      if (isSidebarOpen) {
+        return 'md:ml-60';
+      }
+      return 'ml-0';
     }
-    return 'ml-0';
   };
 
   return (
     <div className="flex flex-col h-screen">
       <Header toggleSidebar={toggleSidebar} />
       <div className="flex flex-1 pt-14">
-        <Sidebar isOpen={isSidebarOpen} />
+        {isWatchPage ? (
+          isMinimized ? (
+            <MinimizedSidebar />
+          ) : (
+            <Sidebar isOpen={true} />
+          )
+        ) : (
+          <Sidebar isOpen={isSidebarOpen} />
+        )}
         <main
           id="main-content"
           role="main"
