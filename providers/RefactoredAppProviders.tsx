@@ -5,6 +5,8 @@ import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import FastLoadingSpinner from '../components/FastLoadingSpinner';
+import PWAStatus from '../src/components/PWAStatus';
+import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
 import SuspenseWrapper from '../components/SuspenseWrapper';
 import { AuthProvider } from '../contexts/AuthContext';
 import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerContext';
@@ -40,6 +42,8 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
                 <UnifiedAppProvider>
                   <SuspenseWrapper fallback={<FastLoadingSpinner />}>
                     {children}
+                    <PWAStatus />
+                    <PWAUpdateNotification />
                   </SuspenseWrapper>
                 </UnifiedAppProvider>
               </WatchLaterProvider>

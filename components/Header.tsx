@@ -11,6 +11,8 @@ import MenuIcon from './icons/MenuIcon';
 import VideoPlusIcon from './icons/VideoPlusIcon';
 import YouTubeLogo from './icons/YouTubeLogo';
 import NotificationSystem from './NotificationSystem';
+import OfflineIndicator from './OfflineIndicator';
+import PWAInstallBanner from './PWAInstallBanner';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
 // UserIcon not used if avatar image is present
@@ -213,6 +215,9 @@ setIsNotificationsPanelOpen(false);
       </div>
 
       <div className="flex items-center space-x-0.5 sm:space-x-1.5">
+        {/* PWA Offline Indicator */}
+        <OfflineIndicator className="hidden sm:flex" />
+
         <div className="relative">
             <button
               ref={createButtonRef}
@@ -265,6 +270,10 @@ setIsNotificationsPanelOpen(false);
           isUserMenuOpen={isUserMenuOpen}
           handleCloseUserMenu={handleCloseUserMenu}
         />
+      </div>
+
+      {/* PWA Install Banner */}
+      <PWAInstallBanner />
       </div>
     </header>
   );
