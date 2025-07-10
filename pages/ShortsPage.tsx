@@ -447,31 +447,32 @@ return;
   }, [handleTouchStart, handleTouchEnd]);
 
   // Scroll to specific video when component mounts or when shorts data changes
+  const initializedRef = useRef(false);
   useEffect(() => {
-    if (targetVideoId && filteredShorts.length > 0 && containerRef.current) {
-      const targetIndex = filteredShorts.findIndex(short => short.id === targetVideoId);
-      if (targetIndex !== -1) {
-        setCurrentVideoIndex(prevIndex => {
-          if (prevIndex !== targetIndex) {
-            const targetElement = containerRef.current?.children[targetIndex] as HTMLElement;
-            if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            return targetIndex;
+    if (targetVideoId && !initializedRef.current && containerRef.current) {
+      const currentFilteredShorts = filteredShorts;
+      if (currentFilteredShorts.length > 0) {
+        const targetIndex = currentFilteredShorts.findIndex(short => short.id === targetVideoId);
+        if (targetIndex !== -1) {
+          setCurrentVideoIndex(targetIndex);
+          const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-          return prevIndex;
-        });
+          initializedRef.current = true;
+        }
       }
     }
-  }, [targetVideoId, filteredShorts]);
+  }, [targetVideoId]);
 
   // Auto-advance to next video when current video ends
   useEffect(() => {
-    if (isAutoAdvanceEnabled && currentVideoIndex < filteredShorts.length - 1) {
+    const currentFilteredShorts = filteredShorts;
+    if (isAutoAdvanceEnabled && currentVideoIndex < currentFilteredShorts.length - 1) {
       // This would be triggered by video end event in ShortDisplayCard
       // Implementation would be in the video player component
     }
-  }, [isAutoAdvanceEnabled, currentVideoIndex, filteredShorts.length]);
+  }, [isAutoAdvanceEnabled, currentVideoIndex]);
 
   // Set up intersection observer to track which video is currently in view
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -496,8 +497,9 @@ return;
               setCurrentVideoIndex((prevIndex) => {
                 if (index !== prevIndex) {
                   // Update URL without triggering scroll
-                  if (filteredShorts[index]) {
-                    const newUrl = `/shorts?v=${filteredShorts[index].id}`;
+                  const currentFilteredShorts = filteredShorts;
+                  if (currentFilteredShorts[index]) {
+                    const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
                     window.history.replaceState(null, '', newUrl);
                   }
                   return index;
