@@ -189,18 +189,58 @@ return;
   }, [filteredShorts]);
 
   const handleNextVideo = useCallback(() => {
-    if (currentVideoIndex < filteredShorts.length - 1) {
-      const nextIndex = currentVideoIndex + 1;
-      handleVideoChange(nextIndex);
-    }
-  }, [currentVideoIndex, filteredShorts.length, handleVideoChange]);
+    setCurrentVideoIndex(prevIndex => {
+      const currentFilteredShorts = filteredShorts;
+      if (prevIndex < currentFilteredShorts.length - 1) {
+        const nextIndex = prevIndex + 1;
+        // Update URL with current video ID
+        if (currentFilteredShorts[nextIndex]) {
+          const newUrl = `/shorts?v=${currentFilteredShorts[nextIndex].id}`;
+          window.history.replaceState(null, '', newUrl);
+        }
+        // Scroll to the video
+        if (containerRef.current) {
+          const targetElement = containerRef.current.children[nextIndex] as HTMLElement;
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest',
+            });
+          }
+        }
+        return nextIndex;
+      }
+      return prevIndex;
+    });
+  }, []);
 
   const handlePreviousVideo = useCallback(() => {
-    if (currentVideoIndex > 0) {
-      const prevIndex = currentVideoIndex - 1;
-      handleVideoChange(prevIndex);
-    }
-  }, [currentVideoIndex, handleVideoChange]);
+    setCurrentVideoIndex(prevIndex => {
+      if (prevIndex > 0) {
+        const currentFilteredShorts = filteredShorts;
+        const prevVideoIndex = prevIndex - 1;
+        // Update URL with current video ID
+        if (currentFilteredShorts[prevVideoIndex]) {
+          const newUrl = `/shorts?v=${currentFilteredShorts[prevVideoIndex].id}`;
+          window.history.replaceState(null, '', newUrl);
+        }
+        // Scroll to the video
+        if (containerRef.current) {
+          const targetElement = containerRef.current.children[prevVideoIndex] as HTMLElement;
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest',
+            });
+          }
+        }
+        return prevVideoIndex;
+      }
+      return prevIndex;
+    });
+  }, []);
 
   const handleSearchToggle = useCallback(() => {
     setShowSearch(prev => !prev);
@@ -409,11 +449,16 @@ return;
     if (targetVideoId && filteredShorts.length > 0 && containerRef.current) {
       const targetIndex = filteredShorts.findIndex(short => short.id === targetVideoId);
       if (targetIndex !== -1) {
-        setCurrentVideoIndex(targetIndex);
-        const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        setCurrentVideoIndex(prevIndex => {
+          if (prevIndex !== targetIndex) {
+            const targetElement = containerRef.current?.children[targetIndex] as HTMLElement;
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return targetIndex;
+          }
+          return prevIndex;
+        });
       }
     }
   }, [targetVideoId, filteredShorts]);
@@ -427,25 +472,36 @@ return;
   }, [isAutoAdvanceEnabled, currentVideoIndex, filteredShorts.length]);
 
   // Set up intersection observer to track which video is currently in view
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  
   useEffect(() => {
-    if (!containerRef.current) {
-return;
-}
+    if (!containerRef.current || !filteredShorts.length) {
+      return;
+    }
 
-    const observer = new IntersectionObserver(
+    // Disconnect existing observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
             const videoElement = entry.target as HTMLElement;
             const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
-            if (index !== -1 && index !== currentVideoIndex) {
-              setCurrentVideoIndex(index);
-
-              // Update URL without triggering scroll
-              if (filteredShorts[index]) {
-                const newUrl = `/shorts?v=${filteredShorts[index].id}`;
-                window.history.replaceState(null, '', newUrl);
-              }
+            if (index !== -1) {
+              setCurrentVideoIndex((prevIndex) => {
+                if (index !== prevIndex) {
+                  // Update URL without triggering scroll
+                  if (filteredShorts[index]) {
+                    const newUrl = `/shorts?v=${filteredShorts[index].id}`;
+                    window.history.replaceState(null, '', newUrl);
+                  }
+                  return index;
+                }
+                return prevIndex;
+              });
             }
           }
         });
@@ -459,11 +515,15 @@ return;
 
     // Observe all video elements
     Array.from(containerRef.current.children).forEach((child) => {
-      observer.observe(child);
+      observerRef.current?.observe(child);
     });
 
-    return () => observer.disconnect();
-  }, [filteredShorts, currentVideoIndex]);
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [filteredShorts.length]); // Only depend on length, not the entire array
 
   if (loading) {
     return <ShortsPageSkeleton />;
