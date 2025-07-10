@@ -148,10 +148,11 @@ return [];
   }, [setFollowedChannelsArray]);
 
   const handleComment = useCallback((shortId: string) => {
-    const short = filteredShorts.find(s => s.id === shortId);
+    const currentFilteredShorts = filteredShorts;
+    const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
-  }, [filteredShorts]);
+  }, []);
 
   const handleCommentSubmit = useCallback(async (_commentText: string) => {
     if (!selectedShortForComment) {
@@ -170,8 +171,9 @@ return;
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID
-    if (filteredShorts[index]) {
-      const newUrl = `/shorts?v=${filteredShorts[index].id}`;
+    const currentFilteredShorts = filteredShorts;
+    if (currentFilteredShorts[index]) {
+      const newUrl = `/shorts?v=${currentFilteredShorts[index].id}`;
       window.history.replaceState(null, '', newUrl);
     }
 
@@ -186,7 +188,7 @@ return;
         });
       }
     }
-  }, [filteredShorts]);
+  }, []);
 
   const handleNextVideo = useCallback(() => {
     setCurrentVideoIndex(prevIndex => {
