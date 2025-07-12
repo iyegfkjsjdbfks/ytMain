@@ -1,5 +1,65 @@
 // Offline Storage Utilities for PWA functionality
 
+import { conditionalLogger } from './conditionalLogger';
+import type { Video } from '../types/core';
+
+// Define interfaces for offline storage
+interface CachedVideo extends Video {
+  cachedAt: number;
+}
+
+interface UserAction {
+  id?: number;
+  type: 'like' | 'dislike' | 'comment' | 'subscribe' | 'unsubscribe';
+  videoId?: string;
+  channelId?: string;
+  data: Record<string, unknown>;
+  endpoint: string;
+  method: string;
+  timestamp: number;
+  synced: boolean;
+}
+
+interface WatchHistoryEntry {
+  id: string;
+  videoId: string;
+  title: string;
+  thumbnail: string;
+  channelName: string;
+  duration: number;
+  watchedAt: number;
+  progress: number;
+}
+
+interface Playlist {
+  id: string;
+  name: string;
+  description?: string;
+  videos: string[];
+  createdAt: number;
+  updatedAt?: number;
+}
+
+interface Subscription {
+  channelId: string;
+  channelName: string;
+  channelAvatar: string;
+  subscribedAt: number;
+}
+
+interface PendingUpload {
+  id?: number;
+  title: string;
+  description: string;
+  file: File;
+  thumbnail?: File;
+  privacy: string;
+  tags: string[];
+  createdAt: number;
+  status: 'pending' | 'uploading' | 'completed' | 'failed';
+  updatedAt?: number;
+}
+
 // IndexedDB wrapper for offline data storage
 class OfflineStorage {
   private dbName = 'youtubex-offline';
@@ -70,7 +130,7 @@ class OfflineStorage {
   }
 
   // Video operations
-  async saveVideo(video: any): Promise<void> {
+  async saveVideo(video: Video): Promise<void> {
     const store = await this.getStore('videos', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.put({ ...video, cachedAt: Date.now() });
@@ -79,7 +139,7 @@ class OfflineStorage {
     });
   }
 
-  async getVideo(id: string): Promise<any | null> {
+  async getVideo(id: string): Promise<CachedVideo | null> {
     const store = await this.getStore('videos');
     return new Promise((resolve, reject) => {
       const request = store.get(id);
@@ -88,7 +148,7 @@ class OfflineStorage {
     });
   }
 
-  async getAllVideos(): Promise<any[]> {
+  async getAllVideos(): Promise<CachedVideo[]> {
     const store = await this.getStore('videos');
     return new Promise((resolve, reject) => {
       const request = store.getAll();
@@ -107,14 +167,7 @@ class OfflineStorage {
   }
 
   // User actions operations (for background sync)
-  async saveUserAction(action: {
-    type: 'like' | 'dislike' | 'comment' | 'subscribe' | 'unsubscribe';
-    videoId?: string;
-    channelId?: string;
-    data: any;
-    endpoint: string;
-    method: string;
-  }): Promise<void> {
+  async saveUserAction(action: Omit<UserAction, 'id' | 'timestamp' | 'synced'>): Promise<void> {
     const store = await this.getStore('userActions', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.add({
@@ -127,7 +180,7 @@ class OfflineStorage {
     });
   }
 
-  async getPendingActions(): Promise<any[]> {
+  async getPendingActions(): Promise<UserAction[]> {
     const store = await this.getStore('userActions');
     return new Promise((resolve, reject) => {
       const index = store.index('synced');
@@ -166,16 +219,7 @@ class OfflineStorage {
   }
 
   // Watch history operations
-  async saveWatchHistory(entry: {
-    id: string;
-    videoId: string;
-    title: string;
-    thumbnail: string;
-    channelName: string;
-    duration: number;
-    watchedAt: number;
-    progress: number;
-  }): Promise<void> {
+  async saveWatchHistory(entry: WatchHistoryEntry): Promise<void> {
     const store = await this.getStore('watchHistory', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.put(entry);
@@ -184,12 +228,12 @@ class OfflineStorage {
     });
   }
 
-  async getWatchHistory(limit: number = 50): Promise<any[]> {
+  async getWatchHistory(limit: number = 50): Promise<WatchHistoryEntry[]> {
     const store = await this.getStore('watchHistory');
     return new Promise((resolve, reject) => {
       const index = store.index('watchedAt');
       const request = index.openCursor(null, 'prev');
-      const results: any[] = [];
+      const results: WatchHistoryEntry[] = [];
       let count = 0;
 
       request.onsuccess = (event) => {
@@ -207,7 +251,7 @@ class OfflineStorage {
   }
 
   // Playlist operations
-  async savePlaylist(playlist: any): Promise<void> {
+  async savePlaylist(playlist: Playlist): Promise<void> {
     const store = await this.getStore('playlists', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.put(playlist);
@@ -216,7 +260,7 @@ class OfflineStorage {
     });
   }
 
-  async getPlaylists(): Promise<any[]> {
+  async getPlaylists(): Promise<Playlist[]> {
     const store = await this.getStore('playlists');
     return new Promise((resolve, reject) => {
       const request = store.getAll();
@@ -226,12 +270,7 @@ class OfflineStorage {
   }
 
   // Subscription operations
-  async saveSubscription(subscription: {
-    channelId: string;
-    channelName: string;
-    channelAvatar: string;
-    subscribedAt: number;
-  }): Promise<void> {
+  async saveSubscription(subscription: Subscription): Promise<void> {
     const store = await this.getStore('subscriptions', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.put(subscription);
@@ -240,7 +279,7 @@ class OfflineStorage {
     });
   }
 
-  async getSubscriptions(): Promise<any[]> {
+  async getSubscriptions(): Promise<Subscription[]> {
     const store = await this.getStore('subscriptions');
     return new Promise((resolve, reject) => {
       const request = store.getAll();
@@ -259,14 +298,7 @@ class OfflineStorage {
   }
 
   // Pending uploads operations
-  async savePendingUpload(upload: {
-    title: string;
-    description: string;
-    file: File;
-    thumbnail?: File;
-    privacy: string;
-    tags: string[];
-  }): Promise<number> {
+  async savePendingUpload(upload: Omit<PendingUpload, 'id' | 'createdAt' | 'status'>): Promise<number> {
     const store = await this.getStore('pendingUploads', 'readwrite');
     return new Promise((resolve, reject) => {
       const request = store.add({
@@ -279,7 +311,7 @@ class OfflineStorage {
     });
   }
 
-  async getPendingUploads(): Promise<any[]> {
+  async getPendingUploads(): Promise<PendingUpload[]> {
     const store = await this.getStore('pendingUploads');
     return new Promise((resolve, reject) => {
       const request = store.getAll();
@@ -369,7 +401,7 @@ class OfflineStorage {
 export const offlineStorage = new OfflineStorage();
 
 // Initialize storage when module loads
-offlineStorage.init().catch(console.error);
+offlineStorage.init().catch((error) => conditionalLogger.error('Failed to initialize offline storage:', error));
 
 // Utility functions
 export const isOnline = (): boolean => navigator.onLine;
@@ -410,11 +442,11 @@ return;
           await offlineStorage.markActionSynced(action.id);
         }
       } catch (error) {
-        console.error('Failed to sync action:', action, error);
+        conditionalLogger.error('Failed to sync action:', action, error);
       }
     }
   } catch (error) {
-    console.error('Failed to sync pending actions:', error);
+    conditionalLogger.error('Failed to sync pending actions:', error);
   }
 };
 

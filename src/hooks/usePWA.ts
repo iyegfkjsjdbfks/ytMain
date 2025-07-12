@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import { PWAUtils, PWAEvents } from '../config/pwa';
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { createComponentError, createNetworkError } from '../types/errors';
 
 interface PWAInstallPrompt extends Event {
   prompt(): Promise<void>;
@@ -121,15 +123,20 @@ return;
       const choiceResult = await deferredPrompt.userChoice;
 
       if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
+        conditionalLogger.debug('User accepted the install prompt', undefined, 'usePWA');
       } else {
-        console.log('User dismissed the install prompt');
+        conditionalLogger.debug('User dismissed the install prompt', undefined, 'usePWA');
       }
 
       setDeferredPrompt(null);
       setShowInstallPrompt(false);
     } catch (error) {
-      console.error('Error during app installation:', error);
+      const componentError = createComponentError(
+        `Error during app installation: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'installApp'
+      );
+      conditionalLogger.error('Error during app installation', componentError, 'usePWA');
     }
   };
 
@@ -170,7 +177,7 @@ return;
 // Utility functions for PWA features
 export const requestNotificationPermission = async (): Promise<boolean> => {
   if (!('Notification' in window)) {
-    console.log('This browser does not support notifications');
+    conditionalLogger.warn('This browser does not support notifications', undefined, 'usePWA');
     return false;
   }
 
@@ -212,7 +219,12 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       await navigator.share(data);
       return true;
     } catch (error) {
-      console.error('Error sharing:', error);
+      const componentError = createComponentError(
+        `Error sharing: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'shareContent'
+      );
+      conditionalLogger.error('Error sharing', componentError, 'usePWA');
       return false;
     }
   }
@@ -224,7 +236,12 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       showNotification('Link copied to clipboard!');
       return true;
     } catch (error) {
-      console.error('Error copying to clipboard:', error);
+      const componentError = createComponentError(
+        `Error copying to clipboard: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'shareContent'
+      );
+      conditionalLogger.error('Error copying to clipboard', componentError, 'usePWA');
       return false;
     }
   }
@@ -247,7 +264,12 @@ export const enableBackgroundSync = (tag: string): void => {
     navigator.serviceWorker.ready.then((registration) => {
       return (registration as any).sync.register(tag);
     }).catch((error) => {
-      console.error('Background sync registration failed:', error);
+      const componentError = createComponentError(
+        `Background sync registration failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'enableBackgroundSync'
+      );
+      conditionalLogger.error('Background sync registration failed', componentError, 'usePWA');
     });
   }
 };
@@ -263,7 +285,12 @@ export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boo
         return true;
       }
     } catch (error) {
-      console.error('Error caching video:', error);
+      const componentError = createComponentError(
+        `Error caching video: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'cacheVideo'
+      );
+      conditionalLogger.error('Error caching video', componentError, 'usePWA');
     }
   }
 
@@ -276,7 +303,12 @@ export const getCachedVideo = async (videoId: string): Promise<Response | null> 
       const cache = await caches.open('youtubex-videos-v1');
       return await cache.match(`video-${videoId}`);
     } catch (error) {
-      console.error('Error retrieving cached video:', error);
+      const componentError = createComponentError(
+        `Error retrieving cached video: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'usePWA',
+        'getCachedVideo'
+      );
+      conditionalLogger.error('Error retrieving cached video', componentError, 'usePWA');
     }
   }
 

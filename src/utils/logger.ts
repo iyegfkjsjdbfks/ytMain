@@ -33,13 +33,13 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(level: LogLevel, message: string, ..._args: any[]): string {
+  private formatMessage(level: LogLevel, message: string, ..._args: unknown[]): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
     return `${prefix} ${message}`;
   }
 
-  debug(message: string, ...args: any[]): void {
+  debug(message: string, ...args: unknown[]): void {
     if (!this.shouldLog('debug')) {
 return;
 }
@@ -50,7 +50,7 @@ return;
     }
   }
 
-  info(message: string, ...args: any[]): void {
+  info(message: string, ...args: unknown[]): void {
     if (!this.shouldLog('info')) {
 return;
 }
@@ -61,7 +61,7 @@ return;
     }
   }
 
-  warn(message: string, ...args: any[]): void {
+  warn(message: string, ...args: unknown[]): void {
     if (!this.shouldLog('warn')) {
 return;
 }
@@ -72,7 +72,7 @@ return;
     }
   }
 
-  error(message: string, error?: Error | unknown, ...args: any[]): void {
+  error(message: string, error?: Error | unknown, ...args: unknown[]): void {
     if (!this.shouldLog('error')) {
 return;
 }
@@ -94,11 +94,11 @@ return;
   }
 
   // Utility methods for common logging patterns
-  apiCall(method: string, url: string, data?: any): void {
+  apiCall(method: string, url: string, data?: unknown): void {
     this.debug(`API ${method} ${url}`, data);
   }
 
-  apiResponse(method: string, url: string, status: number, data?: any): void {
+  apiResponse(method: string, url: string, status: number, data?: unknown): void {
     if (status >= 400) {
       this.error(`API ${method} ${url} failed with status ${status}`, undefined, data);
     } else {
@@ -106,7 +106,7 @@ return;
     }
   }
 
-  userAction(action: string, data?: any): void {
+  userAction(action: string, data?: Record<string, unknown>): void {
     this.info(`User action: ${action}`, data);
   }
 

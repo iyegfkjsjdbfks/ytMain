@@ -1,4 +1,6 @@
 // PWA Analytics Utilities
+import { conditionalLogger } from './conditionalLogger';
+import { createNetworkError } from '../types/errors';
 
 interface PWAAnalyticsEvent {
   action: string;
@@ -23,7 +25,7 @@ class PWAAnalytics {
 
   private trackEvent(event: PWAAnalyticsEvent) {
     if (!this.isEnabled) {
-      console.log('PWA Analytics Event:', event);
+      conditionalLogger.debug('PWA Analytics Event (disabled)', event, 'PWAAnalytics');
       return;
     }
 
@@ -350,12 +352,16 @@ return;
 
     try {
       // In a real implementation, you would send these to your analytics endpoint
-      console.log('Syncing offline PWA events:', this.events);
+      conditionalLogger.debug('Syncing offline PWA events', { eventCount: this.events.length }, 'PWAAnalytics');
 
       // Clear events after successful sync
       this.clearStoredEvents();
     } catch (error) {
-      console.error('Failed to sync PWA analytics events:', error);
+      const networkError = createNetworkError(
+        `Failed to sync PWA analytics events: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        'analytics-endpoint'
+      );
+      conditionalLogger.error('Failed to sync PWA analytics events', networkError, 'PWAAnalytics');
     }
   }
 

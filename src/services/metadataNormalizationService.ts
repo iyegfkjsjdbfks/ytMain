@@ -3,6 +3,7 @@ import { logger } from '../utils/logger';
 import { youtubeService } from './api/youtubeService';
 
 import type { Video as LocalVideo, Channel as LocalChannel } from '../types/core';
+import type { YouTubeVideo, YouTubeChannel, YouTubeThumbnails } from '../types/youtube';
 
 /**
  * Unified Video Metadata Interface
@@ -139,7 +140,7 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube video data to unified format
    */
-  async normalizeYouTubeVideo(youtubeVideo: any, channelData?: any): Promise<UnifiedVideoMetadata> {
+  async normalizeYouTubeVideo(youtubeVideo: YouTubeVideo, channelData?: YouTubeChannel): Promise<UnifiedVideoMetadata> {
     logger.debug('normalizeYouTubeVideo - Full input data structure:', youtubeVideo);
     logger.debug('normalizeYouTubeVideo - Input data:', {
       videoId: youtubeVideo.id,
@@ -241,7 +242,7 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube channel data to unified format
    */
-  normalizeYouTubeChannel(youtubeChannel: any): UnifiedChannelMetadata {
+  normalizeYouTubeChannel(youtubeChannel: YouTubeChannel): UnifiedChannelMetadata {
     const subscriberCount = parseInt(youtubeChannel.statistics?.subscriberCount || '0', 10);
     const videoCount = parseInt(youtubeChannel.statistics?.videoCount || '0', 10);
     const totalViews = parseInt(youtubeChannel.statistics?.viewCount || '0', 10);
@@ -267,15 +268,15 @@ class MetadataNormalizationService {
   /**
    * Batch normalize multiple videos from mixed sources
    */
-  async normalizeVideosBatch(videos: Array<{ data: any; source: 'local' | 'youtube' }>): Promise<UnifiedVideoMetadata[]> {
+  async normalizeVideosBatch(videos: Array<{ data: LocalVideo | YouTubeVideo; source: 'local' | 'youtube' }>): Promise<UnifiedVideoMetadata[]> {
     const normalized: UnifiedVideoMetadata[] = [];
 
     for (const { data, source } of videos) {
       try {
         if (source === 'local') {
-          normalized.push(this.normalizeLocalVideo(data));
+          normalized.push(this.normalizeLocalVideo(data as LocalVideo));
         } else if (source === 'youtube') {
-          normalized.push(await this.normalizeYouTubeVideo(data));
+          normalized.push(await this.normalizeYouTubeVideo(data as YouTubeVideo));
         }
       } catch (error) {
         logger.error(`Failed to normalize ${source} video:`, error);
@@ -433,7 +434,7 @@ return false;
     return totalSeconds <= 60; // YouTube Shorts are 60 seconds or less
   }
 
-  private selectBestThumbnail(thumbnails: any): string {
+  private selectBestThumbnail(thumbnails: YouTubeThumbnails | undefined): string {
     if (!thumbnails) {
 return '';
 }

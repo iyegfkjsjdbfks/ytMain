@@ -4,56 +4,74 @@
  */
 
 import { API_CONFIG } from '../config';
-
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { createApiError, createNetworkError, ERROR_CODES } from '../types/errors';
 import type { Video } from '../types';
+import type { ApiError, NetworkError } from '../types/errors';
+
+interface YouTubeVideoObject {
+  thumbnailurl?: string;
+  duration?: string;
+  name?: string;
+  description?: string;
+  uploaddate?: string;
+  channelid?: string;
+}
+
+interface YouTubeMetaTags {
+  'og:title'?: string;
+  'og:description'?: string;
+  'og:image'?: string;
+  'og:url'?: string;
+  'og:video:duration'?: string;
+  'og:video:tag'?: string;
+  viewCount?: string;
+  'video:view_count'?: string;
+}
+
+interface YouTubeThumbnail {
+  src: string;
+  width: string;
+  height: string;
+}
+
+interface YouTubeImage {
+  src: string;
+}
 
 interface YouTubeSearchItem {
   title: string;
   link: string;
   snippet: string;
   pagemap?: {
-    videoobject?: Array<{
-      thumbnailurl?: string;
-      duration?: string;
-      name?: string;
-      description?: string;
-      uploaddate?: string;
-      channelid?: string;
-    }>;
-    metatags?: Array<{
-      'og:title'?: string;
-      'og:description'?: string;
-      'og:image'?: string;
-      'og:url'?: string;
-      'og:video:duration'?: string;
-      'og:video:tag'?: string;
-    }>;
-    cse_thumbnail?: Array<{
-      src: string;
-      width: string;
-      height: string;
-    }>;
-    cse_image?: Array<{
-      src: string;
-    }>;
+    videoobject?: YouTubeVideoObject[];
+    metatags?: YouTubeMetaTags[];
+    cse_thumbnail?: YouTubeThumbnail[];
+    cse_image?: YouTubeImage[];
   };
+}
+
+interface GoogleCustomSearchError {
+  domain: string;
+  reason: string;
+  message: string;
+}
+
+interface GoogleCustomSearchApiError {
+  code: number;
+  message: string;
+  errors: GoogleCustomSearchError[];
+}
+
+interface GoogleCustomSearchInfo {
+  totalResults: string;
+  searchTime: number;
 }
 
 interface GoogleCustomSearchResponse {
   items?: YouTubeSearchItem[];
-  searchInformation?: {
-    totalResults: string;
-    searchTime: number;
-  };
-  error?: {
-    code: number;
-    message: string;
-    errors: Array<{
-      domain: string;
-      reason: string;
-      message: string;
-    }>;
-  };
+  searchInformation?: GoogleCustomSearchInfo;
+  error?: GoogleCustomSearchApiError;
 }
 
 class YouTubeSearchService {
@@ -112,7 +130,7 @@ class YouTubeSearchService {
 
     // Try to get channel avatar from pagemap (this is the most reliable source)
     if (item.pagemap?.cse_image) {
-      const channelImage = item.pagemap.cse_image.find((img: any) =>
+      const channelImage = item.pagemap.cse_image.find((img: YouTubeImage) =>
         img.src?.includes('yt3.ggpht.com') ||
         img.src?.includes('youtube.com/channel') ||
         img.src?.includes('googleusercontent.com') ||
@@ -165,7 +183,7 @@ class YouTubeSearchService {
 
     // If we still don't have views, try to extract from meta tags
     if (views === '0' && metaTags) {
-      const metaViewCount = (metaTags as any).viewCount || (metaTags as any)['video:view_count'];
+      const metaViewCount = metaTags.viewCount || metaTags['video:view_count'];
       if (metaViewCount) {
         viewCount = parseInt(metaViewCount, 10);
         views = viewCount.toString();
@@ -287,26 +305,26 @@ class YouTubeSearchService {
       }
     }
 
-    console.log('🔍 Enhanced metadata extracted:', {
-      title: `${title.substring(0, 50)  }...`,
+    conditionalLogger.debug('Enhanced metadata extracted', {
+      title: `${title.substring(0, 50)}...`,
       channelName,
       views,
       duration,
       category,
       tagsCount: tags.length,
-      thumbnailUrl: `${thumbnailUrl.substring(0, 50)  }...`,
-    });
+      thumbnailUrl: `${thumbnailUrl.substring(0, 50)}...`,
+    }, 'YouTubeSearchService');
 
-    console.log('🎬 Enhanced Metadata Extraction for:', {
+    conditionalLogger.debug('Enhanced Metadata Extraction completed', {
       videoId,
-      title,
+      title: title.substring(0, 50),
       channelName,
-      channelAvatarUrl: `${channelAvatarUrl.substring(0, 50)  }...`,
+      channelAvatarUrl: `${channelAvatarUrl.substring(0, 50)}...`,
       views,
       viewCount,
       duration,
       category,
-    });
+    }, 'YouTubeSearchService');
 
     return {
       id: videoId,
@@ -414,7 +432,7 @@ class YouTubeSearchService {
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
-      console.warn('Google Custom Search API credentials not configured');
+      conditionalLogger.warn('Google Custom Search API credentials not configured', undefined, 'YouTubeSearchService');
       return [];
     }
 
@@ -422,13 +440,13 @@ class YouTubeSearchService {
       // Generate search query based on current video
       const query = this.generateSearchQuery(currentVideo);
 
-      console.log('🔍 Generated search query:', query);
-      console.log('📊 Based on video context:', {
+      conditionalLogger.debug('Generated search query', { query }, 'YouTubeSearchService');
+      conditionalLogger.debug('Video context for search', {
         title: currentVideo.title,
         category: currentVideo.category,
         tags: currentVideo.tags,
         channelName: currentVideo.channelName,
-      });
+      }, 'YouTubeSearchService');
 
       // Build search URL
       const searchUrl = new URL(this.baseUrl);
@@ -440,29 +458,42 @@ class YouTubeSearchService {
       // searchUrl.searchParams.set('safe', 'moderate'); // Invalid parameter
       // searchUrl.searchParams.set('searchType', 'web'); // Invalid parameter
 
-      console.log('🌐 Searching YouTube with URL:', searchUrl.toString());
+      conditionalLogger.debug('Searching YouTube with Custom Search API', { url: searchUrl.toString() }, 'YouTubeSearchService');
 
       const response = await fetch(searchUrl.toString());
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Google Custom Search API error:', response.status, errorText);
+        const apiError = createApiError(
+          `Google Custom Search API request failed: ${errorText}`,
+          searchUrl.toString(),
+          'GET',
+          response.status
+        );
+        conditionalLogger.apiError(searchUrl.toString(), apiError);
         return [];
       }
 
       const data: GoogleCustomSearchResponse = await response.json();
 
       if (data.error) {
-        console.error('❌ Google Custom Search API error:', data.error);
+        const apiError = createApiError(
+          `Google Custom Search API error: ${data.error.message}`,
+          searchUrl.toString(),
+          'GET',
+          data.error.code,
+          { errors: data.error.errors }
+        );
+        conditionalLogger.apiError(searchUrl.toString(), apiError);
         return [];
       }
 
       if (!data.items || data.items.length === 0) {
-        console.warn('⚠️ No search results found for query:', query);
+        conditionalLogger.warn('No search results found for query', { query }, 'YouTubeSearchService');
         return [];
       }
 
-      console.log(`✅ Found ${data.items.length} raw search results`);
+      conditionalLogger.debug('Found raw search results', { count: data.items.length }, 'YouTubeSearchService');
 
       // Convert search results to Video objects
       const videos = data.items
@@ -470,7 +501,7 @@ class YouTubeSearchService {
           // Only include YouTube video URLs
           const isYouTubeVideo = item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/');
           if (!isYouTubeVideo) {
-            console.log('🚫 Filtering out non-YouTube URL:', item.link);
+            conditionalLogger.debug('Filtering out non-YouTube URL', { url: item.link }, 'YouTubeSearchService');
           }
           return isYouTubeVideo;
         })
@@ -480,20 +511,26 @@ class YouTubeSearchService {
           const isDifferent = video.id !== currentVideo.id &&
                              !video.videoUrl.includes(currentVideo.id);
           if (!isDifferent) {
-            console.log('🚫 Filtering out current video:', video.title);
+            conditionalLogger.debug('Filtering out current video', { title: video.title }, 'YouTubeSearchService');
           }
           return isDifferent;
         });
 
-      console.log(`🎯 Final recommendation count: ${videos.length}`);
+      conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
-        console.log('📺 Sample recommendations:', videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl })));
+        conditionalLogger.debug('Sample recommendations', {
+          samples: videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl }))
+        }, 'YouTubeSearchService');
       }
 
       return videos;
 
     } catch (error) {
-      console.error('Error searching for related videos:', error);
+      const networkError = createNetworkError(
+        `Failed to search for related videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        this.baseUrl
+      );
+      conditionalLogger.error('Error searching for related videos', networkError, 'YouTubeSearchService');
       return [];
     }
   }
@@ -506,7 +543,7 @@ class YouTubeSearchService {
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
-      console.warn('Google Custom Search API credentials not configured');
+      conditionalLogger.warn('Google Custom Search API credentials not configured', undefined, 'YouTubeSearchService');
       return [];
     }
 
@@ -540,7 +577,11 @@ class YouTubeSearchService {
         .map((item, index) => this.convertToVideo(item, index));
 
     } catch (error) {
-      console.error('Error searching videos:', error);
+      const networkError = createNetworkError(
+        `Failed to search videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        this.baseUrl
+      );
+      conditionalLogger.error('Error searching videos', networkError, 'YouTubeSearchService');
       return [];
     }
   }
