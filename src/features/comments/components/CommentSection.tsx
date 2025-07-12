@@ -1,6 +1,6 @@
 import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
-import { logger } from '../../../utils/logger';
+
 
 import {
   HandThumbUpIcon,
@@ -17,6 +17,7 @@ import {
 } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 
+import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 
 import type { Comment } from '../../../types/core';

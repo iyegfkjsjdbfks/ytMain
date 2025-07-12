@@ -11,7 +11,6 @@ import {
   SignalIcon,
   ArrowTrendingUpIcon as TrendingUpIcon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 
 import type { LiveStreamStats } from '../../../types/livestream';
 
@@ -216,7 +215,7 @@ const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') =>
       setAnalytics(mockAnalytics);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch analytics';
-      logger.error('Failed to fetch analytics:', err);
+      console.error('Failed to fetch analytics:', err);
       setError(errorMessage);
       setAnalytics(null);
     } finally {
@@ -463,7 +462,7 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
         };
       });
     } catch (error) {
-      logger.error('Error generating chart data:', error);
+      console.error('Error generating chart data:', error);
       return [];
     }
   }, [analytics, selectedMetric]);

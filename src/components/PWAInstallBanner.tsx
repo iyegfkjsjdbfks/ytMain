@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import { X, Download, Smartphone, Monitor } from 'lucide-react';
+
 import { usePWA } from '../hooks/usePWA';
 
 interface PWAInstallBannerProps {
@@ -63,7 +65,7 @@ const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({ onDismiss, classNam
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
               <div className="w-4 h-4 bg-white rounded-sm flex items-center justify-center">
-                <div className="w-0 h-0 border-l-[3px] border-l-red-600 border-t-[2px] border-t-transparent border-b-[2px] border-b-transparent"></div>
+                <div className="w-0 h-0 border-l-[3px] border-l-red-600 border-t-[2px] border-t-transparent border-b-[2px] border-b-transparent" />
               </div>
             </div>
             <div>

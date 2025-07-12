@@ -572,10 +572,10 @@ return;
           if (action === 'like') {
             // Toggle like state
             newLiked = !item.isLikedByCurrentUser;
-            
+
             // Update like count based on new like state
             newLikes = newLiked ? item.likes + 1 : item.likes - 1;
-            
+
             // If liking and was previously disliked, remove dislike
             if (newLiked && item.isDislikedByCurrentUser) {
               newDisliked = false;
@@ -583,7 +583,7 @@ return;
           } else if (action === 'dislike') {
             // Toggle dislike state
             newDisliked = !item.isDislikedByCurrentUser;
-            
+
             // If disliking and was previously liked, remove like and decrease count
             if (newDisliked && item.isLikedByCurrentUser) {
               newLiked = false;

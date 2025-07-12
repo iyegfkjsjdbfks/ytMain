@@ -120,7 +120,7 @@ class OfflineStorage {
       const request = store.add({
         ...action,
         timestamp: Date.now(),
-        synced: false
+        synced: false,
       });
       request.onsuccess = () => resolve();
       request.onerror = () => reject(request.error);
@@ -272,7 +272,7 @@ class OfflineStorage {
       const request = store.add({
         ...upload,
         createdAt: Date.now(),
-        status: 'pending'
+        status: 'pending',
       });
       request.onsuccess = () => resolve(request.result as number);
       request.onerror = () => reject(request.error);
@@ -320,11 +320,11 @@ class OfflineStorage {
   // Cleanup operations
   async cleanupOldData(maxAge: number = 7 * 24 * 60 * 60 * 1000): Promise<void> {
     const cutoffTime = Date.now() - maxAge;
-    
+
     // Clean old cached videos
     const videosStore = await this.getStore('videos', 'readwrite');
     const videosRequest = videosStore.openCursor();
-    
+
     videosRequest.onsuccess = (event) => {
       const cursor = (event.target as IDBRequest).result;
       if (cursor) {
@@ -339,7 +339,7 @@ class OfflineStorage {
     // Clean old watch history
     const historyStore = await this.getStore('watchHistory', 'readwrite');
     const historyRequest = historyStore.openCursor();
-    
+
     historyRequest.onsuccess = (event) => {
       const cursor = (event.target as IDBRequest).result;
       if (cursor) {
@@ -358,7 +358,7 @@ class OfflineStorage {
       const estimate = await navigator.storage.estimate();
       return {
         used: estimate.usage || 0,
-        quota: estimate.quota || 0
+        quota: estimate.quota || 0,
       };
     }
     return { used: 0, quota: 0 };
@@ -389,11 +389,13 @@ export const waitForOnline = (): Promise<void> => {
 };
 
 export const syncPendingActions = async (): Promise<void> => {
-  if (!navigator.onLine) return;
+  if (!navigator.onLine) {
+return;
+}
 
   try {
     const pendingActions = await offlineStorage.getPendingActions();
-    
+
     for (const action of pendingActions) {
       try {
         const response = await fetch(action.endpoint, {
@@ -401,7 +403,7 @@ export const syncPendingActions = async (): Promise<void> => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(action.data)
+          body: JSON.stringify(action.data),
         });
 
         if (response.ok) {

@@ -358,10 +358,10 @@ return;
 
     // Prevent default scroll behavior
     event.preventDefault();
-    
+
     // Determine scroll direction
-    const deltaY = event.deltaY;
-    
+    const { deltaY } = event;
+
     // Add debouncing to prevent rapid scrolling
     if (Math.abs(deltaY) > 50) {
       setIsScrolling(true);
@@ -372,7 +372,7 @@ return;
         // Scrolling up - previous video
         handlePreviousVideo();
       }
-      
+
       // Reset scrolling flag after a delay
       setTimeout(() => setIsScrolling(false), 500);
     }
@@ -383,7 +383,7 @@ return;
     if (commentModalOpen || showSearch || showFilters) {
       return;
     }
-    if (event.touches && event.touches[0]) {
+    if (event.touches?.[0]) {
       setTouchStartY(event.touches[0].clientY);
     }
   }, [commentModalOpen, showSearch, showFilters]);
@@ -393,7 +393,7 @@ return;
       return;
     }
 
-    if (event.changedTouches && event.changedTouches[0]) {
+    if (event.changedTouches?.[0]) {
       const touchEndY = event.changedTouches[0].clientY;
       const deltaY = touchStartY - touchEndY;
       const minSwipeDistance = 50;
@@ -407,12 +407,12 @@ return;
           // Swiped down - previous video
           handlePreviousVideo();
         }
-        
+
         // Reset scrolling flag after a delay
         setTimeout(() => setIsScrolling(false), 500);
       }
     }
-    
+
     setTouchStartY(null);
   }, [commentModalOpen, showSearch, showFilters, touchStartY, isScrolling, handleNextVideo, handlePreviousVideo]);
 
@@ -476,7 +476,7 @@ return;
 
   // Set up intersection observer to track which video is currently in view
   const observerRef = useRef<IntersectionObserver | null>(null);
-  
+
   useEffect(() => {
     if (!containerRef.current || !filteredShorts.length) {
       return;

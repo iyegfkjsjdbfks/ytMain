@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { logger } from '../../../utils/logger';
+
 
 import {
   VideoCameraIcon,
@@ -20,6 +20,7 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { useLiveStream } from '../../../hooks/useLiveStream';
+import { logger } from '../../../utils/logger';
 
 import {
   AdvancedLiveChat,

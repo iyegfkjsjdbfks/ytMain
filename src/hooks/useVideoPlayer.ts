@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+
 import { logger } from '../utils/logger';
 
 export interface VideoPlayerOptions {

@@ -1,6 +1,8 @@
-import React from 'react';
+import type React from 'react';
+
+import { WifiSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
+
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
-import { WifiIcon, WifiSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
 
 const PWAStatus: React.FC = () => {
   const {
@@ -11,7 +13,7 @@ const PWAStatus: React.FC = () => {
     showInstallPrompt,
     dismissInstallPrompt,
     updateAvailable,
-    updateApp
+    updateApp,
   } = usePWA();
 
   const handleInstall = async () => {
@@ -67,7 +69,7 @@ const PWAStatus: React.FC = () => {
                   <p className="text-sm opacity-90">Get the full app experience</p>
                 </div>
               </div>
-              
+
               <div className="text-sm opacity-90 mb-3">
                 <ul className="space-y-1">
                   <li>• Faster loading and better performance</li>
@@ -76,7 +78,7 @@ const PWAStatus: React.FC = () => {
                   <li>• Home screen access</li>
                 </ul>
               </div>
-              
+
               <div className="flex gap-2">
                 <button
                   onClick={handleInstall}
@@ -85,7 +87,7 @@ const PWAStatus: React.FC = () => {
                   <ArrowDownTrayIcon className="w-4 h-4" />
                   Install App
                 </button>
-                
+
                 <button
                   onClick={handleEnableNotifications}
                   className="bg-red-700 text-white px-3 py-2 rounded hover:bg-red-800 transition-colors flex items-center gap-2"
@@ -95,7 +97,7 @@ const PWAStatus: React.FC = () => {
                 </button>
               </div>
             </div>
-            
+
             <button
               onClick={dismissInstallPrompt}
               className="text-white hover:text-red-200 transition-colors p-1"
@@ -110,14 +112,14 @@ const PWAStatus: React.FC = () => {
       <div className="fixed bottom-4 right-4 z-40">
         {!isOnline && (
           <div className="bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
             <span>Offline</span>
           </div>
         )}
-        
+
         {isOnline && (
           <div className="bg-green-600 text-white px-3 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm opacity-0 hover:opacity-100 transition-opacity">
-            <div className="w-2 h-2 bg-green-300 rounded-full"></div>
+            <div className="w-2 h-2 bg-green-300 rounded-full" />
             <span>Online</span>
           </div>
         )}
@@ -127,7 +129,7 @@ const PWAStatus: React.FC = () => {
       {isInstalled && (
         <div className="fixed top-4 right-4 z-40">
           <div className="bg-green-600 text-white px-3 py-2 rounded-lg shadow-lg text-sm flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-300 rounded-full"></div>
+            <div className="w-2 h-2 bg-green-300 rounded-full" />
             <span>App Mode</span>
           </div>
         </div>

@@ -8,9 +8,9 @@ import {
   PencilIcon,
 } from '@heroicons/react/24/outline';
 
+import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 
-import { liveStreamService } from '../../../services/livestreamAPI';
 
 import type { LiveStream } from '../../../types/livestream';
 

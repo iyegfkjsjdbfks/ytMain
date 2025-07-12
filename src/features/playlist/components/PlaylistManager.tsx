@@ -16,8 +16,8 @@ import {
   ListBulletIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 
+import { logger } from '../../../utils/logger';
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 
 import type { Playlist } from '../../../types/core';

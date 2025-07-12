@@ -10,13 +10,13 @@ import {
   FlagIcon,
   ClipboardDocumentIcon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 import {
   HandThumbUpIcon as HandThumbUpSolidIcon,
   HandThumbDownIcon as HandThumbDownSolidIcon,
   BookmarkIcon as BookmarkSolidIcon,
 } from '@heroicons/react/24/solid';
 
+import { logger } from '../../../utils/logger';
 import { useVideoInteractions } from '../hooks/useVideoInteractions';
 
 interface VideoInteractionsProps {

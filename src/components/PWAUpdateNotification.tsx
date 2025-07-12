@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import { RefreshCw, X, Download } from 'lucide-react';
+
 import { usePWA } from '../hooks/usePWA';
 
 interface PWAUpdateNotificationProps {

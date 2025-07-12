@@ -344,12 +344,14 @@ class PWAAnalytics {
   }
 
   async syncOfflineEvents(): Promise<void> {
-    if (this.events.length === 0) return;
+    if (this.events.length === 0) {
+return;
+}
 
     try {
       // In a real implementation, you would send these to your analytics endpoint
       console.log('Syncing offline PWA events:', this.events);
-      
+
       // Clear events after successful sync
       this.clearStoredEvents();
     } catch (error) {

@@ -5,21 +5,21 @@ export const PWA_CONFIG = {
   APP_NAME: 'YouTubeX',
   APP_SHORT_NAME: 'YouTubeX',
   APP_DESCRIPTION: 'Enhanced YouTube experience with advanced features',
-  
+
   // URLs and Paths
   START_URL: '/',
   SCOPE: '/',
   MANIFEST_PATH: '/manifest.json',
   SERVICE_WORKER_PATH: '/sw.js',
-  
+
   // Display Settings
   DISPLAY: 'standalone' as const,
   ORIENTATION: 'portrait-primary' as const,
-  
+
   // Theme Colors
   THEME_COLOR: '#dc2626',
   BACKGROUND_COLOR: '#ffffff',
-  
+
   // Cache Settings
   CACHE_NAMES: {
     STATIC: 'youtubex-static-v1',
@@ -27,7 +27,7 @@ export const PWA_CONFIG = {
     IMAGES: 'youtubex-images-v1',
     API: 'youtubex-api-v1',
   },
-  
+
   // Cache Durations (in milliseconds)
   CACHE_DURATIONS: {
     STATIC: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -35,24 +35,24 @@ export const PWA_CONFIG = {
     IMAGES: 14 * 24 * 60 * 60 * 1000, // 14 days
     API: 5 * 60 * 1000, // 5 minutes
   },
-  
+
   // Installation Settings
   INSTALL_PROMPT: {
     SHOW_AFTER_VISITS: 3,
     DISMISS_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 days
     STORAGE_KEY: 'pwa-install-dismissed',
   },
-  
+
   // Update Settings
   UPDATE_CHECK_INTERVAL: 60 * 60 * 1000, // 1 hour
-  
+
   // Notification Settings
   NOTIFICATION_SETTINGS: {
     BADGE: '/icons/badge-72x72.svg',
     DEFAULT_ICON: '/icons/icon-192x192.svg',
     VIBRATE_PATTERN: [200, 100, 200],
   },
-  
+
   // Offline Storage Settings
   OFFLINE_STORAGE: {
     DB_NAME: 'YouTubeXOfflineDB',
@@ -62,7 +62,7 @@ export const PWA_CONFIG = {
     MAX_PLAYLISTS: 20,
     CLEANUP_THRESHOLD: 0.8, // Clean up when 80% full
   },
-  
+
   // Background Sync Settings
   BACKGROUND_SYNC: {
     TAGS: {
@@ -73,7 +73,7 @@ export const PWA_CONFIG = {
     RETRY_DELAY: 5 * 60 * 1000, // 5 minutes
     MAX_RETRIES: 3,
   },
-  
+
   // Feature Flags
   FEATURES: {
     OFFLINE_VIDEO_CACHING: true,
@@ -91,65 +91,67 @@ export const PWAUtils = {
     return window.matchMedia('(display-mode: standalone)').matches ||
            (window.navigator as any).standalone === true;
   },
-  
+
   // Check if PWA installation is supported
   isInstallSupported(): boolean {
     return 'serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window;
   },
-  
+
   // Check if device is mobile
   isMobile(): boolean {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
+      navigator.userAgent,
     );
   },
-  
+
   // Check if device supports notifications
   supportsNotifications(): boolean {
     return 'Notification' in window && 'serviceWorker' in navigator;
   },
-  
+
   // Check if device supports background sync
   supportsBackgroundSync(): boolean {
     return 'serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype;
   },
-  
+
   // Get installation prompt storage key
   getInstallPromptKey(): string {
     return PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY;
   },
-  
+
   // Check if install prompt was dismissed recently
   isInstallPromptDismissed(): boolean {
     const dismissed = localStorage.getItem(PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY);
-    if (!dismissed) return false;
-    
+    if (!dismissed) {
+return false;
+}
+
     const dismissedTime = parseInt(dismissed, 10);
     const now = Date.now();
     return (now - dismissedTime) < PWA_CONFIG.INSTALL_PROMPT.DISMISS_DURATION;
   },
-  
+
   // Mark install prompt as dismissed
   dismissInstallPrompt(): void {
     localStorage.setItem(
       PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY,
-      Date.now().toString()
+      Date.now().toString(),
     );
   },
-  
+
   // Get app visit count
   getVisitCount(): number {
     const count = localStorage.getItem('pwa-visit-count');
     return count ? parseInt(count, 10) : 0;
   },
-  
+
   // Increment app visit count
   incrementVisitCount(): number {
     const count = this.getVisitCount() + 1;
     localStorage.setItem('pwa-visit-count', count.toString());
     return count;
   },
-  
+
   // Check if should show install prompt based on visit count
   shouldShowInstallPrompt(): boolean {
     if (this.isInstalled() || this.isInstallPromptDismissed()) {
@@ -167,7 +169,7 @@ export const PWAEvents = {
     // Store the event for later use
     (window as any).deferredPrompt = event;
   },
-  
+
   // Handle app installed event
   handleAppInstalled(): void {
     console.log('PWA was installed');
@@ -181,7 +183,7 @@ export const PWAEvents = {
       });
     }
   },
-  
+
   // Handle service worker update
   handleServiceWorkerUpdate(registration: ServiceWorkerRegistration): void {
     console.log('Service worker updated');

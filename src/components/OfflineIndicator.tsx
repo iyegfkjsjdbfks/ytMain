@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
+
 import { usePWA } from '../hooks/usePWA';
 import { offlineStorage } from '../utils/offlineStorage';
 
@@ -14,7 +16,7 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
     videos: 0,
     watchHistory: 0,
     pendingActions: 0,
-    pendingUploads: 0
+    pendingUploads: 0,
   });
   const [storageUsage, setStorageUsage] = useState({ used: 0, quota: 0 });
 
@@ -31,14 +33,14 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
         offlineStorage.getWatchHistory(100),
         offlineStorage.getPendingActions(),
         offlineStorage.getPendingUploads(),
-        offlineStorage.getStorageUsage()
+        offlineStorage.getStorageUsage(),
       ]);
 
       setOfflineData({
         videos: videos.length,
         watchHistory: watchHistory.length,
         pendingActions: pendingActions.length,
-        pendingUploads: pendingUploads.length
+        pendingUploads: pendingUploads.length,
       });
 
       setStorageUsage(storage);
@@ -48,15 +50,19 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
   };
 
   const formatBytes = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) {
+return '0 Bytes';
+}
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`;
   };
 
   const getStoragePercentage = (): number => {
-    if (storageUsage.quota === 0) return 0;
+    if (storageUsage.quota === 0) {
+return 0;
+}
     return (storageUsage.used / storageUsage.quota) * 100;
   };
 
@@ -172,7 +178,7 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
                     <div
                       className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
                       style={{ width: `${Math.min(getStoragePercentage(), 100)}%` }}
-                    ></div>
+                     />
                   </div>
                 </div>
               </div>

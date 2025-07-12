@@ -40,8 +40,10 @@ class Logger {
   }
 
   debug(message: string, ...args: any[]): void {
-    if (!this.shouldLog('debug')) return;
-    
+    if (!this.shouldLog('debug')) {
+return;
+}
+
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
       console.debug(this.formatMessage('debug', message), ...args);
@@ -49,8 +51,10 @@ class Logger {
   }
 
   info(message: string, ...args: any[]): void {
-    if (!this.shouldLog('info')) return;
-    
+    if (!this.shouldLog('info')) {
+return;
+}
+
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
       console.info(this.formatMessage('info', message), ...args);
@@ -58,8 +62,10 @@ class Logger {
   }
 
   warn(message: string, ...args: any[]): void {
-    if (!this.shouldLog('warn')) return;
-    
+    if (!this.shouldLog('warn')) {
+return;
+}
+
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
       console.warn(this.formatMessage('warn', message), ...args);
@@ -67,13 +73,15 @@ class Logger {
   }
 
   error(message: string, error?: Error | unknown, ...args: any[]): void {
-    if (!this.shouldLog('error')) return;
-    
+    if (!this.shouldLog('error')) {
+return;
+}
+
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
       console.error(this.formatMessage('error', message), error, ...args);
     }
-    
+
     // In production, you might want to send errors to a remote service
     if (this.config.enableRemote && error instanceof Error) {
       this.sendToRemoteService(message, error);

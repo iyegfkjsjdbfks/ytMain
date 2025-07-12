@@ -238,8 +238,8 @@ return 0;
                     }
                   }}
                   className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center space-x-1 ${
-                    comment.isLikedByCurrentUser 
-                      ? 'text-sky-600 dark:text-sky-400' 
+                    comment.isLikedByCurrentUser
+                      ? 'text-sky-600 dark:text-sky-400'
                       : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
                   }`}
                   title="Like comment"
@@ -265,8 +265,8 @@ return 0;
                     }
                   }}
                   className={`p-1 rounded-full transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center ${
-                    comment.isDislikedByCurrentUser 
-                      ? 'text-red-500 dark:text-red-400' 
+                    comment.isDislikedByCurrentUser
+                      ? 'text-red-500 dark:text-red-400'
                       : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
                   }`}
                   title="Dislike comment"

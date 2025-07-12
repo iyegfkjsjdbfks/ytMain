@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
-import { offlineStorage } from '../utils/offlineStorage';
-import { PWA_CONFIG, PWAUtils, PWAEvents } from '../config/pwa';
+import { useState, useEffect } from 'react';
+
+import { PWAUtils, PWAEvents } from '../config/pwa';
 
 interface PWAInstallPrompt extends Event {
   prompt(): Promise<void>;
@@ -41,7 +41,7 @@ export const usePWA = (): UsePWAReturn => {
       const installPrompt = e as PWAInstallPrompt;
       setDeferredPrompt(installPrompt);
       setIsInstallable(true);
-      
+
       // Show install prompt after a delay if not dismissed
       setTimeout(() => {
         if (!isInstalled) {
@@ -57,12 +57,12 @@ export const usePWA = (): UsePWAReturn => {
       setIsInstallable(false);
       setShowInstallPrompt(false);
       setDeferredPrompt(null);
-      
+
       // Show success notification
       if ('Notification' in window && Notification.permission === 'granted') {
         new Notification('YouTubeX Installed!', {
           body: 'You can now access YouTubeX from your home screen.',
-          icon: '/icons/icon-192x192.svg'
+          icon: '/icons/icon-192x192.svg',
         });
       }
     };
@@ -99,7 +99,7 @@ export const usePWA = (): UsePWAReturn => {
     window.addEventListener('appinstalled', handleAppInstalled);
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-    
+
     handleServiceWorkerUpdate();
 
     // Cleanup
@@ -112,18 +112,20 @@ export const usePWA = (): UsePWAReturn => {
   }, [isInstalled]);
 
   const installApp = async (): Promise<void> => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+return;
+}
 
     try {
       await deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
-      
+
       if (choiceResult.outcome === 'accepted') {
         console.log('User accepted the install prompt');
       } else {
         console.log('User dismissed the install prompt');
       }
-      
+
       setDeferredPrompt(null);
       setShowInstallPrompt(false);
     } catch (error) {
@@ -133,7 +135,7 @@ export const usePWA = (): UsePWAReturn => {
 
   const dismissInstallPrompt = (): void => {
     setShowInstallPrompt(false);
-    
+
     // Don't show again for this session
     sessionStorage.setItem('pwa-install-dismissed', 'true');
   };
@@ -161,7 +163,7 @@ export const usePWA = (): UsePWAReturn => {
     showInstallPrompt,
     dismissInstallPrompt,
     updateAvailable,
-    updateApp
+    updateApp,
   };
 };
 
@@ -190,9 +192,9 @@ export const showNotification = (title: string, options?: NotificationOptions): 
       icon: '/icons/icon-192x192.svg',
       badge: '/icons/badge-72x72.svg',
       vibrate: [200, 100, 200],
-      ...options
+      ...options,
     };
-    
+
     new Notification(title, defaultOptions);
   }
 };
@@ -214,7 +216,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       return false;
     }
   }
-  
+
   // Fallback to clipboard
   if ('clipboard' in navigator && data.url) {
     try {
@@ -226,17 +228,17 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       return false;
     }
   }
-  
+
   return false;
 };
 
 export const getNetworkStatus = (): { online: boolean; effectiveType?: string; downlink?: number } => {
   const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-  
+
   return {
     online: navigator.onLine,
     effectiveType: connection?.effectiveType,
-    downlink: connection?.downlink
+    downlink: connection?.downlink,
   };
 };
 
@@ -255,7 +257,7 @@ export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boo
     try {
       const cache = await caches.open('youtubex-videos-v1');
       const response = await fetch(videoUrl);
-      
+
       if (response.ok) {
         await cache.put(`video-${videoId}`, response);
         return true;
@@ -264,7 +266,7 @@ export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boo
       console.error('Error caching video:', error);
     }
   }
-  
+
   return false;
 };
 
@@ -277,6 +279,6 @@ export const getCachedVideo = async (videoId: string): Promise<Response | null> 
       console.error('Error retrieving cached video:', error);
     }
   }
-  
+
   return null;
 };

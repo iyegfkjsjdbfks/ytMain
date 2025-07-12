@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { logger } from '../../../utils/logger';
+
 
 import {
   PaperAirplaneIcon,
@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { useLiveChat } from '../../../hooks/useLiveStream';
+import { logger } from '../../../utils/logger';
 
 import type {
   ChatMessage,

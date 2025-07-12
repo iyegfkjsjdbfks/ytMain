@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import { logger } from '../../utils/logger';
+import { useEffect, useRef, useState, type FC, type ChangeEvent } from 'react';
 
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
+import { logger } from '../../utils/logger';
+
 
 interface YouTubePlayerExampleProps {
   videoId: string;

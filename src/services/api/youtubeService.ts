@@ -1,9 +1,9 @@
 import { CACHE_CONFIG } from '../../lib/constants';
+import { logger } from '../../utils/logger';
 
 import { ApiError } from './base';
 
 import type { Video, Channel } from '../../types/core';
-import { logger } from '../../utils/logger';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 

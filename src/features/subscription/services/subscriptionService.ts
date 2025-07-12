@@ -1,8 +1,8 @@
 import { api } from '../../../services/api/base';
+import { logger } from '../../../utils/logger';
 
 import type { ApiResponse } from '../../../types/core';
 import type { Video } from '../../../types/video';
-import { logger } from '../../../utils/logger';
 
 export interface Subscription {
   id: string;

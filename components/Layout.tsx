@@ -5,9 +5,9 @@ import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 
 import Header from './Header';
+import MinimizedSidebar from './MinimizedSidebar';
 import Miniplayer from './Miniplayer';
 import Sidebar from './Sidebar';
-import MinimizedSidebar from './MinimizedSidebar';
 
 
 interface LayoutProps {}
@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
 
   // Check if current page is watch page
   const isWatchPage = location.pathname.startsWith('/watch');
-  
+
   // For watch page, start with minimized sidebar by default
   const [isMinimized, setIsMinimized] = useState(isWatchPage);
 
@@ -71,13 +71,13 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
     if (isWatchPage) {
       // On watch page, use minimized or expanded sidebar
       return isMinimized ? 'md:ml-16' : 'md:ml-60';
-    } else {
+    }
       // On other pages, use normal sidebar behavior
       if (isSidebarOpen) {
         return 'md:ml-60';
       }
       return 'ml-0';
-    }
+
   };
 
   return (

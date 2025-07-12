@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   QuestionMarkCircleIcon,
@@ -8,7 +7,6 @@ import {
   ClockIcon,
   MicrophoneIcon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 
 import { useLiveQA } from '../../../hooks/useLiveStream';
 
@@ -38,7 +36,7 @@ return;
       await submitQuestion(newQuestion.trim());
       setNewQuestion('');
     } catch (error) {
-      logger.error('Failed to submit question:', error);
+      console.error('Failed to submit question:', error);
     }
   };
 
@@ -46,16 +44,16 @@ return;
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
-      logger.error('Failed to like question:', error);
+      console.error('Failed to like question:', error);
     }
   };
 
   const handlePinQuestion = async (questionId: string) => {
     try {
       // TODO: Implement pin functionality in service
-      logger.debug('Pin question:', questionId);
+      console.log('Pin question:', questionId);
     } catch (error) {
-      logger.error('Failed to pin question:', error);
+      console.error('Failed to pin question:', error);
     }
   };
 
@@ -69,7 +67,7 @@ return;
       setAnswerMode(null);
       setAnswerText('');
     } catch (error) {
-      logger.error('Failed to answer question:', error);
+      console.error('Failed to answer question:', error);
     }
   };
 

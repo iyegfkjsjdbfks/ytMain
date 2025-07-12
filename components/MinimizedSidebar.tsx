@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+
 import { QueueListIcon, ChartBarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import { Link, useLocation } from 'react-router-dom';
 
 import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';
@@ -52,32 +53,32 @@ const MinimizedSidebar: React.FC = memo(() => {
       <div className="flex flex-col h-full">
         <div className="flex-grow">
           <nav className="p-2 space-y-1">
-            <MinimizedNavItem 
-              to="/" 
-              icon={<HomeIcon className="w-6 h-6"/>} 
-              label="Home" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/"
+              icon={<HomeIcon className="w-6 h-6"/>}
+              label="Home"
+              currentPath={location.pathname}
               title="Home"
             />
-            <MinimizedNavItem 
-              to="/shorts" 
-              icon={<ShortsIcon className="w-6 h-6"/>} 
-              label="Shorts" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/shorts"
+              icon={<ShortsIcon className="w-6 h-6"/>}
+              label="Shorts"
+              currentPath={location.pathname}
               title="Shorts"
             />
-            <MinimizedNavItem 
-              to="/subscriptions" 
-              icon={<SubscriptionsIcon className="w-6 h-6"/>} 
-              label="Subscriptions" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/subscriptions"
+              icon={<SubscriptionsIcon className="w-6 h-6"/>}
+              label="Subscriptions"
+              currentPath={location.pathname}
               title="Subscriptions"
             />
-            <MinimizedNavItem 
-              to="/library" 
-              icon={<QueueListIcon className="w-6 h-6"/>} 
-              label="Library" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/library"
+              icon={<QueueListIcon className="w-6 h-6"/>}
+              label="Library"
+              currentPath={location.pathname}
               title="Library"
             />
           </nav>
@@ -85,32 +86,32 @@ const MinimizedSidebar: React.FC = memo(() => {
           <div className="border-t border-neutral-200 dark:border-neutral-700/70 my-2 mx-2" />
 
           <nav className="p-2 space-y-1">
-            <MinimizedNavItem 
-              to="/history" 
-              icon={<HistoryIcon className="w-6 h-6"/>} 
-              label="History" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/history"
+              icon={<HistoryIcon className="w-6 h-6"/>}
+              label="History"
+              currentPath={location.pathname}
               title="Watch History"
             />
-            <MinimizedNavItem 
-              to="/playlists" 
-              icon={<PlaylistIcon className="w-6 h-6"/>} 
-              label="Playlists" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/playlists"
+              icon={<PlaylistIcon className="w-6 h-6"/>}
+              label="Playlists"
+              currentPath={location.pathname}
               title="Your Playlists"
             />
-            <MinimizedNavItem 
-              to="/watch-later" 
-              icon={<ClockIcon className="w-6 h-6"/>} 
-              label="Watch Later" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/watch-later"
+              icon={<ClockIcon className="w-6 h-6"/>}
+              label="Watch Later"
+              currentPath={location.pathname}
               title="Watch Later"
             />
-            <MinimizedNavItem 
-              to="/trending" 
-              icon={<FireIcon className="w-6 h-6"/>} 
-              label="Trending" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/trending"
+              icon={<FireIcon className="w-6 h-6"/>}
+              label="Trending"
+              currentPath={location.pathname}
               title="Trending"
             />
           </nav>
@@ -118,18 +119,18 @@ const MinimizedSidebar: React.FC = memo(() => {
           <div className="border-t border-neutral-200 dark:border-neutral-700/70 my-2 mx-2" />
 
           <nav className="p-2 space-y-1">
-            <MinimizedNavItem 
-              to="/studio" 
-              icon={<ChartBarIcon className="w-6 h-6"/>} 
-              label="Studio" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/studio"
+              icon={<ChartBarIcon className="w-6 h-6"/>}
+              label="Studio"
+              currentPath={location.pathname}
               title="Studio Dashboard"
             />
-            <MinimizedNavItem 
-              to="/upload" 
-              icon={<VideoCameraIcon className="w-6 h-6"/>} 
-              label="Upload" 
-              currentPath={location.pathname} 
+            <MinimizedNavItem
+              to="/upload"
+              icon={<VideoCameraIcon className="w-6 h-6"/>}
+              label="Upload"
+              currentPath={location.pathname}
               title="Upload Video"
             />
           </nav>

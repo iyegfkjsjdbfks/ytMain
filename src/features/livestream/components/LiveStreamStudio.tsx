@@ -13,11 +13,12 @@ import {
   ShareIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 import {
   VideoCameraIcon as VideoCameraSolidIcon,
   MicrophoneIcon as MicrophoneSolidIcon,
 } from '@heroicons/react/24/solid';
+
+import { logger } from '../../../utils/logger';
 
 interface StreamSettings {
   title: string;

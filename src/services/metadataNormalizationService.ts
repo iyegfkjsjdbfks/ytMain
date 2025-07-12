@@ -1,5 +1,6 @@
-import { youtubeService } from './api/youtubeService';
 import { logger } from '../utils/logger';
+
+import { youtubeService } from './api/youtubeService';
 
 import type { Video as LocalVideo, Channel as LocalChannel } from '../types/core';
 

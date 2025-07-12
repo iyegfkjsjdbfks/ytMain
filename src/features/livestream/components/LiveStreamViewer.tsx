@@ -16,7 +16,6 @@ import {
   EyeIcon,
   BellIcon,
 } from '@heroicons/react/24/outline';
-import { logger } from '../../../utils/logger';
 import {
   HandThumbUpIcon as ThumbsUpSolidIcon,
   BellIcon as BellSolidIcon,
@@ -79,7 +78,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
         const streamData = await liveStreamService.streams.getStream(streamId);
         setStream(streamData);
       } catch (error) {
-        logger.error('Failed to fetch stream:', error);
+        console.error('Failed to fetch stream:', error);
       }
     };
 
