@@ -12,6 +12,8 @@ import {
 } from '@heroicons/react/24/outline';
 
 import type { LiveStreamStats } from '../../../types/livestream';
+import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { createComponentError } from '../../../utils/errorUtils';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -214,7 +216,8 @@ const useStreamAnalytics = (streamId?: string, timeRange: TimeRange = 'live') =>
       setAnalytics(mockAnalytics);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch analytics';
-      console.error('Failed to fetch analytics:', err);
+      const componentError = createComponentError('StreamAnalyticsDashboard', 'Failed to fetch analytics', err);
+      conditionalLogger.error('Failed to fetch analytics:', componentError);
       setError(errorMessage);
       setAnalytics(null);
     } finally {
@@ -461,7 +464,8 @@ const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
         };
       });
     } catch (error) {
-      console.error('Error generating chart data:', error);
+      const componentError = createComponentError('StreamAnalyticsDashboard', 'Error generating chart data', error);
+      conditionalLogger.error('Error generating chart data:', componentError);
       return [];
     }
   }, [analytics, selectedMetric]);

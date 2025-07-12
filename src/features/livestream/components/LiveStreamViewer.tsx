@@ -22,6 +22,8 @@ import {
 
 import { useLiveStream } from '../../../hooks/useLiveStream';
 import { liveStreamService } from '../../../services/livestreamAPI';
+import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { createComponentError } from '../../../utils/errorUtils';
 
 import AdvancedLiveChat from './AdvancedLiveChat';
 import LivePolls from './LivePolls';
@@ -77,7 +79,8 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
         const streamData = await liveStreamService.streams.getStream(streamId);
         setStream(streamData);
       } catch (error) {
-        console.error('Failed to fetch stream:', error);
+        const componentError = createComponentError('LiveStreamViewer', 'Failed to fetch stream', error);
+        conditionalLogger.error('Failed to fetch stream:', componentError);
       }
     };
 

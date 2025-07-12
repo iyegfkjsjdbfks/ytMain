@@ -1,4 +1,5 @@
 // PWA Configuration and Utilities
+import { conditionalLogger } from '../utils/conditionalLogger';
 
 export const PWA_CONFIG = {
   // App Information
@@ -172,7 +173,7 @@ export const PWAEvents = {
 
   // Handle app installed event
   handleAppInstalled(): void {
-    console.log('PWA was installed');
+    conditionalLogger.debug('PWA was installed');
     // Clear the deferred prompt
     (window as any).deferredPrompt = null;
     // Track installation analytics
@@ -186,7 +187,7 @@ export const PWAEvents = {
 
   // Handle service worker update
   handleServiceWorkerUpdate(registration: ServiceWorkerRegistration): void {
-    console.log('Service worker updated');
+    conditionalLogger.debug('Service worker updated');
     // Notify user about update
     if (registration.waiting) {
       // Post message to service worker to skip waiting

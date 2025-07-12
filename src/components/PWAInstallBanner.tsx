@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { X, Download, Smartphone, Monitor } from 'lucide-react';
 
 import { usePWA } from '../hooks/usePWA';
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { createComponentError } from '../utils/errorUtils';
 
 interface PWAInstallBannerProps {
   onDismiss?: () => void;
@@ -38,7 +40,8 @@ const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({ onDismiss, classNam
       await installPWA();
       setIsVisible(false);
     } catch (error) {
-      console.error('Failed to install PWA:', error);
+      const componentError = createComponentError('PWAInstallBanner', 'Failed to install PWA', error);
+      conditionalLogger.error('Failed to install PWA:', componentError);
     }
   };
 

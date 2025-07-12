@@ -9,6 +9,8 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useLiveQA } from '../../../hooks/useLiveStream';
+import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { createComponentError } from '../../../utils/errorUtils';
 
 interface LiveQAProps {
   streamId: string;
@@ -36,7 +38,8 @@ return;
       await submitQuestion(newQuestion.trim());
       setNewQuestion('');
     } catch (error) {
-      console.error('Failed to submit question:', error);
+      const componentError = createComponentError('LiveQA', 'Failed to submit question', error);
+      conditionalLogger.error('Failed to submit question:', componentError);
     }
   };
 
@@ -44,16 +47,18 @@ return;
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
-      console.error('Failed to like question:', error);
+      const componentError = createComponentError('LiveQA', 'Failed to like question', error);
+      conditionalLogger.error('Failed to like question:', componentError);
     }
   };
 
   const handlePinQuestion = async (questionId: string) => {
     try {
       // TODO: Implement pin functionality in service
-      console.log('Pin question:', questionId);
+      conditionalLogger.debug('Pin question:', questionId);
     } catch (error) {
-      console.error('Failed to pin question:', error);
+      const componentError = createComponentError('LiveQA', 'Failed to pin question', error);
+      conditionalLogger.error('Failed to pin question:', componentError);
     }
   };
 
@@ -67,7 +72,8 @@ return;
       setAnswerMode(null);
       setAnswerText('');
     } catch (error) {
-      console.error('Failed to answer question:', error);
+      const componentError = createComponentError('LiveQA', 'Failed to answer question', error);
+      conditionalLogger.error('Failed to answer question:', componentError);
     }
   };
 

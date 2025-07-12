@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { RefreshCw, X, Download } from 'lucide-react';
 
 import { usePWA } from '../hooks/usePWA';
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { createComponentError } from '../utils/errorUtils';
 
 interface PWAUpdateNotificationProps {
   className?: string;
@@ -25,7 +27,8 @@ const PWAUpdateNotification: React.FC<PWAUpdateNotificationProps> = ({ className
       await updateApp();
       // The page will reload automatically after update
     } catch (error) {
-      console.error('Failed to update app:', error);
+      const componentError = createComponentError('PWAUpdateNotification', 'Failed to update app', error);
+      conditionalLogger.error('Failed to update app:', componentError);
       setIsUpdating(false);
     }
   };

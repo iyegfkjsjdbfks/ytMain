@@ -4,6 +4,8 @@ import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 
 import { usePWA } from '../hooks/usePWA';
 import { offlineStorage } from '../utils/offlineStorage';
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { createComponentError } from '../utils/errorUtils';
 
 interface OfflineIndicatorProps {
   className?: string;
@@ -45,7 +47,8 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
 
       setStorageUsage(storage);
     } catch (error) {
-      console.error('Failed to load offline data:', error);
+      const componentError = createComponentError('OfflineIndicator', 'Failed to load offline data', error);
+      conditionalLogger.error('Failed to load offline data:', componentError);
     }
   };
 

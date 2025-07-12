@@ -3,6 +3,7 @@ import type React from 'react';
 import { WifiSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
 
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
+import { conditionalLogger } from '../utils/conditionalLogger';
 
 const PWAStatus: React.FC = () => {
   const {
@@ -23,7 +24,7 @@ const PWAStatus: React.FC = () => {
   const handleEnableNotifications = async () => {
     const granted = await requestNotificationPermission();
     if (granted) {
-      console.log('Notifications enabled');
+      conditionalLogger.debug('Notifications enabled');
     }
   };
 
