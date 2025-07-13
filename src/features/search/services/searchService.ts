@@ -3,9 +3,9 @@
  * Comprehensive search functionality for videos, channels, playlists, and more
  */
 
-import { api } from '../../../services/api/base';
+import { api } from '../../../../services/api/base';
 
-import type { Video, Channel, Playlist, User, ApiResponse } from '../../../types/core';
+import type { Video, Channel, Playlist, User, ApiResponse } from '../../types/core';
 
 export interface SearchFilters {
   type?: 'all' | 'video' | 'channel' | 'playlist' | 'user';

@@ -1,5 +1,5 @@
-import { youtubeService } from '../../../services/api/youtubeService';
-import { logger } from '../../../utils/logger';
+import { youtubeService } from '../../../../services/api/youtubeService';
+import { logger } from '../../utils/logger';
 
 import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
 

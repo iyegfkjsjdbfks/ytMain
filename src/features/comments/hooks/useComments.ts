@@ -3,10 +3,10 @@
  * Comprehensive hooks for comment management
  */
 
-import { useQuery, useMutation, queryCache } from '../../../hooks/unified/useApi';
+import { useQuery, useMutation, queryCache } from '../../../../hooks/unified/useApi';
 import { commentService, type CommentFilters, type CreateCommentData } from '../services/commentService';
 
-import type { Comment } from '../../../types/core';
+import type { Comment } from '../../types/core';
 
 // Query hooks
 export function useVideoComments(videoId: string, filters: CommentFilters = {}) {

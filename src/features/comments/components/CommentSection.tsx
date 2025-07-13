@@ -17,10 +17,10 @@ import {
 } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 
-import { logger } from '../../../utils/logger';
+import { logger } from '../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 
-import type { Comment } from '../../../types/core';
+import type { Comment } from '../../types/core';
 
 
 interface CommentSectionProps {

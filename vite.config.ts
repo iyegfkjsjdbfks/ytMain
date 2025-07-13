@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => ({
   
   resolve: {
     alias: {
-      '@': resolve(__dirname, './'),
+      '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './components'),
       '@pages': resolve(__dirname, './pages'),
       '@hooks': resolve(__dirname, './hooks'),
@@ -54,7 +54,7 @@ export default defineConfig(({ mode }) => ({
       '@services': resolve(__dirname, './services'),
       '@contexts': resolve(__dirname, './contexts'),
       '@store': resolve(__dirname, './store'),
-      '@types': resolve(__dirname, './types.ts'),
+      '@types': resolve(__dirname, './types'),
       '@config': resolve(__dirname, './config'),
     },
   },

@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 
-import YouTubePlayer from '../../../../components/YouTubePlayer';
+import YouTubePlayer from '../../../components/YouTubePlayer';
 import { useUnifiedVideo } from '../../../hooks/unified/useVideos';
-import { isYouTubeUrl } from '../../../lib/youtube-utils';
-import { logger } from '../../../utils/logger';
+import { isYouTubeUrl } from '../../../src/lib/youtube-utils';
+import { logger } from '../../../src/utils/logger';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
-import type { Video } from '../../../types/core';
+import type { Video } from '../../types/core';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -252,7 +252,7 @@ const WatchPage: React.FC = () => {
         logger.debug('⚙️ Current YouTube Search Provider:', currentProvider);
 
         // Check if YouTube API is blocked
-        const { isYouTubeDataApiBlocked } = await import('../../../utils/youtubeApiUtils');
+        const { isYouTubeDataApiBlocked } = await import('../../utils/youtubeApiUtils');
         const isBlocked = isYouTubeDataApiBlocked();
         logger.debug('🔒 YouTube Data API Blocked:', isBlocked);
 
@@ -428,7 +428,7 @@ const WatchPage: React.FC = () => {
             <div className="bg-black rounded-lg overflow-hidden mb-4">
               {isYouTubeUrl(video.videoUrl || '') ? (
                 <YouTubePlayer
-                  video={video as any}
+                  video={video}
                   autoplay={true}
                   width="100%"
                   height={480}
