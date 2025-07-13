@@ -70,7 +70,7 @@ export const mockGenerators = {
 // API mocking utilities
 export const apiMocks = {
   // Mock successful API responses
-  mockApiSuccess: <T>(data: T, delay: number = 0) => {
+  mockApiSuccess: function<T>(data: T, delay: number = 0) {
     return vi.fn().mockImplementation(() => 
       new Promise(resolve => setTimeout(() => resolve(data), delay))
     );
@@ -93,7 +93,7 @@ export const apiMocks = {
   },
 
   // Mock paginated responses
-  mockPaginatedResponse: <T>(items: T[], page: number = 1, pageSize: number = 10) => {
+  mockPaginatedResponse: function<T>(items: T[], page: number = 1, pageSize: number = 10) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
@@ -429,19 +429,19 @@ export const a11yUtils = {
     }
     
     // Tab through all focusable elements
-    for (let i = 0; i < 20; i++) { // Limit to prevent infinite loops
+    for (let i = 0; i < 20; i++) {
       await user.keyboard('{Tab}');
       const activeElement = document.activeElement as HTMLElement;
       
       if (focusableElements.includes(activeElement)) {
-        break; // We've cycled back
+        break;
       }
       
       focusableElements.push(activeElement);
     }
     
     return focusableElements;
-  },
+  }
 };
 
 // Re-export everything from testing-library
