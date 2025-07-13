@@ -7,7 +7,7 @@ import { getShortsVideos } from '../services/realVideoService';
 import ShortsIcon from './icons/ShortsIcon';
 import ShortDisplayCard from './ShortDisplayCard';
 
-import type { Short } from '../types';
+import type { Short } from '../src/types/core';
 
 interface ShortsSectionProps {
   maxShorts?: number;

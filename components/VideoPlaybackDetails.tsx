@@ -9,7 +9,7 @@ import VideoActions from './VideoActions';
 import VideoDescription from './VideoDescription';
 import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 
-import type { Video, Channel } from '../types'; // Assuming types are defined in types.ts
+import type { Video, Channel } from '../src/types/core';
 
 interface VideoPlaybackDetailsProps {
   video: Video;

@@ -7,38 +7,7 @@ import { formatCount } from '../utils/numberUtils';
 
 import { SummarizeIcon } from './icons/SummarizeIcon';
 
-import type { VideoVisibility } from '../types';
-
-interface Channel {
-  id: string;
-  name: string;
-  avatarUrl: string;
-  subscriberCount: string;
-  isVerified: boolean;
-}
-
-interface Video {
-  id: string;
-  title: string;
-  description: string;
-  views: string;
-  uploadedAt: string;
-  thumbnailUrl: string;
-  videoUrl: string;
-  channelId: string;
-  channelName: string;
-  channelAvatarUrl: string;
-  duration: string;
-  category: string;
-  likes: number;
-  dislikes: number;
-  tags: string[];
-  visibility: VideoVisibility;
-  isLive?: boolean;
-  isShort?: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { Video, Channel } from '../src/types/core';
 
 interface VideoDescriptionProps {
   video: Video;

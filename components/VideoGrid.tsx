@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import VideoCard from './VideoCard';
 
-import type { Video } from '../types';
+import type { Video } from '../types/core';
 
 
 interface VideoGridProps {

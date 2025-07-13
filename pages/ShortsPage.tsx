@@ -17,7 +17,7 @@ import ShortsFilters from '../components/ShortsFilters';
 import ShortsNavigation from '../components/ShortsNavigation';
 import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
 
-import type { Short } from '../types';
+import type { Short } from '../types/core';
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();

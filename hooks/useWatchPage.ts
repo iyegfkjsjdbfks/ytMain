@@ -5,7 +5,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/realVideoService';
 import { unifiedDataService } from '../src/services/unifiedDataService';
 
-import type { VideoVisibility } from '../types';
+import type { Video, Channel, VideoVisibility } from '../src/types/core';
 
 interface Comment {
   id: string;
@@ -21,37 +21,6 @@ interface Comment {
   replyTo?: string;
   replies?: Comment[];
   replyCount?: number;
-}
-
-interface Video {
-  id: string;
-  title: string;
-  description: string;
-  views: string;
-  uploadedAt: string;
-  thumbnailUrl: string;
-  videoUrl: string;
-  channelId: string;
-  channelName: string;
-  channelAvatarUrl: string;
-  duration: string;
-  category: string;
-  likes: number;
-  dislikes: number;
-  tags: string[];
-  visibility: VideoVisibility;
-  isLive?: boolean;
-  isShort?: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Channel {
-  id: string;
-  name: string;
-  avatarUrl: string;
-  subscriberCount: string;
-  isVerified: boolean;
 }
 
 const MAX_COMMENT_LENGTH = 500;

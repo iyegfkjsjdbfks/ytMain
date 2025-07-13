@@ -3,7 +3,7 @@ import type React from 'react';
 import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
-import type { Video } from '../types';
+import type { Video } from '../types/core';
 
 
 interface MiniplayerProps {
