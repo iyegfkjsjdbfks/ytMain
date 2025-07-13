@@ -146,7 +146,7 @@ inputRef.current.blur();
     : 'rounded-r-full';
 
   return (
-    <div ref={searchBarRef} className="flex-grow max-w-xl mx-4 relative">
+    <div ref={searchBarRef} className="flex-grow max-w-xl mx-1 sm:mx-2 md:mx-4 relative">
       <form onSubmit={handleSubmit} className="flex items-center w-full" role="search">
         <input
           ref={inputRef}
@@ -155,7 +155,7 @@ inputRef.current.blur();
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           placeholder="Search"
-          className={`w-full pl-4 pr-10 py-2.5 bg-white border border-neutral-300 
+          className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300 
             dark:bg-neutral-900 dark:border-neutral-700 
             focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-black
             outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm shadow-sm
@@ -178,14 +178,14 @@ inputRef.current.blur();
         />
         <button
           type="submit"
-          className={`px-5 py-2.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 
+          className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 
             border border-neutral-300 dark:border-neutral-700 border-l-0 
-            flex items-center justify-center transition-all duration-100 ease-in-out
+            flex items-center justify-center transition-all duration-100 ease-in-out min-w-[44px]
             ${buttonBorderRadiusClass}
           `}
           aria-label="Perform search"
         >
-          <SearchIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
+          <SearchIcon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-600 dark:text-neutral-300" />
         </button>
       </form>
       {showSuggestions && suggestions.length > 0 && (

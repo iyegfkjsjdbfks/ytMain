@@ -58,20 +58,20 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
             className="w-full h-full object-cover rounded-lg"
             loading="lazy"
           />
-          <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-medium">
+          <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs sm:text-sm px-1.5 py-0.5 rounded font-medium">
             {video.duration}
           </div>
           <IconButton
             onClick={handleToggleWatchLater}
             variant={isSaved ? 'primary' : 'ghost'}
             size="sm"
-            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100"
+            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white transition-colors z-20 group-hover:opacity-100 opacity-0 focus:opacity-100 p-1.5 sm:p-1 touch-manipulation"
             aria-label={isSaved ? 'Remove from Watch Later' : 'Save to Watch Later'}
             icon={<SaveIcon className="w-4 h-4 sm:w-5 sm:h-5" />}
           />
         </div>
-        <div className="p-3 flex-grow">
-          <div className="flex items-start space-x-3">
+        <div className="p-2 sm:p-3 flex-grow">
+          <div className="flex items-start space-x-2 sm:space-x-3">
             <div
               role="button"
               tabIndex={0}
@@ -84,17 +84,17 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
                 <img
                   src={video.channelAvatarUrl}
                   alt={`${video.channelName} channel avatar`}
-                  className="w-9 h-9 rounded-full mt-0.5"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5"
                   loading="lazy"
                 />
               ) : (
-                <div className="w-9 h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full mt-0.5 bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600">
                   {avatarFallback}
                 </div>
               )}
             </div>
             <div className="flex-grow overflow-hidden">
-              <h3 className={buildTruncateClasses(2, 'text-sm font-medium text-neutral-800 dark:text-neutral-50 leading-snug')}>
+              <h3 className={buildTruncateClasses(2, 'text-sm sm:text-base font-medium text-neutral-800 dark:text-neutral-50 leading-tight')}>
                 {video.title}
               </h3>
               <div
@@ -102,12 +102,12 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
                 tabIndex={0}
                 onClick={handleChannelNavigation}
                 onKeyDown={handleChannelKeyDown}
-                className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
+                className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mt-1 sm:mt-1.5 block truncate transition-colors cursor-pointer z-10 relative"
                 aria-label={`Go to ${video.channelName} channel`}
               >
                 {video.channelName}
               </div>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400">
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
                 {video.views} &bull; {video.uploadedAt}
               </p>
             </div>

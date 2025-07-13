@@ -211,13 +211,13 @@ const WatchPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-[1280px] mx-auto px-4 py-4">
-        <div className="flex flex-col xl:flex-row gap-6">
+      <div className="max-w-[1280px] mx-auto px-2 sm:px-4 py-2 sm:py-4">
+        <div className="flex flex-col xl:flex-row gap-3 sm:gap-6">
           {/* Main content - Video player and details */}
           <div className="flex-1 max-w-full xl:max-w-[854px]">
             {/* Video player container */}
-            <div className="relative w-full mb-4">
-              <div className="aspect-video bg-black rounded-xl overflow-hidden">
+            <div className="relative w-full mb-3 sm:mb-4">
+              <div className="aspect-video bg-black rounded-lg sm:rounded-xl overflow-hidden">
                 {isYouTubeUrl(video.videoUrl) ? (() => {
                   const youtubePlayerType = getYouTubePlayerType();
                   const videoId = getYouTubeVideoId(video.videoUrl) || '';
@@ -252,15 +252,15 @@ const WatchPage: React.FC = () => {
             </div>
 
             {/* Video title */}
-            <div className="mb-3">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+            <div className="mb-2 sm:mb-3 px-1 sm:px-0">
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight">
                 {video.title}
               </h1>
             </div>
 
             {/* Video metadata and actions combined */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0">
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
               </div>
 
@@ -325,8 +325,9 @@ const WatchPage: React.FC = () => {
           </div>
 
           {/* Sidebar - Related videos */}
-          <aside className="xl:w-[402px] xl:flex-shrink-0">
+          <aside className="xl:w-[402px] xl:flex-shrink-0 mt-4 xl:mt-0">
             <div className="xl:sticky xl:top-4">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 px-1 sm:px-0">Up next</h2>
               <RecommendationEngine
                 currentVideo={video}
                 onVideoSelect={(videoId) => {

@@ -194,29 +194,29 @@ setIsNotificationsPanelOpen(false);
 
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-3 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
       <div className="flex items-center">
         <button
           onClick={toggleSidebar}
-          className="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
+          className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
           aria-label="Toggle sidebar menu"
           title="Menu"
         >
-          <MenuIcon className="w-6 h-6" />
+          <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
         <Link to="/" className="flex items-center" aria-label="YoutubeX Home">
-          <YouTubeLogo className="h-5 sm:h-[22px]" />
-          <span className="ml-1 text-lg sm:text-xl font-semibold text-black dark:text-white hidden md:block tracking-tighter relative top-[-1px]">YoutubeX</span>
+          <YouTubeLogo className="h-4 sm:h-5 md:h-[22px]" />
+          <span className="ml-1 text-base sm:text-lg md:text-xl font-semibold text-black dark:text-white hidden sm:block tracking-tighter relative top-[-1px]">YoutubeX</span>
         </Link>
       </div>
 
-      <div className="flex-1 flex justify-center px-2 sm:px-4">
+      <div className="flex-1 flex justify-center px-1 sm:px-2 md:px-4">
         <SearchBar />
       </div>
 
-      <div className="flex items-center space-x-0.5 sm:space-x-1.5">
+      <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-1.5">
         {/* PWA Offline Indicator */}
-        <OfflineIndicator className="hidden sm:flex" />
+        <OfflineIndicator className="hidden md:flex" />
 
         <div className="relative">
             <button
@@ -261,7 +261,9 @@ setIsNotificationsPanelOpen(false);
         </div>
 
         {/* Enhanced Notification System */}
-        <NotificationSystem className="relative" />
+        <div className="hidden sm:block">
+          <NotificationSystem className="relative" />
+        </div>
 
         <AuthenticatedUserSection
           userMenuRef={userMenuRef}
@@ -274,7 +276,6 @@ setIsNotificationsPanelOpen(false);
 
       {/* PWA Install Banner */}
       <PWAInstallBanner />
-      </div>
     </header>
   );
 });

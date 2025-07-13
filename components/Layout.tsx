@@ -99,7 +99,9 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
           className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out bg-white dark:bg-neutral-950 ${getSidebarMargin()} ${isShortsPage ? 'overflow-hidden' : ''}`}
         >
           <div className={mainContentPaddingClass}> {/* Apply conditional padding */}
-            <Outlet /> {/* Render child routes */}
+            <div className="min-h-[calc(100vh-3.5rem)]">
+              <Outlet /> {/* Render child routes */}
+            </div>
           </div>
         </main>
       </div>

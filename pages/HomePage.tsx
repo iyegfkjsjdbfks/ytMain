@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
             <div className="flex items-center gap-2 mb-6">
               <div className="text-sm text-gray-500 dark:text-gray-400">🔥 Loading {currentKeyword} videos...</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-6 gap-y-8">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
               {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index} className="animate-pulse">
                   <div className="bg-gray-200 dark:bg-gray-700 rounded-xl mb-3 w-full h-[250px]" />
@@ -89,7 +89,7 @@ const HomePage: React.FC = () => {
           </div>
         ) : (
           /* Video Grid with Enhanced Hover Effects - YouTube style */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-6 gap-y-8">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
             {filteredVideos.map((video: Video) => (
               <MemoizedVideoCard
                 key={video.id}
