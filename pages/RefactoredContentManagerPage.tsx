@@ -104,7 +104,7 @@ const RefactoredContentManagerPage: React.FC = () => {
       case 'private':
         return video.visibility === 'private';
       case 'drafts':
-        return video.privacyStatus === 'private' || video.visibility === 'private';
+        return video.visibility === 'private';
       default:
         return true;
     }
@@ -294,7 +294,7 @@ return {};
     published: videos.filter(v => v.visibility === 'public').length,
     unlisted: videos.filter(v => v.visibility === 'unlisted').length,
     private: videos.filter(v => v.visibility === 'private').length,
-    drafts: videos.filter(v => (v as any).status === 'draft').length,
+    drafts: videos.filter(v => v.visibility === 'private').length,
   };
 
   return (

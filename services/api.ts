@@ -250,25 +250,23 @@ export class VideoService {
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
-        duration: 0,
+        duration: '0',
         thumbnailUrl: item.snippet.thumbnails.medium.url,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        views: '0',
+        likes: 0,
+        dislikes: 0,
+        uploadedAt: item.snippet.publishedAt,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         channelId: item.snippet.channelId,
         channelName: item.snippet.channelTitle,
-        channelAvatarUrl: '', // Would need separate API call
-        viewCount: 0, // Would need separate API call
-        likeCount: 0,
-        dislikeCount: 0,
-        commentCount: 0,
-        publishedAt: item.snippet.publishedAt,
+        channelAvatarUrl: '',
         tags: item.snippet.tags || [],
         category,
-        license: 'youtube',
         visibility: 'public' as const,
         isLive: false,
-        isFamilySafe: true,
-        isAgeRestricted: false,
-        embeddable: true,
-        defaultLanguage: 'en',
+        isShort: false
       })) || [];
 
       return {
@@ -310,7 +308,7 @@ return null;
 }
 
       return {
-        id: item.id.videoId,
+        id: item.id,
         title: item.snippet.title,
         description: item.snippet.description,
         thumbnailUrl: item.snippet.thumbnails.medium.url,
@@ -321,17 +319,15 @@ return null;
         uploadedAt: item.snippet.publishedAt || new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-
-        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
         channelId: item.snippet.channelId,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
         tags: item.snippet.tags || [],
         category: item.snippet.categoryId || 'Unknown',
-        visibility: 'public' as any,
-        monetization: {} as any,
-        analytics: {} as any,
-        captions: [] as any,
+        visibility: 'public' as const,
+        isLive: false,
+        isShort: false
       };
     } catch (error) {
       console.error('Error fetching video:', error);
@@ -389,19 +385,16 @@ return null;
         likes: 0,
         dislikes: 0,
         uploadedAt: item.snippet.publishedAt,
-        publishedAt: item.snippet.publishedAt,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         channelId: item.snippet.channelId,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
         tags: item.snippet.tags || [],
         category: 'Search Result',
-        license: 'youtube',
         visibility: 'public' as const,
         isLive: false,
-        isFamilySafe: true,
-        isAgeRestricted: false,
-        embeddable: true,
-        defaultLanguage: 'en',
+        isShort: false
       })) || [];
 
       return {
@@ -539,25 +532,22 @@ return null;
         title: item.snippet.title,
         description: item.snippet.description,
         thumbnailUrl: item.snippet.thumbnails.medium.url,
-        duration: 0,
-        views: 0,
+        duration: '0',
+        views: '0',
         likes: 0,
         dislikes: 0,
-        comments: 0,
         uploadedAt: item.snippet.publishedAt || new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-
         videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         channelId: item.snippet.channelId,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
         tags: item.snippet.tags || [],
         category: 'Channel Video',
-        visibility: 'public' as any,
-        monetization: {} as any,
-        analytics: {} as any,
-        captions: [] as any,
+        visibility: 'public' as const,
+        isLive: false,
+        isShort: false
       })) || [];
 
       return {

@@ -302,6 +302,7 @@ export function useUnifiedAppState() {
     miniplayerVideo: context.state.miniplayerVideo,
     isMiniplayerOpen: context.state.isMiniplayerOpen,
     openMiniplayer: context.openMiniplayer,
+    closeMiniplayer: context.closeMiniplayer,
     toggleMiniplayer: context.toggleMiniplayer,
 
     // Watch Later state

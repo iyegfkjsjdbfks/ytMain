@@ -261,14 +261,14 @@ const WatchPage: React.FC = () => {
             {/* Video metadata and actions combined */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3 sm:mb-4 px-1 sm:px-0">
               <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
+                {formatCount(typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
               </div>
 
               {/* Video actions - moved to same line as metadata */}
               <VideoActions
                 liked={liked}
                 disliked={disliked}
-                likeCount={video.likes || 0}
+                likeCount={typeof video.likes === 'string' ? parseInt(video.likes.replace(/[^0-9]/g, ''), 10) : video.likes || 0}
                 onLike={handleLike}
                 onDislike={handleDislike}
                 onShare={() => {}}

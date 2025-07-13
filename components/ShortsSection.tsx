@@ -7,7 +7,7 @@ import { getShortsVideos } from '../services/realVideoService';
 import ShortsIcon from './icons/ShortsIcon';
 import ShortDisplayCard from './ShortDisplayCard';
 
-import type { Short } from '../src/types/core';
+import type { Short } from '../types';
 
 interface ShortsSectionProps {
   maxShorts?: number;
@@ -35,7 +35,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              description: video.description,
              thumbnailUrl: video.thumbnailUrl,
              videoUrl: video.videoUrl,
-             duration: parseInt(video.duration, 10) || 60, // Convert string duration to number
+             duration: video.duration,
              views: video.views,
              likes: video.likes,
              dislikes: video.dislikes,
@@ -44,19 +44,23 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              channelId: video.channelId,
              channelAvatarUrl: video.channelAvatarUrl,
              category: video.category,
-             tags: video.tags,
-             isLive: false, // Real sample videos don't have isLive property, default to false
-             isShort: video.isShort ?? true,
-             isLiked: false, // Real sample videos don't track user interactions, default to false
-             isDisliked: false, // Real sample videos don't track user interactions, default to false
-             isSaved: false, // Real sample videos don't track user interactions, default to false
-             visibility: video.visibility,
-             createdAt: video.createdAt,
-             updatedAt: video.updatedAt,
+             tags: video.tags || [],
+             isLive: false,
+             isShort: true,
+             isLiked: false,
+             isDisliked: false,
+             isSaved: false,
+             visibility: video.visibility || 'public',
+             createdAt: video.createdAt || new Date().toISOString(),
+             updatedAt: video.updatedAt || new Date().toISOString(),
              isVertical: true,
-             definition: 'hd', // Default to HD since real sample videos don't specify definition
-             // Ensure all required Short properties are present
-             effects: [],
+             definition: 'hd' as 'hd' | 'sd',
+             // Additional properties for Short type compatibility
+             aspectRatio: 9/16,
+             viewCount: parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0,
+             commentCount: 0,
+             likeCount: video.likes || 0,
+             favoriteCount: 0
            };
           return shortVideo;
         });

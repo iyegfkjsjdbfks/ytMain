@@ -84,7 +84,7 @@ return null;
         </h1>
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            {formatCount(parseInt(video.views, 10))} views • {formatDistanceToNow(video.uploadedAt)}
+            {formatCount(typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0)} views • {formatDistanceToNow(video.uploadedAt)}
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@ return null;
       <VideoActions
         liked={liked}
         disliked={disliked}
-        likeCount={video.likes || 0}
-        isSavedToAnyList={false}
+        likeCount={typeof video.likes === 'string' ? parseInt(video.likes.replace(/[^0-9]/g, ''), 10) : video.likes || 0}
+        isSavedToAnyList={props.isSavedToAnyList}
         onLike={handleLike}
         onDislike={handleDislike}
         onShare={() => { /* Implement share functionality */ }}

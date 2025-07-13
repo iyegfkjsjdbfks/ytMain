@@ -17,7 +17,7 @@ import ShortsFilters from '../components/ShortsFilters';
 import ShortsNavigation from '../components/ShortsNavigation';
 import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
 
-import type { Short } from '../src/types/core';
+import type { Short } from '../types';
 
 const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
@@ -85,13 +85,20 @@ return [];
       .map(video => {
         const shortVideo: Short = {
           ...video,
-          duration: typeof video.duration === 'number' ? video.duration : parseInt(video.duration, 10) || 60,
-          isShort: true as const,
+          duration: video.duration,
+          isShort: true,
           isVertical: true,
-          visibility: video.visibility as 'public' | 'private' | 'unlisted',
+          visibility: video.visibility || 'public',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString(),
-        } as Short;
+          // Additional properties for Short type compatibility
+          aspectRatio: 9/16,
+          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
+          commentCount: 0,
+          likeCount: typeof video.likes === 'string' ? parseInt(video.likes.replace(/[^0-9]/g, ''), 10) : video.likes || 0,
+          favoriteCount: 0,
+          definition: 'hd' as 'hd' | 'sd'
+        };
         return shortVideo;
       });
 
