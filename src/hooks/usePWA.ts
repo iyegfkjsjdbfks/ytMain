@@ -1,144 +1,271 @@
-import { useState, useEffect } from 'react';
-
-import { PWAUtils, PWAEvents } from '../config/pwa';
+import { useState, useEffect, useCallback } from 'react';
+import { PWA_CONFIG, PWAUtils, PWAEvents } from '../utils/pwa';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError, createNetworkError } from '../types/errors';
+import { createComponentError } from '../utils/errorUtils';
+import { useInstallPrompt } from './useInstallPrompt';
+import { useServiceWorker } from './useServiceWorker';
+import { useOfflineStatus } from './useOfflineStatus';
+import { usePWAUpdates } from './usePWAUpdates';
+import { usePWANotifications } from './usePWANotifications';
 
-interface PWAInstallPrompt extends Event {
-  prompt(): Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+interface PWAState {
+  isInitialized: boolean;
+  features: {
+    installPrompt: boolean;
+    notifications: boolean;
+    backgroundSync: boolean;
+    sharing: boolean;
+    offlineSupport: boolean;
+  };
 }
 
 interface UsePWAReturn {
-  isInstallable: boolean;
+  // Installation
+  canInstall: boolean;
   isInstalled: boolean;
-  isOnline: boolean;
-  installApp: () => Promise<void>;
-  showInstallPrompt: boolean;
+  installPWA: () => Promise<boolean>;
+  showInstallPrompt: () => Promise<boolean>;
   dismissInstallPrompt: () => void;
+  
+  // Network & Offline
+  isOnline: boolean;
+  isOffline: boolean;
+  networkQuality: 'fast' | 'slow' | 'offline';
+  shouldReduceData: boolean;
+  
+  // Updates
   updateAvailable: boolean;
-  updateApp: () => void;
+  isUpdating: boolean;
+  checkForUpdates: () => Promise<boolean>;
+  installUpdate: () => Promise<void>;
+  
+  // Notifications
+  notificationPermission: NotificationPermission;
+  canShowNotifications: boolean;
+  requestNotificationPermission: () => Promise<NotificationPermission>;
+  showNotification: (options: any) => Promise<boolean>;
+  
+  // Features
+  shareContent: (data: ShareData) => Promise<boolean>;
+  addToHomeScreen: () => void;
+  registerBackgroundSync: (tag: string) => Promise<void>;
+  cacheVideo: (videoId: string, quality?: string) => Promise<boolean>;
+  
+  // Analytics
+  getInstallStats: () => any;
+  getUsageStats: () => any;
+  
+  // State
+  isInitialized: boolean;
+  supportedFeatures: string[];
 }
 
 export const usePWA = (): UsePWAReturn => {
-  const [isInstallable, setIsInstallable] = useState(false);
-  const [isInstalled, setIsInstalled] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [deferredPrompt, setDeferredPrompt] = useState<PWAInstallPrompt | null>(null);
-  const [showInstallPrompt, setShowInstallPrompt] = useState(false);
-  const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(null);
-
-  useEffect(() => {
-    // Check if app is already installed
-    const checkInstalled = () => {
-      setIsInstalled(PWAUtils.isInstalled());
-    };
-
-    checkInstalled();
-
-    // Listen for install prompt
-    const handleBeforeInstallPrompt = (e: Event) => {
-      PWAEvents.handleBeforeInstallPrompt(e);
-      const installPrompt = e as PWAInstallPrompt;
-      setDeferredPrompt(installPrompt);
-      setIsInstallable(true);
-
-      // Show install prompt after a delay if not dismissed
-      setTimeout(() => {
-        if (!isInstalled) {
-          setShowInstallPrompt(true);
-        }
-      }, 3000);
-    };
-
-    // Listen for app installed
-    const handleAppInstalled = () => {
-      PWAEvents.handleAppInstalled();
-      setIsInstalled(true);
-      setIsInstallable(false);
-      setShowInstallPrompt(false);
-      setDeferredPrompt(null);
-
-      // Show success notification
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('YouTubeX Installed!', {
-          body: 'You can now access YouTubeX from your home screen.',
-          icon: '/icons/icon-192x192.svg',
-        });
-      }
-    };
-
-    // Listen for online/offline status
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    // Service Worker update detection
-    const handleServiceWorkerUpdate = () => {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          window.location.reload();
-        });
-
-        navigator.serviceWorker.ready.then((registration) => {
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (newWorker) {
-              setWaitingWorker(newWorker);
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  setUpdateAvailable(true);
-                }
-              });
-            }
-          });
-        });
-      }
-    };
-
-    // Add event listeners
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    handleServiceWorkerUpdate();
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, [isInstalled]);
-
-  const installApp = async (): Promise<void> => {
-    if (!deferredPrompt) {
-return;
-}
-
-    try {
-      await deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
-
-      if (choiceResult.outcome === 'accepted') {
-        conditionalLogger.debug('User accepted the install prompt', undefined, 'usePWA');
-      } else {
-        conditionalLogger.debug('User dismissed the install prompt', undefined, 'usePWA');
-      }
-
-      setDeferredPrompt(null);
-      setShowInstallPrompt(false);
-    } catch (error) {
-      const componentError = createComponentError(
-        `Error during app installation: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        'usePWA',
-        'installApp'
-      );
-      conditionalLogger.error('Error during app installation', componentError, 'usePWA');
+  const [state, setState] = useState<PWAState>({
+    isInitialized: false,
+    features: {
+      installPrompt: false,
+      notifications: false,
+      backgroundSync: false,
+      sharing: false,
+      offlineSupport: false
     }
-  };
+  });
+
+  // Use specialized hooks
+  const installPrompt = useInstallPrompt();
+  const serviceWorker = useServiceWorker();
+  const offlineStatus = useOfflineStatus();
+  const pwaUpdates = usePWAUpdates();
+  const notifications = usePWANotifications();
+
+  // Initialize PWA features
+  const initializePWA = useCallback(async () => {
+    try {
+      conditionalLogger.info('Initializing PWA features', undefined, 'usePWA');
+      
+      // Check feature support
+      const features = {
+        installPrompt: PWAUtils.isInstallSupported(),
+        notifications: notifications.isSupported,
+        backgroundSync: 'serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype,
+        sharing: 'share' in navigator,
+        offlineSupport: 'serviceWorker' in navigator
+      };
+      
+      setState(prev => ({
+        ...prev,
+        features,
+        isInitialized: true
+      }));
+      
+      conditionalLogger.info(
+        'PWA features initialized',
+        { supportedFeatures: Object.keys(features).filter(key => features[key as keyof typeof features]) },
+        'usePWA'
+      );
+    } catch (error) {
+      conditionalLogger.error(
+        'Failed to initialize PWA features',
+        { error: error instanceof Error ? error.message : 'Unknown error' },
+        'usePWA'
+      );
+    }
+  }, [notifications.isSupported]);
+
+  // Initialize PWA on mount
+  useEffect(() => {
+    initializePWA();
+  }, [initializePWA]);
+
+  // Track PWA usage
+  useEffect(() => {
+    if (state.isInitialized) {
+      const usageData = {
+        timestamp: Date.now(),
+        features: state.features,
+        userAgent: navigator.userAgent,
+        isStandalone: window.matchMedia('(display-mode: standalone)').matches
+      };
+      
+      try {
+        const existingData = JSON.parse(localStorage.getItem('pwa-usage-data') || '[]');
+        existingData.push(usageData);
+        
+        // Keep only last 100 entries
+        if (existingData.length > 100) {
+          existingData.splice(0, existingData.length - 100);
+        }
+        
+        localStorage.setItem('pwa-usage-data', JSON.stringify(existingData));
+      } catch (error) {
+        conditionalLogger.error(
+          'Failed to track PWA usage',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'usePWA'
+        );
+      }
+    }
+  }, [state.isInitialized, state.features]);
+
+  // Share content using Web Share API
+  const shareContent = useCallback(async (data: ShareData): Promise<boolean> => {
+    try {
+      if (!('share' in navigator)) {
+        conditionalLogger.warn('Web Share API not supported', undefined, 'usePWA');
+        return false;
+      }
+
+      await navigator.share(data);
+      conditionalLogger.debug('Content shared successfully', { title: data.title }, 'usePWA');
+      return true;
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        conditionalLogger.debug('Share cancelled by user', undefined, 'usePWA');
+      } else {
+        conditionalLogger.error(
+          'Failed to share content',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'usePWA'
+        );
+      }
+      return false;
+    }
+  }, []);
+
+  // Add to home screen helper
+  const addToHomeScreen = useCallback(() => {
+    if (installPrompt.canInstall) {
+      installPrompt.showInstallPrompt();
+    } else {
+      // For iOS Safari
+      if ((navigator as any).standalone === false) {
+        notifications.showNotification({
+          title: 'Add to Home Screen',
+          body: 'Tap the share button and then "Add to Home Screen".',
+          icon: '/icons/icon-192x192.png'
+        });
+      }
+    }
+  }, [installPrompt.canInstall, installPrompt.showInstallPrompt, notifications.showNotification]);
+
+  // Register background sync
+  const registerBackgroundSync = useCallback(async (tag: string): Promise<void> => {
+    try {
+      if (!state.features.backgroundSync) {
+        conditionalLogger.warn('Background sync not supported', undefined, 'usePWA');
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.ready;
+      await (registration as any).sync.register(tag);
+      conditionalLogger.debug('Background sync registered', { tag }, 'usePWA');
+    } catch (error) {
+      conditionalLogger.error(
+        'Failed to register background sync',
+        { error: error instanceof Error ? error.message : 'Unknown error', tag },
+        'usePWA'
+      );
+    }
+  }, [state.features.backgroundSync]);
+
+  // Cache video for offline viewing
+  const cacheVideo = useCallback(async (videoId: string, quality?: string): Promise<boolean> => {
+    try {
+      if (!('caches' in window)) {
+        conditionalLogger.warn('Cache API not supported', undefined, 'usePWA');
+        return false;
+      }
+
+      const cache = await caches.open(`youtubex-videos-${quality || 'default'}-v1`);
+      const videoUrl = `/api/video/${videoId}${quality ? `?quality=${quality}` : ''}`;
+      
+      const response = await fetch(videoUrl);
+      if (response.ok) {
+        await cache.put(`video-${videoId}`, response.clone());
+        conditionalLogger.debug('Video cached successfully', { videoId, quality }, 'usePWA');
+        return true;
+      }
+      
+      return false;
+    } catch (error) {
+      conditionalLogger.error(
+        'Failed to cache video',
+        { error: error instanceof Error ? error.message : 'Unknown error', videoId },
+        'usePWA'
+      );
+      return false;
+    }
+  }, []);
+
+  // Get install stats
+  const getInstallStats = useCallback(() => {
+    return {
+      canInstall: installPrompt.canInstall,
+      isInstalled: installPrompt.isInstalled,
+      installPromptShown: installPrompt.isPromptShown,
+      supportedFeatures: Object.keys(state.features).filter(key => 
+        state.features[key as keyof typeof state.features]
+      )
+    };
+  }, [installPrompt.canInstall, installPrompt.isInstalled, installPrompt.isPromptShown, state.features]);
+
+  // Get usage stats
+  const getUsageStats = useCallback(() => {
+    return {
+      isOnline: offlineStatus.isOnline,
+      networkQuality: offlineStatus.networkQuality,
+      updateAvailable: pwaUpdates.updateAvailable,
+      notificationPermission: notifications.permission,
+      lastUpdateCheck: pwaUpdates.lastUpdateCheck
+    };
+  }, [
+    offlineStatus.isOnline,
+    offlineStatus.networkQuality,
+    pwaUpdates.updateAvailable,
+    pwaUpdates.lastUpdateCheck,
+    notifications.permission
+  ]);
 
   const dismissInstallPrompt = (): void => {
     setShowInstallPrompt(false);
@@ -163,14 +290,46 @@ return;
   }, []);
 
   return {
-    isInstallable,
-    isInstalled,
-    isOnline,
-    installApp,
-    showInstallPrompt,
-    dismissInstallPrompt,
-    updateAvailable,
-    updateApp,
+    // Installation
+    canInstall: installPrompt.canInstall,
+    isInstalled: installPrompt.isInstalled,
+    installPWA: installPrompt.installPWA,
+    showInstallPrompt: installPrompt.showInstallPrompt,
+    dismissInstallPrompt: installPrompt.dismissInstallPrompt,
+    
+    // Network & Offline
+    isOnline: offlineStatus.isOnline,
+    isOffline: offlineStatus.isOffline,
+    networkQuality: offlineStatus.networkQuality,
+    shouldReduceData: offlineStatus.shouldReduceData,
+    
+    // Updates
+    updateAvailable: pwaUpdates.updateAvailable,
+    isUpdating: pwaUpdates.isUpdating,
+    checkForUpdates: pwaUpdates.checkForUpdates,
+    installUpdate: pwaUpdates.installUpdate,
+    
+    // Notifications
+    notificationPermission: notifications.permission,
+    canShowNotifications: notifications.canShowNotifications,
+    requestNotificationPermission: notifications.requestPermission,
+    showNotification: notifications.showNotification,
+    
+    // Features
+    shareContent,
+    addToHomeScreen,
+    registerBackgroundSync,
+    cacheVideo,
+    
+    // Analytics
+    getInstallStats,
+    getUsageStats,
+    
+    // State
+    isInitialized: state.isInitialized,
+    supportedFeatures: Object.keys(state.features).filter(key => 
+      state.features[key as keyof typeof state.features]
+    )
   };
 };
 
