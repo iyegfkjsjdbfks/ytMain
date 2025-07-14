@@ -4,10 +4,10 @@
  */
 
 import { API_CONFIG } from '../config';
-import { conditionalLogger } from '../utils/conditionalLogger';
-import { createApiError, createNetworkError, ERROR_CODES } from '../types/errors';
+import { conditionalLogger } from '../src/utils/conditionalLogger';
+import { createApiError, createNetworkError, ERROR_CODES } from '../src/types/errors';
 import type { Video } from '../types';
-import type { ApiError, NetworkError } from '../types/errors';
+import type { ApiError, NetworkError } from '../src/types/errors';
 
 interface YouTubeVideoObject {
   thumbnailurl?: string;
