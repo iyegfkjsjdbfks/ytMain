@@ -6,7 +6,7 @@
 import type * as React from 'react';
 import {  forwardRef  } from 'react';
 
-import LoadingSpinner from '../../../components/LoadingSpinner';
+import LoadingSpinner from '@components/LoadingSpinner';
 import { cn } from '../../lib/utils';
 
 // Button variant types

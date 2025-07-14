@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { unifiedDataService } from '../../../../services/unifiedDataService';
+import { unifiedDataService } from '@services/unifiedDataService';
 import { videoService } from '../services/videoService';
 
 // Video query key factory
