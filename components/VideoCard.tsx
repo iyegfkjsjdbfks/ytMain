@@ -9,6 +9,7 @@ import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback
 
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
+import ImageWithFallback from './ImageWithFallback';
 
 import type { Video } from '../src/types/core';
 
@@ -52,11 +53,13 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
     <Link to={videoUrl} className="block group cursor-pointer" aria-label={`Watch ${video.title}`}>
       <div className="bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full">
         <div className="relative aspect-video">
-          <img
+          <ImageWithFallback
             src={video.thumbnailUrl}
             alt={`Thumbnail for ${video.title}`}
             className="w-full h-full object-cover rounded-lg"
-            loading="lazy"
+            width={320}
+            height={180}
+            fallbackSrc={`https://picsum.photos/320/180?random=${video.id}`}
           />
           <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs sm:text-sm px-1.5 py-0.5 rounded font-medium">
             {video.duration}

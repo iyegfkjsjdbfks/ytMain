@@ -4,6 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import ImageWithFallback from './ImageWithFallback';
 
 import type { Video } from '../types';
 
@@ -125,11 +126,13 @@ return duration;
         <Link to={`/watch/${video.id}`}>
           <div className="relative w-full" style={{ height: '250px' }}>
             {/* Main thumbnail */}
-            <img
+            <ImageWithFallback
               src={video.thumbnailUrl}
               alt={video.title}
               className="absolute inset-0 w-full h-full object-cover rounded-xl"
-              loading="lazy"
+              width={320}
+              height={250}
+              fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`}
             />
 
             {/* Animated preview overlay */}
@@ -210,12 +213,15 @@ return duration;
         {/* Channel Avatar */}
         {video.channelAvatarUrl && (
           <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
-            <img
+            <ImageWithFallback
               src={video.channelAvatarUrl}
               alt={video.channelName}
               className={`w-9 h-9 rounded-full object-cover transition-transform duration-200 ${
                 isHovered ? 'transform scale-110 ring-2 ring-red-500/50' : ''
               }`}
+              width={36}
+              height={36}
+              fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName}`}
             />
           </Link>
         )}

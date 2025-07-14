@@ -4,6 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+import ImageWithFallback from './ImageWithFallback';
 
 import type { Video } from '../types';
 
@@ -148,13 +149,15 @@ return duration;
         <Link to={`/watch/${video.id}`}>
           <div className="relative w-full" style={{ height: '250px' }}>
             {/* Thumbnail - always visible as background */}
-            <img
+            <ImageWithFallback
               src={video.thumbnailUrl}
               alt={video.title}
               className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
                 showIframe ? 'opacity-0' : 'opacity-100 group-hover:rounded-lg'
               }`}
-              loading="lazy"
+              width={320}
+              height={250}
+              fallbackSrc={`https://picsum.photos/320/250?random=${video.id}`}
             />
 
             {/* YouTube iframe - shown on hover */}
@@ -225,10 +228,13 @@ return duration;
         {/* Channel Avatar */}
         {video.channelAvatarUrl && (
           <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
-            <img
+            <ImageWithFallback
               src={video.channelAvatarUrl}
               alt={video.channelName}
               className="w-9 h-9 rounded-full object-cover"
+              width={36}
+              height={36}
+              fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName}`}
             />
           </Link>
         )}

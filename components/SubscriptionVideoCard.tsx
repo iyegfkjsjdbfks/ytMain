@@ -13,6 +13,7 @@ import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/comp
 
 import { SaveIcon } from './icons/UnifiedIcon';
 import { IconButton } from './ui/Button';
+import ImageWithFallback from './ImageWithFallback';
 
 import type { Video } from '../types';
 
@@ -54,11 +55,13 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
         {/* Thumbnail */}
         <div className="relative flex-shrink-0">
           <Link to={videoUrl} className="block">
-            <img
+            <ImageWithFallback
               src={video.thumbnailUrl}
               alt={video.title}
               className="w-48 h-28 object-cover rounded-lg"
-              loading="lazy"
+              width={192}
+              height={112}
+              fallbackSrc={`https://picsum.photos/192/112?random=${video.id}`}
             />
             <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
               {video.duration}
@@ -144,11 +147,13 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
     <div className="group">
       <div className="relative mb-3">
         <Link to={videoUrl} className="block">
-          <img
+          <ImageWithFallback
             src={video.thumbnailUrl}
             alt={video.title}
             className="w-full aspect-video object-cover rounded-lg group-hover:rounded-none transition-all duration-200"
-            loading="lazy"
+            width={320}
+            height={180}
+            fallbackSrc={`https://picsum.photos/320/180?random=${video.id}`}
           />
           <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded">
             {video.duration}

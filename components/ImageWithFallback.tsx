@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface ImageWithFallbackProps {
   src: string;
@@ -9,6 +9,8 @@ interface ImageWithFallbackProps {
   className?: string;
   onError?: () => void;
   onLoad?: () => void;
+  maxRetries?: number;
+  retryDelay?: number;
 }
 
 const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
@@ -20,10 +22,14 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   className = '',
   onError,
   onLoad,
+  maxRetries = 3,
+  retryDelay = 1000,
 }) => {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isRateLimited, setIsRateLimited] = useState(false);
 
   // Generate fallback URL
   const generateFallback = () => {
@@ -49,9 +55,28 @@ return fallbackSrc;
     setCurrentSrc(src);
     setHasError(false);
     setIsLoading(true);
+    setRetryCount(0);
+    setIsRateLimited(false);
   }, [src]);
 
-  const handleError = () => {
+  const handleError = useCallback((event?: Event) => {
+    const imgElement = event?.target as HTMLImageElement;
+    const isYouTubeThumbnail = currentSrc.includes('yt3.ggpht.com') || currentSrc.includes('i.ytimg.com');
+    
+    // Check if this is a 429 rate limiting error for YouTube thumbnails
+    if (isYouTubeThumbnail && retryCount < maxRetries) {
+      setIsRateLimited(true);
+      const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
+      
+      setTimeout(() => {
+        setRetryCount(prev => prev + 1);
+        setCurrentSrc(src); // Retry original source
+        setIsLoading(true);
+      }, delay);
+      
+      return;
+    }
+    
     if (!hasError) {
       setHasError(true);
       setCurrentSrc(generateFallback());
@@ -61,7 +86,8 @@ return fallbackSrc;
       setCurrentSrc(generatePlaceholderDataUrl(width, height, alt));
     }
     setIsLoading(false);
-  };
+    setIsRateLimited(false);
+  }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError]);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -174,6 +200,12 @@ return '';
       {hasError && (
         <div className="absolute top-2 right-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">
           Fallback
+        </div>
+      )}
+      
+      {isRateLimited && (
+        <div className="absolute top-2 left-2 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">
+          Retrying... ({retryCount}/{maxRetries})
         </div>
       )}
     </div>

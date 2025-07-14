@@ -4,6 +4,7 @@ import { memo } from 'react';
 import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
+import ImageWithFallback from './ImageWithFallback';
 import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {
@@ -90,11 +91,13 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
     >
       {/* Thumbnail */}
       <div className={`${classes.thumbnail} relative overflow-hidden rounded-md bg-gray-200 dark:bg-gray-700`}>
-        <img
+        <ImageWithFallback
           src={video.thumbnailUrl}
           alt={video.title}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
-          loading="lazy"
+          width={size === 'sm' ? 168 : size === 'md' ? 192 : 320}
+          height={size === 'sm' ? 94 : size === 'md' ? 112 : 180}
+          fallbackSrc={`https://picsum.photos/${size === 'sm' ? 168 : size === 'md' ? 192 : 320}/${size === 'sm' ? 94 : size === 'md' ? 112 : 180}?random=${video.id}`}
         />
 
         {/* Duration and View Count Badges */}
