@@ -20,10 +20,10 @@ import {
   BellIcon as BellSolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { useLiveStream } from '../../../hooks/useLiveStream';
-import { liveStreamService } from '../../../services/livestreamAPI';
-import { conditionalLogger } from '../../../utils/conditionalLogger';
-import { createComponentError } from '../../../utils/errorUtils';
+import { useLiveStream } from '@/hooks/useLiveStream';
+import { liveStreamService } from '@/services/livestreamAPI';
+import { conditionalLogger } from '@/utils/conditionalLogger';
+import { createComponentError } from '@/utils/errorUtils';
 
 import AdvancedLiveChat from './AdvancedLiveChat';
 import LivePolls from './LivePolls';

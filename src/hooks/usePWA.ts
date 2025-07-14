@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { PWA_CONFIG, PWAUtils, PWAEvents } from '../utils/pwa';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '../utils/errorUtils';
+import { createComponentError } from '@/utils/errorUtils';
 import { useInstallPrompt } from './useInstallPrompt';
 import { useServiceWorker } from './useServiceWorker';
 import { useOfflineStatus } from './useOfflineStatus';

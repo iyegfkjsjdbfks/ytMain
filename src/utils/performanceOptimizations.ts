@@ -68,7 +68,7 @@ export class PerformanceMonitor {
       
       this.metrics.set(name, duration);
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.MODE === 'development') {
         console.log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
       }
       

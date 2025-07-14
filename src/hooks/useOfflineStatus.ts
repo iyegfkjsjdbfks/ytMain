@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '../utils/errorUtils';
+import { createComponentError } from '@/utils/errorUtils';
 
 interface NetworkConnection {
   effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';

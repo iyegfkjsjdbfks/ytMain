@@ -8,10 +8,10 @@ import {
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
 
-import { liveStreamService } from '../../../services/livestreamAPI';
-import { logger } from '../../../utils/logger';
+import { liveStreamService } from '@/services/livestreamAPI';
+import { logger } from '@/utils/logger';
 
-import type { SuperChat } from '../../../types/livestream';
+import type { SuperChat } from '@/types/livestream';
 
 interface SuperChatPanelProps {
   streamId: string;

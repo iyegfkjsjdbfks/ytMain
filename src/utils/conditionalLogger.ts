@@ -19,11 +19,21 @@ interface LogEntry {
 }
 
 class ConditionalLogger {
-  private isDevelopment = process.env.NODE_ENV === 'development';
-  private isDebugMode = process.env.VITE_DEBUG === 'true' || this.isDevelopment;
+  private isDevelopment: boolean;
+  private isDebugMode: boolean;
   private logLevel: LogLevel;
 
   constructor() {
+    // Safely access import.meta.env with fallbacks
+    try {
+      this.isDevelopment = import.meta.env?.MODE === 'development' || process.env.NODE_ENV === 'development';
+      this.isDebugMode = import.meta.env?.VITE_DEBUG === 'true' || process.env.VITE_DEBUG === 'true' || this.isDevelopment;
+    } catch (error) {
+      // Fallback for environments where import.meta.env is not available
+      this.isDevelopment = process.env.NODE_ENV === 'development' || typeof window !== 'undefined';
+      this.isDebugMode = process.env.VITE_DEBUG === 'true' || this.isDevelopment;
+    }
+
     // Set log level based on environment
     if (this.isDevelopment) {
       this.logLevel = LogLevel.DEBUG;

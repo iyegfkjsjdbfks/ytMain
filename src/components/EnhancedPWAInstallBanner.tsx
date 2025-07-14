@@ -3,7 +3,7 @@ import { X, Download, Smartphone, Monitor, Wifi, WifiOff, Star, Zap, Shield } fr
 import { usePWA } from '../hooks/usePWA';
 import { PWAUtils } from '../config/pwa';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '../utils/errorUtils';
+import { createComponentError } from '@/utils/errorUtils';
 
 interface EnhancedPWAInstallBannerProps {
   onDismiss?: () => void;

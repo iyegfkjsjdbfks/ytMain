@@ -1,6 +1,11 @@
 import type React from 'react';
 
-import { WifiSlashIcon, ArrowDownTrayIcon, XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
+import { 
+  SignalSlashIcon, 
+  ArrowDownTrayIcon, 
+  XMarkIcon, 
+  BellIcon
+} from '@heroicons/react/24/outline';
 
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
 import { conditionalLogger } from '../utils/conditionalLogger';
@@ -34,7 +39,7 @@ const PWAStatus: React.FC = () => {
       {!isOnline && (
         <div className="fixed top-0 left-0 right-0 bg-yellow-500 text-white px-4 py-2 text-center text-sm font-medium z-50">
           <div className="flex items-center justify-center gap-2">
-            <WifiSlashIcon className="w-4 h-4" />
+            <SignalSlashIcon className="w-4 h-4" />
             <span>You're offline. Some features may be limited.</span>
           </div>
         </div>

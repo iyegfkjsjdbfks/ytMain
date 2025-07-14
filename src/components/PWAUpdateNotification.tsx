@@ -4,7 +4,7 @@ import { RefreshCw, X, Download } from 'lucide-react';
 
 import { usePWA } from '../hooks/usePWA';
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '../utils/errorUtils';
+import { createComponentError } from '@/utils/errorUtils';
 
 interface PWAUpdateNotificationProps {
   className?: string;
