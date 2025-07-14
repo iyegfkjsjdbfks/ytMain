@@ -19,27 +19,55 @@ interface LogEntry {
 }
 
 class ConditionalLogger {
-  private isDevelopment: boolean;
-  private isDebugMode: boolean;
-  private logLevel: LogLevel;
+  private isDevelopment: boolean = false;
+  private isDebugMode: boolean = false;
+  private logLevel: LogLevel = LogLevel.ERROR;
 
   constructor() {
-    // Safely access import.meta.env with fallbacks
-    try {
-      this.isDevelopment = import.meta.env?.MODE === 'development' || process.env.NODE_ENV === 'development';
-      this.isDebugMode = import.meta.env?.VITE_DEBUG === 'true' || process.env.VITE_DEBUG === 'true' || this.isDevelopment;
-    } catch (error) {
-      // Fallback for environments where import.meta.env is not available
-      this.isDevelopment = process.env.NODE_ENV === 'development' || typeof window !== 'undefined';
-      this.isDebugMode = process.env.VITE_DEBUG === 'true' || this.isDevelopment;
-    }
-
+    // Simple and safe environment detection
+    this.isDevelopment = this.detectDevelopmentMode();
+    this.isDebugMode = this.detectDebugMode();
+    
     // Set log level based on environment
-    if (this.isDevelopment) {
-      this.logLevel = LogLevel.DEBUG;
-    } else {
-      this.logLevel = LogLevel.ERROR;
-    }
+    this.logLevel = this.isDevelopment ? LogLevel.DEBUG : LogLevel.ERROR;
+  }
+
+  private detectDevelopmentMode(): boolean {
+    try {
+      // Check Vite environment first
+      if (typeof import.meta !== 'undefined' && import.meta.env) {
+        return import.meta.env.MODE === 'development';
+      }
+    } catch {}
+
+    try {
+      // Check Node.js environment
+      if (typeof process !== 'undefined' && process.env) {
+        return process.env.NODE_ENV === 'development';
+      }
+    } catch {}
+
+    // Browser fallback - assume development if we can't determine
+    return typeof window !== 'undefined';
+  }
+
+  private detectDebugMode(): boolean {
+    try {
+      // Check Vite debug flag first
+      if (typeof import.meta !== 'undefined' && import.meta.env) {
+        return import.meta.env.VITE_DEBUG === 'true';
+      }
+    } catch {}
+
+    try {
+      // Check Node.js debug flag
+      if (typeof process !== 'undefined' && process.env) {
+        return process.env.VITE_DEBUG === 'true';
+      }
+    } catch {}
+
+    // Default to development mode setting
+    return this.isDevelopment;
   }
 
   private shouldLog(level: LogLevel): boolean {
@@ -150,18 +178,48 @@ class ConditionalLogger {
       return {
         name: error.name,
         message: error.message,
-        stack: this.isDebugMode ? error.stack : undefined
+        stack: (this.isDebugMode ?? false) ? error.stack : undefined
       };
     }
     return error;
   }
 }
 
+// Create singleton instance safely
+let conditionalLoggerInstance: ConditionalLogger;
+
+try {
+  conditionalLoggerInstance = new ConditionalLogger();
+} catch (error) {
+  // Fallback logger if construction fails
+  conditionalLoggerInstance = {
+    error: (msg: string) => console.error(msg),
+    warn: (msg: string) => console.warn(msg),
+    info: (msg: string) => console.info(msg),
+    debug: (msg: string) => console.log(msg),
+    time: (label: string) => console.time(label),
+    timeEnd: (label: string) => console.timeEnd(label),
+    group: (label: string) => console.group(label),
+    groupEnd: () => console.groupEnd(),
+    apiResponse: () => {},
+    apiError: (endpoint: string, err: unknown) => console.error(`API Error from ${endpoint}:`, err)
+  } as ConditionalLogger;
+}
+
 // Export singleton instance
-export const conditionalLogger = new ConditionalLogger();
+export const conditionalLogger = conditionalLoggerInstance;
 
 // Export for testing
 export { ConditionalLogger };
 
-// Convenience exports
-export const { error, warn, info, debug, time, timeEnd, group, groupEnd, apiResponse, apiError } = conditionalLogger;
+// Convenience exports - safely destructure
+export const error = conditionalLogger.error.bind(conditionalLogger);
+export const warn = conditionalLogger.warn.bind(conditionalLogger);
+export const info = conditionalLogger.info.bind(conditionalLogger);
+export const debug = conditionalLogger.debug.bind(conditionalLogger);
+export const time = conditionalLogger.time.bind(conditionalLogger);
+export const timeEnd = conditionalLogger.timeEnd.bind(conditionalLogger);
+export const group = conditionalLogger.group.bind(conditionalLogger);
+export const groupEnd = conditionalLogger.groupEnd.bind(conditionalLogger);
+export const apiResponse = conditionalLogger.apiResponse.bind(conditionalLogger);
+export const apiError = conditionalLogger.apiError.bind(conditionalLogger);
