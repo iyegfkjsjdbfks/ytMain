@@ -23,8 +23,8 @@ import {
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
-import { UnifiedButton } from '../../../../components/unified';
-import { cn, formatRelativeTime } from '../../../lib/utils';
+import { UnifiedButton } from '@/components/unified';
+import { cn, formatRelativeTime } from '@/lib/utils';
 
 import type { Playlist } from '../../types/core';
 

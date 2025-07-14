@@ -3,7 +3,7 @@
  * Comprehensive comment management service
  */
 
-import { api } from '../../../../services/api/base';
+import { api } from '@services/api/base';
 
 import type { Comment, ApiResponse } from '../../types/core';
 

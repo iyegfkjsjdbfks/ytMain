@@ -3,7 +3,7 @@
  * Comprehensive notification management system
  */
 
-import { api } from '../../../../services/api/base';
+import { api } from '@services/api/base';
 
 import type { ApiResponse } from '../../types/core';
 

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { VideoErrorBoundary } from '../../../components/ErrorBoundaries';
-import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
+import { conditionalLogger } from '@/utils/conditionalLogger';
 import { VideoPlayer } from './VideoPlayer';
 import type { VideoPlayerProps } from './VideoPlayer';
 

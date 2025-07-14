@@ -558,7 +558,8 @@ return null;
                         </button>
                         <button
                           onClick={() => {
-                            // Delete the selected clip                            // setClips(clips.filter(c => c.id !== clip.id));
+                            // Delete the selected clip
+                            // setClips(clips.filter(c => c.id !== clip.id));
                           }}
                           className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
                           title="Delete clip"

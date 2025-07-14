@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries';
-import { conditionalLogger } from '../../../utils/conditionalLogger';
+import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
+import { conditionalLogger } from '@/utils/conditionalLogger';
 import SearchResultsPage from './SearchResultsPage';
 import { useSearchParams } from 'react-router-dom';
 
