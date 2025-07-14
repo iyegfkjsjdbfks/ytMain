@@ -164,7 +164,7 @@ const SearchResultsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 pt-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
+      <div className="max-w-[1280px] mx-auto">
         <OptimizedSearchResults
           videos={searchState.videos}
           youtubeVideos={searchState.youtubeVideos}
