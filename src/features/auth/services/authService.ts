@@ -1,4 +1,4 @@
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 
 import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
 

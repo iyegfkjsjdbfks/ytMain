@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 import { authService } from '../services/authService';
 
 import type { AuthState, LoginCredentials, RegisterData, User } from '../types';

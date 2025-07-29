@@ -17,10 +17,10 @@ import {
 } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 
-import type { Comment } from '../../types/core';
+import type { Comment } from '../../../types/core';
 
 
 interface CommentSectionProps {
@@ -455,7 +455,7 @@ return;
         </div>
       ) : comments && comments.length > 0 ? (
         <div className="space-y-6">
-          {comments.map((comment) => (
+          {comments.map((comment: Comment) => (
             <CommentItem
               key={comment.id}
               comment={comment}

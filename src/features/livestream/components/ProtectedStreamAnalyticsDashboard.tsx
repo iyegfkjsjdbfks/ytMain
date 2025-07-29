@@ -31,7 +31,7 @@ const ProtectedStreamAnalyticsDashboard: React.FC<ProtectedStreamAnalyticsDashbo
       onRetry={handleRetry}
       showOfflineMessage={true}
     >
-      <StreamAnalyticsDashboard streamId={streamId} className={className} />
+      <StreamAnalyticsDashboard streamId={streamId} {...(className && { className })} />
     </DataFetchErrorBoundary>
   );
 };
