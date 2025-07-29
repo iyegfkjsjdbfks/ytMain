@@ -14,6 +14,7 @@ const PWAStatus: React.FC = () => {
   const {
     isInstalled,
     isOnline,
+    canInstall,
     installPWA,
     dismissInstallPrompt,
     updateAvailable,
@@ -23,10 +24,10 @@ const PWAStatus: React.FC = () => {
   const [showInstallPrompt, setShowInstallPrompt] = React.useState(false);
 
   React.useEffect(() => {
-    if (isInstallable && !isInstalled) {
+    if (canInstall && !isInstalled) {
       setShowInstallPrompt(true);
     }
-  }, [isInstallable, isInstalled]);
+  }, [canInstall, isInstalled]);
 
   const handleInstall = async () => {
     await installPWA();
@@ -71,7 +72,7 @@ const PWAStatus: React.FC = () => {
       )}
 
       {/* Install App Prompt */}
-      {showInstallPrompt && isInstallable && !isInstalled && (
+      {showInstallPrompt && canInstall && !isInstalled && (
         <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-red-600 text-white rounded-lg shadow-lg p-4 z-50 animate-slide-in-right-mini">
           <div className="flex items-start justify-between gap-3">
             <div className="flex-1">

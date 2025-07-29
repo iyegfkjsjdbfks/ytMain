@@ -6,13 +6,11 @@ import { useUnifiedVideo } from '@/hooks/unified/useVideos';
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 import { logger } from '@/utils/logger';
 
-import YouTubePlayer from '@components/YouTubePlayer';
-
+import YouTubePlayer from '../../../components/YouTubePlayer';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
 import type { Video } from '../../../types/core';
-import type { UnifiedVideoMetadata } from '../../../services/metadataNormalizationService';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -436,6 +434,7 @@ const WatchPage: React.FC = () => {
                   width="100%"
                   height={480}
                   controls={true}
+                  className="w-full h-full"
                 />
               ) : (
                 <VideoPlayer

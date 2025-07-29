@@ -27,14 +27,13 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
   onInstallSuccess,
   onDismiss,
 }) => {
-  const { isSupported } = usePWA();
+  const { canInstall, isInstalled } = usePWA();
   const {
-    canInstall,
-    isInstalled,
+    isInstallable,
     isInstalling,
-    error: installError,
-    install,
-    dismiss: dismissPrompt,
+    installError,
+    installApp,
+    dismissPrompt,
     resetError,
   } = useInstallPrompt();
   const { isOnline } = useOfflineStatus();
@@ -74,12 +73,12 @@ return;
     };
 
     checkVisibility();
-  }, [canInstall, isInstalled, isDismissed, autoShow, isSupported]);
+  }, [canInstall, isInstalled, isDismissed, autoShow]);
 
   const handleInstall = async () => {
     try {
       resetError();
-      const success = await install();
+      const success = await installApp();
       if (success) {
         trackEvent('pwa_install_success', {
           source: 'banner',
@@ -174,7 +173,7 @@ return;
 
   const renderDefaultVariant = () => (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-sm">
-      {hasUpdate && (
+      {updateAvailable && (
         <div className="mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
           <div className="flex items-center justify-between">
             <span className="text-sm text-blue-800 dark:text-blue-200">Update available</span>

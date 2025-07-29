@@ -77,7 +77,6 @@ export const usePWA = (): UsePWAReturn => {
 
   // Use specialized hooks
   const installPrompt = useInstallPrompt();
-  const serviceWorker = useServiceWorker();
   const offlineStatus = useOfflineStatus();
   const pwaUpdates = usePWAUpdates();
   const notifications = usePWANotifications();
@@ -178,8 +177,8 @@ export const usePWA = (): UsePWAReturn => {
 
   // Add to home screen helper
   const addToHomeScreen = useCallback(() => {
-    if (installPrompt.canInstall) {
-      installPrompt.showInstallPrompt();
+    if (installPrompt.isInstallable) {
+      installPrompt.installApp();
     } else {
       // For iOS Safari
       if ((navigator as any).standalone === false) {
@@ -190,7 +189,7 @@ export const usePWA = (): UsePWAReturn => {
         });
       }
     }
-  }, [installPrompt.canInstall, installPrompt.showInstallPrompt, notifications.showNotification]);
+  }, [installPrompt.isInstallable, installPrompt.installApp, notifications.showNotification]);
 
   // Register background sync
   const registerBackgroundSync = useCallback(async (tag: string): Promise<void> => {
@@ -297,7 +296,7 @@ export const usePWA = (): UsePWAReturn => {
     canInstall: installPrompt.isInstallable,
     isInstalled: installPrompt.isInstalled,
     installPWA: installPrompt.installApp,
-    showInstallPrompt: () => Promise.resolve(installPrompt.canShowPrompt()),
+    showInstallPrompt: installPrompt.installApp,
     dismissInstallPrompt: installPrompt.dismissPrompt,
 
     // Network & Offline

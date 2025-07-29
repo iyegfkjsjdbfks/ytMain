@@ -47,6 +47,70 @@ class LiveStreamService {
     // Placeholder implementation
     return [];
   }
+
+  async getStream(id: string): Promise<LiveStream | null> {
+    conditionalLogger.info('Fetching stream:', id);
+    
+    // Placeholder implementation - return a mock LiveStream
+    const stream: LiveStream = {
+      id,
+      title: 'Sample Stream',
+      description: 'A sample stream',
+      thumbnailUrl: '',
+      streamUrl: '',
+      streamKey: 'key123',
+      category: 'General',
+      tags: [],
+      visibility: 'public',
+      status: 'scheduled',
+      creatorId: 'creator1',
+      creatorName: 'Creator',
+      creatorAvatar: '',
+      settings: {
+        enableChat: true,
+        enableSuperChat: false,
+        enablePolls: false,
+        enableQA: false,
+        chatMode: 'live',
+        slowMode: 0,
+        subscriberOnly: false,
+        moderatorOnly: false,
+        allowedWords: [],
+        blockedWords: [],
+        maxMessageLength: 200
+      },
+      stats: {
+        viewerCount: 0,
+        peakViewers: 0,
+        totalViews: 0,
+        likes: 0,
+        dislikes: 0,
+        shares: 0,
+        comments: 0,
+        superChats: 0,
+        revenue: 0,
+        watchTime: 0,
+        averageWatchTime: 0,
+        chatMessages: 0,
+        uniqueViewers: 0
+      },
+      monetization: {
+        enabled: false,
+        superChatEnabled: false,
+        membershipEnabled: false,
+        adsEnabled: false,
+        sponsorshipEnabled: false,
+        merchandiseEnabled: false,
+        donationGoal: null,
+        revenueSharing: {
+          platform: 70,
+          creator: 30
+        }
+      }
+    };
+    
+    return stream;
+  }
   
   async updateStream(id: string, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
     conditionalLogger.info('Updating stream:', id, config);
@@ -158,4 +222,35 @@ class LiveStreamService {
   }
 }
 
-export const liveStreamService = new LiveStreamService();
+const liveStreamServiceInstance = new LiveStreamService();
+
+export const liveStreamService = {
+  streams: {
+    createStream: liveStreamServiceInstance.createStream.bind(liveStreamServiceInstance),
+    getStream: liveStreamServiceInstance.getStream.bind(liveStreamServiceInstance),
+    updateStream: liveStreamServiceInstance.updateStream.bind(liveStreamServiceInstance),
+    deleteStream: liveStreamServiceInstance.deleteStream.bind(liveStreamServiceInstance),
+    startStream: liveStreamServiceInstance.startStream.bind(liveStreamServiceInstance),
+    stopStream: liveStreamServiceInstance.stopStream.bind(liveStreamServiceInstance),
+    getStreamStats: liveStreamServiceInstance.getStreamStats.bind(liveStreamServiceInstance)
+  },
+  scheduling: {
+    getScheduledStreams: liveStreamServiceInstance.getScheduledStreams.bind(liveStreamServiceInstance)
+  },
+  chat: {
+    getChatMessages: async (streamId: string) => {
+      conditionalLogger.info('Getting chat messages for stream:', streamId);
+      return [];
+    },
+    sendSuperChat: async (streamId: string, message: string, amount: number) => {
+      conditionalLogger.info('Sending super chat:', { streamId, message, amount });
+      return { success: true };
+    }
+  },
+  // Legacy direct access methods for backward compatibility
+  createStream: liveStreamServiceInstance.createStream.bind(liveStreamServiceInstance),
+  getStream: liveStreamServiceInstance.getStream.bind(liveStreamServiceInstance),
+  getScheduledStreams: liveStreamServiceInstance.getScheduledStreams.bind(liveStreamServiceInstance),
+  startStream: liveStreamServiceInstance.startStream.bind(liveStreamServiceInstance),
+  stopStream: liveStreamServiceInstance.stopStream.bind(liveStreamServiceInstance)
+};

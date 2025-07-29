@@ -205,7 +205,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const [showPlaylistMenu, setShowPlaylistMenu] = useState<string | null>(null);
 
-  const { data: playlists = [] }: { data: Playlist[] } = usePlaylists({
+  const { data: playlists = [] } = usePlaylists({
     sortBy: sortBy === 'recent' ? 'updated' :
            sortBy === 'alphabetical' ? 'title' :
            sortBy === 'most_videos' ? 'videoCount' : 'updated',
