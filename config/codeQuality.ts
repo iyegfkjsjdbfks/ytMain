@@ -13,11 +13,11 @@ export const eslintConfig = {
     'react/no-unstable-nested-components': 'error',
     'react/prefer-stateless-function': 'warn',
     'react/self-closing-comp': 'error',
-    
+
     // React Hooks rules
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
-    
+
     // TypeScript specific rules
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-explicit-any': 'warn',
@@ -25,7 +25,7 @@ export const eslintConfig = {
     '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/no-non-null-assertion': 'warn',
     '@typescript-eslint/consistent-type-imports': 'error',
-    
+
     // General code quality rules
     'prefer-const': 'error',
     'no-var': 'error',
@@ -35,11 +35,11 @@ export const eslintConfig = {
     'no-eval': 'error',
     'no-implied-eval': 'error',
     'no-script-url': 'error',
-    
+
     // Performance rules
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react/jsx-no-constructed-context-values': 'error',
-    
+
     // Accessibility rules
     'jsx-a11y/alt-text': 'error',
     'jsx-a11y/anchor-has-content': 'error',
@@ -91,12 +91,12 @@ export const performanceBudgets = {
   maxBundleSize: 1024, // 1MB
   maxChunkSize: 512, // 512KB
   maxAssetSize: 256, // 256KB
-  
+
   // Runtime performance limits
   maxRenderTime: 16, // 16ms (60fps)
   maxApiResponseTime: 2000, // 2 seconds
   maxImageLoadTime: 1000, // 1 second
-  
+
   // Core Web Vitals thresholds
   maxLCP: 2500, // Largest Contentful Paint
   maxFID: 100, // First Input Delay
@@ -116,7 +116,7 @@ export const securityConfig = {
     'connect-src': ["'self'", 'https://api.youtube.com', 'wss:'],
     'frame-src': ['https://www.youtube.com'],
   },
-  
+
   // Sensitive data patterns to avoid
   sensitivePatterns: [
     /api[_-]?key/i,
@@ -127,7 +127,7 @@ export const securityConfig = {
     /credential/i,
     /private[_-]?key/i,
   ],
-  
+
   // Allowed external domains
   allowedDomains: [
     'youtube.com',
@@ -144,14 +144,14 @@ export const a11yStandards = {
     level: 'AA',
     version: '2.1',
   },
-  
+
   // Color contrast ratios
   colorContrast: {
     normal: 4.5, // AA standard
     large: 3, // AA standard for large text
     enhanced: 7, // AAA standard
   },
-  
+
   // Required ARIA attributes
   requiredAria: [
     'aria-label',
@@ -159,7 +159,7 @@ export const a11yStandards = {
     'aria-describedby',
     'role',
   ],
-  
+
   // Keyboard navigation requirements
   keyboardNav: {
     tabIndex: true,
@@ -178,19 +178,19 @@ export const testingConfig = {
     functions: 80,
     lines: 80,
   },
-  
+
   // Test file patterns
   testPatterns: [
     '**/*.test.{ts,tsx}',
     '**/*.spec.{ts,tsx}',
     '**/__tests__/**/*.{ts,tsx}',
   ],
-  
+
   // Test environment setup
   setupFiles: [
     '<rootDir>/test/setup.ts',
   ],
-  
+
   // Mock patterns
   mockPatterns: [
     '^@/(.*)$',
@@ -207,35 +207,35 @@ export const codeReviewChecklist = {
     'Is error handling comprehensive?',
     'Are loading states managed correctly?',
   ],
-  
+
   performance: [
     'Are there any performance bottlenecks?',
     'Is the code optimized for re-renders?',
     'Are large objects memoized appropriately?',
     'Is lazy loading implemented where beneficial?',
   ],
-  
+
   security: [
     'Are user inputs properly validated?',
     'Is sensitive data handled securely?',
     'Are API calls authenticated properly?',
     'Is XSS protection in place?',
   ],
-  
+
   accessibility: [
     'Are ARIA attributes used correctly?',
     'Is keyboard navigation supported?',
     'Are color contrasts sufficient?',
     'Are screen readers supported?',
   ],
-  
+
   maintainability: [
     'Is the code readable and well-documented?',
     'Are functions and components single-purpose?',
     'Is the code DRY (Don\'t Repeat Yourself)?',
     'Are naming conventions consistent?',
   ],
-  
+
   testing: [
     'Are unit tests comprehensive?',
     'Are integration tests included?',
@@ -253,7 +253,7 @@ export const monitoringConfig = {
     sampleRate: 1.0,
     maxBreadcrumbs: 50,
   },
-  
+
   // Performance monitoring
   performanceMonitoring: {
     enableInProduction: true,
@@ -262,7 +262,7 @@ export const monitoringConfig = {
     trackWebVitals: true,
     trackUserInteractions: true,
   },
-  
+
   // Analytics
   analytics: {
     trackPageViews: true,
@@ -270,7 +270,7 @@ export const monitoringConfig = {
     trackPerformanceMetrics: true,
     respectDoNotTrack: true,
   },
-  
+
   // Alerts
   alerts: {
     errorRate: 0.05, // Alert if error rate > 5%
@@ -297,7 +297,7 @@ export const workflowConfig = {
       'commitlint',
     ],
   },
-  
+
   // CI/CD pipeline
   cicd: {
     stages: [
@@ -310,7 +310,7 @@ export const workflowConfig = {
       'performance-audit',
       'deploy',
     ],
-    
+
     // Quality gates
     qualityGates: {
       testCoverage: 80,
@@ -320,7 +320,7 @@ export const workflowConfig = {
       performanceScore: 90,
     },
   },
-  
+
   // Code formatting
   formatting: {
     onSave: true,

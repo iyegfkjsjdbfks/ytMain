@@ -4,7 +4,6 @@
  * and automated quality gates for enhanced code quality and maintainability.
  */
 
-import { performanceMonitor } from './performanceMonitor';
 import { securityUtils } from './securityUtils';
 
 // Types for monitoring data
@@ -72,13 +71,15 @@ class APMSystem {
    * Start the monitoring system
    */
   start(): void {
-    if (this.isMonitoring) return;
-    
+    if (this.isMonitoring) {
+return;
+}
+
     this.isMonitoring = true;
     this.startMetricsCollection();
     this.startHealthChecks();
     this.startAlertProcessing();
-    
+
     console.log('🔍 Advanced monitoring system started');
   }
 
@@ -101,8 +102,8 @@ class APMSystem {
       metadata: {
         userAgent: navigator.userAgent,
         url: window.location.href,
-        sessionId: this.getSessionId()
-      }
+        sessionId: this.getSessionId(),
+      },
     };
 
     if (!this.metrics.has(name)) {
@@ -126,11 +127,13 @@ class APMSystem {
    */
   getMetrics(name: string, timeRange?: { start: number; end: number }): MetricData[] {
     const metrics = this.metrics.get(name) || [];
-    
-    if (!timeRange) return metrics;
-    
-    return metrics.filter(m => 
-      m.timestamp >= timeRange.start && m.timestamp <= timeRange.end
+
+    if (!timeRange) {
+return metrics;
+}
+
+    return metrics.filter(m =>
+      m.timestamp >= timeRange.start && m.timestamp <= timeRange.end,
     );
   }
 
@@ -147,7 +150,7 @@ class APMSystem {
   } {
     const metrics = this.getMetrics(name, timeRange);
     const values = metrics.map(m => m.value).sort((a, b) => a - b);
-    
+
     if (values.length === 0) {
       return { count: 0, avg: 0, min: 0, max: 0, p95: 0, p99: 0 };
     }
@@ -162,7 +165,7 @@ class APMSystem {
       min: values[0],
       max: values[values.length - 1],
       p95: values[p95Index] || 0,
-      p99: values[p99Index] || 0
+      p99: values[p99Index] || 0,
     };
   }
 
@@ -197,24 +200,26 @@ class APMSystem {
     const results: Array<{ gate: string; rule: string; passed: boolean; message: string; value?: number }> = [];
     let allPassed = true;
 
-    const gatesToRun = gateName 
+    const gatesToRun = gateName
       ? [this.qualityGates.get(gateName)].filter(Boolean) as QualityGate[]
       : Array.from(this.qualityGates.values());
 
     for (const gate of gatesToRun) {
       for (const rule of gate.rules) {
         const metrics = this.getMetrics(rule.metric);
-        if (metrics.length === 0) continue;
+        if (metrics.length === 0) {
+continue;
+}
 
         const latestValue = metrics[metrics.length - 1].value;
         const passed = this.evaluateRule(latestValue, rule);
-        
+
         results.push({
           gate: gate.name,
           rule: rule.metric,
           passed,
           message: rule.message,
-          value: latestValue
+          value: latestValue,
         });
 
         if (!passed && gate.blocking) {
@@ -240,15 +245,15 @@ class APMSystem {
       try {
         const result = await Promise.race([
           healthCheck.check(),
-          new Promise<{ healthy: boolean }>((_, reject) => 
-            setTimeout(() => reject(new Error('Timeout')), healthCheck.timeout * 1000)
-          )
+          new Promise<{ healthy: boolean }>((_, reject) =>
+            setTimeout(() => reject(new Error('Timeout')), healthCheck.timeout * 1000),
+          ),
         ]);
 
         checks.push({
           name,
           healthy: result.healthy,
-          details: result.details
+          details: result.details,
         });
 
         if (!result.healthy) {
@@ -258,7 +263,7 @@ class APMSystem {
         checks.push({
           name,
           healthy: false,
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : 'Unknown error',
         });
         overallHealthy = false;
       }
@@ -278,7 +283,7 @@ class APMSystem {
     return {
       metrics: Object.fromEntries(this.metrics),
       alerts: Array.from(this.alerts.values()),
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
   }
 
@@ -291,7 +296,7 @@ class APMSystem {
       threshold: 100 * 1024 * 1024, // 100MB
       severity: 'high',
       cooldown: 5,
-      actions: [{ type: 'console', config: {} }]
+      actions: [{ type: 'console', config: {} }],
     });
 
     this.addAlert({
@@ -301,7 +306,7 @@ class APMSystem {
       threshold: 3000, // 3 seconds
       severity: 'medium',
       cooldown: 2,
-      actions: [{ type: 'console', config: {} }]
+      actions: [{ type: 'console', config: {} }],
     });
 
     this.addAlert({
@@ -311,7 +316,7 @@ class APMSystem {
       threshold: 0.05, // 5%
       severity: 'critical',
       cooldown: 1,
-      actions: [{ type: 'console', config: {} }]
+      actions: [{ type: 'console', config: {} }],
     });
   }
 
@@ -321,13 +326,13 @@ class APMSystem {
       name: 'api-connectivity',
       check: async () => {
         try {
-          const response = await fetch('/api/health', { 
+          const response = await fetch('/api/health', {
             method: 'GET',
-            signal: AbortSignal.timeout(5000)
+            signal: AbortSignal.timeout(5000),
           });
-          return { 
+          return {
             healthy: response.ok,
-            details: { status: response.status, statusText: response.statusText }
+            details: { status: response.status, statusText: response.statusText },
           };
         } catch {
           return { healthy: false, details: { error: 'API unreachable' } };
@@ -335,7 +340,7 @@ class APMSystem {
       },
       interval: 30,
       timeout: 10,
-      retries: 3
+      retries: 3,
     });
 
     // Local storage health check
@@ -354,7 +359,7 @@ class APMSystem {
       },
       interval: 60,
       timeout: 5,
-      retries: 1
+      retries: 1,
     });
 
     // Memory health check
@@ -362,8 +367,10 @@ class APMSystem {
       name: 'memory-usage',
       check: async () => {
         const memInfo = (performance as any).memory;
-        if (!memInfo) return { healthy: true };
-        
+        if (!memInfo) {
+return { healthy: true };
+}
+
         const usageRatio = memInfo.usedJSHeapSize / memInfo.jsHeapSizeLimit;
         return {
           healthy: usageRatio < 0.9,
@@ -371,13 +378,13 @@ class APMSystem {
             used: memInfo.usedJSHeapSize,
             total: memInfo.totalJSHeapSize,
             limit: memInfo.jsHeapSizeLimit,
-            usageRatio
-          }
+            usageRatio,
+          },
         };
       },
       interval: 30,
       timeout: 5,
-      retries: 1
+      retries: 1,
     });
   }
 
@@ -391,21 +398,21 @@ class APMSystem {
           metric: 'page-load-time',
           operator: 'lt',
           threshold: 3000,
-          message: 'Page load time must be under 3 seconds'
+          message: 'Page load time must be under 3 seconds',
         },
         {
           metric: 'first-contentful-paint',
           operator: 'lt',
           threshold: 1500,
-          message: 'First Contentful Paint must be under 1.5 seconds'
+          message: 'First Contentful Paint must be under 1.5 seconds',
         },
         {
           metric: 'cumulative-layout-shift',
           operator: 'lt',
           threshold: 0.1,
-          message: 'Cumulative Layout Shift must be under 0.1'
-        }
-      ]
+          message: 'Cumulative Layout Shift must be under 0.1',
+        },
+      ],
     });
 
     // Error rate quality gate
@@ -417,23 +424,25 @@ class APMSystem {
           metric: 'error-rate',
           operator: 'lt',
           threshold: 0.01,
-          message: 'Error rate must be under 1%'
+          message: 'Error rate must be under 1%',
         },
         {
           metric: 'api-error-rate',
           operator: 'lt',
           threshold: 0.05,
-          message: 'API error rate must be under 5%'
-        }
-      ]
+          message: 'API error rate must be under 5%',
+        },
+      ],
     });
   }
 
   private startMetricsCollection(): void {
     // Collect Core Web Vitals
     setInterval(() => {
-      if (!this.isMonitoring) return;
-      
+      if (!this.isMonitoring) {
+return;
+}
+
       // Memory usage
       const memInfo = (performance as any).memory;
       if (memInfo) {
@@ -441,7 +450,7 @@ class APMSystem {
       }
 
       // Connection info
-      const connection = (navigator as any).connection;
+      const { connection } = (navigator as any);
       if (connection) {
         this.recordMetric('network-downlink', connection.downlink);
         this.recordMetric('network-rtt', connection.rtt);
@@ -460,8 +469,10 @@ class APMSystem {
   private startHealthChecks(): void {
     for (const [name, check] of this.healthChecks) {
       const runCheck = async () => {
-        if (!this.isMonitoring) return;
-        
+        if (!this.isMonitoring) {
+return;
+}
+
         try {
           const result = await check.check();
           this.recordMetric(`health-${name}`, result.healthy ? 1 : 0);
@@ -473,7 +484,7 @@ class APMSystem {
 
       // Run immediately
       runCheck();
-      
+
       // Schedule recurring checks
       setInterval(runCheck, check.interval * 1000);
     }
@@ -481,8 +492,10 @@ class APMSystem {
 
   private startAlertProcessing(): void {
     setInterval(() => {
-      if (!this.isMonitoring) return;
-      
+      if (!this.isMonitoring) {
+return;
+}
+
       // Process any pending alerts
       this.processAlerts();
     }, 10000); // Check every 10 seconds
@@ -503,7 +516,9 @@ class APMSystem {
     const lastAlert = this.lastAlertTime.get(alert.id) || 0;
     const cooldownMs = alert.cooldown * 60 * 1000;
 
-    if (now - lastAlert < cooldownMs) return;
+    if (now - lastAlert < cooldownMs) {
+return;
+}
 
     this.lastAlertTime.set(alert.id, now);
 
@@ -524,7 +539,7 @@ class APMSystem {
           value,
           threshold: alert.threshold,
           severity: alert.severity,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         };
         localStorage.setItem(`alert_${alert.id}_${Date.now()}`, JSON.stringify(alertData));
         break;
@@ -576,14 +591,16 @@ class RUMSystem {
   }
 
   start(): void {
-    if (this.isTracking) return;
-    
+    if (this.isTracking) {
+return;
+}
+
     this.isTracking = true;
     this.trackUserInteractions();
     this.trackPageViews();
     this.trackErrors();
     this.trackPerformance();
-    
+
     console.log('👥 Real User Monitoring started');
   }
 
@@ -594,14 +611,16 @@ class RUMSystem {
 
   private trackUserInteractions(): void {
     const events = ['click', 'scroll', 'keydown', 'touchstart'];
-    
+
     events.forEach(eventType => {
       document.addEventListener(eventType, (event) => {
-        if (!this.isTracking) return;
-        
+        if (!this.isTracking) {
+return;
+}
+
         this.apm.recordMetric(`user-interaction-${eventType}`, 1, {
           target: (event.target as Element)?.tagName?.toLowerCase() || 'unknown',
-          timestamp: Date.now().toString()
+          timestamp: Date.now().toString(),
         });
       }, { passive: true });
     });
@@ -612,7 +631,7 @@ class RUMSystem {
     this.apm.recordMetric('page-view', 1, {
       url: window.location.href,
       referrer: document.referrer,
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
     });
 
     // Track SPA navigation
@@ -624,7 +643,7 @@ class RUMSystem {
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
           url: window.location.href,
-          type: 'spa-navigation'
+          type: 'spa-navigation',
         });
       }
     }.bind(this);
@@ -634,7 +653,7 @@ class RUMSystem {
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
           url: window.location.href,
-          type: 'spa-replace'
+          type: 'spa-replace',
         });
       }
     }.bind(this);
@@ -642,22 +661,26 @@ class RUMSystem {
 
   private trackErrors(): void {
     window.addEventListener('error', (event) => {
-      if (!this.isTracking) return;
-      
+      if (!this.isTracking) {
+return;
+}
+
       this.apm.recordMetric('javascript-error', 1, {
         message: event.message,
         filename: event.filename,
         lineno: event.lineno?.toString(),
         colno: event.colno?.toString(),
-        stack: event.error?.stack
+        stack: event.error?.stack,
       });
     });
 
     window.addEventListener('unhandledrejection', (event) => {
-      if (!this.isTracking) return;
-      
+      if (!this.isTracking) {
+return;
+}
+
       this.apm.recordMetric('promise-rejection', 1, {
-        reason: event.reason?.toString() || 'Unknown rejection'
+        reason: event.reason?.toString() || 'Unknown rejection',
       });
     });
   }
@@ -671,14 +694,16 @@ class RUMSystem {
 
     // Track resource loading
     const observer = new PerformanceObserver((list) => {
-      if (!this.isTracking) return;
-      
+      if (!this.isTracking) {
+return;
+}
+
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'resource') {
           const resource = entry as PerformanceResourceTiming;
           this.apm.recordMetric('resource-load-time', resource.duration, {
             name: resource.name,
-            type: resource.initiatorType
+            type: resource.initiatorType,
           });
         }
       }
@@ -710,7 +735,7 @@ class CodeQualityMetrics {
       this.bundleAnalyzer.analyze(),
       this.collectPerformanceMetrics(),
       this.collectAccessibilityMetrics(),
-      this.collectSecurityMetrics()
+      this.collectSecurityMetrics(),
     ]);
 
     return { bundle, performance, accessibility, security };
@@ -718,11 +743,11 @@ class CodeQualityMetrics {
 
   private async collectPerformanceMetrics(): Promise<any> {
     const timeRange = { start: Date.now() - 60000, end: Date.now() };
-    
+
     return {
       pageLoadTime: this.apm.getAggregatedMetrics('page-load-time', timeRange),
       memoryUsage: this.apm.getAggregatedMetrics('memory-usage', timeRange),
-      errorRate: this.calculateErrorRate(timeRange)
+      errorRate: this.calculateErrorRate(timeRange),
     };
   }
 
@@ -730,7 +755,7 @@ class CodeQualityMetrics {
     // This would integrate with accessibility testing tools
     return {
       violations: 0, // Placeholder
-      score: 100    // Placeholder
+      score: 100,    // Placeholder
     };
   }
 
@@ -738,7 +763,7 @@ class CodeQualityMetrics {
     // This would integrate with security scanning tools
     return {
       vulnerabilities: 0, // Placeholder
-      score: 100         // Placeholder
+      score: 100,         // Placeholder
     };
   }
 
@@ -746,7 +771,7 @@ class CodeQualityMetrics {
     const errors = this.apm.getMetrics('javascript-error', timeRange).length +
                   this.apm.getMetrics('promise-rejection', timeRange).length;
     const pageViews = this.apm.getMetrics('page-view', timeRange).length;
-    
+
     return pageViews > 0 ? errors / pageViews : 0;
   }
 }
@@ -768,9 +793,9 @@ class BundleAnalyzer {
       gzippedSize: 150000, // 150KB
       chunks: [
         { name: 'main', size: 300000 },
-        { name: 'vendor', size: 200000 }
+        { name: 'vendor', size: 200000 },
       ],
-      duplicates: []
+      duplicates: [],
     };
   }
 }
@@ -793,7 +818,7 @@ export type {
   AlertAction,
   HealthCheck,
   QualityGate,
-  QualityRule
+  QualityRule,
 };
 
 // Export classes for custom implementations
@@ -801,5 +826,5 @@ export {
   APMSystem,
   RUMSystem,
   CodeQualityMetrics,
-  BundleAnalyzer
+  BundleAnalyzer,
 };

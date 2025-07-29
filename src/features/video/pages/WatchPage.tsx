@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 
-import YouTubePlayer from '@components/YouTubePlayer';
 import { useUnifiedVideo } from '@/hooks/unified/useVideos';
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 import { logger } from '@/utils/logger';
+
+import YouTubePlayer from '@components/YouTubePlayer';
+
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 

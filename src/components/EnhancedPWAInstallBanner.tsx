@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { X, Download, Smartphone, Monitor, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
-import { usePWA } from '../hooks/usePWA';
-import { PWAUtils } from '../config/pwa';
-import { conditionalLogger } from '../utils/conditionalLogger';
+import type React from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+
+import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
+
 import { createComponentError } from '@/utils/errorUtils';
+
+import { PWAUtils } from '../config/pwa';
+import { usePWA } from '../hooks/usePWA';
+import { conditionalLogger } from '../utils/conditionalLogger';
+
 
 interface EnhancedPWAInstallBannerProps {
   onDismiss?: () => void;
@@ -29,23 +34,23 @@ const BENEFITS = [
   {
     icon: Smartphone,
     title: 'Offline Access',
-    description: 'Watch videos even without internet'
+    description: 'Watch videos even without internet',
   },
   {
     icon: Zap,
     title: 'Faster Loading',
-    description: 'Lightning-fast app performance'
+    description: 'Lightning-fast app performance',
   },
   {
     icon: Shield,
     title: 'Secure & Private',
-    description: 'Enhanced security and privacy'
+    description: 'Enhanced security and privacy',
   },
   {
     icon: Star,
     title: 'Native Experience',
-    description: 'App-like experience on any device'
-  }
+    description: 'App-like experience on any device',
+  },
 ];
 
 const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
@@ -57,16 +62,16 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
   showBenefits = true,
   autoShow = true,
   delayMs = 3000,
-  theme = 'auto'
+  theme = 'auto',
 }) => {
   const { isInstallable, isInstalled, isOnline, installApp, updateAvailable, updateApp } = usePWA();
-  
+
   const [state, setState] = useState<BannerState>({
     isVisible: false,
     isDismissed: false,
     isAnimating: false,
     showDetails: false,
-    installProgress: 'idle'
+    installProgress: 'idle',
   });
 
   // Memoized theme detection
@@ -95,7 +100,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
 
     const timer = setTimeout(() => {
       setState(prev => ({ ...prev, isVisible: true, isAnimating: true }));
-      
+
       // Track banner impression
       conditionalLogger.debug('PWA install banner shown', { variant, position }, 'EnhancedPWAInstallBanner');
     }, delayMs);
@@ -106,20 +111,20 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
   // Handle installation
   const handleInstall = useCallback(async () => {
     setState(prev => ({ ...prev, installProgress: 'installing' }));
-    
+
     try {
       await installApp();
       setState(prev => ({ ...prev, installProgress: 'success', isVisible: false }));
       onInstall?.();
-      
+
       // Track successful installation
       conditionalLogger.debug('PWA installation successful', { variant }, 'EnhancedPWAInstallBanner');
     } catch (error) {
       setState(prev => ({ ...prev, installProgress: 'error' }));
-      
+
       const componentError = createComponentError('EnhancedPWAInstallBanner', 'Failed to install PWA', error);
       conditionalLogger.error('PWA installation failed:', componentError);
-      
+
       // Reset after error
       setTimeout(() => {
         setState(prev => ({ ...prev, installProgress: 'idle' }));
@@ -132,7 +137,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
     setState(prev => ({ ...prev, isVisible: false, isDismissed: true, isAnimating: false }));
     PWAUtils.dismissInstallPrompt();
     onDismiss?.();
-    
+
     conditionalLogger.debug('PWA install banner dismissed', { variant }, 'EnhancedPWAInstallBanner');
   }, [onDismiss, variant]);
 
@@ -213,7 +218,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
               <X className="w-4 h-4" />
             </button>
           </div>
-          
+
           <div className="flex space-x-2">
             <button
               onClick={handleUpdate}
@@ -356,7 +361,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
                 );
               })}
             </div>
-            
+
             {BENEFITS.length > 2 && (
               <button
                 onClick={toggleDetails}

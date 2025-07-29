@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
 import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 
-import { usePWA } from '../hooks/usePWA';
-import { offlineStorage } from '../utils/offlineStorage';
-import { conditionalLogger } from '../utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
+
+import { usePWA } from '../hooks/usePWA';
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { offlineStorage } from '../utils/offlineStorage';
 
 interface OfflineIndicatorProps {
   className?: string;

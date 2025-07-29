@@ -1,7 +1,10 @@
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+
 import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { conditionalLogger } from '../../utils/conditionalLogger';
+
 import { createComponentError } from '@/utils/errorUtils';
+
+import { conditionalLogger } from '../../utils/conditionalLogger';
 
 export interface VideoErrorBoundaryProps {
   children: ReactNode;
@@ -51,11 +54,11 @@ export class VideoErrorBoundary extends Component<Props, State> {
         videoId: this.props.videoId,
         retryCount: this.state.retryCount,
         errorInfo,
-      }
+      },
     );
 
     conditionalLogger.error('Video component error caught:', componentError);
-    
+
     this.setState({
       errorInfo,
     });
@@ -96,13 +99,13 @@ export class VideoErrorBoundary extends Component<Props, State> {
           <div className="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
             <ExclamationTriangleIcon className="w-8 h-8 text-red-600" />
           </div>
-          
+
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             Video Error
           </h3>
-          
+
           <p className="text-sm text-gray-600 text-center mb-6 max-w-md">
-            {this.props.videoId 
+            {this.props.videoId
               ? `There was an error loading video ${this.props.videoId}. This might be due to network issues or the video being unavailable.`
               : 'There was an error with the video player. Please try again.'
             }
@@ -118,7 +121,7 @@ export class VideoErrorBoundary extends Component<Props, State> {
                 Try Again ({this.maxRetries - this.state.retryCount} left)
               </button>
             )}
-            
+
             <button
               onClick={this.handleReload}
               className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"

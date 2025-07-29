@@ -1,7 +1,10 @@
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+
 import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
-import { conditionalLogger } from '../../utils/conditionalLogger';
+
 import { createComponentError } from '@/utils/errorUtils';
+
+import { conditionalLogger } from '../../utils/conditionalLogger';
 
 export interface LiveStreamErrorBoundaryProps {
   children: ReactNode;
@@ -55,11 +58,11 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
         streamId: this.props.streamId,
         retryCount: this.state.retryCount,
         errorInfo,
-      }
+      },
     );
 
     conditionalLogger.error('Live stream component error caught:', componentError);
-    
+
     this.setState({
       errorInfo,
     });
@@ -91,7 +94,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 
   private handleReconnect = (): void => {
     this.setState({ isReconnecting: true });
-    
+
     conditionalLogger.debug('Attempting to reconnect live stream', {
       streamId: this.props.streamId,
     });
@@ -143,13 +146,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
           <div className="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
             <SignalSlashIcon className="w-8 h-8 text-red-600" />
           </div>
-          
+
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             Live Stream Error
           </h3>
-          
+
           <p className="text-sm text-gray-600 text-center mb-6 max-w-md">
-            {this.props.streamId 
+            {this.props.streamId
               ? `There was an error with live stream ${this.props.streamId}. This might be due to network issues or the stream being offline.`
               : 'There was an error with the live stream. The stream might be offline or experiencing technical difficulties.'
             }
@@ -165,7 +168,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
                 Retry ({this.maxRetries - this.state.retryCount} left)
               </button>
             )}
-            
+
             <button
               onClick={this.handleReconnect}
               className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -173,7 +176,7 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
               <SignalSlashIcon className="w-4 h-4" />
               Reconnect
             </button>
-            
+
             <button
               onClick={this.handleGoHome}
               className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"

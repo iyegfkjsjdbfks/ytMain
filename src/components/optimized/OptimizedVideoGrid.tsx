@@ -1,6 +1,7 @@
-import { memo, useMemo, useCallback, useState, useEffect } from 'react';
+import { memo, useMemo, useCallback, useState } from 'react';
+
 import { FixedSizeGrid as Grid } from 'react-window';
-import { FixedSizeList as List } from 'react-window';
+
 
 import type { Video } from '../../types/core';
 
@@ -22,7 +23,7 @@ const VideoGridItem = memo<{
   data: {
     videos: Video[];
     itemsPerRow: number;
-    onVideoClick: (video: Video) => void;
+    onVideoClick:(video: Video) => void;
   };
 }>(({ columnIndex, rowIndex, style, data }) => {
   const { videos, itemsPerRow, onVideoClick } = data;
@@ -41,7 +42,7 @@ const VideoGridItem = memo<{
 
   return (
     <div style={style} className="p-2">
-      <div 
+      <div
         className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
         onClick={handleClick}
       >
@@ -86,7 +87,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
   const { rowCount, columnCount, itemWidth } = useMemo(() => {
     const count = Math.ceil(videos.length / itemsPerRow);
     const width = Math.floor(containerWidth / itemsPerRow);
-    
+
     return {
       rowCount: count,
       columnCount: itemsPerRow,
@@ -110,10 +111,10 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
           setContainerWidth(entry.contentRect.width);
         }
       });
-      
+
       resizeObserver.observe(node);
       setContainerWidth(node.offsetWidth);
-      
+
       return () => {
         resizeObserver.disconnect();
       };

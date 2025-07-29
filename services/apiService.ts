@@ -69,35 +69,39 @@ class ApiCache {
       data,
       timestamp: Date.now(),
       ttl: ttl || this.defaultTTL,
-      ...(etag && { etag })
+      ...(etag && { etag }),
     });
   }
 
   get<T>(key: string): T | null {
     const entry = this.cache.get(key);
-    
-    if (!entry) return null;
-    
+
+    if (!entry) {
+return null;
+}
+
     // Check if entry has expired
     if (Date.now() - entry.timestamp > entry.ttl) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return entry.data;
   }
 
   getEntry<T>(key: string): CacheEntry<T> | null {
     const entry = this.cache.get(key);
-    
-    if (!entry) return null;
-    
+
+    if (!entry) {
+return null;
+}
+
     // Check if entry has expired
     if (Date.now() - entry.timestamp > entry.ttl) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return entry;
   }
 
@@ -138,7 +142,7 @@ class RequestQueue {
           this.processQueue();
         }
       });
-      
+
       this.processQueue();
     });
   }
@@ -187,7 +191,7 @@ export class ApiService {
       cache: false,
       cacheTTL: 5 * 60 * 1000,
       validateStatus: (status) => status >= 200 && status < 300,
-      ...defaultConfig
+      ...defaultConfig,
     };
   }
 
@@ -225,19 +229,19 @@ export class ApiService {
   // Main request method
   async request<T = any>(
     url: string,
-    config: RequestConfig = {}
+    config: RequestConfig = {},
   ): Promise<ApiResponse<T>> {
     const fullConfig = { ...this.defaultConfig, ...config };
     const fullUrl = this.buildUrl(url);
     const requestId = securityUtils.TokenGenerator.generateUUID();
-    
+
     // Rate limiting check
     if (!this.rateLimiter.isAllowed(fullUrl)) {
       throw this.createError(
         'Rate limit exceeded',
         429,
         'RATE_LIMIT_EXCEEDED',
-        { url: fullUrl, requestId }
+        { url: fullUrl, requestId },
       );
     }
 
@@ -251,7 +255,7 @@ export class ApiService {
     if (interceptedConfig.method === 'GET' && interceptedConfig.cache) {
       const cacheKey = this.getCacheKey(interceptedConfig.url, interceptedConfig);
       const cachedResponse = this.cache.get<ApiResponse<T>>(cacheKey);
-      
+
       if (cachedResponse) {
         performanceMonitor.trackCustomMetric('api_cache_hit', 1);
         return cachedResponse;
@@ -261,10 +265,10 @@ export class ApiService {
     // Add to request queue
     return this.requestQueue.add(async () => {
       const startTime = performance.now();
-      
+
       try {
         const response = await this.executeRequest<T>(interceptedConfig, requestId);
-        
+
         // Apply response interceptors
         let interceptedResponse = response;
         for (const interceptor of this.responseInterceptors) {
@@ -272,7 +276,7 @@ export class ApiService {
         }
 
         // Cache successful GET responses
-        if (interceptedConfig.method === 'GET' && interceptedConfig.cache && 
+        if (interceptedConfig.method === 'GET' && interceptedConfig.cache &&
             interceptedResponse.status >= 200 && interceptedResponse.status < 300) {
           const cacheKey = this.getCacheKey(interceptedConfig.url, interceptedConfig);
           const etag = interceptedResponse.headers.get('etag') || undefined;
@@ -303,15 +307,15 @@ export class ApiService {
   // Execute the actual HTTP request
   private async executeRequest<T>(
     config: RequestConfig & { url: string },
-    requestId: string
+    requestId: string,
   ): Promise<ApiResponse<T>> {
     const { url, method = 'GET', headers = {}, body, timeout, retries = 0, retryDelay = 1000 } = config;
-    
+
     // Prepare headers
     const requestHeaders = new Headers({
       'Content-Type': 'application/json',
       'X-Request-ID': requestId,
-      ...headers
+      ...headers,
     });
 
     // Add CSRF token for non-GET requests
@@ -326,7 +330,7 @@ export class ApiService {
     const requestOptions: RequestInit = {
       method,
       headers: requestHeaders,
-      signal: config.signal
+      signal: config.signal,
     };
 
     // Add body for non-GET requests
@@ -346,13 +350,13 @@ export class ApiService {
     // Combine signals
     const combinedSignal = this.combineAbortSignals([
       config.signal,
-      timeoutController.signal
+      timeoutController.signal,
     ].filter(Boolean) as AbortSignal[]);
 
     requestOptions.signal = combinedSignal;
 
     let lastError: ApiError;
-    
+
     // Retry logic
     for (let attempt = 0; attempt <= retries; attempt++) {
       try {
@@ -366,37 +370,37 @@ export class ApiService {
             `Request failed with status ${response.status}`,
             response.status,
             'HTTP_ERROR',
-            { responseText: errorText, requestId }
+            { responseText: errorText, requestId },
           );
         }
 
         // Parse response
         const data = await this.parseResponse<T>(response);
-        
+
         return {
           data,
           status: response.status,
           statusText: response.statusText,
           headers: response.headers,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         };
       } catch (error) {
         clearTimeout(timeoutId);
-        
+
         if (error instanceof Error) {
           if (error.name === 'AbortError') {
             lastError = this.createError(
               'Request timeout',
               408,
               'TIMEOUT',
-              { requestId }
+              { requestId },
             );
           } else {
             lastError = this.createError(
               error.message,
               0,
               'NETWORK_ERROR',
-              { originalError: error, requestId }
+              { originalError: error, requestId },
             );
           }
         } else {
@@ -421,16 +425,16 @@ export class ApiService {
   // Parse response based on content type
   private async parseResponse<T>(response: Response): Promise<T> {
     const contentType = response.headers.get('content-type') || '';
-    
+
     if (contentType.includes('application/json')) {
-      return await response.json();
+      return response.json();
     } else if (contentType.includes('text/')) {
       return await response.text() as unknown as T;
     } else if (contentType.includes('application/octet-stream') || contentType.includes('application/pdf')) {
       return await response.blob() as unknown as T;
-    } else {
-      return await response.arrayBuffer() as unknown as T;
     }
+      return await response.arrayBuffer() as unknown as T;
+
   }
 
   // Utility methods
@@ -438,7 +442,7 @@ export class ApiService {
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
-    return `${this.baseURL}${url.startsWith('/') ? url : '/' + url}`;
+    return `${this.baseURL}${url.startsWith('/') ? url : `/${  url}`}`;
   }
 
   private getCacheKey(url: string, config: RequestConfig): string {
@@ -453,14 +457,14 @@ export class ApiService {
     message: string,
     status?: number,
     code?: string,
-    details?: any
+    details?: any,
   ): ApiError {
     return {
       message,
       status,
       code,
       details,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
   }
 
@@ -470,7 +474,7 @@ export class ApiService {
 
   private combineAbortSignals(signals: AbortSignal[]): AbortSignal {
     const controller = new AbortController();
-    
+
     signals.forEach(signal => {
       if (signal.aborted) {
         controller.abort();
@@ -478,7 +482,7 @@ export class ApiService {
         signal.addEventListener('abort', () => controller.abort());
       }
     });
-    
+
     return controller.signal;
   }
 
@@ -510,11 +514,11 @@ export class ApiService {
     config?: RequestConfig & {
       fieldName?: string;
       additionalFields?: Record<string, string>;
-    }
+    },
   ): Promise<ApiResponse<T>> {
     const formData = new FormData();
     formData.append(config?.fieldName || 'file', file);
-    
+
     // Add additional fields
     if (config?.additionalFields) {
       Object.entries(config.additionalFields).forEach(([key, value]) => {
@@ -525,7 +529,7 @@ export class ApiService {
     return this.request<T>(url, {
       ...config,
       method: 'POST',
-      body: formData
+      body: formData,
     });
   }
 
@@ -534,10 +538,10 @@ export class ApiService {
     url: string;
     config?: RequestConfig;
   }>): Promise<Array<ApiResponse<T> | ApiError>> {
-    const promises = requests.map(({ url, config }) => 
-      this.request<T>(url, config).catch(error => error as ApiError)
+    const promises = requests.map(({ url, config }) =>
+      this.request<T>(url, config).catch(error => error as ApiError),
     );
-    
+
     return Promise.all(promises);
   }
 
@@ -548,23 +552,23 @@ export class ApiService {
     timestamp: number;
   }> {
     const startTime = performance.now();
-    
+
     try {
       await this.get(endpoint, { timeout: 5000, cache: false });
       const responseTime = performance.now() - startTime;
-      
+
       return {
         status: 'healthy',
         responseTime,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
     } catch (error) {
       const responseTime = performance.now() - startTime;
-      
+
       return {
         status: 'unhealthy',
         responseTime,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
     }
   }
@@ -580,10 +584,10 @@ apiService.addRequestInterceptor(async (config) => {
   if (token) {
     config.headers = {
       ...config.headers,
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     };
   }
-  
+
   return config;
 });
 
@@ -592,7 +596,7 @@ apiService.addResponseInterceptor(async (response) => {
   if (import.meta.env.DEV) {
     console.log(`API Response: ${response.status} ${response.statusText}`);
   }
-  
+
   return response;
 });
 
@@ -602,10 +606,10 @@ apiService.addErrorInterceptor(async (error) => {
     securityUtils.SecureStorage.removeItem('auth_token');
     // Redirect to login or refresh token
   }
-  
+
   // Log errors
   console.error('API Error:', error);
-  
+
   return error;
 });
 

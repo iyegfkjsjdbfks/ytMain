@@ -1,6 +1,9 @@
-import React, { useCallback } from 'react';
+import type React from 'react';
+import { useCallback } from 'react';
+
 import { LiveStreamErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
+
 import LiveStreamViewer from './LiveStreamViewer';
 
 interface ProtectedLiveStreamViewerProps {

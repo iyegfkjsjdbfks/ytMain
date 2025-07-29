@@ -251,7 +251,7 @@ export const ERROR_CODES = {
   NETWORK_TIMEOUT: 'NETWORK_TIMEOUT',
   NETWORK_OFFLINE: 'NETWORK_OFFLINE',
   NETWORK_ERROR: 'NETWORK_ERROR',
-  
+
   // API Errors
   API_QUOTA_EXCEEDED: 'API_QUOTA_EXCEEDED',
   API_RATE_LIMITED: 'API_RATE_LIMITED',
@@ -260,50 +260,50 @@ export const ERROR_CODES = {
   API_NOT_FOUND: 'API_NOT_FOUND',
   API_SERVER_ERROR: 'API_SERVER_ERROR',
   API_BAD_REQUEST: 'API_BAD_REQUEST',
-  
+
   // YouTube Specific
   YOUTUBE_VIDEO_UNAVAILABLE: 'YOUTUBE_VIDEO_UNAVAILABLE',
   YOUTUBE_EMBED_DISABLED: 'YOUTUBE_EMBED_DISABLED',
   YOUTUBE_REGION_BLOCKED: 'YOUTUBE_REGION_BLOCKED',
   YOUTUBE_PRIVATE_VIDEO: 'YOUTUBE_PRIVATE_VIDEO',
   YOUTUBE_DELETED_VIDEO: 'YOUTUBE_DELETED_VIDEO',
-  
+
   // Validation Errors
   VALIDATION_REQUIRED: 'VALIDATION_REQUIRED',
   VALIDATION_INVALID_FORMAT: 'VALIDATION_INVALID_FORMAT',
   VALIDATION_OUT_OF_RANGE: 'VALIDATION_OUT_OF_RANGE',
   VALIDATION_INVALID_TYPE: 'VALIDATION_INVALID_TYPE',
-  
+
   // Storage Errors
   STORAGE_QUOTA_EXCEEDED: 'STORAGE_QUOTA_EXCEEDED',
   STORAGE_NOT_AVAILABLE: 'STORAGE_NOT_AVAILABLE',
   STORAGE_PERMISSION_DENIED: 'STORAGE_PERMISSION_DENIED',
-  
+
   // Media Errors
   MEDIA_LOAD_ERROR: 'MEDIA_LOAD_ERROR',
   MEDIA_DECODE_ERROR: 'MEDIA_DECODE_ERROR',
   MEDIA_NETWORK_ERROR: 'MEDIA_NETWORK_ERROR',
   MEDIA_SRC_NOT_SUPPORTED: 'MEDIA_SRC_NOT_SUPPORTED',
-  
+
   // Component Errors
   COMPONENT_RENDER_ERROR: 'COMPONENT_RENDER_ERROR',
   COMPONENT_MOUNT_ERROR: 'COMPONENT_MOUNT_ERROR',
   COMPONENT_UPDATE_ERROR: 'COMPONENT_UPDATE_ERROR',
-  
+
   // Configuration Errors
   CONFIG_MISSING: 'CONFIG_MISSING',
   CONFIG_INVALID: 'CONFIG_INVALID',
   CONFIG_LOAD_ERROR: 'CONFIG_LOAD_ERROR',
-  
+
   // Performance Errors
   PERFORMANCE_SLOW_LOAD: 'PERFORMANCE_SLOW_LOAD',
   PERFORMANCE_MEMORY_LEAK: 'PERFORMANCE_MEMORY_LEAK',
   PERFORMANCE_LARGE_BUNDLE: 'PERFORMANCE_LARGE_BUNDLE',
-  
+
   // Generic Errors
   UNKNOWN_ERROR: 'UNKNOWN_ERROR',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
-  FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED'
+  FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED',
 } as const;
 
 export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];
@@ -314,7 +314,7 @@ export const createApiError = (
   endpoint: string,
   method: ApiError['method'],
   statusCode?: number,
-  details?: Record<string, unknown>
+  details?: Record<string, unknown>,
 ): ApiError => ({
   code: ERROR_CODES.API_SERVER_ERROR,
   message,
@@ -322,45 +322,45 @@ export const createApiError = (
   method,
   statusCode,
   timestamp: new Date(),
-  details
+  details,
 });
 
 export const createValidationError = (
   field: string,
   message: string,
   value?: unknown,
-  constraint?: string
+  constraint?: string,
 ): ValidationError => ({
   code: ERROR_CODES.VALIDATION_INVALID_FORMAT,
   message,
   field,
   value,
   constraint: constraint || 'unknown',
-  timestamp: new Date()
+  timestamp: new Date(),
 });
 
 export const createNetworkError = (
   message: string,
   url: string,
   timeout = false,
-  offline = false
+  offline = false,
 ): NetworkError => ({
   code: timeout ? ERROR_CODES.NETWORK_TIMEOUT : ERROR_CODES.NETWORK_ERROR,
   message,
   url,
   timeout,
   offline,
-  timestamp: new Date()
+  timestamp: new Date(),
 });
 
 export const createYouTubeError = (
   message: string,
   endpoint: string,
   videoId?: string,
-  errorType?: 'unavailable' | 'embed_disabled' | 'region_blocked' | 'private' | 'deleted'
+  errorType?: 'unavailable' | 'embed_disabled' | 'region_blocked' | 'private' | 'deleted',
 ): YouTubeApiError => {
   let code = ERROR_CODES.API_SERVER_ERROR;
-  
+
   switch (errorType) {
     case 'unavailable':
       code = ERROR_CODES.YOUTUBE_VIDEO_UNAVAILABLE;
@@ -378,7 +378,7 @@ export const createYouTubeError = (
       code = ERROR_CODES.YOUTUBE_DELETED_VIDEO;
       break;
   }
-  
+
   return {
     code,
     message,
@@ -388,6 +388,6 @@ export const createYouTubeError = (
     videoUnavailable: errorType === 'unavailable',
     embedDisabled: errorType === 'embed_disabled',
     regionBlocked: errorType === 'region_blocked',
-    details: videoId ? { videoId } : undefined
+    details: videoId ? { videoId } : undefined,
   };
 };

@@ -266,7 +266,7 @@ export class VideoService {
         category,
         visibility: 'public' as const,
         isLive: false,
-        isShort: false
+        isShort: false,
       })) || [];
 
       return {
@@ -327,7 +327,7 @@ return null;
         category: item.snippet.categoryId || 'Unknown',
         visibility: 'public' as const,
         isLive: false,
-        isShort: false
+        isShort: false,
       };
     } catch (error) {
       console.error('Error fetching video:', error);
@@ -394,7 +394,7 @@ return null;
         category: 'Search Result',
         visibility: 'public' as const,
         isLive: false,
-        isShort: false
+        isShort: false,
       })) || [];
 
       return {
@@ -547,7 +547,7 @@ return null;
         category: 'Channel Video',
         visibility: 'public' as const,
         isLive: false,
-        isShort: false
+        isShort: false,
       })) || [];
 
       return {

@@ -2,13 +2,14 @@
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-import { render, screen, waitFor, type RenderOptions } from '@testing-library/react';
-import { renderHook, type RenderHookOptions } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import type { ReactElement, ReactNode } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { vi, type MockedFunction } from 'vitest';
-import { ReactElement, ReactNode } from 'react';
+import { vi } from 'vitest';
+
 
 // Mock data generators
 export const mockGenerators = {
@@ -70,9 +71,9 @@ export const mockGenerators = {
 // API mocking utilities
 export const apiMocks = {
   // Mock successful API responses
-  mockApiSuccess: function<T>(data: T, delay: number = 0) {
-    return vi.fn().mockImplementation(() => 
-      new Promise(resolve => setTimeout(() => resolve(data), delay))
+  mockApiSuccess<T>(data: T, delay: number = 0) {
+    return vi.fn().mockImplementation(() =>
+      new Promise(resolve => setTimeout(() => resolve(data), delay)),
     );
   },
 
@@ -86,18 +87,18 @@ export const apiMocks = {
         data: { message: error.message || 'Internal Server Error' },
       },
     };
-    
-    return vi.fn().mockImplementation(() => 
-      new Promise((_, reject) => setTimeout(() => reject(apiError), delay))
+
+    return vi.fn().mockImplementation(() =>
+      new Promise((_, reject) => setTimeout(() => reject(apiError), delay)),
     );
   },
 
   // Mock paginated responses
-  mockPaginatedResponse: function<T>(items: T[], page: number = 1, pageSize: number = 10) {
+  mockPaginatedResponse<T>(items: T[], page: number = 1, pageSize: number = 10) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
-    
+
     return {
       data: paginatedItems,
       pagination: {
@@ -116,13 +117,13 @@ export const apiMocks = {
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   // Router options
   initialEntries?: string[];
-  
+
   // Query client options
   queryClient?: QueryClient;
-  
+
   // Custom wrapper
   wrapper?: ({ children }: { children: ReactNode }) => ReactElement;
-  
+
   // Mock user for authentication
   mockUser?: any;
 }
@@ -146,11 +147,11 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({ 
-  children, 
-  queryClient, 
+function AllTheProviders({
+  children,
+  queryClient,
   initialEntries = ['/'],
-  mockUser 
+  mockUser,
 }: {
   children: ReactNode;
   queryClient: QueryClient;
@@ -168,7 +169,7 @@ function AllTheProviders({
 
 export function customRender(
   ui: ReactElement,
-  options: CustomRenderOptions = {}
+  options: CustomRenderOptions = {},
 ) {
   const {
     queryClient = createTestQueryClient(),
@@ -179,8 +180,8 @@ export function customRender(
   } = options;
 
   const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
-    <AllTheProviders 
-      queryClient={queryClient} 
+    <AllTheProviders
+      queryClient={queryClient}
       initialEntries={initialEntries}
       mockUser={mockUser}
     >
@@ -189,7 +190,7 @@ export function customRender(
   ));
 
   const result = render(ui, { wrapper: Wrapper, ...renderOptions });
-  
+
   return {
     ...result,
     user: userEvent.setup(),
@@ -204,7 +205,7 @@ export function customRenderHook<TResult, TProps>(
     queryClient?: QueryClient;
     initialEntries?: string[];
     mockUser?: any;
-  } = {}
+  } = {},
 ) {
   const {
     queryClient = createTestQueryClient(),
@@ -215,8 +216,8 @@ export function customRenderHook<TResult, TProps>(
   } = options;
 
   const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
-    <AllTheProviders 
-      queryClient={queryClient} 
+    <AllTheProviders
+      queryClient={queryClient}
       initialEntries={initialEntries}
       mockUser={mockUser}
     >
@@ -290,12 +291,12 @@ export const testUtils = {
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
     }));
-    
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: mockMatchMedia,
     });
-    
+
     return mockMatchMedia;
   },
 
@@ -307,11 +308,11 @@ export const testUtils = {
       removeItem: vi.fn(),
       clear: vi.fn(),
     };
-    
+
     Object.defineProperty(window, 'localStorage', {
       value: localStorageMock,
     });
-    
+
     return localStorageMock;
   },
 
@@ -330,7 +331,7 @@ export const testUtils = {
   // Simulate drag and drop events
   simulateDragAndDrop: async (element: HTMLElement, files: File[]) => {
     const user = userEvent.setup();
-    
+
     const dataTransfer = {
       files,
       items: files.map(file => ({
@@ -340,18 +341,18 @@ export const testUtils = {
       })),
       types: ['Files'],
     };
-    
+
     await user.pointer([
       { target: element },
       { keys: '[MouseLeft>]', target: element },
     ]);
-    
+
     // Simulate drop event
     const dropEvent = new Event('drop', { bubbles: true });
     Object.defineProperty(dropEvent, 'dataTransfer', {
       value: dataTransfer,
     });
-    
+
     element.dispatchEvent(dropEvent);
   },
 };
@@ -370,20 +371,20 @@ export const performanceUtils = {
   // Test for memory leaks
   checkForMemoryLeaks: (component: ReactElement, iterations: number = 100) => {
     const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
-    
+
     for (let i = 0; i < iterations; i++) {
       const { unmount } = customRender(component);
       unmount();
     }
-    
+
     // Force garbage collection if available
     if ((global as any).gc) {
       (global as any).gc();
     }
-    
+
     const finalMemory = (performance as any).memory?.usedJSHeapSize || 0;
     const memoryIncrease = finalMemory - initialMemory;
-    
+
     return {
       initialMemory,
       finalMemory,
@@ -400,18 +401,18 @@ export const a11yUtils = {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
     const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1)));
-    
+
     // Check for alt text on images
     const images = screen.getAllByRole('img');
     const imagesWithoutAlt = images.filter(img => !img.getAttribute('alt'));
-    
+
     // Check for form labels
     const inputs = screen.getAllByRole('textbox');
     const inputsWithoutLabels = inputs.filter(input => {
       const id = input.getAttribute('id');
       return !id || !screen.queryByLabelText(new RegExp(id, 'i'));
     });
-    
+
     return {
       headingLevels,
       imagesWithoutAlt: imagesWithoutAlt.length,
@@ -423,25 +424,25 @@ export const a11yUtils = {
   testKeyboardNavigation: async (startElement?: HTMLElement) => {
     const user = userEvent.setup();
     const focusableElements: HTMLElement[] = [];
-    
+
     if (startElement) {
       startElement.focus();
     }
-    
+
     // Tab through all focusable elements
     for (let i = 0; i < 20; i++) {
       await user.keyboard('{Tab}');
       const activeElement = document.activeElement as HTMLElement;
-      
+
       if (focusableElements.includes(activeElement)) {
         break;
       }
-      
+
       focusableElements.push(activeElement);
     }
-    
+
     return focusableElements;
-  }
+  },
 };
 
 // Re-export everything from testing-library

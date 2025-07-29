@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { usePWA } from '../hooks/usePWA';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
+import { usePWA } from '../hooks/usePWA';
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
-import { PWAUtils } from '../utils/pwa';
 import { trackEvent } from '../utils/analytics';
+import { PWAUtils } from '../utils/pwa';
 
 interface PWAInstallBannerProps {
   className?: string;
@@ -26,23 +28,25 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
   onDismiss,
 }) => {
   const { isSupported } = usePWA();
-  const { 
-    canInstall, 
-    isInstalled, 
-    isInstalling, 
+  const {
+    canInstall,
+    isInstalled,
+    isInstalling,
     error: installError,
     install,
     dismiss: dismissPrompt,
-    resetError
+    resetError,
   } = useInstallPrompt();
   const { isOnline, networkQuality } = useOfflineStatus();
   const { hasUpdate, isUpdating, installUpdate } = usePWAUpdates();
-  
+
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    if (!autoShow || !isSupported) return;
+    if (!autoShow || !isSupported) {
+return;
+}
 
     const checkVisibility = () => {
       if (isInstalled || isDismissed || !canInstall) {
@@ -55,7 +59,7 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
       if (dismissedTime) {
         const timeSinceDismissed = Date.now() - parseInt(dismissedTime);
         const daysSinceDismissed = timeSinceDismissed / (1000 * 60 * 60 * 24);
-        
+
         if (daysSinceDismissed < 7) {
           setIsVisible(false);
           return;
@@ -101,7 +105,7 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
     setIsVisible(false);
     dismissPrompt();
     onDismiss?.();
-    
+
     trackEvent('pwa_banner_dismissed', {
       variant,
       timestamp: Date.now(),
@@ -184,7 +188,7 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
           </div>
         </div>
       )}
-      
+
       <div className="flex items-start space-x-3">
         <div className="flex-shrink-0">
           <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
@@ -200,13 +204,13 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Get the full app experience with offline access and faster loading.
           </p>
-          
+
           {!isOnline && (
             <div className="mt-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
               <span className="text-xs text-yellow-800 dark:text-yellow-200">You're offline - Install for better offline experience</span>
             </div>
           )}
-          
+
           {showBenefits && (
             <div className="mt-2 space-y-1">
               <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
@@ -239,13 +243,13 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
           )}
         </div>
       </div>
-      
+
       {installError && (
         <div className="mt-3 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
           <span className="text-xs text-red-800 dark:text-red-200">{installError}</span>
         </div>
       )}
-      
+
       <div className="mt-4 flex space-x-2">
         <button
           onClick={handleInstall}

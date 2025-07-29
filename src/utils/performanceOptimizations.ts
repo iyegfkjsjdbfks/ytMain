@@ -1,9 +1,10 @@
-import { ComponentType, memo, ReactElement } from 'react';
+import type { ComponentType } from 'react';
+import { memo } from 'react';
 
 // Enhanced memoization with custom comparison
 export const withMemo = <P extends object>(
   Component: ComponentType<P>,
-  propsAreEqual?: (prevProps: P, nextProps: P) => boolean
+  propsAreEqual?: (prevProps: P, nextProps: P) => boolean,
 ) => {
   const MemoizedComponent = memo(Component, propsAreEqual);
   MemoizedComponent.displayName = `Memo(${Component.displayName || Component.name})`;
@@ -12,38 +13,56 @@ export const withMemo = <P extends object>(
 
 // Deep comparison for complex props
 export const deepEqual = (a: any, b: any): boolean => {
-  if (a === b) return true;
-  
-  if (a == null || b == null) return false;
-  
-  if (typeof a !== typeof b) return false;
-  
-  if (typeof a !== 'object') return false;
-  
+  if (a === b) {
+return true;
+}
+
+  if (a == null || b == null) {
+return false;
+}
+
+  if (typeof a !== typeof b) {
+return false;
+}
+
+  if (typeof a !== 'object') {
+return false;
+}
+
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
-  
-  if (keysA.length !== keysB.length) return false;
-  
+
+  if (keysA.length !== keysB.length) {
+return false;
+}
+
   for (const key of keysA) {
-    if (!keysB.includes(key)) return false;
-    if (!deepEqual(a[key], b[key])) return false;
+    if (!keysB.includes(key)) {
+return false;
+}
+    if (!deepEqual(a[key], b[key])) {
+return false;
+}
   }
-  
+
   return true;
 };
 
 // Shallow comparison for props
 export const shallowEqual = <T extends object>(a: T, b: T): boolean => {
-  const keysA = Object.keys(a) as (keyof T)[];
-  const keysB = Object.keys(b) as (keyof T)[];
-  
-  if (keysA.length !== keysB.length) return false;
-  
+  const keysA = Object.keys(a) as Array<keyof T>;
+  const keysB = Object.keys(b) as Array<keyof T>;
+
+  if (keysA.length !== keysB.length) {
+return false;
+}
+
   for (const key of keysA) {
-    if (a[key] !== b[key]) return false;
+    if (a[key] !== b[key]) {
+return false;
+}
   }
-  
+
   return true;
 };
 
@@ -62,16 +81,16 @@ export class PerformanceMonitor {
     if (startTime) {
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
+
       performance.mark(`${name}-end`);
       performance.measure(name, `${name}-start`, `${name}-end`);
-      
+
       this.metrics.set(name, duration);
-      
+
       if (import.meta.env.MODE === 'development') {
         console.log(`Performance: ${name} took ${duration.toFixed(2)}ms`);
       }
-      
+
       return duration;
     }
     return 0;
@@ -90,7 +109,7 @@ export class PerformanceMonitor {
           callback(lastEntry);
         }
       });
-      
+
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
       this.observers.set('lcp', observer);
     }
@@ -101,7 +120,7 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach(callback);
       });
-      
+
       observer.observe({ entryTypes: ['first-input'] });
       this.observers.set('fid', observer);
     }
@@ -112,7 +131,7 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach(callback);
       });
-      
+
       observer.observe({ entryTypes: ['layout-shift'] });
       this.observers.set('cls', observer);
     }
@@ -133,24 +152,38 @@ export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
 export const optimizeImageUrl = (url: string, width?: number, height?: number, quality = 80): string => {
-  if (!url) return url;
-  
+  if (!url) {
+return url;
+}
+
   // For YouTube thumbnails, use different quality versions
   if (url.includes('youtube.com') || url.includes('ytimg.com')) {
-    if (width && width <= 120) return url.replace(/maxresdefault|hqdefault|mqdefault/, 'default');
-    if (width && width <= 320) return url.replace(/maxresdefault|hqdefault/, 'mqdefault');
-    if (width && width <= 480) return url.replace(/maxresdefault/, 'hqdefault');
+    if (width && width <= 120) {
+return url.replace(/maxresdefault|hqdefault|mqdefault/, 'default');
+}
+    if (width && width <= 320) {
+return url.replace(/maxresdefault|hqdefault/, 'mqdefault');
+}
+    if (width && width <= 480) {
+return url.replace(/maxresdefault/, 'hqdefault');
+}
     return url;
   }
-  
+
   // For other images, add query parameters if supported
   const separator = url.includes('?') ? '&' : '?';
   const params = [];
-  
-  if (width) params.push(`w=${width}`);
-  if (height) params.push(`h=${height}`);
-  if (quality !== 80) params.push(`q=${quality}`);
-  
+
+  if (width) {
+params.push(`w=${width}`);
+}
+  if (height) {
+params.push(`h=${height}`);
+}
+  if (quality !== 80) {
+params.push(`q=${quality}`);
+}
+
   return params.length > 0 ? `${url}${separator}${params.join('&')}` : url;
 };
 
@@ -189,7 +222,7 @@ export const createMemoryManager = () => {
           accessOrder.delete(firstKey);
         }
       }
-      
+
       cache.set(key, value);
       accessOrder.delete(key);
       accessOrder.add(key);
@@ -221,7 +254,7 @@ export const createMemoryManager = () => {
 
     size() {
       return cache.size;
-    }
+    },
   };
 };
 
@@ -245,7 +278,7 @@ export const createRequestDeduplicator = () => {
 
     clear() {
       pendingRequests.clear();
-    }
+    },
   };
 };
 

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-import { searchForSearchResultsPage } from '@services/googleSearchService';
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
-
 import type { Video } from '@/types/core';
+
+import { searchForSearchResultsPage } from '@services/googleSearchService';
 
 /**
  * SearchResultsPage component for displaying video search results

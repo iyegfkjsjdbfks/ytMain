@@ -4,10 +4,10 @@
  */
 
 import { API_CONFIG } from '../config';
+import { createApiError, createNetworkError } from '../src/types/errors';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
-import { createApiError, createNetworkError, ERROR_CODES } from '../src/types/errors';
+
 import type { Video } from '../types';
-import type { ApiError, NetworkError } from '../src/types/errors';
 
 interface YouTubeVideoObject {
   thumbnailurl?: string;
@@ -468,7 +468,7 @@ class YouTubeSearchService {
           `Google Custom Search API request failed: ${errorText}`,
           searchUrl.toString(),
           'GET',
-          response.status
+          response.status,
         );
         conditionalLogger.apiError(searchUrl.toString(), apiError);
         return [];
@@ -482,7 +482,7 @@ class YouTubeSearchService {
           searchUrl.toString(),
           'GET',
           data.error.code,
-          { errors: data.error.errors }
+          { errors: data.error.errors },
         );
         conditionalLogger.apiError(searchUrl.toString(), apiError);
         return [];
@@ -519,7 +519,7 @@ class YouTubeSearchService {
       conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
         conditionalLogger.debug('Sample recommendations', {
-          samples: videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl }))
+          samples: videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl })),
         }, 'YouTubeSearchService');
       }
 
@@ -528,7 +528,7 @@ class YouTubeSearchService {
     } catch (error) {
       const networkError = createNetworkError(
         `Failed to search for related videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        this.baseUrl
+        this.baseUrl,
       );
       conditionalLogger.error('Error searching for related videos', networkError, 'YouTubeSearchService');
       return [];
@@ -579,7 +579,7 @@ class YouTubeSearchService {
     } catch (error) {
       const networkError = createNetworkError(
         `Failed to search videos: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        this.baseUrl
+        this.baseUrl,
       );
       conditionalLogger.error('Error searching videos', networkError, 'YouTubeSearchService');
       return [];

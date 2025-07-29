@@ -1,5 +1,10 @@
 import React from 'react';
 
+// Import the components for HOCs
+import DataFetchErrorBoundary from './DataFetchErrorBoundary';
+import LiveStreamErrorBoundary from './LiveStreamErrorBoundary';
+import VideoErrorBoundary from './VideoErrorBoundary';
+
 // Re-export all error boundaries and their types
 export { default as VideoErrorBoundary, type VideoErrorBoundaryProps } from './VideoErrorBoundary';
 export { default as LiveStreamErrorBoundary, type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
@@ -11,15 +16,10 @@ export { ErrorBoundary as BaseErrorBoundary } from '../common/components/ErrorBo
 // Re-export all protected components
 export * from './ProtectedComponents';
 
-// Import the components for HOCs
-import VideoErrorBoundary from './VideoErrorBoundary';
-import LiveStreamErrorBoundary from './LiveStreamErrorBoundary';
-import DataFetchErrorBoundary from './DataFetchErrorBoundary';
-
 // Higher-Order Components for wrapping components with error boundaries
 export const withVideoErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps?: Partial<VideoErrorBoundaryProps>
+  errorBoundaryProps?: Partial<VideoErrorBoundaryProps>,
 ) => {
   return React.forwardRef<any, P>((props, ref) => (
     <VideoErrorBoundary {...errorBoundaryProps}>
@@ -30,7 +30,7 @@ export const withVideoErrorBoundary = <P extends object>(
 
 export const withLiveStreamErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps?: Partial<LiveStreamErrorBoundaryProps>
+  errorBoundaryProps?: Partial<LiveStreamErrorBoundaryProps>,
 ) => {
   return React.forwardRef<any, P>((props, ref) => (
     <LiveStreamErrorBoundary {...errorBoundaryProps}>
@@ -41,7 +41,7 @@ export const withLiveStreamErrorBoundary = <P extends object>(
 
 export const withDataFetchErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps?: Partial<DataFetchErrorBoundaryProps>
+  errorBoundaryProps?: Partial<DataFetchErrorBoundaryProps>,
 ) => {
   return React.forwardRef<any, P>((props, ref) => (
     <DataFetchErrorBoundary {...errorBoundaryProps}>

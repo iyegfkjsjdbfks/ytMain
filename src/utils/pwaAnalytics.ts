@@ -1,6 +1,7 @@
 // PWA Analytics Utilities
-import { conditionalLogger } from './conditionalLogger';
 import { createNetworkError } from '../types/errors';
+
+import { conditionalLogger } from './conditionalLogger';
 
 interface PWAAnalyticsEvent {
   action: string;
@@ -359,7 +360,7 @@ return;
     } catch (error) {
       const networkError = createNetworkError(
         `Failed to sync PWA analytics events: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        'analytics-endpoint'
+        'analytics-endpoint',
       );
       conditionalLogger.error('Failed to sync PWA analytics events', networkError, 'PWAAnalytics');
     }

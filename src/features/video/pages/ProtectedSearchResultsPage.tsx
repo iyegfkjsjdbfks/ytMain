@@ -1,8 +1,12 @@
-import React, { useCallback } from 'react';
+import type React from 'react';
+import { useCallback } from 'react';
+
+import { useSearchParams } from 'react-router-dom';
+
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
+
 import SearchResultsPage from './SearchResultsPage';
-import { useSearchParams } from 'react-router-dom';
 
 /**
  * SearchResultsPage wrapped with specialized error boundary

@@ -40,7 +40,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args: any[]) => any>(
   callback: T,
-  delay: number
+  delay: number,
 ): T => {
   const lastCall = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -48,19 +48,19 @@ export const useThrottle = <T extends (...args: any[]) => any>(
   return useCallback(
     ((...args: Parameters<T>) => {
       const now = Date.now();
-      
+
       if (now - lastCall.current >= delay) {
         lastCall.current = now;
         return callback(...args);
-      } else {
+      }
         clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => {
           lastCall.current = Date.now();
           callback(...args);
         }, delay - (now - lastCall.current));
-      }
+
     }) as T,
-    [callback, delay]
+    [callback, delay],
   );
 };
 
@@ -75,7 +75,7 @@ export const useMemoryMonitor = () => {
   useEffect(() => {
     const updateMemoryInfo = () => {
       if ('memory' in performance) {
-        const memory = (performance as any).memory;
+        const { memory } = (performance as any);
         setMemoryInfo({
           usedJSHeapSize: memory.usedJSHeapSize,
           totalJSHeapSize: memory.totalJSHeapSize,
@@ -95,7 +95,7 @@ export const useMemoryMonitor = () => {
 
 // Intersection observer for lazy loading
 export const useIntersectionObserver = (
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -107,7 +107,9 @@ export const useIntersectionObserver = (
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+return;
+}
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -120,7 +122,7 @@ export const useIntersectionObserver = (
         threshold: 0.1,
         rootMargin: '50px',
         ...options,
-      }
+      },
     );
 
     observer.observe(element);
@@ -136,7 +138,7 @@ export const useIntersectionObserver = (
 // Optimized state updates
 export const useBatchedUpdates = <T>(initialValue: T) => {
   const [value, setValue] = useState(initialValue);
-  const pendingUpdates = useRef<((prev: T) => T)[]>([]);
+  const pendingUpdates = useRef<Array<(prev: T) => T>>([]);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
   const batchedSetValue = useCallback((updater: (prev: T) => T) => {

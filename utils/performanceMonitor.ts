@@ -28,7 +28,9 @@ class PerformanceMonitor {
    * Track Core Web Vitals (CLS, FID, LCP)
    */
   public trackWebVitals(): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     // Track Largest Contentful Paint (LCP)
     this.observePerformanceEntry('largest-contentful-paint', (entry) => {
@@ -70,7 +72,9 @@ class PerformanceMonitor {
    * Track custom performance metrics
    */
   public trackCustomMetric(name: string, value: number): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     this.recordMetric({
       name,
@@ -85,11 +89,13 @@ class PerformanceMonitor {
    * Track page load performance
    */
   public trackPageLoad(): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     window.addEventListener('load', () => {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
+
       if (navigation) {
         this.recordMetric({
           name: 'TTFB',
@@ -122,7 +128,9 @@ class PerformanceMonitor {
    * Track React component render performance
    */
   public trackComponentRender(componentName: string, renderTime: number): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     this.recordMetric({
       name: `Component_${componentName}_Render`,
@@ -137,7 +145,9 @@ class PerformanceMonitor {
    * Track API call performance
    */
   public trackApiCall(endpoint: string, duration: number, status: number): void {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled) {
+return;
+}
 
     this.recordMetric({
       name: `API_${endpoint.replace(/[^a-zA-Z0-9]/g, '_')}`,
@@ -177,7 +187,9 @@ class PerformanceMonitor {
    * Send metrics to analytics service
    */
   public async sendMetrics(): Promise<void> {
-    if (!this.isEnabled || this.metrics.length === 0) return;
+    if (!this.isEnabled || this.metrics.length === 0) {
+return;
+}
 
     try {
       // In a real application, you would send this to your analytics service
@@ -239,7 +251,7 @@ export function usePerformanceTracking(componentName: string) {
 // Higher-order component for automatic performance tracking
 export function withPerformanceTracking<P extends object>(
   WrappedComponent: React.ComponentType<P>,
-  componentName?: string
+  componentName?: string,
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 

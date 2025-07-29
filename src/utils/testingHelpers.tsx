@@ -1,8 +1,10 @@
+import type { ReactElement } from 'react';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
-import { ReactElement } from 'react';
+
 
 import type { Video, Channel, Comment } from '../types/core';
 
@@ -29,7 +31,7 @@ interface TestWrapperProps {
 
 export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
   const client = queryClient || createTestQueryClient();
-  
+
   return (
     <QueryClientProvider client={client}>
       <BrowserRouter>
@@ -45,10 +47,10 @@ export const renderWithProviders = (
   options?: {
     queryClient?: QueryClient;
     [key: string]: any;
-  }
+  },
 ) => {
   const { queryClient, ...renderOptions } = options || {};
-  
+
   return render(ui, {
     wrapper: ({ children }) => (
       <TestWrapper queryClient={queryClient}>
@@ -161,7 +163,7 @@ export const userInteraction = {
     const commentInput = screen.getByRole('textbox', { name: /add.*comment/i });
     await userEvent.clear(commentInput);
     await userEvent.type(commentInput, content);
-    
+
     const submitButton = screen.getByRole('button', { name: /comment/i });
     await userEvent.click(submitButton);
   },
@@ -177,17 +179,17 @@ export const mockApiResponses = {
   videos: {
     trending: [createMockVideo({ id: '1', title: 'Trending Video 1' })],
     search: (query: string) => [
-      createMockVideo({ id: '2', title: `Search Result for ${query}` })
+      createMockVideo({ id: '2', title: `Search Result for ${query}` }),
     ],
   },
-  
+
   channels: {
     byId: (id: string) => createMockChannel({ id, name: `Channel ${id}` }),
   },
-  
+
   comments: {
     byVideoId: (videoId: string) => [
-      createMockComment({ id: '1', content: `Comment for video ${videoId}` })
+      createMockComment({ id: '1', content: `Comment for video ${videoId}` }),
     ],
   },
 };
@@ -199,7 +201,7 @@ export const testScenarios = {
       await userInteraction.clickVideo('Test Video');
       expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument();
     },
-    
+
     'should show video controls': () => {
       expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
       expect(screen.getByRole('slider', { name: /seek/i })).toBeInTheDocument();
@@ -211,7 +213,7 @@ export const testScenarios = {
       await userInteraction.likeVideo();
       expect(screen.getByRole('button', { name: /liked/i })).toBeInTheDocument();
     },
-    
+
     'should allow adding comments': async () => {
       await userInteraction.addComment('Great video!');
       expect(screen.getByText('Great video!')).toBeInTheDocument();
@@ -223,7 +225,7 @@ export const testScenarios = {
       await userInteraction.clickVideo('Test Video');
       expect(window.location.pathname).toMatch(/\/watch/);
     },
-    
+
     'should search for videos': async () => {
       await userInteraction.searchFor('test query');
       expect(window.location.search).toContain('q=test+query');
@@ -237,12 +239,12 @@ export const performanceBenchmarks = {
     maxRenderTime: 100, // ms
     maxMemoryUsage: 50 * 1024 * 1024, // 50MB
   },
-  
+
   videoPlayerLoad: {
     maxLoadTime: 500, // ms
     maxBundleSize: 200 * 1024, // 200KB
   },
-  
+
   commentSection: {
     maxRenderTime: 50, // ms per 100 comments
     maxScrollPerformance: 60, // fps

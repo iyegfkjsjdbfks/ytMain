@@ -10,9 +10,9 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useLivePolls } from '@/hooks/useLiveStream';
+import type { LivePoll } from '@/types/livestream';
 import { logger } from '@/utils/logger';
 
-import type { LivePoll } from '@/types/livestream';
 
 interface LivePollsProps {
   streamId: string;

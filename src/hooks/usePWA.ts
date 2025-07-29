@@ -1,12 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
-import { PWA_CONFIG, PWAUtils, PWAEvents } from '../utils/pwa';
-import { conditionalLogger } from '../utils/conditionalLogger';
+
 import { createComponentError } from '@/utils/errorUtils';
+
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { PWAUtils } from '../utils/pwa';
+
 import { useInstallPrompt } from './useInstallPrompt';
-import { useServiceWorker } from './useServiceWorker';
 import { useOfflineStatus } from './useOfflineStatus';
-import { usePWAUpdates } from './usePWAUpdates';
 import { usePWANotifications } from './usePWANotifications';
+import { usePWAUpdates } from './usePWAUpdates';
+import { useServiceWorker } from './useServiceWorker';
 
 interface PWAState {
   isInitialized: boolean;
@@ -26,35 +29,35 @@ interface UsePWAReturn {
   installPWA: () => Promise<boolean>;
   showInstallPrompt: () => Promise<boolean>;
   dismissInstallPrompt: () => void;
-  
+
   // Network & Offline
   isOnline: boolean;
   isOffline: boolean;
   networkQuality: 'fast' | 'slow' | 'offline';
   shouldReduceData: boolean;
-  
+
   // Updates
   updateAvailable: boolean;
   isUpdating: boolean;
   checkForUpdates: () => Promise<boolean>;
   installUpdate: () => Promise<void>;
-  
+
   // Notifications
   notificationPermission: NotificationPermission;
   canShowNotifications: boolean;
   requestNotificationPermission: () => Promise<NotificationPermission>;
   showNotification: (options: any) => Promise<boolean>;
-  
+
   // Features
   shareContent: (data: ShareData) => Promise<boolean>;
   addToHomeScreen: () => void;
   registerBackgroundSync: (tag: string) => Promise<void>;
   cacheVideo: (videoId: string, quality?: string) => Promise<boolean>;
-  
+
   // Analytics
   getInstallStats: () => any;
   getUsageStats: () => any;
-  
+
   // State
   isInitialized: boolean;
   supportedFeatures: string[];
@@ -68,8 +71,8 @@ export const usePWA = (): UsePWAReturn => {
       notifications: false,
       backgroundSync: false,
       sharing: false,
-      offlineSupport: false
-    }
+      offlineSupport: false,
+    },
   });
 
   // Use specialized hooks
@@ -83,32 +86,32 @@ export const usePWA = (): UsePWAReturn => {
   const initializePWA = useCallback(async () => {
     try {
       conditionalLogger.info('Initializing PWA features', undefined, 'usePWA');
-      
+
       // Check feature support
       const features = {
         installPrompt: PWAUtils.isInstallSupported(),
         notifications: notifications.isSupported,
         backgroundSync: 'serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype,
         sharing: 'share' in navigator,
-        offlineSupport: 'serviceWorker' in navigator
+        offlineSupport: 'serviceWorker' in navigator,
       };
-      
+
       setState(prev => ({
         ...prev,
         features,
-        isInitialized: true
+        isInitialized: true,
       }));
-      
+
       conditionalLogger.info(
         'PWA features initialized',
         { supportedFeatures: Object.keys(features).filter(key => features[key as keyof typeof features]) },
-        'usePWA'
+        'usePWA',
       );
     } catch (error) {
       conditionalLogger.error(
         'Failed to initialize PWA features',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWA'
+        'usePWA',
       );
     }
   }, [notifications.isSupported]);
@@ -125,24 +128,24 @@ export const usePWA = (): UsePWAReturn => {
         timestamp: Date.now(),
         features: state.features,
         userAgent: navigator.userAgent,
-        isStandalone: window.matchMedia('(display-mode: standalone)').matches
+        isStandalone: window.matchMedia('(display-mode: standalone)').matches,
       };
-      
+
       try {
         const existingData = JSON.parse(localStorage.getItem('pwa-usage-data') || '[]');
         existingData.push(usageData);
-        
+
         // Keep only last 100 entries
         if (existingData.length > 100) {
           existingData.splice(0, existingData.length - 100);
         }
-        
+
         localStorage.setItem('pwa-usage-data', JSON.stringify(existingData));
       } catch (error) {
         conditionalLogger.error(
           'Failed to track PWA usage',
           { error: error instanceof Error ? error.message : 'Unknown error' },
-          'usePWA'
+          'usePWA',
         );
       }
     }
@@ -166,7 +169,7 @@ export const usePWA = (): UsePWAReturn => {
         conditionalLogger.error(
           'Failed to share content',
           { error: error instanceof Error ? error.message : 'Unknown error' },
-          'usePWA'
+          'usePWA',
         );
       }
       return false;
@@ -183,7 +186,7 @@ export const usePWA = (): UsePWAReturn => {
         notifications.showNotification({
           title: 'Add to Home Screen',
           body: 'Tap the share button and then "Add to Home Screen".',
-          icon: '/icons/icon-192x192.png'
+          icon: '/icons/icon-192x192.png',
         });
       }
     }
@@ -204,7 +207,7 @@ export const usePWA = (): UsePWAReturn => {
       conditionalLogger.error(
         'Failed to register background sync',
         { error: error instanceof Error ? error.message : 'Unknown error', tag },
-        'usePWA'
+        'usePWA',
       );
     }
   }, [state.features.backgroundSync]);
@@ -219,20 +222,20 @@ export const usePWA = (): UsePWAReturn => {
 
       const cache = await caches.open(`youtubex-videos-${quality || 'default'}-v1`);
       const videoUrl = `/api/video/${videoId}${quality ? `?quality=${quality}` : ''}`;
-      
+
       const response = await fetch(videoUrl);
       if (response.ok) {
         await cache.put(`video-${videoId}`, response.clone());
         conditionalLogger.debug('Video cached successfully', { videoId, quality }, 'usePWA');
         return true;
       }
-      
+
       return false;
     } catch (error) {
       conditionalLogger.error(
         'Failed to cache video',
         { error: error instanceof Error ? error.message : 'Unknown error', videoId },
-        'usePWA'
+        'usePWA',
       );
       return false;
     }
@@ -244,9 +247,9 @@ export const usePWA = (): UsePWAReturn => {
       canInstall: installPrompt.canInstall,
       isInstalled: installPrompt.isInstalled,
       installPromptShown: installPrompt.isPromptShown,
-      supportedFeatures: Object.keys(state.features).filter(key => 
-        state.features[key as keyof typeof state.features]
-      )
+      supportedFeatures: Object.keys(state.features).filter(key =>
+        state.features[key as keyof typeof state.features],
+      ),
     };
   }, [installPrompt.canInstall, installPrompt.isInstalled, installPrompt.isPromptShown, state.features]);
 
@@ -257,14 +260,14 @@ export const usePWA = (): UsePWAReturn => {
       networkQuality: offlineStatus.networkQuality,
       updateAvailable: pwaUpdates.updateAvailable,
       notificationPermission: notifications.permission,
-      lastUpdateCheck: pwaUpdates.lastUpdateCheck
+      lastUpdateCheck: pwaUpdates.lastUpdateCheck,
     };
   }, [
     offlineStatus.isOnline,
     offlineStatus.networkQuality,
     pwaUpdates.updateAvailable,
     pwaUpdates.lastUpdateCheck,
-    notifications.permission
+    notifications.permission,
   ]);
 
   const dismissInstallPrompt = (): void => {
@@ -296,40 +299,40 @@ export const usePWA = (): UsePWAReturn => {
     installPWA: installPrompt.installPWA,
     showInstallPrompt: installPrompt.showInstallPrompt,
     dismissInstallPrompt: installPrompt.dismissInstallPrompt,
-    
+
     // Network & Offline
     isOnline: offlineStatus.isOnline,
     isOffline: offlineStatus.isOffline,
     networkQuality: offlineStatus.networkQuality,
     shouldReduceData: offlineStatus.shouldReduceData,
-    
+
     // Updates
     updateAvailable: pwaUpdates.updateAvailable,
     isUpdating: pwaUpdates.isUpdating,
     checkForUpdates: pwaUpdates.checkForUpdates,
     installUpdate: pwaUpdates.installUpdate,
-    
+
     // Notifications
     notificationPermission: notifications.permission,
     canShowNotifications: notifications.canShowNotifications,
     requestNotificationPermission: notifications.requestPermission,
     showNotification: notifications.showNotification,
-    
+
     // Features
     shareContent,
     addToHomeScreen,
     registerBackgroundSync,
     cacheVideo,
-    
+
     // Analytics
     getInstallStats,
     getUsageStats,
-    
+
     // State
     isInitialized: state.isInitialized,
-    supportedFeatures: Object.keys(state.features).filter(key => 
-      state.features[key as keyof typeof state.features]
-    )
+    supportedFeatures: Object.keys(state.features).filter(key =>
+      state.features[key as keyof typeof state.features],
+    ),
   };
 };
 
@@ -381,7 +384,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       const componentError = createComponentError(
         `Error sharing: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'shareContent'
+        'shareContent',
       );
       conditionalLogger.error('Error sharing', componentError, 'usePWA');
       return false;
@@ -398,7 +401,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       const componentError = createComponentError(
         `Error copying to clipboard: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'shareContent'
+        'shareContent',
       );
       conditionalLogger.error('Error copying to clipboard', componentError, 'usePWA');
       return false;
@@ -426,7 +429,7 @@ export const enableBackgroundSync = (tag: string): void => {
       const componentError = createComponentError(
         `Background sync registration failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'enableBackgroundSync'
+        'enableBackgroundSync',
       );
       conditionalLogger.error('Background sync registration failed', componentError, 'usePWA');
     });
@@ -447,7 +450,7 @@ export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boo
       const componentError = createComponentError(
         `Error caching video: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'cacheVideo'
+        'cacheVideo',
       );
       conditionalLogger.error('Error caching video', componentError, 'usePWA');
     }
@@ -465,7 +468,7 @@ export const getCachedVideo = async (videoId: string): Promise<Response | null> 
       const componentError = createComponentError(
         `Error retrieving cached video: ${error instanceof Error ? error.message : 'Unknown error'}`,
         'usePWA',
-        'getCachedVideo'
+        'getCachedVideo',
       );
       conditionalLogger.error('Error retrieving cached video', componentError, 'usePWA');
     }

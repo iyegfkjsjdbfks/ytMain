@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '@/utils/errorUtils';
 
 type NotificationPermission = 'default' | 'granted' | 'denied';
 
@@ -50,18 +50,18 @@ interface UsePWANotificationsReturn {
   canShowNotifications: boolean;
   notificationCount: number;
   pendingNotifications: NotificationOptions[];
-  
+
   // Actions
   requestPermission: () => Promise<NotificationPermission>;
   showNotification: (options: NotificationOptions) => Promise<boolean>;
   scheduleNotification: (options: NotificationOptions, delay: number) => void;
   clearNotifications: (tag?: string) => Promise<void>;
-  
+
   // Settings
   enableQuietHours: (start: string, end: string) => void;
   disableQuietHours: () => void;
   setNotificationFrequency: (maxPerHour: number) => void;
-  
+
   // Analytics
   getNotificationStats: () => NotificationStats;
   resetStats: () => void;
@@ -78,7 +78,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     isRequesting: false,
     lastNotificationTime: null,
     notificationCount: 0,
-    pendingNotifications: []
+    pendingNotifications: [],
   });
 
   // Check if notifications can be shown
@@ -99,17 +99,17 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
     try {
       const permission = await Notification.requestPermission();
-      
+
       setState(prev => ({
         ...prev,
         permission: permission as NotificationPermission,
-        isRequesting: false
+        isRequesting: false,
       }));
 
       conditionalLogger.info(
         'Notification permission requested',
         { permission },
-        'usePWANotifications'
+        'usePWANotifications',
       );
 
       // Track permission request
@@ -120,13 +120,13 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       setState(prev => ({
         ...prev,
         permission: 'denied',
-        isRequesting: false
+        isRequesting: false,
       }));
 
       conditionalLogger.error(
         'Failed to request notification permission',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications'
+        'usePWANotifications',
       );
 
       return 'denied';
@@ -136,7 +136,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   // Check quiet hours
   const isQuietHours = useCallback((): boolean => {
     const quietHours = localStorage.getItem('notification-quiet-hours');
-    
+
     if (!quietHours) {
       return false;
     }
@@ -145,23 +145,23 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       const { start, end } = JSON.parse(quietHours);
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
-      
+
       const startMinutes = parseTimeString(start);
       const endMinutes = parseTimeString(end);
-      
+
       if (startMinutes <= endMinutes) {
         return currentTime >= startMinutes && currentTime <= endMinutes;
-      } else {
+      }
         // Quiet hours span midnight
         return currentTime >= startMinutes || currentTime <= endMinutes;
-      }
+
     } catch (error) {
       conditionalLogger.error(
         'Failed to parse quiet hours',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications'
+        'usePWANotifications',
       );
-      
+
       return false;
     }
   }, []);
@@ -169,7 +169,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   // Check notification frequency limits
   const canSendNotification = useCallback((): boolean => {
     const frequencyLimit = localStorage.getItem('notification-frequency-limit');
-    
+
     if (!frequencyLimit) {
       return true;
     }
@@ -178,10 +178,10 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       const maxPerHour = parseInt(frequencyLimit, 10);
       const stats = getNotificationStats();
       const oneHourAgo = Date.now() - (60 * 60 * 1000);
-      
+
       // Get notifications sent in the last hour
       const recentNotifications = getRecentNotifications(oneHourAgo);
-      
+
       return recentNotifications.length < maxPerHour;
     } catch (error) {
       return true;
@@ -194,9 +194,9 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       conditionalLogger.warn(
         'Cannot show notification - permission not granted or not supported',
         undefined,
-        'usePWANotifications'
+        'usePWANotifications',
       );
-      
+
       return false;
     }
 
@@ -205,15 +205,15 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       conditionalLogger.debug(
         'Notification blocked - quiet hours active',
         undefined,
-        'usePWANotifications'
+        'usePWANotifications',
       );
-      
+
       // Queue for later
       setState(prev => ({
         ...prev,
-        pendingNotifications: [...prev.pendingNotifications, options]
+        pendingNotifications: [...prev.pendingNotifications, options],
       }));
-      
+
       return false;
     }
 
@@ -222,16 +222,16 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       conditionalLogger.debug(
         'Notification blocked - frequency limit reached',
         undefined,
-        'usePWANotifications'
+        'usePWANotifications',
       );
-      
+
       return false;
     }
 
     try {
       // Use service worker for better notification handling
       const registration = await navigator.serviceWorker.getRegistration();
-      
+
       if (registration) {
         await registration.showNotification(options.title, {
           body: options.body,
@@ -244,7 +244,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           silent: options.silent,
           vibrate: options.vibrate,
           actions: options.actions,
-          timestamp: options.timestamp || Date.now()
+          timestamp: options.timestamp || Date.now(),
         });
       } else {
         // Fallback to regular notification
@@ -255,14 +255,14 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           data: options.data,
           requireInteraction: options.requireInteraction,
           silent: options.silent,
-          vibrate: options.vibrate
+          vibrate: options.vibrate,
         });
 
         // Handle notification events
         notification.onclick = () => {
           trackNotificationEvent('clicked', { tag: options.tag });
           notification.close();
-          
+
           // Focus the app window
           if (window.focus) {
             window.focus();
@@ -278,20 +278,20 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       setState(prev => ({
         ...prev,
         lastNotificationTime: Date.now(),
-        notificationCount: prev.notificationCount + 1
+        notificationCount: prev.notificationCount + 1,
       }));
 
       // Track notification
       trackNotificationEvent('sent', {
         tag: options.tag,
         title: options.title,
-        hasActions: !!(options.actions && options.actions.length > 0)
+        hasActions: !!(options.actions && options.actions.length > 0),
       });
 
       conditionalLogger.debug(
         'Notification sent',
         { title: options.title, tag: options.tag },
-        'usePWANotifications'
+        'usePWANotifications',
       );
 
       return true;
@@ -300,9 +300,9 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         'Failed to show notification',
         {
           error: error instanceof Error ? error.message : 'Unknown error',
-          title: options.title
+          title: options.title,
         },
-        'usePWANotifications'
+        'usePWANotifications',
       );
 
       return false;
@@ -318,7 +318,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     conditionalLogger.debug(
       'Notification scheduled',
       { title: options.title, delay },
-      'usePWANotifications'
+      'usePWANotifications',
     );
   }, [showNotification]);
 
@@ -326,10 +326,10 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   const clearNotifications = useCallback(async (tag?: string): Promise<void> => {
     try {
       const registration = await navigator.serviceWorker.getRegistration();
-      
+
       if (registration) {
         const notifications = await registration.getNotifications({ tag });
-        
+
         notifications.forEach(notification => {
           notification.close();
         });
@@ -337,14 +337,14 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         conditionalLogger.debug(
           'Notifications cleared',
           { count: notifications.length, tag },
-          'usePWANotifications'
+          'usePWANotifications',
         );
       }
     } catch (error) {
       conditionalLogger.error(
         'Failed to clear notifications',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications'
+        'usePWANotifications',
       );
     }
   }, []);
@@ -353,40 +353,40 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   const enableQuietHours = useCallback((start: string, end: string) => {
     const quietHours = { start, end };
     localStorage.setItem('notification-quiet-hours', JSON.stringify(quietHours));
-    
+
     conditionalLogger.debug(
       'Quiet hours enabled',
       { start, end },
-      'usePWANotifications'
+      'usePWANotifications',
     );
   }, []);
 
   // Disable quiet hours
   const disableQuietHours = useCallback(() => {
     localStorage.removeItem('notification-quiet-hours');
-    
+
     conditionalLogger.debug(
       'Quiet hours disabled',
       undefined,
-      'usePWANotifications'
+      'usePWANotifications',
     );
   }, []);
 
   // Set notification frequency limit
   const setNotificationFrequency = useCallback((maxPerHour: number) => {
     localStorage.setItem('notification-frequency-limit', maxPerHour.toString());
-    
+
     conditionalLogger.debug(
       'Notification frequency limit set',
       { maxPerHour },
-      'usePWANotifications'
+      'usePWANotifications',
     );
   }, []);
 
   // Get notification statistics
   const getNotificationStats = useCallback((): NotificationStats => {
     const stats = localStorage.getItem('notification-stats');
-    
+
     if (stats) {
       try {
         const parsed = JSON.parse(stats);
@@ -395,13 +395,13 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           totalClicked: parsed.totalClicked || 0,
           totalDismissed: parsed.totalDismissed || 0,
           lastSent: parsed.lastSent || null,
-          clickRate: parsed.totalSent > 0 ? (parsed.totalClicked / parsed.totalSent) * 100 : 0
+          clickRate: parsed.totalSent > 0 ? (parsed.totalClicked / parsed.totalSent) * 100 : 0,
         };
       } catch (error) {
         conditionalLogger.error(
           'Failed to parse notification stats',
           { error: error instanceof Error ? error.message : 'Unknown error' },
-          'usePWANotifications'
+          'usePWANotifications',
         );
       }
     }
@@ -411,7 +411,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       totalClicked: 0,
       totalDismissed: 0,
       lastSent: null,
-      clickRate: 0
+      clickRate: 0,
     };
   }, []);
 
@@ -419,11 +419,11 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   const resetStats = useCallback(() => {
     localStorage.removeItem('notification-stats');
     localStorage.removeItem('notification-events');
-    
+
     conditionalLogger.debug(
       'Notification stats reset',
       undefined,
-      'usePWANotifications'
+      'usePWANotifications',
     );
   }, []);
 
@@ -439,19 +439,19 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       events.push({
         event,
         data,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
-      
+
       // Keep only last 1000 events
       if (events.length > 1000) {
         events.splice(0, events.length - 1000);
       }
-      
+
       localStorage.setItem('notification-events', JSON.stringify(events));
-      
+
       // Update stats
       const stats = getNotificationStats();
-      
+
       if (event === 'sent') {
         stats.totalSent += 1;
         stats.lastSent = Date.now();
@@ -460,15 +460,15 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       } else if (event === 'dismissed') {
         stats.totalDismissed += 1;
       }
-      
+
       stats.clickRate = stats.totalSent > 0 ? (stats.totalClicked / stats.totalSent) * 100 : 0;
-      
+
       localStorage.setItem('notification-stats', JSON.stringify(stats));
     } catch (error) {
       conditionalLogger.error(
         'Failed to track notification event',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications'
+        'usePWANotifications',
       );
     }
   };
@@ -476,8 +476,8 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   const getRecentNotifications = (since: number): any[] => {
     try {
       const events = JSON.parse(localStorage.getItem('notification-events') || '[]');
-      return events.filter((event: any) => 
-        event.event === 'sent' && event.timestamp >= since
+      return events.filter((event: any) =>
+        event.event === 'sent' && event.timestamp >= since,
       );
     } catch (error) {
       return [];
@@ -489,7 +489,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     if (state.isSupported) {
       setState(prev => ({
         ...prev,
-        permission: Notification.permission as NotificationPermission
+        permission: Notification.permission as NotificationPermission,
       }));
     }
   }, [state.isSupported]);
@@ -501,11 +501,11 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       state.pendingNotifications.forEach(notification => {
         showNotification(notification);
       });
-      
+
       // Clear pending notifications
       setState(prev => ({
         ...prev,
-        pendingNotifications: []
+        pendingNotifications: [],
       }));
     }
   }, [isQuietHours, state.pendingNotifications, showNotification]);
@@ -518,21 +518,21 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     canShowNotifications,
     notificationCount: state.notificationCount,
     pendingNotifications: state.pendingNotifications,
-    
+
     // Actions
     requestPermission,
     showNotification,
     scheduleNotification,
     clearNotifications,
-    
+
     // Settings
     enableQuietHours,
     disableQuietHours,
     setNotificationFrequency,
-    
+
     // Analytics
     getNotificationStats,
-    resetStats
+    resetStats,
   };
 };
 

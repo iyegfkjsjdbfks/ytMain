@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { usePWA } from '../hooks/usePWA';
+import type React from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
-import { usePWAUpdates } from '../hooks/usePWAUpdates';
+import { usePWA } from '../hooks/usePWA';
 import { usePWANotifications } from '../hooks/usePWANotifications';
+import { usePWAUpdates } from '../hooks/usePWAUpdates';
 import { conditionalLogger } from '../utils/conditionalLogger';
 
 interface ModularPWAInstallBannerProps {
@@ -41,13 +43,13 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
   customTheme,
   onInstallSuccess,
   onInstallDismiss,
-  onUpdateInstall
+  onUpdateInstall,
 }) => {
   const [state, setState] = useState<BannerState>({
     isVisible: false,
     currentView: 'install',
     isAnimating: false,
-    dismissedAt: null
+    dismissedAt: null,
   });
 
   // Use modular hooks
@@ -65,7 +67,9 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
 
   // Auto-show logic
   useEffect(() => {
-    if (!autoShow) return;
+    if (!autoShow) {
+return;
+}
 
     const checkAutoShow = () => {
       // Don't show if recently dismissed (within 24 hours)
@@ -100,7 +104,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
         setState(prev => ({
           ...prev,
           isVisible: true,
-          currentView
+          currentView,
         }));
       }
     };
@@ -113,7 +117,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
     shouldShowInstall,
     shouldShowUpdate,
     shouldShowOffline,
-    shouldShowNotification
+    shouldShowNotification,
   ]);
 
   // Handle install
@@ -122,15 +126,15 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
 
     try {
       const success = await installPrompt.installPWA();
-      
+
       if (success) {
         conditionalLogger.info('PWA installed successfully', undefined, 'ModularPWAInstallBanner');
         onInstallSuccess?.();
-        
+
         setState(prev => ({
           ...prev,
           isVisible: false,
-          isAnimating: false
+          isAnimating: false,
         }));
       } else {
         setState(prev => ({ ...prev, isAnimating: false }));
@@ -139,7 +143,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
       conditionalLogger.error(
         'Failed to install PWA',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner'
+        'ModularPWAInstallBanner',
       );
       setState(prev => ({ ...prev, isAnimating: false }));
     }
@@ -156,7 +160,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
       conditionalLogger.error(
         'Failed to install update',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner'
+        'ModularPWAInstallBanner',
       );
     }
 
@@ -172,7 +176,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
       setState(prev => ({
         ...prev,
         isVisible: false,
-        isAnimating: false
+        isAnimating: false,
       }));
     } catch (error) {
       setState(prev => ({ ...prev, isAnimating: false }));
@@ -184,7 +188,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
     setState(prev => ({
       ...prev,
       isVisible: false,
-      dismissedAt: Date.now()
+      dismissedAt: Date.now(),
     }));
 
     localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
@@ -201,14 +205,14 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
     primaryColor: customTheme?.primaryColor || '#007bff',
     backgroundColor: customTheme?.backgroundColor || '#ffffff',
     textColor: customTheme?.textColor || '#333333',
-    borderRadius: customTheme?.borderRadius || '8px'
+    borderRadius: customTheme?.borderRadius || '8px',
   };
 
   // Position classes
   const positionClasses = {
     top: 'top-4 left-4 right-4',
     bottom: 'bottom-4 left-4 right-4',
-    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
   };
 
   // Variant classes
@@ -216,7 +220,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
     default: 'p-4 shadow-lg',
     minimal: 'p-2 shadow-md',
     detailed: 'p-6 shadow-xl',
-    floating: 'p-4 shadow-2xl rounded-full'
+    floating: 'p-4 shadow-2xl rounded-full',
   };
 
   // Content based on current view
@@ -376,11 +380,11 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
         backgroundColor: theme.backgroundColor,
         borderRadius: theme.borderRadius,
         transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
-        opacity: state.isVisible ? 1 : 0
+        opacity: state.isVisible ? 1 : 0,
       }}
     >
       {renderContent()}
-      
+
       {/* Network status indicator */}
       {showNetworkStatus && (
         <div className="absolute top-2 right-2">

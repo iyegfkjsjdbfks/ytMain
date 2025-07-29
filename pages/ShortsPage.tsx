@@ -95,7 +95,7 @@ return [];
           viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0,
-          definition: 'hd' as 'hd' | 'sd'
+          definition: 'hd' as 'hd' | 'sd',
         };
         return shortVideo;
       });

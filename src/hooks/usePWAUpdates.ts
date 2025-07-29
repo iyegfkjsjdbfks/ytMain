@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '@/utils/errorUtils';
 
 interface UpdateState {
   updateAvailable: boolean;
@@ -26,10 +26,10 @@ interface UsePWAUpdatesReturn {
   lastUpdateCheck: number | null;
   updateSize: number | null;
   updateVersion: string | null;
-  
+
   // Cache info
   cacheInfo: CacheInfo | null;
-  
+
   // Actions
   checkForUpdates: () => Promise<boolean>;
   installUpdate: () => Promise<void>;
@@ -37,7 +37,7 @@ interface UsePWAUpdatesReturn {
   dismissUpdate: () => void;
   clearCache: () => Promise<void>;
   getCacheSize: () => Promise<number>;
-  
+
   // Auto-update settings
   enableAutoUpdate: (enabled: boolean) => void;
   setUpdateInterval: (minutes: number) => void;
@@ -55,15 +55,15 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     lastUpdateCheck: null,
     updateSize: null,
     updateVersion: null,
-    skipWaiting: false
+    skipWaiting: false,
   });
 
   const [cacheInfo, setCacheInfo] = useState<CacheInfo | null>(null);
   const [autoUpdateEnabled, setAutoUpdateEnabled] = useState<boolean>(
-    localStorage.getItem('pwa-auto-update') === 'true'
+    localStorage.getItem('pwa-auto-update') === 'true',
   );
   const [updateInterval, setUpdateIntervalState] = useState<number>(
-    parseInt(localStorage.getItem('pwa-update-interval') || '60', 10)
+    parseInt(localStorage.getItem('pwa-update-interval') || '60', 10),
   );
 
   // Check for service worker updates
@@ -85,40 +85,40 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
       // Check if there's a waiting service worker
       const hasUpdate = !!registration.waiting || !!registration.installing;
-      
+
       if (hasUpdate) {
         // Try to get update information
         const updateInfo = await getUpdateInfo(registration);
-        
+
         setState(prev => ({
           ...prev,
           updateAvailable: true,
           updateSize: updateInfo.size,
-          updateVersion: updateInfo.version
+          updateVersion: updateInfo.version,
         }));
-        
+
         conditionalLogger.info(
           'PWA update available',
           { version: updateInfo.version, size: updateInfo.size },
-          'usePWAUpdates'
+          'usePWAUpdates',
         );
       }
 
       return hasUpdate;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      
+
       setState(prev => ({
         ...prev,
-        updateError: errorMessage
+        updateError: errorMessage,
       }));
-      
+
       conditionalLogger.error(
         'Failed to check for updates',
         { error: errorMessage },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
-      
+
       return false;
     }
   }, []);
@@ -129,13 +129,13 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       setState(prev => ({ ...prev, isUpdating: true, updateError: null }));
 
       const registration = await navigator.serviceWorker.getRegistration();
-      if (!registration || !registration.waiting) {
+      if (!registration?.waiting) {
         throw new Error('No update available');
       }
 
       // Skip waiting and activate new service worker
       registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-      
+
       setState(prev => ({ ...prev, skipWaiting: true }));
 
       // Wait for the new service worker to take control
@@ -144,9 +144,9 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
           navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);
           resolve();
         };
-        
+
         navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange);
-        
+
         // Fallback timeout
         setTimeout(() => {
           navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);
@@ -161,26 +161,26 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         isUpdating: false,
         updateSize: null,
         updateVersion: null,
-        skipWaiting: false
+        skipWaiting: false,
       }));
 
       conditionalLogger.info('PWA update installed successfully', undefined, 'usePWAUpdates');
-      
+
       // Reload the page to use the new version
       window.location.reload();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Update failed';
-      
+
       setState(prev => ({
         ...prev,
         isUpdating: false,
-        updateError: errorMessage
+        updateError: errorMessage,
       }));
-      
+
       conditionalLogger.error(
         'Failed to install update',
         { error: errorMessage },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
     }
   }, []);
@@ -192,21 +192,21 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       updateAvailable: false,
       updateSize: null,
       updateVersion: null,
-      updateError: null
+      updateError: null,
     }));
-    
+
     // Store skip information
     const skipInfo = {
       version: state.updateVersion,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
-    
+
     localStorage.setItem('pwa-skipped-update', JSON.stringify(skipInfo));
-    
+
     conditionalLogger.debug(
       'PWA update skipped',
       { version: state.updateVersion },
-      'usePWAUpdates'
+      'usePWAUpdates',
     );
   }, [state.updateVersion]);
 
@@ -215,7 +215,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     setState(prev => ({
       ...prev,
       updateAvailable: false,
-      updateError: null
+      updateError: null,
     }));
   }, []);
 
@@ -232,7 +232,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       for (const cacheName of cacheNames) {
         const cache = await caches.open(cacheName);
         const requests = await cache.keys();
-        
+
         for (const request of requests) {
           const response = await cache.match(request);
           if (response) {
@@ -247,9 +247,9 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.error(
         'Failed to calculate cache size',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
-      
+
       return 0;
     }
   }, []);
@@ -262,28 +262,28 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       }
 
       const cacheNames = await caches.keys();
-      
+
       await Promise.all(
-        cacheNames.map(cacheName => caches.delete(cacheName))
+        cacheNames.map(cacheName => caches.delete(cacheName)),
       );
 
       // Update cache info
       setCacheInfo({
         totalSize: 0,
         cacheNames: [],
-        lastCacheUpdate: Date.now()
+        lastCacheUpdate: Date.now(),
       });
 
       conditionalLogger.info(
         'All caches cleared',
         { clearedCaches: cacheNames.length },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
     } catch (error) {
       conditionalLogger.error(
         'Failed to clear cache',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
     }
   }, []);
@@ -292,11 +292,11 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   const enableAutoUpdate = useCallback((enabled: boolean) => {
     setAutoUpdateEnabled(enabled);
     localStorage.setItem('pwa-auto-update', enabled.toString());
-    
+
     conditionalLogger.debug(
       `Auto-update ${enabled ? 'enabled' : 'disabled'}`,
       undefined,
-      'usePWAUpdates'
+      'usePWAUpdates',
     );
   }, []);
 
@@ -304,11 +304,11 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   const setUpdateInterval = useCallback((minutes: number) => {
     setUpdateIntervalState(minutes);
     localStorage.setItem('pwa-update-interval', minutes.toString());
-    
+
     conditionalLogger.debug(
       'Update interval changed',
       { minutes },
-      'usePWAUpdates'
+      'usePWAUpdates',
     );
   }, []);
 
@@ -317,39 +317,39 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     try {
       // Try to get version from service worker
       const worker = registration.waiting || registration.installing;
-      
+
       if (worker) {
         // Send message to get version info
         const messageChannel = new MessageChannel();
-        
+
         const versionPromise = new Promise<string>((resolve) => {
           messageChannel.port1.onmessage = (event) => {
             resolve(event.data.version || 'unknown');
           };
-          
+
           setTimeout(() => resolve('unknown'), 1000);
         });
-        
+
         worker.postMessage(
           { type: 'GET_VERSION' },
-          [messageChannel.port2]
+          [messageChannel.port2],
         );
-        
+
         const version = await versionPromise;
-        
+
         return {
           version,
-          size: null // Size calculation would require more complex implementation
+          size: null, // Size calculation would require more complex implementation
         };
       }
     } catch (error) {
       conditionalLogger.debug(
         'Could not get update info',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
     }
-    
+
     return { version: 'unknown', size: null };
   }, []);
 
@@ -362,17 +362,17 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
       const cacheNames = await caches.keys();
       const totalSize = await getCacheSize();
-      
+
       setCacheInfo({
         totalSize,
         cacheNames,
-        lastCacheUpdate: Date.now()
+        lastCacheUpdate: Date.now(),
       });
     } catch (error) {
       conditionalLogger.error(
         'Failed to update cache info',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates'
+        'usePWAUpdates',
       );
     }
   }, [getCacheSize]);
@@ -398,7 +398,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     // Listen for service worker updates
     navigator.serviceWorker.addEventListener('message', handleMessage);
-    
+
     // Set up auto-update timer
     if (autoUpdateEnabled && updateInterval > 0) {
       updateTimer = setInterval(() => {
@@ -414,7 +414,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     return () => {
       navigator.serviceWorker.removeEventListener('message', handleMessage);
-      
+
       if (updateTimer) {
         clearInterval(updateTimer);
       }
@@ -429,10 +429,10 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     lastUpdateCheck: state.lastUpdateCheck,
     updateSize: state.updateSize,
     updateVersion: state.updateVersion,
-    
+
     // Cache info
     cacheInfo,
-    
+
     // Actions
     checkForUpdates,
     installUpdate,
@@ -440,10 +440,10 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     dismissUpdate,
     clearCache,
     getCacheSize,
-    
+
     // Auto-update settings
     enableAutoUpdate,
-    setUpdateInterval
+    setUpdateInterval,
   };
 };
 

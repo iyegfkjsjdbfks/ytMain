@@ -4,8 +4,7 @@
  * with real-time monitoring and automatic rollback capabilities.
  */
 
-import { advancedAPM, rumSystem } from './advancedMonitoring';
-import { securityUtils } from './securityUtils';
+import { advancedAPM } from './advancedMonitoring';
 import { performanceMonitor } from './performanceMonitor';
 
 // Types for feature flag system
@@ -132,12 +131,14 @@ class AdvancedFeatureFlagManager {
    * Start the feature flag system
    */
   start(): void {
-    if (this.isRunning) return;
-    
+    if (this.isRunning) {
+return;
+}
+
     this.isRunning = true;
     this.startMonitoring();
     this.startRolloutScheduler();
-    
+
     console.log('🚩 Advanced feature flag system started');
   }
 
@@ -146,11 +147,11 @@ class AdvancedFeatureFlagManager {
    */
   stop(): void {
     this.isRunning = false;
-    
+
     // Clear all timers
     this.rolloutTimers.forEach(timer => clearTimeout(timer));
     this.rolloutTimers.clear();
-    
+
     console.log('🚩 Advanced feature flag system stopped');
   }
 
@@ -166,24 +167,24 @@ class AdvancedFeatureFlagManager {
         updatedAt: now,
         createdBy: 'system',
         tags: flag.metadata?.tags || [],
-        environment: process.env.NODE_ENV || 'development'
-      }
+        environment: process.env.NODE_ENV || 'development',
+      },
     };
-    
+
     this.flags.set(flag.id, fullFlag);
     this.clearEvaluationCache(flag.id);
-    
+
     // Start rollout if gradual
     if (fullFlag.rolloutStrategy.type === 'gradual') {
       this.startGradualRollout(fullFlag);
     }
-    
+
     console.log(`🚩 Feature flag '${flag.name}' created/updated`);
-    
+
     advancedAPM.recordMetric('feature-flag-created', 1, {
       flagId: flag.id,
       flagName: flag.name,
-      type: flag.type
+      type: flag.type,
     });
   }
 
@@ -206,36 +207,36 @@ class AdvancedFeatureFlagManager {
 
     // Evaluate flag
     const evaluation = this.performEvaluation(flag, context);
-    
+
     // Cache result (5 minute TTL)
     this.evaluationCache.set(cacheKey, {
       value: evaluation.value,
-      expiry: Date.now() + 5 * 60 * 1000
+      expiry: Date.now() + 5 * 60 * 1000,
     });
-    
+
     // Record evaluation
     this.evaluationHistory.push(evaluation);
-    
+
     // Keep only last 10000 evaluations
     if (this.evaluationHistory.length > 10000) {
       this.evaluationHistory.splice(0, this.evaluationHistory.length - 10000);
     }
-    
+
     // Track metrics
     if (flag.monitoring.trackEvents) {
       advancedAPM.recordMetric('feature-flag-evaluation', 1, {
         flagId,
         value: String(evaluation.value),
         variant: evaluation.variant || 'default',
-        reason: evaluation.reason
+        reason: evaluation.reason,
       });
     }
-    
+
     // Track performance impact
     if (flag.monitoring.trackPerformance) {
       this.trackPerformanceImpact(flagId, evaluation.value);
     }
-    
+
     return evaluation.value;
   }
 
@@ -260,14 +261,14 @@ class AdvancedFeatureFlagManager {
     const deleted = this.flags.delete(flagId);
     if (deleted) {
       this.clearEvaluationCache(flagId);
-      
+
       // Clear rollout timer
       const timer = this.rolloutTimers.get(flagId);
       if (timer) {
         clearTimeout(timer);
         this.rolloutTimers.delete(flagId);
       }
-      
+
       console.log(`🚩 Feature flag '${flagId}' deleted`);
     }
     return deleted;
@@ -281,17 +282,17 @@ class AdvancedFeatureFlagManager {
     if (!flag) {
       throw new Error(`Feature flag '${flagId}' not found`);
     }
-    
+
     flag.rolloutStrategy.config.percentage = Math.max(0, Math.min(100, percentage));
     flag.metadata.updatedAt = Date.now();
-    
+
     this.clearEvaluationCache(flagId);
-    
+
     console.log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
-    
+
     advancedAPM.recordMetric('feature-flag-rollout-updated', 1, {
       flagId,
-      percentage: percentage.toString()
+      percentage: percentage.toString(),
     });
   }
 
@@ -303,17 +304,17 @@ class AdvancedFeatureFlagManager {
     if (!flag) {
       throw new Error(`Feature flag '${flagId}' not found`);
     }
-    
+
     flag.enabled = enabled;
     flag.metadata.updatedAt = Date.now();
-    
+
     this.clearEvaluationCache(flagId);
-    
+
     console.log(`🚩 Feature flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
-    
+
     advancedAPM.recordMetric('feature-flag-toggled', 1, {
       flagId,
-      enabled: enabled.toString()
+      enabled: enabled.toString(),
     });
   }
 
@@ -332,25 +333,25 @@ class AdvancedFeatureFlagManager {
   } {
     const cutoff = Date.now() - (hours * 60 * 60 * 1000);
     let evaluations = this.evaluationHistory.filter(e => e.timestamp > cutoff);
-    
+
     if (flagId) {
       evaluations = evaluations.filter(e => e.flagId === flagId);
     }
-    
+
     const uniqueUsers = new Set(evaluations.map(e => e.userId).filter(Boolean)).size;
-    
+
     const variantDistribution: Record<string, number> = {};
     evaluations.forEach(e => {
       const variant = e.variant || 'default';
       variantDistribution[variant] = (variantDistribution[variant] || 0) + 1;
     });
-    
+
     // Mock conversion rates and performance data
     const conversionRates: Record<string, number> = {};
     Object.keys(variantDistribution).forEach(variant => {
       conversionRates[variant] = Math.random() * 0.1 + 0.05; // 5-15%
     });
-    
+
     return {
       totalEvaluations: evaluations.length,
       uniqueUsers,
@@ -358,8 +359,8 @@ class AdvancedFeatureFlagManager {
       conversionRates,
       performanceImpact: {
         averageLoadTime: Math.random() * 500 + 200,
-        errorRate: Math.random() * 0.02
-      }
+        errorRate: Math.random() * 0.02,
+      },
     };
   }
 
@@ -368,24 +369,24 @@ class AdvancedFeatureFlagManager {
    */
   async runABTestAnalysis(flagId: string): Promise<ABTestResult[]> {
     const flag = this.flags.get(flagId);
-    if (!flag || !flag.variants || flag.variants.length < 2) {
+    if (!flag?.variants || flag.variants.length < 2) {
       throw new Error('Flag must have at least 2 variants for A/B testing');
     }
-    
+
     const results: ABTestResult[] = [];
     const analytics = this.getEvaluationAnalytics(flagId);
-    
+
     // Analyze each metric for each variant
     const metrics = ['conversion_rate', 'engagement_time', 'bounce_rate'];
-    
+
     for (const metric of metrics) {
       const variantResults: Record<string, { value: number; sampleSize: number }> = {};
-      
+
       // Generate mock data for each variant
       flag.variants.forEach(variant => {
         const sampleSize = analytics.variantDistribution[variant.id] || 0;
         let value: number;
-        
+
         switch (metric) {
           case 'conversion_rate':
             value = analytics.conversionRates[variant.id] || 0;
@@ -399,28 +400,28 @@ class AdvancedFeatureFlagManager {
           default:
             value = Math.random();
         }
-        
+
         variantResults[variant.id] = { value, sampleSize };
       });
-      
+
       // Calculate statistical significance (simplified)
       const variants = Object.keys(variantResults);
       if (variants.length >= 2) {
         const controlVariant = variants[0];
         const testVariant = variants[1];
-        
+
         const controlValue = variantResults[controlVariant].value;
         const testValue = variantResults[testVariant].value;
-        
+
         const difference = Math.abs(testValue - controlValue);
         const relativeDifference = difference / controlValue;
-        
+
         // Mock statistical significance calculation
         const confidence = Math.min(0.99, relativeDifference * 2);
         const significantDifference = confidence > 0.95;
-        
+
         const winningVariant = testValue > controlValue ? testVariant : controlVariant;
-        
+
         results.push({
           flagId,
           variant: testVariant,
@@ -429,15 +430,15 @@ class AdvancedFeatureFlagManager {
           sampleSize: variantResults[testVariant].sampleSize,
           confidence,
           significantDifference,
-          winningVariant: significantDifference ? winningVariant : undefined
+          winningVariant: significantDifference ? winningVariant : undefined,
         });
       }
     }
-    
+
     this.abTestResults.set(flagId, results);
-    
+
     console.log(`📊 A/B test analysis completed for flag '${flagId}'`);
-    
+
     return results;
   }
 
@@ -451,26 +452,26 @@ class AdvancedFeatureFlagManager {
     confidence: number;
   } {
     const results = this.abTestResults.get(flagId) || [];
-    
+
     if (results.length === 0) {
       return {
         action: 'continue',
         reason: 'Insufficient data for analysis',
-        confidence: 0
+        confidence: 0,
       };
     }
-    
+
     // Find results with significant differences
     const significantResults = results.filter(r => r.significantDifference);
-    
+
     if (significantResults.length === 0) {
       return {
         action: 'extend_test',
         reason: 'No statistically significant differences found',
-        confidence: Math.max(...results.map(r => r.confidence))
+        confidence: Math.max(...results.map(r => r.confidence)),
       };
     }
-    
+
     // Check if there's a consistent winner
     const winnerCounts: Record<string, number> = {};
     significantResults.forEach(r => {
@@ -478,23 +479,23 @@ class AdvancedFeatureFlagManager {
         winnerCounts[r.winningVariant] = (winnerCounts[r.winningVariant] || 0) + 1;
       }
     });
-    
+
     const topWinner = Object.entries(winnerCounts)
-      .sort(([,a], [,b]) => b - a)[0];
-    
+      .sort(([, a], [, b]) => b - a)[0];
+
     if (topWinner && topWinner[1] >= significantResults.length * 0.7) {
       return {
         action: 'promote_winner',
         reason: `Variant '${topWinner[0]}' shows consistent improvement across metrics`,
         winningVariant: topWinner[0],
-        confidence: Math.max(...significantResults.map(r => r.confidence))
+        confidence: Math.max(...significantResults.map(r => r.confidence)),
       };
     }
-    
+
     return {
       action: 'continue',
       reason: 'Mixed results, continue testing for clearer winner',
-      confidence: Math.max(...results.map(r => r.confidence))
+      confidence: Math.max(...results.map(r => r.confidence)),
     };
   }
 
@@ -503,27 +504,31 @@ class AdvancedFeatureFlagManager {
    */
   async autoPromoteWinner(flagId: string): Promise<void> {
     const recommendation = this.getABTestRecommendations(flagId);
-    
+
     if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
       const flag = this.flags.get(flagId);
-      if (!flag) return;
-      
+      if (!flag) {
+return;
+}
+
       const winningVariant = flag.variants?.find(v => v.id === recommendation.winningVariant);
-      if (!winningVariant) return;
-      
+      if (!winningVariant) {
+return;
+}
+
       // Update flag to use winning variant as default
       flag.defaultValue = winningVariant.value;
       flag.rolloutStrategy.config.percentage = 100;
       flag.metadata.updatedAt = Date.now();
-      
+
       this.clearEvaluationCache(flagId);
-      
+
       console.log(`🏆 Auto-promoted winning variant '${winningVariant.name}' for flag '${flagId}'`);
-      
+
       advancedAPM.recordMetric('feature-flag-auto-promoted', 1, {
         flagId,
         winningVariant: winningVariant.id,
-        confidence: recommendation.confidence.toString()
+        confidence: recommendation.confidence.toString(),
       });
     }
   }
@@ -533,20 +538,22 @@ class AdvancedFeatureFlagManager {
    */
   emergencyRollback(flagId: string, reason: string): void {
     const flag = this.flags.get(flagId);
-    if (!flag) return;
-    
+    if (!flag) {
+return;
+}
+
     // Disable flag or set to safe default
     flag.enabled = false;
     flag.rolloutStrategy.config.percentage = 0;
     flag.metadata.updatedAt = Date.now();
-    
+
     this.clearEvaluationCache(flagId);
-    
+
     console.error(`🚨 Emergency rollback for flag '${flagId}': ${reason}`);
-    
+
     advancedAPM.recordMetric('feature-flag-emergency-rollback', 1, {
       flagId,
-      reason
+      reason,
     });
   }
 
@@ -557,15 +564,15 @@ class AdvancedFeatureFlagManager {
       value: flag.defaultValue,
       timestamp: Date.now(),
       context,
-      reason: 'default'
+      reason: 'default',
     };
-    
+
     // Check if flag is enabled
     if (!flag.enabled) {
       evaluation.reason = 'flag_disabled';
       return evaluation;
     }
-    
+
     // Check schedule
     if (flag.schedule) {
       const now = Date.now();
@@ -578,11 +585,13 @@ class AdvancedFeatureFlagManager {
         return evaluation;
       }
     }
-    
+
     // Check targeting rules
     for (const rule of flag.targeting) {
-      if (!rule.enabled) continue;
-      
+      if (!rule.enabled) {
+continue;
+}
+
       const ruleMatches = this.evaluateTargetingRule(rule, context);
       if (ruleMatches) {
         evaluation.value = rule.value;
@@ -590,7 +599,7 @@ class AdvancedFeatureFlagManager {
         break;
       }
     }
-    
+
     // Apply rollout strategy
     const rolloutResult = this.applyRolloutStrategy(flag, context);
     if (rolloutResult.shouldApply) {
@@ -598,23 +607,23 @@ class AdvancedFeatureFlagManager {
       evaluation.variant = rolloutResult.variant;
       evaluation.reason = rolloutResult.reason;
     }
-    
+
     return evaluation;
   }
 
   private evaluateTargetingRule(rule: TargetingRule, context: UserContext): boolean {
-    const results = rule.conditions.map(condition => 
-      this.evaluateTargetingCondition(condition, context)
+    const results = rule.conditions.map(condition =>
+      this.evaluateTargetingCondition(condition, context),
     );
-    
-    return rule.operator === 'AND' 
+
+    return rule.operator === 'AND'
       ? results.every(r => r)
       : results.some(r => r);
   }
 
   private evaluateTargetingCondition(condition: TargetingCondition, context: UserContext): boolean {
     const contextValue = this.getContextValue(condition.attribute, context);
-    
+
     switch (condition.operator) {
       case 'equals':
         return contextValue === condition.value;
@@ -666,53 +675,53 @@ class AdvancedFeatureFlagManager {
     reason: string;
   } {
     const strategy = flag.rolloutStrategy;
-    
+
     switch (strategy.type) {
       case 'immediate':
         return {
           shouldApply: true,
           value: flag.defaultValue,
-          reason: 'immediate_rollout'
+          reason: 'immediate_rollout',
         };
-        
+
       case 'gradual':
       case 'user-based':
         const percentage = strategy.config.percentage || 0;
         const hash = this.getUserHash(context.userId || context.sessionId || 'anonymous', flag.id);
         const shouldInclude = hash < percentage;
-        
+
         if (shouldInclude && flag.variants && flag.variants.length > 0) {
           const variant = this.selectVariant(flag.variants, hash);
           return {
             shouldApply: true,
             value: variant.value,
             variant: variant.id,
-            reason: 'variant_selected'
+            reason: 'variant_selected',
           };
         }
-        
+
         return {
           shouldApply: shouldInclude,
           value: flag.defaultValue,
-          reason: shouldInclude ? 'rollout_included' : 'rollout_excluded'
+          reason: shouldInclude ? 'rollout_included' : 'rollout_excluded',
         };
-        
+
       case 'geographic':
         const geoTargets = strategy.config.geoTargets || [];
         const userCountry = context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
-        
+
         return {
           shouldApply: geoMatch,
           value: flag.defaultValue,
-          reason: geoMatch ? 'geo_included' : 'geo_excluded'
+          reason: geoMatch ? 'geo_included' : 'geo_excluded',
         };
-        
+
       default:
         return {
           shouldApply: false,
           value: flag.defaultValue,
-          reason: 'unknown_strategy'
+          reason: 'unknown_strategy',
         };
     }
   }
@@ -720,7 +729,7 @@ class AdvancedFeatureFlagManager {
   private selectVariant(variants: FlagVariant[], hash: number): FlagVariant {
     // Normalize hash to 0-100 range
     const normalizedHash = hash % 100;
-    
+
     let cumulativeWeight = 0;
     for (const variant of variants) {
       cumulativeWeight += variant.weight;
@@ -728,7 +737,7 @@ class AdvancedFeatureFlagManager {
         return variant;
       }
     }
-    
+
     // Fallback to first variant
     return variants[0];
   }
@@ -750,7 +759,7 @@ class AdvancedFeatureFlagManager {
       flagId,
       context.userId || 'anonymous',
       context.country || 'unknown',
-      context.deviceType || 'unknown'
+      context.deviceType || 'unknown',
     ];
     return keyParts.join(':');
   }
@@ -776,25 +785,25 @@ class AdvancedFeatureFlagManager {
     if (strategy.type !== 'gradual' || !strategy.config.incrementPercentage || !strategy.config.incrementInterval) {
       return;
     }
-    
+
     const currentPercentage = strategy.config.percentage || 0;
-    const incrementPercentage = strategy.config.incrementPercentage;
+    const { incrementPercentage } = strategy.config;
     const incrementInterval = strategy.config.incrementInterval * 60 * 1000; // Convert to ms
-    
+
     if (currentPercentage >= 100) {
       return; // Already at 100%
     }
-    
+
     const timer = setTimeout(() => {
       const newPercentage = Math.min(100, currentPercentage + incrementPercentage);
       this.updateRolloutPercentage(flag.id, newPercentage);
-      
+
       // Schedule next increment if not at 100%
       if (newPercentage < 100) {
         this.startGradualRollout(flag);
       }
     }, incrementInterval);
-    
+
     this.rolloutTimers.set(flag.id, timer);
   }
 
@@ -802,21 +811,25 @@ class AdvancedFeatureFlagManager {
     // Track performance metrics when flag is evaluated
     const metrics = performanceMonitor.getMetrics();
     const loadTime = metrics.find(m => m.name === 'page-load-time')?.value || 0;
-    
+
     advancedAPM.recordMetric('feature-flag-performance-impact', loadTime, {
       flagId,
-      flagValue: String(flagValue)
+      flagValue: String(flagValue),
     });
   }
 
   private startMonitoring(): void {
     // Monitor flag performance and trigger alerts
     setInterval(() => {
-      if (!this.isRunning) return;
-      
+      if (!this.isRunning) {
+return;
+}
+
       this.flags.forEach(flag => {
-        if (!flag.monitoring.alertThresholds.length) return;
-        
+        if (!flag.monitoring.alertThresholds.length) {
+return;
+}
+
         flag.monitoring.alertThresholds.forEach(threshold => {
           this.checkAlertThreshold(flag, threshold);
         });
@@ -827,24 +840,28 @@ class AdvancedFeatureFlagManager {
   private startRolloutScheduler(): void {
     // Check for scheduled flag activations
     setInterval(() => {
-      if (!this.isRunning) return;
-      
+      if (!this.isRunning) {
+return;
+}
+
       const now = Date.now();
-      
+
       this.flags.forEach(flag => {
-        if (!flag.schedule) return;
-        
+        if (!flag.schedule) {
+return;
+}
+
         // Auto-enable flags that should start
-        if (flag.schedule.startTime && 
-            flag.schedule.startTime <= now && 
+        if (flag.schedule.startTime &&
+            flag.schedule.startTime <= now &&
             !flag.enabled) {
           this.toggleFlag(flag.id, true);
           console.log(`🕐 Auto-enabled scheduled flag '${flag.id}'`);
         }
-        
+
         // Auto-disable flags that should end
-        if (flag.schedule.endTime && 
-            flag.schedule.endTime <= now && 
+        if (flag.schedule.endTime &&
+            flag.schedule.endTime <= now &&
             flag.enabled) {
           this.toggleFlag(flag.id, false);
           console.log(`🕐 Auto-disabled expired flag '${flag.id}'`);
@@ -855,7 +872,7 @@ class AdvancedFeatureFlagManager {
 
   private async checkAlertThreshold(flag: FeatureFlag, threshold: AlertThreshold): Promise<void> {
     let currentValue: number;
-    
+
     switch (threshold.metric) {
       case 'error_rate':
         currentValue = Math.random() * 0.1; // Mock error rate
@@ -870,7 +887,7 @@ class AdvancedFeatureFlagManager {
       default:
         return;
     }
-    
+
     let shouldTrigger = false;
     switch (threshold.operator) {
       case 'gt':
@@ -883,10 +900,10 @@ class AdvancedFeatureFlagManager {
         shouldTrigger = currentValue === threshold.value;
         break;
     }
-    
+
     if (shouldTrigger) {
       console.warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
-      
+
       switch (threshold.action) {
         case 'notify':
           // Send notification (implementation would depend on notification system)
@@ -915,8 +932,8 @@ class AdvancedFeatureFlagManager {
         config: {
           percentage: 10,
           incrementPercentage: 10,
-          incrementInterval: 60 // 1 hour
-        }
+          incrementInterval: 60, // 1 hour
+        },
       },
       targeting: [
         {
@@ -926,27 +943,27 @@ class AdvancedFeatureFlagManager {
             {
               attribute: 'userType',
               operator: 'equals',
-              value: 'premium'
-            }
+              value: 'premium',
+            },
           ],
           operator: 'AND',
           value: true,
-          enabled: true
-        }
+          enabled: true,
+        },
       ],
       variants: [
         {
           id: 'control',
           name: 'Control (Old Player)',
           value: false,
-          weight: 50
+          weight: 50,
         },
         {
           id: 'treatment',
           name: 'Treatment (New Player)',
           value: true,
-          weight: 50
-        }
+          weight: 50,
+        },
       ],
       monitoring: {
         trackEvents: true,
@@ -956,10 +973,10 @@ class AdvancedFeatureFlagManager {
             metric: 'error_rate',
             operator: 'gt',
             value: 0.05,
-            action: 'rollback'
-          }
-        ]
-      }
+            action: 'rollback',
+          },
+        ],
+      },
     });
 
     this.createFlag({
@@ -971,14 +988,14 @@ class AdvancedFeatureFlagManager {
       enabled: true,
       rolloutStrategy: {
         type: 'immediate',
-        config: {}
+        config: {},
       },
       targeting: [],
       monitoring: {
         trackEvents: true,
         trackPerformance: false,
-        alertThresholds: []
-      }
+        alertThresholds: [],
+      },
     });
 
     this.createFlag({
@@ -991,8 +1008,8 @@ class AdvancedFeatureFlagManager {
       rolloutStrategy: {
         type: 'user-based',
         config: {
-          percentage: 100
-        }
+          percentage: 100,
+        },
       },
       targeting: [],
       variants: [
@@ -1000,20 +1017,20 @@ class AdvancedFeatureFlagManager {
           id: 'collaborative',
           name: 'Collaborative Filtering',
           value: 'collaborative',
-          weight: 33
+          weight: 33,
         },
         {
           id: 'content-based',
           name: 'Content-Based',
           value: 'content-based',
-          weight: 33
+          weight: 33,
         },
         {
           id: 'hybrid',
           name: 'Hybrid Approach',
           value: 'hybrid',
-          weight: 34
-        }
+          weight: 34,
+        },
       ],
       monitoring: {
         trackEvents: true,
@@ -1023,10 +1040,10 @@ class AdvancedFeatureFlagManager {
             metric: 'conversion_rate',
             operator: 'lt',
             value: 0.05,
-            action: 'notify'
-          }
-        ]
-      }
+            action: 'notify',
+          },
+        ],
+      },
     });
   }
 }
@@ -1049,7 +1066,7 @@ export type {
   AlertThreshold,
   UserContext,
   FlagEvaluation,
-  ABTestResult
+  ABTestResult,
 };
 
 // Export class for custom implementations
@@ -1064,6 +1081,6 @@ export const useABTest = (flagId: string, context: UserContext = {}) => {
   const evaluation = featureFlagManager.evaluateFlag(flagId, context);
   return {
     value: evaluation,
-    variant: context.userId ? featureFlagManager.getUserHash(context.userId, flagId) : 'control'
+    variant: context.userId ? featureFlagManager.getUserHash(context.userId, flagId) : 'control',
   };
 };

@@ -4,6 +4,10 @@
  */
 
 // Re-export core types
+// Ensure Video type compatibility
+import type { Video as CoreVideo } from './core';
+import type { Video as RootVideo } from '../../types';
+
 export * from './core';
 export * from './video';
 export * from './youtube';
@@ -12,10 +16,6 @@ export * from './livestream';
 
 // Legacy compatibility - re-export from root types
 export type { Video, Channel, UserPlaylist } from '../../types';
-
-// Ensure Video type compatibility
-import type { Video as CoreVideo } from './core';
-import type { Video as RootVideo } from '../../types';
 
 // Create a unified Video type that combines both definitions
 export type UnifiedVideo = CoreVideo & Partial<RootVideo>;

@@ -5,7 +5,6 @@
  */
 
 import { advancedAPM } from './advancedMonitoring';
-import { performanceMonitor } from './performanceMonitor';
 
 // Types for security monitoring
 interface SecurityThreat {
@@ -148,21 +147,21 @@ class SecurityMonitoringEngine {
           id: 'rate-limit-api',
           condition: 'request.path.startsWith("/api/")',
           action: 'rate-limit',
-          parameters: { maxRequests: 100, windowMs: 60000 }
+          parameters: { maxRequests: 100, windowMs: 60000 },
         },
         {
           id: 'block-suspicious-ips',
           condition: 'request.ip in suspiciousIPs',
           action: 'deny',
-          parameters: {}
+          parameters: {},
         },
         {
           id: 'require-auth-admin',
           condition: 'request.path.startsWith("/admin/")',
           action: 'deny',
-          parameters: { requireAuth: true, requireRole: 'admin' }
-        }
-      ]
+          parameters: { requireAuth: true, requireRole: 'admin' },
+        },
+      ],
     };
 
     const dataProtectionPolicy: SecurityPolicy = {
@@ -176,15 +175,15 @@ class SecurityMonitoringEngine {
           id: 'encrypt-sensitive-data',
           condition: 'data.type === "sensitive"',
           action: 'log',
-          parameters: { requireEncryption: true }
+          parameters: { requireEncryption: true },
         },
         {
           id: 'audit-data-access',
           condition: 'action === "data-access"',
           action: 'log',
-          parameters: { auditLevel: 'detailed' }
-        }
-      ]
+          parameters: { auditLevel: 'detailed' },
+        },
+      ],
     };
 
     const applicationSecurityPolicy: SecurityPolicy = {
@@ -198,21 +197,21 @@ class SecurityMonitoringEngine {
           id: 'detect-xss',
           condition: 'request.body contains script tags',
           action: 'alert',
-          parameters: { threatType: 'xss' }
+          parameters: { threatType: 'xss' },
         },
         {
           id: 'detect-sql-injection',
           condition: 'request.query contains SQL keywords',
           action: 'alert',
-          parameters: { threatType: 'sql-injection' }
+          parameters: { threatType: 'sql-injection' },
         },
         {
           id: 'validate-csrf-token',
           condition: 'request.method in ["POST", "PUT", "DELETE"]',
           action: 'deny',
-          parameters: { requireCSRFToken: true }
-        }
-      ]
+          parameters: { requireCSRFToken: true },
+        },
+      ],
     };
 
     this.policies.set(accessControlPolicy.id, accessControlPolicy);
@@ -231,7 +230,7 @@ class SecurityMonitoringEngine {
         requirement: 'Personal data must be encrypted at rest and in transit',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000 // 24 hours
+        nextCheck: Date.now() + 86400000, // 24 hours
       },
       {
         id: 'gdpr-consent-management',
@@ -239,7 +238,7 @@ class SecurityMonitoringEngine {
         requirement: 'User consent must be obtained and recorded',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000
+        nextCheck: Date.now() + 86400000,
       },
       {
         id: 'gdpr-data-retention',
@@ -247,8 +246,8 @@ class SecurityMonitoringEngine {
         requirement: 'Data retention policies must be implemented',
         status: 'partial',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000
-      }
+        nextCheck: Date.now() + 86400000,
+      },
     ];
 
     const iso27001Checks: ComplianceCheck[] = [
@@ -258,7 +257,7 @@ class SecurityMonitoringEngine {
         requirement: 'Access control measures must be implemented',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 604800000 // 7 days
+        nextCheck: Date.now() + 604800000, // 7 days
       },
       {
         id: 'iso-incident-response',
@@ -266,8 +265,8 @@ class SecurityMonitoringEngine {
         requirement: 'Incident response procedures must be documented',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 604800000
-      }
+        nextCheck: Date.now() + 604800000,
+      },
     ];
 
     [...gdprChecks, ...iso27001Checks].forEach(check => {
@@ -279,26 +278,28 @@ class SecurityMonitoringEngine {
    * Start security monitoring
    */
   private startSecurityMonitoring(): void {
-    if (this.isMonitoring) return;
-    
+    if (this.isMonitoring) {
+return;
+}
+
     this.isMonitoring = true;
     console.log('🛡️ Starting security monitoring engine...');
-    
+
     // Continuous threat detection
     setInterval(() => {
       this.performThreatDetection();
     }, 30000); // Every 30 seconds
-    
+
     // Vulnerability scanning
     setInterval(() => {
       this.performVulnerabilityScanning();
     }, this.scanInterval);
-    
+
     // Compliance monitoring
     setInterval(() => {
       this.performComplianceChecks();
     }, 3600000); // Every hour
-    
+
     // Audit log cleanup
     setInterval(() => {
       this.cleanupAuditLogs();
@@ -312,36 +313,36 @@ class SecurityMonitoringEngine {
     try {
       // Simulate threat detection
       const threats = await this.detectThreats();
-      
+
       for (const threat of threats) {
         this.threats.set(threat.id, threat);
-        
+
         // Generate alert for high/critical threats
         if (threat.severity === 'high' || threat.severity === 'critical') {
-          this.generateSecurityAlert('threat', threat.severity, 
-            `${threat.type.toUpperCase()} threat detected`, 
-            threat.description
+          this.generateSecurityAlert('threat', threat.severity,
+            `${threat.type.toUpperCase()} threat detected`,
+            threat.description,
           );
         }
-        
+
         // Automated response
         const response = await this.respondToThreat(threat);
         if (response) {
           threat.response = response;
           threat.status = response.success ? 'mitigated' : 'investigating';
         }
-        
+
         // Log the threat
         this.logSecurityEvent('threat-detected', {
           threatId: threat.id,
           type: threat.type,
           severity: threat.severity,
-          source: threat.source
+          source: threat.source,
         });
       }
-      
+
       advancedAPM.recordMetric('threats-detected', threats.length);
-      
+
     } catch (error) {
       console.error('Threat detection error:', error);
     }
@@ -352,16 +353,16 @@ class SecurityMonitoringEngine {
    */
   private async detectThreats(): Promise<SecurityThreat[]> {
     const threats: SecurityThreat[] = [];
-    
+
     // Simulate various threat types
     const threatTypes = ['xss', 'sql-injection', 'brute-force', 'ddos'] as const;
     const severities = ['low', 'medium', 'high', 'critical'] as const;
-    
+
     // Random threat generation for demonstration
     if (Math.random() < 0.1) { // 10% chance of detecting a threat
       const threatType = threatTypes[Math.floor(Math.random() * threatTypes.length)];
       const severity = severities[Math.floor(Math.random() * severities.length)];
-      
+
       const threat: SecurityThreat = {
         id: `threat-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         type: threatType,
@@ -372,14 +373,14 @@ class SecurityMonitoringEngine {
         description: `Detected ${threatType} attempt from suspicious source`,
         metadata: {
           userAgent: 'Mozilla/5.0 (compatible; Bot/1.0)',
-          requestCount: Math.floor(Math.random() * 100) + 1
+          requestCount: Math.floor(Math.random() * 100) + 1,
         },
-        status: 'detected'
+        status: 'detected',
       };
-      
+
       threats.push(threat);
     }
-    
+
     return threats;
   }
 
@@ -389,7 +390,7 @@ class SecurityMonitoringEngine {
   private async respondToThreat(threat: SecurityThreat): Promise<SecurityResponse | null> {
     try {
       let action: SecurityResponse['action'];
-      
+
       // Determine response action based on threat type and severity
       switch (threat.type) {
         case 'ddos':
@@ -403,10 +404,10 @@ class SecurityMonitoringEngine {
         default:
           action = 'alert';
       }
-      
+
       // Simulate response execution
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       const response: SecurityResponse = {
         id: `response-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         threatId: threat.id,
@@ -414,14 +415,14 @@ class SecurityMonitoringEngine {
         timestamp: Date.now(),
         success: Math.random() > 0.1, // 90% success rate
         details: `Automated ${action} response executed`,
-        automated: true
+        automated: true,
       };
-      
+
       console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
       advancedAPM.recordMetric('security-response', 1, { action, success: response.success });
-      
+
       return response;
-      
+
     } catch (error) {
       console.error('Security response error:', error);
       return null;
@@ -434,30 +435,30 @@ class SecurityMonitoringEngine {
   private async performVulnerabilityScanning(): Promise<void> {
     try {
       console.log('🔍 Performing vulnerability scan...');
-      
+
       const vulnerabilities = await this.scanForVulnerabilities();
-      
+
       for (const vulnerability of vulnerabilities) {
         this.vulnerabilities.set(vulnerability.id, vulnerability);
-        
+
         // Generate alert for critical vulnerabilities
         if (vulnerability.severity === 'critical') {
           this.generateSecurityAlert('vulnerability', vulnerability.severity,
             'Critical vulnerability detected',
-            `${vulnerability.component}: ${vulnerability.description}`
+            `${vulnerability.component}: ${vulnerability.description}`,
           );
         }
-        
+
         this.logSecurityEvent('vulnerability-detected', {
           vulnerabilityId: vulnerability.id,
           component: vulnerability.component,
           severity: vulnerability.severity,
-          cve: vulnerability.cve
+          cve: vulnerability.cve,
         });
       }
-      
+
       advancedAPM.recordMetric('vulnerabilities-scanned', vulnerabilities.length);
-      
+
     } catch (error) {
       console.error('Vulnerability scanning error:', error);
     }
@@ -468,15 +469,15 @@ class SecurityMonitoringEngine {
    */
   private async scanForVulnerabilities(): Promise<VulnerabilityReport[]> {
     const vulnerabilities: VulnerabilityReport[] = [];
-    
+
     // Simulate dependency vulnerabilities
     const dependencies = ['react', 'express', 'lodash', 'axios'];
     const severities = ['low', 'medium', 'high', 'critical'] as const;
-    
+
     for (const dep of dependencies) {
       if (Math.random() < 0.05) { // 5% chance of vulnerability per dependency
         const severity = severities[Math.floor(Math.random() * severities.length)];
-        
+
         const vulnerability: VulnerabilityReport = {
           id: `vuln-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           type: 'dependency',
@@ -487,17 +488,17 @@ class SecurityMonitoringEngine {
           cvss: Math.random() * 10,
           fixAvailable: Math.random() > 0.3,
           detectedAt: Date.now(),
-          status: 'open'
+          status: 'open',
         };
-        
+
         if (vulnerability.fixAvailable) {
           vulnerability.fixVersion = `${Math.floor(Math.random() * 5) + 1}.${Math.floor(Math.random() * 10)}.${Math.floor(Math.random() * 10)}`;
         }
-        
+
         vulnerabilities.push(vulnerability);
       }
     }
-    
+
     return vulnerabilities;
   }
 
@@ -507,32 +508,32 @@ class SecurityMonitoringEngine {
   private async performComplianceChecks(): Promise<void> {
     try {
       console.log('📋 Performing compliance checks...');
-      
+
       for (const [id, check] of this.complianceChecks) {
         if (Date.now() >= check.nextCheck) {
           // Simulate compliance check
           const result = await this.executeComplianceCheck(check);
-          
+
           check.status = result.status;
           check.evidence = result.evidence;
           check.lastChecked = Date.now();
           check.nextCheck = Date.now() + (check.standard === 'GDPR' ? 86400000 : 604800000);
-          
+
           if (check.status === 'non-compliant') {
             this.generateSecurityAlert('compliance-issue', 'high',
               `${check.standard} compliance issue`,
-              `Requirement: ${check.requirement}`
+              `Requirement: ${check.requirement}`,
             );
           }
-          
+
           this.logSecurityEvent('compliance-check', {
             checkId: id,
             standard: check.standard,
-            status: check.status
+            status: check.status,
           });
         }
       }
-      
+
     } catch (error) {
       console.error('Compliance check error:', error);
     }
@@ -547,13 +548,13 @@ class SecurityMonitoringEngine {
   }> {
     // Simulate compliance check execution
     await new Promise(resolve => setTimeout(resolve, 500));
-    
-    const statuses: ComplianceCheck['status'][] = ['compliant', 'non-compliant', 'partial'];
+
+    const statuses: Array<ComplianceCheck['status']> = ['compliant', 'non-compliant', 'partial'];
     const status = statuses[Math.floor(Math.random() * statuses.length)];
-    
+
     return {
       status,
-      evidence: status === 'compliant' ? 'Automated verification passed' : undefined
+      evidence: status === 'compliant' ? 'Automated verification passed' : undefined,
     };
   }
 
@@ -564,7 +565,7 @@ class SecurityMonitoringEngine {
     type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
     title: string,
-    description: string
+    description: string,
   ): void {
     const alert: SecurityAlert = {
       id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -573,11 +574,11 @@ class SecurityMonitoringEngine {
       title,
       description,
       timestamp: Date.now(),
-      acknowledged: false
+      acknowledged: false,
     };
-    
+
     this.alerts.set(alert.id, alert);
-    
+
     console.log(`🚨 Security Alert [${severity.toUpperCase()}]: ${title}`);
     advancedAPM.recordMetric('security-alert', 1, { type, severity });
   }
@@ -593,11 +594,11 @@ class SecurityMonitoringEngine {
       resource: metadata.resource || 'system',
       action: metadata.action || event,
       result: metadata.result || 'success',
-      metadata
+      metadata,
     };
-    
+
     this.auditLogs.push(log);
-    
+
     // Keep only recent logs
     if (this.auditLogs.length > this.maxAuditLogs) {
       this.auditLogs = this.auditLogs.slice(-this.maxAuditLogs);
@@ -620,27 +621,27 @@ class SecurityMonitoringEngine {
     const threats = Array.from(this.threats.values());
     const vulnerabilities = Array.from(this.vulnerabilities.values());
     const alerts = Array.from(this.alerts.values());
-    
+
     const threatsDetected = threats.length;
     const threatsBlocked = threats.filter(t => t.response?.action === 'block').length;
-    
+
     const vulnCounts = vulnerabilities.reduce((acc, vuln) => {
       acc.total++;
       acc[vuln.severity]++;
       return acc;
     }, { total: 0, critical: 0, high: 0, medium: 0, low: 0 });
-    
+
     // Calculate security score (0-100)
     const criticalIssues = vulnCounts.critical + alerts.filter(a => a.severity === 'critical').length;
     const highIssues = vulnCounts.high + alerts.filter(a => a.severity === 'high').length;
     const securityScore = Math.max(0, 100 - (criticalIssues * 20) - (highIssues * 10));
-    
+
     // Calculate compliance score
     const complianceChecks = Array.from(this.complianceChecks.values());
     const compliantChecks = complianceChecks.filter(c => c.status === 'compliant').length;
-    const complianceScore = complianceChecks.length > 0 ? 
+    const complianceScore = complianceChecks.length > 0 ?
       (compliantChecks / complianceChecks.length) * 100 : 100;
-    
+
     return {
       threatsDetected,
       threatsBlocked,
@@ -648,7 +649,7 @@ class SecurityMonitoringEngine {
       securityScore,
       complianceScore,
       incidentResponseTime: 300, // 5 minutes average
-      falsePositiveRate: 0.05 // 5%
+      falsePositiveRate: 0.05, // 5%
     };
   }
 
@@ -666,7 +667,7 @@ class SecurityMonitoringEngine {
    */
   getVulnerabilities(status?: VulnerabilityReport['status']): VulnerabilityReport[] {
     const vulnerabilities = Array.from(this.vulnerabilities.values());
-    return status ? 
+    return status ?
       vulnerabilities.filter(vuln => vuln.status === status) :
       vulnerabilities.sort((a, b) => b.detectedAt - a.detectedAt);
   }
@@ -698,11 +699,11 @@ class SecurityMonitoringEngine {
     if (alert) {
       alert.acknowledged = true;
       alert.assignee = assignee;
-      
+
       this.logSecurityEvent('alert-acknowledged', {
         alertId,
         assignee,
-        alertType: alert.type
+        alertType: alert.type,
       });
     }
   }
@@ -715,11 +716,11 @@ class SecurityMonitoringEngine {
     if (alert) {
       alert.resolution = resolution;
       alert.resolvedAt = Date.now();
-      
+
       this.logSecurityEvent('alert-resolved', {
         alertId,
         resolution,
-        alertType: alert.type
+        alertType: alert.type,
       });
     }
   }
@@ -731,11 +732,11 @@ class SecurityMonitoringEngine {
     const vulnerability = this.vulnerabilities.get(vulnerabilityId);
     if (vulnerability) {
       vulnerability.status = status;
-      
+
       this.logSecurityEvent('vulnerability-updated', {
         vulnerabilityId,
         status,
-        component: vulnerability.component
+        component: vulnerability.component,
       });
     }
   }
@@ -756,33 +757,33 @@ class SecurityMonitoringEngine {
     const vulnerabilities = this.getVulnerabilities('open');
     const alerts = this.getSecurityAlerts(false);
     const compliance = Array.from(this.complianceChecks.values());
-    
+
     const recommendations: string[] = [];
-    
+
     // Generate recommendations based on current state
     if (metrics.vulnerabilities.critical > 0) {
       recommendations.push('Address critical vulnerabilities immediately');
     }
-    
+
     if (metrics.securityScore < 80) {
       recommendations.push('Improve overall security posture');
     }
-    
+
     if (metrics.complianceScore < 90) {
       recommendations.push('Review and address compliance gaps');
     }
-    
+
     if (threats.length > 10) {
       recommendations.push('Investigate high volume of security threats');
     }
-    
+
     return {
       summary: metrics,
       threats,
       vulnerabilities,
       alerts,
       compliance,
-      recommendations
+      recommendations,
     };
   }
 }
@@ -803,5 +804,5 @@ export type {
   SecurityAlert,
   SecurityPolicy,
   ComplianceCheck,
-  SecurityAuditLog
+  SecurityAuditLog,
 };

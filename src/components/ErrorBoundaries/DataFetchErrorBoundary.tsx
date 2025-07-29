@@ -1,7 +1,10 @@
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+
 import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';
-import { conditionalLogger } from '../../utils/conditionalLogger';
+
 import { createComponentError } from '@/utils/errorUtils';
+
+import { conditionalLogger } from '../../utils/conditionalLogger';
 
 export interface DataFetchErrorBoundaryProps {
   children: ReactNode;
@@ -56,11 +59,11 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
         retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
         errorInfo,
-      }
+      },
     );
 
     conditionalLogger.error('Data fetching component error caught:', componentError);
-    
+
     this.setState({
       errorInfo,
     });
@@ -75,7 +78,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
   private handleRetry = (): void => {
     if (this.state.retryCount < this.maxRetries) {
       this.setState({ isRetrying: true });
-      
+
       conditionalLogger.debug('Retrying data fetch component', {
         dataType: this.props.dataType,
         attempt: this.state.retryCount + 1,
@@ -104,29 +107,29 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
   private getErrorMessage = (): string => {
     const { dataType } = this.props;
     const isOffline = !navigator.onLine;
-    
+
     if (isOffline) {
       return 'You appear to be offline. Please check your internet connection and try again.';
     }
-    
+
     if (this.state.error?.message.includes('fetch')) {
       return `Failed to load ${dataType || 'data'}. This might be due to network issues or server problems.`;
     }
-    
+
     if (this.state.error?.message.includes('timeout')) {
       return `Request timed out while loading ${dataType || 'data'}. The server might be experiencing high traffic.`;
     }
-    
+
     return `There was an error loading ${dataType || 'data'}. Please try again.`;
   };
 
   private getErrorIcon = (): ReactNode => {
     const isOffline = !navigator.onLine;
-    
+
     if (isOffline) {
       return <WifiIcon className="w-8 h-8 text-orange-600" />;
     }
-    
+
     return <ExclamationCircleIcon className="w-8 h-8 text-red-600" />;
   };
 
@@ -165,11 +168,11 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
           <div className={`flex items-center justify-center w-16 h-16 ${this.getErrorIconBg()} rounded-full mb-4`}>
             {this.getErrorIcon()}
           </div>
-          
+
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             {isOffline ? 'Connection Error' : 'Data Loading Error'}
           </h3>
-          
+
           <p className="text-sm text-gray-600 text-center mb-6 max-w-md">
             {this.getErrorMessage()}
           </p>
@@ -184,7 +187,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
                 Try Again ({this.maxRetries - this.state.retryCount} left)
               </button>
             )}
-            
+
             <button
               onClick={this.handleRefresh}
               className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"

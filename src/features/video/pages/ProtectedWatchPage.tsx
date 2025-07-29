@@ -1,8 +1,12 @@
-import React, { useCallback } from 'react';
+import type React from 'react';
+import { useCallback } from 'react';
+
+import { useParams, useSearchParams } from 'react-router-dom';
+
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
+
 import WatchPage from './WatchPage';
-import { useParams, useSearchParams } from 'react-router-dom';
 
 /**
  * WatchPage wrapped with specialized error boundary

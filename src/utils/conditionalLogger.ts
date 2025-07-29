@@ -27,7 +27,7 @@ class ConditionalLogger {
     // Simple and safe environment detection
     this.isDevelopment = this.detectDevelopmentMode();
     this.isDebugMode = this.detectDebugMode();
-    
+
     // Set log level based on environment
     this.logLevel = this.isDevelopment ? LogLevel.DEBUG : LogLevel.ERROR;
   }
@@ -87,7 +87,7 @@ class ConditionalLogger {
       message,
       data,
       timestamp: new Date(),
-      source
+      source,
     };
   }
 
@@ -148,7 +148,7 @@ class ConditionalLogger {
   // API response logging with sanitization
   apiResponse(endpoint: string, response: unknown, duration?: number): void {
     if (this.isDebugMode) {
-      const message = duration 
+      const message = duration
         ? `API Response from ${endpoint} (${duration}ms)`
         : `API Response from ${endpoint}`;
       this.debug(message, this.sanitizeApiResponse(response), 'API');
@@ -178,7 +178,7 @@ class ConditionalLogger {
       return {
         name: error.name,
         message: error.message,
-        stack: (this.isDebugMode ?? false) ? error.stack : undefined
+        stack: (this.isDebugMode ?? false) ? error.stack : undefined,
       };
     }
     return error;
@@ -202,7 +202,7 @@ try {
     group: (label: string) => console.group(label),
     groupEnd: () => console.groupEnd(),
     apiResponse: () => {},
-    apiError: (endpoint: string, err: unknown) => console.error(`API Error from ${endpoint}:`, err)
+    apiError: (endpoint: string, err: unknown) => console.error(`API Error from ${endpoint}:`, err),
   } as ConditionalLogger;
 }
 

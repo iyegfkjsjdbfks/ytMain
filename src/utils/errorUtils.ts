@@ -20,19 +20,19 @@ export function createComponentError(
   component: string,
   message: string,
   originalError?: unknown,
-  context?: string
+  context?: string,
 ): ComponentError {
   const error = new Error(message) as ComponentError;
   error.component = component;
   error.context = context;
   error.originalError = originalError;
-  
+
   // Include original error message if available
   if (originalError instanceof Error) {
     error.message = `${message}: ${originalError.message}`;
     error.stack = originalError.stack;
   }
-  
+
   return error;
 }
 
@@ -46,13 +46,13 @@ export function createComponentError(
 export function createAsyncError(
   component: string,
   operation: string,
-  originalError?: unknown
+  originalError?: unknown,
 ): ComponentError {
   return createComponentError(
     component,
     `Async operation failed: ${operation}`,
     originalError,
-    'async'
+    'async',
   );
 }
 
@@ -66,13 +66,13 @@ export function createAsyncError(
 export function createNetworkError(
   component: string,
   url: string,
-  originalError?: unknown
+  originalError?: unknown,
 ): ComponentError {
   return createComponentError(
     component,
     `Network request failed: ${url}`,
     originalError,
-    'network'
+    'network',
   );
 }
 
@@ -86,13 +86,13 @@ export function createNetworkError(
 export function createValidationError(
   component: string,
   field: string,
-  value: unknown
+  value: unknown,
 ): ComponentError {
   return createComponentError(
     component,
     `Validation failed for field: ${field}`,
     new Error(`Invalid value: ${JSON.stringify(value)}`),
-    'validation'
+    'validation',
   );
 }
 

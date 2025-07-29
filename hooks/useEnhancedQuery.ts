@@ -3,6 +3,7 @@
  */
 
 import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+
 import { performanceMonitor } from '../utils/performanceMonitor';
 
 // Enhanced error types
@@ -67,19 +68,27 @@ function createApiError(error: any): ApiError {
 
 function isRetryableError(error: any): boolean {
   const status = error?.status || error?.response?.status;
-  
+
   // Network errors are retryable
-  if (!status) return true;
-  
+  if (!status) {
+return true;
+}
+
   // Server errors (5xx) are retryable
-  if (status >= 500) return true;
-  
+  if (status >= 500) {
+return true;
+}
+
   // Rate limiting is retryable
-  if (status === 429) return true;
-  
+  if (status === 429) {
+return true;
+}
+
   // Timeout errors are retryable
-  if (status === 408) return true;
-  
+  if (status === 408) {
+return true;
+}
+
   // Client errors (4xx) are generally not retryable
   return false;
 }
@@ -88,13 +97,17 @@ function isRetryableError(error: any): boolean {
 function createRetryFn(maxRetries: number = 3) {
   return (failureCount: number, error: any) => {
     const apiError = createApiError(error);
-    
+
     // Don't retry if error is not retryable
-    if (!apiError.retryable) return false;
-    
+    if (!apiError.retryable) {
+return false;
+}
+
     // Don't retry if we've exceeded max retries
-    if (failureCount >= maxRetries) return false;
-    
+    if (failureCount >= maxRetries) {
+return false;
+}
+
     return true;
   };
 }
@@ -104,18 +117,18 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
   return (attemptIndex: number, error: any) => {
     // Create API error to ensure proper error handling
     createApiError(error);
-    
+
     // Use server-provided retry-after header if available
     const retryAfter = error?.response?.headers?.['retry-after'];
     if (retryAfter) {
       const retryAfterMs = parseInt(retryAfter) * 1000;
       return Math.min(retryAfterMs, maxDelay);
     }
-    
+
     // Exponential backoff with jitter
     const exponentialDelay = baseDelay * Math.pow(2, attemptIndex);
     const jitter = Math.random() * 0.1 * exponentialDelay; // 10% jitter
-    
+
     return Math.min(exponentialDelay + jitter, maxDelay);
   };
 }
@@ -123,25 +136,25 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
   queryFn: () => Promise<T>,
-  queryKey: string[]
+  queryKey: string[],
 ): () => Promise<T> {
   return async () => {
     const startTime = performance.now();
     const endpoint = queryKey.join('/');
-    
+
     try {
       const result = await queryFn();
       const duration = performance.now() - startTime;
-      
+
       performanceMonitor.trackApiCall(endpoint, duration, 200);
-      
+
       return result;
     } catch (error: any) {
       const duration = performance.now() - startTime;
       const status = error?.status || error?.response?.status || 0;
-      
+
       performanceMonitor.trackApiCall(endpoint, duration, status);
-      
+
       throw createApiError(error);
     }
   };
@@ -157,7 +170,7 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
     baseRetryDelay?: number;
     maxRetryDelay?: number;
     enablePerformanceMonitoring?: boolean;
-  } & Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn' | 'retry' | 'retryDelay'> = {}
+  } & Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn' | 'retry' | 'retryDelay'> = {},
 ) {
   const {
     preset = 'standard',
@@ -169,7 +182,7 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
   } = options;
 
   const presetConfig = queryPresets[preset];
-  const enhancedQueryFn = enablePerformanceMonitoring 
+  const enhancedQueryFn = enablePerformanceMonitoring
     ? withPerformanceMonitoring(queryFn, queryKey)
     : queryFn;
 
@@ -196,7 +209,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
       queryKey: string[];
       updateFn: (oldData: any, variables: TVariables) => any;
     };
-  } & Omit<UseMutationOptions<TData, TError, TVariables>, 'mutationFn' | 'retry' | 'retryDelay'> = {}
+  } & Omit<UseMutationOptions<TData, TError, TVariables>, 'mutationFn' | 'retry' | 'retryDelay'> = {},
 ) {
   const {
     maxRetries = 1, // Mutations typically shouldn't auto-retry
@@ -209,25 +222,25 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
   } = options;
 
   const queryClient = useQueryClient();
-  
+
   const enhancedMutationFn = enablePerformanceMonitoring
     ? async (variables: TVariables) => {
         const startTime = performance.now();
         const endpoint = 'mutation'; // Could be enhanced to include specific mutation name
-        
+
         try {
           const result = await mutationFn(variables);
           const duration = performance.now() - startTime;
-          
+
           performanceMonitor.trackApiCall(endpoint, duration, 200);
-          
+
           return result;
         } catch (error: any) {
           const duration = performance.now() - startTime;
           const status = error?.status || error?.response?.status || 0;
-          
+
           performanceMonitor.trackApiCall(endpoint, duration, status);
-          
+
           throw createApiError(error);
         }
       }
@@ -242,15 +255,15 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
       if (optimisticUpdate) {
         await queryClient.cancelQueries({ queryKey: optimisticUpdate.queryKey });
         const previousData = queryClient.getQueryData(optimisticUpdate.queryKey);
-        
+
         queryClient.setQueryData(
           optimisticUpdate.queryKey,
-          (oldData: any) => optimisticUpdate.updateFn(oldData, variables)
+          (oldData: any) => optimisticUpdate.updateFn(oldData, variables),
         );
-        
+
         return { previousData };
       }
-      
+
       return mutationOptions.onMutate?.(variables);
     },
     onError: (error, variables, context) => {
@@ -258,7 +271,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
       if (optimisticUpdate && context && typeof context === 'object' && 'previousData' in context) {
         queryClient.setQueryData(optimisticUpdate.queryKey, (context as any).previousData);
       }
-      
+
       mutationOptions.onError?.(error, variables, context);
     },
     onSuccess: (data, variables, context) => {
@@ -266,7 +279,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
       invalidateQueries.forEach(queryKey => {
         queryClient.invalidateQueries({ queryKey });
       });
-      
+
       mutationOptions.onSuccess?.(data, variables, context);
     },
     ...mutationOptions,
@@ -280,7 +293,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData[]) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData[]) => unknown;
-  } = {}
+  } = {},
 ) {
   // Implementation would use useInfiniteQuery with similar enhancements
   // This is a placeholder for the infinite query pattern
@@ -290,7 +303,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
 // Cache management utilities
 export function useCacheManager() {
   const queryClient = useQueryClient();
-  
+
   return {
     // Prefetch data
     prefetch: <TData>(queryKey: string[], queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
@@ -300,7 +313,7 @@ export function useCacheManager() {
         ...queryPresets[preset],
       });
     },
-    
+
     // Clear specific cache
     clearCache: (queryKey?: string[]) => {
       if (queryKey) {
@@ -309,7 +322,7 @@ export function useCacheManager() {
         queryClient.clear();
       }
     },
-    
+
     // Get cache size and stats
     getCacheStats: () => {
       const cache = queryClient.getQueryCache();

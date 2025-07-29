@@ -1,4 +1,5 @@
 import { memo, useMemo, useCallback, useState, useEffect } from 'react';
+
 import { FixedSizeList as List } from 'react-window';
 
 import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
@@ -40,8 +41,10 @@ const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }) =>
 
   // Highlight search terms in title
   const highlightedTitle = useMemo(() => {
-    if (!query || !video?.title) return video?.title || '';
-    
+    if (!query || !video?.title) {
+return video?.title || '';
+}
+
     const regex = new RegExp(`(${query})`, 'gi');
     return video.title.replace(regex, '<mark>$1</mark>');
   }, [video?.title, query]);
@@ -52,7 +55,7 @@ const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }) =>
 
   return (
     <div style={style} className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-      <div 
+      <div
         className="flex space-x-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2 transition-colors"
         onClick={handleClick}
       >
@@ -70,11 +73,11 @@ const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }) =>
 
         {/* Video Info */}
         <div className="flex-1 min-w-0">
-          <h3 
+          <h3
             className="text-lg font-medium text-gray-900 dark:text-white line-clamp-2 mb-1"
             dangerouslySetInnerHTML={{ __html: highlightedTitle }}
           />
-          
+
           <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
             <span>{video.viewsFormatted} views</span>
             <span>•</span>
@@ -131,10 +134,10 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
           setContainerHeight(Math.min(entry.contentRect.height, 800));
         }
       });
-      
+
       resizeObserver.observe(node);
       setContainerHeight(Math.min(node.offsetHeight, 800));
-      
+
       return () => {
         resizeObserver.disconnect();
       };
@@ -210,7 +213,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
       >
         {SearchResultItem}
       </List>
-      
+
       {/* Load more trigger */}
       {hasMore && (
         <div ref={loadMoreRef} className="h-20 flex items-center justify-center">

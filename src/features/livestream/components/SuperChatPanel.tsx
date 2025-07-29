@@ -9,9 +9,9 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { liveStreamService } from '@/services/livestreamAPI';
+import type { SuperChat } from '@/types/livestream';
 import { logger } from '@/utils/logger';
 
-import type { SuperChat } from '@/types/livestream';
 
 interface SuperChatPanelProps {
   streamId: string;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import { createComponentError } from '@/utils/errorUtils';
 
 interface NetworkConnection {
   effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';
@@ -26,7 +26,7 @@ interface UseOfflineStatusReturn {
   offlineDuration: number;
   connectionType: string | null;
   networkInfo: NetworkConnection | null;
-  
+
   // Utilities
   getNetworkQuality: () => 'fast' | 'slow' | 'offline';
   isSlowConnection: () => boolean;
@@ -36,7 +36,7 @@ interface UseOfflineStatusReturn {
     offlineEvents: number;
     lastOfflineTime: number | null;
   };
-  
+
   // Actions
   pingServer: (url?: string) => Promise<boolean>;
   testConnection: () => Promise<{
@@ -57,7 +57,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     offlineDuration: 0,
     lastOnlineTime: Date.now(),
     connectionType: null,
-    networkInfo: null
+    networkInfo: null,
   });
 
   // Get network quality assessment
@@ -68,11 +68,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     if (state.networkInfo) {
       const { effectiveType, downlink } = state.networkInfo;
-      
+
       if (effectiveType === 'slow-2g' || effectiveType === '2g') {
         return 'slow';
       }
-      
+
       if (downlink && downlink < 1.5) {
         return 'slow';
       }
@@ -104,7 +104,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   // Get offline statistics
   const getOfflineStats = useCallback(() => {
     const stats = localStorage.getItem('offline-stats');
-    
+
     if (stats) {
       try {
         return JSON.parse(stats);
@@ -116,7 +116,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     return {
       totalOfflineTime: 0,
       offlineEvents: 0,
-      lastOfflineTime: null
+      lastOfflineTime: null,
     };
   }, []);
 
@@ -127,25 +127,25 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       const response = await fetch(url, {
         method: 'HEAD',
         cache: 'no-cache',
-        signal: AbortSignal.timeout(5000) // 5 second timeout
+        signal: AbortSignal.timeout(5000), // 5 second timeout
       });
-      
+
       const latency = Date.now() - startTime;
-      
+
       conditionalLogger.debug(
-        `Server ping successful`,
+        'Server ping successful',
         { latency, status: response.status },
-        'useOfflineStatus'
+        'useOfflineStatus',
       );
-      
+
       return response.ok;
     } catch (error) {
       conditionalLogger.debug(
         'Server ping failed',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'useOfflineStatus'
+        'useOfflineStatus',
       );
-      
+
       return false;
     }
   }, []);
@@ -165,20 +165,20 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       const response = await fetch('/api/speed-test', {
         method: 'GET',
         cache: 'no-cache',
-        signal: AbortSignal.timeout(10000)
+        signal: AbortSignal.timeout(10000),
       });
-      
+
       const latency = Date.now() - startTime;
       const online = response.ok;
-      
+
       let speed: 'fast' | 'slow' | 'offline' = 'fast';
-      
+
       if (!online) {
         speed = 'offline';
       } else if (latency > 2000 || getNetworkQuality() === 'slow') {
         speed = 'slow';
       }
-      
+
       return { online, latency, speed };
     } catch (error) {
       return { online: false, latency: -1, speed: 'offline' };
@@ -188,7 +188,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   // Update offline statistics
   const updateOfflineStats = useCallback((isOffline: boolean) => {
     const stats = getOfflineStats();
-    
+
     if (isOffline && !state.wasOffline) {
       // Going offline
       stats.offlineEvents += 1;
@@ -200,7 +200,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
         stats.totalOfflineTime += offlineTime;
       }
     }
-    
+
     try {
       localStorage.setItem('offline-stats', JSON.stringify(stats));
     } catch (error) {
@@ -210,10 +210,10 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
   // Get network information
   const getNetworkInfo = useCallback((): NetworkConnection | null => {
-    const connection = (navigator as any).connection || 
-                      (navigator as any).mozConnection || 
+    const connection = (navigator as any).connection ||
+                      (navigator as any).mozConnection ||
                       (navigator as any).webkitConnection;
-    
+
     if (!connection) {
       return null;
     }
@@ -222,7 +222,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       effectiveType: connection.effectiveType,
       downlink: connection.downlink,
       rtt: connection.rtt,
-      saveData: connection.saveData
+      saveData: connection.saveData,
     };
   }, []);
 
@@ -232,27 +232,27 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
     const handleOnline = () => {
       const now = Date.now();
-      
+
       setState(prev => {
-        const offlineDuration = prev.wasOffline && prev.lastOnlineTime 
-          ? now - prev.lastOnlineTime 
+        const offlineDuration = prev.wasOffline && prev.lastOnlineTime
+          ? now - prev.lastOnlineTime
           : 0;
-        
+
         return {
           ...prev,
           isOnline: true,
           lastOnlineTime: now,
-          offlineDuration
+          offlineDuration,
         };
       });
-      
+
       updateOfflineStats(false);
-      
+
       if (offlineTimer) {
         clearInterval(offlineTimer);
         offlineTimer = null;
       }
-      
+
       conditionalLogger.debug('Connection restored', undefined, 'useOfflineStatus');
     };
 
@@ -260,45 +260,45 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       setState(prev => ({
         ...prev,
         isOnline: false,
-        wasOffline: true
+        wasOffline: true,
       }));
-      
+
       updateOfflineStats(true);
-      
+
       // Start tracking offline duration
       offlineTimer = setInterval(() => {
         setState(prev => ({
           ...prev,
-          offlineDuration: prev.lastOnlineTime ? Date.now() - prev.lastOnlineTime : 0
+          offlineDuration: prev.lastOnlineTime ? Date.now() - prev.lastOnlineTime : 0,
         }));
       }, 1000);
-      
+
       conditionalLogger.debug('Connection lost', undefined, 'useOfflineStatus');
     };
 
     const handleConnectionChange = () => {
       const networkInfo = getNetworkInfo();
       const connectionType = networkInfo?.effectiveType || null;
-      
+
       setState(prev => ({
         ...prev,
         networkInfo,
-        connectionType
+        connectionType,
       }));
-      
+
       conditionalLogger.debug(
         'Network connection changed',
         { connectionType, networkInfo },
-        'useOfflineStatus'
+        'useOfflineStatus',
       );
     };
 
     // Add event listeners
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-    
+
     // Listen for connection changes
-    const connection = (navigator as any).connection;
+    const { connection } = (navigator as any);
     if (connection) {
       connection.addEventListener('change', handleConnectionChange);
     }
@@ -310,11 +310,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
-      
+
       if (connection) {
         connection.removeEventListener('change', handleConnectionChange);
       }
-      
+
       if (offlineTimer) {
         clearInterval(offlineTimer);
       }
@@ -329,16 +329,16 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     offlineDuration: state.offlineDuration,
     connectionType: state.connectionType,
     networkInfo: state.networkInfo,
-    
+
     // Utilities
     getNetworkQuality,
     isSlowConnection,
     shouldReduceData,
     getOfflineStats,
-    
+
     // Actions
     pingServer,
-    testConnection
+    testConnection,
   };
 };
 

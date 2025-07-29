@@ -1,4 +1,5 @@
 import { memo, useState, useCallback, useMemo } from 'react';
+
 import { FixedSizeList as List } from 'react-window';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
@@ -44,7 +45,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
 
   return (
     <div style={style} className="px-2 pb-4">
-      <div 
+      <div
         className="bg-white dark:bg-gray-800 rounded-lg shadow-sm active:scale-95 transition-transform cursor-pointer"
         onClick={handleClick}
       >
@@ -64,7 +65,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
             loading="lazy"
             onLoad={handleImageLoad}
           />
-          
+
           {/* Duration Badge */}
           {video.duration && (
             <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
@@ -190,7 +191,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
       >
         {MobileVideoItem}
       </List>
-      
+
       {/* Load more trigger */}
       {hasMore && (
         <div ref={loadMoreRef} className="h-20 flex items-center justify-center">

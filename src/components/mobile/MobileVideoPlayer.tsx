@@ -1,11 +1,12 @@
 import { memo, useState, useEffect, useCallback, useRef } from 'react';
-import { 
-  PlayIcon, 
-  PauseIcon, 
-  SpeakerWaveIcon, 
+
+import {
+  PlayIcon,
+  PauseIcon,
+  SpeakerWaveIcon,
   SpeakerXMarkIcon,
   ArrowsPointingOutIcon,
-  ArrowsPointingInIcon 
+  ArrowsPointingInIcon,
 } from '@heroicons/react/24/outline';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
@@ -50,7 +51,9 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
 
   // Handle play/pause
   const togglePlay = useCallback(async () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+return;
+}
 
     try {
       if (isPlaying) {
@@ -69,7 +72,9 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
 
   // Handle volume/mute
   const toggleMute = useCallback(() => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+return;
+}
 
     const newMuted = !isMuted;
     videoRef.current.muted = newMuted;
@@ -78,7 +83,9 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
 
   // Handle fullscreen
   const toggleFullscreen = useCallback(async () => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {
+return;
+}
 
     try {
       if (!isFullscreen) {
@@ -103,7 +110,9 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
 
   // Handle seek
   const handleSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) {
+return;
+}
 
     const newTime = parseFloat(e.target.value);
     videoRef.current.currentTime = newTime;
@@ -113,11 +122,11 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
   // Show controls temporarily
   const showControlsTemporarily = useCallback(() => {
     setShowControls(true);
-    
+
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
     }
-    
+
     controlsTimeoutRef.current = setTimeout(() => {
       if (isPlaying) {
         setShowControls(false);
@@ -135,9 +144,9 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
   const handleTimeUpdate = useCallback(() => {
     if (videoRef.current) {
       setCurrentTime(videoRef.current.currentTime);
-      
+
       // Update buffered
-      const bufferedEnd = videoRef.current.buffered.length > 0 
+      const bufferedEnd = videoRef.current.buffered.length > 0
         ? videoRef.current.buffered.end(videoRef.current.buffered.length - 1)
         : 0;
       setBuffered(bufferedEnd);
@@ -230,7 +239,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
               <SpeakerWaveIcon className="w-5 h-5" />
             )}
           </button>
-          
+
           <button
             onClick={toggleFullscreen}
             className="bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors"
@@ -256,15 +265,15 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
               onChange={handleSeek}
               className="w-full h-1 bg-white/30 rounded-lg appearance-none slider-thumb"
               style={{
-                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)`
+                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) ${(currentTime / duration) * 100}%, rgba(255,255,255,0.3) 100%)`,
               }}
             />
             {/* Buffered indicator */}
-            <div 
+            <div
               className="absolute h-1 bg-white/50 rounded-lg pointer-events-none"
               style={{
                 width: `${(buffered / duration) * 100}%`,
-                marginTop: '-4px'
+                marginTop: '-4px',
               }}
             />
           </div>
