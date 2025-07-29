@@ -13,7 +13,7 @@ interface PWAUpdateNotificationProps {
 }
 
 const PWAUpdateNotification: React.FC<PWAUpdateNotificationProps> = ({ className = '' }) => {
-  const { updateAvailable, updateApp } = usePWA();
+  const { updateAvailable, installUpdate } = usePWA();
   const [isVisible, setIsVisible] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -26,7 +26,7 @@ const PWAUpdateNotification: React.FC<PWAUpdateNotificationProps> = ({ className
   const handleUpdate = async () => {
     setIsUpdating(true);
     try {
-      await updateApp();
+      await installUpdate();
       // The page will reload automatically after update
     } catch (error) {
       const componentError = createComponentError('PWAUpdateNotification', 'Failed to update app', error);

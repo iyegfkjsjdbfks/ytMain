@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 
 import {
   SignalSlashIcon,
@@ -12,18 +12,25 @@ import { conditionalLogger } from '../utils/conditionalLogger';
 
 const PWAStatus: React.FC = () => {
   const {
-    isInstallable,
     isInstalled,
     isOnline,
-    installApp,
-    showInstallPrompt,
+    installPWA,
     dismissInstallPrompt,
     updateAvailable,
-    updateApp,
+    installUpdate,
   } = usePWA();
 
+  const [showInstallPrompt, setShowInstallPrompt] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isInstallable && !isInstalled) {
+      setShowInstallPrompt(true);
+    }
+  }, [isInstallable, isInstalled]);
+
   const handleInstall = async () => {
-    await installApp();
+    await installPWA();
+    setShowInstallPrompt(false);
   };
 
   const handleEnableNotifications = async () => {
@@ -54,7 +61,7 @@ const PWAStatus: React.FC = () => {
               <span className="font-medium">New version available!</span>
             </div>
             <button
-              onClick={updateApp}
+              onClick={installUpdate}
               className="bg-white text-blue-600 px-3 py-1 rounded text-sm font-medium hover:bg-blue-50 transition-colors"
             >
               Update Now

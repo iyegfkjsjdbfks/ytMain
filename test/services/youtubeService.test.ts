@@ -1,6 +1,25 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { youtubeService } from '../../src/services/api/youtubeService';
+import { ApiError } from '../../src/services/api/base';
+import { CACHE_CONFIG } from '../../src/lib/constants';
+import { logger } from '../../src/utils/logger';
+
+// Mock external dependencies
+vi.mock('../../src/utils/logger', () => ({
+  logger: {
+    warn: vi.fn(),
+    error: vi.fn(),
+    debug: vi.fn(),
+  },
+}));
+
+vi.mock('../../src/lib/constants', () => ({
+  CACHE_CONFIG: {
+    VIDEO_DATA_TTL: 300000, // 5 minutes
+    USER_DATA_TTL: 3600000, // 1 hour
+  },
+}));
 
 // Mock fetch globally
 const mockFetch = vi.fn();
@@ -23,6 +42,7 @@ const mockYouTubeVideoResponse = {
         channelTitle: 'Test Channel 1',
         tags: ['test', 'video'],
         categoryId: '10',
+        liveBroadcastContent: 'none',
       },
       statistics: {
         viewCount: '1000',
@@ -40,6 +60,30 @@ const mockYouTubeVideoResponse = {
   ],
 };
 
+const mockYouTubeChannelResponse = {
+  items: [
+    {
+      id: 'test-channel-1',
+      snippet: {
+        title: 'Test Channel 1',
+        description: 'Test channel description',
+        thumbnails: {
+          medium: { url: 'https://example.com/channel1.jpg' },
+          high: { url: 'https://example.com/channel1_hq.jpg' },
+        },
+        publishedAt: '2020-01-01T00:00:00Z',
+        customUrl: '@testchannel1',
+        country: 'US',
+      },
+      statistics: {
+        subscriberCount: '10000',
+        videoCount: '50',
+        viewCount: '500000',
+      },
+    },
+  ],
+};
+
 describe('YouTubeService', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -51,7 +95,6 @@ describe('YouTubeService', () => {
   });
 
   describe('fetchVideos', () => {
-
     it('should fetch videos successfully', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -65,11 +108,18 @@ describe('YouTubeService', () => {
         id: 'test-video-1',
         title: 'Test Video 1',
         description: 'Test description 1',
+        thumbnailUrl: 'https://example.com/thumb1.jpg',
         duration: '5:30',
         viewCount: 1000,
         likes: 100,
+        commentCount: 20,
+        publishedAt: '2023-01-01T00:00:00Z',
         channelId: 'test-channel-1',
         channelName: 'Test Channel 1',
+        category: 'Music',
+        tags: ['test', 'video'],
+        isLive: false,
+        isShort: false,
       });
     });
 
@@ -85,13 +135,13 @@ describe('YouTubeService', () => {
         statusText: 'Forbidden',
       });
 
-      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow();
+      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('YouTube API error: Forbidden');
     });
 
     it('should handle network errors gracefully', async () => {
       mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow();
+      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('Failed to fetch video data');
     });
 
     it('should use caching for repeated requests', async () => {
@@ -100,11 +150,9 @@ describe('YouTubeService', () => {
         json: () => Promise.resolve(mockYouTubeVideoResponse),
       });
 
-      // First request
       await youtubeService.fetchVideos(['test-video-1']);
       expect(mockFetch).toHaveBeenCalledTimes(1);
 
-      // Second request (should use cache)
       await youtubeService.fetchVideos(['test-video-1']);
       expect(mockFetch).toHaveBeenCalledTimes(1);
     });
@@ -116,6 +164,7 @@ describe('YouTubeService', () => {
         { input: 'PT45S', expected: '0:45' },
         { input: 'PT2H', expected: '2:00:00' },
         { input: 'PT10M', expected: '10:00' },
+        { input: 'INVALID', expected: '0:00' },
       ];
 
       for (const testCase of testCases) {
@@ -137,6 +186,45 @@ describe('YouTubeService', () => {
         const result = await youtubeService.fetchVideos(['test-video']);
         expect(result[0]?.duration).toBe(testCase.expected);
       }
+    });
+
+    it('should handle missing thumbnail URLs', async () => {
+      const mockResponse = {
+        items: [{
+          ...mockYouTubeVideoResponse.items[0],
+          snippet: {
+            ...mockYouTubeVideoResponse.items[0]!.snippet,
+            thumbnails: {},
+          },
+        }],
+      };
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const result = await youtubeService.fetchVideos(['test-video']);
+      expect(result[0]?.thumbnailUrl).toBe('');
+    });
+
+    it('should handle missing statistics', async () => {
+      const mockResponse = {
+        items: [{
+          ...mockYouTubeVideoResponse.items[0],
+          statistics: {},
+        }],
+      };
+
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockResponse),
+      });
+
+      const result = await youtubeService.fetchVideos(['test-video']);
+      expect(result[0]?.viewCount).toBe(0);
+      expect(result[0]?.likes).toBe(0);
+      expect(result[0]?.commentCount).toBe(0);
     });
   });
 
@@ -178,7 +266,7 @@ describe('YouTubeService', () => {
         name: 'Test Channel 1',
         description: 'Test channel description',
         subscribers: 10000,
-        subscriberCount: '10.0K',
+        subscriberCount: '10K',
         videoCount: 50,
         totalViews: 500000,
         country: 'US',
@@ -216,7 +304,7 @@ describe('YouTubeService', () => {
         { input: 999, expected: '999' },
         { input: 1500, expected: '1.5K' },
         { input: 1500000, expected: '1.5M' },
-        { input: 10000000, expected: '10.0M' },
+        { input: 10000000, expected: '10M' },
       ];
 
       for (const testCase of testCases) {
@@ -246,17 +334,28 @@ describe('YouTubeService', () => {
         json: () => Promise.resolve(mockYouTubeChannelResponse),
       });
 
-      // First request
       await youtubeService.fetchChannel('test-channel-1');
       expect(mockFetch).toHaveBeenCalledTimes(1);
 
-      // Second request (should use cache)
       await youtubeService.fetchChannel('test-channel-1');
       expect(mockFetch).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('URL Building', () => {
+    const originalEnv = import.meta.env;
+    const originalWindow = global.window;
+
+    beforeEach(() => {
+      vi.clearAllMocks();
+      youtubeService.clearCache();
+    });
+
+    afterEach(() => {
+      Object.assign(import.meta.env, originalEnv);
+      global.window = originalWindow;
+    });
+
     it('should build correct URLs for video requests', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -294,33 +393,14 @@ describe('YouTubeService', () => {
         expect.stringContaining('id=test-channel'),
       );
     });
-  });
-
-  describe('buildUrl with different MODE values', () => {
-    const originalEnv = import.meta.env;
-    const originalWindow = global.window;
-
-    beforeEach(() => {
-      // Reset environment and window mocks
-      vi.clearAllMocks();
-      youtubeService.clearCache();
-    });
-
-    afterEach(() => {
-      // Restore original environment
-      Object.assign(import.meta.env, originalEnv);
-      global.window = originalWindow;
-    });
 
     it('should use proxy endpoint in development mode', async () => {
-      // Mock development environment
       vi.stubGlobal('window', {
         location: {
           origin: 'http://localhost:3000',
         },
       });
 
-      // Mock import.meta.env for development
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
@@ -346,7 +426,6 @@ describe('YouTubeService', () => {
     });
 
     it('should use direct Google API endpoint in production mode', async () => {
-      // Mock production environment
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
@@ -372,7 +451,6 @@ describe('YouTubeService', () => {
     });
 
     it('should use direct Google API endpoint in test mode', async () => {
-      // Mock test environment
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
@@ -398,7 +476,6 @@ describe('YouTubeService', () => {
     });
 
     it('should use direct Google API endpoint for custom build modes', async () => {
-      // Mock custom build environment (e.g., staging)
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
@@ -424,7 +501,6 @@ describe('YouTubeService', () => {
     });
 
     it('should properly construct URLs with parameters for different endpoints', async () => {
-      // Test development mode with channel endpoint
       vi.stubGlobal('window', {
         location: {
           origin: 'http://localhost:5173',
@@ -455,7 +531,6 @@ describe('YouTubeService', () => {
     });
 
     it('should handle missing API key gracefully', async () => {
-      // Mock environment without API key
       Object.defineProperty(import.meta, 'env', {
         value: {
           ...originalEnv,
@@ -475,7 +550,6 @@ describe('YouTubeService', () => {
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining('key='),
       );
-      // Should still make the request but with empty key
       const callUrl = mockFetch.mock.calls[0]?.[0] as string;
       const url = new URL(callUrl);
       expect(url.searchParams.get('key')).toBe('');
@@ -520,14 +594,11 @@ describe('YouTubeService', () => {
         json: () => Promise.resolve({ items: [] }),
       });
 
-      // Make initial request
       await youtubeService.fetchVideos(['test-video']);
       expect(mockFetch).toHaveBeenCalledTimes(1);
 
-      // Clear cache manually
       youtubeService.clearCache();
 
-      // Make same request again (should hit API again)
       await youtubeService.fetchVideos(['test-video']);
       expect(mockFetch).toHaveBeenCalledTimes(2);
     });

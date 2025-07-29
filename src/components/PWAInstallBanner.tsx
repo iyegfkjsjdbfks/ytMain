@@ -6,7 +6,7 @@ import { useOfflineStatus } from '../hooks/useOfflineStatus';
 import { usePWA } from '../hooks/usePWA';
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
 import { trackEvent } from '../utils/analytics';
-import { PWAUtils } from '../utils/pwa';
+import { PWAUtils } from '../config/pwa';
 
 interface PWAInstallBannerProps {
   className?: string;
@@ -37,8 +37,8 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
     dismiss: dismissPrompt,
     resetError,
   } = useInstallPrompt();
-  const { isOnline, networkQuality } = useOfflineStatus();
-  const { hasUpdate, isUpdating, installUpdate } = usePWAUpdates();
+  const { isOnline } = useOfflineStatus();
+  const { updateAvailable, isUpdating, installUpdate } = usePWAUpdates();
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);

@@ -314,11 +314,11 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     try {
       switch (action.type) {
         case 'start':
-          await liveStreamService.streams.startStream(stream.id);
+          await liveStreamService.startStream(stream.id);
           // Refresh streams
           break;
         case 'stop':
-          await liveStreamService.streams.endStream(stream.id);
+          await liveStreamService.stopStream(stream.id);
           // Refresh streams
           break;
         case 'edit':
@@ -326,7 +326,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Edit stream:', stream.id);
           break;
         case 'duplicate':
-          const duplicatedStream = await liveStreamService.streams.createStream({
+          const duplicatedStream = await liveStreamService.createStream({
             ...stream,
             title: `${stream.title} (Copy)`,
             status: 'scheduled',

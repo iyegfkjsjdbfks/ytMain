@@ -12,10 +12,11 @@ import { liveStreamService } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 
 
-import type { LiveStream } from '../../../types/livestream';
+import { LiveStream } from '../../../types/livestream';
+import { ScheduledStream } from '../../../../services/livestreamAPI';
 
 interface StreamSchedulerProps {
-  onStreamScheduled?: (stream: LiveStream) => void;
+  onStreamScheduled?: (stream: ScheduledStream) => void;
   className?: string;
 }
 
@@ -34,7 +35,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   onStreamScheduled,
   className = '',
 }) => {
-  const [scheduledStreams, setScheduledStreams] = useState<LiveStream[]>([]);
+  const [scheduledStreams, setScheduledStreams] = useState<ScheduledStream[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingStream, setEditingStream] = useState<string | null>(null);
   const [formData, setFormData] = useState<ScheduledStreamForm>({
@@ -57,7 +58,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
   useEffect(() => {
     // Load scheduled streams
-    liveStreamService.scheduling.getScheduledStreams().then(setScheduledStreams);
+    liveStreamService.getScheduledStreams().then(setScheduledStreams);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,12 +71,12 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     try {
       const streamData = {
         ...formData,
-        scheduledStartTime: new Date(formData.scheduledStartTime),
+        scheduledStartTime: formData.scheduledStartTime,
         status: 'scheduled' as const,
       };
 
       // Create a new scheduled stream using the existing createStream method
-      const stream = await liveStreamService.streams.createStream(streamData);
+      const stream = await liveStreamService.createStream(streamData);
 
       setScheduledStreams(prev => {
         if (editingStream) {
@@ -109,7 +110,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const handleStartStream = async (streamId: string) => {
     try {
       // Start the scheduled stream
-      await liveStreamService.streams.startStream(streamId);
+      await liveStreamService.startStream(streamId);
     } catch (error) {
       logger.error('Failed to start stream:', error);
     }
@@ -401,14 +402,14 @@ return false;
                     <div className="flex items-center space-x-1">
                       <ClockIcon className="w-4 h-4" />
                       <span>
-                        {stream.scheduledStartTime && formatDateTime(stream.scheduledStartTime)}
+                        {stream.scheduledStartTime && formatDateTime(new Date(stream.scheduledStartTime))}
                       </span>
                     </div>
                     <span>•</span>
                     <span>{stream.category}</span>
                     <span>•</span>
                     <span className="font-medium text-blue-600">
-                      {stream.scheduledStartTime && getTimeUntilStream(stream.scheduledStartTime)}
+                      {stream.scheduledStartTime && getTimeUntilStream(new Date(stream.scheduledStartTime))}
                     </span>
                   </div>
 

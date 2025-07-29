@@ -6,6 +6,7 @@ import { ApiError } from './base';
 import type { Video, Channel } from '../../types/core';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+const GOOGLE_API_URL = 'https://www.googleapis.com/youtube/v3';
 
 // YouTube API response interfaces
 interface YouTubeVideoResponse {
@@ -99,7 +100,7 @@ class YouTubeService {
   private buildUrl(endpoint: string, params: Record<string, string>): string {
     const isDevelopment = import.meta.env.MODE === 'development';
     const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
-    const baseUrl = isDevelopment ? `${origin}/api/youtube/v3` : 'https://www.googleapis.com/youtube/v3';
+    const baseUrl = isDevelopment ? `${origin}/api/youtube/v3` : GOOGLE_API_URL;
 
     const url = new URL(`${baseUrl}/${endpoint}`);
     Object.entries(params).forEach(([key, value]) => {
