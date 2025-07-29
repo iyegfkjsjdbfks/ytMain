@@ -79,9 +79,9 @@ return video?.title || '';
           />
 
           <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
-            <span>{video.viewsFormatted} views</span>
+            <span>{video.views} views</span>
             <span>•</span>
-            <span>{video.publishedAtFormatted}</span>
+            <span>{video.publishedAt || video.uploadedAt}</span>
           </div>
 
           {/* Channel Info */}

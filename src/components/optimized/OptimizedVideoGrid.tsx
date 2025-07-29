@@ -62,7 +62,7 @@ const VideoGridItem = memo<{
             {video.channel?.name}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-            {video.viewsFormatted} views • {video.publishedAtFormatted}
+            {video.views} views • {video.publishedAt || video.uploadedAt}
           </p>
         </div>
       </div>
@@ -119,6 +119,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
         resizeObserver.disconnect();
       };
     }
+    return undefined;
   }, []);
 
   if (loading) {
@@ -149,6 +150,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
         <Grid
           columnCount={columnCount}
           columnWidth={itemWidth}
+          width={containerWidth}
           height={containerHeight}
           rowCount={rowCount}
           rowHeight={itemHeight}
