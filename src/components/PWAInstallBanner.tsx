@@ -29,7 +29,7 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
 }) => {
   const { canInstall, isInstalled } = usePWA();
   const {
-    isInstallable,
+
     isInstalling,
     installError,
     installApp,
@@ -43,7 +43,7 @@ export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    if (!autoShow || !isSupported) {
+    if (!autoShow) {
 return;
 }
 
@@ -267,7 +267,7 @@ return;
     </div>
   );
 
-  if (!isVisible || !isSupported) {
+  if (!isVisible) {
     return null;
   }
 

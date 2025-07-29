@@ -326,7 +326,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Edit stream:', stream.id);
           break;
         case 'duplicate':
-          const duplicatedStream = await liveStreamService.createStream({
+          const duplicatedStream = await liveStreamService.streams.createStream({
             ...stream,
             title: `${stream.title} (Copy)`,
             status: 'scheduled',

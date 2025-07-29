@@ -58,14 +58,14 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
     <div style={style} className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
       <div className="flex space-x-3">
         <img
-          src={comment.author.avatarUrl || 'https://via.placeholder.com/32'}
-          alt={comment.author.name}
+          src={comment.authorAvatar || comment.authorAvatarUrl || 'https://via.placeholder.com/32'}
+          alt={comment.authorName}
           className="w-8 h-8 rounded-full flex-shrink-0"
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-center space-x-2">
             <span className="font-medium text-sm text-gray-900 dark:text-white">
-              {comment.author.name}
+              {comment.authorName}
             </span>
             <span className="text-xs text-gray-500 dark:text-gray-400">
               {comment.publishedAt}
@@ -133,6 +133,7 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(({
     <div className={className}>
       <List
         height={height}
+        width="100%"
         itemCount={comments.length}
         itemSize={itemHeight}
         itemData={listData}
