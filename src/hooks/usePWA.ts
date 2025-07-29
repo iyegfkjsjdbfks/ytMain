@@ -244,14 +244,14 @@ export const usePWA = (): UsePWAReturn => {
   // Get install stats
   const getInstallStats = useCallback(() => {
     return {
-      canInstall: installPrompt.canInstall,
+      canInstall: installPrompt.isInstallable,
       isInstalled: installPrompt.isInstalled,
-      installPromptShown: installPrompt.isPromptShown,
+      installPromptShown: installPrompt.showPrompt,
       supportedFeatures: Object.keys(state.features).filter(key =>
         state.features[key as keyof typeof state.features],
       ),
     };
-  }, [installPrompt.canInstall, installPrompt.isInstalled, installPrompt.isPromptShown, state.features]);
+  }, [installPrompt.isInstallable, installPrompt.isInstalled, installPrompt.showPrompt, state.features]);
 
   // Get usage stats
   const getUsageStats = useCallback(() => {
@@ -294,11 +294,11 @@ export const usePWA = (): UsePWAReturn => {
 
   return {
     // Installation
-    canInstall: installPrompt.canInstall,
+    canInstall: installPrompt.isInstallable,
     isInstalled: installPrompt.isInstalled,
-    installPWA: installPrompt.installPWA,
-    showInstallPrompt: installPrompt.showInstallPrompt,
-    dismissInstallPrompt: installPrompt.dismissInstallPrompt,
+    installPWA: installPrompt.installApp,
+    showInstallPrompt: () => Promise.resolve(installPrompt.canShowPrompt()),
+    dismissInstallPrompt: installPrompt.dismissPrompt,
 
     // Network & Offline
     isOnline: offlineStatus.isOnline,

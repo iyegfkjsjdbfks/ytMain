@@ -1,4 +1,4 @@
-import { unifiedDataService } from '@services/unifiedDataService';
+import { unifiedDataService } from '../../../services/unifiedDataService';
 import { useQuery } from '@tanstack/react-query';
 
 import { videoService } from '../services/videoService';

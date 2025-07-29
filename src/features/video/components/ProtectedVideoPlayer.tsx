@@ -37,31 +37,26 @@ const ProtectedVideoPlayer: React.FC<ProtectedVideoPlayerProps> = ({
     // The error boundary will reset and re-render the component
   }, [videoId, src]);
 
-  const handleReload = useCallback(() => {
-    conditionalLogger.debug('Reloading video player', { videoId, src });
-    // Additional reload logic can be added here
-    // For example, clearing cached video data or resetting player state
-  }, [videoId, src]);
+  // Removed unused handleReload function
 
   return (
     <VideoErrorBoundary
-      videoId={videoId || 'unknown'}
-      onRetry={handleRetry}
-      onReload={handleReload}
-    >
+        videoId={videoId || 'unknown'}
+        onRetry={handleRetry}
+      >
       <VideoPlayer
         videoId={videoId}
-        src={src}
-        poster={poster}
-        title={title}
+        {...(src && { src })}
+        {...(poster && { poster })}
+        {...(title && { title })}
         autoplay={autoplay}
         startTime={startTime}
         className={className}
-        onReady={onReady}
-        onTimeUpdate={onTimeUpdate}
-        onPlay={onPlay}
-        onPause={onPause}
-        onEnded={onEnded}
+        {...(onReady && { onReady })}
+        {...(onTimeUpdate && { onTimeUpdate })}
+        {...(onPlay && { onPlay })}
+        {...(onPause && { onPause })}
+        {...(onEnded && { onEnded })}
         useYouTube={useYouTube}
         {...otherProps}
       />
