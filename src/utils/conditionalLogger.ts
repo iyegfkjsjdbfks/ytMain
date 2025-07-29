@@ -10,13 +10,7 @@ export enum LogLevel {
   DEBUG = 3
 }
 
-interface LogEntry {
-  level: LogLevel;
-  message: string;
-  data?: unknown;
-  timestamp: Date;
-  source?: string;
-}
+
 
 class ConditionalLogger {
   private isDevelopment: boolean = false;
@@ -81,15 +75,7 @@ class ConditionalLogger {
     return `${timestamp} ${levelName}${sourcePrefix}: ${message}`;
   }
 
-  private createLogEntry(level: LogLevel, message: string, data?: unknown, source?: string): LogEntry {
-    return {
-      level,
-      message,
-      data,
-      timestamp: new Date(),
-      source,
-    };
-  }
+
 
   error(message: string, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.ERROR)) {
@@ -192,18 +178,24 @@ try {
   conditionalLoggerInstance = new ConditionalLogger();
 } catch (error) {
   // Fallback logger if construction fails
-  conditionalLoggerInstance = {
-    error: (msg: string) => console.error(msg),
-    warn: (msg: string) => console.warn(msg),
-    info: (msg: string) => console.info(msg),
-    debug: (msg: string) => console.log(msg),
-    time: (label: string) => console.time(label),
-    timeEnd: (label: string) => console.timeEnd(label),
-    group: (label: string) => console.group(label),
-    groupEnd: () => console.groupEnd(),
-    apiResponse: () => {},
-    apiError: (endpoint: string, err: unknown) => console.error(`API Error from ${endpoint}:`, err),
-  } as ConditionalLogger;
+  class FallbackLogger extends ConditionalLogger {
+     constructor() {
+       super();
+     }
+     
+     override error(msg: string) { console.error(msg); }
+     override warn(msg: string) { console.warn(msg); }
+     override info(msg: string) { console.info(msg); }
+     override debug(msg: string) { console.log(msg); }
+     override time(label: string) { console.time(label); }
+     override timeEnd(label: string) { console.timeEnd(label); }
+     override group(label: string) { console.group(label); }
+     override groupEnd() { console.groupEnd(); }
+     override apiResponse() {}
+     override apiError(endpoint: string, err: unknown) { console.error(`API Error from ${endpoint}:`, err); }
+   }
+  
+  conditionalLoggerInstance = new FallbackLogger();
 }
 
 // Export singleton instance

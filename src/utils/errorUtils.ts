@@ -24,13 +24,19 @@ export function createComponentError(
 ): ComponentError {
   const error = new Error(message) as ComponentError;
   error.component = component;
-  error.context = context;
-  error.originalError = originalError;
+  if (context !== undefined) {
+    error.context = context;
+  }
+  if (originalError !== undefined) {
+    error.originalError = originalError;
+  }
 
   // Include original error message if available
   if (originalError instanceof Error) {
     error.message = `${message}: ${originalError.message}`;
-    error.stack = originalError.stack;
+    if (originalError.stack !== undefined) {
+      error.stack = originalError.stack;
+    }
   }
 
   return error;

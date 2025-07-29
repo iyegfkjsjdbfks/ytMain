@@ -168,7 +168,7 @@ class MetadataNormalizationService {
       }
     }
 
-    const subscriberCount = channel?.subscribers || 0;
+    const subscriberCount = parseInt(channel?.statistics?.subscriberCount || '0', 10);
 
     const normalizedVideo: UnifiedVideoMetadata = {
       id: youtubeVideo.id,
@@ -184,10 +184,10 @@ class MetadataNormalizationService {
       channel: {
         id: youtubeVideo.snippet?.channelId || '',
         name: youtubeVideo.snippet?.channelTitle || '',
-        avatarUrl: channel?.avatarUrl || '',
+        avatarUrl: channel?.snippet?.thumbnails?.default?.url || '',
         subscribers: subscriberCount,
         subscribersFormatted: this.formatSubscribers(subscriberCount),
-        isVerified: channel?.isVerified || false,
+        isVerified: false, // YouTube API doesn't provide verification status directly
       },
       duration: this.parseDuration(youtubeVideo.contentDetails?.duration || 'PT0S'),
       publishedAt: youtubeVideo.snippet?.publishedAt || '',
@@ -199,11 +199,12 @@ class MetadataNormalizationService {
       visibility: this.mapYouTubeVisibility(youtubeVideo.status?.privacyStatus),
       source: 'youtube',
       metadata: {
-        quality: youtubeVideo.contentDetails?.definition,
-        definition: youtubeVideo.contentDetails?.definition,
+        ...(youtubeVideo.contentDetails?.definition && { quality: youtubeVideo.contentDetails.definition }),
+        ...(youtubeVideo.contentDetails?.definition && { definition: youtubeVideo.contentDetails.definition }),
         captions: youtubeVideo.contentDetails?.caption === 'true',
-        language: youtubeVideo.snippet?.defaultLanguage || youtubeVideo.snippet?.defaultAudioLanguage,
-        license: youtubeVideo.status?.license,
+        ...(youtubeVideo.snippet?.defaultLanguage && { language: youtubeVideo.snippet.defaultLanguage }),
+        ...(!youtubeVideo.snippet?.defaultLanguage && youtubeVideo.snippet?.defaultAudioLanguage && { language: youtubeVideo.snippet.defaultAudioLanguage }),
+        ...(youtubeVideo.status?.license && { license: youtubeVideo.status.license }),
       },
     };
 
@@ -440,7 +441,7 @@ return '';
 }
 
     // Prefer higher quality thumbnails
-    const priorities = ['maxres', 'standard', 'high', 'medium', 'default'];
+    const priorities: (keyof YouTubeThumbnails)[] = ['maxres', 'standard', 'high', 'medium', 'default'];
 
     for (const quality of priorities) {
       if (thumbnails[quality]?.url) {

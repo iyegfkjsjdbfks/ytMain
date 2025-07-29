@@ -10,15 +10,31 @@ import type { Video as RootVideo } from '../../types';
 
 export * from './core';
 export * from './video';
-export * from './youtube';
-export * from './errors';
+// Export specific types from youtube to avoid conflicts
+export type { YouTubeVideo, YouTubeChannel, YouTubePlaylist } from './youtube';
+// Export specific types from errors to avoid YouTubeApiError conflict
+export type { 
+  BaseError, 
+  ApiError, 
+  NetworkError, 
+  ValidationError, 
+  FormValidationError, 
+  AuthError, 
+  StorageError, 
+  MediaError, 
+  VideoPlayerError, 
+  PerformanceError, 
+  ServiceWorkerError, 
+  CacheError, 
+  ErrorCode 
+} from './errors';
 export * from './livestream';
 
-// Legacy compatibility - re-export from root types
-export type { Video, Channel, UserPlaylist } from '../../types';
+// Legacy compatibility - re-export from root types (excluding Video to avoid conflict)
+export type { Channel, UserPlaylist } from '../../types';
 
 // Create a unified Video type that combines both definitions
 export type UnifiedVideo = CoreVideo & Partial<RootVideo>;
 
-// Default export for backward compatibility
+// Use the core Video type as the primary export
 export type { Video } from './core';

@@ -621,7 +621,7 @@ class UnifiedDataService {
       try {
         const youtubeChannel = await youtubeService.fetchChannel(id);
         if (youtubeChannel) {
-          const normalized = metadataNormalizationService.normalizeYouTubeChannel(youtubeChannel);
+          const normalized = metadataNormalizationService.normalizeYouTubeChannel(youtubeChannel as any);
           this.setCachedData(cacheKey, normalized);
           return normalized;
         }

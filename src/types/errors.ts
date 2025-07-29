@@ -315,15 +315,25 @@ export const createApiError = (
   method: ApiError['method'],
   statusCode?: number,
   details?: Record<string, unknown>,
-): ApiError => ({
-  code: ERROR_CODES.API_SERVER_ERROR,
-  message,
-  endpoint,
-  method,
-  statusCode,
-  timestamp: new Date(),
-  details,
-});
+): ApiError => {
+  const error: ApiError = {
+    code: ERROR_CODES.API_SERVER_ERROR,
+    message,
+    endpoint,
+    method,
+    timestamp: new Date(),
+  };
+  
+  if (statusCode !== undefined) {
+    error.statusCode = statusCode;
+  }
+  
+  if (details !== undefined) {
+    error.details = details;
+  }
+  
+  return error;
+};
 
 export const createValidationError = (
   field: string,
@@ -359,7 +369,7 @@ export const createYouTubeError = (
   videoId?: string,
   errorType?: 'unavailable' | 'embed_disabled' | 'region_blocked' | 'private' | 'deleted',
 ): YouTubeApiError => {
-  let code = ERROR_CODES.API_SERVER_ERROR;
+  let code: ErrorCode = ERROR_CODES.API_SERVER_ERROR;
 
   switch (errorType) {
     case 'unavailable':
@@ -379,7 +389,7 @@ export const createYouTubeError = (
       break;
   }
 
-  return {
+  const error: YouTubeApiError = {
     code,
     message,
     endpoint,
@@ -388,6 +398,11 @@ export const createYouTubeError = (
     videoUnavailable: errorType === 'unavailable',
     embedDisabled: errorType === 'embed_disabled',
     regionBlocked: errorType === 'region_blocked',
-    details: videoId ? { videoId } : undefined,
   };
+  
+  if (videoId) {
+    error.details = { videoId };
+  }
+  
+  return error;
 };
