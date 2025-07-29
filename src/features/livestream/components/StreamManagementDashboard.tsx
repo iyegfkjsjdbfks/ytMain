@@ -314,11 +314,11 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     try {
       switch (action.type) {
         case 'start':
-          await liveStreamService.startStream(stream.id);
+          await liveStreamService.streams.startStream(stream.id);
           // Refresh streams
           break;
         case 'stop':
-          await liveStreamService.stopStream(stream.id);
+          await liveStreamService.streams.stopStream(stream.id);
           // Refresh streams
           break;
         case 'edit':

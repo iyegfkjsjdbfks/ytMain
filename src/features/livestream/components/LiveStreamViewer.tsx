@@ -77,7 +77,7 @@ const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
   useEffect(() => {
     const fetchStream = async () => {
       try {
-        const streamData = await liveStreamService.getStream(streamId);
+        const streamData = await liveStreamService.streams.getStream(streamId);
         setStream(streamData);
       } catch (error) {
         const componentError = createComponentError('LiveStreamViewer', 'Failed to fetch stream', error);
