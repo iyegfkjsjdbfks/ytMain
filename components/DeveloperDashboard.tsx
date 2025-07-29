@@ -4,13 +4,14 @@
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { advancedAPM, rumSystem } from '../utils/advancedMonitoring';
+import type React from 'react';
+import { useState, useEffect, useMemo } from 'react';
+
+import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine, technicalDebtTracker } from '../utils/codeAnalysisEngine';
 import { intelligentWorkflowEngine } from '../utils/developmentWorkflow';
 import { featureFlagManager } from '../utils/featureFlagSystem';
 import { performanceMonitor } from '../utils/performanceMonitor';
-import { securityUtils } from '../utils/securityUtils';
 
 // Types for dashboard data
 interface DashboardMetrics {
@@ -83,52 +84,52 @@ export const DeveloperDashboard: React.FC = () => {
   const fetchDashboardData = async () => {
     try {
       setIsLoading(true);
-      
+
       // Fetch metrics from various systems
       const [performanceMetrics, codeAnalysis, workflowAnalytics, flagsData] = await Promise.all([
         getPerformanceMetrics(),
         codeAnalysisEngine.analyzeCode(),
         intelligentWorkflowEngine.getWorkflowAnalytics(),
-        getFeatureFlagMetrics()
+        getFeatureFlagMetrics(),
       ]);
-      
+
       const dashboardMetrics: DashboardMetrics = {
         performance: {
           coreWebVitals: {
             lcp: performanceMetrics.lcp || 0,
             fid: performanceMetrics.fid || 0,
-            cls: performanceMetrics.cls || 0
+            cls: performanceMetrics.cls || 0,
           },
           memoryUsage: performanceMetrics.memoryUsage || 0,
           errorRate: performanceMetrics.errorRate || 0,
-          responseTime: performanceMetrics.responseTime || 0
+          responseTime: performanceMetrics.responseTime || 0,
         },
         codeQuality: {
           complexity: codeAnalysis.complexity || 0,
           maintainability: codeAnalysis.maintainabilityIndex || 0,
           testCoverage: codeAnalysis.testCoverage || 0,
-          technicalDebt: technicalDebtTracker.getTechnicalDebtSummary().totalItems
+          technicalDebt: technicalDebtTracker.getTechnicalDebtSummary().totalItems,
         },
         workflow: workflowAnalytics,
         featureFlags: flagsData,
         security: {
           vulnerabilities: Math.floor(Math.random() * 3), // Mock data
           lastScan: Date.now() - Math.random() * 24 * 60 * 60 * 1000,
-          riskLevel: 'low'
-        }
+          riskLevel: 'low',
+        },
       };
-      
+
       setMetrics(dashboardMetrics);
-      
+
       // Fetch alerts and suggestions
       const [alertsData, suggestionsData] = await Promise.all([
         generateAlerts(dashboardMetrics),
-        intelligentWorkflowEngine.getContinuousImprovementSuggestions()
+        intelligentWorkflowEngine.getContinuousImprovementSuggestions(),
       ]);
-      
+
       setAlerts(alertsData);
       setSuggestions(suggestionsData);
-      
+
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
     } finally {
@@ -139,7 +140,7 @@ export const DeveloperDashboard: React.FC = () => {
   // Auto-refresh effect
   useEffect(() => {
     fetchDashboardData();
-    
+
     if (autoRefresh) {
       const interval = setInterval(fetchDashboardData, refreshInterval * 1000);
       return () => clearInterval(interval);
@@ -150,39 +151,39 @@ export const DeveloperDashboard: React.FC = () => {
   const getPerformanceMetrics = async () => {
     const metrics = performanceMonitor.getMetrics();
     const apmMetrics = advancedAPM.getAggregatedMetrics();
-    
+
     return {
       lcp: metrics.find(m => m.name === 'lcp')?.value || 0,
       fid: metrics.find(m => m.name === 'fid')?.value || 0,
       cls: metrics.find(m => m.name === 'cls')?.value || 0,
       memoryUsage: apmMetrics['memory-usage']?.avg || 0,
       errorRate: apmMetrics['error-rate']?.avg || 0,
-      responseTime: apmMetrics['response-time']?.avg || 0
+      responseTime: apmMetrics['response-time']?.avg || 0,
     };
   };
 
   const getFeatureFlagMetrics = async () => {
     const flags = featureFlagManager.getAllFlags();
     const activeFlags = flags.filter(f => f.enabled);
-    
+
     const rolloutProgress = flags
       .filter(f => f.rolloutStrategy.type === 'gradual')
       .map(f => ({
         id: f.id,
         name: f.name,
-        percentage: f.rolloutStrategy.config.percentage || 0
+        percentage: f.rolloutStrategy.config.percentage || 0,
       }));
-    
+
     return {
       totalFlags: flags.length,
       activeFlags: activeFlags.length,
-      rolloutProgress
+      rolloutProgress,
     };
   };
 
   const generateAlerts = async (metrics: DashboardMetrics): Promise<AlertItem[]> => {
     const alerts: AlertItem[] = [];
-    
+
     // Performance alerts
     if (metrics.performance.coreWebVitals.lcp > 2500) {
       alerts.push({
@@ -192,10 +193,10 @@ export const DeveloperDashboard: React.FC = () => {
         message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,
         timestamp: Date.now(),
         severity: 6,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     if (metrics.performance.errorRate > 0.05) {
       alerts.push({
         id: 'error-rate-high',
@@ -204,10 +205,10 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,
         timestamp: Date.now(),
         severity: 8,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     // Code quality alerts
     if (metrics.codeQuality.complexity > 8) {
       alerts.push({
@@ -217,10 +218,10 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,
         timestamp: Date.now(),
         severity: 5,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     if (metrics.codeQuality.testCoverage < 80) {
       alerts.push({
         id: 'coverage-low',
@@ -229,10 +230,10 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Test coverage is ${metrics.codeQuality.testCoverage}% (target: >80%)`,
         timestamp: Date.now(),
         severity: 6,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     // Workflow alerts
     if (metrics.workflow.successRate < 0.9) {
       alerts.push({
@@ -242,10 +243,10 @@ export const DeveloperDashboard: React.FC = () => {
         message: `Workflow success rate is ${(metrics.workflow.successRate * 100).toFixed(1)}% (target: >90%)`,
         timestamp: Date.now(),
         severity: 7,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     // Security alerts
     if (metrics.security.vulnerabilities > 0) {
       alerts.push({
@@ -255,24 +256,26 @@ export const DeveloperDashboard: React.FC = () => {
         message: `${metrics.security.vulnerabilities} security vulnerabilities detected`,
         timestamp: Date.now(),
         severity: 9,
-        actionable: true
+        actionable: true,
       });
     }
-    
+
     return alerts.sort((a, b) => b.severity - a.severity);
   };
 
   // Computed values
   const overallHealthScore = useMemo(() => {
-    if (!metrics) return 0;
-    
+    if (!metrics) {
+return 0;
+}
+
     const scores = {
       performance: Math.max(0, 100 - (metrics.performance.errorRate * 1000)),
       quality: metrics.codeQuality.maintainability,
       workflow: metrics.workflow.successRate * 100,
-      security: metrics.security.vulnerabilities === 0 ? 100 : Math.max(0, 100 - (metrics.security.vulnerabilities * 20))
+      security: metrics.security.vulnerabilities === 0 ? 100 : Math.max(0, 100 - (metrics.security.vulnerabilities * 20)),
     };
-    
+
     return Math.round(Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length);
   }, [metrics]);
 
@@ -284,13 +287,13 @@ export const DeveloperDashboard: React.FC = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6"></div>
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+                <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg" />
               ))}
             </div>
-            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-lg" />
           </div>
         </div>
       </div>
@@ -310,7 +313,7 @@ export const DeveloperDashboard: React.FC = () => {
               Real-time insights into application health and development metrics
             </p>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* Auto-refresh toggle */}
             <div className="flex items-center space-x-2">
@@ -330,7 +333,7 @@ export const DeveloperDashboard: React.FC = () => {
                 />
               </button>
             </div>
-            
+
             {/* Refresh interval */}
             <select
               value={refreshInterval}
@@ -343,7 +346,7 @@ export const DeveloperDashboard: React.FC = () => {
               <option value={60}>1m</option>
               <option value={300}>5m</option>
             </select>
-            
+
             {/* Manual refresh */}
             <button
               onClick={fetchDashboardData}
@@ -424,7 +427,7 @@ export const DeveloperDashboard: React.FC = () => {
                     className="flex items-start space-x-3 p-3 bg-red-50 dark:bg-red-900/20 rounded-md"
                   >
                     <div className="flex-shrink-0">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-red-800 dark:text-red-200">
@@ -449,21 +452,21 @@ export const DeveloperDashboard: React.FC = () => {
               {actionableSuggestions.length > 0 && (
                 <button
                   onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
-                    actionableSuggestions.slice(0, 3).map(s => s.id)
+                    actionableSuggestions.slice(0, 3).map(s => s.id),
                   )}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
                 >
                   Auto-implement {actionableSuggestions.length} improvements
                 </button>
               )}
-              
+
               <button
                 onClick={() => intelligentWorkflowEngine.executeWorkflow('ci-cd')}
                 className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
               >
                 Run CI/CD Pipeline
               </button>
-              
+
               <button
                 onClick={() => codeAnalysisEngine.analyzeCode()}
                 className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm"
@@ -626,7 +629,7 @@ export const DeveloperDashboard: React.FC = () => {
               { id: 'quality', label: 'Code Quality' },
               { id: 'workflow', label: 'Workflow' },
               { id: 'flags', label: 'Feature Flags' },
-              { id: 'security', label: 'Security' }
+              { id: 'security', label: 'Security' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -650,7 +653,7 @@ export const DeveloperDashboard: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
                 System Overview
               </h3>
-              
+
               {/* Alerts Section */}
               <div className="mb-8">
                 <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
@@ -675,7 +678,7 @@ export const DeveloperDashboard: React.FC = () => {
                             : alert.type === 'warning'
                             ? 'bg-yellow-500'
                             : 'bg-blue-500'
-                        }`}></div>
+                        }`} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start">
@@ -714,7 +717,7 @@ export const DeveloperDashboard: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Improvement Suggestions */}
               <div>
                 <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
@@ -733,7 +736,7 @@ export const DeveloperDashboard: React.FC = () => {
                             : suggestion.priority >= 6
                             ? 'bg-yellow-500'
                             : 'bg-green-500'
-                        }`}></div>
+                        }`} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start">
@@ -769,7 +772,7 @@ export const DeveloperDashboard: React.FC = () => {
               </div>
             </div>
           )}
-          
+
           {selectedTab !== 'overview' && (
             <div className="text-center py-12">
               <p className="text-gray-500 dark:text-gray-400">

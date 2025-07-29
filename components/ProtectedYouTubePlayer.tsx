@@ -1,7 +1,11 @@
-import React, { useCallback } from 'react';
+import type React from 'react';
+import { useCallback } from 'react';
+
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
+
 import YouTubePlayer from './YouTubePlayer';
+
 import type { YouTubeSearchResult } from '../services/googleSearchService';
 import type { Video } from '../src/types/core';
 

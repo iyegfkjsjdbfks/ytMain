@@ -4,6 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
+
 import ImageWithFallback from './ImageWithFallback';
 
 import type { Video } from '../types';

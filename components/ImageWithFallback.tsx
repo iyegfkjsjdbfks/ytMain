@@ -61,21 +61,21 @@ return fallbackSrc;
 
   const handleError = useCallback((_event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const isYouTubeThumbnail = currentSrc.includes('yt3.ggpht.com') || currentSrc.includes('i.ytimg.com');
-    
+
     // Check if this is a 429 rate limiting error for YouTube thumbnails
     if (isYouTubeThumbnail && retryCount < maxRetries) {
       setIsRateLimited(true);
       const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
-      
+
       setTimeout(() => {
         setRetryCount(prev => prev + 1);
         setCurrentSrc(src); // Retry original source
         setIsLoading(true);
       }, delay);
-      
+
       return;
     }
-    
+
     if (!hasError) {
       setHasError(true);
       setCurrentSrc(generateFallback());
@@ -201,7 +201,7 @@ return '';
           Fallback
         </div>
       )}
-      
+
       {isRateLimited && (
         <div className="absolute top-2 left-2 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">
           Retrying... ({retryCount}/{maxRetries})

@@ -8,13 +8,14 @@
  * - Feature flag management
  */
 
-import React, { useState, useEffect } from 'react';
-import { advancedAPM } from '../utils/advancedMonitoring';
-import { securityMonitoring } from '../utils/securityMonitoring';
+import type React from 'react';
+import { useState, useEffect } from 'react';
+
 import { deploymentAutomation } from '../utils/deploymentAutomation';
-import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
 import { featureFlagManager } from '../utils/featureFlagSystem';
+import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
 import { performanceMonitor } from '../utils/performanceMonitor';
+import { securityMonitoring } from '../utils/securityMonitoring';
 
 // Types for dashboard data
 interface DashboardMetrics {
@@ -72,14 +73,14 @@ const DevOpsDashboard: React.FC = () => {
   const fetchDashboardData = async () => {
     try {
       setIsLoading(true);
-      
+
       // Gather metrics from all monitoring systems
       const performanceMetrics = performanceMonitor.getMetrics();
       const securityMetrics = securityMonitoring.getSecurityMetrics();
       const deploymentMetrics = deploymentAutomation.getDeploymentMetrics();
       const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
       const flagMetrics = featureFlagManager.getMetrics();
-      
+
       // Transform data for dashboard
       const dashboardMetrics: DashboardMetrics = {
         performance: {
@@ -88,35 +89,35 @@ const DevOpsDashboard: React.FC = () => {
           fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
           cls: performanceMetrics.find(m => m.name === 'cls')?.value || 0.05,
           memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45,
-          errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1
+          errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1,
         },
         security: {
           score: Math.round(securityMetrics.securityScore),
           threatsDetected: securityMetrics.threatsDetected,
           vulnerabilities: securityMetrics.vulnerabilities.total,
-          complianceScore: Math.round(securityMetrics.complianceScore)
+          complianceScore: Math.round(securityMetrics.complianceScore),
         },
         deployment: {
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes
           frequency: deploymentMetrics.deploymentFrequency,
-          activeDeployments: deploymentAutomation.getAllExecutions().filter(e => e.status === 'running').length
+          activeDeployments: deploymentAutomation.getAllExecutions().filter(e => e.status === 'running').length,
         },
         codeQuality: {
           score: Math.round(codeMetrics?.qualityScore || 82),
           complexity: Math.round(codeMetrics?.complexity || 15),
           coverage: Math.round(codeMetrics?.testCoverage || 78),
-          technicalDebt: Math.round(codeMetrics?.technicalDebt || 12)
+          technicalDebt: Math.round(codeMetrics?.technicalDebt || 12),
         },
         featureFlags: {
           totalFlags: flagMetrics.totalFlags,
           activeFlags: flagMetrics.activeFlags,
-          experimentsRunning: flagMetrics.experimentsRunning
-        }
+          experimentsRunning: flagMetrics.experimentsRunning,
+        },
       };
-      
+
       setMetrics(dashboardMetrics);
-      
+
       // Gather alerts from all systems
       const allAlerts: AlertItem[] = [
         ...securityMonitoring.getSecurityAlerts(false).map(alert => ({
@@ -126,7 +127,7 @@ const DevOpsDashboard: React.FC = () => {
           title: alert.title,
           description: alert.description,
           timestamp: alert.timestamp,
-          acknowledged: alert.acknowledged
+          acknowledged: alert.acknowledged,
         })),
         ...deploymentAutomation.getAllExecutions()
           .filter(exec => exec.status === 'failed')
@@ -138,10 +139,10 @@ const DevOpsDashboard: React.FC = () => {
             title: 'Deployment Failed',
             description: `Pipeline ${exec.pipelineId} failed`,
             timestamp: exec.endTime || exec.startTime,
-            acknowledged: false
-          }))
+            acknowledged: false,
+          })),
       ];
-      
+
       // Add performance alerts
       if (dashboardMetrics.performance.score < 70) {
         allAlerts.push({
@@ -151,10 +152,10 @@ const DevOpsDashboard: React.FC = () => {
           title: 'Low Performance Score',
           description: `Performance score is ${dashboardMetrics.performance.score}`,
           timestamp: Date.now(),
-          acknowledged: false
+          acknowledged: false,
         });
       }
-      
+
       // Add code quality alerts
       if (dashboardMetrics.codeQuality.score < 75) {
         allAlerts.push({
@@ -164,13 +165,13 @@ const DevOpsDashboard: React.FC = () => {
           title: 'Low Code Quality Score',
           description: `Code quality score is ${dashboardMetrics.codeQuality.score}`,
           timestamp: Date.now(),
-          acknowledged: false
+          acknowledged: false,
         });
       }
-      
+
       setAlerts(allAlerts.sort((a, b) => b.timestamp - a.timestamp));
       setLastUpdated(new Date());
-      
+
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
     } finally {
@@ -198,9 +199,15 @@ const DevOpsDashboard: React.FC = () => {
 
   // Get score color
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-600';
-    if (score >= 75) return 'text-yellow-600';
-    if (score >= 60) return 'text-orange-600';
+    if (score >= 90) {
+return 'text-green-600';
+}
+    if (score >= 75) {
+return 'text-yellow-600';
+}
+    if (score >= 60) {
+return 'text-orange-600';
+}
     return 'text-red-600';
   };
 
@@ -221,7 +228,7 @@ const DevOpsDashboard: React.FC = () => {
         </div>
         {trend && (
           <div className={`text-sm ${
-            trend === 'up' ? 'text-green-600' : 
+            trend === 'up' ? 'text-green-600' :
             trend === 'down' ? 'text-red-600' : 'text-gray-600'
           }`}>
             {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'}
@@ -233,8 +240,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render overview tab
   const OverviewTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         {/* Key Metrics Grid */}
@@ -273,27 +282,27 @@ const DevOpsDashboard: React.FC = () => {
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full" />
                 <span className="text-sm text-gray-600">Application Health: Healthy</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full" />
                 <span className="text-sm text-gray-600">Database: Connected</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-400 rounded-full" />
                 <span className="text-sm text-gray-600">Cache: Degraded</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full" />
                 <span className="text-sm text-gray-600">CDN: Operational</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full" />
                 <span className="text-sm text-gray-600">Monitoring: Active</span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full" />
                 <span className="text-sm text-gray-600">Security: Protected</span>
               </div>
             </div>
@@ -345,8 +354,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render performance tab
   const PerformanceTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -382,8 +393,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render security tab
   const SecurityTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -414,8 +427,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render deployment tab
   const DeploymentTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -446,8 +461,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render quality tab
   const QualityTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -478,8 +495,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Render features tab
   const FeaturesTab = () => {
-    if (!metrics) return <div>Loading...</div>;
-    
+    if (!metrics) {
+return <div>Loading...</div>;
+}
+
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -507,7 +526,7 @@ const DevOpsDashboard: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
           <p className="mt-4 text-gray-600">Loading DevOps Dashboard...</p>
         </div>
       </div>
@@ -549,7 +568,7 @@ const DevOpsDashboard: React.FC = () => {
               { id: 'security', label: 'Security' },
               { id: 'deployment', label: 'Deployment' },
               { id: 'quality', label: 'Code Quality' },
-              { id: 'features', label: 'Feature Flags' }
+              { id: 'features', label: 'Feature Flags' },
             ].map((tab) => (
               <button
                 key={tab.id}

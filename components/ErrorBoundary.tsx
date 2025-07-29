@@ -60,7 +60,7 @@ class ErrorReportingService {
         //   headers: { 'Content-Type': 'application/json' },
         //   body: JSON.stringify(report)
         // });
-        
+
         // Or use a service like Sentry
         // Sentry.captureException(error, { contexts: { react: errorInfo } });
       }
@@ -109,10 +109,10 @@ class ErrorBoundary extends Component<Props, State> {
 
   public static getDerivedStateFromError(error: Error): Partial<State> {
     const errorId = `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    return { 
-      hasError: true, 
+    return {
+      hasError: true,
       error,
-      errorId
+      errorId,
     };
   }
 
@@ -123,9 +123,9 @@ class ErrorBoundary extends Component<Props, State> {
     // Reset error boundary when resetKeys change
     if (hasError && resetKeys && prevProps.resetKeys !== resetKeys) {
       const hasResetKeyChanged = resetKeys.some(
-        (key, index) => this.prevResetKeys[index] !== key
+        (key, index) => this.prevResetKeys[index] !== key,
       );
-      
+
       if (hasResetKeyChanged) {
         this.prevResetKeys = resetKeys;
         this.resetErrorBoundary();
@@ -140,13 +140,13 @@ class ErrorBoundary extends Component<Props, State> {
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Report error to external service
     errorReporter.reportError(error, errorInfo);
-    
+
     // Call custom error handler if provided
     this.props.onError?.(error, errorInfo);
-    
+
     this.setState({ error, errorInfo });
   }
 
@@ -160,21 +160,21 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.resetTimeoutId) {
       clearTimeout(this.resetTimeoutId);
     }
-    
-    this.setState({ 
-      hasError: false, 
-      retryCount: 0
+
+    this.setState({
+      hasError: false,
+      retryCount: 0,
     });
   };
 
   private handleRetry = () => {
     const { maxRetries = 3 } = this.props;
     const { retryCount } = this.state;
-    
+
     if (retryCount < maxRetries) {
-      this.setState(prevState => ({ 
-        hasError: false, 
-        retryCount: prevState.retryCount + 1
+      this.setState(prevState => ({
+        hasError: false,
+        retryCount: prevState.retryCount + 1,
       }));
     }
   };
@@ -222,12 +222,12 @@ class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              {retryCount > 0 
+              {retryCount > 0
                 ? `We've tried ${retryCount} time${retryCount > 1 ? 's' : ''} to fix this. Please try refreshing the page.`
                 : "We're sorry, but something unexpected happened. We'll automatically retry in a moment."
               }
             </p>
-            
+
             {retryCount === 0 && (
               <div className="mt-3 flex justify-center">
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-xs bg-blue-100 text-blue-800">

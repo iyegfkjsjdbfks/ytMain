@@ -5,6 +5,7 @@ import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline
 import { formatDistanceToNow } from 'date-fns';
 
 import ImageWithFallback from './ImageWithFallback';
+
 import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {

@@ -12,8 +12,8 @@ import { useToggle } from '../hooks/unifiedHooks';
 import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 
 import { SaveIcon } from './icons/UnifiedIcon';
-import { IconButton } from './ui/Button';
 import ImageWithFallback from './ImageWithFallback';
+import { IconButton } from './ui/Button';
 
 import type { Video } from '../types';
 

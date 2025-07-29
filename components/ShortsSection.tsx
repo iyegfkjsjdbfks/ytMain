@@ -58,7 +58,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              // Additional properties for Short type compatibility
              viewCount: parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0,
              commentCount: 0,
-             likeCount: video.likes || 0
+             likeCount: video.likes || 0,
            };
           return shortVideo;
         });

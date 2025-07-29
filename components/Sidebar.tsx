@@ -52,15 +52,15 @@ const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
     <>
       {/* Mobile Overlay */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-30 md:hidden" 
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
           aria-hidden="true"
         />
       )}
 
       {/* Desktop Sidebar */}
       <aside
-        className={`fixed top-14 left-0 z-40 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-all duration-300 ease-in-out overflow-y-auto hidden md:block w-60`}
+        className={'fixed top-14 left-0 z-40 h-[calc(100vh-3.5rem)] bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transition-all duration-300 ease-in-out overflow-y-auto hidden md:block w-60'}
         aria-label="Main navigation"
       >
         <div className="flex flex-col h-full">
