@@ -8,7 +8,6 @@
  * - Feature flag management
  */
 
-import type React from 'react';
 import { useState, useEffect } from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';

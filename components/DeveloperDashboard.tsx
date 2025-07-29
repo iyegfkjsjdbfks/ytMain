@@ -4,7 +4,6 @@
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-import type React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
