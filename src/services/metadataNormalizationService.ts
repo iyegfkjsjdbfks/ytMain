@@ -161,7 +161,8 @@ class MetadataNormalizationService {
     if (!channel && youtubeVideo.snippet?.channelId) {
       try {
         logger.debug(`Fetching channel data for channelId: ${youtubeVideo.snippet.channelId}`);
-        channel = await youtubeService.fetchChannel(youtubeVideo.snippet.channelId);
+        const fetchedChannel = await youtubeService.fetchChannel(youtubeVideo.snippet.channelId);
+        channel = (fetchedChannel as unknown as YouTubeChannel) || undefined;
         logger.debug('Fetched channel data:', channel);
       } catch (error) {
         logger.warn('Failed to fetch channel data:', error);
@@ -248,22 +249,37 @@ class MetadataNormalizationService {
     const videoCount = parseInt(youtubeChannel.statistics?.videoCount || '0', 10);
     const totalViews = parseInt(youtubeChannel.statistics?.viewCount || '0', 10);
 
-    return {
+    const result: UnifiedChannelMetadata = {
       id: youtubeChannel.id,
       name: youtubeChannel.snippet?.title || '',
-      handle: youtubeChannel.snippet?.customUrl,
       description: youtubeChannel.snippet?.description || '',
       avatarUrl: this.selectBestThumbnail(youtubeChannel.snippet?.thumbnails),
-      bannerUrl: youtubeChannel.brandingSettings?.image?.bannerExternalUrl,
       subscribers: subscriberCount,
       subscribersFormatted: this.formatSubscribers(subscriberCount),
       videoCount,
       totalViews,
       isVerified: false, // Would need additional verification data
-      joinedDate: youtubeChannel.snippet?.publishedAt,
-      country: youtubeChannel.snippet?.country,
       source: 'youtube',
     };
+
+    // Add optional properties only if they exist
+    if (youtubeChannel.snippet?.customUrl) {
+      result.handle = youtubeChannel.snippet.customUrl;
+    }
+    if (youtubeChannel.brandingSettings && 'image' in youtubeChannel.brandingSettings && 
+        youtubeChannel.brandingSettings.image && 
+        typeof youtubeChannel.brandingSettings.image === 'object' &&
+        'bannerExternalUrl' in youtubeChannel.brandingSettings.image) {
+      result.bannerUrl = (youtubeChannel.brandingSettings.image as any).bannerExternalUrl;
+    }
+    if (youtubeChannel.snippet?.publishedAt) {
+      result.joinedDate = youtubeChannel.snippet.publishedAt;
+    }
+    if (youtubeChannel.snippet?.country) {
+      result.country = youtubeChannel.snippet.country;
+    }
+
+    return result;
   }
 
   /**

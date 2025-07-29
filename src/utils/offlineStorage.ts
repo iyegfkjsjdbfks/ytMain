@@ -439,11 +439,11 @@ return;
           body: JSON.stringify(action.data),
         });
 
-        if (response.ok) {
+        if (response.ok && action.id !== undefined) {
           await offlineStorage.markActionSynced(action.id);
         }
       } catch (error) {
-        conditionalLogger.error('Failed to sync action:', action, error);
+        conditionalLogger.error('Failed to sync action:', action, String(error));
       }
     }
   } catch (error) {
