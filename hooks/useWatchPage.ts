@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { getVideos, getVideoById, getChannelByName, getCommentsByVideoId } from '../services/realVideoService';
+import { getVideos, getVideoById, getCommentsByVideoId } from '../services/realVideoService';
 import { unifiedDataService } from '../src/services/unifiedDataService';
 
 import type { Video, Channel, VideoVisibility } from '../src/types/core';
@@ -210,22 +210,8 @@ return;
         });
         setVideo(videoWithChannelInfo);
 
-        // Load channel data
-        const foundChannel = await getChannelByName(foundVideo.channelName || '');
-        if (foundChannel) {
-          // Ensure channel has required subscriberCount property
-          const channelWithSubscriberCount = {
-            ...foundChannel,
-            subscriberCount: 'subscriberCount' in foundChannel
-              ? foundChannel.subscriberCount
-              : ('subscribers' in foundChannel && foundChannel.subscribers
-                ? foundChannel.subscribers.toString()
-                : '0'),
-          };
-          setChannel(channelWithSubscriberCount);
-        } else {
-          setChannel(null);
-        }
+        // Load channel data (currently returns null from realVideoService)
+        setChannel(null);
 
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);

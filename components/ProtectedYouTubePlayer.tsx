@@ -43,22 +43,15 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
     // The error boundary will reset and re-render the component
   }, [videoId]);
 
-  const handleReload = useCallback(() => {
-    conditionalLogger.debug('Reloading YouTube player', { videoId });
-    // Additional reload logic can be added here
-    // For example, clearing cached video data or resetting player state
-  }, [videoId]);
-
   return (
     <VideoErrorBoundary
       videoId={videoId}
       onRetry={handleRetry}
-      onReload={handleReload}
     >
       <YouTubePlayer
         video={video}
-        width={width}
-        height={height}
+        width={width || 560}
+        height={height || 315}
         autoplay={autoplay}
         controls={controls}
         className={className}

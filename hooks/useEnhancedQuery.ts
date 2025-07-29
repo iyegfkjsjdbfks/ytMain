@@ -102,7 +102,8 @@ function createRetryFn(maxRetries: number = 3) {
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
   return (attemptIndex: number, error: any) => {
-    const apiError = createApiError(error);
+    // Create API error to ensure proper error handling
+    createApiError(error);
     
     // Use server-provided retry-after header if available
     const retryAfter = error?.response?.headers?.['retry-after'];
@@ -254,8 +255,8 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     },
     onError: (error, variables, context) => {
       // Rollback optimistic updates on error
-      if (optimisticUpdate && context?.previousData) {
-        queryClient.setQueryData(optimisticUpdate.queryKey, context.previousData);
+      if (optimisticUpdate && context && typeof context === 'object' && 'previousData' in context) {
+        queryClient.setQueryData(optimisticUpdate.queryKey, (context as any).previousData);
       }
       
       mutationOptions.onError?.(error, variables, context);
@@ -273,10 +274,10 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 }
 
 // Utility hooks for common patterns
-export function useInfiniteEnhancedQuery<TData = unknown, TError = ApiError>(
-  queryKey: string[],
-  queryFn: ({ pageParam }: { pageParam: unknown }) => Promise<TData>,
-  options: Parameters<typeof useEnhancedQuery>[2] & {
+export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
+  _queryKey: string[],
+  _queryFn: ({ pageParam }: { pageParam: unknown }) => Promise<TData>,
+  _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData[]) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData[]) => unknown;
   } = {}
