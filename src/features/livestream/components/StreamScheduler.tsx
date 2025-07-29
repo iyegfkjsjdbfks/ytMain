@@ -12,7 +12,7 @@ import { liveStreamService } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 
 
-import { LiveStream } from '../../../types/livestream';
+
 import { ScheduledStream } from '../../../../services/livestreamAPI';
 
 interface StreamSchedulerProps {
@@ -132,7 +132,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     setEditingStream(null);
   };
 
-  const handleEditStream = (stream: LiveStream) => {
+  const handleEditStream = (stream: ScheduledStream) => {
     setFormData({
       title: stream.title,
       description: stream.description,
@@ -197,7 +197,7 @@ return `${hours}h ${minutes}m`;
     return `${minutes}m`;
   };
 
-  const isStreamStartable = (stream: LiveStream) => {
+  const isStreamStartable = (stream: ScheduledStream) => {
     if (!stream.scheduledStartTime) {
 return false;
 }
