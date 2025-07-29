@@ -461,7 +461,7 @@ class CodeAnalysisEngine {
     ];
   }
 
-  private async suggestSimplifyConditions(content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestSimplifyConditions(_content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'simplify-condition',
@@ -472,7 +472,7 @@ class CodeAnalysisEngine {
     ];
   }
 
-  private async suggestRemoveDuplication(content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestRemoveDuplication(_content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'remove-duplication',
@@ -483,7 +483,7 @@ class CodeAnalysisEngine {
     ];
   }
 
-  private async suggestImproveNaming(content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestImproveNaming(_content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'improve-naming',
