@@ -15,7 +15,7 @@ import {
 
 import { useVideoPlayer } from '../hooks';
 
-import type { Video } from '../types/core';
+import type { Video } from '../src/types/core';
 
 interface Chapter {
   title: string;
