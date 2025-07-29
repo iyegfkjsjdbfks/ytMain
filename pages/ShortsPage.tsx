@@ -85,18 +85,16 @@ return [];
       .map(video => {
         const shortVideo: Short = {
           ...video,
-          duration: video.duration,
+          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
           isShort: true,
           isVertical: true,
           visibility: video.visibility || 'public',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString(),
           // Additional properties for Short type compatibility
-          aspectRatio: 9/16,
           viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
-          likeCount: typeof video.likes === 'string' ? parseInt(video.likes.replace(/[^0-9]/g, ''), 10) : video.likes || 0,
-          favoriteCount: 0,
+          likeCount: video.likes || 0,
           definition: 'hd' as 'hd' | 'sd'
         };
         return shortVideo;

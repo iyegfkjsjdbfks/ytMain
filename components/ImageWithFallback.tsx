@@ -59,8 +59,7 @@ return fallbackSrc;
     setIsRateLimited(false);
   }, [src]);
 
-  const handleError = useCallback((event?: Event) => {
-    const imgElement = event?.target as HTMLImageElement;
+  const handleError = useCallback((_event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const isYouTubeThumbnail = currentSrc.includes('yt3.ggpht.com') || currentSrc.includes('i.ytimg.com');
     
     // Check if this is a 429 rate limiting error for YouTube thumbnails

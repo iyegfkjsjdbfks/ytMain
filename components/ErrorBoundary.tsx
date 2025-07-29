@@ -163,10 +163,7 @@ class ErrorBoundary extends Component<Props, State> {
     
     this.setState({ 
       hasError: false, 
-      error: undefined, 
-      errorInfo: undefined,
-      retryCount: 0,
-      errorId: undefined
+      retryCount: 0
     });
   };
 
@@ -177,8 +174,6 @@ class ErrorBoundary extends Component<Props, State> {
     if (retryCount < maxRetries) {
       this.setState(prevState => ({ 
         hasError: false, 
-        error: undefined, 
-        errorInfo: undefined,
         retryCount: prevState.retryCount + 1
       }));
     }

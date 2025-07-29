@@ -43,6 +43,7 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
       }, 3000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [isOnline, showOfflineMessage]);
 
   if (isOnline && !showOfflineMessage) {

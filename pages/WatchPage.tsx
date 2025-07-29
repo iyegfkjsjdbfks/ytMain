@@ -268,7 +268,7 @@ const WatchPage: React.FC = () => {
               <VideoActions
                 liked={liked}
                 disliked={disliked}
-                likeCount={typeof video.likes === 'string' ? parseInt(video.likes.replace(/[^0-9]/g, ''), 10) : video.likes || 0}
+                likeCount={video.likes || 0}
                 onLike={handleLike}
                 onDislike={handleDislike}
                 onShare={() => {}}

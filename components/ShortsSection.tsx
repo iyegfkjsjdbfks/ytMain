@@ -35,7 +35,7 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              description: video.description,
              thumbnailUrl: video.thumbnailUrl,
              videoUrl: video.videoUrl,
-             duration: video.duration,
+             duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
              views: video.views,
              likes: video.likes,
              dislikes: video.dislikes,
@@ -56,11 +56,9 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
              isVertical: true,
              definition: 'hd' as 'hd' | 'sd',
              // Additional properties for Short type compatibility
-             aspectRatio: 9/16,
              viewCount: parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0,
              commentCount: 0,
-             likeCount: video.likes || 0,
-             favoriteCount: 0
+             likeCount: video.likes || 0
            };
           return shortVideo;
         });
