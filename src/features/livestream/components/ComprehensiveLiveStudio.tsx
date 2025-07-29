@@ -20,7 +20,7 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { useLiveStream } from '../../../../hooks/useLiveStream';
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 
 import {
   AdvancedLiveChat,
@@ -31,7 +31,7 @@ import {
   MultiplatformStreaming,
 } from '.';
 
-import type { LiveStream, StreamPlatform } from '../../types/livestream';
+import type { LiveStream, StreamPlatform } from '../../../types/livestream';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;

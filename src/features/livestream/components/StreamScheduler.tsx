@@ -9,10 +9,10 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { liveStreamService } from '../../../../services/livestreamAPI';
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 
 
-import type { LiveStream } from '../../types/livestream';
+import type { LiveStream } from '../../../types/livestream';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: LiveStream) => void;

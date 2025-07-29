@@ -17,10 +17,10 @@ import {
   Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 
-import type { Playlist } from '../../types/core';
+import type { Playlist } from '../../../types/core';
 import type { CreatePlaylistData } from '../services/playlistService';
 
 interface PlaylistManagerProps {
@@ -215,7 +215,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const deletePlaylistMutation = useDeletePlaylist();
 
-  const filteredPlaylists = playlists.filter(playlist =>
+  const filteredPlaylists = playlists.filter((playlist: Playlist) =>
     playlist.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     playlist.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
@@ -344,7 +344,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
           ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
           : 'space-y-4'
         }>
-          {filteredPlaylists.map((playlist) => (
+          {filteredPlaylists.map((playlist: Playlist) => (
             <div
               key={playlist.id}
               className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow ${

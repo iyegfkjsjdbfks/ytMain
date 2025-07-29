@@ -18,7 +18,7 @@ import {
   MicrophoneIcon as MicrophoneSolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 
 interface StreamSettings {
   title: string;
