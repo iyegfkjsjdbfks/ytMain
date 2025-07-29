@@ -180,7 +180,6 @@ return 'linux';
    */
   static canInstall(): boolean {
     const platform = this.getPlatform();
-    const deviceType = this.getDeviceType();
 
     // iOS Safari doesn't support beforeinstallprompt but supports Add to Home Screen
     if (platform === 'ios') {

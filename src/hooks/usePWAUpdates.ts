@@ -385,10 +385,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     let updateTimer: NodeJS.Timeout | null = null;
 
-    const handleServiceWorkerUpdate = (event: Event) => {
-      conditionalLogger.debug('Service worker update detected', undefined, 'usePWAUpdates');
-      checkForUpdates();
-    };
+    // Service worker update handler removed - unused
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.type === 'SW_UPDATE_AVAILABLE') {

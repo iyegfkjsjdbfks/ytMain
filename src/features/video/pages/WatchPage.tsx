@@ -12,6 +12,7 @@ import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
 import type { Video } from '../../types/core';
+import type { UnifiedVideoMetadata } from '../../../services/metadataNormalizationService';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -254,7 +255,7 @@ const WatchPage: React.FC = () => {
         logger.debug('⚙️ Current YouTube Search Provider:', currentProvider);
 
         // Check if YouTube API is blocked
-        const { isYouTubeDataApiBlocked } = await import('../../utils/youtubeApiUtils');
+        const { isYouTubeDataApiBlocked } = await import('../../../utils/youtubeApiUtils');
         const isBlocked = isYouTubeDataApiBlocked();
         logger.debug('🔒 YouTube Data API Blocked:', isBlocked);
 

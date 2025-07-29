@@ -25,7 +25,7 @@ export const createTestQueryClient = () => {
 
 // Wrapper component for tests
 interface TestWrapperProps {
-  children: ReactElement;
+  children: ReactNode;
   queryClient?: QueryClient;
 }
 
@@ -68,8 +68,8 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   description: 'Test video description',
   thumbnailUrl: 'https://example.com/thumbnail.jpg',
   videoUrl: 'https://example.com/video.mp4',
-  duration: 300,
-  views: 1000,
+  duration: '300',
+  views: '1000',
   viewsFormatted: '1K views',
   likes: 50,
   dislikes: 2,
@@ -77,14 +77,20 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   publishedAt: '2024-01-01T00:00:00Z',
   publishedAtFormatted: '1 day ago',
   uploadedAt: '2024-01-01T00:00:00Z',
+  createdAt: '2024-01-01T00:00:00Z',
+  updatedAt: '2024-01-01T00:00:00Z',
+  channelName: 'Test Channel',
+  channelId: 'test-channel-1',
+  channelAvatarUrl: 'https://example.com/avatar.jpg',
   category: 'Entertainment',
   tags: ['test', 'video'],
-  source: 'test',
+  visibility: 'public' as VideoVisibility,
+  source: 'youtube',
   channel: {
     id: 'test-channel-1',
     name: 'Test Channel',
     avatarUrl: 'https://example.com/avatar.jpg',
-    subscribersFormatted: '1K subscribers',
+    subscribers: 1000,
     isVerified: false,
   },
   ...overrides,
@@ -95,24 +101,26 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   name: 'Test Channel',
   description: 'Test channel description',
   avatarUrl: 'https://example.com/avatar.jpg',
-  bannerUrl: 'https://example.com/banner.jpg',
+  banner: 'https://example.com/banner.jpg',
   subscriberCount: '1000',
   subscribersFormatted: '1K subscribers',
   videoCount: 50,
   isVerified: false,
   joinedDate: '2023-01-01',
+  createdAt: '2023-01-01T00:00:00Z',
+  updatedAt: '2024-01-01T00:00:00Z',
   ...overrides,
 });
 
 export const createMockComment = (overrides: Partial<Comment> = {}): Comment => ({
   id: 'test-comment-1',
   content: 'Test comment content',
-  author: {
-    id: 'test-user-1',
-    name: 'Test User',
-    avatarUrl: 'https://example.com/user-avatar.jpg',
-  },
+  authorId: 'test-user-1',
+  authorName: 'Test User',
+  authorAvatarUrl: 'https://example.com/user-avatar.jpg',
   publishedAt: '2024-01-01T00:00:00Z',
+  createdAt: '2024-01-01T00:00:00Z',
+  updatedAt: '2024-01-01T00:00:00Z',
   likeCount: 5,
   replyCount: 2,
   isLiked: false,
@@ -135,8 +143,8 @@ export const measureRenderTime = async (renderFn: () => void): Promise<number> =
 
 // Accessibility testing helpers
 export const checkAccessibility = async (container: HTMLElement) => {
-  const { axe } = await import('@axe-core/react');
-  const results = await axe(container);
+  const axeCore = await import('@axe-core/react');
+  const results = await axeCore.default(container);
   return results;
 };
 

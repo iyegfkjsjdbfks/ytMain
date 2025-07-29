@@ -176,7 +176,6 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
     try {
       const maxPerHour = parseInt(frequencyLimit, 10);
-      const stats = getNotificationStats();
       const oneHourAgo = Date.now() - (60 * 60 * 1000);
 
       // Get notifications sent in the last hour
@@ -237,12 +236,12 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           body: options.body,
           icon: options.icon || '/icons/icon-192x192.png',
           badge: options.badge || '/icons/badge-72x72.png',
-          image: options.image,
+          ...(options.image && { image: options.image } as any),
           tag: options.tag,
           data: options.data,
           requireInteraction: options.requireInteraction,
           silent: options.silent,
-          vibrate: options.vibrate,
+          ...(options.vibrate && { vibrate: options.vibrate } as any),
           actions: options.actions,
           timestamp: options.timestamp || Date.now(),
         });
@@ -255,7 +254,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           data: options.data,
           requireInteraction: options.requireInteraction,
           silent: options.silent,
-          vibrate: options.vibrate,
+          ...(options.vibrate && { vibrate: options.vibrate } as any),
         });
 
         // Handle notification events
@@ -328,7 +327,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       const registration = await navigator.serviceWorker.getRegistration();
 
       if (registration) {
-        const notifications = await registration.getNotifications({ tag });
+        const notifications = await registration.getNotifications(tag ? { tag } : {});
 
         notifications.forEach(notification => {
           notification.close();
@@ -430,7 +429,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   // Helper functions
   const parseTimeString = (timeStr: string): number => {
     const [hours, minutes] = timeStr.split(':').map(Number);
-    return hours * 60 + minutes;
+    return (hours || 0) * 60 + (minutes || 0);
   };
 
   const trackNotificationEvent = (event: string, data: any) => {
