@@ -11,7 +11,7 @@ import YouTubePlayer from '@components/YouTubePlayer';
 import VideoCard from '../components/VideoCard';
 import { VideoPlayer } from '../components/VideoPlayer';
 
-import type { Video } from '../../types/core';
+import type { Video } from '../../../types/core';
 import type { UnifiedVideoMetadata } from '../../../services/metadataNormalizationService';
 
 const WatchPage: React.FC = () => {

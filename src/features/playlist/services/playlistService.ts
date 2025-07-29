@@ -1,9 +1,9 @@
-/**
+/**1
  * Playlist Service
  * Comprehensive playlist management service
  */
 
-import { api } from '@services/api/base';
+import { api } from '../../../services/api/base';
 
 import type { Playlist, Video, ApiResponse } from '../../types/core';
 

@@ -1,9 +1,9 @@
-import { api } from '@services/api/base';
+import { api } from '../../../services/api/base';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../../utils/logger';
 
-import type { ApiResponse } from '../../types/core';
-import type { Video } from '../../types/video';
+import type { ApiResponse } from '../../../types/core';
+import type { Video } from '../../../types/video';
 
 export interface Subscription {
   id: string;
