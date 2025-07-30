@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 
 import { PWAUtils } from '../config/pwa';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
