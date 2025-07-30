@@ -373,7 +373,7 @@ current[finalKey] = value;
             id="bitrate"
             type="number"
             value={settings.settings?.bitrate || 4500}
-            onChange={(e) => updateSettings('settings.bitrate', parseInt(e.target.value))}
+            onChange={(e) => updateSettings('settings.bitrate', parseInt(e.target.value, 10))}
             min="500"
             max="50000"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -387,7 +387,7 @@ current[finalKey] = value;
           <select
             id="frame-rate"
             value={settings.settings?.frameRate || 30}
-            onChange={(e) => updateSettings('settings.frameRate', parseInt(e.target.value))}
+            onChange={(e) => updateSettings('settings.frameRate', parseInt(e.target.value, 10))}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value={24}>24 fps</option>
@@ -518,9 +518,9 @@ current[finalKey] = value;
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Moderation Level</h3>
         <div className="space-y-3">
           {moderationLevels.map(level => (
-            <label htmlFor="moderation-level" key={level.value} className="flex items-start space-x-3">
+            <label htmlFor={`moderation-level-${level.value}`} key={level.value} className="flex items-start space-x-3">
               <input
-                id="moderation-level"
+                id={`moderation-level-${level.value}`}
                 type="radio"
                 name="moderationLevel"
                 value={level.value}

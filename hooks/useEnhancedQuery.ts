@@ -121,7 +121,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
     // Use server-provided retry-after header if available
     const retryAfter = error?.response?.headers?.['retry-after'];
     if (retryAfter) {
-      const retryAfterMs = parseInt(retryAfter) * 1000;
+      const retryAfterMs = parseInt(retryAfter, 10) * 1000;
       return Math.min(retryAfterMs, maxDelay);
     }
 

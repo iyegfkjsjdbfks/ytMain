@@ -2,7 +2,6 @@
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import type React from 'react';
 import {
   useEffect,
   useRef,
@@ -10,6 +9,7 @@ import {
   useCallback,
   createContext,
   useContext,
+  type React,
   type ReactNode,
   type KeyboardEvent,
   type FocusEvent,
@@ -158,18 +158,18 @@ return;
       if (e.shiftKey) {
         if (document.activeElement === firstElement) {
           e.preventDefault();
-          lastElement?.focus();
+          (lastElement as HTMLElement)?.focus();
         }
       } else {
         if (document.activeElement === lastElement) {
           e.preventDefault();
-          firstElement?.focus();
+          (firstElement as HTMLElement)?.focus();
         }
       }
     };
 
     container.addEventListener('keydown', handleKeyDown as any);
-    firstElement?.focus();
+    (firstElement as HTMLElement)?.focus();
 
     return () => {
       container.removeEventListener('keydown', handleKeyDown as any);
@@ -286,7 +286,7 @@ export function useAriaLiveRegion(initialMessage = '') {
 export function getContrastRatio(color1: string, color2: string): number {
   const getLuminance = (color: string): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
-    const [r, g, b] = rgb.map(c => {
+    const [r = 0, g = 0, b = 0] = rgb.map(c => {
       c = c / 255;
       return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
     });
@@ -365,6 +365,7 @@ export function useAccessibleModal() {
         document.body.style.overflow = '';
       };
     }
+    return undefined;
   }, [isOpen, trapFocus]);
 
   // Handle escape key
@@ -379,6 +380,7 @@ export function useAccessibleModal() {
       document.addEventListener('keydown', handleEscape as any);
       return () => document.removeEventListener('keydown', handleEscape as any);
     }
+    return undefined;
   }, [isOpen, closeModal]);
 
   return {
@@ -547,7 +549,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
   let previousLevel = 0;
 
   headings.forEach(heading => {
-    const level = parseInt(heading.tagName.charAt(1));
+    const level = parseInt(heading.tagName.charAt(1), 10);
 
     if (level > previousLevel + 1) {
       issues.push({
@@ -582,7 +584,6 @@ export function runAccessibilityAudit(element: HTMLElement): {
 
   const errorCount = issues.filter(issue => issue.type === 'error').length;
   const warningCount = issues.filter(issue => issue.type === 'warning').length;
-  const totalElements = element.querySelectorAll('*').length;
 
   // Calculate score (0-100)
   const score = Math.max(0, 100 - (errorCount * 10) - (warningCount * 5));

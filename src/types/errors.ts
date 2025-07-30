@@ -323,15 +323,15 @@ export const createApiError = (
     method,
     timestamp: new Date(),
   };
-  
+
   if (statusCode !== undefined) {
     error.statusCode = statusCode;
   }
-  
+
   if (details !== undefined) {
     error.details = details;
   }
-  
+
   return error;
 };
 
@@ -399,10 +399,10 @@ export const createYouTubeError = (
     embedDisabled: errorType === 'embed_disabled',
     regionBlocked: errorType === 'region_blocked',
   };
-  
+
   if (videoId) {
     error.details = { videoId };
   }
-  
+
   return error;
 };

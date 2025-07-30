@@ -1,4 +1,5 @@
-import React from 'react';
+import type React from 'react';
+
 import type { Video } from '../types/core';
 
 export interface YouTubePlayerProps {
@@ -16,17 +17,17 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   width = '100%',
   height = 315,
   controls = true,
-  className = ''
+  className = '',
 }) => {
   // Extract YouTube video ID from URL
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const match = url.match(regex);
-    return match && match[1] ? match[1] : null;
+    return match?.[1] ? match[1] : null;
   };
 
   const videoId = getYouTubeVideoId(video.videoUrl || '');
-  
+
   if (!videoId) {
     return (
       <div className={`bg-gray-200 dark:bg-gray-800 flex items-center justify-center ${className}`} style={{ width, height }}>
@@ -39,7 +40,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     autoplay: autoplay ? '1' : '0',
     controls: controls ? '1' : '0',
     rel: '0',
-    modestbranding: '1'
+    modestbranding: '1',
   }).toString()}`;
 
   return (

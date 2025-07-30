@@ -136,7 +136,7 @@ class RequestQueue {
           const result = await request();
           resolve(result);
         } catch (error) {
-          reject(error);
+          reject(error instanceof Error ? error : new Error(String(error)));
         } finally {
           this.running--;
           this.processQueue();
@@ -419,7 +419,7 @@ export class ApiService {
       }
     }
 
-    throw lastError!;
+    throw lastError instanceof Error ? lastError : new Error('Request failed');
   }
 
   // Parse response based on content type

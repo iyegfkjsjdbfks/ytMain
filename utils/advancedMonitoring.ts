@@ -98,7 +98,7 @@ return;
     const metric: MetricData = {
       timestamp: Date.now(),
       value,
-      tags,
+      tags: tags || {},
       metadata: {
         userAgent: navigator.userAgent,
         url: window.location.href,
@@ -162,8 +162,8 @@ return metrics;
     return {
       count: values.length,
       avg: sum / values.length,
-      min: values[0],
-      max: values[values.length - 1],
+      min: values[0] || 0,
+      max: values[values.length - 1] || 0,
       p95: values[p95Index] || 0,
       p99: values[p99Index] || 0,
     };
@@ -211,7 +211,7 @@ return metrics;
 continue;
 }
 
-        const latestValue = metrics[metrics.length - 1].value;
+        const latestValue = metrics[metrics.length - 1]?.value || 0;
         const passed = this.evaluateRule(latestValue, rule);
 
         results.push({
@@ -635,8 +635,8 @@ return;
     });
 
     // Track SPA navigation
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
+    const originalPushState = history.pushState.bind(history);
+    const originalReplaceState = history.replaceState.bind(history);
 
     history.pushState = function(...args) {
       originalPushState.apply(history, args);

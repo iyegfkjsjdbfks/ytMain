@@ -170,6 +170,7 @@ export class InputValidator {
 
   // File name validation
   static isValidFileName(fileName: string): boolean {
+    // eslint-disable-next-line no-control-regex
     const invalidChars = /[<>:"/\\|?*\x00-\x1f]/;
     const reservedNames = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i;
 
@@ -193,7 +194,7 @@ export class InputValidator {
     let isEven = false;
 
     for (let i = cleanNumber.length - 1; i >= 0; i--) {
-      let digit = parseInt(cleanNumber[i]);
+      let digit = parseInt(cleanNumber[i], 10);
 
       if (isEven) {
         digit *= 2;

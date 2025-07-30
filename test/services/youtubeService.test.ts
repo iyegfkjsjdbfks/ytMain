@@ -1,9 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { youtubeService } from '../../src/services/api/youtubeService';
-import { ApiError } from '../../src/services/api/base';
-import { CACHE_CONFIG } from '../../src/lib/constants';
-import { logger } from '../../src/utils/logger';
 
 // Mock external dependencies
 vi.mock('../../src/utils/logger', () => ({

@@ -65,6 +65,12 @@ export interface UnifiedVideoMetadata {
     language?: string;
     license?: string;
   };
+
+  // Required properties for Video interface compatibility
+  uploadedAt: string;
+  channelName: string;
+  channelId: string;
+  channelAvatarUrl: string;
 }
 
 /**
@@ -134,6 +140,11 @@ class MetadataNormalizationService {
         ...(localVideo.contentDetails?.caption && { language: localVideo.contentDetails.caption }),
         ...(localVideo.license && { license: localVideo.license }),
       },
+      // Required properties for Video interface compatibility
+      uploadedAt: localVideo.uploadedAt || localVideo.publishedAt || localVideo.createdAt,
+      channelName: localVideo.channelName,
+      channelId: localVideo.channelId,
+      channelAvatarUrl: localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
     };
   }
 
@@ -207,6 +218,11 @@ class MetadataNormalizationService {
         ...(!youtubeVideo.snippet?.defaultLanguage && youtubeVideo.snippet?.defaultAudioLanguage && { language: youtubeVideo.snippet.defaultAudioLanguage }),
         ...(youtubeVideo.status?.license && { license: youtubeVideo.status.license }),
       },
+      // Required properties for Video interface compatibility
+      uploadedAt: youtubeVideo.snippet?.publishedAt || '',
+      channelName: youtubeVideo.snippet?.channelTitle || '',
+      channelId: youtubeVideo.snippet?.channelId || '',
+      channelAvatarUrl: channel?.snippet?.thumbnails?.default?.url || '',
     };
 
     logger.debug('normalizeYouTubeVideo - Final normalized data:', {
@@ -266,8 +282,8 @@ class MetadataNormalizationService {
     if (youtubeChannel.snippet?.customUrl) {
       result.handle = youtubeChannel.snippet.customUrl;
     }
-    if (youtubeChannel.brandingSettings && 'image' in youtubeChannel.brandingSettings && 
-        youtubeChannel.brandingSettings.image && 
+    if (youtubeChannel.brandingSettings && 'image' in youtubeChannel.brandingSettings &&
+        youtubeChannel.brandingSettings.image &&
         typeof youtubeChannel.brandingSettings.image === 'object' &&
         'bannerExternalUrl' in youtubeChannel.brandingSettings.image) {
       result.bannerUrl = (youtubeChannel.brandingSettings.image as any).bannerExternalUrl;
@@ -457,7 +473,7 @@ return '';
 }
 
     // Prefer higher quality thumbnails
-    const priorities: (keyof YouTubeThumbnails)[] = ['maxres', 'standard', 'high', 'medium', 'default'];
+    const priorities: Array<keyof YouTubeThumbnails> = ['maxres', 'standard', 'high', 'medium', 'default'];
 
     for (const quality of priorities) {
       if (thumbnails[quality]?.url) {

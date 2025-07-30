@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
 
-import type { Video, Channel, Comment } from '../types/core';
+import type { Video, Channel, Comment, VideoVisibility } from '../types/core';
 
 // Test utilities for consistent testing
 export const createTestQueryClient = () => {

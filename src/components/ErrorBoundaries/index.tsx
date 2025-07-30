@@ -11,7 +11,7 @@ export { default as LiveStreamErrorBoundary, type LiveStreamErrorBoundaryProps }
 export { default as DataFetchErrorBoundary, type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
 
 // Re-export the main error boundary from the common components
-export { ErrorBoundary as BaseErrorBoundary } from '../common/components/ErrorBoundary';
+export { ErrorBoundary as BaseErrorBoundary } from '../../features/common/components/ErrorBoundary';
 
 // Re-export all protected components
 export * from './ProtectedComponents';

@@ -12,9 +12,10 @@ import {
   ArrowTrendingUpIcon as TrendingUpIcon,
 } from '@heroicons/react/24/outline';
 
-import type { LiveStreamStats } from '../../../types/livestream';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
+
+import type { LiveStreamStats } from '../../../types/livestream';
 
 /**
  * Props for the StreamAnalyticsDashboard component

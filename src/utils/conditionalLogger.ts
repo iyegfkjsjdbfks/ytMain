@@ -11,7 +11,6 @@ export enum LogLevel {
 }
 
 
-
 class ConditionalLogger {
   private isDevelopment: boolean = false;
   private isDebugMode: boolean = false;
@@ -74,7 +73,6 @@ class ConditionalLogger {
     const sourcePrefix = source ? `[${source}]` : '';
     return `${timestamp} ${levelName}${sourcePrefix}: ${message}`;
   }
-
 
 
   error(message: string, data?: unknown, source?: string): void {
@@ -182,19 +180,37 @@ try {
      constructor() {
        super();
      }
-     
-     override error(msg: string) { console.error(msg); }
-     override warn(msg: string) { console.warn(msg); }
-     override info(msg: string) { console.info(msg); }
-     override debug(msg: string) { console.log(msg); }
-     override time(label: string) { console.time(label); }
-     override timeEnd(label: string) { console.timeEnd(label); }
-     override group(label: string) { console.group(label); }
-     override groupEnd() { console.groupEnd(); }
+
+     override error(msg: string) {
+ console.error(msg);
+}
+     override warn(msg: string) {
+ console.warn(msg);
+}
+     override info(msg: string) {
+ console.info(msg);
+}
+     override debug(msg: string) {
+ console.log(msg);
+}
+     override time(label: string) {
+ console.time(label);
+}
+     override timeEnd(label: string) {
+ console.timeEnd(label);
+}
+     override group(label: string) {
+ console.group(label);
+}
+     override groupEnd() {
+ console.groupEnd();
+}
      override apiResponse() {}
-     override apiError(endpoint: string, err: unknown) { console.error(`API Error from ${endpoint}:`, err); }
+     override apiError(endpoint: string, err: unknown) {
+ console.error(`API Error from ${endpoint}:`, err);
+}
    }
-  
+
   conditionalLoggerInstance = new FallbackLogger();
 }
 

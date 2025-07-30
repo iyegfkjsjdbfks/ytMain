@@ -8,12 +8,9 @@ import {
   PencilIcon,
 } from '@heroicons/react/24/outline';
 
-import { liveStreamService } from '../../../../services/livestreamAPI';
+import { liveStreamService, type ScheduledStream } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 
-
-
-import { ScheduledStream } from '../../../../services/livestreamAPI';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: ScheduledStream) => void;

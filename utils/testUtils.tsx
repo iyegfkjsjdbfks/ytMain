@@ -89,7 +89,7 @@ export const apiMocks = {
     };
 
     return vi.fn().mockImplementation(() =>
-      new Promise((_, reject) => setTimeout(() => reject(apiError), delay)),
+      new Promise((_, reject) => setTimeout(() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError))), delay)),
     );
   },
 
@@ -400,7 +400,7 @@ export const a11yUtils = {
   checkBasicA11y: async () => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
-    const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1)));
+    const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1), 10));
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');

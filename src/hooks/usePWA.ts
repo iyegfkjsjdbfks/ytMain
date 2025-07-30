@@ -9,7 +9,7 @@ import { useInstallPrompt } from './useInstallPrompt';
 import { useOfflineStatus } from './useOfflineStatus';
 import { usePWANotifications } from './usePWANotifications';
 import { usePWAUpdates } from './usePWAUpdates';
-import { useServiceWorker } from './useServiceWorker';
+
 
 interface PWAState {
   isInitialized: boolean;
@@ -256,30 +256,31 @@ export const usePWA = (): UsePWAReturn => {
   const getUsageStats = useCallback(() => {
     return {
       isOnline: offlineStatus.isOnline,
-      networkQuality: offlineStatus.networkQuality,
+      networkQuality: offlineStatus.getNetworkQuality(),
       updateAvailable: pwaUpdates.updateAvailable,
       notificationPermission: notifications.permission,
       lastUpdateCheck: pwaUpdates.lastUpdateCheck,
     };
   }, [
     offlineStatus.isOnline,
-    offlineStatus.networkQuality,
+    offlineStatus.getNetworkQuality(),
     pwaUpdates.updateAvailable,
     pwaUpdates.lastUpdateCheck,
     notifications.permission,
   ]);
 
   const dismissInstallPrompt = (): void => {
-    setShowInstallPrompt(false);
+    installPrompt.dismissPrompt(false);
 
     // Don't show again for this session
     sessionStorage.setItem('pwa-install-dismissed', 'true');
   };
 
-  const updateApp = (): void => {
-    if (waitingWorker) {
-      waitingWorker.postMessage({ type: 'SKIP_WAITING' });
-      setUpdateAvailable(false);
+  const updateApp = async (): Promise<void> => {
+    try {
+      await pwaUpdates.installUpdate();
+    } catch (error) {
+      conditionalLogger.error('Failed to update app', { error }, 'usePWA');
     }
   };
 
@@ -287,9 +288,9 @@ export const usePWA = (): UsePWAReturn => {
   useEffect(() => {
     const dismissed = sessionStorage.getItem('pwa-install-dismissed');
     if (dismissed) {
-      setShowInstallPrompt(false);
+      installPrompt.dismissPrompt(false);
     }
-  }, []);
+  }, [installPrompt]);
 
   return {
     // Installation
@@ -302,8 +303,8 @@ export const usePWA = (): UsePWAReturn => {
     // Network & Offline
     isOnline: offlineStatus.isOnline,
     isOffline: offlineStatus.isOffline,
-    networkQuality: offlineStatus.networkQuality,
-    shouldReduceData: offlineStatus.shouldReduceData,
+    networkQuality: offlineStatus.getNetworkQuality(),
+    shouldReduceData: offlineStatus.shouldReduceData(),
 
     // Updates
     updateAvailable: pwaUpdates.updateAvailable,
@@ -363,7 +364,7 @@ export const showNotification = (title: string, options?: NotificationOptions): 
       ...options,
     };
 
-    new Notification(title, defaultOptions);
+    void new Notification(title, defaultOptions);
   }
 };
 

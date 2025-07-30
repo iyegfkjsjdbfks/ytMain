@@ -91,7 +91,7 @@ class SystemIntegrationHub {
   private health: SystemHealth;
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
-  private eventHandlers: Map<string, Function[]> = new Map();
+  private eventHandlers: Map<string, Array<(...args: unknown[]) => void>> = new Map();
   private healthCheckInterval?: NodeJS.Timeout;
   private isInitialized = false;
 
@@ -538,7 +538,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType: string, handler: Function): void {
+  private addEventListener(eventType: string, handler: (...args: unknown[]) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }

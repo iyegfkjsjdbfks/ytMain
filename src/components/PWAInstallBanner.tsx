@@ -1,12 +1,11 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import { PWAUtils } from '../config/pwa';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
 import { usePWA } from '../hooks/usePWA';
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
 import { trackEvent } from '../utils/analytics';
-import { PWAUtils } from '../config/pwa';
 
 interface PWAInstallBannerProps {
   className?: string;
@@ -56,7 +55,7 @@ return;
       // Check if user has dismissed the banner recently
       const dismissedTime = localStorage.getItem('pwa-banner-dismissed');
       if (dismissedTime) {
-        const timeSinceDismissed = Date.now() - parseInt(dismissedTime);
+        const timeSinceDismissed = Date.now() - parseInt(dismissedTime, 10);
         const daysSinceDismissed = timeSinceDismissed / (1000 * 60 * 60 * 24);
 
         if (daysSinceDismissed < 7) {

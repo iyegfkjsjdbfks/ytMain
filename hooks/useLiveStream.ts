@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import type { LiveStream } from '../src/types/livestream';
 
 export function useLiveStream(streamId?: string) {
@@ -7,7 +8,9 @@ export function useLiveStream(streamId?: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!streamId) return;
+    if (!streamId) {
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -38,7 +41,7 @@ export function useLiveStream(streamId?: string) {
         moderatorOnly: false,
         allowedWords: [],
         blockedWords: [],
-        maxMessageLength: 200
+        maxMessageLength: 200,
       },
       stats: {
         viewerCount: 0,
@@ -53,7 +56,7 @@ export function useLiveStream(streamId?: string) {
         watchTime: 0,
         averageWatchTime: 0,
         chatMessages: 0,
-        uniqueViewers: 0
+        uniqueViewers: 0,
       },
       monetization: {
         enabled: false,
@@ -65,9 +68,9 @@ export function useLiveStream(streamId?: string) {
         donationGoal: null,
         revenueSharing: {
           platform: 70,
-          creator: 30
-        }
-      }
+          creator: 30,
+        },
+      },
     };
 
     setTimeout(() => {
@@ -104,7 +107,7 @@ export function useLiveStream(streamId?: string) {
         moderatorOnly: false,
         allowedWords: [],
         blockedWords: [],
-        maxMessageLength: 200
+        maxMessageLength: 200,
       },
       stats: {
         viewerCount: 0,
@@ -119,7 +122,7 @@ export function useLiveStream(streamId?: string) {
         watchTime: 0,
         averageWatchTime: 0,
         chatMessages: 0,
-        uniqueViewers: 0
+        uniqueViewers: 0,
       },
       monetization: {
         enabled: false,
@@ -131,9 +134,9 @@ export function useLiveStream(streamId?: string) {
         donationGoal: null,
         revenueSharing: {
           platform: 70,
-          creator: 30
-        }
-      }
+          creator: 30,
+        },
+      },
     };
     return newStream;
   };
@@ -151,7 +154,7 @@ export function useLiveStream(streamId?: string) {
       title: `Stream Replay - ${new Date().toLocaleDateString()}`,
       url: `https://example.com/replay/${streamId}`,
       duration: '00:00:00',
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
   };
 

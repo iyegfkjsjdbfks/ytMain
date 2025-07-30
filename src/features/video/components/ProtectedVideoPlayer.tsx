@@ -4,9 +4,7 @@ import { useCallback } from 'react';
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
-import { VideoPlayer } from './VideoPlayer';
-
-import type { VideoPlayerProps } from './VideoPlayer';
+import { VideoPlayer, type VideoPlayerProps } from './VideoPlayer';
 
 interface ProtectedVideoPlayerProps extends VideoPlayerProps {
   // Additional props specific to the protected version can be added here

@@ -71,7 +71,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, this.version);
 
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Database initialization failed'));
       request.onsuccess = () => {
         this.db = request.result;
         resolve();
@@ -136,7 +136,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.put({ ...video, cachedAt: Date.now() });
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to cache video'));
     });
   }
 
@@ -145,7 +145,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.get(id);
       request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get video'));
     });
   }
 
@@ -154,7 +154,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.getAll();
       request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get all videos'));
     });
   }
 
@@ -163,7 +163,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.delete(id);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to delete video'));
     });
   }
 
@@ -177,7 +177,7 @@ class OfflineStorage {
         synced: false,
       });
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to add user action'));
     });
   }
 
@@ -187,7 +187,7 @@ class OfflineStorage {
       const index = store.index('synced');
       const request = index.getAll(IDBKeyRange.only(false));
       request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get pending actions'));
     });
   }
 
@@ -201,12 +201,12 @@ class OfflineStorage {
           action.synced = true;
           const putRequest = store.put(action);
           putRequest.onsuccess = () => resolve();
-          putRequest.onerror = () => reject(putRequest.error);
+          putRequest.onerror = () => reject(new Error(putRequest.error?.message || 'Failed to update action'));
         } else {
           resolve();
         }
       };
-      getRequest.onerror = () => reject(getRequest.error);
+      getRequest.onerror = () => reject(new Error(getRequest.error?.message || 'Failed to get action'));
     });
   }
 
@@ -215,7 +215,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.delete(id);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to delete action'));
     });
   }
 
@@ -225,7 +225,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.put(entry);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to save watch history'));
     });
   }
 
@@ -247,7 +247,7 @@ class OfflineStorage {
           resolve(results);
         }
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get watch history'));
     });
   }
 
@@ -257,7 +257,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.put(playlist);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to save playlist'));
     });
   }
 
@@ -266,7 +266,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.getAll();
       request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get playlists'));
     });
   }
 
@@ -276,7 +276,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.put(subscription);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to save subscription'));
     });
   }
 
@@ -285,7 +285,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.getAll();
       request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get subscriptions'));
     });
   }
 
@@ -294,7 +294,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.delete(channelId);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to remove subscription'));
     });
   }
 
@@ -308,7 +308,7 @@ class OfflineStorage {
         status: 'pending',
       });
       request.onsuccess = () => resolve(request.result as number);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to save pending upload'));
     });
   }
 
@@ -317,7 +317,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.getAll();
       request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to get pending uploads'));
     });
   }
 
@@ -332,12 +332,12 @@ class OfflineStorage {
           upload.updatedAt = Date.now();
           const putRequest = store.put(upload);
           putRequest.onsuccess = () => resolve();
-          putRequest.onerror = () => reject(putRequest.error);
+          putRequest.onerror = () => reject(new Error(putRequest.error?.message || 'Failed to update upload status'));
         } else {
           resolve();
         }
       };
-      getRequest.onerror = () => reject(getRequest.error);
+      getRequest.onerror = () => reject(new Error(getRequest.error?.message || 'Failed to get upload'));
     });
   }
 
@@ -346,7 +346,7 @@ class OfflineStorage {
     return new Promise((resolve, reject) => {
       const request = store.delete(id);
       request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
+      request.onerror = () => reject(new Error(request.error?.message || 'Failed to delete pending upload'));
     });
   }
 

@@ -36,7 +36,7 @@ const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({ className = '' }) =
       // Check if user has previously dismissed the banner
       const dismissedTime = localStorage.getItem('pwa-banner-dismissed');
       if (dismissedTime) {
-        const dismissedDate = new Date(parseInt(dismissedTime));
+        const dismissedDate = new Date(parseInt(dismissedTime, 10));
         const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
         // Don't show banner if dismissed within last 30 days

@@ -275,7 +275,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
           ...prev,
           error: error instanceof Error ? error.message : 'Registration failed',
         }));
-        
+
         return () => {}; // Return empty cleanup function
       }
     };

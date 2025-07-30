@@ -312,6 +312,11 @@ class UnifiedDataService {
                 language: 'en',
                 license: 'youtube',
               },
+              // Required properties for Video interface compatibility
+              uploadedAt: video.publishedAt || new Date().toISOString(),
+              channelName: video.channelName || '',
+              channelId: video.channelId || '',
+              channelAvatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
             };
 
             this.setCachedData(cacheKey, normalized);
@@ -377,6 +382,11 @@ class UnifiedDataService {
             quality: 'hd',
             definition: 'high',
           },
+          // Required properties for Video interface compatibility
+          uploadedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+          channelName: googleSearchVideo.channelName || 'YouTube Channel',
+          channelId: googleSearchVideo.channelId || `channel-${googleSearchVideo.id.replace('google-search-', '')}`,
+          channelAvatarUrl: googleSearchVideo.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
         };
 
         // Cache the result
@@ -434,6 +444,11 @@ class UnifiedDataService {
                 quality: 'hd',
                 definition: 'high',
               },
+              // Required properties for Video interface compatibility
+              uploadedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+              channelName: googleSearchVideo.channelName || 'YouTube Channel',
+              channelId: googleSearchVideo.channelId || `channel-${extractedYoutubeId}`,
+              channelAvatarUrl: googleSearchVideo.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
             };
 
             // Cache the result
@@ -532,6 +547,11 @@ class UnifiedDataService {
                 language: 'en',
                 license: 'youtube',
               },
+              // Required properties for Video interface compatibility
+              uploadedAt: processedVideo.publishedAt || processedVideo.uploadedAt || new Date().toISOString(),
+              channelName: processedVideo.channelName,
+              channelId: processedVideo.channelId,
+              channelAvatarUrl: processedVideo.channelAvatarUrl || processedVideo.channel?.avatarUrl || '',
             };
             this.setCachedData(cacheKey, normalized);
             return normalized;
@@ -591,6 +611,11 @@ class UnifiedDataService {
                 language: 'en',
                 license: 'youtube',
               },
+              // Required properties for Video interface compatibility
+              uploadedAt: processedVideo.publishedAt || processedVideo.uploadedAt || new Date().toISOString(),
+              channelName: processedVideo.channelName,
+              channelId: processedVideo.channelId,
+              channelAvatarUrl: processedVideo.channelAvatarUrl || '',
             };
             this.setCachedData(cacheKey, normalized);
             return normalized;
@@ -733,6 +758,11 @@ class UnifiedDataService {
           quality: 'hd',
           definition: 'high',
         },
+        // Required properties for Video interface compatibility
+        uploadedAt: video.uploadedAt || new Date().toISOString(),
+        channelName: video.channelName || 'YouTube Channel',
+        channelId: video.channelId || `channel-${video.id.replace('google-search-', '')}`,
+        channelAvatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
       }));
 
       logger.debug(`✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`);
@@ -812,6 +842,11 @@ class UnifiedDataService {
           language: 'en',
           license: 'youtube',
         },
+        // Required properties for Video interface compatibility
+        uploadedAt: video.publishedAt || video.uploadedAt || new Date().toISOString(),
+        channelName: video.channelName,
+        channelId: video.channelId,
+        channelAvatarUrl: video.channelAvatarUrl || '',
       }));
 
       logger.debug(`Found ${unifiedVideos.length} YouTube videos for query: ${query}`);

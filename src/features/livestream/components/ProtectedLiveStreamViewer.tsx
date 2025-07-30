@@ -36,8 +36,8 @@ const ProtectedLiveStreamViewer: React.FC<ProtectedLiveStreamViewerProps> = ({
       onRetry={handleRetry}
       onReconnect={handleReconnect}
     >
-      <LiveStreamViewer 
-        streamId={streamId} 
+      <LiveStreamViewer
+        streamId={streamId}
         {...(className && { className })}
       />
     </LiveStreamErrorBoundary>

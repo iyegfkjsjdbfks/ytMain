@@ -13,20 +13,20 @@ export * from './video';
 // Export specific types from youtube to avoid conflicts
 export type { YouTubeVideo, YouTubeChannel, YouTubePlaylist } from './youtube';
 // Export specific types from errors to avoid YouTubeApiError conflict
-export type { 
-  BaseError, 
-  ApiError, 
-  NetworkError, 
-  ValidationError, 
-  FormValidationError, 
-  AuthError, 
-  StorageError, 
-  MediaError, 
-  VideoPlayerError, 
-  PerformanceError, 
-  ServiceWorkerError, 
-  CacheError, 
-  ErrorCode 
+export type {
+  BaseError,
+  ApiError,
+  NetworkError,
+  ValidationError,
+  FormValidationError,
+  AuthError,
+  StorageError,
+  MediaError,
+  VideoPlayerError,
+  PerformanceError,
+  ServiceWorkerError,
+  CacheError,
+  ErrorCode,
 } from './errors';
 export * from './livestream';
 

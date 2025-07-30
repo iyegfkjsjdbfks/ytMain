@@ -316,10 +316,11 @@ return 0;
           <div className="flex items-center space-x-4">
             {/* Auto-refresh toggle */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm text-gray-600 dark:text-gray-400">
+              <label htmlFor="auto-refresh-toggle" className="text-sm text-gray-600 dark:text-gray-400">
                 Auto-refresh
               </label>
               <button
+                id="auto-refresh-toggle"
                 onClick={() => setAutoRefresh(!autoRefresh)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   autoRefresh ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'

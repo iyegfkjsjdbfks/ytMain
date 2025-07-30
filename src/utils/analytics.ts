@@ -22,7 +22,7 @@ export const trackEvent = (eventName: string, properties?: AnalyticsEvent): void
     // - Mixpanel
     // - Amplitude
     // - Custom analytics service
-    
+
     // Google Analytics example (if gtag is available)
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', eventName, properties);

@@ -5,7 +5,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import type { Video } from '../../types/core';
 
 // Lazy load the heavy video player component
-const VideoPlayer = lazy(() => import('../features/video/components/VideoPlayer'));
+const VideoPlayer = lazy(() => import('../../features/video/components/VideoPlayer'));
 const YouTubePlayer = lazy(() => import('../YouTubePlayer'));
 
 interface LazyVideoPlayerProps {
