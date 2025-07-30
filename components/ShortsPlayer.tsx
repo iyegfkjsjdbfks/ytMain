@@ -124,9 +124,9 @@ return;
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [navigateShort, toggleMute, togglePlay]);
 
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -138,9 +138,9 @@ return;
       video.play().catch(console.error);
     }
     setIsPlaying(!isPlaying);
-  };
+  }, [isPlaying]);
 
-  const toggleMute = () => {
+  const toggleMute = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -148,15 +148,15 @@ return;
 
     video.muted = !isMuted;
     setIsMuted(!isMuted);
-  };
+  }, [isMuted]);
 
-  const navigateShort = (direction: 'up' | 'down') => {
+  const navigateShort = useCallback((direction: 'up' | 'down') => {
     if (direction === 'up' && currentIndex > 0) {
       onIndexChange(currentIndex - 1);
     } else if (direction === 'down' && currentIndex < shorts.length - 1) {
       onIndexChange(currentIndex + 1);
     }
-  };
+  }, [currentIndex, shorts.length, onIndexChange]);
 
   const handleVideoClick = () => {
     togglePlay();

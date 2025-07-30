@@ -453,7 +453,7 @@ return;
 
 // Auto-sync when coming back online
 window.addEventListener('online', () => {
-  syncPendingActions();
+  void syncPendingActions();
 });
 
 export default offlineStorage;

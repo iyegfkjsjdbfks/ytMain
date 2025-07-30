@@ -32,7 +32,7 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   const [isRateLimited, setIsRateLimited] = useState(false);
 
   // Generate fallback URL
-  const generateFallback = () => {
+  const generateFallback = useCallback(() => {
     if (fallbackSrc) {
 return fallbackSrc;
 }
@@ -49,7 +49,7 @@ return fallbackSrc;
 
     // Generate a picsum URL as fallback
     return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
-  };
+  }, [fallbackSrc, src, width, height]);
 
   useEffect(() => {
     setCurrentSrc(src);
@@ -86,7 +86,7 @@ return fallbackSrc;
     }
     setIsLoading(false);
     setIsRateLimited(false);
-  }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError]);
+  }, [currentSrc, hasError, retryCount, maxRetries, retryDelay, src, width, height, alt, onError, generateFallback]);
 
   const handleLoad = () => {
     setIsLoading(false);

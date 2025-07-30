@@ -54,7 +54,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
       }
     };
 
-    fetchLiveStreams();
+    void fetchLiveStreams();
   }, [maxStreams]);
 
   if (loading) {

@@ -69,7 +69,7 @@ const AnalyticsPage: React.FC = () => {
       }
     };
 
-    fetchAnalyticsData();
+    void fetchAnalyticsData();
   }, [timeRange]);
 
   const formatNumber = (num: number): string => {

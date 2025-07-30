@@ -131,7 +131,7 @@ export class YouTubePlayer {
       };
     } = {},
   ) {
-    this.initPlayer();
+    void this.initPlayer();
   }
 
   private loadYouTubeAPI(): Promise<void> {

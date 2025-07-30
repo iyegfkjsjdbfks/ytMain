@@ -47,7 +47,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
       }
     };
 
-    fetchWatchHistory();
+    void fetchWatchHistory();
   }, [maxVideos]);
 
   if (loading) {

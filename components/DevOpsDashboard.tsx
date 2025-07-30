@@ -180,8 +180,10 @@ const DevOpsDashboard: React.FC = () => {
 
   // Auto-refresh data
   useEffect(() => {
-    fetchDashboardData();
-    const interval = setInterval(fetchDashboardData, 30000); // Refresh every 30 seconds
+    void fetchDashboardData();
+    const interval = setInterval(() => {
+      void fetchDashboardData();
+    }, 30000); // Refresh every 30 seconds
     return () => clearInterval(interval);
   }, []);
 

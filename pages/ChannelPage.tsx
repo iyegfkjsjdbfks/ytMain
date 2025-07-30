@@ -103,7 +103,7 @@ const ChannelPage: React.FC = () => {
       }
     };
 
-    fetchChannelData();
+    void fetchChannelData();
     window.scrollTo(0, 0);
   }, [channelIdOrName]);
 

@@ -56,7 +56,7 @@ const CommentModerationPage: React.FC = () => {
       }
     };
 
-    fetchCommentsData();
+    void fetchCommentsData();
   }, []);
 
   useEffect(() => {

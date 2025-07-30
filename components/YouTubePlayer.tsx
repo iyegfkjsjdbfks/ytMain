@@ -315,7 +315,7 @@ return;
         }
       }
     };
-  }, [isAPIReady, videoId, height, width, autoplay, controls]);
+  }, [isAPIReady, videoId, height, width, autoplay, controls, isValidVideoId, onError, onReady, onStateChange]);
 
   if (!isValidVideoId) {
     return (

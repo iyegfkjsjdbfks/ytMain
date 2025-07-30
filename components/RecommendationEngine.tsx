@@ -228,11 +228,11 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     } finally {
       setLoading(false);
     }
-  }, [activeVideoId, currentVideo, currentVideoId, maxRecommendations, useGoogleCustomSearch, searchProvider]);
+  }, [activeVideoId, currentVideo, maxRecommendations, useGoogleCustomSearch]);
 
   // Use stable dependencies to prevent infinite re-renders
   useEffect(() => {
-    generateRecommendations();
+    void generateRecommendations();
   }, [generateRecommendations]);
 
   const handleVideoClick = useCallback((video: Video) => {

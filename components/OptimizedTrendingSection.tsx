@@ -46,7 +46,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
   }, [maxVideos]);
 
   useEffect(() => {
-    fetchTrendingVideos();
+    void fetchTrendingVideos();
   }, [fetchTrendingVideos]);
 
   // Memoized video grid to prevent unnecessary re-renders

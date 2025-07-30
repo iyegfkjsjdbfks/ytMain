@@ -96,9 +96,9 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     if (videoFile) {
       handleFileSelect(videoFile);
     }
-  }, [allowedFormats]);
+  }, [allowedFormats, handleFileSelect]);
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = useCallback((file: File) => {
     // Validate file size
     const maxSizeBytes = maxSizeGB * 1024 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
@@ -126,7 +126,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }));
 
     setStep('details');
-  };
+  }, [maxSizeGB, allowedFormats, setVideoFile, setVideoPreview, setUploadData, setStep]);
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -361,7 +361,7 @@ return '0:00';
                             if (isPlaying) {
                               videoRef.current.pause();
                             } else {
-                              videoRef.current.play();
+                              void videoRef.current.play();
                             }
                             setIsPlaying(!isPlaying);
                           }

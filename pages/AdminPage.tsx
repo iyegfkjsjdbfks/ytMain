@@ -73,7 +73,7 @@ const AdminPage: React.FC = () => {
     setInitialSearchKeywordState(getInitialSearchKeyword());
 
     // Load Google Search store videos
-    loadStoreVideos();
+    void loadStoreVideos();
   }, []);
 
   const loadStoreVideos = async () => {
@@ -852,7 +852,7 @@ const AdminPage: React.FC = () => {
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    handleToggleLocalPlayer(config.type as LocalVideoPlayerType);
+                                    void handleToggleLocalPlayer(config.type as LocalVideoPlayerType);
                                   }}
                                   className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
                                     isEnabled
@@ -1033,7 +1033,7 @@ const AdminPage: React.FC = () => {
                       localPlayerType === config.type,
                       enabledLocalPlayers.includes(config.type as LocalVideoPlayerType),
                       () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType),
-                      () => handleToggleLocalPlayer(config.type as LocalVideoPlayerType),
+                      () => void handleToggleLocalPlayer(config.type as LocalVideoPlayerType),
                     ),
                   )}
                 </div>

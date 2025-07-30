@@ -138,13 +138,15 @@ export const DeveloperDashboard: React.FC = () => {
 
   // Auto-refresh effect
   useEffect(() => {
-    fetchDashboardData();
+    void fetchDashboardData();
 
     if (autoRefresh) {
-      const interval = setInterval(fetchDashboardData, refreshInterval * 1000);
+      const interval = setInterval(() => {
+        void fetchDashboardData();
+      }, refreshInterval * 1000);
       return () => clearInterval(interval);
     }
-  }, [autoRefresh, refreshInterval]);
+  }, [autoRefresh, refreshInterval, fetchDashboardData]);
 
   // Helper functions
   const getPerformanceMetrics = async () => {
