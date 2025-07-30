@@ -183,6 +183,14 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
     <div
       className="flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer group hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 transition-colors"
       onClick={handleCardClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
     >
       {/* YouTube Player or Thumbnail */}
       <div className="relative flex-shrink-0">
@@ -191,6 +199,13 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
             <div
               className="w-full h-full"
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.stopPropagation();
+                }
+              }}
+              role="button"
+              tabIndex={0}
             >
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&enablejsapi=0&origin=${encodeURIComponent(window.location.origin)}`}

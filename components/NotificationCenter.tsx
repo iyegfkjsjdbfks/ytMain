@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
@@ -40,7 +40,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     }, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [loadNotifications, generateRandomNotification]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +53,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const loadNotifications = () => {
+  const loadNotifications = useCallback(() => {
     const stored = localStorage.getItem('youtubeCloneNotifications_v1');
     if (stored) {
       const parsedNotifications = JSON.parse(stored);
@@ -66,7 +66,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       setUnreadCount(mockNotifications.filter(n => !n.isRead).length);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
     }
-  };
+  }, []);
 
   const generateMockNotifications = (): Notification[] => {
     return [
@@ -118,7 +118,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     ];
   };
 
-  const generateRandomNotification = () => {
+  const generateRandomNotification = useCallback(() => {
     const types: Array<Notification['type']> = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
     const randomType = types[Math.floor(Math.random() * types.length)] || 'video_upload';
 
@@ -137,7 +137,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     setNotifications(updatedNotifications);
     setUnreadCount(prev => prev + 1);
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
-  };
+  }, [notifications]);
 
   const getNotificationTitle = (type: Notification['type']): string => {
     switch (type) {

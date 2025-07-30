@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import {
   BellIcon,
@@ -49,7 +49,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     }, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [loadNotifications, generateMockNotification]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -67,7 +67,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     setUnreadCount(count);
   }, [notifications]);
 
-  const loadNotifications = () => {
+  const loadNotifications = useCallback(() => {
     try {
       const stored = localStorage.getItem('youtubeCloneNotifications_v1');
       if (stored) {
@@ -82,7 +82,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     } catch (error) {
       console.error('Error loading notifications:', error);
     }
-  };
+  }, []);
 
   const generateInitialNotifications = (): Notification[] => {
     return [
@@ -148,7 +148,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     ];
   };
 
-  const generateMockNotification = () => {
+  const generateMockNotification = useCallback(() => {
     const types: Array<Notification['type']> = ['video_upload', 'like', 'comment', 'subscription', 'live_stream'];
     const type = types[Math.floor(Math.random() * types.length)];
 
@@ -175,7 +175,7 @@ return;
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
-  };
+  }, []);
 
   const getNotificationTitle = (type: Notification['type']): string => {
     switch (type) {

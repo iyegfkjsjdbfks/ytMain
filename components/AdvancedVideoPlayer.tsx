@@ -288,7 +288,17 @@ return;
         className="w-full h-full object-contain"
         onClick={actions.togglePlayPause}
         onDoubleClick={actions.toggleFullscreen}
-      />
+        aria-label={`Video: ${video.title}`}
+        controls={false}
+      >
+        <track
+          kind="captions"
+          src=""
+          srcLang="en"
+          label="English captions"
+          default
+        />
+      </video>
 
       {/* Loading Overlay */}
       {state.isLoading && (
@@ -324,7 +334,14 @@ return;
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={actions.togglePlayPause}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                actions.togglePlayPause();
+              }
+            }}
             className="bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-4 rounded-full transition-all duration-200 transform hover:scale-110"
+            aria-label={state.isPlaying ? 'Pause video' : 'Play video'}
           >
             {state.isPlaying ? (
               <PauseIcon className="w-8 h-8" />
@@ -344,6 +361,18 @@ return;
               onClick={handleProgressClick}
               onMouseMove={handleProgressMouseMove}
               onMouseLeave={handleProgressMouseLeave}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleProgressClick(e as any);
+                }
+              }}
+              role="slider"
+              aria-label="Video progress"
+              aria-valuemin={0}
+              aria-valuemax={state.duration}
+              aria-valuenow={state.currentTime}
+              tabIndex={0}
             >
               {/* Buffer Bar */}
               <div

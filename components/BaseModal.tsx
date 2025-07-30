@@ -106,6 +106,14 @@ return null;
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
       onClick={handleOverlayClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          handleOverlayClick();
+        }
+      }}
+      role="dialog"
+      aria-modal="true"
+      tabIndex={0}
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
