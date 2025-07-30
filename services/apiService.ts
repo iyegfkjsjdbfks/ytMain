@@ -290,14 +290,25 @@ export class ApiService {
         return interceptedResponse;
       } catch (error) {
         // Apply error interceptors
-        let interceptedError = error as ApiError;
+        let interceptedError: Error;
+        if (error instanceof Error) {
+          interceptedError = error;
+        } else {
+          interceptedError = this.createError(
+            'Request failed',
+            0,
+            'REQUEST_ERROR',
+            { originalError: error },
+          );
+        }
+
         for (const interceptor of this.errorInterceptors) {
-          interceptedError = await interceptor(interceptedError);
+          interceptedError = await interceptor(interceptedError as any);
         }
 
         // Track error
         const duration = performance.now() - startTime;
-        performanceMonitor.trackApiCall(interceptedConfig.url, duration, interceptedError.status || 0);
+        performanceMonitor.trackApiCall(interceptedConfig.url, duration, (interceptedError as any).status || 0);
 
         throw interceptedError;
       }
@@ -355,7 +366,7 @@ export class ApiService {
 
     requestOptions.signal = combinedSignal;
 
-    let lastError: ApiError;
+    let lastError: Error;
 
     // Retry logic
     for (let attempt = 0; attempt <= retries; attempt++) {
@@ -404,7 +415,12 @@ export class ApiService {
             );
           }
         } else {
-          lastError = error as ApiError;
+          lastError = this.createError(
+            'Unknown error occurred',
+            0,
+            'UNKNOWN_ERROR',
+            { originalError: error, requestId },
+          );
         }
 
         // Don't retry on certain errors
@@ -458,14 +474,13 @@ export class ApiService {
     status?: number,
     code?: string,
     details?: any,
-  ): ApiError {
-    return {
-      message,
-      status,
-      code,
-      details,
-      timestamp: Date.now(),
-    };
+  ): Error {
+    const error = new Error(message);
+    (error as any).status = status;
+    (error as any).code = code;
+    (error as any).details = details;
+    (error as any).timestamp = Date.now();
+    return error;
   }
 
   private delay(ms: number): Promise<void> {

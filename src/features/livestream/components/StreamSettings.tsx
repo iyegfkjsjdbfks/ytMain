@@ -518,7 +518,7 @@ current[finalKey] = value;
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Moderation Level</h3>
         <div className="space-y-3">
           {moderationLevels.map(level => (
-            <label htmlFor={`moderation-level-${level.value}`} key={level.value} className="flex items-start space-x-3">
+            <label htmlFor={`moderation-level-${level.value}`} key={level.value} className="flex items-start space-x-3" aria-label={`Select ${level.label} moderation level`}>
               <input
                 id={`moderation-level-${level.value}`}
                 type="radio"

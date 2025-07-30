@@ -364,7 +364,7 @@ export const showNotification = (title: string, options?: NotificationOptions): 
       ...options,
     };
 
-    void new Notification(title, defaultOptions);
+    const notification = new Notification(title, defaultOptions);
   }
 };
 

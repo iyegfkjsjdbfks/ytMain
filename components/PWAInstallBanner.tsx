@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type React } from 'react';
 
 import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 

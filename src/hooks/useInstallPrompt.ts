@@ -197,7 +197,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
       // Show success notification
       if ('Notification' in window && Notification.permission === 'granted') {
-        void new Notification('YouTubeX Installed!', {
+        const notification = new Notification('YouTubeX Installed!', {
           body: 'You can now access YouTubeX from your home screen.',
           icon: '/icons/icon-192x192.svg',
           badge: '/icons/badge-72x72.svg',

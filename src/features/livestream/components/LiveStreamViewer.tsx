@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type React } from 'react';
 
 import {
   PlayIcon,

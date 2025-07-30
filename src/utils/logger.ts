@@ -67,7 +67,6 @@ return;
 }
 
     if (this.config.enableConsole) {
-      // eslint-disable-next-line no-console
       console.warn(this.formatMessage('warn', message), ...args);
     }
   }
@@ -78,7 +77,6 @@ return;
 }
 
     if (this.config.enableConsole) {
-      // eslint-disable-next-line no-console
       console.error(this.formatMessage('error', message), error, ...args);
     }
 

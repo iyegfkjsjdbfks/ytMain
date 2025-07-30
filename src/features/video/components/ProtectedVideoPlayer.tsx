@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useCallback } from 'react';
+import { useCallback, type React } from 'react';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';

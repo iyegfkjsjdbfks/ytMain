@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type React } from 'react';
 
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
