@@ -1,4 +1,4 @@
-import { useCallback, type React } from 'react';
+import React, { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
@@ -26,11 +26,11 @@ interface ProtectedYouTubePlayerProps {
  */
 const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
   video,
-  width,
-  height,
-  autoplay,
-  controls,
-  className,
+  width = '100%',
+  height = '315',
+  autoplay = false,
+  controls = true,
+  className = '',
   onReady,
   onStateChange,
   onError,

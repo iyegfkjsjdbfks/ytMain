@@ -86,18 +86,6 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     setIsDragging(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-
-    const files = Array.from(e.dataTransfer.files);
-    const videoFile = files.find(file => allowedFormats.includes(file.type));
-
-    if (videoFile) {
-      handleFileSelect(videoFile);
-    }
-  }, [allowedFormats, handleFileSelect]);
-
   const handleFileSelect = useCallback((file: File) => {
     // Validate file size
     const maxSizeBytes = maxSizeGB * 1024 * 1024 * 1024;
@@ -127,6 +115,18 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
 
     setStep('details');
   }, [maxSizeGB, allowedFormats, setVideoFile, setVideoPreview, setUploadData, setStep]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const files = Array.from(e.dataTransfer.files);
+    const videoFile = files.find(file => allowedFormats.includes(file.type));
+
+    if (videoFile) {
+      handleFileSelect(videoFile);
+    }
+  }, [allowedFormats, handleFileSelect]);
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

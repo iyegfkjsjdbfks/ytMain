@@ -108,7 +108,7 @@ return null;
       onClick={handleOverlayClick}
       onKeyDown={(e) => {
         if (e.key === 'Escape') {
-          handleOverlayClick();
+          onClose();
         }
       }}
       role="dialog"
