@@ -47,7 +47,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(({
             if (state === 2) onPause?.(); // Paused
             if (state === 0) onEnded?.(); // Ended
           }}
-          className={className}
+          {...(className && { className })}
         />
       ) : (
         <VideoPlayer
@@ -56,10 +56,10 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(({
           poster={video.thumbnailUrl}
           title={video.title}
           autoplay={autoplay}
-          onReady={onReady}
-          onPlay={onPlay}
-          onPause={onPause}
-          onEnded={onEnded}
+          {...(onReady && { onReady })}
+          {...(onPlay && { onPlay })}
+          {...(onPause && { onPause })}
+          {...(onEnded && { onEnded })}
           className={className || ''}
         />
       )}

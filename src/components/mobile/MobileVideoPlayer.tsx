@@ -39,7 +39,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
   const [buffered, setBuffered] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Intersection observer for autoplay on mobile
@@ -47,6 +47,12 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
     threshold: 0.5,
     rootMargin: '0px',
   });
+
+  // Combined ref callback using a mutable ref
+  const setRefs = useCallback((node: HTMLDivElement | null) => {
+    containerRef.current = node;
+    intersectionRef(node);
+  }, [intersectionRef]);
 
   // Handle play/pause
   const togglePlay = useCallback(async () => {
@@ -181,12 +187,7 @@ return;
 
   return (
     <div
-      ref={(node) => {
-        if (containerRef.current !== node) {
-          containerRef.current = node;
-        }
-        intersectionRef(node);
-      }}
+      ref={setRefs}
       className={`relative bg-black rounded-lg overflow-hidden ${className}`}
       onTouchStart={handleTouchStart}
       onClick={showControlsTemporarily}

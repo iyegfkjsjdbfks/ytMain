@@ -9,6 +9,7 @@ export interface YouTubePlayerProps {
   height?: string | number;
   controls?: boolean;
   className?: string;
+  onStateChange?: (state: number) => void;
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -18,6 +19,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   height = 315,
   controls = true,
   className = '',
+  // onStateChange, // TODO: Implement YouTube iframe API for state change callbacks
 }) => {
   // Extract YouTube video ID from URL
   const getYouTubeVideoId = (url: string): string | null => {

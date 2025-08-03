@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useMemo, type React } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import {
   ChartBarIcon,
@@ -253,14 +254,14 @@ interface StatsCardProps {
   /** Main value to display */
   value: string | number;
   /** Icon component */
-  icon: React.ReactNode;
+  icon: ReactNode;
   /** Optional subtitle text */
   subtitle?: string;
   /** Optional trend indicator */
-  trend?: React.ReactNode;
+  trend?: ReactNode;
 }
 
-const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }) => (
+const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }) => (
   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div className="flex-1">
@@ -430,7 +431,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
  * ```
  */
 
-const StreamAnalyticsDashboard: React.FC<StreamAnalyticsDashboardProps> = ({
+const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
   streamId,
   className = '',
 }) => {
