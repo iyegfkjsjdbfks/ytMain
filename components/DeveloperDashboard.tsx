@@ -138,11 +138,11 @@ export const DeveloperDashboard: React.FC = () => {
 
   // Auto-refresh effect
   useEffect(() => {
-    void fetchDashboardData();
+    fetchDashboardData().catch(console.error);
 
     if (autoRefresh) {
       const interval = setInterval(() => {
-        void fetchDashboardData();
+        fetchDashboardData().catch(console.error);
       }, refreshInterval * 1000);
       return () => clearInterval(interval);
     }

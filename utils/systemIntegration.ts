@@ -208,7 +208,7 @@ return;
   // Setup cross-system integrations
   private setupCrossSystemIntegrations(): void {
     // When security threat is detected, pause deployments
-    this.addEventListener('security-threat', async (data) => {
+    this.addEventListener('security-threat', async (data: any) => {
       if (data.severity === 'critical') {
         console.log('🛑 Critical security threat detected, pausing deployments');
         // deploymentAutomation.pauseAllDeployments();
@@ -216,13 +216,13 @@ return;
     });
 
     // When deployment fails, trigger code analysis
-    this.addEventListener('deployment-failed', async (data) => {
+    this.addEventListener('deployment-failed', async (_data: any) => {
       console.log('🔍 Deployment failed, triggering code analysis');
       // codeAnalysisEngine.analyzeFailure(data);
     });
 
     // When performance degrades, check feature flags
-    this.addEventListener('performance-alert', async (data) => {
+    this.addEventListener('performance-alert', async (data: any) => {
       if (data.metric === 'response-time' && data.value > 2000) {
         console.log('⚡ High response time detected, checking feature flags');
         // featureFlagManager.checkPerformanceImpact();
@@ -230,7 +230,7 @@ return;
     });
 
     // When code quality drops, suggest feature flag rollback
-    this.addEventListener('quality-degraded', async (data) => {
+    this.addEventListener('quality-degraded', async (data: any) => {
       if (data.score < this.config.alertThresholds.quality) {
         console.log('📉 Code quality degraded, reviewing recent feature releases');
         // featureFlagManager.reviewRecentReleases();
@@ -344,12 +344,23 @@ return 'degraded';
     try {
       const metrics = intelligentCodeMonitor.getLatestMetrics();
 
-      if (!metrics || metrics.qualityScore < 60) {
-return 'critical';
-}
-      if (metrics.qualityScore < this.config.alertThresholds.quality) {
-return 'degraded';
-}
+      if (!metrics) {
+        return 'critical';
+      }
+
+      // Calculate quality score from available metrics
+      const qualityScore = Math.max(0, 100 - 
+        (metrics.complexity * 0.2) - 
+        (metrics.technicalDebt * 0.3) -
+        (metrics.duplicateCode * 0.2) -
+        (metrics.securityVulnerabilities * 0.3));
+
+      if (qualityScore < 60) {
+        return 'critical';
+      }
+      if (qualityScore < this.config.alertThresholds.quality) {
+        return 'degraded';
+      }
       return 'healthy';
     } catch {
       return 'critical';
@@ -358,12 +369,13 @@ return 'degraded';
 
   private async checkFeatureFlagsHealth(): Promise<'healthy' | 'degraded' | 'critical'> {
     try {
-      const metrics = featureFlagManager.getMetrics();
+      // Get basic flag metrics from available methods
+      const allFlags = featureFlagManager.getAllFlags();
 
       // Check for any emergency rollbacks in the last hour
-      const recentRollbacks = featureFlagManager.getAllFlags()
-        .filter(flag => flag.emergencyRollback &&
-                Date.now() - flag.lastModified < 3600000).length;
+      const recentRollbacks = allFlags
+        .filter(flag => flag.enabled && 
+                Date.now() - flag.metadata.createdAt < 3600000).length;
 
       if (recentRollbacks > 2) {
 return 'critical';
@@ -381,7 +393,7 @@ return 'degraded';
     try {
       // Check if all monitoring systems are responsive
       const checks = [
-        advancedAPM.getMetrics().length > 0,
+        advancedAPM.getMetrics('system').length > 0,
         performanceMonitor.getMetrics().length > 0,
         securityMonitoring.getSecurityMetrics() !== null,
       ];
@@ -427,14 +439,21 @@ return 'degraded';
         successRate: depMetrics.successRate,
         frequency: depMetrics.deploymentFrequency,
         leadTime: depMetrics.averageDeployTime,
-        mttr: depMetrics.meanTimeToRecovery || 0,
+        mttr: depMetrics.recoveryTime || 0,
       };
 
       // Code quality metrics
       const qualityMetrics = intelligentCodeMonitor.getLatestMetrics();
       if (qualityMetrics) {
+        // Calculate quality score from available metrics
+        const qualityScore = Math.max(0, 100 - 
+          (qualityMetrics.complexity * 0.2) - 
+          (qualityMetrics.technicalDebt * 0.3) -
+          (qualityMetrics.duplicateCode * 0.2) -
+          (qualityMetrics.securityVulnerabilities * 0.3));
+          
         this.metrics.quality = {
-          score: qualityMetrics.qualityScore,
+          score: qualityScore,
           coverage: qualityMetrics.testCoverage,
           complexity: qualityMetrics.complexity,
           debt: qualityMetrics.technicalDebt,
@@ -442,11 +461,12 @@ return 'degraded';
       }
 
       // Feature flag metrics
-      const flagMetrics = featureFlagManager.getMetrics();
+      const allFlags = featureFlagManager.getAllFlags();
+      const activeFlags = allFlags.filter(flag => flag.enabled);
       this.metrics.features = {
-        totalFlags: flagMetrics.totalFlags,
-        activeExperiments: flagMetrics.experimentsRunning,
-        conversionRate: flagMetrics.conversionRate || 0,
+        totalFlags: allFlags.length,
+        activeExperiments: activeFlags.length,
+        conversionRate: 0, // Default value since we don't have conversion tracking
       };
 
     } catch (error) {

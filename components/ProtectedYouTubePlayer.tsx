@@ -1,4 +1,3 @@
-import type React from 'react';
 import { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';

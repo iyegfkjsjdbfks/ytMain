@@ -1,11 +1,11 @@
-import type React from 'react';
+import type { FC } from 'react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+const LoadingSpinner: FC<LoadingSpinnerProps> = ({
   size = 'md',
   className = '',
 }) => {

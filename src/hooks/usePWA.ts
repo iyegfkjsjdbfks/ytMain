@@ -363,7 +363,9 @@ export const showNotification = (title: string, options?: NotificationOptions): 
       ...options,
     };
 
-    new Notification(title, defaultOptions);
+    const notification = new Notification(title, defaultOptions);
+    // Notification will auto-close, no need to manage it further
+    void notification;
   }
 };
 

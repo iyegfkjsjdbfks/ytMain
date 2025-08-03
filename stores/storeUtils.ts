@@ -247,11 +247,11 @@ export function createEnhancedStore<T>(
   stateCreator: StateCreator<T, [], [], T>,
   config: StoreConfig,
 ) {
-  let enhancedCreator = stateCreator;
+  let enhancedCreator: StateCreator<T, [], [], T> = stateCreator;
 
   // Apply immer middleware
   if (config.immer) {
-    enhancedCreator = immer(enhancedCreator);
+    enhancedCreator = immer(enhancedCreator) as StateCreator<T, [], [], T>;
   }
 
   // Apply performance monitoring
@@ -261,7 +261,7 @@ export function createEnhancedStore<T>(
 
   // Apply subscriptions middleware
   if (config.subscriptions) {
-    enhancedCreator = subscribeWithSelector(enhancedCreator);
+    enhancedCreator = subscribeWithSelector(enhancedCreator) as StateCreator<T, [], [], T>;
   }
 
   // Apply persistence middleware
@@ -274,16 +274,16 @@ export function createEnhancedStore<T>(
 
     enhancedCreator = persist(enhancedCreator, {
       name: config.name,
-      storage,
+      storage: storage as any, // Type assertion for storage compatibility
       partialize: config.persist.partialize,
       version: config.persist.version || 1,
       migrate: config.persist.migrate,
-    });
+    }) as StateCreator<T, [], [], T>;
   }
 
   // Apply devtools middleware
   if (config.devtools && import.meta.env.DEV) {
-    enhancedCreator = devtools(enhancedCreator, { name: config.name });
+    enhancedCreator = devtools(enhancedCreator, { name: config.name }) as StateCreator<T, [], [], T>;
   }
 
   return create(enhancedCreator);
@@ -388,7 +388,7 @@ return;
 }
 
 // Store validation utilities
-export function createValidator<T>(schema: {
+export function createValidator<T extends object>(schema: {
   [K in keyof T]?: (value: T[K]) => boolean | string;
 }) {
   return (state: T): { isValid: boolean; errors: Record<string, string> } => {
@@ -396,7 +396,7 @@ export function createValidator<T>(schema: {
 
     for (const [key, validator] of Object.entries(schema)) {
       if (validator && key in state) {
-        const result = validator(state[key as keyof T]);
+        const result = (validator as (value: any) => boolean | string)(state[key as keyof T]);
 
         if (typeof result === 'string') {
           errors[key] = result;
