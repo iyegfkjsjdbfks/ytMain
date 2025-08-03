@@ -54,12 +54,13 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
     const componentError = createComponentError(
       'DataFetchErrorBoundary',
       'Data fetching component error',
-      {
+      error,
+      JSON.stringify({
         dataType: this.props.dataType,
         retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
-        errorInfo,
-      },
+        componentStack: errorInfo.componentStack,
+      })
     );
 
     conditionalLogger.error('Data fetching component error caught:', componentError);

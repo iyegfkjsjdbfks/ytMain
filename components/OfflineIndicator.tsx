@@ -1,5 +1,5 @@
-import type React from 'react';
 import { useState, useEffect } from 'react';
+import type { FC } from 'react';
 
 import { WifiIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
@@ -7,7 +7,7 @@ interface OfflineIndicatorProps {
   className?: string;
 }
 
-const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) => {
+const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showOfflineMessage, setShowOfflineMessage] = useState(false);
 

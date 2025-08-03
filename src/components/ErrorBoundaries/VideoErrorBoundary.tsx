@@ -50,11 +50,12 @@ export class VideoErrorBoundary extends Component<Props, State> {
     const componentError = createComponentError(
       'VideoErrorBoundary',
       'Video component error',
-      {
+      error,
+      JSON.stringify({
         videoId: this.props.videoId,
         retryCount: this.state.retryCount,
-        errorInfo,
-      },
+        componentStack: errorInfo.componentStack,
+      })
     );
 
     conditionalLogger.error('Video component error caught:', componentError);
