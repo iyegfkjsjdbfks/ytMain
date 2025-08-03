@@ -3,11 +3,12 @@
  * and testing real user workflows
  */
 
+import React from 'react';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import { VideoDescription } from '../../components/VideoDescription';
+import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
 import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';

@@ -6,7 +6,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-import { VideoDescription } from '../../components/VideoDescription';
+import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
 import { testUtils, customRender } from '../../utils/testUtils';
 import { testHelpers, TestPerformanceTracker } from '../setup';

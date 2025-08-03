@@ -194,7 +194,11 @@ export class InputValidator {
     let isEven = false;
 
     for (let i = cleanNumber.length - 1; i >= 0; i--) {
-      let digit = parseInt(cleanNumber[i], 10);
+      const char = cleanNumber[i];
+      if (char === undefined) {
+        continue;
+      }
+      let digit = parseInt(char, 10);
 
       if (isEven) {
         digit *= 2;
@@ -581,6 +585,10 @@ continue;
 
     document.cookie.split(';').forEach(cookie => {
       const [name] = cookie.trim().split('=');
+      
+      if (!name) {
+        return;
+      }
 
       // Check if cookie has secure flags (this is limited in client-side)
       if (!cookie.includes('Secure') && location.protocol === 'https:') {

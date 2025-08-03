@@ -2,18 +2,14 @@
  * Performance monitoring utility for tracking Core Web Vitals and custom metrics
  */
 
+import React from 'react';
+
 interface PerformanceMetric {
   name: string;
   value: number;
   timestamp: number;
   url: string;
   userAgent: string;
-}
-
-interface WebVitalsMetric extends PerformanceMetric {
-  id: string;
-  delta: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
 }
 
 class PerformanceMonitor {
@@ -107,7 +103,7 @@ return;
 
         this.recordMetric({
           name: 'DOMContentLoaded',
-          value: navigation.domContentLoadedEventEnd - navigation.navigationStart,
+          value: navigation.domContentLoadedEventEnd - navigation.startTime,
           timestamp: Date.now(),
           url: window.location.href,
           userAgent: navigator.userAgent,
@@ -115,7 +111,7 @@ return;
 
         this.recordMetric({
           name: 'LoadComplete',
-          value: navigation.loadEventEnd - navigation.navigationStart,
+          value: navigation.loadEventEnd - navigation.startTime,
           timestamp: Date.now(),
           url: window.location.href,
           userAgent: navigator.userAgent,
