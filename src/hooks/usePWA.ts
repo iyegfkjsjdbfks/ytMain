@@ -391,9 +391,9 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
   }
 
   // Fallback to clipboard
-  if ('clipboard' in navigator && navigator.clipboard && data.url) {
+  if ('clipboard' in navigator && (navigator as any).clipboard && data.url) {
     try {
-      await navigator.clipboard.writeText(data.url);
+      await (navigator as any).clipboard.writeText(data.url);
       showNotification('Link copied to clipboard!');
       return true;
     } catch (error) {

@@ -429,7 +429,13 @@ const WatchPage: React.FC = () => {
             <div className="bg-black rounded-lg overflow-hidden mb-4">
               {isYouTubeUrl(video.videoUrl || '') ? (
                 <YouTubePlayer
-                  video={video}
+                  video={{
+                    ...video,
+                    viewCount: video.views,
+                    duration: typeof video.duration === 'string' ? 
+                      parseInt(video.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0).toString()) : 
+                      (video.duration as number || 0),
+                  } as unknown as Video}
                   autoplay={true}
                   width="100%"
                   height={480}
