@@ -201,6 +201,13 @@ export const streamAPI = {
   },
 
   /**
+   * Stop a live stream (alias for endStream)
+   */
+  async stopStream(id: string): Promise<LiveStream> {
+    return this.endStream(id);
+  },
+
+  /**
    * Delete a stream
    */
   async deleteStream(id: string): Promise<void> {

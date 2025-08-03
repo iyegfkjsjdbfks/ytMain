@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
 
-import type { Video, Channel, Comment, VideoVisibility } from '../types/core';
+import type { Video, Channel, Comment } from '../types/core';
 
 // Test utilities for consistent testing
 export const createTestQueryClient = () => {
@@ -49,7 +49,12 @@ export const renderWithProviders = (
     [key: string]: any;
   },
 ) => {
-  const { queryClient, ...renderOptions } = options || {};
+  const { queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  }), ...renderOptions } = options || {};
 
   return render(ui, {
     wrapper: ({ children }) => (
@@ -67,32 +72,25 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   title: 'Test Video Title',
   description: 'Test video description',
   thumbnailUrl: 'https://example.com/thumbnail.jpg',
-  videoUrl: 'https://example.com/video.mp4',
   duration: '300',
-  views: '1000',
-  viewsFormatted: '1K views',
-  likes: 50,
-  dislikes: 2,
+  channelId: 'test-channel-1',
+  channelName: 'Test Channel',
+  channelAvatarUrl: 'https://example.com/avatar.jpg',
+  viewCount: 1000,
+  likeCount: 50,
+  dislikeCount: 2,
   commentCount: 10,
   publishedAt: '2024-01-01T00:00:00Z',
-  publishedAtFormatted: '1 day ago',
-  uploadedAt: '2024-01-01T00:00:00Z',
+  tags: ['test', 'video'],
+  category: 'Entertainment',
+  license: 'youtube',
+  visibility: 'public',
+  isLive: false,
+  isFamilySafe: true,
+  isAgeRestricted: false,
+  embeddable: true,
   createdAt: '2024-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',
-  channelName: 'Test Channel',
-  channelId: 'test-channel-1',
-  channelAvatarUrl: 'https://example.com/avatar.jpg',
-  category: 'Entertainment',
-  tags: ['test', 'video'],
-  visibility: 'public' as VideoVisibility,
-  source: 'youtube',
-  channel: {
-    id: 'test-channel-1',
-    name: 'Test Channel',
-    avatarUrl: 'https://example.com/avatar.jpg',
-    subscribers: 1000,
-    isVerified: false,
-  },
   ...overrides,
 });
 
@@ -102,8 +100,8 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   description: 'Test channel description',
   avatarUrl: 'https://example.com/avatar.jpg',
   banner: 'https://example.com/banner.jpg',
+  subscribers: 1000,
   subscriberCount: '1000',
-  subscribersFormatted: '1K subscribers',
   videoCount: 50,
   isVerified: false,
   joinedDate: '2023-01-01',
@@ -114,19 +112,28 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
 
 export const createMockComment = (overrides: Partial<Comment> = {}): Comment => ({
   id: 'test-comment-1',
-  content: 'Test comment content',
+  userAvatarUrl: 'https://example.com/user-avatar.jpg',
+  userName: 'Test User',
+  commentText: 'Test comment content',
+  timestamp: '2024-01-01T00:00:00Z',
+  likes: 5,
+  isLikedByCurrentUser: false,
+  isDislikedByCurrentUser: false,
+  isEdited: false,
+  replies: [],
+  replyCount: 2,
+  videoId: 'test-video-1',
   authorId: 'test-user-1',
   authorName: 'Test User',
-  authorAvatarUrl: 'https://example.com/user-avatar.jpg',
-  publishedAt: '2024-01-01T00:00:00Z',
-  createdAt: '2024-01-01T00:00:00Z',
-  updatedAt: '2024-01-01T00:00:00Z',
-  likeCount: 5,
-  replyCount: 2,
-  isLiked: false,
+  authorAvatar: 'https://example.com/user-avatar.jpg',
+  content: 'Test comment content',
+  dislikes: 0,
   isPinned: false,
   isHearted: false,
-  replies: [],
+  createdAt: '2024-01-01T00:00:00Z',
+  likeCount: 5,
+  publishedAt: '2024-01-01T00:00:00Z',
+  updatedAt: '2024-01-01T00:00:00Z',
   ...overrides,
 });
 
@@ -142,9 +149,11 @@ export const measureRenderTime = async (renderFn: () => void): Promise<number> =
 };
 
 // Accessibility testing helpers
-export const checkAccessibility = async (container: HTMLElement) => {
+export const checkAccessibility = async (_container: HTMLElement) => {
   const axeCore = await import('@axe-core/react');
-  const results = await axeCore.default(container);
+  const React = await import('react');
+  const ReactDOM = await import('react-dom');
+  const results = await axeCore.default(React, ReactDOM, 1000);
   return results;
 };
 

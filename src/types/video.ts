@@ -157,4 +157,7 @@ export interface Video {
     title: string;
     description: string;
   }>;
+  // Required timestamp fields
+  createdAt: string;
+  updatedAt: string;
 }

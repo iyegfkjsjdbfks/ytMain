@@ -71,6 +71,8 @@ export interface UnifiedVideoMetadata {
   channelName: string;
   channelId: string;
   channelAvatarUrl: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 /**
@@ -145,6 +147,8 @@ class MetadataNormalizationService {
       channelName: localVideo.channelName,
       channelId: localVideo.channelId,
       channelAvatarUrl: localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
+      createdAt: localVideo.createdAt || localVideo.publishedAt || new Date().toISOString(),
+      updatedAt: localVideo.updatedAt || new Date().toISOString(),
     };
   }
 
@@ -223,6 +227,8 @@ class MetadataNormalizationService {
       channelName: youtubeVideo.snippet?.channelTitle || '',
       channelId: youtubeVideo.snippet?.channelId || '',
       channelAvatarUrl: channel?.snippet?.thumbnails?.default?.url || '',
+      createdAt: youtubeVideo.snippet?.publishedAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     logger.debug('normalizeYouTubeVideo - Final normalized data:', {

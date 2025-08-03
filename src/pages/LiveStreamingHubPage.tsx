@@ -245,7 +245,7 @@ const LiveStreamingHubPage: React.FC = () => {
 
           {/* Analytics Tab */}
           <TabsContent value="analytics">
-            <StreamAnalyticsDashboard />
+            <StreamAnalyticsDashboard streamId="demo-stream-1" />
           </TabsContent>
 
           {/* Live Viewer Tab */}
