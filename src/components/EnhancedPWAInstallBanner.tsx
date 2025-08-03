@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import type { FC } from 'react';
+import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
 
 import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
 

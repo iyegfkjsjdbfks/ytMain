@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import type { FC } from 'react';
+import { useCallback, type FC } from 'react';
 
 import { LiveStreamErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';

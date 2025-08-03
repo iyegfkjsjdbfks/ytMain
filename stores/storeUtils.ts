@@ -277,11 +277,11 @@ export function createEnhancedStore<T>(
       storage: storage as any, // Type assertion for storage compatibility
       version: config.persist.version || 1,
     };
-    
+
     if (config.persist.partialize) {
       persistOptions.partialize = config.persist.partialize;
     }
-    
+
     if (config.persist.migrate) {
       persistOptions.migrate = config.persist.migrate;
     }

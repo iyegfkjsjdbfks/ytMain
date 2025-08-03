@@ -1,5 +1,10 @@
 import React from 'react';
 
+// Import the components for use in HOCs
+import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
+import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
+import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary';
+
 // Re-export all error boundaries and their types
 export { default as VideoErrorBoundary, type VideoErrorBoundaryProps } from './VideoErrorBoundary';
 export { default as LiveStreamErrorBoundary, type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
@@ -10,11 +15,6 @@ export { ErrorBoundary as BaseErrorBoundary } from '../../features/common/compon
 
 // Re-export all protected components
 export * from './ProtectedComponents';
-
-// Import the components for use in HOCs
-import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary';
-import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
-import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
 
 // Higher-Order Components for wrapping components with error boundaries
 export const withVideoErrorBoundary = <P extends object>(
