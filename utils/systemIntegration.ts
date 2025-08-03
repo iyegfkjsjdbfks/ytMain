@@ -208,7 +208,7 @@ return;
   // Setup cross-system integrations
   private setupCrossSystemIntegrations(): void {
     // When security threat is detected, pause deployments
-    this.addEventListener('security-threat', async (data) => {
+    this.addEventListener('security-threat', async (data: any) => {
       if (data.severity === 'critical') {
         console.log('🛑 Critical security threat detected, pausing deployments');
         // deploymentAutomation.pauseAllDeployments();
@@ -216,13 +216,13 @@ return;
     });
 
     // When deployment fails, trigger code analysis
-    this.addEventListener('deployment-failed', async (data) => {
+    this.addEventListener('deployment-failed', async (_data: any) => {
       console.log('🔍 Deployment failed, triggering code analysis');
       // codeAnalysisEngine.analyzeFailure(data);
     });
 
     // When performance degrades, check feature flags
-    this.addEventListener('performance-alert', async (data) => {
+    this.addEventListener('performance-alert', async (data: any) => {
       if (data.metric === 'response-time' && data.value > 2000) {
         console.log('⚡ High response time detected, checking feature flags');
         // featureFlagManager.checkPerformanceImpact();
@@ -230,7 +230,7 @@ return;
     });
 
     // When code quality drops, suggest feature flag rollback
-    this.addEventListener('quality-degraded', async (data) => {
+    this.addEventListener('quality-degraded', async (data: any) => {
       if (data.score < this.config.alertThresholds.quality) {
         console.log('📉 Code quality degraded, reviewing recent feature releases');
         // featureFlagManager.reviewRecentReleases();
