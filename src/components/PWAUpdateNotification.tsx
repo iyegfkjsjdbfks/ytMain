@@ -1,4 +1,5 @@
-import { useState, useEffect, type React } from 'react';
+import { useState, useEffect } from 'react';
+import type { FC } from 'react';
 
 import { RefreshCw, X, Download } from 'lucide-react';
 
@@ -11,7 +12,7 @@ interface PWAUpdateNotificationProps {
   className?: string;
 }
 
-const PWAUpdateNotification: React.FC<PWAUpdateNotificationProps> = ({ className = '' }) => {
+const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({ className = '' }) => {
   const { updateAvailable, installUpdate } = usePWA();
   const [isVisible, setIsVisible] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);

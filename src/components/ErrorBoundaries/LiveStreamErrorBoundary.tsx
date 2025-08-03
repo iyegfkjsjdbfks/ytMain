@@ -54,11 +54,12 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     const componentError = createComponentError(
       'LiveStreamErrorBoundary',
       'Live stream component error',
-      {
+      error,
+      JSON.stringify({
         streamId: this.props.streamId,
         retryCount: this.state.retryCount,
-        errorInfo,
-      },
+        componentStack: errorInfo.componentStack,
+      }),
     );
 
     conditionalLogger.error('Live stream component error caught:', componentError);

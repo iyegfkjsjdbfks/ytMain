@@ -40,7 +40,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
     // NEW STRATEGY: Google Custom Search for discovery, YouTube Data API v3 for metadata
     const shouldUseGoogleCustomSearch = googleSearchConfigured; // Use Google Custom Search for discovery
-    
+
     console.log('Search provider:', provider); // Use the provider variable
 
     setUseGoogleCustomSearch(shouldUseGoogleCustomSearch);

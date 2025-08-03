@@ -1,4 +1,5 @@
-import { useState, useEffect, type React } from 'react';
+import { useState, useEffect } from 'react';
+import type { FC } from 'react';
 
 import { PWAUtils } from '../config/pwa';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
@@ -17,7 +18,7 @@ interface PWAInstallBannerProps {
   onDismiss?: () => void;
 }
 
-export const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({
+export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
   className = '',
   variant = 'default',
   position = 'bottom-right',

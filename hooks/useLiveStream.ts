@@ -32,25 +32,28 @@ export function useLiveStream(streamId?: string) {
       creatorAvatar: '',
       settings: {
         enableChat: true,
-        enableSuperChat: false,
-        enablePolls: false,
-        enableQA: false,
-        chatMode: 'live' as const,
+        enableSuperChat: true,
+        enablePolls: true,
+        enableQA: true,
+        chatMode: 'live',
         slowMode: 0,
         subscribersOnly: false,
-        moderationLevel: 'moderate' as const,
-        quality: '1080p' as const,
+        moderationLevel: 'moderate',
+        quality: '1080p',
         bitrate: 5000,
-        frameRate: 30 as const,
-        enableRecording: false,
+        frameRate: 60,
+        enableRecording: true,
         enableMultiplatform: false,
         platforms: [],
       },
       stats: {
         viewers: 0,
         peakViewers: 0,
-        averageViewers: 0, // totalViews: 0,
+        averageViewers: 0,
         duration: 0,
+        likes: 0,
+        dislikes: 0,
+        chatMessages: 0,
         superChatAmount: 0,
         superChatCount: 0,
         pollVotes: 0,
@@ -59,16 +62,6 @@ export function useLiveStream(streamId?: string) {
         bitrate: 5000,
         frameDrops: 0,
         latency: 0,
-        likes: 0,
-        dislikes: 0,
-        // shareCount: 0, // removed - not in LiveStreamStats interface 0, // shares: 0,
-        chatMessages: 0,
-        superChatCount: 0,
-        revenue: 0,
-        watchTime: 0,
-        averageWatchTime: 0,
-        chatMessages: 0,
-        uniqueViewers: 0,
       },
       monetization: {
         totalRevenue: 0,
@@ -76,129 +69,144 @@ export function useLiveStream(streamId?: string) {
         adRevenue: 0,
         membershipRevenue: 0,
         donationRevenue: 0,
-        superChatCount: [],
-        // superChatEnabled: false, // removed - not in LiveStreamMonetization interface false,
-        // membershipEnabled: false, // removed - not in LiveStreamMonetization interface false,
-        adsEnabled: false,
-        sponsorshipEnabled: false,
-        merchandiseEnabled: false,
-        donationGoal: null,
-        revenueSharing: {
-          platform: 70,
-          creator: 30,
-        },
+        superChats: [],
       },
     };
 
     setTimeout(() => {
       setStream(mockStream);
       setLoading(false);
-    }, 100);
+    }, 1000);
   }, [streamId]);
 
-  const createStream = async (data: any): Promise<LiveStream> => {
-    // Placeholder implementation
-    console.log('Creating stream:', data);
-    const newStream: LiveStream = {
-      id: `stream_${Date.now()}`,
-      title: data.title || 'New Stream',
-      description: data.description || '',
-      thumbnailUrl: '',
-      streamUrl: '',
-      streamKey: `key_${Date.now()}`,
-      category: data.category || 'General',
-      tags: data.tags || [],
-      visibility: data.visibility || 'public',
-      status: 'scheduled',
-      creatorId: 'creator1',
-      creatorName: 'Creator',
-      creatorAvatar: '',
-      settings: {
-        enableChat: true,
-        enableSuperChat: false,
-        enablePolls: false,
-        enableQA: false,
-        chatMode: 'live' as const,
-        slowMode: 0,
-        subscribersOnly: false,
-        moderationLevel: 'moderate' as const,
-        quality: '1080p' as const,
-        bitrate: 5000,
-        frameRate: 30 as const,
-        enableRecording: false,
-        enableMultiplatform: false,
-        platforms: [],
-      },
-      stats: {
-        viewers: 0,
-        peakViewers: 0,
-        averageViewers: 0, // totalViews: 0,
-        duration: 0,
-        superChatAmount: 0,
-        superChatCount: 0,
-        pollVotes: 0,
-        qaQuestions: 0,
-        streamHealth: 'excellent' as const,
-        bitrate: 5000,
-        frameDrops: 0,
-        latency: 0,
-        likes: 0,
-        dislikes: 0,
-        // shareCount: 0, // removed - not in LiveStreamStats interface 0, // shares: 0,
-        chatMessages: 0,
-        superChatCount: 0,
-        revenue: 0,
-        watchTime: 0,
-        averageWatchTime: 0,
-        chatMessages: 0,
-        uniqueViewers: 0,
-      },
-      monetization: {
-        totalRevenue: 0,
-        superChatRevenue: 0,
-        adRevenue: 0,
-        membershipRevenue: 0,
-        donationRevenue: 0,
-        superChatCount: [],
-        // superChatEnabled: false, // removed - not in LiveStreamMonetization interface false,
-        // membershipEnabled: false, // removed - not in LiveStreamMonetization interface false,
-        adsEnabled: false,
-        sponsorshipEnabled: false,
-        merchandiseEnabled: false,
-        donationGoal: null,
-        revenueSharing: {
-          platform: 70,
-          creator: 30,
+  const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
+    if (stream) {
+      setStream(prev => prev ? {
+        ...prev,
+        stats: { ...prev.stats, ...newStats },
+      } : null);
+    }
+  };
+
+  const addSuperChat = (amount: number, message: string, username: string) => {
+    if (stream) {
+      const superChat = {
+        id: Date.now().toString(),
+        username,
+        amount,
+        currency: 'USD',
+        message,
+        timestamp: new Date(),
+        color: '#FF5722',
+        duration: 5000,
+      };
+
+      setStream(prev => prev ? {
+        ...prev,
+        monetization: {
+          ...prev.monetization,
+          superChats: [...prev.monetization.superChats, superChat],
+          superChatRevenue: prev.monetization.superChatRevenue + amount,
+          totalRevenue: prev.monetization.totalRevenue + amount,
         },
-      },
-    };
-    return newStream;
-  };
-
-  const startStream = async (streamId: string) => {
-    // Placeholder implementation
-    console.log('Starting stream:', streamId);
-  };
-
-  const endStream = async (streamId: string) => {
-    // Placeholder implementation
-    console.log('Ending stream:', streamId);
-    return {
-      id: `replay_${Date.now()}`,
-      title: `Stream Replay - ${new Date().toLocaleDateString()}`,
-      url: `https://example.com/replay/${streamId}`,
-      duration: '00:00:00',
-      createdAt: new Date().toISOString(),
-    };
+        stats: {
+          ...prev.stats,
+          superChatCount: prev.stats.superChatCount + 1,
+          superChatAmount: prev.stats.superChatAmount + amount,
+        },
+      } : null);
+    }
   };
 
   return {
     stream,
     loading,
     error,
-    refetch: () => {},
+    updateStreamStats,
+    addSuperChat,
+  };
+}
+
+export function useCreateLiveStream() {
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const createStream = async (streamData: Partial<LiveStream>): Promise<LiveStream | null> => {
+    setCreating(true);
+    setError(null);
+
+    try {
+      // Placeholder implementation
+      const newStream: LiveStream = {
+        id: Date.now().toString(),
+        title: streamData.title || 'New Live Stream',
+        description: streamData.description || '',
+        thumbnailUrl: streamData.thumbnailUrl || '',
+        streamUrl: '',
+        streamKey: Math.random().toString(36).substring(7),
+        category: streamData.category || 'General',
+        tags: streamData.tags || [],
+        visibility: streamData.visibility || 'public',
+        status: 'scheduled',
+        creatorId: 'creator1',
+        creatorName: 'Creator',
+        creatorAvatar: '',
+        settings: {
+          enableChat: true,
+          enableSuperChat: true,
+          enablePolls: true,
+          enableQA: true,
+          chatMode: 'live',
+          slowMode: 0,
+          subscribersOnly: false,
+          moderationLevel: 'moderate',
+          quality: '1080p',
+          bitrate: 5000,
+          frameRate: 60,
+          enableRecording: true,
+          enableMultiplatform: false,
+          platforms: [],
+        },
+        stats: {
+          viewers: 0,
+          peakViewers: 0,
+          averageViewers: 0,
+          duration: 0,
+          likes: 0,
+          dislikes: 0,
+          chatMessages: 0,
+          superChatAmount: 0,
+          superChatCount: 0,
+          pollVotes: 0,
+          qaQuestions: 0,
+          streamHealth: 'excellent' as const,
+          bitrate: 5000,
+          frameDrops: 0,
+          latency: 0,
+        },
+        monetization: {
+          totalRevenue: 0,
+          superChatRevenue: 0,
+          adRevenue: 0,
+          membershipRevenue: 0,
+          donationRevenue: 0,
+          superChats: [],
+        },
+      };
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setCreating(false);
+      return newStream;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create stream');
+      setCreating(false);
+      return null;
+    }
+  };
+
+  return {
     createStream,
-    startStream,
-    endStream,
+    creating,
+    error,
   };
 }

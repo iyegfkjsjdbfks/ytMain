@@ -206,6 +206,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
     <div ref={containerRef} className={`w-full ${className}`}>
       <List
         height={containerHeight}
+        width="100%"
         itemCount={videos.length}
         itemSize={140}
         itemData={listData}

@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useMemo, type React } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import type { FC } from 'react';
 
 import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
 
@@ -52,7 +53,7 @@ const BENEFITS = [
   },
 ];
 
-const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
+const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
   onDismiss,
   onInstall,
   className = '',
@@ -63,7 +64,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
   delayMs = 3000,
   theme = 'auto',
 }) => {
-  const { isInstallable, isInstalled, isOnline, installApp, updateAvailable, updateApp } = usePWA();
+  const { canInstall, isInstalled, isOnline, installPWA, updateAvailable, installUpdate } = usePWA();
 
   const [state, setState] = useState<BannerState>({
     isVisible: false,
@@ -83,13 +84,13 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
 
   // Check if banner should be shown
   const shouldShowBanner = useCallback(() => {
-    if (!autoShow || isInstalled || !isInstallable || state.isDismissed) {
+    if (!autoShow || isInstalled || !canInstall || state.isDismissed) {
       return false;
     }
 
     // Check visit count and dismissal status
     return PWAUtils.shouldShowInstallPrompt();
-  }, [autoShow, isInstalled, isInstallable, state.isDismissed]);
+  }, [autoShow, isInstalled, canInstall, state.isDismissed]);
 
   // Initialize banner visibility
   useEffect(() => {
@@ -112,7 +113,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
     setState(prev => ({ ...prev, installProgress: 'installing' }));
 
     try {
-      await installApp();
+      await installPWA();
       setState(prev => ({ ...prev, installProgress: 'success', isVisible: false }));
       onInstall?.();
 
@@ -129,7 +130,7 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
         setState(prev => ({ ...prev, installProgress: 'idle' }));
       }, 3000);
     }
-  }, [installApp, onInstall, variant]);
+  }, [installPWA, onInstall, variant]);
 
   // Handle dismissal
   const handleDismiss = useCallback(() => {
@@ -149,9 +150,9 @@ const EnhancedPWAInstallBanner: React.FC<EnhancedPWAInstallBannerProps> = ({
 
   // Handle update
   const handleUpdate = useCallback(() => {
-    updateApp();
+    installUpdate();
     setState(prev => ({ ...prev, isVisible: false }));
-  }, [updateApp]);
+  }, [installUpdate]);
 
   // Toggle details view
   const toggleDetails = useCallback(() => {

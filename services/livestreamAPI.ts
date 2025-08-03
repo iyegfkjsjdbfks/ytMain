@@ -9,6 +9,7 @@ export interface LiveStreamConfig {
   category?: string;
   tags?: string[];
   visibility?: 'public' | 'private' | 'unlisted';
+  thumbnailUrl?: string;
 }
 
 export interface ScheduledStream {
@@ -37,33 +38,38 @@ class LiveStreamService {
       scheduledStartTime: config.scheduledStartTime || new Date().toISOString(),
       status: 'scheduled',
       createdAt: new Date().toISOString(),
+      category: config.category || 'General',
+      tags: config.tags || [],
+      visibility: config.visibility || 'public',
+      thumbnailUrl: config.thumbnailUrl || '',
+      reminderSet: false,
     };
 
     return stream;
   }
 
   async getScheduledStreams(): Promise<ScheduledStream[]> {
-    conditionalLogger.info('Fetching scheduled streams');
+    conditionalLogger.info('Getting scheduled streams');
 
     // Placeholder implementation
     return [];
   }
 
-  async getStream(id: string): Promise<LiveStream | null> {
-    conditionalLogger.info('Fetching stream:', id);
+  async getStreamById(id: string): Promise<LiveStream | null> {
+    conditionalLogger.info('Getting stream by ID:', id);
 
-    // Placeholder implementation - return a mock LiveStream
+    // Placeholder implementation
     const stream: LiveStream = {
       id,
-      title: 'Sample Stream',
-      description: 'A sample stream',
+      title: 'Sample Live Stream',
+      description: 'A sample live stream',
       thumbnailUrl: '',
       streamUrl: '',
       streamKey: 'key123',
       category: 'General',
       tags: [],
       visibility: 'public',
-      status: 'scheduled',
+      status: 'live',
       creatorId: 'creator1',
       creatorName: 'Creator',
       creatorAvatar: '',
@@ -74,39 +80,39 @@ class LiveStreamService {
         enableQA: false,
         chatMode: 'live',
         slowMode: 0,
-        subscriberOnly: false,
-        moderatorOnly: false,
-        allowedWords: [],
-        blockedWords: [],
-        maxMessageLength: 200,
+        subscribersOnly: false,
+        moderationLevel: 'moderate',
+        quality: '1080p',
+        bitrate: 5000,
+        frameRate: 60,
+        enableRecording: true,
+        enableMultiplatform: false,
+        platforms: [],
       },
       stats: {
-        viewerCount: 0,
+        viewers: 0,
         peakViewers: 0,
-        totalViews: 0,
+        averageViewers: 0,
+        duration: 0,
         likes: 0,
         dislikes: 0,
-        shares: 0,
-        comments: 0,
-        superChats: 0,
-        revenue: 0,
-        watchTime: 0,
-        averageWatchTime: 0,
         chatMessages: 0,
-        uniqueViewers: 0,
+        superChatAmount: 0,
+        superChatCount: 0,
+        pollVotes: 0,
+        qaQuestions: 0,
+        streamHealth: 'excellent',
+        bitrate: 5000,
+        frameDrops: 0,
+        latency: 0,
       },
       monetization: {
-        enabled: false,
-        superChatEnabled: false,
-        membershipEnabled: false,
-        adsEnabled: false,
-        sponsorshipEnabled: false,
-        merchandiseEnabled: false,
-        donationGoal: null,
-        revenueSharing: {
-          platform: 70,
-          creator: 30,
-        },
+        totalRevenue: 0,
+        superChatRevenue: 0,
+        adRevenue: 0,
+        membershipRevenue: 0,
+        donationRevenue: 0,
+        superChats: [],
       },
     };
 
@@ -114,16 +120,21 @@ class LiveStreamService {
   }
 
   async updateStream(id: string, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
-    conditionalLogger.info('Updating stream:', id, config);
+    conditionalLogger.info('Updating stream', { id, config });
 
     // Placeholder implementation
     const stream: ScheduledStream = {
-      id,
+      id: `stream_${Date.now()}`,
       title: config.title || 'Updated Stream',
       description: config.description || '',
       scheduledStartTime: config.scheduledStartTime || new Date().toISOString(),
       status: 'scheduled',
       createdAt: new Date().toISOString(),
+      category: config.category || 'General',
+      tags: config.tags || [],
+      visibility: config.visibility || 'public',
+      thumbnailUrl: config.thumbnailUrl || '',
+      reminderSet: false,
     };
 
     return stream;
@@ -131,15 +142,13 @@ class LiveStreamService {
 
   async deleteStream(id: string): Promise<void> {
     conditionalLogger.info('Deleting stream:', id);
-
     // Placeholder implementation
-    return Promise.resolve();
   }
 
   async startStream(id: string): Promise<LiveStream> {
     conditionalLogger.info('Starting stream:', id);
 
-    // Placeholder implementation - return a mock LiveStream
+    // Placeholder implementation
     const stream: LiveStream = {
       id,
       title: 'Live Stream',
@@ -161,97 +170,59 @@ class LiveStreamService {
         enableQA: false,
         chatMode: 'live',
         slowMode: 0,
-        subscriberOnly: false,
-        moderatorOnly: false,
-        allowedWords: [],
-        blockedWords: [],
-        maxMessageLength: 200,
+        subscribersOnly: false,
+        moderationLevel: 'moderate',
+        quality: '1080p',
+        bitrate: 5000,
+        frameRate: 60,
+        enableRecording: true,
+        enableMultiplatform: false,
+        platforms: [],
       },
       stats: {
-        viewerCount: 0,
+        viewers: 0,
         peakViewers: 0,
-        totalViews: 0,
+        averageViewers: 0,
+        duration: 0,
         likes: 0,
         dislikes: 0,
-        shares: 0,
-        comments: 0,
-        superChats: 0,
-        revenue: 0,
-        watchTime: 0,
-        averageWatchTime: 0,
         chatMessages: 0,
-        uniqueViewers: 0,
+        superChatAmount: 0,
+        superChatCount: 0,
+        pollVotes: 0,
+        qaQuestions: 0,
+        streamHealth: 'excellent',
+        bitrate: 5000,
+        frameDrops: 0,
+        latency: 0,
       },
       monetization: {
-        enabled: false,
-        superChatEnabled: false,
-        membershipEnabled: false,
-        adsEnabled: false,
-        sponsorshipEnabled: false,
-        merchandiseEnabled: false,
-        donationGoal: null,
-        revenueSharing: {
-          platform: 70,
-          creator: 30,
-        },
+        totalRevenue: 0,
+        superChatRevenue: 0,
+        adRevenue: 0,
+        membershipRevenue: 0,
+        donationRevenue: 0,
+        superChats: [],
       },
     };
 
     return stream;
   }
 
-  async stopStream(id: string): Promise<void> {
-    conditionalLogger.info('Stopping stream:', id);
-
+  async endStream(id: string): Promise<void> {
+    conditionalLogger.info('Ending stream:', id);
     // Placeholder implementation
-    return Promise.resolve();
   }
 
   async getStreamStats(id: string): Promise<any> {
     conditionalLogger.info('Getting stream stats:', id);
 
-    // Placeholder implementation
     return {
-      viewerCount: 0,
-      peakViewers: 0,
-      totalViews: 0,
-      likes: 0,
-      dislikes: 0,
-      shares: 0,
-      comments: 0,
+      viewers: 0,
+      duration: 0,
+      chatMessages: 0,
     };
   }
 }
 
-const liveStreamServiceInstance = new LiveStreamService();
-
-export const liveStreamService = {
-  streams: {
-    createStream: liveStreamServiceInstance.createStream.bind(liveStreamServiceInstance),
-    getStream: liveStreamServiceInstance.getStream.bind(liveStreamServiceInstance),
-    updateStream: liveStreamServiceInstance.updateStream.bind(liveStreamServiceInstance),
-    deleteStream: liveStreamServiceInstance.deleteStream.bind(liveStreamServiceInstance),
-    startStream: liveStreamServiceInstance.startStream.bind(liveStreamServiceInstance),
-    stopStream: liveStreamServiceInstance.stopStream.bind(liveStreamServiceInstance),
-    getStreamStats: liveStreamServiceInstance.getStreamStats.bind(liveStreamServiceInstance),
-  },
-  scheduling: {
-    getScheduledStreams: liveStreamServiceInstance.getScheduledStreams.bind(liveStreamServiceInstance),
-  },
-  chat: {
-    getChatMessages: async (streamId: string) => {
-      conditionalLogger.info('Getting chat messages for stream:', streamId);
-      return [];
-    },
-    sendSuperChat: async (streamId: string, message: string, amount: number) => {
-      conditionalLogger.info('Sending super chat:', { streamId, message, amount });
-      return { success: true };
-    },
-  },
-  // Legacy direct access methods for backward compatibility
-  createStream: liveStreamServiceInstance.createStream.bind(liveStreamServiceInstance),
-  getStream: liveStreamServiceInstance.getStream.bind(liveStreamServiceInstance),
-  getScheduledStreams: liveStreamServiceInstance.getScheduledStreams.bind(liveStreamServiceInstance),
-  startStream: liveStreamServiceInstance.startStream.bind(liveStreamServiceInstance),
-  stopStream: liveStreamServiceInstance.stopStream.bind(liveStreamServiceInstance),
-};
+export const liveStreamService = new LiveStreamService();
