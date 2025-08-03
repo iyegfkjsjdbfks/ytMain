@@ -161,7 +161,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       }
 
       const newStream = await createStream(streamData);
-      
+
       if (!newStream) {
         console.error('Failed to create stream');
         return;
@@ -206,7 +206,7 @@ return;
       setIsPreviewing(false);
 
       // Show stream summary
-      alert(`Stream ended successfully!`);
+      alert('Stream ended successfully!');
     } catch (error) {
       logger.error('Failed to end stream:', error);
     }

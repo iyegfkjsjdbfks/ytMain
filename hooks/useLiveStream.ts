@@ -193,8 +193,10 @@ export function useLiveStream(streamId?: string) {
   };
 
   const startStream = async (): Promise<boolean> => {
-    if (!stream) return false;
-    
+    if (!stream) {
+return false;
+}
+
     setLoading(true);
     setError(null);
 
@@ -211,8 +213,10 @@ export function useLiveStream(streamId?: string) {
   };
 
   const endStream = async (): Promise<boolean> => {
-    if (!stream) return false;
-    
+    if (!stream) {
+return false;
+}
+
     setLoading(true);
     setError(null);
 

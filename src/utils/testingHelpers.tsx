@@ -72,7 +72,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   title: 'Test Video Title',
   description: 'Test video description',
   thumbnailUrl: 'https://example.com/thumbnail.jpg',
-  duration: 300,
+  duration: '300',
   channelId: 'test-channel-1',
   channelName: 'Test Channel',
   channelAvatarUrl: 'https://example.com/avatar.jpg',
@@ -134,8 +134,6 @@ export const createMockComment = (overrides: Partial<Comment> = {}): Comment => 
   likeCount: 5,
   publishedAt: '2024-01-01T00:00:00Z',
   updatedAt: '2024-01-01T00:00:00Z',
-  isHearted: false,
-  replies: [],
   ...overrides,
 });
 
@@ -151,7 +149,7 @@ export const measureRenderTime = async (renderFn: () => void): Promise<number> =
 };
 
 // Accessibility testing helpers
-export const checkAccessibility = async (container: HTMLElement) => {
+export const checkAccessibility = async (_container: HTMLElement) => {
   const axeCore = await import('@axe-core/react');
   const React = await import('react');
   const ReactDOM = await import('react-dom');

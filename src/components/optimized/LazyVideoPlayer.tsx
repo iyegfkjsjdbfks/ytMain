@@ -43,9 +43,15 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(({
           video={video}
           autoplay={autoplay}
           onStateChange={(state: number) => {
-            if (state === 1) onPlay?.(); // Playing
-            if (state === 2) onPause?.(); // Paused
-            if (state === 0) onEnded?.(); // Ended
+            if (state === 1) {
+onPlay?.();
+} // Playing
+            if (state === 2) {
+onPause?.();
+} // Paused
+            if (state === 0) {
+onEnded?.();
+} // Ended
           }}
           {...(className && { className })}
         />

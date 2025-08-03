@@ -271,5 +271,5 @@ liveStreamService.streams = {
 
   async getStreamStats(id: string): Promise<any> {
     return liveStreamService.getStreamStats(id);
-  }
+  },
 };

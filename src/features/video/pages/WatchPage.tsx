@@ -432,8 +432,8 @@ const WatchPage: React.FC = () => {
                   video={{
                     ...video,
                     viewCount: video.views,
-                    duration: typeof video.duration === 'string' ? 
-                      parseInt(video.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0).toString()) : 
+                    duration: typeof video.duration === 'string' ?
+                      parseInt(video.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0).toString()) :
                       (video.duration as number || 0),
                   } as unknown as Video}
                   autoplay={true}
