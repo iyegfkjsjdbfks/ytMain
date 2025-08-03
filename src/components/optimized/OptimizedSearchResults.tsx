@@ -142,6 +142,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
         resizeObserver.disconnect();
       };
     }
+    return undefined;
   }, []);
 
   // Intersection observer for load more

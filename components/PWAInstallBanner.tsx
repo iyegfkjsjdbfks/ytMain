@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 
 import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
@@ -9,7 +8,7 @@ interface PWAInstallBannerProps {
   className?: string;
 }
 
-const PWAInstallBanner: React.FC<PWAInstallBannerProps> = ({ className = '' }) => {
+const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
   const [showBanner, setShowBanner] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalling, setIsInstalling] = useState(false);

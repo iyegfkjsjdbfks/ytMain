@@ -42,19 +42,12 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(({
         <YouTubePlayer
           video={video}
           autoplay={autoplay}
-          onReady={onReady}
-          onStateChange={(state) => {
-            if (state === 1) {
-onPlay?.();
-} // Playing
-            if (state === 2) {
-onPause?.();
-} // Paused
-            if (state === 0) {
-onEnded?.();
-} // Ended
+          onStateChange={(state: number) => {
+            if (state === 1) onPlay?.(); // Playing
+            if (state === 2) onPause?.(); // Paused
+            if (state === 0) onEnded?.(); // Ended
           }}
-          className={className}
+          {...(className && { className })}
         />
       ) : (
         <VideoPlayer
@@ -63,11 +56,11 @@ onEnded?.();
           poster={video.thumbnailUrl}
           title={video.title}
           autoplay={autoplay}
-          onReady={onReady}
-          onPlay={onPlay}
-          onPause={onPause}
-          onEnded={onEnded}
-          className={className}
+          {...(onReady && { onReady })}
+          {...(onPlay && { onPlay })}
+          {...(onPause && { onPause })}
+          {...(onEnded && { onEnded })}
+          className={className || ''}
         />
       )}
     </Suspense>

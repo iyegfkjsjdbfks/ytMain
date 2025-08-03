@@ -1,4 +1,5 @@
-import { useCallback, type React } from 'react';
+import { useCallback } from 'react';
+import type { FC } from 'react';
 
 import { DataFetchErrorBoundary } from '../../../components/ErrorBoundaries';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
@@ -14,7 +15,7 @@ interface ProtectedStreamAnalyticsDashboardProps {
  * StreamAnalyticsDashboard wrapped with specialized error boundary
  * Provides enhanced error handling for analytics data fetching
  */
-const ProtectedStreamAnalyticsDashboard: React.FC<ProtectedStreamAnalyticsDashboardProps> = ({
+const ProtectedStreamAnalyticsDashboard: FC<ProtectedStreamAnalyticsDashboardProps> = ({
   streamId,
   className,
 }) => {

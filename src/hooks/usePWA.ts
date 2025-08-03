@@ -269,20 +269,20 @@ export const usePWA = (): UsePWAReturn => {
     notifications.permission,
   ]);
 
-  const dismissInstallPrompt = (): void => {
-    installPrompt.dismissPrompt(false);
+  // const dismissInstallPrompt = (): void => {
+  //   installPrompt.dismissPrompt(false);
 
-    // Don't show again for this session
-    sessionStorage.setItem('pwa-install-dismissed', 'true');
-  };
+  //   // Don't show again for this session
+  //   sessionStorage.setItem('pwa-install-dismissed', 'true');
+  // };
 
-  const updateApp = async (): Promise<void> => {
-    try {
-      await pwaUpdates.installUpdate();
-    } catch (error) {
-      conditionalLogger.error('Failed to update app', { error }, 'usePWA');
-    }
-  };
+  // const updateApp = async (): Promise<void> => {
+  //   try {
+  //     await pwaUpdates.installUpdate();
+  //   } catch (error) {
+  //     conditionalLogger.error('Failed to update app', { error }, 'usePWA');
+  //   }
+  // };
 
   // Check if install prompt was previously dismissed
   useEffect(() => {
@@ -360,11 +360,10 @@ export const showNotification = (title: string, options?: NotificationOptions): 
     const defaultOptions: NotificationOptions = {
       icon: '/icons/icon-192x192.svg',
       badge: '/icons/badge-72x72.svg',
-      vibrate: [200, 100, 200],
       ...options,
     };
 
-    const notification = new Notification(title, defaultOptions);
+    new Notification(title, defaultOptions);
   }
 };
 

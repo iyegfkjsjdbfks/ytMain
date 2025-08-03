@@ -161,11 +161,16 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       }
 
       const newStream = await createStream(streamData);
+      
+      if (!newStream) {
+        console.error('Failed to create stream');
+        return;
+      }
 
       setCurrentStream(newStream);
 
       // Start streaming
-      await startStream(newStream.id);
+      await startStream();
       setIsStreaming(true);
 
       // Enable multiplatform if configured
@@ -190,7 +195,7 @@ return;
 }
 
     try {
-      const replay = await endStream(currentStream.id);
+      await endStream();
       setIsStreaming(false);
       setCurrentStream(null);
 
@@ -201,7 +206,7 @@ return;
       setIsPreviewing(false);
 
       // Show stream summary
-      alert(`Stream ended! Replay saved: ${replay.title}`);
+      alert(`Stream ended successfully!`);
     } catch (error) {
       logger.error('Failed to end stream:', error);
     }
