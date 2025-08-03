@@ -27,6 +27,8 @@ export interface ScheduledStream {
 }
 
 class LiveStreamService {
+  streams: any; // Will be assigned after class definition
+
   async createStream(config: LiveStreamConfig): Promise<ScheduledStream> {
     conditionalLogger.info('Creating scheduled stream:', config);
 
@@ -214,6 +216,12 @@ class LiveStreamService {
     // Placeholder implementation
   }
 
+  async stopStream(id: string): Promise<void> {
+    conditionalLogger.info('Stopping stream:', id);
+    // Placeholder implementation - alias for endStream
+    return this.endStream(id);
+  }
+
   async getStreamStats(id: string): Promise<any> {
     conditionalLogger.info('Getting stream stats:', id);
 
@@ -226,3 +234,42 @@ class LiveStreamService {
 }
 
 export const liveStreamService = new LiveStreamService();
+
+// Add streams object for API compatibility
+liveStreamService.streams = {
+  async createStream(config: LiveStreamConfig): Promise<ScheduledStream> {
+    return liveStreamService.createStream(config);
+  },
+
+  async getScheduledStreams(): Promise<ScheduledStream[]> {
+    return liveStreamService.getScheduledStreams();
+  },
+
+  async getStream(id: string): Promise<LiveStream | null> {
+    return liveStreamService.getStreamById(id);
+  },
+
+  async updateStream(id: string, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
+    return liveStreamService.updateStream(id, config);
+  },
+
+  async deleteStream(id: string): Promise<void> {
+    return liveStreamService.deleteStream(id);
+  },
+
+  async startStream(id: string): Promise<LiveStream> {
+    return liveStreamService.startStream(id);
+  },
+
+  async stopStream(id: string): Promise<void> {
+    return liveStreamService.stopStream(id);
+  },
+
+  async endStream(id: string): Promise<void> {
+    return liveStreamService.endStream(id);
+  },
+
+  async getStreamStats(id: string): Promise<any> {
+    return liveStreamService.getStreamStats(id);
+  }
+};

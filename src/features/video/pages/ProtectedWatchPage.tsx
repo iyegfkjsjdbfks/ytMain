@@ -1,4 +1,5 @@
-import { useCallback, type React } from 'react';
+import { useCallback } from 'react';
+import type { FC } from 'react';
 
 import { useParams, useSearchParams } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ import WatchPage from './WatchPage';
  * WatchPage wrapped with specialized error boundary
  * Provides enhanced error handling for video data fetching and recommendations
  */
-const ProtectedWatchPage: React.FC = () => {
+const ProtectedWatchPage: FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
   const [searchParams] = useSearchParams();
   const videoId = paramVideoId || searchParams.get('v') || '';

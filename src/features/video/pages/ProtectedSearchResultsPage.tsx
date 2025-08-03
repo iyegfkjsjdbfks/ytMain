@@ -1,4 +1,5 @@
-import { useCallback, type React } from 'react';
+import { useCallback } from 'react';
+import type { FC } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ import SearchResultsPage from './SearchResultsPage';
  * SearchResultsPage wrapped with specialized error boundary
  * Provides enhanced error handling for search data fetching
  */
-const ProtectedSearchResultsPage: React.FC = () => {
+const ProtectedSearchResultsPage: FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
 

@@ -1,4 +1,5 @@
-import { useCallback, type React } from 'react';
+import { useCallback } from 'react';
+import type { FC } from 'react';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
@@ -13,7 +14,7 @@ interface ProtectedVideoPlayerProps extends VideoPlayerProps {
  * VideoPlayer wrapped with specialized error boundary
  * Provides enhanced error handling for video playback
  */
-const ProtectedVideoPlayer: React.FC<ProtectedVideoPlayerProps> = ({
+const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
   videoId,
   src,
   poster,
