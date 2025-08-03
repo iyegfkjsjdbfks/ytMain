@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import type { FC } from 'react';
+import { useState, useEffect, type FC } from 'react';
 
 import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 

@@ -289,7 +289,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
     navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange);
 
     // Register the service worker
-    void registerServiceWorker();
+    registerServiceWorker().catch(console.error);
 
     return () => {
       navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);

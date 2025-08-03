@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import type { FC, ReactNode } from 'react';
+import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
 
 import {
   ChartBarIcon,

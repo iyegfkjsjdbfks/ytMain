@@ -361,7 +361,7 @@ return '0:00';
                             if (isPlaying) {
                               videoRef.current.pause();
                             } else {
-                              void videoRef.current.play();
+                              videoRef.current.play();
                             }
                             setIsPlaying(!isPlaying);
                           }

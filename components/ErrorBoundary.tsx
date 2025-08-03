@@ -142,7 +142,7 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
 
     // Report error to external service
-    void errorReporter.reportError(error, errorInfo);
+    errorReporter.reportError(error, errorInfo).catch(console.error);
 
     // Call custom error handler if provided
     this.props.onError?.(error, errorInfo);

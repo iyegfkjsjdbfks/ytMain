@@ -247,11 +247,11 @@ export function createEnhancedStore<T>(
   stateCreator: StateCreator<T, [], [], T>,
   config: StoreConfig,
 ) {
-  let enhancedCreator: StateCreator<T, [], [], T> = stateCreator;
+  let enhancedCreator: any = stateCreator;
 
   // Apply immer middleware
   if (config.immer) {
-    enhancedCreator = immer(enhancedCreator) as StateCreator<T, [], [], T>;
+    enhancedCreator = immer(enhancedCreator);
   }
 
   // Apply performance monitoring
@@ -261,7 +261,7 @@ export function createEnhancedStore<T>(
 
   // Apply subscriptions middleware
   if (config.subscriptions) {
-    enhancedCreator = subscribeWithSelector(enhancedCreator) as StateCreator<T, [], [], T>;
+    enhancedCreator = subscribeWithSelector(enhancedCreator);
   }
 
   // Apply persistence middleware
@@ -272,18 +272,26 @@ export function createEnhancedStore<T>(
       ? sessionStorage
       : localStorage;
 
-    enhancedCreator = persist(enhancedCreator, {
+    const persistOptions: any = {
       name: config.name,
       storage: storage as any, // Type assertion for storage compatibility
-      partialize: config.persist.partialize,
       version: config.persist.version || 1,
-      migrate: config.persist.migrate,
-    }) as StateCreator<T, [], [], T>;
+    };
+
+    if (config.persist.partialize) {
+      persistOptions.partialize = config.persist.partialize;
+    }
+
+    if (config.persist.migrate) {
+      persistOptions.migrate = config.persist.migrate;
+    }
+
+    enhancedCreator = persist(enhancedCreator, persistOptions);
   }
 
   // Apply devtools middleware
   if (config.devtools && import.meta.env.DEV) {
-    enhancedCreator = devtools(enhancedCreator, { name: config.name }) as StateCreator<T, [], [], T>;
+    enhancedCreator = devtools(enhancedCreator, { name: config.name });
   }
 
   return create(enhancedCreator);

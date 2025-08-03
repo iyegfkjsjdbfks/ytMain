@@ -349,8 +349,8 @@ return 'degraded';
       }
 
       // Calculate quality score from available metrics
-      const qualityScore = Math.max(0, 100 - 
-        (metrics.complexity * 0.2) - 
+      const qualityScore = Math.max(0, 100 -
+        (metrics.complexity * 0.2) -
         (metrics.technicalDebt * 0.3) -
         (metrics.duplicateCode * 0.2) -
         (metrics.securityVulnerabilities * 0.3));
@@ -374,7 +374,7 @@ return 'degraded';
 
       // Check for any emergency rollbacks in the last hour
       const recentRollbacks = allFlags
-        .filter(flag => flag.enabled && 
+        .filter(flag => flag.enabled &&
                 Date.now() - flag.metadata.createdAt < 3600000).length;
 
       if (recentRollbacks > 2) {
@@ -446,12 +446,12 @@ return 'degraded';
       const qualityMetrics = intelligentCodeMonitor.getLatestMetrics();
       if (qualityMetrics) {
         // Calculate quality score from available metrics
-        const qualityScore = Math.max(0, 100 - 
-          (qualityMetrics.complexity * 0.2) - 
+        const qualityScore = Math.max(0, 100 -
+          (qualityMetrics.complexity * 0.2) -
           (qualityMetrics.technicalDebt * 0.3) -
           (qualityMetrics.duplicateCode * 0.2) -
           (qualityMetrics.securityVulnerabilities * 0.3));
-          
+
         this.metrics.quality = {
           score: qualityScore,
           coverage: qualityMetrics.testCoverage,
