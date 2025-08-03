@@ -303,7 +303,18 @@ export class ApiService {
         }
 
         for (const interceptor of this.errorInterceptors) {
-          interceptedError = await interceptor(interceptedError as any);
+          const result = await interceptor(interceptedError as any);
+          if (result instanceof Error) {
+            interceptedError = result;
+          } else {
+            // If interceptor returns non-Error, create a proper Error with name
+            interceptedError = this.createError(
+              result?.message || 'Intercepted error',
+              (result as any)?.status || 0,
+              (result as any)?.code || 'INTERCEPTED_ERROR',
+              result
+            );
+          }
         }
 
         // Track error
@@ -341,7 +352,7 @@ export class ApiService {
     const requestOptions: RequestInit = {
       method,
       headers: requestHeaders,
-      signal: config.signal,
+      signal: config.signal || null,
     };
 
     // Add body for non-GET requests
@@ -366,7 +377,7 @@ export class ApiService {
 
     requestOptions.signal = combinedSignal;
 
-    let lastError: Error;
+    let lastError: Error = new Error('Request failed');
 
     // Retry logic
     for (let attempt = 0; attempt <= retries; attempt++) {
@@ -424,7 +435,7 @@ export class ApiService {
         }
 
         // Don't retry on certain errors
-        if (lastError.status && (lastError.status < 500 || lastError.status === 501)) {
+        if ((lastError as any).status && ((lastError as any).status < 500 || (lastError as any).status === 501)) {
           throw lastError;
         }
 
@@ -476,6 +487,7 @@ export class ApiService {
     details?: any,
   ): Error {
     const error = new Error(message);
+    error.name = 'ApiError';
     (error as any).status = status;
     (error as any).code = code;
     (error as any).details = details;
