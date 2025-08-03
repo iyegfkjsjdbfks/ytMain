@@ -47,7 +47,9 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
       }
     };
 
-    void fetchWatchHistory();
+    fetchWatchHistory().catch(() => {
+      // Handle promise rejection silently
+    });
   }, [maxVideos]);
 
   if (loading) {

@@ -131,7 +131,9 @@ export class YouTubePlayer {
       };
     } = {},
   ) {
-    void this.initPlayer();
+    this.initPlayer().catch(() => {
+      // Handle initialization failure silently
+    });
   }
 
   private loadYouTubeAPI(): Promise<void> {

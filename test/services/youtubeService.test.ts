@@ -57,30 +57,6 @@ const mockYouTubeVideoResponse = {
   ],
 };
 
-const mockYouTubeChannelResponse = {
-  items: [
-    {
-      id: 'test-channel-1',
-      snippet: {
-        title: 'Test Channel 1',
-        description: 'Test channel description',
-        thumbnails: {
-          medium: { url: 'https://example.com/channel1.jpg' },
-          high: { url: 'https://example.com/channel1_hq.jpg' },
-        },
-        publishedAt: '2020-01-01T00:00:00Z',
-        customUrl: '@testchannel1',
-        country: 'US',
-      },
-      statistics: {
-        subscriberCount: '10000',
-        videoCount: '50',
-        viewCount: '500000',
-      },
-    },
-  ],
-};
-
 describe('YouTubeService', () => {
   beforeEach(() => {
     vi.clearAllMocks();

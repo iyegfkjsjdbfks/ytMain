@@ -360,8 +360,8 @@ return;
 
     // Random threat generation for demonstration
     if (Math.random() < 0.1) { // 10% chance of detecting a threat
-      const threatType = threatTypes[Math.floor(Math.random() * threatTypes.length)];
-      const severity = severities[Math.floor(Math.random() * severities.length)];
+      const threatType = threatTypes[Math.floor(Math.random() * threatTypes.length)] ?? 'xss';
+      const severity = severities[Math.floor(Math.random() * severities.length)] ?? 'medium';
 
       const threat: SecurityThreat = {
         id: `threat-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -419,7 +419,7 @@ return;
       };
 
       console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
-      advancedAPM.recordMetric('security-response', 1, { action, success: response.success });
+      advancedAPM.recordMetric('security-response', 1, { action, success: response.success.toString() });
 
       return response;
 
@@ -476,7 +476,7 @@ return;
 
     for (const dep of dependencies) {
       if (Math.random() < 0.05) { // 5% chance of vulnerability per dependency
-        const severity = severities[Math.floor(Math.random() * severities.length)];
+        const severity = severities[Math.floor(Math.random() * severities.length)] ?? 'medium';
 
         const vulnerability: VulnerabilityReport = {
           id: `vuln-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -515,7 +515,9 @@ return;
           const result = await this.executeComplianceCheck(check);
 
           check.status = result.status;
-          check.evidence = result.evidence;
+          if (result.evidence !== undefined) {
+            check.evidence = result.evidence;
+          }
           check.lastChecked = Date.now();
           check.nextCheck = Date.now() + (check.standard === 'GDPR' ? 86400000 : 604800000);
 
@@ -542,7 +544,7 @@ return;
   /**
    * Execute compliance check (simulated)
    */
-  private async executeComplianceCheck(check: ComplianceCheck): Promise<{
+  private async executeComplianceCheck(_check: ComplianceCheck): Promise<{
     status: ComplianceCheck['status'];
     evidence?: string;
   }> {
@@ -550,12 +552,20 @@ return;
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const statuses: Array<ComplianceCheck['status']> = ['compliant', 'non-compliant', 'partial'];
-    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const status = statuses[Math.floor(Math.random() * statuses.length)] ?? 'partial';
 
-    return {
+    const result: {
+      status: ComplianceCheck['status'];
+      evidence?: string;
+    } = {
       status,
-      evidence: status === 'compliant' ? 'Automated verification passed' : undefined,
     };
+
+    if (status === 'compliant') {
+      result.evidence = 'Automated verification passed';
+    }
+
+    return result;
   }
 
   /**
@@ -698,7 +708,9 @@ return;
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.acknowledged = true;
-      alert.assignee = assignee;
+      if (assignee !== undefined) {
+        alert.assignee = assignee;
+      }
 
       this.logSecurityEvent('alert-acknowledged', {
         alertId,

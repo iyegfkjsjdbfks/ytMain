@@ -7,11 +7,13 @@ export const worker = setupWorker(...handlers);
 
 // Start the worker in development mode
 if (import.meta.env.DEV && import.meta.env.VITE_ENABLE_MSW === 'true') {
-  void worker.start({
+  worker.start({
     onUnhandledRequest: 'warn',
     serviceWorker: {
       url: '/mockServiceWorker.js',
     },
+  }).catch(() => {
+    // Handle MSW start failure silently
   });
 }
 

@@ -231,7 +231,9 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
   // Use stable dependencies to prevent infinite re-renders
   useEffect(() => {
-    void generateRecommendations();
+    generateRecommendations().catch(() => {
+      // Handle promise rejection silently
+    });
   }, [generateRecommendations]);
 
   const handleVideoClick = useCallback((video: Video) => {

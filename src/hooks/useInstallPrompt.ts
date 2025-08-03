@@ -203,7 +203,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
           badge: '/icons/badge-72x72.svg',
         });
         // Notification will auto-close, no need to manage it further
-        void notification;
+        notification.addEventListener('click', () => notification.close());
       }
     };
 
