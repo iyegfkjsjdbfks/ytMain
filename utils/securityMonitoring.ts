@@ -560,11 +560,11 @@ return;
     } = {
       status,
     };
-    
+
     if (status === 'compliant') {
       result.evidence = 'Automated verification passed';
     }
-    
+
     return result;
   }
 

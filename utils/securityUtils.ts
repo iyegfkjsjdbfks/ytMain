@@ -585,7 +585,7 @@ continue;
 
     document.cookie.split(';').forEach(cookie => {
       const [name] = cookie.trim().split('=');
-      
+
       if (!name) {
         return;
       }

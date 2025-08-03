@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -52,7 +53,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: any) => (
   </div>
 );
 
-const CommentSection = ({ videoId, comments, onAddComment }: any) => {
+const CommentSection = ({ comments, onAddComment }: any) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -605,7 +606,6 @@ describe('Integration Tests', () => {
       Object.defineProperty(window, 'innerWidth', { value: 375 });
       Object.defineProperty(window, 'innerHeight', { value: 667 });
 
-      const user = userEvent.setup();
       customRender(<VideoPage />);
 
       await waitFor(() => {
@@ -626,7 +626,7 @@ describe('Integration Tests', () => {
 
     it('should handle slow network conditions', async () => {
       // Mock slow network
-      global.fetch = vi.fn().mockImplementation(async (url) => {
+      global.fetch = vi.fn().mockImplementation(async () => {
         await testUtils.simulateNetworkDelay(2000); // 2 second delay
         return {
           ok: true,
