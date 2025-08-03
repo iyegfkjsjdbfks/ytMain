@@ -158,7 +158,7 @@ return;
   /**
    * Create or update a feature flag
    */
-  createFlag(flag: Omit<FeatureFlag, 'metadata'>): void {
+  createFlag(flag: Omit<FeatureFlag, 'metadata'> & { metadata?: Partial<FeatureFlag['metadata']> }): void {
     const now = Date.now();
     const fullFlag: FeatureFlag = {
       ...flag,
@@ -410,8 +410,13 @@ return;
         const controlVariant = variants[0];
         const testVariant = variants[1];
 
-        const controlValue = variantResults[controlVariant].value;
-        const testValue = variantResults[testVariant].value;
+        const testData = variantResults[testVariant];
+        const controlData = variantResults[controlVariant];
+        
+        if (!testData || !controlData) return;
+
+        const controlValue = controlData.value;
+        const testValue = testData.value;
 
         const difference = Math.abs(testValue - controlValue);
         const relativeDifference = difference / controlValue;
@@ -424,10 +429,10 @@ return;
 
         results.push({
           flagId,
-          variant: testVariant,
+          variant: testVariant || 'unknown',
           metric,
           value: testValue,
-          sampleSize: variantResults[testVariant].sampleSize,
+          sampleSize: testData.sampleSize,
           confidence,
           significantDifference,
           winningVariant: significantDifference ? winningVariant : undefined,
@@ -560,12 +565,16 @@ return;
   private performEvaluation(flag: FeatureFlag, context: UserContext): FlagEvaluation {
     const evaluation: FlagEvaluation = {
       flagId: flag.id,
-      userId: context.userId,
       value: flag.defaultValue,
       timestamp: Date.now(),
       context,
       reason: 'default',
     };
+
+    // Add userId only if it exists
+    if (context.userId) {
+      evaluation.userId = context.userId;
+    }
 
     // Check if flag is enabled
     if (!flag.enabled) {
@@ -604,7 +613,9 @@ continue;
     const rolloutResult = this.applyRolloutStrategy(flag, context);
     if (rolloutResult.shouldApply) {
       evaluation.value = rolloutResult.value;
-      evaluation.variant = rolloutResult.variant;
+      if (rolloutResult.variant) {
+        evaluation.variant = rolloutResult.variant;
+      }
       evaluation.reason = rolloutResult.reason;
     }
 
@@ -727,6 +738,16 @@ continue;
   }
 
   private selectVariant(variants: FlagVariant[], hash: number): FlagVariant {
+    if (variants.length === 0) {
+      // Return a default variant if no variants are provided
+      return {
+        id: 'default',
+        name: 'Default',
+        value: null,
+        weight: 100,
+      };
+    }
+
     // Normalize hash to 0-100 range
     const normalizedHash = hash % 100;
 
@@ -1081,6 +1102,6 @@ export const useABTest = (flagId: string, context: UserContext = {}) => {
   const evaluation = featureFlagManager.evaluateFlag(flagId, context);
   return {
     value: evaluation,
-    variant: context.userId ? featureFlagManager.getUserHash(context.userId, flagId) : 'control',
+    variant: evaluation.variant || 'control',
   };
 };

@@ -98,9 +98,9 @@ const CommentSection = ({ comments, onAddComment }: any) => {
 };
 
 const VideoPage = () => {
-  const [currentVideo, setCurrentVideo] = React.useState(null);
-  const [videos, setVideos] = React.useState([]);
-  const [comments, setComments] = React.useState([]);
+  const [currentVideo, setCurrentVideo] = React.useState<any>(null);
+  const [videos, setVideos] = React.useState<any[]>([]);
+  const [comments, setComments] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [watchTime, setWatchTime] = React.useState(0);
 
@@ -149,6 +149,8 @@ const VideoPage = () => {
   };
 
   const handleAddComment = async (text: string) => {
+    if (!currentVideo) return;
+    
     try {
       const response = await fetch(`/api/videos/${currentVideo.id}/comments`, {
         method: 'POST',
@@ -169,11 +171,7 @@ const VideoPage = () => {
 
   const handleVideoEnded = () => {
     // Track video completion
-    performanceMonitor.trackCustomMetric('video_completed', 1, {
-      videoId: currentVideo?.id,
-      watchTime,
-      duration: currentVideo?.duration,
-    });
+    performanceMonitor.trackCustomMetric('video_completed', 1);
   };
 
   if (loading) {
@@ -190,9 +188,19 @@ const VideoPage = () => {
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleVideoEnded}
             />
-            <VideoDescription video={currentVideo} />
+            <VideoDescription 
+              video={currentVideo} 
+              channel={null}
+              isSubscribed={false}
+              showFullDescription={false}
+              isSummarizing={false}
+              canSummarize={true}
+              onSubscribe={() => {}}
+              onToggleDescription={() => {}}
+              onSummarizeDescription={() => {}}
+            />
             <CommentSection
-              videoId={currentVideo.id}
+              videoId={currentVideo?.id || ''}
               comments={comments}
               onAddComment={handleAddComment}
             />
@@ -512,7 +520,10 @@ describe('Integration Tests', () => {
       // All interactive elements should be accessible
       const buttons = screen.getAllByRole('button');
       buttons.forEach(button => {
-        expect(button).toHaveAccessibleName();
+        const ariaLabel = button.getAttribute('aria-label');
+        const textContent = button.textContent;
+        const accessibleName = ariaLabel || textContent || 'Button';
+        expect(button).toHaveAccessibleName(accessibleName);
       });
     });
   });
