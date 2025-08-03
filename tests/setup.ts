@@ -68,7 +68,7 @@ const mockSessionStorage = (() => {
   };
 })();
 
-const mockIntersectionObserver = vi.fn().mockImplementation((callback) => ({
+const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -78,7 +78,7 @@ const mockIntersectionObserver = vi.fn().mockImplementation((callback) => ({
   takeRecords: vi.fn(() => []),
 }));
 
-const mockResizeObserver = vi.fn().mockImplementation((callback) => ({
+const mockResizeObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -108,7 +108,7 @@ const mockNotification = {
 
 // Fetch mock with realistic responses
 const createMockFetch = () => {
-  return vi.fn().mockImplementation(async (url: string, options?: RequestInit) => {
+  return vi.fn().mockImplementation(async (url: string, _options?: RequestInit) => {
     // Simulate network delay
     await testUtils.simulateNetworkDelay(TEST_CONFIG.mockApiDelay);
 
@@ -135,13 +135,8 @@ const createMockFetch = () => {
     if (url.includes('/api/videos')) {
       mockResponse.json = async () => ({
         success: true,
-        data: Array.from({ length: 10 }, () => testUtils.generateMockVideo()),
-        pagination: {
-          page: 1,
-          pageSize: 10,
-          total: 100,
-          hasMore: true,
-        },
+        data: testUtils.generateMockVideo(),
+        timestamp: Date.now(),
       });
     }
 
@@ -149,6 +144,7 @@ const createMockFetch = () => {
       mockResponse.json = async () => ({
         success: true,
         data: testUtils.generateMockChannel(),
+        timestamp: Date.now(),
       });
     }
 
@@ -156,6 +152,7 @@ const createMockFetch = () => {
       mockResponse.json = async () => ({
         success: true,
         data: testUtils.generateMockUser(),
+        timestamp: Date.now(),
       });
     }
 

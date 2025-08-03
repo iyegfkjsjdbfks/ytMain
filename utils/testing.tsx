@@ -359,7 +359,7 @@ export const testUtils = {
   waitForLoadingToFinish: async () => {
     await waitForTime(100);
   },
-  waitForError: async (errorMessage?: string) => {
+  waitForError: async (_errorMessage?: string) => {
     await waitForTime(50);
   },
   simulateNetworkDelay: async (ms: number = 100) => {
@@ -396,9 +396,10 @@ export const testUtils = {
 };
 
 // Accessibility testing helper with proper return type
-export const runAccessibilityAudit = async (container: HTMLElement) => {
+export const runAccessibilityAudit = async (_container: HTMLElement) => {
   try {
-    const axeCore = await import('@axe-core/react');
+    // Import axe-core for accessibility testing
+    await import('@axe-core/react');
     
     // Return a compatible result format
     return {
