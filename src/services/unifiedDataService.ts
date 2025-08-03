@@ -317,6 +317,8 @@ class UnifiedDataService {
               channelName: video.channelName || '',
               channelId: video.channelId || '',
               channelAvatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
+              createdAt: video.publishedAt || new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
             };
 
             this.setCachedData(cacheKey, normalized);
@@ -387,6 +389,8 @@ class UnifiedDataService {
           channelName: googleSearchVideo.channelName || 'YouTube Channel',
           channelId: googleSearchVideo.channelId || `channel-${googleSearchVideo.id.replace('google-search-', '')}`,
           channelAvatarUrl: googleSearchVideo.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
+          createdAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         };
 
         // Cache the result
@@ -449,6 +453,8 @@ class UnifiedDataService {
               channelName: googleSearchVideo.channelName || 'YouTube Channel',
               channelId: googleSearchVideo.channelId || `channel-${extractedYoutubeId}`,
               channelAvatarUrl: googleSearchVideo.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleSearchVideo.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
+              createdAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
             };
 
             // Cache the result
@@ -552,6 +558,8 @@ class UnifiedDataService {
               channelName: processedVideo.channelName,
               channelId: processedVideo.channelId,
               channelAvatarUrl: processedVideo.channelAvatarUrl || processedVideo.channel?.avatarUrl || '',
+              createdAt: processedVideo.publishedAt || processedVideo.uploadedAt || new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
             };
             this.setCachedData(cacheKey, normalized);
             return normalized;
@@ -616,6 +624,8 @@ class UnifiedDataService {
               channelName: processedVideo.channelName,
               channelId: processedVideo.channelId,
               channelAvatarUrl: processedVideo.channelAvatarUrl || '',
+              createdAt: processedVideo.publishedAt || processedVideo.uploadedAt || new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
             };
             this.setCachedData(cacheKey, normalized);
             return normalized;
@@ -763,6 +773,8 @@ class UnifiedDataService {
         channelName: video.channelName || 'YouTube Channel',
         channelId: video.channelId || `channel-${video.id.replace('google-search-', '')}`,
         channelAvatarUrl: video.channelAvatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(video.channelName || 'YouTube Channel')}&size=88&background=ff0000&color=ffffff&bold=true`,
+        createdAt: video.uploadedAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }));
 
       logger.debug(`✅ Converted ${unifiedVideos.length} Google Custom Search results to unified format`);
@@ -788,24 +800,6 @@ class UnifiedDataService {
       // Use the YouTube search service
       const searchResults = await youtubeService.searchVideos(query, {
         maxResults: this.config.limits.youtube || 25,
-        type: filters.type === 'short' ? 'video' : filters.type || 'video',
-        order: filters.sortBy === 'date' ? 'date' :
-               filters.sortBy === 'views' ? 'viewCount' :
-               filters.sortBy === 'rating' ? 'rating' :
-               'relevance',
-        videoDuration: filters.duration === 'short' ? 'short' :
-                      filters.duration === 'medium' ? 'medium' :
-                      filters.duration === 'long' ? 'long' :
-                      'any',
-        ...(filters.uploadDate && {
-          publishedAfter: filters.uploadDate === 'hour' ? new Date(Date.now() - 60 * 60 * 1000).toISOString() :
-                         filters.uploadDate === 'today' ? new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() :
-                         filters.uploadDate === 'week' ? new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() :
-                         filters.uploadDate === 'month' ? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString() :
-                         filters.uploadDate === 'year' ? new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString() :
-                         new Date().toISOString(),
-        }),
-        forRecommendations: filters.forRecommendations || false,
       });
       const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map(video => ({
         id: video.id,
@@ -847,6 +841,8 @@ class UnifiedDataService {
         channelName: video.channelName,
         channelId: video.channelId,
         channelAvatarUrl: video.channelAvatarUrl || '',
+        createdAt: video.publishedAt || video.uploadedAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }));
 
       logger.debug(`Found ${unifiedVideos.length} YouTube videos for query: ${query}`);

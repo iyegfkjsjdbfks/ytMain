@@ -391,7 +391,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
   }
 
   // Fallback to clipboard
-  if ('clipboard' in navigator && data.url) {
+  if ('clipboard' in navigator && navigator.clipboard && data.url) {
     try {
       await navigator.clipboard.writeText(data.url);
       showNotification('Link copied to clipboard!');
@@ -462,7 +462,8 @@ export const getCachedVideo = async (videoId: string): Promise<Response | null> 
   if ('caches' in window) {
     try {
       const cache = await caches.open('youtubex-videos-v1');
-      return await cache.match(`video-${videoId}`);
+      const response = await cache.match(`video-${videoId}`);
+      return response || null;
     } catch (error) {
       const componentError = createComponentError(
         `Error retrieving cached video: ${error instanceof Error ? error.message : 'Unknown error'}`,
