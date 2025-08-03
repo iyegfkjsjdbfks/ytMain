@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, type React } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import type { FC } from 'react';
 
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
@@ -32,7 +33,7 @@ interface BannerState {
   dismissedAt: number | null;
 }
 
-const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
+const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
   variant = 'default',
   position = 'bottom',
   autoShow = true,
@@ -59,7 +60,7 @@ const ModularPWAInstallBanner: React.FC<ModularPWAInstallBannerProps> = ({
   const notifications = usePWANotifications();
 
   // Determine what to show
-  const shouldShowInstall = installPrompt.canInstall && !installPrompt.isInstalled;
+  const shouldShowInstall = installPrompt.isInstallable && !installPrompt.isInstalled;
   const shouldShowUpdate = pwaUpdates.updateAvailable && showUpdateStatus;
   const shouldShowOffline = offlineStatus.isOffline && showNetworkStatus;
   const shouldShowNotification = !notifications.canShowNotifications && notifications.isSupported;
@@ -124,7 +125,7 @@ return;
     setState(prev => ({ ...prev, isAnimating: true }));
 
     try {
-      const success = await installPrompt.installPWA();
+      const success = await installPrompt.installApp();
 
       if (success) {
         conditionalLogger.info('PWA installed successfully', undefined, 'ModularPWAInstallBanner');
@@ -146,7 +147,7 @@ return;
       );
       setState(prev => ({ ...prev, isAnimating: false }));
     }
-  }, [installPrompt.installPWA, onInstallSuccess]);
+  }, [installPrompt.installApp, onInstallSuccess]);
 
   // Handle update
   const handleUpdate = useCallback(async () => {
@@ -390,12 +391,12 @@ return;
           <div
             className={`w-2 h-2 rounded-full ${
               offlineStatus.isOnline
-                ? offlineStatus.networkQuality === 'fast'
+                ? offlineStatus.getNetworkQuality() === 'fast'
                   ? 'bg-green-500'
                   : 'bg-yellow-500'
                 : 'bg-red-500'
             }`}
-            title={`Network: ${offlineStatus.networkQuality}`}
+            title={`Network: ${offlineStatus.getNetworkQuality()}`}
           />
         </div>
       )}

@@ -60,7 +60,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
         retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
         componentStack: errorInfo.componentStack,
-      })
+      }),
     );
 
     conditionalLogger.error('Data fetching component error caught:', componentError);

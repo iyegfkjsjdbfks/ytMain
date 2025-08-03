@@ -1,4 +1,4 @@
-import { useState, type React } from 'react';
+import { useState } from 'react';
 
 import {
   QuestionMarkCircleIcon,

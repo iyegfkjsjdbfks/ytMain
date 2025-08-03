@@ -83,7 +83,7 @@ export function useLiveStream(streamId?: string) {
     if (stream) {
       setStream(prev => prev ? {
         ...prev,
-        stats: { ...prev.stats, ...newStats }
+        stats: { ...prev.stats, ...newStats },
       } : null);
     }
   };
@@ -113,7 +113,7 @@ export function useLiveStream(streamId?: string) {
           ...prev.stats,
           superChatCount: prev.stats.superChatCount + 1,
           superChatAmount: prev.stats.superChatAmount + amount,
-        }
+        },
       } : null);
     }
   };

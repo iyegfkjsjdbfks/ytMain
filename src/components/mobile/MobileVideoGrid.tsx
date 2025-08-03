@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, useMemo } from 'react';
+import { memo, useState, useCallback, useMemo, useEffect } from 'react';
 
 import { FixedSizeList as List } from 'react-window';
 
@@ -67,7 +67,7 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
           />
 
           {/* Duration Badge */}
-          {video.duration && (
+          {video.duration && typeof video.duration === 'number' && (
             <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
               {Math.floor(video.duration / 60)}:{(video.duration % 60).toString().padStart(2, '0')}
             </div>
@@ -95,9 +95,9 @@ const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
                 )}
               </p>
               <div className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-500">
-                <span>{video.viewsFormatted} views</span>
+                <span>{video.views || '0'} views</span>
                 <span>•</span>
-                <span>{video.publishedAtFormatted}</span>
+                <span>{video.publishedAt || 'Recently'}</span>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
   });
 
   // Load more when intersecting
-  React.useEffect(() => {
+  useEffect(() => {
     if (isIntersecting && hasMore && !loading && onLoadMore) {
       onLoadMore();
     }
@@ -184,6 +184,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
     <div className={`w-full ${className}`}>
       <List
         height={window.innerHeight - 120} // Account for header/navigation
+        width="100%"
         itemCount={videos.length}
         itemSize={itemHeight}
         itemData={listData}

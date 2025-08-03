@@ -50,7 +50,7 @@ class LiveStreamService {
 
   async getScheduledStreams(): Promise<ScheduledStream[]> {
     conditionalLogger.info('Getting scheduled streams');
-    
+
     // Placeholder implementation
     return [];
   }
@@ -216,7 +216,7 @@ class LiveStreamService {
 
   async getStreamStats(id: string): Promise<any> {
     conditionalLogger.info('Getting stream stats:', id);
-    
+
     return {
       viewers: 0,
       duration: 0,

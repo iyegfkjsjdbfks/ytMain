@@ -1,9 +1,14 @@
 import React from 'react';
 
 // Import the components for HOCs
-import DataFetchErrorBoundary, { DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
-import LiveStreamErrorBoundary, { LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
-import VideoErrorBoundary, { VideoErrorBoundaryProps } from './VideoErrorBoundary';
+import DataFetchErrorBoundary from './DataFetchErrorBoundary';
+import LiveStreamErrorBoundary from './LiveStreamErrorBoundary';
+import VideoErrorBoundary from './VideoErrorBoundary';
+
+import type { DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
+import type { LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
+import type { VideoErrorBoundaryProps } from './VideoErrorBoundary';
+
 
 // Re-export all error boundaries and their types
 export { default as VideoErrorBoundary, type VideoErrorBoundaryProps } from './VideoErrorBoundary';
@@ -26,7 +31,7 @@ export const withVideoErrorBoundary = <P extends object>(
       <Component {...(props as P)} ref={ref} />
     </VideoErrorBoundary>
   ));
-  
+
   WrappedComponent.displayName = `withVideoErrorBoundary(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };
@@ -40,7 +45,7 @@ export const withLiveStreamErrorBoundary = <P extends object>(
       <Component {...(props as P)} ref={ref} />
     </LiveStreamErrorBoundary>
   ));
-  
+
   WrappedComponent.displayName = `withLiveStreamErrorBoundary(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };
@@ -54,7 +59,7 @@ export const withDataFetchErrorBoundary = <P extends object>(
       <Component {...(props as P)} ref={ref} />
     </DataFetchErrorBoundary>
   ));
-  
+
   WrappedComponent.displayName = `withDataFetchErrorBoundary(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };

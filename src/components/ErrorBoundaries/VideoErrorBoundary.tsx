@@ -55,7 +55,7 @@ export class VideoErrorBoundary extends Component<Props, State> {
         videoId: this.props.videoId,
         retryCount: this.state.retryCount,
         componentStack: errorInfo.componentStack,
-      })
+      }),
     );
 
     conditionalLogger.error('Video component error caught:', componentError);

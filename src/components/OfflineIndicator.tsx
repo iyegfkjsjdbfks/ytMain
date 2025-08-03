@@ -1,4 +1,5 @@
-import { useState, useEffect, type React } from 'react';
+import { useState, useEffect } from 'react';
+import type { FC } from 'react';
 
 import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 
@@ -12,7 +13,7 @@ interface OfflineIndicatorProps {
   className?: string;
 }
 
-const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) => {
+const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
   const { isOnline } = usePWA();
   const [showDetails, setShowDetails] = useState(false);
   const [offlineData, setOfflineData] = useState({

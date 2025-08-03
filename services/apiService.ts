@@ -312,7 +312,7 @@ export class ApiService {
               result?.message || 'Intercepted error',
               (result as any)?.status || 0,
               (result as any)?.code || 'INTERCEPTED_ERROR',
-              result
+              result,
             );
           }
         }
