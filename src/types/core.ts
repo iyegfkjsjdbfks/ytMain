@@ -113,6 +113,9 @@ export interface Video extends BaseEntity {
   isHearted?: boolean;
   isPinned?: boolean;
   isEdited?: boolean;
+  isFamilySafe?: boolean;
+  isAgeRestricted?: boolean;
+  embeddable?: boolean;
   visibility: VideoVisibility;
   privacyStatus?: 'public' | 'private' | 'unlisted' | 'scheduled';
   commentCount?: number;
