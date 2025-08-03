@@ -33,7 +33,6 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
@@ -183,7 +182,9 @@ return;
   return (
     <div
       ref={(node) => {
-        containerRef.current = node;
+        if (containerRef.current !== node) {
+          containerRef.current = node;
+        }
         intersectionRef(node);
       }}
       className={`relative bg-black rounded-lg overflow-hidden ${className}`}

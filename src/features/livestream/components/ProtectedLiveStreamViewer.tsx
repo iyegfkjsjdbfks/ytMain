@@ -1,4 +1,5 @@
-import { useCallback, type React } from 'react';
+import { useCallback } from 'react';
+import type { FC } from 'react';
 
 import { LiveStreamErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
@@ -14,7 +15,7 @@ interface ProtectedLiveStreamViewerProps {
  * LiveStreamViewer wrapped with specialized error boundary
  * Provides enhanced error handling and recovery for live streaming
  */
-const ProtectedLiveStreamViewer: React.FC<ProtectedLiveStreamViewerProps> = ({
+const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
   streamId,
   className,
 }) => {

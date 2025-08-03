@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, type React } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import type { FC } from 'react';
 
 import {
   PlayIcon,
@@ -53,7 +54,12 @@ interface QualityOption {
   bitrate: number;
 }
 
-const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
+interface LiveStreamViewerProps {
+  streamId: string;
+  className?: string;
+}
+
+const LiveStreamViewer: FC<LiveStreamViewerProps> = ({
   streamId,
   className = '',
 }) => {
