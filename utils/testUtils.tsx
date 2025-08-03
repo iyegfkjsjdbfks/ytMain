@@ -139,24 +139,15 @@ function createTestQueryClient(): QueryClient {
         retry: false,
       },
     },
-    logger: {
-      log: () => {},
-      warn: () => {},
-      error: () => {},
-    },
   });
 }
 
 function AllTheProviders({
   children,
   queryClient,
-  initialEntries = ['/'],
-  mockUser,
 }: {
   children: ReactNode;
   queryClient: QueryClient;
-  initialEntries?: string[];
-  mockUser?: any;
 }) {
   return (
     <QueryClientProvider client={queryClient}>
@@ -324,7 +315,7 @@ export const testUtils = {
   },
 
   // Create mock file for upload tests
-  createMockFile: (name: string = 'test.mp4', type: string = 'video/mp4', size: number = 1024) => {
+  createMockFile: (name: string = 'test.mp4', type: string = 'video/mp4') => {
     return new File(['test content'], name, { type, lastModified: Date.now() });
   },
 
