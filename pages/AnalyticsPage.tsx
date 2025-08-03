@@ -69,7 +69,9 @@ const AnalyticsPage: React.FC = () => {
       }
     };
 
-    void fetchAnalyticsData();
+    fetchAnalyticsData().catch(() => {
+      // Handle promise rejection silently
+    });
   }, [timeRange]);
 
   const formatNumber = (num: number): string => {

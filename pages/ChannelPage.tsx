@@ -103,7 +103,9 @@ const ChannelPage: React.FC = () => {
       }
     };
 
-    void fetchChannelData();
+    fetchChannelData().catch(() => {
+      // Handle promise rejection silently
+    });
     window.scrollTo(0, 0);
   }, [channelIdOrName]);
 

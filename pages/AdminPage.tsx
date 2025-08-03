@@ -73,7 +73,9 @@ const AdminPage: React.FC = () => {
     setInitialSearchKeywordState(getInitialSearchKeyword());
 
     // Load Google Search store videos
-    void loadStoreVideos();
+    loadStoreVideos().catch(() => {
+      // Handle promise rejection silently
+    });
   }, []);
 
   const loadStoreVideos = async () => {
@@ -852,7 +854,9 @@ const AdminPage: React.FC = () => {
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    void handleToggleLocalPlayer(config.type as LocalVideoPlayerType);
+                                    handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
+                                      // Handle promise rejection silently
+                                    });
                                   }}
                                   className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
                                     isEnabled
@@ -1033,7 +1037,11 @@ const AdminPage: React.FC = () => {
                       localPlayerType === config.type,
                       enabledLocalPlayers.includes(config.type as LocalVideoPlayerType),
                       () => handleLocalPlayerTypeChange(config.type as LocalVideoPlayerType),
-                      () => void handleToggleLocalPlayer(config.type as LocalVideoPlayerType),
+                      () => {
+                        handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
+                          // Handle promise rejection silently
+                        });
+                      },
                     ),
                   )}
                 </div>

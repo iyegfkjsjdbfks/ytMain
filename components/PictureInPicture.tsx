@@ -112,7 +112,9 @@ return;
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        void videoRef.current.play();
+        videoRef.current.play().catch(() => {
+          // Handle play promise rejection silently
+        });
       }
       setIsPlaying(!isPlaying);
     }

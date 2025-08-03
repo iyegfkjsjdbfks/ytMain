@@ -79,6 +79,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'local' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Test Channel 1',
+            channelId: 'channel-1',
+            channelAvatarUrl: 'https://example.com/avatar1.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
           {
             id: 'video-2',
@@ -109,6 +116,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Test Channel 2',
+            channelId: 'channel-2',
+            channelAvatarUrl: 'https://example.com/avatar2.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
         ],
         sources: {
@@ -212,6 +226,13 @@ describe('Unified Video Hooks', () => {
         visibility: 'public' as const,
         source: 'local' as const,
         metadata: {},
+        // Required properties for UnifiedVideoMetadata
+        uploadedAt: new Date().toISOString(),
+        channelName: 'Test Channel',
+        channelId: 'channel-1',
+        channelAvatarUrl: 'https://example.com/avatar.jpg',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
       mockUnifiedDataService.getVideoById.mockResolvedValue(mockVideo);
@@ -311,6 +332,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Channel 1',
+            channelId: 'channel-1',
+            channelAvatarUrl: 'https://example.com/avatar1.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
           {
             id: 'trending-2',
@@ -341,6 +369,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Channel 2',
+            channelId: 'channel-2',
+            channelAvatarUrl: 'https://example.com/avatar2.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
         ],
         sources: {
@@ -425,6 +460,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Short Channel',
+            channelId: 'channel-1',
+            channelAvatarUrl: 'https://example.com/avatar1.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
           {
             id: 'short-2',
@@ -455,6 +497,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Short Channel 2',
+            channelId: 'channel-2',
+            channelAvatarUrl: 'https://example.com/avatar2.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
         ],
         sources: {
@@ -515,6 +564,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Search Channel 1',
+            channelId: 'channel-1',
+            channelAvatarUrl: 'https://example.com/avatar1.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
           {
             id: 'search-2',
@@ -545,6 +601,13 @@ describe('Unified Video Hooks', () => {
             visibility: 'public' as const,
             source: 'youtube' as const,
             metadata: {},
+            // Required properties for UnifiedVideoMetadata
+            uploadedAt: new Date().toISOString(),
+            channelName: 'Search Channel 2',
+            channelId: 'channel-2',
+            channelAvatarUrl: 'https://example.com/avatar2.jpg',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           },
         ],
         sources: {

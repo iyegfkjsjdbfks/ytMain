@@ -56,7 +56,9 @@ const CommentModerationPage: React.FC = () => {
       }
     };
 
-    void fetchCommentsData();
+    fetchCommentsData().catch(() => {
+      // Handle promise rejection silently
+    });
   }, []);
 
   useEffect(() => {
