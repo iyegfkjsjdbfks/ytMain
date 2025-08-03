@@ -55,9 +55,9 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
         autoplay={autoplay}
         controls={controls}
         className={className}
-        onReady={onReady}
-        onStateChange={onStateChange}
-        onError={onError}
+        {...(onReady && { onReady })}
+        {...(onStateChange && { onStateChange })}
+        {...(onError && { onError })}
       />
     </VideoErrorBoundary>
   );
