@@ -11,6 +11,11 @@ export { ErrorBoundary as BaseErrorBoundary } from '../../features/common/compon
 // Re-export all protected components
 export * from './ProtectedComponents';
 
+// Import the components for use in HOCs
+import VideoErrorBoundary, { type VideoErrorBoundaryProps } from './VideoErrorBoundary';
+import LiveStreamErrorBoundary, { type LiveStreamErrorBoundaryProps } from './LiveStreamErrorBoundary';
+import DataFetchErrorBoundary, { type DataFetchErrorBoundaryProps } from './DataFetchErrorBoundary';
+
 // Higher-Order Components for wrapping components with error boundaries
 export const withVideoErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,

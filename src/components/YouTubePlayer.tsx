@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import type { Video } from '../types/core';
 
 export interface YouTubePlayerProps {
