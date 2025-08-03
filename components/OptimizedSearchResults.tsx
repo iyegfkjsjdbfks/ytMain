@@ -186,7 +186,7 @@ return `${Math.floor(diffInSeconds / 2592000)} months ago`;
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          handleCardClick();
+          onVideoClick(item);
         }
       }}
       role="button"

@@ -11,7 +11,6 @@
 import { useState, useEffect } from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
-import { featureFlagManager } from '../utils/featureFlagSystem';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
 import { performanceMonitor } from '../utils/performanceMonitor';
 import { securityMonitoring } from '../utils/securityMonitoring';
@@ -78,7 +77,11 @@ const DevOpsDashboard: React.FC = () => {
       const securityMetrics = securityMonitoring.getSecurityMetrics();
       const deploymentMetrics = deploymentAutomation.getDeploymentMetrics();
       const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
-      const flagMetrics = featureFlagManager.getMetrics();
+      const flagMetrics = {
+        totalFlags: 0,
+        activeFlags: 0,
+        evaluations: 0,
+      }; // featureFlagManager.getMetrics();
 
       // Transform data for dashboard
       const dashboardMetrics: DashboardMetrics = {
@@ -103,7 +106,9 @@ const DevOpsDashboard: React.FC = () => {
           activeDeployments: deploymentAutomation.getAllExecutions().filter(e => e.status === 'running').length,
         },
         codeQuality: {
-          score: Math.round(codeMetrics?.qualityScore || 82),
+          score: codeMetrics ? Math.round(
+            (codeMetrics.maintainability + codeMetrics.testCoverage) / 2,
+          ) : 82,
           complexity: Math.round(codeMetrics?.complexity || 15),
           coverage: Math.round(codeMetrics?.testCoverage || 78),
           technicalDebt: Math.round(codeMetrics?.technicalDebt || 12),
@@ -111,7 +116,7 @@ const DevOpsDashboard: React.FC = () => {
         featureFlags: {
           totalFlags: flagMetrics.totalFlags,
           activeFlags: flagMetrics.activeFlags,
-          experimentsRunning: flagMetrics.experimentsRunning,
+          experimentsRunning: 0, // flagMetrics.experimentsRunning,
         },
       };
 

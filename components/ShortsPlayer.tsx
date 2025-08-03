@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 import {
   PlayIcon,
@@ -124,7 +125,7 @@ return;
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [navigateShort, toggleMute, togglePlay]);
+  }, []);
 
   const togglePlay = useCallback(() => {
     const video = videoRef.current;

@@ -40,7 +40,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [loadNotifications, generateRandomNotification]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

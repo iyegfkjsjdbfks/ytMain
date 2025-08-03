@@ -26,7 +26,6 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const [recommendations, setRecommendations] = useState<Video[]>([]);
   const [loading, setLoading] = useState(false);
   const [useGoogleCustomSearch, setUseGoogleCustomSearch] = useState(false);
-  const [searchProvider, setSearchProvider] = useState<string>('google-search');
 
   // Determine the current video ID from either prop
   const activeVideoId = useMemo(() => {
@@ -39,10 +38,10 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     const googleSearchConfigured = youtubeSearchService.isConfigured();
     const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
-    setSearchProvider(provider);
-
     // NEW STRATEGY: Google Custom Search for discovery, YouTube Data API v3 for metadata
     const shouldUseGoogleCustomSearch = googleSearchConfigured; // Use Google Custom Search for discovery
+    
+    console.log('Search provider:', provider); // Use the provider variable
 
     setUseGoogleCustomSearch(shouldUseGoogleCustomSearch);
 

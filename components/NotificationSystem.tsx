@@ -49,7 +49,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [loadNotifications, generateMockNotification]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
