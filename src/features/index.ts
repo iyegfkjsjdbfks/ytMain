@@ -1,5 +1,4 @@
-
-/**
+import { /**
  * Features Index
  * Centralized exports for all feature modules
  */
@@ -12,17 +11,15 @@ export * from './video';
 
 // Playlist Features
 export { playlistService } from './playlist/services/playlistService';
-export * from './playlist/hooks/usePlaylists';
+import { export * from './playlist/hooks/usePlaylists';
 export { PlaylistCard } from './playlist/components/PlaylistCard';
-
-// Comment Features
+import { // Comment Features
 export { commentService } from './comments/services/commentService';
-export * from './comments/hooks/useComments';
+import { export * from './comments/hooks/useComments';
 
 // Search Features
 export { searchService } from './search/services/searchService';
-
-// Notification Features
+import { // Notification Features
 export { notificationService } from './notifications/services/notificationService';
 
 // Channel Features

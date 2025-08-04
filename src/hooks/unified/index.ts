@@ -1,5 +1,4 @@
-
-/**
+import { /**
  * Unified Hooks Index
  * Centralized exports for all unified hooks
  */
@@ -10,12 +9,10 @@ export {
   useQuery,
   useMutation,
   queryCache,
-  type UseApiConfig,
-  type UseApiState,
-  type UseApiReturn,
-} from './useApi';
-
-// Video hooks
+    type UseApiConfig,
+    type UseApiState,
+  type UseApiReturn, } from './useApi';
+import { // Video hooks
 export {
   useVideos,
   useVideo,
@@ -42,8 +39,6 @@ export {
   useReportVideo,
   useVideoCategories,
   useVideoWithRelated,
-  useHomePageData,
-} from './useVideos';
-
-// Re-export types
+  useHomePageData, } from './useVideos';
+import { // Re-export types
 export type { Video, Short, User, Channel, Playlist, Comment } from '../../types/core';

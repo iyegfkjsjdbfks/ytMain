@@ -1,4 +1,6 @@
+import React from "react";
 import { cn } from '@/lib/utils';
+import React from "react";
 import { VideoCard } from '@/components/molecules/VideoCard';
 import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 

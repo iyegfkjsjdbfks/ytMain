@@ -1,4 +1,3 @@
-
 // Re-export all protected components for easy access
 export { default as ProtectedLiveStreamViewer } from '../../features/livestream/components/ProtectedLiveStreamViewer';
 export { default as ProtectedStreamAnalyticsDashboard } from '../../features/livestream/components/ProtectedStreamAnalyticsDashboard';
@@ -9,6 +8,8 @@ export { default as ProtectedSearchResultsPage } from '../../features/video/page
 
 // Type exports
 export type { default as ProtectedLiveStreamViewerProps } from '../../features/livestream/components/ProtectedLiveStreamViewer';
-export type { default as ProtectedStreamAnalyticsDashboardProps } from '../../features/livestream/components/ProtectedStreamAnalyticsDashboard';
-export type { default as ProtectedYouTubePlayerProps } from '../../../components/ProtectedYouTubePlayer';
-export type { default as ProtectedVideoPlayerProps } from '../../features/video/components/ProtectedVideoPlayer';
+import { export type { default as ProtectedStreamAnalyticsDashboardProps } from '../../features/livestream/components/ProtectedStreamAnalyticsDashboard';
+import React from "react";
+import { export type { default as ProtectedYouTubePlayerProps } from '../../../components/ProtectedYouTubePlayer';
+import React from "react";
+import { export type { default as ProtectedVideoPlayerProps } from '../../features/video/components/ProtectedVideoPlayer';

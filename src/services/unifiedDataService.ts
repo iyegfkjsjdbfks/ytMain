@@ -1,3 +1,4 @@
+import React from "react";
 import { fetchSingleVideoFromGoogleSearch, searchYouTubeWithGoogleSearch } from '../../services/googleSearchService';
 import { getYouTubeSearchProvider } from '../../services/settingsService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
@@ -5,12 +6,7 @@ import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { isYouTubeDataApiBlocked } from '../utils/youtubeApiUtils';
 import { logger } from '../utils/logger';
 import { youtubeService } from './api/youtubeService';
-
-
-  metadataNormalizationService,
-  type UnifiedVideoMetadata,
-  type UnifiedChannelMetadata,
-} from './metadataNormalizationService';
+import { metadataNormalizationService, type UnifiedVideoMetadata, type UnifiedChannelMetadata } from './metadataNormalizationService';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 

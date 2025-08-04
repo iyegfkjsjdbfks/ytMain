@@ -1,4 +1,6 @@
+import React from "react";
 import { twMerge } from 'tailwind-merge';
+import React from "react";
 import { type ClassValue, clsx } from 'clsx';
 
 
@@ -245,7 +247,7 @@ export function isObject(value: any): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value: any): value is (...args: any[]) => any {
+export function isFunction(value: any): value is (...args) => any {
   return typeof value === 'function';
 }
 
@@ -274,7 +276,7 @@ export function isValidUrl(str: string): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args) => any>(
   func: T,
   wait: number,
 ): (...args: Parameters<T>) => void {
@@ -297,7 +299,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args) => any>(
   func: T,
   limit: number,
 ): (...args: Parameters<T>) => void {

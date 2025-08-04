@@ -1,6 +1,10 @@
+import React from "react";
 import { useCallback, type FC } from 'react';
+import React from "react";
 import { useSearchParams } from 'react-router-dom';
+import React from "react";
 import { conditionalLogger } from '@/utils/conditionalLogger';
+import React from "react";
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import SearchResultsPage from './SearchResultsPage';
 

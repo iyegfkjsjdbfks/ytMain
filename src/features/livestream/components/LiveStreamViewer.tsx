@@ -1,5 +1,5 @@
+import React from "react";
 import { useState, useEffect, useRef, type FC } from 'react';
-import {
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { liveStreamService } from '@/services/livestreamAPI';
@@ -24,9 +24,7 @@ import SuperChatPanel from './SuperChatPanel';
   EyeIcon,
   BellIcon,
 } from '@heroicons/react/24/outline';
-  HandThumbUpIcon as ThumbsUpSolidIcon,
-  BellIcon as BellSolidIcon,
-} from '@heroicons/react/24/solid';
+import { HandThumbUpIcon as ThumbsUpSolidIcon, BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 
 
 

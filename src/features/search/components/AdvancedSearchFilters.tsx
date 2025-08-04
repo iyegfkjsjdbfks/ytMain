@@ -1,6 +1,5 @@
-import {
-
-  FunnelIcon,
+import React from "react";
+import { FunnelIcon,
   XMarkIcon,
   VideoCameraIcon,
   UserIcon,

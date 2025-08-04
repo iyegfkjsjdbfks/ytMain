@@ -4,7 +4,9 @@
  * with real-time monitoring and automatic rollback capabilities.
  */
 
+import React from "react";
 import { advancedAPM } from './advancedMonitoring';
+import React from "react";
 import { performanceMonitor } from './performanceMonitor';
 
 // Types for feature flag system

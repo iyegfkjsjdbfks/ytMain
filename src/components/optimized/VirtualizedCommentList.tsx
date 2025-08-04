@@ -1,5 +1,8 @@
+import React from "react";
 import { FixedSizeList as List } from 'react-window';
+import React from "react";
 import { memo, useMemo, useCallback } from 'react';
+import React from "react";
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
 

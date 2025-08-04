@@ -1,9 +1,13 @@
 import type React from 'react';
 
+import React from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from "react";
 import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from "react";
 import { BrowserRouter } from 'react-router-dom';
+import React from "react";
 import { vi, type MockedFunction } from 'vitest';
 
 // Store import removed to fix circular dependency
@@ -136,7 +140,7 @@ export const createUserEvent = () => userEvent.setup();
 // Store Test Utilities removed to fix circular dependency
 
 // Mock Functions
-export const createMockFunction = <T extends (...args: any[]) => any>(
+export const createMockFunction = <T extends (...args) => any>(
   implementation?: T,
 ): MockedFunction<T> => {
   return vi.fn(implementation || (() => {})) as MockedFunction<T>;

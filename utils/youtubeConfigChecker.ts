@@ -3,7 +3,9 @@
  * Helps verify and validate Google Custom Search API setup
  */
 
+import React from "react";
 import { API_CONFIG } from '../config';
+import React from "react";
 import { youtubeSearchService } from '../services/youtubeSearchService';
 
 interface ConfigStatus {

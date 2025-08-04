@@ -1,19 +1,8 @@
+import React from "react";
 import { useState, useRef, useEffect } from 'react';
 import type * as React from 'react';
-import {
 import { logger } from '../../../utils/logger';
-
-
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  Cog6ToothIcon,
-  ForwardIcon,
-  BackwardIcon,
-} from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 
 
 

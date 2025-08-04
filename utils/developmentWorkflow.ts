@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * Intelligent Development Workflow Automation
  * Provides automated quality gates, deployment pipelines, and continuous improvement
@@ -228,19 +229,19 @@ return undefined;
 
     // Analyze performance metrics
     const performanceSuggestions = await this.analyzePerformanceMetrics();
-    suggestions.push(...performanceSuggestions: any[]);
+    suggestions.push(...performanceSuggestions);
 
     // Analyze code quality
     const qualitySuggestions = await this.analyzeCodeQuality();
-    suggestions.push(...qualitySuggestions: any[]);
+    suggestions.push(...qualitySuggestions);
 
     // Analyze deployment patterns
     const deploymentSuggestions = await this.analyzeDeploymentPatterns();
-    suggestions.push(...deploymentSuggestions: any[]);
+    suggestions.push(...deploymentSuggestions);
 
     // Analyze testing effectiveness
     const testingSuggestions = await this.analyzeTestingEffectiveness();
-    suggestions.push(...testingSuggestions: any[]);
+    suggestions.push(...testingSuggestions);
 
     return suggestions.sort((a, b) => b.priority - a.priority);
   }
@@ -440,21 +441,21 @@ return undefined;
   private async executeAction(action: WorkflowAction, _context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
-        console.warn(`🔔 Notification: ${action??._config.message || 'Quality gate failed'}`);
+        console.warn(`🔔 Notification: ${action?.config.message || 'Quality gate failed'}`);
         break;
       case 'block':
-        throw new Error(action??._config.message || 'Workflow blocked by quality gate');
+        throw new Error(action?.config.message || 'Workflow blocked by quality gate');
       case 'auto-fix':
-        await this.executeAutoFix(action??._config);
+        await this.executeAutoFix(action?.config);
         break;
       case 'create-issue':
-        await this.createIssue(action??._config, context);
+        await this.createIssue(action?.config, context);
         break;
       case 'rollback':
-        await this.executeRollback(action??._config);
+        await this.executeRollback(action?.config);
         break;
       case 'scale':
-        await this.executeScaling(action??._config);
+        await this.executeScaling(action?.config);
         break;
     }
   }

@@ -1,16 +1,8 @@
+import React from "react";
 import { memo, useState, useEffect, useCallback, useRef } from 'react';
-import {
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
-
-
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-} from '@heroicons/react/24/outline';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 
 

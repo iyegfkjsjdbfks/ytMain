@@ -1,16 +1,9 @@
+import React from "react";
 import { useState } from 'react';
-import {
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
-
-
-  QuestionMarkCircleIcon,
-  HeartIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  MicrophoneIcon,
-} from '@heroicons/react/24/outline';
+import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 
 
 interface LiveQAProps {

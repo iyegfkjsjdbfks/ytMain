@@ -1,16 +1,9 @@
+import React from "react";
 import { useState, useEffect } from 'react';
-import {
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
-
-
-  CurrencyDollarIcon,
-  HeartIcon,
-  SparklesIcon,
-  TrophyIcon,
-  ChartBarIcon,
-} from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 
 

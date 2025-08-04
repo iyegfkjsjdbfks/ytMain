@@ -1,3 +1,4 @@
+import React from "react";
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 
@@ -39,7 +40,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args: any[]) => any>(
+export const useThrottle = <T extends (...args) => any>(
   callback: T,
   delay: number,
 ): T => {

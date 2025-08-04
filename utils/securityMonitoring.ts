@@ -4,6 +4,7 @@
  * and automated security response capabilities.
  */
 
+import React from "react";
 import { advancedAPM } from './advancedMonitoring';
 
 // Types for security monitoring

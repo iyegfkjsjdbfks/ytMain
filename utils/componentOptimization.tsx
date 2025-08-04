@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
@@ -9,9 +10,9 @@ import React, {
   useRef,
   useEffect,
   useState,
-  type ComponentType,
-  type ReactNode,
-  type MemoExoticComponent,
+    type ComponentType,
+    type ReactNode,
+    type MemoExoticComponent,
 } from 'react';
 
 import { performanceMonitor } from './performanceMonitor';
@@ -134,7 +135,7 @@ export function smartMemo<P extends object>(
 }
 
 // Optimized callback hook with dependency tracking
-export function useOptimizedCallback<T extends (...args: any[]) => any>(
+export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
   deps: React.DependencyList,
   debugName?: string,
@@ -448,7 +449,7 @@ export function useDebouncedState<T>(
 }
 
 // Throttled callback hook
-export function useThrottledCallback<T extends (...args: any[]) => any>(
+export function useThrottledCallback<T extends (...args) => any>(
   callback: T,
   delay: number = 100,
 ): T {
@@ -460,7 +461,7 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
 
     if (now - lastCall.current >= delay) {
       lastCall.current = now;
-      return callback(...args: any[]);
+      return callback(...args);
     }
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -468,7 +469,7 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
 
       timeoutRef.current = setTimeout(() => {
         lastCall.current = Date.now();
-        callback(...args: any[]);
+        callback(...args);
       }, delay - (now - lastCall.current));
 
   }, [callback, delay]) as T;

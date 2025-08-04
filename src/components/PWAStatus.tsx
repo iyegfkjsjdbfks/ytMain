@@ -1,13 +1,11 @@
 import React from 'react';
-import {
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
-
-
+import { 
   SignalSlashIcon,
   ArrowDownTrayIcon,
   XMarkIcon,
-  BellIcon,
+  BellIcon
 } from '@heroicons/react/24/outline';
 
 

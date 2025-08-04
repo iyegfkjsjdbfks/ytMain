@@ -1,26 +1,18 @@
-import {  memo, useState  } from 'react';
+import React from "react";
+import { memo, useState } from 'react';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import type * as React from 'react';
-import {
 import { cn, formatRelativeTime } from '../../lib/utils';
 import { UnifiedButton } from './UnifiedButton';
 import type { Video } from '../../types/core';
-
-/**
+import { /**
  * Unified Video Card Component
  * Consolidates all video card variants into a single, comprehensive component
  */
 
 
-  PlayIcon,
-  EyeIcon,
-  ClockIcon,
-  HeartIcon,
-  ShareIcon,
-  BookmarkIcon,
-  EllipsisVerticalIcon,
-} from '@heroicons/react/24/outline';
+  PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
 
 

@@ -1,10 +1,16 @@
-
-// Export all common components, hooks, and utilities
+import { // Export all common components, hooks, and utilities
 export { default as ErrorBoundary } from './components/ErrorBoundary';
-export { default as Layout } from './components/Layout';
-export { default as StudioLayout } from './components/StudioLayout';
-export { default as Header } from './components/Header';
-export { default as Footer } from './components/Footer';
-export { default as Sidebar } from './components/Sidebar';
-export { default as StudioHeader } from './components/StudioHeader';
-export { default as StudioSidebar } from './components/StudioSidebar';
+import React from "react";
+import { export { default as Layout } from './components/Layout';
+import React from "react";
+import { export { default as StudioLayout } from './components/StudioLayout';
+import React from "react";
+import { export { default as Header } from './components/Header';
+import React from "react";
+import { export { default as Footer } from './components/Footer';
+import React from "react";
+import { export { default as Sidebar } from './components/Sidebar';
+import React from "react";
+import { export { default as StudioHeader } from './components/StudioHeader';
+import React from "react";
+import { export { default as StudioSidebar } from './components/StudioSidebar';

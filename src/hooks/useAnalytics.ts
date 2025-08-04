@@ -1,6 +1,10 @@
+import React from "react";
 import { useEffect, useCallback, useRef } from 'react';
+import React from "react";
 import { useLocation } from 'react-router-dom';
+import React from "react";
 import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
+import React from "react";
 import { usePerformanceMonitor } from './usePerformanceMonitor';
 
 
@@ -390,7 +394,7 @@ export const useFormAnalytics = (formName: string) => {
 };
 
 // Utility function for throttling
-function throttle<T extends (...args: any[]) => any>(
+function throttle<T extends (...args) => any>(
   func: T,
   limit: number,
 ): (...args: Parameters<T>) => void {

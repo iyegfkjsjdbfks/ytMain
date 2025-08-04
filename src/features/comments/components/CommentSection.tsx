@@ -1,24 +1,12 @@
+import React from "react";
 import { useState, useRef, useEffect } from 'react';
 import type * as React from 'react';
-import {
 import { formatDistanceToNow } from 'date-fns';
 import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
-
-
-
-  HandThumbUpIcon,
-  HandThumbDownIcon,
-  ChatBubbleLeftIcon,
-  EllipsisVerticalIcon,
-  FlagIcon,
-  HeartIcon,
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
-  MapPinIcon as PinSolidIcon,
-  HeartIcon as HeartSolidIcon,
-} from '@heroicons/react/24/solid';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 
 

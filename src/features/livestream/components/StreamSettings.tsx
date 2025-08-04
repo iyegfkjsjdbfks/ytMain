@@ -1,18 +1,8 @@
+import React from "react";
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-import {
-import type { LiveStream } from '../../../types/livestream';
-
-
-  Cog6ToothIcon,
-  VideoCameraIcon,
-  ChatBubbleLeftRightIcon,
-  CurrencyDollarIcon,
-  ShieldCheckIcon,
-  GlobeAltIcon,
-  BellIcon,
-  ClockIcon,
-} from '@heroicons/react/24/outline';
+import { import type { LiveStream } from '../../../types/livestream';
+import { Cog6ToothIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ShieldCheckIcon, GlobeAltIcon, BellIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 
 interface StreamSettingsProps {

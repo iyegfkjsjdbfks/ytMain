@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
 
@@ -308,7 +309,7 @@ export function useOptimizedMemo<T>(
 /**
  * Enhanced callback hook with stable reference optimization
  */
-export function useOptimizedCallback<T extends (...args: any[]) => any>(
+export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
   deps: any[],
 ): T {
@@ -324,7 +325,7 @@ export function useOptimizedCallback<T extends (...args: any[]) => any>(
     }
   });
 
-  return useCallback((...args: any[]) => callbackRef.current(...args), []) as T;
+  return useCallback((...args) => callbackRef.current(...args), []) as T;
 }
 
 /**

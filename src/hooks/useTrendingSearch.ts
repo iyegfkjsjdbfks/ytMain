@@ -1,6 +1,10 @@
+import React from "react";
 import { useState, useEffect, useCallback } from 'react';
+import React from "react";
 import { getInitialSearchKeyword } from '../services/settingsService';
+import React from "react";
 import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
+import React from "react";
 import { VideoService } from '../services/api';
 import type { Video } from '../types';
 

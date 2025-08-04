@@ -1,4 +1,6 @@
+import React from "react";
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import React from "react";
 import { logger } from '../../../utils/logger';
 
 

@@ -1,17 +1,10 @@
+import React from "react";
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect, useRef   } from 'react';
-import {
+import { useState, useEffect, useRef } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
-
-
-  BellIcon,
-  XMarkIcon,
-  CheckIcon,
-  TrashIcon,
-
-} from '@heroicons/react/24/outline';
+import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 
 

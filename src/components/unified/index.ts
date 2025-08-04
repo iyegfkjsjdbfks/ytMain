@@ -1,5 +1,4 @@
-
-/**
+import { /**
  * Unified Components Index
  * Centralized exports for all unified components
  */
@@ -12,18 +11,14 @@ export {
   DangerButton,
   GhostButton,
   LinkButton,
-  type UnifiedButtonProps,
-  type ButtonVariant,
-  type ButtonSize,
-} from './UnifiedButton';
-
-// Video Card Components
+    type UnifiedButtonProps,
+    type ButtonVariant,
+  type ButtonSize, } from './UnifiedButton';
+import { // Video Card Components
 export {
   UnifiedVideoCard,
-  type UnifiedVideoCardProps,
-  type VideoCardVariant,
-  type VideoCardSize,
-} from './UnifiedVideoCard';
-
-// Re-export common types
+    type UnifiedVideoCardProps,
+    type VideoCardVariant,
+  type VideoCardSize, } from './UnifiedVideoCard';
+import { // Re-export common types
 export type { Video, User, Channel, Playlist, Comment } from '../../types/core';

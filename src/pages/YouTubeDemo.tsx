@@ -1,5 +1,7 @@
-import {  useState  } from 'react';
+import React from "react";
+import { useState  } from 'react';
 import type * as React from 'react';
+import React from "react";
 import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 
@@ -121,7 +123,7 @@ const YouTubeDemo: React.FC = () => {
         <div className="prose max-w-none">
           <h3 className="text-xl font-semibold mt-4">Basic Usage</h3>
           <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-            {`import { YouTubePlayer } from './lib/youtube-utils';
+            import { `import { YouTubePlayer  } from './lib/youtube-utils';
 
 // Initialize player
 const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
@@ -148,7 +150,7 @@ player.seekTo(60); // Seek to 1 minute`}
 
           <h3 className="text-xl font-semibold mt-6">Using the React Component</h3>
           <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-            {`import { YouTubePlayerExample } from './components/examples/YouTubePlayerExample';
+            import { `import { YouTubePlayerExample  } from './components/examples/YouTubePlayerExample';
 
 // In your component
 <YouTubePlayerExample 
