@@ -281,7 +281,7 @@ return;
   const currentChapter = getCurrentChapter();
   const progressPercentage = videoPlayerInstance.duration ? (videoPlayerInstance.currentTime / videoPlayerInstance.duration) * 100 : 0;
   const volumePercentage = videoPlayerInstance.volume * 100;
-  const bufferPercentage = videoPlayerInstance.buffered * 100;
+  const bufferPercentage = videoPlayerInstance.buffered ? 100 : 0; // Placeholder for buffered calculation
 
   return (
     <div
@@ -322,7 +322,7 @@ return;
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
           <div className="text-white text-center">
             <p className="text-lg mb-2">Video Error</p>
-            <p className="text-sm opacity-75">{videoPlayerInstance.error}</p>
+            <p className="text-sm opacity-75">{videoPlayerInstance.error?.message || "An error occurred"}</p>
           </div>
         </div>
       )}

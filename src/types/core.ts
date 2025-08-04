@@ -19,6 +19,11 @@ export interface Video {
   channelName?: string; // Alternative name field
   channelAvatarUrl?: string; // Channel avatar URL
   isLive?: boolean; // Live stream indicator
+  viewCount?: number; // View count for sorting
+  dislikeCount?: number; // Dislike count
+  categoryId?: string; // Category ID
+  buffered?: TimeRanges; // Buffered time ranges
+  tags?: string[]; // Video tags
 }
 
 export interface Short extends Video {

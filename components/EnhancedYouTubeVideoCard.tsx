@@ -152,7 +152,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
             <span>{formatViews(video.views)} views</span>
             <span>•</span>
             <time dateTime={video.uploadedAt}>
-              {formatTimeAgo(video.uploadedAt)}
+              {formatTimeAgo(video.uploadedAt || video.publishedAt || new Date().toISOString())}
             </time>
           </div>
         </div>
