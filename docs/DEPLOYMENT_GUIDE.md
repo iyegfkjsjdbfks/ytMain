@@ -1,53 +1,59 @@
 # Deployment Guide
 
-## Overview
-
-This comprehensive deployment guide covers all aspects of deploying the YouTubeX application to various environments, including development, staging, and production. It includes containerization, CI/CD pipelines, monitoring, and best practices for scalable deployment.
+Comprehensive deployment guide for the YouTubeX Studio Clone application, covering development, staging, and production environments.
 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
 2. [Environment Configuration](#environment-configuration)
-3. [Docker Deployment](#docker-deployment)
-4. [Cloud Deployment](#cloud-deployment)
-5. [CI/CD Pipeline](#cicd-pipeline)
-6. [Monitoring and Logging](#monitoring-and-logging)
-7. [Security Configuration](#security-configuration)
-8. [Performance Optimization](#performance-optimization)
-9. [Backup and Recovery](#backup-and-recovery)
+3. [Local Development Deployment](#local-development-deployment)
+4. [Docker Deployment](#docker-deployment)
+5. [Cloud Platform Deployment](#cloud-platform-deployment)
+6. [CI/CD Pipeline](#cicd-pipeline)
+7. [Monitoring and Logging](#monitoring-and-logging)
+8. [Security Configuration](#security-configuration)
+9. [Performance Optimization](#performance-optimization)
 10. [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
 
 ### System Requirements
 
-```yaml
-# Minimum requirements
-CPU: 2 cores
-RAM: 4GB
-Storage: 20GB SSD
-Network: 100 Mbps
+#### Development Environment
+- **CPU**: 2+ cores
+- **RAM**: 4GB minimum, 8GB recommended
+- **Storage**: 10GB available space
+- **Network**: Stable internet connection
 
-# Recommended for production
-CPU: 4+ cores
-RAM: 8GB+
-Storage: 50GB+ SSD
-Network: 1 Gbps
-```
+#### Production Environment
+- **CPU**: 4+ cores
+- **RAM**: 8GB minimum, 16GB recommended
+- **Storage**: 50GB+ SSD
+- **Network**: High-speed connection with CDN support
 
 ### Required Software
 
 ```bash
-# Core dependencies
-Node.js >= 18.0.0
-npm >= 8.0.0
+# Core requirements
+Node.js >= 18.0.0 LTS
+npm >= 9.0.0
+Git >= 2.30.0
+
+# For containerized deployment
 Docker >= 20.10.0
 Docker Compose >= 2.0.0
 
-# Optional but recommended
-Kubernetes >= 1.24
-Helm >= 3.8.0
+# For cloud deployment (optional)
+kubectl >= 1.24.0
 Terraform >= 1.0.0
+AWS CLI / Azure CLI / gcloud CLI
+```
+
+### API Requirements
+
+- **YouTube Data API v3 Key**: Required for video data
+- **Google Gemini AI API Key**: Optional for AI features
+- **Domain/SSL Certificate**: For production deployment
 ```
 
 ### Environment Setup
