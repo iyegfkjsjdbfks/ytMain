@@ -1,8 +1,8 @@
+import React from "react";
+import { useState, useRef, useEffect  } from 'react';
 import type * as React from 'react';
-import {  useState, useRef, useEffect  } from 'react';
-
-import {
-  PlayIcon,
+import React from "react";
+import { PlayIcon,
   PauseIcon,
   ScissorsIcon,
   DocumentArrowDownIcon,

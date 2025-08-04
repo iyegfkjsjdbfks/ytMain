@@ -1,8 +1,8 @@
+import React from "react";
+import { useState, useEffect  } from 'react';
 import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
-
-import {
-  ChartBarIcon,
+import React from "react";
+import { ChartBarIcon,
   EyeIcon,
   ClockIcon,
   UserGroupIcon,

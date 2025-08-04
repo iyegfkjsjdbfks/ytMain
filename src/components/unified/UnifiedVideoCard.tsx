@@ -1,28 +1,21 @@
-/**
+import React from "react";
+import { memo, useState } from 'react';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import type * as React from 'react';
+import { cn, formatRelativeTime } from '../../lib/utils';
+import { UnifiedButton } from './UnifiedButton';
+import type { Video } from '../../types/core';
+import { /**
  * Unified Video Card Component
  * Consolidates all video card variants into a single, comprehensive component
  */
 
-import type * as React from 'react';
-import {  memo, useState  } from 'react';
 
-import {
-  PlayIcon,
-  EyeIcon,
-  ClockIcon,
-  HeartIcon,
-  ShareIcon,
-  BookmarkIcon,
-  EllipsisVerticalIcon,
-} from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+  PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
-import { cn, formatRelativeTime } from '../../lib/utils';
 
-import { UnifiedButton } from './UnifiedButton';
 
-import type { Video } from '../../types/core';
 
 
 export type VideoCardVariant = 'default' | 'compact' | 'list' | 'grid' | 'shorts';

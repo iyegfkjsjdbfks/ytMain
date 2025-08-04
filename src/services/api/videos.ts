@@ -1,11 +1,13 @@
+import React from "react";
+import { api, type PaginatedRequest } from './base';
+import type { Video, Short, ApiResponse, SearchFilters } from '../../types/core';
+
 /**
  * Video API Service
  * Centralized video-related API calls
  */
 
-import { api, type PaginatedRequest } from './base';
 
-import type { Video, Short, ApiResponse, SearchFilters } from '../../types/core';
 
 // Video service interfaces
 export interface GetVideosParams extends PaginatedRequest {

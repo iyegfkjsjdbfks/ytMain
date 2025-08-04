@@ -1,6 +1,15 @@
+import React from "react";
 import { useState, useEffect, useRef, type FC } from 'react';
+import { conditionalLogger } from '@/utils/conditionalLogger';
+import { createComponentError } from '@/utils/errorUtils';
+import { liveStreamService } from '@/services/livestreamAPI';
+import { useLiveStream } from '@/hooks/useLiveStream';
+import AdvancedLiveChat from './AdvancedLiveChat';
+import LivePolls from './LivePolls';
+import LiveQA from './LiveQA';
+import SuperChatPanel from './SuperChatPanel';
 
-import {
+
   PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
@@ -15,20 +24,9 @@ import {
   EyeIcon,
   BellIcon,
 } from '@heroicons/react/24/outline';
-import {
-  HandThumbUpIcon as ThumbsUpSolidIcon,
-  BellIcon as BellSolidIcon,
-} from '@heroicons/react/24/solid';
+import { HandThumbUpIcon as ThumbsUpSolidIcon, BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 
-import { useLiveStream } from '@/hooks/useLiveStream';
-import { liveStreamService } from '@/services/livestreamAPI';
-import { conditionalLogger } from '@/utils/conditionalLogger';
-import { createComponentError } from '@/utils/errorUtils';
 
-import AdvancedLiveChat from './AdvancedLiveChat';
-import LivePolls from './LivePolls';
-import LiveQA from './LiveQA';
-import SuperChatPanel from './SuperChatPanel';
 
 
 interface LiveStreamViewerProps {

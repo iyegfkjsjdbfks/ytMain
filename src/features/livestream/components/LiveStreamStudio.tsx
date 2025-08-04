@@ -1,24 +1,10 @@
+import React from "react";
+import { useState, useRef, useEffect } from 'react';
 import type * as React from 'react';
-import {  useState, useRef, useEffect  } from 'react';
-
-import {
-  VideoCameraIcon,
-  MicrophoneIcon,
-  StopIcon,
-  PlayIcon,
-  Cog6ToothIcon,
-  ChatBubbleLeftRightIcon,
-  EyeIcon,
-  HeartIcon,
-  ShareIcon,
-  SignalIcon,
-} from '@heroicons/react/24/outline';
-import {
-  VideoCameraIcon as VideoCameraSolidIcon,
-  MicrophoneIcon as MicrophoneSolidIcon,
-} from '@heroicons/react/24/solid';
-
 import { logger } from '../../../utils/logger';
+import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
+
 
 interface StreamSettings {
   title: string;

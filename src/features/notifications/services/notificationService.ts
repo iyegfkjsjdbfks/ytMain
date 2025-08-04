@@ -1,11 +1,13 @@
+import React from "react";
+import { api } from '../../../services/api/base';
+import type { ApiResponse } from '../../../types/core';
+
 /**
  * Notification Service
  * Comprehensive notification management system
  */
 
-import { api } from '../../../services/api/base';
 
-import type { ApiResponse } from '../../../types/core';
 
 export interface Notification {
   id: string;

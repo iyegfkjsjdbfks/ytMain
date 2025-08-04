@@ -1,3 +1,4 @@
+
 /**
  * PWA (Progressive Web App) utilities and configuration
  */

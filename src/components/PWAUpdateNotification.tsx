@@ -1,11 +1,17 @@
-import { useState, useEffect, type FC } from 'react';
-
+import React from "react";
 import { RefreshCw, X, Download } from 'lucide-react';
-
+import React from "react";
+import { useState, useEffect, type FC } from 'react';
+import React from "react";
 import { createComponentError } from '@/utils/errorUtils';
-
-import { usePWA } from '../hooks/usePWA';
+import React from "react";
 import { conditionalLogger } from '../utils/conditionalLogger';
+import React from "react";
+import { usePWA } from '../hooks/usePWA';
+
+
+
+
 
 interface PWAUpdateNotificationProps {
   className?: string;

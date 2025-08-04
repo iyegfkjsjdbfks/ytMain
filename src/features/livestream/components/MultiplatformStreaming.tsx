@@ -1,17 +1,9 @@
+import React from "react";
 import { useState, useEffect } from 'react';
+import { import type { StreamPlatform } from '../../../types/livestream';
+import { GlobeAltIcon, ExclamationCircleIcon, SignalIcon, EyeIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon as CheckCircleSolidIcon } from '@heroicons/react/24/solid';
 
-import {
-  GlobeAltIcon,
-  ExclamationCircleIcon,
-  SignalIcon,
-  EyeIcon,
-  Cog6ToothIcon,
-} from '@heroicons/react/24/outline';
-import {
-  CheckCircleIcon as CheckCircleSolidIcon,
-} from '@heroicons/react/24/solid';
-
-import type { StreamPlatform } from '../../../types/livestream';
 
 interface MultiplatformStreamingProps {
   isStreaming: boolean;

@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 
+import React from "react";
 import { cn } from '../src/lib/utils';
 
 // Common component patterns and utilities
@@ -107,8 +108,7 @@ export const buildAvatarClasses = (
     className,
   );
 };
-
-// Text truncation utilities - using shared utility
+import { // Text truncation utilities - using shared utility
 export { truncateText } from './formatters';
 
 export const buildTruncateClasses = (
@@ -236,8 +236,7 @@ export const buildPlaylistUrl = (playlistId: string): string => {
 export const isExternalUrl = (url: string): boolean => {
   return url.startsWith('http://') || url.startsWith('https://');
 };
-
-// Performance utilities - using shared utilities
+import { // Performance utilities - using shared utilities
 export { debounce, throttle } from '../src/lib/utils';
 
 // Local storage utilities with error handling

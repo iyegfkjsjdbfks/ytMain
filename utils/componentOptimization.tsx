@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
@@ -9,9 +10,9 @@ import React, {
   useRef,
   useEffect,
   useState,
-  type ComponentType,
-  type ReactNode,
-  type MemoExoticComponent,
+    type ComponentType,
+    type ReactNode,
+    type MemoExoticComponent,
 } from 'react';
 
 import { performanceMonitor } from './performanceMonitor';
@@ -134,7 +135,7 @@ export function smartMemo<P extends object>(
 }
 
 // Optimized callback hook with dependency tracking
-export function useOptimizedCallback<T extends (...args: any[]) => any>(
+export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
   deps: React.DependencyList,
   debugName?: string,
@@ -245,7 +246,7 @@ export function createLazyComponent<P extends Record<string, any>>(
           </div>
         )}
       >
-        <LazyComponent {...(props as any)} />
+        <LazyComponent {...((props as any))} />
       </React.Suspense>
     );
   };
@@ -278,7 +279,7 @@ export function useVirtualScrolling({
   const totalHeight = itemCount * itemHeight;
   const offsetY = visibleRange.startIndex * itemHeight;
 
-  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+  const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
     setScrollTop(event.currentTarget.scrollTop);
   }, []);
 
@@ -408,8 +409,8 @@ export function withPerformanceMonitoring<P extends object>(
 
     // Add performance data to dev tools
     useEffect(() => {
-      if (import.meta.env.DEV && ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-        ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
+      if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+        (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
           _id: any,
           _root: any,
           _priorityLevel: any,
@@ -448,7 +449,7 @@ export function useDebouncedState<T>(
 }
 
 // Throttled callback hook
-export function useThrottledCallback<T extends (...args: any[]) => any>(
+export function useThrottledCallback<T extends (...args) => any>(
   callback: T,
   delay: number = 100,
 ): T {

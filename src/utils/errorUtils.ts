@@ -1,3 +1,4 @@
+
 /**
  * Error utilities for component error handling
  */

@@ -1,3 +1,4 @@
+
 /**
  * Conditional Logger Utility
  * Provides environment-aware logging with proper levels
@@ -99,7 +100,7 @@ class ConditionalLogger {
   debug(message: string, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.DEBUG) && this.isDebugMode) {
       const formattedMessage = this.formatMessage(LogLevel.DEBUG, message, source);
-      console.log(formattedMessage, data || '');
+
     }
   }
 
@@ -191,7 +192,7 @@ try {
  console.info(msg);
 }
      override debug(msg: string) {
- console.log(msg);
+
 }
      override time(label: string) {
  console.time(label);

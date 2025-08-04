@@ -4,8 +4,11 @@
  * and rollback mechanisms with real-time monitoring integration.
  */
 
+import React from "react";
 import { advancedAPM } from './advancedMonitoring';
+import React from "react";
 import { intelligentCodeMonitor } from './intelligentCodeMonitor';
+import React from "react";
 import { performanceMonitor } from './performanceMonitor';
 
 // Types for deployment automation

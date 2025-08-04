@@ -1,3 +1,4 @@
+
 /**
  * YouTube API Type Definitions
  * Comprehensive interfaces for YouTube Data API v3 responses

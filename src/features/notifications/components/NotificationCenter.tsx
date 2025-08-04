@@ -1,18 +1,12 @@
-import { useState, useEffect, useRef   } from 'react';
-
-import {
-  BellIcon,
-  XMarkIcon,
-  CheckIcon,
-  TrashIcon,
-
-} from '@heroicons/react/24/outline';
+import React from "react";
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { useState, useEffect, useRef } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-
 import { useNotifications } from '../hooks/useNotifications';
-
 import type { Notification } from '../services/notificationService';
+import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
+
+
 
 interface NotificationCenterProps {
   className?: string;

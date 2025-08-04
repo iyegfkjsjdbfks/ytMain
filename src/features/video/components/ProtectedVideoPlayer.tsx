@@ -1,9 +1,14 @@
+import React from "react";
 import { useCallback, type FC } from 'react';
-
-import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
+import React from "react";
 import { conditionalLogger } from '@/utils/conditionalLogger';
-
+import React from "react";
+import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
+import React from "react";
 import { VideoPlayer, type VideoPlayerProps } from './VideoPlayer';
+
+
+
 
 interface ProtectedVideoPlayerProps extends VideoPlayerProps {
   // Additional props specific to the protected version can be added here

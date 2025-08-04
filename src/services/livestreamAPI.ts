@@ -1,3 +1,5 @@
+import type {
+
 /**
  * Mock Live Streaming API Service
  * This is a mock implementation for development and testing.
@@ -9,7 +11,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import type {
   LiveStream,
   ChatMessage,
   SuperChat,

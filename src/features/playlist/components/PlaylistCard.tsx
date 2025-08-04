@@ -1,32 +1,20 @@
-/**
+import React from "react";
+import { useState } from 'react';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import * as React from 'react';
+import { cn, formatRelativeTime } from '@/lib/utils';
+import { UnifiedButton } from '@/components/unified';
+import type { Playlist } from '../../../types/core';
+import { /**
  * Playlist Card Component
  * Displays playlist information with actions
  */
 
-import * as React from 'react';
-import {  useState  } from 'react';
 
-import {
-  PlayIcon,
-  EllipsisVerticalIcon,
-  LockClosedIcon,
-  EyeSlashIcon,
+  PlayIcon, EllipsisVerticalIcon, LockClosedIcon, EyeSlashIcon, ClockIcon, VideoCameraIcon, HeartIcon, ShareIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
-  ClockIcon,
-  VideoCameraIcon,
-  HeartIcon,
-  ShareIcon,
-  PencilIcon,
-  TrashIcon,
-  DocumentDuplicateIcon,
-} from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
 
-import { UnifiedButton } from '@/components/unified';
-import { cn, formatRelativeTime } from '@/lib/utils';
-
-import type { Playlist } from '../../../types/core';
 
 export interface PlaylistCardProps {
   playlist: Playlist;

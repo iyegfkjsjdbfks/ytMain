@@ -1,6 +1,8 @@
+import React from "react";
+import { useParams } from 'react-router-dom';
 import type React from 'react';
 
-import { useParams } from 'react-router-dom';
+
 
 /**
  * UserPage component for displaying a user's public profile

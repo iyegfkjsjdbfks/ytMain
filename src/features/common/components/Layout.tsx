@@ -1,10 +1,12 @@
-import type React from 'react';
-
+import React from "react";
 import { Outlet } from 'react-router-dom';
-
+import type React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
+
+
+
 
 /**
  * Main layout component for the application

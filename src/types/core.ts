@@ -1,3 +1,4 @@
+
 /**
  * Core Type Definitions
  * Centralized, strict type definitions for the YouTube clone application

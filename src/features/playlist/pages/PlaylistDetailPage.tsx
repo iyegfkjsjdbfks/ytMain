@@ -1,6 +1,8 @@
+import React from "react";
+import { useParams } from 'react-router-dom';
 import type React from 'react';
 
-import { useParams } from 'react-router-dom';
+
 
 /**
  * PlaylistDetailPage component for displaying a specific playlist's videos

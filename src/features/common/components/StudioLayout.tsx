@@ -1,9 +1,11 @@
-import type React from 'react';
-
+import React from "react";
 import { Outlet } from 'react-router-dom';
-
+import type React from 'react';
 import StudioHeader from './StudioHeader';
 import StudioSidebar from './StudioSidebar';
+
+
+
 
 /**
  * Studio layout component for the YouTube Studio section

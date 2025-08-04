@@ -1,11 +1,19 @@
+import React from "react";
 import { useState, useEffect, type FC } from 'react';
-
+import React from "react";
 import { PWAUtils } from '../config/pwa';
-import { useInstallPrompt } from '../hooks/useInstallPrompt';
-import { useOfflineStatus } from '../hooks/useOfflineStatus';
-import { usePWA } from '../hooks/usePWA';
-import { usePWAUpdates } from '../hooks/usePWAUpdates';
+import React from "react";
 import { trackEvent } from '../utils/analytics';
+import React from "react";
+import { useInstallPrompt } from '../hooks/useInstallPrompt';
+import React from "react";
+import { useOfflineStatus } from '../hooks/useOfflineStatus';
+import React from "react";
+import { usePWA } from '../hooks/usePWA';
+import React from "react";
+import { usePWAUpdates } from '../hooks/usePWAUpdates';
+
+
 
 interface PWAInstallBannerProps {
   className?: string;

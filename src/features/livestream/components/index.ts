@@ -1,8 +1,14 @@
-// Component exports for live streaming features
+import { // Component exports for live streaming features
 export { default as AdvancedLiveChat } from './AdvancedLiveChat';
-export { default as LivePolls } from './LivePolls';
-export { default as LiveQA } from './LiveQA';
-export { default as SuperChatPanel } from './SuperChatPanel';
-export { default as StreamScheduler } from './StreamScheduler';
-export { default as MultiplatformStreaming } from './MultiplatformStreaming';
-export { default as ComprehensiveLiveStudio } from './ComprehensiveLiveStudio';
+import React from "react";
+import { export { default as LivePolls } from './LivePolls';
+import React from "react";
+import { export { default as LiveQA } from './LiveQA';
+import React from "react";
+import { export { default as SuperChatPanel } from './SuperChatPanel';
+import React from "react";
+import { export { default as StreamScheduler } from './StreamScheduler';
+import React from "react";
+import { export { default as MultiplatformStreaming } from './MultiplatformStreaming';
+import React from "react";
+import { export { default as ComprehensiveLiveStudio } from './ComprehensiveLiveStudio';

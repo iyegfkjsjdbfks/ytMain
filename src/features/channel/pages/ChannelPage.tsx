@@ -1,6 +1,8 @@
+import React from "react";
+import { useParams } from 'react-router-dom';
 import type React from 'react';
 
-import { useParams } from 'react-router-dom';
+
 
 /**
  * ChannelPage component for displaying a channel's content and information

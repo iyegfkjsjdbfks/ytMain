@@ -1,12 +1,19 @@
+import React from "react";
 import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
-
+import React from "react";
 import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
-
+import React from "react";
 import { createComponentError } from '@/utils/errorUtils';
-
-import { PWAUtils } from '../config/pwa';
-import { usePWA } from '../hooks/usePWA';
+import React from "react";
 import { conditionalLogger } from '../utils/conditionalLogger';
+import React from "react";
+import { PWAUtils } from '../config/pwa';
+import React from "react";
+import { usePWA } from '../hooks/usePWA';
+
+
+
+
 
 
 interface EnhancedPWAInstallBannerProps {

@@ -86,7 +86,6 @@
     "*.config.cjs",
     "*.config.ts",
     "vite.config.ts",
-    
     "vitest.config.ts",
     "vitest.workspace.ts",
     "postcss.config.js",

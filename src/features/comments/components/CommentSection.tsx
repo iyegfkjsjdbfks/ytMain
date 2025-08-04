@@ -1,26 +1,14 @@
-import type * as React from 'react';
+import React from "react";
 import { useState, useRef, useEffect } from 'react';
-
-
-import {
-  HandThumbUpIcon,
-  HandThumbDownIcon,
-  ChatBubbleLeftIcon,
-  EllipsisVerticalIcon,
-  FlagIcon,
-  HeartIcon,
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
-import {
-  MapPinIcon as PinSolidIcon,
-  HeartIcon as HeartSolidIcon,
-} from '@heroicons/react/24/solid';
+import type * as React from 'react';
 import { formatDistanceToNow } from 'date-fns';
-
 import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
-
 import type { Comment } from '../../../types/core';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+
+
 
 
 interface CommentSectionProps {

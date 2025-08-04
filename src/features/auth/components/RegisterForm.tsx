@@ -1,11 +1,15 @@
-import type * as React from 'react';
-import {  useState  } from 'react';
-
+import React from "react";
+import { useState  } from 'react';
+import React from "react";
 import { useNavigate } from 'react-router-dom';
-
+import type * as React from 'react';
+import React from "react";
 import { useAuthStore } from '../store/authStore';
-
 import type { RegisterData } from '../types';
+
+
+
+
 
 /**
  * Registration form component with validation and error handling

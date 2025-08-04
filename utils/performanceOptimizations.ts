@@ -1,3 +1,4 @@
+import React from "react";
 import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
 
 // Performance optimization utilities
@@ -108,7 +109,7 @@ export const hookOptimizations = {
   /**
    * Create stable callback with dependency optimization
    */
-  useOptimizedCallback: <T extends (...args: any[]) => any>(
+  useOptimizedCallback: <T extends (...args) => any>(
     callback: T,
     deps: any[],
   ): T => useCallback(callback, deps),
@@ -247,14 +248,14 @@ export const eventOptimizations = {
   /**
    * Throttled event handler
    */
-  throttle: <T extends (...args: any[]) => any>(
+  throttle: <T extends (...args) => any>(
     func: T,
     delay: number,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
     let lastExecTime = 0;
 
-    return ((...args: any[]) => {
+    return ((...args) => {
       const currentTime = Date.now();
 
       if (currentTime - lastExecTime > delay) {
@@ -275,13 +276,13 @@ clearTimeout(timeoutId);
   /**
    * Debounced event handler
    */
-  debounce: <T extends (...args: any[]) => any>(
+  debounce: <T extends (...args) => any>(
     func: T,
     delay: number,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
 
-    return ((...args: any[]) => {
+    return ((...args) => {
       if (timeoutId) {
 clearTimeout(timeoutId);
 }

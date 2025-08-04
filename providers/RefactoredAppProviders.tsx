@@ -11,7 +11,7 @@ import { OptimizedMiniplayerProvider } from '../contexts/OptimizedMiniplayerCont
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { UnifiedAppProvider } from '../contexts/UnifiedAppContext';
 import { WatchLaterProvider } from '../contexts/WatchLaterContext';
-import { queryClient } from '../hooks/useQueryClient';
+import { queryClient } from '../src/hooks/useQueryClient';
 import PWAStatus from '../src/components/PWAStatus';
 import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
 

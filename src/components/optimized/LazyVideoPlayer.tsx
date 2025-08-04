@@ -1,8 +1,10 @@
+import React from "react";
 import { lazy, Suspense, memo } from 'react';
-
 import LoadingSpinner from '../LoadingSpinner';
-
 import type { Video } from '../../types/core';
+
+
+
 
 // Lazy load the heavy video player component
 const VideoPlayer = lazy(() => import('../../features/video/components/VideoPlayer'));

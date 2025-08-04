@@ -1,7 +1,7 @@
+import React from "react";
 import { useState } from 'react';
-
-import {
-  EyeIcon,
+import React from "react";
+import { EyeIcon,
   ClockIcon,
   UserGroupIcon,
   CurrencyDollarIcon,

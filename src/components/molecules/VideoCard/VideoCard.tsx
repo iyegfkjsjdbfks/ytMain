@@ -1,11 +1,17 @@
-import { useState } from 'react';
-
-import { User, MoreVertical } from 'lucide-react';
+import React from "react";
 import { Link } from 'react-router-dom';
-
+import React from "react";
+import { User, MoreVertical } from 'lucide-react';
+import React from "react";
+import { useState } from 'react';
+import React from "react";
 import { Button } from '@/components/atoms/Button';
+import React from "react";
 import { formatNumber, getTimeAgo, cn } from '@/lib/utils';
 import type { VideoCardProps as VideoCardPropsBase } from '@/types';
+
+
+
 
 // Simple image component since we're not using Next.js
 const Image = ({

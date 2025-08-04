@@ -1,4 +1,6 @@
+import React from "react";
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: string) => {
@@ -38,7 +40,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args: any[]) => any>(
+export const useThrottle = <T extends (...args) => any>(
   callback: T,
   delay: number,
 ): T => {

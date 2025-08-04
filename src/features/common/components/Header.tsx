@@ -1,9 +1,13 @@
-import type * as React from 'react';
-import {  useState  } from 'react';
-
+import React from "react";
+import { useState  } from 'react';
+import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
-
+import type * as React from 'react';
+import React from "react";
 import { useAuthStore } from '../../auth/store/authStore';
+
+
+
 
 /**
  * Main header component with navigation, search and user controls

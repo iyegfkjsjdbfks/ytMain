@@ -1,8 +1,8 @@
+import React from "react";
+import { useState  } from 'react';
 import type * as React from 'react';
-import {  useState  } from 'react';
-
-import {
-  FlagIcon,
+import React from "react";
+import { FlagIcon,
   EyeIcon,
   CheckIcon,
   XMarkIcon,

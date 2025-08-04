@@ -58,10 +58,15 @@
     "refactor:comprehensive": "node scripts/comprehensive-refactor-v2.js",
     "refactor:iterative": "node scripts/iterative-optimizer.js",
     "test:memory-safe": "NODE_OPTIONS=\"--max-old-space-size=4096\" vitest run --pool=forks --poolOptions.forks.singleFork=true",
-    "build:optimized": "NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build",
+    "build:optimized": "NODE_OPTIONS=\"--max-old-space-size=8192\" npm run build",
     "validate:comprehensive": "npm run type-check && npm run lint && npm run test:memory-safe",
     "validate:all": "./scripts/validate-all.sh",
-    "optimize": "npm run refactor:iterative"
+    "optimize": "npm run refactor:iterative",
+    "test:safe": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest run --pool=threads --poolOptions.threads.singleThread=true --reporter=basic",
+    "test:watch:safe": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest --pool=threads --poolOptions.threads.singleThread=true",
+    "test:simple": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest run --pool=forks --poolOptions.forks.singleFork=true --reporter=basic --no-coverage",
+    "validate:quick": "npm run type-check && npm run lint",
+    "validate:full": "npm run type-check && npm run lint && npm run build:optimized"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",
