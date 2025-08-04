@@ -7,7 +7,6 @@
 import { advancedAPM } from './advancedMonitoring';
 import { codeAnalysisEngine } from './codeAnalysisEngine';
 import { performanceMonitor } from './performanceMonitor';
-import { securityUtils } from './securityUtils';
 
 // Types for workflow automation
 interface WorkflowStage {
@@ -104,7 +103,7 @@ return undefined;
   /**
    * Execute workflow
    */
-  async executeWorkflow(workflowName: string, _context: Record<string, any> = {}): Promise<{
+  async executeWorkflow(workflowName: string, context: Record<string, any> = {}): Promise<{
     success: boolean;
     results: QualityGateResult[];
     failedStage?: string;
@@ -130,20 +129,20 @@ return undefined;
             success: false,
             results,
             failedStage: stage.name,
-            _error: `Stage '${stage.name}' failed quality gates`,
+            error: `Stage '${stage.name}' failed quality gates`,
           };
         }
 
         console.log(`✅ Stage '${stage.name}' completed`);
       } catch (error) {
-        console.error(`💥 Stage '${stage.name}' _error:`, error);
+        console.error(`💥 Stage '${stage.name}' error:`, error);
 
         if (stage.required) {
           return {
             success: false,
             results,
             failedStage: stage.name,
-            _error: error instanceof Error ? error.message : 'Unknown error',
+            error: error instanceof Error ? error.message : 'Unknown error',
           };
         }
       }
@@ -156,18 +155,18 @@ return undefined;
   /**
    * Execute deployment with strategy
    */
-  async executeDeployment(strategyName: string, _version: string, _config: Record<string, any> = {}): Promise<{
+  async executeDeployment(strategyName: string, version: string, config: Record<string, any> = {}): Promise<{
     success: boolean;
     deploymentId: string;
     _strategy: string;
     healthStatus: any;
   }> {
-    const _strategy = this.deploymentStrategies.get(strategyName);
+    const strategy = this.deploymentStrategies.get(strategyName);
     if (!strategy) {
       throw new Error(`Deployment strategy '${strategyName}' not found`);
     }
 
-    const deploymentId = securityUtils.generateSecureToken(16);
+    const deploymentId = this.generateSecureToken(16);
     this.currentDeployment = {
       id: deploymentId,
       _strategy: strategyName,
@@ -315,9 +314,9 @@ return undefined;
 
     // Generate trends (mock data for now)
     const trends = {
-      executions: Array.from({ length: days }, (_, i) => Math.floor(Math.random() * 10) + 5),
-      successRates: Array.from({ length: days }, (_, i) => Math.random() * 0.2 + 0.8),
-      durations: Array.from({ length: days }, (_, i) => Math.random() * 300 + 120),
+      executions: Array.from({ length: days }, () => Math.floor(Math.random() * 10) + 5),
+      successRates: Array.from({ length: days }, () => Math.random() * 0.2 + 0.8),
+      durations: Array.from({ length: days }, () => Math.random() * 300 + 120),
       timestamps: Array.from({ length: days }, (_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000),
     };
 
@@ -330,7 +329,7 @@ return undefined;
     };
   }
 
-  private async executeStage(stage: WorkflowStage, _context: Record<string, any>): Promise<QualityGateResult> {
+  private async executeStage(stage: WorkflowStage, context: Record<string, any>): Promise<QualityGateResult> {
     const startTime = Date.now();
     const results: any[] = [];
     let passed = true;
@@ -373,7 +372,7 @@ return undefined;
     return result;
   }
 
-  private async evaluateCondition(condition: WorkflowCondition, _context: Record<string, any>): Promise<{
+  private async evaluateCondition(condition: WorkflowCondition, context: Record<string, any>): Promise<{
     condition: string;
     passed: boolean;
     value: any;
@@ -386,22 +385,22 @@ return undefined;
     // Get value based on condition type
     switch (condition.type) {
       case 'metric':
-        value = await this.getMetricValue(condition.source);
+        value = await this.getMetricValue(condition._source);
         break;
       case 'test-result':
-        value = await this.getTestResult(condition.source);
+        value = await this.getTestResult(condition._source);
         break;
       case 'security-scan':
-        value = await this.getSecurityScanResult(condition.source);
+        value = await this.getSecurityScanResult(condition._source);
         break;
       case 'performance':
-        value = await this.getPerformanceMetric(condition.source);
+        value = await this.getPerformanceMetric(condition._source);
         break;
       case 'code-quality':
-        value = await this.getCodeQualityMetric(condition.source);
+        value = await this.getCodeQualityMetric(condition._source);
         break;
       default:
-        value = context[condition.source];
+        value = context[condition._source];
     }
 
     // Evaluate condition
@@ -430,15 +429,15 @@ return undefined;
     }
 
     return {
-      condition: `${condition.source} ${condition.operator} ${condition.value}`,
+      condition: `${condition._source} ${condition.operator} ${condition.value}`,
       passed,
       value,
       threshold: condition.value,
-      message: passed ? 'Condition passed' : `Expected ${condition.source} to be ${condition.operator} ${condition.value}, got ${value}`,
+      message: passed ? 'Condition passed' : `Expected ${condition._source} to be ${condition.operator} ${condition.value}, got ${value}`,
     };
   }
 
-  private async executeAction(action: WorkflowAction, _context: any): Promise<void> {
+  private async executeAction(action: WorkflowAction, context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
         console.warn(`🔔 Notification: ${action?._config.message || 'Quality gate failed'}`);
@@ -921,6 +920,15 @@ return undefined;
         },
       ],
     });
+  }
+
+  private generateSecureToken(length: number): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   }
 
   private startWorkflowMonitoring(): void {
