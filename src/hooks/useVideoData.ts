@@ -1,14 +1,14 @@
 import React from "react";
 import { useCallback } from 'react';
 
-import { getVideos, getVideosByChannelName, getSubscribedChannelNames } from '../services/realVideoService';
+// import { getVideos, getVideosByChannelName, getSubscribedChannelNames } // from '../services/realVideoService' // Service not found;
 
 import { parseRelativeDate } from '../utils/dateUtils';
 
 import { parseViewCount } from '../utils/numberUtils';
 
 import { useAsyncData } from './useAsyncData';
-import type { Video } from '../src/types/core';
+import type { Video } from '../types/core';
 
 /**
  * Hook for fetching all videos

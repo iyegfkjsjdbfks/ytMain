@@ -1,13 +1,13 @@
 import React from "react";
 import { useCallback } from 'react';
 
-import { getVideos, getShortsVideos } from '../services/realVideoService';
+// import { getVideos, getShortsVideos } // from '../services/realVideoService' // Service not found;
 
-import { unifiedDataService } from '../src/services/unifiedDataService';
+import { unifiedDataService } from '../services/unifiedDataService';
 
 import { useAsyncData } from './useAsyncData';
-import type { UnifiedVideoMetadata } from '../src/services/metadataNormalizationService';
-import type { Video } from '../src/types/core';
+import type { UnifiedVideoMetadata } from '../services/metadataNormalizationService';
+import type { Video } from '../types/core';
 
 /**
  * Hook for fetching different types of videos using unified data service
