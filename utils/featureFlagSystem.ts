@@ -412,8 +412,8 @@ return undefined;
         const controlVariant = variants[0];
         const testVariant = variants[1];
 
-        const testData = testVariant ? variantResults[testVariant] || { value: null, sampleSize: 0 } : undefined;
-        const controlData = controlVariant ? variantResults[controlVariant] || { value: null, sampleSize: 0 } : undefined;
+        const testData = testVariant ? variantResults[testVariant] || { value: null, sampleSize: 0 } || { value: null, sampleSize: 0 } : undefined;
+        const controlData = controlVariant ? variantResults[controlVariant] || { value: null, sampleSize: 0 } || { value: null, sampleSize: 0 } : undefined;
 
         if (!testData || !controlData) {
 return [];
@@ -895,8 +895,8 @@ return undefined;
     }, 30000); // Check every 30 seconds
   }
 
-  private async checkAlertThreshold(_flag: FeatureFlag, _threshold: AlertThreshold): Promise<void> {
-    let _currentValue: number;
+  private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
+    let __currentValue: number;
 
     switch (threshold.metric) {
       case 'error_rate':

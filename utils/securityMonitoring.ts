@@ -388,9 +388,9 @@ return;
   /**
    * Respond to threat automatically
    */
-  private async respondToThreat(_threat: SecurityThreat): Promise<SecurityResponse | null> {
+  private async respondToThreat(__threat: SecurityThreat): Promise<SecurityResponse | null> {
     try {
-      let _action: SecurityResponse['action'];
+      let __action: SecurityResponse['action'];
 
       // Determine response action based on threat type and severity
       switch (threat.type) {
@@ -545,7 +545,7 @@ return;
   /**
    * Execute compliance check (simulated)
    */
-  private async executeComplianceCheck(__check: ComplianceCheck): Promise<{
+  private async executeComplianceCheck(___check: ComplianceCheck): Promise<{
     status: ComplianceCheck['status'];
     evidence?: string;
   }> {

@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
 
-import { getSubscribedChannels,
-  updateSubscriptionNotifications,
-  unsubscribeFromChannel,
-} // from '../services/realVideoService' // Service not found;
+// Temporarily mock these functions until service is implemented
+const getSubscribedChannels = async (): Promise<SubscribedChannel[]> => [];
+const updateSubscriptionNotifications = async (channelId: string, enabled: boolean): Promise<void> => {};
+const unsubscribeFromChannel = async (channelId: string): Promise<void> => {};
 
 export interface SubscribedChannel {
   id: string;

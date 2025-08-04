@@ -49,12 +49,12 @@ return null;
             {video.title}
         </Link>
         <Link
-            to={`/channel/${encodeURIComponent((video.channelName || video.channelTitle || "Unknown"))}`}
+            to={`/channel/${encodeURIComponent(((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown"))}`}
             className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 block truncate mt-0.5"
-            title={(video.channelName || video.channelTitle || "Unknown")}
+            title={((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown")}
             onClick={(e) => e.stopPropagation()}
         >
-            {(video.channelName || video.channelTitle || "Unknown")}
+            {((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown")}
         </Link>
       </div>
       <button
