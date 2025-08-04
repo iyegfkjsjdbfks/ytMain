@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { ChartBarIcon,
   EyeIcon,
   ClockIcon,
@@ -30,7 +30,6 @@ const Legend = (_props: any) => null;
 
 // Temporary utility functions
 
-
 interface DashboardStats {
   totalViews: number;
   totalSubscribers: number;
@@ -54,7 +53,6 @@ interface VideoPerformance {
   revenue: number;
   watchTime: number;
 }
-
 
 interface AudienceData {
   country: string;
@@ -166,7 +164,6 @@ const DashboardPage: React.FC = () => {
           watchTime: 35000,
         },
       ];
-
 
       const mockAudienceData: AudienceData[] = [
         { country: 'United States', percentage: 35, views: 157500 },

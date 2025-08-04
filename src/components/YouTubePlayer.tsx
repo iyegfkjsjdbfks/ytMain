@@ -1,6 +1,5 @@
 import type { Video } from '../types/core';
 
-
 export interface YouTubePlayerProps {
   video: Video;
   autoplay?: boolean;

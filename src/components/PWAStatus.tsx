@@ -8,7 +8,6 @@ import {
   BellIcon
 } from '@heroicons/react/24/outline';
 
-
 const PWAStatus: React.FC = () => {
   const {
     isInstalled,

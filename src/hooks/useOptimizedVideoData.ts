@@ -1,11 +1,8 @@
 import React from "react";
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import React from "react";
+
 import { getVideos, getVideosByCategory } from '../services/realVideoService';
 import type { Video } from '../types';
-
-
-
 
 interface UseVideoDataOptions {
   category?: string;

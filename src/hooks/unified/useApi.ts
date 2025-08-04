@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback, useRef } from 'react';
-import React from "react";
+
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse } from '../../types/core';
 
@@ -8,9 +8,6 @@ import type { ApiResponse } from '../../types/core';
  * Unified API Hook
  * Centralized hook for API calls with caching, loading states, and error handling
  */
-
-
-
 
 // Hook configuration
 export interface UseApiConfig<T> {

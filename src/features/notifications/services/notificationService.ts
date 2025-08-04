@@ -7,8 +7,6 @@ import type { ApiResponse } from '../../../types/core';
  * Comprehensive notification management system
  */
 
-
-
 export interface Notification {
   id: string;
   type: 'video_upload' | 'comment_reply' | 'like' | 'subscribe' | 'live_stream' | 'mention' | 'system' | 'milestone';

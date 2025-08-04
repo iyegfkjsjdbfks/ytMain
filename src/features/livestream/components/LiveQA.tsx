@@ -5,7 +5,6 @@ import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
 import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 
-
 interface LiveQAProps {
   streamId: string;
   isOwner: boolean;

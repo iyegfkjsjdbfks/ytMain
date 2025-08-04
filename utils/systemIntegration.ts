@@ -6,15 +6,15 @@
 
 import React from "react";
 import { advancedAPM } from './advancedMonitoring';
-import React from "react";
+
 import { deploymentAutomation } from './deploymentAutomation';
-import React from "react";
+
 import { featureFlagManager } from './featureFlagSystem';
-import React from "react";
+
 import { intelligentCodeMonitor } from './intelligentCodeMonitor';
-import React from "react";
+
 import { performanceMonitor } from './performanceMonitor';
-import React from "react";
+
 import { securityMonitoring } from './securityMonitoring';
 
 // System integration types

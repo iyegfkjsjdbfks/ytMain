@@ -1,8 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useCallback, useState } from 'react';
 
-
-
 interface PerformanceMetrics {
   renderTime: number;
   mountTime: number;

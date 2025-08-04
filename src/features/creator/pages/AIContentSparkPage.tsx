@@ -1,6 +1,5 @@
 import type React from 'react';
 
-
 /**
  * AIContentSparkPage component for AI-assisted content creation
  */

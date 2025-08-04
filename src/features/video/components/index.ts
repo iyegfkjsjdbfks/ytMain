@@ -1,11 +1,22 @@
-import { // Export video components
+// Video component exports
+export { default as VideoPlayer } from './VideoPlayer';
 export { default as VideoCard } from './VideoCard';
-import React from "react";
-import { export { default as VideoList } from './VideoList';
-import React from "react";
-import { export { default as VideoGrid } from './VideoGrid';
-import React from "react";
-import { export { default as VideoUpload } from './VideoUpload';
-import React from "react";
-import { export { default as StudioVideoGrid } from './StudioVideoGrid';
-export * from './VideoPlayer';
+export { default as VideoGrid } from './VideoGrid';
+export { default as VideoList } from './VideoList';
+export { default as VideoDescription } from './VideoDescription';
+export { default as VideoComments } from './VideoComments';
+export { default as VideoUpload } from './VideoUpload';
+export { default as VideoMetadata } from './VideoMetadata';
+
+// Protected components
+export { default as ProtectedVideoPlayer } from './ProtectedVideoPlayer';
+
+// Type exports
+export type { VideoPlayerProps } from './VideoPlayer';
+export type { VideoCardProps } from './VideoCard';
+export type { VideoGridProps } from './VideoGrid';
+export type { VideoListProps } from './VideoList';
+export type { VideoDescriptionProps } from './VideoDescription';
+export type { VideoCommentsProps } from './VideoComments';
+export type { VideoUploadProps } from './VideoUpload';
+export type { VideoMetadataProps } from './VideoMetadata';

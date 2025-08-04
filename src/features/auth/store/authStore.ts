@@ -1,13 +1,10 @@
 import React from "react";
 import { create } from 'zustand';
-import React from "react";
+
 import { authService } from '../services/authService';
-import React from "react";
+
 import { logger } from '../../../utils/logger';
 import type { AuthState, LoginCredentials, RegisterData, User } from '../types';
-
-
-
 
 interface AuthStore extends AuthState {
   login: (credentials: LoginCredentials) => Promise<User>;

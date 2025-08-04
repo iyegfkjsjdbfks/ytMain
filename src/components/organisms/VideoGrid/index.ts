@@ -1,5 +1,7 @@
-import React from "react";
-import { export * from './VideoGrid';
+// Video Grid component exports
+export { default as VideoGrid } from './VideoGrid';
+export { default } from './VideoGrid';
+
+// Video Grid component types
 export type { VideoGridProps } from './VideoGrid';
-import { // Re-export the VideoItem type from the types directory
-export type { VideoItem } from '@/types';
+export type { VideoItem } from '../../types/core';

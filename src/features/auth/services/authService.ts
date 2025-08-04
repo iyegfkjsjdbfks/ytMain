@@ -2,8 +2,6 @@ import React from "react";
 import { logger } from '../../../utils/logger';
 import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
 
-
-
 /**
  * Service for handling authentication-related API requests
  */

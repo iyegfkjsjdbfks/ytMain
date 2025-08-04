@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef, useCallback } from 'react';
-import React from "react";
+
 import { useUnifiedApp } from './useUnifiedApp';
-
-
 
 /**
  * Enhanced useLocalStorage hook with error handling and type safety

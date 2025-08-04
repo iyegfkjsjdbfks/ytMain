@@ -6,7 +6,7 @@
 
 import React from "react";
 import { advancedAPM } from './advancedMonitoring';
-import React from "react";
+
 import { codeAnalysisEngine } from './codeAnalysisEngine';
 
 // Types for code monitoring

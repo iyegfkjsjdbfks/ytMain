@@ -1,16 +1,12 @@
 import React from "react";
 import { useCallback, type FC } from 'react';
-import React from "react";
+
 import { useParams, useSearchParams } from 'react-router-dom';
-import React from "react";
+
 import { conditionalLogger } from '@/utils/conditionalLogger';
-import React from "react";
+
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import WatchPage from './WatchPage';
-
-
-
-
 
 /**
  * WatchPage wrapped with specialized error boundary

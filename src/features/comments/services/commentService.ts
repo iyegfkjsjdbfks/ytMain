@@ -7,8 +7,6 @@ import type { Comment, ApiResponse } from '../../../types/core';
  * Comprehensive comment management service
  */
 
-
-
 export interface CreateCommentData {
   content: string;
   videoId: string;

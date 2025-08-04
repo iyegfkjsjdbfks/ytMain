@@ -6,8 +6,6 @@ import type { LiveStream } from '../../../types/livestream';
 import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 
-
-
 interface StreamManagementDashboardProps {
   className?: string;
 }

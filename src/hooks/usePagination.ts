@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useMemo, useCallback } from 'react';
 
-
 interface UsePaginationProps {
   totalCount: number;
   pageSize: number;

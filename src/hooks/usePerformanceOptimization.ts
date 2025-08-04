@@ -1,7 +1,6 @@
 import React from "react";
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: string) => {
   const renderCount = useRef(0);

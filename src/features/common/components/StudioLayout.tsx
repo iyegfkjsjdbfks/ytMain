@@ -4,9 +4,6 @@ import type React from 'react';
 import StudioHeader from './StudioHeader';
 import StudioSidebar from './StudioSidebar';
 
-
-
-
 /**
  * Studio layout component for the YouTube Studio section
  * Provides the studio-specific structure including specialized header and sidebar

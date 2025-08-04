@@ -1,6 +1,5 @@
 import type React from 'react';
 
-
 /**
  * TrendingPage component for displaying trending videos
  */

@@ -1,11 +1,8 @@
 import React from "react";
 import { NavLink, Link } from 'react-router-dom';
 import type React from 'react';
-import React from "react";
+
 import { useAuthStore } from '../../auth/store/authStore';
-
-
-
 
 // Fix missing Link import
 

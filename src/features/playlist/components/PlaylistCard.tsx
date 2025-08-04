@@ -11,10 +11,7 @@ import { /**
  * Displays playlist information with actions
  */
 
-
   PlayIcon, EllipsisVerticalIcon, LockClosedIcon, EyeSlashIcon, ClockIcon, VideoCameraIcon, HeartIcon, ShareIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
-
-
 
 export interface PlaylistCardProps {
   playlist: Playlist;

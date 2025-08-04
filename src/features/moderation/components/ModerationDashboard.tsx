@@ -1,7 +1,7 @@
 import React from "react";
 import { useState  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { FlagIcon,
   EyeIcon,
   CheckIcon,

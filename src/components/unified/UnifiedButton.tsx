@@ -1,7 +1,7 @@
 import React from "react";
 import { forwardRef  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { cn } from '@/lib/utils';
 import LoadingSpinner from '@components/LoadingSpinner';
 
@@ -10,12 +10,8 @@ import LoadingSpinner from '@components/LoadingSpinner';
  * Consolidates all button variants into a single, comprehensive component
  */
 
-
-
-
 // Button variant types
-export type ButtonVariant =
-  | 'primary'
+export type ButtonVariant = | 'primary'
   | 'secondary'
   | 'ghost'
   | 'danger'

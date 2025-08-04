@@ -14,7 +14,6 @@ export interface Channel {
   isVerified?: boolean;
 }
 
-
 export interface VideoMetrics {
   views: number;
   likes: number;

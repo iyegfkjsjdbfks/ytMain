@@ -1,35 +1,40 @@
-import { /**
- * Features Index
- * Centralized exports for all feature modules
- */
+// Feature module exports
 
-// Authentication Features
-export * from './auth';
+// Common features
+export * from './common';
 
-// Video Features
+// Video features
 export * from './video';
 
-// Playlist Features
-export { playlistService } from './playlist/services/playlistService';
-import { export * from './playlist/hooks/usePlaylists';
-export { PlaylistCard } from './playlist/components/PlaylistCard';
-import { // Comment Features
-export { commentService } from './comments/services/commentService';
-import { export * from './comments/hooks/useComments';
+// Auth features
+export * from './auth';
 
-// Search Features
-export { searchService } from './search/services/searchService';
-import { // Notification Features
-export { notificationService } from './notifications/services/notificationService';
+// Playlist features 
+export * from './playlist';
 
-// Channel Features
-// export * from './channel';
+// Channel features
+export * from './channel';
 
-// User Features
-// export * from './user';
+// Comment features
+export * from './comments';
 
-// Creator Studio Features
-// export * from './studio';
+// Search features
+export * from './search';
 
-// Common Features
-export * from './common';
+// Analytics features
+export * from './analytics';
+
+// Livestream features
+export * from './livestream';
+
+// Creator features
+export * from './creator';
+
+// Community features
+export * from './community';
+
+// Moderation features
+export * from './moderation';
+
+// Notification features
+export * from './notifications';

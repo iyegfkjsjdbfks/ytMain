@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-
 /**
  * Hook that debounces a value
  * @param value - The value to debounce

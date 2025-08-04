@@ -7,8 +7,6 @@ import type { Video, Channel, Playlist, User, ApiResponse } from '../../../types
  * Comprehensive search functionality for videos, channels, playlists, and more
  */
 
-
-
 export interface SearchFilters {
   type?: 'all' | 'video' | 'channel' | 'playlist' | 'user';
   duration?: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min

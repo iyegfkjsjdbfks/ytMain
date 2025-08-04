@@ -1,24 +1,19 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
-import React from "react";
+
 import { createComponentError } from '@/utils/errorUtils';
-import React from "react";
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import React from "react";
+
 import { PWAUtils } from '../utils/pwa';
-import React from "react";
+
 import { useInstallPrompt } from './useInstallPrompt';
-import React from "react";
+
 import { useOfflineStatus } from './useOfflineStatus';
-import React from "react";
+
 import { usePWANotifications } from './usePWANotifications';
-import React from "react";
+
 import { usePWAUpdates } from './usePWAUpdates';
-
-
-
-
-
 
 interface PWAState {
   isInitialized: boolean;

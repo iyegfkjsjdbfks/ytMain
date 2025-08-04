@@ -2,10 +2,6 @@ import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
 
-
-
-
-
 interface VideoGridProps {
   title?: string;
   videos: Video[];

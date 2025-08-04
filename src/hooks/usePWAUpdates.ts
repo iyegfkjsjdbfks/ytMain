@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
-import React from "react";
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-
-
 
 interface UpdateState {
   updateAvailable: boolean;

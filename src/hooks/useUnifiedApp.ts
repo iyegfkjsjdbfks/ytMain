@@ -1,9 +1,7 @@
 import React from "react";
 import { useContext } from 'react';
-import React from "react";
+
 import { UnifiedAppContext } from '../contexts/UnifiedAppContext';
-
-
 
 /**
  * Hook to access the unified app context

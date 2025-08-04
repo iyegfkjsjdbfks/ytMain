@@ -1,16 +1,23 @@
-import { // Export all common components, hooks, and utilities
+// Common feature exports
 export { default as ErrorBoundary } from './components/ErrorBoundary';
-import React from "react";
-import { export { default as Layout } from './components/Layout';
-import React from "react";
-import { export { default as StudioLayout } from './components/StudioLayout';
-import React from "react";
-import { export { default as Header } from './components/Header';
-import React from "react";
-import { export { default as Footer } from './components/Footer';
-import React from "react";
-import { export { default as Sidebar } from './components/Sidebar';
-import React from "react";
-import { export { default as StudioHeader } from './components/StudioHeader';
-import React from "react";
-import { export { default as StudioSidebar } from './components/StudioSidebar';
+
+export { default as Layout } from './components/Layout';
+
+export { default as StudioLayout } from './components/StudioLayout';
+
+export { default as Header } from './components/Header';
+
+export { default as Footer } from './components/Footer';
+
+export { default as Sidebar } from './components/Sidebar';
+
+export { default as StudioHeader } from './components/StudioHeader';
+
+export { default as StudioSidebar } from './components/StudioSidebar';
+
+// Type exports
+export type { ErrorBoundaryProps } from './components/ErrorBoundary';
+export type { LayoutProps } from './components/Layout';
+export type { HeaderProps } from './components/Header';
+export type { FooterProps } from './components/Footer';
+export type { SidebarProps } from './components/Sidebar';

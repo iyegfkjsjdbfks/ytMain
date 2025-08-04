@@ -1,14 +1,11 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
-import React from "react";
+
 import { createComponentError } from '@/utils/errorUtils';
-import React from "react";
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import React from "react";
+
 import { PWAUtils, PWAEvents } from '../config/pwa';
-
-
-
 
 interface PWAInstallPrompt extends Event {
   prompt(): Promise<void>;

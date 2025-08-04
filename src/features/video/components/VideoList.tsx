@@ -2,10 +2,6 @@ import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
 
-
-
-
-
 interface VideoListProps {
   videos: Video[];
   layout?: 'grid' | 'list';

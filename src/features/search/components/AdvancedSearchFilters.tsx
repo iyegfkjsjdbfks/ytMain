@@ -35,7 +35,6 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   className = '',
 }) => {
 
-
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,
     value: SearchFilters[K],

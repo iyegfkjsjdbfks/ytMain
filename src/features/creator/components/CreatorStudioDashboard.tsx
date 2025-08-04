@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from 'react';
-import React from "react";
+
 import { EyeIcon,
   ClockIcon,
   UserGroupIcon,
@@ -18,7 +18,6 @@ import { EyeIcon,
 const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
   <VideoCameraIcon className={className} />
 );
-
 
 interface DashboardMetrics {
   views: {

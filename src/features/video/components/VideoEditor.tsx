@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { PlayIcon,
   PauseIcon,
   ScissorsIcon,
@@ -139,7 +139,6 @@ export const VideoEditor: React.FC = () => {
       isPlaying: !prev.isPlaying,
     }));
   };
-
 
   const splitClip = (clipId: string, splitTime: number) => {
     setEditorState(prev => {

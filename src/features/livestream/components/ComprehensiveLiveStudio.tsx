@@ -7,7 +7,6 @@ import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLef
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { AdvancedLiveChat, LivePolls, LiveQA, SuperChatPanel, StreamScheduler, MultiplatformStreaming } from '.';
 
-
 interface ComprehensiveLiveStudioProps {
   className?: string;
 }
