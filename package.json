@@ -56,10 +56,12 @@
     "refactor:full": "./scripts/refactor.sh",
     "refactor:analyze": "node scripts/refactor-optimize.js --analyze-only",
     "refactor:comprehensive": "node scripts/comprehensive-refactor-v2.js",
+    "refactor:iterative": "node scripts/iterative-optimizer.js",
     "test:memory-safe": "NODE_OPTIONS=\"--max-old-space-size=4096\" vitest run --pool=forks --poolOptions.forks.singleFork=true",
     "build:optimized": "NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build",
     "validate:comprehensive": "npm run type-check && npm run lint && npm run test:memory-safe",
-    "optimize": "npm run refactor:comprehensive"
+    "validate:all": "./scripts/validate-all.sh",
+    "optimize": "npm run refactor:iterative"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",
