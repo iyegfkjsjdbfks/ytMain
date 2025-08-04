@@ -84,7 +84,7 @@ class IntelligentWorkflowEngine {
    */
   start(): void {
     if (this.isRunning) {
-return;
+return undefined;
 }
 
     this.isRunning = true;
@@ -162,7 +162,7 @@ return;
     _strategy: string;
     healthStatus: any;
   }> {
-    const strategy = this.deploymentStrategies.get(strategyName);
+    const _strategy = this.deploymentStrategies.get(strategyName);
     if (!strategy) {
       throw new Error(`Deployment strategy '${strategyName}' not found`);
     }
@@ -441,21 +441,21 @@ return;
   private async executeAction(action: WorkflowAction, _context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
-        console.warn(`🔔 Notification: ${action.config.message || 'Quality gate failed'}`);
+        console.warn(`🔔 Notification: ${action?._config.message || 'Quality gate failed'}`);
         break;
       case 'block':
-        throw new Error(action.config.message || 'Workflow blocked by quality gate');
+        throw new Error(action?._config.message || 'Workflow blocked by quality gate');
       case 'auto-fix':
-        await this.executeAutoFix(action.config);
+        await this.executeAutoFix(action?._config);
         break;
       case 'create-issue':
-        await this.createIssue(action.config, context);
+        await this.createIssue(action?._config, context);
         break;
       case 'rollback':
-        await this.executeRollback(action.config);
+        await this.executeRollback(action?._config);
         break;
       case 'scale':
-        await this.executeScaling(action.config);
+        await this.executeScaling(action?._config);
         break;
     }
   }
@@ -520,7 +520,7 @@ return;
   private async executeRollingDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
     console.log('🔄 Starting rolling deployment');
 
-    const batchSize = config.batchSize || 1;
+    const _batchSize = config.batchSize || 1;
     const totalInstances = config.totalInstances || 3;
 
     for (let i = 0; i < totalInstances; i += batchSize) {
@@ -667,7 +667,7 @@ return;
 
   private async getCodeQualityMetric(_source: string): Promise<number> {
     const analysis = await codeAnalysisEngine.analyzeCode();
-    return (analysis as any)[source] || Math.random() * 100;
+    return ((analysis as any))[source] || Math.random() * 100;
   }
 
   private async executeAutoFix(_config: any): Promise<void> {
@@ -927,7 +927,7 @@ return;
     // Monitor workflow health and performance
     setInterval(() => {
       if (!this.isRunning) {
-return;
+return undefined;
 }
 
       const analytics = this.getWorkflowAnalytics(1); // Last day

@@ -400,7 +400,7 @@ export const runAccessibilityAudit = async (_container: HTMLElement) => {
   try {
     // Import axe-core for accessibility testing
     await import('@axe-core/react');
-    
+
     // Return a compatible result format
     return {
       issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>,

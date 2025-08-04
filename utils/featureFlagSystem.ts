@@ -132,7 +132,7 @@ class AdvancedFeatureFlagManager {
    */
   start(): void {
     if (this.isRunning) {
-return;
+return undefined;
 }
 
     this.isRunning = true;
@@ -412,8 +412,10 @@ return;
 
         const testData = testVariant ? variantResults[testVariant] : undefined;
         const controlData = controlVariant ? variantResults[controlVariant] : undefined;
-        
-        if (!testData || !controlData) return [];
+
+        if (!testData || !controlData) {
+return [];
+}
 
         const controlValue = controlData.value;
         const testValue = testData.value;
@@ -435,7 +437,7 @@ return;
           sampleSize: testData.sampleSize,
           confidence,
           significantDifference,
-          winningVariant: significantDifference && winningVariant ? winningVariant : "",
+          winningVariant: significantDifference && winningVariant ? winningVariant : '',
         });
       }
     }
@@ -513,12 +515,12 @@ return;
     if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
       const flag = this.flags.get(flagId);
       if (!flag) {
-return;
+return undefined;
 }
 
       const winningVariant = flag.variants?.find(v => v.id === recommendation.winningVariant);
       if (!winningVariant) {
-return;
+return undefined;
 }
 
       // Update flag to use winning variant as default
@@ -544,7 +546,7 @@ return;
   emergencyRollback(flagId: string, reason: string): void {
     const flag = this.flags.get(flagId);
     if (!flag) {
-return;
+return undefined;
 }
 
     // Disable flag or set to safe default
@@ -685,7 +687,7 @@ continue;
     variant?: string;
     reason: string;
   } {
-    const strategy = flag.rolloutStrategy;
+    const _strategy = flag.rolloutStrategy;
 
     switch (strategy.type) {
       case 'immediate':
@@ -760,7 +762,7 @@ continue;
     }
 
     // Fallback to first variant
-    return variants[0] || { id: "default", name: "Default", weight: 100 };
+    return variants[0] || { id: 'default', name: 'Default', weight: 100 };
   }
 
   private getUserHash(userId: string, flagId: string): number {
@@ -802,9 +804,9 @@ continue;
   }
 
   private startGradualRollout(flag: FeatureFlag): void {
-    const strategy = flag.rolloutStrategy;
+    const _strategy = flag.rolloutStrategy;
     if (strategy.type !== 'gradual' || !strategy._config.incrementPercentage || !strategy._config.incrementInterval) {
-      return;
+      return undefined;
     }
 
     const currentPercentage = strategy._config.percentage || 0;
@@ -812,7 +814,7 @@ continue;
     const incrementInterval = strategy._config.incrementInterval * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
-      return; // Already at 100%
+      return undefined; // Already at 100%
     }
 
     const timer = setTimeout(() => {
@@ -843,12 +845,12 @@ continue;
     // Monitor flag performance and trigger alerts
     setInterval(() => {
       if (!this.isRunning) {
-return;
+return undefined;
 }
 
       this.flags.forEach(flag => {
         if (!flag.monitoring.alertThresholds.length) {
-return;
+return undefined;
 }
 
         flag.monitoring.alertThresholds.forEach(threshold => {
@@ -862,14 +864,14 @@ return;
     // Check for scheduled flag activations
     setInterval(() => {
       if (!this.isRunning) {
-return;
+return undefined;
 }
 
       const now = Date.now();
 
       this.flags.forEach(flag => {
         if (!flag.schedule) {
-return;
+return undefined;
 }
 
         // Auto-enable flags that should start
@@ -906,7 +908,7 @@ return;
         currentValue = Object.values(analytics.conversionRates)[0] || 0;
         break;
       default:
-        return;
+        return undefined;
     }
 
     let shouldTrigger = false;

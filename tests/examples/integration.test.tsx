@@ -149,8 +149,10 @@ const VideoPage = () => {
   };
 
   const handleAddComment = async (text: string) => {
-    if (!currentVideo) return;
-    
+    if (!currentVideo) {
+return;
+}
+
     try {
       const response = await fetch(`/api/videos/${currentVideo.id}/comments`, {
         method: 'POST',
@@ -188,8 +190,8 @@ const VideoPage = () => {
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleVideoEnded}
             />
-            <VideoDescription 
-              video={currentVideo} 
+            <VideoDescription
+              video={currentVideo}
               channel={null}
               isSubscribed={false}
               showFullDescription={false}
@@ -521,7 +523,7 @@ describe('Integration Tests', () => {
       const buttons = screen.getAllByRole('button');
       buttons.forEach(button => {
         const ariaLabel = button.getAttribute('aria-label');
-        const textContent = button.textContent;
+        const { textContent } = button;
         const accessibleName = ariaLabel || textContent || 'Button';
         expect(button).toHaveAccessibleName(accessibleName);
       });

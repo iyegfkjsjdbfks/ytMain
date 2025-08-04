@@ -55,8 +55,8 @@ describe('VideoDescription Component', () => {
   describe('Rendering', () => {
     it('should render video information correctly', async () => {
       const { container } = customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -90,8 +90,8 @@ describe('VideoDescription Component', () => {
 
     it('should render verified badge for verified channels', () => {
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -100,7 +100,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const verifiedBadge = screen.getByLabelText(/verified channel/i);
@@ -114,8 +114,8 @@ describe('VideoDescription Component', () => {
       };
 
       customRender(
-        <VideoDescription 
-          video={videoWithoutChannel} 
+        <VideoDescription
+          video={videoWithoutChannel}
           channel={null}
           isSubscribed={false}
           showFullDescription={false}
@@ -124,7 +124,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       expect(screen.getByText(mockVideo.title)).toBeInTheDocument();
@@ -141,8 +141,8 @@ describe('VideoDescription Component', () => {
       };
 
       customRender(
-        <VideoDescription 
-          video={videoWithLongDescription} 
+        <VideoDescription
+          video={videoWithLongDescription}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -151,7 +151,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Initially should show truncated description
@@ -184,8 +184,8 @@ describe('VideoDescription Component', () => {
       };
 
       customRender(
-        <VideoDescription 
-          video={videoWithShortDescription} 
+        <VideoDescription
+          video={videoWithShortDescription}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -194,7 +194,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       expect(screen.queryByText(/show more/i)).not.toBeInTheDocument();
@@ -232,8 +232,8 @@ describe('VideoDescription Component', () => {
       const onSubscribe = vi.fn();
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -242,7 +242,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={onSubscribe}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const likeButton = screen.getByLabelText(/like video/i);
@@ -269,8 +269,8 @@ describe('VideoDescription Component', () => {
       const startTime = performance.now();
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -279,7 +279,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const endTime = performance.now();
@@ -296,8 +296,8 @@ describe('VideoDescription Component', () => {
       const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
       const { unmount } = customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -306,7 +306,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Simulate component lifecycle
@@ -334,8 +334,8 @@ describe('VideoDescription Component', () => {
       testHelpers.mockApiError(500, 'Server Error');
 
       const { container } = customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -344,7 +344,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Should still render basic video information
@@ -374,7 +374,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
       }).not.toThrow();
 
@@ -395,8 +395,8 @@ describe('VideoDescription Component', () => {
       window.dispatchEvent(new Event('resize'));
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -405,7 +405,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Check if mobile-specific elements are present
@@ -424,8 +424,8 @@ describe('VideoDescription Component', () => {
       window.dispatchEvent(new Event('resize'));
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -434,7 +434,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const component = screen.getByTestId('video-description');
@@ -445,8 +445,8 @@ describe('VideoDescription Component', () => {
   describe('Accessibility', () => {
     it('should have proper ARIA labels', () => {
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -455,7 +455,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       expect(screen.getByLabelText(/like video/i)).toBeInTheDocument();
@@ -465,8 +465,8 @@ describe('VideoDescription Component', () => {
 
     it('should support screen readers', () => {
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -475,7 +475,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Check for screen reader friendly content
@@ -485,8 +485,8 @@ describe('VideoDescription Component', () => {
 
     it('should have proper heading hierarchy', () => {
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -495,7 +495,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const title = screen.getByRole('heading', { level: 1 });
@@ -507,8 +507,8 @@ describe('VideoDescription Component', () => {
 
     it('should have sufficient color contrast', async () => {
       const { container } = customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -517,7 +517,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const auditResults = await testHelpers.checkAccessibility(container);
@@ -548,7 +548,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Should not render script tags
@@ -576,7 +576,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       const links = screen.getAllByRole('link');
@@ -592,8 +592,8 @@ describe('VideoDescription Component', () => {
       const performanceSpy = vi.spyOn(performanceMonitor, 'trackCustomMetric');
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -602,7 +602,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Should track component mount
@@ -621,8 +621,8 @@ describe('VideoDescription Component', () => {
       });
 
       customRender(
-        <VideoDescription 
-          video={mockVideo} 
+        <VideoDescription
+          video={mockVideo}
           channel={mockChannel}
           isSubscribed={false}
           showFullDescription={false}
@@ -631,7 +631,7 @@ describe('VideoDescription Component', () => {
           onSubscribe={() => {}}
           onToggleDescription={() => {}}
           onSummarizeDescription={() => {}}
-        />
+        />,
       );
 
       // Should handle loading states

@@ -6,7 +6,7 @@ import { cleanup } from '@testing-library/react';
 import { beforeAll, afterAll, beforeEach, afterEach, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
-import { performanceMonitor } from '../utils/performanceMonitor';
+// // import { performanceMonitor } from '../utils/performanceMonitor'; // Unused import // Unused import
 import { securityUtils } from '../utils/securityUtils';
 import { testUtils } from '../utils/testUtils';
 
@@ -155,7 +155,7 @@ const createMockFetch = () => {
           isLive: false,
           visibility: 'public' as const,
           createdAt: '2023-01-01',
-          updatedAt: '2023-01-01'
+          updatedAt: '2023-01-01',
         },
         timestamp: Date.now(),
       });
@@ -184,7 +184,7 @@ const createMockFetch = () => {
           isLive: false,
           visibility: 'public' as const,
           createdAt: '2023-01-01',
-          updatedAt: '2023-01-01'
+          updatedAt: '2023-01-01',
         },
         timestamp: Date.now(),
       });
@@ -213,7 +213,7 @@ const createMockFetch = () => {
           isLive: false,
           visibility: 'public' as const,
           createdAt: '2023-01-01',
-          updatedAt: '2023-01-01'
+          updatedAt: '2023-01-01',
         },
         timestamp: Date.now(),
       });
@@ -397,7 +397,7 @@ afterAll(() => {
   // Generate performance report
   if (TEST_CONFIG.enablePerformanceTracking) {
     console.log(`\n${  TestPerformanceTracker.generateReport()}`);
-    console.log(`\nPerformance report not available`);
+    console.log('\nPerformance report not available');
     // console.log(`\n${performanceMonitor.getReport()}`); // Method not available
   }
 

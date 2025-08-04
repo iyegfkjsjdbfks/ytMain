@@ -72,7 +72,7 @@ class APMSystem {
    */
   start(): void {
     if (this.isMonitoring) {
-return;
+return undefined;
 }
 
     this.isMonitoring = true;
@@ -253,7 +253,7 @@ continue;
         checks.push({
           name,
           healthy: result.healthy,
-          details: (result as any).details,
+          details: ((result as any))?.details,
         });
 
         if (!result.healthy) {
@@ -366,7 +366,7 @@ continue;
     this.addHealthCheck({
       name: 'memory-usage',
       check: async () => {
-        const memInfo = (performance as any).memory;
+        const memInfo = ((performance as any)).memory;
         if (!memInfo) {
 return { healthy: true };
 }
@@ -440,17 +440,17 @@ return { healthy: true };
     // Collect Core Web Vitals
     setInterval(() => {
       if (!this.isMonitoring) {
-return;
+return undefined;
 }
 
       // Memory usage
-      const memInfo = (performance as any).memory;
+      const memInfo = ((performance as any)).memory;
       if (memInfo) {
         this.recordMetric('memory-usage', memInfo.usedJSHeapSize);
       }
 
       // Connection info
-      const { connection } = (navigator as any);
+      const { connection } = ((navigator as any));
       if (connection) {
         this.recordMetric('network-downlink', connection.downlink);
         this.recordMetric('network-rtt', connection.rtt);
@@ -470,7 +470,7 @@ return;
     for (const [name, check] of this.healthChecks) {
       const runCheck = async () => {
         if (!this.isMonitoring) {
-return;
+return undefined;
 }
 
         try {
@@ -493,7 +493,7 @@ return;
   private startAlertProcessing(): void {
     setInterval(() => {
       if (!this.isMonitoring) {
-return;
+return undefined;
 }
 
       // Process any pending alerts
@@ -517,7 +517,7 @@ return;
     const cooldownMs = alert.cooldown * 60 * 1000;
 
     if (now - lastAlert < cooldownMs) {
-return;
+return undefined;
 }
 
     this.lastAlertTime.set(alert.id, now);
@@ -592,7 +592,7 @@ class RUMSystem {
 
   start(): void {
     if (this.isTracking) {
-return;
+return undefined;
 }
 
     this.isTracking = true;
@@ -615,7 +615,7 @@ return;
     events.forEach(eventType => {
       document.addEventListener(eventType, (event) => {
         if (!this.isTracking) {
-return;
+return undefined;
 }
 
         this.apm.recordMetric(`user-interaction-${eventType}`, 1, {
@@ -638,7 +638,7 @@ return;
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
 
-    history.pushState = function(...args) {
+    history.pushState = function(..._args: any[]) {
       originalPushState.apply(history, args);
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
@@ -648,7 +648,7 @@ return;
       }
     }.bind(this);
 
-    history.replaceState = function(...args) {
+    history.replaceState = function(..._args: any[]) {
       originalReplaceState.apply(history, args);
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
@@ -662,7 +662,7 @@ return;
   private trackErrors(): void {
     window.addEventListener('error', (event) => {
       if (!this.isTracking) {
-return;
+return undefined;
 }
 
       this.apm.recordMetric('javascript-error', 1, {
@@ -676,7 +676,7 @@ return;
 
     window.addEventListener('unhandledrejection', (event) => {
       if (!this.isTracking) {
-return;
+return undefined;
 }
 
       this.apm.recordMetric('promise-rejection', 1, {
@@ -695,7 +695,7 @@ return;
     // Track resource loading
     const observer = new PerformanceObserver((list) => {
       if (!this.isTracking) {
-return;
+return undefined;
 }
 
       for (const entry of list.getEntries()) {
