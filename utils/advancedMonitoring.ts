@@ -4,8 +4,6 @@
  * and automated quality gates for enhanced code quality and maintainability.
  */
 
-import { securityUtils } from './securityUtils';
-
 // Types for monitoring data
 interface MetricData {
   timestamp: number;
@@ -646,21 +644,22 @@ return undefined;
     // Track SPA navigation
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
+    const self = this;
 
-    history.pushState = function(..._args: any[]) {
-      originalPushState.apply(history, _args);
-      if (this.isTracking) {
-        this.apm.recordMetric('page-view', 1, {
+    history.pushState = function(data: any, unused: string, url?: string | URL | null) {
+      originalPushState.call(history, data, unused, url);
+      if (self.isTracking) {
+        self.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-navigation',
         });
       }
-    }.bind(this);
+    };
 
-    history.replaceState = function(..._args: any[]) {
-      originalReplaceState.apply(history, _args);
-      if (this.isTracking) {
-        this.apm.recordMetric('page-view', 1, {
+    history.replaceState = function(data: any, unused: string, url?: string | URL | null) {
+      originalReplaceState.call(history, data, unused, url);
+      if (self.isTracking) {
+        self.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-replace',
         });

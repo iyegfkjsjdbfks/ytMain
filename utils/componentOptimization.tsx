@@ -22,7 +22,7 @@ export function useComponentPerformance(componentName: string) {
   const mountTime = useRef<number>(0);
   const renderCount = useRef<number>(0);
   const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   // Track component mount time
   useEffect(() => {
@@ -213,7 +213,7 @@ export function useOptimizedMemo<T>(
 }
 
 // Lazy component wrapper with loading states
-export function createLazyComponent<P extends object>(
+export function createLazyComponent<P extends Record<string, any>>(
   importFn: () => Promise<{ default: ComponentType<P> }>,
   fallback?: ReactNode,
   errorFallback?: ReactNode,
@@ -245,7 +245,7 @@ export function createLazyComponent<P extends object>(
           </div>
         )}
       >
-        <LazyComponent {...props} />
+        <LazyComponent {...(props as any)} />
       </React.Suspense>
     );
   };
@@ -360,7 +360,7 @@ return options.placeholder || '';
 }
 
 // Bundle splitting utility
-export function createAsyncComponent<P extends object>(
+export function createAsyncComponent<_P extends object>(
   componentPath: string,
   chunkName?: string,
 ) {
@@ -410,11 +410,12 @@ export function withPerformanceMonitoring<P extends object>(
     useEffect(() => {
       if (import.meta.env.DEV && ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
         ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
-          id: any,
-          root: any,
-          priorityLevel: any,
+          _id: any,
+          _root: any,
+          _priorityLevel: any,
         ) => {
           // Custom performance tracking logic
+          console.debug('Component committed to root');
         };
       }
     }, []);
