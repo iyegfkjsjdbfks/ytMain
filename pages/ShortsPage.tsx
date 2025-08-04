@@ -15,7 +15,7 @@ import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import ShortsFilters from '../components/ShortsFilters';
 import ShortsNavigation from '../components/ShortsNavigation';
-import { useShortsVideos, useLocalStorage, useDebounce } from '../hooks';
+import { useShortsVideos, useLocalStorage, useDebounce } from '../src/hooks';
 
 import type { Short } from '../src/types/core';
 
