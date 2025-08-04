@@ -149,7 +149,7 @@ export function useOptimizedCallback<T extends (...args: any[]) => any>(
       return true;
     }
 
-    const changed = deps.some((dep, index) => dep !== depsRef.current![index]);
+    const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;
@@ -184,11 +184,11 @@ export function useOptimizedMemo<T>(
     const endTime = performance.now();
 
     computationTime.current = endTime - startTime;
-    
+
     // Update refs to track values
     valueRef.current = result;
     depsRef.current = deps;
-    
+
     // Update creation time if this is a new computation
     if (computationTime.current > 0) {
       creationTime.current = endTime;

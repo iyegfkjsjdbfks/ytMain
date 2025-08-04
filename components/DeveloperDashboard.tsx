@@ -173,7 +173,7 @@ export const DeveloperDashboard: React.FC = () => {
       .map(f => ({
         id: f.id,
         name: f.name,
-        percentage: f.rolloutStrategy?._config.percentage || 0,
+        percentage: f.rolloutStrategy?.config.percentage || 0,
       }));
 
     return {
