@@ -133,7 +133,6 @@ export default {
   useCallback,
 };
 
-
 // Additional utility functions
 export const buildVideoUrl = (videoId: string): string => {
   return `/watch?v=${videoId}`;

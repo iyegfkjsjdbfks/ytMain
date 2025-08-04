@@ -54,9 +54,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
 
-    /* Module resolution */
-    "types": ["vite/client", "vitest/globals"]
-  },
+    /* Module resolution */  },
   "include": [
     "src/**/*",
     "test/**/*",

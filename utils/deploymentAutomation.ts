@@ -704,7 +704,7 @@ return;
   /**
    * Execute a deployment
    */
-  private async executeDeployment(executionId: string): Promise<void> {
+  private async executeDeployment(_executionId: string): Promise<void> {
     const execution = this.executions.get(executionId);
     if (!execution) {
 return;
@@ -862,7 +862,7 @@ continue;
   /**
    * Check quality gates
    */
-  private async checkQualityGates(environment: string): Promise<boolean> {
+  private async checkQualityGates(_environment: string): Promise<boolean> {
     const config = this.configs.get(`${environment}-config`);
     if (!config) {
 return true;
@@ -931,7 +931,7 @@ continue;
   /**
    * Perform health checks
    */
-  private async performHealthChecks(environment: string, execution: DeploymentExecution): Promise<void> {
+  private async performHealthChecks(_environment: string, _execution: DeploymentExecution): Promise<void> {
     const config = this.configs.get(`${environment}-config`);
     if (!config) {
 return;
@@ -962,7 +962,7 @@ return;
   /**
    * Execute a health check
    */
-  private async executeHealthCheck(healthCheck: HealthCheck): Promise<boolean> {
+  private async executeHealthCheck(_healthCheck: HealthCheck): Promise<boolean> {
     const { _config: config } = healthCheck;
     const maxRetries = config.retries || 3;
 
@@ -1005,7 +1005,7 @@ return;
   /**
    * Perform rollback
    */
-  private async performRollback(execution: DeploymentExecution, reason: string): Promise<void> {
+  private async performRollback(_execution: DeploymentExecution, _reason: string): Promise<void> {
     this.addLog(execution, 'warn', `Initiating rollback: ${reason}`);
 
     const rollbackInfo: RollbackInfo = {

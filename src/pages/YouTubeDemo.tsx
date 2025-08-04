@@ -1,3 +1,4 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import React from "react";
 import { useState  } from 'react';
 import type * as React from 'react';
@@ -168,4 +169,10 @@ player.seekTo(60); // Seek to 1 minute`}
   );
 };
 
-export default YouTubeDemo;
+const YouTubeDemoWithErrorBoundary = () => (
+  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
+    <YouTubeDemo />
+  </ErrorBoundary>
+);
+
+export default YouTubeDemoWithErrorBoundary;;

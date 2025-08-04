@@ -4,6 +4,7 @@ export interface Video {
   title: string;
   description?: string;
   thumbnail: string;
+  thumbnailUrl?: string; // Alias for thumbnail
   duration: string;
   views: number;
   publishedAt: string;
@@ -15,6 +16,9 @@ export interface Video {
   likes?: number;
   dislikes?: number;
   uploadedAt?: string;
+  channelName?: string; // Alternative name field
+  channelAvatarUrl?: string; // Channel avatar URL
+  isLive?: boolean; // Live stream indicator
 }
 
 export interface Short extends Video {
@@ -35,6 +39,11 @@ export interface Channel {
   thumbnail: string;
   subscriberCount: number;
   videoCount: number;
+  name?: string; // Display name
+  avatarUrl?: string; // Avatar image URL
+  subscribers?: number | string; // Subscriber count
+  joinedDate?: string; // Date joined
+  totalViews?: number; // Total channel views
 }
 
 export interface Playlist {

@@ -1,3 +1,4 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import React from "react";
 import { Link } from 'react-router-dom';
 import React from "react";
@@ -291,4 +292,10 @@ const LiveStreamingHubPage: React.FC = () => {
   );
 };
 
-export default LiveStreamingHubPage;
+const LiveStreamingHubPageWithErrorBoundary = () => (
+  <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
+    <LiveStreamingHubPage />
+  </ErrorBoundary>
+);
+
+export default LiveStreamingHubPageWithErrorBoundary;;
