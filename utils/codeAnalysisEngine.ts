@@ -187,8 +187,7 @@ return;
   } {
     const key = filePath || 'project';
     const history = this.analysisHistory.get(key) || [];
-    const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
-
+    
     // Filter recent history (mock timestamps for now)
     const recentHistory = history.slice(-days);
 
@@ -228,7 +227,7 @@ return;
     };
   }
 
-  private async calculateCodeMetrics(filePath?: string): Promise<Omit<CodeMetrics, 'codeSmells'>> {
+  private async calculateCodeMetrics(_filePath?: string): Promise<Omit<CodeMetrics, 'codeSmells'>> {
     // Mock implementation - in real scenario, this would analyze actual code
     const baseComplexity = Math.random() * 10 + 5;
     const baseMaintainability = Math.random() * 40 + 60;
@@ -451,7 +450,7 @@ return;
     return `// Mock file content for ${filePath}`;
   }
 
-  private async suggestExtractMethod(content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestExtractMethod(_content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     // Mock implementation - in real scenario, this would analyze AST
     return [
       {
@@ -525,10 +524,9 @@ return;
  */
 class TechnicalDebtTracker {
   private debtItems: Map<string, any> = new Map();
-  private codeAnalysis: CodeAnalysisEngine;
 
-  constructor(codeAnalysis: CodeAnalysisEngine) {
-    this.codeAnalysis = codeAnalysis;
+  constructor(_codeAnalysis: CodeAnalysisEngine) {
+    // CodeAnalysis instance available if needed for future use
   }
 
   /**
@@ -610,11 +608,10 @@ class TechnicalDebtTracker {
  * Automated Code Reviewer
  */
 class AutomatedCodeReviewer {
-  private codeAnalysis: CodeAnalysisEngine;
   private reviewRules: Map<string, any> = new Map();
 
-  constructor(codeAnalysis: CodeAnalysisEngine) {
-    this.codeAnalysis = codeAnalysis;
+  constructor(_codeAnalysis: CodeAnalysisEngine) {
+    // CodeAnalysis instance available if needed for future use
     this.setupReviewRules();
   }
 

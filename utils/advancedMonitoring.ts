@@ -4,8 +4,6 @@
  * and automated quality gates for enhanced code quality and maintainability.
  */
 
-import { securityUtils } from './securityUtils';
-
 // Types for monitoring data
 interface MetricData {
   timestamp: number;
@@ -263,7 +261,7 @@ continue;
         checks.push({
           name,
           healthy: false,
-          _error: error instanceof Error ? error.message : 'Unknown error',
+          error: error instanceof Error ? error.message : 'Unknown error',
         });
         overallHealthy = false;
       }
@@ -503,7 +501,8 @@ return undefined;
 
   private checkAlerts(metricName: string, value: number): void {
     for (const [alertId, alert] of this.alerts) {
-      if (metricName.includes(alertId.split('-')[0]) || alertId === metricName) {
+      const alertPrefix = alertId?.split('-')[0];
+      if ((alertPrefix && metricName.includes(alertPrefix)) || alertId === metricName) {
         if (alert.condition(value, alert.threshold)) {
           this.triggerAlert(alert, value);
         }
@@ -571,10 +570,19 @@ return undefined;
   private getSessionId(): string {
     let sessionId = sessionStorage.getItem('monitoring_session_id');
     if (!sessionId) {
-      sessionId = securityUtils.generateSecureToken(16);
+      sessionId = this.generateSecureToken(16);
       sessionStorage.setItem('monitoring_session_id', sessionId);
     }
     return sessionId;
+  }
+
+  private generateSecureToken(length: number): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   }
 }
 
@@ -583,7 +591,6 @@ return undefined;
  */
 class RUMSystem {
   private apm: APMSystem;
-  private userSessions: Map<string, any> = new Map();
   private isTracking = false;
 
   constructor(apm: APMSystem) {
@@ -637,21 +644,22 @@ return undefined;
     // Track SPA navigation
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
+    const self = this;
 
-    history.pushState = function(..._args: any[]) {
-      originalPushState.apply(history, args);
-      if (this.isTracking) {
-        this.apm.recordMetric('page-view', 1, {
+    history.pushState = function(data: any, unused: string, url?: string | URL | null) {
+      originalPushState.call(history, data, unused, url);
+      if (self.isTracking) {
+        self.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-navigation',
         });
       }
-    }.bind(this);
+    };
 
-    history.replaceState = function(..._args: any[]) {
-      originalReplaceState.apply(history, args);
-      if (this.isTracking) {
-        this.apm.recordMetric('page-view', 1, {
+    history.replaceState = function(data: any, unused: string, url?: string | URL | null) {
+      originalReplaceState.call(history, data, unused, url);
+      if (self.isTracking) {
+        self.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-replace',
         });

@@ -794,7 +794,7 @@ continue;
       advancedAPM.recordMetric('deployment-completed', 1, {
         pipeline: execution.pipelineId,
         status: execution.status,
-        duration: execution.metrics.duration,
+        duration: execution.metrics.duration.toString(),
       });
 
       console.log(`🏁 Deployment ${execution.status}: ${pipeline.name} (${execution.metrics.duration}ms)`);
@@ -960,7 +960,7 @@ return;
    * Execute a health check
    */
   private async executeHealthCheck(healthCheck: HealthCheck): Promise<boolean> {
-    const { config } = healthCheck;
+    const { _config: config } = healthCheck;
     const maxRetries = config.retries || 3;
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -1040,7 +1040,7 @@ return;
 
     advancedAPM.recordMetric('deployment-rollback', 1, {
       reason,
-      success: rollbackInfo.success,
+      success: rollbackInfo.success.toString(),
     });
   }
 
@@ -1049,13 +1049,13 @@ return;
    */
   private async sendNotifications(
     environment: string,
-    _event: 'start' | 'success' | 'failure' | 'rollback',
+    event: 'start' | 'success' | 'failure' | 'rollback',
     execution: DeploymentExecution,
   ): Promise<void> {
     const config = this.configs.get(`${environment}-config`);
     if (!config) {
-return;
-}
+      return;
+    }
 
     const relevantNotifications = config.notifications.filter(n => n.events.includes(event));
 
@@ -1092,7 +1092,7 @@ return;
       timestamp: Date.now(),
       level,
       message,
-      stage,
+      ...(stage && { stage }),
     };
 
     execution.logs.push(log);

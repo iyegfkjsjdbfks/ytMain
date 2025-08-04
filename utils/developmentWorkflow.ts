@@ -7,7 +7,6 @@
 import { advancedAPM } from './advancedMonitoring';
 import { codeAnalysisEngine } from './codeAnalysisEngine';
 import { performanceMonitor } from './performanceMonitor';
-import { securityUtils } from './securityUtils';
 
 // Types for workflow automation
 interface WorkflowStage {
@@ -24,18 +23,18 @@ interface WorkflowCondition {
   type: 'metric' | 'test-result' | 'security-scan' | 'performance' | 'code-quality';
   operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'contains' | 'not-contains';
   value: any;
-  _source: string;
+  source: string;
 }
 
 interface WorkflowAction {
   type: 'notify' | 'block' | 'auto-fix' | 'create-issue' | 'rollback' | 'scale';
-  _config: Record<string, any>;
+  config: Record<string, any>;
 }
 
 interface DeploymentStrategy {
   name: string;
   type: 'blue-green' | 'canary' | 'rolling' | 'feature-flag';
-  _config: Record<string, any>;
+  config: Record<string, any>;
   healthChecks: string[];
   rollbackTriggers: WorkflowCondition[];
 }
@@ -104,7 +103,7 @@ return undefined;
   /**
    * Execute workflow
    */
-  async executeWorkflow(workflowName: string, _context: Record<string, any> = {}): Promise<{
+  async executeWorkflow(workflowName: string, context: Record<string, any> = {}): Promise<{
     success: boolean;
     results: QualityGateResult[];
     failedStage?: string;
@@ -130,20 +129,20 @@ return undefined;
             success: false,
             results,
             failedStage: stage.name,
-            _error: `Stage '${stage.name}' failed quality gates`,
+            error: `Stage '${stage.name}' failed quality gates`,
           };
         }
 
         console.log(`✅ Stage '${stage.name}' completed`);
       } catch (error) {
-        console.error(`💥 Stage '${stage.name}' _error:`, error);
+        console.error(`💥 Stage '${stage.name}' error:`, error);
 
         if (stage.required) {
           return {
             success: false,
             results,
             failedStage: stage.name,
-            _error: error instanceof Error ? error.message : 'Unknown error',
+            error: error instanceof Error ? error.message : 'Unknown error',
           };
         }
       }
@@ -156,18 +155,18 @@ return undefined;
   /**
    * Execute deployment with strategy
    */
-  async executeDeployment(strategyName: string, _version: string, _config: Record<string, any> = {}): Promise<{
+  async executeDeployment(strategyName: string, version: string, config: Record<string, any> = {}): Promise<{
     success: boolean;
     deploymentId: string;
     _strategy: string;
     healthStatus: any;
   }> {
-    const _strategy = this.deploymentStrategies.get(strategyName);
+    const strategy = this.deploymentStrategies.get(strategyName);
     if (!strategy) {
       throw new Error(`Deployment strategy '${strategyName}' not found`);
     }
 
-    const deploymentId = securityUtils.generateSecureToken(16);
+    const deploymentId = this.generateSecureToken(16);
     this.currentDeployment = {
       id: deploymentId,
       _strategy: strategyName,
@@ -315,9 +314,9 @@ return undefined;
 
     // Generate trends (mock data for now)
     const trends = {
-      executions: Array.from({ length: days }, (_, i) => Math.floor(Math.random() * 10) + 5),
-      successRates: Array.from({ length: days }, (_, i) => Math.random() * 0.2 + 0.8),
-      durations: Array.from({ length: days }, (_, i) => Math.random() * 300 + 120),
+      executions: Array.from({ length: days }, () => Math.floor(Math.random() * 10) + 5),
+      successRates: Array.from({ length: days }, () => Math.random() * 0.2 + 0.8),
+      durations: Array.from({ length: days }, () => Math.random() * 300 + 120),
       timestamps: Array.from({ length: days }, (_, i) => Date.now() - (days - i) * 24 * 60 * 60 * 1000),
     };
 
@@ -330,7 +329,7 @@ return undefined;
     };
   }
 
-  private async executeStage(stage: WorkflowStage, _context: Record<string, any>): Promise<QualityGateResult> {
+  private async executeStage(stage: WorkflowStage, context: Record<string, any>): Promise<QualityGateResult> {
     const startTime = Date.now();
     const results: any[] = [];
     let passed = true;
@@ -373,7 +372,7 @@ return undefined;
     return result;
   }
 
-  private async evaluateCondition(condition: WorkflowCondition, _context: Record<string, any>): Promise<{
+  private async evaluateCondition(condition: WorkflowCondition, context: Record<string, any>): Promise<{
     condition: string;
     passed: boolean;
     value: any;
@@ -386,22 +385,22 @@ return undefined;
     // Get value based on condition type
     switch (condition.type) {
       case 'metric':
-        value = await this.getMetricValue(condition.source);
+        value = await this.getMetricValue(condition._source);
         break;
       case 'test-result':
-        value = await this.getTestResult(condition.source);
+        value = await this.getTestResult(condition._source);
         break;
       case 'security-scan':
-        value = await this.getSecurityScanResult(condition.source);
+        value = await this.getSecurityScanResult(condition._source);
         break;
       case 'performance':
-        value = await this.getPerformanceMetric(condition.source);
+        value = await this.getPerformanceMetric(condition._source);
         break;
       case 'code-quality':
-        value = await this.getCodeQualityMetric(condition.source);
+        value = await this.getCodeQualityMetric(condition._source);
         break;
       default:
-        value = context[condition.source];
+        value = context[condition._source];
     }
 
     // Evaluate condition
@@ -430,15 +429,15 @@ return undefined;
     }
 
     return {
-      condition: `${condition.source} ${condition.operator} ${condition.value}`,
+      condition: `${condition._source} ${condition.operator} ${condition.value}`,
       passed,
       value,
       threshold: condition.value,
-      message: passed ? 'Condition passed' : `Expected ${condition.source} to be ${condition.operator} ${condition.value}, got ${value}`,
+      message: passed ? 'Condition passed' : `Expected ${condition._source} to be ${condition.operator} ${condition.value}, got ${value}`,
     };
   }
 
-  private async executeAction(action: WorkflowAction, _context: any): Promise<void> {
+  private async executeAction(action: WorkflowAction, context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
         console.warn(`🔔 Notification: ${action?._config.message || 'Quality gate failed'}`);
@@ -460,7 +459,7 @@ return undefined;
     }
   }
 
-  private async executeDeploymentStrategy(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeDeploymentStrategy(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     switch (strategy.type) {
       case 'blue-green':
         await this.executeBlueGreenDeployment(strategy, version, config);
@@ -477,7 +476,7 @@ return undefined;
     }
   }
 
-  private async executeBlueGreenDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeBlueGreenDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🔵 Starting blue-green deployment');
 
     // Deploy to green environment
@@ -495,7 +494,7 @@ return undefined;
     }
   }
 
-  private async executeCanaryDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeCanaryDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🐤 Starting canary deployment');
 
     const trafficPercentages = config.trafficPercentages || [10, 25, 50, 100];
@@ -517,10 +516,10 @@ return undefined;
     console.log('🎉 Canary deployment completed successfully');
   }
 
-  private async executeRollingDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeRollingDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🔄 Starting rolling deployment');
 
-    const _batchSize = config.batchSize || 1;
+    const batchSize = config.batchSize || 1;
     const totalInstances = config.totalInstances || 3;
 
     for (let i = 0; i < totalInstances; i += batchSize) {
@@ -541,7 +540,7 @@ return undefined;
     console.log('🎉 Rolling deployment completed successfully');
   }
 
-  private async executeFeatureFlagDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeFeatureFlagDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🚩 Starting feature flag deployment');
 
     // Deploy code with feature flag disabled
@@ -568,7 +567,7 @@ return undefined;
   }
 
   // Mock implementations for deployment operations
-  private async deployToEnvironment(env: string, _version: string): Promise<void> {
+  private async deployToEnvironment(env: string, version: string): Promise<void> {
     console.log(`🚀 Deploying ${version} to ${env} environment`);
     await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate deployment time
   }
@@ -578,7 +577,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async routeTrafficToCanary(percentage: number, _version: string): Promise<void> {
+  private async routeTrafficToCanary(percentage: number, version: string): Promise<void> {
     console.log(`📊 Routing ${percentage}% traffic to canary ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
@@ -588,7 +587,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployBatch(startIndex: number, _batchSize: number, _version: string): Promise<void> {
+  private async deployBatch(startIndex: number, batchSize: number, version: string): Promise<void> {
     console.log(`📦 Deploying batch starting at ${startIndex} (${batchSize} instances) with ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1500));
   }
@@ -598,7 +597,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployWithFeatureFlag(_version: string, enabled: boolean): Promise<void> {
+  private async deployWithFeatureFlag(version: string, enabled: boolean): Promise<void> {
     console.log(`🚀 Deploying ${version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
   }
@@ -636,7 +635,7 @@ return undefined;
     };
   }
 
-  private async evaluateRollback(_strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
+  private async evaluateRollback(strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
     for (const trigger of strategy.rollbackTriggers) {
       const shouldRollback = await this.evaluateCondition(trigger, { healthStatus });
       if (shouldRollback.passed) {
@@ -648,24 +647,24 @@ return undefined;
   }
 
   // Mock implementations for various operations
-  private async getMetricValue(_source: string): Promise<number> {
+  private async getMetricValue(source: string): Promise<number> {
     const metrics = advancedAPM.getAggregatedMetrics(source);
     return metrics.avg || Math.random() * 100;
   }
 
-  private async getTestResult(_source: string): Promise<number> {
+  private async getTestResult(source: string): Promise<number> {
     return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
   }
 
-  private async getSecurityScanResult(_source: string): Promise<number> {
+  private async getSecurityScanResult(source: string): Promise<number> {
     return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
   }
 
-  private async getPerformanceMetric(_source: string): Promise<number> {
+  private async getPerformanceMetric(source: string): Promise<number> {
     return performanceMonitor.getMetrics().find(m => m.name === source)?.value || Math.random() * 1000;
   }
 
-  private async getCodeQualityMetric(_source: string): Promise<number> {
+  private async getCodeQualityMetric(source: string): Promise<number> {
     const analysis = await codeAnalysisEngine.analyzeCode();
     return ((analysis as any))[source] || Math.random() * 100;
   }
@@ -921,6 +920,15 @@ return undefined;
         },
       ],
     });
+  }
+
+  private generateSecureToken(length: number): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   }
 
   private startWorkflowMonitoring(): void {
