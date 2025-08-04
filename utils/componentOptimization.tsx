@@ -58,8 +58,11 @@ return undefined;
 }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setIsVisible(entry.isIntersecting);
+        }
       },
       { threshold: 0.1 },
     );
@@ -141,18 +144,22 @@ export function useOptimizedCallback<T extends (...args: any[]) => any>(
   const creationTime = useRef(performance.now());
 
   // Track dependency changes
-  const depsChanged = useMemo(() => {
+  useMemo(() => {
     if (!depsRef.current) {
-return true;
-}
+      return true;
+    }
 
-    const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
+    const changed = deps.some((dep, index) => dep !== depsRef.current![index]);
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;
       console.log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
       creationTime.current = performance.now();
     }
+
+    // Update refs
+    callbackRef.current = callback;
+    depsRef.current = deps;
 
     return changed;
   }, deps);
@@ -177,6 +184,15 @@ export function useOptimizedMemo<T>(
     const endTime = performance.now();
 
     computationTime.current = endTime - startTime;
+    
+    // Update refs to track values
+    valueRef.current = result;
+    depsRef.current = deps;
+    
+    // Update creation time if this is a new computation
+    if (computationTime.current > 0) {
+      creationTime.current = endTime;
+    }
 
     if (import.meta.env.DEV) {
       if (computationTime.current > 5) {
@@ -262,7 +278,7 @@ export function useVirtualScrolling({
   const totalHeight = itemCount * itemHeight;
   const offsetY = visibleRange.startIndex * itemHeight;
 
-  const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
+  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
     setScrollTop(event.currentTarget.scrollTop);
   }, []);
 
@@ -293,8 +309,9 @@ return undefined;
 }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
         }
