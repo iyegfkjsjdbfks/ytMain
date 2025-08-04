@@ -93,7 +93,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
       {/* Thumbnail */}
       <div className={`${classes.thumbnail} relative overflow-hidden rounded-md bg-gray-200 dark:bg-gray-700`}>
         <ImageWithFallback
-          src={(video.thumbnailUrl || video.thumbnail)}
+          src={((video.thumbnailUrl || video.thumbnail) || video.thumbnail)}
           alt={video.title}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
           width={size === 'sm' ? 168 : size === 'md' ? 192 : 320}
@@ -111,7 +111,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
         {/* Remove view count badge from thumbnail for cleaner look like YouTube */}
 
         {/* Live Badge */}
-        {(video.isLive || false) && (
+        {((video.isLive || false) || false) && (
           <div className="absolute top-1 left-1 bg-red-600 text-white text-xs px-2 py-1 rounded font-medium">
             🔴 LIVE
           </div>
@@ -141,7 +141,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
         {showChannel && (
           <div className={`${classes.meta} text-gray-600 dark:text-gray-400 mb-1`}>
             <span className="hover:text-gray-900 dark:hover:text-white transition-colors">
-              {(video.channelName || video.channelTitle)}
+              {((video.channelName || video.channelTitle) || video.channelTitle)}
             </span>
           </div>
         )}

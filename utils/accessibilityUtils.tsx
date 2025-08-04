@@ -255,7 +255,7 @@ return;
 }
 
 // ARIA live region hook
-export function useAriaLiveRegion(initialMessage = '') {
+export function useAriaLiveRegion(initialMessage: string = '') {
   const [message, setMessage] = useState(initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 

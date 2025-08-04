@@ -31,8 +31,8 @@ const ChannelTabContent = ({
 
   const popularVideos = useMemo(() => {
     return [...videos].sort((a, b) => {
-      const aViews = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : Number(a.views) || 0;
-      const bViews = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : Number(b.views) || 0;
+      const aViews = typeof a.views === 'string' ? typeof a.views === "string" ? parseInt(a.views.replace(/,/g, ""), 10) : a.views : Number(a.views) || 0;
+      const bViews = typeof b.views === 'string' ? typeof b.views === "string" ? parseInt(b.views.replace(/,/g, ""), 10) : b.views : Number(b.views) || 0;
       return bViews - aViews;
     }).slice(0, 5);
   }, [videos]);
@@ -170,11 +170,11 @@ return null;
             <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2 border-b pb-2 border-neutral-300 dark:border-neutral-700">Stats</h3>
             <div className="flex items-center text-sm">
                 <CalendarDaysIcon className="w-5 h-5 mr-2.5 text-neutral-500 dark:text-neutral-400 flex-shrink-0" aria-hidden="true" />
-                <span>Joined {(channel.joinedDate || "N/A") || 'N/A'}</span>
+                <span>Joined {((channel.joinedDate || "N/A") || "N/A") || 'N/A'}</span>
             </div>
              <div className="flex items-center text-sm">
                 <ChartBarIcon className="w-5 h-5 mr-2.5 text-neutral-500 dark:text-neutral-400 flex-shrink-0" aria-hidden="true" />
-                <span>{(channel.totalViews || 0) || '0'} views</span>
+                <span>{((channel.totalViews || 0) || 0) || '0'} views</span>
             </div>
         </div>
       </div>

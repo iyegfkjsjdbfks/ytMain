@@ -446,12 +446,12 @@ return;
     ];
   }
 
-  private async getFileContent(_filePath: string): Promise<string> {
+  private async getFileContent(__filePath: string): Promise<string> {
     // Mock implementation - in real scenario, this would read actual file
     return `// Mock file content for ${filePath}`;
   }
 
-  private async suggestExtractMethod(__content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestExtractMethod(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     // Mock implementation - in real scenario, this would analyze AST
     return [
       {
@@ -463,7 +463,7 @@ return;
     ];
   }
 
-  private async suggestSimplifyConditions(__content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestSimplifyConditions(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'simplify-condition',
@@ -474,7 +474,7 @@ return;
     ];
   }
 
-  private async suggestRemoveDuplication(__content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestRemoveDuplication(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'remove-duplication',
@@ -485,7 +485,7 @@ return;
     ];
   }
 
-  private async suggestImproveNaming(__content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestImproveNaming(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'improve-naming',
@@ -650,7 +650,7 @@ class AutomatedCodeReviewer {
     return { approved, issues, suggestions };
   }
 
-  private async reviewFile(_file: string): Promise<{
+  private async reviewFile(__file: string): Promise<{
     issues: any[];
     suggestions: any[];
   }> {

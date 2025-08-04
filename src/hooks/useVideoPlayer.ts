@@ -399,31 +399,25 @@ return;
   }, []);
 
   return {
-    isPlaying: state.isPlaying,
-    duration: state.duration,
-    currentTime: state.currentTime,
-    isMuted: state.isMuted,
-    volume: state.volume,
-    isFullscreen: state.isFullscreen,
-    isPictureInPicture: state.isPictureInPicture,
-    playbackRate: state.playbackRate,
-    isLoading: state.isLoading,
-    error: state.error,
-    play,
-    pause,
-    togglePlay,
-    seek,
-    setVolume,
-    mute,
-    unmute,
-    toggleMute,
-    setPlaybackRate,
-    requestFullscreen,
-    exitFullscreen,
-    toggleFullscreen,
-    requestPictureInPicture,
-    exitPictureInPicture,
-    togglePictureInPicture,
-    setVideoRef
+    videoRef,
+    state: {
+      isPlaying,
+      isMuted,
+      volume,
+      currentTime,
+      duration,
+      isLoading,
+      error
+    },
+    actions: {
+      play,
+      pause,
+      toggle,
+      mute,
+      unmute,
+      setVolume,
+      seek,
+      reset
+    }
   };
 };

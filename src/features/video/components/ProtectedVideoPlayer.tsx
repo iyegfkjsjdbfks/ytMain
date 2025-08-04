@@ -45,7 +45,7 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
       >
       <VideoPlayer
         videoId={videoId}
-        {...(src && { src })}
+        {...(src && { src } as any)}
         {...(poster && { poster })}
         {...(title && { title })}
         autoplay={autoplay}
