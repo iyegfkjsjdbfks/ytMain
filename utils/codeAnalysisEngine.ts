@@ -187,7 +187,7 @@ return;
   } {
     const key = filePath || 'project';
     const history = this.analysisHistory.get(key) || [];
-    
+
     // Filter recent history (mock timestamps for now)
     const recentHistory = history.slice(-days);
 

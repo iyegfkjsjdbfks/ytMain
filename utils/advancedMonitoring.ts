@@ -644,27 +644,26 @@ return undefined;
     // Track SPA navigation
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
-    const self = this;
 
-    history.pushState = function(data: any, unused: string, url?: string | URL | null) {
+    history.pushState = (data: any, unused: string, url?: string | URL | null) => {
       originalPushState.call(history, data, unused, url);
-      if (self.isTracking) {
-        self.apm.recordMetric('page-view', 1, {
+      if (this.isTracking) {
+        this.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-navigation',
         });
       }
     };
 
-    history.replaceState = function(data: any, unused: string, url?: string | URL | null) {
+    history.replaceState = (data: any, unused: string, url?: string | URL | null) => {
       originalReplaceState.call(history, data, unused, url);
-      if (self.isTracking) {
-        self.apm.recordMetric('page-view', 1, {
+      if (this.isTracking) {
+        this.apm.recordMetric('page-view', 1, {
           url: window.location.href,
           type: 'spa-replace',
         });
       }
-    }.bind(this);
+    };
   }
 
   private trackErrors(): void {

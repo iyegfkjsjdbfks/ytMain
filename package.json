@@ -51,7 +51,11 @@
     "prepare": "husky install",
     "postinstall": "npm run type-check",
     "start": "npm run dev",
-    "start:production": "npm run build && npm run preview:production"
+    "start:production": "npm run build && npm run preview:production",
+    "refactor": "node scripts/refactor-optimize.js",
+    "refactor:full": "./scripts/refactor.sh",
+    "refactor:analyze": "node scripts/refactor-optimize.js --analyze-only",
+    "optimize": "npm run refactor"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",

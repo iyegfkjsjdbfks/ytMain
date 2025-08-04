@@ -385,22 +385,22 @@ return undefined;
     // Get value based on condition type
     switch (condition.type) {
       case 'metric':
-        value = await this.getMetricValue(condition._source);
+        value = await this.getMetricValue(condition.source);
         break;
       case 'test-result':
-        value = await this.getTestResult(condition._source);
+        value = await this.getTestResult(condition.source);
         break;
       case 'security-scan':
-        value = await this.getSecurityScanResult(condition._source);
+        value = await this.getSecurityScanResult(condition.source);
         break;
       case 'performance':
-        value = await this.getPerformanceMetric(condition._source);
+        value = await this.getPerformanceMetric(condition.source);
         break;
       case 'code-quality':
-        value = await this.getCodeQualityMetric(condition._source);
+        value = await this.getCodeQualityMetric(condition.source);
         break;
       default:
-        value = context[condition._source];
+        value = context[condition.source];
     }
 
     // Evaluate condition
@@ -429,32 +429,32 @@ return undefined;
     }
 
     return {
-      condition: `${condition._source} ${condition.operator} ${condition.value}`,
+      condition: `${condition.source} ${condition.operator} ${condition.value}`,
       passed,
       value,
       threshold: condition.value,
-      message: passed ? 'Condition passed' : `Expected ${condition._source} to be ${condition.operator} ${condition.value}, got ${value}`,
+      message: passed ? 'Condition passed' : `Expected ${condition.source} to be ${condition.operator} ${condition.value}, got ${value}`,
     };
   }
 
   private async executeAction(action: WorkflowAction, context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
-        console.warn(`🔔 Notification: ${action?._config.message || 'Quality gate failed'}`);
+        console.warn(`🔔 Notification: ${action?.config.message || 'Quality gate failed'}`);
         break;
       case 'block':
-        throw new Error(action?._config.message || 'Workflow blocked by quality gate');
+        throw new Error(action?.config.message || 'Workflow blocked by quality gate');
       case 'auto-fix':
-        await this.executeAutoFix(action?._config);
+        await this.executeAutoFix(action?.config);
         break;
       case 'create-issue':
-        await this.createIssue(action?._config, context);
+        await this.createIssue(action?.config, context);
         break;
       case 'rollback':
-        await this.executeRollback(action?._config);
+        await this.executeRollback(action?.config);
         break;
       case 'scale':
-        await this.executeScaling(action?._config);
+        await this.executeScaling(action?.config);
         break;
     }
   }
@@ -476,8 +476,8 @@ return undefined;
     }
   }
 
-  private async executeBlueGreenDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
-    console.log('🔵 Starting blue-green deployment');
+  private async executeBlueGreenDeployment(strategy: DeploymentStrategy, version: string, _config: Record<string, any>): Promise<void> {
+    console.log('🔵 Starting blue-green deployment for strategy:', strategy.name);
 
     // Deploy to green environment
     await this.deployToEnvironment('green', version);
@@ -653,10 +653,12 @@ return undefined;
   }
 
   private async getTestResult(source: string): Promise<number> {
+    console.log(`Getting test results for source: ${source}`);
     return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
   }
 
   private async getSecurityScanResult(source: string): Promise<number> {
+    console.log(`Getting security scan results for source: ${source}`);
     return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
   }
 
@@ -669,22 +671,22 @@ return undefined;
     return ((analysis as any))[source] || Math.random() * 100;
   }
 
-  private async executeAutoFix(_config: any): Promise<void> {
+  private async executeAutoFix(config: any): Promise<void> {
     console.log('🔧 Executing auto-fix:', config.type);
     // Implementation would depend on the type of fix
   }
 
-  private async createIssue(_config: any, _context: any): Promise<void> {
-    console.log('📝 Creating issue:', config.title);
+  private async createIssue(config: any, context: any): Promise<void> {
+    console.log('📝 Creating issue:', config.title, 'for context:', context.workflowName || 'unknown');
     // Implementation would integrate with issue tracking system
   }
 
-  private async executeRollback(_config: any): Promise<void> {
+  private async executeRollback(config: any): Promise<void> {
     console.log('⏪ Executing rollback:', config.reason);
     // Implementation would rollback to previous version
   }
 
-  private async executeScaling(_config: any): Promise<void> {
+  private async executeScaling(config: any): Promise<void> {
     console.log('📈 Executing scaling:', config.action);
     // Implementation would scale infrastructure
   }
@@ -811,19 +813,19 @@ return undefined;
             type: 'code-quality',
             operator: 'gte',
             value: 80,
-            _source: 'maintainabilityIndex',
+            source: 'maintainabilityIndex',
           },
           {
             type: 'security-scan',
             operator: 'eq',
             value: 0,
-            _source: 'vulnerabilities',
+            source: 'vulnerabilities',
           },
         ],
         actions: [
           {
             type: 'block',
-            _config: { message: 'Code quality standards not met' },
+            config: { message: 'Code quality standards not met' },
           },
         ],
       },
@@ -842,13 +844,13 @@ return undefined;
             type: 'test-result',
             operator: 'gte',
             value: 95,
-            _source: 'test-coverage',
+            source: 'test-coverage',
           },
         ],
         actions: [
           {
             type: 'block',
-            _config: { message: 'Test coverage below threshold' },
+            config: { message: 'Test coverage below threshold' },
           },
         ],
       },
@@ -863,13 +865,13 @@ return undefined;
             type: 'performance',
             operator: 'lt',
             value: 3000,
-            _source: 'page-load-time',
+            source: 'page-load-time',
           },
         ],
         actions: [
           {
             type: 'notify',
-            _config: { message: 'Performance degradation detected' },
+            config: { message: 'Performance degradation detected' },
           },
         ],
       },
@@ -881,7 +883,7 @@ return undefined;
     this.deploymentStrategies.set('blue-green', {
       name: 'Blue-Green Deployment',
       type: 'blue-green',
-      _config: {
+      config: {
         healthCheckTimeout: 300,
         switchTimeout: 60,
       },
@@ -891,7 +893,7 @@ return undefined;
           type: 'metric',
           operator: 'gt',
           value: 0.05,
-          _source: 'error-rate',
+          source: 'error-rate',
         },
       ],
     });
@@ -900,7 +902,7 @@ return undefined;
     this.deploymentStrategies.set('canary', {
       name: 'Canary Deployment',
       type: 'canary',
-      _config: {
+      config: {
         trafficPercentages: [5, 10, 25, 50, 100],
         stabilizationTime: 300,
       },
@@ -910,13 +912,13 @@ return undefined;
           type: 'metric',
           operator: 'gt',
           value: 0.02,
-          _source: 'error-rate',
+          source: 'error-rate',
         },
         {
           type: 'performance',
           operator: 'gt',
           value: 2000,
-          _source: 'response-time',
+          source: 'response-time',
         },
       ],
     });
