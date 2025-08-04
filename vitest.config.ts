@@ -24,8 +24,8 @@ export default defineConfig({
       'coverage'
     ],
     
-    // Test timeout
-    testTimeout: 10000,
+    // Test timeout (increased for memory-safe execution)
+    testTimeout: 30000,
     hookTimeout: 10000,
     
     // Coverage configuration
@@ -70,13 +70,13 @@ export default defineConfig({
     // Watch mode
     watch: false,
     
-    // Parallel execution
-    pool: 'threads',
+    // Memory-safe test execution
+    pool: 'forks',
     poolOptions: {
-      threads: {
-        singleThread: false,
-        maxThreads: 4,
-        minThreads: 1
+      forks: {
+        singleFork: true,
+        maxForks: 1,
+        minForks: 1
       }
     },
     
@@ -87,12 +87,13 @@ export default defineConfig({
       ]
     },
     
-    // Environment variables
+    // Environment variables for memory management
     env: {
       NODE_ENV: 'test',
       VITE_APP_ENV: 'test',
       VITE_USE_MOCK_DATA: 'true',
-      VITE_TEST_MODE: 'true'
+      VITE_TEST_MODE: 'true',
+      NODE_OPTIONS: '--max-old-space-size=2048'
     },
     
     // Retry configuration

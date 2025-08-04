@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ interface VideoCardProps {
  * VideoCard component displays a video thumbnail with metadata
  * Can be displayed in different variants: default, compact, or studio
  */
-const VideoCard: React.FC<VideoCardProps> = ({
+const VideoCard: React.FC<VideoCardProps> = React.memo(({
   video,
   variant = 'default',
   onClick,
@@ -241,6 +241,6 @@ const VideoCard: React.FC<VideoCardProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export default VideoCard;
