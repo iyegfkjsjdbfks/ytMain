@@ -6,19 +6,10 @@ import { logger } from '../utils/logger';
 export interface VideoPlayerOptions {
   autoplay?: boolean;
   muted?: boolean;
-  loop?: boolean;
-  controls?: boolean;
-  playbackRate?: number;
-  volume?: number;
-  onEnded?: () => void;
   onTimeUpdate?: (currentTime: number) => void;
-  onDurationChange?: (duration: number) => void;
+  onEnded?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
-  onVolumeChange?: (volume: number) => void;
-  onPlaybackRateChange?: (rate: number) => void;
-  onFullscreenChange?: (isFullscreen: boolean) => void;
-  onError?: (error: Error) => void;
 }
 
 export interface VideoPlayerState {
@@ -32,6 +23,8 @@ export interface VideoPlayerState {
   playbackRate: number;
   isLoading: boolean;
   error: Error | null;
+  buffered?: TimeRanges;
+  setQuality?: (quality: string) => void;
 }
 
 export interface VideoPlayerControls {
@@ -51,6 +44,7 @@ export interface VideoPlayerControls {
   exitPictureInPicture: () => Promise<void>;
   togglePictureInPicture: () => Promise<void>;
   setVideoRef: (element: HTMLVideoElement | null) => void;
+  setQuality: (quality: string) => void;
 }
 
 export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerState & VideoPlayerControls => {
@@ -405,10 +399,16 @@ return;
   }, []);
 
   return {
-    // State
-    ...state,
-
-    // Controls
+    isPlaying: state.isPlaying,
+    duration: state.duration,
+    currentTime: state.currentTime,
+    isMuted: state.isMuted,
+    volume: state.volume,
+    isFullscreen: state.isFullscreen,
+    isPictureInPicture: state.isPictureInPicture,
+    playbackRate: state.playbackRate,
+    isLoading: state.isLoading,
+    error: state.error,
     play,
     pause,
     togglePlay,
@@ -424,6 +424,6 @@ return;
     requestPictureInPicture,
     exitPictureInPicture,
     togglePictureInPicture,
-    setVideoRef,
+    setVideoRef
   };
 };

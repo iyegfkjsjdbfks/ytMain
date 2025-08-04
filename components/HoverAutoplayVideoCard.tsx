@@ -151,7 +151,7 @@ return duration;
           <div className="relative w-full" style={{ height: '250px' }}>
             {/* Thumbnail - always visible as background */}
             <ImageWithFallback
-              src={video.thumbnailUrl}
+              src={(video.thumbnailUrl || video.thumbnail)}
               alt={video.title}
               className={`absolute inset-0 w-full h-full object-cover rounded-xl transition-all duration-300 ${
                 showIframe ? 'opacity-0' : 'opacity-100 group-hover:rounded-lg'
@@ -227,15 +227,15 @@ return duration;
       {/* Video Info */}
       <div className="flex gap-3">
         {/* Channel Avatar */}
-        {video.channelAvatarUrl && (
+        {(video.channelAvatarUrl || video.thumbnail) && (
           <Link to={`/channel/${video.channelId}`} className="flex-shrink-0">
             <ImageWithFallback
-              src={video.channelAvatarUrl}
-              alt={video.channelName}
+              src={(video.channelAvatarUrl || video.thumbnail)}
+              alt={(video.channelName || video.channelTitle)}
               className="w-9 h-9 rounded-full object-cover"
               width={36}
               height={36}
-              fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || video.channelName}`}
+              fallbackSrc={`https://picsum.photos/36/36?random=${video.channelId || (video.channelName || video.channelTitle)}`}
             />
           </Link>
         )}
@@ -252,7 +252,7 @@ return duration;
           {/* Channel Name */}
           <Link to={`/channel/${video.channelId}`}>
             <p className="text-gray-600 dark:text-gray-400 text-sm hover:text-gray-800 dark:hover:text-white transition-colors">
-              {video.channelName}
+              {(video.channelName || video.channelTitle)}
             </p>
           </Link>
 
@@ -263,7 +263,7 @@ return duration;
             <span>
               {(() => {
                 try {
-                  const date = new Date(video.uploadedAt);
+                  const date = new Date(video.uploadedAt || Date.now());
                   if (isNaN(date.getTime())) {
                     return 'Recently';
                   }

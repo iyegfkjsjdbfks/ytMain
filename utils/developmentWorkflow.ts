@@ -438,7 +438,7 @@ return undefined;
     };
   }
 
-  private async executeAction(action: WorkflowAction, _context: any): Promise<void> {
+  private async executeAction(_action: WorkflowAction, __context: any): Promise<void> {
     switch (action.type) {
       case 'notify':
         console.warn(`🔔 Notification: ${action?.config.message || 'Quality gate failed'}`);
@@ -568,17 +568,17 @@ return undefined;
   }
 
   // Mock implementations for deployment operations
-  private async deployToEnvironment(env: string, _version: string): Promise<void> {
+  private async deployToEnvironment(_env: string, __version: string): Promise<void> {
     console.log(`🚀 Deploying ${version} to ${env} environment`);
     await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate deployment time
   }
 
-  private async switchTraffic(env: string): Promise<void> {
+  private async switchTraffic(_env: string): Promise<void> {
     console.log(`🔀 Switching traffic to ${env}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async routeTrafficToCanary(percentage: number, _version: string): Promise<void> {
+  private async routeTrafficToCanary(_percentage: number, __version: string): Promise<void> {
     console.log(`📊 Routing ${percentage}% traffic to canary ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
@@ -588,37 +588,37 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployBatch(startIndex: number, _batchSize: number, _version: string): Promise<void> {
+  private async deployBatch(_startIndex: number, __batchSize: number, __version: string): Promise<void> {
     console.log(`📦 Deploying batch starting at ${startIndex} (${batchSize} instances) with ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1500));
   }
 
-  private async rollbackBatch(startIndex: number, _batchSize: number): Promise<void> {
+  private async rollbackBatch(_startIndex: number, __batchSize: number): Promise<void> {
     console.log(`⏪ Rolling back batch starting at ${startIndex}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployWithFeatureFlag(_version: string, enabled: boolean): Promise<void> {
+  private async deployWithFeatureFlag(__version: string, _enabled: boolean): Promise<void> {
     console.log(`🚀 Deploying ${version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
   }
 
-  private async updateFeatureFlag(flagName: string, percentage: number): Promise<void> {
+  private async updateFeatureFlag(_flagName: string, _percentage: number): Promise<void> {
     console.log(`🎯 Updating feature flag ${flagName} to ${percentage}%`);
     await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  private async disableFeatureFlag(flagName: string): Promise<void> {
+  private async disableFeatureFlag(_flagName: string): Promise<void> {
     console.log(`🚫 Disabling feature flag ${flagName}`);
     await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  private async waitForStabilization(seconds: number): Promise<void> {
+  private async waitForStabilization(_seconds: number): Promise<void> {
     console.log(`⏳ Waiting ${seconds}s for stabilization`);
     await new Promise(resolve => setTimeout(resolve, Math.min(seconds * 1000, 5000))); // Cap at 5s for demo
   }
 
-  private async runDeploymentHealthChecks(checks: string[]): Promise<{ healthy: boolean; details: any }> {
+  private async runDeploymentHealthChecks(_checks: string[]): Promise<{ healthy: boolean; details: any }> {
     console.log('🏥 Running deployment health checks');
 
     // Simulate health check results
@@ -636,7 +636,7 @@ return undefined;
     };
   }
 
-  private async evaluateRollback(_strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
+  private async evaluateRollback(__strategy: DeploymentStrategy, _healthStatus: any): Promise<void> {
     for (const trigger of strategy.rollbackTriggers) {
       const shouldRollback = await this.evaluateCondition(trigger, { healthStatus });
       if (shouldRollback.passed) {
@@ -648,46 +648,46 @@ return undefined;
   }
 
   // Mock implementations for various operations
-  private async getMetricValue(_source: string): Promise<number> {
+  private async getMetricValue(__source: string): Promise<number> {
     const metrics = advancedAPM.getAggregatedMetrics(source);
     return metrics.avg || Math.random() * 100;
   }
 
-  private async getTestResult(_source: string): Promise<number> {
+  private async getTestResult(__source: string): Promise<number> {
     console.log(`Getting test results for source: ${source}`);
     return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
   }
 
-  private async getSecurityScanResult(_source: string): Promise<number> {
+  private async getSecurityScanResult(__source: string): Promise<number> {
     console.log(`Getting security scan results for source: ${source}`);
     return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
   }
 
-  private async getPerformanceMetric(_source: string): Promise<number> {
+  private async getPerformanceMetric(__source: string): Promise<number> {
     return performanceMonitor.getMetrics().find(m => m.name === source)?.value || Math.random() * 1000;
   }
 
-  private async getCodeQualityMetric(_source: string): Promise<number> {
+  private async getCodeQualityMetric(__source: string): Promise<number> {
     const analysis = await codeAnalysisEngine.analyzeCode();
     return (((analysis as any)))[source] || Math.random() * 100;
   }
 
-  private async executeAutoFix(_config: any): Promise<void> {
+  private async executeAutoFix(__config: any): Promise<void> {
     console.log('🔧 Executing auto-fix:', config.type);
     // Implementation would depend on the type of fix
   }
 
-  private async createIssue(_config: any, _context: any): Promise<void> {
+  private async createIssue(__config: any, __context: any): Promise<void> {
     console.log('📝 Creating issue:', config.title, 'for context:', context.workflowName || 'unknown');
     // Implementation would integrate with issue tracking system
   }
 
-  private async executeRollback(_config: any): Promise<void> {
+  private async executeRollback(__config: any): Promise<void> {
     console.log('⏪ Executing rollback:', config.reason);
     // Implementation would rollback to previous version
   }
 
-  private async executeScaling(_config: any): Promise<void> {
+  private async executeScaling(__config: any): Promise<void> {
     console.log('📈 Executing scaling:', config.action);
     // Implementation would scale infrastructure
   }
@@ -774,7 +774,7 @@ return undefined;
     return suggestions;
   }
 
-  private async implementSuggestion(suggestion: ContinuousImprovementSuggestion): Promise<void> {
+  private async implementSuggestion(_suggestion: ContinuousImprovementSuggestion): Promise<void> {
     console.log(`🔧 Implementing: ${suggestion.description}`);
 
     switch (suggestion.id) {

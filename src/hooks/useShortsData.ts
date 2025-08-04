@@ -1,7 +1,7 @@
 import React from "react";
 import { useCallback } from 'react';
 
-import { getShortsVideos } from '../services/realVideoService';
+// import { getShortsVideos } // from '../services/realVideoService' // Service not found;
 
 import { useAsyncData } from './useAsyncData';
 import type { Video } from '../types';

@@ -64,14 +64,17 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   onPause,
 }) => {
   // Use the custom video player hook
-  const { videoRef, state, actions } = useVideoPlayer({
+  const videoPlayerInstance = useVideoPlayer({
     autoplay,
     muted,
-    onTimeUpdate,
-    onEnded,
-    onPlay,
-    onPause,
+    ...(onTimeUpdate && { onTimeUpdate }),
+    ...(onEnded && { onEnded }),
+    ...(onPlay && { onPlay }),
+    ...(onPause && { onPause }),
   });
+
+  // Local video ref
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Local state for UI controls
   const [showControls, setShowControls] = useState(true);
@@ -92,6 +95,13 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
 
+  // Connect videoRef to video player instance
+  useEffect(() => {
+    if (videoRef.current) {
+      videoPlayerInstance.setVideoRef(videoRef.current);
+    }
+  }, [videoPlayerInstance]);
+
   // Format time for display
   const formatTime = (time: number): string => {
     const hours = Math.floor(time / 3600);
@@ -107,33 +117,33 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   // Get current chapter
   const getCurrentChapter = (): Chapter | undefined => {
     return chapters.find(
-      (chapter) => state.currentTime >= chapter.startTime && state.currentTime < chapter.endTime,
+      (chapter) => videoPlayerInstance.currentTime >= chapter.startTime && videoPlayerInstance.currentTime < chapter.endTime,
     );
   };
 
   // Handle progress bar interaction
   const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!progressRef.current || !state.duration) {
+    if (!progressRef.current || !videoPlayerInstance.duration) {
 return;
 }
 
     const rect = progressRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
-    const newTime = (clickX / rect.width) * state.duration;
-    actions.seek(newTime);
-  }, [state.duration, actions]);
+    const newTime = (clickX / rect.width) * videoPlayerInstance.duration;
+    videoPlayerInstance.seek(newTime);
+  }, [videoPlayerInstance.duration]);
 
   const handleProgressMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!progressRef.current || !state.duration) {
+    if (!progressRef.current || !videoPlayerInstance.duration) {
 return;
 }
 
     const rect = progressRef.current.getBoundingClientRect();
     const hoverX = e.clientX - rect.left;
-    const hoverTime = (hoverX / rect.width) * state.duration;
+    const hoverTime = (hoverX / rect.width) * videoPlayerInstance.duration;
     setPreviewTime(hoverTime);
     setShowPreview(true);
-  }, [state.duration]);
+  }, [videoPlayerInstance.duration]);
 
   const handleProgressMouseLeave = useCallback(() => {
     setShowPreview(false);
@@ -148,46 +158,46 @@ return;
     switch (e.code) {
       case 'Space':
         e.preventDefault();
-        actions.togglePlayPause();
+        videoPlayerInstance.togglePlay();
         break;
       case 'ArrowLeft':
         e.preventDefault();
-        actions.seek(Math.max(0, state.currentTime - 10));
+        videoPlayerInstance.seek(Math.max(0, videoPlayerInstance.currentTime - 10));
         break;
       case 'ArrowRight':
         e.preventDefault();
-        actions.seek(Math.min(state.duration, state.currentTime + 10));
+        videoPlayerInstance.seek(Math.min(videoPlayerInstance.duration, videoPlayerInstance.currentTime + 10));
         break;
       case 'ArrowUp':
         e.preventDefault();
-        actions.setVolume(Math.min(1, state.volume + 0.1));
+        videoPlayerInstance.setVolume(Math.min(1, videoPlayerInstance.volume + 0.1));
         break;
       case 'ArrowDown':
         e.preventDefault();
-        actions.setVolume(Math.max(0, state.volume - 0.1));
+        videoPlayerInstance.setVolume(Math.max(0, videoPlayerInstance.volume - 0.1));
         break;
       case 'KeyM':
         e.preventDefault();
-        actions.toggleMute();
+        videoPlayerInstance.toggleMute();
         break;
       case 'KeyF':
         e.preventDefault();
-        actions.toggleFullscreen();
+        videoPlayerInstance.toggleFullscreen();
         break;
       case 'Comma':
         if (e.shiftKey) {
           e.preventDefault();
-          actions.setPlaybackRate(Math.max(0.25, state.playbackRate - 0.25));
+          videoPlayerInstance.setPlaybackRate(Math.max(0.25, videoPlayerInstance.playbackRate - 0.25));
         }
         break;
       case 'Period':
         if (e.shiftKey) {
           e.preventDefault();
-          actions.setPlaybackRate(Math.min(2, state.playbackRate + 0.25));
+          videoPlayerInstance.setPlaybackRate(Math.min(2, videoPlayerInstance.playbackRate + 0.25));
         }
         break;
     }
-  }, [actions, state.currentTime, state.duration, state.volume, state.playbackRate]);
+  }, [videoPlayerInstance.currentTime, videoPlayerInstance.duration, videoPlayerInstance.volume, videoPlayerInstance.playbackRate]);
 
   // Auto-hide controls
   const resetControlsTimeout = useCallback(() => {
@@ -197,12 +207,12 @@ return;
 
     setShowControls(true);
 
-    if (state.isPlaying) {
+    if (videoPlayerInstance.isPlaying) {
       controlsTimeoutRef.current = setTimeout(() => {
         setShowControls(false);
       }, 3000);
     }
-  }, [state.isPlaying]);
+  }, [videoPlayerInstance.isPlaying]);
 
   // Handle mouse movement to show controls
   const handleMouseMove = useCallback(() => {
@@ -220,18 +230,18 @@ return;
 
   // Chapter navigation
   const goToChapter = useCallback((chapter: Chapter) => {
-    actions.seek(chapter.startTime);
+    videoPlayerInstance.seek(chapter.startTime);
     setShowChapters(false);
-  }, [actions]);
+  }, []);
 
   // Skip forward/backward
   const skipForward = useCallback(() => {
-    actions.seek(Math.min(state.duration, state.currentTime + 10));
-  }, [actions, state.currentTime, state.duration]);
+    videoPlayerInstance.seek(Math.min(videoPlayerInstance.duration, videoPlayerInstance.currentTime + 10));
+  }, [videoPlayerInstance.currentTime, videoPlayerInstance.duration]);
 
   const skipBackward = useCallback(() => {
-    actions.seek(Math.max(0, state.currentTime - 10));
-  }, [actions, state.currentTime]);
+    videoPlayerInstance.seek(Math.max(0, videoPlayerInstance.currentTime - 10));
+  }, [videoPlayerInstance.currentTime]);
 
   // Picture-in-picture
   const togglePictureInPicture = useCallback(async () => {
@@ -266,12 +276,12 @@ return;
 
   useEffect(() => {
     resetControlsTimeout();
-  }, [state.isPlaying, resetControlsTimeout]);
+  }, [videoPlayerInstance.isPlaying, resetControlsTimeout]);
 
   const currentChapter = getCurrentChapter();
-  const progressPercentage = state.duration ? (state.currentTime / state.duration) * 100 : 0;
-  const volumePercentage = state.volume * 100;
-  const bufferPercentage = state.buffered * 100;
+  const progressPercentage = videoPlayerInstance.duration ? (videoPlayerInstance.currentTime / videoPlayerInstance.duration) * 100 : 0;
+  const volumePercentage = videoPlayerInstance.volume * 100;
+  const bufferPercentage = videoPlayerInstance.buffered ? 100 : 0; // Placeholder for buffered calculation
 
   return (
     <div
@@ -286,8 +296,8 @@ return;
         src={video.videoUrl}
         poster={video.thumbnailUrl}
         className="w-full h-full object-contain"
-        onClick={actions.togglePlayPause}
-        onDoubleClick={actions.toggleFullscreen}
+        onClick={videoPlayerInstance.togglePlay}
+        onDoubleClick={videoPlayerInstance.toggleFullscreen}
         aria-label={`Video: ${video.title}`}
         controls={false}
       >
@@ -301,18 +311,18 @@ return;
       </video>
 
       {/* Loading Overlay */}
-      {state.isLoading && (
+      {videoPlayerInstance.isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
         </div>
       )}
 
       {/* Error Overlay */}
-      {state.error && (
+      {videoPlayerInstance.error && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
           <div className="text-white text-center">
             <p className="text-lg mb-2">Video Error</p>
-            <p className="text-sm opacity-75">{state.error}</p>
+            <p className="text-sm opacity-75">{videoPlayerInstance.error?.message || "An error occurred"}</p>
           </div>
         </div>
       )}
@@ -327,23 +337,23 @@ return;
       {/* Controls Overlay */}
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${
-          showControls || !state.isPlaying ? 'opacity-100' : 'opacity-0'
+          showControls || !videoPlayerInstance.isPlaying ? 'opacity-100' : 'opacity-0'
         }`}
       >
         {/* Center Play/Pause Button */}
         <div className="absolute inset-0 flex items-center justify-center">
           <button
-            onClick={actions.togglePlayPause}
+            onClick={videoPlayerInstance.togglePlay}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                actions.togglePlayPause();
+                videoPlayerInstance.togglePlay();
               }
             }}
             className="bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-4 rounded-full transition-all duration-200 transform hover:scale-110"
-            aria-label={state.isPlaying ? 'Pause video' : 'Play video'}
+            aria-label={videoPlayerInstance.isPlaying ? 'Pause video' : 'Play video'}
           >
-            {state.isPlaying ? (
+            {videoPlayerInstance.isPlaying ? (
               <PauseIcon className="w-8 h-8" />
             ) : (
               <PlayIcon className="w-8 h-8 ml-1" />
@@ -370,8 +380,8 @@ return;
               role="slider"
               aria-label="Video progress"
               aria-valuemin={0}
-              aria-valuemax={state.duration}
-              aria-valuenow={state.currentTime}
+              aria-valuemax={videoPlayerInstance.duration}
+              aria-valuenow={videoPlayerInstance.currentTime}
               tabIndex={0}
             >
               {/* Buffer Bar */}
@@ -394,7 +404,7 @@ return;
 
               {/* Chapter Markers */}
               {chapters.map((chapter, index) => {
-                const markerPosition = state.duration ? (chapter.startTime / state.duration) * 100 : 0;
+                const markerPosition = videoPlayerInstance.duration ? (chapter.startTime / videoPlayerInstance.duration) * 100 : 0;
                 return (
                   <div
                     key={index}
@@ -409,7 +419,7 @@ return;
               {showPreview && (
                 <div
                   className="absolute bottom-full mb-2 px-2 py-1 bg-black bg-opacity-75 text-white text-xs rounded whitespace-nowrap transform -translate-x-1/2"
-                  style={{ left: `${(previewTime / state.duration) * 100}%` }}
+                  style={{ left: `${(previewTime / videoPlayerInstance.duration) * 100}%` }}
                 >
                   {formatTime(previewTime)}
                 </div>
@@ -422,10 +432,10 @@ return;
             <div className="flex items-center space-x-2">
               {/* Play/Pause */}
               <button
-                onClick={actions.togglePlayPause}
+                onClick={videoPlayerInstance.togglePlay}
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
               >
-                {state.isPlaying ? (
+                {videoPlayerInstance.isPlaying ? (
                   <PauseIcon className="w-6 h-6" />
                 ) : (
                   <PlayIcon className="w-6 h-6" />
@@ -453,10 +463,10 @@ return;
               {/* Volume */}
               <div className="flex items-center group">
                 <button
-                  onClick={actions.toggleMute}
+                  onClick={videoPlayerInstance.toggleMute}
                   className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
                 >
-                  {state.isMuted || state.volume === 0 ? (
+                  {videoPlayerInstance.isMuted || videoPlayerInstance.volume === 0 ? (
                     <SpeakerXMarkIcon className="w-6 h-6" />
                   ) : (
                     <SpeakerWaveIcon className="w-6 h-6" />
@@ -469,7 +479,7 @@ return;
                     min="0"
                     max="100"
                     value={volumePercentage}
-                    onChange={(e) => actions.setVolume(Number(e.target.value) / 100)}
+                    onChange={(e) => videoPlayerInstance.setVolume(Number(e.target.value) / 100)}
                     className="w-20 h-1 bg-white bg-opacity-30 rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
@@ -477,7 +487,7 @@ return;
 
               {/* Time Display */}
               <span className="text-sm font-mono">
-                {formatTime(state.currentTime)} / {formatTime(state.duration)}
+                {formatTime(videoPlayerInstance.currentTime)} / {formatTime(videoPlayerInstance.duration)}
               </span>
             </div>
 
@@ -552,7 +562,7 @@ return;
                               key={quality.value}
                               onClick={() => {
                                 setSelectedQuality(quality.value);
-                                actions.setQuality(quality.value);
+                                videoPlayerInstance.setQuality(quality.value);
                                 setShowQualityMenu(false);
                               }}
                               className={`w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors ${
@@ -577,7 +587,7 @@ return;
                       >
                         <span>Playback Speed</span>
                         <div className="flex items-center space-x-2">
-                          <span className="text-sm opacity-75">{state.playbackRate}x</span>
+                          <span className="text-sm opacity-75">{videoPlayerInstance.playbackRate}x</span>
                           <ChevronUpIcon className={`w-4 h-4 transition-transform ${showSpeedMenu ? 'rotate-180' : ''}`} />
                         </div>
                       </button>
@@ -588,11 +598,11 @@ return;
                             <button
                               key={rate}
                               onClick={() => {
-                                actions.setPlaybackRate(rate);
+                                videoPlayerInstance.setPlaybackRate(rate);
                                 setShowSpeedMenu(false);
                               }}
                               className={`w-full text-left p-3 hover:bg-white hover:bg-opacity-20 transition-colors ${
-                                state.playbackRate === rate ? 'bg-white bg-opacity-20' : ''
+                                videoPlayerInstance.playbackRate === rate ? 'bg-white bg-opacity-20' : ''
                               }`}
                             >
                               {rate}x
@@ -640,10 +650,10 @@ return;
 
               {/* Fullscreen */}
               <button
-                onClick={actions.toggleFullscreen}
+                onClick={videoPlayerInstance.toggleFullscreen}
                 className="p-2 hover:bg-white hover:bg-opacity-20 rounded transition-colors"
               >
-                {state.isFullscreen ? (
+                {videoPlayerInstance.isFullscreen ? (
                   <ArrowsPointingInIcon className="w-6 h-6" />
                 ) : (
                   <ArrowsPointingOutIcon className="w-6 h-6" />

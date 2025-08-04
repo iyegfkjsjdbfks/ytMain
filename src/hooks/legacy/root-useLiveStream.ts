@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import type { LiveStream } from '../src/types/livestream';
+import type { LiveStream } from '../types/livestream';
 
 export function useLiveStream(streamId?: string) {
   const [stream, setStream] = useState<LiveStream | null>(null);

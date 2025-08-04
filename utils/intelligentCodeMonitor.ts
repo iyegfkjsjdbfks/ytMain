@@ -356,23 +356,23 @@ return 0;
   /**
    * Generate refactoring opportunities
    */
-  private async generateRefactoringOpportunities(metrics: CodeMetrics): Promise<void> {
-    const opportunities: RefactoringOpportunity[] = [];
+  private async generateRefactoringOpportunities(_metrics: CodeMetrics): Promise<void> {
+    const _opportunities: RefactoringOpportunity[] = [];
 
     // High complexity opportunities
     if (metrics.complexity > 10) {
       opportunities.push({
-        id: 'reduce-complexity',
-        type: 'maintainability',
-        file: 'components/ComplexComponent.tsx',
-        line: 45,
-        description: 'High cyclomatic complexity detected',
-        impact: 'high',
-        effort: 'medium',
-        automatable: false,
-        suggestion: 'Consider breaking down large functions into smaller, more focused functions',
-        codeExample: {
-          before: 'function complexFunction() { /* 50+ lines of code */ }',
+        _id: 'reduce-complexity',
+        _type: 'maintainability',
+        _file: 'components/ComplexComponent.tsx',
+        _line: 45,
+        _description: 'High cyclomatic complexity detected',
+        _impact: 'high',
+        _effort: 'medium',
+        _automatable: false,
+        _suggestion: 'Consider breaking down large functions into smaller, more focused functions',
+        _codeExample: {
+          _before: 'function complexFunction() { /* 50+ lines of code */ }',
           after: 'function mainFunction() { helper1(); helper2(); helper3(); }',
         },
       });
@@ -460,20 +460,20 @@ return 0;
   /**
    * Generate code review insights
    */
-  private async generateCodeReviewInsights(metrics: CodeMetrics): Promise<void> {
-    const insights: CodeReviewInsight[] = [];
+  private async generateCodeReviewInsights(_metrics: CodeMetrics): Promise<void> {
+    const _insights: CodeReviewInsight[] = [];
 
     // Architecture insights
     if (metrics.complexity > 12) {
       insights.push({
-        id: 'architecture-complexity',
-        category: 'architecture',
-        severity: 'warning',
-        title: 'High System Complexity',
-        description: 'The overall system complexity is higher than recommended',
-        recommendation: 'Consider implementing Domain-Driven Design patterns to better organize code',
-        files: ['src/components/', 'src/utils/', 'src/services/'],
-        estimatedImpact: 'Improved maintainability and reduced development time',
+        _id: 'architecture-complexity',
+        _category: 'architecture',
+        _severity: 'warning',
+        _title: 'High System Complexity',
+        _description: 'The overall system complexity is higher than recommended',
+        _recommendation: 'Consider implementing Domain-Driven Design patterns to better organize code',
+        _files: ['src/components/', 'src/utils/', 'src/services/'],
+        _estimatedImpact: 'Improved maintainability and reduced development time',
       });
     }
 

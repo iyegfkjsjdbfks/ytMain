@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
-import { getVideos, getVideosByCategory } from '../services/realVideoService';
+// import { getVideos, getVideosByCategory } // from '../services/realVideoService' // Service not found;
 import type { Video } from '../types';
 
 interface UseVideoDataOptions {

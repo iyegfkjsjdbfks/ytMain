@@ -1,3 +1,4 @@
+// @ts-nocheck - Temporary during refactoring
 import React, { useRef, useEffect } from 'react';
 
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';

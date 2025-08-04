@@ -11,16 +11,14 @@ import type { Video, Channel } from '../src/types/core';
 
 interface VideoDescriptionProps {
   video: Video;
-  channel: Channel | null;
-  isSubscribed: boolean;
-  showFullDescription: boolean;
-  summary?: string;
-  summaryError?: string;
-  isSummarizing: boolean;
-  canSummarize: boolean;
-  onSubscribe: () => void;
-  onToggleDescription: () => void;
-  onSummarizeDescription: () => void;
+  channel?: Channel;
+  isSubscribed?: boolean;
+  showFullDescription?: boolean;
+  isSummarizing?: boolean;
+  onSubscribe?: (channelId: string) => void;
+  onLike?: (videoId: string) => void;
+  onShare?: (videoId: string) => void;
+  onToggleDescription?: () => void;
 }
 
 const VideoDescription: React.FC<VideoDescriptionProps> = ({
