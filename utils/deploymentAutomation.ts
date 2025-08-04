@@ -13,7 +13,7 @@ interface DeploymentConfig {
   id: string;
   name: string;
   environment: 'development' | 'staging' | 'production';
-  strategy: 'blue-green' | 'canary' | 'rolling' | 'recreate';
+  _strategy: 'blue-green' | 'canary' | 'rolling' | 'recreate';
   autoRollback: boolean;
   healthChecks: HealthCheck[];
   qualityGates: QualityGateConfig[];
@@ -24,7 +24,7 @@ interface HealthCheck {
   id: string;
   name: string;
   type: 'http' | 'tcp' | 'command' | 'custom';
-  config: {
+  _config: {
     url?: string;
     port?: number;
     command?: string;
@@ -49,7 +49,7 @@ interface QualityGateConfig {
 
 interface NotificationConfig {
   type: 'email' | 'slack' | 'webhook' | 'sms';
-  config: {
+  _config: {
     url?: string;
     channel?: string;
     recipients?: string[];
@@ -80,7 +80,7 @@ interface PipelineStage {
 
 interface PipelineTrigger {
   type: 'push' | 'pull-request' | 'schedule' | 'manual' | 'webhook';
-  config: {
+  _config: {
     branches?: string[];
     schedule?: string;
     webhook?: string;
@@ -166,7 +166,7 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'push',
-          config: { branches: ['develop', 'feature/*'] },
+          _config: { branches: ['develop', 'feature/*'] },
         },
       ],
       stages: [
@@ -229,7 +229,7 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'push',
-          config: { branches: ['main', 'release/*'] },
+          _config: { branches: ['main', 'release/*'] },
         },
       ],
       stages: [
@@ -320,7 +320,7 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'manual',
-          config: {},
+          _config: {},
         },
       ],
       stages: [
@@ -408,14 +408,14 @@ class DeploymentAutomationEngine {
       id: 'dev-config',
       name: 'Development Configuration',
       environment: 'development',
-      strategy: 'recreate',
+      _strategy: 'recreate',
       autoRollback: true,
       healthChecks: [
         {
           id: 'app-health',
           name: 'Application Health',
           type: 'http',
-          config: {
+          _config: {
             url: 'http://localhost:3001/health',
             timeout: 5000,
             retries: 3,
@@ -438,7 +438,7 @@ class DeploymentAutomationEngine {
       notifications: [
         {
           type: 'webhook',
-          config: { url: 'http://localhost:3001/api/notifications' },
+          _config: { url: 'http://localhost:3001/api/notifications' },
           events: ['failure'],
         },
       ],
@@ -448,14 +448,14 @@ class DeploymentAutomationEngine {
       id: 'staging-config',
       name: 'Staging Configuration',
       environment: 'staging',
-      strategy: 'blue-green',
+      _strategy: 'blue-green',
       autoRollback: true,
       healthChecks: [
         {
           id: 'app-health',
           name: 'Application Health',
           type: 'http',
-          config: {
+          _config: {
             url: 'https://staging.example.com/health',
             timeout: 10000,
             retries: 5,
@@ -467,7 +467,7 @@ class DeploymentAutomationEngine {
           id: 'api-health',
           name: 'API Health',
           type: 'http',
-          config: {
+          _config: {
             url: 'https://staging-api.example.com/health',
             timeout: 5000,
             retries: 3,
@@ -500,7 +500,7 @@ class DeploymentAutomationEngine {
       notifications: [
         {
           type: 'slack',
-          config: { channel: '#deployments' },
+          _config: { channel: '#deployments' },
           events: ['start', 'success', 'failure', 'rollback'],
         },
       ],
@@ -510,14 +510,14 @@ class DeploymentAutomationEngine {
       id: 'prod-config',
       name: 'Production Configuration',
       environment: 'production',
-      strategy: 'blue-green',
+      _strategy: 'blue-green',
       autoRollback: true,
       healthChecks: [
         {
           id: 'app-health',
           name: 'Application Health',
           type: 'http',
-          config: {
+          _config: {
             url: 'https://app.example.com/health',
             timeout: 10000,
             retries: 5,
@@ -529,7 +529,7 @@ class DeploymentAutomationEngine {
           id: 'api-health',
           name: 'API Health',
           type: 'http',
-          config: {
+          _config: {
             url: 'https://api.example.com/health',
             timeout: 5000,
             retries: 3,
@@ -541,7 +541,7 @@ class DeploymentAutomationEngine {
           id: 'database-health',
           name: 'Database Health',
           type: 'tcp',
-          config: {
+          _config: {
             port: 5432,
             timeout: 5000,
             retries: 3,
@@ -584,12 +584,12 @@ class DeploymentAutomationEngine {
       notifications: [
         {
           type: 'slack',
-          config: { channel: '#production-deployments' },
+          _config: { channel: '#production-deployments' },
           events: ['start', 'success', 'failure', 'rollback'],
         },
         {
           type: 'email',
-          config: { recipients: ['devops@example.com', 'team-lead@example.com'] },
+          _config: { recipients: ['devops@example.com', 'team-lead@example.com'] },
           events: ['failure', 'rollback'],
         },
       ],
@@ -783,7 +783,7 @@ continue;
 
     } catch (error) {
       execution.status = 'failed';
-      this.addLog(execution, 'error', `Deployment error: ${error}`);
+      this.addLog(execution, 'error', `Deployment _error: ${error}`);
       await this.sendNotifications(pipeline.environment, 'failure', execution);
     } finally {
       execution.endTime = Date.now();
@@ -951,7 +951,7 @@ return;
           }
         }
       } catch (error) {
-        this.addLog(execution, 'error', `Health check error: ${healthCheck.name} - ${error}`);
+        this.addLog(execution, 'error', `Health check _error: ${healthCheck.name} - ${error}`);
       }
     }
   }
@@ -1027,7 +1027,7 @@ return;
       }
 
     } catch (error) {
-      this.addLog(execution, 'error', `Rollback error: ${error}`);
+      this.addLog(execution, 'error', `Rollback _error: ${error}`);
     }
 
     execution.rollbackInfo = rollbackInfo;
@@ -1049,7 +1049,7 @@ return;
    */
   private async sendNotifications(
     environment: string,
-    event: 'start' | 'success' | 'failure' | 'rollback',
+    _event: 'start' | 'success' | 'failure' | 'rollback',
     execution: DeploymentExecution,
   ): Promise<void> {
     const config = this.configs.get(`${environment}-config`);

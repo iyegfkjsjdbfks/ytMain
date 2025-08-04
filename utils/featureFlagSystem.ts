@@ -39,7 +39,7 @@ interface FeatureFlag {
 
 interface RolloutStrategy {
   type: 'immediate' | 'gradual' | 'scheduled' | 'user-based' | 'geographic';
-  config: {
+  _config: {
     percentage?: number;
     incrementPercentage?: number;
     incrementInterval?: number; // minutes
@@ -98,7 +98,7 @@ interface FlagEvaluation {
   variant?: string;
   reason: string;
   timestamp: number;
-  context: UserContext;
+  _context: UserContext;
 }
 
 interface ABTestResult {
@@ -132,7 +132,7 @@ class AdvancedFeatureFlagManager {
    */
   start(): void {
     if (this.isRunning) {
-return;
+return undefined;
 }
 
     this.isRunning = true;
@@ -191,7 +191,7 @@ return;
   /**
    * Evaluate a feature flag for a user
    */
-  evaluateFlag(flagId: string, context: UserContext = {}, defaultValue?: any): any {
+  evaluateFlag(flagId: string, _context: UserContext = {}, defaultValue?: any): any {
     const flag = this.flags.get(flagId);
     if (!flag) {
       console.warn(`🚩 Feature flag '${flagId}' not found`);
@@ -283,7 +283,7 @@ return;
       throw new Error(`Feature flag '${flagId}' not found`);
     }
 
-    flag.rolloutStrategy.config.percentage = Math.max(0, Math.min(100, percentage));
+    flag.rolloutStrategy._config.percentage = Math.max(0, Math.min(100, percentage));
     flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -410,10 +410,12 @@ return;
         const controlVariant = variants[0];
         const testVariant = variants[1];
 
-        const testData = variantResults[testVariant];
-        const controlData = variantResults[controlVariant];
-        
-        if (!testData || !controlData) return;
+        const testData = testVariant ? variantResults[testVariant] : undefined;
+        const controlData = controlVariant ? variantResults[controlVariant] : undefined;
+
+        if (!testData || !controlData) {
+return [];
+}
 
         const controlValue = controlData.value;
         const testValue = testData.value;
@@ -435,7 +437,7 @@ return;
           sampleSize: testData.sampleSize,
           confidence,
           significantDifference,
-          winningVariant: significantDifference ? winningVariant : undefined,
+          winningVariant: significantDifference && winningVariant ? winningVariant : '',
         });
       }
     }
@@ -513,17 +515,17 @@ return;
     if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
       const flag = this.flags.get(flagId);
       if (!flag) {
-return;
+return undefined;
 }
 
       const winningVariant = flag.variants?.find(v => v.id === recommendation.winningVariant);
       if (!winningVariant) {
-return;
+return undefined;
 }
 
       // Update flag to use winning variant as default
       flag.defaultValue = winningVariant.value;
-      flag.rolloutStrategy.config.percentage = 100;
+      flag.rolloutStrategy._config.percentage = 100;
       flag.metadata.updatedAt = Date.now();
 
       this.clearEvaluationCache(flagId);
@@ -544,12 +546,12 @@ return;
   emergencyRollback(flagId: string, reason: string): void {
     const flag = this.flags.get(flagId);
     if (!flag) {
-return;
+return undefined;
 }
 
     // Disable flag or set to safe default
     flag.enabled = false;
-    flag.rolloutStrategy.config.percentage = 0;
+    flag.rolloutStrategy._config.percentage = 0;
     flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -562,7 +564,7 @@ return;
     });
   }
 
-  private performEvaluation(flag: FeatureFlag, context: UserContext): FlagEvaluation {
+  private performEvaluation(flag: FeatureFlag, _context: UserContext): FlagEvaluation {
     const evaluation: FlagEvaluation = {
       flagId: flag.id,
       value: flag.defaultValue,
@@ -622,7 +624,7 @@ continue;
     return evaluation;
   }
 
-  private evaluateTargetingRule(rule: TargetingRule, context: UserContext): boolean {
+  private evaluateTargetingRule(rule: TargetingRule, _context: UserContext): boolean {
     const results = rule.conditions.map(condition =>
       this.evaluateTargetingCondition(condition, context),
     );
@@ -632,7 +634,7 @@ continue;
       : results.some(r => r);
   }
 
-  private evaluateTargetingCondition(condition: TargetingCondition, context: UserContext): boolean {
+  private evaluateTargetingCondition(condition: TargetingCondition, _context: UserContext): boolean {
     const contextValue = this.getContextValue(condition.attribute, context);
 
     switch (condition.operator) {
@@ -664,7 +666,7 @@ continue;
     }
   }
 
-  private getContextValue(attribute: string, context: UserContext): any {
+  private getContextValue(attribute: string, _context: UserContext): any {
     switch (attribute) {
       case 'userId':
         return context.userId;
@@ -679,13 +681,13 @@ continue;
     }
   }
 
-  private applyRolloutStrategy(flag: FeatureFlag, context: UserContext): {
+  private applyRolloutStrategy(flag: FeatureFlag, _context: UserContext): {
     shouldApply: boolean;
     value: any;
     variant?: string;
     reason: string;
   } {
-    const strategy = flag.rolloutStrategy;
+    const _strategy = flag.rolloutStrategy;
 
     switch (strategy.type) {
       case 'immediate':
@@ -697,7 +699,7 @@ continue;
 
       case 'gradual':
       case 'user-based':
-        const percentage = strategy.config.percentage || 0;
+        const percentage = strategy._config.percentage || 0;
         const hash = this.getUserHash(context.userId || context.sessionId || 'anonymous', flag.id);
         const shouldInclude = hash < percentage;
 
@@ -718,7 +720,7 @@ continue;
         };
 
       case 'geographic':
-        const geoTargets = strategy.config.geoTargets || [];
+        const geoTargets = strategy._config.geoTargets || [];
         const userCountry = context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
 
@@ -760,7 +762,7 @@ continue;
     }
 
     // Fallback to first variant
-    return variants[0];
+    return variants[0] || { id: 'default', name: 'Default', weight: 100 };
   }
 
   private getUserHash(userId: string, flagId: string): number {
@@ -775,7 +777,7 @@ continue;
     return Math.abs(hash) % 100;
   }
 
-  private getCacheKey(flagId: string, context: UserContext): string {
+  private getCacheKey(flagId: string, _context: UserContext): string {
     const keyParts = [
       flagId,
       context.userId || 'anonymous',
@@ -802,17 +804,17 @@ continue;
   }
 
   private startGradualRollout(flag: FeatureFlag): void {
-    const strategy = flag.rolloutStrategy;
-    if (strategy.type !== 'gradual' || !strategy.config.incrementPercentage || !strategy.config.incrementInterval) {
-      return;
+    const _strategy = flag.rolloutStrategy;
+    if (strategy.type !== 'gradual' || !strategy._config.incrementPercentage || !strategy._config.incrementInterval) {
+      return undefined;
     }
 
-    const currentPercentage = strategy.config.percentage || 0;
-    const { incrementPercentage } = strategy.config;
-    const incrementInterval = strategy.config.incrementInterval * 60 * 1000; // Convert to ms
+    const currentPercentage = strategy._config.percentage || 0;
+    const { incrementPercentage } = strategy._config;
+    const incrementInterval = strategy._config.incrementInterval * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
-      return; // Already at 100%
+      return undefined; // Already at 100%
     }
 
     const timer = setTimeout(() => {
@@ -843,12 +845,12 @@ continue;
     // Monitor flag performance and trigger alerts
     setInterval(() => {
       if (!this.isRunning) {
-return;
+return undefined;
 }
 
       this.flags.forEach(flag => {
         if (!flag.monitoring.alertThresholds.length) {
-return;
+return undefined;
 }
 
         flag.monitoring.alertThresholds.forEach(threshold => {
@@ -862,14 +864,14 @@ return;
     // Check for scheduled flag activations
     setInterval(() => {
       if (!this.isRunning) {
-return;
+return undefined;
 }
 
       const now = Date.now();
 
       this.flags.forEach(flag => {
         if (!flag.schedule) {
-return;
+return undefined;
 }
 
         // Auto-enable flags that should start
@@ -906,7 +908,7 @@ return;
         currentValue = Object.values(analytics.conversionRates)[0] || 0;
         break;
       default:
-        return;
+        return undefined;
     }
 
     let shouldTrigger = false;
@@ -950,7 +952,7 @@ return;
       enabled: true,
       rolloutStrategy: {
         type: 'gradual',
-        config: {
+        _config: {
           percentage: 10,
           incrementPercentage: 10,
           incrementInterval: 60, // 1 hour
@@ -1009,7 +1011,7 @@ return;
       enabled: true,
       rolloutStrategy: {
         type: 'immediate',
-        config: {},
+        _config: {},
       },
       targeting: [],
       monitoring: {
@@ -1028,7 +1030,7 @@ return;
       enabled: true,
       rolloutStrategy: {
         type: 'user-based',
-        config: {
+        _config: {
           percentage: 100,
         },
       },
@@ -1094,11 +1096,11 @@ export type {
 export { AdvancedFeatureFlagManager };
 
 // Convenience hooks for React components
-export const useFeatureFlag = (flagId: string, context: UserContext = {}, defaultValue?: any) => {
+export const useFeatureFlag = (flagId: string, _context: UserContext = {}, defaultValue?: any) => {
   return featureFlagManager.evaluateFlag(flagId, context, defaultValue);
 };
 
-export const useABTest = (flagId: string, context: UserContext = {}) => {
+export const useABTest = (flagId: string, _context: UserContext = {}) => {
   const evaluation = featureFlagManager.evaluateFlag(flagId, context);
   return {
     value: evaluation,

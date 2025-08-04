@@ -54,7 +54,7 @@ export function useComponentPerformance(componentName: string) {
   // Track visibility for lazy loading optimization
   useEffect(() => {
     if (!elementRef.current) {
-return;
+return undefined;
 }
 
     const observer = new IntersectionObserver(
@@ -262,7 +262,7 @@ export function useVirtualScrolling({
   const totalHeight = itemCount * itemHeight;
   const offsetY = visibleRange.startIndex * itemHeight;
 
-  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+  const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
     setScrollTop(event.currentTarget.scrollTop);
   }, []);
 
@@ -289,7 +289,7 @@ export function useOptimizedImage(src: string, options: {
   // Intersection observer for lazy loading
   useEffect(() => {
     if (options.priority || !imgRef.current) {
-return;
+return undefined;
 }
 
     const observer = new IntersectionObserver(
@@ -391,8 +391,8 @@ export function withPerformanceMonitoring<P extends object>(
 
     // Add performance data to dev tools
     useEffect(() => {
-      if (import.meta.env.DEV && (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-        (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
+      if (import.meta.env.DEV && ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+        ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
           id: any,
           root: any,
           priorityLevel: any,

@@ -2,6 +2,7 @@
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
+import type React from 'react';
 import {
   useEffect,
   useRef,
@@ -9,7 +10,6 @@ import {
   useCallback,
   createContext,
   useContext,
-  type React,
   type ReactNode,
   type KeyboardEvent,
   type FocusEvent,
