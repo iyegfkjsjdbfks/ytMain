@@ -1,7 +1,9 @@
-import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
+import { fetchSingleVideoFromGoogleSearch, searchYouTubeWithGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
+import { getYouTubeSearchProvider } from '../../services/settingsService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
 import { logger } from '../utils/logger';
+import { isYouTubeDataApiBlocked } from '../utils/youtubeApiUtils';
 
 import { youtubeService } from './api/youtubeService';
 import {
@@ -471,7 +473,6 @@ class UnifiedDataService {
           });
 
           // Check if YouTube API is available as fallback
-          const { isYouTubeDataApiBlocked } = await import('../utils/youtubeApiUtils');
           if (isYouTubeDataApiBlocked()) {
             logger.error(`❌ Google Custom Search failed and YouTube API is blocked. No fallback available for video: ${id}`);
             logger.error('💡 Suggestion: Check Google Custom Search API configuration or enable YouTube API as fallback');
@@ -490,7 +491,6 @@ class UnifiedDataService {
 
     if (youtubeId) {
       // Check if YouTube API is blocked by admin settings
-      const { isYouTubeDataApiBlocked } = await import('../utils/youtubeApiUtils');
       const youtubeApiBlocked = isYouTubeDataApiBlocked();
 
       logger.debug(`Detected YouTube video ID: ${youtubeId}`);
@@ -572,7 +572,6 @@ class UnifiedDataService {
       }
     } else {
       // For non-YouTube IDs, try YouTube search as fallback
-      const { isYouTubeDataApiBlocked } = await import('../utils/youtubeApiUtils');
       const youtubeApiBlocked = isYouTubeDataApiBlocked();
 
       if (this.config.sources.youtube && !youtubeApiBlocked) {
@@ -688,7 +687,6 @@ class UnifiedDataService {
       logger.debug('🎯 NEW DISCOVERY STRATEGY: Google Custom Search (primary discovery) with YouTube Data API v3 metadata');
 
       // NEW STRATEGY: Use Google Custom Search for discovery by default
-      const { getYouTubeSearchProvider } = await import('../../services/settingsService');
       const provider = getYouTubeSearchProvider();
 
       logger.debug(`📋 Admin selected provider: ${provider}`);
@@ -725,9 +723,6 @@ class UnifiedDataService {
   private async searchGoogleCustomSearchVideos(query: string, _filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       logger.debug('🔍 Using Google Custom Search for video discovery with query:', query);
-
-      // Import Google Custom Search service
-      const { searchYouTubeWithGoogleSearch } = await import('../../services/googleSearchService');
 
       // Search for videos using Google Custom Search
       const searchResults = await searchYouTubeWithGoogleSearch(query);
