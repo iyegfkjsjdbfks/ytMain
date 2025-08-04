@@ -23,18 +23,18 @@ interface WorkflowCondition {
   type: 'metric' | 'test-result' | 'security-scan' | 'performance' | 'code-quality';
   operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'contains' | 'not-contains';
   value: any;
-  _source: string;
+  source: string;
 }
 
 interface WorkflowAction {
   type: 'notify' | 'block' | 'auto-fix' | 'create-issue' | 'rollback' | 'scale';
-  _config: Record<string, any>;
+  config: Record<string, any>;
 }
 
 interface DeploymentStrategy {
   name: string;
   type: 'blue-green' | 'canary' | 'rolling' | 'feature-flag';
-  _config: Record<string, any>;
+  config: Record<string, any>;
   healthChecks: string[];
   rollbackTriggers: WorkflowCondition[];
 }
@@ -459,7 +459,7 @@ return undefined;
     }
   }
 
-  private async executeDeploymentStrategy(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeDeploymentStrategy(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     switch (strategy.type) {
       case 'blue-green':
         await this.executeBlueGreenDeployment(strategy, version, config);
@@ -476,7 +476,7 @@ return undefined;
     }
   }
 
-  private async executeBlueGreenDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeBlueGreenDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🔵 Starting blue-green deployment');
 
     // Deploy to green environment
@@ -494,7 +494,7 @@ return undefined;
     }
   }
 
-  private async executeCanaryDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeCanaryDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🐤 Starting canary deployment');
 
     const trafficPercentages = config.trafficPercentages || [10, 25, 50, 100];
@@ -516,10 +516,10 @@ return undefined;
     console.log('🎉 Canary deployment completed successfully');
   }
 
-  private async executeRollingDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeRollingDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🔄 Starting rolling deployment');
 
-    const _batchSize = config.batchSize || 1;
+    const batchSize = config.batchSize || 1;
     const totalInstances = config.totalInstances || 3;
 
     for (let i = 0; i < totalInstances; i += batchSize) {
@@ -540,7 +540,7 @@ return undefined;
     console.log('🎉 Rolling deployment completed successfully');
   }
 
-  private async executeFeatureFlagDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
+  private async executeFeatureFlagDeployment(strategy: DeploymentStrategy, version: string, config: Record<string, any>): Promise<void> {
     console.log('🚩 Starting feature flag deployment');
 
     // Deploy code with feature flag disabled
@@ -567,7 +567,7 @@ return undefined;
   }
 
   // Mock implementations for deployment operations
-  private async deployToEnvironment(env: string, _version: string): Promise<void> {
+  private async deployToEnvironment(env: string, version: string): Promise<void> {
     console.log(`🚀 Deploying ${version} to ${env} environment`);
     await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate deployment time
   }
@@ -577,7 +577,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async routeTrafficToCanary(percentage: number, _version: string): Promise<void> {
+  private async routeTrafficToCanary(percentage: number, version: string): Promise<void> {
     console.log(`📊 Routing ${percentage}% traffic to canary ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
@@ -587,7 +587,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployBatch(startIndex: number, _batchSize: number, _version: string): Promise<void> {
+  private async deployBatch(startIndex: number, batchSize: number, version: string): Promise<void> {
     console.log(`📦 Deploying batch starting at ${startIndex} (${batchSize} instances) with ${version}`);
     await new Promise(resolve => setTimeout(resolve, 1500));
   }
@@ -597,7 +597,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployWithFeatureFlag(_version: string, enabled: boolean): Promise<void> {
+  private async deployWithFeatureFlag(version: string, enabled: boolean): Promise<void> {
     console.log(`🚀 Deploying ${version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
   }
@@ -635,7 +635,7 @@ return undefined;
     };
   }
 
-  private async evaluateRollback(_strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
+  private async evaluateRollback(strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
     for (const trigger of strategy.rollbackTriggers) {
       const shouldRollback = await this.evaluateCondition(trigger, { healthStatus });
       if (shouldRollback.passed) {
@@ -647,24 +647,24 @@ return undefined;
   }
 
   // Mock implementations for various operations
-  private async getMetricValue(_source: string): Promise<number> {
+  private async getMetricValue(source: string): Promise<number> {
     const metrics = advancedAPM.getAggregatedMetrics(source);
     return metrics.avg || Math.random() * 100;
   }
 
-  private async getTestResult(_source: string): Promise<number> {
+  private async getTestResult(source: string): Promise<number> {
     return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
   }
 
-  private async getSecurityScanResult(_source: string): Promise<number> {
+  private async getSecurityScanResult(source: string): Promise<number> {
     return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
   }
 
-  private async getPerformanceMetric(_source: string): Promise<number> {
+  private async getPerformanceMetric(source: string): Promise<number> {
     return performanceMonitor.getMetrics().find(m => m.name === source)?.value || Math.random() * 1000;
   }
 
-  private async getCodeQualityMetric(_source: string): Promise<number> {
+  private async getCodeQualityMetric(source: string): Promise<number> {
     const analysis = await codeAnalysisEngine.analyzeCode();
     return ((analysis as any))[source] || Math.random() * 100;
   }
