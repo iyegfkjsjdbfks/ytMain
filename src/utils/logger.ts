@@ -1,3 +1,4 @@
+
 /**
  * Centralized logging utility for the application
  * Provides different log levels and can be configured for production

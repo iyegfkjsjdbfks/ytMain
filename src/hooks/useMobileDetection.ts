@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+
 interface MobileDetectionResult {
   isMobile: boolean;
   isTablet: boolean;

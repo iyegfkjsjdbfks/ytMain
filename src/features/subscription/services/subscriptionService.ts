@@ -1,8 +1,10 @@
+    imported: number;
 import { api } from '../../../services/api/base';
 import { logger } from '../../../utils/logger';
-
 import type { ApiResponse } from '../../../types/core';
 import type { Video } from '../../../types/video';
+
+
 
 export interface Subscription {
   id: string;
@@ -274,7 +276,6 @@ class SubscriptionService {
     file: File,
     format: 'json' | 'csv' | 'opml',
   ): Promise<ApiResponse<{
-    imported: number;
     skipped: number;
     errors: string[];
   }>> {

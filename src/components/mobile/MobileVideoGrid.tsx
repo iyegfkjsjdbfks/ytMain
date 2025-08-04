@@ -1,10 +1,11 @@
-import { memo, useState, useCallback, useMemo, useEffect } from 'react';
-
 import { FixedSizeList as List } from 'react-window';
-
+import { memo, useState, useCallback, useMemo, useEffect } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
-
 import type { Video } from '../../types/core';
+
+
+
+
 
 interface MobileVideoGridProps {
   videos: Video[];

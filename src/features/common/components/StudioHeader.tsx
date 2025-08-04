@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 import { useAuthStore } from '../../auth/store/authStore';
+
+
+
 
 /**
  * Studio-specific header component with studio navigation and controls

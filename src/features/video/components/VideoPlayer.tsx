@@ -1,7 +1,9 @@
-import type * as React from 'react';
 import { useState, useRef, useEffect } from 'react';
-
+import type * as React from 'react';
 import {
+import { logger } from '../../../utils/logger';
+
+
   PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
@@ -13,7 +15,6 @@ import {
   BackwardIcon,
 } from '@heroicons/react/24/outline';
 
-import { logger } from '../../../utils/logger';
 
 
 export interface VideoPlayerProps {

@@ -1,10 +1,11 @@
-import { memo, useMemo, useCallback } from 'react';
-
 import { FixedSizeList as List } from 'react-window';
-
+import { memo, useMemo, useCallback } from 'react';
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
-
 import type { Comment } from '../../types/core';
+
+
+
+
 
 interface VirtualizedCommentListProps {
   comments: Comment[];

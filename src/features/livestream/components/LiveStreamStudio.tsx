@@ -1,7 +1,9 @@
-import type * as React from 'react';
 import {  useState, useRef, useEffect  } from 'react';
-
+import type * as React from 'react';
 import {
+import { logger } from '../../../utils/logger';
+
+
   VideoCameraIcon,
   MicrophoneIcon,
   StopIcon,
@@ -13,12 +15,10 @@ import {
   ShareIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline';
-import {
   VideoCameraIcon as VideoCameraSolidIcon,
   MicrophoneIcon as MicrophoneSolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { logger } from '../../../utils/logger';
 
 interface StreamSettings {
   title: string;

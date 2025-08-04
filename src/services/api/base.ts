@@ -1,11 +1,12 @@
+import { CONSTANTS } from '../../lib/constants';
+import type { ApiResponse, PaginationInfo } from '../../types/core';
+
 /**
  * Base API Service
  * Centralized API configuration and utilities
  */
 
-import { CONSTANTS } from '../../lib/constants';
 
-import type { ApiResponse, PaginationInfo } from '../../types/core';
 
 // API Configuration
 export const API_BASE_URL = CONSTANTS.API_CONFIG.BASE_URL;

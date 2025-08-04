@@ -1,12 +1,13 @@
 import { useState, useEffect, type FC } from 'react';
-
 import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
-
 import { createComponentError } from '@/utils/errorUtils';
-
-import { usePWA } from '../hooks/usePWA';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { offlineStorage } from '../utils/offlineStorage';
+import { usePWA } from '../hooks/usePWA';
+
+
+
+
 
 interface OfflineIndicatorProps {
   className?: string;

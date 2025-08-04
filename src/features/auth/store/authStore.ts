@@ -1,9 +1,10 @@
 import { create } from 'zustand';
-
-import { logger } from '../../../utils/logger';
 import { authService } from '../services/authService';
-
+import { logger } from '../../../utils/logger';
 import type { AuthState, LoginCredentials, RegisterData, User } from '../types';
+
+
+
 
 interface AuthStore extends AuthState {
   login: (credentials: LoginCredentials) => Promise<User>;

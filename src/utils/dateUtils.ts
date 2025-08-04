@@ -1,8 +1,9 @@
+import { logger } from './logger';
+
 /**
  * Date and time formatting utilities
  */
 
-import { logger } from './logger';
 
 /**
  * Formats a date to a relative time string (e.g., "2 hours ago")

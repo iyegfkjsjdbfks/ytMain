@@ -1,5 +1,6 @@
 import type React from 'react';
 
+
 /**
  * PlaylistsPage component for displaying all playlists
  */

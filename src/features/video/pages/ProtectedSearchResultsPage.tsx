@@ -1,11 +1,12 @@
 import { useCallback, type FC } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
-
-import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import { conditionalLogger } from '@/utils/conditionalLogger';
-
+import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import SearchResultsPage from './SearchResultsPage';
+
+
+
+
 
 /**
  * SearchResultsPage wrapped with specialized error boundary

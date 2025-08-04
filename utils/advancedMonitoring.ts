@@ -251,7 +251,7 @@ continue;
         checks.push({
           name,
           healthy: result.healthy,
-          details: ((result as any))?.details,
+          details: (((result as any)))??.details,
         });
 
         if (!result.healthy) {
@@ -364,7 +364,7 @@ continue;
     this.addHealthCheck({
       name: 'memory-usage',
       check: async () => {
-        const memInfo = ((performance as any)).memory;
+        const memInfo = (((performance as any))).memory;
         if (!memInfo) {
 return { healthy: true };
 }
@@ -442,13 +442,13 @@ return undefined;
 }
 
       // Memory usage
-      const memInfo = ((performance as any)).memory;
+      const memInfo = (((performance as any))).memory;
       if (memInfo) {
         this.recordMetric('memory-usage', memInfo.usedJSHeapSize);
       }
 
       // Connection info
-      const { connection } = ((navigator as any));
+      const { connection } = (((navigator as any)));
       if (connection) {
         this.recordMetric('network-downlink', connection.downlink);
         this.recordMetric('network-rtt', connection.rtt);

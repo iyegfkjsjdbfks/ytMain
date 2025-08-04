@@ -61,7 +61,10 @@
     "build:optimized": "NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build",
     "validate:comprehensive": "npm run type-check && npm run lint && npm run test:memory-safe",
     "validate:all": "./scripts/validate-all.sh",
-    "optimize": "npm run refactor:iterative"
+    "optimize": "npm run refactor:iterative",
+    "test:safe": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest run --pool=threads --poolOptions.threads.singleThread=true --reporter=basic",
+    "test:watch:safe": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest --pool=threads --poolOptions.threads.singleThread=true",
+    "test:simple": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest run --pool=forks --poolOptions.forks.singleFork=true --reporter=basic --no-coverage"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",

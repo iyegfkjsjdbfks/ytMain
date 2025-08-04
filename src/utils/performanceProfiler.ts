@@ -1,5 +1,6 @@
-// Performance monitoring utility for React components
 import React from 'react';
+
+// Performance monitoring utility for React components
 
 export const withPerformanceProfiler = <P extends object>(
   Component: React.ComponentType<P>,

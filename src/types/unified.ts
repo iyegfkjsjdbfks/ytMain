@@ -1,3 +1,6 @@
+import type { Video as CoreVideo } from './core';
+import type { Video as RootVideo } from '../../types';
+
 /**
  * Unified Type Definitions
  * Consolidates all type definitions to prevent conflicts and duplication
@@ -5,8 +8,6 @@
 
 // Re-export core types
 // Ensure Video type compatibility
-import type { Video as CoreVideo } from './core';
-import type { Video as RootVideo } from '../../types';
 
 export * from './core';
 export * from './video';

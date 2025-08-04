@@ -1,10 +1,11 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-
 import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';
-
 import { createComponentError } from '@/utils/errorUtils';
-
 import { conditionalLogger } from '../../utils/conditionalLogger';
+
+
+
+
 
 export interface DataFetchErrorBoundaryProps {
   children: ReactNode;

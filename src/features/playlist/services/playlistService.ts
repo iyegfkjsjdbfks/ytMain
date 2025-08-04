@@ -1,11 +1,12 @@
+import { api } from '../../../services/api/base';
+import type { Playlist, Video, ApiResponse } from '../../../types/core';
+
 /** 1
  * Playlist Service
  * Comprehensive playlist management service
  */
 
-import { api } from '../../../services/api/base';
 
-import type { Playlist, Video, ApiResponse } from '../../../types/core';
 
 export interface CreatePlaylistData {
   title: string;

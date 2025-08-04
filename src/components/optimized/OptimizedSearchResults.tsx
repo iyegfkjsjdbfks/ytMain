@@ -1,11 +1,12 @@
-import { memo, useMemo, useCallback, useState, useEffect } from 'react';
-
 import { FixedSizeList as List } from 'react-window';
-
-import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
+import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 import { performanceMonitor } from '../../utils/performanceOptimizations';
-
+import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
+
+
+
+
 
 interface OptimizedSearchResultsProps {
   videos: Video[];

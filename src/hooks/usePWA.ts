@@ -1,14 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
-
 import { createComponentError } from '@/utils/errorUtils';
-
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { PWAUtils } from '../utils/pwa';
-
 import { useInstallPrompt } from './useInstallPrompt';
 import { useOfflineStatus } from './useOfflineStatus';
 import { usePWANotifications } from './usePWANotifications';
 import { usePWAUpdates } from './usePWAUpdates';
+
+
+
+
 
 
 interface PWAState {

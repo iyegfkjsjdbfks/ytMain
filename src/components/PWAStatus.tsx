@@ -1,14 +1,15 @@
 import React from 'react';
-
 import {
+import { conditionalLogger } from '../utils/conditionalLogger';
+import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
+
+
   SignalSlashIcon,
   ArrowDownTrayIcon,
   XMarkIcon,
   BellIcon,
 } from '@heroicons/react/24/outline';
 
-import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
-import { conditionalLogger } from '../utils/conditionalLogger';
 
 const PWAStatus: React.FC = () => {
   const {

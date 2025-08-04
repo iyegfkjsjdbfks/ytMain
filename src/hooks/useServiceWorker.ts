@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-
 import { createComponentError } from '@/utils/errorUtils';
-
-import { PWAEvents } from '../config/pwa';
 import { conditionalLogger } from '../utils/conditionalLogger';
+import { PWAEvents } from '../config/pwa';
+
+
+
 
 interface ServiceWorkerState {
   isSupported: boolean;

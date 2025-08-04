@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, type FC } from 'react';
-
+import { conditionalLogger } from '../utils/conditionalLogger';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
 import { usePWA } from '../hooks/usePWA';
 import { usePWANotifications } from '../hooks/usePWANotifications';
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
-import { conditionalLogger } from '../utils/conditionalLogger';
+
+
 
 interface ModularPWAInstallBannerProps {
   variant?: 'default' | 'minimal' | 'detailed' | 'floating';

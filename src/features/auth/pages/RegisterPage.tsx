@@ -1,6 +1,7 @@
 import type React from 'react';
-
 import { RegisterForm } from '../components/RegisterForm';
+
+
 
 /**
  * Registration page component

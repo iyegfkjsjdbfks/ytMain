@@ -245,7 +245,7 @@ export function createLazyComponent<P extends Record<string, any>>(
           </div>
         )}
       >
-        <LazyComponent {...(props as any)} />
+        <LazyComponent {...((props as any))} />
       </React.Suspense>
     );
   };
@@ -278,7 +278,7 @@ export function useVirtualScrolling({
   const totalHeight = itemCount * itemHeight;
   const offsetY = visibleRange.startIndex * itemHeight;
 
-  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+  const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
     setScrollTop(event.currentTarget.scrollTop);
   }, []);
 
@@ -408,8 +408,8 @@ export function withPerformanceMonitoring<P extends object>(
 
     // Add performance data to dev tools
     useEffect(() => {
-      if (import.meta.env.DEV && ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-        ((window as any)).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
+      if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+        (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
           _id: any,
           _root: any,
           _priorityLevel: any,
@@ -460,7 +460,7 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
 
     if (now - lastCall.current >= delay) {
       lastCall.current = now;
-      return callback(...args);
+      return callback(...args: any[]);
     }
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -468,7 +468,7 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
 
       timeoutRef.current = setTimeout(() => {
         lastCall.current = Date.now();
-        callback(...args);
+        callback(...args: any[]);
       }, delay - (now - lastCall.current));
 
   }, [callback, delay]) as T;

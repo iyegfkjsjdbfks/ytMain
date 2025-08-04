@@ -1,5 +1,6 @@
 import { memo, type ComponentType } from 'react';
 
+
 // Enhanced memoization with custom comparison
 export const withMemo = <P extends object>(
   Component: ComponentType<P>,

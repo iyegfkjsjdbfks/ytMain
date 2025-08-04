@@ -1,7 +1,8 @@
-// PWA Analytics Utilities
+import { conditionalLogger } from './conditionalLogger';
 import { createNetworkError } from '../types/errors';
 
-import { conditionalLogger } from './conditionalLogger';
+// PWA Analytics Utilities
+
 
 interface PWAAnalyticsEvent {
   action: string;

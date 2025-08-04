@@ -1,6 +1,9 @@
 import { memo, useState, useEffect, useCallback, useRef } from 'react';
-
 import {
+import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
+import type { Video } from '../../types/core';
+
+
   PlayIcon,
   PauseIcon,
   SpeakerWaveIcon,
@@ -9,9 +12,7 @@ import {
   ArrowsPointingInIcon,
 } from '@heroicons/react/24/outline';
 
-import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 
-import type { Video } from '../../types/core';
 
 interface MobileVideoPlayerProps {
   video: Video;

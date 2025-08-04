@@ -191,7 +191,7 @@ return undefined;
   /**
    * Evaluate a feature flag for a user
    */
-  evaluateFlag(flagId: string, context: UserContext = {}, defaultValue?: any): any {
+  evaluateFlag(flagId: string, _context: UserContext = {}, defaultValue?: any): any {
     const flag = this.flags.get(flagId);
     if (!flag) {
       console.warn(`🚩 Feature flag '${flagId}' not found`);
@@ -283,7 +283,7 @@ return undefined;
       throw new Error(`Feature flag '${flagId}' not found`);
     }
 
-    flag.rolloutStrategy.config.percentage = Math.max(0, Math.min(100, percentage));
+    flag.rolloutStrategy?._config.percentage = Math.max(0, Math.min(100, percentage));
     flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -525,7 +525,7 @@ return undefined;
 
       // Update flag to use winning variant as default
       flag.defaultValue = winningVariant.value;
-      flag.rolloutStrategy.config.percentage = 100;
+      flag.rolloutStrategy?._config.percentage = 100;
       flag.metadata.updatedAt = Date.now();
 
       this.clearEvaluationCache(flagId);
@@ -551,7 +551,7 @@ return undefined;
 
     // Disable flag or set to safe default
     flag.enabled = false;
-    flag.rolloutStrategy.config.percentage = 0;
+    flag.rolloutStrategy?._config.percentage = 0;
     flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -564,7 +564,7 @@ return undefined;
     });
   }
 
-  private performEvaluation(flag: FeatureFlag, context: UserContext): FlagEvaluation {
+  private performEvaluation(flag: FeatureFlag, _context: UserContext): FlagEvaluation {
     const evaluation: FlagEvaluation = {
       flagId: flag.id,
       value: flag.defaultValue,
@@ -624,7 +624,7 @@ continue;
     return evaluation;
   }
 
-  private evaluateTargetingRule(rule: TargetingRule, context: UserContext): boolean {
+  private evaluateTargetingRule(rule: TargetingRule, _context: UserContext): boolean {
     const results = rule.conditions.map(condition =>
       this.evaluateTargetingCondition(condition, context),
     );
@@ -634,7 +634,7 @@ continue;
       : results.some(r => r);
   }
 
-  private evaluateTargetingCondition(condition: TargetingCondition, context: UserContext): boolean {
+  private evaluateTargetingCondition(condition: TargetingCondition, _context: UserContext): boolean {
     const contextValue = this.getContextValue(condition.attribute, context);
 
     switch (condition.operator) {
@@ -666,7 +666,7 @@ continue;
     }
   }
 
-  private getContextValue(attribute: string, context: UserContext): any {
+  private getContextValue(attribute: string, _context: UserContext): any {
     switch (attribute) {
       case 'userId':
         return context.userId;
@@ -681,13 +681,13 @@ continue;
     }
   }
 
-  private applyRolloutStrategy(flag: FeatureFlag, context: UserContext): {
+  private applyRolloutStrategy(flag: FeatureFlag, _context: UserContext): {
     shouldApply: boolean;
     value: any;
     variant?: string;
     reason: string;
   } {
-    const strategy = flag.rolloutStrategy;
+    const _strategy = flag.rolloutStrategy;
 
     switch (strategy.type) {
       case 'immediate':
@@ -699,7 +699,7 @@ continue;
 
       case 'gradual':
       case 'user-based':
-        const percentage = strategy.config.percentage || 0;
+        const percentage = strategy?._config.percentage || 0;
         const hash = this.getUserHash(context.userId || context.sessionId || 'anonymous', flag.id);
         const shouldInclude = hash < percentage;
 
@@ -720,7 +720,7 @@ continue;
         };
 
       case 'geographic':
-        const geoTargets = strategy.config.geoTargets || [];
+        const geoTargets = strategy?._config.geoTargets || [];
         const userCountry = context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
 
@@ -777,7 +777,7 @@ continue;
     return Math.abs(hash) % 100;
   }
 
-  private getCacheKey(flagId: string, context: UserContext): string {
+  private getCacheKey(flagId: string, _context: UserContext): string {
     const keyParts = [
       flagId,
       context.userId || 'anonymous',
@@ -804,14 +804,14 @@ continue;
   }
 
   private startGradualRollout(flag: FeatureFlag): void {
-    const strategy = flag.rolloutStrategy;
-    if (strategy.type !== 'gradual' || !strategy.config.incrementPercentage || !strategy.config.incrementInterval) {
+    const _strategy = flag.rolloutStrategy;
+    if (strategy.type !== 'gradual' || !strategy?._config.incrementPercentage || !strategy?._config.incrementInterval) {
       return undefined;
     }
 
-    const currentPercentage = strategy.config.percentage || 0;
-    const { incrementPercentage } = strategy.config;
-    const incrementInterval = strategy.config.incrementInterval * 60 * 1000; // Convert to ms
+    const currentPercentage = strategy?._config.percentage || 0;
+    const { incrementPercentage } = strategy?._config;
+    const incrementInterval = strategy?._config.incrementInterval * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
       return undefined; // Already at 100%
@@ -1096,11 +1096,11 @@ export type {
 export { AdvancedFeatureFlagManager };
 
 // Convenience hooks for React components
-export const useFeatureFlag = (flagId: string, context: UserContext = {}, defaultValue?: any) => {
+export const useFeatureFlag = (flagId: string, _context: UserContext = {}, defaultValue?: any) => {
   return featureFlagManager.evaluateFlag(flagId, context, defaultValue);
 };
 
-export const useABTest = (flagId: string, context: UserContext = {}) => {
+export const useABTest = (flagId: string, _context: UserContext = {}) => {
   const evaluation = featureFlagManager.evaluateFlag(flagId, context);
   return {
     value: evaluation,

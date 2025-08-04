@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-
-
 import {
+import { logger } from '../../../utils/logger';
+import { useLiveStream } from '../../../../hooks/useLiveStream';
+import type { LiveStream, StreamPlatform } from '../../../types/livestream';
+
+
+
   VideoCameraIcon,
   MicrophoneIcon,
   StopIcon,
@@ -13,16 +17,12 @@ import {
   ClockIcon,
   CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
-import {
   VideoCameraIcon as VideoCameraSolidIcon,
   MicrophoneIcon as MicrophoneSolidIcon,
   PlayIcon as PlaySolidIcon,
 } from '@heroicons/react/24/solid';
 
-import { useLiveStream } from '../../../../hooks/useLiveStream';
-import { logger } from '../../../utils/logger';
 
-import {
   AdvancedLiveChat,
   LivePolls,
   LiveQA,
@@ -31,7 +31,6 @@ import {
   MultiplatformStreaming,
 } from '.';
 
-import type { LiveStream, StreamPlatform } from '../../../types/livestream';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;

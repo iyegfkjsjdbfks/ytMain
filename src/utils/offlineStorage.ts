@@ -1,8 +1,9 @@
+import { conditionalLogger } from './conditionalLogger';
+import type { Video } from '../types/core';
+
 // Offline Storage Utilities for PWA functionality
 
-import { conditionalLogger } from './conditionalLogger';
 
-import type { Video } from '../types/core';
 
 // Define interfaces for offline storage
 interface CachedVideo extends Video {

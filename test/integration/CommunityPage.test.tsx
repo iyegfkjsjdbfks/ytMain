@@ -83,7 +83,7 @@ describe('CommunityPage', () => {
   });
 
   it('handles post creation', async () => {
-    const { useRefactoredHooks } = await import('../../hooks/useRefactoredHooks');
+    const { useRefactoredHooks } = await import('../../src/hooks/useRefactoredHooks');
     const mockCreatePost = vi.fn();
 
     vi.mocked(useRefactoredHooks).mockReturnValue({

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-
 import { conditionalLogger } from '../utils/conditionalLogger';
+
+
 
 interface NetworkConnection {
   effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';

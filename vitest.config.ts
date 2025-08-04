@@ -26,6 +26,31 @@ export default defineConfig({
     
     // Test timeout (increased for memory-safe execution)
     testTimeout: 30000,
+    
+    // Project configuration (replaces deprecated workspace)
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          include: ['test/components/**/*.test.{ts,tsx}', 'test/hooks/**/*.test.{ts,tsx}'],
+          environment: 'jsdom'
+        }
+      },
+      {
+        test: {
+          name: 'integration', 
+          include: ['test/integration/**/*.test.{ts,tsx}'],
+          environment: 'jsdom'
+        }
+      },
+      {
+        test: {
+          name: 'services',
+          include: ['test/services/**/*.test.{ts,tsx}'],
+          environment: 'node'
+        }
+      }
+    ],
     hookTimeout: 10000,
     
     // Coverage configuration
@@ -71,20 +96,22 @@ export default defineConfig({
     watch: false,
     
     // Memory-safe test execution
-    pool: 'forks',
+    pool: 'threads',
     poolOptions: {
-      forks: {
-        singleFork: true,
-        maxForks: 1,
-        minForks: 1
+      threads: {
+        singleThread: true,
+        maxThreads: 1,
+        minThreads: 1
       }
     },
     
     // Mock configuration
-    deps: {
-      inline: [
+    server: {
+      deps: {
+        inline: [
         '@testing-library/jest-dom'
       ]
+      }
     },
     
     // Environment variables for memory management
@@ -93,7 +120,7 @@ export default defineConfig({
       VITE_APP_ENV: 'test',
       VITE_USE_MOCK_DATA: 'true',
       VITE_TEST_MODE: 'true',
-      NODE_OPTIONS: '--max-old-space-size=2048'
+      NODE_OPTIONS: "--max-old-space-size=8192"
     },
     
     // Retry configuration
@@ -133,7 +160,7 @@ export default defineConfig({
     },
     
     // Workspace configuration
-    workspace: './vitest.workspace.ts'
+    // workspace: "./vitest.workspace.ts" // Deprecated, using test.projects instead
   },
   
   // Resolve configuration
