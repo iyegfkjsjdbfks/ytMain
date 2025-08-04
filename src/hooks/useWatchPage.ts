@@ -1,16 +1,12 @@
 import React from "react";
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import React from "react";
+
 import { useState, useEffect, useCallback } from 'react';
-import React from "react";
+
 import { getVideos, getVideoById, getCommentsByVideoId } from '../services/realVideoService';
-import React from "react";
+
 import { unifiedDataService } from '../src/services/unifiedDataService';
 import type { Video, Channel, VideoVisibility } from '../src/types/core';
-
-
-
-
 
 interface Comment {
   id: string;
@@ -237,7 +233,7 @@ return;
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter(v => v.id !== videoId && v.category === foundVideo.category)
+          .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
 

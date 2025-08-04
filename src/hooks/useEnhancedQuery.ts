@@ -1,13 +1,11 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
-import React from "react";
+
 import { performanceMonitor } from '../utils/performanceMonitor';
 
 /**
  * Enhanced React Query wrapper with better error handling, caching, and performance monitoring
  */
-
-
 
 // Enhanced error types
 export interface ApiError extends Error {

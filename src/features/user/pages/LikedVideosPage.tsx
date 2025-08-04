@@ -1,6 +1,5 @@
 import type React from 'react';
 
-
 /**
  * LikedVideosPage component for displaying videos the user has liked
  */

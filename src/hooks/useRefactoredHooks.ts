@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef, useCallback } from 'react';
-import React from "react";
+
 import { useUnifiedApp } from './useUnifiedApp';
-
-
 
 /**
  * Enhanced useLocalStorage hook with error handling and type safety
@@ -291,7 +289,7 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user: context.state.user,
+    user: any,
     isAuthenticated: context.state.isAuthenticated,
     login: context.login,
     logout: context.logout,

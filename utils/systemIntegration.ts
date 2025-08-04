@@ -6,15 +6,15 @@
 
 import React from "react";
 import { advancedAPM } from './advancedMonitoring';
-import React from "react";
+
 import { deploymentAutomation } from './deploymentAutomation';
-import React from "react";
+
 import { featureFlagManager } from './featureFlagSystem';
-import React from "react";
+
 import { intelligentCodeMonitor } from './intelligentCodeMonitor';
-import React from "react";
+
 import { performanceMonitor } from './performanceMonitor';
-import React from "react";
+
 import { securityMonitoring } from './securityMonitoring';
 
 // System integration types
@@ -268,8 +268,8 @@ return;
       this.health.lastCheck = Date.now();
 
       // Determine overall health
-      const criticalSystems = Object.values(healthChecks).filter(status => status === 'critical').length;
-      const degradedSystems = Object.values(healthChecks).filter(status => status === 'degraded').length;
+      const criticalSystems = Object.values(healthChecks).filter((status: any) => status === 'critical').length;
+      const degradedSystems = Object.values(healthChecks).filter((status: any) => status === 'degraded').length;
 
       if (criticalSystems > 0) {
         this.health.overall = 'critical';
@@ -380,7 +380,7 @@ return 'degraded';
 
       // Check for any emergency rollbacks in the last hour
       const recentRollbacks = allFlags
-        .filter(flag => flag.enabled &&
+        .filter((flag: any) => flag.enabled &&
                 Date.now() - flag.metadata.createdAt < 3600000).length;
 
       if (recentRollbacks > 2) {
@@ -404,7 +404,7 @@ return 'degraded';
         securityMonitoring.getSecurityMetrics() !== null,
       ];
 
-      const failedChecks = checks.filter(check => !check).length;
+      const failedChecks = checks.filter((check: any) => !check).length;
 
       if (failedChecks > 1) {
 return 'critical';
@@ -468,7 +468,7 @@ return 'degraded';
 
       // Feature flag metrics
       const allFlags = featureFlagManager.getAllFlags();
-      const activeFlags = allFlags.filter(flag => flag.enabled);
+      const activeFlags = allFlags.filter((flag: any) => flag.enabled);
       this.metrics.features = {
         totalFlags: allFlags.length,
         activeExperiments: activeFlags.length,
@@ -573,7 +573,7 @@ return 'degraded';
 
   private cleanupOldEvents(): void {
     const cutoffTime = Date.now() - (this.config.eventRetentionDays * 24 * 60 * 60 * 1000);
-    this.events = this.events.filter(event => event.timestamp > cutoffTime);
+    this.events = this.events.filter((event: any) => event.timestamp > cutoffTime);
   }
 
   // Public API methods
@@ -593,14 +593,14 @@ return 'degraded';
 
   getEventsByType(type: SystemEvent['type'], limit: number = 20): SystemEvent[] {
     return this.events
-      .filter(event => event.type === type)
+      .filter((event: any) => event.type === type)
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getCriticalEvents(): SystemEvent[] {
     return this.events
-      .filter(event => event.severity === 'critical')
+      .filter((event: any) => event.severity === 'critical')
       .sort((a, b) => b.timestamp - a.timestamp);
   }
 
@@ -638,7 +638,7 @@ return 'degraded';
 
     let summary = `System Status: ${this.health.overall.toUpperCase()}\n`;
     summary += `Last Health Check: ${new Date(this.health.lastCheck).toLocaleString()}\n`;
-    summary += `Critical Events (24h): ${criticalEvents.filter(e => Date.now() - e.timestamp < 86400000).length}\n`;
+    summary += `Critical Events (24h): ${criticalEvents.filter((e: any) => Date.now() - e.timestamp < 86400000).length}\n`;
     summary += `Overall Performance Score: ${Math.round(this.metrics.performance.score)}\n`;
     summary += `Security Score: ${Math.round(this.metrics.security.score)}\n`;
     summary += `Deployment Success Rate: ${Math.round(this.metrics.deployment.successRate * 100)}%`;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-
 /**
  * Custom hook for managing dropdown menu state and behavior
  * Handles opening/closing, click outside detection, and cleanup

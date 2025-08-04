@@ -27,7 +27,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
       const allVideos = await getVideos();
       // Sort by views (convert string to number for sorting)
       const sortedByViews = allVideos
-        .filter(video => !video.isShort) // Exclude shorts from trending
+        .filter((video: any) => !video.isShort) // Exclude shorts from trending
         .sort((a, b) => {
           const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
           const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;

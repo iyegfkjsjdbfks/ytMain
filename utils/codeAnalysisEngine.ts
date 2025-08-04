@@ -580,7 +580,7 @@ class TechnicalDebtTracker {
     totalEffort: number;
     averageAge: number;
   } {
-    const items = Array.from(this.debtItems.values()).filter(item => item.status === 'open');
+    const items = Array.from(this.debtItems.values()).filter((item: any) => item.status === 'open');
     const now = Date.now();
 
     const byType: Record<string, number> = {};
@@ -644,7 +644,7 @@ class AutomatedCodeReviewer {
       suggestions.push(...fileIssues.suggestions);
     }
 
-    const criticalIssues = issues.filter(issue => issue.severity === 'critical');
+    const criticalIssues = issues.filter((issue: any) => issue.severity === 'critical');
     const approved = criticalIssues.length === 0;
 
     return { approved, issues, suggestions };

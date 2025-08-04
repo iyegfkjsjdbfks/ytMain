@@ -173,7 +173,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   };
 
   const filteredItems = items
-    .filter(item => {
+    .filter((item: any) => {
       if (filterStatus !== 'all' && item.status !== filterStatus) {
 return false;
 }
@@ -308,9 +308,9 @@ return false;
         {/* Stats */}
         <div className="grid grid-cols-4 gap-4">
           {[
-            { label: 'Pending', count: items.filter(i => i.status === 'pending').length, color: 'text-yellow-600' },
-            { label: 'Flagged', count: items.filter(i => i.status === 'flagged').length, color: 'text-red-600' },
-            { label: 'Critical', count: items.filter(i => i.priority === 'critical').length, color: 'text-red-600' },
+            { label: 'Pending', count: items.filter((i: any) => i.status === 'pending').length, color: 'text-yellow-600' },
+            { label: 'Flagged', count: items.filter((i: any) => i.status === 'flagged').length, color: 'text-red-600' },
+            { label: 'Critical', count: items.filter((i: any) => i.priority === 'critical').length, color: 'text-red-600' },
             { label: 'Total Reports', count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' },
           ].map((stat, index) => (
             <div key={index} className="text-center">

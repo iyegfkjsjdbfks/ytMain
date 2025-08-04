@@ -5,8 +5,6 @@ import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
 import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
 
-
-
 /**
  * Props for the StreamAnalyticsDashboard component
  */

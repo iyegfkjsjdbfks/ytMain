@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-
 interface VideoPlayerState {
   isPlaying: boolean;
   isMuted: boolean;

@@ -107,8 +107,8 @@ return null;
 }
         return {
           ...prevDetails,
-          videos: prevDetails.videos.filter(v => v.id !== videoIdToRemove),
-          videoIds: prevDetails.videoIds.filter(id => id !== videoIdToRemove),
+          videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
+          videoIds: prevDetails.videoIds.filter((id: any) => id !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
         };
       });

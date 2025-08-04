@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useCallback, useMemo } from 'react';
 
-
 /**
  * Custom hook for storing and managing Sets in localStorage
  * Since localStorage can only store strings, this hook handles the conversion
@@ -65,7 +64,7 @@ export function useLocalStorageSet<T>(
   // Remove item from set
   const removeItem = useCallback((item: T) => {
     setItems(prev => {
-      const newItems = prev.filter(i => i !== item);
+      const newItems = prev.filter((i: any) => i !== item);
       if (newItems.length !== prev.length) {
         updateLocalStorage(newItems);
         return newItems;
@@ -78,7 +77,7 @@ export function useLocalStorageSet<T>(
   const toggleItem = useCallback((item: T) => {
     setItems(prev => {
       const newItems = prev.includes(item)
-        ? prev.filter(i => i !== item)
+        ? prev.filter((i: any) => i !== item)
         : [...prev, item];
       updateLocalStorage(newItems);
       return newItems;

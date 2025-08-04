@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
 
-
 type SetValue<T> = T | ((val: T) => T);
 
 /**

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from 'react';
 
-
 interface UseVideoAutoplayProps {
   isIntersecting: boolean;
   isPlaying: boolean;

@@ -1,12 +1,10 @@
     imported: number;
 import React from "react";
 import { api } from '../../../services/api/base';
-import React from "react";
+
 import { logger } from '../../../utils/logger';
 import type { ApiResponse } from '../../../types/core';
 import type { Video } from '../../../types/video';
-
-
 
 export interface Subscription {
   id: string;

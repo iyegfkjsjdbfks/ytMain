@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
-import React from "react";
+
 import { getSubscribedChannels,
   updateSubscriptionNotifications,
   unsubscribeFromChannel,
@@ -60,7 +60,7 @@ return;
   const unsubscribe = useCallback(async (channelId: string) => {
     try {
       await unsubscribeFromChannel(channelId);
-      setChannels(prev => prev.filter(c => c.id !== channelId));
+      setChannels(prev => prev.filter((c: any) => c.id !== channelId));
     } catch (err) {
       console.error('Error unsubscribing from channel:', err);
       setError('Failed to unsubscribe from channel');

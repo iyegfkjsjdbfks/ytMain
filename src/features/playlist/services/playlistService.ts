@@ -7,8 +7,6 @@ import type { Playlist, Video, ApiResponse } from '../../../types/core';
  * Comprehensive playlist management service
  */
 
-
-
 export interface CreatePlaylistData {
   title: string;
   description?: string;

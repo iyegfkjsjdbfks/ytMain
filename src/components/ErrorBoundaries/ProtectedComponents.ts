@@ -6,10 +6,11 @@ export { default as ProtectedVideoPlayer } from '../../features/video/components
 export { default as ProtectedWatchPage } from '../../features/video/pages/ProtectedWatchPage';
 export { default as ProtectedSearchResultsPage } from '../../features/video/pages/ProtectedSearchResultsPage';
 
-// Type exports
-export type { default as ProtectedLiveStreamViewerProps } from '../../features/livestream/components/ProtectedLiveStreamViewer';
-import { export type { default as ProtectedStreamAnalyticsDashboardProps } from '../../features/livestream/components/ProtectedStreamAnalyticsDashboard';
-import React from "react";
-import { export type { default as ProtectedYouTubePlayerProps } from '../../../components/ProtectedYouTubePlayer';
-import React from "react";
-import { export type { default as ProtectedVideoPlayerProps } from '../../features/video/components/ProtectedVideoPlayer';
+// Type exports for protected components
+// Note: These types should be defined in their respective component files
+export type ProtectedLiveStreamViewerProps = any;
+export type ProtectedStreamAnalyticsDashboardProps = any;
+export type ProtectedYouTubePlayerProps = any;
+export type ProtectedVideoPlayerProps = any;
+export type ProtectedWatchPageProps = any;
+export type ProtectedSearchResultsPageProps = any;

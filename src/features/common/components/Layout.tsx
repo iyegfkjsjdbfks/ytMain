@@ -5,9 +5,6 @@ import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-
-
-
 /**
  * Main layout component for the application
  * Provides the common structure for most pages including header, sidebar, and footer

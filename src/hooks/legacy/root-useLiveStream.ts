@@ -2,8 +2,6 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import type { LiveStream } from '../src/types/livestream';
 
-
-
 export function useLiveStream(streamId?: string) {
   const [stream, setStream] = useState<LiveStream | null>(null);
   const [loading, setLoading] = useState(false);

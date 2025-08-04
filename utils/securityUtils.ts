@@ -235,7 +235,7 @@ export class RateLimiter {
     const userRequests = this.requests.get(identifier)!;
 
     // Remove old requests outside the window
-    const validRequests = userRequests.filter(time => time > windowStart);
+    const validRequests = userRequests.filter((time: any) => time > windowStart);
 
     if (validRequests.length >= this.maxRequests) {
       return false;
@@ -257,7 +257,7 @@ export class RateLimiter {
     }
 
     const userRequests = this.requests.get(identifier)!;
-    const validRequests = userRequests.filter(time => time > windowStart);
+    const validRequests = userRequests.filter((time: any) => time > windowStart);
 
     return Math.max(0, this.maxRequests - validRequests.length);
   }

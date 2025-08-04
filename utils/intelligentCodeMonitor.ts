@@ -6,7 +6,7 @@
 
 import React from "react";
 import { advancedAPM } from './advancedMonitoring';
-import React from "react";
+
 import { codeAnalysisEngine } from './codeAnalysisEngine';
 
 // Types for code monitoring
@@ -689,7 +689,7 @@ return 'No data available';
       ...this.insights.slice(0, 3).map(insight =>
         `- ${insight.title}: ${insight.description}`,
       ),
-    ].filter(line => line !== undefined);
+    ].filter((line: any) => line !== undefined);
 
     return report.join('\n');
   }

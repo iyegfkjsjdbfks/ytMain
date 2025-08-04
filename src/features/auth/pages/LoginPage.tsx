@@ -1,12 +1,10 @@
 import React from "react";
 import { useEffect  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { LoginForm } from '../components/LoginForm';
-import React from "react";
+
 import { useAuthStore } from '../store/authStore';
-
-
 
 /**
  * Login page component

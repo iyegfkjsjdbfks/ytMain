@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useToggle } from '../hooks/unifiedHooks';
+import { useToggle } from '../src/hooks/unifiedHooks';
 import { buildTruncateClasses, buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 
 import { SaveIcon } from './icons/UnifiedIcon';

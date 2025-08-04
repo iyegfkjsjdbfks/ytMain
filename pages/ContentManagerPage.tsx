@@ -61,7 +61,7 @@ const ContentManagerPage: React.FC = () => {
 
     // Apply filter
     if (filter !== 'all') {
-      filtered = filtered.filter(item => item.status === filter);
+      filtered = filtered.filter((item: any) => item.status === filter);
     }
 
     // Apply search
@@ -149,7 +149,7 @@ const ContentManagerPage: React.FC = () => {
     if (action === 'duplicate') {
       // Add duplicated items
       const duplicatedItems = content
-        .filter(item => selectedItems.has(item.id))
+        .filter((item: any) => selectedItems.has(item.id))
         .map(item => ({
           ...item,
           id: `${item.id}-copy`,
@@ -220,7 +220,7 @@ return;
     if (filterType === 'all') {
 return content.length;
 }
-    return content.filter(item => item.status === filterType).length;
+    return content.filter((item: any) => item.status === filterType).length;
   };
 
   if (loading) {

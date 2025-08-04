@@ -4,7 +4,7 @@ import { AdvancedVideoPlayer, YouTubePlayer, YouTubePlayerWrapper, VideoDescript
 import VideoMetadata from '../components/VideoMetadata';
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useWatchPage } from '../hooks/useWatchPage';
+import { useWatchPage } from '../src/hooks/useWatchPage';
 import { getYouTubePlayerType } from '../services/settingsService';
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';

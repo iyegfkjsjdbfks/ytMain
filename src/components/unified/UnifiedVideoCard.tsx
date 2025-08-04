@@ -11,12 +11,7 @@ import { /**
  * Consolidates all video card variants into a single, comprehensive component
  */
 
-
   PlayIcon, EyeIcon, ClockIcon, HeartIcon, ShareIcon, BookmarkIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
-
-
-
-
 
 export type VideoCardVariant = 'default' | 'compact' | 'list' | 'grid' | 'shorts';
 export type VideoCardSize = 'sm' | 'md' | 'lg';

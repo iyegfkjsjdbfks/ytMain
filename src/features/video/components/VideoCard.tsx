@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import React from 'react';
-import React from "react";
+
 import { formatDistanceToNow } from 'date-fns';
 import type { Video } from '../types';
-
-
-
 
 interface VideoCardProps {
   video: Video;

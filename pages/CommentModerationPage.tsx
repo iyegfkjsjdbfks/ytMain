@@ -67,9 +67,9 @@ const CommentModerationPage: React.FC = () => {
     // Apply filter
     if (filter !== 'all') {
       if (filter === 'flagged') {
-        filtered = filtered.filter(comment => comment.flaggedReason);
+        filtered = filtered.filter((comment: any) => comment.flaggedReason);
       } else {
-        filtered = filtered.filter(comment => comment.status === filter);
+        filtered = filtered.filter((comment: any) => comment.status === filter);
       }
     }
 
@@ -189,9 +189,9 @@ const CommentModerationPage: React.FC = () => {
 return comments.length;
 }
     if (filterType === 'flagged') {
-return comments.filter(c => c.flaggedReason).length;
+return comments.filter((c: any) => c.flaggedReason).length;
 }
-    return comments.filter(c => c.status === filterType).length;
+    return comments.filter((c: any) => c.status === filterType).length;
   };
 
   if (loading) {

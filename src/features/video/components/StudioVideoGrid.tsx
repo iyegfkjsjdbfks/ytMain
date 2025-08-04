@@ -1,12 +1,9 @@
 import React from "react";
 import { useState  } from 'react';
-import React from "react";
+
 import { Link } from 'react-router-dom';
 import type * as React from 'react';
 import type { Video, VideoVisibility } from '../types';
-
-
-
 
 interface StudioVideoGridProps {
   videos: Video[];
@@ -82,7 +79,7 @@ return;
   // Filter videos based on visibility
   const filteredVideos = filterVisibility === 'all'
     ? videos
-    : videos.filter(video => video.visibility === filterVisibility);
+    : videos.filter((video: any) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {

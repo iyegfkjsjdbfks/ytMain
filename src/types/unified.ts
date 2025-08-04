@@ -1,39 +1,23 @@
-import type { Video as CoreVideo } from './core';
-import type { Video as RootVideo } from '../../types';
-import { /**
- * Unified Type Definitions
- * Consolidates all type definitions to prevent conflicts and duplication
- */
-
-// Re-export core types
-// Ensure Video type compatibility
-
+// Unified type exports for the application
+// Core types
 export * from './core';
+
+// Video and media types  
 export * from './video';
-// Export specific types from youtube to avoid conflicts
-export type { YouTubeVideo, YouTubeChannel, YouTubePlaylist } from './youtube';
-import { // Export specific types from errors to avoid YouTubeApiError conflict
+export * from './playlist';
+export * from './channel';
+
+// Error types
 export type {
-  BaseError,
-  ApiError,
-  NetworkError,
-  ValidationError,
-  FormValidationError,
-  AuthError,
-  StorageError,
-  MediaError,
-  VideoPlayerError,
-  PerformanceError,
-  ServiceWorkerError,
-  CacheError,
-  ErrorCode, } from './errors';
-import React from "react";
-import { export * from './livestream';
+  ErrorInfo,
+  ErrorBoundaryState,
+  ErrorCode,
+} from './errors';
 
-// Legacy compatibility - re-export from root types (excluding Video to avoid conflict)
-export type { Channel, UserPlaylist } from '../../types';
-import { // Create a unified Video type that combines both definitions
-export type UnifiedVideo = CoreVideo & Partial<RootVideo>;
+// Livestream types
+export * from './livestream';
 
-// Use the core Video type as the primary export
-export type { Video } from './core';
+// Unified type definitions
+export type UnifiedVideo = any; // TODO: Define proper type
+export type UnifiedChannel = any; // TODO: Define proper type
+export type UnifiedPlaylist = any; // TODO: Define proper type

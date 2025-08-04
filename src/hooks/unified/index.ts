@@ -1,44 +1,38 @@
-import { /**
- * Unified Hooks Index
- * Centralized exports for all unified hooks
- */
+// Unified hooks system
 
-// Core API hooks
-export {
+// API hooks
+export { 
   useApi,
-  useQuery,
-  useMutation,
-  queryCache,
-    type UseApiConfig,
-    type UseApiState,
-  type UseApiReturn, } from './useApi';
-import { // Video hooks
+  useQueryClient,
+  useEnhancedQuery
+} from './useApi';
+export type { 
+  UseApiConfig,
+  UseApiState,
+  UseApiReturn 
+} from './useApi';
+
+// Video hooks
 export {
   useVideos,
   useVideo,
+  useVideoSearch,
+  useVideoCache,
+  useVideoInteractions,
   useTrendingVideos,
-  useFeaturedVideos,
-  useVideosByCategory,
-  useSubscriptionFeed,
-  useRelatedVideos,
-  useRecommendations,
-  useWatchHistory,
-  useLikedVideos,
-  useSavedVideos,
-  useShorts,
-  useTrendingShorts,
-  useSearchVideos,
-  useUploadVideo,
-  useUpdateVideo,
-  useDeleteVideo,
-  useLikeVideo,
-  useUnlikeVideo,
-  useSaveVideo,
-  useUnsaveVideo,
-  useIncrementViews,
-  useReportVideo,
-  useVideoCategories,
-  useVideoWithRelated,
-  useHomePageData, } from './useVideos';
-import { // Re-export types
+  useChannelVideos,
+  usePlaylistVideos,
+  useVideoRecommendations,
+  useVideoAnalytics,
+  useVideoUpload,
+  useVideoMetadata,
+  useVideoComments,
+  useVideoLikes,
+  useVideoShares,
+  useVideoSaves,
+  useShortsData,
+  useHomePageData
+} from './useVideos';
+
+// Core type re-exports
 export type { Video, Short, User, Channel, Playlist, Comment } from '../../types/core';

@@ -1,19 +1,17 @@
 import React from "react";
 import { useState, useEffect, useCallback, type FC } from 'react';
-import React from "react";
+
 import { conditionalLogger } from '../utils/conditionalLogger';
-import React from "react";
+
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
-import React from "react";
+
 import { useOfflineStatus } from '../hooks/useOfflineStatus';
-import React from "react";
+
 import { usePWA } from '../hooks/usePWA';
-import React from "react";
+
 import { usePWANotifications } from '../hooks/usePWANotifications';
-import React from "react";
+
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
-
-
 
 interface ModularPWAInstallBannerProps {
   variant?: 'default' | 'minimal' | 'detailed' | 'floating';

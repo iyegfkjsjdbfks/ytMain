@@ -166,10 +166,10 @@ export const DeveloperDashboard: React.FC = () => {
 
   const getFeatureFlagMetrics = async () => {
     const flags = featureFlagManager.getAllFlags();
-    const activeFlags = flags.filter(f => f.enabled);
+    const activeFlags = flags.filter((f: any) => f.enabled);
 
     const rolloutProgress = flags
-      .filter(f => f.rolloutStrategy.type === 'gradual')
+      .filter((f: any) => f.rolloutStrategy.type === 'gradual')
       .map(f => ({
         id: f.id,
         name: f.name,
@@ -281,8 +281,8 @@ return 0;
     return Math.round(Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length);
   }, [metrics]);
 
-  const criticalAlerts = alerts.filter(a => a.severity >= 8);
-  const actionableSuggestions = suggestions.filter(s => s.automatable && s.priority >= 7);
+  const criticalAlerts = alerts.filter((a: any) => a.severity >= 8);
+  const actionableSuggestions = suggestions.filter((s: any) => s.automatable && s.priority >= 7);
 
   if (isLoading && !metrics) {
     return (

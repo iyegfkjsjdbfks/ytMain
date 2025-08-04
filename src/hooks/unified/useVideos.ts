@@ -1,14 +1,14 @@
 import React from "react";
 import { useQuery as useReactQuery } from '@tanstack/react-query';
-import React from "react";
+
 import { logger } from '../../utils/logger';
-import React from "react";
+
 import { type UnifiedVideoMetadata } from '../../services/metadataNormalizationService';
-import React from "react";
+
 import { unifiedDataService, type UnifiedSearchFilters } from '../../services/unifiedDataService';
-import React from "react";
+
 import { useQuery, useMutation, type UseApiConfig } from './useApi';
-import React from "react";
+
 import { videoApi, type VideoUploadData } from '../../services/api/videos';
 import type { Video, Short } from '../../types/core';
 
@@ -16,10 +16,6 @@ import type { Video, Short } from '../../types/core';
  * Unified Video Hooks
  * Refactored video hooks using the new unified metadata system
  */
-
-
-
-
 
 // Unified Video hooks using normalized metadata
 export function useUnifiedVideos(

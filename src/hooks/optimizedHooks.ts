@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
-
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
  */
@@ -248,7 +247,7 @@ export function useOptimizedArray<T>(initialArray: T[] = []) {
   }, []);
 
   const removeById = useCallback((id: string | number, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.filter(item => item[idKey] !== id));
+    setArray(prev => prev.filter((item: any) => item[idKey] !== id));
   }, []);
 
   const update = useCallback((index: number, newItem: Partial<T>) => {

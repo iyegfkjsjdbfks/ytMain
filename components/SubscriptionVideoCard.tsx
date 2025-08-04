@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useToggle } from '../hooks/unifiedHooks';
+import { useToggle } from '../src/hooks/unifiedHooks';
 import { buildVideoUrl, buildChannelUrl, getAvatarFallback } from '../utils/componentUtils';
 
 import { SaveIcon } from './icons/UnifiedIcon';

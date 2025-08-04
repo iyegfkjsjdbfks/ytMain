@@ -621,7 +621,7 @@ return;
    */
   private cleanupAuditLogs(): void {
     const cutoffTime = Date.now() - (30 * 24 * 60 * 60 * 1000); // 30 days
-    this.auditLogs = this.auditLogs.filter(log => log.timestamp > cutoffTime);
+    this.auditLogs = this.auditLogs.filter((log: any) => log.timestamp > cutoffTime);
     console.log(`🧹 Cleaned up old audit logs, ${this.auditLogs.length} logs remaining`);
   }
 
@@ -634,7 +634,7 @@ return;
     const alerts = Array.from(this.alerts.values());
 
     const threatsDetected = threats.length;
-    const threatsBlocked = threats.filter(t => t.response?.action === 'block').length;
+    const threatsBlocked = threats.filter((t: any) => t.response?.action === 'block').length;
 
     const vulnCounts = vulnerabilities.reduce((acc, vuln) => {
       acc.total++;
@@ -643,13 +643,13 @@ return;
     }, { total: 0, critical: 0, high: 0, medium: 0, low: 0 });
 
     // Calculate security score (0-100)
-    const criticalIssues = vulnCounts.critical + alerts.filter(a => a.severity === 'critical').length;
-    const highIssues = vulnCounts.high + alerts.filter(a => a.severity === 'high').length;
+    const criticalIssues = vulnCounts.critical + alerts.filter((a: any) => a.severity === 'critical').length;
+    const highIssues = vulnCounts.high + alerts.filter((a: any) => a.severity === 'high').length;
     const securityScore = Math.max(0, 100 - (criticalIssues * 20) - (highIssues * 10));
 
     // Calculate compliance score
     const complianceChecks = Array.from(this.complianceChecks.values());
-    const compliantChecks = complianceChecks.filter(c => c.status === 'compliant').length;
+    const compliantChecks = complianceChecks.filter((c: any) => c.status === 'compliant').length;
     const complianceScore = complianceChecks.length > 0 ?
       (compliantChecks / complianceChecks.length) * 100 : 100;
 
@@ -669,7 +669,7 @@ return;
    */
   getActiveThreats(): SecurityThreat[] {
     return Array.from(this.threats.values())
-      .filter(threat => threat.status === 'detected' || threat.status === 'investigating')
+      .filter((threat: any) => threat.status === 'detected' || threat.status === 'investigating')
       .sort((a, b) => b.timestamp - a.timestamp);
   }
 
@@ -679,7 +679,7 @@ return;
   getVulnerabilities(status?: VulnerabilityReport['status']): VulnerabilityReport[] {
     const vulnerabilities = Array.from(this.vulnerabilities.values());
     return status ?
-      vulnerabilities.filter(vuln => vuln.status === status) :
+      vulnerabilities.filter((vuln: any) => vuln.status === status) :
       vulnerabilities.sort((a, b) => b.detectedAt - a.detectedAt);
   }
 
@@ -689,7 +689,7 @@ return;
   getSecurityAlerts(acknowledged?: boolean): SecurityAlert[] {
     const alerts = Array.from(this.alerts.values());
     return acknowledged !== undefined ?
-      alerts.filter(alert => alert.acknowledged === acknowledged) :
+      alerts.filter((alert: any) => alert.acknowledged === acknowledged) :
       alerts.sort((a, b) => b.timestamp - a.timestamp);
   }
 

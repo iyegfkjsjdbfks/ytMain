@@ -1,6 +1,6 @@
 import React, { memo, useMemo, useState, useEffect } from 'react';
 
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { performanceMonitor } from '../utils/performance';
 
@@ -319,12 +319,12 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       case 'playlists':
         return []; // Not implemented yet
       case 'live':
-        return allResults.filter(item => {
+        return allResults.filter((item: any) => {
           const video = 'isLive' in item ? item : convertToVideo(item);
           return video.isLive;
         });
       case 'shorts':
-        return allResults.filter(item => {
+        return allResults.filter((item: any) => {
           const video = 'duration' in item ? item : convertToVideo(item);
           if (typeof video.duration === 'string') {
             const parts = video.duration.split(':');

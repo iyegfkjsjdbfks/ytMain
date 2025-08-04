@@ -252,7 +252,7 @@ continue;
         checks.push({
           name,
           healthy: result.healthy,
-          details: (((result as any)))??.details,
+          details: (result as any)?.details,
         });
 
         if (!result.healthy) {

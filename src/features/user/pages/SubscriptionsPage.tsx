@@ -1,6 +1,5 @@
 import type React from 'react';
 
-
 /**
  * SubscriptionsPage component for displaying videos from subscribed channels
  */

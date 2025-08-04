@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
 
-
 interface AsyncState<T> {
   data: T | null;
   loading: boolean;

@@ -35,7 +35,6 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   className = '',
 }) => {
 
-
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,
     value: SearchFilters[K],
@@ -48,7 +47,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
   const toggleFeature = (feature: string) => {
     const newFeatures = filters.features.includes(feature)
-      ? filters.features.filter(f => f !== feature)
+      ? filters.features.filter((f: any) => f !== feature)
       : [...filters.features, feature];
 
     updateFilter('features', newFeatures);

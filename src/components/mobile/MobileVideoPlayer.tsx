@@ -4,8 +4,6 @@ import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization'
 import type { Video } from '../../types/core';
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
-
-
 interface MobileVideoPlayerProps {
   video: Video;
   autoplay?: boolean;

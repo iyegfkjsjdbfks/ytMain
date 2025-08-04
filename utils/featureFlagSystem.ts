@@ -6,7 +6,7 @@
 
 import React from "react";
 import { advancedAPM } from './advancedMonitoring';
-import React from "react";
+
 import { performanceMonitor } from './performanceMonitor';
 
 // Types for feature flag system
@@ -334,10 +334,10 @@ return undefined;
     };
   } {
     const cutoff = Date.now() - (hours * 60 * 60 * 1000);
-    let evaluations = this.evaluationHistory.filter(e => e.timestamp > cutoff);
+    let evaluations = this.evaluationHistory.filter((e: any) => e.timestamp > cutoff);
 
     if (flagId) {
-      evaluations = evaluations.filter(e => e.flagId === flagId);
+      evaluations = evaluations.filter((e: any) => e.flagId === flagId);
     }
 
     const uniqueUsers = new Set(evaluations.map(e => e.userId).filter(Boolean)).size;
@@ -471,7 +471,7 @@ return [];
     }
 
     // Find results with significant differences
-    const significantResults = results.filter(r => r.significantDifference);
+    const significantResults = results.filter((r: any) => r.significantDifference);
 
     if (significantResults.length === 0) {
       return {

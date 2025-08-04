@@ -8,9 +8,6 @@ import type { Comment } from '../../../types/core';
 import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
-
-
-
 interface CommentSectionProps {
   videoId: string;
   channelId: string;

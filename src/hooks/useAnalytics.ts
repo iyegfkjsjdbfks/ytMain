@@ -1,16 +1,11 @@
 import React from "react";
 import { useEffect, useCallback, useRef } from 'react';
-import React from "react";
+
 import { useLocation } from 'react-router-dom';
-import React from "react";
+
 import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
-import React from "react";
+
 import { usePerformanceMonitor } from './usePerformanceMonitor';
-
-
-
-
-
 
 interface UseAnalyticsOptions {
   trackPageViews?: boolean;

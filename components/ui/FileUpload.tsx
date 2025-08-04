@@ -40,7 +40,7 @@ return;
 
     // Validate file size
     if (maxSize) {
-      const oversizedFiles = fileArray.filter(file => file.size > maxSize);
+      const oversizedFiles = fileArray.filter((file: any) => file.size > maxSize);
       if (oversizedFiles.length > 0) {
         setError(`Some files exceed the maximum size of ${formatFileSize(maxSize)}`);
         return;

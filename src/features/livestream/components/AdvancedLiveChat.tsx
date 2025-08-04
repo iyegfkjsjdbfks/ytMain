@@ -1,6 +1,5 @@
 import type React from 'react';
 
-
 interface AdvancedLiveChatProps {
   streamId: string;
   className?: string;

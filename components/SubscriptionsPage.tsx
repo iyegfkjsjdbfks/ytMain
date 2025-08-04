@@ -170,13 +170,13 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     }
 
     if (filterBy === 'notifications_on') {
-      filtered = filtered.filter(sub => sub.notificationsEnabled);
+      filtered = filtered.filter((sub: any) => sub.notificationsEnabled);
     } else if (filterBy === 'notifications_off') {
-      filtered = filtered.filter(sub => !sub.notificationsEnabled);
+      filtered = filtered.filter((sub: any) => !sub.notificationsEnabled);
     } else if (filterBy === 'live') {
-      filtered = filtered.filter(sub => sub.isLive);
+      filtered = filtered.filter((sub: any) => sub.isLive);
     } else if (filterBy === 'recent_uploads') {
-      filtered = filtered.filter(sub => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
+      filtered = filtered.filter((sub: any) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
     }
 
     switch (sortBy) {
@@ -214,7 +214,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const handleUnsubscribe = (channelId: string) => {
-    setSubscriptions(prev => prev.filter(sub => sub.channelId !== channelId));
+    setSubscriptions(prev => prev.filter((sub: any) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
     delete stored[channelId];

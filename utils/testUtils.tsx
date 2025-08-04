@@ -6,14 +6,13 @@ import type { ReactElement, ReactNode } from 'react';
 
 import React from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from "react";
+
 import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from "react";
-import { MemoryRouter } from 'react-router-dom';
-import React from "react";
-import { vi } from 'vitest';
 
+import { MemoryRouter } from 'react-router-dom';
+
+import { vi } from 'vitest';
 
 // Mock data generators
 export const mockGenerators = {
@@ -450,11 +449,11 @@ export const a11yUtils = {
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');
-    const imagesWithoutAlt = images.filter(img => !img.getAttribute('alt'));
+    const imagesWithoutAlt = images.filter((img: any) => !img.getAttribute('alt'));
 
     // Check for form labels
     const inputs = screen.getAllByRole('textbox');
-    const inputsWithoutLabels = inputs.filter(input => {
+    const inputsWithoutLabels = inputs.filter((input: any) => {
       const id = input.getAttribute('id');
       return !id || !screen.queryByLabelText(new RegExp(id, 'i'));
     });

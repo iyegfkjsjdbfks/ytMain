@@ -95,7 +95,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   };
 
   // Filter videos based on active tab
-  const filteredVideos = videos.filter(video => {
+  const filteredVideos = videos.filter((video: any) => {
     switch (activeTab) {
       case 'published':
         return video.visibility === 'public';
@@ -173,7 +173,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   ];
 
   // Video edit form configuration
-  const editFormFields = uploadFormFields.filter(field => field.name !== 'videoFile');
+  const editFormFields = uploadFormFields.filter((field: any) => field.name !== 'videoFile');
 
   // Handle video upload
   const handleVideoUpload = async (formData: Record<string, any>) => {
@@ -291,10 +291,10 @@ return {};
   // Tab counts
   const tabCounts = {
     all: videos.length,
-    published: videos.filter(v => v.visibility === 'public').length,
-    unlisted: videos.filter(v => v.visibility === 'unlisted').length,
-    private: videos.filter(v => v.visibility === 'private').length,
-    drafts: videos.filter(v => v.visibility === 'private').length,
+    published: videos.filter((v: any) => v.visibility === 'public').length,
+    unlisted: videos.filter((v: any) => v.visibility === 'unlisted').length,
+    private: videos.filter((v: any) => v.visibility === 'private').length,
+    drafts: videos.filter((v: any) => v.visibility === 'private').length,
   };
 
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useCallback } from 'react';
 
-
 interface UseFormStateOptions<T> {
   initialValues: T;
   validate?: (values: T) => Partial<Record<keyof T, string>>;

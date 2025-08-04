@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect  } from 'react';
 import type * as React from 'react';
-import React from "react";
+
 import { PlayIcon,
   PauseIcon,
   ScissorsIcon,
@@ -140,7 +140,6 @@ export const VideoEditor: React.FC = () => {
     }));
   };
 
-
   const splitClip = (clipId: string, splitTime: number) => {
     setEditorState(prev => {
       const clipIndex = prev.clips.findIndex(c => c.id === clipId);
@@ -181,7 +180,7 @@ return prev;
   const deleteClip = (clipId: string) => {
     setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter(c => c.id !== clipId),
+      clips: prev.clips.filter((c: any) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };

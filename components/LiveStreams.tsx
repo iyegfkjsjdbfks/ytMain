@@ -26,7 +26,7 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
 
         // Mock live streams by modifying some videos to appear as live
         const mockLiveStreams = allVideos
-          .filter(video => !video.isShort)
+          .filter((video: any) => !video.isShort)
           .slice(0, maxStreams * 2) // Get more videos to simulate live streams
           .map((video, index) => {
             if (index < maxStreams) {
