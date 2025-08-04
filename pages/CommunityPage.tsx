@@ -66,7 +66,7 @@ return;
       type: newPostType,
       content: newPostContent,
       ...(newPostType === 'image' && { imageUrl: '/api/placeholder/600/400' }),
-      pollOptions: newPostType === 'poll' ? pollOptions.filter(opt => opt.trim()).map((opt, idx) => ({
+      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt: any) => opt.trim()).map((opt, idx) => ({
         id: `option-${idx}`,
         text: opt,
         votes: 0,

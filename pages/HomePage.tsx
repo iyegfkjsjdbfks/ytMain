@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, memo } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
-import { useTrendingSearch } from '../hooks';
+import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
 
 import type { Video } from '../types';
@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter(video => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [

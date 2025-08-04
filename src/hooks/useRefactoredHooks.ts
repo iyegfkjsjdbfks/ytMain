@@ -289,7 +289,7 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user: context.state.user,
+    user: any,
     isAuthenticated: context.state.isAuthenticated,
     login: context.login,
     logout: context.logout,

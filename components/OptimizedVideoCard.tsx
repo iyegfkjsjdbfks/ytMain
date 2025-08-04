@@ -11,8 +11,8 @@ import {
 
 import { useMiniplayerActions } from '../contexts/OptimizedMiniplayerContext';
 import { useWatchLater } from '../contexts/WatchLaterContext';
-import { useDropdownMenu } from '../hooks/useDropdownMenu';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useDropdownMenu } from '../src/hooks/useDropdownMenu';
+import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { cn } from '../src/lib/utils';
 import { isYouTubeUrl } from '../src/lib/youtube-utils';
 import { withMemo } from '../utils/componentOptimizations';

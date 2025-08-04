@@ -78,7 +78,7 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
 
     // Auto-clear announcement after 5 seconds
     setTimeout(() => {
-      setAnnouncements(prev => prev.filter(msg => msg !== message));
+      setAnnouncements(prev => prev.filter((msg: any) => msg !== message));
     }, 5000);
   }, []);
 
@@ -581,8 +581,8 @@ export function runAccessibilityAudit(element: HTMLElement): {
     }
   });
 
-  const errorCount = issues.filter(issue => issue.type === 'error').length;
-  const warningCount = issues.filter(issue => issue.type === 'warning').length;
+  const errorCount = issues.filter((issue: any) => issue.type === 'error').length;
+  const warningCount = issues.filter((issue: any) => issue.type === 'warning').length;
 
   // Calculate score (0-100)
   const score = Math.max(0, 100 - (errorCount * 10) - (warningCount * 5));

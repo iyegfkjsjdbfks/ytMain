@@ -7,7 +7,7 @@ import CategoryChips from '../components/CategoryChips';
 import ErrorBoundary from '../components/ErrorBoundary';
 import LoadingSpinner from '../components/LoadingSpinner';
 import VirtualizedVideoGrid from '../components/VirtualizedVideoGrid';
-import { useHomeVideos } from '../hooks/useOptimizedVideoData';
+import { useHomeVideos } from '../src/hooks/useOptimizedVideoData';
 import { cn } from '../src/lib/utils';
 
 import type { Video } from '../types';
@@ -60,7 +60,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter(video => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   // Event handlers

@@ -39,7 +39,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     try {
       await createPoll(
         newPoll.question,
-        newPoll.options.filter(opt => opt.trim()),
+        newPoll.options.filter((opt: any) => opt.trim()),
       );
 
       setNewPoll({ question: '', options: ['', ''], duration: 60 });
@@ -266,11 +266,11 @@ return 0;
       )}
 
       {/* Past Polls */}
-      {polls.filter(p => !p.isActive).length > 0 && (
+      {polls.filter((p: any) => !p.isActive).length > 0 && (
         <div>
           <h3 className="font-medium text-gray-900 mb-3">Past Polls</h3>
           <div className="space-y-3">
-            {polls.filter(p => !p.isActive).map((poll) => (
+            {polls.filter((p: any) => !p.isActive).map((poll) => (
               <div key={poll.id} className="p-3 border border-gray-200 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <p className="font-medium text-gray-900">{poll.question}</p>

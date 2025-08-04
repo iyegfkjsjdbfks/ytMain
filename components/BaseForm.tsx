@@ -1,6 +1,6 @@
 import React, { type FormEvent, type ReactNode } from 'react';
 
-import { useFormState } from '../hooks';
+import { useFormState } from '../src/hooks';
 
 interface FormField {
   name: string;

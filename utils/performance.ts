@@ -115,7 +115,7 @@ return 1500;
   }
 
   getMetrics(): PerformanceMetric[] {
-    return Array.from(this.metrics.values()).filter(m => m.duration !== undefined);
+    return Array.from(this.metrics.values()).filter((m: any) => m.duration !== undefined);
   }
 
   clearMetrics(): void {
@@ -127,7 +127,7 @@ return 1500;
   }
 
   getAverageTime(name: string): number | null {
-    const metrics = this.getMetrics().filter(m => m.name === name);
+    const metrics = this.getMetrics().filter((m: any) => m.name === name);
     if (metrics.length === 0) {
 return null;
 }

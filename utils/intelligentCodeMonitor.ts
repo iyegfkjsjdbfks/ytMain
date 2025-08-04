@@ -689,7 +689,7 @@ return 'No data available';
       ...this.insights.slice(0, 3).map(insight =>
         `- ${insight.title}: ${insight.description}`,
       ),
-    ].filter(line => line !== undefined);
+    ].filter((line: any) => line !== undefined);
 
     return report.join('\n');
   }

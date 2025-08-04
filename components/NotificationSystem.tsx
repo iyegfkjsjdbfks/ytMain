@@ -63,7 +63,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
   }, []);
 
   useEffect(() => {
-    const count = notifications.filter(n => !n.isRead).length;
+    const count = notifications.filter((n: any) => !n.isRead).length;
     setUnreadCount(count);
   }, [notifications]);
 
@@ -219,7 +219,7 @@ return;
 
   const deleteNotification = (notificationId: string) => {
     setNotifications(prev => {
-      const updated = prev.filter(n => n.id !== notificationId);
+      const updated = prev.filter((n: any) => n.id !== notificationId);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
@@ -238,7 +238,7 @@ return;
 
   const filteredNotifications = filter === 'all'
     ? notifications
-    : notifications.filter(n => !n.isRead);
+    : notifications.filter((n: any) => !n.isRead);
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>

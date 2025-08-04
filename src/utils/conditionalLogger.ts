@@ -13,9 +13,9 @@ export enum LogLevel {
 
 
 class ConditionalLogger {
-  private isDevelopment: boolean = false;
-  private isDebugMode: boolean = false;
-  private logLevel: LogLevel = LogLevel.ERROR;
+  private isDevelopment: any;
+  private isDebugMode: any;
+  private logLevel: any;
 
   constructor() {
     // Simple and safe environment detection
@@ -23,7 +23,7 @@ class ConditionalLogger {
     this.isDebugMode = this.detectDebugMode();
 
     // Set log level based on environment
-    this.logLevel = this.isDevelopment ? LogLevel.DEBUG : LogLevel.ERROR;
+    this.logLevel = this.isDevelopment ? LogLevel.DEBUG : any;
   }
 
   private detectDevelopmentMode(): boolean {
@@ -65,10 +65,10 @@ class ConditionalLogger {
   }
 
   private shouldLog(level: LogLevel): boolean {
-    return level <= this.logLevel;
+    return level <= this.currentLogLevel;
   }
 
-  private formatMessage(level: LogLevel, message: string, source?: string): string {
+  private formatMessage(level: LogLevel, message: any, source?: string): string {
     const timestamp = new Date().toISOString();
     const levelName = LogLevel[level];
     const sourcePrefix = source ? `[${source}]` : '';
@@ -76,31 +76,31 @@ class ConditionalLogger {
   }
 
 
-  error(message: string, data?: unknown, source?: string): void {
+  error(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.ERROR)) {
       const formattedMessage = this.formatMessage(LogLevel.ERROR, message, source);
       console.error(formattedMessage, data || '');
     }
   }
 
-  warn(message: string, data?: unknown, source?: string): void {
+  warn(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.WARN)) {
       const formattedMessage = this.formatMessage(LogLevel.WARN, message, source);
       console.warn(formattedMessage, data || '');
     }
   }
 
-  info(message: string, data?: unknown, source?: string): void {
+  info(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.INFO)) {
       const formattedMessage = this.formatMessage(LogLevel.INFO, message, source);
       console.info(formattedMessage, data || '');
     }
   }
 
-  debug(message: string, data?: unknown, source?: string): void {
+  debug(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.DEBUG) && this.isDebugMode) {
       const formattedMessage = this.formatMessage(LogLevel.DEBUG, message, source);
-
+      console.debug(formattedMessage, data || '');
     }
   }
 
@@ -108,6 +108,12 @@ class ConditionalLogger {
   time(label: string): void {
     if (this.isDebugMode) {
       console.time(label);
+    }
+  }
+
+  timeEnd(label: string): void {
+    if (this.isDebugMode) {
+      console.timeEnd(label);
     }
   }
 
@@ -131,7 +137,7 @@ class ConditionalLogger {
   }
 
   // API response logging with sanitization
-  apiResponse(endpoint: string, response: unknown, duration?: number): void {
+  apiResponse(endpoint: string, response: any, duration?: number): void {
     if (this.isDebugMode) {
       const message = duration
         ? `API Response from ${endpoint} (${duration}ms)`
@@ -141,15 +147,14 @@ class ConditionalLogger {
   }
 
   // API error logging
-  apiError(endpoint: string, error: unknown): void {
+  apiError(endpoint: string, error: any): void {
     const message = `API Error from ${endpoint}`;
     this.error(message, this.sanitizeError(error), 'API');
   }
 
-  private sanitizeApiResponse(response: unknown): unknown {
+  private sanitizeApiResponse(response: any): any {
     if (typeof response === 'object' && response !== null) {
-      // Remove sensitive data from logs
-      const sanitized = { ...response as Record<string, unknown> };
+      const sanitized = { ...response };
       delete sanitized.apiKey;
       delete sanitized.token;
       delete sanitized.authorization;
@@ -158,12 +163,12 @@ class ConditionalLogger {
     return response;
   }
 
-  private sanitizeError(error: unknown): unknown {
+  private sanitizeError(error: any): any {
     if (error instanceof Error) {
       return {
         name: error.name,
         message: error.message,
-        stack: (this.isDebugMode ?? false) ? error.stack : undefined,
+        stack: error.stack,
       };
     }
     return error;
@@ -178,39 +183,39 @@ try {
 } catch (error) {
   // Fallback logger if construction fails
   class FallbackLogger extends ConditionalLogger {
-     constructor() {
-       super();
-     }
+    constructor() {
+      super();
+    }
 
-     override error(msg: string) {
- console.error(msg);
-}
-     override warn(msg: string) {
- console.warn(msg);
-}
-     override info(msg: string) {
- console.info(msg);
-}
-     override debug(msg: string) {
-
-}
-     override time(label: string) {
- console.time(label);
-}
-     override timeEnd(label: string) {
- console.timeEnd(label);
-}
-     override group(label: string) {
- console.group(label);
-}
-     override groupEnd() {
- console.groupEnd();
-}
-     override apiResponse() {}
-     override apiError(endpoint: string, err: unknown) {
- console.error(`API Error from ${endpoint}:`, err);
-}
-   }
+    override error(msg: any): void {
+      console.error(msg);
+    }
+    override warn(msg: any): void {
+      console.warn(msg);
+    }
+    override info(msg: any): void {
+      console.info(msg);
+    }
+    override debug(msg: any): void {
+      console.debug(msg);
+    }
+    override time(label: string): void {
+      console.time(label);
+    }
+    override timeEnd(label: string): void {
+      console.timeEnd(label);
+    }
+    override group(label: string): void {
+      console.group(label);
+    }
+    override groupEnd(): void {
+      console.groupEnd();
+    }
+    override apiResponse(): void {}
+    override apiError(endpoint: string, err: any): void {
+      console.error(`API Error from ${endpoint}:`, err);
+    }
+  }
 
   conditionalLoggerInstance = new FallbackLogger();
 }

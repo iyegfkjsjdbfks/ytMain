@@ -59,7 +59,7 @@ return;
   const removeTag = (tagToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove),
+      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
   };
 

@@ -63,7 +63,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       // Generate initial mock notifications
       const mockNotifications = generateMockNotifications();
       setNotifications(mockNotifications);
-      setUnreadCount(mockNotifications.filter(n => !n.isRead).length);
+      setUnreadCount(mockNotifications.filter((n: any) => !n.isRead).length);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
     }
   }, []);
@@ -212,7 +212,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
   const deleteNotification = (notificationId: string) => {
     const notification = notifications.find(n => n.id === notificationId);
-    const updatedNotifications = notifications.filter(n => n.id !== notificationId);
+    const updatedNotifications = notifications.filter((n: any) => n.id !== notificationId);
     setNotifications(updatedNotifications);
     if (notification && !notification.isRead) {
       setUnreadCount(prev => Math.max(0, prev - 1));
@@ -221,7 +221,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const filteredNotifications = filter === 'unread'
-    ? notifications.filter(n => !n.isRead)
+    ? notifications.filter((n: any) => !n.isRead)
     : notifications;
 
   const getNotificationIcon = (type: Notification['type']) => {

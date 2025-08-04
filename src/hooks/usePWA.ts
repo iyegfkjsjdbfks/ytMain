@@ -107,7 +107,7 @@ export const usePWA = (): UsePWAReturn => {
 
       conditionalLogger.info(
         'PWA features initialized',
-        { supportedFeatures: Object.keys(features).filter(key => features[key as keyof typeof features]) },
+        { supportedFeatures: Object.keys(features).filter((key: any) => features[key as keyof typeof features]) },
         'usePWA',
       );
     } catch (error) {

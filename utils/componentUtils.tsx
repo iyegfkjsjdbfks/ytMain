@@ -132,3 +132,17 @@ export default {
   useMemo,
   useCallback,
 };
+
+
+// Additional utility functions
+export const buildVideoUrl = (videoId: string): string => {
+  return `/watch?v=${videoId}`;
+};
+
+export const buildChannelUrl = (channelId: string): string => {
+  return `/channel/${channelId}`;
+};
+
+export const getAvatarFallback = (name: string): string => {
+  return name.charAt(0).toUpperCase();
+};

@@ -1060,7 +1060,7 @@ return;
       return;
     }
 
-    const relevantNotifications = config.notifications.filter(n => n.events.includes(event));
+    const relevantNotifications = config.notifications.filter((n: any) => n.events.includes(event));
 
     for (const notification of relevantNotifications) {
       try {
@@ -1132,7 +1132,7 @@ return;
    */
   getDeploymentMetrics(): DeploymentMetrics {
     const executions = this.getAllExecutions();
-    const completedExecutions = executions.filter(e => e.endTime);
+    const completedExecutions = executions.filter((e: any) => e.endTime);
 
     if (completedExecutions.length === 0) {
       return {
@@ -1147,9 +1147,9 @@ return;
       };
     }
 
-    const successfulDeployments = completedExecutions.filter(e => e.status === 'success');
-    const failedDeployments = completedExecutions.filter(e => e.status === 'failed');
-    const rolledBackDeployments = completedExecutions.filter(e => e.status === 'rolled-back');
+    const successfulDeployments = completedExecutions.filter((e: any) => e.status === 'success');
+    const failedDeployments = completedExecutions.filter((e: any) => e.status === 'failed');
+    const rolledBackDeployments = completedExecutions.filter((e: any) => e.status === 'rolled-back');
 
     const totalDuration = completedExecutions.reduce((sum, e) => sum + (e.metrics?.duration || 0), 0);
     const averageDeployTime = totalDuration / completedExecutions.length;
@@ -1157,7 +1157,7 @@ return;
     // Calculate deployment frequency (deployments per day)
     const now = Date.now();
     const oneDayAgo = now - (24 * 60 * 60 * 1000);
-    const recentDeployments = completedExecutions.filter(e => e.startTime > oneDayAgo);
+    const recentDeployments = completedExecutions.filter((e: any) => e.startTime > oneDayAgo);
 
     return {
       duration: totalDuration,

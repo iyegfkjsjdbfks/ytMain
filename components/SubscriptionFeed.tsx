@@ -37,7 +37,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
 
         // Filter videos from subscribed channels and sort by upload date
         const subscriptionFeed = allVideos
-          .filter(video => subscribedChannels.includes(video.channelName) && !video.isShort)
+          .filter((video: any) => subscribedChannels.includes(video.channelName) && !video.isShort)
           .sort((a, b) => {
             // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
             const timeA = a.uploadedAt.includes('hour') ? 1 :

@@ -180,7 +180,7 @@ return prev;
   const deleteClip = (clipId: string) => {
     setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter(c => c.id !== clipId),
+      clips: prev.clips.filter((c: any) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };

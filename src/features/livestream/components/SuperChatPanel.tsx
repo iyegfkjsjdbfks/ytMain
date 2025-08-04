@@ -35,7 +35,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
     // Load existing super chats from API
     liveStreamService.chat.getChatMessages(streamId).then(messages => {
       const existingSuperChats = messages
-        .filter(msg => msg.superChat)
+        .filter((msg: any) => msg.superChat)
         .map(msg => msg.superChat!)
         .sort((a, b) => {
           const aTime = a.timestamp ? new Date(a.timestamp).getTime() : 0;

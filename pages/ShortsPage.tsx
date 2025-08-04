@@ -34,7 +34,7 @@ const ShortsPage: React.FC = () => {
     try {
       // Ensure we have a valid array
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
-      return new Set(validArray.filter(item => typeof item === 'string'));
+      return new Set(validArray.filter((item: any) => typeof item === 'string'));
     } catch (error) {
       console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set
@@ -47,7 +47,7 @@ const ShortsPage: React.FC = () => {
     try {
       // Ensure we have a valid array
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
-      return new Set(validArray.filter(item => typeof item === 'string'));
+      return new Set(validArray.filter((item: any) => typeof item === 'string'));
     } catch (error) {
       console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set
@@ -81,7 +81,7 @@ return [];
 
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
-      .filter(video => video.visibility !== 'scheduled') // Filter out scheduled videos
+      .filter((video: any) => video.visibility !== 'scheduled') // Filter out scheduled videos
       .map(video => {
         const shortVideo: Short = {
           ...video,
@@ -134,7 +134,7 @@ return [];
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
-        return currentArray.filter(id => id !== shortId);
+        return currentArray.filter((id: any) => id !== shortId);
       }
         return [...currentArray, shortId];
 
@@ -145,7 +145,7 @@ return [];
     setFollowedChannelsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter(name => name !== channelName);
+        return currentArray.filter((name: any) => name !== channelName);
       }
         return [...currentArray, channelName];
 

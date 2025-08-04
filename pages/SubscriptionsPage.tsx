@@ -56,13 +56,13 @@ return [];
 
     switch (activeTab) {
       case 'today':
-        filtered = filtered.filter(video => {
+        filtered = filtered.filter((video: any) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= today;
         });
         break;
       case 'week':
-        filtered = filtered.filter(video => {
+        filtered = filtered.filter((video: any) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= weekAgo;
         });
@@ -72,7 +72,7 @@ return [];
         filtered = filtered.filter((_, index) => index % 3 !== 0);
         break;
       case 'live':
-        filtered = filtered.filter(video => video.isLive);
+        filtered = filtered.filter((video: any) => video.isLive);
         break;
       case 'posts':
         // Mock community posts filter
@@ -98,13 +98,13 @@ return [];
   }, [subscribedVideos, activeTab, sortBy]);
 
   const subscriptionStats = useMemo(() => {
-    const notificationsEnabled = subscribedChannels.filter(c => c.notificationsEnabled).length;
+    const notificationsEnabled = subscribedChannels.filter((c: any) => c.notificationsEnabled).length;
     const totalVideos = subscribedVideos?.length || 0;
 
     // Calculate new videos today (mock calculation)
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const newVideosToday = subscribedVideos?.filter(video => {
+    const newVideosToday = subscribedVideos?.filter((video: any) => {
       const uploadDate = new Date(video.uploadedAt);
       return uploadDate >= todayStart;
     }).length || 0;

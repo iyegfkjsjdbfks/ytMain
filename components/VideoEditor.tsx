@@ -185,7 +185,7 @@ return;
   };
 
   const deleteTextOverlay = (id: string) => {
-    setTextOverlays(prev => prev.filter(text => text.id !== id));
+    setTextOverlays(prev => prev.filter((text: any) => text.id !== id));
     setSelectedText(null);
   };
 
@@ -208,7 +208,7 @@ return;
   };
 
   const removeFilter = (id: string) => {
-    setFilters(prev => prev.filter(filter => filter.id !== id));
+    setFilters(prev => prev.filter((filter: any) => filter.id !== id));
   };
 
   const trimVideo = () => {

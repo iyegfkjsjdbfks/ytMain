@@ -103,7 +103,7 @@ const DevOpsDashboard: React.FC = () => {
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes
           frequency: deploymentMetrics.deploymentFrequency,
-          activeDeployments: deploymentAutomation.getAllExecutions().filter(e => e.status === 'running').length,
+          activeDeployments: deploymentAutomation.getAllExecutions().filter((e: any) => e.status === 'running').length,
         },
         codeQuality: {
           score: codeMetrics ? Math.round(
@@ -134,7 +134,7 @@ const DevOpsDashboard: React.FC = () => {
           acknowledged: alert.acknowledged,
         })),
         ...deploymentAutomation.getAllExecutions()
-          .filter(exec => exec.status === 'failed')
+          .filter((exec: any) => exec.status === 'failed')
           .slice(0, 5)
           .map(exec => ({
             id: exec.id,

@@ -449,11 +449,11 @@ export const a11yUtils = {
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');
-    const imagesWithoutAlt = images.filter(img => !img.getAttribute('alt'));
+    const imagesWithoutAlt = images.filter((img: any) => !img.getAttribute('alt'));
 
     // Check for form labels
     const inputs = screen.getAllByRole('textbox');
-    const inputsWithoutLabels = inputs.filter(input => {
+    const inputsWithoutLabels = inputs.filter((input: any) => {
       const id = input.getAttribute('id');
       return !id || !screen.queryByLabelText(new RegExp(id, 'i'));
     });

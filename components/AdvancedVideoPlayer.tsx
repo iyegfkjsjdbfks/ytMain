@@ -13,7 +13,7 @@ import {
   ChevronUpIcon,
 } from '@heroicons/react/24/outline';
 
-import { useVideoPlayer } from '../hooks';
+import { useVideoPlayer } from '../src/hooks';
 
 import type { Video } from '../src/types/core';
 

@@ -233,7 +233,7 @@ return;
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter(v => v.id !== videoId && v.category === foundVideo.category)
+          .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
 

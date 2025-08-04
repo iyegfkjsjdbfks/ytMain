@@ -150,7 +150,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       // Enable multiplatform if configured
       if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
         const enabledPlatforms = streamSettings.platforms
-          .filter(p => p.enabled)
+          .filter((p: any) => p.enabled)
           .map(p => p.name);
 
         // TODO: Implement multiplatform streaming

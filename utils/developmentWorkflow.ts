@@ -302,14 +302,14 @@ return undefined;
     };
   } {
     const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
-    const recentResults = this.qualityGateHistory.filter(r => r.timestamp > cutoff);
+    const recentResults = this.qualityGateHistory.filter((r: any) => r.timestamp > cutoff);
 
     const totalExecutions = recentResults.length;
-    const successfulExecutions = recentResults.filter(r => r.passed).length;
+    const successfulExecutions = recentResults.filter((r: any) => r.passed).length;
     const successRate = totalExecutions > 0 ? successfulExecutions / totalExecutions : 0;
 
     const failuresByStage: Record<string, number> = {};
-    recentResults.filter(r => !r.passed).forEach(r => {
+    recentResults.filter((r: any) => !r.passed).forEach(r => {
       failuresByStage[r.stage] = (failuresByStage[r.stage] || 0) + 1;
     });
 

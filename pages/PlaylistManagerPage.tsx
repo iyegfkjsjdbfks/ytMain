@@ -119,9 +119,9 @@ const PlaylistManagerPage: React.FC = () => {
         totalPlaylists: playlists.length,
         totalVideos: playlists.reduce((sum, playlist) => sum + playlist.videoCount, 0),
         totalViews: playlists.reduce((sum, playlist) => sum + playlist.totalViews, 0),
-        publicPlaylists: playlists.filter(p => p.visibility === 'public').length,
-        privatePlaylists: playlists.filter(p => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter(p => p.visibility === 'unlisted').length,
+        publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
+        privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
+        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length,
       };
     };
 
@@ -134,7 +134,7 @@ const PlaylistManagerPage: React.FC = () => {
   }, []);
 
   const filteredPlaylists = playlists
-    .filter(playlist => {
+    .filter((playlist: any) => {
       const matchesSearch = playlist.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            playlist.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesVisibility = filterVisibility === 'all' || playlist.visibility === filterVisibility;
@@ -180,7 +180,7 @@ return;
 
   const handleDeletePlaylist = (playlistId: string) => {
     if (confirm('Are you sure you want to delete this playlist?')) {
-      setPlaylists(playlists.filter(p => p.id !== playlistId));
+      setPlaylists(playlists.filter((p: any) => p.id !== playlistId));
       if (selectedPlaylist?.id === playlistId) {
         setSelectedPlaylist(null);
       }

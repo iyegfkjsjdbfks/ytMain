@@ -44,7 +44,7 @@ class PerformanceStore {
   }
 
   getMetricsByComponent(componentName: string) {
-    return this.metrics.filter(m => m.componentName === componentName);
+    return this.metrics.filter((m: any) => m.componentName === componentName);
   }
 
   subscribe(observer: (metrics: PerformanceMetrics[]) => void) {
@@ -80,7 +80,7 @@ return 0;
   }
 
   getSlowRenders(threshold = 16) { // 16ms = 60fps
-    return this.metrics.filter(m => m.renderTime > threshold);
+    return this.metrics.filter((m: any) => m.renderTime > threshold);
   }
 }
 
@@ -217,7 +217,7 @@ export const usePerformanceData = (componentName?: string) => {
   useEffect(() => {
     const updateMetrics = (allMetrics: PerformanceMetrics[]) => {
       const filteredMetrics = componentName
-        ? allMetrics.filter(m => m.componentName.startsWith(componentName))
+        ? allMetrics.filter((m: any) => m.componentName.startsWith(componentName))
         : allMetrics;
       setMetrics(filteredMetrics);
     };

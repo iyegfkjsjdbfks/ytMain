@@ -90,7 +90,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     try {
       // For now, just remove from local state
       // In a real implementation, this would call a delete API
-      setScheduledStreams(prev => prev.filter(s => s.id !== streamId));
+      setScheduledStreams(prev => prev.filter((s: any) => s.id !== streamId));
     } catch (error) {
       logger.error('Failed to delete stream:', error);
     }
@@ -151,7 +151,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const removeTag = (tagToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove),
+      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
   };
 
