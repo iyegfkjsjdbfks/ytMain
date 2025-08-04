@@ -2,14 +2,13 @@
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import {
+import React, {
   useEffect,
   useRef,
   useState,
   useCallback,
   createContext,
   useContext,
-  type React,
   type ReactNode,
   type KeyboardEvent,
   type FocusEvent,

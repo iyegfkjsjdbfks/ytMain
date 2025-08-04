@@ -479,7 +479,7 @@ return;
       {
         type: 'remove-duplication',
         description: 'Extract common error handling pattern',
-        code: 'const handleApiError = (error: Error) => { /* common error handling */ };',
+        code: 'const handleApiError = (_error: Error) => { /* common error handling */ };',
         confidence: 0.90,
       },
     ];

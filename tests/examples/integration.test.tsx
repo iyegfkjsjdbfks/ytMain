@@ -102,7 +102,7 @@ const VideoPage = () => {
   const [videos, setVideos] = React.useState<any[]>([]);
   const [comments, setComments] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [watchTime, setWatchTime] = React.useState(0);
+  const [_watchTime, setWatchTime] = React.useState(0);
 
   React.useEffect(() => {
     // Simulate API calls

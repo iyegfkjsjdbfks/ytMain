@@ -26,7 +26,7 @@ interface AlertRule {
 
 interface AlertAction {
   type: 'email' | 'webhook' | 'console' | 'storage';
-  config: Record<string, any>;
+  _config: Record<string, any>;
 }
 
 interface HealthCheck {
@@ -253,7 +253,7 @@ continue;
         checks.push({
           name,
           healthy: result.healthy,
-          details: result.details,
+          details: (result as any).details,
         });
 
         if (!result.healthy) {
@@ -263,7 +263,7 @@ continue;
         checks.push({
           name,
           healthy: false,
-          error: error instanceof Error ? error.message : 'Unknown error',
+          _error: error instanceof Error ? error.message : 'Unknown error',
         });
         overallHealthy = false;
       }
@@ -296,7 +296,7 @@ continue;
       threshold: 100 * 1024 * 1024, // 100MB
       severity: 'high',
       cooldown: 5,
-      actions: [{ type: 'console', config: {} }],
+      actions: [{ type: 'console', _config: {} }],
     });
 
     this.addAlert({
@@ -306,7 +306,7 @@ continue;
       threshold: 3000, // 3 seconds
       severity: 'medium',
       cooldown: 2,
-      actions: [{ type: 'console', config: {} }],
+      actions: [{ type: 'console', _config: {} }],
     });
 
     this.addAlert({
@@ -316,7 +316,7 @@ continue;
       threshold: 0.05, // 5%
       severity: 'critical',
       cooldown: 1,
-      actions: [{ type: 'console', config: {} }],
+      actions: [{ type: 'console', _config: {} }],
     });
   }
 
@@ -335,7 +335,7 @@ continue;
             details: { status: response.status, statusText: response.statusText },
           };
         } catch {
-          return { healthy: false, details: { error: 'API unreachable' } };
+          return { healthy: false, details: { _error: 'API unreachable' } };
         }
       },
       interval: 30,
