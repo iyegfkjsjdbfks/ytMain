@@ -201,4 +201,5 @@ const logger = new ConditionalLogger();
 
 // Export both the class and instance
 export { ConditionalLogger, LogLevel, logger };
+export { logger as conditionalLogger };
 export default logger;
