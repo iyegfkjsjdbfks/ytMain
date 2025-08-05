@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useCallback } from 'react';
 
-// import { getInitialSearchKeyword } // from '../services/settingsService' // Service not found; // Service not found
+import { getInitialSearchKeyword } from '../services/settingsService';
 
 import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
 
