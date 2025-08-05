@@ -1,11 +1,8 @@
 // Unified hooks system
 
 // API hooks
-export { 
-  useApi,
-  useQueryClient,
-  useEnhancedQuery
-} from './useApi';
+export { useApi } from './useApi';
+export { useEnhancedQuery } from '../useEnhancedQuery';
 export type { 
   UseApiConfig,
   UseApiState,
@@ -14,25 +11,15 @@ export type {
 
 // Video hooks
 export {
-  useVideos,
   useVideo,
-  useVideoSearch,
-  useVideoCache,
-  useVideoInteractions,
   useTrendingVideos,
-  useChannelVideos,
-  usePlaylistVideos,
-  useVideoRecommendations,
-  useVideoAnalytics,
-  useVideoUpload,
-  useVideoMetadata,
-  useVideoComments,
-  useVideoLikes,
-  useVideoShares,
-  useVideoSaves,
-  useShortsData,
-  useHomePageData
-} from './useVideos';
+  useRecommendedVideos,
+  useSearchVideos,
+  useUnifiedVideo,
+  useUnifiedTrendingVideos,
+  useUnifiedShorts,
+  useUnifiedSearchVideos
+} from '../../features/video/hooks/useVideo';
 
 // Core type re-exports
 export type { Video, Short, User, Channel, Playlist, Comment } from '../../types/core';

@@ -1,4 +1,3 @@
-import React from "react";
 import { logger } from '../../../utils/logger';
 
 import { youtubeService } from '../../../services/api/youtubeService';

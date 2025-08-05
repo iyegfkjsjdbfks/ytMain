@@ -4,6 +4,30 @@
  */
 
 /**
+ * Parses a view count string (e.g., "1.2M views", "500K") into a number.
+ * @param viewsStr The view count string to parse.
+ * @returns The parsed number.
+ */
+export const parseViewCount = (viewsStr: string): number => {
+  if (!viewsStr || typeof viewsStr !== 'string') {
+    return 0;
+  }
+  const lowerStr = viewsStr.toLowerCase().replace(/\s*views?$/, ''); // Remove " views" or " view" suffix and trim
+  let numPart = parseFloat(lowerStr);
+
+  if (isNaN(numPart)) {
+    return 0;
+  } // If the beginning isn't a number
+
+  if (lowerStr.includes('m')) {
+    numPart *= 1000000;
+  } else if (lowerStr.includes('k')) {
+    numPart *= 1000;
+  }
+  return Math.floor(numPart); // Return integer part
+};
+
+/**
  * Formats a number into a string with K, M, B suffixes for thousands, millions, billions.
  * @param num The number to format.
  * @param digits The number of decimal digits (optional, default 0 for K/M/B, 1 if needed).

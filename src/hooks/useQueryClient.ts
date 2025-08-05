@@ -1,4 +1,3 @@
-import React from "react";
 import { QueryClient } from '@tanstack/react-query';
 
 // Create a single, optimized QueryClient instance with performance-focused settings
@@ -28,12 +27,6 @@ const queryClient = new QueryClient({
   },
 });
 
-/**
- * Hook to access the QueryClient instance
- * Useful for imperative cache operations
- */
-export function useQueryClient() {
-  return queryClient;
-}
+
 
 export { queryClient };

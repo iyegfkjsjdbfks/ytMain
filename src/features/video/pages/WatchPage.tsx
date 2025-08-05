@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { queryClient } from '../../../../hooks/useQueryClient';
 
 import { useState, useEffect } from 'react';
 
@@ -312,7 +313,7 @@ const WatchPage: React.FC = () => {
         logger.debug('✅ Google Search video store cleared');
 
         // Clear React Query cache
-        const { queryClient } = await import('../../../../hooks/useQueryClient');
+        
         queryClient.clear();
         logger.debug('✅ React Query cache cleared');
 

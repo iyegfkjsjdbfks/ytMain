@@ -1,4 +1,3 @@
-import React from "react";
 import { fetchSingleVideoFromGoogleSearch, searchYouTubeWithGoogleSearch } from '../../services/googleSearchService';
 import { getYouTubeSearchProvider } from '../../services/settingsService';
 import { getYouTubeVideoId } from '../lib/youtube-utils';
