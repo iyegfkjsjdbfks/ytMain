@@ -1,20 +1,24 @@
-import React from "react";
 import { useCallback } from 'react';
-
-// import { getVideos, getVideosByChannelName, getSubscribedChannelNames } // // from '../services/realVideoService' // Service not found // Service not found;
-
-import { parseRelativeDate } from '../utils/dateUtils';
-
-import { parseViewCount } from '../utils/numberUtils';
-
-import { useAsyncData } from './useAsyncData';
 import type { Video } from '../types/core';
+import { parseRelativeDate } from '../utils/dateUtils';
+import { parseViewCount } from '../utils/numberUtils';
+import { useAsyncData } from './useAsyncData';
+// Use the mock realVideoService for demo data (these functions exist)
+import {
+  getVideos,
+  getVideosByCategory,
+  getVideosByChannelName,
+  getSubscribedChannelNames,
+} from '../../services/realVideoService';
 
 /**
  * Hook for fetching all videos
  */
 export function useVideos() {
-  const fetchVideos = useCallback(() => getVideos(), []);
+  const fetchVideos = useCallback(async (): Promise<Video[]> => {
+    const data = await getVideos();
+    return data as unknown as Video[];
+  }, []);
   // Provide empty array as initial data to show UI immediately
   return useAsyncData<Video[]>(fetchVideos, {
     initialData: [],
@@ -27,24 +31,37 @@ export function useVideos() {
  */
 export function useTrendingVideos(category: string = 'all') {
   const fetchTrendingVideos = useCallback(async (): Promise<Video[]> => {
-    const allVideos = await getVideos();
-
-    // Sort by view count to get trending videos
-    const sortedByViews = [...allVideos].sort((a, b) => {
-      const viewsA = parseViewCount(a.views);
-      const viewsB = parseViewCount(b.views);
-      return viewsB - viewsA;
-    });
-
-    // Filter by category if not 'all'
-    let filteredVideos = sortedByViews;
-    if (category !== 'all') {
-      filteredVideos = sortedByViews.filter(video =>
-        video.category.toLowerCase().includes(category.toLowerCase()),
-      );
+    // If category-specific API available, use it, then normalize to Video[]
+    if (category && category !== 'all' && typeof getVideosByCategory === 'function') {
+      const byCategory = await getVideosByCategory(category);
+      const normalized = (byCategory as any[]).map((v) => ({
+        // realVideoService returns fields like thumbnailUrl/publishedAt etc.
+        // Map to Video shape expected by UI where necessary
+        ...v,
+        thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
+        publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
+        channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
+      })) as Video[];
+      return [...normalized]
+        .sort((a, b) => Number(parseViewCount((b as any).views)) - Number(parseViewCount((a as any).views)))
+        .slice(0, 50);
     }
 
-    return filteredVideos.slice(0, 50); // Top 50 trending
+    // Fallback: get all videos then sort/filter
+    const allVideosRaw = await getVideos();
+    const allVideos = (allVideosRaw as any[]).map((v) => ({
+      ...v,
+      thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
+      publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
+      channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
+    })) as Video[];
+
+    const sortedByViews = [...allVideos].sort((a: any, b: any) => {
+      const viewsA = parseViewCount(a.views as string);
+      const viewsB = parseViewCount(b.views as string);
+      return viewsB - viewsA;
+    });
+    return sortedByViews.slice(0, 50);
   }, [category]);
 
   return useAsyncData<Video[]>(fetchTrendingVideos, {
@@ -58,6 +75,7 @@ export function useTrendingVideos(category: string = 'all') {
  */
 export function useSubscriptionsFeed() {
   const fetchSubscriptionsFeed = useCallback(async (): Promise<Video[]> => {
+    // getSubscribedChannelNames is provided by services/realVideoService.ts
     const channelNames: string[] = await getSubscribedChannelNames();
     if (channelNames.length === 0) {
       return [];

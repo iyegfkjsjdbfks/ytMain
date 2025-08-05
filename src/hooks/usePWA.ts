@@ -119,14 +119,26 @@ export const usePWA = (): UsePWAReturn => {
     }
   }, [notifications.isSupported]);
 
-  // Initialize PWA on mount
+  // Initialize PWA on mount (guard against StrictMode double-invoke)
   useEffect(() => {
-    initializePWA();
-  }, [initializePWA]);
+    let mounted = true;
 
-  // Track PWA usage
+    // Avoid re-initializing if already initialized
+    if (!state.isInitialized) {
+      initializePWA();
+    }
+
+    return () => {
+      mounted = false;
+    };
+    // include state.isInitialized to prevent duplicate init logs
+  }, [initializePWA, state.isInitialized]);
+
+  // Track PWA usage (debounced to reduce noisy duplicates)
   useEffect(() => {
-    if (state.isInitialized) {
+    if (!state.isInitialized) return;
+
+    const timer = setTimeout(() => {
       const usageData = {
         timestamp: Date.now(),
         features: state.features,
@@ -151,7 +163,9 @@ export const usePWA = (): UsePWAReturn => {
           'usePWA',
         );
       }
-    }
+    }, 250); // debounce a bit to avoid StrictMode double logs
+
+    return () => clearTimeout(timer);
   }, [state.isInitialized, state.features]);
 
   // Share content using Web Share API
@@ -294,7 +308,9 @@ export const usePWA = (): UsePWAReturn => {
     if (dismissed) {
       installPrompt.dismissPrompt(false);
     }
-  }, [installPrompt]);
+    // do not re-run unnecessarily
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     // Installation

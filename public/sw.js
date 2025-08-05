@@ -78,23 +78,39 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
-  
+
   // Skip non-GET requests
   if (request.method !== 'GET') {
     return;
   }
-  
+
+  // Helper to safely handle a handler that returns a Response or throws
+  const withResponseGuard = async (promise) => {
+    try {
+      const res = await promise;
+      if (res instanceof Response) {
+        return res;
+      }
+      // If a handler returned something invalid, convert to a proper Response
+      console.error('[SW] Handler returned non-Response. Converting to error Response.', { type: typeof res, url: request.url });
+      return new Response('Invalid handler response', { status: 502, statusText: 'Bad Gateway' });
+    } catch (err) {
+      console.error('[SW] Handler threw error. Returning fallback Response.', err);
+      return new Response('Network error', { status: 503, statusText: 'Service Unavailable' });
+    }
+  };
+
   // Handle different types of requests
   if (isStaticAsset(url)) {
-    event.respondWith(handleStaticAsset(request));
+    event.respondWith(withResponseGuard(handleStaticAsset(request)));
   } else if (isImageRequest(url)) {
-    event.respondWith(handleImageRequest(request));
+    event.respondWith(withResponseGuard(handleImageRequest(request)));
   } else if (isAPIRequest(url)) {
-    event.respondWith(handleAPIRequest(request));
+    event.respondWith(withResponseGuard(handleAPIRequest(request)));
   } else if (isNavigationRequest(request)) {
-    event.respondWith(handleNavigationRequest(request));
+    event.respondWith(withResponseGuard(handleNavigationRequest(request)));
   } else {
-    event.respondWith(handleDynamicRequest(request));
+    event.respondWith(withResponseGuard(handleDynamicRequest(request)));
   }
 });
 
@@ -120,7 +136,11 @@ function isImageRequest(url) {
     url.pathname.endsWith('.webp') ||
     url.pathname.endsWith('.svg') ||
     url.pathname.includes('/thumbnails/') ||
-    url.pathname.includes('/avatars/')
+    url.pathname.includes('/avatars/') ||
+    // treat common placeholder domains as images too
+    url.hostname.includes('placeholder.com') ||
+    url.hostname.includes('placehold.co') ||
+    url.hostname.includes('picsum.photos')
   );
 }
 
@@ -165,22 +185,36 @@ async function handleImageRequest(request) {
   try {
     const cache = await caches.open(IMAGE_CACHE_NAME);
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse && !isExpired(cachedResponse, CACHE_DURATION.IMAGES)) {
       return cachedResponse;
     }
-    
-    const networkResponse = await fetch(request);
-    if (networkResponse.ok) {
+
+    // For cross-origin images, we still try fetch but handle failures gracefully
+    const networkResponse = await fetch(request, { mode: 'no-cors' }).catch(() => null);
+
+    if (networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
+      // Cache opaque responses too for images
       cache.put(request, networkResponse.clone());
+      return networkResponse;
     }
-    return networkResponse;
-  } catch (error) {
-    console.error('[SW] Image fetch failed:', error);
-    // Return placeholder image for offline
+
+    // If fetch failed or not ok, try cache again (maybe stale)
+    const fallbackCache = await cache.match(request);
+    if (fallbackCache) {
+      return fallbackCache;
+    }
+
+    // Return inline placeholder as a valid Response
     return new Response(
       '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="100%" height="100%" fill="#f0f0f0"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#999">Image unavailable</text></svg>',
-      { headers: { 'Content-Type': 'image/svg+xml' } }
+      { headers: { 'Content-Type': 'image/svg+xml' }, status: 200 }
+    );
+  } catch (error) {
+    console.error('[SW] Image fetch failed:', error);
+    return new Response(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="100%" height="100%" fill="#f0f0f0"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#999">Image unavailable</text></svg>',
+      { headers: { 'Content-Type': 'image/svg+xml' }, status: 200 }
     );
   }
 }
@@ -277,17 +311,23 @@ async function handleNavigationRequest(request) {
 async function handleDynamicRequest(request) {
   try {
     const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
+    if (networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
       const cache = await caches.open(DYNAMIC_CACHE_NAME);
       cache.put(request, networkResponse.clone());
+      return networkResponse;
     }
-    
-    return networkResponse;
+    // If response not ok, try cache before returning the network response
+    const cacheStore = await caches.open(DYNAMIC_CACHE_NAME);
+    const cached = await cacheStore.match(request);
+    if (cached) return cached;
+    return networkResponse instanceof Response ? networkResponse : new Response('Network error', { status: 502 });
   } catch (error) {
     console.error('[SW] Dynamic fetch failed:', error);
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
-    return cache.match(request) || new Response('Content not available offline');
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    // Provide a generic offline Response with proper headers
+    return new Response('Content not available offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
   }
 }
 
