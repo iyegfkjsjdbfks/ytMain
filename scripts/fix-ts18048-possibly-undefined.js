@@ -1,90 +1,37 @@
-#!/usr/bin/env node
-/**
- * Fix TS18048: 'X' is possibly 'undefined'
- * Strategy: add optional chaining and null checks
- */
-
-import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
 import { execSync } from 'child_process';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const projectRoot = join(__dirname, '..');
+const projectRoot = process.cwd();
 
 class TS18048Fixer {
-  log(msg) { console.log(`⚠️ ${msg}`); }
+  constructor() {
+    this.fixedFiles = new Set();
+  }
 
-  getErrorCount() {
+  log(message, type = 'info') {
+    const prefix = {
+      info: '⚠️',
+      success: '✅', 
+      error: '❌',
+      warning: '🚧'
+    }[type] || '⚠️';
+    console.log(`${prefix} ${message}`);
+  }
+
+  getCount() {
     try {
       const run = () => {
         try {
           execSync('npm run type-check', { encoding: 'utf8', stdio: 'pipe', cwd: projectRoot });
           return '';
-        }
-
-  async run() {
-    console.log('🔧 Starting TS18048 possibly undefined fixes...');
-    
-    const initialCount = this.getErrorCount();
-    console.log(`Found ${initialCount} TS18048 errors to fix`);
-    
-    if (initialCount === 0) {
-      console.log('✅ No TS18048 errors found!');
-      return;
-    }
-
-    const errors = this.getErrors();
-    const fileGroups = {};
-    
-    // Group errors by file
-    for (const error of errors) {
-      const filePath = error.file;
-      if (!fileGroups[filePath]) {
-        fileGroups[filePath] = [];
-      }
-      fileGroups[filePath].push(error);
-    }
-
-    let filesModified = 0;
-    
-    // Process each file
-    for (const [filePath, fileErrors] of Object.entries(fileGroups)) {
-      try {
-        const modified = this.fixFile(filePath);
-        if (modified) {
-          filesModified++;
-          console.log(`Fixed ${filePath}`);
-        }
-      } catch (error) {
-        console.log(`❌ Error processing ${filePath}: ${error.message}`);
-      }
-    }
-
-    const finalCount = this.getErrorCount();
-    const fixed = initialCount - finalCount;
-    
-    console.log('\n=== TS18048 Fix Results ===');
-    console.log(`Initial errors: ${initialCount}`);
-    console.log(`Final errors: ${finalCount}`);
-    console.log(`Errors fixed: ${fixed}`);
-    console.log(`Files modified: ${filesModified}`);
-    console.log(`Fix rate: ${((fixed / (initialCount || 1)) * 100).toFixed(1)}%`);
-    
-    if (finalCount < initialCount) {
-      console.log('✅ Successfully reduced TS18048 errors!');
-    } else if (finalCount <= initialCount) {
-      console.log('✅ Error count maintained (no increase)');
-    } else {
-      console.log('⚠️ Warning: Error count increased');
-    }
-  } catch (err) {
+        } catch (err) {
           return `${err.stdout || ''}${err.stderr || ''}`;
         }
       };
       const output = run();
       if (!output) return 0;
-      return output.split('\n').filter(l => /error TS18048:/.test(l)).length;
+      return output.split('\n').filter(line => /error TS18048:/.test(line)).length;
     } catch {
       return 0;
     }
@@ -103,103 +50,58 @@ class TS18048Fixer {
       const output = run();
       if (!output) return [];
       
-      return output.split('\n').filter(Boolean).map(line => {
-        const match = line.match(/([^:]+):(\d+):(\d+):\s*error TS18048: '([^']+)' is possibly 'undefined'/);
-        if (match) {
-          return {
-            file: match[1],
-            line: parseInt(match[2]),
-            column: parseInt(match[3]),
-            variable: match[4]
-          };
-        }
-        return null;
-      }).filter(Boolean);
+      return output.split('\n')
+        .filter(line => /error TS18048:/.test(line))
+        .map(line => {
+          const match = line.match(/^(.+?)\((\d+),(\d+)\):\s*error TS18048:\s*(.+)$/);
+          if (match) {
+            return {
+              filePath: match[1].replace(projectRoot + '/', '').replace(projectRoot + '\\', ''),
+              line: parseInt(match[2]),
+              column: parseInt(match[3]),
+              message: match[4]
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
     } catch {
       return [];
     }
   }
 
-  fixFile(filePath) {
-    const fullPath = join(projectRoot, filePath);
-    
+  fixPossiblyUndefined(filePath, line, column, message) {
     try {
+      const fullPath = join(projectRoot, filePath);
       let content = readFileSync(fullPath, 'utf8');
+      const lines = content.split('\n');
       let modified = false;
-      
-      // Common patterns to fix
-      const patterns = [
-        // Direct property access -> optional chaining
-        {
-          from: /([a-zA-Z_$][a-zA-Z0-9_$]*)\.(length|map|filter|join|push|slice|indexOf)/g,
-          to: '$1?.$2'
-        },
-        // Array access -> safe access with check
-        {
-          from: /([a-zA-Z_$][a-zA-Z0-9_$]*)\[([^\]]+)\]/g,
-          to: '$1?.[$2]'
-        },
-        // Function calls -> safe calls
-        {
-          from: /([a-zA-Z_$][a-zA-Z0-9_$]*)\.(sort|reverse|reduce|forEach|find|some|every|includes)\(/g,
-          to: '$1?.$2('
-        }
-      ];
 
-      // Apply patterns
-      for (const pattern of patterns) {
-        const newContent = content.replace(pattern.from, pattern.to);
-        if (newContent !== content) {
-          content = newContent;
-          modified = true;
-        }
-      }
-
-      // Handle specific cases found in the codebase
-      const specificFixes = {
-        // video.tags access
-        'video.tags': 'video.tags || []',
-        'video.tags.length': '(video.tags || []).length',
-        'video.tags.join': '(video.tags || []).join',
-        'video.tags.includes': '(video.tags || []).includes',
+      if (line <= lines.length) {
+        const targetLine = lines[line - 1];
         
-        // Common undefined property access
-        'user.preferences': 'user?.preferences',
-        'config.options': 'config?.options',
-        'data.items': 'data?.items',
-        'response.data': 'response?.data'
-      };
-
-      for (const [from, to] of Object.entries(specificFixes)) {
-        if (content.includes(from) && !content.includes(to)) {
-          content = content.replace(new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), to);
-          modified = true;
-        }
-      }
-
-      // Add null checks for array operations
-      const arrayChecks = [
-        {
-          pattern: /if\s*\(\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\.(length|map|filter)\s*\)/g,
-          replacement: 'if ($1 && $1.$2)'
-        },
-        {
-          pattern: /return\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\.(map|filter|sort|slice)\(/g,
-          replacement: 'return $1?.$2('
-        }
-      ];
-
-      for (const check of arrayChecks) {
-        const newContent = content.replace(check.pattern, check.replacement);
-        if (newContent !== content) {
-          content = newContent;
-          modified = true;
+        // Common patterns for possibly undefined fixes
+        if (message.includes('possibly \'undefined\'')) {
+          // Add optional chaining or null check
+          if (targetLine.includes('.') && !targetLine.includes('?.')) {
+            lines[line - 1] = targetLine.replace(/(\w+)\.(\w+)/g, '$1?.$2');
+            modified = true;
+          }
+          // Add null check for function calls
+          else if (targetLine.includes('(') && !targetLine.includes('&&')) {
+            const varMatch = targetLine.match(/(\w+)\s*\(/);
+            if (varMatch) {
+              lines[line - 1] = targetLine.replace(varMatch[0], `${varMatch[1]} && ${varMatch[0]}`);
+              modified = true;
+            }
+          }
         }
       }
 
       if (modified) {
-        writeFileSync(fullPath, content);
+        writeFileSync(fullPath, lines.join('\n'));
         this.log(`Added safety checks to ${filePath}`, 'success');
+        this.fixedFiles.add(filePath);
         return true;
       }
 
@@ -210,12 +112,47 @@ class TS18048Fixer {
     }
   }
 
+  run() {
+    const initialCount = this.getCount();
+    this.log(`Found ${initialCount} TS18048 possibly undefined errors`);
+    
+    if (initialCount === 0) {
+      this.log('No TS18048 errors to fix');
+      return;
+    }
 
+    const errors = this.getErrors();
+    let filesModified = 0;
+
+    for (const error of errors) {
+      if (this.fixPossiblyUndefined(error.filePath, error.line, error.column, error.message)) {
+        filesModified++;
+      }
+    }
+
+    const finalCount = this.getCount();
+    const improvement = initialCount - finalCount;
+
+    this.log(`\n=== TS18048 Fix Results ===`);
+    this.log(`Initial errors: ${initialCount}`);
+    this.log(`Final errors: ${finalCount}`);
+    this.log(`Errors fixed: ${improvement}`);
+    this.log(`Files modified: ${filesModified}`);
+    this.log(`Fix rate: ${((improvement / initialCount) * 100).toFixed(1)}%`);
+
+    if (improvement > 0) {
+      this.log('TS18048 errors successfully reduced!', 'success');
+    } else if (finalCount <= initialCount) {
+      this.log('Error count maintained (no increase)', 'success');
+    } else {
+      this.log('Warning: Error count increased', 'warning');
+    }
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const fixer = new TS18048Fixer();
-  fixer.run().catch(console.error);
+  fixer.run();
 }
 
 export { TS18048Fixer };
