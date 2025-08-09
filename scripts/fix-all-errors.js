@@ -40,15 +40,22 @@ class MasterErrorFixer {
 
   async getTotalErrorCount() {
     try {
-      // Run type-check. If there are errors, npm exits non-zero and throws.
+      // Run type-check with timeout to prevent hanging
       execSync('npm run type-check', {
         encoding: 'utf8',
         stdio: 'pipe',
-        cwd: projectRoot
+        cwd: projectRoot,
+        timeout: 60000 // 60 second timeout
       });
       // No errors
       return 0;
     } catch (error) {
+      // Handle timeout specifically
+      if (error.signal === 'SIGTERM') {
+        this.log('Type check timed out after 60 seconds', 'warning');
+        return -1; // Indicate timeout
+      }
+      
       const out = `${error.stdout || ''}${error.stderr || ''}`;
       if (!out) return 0;
       const errorLines = out.split('\n').filter(line => /error TS\d+:/.test(line));
@@ -329,16 +336,7 @@ class MasterErrorFixer {
 }
 
 // Execute if run directly (cross-platform ESM detection)
-try {
-  const invoked = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';
-  if (import.meta.url === invoked) {
-    const fixer = new MasterErrorFixer();
-    fixer.run().catch(err => {
-      console.error('MasterErrorFixer failed:', err);
-      process.exitCode = 1;
-    });
-  }
-} catch (e) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const fixer = new MasterErrorFixer();
   fixer.run().catch(err => {
     console.error('MasterErrorFixer failed:', err);
