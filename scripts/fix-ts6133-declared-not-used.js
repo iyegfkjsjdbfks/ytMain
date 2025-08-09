@@ -44,7 +44,13 @@ class TS6133Fixer {
       return output.split('\n').filter(l => /error TS6133:/.test(l)).map(line => {
         // Extract just the file path, removing line/column info
         const match = line.match(/^([^(]+)\(\d+,\d+\):/);
-        return match ? match[1] : line.split(':')[0];
+        if (match) {
+          // Convert absolute path to relative from project root
+          const fullPath = match[1].trim();
+          return fullPath.replace(projectRoot + '/', '').replace(projectRoot + '\\', '');
+        }
+        // Fallback for other formats
+        return line.split(':')[0].replace(projectRoot + '/', '').replace(projectRoot + '\\', '');
       });
     } catch { return []; }
   }
