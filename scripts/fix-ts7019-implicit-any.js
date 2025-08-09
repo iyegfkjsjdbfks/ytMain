@@ -267,49 +267,7 @@ class TS7019Fixer {
     return 'any[]';
   }
 
-  run() {
-    const initialCount = this.getErrorCount();
-    this.log(`Found ${initialCount} TS7019 implicit any type errors`);
 
-    if (initialCount === 0) {
-      this.log('No TS7019 errors found!', 'success');
-      return;
-    }
-
-    const errors = this.getErrors();
-    
-    // Group errors by file
-    const errorsByFile = {};
-    for (const error of errors) {
-      if (!errorsByFile[error.file]) {
-        errorsByFile[error.file] = [];
-      }
-      errorsByFile[error.file].push(error);
-    }
-
-    // Fix each file
-    for (const [filePath, fileErrors] of Object.entries(errorsByFile)) {
-      this.fixFile(filePath, fileErrors);
-    }
-
-    const finalCount = this.getErrorCount();
-    const improvement = initialCount - finalCount;
-
-    this.log(`\n=== TS7019 Fix Results ===`);
-    this.log(`Initial errors: ${initialCount}`);
-    this.log(`Final errors: ${finalCount}`);
-    this.log(`Errors fixed: ${improvement}`);
-    this.log(`Files modified: ${this.fixedFiles.size}`);
-    this.log(`Fix rate: ${((improvement / initialCount) * 100).toFixed(1)}%`);
-
-    if (improvement > 0) {
-      this.log('TS7019 errors successfully reduced!', 'success');
-    } else if (finalCount <= initialCount) {
-      this.log('Error count maintained (no increase)', 'success');
-    } else {
-      this.log('Warning: Error count increased', 'warning');
-    }
-  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
