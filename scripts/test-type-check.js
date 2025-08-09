@@ -11,7 +11,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(__dirname, '..');
 
 console.log('Testing type-check command...');
-console.log('Project root:', projectRoot);
+console.log('Project root:', process.cwd());
+
+const start = Date.now();
 
 try {
   console.log('Running npm run type-check with 30 second timeout...');
@@ -29,7 +31,6 @@ try {
   console.log('No TypeScript errors found!');
   
 } catch (error) {
-  const start = Date.now();
   const duration = Date.now() - start;
   
   if (error.signal === 'SIGTERM') {
