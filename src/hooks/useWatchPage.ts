@@ -3,8 +3,6 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useState, useEffect, useCallback } from 'react';
 
-// import { getVideos, getVideoById, getCommentsByVideoId } // from '../services/realVideoService' // Service not found; // Service not found
-
 import { unifiedDataService } from '../services/unifiedDataService';
 import type { Video, Channel, VideoVisibility } from '../types/core';
 
@@ -652,3 +650,4 @@ return;
 };
 
 export default useWatchPage;
+import { getVideoById, getCommentsByVideoId, getVideos } from '../../services/realVideoService';
