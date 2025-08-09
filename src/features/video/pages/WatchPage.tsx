@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link, useSearchParams } from 'react-router-dom';
-import { queryClient } from '../../../../hooks/useQueryClient';
+import { queryClient } from '@/hooks/useQueryClient';
 
 import { useState, useEffect } from 'react';
 
