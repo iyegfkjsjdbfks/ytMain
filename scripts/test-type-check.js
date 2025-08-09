@@ -29,6 +29,7 @@ try {
   console.log('No TypeScript errors found!');
   
 } catch (error) {
+  const start = Date.now();
   const duration = Date.now() - start;
   
   if (error.signal === 'SIGTERM') {
