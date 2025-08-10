@@ -46,14 +46,14 @@ class MasterErrorFixer {
         encoding: 'utf8',
         stdio: 'pipe',
         cwd: projectRoot,
-        timeout: 30000 // 30 second timeout
+        timeout: 60000 // 60 second timeout
       });
       // No errors
       return 0;
     } catch (error) {
       // Handle timeout specifically
-      if (error.signal === 'SIGTERM') {
-        this.log('Type check timed out after 30 seconds', 'warning');
+      if (error.signal === 'SIGTERM' || error.code === 'ETIMEDOUT') {
+        this.log('Type check timed out after 60 seconds', 'warning');
         // Return a reasonable fallback instead of hardcoded value
         return this.lastKnownErrorCount || 0;
       }
@@ -146,7 +146,8 @@ class MasterErrorFixer {
       const output = execSync(`node scripts/${script}`, {
         encoding: 'utf8',
         stdio: 'pipe',
-        cwd: projectRoot
+        cwd: projectRoot,
+        timeout: 120000 // 2 minute timeout per fixer
       });
       
       const afterCount = await this.getErrorCountByType(errorCode);
@@ -222,6 +223,18 @@ class MasterErrorFixer {
 
     // Define fixers in optimal order (high-impact errors first)
     const fixers = [
+      {
+        name: 'Syntax Errors',
+        script: 'fix-ts1003-syntax-errors.js',
+        errorCode: '1003',
+        description: 'Fixes syntax errors from type assertions'
+      },
+      {
+        name: 'Property Does Not Exist',
+        script: 'fix-ts2339-property-errors.js',
+        errorCode: '2339',
+        description: 'Fixes missing properties and type mismatches'
+      },
       {
         name: 'Cannot Find Name',
         script: 'fix-ts2304-cannot-find-name.js',

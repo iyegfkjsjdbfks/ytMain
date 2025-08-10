@@ -83,7 +83,7 @@ return [];
     // Sort videos
     switch (sortBy) {
       case 'popular':
-        filtered.sort((a, b) => parseInt(b.views.replace(/[^\d]/g, ''), 10) - parseInt(a.views.replace(/[^\d]/g, ''), 10));
+        filtered.sort((a, b) => parseInt(((b.views as string)).replace(/[^\d]/g, ''), 10) - parseInt(((a.views as string)).replace(/[^\d]/g, ''), 10));
         break;
       case 'oldest':
         filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());

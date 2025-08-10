@@ -1,0 +1,936 @@
+
+> youtubex-studio-clone@2.0.0 type-check
+> tsc --noEmit
+
+components/SubscriptionFeed.tsx(53,31): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+components/SubscriptionVideoCard.tsx(37,57): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | boolean'.
+  Type 'undefined' is not assignable to type 'string | number | boolean'.
+components/SubscriptionVideoCard.tsx(38,44): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/TrendingSection.tsx(38,25): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+components/VideoCard.tsx(27,57): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | boolean'.
+  Type 'undefined' is not assignable to type 'string | number | boolean'.
+components/VideoCard.tsx(28,44): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/VideoDescription.tsx(29,3): error TS2339: Property 'summary' does not exist on type 'VideoDescriptionProps'.
+components/VideoDescription.tsx(30,3): error TS2339: Property 'summaryError' does not exist on type 'VideoDescriptionProps'.
+components/VideoDescription.tsx(32,3): error TS2339: Property 'canSummarize' does not exist on type 'VideoDescriptionProps'.
+components/VideoDescription.tsx(35,3): error TS2339: Property 'onSummarizeDescription' does not exist on type 'VideoDescriptionProps'.
+components/VideoDescription.tsx(37,64): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | boolean'.
+  Type 'undefined' is not assignable to type 'string | number | boolean'.
+components/VideoDescription.tsx(57,25): error TS2339: Property 'isVerified' does not exist on type 'Channel'.
+components/VideoDescription.tsx(62,91): error TS2339: Property 'replace' does not exist on type 'number'.
+components/VideoDescription.tsx(68,13): error TS2322: Type '((channelId: string) => void) | undefined' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.
+  Type '(channelId: string) => void' is not assignable to type 'MouseEventHandler<HTMLButtonElement>'.
+    Types of parameters 'channelId' and 'event' are incompatible.
+      Type 'MouseEvent<HTMLButtonElement, MouseEvent>' is not assignable to type 'string'.
+components/VideoDescription.tsx(100,1): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+components/VideoDescription.tsx(108,87): error TS2339: Property 'includes' does not exist on type 'never'.
+components/VideoDescription.tsx(108,115): error TS2339: Property 'split' does not exist on type 'never'.
+components/VideoDescription.tsx(116,9): error TS18048: 'video.description' is possibly 'undefined'.
+components/VideoDescription.tsx(116,43): error TS18048: 'video.description' is possibly 'undefined'.
+components/VideoDescription.tsx(123,1): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+components/VideoMetadata.tsx(59,30): error TS2339: Property 'definition' does not exist on type 'Video'.
+components/VideoMetadata.tsx(59,50): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(72,55): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+components/VideoMetadata.tsx(78,48): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?
+components/VideoMetadata.tsx(84,33): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+components/VideoMetadata.tsx(84,55): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoMetadata.tsx(99,25): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/VideoMetadata.tsx(112,24): error TS2339: Property 'definition' does not exist on type 'Video'.
+components/VideoMetadata.tsx(112,44): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(117,20): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(118,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(123,20): error TS2339: Property 'privacyStatus' does not exist on type 'Video'.
+components/VideoMetadata.tsx(123,43): error TS2339: Property 'visibility' does not exist on type 'Video'.
+components/VideoMetadata.tsx(129,20): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(130,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(135,20): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(136,24): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(141,51): error TS2339: Property 'isShort' does not exist on type 'Video'.
+components/VideoMetadata.tsx(146,34): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(146,69): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(146,107): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(225,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(229,41): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(233,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(237,41): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(241,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(245,41): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(249,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(253,52): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(262,18): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(271,28): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(277,28): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(283,28): error TS2339: Property 'contentDetails' does not exist on type 'Video'.
+components/VideoMetadata.tsx(286,24): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(290,30): error TS2339: Property 'metadata' does not exist on type 'Video'.
+components/VideoMetadata.tsx(299,18): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoMetadata.tsx(308,41): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoMetadata.tsx(314,41): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoMetadata.tsx(320,41): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoMetadata.tsx(326,41): error TS2339: Property 'statistics' does not exist on type 'Video'.
+components/VideoPlaybackDetails.tsx(65,23): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/VideoPlaybackDetails.tsx(87,81): error TS2339: Property 'replace' does not exist on type 'never'.
+components/VideoPlaybackDetails.tsx(112,11): error TS2322: Type '{ summary?: string; summaryError?: string; video: Video; channel: Channel; isSubscribed: boolean; showFullDescription: boolean; isSummarizing: boolean; canSummarize: boolean; onSubscribe: () => void; onToggleDescription: () => void; onSummarizeDescription: () => void; }' is not assignable to type 'IntrinsicAttributes & VideoDescriptionProps'.
+  Property 'canSummarize' does not exist on type 'IntrinsicAttributes & VideoDescriptionProps'.
+components/WatchHistory.tsx(40,26): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+contexts/UnifiedAppContext.tsx(171,9): error TS2353: Object literal may only specify known properties, and 'username' does not exist in type 'User'.
+pages/ChannelPage.tsx(90,22): error TS2345: Argument of type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is not assignable to parameter of type 'SetStateAction<Channel | null>'.
+  Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+pages/CommentModerationPage.tsx(79,17): error TS2339: Property 'commentText' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(80,17): error TS2339: Property 'userName' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(89,29): error TS2339: Property 'timestamp' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(89,63): error TS2339: Property 'timestamp' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(91,29): error TS2339: Property 'timestamp' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(91,63): error TS2339: Property 'timestamp' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(93,20): error TS2339: Property 'likes' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(93,30): error TS2339: Property 'likes' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(95,21): error TS2339: Property 'replyCount' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(95,43): error TS2339: Property 'replyCount' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(350,34): error TS2339: Property 'userAvatarUrl' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(351,34): error TS2339: Property 'userName' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(357,34): error TS2339: Property 'userName' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(361,52): error TS2339: Property 'timestamp' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(365,32): error TS2339: Property 'commentText' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(369,38): error TS2339: Property 'likes' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(370,32): error TS2339: Property 'replyCount' does not exist on type 'CommentWithVideo'.
+pages/CommentModerationPage.tsx(370,61): error TS2339: Property 'replyCount' does not exist on type 'CommentWithVideo'.
+pages/HistoryPage.tsx(21,19): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/HomePage.tsx(93,33): error TS2345: Argument of type '(video: Video) => JSX.Element' is not assignable to parameter of type '(value: Video, index: number, array: Video[]) => Element'.
+  Types of parameters 'video' and 'value' are incompatible.
+    Type 'Video' is missing the following properties from type 'Video': thumbnail, views, channelTitle
+pages/LibraryPage.tsx(109,63): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/LibraryPage.tsx(112,64): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/LibraryPage.tsx(121,54): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/LikedVideosPage.tsx(22,19): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/OptimizedHomePage.tsx(216,19): error TS2322: Type 'import("C:/Users/hp/Documents/GitHub/YT/ytMain/src/types/video").Video[]' is not assignable to type 'import("C:/Users/hp/Documents/GitHub/YT/ytMain/src/types/core").Video[]'.
+  Type 'Video' is missing the following properties from type 'Video': thumbnail, views, channelTitle
+pages/RefactoredContentManagerPage.tsx(236,33): error TS2339: Property 'visibility' does not exist on type 'Video'.
+pages/RefactoredTrendingPage.tsx(5,10): error TS2724: '"../hooks"' has no exported member named 'useVideosData'. Did you mean 'useVideos'?
+pages/RefactoredTrendingPage.tsx(23,61): error TS7006: Parameter 'video' implicitly has an 'any' type.
+pages/ShortsPage.tsx(88,11): error TS2322: Type 'number' is not assignable to type 'string'.
+pages/ShortsPage.tsx(95,35): error TS2339: Property 'views' does not exist on type 'Video'.
+pages/ShortsPage.tsx(95,71): error TS2339: Property 'views' does not exist on type 'Video'.
+pages/ShortsPage.tsx(95,113): error TS2339: Property 'views' does not exist on type 'Video'.
+pages/ShortsPage.tsx(97,28): error TS2339: Property 'likes' does not exist on type 'Video'.
+pages/ShortsPage.tsx(106,9): error TS18048: 'short.category' is possibly 'undefined'.
+pages/ShortsPage.tsx(115,9): error TS18048: 'short.channelName' is possibly 'undefined'.
+pages/ShortsPage.tsx(116,9): error TS18048: 'short.description' is possibly 'undefined'.
+pages/ShortsPage.tsx(698,48): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+pages/SubscriptionsPage.tsx(86,50): error TS2339: Property 'replace' does not exist on type 'number'.
+pages/SubscriptionsPage.tsx(86,96): error TS2339: Property 'replace' does not exist on type 'number'.
+pages/SubscriptionsPage.tsx(89,42): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+pages/SubscriptionsPage.tsx(89,77): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+pages/SubscriptionsPage.tsx(93,42): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+pages/SubscriptionsPage.tsx(93,77): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+pages/UserPage.tsx(33,23): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+pages/WatchPage.tsx(221,31): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+pages/WatchPage.tsx(264,85): error TS2339: Property 'replace' does not exist on type 'never'.
+pages/WatchPage.tsx(283,15): error TS2322: Type 'Channel | null' is not assignable to type 'Channel'.
+  Type 'null' is not assignable to type 'Channel'.
+pages/WatchPage.tsx(347,9): error TS2322: Type '{ id: string; title: string; description: string; videoCount: number; totalDuration: string; visibility: "private"; ownerId: string; ownerName: string; videos: never[]; tags: never[]; thumbnailUrl: string; createdAt: string; updatedAt: string; }[]' is not assignable to type 'Playlist[]'.
+  Type '{ id: string; title: string; description: string; videoCount: number; totalDuration: string; visibility: "private"; ownerId: string; ownerName: string; videos: never[]; tags: never[]; thumbnailUrl: string; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Playlist': thumbnail, channelId, channelTitle
+pages/WatchPage.tsx(349,9): error TS2322: Type '(name: string, description?: string) => Promise<{ id: string; title: string; description: string; videoCount: number; totalDuration: string; visibility: "private"; ownerId: string; ownerName: string; ... 4 more ...; updatedAt: string; }>' is not assignable to type '(name: string, description?: string | undefined) => Promise<Playlist>'.
+  Type 'Promise<{ id: string; title: string; description: string; videoCount: number; totalDuration: string; visibility: "private"; ownerId: string; ownerName: string; videos: never[]; tags: never[]; thumbnailUrl: string; createdAt: string; updatedAt: string; }>' is not assignable to type 'Promise<Playlist>'.
+    Type '{ id: string; title: string; description: string; videoCount: number; totalDuration: string; visibility: "private"; ownerId: string; ownerName: string; videos: never[]; tags: never[]; thumbnailUrl: string; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Playlist': thumbnail, channelId, channelTitle
+services/api.ts(223,11): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+services/api.ts(291,9): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; ... 7 more ...; updatedAt: string; } | null' is not assignable to type 'Video | null'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+services/api.ts(320,9): error TS2353: Object literal may only specify known properties, and 'createdAt' does not exist in type 'Video'.
+services/api.ts(355,11): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+services/api.ts(434,5): error TS2322: Type 'string' is not assignable to type 'number'.
+services/api.ts(478,9): error TS2322: Type 'string' is not assignable to type 'number'.
+services/youtubeSearchService.ts(336,7): error TS2322: Type 'string' is not assignable to type 'number'.
+services/youtubeSearchService.ts(512,31): error TS18048: 'video.videoUrl' is possibly 'undefined'.
+src/components/EnhancedPWAInstallBanner.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ErrorBoundaries/DataFetchErrorBoundary.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ErrorBoundaries/index.tsx(1,1): error TS6192: All imports in import declaration are unused.
+src/components/ErrorBoundaries/index.tsx(2,1): error TS6192: All imports in import declaration are unused.
+src/components/ErrorBoundaries/index.tsx(3,1): error TS6192: All imports in import declaration are unused.
+src/components/ErrorBoundaries/LiveStreamErrorBoundary.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ErrorBoundaries/VideoErrorBoundary.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ErrorBoundary/ErrorBoundary.tsx(28,3): error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'Component<ErrorBoundaryProps, ErrorBoundaryState, any>'.
+src/components/ErrorBoundary/ErrorBoundary.tsx(44,19): error TS2345: Argument of type '{ hasError: false; error: undefined; errorInfo: undefined; }' is not assignable to parameter of type 'ErrorBoundaryState | ((prevState: Readonly<ErrorBoundaryState>, props: Readonly<ErrorBoundaryProps>) => ErrorBoundaryState | ... 1 more ... | null) | Pick<...> | null'.
+  Type '{ hasError: false; error: undefined; errorInfo: undefined; }' is not assignable to type 'Pick<ErrorBoundaryState, "error" | "hasError" | "errorInfo">' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Types of property 'error' are incompatible.
+      Type 'undefined' is not assignable to type 'Error'.
+src/components/ErrorBoundary/ErrorBoundary.tsx(47,3): error TS4114: This member must have an 'override' modifier because it overrides a member in the base class 'Component<ErrorBoundaryProps, ErrorBoundaryState, any>'.
+src/components/ErrorBoundary/ErrorBoundary.tsx(51,17): error TS2375: Type '{ error: Error | undefined; resetError: () => void; }' is not assignable to type '{ error?: Error; resetError: () => void; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'error' are incompatible.
+    Type 'Error | undefined' is not assignable to type 'Error'.
+      Type 'undefined' is not assignable to type 'Error'.
+src/components/examples/YouTubePlayerExample.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/mobile/MobileVideoGrid.tsx(82,26): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/mobile/MobileVideoGrid.tsx(83,26): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/mobile/MobileVideoGrid.tsx(92,24): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/mobile/MobileVideoGrid.tsx(93,24): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/ModularPWAInstallBanner.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/molecules/VideoCard/index.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/molecules/VideoCard/VideoCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/OfflineIndicator.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/optimized/LazyVideoPlayer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/optimized/LazyVideoPlayer.tsx(58,10): error TS2375: Type '{ className: string; onEnded?: () => void; onPause?: () => void; onPlay?: () => void; onReady?: () => void; videoId: string; src: string | undefined; poster: string | undefined; title: string; autoplay: boolean; }' is not assignable to type 'VideoPlayerProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'src' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/components/optimized/OptimizedSearchResults.tsx(91,26): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/optimized/OptimizedSearchResults.tsx(92,26): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/optimized/OptimizedSearchResults.tsx(96,22): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/optimized/OptimizedSearchResults.tsx(98,20): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/optimized/OptimizedVideoGrid.tsx(61,20): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/components/optimized/VirtualizedCommentList.tsx(61,48): error TS2551: Property 'authorAvatarUrl' does not exist on type 'Comment'. Did you mean 'authorAvatar'?
+src/components/optimized/VirtualizedCommentList.tsx(75,22): error TS2339: Property 'content' does not exist on type 'Comment'.
+src/components/organisms/VideoGrid/index.ts(2,10): error TS2305: Module '"./VideoGrid"' has no exported member 'default'.
+src/components/organisms/VideoGrid/index.ts(3,10): error TS2305: Module '"./VideoGrid"' has no exported member 'default'.
+src/components/organisms/VideoGrid/index.ts(7,32): error TS2307: Cannot find module '../../types/core' or its corresponding type declarations.
+src/components/organisms/VideoGrid/VideoGrid.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/PWAInstallBanner.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/PWAUpdateNotification.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/unified/UnifiedButton.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/components/unified/UnifiedButton.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/components/unified/UnifiedVideoCard.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/components/unified/UnifiedVideoCard.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/components/unified/UnifiedVideoCard.tsx(133,53): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | boolean'.
+  Type 'undefined' is not assignable to type 'string | number | boolean'.
+src/components/unified/UnifiedVideoCard.tsx(156,22): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/components/unified/UnifiedVideoCard.tsx(292,41): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | Date'.
+  Type 'undefined' is not assignable to type 'string | Date'.
+src/config/pwa.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/debug/GoogleSearchStoreDebug.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/debug/GoogleSearchStoreDebug.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/debug/GoogleSearchStoreDebug.tsx(3,8): error TS2300: Duplicate identifier 'React'.
+src/debug/GoogleSearchStoreDebug.tsx(5,8): error TS2300: Duplicate identifier 'React'.
+src/debug/GoogleSearchStoreDebug.tsx(7,8): error TS2300: Duplicate identifier 'React'.
+src/debug/TestMetadataFetch.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/debug/TestMetadataFetch.tsx(3,8): error TS2300: Duplicate identifier 'React'.
+src/debug/TestMetadataFetch.tsx(5,8): error TS2300: Duplicate identifier 'React'.
+src/debug/TestMetadataFetch.tsx(7,8): error TS2300: Duplicate identifier 'React'.
+src/debug/TestMetadataFetch.tsx(9,8): error TS2300: Duplicate identifier 'React'.
+src/features/analytics/components/AdvancedAnalyticsDashboard.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/analytics/components/AdvancedAnalyticsDashboard.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/auth/components/LoginForm.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/auth/components/LoginForm.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/features/auth/components/RegisterForm.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/auth/components/RegisterForm.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/features/auth/pages/LoginPage.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/auth/pages/LoginPage.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/auth/pages/RegisterPage.tsx(1,13): error TS2300: Duplicate identifier 'React'.
+src/features/auth/pages/RegisterPage.tsx(2,8): error TS2300: Duplicate identifier 'React'.
+src/features/auth/services/authService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/auth/store/authStore.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/channel/pages/ChannelPage.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/channel/pages/ChannelPage.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/channel/pages/UserPage.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/channel/pages/UserPage.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/comments/components/CommentSection.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/comments/components/CommentSection.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/comments/components/CommentSection.tsx(99,51): error TS2339: Property 'createdAt' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(101,20): error TS2339: Property 'isPinned' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(108,20): error TS2339: Property 'content' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(120,24): error TS2339: Property 'likes' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(121,64): error TS2339: Property 'likes' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(146,25): error TS2339: Property 'isHearted' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(149,24): error TS2339: Property 'isHearted' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(177,30): error TS2339: Property 'isPinned' does not exist on type 'Comment'.
+src/features/comments/components/CommentSection.tsx(350,24): error TS2339: Property 'length' does not exist on type '{}'.
+src/features/comments/components/CommentSection.tsx(441,32): error TS2339: Property 'length' does not exist on type '{}'.
+src/features/comments/components/CommentSection.tsx(443,21): error TS2339: Property 'map' does not exist on type '{}'.
+src/features/comments/hooks/useComments.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/comments/hooks/useComments.ts(160,28): error TS2339: Property 'videoId' does not exist on type 'Comment'.
+src/features/comments/hooks/useComments.ts(161,66): error TS2339: Property 'videoId' does not exist on type 'Comment'.
+src/features/comments/hooks/useComments.ts(163,28): error TS2339: Property 'parentId' does not exist on type 'Comment'.
+src/features/comments/hooks/useComments.ts(164,68): error TS2339: Property 'parentId' does not exist on type 'Comment'.
+src/features/comments/services/commentService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/comments/services/commentService.ts(3,24): error TS2305: Module '"../../../types/core"' has no exported member 'ApiResponse'.
+src/features/common/components/ErrorBoundary.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/common/components/Footer.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Footer.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Header.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Header.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Layout.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Layout.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Sidebar.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/Sidebar.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/StudioLayout.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/StudioLayout.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/StudioSidebar.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/common/components/StudioSidebar.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/common/index.ts(19,15): error TS2724: '"./components/ErrorBoundary"' has no exported member named 'ErrorBoundaryProps'. Did you mean 'ErrorBoundary'?
+src/features/common/index.ts(20,15): error TS2614: Module '"./components/Layout"' has no exported member 'LayoutProps'. Did you mean to use 'import LayoutProps from "./components/Layout"' instead?
+src/features/common/index.ts(21,15): error TS2614: Module '"./components/Header"' has no exported member 'HeaderProps'. Did you mean to use 'import HeaderProps from "./components/Header"' instead?
+src/features/common/index.ts(22,15): error TS2614: Module '"./components/Footer"' has no exported member 'FooterProps'. Did you mean to use 'import FooterProps from "./components/Footer"' instead?
+src/features/common/index.ts(23,15): error TS2614: Module '"./components/Sidebar"' has no exported member 'SidebarProps'. Did you mean to use 'import SidebarProps from "./components/Sidebar"' instead?
+src/features/community/components/CommunityPost.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/community/components/CommunityPost.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/creator/pages/DashboardPage.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/creator/pages/DashboardPage.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/index.ts(13,15): error TS2307: Cannot find module './playlist' or its corresponding type declarations.
+src/features/index.ts(16,15): error TS2307: Cannot find module './channel' or its corresponding type declarations.
+src/features/index.ts(19,15): error TS2307: Cannot find module './comments' or its corresponding type declarations.
+src/features/index.ts(22,15): error TS2307: Cannot find module './search' or its corresponding type declarations.
+src/features/index.ts(25,15): error TS2307: Cannot find module './analytics' or its corresponding type declarations.
+src/features/index.ts(28,15): error TS2307: Cannot find module './livestream' or its corresponding type declarations.
+src/features/index.ts(31,15): error TS2307: Cannot find module './creator' or its corresponding type declarations.
+src/features/index.ts(34,15): error TS2307: Cannot find module './community' or its corresponding type declarations.
+src/features/index.ts(37,15): error TS2307: Cannot find module './moderation' or its corresponding type declarations.
+src/features/index.ts(40,15): error TS2307: Cannot find module './notifications' or its corresponding type declarations.
+src/features/livestream/components/ComprehensiveLiveStudio.tsx(27,11): error TS2339: Property 'createStream' does not exist on type '{ startStream: () => Promise<void>; stopStream: () => Promise<void>; isLive: boolean; viewerCount: number; chatMessages: any[]; streamQuality: string; error: string | null; }'.
+src/features/livestream/components/ComprehensiveLiveStudio.tsx(27,38): error TS2339: Property 'endStream' does not exist on type '{ startStream: () => Promise<void>; stopStream: () => Promise<void>; isLive: boolean; viewerCount: number; chatMessages: any[]; streamQuality: string; error: string | null; }'.
+src/features/livestream/components/ComprehensiveLiveStudio.tsx(601,17): error TS2322: Type '{ isStreaming: boolean; }' is not assignable to type 'IntrinsicAttributes & MultiplatformStreamingProps'.
+  Property 'isStreaming' does not exist on type 'IntrinsicAttributes & MultiplatformStreamingProps'.
+src/features/livestream/components/index.ts(20,15): error TS2724: '"./LiveStreamViewer"' has no exported member named 'LiveStreamViewerProps'. Did you mean 'LiveStreamViewer'?
+src/features/livestream/components/index.ts(21,15): error TS2724: '"./LiveStreamStudio"' has no exported member named 'LiveStreamStudioProps'. Did you mean 'LiveStreamStudio'?
+src/features/livestream/components/index.ts(22,15): error TS2614: Module '"./StreamAnalyticsDashboard"' has no exported member 'StreamAnalyticsDashboardProps'. Did you mean to use 'import StreamAnalyticsDashboardProps from "./StreamAnalyticsDashboard"' instead?
+src/features/livestream/components/index.ts(23,15): error TS2614: Module '"./StreamManagementDashboard"' has no exported member 'StreamManagementDashboardProps'. Did you mean to use 'import StreamManagementDashboardProps from "./StreamManagementDashboard"' instead?
+src/features/livestream/components/index.ts(24,15): error TS2724: '"./MultiplatformStreaming"' has no exported member named 'MultiplatformStreamingProps'. Did you mean 'MultiplatformStreaming'?
+src/features/livestream/components/index.ts(25,15): error TS2724: '"./StreamSettings"' has no exported member named 'StreamSettingsProps'. Did you mean 'StreamSettings'?
+src/features/livestream/components/index.ts(26,15): error TS2614: Module '"./StreamScheduler"' has no exported member 'StreamSchedulerProps'. Did you mean to use 'import StreamSchedulerProps from "./StreamScheduler"' instead?
+src/features/livestream/components/index.ts(27,15): error TS2614: Module '"./AdvancedLiveChat"' has no exported member 'AdvancedLiveChatProps'. Did you mean to use 'import AdvancedLiveChatProps from "./AdvancedLiveChat"' instead?
+src/features/livestream/components/index.ts(28,15): error TS2614: Module '"./LivePolls"' has no exported member 'LivePollsProps'. Did you mean to use 'import LivePollsProps from "./LivePolls"' instead?
+src/features/livestream/components/index.ts(29,15): error TS2614: Module '"./LiveQA"' has no exported member 'LiveQAProps'. Did you mean to use 'import LiveQAProps from "./LiveQA"' instead?
+src/features/livestream/components/index.ts(30,15): error TS2614: Module '"./SuperChatPanel"' has no exported member 'SuperChatPanelProps'. Did you mean to use 'import SuperChatPanelProps from "./SuperChatPanel"' instead?
+src/features/livestream/components/ProtectedLiveStreamViewer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/livestream/components/ProtectedStreamAnalyticsDashboard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/moderation/components/ModerationDashboard.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/moderation/components/ModerationDashboard.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/notifications/hooks/useNotifications.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/notifications/services/notificationService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/notifications/services/notificationService.ts(3,15): error TS2305: Module '"../../../types/core"' has no exported member 'ApiResponse'.
+src/features/playlist/components/PlaylistCard.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/playlist/components/PlaylistCard.tsx(5,13): error TS2300: Duplicate identifier 'React'.
+src/features/playlist/components/PlaylistCard.tsx(54,60): error TS2339: Property 'ownerName' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(57,22): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(68,22): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(95,36): error TS2551: Property 'thumbnailUrl' does not exist on type 'Playlist'. Did you mean 'thumbnail'?
+src/features/playlist/components/PlaylistCard.tsx(97,29): error TS2551: Property 'thumbnailUrl' does not exist on type 'Playlist'. Did you mean 'thumbnail'?
+src/features/playlist/components/PlaylistCard.tsx(135,21): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(172,21): error TS2339: Property 'ownerName' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(194,19): error TS2339: Property 'totalDuration' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(197,29): error TS2339: Property 'totalDuration' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(202,54): error TS2339: Property 'updatedAt' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(207,43): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(207,60): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(209,21): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(209,43): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/features/playlist/components/PlaylistCard.tsx(217,21): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistCard.tsx(219,26): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(201,29): error TS18046: 'playlists' is of type 'unknown'.
+src/features/playlist/components/PlaylistManager.tsx(228,30): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(230,22): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(230,47): error TS2339: Property 'tags' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(341,37): error TS2551: Property 'thumbnailUrl' does not exist on type 'Playlist'. Did you mean 'thumbnail'?
+src/features/playlist/components/PlaylistManager.tsx(364,53): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(366,37): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/components/PlaylistManager.tsx(416,35): error TS2551: Property 'thumbnailUrl' does not exist on type 'Playlist'. Did you mean 'thumbnail'?
+src/features/playlist/components/PlaylistManager.tsx(425,69): error TS2339: Property 'visibility' does not exist on type 'Playlist'.
+src/features/playlist/hooks/usePlaylists.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/playlist/pages/PlaylistDetailPage.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/playlist/pages/PlaylistDetailPage.tsx(3,13): error TS2300: Duplicate identifier 'React'.
+src/features/playlist/services/playlistService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/playlist/services/playlistService.ts(3,32): error TS2305: Module '"../../../types/core"' has no exported member 'ApiResponse'.
+src/features/search/services/searchService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/search/services/searchService.ts(3,47): error TS2305: Module '"../../../types/core"' has no exported member 'ApiResponse'.
+src/features/subscription/components/SubscriptionButton.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/subscription/components/SubscriptionButton.tsx(7,18): error TS2300: Duplicate identifier 'React'.
+src/features/subscription/hooks/useSubscription.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/subscription/services/subscriptionService.ts(1,15): error TS2693: 'number' only refers to a type, but is being used as a value here.
+src/features/subscription/services/subscriptionService.ts(2,1): error TS6133: 'React' is declared but its value is never read.
+src/features/subscription/services/subscriptionService.ts(6,15): error TS2305: Module '"../../../types/core"' has no exported member 'ApiResponse'.
+src/features/video/components/index.ts(6,45): error TS2307: Cannot find module './VideoDescription' or its corresponding type declarations.
+src/features/video/components/index.ts(7,42): error TS2307: Cannot find module './VideoComments' or its corresponding type declarations.
+src/features/video/components/index.ts(9,42): error TS2307: Cannot find module './VideoMetadata' or its corresponding type declarations.
+src/features/video/components/index.ts(16,15): error TS2614: Module '"./VideoCard"' has no exported member 'VideoCardProps'. Did you mean to use 'import VideoCardProps from "./VideoCard"' instead?
+src/features/video/components/index.ts(17,15): error TS2614: Module '"./VideoGrid"' has no exported member 'VideoGridProps'. Did you mean to use 'import VideoGridProps from "./VideoGrid"' instead?
+src/features/video/components/index.ts(18,15): error TS2614: Module '"./VideoList"' has no exported member 'VideoListProps'. Did you mean to use 'import VideoListProps from "./VideoList"' instead?
+src/features/video/components/index.ts(19,44): error TS2307: Cannot find module './VideoDescription' or its corresponding type declarations.
+src/features/video/components/index.ts(20,41): error TS2307: Cannot find module './VideoComments' or its corresponding type declarations.
+src/features/video/components/index.ts(21,15): error TS2614: Module '"./VideoUpload"' has no exported member 'VideoUploadProps'. Did you mean to use 'import VideoUploadProps from "./VideoUpload"' instead?
+src/features/video/components/index.ts(22,41): error TS2307: Cannot find module './VideoMetadata' or its corresponding type declarations.
+src/features/video/components/ProtectedVideoPlayer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/video/components/StudioVideoGrid.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/video/components/StudioVideoGrid.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/features/video/components/StudioVideoGrid.tsx(96,27): error TS2339: Property 'createdAt' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(96,61): error TS2339: Property 'createdAt' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(218,47): error TS2339: Property 'createdAt' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(221,33): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(222,33): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(223,33): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(225,32): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/StudioVideoGrid.tsx(235,36): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/VideoCard.tsx(27,5): error TS2339: Property 'createdAt' does not exist on type 'Video'.
+src/features/video/components/VideoCard.tsx(34,5): error TS2339: Property 'likeCount' does not exist on type 'Video'.
+src/features/video/components/VideoCard.tsx(35,5): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+src/features/video/components/VideoCard.tsx(158,38): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/VideoCard.tsx(159,24): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/features/video/components/VideoEditor.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/video/components/VideoEditor.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/video/components/VideoUpload.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/video/components/VideoUpload.tsx(5,18): error TS2300: Duplicate identifier 'React'.
+src/features/video/hooks/useVideo.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/video/hooks/useVideoInteractions.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/video/pages/ProtectedSearchResultsPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/video/pages/ProtectedWatchPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/features/video/pages/SearchResultsPage.tsx(38,15): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelName: string; ... 12 more ...; commentCount: number; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelName: string; ... 12 more ...; commentCount: number; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/SearchResultsPage.tsx(184,39): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+src/features/video/pages/VideoDemo.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/features/video/pages/VideoDemo.tsx(3,18): error TS2300: Duplicate identifier 'React'.
+src/features/video/pages/VideoDemo.tsx(7,43): error TS2305: Module '"../components"' has no exported member 'StudioVideoGrid'.
+src/features/video/pages/VideoDemo.tsx(65,44): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(66,44): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(75,19): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(82,19): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(95,19): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(108,17): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(120,17): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/VideoDemo.tsx(131,17): error TS2322: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/features/video/pages/WatchPage.tsx(115,13): error TS2322: Type '{ id: string; createdAt: string; updatedAt: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; viewCount: number; likes: number; likeCount: number; ... 15 more ...; contentDetails: { ...; }; }[]' is not assignable to type 'Video[]'.
+  Type '{ id: string; createdAt: string; updatedAt: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; viewCount: number; likes: number; likeCount: number; ... 15 more ...; contentDetails: { ...; }; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+src/features/video/pages/WatchPage.tsx(187,9): error TS2322: Type 'string' is not assignable to type 'number'.
+src/features/video/services/videoService.ts(259,13): error TS2353: Object literal may only specify known properties, and 'isLiked' does not exist in type 'Video'.
+src/features/video/types/index.ts(7,22): error TS2305: Module '"../../../types/core"' has no exported member 'VideoVisibility'.
+src/hooks/index.ts(30,1): error TS2308: Module './unifiedHooks' has already exported a member named 'useApi'. Consider explicitly re-exporting to resolve the ambiguity.
+src/hooks/legacy/index.ts(2,32): error TS2307: Cannot find module '../hooks/useVideoPlayer' or its corresponding type declarations.
+src/hooks/legacy/index.ts(3,30): error TS2307: Cannot find module '../hooks/useFormState' or its corresponding type declarations.
+src/hooks/legacy/index.ts(4,31): error TS2307: Cannot find module '../hooks/useAsyncState' or its corresponding type declarations.
+src/hooks/legacy/index.ts(5,35): error TS2307: Cannot find module '../hooks/useTrendingSearch' or its corresponding type declarations.
+src/hooks/legacy/index.ts(6,59): error TS2307: Cannot find module '../hooks' or its corresponding type declarations.
+src/hooks/legacy/root-index.ts(3,10): error TS2305: Module '"./root-useLiveStream"' has no exported member 'default'.
+src/hooks/legacy/root-index.ts(18,10): error TS2305: Module '"../useVideoData"' has no exported member 'useVideoData'.
+src/hooks/legacy/root-useLiveStream.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/legacy/root-useLiveStream.ts(3,33): error TS2307: Cannot find module '../types/livestream' or its corresponding type declarations.
+src/hooks/legacy/root-useLiveStream.ts(84,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/hooks/legacy/root-useLiveStream.ts(104,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/hooks/legacy/root-useLiveStream.ts(205,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/hooks/legacy/root-useLiveStream.ts(225,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/hooks/optimizedHooks.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/optimizedHooks.ts(311,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/hooks/optimizedHooks.ts(327,22): error TS2345: Argument of type '(...args: any[]) => any' is not assignable to parameter of type 'T'.
+  '(...args: any[]) => any' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint '(...args: any[]) => any'.
+src/hooks/unified/useApi.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/unified/useApi.ts(5,15): error TS2305: Module '"../../types/core"' has no exported member 'ApiResponse'.
+src/hooks/unified/useVideos.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useAnalytics.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useAnalytics.ts(6,55): error TS2307: Cannot find module '../services/analyticsService' or its corresponding type declarations.
+src/hooks/useAnalytics.ts(392,30): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/hooks/useAsyncData.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useAsyncState.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useCommon.ts(4,10): error TS2305: Module '"../utils/componentUtils"' has no exported member 'throttle'.
+src/hooks/useCommon.ts(4,20): error TS2305: Module '"../utils/componentUtils"' has no exported member 'safeLocalStorage'.
+src/hooks/useDebounce.ts(33,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/hooks/useDropdownMenu.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useEnhancedQuery.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useEnhancedQuery.ts(150,26): error TS2339: Property 'trackApiCall' does not exist on type 'PerformanceMonitor'.
+src/hooks/useEnhancedQuery.ts(157,26): error TS2339: Property 'trackApiCall' does not exist on type 'PerformanceMonitor'.
+src/hooks/useEnhancedQuery.ts(236,30): error TS2339: Property 'trackApiCall' does not exist on type 'PerformanceMonitor'.
+src/hooks/useEnhancedQuery.ts(243,30): error TS2339: Property 'trackApiCall' does not exist on type 'PerformanceMonitor'.
+src/hooks/useInstallPrompt.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useIntersectionObserver.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useLiveStream.ts(15,31): error TS6133: 'streamId' is declared but its value is never read.
+src/hooks/useLiveStream.ts(68,11): error TS2375: Type '{ id: string; streamId: string | undefined; question: string; options: { id: string; text: string; votes: number; percentage: number; }[]; isActive: true; totalVotes: number; createdAt: Date; duration: number; }' is not assignable to type 'LivePoll' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'streamId' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/hooks/useLiveStream.ts(118,11): error TS2375: Type '{ id: string; streamId: string | undefined; userId: string; username: string; question: string; answer: undefined; answered: false; isAnswered: false; timestamp: Date; answeredAt: undefined; isHighlighted: false; upvotes: number; }' is not assignable to type 'QAQuestion' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'streamId' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/hooks/useLocalStorage.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useLocalStorageSet.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useMobileDetection.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useModal.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useOfflineStatus.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useOptimizedVideoData.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useOptimizedVideoData.ts(30,12): error TS2304: Cannot find name 'getVideosByCategory'.
+src/hooks/useOptimizedVideoData.ts(32,10): error TS2304: Cannot find name 'getVideos'.
+src/hooks/usePagination.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/usePerformanceMonitor.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/usePerformanceOptimization.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/usePerformanceOptimization.ts(42,40): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/hooks/usePWA.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/usePWA.ts(124,9): error TS6133: 'mounted' is declared but its value is never read.
+src/hooks/usePWANotifications.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/usePWAUpdates.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useServiceWorker.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useShortsData.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useSubscriptions.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useSubscriptions.ts(6,48): error TS6133: 'channelId' is declared but its value is never read.
+src/hooks/useSubscriptions.ts(6,67): error TS6133: 'enabled' is declared but its value is never read.
+src/hooks/useSubscriptions.ts(7,39): error TS6133: 'channelId' is declared but its value is never read.
+src/hooks/useTrendingSearch.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useTrendingSearch.ts(25,26): error TS2551: Property 'thumbnailUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'. Did you mean 'thumbnail'?
+  Property 'thumbnailUrl' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(26,22): error TS2339: Property 'videoUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'videoUrl' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(27,22): error TS2339: Property 'duration' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'duration' does not exist on type 'GoogleSearchResult'.
+src/hooks/useTrendingSearch.ts(28,19): error TS2339: Property 'viewCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'viewCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(29,19): error TS2339: Property 'likeCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'likeCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(30,22): error TS2339: Property 'dislikeCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'dislikeCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(31,24): error TS2339: Property 'uploadedAt' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'uploadedAt' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(32,25): error TS2339: Property 'channelName' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'channelName' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(33,23): error TS2339: Property 'channelId' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'channelId' does not exist on type 'GoogleSearchResult'.
+src/hooks/useTrendingSearch.ts(34,30): error TS2339: Property 'channelAvatarUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'channelAvatarUrl' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(35,22): error TS2339: Property 'categoryId' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'categoryId' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(36,18): error TS2339: Property 'tags' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'tags' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(48,25): error TS2339: Property 'viewCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'viewCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(49,25): error TS2339: Property 'likeCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'likeCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(50,28): error TS2339: Property 'dislikeCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'dislikeCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(51,7): error TS2322: Type 'number' is not assignable to type 'string'.
+src/hooks/useTrendingSearch.ts(52,28): error TS2339: Property 'commentCount' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'commentCount' does not exist on type 'YouTubeSearchResult'.
+src/hooks/useTrendingSearch.ts(60,24): error TS2339: Property 'duration' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'duration' does not exist on type 'GoogleSearchResult'.
+src/hooks/useTrendingSearch.ts(60,47): error TS2339: Property 'duration' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'.
+  Property 'duration' does not exist on type 'GoogleSearchResult'.
+src/hooks/useTrendingSearch.ts(105,9): error TS2554: Expected 1 arguments, but got 2.
+src/hooks/useTrendingSearch.ts(105,10): error TS7006: Parameter 'query' implicitly has an 'any' type.
+src/hooks/useTrendingSearch.ts(110,29): error TS2339: Property 'youtubeVideos' does not exist on type '(YouTubeSearchResult | GoogleSearchResult)[]'.
+src/hooks/useTrendingSearch.ts(111,29): error TS2339: Property 'googleSearchVideos' does not exist on type '(YouTubeSearchResult | GoogleSearchResult)[]'.
+src/hooks/useTrendingSearch.ts(120,43): error TS2339: Property 'localVideos' does not exist on type '(YouTubeSearchResult | GoogleSearchResult)[]'.
+src/hooks/useUnifiedApp.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useUnifiedApp.ts(4,35): error TS2307: Cannot find module '../contexts/UnifiedAppContext' or its corresponding type declarations.
+src/hooks/useVideoAutoplay.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useVideoCache.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(54,5): error TS2339: Property 'loop' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(55,5): error TS2339: Property 'controls' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(56,5): error TS2339: Property 'playbackRate' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(57,5): error TS2339: Property 'volume' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(60,5): error TS2339: Property 'onDurationChange' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(63,5): error TS2339: Property 'onVolumeChange' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(64,5): error TS2339: Property 'onPlaybackRateChange' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(65,5): error TS2339: Property 'onFullscreenChange' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(66,5): error TS2339: Property 'onError' does not exist on type 'VideoPlayerOptions'.
+src/hooks/useVideoPlayer.ts(262,9): error TS6133: 'togglePlay' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(312,9): error TS6133: 'toggleMute' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(320,9): error TS6133: 'setPlaybackRate' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(353,9): error TS6133: 'toggleFullscreen' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(388,9): error TS6133: 'togglePictureInPicture' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(397,9): error TS6133: 'setVideoRef' is declared but its value is never read.
+src/hooks/useVideoPlayer.ts(402,5): error TS2353: Object literal may only specify known properties, and 'videoRef' does not exist in type 'VideoPlayerState & VideoPlayerControls'.
+src/hooks/useVideoPlayer.ts(404,7): error TS18004: No value exists in scope for the shorthand property 'isPlaying'. Either declare one or provide an initializer.
+src/hooks/useVideoPlayer.ts(405,7): error TS2552: Cannot find name 'isMuted'. Did you mean 'muted'?
+src/hooks/useVideoPlayer.ts(406,7): error TS18004: No value exists in scope for the shorthand property 'volume'. Either declare one or provide an initializer.
+src/hooks/useVideoPlayer.ts(407,7): error TS18004: No value exists in scope for the shorthand property 'currentTime'. Either declare one or provide an initializer.
+src/hooks/useVideoPlayer.ts(408,7): error TS18004: No value exists in scope for the shorthand property 'duration'. Either declare one or provide an initializer.
+src/hooks/useVideoPlayer.ts(409,7): error TS18004: No value exists in scope for the shorthand property 'isLoading'. Either declare one or provide an initializer.
+src/hooks/useVideoPlayer.ts(410,7): error TS2552: Cannot find name 'error'. Did you mean 'onError'?
+src/hooks/useVideoPlayer.ts(415,7): error TS2552: Cannot find name 'toggle'. Did you mean 'ontoggle'?
+src/hooks/useVideoPlayer.ts(420,7): error TS18004: No value exists in scope for the shorthand property 'reset'. Either declare one or provide an initializer.
+src/hooks/useVideosData.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useVideosData.ts(40,18): error TS2304: Cannot find name 'getShortsVideos'.
+src/hooks/useVideosData.ts(44,18): error TS2304: Cannot find name 'getVideos'.
+src/hooks/useWatchPage.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/hooks/useWatchPage.ts(7,31): error TS2305: Module '"../types/core"' has no exported member 'VideoVisibility'.
+src/hooks/useWatchPage.ts(42,75): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/hooks/useWatchPage.ts(203,18): error TS2345: Argument of type '{ channelName: string; channelAvatarUrl: string; id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; ... 7 more ...; updatedAt: string; } | { ...; }' is not assignable to parameter of type 'SetStateAction<Video | null>'.
+  Type '{ channelName: string; channelAvatarUrl: string; id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; ... 7 more ...; updatedAt: string; }' is not assignable to type 'SetStateAction<Video | null>'.
+    Type '{ channelName: string; channelAvatarUrl: string; id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; ... 7 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/hooks/useWatchPage.ts(236,29): error TS2345: Argument of type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to parameter of type 'SetStateAction<Video[]>'.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }[]' is not assignable to type 'Video[]'.
+    Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; channelId: string; channelName: string; ... 6 more ...; updatedAt: string; }' is missing the following properties from type 'Video': thumbnail, publishedAt, channelTitle
+src/lib/utils.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/lib/utils.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/lib/utils.ts(3,8): error TS2300: Duplicate identifier 'React'.
+src/lib/utils.ts(250,51): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/lib/utils.ts(279,37): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/lib/utils.ts(302,37): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+src/lib/youtube-utils.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/LiveStreamingHubPage.tsx(2,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(4,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(6,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(8,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(10,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(12,8): error TS2300: Duplicate identifier 'React'.
+src/pages/LiveStreamingHubPage.tsx(14,8): error TS2300: Duplicate identifier 'React'.
+src/pages/YouTubeDemo.tsx(2,8): error TS2300: Duplicate identifier 'React'.
+src/pages/YouTubeDemo.tsx(4,18): error TS2300: Duplicate identifier 'React'.
+src/pages/YouTubeDemo.tsx(5,8): error TS2300: Duplicate identifier 'React'.
+src/services/api/base.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/services/api/base.ts(3,15): error TS2305: Module '"../../types/core"' has no exported member 'ApiResponse'.
+src/services/api/base.ts(3,28): error TS2305: Module '"../../types/core"' has no exported member 'PaginationInfo'.
+src/services/api/videos.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/services/api/videos.ts(3,29): error TS2305: Module '"../../types/core"' has no exported member 'ApiResponse'.
+src/services/api/videos.ts(3,42): error TS2305: Module '"../../types/core"' has no exported member 'SearchFilters'.
+src/services/api/youtubeService.ts(168,16): error TS2352: Conversion of type '{ id: string; title: string; description: string; thumbnailUrl: string; duration: string; views: string; viewCount: number; likes: number; likeCount: number; dislikes: number; dislikeCount: number; ... 12 more ...; videoUrl: string; }' to type 'Video' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ id: string; title: string; description: string; thumbnailUrl: string; duration: string; views: string; viewCount: number; likes: number; likeCount: number; dislikes: number; dislikeCount: number; ... 12 more ...; videoUrl: string; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+src/services/api/youtubeService.ts(252,9): error TS2322: Type 'string' is not assignable to type 'number'.
+src/services/api/youtubeService.ts(252,62): error TS2345: Argument of type 'string | 0' is not assignable to parameter of type 'string'.
+  Type 'number' is not assignable to type 'string'.
+src/services/liveStreamService.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/services/unifiedDataService.ts(285,28): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?
+src/services/unifiedDataService.ts(287,35): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(302,30): error TS2339: Property 'isShort' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(303,33): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(524,37): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?
+src/services/unifiedDataService.ts(526,44): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(530,78): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/services/unifiedDataService.ts(533,44): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/services/unifiedDataService.ts(539,15): error TS2322: Type 'string[] | undefined' is not assignable to type 'string[]'.
+  Type 'undefined' is not assignable to type 'string[]'.
+src/services/unifiedDataService.ts(541,39): error TS2339: Property 'isShort' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(542,42): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(555,83): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/services/unifiedDataService.ts(589,37): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?
+src/services/unifiedDataService.ts(591,44): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(598,44): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/services/unifiedDataService.ts(604,15): error TS2322: Type 'string[] | undefined' is not assignable to type 'string[]'.
+  Type 'undefined' is not assignable to type 'string[]'.
+src/services/unifiedDataService.ts(606,39): error TS2339: Property 'isShort' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(607,42): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(794,13): error TS2322: Type '{ id: string; title: string; description: string | undefined; thumbnailUrl: string | undefined; videoUrl: string | undefined; views: number; viewsFormatted: string; likes: any; dislikes: number; ... 17 more ...; updatedAt: string; }[]' is not assignable to type 'UnifiedVideoMetadata[]'.
+  Type '{ id: string; title: string; description: string | undefined; thumbnailUrl: string | undefined; videoUrl: string | undefined; views: number; viewsFormatted: string; likes: any; dislikes: number; ... 17 more ...; updatedAt: string; }' is not assignable to type 'UnifiedVideoMetadata'.
+    Types of property 'description' are incompatible.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+src/services/unifiedDataService.ts(802,22): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?
+src/services/unifiedDataService.ts(804,29): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(811,29): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?
+src/services/unifiedDataService.ts(819,24): error TS2339: Property 'isShort' does not exist on type 'Video'.
+src/services/unifiedDataService.ts(820,27): error TS2339: Property 'visibility' does not exist on type 'Video'.
+src/types/unified.ts(6,1): error TS2308: Module './core' has already exported a member named 'Video'. Consider explicitly re-exporting to resolve the ambiguity.
+src/types/unified.ts(7,15): error TS2307: Cannot find module './playlist' or its corresponding type declarations.
+src/types/unified.ts(8,15): error TS2307: Cannot find module './channel' or its corresponding type declarations.
+src/types/unified.ts(12,3): error TS2305: Module '"./errors"' has no exported member 'ErrorInfo'.
+src/types/unified.ts(13,3): error TS2305: Module '"./errors"' has no exported member 'ErrorBoundaryState'.
+src/utils/dateUtils.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/index.ts(4,18): error TS1205: Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'.
+src/utils/index.ts(4,43): error TS1205: Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'.
+src/utils/mocks/browser.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/mocks/browser.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/mocks/browser.ts(3,8): error TS2300: Duplicate identifier 'React'.
+src/utils/mocks/handlers.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/mocks/server.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/mocks/server.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/mocks/server.ts(3,8): error TS2300: Duplicate identifier 'React'.
+src/utils/offlineStorage.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/performanceOptimizations.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/pwaAnalytics.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/pwaAnalytics.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/pwaAnalytics.ts(3,8): error TS2300: Duplicate identifier 'React'.
+src/utils/test-setup.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/test-setup.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/test-setup.ts(4,8): error TS2300: Duplicate identifier 'React'.
+src/utils/test-setup.ts(6,8): error TS2300: Duplicate identifier 'React'.
+src/utils/testingHelpers.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/testingHelpers.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/testingHelpers.tsx(3,8): error TS2300: Duplicate identifier 'React'.
+src/utils/testingHelpers.tsx(5,8): error TS2300: Duplicate identifier 'React'.
+src/utils/testingHelpers.tsx(91,3): error TS2353: Object literal may only specify known properties, and 'visibility' does not exist in type 'Video'.
+src/utils/testingHelpers.tsx(102,3): error TS2353: Object literal may only specify known properties, and 'banner' does not exist in type 'Channel'.
+src/utils/testingHelpers.tsx(115,3): error TS2353: Object literal may only specify known properties, and 'userAvatarUrl' does not exist in type 'Comment'.
+src/utils/testingHelpers.tsx(209,36): error TS2353: Object literal may only specify known properties, and 'content' does not exist in type 'Partial<Comment>'.
+src/utils/youtubeApiUtils.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+src/utils/youtubeApiUtils.ts(1,8): error TS2300: Duplicate identifier 'React'.
+src/utils/youtubeApiUtils.ts(3,8): error TS2300: Duplicate identifier 'React'.
+test/integration/CommunityPage.test.tsx(127,49): error TS2307: Cannot find module '../../hooks/useRefactoredHooks' or its corresponding type declarations.
+test/integration/CommunityPage.test.tsx(168,49): error TS2307: Cannot find module '../../hooks/useRefactoredHooks' or its corresponding type declarations.
+test/integration/CommunityPage.test.tsx(200,49): error TS2307: Cannot find module '../../hooks/useRefactoredHooks' or its corresponding type declarations.
+test/services/youtubeService.test.ts(200,25): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+test/services/youtubeService.test.ts(617,25): error TS2339: Property 'commentCount' does not exist on type 'Video'.
+tests/examples/integration.test.tsx(195,15): error TS2322: Type 'null' is not assignable to type 'Channel'.
+tests/examples/VideoDescription.test.tsx(59,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(60,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(94,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(95,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(118,11): error TS2739: Type '{ channelName: string; id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(119,11): error TS2322: Type 'null' is not assignable to type 'Channel'.
+tests/examples/VideoDescription.test.tsx(145,11): error TS2739: Type '{ description: string; id: string; title: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(146,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(188,11): error TS2739: Type '{ description: string; id: string; title: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(189,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(211,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(212,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(236,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(237,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(273,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(274,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(300,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(301,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(338,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(339,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(368,11): error TS2739: Type '{ views: string; likes: number; publishedAt: string; id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; dislikes: number; uploadedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(369,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(399,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(400,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(428,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(429,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(449,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(450,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(469,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(470,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(489,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(490,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(511,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(512,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(542,11): error TS2739: Type '{ description: string; id: string; title: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(543,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(570,11): error TS2739: Type '{ description: string; id: string; title: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(571,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(596,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(597,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+tests/examples/VideoDescription.test.tsx(625,11): error TS2739: Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; duration: string; views: string; likes: number; dislikes: number; uploadedAt: string; publishedAt: string; ... 7 more ...; visibility: "public"; }' is missing the following properties from type 'Video': thumbnail, channelTitle
+tests/examples/VideoDescription.test.tsx(626,11): error TS2739: Type '{ id: string; name: string; description: string; avatarUrl: string; banner: string; subscribers: number; subscriberCount: string; videoCount: number; isVerified: boolean; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Channel': title, thumbnail
+types.ts(3,15): error TS2305: Module '"./src/types/core"' has no exported member 'VideoVisibility'.
+types.ts(39,22): error TS2305: Module '"./src/types/core"' has no exported member 'ContentItem'.
+utils/advancedMonitoring.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+utils/analyticsUtils.ts(26,51): error TS2339: Property 'replace' does not exist on type 'number'.
+utils/analyticsUtils.ts(32,51): error TS2339: Property 'replace' does not exist on type 'number'.
+utils/cn.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+utils/codeAnalysisEngine.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/codeAnalysisEngine.ts(451,40): error TS2304: Cannot find name '_filePath'.
+utils/codeAnalysisEngine.ts(664,9): error TS18004: No value exists in scope for the shorthand property 'file'. Either declare one or provide an initializer.
+utils/componentOptimization.tsx(1,8): error TS2300: Duplicate identifier 'React'.
+utils/componentOptimization.tsx(6,8): error TS2300: Duplicate identifier 'React'.
+utils/componentOptimization.tsx(138,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/componentOptimization.tsx(283,18): error TS18048: 'event' is possibly 'undefined'.
+utils/componentOptimization.tsx(283,18): error TS18047: 'event.currentTarget' is possibly 'null'.
+utils/componentOptimization.tsx(283,38): error TS2339: Property 'scrollTop' does not exist on type 'EventTarget'.
+utils/componentOptimization.tsx(452,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/componentOptimizations.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+utils/deploymentAutomation.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/deploymentAutomation.ts(708,44): error TS2304: Cannot find name '_executionId'.
+utils/deploymentAutomation.ts(866,40): error TS2304: Cannot find name '_environment'.
+utils/deploymentAutomation.ts(871,50): error TS2304: Cannot find name '_environment'.
+utils/deploymentAutomation.ts(935,40): error TS2304: Cannot find name '_environment'.
+utils/deploymentAutomation.ts(940,17): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(947,23): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(949,23): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(952,40): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(957,21): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(966,33): error TS2304: Cannot find name '_healthCheck'.
+utils/deploymentAutomation.ts(971,17): error TS2304: Cannot find name '_healthCheck'.
+utils/deploymentAutomation.ts(1009,17): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1009,61): error TS2304: Cannot find name '_reason'.
+utils/deploymentAutomation.ts(1012,7): error TS18004: No value exists in scope for the shorthand property '_reason'. Either declare one or provide an initializer.
+utils/deploymentAutomation.ts(1026,9): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1027,21): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1029,21): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1033,19): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1036,5): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1039,41): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1041,71): error TS2304: Cannot find name '_execution'.
+utils/deploymentAutomation.ts(1045,7): error TS18004: No value exists in scope for the shorthand property '_reason'. Either declare one or provide an initializer.
+utils/developmentWorkflow.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+utils/developmentWorkflow.ts(124,31): error TS2339: Property '_context' does not exist on type 'IntelligentWorkflowEngine'.
+utils/developmentWorkflow.ts(166,11): error TS2451: Cannot redeclare block-scoped variable '_strategy'.
+utils/developmentWorkflow.ts(166,28): error TS2339: Property '_strategy' does not exist on type 'IntelligentWorkflowEngine'.
+utils/developmentWorkflow.ts(167,11): error TS2451: Cannot redeclare block-scoped variable '_strategy'.
+utils/developmentWorkflow.ts(184,28): error TS2339: Property '_config' does not exist on type 'IntelligentWorkflowEngine'.
+utils/developmentWorkflow.ts(185,32): error TS2551: Property '_env' does not exist on type 'Process'. Did you mean 'env'?
+utils/developmentWorkflow.ts(446,13): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(448,42): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(451,25): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(453,35): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(456,32): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(456,50): error TS2304: Cannot find name '_context'.
+utils/developmentWorkflow.ts(459,36): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(462,35): error TS2304: Cannot find name '_action'.
+utils/developmentWorkflow.ts(525,11): error TS2451: Cannot redeclare block-scoped variable '_batchSize'.
+utils/developmentWorkflow.ts(528,11): error TS2451: Cannot redeclare block-scoped variable '_batchSize'.
+utils/developmentWorkflow.ts(577,33): error TS2304: Cannot find name '_version'.
+utils/developmentWorkflow.ts(577,48): error TS2304: Cannot find name '_env'.
+utils/developmentWorkflow.ts(582,44): error TS2304: Cannot find name '_env'.
+utils/developmentWorkflow.ts(587,31): error TS2304: Cannot find name '_percentage'.
+utils/developmentWorkflow.ts(587,65): error TS2304: Cannot find name '_version'.
+utils/developmentWorkflow.ts(597,51): error TS2304: Cannot find name '_startIndex'.
+utils/developmentWorkflow.ts(597,67): error TS2304: Cannot find name '_batchSize'.
+utils/developmentWorkflow.ts(597,97): error TS2304: Cannot find name '_version'.
+utils/developmentWorkflow.ts(602,53): error TS2304: Cannot find name '_startIndex'.
+utils/developmentWorkflow.ts(607,33): error TS2304: Cannot find name '_version'.
+utils/developmentWorkflow.ts(607,63): error TS2304: Cannot find name '_enabled'.
+utils/developmentWorkflow.ts(612,45): error TS2304: Cannot find name '_flagName'.
+utils/developmentWorkflow.ts(612,61): error TS2304: Cannot find name '_percentage'.
+utils/developmentWorkflow.ts(617,46): error TS2304: Cannot find name '_flagName'.
+utils/developmentWorkflow.ts(622,30): error TS2304: Cannot find name '_seconds'.
+utils/developmentWorkflow.ts(623,63): error TS2304: Cannot find name '_seconds'.
+utils/developmentWorkflow.ts(635,18): error TS2304: Cannot find name '_checks'.
+utils/developmentWorkflow.ts(635,30): error TS7006: Parameter 'check' implicitly has an 'any' type.
+utils/developmentWorkflow.ts(645,27): error TS2304: Cannot find name '_strategy'.
+utils/developmentWorkflow.ts(646,70): error TS18004: No value exists in scope for the shorthand property 'healthStatus'. Either declare one or provide an initializer.
+utils/developmentWorkflow.ts(657,54): error TS2304: Cannot find name '_source'.
+utils/developmentWorkflow.ts(662,54): error TS2304: Cannot find name '_source'.
+utils/developmentWorkflow.ts(667,63): error TS2304: Cannot find name '_source'.
+utils/developmentWorkflow.ts(672,65): error TS2304: Cannot find name '_source'.
+utils/developmentWorkflow.ts(677,34): error TS2304: Cannot find name '_source'.
+utils/developmentWorkflow.ts(681,43): error TS2304: Cannot find name '_config'.
+utils/developmentWorkflow.ts(686,39): error TS2304: Cannot find name '_config'.
+utils/developmentWorkflow.ts(686,71): error TS2304: Cannot find name '_context'.
+utils/developmentWorkflow.ts(691,42): error TS2304: Cannot find name '_config'.
+utils/developmentWorkflow.ts(696,42): error TS2304: Cannot find name '_config'.
+utils/developmentWorkflow.ts(783,37): error TS2304: Cannot find name '_suggestion'.
+utils/developmentWorkflow.ts(785,13): error TS2304: Cannot find name '_suggestion'.
+utils/developmentWorkflow.ts(969,13): error TS2551: Property '_env' does not exist on type 'Process'. Did you mean 'env'?
+utils/featureFlagSystem.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/featureFlagSystem.ts(288,5): error TS2779: The left-hand side of an assignment expression may not be an optional property access.
+utils/featureFlagSystem.ts(288,28): error TS2551: Property '_config' does not exist on type 'RolloutStrategy'. Did you mean 'config'?
+utils/featureFlagSystem.ts(425,37): error TS18047: 'testValue' is possibly 'null'.
+utils/featureFlagSystem.ts(425,49): error TS18047: 'controlValue' is possibly 'null'.
+utils/featureFlagSystem.ts(426,49): error TS18047: 'controlValue' is possibly 'null'.
+utils/featureFlagSystem.ts(432,32): error TS18047: 'testValue' is possibly 'null'.
+utils/featureFlagSystem.ts(432,44): error TS18047: 'controlValue' is possibly 'null'.
+utils/featureFlagSystem.ts(438,11): error TS2322: Type 'number | null' is not assignable to type 'number'.
+  Type 'null' is not assignable to type 'number'.
+utils/featureFlagSystem.ts(530,7): error TS2779: The left-hand side of an assignment expression may not be an optional property access.
+utils/featureFlagSystem.ts(530,30): error TS2551: Property '_config' does not exist on type 'RolloutStrategy'. Did you mean 'config'?
+utils/featureFlagSystem.ts(556,5): error TS2779: The left-hand side of an assignment expression may not be an optional property access.
+utils/featureFlagSystem.ts(556,28): error TS2551: Property '_config' does not exist on type 'RolloutStrategy'. Did you mean 'config'?
+utils/featureFlagSystem.ts(705,38): error TS2551: Property '_config' does not exist on type 'RolloutStrategy'. Did you mean 'config'?
+utils/featureFlagSystem.ts(726,38): error TS2551: Property '_config' does not exist on type 'RolloutStrategy'. Did you mean 'config'?
+utils/featureFlagSystem.ts(771,40): error TS1016: A required parameter cannot follow an optional parameter.
+utils/featureFlagSystem.ts(810,11): error TS6133: '_strategy' is declared but its value is never read.
+utils/featureFlagSystem.ts(811,9): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(811,41): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(811,83): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(815,31): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(816,37): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(817,31): error TS2304: Cannot find name 'strategy'.
+utils/featureFlagSystem.ts(900,29): error TS2339: Property '_threshold' does not exist on type 'AdvancedFeatureFlagManager'.
+utils/featureFlagSystem.ts(901,9): error TS6133: '__currentValue' is declared but its value is never read.
+utils/featureFlagSystem.ts(905,9): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(908,9): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(911,55): error TS2304: Cannot find name '_flag'.
+utils/featureFlagSystem.ts(912,9): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(921,25): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(924,25): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(927,25): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(932,64): error TS2304: Cannot find name '_flag'.
+utils/featureFlagSystem.ts(932,152): error TS2304: Cannot find name 'currentValue'.
+utils/featureFlagSystem.ts(939,27): error TS2304: Cannot find name '_flag'.
+utils/featureFlagSystem.ts(942,34): error TS2304: Cannot find name '_flag'.
+utils/intelligentCodeMonitor.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/intelligentCodeMonitor.ts(360,11): error TS6133: '__opportunities' is declared but its value is never read.
+utils/intelligentCodeMonitor.ts(363,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(364,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(382,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(383,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(401,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(402,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(420,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(421,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(439,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(440,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(457,26): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?
+utils/intelligentCodeMonitor.ts(464,11): error TS6133: '__insights' is declared but its value is never read.
+utils/intelligentCodeMonitor.ts(467,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(468,7): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/intelligentCodeMonitor.ts(481,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(482,7): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/intelligentCodeMonitor.ts(495,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(496,7): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/intelligentCodeMonitor.ts(509,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(510,7): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/intelligentCodeMonitor.ts(523,9): error TS2304: Cannot find name '_metrics'.
+utils/intelligentCodeMonitor.ts(524,7): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/intelligentCodeMonitor.ts(536,21): error TS2663: Cannot find name 'insights'. Did you mean the instance member 'this.insights'?
+utils/performanceOptimizations.ts(1,1): error TS6133: 'React' is declared but its value is never read.
+utils/performanceOptimizations.ts(112,37): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/performanceOptimizations.ts(251,25): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/performanceOptimizations.ts(279,25): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/playerUtils.ts(244,31): error TS2339: Property 'definition' does not exist on type 'Partial<Video>'.
+utils/playerUtils.ts(425,16): error TS2339: Property 'captions' does not exist on type 'Partial<Video>'.
+utils/playerUtils.ts(426,20): error TS2339: Property 'captions' does not exist on type 'Partial<Video>'.
+utils/playerUtils.ts(426,34): error TS7006: Parameter 'caption' implicitly has an 'any' type.
+utils/playerUtils.ts(426,43): error TS7006: Parameter 'index' implicitly has an 'any' type.
+utils/playerUtils.ts(518,33): error TS2551: Property 'channel' does not exist on type 'Partial<Video>'. Did you mean 'channelId'?
+utils/playerUtils.ts(519,27): error TS2551: Property 'channel' does not exist on type 'Partial<Video>'. Did you mean 'channelId'?
+utils/securityMonitoring.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/securityMonitoring.ts(393,11): error TS6133: '__action' is declared but its value is never read.
+utils/securityMonitoring.ts(396,15): error TS2304: Cannot find name '_threat'.
+utils/securityMonitoring.ts(399,11): error TS2304: Cannot find name 'action'.
+utils/securityMonitoring.ts(399,20): error TS2304: Cannot find name '_threat'.
+utils/securityMonitoring.ts(403,11): error TS2304: Cannot find name 'action'.
+utils/securityMonitoring.ts(406,11): error TS2304: Cannot find name 'action'.
+utils/securityMonitoring.ts(414,19): error TS2304: Cannot find name '_threat'.
+utils/securityMonitoring.ts(415,9): error TS18004: No value exists in scope for the shorthand property 'action'. Either declare one or provide an initializer.
+utils/securityMonitoring.ts(418,31): error TS2304: Cannot find name 'action'.
+utils/securityMonitoring.ts(422,44): error TS2304: Cannot find name 'action'.
+utils/securityMonitoring.ts(422,58): error TS2304: Cannot find name '_threat'.
+utils/securityMonitoring.ts(423,58): error TS18004: No value exists in scope for the shorthand property 'action'. Either declare one or provide an initializer.
+utils/systemIntegration.ts(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/testing.tsx(1,13): error TS2300: Duplicate identifier 'React'.
+utils/testing.tsx(3,8): error TS2300: Duplicate identifier 'React'.
+utils/testing.tsx(91,3): error TS2322: Type 'string' is not assignable to type 'number'.
+utils/testing.tsx(113,3): error TS2322: Type 'string' is not assignable to type 'number'.
+utils/testing.tsx(143,47): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type.
+utils/testUtils.tsx(7,1): error TS6133: 'React' is declared but its value is never read.
+utils/videoUtils.ts(43,16): error TS2339: Property 'isShort' does not exist on type 'Video'.
+utils/videoUtils.ts(47,14): error TS2339: Property 'privacyStatus' does not exist on type 'Video'.
+utils/videoUtils.ts(51,17): error TS2339: Property 'privacyStatus' does not exist on type 'Video'.
+utils/videoUtils.ts(62,8): error TS18048: 'video.tags' is possibly 'undefined'.
+utils/videoUtils.ts(65,10): error TS18048: 'video.tags' is possibly 'undefined'.
+utils/videoUtils.ts(73,19): error TS2339: Property 'monetization' does not exist on type 'Video'.
+utils/youtubeConfigChecker.ts(6,1): error TS6133: 'React' is declared but its value is never read.

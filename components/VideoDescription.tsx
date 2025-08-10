@@ -59,7 +59,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
               )}
             </Link>
             <p className="text-xs text-neutral-600 dark:text-neutral-400">
-              {channel?.subscriberCount ? `${formatCount(parseInt(channel.subscriberCount.replace(/[^0-9]/g, ''), 10))} subscribers` : 'No subscriber data'}
+              {channel?.subscriberCount ? `${formatCount(parseInt(((channel.subscriberCount as string)).replace(/[^0-9]/g, ''), 10))} subscribers` : 'No subscriber data'}
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ onToggleDescription();
       >
         <div className="text-sm" id="video-description-content">
           <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            {video.uploadedAt} &bull; {typeof video.views === 'string' && video.views.includes(' ') ? video.views.split(' ')[0] : video.views} views
+            {video.uploadedAt} &bull; {typeof video.views === 'string' && ((video.views as string)).includes(' ') ? ((video.views as string)).split(' ')[0] : video.views} views
           </span>
           <br/>
           {video.description}

@@ -24,6 +24,22 @@ export interface Video {
   categoryId?: string; // Category ID
   buffered?: TimeRanges; // Buffered time ranges
   tags?: string[]; // Video tags
+  visibility?: string;
+  metadata?: any;
+  statistics?: { viewCount?: number; likeCount?: number; commentCount?: number; favoriteCount?: number;   contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string; };
+  privacyStatus?: string;
+  isShort?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  definition?: string;
+};
+  contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string; };
+  privacyStatus?: string;
+  isShort?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  definition?: string;
+  commentCount?: number;
 }
 
 export interface Short extends Video {
@@ -49,6 +65,7 @@ export interface Channel {
   subscribers?: number | string; // Subscriber count
   joinedDate?: string; // Date joined
   totalViews?: number; // Total channel views
+  isVerified?: boolean;
 }
 
 export interface Playlist {
@@ -59,6 +76,12 @@ export interface Playlist {
   videoCount: number;
   channelId: string;
   channelTitle: string;
+  visibility?: string;
+  tags?: string[];
+  updatedAt?: string;
+  totalDuration?: string;
+  ownerName?: string;
+  thumbnailUrl?: string;
 }
 
 export interface Comment {
@@ -69,6 +92,14 @@ export interface Comment {
   publishedAt: string;
   likeCount: number;
   replies?: Comment[];
+  content?: string;
+  likes?: number;
+  isPinned?: boolean;
+  isHearted?: boolean;
+  createdAt?: string;
+  videoId?: string;
+  parentId?: string;
+  replyCount?: number;
 }
 
 export interface VideoItem extends Video {

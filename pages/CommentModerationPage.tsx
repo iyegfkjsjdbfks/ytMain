@@ -76,8 +76,8 @@ const CommentModerationPage: React.FC = () => {
     // Apply search
     if (searchQuery) {
       filtered = filtered.filter(comment =>
-        comment.commentText.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        comment.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
@@ -86,9 +86,9 @@ const CommentModerationPage: React.FC = () => {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'newest':
-          return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+          return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
         case 'oldest':
-          return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
+          return new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
         case 'mostLikes':
           return b.likes - a.likes;
         case 'mostReplies':
@@ -347,22 +347,22 @@ return comments.filter((c: any) => c.flaggedReason).length;
                     className="mt-1 rounded border-neutral-300 dark:border-neutral-600 text-blue-500 focus:ring-blue-500"
                   />
                   <img
-                    src={comment.userAvatarUrl}
-                    alt={comment.userName}
+                    src={comment.authorAvatar}
+                    alt={comment.authorName}
                     className="w-10 h-10 rounded-full"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2 mb-1">
                       <span className="font-medium text-neutral-900 dark:text-neutral-50">
-                        {comment.userName}
+                        {comment.authorName}
                       </span>
                       {getStatusBadge(comment.status, comment.flaggedReason)}
                       <span className="text-sm text-neutral-500 dark:text-neutral-400">
-                        {parseRelativeDate(comment.timestamp)}
+                        {parseRelativeDate(comment.publishedAt)}
                       </span>
                     </div>
                     <p className="text-neutral-700 dark:text-neutral-300 mb-2">
-                      {comment.commentText}
+                      {comment.text}
                     </p>
                     <div className="flex items-center space-x-4 text-sm text-neutral-500 dark:text-neutral-400">
                       <span>On: {comment.videoTitle}</span>
