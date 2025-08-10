@@ -475,7 +475,7 @@ return null;
         avatarUrl: item.snippet.thumbnails.medium.url,
         banner: item.brandingSettings?.image?.bannerExternalUrl || '',
         subscribers: parseInt(item.statistics.subscriberCount || '0', 10),
-        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0', 10) / 1000)}K`,
+        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || 0, 10) / 1000)}K`,
         videoCount: parseInt(item.statistics.videoCount || '0', 10),
         isVerified: false, // Would need to check separately
         createdAt: item.snippet.publishedAt,

@@ -249,7 +249,7 @@ class YouTubeService {
         avatarUrl: item.snippet?.thumbnails?.medium?.url || item.snippet?.thumbnails?.high?.url || '',
         banner: item.snippet?.thumbnails?.high?.url || '',
         subscribers: parseInt(item.statistics?.subscriberCount || '0', 10),
-        subscriberCount: this.formatSubscriberCount(parseInt(item.statistics?.subscriberCount || '0', 10)),
+        subscriberCount: this.formatSubscriberCount(parseInt(item.statistics?.subscriberCount || 0, 10)),
         videoCount: parseInt(item.statistics?.videoCount || '0', 10),
         totalViews: parseInt(item.statistics?.viewCount || '0', 10),
         isVerified: false, // This would require a separate mechanism to verify
