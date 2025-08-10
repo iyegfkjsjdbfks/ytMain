@@ -64,7 +64,19 @@ class TS18048Fixer {
       return output.split('\n')
         .filter(line => /error TS18048:/.test(line))
         .map(line => {
-          const match = line.match(/^(.+?)\((\d+),(\d+)\):\s*error TS18048:\s*(.+)$/);
+          // Try Windows format first: file(line,col): error TS18048: message
+          let match = line.match(/^(.+?)\((\d+),(\d+)\):\s*error TS18048:\s*(.+)$/);
+          if (match) {
+            return {
+              filePath: this.normalizeFilePath(match[1]),
+              line: parseInt(match[2]),
+              column: parseInt(match[3]),
+              message: match[4]
+            };
+          }
+
+          // Try Unix format: file:line:col: error TS18048: message
+          match = line.match(/^(.+?):(\d+):(\d+):\s*error TS18048:\s*(.+)$/);
           if (match) {
             return {
               filePath: this.normalizeFilePath(match[1]),

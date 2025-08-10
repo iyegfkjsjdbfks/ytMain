@@ -111,7 +111,19 @@ class TS7019Fixer {
       if (!output) return [];
       
       return output.split('\n').filter(Boolean).map(line => {
-        const match = line.match(/([^:]+):(\d+):(\d+):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
+        // Try Windows format first: file(line,col): error TS7019: Rest parameter 'name' implicitly has an 'any[]' type
+        let match = line.match(/([^(]+)\((\d+),(\d+)\):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
+        if (match) {
+          return {
+            file: match[1],
+            line: parseInt(match[2]),
+            column: parseInt(match[3]),
+            parameter: match[4]
+          };
+        }
+
+        // Try Unix format: file:line:col: error TS7019: Rest parameter 'name' implicitly has an 'any[]' type
+        match = line.match(/([^:]+):(\d+):(\d+):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
         if (match) {
           return {
             file: match[1],

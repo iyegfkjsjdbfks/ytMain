@@ -690,9 +690,9 @@ continue;
     reason: string;
   } {
     const _strategy = _flag.rolloutStrategy;
+    const strategy = _strategy; // Use the rollout strategy
 
     switch (strategy.type) {
-      const strategy = this.strategy;
       case 'immediate':
         return {
           shouldApply: true,

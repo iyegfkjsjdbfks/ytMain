@@ -55,8 +55,14 @@ class TS2322Fixer {
     const fileSet = new Set();
 
     for (const line of lines) {
-      const m = line.match(/([^:]+):(\d+):(\d+): error TS2322: Type '([^']+)' is not assignable to type '([^']+)'/);
+      // Try Windows format first: file(line,col): error TS2322: Type 'X' is not assignable to type 'Y'
+      let m = line.match(/([^(]+)\((\d+),(\d+)\): error TS2322: Type '([^']+)' is not assignable to type '([^']+)'/);
+      if (!m) {
+        // Try Unix format: file:line:col: error TS2322: Type 'X' is not assignable to type 'Y'
+        m = line.match(/([^:]+):(\d+):(\d+): error TS2322: Type '([^']+)' is not assignable to type '([^']+)'/);
+      }
       if (!m) continue;
+
       const [_, file, lineNumStr, colStr, fromType, toType] = m;
       fileSet.add(file);
 

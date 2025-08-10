@@ -55,7 +55,14 @@ class TS2300Fixer {
       const output = run();
       if (!output) return [];
       return output.split('\n').filter(l => /error TS2300:/.test(l)).map(line => {
-        const match = line.match(/([^:]+):(\d+):(\d+):\s*error TS2300: Duplicate identifier '([^']+)'/);
+        // Try Windows format first: file(line,col): error TS2300: Duplicate identifier 'name'
+        let match = line.match(/([^(]+)\((\d+),(\d+)\):\s*error TS2300: Duplicate identifier '([^']+)'/);
+        if (match) {
+          return { file: match[1], line: parseInt(match[2]), ident: match[4] };
+        }
+
+        // Try Unix format: file:line:col: error TS2300: Duplicate identifier 'name'
+        match = line.match(/([^:]+):(\d+):(\d+):\s*error TS2300: Duplicate identifier '([^']+)'/);
         return match ? { file: match[1], line: parseInt(match[2]), ident: match[4] } : null;
       }).filter(Boolean);
     } catch {
