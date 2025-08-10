@@ -4,7 +4,7 @@
  * Strategy: remove unused imports and variables safely
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -79,7 +79,7 @@ class TS6133Fixer {
 
       try {
         // Check if file exists
-        if (!require('fs').existsSync(full)) {
+        if (!existsSync(full)) {
           this.log(`File not found: ${file}`);
           continue;
         }

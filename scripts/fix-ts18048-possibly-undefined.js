@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const projectRoot = process.cwd();
@@ -86,7 +86,7 @@ class TS18048Fixer {
       const fullPath = join(projectRoot, filePath);
 
       // Check if file exists
-      if (!require('fs').existsSync(fullPath)) {
+      if (!existsSync(fullPath)) {
         this.log(`File not found: ${filePath}`, 'warning');
         return false;
       }

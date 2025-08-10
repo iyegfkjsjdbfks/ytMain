@@ -344,20 +344,12 @@ const isMainModule = import.meta.url === `file://${process.argv[1]}` ||
                      import.meta.url.endsWith(process.argv[1]) ||
                      process.argv[1].endsWith('fix-all-errors.js');
 
-console.log('Debug: Script execution check');
-console.log('import.meta.url:', import.meta.url);
-console.log('process.argv[1]:', process.argv[1]);
-console.log('isMainModule:', isMainModule);
-
 if (isMainModule) {
-  console.log('Starting MasterErrorFixer...');
   const fixer = new MasterErrorFixer();
   fixer.run().catch(err => {
     console.error('MasterErrorFixer failed:', err);
     process.exitCode = 1;
   });
-} else {
-  console.log('Script not executed as main module');
 }
 
 export { MasterErrorFixer };

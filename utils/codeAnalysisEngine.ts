@@ -93,12 +93,12 @@ return;
   /**
    * Analyze code metrics for a specific file or project
    */
-  async analyzeCode(filePath?: string): Promise<CodeMetrics> {
+  async analyzeCode(_filePath?: string): Promise<CodeMetrics> {
     const startTime = performance.now();
 
     try {
-      const metrics = await this.calculateCodeMetrics(filePath);
-      const codeSmells = await this.detectCodeSmells(filePath);
+      const metrics = await this.calculateCodeMetrics(_filePath);
+      const codeSmells = await this.detectCodeSmells(_filePath);
 
       const result: CodeMetrics = {
         ...metrics,
@@ -106,7 +106,7 @@ return;
       };
 
       // Store analysis history
-      const key = filePath || 'project';
+      const key = _filePath || 'project';
       if (!this.analysisHistory.has(key)) {
         this.analysisHistory.set(key, []);
       }
@@ -157,7 +157,7 @@ return;
   /**
    * Generate automated refactoring suggestions
    */
-  async generateRefactoringSuggestions(filePath: string): Promise<{
+  async generateRefactoringSuggestions(_filePath: string): Promise<{
     suggestions: Array<{
       type: string;
       description: string;
@@ -165,7 +165,7 @@ return;
       confidence: number;
     }>;
   }> {
-    const fileContent = await this.getFileContent(filePath);
+    const fileContent = await this.getFileContent(_filePath);
     const suggestions = [];
 
     // Analyze for common refactoring patterns
@@ -180,13 +180,13 @@ return;
   /**
    * Get code quality trends
    */
-  getQualityTrends(filePath?: string, days = 30): {
+  getQualityTrends(_filePath?: string, days = 30): {
     complexity: number[];
     maintainability: number[];
     technicalDebt: number[];
     timestamps: number[];
   } {
-    const key = filePath || 'project';
+    const key = _filePath || 'project';
     const history = this.analysisHistory.get(key) || [];
 
     // Filter recent history (mock timestamps for now)
@@ -245,7 +245,7 @@ return;
     };
   }
 
-  private async detectCodeSmells(filePath?: string): Promise<CodeSmell[]> {
+  private async detectCodeSmells(_filePath?: string): Promise<CodeSmell[]> {
     // Mock implementation - in real scenario, this would analyze actual code
     const smells: CodeSmell[] = [];
 
@@ -254,7 +254,7 @@ return;
       smells.push({
         type: 'long-method',
         severity: 'medium',
-        file: filePath || 'components/VideoPlayer.tsx',
+        file: _filePath || 'components/VideoPlayer.tsx',
         line: 45,
         description: 'Method has too many lines (>50)',
         suggestion: 'Consider extracting smaller methods',
@@ -266,7 +266,7 @@ return;
       smells.push({
         type: 'complex-condition',
         severity: 'high',
-        file: filePath || 'utils/videoUtils.ts',
+        file: _filePath || 'utils/videoUtils.ts',
         line: 23,
         description: 'Complex conditional logic detected',
         suggestion: 'Extract condition into separate method',
@@ -278,7 +278,7 @@ return;
       smells.push({
         type: 'duplicate-code',
         severity: 'medium',
-        file: filePath || 'components/VideoCard.tsx',
+        file: _filePath || 'components/VideoCard.tsx',
         line: 12,
         description: 'Duplicate code block found',
         suggestion: 'Extract common functionality into utility',
@@ -448,7 +448,7 @@ return;
 
   private async getFileContent(__filePath: string): Promise<string> {
     // Mock implementation - in real scenario, this would read actual file
-    return `// Mock file content for ${filePath}`;
+    return `// Mock file content for ${_filePath}`;
   }
 
   private async suggestExtractMethod(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {

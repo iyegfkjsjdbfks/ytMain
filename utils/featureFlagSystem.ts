@@ -9,7 +9,7 @@ import { advancedAPM } from './advancedMonitoring';
 
 import { performanceMonitor } from './performanceMonitor';
 
-// Types for feature flag system
+// Types for feature _flag system
 interface FeatureFlag {
   id: string;
   name: string;
@@ -100,7 +100,7 @@ interface FlagEvaluation {
   variant?: string;
   reason: string;
   timestamp: number;
-  context: UserContext;
+  _context: UserContext;
 }
 
 interface ABTestResult {
@@ -130,7 +130,7 @@ class AdvancedFeatureFlagManager {
   }
 
   /**
-   * Start the feature flag system
+   * Start the feature _flag system
    */
   start(): void {
     if (this.isRunning) {
@@ -141,11 +141,11 @@ return undefined;
     this.startMonitoring();
     this.startRolloutScheduler();
 
-    console.log('🚩 Advanced feature flag system started');
+    console.log('🚩 Advanced feature _flag system started');
   }
 
   /**
-   * Stop the feature flag system
+   * Stop the feature _flag system
    */
   stop(): void {
     this.isRunning = false;
@@ -154,61 +154,61 @@ return undefined;
     this.rolloutTimers.forEach(timer => clearTimeout(timer));
     this.rolloutTimers.clear();
 
-    console.log('🚩 Advanced feature flag system stopped');
+    console.log('🚩 Advanced feature _flag system stopped');
   }
 
   /**
-   * Create or update a feature flag
+   * Create or update a feature _flag
    */
-  createFlag(flag: Omit<FeatureFlag, 'metadata'> & { metadata?: Partial<FeatureFlag['metadata']> }): void {
+  createFlag(_flag: Omit<FeatureFlag, 'metadata'> & { metadata?: Partial<FeatureFlag['metadata']> }): void {
     const now = Date.now();
     const fullFlag: FeatureFlag = {
-      ...flag,
+      ..._flag,
       metadata: {
-        createdAt: this.flags.has(flag.id) ? this.flags.get(flag.id)!.metadata.createdAt : now,
+        createdAt: this.flags.has(_flag.id) ? this.flags.get(_flag.id)!.metadata.createdAt : now,
         updatedAt: now,
         createdBy: 'system',
-        tags: flag.metadata && flag.metadata.tags || [],
+        tags: _flag.metadata && _flag.metadata.tags || [],
         environment: process.env.NODE_ENV || 'development',
       },
     };
 
-    this.flags.set(flag.id, fullFlag);
-    this.clearEvaluationCache(flag.id);
+    this.flags.set(_flag.id, fullFlag);
+    this.clearEvaluationCache(_flag.id);
 
     // Start rollout if gradual
     if (fullFlag.rolloutStrategy.type === 'gradual') {
       this.startGradualRollout(fullFlag);
     }
 
-    console.log(`🚩 Feature flag '${flag.name}' created/updated`);
+    console.log(`🚩 Feature _flag '${_flag.name}' created/updated`);
 
-    advancedAPM.recordMetric('feature-flag-created', 1, {
-      flagId: flag.id,
-      flagName: flag.name,
-      type: flag.type,
+    advancedAPM.recordMetric('feature-_flag-created', 1, {
+      flagId: _flag.id,
+      flagName: _flag.name,
+      type: _flag.type,
     });
   }
 
   /**
-   * Evaluate a feature flag for a user
+   * Evaluate a feature _flag for a user
    */
   evaluateFlag(flagId: string, _context: UserContext = {}, defaultValue?: any): any {
-    const flag = this.flags.get(flagId);
-    if (!flag) {
-      console.warn(`🚩 Feature flag '${flagId}' not found`);
+    const _flag = this.flags.get(flagId);
+    if (!_flag) {
+      console.warn(`🚩 Feature _flag '${flagId}' not found`);
       return defaultValue !== undefined ? defaultValue : false;
     }
 
     // Check cache first
-    const cacheKey = this.getCacheKey(flagId, context);
+    const cacheKey = this.getCacheKey(flagId, _context);
     const cached = this.evaluationCache.get(cacheKey);
     if (cached && cached.expiry > Date.now()) {
       return cached.value;
     }
 
-    // Evaluate flag
-    const evaluation = this.performEvaluation(flag, context);
+    // Evaluate _flag
+    const evaluation = this.performEvaluation(_flag, _context);
 
     // Cache result (5 minute TTL)
     this.evaluationCache.set(cacheKey, {
@@ -225,8 +225,8 @@ return undefined;
     }
 
     // Track metrics
-    if (flag.monitoring.trackEvents) {
-      advancedAPM.recordMetric('feature-flag-evaluation', 1, {
+    if (_flag.monitoring.trackEvents) {
+      advancedAPM.recordMetric('feature-_flag-evaluation', 1, {
         flagId,
         value: String(evaluation.value),
         variant: evaluation.variant || 'default',
@@ -235,7 +235,7 @@ return undefined;
     }
 
     // Track performance impact
-    if (flag.monitoring.trackPerformance) {
+    if (_flag.monitoring.trackPerformance) {
       this.trackPerformanceImpact(flagId, evaluation.value);
     }
 
@@ -250,14 +250,14 @@ return undefined;
   }
 
   /**
-   * Get feature flag by ID
+   * Get feature _flag by ID
    */
   getFlag(flagId: string): FeatureFlag | undefined {
     return this.flags.get(flagId);
   }
 
   /**
-   * Delete a feature flag
+   * Delete a feature _flag
    */
   deleteFlag(flagId: string): boolean {
     const deleted = this.flags.delete(flagId);
@@ -271,50 +271,50 @@ return undefined;
         this.rolloutTimers.delete(flagId);
       }
 
-      console.log(`🚩 Feature flag '${flagId}' deleted`);
+      console.log(`🚩 Feature _flag '${flagId}' deleted`);
     }
     return deleted;
   }
 
   /**
-   * Update flag rollout percentage
+   * Update _flag rollout percentage
    */
   updateRolloutPercentage(flagId: string, percentage: number): void {
-    const flag = this.flags.get(flagId);
-    if (!flag) {
-      throw new Error(`Feature flag '${flagId}' not found`);
+    const _flag = this.flags.get(flagId);
+    if (!_flag) {
+      throw new Error(`Feature _flag '${flagId}' not found`);
     }
 
-    flag.rolloutStrategy?._config.percentage = Math.max(0, Math.min(100, percentage));
-    flag.metadata.updatedAt = Date.now();
+    _flag.rolloutStrategy?._config.percentage = Math.max(0, Math.min(100, percentage));
+    _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
 
     console.log(`🚩 Updated rollout percentage for '${flagId}' to ${percentage}%`);
 
-    advancedAPM.recordMetric('feature-flag-rollout-updated', 1, {
+    advancedAPM.recordMetric('feature-_flag-rollout-updated', 1, {
       flagId,
       percentage: percentage.toString(),
     });
   }
 
   /**
-   * Enable/disable a feature flag
+   * Enable/disable a feature _flag
    */
   toggleFlag(flagId: string, enabled: boolean): void {
-    const flag = this.flags.get(flagId);
-    if (!flag) {
-      throw new Error(`Feature flag '${flagId}' not found`);
+    const _flag = this.flags.get(flagId);
+    if (!_flag) {
+      throw new Error(`Feature _flag '${flagId}' not found`);
     }
 
-    flag.enabled = enabled;
-    flag.metadata.updatedAt = Date.now();
+    _flag.enabled = enabled;
+    _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
 
-    console.log(`🚩 Feature flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
+    console.log(`🚩 Feature _flag '${flagId}' ${enabled ? 'enabled' : 'disabled'}`);
 
-    advancedAPM.recordMetric('feature-flag-toggled', 1, {
+    advancedAPM.recordMetric('feature-_flag-toggled', 1, {
       flagId,
       enabled: enabled.toString(),
     });
@@ -370,8 +370,8 @@ return undefined;
    * Run A/B test analysis
    */
   async runABTestAnalysis(flagId: string): Promise<ABTestResult[]> {
-    const flag = this.flags.get(flagId);
-    if (!flag?.variants || flag.variants.length < 2) {
+    const _flag = this.flags.get(flagId);
+    if (!_flag?.variants || _flag.variants.length < 2) {
       throw new Error('Flag must have at least 2 variants for A/B testing');
     }
 
@@ -385,7 +385,7 @@ return undefined;
       const variantResults: Record<string, { value: number; sampleSize: number }> = {};
 
       // Generate mock data for each variant
-      flag.variants.forEach(variant => {
+      _flag.variants.forEach(variant => {
         const sampleSize = analytics.variantDistribution[variant.id] || 0;
         let value: number;
 
@@ -446,7 +446,7 @@ return [];
 
     this.abTestResults.set(flagId, results);
 
-    console.log(`📊 A/B test analysis completed for flag '${flagId}'`);
+    console.log(`📊 A/B test analysis completed for _flag '${flagId}'`);
 
     return results;
   }
@@ -515,26 +515,26 @@ return [];
     const recommendation = this.getABTestRecommendations(flagId);
 
     if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
-      const flag = this.flags.get(flagId);
-      if (!flag) {
+      const _flag = this.flags.get(flagId);
+      if (!_flag) {
 return undefined;
 }
 
-      const winningVariant = flag.variants?.find(v => v.id === recommendation.winningVariant);
+      const winningVariant = _flag.variants?.find(v => v.id === recommendation.winningVariant);
       if (!winningVariant) {
 return undefined;
 }
 
-      // Update flag to use winning variant as default
-      flag.defaultValue = winningVariant.value;
-      flag.rolloutStrategy?._config.percentage = 100;
-      flag.metadata.updatedAt = Date.now();
+      // Update _flag to use winning variant as default
+      _flag.defaultValue = winningVariant.value;
+      _flag.rolloutStrategy?._config.percentage = 100;
+      _flag.metadata.updatedAt = Date.now();
 
       this.clearEvaluationCache(flagId);
 
-      console.log(`🏆 Auto-promoted winning variant '${winningVariant.name}' for flag '${flagId}'`);
+      console.log(`🏆 Auto-promoted winning variant '${winningVariant.name}' for _flag '${flagId}'`);
 
-      advancedAPM.recordMetric('feature-flag-auto-promoted', 1, {
+      advancedAPM.recordMetric('feature-_flag-auto-promoted', 1, {
         flagId,
         winningVariant: winningVariant.id,
         confidence: recommendation.confidence.toString(),
@@ -546,66 +546,66 @@ return undefined;
    * Emergency rollback
    */
   emergencyRollback(flagId: string, reason: string): void {
-    const flag = this.flags.get(flagId);
-    if (!flag) {
+    const _flag = this.flags.get(flagId);
+    if (!_flag) {
 return undefined;
 }
 
-    // Disable flag or set to safe default
-    flag.enabled = false;
-    flag.rolloutStrategy?._config.percentage = 0;
-    flag.metadata.updatedAt = Date.now();
+    // Disable _flag or set to safe default
+    _flag.enabled = false;
+    _flag.rolloutStrategy?._config.percentage = 0;
+    _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
 
-    console.error(`🚨 Emergency rollback for flag '${flagId}': ${reason}`);
+    console.error(`🚨 Emergency rollback for _flag '${flagId}': ${reason}`);
 
-    advancedAPM.recordMetric('feature-flag-emergency-rollback', 1, {
+    advancedAPM.recordMetric('feature-_flag-emergency-rollback', 1, {
       flagId,
       reason,
     });
   }
 
-  private performEvaluation(flag: FeatureFlag, _context: UserContext): FlagEvaluation {
+  private performEvaluation(_flag: FeatureFlag, _context: UserContext): FlagEvaluation {
     const evaluation: FlagEvaluation = {
-      flagId: flag.id,
-      value: flag.defaultValue,
+      flagId: _flag.id,
+      value: _flag.defaultValue,
       timestamp: Date.now(),
-      context,
+      _context,
       reason: 'default',
     };
 
     // Add userId only if it exists
-    if (context.userId) {
-      evaluation.userId = context.userId;
+    if (_context.userId) {
+      evaluation.userId = _context.userId;
     }
 
-    // Check if flag is enabled
-    if (!flag.enabled) {
+    // Check if _flag is enabled
+    if (!_flag.enabled) {
       evaluation.reason = 'flag_disabled';
       return evaluation;
     }
 
     // Check schedule
-    if (flag.schedule) {
+    if (_flag.schedule) {
       const now = Date.now();
-      if (flag.schedule.startTime && now < flag.schedule.startTime) {
+      if (_flag.schedule.startTime && now < _flag.schedule.startTime) {
         evaluation.reason = 'not_started';
         return evaluation;
       }
-      if (flag.schedule.endTime && now > flag.schedule.endTime) {
+      if (_flag.schedule.endTime && now > _flag.schedule.endTime) {
         evaluation.reason = 'expired';
         return evaluation;
       }
     }
 
     // Check targeting rules
-    for (const rule of flag.targeting) {
+    for (const rule of _flag.targeting) {
       if (!rule.enabled) {
 continue;
 }
 
-      const ruleMatches = this.evaluateTargetingRule(rule, context);
+      const ruleMatches = this.evaluateTargetingRule(rule, _context);
       if (ruleMatches) {
         evaluation.value = rule.value;
         evaluation.reason = `targeting_rule_${rule.id}`;
@@ -614,7 +614,7 @@ continue;
     }
 
     // Apply rollout strategy
-    const rolloutResult = this.applyRolloutStrategy(flag, context);
+    const rolloutResult = this.applyRolloutStrategy(_flag, _context);
     if (rolloutResult.shouldApply) {
       evaluation.value = rolloutResult.value;
       if (rolloutResult.variant) {
@@ -628,7 +628,7 @@ continue;
 
   private evaluateTargetingRule(rule: TargetingRule, _context: UserContext): boolean {
     const results = rule.conditions.map(condition =>
-      this.evaluateTargetingCondition(condition, context),
+      this.evaluateTargetingCondition(condition, _context),
     );
 
     return rule.operator === 'AND'
@@ -637,7 +637,7 @@ continue;
   }
 
   private evaluateTargetingCondition(condition: TargetingCondition, _context: UserContext): boolean {
-    const contextValue = this.getContextValue(condition.attribute, context);
+    const contextValue = this.getContextValue(condition.attribute, _context);
 
     switch (condition.operator) {
       case 'equals':
@@ -671,42 +671,43 @@ continue;
   private getContextValue(attribute: string, _context: UserContext): any {
     switch (attribute) {
       case 'userId':
-        return context.userId;
+        return _context.userId;
       case 'country':
-        return context.country;
+        return _context.country;
       case 'deviceType':
-        return context.deviceType;
+        return _context.deviceType;
       case 'browserType':
-        return context.browserType;
+        return _context.browserType;
       default:
-        return context.customAttributes?.[attribute];
+        return _context.customAttributes?.[attribute];
     }
   }
 
-  private applyRolloutStrategy(flag: FeatureFlag, _context: UserContext): {
+  private applyRolloutStrategy(_flag: FeatureFlag, _context: UserContext): {
     shouldApply: boolean;
     value: any;
     variant?: string;
     reason: string;
   } {
-    const _strategy = flag.rolloutStrategy;
+    const _strategy = _flag.rolloutStrategy;
 
     switch (strategy.type) {
+      const strategy = this.strategy;
       case 'immediate':
         return {
           shouldApply: true,
-          value: flag.defaultValue,
+          value: _flag.defaultValue,
           reason: 'immediate_rollout',
         };
 
       case 'gradual':
       case 'user-based':
         const percentage = strategy?._config.percentage || 0;
-        const hash = this.getUserHash(context.userId || context.sessionId || 'anonymous', flag.id);
+        const hash = this.getUserHash(_context.userId || _context.sessionId || 'anonymous', _flag.id);
         const shouldInclude = hash < percentage;
 
-        if (shouldInclude && flag.variants && flag.variants.length > 0) {
-          const variant = this.selectVariant(flag.variants, hash);
+        if (shouldInclude && _flag.variants && _flag.variants.length > 0) {
+          const variant = this.selectVariant(_flag.variants, hash);
           return {
             shouldApply: true,
             value: variant.value,
@@ -717,25 +718,25 @@ continue;
 
         return {
           shouldApply: shouldInclude,
-          value: flag.defaultValue,
+          value: _flag.defaultValue,
           reason: shouldInclude ? 'rollout_included' : 'rollout_excluded',
         };
 
       case 'geographic':
         const geoTargets = strategy?._config.geoTargets || [];
-        const userCountry = context.country;
+        const userCountry = _context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
 
         return {
           shouldApply: geoMatch,
-          value: flag.defaultValue,
+          value: _flag.defaultValue,
           reason: geoMatch ? 'geo_included' : 'geo_excluded',
         };
 
       default:
         return {
           shouldApply: false,
-          value: flag.defaultValue,
+          value: _flag.defaultValue,
           reason: 'unknown_strategy',
         };
     }
@@ -782,16 +783,16 @@ continue;
   private getCacheKey(flagId: string, _context: UserContext): string {
     const keyParts = [
       flagId,
-      context.userId || 'anonymous',
-      context.country || 'unknown',
-      context.deviceType || 'unknown',
+      _context.userId || 'anonymous',
+      _context.country || 'unknown',
+      _context.deviceType || 'unknown',
     ];
     return keyParts.join(':');
   }
 
   private clearEvaluationCache(flagId?: string): void {
     if (flagId) {
-      // Clear cache entries for specific flag
+      // Clear cache entries for specific _flag
       const keysToDelete: string[] = [];
       this.evaluationCache.forEach((_, key) => {
         if (key.startsWith(`${flagId}:`)) {
@@ -805,8 +806,8 @@ continue;
     }
   }
 
-  private startGradualRollout(flag: FeatureFlag): void {
-    const _strategy = flag.rolloutStrategy;
+  private startGradualRollout(_flag: FeatureFlag): void {
+    const _strategy = _flag.rolloutStrategy;
     if (strategy.type !== 'gradual' || !strategy?._config.incrementPercentage || !strategy?._config.incrementInterval) {
       return undefined;
     }
@@ -821,49 +822,49 @@ continue;
 
     const timer = setTimeout(() => {
       const newPercentage = Math.min(100, currentPercentage + incrementPercentage);
-      this.updateRolloutPercentage(flag.id, newPercentage);
+      this.updateRolloutPercentage(_flag.id, newPercentage);
 
       // Schedule next increment if not at 100%
       if (newPercentage < 100) {
-        this.startGradualRollout(flag);
+        this.startGradualRollout(_flag);
       }
     }, incrementInterval);
 
-    this.rolloutTimers.set(flag.id, timer);
+    this.rolloutTimers.set(_flag.id, timer);
   }
 
   private trackPerformanceImpact(flagId: string, flagValue: any): void {
-    // Track performance metrics when flag is evaluated
+    // Track performance metrics when _flag is evaluated
     const metrics = performanceMonitor.getMetrics();
     const loadTime = metrics.find(m => m.name === 'page-load-time')?.value || 0;
 
-    advancedAPM.recordMetric('feature-flag-performance-impact', loadTime, {
+    advancedAPM.recordMetric('feature-_flag-performance-impact', loadTime, {
       flagId,
       flagValue: String(flagValue),
     });
   }
 
   private startMonitoring(): void {
-    // Monitor flag performance and trigger alerts
+    // Monitor _flag performance and trigger alerts
     setInterval(() => {
       if (!this.isRunning) {
 return undefined;
 }
 
-      this.flags.forEach(flag => {
-        if (!flag.monitoring.alertThresholds.length) {
+      this.flags.forEach(_flag => {
+        if (!_flag.monitoring.alertThresholds.length) {
 return undefined;
 }
 
-        flag.monitoring.alertThresholds.forEach(threshold => {
-          this.checkAlertThreshold(flag, threshold);
+        _flag.monitoring.alertThresholds.forEach(_threshold => {
+          this.checkAlertThreshold(_flag, _threshold);
         });
       });
     }, 60000); // Check every minute
   }
 
   private startRolloutScheduler(): void {
-    // Check for scheduled flag activations
+    // Check for scheduled _flag activations
     setInterval(() => {
       if (!this.isRunning) {
 return undefined;
@@ -871,34 +872,35 @@ return undefined;
 
       const now = Date.now();
 
-      this.flags.forEach(flag => {
-        if (!flag.schedule) {
+      this.flags.forEach(_flag => {
+        if (!_flag.schedule) {
 return undefined;
 }
 
         // Auto-enable flags that should start
-        if (flag.schedule.startTime &&
-            flag.schedule.startTime <= now &&
-            !flag.enabled) {
-          this.toggleFlag(flag.id, true);
-          console.log(`🕐 Auto-enabled scheduled flag '${flag.id}'`);
+        if (_flag.schedule.startTime &&
+            _flag.schedule.startTime <= now &&
+            !_flag.enabled) {
+          this.toggleFlag(_flag.id, true);
+          console.log(`🕐 Auto-enabled scheduled _flag '${_flag.id}'`);
         }
 
         // Auto-disable flags that should end
-        if (flag.schedule.endTime &&
-            flag.schedule.endTime <= now &&
-            flag.enabled) {
-          this.toggleFlag(flag.id, false);
-          console.log(`🕐 Auto-disabled expired flag '${flag.id}'`);
+        if (_flag.schedule.endTime &&
+            _flag.schedule.endTime <= now &&
+            _flag.enabled) {
+          this.toggleFlag(_flag.id, false);
+          console.log(`🕐 Auto-disabled expired _flag '${_flag.id}'`);
         }
       });
     }, 30000); // Check every 30 seconds
   }
 
   private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
+    const threshold = this.threshold;
     let __currentValue: number;
 
-    switch (threshold.metric) {
+    switch (_threshold.metric) {
       case 'error_rate':
         currentValue = Math.random() * 0.1; // Mock error rate
         break;
@@ -906,7 +908,7 @@ return undefined;
         currentValue = Math.random() * 1000 + 200; // Mock response time
         break;
       case 'conversion_rate':
-        const analytics = this.getEvaluationAnalytics(flag.id, 1);
+        const analytics = this.getEvaluationAnalytics(_flag.id, 1);
         currentValue = Object.values(analytics.conversionRates)[0] || 0;
         break;
       default:
@@ -914,30 +916,30 @@ return undefined;
     }
 
     let shouldTrigger = false;
-    switch (threshold.operator) {
+    switch (_threshold.operator) {
       case 'gt':
-        shouldTrigger = currentValue > threshold.value;
+        shouldTrigger = currentValue > _threshold.value;
         break;
       case 'lt':
-        shouldTrigger = currentValue < threshold.value;
+        shouldTrigger = currentValue < _threshold.value;
         break;
       case 'eq':
-        shouldTrigger = currentValue === threshold.value;
+        shouldTrigger = currentValue === _threshold.value;
         break;
     }
 
     if (shouldTrigger) {
-      console.warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
+      console.warn(`🚨 Alert _threshold triggered for _flag '${_flag.id}': ${_threshold.metric} ${_threshold.operator} ${_threshold.value} (current: ${currentValue})`);
 
-      switch (threshold.action) {
+      switch (_threshold.action) {
         case 'notify':
           // Send notification (implementation would depend on notification system)
           break;
         case 'disable':
-          this.toggleFlag(flag.id, false);
+          this.toggleFlag(_flag.id, false);
           break;
         case 'rollback':
-          this.emergencyRollback(flag.id, `Alert threshold: ${threshold.metric} ${threshold.operator} ${threshold.value}`);
+          this.emergencyRollback(_flag.id, `Alert _threshold: ${_threshold.metric} ${_threshold.operator} ${_threshold.value}`);
           break;
       }
     }
@@ -1099,11 +1101,11 @@ export { AdvancedFeatureFlagManager };
 
 // Convenience hooks for React components
 export const useFeatureFlag = (flagId: string, _context: UserContext = {}, defaultValue?: any) => {
-  return featureFlagManager.evaluateFlag(flagId, context, defaultValue);
+  return featureFlagManager.evaluateFlag(flagId, _context, defaultValue);
 };
 
 export const useABTest = (flagId: string, _context: UserContext = {}) => {
-  const evaluation = featureFlagManager.evaluateFlag(flagId, context);
+  const evaluation = featureFlagManager.evaluateFlag(flagId, _context);
   return {
     value: evaluation,
     variant: evaluation.variant || 'control',

@@ -4,7 +4,7 @@
  * Fixes undefined variables and missing imports
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -63,7 +63,19 @@ class TS2304Fixer {
       const output = run();
       if (!output) return [];
       return output.split('\n').filter(line => /error TS2304:/.test(line)).map(line => {
-        const match = line.match(/([^:]+):(\d+):(\d+):\s*error TS2304: Cannot find name '([^']+)'/);
+        // Try Windows format first: file(line,col): error TS2304: Cannot find name 'variable'
+        let match = line.match(/([^(]+)\((\d+),(\d+)\):\s*error TS2304: Cannot find name '([^']+)'/);
+        if (match) {
+          return {
+            file: match[1],
+            line: parseInt(match[2]),
+            column: parseInt(match[3]),
+            variable: match[4]
+          };
+        }
+
+        // Try Unix format: file:line:col: error TS2304: Cannot find name 'variable'
+        match = line.match(/([^:]+):(\d+):(\d+):\s*error TS2304: Cannot find name '([^']+)'/);
         if (match) {
           return {
             file: match[1],
@@ -84,7 +96,7 @@ class TS2304Fixer {
 
     try {
       // Check if file exists and is readable
-      if (!require('fs').existsSync(fullPath)) {
+      if (!existsSync(fullPath)) {
         this.log(`File not found: ${filePath}`, 'warning');
         return false;
       }
@@ -258,7 +270,11 @@ class TS2304Fixer {
 }
 
 // Run the fixer
-if (import.meta.url === `file://${process.argv[1]}`) {
+const isMainModule = import.meta.url === `file://${process.argv[1]}` ||
+                     import.meta.url.endsWith(process.argv[1]) ||
+                     process.argv[1].endsWith('fix-ts2304-cannot-find-name.js');
+
+if (isMainModule) {
   const fixer = new TS2304Fixer();
   fixer.run().catch(console.error);
 }

@@ -6,7 +6,7 @@
  * - Ensures React is not imported twice
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -68,7 +68,7 @@ class TS2300Fixer {
 
     try {
       // Check if file exists
-      if (!require('fs').existsSync(fullPath)) {
+      if (!existsSync(fullPath)) {
         this.log(`File not found: ${filePath}`, 'warning');
         return false;
       }

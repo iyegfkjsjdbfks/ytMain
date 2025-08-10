@@ -23,7 +23,7 @@ interface CodeMetrics {
 
 interface CodeQualityTrend {
   timestamp: number;
-  metrics: CodeMetrics;
+  _metrics: CodeMetrics;
   score: number;
   improvements: string[];
   regressions: string[];
@@ -189,9 +189,9 @@ return;
 
       console.log('🔍 Performing code quality analysis...');
 
-      // Get current metrics
-      const metrics = await this.collectCodeMetrics();
-      const score = this.calculateQualityScore(metrics);
+      // Get current _metrics
+      const _metrics = await this.collectCodeMetrics();
+      const score = this.calculateQualityScore(_metrics);
 
       // Analyze trends
       const previousTrend = this.trends[this.trends.length - 1];
@@ -199,9 +199,9 @@ return;
       const regressions: string[] = [];
 
       if (previousTrend) {
-        // Compare with previous metrics
-        Object.entries(metrics).forEach(([key, value]) => {
-          const previousValue = previousTrend.metrics[key as keyof CodeMetrics];
+        // Compare with previous _metrics
+        Object.entries(_metrics).forEach(([key, value]) => {
+          const previousValue = previousTrend._metrics[key as keyof CodeMetrics];
           const improvement = this.isImprovement(key as keyof CodeMetrics, value, previousValue);
 
           if (improvement > 0) {
@@ -215,7 +215,7 @@ return;
       // Store trend
       const trend: CodeQualityTrend = {
         timestamp: now,
-        metrics,
+        _metrics,
         score,
         improvements,
         regressions,
@@ -229,11 +229,11 @@ return;
       }
 
       // Generate insights and opportunities
-      await this.generateRefactoringOpportunities(metrics);
-      await this.generateCodeReviewInsights(metrics);
+      await this.generateRefactoringOpportunities(_metrics);
+      await this.generateCodeReviewInsights(_metrics);
 
       // Check quality gates
-      this.checkQualityGates(metrics);
+      this.checkQualityGates(_metrics);
 
       // Report significant changes
       if (regressions.length > 0) {
@@ -254,15 +254,15 @@ return;
   }
 
   /**
-   * Collect comprehensive code metrics
+   * Collect comprehensive code _metrics
    */
   private async collectCodeMetrics(): Promise<CodeMetrics> {
     try {
-      // Get metrics from code analysis engine
+      // Get _metrics from code analysis engine
       const analysis = await codeAnalysisEngine.analyzeCode();
 
-      // Simulate additional metrics (in a real implementation, these would come from actual tools)
-      const metrics: CodeMetrics = {
+      // Simulate additional _metrics (in a real implementation, these would come from actual tools)
+      const _metrics: CodeMetrics = {
         complexity: analysis.complexity || this.generateRealisticMetric('complexity', 5, 15),
         maintainability: analysis.maintainabilityIndex || this.generateRealisticMetric('maintainability', 60, 95),
         testCoverage: analysis.testCoverage || this.generateRealisticMetric('testCoverage', 70, 90),
@@ -273,11 +273,11 @@ return;
         accessibilityIssues: this.generateRealisticMetric('accessibilityIssues', 0, 8),
       };
 
-      return metrics;
+      return _metrics;
     } catch (error) {
-      console.error('Failed to collect code metrics:', error);
+      console.error('Failed to collect code _metrics:', error);
 
-      // Return default metrics on error
+      // Return default _metrics on error
       return {
         complexity: 8,
         maintainability: 75,
@@ -300,7 +300,7 @@ return;
     // Add some trend based on previous values
     const previousTrend = this.trends[this.trends.length - 1];
     if (previousTrend) {
-      const previousValue = previousTrend.metrics[type as keyof CodeMetrics];
+      const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
       // Small random walk
       const change = (Math.random() - 0.5) * 2; // -1 to 1
       return Math.max(min, Math.min(max, previousValue + change));
@@ -312,7 +312,7 @@ return;
   /**
    * Calculate overall quality score
    */
-  private calculateQualityScore(metrics: CodeMetrics): number {
+  private calculateQualityScore(_metrics: CodeMetrics): number {
     const weights = {
       complexity: -2, // Lower is better
       maintainability: 1,
@@ -326,7 +326,7 @@ return;
 
     let score = 50; // Base score
 
-    Object.entries(metrics).forEach(([key, value]) => {
+    Object.entries(_metrics).forEach(([key, value]) => {
       const weight = weights[key as keyof typeof weights];
       if (weight > 0) {
         score += (value / 100) * weight * 50;
@@ -360,7 +360,7 @@ return 0;
     const __opportunities: RefactoringOpportunity[] = [];
 
     // High complexity opportunities
-    if (metrics.complexity > 10) {
+    if (_metrics.complexity > 10) {
       opportunities.push({
         __id: 'reduce-complexity',
         __type: 'maintainability',
@@ -379,7 +379,7 @@ return 0;
     }
 
     // Low test coverage opportunities
-    if (metrics.testCoverage < 80) {
+    if (_metrics.testCoverage < 80) {
       opportunities.push({
         id: 'improve-test-coverage',
         type: 'testing',
@@ -398,7 +398,7 @@ return 0;
     }
 
     // Performance opportunities
-    if (metrics.performanceIssues > 3) {
+    if (_metrics.performanceIssues > 3) {
       opportunities.push({
         id: 'optimize-performance',
         type: 'performance',
@@ -417,7 +417,7 @@ return 0;
     }
 
     // Security opportunities
-    if (metrics.securityVulnerabilities > 0) {
+    if (_metrics.securityVulnerabilities > 0) {
       opportunities.push({
         id: 'fix-security-issues',
         type: 'security',
@@ -436,7 +436,7 @@ return 0;
     }
 
     // Accessibility opportunities
-    if (metrics.accessibilityIssues > 5) {
+    if (_metrics.accessibilityIssues > 5) {
       opportunities.push({
         id: 'improve-accessibility',
         type: 'accessibility',
@@ -464,7 +464,7 @@ return 0;
     const __insights: CodeReviewInsight[] = [];
 
     // Architecture insights
-    if (metrics.complexity > 12) {
+    if (_metrics.complexity > 12) {
       insights.push({
         __id: 'architecture-complexity',
         __category: 'architecture',
@@ -478,7 +478,7 @@ return 0;
     }
 
     // Pattern insights
-    if (metrics.duplicateCode > 8) {
+    if (_metrics.duplicateCode > 8) {
       insights.push({
         id: 'pattern-duplication',
         category: 'patterns',
@@ -492,7 +492,7 @@ return 0;
     }
 
     // Performance insights
-    if (metrics.performanceIssues > 4) {
+    if (_metrics.performanceIssues > 4) {
       insights.push({
         id: 'performance-optimization',
         category: 'performance',
@@ -506,7 +506,7 @@ return 0;
     }
 
     // Security insights
-    if (metrics.securityVulnerabilities > 0) {
+    if (_metrics.securityVulnerabilities > 0) {
       insights.push({
         id: 'security-vulnerabilities',
         category: 'security',
@@ -520,7 +520,7 @@ return 0;
     }
 
     // Testing insights
-    if (metrics.testCoverage < 75) {
+    if (_metrics.testCoverage < 75) {
       insights.push({
         id: 'testing-coverage',
         category: 'testing',
@@ -539,7 +539,7 @@ return 0;
   /**
    * Check quality gates
    */
-  private checkQualityGates(metrics: CodeMetrics): void {
+  private checkQualityGates(_metrics: CodeMetrics): void {
     const failedGates: string[] = [];
 
     this.qualityGates.forEach(gate => {
@@ -548,7 +548,7 @@ return;
 }
 
       const failed = gate.criteria.some(criterion => {
-        const value = metrics[criterion.metric];
+        const value = _metrics[criterion.metric];
 
         switch (criterion.operator) {
           case '>':
@@ -612,11 +612,11 @@ return;
   }
 
   /**
-   * Get latest metrics
+   * Get latest _metrics
    */
   getLatestMetrics(): CodeMetrics | null {
     const latestTrend = this.trends[this.trends.length - 1];
-    return latestTrend ? latestTrend.metrics : null;
+    return latestTrend ? latestTrend._metrics : null;
   }
 
   /**
@@ -665,14 +665,14 @@ return 'No data available';
       `Overall Score: ${latest.score}/100`,
       '',
       '## Metrics',
-      `- Complexity: ${latest.metrics.complexity}`,
-      `- Maintainability: ${latest.metrics.maintainability}`,
-      `- Test Coverage: ${latest.metrics.testCoverage}%`,
-      `- Duplicate Code: ${latest.metrics.duplicateCode}%`,
-      `- Technical Debt: ${latest.metrics.technicalDebt} items`,
-      `- Security Issues: ${latest.metrics.securityVulnerabilities}`,
-      `- Performance Issues: ${latest.metrics.performanceIssues}`,
-      `- Accessibility Issues: ${latest.metrics.accessibilityIssues}`,
+      `- Complexity: ${latest._metrics.complexity}`,
+      `- Maintainability: ${latest._metrics.maintainability}`,
+      `- Test Coverage: ${latest._metrics.testCoverage}%`,
+      `- Duplicate Code: ${latest._metrics.duplicateCode}%`,
+      `- Technical Debt: ${latest._metrics.technicalDebt} items`,
+      `- Security Issues: ${latest._metrics.securityVulnerabilities}`,
+      `- Performance Issues: ${latest._metrics.performanceIssues}`,
+      `- Accessibility Issues: ${latest._metrics.accessibilityIssues}`,
       '',
       '## Recent Changes',
       latest.improvements.length > 0 ? '### Improvements' : '',
