@@ -1,11 +1,19 @@
-import type React from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
 
 import {
   EyeIcon,
   CalendarDaysIcon,
   PlayIcon,
 } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';

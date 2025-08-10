@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useRef  } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useRef  } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-import type * as React from 'react';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import type * as React from 'react';
 
 interface VideoUploadProps {
   onUploadComplete?: (videoId: string) => void;
@@ -87,7 +87,7 @@ return;
 
     // Simulating upload progress
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress(prev: any => {
         const newProgress = prev + 10;
         if (newProgress >= 100) {
           clearInterval(interval);

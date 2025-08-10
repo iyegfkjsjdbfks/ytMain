@@ -2,17 +2,17 @@
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-import type { ReactElement, ReactNode } from 'react';
+// TODO: Fix import - import type { ReactElement, ReactNode } from 'react';
 
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// TODO: Fix import - import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
+// TODO: Fix import - import userEvent from '@testing-library/user-event';
 
-import { MemoryRouter } from 'react-router-dom';
+// TODO: Fix import - import { MemoryRouter } from 'react-router-dom';
 
-import { vi } from 'vitest';
+// TODO: Fix import - import { vi } from 'vitest';
 
 // Mock data generators
 export const mockGenerators = {
@@ -445,7 +445,7 @@ export const a11yUtils = {
   checkBasicA11y: async () => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
-    const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1), 10));
+    const headingLevels = headings.map(h: any => parseInt(h: any.tagName.charAt(1), 10));
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');

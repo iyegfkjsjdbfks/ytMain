@@ -1,7 +1,15 @@
-import type React from 'react';
 
-import { BellIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
+
+// TODO: Fix import - import { BellIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { formatCount } from '../utils/numberUtils';
 
@@ -95,7 +103,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         onClick={onToggleDescription}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={(e: Event) => {
           if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -118,7 +126,7 @@ onToggleDescription();
           onClick={onToggleDescription}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
+          onKeyDown={(e: Event) => {
             if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }

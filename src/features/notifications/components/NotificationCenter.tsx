@@ -1,10 +1,10 @@
-import React from "react";
-import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect, useRef } from 'react';
-import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
-import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface NotificationCenterProps {
   className?: string;
@@ -108,7 +108,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
             <div className="flex items-center gap-1 ml-2">
               {!notification.isRead && (
                 <button
-                  onClick={(e) => {
+                  onClick={(e: Event) => {
                     e.stopPropagation();
                     onMarkAsRead(notification.id);
                   }}
@@ -119,7 +119,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
                 </button>
               )}
               <button
-                onClick={(e) => {
+                onClick={(e: Event) => {
                   e.stopPropagation();
                   onDelete(notification.id);
                 }}
@@ -292,7 +292,7 @@ return false;
             <div className="mt-3">
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(e: Event) => setSelectedCategory(e: Event.target.value)}
                 className="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm"
               >
                 {categories.map((category) => (

@@ -1,8 +1,8 @@
 
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState, useEffect  } from 'react';
 
-import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
 
@@ -69,7 +69,7 @@ const YourDataPage: React.FC = () => {
   };
 
   const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
-    setDataVisibility(prev => ({
+    setDataVisibility(prev: any => ({
       ...prev,
       [dataType]: !prev[dataType],
     }));

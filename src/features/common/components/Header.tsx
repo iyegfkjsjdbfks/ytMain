@@ -1,8 +1,8 @@
-import React from "react";
-import { useState  } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState  } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-import type * as React from 'react';
+// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
+// TODO: Fix import - import type * as React from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
                 placeholder="Search"
                 className="block w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-blue-500"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
               />
               <button
                 type="submit"

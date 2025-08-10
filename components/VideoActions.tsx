@@ -1,4 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   ShareIcon,

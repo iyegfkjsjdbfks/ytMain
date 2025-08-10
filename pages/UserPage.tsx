@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import { useState, useEffect } from 'react';
 
-import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
-import { useParams } from 'react-router-dom';
+// TODO: Fix import - import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { useParams } from 'react-router-dom';
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
@@ -43,7 +43,7 @@ const UserPage: React.FC = () => {
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
+    setSubscriberCount(prev: any => isSubscribed ? prev: any - 1 : prev: any + 1);
   };
 
   const tabs = [
@@ -72,7 +72,7 @@ const UserPage: React.FC = () => {
               </div>
             ) : userVideos.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {userVideos.map(video => (
+                {userVideos.map(video: any => (
                   <VideoCard key={video.id} video={video} />
                 ))}
               </div>

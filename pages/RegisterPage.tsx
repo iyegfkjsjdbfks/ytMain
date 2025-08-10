@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+// TODO: Fix import - import { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
@@ -123,7 +123,7 @@ const RegisterPage: React.FC = () => {
                   autoComplete="username"
                   required
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e: Event) => setUsername(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Choose a username"
                 />
@@ -145,7 +145,7 @@ const RegisterPage: React.FC = () => {
                   autoComplete="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e: Event) => setEmail(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Enter your email"
                 />
@@ -164,7 +164,7 @@ const RegisterPage: React.FC = () => {
                   autoComplete="new-password"
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e: Event) => setPassword(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Create a password"
                 />
@@ -186,7 +186,7 @@ const RegisterPage: React.FC = () => {
                   autoComplete="new-password"
                   required
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e: Event) => setConfirmPassword(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Confirm your password"
                 />
@@ -200,7 +200,7 @@ const RegisterPage: React.FC = () => {
                   name="accept-terms"
                   type="checkbox"
                   checked={acceptTerms}
-                  onChange={(e) => setAcceptTerms(e.target.checked)}
+                  onChange={(e: Event) => setAcceptTerms(e: Event.target.checked)}
                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                   required
                 />

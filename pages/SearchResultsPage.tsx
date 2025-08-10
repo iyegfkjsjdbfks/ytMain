@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect, useCallback, memo } from 'react';
+// TODO: Fix import - import React, { useState, useEffect, useCallback, memo } from 'react';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
@@ -64,7 +64,7 @@ const SearchResultsPage: React.FC = () => {
     }
 
     performanceMonitor.startMeasure('search-results-load');
-    setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
+    setSearchState(prev: any => ({ ...prev: any, loading: true, youtubeLoading: true }));
 
     // Create an AbortController for request cancellation
     const abortController = new AbortController();
@@ -128,7 +128,7 @@ const SearchResultsPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Error in search:', error);
-      setSearchState(prev => ({ ...prev, loading: false, youtubeLoading: false }));
+      setSearchState(prev: any => ({ ...prev: any, loading: false, youtubeLoading: false }));
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
       }
@@ -172,7 +172,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video) => {
+          onVideoClick={(video: any) => {
             if ('videoId' in video) {
               // YouTube video - use google-search prefix for search results
               navigate(`/watch?v=google-search-${video.videoId}`);

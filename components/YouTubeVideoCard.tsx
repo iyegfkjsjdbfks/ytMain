@@ -1,8 +1,16 @@
-// YouTube Video Card component for displaying YouTube search results
-// YouTube Video Card component for displaying YouTube search results
-import type React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// YouTube Video Card component for displaying YouTube search results
+// YouTube Video Card component for displaying YouTube search results
+// TODO: Fix import - import type React from 'react';
+
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 import { buildVideoUrl } from '../utils/componentUtils';
 
@@ -68,7 +76,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={(e: Event) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleCardClick();

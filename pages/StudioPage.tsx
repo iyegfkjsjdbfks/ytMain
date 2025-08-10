@@ -1,5 +1,5 @@
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState, useEffect  } from 'react';
 
 import {
   VideoCameraIcon,
@@ -15,8 +15,8 @@ import {
 
   PlusIcon,
 } from '@heroicons/react/24/outline';
-import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
@@ -303,7 +303,7 @@ return `${(num / 1000).toFixed(1)}K`;
                   Recent Videos
                 </h2>
                 <div className="space-y-4">
-                  {videos.slice(0, 3).map((video) => (
+                  {videos.slice(0, 3).map((video: any) => (
                     <div key={video.id} className="flex items-center space-x-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                       <img
                         src={video.thumbnail}
@@ -366,7 +366,7 @@ return `${(num / 1000).toFixed(1)}K`;
                       </tr>
                     </thead>
                     <tbody>
-                      {videos.map((video) => (
+                      {videos.map((video: any) => (
                         <tr key={video.id} className="border-b border-gray-100 dark:border-gray-800">
                           <td className="py-4 px-4">
                             <div className="flex items-center space-x-3">

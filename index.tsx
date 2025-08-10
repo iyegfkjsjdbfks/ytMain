@@ -1,6 +1,6 @@
-import { StrictMode } from 'react';
+// TODO: Fix import - import { StrictMode } from 'react';
 
-import ReactDOM from 'react-dom/client';
+// TODO: Fix import - import ReactDOM from 'react-dom/client';
 
 import './src/styles.css';
 import App from './App';

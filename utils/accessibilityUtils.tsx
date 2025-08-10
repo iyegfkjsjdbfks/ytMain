@@ -2,7 +2,7 @@
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React from "react";
+// TODO: Fix import - import React from "react";
 import { useEffect,
   useRef,
   useState,
@@ -74,11 +74,11 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   }, [fontSize]);
 
   const addAnnouncement = useCallback((message: string) => {
-    setAnnouncements(prev => [...prev, message]);
+    setAnnouncements(prev: any => [...prev: any, message]);
 
     // Auto-clear announcement after 5 seconds
     setTimeout(() => {
-      setAnnouncements(prev => prev.filter((msg: any) => msg !== message));
+      setAnnouncements(prev: any => prev: any.filter((msg: any) => msg !== message));
     }, 5000);
   }, []);
 
@@ -119,7 +119,7 @@ export function ScreenReaderAnnouncer() {
       className="sr-only"
       role="status"
     >
-      {announcements.map((announcement, index) => (
+      {announcements.map((announcement: any, index: number) => (
         <div key={`${announcement}-${index}`}>
           {announcement}
         </div>
@@ -322,7 +322,7 @@ export function SkipLink({ href, children }: { href: string; children: ReactNode
     <a
       href={href}
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
-      onFocus={(e) => {
+      onFocus={(e: Event) => {
         e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }}
     >
@@ -402,12 +402,12 @@ export function useAccessibleForm() {
   const { addAnnouncement } = useAccessibility();
 
   const setFieldError = useCallback((fieldName: string, error: string) => {
-    setErrors(prev => ({ ...prev, [fieldName]: error }));
+    setErrors(prev: any => ({ ...prev: any, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
   const clearFieldError = useCallback((fieldName: string) => {
-    setErrors(prev => {
+    setErrors(prev: any => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
       return newErrors;

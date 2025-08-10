@@ -1,9 +1,9 @@
 
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useEffect, useState  } from 'react';
 
-import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { getUserPlaylists, createUserPlaylist } from '../services/realVideoService';
 
@@ -55,7 +55,7 @@ const PlaylistsPage: React.FC = () => {
         createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt,
       };
-      setPlaylists(prev => [playlistWithDetails, ...prev]);
+      setPlaylists(prev: any => [playlistWithDetails, ...prev: any]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {
@@ -107,7 +107,7 @@ const PlaylistsPage: React.FC = () => {
         renderSkeleton()
       ) : playlists.length > 0 ? (
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-          {playlists.map(playlist => (
+          {playlists.map(playlist: any => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
                 <img
@@ -161,7 +161,7 @@ const PlaylistsPage: React.FC = () => {
                   id="playlistName"
                   type="text"
                   value={newPlaylistName}
-                  onChange={(e) => {
+                  onChange={(e: Event) => {
                     setNewPlaylistName(e.target.value);
                     setCreateError(null);
                   }}

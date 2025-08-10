@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/react-query';
+// TODO: Fix import - import { QueryClient } from '@tanstack/react-query';
 
 // Create a single, optimized QueryClient instance with performance-focused settings
 const queryClient = new QueryClient({
@@ -6,7 +6,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 2 * 60 * 1000, // 2 minutes (reduced from 5)
       gcTime: 5 * 60 * 1000, // 5 minutes (reduced from 10)
-      retry: (failureCount, error) => {
+      retry: (failureCount: any, error: Error) => {
         // Don't retry on 4xx errors
         if (error && typeof error === 'object' && 'status' in error) {
           const { status } = (error as any);

@@ -1,6 +1,6 @@
-import React from "react";
-import { forwardRef  } from 'react';
-import type * as React from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { forwardRef  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
 import LoadingSpinner from '@components/LoadingSpinner';
@@ -128,7 +128,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
     className,
     asChild = false,
     ...props
-  }, ref) => {
+  }, ref: any) => {
     const isDisabled = disabled || loading;
 
     const buttonClasses = cn(
@@ -193,23 +193,23 @@ UnifiedButton.displayName = 'UnifiedButton';
 
 // Export convenience components for common use cases
 export const PrimaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="primary" {...props} />,
+  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="primary" {...props: any} />,
 );
 
 export const SecondaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="secondary" {...props} />,
+  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="secondary" {...props: any} />,
 );
 
 export const DangerButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="danger" {...props} />,
+  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="danger" {...props: any} />,
 );
 
 export const GhostButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="ghost" {...props} />,
+  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="ghost" {...props: any} />,
 );
 
 export const LinkButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="link" {...props} />,
+  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="link" {...props: any} />,
 );
 
 PrimaryButton.displayName = 'PrimaryButton';

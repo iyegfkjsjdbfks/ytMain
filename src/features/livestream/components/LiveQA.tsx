@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';
-import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 
 interface LiveQAProps {
   streamId: string;
@@ -90,7 +90,7 @@ return;
     }
   });
 
-  const sortedQuestions = filteredQuestions.sort((a, b) => {
+  const sortedQuestions = filteredQuestions.sort((a: any, b: any) => {
     // Highlighted questions first
     if (a.isHighlighted && !b.isHighlighted) {
 return -1;
@@ -128,8 +128,8 @@ return bUpvotes - aUpvotes;
           <input
             type="text"
             value={newQuestion}
-            onChange={(e) => setNewQuestion(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSubmitQuestion()}
+            onChange={(e: Event) => setNewQuestion(e: Event.target.value)}
+            onKeyPress={(e: Event) => e: Event.key === 'Enter' && handleSubmitQuestion()}
             placeholder="Ask a question..."
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -167,7 +167,7 @@ return bUpvotes - aUpvotes;
 
       {/* Questions List */}
       <div className="space-y-3 max-h-96 overflow-y-auto">
-        {sortedQuestions.map((question) => (
+        {sortedQuestions.map((question: any) => (
           <div
             key={question.id}
             className={`p-4 border rounded-lg ${
@@ -243,7 +243,7 @@ return bUpvotes - aUpvotes;
                 <div className="space-y-2">
                   <textarea
                     value={answerText}
-                    onChange={(e) => setAnswerText(e.target.value)}
+                    onChange={(e: Event) => setAnswerText(e: Event.target.value)}
                     placeholder="Type your answer..."
                     rows={3}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"

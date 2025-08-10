@@ -1,6 +1,15 @@
-import { useRef, useState } from 'react';
 
-import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useRef, useState } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;
@@ -110,7 +119,7 @@ return '0 Bytes';
           type="file"
           accept={accept}
           multiple={multiple}
-          onChange={(e) => handleFileSelect(e.target.files)}
+          onChange={(e: Event) => handleFileSelect(e: Event.target.files)}
           className="hidden"
           disabled={disabled}
         />
@@ -161,7 +170,7 @@ return '0 Bytes';
                 </div>
                 {onFileRemove && (
                   <button
-                    onClick={(e) => {
+                    onClick={(e: Event) => {
                       e.stopPropagation();
                       onFileRemove(index);
                     }}

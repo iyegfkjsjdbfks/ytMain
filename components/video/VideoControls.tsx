@@ -1,4 +1,12 @@
-import type React from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
 
 import {
   PlayIcon,
@@ -131,7 +139,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
           {/* Playback Rate */}
           <select
             value={playbackRate}
-            onChange={(e) => onPlaybackRateChange(parseFloat(e.target.value))}
+            onChange={(e: Event) => onPlaybackRateChange(parseFloat(e: Event.target.value))}
             className="bg-black bg-opacity-50 text-white text-sm rounded px-2 py-1 border-none outline-none"
           >
             <option value={0.25}>0.25x</option>

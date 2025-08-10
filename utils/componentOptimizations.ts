@@ -1,5 +1,5 @@
 
-import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type ComponentType, type EffectCallback, type DependencyList, type LazyExoticComponent } from 'react';
+// TODO: Fix import - import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type ComponentType, type EffectCallback, type DependencyList, type LazyExoticComponent } from 'react';
 
 /**
  * Higher-order component that adds React.memo with custom comparison
@@ -120,7 +120,7 @@ export const componentPerformance = {
    * HOC to measure component render time
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, _name?: string) => {
-    return forwardRef<any, P>((props, ref) => {
+    return forwardRef<any, P>((props: any, ref: any) => {
       useEffect(() => {
         // Performance monitoring disabled
         // const startTime = performance.now();

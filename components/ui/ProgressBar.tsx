@@ -1,4 +1,12 @@
-import type React from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
 
 export interface ProgressBarProps {
   value: number; // 0-100

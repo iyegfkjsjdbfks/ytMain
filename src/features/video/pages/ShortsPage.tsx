@@ -1,4 +1,4 @@
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 /**
  * ShortsPage component for displaying short-form vertical videos

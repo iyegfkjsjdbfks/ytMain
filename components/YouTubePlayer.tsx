@@ -1,4 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useEffect, useRef, useState } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 

@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { getInitialSearchKeyword } from '../services/settingsService';
 
@@ -102,7 +102,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
       // Use home page specific search logic (YouTube API first in hybrid mode)
       const combinedResults = await searchForHomePage(
         initialKeyword,
-        (query) => VideoService.searchVideos(query).then(result => result.videos),
+        (query: any) => VideoService.searchVideos(query: any).then(result => result.videos),
       );
 
       // Combine all results and convert to Video format

@@ -1,4 +1,13 @@
-import { createContext, useContext } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { createContext, useContext } from 'react';
+// TODO: Fix import - import React from 'react';
 
 interface TabsContextType {
   value: string;

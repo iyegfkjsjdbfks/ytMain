@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 
 import { throttle, safeLocalStorage } from '../utils/componentUtils';
 
@@ -85,7 +85,7 @@ export const useToggle = (
 ): [boolean, () => void, (value: boolean) => void] => {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => setValue(v => !v), []);
+  const toggle = useCallback(() => setValue(v: any => !v: any), []);
   const setToggle = useCallback((newValue: boolean) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
@@ -103,8 +103,8 @@ export const useCounter = (
 } => {
   const [count, setCount] = useState(initialValue);
 
-  const increment = useCallback(() => setCount(c => c + 1), []);
-  const decrement = useCallback(() => setCount(c => c - 1), []);
+  const increment = useCallback(() => setCount(c: any => c: any + 1), []);
+  const decrement = useCallback(() => setCount(c: any => c: any - 1), []);
   const reset = useCallback(() => setCount(initialValue), [initialValue]);
   const set = useCallback((value: number) => setCount(value), []);
 
@@ -126,15 +126,15 @@ export const useArray = <T>(
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
-    setArray(arr => [...arr, element]);
+    setArray(arr: any => [...arr: any, element]);
   }, []);
 
   const filter = useCallback((callback: (item: T, index: number) => boolean) => {
-    setArray(arr => arr.filter(callback));
+    setArray(arr: any => arr: any.filter(callback));
   }, []);
 
   const update = useCallback((index: number, newElement: T) => {
-    setArray(arr => {
+    setArray(arr: any => {
       const newArray = [...arr];
       newArray[index] = newElement;
       return newArray;
@@ -142,7 +142,7 @@ export const useArray = <T>(
   }, []);
 
   const remove = useCallback((index: number) => {
-    setArray(arr => arr.filter((_, i) => i !== index));
+    setArray(arr: any => arr: any.filter((_: any, i: any) => i: any !== index));
   }, []);
 
   const clear = useCallback(() => setArray([]), []);
@@ -363,10 +363,10 @@ export const useFormValidation = <T extends Record<string, unknown>>(
 
   const handleChange = useCallback(
     (name: keyof T, value: unknown) => {
-      setValues(prev => ({ ...prev, [name]: value }));
+      setValues(prev: any => ({ ...prev: any, [name]: value }));
 
       const error = validateField(name, value);
-      setErrors(prev => ({
+      setErrors(prev: any => ({
         ...prev,
         [name]: error,
       }));

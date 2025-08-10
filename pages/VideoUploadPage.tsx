@@ -1,7 +1,7 @@
-import type * as React from 'react';
-import {  useState, useRef, useCallback  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState, useRef, useCallback  } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 import { uploadVideo } from '../services/realVideoService';
 
@@ -56,13 +56,13 @@ const VideoUploadPage: React.FC = () => {
 
   const handleFileSelect = (file: File) => {
     const isShorts = file.size < 100 * 1024 * 1024; // Less than 100MB considered Shorts
-    setUploadData(prev => ({
+    setUploadData(prev: any => ({
       ...prev,
       videoFile: file,
       isShorts,
       title: prev.title || file.name.replace(/\.[^/.]+$/, ''),
     }));
-    setErrors(prev => ({ ...prev, videoFile: '' }));
+    setErrors(prev: any => ({ ...prev: any, videoFile: '' }));
   };
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -89,7 +89,7 @@ const VideoUploadPage: React.FC = () => {
 
   const handleAddTag = () => {
     if (tagInput.trim() && !uploadData.tags.includes(tagInput.trim())) {
-      setUploadData(prev => ({
+      setUploadData(prev: any => ({
         ...prev,
         tags: [...prev.tags, tagInput.trim()],
       }));
@@ -98,7 +98,7 @@ const VideoUploadPage: React.FC = () => {
   };
 
   const handleRemoveTag = (tagToRemove: string) => {
-    setUploadData(prev => ({
+    setUploadData(prev: any => ({
       ...prev,
       tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
@@ -197,7 +197,7 @@ return;
                     </div>
                     <button
                       type="button"
-                      onClick={() => setUploadData(prev => ({ ...prev, videoFile: null }))}
+                      onClick={() => setUploadData(prev: any => ({ ...prev: any, videoFile: null }))}
                       className="text-red-600 hover:text-red-700"
                     >
                       Remove
@@ -210,7 +210,7 @@ return;
                 ref={fileInputRef}
                 type="file"
                 accept="video/*"
-                onChange={(e) => {
+                onChange={(e: Event) => {
                   const file = e.target.files?.[0];
                   if (file) {
 handleFileSelect(file);
@@ -232,9 +232,9 @@ handleFileSelect(file);
               <input
                 type="text"
                 value={uploadData.title}
-                onChange={(e) => {
-                  setUploadData(prev => ({ ...prev, title: e.target.value }));
-                  setErrors(prev => ({ ...prev, title: '' }));
+                onChange={(e: Event) => {
+                  setUploadData(prev: any => ({ ...prev: any, title: e.target.value }));
+                  setErrors(prev: any => ({ ...prev: any, title: '' }));
                 }}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Enter video title"
@@ -251,7 +251,7 @@ handleFileSelect(file);
               </label>
               <textarea
                 value={uploadData.description}
-                onChange={(e) => setUploadData(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Tell viewers about your video"
@@ -273,7 +273,7 @@ handleFileSelect(file);
                   />
                   <button
                     type="button"
-                    onClick={() => setUploadData(prev => ({ ...prev, thumbnailFile: null }))}
+                    onClick={() => setUploadData(prev: any => ({ ...prev: any, thumbnailFile: null }))}
                     className="text-red-600 hover:text-red-700"
                   >
                     Remove
@@ -293,10 +293,10 @@ handleFileSelect(file);
                 ref={thumbnailInputRef}
                 type="file"
                 accept="image/*"
-                onChange={(e) => {
+                onChange={(e: Event) => {
                   const file = e.target.files?.[0];
                   if (file) {
-                    setUploadData(prev => ({ ...prev, thumbnailFile: file }));
+                    setUploadData(prev: any => ({ ...prev: any, thumbnailFile: file }));
                   }
                 }}
                 className="hidden"
@@ -311,7 +311,7 @@ handleFileSelect(file);
                 </label>
                 <select
                   value={uploadData.category}
-                  onChange={(e) => setUploadData(prev => ({ ...prev, category: e.target.value }))}
+                  onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   {categories.map(category => (
@@ -327,7 +327,7 @@ handleFileSelect(file);
                 </label>
                 <select
                   value={uploadData.visibility}
-                  onChange={(e) => setUploadData(prev => ({ ...prev, visibility: e.target.value as 'public' | 'unlisted' | 'private' }))}
+                  onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, visibility: e: Event.target.value as 'public' | 'unlisted' | 'private' }))}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="public">Public</option>
@@ -346,8 +346,8 @@ handleFileSelect(file);
                 <input
                   type="text"
                   value={tagInput}
-                  onChange={(e) => setTagInput(e.target.value)}
-                  onKeyPress={(e) => {
+                  onChange={(e: Event) => setTagInput(e: Event.target.value)}
+                  onKeyPress={(e: Event) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       handleAddTag();
@@ -367,7 +367,7 @@ handleFileSelect(file);
 
               {uploadData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {uploadData.tags.map((tag, index) => (
+                  {uploadData.tags.map((tag: string, index: number) => (
                     <span
                       key={index}
                       className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

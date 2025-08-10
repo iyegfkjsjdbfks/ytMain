@@ -1,7 +1,7 @@
-import React from "react";
-import { FixedSizeList as List } from 'react-window';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
-import { memo, useMemo, useCallback } from 'react';
+// TODO: Fix import - import { memo, useMemo, useCallback } from 'react';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';

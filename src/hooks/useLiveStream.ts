@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
 
 // Import statement fixed
@@ -24,18 +24,18 @@ export const useLiveStream = (streamId?: string) => {
   const startStream = useCallback(async () => {
     try {
       // Implementation here
-      setState(prev => ({ ...prev, isLive: true, error: null }));
+      setState(prev: any => ({ ...prev: any, isLive: true, error: null }));
     } catch (error) {
-      setState(prev => ({ ...prev, error: (error as Error).message }));
+      setState(prev: any => ({ ...prev: any, error: (error as Error).message }));
     }
   }, []);
 
   const stopStream = useCallback(async () => {
     try {
       // Implementation here
-      setState(prev => ({ ...prev, isLive: false, error: null }));
+      setState(prev: any => ({ ...prev: any, isLive: false, error: null }));
     } catch (error) {
-      setState(prev => ({ ...prev, error: (error as Error).message }));
+      setState(prev: any => ({ ...prev: any, error: (error as Error).message }));
     }
   }, []);
 
@@ -81,19 +81,19 @@ export const useLivePolls = (streamId?: string) => {
       duration: durationMs,
     };
 
-    setPolls(prev => [poll, ...prev]);
+    setPolls(prev: any => [poll, ...prev: any]);
   };
 
   const votePoll = async (pollId: string, optionId: string) => {
-    setPolls(prev =>
-      prev.map(p => {
+    setPolls(prev: any =>
+      prev.map(p: any => {
         if (p.id !== pollId || !p.isActive) return p;
         const total = p.totalVotes + 1;
-        const options = p.options.map(o => {
+        const options = p.options.map(o: any => {
           const votes = o.id === optionId ? o.votes + 1 : o.votes;
           return { ...o, votes };
         });
-        const withPct = options.map(o => ({
+        const withPct = options.map(o: any => ({
           ...o,
           percentage: recalcPercentages(total, o.votes),
         }));
@@ -129,17 +129,17 @@ export const useLiveQA = (streamId?: string) => {
       isHighlighted: false,
       upvotes: 0,
     };
-    setQuestions(prev => [q, ...prev]);
+    setQuestions(prev: any => [q, ...prev: any]);
   };
 
   const answerQuestion = async (questionId: string, answer: string) => {
-    setQuestions(prev =>
-      prev.map(q => (q.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q))
+    setQuestions(prev: any =>
+      prev.map(q: any => (q: any.id === questionId ? { ...q: any, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q: any))
     );
   };
 
   const upvoteQuestion = async (questionId: string) => {
-    setQuestions(prev => prev.map(q => (q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q)));
+    setQuestions(prev: any => prev: any.map(q: any => (q: any.id === questionId ? { ...q: any, upvotes: (q: any.upvotes || 0) + 1 } : q: any)));
   };
 
   return { questions, submitQuestion, answerQuestion, upvoteQuestion } as const;

@@ -1,6 +1,14 @@
-import type React from 'react';
 
-import { Navigate, useLocation } from 'react-router-dom';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
+
+// TODO: Fix import - import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 

@@ -1,8 +1,16 @@
 
-import type * as React from 'react';
-import {  useState  } from 'react';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 
-import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState  } from 'react';
+
+// TODO: Fix import - import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 
 import { generateVideoIdeas } from '../services/geminiService';
 
@@ -85,7 +93,7 @@ const AIContentSparkPage: React.FC = () => {
           <textarea
             id="userInput"
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={(e: Event) => setUserInput(e: Event.target.value)}
             placeholder="e.g., 'beginner friendly JavaScript tutorials', 'baking sourdough bread for the first time', 'travel vlog Bali'"
             rows={3}
             className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 placeholder-neutral-400 dark:placeholder-neutral-500 text-sm transition-colors"

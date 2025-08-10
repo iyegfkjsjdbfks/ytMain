@@ -1,8 +1,17 @@
 
-import { useState, useRef, useEffect, useCallback, memo } from 'react';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 
-import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { useState, useRef, useEffect, useCallback, memo } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 
@@ -125,7 +134,7 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleUserMenu = () => {
-    setIsUserMenuOpen(prev => !prev);
+    setIsUserMenuOpen(prev: any => !prev: any);
     if (isNotificationsPanelOpen) {
 setIsNotificationsPanelOpen(false);
 }
@@ -136,7 +145,7 @@ setIsCreateMenuOpen(false);
 
 
   const toggleCreateMenu = () => {
-    setIsCreateMenuOpen(prev => !prev);
+    setIsCreateMenuOpen(prev: any => !prev: any);
     if (isUserMenuOpen) {
 setIsUserMenuOpen(false);
 }

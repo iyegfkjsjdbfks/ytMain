@@ -1,6 +1,6 @@
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+// TODO: Fix import - import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';

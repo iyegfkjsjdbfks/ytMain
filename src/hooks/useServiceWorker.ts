@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -60,7 +60,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
       return false;
     }
 
-    setState(prev => ({ ...prev, isUpdating: true, error: null }));
+    setState(prev: any => ({ ...prev: any, isUpdating: true, error: null }));
 
     try {
       // Tell the waiting service worker to skip waiting
@@ -75,7 +75,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
         navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange);
       });
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         isUpdating: false,
         updateAvailable: false,
@@ -97,7 +97,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
       conditionalLogger.error('Service worker update failed', componentError, 'useServiceWorker');
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         isUpdating: false,
         error: error instanceof Error ? error.message : 'Update failed',
@@ -124,7 +124,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
       const result = await state.registration.unregister();
 
       if (result) {
-        setState(prev => ({
+        setState(prev: any => ({
           ...prev,
           isRegistered: false,
           registration: null,
@@ -215,7 +215,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
           scope: '/',
         });
 
-        setState(prev => ({
+        setState(prev: any => ({
           ...prev,
           isRegistered: true,
           registration,
@@ -233,7 +233,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 // New service worker is available
-                setState(prev => ({
+                setState(prev: any => ({
                   ...prev,
                   updateAvailable: true,
                   waitingWorker: newWorker,
@@ -249,7 +249,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
         // Check for existing waiting worker
         if (registration.waiting) {
-          setState(prev => ({
+          setState(prev: any => ({
             ...prev,
             updateAvailable: true,
             waitingWorker: registration.waiting,
@@ -273,7 +273,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
         conditionalLogger.error('Service worker registration failed', componentError, 'useServiceWorker');
 
-        setState(prev => ({
+        setState(prev: any => ({
           ...prev,
           error: error instanceof Error ? error.message : 'Registration failed',
         }));

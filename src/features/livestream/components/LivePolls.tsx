@@ -1,9 +1,9 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';
-import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
 
 interface LivePollsProps {
   streamId: string;
@@ -27,12 +27,12 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
   // Set active poll from the polls returned by the hook
   useEffect(() => {
-    const active = polls.find(p => p.isActive);
+    const active = polls.find(p: any => p: any.isActive);
     setActivePoll(active || null);
   }, [polls]);
 
   const handleCreatePoll = async () => {
-    if (!newPoll.question.trim() || newPoll.options.some(opt => !opt.trim())) {
+    if (!newPoll.question.trim() || newPoll.options.some(opt: any => !opt: any.trim())) {
       return;
     }
 
@@ -68,23 +68,23 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
   const addOption = () => {
     if (newPoll.options.length < 5) {
-      setNewPoll(prev => ({ ...prev, options: [...prev.options, ''] }));
+      setNewPoll(prev: any => ({ ...prev: any, options: [...prev: any.options, ''] }));
     }
   };
 
   const removeOption = (index: number) => {
     if (newPoll.options.length > 2) {
-      setNewPoll(prev => ({
+      setNewPoll(prev: any => ({
         ...prev,
-        options: prev.options.filter((_, i) => i !== index),
+        options: prev.options.filter((_: any, i: any) => i: any !== index),
       }));
     }
   };
 
   const updateOption = (index: number, value: string) => {
-    setNewPoll(prev => ({
+    setNewPoll(prev: any => ({
       ...prev,
-      options: prev.options.map((opt, i) => i === index ? value : opt),
+      options: prev.options.map((opt: any, i: any) => i: any === index ? value : opt: any),
     }));
   };
 
@@ -132,7 +132,7 @@ return 0;
                 id="poll-question"
                 type="text"
                 value={newPoll.question}
-                onChange={(e) => setNewPoll(prev => ({ ...prev, question: e.target.value }))}
+                onChange={(e: Event) => setNewPoll(prev: any => ({ ...prev: any, question: e: Event.target.value }))}
                 placeholder="Ask your audience a question..."
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -143,13 +143,13 @@ return 0;
                 Options
               </label>
               <div className="space-y-2">
-                {newPoll.options.map((option, index) => (
+                {newPoll.options.map((option: any, index: number) => (
                   <div key={index} className="flex items-center space-x-2">
                     <input
                       id={`poll-option-${index + 1}`}
                       type="text"
                       value={option}
-                      onChange={(e) => updateOption(index, e.target.value)}
+                      onChange={(e: Event) => updateOption(index, e: Event.target.value)}
                       placeholder={`Option ${index + 1}`}
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -182,7 +182,7 @@ return 0;
                 id="poll-duration"
                 type="number"
                 value={newPoll.duration}
-                onChange={(e) => setNewPoll(prev => ({ ...prev, duration: parseInt(e.target.value, 10) || 60 }))}
+                onChange={(e: Event) => setNewPoll(prev: any => ({ ...prev: any, duration: parseInt(e: Event.target.value, 10) || 60 }))}
                 min="30"
                 max="600"
                 className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -231,7 +231,7 @@ return 0;
           <p className="text-gray-900 mb-3 font-medium">{activePoll.question}</p>
 
           <div className="space-y-2">
-            {activePoll.options.map((option) => (
+            {activePoll.options.map((option: any) => (
               <div key={option.id} className="relative">
                 <button
                   onClick={() => handleVote(activePoll.id, option.id)}
@@ -270,7 +270,7 @@ return 0;
         <div>
           <h3 className="font-medium text-gray-900 mb-3">Past Polls</h3>
           <div className="space-y-3">
-            {polls.filter((p: any) => !p.isActive).map((poll) => (
+            {polls.filter((p: any) => !p.isActive).map((poll: any) => (
               <div key={poll.id} className="p-3 border border-gray-200 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <p className="font-medium text-gray-900">{poll.question}</p>
@@ -281,7 +281,7 @@ return 0;
                 </div>
 
                 <div className="space-y-2">
-                  {poll.options.map((option) => (
+                  {poll.options.map((option: any) => (
                     <div key={option.id} className="flex items-center justify-between text-sm">
                       <span className="text-gray-700">{option.text}</span>
                       <div className="flex items-center space-x-2">

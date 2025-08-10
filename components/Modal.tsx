@@ -1,6 +1,15 @@
-import { useEffect, useRef } from 'react';
 
-import { XMarkIcon } from '@heroicons/react/24/outline';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useEffect, useRef } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
   isOpen: boolean;

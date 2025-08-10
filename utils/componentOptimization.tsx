@@ -1,4 +1,4 @@
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
@@ -93,7 +93,7 @@ export function smartMemo<P extends object>(
 ): MemoExoticComponent<ComponentType<P>> {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component, (prevProps, nextProps) => {
+  const MemoizedComponent = memo(Component, (prevProps: any, nextProps: any) => {
     const startTime = performance.now();
 
     // Use custom comparison if provided
@@ -150,7 +150,7 @@ export function useOptimizedCallback<T extends (...args) => any>(
       return true;
     }
 
-    const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
+    const changed = deps.some((dep: any, index: number) => dep: any !== depsRef.current[index: number]);
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;

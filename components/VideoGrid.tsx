@@ -1,4 +1,13 @@
-import { memo } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { memo } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import VideoCard from './VideoCard';
 
@@ -45,7 +54,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video, index) => (
+      {videos.map((video: any, index: number) => (
         <VideoCard
           key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
           video={video}

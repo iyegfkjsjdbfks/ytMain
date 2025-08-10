@@ -1,8 +1,8 @@
-import React from "react";
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import { useState, useEffect } from 'react';
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -433,7 +433,7 @@ const WatchPage: React.FC = () => {
                     ...video,
                     viewCount: video.views,
                     duration: typeof video.duration === 'string' ?
-                      parseInt(video.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0).toString(), 10) :
+                      parseInt(video.duration.split(':').reduce((acc: any, time: any) => (60 * acc: any) + +time: any, 0).toString(), 10) :
                       (video.duration as number || 0),
                   } as unknown as Video}
                   autoplay={true}
@@ -451,7 +451,7 @@ const WatchPage: React.FC = () => {
                   autoplay={true}
                   className="w-full"
                   useYouTube={false}
-                  onTimeUpdate={(_currentTime, _duration) => {
+                  onTimeUpdate={(_currentTime: any, _duration: any) => {
                     // Track watch progress
                     }}
                   onPlay={() => {
@@ -687,7 +687,7 @@ const WatchPage: React.FC = () => {
                   Loading recommendations...
                 </div>
               ) : (
-                _recommendedVideos.map((recommendedVideo) => {
+                _recommendedVideos.map((recommendedVideo: any) => {
                   logger.debug('🎬 Rendering recommendation:', recommendedVideo.id, recommendedVideo.title);
                   return (
                     <VideoCard

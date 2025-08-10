@@ -1,7 +1,7 @@
-import React from "react";
-import { useSearchParams } from 'react-router-dom';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useSearchParams } from 'react-router-dom';
 
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import { useState, useEffect } from 'react';
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
 
@@ -130,7 +130,7 @@ return;
 
       {!loading && videos.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {videos.map((video) => {
+          {videos.map((video: any) => {
             // Extract YouTube video ID from the video object using utility function
             let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
 

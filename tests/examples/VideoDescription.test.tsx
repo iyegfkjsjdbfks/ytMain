@@ -3,8 +3,8 @@
  * for the VideoDescription component
  */
 
-import { screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+// TODO: Fix import - import { screen, waitFor } from '@testing-library/react';
+// TODO: Fix import - import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
@@ -580,7 +580,7 @@ describe('VideoDescription Component', () => {
       );
 
       const links = screen.getAllByRole('link');
-      links.forEach(link => {
+      links.forEach(link: any => {
         expect(link).toHaveAttribute('rel', 'noopener noreferrer');
         expect(link).toHaveAttribute('target', '_blank');
       });

@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -99,7 +99,7 @@ export const usePWA = (): UsePWAReturn => {
         offlineSupport: 'serviceWorker' in navigator,
       };
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         features,
         isInitialized: true,

@@ -1,4 +1,12 @@
-import type React from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
 
 import {
   ClockIcon,
@@ -198,7 +206,7 @@ return `${(num / 1000).toFixed(1)}K`;
             <div className="mb-4">
               <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">Tags</h5>
               <div className="flex flex-wrap gap-2">
-                {video.tags.slice(0, 10).map((tag, index) => (
+                {video.tags.slice(0, 10).map((tag: string, index: number) => (
                   <span
                     key={index}
                     className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"

@@ -1,7 +1,7 @@
 
-import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
 
-import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
+// TODO: Fix import - import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -100,7 +100,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
     }
 
     const timer = setTimeout(() => {
-      setState(prev => ({ ...prev, isVisible: true, isAnimating: true }));
+      setState(prev: any => ({ ...prev: any, isVisible: true, isAnimating: true }));
 
       // Track banner impression
       conditionalLogger.debug('PWA install banner shown', { variant, position }, 'EnhancedPWAInstallBanner');
@@ -111,31 +111,31 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
   // Handle installation
   const handleInstall = useCallback(async () => {
-    setState(prev => ({ ...prev, installProgress: 'installing' }));
+    setState(prev: any => ({ ...prev: any, installProgress: 'installing' }));
 
     try {
       await installPWA();
-      setState(prev => ({ ...prev, installProgress: 'success', isVisible: false }));
+      setState(prev: any => ({ ...prev: any, installProgress: 'success', isVisible: false }));
       onInstall?.();
 
       // Track successful installation
       conditionalLogger.debug('PWA installation successful', { variant }, 'EnhancedPWAInstallBanner');
     } catch (error) {
-      setState(prev => ({ ...prev, installProgress: 'error' }));
+      setState(prev: any => ({ ...prev: any, installProgress: 'error' }));
 
       const componentError = createComponentError('EnhancedPWAInstallBanner', 'Failed to install PWA', error);
       conditionalLogger.error('PWA installation failed:', componentError);
 
       // Reset after error
       setTimeout(() => {
-        setState(prev => ({ ...prev, installProgress: 'idle' }));
+        setState(prev: any => ({ ...prev: any, installProgress: 'idle' }));
       }, 3000);
     }
   }, [installPWA, onInstall, variant]);
 
   // Handle dismissal
   const handleDismiss = useCallback(() => {
-    setState(prev => ({ ...prev, isVisible: false, isDismissed: true, isAnimating: false }));
+    setState(prev: any => ({ ...prev: any, isVisible: false, isDismissed: true, isAnimating: false }));
     PWAUtils.dismissInstallPrompt();
     onDismiss?.();
 
@@ -144,7 +144,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
   // Handle "Not now" action
   const handleNotNow = useCallback(() => {
-    setState(prev => ({ ...prev, isVisible: false, isAnimating: false }));
+    setState(prev: any => ({ ...prev: any, isVisible: false, isAnimating: false }));
     // Don't permanently dismiss, just hide for this session
     sessionStorage.setItem('pwa-banner-hidden', 'true');
   }, []);
@@ -152,12 +152,12 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
   // Handle update
   const handleUpdate = useCallback(() => {
     installUpdate();
-    setState(prev => ({ ...prev, isVisible: false }));
+    setState(prev: any => ({ ...prev: any, isVisible: false }));
   }, [installUpdate]);
 
   // Toggle details view
   const toggleDetails = useCallback(() => {
-    setState(prev => ({ ...prev, showDetails: !prev.showDetails }));
+    setState(prev: any => ({ ...prev: any, showDetails: !prev: any.showDetails }));
   }, []);
 
   // Position classes

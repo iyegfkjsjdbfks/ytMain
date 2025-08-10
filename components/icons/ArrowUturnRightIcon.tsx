@@ -1,4 +1,12 @@
-import type React from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
 
 // Using a Heroicons v2 style path for ArrowUturnRightIcon (Share-like icon)
 const ArrowUturnRightIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

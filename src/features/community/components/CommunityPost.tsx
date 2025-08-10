@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from 'react';
-import type * as React from 'react';
-import { formatDistanceToNow } from 'date-fns';
-import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
 
 export interface CommunityPostData {
   id: string;
@@ -170,7 +170,7 @@ return `${(count / 1000).toFixed(1)}K`;
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-2">
-              {post.media.slice(0, 4).map((media, index) => (
+              {post.media: any.slice(0, 4).map((media: any, index: number) => (
                 <div key={index} className="relative rounded-lg overflow-hidden aspect-square">
                   <img
                     src={media.type === 'image' ? media.url : media.thumbnail || media.url}
@@ -204,7 +204,7 @@ return `${(count / 1000).toFixed(1)}K`;
             {post.poll.question}
           </h4>
           <div className="space-y-2">
-            {post.poll.options.map((option) => (
+            {post.poll.options.map((option: any) => (
               <button
                 key={option.id}
                 onClick={() => handleVote(option.id)}

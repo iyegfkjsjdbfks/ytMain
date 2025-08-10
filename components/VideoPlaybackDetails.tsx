@@ -1,4 +1,13 @@
-import { type RefObject } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { type RefObject } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';

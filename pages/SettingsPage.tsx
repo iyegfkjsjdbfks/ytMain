@@ -1,9 +1,9 @@
 
-import type * as React from 'react';
-import {  useState  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState  } from 'react';
 
-import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-import { CheckIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CheckIcon } from '@heroicons/react/24/solid';
 
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -60,10 +60,10 @@ const SelectSetting: React.FC<{
     </label>
     <select
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e: Event) => onChange(e: Event.target.value)}
       className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
     >
-      {options.map(option => (
+      {options.map(option: any => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>
@@ -88,7 +88,7 @@ const SettingsPage: React.FC = () => {
   });
 
   const handleNotificationChange = (key: keyof typeof notifications) => {
-    setNotifications(prev => ({
+    setNotifications(prev: any => ({
       ...prev,
       [key]: !prev[key],
     }));

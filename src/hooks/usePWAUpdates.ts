@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
 
@@ -79,7 +79,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         return false;
       }
 
-      setState(prev => ({ ...prev, lastUpdateCheck: Date.now() }));
+      setState(prev: any => ({ ...prev: any, lastUpdateCheck: Date.now() }));
 
       // Force update check
       await registration.update();
@@ -91,7 +91,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         // Try to get update information
         const updateInfo = await getUpdateInfo(registration);
 
-        setState(prev => ({
+        setState(prev: any => ({
           ...prev,
           updateAvailable: true,
           updateSize: updateInfo.size,
@@ -109,7 +109,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         updateError: errorMessage,
       }));
@@ -127,7 +127,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   // Install available update
   const installUpdate = useCallback(async (): Promise<void> => {
     try {
-      setState(prev => ({ ...prev, isUpdating: true, updateError: null }));
+      setState(prev: any => ({ ...prev: any, isUpdating: true, updateError: null }));
 
       const registration = await navigator.serviceWorker.getRegistration();
       if (!registration?.waiting) {
@@ -137,7 +137,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       // Skip waiting and activate new service worker
       registration.waiting.postMessage({ type: 'SKIP_WAITING' });
 
-      setState(prev => ({ ...prev, skipWaiting: true }));
+      setState(prev: any => ({ ...prev: any, skipWaiting: true }));
 
       // Wait for the new service worker to take control
       await new Promise<void>((resolve) => {
@@ -156,7 +156,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       });
 
       // Clear update state
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         updateAvailable: false,
         isUpdating: false,
@@ -172,7 +172,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Update failed';
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         isUpdating: false,
         updateError: errorMessage,
@@ -188,7 +188,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
   // Skip current update
   const skipUpdate = useCallback(() => {
-    setState(prev => ({
+    setState(prev: any => ({
       ...prev,
       updateAvailable: false,
       updateSize: null,
@@ -213,7 +213,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
   // Dismiss update notification
   const dismissUpdate = useCallback(() => {
-    setState(prev => ({
+    setState(prev: any => ({
       ...prev,
       updateAvailable: false,
       updateError: null,
@@ -390,7 +390,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.type === 'SW_UPDATE_AVAILABLE') {
-        setState(prev => ({ ...prev, updateAvailable: true }));
+        setState(prev: any => ({ ...prev: any, updateAvailable: true }));
       }
     };
 

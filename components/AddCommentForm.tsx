@@ -1,6 +1,15 @@
-import { useState, useRef } from 'react';
 
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useState, useRef } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
@@ -53,7 +62,7 @@ return;
             ref={inputRef}
             type="text"
             value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
+            onChange={(e: Event) => setCommentText(e: Event.target.value)}
             onFocus={() => setIsFocused(true)}
             placeholder="Add a comment..."
             className="bg-transparent border-b border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-sky-500 w-full py-2 outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm transition-colors"

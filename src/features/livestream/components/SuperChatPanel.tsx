@@ -1,9 +1,9 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
-import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 interface SuperChatPanelProps {
   streamId: string;
@@ -101,7 +101,7 @@ return;
 
   const topSuperChats = superChats
     .slice()
-    .sort((a, b) => b.amount - a.amount)
+    .sort((a: any, b: any) => b: any.amount - a: any.amount)
     .slice(0, 5);
 
   return (
@@ -136,7 +136,7 @@ return;
                 {superChatTiers.map((tier) => (
                   <button
                     key={tier.amount}
-                    onClick={() => setNewSuperChat(prev => ({ ...prev, amount: tier.amount }))}
+                    onClick={() => setNewSuperChat(prev: any => ({ ...prev: any, amount: tier.amount }))}
                     className={`p-2 rounded-lg text-white text-sm font-medium transition-all ${
                       newSuperChat.amount === tier.amount
                         ? `${tier.color} ring-2 ring-offset-2 ring-blue-500`
@@ -152,7 +152,7 @@ return;
                   id="superchat-amount-input"
                   type="number"
                   value={newSuperChat.amount}
-                  onChange={(e) => setNewSuperChat(prev => ({ ...prev, amount: parseInt(e.target.value, 10) || 1 }))}
+                  onChange={(e: Event) => setNewSuperChat(prev: any => ({ ...prev: any, amount: parseInt(e: Event.target.value, 10) || 1 }))}
                   min="1"
                   max="500"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -168,7 +168,7 @@ return;
               <textarea
                 id="superchat-message"
                 value={newSuperChat.message}
-                onChange={(e) => setNewSuperChat(prev => ({ ...prev, message: e.target.value }))}
+                onChange={(e: Event) => setNewSuperChat(prev: any => ({ ...prev: any, message: e: Event.target.value }))}
                 placeholder="Add a message to your Super Chat..."
                 rows={3}
                 maxLength={200}
@@ -252,7 +252,7 @@ return;
             <p className="text-sm mt-1">Be the first to send a Super Chat!</p>
           </div>
         ) : (
-          superChats.map((superChat) => (
+          superChats.map((superChat: any) => (
             <div
               key={superChat.id}
               className={`p-3 rounded-lg border-l-4 ${getTierColor(superChat.amount)}`}
@@ -298,7 +298,7 @@ return;
         <div className="mt-4 pt-4 border-t border-gray-200">
           <h3 className="font-medium text-gray-900 mb-3">Top Super Chats</h3>
           <div className="space-y-2">
-            {topSuperChats.map((superChat, index) => (
+            {topSuperChats.map((superChat: any, index: number) => (
               <div
                 key={superChat.id}
                 className="flex items-center justify-between p-2 bg-gray-50 rounded-lg"

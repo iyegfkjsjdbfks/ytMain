@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useCallback, type ReactNode } from 'react';
+// TODO: Fix import - import React, { createContext, useReducer, useCallback, type ReactNode } from 'react';
 
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
@@ -260,7 +260,7 @@ return false;
 
   const removeFromWatchLater = useCallback((videoId: string) => {
     dispatch({ type: 'REMOVE_FROM_WATCH_LATER', payload: videoId });
-    const updated = state.watchLaterVideos.filter(id => id !== videoId);
+    const updated = state.watchLaterVideos.filter(id: string => id: string !== videoId);
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 

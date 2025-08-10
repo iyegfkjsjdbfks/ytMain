@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode } from 'react';
+// TODO: Fix import - import { forwardRef, type ReactNode } from 'react';
 
 
 import YouTubePlayer from './YouTubePlayer';
@@ -32,8 +32,8 @@ interface YouTubePlayerWrapperProps {
 export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
-  props,
-  _ref,
+  props: any,
+  _ref: any,
 ) => {
   // YouTubePlayerWrapper rendering
 

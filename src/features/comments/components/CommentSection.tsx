@@ -1,12 +1,12 @@
-import React from "react";
-import { useState, useRef, useEffect } from 'react';
-import type * as React from 'react';
-import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
 import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
-import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 interface CommentSectionProps {
   videoId: string;
@@ -205,7 +205,7 @@ return `${(count / 1000).toFixed(1)}K`;
             <div className="flex-1">
               <textarea
                 value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
+                onChange={(e: Event) => setReplyText(e: Event.target.value)}
                 placeholder="Add a reply..."
                 className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                 rows={2}
@@ -246,7 +246,7 @@ return `${(count / 1000).toFixed(1)}K`;
 
             {showReplies && (
               <div className="mt-3 space-y-4">
-                {comment.replies.map((reply) => (
+                {comment.replies.map((reply: any) => (
                   <CommentItem
                     key={reply.id}
                     comment={reply}
@@ -393,7 +393,7 @@ return;
           >
             <textarea
               value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
+              onChange={(e: Event) => setNewComment(e: Event.target.value)}
               onFocus={() => setShowCommentInput(true)}
               placeholder="Add a comment..."
               className="w-full p-2 bg-transparent text-gray-900 dark:text-white resize-none border-none outline-none"

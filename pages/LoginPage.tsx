@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+// TODO: Fix import - import { useState } from 'react';
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+// TODO: Fix import - import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
@@ -99,7 +99,7 @@ const LoginPage: React.FC = () => {
                   autoComplete="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e: Event) => setEmail(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Enter your email"
                 />
@@ -118,7 +118,7 @@ const LoginPage: React.FC = () => {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e: Event) => setPassword(e: Event.target.value)}
                   className="block w-full"
                   placeholder="Enter your password"
                 />

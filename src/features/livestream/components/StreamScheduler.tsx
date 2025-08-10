@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect } from 'react';
 import { liveStreamService, type ScheduledStream } from '../../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
-import { CalendarIcon, ClockIcon, PlayIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CalendarIcon, ClockIcon, PlayIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 
 interface StreamSchedulerProps {
   onStreamScheduled?: (stream: ScheduledStream) => void;
@@ -67,9 +67,9 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       // Create a new scheduled stream using the existing createStream method
       const stream = await liveStreamService.createStream(streamData);
 
-      setScheduledStreams(prev => {
+      setScheduledStreams(prev: any => {
         if (editingStream) {
-          return prev.map(s => s.id === stream.id ? stream : s);
+          return prev.map(s: any => s: any.id === stream.id ? stream : s: any);
         }
           return [...prev, stream];
 
@@ -90,7 +90,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     try {
       // For now, just remove from local state
       // In a real implementation, this would call a delete API
-      setScheduledStreams(prev => prev.filter((s: any) => s.id !== streamId));
+      setScheduledStreams(prev: any => prev: any.filter((s: any) => s.id !== streamId));
     } catch (error) {
       logger.error('Failed to delete stream:', error);
     }
@@ -140,7 +140,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
   const addTag = () => {
     if (newTag.trim() && !formData.tags.includes(newTag.trim()) && formData.tags.length < 10) {
-      setFormData(prev => ({
+      setFormData(prev: any => ({
         ...prev,
         tags: [...prev.tags, newTag.trim()],
       }));
@@ -149,7 +149,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   };
 
   const removeTag = (tagToRemove: string) => {
-    setFormData(prev => ({
+    setFormData(prev: any => ({
       ...prev,
       tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
@@ -228,7 +228,7 @@ return false;
                 id="stream-title"
                 type="text"
                 value={formData.title}
-                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
                 placeholder="Enter stream title..."
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -242,7 +242,7 @@ return false;
               <select
                 id="stream-category"
                 value={formData.category}
-                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {categories.map(category => (
@@ -258,7 +258,7 @@ return false;
               <textarea
                 id="stream-description"
                 value={formData.description}
-                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
                 placeholder="Describe your stream..."
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
@@ -273,7 +273,7 @@ return false;
                 id="stream-start-time"
                 type="datetime-local"
                 value={formData.scheduledStartTime}
-                onChange={(e) => setFormData(prev => ({ ...prev, scheduledStartTime: e.target.value }))}
+                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, scheduledStartTime: e: Event.target.value }))}
                 min={new Date().toISOString().slice(0, 16)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -287,7 +287,7 @@ return false;
               <select
                 id="stream-visibility"
                 value={formData.visibility}
-                onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value as any }))}
+                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, visibility: e: Event.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="public">Public</option>
@@ -305,8 +305,8 @@ return false;
                   id="stream-tags"
                   type="text"
                   value={newTag}
-                  onChange={(e) => setNewTag(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                  onChange={(e: Event) => setNewTag(e: Event.target.value)}
+                  onKeyPress={(e: Event) => e: Event.key === 'Enter' && (e: Event.preventDefault(), addTag())}
                   placeholder="Add a tag..."
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -319,7 +319,7 @@ return false;
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {formData.tags.map((tag) => (
+                {formData.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg"
@@ -365,7 +365,7 @@ return false;
             <p className="text-sm mt-1">Schedule your first stream to get started!</p>
           </div>
         ) : (
-          scheduledStreams.map((stream) => (
+          scheduledStreams.map((stream: any) => (
             <div
               key={stream.id}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -404,7 +404,7 @@ return false;
 
                   {stream.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-2">
-                      {stream.tags.slice(0, 3).map((tag) => (
+                      {stream.tags.slice(0, 3).map((tag: string) => (
                         <span
                           key={tag}
                           className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"

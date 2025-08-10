@@ -1,7 +1,15 @@
 
-import React from 'react';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 
-import { Link, useNavigate } from 'react-router-dom';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';

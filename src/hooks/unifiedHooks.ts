@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect, useCallback, useRef } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect, useCallback, useRef } from 'react';
 
 // Unified state management hook
 export interface AsyncState<T> {
@@ -26,7 +26,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
   });
 
   const setData = useCallback((data: T | null) => {
-    setState(prev => ({
+    setState(prev: any => ({
       ...prev,
       data,
       error: null,
@@ -35,11 +35,11 @@ export function useAsyncState<T>(initialData: T | null = null): [
   }, []);
 
   const setLoading = useCallback((loading: boolean) => {
-    setState(prev => ({ ...prev, loading }));
+    setState(prev: any => ({ ...prev: any, loading }));
   }, []);
 
   const setError = useCallback((error: Error | null) => {
-    setState(prev => ({
+    setState(prev: any => ({
       ...prev,
       error,
       loading: false,
@@ -219,7 +219,7 @@ export function useForm<T extends Record<string, any>>(
   });
 
   const setValue = useCallback(<K extends keyof T>(field: K, value: T[K]) => {
-    setState(prev => {
+    setState(prev: any => {
       const newFields = { ...prev.fields };
       newFields[field] = {
         ...newFields[field],
@@ -239,7 +239,7 @@ export function useForm<T extends Record<string, any>>(
   }, [initialValues, validators]);
 
   const setError = useCallback(<K extends keyof T>(field: K, error: string | null) => {
-    setState(prev => {
+    setState(prev: any => {
       const newFields = { ...prev.fields };
       newFields[field] = { ...newFields[field], error };
       const isValid = Object.values(newFields).every(f => !f.error);
@@ -253,7 +253,7 @@ export function useForm<T extends Record<string, any>>(
   }, []);
 
   const setTouched = useCallback(<K extends keyof T>(field: K, touched = true) => {
-    setState(prev => {
+    setState(prev: any => {
       const newFields = { ...prev.fields };
       newFields[field] = { ...newFields[field], touched };
 
@@ -265,15 +265,15 @@ export function useForm<T extends Record<string, any>>(
   }, []);
 
   const setSubmitting = useCallback((submitting: boolean) => {
-    setState(prev => ({ ...prev, isSubmitting: submitting }));
+    setState(prev: any => ({ ...prev: any, isSubmitting: submitting }));
   }, []);
 
   const setSubmitError = useCallback((error: string | null) => {
-    setState(prev => ({ ...prev, submitError: error }));
+    setState(prev: any => ({ ...prev: any, submitError: error }));
   }, []);
 
   const reset = useCallback(() => {
-    setState(prev => {
+    setState(prev: any => {
       const fields = {} as { [K in keyof T]: FormField<T[K]> };
       for (const key in initialValues) {
         fields[key] = {
@@ -299,7 +299,7 @@ return true;
 }
 
     let isValid = true;
-    setState(prev => {
+    setState(prev: any => {
       const newFields = { ...prev.fields };
 
       for (const key in validators) {
@@ -371,7 +371,7 @@ export function useToggle(initialValue: boolean = false): [boolean, () => void, 
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => {
-    setValue(prev => !prev);
+    setValue(prev: any => !prev: any);
   }, []);
 
   const setToggle = useCallback((newValue: boolean) => {

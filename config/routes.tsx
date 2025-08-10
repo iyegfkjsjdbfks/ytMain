@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+// TODO: Fix import - import { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -8,7 +8,7 @@ import StudioLayout from '../components/StudioLayout';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
 
-import type { RouteObject } from 'react-router-dom';
+// TODO: Fix import - import type { RouteObject } from 'react-router-dom';
 
 // Lazy load secondary components for better performance
 // HomePage is loaded directly for faster initial render

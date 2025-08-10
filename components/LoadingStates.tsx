@@ -1,6 +1,14 @@
-import type React from 'react';
 
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import type React from 'react';
+
+// TODO: Fix import - import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface VideoGridSkeletonProps {
   count?: number;

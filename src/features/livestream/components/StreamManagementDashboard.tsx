@@ -1,10 +1,10 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect } from 'react';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 import type { LiveStream } from '../../../types/livestream';
-import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 
 interface StreamManagementDashboardProps {
   className?: string;
@@ -311,12 +311,12 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
             title: `${stream.title} (Copy)`,
             status: 'scheduled',
           });
-          setStreams(prev => [...prev, duplicatedStream]);
+          setStreams(prev: any => [...prev: any, duplicatedStream]);
           break;
         case 'delete':
           if (confirm('Are you sure you want to delete this stream?')) {
             // In production, call delete API
-            setStreams(prev => prev.filter((s: any) => s.id !== stream.id));
+            setStreams(prev: any => prev: any.filter((s: any) => s.id !== stream.id));
           }
           break;
         case 'analytics':
@@ -338,7 +338,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
       switch (action) {
         case 'delete':
           if (confirm(`Are you sure you want to delete ${selectedStreams.length} streams?`)) {
-            setStreams(prev => prev.filter((s: any) => !selectedStreams.includes(s.id)));
+            setStreams(prev: any => prev: any.filter((s: any) => !selectedStreams.includes(s.id)));
             setSelectedStreams([]);
           }
           break;
@@ -452,7 +452,7 @@ return `${hours}h ${minutes}m`;
         <div className="flex items-center space-x-4">
           <select
             value={filter}
-            onChange={(e) => setFilter(e.target.value as any)}
+            onChange={(e: Event) => setFilter(e: Event.target.value as any)}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Streams</option>
@@ -463,7 +463,7 @@ return `${hours}h ${minutes}m`;
 
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="date">Sort by Date</option>
@@ -506,11 +506,11 @@ return `${hours}h ${minutes}m`;
               <input
                 type="checkbox"
                 checked={selectedStreams.includes(stream.id)}
-                onChange={(e) => {
+                onChange={(e: Event) => {
                   if (e.target.checked) {
-                    setSelectedStreams(prev => [...prev, stream.id]);
+                    setSelectedStreams(prev: any => [...prev: any, stream.id]);
                   } else {
-                    setSelectedStreams(prev => prev.filter((id: any) => id !== stream.id));
+                    setSelectedStreams(prev: any => prev: any.filter((id: any) => id !== stream.id));
                   }
                 }}
                 className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"

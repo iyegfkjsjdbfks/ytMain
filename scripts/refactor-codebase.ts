@@ -5,8 +5,8 @@
  * Automates the refactoring process for the YouTube clone application
  */
 
-import fs from 'fs';
-import path from 'path';
+// TODO: Fix import - import fs from 'fs';
+// TODO: Fix import - import path from 'path';
 
 interface RefactorTask {
   name: string;
@@ -300,8 +300,8 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
       if (!match[1]) {
 continue;
 }
-      const imports = match[1].split(',').map(imp => imp.trim());
-      const usedImports = imports.filter(imp => {
+      const imports = match[1].split(',').map(imp: any => imp: any.trim());
+      const usedImports = imports.filter(imp: any => {
         const importName = imp.replace(/\s+as\s+\w+/, '').trim();
         return content.includes(importName);
       });

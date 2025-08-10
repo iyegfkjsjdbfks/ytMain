@@ -632,7 +632,7 @@ return undefined;
     return {
       healthy,
       details: {
-        _checks: _checks.map(check => ({
+        _checks: _checks.map(check: any => ({
           name: check,
           status: healthy ? 'healthy' : 'unhealthy',
           responseTime: Math.random() * 100 + 50,

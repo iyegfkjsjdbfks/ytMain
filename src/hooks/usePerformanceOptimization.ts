@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+// TODO: Fix import - import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: string) => {
@@ -150,9 +150,9 @@ export const useBatchedUpdates = <T>(initialValue: T) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      setValue((prev) => {
+      setValue((prev: any) => {
         let result = prev;
-        pendingUpdates.current.forEach((update) => {
+        pendingUpdates.current.forEach((update: any) => {
           result = update(result);
         });
         pendingUpdates.current = [];

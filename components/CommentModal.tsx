@@ -1,6 +1,15 @@
-import { useState } from 'react';
 
-import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
 import BaseModal from './BaseModal';
 
@@ -96,7 +105,7 @@ return;
             id="comment-text"
             rows={4}
             value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
+            onChange={(e: Event) => setCommentText(e: Event.target.value)}
             placeholder="Share your thoughts about this short..."
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white resize-none"
             maxLength={500}

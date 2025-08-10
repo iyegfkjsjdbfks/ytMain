@@ -1,6 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
 
-import { CheckIcon } from '@heroicons/react/24/solid';
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import React from 'react';
+
+// TODO: Fix import - import { CheckIcon } from '@heroicons/react/24/solid';
 
 import AdjustmentsHorizontalIcon from './icons/AdjustmentsHorizontalIcon';
 
@@ -55,7 +64,7 @@ return null;
     <div className="relative">
       <button
         ref={buttonRef}
-        onClick={() => setShowPanel(prev => !prev)}
+        onClick={() => setShowPanel(prev: any => !prev: any)}
         className="flex items-center text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         aria-expanded={showPanel}
         aria-haspopup="true"

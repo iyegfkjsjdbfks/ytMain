@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
@@ -138,7 +138,7 @@ export function useOptimizedAsync<T>(
   });
 
   const execute = useCallback(async () => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+    setState(prev: any => ({ ...prev: any, loading: true, error: null }));
 
     try {
       const result = await asyncFunction();
@@ -225,7 +225,7 @@ export function useOptimizedToggle(
 ): [boolean, () => void, (value: boolean) => void, () => void, () => void] {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => setValue(prev => !prev), []);
+  const toggle = useCallback(() => setValue(prev: any => !prev: any), []);
   const setTrue = useCallback(() => setValue(true), []);
   const setFalse = useCallback(() => setValue(false), []);
 
@@ -239,23 +239,23 @@ export function useOptimizedArray<T>(initialArray: T[] = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((item: T) => {
-    setArray(prev => [...prev, item]);
+    setArray(prev: any => [...prev: any, item]);
   }, []);
 
   const remove = useCallback((index: number) => {
-    setArray(prev => prev.filter((_, i) => i !== index));
+    setArray(prev: any => prev: any.filter((_: any, i: any) => i: any !== index));
   }, []);
 
   const removeById = useCallback((id: string | number, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.filter((item: any) => item[idKey] !== id));
+    setArray(prev: any => prev: any.filter((item: any) => item[idKey] !== id));
   }, []);
 
   const update = useCallback((index: number, newItem: Partial<T>) => {
-    setArray(prev => prev.map((item, i) => i === index ? { ...item, ...newItem } : item));
+    setArray(prev: any => prev: any.map((item: any, i: any) => i: any === index ? { ...item: any, ...newItem } : item: any));
   }, []);
 
   const updateById = useCallback((id: string | number, newItem: Partial<T>, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.map(item => item[idKey] === id ? { ...item, ...newItem } : item));
+    setArray(prev: any => prev: any.map(item: any => item: any[idKey] === id ? { ...item: any, ...newItem } : item: any));
   }, []);
 
   const clear = useCallback(() => {
@@ -339,17 +339,17 @@ export function useOptimizedForm<T extends Record<string, any>>(
   const [touched, setTouchedState] = useState<Partial<Record<keyof T, boolean>>>({});
 
   const setValue = useCallback((name: keyof T, value: any) => {
-    setValues(prev => ({ ...prev, [name]: value }));
+    setValues(prev: any => ({ ...prev: any, [name]: value }));
 
     // Validate field if rules exist
     if (validationRules?.[name]) {
       const error = validationRules[name](value);
-      setErrors(prev => ({ ...prev, [name]: error || undefined }));
+      setErrors(prev: any => ({ ...prev: any, [name]: error || undefined }));
     }
   }, [validationRules]);
 
   const setTouched = useCallback((name: keyof T, isTouched: boolean = true) => {
-    setTouchedState(prev => ({ ...prev, [name]: isTouched }));
+    setTouchedState(prev: any => ({ ...prev: any, [name]: isTouched }));
   }, []);
 
   const reset = useCallback(() => {

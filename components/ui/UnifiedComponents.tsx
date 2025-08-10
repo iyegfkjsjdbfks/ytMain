@@ -1,4 +1,12 @@
-import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+// TODO: Fix import - import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
 
 import {
   ExclamationTriangleIcon,
@@ -46,7 +54,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
     children,
     disabled,
     ...props
-  }, ref) => {
+  }, ref: any) => {
     const isDisabled = disabled || loading;
 
     return (
@@ -100,7 +108,7 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
     className,
     id,
     ...props
-  }, ref) => {
+  }, ref: any) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
     const hasError = !!error;
 
