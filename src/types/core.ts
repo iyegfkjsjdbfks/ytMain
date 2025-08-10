@@ -26,7 +26,11 @@ export interface Video {
   tags?: string[]; // Video tags
   visibility?: string;
   metadata?: any;
-  statistics?: { viewCount?: number; likeCount?: number; commentCount?: number; favoriteCount?: number;   contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string; };
+  statistics?: { viewCount?: number; likeCount?: number; commentCount?: number; favoriteCount?: number;   contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string;   privacyStatus?: string;
+  isShort?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+};
   privacyStatus?: string;
   isShort?: boolean;
   createdAt?: string;
