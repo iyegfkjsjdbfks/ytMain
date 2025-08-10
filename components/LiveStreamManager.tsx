@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
 import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';

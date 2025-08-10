@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useRef, useEffect, memo } from 'react';
+import React from 'react';
 
 import {
   PlayIcon,

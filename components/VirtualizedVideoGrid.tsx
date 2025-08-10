@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useMemo, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
 import { FixedSizeGrid as Grid } from 'react-window';
 

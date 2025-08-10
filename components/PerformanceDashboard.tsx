@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, memo } from 'react';
+import React from 'react';
 
 import { performanceMonitor } from '../utils/performance';
 

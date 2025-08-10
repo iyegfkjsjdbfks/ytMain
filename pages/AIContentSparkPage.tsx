@@ -1,4 +1,12 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import type * as React from 'react';
 import {  useState  } from 'react';
 

@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, type FC } from 'react';
+import React from 'react';
 
 import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 

@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { type RefObject } from 'react';
+import React from 'react';
 
 import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';

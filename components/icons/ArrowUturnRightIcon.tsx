@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import type React from 'react';
 
 // Using a Heroicons v2 style path for ArrowUturnRightIcon (Share-like icon)

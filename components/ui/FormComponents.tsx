@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react';
+import React from 'react';
 
 import { cn } from '../../utils/cn';
 

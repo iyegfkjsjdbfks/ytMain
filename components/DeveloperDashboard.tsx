@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 /**
  * Intelligent Developer Dashboard
  * Provides a comprehensive view of application health, development metrics,
@@ -5,6 +13,7 @@
  */
 
 import { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';

@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';

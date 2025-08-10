@@ -1,4 +1,12 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import type React from 'react';
 
 const SaveIconFilled: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (

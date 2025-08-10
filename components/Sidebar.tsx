@@ -1,4 +1,12 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import React, { memo } from 'react';
 
 import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio

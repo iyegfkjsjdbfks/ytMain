@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 /**
  * Comprehensive DevOps Dashboard
  * Provides unified monitoring and management interface for all system aspects:
@@ -9,6 +17,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import React from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';

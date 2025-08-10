@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import type { ReactNode, RefObject, MouseEvent } from 'react';
 
 import { cn } from '../../utils/cn';

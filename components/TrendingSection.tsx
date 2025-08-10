@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 

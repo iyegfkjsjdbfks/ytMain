@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, useRef, useMemo } from 'react';
+import React from 'react';
 
 import {
   HeartIcon,

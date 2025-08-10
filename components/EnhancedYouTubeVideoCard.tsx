@@ -1,5 +1,14 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import { memo } from 'react';
+import React from 'react';
 
 import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';

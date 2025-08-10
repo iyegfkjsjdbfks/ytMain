@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 
 interface ImageWithFallbackProps {
   src: string;

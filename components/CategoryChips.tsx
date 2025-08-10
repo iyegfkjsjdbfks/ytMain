@@ -1,5 +1,14 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import { useRef, useEffect, useState, useCallback } from 'react';
+import React from 'react';
 
 import { cn } from '../src/lib/utils';
 

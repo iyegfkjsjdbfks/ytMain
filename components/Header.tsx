@@ -1,5 +1,14 @@
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 import { useState, useRef, useEffect, useCallback, memo } from 'react';
+import React from 'react';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
 import { Link } from 'react-router-dom';

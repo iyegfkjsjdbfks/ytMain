@@ -1,3 +1,11 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import React, { type FormEvent, type ReactNode } from 'react';
 
 import { useFormState } from '../src/hooks';

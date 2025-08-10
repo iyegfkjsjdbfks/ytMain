@@ -1,4 +1,13 @@
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 import { useState, useRef } from 'react';
+import React from 'react';
 
 import {
   EllipsisHorizontalIcon,
@@ -9,6 +18,7 @@ import {
 import AddCommentForm from './AddCommentForm';
 import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import ThumbsUpIcon from './icons/ThumbsUpIcon';
+/// <reference types="react/jsx-runtime" />
 
 export interface Comment {
   id: string;
@@ -129,7 +139,7 @@ return 0;
     }
   };
 
-  const renderComment = (comment: Comment, isReply = false): JSX.Element => {
+  const renderComment = (comment: Comment, isReply = false): React.JSX.Element => {
     const isEditing = editingComment?.id === comment.id && editingComment?.parentId === comment.parentId;
     const isMenuOpen = activeCommentMenu === comment.id;
 
