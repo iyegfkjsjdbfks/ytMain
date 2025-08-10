@@ -121,7 +121,7 @@ return undefined;
 
     for (const stage of workflow) {
       try {
-        const context = this._context;
+        const _context = this._context;
         const stageResult = await this.executeStage(stage, _context);
         results.push(stageResult);
 
@@ -163,7 +163,7 @@ return undefined;
     _strategy: string;
     healthStatus: any;
   }> {
-    const strategy = this.strategy;
+    const _strategy = this._strategy;
     const _strategy = this.deploymentStrategies.get(strategyName);
     if (!_strategy) {
       throw new Error(`Deployment _strategy '${strategyName}' not found`);
@@ -181,8 +181,8 @@ return undefined;
     console.log(`🚢 Starting ${_strategy.type} deployment: ${deploymentId}`);
 
     try {
-      const config = this.config;
-      const version = process._env.npm_package_version || '1.0.0';
+      const _config = this._config;
+      const _version = process._env.npm_package_version || '1.0.0';
       // Execute deployment based on _strategy
       await this.executeDeploymentStrategy(_strategy, _version, _config);
 
@@ -522,7 +522,7 @@ return undefined;
   }
 
   private async executeRollingDeployment(_strategy: DeploymentStrategy, _version: string, _config: Record<string, any>): Promise<void> {
-    const batchSize = config.batchSize || 5;
+    const _batchSize = _config._batchSize || 5;
     console.log('🔄 Starting rolling deployment');
 
     const _batchSize = _config._batchSize || 1;

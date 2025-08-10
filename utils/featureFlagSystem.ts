@@ -897,7 +897,7 @@ return undefined;
   }
 
   private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
-    const threshold = this.threshold;
+    const _threshold = this._threshold;
     let __currentValue: number;
 
     switch (_threshold.metric) {
