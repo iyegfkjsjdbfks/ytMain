@@ -12,11 +12,11 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
+import React from 'react';
 
 // TODO: Fix import - import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
-import React from 'react';
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
   XMarkIcon,

@@ -11,11 +11,11 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
+import React from 'react';
 
 // TODO: Fix import - import { useState, useRef } from 'react';
 
 import {
-import React from 'react';
   CloudArrowUpIcon,
   VideoCameraIcon,
   EyeIcon,

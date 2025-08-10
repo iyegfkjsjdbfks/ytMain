@@ -11,12 +11,12 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
+import React from 'react';
 
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 
 import {
-import React from 'react';
   ChartBarIcon,
   VideoCameraIcon,
   CurrencyDollarIcon,
