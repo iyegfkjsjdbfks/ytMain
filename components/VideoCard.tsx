@@ -54,7 +54,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
       <div className="bg-transparent dark:bg-transparent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-neutral-300/30 dark:hover:shadow-neutral-700/30 flex flex-col h-full">
         <div className="relative aspect-video">
           <ImageWithFallback
-            (src || "")={(video || "").(thumbnailUrl || "")}
+            src={video.thumbnailUrl}
             alt={`Thumbnail for ${video.title}`}
             className="w-full h-full object-cover rounded-lg"
             width={320}
