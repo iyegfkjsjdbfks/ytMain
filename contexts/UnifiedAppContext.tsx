@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { createContext, useReducer, useCallback, type ReactNode } from 'react';
 
 import type { User } from '../src/types/core';
@@ -366,3 +367,11 @@ return false;
 };
 
 export default UnifiedAppProvider;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

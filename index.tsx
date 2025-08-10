@@ -1,3 +1,5 @@
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { StrictMode } from 'react';
 
 // TODO: Fix import - import ReactDOM from 'react-dom/client';
@@ -26,3 +28,12 @@ root.render(
     <App />
   </StrictMode>,
 );
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

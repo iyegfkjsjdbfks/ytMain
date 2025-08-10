@@ -1,3 +1,5 @@
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';
@@ -279,3 +281,11 @@ const authRoutes: RouteObject[] = [
 
 // Combined route configuration
 export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes, ...authRoutes];
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

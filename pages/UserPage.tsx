@@ -1,3 +1,17 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 // TODO: Fix import - import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
@@ -6,6 +20,7 @@
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
+import React from 'react';
 
 import type { Video } from '../types';
 

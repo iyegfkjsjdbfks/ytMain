@@ -1,4 +1,19 @@
 import type { Video } from '../types/core';
+import React from 'react';
+
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
 
 export interface YouTubePlayerProps {
   video: Video;

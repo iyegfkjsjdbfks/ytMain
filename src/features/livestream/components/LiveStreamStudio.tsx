@@ -1,5 +1,16 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
+/// <reference types="node" />
 // TODO: Fix import - import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
 // TODO: Fix import - import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 

@@ -1,9 +1,20 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 /**
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
 // TODO: Fix import - import React from "react";
 import { useEffect,
+/// <reference types="node" />
   useRef,
   useState,
   useCallback,

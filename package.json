@@ -75,7 +75,14 @@
     "fix:ts18048": "node scripts/fix-ts18048-possibly-undefined.js",
     "fix:ts7019": "node scripts/fix-ts7019-implicit-any.js",
     "fix:all-types": "npm run fix:ts2304 && npm run fix:ts2300 && npm run fix:ts2322 && npm run fix:ts6133 && npm run fix:ts18048 && npm run fix:ts7019",
-    "fix:all": "node scripts/fix-all-errors.js"
+    "fix:all": "node scripts/fix-all-errors.js",
+    "fix:ts1005-enhanced": "node scripts/fix-ts1005-enhanced.js",
+    "fix:unexpected-tokens": "node scripts/fix-unexpected-tokens.js",
+    "fix:jsx-errors": "node scripts/fix-jsx-errors.js",
+    "fix:remaining-syntax": "node scripts/fix-remaining-syntax.js",
+    "fix:final-syntax": "node scripts/fix-final-syntax.js",
+    "fix:syntax-all": "npm run fix:ts1005-enhanced && npm run fix:unexpected-tokens && npm run fix:remaining-syntax && npm run fix:final-syntax",
+    "orchestrate:enhanced": "node scripts/enhanced-orchestrator.js"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",

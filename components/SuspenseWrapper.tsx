@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { Suspense, type ReactNode } from 'react';
 
 import FastLoadingSpinner from './FastLoadingSpinner';
@@ -21,3 +22,11 @@ const SuspenseWrapper: React.FC<SuspenseWrapperProps> = ({
 };
 
 export default SuspenseWrapper;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

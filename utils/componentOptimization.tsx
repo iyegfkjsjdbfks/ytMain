@@ -1,9 +1,20 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
 
 import React, {
+/// <reference types="node" />
   memo,
   useMemo,
   useCallback,

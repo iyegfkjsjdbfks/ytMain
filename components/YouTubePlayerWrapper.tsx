@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { forwardRef, type ReactNode } from 'react';
 
 
@@ -73,3 +74,11 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 YouTubePlayerWrapper.displayName = 'YouTubePlayerWrapper';
 
 export default YouTubePlayerWrapper;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

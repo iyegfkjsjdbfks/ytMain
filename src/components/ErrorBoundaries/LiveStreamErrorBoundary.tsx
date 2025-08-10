@@ -1,9 +1,20 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 // TODO: Fix import - import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 import { createComponentError } from '@/utils/errorUtils';
+/// <reference types="node" />
 
 import { conditionalLogger } from '../../utils/conditionalLogger';
 

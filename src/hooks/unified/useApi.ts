@@ -1,8 +1,19 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse } from '../../types/core';
+/// <reference types="node" />
 
 /**
  * Unified API Hook

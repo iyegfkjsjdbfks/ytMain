@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -595,3 +596,11 @@ return content.length;
 };
 
 export default ContentManagerPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

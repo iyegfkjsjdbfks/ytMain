@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { createContext, useContext, useReducer, useMemo, type ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
@@ -276,3 +277,11 @@ export const useMiniplayerActions = () => {
   const { actions } = useOptimizedMiniplayer();
   return actions;
 };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

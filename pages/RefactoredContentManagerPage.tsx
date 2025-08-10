@@ -1,3 +1,17 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState } from 'react';
 
 import BaseForm from '../components/BaseForm';
@@ -6,6 +20,7 @@ import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
 import { Button } from '../components/ui/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/Tabs';
+import React from 'react';
 
 import type { Video } from '../types';
 

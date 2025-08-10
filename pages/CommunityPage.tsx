@@ -1,3 +1,5 @@
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 // TODO: Fix import - import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
@@ -507,3 +509,11 @@ return;
 };
 
 export default CommunityPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

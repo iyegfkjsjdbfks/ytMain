@@ -1,7 +1,18 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useEffect, useRef, useState, type FC, type ChangeEvent } from 'react';
 
 import { logger } from '../../utils/logger';
+/// <reference types="node" />
 
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
 

@@ -1,3 +1,15 @@
+/// <reference types="node" />
+
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState, useEffect, useCallback, useRef } from 'react';
 

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -419,3 +420,11 @@ return comments.filter((c) => c.flaggedReason).length;
 };
 
 export default CommentModerationPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

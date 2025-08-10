@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type React from 'react';
 
 // TODO: Fix import - import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -36,3 +37,12 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,4 +1,16 @@
 
+/// <reference types="react/jsx-runtime" />
+/// <reference types="node" />
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {

@@ -1,3 +1,30 @@
+import React from 'react';
+/// <reference types="node" />
+
+
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useRef, useEffect } from 'react';
 
 // TODO: Fix import - import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';

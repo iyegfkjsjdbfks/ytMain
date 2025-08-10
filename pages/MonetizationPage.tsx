@@ -1,8 +1,23 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, memo, lazy, Suspense } from 'react';
 
 // TODO: Fix import - import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
 import {
+import React from 'react';
   Chart as ChartJS,
   CategoryScale,
   LinearScale,

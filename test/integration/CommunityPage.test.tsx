@@ -1,8 +1,23 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // TODO: Fix import - import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 // TODO: Fix import - import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import CommunityPage from '../../pages/CommunityPage';
+import React from 'react';
 
 // Mock the hooks
 vi.mock('@hooks/useRefactoredHooks', () => ({

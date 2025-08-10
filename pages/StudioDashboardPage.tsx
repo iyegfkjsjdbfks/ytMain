@@ -1,7 +1,22 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements: any;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 
 import {
+import React from 'react';
   ChartBarIcon,
   VideoCameraIcon,
   CurrencyDollarIcon,

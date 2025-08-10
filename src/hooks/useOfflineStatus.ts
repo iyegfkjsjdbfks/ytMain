@@ -1,7 +1,18 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
+/// <reference types="node" />
 
 interface NetworkConnection {
   effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
@@ -57,3 +58,12 @@ export const useWatchLater = () => {
   }
   return context;
 };
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
