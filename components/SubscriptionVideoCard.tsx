@@ -56,7 +56,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
         <div className="relative flex-shrink-0">
           <Link to={videoUrl} className="block">
             <ImageWithFallback
-              (src || "")={(video || "").(thumbnailUrl || "")}
+              src={video?.thumbnailUrl || ""}
               alt={video.title}
               className="w-48 h-28 object-cover rounded-lg"
               width={192}
@@ -148,7 +148,7 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
       <div className="relative mb-3">
         <Link to={videoUrl} className="block">
           <ImageWithFallback
-            (src || "")={(video || "").(thumbnailUrl || "")}
+            src={video?.thumbnailUrl || ""}
             alt={video.title}
             className="w-full aspect-video object-cover rounded-lg group-hover:rounded-none transition-all duration-200"
             width={320}

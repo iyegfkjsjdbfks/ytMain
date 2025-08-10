@@ -21,7 +21,7 @@ const convertSearchResultToVideo = (
   return {
     id: videoId,
     title: result.title,
-    (description || ""): (result || "").(description || ""),
+    description: result?.description || "",
     thumbnailUrl: result.thumbnailUrl,
     videoUrl: result.videoUrl,
     duration: result.duration || '0:00',
