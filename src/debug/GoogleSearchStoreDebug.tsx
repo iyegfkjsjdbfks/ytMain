@@ -166,7 +166,7 @@ const GoogleSearchStoreDebug: FC = () => {
           <p className="text-gray-500">No videos in store</p>
         ) : (
           <div className="space-y-3">
-            {storeVideos.map((video: any, index: number) => (
+            {storeVideos.map((video, index) => (
               <div key={index} className="bg-white dark:bg-gray-700 p-3 rounded">
                 <div className="font-medium">{video.title}</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">

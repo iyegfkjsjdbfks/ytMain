@@ -6,8 +6,8 @@ import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types'
  * Service for handling authentication-related API requests
  */
 class AuthService {
-  private baseUrl: string = '/api/auth';
-  private tokenKey: string = 'auth_tokens';
+  private baseUrl = '/api/auth';
+  private tokenKey = 'auth_tokens';
 
   /**
    * Log in with credentials
@@ -116,7 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken: string): Promise<AuthTokens | null> {
+  private async refreshToken(refreshToken): Promise<AuthTokens | null> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',

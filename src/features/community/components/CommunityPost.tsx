@@ -46,11 +46,11 @@ export interface CommunityPostData {
 
 interface CommunityPostProps {
   post: CommunityPostData;
-  onLike: (postId: string) => void;
-  onDislike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
-  onVote?: (postId: string, optionId: string) => void;
+  onLike: (postId) => void;
+  onDislike: (postId) => void;
+  onComment: (postId) => void;
+  onShare: (postId) => void;
+  onVote?: (postId, optionId) => void;
   className?: string;
 }
 
@@ -66,7 +66,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   const [showFullContent, setShowFullContent] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const formatCount = (count: number): string => {
+  const formatCount = (count): string => {
     if (count >= 1000000) {
 return `${(count / 1000000).toFixed(1)}M`;
 }
@@ -81,7 +81,7 @@ return `${(count / 1000).toFixed(1)}K`;
     ? `${post.content.slice(0, 300)}...`
     : post.content;
 
-  const handleVote = (optionId: string) => {
+  const handleVote = (optionId) => {
     if (post.poll && !post.poll.hasVoted && onVote) {
       onVote(post.id, optionId);
     }
@@ -170,7 +170,7 @@ return `${(count / 1000).toFixed(1)}K`;
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-2">
-              {post.media.slice(0, 4).map((media: any, index: number) => (
+              {post.media.slice(0, 4).map((media, index) => (
                 <div key={index} className="relative rounded-lg overflow-hidden aspect-square">
                   <img
                     src={media.type === 'image' ? media.url : media.thumbnail || media.url}

@@ -25,8 +25,8 @@ interface CodeQualityTrend {
   timestamp: number;
   _metrics: CodeMetrics;
   score: number;
-  improvements: string[];
-  regressions: string[];
+  improvements: string;
+  regressions: string;
 }
 
 interface RefactoringOpportunity {
@@ -52,7 +52,7 @@ interface CodeReviewInsight {
   title: string;
   description: string;
   recommendation: string;
-  files: string[];
+  files: string;
   estimatedImpact: string;
 }
 
@@ -72,10 +72,10 @@ interface QualityGate {
  * Intelligent Code Quality Monitor
  */
 class IntelligentCodeMonitor {
-  private trends: CodeQualityTrend[] = [];
-  private opportunities: RefactoringOpportunity[] = [];
-  private insights: CodeReviewInsight[] = [];
-  private qualityGates: QualityGate[] = [];
+  private trends: CodeQualityTrend = [];
+  private opportunities: RefactoringOpportunity = [];
+  private insights: CodeReviewInsight = [];
+  private qualityGates: QualityGate = [];
   private isMonitoring = false;
   private monitoringInterval: NodeJS.Timeout | null = null;
   private lastAnalysis: number = 0;
@@ -195,8 +195,8 @@ return;
 
       // Analyze trends
       const previousTrend = this.trends[this.trends.length - 1];
-      const improvements: string[] = [];
-      const regressions: string[] = [];
+      const improvements: string = [];
+      const regressions: string = [];
 
       if (previousTrend) {
         // Compare with previous _metrics
@@ -294,7 +294,7 @@ return;
   /**
    * Generate realistic metric values with some variation
    */
-  private generateRealisticMetric(type: string, min: number, max: number): number {
+  private generateRealisticMetric(type, min, max): number {
     const base = min + (max - min) * Math.random();
 
     // Add some trend based on previous values
@@ -341,7 +341,7 @@ return;
   /**
    * Check if a metric change is an improvement
    */
-  private isImprovement(metric: keyof CodeMetrics, current: number, previous: number): number {
+  private isImprovement(metric: keyof CodeMetrics, current, previous): number {
     const lowerIsBetter = ['complexity', 'duplicateCode', 'technicalDebt', 'securityVulnerabilities', 'performanceIssues', 'accessibilityIssues'];
 
     if (previous === 0) {
@@ -540,7 +540,7 @@ return 0;
    * Check quality gates
    */
   private checkQualityGates(_metrics: CodeMetrics): void {
-    const failedGates: string[] = [];
+    const failedGates: string = [];
 
     this.qualityGates.forEach(gate => {
       if (!gate.enabled) {
@@ -632,7 +632,7 @@ return;
   /**
    * Auto-implement simple refactoring opportunities
    */
-  async autoImplementRefactoring(opportunityIds: string[]): Promise<void> {
+  async autoImplementRefactoring(opportunityIds): Promise<void> {
     const automatableOpportunities = this.opportunities.filter(
       op => opportunityIds.includes(op.id) && op.automatable,
     );

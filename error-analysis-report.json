@@ -1,220 +1,88 @@
 {
-  "timestamp": "2025-08-10T22:28:36.448Z",
-  "totalErrors": 1923,
+  "timestamp": "2025-08-10T23:26:10.578Z",
+  "totalErrors": 30,
   "errorsByType": {
     "Expected token": {
-      "count": 1075,
-      "percentage": "55.9",
-      "affectedFiles": 129,
+      "count": 12,
+      "percentage": "40.0",
+      "affectedFiles": 6,
       "examples": [
         {
-          "file": "AddCommentForm.tsx",
+          "file": "CreatorStudioPage.tsx",
           "message": "',' expected."
         },
         {
-          "file": "AdvancedSearch.tsx",
+          "file": "CreatorStudioPage.tsx",
           "message": "',' expected."
         },
         {
-          "file": "AdvancedSearch.tsx",
+          "file": "MonetizationPage.tsx",
           "message": "',' expected."
-        }
-      ]
-    },
-    "TS1381": {
-      "count": 316,
-      "percentage": "16.4",
-      "affectedFiles": 69,
-      "examples": [
-        {
-          "file": "AddCommentForm.tsx",
-          "message": "Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
-        }
-      ]
-    },
-    "TS1382": {
-      "count": 281,
-      "percentage": "14.6",
-      "affectedFiles": 69,
-      "examples": [
-        {
-          "file": "AddCommentForm.tsx",
-          "message": "Unexpected token. Did you mean `{'>'}` or `&gt;`?"
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Unexpected token. Did you mean `{'>'}` or `&gt;`?"
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Unexpected token. Did you mean `{'>'}` or `&gt;`?"
-        }
-      ]
-    },
-    "Declaration or statement expected": {
-      "count": 91,
-      "percentage": "4.7",
-      "affectedFiles": 36,
-      "examples": [
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Declaration or statement expected."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Declaration or statement expected."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Declaration or statement expected."
-        }
-      ]
-    },
-    "TS17002": {
-      "count": 71,
-      "percentage": "3.7",
-      "affectedFiles": 34,
-      "examples": [
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expected corresponding JSX closing tag for 'div'."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expected corresponding JSX closing tag for 'div'."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expected corresponding JSX closing tag for 'div'."
-        }
-      ]
-    },
-    "TS1109": {
-      "count": 64,
-      "percentage": "3.3",
-      "affectedFiles": 38,
-      "examples": [
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expression expected."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expression expected."
-        },
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "Expression expected."
-        }
-      ]
-    },
-    "TS2657": {
-      "count": 10,
-      "percentage": "0.5",
-      "affectedFiles": 8,
-      "examples": [
-        {
-          "file": "AdvancedSearch.tsx",
-          "message": "JSX expressions must have one parent element."
-        },
-        {
-          "file": "LiveStreamManager.tsx",
-          "message": "JSX expressions must have one parent element."
-        },
-        {
-          "file": "Miniplayer.tsx",
-          "message": "JSX expressions must have one parent element."
         }
       ]
     },
     "TS1003": {
       "count": 6,
-      "percentage": "0.3",
-      "affectedFiles": 2,
+      "percentage": "20.0",
+      "affectedFiles": 6,
       "examples": [
         {
-          "file": "UnifiedButton.tsx",
+          "file": "CreatorStudioPage.tsx",
           "message": "Identifier expected."
         },
         {
-          "file": "UnifiedButton.tsx",
+          "file": "MonetizationPage.tsx",
           "message": "Identifier expected."
         },
         {
-          "file": "UnifiedButton.tsx",
+          "file": "ShortsPage.tsx",
           "message": "Identifier expected."
         }
       ]
     },
-    "TS1161": {
-      "count": 5,
-      "percentage": "0.3",
-      "affectedFiles": 1,
+    "TS1109": {
+      "count": 6,
+      "percentage": "20.0",
+      "affectedFiles": 6,
       "examples": [
         {
-          "file": "UnifiedButton.tsx",
-          "message": "Unterminated regular expression literal."
+          "file": "CreatorStudioPage.tsx",
+          "message": "Expression expected."
         },
         {
-          "file": "UnifiedButton.tsx",
-          "message": "Unterminated regular expression literal."
+          "file": "MonetizationPage.tsx",
+          "message": "Expression expected."
         },
         {
-          "file": "UnifiedButton.tsx",
-          "message": "Unterminated regular expression literal."
+          "file": "ShortsPage.tsx",
+          "message": "Expression expected."
         }
       ]
     },
-    "TS17008": {
-      "count": 2,
-      "percentage": "0.1",
-      "affectedFiles": 2,
+    "TS1434": {
+      "count": 6,
+      "percentage": "20.0",
+      "affectedFiles": 6,
       "examples": [
         {
-          "file": "VideoUploadPage.tsx",
-          "message": "JSX element 'form' has no corresponding closing tag."
+          "file": "CreatorStudioPage.tsx",
+          "message": "Unexpected keyword or identifier."
         },
         {
-          "file": "PlaylistManager.tsx",
-          "message": "JSX element 'form' has no corresponding closing tag."
-        }
-      ]
-    },
-    "TS1134": {
-      "count": 2,
-      "percentage": "0.1",
-      "affectedFiles": 1,
-      "examples": [
-        {
-          "file": "useLiveStream.ts",
-          "message": "Variable declaration expected."
+          "file": "MonetizationPage.tsx",
+          "message": "Unexpected keyword or identifier."
         },
         {
-          "file": "useLiveStream.ts",
-          "message": "Variable declaration expected."
+          "file": "ShortsPage.tsx",
+          "message": "Unexpected keyword or identifier."
         }
       ]
     }
   },
   "summary": [
-    "Expected token: 1075 errors (129 files)",
-    "TS1381: 316 errors (69 files)",
-    "TS1382: 281 errors (69 files)",
-    "Declaration or statement expected: 91 errors (36 files)",
-    "TS17002: 71 errors (34 files)",
-    "TS1109: 64 errors (38 files)",
-    "TS2657: 10 errors (8 files)",
-    "TS1003: 6 errors (2 files)",
-    "TS1161: 5 errors (1 files)",
-    "TS17008: 2 errors (2 files)",
-    "TS1134: 2 errors (1 files)"
+    "Expected token: 12 errors (6 files)",
+    "TS1003: 6 errors (6 files)",
+    "TS1109: 6 errors (6 files)",
+    "TS1434: 6 errors (6 files)"
   ]
 }

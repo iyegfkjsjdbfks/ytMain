@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -169,7 +170,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
         onClick={onToggleDescription}
         role="button"
         tabIndex={0}
-        onKeyDown={(e: Event) => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onToggleDescription();

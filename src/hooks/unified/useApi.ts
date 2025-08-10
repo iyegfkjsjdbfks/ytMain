@@ -1,8 +1,19 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse } from '../../types/core';
+/// <reference types="node" />
 
 /**
  * Unified API Hook
@@ -42,12 +53,12 @@ export interface UseApiReturn<T> extends UseApiState<T> {
 // Cache implementation
 class ApiCache {
   private cache = new Map<string, {
-    data: any;
+    data;
     timestamp: number;
     staleTime: number;
   }>();
 
-  set<T>(key: string, data: T, staleTime: number = 0): void {
+  set<T>(key, data: T, staleTime: number = 0): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -63,7 +74,7 @@ class ApiCache {
     }
   }
 
-  get<T>(key: string): T | undefined {
+  get<T>(key): T | undefined {
     const entry = this.cache.get(key);
     if (!entry) {
 return undefined;
@@ -81,7 +92,7 @@ return undefined;
     return entry.data;
   }
 
-  isStale(key: string): boolean {
+  isStale(key): boolean {
     const entry = this.cache.get(key);
     if (!entry) {
 return true;
@@ -92,7 +103,7 @@ return true;
     return age > entry.staleTime;
   }
 
-  invalidate(key: string): void {
+  invalidate(key): void {
     this.cache.delete(key);
   }
 
@@ -108,7 +119,7 @@ const apiCache = new ApiCache();
  * Unified API hook for data fetching with advanced features
  */
 export function useApi<T>(
-  queryKey: string | string[],
+  queryKey: string | string,
   queryFn: () => Promise<ApiResponse<T>>,
   config: UseApiConfig<T> = {},
 ): UseApiReturn<T> {
@@ -294,7 +305,7 @@ return;
 
 // Specialized hooks for common patterns
 export function useQuery<T>(
-  queryKey: string | string[],
+  queryKey: string | string,
   queryFn: () => Promise<ApiResponse<T>>,
   config?: UseApiConfig<T>,
 ) {
@@ -355,10 +366,10 @@ export function useMutation<T, TVariables = any>(
 
 // Cache utilities
 export const queryCache = {
-  invalidate: (key: string) => apiCache.invalidate(key),
+  invalidate: (key) => apiCache.invalidate(key),
   clear: () => apiCache.clear(),
-  get: <T>(key: string) => apiCache.get<T>(key),
-  set: <T>(key: string, data: T, staleTime?: number) => apiCache.set(key, data, staleTime),
+  get: <T>(key) => apiCache.get<T>(key),
+  set: <T>(key, data: T, staleTime?: number) => apiCache.set(key, data, staleTime),
 };
 
 export default useApi;

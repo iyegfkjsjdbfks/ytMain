@@ -1,3 +1,15 @@
+/// <reference types="node" />
+
+
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
 
 // TODO: Fix import - import { twMerge } from 'tailwind-merge';
 // TODO: Fix import - import React from "react";
@@ -13,7 +25,7 @@
  * @param inputs - Class values to combine and merge
  * @returns A single string of combined and merged class names
  */
-export function cn(...inputs: ClassValue[]): string {
+export function cn(...inputs: ClassValue): string {
   return twMerge(clsx(inputs));
 }
 
@@ -27,7 +39,7 @@ export function cn(...inputs: ClassValue[]): string {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatNumber(num: number, decimals: number = 1): string {
+export function formatNumber(num, decimals: number = 1): string {
   if (num >= 1000000000) {
     return `${(num / 1000000000).toFixed(decimals)  }B`;
   }
@@ -48,7 +60,7 @@ export function formatNumber(num: number, decimals: number = 1): string {
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-export function formatNumberWithCommas(num: number): string {
+export function formatNumberWithCommas(num): string {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
@@ -59,7 +71,7 @@ export function formatNumberWithCommas(num: number): string {
  * @param max - The maximum value
  * @returns The clamped number
  */
-export function clamp(num: number, min: number, max: number): number {
+export function clamp(num, min, max): number {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -83,7 +95,7 @@ export function formatCount(num: number | string, decimals: number = 1): string 
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds: number): string {
+export function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
@@ -165,7 +177,7 @@ export function formatDate(
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str: string, maxLength: number, ellipsis: string = '...'): string {
+export function truncate(str, maxLength, ellipsis = '...'): string {
   if (!str || str.length <= maxLength) {
 return str;
 }
@@ -177,7 +189,7 @@ return str;
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str: string): string {
+export function toTitleCase(str): string {
   return str.replace(
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
@@ -189,7 +201,7 @@ export function toTitleCase(str: string): string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str: string): string {
+export function toKebabCase(str): string {
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
@@ -256,7 +268,7 @@ export function isFunction(value): value is (...args) => any {
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-export function isValidUrl(str: string): boolean {
+export function isValidUrl(str): boolean {
   try {
     const url = new URL(str);
     return Boolean(url);
@@ -278,7 +290,7 @@ export function isValidUrl(str: string): boolean {
  */
 export function debounce<T extends (...args) => any>(
   func: T,
-  wait: number,
+  wait,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 
@@ -301,7 +313,7 @@ export function debounce<T extends (...args) => any>(
  */
 export function throttle<T extends (...args) => any>(
   func: T,
-  limit: number,
+  limit,
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
 
@@ -342,7 +354,7 @@ export function fileToBase64(file: File): Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename: string): string {
+export function getFileExtension(filename): string {
   return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
@@ -363,7 +375,7 @@ export const isBrowser = (): boolean => {
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-export async function copyToClipboard(text: string): Promise<void> {
+export async function copyToClipboard(text): Promise<void> {
   if (!isBrowser()) {
 return;
 }
@@ -422,7 +434,7 @@ export function isNumber(value): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+export function hexToRgb(hex): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
@@ -440,7 +452,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex: string): 'light' | 'dark' {
+export function getColorContrast(hex): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -463,7 +475,7 @@ return 'dark';
  * @param array - The array to deduplicate
  * @returns A new array with unique values
  */
-export function uniq<T>(array: T[]): T[] {
+export function uniq<T>(array: T): T[] {
   return [...new Set(array)];
 }
 
@@ -474,7 +486,7 @@ export function uniq<T>(array: T[]): T[] {
  * @returns An object with keys and arrays of grouped items
  */
 export function groupBy<T extends Record<string, any>, K extends keyof T>(
-  array: T[],
+  array: T,
   key: K,
 ): Record<string, T[]> {
   return array.reduce((acc, item) => {
@@ -525,7 +537,7 @@ export function deepMerge<T extends object, U extends object>(target: T, source:
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-export function sleep(ms: number): Promise<void> {
+export function sleep(ms): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -538,8 +550,8 @@ export function sleep(ms: number): Promise<void> {
  */
 export function timeout<T>(
   promise: Promise<T>,
-  timeoutMs: number,
-  error: string = 'Operation timed out',
+  timeoutMs,
+  error = 'Operation timed out',
 ): Promise<T> {
   return Promise.race([
     promise,
@@ -575,6 +587,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min: number, max: number): number {
+export function randomInt(min, max): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

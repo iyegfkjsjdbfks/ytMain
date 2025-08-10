@@ -1,8 +1,20 @@
+/// <reference types="node" />
+
+
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
 
 // TODO: Fix import - import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Performance monitoring hook
-export const usePerformanceMonitor = (componentName: string) => {
+export const usePerformanceMonitor = (componentName) => {
   const renderCount = useRef(0);
   const startTime = useRef(performance.now());
 
@@ -22,7 +34,7 @@ export const usePerformanceMonitor = (componentName: string) => {
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay: number): T => {
+export const useDebounce = <T>(value: T, delay): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -41,7 +53,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args) => any>(
   callback: T,
-  delay: number,
+  delay,
 ): T => {
   const lastCall = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>();

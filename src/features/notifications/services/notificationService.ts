@@ -33,26 +33,26 @@ export interface NotificationPreferences {
   email: {
     enabled: boolean;
     frequency: 'instant' | 'daily' | 'weekly';
-    types: NotificationType[];
+    types: NotificationType;
   };
   push: {
     enabled: boolean;
-    types: NotificationType[];
+    types: NotificationType;
   };
   inApp: {
     enabled: boolean;
-    types: NotificationType[];
+    types: NotificationType;
   };
   sms: {
     enabled: boolean;
-    types: NotificationType[];
+    types: NotificationType;
   };
 }
 
 export type NotificationType = Notification['type'];
 
 export interface NotificationFilters {
-  type?: NotificationType | NotificationType[];
+  type?: NotificationType | NotificationType;
   category?: Notification['category'];
   priority?: Notification['priority'];
   isRead?: boolean;
@@ -95,14 +95,14 @@ class NotificationService {
   /**
    * Mark notification as read
    */
-  async markAsRead(notificationId: string): Promise<ApiResponse<void>> {
+  async markAsRead(notificationId): Promise<ApiResponse<void>> {
     return api.patch(`/api/notifications/${notificationId}/read`);
   }
 
   /**
    * Mark multiple notifications as read
    */
-  async markMultipleAsRead(notificationIds: string[]): Promise<ApiResponse<void>> {
+  async markMultipleAsRead(notificationIds): Promise<ApiResponse<void>> {
     return api.patch('/api/notifications/read', { notificationIds });
   }
 
@@ -116,14 +116,14 @@ class NotificationService {
   /**
    * Delete notification
    */
-  async deleteNotification(notificationId: string): Promise<ApiResponse<void>> {
+  async deleteNotification(notificationId): Promise<ApiResponse<void>> {
     return api.delete(`/api/notifications/${notificationId}`);
   }
 
   /**
    * Delete multiple notifications
    */
-  async deleteMultiple(notificationIds: string[]): Promise<ApiResponse<void>> {
+  async deleteMultiple(notificationIds): Promise<ApiResponse<void>> {
     return api.delete('/api/notifications/bulk', {
       body: JSON.stringify({ notificationIds }),
       headers: { 'Content-Type': 'application/json' },
@@ -226,7 +226,7 @@ class NotificationService {
    * Send bulk notifications
    */
   async sendBulkNotifications(
-    userIds: string[],
+    userIds,
     notification: Omit<CreateNotificationData, 'userId'>,
   ): Promise<ApiResponse<{ sent: number; failed: number }>> {
     return api.post('/api/notifications/bulk', {
@@ -243,7 +243,7 @@ class NotificationService {
     name: string;
     type: NotificationType;
     template: string;
-    variables: string[];
+    variables: string;
   }>>> {
     return api.get('/api/notifications/templates');
   }
@@ -255,7 +255,7 @@ class NotificationService {
     name: string;
     type: NotificationType;
     template: string;
-    variables: string[];
+    variables: string;
   }): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/templates', template);
   }
@@ -298,7 +298,7 @@ class NotificationService {
    */
   async scheduleNotification(
     data: CreateNotificationData,
-    scheduledFor: string,
+    scheduledFor,
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/schedule', {
       ...data,
@@ -310,7 +310,7 @@ class NotificationService {
    * Cancel scheduled notification
    */
   async cancelScheduledNotification(
-    notificationId: string,
+    notificationId,
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/notifications/schedule/${notificationId}`);
   }
@@ -331,8 +331,8 @@ class NotificationService {
    * Snooze notification
    */
   async snoozeNotification(
-    notificationId: string,
-    snoozeUntil: string,
+    notificationId,
+    snoozeUntil,
   ): Promise<ApiResponse<void>> {
     return api.patch(`/api/notifications/${notificationId}/snooze`, {
       snoozeUntil,
@@ -343,7 +343,7 @@ class NotificationService {
    * Get notification delivery status
    */
   async getDeliveryStatus(
-    notificationId: string,
+    notificationId,
   ): Promise<ApiResponse<{
     email?: { status: 'sent' | 'delivered' | 'failed'; timestamp: string };
     push?: { status: 'sent' | 'delivered' | 'failed'; timestamp: string };
@@ -356,7 +356,7 @@ class NotificationService {
    * Archive old notifications
    */
   async archiveOldNotifications(
-    olderThan: string,
+    olderThan,
   ): Promise<ApiResponse<{ archived: number }>> {
     return api.post('/api/notifications/archive', { olderThan });
   }
@@ -373,7 +373,7 @@ class NotificationService {
       unreadCount: number;
       topTypes: Array<{ type: NotificationType; count: number }>;
     };
-    highlights: Notification[];
+    highlights: Notification;
     trends: Array<{
       type: NotificationType;
       change: number;

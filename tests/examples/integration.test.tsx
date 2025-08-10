@@ -148,7 +148,7 @@ const VideoPage = () => {
     }
   };
 
-  const handleAddComment = async (text: string) => {
+  const handleAddComment = async (text) => {
     if (!currentVideo) {
 return;
 }
@@ -223,8 +223,8 @@ return;
 
 describe('Integration Tests', () => {
   let endPerformanceTracking: () => void;
-  let mockVideos: any[];
-  let mockComments: any[];
+  let mockVideos;
+  let mockComments;
 
   beforeEach(() => {
     endPerformanceTracking = TestPerformanceTracker.startTest('Integration');
@@ -234,7 +234,7 @@ describe('Integration Tests', () => {
     mockComments = Array.from({ length: 3 }, () => testUtils.generateMockComment());
 
     // Setup API mocks
-    global.fetch = vi.fn().mockImplementation(async (url: string, options?: RequestInit) => {
+    global.fetch = vi.fn().mockImplementation(async (url, options?: RequestInit) => {
       await testUtils.simulateNetworkDelay(50);
 
       if (url.includes('/api/videos') && !url.includes('/comments')) {

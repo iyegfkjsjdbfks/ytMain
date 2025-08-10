@@ -22,10 +22,10 @@ const defaultConfig: ApiConfig = {
 
 // Unified Cache System
 class UnifiedCache {
-  private cache = new Map<string, { data: any; timestamp: number; ttl: number }>();
+  private cache = new Map<string, { data; timestamp: number; ttl: number }>();
   private readonly defaultTTL = 15 * 60 * 1000; // 15 minutes
 
-  set(key: string, data: any, ttl: number = this.defaultTTL): void {
+  set(key, data, ttl: number = this.defaultTTL): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -33,7 +33,7 @@ class UnifiedCache {
     });
   }
 
-  get<T>(key: string): T | null {
+  get<T>(key): T | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -70,10 +70,10 @@ return null;
 // Unified Error Types
 export class ApiError extends Error {
   constructor(
-    message: string,
+    message,
     public status?: number,
     public code?: string,
-    public details?: any,
+    public details?,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -81,14 +81,14 @@ export class ApiError extends Error {
 }
 
 export class NetworkError extends Error {
-  constructor(message: string, public originalError?: Error) {
+  constructor(message, public originalError?: Error) {
     super(message);
     this.name = 'NetworkError';
   }
 }
 
 export class ValidationError extends Error {
-  constructor(message: string, public field?: string) {
+  constructor(message, public field?: string) {
     super(message);
     this.name = 'ValidationError';
   }
@@ -100,9 +100,9 @@ type ResponseInterceptor = (response: Response) => Response | Promise<Response>;
 type ErrorInterceptor = (error: Error) => Error | Promise<Error>;
 
 interface Interceptors {
-  request: RequestInterceptor[];
-  response: ResponseInterceptor[];
-  error: ErrorInterceptor[];
+  request: RequestInterceptor;
+  response: ResponseInterceptor;
+  error: ErrorInterceptor;
 }
 
 // Unified API Service
@@ -152,7 +152,7 @@ class UnifiedApiService {
 
   // Core request method with unified error handling
   private async makeRequest<T>(
-    endpoint: string,
+    endpoint,
     options: RequestInit = {},
     cacheKey?: string,
     cacheTTL?: number,
@@ -183,7 +183,7 @@ class UnifiedApiService {
   }
 
   private async executeRequest<T>(
-    endpoint: string,
+    endpoint,
     options: RequestInit,
     cacheKey?: string,
     cacheTTL?: number,
@@ -269,7 +269,7 @@ class UnifiedApiService {
     regionCode?: string;
     maxResults?: number;
     pageToken?: string;
-  } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
+  } = {}): Promise<{ items: Video; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -288,12 +288,12 @@ queryParams.set('pageToken', params.pageToken);
     return this.makeRequest(`/videos?${queryParams}`, {}, cacheKey, 10 * 60 * 1000);
   }
 
-  async searchVideos(query: string, params: {
+  async searchVideos(query, params: {
     maxResults?: number;
     pageToken?: string;
     order?: string;
     type?: string;
-  } = {}): Promise<{ items: Video[]; nextPageToken?: string }> {
+  } = {}): Promise<{ items: Video; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -315,7 +315,7 @@ queryParams.set('order', params.order);
     return this.makeRequest(`/search?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);
   }
 
-  async getChannel(channelId: string): Promise<Channel> {
+  async getChannel(channelId): Promise<Channel> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -346,7 +346,7 @@ queryParams.set('order', params.order);
     return channel;
   }
 
-  async getPlaylist(playlistId: string): Promise<Playlist> {
+  async getPlaylist(playlistId): Promise<Playlist> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -377,11 +377,11 @@ queryParams.set('order', params.order);
     return playlist;
   }
 
-  async getComments(videoId: string, params: {
+  async getComments(videoId, params: {
     maxResults?: number;
     pageToken?: string;
     order?: string;
-  } = {}): Promise<{ items: Comment[]; nextPageToken?: string }> {
+  } = {}): Promise<{ items: Comment; nextPageToken?: string }> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');

@@ -13,7 +13,7 @@ interface AuthStore extends AuthState {
   checkAuth: () => Promise<void>;
   setUser: (user: User | null) => void;
   setError: (error: string | null) => void;
-  setLoading: (isLoading: boolean) => void;
+  setLoading: (isLoading) => void;
 }
 
 /**
@@ -35,7 +35,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   setError: (error: Error) => set({ error: Error }),
 
-  setLoading: (isLoading) => set({ isLoading: any }),
+  setLoading: (isLoading) => set({ isLoading }),
 
   login: async (credentials) => {
     set({ isLoading: true, error: null });

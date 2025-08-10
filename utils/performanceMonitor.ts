@@ -13,7 +13,7 @@ interface PerformanceMetric {
 }
 
 class PerformanceMonitor {
-  private metrics: PerformanceMetric[] = [];
+  private metrics: PerformanceMetric = [];
   private isEnabled: boolean;
 
   constructor() {
@@ -67,7 +67,7 @@ return;
   /**
    * Track custom performance metrics
    */
-  public trackCustomMetric(name: string, value: number): void {
+  public trackCustomMetric(name, value): void {
     if (!this.isEnabled) {
 return;
 }
@@ -123,7 +123,7 @@ return;
   /**
    * Track React component render performance
    */
-  public trackComponentRender(componentName: string, renderTime: number): void {
+  public trackComponentRender(componentName, renderTime): void {
     if (!this.isEnabled) {
 return;
 }
@@ -140,7 +140,7 @@ return;
   /**
    * Track API call performance
    */
-  public trackApiCall(endpoint: string, duration: number, status: number): void {
+  public trackApiCall(endpoint, duration, status): void {
     if (!this.isEnabled) {
 return;
 }
@@ -211,7 +211,7 @@ return;
     }
   }
 
-  private observePerformanceEntry(entryType: string, callback: (entry) => void): void {
+  private observePerformanceEntry(entryType, callback: (entry) => void): void {
     try {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach(callback);
@@ -236,8 +236,8 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React hook for component performance tracking
-export function usePerformanceTracking(componentName: string) {
-  const trackRender = (renderTime: number) => {
+export function usePerformanceTracking(componentName) {
+  const trackRender = (renderTime) => {
     performanceMonitor.trackComponentRender(componentName, renderTime);
   };
 

@@ -1,3 +1,17 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 // TODO: Fix import - import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
@@ -6,6 +20,7 @@
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
+import React from 'react';
 
 import type { Video } from '../types';
 
@@ -43,7 +58,7 @@ const UserPage: React.FC = () => {
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev: any - 1 : prev: any + 1);
+    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
   };
 
   const tabs = [

@@ -81,14 +81,14 @@ export function useLiveStream(streamId?: string) {
 
   const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
     if (stream) {
-      setStream(prev => prev: any ? {
+      setStream(prev => prev ? {
         ...prev,
         stats: { ...prev.stats, ...newStats },
       } : null);
     }
   };
 
-  const addSuperChat = (amount: number, message: string, username: string) => {
+  const addSuperChat = (amount, message, username) => {
     if (stream) {
       const superChat = {
         id: Date.now().toString(),
@@ -101,7 +101,7 @@ export function useLiveStream(streamId?: string) {
         duration: 5000,
       };
 
-      setStream(prev => prev: any ? {
+      setStream(prev => prev ? {
         ...prev,
         monetization: {
           ...prev.monetization,
@@ -202,7 +202,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream(prev => prev: any ? { ...prev, status: 'live' } : null);
+      setStream(prev => prev ? { ...prev, status: 'live' } : null);
       setLoading(false);
       return true;
     } catch (err) {
@@ -222,7 +222,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream(prev => prev: any ? { ...prev, status: 'ended' } : null);
+      setStream(prev => prev ? { ...prev, status: 'ended' } : null);
       setLoading(false);
       return true;
     } catch (err) {

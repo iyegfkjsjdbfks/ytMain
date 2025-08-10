@@ -15,22 +15,22 @@ interface FeatureFlag {
   name: string;
   description: string;
   type: 'boolean' | 'string' | 'number' | 'json' | 'percentage';
-  defaultValue: any;
+  defaultValue;
   enabled: boolean;
   rolloutStrategy: RolloutStrategy;
-  targeting: TargetingRule[];
-  variants?: FlagVariant[];
+  targeting: TargetingRule;
+  variants?: FlagVariant;
   metadata: {
     createdAt: number;
     updatedAt: number;
     createdBy: string;
-    tags: string[];
+    tags: string;
     environment: string;
   };
   monitoring: {
     trackEvents: boolean;
     trackPerformance: boolean;
-    alertThresholds: AlertThreshold[];
+    alertThresholds: AlertThreshold;
   };
   schedule?: {
     startTime?: number;
@@ -45,31 +45,31 @@ interface RolloutStrategy {
     percentage?: number;
     incrementPercentage?: number;
     incrementInterval?: number; // minutes
-    userGroups?: string[];
-    geoTargets?: string[];
-    customRules?: string[];
+    userGroups?: string;
+    geoTargets?: string;
+    customRules?: string;
   };
 }
 
 interface TargetingRule {
   id: string;
   name: string;
-  conditions: TargetingCondition[];
+  conditions: TargetingCondition;
   operator: 'AND' | 'OR';
-  value: any;
+  value;
   enabled: boolean;
 }
 
 interface TargetingCondition {
   attribute: string;
   operator: 'equals' | 'not_equals' | 'contains' | 'not_contains' | 'greater_than' | 'less_than' | 'in' | 'not_in' | 'regex';
-  value: any;
+  value;
 }
 
 interface FlagVariant {
   id: string;
   name: string;
-  value: any;
+  value;
   weight: number; // 0-100
   description?: string;
 }
@@ -96,7 +96,7 @@ interface UserContext {
 interface FlagEvaluation {
   flagId: string;
   userId?: string;
-  value: any;
+  value;
   variant?: string;
   reason: string;
   timestamp: number;
@@ -119,8 +119,8 @@ interface ABTestResult {
  */
 class AdvancedFeatureFlagManager {
   private flags: Map<string, FeatureFlag> = new Map();
-  private evaluationCache: Map<string, { value: any; expiry: number }> = new Map();
-  private evaluationHistory: FlagEvaluation[] = [];
+  private evaluationCache: Map<string, { value; expiry: number }> = new Map();
+  private evaluationHistory: FlagEvaluation = [];
   private abTestResults: Map<string, ABTestResult[]> = new Map();
   private isRunning = false;
   private rolloutTimers: Map<string, NodeJS.Timeout> = new Map();
@@ -193,7 +193,7 @@ return undefined;
   /**
    * Evaluate a feature _flag for a user
    */
-  evaluateFlag(flagId: string, _context: UserContext = {}, defaultValue?: any): any {
+  evaluateFlag(flagId, _context: UserContext = {}, defaultValue?: any): any {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       console.warn(`🚩 Feature _flag '${flagId}' not found`);
@@ -252,14 +252,14 @@ return undefined;
   /**
    * Get feature _flag by ID
    */
-  getFlag(flagId: string): FeatureFlag | undefined {
+  getFlag(flagId): FeatureFlag | undefined {
     return this.flags.get(flagId);
   }
 
   /**
    * Delete a feature _flag
    */
-  deleteFlag(flagId: string): boolean {
+  deleteFlag(flagId): boolean {
     const deleted = this.flags.delete(flagId);
     if (deleted) {
       this.clearEvaluationCache(flagId);
@@ -279,7 +279,7 @@ return undefined;
   /**
    * Update _flag rollout percentage
    */
-  updateRolloutPercentage(flagId: string, percentage: number): void {
+  updateRolloutPercentage(flagId, percentage): void {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       throw new Error(`Feature _flag '${flagId}' not found`);
@@ -301,7 +301,7 @@ return undefined;
   /**
    * Enable/disable a feature _flag
    */
-  toggleFlag(flagId: string, enabled: boolean): void {
+  toggleFlag(flagId, enabled): void {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       throw new Error(`Feature _flag '${flagId}' not found`);
@@ -369,13 +369,13 @@ return undefined;
   /**
    * Run A/B test analysis
    */
-  async runABTestAnalysis(flagId: string): Promise<ABTestResult[]> {
+  async runABTestAnalysis(flagId): Promise<ABTestResult[]> {
     const _flag = this.flags.get(flagId);
     if (!_flag?.variants || _flag.variants.length < 2) {
       throw new Error('Flag must have at least 2 variants for A/B testing');
     }
 
-    const results: ABTestResult[] = [];
+    const results: ABTestResult = [];
     const analytics = this.getEvaluationAnalytics(flagId);
 
     // Analyze each metric for each variant
@@ -454,7 +454,7 @@ return [];
   /**
    * Get A/B test recommendations
    */
-  getABTestRecommendations(flagId: string): {
+  getABTestRecommendations(flagId): {
     action: 'continue' | 'promote_winner' | 'stop_test' | 'extend_test';
     reason: string;
     winningVariant?: string;
@@ -511,7 +511,7 @@ return [];
   /**
    * Auto-promote winning variant
    */
-  async autoPromoteWinner(flagId: string): Promise<void> {
+  async autoPromoteWinner(flagId): Promise<void> {
     const recommendation = this.getABTestRecommendations(flagId);
 
     if (recommendation.action === 'promote_winner' && recommendation.winningVariant) {
@@ -545,7 +545,7 @@ return undefined;
   /**
    * Emergency rollback
    */
-  emergencyRollback(flagId: string, reason: string): void {
+  emergencyRollback(flagId, reason): void {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
 return undefined;
@@ -668,7 +668,7 @@ continue;
     }
   }
 
-  private getContextValue(attribute: string, _context: UserContext): any {
+  private getContextValue(attribute, _context: UserContext): any {
     switch (attribute) {
       case 'userId':
         return _context.userId;
@@ -685,7 +685,7 @@ continue;
 
   private applyRolloutStrategy(_flag: FeatureFlag, _context: UserContext): {
     shouldApply: boolean;
-    value: any;
+    value;
     variant?: string;
     reason: string;
   } {
@@ -742,7 +742,7 @@ continue;
     }
   }
 
-  private selectVariant(variants: FlagVariant[], hash: number): FlagVariant {
+  private selectVariant(variants: FlagVariant, hash): FlagVariant {
     if (variants.length === 0) {
       // Return a default variant if no variants are provided
       return {
@@ -768,7 +768,7 @@ continue;
     return variants[0] || { id: 'default', name: 'Default', value: false, weight: 100 };
   }
 
-  private getUserHash(userId?: string, flagId: string): number {
+  private getUserHash(userId?: string, flagId): number {
     // Simple hash function for consistent user bucketing
     const str = `${userId}:${flagId}`;
     let hash = 0;
@@ -780,7 +780,7 @@ continue;
     return Math.abs(hash) % 100;
   }
 
-  private getCacheKey(flagId: string, _context: UserContext): string {
+  private getCacheKey(flagId, _context: UserContext): string {
     const keyParts = [
       flagId,
       _context.userId || 'anonymous',
@@ -793,7 +793,7 @@ continue;
   private clearEvaluationCache(flagId?: string): void {
     if (flagId) {
       // Clear cache entries for specific _flag
-      const keysToDelete: string[] = [];
+      const keysToDelete: string = [];
       this.evaluationCache.forEach((_, key) => {
         if (key.startsWith(`${flagId}:`)) {
           keysToDelete.push(key);
@@ -833,7 +833,7 @@ continue;
     this.rolloutTimers.set(_flag.id, timer);
   }
 
-  private trackPerformanceImpact(flagId: string, flagValue: any): void {
+  private trackPerformanceImpact(flagId, flagValue): void {
     // Track performance metrics when _flag is evaluated
     const metrics = performanceMonitor.getMetrics();
     const loadTime = metrics.find(m => m.name === 'page-load-time')?.value || 0;
@@ -1100,11 +1100,11 @@ export type {
 export { AdvancedFeatureFlagManager };
 
 // Convenience hooks for React components
-export const useFeatureFlag = (flagId: string, _context: UserContext = {}, defaultValue?) => {
+export const useFeatureFlag = (flagId, _context: UserContext = {}, defaultValue?) => {
   return featureFlagManager.evaluateFlag(flagId, _context, defaultValue);
 };
 
-export const useABTest = (flagId: string, _context: UserContext = {}) => {
+export const useABTest = (flagId, _context: UserContext = {}) => {
   const evaluation = featureFlagManager.evaluateFlag(flagId, _context);
   return {
     value: evaluation,

@@ -163,7 +163,7 @@ export const CreatorStudioDashboard: React.FC = () => {
     },
   ];
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -173,13 +173,13 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds: number): string => {
+  const formatDuration = (seconds): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     return `${hours}h ${minutes}m`;
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
       case 'processing': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300';
@@ -189,7 +189,7 @@ return `${(num / 1000).toFixed(1)}K`;
     }
   };
 
-  const getNotificationIcon = (type: string) => {
+  const getNotificationIcon = (type) => {
     switch (type) {
       case 'milestone': return CheckCircleIcon;
       case 'comment': return ChatBubbleLeftIcon;

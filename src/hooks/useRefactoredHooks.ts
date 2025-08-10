@@ -8,7 +8,7 @@ import { useUnifiedApp } from './useUnifiedApp';
  * Enhanced useLocalStorage hook with error handling and type safety
  */
 export function useLocalStorage<T>(
-  key: string,
+  key,
   initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -46,7 +46,7 @@ export function useLocalStorage<T>(
 /**
  * Enhanced useDebounce hook with cleanup
  */
-export function useDebounce<T>(value: T, delay: number): T {
+export function useDebounce<T>(value: T, delay): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export function useDebounce<T>(value: T, delay: number): T {
 /**
  * Enhanced useThrottle hook
  */
-export function useThrottle<T>(value: T, delay: number): T {
+export function useThrottle<T>(value: T, delay): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastExecuted = useRef<number>(Date.now());
 
@@ -92,11 +92,11 @@ export function useThrottle<T>(value: T, delay: number): T {
  */
 export function useToggle(
   initialValue: boolean = false,
-): [boolean, () => void, (value: boolean) => void] {
+): [boolean, () => void, (value) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
-  const setToggle = useCallback((newValue: boolean) => setValue(newValue), []);
+  const setToggle = useCallback((newValue) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 }
@@ -104,18 +104,18 @@ export function useToggle(
 /**
  * Enhanced useArray hook for array state management
  */
-export function useArray<T>(initialArray: T[] = []) {
+export function useArray<T>(initialArray: T = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
     setArray(arr => [...arr, element]);
   }, []);
 
-  const filter = useCallback((callback: (item: T, index: number) => boolean) => {
+  const filter = useCallback((callback: (item: T, index) => boolean) => {
     setArray(arr => arr.filter(callback));
   }, []);
 
-  const update = useCallback((index: number, newElement: T) => {
+  const update = useCallback((index, newElement: T) => {
     setArray(arr => [
       ...arr.slice(0, index),
       newElement,
@@ -123,7 +123,7 @@ export function useArray<T>(initialArray: T[] = []) {
     ]);
   }, []);
 
-  const remove = useCallback((index: number) => {
+  const remove = useCallback((index) => {
     setArray(arr => [
       ...arr.slice(0, index),
       ...arr.slice(index + 1),
@@ -250,7 +250,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
 /**
  * Enhanced useMediaQuery hook
  */
-export function useMediaQuery(query: string): boolean {
+export function useMediaQuery(query): boolean {
   const [matches, setMatches] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia(query).matches;
@@ -290,7 +290,7 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user: any,
+    user,
     isAuthenticated: context.state.isAuthenticated,
     login: context.login,
     logout: context.logout,

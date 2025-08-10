@@ -23,28 +23,28 @@ interface AppState {
 
   // Video State
   videos: {
-    home: Video[];
-    trending: Video[];
-    subscriptions: Video[];
-    watchLater: Video[];
-    history: Video[];
-    liked: Video[];
+    home: Video;
+    trending: Video;
+    subscriptions: Video;
+    watchLater: Video;
+    history: Video;
+    liked: Video;
   };
 
   // Channel State
   channels: {
-    subscribed: Channel[];
-    recommended: Channel[];
+    subscribed: Channel;
+    recommended: Channel;
   };
 
   // Playlist State
-  playlists: UserPlaylist[];
+  playlists: UserPlaylist;
 
   // Search State
   search: {
     query: string;
-    results: Video[];
-    suggestions: string[];
+    results: Video;
+    suggestions: string;
     isLoading: boolean;
   };
 
@@ -70,7 +70,7 @@ interface AppActions {
   // UI Actions
   setTheme: (theme: AppState['theme']) => void;
   toggleSidebar: () => void;
-  setSidebarCollapsed: (collapsed: boolean) => void;
+  setSidebarCollapsed: (collapsed) => void;
   showMiniplayer: (video: Video) => void;
   hideMiniplayer: () => void;
 
@@ -79,36 +79,36 @@ interface AppActions {
   logout: () => void;
 
   // Video Actions
-  setVideos: (category: keyof AppState['videos'], videos: Video[]) => void;
+  setVideos: (category: keyof AppState['videos'], videos: Video) => void;
   addToWatchLater: (video: Video) => void;
-  removeFromWatchLater: (videoId: string) => void;
+  removeFromWatchLater: (videoId) => void;
   addToHistory: (video: Video) => void;
   clearHistory: () => void;
   likeVideo: (video: Video) => void;
-  unlikeVideo: (videoId: string) => void;
+  unlikeVideo: (videoId) => void;
 
   // Channel Actions
-  setChannels: (category: keyof AppState['channels'], channels: Channel[]) => void;
+  setChannels: (category: keyof AppState['channels'], channels: Channel) => void;
   subscribeToChannel: (channel: Channel) => void;
-  unsubscribeFromChannel: (channelId: string) => void;
+  unsubscribeFromChannel: (channelId) => void;
 
   // Playlist Actions
-  setPlaylists: (playlists: UserPlaylist[]) => void;
+  setPlaylists: (playlists: UserPlaylist) => void;
   createPlaylist: (playlist: Omit<UserPlaylist, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  updatePlaylist: (id: string, updates: Partial<UserPlaylist>) => void;
-  deletePlaylist: (id: string) => void;
-  addVideoToPlaylist: (playlistId: string, video: Video) => void;
-  removeVideoFromPlaylist: (playlistId: string, videoId: string) => void;
+  updatePlaylist: (id, updates: Partial<UserPlaylist>) => void;
+  deletePlaylist: (id) => void;
+  addVideoToPlaylist: (playlistId, video: Video) => void;
+  removeVideoFromPlaylist: (playlistId, videoId) => void;
 
   // Search Actions
-  setSearchQuery: (query: string) => void;
-  setSearchResults: (results: Video[]) => void;
-  setSearchSuggestions: (suggestions: string[]) => void;
-  setSearchLoading: (loading: boolean) => void;
+  setSearchQuery: (query) => void;
+  setSearchResults: (results: Video) => void;
+  setSearchSuggestions: (suggestions) => void;
+  setSearchLoading: (loading) => void;
   clearSearch: () => void;
 
   // Loading Actions
-  setLoading: (category: keyof AppState['loading'], loading: boolean) => void;
+  setLoading: (category: keyof AppState['loading'], loading) => void;
 
   // Error Actions
   setError: (category: keyof AppState['errors'], error: string | null) => void;
@@ -217,7 +217,7 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           // Video Actions
-          setVideos: (category: any, videos) => set((state) => {
+          setVideos: (category, videos) => set((state) => {
             state.videos[category] = videos;
           }),
 
@@ -259,7 +259,7 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           // Channel Actions
-          setChannels: (category: any, channels) => set((state) => {
+          setChannels: (category, channels) => set((state) => {
             state.channels[category] = channels;
           }),
 
@@ -289,7 +289,7 @@ export const useAppStore = create<AppState & AppActions>()(
             state.playlists.push(newPlaylist);
           }),
 
-          updatePlaylist: (id: string, updates) => set((state) => {
+          updatePlaylist: (id, updates) => set((state) => {
             const index = state.playlists.findIndex((p) => p.id === id);
             if (index !== -1) {
               Object.assign(state.playlists[index], updates, {
@@ -298,11 +298,11 @@ export const useAppStore = create<AppState & AppActions>()(
             }
           }),
 
-          deletePlaylist: (id: string) => set((state) => {
+          deletePlaylist: (id) => set((state) => {
             state.playlists = state.playlists.filter((p) => p.id !== id);
           }),
 
-          addVideoToPlaylist: (playlistId: any, video) => set((state) => {
+          addVideoToPlaylist: (playlistId, video) => set((state) => {
             const playlist = state.playlists.find((p) => p.id === playlistId);
             if (playlist) {
               const exists = playlist.videos?.find((v: Video) => v.id === video.id);
@@ -317,7 +317,7 @@ playlist.videos = [];
             }
           }),
 
-          removeVideoFromPlaylist: (playlistId: any, videoId) => set((state) => {
+          removeVideoFromPlaylist: (playlistId, videoId) => set((state) => {
             const playlist = state.playlists.find((p) => p.id === playlistId);
             if (playlist?.videos) {
               playlist.videos = playlist.videos.filter((v: Video) => v.id !== videoId);
@@ -351,12 +351,12 @@ playlist.videos = [];
           }),
 
           // Loading Actions
-          setLoading: (category: any, loading) => set((state) => {
+          setLoading: (category, loading) => set((state) => {
             state.loading[category] = loading;
           }),
 
           // Error Actions
-          setError: (category: any, error: Error) => set((state) => {
+          setError: (category, error: Error) => set((state) => {
             state.errors[category] = error;
           }),
 
@@ -414,7 +414,7 @@ export const useVideos = (category?: keyof AppState['videos']) => {
     if (category) {
       return {
         videos: state.videos[category],
-        setVideos: (videos: Video[]) => state.setVideos(category, videos),
+        setVideos: (videos: Video) => state.setVideos(category, videos),
         loading: state.loading.videos,
         error: state.errors.videos,
       };

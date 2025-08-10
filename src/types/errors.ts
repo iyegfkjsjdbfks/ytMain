@@ -46,7 +46,7 @@ export interface ValidationError extends BaseError {
 }
 
 export interface FormValidationError extends BaseError {
-  fields: ValidationError[];
+  fields: ValidationError;
   formId?: string;
 }
 
@@ -124,7 +124,7 @@ export interface ComponentError extends BaseError {
 // Hook Error Types
 export interface HookError extends BaseError {
   hookName: string;
-  dependencies?: unknown[];
+  dependencies?: unknown;
   state?: unknown;
 }
 
@@ -218,7 +218,7 @@ export interface ErrorContext {
   };
   performance?: {
     navigation?: PerformanceNavigationTiming;
-    resources?: PerformanceResourceTiming[];
+    resources?: PerformanceResourceTiming;
   };
 }
 
@@ -242,7 +242,7 @@ export interface ErrorReportingConfig {
   includeStack: boolean;
   includeContext: boolean;
   samplingRate: number;
-  ignoredErrors: string[];
+  ignoredErrors: string;
   beforeSend?: (error: EnhancedError, context?: ErrorContext) => EnhancedError | null;
 }
 
@@ -311,8 +311,8 @@ export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];
 
 // Error Factory Functions
 export const createApiError = (
-  message: string,
-  endpoint: string,
+  message,
+  endpoint,
   method: ApiError['method'],
   statusCode?: number,
   details?: Record<string, unknown>,
@@ -337,8 +337,8 @@ export const createApiError = (
 };
 
 export const createValidationError = (
-  field: string,
-  message: string,
+  field,
+  message,
   value?: unknown,
   constraint?: string,
 ): ValidationError => ({
@@ -351,8 +351,8 @@ export const createValidationError = (
 });
 
 export const createNetworkError = (
-  message: string,
-  url: string,
+  message,
+  url,
   timeout = false,
   offline = false,
 ): NetworkError => ({
@@ -365,8 +365,8 @@ export const createNetworkError = (
 });
 
 export const createYouTubeError = (
-  message: string,
-  endpoint: string,
+  message,
+  endpoint,
   videoId?: string,
   errorType?: 'unavailable' | 'embed_disabled' | 'region_blocked' | 'private' | 'deleted',
 ): YouTubeApiError => {

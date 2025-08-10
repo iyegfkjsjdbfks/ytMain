@@ -1,7 +1,18 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
+/// <reference types="node" />
 
 interface UpdateState {
   updateAvailable: boolean;
@@ -15,7 +26,7 @@ interface UpdateState {
 
 interface CacheInfo {
   totalSize: number;
-  cacheNames: string[];
+  cacheNames: string;
   lastCacheUpdate: number | null;
 }
 
@@ -40,8 +51,8 @@ interface UsePWAUpdatesReturn {
   getCacheSize: () => Promise<number>;
 
   // Auto-update settings
-  enableAutoUpdate: (enabled: boolean) => void;
-  setUpdateInterval: (minutes: number) => void;
+  enableAutoUpdate: (enabled) => void;
+  setUpdateInterval: (minutes) => void;
 }
 
 /**
@@ -290,7 +301,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   }, []);
 
   // Enable/disable auto-update
-  const enableAutoUpdate = useCallback((enabled: boolean) => {
+  const enableAutoUpdate = useCallback((enabled) => {
     setAutoUpdateEnabled(enabled);
     localStorage.setItem('pwa-auto-update', enabled.toString());
 
@@ -302,7 +313,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   }, []);
 
   // Set update check interval
-  const setUpdateInterval = useCallback((minutes: number) => {
+  const setUpdateInterval = useCallback((minutes) => {
     setUpdateIntervalState(minutes);
     localStorage.setItem('pwa-update-interval', minutes.toString());
 

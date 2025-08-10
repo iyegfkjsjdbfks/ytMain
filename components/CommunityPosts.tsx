@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -30,7 +31,7 @@ export interface CommunityPost {
   channelVerified: boolean;
   type: 'text' | 'image' | 'video' | 'poll' | 'link';
   content: string;
-  images?: string[];
+  images?: string;
   videoId?: string;
   videoThumbnail?: string;
   videoTitle?: string;
@@ -60,11 +61,11 @@ export interface CommunityPost {
 
 interface CommunityPostsProps {
   channelId?: string;
-  posts: CommunityPost[];
-  onLike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
-  onVote?: (postId: string, optionId: string) => void;
+  posts: CommunityPost;
+  onLike: (postId) => void;
+  onComment: (postId) => void;
+  onShare: (postId) => void;
+  onVote?: (postId, optionId) => void;
   className?: string;
 }
 
@@ -78,7 +79,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 }) => {
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
-  const toggleExpanded = (postId: string) => {
+  const toggleExpanded = (postId) => {
     setExpandedPosts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
@@ -90,7 +91,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     });
   };
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {

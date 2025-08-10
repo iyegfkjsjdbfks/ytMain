@@ -15,12 +15,12 @@ export interface ComponentWrapperProps {
 }
 
 // Utility functions for components
-export const truncateText = (text: string, maxLength: number = 100, suffix: string = '...') => {
+export const truncateText = (text, maxLength: number = 100, suffix = '...') => {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + suffix;
 };
 
-export const formatDuration = (seconds: number): string => {
+export const formatDuration = (seconds): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);
@@ -31,7 +31,7 @@ export const formatDuration = (seconds: number): string => {
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
-export const formatViews = (views: number): string => {
+export const formatViews = (views): string => {
   if (views >= 1000000) {
     return `${(views / 1000000).toFixed(1)}M views`;
   } else if (views >= 1000) {
@@ -70,7 +70,7 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
 // Build truncate classes utility
 export const buildTruncateClasses = (
   lines: number = 1,
-  baseClasses: string = ''
+  baseClasses = ''
 ): string => {
   const truncateClass = lines === 1 ? 'truncate' : `line-clamp-${lines}`;
   return `${baseClasses} ${truncateClass}`.trim();
@@ -78,7 +78,7 @@ export const buildTruncateClasses = (
 
 // Safe localStorage utility
 export const safeLocalStorage = {
-  getItem: (key: string): string | null => {
+  getItem: (key): string | null => {
     try {
       if (typeof window !== 'undefined') {
         return localStorage.getItem(key);
@@ -89,7 +89,7 @@ export const safeLocalStorage = {
     return null;
   },
   
-  setItem: (key: string, value: string): boolean => {
+  setItem: (key, value): boolean => {
     try {
       if (typeof window !== 'undefined') {
         localStorage.setItem(key, value);
@@ -101,7 +101,7 @@ export const safeLocalStorage = {
     return false;
   },
   
-  removeItem: (key: string): boolean => {
+  removeItem: (key): boolean => {
     try {
       if (typeof window !== 'undefined') {
         localStorage.removeItem(key);
@@ -134,14 +134,14 @@ export default {
 };
 
 // Additional utility functions
-export const buildVideoUrl = (videoId: string): string => {
+export const buildVideoUrl = (videoId): string => {
   return `/watch?v=${videoId}`;
 };
 
-export const buildChannelUrl = (channelId: string): string => {
+export const buildChannelUrl = (channelId): string => {
   return `/channel/${channelId}`;
 };
 
-export const getAvatarFallback = (name: string): string => {
+export const getAvatarFallback = (name): string => {
   return name.charAt(0).toUpperCase();
 };

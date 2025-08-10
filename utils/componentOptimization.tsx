@@ -1,9 +1,20 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
 
 import React, {
+/// <reference types="node" />
   memo,
   useMemo,
   useCallback,
@@ -18,7 +29,7 @@ import React, {
 import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
-export function useComponentPerformance(componentName: string) {
+export function useComponentPerformance(componentName) {
   const renderStartTime = useRef<number>(0);
   const mountTime = useRef<number>(0);
   const renderCount = useRef<number>(0);
@@ -79,7 +90,7 @@ return undefined;
     elementRef,
     isVisible,
     renderCount: renderCount.current,
-    trackCustomMetric: (metricName: string, value: number) => {
+    trackCustomMetric: (metricName, value) => {
       performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
     },
   };
@@ -93,7 +104,7 @@ export function smartMemo<P extends object>(
 ): MemoExoticComponent<ComponentType<P>> {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component, (prevProps: any, nextProps) => {
+  const MemoizedComponent = memo(Component, (prevProps, nextProps) => {
     const startTime = performance.now();
 
     // Use custom comparison if provided
@@ -150,7 +161,7 @@ export function useOptimizedCallback<T extends (...args) => any>(
       return true;
     }
 
-    const changed = deps.some((dep: any, index: number) => dep: any !== depsRef.current[index]);
+    const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;
@@ -292,7 +303,7 @@ export function useVirtualScrolling({
 }
 
 // Image optimization hook with lazy loading
-export function useOptimizedImage(src: string, options: {
+export function useOptimizedImage(src, options: {
   placeholder?: string;
   sizes?: string;
   quality?: number;
@@ -362,7 +373,7 @@ return options.placeholder || '';
 
 // Bundle splitting utility
 export function createAsyncComponent<_P extends object>(
-  componentPath: string,
+  componentPath,
   chunkName?: string,
 ) {
   return React.lazy(() => {
@@ -411,9 +422,9 @@ export function withPerformanceMonitoring<P extends object>(
     useEffect(() => {
       if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
         (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
-          _id: any,
-          _root: any,
-          _priorityLevel: any,
+          _id,
+          _root,
+          _priorityLevel,
         ) => {
           // Custom performance tracking logic
           console.debug('Component committed to root');

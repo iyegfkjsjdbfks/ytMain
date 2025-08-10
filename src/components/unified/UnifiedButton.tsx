@@ -193,23 +193,23 @@ UnifiedButton.displayName = 'UnifiedButton';
 
 // Export convenience components for common use cases
 export const PrimaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref) => <UnifiedButton ref={ref: any} variant="primary" {...props} />,
+  (props, ref) => <UnifiedButton ref={ref} variant="primary" {...props} />,
 );
 
 export const SecondaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref) => <UnifiedButton ref={ref: any} variant="secondary" {...props} />,
+  (props, ref) => <UnifiedButton ref={ref} variant="secondary" {...props} />,
 );
 
 export const DangerButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref) => <UnifiedButton ref={ref: any} variant="danger" {...props} />,
+  (props, ref) => <UnifiedButton ref={ref} variant="danger" {...props} />,
 );
 
 export const GhostButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref) => <UnifiedButton ref={ref: any} variant="ghost" {...props} />,
+  (props, ref) => <UnifiedButton ref={ref} variant="ghost" {...props} />,
 );
 
 export const LinkButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref) => <UnifiedButton ref={ref: any} variant="link" {...props} />,
+  (props, ref) => <UnifiedButton ref={ref} variant="link" {...props} />,
 );
 
 PrimaryButton.displayName = 'PrimaryButton';

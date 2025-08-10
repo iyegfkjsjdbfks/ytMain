@@ -433,7 +433,7 @@ const WatchPage: React.FC = () => {
                     ...video,
                     viewCount: video.views,
                     duration: typeof video.duration === 'string' ?
-                      parseInt(video.duration.split(':').reduce((acc: any, time) => (60 * acc: any) + +time: any, 0).toString(), 10) :
+                      parseInt(video.duration.split(':').reduce((acc, time) => (60 * acc) + +time, 0).toString(), 10) :
                       (video.duration as number || 0),
                   } as unknown as Video}
                   autoplay={true}
@@ -451,7 +451,7 @@ const WatchPage: React.FC = () => {
                   autoplay={true}
                   className="w-full"
                   useYouTube={false}
-                  onTimeUpdate={(_currentTime: any, _duration) => {
+                  onTimeUpdate={(_currentTime, _duration) => {
                     // Track watch progress
                     }}
                   onPlay={() => {
@@ -572,7 +572,7 @@ const WatchPage: React.FC = () => {
 
                     {/* Tags */}                        {video.tags && video.tags.length > 0 && (
                           <div className="mt-4 flex flex-wrap gap-2">
-                            {video.tags.map((tag: string, index: number) => (
+                            {video.tags.map((tag, index) => (
                           <span
                             key={index}
                             className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"

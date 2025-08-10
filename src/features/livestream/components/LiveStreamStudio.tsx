@@ -1,5 +1,16 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
+/// <reference types="node" />
 // TODO: Fix import - import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
 // TODO: Fix import - import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
@@ -31,7 +42,7 @@ interface ChatMessage {
   timestamp: Date;
   isModerator?: boolean;
   isOwner?: boolean;
-  badges?: string[];
+  badges?: string;
 }
 
 export const LiveStreamStudio: React.FC = () => {
@@ -183,7 +194,7 @@ return;
     setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -417,7 +428,7 @@ return;
                   type="text"
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyPress={(e: Event) => e: Event.key === 'Enter' && sendChatMessage()}
+                  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
                   placeholder="Type a message..."
                   className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
                 />

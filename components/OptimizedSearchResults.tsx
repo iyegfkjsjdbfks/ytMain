@@ -42,9 +42,9 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
 };
 
 interface OptimizedSearchResultsProps {
-  videos: Video[];
-  youtubeVideos: YouTubeSearchResult[];
-  googleSearchVideos: GoogleSearchResult[];
+  videos: Video;
+  youtubeVideos: YouTubeSearchResult;
+  googleSearchVideos: GoogleSearchResult;
   loading: boolean;
   query: string;
   sortBy: string;
@@ -54,7 +54,7 @@ interface OptimizedSearchResultsProps {
 }
 
 // Debounce hook for search optimization
-function useDebounce<T>(value: T, delay: number): T {
+function useDebounce<T>(value: T, delay): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -72,21 +72,21 @@ function useDebounce<T>(value: T, delay: number): T {
 
 // Memoized sorting functions
 const sortingFunctions = {
-  relevance: (items: any[], query: string) => {
+  relevance: (items, query) => {
     return items.sort((a, b) => {
       const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       return bRelevance - aRelevance;
     });
   },
-  date: (items: any[]) => {
+  date: (items) => {
     return items.sort((a, b) => {
       const dateA = a.uploadedAt || a.publishedAt || '';
       const dateB = b.uploadedAt || b.publishedAt || '';
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
   },
-  views: (items: any[]) => {
+  views: (items) => {
     return items.sort((a, b) => {
       const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
       const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
@@ -142,7 +142,7 @@ return duration;
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr: string) => {
+  const formatTimeAgo = (dateStr) => {
     try {
       const date = new Date(dateStr);
       const now = new Date();

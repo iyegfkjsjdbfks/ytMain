@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -14,7 +15,7 @@ interface PlaylistEditModalProps {
   onClose: () => void;
   initialTitle: string;
   initialDescription: string;
-  onSaveChanges: (title: string, description: string) => Promise<void>;
+  onSaveChanges: (title, description) => Promise<void>;
 }
 
 const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({

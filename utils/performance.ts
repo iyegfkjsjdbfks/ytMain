@@ -11,7 +11,7 @@ interface PerformanceMetric {
 
 class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetric> = new Map();
-  private observers: PerformanceObserver[] = [];
+  private observers: PerformanceObserver = [];
   private isEnabled: boolean = import.meta.env.MODE === 'development';
 
   constructor() {
@@ -49,7 +49,7 @@ class PerformanceMonitor {
     }
   }
 
-  startMeasure(name: string, metadata?: Record<string, any>): void {
+  startMeasure(name, metadata?: Record<string, any>): void {
     if (!this.isEnabled) {
 return;
 }
@@ -67,11 +67,11 @@ return;
     }
   }
 
-  hasMetric(name: string): boolean {
+  hasMetric(name): boolean {
     return this.metrics.has(name);
   }
 
-  endMeasure(name: string): number | null {
+  endMeasure(name): number | null {
     if (!this.isEnabled) {
 return null;
 }
@@ -96,7 +96,7 @@ return null;
     }
 
     // Log slow operations with different thresholds for different operation types
-    const getThreshold = (operationName: string): number => {
+    const getThreshold = (operationName): number => {
       if (operationName.startsWith('image-load')) {
 return 2000;
 } // 2s for images
@@ -126,7 +126,7 @@ return 1500;
     }
   }
 
-  getAverageTime(name: string): number | null {
+  getAverageTime(name): number | null {
     const metrics = this.getMetrics().filter((m) => m.name === name);
     if (metrics.length === 0) {
 return null;
@@ -179,7 +179,7 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React Hook for component performance monitoring
-export function usePerformanceMonitor(componentName: string) {
+export function usePerformanceMonitor(componentName) {
   const startRender = () => {
     performanceMonitor.startMeasure(`${componentName}-render`);
   };
@@ -191,7 +191,7 @@ export function usePerformanceMonitor(componentName: string) {
       : null;
   };
 
-  const measureAsync = async <T>(operationName: string, operation: () => Promise<T>): Promise<T> => {
+  const measureAsync = async <T>(operationName, operation: () => Promise<T>): Promise<T> => {
     const fullName = `${componentName}-${operationName}`;
     performanceMonitor.startMeasure(fullName);
     try {
@@ -208,7 +208,7 @@ export function usePerformanceMonitor(componentName: string) {
     }
   };
 
-  const measureSync = <T>(operationName: string, operation: () => T): T => {
+  const measureSync = <T>(operationName, operation: () => T): T => {
     const fullName = `${componentName}-${operationName}`;
     performanceMonitor.startMeasure(fullName);
     try {
@@ -259,11 +259,11 @@ export function withPerformanceMonitoring<P extends object>(
 }
 
 // Utility functions
-export const measureRenderTime = (componentName: string) => {
-  return (_target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+export const measureRenderTime = (componentName) => {
+  return (_target, propertyKey, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args[]) {
+    descriptor.value = function (...args) {
       const metricName = `${componentName}-${propertyKey}`;
       performanceMonitor.startMeasure(metricName);
       const result = originalMethod.apply(this, args);
@@ -313,4 +313,4 @@ export const monitorMemoryUsage = () => {
   };
 
 // React import (assuming it's available globally or imported elsewhere)
-declare const React: any;
+declare const React;

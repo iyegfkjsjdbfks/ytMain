@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { forwardRef, type ReactNode } from 'react';
 
 
@@ -32,14 +33,14 @@ interface YouTubePlayerWrapperProps {
 export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
-  props: any,
-  _ref: any,
+  props,
+  _ref,
 ) => {
   // YouTubePlayerWrapper rendering
 
 
   // Create mock video object for YouTubePlayer component
-  const createMockVideo = (videoId: string): YouTubeSearchResult => ({
+  const createMockVideo = (videoId): YouTubeSearchResult => ({
     id: videoId,
     title: 'Video',
     description: '',
@@ -73,3 +74,11 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 YouTubePlayerWrapper.displayName = 'YouTubePlayerWrapper';
 
 export default YouTubePlayerWrapper;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

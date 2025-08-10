@@ -14,7 +14,7 @@ interface CodeMetrics {
   technicalDebt: number;
   testCoverage: number;
   duplicateCode: number;
-  codeSmells: CodeSmell[];
+  codeSmells: CodeSmell;
 }
 
 interface CodeSmell {
@@ -32,25 +32,25 @@ interface RefactoringOpportunity {
   type: 'extract-method' | 'extract-class' | 'inline-method' | 'move-method' | 'rename' | 'simplify';
   priority: number;
   description: string;
-  benefits: string[];
-  risks: string[];
+  benefits: string;
+  risks: string;
   estimatedEffort: number; // hours
   automatable: boolean;
-  files: string[];
+  files: string;
 }
 
 interface ArchitecturalInsight {
   category: 'performance' | 'security' | 'maintainability' | 'scalability' | 'accessibility';
   insight: string;
   impact: 'low' | 'medium' | 'high';
-  actionItems: string[];
-  resources: string[];
+  actionItems: string;
+  resources: string;
 }
 
 interface DependencyAnalysis {
   outdated: Array<{ name: string; current: string; latest: string; severity: string }>;
   vulnerabilities: Array<{ name: string; severity: string; description: string }>;
-  unused: string[];
+  unused: string;
   circular: string[][];
   bundleImpact: Array<{ name: string; size: number; impact: string }>;
 }
@@ -60,8 +60,8 @@ interface DependencyAnalysis {
  */
 class CodeAnalysisEngine {
   private analysisHistory: Map<string, CodeMetrics[]> = new Map();
-  private refactoringOpportunities: RefactoringOpportunity[] = [];
-  private architecturalInsights: ArchitecturalInsight[] = [];
+  private refactoringOpportunities: RefactoringOpportunity = [];
+  private architecturalInsights: ArchitecturalInsight = [];
   private isAnalyzing = false;
 
   constructor() {
@@ -157,7 +157,7 @@ return;
   /**
    * Generate automated refactoring suggestions
    */
-  async generateRefactoringSuggestions(_filePath: string): Promise<{
+  async generateRefactoringSuggestions(_filePath): Promise<{
     suggestions: Array<{
       type: string;
       description: string;
@@ -181,10 +181,10 @@ return;
    * Get code quality trends
    */
   getQualityTrends(_filePath?: string, days = 30): {
-    complexity: number[];
-    maintainability: number[];
-    technicalDebt: number[];
-    timestamps: number[];
+    complexity: number;
+    maintainability: number;
+    technicalDebt: number;
+    timestamps: number;
   } {
     const key = _filePath || 'project';
     const history = this.analysisHistory.get(key) || [];
@@ -205,9 +205,9 @@ return;
    */
   async exportAnalysisReport(): Promise<{
     summary: CodeMetrics;
-    trends: any;
-    opportunities: RefactoringOpportunity[];
-    insights: ArchitecturalInsight[];
+    trends;
+    opportunities: RefactoringOpportunity;
+    insights: ArchitecturalInsight;
     dependencies: DependencyAnalysis;
     timestamp: number;
   }> {
@@ -247,7 +247,7 @@ return;
 
   private async detectCodeSmells(_filePath?: string): Promise<CodeSmell[]> {
     // Mock implementation - in real scenario, this would analyze actual code
-    const smells: CodeSmell[] = [];
+    const smells: CodeSmell = [];
 
     // Simulate finding code smells
     if (Math.random() > 0.7) {
@@ -446,24 +446,24 @@ return;
     ];
   }
 
-  private async getFileContent(__filePath: string): Promise<string> {
+  private async getFileContent(__filePath): Promise<string> {
     // Mock implementation - in real scenario, this would read actual file
     return `// Mock file content for ${_filePath}`;
   }
 
-  private async suggestExtractMethod(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestExtractMethod(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     // Mock implementation - in real scenario, this would analyze AST
     return [
       {
         type: 'extract-method',
         description: 'Extract validation logic into separate method',
-        code: 'const validateInput = (input: string) => { /* validation logic */ };',
+        code: 'const validateInput = (input) => { /* validation logic */ };',
         confidence: 0.85,
       },
     ];
   }
 
-  private async suggestSimplifyConditions(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestSimplifyConditions(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'simplify-condition',
@@ -474,7 +474,7 @@ return;
     ];
   }
 
-  private async suggestRemoveDuplication(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestRemoveDuplication(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'remove-duplication',
@@ -485,7 +485,7 @@ return;
     ];
   }
 
-  private async suggestImproveNaming(___content: string): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestImproveNaming(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'improve-naming',
@@ -557,7 +557,7 @@ class TechnicalDebtTracker {
   /**
    * Mark debt item as resolved
    */
-  resolveDebt(id: string): void {
+  resolveDebt(id): void {
     const item = this.debtItems.get(id);
     if (item) {
       item.status = 'resolved';
@@ -619,7 +619,7 @@ class AutomatedCodeReviewer {
   /**
    * Review code changes
    */
-  async reviewChanges(files: string[]): Promise<{
+  async reviewChanges(files): Promise<{
     approved: boolean;
     issues: Array<{
       file: string;
@@ -635,8 +635,8 @@ class AutomatedCodeReviewer {
       confidence: number;
     }>;
   }> {
-    const issues: any[] = [];
-    const suggestions: any[] = [];
+    const issues = [];
+    const suggestions = [];
 
     for (const file of files) {
       const fileIssues = await this.reviewFile(file);
@@ -650,9 +650,9 @@ class AutomatedCodeReviewer {
     return { approved, issues, suggestions };
   }
 
-  private async reviewFile(__file: string): Promise<{
-    issues: any[];
-    suggestions: any[];
+  private async reviewFile(__file): Promise<{
+    issues;
+    suggestions;
   }> {
     // Mock implementation - in real scenario, this would analyze actual file
     const issues = [];

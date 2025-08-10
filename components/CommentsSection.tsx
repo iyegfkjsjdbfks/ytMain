@@ -32,12 +32,12 @@ export interface Comment {
   isDislikedByCurrentUser: boolean;
   isEdited: boolean;
   replyTo?: string;
-  replies?: Comment[];
+  replies?: Comment;
   replyCount?: number;
 }
 
 export interface CommentsSectionProps {
-  comments: Comment[];
+  comments: Comment;
   commentCount: number;
   commentSortOrder: 'top' | 'newest';
   replyingToCommentId: string | null;
@@ -46,14 +46,14 @@ export interface CommentsSectionProps {
   activeCommentMenu: string | null;
   expandedReplies: Record<string, boolean>;
   maxCommentLength: number;
-  onCommentSubmit: (commentText: string) => void;
-  onReplySubmit: (parentId: string) => void;
-  onEditSave: (commentId: string, newText: string, parentId?: string) => void;
-  onDeleteComment: (commentId: string, parentId?: string) => void;
-  onToggleLikeDislike: (id: string, parentId: string | undefined, action: 'like' | 'dislike') => void;
+  onCommentSubmit: (commentText) => void;
+  onReplySubmit: (parentId) => void;
+  onEditSave: (commentId, newText, parentId?: string) => void;
+  onDeleteComment: (commentId, parentId?: string) => void;
+  onToggleLikeDislike: (id, parentId: string | undefined, action: 'like' | 'dislike') => void;
   onSortChange: (order: 'top' | 'newest') => void;
   onSetReplyingTo: (commentId: string | null, text?: string) => void;
-  onSetCurrentReplyText: (text: string) => void;
+  onSetCurrentReplyText: (text) => void;
   onSetEditingComment: (comment: { id: string; parentId?: string } | null) => void;
   onSetActiveCommentMenu: (commentId: string | null) => void;
   onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => void;
@@ -84,7 +84,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   const replyInputRef = useRef<HTMLInputElement>(null);
   const [editText, setEditText] = useState('');
 
-  const parseRelativeDate = (timestamp: string): number => {
+  const parseRelativeDate = (timestamp): number => {
     if (timestamp.includes('Just now') || timestamp.includes('edited')) {
 return 0;
 }
@@ -238,7 +238,7 @@ return 0;
                 </div>
 
                 <button
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     try {
@@ -265,7 +265,7 @@ return 0;
                 </button>
 
                 <button
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     try {

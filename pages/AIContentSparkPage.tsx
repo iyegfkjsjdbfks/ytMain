@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -34,7 +35,7 @@ const AIContentSparkPage: React.FC = () => {
     try {
       const result = await generateVideoIdeas(userInput);
       setVideoIdea(result);
-    } catch (err: any) {
+    } catch (err) {
       setError(err.message || 'An unexpected error occurred.');
     } finally {
       setIsLoading(false);
@@ -133,7 +134,7 @@ const AIContentSparkPage: React.FC = () => {
             <section>
               <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Suggested Titles</h2>
               <ul className="list-disc list-inside space-y-1.5 pl-2 text-neutral-700 dark:text-neutral-200 text-sm">
-                {videoIdea.titles.map((title: string, index: number) => (
+                {videoIdea.titles.map((title, index) => (
                   <li key={`title-${index}`}>{title}</li>
                 ))}
               </ul>
@@ -147,7 +148,7 @@ const AIContentSparkPage: React.FC = () => {
             <section>
               <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Key Talking Points / Outline</h2>
               <ul className="list-disc list-inside space-y-1.5 pl-2 text-neutral-700 dark:text-neutral-200 text-sm">
-                {videoIdea.talkingPoints.map((point: string, index: number) => (
+                {videoIdea.talkingPoints.map((point, index) => (
                   <li key={`point-${index}`}>{point}</li>
                 ))}
               </ul>
@@ -156,7 +157,7 @@ const AIContentSparkPage: React.FC = () => {
             <section>
               <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-3 border-b border-neutral-300 dark:border-neutral-700 pb-2">Suggested Tags</h2>
               <div className="flex flex-wrap gap-2">
-                {videoIdea.tags.map((tag: string, index: number) => (
+                {videoIdea.tags.map((tag, index) => (
                   <span key={`tag-${index}`} className="px-3 py-1 bg-sky-100 dark:bg-sky-700/50 text-sky-700 dark:text-sky-300 rounded-full text-xs font-medium">
                     {tag}
                   </span>

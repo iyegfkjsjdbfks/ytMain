@@ -18,13 +18,13 @@ import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import type { Short } from '../src/types/core';
 
 interface ShortsPlayerProps {
-  shorts: Short[];
+  shorts: Short;
   currentIndex: number;
-  onIndexChange: (index: number) => void;
-  onLike: (shortId: string) => void;
-  onSubscribe: (channelId: string) => void;
-  onComment: (shortId: string) => void;
-  onShare: (shortId: string) => void;
+  onIndexChange: (index) => void;
+  onLike: (shortId) => void;
+  onSubscribe: (channelId) => void;
+  onComment: (shortId) => void;
+  onShare: (shortId) => void;
   className?: string;
 }
 
@@ -179,7 +179,7 @@ return;
     video.currentTime = newTime;
   };
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {

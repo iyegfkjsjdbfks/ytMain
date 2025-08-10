@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -100,7 +101,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'engagement' | 'revenue'>('overview');
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -109,7 +110,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return num.toLocaleString();
   };
 
-  const formatDuration = (seconds: number): string => {
+  const formatDuration = (seconds): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -122,7 +123,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return `${secs}s`;
   };
 
-  const formatCurrency = (amount: number): string => {
+  const formatCurrency = (amount): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -414,7 +415,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
               Top countries
             </h3>
             <div className="space-y-3">
-              {analytics.topCountries.slice(0, 5).map((country: any, index: number) => (
+              {analytics.topCountries.slice(0, 5).map((country, index) => (
                 <div key={country.country} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-400">

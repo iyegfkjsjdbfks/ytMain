@@ -6,13 +6,13 @@
 import type { Video, VideoVisibility } from '../types';
 
 interface StudioVideoGridProps {
-  videos: Video[];
+  videos: Video;
   title?: string;
   loading?: boolean;
   emptyMessage?: string;
-  onEdit?: (videoId: string) => void;
-  onDelete?: (videoId: string) => void;
-  onVisibilityChange?: (videoId: string, visibility: VideoVisibility) => void;
+  onEdit?: (videoId) => void;
+  onDelete?: (videoId) => void;
+  onVisibilityChange?: (videoId, visibility: VideoVisibility) => void;
 }
 
 /**
@@ -32,7 +32,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const [sortBy, setSortBy] = useState<'date' | 'views' | 'comments'>('date');
   const [filterVisibility, setFilterVisibility] = useState<VideoVisibility | 'all'>('all');
 
-  const handleVideoSelect = (videoId: string, selected: boolean) => {
+  const handleVideoSelect = (videoId, selected) => {
     const newSelection = new Set(selectedVideos);
 
     if (selected) {
@@ -44,7 +44,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     setSelectedVideos(newSelection);
   };
 
-  const handleSelectAll = (selected: boolean) => {
+  const handleSelectAll = (selected) => {
     if (selected) {
       const allIds = videos.map(video => video.id);
       setSelectedVideos(new Set(allIds));
@@ -67,7 +67,7 @@ return;
     }
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -141,7 +141,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={filterVisibility}
-              onChange={e: Event => setFilterVisibility(e.target.value as VideoVisibility | 'all')}
+              onChange={e => setFilterVisibility(e.target.value as VideoVisibility | 'all')}
             >
               <option value="all">All Videos</option>
               <option value="public">Public</option>
@@ -152,7 +152,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={sortBy}
-              onChange={e: Event => setSortBy(e.target.value as 'date' | 'views' | 'comments')}
+              onChange={e => setSortBy(e.target.value as 'date' | 'views' | 'comments')}
             >
               <option value="date">Date</option>
               <option value="views">Views</option>
@@ -166,7 +166,7 @@ return;
               type="checkbox"
               className="h-4 w-4"
               checked={selectedVideos.size === videos.length && videos.length > 0}
-              onChange={e: Event => handleSelectAll(e.target.checked)}
+              onChange={e => handleSelectAll(e.target.checked)}
             />
             <span className="text-sm text-gray-600 mr-3">
               {selectedVideos.size} selected
@@ -193,7 +193,7 @@ return;
                 type="checkbox"
                 className="h-4 w-4 mr-4"
                 checked={selectedVideos.has(video.id)}
-                onChange={e: Event => handleVideoSelect(video.id, e.target.checked)}
+                onChange={e => handleVideoSelect(video.id, e.target.checked)}
               />
 
               <div className="flex flex-col md:flex-row items-start md:items-center flex-grow">
@@ -233,7 +233,7 @@ return;
                     <select
                       className="border rounded text-sm p-1"
                       value={video.visibility}
-                      onChange={e: Event => onVisibilityChange(video.id, e.target.value as VideoVisibility)}
+                      onChange={e => onVisibilityChange(video.id, e.target.value as VideoVisibility)}
                     >
                       <option value="public">Public</option>
                       <option value="unlisted">Unlisted</option>

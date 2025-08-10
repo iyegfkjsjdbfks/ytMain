@@ -1,7 +1,22 @@
 
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
+import React from 'react';
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
   XMarkIcon,
@@ -130,7 +145,7 @@ return [];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
-  const handleLike = useCallback((shortId: string) => {
+  const handleLike = useCallback((shortId) => {
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
@@ -141,7 +156,7 @@ return [];
     });
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName: string) => {
+  const handleFollow = useCallback((channelName) => {
     setFollowedChannelsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
@@ -152,14 +167,14 @@ return [];
     });
   }, [setFollowedChannelsArray]);
 
-  const handleComment = useCallback((shortId: string) => {
+  const handleComment = useCallback((shortId) => {
     const currentFilteredShorts = filteredShorts;
     const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
 
-  const handleCommentSubmit = useCallback(async (_commentText: string) => {
+  const handleCommentSubmit = useCallback(async (_commentText) => {
     if (!selectedShortForComment) {
 return;
 }
@@ -172,7 +187,7 @@ return;
     }
   }, [selectedShortForComment]);
 
-  const handleVideoChange = useCallback((index: number) => {
+  const handleVideoChange = useCallback((index) => {
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID
@@ -250,17 +265,17 @@ return;
   }, []);
 
   const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev => !prev: any);
+    setShowSearch(prev => !prev);
     if (showSearch) {
       setSearchQuery('');
     }
   }, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev => !prev: any);
+    setShowFilters(prev => !prev);
   }, []);
 
-  const handleCategoryChange = useCallback((category: string) => {
+  const handleCategoryChange = useCallback((category) => {
     setSelectedCategory(category);
     setCurrentVideoIndex(0);
   }, []);
@@ -289,7 +304,7 @@ return;
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId: string) => {
+  const handleShare = async (shortId) => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
@@ -308,7 +323,7 @@ return;
     }
   };
 
-  const copyToClipboard = async (text: string) => {
+  const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here
@@ -690,7 +705,7 @@ return;
         role="feed"
         aria-label="Shorts feed"
       >
-        {filteredShorts.map((short: any, index: number) => (
+        {filteredShorts.map((short, index) => (
           <div key={short.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard
               short={short}

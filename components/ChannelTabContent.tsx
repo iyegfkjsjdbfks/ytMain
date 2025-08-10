@@ -14,9 +14,9 @@ import type { Channel, Video, PlaylistSummary, CommunityPost } from '../types';
 interface ChannelTabContentProps {
   activeTab: string;
   channel: Channel | null;
-  videos: Video[];
-  playlists: PlaylistSummary[];
-  communityPosts: CommunityPost[];
+  videos: Video;
+  playlists: PlaylistSummary;
+  communityPosts: CommunityPost;
   onPlaylistTabSelect: () => void;
 }
 

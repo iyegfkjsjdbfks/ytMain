@@ -1,5 +1,16 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
+/// <reference types="node" />
 // TODO: Fix import - import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 
 export interface VideoPlayerProps {
@@ -11,7 +22,7 @@ export interface VideoPlayerProps {
   startTime?: number;
   className?: string;
   onReady?: () => void;
-  onTimeUpdate?: (currentTime: number, duration: number) => void;
+  onTimeUpdate?: (currentTime, duration) => void;
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
@@ -197,7 +208,7 @@ return;
     }
   };
 
-  const seek = (time: number) => {
+  const seek = (time) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -206,7 +217,7 @@ return;
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
 
-  const setVolume = (volume: number) => {
+  const setVolume = (volume) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -241,7 +252,7 @@ return;
     }
   };
 
-  const setPlaybackRate = (rate: number) => {
+  const setPlaybackRate = (rate) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -278,7 +289,7 @@ return;
     }, 3000);
   };
 
-  const formatTime = (time: number): string => {
+  const formatTime = (time): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);

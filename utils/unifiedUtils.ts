@@ -32,7 +32,7 @@ return `${Math.floor(diffInSeconds / 2592000)}mo ago`;
     return `${Math.floor(diffInSeconds / 31536000)}y ago`;
   },
 
-  formatDuration: (seconds: number): string => {
+  formatDuration: (seconds): string => {
     if (seconds < 60) {
 return `0:${seconds.toString().padStart(2, '0')}`;
 }
@@ -74,7 +74,7 @@ return `0:${seconds.toString().padStart(2, '0')}`;
 
 // Number Formatting Utilities
 export const numberUtils = {
-  formatViewCount: (count: number): string => {
+  formatViewCount: (count): string => {
     if (count < 1000) {
 return count.toString();
 }
@@ -87,11 +87,11 @@ return `${(count / 1000000).toFixed(1)}M`;
     return `${(count / 1000000000).toFixed(1)}B`;
   },
 
-  formatSubscriberCount: (count: number): string => {
+  formatSubscriberCount: (count): string => {
     return numberUtils.formatViewCount(count);
   },
 
-  formatFileSize: (bytes: number): string => {
+  formatFileSize: (bytes): string => {
     const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
     if (bytes === 0) {
 return '0 B';
@@ -100,7 +100,7 @@ return '0 B';
     return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
   },
 
-  formatPercentage: (value: number, total: number): string => {
+  formatPercentage: (value, total): string => {
     if (total === 0) {
 return '0%';
 }
@@ -112,11 +112,11 @@ return '0%';
 export const stringUtils = {
   // truncate function moved to src/lib/utils.ts to avoid duplication
 
-  capitalize: (text: string): string => {
+  capitalize: (text): string => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   },
 
-  camelCase: (text: string): string => {
+  camelCase: (text): string => {
     return text
       .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
@@ -124,14 +124,14 @@ export const stringUtils = {
       .replace(/\s+/g, '');
   },
 
-  kebabCase: (text: string): string => {
+  kebabCase: (text): string => {
     return text
       .replace(/([a-z])([A-Z])/g, '$1-$2')
       .replace(/[\s_]+/g, '-')
       .toLowerCase();
   },
 
-  slugify: (text: string): string => {
+  slugify: (text): string => {
     return text
       .toLowerCase()
       .replace(/[^\w\s-]/g, '')
@@ -139,12 +139,12 @@ export const stringUtils = {
       .replace(/^-+|-+$/g, '');
   },
 
-  extractHashtags: (text: string): string[] => {
+  extractHashtags: (text): string[] => {
     const hashtagRegex = /#[\w]+/g;
     return text.match(hashtagRegex) ?? [];
   },
 
-  extractMentions: (text: string): string[] => {
+  extractMentions: (text): string[] => {
     const mentionRegex = /@[\w]+/g;
     return text.match(mentionRegex) ?? [];
   },
@@ -152,7 +152,7 @@ export const stringUtils = {
 
 // URL and Media Utilities
 export const mediaUtils = {
-  generateThumbnailUrl: (videoId: string, quality: 'default' | 'medium' | 'high' | 'standard' | 'maxres' = 'medium'): string => {
+  generateThumbnailUrl: (videoId, quality: 'default' | 'medium' | 'high' | 'standard' | 'maxres' = 'medium'): string => {
     const qualityMap = {
       default: 'default',
       medium: 'mqdefault',
@@ -163,7 +163,7 @@ export const mediaUtils = {
     return `https://img.youtube.com/vi/${videoId}/${qualityMap[quality]}.jpg`;
   },
 
-  extractVideoId: (url: string): string | null => {
+  extractVideoId: (url): string | null => {
     const patterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/,
       /youtube\.com\/embed\/([\w-]+)/,
@@ -180,12 +180,12 @@ return match[1] ?? null;
     return null;
   },
 
-  isValidImageUrl: (url: string): boolean => {
+  isValidImageUrl: (url): boolean => {
     const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)$/i;
     return imageExtensions.test(url);
   },
 
-  isValidVideoUrl: (url: string): boolean => {
+  isValidVideoUrl: (url): boolean => {
     const videoExtensions = /\.(mp4|webm|ogg|avi|mov|wmv|flv)$/i;
     return videoExtensions.test(url) || /youtube|youtu\.be|vimeo|dailymotion/.test(url);
   },
@@ -193,12 +193,12 @@ return match[1] ?? null;
 
 // Validation Utilities
 export const validationUtils = {
-  isEmail: (email: string): boolean => {
+  isEmail: (email): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   },
 
-  isUrl: (url: string): boolean => {
+  isUrl: (url): boolean => {
     try {
       // eslint-disable-next-line no-new
       new URL(url);
@@ -208,8 +208,8 @@ export const validationUtils = {
     }
   },
 
-  isStrongPassword: (password: string): { isValid: boolean; errors: string[] } => {
-    const errors: string[] = [];
+  isStrongPassword: (password): { isValid: boolean; errors: string[] } => {
+    const errors: string = [];
 
     if (password.length < 8) {
 errors.push('Password must be at least 8 characters long');
@@ -233,7 +233,7 @@ errors.push('Password must contain at least one special character');
     };
   },
 
-  isPhoneNumber: (phone: string): boolean => {
+  isPhoneNumber: (phone): boolean => {
     const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
     return phoneRegex.test(phone.replace(/[\s\-()]/g, ''));
   },
@@ -241,7 +241,7 @@ errors.push('Password must contain at least one special character');
 
 // Array Utilities
 export const arrayUtils = {
-  chunk: <T>(array: T[], size: number): T[][] => {
+  chunk: <T>(array: T, size): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += size) {
       chunks.push(array.slice(i, i + size));
@@ -249,7 +249,7 @@ export const arrayUtils = {
     return chunks;
   },
 
-  shuffle: <T>(array: T[]): T[] => {
+  shuffle: <T>(array: T): T[] => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -258,7 +258,7 @@ export const arrayUtils = {
     return shuffled;
   },
 
-  unique: <T>(array: T[], key?: keyof T): T[] => {
+  unique: <T>(array: T, key?: keyof T): T[] => {
     if (!key) {
 return [...new Set(array)];
 }
@@ -274,7 +274,7 @@ return false;
     });
   },
 
-  groupBy: <T, K extends keyof T>(array: T[], key: K): Record<string, T[]> => {
+  groupBy: <T, K extends keyof T>(array: T, key: K): Record<string, T[]> => {
     return array.reduce((groups, item) => {
       const groupKey = String(item[key]);
       groups[groupKey] ??= [];
@@ -283,7 +283,7 @@ return false;
     }, {} as Record<string, T[]>);
   },
 
-  sortBy: <T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] => {
+  sortBy: <T>(array: T, key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] => {
     return [...array].sort((a, b) => {
       const aVal = a[key];
       const bVal = b[key];
@@ -301,7 +301,7 @@ return direction === 'asc' ? 1 : -1;
 
 // Local Storage Utilities
 export const storageUtils = {
-  set: (key: string, value: unknown): void => {
+  set: (key, value: unknown): void => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
@@ -309,7 +309,7 @@ export const storageUtils = {
     }
   },
 
-  get: <T>(key: string, defaultValue?: T): T | null => {
+  get: <T>(key, defaultValue?: T): T | null => {
     try {
       const item = localStorage.getItem(key);
       if (item !== null) {
@@ -322,7 +322,7 @@ export const storageUtils = {
     }
   },
 
-  remove: (key: string): void => {
+  remove: (key): void => {
     try {
       localStorage.removeItem(key);
     } catch (error) {
@@ -338,16 +338,16 @@ export const storageUtils = {
     }
   },
 
-  exists: (key: string): boolean => {
+  exists: (key): boolean => {
     return localStorage.getItem(key) !== null;
   },
 };
 
 // Performance Utilities
 export const performanceUtils = {
-  debounce: <T extends (...args: unknown[]) => unknown>(
+  debounce: <T extends (...args: unknown) => unknown>(
     func: T,
-    delay: number,
+    delay,
   ): (...args: Parameters<T>) => void => {
     let timeoutId: NodeJS.Timeout;
     return (...args: Parameters<T>) => {
@@ -356,9 +356,9 @@ export const performanceUtils = {
     };
   },
 
-  throttle: <T extends (...args: unknown[]) => unknown>(
+  throttle: <T extends (...args: unknown) => unknown>(
     func: T,
-    delay: number,
+    delay,
   ): (...args: Parameters<T>) => void => {
     let lastCall = 0;
     return (...args: Parameters<T>) => {
@@ -370,7 +370,7 @@ export const performanceUtils = {
     };
   },
 
-  memoize: <T extends (...args: unknown[]) => unknown>(func: T): T => {
+  memoize: <T extends (...args: unknown) => unknown>(func: T): T => {
     const cache = new Map<string, ReturnType<T>>();
     return ((...args: Parameters<T>) => {
       const key = JSON.stringify(args);
@@ -399,7 +399,7 @@ export const performanceUtils = {
 
 // Error Handling Utilities
 export const errorUtils = {
-  createError: (message: string, code?: string, details?: unknown): Error => {
+  createError: (message, code?: string, details?: unknown): Error => {
     const error = new Error(message) as Error & { code?: string; details?: unknown };
     if (code !== undefined) {
       error.code = code;

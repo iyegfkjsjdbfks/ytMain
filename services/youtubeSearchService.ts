@@ -44,10 +44,10 @@ interface YouTubeSearchItem {
   link: string;
   snippet: string;
   pagemap?: {
-    videoobject?: YouTubeVideoObject[];
-    metatags?: YouTubeMetaTags[];
-    cse_thumbnail?: YouTubeThumbnail[];
-    cse_image?: YouTubeImage[];
+    videoobject?: YouTubeVideoObject;
+    metatags?: YouTubeMetaTags;
+    cse_thumbnail?: YouTubeThumbnail;
+    cse_image?: YouTubeImage;
   };
 }
 
@@ -60,7 +60,7 @@ interface GoogleCustomSearchError {
 interface GoogleCustomSearchApiError {
   code: number;
   message: string;
-  errors: GoogleCustomSearchError[];
+  errors: GoogleCustomSearchError;
 }
 
 interface GoogleCustomSearchInfo {
@@ -69,7 +69,7 @@ interface GoogleCustomSearchInfo {
 }
 
 interface GoogleCustomSearchResponse {
-  items?: YouTubeSearchItem[];
+  items?: YouTubeSearchItem;
   searchInformation?: GoogleCustomSearchInfo;
   error?: GoogleCustomSearchApiError;
 }
@@ -82,7 +82,7 @@ class YouTubeSearchService {
   /**
    * Extract YouTube video ID from various YouTube URL formats
    */
-  private extractVideoId(url: string): string | null {
+  private extractVideoId(url): string | null {
     const patterns = [
       /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n?#]+)/,
       /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^&\n?#]+)/,
@@ -103,7 +103,7 @@ class YouTubeSearchService {
   /**
    * Convert search result to Video object with enhanced metadata
    */
-  private convertToVideo(item: YouTubeSearchItem, index: number): Video {
+  private convertToVideo(item: YouTubeSearchItem, index): Video {
     const extractedVideoId = this.extractVideoId(item.link);
     // Ensure Google Custom Search videos have the google-search- prefix
     const videoId = extractedVideoId ? `google-search-${extractedVideoId}` : `google-search-${Date.now()}-${index}`;
@@ -277,7 +277,7 @@ class YouTubeSearchService {
                        'No description available';
 
     // Extract tags from various sources
-    const tags: string[] = [];
+    const tags: string = [];
     if (metaTags?.['og:video:tag']) {
       tags.push(...metaTags['og:video:tag'].split(',').map(tag => tag.trim()));
     }
@@ -539,7 +539,7 @@ class YouTubeSearchService {
    * Search for YouTube videos by specific query
    */
   async searchVideos(
-    query: string,
+    query,
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
@@ -590,7 +590,7 @@ class YouTubeSearchService {
    * Get trending YouTube videos by category
    */
   async getTrendingVideos(
-    category: string = 'popular',
+    category = 'popular',
     maxResults: number = 10,
   ): Promise<Video[]> {
     const trendingQueries = {

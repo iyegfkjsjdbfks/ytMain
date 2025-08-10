@@ -55,8 +55,8 @@ interface UsePWAReturn {
   // Features
   shareContent: (data: ShareData) => Promise<boolean>;
   addToHomeScreen: () => void;
-  registerBackgroundSync: (tag: string) => Promise<void>;
-  cacheVideo: (videoId: string, quality?: string) => Promise<boolean>;
+  registerBackgroundSync: (tag) => Promise<void>;
+  cacheVideo: (videoId, quality?: string) => Promise<boolean>;
 
   // Analytics
   getInstallStats: () => any;
@@ -64,7 +64,7 @@ interface UsePWAReturn {
 
   // State
   isInitialized: boolean;
-  supportedFeatures: string[];
+  supportedFeatures: string;
 }
 
 export const usePWA = (): UsePWAReturn => {
@@ -210,7 +210,7 @@ export const usePWA = (): UsePWAReturn => {
   }, [installPrompt.isInstallable, installPrompt.installApp, notifications.showNotification]);
 
   // Register background sync
-  const registerBackgroundSync = useCallback(async (tag: string): Promise<void> => {
+  const registerBackgroundSync = useCallback(async (tag): Promise<void> => {
     try {
       if (!state.features.backgroundSync) {
         conditionalLogger.warn('Background sync not supported', undefined, 'usePWA');
@@ -230,7 +230,7 @@ export const usePWA = (): UsePWAReturn => {
   }, [state.features.backgroundSync]);
 
   // Cache video for offline viewing
-  const cacheVideo = useCallback(async (videoId: string, quality?: string): Promise<boolean> => {
+  const cacheVideo = useCallback(async (videoId, quality?: string): Promise<boolean> => {
     try {
       if (!('caches' in window)) {
         conditionalLogger.warn('Cache API not supported', undefined, 'usePWA');
@@ -375,7 +375,7 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
   return permission === 'granted';
 };
 
-export const showNotification = (title: string, options?: NotificationOptions): void => {
+export const showNotification = (title, options?: NotificationOptions): void => {
   if ('Notification' in window && Notification.permission === 'granted') {
     const defaultOptions: NotificationOptions = {
       icon: '/icons/icon-192x192.svg',
@@ -442,7 +442,7 @@ export const getNetworkStatus = (): { online: boolean; effectiveType?: string; d
   };
 };
 
-export const enableBackgroundSync = (tag: string): void => {
+export const enableBackgroundSync = (tag): void => {
   if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
     navigator.serviceWorker.ready.then((registration) => {
       return (registration as any).sync.register(tag);
@@ -457,7 +457,7 @@ export const enableBackgroundSync = (tag: string): void => {
   }
 };
 
-export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boolean> => {
+export const cacheVideo = async (videoUrl, videoId): Promise<boolean> => {
   if ('caches' in window) {
     try {
       const cache = await caches.open('youtubex-videos-v1');
@@ -480,7 +480,7 @@ export const cacheVideo = async (videoUrl: string, videoId: string): Promise<boo
   return false;
 };
 
-export const getCachedVideo = async (videoId: string): Promise<Response | null> => {
+export const getCachedVideo = async (videoId): Promise<Response | null> => {
   if ('caches' in window) {
     try {
       const cache = await caches.open('youtubex-videos-v1');

@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -131,7 +132,7 @@ class ErrorBoundary extends Component<Props, State> {
     // Reset error boundary when resetKeys change
     if (hasError && resetKeys && prevProps.resetKeys !== resetKeys) {
       const hasResetKeyChanged = resetKeys.some(
-        (key: string, index: number) => this.prevResetKeys[index] !== key: string,
+        (key, index) => this.prevResetKeys[index] !== key,
       );
 
       if (hasResetKeyChanged) {

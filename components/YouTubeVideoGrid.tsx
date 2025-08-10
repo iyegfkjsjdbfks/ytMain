@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -15,7 +16,7 @@ import type { YouTubeSearchResult } from '../services/googleSearchService';
 
 
 interface YouTubeVideoGridProps {
-  videos: YouTubeSearchResult[];
+  videos: YouTubeSearchResult;
   className?: string;
   keyPrefix?: string;
   columns?: {
@@ -54,7 +55,7 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video: any, index: number) => {
+      {videos.map((video, index) => {
         // Generate a stable key using available identifiers
         const videoKey = video.id || (video as any).videoId || `video-${index}`;
         return (

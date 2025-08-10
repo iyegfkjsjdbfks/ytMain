@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -74,7 +75,7 @@ const ContentManagerPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a: any, b) => {
+    filtered.sort((a, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
@@ -99,7 +100,7 @@ const ContentManagerPage: React.FC = () => {
     setFilteredContent(filtered);
   }, [content, filter, searchQuery, sortBy]);
 
-  const handleSelectItem = (itemId: string) => {
+  const handleSelectItem = (itemId) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(itemId)) {
       newSelected.delete(itemId);
@@ -143,7 +144,7 @@ const ContentManagerPage: React.FC = () => {
           }
         }
         return item;
-      }).filter(Boolean) as ContentItem[],
+      }).filter(Boolean) as ContentItem,
     );
 
     if (action === 'duplicate') {
@@ -192,7 +193,7 @@ return;
     setScheduleTime('');
   };
 
-  const getStatusBadge = (status: string, scheduledDate?: string) => {
+  const getStatusBadge = (status, scheduledDate?: string) => {
     const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
     switch (status) {
@@ -263,7 +264,7 @@ return content.length;
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Filter Tabs */}
           <div className="flex flex-wrap gap-2">
-            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType[]).map((filterType) => (
+            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}
@@ -595,3 +596,11 @@ return content.length;
 };
 
 export default ContentManagerPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

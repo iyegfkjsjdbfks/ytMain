@@ -66,7 +66,7 @@ export const mockPost = (overrides = {}) => ({
 interface AllTheProvidersProps {
   children: React.ReactNode;
   queryClient?: QueryClient;
-  initialEntries?: string[];
+  initialEntries?: string;
 }
 
 const AllTheProviders = ({
@@ -98,7 +98,7 @@ const AllTheProviders = ({
 // Custom render function
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
-  initialEntries?: string[];
+  initialEntries?: string;
 }
 
 const customRender = (
@@ -189,11 +189,11 @@ export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
 
   const mockStorage = {
-    getItem: vi.fn((key: string) => store[key] || null),
-    setItem: vi.fn((key: string, value: string) => {
+    getItem: vi.fn((key) => store[key] || null),
+    setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key: string) => {
+    removeItem: vi.fn((key) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -215,11 +215,11 @@ export const mockSessionStorage = () => {
   const store: Record<string, string> = {};
 
   const mockStorage = {
-    getItem: vi.fn((key: string) => store[key] || null),
-    setItem: vi.fn((key: string, value: string) => {
+    getItem: vi.fn((key) => store[key] || null),
+    setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key: string) => {
+    removeItem: vi.fn((key) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -241,7 +241,7 @@ export const mockSessionStorage = () => {
 export const mockFetch = () => {
   const mockFetch = vi.fn();
 
-  const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
+  const mockResponse = (data, options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
     status: options.status ?? 200,
     json: vi.fn().mockResolvedValue(data),

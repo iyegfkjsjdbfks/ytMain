@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -37,7 +38,7 @@ interface VideoActionsProps {
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onShareToSocial: (platform: string) => void;
+  onShareToSocial: (platform) => void;
   onCopyLink: () => void;
   shareMessage?: string;
 }
@@ -150,7 +151,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
     onShare();
   };
 
-  const handleShareToSocial = (platform: string) => {
+  const handleShareToSocial = (platform) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
 

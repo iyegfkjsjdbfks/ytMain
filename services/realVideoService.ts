@@ -135,26 +135,26 @@ const sampleVideos = [
 
 // Video service functions
 export const getVideos = async () => sampleVideos;
-export const getVideoById = async (id: string) => sampleVideos.find(v => v.id === id) || null;
+export const getVideoById = async (id) => sampleVideos.find(v => v.id === id) || null;
 export const getShortsVideos = async () => sampleVideos.filter(v => v.isShort);
-export const getVideosByCategory = async (category: string) => sampleVideos.filter(v => v.category === category);
-export const searchVideos = async (query: string) => sampleVideos.filter(v =>
+export const getVideosByCategory = async (category) => sampleVideos.filter(v => v.category === category);
+export const searchVideos = async (query) => sampleVideos.filter(v =>
   v.title.toLowerCase().includes(query.toLowerCase()) ||
   v.description.toLowerCase().includes(query.toLowerCase()),
 );
 
 // Channel and playlist functions (simplified for now)
 export const getChannels = async () => [];
-export const getChannelById = async (_id: string) => null;
-export const getChannelByName = async (_name: string) => null;
-export const getVideosByChannelName = async (_name: string) => [];
-export const getChannelPlaylists = async (_name: string) => [];
-export const getChannelCommunityPosts = async (_name: string) => [];
-export const getCommentsByVideoId = async (_videoId: string) => [];
+export const getChannelById = async (_id) => null;
+export const getChannelByName = async (_name) => null;
+export const getVideosByChannelName = async (_name) => [];
+export const getChannelPlaylists = async (_name) => [];
+export const getChannelCommunityPosts = async (_name) => [];
+export const getCommentsByVideoId = async (_videoId) => [];
 export const getPlaylists = async () => [];
 export const getCommunityPosts = async () => [];
 export const getUserPlaylists = async () => [];
-export const getUserPlaylistById = async (_id: string) => null;
+export const getUserPlaylistById = async (_id) => null;
 
 // User interaction functions
 export const getWatchHistoryVideos = async () => sampleVideos.slice(0, 3);
@@ -164,10 +164,10 @@ export const getRecentSearches = async () => ['animation', 'blender', 'short fil
 export const clearAllRecentSearches = async () => {};
 
 // Search functions
-export const getSearchSuggestions = async (query: string) =>
+export const getSearchSuggestions = async (query) =>
   ['animation', 'blender', 'short film', 'sample video'].filter(s => s.includes(query.toLowerCase()));
-export const removeRecentSearch = async (_search: string) => [];
-export const saveRecentSearch = async (_query: string) => {};
+export const removeRecentSearch = async (_search) => [];
+export const saveRecentSearch = async (_query) => {};
 
 // Upload simulation
 export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress: UploadProgress) => void): Promise<void> => {
@@ -198,16 +198,16 @@ export default {
 };
 
 // Playlist management functions (simplified for now)
-export const removeVideoFromPlaylist = async (_playlistId: string, _videoId: string) => {};
-export const updateUserPlaylistDetails = async (_playlistId: string, _details) => {};
+export const removeVideoFromPlaylist = async (_playlistId, _videoId) => {};
+export const updateUserPlaylistDetails = async (_playlistId, _details) => {};
 
 // Subscription management functions (simplified for now)
 export const getSubscribedChannels = async () => [];
-export const updateSubscriptionNotifications = async (_channelId: string, _enabled: boolean) => {};
-export const unsubscribeFromChannel = async (_channelId: string) => {};
+export const updateSubscriptionNotifications = async (_channelId, _enabled) => {};
+export const unsubscribeFromChannel = async (_channelId) => {};
 
 // Playlist creation function (simplified for now)
-export const createUserPlaylist = async (_name: string, _description?: string) => ({
+export const createUserPlaylist = async (_name, _description?: string) => ({
   id: `playlist-${Date.now()}`,
   name: _name,
   description: _description || '',

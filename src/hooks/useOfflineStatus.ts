@@ -1,7 +1,18 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
+/// <reference types="node" />
 
 interface NetworkConnection {
   effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';
@@ -122,7 +133,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, []);
 
   // Ping server to test connectivity
-  const pingServer = useCallback(async (url: string = '/api/ping'): Promise<boolean> => {
+  const pingServer = useCallback(async (url = '/api/ping'): Promise<boolean> => {
     try {
       const startTime = Date.now();
       const response = await fetch(url, {
@@ -187,7 +198,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [state.isOnline, getNetworkQuality]);
 
   // Update offline statistics
-  const updateOfflineStats = useCallback((isOffline: boolean) => {
+  const updateOfflineStats = useCallback((isOffline) => {
     const stats = getOfflineStats();
 
     if (isOffline && !state.wasOffline) {

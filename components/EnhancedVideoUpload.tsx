@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -24,7 +25,7 @@ import {
 export interface VideoUploadData {
   title: string;
   description: string;
-  tags: string[];
+  tags: string;
   category: string;
   thumbnail?: File | null;
   customThumbnail?: string | null;
@@ -35,14 +36,14 @@ export interface VideoUploadData {
   commentsEnabled: boolean;
   likesVisible: boolean;
   language: string;
-  captions?: File[];
+  captions?: File;
 }
 
 interface EnhancedVideoUploadProps {
   onUpload: (file: File, data: VideoUploadData) => Promise<void>;
   onCancel?: () => void;
   maxSizeGB?: number;
-  allowedFormats?: string[];
+  allowedFormats?: string;
   className?: string;
 }
 
@@ -155,7 +156,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }
   };
 
-  const addTag = (tag: string) => {
+  const addTag = (tag) => {
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
       setUploadData(prev => ({
         ...prev,
@@ -164,7 +165,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }
   };
 
-  const removeTag = (tagToRemove: string) => {
+  const removeTag = (tagToRemove) => {
     setUploadData(prev => ({
       ...prev,
       tags: prev.tags.filter((tag) => tag !== tagToRemove),
@@ -201,7 +202,7 @@ return;
     }
   };
 
-  const formatFileSize = (bytes: number): string => {
+  const formatFileSize = (bytes): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -550,7 +551,7 @@ return '0:00';
                   type="text"
                   placeholder="Add tags to help people find your video"
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onKeyPress={(e: Event) => {
+                  onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       const target = e.target as HTMLInputElement;
@@ -562,7 +563,7 @@ return '0:00';
 
                 {uploadData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {uploadData.tags.map((tag: string, index: number) => (
+                    {uploadData.tags.map((tag, index) => (
                       <span
                         key={index}
                         className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

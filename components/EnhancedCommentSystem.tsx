@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -39,30 +40,30 @@ export interface Comment {
   isDisliked: boolean;
   isPinned: boolean;
   isEdited: boolean;
-  replies: Comment[];
+  replies: Comment;
   parentId?: string;
   isReported: boolean;
   moderationStatus: 'approved' | 'pending' | 'flagged' | 'removed';
-  mentions: string[];
-  hashtags: string[];
+  mentions: string;
+  hashtags: string;
 }
 
 interface EnhancedCommentSystemProps {
   videoId: string;
-  comments: Comment[];
+  comments: Comment;
   currentUserId?: string;
   isChannelOwner?: boolean;
   isModerator?: boolean;
   commentsEnabled: boolean;
   sortBy: 'newest' | 'oldest' | 'popular';
-  onAddComment: (content: string, parentId?: string) => void;
-  onEditComment: (commentId: string, content: string) => void;
-  onDeleteComment: (commentId: string) => void;
-  onLikeComment: (commentId: string) => void;
-  onDislikeComment: (commentId: string) => void;
-  onPinComment: (commentId: string) => void;
-  onReportComment: (commentId: string, reason: string) => void;
-  onModerateComment: (commentId: string, action: 'approve' | 'flag' | 'remove') => void;
+  onAddComment: (content, parentId?: string) => void;
+  onEditComment: (commentId, content) => void;
+  onDeleteComment: (commentId) => void;
+  onLikeComment: (commentId) => void;
+  onDislikeComment: (commentId) => void;
+  onPinComment: (commentId) => void;
+  onReportComment: (commentId, reason) => void;
+  onModerateComment: (commentId, action: 'approve' | 'flag' | 'remove') => void;
   onSortChange: (sort: 'newest' | 'oldest' | 'popular') => void;
   className?: string;
 }
@@ -118,14 +119,14 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleSubmitReply = (parentId: string, content: string) => {
+  const handleSubmitReply = (parentId, content) => {
     if (content.trim()) {
       onAddComment(content.trim(), parentId);
       setReplyingTo(null);
     }
   };
 
-  const handleEditSubmit = (commentId: string) => {
+  const handleEditSubmit = (commentId) => {
     if (editContent.trim()) {
       onEditComment(commentId, editContent.trim());
       setEditingComment(null);
@@ -133,7 +134,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleReport = (commentId: string) => {
+  const handleReport = (commentId) => {
     if (reportReason) {
       onReportComment(commentId, reportReason);
       setShowReportModal(null);
@@ -141,7 +142,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const toggleReplies = (commentId: string) => {
+  const toggleReplies = (commentId) => {
     setExpandedReplies(prev => {
       const newSet = new Set(prev);
       if (newSet.has(commentId)) {
@@ -153,7 +154,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     });
   };
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -386,7 +387,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   placeholder={`Reply to ${comment.authorName}...`}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={2}
-                  onKeyDown={(e: Event) => {
+                  onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
                       handleSubmitReply(comment.id, e.currentTarget.value);
@@ -453,7 +454,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     const pinnedComments = topLevelComments.filter((comment) => comment.isPinned);
     const regularComments = topLevelComments.filter((comment) => !comment.isPinned);
 
-    const sorted = regularComments.sort((a: any, b) => {
+    const sorted = regularComments.sort((a, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();

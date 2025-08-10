@@ -7,7 +7,7 @@ import type { LivePoll, QAQuestion } from '@/types/livestream';
 interface LiveStreamState {
   isLive: boolean;
   viewerCount: number;
-  chatMessages: any[];
+  chatMessages;
   streamQuality: string;
   error: string | null;
 }
@@ -55,12 +55,12 @@ export const useLivePolls = (streamId?: string) => {
     setPolls([]);
   }, [streamId]);
 
-  const recalcPercentages = (totalVotes: number, votes: number) => {
+  const recalcPercentages = (totalVotes, votes) => {
     if (totalVotes === 0) return 0;
     return (votes / totalVotes) * 100;
   };
 
-  const createPoll = async (question: string, options: string[]) => {
+  const createPoll = async (question, options) => {
     const id = `poll_${Math.random().toString(36).slice(2, 9)}`;
     const createdAt = new Date();
     const durationMs = 60 * 1000; // default 60s
@@ -84,7 +84,7 @@ export const useLivePolls = (streamId?: string) => {
     setPolls(prev => [poll, ...prev]);
   };
 
-  const votePoll = async (pollId: string, optionId: string) => {
+  const votePoll = async (pollId, optionId) => {
     setPolls(prev =>
       prev.map(p => {
         if (p.id !== pollId || !p.isActive) return p;
@@ -114,7 +114,7 @@ export const useLiveQA = (streamId?: string) => {
     setQuestions([]);
   }, [streamId]);
 
-  const submitQuestion = async (text: string) => {
+  const submitQuestion = async (text) => {
     const q: QAQuestion = {
       id: `q_${Math.random().toString(36).slice(2, 9)}`,
       streamId,
@@ -132,14 +132,14 @@ export const useLiveQA = (streamId?: string) => {
     setQuestions(prev => [q, ...prev]);
   };
 
-  const answerQuestion = async (questionId: string, answer: string) => {
+  const answerQuestion = async (questionId, answer) => {
     setQuestions(prev =>
-      prev.map(q => (q.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q: any))
+      prev.map(q => (q.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q))
     );
   };
 
-  const upvoteQuestion = async (questionId: string) => {
-    setQuestions(prev => prev.map(q => (q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q: any)));
+  const upvoteQuestion = async (questionId) => {
+    setQuestions(prev => prev.map(q => (q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q)));
   };
 
   return { questions, submitQuestion, answerQuestion, upvoteQuestion } as const;

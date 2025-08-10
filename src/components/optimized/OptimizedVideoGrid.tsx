@@ -5,7 +5,7 @@
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
-  videos: Video[];
+  videos: Video;
   onVideoClick: (video: Video) => void;
   loading?: boolean;
   className?: string;
@@ -20,7 +20,7 @@ const VideoGridItem = memo<{
   rowIndex: number;
   style: React.CSSProperties;
   data: {
-    videos: Video[];
+    videos: Video;
     itemsPerRow: number;
     onVideoClick:(video: Video) => void;
   };

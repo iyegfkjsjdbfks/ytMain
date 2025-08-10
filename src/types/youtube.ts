@@ -14,7 +14,7 @@ export interface YouTubeApiResponse<T> {
     totalResults: number;
     resultsPerPage: number;
   };
-  items: T[];
+  items: T;
 }
 
 // Video Interfaces
@@ -25,7 +25,7 @@ export interface YouTubeVideoSnippet {
   description: string;
   thumbnails: YouTubeThumbnails;
   channelTitle: string;
-  tags?: string[];
+  tags?: string;
   categoryId: string;
   liveBroadcastContent: 'none' | 'upcoming' | 'live';
   localized: {
@@ -51,8 +51,8 @@ export interface YouTubeVideoContentDetails {
   caption: 'true' | 'false';
   licensedContent: boolean;
   regionRestriction?: {
-    allowed?: string[];
-    blocked?: string[];
+    allowed?: string;
+    blocked?: string;
   };
   contentRating?: {
     mpaaRating?: string;
@@ -104,9 +104,9 @@ export interface YouTubeVideo {
     embedHtml: string;
   };
   topicDetails?: {
-    topicIds: string[];
-    relevantTopicIds: string[];
-    topicCategories: string[];
+    topicIds: string;
+    relevantTopicIds: string;
+    topicCategories: string;
   };
   recordingDetails?: {
     recordingDate: string;
@@ -151,14 +151,14 @@ export interface YouTubeVideo {
     thumbnailsAvailability: 'processing' | 'available' | 'unavailable';
   };
   suggestions?: {
-    processingErrors: string[];
-    processingWarnings: string[];
-    processingHints: string[];
+    processingErrors: string;
+    processingWarnings: string;
+    processingHints: string;
     tagSuggestions: Array<{
       tag: string;
-      categoryRestricts: string[];
+      categoryRestricts: string;
     }>;
-    editorSuggestions: string[];
+    editorSuggestions: string;
   };
   liveStreamingDetails?: {
     actualStartTime?: string;
@@ -248,8 +248,8 @@ export interface YouTubeChannel {
     description: string;
   }>;
   topicDetails?: {
-    topicIds: string[];
-    topicCategories: string[];
+    topicIds: string;
+    topicCategories: string;
   };
 }
 
@@ -396,7 +396,7 @@ export interface YouTubeCommentThread {
   id: string;
   snippet: YouTubeCommentThreadSnippet;
   replies?: {
-    comments: YouTubeComment[];
+    comments: YouTubeComment;
   };
 }
 
@@ -456,22 +456,22 @@ export interface YouTubePlayer {
   playVideo(): void;
   pauseVideo(): void;
   stopVideo(): void;
-  seekTo(seconds: number, allowSeekAhead?: boolean): void;
+  seekTo(seconds, allowSeekAhead?: boolean): void;
   clearVideo(): void;
   nextVideo(): void;
   previousVideo(): void;
-  playVideoAt(index: number): void;
+  playVideoAt(index): void;
   mute(): void;
   unMute(): void;
   isMuted(): boolean;
-  setVolume(volume: number): void;
+  setVolume(volume): void;
   getVolume(): number;
-  setSize(width: number, height: number): object;
+  setSize(width, height): object;
   getPlaybackRate(): number;
-  setPlaybackRate(suggestedRate: number): void;
-  getAvailablePlaybackRates(): number[];
-  setLoop(loopPlaylists: boolean): void;
-  setShuffle(shufflePlaylist: boolean): void;
+  setPlaybackRate(suggestedRate): void;
+  getAvailablePlaybackRates(): number;
+  setLoop(loopPlaylists): void;
+  setShuffle(shufflePlaylist): void;
   getVideoLoadedFraction(): number;
   getPlayerState(): number;
   getCurrentTime(): number;
@@ -480,10 +480,10 @@ export interface YouTubePlayer {
   getVideoBytesTotal(): number;
   getVideoUrl(): string;
   getVideoEmbedCode(): string;
-  getPlaylist(): string[];
+  getPlaylist(): string;
   getPlaylistIndex(): number;
-  addEventListener(event: string, listener: (event: YouTubePlayerEvent) => void): void;
-  removeEventListener(event: string, listener: (event: YouTubePlayerEvent) => void): void;
+  addEventListener(event, listener: (event: YouTubePlayerEvent) => void): void;
+  removeEventListener(event, listener: (event: YouTubePlayerEvent) => void): void;
   getIframe(): HTMLIFrameElement;
   destroy(): void;
 }

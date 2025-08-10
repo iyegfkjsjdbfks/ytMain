@@ -40,7 +40,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     quality: '1080p' as '720p' | '1080p' | '1440p' | '4k',
     bitrate: 4500,
     frameRate: 30 as 30 | 60,
-    platforms: [] as StreamPlatform[],
+    platforms: [] as StreamPlatform,
     scheduledStartTime: undefined as Date | undefined,
   });
 
@@ -236,7 +236,7 @@ return;
     }
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;

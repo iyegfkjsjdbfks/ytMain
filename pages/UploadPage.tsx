@@ -1,6 +1,21 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useRef } from 'react';
 
 import {
+import React from 'react';
   CloudArrowUpIcon,
   VideoCameraIcon,
   EyeIcon,
@@ -26,7 +41,7 @@ interface VideoMetadata {
   description: string;
   visibility: 'public' | 'unlisted' | 'private';
   category: string;
-  tags: string[];
+  tags: string;
   thumbnail: string | null;
   monetization: boolean;
   commentsEnabled: boolean;
@@ -120,7 +135,7 @@ return null;
 
     // Simulate processing completion
     setTimeout(() => {
-      setUploadedFile(prev => prev: any ? {
+      setUploadedFile(prev => prev ? {
         ...prev,
         status: 'completed',
       } : null);
@@ -139,7 +154,7 @@ return null;
       const fileList = {
         0: file,
         length: 1,
-        item: (index: number) => index === 0 ? file : null,
+        item: (index) => index === 0 ? file : null,
         *[Symbol.iterator] () {
           yield file;
         },
@@ -167,7 +182,7 @@ return null;
   };
 
 
-  const removeTag = (tagToRemove: string) => {
+  const removeTag = (tagToRemove) => {
     setMetadata(prev => ({
       ...prev,
       tags: prev.tags.filter((tag) => tag !== tagToRemove),
@@ -190,7 +205,7 @@ return null;
     navigate('/studio');
   };
 
-  const getVisibilityIcon = (visibility: string) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public': return <GlobeAltIcon className="w-4 h-4" />;
       case 'unlisted': return <EyeIcon className="w-4 h-4" />;
@@ -360,7 +375,7 @@ return null;
                         Tags
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {metadata.tags.map(tag: string => (
+                        {metadata.tags.map(tag => (
                           <span
                             key={tag}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"

@@ -14,9 +14,9 @@ import type { Video } from '../types';
 
 // Types for better performance
 interface SearchState {
-  videos: Video[];
-  youtubeVideos: YouTubeSearchResult[];
-  googleSearchVideos: GoogleSearchResult[];
+  videos: Video;
+  youtubeVideos: YouTubeSearchResult;
+  googleSearchVideos: GoogleSearchResult;
   loading: boolean;
   youtubeLoading: boolean;
 }
@@ -51,7 +51,7 @@ const SearchResultsPage: React.FC = () => {
   });
 
   // Memoized search function with performance monitoring
-  const performSearch = useCallback(async (searchQuery: string) => {
+  const performSearch = useCallback(async (searchQuery) => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],

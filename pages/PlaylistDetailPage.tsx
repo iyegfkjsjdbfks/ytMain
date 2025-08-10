@@ -12,7 +12,7 @@ import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails
 import type { UserPlaylist, Video } from '../types';
 
 interface PlaylistWithVideos extends UserPlaylist {
-  videos: Video[];
+  videos: Video;
 }
 
 const PlaylistDetailPage: React.FC = () => {
@@ -83,12 +83,12 @@ const PlaylistDetailPage: React.FC = () => {
     };
   }, [activeVideoMenuId, isEditModalOpen]);
 
-  const handleToggleVideoMenu = (videoId: string, e: React.MouseEvent) => {
+  const handleToggleVideoMenu = (videoId, e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveVideoMenuId(prevId => (prevId=== videoId ? null : videoId));
   };
 
-  const handleRemoveVideo = async (videoIdToRemove: string) => {
+  const handleRemoveVideo = async (videoIdToRemove) => {
     if (!playlistId || !playlistDetails) {
 return;
 }
@@ -127,7 +127,7 @@ return null;
     }
   };
 
-  const handleSaveChanges = async (title: string, description: string) => {
+  const handleSaveChanges = async (title, description) => {
     if (!playlistId || !title.trim()) {
       alert('Playlist title cannot be empty.');
       return;
@@ -135,7 +135,7 @@ return null;
     try {
       await updateUserPlaylistDetails(playlistId, { title, description });
       if (playlistDetails) {
-        setPlaylistDetails(prev => prev: any ? ({
+        setPlaylistDetails(prev => prev ? ({
           ...prev,
           title,
           description,
@@ -230,7 +230,7 @@ return null;
 
       {videos.length > 0 ? (
         <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
-          {videos.map((video: any, index: number) => (
+          {videos.map((video, index) => (
             <li key={video.id} className="py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900/70 transition-colors rounded-md -mx-2 px-2 group flex items-center justify-between">
               <Link to={`/watch/${video.id}`} className="flex items-center space-x-3 flex-grow min-w-0">
                 <div className="w-8 text-right text-xs text-neutral-500 dark:text-neutral-400 pr-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">{index + 1}</div>
@@ -248,7 +248,7 @@ return null;
               </Link>
               <div className="relative ml-2 flex-shrink-0">
                 <button
-                  onClick={(e: Event) => handleToggleVideoMenu(video.id, e: Event)}
+                  onClick={(e) => handleToggleVideoMenu(video.id, e)}
                   className="p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                   aria-label="More actions for this video"
                   title="More actions"

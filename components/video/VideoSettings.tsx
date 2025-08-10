@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -25,14 +26,14 @@ export interface Subtitle {
 interface VideoSettingsProps {
   isOpen: boolean;
   onClose: () => void;
-  qualities: VideoQuality[];
+  qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality: string) => void;
-  subtitles: Subtitle[];
+  onQualityChange: (quality) => void;
+  subtitles: Subtitle;
   currentSubtitle: string | null;
   onSubtitleChange: (subtitle: string | null) => void;
   autoplay: boolean;
-  onAutoplayChange: (autoplay: boolean) => void;
+  onAutoplayChange: (autoplay) => void;
   className?: string;
 }
 

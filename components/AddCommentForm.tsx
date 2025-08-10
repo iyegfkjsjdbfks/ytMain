@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -13,7 +14,7 @@ declare global {
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText: string) => void;
+  onCommentSubmit: (commentText) => void;
   maxCommentLength: number;
 }
 

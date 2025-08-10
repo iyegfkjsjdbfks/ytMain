@@ -22,7 +22,7 @@ interface UseVideoInteractionsOptions {
 }
 
 export function useVideoInteractions(
-  videoId: string,
+  videoId,
   options: UseVideoInteractionsOptions = {},
 ) {
   const queryClient = useQueryClient();
@@ -145,7 +145,7 @@ export function useVideoInteractions(
 
   // Report mutation
   const reportMutation = useMutation({
-    mutationFn: (reason: string) => videoService.reportVideo(videoId, reason),
+    mutationFn: (reason) => videoService.reportVideo(videoId, reason),
     onSuccess: () => {
       // Show success message
       },
@@ -162,7 +162,7 @@ export function useVideoInteractions(
   };
 }
 
-export function useVideoStats(videoId: string) {
+export function useVideoStats(videoId) {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['video-stats', videoId],
     queryFn: () => videoService.getVideoStats(videoId),
@@ -176,7 +176,7 @@ export function useVideoStats(videoId: string) {
   };
 }
 
-export function useVideoEngagement(videoId: string) {
+export function useVideoEngagement(videoId) {
   const { data: engagement, isLoading } = useQuery({
     queryKey: ['video-engagement', videoId],
     queryFn: () => videoService.getVideoEngagement(videoId),

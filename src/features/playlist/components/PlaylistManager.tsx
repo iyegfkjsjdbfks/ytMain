@@ -25,7 +25,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
     title: '',
     description: '',
     visibility: 'public' as 'public' | 'unlisted' | 'private',
-    tags: [] as string[],
+    tags: [] as string,
   });
   const [tagInput, setTagInput] = useState('');
 
@@ -56,7 +56,7 @@ return;
     }
   };
 
-  const removeTag = (tagToRemove: string) => {
+  const removeTag = (tagToRemove) => {
     setFormData(prev => ({
       ...prev,
       tags: prev.tags.filter((tag) => tag !== tagToRemove),
@@ -126,7 +126,7 @@ return null;
                 type="text"
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
-                onKeyPress={(e: Event) => e: Event.key === 'Enter' && (e: Event.preventDefault(), addTag())}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Add tags..."
               />
@@ -139,7 +139,7 @@ return null;
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {formData.tags.map((tag: string) => (
+              {formData.tags.map((tag) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
@@ -211,7 +211,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const handleDeletePlaylist = async (playlistId: string) => {
+  const handleDeletePlaylist = async (playlistId) => {
     if (window.confirm('Are you sure you want to delete this playlist?')) {
       try {
         await deletePlaylistMutation.mutate(playlistId);
@@ -235,7 +235,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const getVisibilityIcon = (visibility: string) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public':
         return <EyeIcon className="w-4 h-4" />;

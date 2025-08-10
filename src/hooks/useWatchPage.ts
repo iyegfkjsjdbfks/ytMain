@@ -18,7 +18,7 @@ interface Comment {
   isDislikedByCurrentUser: boolean;
   isEdited: boolean;
   replyTo?: string;
-  replies?: Comment[];
+  replies?: Comment;
   replyCount?: number;
 }
 
@@ -290,7 +290,7 @@ setLiked(false);
     }
   };
 
-  const handleSaveToPlaylist = async (playlistId: string) => {
+  const handleSaveToPlaylist = async (playlistId) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
 
@@ -307,7 +307,7 @@ setLiked(false);
     // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
-  const handleCreatePlaylist = async (name: string, description?: string) => {
+  const handleCreatePlaylist = async (name, description?: string) => {
     // Simulate API call to create new playlist
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -393,7 +393,7 @@ return;
   };
 
   // Comment handlers
-  const handleMainCommentSubmitCallback = (commentText: string) => {
+  const handleMainCommentSubmitCallback = (commentText) => {
     if (!commentText.trim()) {
 return;
 }
@@ -413,10 +413,10 @@ return;
     };
 
     setComments(prev => [newComment, ...prev]);
-    setCommentCount(prev => prev: any + 1);
+    setCommentCount(prev => prev + 1);
   };
 
-  const handleReplySubmit = (parentId: string) => {
+  const handleReplySubmit = (parentId) => {
     if (!currentReplyText.trim()) {
 return;
 }
@@ -453,12 +453,12 @@ return;
     setReplyingToCommentId(null);
   };
 
-  const handleEditSave = (commentId: string, newText: string, parentId?: string) => {
+  const handleEditSave = (commentId, newText, parentId?: string) => {
     if (!newText.trim()) {
 return;
 }
 
-    const updateCommentState = (prevComments: Comment[]): Comment[] =>
+    const updateCommentState = (prevComments: Comment): Comment[] =>
       prevComments.map(comment => {
         if (comment.id === commentId && comment.parentId === parentId) {
           return {
@@ -478,16 +478,16 @@ return;
     setEditingComment(null);
   };
 
-  const handleDeleteComment = (commentId: string, parentId?: string) => {
+  const handleDeleteComment = (commentId, parentId?: string) => {
     if (!window.confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
 return;
 }
 
-    const deleteCommentFromList = (list: Comment[], idToDelete: string, parentOfDeleted?: string): Comment[] => {
+    const deleteCommentFromList = (list: Comment, idToDelete, parentOfDeleted?: string): Comment[] => {
       return list.reduce((acc, comment) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
           if (!parentOfDeleted) {
-            setCommentCount(prev => prev: any - 1 - (comment.replyCount || 0));
+            setCommentCount(prev => prev - 1 - (comment.replyCount || 0));
           }
           return acc;
         }
@@ -501,15 +501,15 @@ return;
         }
         acc.push(comment);
         return acc;
-      }, [] as Comment[]);
+      }, [] as Comment);
     };
 
-    setComments(prevComments => deleteCommentFromList(prevComments: any, commentId, parentId));
+    setComments(prevComments => deleteCommentFromList(prevComments, commentId, parentId));
     setActiveCommentMenu(null);
   };
 
-  const toggleLikeDislikeForCommentOrReply = (id: string, parentId: string | undefined, action: 'like' | 'dislike') => {
-    const updateList = (list: Comment[]): Comment[] => {
+  const toggleLikeDislikeForCommentOrReply = (id, parentId: string | undefined, action: 'like' | 'dislike') => {
+    const updateList = (list: Comment): Comment[] => {
       return list.map(item => {
         if (item.id === id && item.parentId === parentId) {
           let newLiked = item.isLikedByCurrentUser;

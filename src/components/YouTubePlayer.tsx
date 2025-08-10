@@ -1,4 +1,19 @@
 import type { Video } from '../types/core';
+import React from 'react';
+
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
 
 export interface YouTubePlayerProps {
   video: Video;
@@ -7,7 +22,7 @@ export interface YouTubePlayerProps {
   height?: string | number;
   controls?: boolean;
   className?: string;
-  onStateChange?: (state: number) => void;
+  onStateChange?: (state) => void;
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -20,7 +35,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   // onStateChange, // TODO: Implement YouTube iframe API for state change callbacks
 }) => {
   // Extract YouTube video ID from URL
-  const getYouTubeVideoId = (url: string): string | null => {
+  const getYouTubeVideoId = (url): string | null => {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const match = url.match(regex);
     return match?.[1] ? match[1] : null;

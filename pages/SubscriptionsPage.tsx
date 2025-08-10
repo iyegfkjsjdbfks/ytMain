@@ -1,7 +1,22 @@
 
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useEffect, useState, useMemo } from 'react';
 
 import {
+import React from 'react';
   ViewColumnsIcon,
   Bars3Icon,
   AdjustmentsHorizontalIcon,
@@ -276,7 +291,7 @@ return [];
 
       {/* Tabs and Filters */}
       <div className="mb-6">
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value: any as TabType)}>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
           <div className="flex items-center justify-between mb-4">
             <TabsList className="flex-1">
               <TabsTrigger value="all">All</TabsTrigger>

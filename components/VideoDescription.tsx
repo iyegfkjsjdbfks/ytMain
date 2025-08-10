@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -23,9 +24,9 @@ interface VideoDescriptionProps {
   isSubscribed?: boolean;
   showFullDescription?: boolean;
   isSummarizing?: boolean;
-  onSubscribe?: (channelId: string) => void;
-  onLike?: (videoId: string) => void;
-  onShare?: (videoId: string) => void;
+  onSubscribe?: (channelId) => void;
+  onLike?: (videoId) => void;
+  onShare?: (videoId) => void;
   onToggleDescription?: () => void;
 }
 
@@ -103,7 +104,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         onClick={onToggleDescription}
         role="button"
         tabIndex={0}
-        onKeyDown={(e: Event) => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -126,7 +127,7 @@ onToggleDescription();
           onClick={onToggleDescription}
           role="button"
           tabIndex={0}
-          onKeyDown={(e: Event) => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }

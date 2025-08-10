@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -11,9 +12,9 @@ declare global {
 // TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ShortsFiltersProps {
-  categories: string[];
+  categories: string;
   selectedCategory: string;
-  onCategoryChange: (category: string) => void;
+  onCategoryChange: (category) => void;
   onClose: () => void;
 }
 
@@ -23,7 +24,7 @@ const ShortsFilters: React.FC<ShortsFiltersProps> = ({
   onCategoryChange,
   onClose,
 }) => {
-  const formatCategoryName = (category: string) => {
+  const formatCategoryName = (category) => {
     if (category === 'all') {
 return 'All';
 }

@@ -3,8 +3,8 @@
 
 // Temporarily mock these functions until service is implemented
 const getSubscribedChannels = async (): Promise<SubscribedChannel[]> => [];
-const updateSubscriptionNotifications = async (channelId: string, enabled: boolean): Promise<void> => {};
-const unsubscribeFromChannel = async (channelId: string): Promise<void> => {};
+const updateSubscriptionNotifications = async (channelId, enabled): Promise<void> => {};
+const unsubscribeFromChannel = async (channelId): Promise<void> => {};
 
 export interface SubscribedChannel {
   id: string;
@@ -34,7 +34,7 @@ export function useSubscriptions() {
     }
   }, []);
 
-  const toggleNotifications = useCallback(async (channelId: string) => {
+  const toggleNotifications = useCallback(async (channelId) => {
     try {
       const channel = channels.find(c => c.id === channelId);
       if (!channel) {
@@ -57,7 +57,7 @@ return;
     }
   }, [channels]);
 
-  const unsubscribe = useCallback(async (channelId: string) => {
+  const unsubscribe = useCallback(async (channelId) => {
     try {
       await unsubscribeFromChannel(channelId);
       setChannels(prev => prev.filter((c) => c.id !== channelId));
@@ -67,11 +67,11 @@ return;
     }
   }, []);
 
-  const isSubscribed = useCallback((channelId: string) => {
+  const isSubscribed = useCallback((channelId) => {
     return channels.some(c => c.id === channelId);
   }, [channels]);
 
-  const getChannelNotificationState = useCallback((channelId: string) => {
+  const getChannelNotificationState = useCallback((channelId) => {
     const channel = channels.find(c => c.id === channelId);
     return channel?.notificationsEnabled || false;
   }, [channels]);

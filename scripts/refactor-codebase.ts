@@ -16,9 +16,9 @@ interface RefactorTask {
 }
 
 class CodebaseRefactorer {
-  private tasks: RefactorTask[] = [];
-  private completedTasks: string[] = [];
-  private failedTasks: string[] = [];
+  private tasks: RefactorTask = [];
+  private completedTasks: string = [];
+  private failedTasks: string = [];
 
   constructor() {
     this.initializeTasks();
@@ -288,7 +288,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
     }
   }
 
-  private async optimizeFileImports(filePath: string): Promise<void> {
+  private async optimizeFileImports(filePath): Promise<void> {
     const content = fs.readFileSync(filePath, 'utf8');
     let optimizedContent = content;
 
@@ -322,10 +322,10 @@ continue;
     }
   }
 
-  private sortImports(content: string): string {
+  private sortImports(content): string {
     const lines = content.split('\n');
-    const importLines: string[] = [];
-    const otherLines: string[] = [];
+    const importLines: string = [];
+    const otherLines: string = [];
     let inImportSection = true;
 
     for (const line of lines) {
@@ -392,20 +392,20 @@ export type EmailAddress = string & { readonly __brand: unique symbol };
 export type URL = string & { readonly __brand: unique symbol };
 
 // Type guards
-export function isNonEmptyString(value: string): value is NonEmptyString {
+export function isNonEmptyString(value): value is NonEmptyString {
   return value.length > 0;
 }
 
-export function isPositiveNumber(value: number): value is PositiveNumber {
+export function isPositiveNumber(value): value is PositiveNumber {
   return value > 0;
 }
 
-export function isEmailAddress(value: string): value is EmailAddress {
+export function isEmailAddress(value): value is EmailAddress {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(value);
 }
 
-export function isURL(value: string): value is URL {
+export function isURL(value): value is URL {
   try {
     new URL(value);
     return true;
@@ -419,7 +419,7 @@ export interface ApiResponse<T> {
   data: T;
   success: boolean;
   message?: string;
-  errors?: string[];
+  errors?: string;
   timestamp: string;
 }
 
@@ -477,10 +477,10 @@ export interface ErrorWithSeverity extends AppError {
     // This would involve implementing code splitting and lazy loading
   }
 
-  private findFiles(directories: string[], extensions: string[], exclude: string[] = []): string[] {
-    const files: string[] = [];
+  private findFiles(directories, extensions, exclude: string = []): string[] {
+    const files: string = [];
 
-    function searchDirectory(dir: string): void {
+    function searchDirectory(dir): void {
       const items = fs.readdirSync(dir);
 
       for (const item of items) {

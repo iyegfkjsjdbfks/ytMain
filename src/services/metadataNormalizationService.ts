@@ -49,7 +49,7 @@ export interface UnifiedVideoMetadata {
 
   // Content metadata
   category: string;
-  tags: string[];
+  tags: string;
   isLive: boolean;
   isShort: boolean;
 
@@ -310,7 +310,7 @@ class MetadataNormalizationService {
    * Batch normalize multiple videos from mixed sources
    */
   async normalizeVideosBatch(videos: Array<{ data: LocalVideo | YouTubeVideo; source: 'local' | 'youtube' }>): Promise<UnifiedVideoMetadata[]> {
-    const normalized: UnifiedVideoMetadata[] = [];
+    const normalized: UnifiedVideoMetadata = [];
 
     for (const { data, source } of videos) {
       try {
@@ -362,7 +362,7 @@ return subscribers;
     return this.parseViewCount(subscribers);
   }
 
-  private formatViews(count: number): string {
+  private formatViews(count): string {
     if (count >= 1000000000) {
 return `${(count / 1000000000).toFixed(1)}B views`;
 }
@@ -375,7 +375,7 @@ return `${(count / 1000).toFixed(1)}K views`;
     return `${count} views`;
   }
 
-  private formatSubscribers(count: number): string {
+  private formatSubscribers(count): string {
     if (count >= 1000000000) {
 return `${(count / 1000000000).toFixed(1)}B subscribers`;
 }
@@ -388,7 +388,7 @@ return `${(count / 1000).toFixed(1)}K subscribers`;
     return `${count} subscribers`;
   }
 
-  private formatTimeAgo(dateString: string): string {
+  private formatTimeAgo(dateString): string {
     if (!dateString) {
 return '';
 }
@@ -440,7 +440,7 @@ return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
     return duration || '0:00';
   }
 
-  private parseDuration(isoDuration: string): string {
+  private parseDuration(isoDuration): string {
     // Parse ISO 8601 duration format (PT#H#M#S)
     const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {

@@ -21,7 +21,7 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
   );
 }
 
-export function usePlaylist(playlistId: string) {
+export function usePlaylist(playlistId) {
   return useQuery(
     ['playlist', playlistId],
     () => playlistService.getPlaylist(playlistId),
@@ -32,7 +32,7 @@ export function usePlaylist(playlistId: string) {
   );
 }
 
-export function usePlaylistVideos(playlistId: string, page: number = 1, limit: number = 50) {
+export function usePlaylistVideos(playlistId, page: number = 1, limit: number = 50) {
   return useQuery(
     ['playlist', playlistId, 'videos', page.toString(), limit.toString()],
     () => playlistService.getPlaylistVideos(playlistId, page, limit),
@@ -73,7 +73,7 @@ export function useFollowedPlaylists(page: number = 1, limit: number = 20) {
   );
 }
 
-export function usePlaylistStats(playlistId: string) {
+export function usePlaylistStats(playlistId) {
   return useQuery(
     ['playlist', playlistId, 'stats'],
     () => playlistService.getPlaylistStats(playlistId),
@@ -84,7 +84,7 @@ export function usePlaylistStats(playlistId: string) {
   );
 }
 
-export function usePlaylistCollaborators(playlistId: string) {
+export function usePlaylistCollaborators(playlistId) {
   return useQuery(
     ['playlist', playlistId, 'collaborators'],
     () => playlistService.getPlaylistCollaborators(playlistId),
@@ -95,7 +95,7 @@ export function usePlaylistCollaborators(playlistId: string) {
   );
 }
 
-export function useSearchPlaylists(query: string, filters: Omit<PlaylistFilters, 'search'> = {}) {
+export function useSearchPlaylists(query, filters: Omit<PlaylistFilters, 'search'> = {}) {
   return useQuery(
     ['playlists', 'search', query, JSON.stringify(filters)],
     () => playlistService.searchPlaylists(query, filters),
@@ -220,7 +220,7 @@ export function useUnfollowPlaylist() {
 }
 
 export function useBulkAddVideos() {
-  return useMutation<{ success: string[]; failed: string[] }, { playlistId: string; videoIds: string[] }>(
+  return useMutation<{ success: string; failed: string[] }, { playlistId: string; videoIds: string[] }>(
     ({ playlistId, videoIds }) => playlistService.bulkAddVideos(playlistId, videoIds),
     {
       onSuccess: (_, { playlistId }) => {
@@ -233,7 +233,7 @@ export function useBulkAddVideos() {
 }
 
 export function useBulkRemoveVideos() {
-  return useMutation<{ success: string[]; failed: string[] }, { playlistId: string; videoIds: string[] }>(
+  return useMutation<{ success: string; failed: string[] }, { playlistId: string; videoIds: string[] }>(
     ({ playlistId, videoIds }) => playlistService.bulkRemoveVideos(playlistId, videoIds),
     {
       onSuccess: (_, { playlistId }) => {
@@ -259,7 +259,7 @@ export function useUploadPlaylistThumbnail() {
 }
 
 // Combined hooks for common patterns
-export function usePlaylistWithVideos(playlistId: string) {
+export function usePlaylistWithVideos(playlistId) {
   const playlist = usePlaylist(playlistId);
   const videos = usePlaylistVideos(playlistId);
   const stats = usePlaylistStats(playlistId);

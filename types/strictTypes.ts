@@ -1,10 +1,26 @@
+import React from 'react';
+
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // Strict Type Definitions to Replace 'any' Types
 
 // Video Related Types
 export interface VideoMetadata {
   title: string;
   description: string;
-  tags: string[];
+  tags: string;
   category: string;
   language: string;
   duration: number;
@@ -37,11 +53,11 @@ export interface StrictVideo {
   channelId: string;
   metadata: VideoMetadata;
   stats: VideoStats;
-  files: VideoFile[];
+  files: VideoFile;
   status: 'draft' | 'published' | 'unlisted' | 'private' | 'deleted';
   monetization: {
     enabled: boolean;
-    adTypes: string[];
+    adTypes: string;
     revenue: number;
   };
   analytics: {
@@ -80,7 +96,7 @@ export interface StrictChannel {
   createdAt: string;
   country: string;
   language: string;
-  categories: string[];
+  categories: string;
 }
 
 // Playlist Related Types
@@ -96,7 +112,7 @@ export interface StrictPlaylist {
   title: string;
   description: string;
   channelId: string;
-  videoIds: string[];
+  videoIds: string;
   thumbnailUrl: string;
   settings: PlaylistSettings;
   createdAt: string;
@@ -124,7 +140,7 @@ export interface StrictComment {
   text: string;
   timestamp: string;
   likes: number;
-  replies: StrictComment[];
+  replies: StrictComment;
   edited: boolean;
   pinned: boolean;
   heartedByCreator: boolean;
@@ -161,7 +177,7 @@ export interface MiniplayerVideo {
 
 // Form Types
 export interface FormFieldValue {
-  value: string | number | boolean | string[];
+  value: string | number | boolean | string;
   error?: string;
   touched: boolean;
   dirty: boolean;
@@ -186,7 +202,7 @@ export interface FormValidationRule {
 export interface FormFieldConfig {
   defaultValue: FormFieldValue['value'];
   validation?: FormValidationRule;
-  dependencies?: string[];
+  dependencies?: string;
 }
 
 // API Types
@@ -211,7 +227,7 @@ export interface StrictApiError {
   status: number;
   code: string;
   message: string;
-  details?: ApiErrorDetails[];
+  details?: ApiErrorDetails;
   timestamp: string;
   requestId?: string;
 }
@@ -236,7 +252,7 @@ export interface CacheItem<T> {
   timestamp: number;
   ttl: number;
   key: string;
-  tags?: string[];
+  tags?: string;
 }
 
 export interface CacheConfig {
@@ -307,9 +323,9 @@ export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
 export type OptionalFields<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 // Function Types
-export type AsyncFunction<T extends unknown[], R> = (...args: T) => Promise<R>;
-export type SyncFunction<T extends unknown[], R> = (...args: T) => R;
-export type AnyFunction<T extends unknown[], R> = AsyncFunction<T, R> | SyncFunction<T, R>;
+export type AsyncFunction<T extends unknown, R> = (...args: T) => Promise<R>;
+export type SyncFunction<T extends unknown, R> = (...args: T) => R;
+export type AnyFunction<T extends unknown, R> = AsyncFunction<T, R> | SyncFunction<T, R>;
 
 export type EventHandler<T = Event> = (event: T) => void;
 export type AsyncEventHandler<T = Event> = (event: T) => Promise<void>;

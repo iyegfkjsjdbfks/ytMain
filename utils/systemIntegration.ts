@@ -25,7 +25,7 @@ interface SystemEvent {
   severity: 'low' | 'medium' | 'high' | 'critical';
   title: string;
   description: string;
-  data: any;
+  data;
   timestamp: number;
   handled: boolean;
 }
@@ -57,7 +57,7 @@ interface IntegrationConfig {
     slack: boolean;
     webhook?: string;
   };
-  emergencyContacts: string[];
+  emergencyContacts: string;
 }
 
 interface SystemMetrics {
@@ -93,11 +93,11 @@ interface SystemMetrics {
 }
 
 class SystemIntegrationHub {
-  private events: SystemEvent[] = [];
+  private events: SystemEvent = [];
   private health: SystemHealth;
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
-  private eventHandlers: Map<string, Array<(...args: unknown[]) => void>> = new Map();
+  private eventHandlers: Map<string, Array<(...args: unknown) => void>> = new Map();
   private healthCheckInterval?: NodeJS.Timeout;
   private isInitialized = false;
 
@@ -564,7 +564,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType: string, handler: (...args: unknown[]) => void): void {
+  private addEventListener(eventType, handler: (...args: unknown) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }
@@ -604,7 +604,7 @@ return 'degraded';
       .sort((a, b) => b.timestamp - a.timestamp);
   }
 
-  acknowledgeEvent(eventId: string): void {
+  acknowledgeEvent(eventId): void {
     const event = this.events.find(e => e.id === eventId);
     if (event) {
       event.handled = true;
@@ -629,9 +629,9 @@ return 'degraded';
   generateSystemReport(): {
     health: SystemHealth;
     metrics: SystemMetrics;
-    recentEvents: SystemEvent[];
+    recentEvents: SystemEvent;
     summary: string;
-    recommendations: string[];
+    recommendations: string;
   } {
     const recentEvents = this.getRecentEvents(10);
     const criticalEvents = this.getCriticalEvents();
@@ -643,7 +643,7 @@ return 'degraded';
     summary += `Security Score: ${Math.round(this.metrics.security.score)}\n`;
     summary += `Deployment Success Rate: ${Math.round(this.metrics.deployment.successRate * 100)}%`;
 
-    const recommendations: string[] = [];
+    const recommendations: string = [];
 
     if (this.metrics.performance.score < 70) {
       recommendations.push('Performance optimization needed - consider code splitting and caching improvements');

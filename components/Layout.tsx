@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -36,11 +37,11 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const toggleSidebar = useCallback(() => {
     if (isWatchPage) {
       // On watch page, toggle between minimized and expanded
-      setIsMinimized(prev => !prev: any);
+      setIsMinimized(prev => !prev);
       setIsSidebarOpen(true); // Always keep sidebar visible on watch page
     } else {
       // On other pages, toggle visibility
-      setIsSidebarOpen(prev => !prev: any);
+      setIsSidebarOpen(prev => !prev);
       setIsMinimized(false); // Reset minimized state
     }
   }, [isWatchPage]);
@@ -66,7 +67,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
     return () => window.removeEventListener('resize', handleResize);
   }, [isSidebarOpen]);
 
-  const handleMaximizeMiniplayer = (videoId: string) => {
+  const handleMaximizeMiniplayer = (videoId) => {
     miniplayerContext.actions.hideMiniplayer();
     navigate(`/watch/${videoId}`);
   };

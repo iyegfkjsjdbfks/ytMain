@@ -18,9 +18,9 @@ interface DeploymentConfig {
   _environment: 'development' | 'staging' | 'production';
   _strategy: 'blue-green' | 'canary' | 'rolling' | 'recreate';
   autoRollback: boolean;
-  healthChecks: HealthCheck[];
-  qualityGates: QualityGateConfig[];
-  notifications: NotificationConfig[];
+  healthChecks: HealthCheck;
+  qualityGates: QualityGateConfig;
+  notifications: NotificationConfig;
 }
 
 interface HealthCheck {
@@ -55,7 +55,7 @@ interface NotificationConfig {
   _config: {
     url?: string;
     channel?: string;
-    recipients?: string[];
+    recipients?: string;
   };
   events: Array<'start' | 'success' | 'failure' | 'rollback'>;
 }
@@ -63,8 +63,8 @@ interface NotificationConfig {
 interface DeploymentPipeline {
   id: string;
   name: string;
-  stages: PipelineStage[];
-  triggers: PipelineTrigger[];
+  stages: PipelineStage;
+  triggers: PipelineTrigger;
   _environment: string;
   parallelExecution: boolean;
 }
@@ -73,18 +73,18 @@ interface PipelineStage {
   id: string;
   name: string;
   type: 'build' | 'test' | 'security-scan' | 'quality-check' | 'deploy' | 'verify';
-  commands: string[];
+  commands: string;
   timeout: number;
   retries: number;
   continueOnFailure: boolean;
-  artifacts?: string[];
-  dependencies?: string[];
+  artifacts?: string;
+  dependencies?: string;
 }
 
 interface PipelineTrigger {
   type: 'push' | 'pull-request' | 'schedule' | 'manual' | 'webhook';
   _config: {
-    branches?: string[];
+    branches?: string;
     schedule?: string;
     webhook?: string;
   };
@@ -96,8 +96,8 @@ interface DeploymentExecution {
   status: 'pending' | 'running' | 'success' | 'failed' | 'cancelled' | 'rolled-back';
   startTime: number;
   endTime?: number;
-  stages: StageExecution[];
-  logs: DeploymentLog[];
+  stages: StageExecution;
+  logs: DeploymentLog;
   metrics: DeploymentMetrics;
   rollbackInfo?: RollbackInfo;
 }
@@ -107,8 +107,8 @@ interface StageExecution {
   status: 'pending' | 'running' | 'success' | 'failed' | 'skipped';
   startTime?: number;
   endTime?: number;
-  logs: string[];
-  artifacts?: string[];
+  logs: string;
+  artifacts?: string;
 }
 
 interface DeploymentLog {
@@ -146,7 +146,7 @@ class DeploymentAutomationEngine {
   private executions: Map<string, DeploymentExecution> = new Map();
   private configs: Map<string, DeploymentConfig> = new Map();
   private isRunning = false;
-  private executionQueue: string[] = [];
+  private executionQueue: string = [];
   private maxConcurrentExecutions = 3;
   private currentExecutions = 0;
 
@@ -648,7 +648,7 @@ return;
   /**
    * Trigger a deployment pipeline
    */
-  async triggerDeployment(pipelineId: string, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
+  async triggerDeployment(pipelineId, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
     const pipeline = this.pipelines.get(pipelineId);
     if (!pipeline) {
       throw new Error(`Pipeline ${pipelineId} not found`);
@@ -704,7 +704,7 @@ return;
   /**
    * Execute a deployment
    */
-  private async executeDeployment(__executionId: string): Promise<void> {
+  private async executeDeployment(__executionId): Promise<void> {
     const _execution = this.executions.get(_executionId);
     if (!_execution) {
 return;
@@ -862,7 +862,7 @@ continue;
   /**
    * Check quality gates
    */
-  private async checkQualityGates(__environment: string): Promise<boolean> {
+  private async checkQualityGates(__environment): Promise<boolean> {
     const config = this.configs.get(`${_environment}-config`);
     if (!config) {
 return true;
@@ -911,7 +911,7 @@ continue;
   /**
    * Evaluate a criterion
    */
-  private evaluateCriterion(value: number, operator: string, threshold: number): boolean {
+  private evaluateCriterion(value, operator, threshold): boolean {
     switch (operator) {
       case '>':
         return value > threshold;
@@ -931,7 +931,7 @@ continue;
   /**
    * Perform health checks
    */
-  private async performHealthChecks(__environment: string, __execution: DeploymentExecution): Promise<void> {
+  private async performHealthChecks(__environment, __execution: DeploymentExecution): Promise<void> {
     const config = this.configs.get(`${_environment}-config`);
     if (!config) {
 return;
@@ -1005,7 +1005,7 @@ return;
   /**
    * Perform rollback
    */
-  private async performRollback(__execution: DeploymentExecution, __reason: string): Promise<void> {
+  private async performRollback(__execution: DeploymentExecution, __reason): Promise<void> {
     this.addLog(_execution, 'warn', `Initiating rollback: ${_reason}`);
 
     const rollbackInfo: RollbackInfo = {
@@ -1051,7 +1051,7 @@ return;
    * Send notifications
    */
   private async sendNotifications(
-    _environment: string,
+    _environment,
     event: 'start' | 'success' | 'failure' | 'rollback',
     _execution: DeploymentExecution,
   ): Promise<void> {
@@ -1088,7 +1088,7 @@ return;
   private addLog(
     _execution: DeploymentExecution,
     level: 'info' | 'warn' | 'error' | 'debug',
-    message: string,
+    message,
     stage?: string,
   ): void {
     const log: DeploymentLog = {
@@ -1109,7 +1109,7 @@ return;
   /**
    * Get deployment _execution
    */
-  getExecution(_executionId: string): DeploymentExecution | undefined {
+  getExecution(_executionId): DeploymentExecution | undefined {
     return this.executions.get(_executionId);
   }
 
@@ -1174,7 +1174,7 @@ return;
   /**
    * Cancel deployment
    */
-  async cancelDeployment(_executionId: string): Promise<void> {
+  async cancelDeployment(_executionId): Promise<void> {
     const _execution = this.executions.get(_executionId);
     if (!_execution) {
       throw new Error(`Execution ${_executionId} not found`);

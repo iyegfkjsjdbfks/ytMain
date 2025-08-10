@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -16,7 +17,7 @@ import type { Video } from '../types';
 
 
 interface ReusableVideoGridProps {
-  videos: Video[];
+  videos: Video;
   loading?: boolean;
   error?: string | null;
   optimized?: boolean;

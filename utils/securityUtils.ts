@@ -20,18 +20,18 @@ export class CSPManager {
     return nonce;
   }
 
-  validateNonce(nonce: string): boolean {
+  validateNonce(nonce): boolean {
     return this.nonces.has(nonce);
   }
 
-  removeNonce(nonce: string): void {
+  removeNonce(nonce): void {
     this.nonces.delete(nonce);
   }
 
   generateCSPHeader(options: {
     allowInlineStyles?: boolean;
     allowInlineScripts?: boolean;
-    allowedDomains?: string[];
+    allowedDomains?: string;
     reportUri?: string;
   } = {}): string {
     const directives: string[] = [
@@ -75,13 +75,13 @@ export class CSPManager {
 // Input validation and sanitization
 export class InputValidator {
   // Email validation
-  static isValidEmail(email: string): boolean {
+  static isValidEmail(email): boolean {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return emailRegex.test(email) && email.length <= 254;
   }
 
   // URL validation
-  static isValidURL(url: string, allowedProtocols: string[] = ['http', 'https']): boolean {
+  static isValidURL(url, allowedProtocols: string[] = ['http', 'https']): boolean {
     try {
       const urlObj = new URL(url);
       return allowedProtocols.includes(urlObj.protocol.slice(0, -1));
@@ -91,19 +91,19 @@ export class InputValidator {
   }
 
   // Phone number validation (international format)
-  static isValidPhoneNumber(phone: string): boolean {
+  static isValidPhoneNumber(phone): boolean {
     const phoneRegex = /^\+?[1-9]\d{1,14}$/;
     const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
     return phoneRegex.test(cleanPhone);
   }
 
   // Password strength validation
-  static validatePasswordStrength(password: string): {
+  static validatePasswordStrength(password): {
     isValid: boolean;
     score: number;
-    feedback: string[];
+    feedback: string;
   } {
-    const feedback: string[] = [];
+    const feedback: string = [];
     let score = 0;
 
     if (password.length < 8) {
@@ -157,19 +157,19 @@ export class InputValidator {
   }
 
   // SQL injection prevention
-  static sanitizeForSQL(input: string): string {
+  static sanitizeForSQL(input): string {
     return input.replace(/['"\\;]/g, '');
   }
 
   // XSS prevention
-  static sanitizeHTML(input: string): string {
+  static sanitizeHTML(input): string {
     const div = document.createElement('div');
     div.textContent = input;
     return div.innerHTML;
   }
 
   // File name validation
-  static isValidFileName(fileName: string): boolean {
+  static isValidFileName(fileName): boolean {
     // eslint-disable-next-line no-control-regex
     const invalidChars = /[<>:"/\\|?*\x00-\x1f]/;
     const reservedNames = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i;
@@ -183,7 +183,7 @@ export class InputValidator {
   }
 
   // Credit card validation (Luhn algorithm)
-  static isValidCreditCard(cardNumber: string): boolean {
+  static isValidCreditCard(cardNumber): boolean {
     const cleanNumber = cardNumber.replace(/\D/g, '');
 
     if (cleanNumber.length < 13 || cleanNumber.length > 19) {
@@ -224,7 +224,7 @@ export class RateLimiter {
     private windowMs: number = 60000, // 1 minute
   ) {}
 
-  isAllowed(identifier: string): boolean {
+  isAllowed(identifier): boolean {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
@@ -248,7 +248,7 @@ export class RateLimiter {
     return true;
   }
 
-  getRemainingRequests(identifier: string): number {
+  getRemainingRequests(identifier): number {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
@@ -262,7 +262,7 @@ export class RateLimiter {
     return Math.max(0, this.maxRequests - validRequests.length);
   }
 
-  getResetTime(identifier: string): number {
+  getResetTime(identifier): number {
     if (!this.requests.has(identifier)) {
       return 0;
     }
@@ -322,7 +322,7 @@ export class ClientEncryption {
     );
   }
 
-  static async encrypt(data: string, key: CryptoKey): Promise<{
+  static async encrypt(data, key: CryptoKey): Promise<{
     encrypted: ArrayBuffer;
     iv: Uint8Array;
   }> {
@@ -358,7 +358,7 @@ export class ClientEncryption {
     return this.decoder.decode(decrypted);
   }
 
-  static async hashData(data: string): Promise<string> {
+  static async hashData(data): Promise<string> {
     const encodedData = this.encoder.encode(data);
     const hashBuffer = await crypto.subtle.digest('SHA-256', encodedData);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -370,7 +370,7 @@ export class ClientEncryption {
 export class SecureStorage {
   private static prefix = 'secure_';
 
-  static setItem(key: string, value: string, encrypt: boolean = false): void {
+  static setItem(key, value, encrypt: boolean = false): void {
     try {
       const storageKey = this.prefix + key;
 
@@ -386,7 +386,7 @@ export class SecureStorage {
     }
   }
 
-  static getItem(key: string, encrypted: boolean = false): string | null {
+  static getItem(key, encrypted: boolean = false): string | null {
     try {
       const storageKey = this.prefix + key;
       const value = localStorage.getItem(storageKey);
@@ -410,7 +410,7 @@ return null;
     }
   }
 
-  static removeItem(key: string): void {
+  static removeItem(key): void {
     const storageKey = this.prefix + key;
     localStorage.removeItem(storageKey);
   }
@@ -424,7 +424,7 @@ return null;
     });
   }
 
-  static setSecureSession(key: string, value: string): void {
+  static setSecureSession(key, value): void {
     try {
       const storageKey = this.prefix + key;
       sessionStorage.setItem(storageKey, value);
@@ -433,7 +433,7 @@ return null;
     }
   }
 
-  static getSecureSession(key: string): string | null {
+  static getSecureSession(key): string | null {
     try {
       const storageKey = this.prefix + key;
       return sessionStorage.getItem(storageKey);
@@ -448,11 +448,11 @@ return null;
 export class SecurityHeaders {
   static validateResponse(response: Response): {
     isSecure: boolean;
-    issues: string[];
-    recommendations: string[];
+    issues: string;
+    recommendations: string;
   } {
-    const issues: string[] = [];
-    const recommendations: string[] = [];
+    const issues: string = [];
+    const recommendations: string = [];
 
     // Check for security headers
     const { headers } = response;
@@ -502,7 +502,7 @@ export class CSRFProtection {
     return SecureStorage.getSecureSession(this.tokenKey);
   }
 
-  static validateToken(token: string): boolean {
+  static validateToken(token): boolean {
     const storedToken = this.getToken();
     return storedToken !== null && storedToken === token;
   }
@@ -528,11 +528,11 @@ export class CSRFProtection {
 export class SecurityAudit {
   static auditLocalStorage(): {
     sensitiveDataFound: boolean;
-    issues: string[];
-    recommendations: string[];
+    issues: string;
+    recommendations: string;
   } {
-    const issues: string[] = [];
-    const recommendations: string[] = [];
+    const issues: string = [];
+    const recommendations: string = [];
     const sensitivePatterns = [
       /password/i,
       /secret/i,
@@ -577,11 +577,11 @@ continue;
   }
 
   static auditCookies(): {
-    insecureCookies: string[];
-    recommendations: string[];
+    insecureCookies: string;
+    recommendations: string;
   } {
-    const insecureCookies: string[] = [];
-    const recommendations: string[] = [];
+    const insecureCookies: string = [];
+    const recommendations: string = [];
 
     document.cookie.split(';').forEach(cookie => {
       const [name] = cookie.trim().split('=');

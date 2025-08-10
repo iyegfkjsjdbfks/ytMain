@@ -147,7 +147,7 @@ return false;
     return true;
   });
 
-  const handleSelectItem = (itemId: string) => {
+  const handleSelectItem = (itemId) => {
     setSelectedItems(prev =>
       prev.includes(itemId)
         ? prev.filter((id) => id !== itemId)
@@ -163,7 +163,7 @@ return false;
     }
   };
 
-  const handleModerationAction = (_itemId: string, _action: ModerationAction) => {
+  const handleModerationAction = (_itemId, _action: ModerationAction) => {
     // In a real app, this would make an API call
   };
 
@@ -174,7 +174,7 @@ return false;
     setSelectedItems([]);
   };
 
-  const getSeverityColor = (severity: string) => {
+  const getSeverityColor = (severity) => {
     switch (severity) {
       case 'low': return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
       case 'medium': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300';
@@ -184,7 +184,7 @@ return false;
     }
   };
 
-  const getTypeIcon = (type: string) => {
+  const getTypeIcon = (type) => {
     switch (type) {
       case 'video': return VideoCameraIcon;
       case 'comment': return ChatBubbleLeftIcon;
@@ -194,7 +194,7 @@ return false;
     }
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;

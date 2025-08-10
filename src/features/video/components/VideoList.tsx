@@ -3,7 +3,7 @@ import type { Video } from '../types';
 import VideoCard from './VideoCard';
 
 interface VideoListProps {
-  videos: Video[];
+  videos: Video;
   layout?: 'grid' | 'list';
   variant?: 'default' | 'compact' | 'studio';
   emptyMessage?: string;

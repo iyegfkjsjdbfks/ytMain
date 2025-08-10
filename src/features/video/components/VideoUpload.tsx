@@ -5,8 +5,8 @@
 // TODO: Fix import - import type * as React from 'react';
 
 interface VideoUploadProps {
-  onUploadComplete?: (videoId: string) => void;
-  allowedTypes?: string[];
+  onUploadComplete?: (videoId) => void;
+  allowedTypes?: string;
   maxSizeMB?: number;
 }
 

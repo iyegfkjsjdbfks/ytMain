@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -22,10 +23,10 @@ interface AnalyticsData {
   subscriberGrowth: number;
   topPerformingVideo: Video | null;
   recentPerformance: {
-    views: number[];
-    watchTime: number[];
-    subscribers: number[];
-    labels: string[];
+    views: number;
+    watchTime: number;
+    subscribers: number;
+    labels: string;
   };
   videoPerformance: Array<{
     video: Video;
@@ -83,7 +84,7 @@ const AnalyticsPage: React.FC = () => {
     });
   }, [timeRange]);
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -93,7 +94,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (hours: number): string => {
+  const formatDuration = (hours): string => {
     if (hours >= 24) {
 return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 }
@@ -132,14 +133,14 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
     </div>
   );
 
-  const SimpleChart: React.FC<{ data: number[]; labels: string[] }> = ({ data, labels }) => {
+  const SimpleChart: React.FC<{ data: number; labels: string[] }> = ({ data, labels }) => {
     const maxValue = Math.max(...data);
     const minValue = Math.min(...data);
     const range = maxValue - minValue || 1;
 
     return (
       <div className="h-64 flex items-end space-x-1 p-4">
-        {data.map((value: any, index: number) => {
+        {data.map((value, index) => {
           const height = ((value - minValue) / range) * 200 + 20;
           return (
             <div key={index} className="flex-1 flex flex-col items-center">

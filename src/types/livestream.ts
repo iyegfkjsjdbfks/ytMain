@@ -8,7 +8,7 @@ export interface LiveStream {
   streamUrl: string;
   streamKey: string;
   category: string;
-  tags: string[];
+  tags: string;
   visibility: 'public' | 'unlisted' | 'private';
   status: 'scheduled' | 'live' | 'ended' | 'error';
   scheduledStartTime?: Date;
@@ -36,7 +36,7 @@ export interface LiveStreamSettings {
   frameRate: 30 | 60;
   enableRecording: boolean;
   enableMultiplatform: boolean;
-  platforms: StreamPlatform[];
+  platforms: StreamPlatform;
 }
 
 export interface StreamPlatform {
@@ -70,7 +70,7 @@ export interface LiveStreamMonetization {
   adRevenue: number;
   membershipRevenue: number;
   donationRevenue: number;
-  superChats: SuperChat[];
+  superChats: SuperChat;
 }
 
 export interface ChatMessage {
@@ -83,7 +83,7 @@ export interface ChatMessage {
   isModerator: boolean;
   isOwner: boolean;
   isVerified: boolean;
-  badges: ChatBadge[];
+  badges: ChatBadge;
   superChat?: SuperChat;
   membership?: MembershipInfo;
   deleted?: boolean;
@@ -115,14 +115,14 @@ export interface MembershipInfo {
   level: string;
   duration: number; // months
   badge: string;
-  perks: string[];
+  perks: string;
 }
 
 export interface LivePoll {
   id: string;
   streamId?: string;
   question: string;
-  options: PollOption[];
+  options: PollOption;
   isActive: boolean;
   totalVotes: number;
   createdAt: Date;

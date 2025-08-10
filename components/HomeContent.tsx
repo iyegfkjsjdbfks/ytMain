@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -19,7 +20,7 @@ import type { Video } from '../types'; // Assuming Video type is in types.ts
 
 interface HomeContentProps {
   selectedCategory: string;
-  videos: Video[];
+  videos: Video;
 }
 
 const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {

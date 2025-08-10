@@ -14,9 +14,9 @@ const CACHE_DURATION = {
 
 // Cache Implementation
 class APICache {
-  private cache = new Map<string, { data: any; timestamp: number; duration: number }>();
+  private cache = new Map<string, { data; timestamp: number; duration: number }>();
 
-  set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM): void {
+  set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -24,7 +24,7 @@ class APICache {
     });
   }
 
-  get(key: string): any | null {
+  get(key): any | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -43,7 +43,7 @@ return null;
     this.cache.clear();
   }
 
-  delete(key: string): void {
+  delete(key): void {
     this.cache.delete(key);
   }
 
@@ -115,7 +115,7 @@ const requestQueue = new RequestQueue();
 // HTTP Client
 class HTTPClient {
   private async request<T>(
-    url: string,
+    url,
     options: RequestInit = {},
     cacheKey?: string,
     cacheDuration?: number,
@@ -151,7 +151,7 @@ return cached;
   }
 
   async get<T>(
-    url: string,
+    url,
     cacheKey?: string,
     cacheDuration?: number,
   ): Promise<T> {
@@ -160,7 +160,7 @@ return cached;
     );
   }
 
-  async post<T>(url: string, data: any): Promise<T> {
+  async post<T>(url, data): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, {
         method: 'POST',
@@ -169,7 +169,7 @@ return cached;
     );
   }
 
-  async put<T>(url: string, data: any): Promise<T> {
+  async put<T>(url, data): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, {
         method: 'PUT',
@@ -178,7 +178,7 @@ return cached;
     );
   }
 
-  async delete<T>(url: string): Promise<T> {
+  async delete<T>(url): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, { method: 'DELETE' }),
     );
@@ -192,10 +192,10 @@ const httpClient = new HTTPClient();
 // API Service Classes
 export class VideoService {
   static async getVideos(
-    category: string = 'home',
+    category = 'home',
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
+  ): Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `videos_${category}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -279,7 +279,7 @@ export class VideoService {
     }
   }
 
-  static async getVideoById(id: string): Promise<Video | null> {
+  static async getVideoById(id): Promise<Video | null> {
     const cacheKey = `video_${id}`;
 
     try {
@@ -336,10 +336,10 @@ return null;
   }
 
   static async searchVideos(
-    query: string,
+    query,
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
+  ): Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `search_${query}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -407,7 +407,7 @@ return null;
     }
   }
 
-  private static parseDuration(duration: string): number {
+  private static parseDuration(duration): number {
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
@@ -423,7 +423,7 @@ return 0;
 }
 
 // Mock data generator for development
-function generateMockChannel(id: string): Channel {
+function generateMockChannel(id): Channel {
   return {
     id,
     name: `Channel ${id}`,
@@ -443,7 +443,7 @@ function generateMockChannel(id: string): Channel {
 }
 
 export class ChannelService {
-  static async getChannel(id: string): Promise<Channel | null> {
+  static async getChannel(id): Promise<Channel | null> {
     const cacheKey = `channel_${id}`;
 
     try {
@@ -488,10 +488,10 @@ return null;
   }
 
   static async getChannelVideos(
-    channelId: string,
+    channelId,
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
+  ): Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `channel_videos_${channelId}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -562,7 +562,7 @@ return null;
 }
 
 export class PlaylistService {
-  static async getUserPlaylists(_userId: string): Promise<UserPlaylist[]> {
+  static async getUserPlaylists(_userId): Promise<UserPlaylist[]> {
     try {
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -599,7 +599,7 @@ export class PlaylistService {
 // Export cache utilities
 export const cacheUtils = {
   clear: () => apiCache.clear(),
-  delete: (key: string) => apiCache.delete(key),
+  delete: (key) => apiCache.delete(key),
   size: () => apiCache.size(),
 };
 

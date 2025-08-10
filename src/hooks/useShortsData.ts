@@ -11,7 +11,7 @@ import unifiedDataService from '../services/unifiedDataService';
 export function useShortsVideos(limit: number = 30) {
   const fetchShorts = useCallback(async (): Promise<Video[]> => {
     const response = await unifiedDataService.getShortsVideos(limit);
-    return response.data as unknown as Video[];
+    return response.data as unknown as Video;
   }, [limit]);
   return useAsyncData<Video[]>(fetchShorts, { initialData: [] });
 }

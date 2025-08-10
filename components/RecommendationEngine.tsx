@@ -15,7 +15,7 @@ interface RecommendationEngineProps {
   currentVideo?: Video;
   currentVideoId?: string;
   maxRecommendations?: number;
-  onVideoSelect?: (videoId: string) => void;
+  onVideoSelect?: (videoId) => void;
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -67,7 +67,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
   const generateRecommendations = useCallback(async () => {
     setLoading(true);
     try {
-      let recommendedVideos: Video[] = [];
+      let recommendedVideos: Video = [];
 
       if (useGoogleCustomSearch) {
         console.log('🎯 Using DIRECT STRATEGY: Google Custom Search API for YouTube recommendations');
@@ -192,7 +192,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         );
 
         // Simple recommendation logic - prioritize similar categories if available
-        let recommended: Video[] = [];
+        let recommended: Video = [];
 
         if (currentVideo?.category) {
           // First, try to get videos from the same category

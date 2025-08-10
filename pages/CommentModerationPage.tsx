@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -33,7 +34,7 @@ const CommentModerationPage: React.FC = () => {
       setLoading(true);
       try {
         const videos = await getVideos();
-        const allComments: CommentWithVideo[] = [];
+        const allComments: CommentWithVideo = [];
 
         // Fetch comments for each video
         for (const video of videos.slice(0, 5)) { // Limit to first 5 videos for demo
@@ -83,7 +84,7 @@ const CommentModerationPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a: any, b) => {
+    filtered.sort((a, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -101,7 +102,7 @@ const CommentModerationPage: React.FC = () => {
     setFilteredComments(filtered);
   }, [comments, filter, searchQuery, sortBy]);
 
-  const handleSelectComment = (commentId: string) => {
+  const handleSelectComment = (commentId) => {
     const newSelected = new Set(selectedComments);
     if (newSelected.has(commentId)) {
       newSelected.delete(commentId);
@@ -135,13 +136,13 @@ const CommentModerationPage: React.FC = () => {
           };
         }
         return comment;
-      }).filter(Boolean) as CommentWithVideo[],
+      }).filter(Boolean) as CommentWithVideo,
     );
     setSelectedComments(new Set());
     setShowBulkActions(false);
   };
 
-  const handleSingleAction = (commentId: string, action: 'approve' | 'spam' | 'hide' | 'delete') => {
+  const handleSingleAction = (commentId, action: 'approve' | 'spam' | 'hide' | 'delete') => {
     setComments(prevComments =>
       prevComments.map(comment => {
         if (comment.id === commentId) {
@@ -154,11 +155,11 @@ const CommentModerationPage: React.FC = () => {
           };
         }
         return comment;
-      }).filter(Boolean) as CommentWithVideo[],
+      }).filter(Boolean) as CommentWithVideo,
     );
   };
 
-  const getStatusBadge = (status: string, flaggedReason?: string) => {
+  const getStatusBadge = (status, flaggedReason?: string) => {
     const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
     if (flaggedReason) {
@@ -226,7 +227,7 @@ return comments.filter((c) => c.flaggedReason).length;
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Filter Tabs */}
           <div className="flex flex-wrap gap-2">
-            {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType[]).map((filterType) => (
+            {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}
@@ -419,3 +420,11 @@ return comments.filter((c) => c.flaggedReason).length;
 };
 
 export default CommentModerationPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

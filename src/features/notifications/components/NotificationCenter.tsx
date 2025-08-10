@@ -12,8 +12,8 @@ interface NotificationCenterProps {
 
 interface NotificationItemProps {
   notification: Notification;
-  onMarkAsRead: (id: string) => void;
-  onDelete: (id: string) => void;
+  onMarkAsRead: (id) => void;
+  onDelete: (id) => void;
   onClick: (notification: Notification) => void;
 }
 
@@ -108,7 +108,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
             <div className="flex items-center gap-1 ml-2">
               {!notification.isRead && (
                 <button
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     onMarkAsRead(notification.id);
                   }}
@@ -119,7 +119,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
                 </button>
               )}
               <button
-                onClick={(e: Event) => {
+                onClick={(e) => {
                   e.stopPropagation();
                   onDelete(notification.id);
                 }}

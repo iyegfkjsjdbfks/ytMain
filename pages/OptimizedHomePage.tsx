@@ -64,7 +64,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
   }, [videos, selectedCategory]);
 
   // Event handlers
-  const handleCategorySelect = useCallback((category: string) => {
+  const handleCategorySelect = useCallback((category) => {
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -74,7 +74,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     window.location.hash = `/watch/${video.id}`;
   }, []);
 
-  const handleChannelClick = useCallback((channelId: string) => {
+  const handleChannelClick = useCallback((channelId) => {
     // Navigate to channel page
     window.location.hash = `/channel/${channelId}`;
   }, []);

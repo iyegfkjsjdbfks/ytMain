@@ -16,7 +16,7 @@ interface PWAAnalyticsEvent {
 
 class PWAAnalytics {
   private isEnabled: boolean = true;
-  private events: PWAAnalyticsEvent[] = [];
+  private events: PWAAnalyticsEvent = [];
 
   constructor() {
     this.initializeAnalytics();
@@ -83,7 +83,7 @@ class PWAAnalytics {
     });
   }
 
-  trackInstallError(error: string) {
+  trackInstallError(error) {
     this.trackEvent({
       action: 'install_error',
       category: 'PWA',
@@ -134,7 +134,7 @@ class PWAAnalytics {
     });
   }
 
-  trackServiceWorkerError(error: string) {
+  trackServiceWorkerError(error) {
     this.trackEvent({
       action: 'sw_error',
       category: 'PWA',
@@ -144,7 +144,7 @@ class PWAAnalytics {
   }
 
   // Cache Events
-  trackCacheHit(resource: string) {
+  trackCacheHit(resource) {
     this.trackEvent({
       action: 'cache_hit',
       category: 'PWA',
@@ -153,7 +153,7 @@ class PWAAnalytics {
     });
   }
 
-  trackCacheMiss(resource: string) {
+  trackCacheMiss(resource) {
     this.trackEvent({
       action: 'cache_miss',
       category: 'PWA',
@@ -162,7 +162,7 @@ class PWAAnalytics {
     });
   }
 
-  trackCacheError(error: string) {
+  trackCacheError(error) {
     this.trackEvent({
       action: 'cache_error',
       category: 'PWA',
@@ -172,7 +172,7 @@ class PWAAnalytics {
   }
 
   // Background Sync Events
-  trackBackgroundSync(tag: string) {
+  trackBackgroundSync(tag) {
     this.trackEvent({
       action: 'background_sync',
       category: 'PWA',
@@ -181,7 +181,7 @@ class PWAAnalytics {
     });
   }
 
-  trackBackgroundSyncSuccess(tag: string) {
+  trackBackgroundSyncSuccess(tag) {
     this.trackEvent({
       action: 'background_sync_success',
       category: 'PWA',
@@ -190,7 +190,7 @@ class PWAAnalytics {
     });
   }
 
-  trackBackgroundSyncError(tag: string, error: string) {
+  trackBackgroundSyncError(tag, error) {
     this.trackEvent({
       action: 'background_sync_error',
       category: 'PWA',
@@ -241,7 +241,7 @@ class PWAAnalytics {
   }
 
   // Offline Storage Events
-  trackOfflineVideoSaved(videoId: string) {
+  trackOfflineVideoSaved(videoId) {
     this.trackEvent({
       action: 'offline_video_saved',
       category: 'PWA',
@@ -250,7 +250,7 @@ class PWAAnalytics {
     });
   }
 
-  trackOfflineVideoPlayed(videoId: string) {
+  trackOfflineVideoPlayed(videoId) {
     this.trackEvent({
       action: 'offline_video_played',
       category: 'PWA',
@@ -267,7 +267,7 @@ class PWAAnalytics {
     });
   }
 
-  trackStorageCleanup(itemsRemoved: number) {
+  trackStorageCleanup(itemsRemoved) {
     this.trackEvent({
       action: 'storage_cleanup',
       category: 'PWA',
@@ -302,7 +302,7 @@ class PWAAnalytics {
   }
 
   // Share Events
-  trackShareAttempt(method: string) {
+  trackShareAttempt(method) {
     this.trackEvent({
       action: 'share_attempt',
       category: 'PWA',
@@ -311,7 +311,7 @@ class PWAAnalytics {
     });
   }
 
-  trackShareSuccess(method: string) {
+  trackShareSuccess(method) {
     this.trackEvent({
       action: 'share_success',
       category: 'PWA',
@@ -320,7 +320,7 @@ class PWAAnalytics {
     });
   }
 
-  trackShareError(method: string, error: string) {
+  trackShareError(method, error) {
     this.trackEvent({
       action: 'share_error',
       category: 'PWA',
@@ -330,7 +330,7 @@ class PWAAnalytics {
   }
 
   // Performance Events
-  trackPerformanceMetric(metric: string, value: number, unit: string) {
+  trackPerformanceMetric(metric, value, unit) {
     this.trackEvent({
       action: 'performance_metric',
       category: 'PWA',
@@ -370,7 +370,7 @@ return;
   }
 
   // Enable/disable analytics
-  setEnabled(enabled: boolean): void {
+  setEnabled(enabled): void {
     this.isEnabled = enabled;
   }
 

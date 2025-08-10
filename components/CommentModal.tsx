@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -19,7 +20,7 @@ interface CommentModalProps {
   onClose: () => void;
   shortId: string;
   shortTitle?: string;
-  onCommentSubmit?: (commentText: string) => void;
+  onCommentSubmit?: (commentText) => void;
 }
 
 /**
@@ -37,7 +38,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality
 
-  const handleCommentSubmit = async (text: string) => {
+  const handleCommentSubmit = async (text) => {
     if (!text.trim()) {
 return;
 }

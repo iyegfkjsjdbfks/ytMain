@@ -1,4 +1,16 @@
 
+/// <reference types="react/jsx-runtime" />
+/// <reference types="node" />
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -34,11 +46,11 @@ interface Chapter {
 
 interface AdvancedVideoPlayerProps {
   video: Video;
-  chapters?: Chapter[];
+  chapters?: Chapter;
   autoplay?: boolean;
   muted?: boolean;
   className?: string;
-  onTimeUpdate?: (currentTime: number) => void;
+  onTimeUpdate?: (currentTime) => void;
   onEnded?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
@@ -112,7 +124,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   }, [videoPlayerInstance]);
 
   // Format time for display
-  const formatTime = (time: number): string => {
+  const formatTime = (time): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);
@@ -353,7 +365,7 @@ return;
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={videoPlayerInstance.togglePlay}
-            onKeyDown={(e: Event) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 videoPlayerInstance.togglePlay();
@@ -380,7 +392,7 @@ return;
               onClick={handleProgressClick}
               onMouseMove={handleProgressMouseMove}
               onMouseLeave={handleProgressMouseLeave}
-              onKeyDown={(e: Event) => {
+              onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   handleProgressClick(e as any);

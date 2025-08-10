@@ -138,7 +138,7 @@ export const apiMocks = {
   },
 
   // Mock paginated responses
-  mockPaginatedResponse<T>(items: T[], page: number = 1, pageSize: number = 10) {
+  mockPaginatedResponse<T>(items: T, page: number = 1, pageSize: number = 10) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
@@ -160,7 +160,7 @@ export const apiMocks = {
 // Custom render function with providers
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   // Router options
-  initialEntries?: string[];
+  initialEntries?: string;
 
   // Query client options
   queryClient?: QueryClient;
@@ -194,7 +194,7 @@ function AllTheProviders({
 }: {
   children: ReactNode;
   queryClient: QueryClient;
-  initialEntries?: string[];
+  initialEntries?: string;
   mockUser?: any;
 }) {
   return (
@@ -242,7 +242,7 @@ export function customRenderHook<TResult, TProps>(
   hook: (props: TProps) => TResult,
   options: RenderHookOptions<TProps> & {
     queryClient?: QueryClient;
-    initialEntries?: string[];
+    initialEntries?: string;
     mockUser?: any;
   } = {},
 ) {
@@ -320,7 +320,7 @@ export const testUtils = {
 
   // Mock media query
   mockMediaQuery: (matches: boolean = false) => {
-    const mockMatchMedia = vi.fn().mockImplementation((query: string) => ({
+    const mockMatchMedia = vi.fn().mockImplementation((query) => ({
       matches,
       media: query,
       onchange: null,
@@ -363,12 +363,12 @@ export const testUtils = {
   },
 
   // Create mock file for upload tests
-  createMockFile: (name: string = 'test.mp4', type: string = 'video/mp4') => {
+  createMockFile: (name = 'test.mp4', type = 'video/mp4') => {
     return new File(['test content'], name, { type, lastModified: Date.now() });
   },
 
   // Simulate drag and drop events
-  simulateDragAndDrop: async (element: HTMLElement, files: File[]) => {
+  simulateDragAndDrop: async (element: HTMLElement, files: File) => {
     const user = userEvent.setup();
 
     const dataTransfer = {
@@ -468,7 +468,7 @@ export const a11yUtils = {
   // Test keyboard navigation
   testKeyboardNavigation: async (startElement?: HTMLElement) => {
     const user = userEvent.setup();
-    const focusableElements: HTMLElement[] = [];
+    const focusableElements: HTMLElement = [];
 
     if (startElement) {
       startElement.focus();

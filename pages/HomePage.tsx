@@ -1,10 +1,25 @@
 
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useMemo, useCallback, memo } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
+import React from 'react';
 
 import type { Video } from '../types';
 
@@ -16,7 +31,7 @@ const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
 
-  const handleSelectCategory = useCallback((category: string) => {
+  const handleSelectCategory = useCallback((category) => {
     setSelectedCategory(category);
     window.scrollTo(0, 0);
   }, []);

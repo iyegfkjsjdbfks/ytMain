@@ -1,4 +1,18 @@
 
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState } from 'react';
 
 // TODO: Fix import - import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -7,6 +21,7 @@ import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
 import YouTubeLogo from '../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
+import React from 'react';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');

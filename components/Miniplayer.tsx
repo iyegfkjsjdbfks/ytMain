@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -17,7 +18,7 @@ import type { Video } from '../src/types/core';
 interface MiniplayerProps {
   video: Video | null;
   onClose: () => void;
-  onMaximize: (videoId: string) => void;
+  onMaximize: (videoId) => void;
 }
 
 const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {
@@ -33,7 +34,7 @@ return null;
     >
       <Link
         to={`/watch/${video.id}`}
-        onClick={(e: Event) => {
+        onClick={(e) => {
  e.preventDefault(); onMaximize(video.id);
 }}
         className="w-[160px] aspect-video block flex-shrink-0 group relative bg-black"
@@ -48,7 +49,7 @@ return null;
       <div className="flex-grow p-3 overflow-hidden flex flex-col justify-center">
         <Link
             to={`/watch/${video.id}`}
-            onClick={(e: Event) => {
+            onClick={(e) => {
  e.preventDefault(); onMaximize(video.id);
 }}
             className="text-sm font-medium text-neutral-800 dark:text-neutral-50 hover:text-neutral-600 dark:hover:text-neutral-100 line-clamp-2 leading-tight"
@@ -60,13 +61,13 @@ return null;
             to={`/channel/${encodeURIComponent(((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown"))}`}
             className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 block truncate mt-0.5"
             title={((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown")}
-            onClick={(e: Event) => e: Event.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
         >
             {((video.channelName || video.channelTitle || "Unknown") || video.channelTitle || "Unknown")}
         </Link>
       </div>
       <button
-        onClick={(e: Event) => {
+        onClick={(e) => {
  e.stopPropagation(); onClose();
 }}
         className="absolute top-1.5 right-1.5 p-1.5 text-neutral-500 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700/60 rounded-full transition-colors"

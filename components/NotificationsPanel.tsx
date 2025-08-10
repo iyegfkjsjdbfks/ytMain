@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -48,7 +49,7 @@ return null;
     setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
   };
 
-  const markAsRead = (id: string) => {
+  const markAsRead = (id) => {
     setNotifications(prev => prev.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));

@@ -11,7 +11,7 @@
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
 export function useLocalStorageSet<T>(
-  key: string,
+  key,
   initialValue: Set<T> = new Set(),
 ): [
   Set<T>,
@@ -40,7 +40,7 @@ export function useLocalStorageSet<T>(
   const set = useMemo(() => new Set(items), [items]);
 
   // Update localStorage whenever items change
-  const updateLocalStorage = useCallback((newItems: T[]) => {
+  const updateLocalStorage = useCallback((newItems: T) => {
     try {
       localStorage.setItem(key, JSON.stringify(newItems));
       setItems(newItems);
@@ -102,7 +102,7 @@ export function useLocalStorageSet<T>(
  * Similar to useState but for Sets stored in localStorage
  */
 export function useLocalStorageSetState<T>(
-  key: string,
+  key,
   initialValue: Set<T> = new Set(),
 ): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {

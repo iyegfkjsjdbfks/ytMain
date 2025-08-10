@@ -246,7 +246,7 @@ Object.defineProperty(window, 'requestAnimationFrame', {
 
 Object.defineProperty(window, 'cancelAnimationFrame', {
   writable: true,
-  value: vi.fn(id: string => clearTimeout(id: string)),
+  value: vi.fn(id => clearTimeout(id)),
 });
 
 // Mock getComputedStyle
@@ -313,7 +313,7 @@ Object.defineProperty(navigator, 'clipboard', {
 Object.defineProperty(window, 'File', {
   writable: true,
   value: class MockFile {
-    constructor(bits: BlobPart[], name: string, options?: FilePropertyBag) {
+    constructor(bits: BlobPart, name, options?: FilePropertyBag) {
       this.name = name;
       this.size = bits.reduce((acc, bit) => {
         if (typeof bit === 'string') {
@@ -427,7 +427,7 @@ expect.extend({
     };
   },
 
-  toHaveAccessibleName(received: Element, expectedName: string) {
+  toHaveAccessibleName(received: Element, expectedName) {
     const accessibleName = received.getAttribute('aria-label') ||
                           received.getAttribute('aria-labelledby') ||
                           received.textContent;
@@ -446,7 +446,7 @@ declare global {
   namespace Vi {
     interface JestAssertion<T = any> {
       toBeInViewport(): T;
-      toHaveAccessibleName(expectedName: string): T;
+      toHaveAccessibleName(expectedName): T;
     }
   }
 

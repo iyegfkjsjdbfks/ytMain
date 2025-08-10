@@ -1,7 +1,18 @@
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { memo, useState, useEffect, useCallback, useRef } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
+/// <reference types="node" />
 // TODO: Fix import - import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 interface MobileVideoPlayerProps {
@@ -170,7 +181,7 @@ return;
   }, [autoplay, isIntersecting, isPlaying]);
 
   // Format time
-  const formatTime = (time: number) => {
+  const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

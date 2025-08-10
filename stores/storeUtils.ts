@@ -17,7 +17,7 @@ export interface StoreConfig {
     storage?: 'localStorage' | 'sessionStorage' | 'secure';
     partialize?: (state) => any;
     version?: number;
-    migrate?: (persistedState: any, version: number) => any;
+    migrate?: (persistedState, version) => any;
   };
   devtools?: boolean;
   immer?: boolean;
@@ -33,7 +33,7 @@ export interface AsyncState<T> {
 }
 
 export interface PaginatedState<T> {
-  items: T[];
+  items: T;
   page: number;
   pageSize: number;
   total: number;
@@ -51,15 +51,15 @@ export interface OptimisticUpdate<T> {
 
 // Storage implementations
 class SecureStorage {
-  static getItem(key: string): string | null {
+  static getItem(key): string | null {
     return securityUtils.SecureStorage.getItem(key, true);
   }
 
-  static setItem(key: string, value: string): void {
+  static setItem(key, value): void {
     securityUtils.SecureStorage.setItem(key, value, true);
   }
 
-  static removeItem(key: string): void {
+  static removeItem(key): void {
     securityUtils.SecureStorage.removeItem(key);
   }
 }
@@ -67,12 +67,12 @@ class SecureStorage {
 // Performance monitoring middleware
 const performanceMiddleware = <T>(
   config: StateCreator<T, [], [], T>,
-  storeName: string,
+  storeName,
 ): StateCreator<T, [], [], T> => {
-  return (set: any, get: any, api) => {
+  return (set, get, api) => {
     const originalSet = set;
 
-    const wrappedSet = (partial: any, replace?: boolean) => {
+    const wrappedSet = (partial, replace?: boolean) => {
       const startTime = performance.now();
 
       originalSet(partial, replace);
@@ -101,7 +101,7 @@ export function createAsyncState<T>(initialData: T | null = null): AsyncState<T>
 
 export function createAsyncActions<T>() {
   return {
-    setLoading: (loading: boolean) => (state) => {
+    setLoading: (loading) => (state) => {
       state.loading = loading;
       if (loading) {
         state.error = null;
@@ -115,7 +115,7 @@ export function createAsyncActions<T>() {
       state.lastFetch = Date.now();
     },
 
-    setError: (error: string) => (state) => {
+    setError: (error) => (state) => {
       state.error = error;
       state.loading = false;
     },
@@ -144,7 +144,7 @@ export function createPaginatedState<T>(pageSize: number = 20): PaginatedState<T
 
 export function createPaginatedActions<T>() {
   return {
-    setItems: (items: T[], total: number, page: number) => (state) => {
+    setItems: (items: T, total, page) => (state) => {
       if (page === 1) {
         state.items = items;
       } else {
@@ -157,14 +157,14 @@ export function createPaginatedActions<T>() {
       state.error = null;
     },
 
-    setLoading: (loading: boolean) => (state) => {
+    setLoading: (loading) => (state) => {
       state.loading = loading;
       if (loading) {
         state.error = null;
       }
     },
 
-    setError: (error: string) => (state) => {
+    setError: (error) => (state) => {
       state.error = error;
       state.loading = false;
     },
@@ -199,7 +199,7 @@ export function createPaginatedActions<T>() {
 export class OptimisticUpdatesManager<T> {
   private updates = new Map<string, OptimisticUpdate<T>>();
 
-  add(id: string, data: T, rollback: () => void): void {
+  add(id, data: T, rollback: () => void): void {
     this.updates.set(id, {
       id,
       data,
@@ -208,11 +208,11 @@ export class OptimisticUpdatesManager<T> {
     });
   }
 
-  confirm(id: string): void {
+  confirm(id): void {
     this.updates.delete(id);
   }
 
-  rollback(id: string): void {
+  rollback(id): void {
     const update = this.updates.get(id);
     if (update) {
       update.rollback();
@@ -315,10 +315,10 @@ export function combineStores<T extends Record<string, any>>(
 // Computed values utility
 export function createComputed<T, R>(
   selector: (state: T) => R,
-  dependencies?: (state: T) => any[],
+  dependencies?: (state: T) => any,
 ) {
   let cachedValue: R;
-  let cachedDeps: any[];
+  let cachedDeps;
 
   return (state: T): R => {
     if (dependencies) {
@@ -337,7 +337,7 @@ export function createComputed<T, R>(
 }
 
 // Shallow equality check
-function shallowEqual(a: any[], b: any[]): boolean {
+function shallowEqual(a, b): boolean {
   if (a.length !== b.length) {
 return false;
 }
@@ -357,11 +357,11 @@ export class StoreDebugger {
     store: string;
     action: string;
     timestamp: number;
-    state: any;
-    prevState: any;
+    state;
+    prevState;
   }> = [];
 
-  static log(store: string, action: string, state: any, prevState: any): void {
+  static log(store, action, state, prevState): void {
     if (!import.meta.env.DEV) {
 return;
 }
@@ -425,11 +425,11 @@ export function createValidator<T extends object>(schema: {
 export class StoreSynchronizer {
   private static instances = new Map<string, any>();
 
-  static register(name: string, store: any): void {
+  static register(name, store): void {
     this.instances.set(name, store);
   }
 
-  static sync(fromStore: string, toStore: string, mapper: (state) => any): void {
+  static sync(fromStore, toStore, mapper: (state) => any): void {
     const from = this.instances.get(fromStore);
     const to = this.instances.get(toStore);
 
@@ -445,7 +445,7 @@ export class StoreSynchronizer {
     });
   }
 
-  static broadcast(event: string, data: any): void {
+  static broadcast(event, data): void {
     for (const store of this.instances.values()) {
       if (typeof store.handleBroadcast === 'function') {
         store.handleBroadcast(event, data);
@@ -464,7 +464,7 @@ export class StorePerformanceAnalyzer {
     minTime: number;
   }>();
 
-  static trackUpdate(storeName: string, duration: number): void {
+  static trackUpdate(storeName, duration): void {
     const current = this.metrics.get(storeName) || {
       updateCount: 0,
       totalTime: 0,

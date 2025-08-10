@@ -1,7 +1,18 @@
 
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
 // TODO: Fix import - import { useEffect, useRef, useState, type FC, type ChangeEvent } from 'react';
 
 import { logger } from '../../utils/logger';
+/// <reference types="node" />
 
 import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
 
@@ -32,7 +43,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Format time in seconds to MM:SS format
-  const formatTime = (timeInSeconds: number): string => {
+  const formatTime = (timeInSeconds): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

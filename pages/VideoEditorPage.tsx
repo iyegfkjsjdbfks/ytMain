@@ -1,3 +1,30 @@
+import React from 'react';
+/// <reference types="node" />
+
+
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    [key: string]: string | undefined;
+  }
+  interface Process {
+    env: ProcessEnv;
+  }
+}
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useRef, useEffect } from 'react';
 
 // TODO: Fix import - import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -21,7 +48,7 @@ interface TimelineClip {
   track: number;
   thumbnail?: string;
   volume?: number;
-  effects?: string[];
+  effects?: string;
 }
 
 interface EditAction {
@@ -93,7 +120,7 @@ const VideoEditorPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const formatTime = (seconds: number): string => {
+  const formatTime = (seconds): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -120,11 +147,11 @@ const VideoEditorPage: React.FC = () => {
     }
   };
 
-  const handleClipSelect = (clipId: string) => {
+  const handleClipSelect = (clipId) => {
     setSelectedClip(selectedClip === clipId ? null : clipId);
   };
 
-  const handleClipSplit = (clipId: string, splitTime: number) => {
+  const handleClipSplit = (clipId, splitTime) => {
     const clip = clips.find(c => c.id === clipId);
     if (!clip) {
 return;
@@ -155,7 +182,7 @@ return;
     }]);
   };
 
-  const handleVolumeChange = (clipId: string, volume: number) => {
+  const handleVolumeChange = (clipId, volume) => {
     setClips(prev => prev.map(clip =>
       clip.id === clipId ? { ...clip, volume } : clip,
     ));
@@ -260,7 +287,7 @@ return;
     }
   };
 
-  const getTrackLabel = (track: number): string => {
+  const getTrackLabel = (track): string => {
     switch (track) {
       case 0: return 'Video';
       case 1: return 'Audio';
@@ -581,7 +608,7 @@ return null;
           <div className="border-t border-gray-700 p-4">
             <h3 className="text-lg font-semibold mb-4">Edit History</h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
-              {editHistory.slice(-10).reverse().map((action: any, _index) => (
+              {editHistory.slice(-10).reverse().map((action, _index) => (
                 <div key={action.timestamp} className="text-xs text-gray-400 p-2 bg-gray-700 rounded">
                   <div className="font-medium capitalize">{action.type}</div>
                   <div>{action.description}</div>

@@ -1,6 +1,21 @@
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
+
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 import {
+import React from 'react';
   UserGroupIcon,
   ChartBarIcon,
   LightBulbIcon,
@@ -32,7 +47,7 @@ interface ContentIdea {
   trending: boolean;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   estimatedViews: number;
-  tags: string[];
+  tags: string;
 }
 
 interface CreatorResource {
@@ -232,7 +247,7 @@ const CreatorStudioPage: React.FC = () => {
     },
   ];
 
-  const getDifficultyColor = (difficulty: string) => {
+  const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case 'Easy': return 'text-green-600 bg-green-100';
       case 'Medium': return 'text-yellow-600 bg-yellow-100';
@@ -241,7 +256,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'ready': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
@@ -250,7 +265,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getTypeIcon = (type: string) => {
+  const getTypeIcon = (type) => {
     switch (type) {
       case 'video': return <CameraIcon className="w-4 h-4" />;
       case 'short': return <ClockIcon className="w-4 h-4" />;
@@ -317,7 +332,7 @@ const CreatorStudioPage: React.FC = () => {
         {/* Tab Content */}
         {activeTab === 'insights' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {audienceInsights.map((insight: any, index: number) => (
+            {audienceInsights.map((insight, index) => (
               <div key={index} className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
                 <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                   {insight.metric}
@@ -377,7 +392,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag: string, tagIndex) => (
+                  {idea.tags.map((tag, tagIndex) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>

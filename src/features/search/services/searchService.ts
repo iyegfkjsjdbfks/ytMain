@@ -34,7 +34,7 @@ export interface SearchResult {
   item: Video | Channel | Playlist | User;
   relevanceScore: number;
   snippet?: string;
-  highlights?: string[];
+  highlights?: string;
 }
 
 export interface SearchAnalytics {
@@ -51,7 +51,7 @@ class SearchService {
    * Perform a comprehensive search
    */
   async search(
-    query: string,
+    query,
     filters: SearchFilters = {},
     page: number = 1,
     limit: number = 20,
@@ -68,7 +68,7 @@ class SearchService {
    * Get search suggestions as user types
    */
   async getSearchSuggestions(
-    query: string,
+    query,
     limit: number = 10,
   ): Promise<ApiResponse<SearchSuggestion[]>> {
     return api.get('/api/search/suggestions', { q: query, limit });
@@ -88,7 +88,7 @@ class SearchService {
    * Search videos specifically
    */
   async searchVideos(
-    query: string,
+    query,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
     limit: number = 20,
@@ -105,7 +105,7 @@ class SearchService {
    * Search channels specifically
    */
   async searchChannels(
-    query: string,
+    query,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
     limit: number = 20,
@@ -122,7 +122,7 @@ class SearchService {
    * Search playlists specifically
    */
   async searchPlaylists(
-    query: string,
+    query,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
     limit: number = 20,
@@ -139,7 +139,7 @@ class SearchService {
    * Advanced video search with AI-powered features
    */
   async advancedVideoSearch(
-    query: string,
+    query,
     options: {
       semanticSearch?: boolean; // Use AI to understand intent
       visualSearch?: boolean; // Search by visual content
@@ -197,7 +197,7 @@ class SearchService {
   /**
    * Save search query
    */
-  async saveSearch(query: string, filters: SearchFilters = {}): Promise<ApiResponse<void>> {
+  async saveSearch(query, filters: SearchFilters = {}): Promise<ApiResponse<void>> {
     return api.post('/api/search/save', { query, filters });
   }
 
@@ -217,7 +217,7 @@ class SearchService {
   /**
    * Delete saved search
    */
-  async deleteSavedSearch(searchId: string): Promise<ApiResponse<void>> {
+  async deleteSavedSearch(searchId): Promise<ApiResponse<void>> {
     return api.delete(`/api/search/saved/${searchId}`);
   }
 
@@ -241,7 +241,7 @@ class SearchService {
    * Get related searches
    */
   async getRelatedSearches(
-    query: string,
+    query,
     limit: number = 10,
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/related', { q: query, limit });
@@ -250,7 +250,7 @@ class SearchService {
   /**
    * Get search filters for a category
    */
-  async getCategoryFilters(category: string): Promise<ApiResponse<{
+  async getCategoryFilters(category): Promise<ApiResponse<{
     duration: Array<{ label: string; value: string; count: number }>;
     features: Array<{ label: string; value: string; count: number }>;
     languages: Array<{ label: string; value: string; count: number }>;
@@ -263,7 +263,7 @@ class SearchService {
    * Auto-complete search query
    */
   async autocomplete(
-    query: string,
+    query,
     limit: number = 8,
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/autocomplete', { q: query, limit });
@@ -273,8 +273,8 @@ class SearchService {
    * Search within a specific channel
    */
   async searchInChannel(
-    channelId: string,
-    query: string,
+    channelId,
+    query,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
     limit: number = 20,
@@ -291,8 +291,8 @@ class SearchService {
    * Search within a playlist
    */
   async searchInPlaylist(
-    playlistId: string,
-    query: string,
+    playlistId,
+    query,
     page: number = 1,
     limit: number = 20,
   ): Promise<ApiResponse<Video[]>> {
@@ -316,7 +316,7 @@ class SearchService {
    * Report search quality issue
    */
   async reportSearchIssue(
-    query: string,
+    query,
     issue: 'irrelevant_results' | 'missing_content' | 'inappropriate_content' | 'technical_error',
     description?: string,
   ): Promise<ApiResponse<void>> {

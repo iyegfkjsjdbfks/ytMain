@@ -18,11 +18,11 @@ interface CommentSectionProps {
 interface CommentItemProps {
   comment: Comment;
   isChannelOwner?: boolean;
-  onReply: (parentId: string, content: string) => void;
-  onReact: (commentId: string, type: 'like' | 'dislike') => void;
-  onPin: (commentId: string) => void | Promise<void>;
-  onHeart: (commentId: string) => void | Promise<void>;
-  onReport: (commentId: string, reason: string) => void | Promise<void>;
+  onReply: (parentId, content) => void;
+  onReact: (commentId, type: 'like' | 'dislike') => void;
+  onPin: (commentId) => void | Promise<void>;
+  onHeart: (commentId) => void | Promise<void>;
+  onReport: (commentId, reason) => void | Promise<void>;
   level?: number;
 }
 
@@ -62,7 +62,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
     }
   };
 
-  const formatCount = (count: number): string => {
+  const formatCount = (count): string => {
     if (count >= 1000000) {
 return `${(count / 1000000).toFixed(1)}M`;
 }
@@ -298,7 +298,7 @@ return;
     }
   };
 
-  const handleReply = async (parentId: string, content: string) => {
+  const handleReply = async (parentId, content) => {
     try {
       await createCommentMutation.mutate({
         content,
@@ -310,7 +310,7 @@ return;
     }
   };
 
-  const handleReact = async (commentId: string, type: 'like' | 'dislike') => {
+  const handleReact = async (commentId, type: 'like' | 'dislike') => {
     try {
       await reactToCommentMutation.mutate({
         commentId,
@@ -321,15 +321,15 @@ return;
     }
   };
 
-  const handlePin = async (_commentId: string) => {
+  const handlePin = async (_commentId) => {
     // Implementation for pinning comments
     };
 
-  const handleHeart = async (_commentId: string) => {
+  const handleHeart = async (_commentId) => {
     // Implementation for hearting comments
     };
 
-  const handleReport = async (_commentId: string, _reason: string) => {
+  const handleReport = async (_commentId, _reason) => {
     // Implementation for reporting comments
     };
 

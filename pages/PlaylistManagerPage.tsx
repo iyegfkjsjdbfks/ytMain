@@ -1,3 +1,19 @@
+import React from 'react';
+
+
+
+declare namespace React {
+  interface JSX {
+    IntrinsicElements;
+  }
+  interface Component<P = {}, S = {}> {
+    props: P;
+    state: S;
+  }
+  interface FC<P = {}> {
+    (props: P): JSX.Element;
+  }
+}
 
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
@@ -23,7 +39,7 @@ interface Playlist {
   visibility: 'public' | 'unlisted' | 'private';
   createdDate: Date;
   lastUpdated: Date;
-  videos: PlaylistVideo[];
+  videos: PlaylistVideo;
 }
 
 interface PlaylistStats {
@@ -53,7 +69,7 @@ const PlaylistManagerPage: React.FC = () => {
 
   // Generate mock data
   useEffect(() => {
-    const generateMockVideos = (count: number): PlaylistVideo[] => {
+    const generateMockVideos = (count): PlaylistVideo[] => {
       const titles = [
         'Getting Started with React Hooks',
         'Advanced TypeScript Patterns',
@@ -114,7 +130,7 @@ const PlaylistManagerPage: React.FC = () => {
       }).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
     };
 
-    const generateMockStats = (playlists: Playlist[]): PlaylistStats => {
+    const generateMockStats = (playlists: Playlist): PlaylistStats => {
       return {
         totalPlaylists: playlists.length,
         totalVideos: playlists.reduce((sum, playlist) => sum + playlist.videoCount, 0),
@@ -140,7 +156,7 @@ const PlaylistManagerPage: React.FC = () => {
       const matchesVisibility = filterVisibility === 'all' || playlist.visibility === filterVisibility;
       return matchesSearch && matchesVisibility;
     })
-    .sort((a: any, b) => {
+    .sort((a, b) => {
       switch (sortBy) {
         case 'title':
           return a.title.localeCompare(b.title);
@@ -178,7 +194,7 @@ return;
     setShowCreateModal(false);
   };
 
-  const handleDeletePlaylist = (playlistId: string) => {
+  const handleDeletePlaylist = (playlistId) => {
     if (confirm('Are you sure you want to delete this playlist?')) {
       setPlaylists(playlists.filter((p) => p.id !== playlistId));
       if (selectedPlaylist?.id === playlistId) {
@@ -199,11 +215,11 @@ return;
 
       const updatedPlaylist = { ...selectedPlaylist, videos: items };
       setSelectedPlaylist(updatedPlaylist);
-      setPlaylists(playlists.map(p => p.id === selectedPlaylist.id ? updatedPlaylist : p: any));
+      setPlaylists(playlists.map(p => p.id === selectedPlaylist.id ? updatedPlaylist : p));
     }
   };
 
-  const getVisibilityIcon = (visibility: string) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public':
         return <GlobeAltIcon className="w-4 h-4" />;
@@ -363,7 +379,7 @@ return;
                         </div>
                         <div className="flex items-center space-x-2 ml-4">
                           <button
-                            onClick={(e: Event) => {
+                            onClick={(e) => {
                               e.stopPropagation();
                               setSelectedPlaylist(playlist);
 }}
@@ -372,7 +388,7 @@ return;
                             <PencilIcon className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={(e: Event) => {
+                            onClick={(e) => {
                               e.stopPropagation();
                               handleDeletePlaylist(playlist.id);
                             }}
@@ -431,9 +447,9 @@ return;
                     <Droppable droppableId="playlist-videos">
                       {(provided) => (
                         <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video, index: number) => (
+                          {selectedPlaylist.videos.map((video, index) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
-                              {(provided: any, snapshot) => (
+                              {(provided, snapshot) => (
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}

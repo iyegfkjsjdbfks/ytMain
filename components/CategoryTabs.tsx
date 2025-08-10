@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -15,7 +16,7 @@ interface Category {
 }
 
 interface CategoryTabsProps {
-  categories: Category[];
+  categories: Category;
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies';
   setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void;
 }

@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -11,7 +12,7 @@ declare global {
 
 interface TabsContextType {
   value: string;
-  onValueChange: (value: string) => void;
+  onValueChange: (value) => void;
 }
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
@@ -26,7 +27,7 @@ const useTabsContext = () => {
 
 export interface TabsProps {
   value: string;
-  onValueChange: (value: string) => void;
+  onValueChange: (value) => void;
   children: React.ReactNode;
   className?: string;
 }

@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -202,7 +203,7 @@ const DevOpsDashboard: React.FC = () => {
   }, []);
 
   // Get severity color
-  const getSeverityColor = (severity: string) => {
+  const getSeverityColor = (severity) => {
     switch (severity) {
       case 'critical': return 'text-red-600 bg-red-100';
       case 'high': return 'text-orange-600 bg-orange-100';
@@ -213,7 +214,7 @@ const DevOpsDashboard: React.FC = () => {
   };
 
   // Get score color
-  const getScoreColor = (score: number) => {
+  const getScoreColor = (score) => {
     if (score >= 90) {
 return 'text-green-600';
 }
