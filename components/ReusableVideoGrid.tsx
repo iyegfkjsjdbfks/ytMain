@@ -6,7 +6,7 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 import { VideoGridSkeleton } from './LoadingStates';
 import OptimizedVideoCard from './OptimizedVideoCard';

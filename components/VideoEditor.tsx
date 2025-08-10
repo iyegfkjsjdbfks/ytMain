@@ -6,8 +6,8 @@ declare global {
     }
   }
 }
-import { useState, useRef, useEffect, memo } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect, memo } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   PlayIcon,

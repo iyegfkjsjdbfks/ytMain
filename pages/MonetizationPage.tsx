@@ -1,6 +1,6 @@
-import { useState, useEffect, memo, lazy, Suspense } from 'react';
+// TODO: Fix import - import { useState, useEffect, memo, lazy, Suspense } from 'react';
 
-import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
 import {
   Chart as ChartJS,

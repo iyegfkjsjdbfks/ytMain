@@ -1,4 +1,4 @@
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 /**
  * YourDataPage component for displaying and managing user data and privacy settings

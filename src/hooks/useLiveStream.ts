@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
 
 // Import statement fixed

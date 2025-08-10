@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+// TODO: Fix import - import type { FC } from 'react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';

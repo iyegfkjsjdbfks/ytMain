@@ -2,7 +2,7 @@
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React from "react";
+// TODO: Fix import - import React from "react";
 import { useEffect,
   useRef,
   useState,

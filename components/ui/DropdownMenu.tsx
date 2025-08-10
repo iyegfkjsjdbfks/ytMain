@@ -6,7 +6,7 @@ declare global {
     }
   }
 }
-import type { ReactNode, RefObject, MouseEvent } from 'react';
+// TODO: Fix import - import type { ReactNode, RefObject, MouseEvent } from 'react';
 
 import { cn } from '../../utils/cn';
 

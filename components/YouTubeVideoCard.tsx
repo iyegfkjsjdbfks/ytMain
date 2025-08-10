@@ -8,9 +8,9 @@ declare global {
 }
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 import { buildVideoUrl } from '../utils/componentUtils';
 

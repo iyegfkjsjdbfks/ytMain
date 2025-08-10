@@ -6,9 +6,9 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { XMarkIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ShortsFiltersProps {
   categories: string[];

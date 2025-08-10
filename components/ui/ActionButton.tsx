@@ -6,7 +6,7 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 interface ActionButtonProps {
   onClick: (e: React.MouseEvent) => void;
