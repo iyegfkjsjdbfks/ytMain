@@ -94,17 +94,21 @@ class TS6133Fixer {
         let content = readFileSync(full, 'utf8');
         let modified = false;
 
-      // Remove unused React import when not needed
-      if (/['\"]react['\"]/.test(content) && /import\s+React\s+from\s+['\"]react['\"];?/.test(content)) {
-        // If no JSX pragma usage or React variable references
-        if (!/React\./.test(content)) {
-          content = content.replace(/import\s+React\s+from\s+['\"]react['\"];?\n?/, '');
-          modified = true;
-        }
-      }
+        // Remove unused React import when not needed (more comprehensive)
+        if (/import\s+React\s+from\s+['\"]react['\"];?/.test(content)) {
+          // Check if React is actually used (JSX, React.*, or JSX elements)
+          const hasJSX = /<[A-Z][^>]*>/.test(content) || /<\/[A-Z][^>]*>/.test(content);
+          const hasReactUsage = /React\./.test(content);
+          const hasJSXElements = /<[a-z][^>]*>/.test(content); // HTML elements in JSX
 
-        // Remove unused named imports from braces (more conservative approach)
-        content = content.replace(/import\s+\{([^}]+)\}\s+from\s+['\"][^'\"]+['\"];?\n?/g, (match, names) => {
+          if (!hasJSX && !hasReactUsage && !hasJSXElements) {
+            content = content.replace(/import\s+React\s+from\s+['\"]react['\"];?\n?/, '');
+            modified = true;
+          }
+        }
+
+        // Remove unused named imports from braces (enhanced approach)
+        content = content.replace(/import\s+\{([^}]+)\}\s+from\s+['\"]([^'\"]+)['\"];?\n?/g, (match, names, moduleName) => {
           try {
             const importNames = names.split(',').map(n => n.trim()).filter(Boolean);
             const usedNames = importNames.filter(name => {
@@ -112,22 +116,75 @@ class TS6133Fixer {
               const actualName = name.includes(' as ') ? name.split(' as ')[1].trim() : name.trim();
               // Check if the name is used in the rest of the content (excluding this import line)
               const contentWithoutImport = content.replace(match, '');
-              return new RegExp(`\\b${actualName}\\b`).test(contentWithoutImport);
+
+              // More comprehensive usage check
+              const usagePatterns = [
+                new RegExp(`\\b${actualName}\\b`), // Direct usage
+                new RegExp(`${actualName}\\(`), // Function call
+                new RegExp(`${actualName}\\.`), // Property access
+                new RegExp(`<${actualName}[\\s>]`), // JSX component
+                new RegExp(`</${actualName}>`), // JSX closing tag
+              ];
+
+              return usagePatterns.some(pattern => pattern.test(contentWithoutImport));
             });
 
             if (usedNames.length === 0) {
               modified = true;
+              this.log(`Removing unused import from ${moduleName}`);
               return ''; // Remove entire import
             }
             if (usedNames.length !== importNames.length) {
               modified = true;
-              return `import { ${usedNames.join(', ')} } from` + match.split('from')[1];
+              this.log(`Cleaning unused imports from ${moduleName}`);
+              return `import { ${usedNames.join(', ')} } from '${moduleName}';\n`;
             }
             return match; // No changes needed
           } catch (regexError) {
             // If regex processing fails, keep the original import to be safe
             return match;
           }
+        });
+
+        // Remove unused variable declarations
+        content = content.replace(/^\s*(const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*[^;]+;?\s*$/gm, (match, keyword, varName) => {
+          // Check if variable is used elsewhere in the file
+          const contentWithoutDeclaration = content.replace(match, '');
+          const isUsed = new RegExp(`\\b${varName}\\b`).test(contentWithoutDeclaration);
+
+          if (!isUsed) {
+            modified = true;
+            this.log(`Removing unused variable: ${varName}`);
+            return ''; // Remove the declaration
+          }
+          return match;
+        });
+
+        // Remove unused function parameters (prefix with underscore)
+        content = content.replace(/function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(([^)]+)\)/g, (match, funcName, params) => {
+          const paramList = params.split(',').map(p => p.trim());
+          const modifiedParams = paramList.map(param => {
+            const paramName = param.split(':')[0].trim();
+            if (paramName && !paramName.startsWith('_')) {
+              // Check if parameter is used in function body
+              const funcBodyRegex = new RegExp(`function\\s+${funcName}\\s*\\([^)]*\\)\\s*\\{([^}]*)\\}`, 's');
+              const funcBodyMatch = content.match(funcBodyRegex);
+              if (funcBodyMatch) {
+                const funcBody = funcBodyMatch[1];
+                const isParamUsed = new RegExp(`\\b${paramName}\\b`).test(funcBody);
+                if (!isParamUsed) {
+                  modified = true;
+                  return param.replace(paramName, `_${paramName}`);
+                }
+              }
+            }
+            return param;
+          });
+
+          if (modifiedParams.join(', ') !== params) {
+            return `function ${funcName}(${modifiedParams.join(', ')})`;
+          }
+          return match;
         });
 
         if (modified) {

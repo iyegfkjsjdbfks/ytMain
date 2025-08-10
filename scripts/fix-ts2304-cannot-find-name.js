@@ -145,17 +145,29 @@ class TS2304Fixer {
     let modified = false;
     let newContent = content;
 
-    // Pattern 1: Fix parameter underscore issues (e.g., _context vs context)
+    // Pattern 1: Fix parameter underscore issues (e.g., _context vs context) - More conservative
     if (varName.startsWith('_') || content.includes(`_${varName}`)) {
       const underscoredVar = varName.startsWith('_') ? varName : `_${varName}`;
       const normalVar = varName.startsWith('_') ? varName.substring(1) : varName;
-      
-      // Check if the underscored version exists in function parameters
-      const funcParamRegex = new RegExp(`\\(([^)]*${underscoredVar}[^)]*)\\)`, 'g');
-      if (funcParamRegex.test(content)) {
-        // Replace usage with underscored version
-        newContent = newContent.replace(new RegExp(`\\b${normalVar}\\b`, 'g'), underscoredVar);
-        modified = true;
+
+      // Only fix if we can find the exact parameter in a function signature
+      const funcParamRegex = new RegExp(`\\(([^)]*\\b${underscoredVar}\\b[^)]*)\\)`, 'g');
+      const matches = content.match(funcParamRegex);
+
+      if (matches && matches.length > 0) {
+        // Only replace in the specific error context, not globally
+        for (const error of errors) {
+          const lines = newContent.split('\n');
+          const lineIndex = error.line - 1;
+          if (lineIndex < lines.length) {
+            const line = lines[lineIndex];
+            if (line.includes(normalVar) && !line.includes(underscoredVar)) {
+              lines[lineIndex] = line.replace(new RegExp(`\\b${normalVar}\\b`, 'g'), underscoredVar);
+              newContent = lines.join('\n');
+              modified = true;
+            }
+          }
+        }
       }
     }
 

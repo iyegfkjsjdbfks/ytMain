@@ -220,7 +220,7 @@ class MasterErrorFixer {
       return;
     }
 
-    // Define fixers in optimal order (dependencies first, then progressively safer fixes)
+    // Define fixers in optimal order (high-impact errors first)
     const fixers = [
       {
         name: 'Cannot Find Name',
@@ -229,16 +229,28 @@ class MasterErrorFixer {
         description: 'Fixes undefined variables and missing imports'
       },
       {
-        name: 'Duplicate Identifier',
-        script: 'fix-ts2300-duplicate-identifier.js',
-        errorCode: '2300',
-        description: 'Removes duplicate imports and declarations'
-      },
-      {
         name: 'Declared But Not Used',
         script: 'fix-ts6133-declared-not-used.js',
         errorCode: '6133',
         description: 'Removes unused imports and variables'
+      },
+      {
+        name: 'Enhanced Type Not Assignable',
+        script: 'fix-ts2322-enhanced.js',
+        errorCode: '2322',
+        description: 'Smart fixes for type assignment errors'
+      },
+      {
+        name: 'Argument Type Mismatch',
+        script: 'fix-ts2345-argument-type.js',
+        errorCode: '2345',
+        description: 'Fixes function argument type mismatches'
+      },
+      {
+        name: 'Duplicate Identifier',
+        script: 'fix-ts2300-duplicate-identifier.js',
+        errorCode: '2300',
+        description: 'Removes duplicate imports and declarations'
       },
       {
         name: 'Implicit Any Type',
@@ -247,7 +259,7 @@ class MasterErrorFixer {
         description: 'Adds explicit types to rest parameters'
       },
       {
-        name: 'Type Not Assignable',
+        name: 'Type Not Assignable (Legacy)',
         script: 'fix-ts2322-type-not-assignable.js',
         errorCode: '2322',
         description: 'Adds type casts and conversions'
