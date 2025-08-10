@@ -148,7 +148,7 @@ return false;
   });
 
   const handleSelectItem = (itemId: string) => {
-    setSelectedItems(prev: any =>
+    setSelectedItems(prev =>
       prev.includes(itemId)
         ? prev.filter((id: any) => id !== itemId)
         : [...prev, itemId],
@@ -168,7 +168,7 @@ return false;
   };
 
   const handleBulkAction = (action: ModerationAction) => {
-    selectedItems.forEach(itemId: any => {
+    selectedItems.forEach(itemId => {
       handleModerationAction(itemId, action);
     });
     setSelectedItems([]);
@@ -298,7 +298,7 @@ return false;
               <div className="flex items-center gap-4">
                 <select
                   value={filterSeverity}
-                  onChange={(e: Event) => setFilterSeverity(e: Event.target.value)}
+                  onChange={(e) => setFilterSeverity(e.target.value)}
                   className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="all">All Severities</option>
@@ -310,7 +310,7 @@ return false;
 
                 <select
                   value={filterType}
-                  onChange={(e: Event) => setFilterType(e: Event.target.value)}
+                  onChange={(e) => setFilterType(e.target.value)}
                   className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="all">All Types</option>

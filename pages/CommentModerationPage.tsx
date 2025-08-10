@@ -75,7 +75,7 @@ const CommentModerationPage: React.FC = () => {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(comment: any =>
+      filtered = filtered.filter(comment =>
         comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -117,14 +117,14 @@ const CommentModerationPage: React.FC = () => {
       setSelectedComments(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedComments(new Set(filteredComments.map(c: any => c: any.id)));
+      setSelectedComments(new Set(filteredComments.map(c => c: any.id)));
       setShowBulkActions(true);
     }
   };
 
   const handleBulkAction = (action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments: any =>
-      prevComments.map(comment: any => {
+    setComments(prevComments =>
+      prevComments.map(comment => {
         if (selectedComments.has(comment.id)) {
           if (action === 'delete') {
             return null; // Will be filtered out
@@ -142,8 +142,8 @@ const CommentModerationPage: React.FC = () => {
   };
 
   const handleSingleAction = (commentId: string, action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments: any =>
-      prevComments.map(comment: any => {
+    setComments(prevComments =>
+      prevComments.map(comment => {
         if (comment.id === commentId) {
           if (action === 'delete') {
             return null; // Will be filtered out
@@ -248,13 +248,13 @@ return comments.filter((c: any) => c.flaggedReason).length;
                 type="text"
                 placeholder="Search comments..."
                 value={searchQuery}
-                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
               />
             </div>
             <select
               value={sortBy}
-              onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
+              onChange={(e) => setSortBy(e.target.value as SortType)}
               className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="newest">Newest First</option>

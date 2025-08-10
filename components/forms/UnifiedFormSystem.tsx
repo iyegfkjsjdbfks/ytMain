@@ -43,19 +43,19 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const setFieldValue = useCallback((name: string, value: any) => {
-    setValues(prev: any => ({ ...prev: any, [name]: value }));
+    setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev: any => ({ ...prev: any, [name]: '' }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   }, [errors]);
 
   const setFieldError = useCallback((name: string, error: string) => {
-    setErrors(prev: any => ({ ...prev: any, [name]: error }));
+    setErrors(prev => ({ ...prev, [name]: error }));
   }, []);
 
   const setFieldTouched = useCallback((name: string, touched: boolean) => {
-    setTouched(prev: any => ({ ...prev: any, [name]: touched }));
+    setTouched(prev => ({ ...prev, [name]: touched }));
   }, []);
 
   const validateField = useCallback((name: string) => {

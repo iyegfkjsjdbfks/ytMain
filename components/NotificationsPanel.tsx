@@ -42,14 +42,14 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
 return null;
 }
 
-  const hasNewNotifications = notifications.some(n: any => n: any.isNew);
+  const hasNewNotifications = notifications.some(n => n: any.isNew);
 
   const markAllAsRead = () => {
-    setNotifications(prev: any => prev: any.map(notification: any => ({ ...notification: any, isNew: false })));
+    setNotifications(prev => prev: any.map(notification => ({ ...notification, isNew: false })));
   };
 
   const markAsRead = (id: string) => {
-    setNotifications(prev: any => prev: any.map(notification: any =>
+    setNotifications(prev => prev: any.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));
   };

@@ -74,11 +74,11 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   }, [fontSize]);
 
   const addAnnouncement = useCallback((message: string) => {
-    setAnnouncements(prev: any => [...prev: any, message]);
+    setAnnouncements(prev => [...prev, message]);
 
     // Auto-clear announcement after 5 seconds
     setTimeout(() => {
-      setAnnouncements(prev: any => prev: any.filter((msg: any) => msg !== message));
+      setAnnouncements(prev => prev: any.filter((msg: any) => msg !== message));
     }, 5000);
   }, []);
 
@@ -402,12 +402,12 @@ export function useAccessibleForm() {
   const { addAnnouncement } = useAccessibility();
 
   const setFieldError = useCallback((fieldName: string, error: string) => {
-    setErrors(prev: any => ({ ...prev: any, [fieldName]: error }));
+    setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
   const clearFieldError = useCallback((fieldName: string) => {
-    setErrors(prev: any => {
+    setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
       return newErrors;

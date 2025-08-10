@@ -62,7 +62,7 @@ return;
             ref={inputRef}
             type="text"
             value={commentText}
-            onChange={(e: Event) => setCommentText(e: Event.target.value)}
+            onChange={(e) => setCommentText(e.target.value)}
             onFocus={() => setIsFocused(true)}
             placeholder="Add a comment..."
             className="bg-transparent border-b border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-sky-500 w-full py-2 outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm transition-colors"

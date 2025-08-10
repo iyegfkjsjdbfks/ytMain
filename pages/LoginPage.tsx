@@ -99,7 +99,7 @@ const LoginPage: React.FC = () => {
                   autoComplete="email"
                   required
                   value={email}
-                  onChange={(e: Event) => setEmail(e: Event.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full"
                   placeholder="Enter your email"
                 />
@@ -118,7 +118,7 @@ const LoginPage: React.FC = () => {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(e: Event) => setPassword(e: Event.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full"
                   placeholder="Enter your password"
                 />

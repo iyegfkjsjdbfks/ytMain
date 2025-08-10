@@ -34,10 +34,10 @@ export function useFormState<T extends Record<string, any>>({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const setValue = useCallback((field: keyof T, value: any) => {
-    setValuesState(prev: any => ({ ...prev: any, [field]: value }));
+    setValuesState(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev: any => {
+      setErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[field];
         return newErrors;
@@ -46,15 +46,15 @@ export function useFormState<T extends Record<string, any>>({
   }, [errors]);
 
   const setValues = useCallback((newValues: Partial<T>) => {
-    setValuesState(prev: any => ({ ...prev: any, ...newValues }));
+    setValuesState(prev => ({ ...prev, ...newValues }));
   }, []);
 
   const setError = useCallback((field: keyof T, error: string) => {
-    setErrors(prev: any => ({ ...prev: any, [field]: error }));
+    setErrors(prev => ({ ...prev, [field]: error }));
   }, []);
 
   const clearError = useCallback((field: keyof T) => {
-    setErrors(prev: any => {
+    setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[field];
       return newErrors;

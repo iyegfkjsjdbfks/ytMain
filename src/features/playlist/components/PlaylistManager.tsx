@@ -48,7 +48,7 @@ return;
 
   const addTag = () => {
     if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
-      setFormData(prev: any => ({
+      setFormData(prev => ({
         ...prev,
         tags: [...prev.tags, tagInput.trim()],
       }));
@@ -57,7 +57,7 @@ return;
   };
 
   const removeTag = (tagToRemove: string) => {
-    setFormData(prev: any => ({
+    setFormData(prev => ({
       ...prev,
       tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
@@ -82,7 +82,7 @@ return null;
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Enter playlist title..."
                 required
@@ -95,7 +95,7 @@ return null;
             </div>
             <textarea
               value={formData.description}
-              onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
+              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               rows={3}
               placeholder="Enter playlist description..."
@@ -108,7 +108,7 @@ return null;
             </div>
             <select
               value={formData.visibility}
-              onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, visibility: e: Event.target.value as any }))}
+              onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value as any }))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="public">Public</option>
@@ -125,7 +125,7 @@ return null;
               <input
                 type="text"
                 value={tagInput}
-                onChange={(e: Event) => setTagInput(e: Event.target.value)}
+                onChange={(e) => setTagInput(e.target.value)}
                 onKeyPress={(e: Event) => e: Event.key === 'Enter' && (e: Event.preventDefault(), addTag())}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Add tags..."
@@ -277,7 +277,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
           <input
             type="text"
             value={searchQuery}
-            onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search playlists..."
             className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
@@ -286,7 +286,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
         <div className="flex items-center gap-4">
           <select
             value={sortBy}
-            onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="recent">Recently updated</option>

@@ -199,7 +199,7 @@ return;
 
       const updatedPlaylist = { ...selectedPlaylist, videos: items };
       setSelectedPlaylist(updatedPlaylist);
-      setPlaylists(playlists.map(p: any => p: any.id === selectedPlaylist.id ? updatedPlaylist : p: any));
+      setPlaylists(playlists.map(p => p: any.id === selectedPlaylist.id ? updatedPlaylist : p: any));
     }
   };
 
@@ -301,13 +301,13 @@ return;
                 type="text"
                 placeholder="Search playlists..."
                 value={searchTerm}
-                onChange={(e: Event) => setSearchTerm(e: Event.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
 
               <select
                 value={sortBy}
-                onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="updated">Last Updated</option>
@@ -318,7 +318,7 @@ return;
 
               <select
                 value={filterVisibility}
-                onChange={(e: Event) => setFilterVisibility(e: Event.target.value as any)}
+                onChange={(e) => setFilterVisibility(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Visibility</option>
@@ -431,7 +431,7 @@ return;
                     <Droppable droppableId="playlist-videos">
                       {(provided: any) => (
                         <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video: any, index: number) => (
+                          {selectedPlaylist.videos.map((video, index: number) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
                               {(provided: any, snapshot: any) => (
                                 <div
@@ -488,7 +488,7 @@ return;
                     type="text"
                     id="new-playlist-title"
                     value={newPlaylist.title}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, title: e: Event.target.value })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     placeholder="Enter playlist title"
                   />
@@ -499,7 +499,7 @@ return;
                   <textarea
                     id="new-playlist-description"
                     value={newPlaylist.description}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, description: e: Event.target.value })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, description: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
                     rows={3}
                     placeholder="Enter playlist description"
@@ -511,7 +511,7 @@ return;
                   <select
                     id="new-playlist-visibility"
                     value={newPlaylist.visibility}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, visibility: e: Event.target.value as any })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, visibility: e.target.value as any })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
                     <option value="public">Public</option>

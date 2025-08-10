@@ -292,7 +292,7 @@ return false;
             <div className="mt-3">
               <select
                 value={selectedCategory}
-                onChange={(e: Event) => setSelectedCategory(e: Event.target.value)}
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm"
               >
                 {categories.map((category) => (

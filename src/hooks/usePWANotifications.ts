@@ -96,12 +96,12 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       return 'granted';
     }
 
-    setState(prev: any => ({ ...prev: any, isRequesting: true }));
+    setState(prev => ({ ...prev, isRequesting: true }));
 
     try {
       const permission = await Notification.requestPermission();
 
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         permission: permission as NotificationPermission,
         isRequesting: false,
@@ -118,7 +118,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
       return permission as NotificationPermission;
     } catch (error) {
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         permission: 'denied',
         isRequesting: false,
@@ -209,7 +209,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       );
 
       // Queue for later
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         pendingNotifications: [...prev.pendingNotifications, options],
       }));
@@ -275,7 +275,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       }
 
       // Update state
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         lastNotificationTime: Date.now(),
         notificationCount: prev.notificationCount + 1,
@@ -487,7 +487,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   // Initialize permission state
   useEffect(() => {
     if (state.isSupported) {
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         permission: Notification.permission as NotificationPermission,
       }));
@@ -498,12 +498,12 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   useEffect(() => {
     if (!isQuietHours() && state.pendingNotifications.length > 0) {
       // Show pending notifications
-      state.pendingNotifications.forEach(notification: any => {
+      state.pendingNotifications.forEach(notification => {
         showNotification(notification);
       });
 
       // Clear pending notifications
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         pendingNotifications: [],
       }));

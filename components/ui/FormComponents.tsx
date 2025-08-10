@@ -144,7 +144,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
     id,
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
@@ -221,7 +221,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
     id,
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   const textareaId = id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
@@ -287,7 +287,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
     id,
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
@@ -366,7 +366,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
     id,
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;

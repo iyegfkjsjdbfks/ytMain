@@ -439,7 +439,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
         return [];
       }
 
-      const maxValue = Math.max(...rawData.map(p: any => getMetricValue(p: any, selectedMetric))) || 1;
+      const maxValue = Math.max(...rawData.map(p => getMetricValue(p, selectedMetric))) || 1;
 
       return rawData.map((point: any, index: number) => {
         const value = getMetricValue(point, selectedMetric);
@@ -502,7 +502,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
         <div className="flex items-center space-x-2">
           <select
             value={timeRange}
-            onChange={(e: Event) => {
+            onChange={(e) => {
               setTimeRange(e.target.value as TimeRange);
             }}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -572,7 +572,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Viewer Trends</h3>
             <select
               value={selectedMetric}
-              onChange={(e: Event) => {
+              onChange={(e) => {
                 setSelectedMetric(e.target.value as MetricType);
               }}
               className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"

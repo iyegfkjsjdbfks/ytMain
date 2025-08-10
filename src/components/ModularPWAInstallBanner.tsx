@@ -106,7 +106,7 @@ return;
       }
 
       if (shouldShow) {
-        setState(prev: any => ({
+        setState(prev => ({
           ...prev,
           isVisible: true,
           currentView,
@@ -127,7 +127,7 @@ return;
 
   // Handle install
   const handleInstall = useCallback(async () => {
-    setState(prev: any => ({ ...prev: any, isAnimating: true }));
+    setState(prev => ({ ...prev, isAnimating: true }));
 
     try {
       const success = await installPrompt.installApp();
@@ -136,13 +136,13 @@ return;
         conditionalLogger.info('PWA installed successfully', undefined, 'ModularPWAInstallBanner');
         onInstallSuccess?.();
 
-        setState(prev: any => ({
+        setState(prev => ({
           ...prev,
           isVisible: false,
           isAnimating: false,
         }));
       } else {
-        setState(prev: any => ({ ...prev: any, isAnimating: false }));
+        setState(prev => ({ ...prev, isAnimating: false }));
       }
     } catch (error) {
       conditionalLogger.error(
@@ -150,13 +150,13 @@ return;
         { error: error instanceof Error ? error.message : 'Unknown error' },
         'ModularPWAInstallBanner',
       );
-      setState(prev: any => ({ ...prev: any, isAnimating: false }));
+      setState(prev => ({ ...prev, isAnimating: false }));
     }
   }, [installPrompt.installApp, onInstallSuccess]);
 
   // Handle update
   const handleUpdate = useCallback(async () => {
-    setState(prev: any => ({ ...prev: any, isAnimating: true }));
+    setState(prev => ({ ...prev, isAnimating: true }));
 
     try {
       await pwaUpdates.installUpdate();
@@ -169,28 +169,28 @@ return;
       );
     }
 
-    setState(prev: any => ({ ...prev: any, isAnimating: false }));
+    setState(prev => ({ ...prev, isAnimating: false }));
   }, [pwaUpdates.installUpdate, onUpdateInstall]);
 
   // Handle notification permission
   const handleNotificationPermission = useCallback(async () => {
-    setState(prev: any => ({ ...prev: any, isAnimating: true }));
+    setState(prev => ({ ...prev, isAnimating: true }));
 
     try {
       await notifications.requestPermission();
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isVisible: false,
         isAnimating: false,
       }));
     } catch (error) {
-      setState(prev: any => ({ ...prev: any, isAnimating: false }));
+      setState(prev => ({ ...prev, isAnimating: false }));
     }
   }, [notifications.requestPermission]);
 
   // Handle dismiss
   const handleDismiss = useCallback(() => {
-    setState(prev: any => ({
+    setState(prev => ({
       ...prev,
       isVisible: false,
       dismissedAt: Date.now(),

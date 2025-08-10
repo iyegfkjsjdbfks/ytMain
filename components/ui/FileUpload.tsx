@@ -119,7 +119,7 @@ return '0 Bytes';
           type="file"
           accept={accept}
           multiple={multiple}
-          onChange={(e: Event) => handleFileSelect(e: Event.target.files)}
+          onChange={(e) => handleFileSelect(e: Event.target.files)}
           className="hidden"
           disabled={disabled}
         />

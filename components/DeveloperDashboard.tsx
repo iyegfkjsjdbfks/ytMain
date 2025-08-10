@@ -349,7 +349,7 @@ return 0;
             {/* Refresh interval */}
             <select
               value={refreshInterval}
-              onChange={(e: Event) => setRefreshInterval(Number(e: Event.target.value))}
+              onChange={(e) => setRefreshInterval(Number(e.target.value))}
               className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               disabled={!autoRefresh}
             >
@@ -464,7 +464,7 @@ return 0;
               {actionableSuggestions.length > 0 && (
                 <button
                   onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
-                    actionableSuggestions.slice(0, 3).map(s: any => s: any.id),
+                    actionableSuggestions.slice(0, 3).map(s => s: any.id),
                   )}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
                 >

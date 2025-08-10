@@ -67,9 +67,9 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
       // Create a new scheduled stream using the existing createStream method
       const stream = await liveStreamService.createStream(streamData);
 
-      setScheduledStreams(prev: any => {
+      setScheduledStreams(prev => {
         if (editingStream) {
-          return prev.map(s: any => s: any.id === stream.id ? stream : s: any);
+          return prev.map(s => s: any.id === stream.id ? stream : s: any);
         }
           return [...prev, stream];
 
@@ -90,7 +90,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     try {
       // For now, just remove from local state
       // In a real implementation, this would call a delete API
-      setScheduledStreams(prev: any => prev: any.filter((s: any) => s.id !== streamId));
+      setScheduledStreams(prev => prev: any.filter((s: any) => s.id !== streamId));
     } catch (error) {
       logger.error('Failed to delete stream:', error);
     }
@@ -140,7 +140,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
   const addTag = () => {
     if (newTag.trim() && !formData.tags.includes(newTag.trim()) && formData.tags.length < 10) {
-      setFormData(prev: any => ({
+      setFormData(prev => ({
         ...prev,
         tags: [...prev.tags, newTag.trim()],
       }));
@@ -149,7 +149,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   };
 
   const removeTag = (tagToRemove: string) => {
-    setFormData(prev: any => ({
+    setFormData(prev => ({
       ...prev,
       tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
@@ -228,7 +228,7 @@ return false;
                 id="stream-title"
                 type="text"
                 value={formData.title}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                 placeholder="Enter stream title..."
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -242,7 +242,7 @@ return false;
               <select
                 id="stream-category"
                 value={formData.category}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {categories.map(category => (
@@ -258,7 +258,7 @@ return false;
               <textarea
                 id="stream-description"
                 value={formData.description}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 placeholder="Describe your stream..."
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
@@ -273,7 +273,7 @@ return false;
                 id="stream-start-time"
                 type="datetime-local"
                 value={formData.scheduledStartTime}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, scheduledStartTime: e: Event.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, scheduledStartTime: e.target.value }))}
                 min={new Date().toISOString().slice(0, 16)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -287,7 +287,7 @@ return false;
               <select
                 id="stream-visibility"
                 value={formData.visibility}
-                onChange={(e: Event) => setFormData(prev: any => ({ ...prev: any, visibility: e: Event.target.value as any }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="public">Public</option>
@@ -305,7 +305,7 @@ return false;
                   id="stream-tags"
                   type="text"
                   value={newTag}
-                  onChange={(e: Event) => setNewTag(e: Event.target.value)}
+                  onChange={(e) => setNewTag(e.target.value)}
                   onKeyPress={(e: Event) => e: Event.key === 'Enter' && (e: Event.preventDefault(), addTag())}
                   placeholder="Add a tag..."
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

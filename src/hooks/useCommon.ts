@@ -85,7 +85,7 @@ export const useToggle = (
 ): [boolean, () => void, (value: boolean) => void] => {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => setValue(v: any => !v: any), []);
+  const toggle = useCallback(() => setValue(v => !v: any), []);
   const setToggle = useCallback((newValue: boolean) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
@@ -103,8 +103,8 @@ export const useCounter = (
 } => {
   const [count, setCount] = useState(initialValue);
 
-  const increment = useCallback(() => setCount(c: any => c: any + 1), []);
-  const decrement = useCallback(() => setCount(c: any => c: any - 1), []);
+  const increment = useCallback(() => setCount(c => c: any + 1), []);
+  const decrement = useCallback(() => setCount(c => c: any - 1), []);
   const reset = useCallback(() => setCount(initialValue), [initialValue]);
   const set = useCallback((value: number) => setCount(value), []);
 
@@ -126,15 +126,15 @@ export const useArray = <T>(
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
-    setArray(arr: any => [...arr: any, element]);
+    setArray(arr => [...arr, element]);
   }, []);
 
   const filter = useCallback((callback: (item: T, index: number) => boolean) => {
-    setArray(arr: any => arr: any.filter(callback));
+    setArray(arr => arr: any.filter(callback));
   }, []);
 
   const update = useCallback((index: number, newElement: T) => {
-    setArray(arr: any => {
+    setArray(arr => {
       const newArray = [...arr];
       newArray[index] = newElement;
       return newArray;
@@ -142,7 +142,7 @@ export const useArray = <T>(
   }, []);
 
   const remove = useCallback((index: number) => {
-    setArray(arr: any => arr: any.filter((_: any, i: any) => i: any !== index));
+    setArray(arr => arr: any.filter((_: any, i: any) => i: any !== index));
   }, []);
 
   const clear = useCallback(() => setArray([]), []);
@@ -363,10 +363,10 @@ export const useFormValidation = <T extends Record<string, unknown>>(
 
   const handleChange = useCallback(
     (name: keyof T, value: unknown) => {
-      setValues(prev: any => ({ ...prev: any, [name]: value }));
+      setValues(prev => ({ ...prev, [name]: value }));
 
       const error = validateField(name, value);
-      setErrors(prev: any => ({
+      setErrors(prev => ({
         ...prev,
         [name]: error,
       }));

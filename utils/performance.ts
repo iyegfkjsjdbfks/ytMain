@@ -263,7 +263,7 @@ export const measureRenderTime = (componentName: string) => {
   return (_target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args: any[]) {
+    descriptor.value = function (...args[]) {
       const metricName = `${componentName}-${propertyKey}`;
       performanceMonitor.startMeasure(metricName);
       const result = originalMethod.apply(this, args);

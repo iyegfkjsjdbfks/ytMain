@@ -70,12 +70,12 @@ const ChannelCustomizationPage: React.FC = () => {
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
   const handleInputChange = (field: keyof ChannelBranding, value: any) => {
-    setBranding(prev: any => ({ ...prev: any, [field]: value }));
+    setBranding(prev => ({ ...prev, [field]: value }));
     setUnsavedChanges(true);
   };
 
   const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: string) => {
-    setBranding(prev: any => ({
+    setBranding(prev => ({
       ...prev,
       socialLinks: { ...prev.socialLinks, [platform]: value },
     }));
@@ -84,7 +84,7 @@ const ChannelCustomizationPage: React.FC = () => {
 
   const handleKeywordAdd = (keyword: string) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
-      setBranding(prev: any => ({
+      setBranding(prev => ({
         ...prev,
         channelKeywords: [...prev.channelKeywords, keyword.trim()],
       }));
@@ -93,7 +93,7 @@ const ChannelCustomizationPage: React.FC = () => {
   };
 
   const handleKeywordRemove = (keyword: string) => {
-    setBranding(prev: any => ({
+    setBranding(prev => ({
       ...prev,
       channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword),
     }));
@@ -374,7 +374,7 @@ const ChannelCustomizationPage: React.FC = () => {
                       <select
                         id="end-screen-template"
                         value={branding.endScreenTemplate}
-                        onChange={(e: Event) => handleInputChange('endScreenTemplate', e: Event.target.value)}
+                        onChange={(e) => handleInputChange('endScreenTemplate', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       >
                         <option value="default">Default Template</option>
@@ -401,7 +401,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         type="text"
                         id="channel-name"
                         value={branding.channelName}
-                        onChange={(e: Event) => handleInputChange('channelName', e: Event.target.value)}
+                        onChange={(e) => handleInputChange('channelName', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Enter your channel name"
                       />
@@ -414,7 +414,7 @@ const ChannelCustomizationPage: React.FC = () => {
                       <textarea
                         id="channel-description"
                         value={branding.channelDescription}
-                        onChange={(e: Event) => handleInputChange('channelDescription', e: Event.target.value)}
+                        onChange={(e) => handleInputChange('channelDescription', e.target.value)}
                         rows={4}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Describe your channel..."
@@ -469,7 +469,7 @@ const ChannelCustomizationPage: React.FC = () => {
                               type="url"
                               id={`${platform}-link`}
                               value={url}
-                              onChange={(e: Event) => handleSocialLinkChange(platform as keyof ChannelBranding['socialLinks'], e: Event.target.value)}
+                              onChange={(e) => handleSocialLinkChange(platform as keyof ChannelBranding['socialLinks'], e.target.value)}
                               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                               placeholder={`Your ${platform} URL`}
                             />
@@ -495,7 +495,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         type="text"
                         id="channel-trailer"
                         value={branding.channelTrailer}
-                        onChange={(e: Event) => handleInputChange('channelTrailer', e: Event.target.value)}
+                        onChange={(e) => handleInputChange('channelTrailer', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Video ID or URL for your channel trailer"
                       />

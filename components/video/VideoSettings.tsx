@@ -139,7 +139,7 @@ return null;
           <input
             type="checkbox"
             checked={autoplay}
-            onChange={(e: Event) => onAutoplayChange(e: Event.target.checked)}
+            onChange={(e) => onAutoplayChange(e: Event.target.checked)}
             className="w-4 h-4 text-red-600 bg-gray-700 border-gray-600 rounded focus:ring-red-500 focus:ring-2"
           />
           <span className="text-sm text-gray-300">Autoplay next video</span>

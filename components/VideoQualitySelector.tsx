@@ -99,7 +99,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   }, []);
 
   const getCurrentQualityLabel = () => {
-    const quality = qualities.find(q: any => q: any.value === currentQuality);
+    const quality = qualities.find(q => q: any.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
@@ -184,7 +184,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 min="0"
                 max="100"
                 value={volume}
-                onChange={(e: Event) => onVolumeChange?.(parseInt(e: Event.target.value, 10))}
+                onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
                 style={{ writingMode: 'vertical-lr' as const, WebkitAppearance: 'slider-vertical' }}
               />

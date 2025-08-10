@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-08-10T22:28:15.215Z",
-  "duration": "97.31s",
+  "timestamp": "2025-08-10T22:44:24.608Z",
+  "duration": "60.10s",
   "initialErrors": 584,
   "finalErrors": 584,
   "totalFixed": 0,
@@ -18,7 +18,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[33m⚠️ Commented out broken import: @tanstack/react-query\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in vite.config.proxy.ts\u001b[0m\n\u001b[33m⚠️ Commented out broken import: vite\u001b[0m\n\u001b[33m⚠️ Commented out broken import: @vitejs/plugin-react\u001b[0m\n\u001b[36m🔧 ✅ Fixed 773 module import errors\u001b[0m\n\u001b[36m🔧 📁 Created 25 stub files\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 50\u001b[0m\n"
+      "output": "\u001b[36m🔧 🔍 Analyzing TS2307 module not found errors...\u001b[0m\n\u001b[36m🔧 Found 0 module not found errors\u001b[0m\n\u001b[36m🔧 No TS2307 errors to fix\u001b[0m\n"
     },
     {
       "name": "Cannot Find Module (iteration 2/3)",
@@ -32,7 +32,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in src/features/video/components/VideoEditor.tsx\u001b[0m\n\u001b[36m🔧 Fixing 3 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 3 errors in utils/testing.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed 0 module import errors\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 50\u001b[0m\n"
+      "output": "\u001b[36m🔧 🔍 Analyzing TS2307 module not found errors...\u001b[0m\n\u001b[36m🔧 Found 0 module not found errors\u001b[0m\n\u001b[36m🔧 No TS2307 errors to fix\u001b[0m\n"
     },
     {
       "name": "Implicit Any Parameter (iteration 1/3)",
@@ -46,7 +46,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[32m✅ Fixed: vite.config.proxy.ts:16 - _res: any\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:13 - err: Error\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:13 - _req: any\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:13 - _res: any\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:12 - proxy: any\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:12 - _options: any\u001b[0m\n\u001b[32m✅ Fixed: vite.config.proxy.ts:11 - path: any\u001b[0m\n\u001b[36m🔧 ✅ Fixed 1087 implicit any parameter errors\u001b[0m\n\u001b[36m🔧 Remaining TS7006 errors: 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 🔍 Analyzing TS7006 implicit any parameter errors...\u001b[0m\n\u001b[36m🔧 Found 0 implicit any parameter errors\u001b[0m\n\u001b[36m🔧 No TS7006 errors to fix\u001b[0m\n"
     },
     {
       "name": "Implicit Any Parameter (iteration 2/3)",
@@ -88,7 +88,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🔧 [2025-08-10T22:27:40.968Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-10T22:27:43.062Z] Found 0 TS2304 errors to fix\n✅ [2025-08-10T22:27:43.063Z] No TS2304 errors found!\n"
+      "output": "🔧 [2025-08-10T22:43:48.137Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-10T22:43:50.236Z] Found 0 TS2304 errors to fix\n✅ [2025-08-10T22:43:50.236Z] No TS2304 errors found!\n"
     },
     {
       "name": "Declared But Not Used",

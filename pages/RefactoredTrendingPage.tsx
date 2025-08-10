@@ -20,7 +20,7 @@ const RefactoredTrendingPage: React.FC = () => {
   const { data: unifiedVideos, loading, error } = useVideosData('trending');
 
   // Convert UnifiedVideoMetadata to Video format for compatibility
-  const videos: Video[] = unifiedVideos ? unifiedVideos.map(video: any => ({
+  const videos: Video[] = unifiedVideos ? unifiedVideos.map(video => ({
     id: video.id,
     title: video.title,
     description: video.description,

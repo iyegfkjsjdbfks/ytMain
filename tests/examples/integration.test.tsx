@@ -71,7 +71,7 @@ const CommentSection = ({ comments, onAddComment }: any) => {
       <form onSubmit={handleSubmit} data-testid="comment-form">
         <textarea
           value={newComment}
-          onChange={(e: Event) => setNewComment(e: Event.target.value)}
+          onChange={(e) => setNewComment(e.target.value)}
           placeholder="Add a comment..."
           aria-label="Add a comment"
           data-testid="comment-input"
@@ -161,7 +161,7 @@ return;
       });
 
       const newComment = await response.json();
-      setComments(prev: any => [newComment.data, ...prev: any]);
+      setComments(prev => [newComment.data, ...prev]);
     } catch (error) {
       console.error('Failed to add comment:', error);
     }
@@ -521,7 +521,7 @@ describe('Integration Tests', () => {
 
       // All interactive elements should be accessible
       const buttons = screen.getAllByRole('button');
-      buttons.forEach(button: any => {
+      buttons.forEach(button => {
         const ariaLabel = button.getAttribute('aria-label');
         const { textContent } = button;
         const accessibleName = ariaLabel || textContent || 'Button';

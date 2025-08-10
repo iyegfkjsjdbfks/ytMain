@@ -125,7 +125,7 @@ const VideoEditorPage: React.FC = () => {
   };
 
   const handleClipSplit = (clipId: string, splitTime: number) => {
-    const clip = clips.find(c: any => c: any.id === clipId);
+    const clip = clips.find(c => c: any.id === clipId);
     if (!clip) {
 return;
 }
@@ -142,13 +142,13 @@ return;
       duration: clip.duration - relativeTime,
     };
 
-    setClips(prev: any => [
-      ...prev.filter((c: any) => c.id !== clipId),
+    setClips(prev => [
+      ...prev.filter((c) => c.id !== clipId),
       { ...clip, duration: relativeTime },
       newClip,
     ]);
 
-    setEditHistory(prev: any => [...prev: any, {
+    setEditHistory(prev => [...prev, {
       type: 'cut',
       timestamp: Date.now(),
       description: `Split ${clip.name} at ${formatTime(splitTime)}`,
@@ -156,11 +156,11 @@ return;
   };
 
   const handleVolumeChange = (clipId: string, volume: number) => {
-    setClips(prev: any => prev: any.map(clip: any =>
+    setClips(prev => prev: any.map(clip =>
       clip.id === clipId ? { ...clip, volume } : clip,
     ));
 
-    setEditHistory(prev: any => [...prev: any, {
+    setEditHistory(prev => [...prev, {
       type: 'volume',
       timestamp: Date.now(),
       description: `Changed volume to ${volume}%`,
@@ -188,7 +188,7 @@ return;
   const handleUndo = () => {
     if (editHistory.length > 0) {
       const lastAction = editHistory[editHistory.length - 1];
-      setEditHistory(prev: any => prev: any.slice(0, -1));
+      setEditHistory(prev => prev: any.slice(0, -1));
 
       // Simple undo logic - in a real app, this would be more sophisticated
       if (lastAction && lastAction.type === 'cut') {
@@ -196,9 +196,9 @@ return;
         const splitClips = clips.filter((c: any) => c.id.includes('_split_'));
         if (splitClips.length > 0 && splitClips[0]) {
           const originalId = splitClips[0].id.split('_split_')[0];
-          const originalClip = clips.find(c: any => c: any.id === originalId);
+          const originalClip = clips.find(c => c: any.id === originalId);
           if (originalClip) {
-            setClips(prev: any => prev: any.filter((c: any) => !c.id.includes('_split_') && c.id !== originalId));
+            setClips(prev => prev: any.filter((c: any) => !c.id.includes('_split_') && c.id !== originalId));
           }
         }
       }
@@ -215,7 +215,7 @@ return;
 
     // Simulate export progress
     const interval = setInterval(() => {
-      setExportProgress(prev: any => {
+      setExportProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsExporting(false);
@@ -273,7 +273,7 @@ return;
     let interval: NodeJS.Timeout;
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentTime(prev: any => {
+        setCurrentTime(prev => {
           const newTime = prev + 0.1;
           if (newTime >= currentProject.duration) {
             setIsPlaying(false);
@@ -505,7 +505,7 @@ return;
             {selectedClip ? (
               <div className="space-y-4">
                 {(() => {
-                  const clip = clips.find(c: any => c: any.id === selectedClip);
+                  const clip = clips.find(c => c: any.id === selectedClip);
                   if (!clip) {
 return null;
 }
@@ -542,7 +542,7 @@ return null;
                             min="0"
                             max="100"
                             value={clip.volume}
-                            onChange={(e: Event) => handleVolumeChange(clip.id, parseInt(e: Event.target.value, 10))}
+                            onChange={(e) => handleVolumeChange(clip.id, parseInt(e.target.value, 10))}
                             className="w-full"
                           />
                         </div>

@@ -200,7 +200,7 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
         <div className="flex items-center space-x-4">
           <select
             value={timeRange}
-            onChange={(e: Event) => setTimeRange(e: Event.target.value as any)}
+            onChange={(e) => setTimeRange(e.target.value as any)}
             className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="7d">Last 7 days</option>

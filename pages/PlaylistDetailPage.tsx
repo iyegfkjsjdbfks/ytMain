@@ -85,7 +85,7 @@ const PlaylistDetailPage: React.FC = () => {
 
   const handleToggleVideoMenu = (videoId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveVideoMenuId(prevId: any => (prevId: any === videoId ? null : videoId));
+    setActiveVideoMenuId(prevId => (prevId: any === videoId ? null : videoId));
   };
 
   const handleRemoveVideo = async (videoIdToRemove: string) => {
@@ -101,7 +101,7 @@ return;
 
     try {
       await removeVideoFromPlaylist(playlistId, videoIdToRemove);
-      setPlaylistDetails(prevDetails: any => {
+      setPlaylistDetails(prevDetails => {
         if (!prevDetails) {
 return null;
 }
@@ -135,7 +135,7 @@ return null;
     try {
       await updateUserPlaylistDetails(playlistId, { title, description });
       if (playlistDetails) {
-        setPlaylistDetails(prev: any => prev: any ? ({
+        setPlaylistDetails(prev => prev: any ? ({
           ...prev,
           title,
           description,

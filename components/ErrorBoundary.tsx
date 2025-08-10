@@ -180,7 +180,7 @@ class ErrorBoundary extends Component<Props, State> {
     const { retryCount } = this.state;
 
     if (retryCount < maxRetries) {
-      this.setState(prevState: any => ({
+      this.setState(prevState => ({
         hasError: false,
         retryCount: prevState.retryCount + 1,
       }));

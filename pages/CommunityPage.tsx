@@ -89,7 +89,7 @@ return;
   };
 
   const toggleLike = (postId: string) => {
-    setPosts(posts.map(post: any =>
+    setPosts(posts.map(post =>
       post.id === postId
         ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
         : post,
@@ -286,7 +286,7 @@ return;
                   {/* Content Input */}
                   <textarea
                     value={newPostContent}
-                    onChange={(e: Event) => setNewPostContent(e: Event.target.value)}
+                    onChange={(e) => setNewPostContent(e.target.value)}
                     placeholder="What's on your mind?"
                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
                     rows={4}
@@ -299,7 +299,7 @@ return;
                         <input
                           key={index}
                           value={option}
-                          onChange={(e: Event) => {
+                          onChange={(e) => {
                             const newOptions = [...pollOptions];
                             newOptions[index] = e.target.value;
                             setPollOptions(newOptions);

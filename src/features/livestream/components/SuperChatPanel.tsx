@@ -136,7 +136,7 @@ return;
                 {superChatTiers.map((tier) => (
                   <button
                     key={tier.amount}
-                    onClick={() => setNewSuperChat(prev: any => ({ ...prev: any, amount: tier.amount }))}
+                    onClick={() => setNewSuperChat(prev => ({ ...prev, amount: tier.amount }))}
                     className={`p-2 rounded-lg text-white text-sm font-medium transition-all ${
                       newSuperChat.amount === tier.amount
                         ? `${tier.color} ring-2 ring-offset-2 ring-blue-500`
@@ -152,7 +152,7 @@ return;
                   id="superchat-amount-input"
                   type="number"
                   value={newSuperChat.amount}
-                  onChange={(e: Event) => setNewSuperChat(prev: any => ({ ...prev: any, amount: parseInt(e: Event.target.value, 10) || 1 }))}
+                  onChange={(e) => setNewSuperChat(prev => ({ ...prev, amount: parseInt(e.target.value, 10) || 1 }))}
                   min="1"
                   max="500"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -168,7 +168,7 @@ return;
               <textarea
                 id="superchat-message"
                 value={newSuperChat.message}
-                onChange={(e: Event) => setNewSuperChat(prev: any => ({ ...prev: any, message: e: Event.target.value }))}
+                onChange={(e) => setNewSuperChat(prev => ({ ...prev, message: e.target.value }))}
                 placeholder="Add a message to your Super Chat..."
                 rows={3}
                 maxLength={200}

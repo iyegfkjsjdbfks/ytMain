@@ -131,7 +131,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {historyVideos.map(video: any => (
+        {historyVideos.map(video => (
           <div key={video.id} className="relative">
             <VideoCard video={video} />
             {/* Progress bar overlay to simulate watch progress */}

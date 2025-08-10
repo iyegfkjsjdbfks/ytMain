@@ -39,7 +39,7 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, isLoading = false, children, ...props }, ref: any) => {
+  ({ className, variant, size, asChild = false, isLoading = false, children, ...props }, ref) => {
     const Comp = asChild ? 'span' : 'button';
 
     return (

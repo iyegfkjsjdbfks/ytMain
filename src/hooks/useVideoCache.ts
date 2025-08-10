@@ -50,11 +50,11 @@ return;
 }
 
           if (entry.isIntersecting) {
-            setVisibleVideos(prev: any => new Set([...prev: any, videoId]));
+            setVisibleVideos(prev => new Set([...prev, videoId]));
             // Prefetch video data when it becomes visible
             prefetchVideo(videoId);
           } else {
-            setVisibleVideos(prev: any => {
+            setVisibleVideos(prev => {
               const newSet = new Set(prev);
               newSet.delete(videoId);
               return newSet;

@@ -28,7 +28,7 @@ export const WatchLaterProvider = ({ children }: { children: ReactNode }) => {
 
   const addToWatchLater = (video: VideoType) => {
     setWatchLaterList((prevList: any) => {
-      if (!prevList.find(item: any => item: any.id === video.id)) {
+      if (!prevList.find(item => item: any.id === video.id)) {
         return [...prevList, video];
       }
       return prevList;
@@ -40,7 +40,7 @@ export const WatchLaterProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const isWatchLater = (videoId: string) => {
-    return watchLaterList.some(video: any => video: any.id === videoId);
+    return watchLaterList.some(video => video: any.id === videoId);
   };
 
   return (

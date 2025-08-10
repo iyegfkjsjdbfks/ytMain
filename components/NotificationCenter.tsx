@@ -144,7 +144,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
     const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
     setNotifications(updatedNotifications);
-    setUnreadCount(prev: any => prev: any + 1);
+    setUnreadCount(prev => prev: any + 1);
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   }, [notifications]);
 
@@ -204,27 +204,27 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const markAsRead = (notificationId: string) => {
-    const updatedNotifications = notifications.map(n: any =>
+    const updatedNotifications = notifications.map(n =>
       n.id === notificationId ? { ...n, isRead: true } : n,
     );
     setNotifications(updatedNotifications);
-    setUnreadCount(prev: any => Math.max(0, prev: any - 1));
+    setUnreadCount(prev => Math.max(0, prev: any - 1));
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
   const markAllAsRead = () => {
-    const updatedNotifications = notifications.map(n: any => ({ ...n: any, isRead: true }));
+    const updatedNotifications = notifications.map(n => ({ ...n, isRead: true }));
     setNotifications(updatedNotifications);
     setUnreadCount(0);
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
   const deleteNotification = (notificationId: string) => {
-    const notification = notifications.find(n: any => n: any.id === notificationId);
+    const notification = notifications.find(n => n: any.id === notificationId);
     const updatedNotifications = notifications.filter((n: any) => n.id !== notificationId);
     setNotifications(updatedNotifications);
     if (notification && !notification.isRead) {
-      setUnreadCount(prev: any => Math.max(0, prev: any - 1));
+      setUnreadCount(prev => Math.max(0, prev: any - 1));
     }
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };

@@ -129,7 +129,7 @@ const MonetizationPage: React.FC = () => {
   };
 
   const getRevenueChartData = () => {
-    const labels = revenueData.map(data: any => {
+    const labels = revenueData.map(data => {
       const date = new Date(data.date);
       return timeRange === '7d' || timeRange === '30d'
         ? date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -141,28 +141,28 @@ const MonetizationPage: React.FC = () => {
       datasets: [
         {
           label: 'Ad Revenue',
-          data: revenueData.map(d: any => d: any.adRevenue),
+          data: revenueData.map(d => d: any.adRevenue),
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
           tension: 0.4,
         },
         {
           label: 'Membership Revenue',
-          data: revenueData.map(d: any => d: any.membershipRevenue),
+          data: revenueData.map(d => d: any.membershipRevenue),
           borderColor: 'rgb(16, 185, 129)',
           backgroundColor: 'rgba(16, 185, 129, 0.1)',
           tension: 0.4,
         },
         {
           label: 'Super Chat',
-          data: revenueData.map(d: any => d: any.superChatRevenue),
+          data: revenueData.map(d => d: any.superChatRevenue),
           borderColor: 'rgb(245, 158, 11)',
           backgroundColor: 'rgba(245, 158, 11, 0.1)',
           tension: 0.4,
         },
         {
           label: 'Sponsorships',
-          data: revenueData.map(d: any => d: any.sponsorshipRevenue),
+          data: revenueData.map(d => d: any.sponsorshipRevenue),
           borderColor: 'rgb(139, 92, 246)',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
           tension: 0.4,
@@ -303,7 +303,7 @@ return { labels: [], datasets: [] };
         <div className="flex items-center space-x-4">
           <select
             value={timeRange}
-            onChange={(e: Event) => setTimeRange(e: Event.target.value as any)}
+            onChange={(e) => setTimeRange(e.target.value as any)}
             className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="7d">Last 7 days</option>
@@ -396,7 +396,7 @@ return { labels: [], datasets: [] };
             </h2>
             <select
               value={selectedMetric}
-              onChange={(e: Event) => setSelectedMetric(e: Event.target.value as any)}
+              onChange={(e) => setSelectedMetric(e.target.value as any)}
               className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50"
             >
               <option value="revenue">Revenue</option>

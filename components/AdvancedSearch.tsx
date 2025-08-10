@@ -151,7 +151,7 @@ searchParams.set('sort_by', filters.sortBy);
   };
 
   const toggleFeature = (feature: string) => {
-    setFilters(prev: any => ({
+    setFilters(prev => ({
       ...prev,
       features: prev.features.includes(feature)
         ? prev.features.filter((f: any) => f !== feature)
@@ -189,7 +189,7 @@ searchParams.set('sort_by', filters.sortBy);
               ref={inputRef}
               type="text"
               value={query}
-              onChange={(e: Event) => setQuery(e: Event.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
               onKeyPress={handleKeyPress}
               onFocus={() => setShowSuggestions(true)}
               placeholder="Search videos, channels, playlists..."
@@ -281,7 +281,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="duration-filter"
                 value={filters.duration}
-                onChange={(e: Event) => setFilters(prev: any => ({ ...prev: any, duration: e: Event.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev, duration: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any duration</option>
@@ -300,7 +300,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="upload-date-filter"
                 value={filters.uploadDate}
-                onChange={(e: Event) => setFilters(prev: any => ({ ...prev: any, uploadDate: e: Event.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev, uploadDate: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any time</option>
@@ -321,7 +321,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="type-filter"
                 value={filters.type}
-                onChange={(e: Event) => setFilters(prev: any => ({ ...prev: any, type: e: Event.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="any">Any type</option>
@@ -341,7 +341,7 @@ searchParams.set('sort_by', filters.sortBy);
               <select
                 id="sort-by-filter"
                 value={filters.sortBy}
-                onChange={(e: Event) => setFilters(prev: any => ({ ...prev: any, sortBy: e: Event.target.value as any }))}
+                onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value as any }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="relevance">Relevance</option>

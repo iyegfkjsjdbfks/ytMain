@@ -234,7 +234,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     const handleOnline = () => {
       const now = Date.now();
 
-      setState(prev: any => {
+      setState(prev => {
         const offlineDuration = prev.wasOffline && prev.lastOnlineTime
           ? now - prev.lastOnlineTime
           : 0;
@@ -258,7 +258,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     };
 
     const handleOffline = () => {
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isOnline: false,
         wasOffline: true,
@@ -268,7 +268,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
       // Start tracking offline duration
       offlineTimer = setInterval(() => {
-        setState(prev: any => ({
+        setState(prev => ({
           ...prev,
           offlineDuration: prev.lastOnlineTime ? Date.now() - prev.lastOnlineTime : 0,
         }));
@@ -281,7 +281,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       const networkInfo = getNetworkInfo();
       const connectionType = networkInfo?.effectiveType || null;
 
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         networkInfo,
         connectionType,

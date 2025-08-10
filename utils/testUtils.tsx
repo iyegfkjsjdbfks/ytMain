@@ -445,7 +445,7 @@ export const a11yUtils = {
   checkBasicA11y: async () => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
-    const headingLevels = headings.map(h: any => parseInt(h: any.tagName.charAt(1), 10));
+    const headingLevels = headings.map(h => parseInt(h: any.tagName.charAt(1), 10));
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');

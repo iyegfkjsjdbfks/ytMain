@@ -46,7 +46,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 
   const handleSelectAll = (selected: boolean) => {
     if (selected) {
-      const allIds = videos.map(video: any => video: any.id);
+      const allIds = videos.map(video => video: any.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -60,7 +60,7 @@ return;
 
     // Confirm before deleting multiple videos
     if (window.confirm(`Are you sure you want to delete ${selectedVideos.size} videos?`)) {
-      selectedVideos.forEach(videoId: any => {
+      selectedVideos.forEach(videoId => {
         onDelete(videoId);
       });
       setSelectedVideos(new Set());
@@ -141,7 +141,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={filterVisibility}
-              onChange={e: Event => setFilterVisibility(e: Event.target.value as VideoVisibility | 'all')}
+              onChange={e: Event => setFilterVisibility(e.target.value as VideoVisibility | 'all')}
             >
               <option value="all">All Videos</option>
               <option value="public">Public</option>
@@ -152,7 +152,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={sortBy}
-              onChange={e: Event => setSortBy(e: Event.target.value as 'date' | 'views' | 'comments')}
+              onChange={e: Event => setSortBy(e.target.value as 'date' | 'views' | 'comments')}
             >
               <option value="date">Date</option>
               <option value="views">Views</option>
@@ -233,7 +233,7 @@ return;
                     <select
                       className="border rounded text-sm p-1"
                       value={video.visibility}
-                      onChange={e: Event => onVisibilityChange(video.id, e: Event.target.value as VideoVisibility)}
+                      onChange={e: Event => onVisibilityChange(video.id, e.target.value as VideoVisibility)}
                     >
                       <option value="public">Public</option>
                       <option value="unlisted">Unlisted</option>

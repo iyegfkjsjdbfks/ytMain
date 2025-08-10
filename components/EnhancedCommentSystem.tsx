@@ -142,7 +142,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
   };
 
   const toggleReplies = (commentId: string) => {
-    setExpandedReplies(prev: any => {
+    setExpandedReplies(prev => {
       const newSet = new Set(prev);
       if (newSet.has(commentId)) {
         newSet.delete(commentId);
@@ -221,7 +221,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
               <div className="mb-3">
                 <textarea
                   value={editContent}
-                  onChange={(e: Event) => setEditContent(e: Event.target.value)}
+                  onChange={(e) => setEditContent(e.target.value)}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={3}
                 />
@@ -488,7 +488,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
         <select
           value={sortBy}
-          onChange={(e: Event) => onSortChange(e: Event.target.value as any)}
+          onChange={(e) => onSortChange(e.target.value as any)}
           className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
         >
           <option value="popular">Top comments</option>
@@ -509,7 +509,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
             <textarea
               ref={textareaRef}
               value={newComment}
-              onChange={(e: Event) => setNewComment(e: Event.target.value)}
+              onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a comment..."
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
               rows={3}
@@ -535,7 +535,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
       {/* Comments List */}
       <div className="space-y-6">
-        {sortedComments.map(comment: any => renderComment(comment: any))}
+        {sortedComments.map(comment => renderComment(comment: any))}
       </div>
 
       {/* Report Modal */}
@@ -554,7 +554,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                     name="reportReason"
                     value={reason}
                     checked={reportReason === reason}
-                    onChange={(e: Event) => setReportReason(e: Event.target.value)}
+                    onChange={(e) => setReportReason(e.target.value)}
                     className="mr-3"
                   />
                   <span className="text-gray-900 dark:text-white">{reason}</span>

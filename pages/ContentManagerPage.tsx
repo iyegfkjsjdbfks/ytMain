@@ -66,7 +66,7 @@ const ContentManagerPage: React.FC = () => {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(item: any =>
+      filtered = filtered.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())),
@@ -115,7 +115,7 @@ const ContentManagerPage: React.FC = () => {
       setSelectedItems(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedItems(new Set(filteredContent.map(item: any => item: any.id)));
+      setSelectedItems(new Set(filteredContent.map(item => item: any.id)));
       setShowBulkActions(true);
     }
   };
@@ -126,8 +126,8 @@ const ContentManagerPage: React.FC = () => {
       return;
     }
 
-    setContent(prevContent: any =>
-      prevContent.map(item: any => {
+    setContent(prevContent =>
+      prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           switch (action) {
             case 'publish':
@@ -150,7 +150,7 @@ const ContentManagerPage: React.FC = () => {
       // Add duplicated items
       const duplicatedItems = content
         .filter((item: any) => selectedItems.has(item.id))
-        .map(item: any => ({
+        .map(item => ({
           ...item,
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
@@ -158,7 +158,7 @@ const ContentManagerPage: React.FC = () => {
           uploadedAt: new Date().toISOString(),
           views: '0',
         }));
-      setContent(prev: any => [...prev: any, ...duplicatedItems]);
+      setContent(prev => [...prev, ...duplicatedItems]);
     }
 
     setSelectedItems(new Set());
@@ -172,8 +172,8 @@ return;
 
     const scheduledDateTime = new Date(`${scheduleDate}T${scheduleTime}`).toISOString();
 
-    setContent(prevContent: any =>
-      prevContent.map(item: any => {
+    setContent(prevContent =>
+      prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           return {
             ...item,
@@ -284,12 +284,12 @@ return content.length;
               type="text"
               placeholder="Search content..."
               value={searchQuery}
-              onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
             />
             <select
               value={sortBy}
-              onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
+              onChange={(e) => setSortBy(e.target.value as SortType)}
               className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="newest">Newest First</option>
@@ -555,7 +555,7 @@ return content.length;
                 <input
                   type="date"
                   value={scheduleDate}
-                  onChange={(e: Event) => setScheduleDate(e: Event.target.value)}
+                  onChange={(e) => setScheduleDate(e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -567,7 +567,7 @@ return content.length;
                 <input
                   type="time"
                   value={scheduleTime}
-                  onChange={(e: Event) => setScheduleTime(e: Event.target.value)}
+                  onChange={(e) => setScheduleTime(e.target.value)}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>

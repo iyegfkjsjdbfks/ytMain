@@ -154,7 +154,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={historyVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {historyVideos.map(video: any => (
+          {historyVideos.map(video => (
             <div key={`hist-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>
@@ -173,7 +173,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={watchLaterVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {watchLaterVideos.map(video: any => (
+          {watchLaterVideos.map(video => (
              <div key={`wl-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>
@@ -193,7 +193,7 @@ function LibraryPage() { // Removed React.FC
         isPlaylistSection
       >
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6">
-          {userPlaylists.map(playlist: any => (
+          {userPlaylists.map(playlist => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
                 <img
@@ -230,7 +230,7 @@ function LibraryPage() { // Removed React.FC
         itemCount={likedVideos.length}
       >
         <div className="flex space-x-3 md:space-x-4 overflow-x-auto pb-2 no-scrollbar">
-          {likedVideos.map(video: any => (
+          {likedVideos.map(video => (
             <div key={`liked-${video.id}`} className="w-56 sm:w-60 md:w-64 lg:w-72 flex-shrink-0">
               <VideoCard video={video} />
             </div>

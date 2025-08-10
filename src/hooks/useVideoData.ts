@@ -56,7 +56,7 @@ export function useTrendingVideos(category: string = 'all') {
       channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
     })) as Video[];
 
-    const sortedByViews = [...allVideos].sort((a: any, b: any) => {
+    const sortedByViews = [...allVideos].sort((a, b: any) => {
       const viewsA = parseViewCount(a.views as string);
       const viewsB = parseViewCount(b.views as string);
       return viewsB - viewsA;

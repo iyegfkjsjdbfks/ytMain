@@ -139,7 +139,7 @@ class ConditionalLogger {
       const sanitized = { ...response };
 
       // Recursively remove sensitive fields
-      const removeSensitiveFields = (obj: any): any => {
+      const removeSensitiveFields = (obj): any => {
         if (typeof obj !== 'object' || obj === null) return obj;
 
         if (Array.isArray(obj)) {

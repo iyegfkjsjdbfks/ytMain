@@ -79,7 +79,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
   const toggleExpanded = (postId: string) => {
-    setExpandedPosts(prev: any => {
+    setExpandedPosts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
         newSet.delete(postId);

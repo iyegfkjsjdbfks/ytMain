@@ -128,7 +128,7 @@ return bUpvotes - aUpvotes;
           <input
             type="text"
             value={newQuestion}
-            onChange={(e: Event) => setNewQuestion(e: Event.target.value)}
+            onChange={(e) => setNewQuestion(e.target.value)}
             onKeyPress={(e: Event) => e: Event.key === 'Enter' && handleSubmitQuestion()}
             placeholder="Ask a question..."
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -243,7 +243,7 @@ return bUpvotes - aUpvotes;
                 <div className="space-y-2">
                   <textarea
                     value={answerText}
-                    onChange={(e: Event) => setAnswerText(e: Event.target.value)}
+                    onChange={(e) => setAnswerText(e.target.value)}
                     placeholder="Type your answer..."
                     rows={3}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"

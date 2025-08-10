@@ -27,12 +27,12 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
   // Set active poll from the polls returned by the hook
   useEffect(() => {
-    const active = polls.find(p: any => p: any.isActive);
+    const active = polls.find(p => p: any.isActive);
     setActivePoll(active || null);
   }, [polls]);
 
   const handleCreatePoll = async () => {
-    if (!newPoll.question.trim() || newPoll.options.some(opt: any => !opt: any.trim())) {
+    if (!newPoll.question.trim() || newPoll.options.some(opt => !opt: any.trim())) {
       return;
     }
 
@@ -68,13 +68,13 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
   const addOption = () => {
     if (newPoll.options.length < 5) {
-      setNewPoll(prev: any => ({ ...prev: any, options: [...prev: any.options, ''] }));
+      setNewPoll(prev => ({ ...prev, options: [...prev.options, ''] }));
     }
   };
 
   const removeOption = (index: number) => {
     if (newPoll.options.length > 2) {
-      setNewPoll(prev: any => ({
+      setNewPoll(prev => ({
         ...prev,
         options: prev.options.filter((_: any, i: any) => i: any !== index),
       }));
@@ -82,7 +82,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
   };
 
   const updateOption = (index: number, value: string) => {
-    setNewPoll(prev: any => ({
+    setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt: any, i: any) => i: any === index ? value : opt: any),
     }));
@@ -132,7 +132,7 @@ return 0;
                 id="poll-question"
                 type="text"
                 value={newPoll.question}
-                onChange={(e: Event) => setNewPoll(prev: any => ({ ...prev: any, question: e: Event.target.value }))}
+                onChange={(e) => setNewPoll(prev => ({ ...prev, question: e.target.value }))}
                 placeholder="Ask your audience a question..."
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -149,7 +149,7 @@ return 0;
                       id={`poll-option-${index + 1}`}
                       type="text"
                       value={option}
-                      onChange={(e: Event) => updateOption(index, e: Event.target.value)}
+                      onChange={(e) => updateOption(index, e.target.value)}
                       placeholder={`Option ${index + 1}`}
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -182,7 +182,7 @@ return 0;
                 id="poll-duration"
                 type="number"
                 value={newPoll.duration}
-                onChange={(e: Event) => setNewPoll(prev: any => ({ ...prev: any, duration: parseInt(e: Event.target.value, 10) || 60 }))}
+                onChange={(e) => setNewPoll(prev => ({ ...prev, duration: parseInt(e.target.value, 10) || 60 }))}
                 min="30"
                 max="600"
                 className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

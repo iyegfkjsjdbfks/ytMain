@@ -205,7 +205,7 @@ return `${(count / 1000).toFixed(1)}K`;
             <div className="flex-1">
               <textarea
                 value={replyText}
-                onChange={(e: Event) => setReplyText(e: Event.target.value)}
+                onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Add a reply..."
                 className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                 rows={2}
@@ -393,7 +393,7 @@ return;
           >
             <textarea
               value={newComment}
-              onChange={(e: Event) => setNewComment(e: Event.target.value)}
+              onChange={(e) => setNewComment(e.target.value)}
               onFocus={() => setShowCommentInput(true)}
               placeholder="Add a comment..."
               className="w-full p-2 bg-transparent text-gray-900 dark:text-white resize-none border-none outline-none"

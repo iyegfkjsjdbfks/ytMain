@@ -329,7 +329,7 @@ export function useCacheManager() {
       const cache = queryClient.getQueryCache();
       return {
         size: cache.getAll().length,
-        queries: cache.getAll().map(query: any => ({
+        queries: cache.getAll().map(query => ({
           queryKey: query.queryKey,
           state: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,

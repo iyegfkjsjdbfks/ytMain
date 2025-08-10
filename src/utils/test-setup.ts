@@ -78,7 +78,7 @@ Object.defineProperty(global, 'ResizeObserver', {
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query: any => ({
+  value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
@@ -282,7 +282,7 @@ Object.defineProperty(document, 'createRange', {
       nodeName: 'BODY',
       ownerDocument: document,
     },
-    createContextualFragment: vi.fn().mockImplementation(html: any => {
+    createContextualFragment: vi.fn().mockImplementation(html => {
       const div = document.createElement('div');
       div.innerHTML = html;
       return div;

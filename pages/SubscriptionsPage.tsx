@@ -216,7 +216,7 @@ return [];
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {subscribedChannels.map(channel: any => (
+              {subscribedChannels.map(channel => (
                 <div
                   key={channel.id}
                   className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
@@ -291,7 +291,7 @@ return [];
               <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
               <select
                 value={sortBy}
-                onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
+                onChange={(e) => setSortBy(e.target.value as SortType)}
                 className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
               >
                 <option value="latest">Latest</option>
@@ -328,7 +328,7 @@ return [];
               </div>
             ) : (
               <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
-                {filteredVideos.map(video: any => (
+                {filteredVideos.map(video => (
                   <SubscriptionVideoCard
                     key={`${activeTab}-${video.id}`}
                     video={video}

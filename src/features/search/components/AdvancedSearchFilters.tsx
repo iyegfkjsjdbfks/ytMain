@@ -162,7 +162,7 @@ count++;
                       name="type"
                       value={value}
                       checked={filters.type === value}
-                      onChange={(e: Event) => updateFilter('type', e: Event.target.value as any)}
+                      onChange={(e) => updateFilter('type', e.target.value as any)}
                       className="text-blue-600"
                     />
                     <Icon className="w-4 h-4 text-gray-500" />
@@ -190,7 +190,7 @@ count++;
                       name="uploadDate"
                       value={value}
                       checked={filters.uploadDate === value}
-                      onChange={(e: Event) => updateFilter('uploadDate', e: Event.target.value as any)}
+                      onChange={(e) => updateFilter('uploadDate', e.target.value as any)}
                       className="text-blue-600"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
@@ -215,7 +215,7 @@ count++;
                       name="duration"
                       value={value}
                       checked={filters.duration === value}
-                      onChange={(e: Event) => updateFilter('duration', e: Event.target.value as any)}
+                      onChange={(e) => updateFilter('duration', e.target.value as any)}
                       className="text-blue-600"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
@@ -270,7 +270,7 @@ count++;
                       name="sortBy"
                       value={value}
                       checked={filters.sortBy === value}
-                      onChange={(e: Event) => updateFilter('sortBy', e: Event.target.value as any)}
+                      onChange={(e) => updateFilter('sortBy', e.target.value as any)}
                       className="text-blue-600"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
@@ -295,7 +295,7 @@ count++;
                       name="quality"
                       value={value}
                       checked={filters.quality === value}
-                      onChange={(e: Event) => updateFilter('quality', e: Event.target.value as any)}
+                      onChange={(e) => updateFilter('quality', e.target.value as any)}
                       className="text-blue-600"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>

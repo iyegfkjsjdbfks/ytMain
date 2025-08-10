@@ -179,7 +179,7 @@ return;
       priority: type === 'live_stream' ? 'high' : 'medium',
     };
 
-    setNotifications(prev: any => {
+    setNotifications(prev => {
       const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
@@ -209,8 +209,8 @@ return;
   };
 
   const markAsRead = (notificationId: string) => {
-    setNotifications(prev: any => {
-      const updated = prev.map(n: any =>
+    setNotifications(prev => {
+      const updated = prev.map(n =>
         n.id === notificationId ? { ...n, isRead: true } : n,
       );
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
@@ -219,15 +219,15 @@ return;
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev: any => {
-      const updated = prev.map(n: any => ({ ...n: any, isRead: true }));
+    setNotifications(prev => {
+      const updated = prev.map(n => ({ ...n, isRead: true }));
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   };
 
   const deleteNotification = (notificationId: string) => {
-    setNotifications(prev: any => {
+    setNotifications(prev => {
       const updated = prev.filter((n: any) => n.id !== notificationId);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;

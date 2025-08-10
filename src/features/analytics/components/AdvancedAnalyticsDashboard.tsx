@@ -241,7 +241,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           <div className="flex items-center gap-4">
             <select
               value={timeRange}
-              onChange={(e: Event) => setTimeRange(e: Event.target.value as any)}
+              onChange={(e) => setTimeRange(e.target.value as any)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               <option value="7d">Last 7 days</option>
