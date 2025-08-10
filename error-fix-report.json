@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-08-10T22:44:24.608Z",
-  "duration": "60.10s",
+  "timestamp": "2025-08-10T22:51:40.713Z",
+  "duration": "85.06s",
   "initialErrors": 584,
   "finalErrors": 584,
   "totalFixed": 0,
@@ -74,7 +74,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "error": "Command failed: node scripts/fix-ts2339-property-errors.js\nnode:internal/modules/esm/resolve:873\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'typescript' imported from /home/runner/work/ytMain/ytMain/scripts/fix-ts2339-property-errors.js\n    at packageResolve (node:internal/modules/esm/resolve:873:9)\n    at moduleResolve (node:internal/modules/esm/resolve:946:18)\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)\n    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\nNode.js v20.19.4\n"
+      "output": "🔍 Analyzing TS2339 property errors...\nFound 0 property errors\n✅ Fixed 0 property errors\n⚠️ 0 TS2339 errors remaining\n"
     },
     {
       "name": "Cannot Find Name",
@@ -88,7 +88,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🔧 [2025-08-10T22:43:48.137Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-10T22:43:50.236Z] Found 0 TS2304 errors to fix\n✅ [2025-08-10T22:43:50.236Z] No TS2304 errors found!\n"
+      "output": "🔧 [2025-08-10T22:50:50.820Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-10T22:50:53.986Z] Found 0 TS2304 errors to fix\n✅ [2025-08-10T22:50:53.986Z] No TS2304 errors found!\n"
     },
     {
       "name": "Declared But Not Used",
