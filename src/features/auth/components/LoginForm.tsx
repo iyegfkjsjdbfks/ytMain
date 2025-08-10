@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState  } from 'react';
 
@@ -187,3 +188,12 @@ export const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

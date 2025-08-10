@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { Link } from 'react-router-dom';
 // TODO: Fix import - import type React from 'react';
@@ -122,3 +123,12 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

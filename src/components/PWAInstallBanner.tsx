@@ -1,4 +1,6 @@
 
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { useState, useEffect, type FC } from 'react';
 
 import { PWAUtils } from '../config/pwa';
@@ -282,3 +284,11 @@ return;
     </div>
   );
 };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

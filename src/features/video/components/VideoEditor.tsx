@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -570,3 +571,12 @@ return;
 };
 
 export default VideoEditor;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

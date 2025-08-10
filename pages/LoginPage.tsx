@@ -1,5 +1,6 @@
 
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -212,3 +213,11 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

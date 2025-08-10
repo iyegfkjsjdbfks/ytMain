@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { NavLink } from 'react-router-dom';
 // TODO: Fix import - import type React from 'react';
@@ -233,3 +234,12 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

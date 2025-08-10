@@ -1,5 +1,7 @@
 
 
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -283,3 +285,12 @@ return;
 };
 
 export default YouTubePlayerExample;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { forwardRef  } from 'react';
 // TODO: Fix import - import type * as React from 'react';
@@ -219,3 +220,12 @@ GhostButton.displayName = 'GhostButton';
 LinkButton.displayName = 'LinkButton';
 
 export default UnifiedButton;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { FixedSizeGrid as Grid } from 'react-window';
 
@@ -167,3 +168,11 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
 OptimizedVideoGrid.displayName = 'OptimizedVideoGrid';
 
 export default OptimizedVideoGrid;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

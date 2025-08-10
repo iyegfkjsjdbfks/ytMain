@@ -1,4 +1,6 @@
 
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { Link } from 'react-router-dom';
 
 // TODO: Fix import - import { User, MoreVertical } from 'lucide-react';
@@ -154,4 +156,13 @@ function formatDuration(seconds): string {
     .filter((v, i) => v > 0 || i > 0)
     .map(v => v.toString().padStart(2, '0'))
     .join(':');
+}
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
 }

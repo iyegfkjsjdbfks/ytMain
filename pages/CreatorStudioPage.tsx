@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -523,3 +524,11 @@ const CreatorStudioPage: React.FC = () => {
 };
 
 export default CreatorStudioPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

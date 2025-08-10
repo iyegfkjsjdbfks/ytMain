@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type React from 'react';
 
 // TODO: Fix import - import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state
@@ -39,3 +40,12 @@ const WatchLaterPage: React.FC = () => {
 };
 
 export default WatchLaterPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

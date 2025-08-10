@@ -1,5 +1,6 @@
 
 
+/// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -258,3 +259,11 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
 }
 
 export default DataFetchErrorBoundary;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

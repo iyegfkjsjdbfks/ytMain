@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useEffect, useState, useRef  } from 'react';
 
@@ -288,3 +289,12 @@ return null;
 };
 
 export default PlaylistDetailPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

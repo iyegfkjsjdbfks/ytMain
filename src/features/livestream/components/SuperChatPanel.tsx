@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState, useEffect } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
@@ -327,3 +328,12 @@ return;
 };
 
 export default SuperChatPanel;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

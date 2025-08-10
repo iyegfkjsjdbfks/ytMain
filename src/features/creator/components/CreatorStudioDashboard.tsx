@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState } from 'react';
 
@@ -450,3 +451,12 @@ return `${(num / 1000).toFixed(1)}K`;
 };
 
 export default CreatorStudioDashboard;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

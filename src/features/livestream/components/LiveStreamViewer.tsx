@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { useState, useEffect, useRef } from 'react';
 
 // Import statements fixed
@@ -79,3 +80,12 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 };
 
 export default LiveStreamViewer;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

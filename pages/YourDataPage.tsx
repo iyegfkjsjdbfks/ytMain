@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -227,3 +228,11 @@ const YourDataPage: React.FC = () => {
 };
 
 export default YourDataPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

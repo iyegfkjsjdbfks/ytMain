@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { useState } from 'react';
 
 // Import statements fixed  
@@ -156,3 +157,12 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
 };
 
 export default StreamSettings;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

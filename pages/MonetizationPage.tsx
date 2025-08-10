@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -547,3 +548,11 @@ return { labels: [], datasets: [] };
 };
 
 export default memo(MonetizationPage);
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

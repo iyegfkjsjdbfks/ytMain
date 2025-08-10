@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { useState } from 'react';
 
 // Import statements fixed
@@ -79,3 +80,12 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
 };
 
 export default MultiplatformStreaming;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

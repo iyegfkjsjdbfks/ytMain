@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
@@ -616,3 +617,11 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 };
 
 export default StreamAnalyticsDashboard;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

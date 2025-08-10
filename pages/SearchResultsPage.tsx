@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { useState, useEffect, useCallback, memo } from 'react';
 
 // TODO: Fix import - import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
@@ -189,3 +190,11 @@ const SearchResultsPage: React.FC = () => {
 
 // Export with memo for performance
 export default React.memo(SearchResultsPage);
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

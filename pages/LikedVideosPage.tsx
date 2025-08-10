@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useEffect, useState  } from 'react';
 
@@ -59,3 +60,12 @@ const LikedVideosPage: React.FC = () => {
 };
 
 export default LikedVideosPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

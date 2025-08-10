@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -243,3 +244,11 @@ describe('CommunityPage', () => {
     expect(screen.getByText(/error loading posts/i)).toBeInTheDocument();
   });
 });
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

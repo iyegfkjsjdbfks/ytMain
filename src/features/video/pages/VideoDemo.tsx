@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState  } from 'react';
 // TODO: Fix import - import type * as React from 'react';
@@ -163,3 +164,12 @@ const VideoDemo: React.FC = () => {
 };
 
 export default VideoDemo;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

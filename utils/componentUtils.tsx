@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // Component utilities and helpers
 // TODO: Fix import - import React, { ReactNode } from 'react';
 
@@ -145,3 +146,12 @@ export const buildChannelUrl = (channelId): string => {
 export const getAvatarFallback = (name): string => {
   return name.charAt(0).toUpperCase();
 };
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

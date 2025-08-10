@@ -1,4 +1,6 @@
 
+/// <reference types="react/jsx-runtime" />
+import React from 'react';
 // TODO: Fix import - import { lazy, Suspense, memo } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
 import type { Video } from '../../types/core';
@@ -75,3 +77,11 @@ onEnded?.();
 LazyVideoPlayer.displayName = 'LazyVideoPlayer';
 
 export default LazyVideoPlayer;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

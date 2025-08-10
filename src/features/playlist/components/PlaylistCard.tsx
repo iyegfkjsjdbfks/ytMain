@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState } from 'react';
 // TODO: Fix import - import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -346,3 +347,12 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 };
 
 export default PlaylistCard;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

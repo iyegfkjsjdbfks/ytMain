@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
@@ -313,3 +314,12 @@ return bUpvotes - aUpvotes;
 };
 
 export default LiveQA;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

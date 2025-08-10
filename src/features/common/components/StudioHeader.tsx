@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
 
@@ -130,3 +131,12 @@ const StudioHeader: React.FC = () => {
 };
 
 export default StudioHeader;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

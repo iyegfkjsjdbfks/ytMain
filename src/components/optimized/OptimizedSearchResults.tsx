@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
@@ -234,3 +235,11 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
 OptimizedSearchResults.displayName = 'OptimizedSearchResults';
 
 export default OptimizedSearchResults;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

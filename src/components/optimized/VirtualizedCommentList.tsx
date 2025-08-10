@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
@@ -148,3 +149,11 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(({
 VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 
 export default VirtualizedCommentList;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

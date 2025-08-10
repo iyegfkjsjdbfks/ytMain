@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type { ReactElement } from 'react';
 
 // TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -379,3 +380,11 @@ export const cleanupTestEnvironment = () => {
 // Re-export everything from React Testing Library
 export * from '@testing-library/react';
 export { customRender as render };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

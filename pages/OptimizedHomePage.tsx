@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import * as React from 'react';
 // TODO: Fix import - import {  useState, useMemo, useCallback, Suspense  } from 'react';
 
@@ -251,3 +252,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
 };
 
 export default OptimizedHomePage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

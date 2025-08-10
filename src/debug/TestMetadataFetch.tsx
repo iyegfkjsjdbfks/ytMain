@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useQuery } from '@tanstack/react-query';
 // TODO: Fix import - import React from "react";
@@ -163,3 +164,12 @@ const TestMetadataFetch: React.FC = () => {
 };
 
 export default TestMetadataFetch;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

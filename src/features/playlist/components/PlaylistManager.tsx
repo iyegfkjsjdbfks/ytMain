@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState } from 'react';
 import { logger } from '../../../utils/logger';
@@ -467,3 +468,12 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 };
 
 export default PlaylistManager;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

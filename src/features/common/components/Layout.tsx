@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { Outlet } from 'react-router-dom';
 // TODO: Fix import - import type React from 'react';
@@ -29,3 +30,12 @@ export const Layout: React.FC = () => {
 };
 
 export default Layout;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

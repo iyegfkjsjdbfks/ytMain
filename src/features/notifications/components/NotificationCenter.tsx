@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 // TODO: Fix import - import { useState, useEffect, useRef } from 'react';
@@ -348,3 +349,12 @@ return false;
 };
 
 export default NotificationCenter;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

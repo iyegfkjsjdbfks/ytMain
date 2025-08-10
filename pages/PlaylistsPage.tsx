@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useEffect, useState  } from 'react';
 
@@ -204,3 +205,12 @@ const PlaylistsPage: React.FC = () => {
 };
 
 export default PlaylistsPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
