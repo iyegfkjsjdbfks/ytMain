@@ -23,7 +23,7 @@ const ChannelTabs: React.FC<ChannelTabsProps> = ({ tabs, activeTab, onTabClick }
   return (
     <div className="border-b border-neutral-300 dark:border-neutral-700/80 mb-1">
       <nav className="-mb-px flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar" aria-label="Channel tabs">
-        {tabs.map((tab: any) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabClick(tab.id)}

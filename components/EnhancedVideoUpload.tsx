@@ -167,7 +167,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const removeTag = (tagToRemove: string) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 

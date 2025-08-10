@@ -81,10 +81,10 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
   };
 
   const averageRenderTime = metrics
-    .filter((m: any) => m.type === 'render')
-    .reduce((sum: any, m: any) => sum: any + m: any.value, 0) / Math.max(metrics.filter((m: any) => m: any.type === 'render').length, 1);
+    .filter((m) => m.type === 'render')
+    .reduce((sum: any, m) => sum: any + m.value, 0) / Math.max(metrics.filter((m) => m.type === 'render').length, 1);
 
-  const apiCallsCount = metrics.filter((m: any) => m.type === 'api').length;
+  const apiCallsCount = metrics.filter((m) => m.type === 'api').length;
 
   if (!isVisible) {
     return null;

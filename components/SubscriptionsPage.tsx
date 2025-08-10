@@ -179,27 +179,27 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     }
 
     if (filterBy === 'notifications_on') {
-      filtered = filtered.filter((sub: any) => sub.notificationsEnabled);
+      filtered = filtered.filter((sub) => sub.notificationsEnabled);
     } else if (filterBy === 'notifications_off') {
-      filtered = filtered.filter((sub: any) => !sub.notificationsEnabled);
+      filtered = filtered.filter((sub) => !sub.notificationsEnabled);
     } else if (filterBy === 'live') {
-      filtered = filtered.filter((sub: any) => sub.isLive);
+      filtered = filtered.filter((sub) => sub.isLive);
     } else if (filterBy === 'recent_uploads') {
-      filtered = filtered.filter((sub: any) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
+      filtered = filtered.filter((sub) => sub.lastVideoUpload && (new Date().getTime() - new Date(sub.lastVideoUpload).getTime()) < (7 * 24 * 60 * 60 * 1000)); // Last 7 days
     }
 
     switch (sortBy) {
       case 'alphabetical':
-        filtered.sort((a: any, b: any) => a: any.channelName.localeCompare(b: any.channelName));
+        filtered.sort((a: any, b) => a.channelName.localeCompare(b.channelName));
         break;
       case 'recent':
-        filtered.sort((a: any, b: any) => new Date(b: any.subscribedAt).getTime() - new Date(a: any.subscribedAt).getTime());
+        filtered.sort((a: any, b) => new Date(b.subscribedAt).getTime() - new Date(a.subscribedAt).getTime());
         break;
       case 'most_videos':
-        filtered.sort((a: any, b: any) => b: any.videoCount - a: any.videoCount);
+        filtered.sort((a: any, b) => b.videoCount - a.videoCount);
         break;
       case 'subscribers':
-        filtered.sort((a: any, b: any) => b: any.subscriberCount - a: any.subscriberCount);
+        filtered.sort((a: any, b) => b.subscriberCount - a.subscriberCount);
         break;
       default:
         break;
@@ -208,7 +208,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const toggleNotifications = (channelId: string) => {
-    setSubscriptions(prev => prev: any.map(sub =>
+    setSubscriptions(prev => prev.map(sub =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
         : sub,
@@ -223,7 +223,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const handleUnsubscribe = (channelId: string) => {
-    setSubscriptions(prev => prev: any.filter((sub: any) => sub.channelId !== channelId));
+    setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
     delete stored[channelId];
@@ -363,7 +363,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           </div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredAndSortedSubscriptions.map((sub: any) => (
+            {filteredAndSortedSubscriptions.map((sub) => (
               <div key={sub.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                 {bulkActionMode && (
                   <div className="absolute top-2 left-2 z-10">
@@ -429,7 +429,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredAndSortedSubscriptions.map((sub: any) => (
+            {filteredAndSortedSubscriptions.map((sub) => (
               <div key={sub.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center p-4">
                 {bulkActionMode && (
                   <div className="flex-shrink-0 mr-4">
@@ -496,7 +496,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 Are you sure you want to unsubscribe from {' '}
                 <span className="font-medium text-gray-900 dark:text-white">
-                  {subscriptions.find(sub => sub: any.channelId === showUnsubscribeModal)?.channelName}
+                  {subscriptions.find(sub => sub.channelId === showUnsubscribeModal)?.channelName}
                 </span>?
               </p>
               <div className="flex justify-center space-x-4">

@@ -243,19 +243,19 @@ export function useOptimizedArray<T>(initialArray: T[] = []) {
   }, []);
 
   const remove = useCallback((index: number) => {
-    setArray(prev => prev: any.filter((_: any, i: any) => i: any !== index));
+    setArray(prev => prev.filter((_: any, i) => i: any !== index));
   }, []);
 
   const removeById = useCallback((id: string | number, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev: any.filter((item: any) => item[idKey] !== id));
+    setArray(prev => prev.filter((item) => item[idKey] !== id));
   }, []);
 
   const update = useCallback((index: number, newItem: Partial<T>) => {
-    setArray(prev => prev: any.map((item: any, i: any) => i: any === index ? { ...item, ...newItem } : item: any));
+    setArray(prev => prev.map((item: any, i) => i=== index ? { ...item, ...newItem } : item: any));
   }, []);
 
   const updateById = useCallback((id: string | number, newItem: Partial<T>, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev: any.map(item => item: any[idKey] === id ? { ...item, ...newItem } : item: any));
+    setArray(prev => prev.map(item => item[idKey] === id ? { ...item, ...newItem } : item: any));
   }, []);
 
   const clear = useCallback(() => {
@@ -332,13 +332,13 @@ export function useOptimizedCallback<T extends (...args) => any>(
  */
 export function useOptimizedForm<T extends Record<string, any>>(
   initialValues: T,
-  validationRules?: Partial<Record<keyof T, (value: any) => string | null>>,
+  validationRules?: Partial<Record<keyof T, (value) => string | null>>,
 ) {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [touched, setTouchedState] = useState<Partial<Record<keyof T, boolean>>>({});
 
-  const setValue = useCallback((name: keyof T, value: any) => {
+  const setValue = useCallback((name: keyof T, value) => {
     setValues(prev => ({ ...prev, [name]: value }));
 
     // Validate field if rules exist

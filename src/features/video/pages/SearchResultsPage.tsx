@@ -130,7 +130,7 @@ return;
 
       {!loading && videos.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {videos.map((video: any) => {
+          {videos.map((video) => {
             // Extract YouTube video ID from the video object using utility function
             let videoId = getYouTubeVideoId(video.videoUrl) || video.id;
 

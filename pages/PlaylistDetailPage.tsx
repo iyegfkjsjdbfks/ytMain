@@ -85,7 +85,7 @@ const PlaylistDetailPage: React.FC = () => {
 
   const handleToggleVideoMenu = (videoId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveVideoMenuId(prevId => (prevId: any === videoId ? null : videoId));
+    setActiveVideoMenuId(prevId => (prevId=== videoId ? null : videoId));
   };
 
   const handleRemoveVideo = async (videoIdToRemove: string) => {
@@ -107,8 +107,8 @@ return null;
 }
         return {
           ...prevDetails,
-          videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
-          videoIds: prevDetails.videoIds.filter((id: any) => id !== videoIdToRemove),
+          videos: prevDetails.videos.filter((v) => v.id !== videoIdToRemove),
+          videoIds: prevDetails.videoIds.filter((id) => id !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
         };
       });

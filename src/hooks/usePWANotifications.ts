@@ -433,7 +433,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     return (hours || 0) * 60 + (minutes || 0);
   };
 
-  const trackNotificationEvent = (event: string, data: any) => {
+  const trackNotificationEvent = (event: string, data) => {
     try {
       const events = JSON.parse(localStorage.getItem('notification-events') || '[]');
       events.push({
@@ -476,7 +476,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   const getRecentNotifications = (since: number): any[] => {
     try {
       const events = JSON.parse(localStorage.getItem('notification-events') || '[]');
-      return events.filter((event: any) =>
+      return events.filter((event) =>
         event.event === 'sent' && event.timestamp >= since,
       );
     } catch (error) {

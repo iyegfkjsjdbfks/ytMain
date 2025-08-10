@@ -150,7 +150,7 @@ throw new Error('Failed to fetch video');
       totalCached: videoQueries.length,
       visibleCount: visibleVideos.size,
       observedCount: observedElements.current.size,
-      cacheSize: videoQueries.reduce((size: any, query: any) => {
+      cacheSize: videoQueries.reduce((size: any, query) => {
         const { data } = query.state;
         return size + (data ? JSON.stringify(data).length : 0);
       }, 0),

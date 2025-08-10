@@ -124,7 +124,7 @@ export const streamAPI = {
    */
   async getUserStreams(userId: string): Promise<LiveStream[]> {
     // In a real implementation, filter by userId
-    return mockStreams.filter((stream: any) => stream.creatorId === userId);
+    return mockStreams.filter((stream) => stream.creatorId === userId);
   },
 
   /**
@@ -213,7 +213,7 @@ export const streamAPI = {
    * Delete a stream
    */
   async deleteStream(id: string): Promise<void> {
-    mockStreams = mockStreams.filter((stream: any) => stream.id !== id);
+    mockStreams = mockStreams.filter((stream) => stream.id !== id);
   },
 };
 
@@ -384,7 +384,7 @@ export const pollsAPI = {
    * Get polls for a stream
    */
   async getStreamPolls(streamId: string): Promise<LivePoll[]> {
-    return mockPolls.filter((poll: any) => poll.streamId === streamId);
+    return mockPolls.filter((poll) => poll.streamId === streamId);
   },
 };
 
@@ -447,7 +447,7 @@ export const qaAPI = {
    */
   async getStreamQuestions(streamId: string): Promise<QAQuestion[]> {
     return mockQuestions
-      .filter((q: any) => q.streamId === streamId)
+      .filter((q) => q.streamId === streamId)
       .sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
   },
 };
@@ -499,7 +499,7 @@ export const replayAPI = {
    * Get replays for a stream
    */
   async getStreamReplays(streamId: string): Promise<StreamReplay[]> {
-    return mockReplays.filter((replay: any) => replay.streamId === streamId);
+    return mockReplays.filter((replay) => replay.streamId === streamId);
   },
 };
 
@@ -559,7 +559,7 @@ export const schedulingAPI = {
    * Get scheduled streams
    */
   async getScheduledStreams(): Promise<LiveStream[]> {
-    return mockStreams.filter((stream: any) => stream.status === 'scheduled');
+    return mockStreams.filter((stream) => stream.status === 'scheduled');
   },
 
   /**

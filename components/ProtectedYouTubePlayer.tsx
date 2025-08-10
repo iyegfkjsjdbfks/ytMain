@@ -15,9 +15,9 @@ interface ProtectedYouTubePlayerProps {
   autoplay?: boolean;
   controls?: boolean;
   className?: string;
-  onReady?: (event: any) => void;
-  onStateChange?: (event: any) => void;
-  onError?: (event: any) => void;
+  onReady?: (event) => void;
+  onStateChange?: (event) => void;
+  onError?: (event) => void;
 }
 
 /**

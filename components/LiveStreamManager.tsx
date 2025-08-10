@@ -92,7 +92,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track => track: any.stop());
+        stream.getTracks().forEach(track => track.stop());
       }
       if (statsInterval.current) {
 clearInterval(statsInterval.current);
@@ -192,7 +192,7 @@ clearInterval(chatInterval.current);
     setIsPaused(false);
 
     if (stream) {
-      stream.getTracks().forEach(track => track: any.stop());
+      stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
 
@@ -284,7 +284,7 @@ return;
     };
 
     setChatMessages(prev => [...prev.slice(-49), message]);
-    setStats(prev => ({ ...prev, messages: prev: any.messages + 1 }));
+    setStats(prev => ({ ...prev, messages: prev.messages + 1 }));
     setNewMessage('');
   };
 
@@ -498,7 +498,7 @@ return;
                         id="enable-chat"
                         type="checkbox"
                         checked={settings.enableChat}
-                        onChange={(e) => setSettings(prev => ({ ...prev, enableChat: e: Event.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev, enableChat: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Chat</span>
@@ -509,7 +509,7 @@ return;
                         id="enable-donations"
                         type="checkbox"
                         checked={settings.enableDonations}
-                        onChange={(e) => setSettings(prev => ({ ...prev, enableDonations: e: Event.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev, enableDonations: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Donations</span>
@@ -583,7 +583,7 @@ return;
                       No messages yet. Start the conversation!
                     </p>
                   ) : (
-                    chatMessages.map((message: any) => (
+                    chatMessages.map((message) => (
                       <div key={message.id} className="flex items-start space-x-2">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2">

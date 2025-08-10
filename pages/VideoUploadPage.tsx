@@ -100,7 +100,7 @@ const VideoUploadPage: React.FC = () => {
   const handleRemoveTag = (tagToRemove: string) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 

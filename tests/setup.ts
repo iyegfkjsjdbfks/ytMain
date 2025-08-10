@@ -68,7 +68,7 @@ const mockSessionStorage = (() => {
   };
 })();
 
-const mockIntersectionObserver = vi.fn().mockImplementation((_callback: any) => ({
+const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -78,7 +78,7 @@ const mockIntersectionObserver = vi.fn().mockImplementation((_callback: any) => 
   takeRecords: vi.fn(() => []),
 }));
 
-const mockResizeObserver = vi.fn().mockImplementation((_callback: any) => ({
+const mockResizeObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -363,7 +363,7 @@ beforeAll(() => {
   // Mock crypto for security utils
   Object.defineProperty(window, 'crypto', {
     value: {
-      getRandomValues: vi.fn((arr: any) => {
+      getRandomValues: vi.fn((arr) => {
         for (let i = 0; i < arr.length; i++) {
           arr[i] = Math.floor(Math.random() * 256);
         }
@@ -458,7 +458,7 @@ export const testHelpers = {
   },
 
   // API mocking
-  mockApiSuccess: (data: any) => {
+  mockApiSuccess: (data) => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
@@ -489,7 +489,7 @@ export const testHelpers = {
   waitForTime: (ms: number) => new Promise(resolve => setTimeout(resolve, ms)),
 
   // Error boundary testing
-  triggerError: (component: any) => {
+  triggerError: (component) => {
     const error = new Error('Test error');
     component.componentDidCatch?.(error, { componentStack: 'test stack' });
     throw error;
@@ -557,7 +557,7 @@ export {
 };
 
 // Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason: any, promise: any) => {
+process.on('unhandledRejection', (reason: any, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 

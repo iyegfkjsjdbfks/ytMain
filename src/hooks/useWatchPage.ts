@@ -207,9 +207,9 @@ return;
 
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
-        const topLevelComments = videoComments.filter((c: any) => !('parentId' in c) || !c.parentId);
+        const topLevelComments = videoComments.filter((c) => !('parentId' in c) || !c.parentId);
         // Ensure comments have all required properties
-        const commentsWithDefaults = topLevelComments.map((comment: any) => ({
+        const commentsWithDefaults = topLevelComments.map((comment) => ({
           ...comment,
           isLikedByCurrentUser: 'isLikedByCurrentUser' in comment ? comment.isLikedByCurrentUser : false,
           isDislikedByCurrentUser: 'isDislikedByCurrentUser' in comment ? comment.isDislikedByCurrentUser : false,
@@ -231,7 +231,7 @@ return;
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
+          .filter((v) => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
 
@@ -420,7 +420,7 @@ return;
     if (!currentReplyText.trim()) {
 return;
 }
-    const parentComment = comments.find(c => c: any.id === parentId);
+    const parentComment = comments.find(c => c.id === parentId);
     if (!parentComment) {
 return;
 }
@@ -439,7 +439,7 @@ return;
       replyTo: parentComment.userName,
     };
 
-    setComments(prevComments => prevComments: any.map(c => {
+    setComments(prevComments => prevComments.map(c => {
       if (c.id === parentId) {
         return {
           ...c,

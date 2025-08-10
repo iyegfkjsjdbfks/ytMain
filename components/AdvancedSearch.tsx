@@ -154,7 +154,7 @@ searchParams.set('sort_by', filters.sortBy);
     setFilters(prev => ({
       ...prev,
       features: prev.features.includes(feature)
-        ? prev.features.filter((f: any) => f !== feature)
+        ? prev.features.filter((f) => f !== feature)
         : [...prev.features, feature],
     }));
   };

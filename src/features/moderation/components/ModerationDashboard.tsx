@@ -134,7 +134,7 @@ export const ModerationDashboard: React.FC = () => {
     },
   ];
 
-  const filteredItems = moderationItems.filter((item: any) => {
+  const filteredItems = moderationItems.filter((item) => {
     if (item.status !== selectedTab) {
 return false;
 }
@@ -150,7 +150,7 @@ return false;
   const handleSelectItem = (itemId: string) => {
     setSelectedItems(prev =>
       prev.includes(itemId)
-        ? prev.filter((id: any) => id !== itemId)
+        ? prev.filter((id) => id !== itemId)
         : [...prev, itemId],
     );
   };
@@ -229,7 +229,7 @@ return false;
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Pending</p>
                 <p className="text-2xl font-bold text-orange-600">
-                  {moderationItems.filter((item: any) => item.status === 'pending').length}
+                  {moderationItems.filter((item) => item.status === 'pending').length}
                 </p>
               </div>
               <ClockIcon className="w-8 h-8 text-orange-500" />
@@ -241,7 +241,7 @@ return false;
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Approved</p>
                 <p className="text-2xl font-bold text-green-600">
-                  {moderationItems.filter((item: any) => item.status === 'approved').length}
+                  {moderationItems.filter((item) => item.status === 'approved').length}
                 </p>
               </div>
               <CheckIcon className="w-8 h-8 text-green-500" />
@@ -253,7 +253,7 @@ return false;
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Rejected</p>
                 <p className="text-2xl font-bold text-red-600">
-                  {moderationItems.filter((item: any) => item.status === 'rejected').length}
+                  {moderationItems.filter((item) => item.status === 'rejected').length}
                 </p>
               </div>
               <XMarkIcon className="w-8 h-8 text-red-500" />
@@ -265,7 +265,7 @@ return false;
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Escalated</p>
                 <p className="text-2xl font-bold text-purple-600">
-                  {moderationItems.filter((item: any) => item.status === 'escalated').length}
+                  {moderationItems.filter((item) => item.status === 'escalated').length}
                 </p>
               </div>
               <ShieldCheckIcon className="w-8 h-8 text-purple-500" />

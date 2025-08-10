@@ -172,7 +172,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video: any) => {
+          onVideoClick={(video) => {
             if ('videoId' in video) {
               // YouTube video - use google-search prefix for search results
               navigate(`/watch?v=google-search-${video.videoId}`);

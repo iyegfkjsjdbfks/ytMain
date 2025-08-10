@@ -445,15 +445,15 @@ export const a11yUtils = {
   checkBasicA11y: async () => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
-    const headingLevels = headings.map(h => parseInt(h: any.tagName.charAt(1), 10));
+    const headingLevels = headings.map(h => parseInt(h.tagName.charAt(1), 10));
 
     // Check for alt text on images
     const images = screen.getAllByRole('img');
-    const imagesWithoutAlt = images.filter((img: any) => !img.getAttribute('alt'));
+    const imagesWithoutAlt = images.filter((img) => !img.getAttribute('alt'));
 
     // Check for form labels
     const inputs = screen.getAllByRole('textbox');
-    const inputsWithoutLabels = inputs.filter((input: any) => {
+    const inputsWithoutLabels = inputs.filter((input) => {
       const id = input.getAttribute('id');
       return !id || !screen.queryByLabelText(new RegExp(id, 'i'));
     });

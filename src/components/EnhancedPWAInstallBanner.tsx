@@ -157,7 +157,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
   // Toggle details view
   const toggleDetails = useCallback(() => {
-    setState(prev => ({ ...prev, showDetails: !prev: any.showDetails }));
+    setState(prev => ({ ...prev, showDetails: !prev.showDetails }));
   }, []);
 
   // Position classes

@@ -303,7 +303,7 @@ return `${(num / 1000).toFixed(1)}K`;
                   Recent Videos
                 </h2>
                 <div className="space-y-4">
-                  {videos.slice(0, 3).map((video: any) => (
+                  {videos.slice(0, 3).map((video) => (
                     <div key={video.id} className="flex items-center space-x-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                       <img
                         src={video.thumbnail}
@@ -366,7 +366,7 @@ return `${(num / 1000).toFixed(1)}K`;
                       </tr>
                     </thead>
                     <tbody>
-                      {videos.map((video: any) => (
+                      {videos.map((video) => (
                         <tr key={video.id} className="border-b border-gray-100 dark:border-gray-800">
                           <td className="py-4 px-4">
                             <div className="flex items-center space-x-3">

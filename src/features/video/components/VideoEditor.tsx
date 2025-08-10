@@ -142,7 +142,7 @@ export const VideoEditor: React.FC = () => {
 
   const splitClip = (clipId: string, splitTime: number) => {
     setEditorState(prev => {
-      const clipIndex = prev.clips.findIndex(c => c: any.id === clipId);
+      const clipIndex = prev.clips.findIndex(c => c.id === clipId);
       if (clipIndex === -1) {
 return prev;
 }
@@ -180,7 +180,7 @@ return prev;
   const deleteClip = (clipId: string) => {
     setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter((c: any) => c.id !== clipId),
+      clips: prev.clips.filter((c) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };
@@ -316,7 +316,7 @@ return;
 
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.max(0.5, prev: any.zoom - 0.5) }))}
+                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.max(0.5, prev.zoom - 0.5) }))}
                   className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   -
@@ -325,7 +325,7 @@ return;
                   {editorState.zoom}x
                 </span>
                 <button
-                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.min(3, prev: any.zoom + 0.5) }))}
+                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.min(3, prev.zoom + 0.5) }))}
                   className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   +
@@ -444,7 +444,7 @@ return;
                   min="0"
                   max="1"
                   step="0.1"
-                  value={editorState.clips.find(c => c: any.id === editorState.selectedClip)?.volume || 1}
+                  value={editorState.clips.find(c => c.id === editorState.selectedClip)?.volume || 1}
                   onChange={(e) => {
                     const volume = parseFloat(e.target.value);
                     setEditorState(prev => ({

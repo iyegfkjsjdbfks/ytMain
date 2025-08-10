@@ -100,7 +100,7 @@ export function useNotifications() {
   }, []);
 
   // Calculate unread count
-  const unreadCount = Array.isArray(notifications) ? notifications.filter((n: any) => !n.isRead).length : 0;
+  const unreadCount = Array.isArray(notifications) ? notifications.filter((n) => !n.isRead).length : 0;
 
   return {
     notifications,
@@ -125,7 +125,7 @@ export function useNotificationSettings() {
   });
 
   const updateSettingsMutation = useMutation({
-    mutationFn: (newSettings: any) => notificationService.updateNotificationSettings(newSettings),
+    mutationFn: (newSettings) => notificationService.updateNotificationSettings(newSettings),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notification-settings'] });
     },

@@ -246,7 +246,7 @@ return `${(count / 1000).toFixed(1)}K`;
 
             {showReplies && (
               <div className="mt-3 space-y-4">
-                {comment.replies.map((reply: any) => (
+                {comment.replies.map((reply) => (
                   <CommentItem
                     key={reply.id}
                     comment={reply}

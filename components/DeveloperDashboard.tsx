@@ -175,10 +175,10 @@ export const DeveloperDashboard: React.FC = () => {
 
   const getFeatureFlagMetrics = async () => {
     const flags = featureFlagManager.getAllFlags();
-    const activeFlags = flags.filter((f: any) => f.enabled);
+    const activeFlags = flags.filter((f) => f.enabled);
 
     const rolloutProgress = flags
-      .filter((f: any) => f.rolloutStrategy.type === 'gradual')
+      .filter((f) => f.rolloutStrategy.type === 'gradual')
       .map(f => ({
         id: f.id,
         name: f.name,
@@ -290,8 +290,8 @@ return 0;
     return Math.round(Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length);
   }, [metrics]);
 
-  const criticalAlerts = alerts.filter((a: any) => a.severity >= 8);
-  const actionableSuggestions = suggestions.filter((s: any) => s.automatable && s.priority >= 7);
+  const criticalAlerts = alerts.filter((a) => a.severity >= 8);
+  const actionableSuggestions = suggestions.filter((s) => s.automatable && s.priority >= 7);
 
   if (isLoading && !metrics) {
     return (
@@ -433,7 +433,7 @@ return 0;
                   ✅ No critical alerts
                 </p>
               ) : (
-                criticalAlerts.slice(0, 3).map((alert: any) => (
+                criticalAlerts.slice(0, 3).map((alert) => (
                   <div
                     key={alert.id}
                     className="flex items-start space-x-3 p-3 bg-red-50 dark:bg-red-900/20 rounded-md"
@@ -464,7 +464,7 @@ return 0;
               {actionableSuggestions.length > 0 && (
                 <button
                   onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
-                    actionableSuggestions.slice(0, 3).map(s => s: any.id),
+                    actionableSuggestions.slice(0, 3).map(s => s.id),
                   )}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
                 >
@@ -672,7 +672,7 @@ return 0;
                   Recent Alerts ({alerts.length})
                 </h4>
                 <div className="space-y-3">
-                  {alerts.slice(0, 5).map((alert: any) => (
+                  {alerts.slice(0, 5).map((alert) => (
                     <div
                       key={alert.id}
                       className={`flex items-start space-x-3 p-4 rounded-lg ${
@@ -736,7 +736,7 @@ return 0;
                   Improvement Suggestions ({suggestions.length})
                 </h4>
                 <div className="space-y-3">
-                  {suggestions.slice(0, 5).map((suggestion: any) => (
+                  {suggestions.slice(0, 5).map((suggestion) => (
                     <div
                       key={suggestion.id}
                       className="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"

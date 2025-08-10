@@ -272,7 +272,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {posts.map((post: any) => (
+      {posts.map((post) => (
         <div
           key={post.id}
           className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6"

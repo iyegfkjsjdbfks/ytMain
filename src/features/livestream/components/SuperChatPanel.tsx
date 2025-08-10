@@ -35,7 +35,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
     // Load existing super chats from API
     liveStreamService.chat.getChatMessages(streamId).then(messages => {
       const existingSuperChats = messages
-        .filter((msg: any) => msg.superChat)
+        .filter((msg) => msg.superChat)
         .map(msg => msg.superChat!)
         .sort((a, b) => {
           const aTime = a.timestamp ? new Date(a.timestamp).getTime() : 0;
@@ -101,7 +101,7 @@ return;
 
   const topSuperChats = superChats
     .slice()
-    .sort((a: any, b: any) => b: any.amount - a: any.amount)
+    .sort((a: any, b) => b.amount - a.amount)
     .slice(0, 5);
 
   return (
@@ -252,7 +252,7 @@ return;
             <p className="text-sm mt-1">Be the first to send a Super Chat!</p>
           </div>
         ) : (
-          superChats.map((superChat: any) => (
+          superChats.map((superChat) => (
             <div
               key={superChat.id}
               className={`p-3 rounded-lg border-l-4 ${getTierColor(superChat.amount)}`}

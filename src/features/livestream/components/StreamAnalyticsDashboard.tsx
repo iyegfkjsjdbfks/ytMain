@@ -318,7 +318,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
-        {moments.map((moment: any) => (
+        {moments.map((moment) => (
           <div
             key={`moment-${moment.type}-${moment.timestamp}`}
             className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
@@ -359,7 +359,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Top Countries</h4>
         <div className="space-y-3">
-          {demographics.countries.slice(0, 3).map((country: any) => (
+          {demographics.countries.slice(0, 3).map((country) => (
             <div key={`country-${country.name}`} className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 {country.name}
@@ -383,7 +383,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Devices</h4>
         <div className="grid grid-cols-2 gap-3">
-          {demographics.devices.map((device: any) => (
+          {demographics.devices.map((device) => (
             <div
               key={`device-${device.type}`}
               className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
@@ -585,7 +585,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           </div>
           {chartData.length > 0 ? (
             <div className="h-64 flex items-end justify-between space-x-1" role="img" aria-label={`${selectedMetric} chart`}>
-              {chartData.map((point: any) => (
+              {chartData.map((point) => (
                 <div
                   key={point.id}
                   className="bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer"

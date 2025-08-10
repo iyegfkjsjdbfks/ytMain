@@ -50,7 +50,7 @@ interface UsePWAReturn {
   notificationPermission: NotificationPermission;
   canShowNotifications: boolean;
   requestNotificationPermission: () => Promise<NotificationPermission>;
-  showNotification: (options: any) => Promise<boolean>;
+  showNotification: (options) => Promise<boolean>;
 
   // Features
   shareContent: (data: ShareData) => Promise<boolean>;
@@ -107,7 +107,7 @@ export const usePWA = (): UsePWAReturn => {
 
       conditionalLogger.info(
         'PWA features initialized',
-        { supportedFeatures: Object.keys(features).filter((key: any) => features[key as keyof typeof features]) },
+        { supportedFeatures: Object.keys(features).filter((key) => features[key as keyof typeof features]) },
         'usePWA',
       );
     } catch (error) {

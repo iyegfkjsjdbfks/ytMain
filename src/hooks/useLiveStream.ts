@@ -134,12 +134,12 @@ export const useLiveQA = (streamId?: string) => {
 
   const answerQuestion = async (questionId: string, answer: string) => {
     setQuestions(prev =>
-      prev.map(q => (q: any.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q: any))
+      prev.map(q => (q.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q: any))
     );
   };
 
   const upvoteQuestion = async (questionId: string) => {
-    setQuestions(prev => prev: any.map(q => (q: any.id === questionId ? { ...q, upvotes: (q: any.upvotes || 0) + 1 } : q: any)));
+    setQuestions(prev => prev.map(q => (q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q: any)));
   };
 
   return { questions, submitQuestion, answerQuestion, upvoteQuestion } as const;

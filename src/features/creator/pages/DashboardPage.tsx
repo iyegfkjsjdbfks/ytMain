@@ -18,14 +18,14 @@ import { ChartBarIcon,
   TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer = ({ children, width, height }: any) => (
+const ResponsiveContainer = ({ children, width, height }) => (
   <div style={{ width, height }}>{children}</div>
 );
-const PieChart = ({ children }: any) => <div className="flex items-center justify-center h-full">{children}</div>;
-const Pie = ({ data }: any) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = (_props: any) => null;
-const Tooltip = (_props: any) => null;
-const Legend = (_props: any) => null;
+const PieChart = ({ children }) => <div className="flex items-center justify-center h-full">{children}</div>;
+const Pie = ({ data }) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
+const Cell = (_props) => null;
+const Tooltip = (_props) => null;
+const Legend = (_props) => null;
 // import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
@@ -418,7 +418,7 @@ return `${(num / 1000).toFixed(1)  }K`;
               </PieChart>
             </ResponsiveContainer>
             <div className="grid grid-cols-2 gap-4 mt-4">
-              {deviceData.map((device: any) => {
+              {deviceData.map((device) => {
                 const Icon = device.device === 'Mobile' ? DevicePhoneMobileIcon :
                            device.device === 'Desktop' ? ComputerDesktopIcon :
                            device.device === 'TV' ? TvIcon : DevicePhoneMobileIcon;
@@ -464,7 +464,7 @@ return `${(num / 1000).toFixed(1)  }K`;
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {topVideos.map((video: any) => (
+                {topVideos.map((video) => (
                   <tr key={video.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">

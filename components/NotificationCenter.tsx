@@ -72,7 +72,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       // Generate initial mock notifications
       const mockNotifications = generateMockNotifications();
       setNotifications(mockNotifications);
-      setUnreadCount(mockNotifications.filter((n: any) => !n.isRead).length);
+      setUnreadCount(mockNotifications.filter((n) => !n.isRead).length);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
     }
   }, []);
@@ -220,8 +220,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const deleteNotification = (notificationId: string) => {
-    const notification = notifications.find(n => n: any.id === notificationId);
-    const updatedNotifications = notifications.filter((n: any) => n.id !== notificationId);
+    const notification = notifications.find(n => n.id === notificationId);
+    const updatedNotifications = notifications.filter((n) => n.id !== notificationId);
     setNotifications(updatedNotifications);
     if (notification && !notification.isRead) {
       setUnreadCount(prev => Math.max(0, prev: any - 1));
@@ -230,7 +230,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
   };
 
   const filteredNotifications = filter === 'unread'
-    ? notifications.filter((n: any) => !n.isRead)
+    ? notifications.filter((n) => !n.isRead)
     : notifications;
 
   const getNotificationIcon = (type: Notification['type']) => {
@@ -319,7 +319,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
                 <p>No notifications</p>
               </div>
             ) : (
-              filteredNotifications.map((notification: any) => (
+              filteredNotifications.map((notification) => (
                 <div
                   key={notification.id}
                   className={`p-4 border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-750 transition-colors ${

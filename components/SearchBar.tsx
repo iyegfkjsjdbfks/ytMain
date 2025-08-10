@@ -212,7 +212,7 @@ inputRef.current.blur();
           className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
           aria-label="Recent searches"
         >
-          {recentSearches.map((searchTerm: any) => (
+          {recentSearches.map((searchTerm) => (
             <li key={searchTerm} className="flex items-center justify-between px-4 py-2.5 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors group">
               <button
                 onClick={() => handleSearch(searchTerm)}

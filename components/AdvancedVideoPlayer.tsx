@@ -628,7 +628,7 @@ return;
                         <input
                           type="checkbox"
                           checked={subtitlesEnabled}
-                          onChange={(e) => setSubtitlesEnabled(e: Event.target.checked)}
+                          onChange={(e) => setSubtitlesEnabled(e.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -638,7 +638,7 @@ return;
                         <input
                           type="checkbox"
                           checked={autoplayNext}
-                          onChange={(e) => setAutoplayNext(e: Event.target.checked)}
+                          onChange={(e) => setAutoplayNext(e.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -648,7 +648,7 @@ return;
                         <input
                           type="checkbox"
                           checked={annotations}
-                          onChange={(e) => setAnnotations(e: Event.target.checked)}
+                          onChange={(e) => setAnnotations(e.target.checked)}
                           className="rounded"
                         />
                       </label>

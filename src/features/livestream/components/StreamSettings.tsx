@@ -10,7 +10,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings: any) => void;
+  onSettingsChange?: (settings) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
@@ -134,7 +134,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <input
               type="checkbox"
               checked={settings.enableChat}
-              onChange={(e) => updateSettings({ enableChat: e: Event.target.checked })}
+              onChange={(e) => updateSettings({ enableChat: e.target.checked })}
               className="mr-2"
             />
             Enable Live Chat
@@ -144,7 +144,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <input
               type="checkbox"
               checked={settings.enableDonations}
-              onChange={(e) => updateSettings({ enableDonations: e: Event.target.checked })}
+              onChange={(e) => updateSettings({ enableDonations: e.target.checked })}
               className="mr-2"
             />
             Enable Donations/Super Chat

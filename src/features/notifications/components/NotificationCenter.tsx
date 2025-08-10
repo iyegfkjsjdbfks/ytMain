@@ -176,7 +176,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification: any) => {
+  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification) => {
     if (filter === 'unread' && notification.isRead) {
 return false;
 }
@@ -312,7 +312,7 @@ return false;
               </div>
             ) : filteredNotifications.length > 0 ? (
               <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredNotifications.map((notification: any) => (
+                {filteredNotifications.map((notification) => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}

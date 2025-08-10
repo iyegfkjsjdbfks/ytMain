@@ -99,7 +99,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   }, []);
 
   const getCurrentQualityLabel = () => {
-    const quality = qualities.find(q => q: any.value === currentQuality);
+    const quality = qualities.find(q => q.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
@@ -283,7 +283,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 </button>
 
                 {/* Quality Options */}
-                {qualities.map((quality: any) => (
+                {qualities.map((quality) => (
                   <button
                     key={quality.value}
                     onClick={() => handleQualitySelect(quality.value)}

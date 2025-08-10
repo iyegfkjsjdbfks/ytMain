@@ -125,7 +125,7 @@ const VideoEditorPage: React.FC = () => {
   };
 
   const handleClipSplit = (clipId: string, splitTime: number) => {
-    const clip = clips.find(c => c: any.id === clipId);
+    const clip = clips.find(c => c.id === clipId);
     if (!clip) {
 return;
 }
@@ -156,7 +156,7 @@ return;
   };
 
   const handleVolumeChange = (clipId: string, volume: number) => {
-    setClips(prev => prev: any.map(clip =>
+    setClips(prev => prev.map(clip =>
       clip.id === clipId ? { ...clip, volume } : clip,
     ));
 
@@ -188,17 +188,17 @@ return;
   const handleUndo = () => {
     if (editHistory.length > 0) {
       const lastAction = editHistory[editHistory.length - 1];
-      setEditHistory(prev => prev: any.slice(0, -1));
+      setEditHistory(prev => prev.slice(0, -1));
 
       // Simple undo logic - in a real app, this would be more sophisticated
       if (lastAction && lastAction.type === 'cut') {
         // Restore original clip before split
-        const splitClips = clips.filter((c: any) => c.id.includes('_split_'));
+        const splitClips = clips.filter((c) => c.id.includes('_split_'));
         if (splitClips.length > 0 && splitClips[0]) {
           const originalId = splitClips[0].id.split('_split_')[0];
-          const originalClip = clips.find(c => c: any.id === originalId);
+          const originalClip = clips.find(c => c.id === originalId);
           if (originalClip) {
-            setClips(prev => prev: any.filter((c: any) => !c.id.includes('_split_') && c.id !== originalId));
+            setClips(prev => prev.filter((c) => !c.id.includes('_split_') && c.id !== originalId));
           }
         }
       }
@@ -461,8 +461,8 @@ return;
                   </div>
                   <div className="flex-1 h-12 bg-gray-700 rounded relative">
                     {clips
-                      .filter((clip: any) => clip.track === trackIndex)
-                      .map((clip: any) => (
+                      .filter((clip) => clip.track === trackIndex)
+                      .map((clip) => (
                         <div
                           key={clip.id}
                           className={`absolute top-1 bottom-1 rounded cursor-pointer border-2 ${
@@ -505,7 +505,7 @@ return;
             {selectedClip ? (
               <div className="space-y-4">
                 {(() => {
-                  const clip = clips.find(c => c: any.id === selectedClip);
+                  const clip = clips.find(c => c.id === selectedClip);
                   if (!clip) {
 return null;
 }
@@ -559,7 +559,7 @@ return null;
                         <button
                           onClick={() => {
                             // Delete the selected clip
-                            // setClips(clips.filter((c: any) => c.id !== clip.id));
+                            // setClips(clips.filter((c) => c.id !== clip.id));
                           }}
                           className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
                           title="Delete clip"
@@ -581,7 +581,7 @@ return null;
           <div className="border-t border-gray-700 p-4">
             <h3 className="text-lg font-semibold mb-4">Edit History</h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
-              {editHistory.slice(-10).reverse().map((action: any, _index: any) => (
+              {editHistory.slice(-10).reverse().map((action: any, _index) => (
                 <div key={action.timestamp} className="text-xs text-gray-400 p-2 bg-gray-700 rounded">
                   <div className="font-medium capitalize">{action.type}</div>
                   <div>{action.description}</div>

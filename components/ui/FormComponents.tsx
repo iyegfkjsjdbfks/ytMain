@@ -325,7 +325,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
               {placeholder}
             </option>
           )}
-          {options.map((option: any) => (
+          {options.map((option) => (
             <option
               key={option.value}
               value={option.value}
@@ -459,7 +459,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
       )}
 
       <div className="space-y-2">
-        {options.map((option: any) => {
+        {options.map((option) => {
           const radioId = `${name}-${option.value}`;
 
           return (

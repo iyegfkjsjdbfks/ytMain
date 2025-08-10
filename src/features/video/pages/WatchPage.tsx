@@ -261,7 +261,7 @@ const WatchPage: React.FC = () => {
         const { googleSearchVideoStore } = await import('../../../../services/googleSearchVideoStore');
         const allVideos = googleSearchVideoStore.getAllVideos();
         logger.debug('📦 Videos in Google Search store:', allVideos.length);
-        logger.debug('📦 Store contents:', allVideos.map((v: any) => ({ id: v.id, title: v.title })));
+        logger.debug('📦 Store contents:', allVideos.map((v) => ({ id: v.id, title: v.title })));
 
         // Check if our specific video is in the store
         const specificVideo = googleSearchVideoStore.getVideo(videoId);
@@ -433,7 +433,7 @@ const WatchPage: React.FC = () => {
                     ...video,
                     viewCount: video.views,
                     duration: typeof video.duration === 'string' ?
-                      parseInt(video.duration.split(':').reduce((acc: any, time: any) => (60 * acc: any) + +time: any, 0).toString(), 10) :
+                      parseInt(video.duration.split(':').reduce((acc: any, time) => (60 * acc: any) + +time: any, 0).toString(), 10) :
                       (video.duration as number || 0),
                   } as unknown as Video}
                   autoplay={true}
@@ -451,7 +451,7 @@ const WatchPage: React.FC = () => {
                   autoplay={true}
                   className="w-full"
                   useYouTube={false}
-                  onTimeUpdate={(_currentTime: any, _duration: any) => {
+                  onTimeUpdate={(_currentTime: any, _duration) => {
                     // Track watch progress
                     }}
                   onPlay={() => {
@@ -687,7 +687,7 @@ const WatchPage: React.FC = () => {
                   Loading recommendations...
                 </div>
               ) : (
-                _recommendedVideos.map((recommendedVideo: any) => {
+                _recommendedVideos.map((recommendedVideo) => {
                   logger.debug('🎬 Rendering recommendation:', recommendedVideo.id, recommendedVideo.title);
                   return (
                     <VideoCard

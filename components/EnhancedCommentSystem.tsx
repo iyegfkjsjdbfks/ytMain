@@ -449,11 +449,11 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
   // Filter and sort comments with memoization
   const sortedComments = useMemo(() => {
-    const topLevelComments = comments.filter((comment: any) => !comment.parentId);
-    const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
-    const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
+    const topLevelComments = comments.filter((comment) => !comment.parentId);
+    const pinnedComments = topLevelComments.filter((comment) => comment.isPinned);
+    const regularComments = topLevelComments.filter((comment) => !comment.isPinned);
 
-    const sorted = regularComments.sort((a: any, b: any) => {
+    const sorted = regularComments.sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();

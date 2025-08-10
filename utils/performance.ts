@@ -36,7 +36,7 @@ class PerformanceMonitor {
     // Observe navigation metrics
     try {
       const navigationObserver = new PerformanceObserver((list) => {
-        list.getEntries().forEach((_entry: any) => {
+        list.getEntries().forEach((_entry) => {
           // Performance monitoring disabled
           // const navigation = _entry as PerformanceNavigationTiming;
           // console.log('Navigation timing:', navigation);
@@ -115,7 +115,7 @@ return 1500;
   }
 
   getMetrics(): PerformanceMetric[] {
-    return Array.from(this.metrics.values()).filter((m: any) => m.duration !== undefined);
+    return Array.from(this.metrics.values()).filter((m) => m.duration !== undefined);
   }
 
   clearMetrics(): void {
@@ -127,7 +127,7 @@ return 1500;
   }
 
   getAverageTime(name: string): number | null {
-    const metrics = this.getMetrics().filter((m: any) => m.name === name);
+    const metrics = this.getMetrics().filter((m) => m.name === name);
     if (metrics.length === 0) {
 return null;
 }
@@ -240,7 +240,7 @@ export function withPerformanceMonitoring<P extends object>(
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const MonitoredComponent = React.forwardRef((props: P, ref: any) => {
+  const MonitoredComponent = React.forwardRef((props: P, ref) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
 
     React.useEffect(() => {
@@ -288,12 +288,12 @@ return;
 
   console.group('📦 Bundle Analysis');
   // Estimate bundle sizes (this is approximate)
-  scripts.forEach((script: any) => {
+  scripts.forEach((script) => {
     if (script.src && !script.src.includes('chrome-extension')) {
       }
   });
 
-  styles.forEach((style: any) => {
+  styles.forEach((style) => {
     if (style.href && !style.href.includes('chrome-extension')) {
       }
   });

@@ -46,7 +46,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 
   const handleSelectAll = (selected: boolean) => {
     if (selected) {
-      const allIds = videos.map(video => video: any.id);
+      const allIds = videos.map(video => video.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -79,7 +79,7 @@ return;
   // Filter videos based on visibility
   const filteredVideos = filterVisibility === 'all'
     ? videos
-    : videos.filter((video: any) => video.visibility === filterVisibility);
+    : videos.filter((video) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {
@@ -166,7 +166,7 @@ return;
               type="checkbox"
               className="h-4 w-4"
               checked={selectedVideos.size === videos.length && videos.length > 0}
-              onChange={e: Event => handleSelectAll(e: Event.target.checked)}
+              onChange={e: Event => handleSelectAll(e.target.checked)}
             />
             <span className="text-sm text-gray-600 mr-3">
               {selectedVideos.size} selected
@@ -193,7 +193,7 @@ return;
                 type="checkbox"
                 className="h-4 w-4 mr-4"
                 checked={selectedVideos.has(video.id)}
-                onChange={e: Event => handleVideoSelect(video.id, e: Event.target.checked)}
+                onChange={e: Event => handleVideoSelect(video.id, e.target.checked)}
               />
 
               <div className="flex flex-col md:flex-row items-start md:items-center flex-grow">

@@ -94,7 +94,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   const stopPreview = () => {
     setIsPreviewing(false);
     if (stream && !isStreaming) {
-      stream.getTracks().forEach(track => track: any.stop());
+      stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
   };
@@ -150,8 +150,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       // Enable multiplatform if configured
       if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
         const enabledPlatforms = streamSettings.platforms
-          .filter((p: any) => p.enabled)
-          .map(p => p: any.name);
+          .filter((p) => p.enabled)
+          .map(p => p.name);
 
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
@@ -174,7 +174,7 @@ return;
       setCurrentStream(null);
 
       if (stream) {
-        stream.getTracks().forEach(track => track: any.stop());
+        stream.getTracks().forEach(track => track.stop());
         setStream(null);
       }
       setIsPreviewing(false);
@@ -591,7 +591,7 @@ return;
             )}
             {activeTab === 'schedule' && (
               <StreamScheduler
-                onStreamScheduled={(stream: any) => {
+                onStreamScheduled={(stream) => {
                   logger.debug('Stream scheduled:', stream);
                 }}
               />

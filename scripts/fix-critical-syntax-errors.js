@@ -24,6 +24,36 @@ class CriticalSyntaxFixer {
         pattern: /e: Event\.target\.value/g,
         replacement: 'e.target.value'
       },
+      // Fix incorrect property access with checked
+      {
+        name: 'Event target checked access',
+        pattern: /e: Event\.target\.checked/g,
+        replacement: 'e.target.checked'
+      },
+      // Fix any other Event property access patterns
+      {
+        name: 'Event target property access',
+        pattern: /e: Event\.target\.(\w+)/g,
+        replacement: 'e.target.$1'
+      },
+      // Fix Event currentTarget access
+      {
+        name: 'Event currentTarget access',
+        pattern: /e: Event\.currentTarget\.(\w+)/g,
+        replacement: 'e.currentTarget.$1'
+      },
+      // Fix array/object access with type annotation
+      {
+        name: 'Array access with type annotation',
+        pattern: /([a-zA-Z_$][a-zA-Z0-9_$]*): any\[([^\]]+)\]/g,
+        replacement: '$1[$2]'
+      },
+      // Fix property access in boolean context
+      {
+        name: 'Boolean property access with type',
+        pattern: /!([a-zA-Z_$][a-zA-Z0-9_$]*): any\[([^\]]+)\]/g,
+        replacement: '!$1[$2]'
+      },
       // Fix incorrect spread syntax with type annotation
       {
         name: 'Spread operator type annotation',
@@ -37,7 +67,7 @@ class CriticalSyntaxFixer {
         replacement: (match, body) => {
           // Fix the body by removing incorrect type annotations
           const fixedBody = body
-            .replace(/e: Event\.target\.value/g, 'e.target.value')
+            .replace(/e: Event\.target\.(\w+)/g, 'e.target.$1')
             .replace(/prev: any\s*=>/g, 'prev =>')
             .replace(/\.\.\.prev: any/g, '...prev');
           return `onChange={(e) => ${fixedBody}}`;

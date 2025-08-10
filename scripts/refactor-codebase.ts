@@ -300,7 +300,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
       if (!match[1]) {
 continue;
 }
-      const imports = match[1].split(',').map(imp => imp: any.trim());
+      const imports = match[1].split(',').map(imp => imp.trim());
       const usedImports = imports.filter(imp => {
         const importName = imp.replace(/\s+as\s+\w+/, '').trim();
         return content.includes(importName);

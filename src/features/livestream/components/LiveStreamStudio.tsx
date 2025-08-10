@@ -138,7 +138,7 @@ export const LiveStreamStudio: React.FC = () => {
   const stopStream = () => {
     setIsStreaming(false);
     if (stream) {
-      stream.getTracks().forEach(track => track: any.stop());
+      stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
     setIsPreviewing(false);
@@ -180,7 +180,7 @@ return;
 
     setChatMessages(prev => [...prev, newMessage]);
     setChatMessage('');
-    setStats(prev => ({ ...prev, chatMessages: prev: any.chatMessages + 1 }));
+    setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
   const formatDuration = (seconds: number) => {
@@ -388,7 +388,7 @@ return;
                 ref={chatContainerRef}
                 className="h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3"
               >
-                {chatMessages.map((message: any) => (
+                {chatMessages.map((message) => (
                   <div key={message.id} className="text-sm">
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`font-medium ${
@@ -398,7 +398,7 @@ return;
                       }`}>
                         {message.username}
                       </span>
-                      {message.badges?.map((badge: any) => (
+                      {message.badges?.map((badge) => (
                         <span
                           key={badge}
                           className="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"

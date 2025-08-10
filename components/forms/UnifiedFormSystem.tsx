@@ -17,7 +17,7 @@ interface FormContextValue {
   errors: Record<string, string>;
   touched: Record<string, boolean>;
   values: Record<string, any>;
-  setFieldValue: (name: string, value: any) => void;
+  setFieldValue: (name: string, value) => void;
   setFieldError: (name: string, error: string) => void;
   setFieldTouched: (name: string, touched: boolean) => void;
   validateField: (name: string) => void;
@@ -29,7 +29,7 @@ const FormContext = createContext<FormContextValue | null>(null);
 interface FormProviderProps {
   children: React.ReactNode;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value: any) => string | undefined>;
+  validationSchema?: Record<string, (value) => string | undefined>;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
 }
 
@@ -42,7 +42,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const setFieldValue = useCallback((name: string, value: any) => {
+  const setFieldValue = useCallback((name: string, value) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -426,7 +426,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
             {placeholder}
           </option>
         )}
-        {options.map((option: any) => (
+        {options.map((option) => (
           <option
             key={option.value}
             value={option.value}
@@ -460,7 +460,7 @@ interface UnifiedFormProps {
   children: React.ReactNode;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value: any) => string | undefined>;
+  validationSchema?: Record<string, (value) => string | undefined>;
   className?: string;
 }
 

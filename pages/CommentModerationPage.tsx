@@ -67,9 +67,9 @@ const CommentModerationPage: React.FC = () => {
     // Apply filter
     if (filter !== 'all') {
       if (filter === 'flagged') {
-        filtered = filtered.filter((comment: any) => comment.flaggedReason);
+        filtered = filtered.filter((comment) => comment.flaggedReason);
       } else {
-        filtered = filtered.filter((comment: any) => comment.status === filter);
+        filtered = filtered.filter((comment) => comment.status === filter);
       }
     }
 
@@ -83,7 +83,7 @@ const CommentModerationPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a: any, b: any) => {
+    filtered.sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -117,7 +117,7 @@ const CommentModerationPage: React.FC = () => {
       setSelectedComments(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedComments(new Set(filteredComments.map(c => c: any.id)));
+      setSelectedComments(new Set(filteredComments.map(c => c.id)));
       setShowBulkActions(true);
     }
   };
@@ -189,9 +189,9 @@ const CommentModerationPage: React.FC = () => {
 return comments.length;
 }
     if (filterType === 'flagged') {
-return comments.filter((c: any) => c.flaggedReason).length;
+return comments.filter((c) => c.flaggedReason).length;
 }
-    return comments.filter((c: any) => c.status === filterType).length;
+    return comments.filter((c) => c.status === filterType).length;
   };
 
   if (loading) {
@@ -337,7 +337,7 @@ return comments.filter((c: any) => c.flaggedReason).length;
               </p>
             </div>
           ) : (
-            filteredComments.map((comment: any) => (
+            filteredComments.map((comment) => (
               <div key={comment.id} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                 <div className="flex items-start space-x-4">
                   <input

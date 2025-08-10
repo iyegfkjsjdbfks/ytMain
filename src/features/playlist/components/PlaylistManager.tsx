@@ -13,7 +13,7 @@ interface PlaylistManagerProps {
 interface CreatePlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: (data) => void;
 }
 
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
@@ -59,7 +59,7 @@ return;
   const removeTag = (tagToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -203,7 +203,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     playlist.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleCreatePlaylist = async (data: any) => {
+  const handleCreatePlaylist = async (data) => {
     try {
       await createPlaylistMutation.mutate(data);
     } catch (error) {

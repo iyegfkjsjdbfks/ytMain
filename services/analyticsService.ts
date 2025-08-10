@@ -175,7 +175,7 @@ class AnalyticsService {
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
+      entries.forEach((entry) => {
         if (!entry.hadRecentInput) {
           clsValue += entry.value;
         }
@@ -191,7 +191,7 @@ class AnalyticsService {
     // First Input Delay
     const fidObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
+      entries.forEach((entry) => {
         this.track('first_input_delay', {
           value: entry.processingStart - entry.startTime,
           inputType: entry.name,

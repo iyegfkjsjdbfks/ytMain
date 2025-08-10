@@ -170,7 +170,7 @@ return null;
   const removeTag = (tagToRemove: string) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -422,7 +422,7 @@ return null;
                           type="checkbox"
                           id="comments-enabled"
                           checked={metadata.commentsEnabled}
-                          onChange={(e) => setMetadata(prev => ({ ...prev, commentsEnabled: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, commentsEnabled: e.target.checked }))}
                           className="mr-3"
                         />
                         Allow comments
@@ -433,7 +433,7 @@ return null;
                           type="checkbox"
                           id="age-restriction"
                           checked={metadata.ageRestriction}
-                          onChange={(e) => setMetadata(prev => ({ ...prev, ageRestriction: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, ageRestriction: e.target.checked }))}
                           className="mr-3"
                         />
                         <span className="text-gray-900 dark:text-white">Age restriction (18+)</span>
@@ -452,7 +452,7 @@ return null;
                           type="checkbox"
                           id="monetization-enabled"
                           checked={metadata.monetization}
-                          onChange={(e) => setMetadata(prev => ({ ...prev, monetization: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, monetization: e.target.checked }))}
                           className="mr-3"
                         />
                           <p className="font-medium text-gray-900 dark:text-white">

@@ -130,7 +130,7 @@ export const useArray = <T>(
   }, []);
 
   const filter = useCallback((callback: (item: T, index: number) => boolean) => {
-    setArray(arr => arr: any.filter(callback));
+    setArray(arr => arr.filter(callback));
   }, []);
 
   const update = useCallback((index: number, newElement: T) => {
@@ -142,7 +142,7 @@ export const useArray = <T>(
   }, []);
 
   const remove = useCallback((index: number) => {
-    setArray(arr => arr: any.filter((_: any, i: any) => i: any !== index));
+    setArray(arr => arr.filter((_: any, i) => i: any !== index));
   }, []);
 
   const clear = useCallback(() => setArray([]), []);

@@ -77,7 +77,7 @@ return;
     }).format(timestamp);
   };
 
-  const filteredQuestions = questions.filter((question: any) => {
+  const filteredQuestions = questions.filter((question) => {
     switch (filter) {
       case 'unanswered':
         return !question.answered;
@@ -90,7 +90,7 @@ return;
     }
   });
 
-  const sortedQuestions = filteredQuestions.sort((a: any, b: any) => {
+  const sortedQuestions = filteredQuestions.sort((a: any, b) => {
     // Highlighted questions first
     if (a.isHighlighted && !b.isHighlighted) {
 return -1;
@@ -147,9 +147,9 @@ return bUpvotes - aUpvotes;
       <div className="flex space-x-1 mb-4 p-1 bg-gray-100 rounded-lg">
         {[
           { key: 'all', label: 'All', count: questions.length },
-          { key: 'unanswered', label: 'Unanswered', count: questions.filter((q: any) => !q.answered).length },
-          { key: 'answered', label: 'Answered', count: questions.filter((q: any) => q.answered).length },
-          { key: 'pinned', label: 'Pinned', count: questions.filter((q: any) => q.isHighlighted).length },
+          { key: 'unanswered', label: 'Unanswered', count: questions.filter((q) => !q.answered).length },
+          { key: 'answered', label: 'Answered', count: questions.filter((q) => q.answered).length },
+          { key: 'pinned', label: 'Pinned', count: questions.filter((q) => q.isHighlighted).length },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -167,7 +167,7 @@ return bUpvotes - aUpvotes;
 
       {/* Questions List */}
       <div className="space-y-3 max-h-96 overflow-y-auto">
-        {sortedQuestions.map((question: any) => (
+        {sortedQuestions.map((question) => (
           <div
             key={question.id}
             className={`p-4 border rounded-lg ${

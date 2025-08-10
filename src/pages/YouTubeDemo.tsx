@@ -67,7 +67,7 @@ const YouTubeDemo: React.FC = () => {
               <input
                 type="checkbox"
                 checked={useCustomControls}
-                onChange={(e) => setUseCustomControls(e: Event.target.checked)}
+                onChange={(e) => setUseCustomControls(e.target.checked)}
                 className="rounded text-blue-500"
               />
               <span>Use Custom Controls</span>
@@ -77,7 +77,7 @@ const YouTubeDemo: React.FC = () => {
               <input
                 type="checkbox"
                 checked={autoplay}
-                onChange={(e) => setAutoplay(e: Event.target.checked)}
+                onChange={(e) => setAutoplay(e.target.checked)}
                 className="rounded text-blue-500"
               />
               <span>Autoplay</span>

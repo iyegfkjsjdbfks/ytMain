@@ -200,7 +200,7 @@ const RegisterPage: React.FC = () => {
                   name="accept-terms"
                   type="checkbox"
                   checked={acceptTerms}
-                  onChange={(e) => setAcceptTerms(e: Event.target.checked)}
+                  onChange={(e) => setAcceptTerms(e.target.checked)}
                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                   required
                 />

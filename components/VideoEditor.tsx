@@ -59,7 +59,7 @@ export interface VideoFilter {
 
 interface VideoEditorProps {
   videoFile: File;
-  onSave: (editedVideo: Blob, metadata: any) => void;
+  onSave: (editedVideo: Blob, metadata) => void;
   onCancel: () => void;
   className?: string;
 }
@@ -188,13 +188,13 @@ return;
   };
 
   const updateTextOverlay = (id: string, updates: Partial<TextOverlay>) => {
-    setTextOverlays(prev => prev: any.map(text =>
+    setTextOverlays(prev => prev.map(text =>
       text.id === id ? { ...text, ...updates } : text,
     ));
   };
 
   const deleteTextOverlay = (id: string) => {
-    setTextOverlays(prev => prev: any.filter((text: any) => text.id !== id));
+    setTextOverlays(prev => prev.filter((text) => text.id !== id));
     setSelectedText(null);
   };
 
@@ -211,13 +211,13 @@ return;
   };
 
   const updateFilter = (id: string, value: number) => {
-    setFilters(prev => prev: any.map(filter =>
+    setFilters(prev => prev.map(filter =>
       filter.id === id ? { ...filter, value } : filter,
     ));
   };
 
   const removeFilter = (id: string) => {
-    setFilters(prev => prev: any.filter((filter: any) => filter.id !== id));
+    setFilters(prev => prev.filter((filter) => filter.id !== id));
   };
 
   const trimVideo = () => {
@@ -443,7 +443,7 @@ return;
       </div>
 
       <div className="space-y-3">
-        {textOverlays.map((text: any) => (
+        {textOverlays.map((text) => (
           <div
             key={text.id}
             className={`p-3 border rounded cursor-pointer ${
@@ -478,7 +478,7 @@ return;
         <div className="border-t pt-4 space-y-3">
           <h4 className="font-medium text-gray-900 dark:text-white">Edit Text</h4>
           {(() => {
-            const text = textOverlays.find(t => t: any.id === selectedText);
+            const text = textOverlays.find(t => t.id === selectedText);
             if (!text) {
 return null;
 }
@@ -549,7 +549,7 @@ return null;
       </div>
 
       <div className="space-y-3">
-        {filters.map((filter: any) => (
+        {filters.map((filter) => (
           <div key={filter.id} className="p-3 border border-gray-200 dark:border-gray-700 rounded">
             <div className="flex items-center justify-between mb-2">
               <span className="font-medium text-gray-900 dark:text-white">

@@ -61,7 +61,7 @@ const ContentManagerPage: React.FC = () => {
 
     // Apply filter
     if (filter !== 'all') {
-      filtered = filtered.filter((item: any) => item.status === filter);
+      filtered = filtered.filter((item) => item.status === filter);
     }
 
     // Apply search
@@ -74,7 +74,7 @@ const ContentManagerPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a: any, b: any) => {
+    filtered.sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
@@ -115,7 +115,7 @@ const ContentManagerPage: React.FC = () => {
       setSelectedItems(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedItems(new Set(filteredContent.map(item => item: any.id)));
+      setSelectedItems(new Set(filteredContent.map(item => item.id)));
       setShowBulkActions(true);
     }
   };
@@ -149,7 +149,7 @@ const ContentManagerPage: React.FC = () => {
     if (action === 'duplicate') {
       // Add duplicated items
       const duplicatedItems = content
-        .filter((item: any) => selectedItems.has(item.id))
+        .filter((item) => selectedItems.has(item.id))
         .map(item => ({
           ...item,
           id: `${item.id}-copy`,
@@ -220,7 +220,7 @@ return;
     if (filterType === 'all') {
 return content.length;
 }
-    return content.filter((item: any) => item.status === filterType).length;
+    return content.filter((item) => item.status === filterType).length;
   };
 
   if (loading) {
@@ -381,7 +381,7 @@ return content.length;
           </div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
-            {filteredContent.map((item: any) => (
+            {filteredContent.map((item) => (
               <div key={item.id} className="group relative">
                 <div className="absolute top-2 left-2 z-10">
                   <input
@@ -466,7 +466,7 @@ return content.length;
           </div>
         ) : (
           <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-            {filteredContent.map((item: any) => (
+            {filteredContent.map((item) => (
               <div key={item.id} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                 <div className="flex items-center space-x-4">
                   <input

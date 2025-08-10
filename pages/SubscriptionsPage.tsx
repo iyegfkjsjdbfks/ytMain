@@ -56,13 +56,13 @@ return [];
 
     switch (activeTab) {
       case 'today':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= today;
         });
         break;
       case 'week':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= weekAgo;
         });
@@ -72,7 +72,7 @@ return [];
         filtered = filtered.filter((_, index) => index % 3 !== 0);
         break;
       case 'live':
-        filtered = filtered.filter((video: any) => video.isLive);
+        filtered = filtered.filter((video) => video.isLive);
         break;
       case 'posts':
         // Mock community posts filter
@@ -98,13 +98,13 @@ return [];
   }, [subscribedVideos, activeTab, sortBy]);
 
   const subscriptionStats = useMemo(() => {
-    const notificationsEnabled = subscribedChannels.filter((c: any) => c.notificationsEnabled).length;
+    const notificationsEnabled = subscribedChannels.filter((c) => c.notificationsEnabled).length;
     const totalVideos = subscribedVideos?.length || 0;
 
     // Calculate new videos today (mock calculation)
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const newVideosToday = subscribedVideos?.filter((video: any) => {
+    const newVideosToday = subscribedVideos?.filter((video) => {
       const uploadDate = new Date(video.uploadedAt);
       return uploadDate >= todayStart;
     }).length || 0;
@@ -276,7 +276,7 @@ return [];
 
       {/* Tabs and Filters */}
       <div className="mb-6">
-        <Tabs value: any={activeTab} onValueChange={(value: any) => setActiveTab(value: any as TabType)}>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value: any as TabType)}>
           <div className="flex items-center justify-between mb-4">
             <TabsList className="flex-1">
               <TabsTrigger value="all">All</TabsTrigger>

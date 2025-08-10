@@ -42,7 +42,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
         ];
 
         const historyFeed = allVideos
-          .filter((video: any) => watchedVideoIds.includes(video.id) && !video.isShort)
+          .filter((video) => watchedVideoIds.includes(video.id) && !video.isShort)
           .sort(() => Math.random() - 0.5) // Randomize order to simulate different watch times
           .slice(0, maxVideos);
 

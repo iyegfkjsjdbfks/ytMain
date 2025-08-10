@@ -49,7 +49,7 @@ return;
 
     // Validate file size
     if (maxSize) {
-      const oversizedFiles = fileArray.filter((file: any) => file.size > maxSize);
+      const oversizedFiles = fileArray.filter((file) => file.size > maxSize);
       if (oversizedFiles.length > 0) {
         setError(`Some files exceed the maximum size of ${formatFileSize(maxSize)}`);
         return;
@@ -119,7 +119,7 @@ return '0 Bytes';
           type="file"
           accept={accept}
           multiple={multiple}
-          onChange={(e) => handleFileSelect(e: Event.target.files)}
+          onChange={(e) => handleFileSelect(e.target.files)}
           className="hidden"
           disabled={disabled}
         />

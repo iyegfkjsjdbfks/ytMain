@@ -202,7 +202,7 @@ return 'Playlist name must be less than 100 characters';
               </div>
             ) : (
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                {existingPlaylists.map((playlist: any) => (
+                {existingPlaylists.map((playlist) => (
                   <label
                     key={playlist.id}
                     htmlFor={`playlist-${playlist.id}`}

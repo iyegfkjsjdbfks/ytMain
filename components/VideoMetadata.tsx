@@ -190,7 +190,7 @@ return `${(num / 1000).toFixed(1)}K`;
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {detailedMetadata.filter((item: any) => item.condition).map((item, index) => (
+            {detailedMetadata.filter((item) => item.condition).map((item, index) => (
               <div key={index} className="flex items-start space-x-2">
                 <item.icon className="w-4 h-4 text-neutral-500 dark:text-neutral-400 mt-0.5 flex-shrink-0" />
                 <div className="min-w-0 flex-1">

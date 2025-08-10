@@ -69,7 +69,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const [previewMode, setPreviewMode] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
-  const handleInputChange = (field: keyof ChannelBranding, value: any) => {
+  const handleInputChange = (field: keyof ChannelBranding, value) => {
     setBranding(prev => ({ ...prev, [field]: value }));
     setUnsavedChanges(true);
   };
@@ -95,7 +95,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleKeywordRemove = (keyword: string) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword),
+      channelKeywords: prev.channelKeywords.filter((k) => k !== keyword),
     }));
     setUnsavedChanges(true);
   };
@@ -426,7 +426,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         Channel Keywords
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {branding.channelKeywords.map((keyword: any) => (
+                        {branding.channelKeywords.map((keyword) => (
                           <span
                             key={keyword}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"

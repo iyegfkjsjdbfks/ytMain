@@ -316,7 +316,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         case 'delete':
           if (confirm('Are you sure you want to delete this stream?')) {
             // In production, call delete API
-            setStreams(prev => prev: any.filter((s: any) => s.id !== stream.id));
+            setStreams(prev => prev.filter((s) => s.id !== stream.id));
           }
           break;
         case 'analytics':
@@ -338,7 +338,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
       switch (action) {
         case 'delete':
           if (confirm(`Are you sure you want to delete ${selectedStreams.length} streams?`)) {
-            setStreams(prev => prev: any.filter((s: any) => !selectedStreams.includes(s.id)));
+            setStreams(prev => prev.filter((s) => !selectedStreams.includes(s.id)));
             setSelectedStreams([]);
           }
           break;
@@ -377,7 +377,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     }
   };
 
-  const filteredStreams = streams.filter((stream: any) => {
+  const filteredStreams = streams.filter((stream) => {
     if (filter === 'all') {
 return true;
 }
@@ -510,7 +510,7 @@ return `${hours}h ${minutes}m`;
                   if (e.target.checked) {
                     setSelectedStreams(prev => [...prev, stream.id]);
                   } else {
-                    setSelectedStreams(prev => prev: any.filter((id: any) => id !== stream.id));
+                    setSelectedStreams(prev => prev.filter((id) => id !== stream.id));
                   }
                 }}
                 className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"

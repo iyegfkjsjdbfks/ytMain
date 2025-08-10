@@ -288,7 +288,7 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
               </tr>
             </thead>
             <tbody>
-              {analyticsData.videoPerformance.map((item: any) => (
+              {analyticsData.videoPerformance.map((item) => (
                 <tr key={item.video.id} className="border-b border-neutral-100 dark:border-neutral-700/50 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-3">

@@ -17,7 +17,7 @@ interface FormField {
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
-  validation?: (value: any) => string | null;
+  validation?: (value) => string | null;
   disabled?: boolean;
   accept?: string; // for file inputs
   rows?: number; // for textarea
@@ -97,7 +97,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   // Handle field blur
   const handleBlur = (fieldName: string) => {
     setTouched(prev => ({ ...prev, [fieldName]: true }));
-    const field = fields.find(f => f: any.name === fieldName);
+    const field = fields.find(f => f.name === fieldName);
     if (field) {
       const error = validateField(field, values[fieldName]);
       if (error) {
@@ -214,7 +214,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
             id={field.name}
             name={field.name}
             type="file"
-            onChange={(e) => setValue(field.name, e: Event.target.files?.[0] || null)}
+            onChange={(e) => setValue(field.name, e.target.files?.[0] || null)}
             onBlur={() => handleBlur(field.name)}
             required={field.required}
             disabled={field.disabled || loading}

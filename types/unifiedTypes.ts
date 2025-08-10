@@ -435,7 +435,7 @@ export interface ValidationRule {
   type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
   value?: any;
   message: string;
-  validator?: (value: any) => boolean;
+  validator?: (value) => boolean;
 }
 
 export interface FormState {
@@ -550,8 +550,8 @@ export interface UseApiOptions {
   refreshInterval?: number;
   retryCount?: number;
   retryDelay?: number;
-  onSuccess?: (data: any) => void;
-  onError?: (error: any) => void;
+  onSuccess?: (data) => void;
+  onError?: (error) => void;
 }
 
 export interface UseApiReturn<T> {
@@ -574,7 +574,7 @@ export interface UseFormReturn {
   touched: Record<string, boolean>;
   isSubmitting: boolean;
   isValid: boolean;
-  setValue: (name: string, value: any) => void;
+  setValue: (name: string, value) => void;
   setError: (name: string, error: string) => void;
   setTouched: (name: string, touched: boolean) => void;
   handleSubmit: (e: React.FormEvent) => void;

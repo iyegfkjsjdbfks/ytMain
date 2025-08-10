@@ -144,7 +144,7 @@ return;
 
   // Handle infinite scrolling
   const handleScroll = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }: any) => {
+    ({ scrollTop, scrollHeight, clientHeight }) => {
       if (!hasMore || loading || !onLoadMore) {
 return;
 }

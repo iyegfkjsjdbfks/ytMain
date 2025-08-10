@@ -69,7 +69,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
       setScheduledStreams(prev => {
         if (editingStream) {
-          return prev.map(s => s: any.id === stream.id ? stream : s: any);
+          return prev.map(s => s.id === stream.id ? stream : s: any);
         }
           return [...prev, stream];
 
@@ -90,7 +90,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
     try {
       // For now, just remove from local state
       // In a real implementation, this would call a delete API
-      setScheduledStreams(prev => prev: any.filter((s: any) => s.id !== streamId));
+      setScheduledStreams(prev => prev.filter((s) => s.id !== streamId));
     } catch (error) {
       logger.error('Failed to delete stream:', error);
     }
@@ -151,7 +151,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const removeTag = (tagToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -365,7 +365,7 @@ return false;
             <p className="text-sm mt-1">Schedule your first stream to get started!</p>
           </div>
         ) : (
-          scheduledStreams.map((stream: any) => (
+          scheduledStreams.map((stream) => (
             <div
               key={stream.id}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"

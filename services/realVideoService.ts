@@ -199,7 +199,7 @@ export default {
 
 // Playlist management functions (simplified for now)
 export const removeVideoFromPlaylist = async (_playlistId: string, _videoId: string) => {};
-export const updateUserPlaylistDetails = async (_playlistId: string, _details: any) => {};
+export const updateUserPlaylistDetails = async (_playlistId: string, _details) => {};
 
 // Subscription management functions (simplified for now)
 export const getSubscribedChannels = async () => [];

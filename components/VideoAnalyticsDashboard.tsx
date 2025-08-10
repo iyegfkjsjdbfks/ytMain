@@ -131,11 +131,11 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 
   // Chart configurations
   const viewsChartData = {
-    labels: analytics.viewsOverTime.map(d => new Date(d: any.date).toLocaleDateString()),
+    labels: analytics.viewsOverTime.map(d => new Date(d.date).toLocaleDateString()),
     datasets: [
       {
         label: 'Views',
-        data: analytics.viewsOverTime.map(d => d: any.views),
+        data: analytics.viewsOverTime.map(d => d.views),
         borderColor: 'rgb(59, 130, 246)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
@@ -145,11 +145,11 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   };
 
   const watchTimeChartData = {
-    labels: analytics.watchTimeOverTime.map(d => new Date(d: any.date).toLocaleDateString()),
+    labels: analytics.watchTimeOverTime.map(d => new Date(d.date).toLocaleDateString()),
     datasets: [
       {
         label: 'Watch Time (hours)',
-        data: analytics.watchTimeOverTime.map(d => d: any.watchTime / 3600),
+        data: analytics.watchTimeOverTime.map(d => d.watchTime / 3600),
         borderColor: 'rgb(16, 185, 129)',
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.4,
@@ -159,10 +159,10 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   };
 
   const deviceChartData = {
-    labels: analytics.deviceTypes.map(d => d: any.device),
+    labels: analytics.deviceTypes.map(d => d.device),
     datasets: [
       {
-        data: analytics.deviceTypes.map(d => d: any.percentage),
+        data: analytics.deviceTypes.map(d => d.percentage),
         backgroundColor: [
           'rgba(59, 130, 246, 0.8)',
           'rgba(16, 185, 129, 0.8)',
@@ -175,10 +175,10 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   };
 
   const trafficSourcesChartData = {
-    labels: analytics.trafficSources.map(d => d: any.source),
+    labels: analytics.trafficSources.map(d => d.source),
     datasets: [
       {
-        data: analytics.trafficSources.map(d => d: any.percentage),
+        data: analytics.trafficSources.map(d => d.percentage),
         backgroundColor: [
           'rgba(139, 92, 246, 0.8)',
           'rgba(236, 72, 153, 0.8)',
@@ -441,7 +441,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
               Age groups
             </h3>
             <div className="space-y-3">
-              {analytics.ageGroups.map((group: any) => (
+              {analytics.ageGroups.map((group) => (
                 <div key={group.range} className="flex items-center justify-between">
                   <span className="text-gray-900 dark:text-white">{group.range}</span>
                   <div className="flex items-center space-x-2">

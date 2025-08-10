@@ -356,7 +356,7 @@ return 0;
           {!isReply && comment.replies && comment.replies.length > 0 && (
             <div className="mt-3">
               <button
-                onClick={() => onSetExpandedReplies(prev => ({ ...prev, [comment.id]: !prev: any[comment.id] }))}
+                onClick={() => onSetExpandedReplies(prev => ({ ...prev, [comment.id]: !prev[comment.id] }))}
                 className="flex items-center text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 rounded-full px-2 py-1 hover:bg-sky-50 dark:hover:bg-sky-500/10 mb-1"
               >
                 {expandedReplies[comment.id] ?

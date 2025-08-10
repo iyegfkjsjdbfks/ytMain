@@ -182,7 +182,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   };
 
   const filteredItems = items
-    .filter((item: any) => {
+    .filter((item) => {
       if (filterStatus !== 'all' && item.status !== filterStatus) {
 return false;
 }
@@ -199,7 +199,7 @@ return false;
       }
       return true;
     })
-    .sort((a: any, b: any) => {
+    .sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.reportedAt).getTime() - new Date(a.reportedAt).getTime();
@@ -217,7 +217,7 @@ return false;
 
   const handleModerate = (itemId: string, action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
-    setItems(prev => prev: any.map(item =>
+    setItems(prev => prev.map(item =>
       item.id === itemId
         ? {
             ...item,
@@ -245,7 +245,7 @@ return false;
     const itemIds = Array.from(selectedItems);
     onBulkModerate(itemIds, action);
 
-    setItems(prev => prev: any.map(item =>
+    setItems(prev => prev.map(item =>
       selectedItems.has(item.id)
         ? {
             ...item,
@@ -317,10 +317,10 @@ return false;
         {/* Stats */}
         <div className="grid grid-cols-4 gap-4">
           {[
-            { label: 'Pending', count: items.filter((i: any) => i.status === 'pending').length, color: 'text-yellow-600' },
-            { label: 'Flagged', count: items.filter((i: any) => i.status === 'flagged').length, color: 'text-red-600' },
-            { label: 'Critical', count: items.filter((i: any) => i.priority === 'critical').length, color: 'text-red-600' },
-            { label: 'Total Reports', count: items.reduce((sum: any, i: any) => sum: any + i: any.reportCount, 0), color: 'text-blue-600' },
+            { label: 'Pending', count: items.filter((i) => i.status === 'pending').length, color: 'text-yellow-600' },
+            { label: 'Flagged', count: items.filter((i) => i.status === 'flagged').length, color: 'text-red-600' },
+            { label: 'Critical', count: items.filter((i) => i.priority === 'critical').length, color: 'text-red-600' },
+            { label: 'Total Reports', count: items.reduce((sum: any, i) => sum: any + i.reportCount, 0), color: 'text-blue-600' },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
@@ -429,7 +429,7 @@ return false;
 
       {/* Moderation Items */}
       <div className="space-y-4">
-        {filteredItems.map((item: any) => (
+        {filteredItems.map((item) => (
           <div
             key={item.id}
             className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 ${

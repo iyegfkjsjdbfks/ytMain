@@ -146,7 +146,7 @@ class ConditionalLogger {
           return obj.map(removeSensitiveFields);
         }
 
-        const result: any = {};
+        const result= {};
         for (const [key, value] of Object.entries(obj)) {
           if (sensitiveFields.some(field => key.toLowerCase().includes(field))) {
             result[key] = '[REDACTED]';

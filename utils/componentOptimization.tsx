@@ -93,7 +93,7 @@ export function smartMemo<P extends object>(
 ): MemoExoticComponent<ComponentType<P>> {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component, (prevProps: any, nextProps: any) => {
+  const MemoizedComponent = memo(Component, (prevProps: any, nextProps) => {
     const startTime = performance.now();
 
     // Use custom comparison if provided

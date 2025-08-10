@@ -25,7 +25,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
   ]);
 
   const togglePlatform = (platformId: string) => {
-    setPlatforms(prev => prev: any.map(platform => {
+    setPlatforms(prev => prev.map(platform => {
       if (platform.id === platformId) {
         const enabled = !platform.enabled;
         onPlatformToggle?.(platformId, enabled);
@@ -63,7 +63,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
                 className="w-full px-3 py-2 border rounded"
                 value={platform.streamKey || ''}
                 onChange={(e) => {
-                  setPlatforms(prev => prev: any.map(p => 
+                  setPlatforms(prev => prev.map(p => 
                     p.id === platform.id 
                       ? { ...p, streamKey: e.target.value }
                       : p
