@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';

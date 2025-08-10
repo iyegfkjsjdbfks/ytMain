@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
@@ -121,7 +121,7 @@ export const usePWA = (): UsePWAReturn => {
 
   // Initialize PWA on mount (guard against StrictMode double-invoke)
   useEffect(() => {
-    let mounted = true;
+
 
     // Avoid re-initializing if already initialized
     if (!state.isInitialized) {

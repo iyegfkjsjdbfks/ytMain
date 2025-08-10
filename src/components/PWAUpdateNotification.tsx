@@ -1,4 +1,4 @@
-import React from "react";
+
 import { RefreshCw, X, Download } from 'lucide-react';
 
 import { useState, useEffect, type FC } from 'react';

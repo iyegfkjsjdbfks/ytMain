@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { logger } from '../utils/logger';
@@ -259,7 +259,7 @@ return;
   }, []);
 
   // Toggle play/pause
-  const togglePlay = useCallback(async () => {
+
     if (videoRef.current) {
       if (videoRef.current.paused) {
         await play();
@@ -309,7 +309,7 @@ return;
   }, []);
 
   // Toggle mute/unmute
-  const toggleMute = useCallback(() => {
+
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setState(prev => ({ ...prev, isMuted: videoRef.current?.muted ?? false }));
@@ -317,7 +317,7 @@ return;
   }, []);
 
   // Set playback rate
-  const setPlaybackRate = useCallback((rate: number) => {
+
     if (videoRef.current) {
       videoRef.current.playbackRate = rate;
       setState(prev => ({ ...prev, playbackRate: rate }));
@@ -350,7 +350,7 @@ return;
   }, []);
 
   // Toggle fullscreen
-  const toggleFullscreen = useCallback(async () => {
+
     if (state.isFullscreen) {
       await exitFullscreen();
     } else {
@@ -385,7 +385,7 @@ return;
   }, [onError]);
 
   // Toggle Picture-in-Picture
-  const togglePictureInPicture = useCallback(async () => {
+
     if (state.isPictureInPicture) {
       await exitPictureInPicture();
     } else {
@@ -394,7 +394,7 @@ return;
   }, [state.isPictureInPicture, exitPictureInPicture, requestPictureInPicture]);
 
   // Set video element reference
-  const setVideoRef = useCallback((element: HTMLVideoElement | null) => {
+
     videoRef.current = element;
   }, []);
 

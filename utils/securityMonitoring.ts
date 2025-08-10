@@ -4,7 +4,7 @@
  * and automated security response capabilities.
  */
 
-import React from "react";
+
 import { advancedAPM } from './advancedMonitoring';
 
 // Types for security monitoring
@@ -390,7 +390,7 @@ return;
    */
   private async respondToThreat(__threat: SecurityThreat): Promise<SecurityResponse | null> {
     try {
-      let __action: SecurityResponse['action'];
+
 
       // Determine response action based on _threat type and severity
       switch (_threat.type) {

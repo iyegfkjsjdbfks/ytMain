@@ -4,7 +4,7 @@
  * Provides unified configuration, event handling, and cross-system communication
  */
 
-import React from "react";
+
 import { advancedAPM } from './advancedMonitoring';
 
 import { deploymentAutomation } from './deploymentAutomation';

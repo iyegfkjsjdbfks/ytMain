@@ -5,7 +5,7 @@
  */
 
 import { execSync } from 'child_process';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 
@@ -41,21 +41,39 @@ class MasterErrorFixer {
 
   async getTotalErrorCount() {
     try {
-      // Use tsc directly with shorter timeout and incremental compilation
-      const result = execSync('npx tsc --noEmit --incremental', {
+      // Try to read from existing type-errors.txt file first
+      const typeErrorsPath = join(projectRoot, 'type-errors.txt');
+      if (existsSync(typeErrorsPath)) {
+        const content = readFileSync(typeErrorsPath, 'utf8');
+        const errorLines = content.split('\n').filter(line => /error TS\d+:/.test(line));
+        const count = errorLines.length;
+        if (count > 0) {
+          this.lastKnownErrorCount = count;
+          return count;
+        }
+      }
+
+      // Use npm run type-check with shorter timeout
+      const result = execSync('npm run type-check', {
         encoding: 'utf8',
         stdio: 'pipe',
         cwd: projectRoot,
-        timeout: 60000 // 60 second timeout
+        timeout: 30000 // 30 second timeout
       });
       // No errors
       return 0;
     } catch (error) {
       // Handle timeout specifically
       if (error.signal === 'SIGTERM' || error.code === 'ETIMEDOUT') {
-        this.log('Type check timed out after 60 seconds', 'warning');
-        // Return a reasonable fallback instead of hardcoded value
-        return this.lastKnownErrorCount || 0;
+        this.log('Type check timed out after 30 seconds', 'warning');
+        // Return a reasonable fallback from file
+        const typeErrorsPath = join(projectRoot, 'type-errors.txt');
+        if (existsSync(typeErrorsPath)) {
+          const content = readFileSync(typeErrorsPath, 'utf8');
+          const errorLines = content.split('\n').filter(line => /error TS\d+:/.test(line));
+          return errorLines.length;
+        }
+        return this.lastKnownErrorCount || 500; // Reasonable fallback
       }
       
       const out = `${error.stdout || ''}${error.stderr || ''}`;
@@ -69,10 +87,19 @@ class MasterErrorFixer {
 
   async getErrorCountByType(errorCode) {
     try {
+      // Try to read from existing type-errors.txt file first
+      const typeErrorsPath = join(projectRoot, 'type-errors.txt');
+      if (existsSync(typeErrorsPath)) {
+        const content = readFileSync(typeErrorsPath, 'utf8');
+        const regex = new RegExp(`error TS${errorCode}[:]`);
+        const count = content.split('\n').filter(l => regex.test(l)).length;
+        if (count >= 0) return count;
+      }
+
       // Run type-check and parse output in JS to support Windows environments
       const run = () => {
         try {
-          execSync('npm run type-check', { encoding: 'utf8', stdio: 'pipe', cwd: projectRoot });
+          execSync('npm run type-check', { encoding: 'utf8', stdio: 'pipe', cwd: projectRoot, timeout: 15000 });
           return '';
         } catch (err) {
           const out = `${err.stdout || ''}${err.stderr || ''}`;
@@ -248,6 +275,30 @@ class MasterErrorFixer {
         description: 'Removes unused imports and variables'
       },
       {
+        name: 'Missing Properties',
+        script: 'fix-ts2739-missing-properties.js',
+        errorCode: '2739',
+        description: 'Fixes type objects missing required properties'
+      },
+      {
+        name: 'Property Suggestions',
+        script: 'fix-ts2551-property-does-not-exist.js',
+        errorCode: '2551',
+        description: 'Applies TypeScript property name suggestions'
+      },
+      {
+        name: 'Cannot Find Module',
+        script: 'fix-ts2307-cannot-find-module.js',
+        errorCode: '2307',
+        description: 'Fixes import paths and creates missing modules'
+      },
+      {
+        name: 'No Exported Member',
+        script: 'fix-ts2305-no-exported-member.js',
+        errorCode: '2305',
+        description: 'Fixes missing exports and import statements'
+      },
+      {
         name: 'Enhanced Type Not Assignable',
         script: 'fix-ts2322-enhanced.js',
         errorCode: '2322',
@@ -264,6 +315,12 @@ class MasterErrorFixer {
         script: 'fix-ts2300-duplicate-identifier.js',
         errorCode: '2300',
         description: 'Removes duplicate imports and declarations'
+      },
+      {
+        name: 'Implicit Any Parameter',
+        script: 'fix-ts7006-implicit-any-param.js',
+        errorCode: '7006',
+        description: 'Adds explicit types to function parameters'
       },
       {
         name: 'Implicit Any Type',

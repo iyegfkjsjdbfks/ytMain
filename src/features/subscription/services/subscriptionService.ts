@@ -1,5 +1,5 @@
     imported: number;
-import React from "react";
+
 import { api } from '../../../services/api/base';
 
 import { logger } from '../../../utils/logger';

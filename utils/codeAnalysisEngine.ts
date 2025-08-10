@@ -4,7 +4,7 @@
  * and continuous improvement recommendations for enhanced maintainability.
  */
 
-import React from "react";
+
 import { advancedAPM } from './advancedMonitoring';
 
 // Types for code analysis

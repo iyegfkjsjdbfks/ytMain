@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';

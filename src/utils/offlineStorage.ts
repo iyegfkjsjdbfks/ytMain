@@ -1,4 +1,4 @@
-import React from "react";
+
 import { conditionalLogger } from './conditionalLogger';
 import type { Video } from '../types/core';
 

@@ -4,7 +4,7 @@
  * with real-time monitoring and automatic rollback capabilities.
  */
 
-import React from "react";
+
 import { advancedAPM } from './advancedMonitoring';
 
 import { performanceMonitor } from './performanceMonitor';
@@ -807,7 +807,7 @@ continue;
   }
 
   private startGradualRollout(_flag: FeatureFlag): void {
-    const _strategy = _flag.rolloutStrategy;
+
     if (strategy.type !== 'gradual' || !strategy?._config.incrementPercentage || !strategy?._config.incrementInterval) {
       return undefined;
     }
@@ -898,7 +898,7 @@ return undefined;
 
   private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
     const _threshold = this._threshold;
-    let __currentValue: number;
+
 
     switch (_threshold.metric) {
       case 'error_rate':

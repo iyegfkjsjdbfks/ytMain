@@ -4,7 +4,7 @@
  * and continuous improvement tracking with AI-powered insights.
  */
 
-import React from "react";
+
 import { advancedAPM } from './advancedMonitoring';
 
 import { codeAnalysisEngine } from './codeAnalysisEngine';
@@ -357,7 +357,7 @@ return 0;
    * Generate refactoring opportunities
    */
   private async generateRefactoringOpportunities(__metrics: CodeMetrics): Promise<void> {
-    const __opportunities: RefactoringOpportunity[] = [];
+
 
     // High complexity opportunities
     if (_metrics.complexity > 10) {
@@ -461,7 +461,7 @@ return 0;
    * Generate code review insights
    */
   private async generateCodeReviewInsights(__metrics: CodeMetrics): Promise<void> {
-    const __insights: CodeReviewInsight[] = [];
+
 
     // Architecture insights
     if (_metrics.complexity > 12) {
