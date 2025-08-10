@@ -1,0 +1,240 @@
+{
+  "timestamp": "2025-08-10T22:19:19.997Z",
+  "totalErrors": 7399,
+  "errorsByType": {
+    "TS7026": {
+      "count": 5867,
+      "percentage": "79.3",
+      "affectedFiles": 130,
+      "examples": [
+        {
+          "file": "AccountLayout.tsx",
+          "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists."
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists."
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists."
+        }
+      ]
+    },
+    "TS7031": {
+      "count": 501,
+      "percentage": "6.8",
+      "affectedFiles": 84,
+      "examples": [
+        {
+          "file": "AccountLayout.tsx",
+          "message": "Binding element 'isActive' implicitly has an 'any' type."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Binding element 'currentUserAvatarUrl' implicitly has an 'any' type."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Binding element 'onCommentSubmit' implicitly has an 'any' type."
+        }
+      ]
+    },
+    "TS7006": {
+      "count": 309,
+      "percentage": "4.2",
+      "affectedFiles": 67,
+      "examples": [
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Parameter 'e' implicitly has an 'any' type."
+        },
+        {
+          "file": "AdvancedSearch.tsx",
+          "message": "Parameter 'prev' implicitly has an 'any' type."
+        },
+        {
+          "file": "AdvancedSearch.tsx",
+          "message": "Parameter 'e' implicitly has an 'any' type."
+        }
+      ]
+    },
+    "TS2307": {
+      "count": 239,
+      "percentage": "3.2",
+      "affectedFiles": 143,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "Cannot find module 'react' or its corresponding type declarations."
+        },
+        {
+          "file": "App.tsx",
+          "message": "Cannot find module 'react-router-dom' or its corresponding type declarations."
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "Cannot find module 'react' or its corresponding type declarations."
+        }
+      ]
+    },
+    "TS2503": {
+      "count": 154,
+      "percentage": "2.1",
+      "affectedFiles": 58,
+      "examples": [
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Cannot find namespace 'React'."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Cannot find namespace 'React'."
+        },
+        {
+          "file": "AdvancedSearch.tsx",
+          "message": "Cannot find namespace 'React'."
+        }
+      ]
+    },
+    "TS2875": {
+      "count": 145,
+      "percentage": "2.0",
+      "affectedFiles": 143,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        }
+      ]
+    },
+    "Property does not exist": {
+      "count": 99,
+      "percentage": "1.3",
+      "affectedFiles": 4,
+      "examples": [
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'startTime' does not exist on type 'never'."
+        },
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'endTime' does not exist on type 'never'."
+        },
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'startTime' does not exist on type 'never'."
+        }
+      ]
+    },
+    "TS7053": {
+      "count": 71,
+      "percentage": "1.0",
+      "affectedFiles": 18,
+      "examples": [
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type"
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{"
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type"
+        }
+      ]
+    },
+    "TS2345": {
+      "count": 5,
+      "percentage": "0.1",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'string' is not assignable to parameter of type 'never'."
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'."
+        }
+      ]
+    },
+    "TS4112": {
+      "count": 5,
+      "percentage": "0.1",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        },
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        },
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        }
+      ]
+    },
+    "TS18046": {
+      "count": 3,
+      "percentage": "0.0",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "EnhancedVideoUpload.tsx",
+          "message": "'file' is of type 'unknown'."
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "'percentage' is of type 'unknown'."
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "'percentage' is of type 'unknown'."
+        }
+      ]
+    },
+    "TS2353": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "UnifiedAppContext.tsx",
+          "message": "Object literal may only specify known properties, and 'username' does not exist in type 'User'."
+        }
+      ]
+    }
+  },
+  "summary": [
+    "TS7026: 5867 errors (130 files)",
+    "TS7031: 501 errors (84 files)",
+    "TS7006: 309 errors (67 files)",
+    "TS2307: 239 errors (143 files)",
+    "TS2503: 154 errors (58 files)",
+    "TS2875: 145 errors (143 files)",
+    "Property does not exist: 99 errors (4 files)",
+    "TS7053: 71 errors (18 files)",
+    "TS2345: 5 errors (2 files)",
+    "TS4112: 5 errors (1 files)",
+    "TS18046: 3 errors (2 files)",
+    "TS2353: 1 errors (1 files)"
+  ]
+}
