@@ -137,13 +137,16 @@ class EnhancedTS2322Fixer {
       return line.replace(/=\s*(\d+(?:\.\d+)?)\s*;/, "= '$1';");
     }
 
-    // Fix 3: undefined to string
+    // Fix 3: undefined to string (conservative approach)
     if (fromType.includes('undefined') && toType === 'string') {
-      // Add null coalescing or default value
-      if (line.includes('?.')) {
+      // Only fix assignment expressions, not object properties
+      if (line.includes('=') && !line.includes(':') && line.includes('?.')) {
         return line.replace(/(\w+\?\.\w+)/g, '($1 || "")');
       }
-      return line.replace(/(\w+)/g, '($1 || "")');
+      // Only fix simple variable assignments, not object properties
+      if (line.includes('=') && !line.includes(':') && !line.includes('{') && !line.includes('}')) {
+        return line.replace(/=\s*(\w+)\s*;/, '= ($1 || "");');
+      }
     }
 
     // Fix 4: Add type assertions for complex types
@@ -164,8 +167,8 @@ class EnhancedTS2322Fixer {
       }
     }
 
-    // Fix 6: Optional property access
-    if (line.includes('?.') && toType === 'string') {
+    // Fix 6: Optional property access (conservative)
+    if (line.includes('?.') && toType === 'string' && line.includes('=') && !line.includes(':')) {
       return line.replace(/(\w+\?\.\w+)/g, '($1 ?? "")');
     }
 
