@@ -4,7 +4,7 @@
  * Strategy: Add explicit typing to rest parameters
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -15,63 +15,6 @@ const projectRoot = join(__dirname, '..');
 class TS7019Fixer {
   constructor() {
     this.fixedFiles = new Set();
-  }
-
-  async run() {
-    this.log('🔧 Starting TS7019 implicit any type fixes...');
-    
-    const initialCount = this.getErrorCount();
-    this.log(`Found ${initialCount} TS7019 errors to fix`);
-    
-    if (initialCount === 0) {
-      this.log('No TS7019 errors found!', 'success');
-      return;
-    }
-
-    const errors = this.getErrors();
-    const fileGroups = {};
-    
-    // Group errors by file
-    for (const error of errors) {
-      const filePath = error.file;
-      if (!fileGroups[filePath]) {
-        fileGroups[filePath] = [];
-      }
-      fileGroups[filePath].push(error);
-    }
-
-    let filesModified = 0;
-    
-    // Process each file
-    for (const [filePath, fileErrors] of Object.entries(fileGroups)) {
-      try {
-        const modified = this.fixFile(filePath, fileErrors);
-        if (modified) {
-          filesModified++;
-          this.log(`Fixed ${filePath}`);
-        }
-      } catch (error) {
-        this.log(`Error processing ${filePath}: ${error.message}`, 'error');
-      }
-    }
-
-    const finalCount = this.getErrorCount();
-    const fixed = initialCount - finalCount;
-    
-    this.log('\n=== TS7019 Fix Results ===');
-    this.log(`Initial errors: ${initialCount}`);
-    this.log(`Final errors: ${finalCount}`);
-    this.log(`Errors fixed: ${fixed}`);
-    this.log(`Files modified: ${filesModified}`);
-    this.log(`Fix rate: ${((fixed / (initialCount || 1)) * 100).toFixed(1)}%`);
-    
-    if (finalCount < initialCount) {
-      this.log('Successfully reduced TS7019 errors!', 'success');
-    } else if (finalCount <= initialCount) {
-      this.log('Error count maintained (no increase)', 'success');
-    } else {
-      this.log('Warning: Error count increased', 'warning');
-    }
   }
 
   log(message, type = 'info') {
@@ -111,19 +54,7 @@ class TS7019Fixer {
       if (!output) return [];
       
       return output.split('\n').filter(Boolean).map(line => {
-        // Try Windows format first: file(line,col): error TS7019: Rest parameter 'name' implicitly has an 'any[]' type
-        let match = line.match(/([^(]+)\((\d+),(\d+)\):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
-        if (match) {
-          return {
-            file: match[1],
-            line: parseInt(match[2]),
-            column: parseInt(match[3]),
-            parameter: match[4]
-          };
-        }
-
-        // Try Unix format: file:line:col: error TS7019: Rest parameter 'name' implicitly has an 'any[]' type
-        match = line.match(/([^:]+):(\d+):(\d+):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
+        const match = line.match(/([^:]+):(\d+):(\d+):\s*error TS7019: Rest parameter '([^']+)' implicitly has an 'any\[\]' type/);
         if (match) {
           return {
             file: match[1],
@@ -141,14 +72,8 @@ class TS7019Fixer {
 
   fixFile(filePath, errors) {
     const fullPath = join(projectRoot, filePath);
-
+    
     try {
-      // Check if file exists
-      if (!existsSync(fullPath)) {
-        this.log(`File not found: ${filePath}`, 'warning');
-        return false;
-      }
-
       let content = readFileSync(fullPath, 'utf8');
       let modified = false;
 
@@ -171,14 +96,9 @@ class TS7019Fixer {
       }
 
       if (modified) {
-        try {
-          writeFileSync(fullPath, content);
-          this.fixedFiles.add(filePath);
-          this.log(`Fixed rest parameter types in ${filePath}`, 'success');
-        } catch (writeError) {
-          this.log(`Failed to write file ${filePath}: ${writeError.message}`, 'error');
-          return false;
-        }
+        writeFileSync(fullPath, content);
+        this.fixedFiles.add(filePath);
+        this.log(`Fixed rest parameter types in ${filePath}`, 'success');
       }
 
       return modified;
@@ -290,7 +210,49 @@ class TS7019Fixer {
     return 'any[]';
   }
 
+  run() {
+    const initialCount = this.getErrorCount();
+    this.log(`Found ${initialCount} TS7019 implicit any type errors`);
 
+    if (initialCount === 0) {
+      this.log('No TS7019 errors found!', 'success');
+      return;
+    }
+
+    const errors = this.getErrors();
+    
+    // Group errors by file
+    const errorsByFile = {};
+    for (const error of errors) {
+      if (!errorsByFile[error.file]) {
+        errorsByFile[error.file] = [];
+      }
+      errorsByFile[error.file].push(error);
+    }
+
+    // Fix each file
+    for (const [filePath, fileErrors] of Object.entries(errorsByFile)) {
+      this.fixFile(filePath, fileErrors);
+    }
+
+    const finalCount = this.getErrorCount();
+    const improvement = initialCount - finalCount;
+
+    this.log(`\n=== TS7019 Fix Results ===`);
+    this.log(`Initial errors: ${initialCount}`);
+    this.log(`Final errors: ${finalCount}`);
+    this.log(`Errors fixed: ${improvement}`);
+    this.log(`Files modified: ${this.fixedFiles.size}`);
+    this.log(`Fix rate: ${((improvement / initialCount) * 100).toFixed(1)}%`);
+
+    if (improvement > 0) {
+      this.log('TS7019 errors successfully reduced!', 'success');
+    } else if (finalCount <= initialCount) {
+      this.log('Error count maintained (no increase)', 'success');
+    } else {
+      this.log('Warning: Error count increased', 'warning');
+    }
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
