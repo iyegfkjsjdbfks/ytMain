@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -272,7 +272,7 @@ return;
             if (!isMounted) {
 return;
 }
-            const errorMessages: { [key: number]: string } = {
+            const errorMessages: { [key]: string } = {
               2: 'Invalid video ID',
               5: 'HTML5 player error',
               100: 'Video not found or private',

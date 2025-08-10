@@ -481,7 +481,7 @@ return 'degraded';
   }
 
   // Event handling methods
-  private handlePerformanceAlert(data: any): void {
+  private handlePerformanceAlert(data): void {
     this.emitEvent({
       type: 'performance',
       source: 'PerformanceMonitor',
@@ -492,7 +492,7 @@ return 'degraded';
     });
   }
 
-  private handleSecurityThreat(data: any): void {
+  private handleSecurityThreat(data): void {
     this.emitEvent({
       type: 'security',
       source: 'SecurityMonitor',
@@ -503,7 +503,7 @@ return 'degraded';
     });
   }
 
-  private handleDeploymentFailure(data: any): void {
+  private handleDeploymentFailure(data): void {
     this.emitEvent({
       type: 'deployment',
       source: 'DeploymentAutomation',
@@ -514,7 +514,7 @@ return 'degraded';
     });
   }
 
-  private handleQualityDegradation(data: any): void {
+  private handleQualityDegradation(data): void {
     this.emitEvent({
       type: 'quality',
       source: 'CodeQualityMonitor',
@@ -525,7 +525,7 @@ return 'degraded';
     });
   }
 
-  private handleFeatureRollback(data: any): void {
+  private handleFeatureRollback(data): void {
     this.emitEvent({
       type: 'feature',
       source: 'FeatureFlagManager',

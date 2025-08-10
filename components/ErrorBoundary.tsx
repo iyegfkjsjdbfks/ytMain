@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -131,7 +131,7 @@ class ErrorBoundary extends Component<Props, State> {
     // Reset error boundary when resetKeys change
     if (hasError && resetKeys && prevProps.resetKeys !== resetKeys) {
       const hasResetKeyChanged = resetKeys.some(
-        (key: string, index: number) => this.prevResetKeys[index: number] !== key: string,
+        (key: string, index: number) => this.prevResetKeys[index] !== key: string,
       );
 
       if (hasResetKeyChanged) {

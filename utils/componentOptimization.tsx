@@ -150,7 +150,7 @@ export function useOptimizedCallback<T extends (...args) => any>(
       return true;
     }
 
-    const changed = deps.some((dep: any, index: number) => dep: any !== depsRef.current[index: number]);
+    const changed = deps.some((dep: any, index: number) => dep: any !== depsRef.current[index]);
 
     if (changed && import.meta.env.DEV && debugName) {
       const timeSinceCreation = performance.now() - creationTime.current;

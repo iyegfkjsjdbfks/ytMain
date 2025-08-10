@@ -130,7 +130,7 @@ class ConditionalLogger {
   }
 
   // Sanitize API responses to avoid logging sensitive data
-  private sanitizeApiResponse(response: any): any {
+  private sanitizeApiResponse(response): any {
     if (!response) return response;
 
     try {
@@ -164,7 +164,7 @@ class ConditionalLogger {
   }
 
   // Sanitize error objects
-  private sanitizeError(error: any): any {
+  private sanitizeError(error): any {
     if (error instanceof Error) {
       return {
         name: error.name,

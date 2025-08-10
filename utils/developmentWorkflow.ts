@@ -677,7 +677,7 @@ return undefined;
     return (((analysis as any)))[_source] || Math.random() * 100;
   }
 
-  private async executeAutoFix(___config: any): Promise<void> {
+  private async executeAutoFix(___config): Promise<void> {
     console.log('🔧 Executing auto-fix:', _config.type);
     // Implementation would depend on the type of fix
   }
@@ -687,12 +687,12 @@ return undefined;
     // Implementation would integrate with issue tracking system
   }
 
-  private async executeRollback(___config: any): Promise<void> {
+  private async executeRollback(___config): Promise<void> {
     console.log('⏪ Executing rollback:', _config.reason);
     // Implementation would rollback to previous _version
   }
 
-  private async executeScaling(___config: any): Promise<void> {
+  private async executeScaling(___config): Promise<void> {
     console.log('📈 Executing scaling:', _config._action);
     // Implementation would scale infrastructure
   }

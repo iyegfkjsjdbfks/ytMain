@@ -154,7 +154,7 @@ class NotificationService {
   /**
    * Update notification settings
    */
-  async updateNotificationSettings(settings: any): Promise<ApiResponse<any>> {
+  async updateNotificationSettings(settings): Promise<ApiResponse<any>> {
     return api.put('/api/notifications/settings', settings);
   }
 

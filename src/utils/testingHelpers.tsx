@@ -50,7 +50,7 @@ export const renderWithProviders = (
   ui: ReactElement,
   options?: {
     queryClient?: QueryClient;
-    [key: string]: any;
+    [key]: any;
   },
 ) => {
   const { queryClient = new QueryClient({

@@ -115,7 +115,7 @@ export const getResponsiveImageSrcSet = (baseUrl: string, sizes: number[]): stri
     .join(', ');
 };
 
-export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }): string => {
+export const getResponsiveImageSizes = (breakpoints: { [key]: string }): string => {
   return Object.entries(breakpoints)
     .map(([breakpoint, size]) => `(${breakpoint}) ${size}`)
     .join(', ');

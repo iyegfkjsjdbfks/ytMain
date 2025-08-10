@@ -12,7 +12,7 @@ interface UploadResponse {
   success: boolean;
   videoId?: string;
   message?: string;
-  [key: string]: unknown;
+  [key]: unknown;
 }
 
 interface UploadOptions {

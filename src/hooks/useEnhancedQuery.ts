@@ -52,7 +52,7 @@ export const queryPresets = {
 } as const;
 
 // Enhanced error handler
-function createApiError(error: any): ApiError {
+function createApiError(error): ApiError {
   const apiError: ApiError = {
     name: 'ApiError',
     message: error?.message || 'An unexpected error occurred',
@@ -67,7 +67,7 @@ function createApiError(error: any): ApiError {
   return apiError;
 }
 
-function isRetryableError(error: any): boolean {
+function isRetryableError(error): boolean {
   const status = error?.status || error?.response?.status;
 
   // Network errors are retryable

@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -535,7 +535,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
       {/* Comments List */}
       <div className="space-y-6">
-        {sortedComments.map(comment => renderComment(comment: any))}
+        {sortedComments.map(comment => renderComment(comment))}
       </div>
 
       {/* Report Modal */}
