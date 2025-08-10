@@ -77,7 +77,7 @@ return fallbackSrc;
       const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
 
       setTimeout(() => {
-        setRetryCount(prev => prev: any + 1);
+        setRetryCount(prev => prev + 1);
         setCurrentSrc(src); // Retry original source
         setIsLoading(true);
       }, delay);
@@ -102,7 +102,7 @@ return fallbackSrc;
     onLoad?.();
   };
 
-  const generatePlaceholderDataUrl = (w: number, h: number, text: string): string => {
+  const generatePlaceholderDataUrl = (w, h, text): string => {
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;

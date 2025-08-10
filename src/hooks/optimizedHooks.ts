@@ -4,7 +4,7 @@
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
  */
-export function useOptimizedDebounce<T>(value: T, delay: number): T {
+export function useOptimizedDebounce<T>(value: T, delay): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -35,7 +35,7 @@ export function useOptimizedDebounce<T>(value: T, delay: number): T {
  */
 export function useOptimizedThrottle<T>(
   value: T,
-  delay: number,
+  delay,
   options: { leading?: boolean; trailing?: boolean } = {},
 ): T {
   const { leading = true, trailing = true } = options;
@@ -74,7 +74,7 @@ export function useOptimizedThrottle<T>(
  * Enhanced useLocalStorage with JSON support and error handling
  */
 export function useOptimizedLocalStorage<T>(
-  key: string,
+  key,
   initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -123,7 +123,7 @@ export interface AsyncState<T> {
 
 export function useOptimizedAsync<T>(
   asyncFunction: () => Promise<T>,
-  dependencies: any[] = [],
+  dependencies = [],
   options: {
     immediate?: boolean;
     onSuccess?: (data: T) => void;
@@ -169,7 +169,7 @@ export function useOptimizedAsync<T>(
  */
 export function useOptimizedIntersectionObserver(
   options: IntersectionObserverInit = {},
-  dependencies: any[] = [],
+  dependencies = [],
 ): {
   ref: (node: Element | null) => void;
   isIntersecting: boolean;
@@ -222,10 +222,10 @@ export function useOptimizedIntersectionObserver(
  */
 export function useOptimizedToggle(
   initialValue: boolean = false,
-): [boolean, () => void, (value: boolean) => void, () => void, () => void] {
+): [boolean, () => void, (value) => void, () => void, () => void] {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => setValue(prev => !prev: any), []);
+  const toggle = useCallback(() => setValue(prev => !prev), []);
   const setTrue = useCallback(() => setValue(true), []);
   const setFalse = useCallback(() => setValue(false), []);
 
@@ -235,34 +235,34 @@ export function useOptimizedToggle(
 /**
  * Enhanced array state management hook
  */
-export function useOptimizedArray<T>(initialArray: T[] = []) {
+export function useOptimizedArray<T>(initialArray: T = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((item: T) => {
     setArray(prev => [...prev, item]);
   }, []);
 
-  const remove = useCallback((index: number) => {
-    setArray(prev => prev.filter((_: any, i) => i: any !== index));
+  const remove = useCallback((index) => {
+    setArray(prev => prev.filter((_, i) => i !== index));
   }, []);
 
   const removeById = useCallback((id: string | number, idKey: keyof T = 'id' as keyof T) => {
     setArray(prev => prev.filter((item) => item[idKey] !== id));
   }, []);
 
-  const update = useCallback((index: number, newItem: Partial<T>) => {
-    setArray(prev => prev.map((item: any, i) => i=== index ? { ...item, ...newItem } : item: any));
+  const update = useCallback((index, newItem: Partial<T>) => {
+    setArray(prev => prev.map((item, i) => i=== index ? { ...item, ...newItem } : item));
   }, []);
 
   const updateById = useCallback((id: string | number, newItem: Partial<T>, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.map(item => item[idKey] === id ? { ...item, ...newItem } : item: any));
+    setArray(prev => prev.map(item => item[idKey] === id ? { ...item, ...newItem } : item));
   }, []);
 
   const clear = useCallback(() => {
     setArray([]);
   }, []);
 
-  const set = useCallback((newArray: T[]) => {
+  const set = useCallback((newArray: T) => {
     setArray(newArray);
   }, []);
 
@@ -285,8 +285,8 @@ export function useOptimizedArray<T>(initialArray: T[] = []) {
  */
 export function useOptimizedMemo<T>(
   factory: () => T,
-  deps: any[],
-  compare?: (a: any[], b: any[]) => boolean,
+  deps,
+  compare?: (a, b) => boolean,
 ): T {
   const memoizedValue = useMemo(factory, deps);
   const lastDeps = useRef<any[]>(deps);
@@ -310,7 +310,7 @@ export function useOptimizedMemo<T>(
  */
 export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
-  deps: any[],
+  deps,
 ): T {
   const callbackRef = useRef<T>(callback);
   const depsRef = useRef<any[]>(deps);

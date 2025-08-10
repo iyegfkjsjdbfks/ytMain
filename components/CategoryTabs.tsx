@@ -15,7 +15,7 @@ interface Category {
 }
 
 interface CategoryTabsProps {
-  categories: Category[];
+  categories: Category;
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies';
   setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void;
 }

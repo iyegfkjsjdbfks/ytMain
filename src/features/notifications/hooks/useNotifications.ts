@@ -19,7 +19,7 @@ export function useNotifications() {
 
   // Mark as read mutation
   const markAsReadMutation = useMutation({
-    mutationFn: (notificationId: string) => notificationService.markAsRead(notificationId),
+    mutationFn: (notificationId) => notificationService.markAsRead(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
@@ -35,7 +35,7 @@ export function useNotifications() {
 
   // Delete notification mutation
   const deleteNotificationMutation = useMutation({
-    mutationFn: (notificationId: string) => notificationService.deleteNotification(notificationId),
+    mutationFn: (notificationId) => notificationService.deleteNotification(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
@@ -52,7 +52,7 @@ export function useNotifications() {
   // Real-time notification handler
   const handleRealTimeNotification = useCallback((notification: Notification) => {
     // Add new notification to the cache
-    queryClient.setQueryData(['notifications'], (oldData: Notification[] = []) => {
+    queryClient.setQueryData(['notifications'], (oldData: Notification = []) => {
       return [notification, ...oldData];
     });
 

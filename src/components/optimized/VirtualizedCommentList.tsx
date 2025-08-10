@@ -7,10 +7,10 @@ import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
-  comments: Comment[];
-  onReply: (commentId: string, content: string) => void;
-  onLike: (commentId: string) => void;
-  onDislike: (commentId: string) => void;
+  comments: Comment;
+  onReply: (commentId, content) => void;
+  onLike: (commentId) => void;
+  onDislike: (commentId) => void;
   className?: string;
   height?: number;
   itemHeight?: number;
@@ -20,10 +20,10 @@ interface CommentItemProps {
   index: number;
   style: React.CSSProperties;
   data: {
-    comments: Comment[];
-    onReply: (commentId: string, content: string) => void;
-    onLike: (commentId: string) => void;
-    onDislike: (commentId: string) => void;
+    comments: Comment;
+    onReply: (commentId, content) => void;
+    onLike: (commentId) => void;
+    onDislike: (commentId) => void;
   };
 }
 

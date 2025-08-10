@@ -2,7 +2,7 @@
 // TODO: Fix import - import { useEffect, useRef, useState, useCallback, type RefObject } from 'react';
 
 interface UseIntersectionObserverOptions {
-  threshold?: number | number[];
+  threshold?: number | number;
   root?: Element | null;
   rootMargin?: string;
   freezeOnceVisible?: boolean;
@@ -45,7 +45,7 @@ export const useIntersectionObserver = ({
   const [isIntersecting, setIsIntersecting] = useState(initialIsIntersecting);
   const frozen = useRef(false);
 
-  const updateEntry = useCallback((entries: IntersectionObserverEntry[]) => {
+  const updateEntry = useCallback((entries: IntersectionObserverEntry) => {
     const [entry] = entries;
 
     if (!entry) {

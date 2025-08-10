@@ -12,7 +12,7 @@ interface UserSession {
   startTime: number;
   endTime?: number;
   pageViews: number;
-  events: AnalyticsEvent[];
+  events: AnalyticsEvent;
   userAgent: string;
   referrer: string;
   userId?: string | undefined;
@@ -45,7 +45,7 @@ const DEFAULT_CONFIG: AnalyticsConfig = {
 class AnalyticsService {
   private config: AnalyticsConfig;
   private session: UserSession;
-  private eventQueue: AnalyticsEvent[] = [];
+  private eventQueue: AnalyticsEvent = [];
   private flushTimer?: NodeJS.Timeout;
   private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
@@ -280,7 +280,7 @@ return;
 
   // Public API
   track(
-    eventName: string,
+    eventName,
     properties: Record<string, any> = {},
     category: AnalyticsEvent['category'] = 'user_action',
   ) {
@@ -327,21 +327,21 @@ return;
     }, 'navigation');
   }
 
-  trackClick(element: string, properties: Record<string, any> = {}) {
+  trackClick(element, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
       ...properties,
     });
   }
 
-  trackVideoEvent(action: string, videoId: string, properties: Record<string, any> = {}) {
+  trackVideoEvent(action, videoId, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
       ...properties,
     }, 'video');
   }
 
-  trackSearch(query: string, results?: number) {
+  trackSearch(query, results?: number) {
     this.track('search', {
       query,
       results,
@@ -349,11 +349,11 @@ return;
     });
   }
 
-  trackEngagement(type: string, properties: Record<string, any> = {}) {
+  trackEngagement(type, properties: Record<string, any> = {}) {
     this.track(type, properties, 'engagement');
   }
 
-  trackPerformance(metric: string, value: number, properties: Record<string, any> = {}) {
+  trackPerformance(metric, value, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
       ...properties,
@@ -361,7 +361,7 @@ return;
   }
 
   // Session management
-  setUserId(userId: string) {
+  setUserId(userId) {
     this.session.userId = userId;
     this.track('user_identified', { userId });
   }

@@ -49,7 +49,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleVote = async (pollId: string, optionId: string) => {
+  const handleVote = async (pollId, optionId) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -57,7 +57,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleEndPoll = async (pollId: string) => {
+  const handleEndPoll = async (pollId) => {
     try {
       // TODO: Implement end poll functionality
       logger.debug('End poll:', pollId);
@@ -72,23 +72,23 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const removeOption = (index: number) => {
+  const removeOption = (index) => {
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
-        options: prev.options.filter((_: any, i) => i: any !== index),
+        options: prev.options.filter((_, i) => i !== index),
       }));
     }
   };
 
-  const updateOption = (index: number, value: string) => {
+  const updateOption = (index, value) => {
     setNewPoll(prev => ({
       ...prev,
-      options: prev.options.map((opt: any, i) => i=== index ? value : opt: any),
+      options: prev.options.map((opt, i) => i=== index ? value : opt),
     }));
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -143,7 +143,7 @@ return 0;
                 Options
               </label>
               <div className="space-y-2">
-                {newPoll.options.map((option: any, index: number) => (
+                {newPoll.options.map((option, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <input
                       id={`poll-option-${index + 1}`}

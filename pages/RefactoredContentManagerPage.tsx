@@ -58,15 +58,15 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const updateVideo = async (_id: string, _formData: VideoEditFormData) => {
+  const updateVideo = async (_id, _formData: VideoEditFormData) => {
     // Mock implementation
   };
 
-  // const deleteVideo = async (_id: string) => {
+  // const deleteVideo = async (_id) => {
   //   // Mock implementation
   // };
 
-  // const toggleVideoVisibility = async (_id: string, _visibility: string) => {
+  // const toggleVideoVisibility = async (_id, _visibility) => {
   //   // Mock implementation
   // };
 
@@ -199,7 +199,7 @@ return;
   };
 
   // Handle video delete
-  // const handleVideoDelete = async (videoId: string) => {
+  // const handleVideoDelete = async (videoId) => {
   //   if (!confirm('Are you sure you want to delete this video?')) return;
   //
   //   await executeAction(async () => {
@@ -209,7 +209,7 @@ return;
   // };
 
   // Handle video visibility toggle
-  // const _handleVisibilityToggle = async (videoId: string, newVisibility: string) => {
+  // const _handleVisibilityToggle = async (videoId, newVisibility) => {
   //   await executeAction(async () => {
   //     await toggleVideoVisibility(videoId, newVisibility);
   //     await refreshVideos();

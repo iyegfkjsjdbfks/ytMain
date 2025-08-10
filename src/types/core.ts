@@ -23,7 +23,7 @@ export interface Video {
   dislikeCount?: number; // Dislike count
   categoryId?: string; // Category ID
   buffered?: TimeRanges; // Buffered time ranges
-  tags?: string[]; // Video tags
+  tags?: string; // Video tags
   visibility?: string;
   metadata?: any;
   statistics?: { viewCount?: number; likeCount?: number; commentCount?: number; favoriteCount?: number;   contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string;   privacyStatus?: string;
@@ -81,7 +81,7 @@ export interface Playlist {
   channelId: string;
   channelTitle: string;
   visibility?: string;
-  tags?: string[];
+  tags?: string;
   updatedAt?: string;
   totalDuration?: string;
   ownerName?: string;
@@ -95,7 +95,7 @@ export interface Comment {
   authorAvatar?: string;
   publishedAt: string;
   likeCount: number;
-  replies?: Comment[];
+  replies?: Comment;
   content?: string;
   likes?: number;
   isPinned?: boolean;

@@ -16,7 +16,7 @@ export const withPerformanceOptimization = {
    * Shallow comparison memoization
    */
   shallow: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps: any, nextProps) => {
+    memo(Component, (prevProps, nextProps) => {
       const prevKeys = Object.keys(prevProps);
       const nextKeys = Object.keys(nextProps);
 
@@ -38,7 +38,7 @@ export const withPerformanceOptimization = {
    */
   ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (Component: ComponentType<P>) =>
-      memo(Component, (prevProps: any, nextProps) => {
+      memo(Component, (prevProps, nextProps) => {
         const filteredPrev = { ...prevProps };
         const filteredNext = { ...nextProps };
 
@@ -54,7 +54,7 @@ export const withPerformanceOptimization = {
    * Memoization for components with array props
    */
   arrayOptimized: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps: any, nextProps) => {
+    memo(Component, (prevProps, nextProps) => {
       for (const key in prevProps) {
         const prevValue = prevProps[key];
         const nextValue = nextProps[key];
@@ -103,7 +103,7 @@ export const hookOptimizations = {
   /**
    * Create stable array reference
    */
-  useStableArray: <T>(arr: T[]): T[] =>
+  useStableArray: <T>(arr: T): T[] =>
     useMemo(() => arr, arr),
 
   /**
@@ -111,7 +111,7 @@ export const hookOptimizations = {
    */
   useOptimizedCallback: <T extends (...args) => any>(
     callback: T,
-    deps: any[],
+    deps,
   ): T => useCallback(callback, deps),
 
   /**
@@ -119,8 +119,8 @@ export const hookOptimizations = {
    */
   useExpensiveComputation: <T>(
     computeFn: () => T,
-    deps: any[],
-    shouldRecompute?: (newDeps: any[], oldDeps: any[]) => boolean,
+    deps,
+    shouldRecompute?: (newDeps, oldDeps) => boolean,
   ): T => {
     return useMemo(() => {
       if (shouldRecompute) {
@@ -139,7 +139,7 @@ export const listOptimizations = {
   /**
    * Generate stable keys for list items
    */
-  generateStableKey: (item: any, index: number, prefix = 'item'): string => {
+  generateStableKey: (item, index, prefix = 'item'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -155,7 +155,7 @@ return `${prefix}-${item.name}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T[], chunkSize: number): T[][] => {
+  chunkArray: <T>(array: T, chunkSize): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -167,9 +167,9 @@ return `${prefix}-${item.name}`;
    * Virtual scrolling helper for large lists
    */
   getVisibleItems: <T>(
-    items: T[],
-    startIndex: number,
-    visibleCount: number,
+    items: T,
+    startIndex,
+    visibleCount,
   ): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
   },
@@ -182,7 +182,7 @@ export const imageOptimizations = {
   /**
    * Preload critical images
    */
-  preloadImage: (src: string): Promise<void> => {
+  preloadImage: (src): Promise<void> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve();
@@ -231,7 +231,7 @@ export const bundleOptimizations = {
    */
   selectiveImport: <T, K extends keyof T>(
     module: T,
-    keys: K[],
+    keys: K,
   ): Pick<T, K> => {
     const result = {} as Pick<T, K>;
     keys.forEach(key => {
@@ -250,7 +250,7 @@ export const eventOptimizations = {
    */
   throttle: <T extends (...args) => any>(
     func: T,
-    delay: number,
+    delay,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
     let lastExecTime = 0;
@@ -278,7 +278,7 @@ clearTimeout(timeoutId);
    */
   debounce: <T extends (...args) => any>(
     func: T,
-    delay: number,
+    delay,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
 
@@ -295,7 +295,7 @@ clearTimeout(timeoutId);
    */
   addPassiveListener: (
     element: Element,
-    event: string,
+    event,
     handler: EventListener,
     options?: AddEventListenerOptions,
   ): void => {
@@ -332,7 +332,7 @@ export const memoryOptimizations = {
   /**
    * LRU cache implementation
    */
-  createLRUCache: <K, V>(maxSize: number) => {
+  createLRUCache: <K, V>(maxSize) => {
     const cache = new Map<K, V>();
 
     return {

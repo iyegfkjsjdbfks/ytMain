@@ -8,10 +8,10 @@ import type { Video as VideoType } from '../src/types/core';
 
 
 interface WatchLaterContextType {
-  watchLaterList: VideoType[];
+  watchLaterList: VideoType;
   addToWatchLater: (video: VideoType) => void;
-  removeFromWatchLater: (videoId: string) => void;
-  isWatchLater: (videoId: string) => boolean;
+  removeFromWatchLater: (videoId) => void;
+  isWatchLater: (videoId) => boolean;
 }
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
@@ -35,11 +35,11 @@ export const WatchLaterProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromWatchLater = (videoId: string) => {
+  const removeFromWatchLater = (videoId) => {
     setWatchLaterList((prevList) => prevList.filter((video) => video.id !== videoId));
   };
 
-  const isWatchLater = (videoId: string) => {
+  const isWatchLater = (videoId) => {
     return watchLaterList.some(video => video.id === videoId);
   };
 

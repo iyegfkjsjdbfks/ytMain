@@ -9,7 +9,7 @@ import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformance
 import type { Video } from '../../types/core';
 
 interface OptimizedSearchResultsProps {
-  videos: Video[];
+  videos: Video;
   query: string;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
@@ -22,7 +22,7 @@ interface SearchResultItemProps {
   index: number;
   style: React.CSSProperties;
   data: {
-    videos: Video[];
+    videos: Video;
     onVideoClick: (video: Video) => void;
     query: string;
   };

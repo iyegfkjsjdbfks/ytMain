@@ -36,7 +36,7 @@ return;
     }
   };
 
-  const handleLikeQuestion = async (questionId: string) => {
+  const handleLikeQuestion = async (questionId) => {
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
@@ -45,7 +45,7 @@ return;
     }
   };
 
-  const handlePinQuestion = async (questionId: string) => {
+  const handlePinQuestion = async (questionId) => {
     try {
       // TODO: Implement pin functionality in service
       conditionalLogger.debug('Pin question:', questionId);
@@ -55,7 +55,7 @@ return;
     }
   };
 
-  const handleAnswerQuestion = async (questionId: string) => {
+  const handleAnswerQuestion = async (questionId) => {
     if (!answerText.trim()) {
 return;
 }
@@ -90,7 +90,7 @@ return;
     }
   });
 
-  const sortedQuestions = filteredQuestions.sort((a: any, b) => {
+  const sortedQuestions = filteredQuestions.sort((a, b) => {
     // Highlighted questions first
     if (a.isHighlighted && !b.isHighlighted) {
 return -1;
@@ -129,7 +129,7 @@ return bUpvotes - aUpvotes;
             type="text"
             value={newQuestion}
             onChange={(e) => setNewQuestion(e.target.value)}
-            onKeyPress={(e: Event) => e: Event.key === 'Enter' && handleSubmitQuestion()}
+            onKeyPress={(e) => e.key === 'Enter' && handleSubmitQuestion()}
             placeholder="Ask a question..."
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />

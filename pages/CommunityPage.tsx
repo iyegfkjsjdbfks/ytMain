@@ -66,7 +66,7 @@ return;
       type: newPostType,
       content: newPostContent,
       ...(newPostType === 'image' && { imageUrl: '/api/placeholder/600/400' }),
-      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt: any, idx) => ({
+      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt, idx) => ({
         id: `option-${idx}`,
         text: opt,
         votes: 0,
@@ -88,7 +88,7 @@ return;
     setShowCreatePost(false);
   };
 
-  const toggleLike = (postId: string) => {
+  const toggleLike = (postId) => {
     setPosts(posts.map(post =>
       post.id === postId
         ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
@@ -136,7 +136,7 @@ return;
           if (pollQuestion) {
             const { content: pollContentValue, options: pollOptionsData } = pollQuestion;
             content = pollContentValue;
-            pollOptions = pollOptionsData.map((option: string, idx: number) => ({
+            pollOptions = pollOptionsData.map((option, idx) => ({
               id: `option-${idx}`,
               text: option,
               votes: Math.floor(Math.random() * 500) + 50,
@@ -163,7 +163,7 @@ return;
       }).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     };
 
-    const generateMockStats = (posts: CommunityPost[]): CommunityStats => {
+    const generateMockStats = (posts: CommunityPost): CommunityStats => {
       const totalLikes = posts.reduce((sum, post) => sum + post.likes, 0);
       const totalComments = posts.reduce((sum, post) => sum + post.comments, 0);
       const topPost = posts.length > 0 ? posts.reduce((top, post) =>
@@ -295,7 +295,7 @@ return;
                   {/* Poll Options */}
                   {newPostType === 'poll' && (
                     <div className="mt-4 space-y-2">
-                      {pollOptions.map((option: any, index: number) => (
+                      {pollOptions.map((option, index) => (
                         <input
                           key={index}
                           value={option}
@@ -381,7 +381,7 @@ return;
                       <div className="space-y-2 mt-3">
                         {post.pollOptions.map((option) => {
                           const pollOptions = post.pollOptions!;
-                          const totalVotes = pollOptions.reduce((sum: any, opt) => sum: any + opt.votes, 0);
+                          const totalVotes = pollOptions.reduce((sum, opt) => sum + opt.votes, 0);
                           const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
 
                           return (
@@ -400,7 +400,7 @@ return;
                           );
                         })}
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                          {post.pollOptions.reduce((sum: any, opt) => sum: any + opt.votes, 0)} votes
+                          {post.pollOptions.reduce((sum, opt) => sum + opt.votes, 0)} votes
                         </p>
                       </div>
                     )}

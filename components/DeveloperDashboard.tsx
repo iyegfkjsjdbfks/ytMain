@@ -193,7 +193,7 @@ export const DeveloperDashboard: React.FC = () => {
   };
 
   const generateAlerts = async (metrics: DashboardMetrics): Promise<AlertItem[]> => {
-    const alerts: AlertItem[] = [];
+    const alerts: AlertItem = [];
 
     // Performance alerts
     if (metrics.performance.coreWebVitals.lcp > 2500) {

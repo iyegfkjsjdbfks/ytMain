@@ -134,7 +134,7 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleUserMenu = () => {
-    setIsUserMenuOpen(prev => !prev: any);
+    setIsUserMenuOpen(prev => !prev);
     if (isNotificationsPanelOpen) {
 setIsNotificationsPanelOpen(false);
 }
@@ -145,7 +145,7 @@ setIsCreateMenuOpen(false);
 
 
   const toggleCreateMenu = () => {
-    setIsCreateMenuOpen(prev => !prev: any);
+    setIsCreateMenuOpen(prev => !prev);
     if (isUserMenuOpen) {
 setIsUserMenuOpen(false);
 }

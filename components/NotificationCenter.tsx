@@ -144,7 +144,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
     const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
     setNotifications(updatedNotifications);
-    setUnreadCount(prev => prev: any + 1);
+    setUnreadCount(prev => prev + 1);
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   }, [notifications]);
 
@@ -203,12 +203,12 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     return names[Math.floor(Math.random() * names.length)] || 'Unknown Channel';
   };
 
-  const markAsRead = (notificationId: string) => {
+  const markAsRead = (notificationId) => {
     const updatedNotifications = notifications.map(n =>
       n.id === notificationId ? { ...n, isRead: true } : n,
     );
     setNotifications(updatedNotifications);
-    setUnreadCount(prev => Math.max(0, prev: any - 1));
+    setUnreadCount(prev => Math.max(0, prev - 1));
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
@@ -219,12 +219,12 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
-  const deleteNotification = (notificationId: string) => {
+  const deleteNotification = (notificationId) => {
     const notification = notifications.find(n => n.id === notificationId);
     const updatedNotifications = notifications.filter((n) => n.id !== notificationId);
     setNotifications(updatedNotifications);
     if (notification && !notification.isRead) {
-      setUnreadCount(prev => Math.max(0, prev: any - 1));
+      setUnreadCount(prev => Math.max(0, prev - 1));
     }
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };

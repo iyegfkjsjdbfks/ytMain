@@ -11,7 +11,7 @@ import type { Video } from '../types';
 // Convert search results to Video format for HomePage compatibility
 const convertSearchResultToVideo = (
   result: YouTubeSearchResult | GoogleSearchResult,
-  index: number,
+  index,
 ): Video => {
   // Generate a unique ID that preserves the source information
   const videoId = result.id.startsWith('youtube-') || result.id.startsWith('google-search-')
@@ -69,7 +69,7 @@ const convertSearchResultToVideo = (
 };
 
 interface UseInitialSearchResult {
-  data: Video[];
+  data: Video;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;

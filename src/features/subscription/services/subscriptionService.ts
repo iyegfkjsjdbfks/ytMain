@@ -34,7 +34,7 @@ class SubscriptionService {
   /**
    * Get subscription status for a specific channel
    */
-  async getSubscriptionStatus(channelId: string): Promise<Subscription | null> {
+  async getSubscriptionStatus(channelId): Promise<Subscription | null> {
     try {
       const response = await api.get(`/api/subscriptions/status/${channelId}`);
       return response.data as Subscription;
@@ -47,14 +47,14 @@ class SubscriptionService {
   /**
    * Subscribe to a channel
    */
-  async subscribe(channelId: string): Promise<ApiResponse<Subscription>> {
+  async subscribe(channelId): Promise<ApiResponse<Subscription>> {
     return api.post('/api/subscriptions', { channelId });
   }
 
   /**
    * Unsubscribe from a channel
    */
-  async unsubscribe(channelId: string): Promise<ApiResponse<void>> {
+  async unsubscribe(channelId): Promise<ApiResponse<void>> {
     return api.delete(`/api/subscriptions/${channelId}`);
   }
 
@@ -62,7 +62,7 @@ class SubscriptionService {
    * Update notification level for a subscription
    */
   async updateNotificationLevel(
-    channelId: string,
+    channelId,
     level: 'all' | 'personalized' | 'none',
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
@@ -83,7 +83,7 @@ class SubscriptionService {
   ): Promise<Subscription[]> {
     try {
       const response = await api.get('/api/subscriptions', filters);
-      return (response.data as Subscription[]) || [];
+      return (response.data as Subscription) || [];
     } catch (error) {
       logger.error('Failed to get subscriptions:', error);
       return [];
@@ -104,7 +104,7 @@ class SubscriptionService {
   ): Promise<Video[]> {
     try {
       const response = await api.get('/api/subscriptions/feed', filters);
-      return (response.data as Video[]) || [];
+      return (response.data as Video) || [];
     } catch (error) {
       logger.error('Failed to get subscription feed:', error);
       return [];
@@ -163,7 +163,7 @@ class SubscriptionService {
     category: string;
     description: string;
     isVerified: boolean;
-    recentVideos: Video[];
+    recentVideos: Video;
   }>> {
     try {
       const response = await api.get('/api/subscriptions/recommended', filters);
@@ -177,7 +177,7 @@ class SubscriptionService {
         category: string;
         description: string;
         isVerified: boolean;
-        recentVideos: Video[];
+        recentVideos: Video;
       }>) || [];
     } catch (error) {
       logger.error('Failed to get recommended channels:', error);
@@ -189,21 +189,21 @@ class SubscriptionService {
    * Search within subscribed channels
    */
   async searchSubscriptions(
-    query: string,
+    query,
     filters: {
       includeVideos?: boolean;
       limit?: number;
     } = {},
   ): Promise<{
-    channels: Subscription[];
-    videos: Video[];
+    channels: Subscription;
+    videos: Video;
   }> {
     try {
       const response = await api.get('/api/subscriptions/search', {
         q: query,
         ...filters,
       });
-      return response.data as { channels: Subscription[]; videos: Video[] };
+      return response.data as { channels: Subscription; videos: Video[] };
     } catch (error) {
       logger.error('Failed to search subscriptions:', error);
       return {
@@ -277,7 +277,7 @@ class SubscriptionService {
     format: 'json' | 'csv' | 'opml',
   ): Promise<ApiResponse<{
     skipped: number;
-    errors: string[];
+    errors: string;
   }>> {
     const formData = new FormData();
     formData.append('file', file);

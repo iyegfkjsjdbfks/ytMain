@@ -197,7 +197,7 @@ const DashboardPage: React.FC = () => {
     fetchDashboardData();
   }, [timeRange]);
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)  }M`;
 }
@@ -206,13 +206,13 @@ return `${(num / 1000).toFixed(1)  }K`;
 }
     return num.toString();
   };
-  const formatDuration = (minutes: number): string => {
+  const formatDuration = (minutes): string => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
-  const formatCurrency = (amount: number): string => {
+  const formatCurrency = (amount): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -374,7 +374,7 @@ return `${(num / 1000).toFixed(1)  }K`;
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Countries</h3>
             <div className="space-y-4">
-              {audienceData.map((country: any, index: number) => (
+              {audienceData.map((country, index) => (
                 <div key={country.country} className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="text-sm font-medium text-gray-900 w-4">{index + 1}</span>
@@ -409,11 +409,11 @@ return `${(num / 1000).toFixed(1)  }K`;
                   paddingAngle={5}
                   dataKey="percentage"
                 >
-                  {deviceData.map((entry: any, index: number) => (
+                  {deviceData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value: number) => [`${value}%`, 'Usage']} />
+                <Tooltip formatter={(value) => [`${value}%`, 'Usage']} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>

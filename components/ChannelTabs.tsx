@@ -14,9 +14,9 @@ interface Tab {
 }
 
 interface ChannelTabsProps {
-  tabs: Tab[];
+  tabs: Tab;
   activeTab: string;
-  onTabClick: (tabId: string) => void;
+  onTabClick: (tabId) => void;
 }
 
 const ChannelTabs: React.FC<ChannelTabsProps> = ({ tabs, activeTab, onTabClick }) => {

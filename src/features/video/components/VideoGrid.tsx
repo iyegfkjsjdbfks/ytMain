@@ -4,7 +4,7 @@ import VideoCard from './VideoCard';
 
 interface VideoGridProps {
   title?: string;
-  videos: Video[];
+  videos: Video;
   columns?: number;
   showMoreLink?: string;
   emptyMessage?: string;

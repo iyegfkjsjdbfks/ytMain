@@ -190,16 +190,16 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
 
     switch (sortBy) {
       case 'alphabetical':
-        filtered.sort((a: any, b) => a.channelName.localeCompare(b.channelName));
+        filtered.sort((a, b) => a.channelName.localeCompare(b.channelName));
         break;
       case 'recent':
-        filtered.sort((a: any, b) => new Date(b.subscribedAt).getTime() - new Date(a.subscribedAt).getTime());
+        filtered.sort((a, b) => new Date(b.subscribedAt).getTime() - new Date(a.subscribedAt).getTime());
         break;
       case 'most_videos':
-        filtered.sort((a: any, b) => b.videoCount - a.videoCount);
+        filtered.sort((a, b) => b.videoCount - a.videoCount);
         break;
       case 'subscribers':
-        filtered.sort((a: any, b) => b.subscriberCount - a.subscriberCount);
+        filtered.sort((a, b) => b.subscriberCount - a.subscriberCount);
         break;
       default:
         break;
@@ -207,7 +207,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     return filtered;
   };
 
-  const toggleNotifications = (channelId: string) => {
+  const toggleNotifications = (channelId) => {
     setSubscriptions(prev => prev.map(sub =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
@@ -222,7 +222,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
   };
 
-  const handleUnsubscribe = (channelId: string) => {
+  const handleUnsubscribe = (channelId) => {
     setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
@@ -231,7 +231,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     setShowUnsubscribeModal(null);
   };
 
-  const toggleBulkSelection = (channelId: string) => {
+  const toggleBulkSelection = (channelId) => {
     setSelectedSubscriptions(prev => {
       const newSet = new Set(prev);
       if (newSet.has(channelId)) {

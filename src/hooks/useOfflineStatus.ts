@@ -122,7 +122,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, []);
 
   // Ping server to test connectivity
-  const pingServer = useCallback(async (url: string = '/api/ping'): Promise<boolean> => {
+  const pingServer = useCallback(async (url = '/api/ping'): Promise<boolean> => {
     try {
       const startTime = Date.now();
       const response = await fetch(url, {
@@ -187,7 +187,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [state.isOnline, getNetworkQuality]);
 
   // Update offline statistics
-  const updateOfflineStats = useCallback((isOffline: boolean) => {
+  const updateOfflineStats = useCallback((isOffline) => {
     const stats = getOfflineStats();
 
     if (isOffline && !state.wasOffline) {

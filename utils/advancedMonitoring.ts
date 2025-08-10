@@ -16,11 +16,11 @@ interface MetricData {
 interface AlertRule {
   id: string;
   name: string;
-  condition: (value: number, threshold: number) => boolean;
+  condition: (value, threshold) => boolean;
   threshold: number;
   severity: 'low' | 'medium' | 'high' | 'critical';
   cooldown: number; // minutes
-  actions: AlertAction[];
+  actions: AlertAction;
 }
 
 interface AlertAction {
@@ -38,7 +38,7 @@ interface HealthCheck {
 
 interface QualityGate {
   name: string;
-  rules: QualityRule[];
+  rules: QualityRule;
   blocking: boolean;
 }
 
@@ -93,7 +93,7 @@ return undefined;
   /**
    * Record a custom metric
    */
-  recordMetric(name: string, value: number, tags?: Record<string, string>): void {
+  recordMetric(name, value, tags?: Record<string, string>): void {
     const metric: MetricData = {
       timestamp: Date.now(),
       value,
@@ -124,7 +124,7 @@ return undefined;
   /**
    * Get metrics for a specific name
    */
-  getMetrics(name: string, timeRange?: { start: number; end: number }): MetricData[] {
+  getMetrics(name, timeRange?: { start: number; end: number }): MetricData[] {
     const metrics = this.metrics.get(name) || [];
 
     if (!timeRange) {
@@ -139,7 +139,7 @@ return metrics;
   /**
    * Get aggregated metrics
    */
-  getAggregatedMetrics(name: string, timeRange?: { start: number; end: number }): {
+  getAggregatedMetrics(name, timeRange?: { start: number; end: number }): {
     count: number;
     avg: number;
     min: number;
@@ -276,7 +276,7 @@ continue;
    */
   exportData(): {
     metrics: Record<string, MetricData[]>;
-    alerts: AlertRule[];
+    alerts: AlertRule;
     timestamp: number;
   } {
     return {
@@ -500,7 +500,7 @@ return undefined;
     }, 10000); // Check every 10 seconds
   }
 
-  private checkAlerts(metricName: string, value: number): void {
+  private checkAlerts(metricName, value): void {
     for (const [alertId, alert] of this.alerts) {
       const alertPrefix = alertId?.split('-')[0];
       if ((alertPrefix && metricName.includes(alertPrefix)) || alertId === metricName) {
@@ -511,7 +511,7 @@ return undefined;
     }
   }
 
-  private triggerAlert(alert: AlertRule, value: number): void {
+  private triggerAlert(alert: AlertRule, value): void {
     const now = Date.now();
     const lastAlert = this.lastAlertTime.get(alert.id) || 0;
     const cooldownMs = alert.cooldown * 60 * 1000;
@@ -527,7 +527,7 @@ return undefined;
     }
   }
 
-  private executeAlertAction(action: AlertAction, alert: AlertRule, value: number): void {
+  private executeAlertAction(action: AlertAction, alert: AlertRule, value): void {
     switch (action.type) {
       case 'console':
         console.warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
@@ -557,7 +557,7 @@ return undefined;
     }
   }
 
-  private evaluateRule(value: number, rule: QualityRule): boolean {
+  private evaluateRule(value, rule: QualityRule): boolean {
     switch (rule.operator) {
       case 'gt': return value > rule.threshold;
       case 'lt': return value < rule.threshold;
@@ -577,7 +577,7 @@ return undefined;
     return sessionId;
   }
 
-  private generateSecureToken(length: number): string {
+  private generateSecureToken(length): string {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -646,7 +646,7 @@ return undefined;
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
 
-    history.pushState = (data: any, unused: string, url?: string | URL | null) => {
+    history.pushState = (data, unused, url?: string | URL | null) => {
       originalPushState.call(history, data, unused, url);
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
@@ -656,7 +656,7 @@ return undefined;
       }
     };
 
-    history.replaceState = (data: any, unused: string, url?: string | URL | null) => {
+    history.replaceState = (data, unused, url?: string | URL | null) => {
       originalReplaceState.call(history, data, unused, url);
       if (this.isTracking) {
         this.apm.recordMetric('page-view', 1, {
@@ -734,10 +734,10 @@ class CodeQualityMetrics {
   }
 
   async collectMetrics(): Promise<{
-    bundle: any;
-    performance: any;
-    accessibility: any;
-    security: any;
+    bundle;
+    performance;
+    accessibility;
+    security;
   }> {
     const [bundle, performance, accessibility, security] = await Promise.all([
       this.bundleAnalyzer.analyze(),
@@ -792,7 +792,7 @@ class BundleAnalyzer {
     totalSize: number;
     gzippedSize: number;
     chunks: Array<{ name: string; size: number }>;
-    duplicates: string[];
+    duplicates: string;
   }> {
     // This would integrate with webpack-bundle-analyzer or similar
     // For now, return mock data

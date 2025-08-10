@@ -29,12 +29,12 @@ import type {
  */
 
 // Mock data storage
-let mockStreams: LiveStream[] = [];
-const mockChatMessages: ChatMessage[] = [];
-const mockSuperChats: SuperChat[] = [];
-const mockPolls: LivePoll[] = [];
-const mockQuestions: QAQuestion[] = [];
-const mockReplays: StreamReplay[] = [];
+let mockStreams: LiveStream = [];
+const mockChatMessages: ChatMessage = [];
+const mockSuperChats: SuperChat = [];
+const mockPolls: LivePoll = [];
+const mockQuestions: QAQuestion = [];
+const mockReplays: StreamReplay = [];
 
 /**
  * Stream Management API
@@ -115,14 +115,14 @@ export const streamAPI = {
   /**
    * Get stream by ID
    */
-  async getStream(id: string): Promise<LiveStream | null> {
+  async getStream(id): Promise<LiveStream | null> {
     return mockStreams.find(stream => stream.id === id) || null;
   },
 
   /**
    * Get all streams for a user
    */
-  async getUserStreams(userId: string): Promise<LiveStream[]> {
+  async getUserStreams(userId): Promise<LiveStream[]> {
     // In a real implementation, filter by userId
     return mockStreams.filter((stream) => stream.creatorId === userId);
   },
@@ -130,7 +130,7 @@ export const streamAPI = {
   /**
    * Update stream
    */
-  async updateStream(id: string, updates: Partial<LiveStream>): Promise<LiveStream> {
+  async updateStream(id, updates: Partial<LiveStream>): Promise<LiveStream> {
     const streamIndex = mockStreams.findIndex(stream => stream.id === id);
     if (streamIndex === -1) {
       throw new Error('Stream not found');
@@ -158,7 +158,7 @@ export const streamAPI = {
   /**
    * Start a live stream
    */
-  async startStream(id: string): Promise<LiveStream> {
+  async startStream(id): Promise<LiveStream> {
     const stream = await this.getStream(id);
     if (!stream) {
       throw new Error('Stream not found');
@@ -175,7 +175,7 @@ export const streamAPI = {
   /**
    * End a live stream
    */
-  async endStream(id: string): Promise<LiveStream> {
+  async endStream(id): Promise<LiveStream> {
     const stream = await this.getStream(id);
     if (!stream) {
       throw new Error('Stream not found');
@@ -205,14 +205,14 @@ export const streamAPI = {
   /**
    * Stop a live stream (alias for endStream)
    */
-  async stopStream(id: string): Promise<LiveStream> {
+  async stopStream(id): Promise<LiveStream> {
     return this.endStream(id);
   },
 
   /**
    * Delete a stream
    */
-  async deleteStream(id: string): Promise<void> {
+  async deleteStream(id): Promise<void> {
     mockStreams = mockStreams.filter((stream) => stream.id !== id);
   },
 };
@@ -225,7 +225,7 @@ export const chatAPI = {
    * Send a chat message
    */
 
-  async sendMessage(streamId: string, message: string, userId: string, username: string): Promise<ChatMessage> {
+  async sendMessage(streamId, message, userId, username): Promise<ChatMessage> {
     const chatMessage: ChatMessage = {
       id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
       userId,
@@ -246,7 +246,7 @@ export const chatAPI = {
   /**
    * Send a Super Chat
    */
-  async sendSuperChat(streamId: string, message: string, amount: number, userId: string, username: string): Promise<SuperChat> {
+  async sendSuperChat(streamId, message, amount, userId, username): Promise<SuperChat> {
     const superChat: SuperChat = {
       id: `super_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
       userId,
@@ -283,7 +283,7 @@ export const chatAPI = {
   /**
    * Get chat messages for a stream
    */
-  async getChatMessages(streamId: string, limit = 50): Promise<ChatMessage[]> {
+  async getChatMessages(streamId, limit = 50): Promise<ChatMessage[]> {
     // In a real implementation, filter by streamId
     return mockChatMessages
       .slice(-limit)
@@ -293,7 +293,7 @@ export const chatAPI = {
   /**
    * Moderate a chat message
    */
-  async moderateMessage(messageId: string, action: ChatModerationAction): Promise<void> {
+  async moderateMessage(messageId, action: ChatModerationAction): Promise<void> {
     const messageIndex = mockChatMessages.findIndex(msg => msg.id === messageId);
     if (messageIndex !== -1) {
       const message = mockChatMessages[messageIndex];
@@ -328,7 +328,7 @@ export const pollsAPI = {
   /**
    * Create a poll
    */
-  async createPoll(streamId: string, question: string, options: string[]): Promise<LivePoll> {
+  async createPoll(streamId, question, options: string): Promise<LivePoll> {
     const poll: LivePoll = {
       id: `poll_${Date.now()}`,
       streamId,
@@ -352,7 +352,7 @@ export const pollsAPI = {
   /**
    * Vote on a poll
    */
-  async votePoll(pollId: string, optionId: string): Promise<LivePoll> {
+  async votePoll(pollId, optionId): Promise<LivePoll> {
     const pollIndex = mockPolls.findIndex(poll => poll.id === pollId);
     if (pollIndex === -1) {
       throw new Error('Poll not found');
@@ -371,7 +371,7 @@ export const pollsAPI = {
   /**
    * End a poll
    */
-  async endPoll(pollId: string): Promise<LivePoll> {
+  async endPoll(pollId): Promise<LivePoll> {
     const pollIndex = mockPolls.findIndex(poll => poll.id === pollId);
     if (pollIndex !== -1) {
       mockPolls[pollIndex].isActive = false;
@@ -383,7 +383,7 @@ export const pollsAPI = {
   /**
    * Get polls for a stream
    */
-  async getStreamPolls(streamId: string): Promise<LivePoll[]> {
+  async getStreamPolls(streamId): Promise<LivePoll[]> {
     return mockPolls.filter((poll) => poll.streamId === streamId);
   },
 };
@@ -395,7 +395,7 @@ export const qaAPI = {
   /**
    * Submit a question
    */
-  async submitQuestion(streamId: string, question: string, userId: string, username: string): Promise<QAQuestion> {
+  async submitQuestion(streamId, question, userId, username): Promise<QAQuestion> {
     const qaQuestion: QAQuestion = {
       id: `qa_${Date.now()}`,
       streamId,
@@ -417,7 +417,7 @@ export const qaAPI = {
   /**
    * Answer a question
    */
-  async answerQuestion(questionId: string, answer: string): Promise<QAQuestion> {
+  async answerQuestion(questionId, answer): Promise<QAQuestion> {
     const questionIndex = mockQuestions.findIndex(q => q.id === questionId);
     if (questionIndex === -1) {
       throw new Error('Question not found');
@@ -434,7 +434,7 @@ export const qaAPI = {
   /**
    * Upvote a question
    */
-  async upvoteQuestion(questionId: string): Promise<QAQuestion> {
+  async upvoteQuestion(questionId): Promise<QAQuestion> {
     const questionIndex = mockQuestions.findIndex(q => q.id === questionId);
     if (questionIndex !== -1) {
       mockQuestions[questionIndex].upvotes = (mockQuestions[questionIndex].upvotes || 0) + 1;
@@ -445,7 +445,7 @@ export const qaAPI = {
   /**
    * Get questions for a stream
    */
-  async getStreamQuestions(streamId: string): Promise<QAQuestion[]> {
+  async getStreamQuestions(streamId): Promise<QAQuestion[]> {
     return mockQuestions
       .filter((q) => q.streamId === streamId)
       .sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
@@ -459,7 +459,7 @@ export const replayAPI = {
   /**
    * Create a replay
    */
-  async createReplay(streamId: string, title: string, duration: number): Promise<StreamReplay> {
+  async createReplay(streamId, title, duration): Promise<StreamReplay> {
     const replay: StreamReplay = {
       id: `replay_${Date.now()}`,
       streamId,
@@ -491,14 +491,14 @@ export const replayAPI = {
   /**
    * Get replay by ID
    */
-  async getReplay(id: string): Promise<StreamReplay | null> {
+  async getReplay(id): Promise<StreamReplay | null> {
     return mockReplays.find(replay => replay.id === id) || null;
   },
 
   /**
    * Get replays for a stream
    */
-  async getStreamReplays(streamId: string): Promise<StreamReplay[]> {
+  async getStreamReplays(streamId): Promise<StreamReplay[]> {
     return mockReplays.filter((replay) => replay.streamId === streamId);
   },
 };
@@ -522,7 +522,7 @@ export const multiPlatformAPI = {
   /**
    * Connect to a platform
    */
-  async connectPlatform(platformId: string): Promise<boolean> {
+  async connectPlatform(platformId): Promise<boolean> {
     // Simulate connection process
     await new Promise(resolve => setTimeout(resolve, 1000));
     return true;
@@ -531,7 +531,7 @@ export const multiPlatformAPI = {
   /**
    * Stream to multiple platforms
    */
-  async startMultiPlatformStream(streamId: string, platforms: string[]): Promise<boolean> {
+  async startMultiPlatformStream(streamId, platforms: string): Promise<boolean> {
     // Simulate multi-platform streaming setup
     await new Promise(resolve => setTimeout(resolve, 2000));
     return true;
@@ -565,7 +565,7 @@ export const schedulingAPI = {
   /**
    * Cancel scheduled stream
    */
-  async cancelScheduledStream(streamId: string): Promise<void> {
+  async cancelScheduledStream(streamId): Promise<void> {
     await streamAPI.deleteStream(streamId);
   },
 };

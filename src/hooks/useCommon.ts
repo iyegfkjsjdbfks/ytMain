@@ -7,7 +7,7 @@ import { throttle, safeLocalStorage } from '../utils/componentUtils';
 
 // Enhanced local storage hook with error handling
 export const useLocalStorage = <T>(
-  key: string,
+  key,
   initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -41,7 +41,7 @@ export const useLocalStorage = <T>(
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay: number): T => {
+export const useDebounce = <T>(value: T, delay): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -58,9 +58,9 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args: unknown[]) => unknown>(
+export const useThrottle = <T extends (...args: unknown) => unknown>(
   callback: T,
-  delay: number,
+  delay,
 ): T => {
   const throttledCallback = useMemo(
     () => throttle(callback, delay),
@@ -82,11 +82,11 @@ export const usePrevious = <T>(value: T): T | undefined => {
 // Toggle hook
 export const useToggle = (
   initialValue: boolean = false,
-): [boolean, () => void, (value: boolean) => void] => {
+): [boolean, () => void, (value) => void] => {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => setValue(v => !v: any), []);
-  const setToggle = useCallback((newValue: boolean) => setValue(newValue), []);
+  const toggle = useCallback(() => setValue(v => !v), []);
+  const setToggle = useCallback((newValue) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 };
@@ -99,28 +99,28 @@ export const useCounter = (
   increment: () => void;
   decrement: () => void;
   reset: () => void;
-  set: (value: number) => void;
+  set: (value) => void;
 } => {
   const [count, setCount] = useState(initialValue);
 
-  const increment = useCallback(() => setCount(c => c: any + 1), []);
-  const decrement = useCallback(() => setCount(c => c: any - 1), []);
+  const increment = useCallback(() => setCount(c => c + 1), []);
+  const decrement = useCallback(() => setCount(c => c - 1), []);
   const reset = useCallback(() => setCount(initialValue), [initialValue]);
-  const set = useCallback((value: number) => setCount(value), []);
+  const set = useCallback((value) => setCount(value), []);
 
   return { count, increment, decrement, reset, set };
 };
 
 // Array state hook
 export const useArray = <T>(
-  initialArray: T[] = [],
+  initialArray: T = [],
 ): {
-  array: T[];
-  set: (array: T[]) => void;
+  array: T;
+  set: (array: T) => void;
   push: (element: T) => void;
-  filter: (callback: (item: T, index: number) => boolean) => void;
-  update: (index: number, newElement: T) => void;
-  remove: (index: number) => void;
+  filter: (callback: (item: T, index) => boolean) => void;
+  update: (index, newElement: T) => void;
+  remove: (index) => void;
   clear: () => void;
 } => {
   const [array, setArray] = useState<T[]>(initialArray);
@@ -129,11 +129,11 @@ export const useArray = <T>(
     setArray(arr => [...arr, element]);
   }, []);
 
-  const filter = useCallback((callback: (item: T, index: number) => boolean) => {
+  const filter = useCallback((callback: (item: T, index) => boolean) => {
     setArray(arr => arr.filter(callback));
   }, []);
 
-  const update = useCallback((index: number, newElement: T) => {
+  const update = useCallback((index, newElement: T) => {
     setArray(arr => {
       const newArray = [...arr];
       newArray[index] = newElement;
@@ -141,8 +141,8 @@ export const useArray = <T>(
     });
   }, []);
 
-  const remove = useCallback((index: number) => {
-    setArray(arr => arr.filter((_: any, i) => i: any !== index));
+  const remove = useCallback((index) => {
+    setArray(arr => arr.filter((_, i) => i !== index));
   }, []);
 
   const clear = useCallback(() => setArray([]), []);
@@ -219,7 +219,7 @@ export const useClickOutside = (
 
 // Keyboard shortcut hook
 export const useKeyPress = (
-  targetKey: string,
+  targetKey,
   handler: () => void,
   options: {
     ctrl?: boolean;
@@ -272,7 +272,7 @@ export const useWindowSize = (): { width: number; height: number } => {
 };
 
 // Media query hook
-export const useMediaQuery = (query: string): boolean => {
+export const useMediaQuery = (query): boolean => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {

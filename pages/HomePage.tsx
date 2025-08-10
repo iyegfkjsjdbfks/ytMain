@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
 
-  const handleSelectCategory = useCallback((category: string) => {
+  const handleSelectCategory = useCallback((category) => {
     setSelectedCategory(category);
     window.scrollTo(0, 0);
   }, []);

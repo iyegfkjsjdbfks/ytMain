@@ -34,7 +34,7 @@ interface UseServiceWorkerReturn {
   getRegistration: () => ServiceWorkerRegistration | null;
   checkForUpdates: () => Promise<void>;
   getCacheInfo: () => Promise<{
-    caches: string[];
+    caches: string;
     totalSize: number;
   }>;
 }
@@ -175,7 +175,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
 
   // Get cache information
   const getCacheInfo = useCallback(async (): Promise<{
-    caches: string[];
+    caches: string;
     totalSize: number;
   }> => {
     if (!('caches' in window)) {

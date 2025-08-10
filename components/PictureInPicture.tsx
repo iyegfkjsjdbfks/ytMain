@@ -147,7 +147,7 @@ return;
     }
   };
 
-  const formatTime = (time: number): string => {
+  const formatTime = (time): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
@@ -179,7 +179,7 @@ return null;
         // Minimized view
         <div className="w-full h-full flex items-center justify-center bg-gray-900">
           <button
-            onClick={(e: Event) => {
+            onClick={(e) => {
               e.stopPropagation();
               setIsMinimized(false);
             }}
@@ -216,7 +216,7 @@ return null;
               <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
                 <div className="flex space-x-1">
                   <button
-                    onClick={(e: Event) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       setIsMinimized(true);
                     }}
@@ -227,7 +227,7 @@ return null;
                   </button>
 
                   <button
-                    onClick={(e: Event) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       handleExpand();
                     }}
@@ -239,7 +239,7 @@ return null;
                 </div>
 
                 <button
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     onClose();
                   }}
@@ -253,7 +253,7 @@ return null;
               {/* Center Play Button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <button
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     togglePlay();
                   }}
@@ -285,7 +285,7 @@ return null;
                 <div className="flex items-center justify-between text-white text-xs">
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={(e: Event) => {
+                      onClick={(e) => {
                         e.stopPropagation();
                         toggleMute();
                       }}
@@ -306,7 +306,7 @@ return null;
                   </div>
 
                   <button
-                    onClick={(e: Event) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       handleExpand();
                     }}

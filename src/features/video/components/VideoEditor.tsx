@@ -17,7 +17,7 @@ interface VideoClip {
   duration: number;
   thumbnail: string;
   volume: number;
-  effects: string[];
+  effects: string;
 }
 
 interface AudioTrack {
@@ -48,9 +48,9 @@ interface EditorState {
   isPlaying: boolean;
   zoom: number;
   selectedClip: string | null;
-  clips: VideoClip[];
-  audioTracks: AudioTrack[];
-  textOverlays: TextOverlay[];
+  clips: VideoClip;
+  audioTracks: AudioTrack;
+  textOverlays: TextOverlay;
 }
 
 export const VideoEditor: React.FC = () => {
@@ -140,7 +140,7 @@ export const VideoEditor: React.FC = () => {
     }));
   };
 
-  const splitClip = (clipId: string, splitTime: number) => {
+  const splitClip = (clipId, splitTime) => {
     setEditorState(prev => {
       const clipIndex = prev.clips.findIndex(c => c.id === clipId);
       if (clipIndex === -1) {
@@ -177,7 +177,7 @@ return prev;
     });
   };
 
-  const deleteClip = (clipId: string) => {
+  const deleteClip = (clipId) => {
     setEditorState(prev => ({
       ...prev,
       clips: prev.clips.filter((c) => c.id !== clipId),
@@ -223,7 +223,7 @@ return;
     alert('Video export started! This would normally process the video with all edits applied.');
   };
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;

@@ -21,9 +21,9 @@ interface RefactoredSaveToPlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
   videoId: string;
-  existingPlaylists: Playlist[];
-  onSaveToPlaylist: (videoId: string, playlistId: string) => Promise<void>;
-  onCreatePlaylist: (name: string, description?: string) => Promise<Playlist>;
+  existingPlaylists: Playlist;
+  onSaveToPlaylist: (videoId, playlistId) => Promise<void>;
+  onCreatePlaylist: (name, description?: string) => Promise<Playlist>;
 }
 
 /**
@@ -105,7 +105,7 @@ return;
       type: 'text' as const,
       placeholder: 'Enter playlist name',
       required: true,
-      validation: (value: string) => {
+      validation: (value) => {
         if (value.length < 3) {
 return 'Playlist name must be at least 3 characters';
 }

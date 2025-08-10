@@ -12,7 +12,7 @@ interface UseVideoDataOptions {
 }
 
 interface UseVideoDataReturn {
-  data: Video[];
+  data: Video;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
@@ -21,7 +21,7 @@ interface UseVideoDataReturn {
 }
 
 // Simple in-memory cache
-const videoCache = new Map<string, { data: Video[]; timestamp: number }>();
+const videoCache = new Map<string, { data: Video; timestamp: number }>();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // Real video data fetcher
@@ -158,7 +158,7 @@ export const useTrendingVideos = () => {
   });
 };
 
-export const useChannelVideos = (channelId: string) => {
+export const useChannelVideos = (channelId) => {
   return useOptimizedVideoData({
     category: `channel-${channelId}`,
     limit: 15,
@@ -166,7 +166,7 @@ export const useChannelVideos = (channelId: string) => {
   });
 };
 
-export const useSearchVideos = (query: string) => {
+export const useSearchVideos = (query) => {
   return useOptimizedVideoData({
     category: `search-${query}`,
     limit: 20,

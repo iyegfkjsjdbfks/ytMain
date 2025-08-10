@@ -4,7 +4,7 @@
 // or by temporarily exposing it for testing
 class TestableYouTubeService {
   // Copy the exact buildUrl implementation from the original service
-  public buildUrl(endpoint: string, params: Record<string, string>): string {
+  public buildUrl(endpoint, params: Record<string, string>): string {
     // Use proxy endpoint in development to avoid CORS issues
     const baseUrl = import.meta.env.MODE === 'development'
       ? `${window.location.origin  }/api/youtube/v3/`

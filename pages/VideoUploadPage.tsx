@@ -97,7 +97,7 @@ const VideoUploadPage: React.FC = () => {
     }
   };
 
-  const handleRemoveTag = (tagToRemove: string) => {
+  const handleRemoveTag = (tagToRemove) => {
     setUploadData(prev => ({
       ...prev,
       tags: prev.tags.filter((tag) => tag !== tagToRemove),
@@ -347,7 +347,7 @@ handleFileSelect(file);
                   type="text"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
-                  onKeyPress={(e: Event) => {
+                  onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       handleAddTag();
@@ -367,7 +367,7 @@ handleFileSelect(file);
 
               {uploadData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {uploadData.tags.map((tag: string, index: number) => (
+                  {uploadData.tags.map((tag, index) => (
                     <span
                       key={index}
                       className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

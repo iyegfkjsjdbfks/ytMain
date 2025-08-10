@@ -11,7 +11,7 @@ interface MiniplayerState {
   currentTime: number;
   duration: number;
   isMaximized: boolean;
-  queue: Video[];
+  queue: Video;
   currentIndex: number;
 }
 
@@ -180,18 +180,18 @@ interface MiniplayerContextValue {
     showMiniplayer: (video: Video) => void;
     hideMiniplayer: () => void;
     togglePlay: () => void;
-    setPlaying: (playing: boolean) => void;
-    setVolume: (volume: number) => void;
-    setCurrentTime: (time: number) => void;
-    setDuration: (duration: number) => void;
+    setPlaying: (playing) => void;
+    setVolume: (volume) => void;
+    setCurrentTime: (time) => void;
+    setDuration: (duration) => void;
     toggleMaximize: () => void;
-    setMaximized: (maximized: boolean) => void;
-    setQueue: (queue: Video[]) => void;
+    setMaximized: (maximized) => void;
+    setQueue: (queue: Video) => void;
     addToQueue: (video: Video) => void;
-    removeFromQueue: (videoId: string) => void;
+    removeFromQueue: (videoId) => void;
     nextVideo: () => void;
     previousVideo: () => void;
-    setCurrentIndex: (index: number) => void;
+    setCurrentIndex: (index) => void;
   };
 }
 
@@ -211,18 +211,18 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
     showMiniplayer: (video: Video) => dispatch({ type: 'SHOW_MINIPLAYER', payload: video }),
     hideMiniplayer: () => dispatch({ type: 'HIDE_MINIPLAYER' }),
     togglePlay: () => dispatch({ type: 'TOGGLE_PLAY' }),
-    setPlaying: (playing: boolean) => dispatch({ type: 'SET_PLAYING', payload: playing }),
-    setVolume: (volume: number) => dispatch({ type: 'SET_VOLUME', payload: volume }),
-    setCurrentTime: (time: number) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
-    setDuration: (duration: number) => dispatch({ type: 'SET_DURATION', payload: duration }),
+    setPlaying: (playing) => dispatch({ type: 'SET_PLAYING', payload: playing }),
+    setVolume: (volume) => dispatch({ type: 'SET_VOLUME', payload: volume }),
+    setCurrentTime: (time) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
+    setDuration: (duration) => dispatch({ type: 'SET_DURATION', payload: duration }),
     toggleMaximize: () => dispatch({ type: 'TOGGLE_MAXIMIZE' }),
-    setMaximized: (maximized: boolean) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
-    setQueue: (queue: Video[]) => dispatch({ type: 'SET_QUEUE', payload: queue }),
+    setMaximized: (maximized) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
+    setQueue: (queue: Video) => dispatch({ type: 'SET_QUEUE', payload: queue }),
     addToQueue: (video: Video) => dispatch({ type: 'ADD_TO_QUEUE', payload: video }),
-    removeFromQueue: (videoId: string) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
+    removeFromQueue: (videoId) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
     nextVideo: () => dispatch({ type: 'NEXT_VIDEO' }),
     previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
-    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
+    setCurrentIndex: (index) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
   }), []);
 
   const value = useMemo(() => ({ state, actions }), [state]);

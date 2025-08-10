@@ -4,7 +4,7 @@
 
 export const withPerformanceProfiler = <P extends object>(
   Component: React.ComponentType<P>,
-  componentName: string,
+  componentName,
 ) => {
   const WrappedComponent = (props: P) => {
     if (process.env.NODE_ENV === 'development') {
@@ -12,7 +12,7 @@ export const withPerformanceProfiler = <P extends object>(
         React.Profiler,
         {
           id: componentName,
-          onRender: (id: string, phase: string, actualDuration: number) => {
+          onRender: (id, phase, actualDuration) => {
             if (actualDuration > 16) {
               console.warn(
                 `⚡ Slow render detected: ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`,

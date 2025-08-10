@@ -13,12 +13,12 @@ interface TestResult {
   name: string;
   status: 'passed' | 'failed' | 'skipped';
   duration: number;
-  errors?: string[];
+  errors?: string;
 }
 
 interface TestSuite {
   name: string;
-  tests: TestResult[];
+  tests: TestResult;
   totalTests: number;
   passedTests: number;
   failedTests: number;
@@ -27,7 +27,7 @@ interface TestSuite {
 }
 
 class TestRunner {
-  private results: TestSuite[] = [];
+  private results: TestSuite = [];
   private startTime: number = Date.now();
 
   async runAllTests(): Promise<void> {
@@ -68,7 +68,7 @@ class TestRunner {
     this.generateReport();
   }
 
-  private async runTestSuite(suiteName: string, testPatterns: string[]): Promise<void> {
+  private async runTestSuite(suiteName, testPatterns: string): Promise<void> {
     const suiteStartTime = Date.now();
 
     const suite: TestSuite = {
@@ -126,8 +126,8 @@ class TestRunner {
     this.results.push(suite);
   }
 
-  private parseTestOutput(output: string): TestResult[] {
-    const results: TestResult[] = [];
+  private parseTestOutput(output): TestResult[] {
+    const results: TestResult = [];
 
     try {
       // Try to parse JSON output from test runner
@@ -233,7 +233,7 @@ class TestRunner {
     }
   }
 
-  private generateHtmlReport(reportData: any, reportsDir: string): void {
+  private generateHtmlReport(reportData, reportsDir): void {
     const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">

@@ -15,13 +15,13 @@ export interface FileUploadProps {
   accept?: string;
   multiple?: boolean;
   maxSize?: number; // in bytes
-  onFileSelect: (files: File[]) => void;
-  onFileRemove?: (index: number) => void;
+  onFileSelect: (files: File) => void;
+  onFileRemove?: (index) => void;
   disabled?: boolean;
   className?: string;
   label?: string;
   description?: string;
-  files?: File[];
+  files?: File;
 }
 
 export const FileUpload: React.FC<FileUploadProps> = ({
@@ -87,7 +87,7 @@ return;
     }
   };
 
-  const formatFileSize = (bytes: number): string => {
+  const formatFileSize = (bytes): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -170,7 +170,7 @@ return '0 Bytes';
                 </div>
                 {onFileRemove && (
                   <button
-                    onClick={(e: Event) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       onFileRemove(index);
                     }}

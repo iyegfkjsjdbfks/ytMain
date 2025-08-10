@@ -110,7 +110,7 @@ const ChannelPage: React.FC = () => {
   }, [channelIdOrName]);
 
   const handleSubscribeToggle = () => {
-    setIsSubscribed(prev => !prev: any);
+    setIsSubscribed(prev => !prev);
   };
 
   if (loading) {

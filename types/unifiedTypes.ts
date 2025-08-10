@@ -19,7 +19,7 @@ export interface User extends BaseEntity {
   totalViews: number;
   joinedDate: Date | string;
   channelBanner?: string;
-  socialLinks?: SocialLink[];
+  socialLinks?: SocialLink;
   preferences: UserPreferences;
 }
 
@@ -78,23 +78,23 @@ export interface Video extends BaseEntity {
   channelId: string;
   channelName: string;
   channelAvatar?: string;
-  tags: string[];
+  tags: string;
   category: VideoCategory;
   visibility: VideoVisibility;
   monetization: MonetizationSettings;
   analytics: VideoAnalytics;
   processing: ProcessingStatus;
-  quality: VideoQuality[];
-  captions: Caption[];
-  chapters: Chapter[];
+  quality: VideoQuality;
+  captions: Caption;
+  chapters: Chapter;
   endScreen?: EndScreen;
-  cards: Card[];
+  cards: Card;
 }
 
 export interface VideoMetadata {
   title: string;
   description: string;
-  tags: string[];
+  tags: string;
   category: VideoCategory;
   thumbnail?: File | string;
   visibility: VideoVisibility;
@@ -130,7 +130,7 @@ export interface Chapter {
 
 export interface EndScreen {
   duration: number;
-  elements: EndScreenElement[];
+  elements: EndScreenElement;
 }
 
 export interface EndScreenElement {
@@ -149,7 +149,7 @@ export interface Card {
   endTime?: number;
   targetId?: string;
   url?: string;
-  pollOptions?: string[];
+  pollOptions?: string;
 }
 
 export type VideoCategory =
@@ -170,7 +170,7 @@ export type VideoVisibility = 'public' | 'unlisted' | 'private' | 'scheduled';
 
 export interface MonetizationSettings {
   enabled: boolean;
-  adTypes: AdType[];
+  adTypes: AdType;
   sponsorships: boolean;
   merchandise: boolean;
   superChat: boolean;
@@ -200,7 +200,7 @@ export interface AnalyticsMetric {
   total: number;
   change: number;
   changePercentage: number;
-  data: DataPoint[];
+  data: DataPoint;
 }
 
 export interface DataPoint {
@@ -248,9 +248,9 @@ export interface PlaybackLocationData {
 }
 
 export interface TrafficMetrics {
-  sources: TrafficSource[];
-  searchTerms: SearchTerm[];
-  externalSites: ExternalSite[];
+  sources: TrafficSource;
+  searchTerms: SearchTerm;
+  externalSites: ExternalSite;
 }
 
 export interface TrafficSource {
@@ -288,7 +288,7 @@ export interface Playlist extends BaseEntity {
   description: string;
   thumbnail: string;
   visibility: VideoVisibility;
-  videos: PlaylistVideo[];
+  videos: PlaylistVideo;
   totalDuration: number;
   totalViews: number;
   channelId: string;
@@ -307,7 +307,7 @@ export interface Comment extends BaseEntity {
   author: CommentAuthor;
   likes: number;
   dislikes: number;
-  replies: Comment[];
+  replies: Comment;
   isEdited: boolean;
   isPinned: boolean;
   isHearted: boolean;
@@ -399,7 +399,7 @@ export interface ApiResponse<T = any> {
   data: T;
   success: boolean;
   message?: string;
-  errors?: string[];
+  errors?: string;
   pagination?: PaginationInfo;
 }
 
@@ -427,7 +427,7 @@ export interface FormField {
   required: boolean;
   placeholder?: string;
   options?: Array<{ value: string; label: string }>;
-  validation?: ValidationRule[];
+  validation?: ValidationRule;
   defaultValue?: any;
 }
 
@@ -515,7 +515,7 @@ export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email, password) => Promise<void>;
   register: (userData: RegisterData) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<void>;
@@ -574,9 +574,9 @@ export interface UseFormReturn {
   touched: Record<string, boolean>;
   isSubmitting: boolean;
   isValid: boolean;
-  setValue: (name: string, value) => void;
-  setError: (name: string, error: string) => void;
-  setTouched: (name: string, touched: boolean) => void;
+  setValue: (name, value) => void;
+  setError: (name, error) => void;
+  setTouched: (name, touched) => void;
   handleSubmit: (e: React.FormEvent) => void;
   reset: () => void;
 }

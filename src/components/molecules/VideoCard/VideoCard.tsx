@@ -43,7 +43,7 @@ const Image = ({
 };
 
 export interface VideoCardProps extends Omit<VideoCardPropsBase, 'onMoreClick'> {
-  onMoreClick: (videoId: string) => void;
+  onMoreClick: (videoId) => void;
 }
 
 export const VideoCard = ({
@@ -145,7 +145,7 @@ export const VideoCard = ({
 };
 
 // Helper function to format duration (moved from utils.ts for self-containment)
-function formatDuration(seconds: number): string {
+function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);

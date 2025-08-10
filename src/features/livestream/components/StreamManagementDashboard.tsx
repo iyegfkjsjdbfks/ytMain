@@ -333,7 +333,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     }
   };
 
-  const handleBulkAction = async (action: string) => {
+  const handleBulkAction = async (action) => {
     try {
       switch (action) {
         case 'delete':
@@ -401,7 +401,7 @@ return true;
     }
   });
 
-  const formatNumber = (num: number) => {
+  const formatNumber = (num) => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -411,7 +411,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     if (hours > 0) {

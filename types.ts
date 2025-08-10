@@ -64,7 +64,7 @@ export interface ExtendedVideo {
   isDisliked?: boolean;
   isSaved?: boolean;
   commentCount?: number;
-  tags?: string[];
+  tags?: string;
   privacyStatus?: 'public' | 'private' | 'unlisted';
   publishedAt?: string; // ISO date string
   createdAt?: string; // ISO date string
@@ -89,10 +89,10 @@ export interface ExtendedVideo {
   monetizationDetails?: {
     access?: {
       allowed: boolean;
-      exception?: string[];
+      exception?: string;
     };
     monetizationStatus?: 'monetized' | 'ineligible' | 'limited';
-    adFormats?: string[];
+    adFormats?: string;
   };
   // Localization
   defaultAudioLanguage?: string;
@@ -119,8 +119,8 @@ export interface ExtendedChannel {
   joinDate?: string; // Added
   totalViews?: string; // Added
   channelDescription?: string; // Added
-  playlists?: PlaylistSummary[];
-  communityPosts?: CommunityPost[];
+  playlists?: PlaylistSummary;
+  communityPosts?: CommunityPost;
 }
 
 // Re-export core Comment type
@@ -131,7 +131,7 @@ export interface UserPlaylist {
   id: string;
   title: string;
   description?: string;
-  videoIds: string[];
+  videoIds: string;
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -143,11 +143,11 @@ export interface UserPlaylistDetails extends UserPlaylist {
 
 // For AI Content Spark feature
 export interface VideoIdeaResponse {
-  ideas: string[];
-  titles: string[];
+  ideas: string;
+  titles: string;
   concept: string;
-  talkingPoints: string[];
-  tags: string[];
+  talkingPoints: string;
+  tags: string;
   error?: string;
 }
 
@@ -155,7 +155,7 @@ export interface VideoUploadData {
   title: string;
   description: string;
   category: string;
-  tags: string[];
+  tags: string;
   visibility: 'public' | 'unlisted' | 'private';
   videoFile: File | null;
   thumbnailFile: File | null;

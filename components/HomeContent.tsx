@@ -19,7 +19,7 @@ import type { Video } from '../types'; // Assuming Video type is in types.ts
 
 interface HomeContentProps {
   selectedCategory: string;
-  videos: Video[];
+  videos: Video;
 }
 
 const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {

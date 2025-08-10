@@ -24,7 +24,7 @@ interface VideoPlayerOptions {
   initialVolume?: number;
   initialPlaybackRate?: number;
   initialQuality?: string;
-  onTimeUpdate?: ((currentTime: number) => void) | undefined;
+  onTimeUpdate?: ((currentTime) => void) | undefined;
   onEnded?: (() => void) | undefined;
   onPlay?: (() => void) | undefined;
   onPause?: (() => void) | undefined;
@@ -40,10 +40,10 @@ interface UseVideoPlayerReturn {
     mute: () => void;
     unmute: () => void;
     toggleMute: () => void;
-    setVolume: (volume: number) => void;
-    seek: (time: number) => void;
-    setPlaybackRate: (rate: number) => void;
-    setQuality: (quality: string) => void;
+    setVolume: (volume) => void;
+    seek: (time) => void;
+    setPlaybackRate: (rate) => void;
+    setQuality: (quality) => void;
     enterFullscreen: () => Promise<void>;
     exitFullscreen: () => Promise<void>;
     toggleFullscreen: () => Promise<void>;
@@ -58,7 +58,7 @@ interface UseVideoPlayerReturn {
     onTimeUpdate: () => void;
     onDurationChange: () => void;
     onVolumeChange: () => void;
-    onError: (error: Event) => void;
+    onError: (error) => void;
     onEnded: () => void;
     onProgress: () => void;
     onWaiting: () => void;
@@ -187,7 +187,7 @@ return;
     }
   }, [state.isMuted, mute, unmute]);
 
-  const setVolume = useCallback((volume: number) => {
+  const setVolume = useCallback((volume) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -198,7 +198,7 @@ return;
     setState(prev => ({ ...prev, volume: clampedVolume }));
   }, []);
 
-  const seek = useCallback((time: number) => {
+  const seek = useCallback((time) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -208,7 +208,7 @@ return;
     setState(prev => ({ ...prev, currentTime: time }));
   }, []);
 
-  const setPlaybackRate = useCallback((rate: number) => {
+  const setPlaybackRate = useCallback((rate) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -218,7 +218,7 @@ return;
     setState(prev => ({ ...prev, playbackRate: rate }));
   }, []);
 
-  const setQuality = useCallback((quality: string) => {
+  const setQuality = useCallback((quality) => {
     setState(prev => ({ ...prev, quality }));
   }, []);
 
@@ -335,7 +335,7 @@ return;
       }));
     }, []),
 
-    onError: useCallback((error: Event) => {
+    onError: useCallback((error) => {
       console.error('Video error:', error);
       setState(prev => ({
         ...prev,

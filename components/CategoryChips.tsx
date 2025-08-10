@@ -13,9 +13,9 @@ declare global {
 import { cn } from '../src/lib/utils';
 
 interface CategoryChipsProps {
-  categories: string[];
+  categories: string;
   selectedCategory: string;
-  onSelectCategory: (category: string) => void;
+  onSelectCategory: (category) => void;
   className?: string;
 }
 

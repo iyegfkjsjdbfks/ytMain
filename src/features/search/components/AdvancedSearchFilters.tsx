@@ -11,7 +11,7 @@ export interface SearchFilters {
   type: 'all' | 'video' | 'channel' | 'playlist' | 'live';
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   duration: 'any' | 'short' | 'medium' | 'long';
-  features: string[];
+  features: string;
   sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
   quality: 'any' | 'hd' | '4k' | 'hdr';
   captions: 'any' | 'with_captions' | 'without_captions';
@@ -45,7 +45,7 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     });
   };
 
-  const toggleFeature = (feature: string) => {
+  const toggleFeature = (feature) => {
     const newFeatures = filters.features.includes(feature)
       ? filters.features.filter((f) => f !== feature)
       : [...filters.features, feature];

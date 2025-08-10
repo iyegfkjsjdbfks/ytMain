@@ -17,9 +17,9 @@ interface ChannelBranding {
   profilePicture: string;
   channelName: string;
   channelDescription: string;
-  channelKeywords: string[];
+  channelKeywords: string;
   channelTrailer: string;
-  featuredChannels: string[];
+  featuredChannels: string;
   socialLinks: {
     website: string;
     twitter: string;
@@ -74,7 +74,7 @@ const ChannelCustomizationPage: React.FC = () => {
     setUnsavedChanges(true);
   };
 
-  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: string) => {
+  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value) => {
     setBranding(prev => ({
       ...prev,
       socialLinks: { ...prev.socialLinks, [platform]: value },
@@ -82,7 +82,7 @@ const ChannelCustomizationPage: React.FC = () => {
     setUnsavedChanges(true);
   };
 
-  const handleKeywordAdd = (keyword: string) => {
+  const handleKeywordAdd = (keyword) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
@@ -92,7 +92,7 @@ const ChannelCustomizationPage: React.FC = () => {
     }
   };
 
-  const handleKeywordRemove = (keyword: string) => {
+  const handleKeywordRemove = (keyword) => {
     setBranding(prev => ({
       ...prev,
       channelKeywords: prev.channelKeywords.filter((k) => k !== keyword),
@@ -112,7 +112,7 @@ const ChannelCustomizationPage: React.FC = () => {
     alert('Changes discarded');
   };
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -446,7 +446,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         id="channel-keywords"
                         placeholder="Add a keyword and press Enter"
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        onKeyPress={(e: Event) => {
+                        onKeyPress={(e) => {
                           if (e.key === 'Enter') {
                             handleKeywordAdd(e.currentTarget.value);
                             e.currentTarget.value = '';

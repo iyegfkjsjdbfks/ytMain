@@ -14,7 +14,7 @@ interface UseFormStateReturn<T> {
   isValid: boolean;
   setValue: (field: keyof T, value) => void;
   setValues: (values: Partial<T>) => void;
-  setError: (field: keyof T, error: string) => void;
+  setError: (field: keyof T, error) => void;
   clearError: (field: keyof T) => void;
   clearErrors: () => void;
   handleSubmit: (e?: React.FormEvent) => Promise<void>;
@@ -49,7 +49,7 @@ export function useFormState<T extends Record<string, any>>({
     setValuesState(prev => ({ ...prev, ...newValues }));
   }, []);
 
-  const setError = useCallback((field: keyof T, error: string) => {
+  const setError = useCallback((field: keyof T, error) => {
     setErrors(prev => ({ ...prev, [field]: error }));
   }, []);
 

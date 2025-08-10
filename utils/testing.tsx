@@ -149,13 +149,13 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export const waitForTime = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const waitForTime = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
   private startTime: number = 0;
   private endTime: number = 0;
-  private measurements: number[] = [];
+  private measurements: number = [];
 
   start(): void {
     this.startTime = performance.now();
@@ -226,7 +226,7 @@ export const createMemoryLeakTest = (testFn: () => void, iterations: number = 10
 };
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement, testId: string): HTMLElement => {
+export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
     throw new Error(`Element with test id "${testId}" not found`);
@@ -234,7 +234,7 @@ export const getByTestId = (container: HTMLElement, testId: string): HTMLElement
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement, testId: string): HTMLElement | null => {
+export const queryByTestId = (container: HTMLElement, testId): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
@@ -255,13 +255,13 @@ export const checkAccessibility = async (container: HTMLElement) => {
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement, name: string) => {
+export const takeSnapshot = (component: React.ReactElement, name) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response: any, status: number = 200) => {
+export const mockFetch = (response, status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: status >= 200 && status < 300,
@@ -272,7 +272,7 @@ export const mockFetch = (response: any, status: number = 200) => {
   );
 };
 
-export const mockFetchError = (error: string) => {
+export const mockFetchError = (error) => {
   global.fetch = vi.fn(() => Promise.reject(new Error(error)));
 };
 
@@ -281,11 +281,11 @@ export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
 
   global.localStorage = {
-    getItem: vi.fn((key: string) => store[key] ?? null),
-    setItem: vi.fn((key: string, value: string) => {
+    getItem: vi.fn((key) => store[key] ?? null),
+    setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key: string) => {
+    removeItem: vi.fn((key) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -319,7 +319,7 @@ export const mockResizeObserver = () => {
 
 // Media Query Mocking
 export const mockMatchMedia = (matches: boolean = false) => {
-  global.matchMedia = vi.fn().mockImplementation((query: string) => ({
+  global.matchMedia = vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
     onchange: null,
@@ -333,7 +333,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
 
 // Test Suite Helpers
 export const describeWithSetup = (
-  name: string,
+  name,
   setup: () => void,
   tests: () => void,
 ) => {
@@ -369,7 +369,7 @@ export const testUtils = {
   simulateNetworkDelay: async (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
-  simulateKeyboardNavigation: async (element: HTMLElement, key: string) => {
+  simulateKeyboardNavigation: async (element: HTMLElement, key) => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);
@@ -388,12 +388,12 @@ export const testUtils = {
         break;
     }
   },
-  simulateFormInput: async (input: HTMLElement, value: string) => {
+  simulateFormInput: async (input: HTMLElement, value) => {
     const user = createUserEvent();
     await user.clear(input);
     await user.type(input, value);
   },
-  simulateDragAndDrop: async (element: HTMLElement, files: File[]) => {
+  simulateDragAndDrop: async (element: HTMLElement, files: File) => {
     const user = createUserEvent();
     await user.upload(element, files);
   },
@@ -438,7 +438,7 @@ expect.extend({
     };
   },
 
-  toHaveAccessibleName(received: HTMLElement, expectedName: string) {
+  toHaveAccessibleName(received: HTMLElement, expectedName) {
     const accessibleName = received.getAttribute('aria-label') ??
                           received.getAttribute('aria-labelledby') ??
                           received.textContent;
@@ -457,7 +457,7 @@ declare global {
   namespace jest {
     interface Matchers<R> {
       toBeInViewport(): R;
-      toHaveAccessibleName(expectedName: string): R;
+      toHaveAccessibleName(expectedName): R;
     }
   }
 }

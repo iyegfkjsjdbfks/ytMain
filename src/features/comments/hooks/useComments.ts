@@ -10,7 +10,7 @@ import type { Comment } from '../../../types/core';
  */
 
 // Query hooks
-export function useVideoComments(videoId: string, filters: CommentFilters = {}) {
+export function useVideoComments(videoId, filters: CommentFilters = {}) {
   return useQuery(
     ['comments', 'video', videoId, JSON.stringify(filters)],
     () => commentService.getVideoComments(videoId, filters),
@@ -22,7 +22,7 @@ export function useVideoComments(videoId: string, filters: CommentFilters = {}) 
   );
 }
 
-export function useCommentReplies(commentId: string, filters: Omit<CommentFilters, 'parentId'> = {}) {
+export function useCommentReplies(commentId, filters: Omit<CommentFilters, 'parentId'> = {}) {
   return useQuery(
     ['comments', 'replies', commentId, JSON.stringify(filters)],
     () => commentService.getCommentReplies(commentId, filters),
@@ -33,7 +33,7 @@ export function useCommentReplies(commentId: string, filters: Omit<CommentFilter
   );
 }
 
-export function useComment(commentId: string) {
+export function useComment(commentId) {
   return useQuery(
     ['comment', commentId],
     () => commentService.getComment(commentId),
@@ -44,7 +44,7 @@ export function useComment(commentId: string) {
   );
 }
 
-export function useCommentThread(commentId: string) {
+export function useCommentThread(commentId) {
   return useQuery(
     ['comment', 'thread', commentId],
     () => commentService.getCommentThread(commentId),
@@ -55,7 +55,7 @@ export function useCommentThread(commentId: string) {
   );
 }
 
-export function useUserComments(userId: string, filters: Omit<CommentFilters, 'parentId'> = {}) {
+export function useUserComments(userId, filters: Omit<CommentFilters, 'parentId'> = {}) {
   return useQuery(
     ['comments', 'user', userId, JSON.stringify(filters)],
     () => commentService.getUserComments(userId, filters),
@@ -77,7 +77,7 @@ export function usePendingComments(videoId?: string, filters: CommentFilters = {
   );
 }
 
-export function useCommentStats(videoId: string) {
+export function useCommentStats(videoId) {
   return useQuery(
     ['comments', 'stats', videoId],
     () => commentService.getCommentStats(videoId),
@@ -98,7 +98,7 @@ export function useTrendingComments(timeframe: '1h' | '24h' | '7d' | '30d' = '24
   );
 }
 
-export function useCommentMentions(userId: string, filters: CommentFilters = {}) {
+export function useCommentMentions(userId, filters: CommentFilters = {}) {
   return useQuery(
     ['comments', 'mentions', userId, JSON.stringify(filters)],
     () => commentService.getCommentMentions(userId, filters),
@@ -110,7 +110,7 @@ export function useCommentMentions(userId: string, filters: CommentFilters = {})
   );
 }
 
-export function useCommentAnalytics(videoId: string, timeframe: '7d' | '30d' | '90d' = '30d') {
+export function useCommentAnalytics(videoId, timeframe: '7d' | '30d' | '90d' = '30d') {
   return useQuery(
     ['comments', 'analytics', videoId, timeframe],
     () => commentService.getCommentAnalytics(videoId, timeframe),
@@ -121,7 +121,7 @@ export function useCommentAnalytics(videoId: string, timeframe: '7d' | '30d' | '
   );
 }
 
-export function useSearchComments(query: string, videoId?: string, filters: CommentFilters = {}) {
+export function useSearchComments(query, videoId?: string, filters: CommentFilters = {}) {
   return useQuery(
     ['comments', 'search', query, videoId || '', JSON.stringify(filters)],
     () => commentService.searchComments(query, videoId, filters),
@@ -279,7 +279,7 @@ export function useModerateComment() {
 }
 
 export function useBulkModerateComments() {
-  return useMutation<{ success: string[]; failed: string[] }, { commentIds: string[]; action: 'approve' | 'reject' | 'hold' | 'spam'; reason?: string }>(
+  return useMutation<{ success: string; failed: string[] }, { commentIds: string; action: 'approve' | 'reject' | 'hold' | 'spam'; reason?: string }>(
     ({ commentIds, action, reason }) => commentService.bulkModerateComments(commentIds, action, reason),
     {
       onSuccess: () => {
@@ -292,7 +292,7 @@ export function useBulkModerateComments() {
 }
 
 export function useAutoModerateComments() {
-  return useMutation<any, { videoId: string; settings: any }>(
+  return useMutation<any, { videoId: string; settings }>(
     ({ videoId, settings }) => commentService.autoModerateComments(videoId, settings),
     {
       onSuccess: (_, { videoId }) => {
@@ -317,7 +317,7 @@ export function useMarkMentionsAsRead() {
 }
 
 // Combined hooks for common patterns
-export function useCommentManagement(videoId: string) {
+export function useCommentManagement(videoId) {
   const comments = useVideoComments(videoId);
   const stats = useCommentStats(videoId);
   const createComment = useCreateComment();
@@ -343,7 +343,7 @@ export function useCommentManagement(videoId: string) {
   };
 }
 
-export function useCommentInteractions(_commentId: string) {
+export function useCommentInteractions(_commentId) {
   const reactToComment = useReactToComment();
   const removeReaction = useRemoveReaction();
   const pinComment = usePinComment();

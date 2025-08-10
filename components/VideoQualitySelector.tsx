@@ -34,14 +34,14 @@ export interface PlaybackSpeed {
 }
 
 interface VideoQualitySelectorProps {
-  qualities: VideoQuality[];
+  qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality: string) => void;
-  playbackSpeeds?: PlaybackSpeed[];
+  onQualityChange: (quality) => void;
+  playbackSpeeds?: PlaybackSpeed;
   currentSpeed?: number;
-  onSpeedChange?: (speed: number) => void;
+  onSpeedChange?: (speed) => void;
   volume?: number;
-  onVolumeChange?: (volume: number) => void;
+  onVolumeChange?: (volume) => void;
   isPlaying?: boolean;
   onPlayPause?: () => void;
   isFullscreen?: boolean;
@@ -108,13 +108,13 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
     return speed?.label || 'Normal';
   };
 
-  const handleQualitySelect = (qualityValue: string) => {
+  const handleQualitySelect = (qualityValue) => {
     onQualityChange(qualityValue);
     setShowSettings(false);
     setActivePanel('main');
   };
 
-  const handleSpeedSelect = (speedValue: number) => {
+  const handleSpeedSelect = (speedValue) => {
     onSpeedChange?.(speedValue);
     setShowSettings(false);
     setActivePanel('main');

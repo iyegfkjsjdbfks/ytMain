@@ -41,7 +41,7 @@ const LazyVideoPlayer = memo<LazyVideoPlayerProps>(({
         <YouTubePlayer
           video={video}
           autoplay={autoplay}
-          onStateChange={(state: number) => {
+          onStateChange={(state) => {
             if (state === 1) {
 onPlay?.();
 } // Playing

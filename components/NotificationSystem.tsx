@@ -208,7 +208,7 @@ return;
     }
   };
 
-  const markAsRead = (notificationId: string) => {
+  const markAsRead = (notificationId) => {
     setNotifications(prev => {
       const updated = prev.map(n =>
         n.id === notificationId ? { ...n, isRead: true } : n,
@@ -226,7 +226,7 @@ return;
     });
   };
 
-  const deleteNotification = (notificationId: string) => {
+  const deleteNotification = (notificationId) => {
     setNotifications(prev => {
       const updated = prev.filter((n) => n.id !== notificationId);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));

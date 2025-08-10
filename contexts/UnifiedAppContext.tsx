@@ -18,11 +18,11 @@ interface UnifiedAppState {
   isMiniplayerOpen: boolean;
 
   // Watch Later state
-  watchLaterVideos: string[];
+  watchLaterVideos: string;
 
   // UI state
   sidebarCollapsed: boolean;
-  notifications: StrictNotification[];
+  notifications: StrictNotification;
 }
 
 // Action Types
@@ -116,7 +116,7 @@ interface UnifiedAppContextType {
   state: UnifiedAppState;
 
   // Auth actions
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email, password) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
 
@@ -129,14 +129,14 @@ interface UnifiedAppContextType {
   toggleMiniplayer: () => void;
 
   // Watch Later actions
-  addToWatchLater: (videoId: string) => void;
-  removeFromWatchLater: (videoId: string) => void;
-  isInWatchLater: (videoId: string) => boolean;
+  addToWatchLater: (videoId) => void;
+  removeFromWatchLater: (videoId) => void;
+  isInWatchLater: (videoId) => boolean;
 
   // UI actions
   toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
-  removeNotification: (id: string) => void;
+  removeNotification: (id) => void;
 }
 
 // Create Context
@@ -155,7 +155,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
 
   // Auth actions
-  const login = useCallback(async (email: string, password: string): Promise<boolean> => {
+  const login = useCallback(async (email, password): Promise<boolean> => {
     dispatch({ type: 'SET_AUTH_LOADING', payload: true });
 
     try {
@@ -252,19 +252,19 @@ return false;
   }, []);
 
   // Watch Later actions
-  const addToWatchLater = useCallback((videoId: string) => {
+  const addToWatchLater = useCallback((videoId) => {
     dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
     const updated = [...state.watchLaterVideos, videoId];
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
-  const removeFromWatchLater = useCallback((videoId: string) => {
+  const removeFromWatchLater = useCallback((videoId) => {
     dispatch({ type: 'REMOVE_FROM_WATCH_LATER', payload: videoId });
-    const updated = state.watchLaterVideos.filter(id: string => id: string !== videoId);
+    const updated = state.watchLaterVideos.filter(id => id !== videoId);
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
-  const isInWatchLater = useCallback((videoId: string) => {
+  const isInWatchLater = useCallback((videoId) => {
     return state.watchLaterVideos.includes(videoId);
   }, [state.watchLaterVideos]);
 
@@ -282,7 +282,7 @@ return false;
     dispatch({ type: 'ADD_NOTIFICATION', payload: notificationWithId });
   }, []);
 
-  const removeNotification = useCallback((id: string) => {
+  const removeNotification = useCallback((id) => {
     dispatch({ type: 'REMOVE_NOTIFICATION', payload: id });
   }, []);
 
@@ -321,7 +321,7 @@ return false;
             try {
               const watchLaterVideos = JSON.parse(storedWatchLater);
               if (Array.isArray(watchLaterVideos)) {
-                watchLaterVideos.forEach((videoId: string) => {
+                watchLaterVideos.forEach((videoId) => {
                   if (typeof videoId === 'string') {
                     dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
                   }

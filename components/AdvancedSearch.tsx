@@ -25,12 +25,12 @@ export interface SearchFilters {
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   type: 'any' | 'video' | 'channel' | 'playlist' | 'live';
   quality: 'any' | 'hd' | '4k';
-  features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr
+  features: string; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr
   sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query: string, filters: SearchFilters) => void;
+  onSearch: (query, filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }
@@ -77,7 +77,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     }
   }, [query]);
 
-  const generateSuggestions = (searchQuery: string) => {
+  const generateSuggestions = (searchQuery) => {
     // Mock search suggestions - in real app, this would call an API
     const mockSuggestions = [
       'react tutorial',
@@ -106,7 +106,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     if (finalQuery.trim()) {
       // Save to search history
       const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
-      const updatedHistory = [finalQuery, ...searchHistory.filter((h: string) => h !== finalQuery)].slice(0, 20);
+      const updatedHistory = [finalQuery, ...searchHistory.filter((h) => h !== finalQuery)].slice(0, 20);
       localStorage.setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
 
       onSearch(finalQuery, filters);
@@ -150,7 +150,7 @@ searchParams.set('sort_by', filters.sortBy);
     }
   };
 
-  const toggleFeature = (feature: string) => {
+  const toggleFeature = (feature) => {
     setFilters(prev => ({
       ...prev,
       features: prev.features.includes(feature)
@@ -229,7 +229,7 @@ searchParams.set('sort_by', filters.sortBy);
         {/* Search Suggestions */}
         {showSuggestions && suggestions.length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50">
-            {suggestions.map((suggestion: any, index: number) => (
+            {suggestions.map((suggestion, index) => (
               <button
                 key={index}
                 onClick={() => {

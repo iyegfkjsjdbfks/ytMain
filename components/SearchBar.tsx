@@ -47,7 +47,7 @@ const SearchBar: React.FC = memo(() => {
     }
   }, []);
 
-  const fetchSuggestionsDebounced = useCallback(async (currentQuery: string) => {
+  const fetchSuggestionsDebounced = useCallback(async (currentQuery) => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
@@ -71,7 +71,7 @@ const SearchBar: React.FC = memo(() => {
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
 
-  const handleSearch = (searchQuery: string) => {
+  const handleSearch = (searchQuery) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
       setQuery(trimmedQuery);
@@ -91,7 +91,7 @@ inputRef.current.blur();
     handleSearch(query);
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
+  const handleSuggestionClick = (suggestion) => {
     handleSearch(suggestion);
   };
 
@@ -115,7 +115,7 @@ inputRef.current.blur();
     }
   };
 
-  const handleRemoveRecentSearch = async (searchToRemove: string, e: React.MouseEvent) => {
+  const handleRemoveRecentSearch = async (searchToRemove, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);
@@ -222,7 +222,7 @@ inputRef.current.blur();
                 <span>{searchTerm}</span>
               </button>
               <button
-                onClick={(e: Event) => {
+                onClick={(e) => {
                   handleRemoveRecentSearch(searchTerm, e).catch(console.error);
                 }}
                 className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -235,7 +235,7 @@ inputRef.current.blur();
           ))}
            <li className="border-t border-neutral-200 dark:border-neutral-700/70 mt-1 pt-1">
                 <button
-                    onClick={(e: Event) => {
+                    onClick={(e) => {
                       handleClearAllRecent(e).catch(console.error);
                     }}
                     className="w-full text-center px-4 py-2 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors"

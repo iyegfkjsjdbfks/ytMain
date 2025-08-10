@@ -76,7 +76,7 @@ return `${Math.floor(diffDays / 30)} months ago`;
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e: Event) => {
+      onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleCardClick();

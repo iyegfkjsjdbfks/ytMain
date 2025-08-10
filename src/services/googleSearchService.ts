@@ -22,7 +22,7 @@ export interface GoogleSearchResult {
 }
 
 // Placeholder implementation
-export const searchForHomePage = async (query: string): Promise<(YouTubeSearchResult | GoogleSearchResult)[]> => {
+export const searchForHomePage = async (query): Promise<(YouTubeSearchResult | GoogleSearchResult)[]> => {
   // Mock data for development
   return [
     {

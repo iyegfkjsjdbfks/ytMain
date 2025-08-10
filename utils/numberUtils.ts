@@ -5,7 +5,7 @@
  * @param viewsStr The string representing the view count.
  * @returns A number representing the view count, or 0 if parsing fails.
  */
-export const parseViewCount = (viewsStr: string): number => {
+export const parseViewCount = (viewsStr): number => {
   if (!viewsStr) {
 return 0;
 }
@@ -30,7 +30,7 @@ return 0;
  * @param digits The number of decimal digits (optional, default 0 for K/M/B, 1 if needed).
  * @returns A string representation of the number with suffix.
  */
-export const formatCount = (num: number, digits: number = 0): string => {
+export const formatCount = (num, digits: number = 0): string => {
   const lookup = [
     { value: 1, symbol: '' },
     { value: 1e3, symbol: 'K' },
@@ -71,7 +71,7 @@ export const formatNumber = formatCount;
  * @param seconds The duration in seconds
  * @returns A string representation of the duration
  */
-export const formatDuration = (seconds: number): string => {
+export const formatDuration = (seconds): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = Math.floor(seconds % 60);

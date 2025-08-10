@@ -276,7 +276,7 @@ return [];
 
       {/* Tabs and Filters */}
       <div className="mb-6">
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value: any as TabType)}>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabType)}>
           <div className="flex items-center justify-between mb-4">
             <TabsList className="flex-1">
               <TabsTrigger value="all">All</TabsTrigger>

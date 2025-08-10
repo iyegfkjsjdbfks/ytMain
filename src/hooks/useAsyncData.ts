@@ -3,7 +3,7 @@
 
 interface UseAsyncDataOptions<T> {
   initialData?: T;
-  dependencies?: any[];
+  dependencies?: any;
 }
 
 interface UseAsyncDataReturn<T> {

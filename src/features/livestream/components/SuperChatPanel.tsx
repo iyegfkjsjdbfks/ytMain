@@ -69,7 +69,7 @@ return;
     }
   };
 
-  const getTierColor = (amount: number) => {
+  const getTierColor = (amount) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -77,7 +77,7 @@ return;
     return tier?.color || 'bg-blue-500';
   };
 
-  const getTierDuration = (amount: number) => {
+  const getTierDuration = (amount) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -85,7 +85,7 @@ return;
     return tier?.duration || 30;
   };
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -101,7 +101,7 @@ return;
 
   const topSuperChats = superChats
     .slice()
-    .sort((a: any, b) => b.amount - a.amount)
+    .sort((a, b) => b.amount - a.amount)
     .slice(0, 5);
 
   return (
@@ -298,7 +298,7 @@ return;
         <div className="mt-4 pt-4 border-t border-gray-200">
           <h3 className="font-medium text-gray-900 mb-3">Top Super Chats</h3>
           <div className="space-y-2">
-            {topSuperChats.map((superChat: any, index: number) => (
+            {topSuperChats.map((superChat, index) => (
               <div
                 key={superChat.id}
                 className="flex items-center justify-between p-2 bg-gray-50 rounded-lg"

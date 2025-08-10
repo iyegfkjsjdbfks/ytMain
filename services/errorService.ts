@@ -185,7 +185,7 @@ class ErrorService {
     this.processError(this.errors.get(errorId)!);
   }
 
-  private generateErrorId(message: string, stack?: string): string {
+  private generateErrorId(message, stack?: string): string {
     const content = `${message}${stack || ''}`;
     let hash = 0;
     for (let i = 0; i < content.length; i++) {
@@ -318,7 +318,7 @@ return;
     return this.getErrors().filter(error => !error.resolved);
   }
 
-  markAsResolved(errorId: string) {
+  markAsResolved(errorId) {
     const error = this.errors.get(errorId);
     if (error) {
       error.resolved = true;
@@ -344,7 +344,7 @@ return;
   }
 
   // Utility methods for manual error reporting
-  reportValidationError(message: string, field?: string, value?: any) {
+  reportValidationError(message, field?: string, value?: any) {
     this.captureError({
       message: `Validation Error: ${message}`,
       type: 'validation',
@@ -356,7 +356,7 @@ return;
     });
   }
 
-  reportApiError(message: string, endpoint: string, status?: number) {
+  reportApiError(message, endpoint, status?: number) {
     this.captureError({
       message: `API Error: ${message}`,
       type: 'api',
@@ -369,7 +369,7 @@ return;
     });
   }
 
-  reportPerformanceIssue(message: string, metric: string, value: number) {
+  reportPerformanceIssue(message, metric, value) {
     this.captureError({
       message: `Performance Issue: ${message}`,
       type: 'performance',

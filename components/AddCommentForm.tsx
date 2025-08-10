@@ -13,7 +13,7 @@ declare global {
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText: string) => void;
+  onCommentSubmit: (commentText) => void;
   maxCommentLength: number;
 }
 

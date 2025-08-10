@@ -32,14 +32,14 @@ interface YouTubePlayerWrapperProps {
 export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
-  props: any,
-  _ref: any,
+  props,
+  _ref,
 ) => {
   // YouTubePlayerWrapper rendering
 
 
   // Create mock video object for YouTubePlayer component
-  const createMockVideo = (videoId: string): YouTubeSearchResult => ({
+  const createMockVideo = (videoId): YouTubeSearchResult => ({
     id: videoId,
     title: 'Video',
     description: '',

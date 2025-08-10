@@ -74,7 +74,7 @@ return;
   }, [opts.enableIntersectionObserver]);
 
   // Observe video elements
-  const observeVideo = useCallback((element: Element, videoId: string) => {
+  const observeVideo = useCallback((element: Element, videoId) => {
     if (!observerRef.current || !opts.enableIntersectionObserver) {
 return;
 }
@@ -85,7 +85,7 @@ return;
   }, [opts.enableIntersectionObserver]);
 
   // Unobserve video elements
-  const unobserveVideo = useCallback((videoId: string) => {
+  const unobserveVideo = useCallback((videoId) => {
     if (!observerRef.current) {
 return;
 }
@@ -98,7 +98,7 @@ return;
   }, []);
 
   // Prefetch video data
-  const prefetchVideo = useCallback(async (videoId: string) => {
+  const prefetchVideo = useCallback(async (videoId) => {
     await queryClient.prefetchQuery({
       queryKey: ['video', videoId],
       queryFn: async () => {
@@ -115,24 +115,24 @@ throw new Error('Failed to fetch video');
   }, [queryClient, opts.staleTime, opts.cacheTime]);
 
   // Prefetch multiple videos
-  const prefetchVideos = useCallback(async (videoIds: string[]) => {
+  const prefetchVideos = useCallback(async (videoIds: string) => {
     const promises = videoIds.slice(0, opts.prefetchCount).map(prefetchVideo);
     await Promise.allSettled(promises);
   }, [prefetchVideo, opts.prefetchCount]);
 
   // Get cached video data
-  const getCachedVideo = useCallback((videoId: string): VideoData | undefined => {
+  const getCachedVideo = useCallback((videoId): VideoData | undefined => {
     return queryClient.getQueryData(['video', videoId]);
   }, [queryClient]);
 
   // Check if video is cached
-  const isVideoCached = useCallback((videoId: string): boolean => {
+  const isVideoCached = useCallback((videoId): boolean => {
     const data = queryClient.getQueryData(['video', videoId]);
     return data !== undefined;
   }, [queryClient]);
 
   // Invalidate video cache
-  const invalidateVideo = useCallback(async (videoId: string) => {
+  const invalidateVideo = useCallback(async (videoId) => {
     await queryClient.invalidateQueries({ queryKey: ['video', videoId] });
   }, [queryClient]);
 
@@ -150,7 +150,7 @@ throw new Error('Failed to fetch video');
       totalCached: videoQueries.length,
       visibleCount: visibleVideos.size,
       observedCount: observedElements.current.size,
-      cacheSize: videoQueries.reduce((size: any, query) => {
+      cacheSize: videoQueries.reduce((size, query) => {
         const { data } = query.state;
         return size + (data ? JSON.stringify(data).length : 0);
       }, 0),
@@ -158,7 +158,7 @@ throw new Error('Failed to fetch video');
   }, [queryClient, visibleVideos.size]);
 
   // Preload video thumbnails
-  const preloadThumbnails = useCallback((videos: VideoData[]) => {
+  const preloadThumbnails = useCallback((videos: VideoData) => {
     videos.forEach((video) => {
       if (video.thumbnail) {
         const img = new Image();
@@ -168,7 +168,7 @@ throw new Error('Failed to fetch video');
   }, []);
 
   // Smart prefetch based on user behavior
-  const smartPrefetch = useCallback(async (currentVideoId: string, allVideoIds: string[]) => {
+  const smartPrefetch = useCallback(async (currentVideoId, allVideoIds: string) => {
     const currentIndex = allVideoIds.indexOf(currentVideoId);
     if (currentIndex === -1) {
 return;
@@ -216,7 +216,7 @@ return;
 };
 
 // Hook for individual video with caching
-export const useCachedVideo = (videoId: string, options: VideoCacheOptions = {}) => {
+export const useCachedVideo = (videoId, options: VideoCacheOptions = {}) => {
   const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return useQuery({

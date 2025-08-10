@@ -30,11 +30,11 @@ const mockLocalStorage = (() => {
   let store: Record<string, string> = {};
 
   return {
-    getItem: vi.fn((key: string) => store[key] || null),
-    setItem: vi.fn((key: string, value: string) => {
+    getItem: vi.fn((key) => store[key] || null),
+    setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key: string) => {
+    removeItem: vi.fn((key) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -43,7 +43,7 @@ const mockLocalStorage = (() => {
     get length() {
       return Object.keys(store).length;
     },
-    key: vi.fn((index: number) => Object.keys(store)[index] || null),
+    key: vi.fn((index) => Object.keys(store)[index] || null),
   };
 })();
 
@@ -51,11 +51,11 @@ const mockSessionStorage = (() => {
   let store: Record<string, string> = {};
 
   return {
-    getItem: vi.fn((key: string) => store[key] || null),
-    setItem: vi.fn((key: string, value: string) => {
+    getItem: vi.fn((key) => store[key] || null),
+    setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
-    removeItem: vi.fn((key: string) => {
+    removeItem: vi.fn((key) => {
       delete store[key];
     }),
     clear: vi.fn(() => {
@@ -64,7 +64,7 @@ const mockSessionStorage = (() => {
     get length() {
       return Object.keys(store).length;
     },
-    key: vi.fn((index: number) => Object.keys(store)[index] || null),
+    key: vi.fn((index) => Object.keys(store)[index] || null),
   };
 })();
 
@@ -84,7 +84,7 @@ const mockResizeObserver = vi.fn().mockImplementation((_callback) => ({
   disconnect: vi.fn(),
 }));
 
-const mockMatchMedia = vi.fn().mockImplementation((query: string) => ({
+const mockMatchMedia = vi.fn().mockImplementation((query) => ({
   matches: false,
   media: query,
   onchange: null,
@@ -108,7 +108,7 @@ const mockNotification = {
 
 // Fetch mock with realistic responses
 const createMockFetch = () => {
-  return vi.fn().mockImplementation(async (url: string, _options?: RequestInit) => {
+  return vi.fn().mockImplementation(async (url, _options?: RequestInit) => {
     // Simulate network delay
     await testUtils.simulateNetworkDelay(TEST_CONFIG.mockApiDelay);
 
@@ -258,7 +258,7 @@ class TestPerformanceTracker {
     testDuration: number;
   }>();
 
-  static startTest(testName: string): () => void {
+  static startTest(testName): () => void {
     const startTime = performance.now();
     const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
@@ -274,7 +274,7 @@ class TestPerformanceTracker {
     };
   }
 
-  static trackRender(testName: string, renderTime: number): void {
+  static trackRender(testName, renderTime): void {
     const metrics = this.testMetrics.get(testName);
     if (metrics) {
       metrics.renderTime = renderTime;
@@ -466,7 +466,7 @@ export const testHelpers = {
     });
   },
 
-  mockApiError: (status: number = 500, message: string = 'Server Error') => {
+  mockApiError: (status: number = 500, message = 'Server Error') => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: false,
       status,
@@ -475,18 +475,18 @@ export const testHelpers = {
   },
 
   // Storage helpers
-  setLocalStorageItem: (key: string, value: string) => {
+  setLocalStorageItem: (key, value) => {
     mockLocalStorage.setItem(key, value);
   },
 
-  getLocalStorageItem: (key: string) => {
+  getLocalStorageItem: (key) => {
     return mockLocalStorage.getItem(key);
   },
 
   // Async helpers
   waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
 
-  waitForTime: (ms: number) => new Promise(resolve => setTimeout(resolve, ms)),
+  waitForTime: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
 
   // Error boundary testing
   triggerError: (component) => {
@@ -522,19 +522,19 @@ export const testHelpers = {
       return testHelpers.waitForNextTick();
     },
 
-    type: async (element: HTMLInputElement, text: string) => {
+    type: async (element: HTMLInputElement, text) => {
       element.focus();
       element.value = text;
       element.dispatchEvent(new Event('input', { bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    keyPress: (element: HTMLElement, key: string) => {
+    keyPress: (element: HTMLElement, key) => {
       element.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    scroll: (element: HTMLElement, scrollTop: number) => {
+    scroll: (element: HTMLElement, scrollTop) => {
       element.scrollTop = scrollTop;
       element.dispatchEvent(new Event('scroll', { bubbles: true }));
       return testHelpers.waitForNextTick();
@@ -557,7 +557,7 @@ export {
 };
 
 // Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason: any, promise) => {
+process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 

@@ -31,7 +31,7 @@ interface ChatMessage {
   timestamp: Date;
   isModerator?: boolean;
   isOwner?: boolean;
-  badges?: string[];
+  badges?: string;
 }
 
 export const LiveStreamStudio: React.FC = () => {
@@ -183,7 +183,7 @@ return;
     setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -417,7 +417,7 @@ return;
                   type="text"
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyPress={(e: Event) => e: Event.key === 'Enter' && sendChatMessage()}
+                  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
                   placeholder="Type a message..."
                   className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
                 />

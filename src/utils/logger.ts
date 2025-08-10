@@ -34,13 +34,13 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(level: LogLevel, message: string, ..._args: unknown[]): string {
+  private formatMessage(level: LogLevel, message, ..._args: unknown): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
     return `${prefix} ${message}`;
   }
 
-  debug(message: string, ...args: unknown[]): void {
+  debug(message, ...args: unknown): void {
     if (!this.shouldLog('debug')) {
 return;
 }
@@ -51,7 +51,7 @@ return;
     }
   }
 
-  info(message: string, ...args: unknown[]): void {
+  info(message, ...args: unknown): void {
     if (!this.shouldLog('info')) {
 return;
 }
@@ -62,7 +62,7 @@ return;
     }
   }
 
-  warn(message: string, ...args: unknown[]): void {
+  warn(message, ...args: unknown): void {
     if (!this.shouldLog('warn')) {
 return;
 }
@@ -72,7 +72,7 @@ return;
     }
   }
 
-  error(message: string, error?: Error | unknown, ...args: unknown[]): void {
+  error(message, error?: Error | unknown, ...args: unknown): void {
     if (!this.shouldLog('error')) {
 return;
 }
@@ -87,17 +87,17 @@ return;
     }
   }
 
-  private sendToRemoteService(_message: string, _error: Error): void {
+  private sendToRemoteService(_message, _error: Error): void {
     // Implement remote logging service integration here
     // For example: Sentry, LogRocket, etc.
   }
 
   // Utility methods for common logging patterns
-  apiCall(method: string, url: string, data?: unknown): void {
+  apiCall(method, url, data?: unknown): void {
     this.debug(`API ${method} ${url}`, data);
   }
 
-  apiResponse(method: string, url: string, status: number, data?: unknown): void {
+  apiResponse(method, url, status, data?: unknown): void {
     if (status >= 400) {
       this.error(`API ${method} ${url} failed with status ${status}`, undefined, data);
     } else {
@@ -105,11 +105,11 @@ return;
     }
   }
 
-  userAction(action: string, data?: Record<string, unknown>): void {
+  userAction(action, data?: Record<string, unknown>): void {
     this.info(`User action: ${action}`, data);
   }
 
-  performance(operation: string, duration: number): void {
+  performance(operation, duration): void {
     this.debug(`Performance: ${operation} took ${duration}ms`);
   }
 }

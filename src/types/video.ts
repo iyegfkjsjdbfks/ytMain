@@ -33,7 +33,7 @@ export interface Video {
   dislikeCount: number;
   commentCount: number;
   publishedAt: string;
-  tags: string[];
+  tags: string;
   category: string;
   license: string;
   visibility: 'public' | 'private' | 'unlisted';
@@ -43,8 +43,8 @@ export interface Video {
   concurrentViewers?: number;
   isLiveContent?: boolean;
   isFamilySafe: boolean;
-  allowedRegions?: string[];
-  blockedRegions?: string[];
+  allowedRegions?: string;
+  blockedRegions?: string;
   isAgeRestricted: boolean;
   embeddable: boolean;
   defaultLanguage?: string;
@@ -62,9 +62,9 @@ export interface Video {
     commentCount: string;
   };
   topicDetails?: {
-    topicIds: string[];
-    relevantTopicIds: string[];
-    topicCategories: string[];
+    topicIds: string;
+    relevantTopicIds: string;
+    topicCategories: string;
   };
   contentDetails?: {
     duration: string;
@@ -73,8 +73,8 @@ export interface Video {
     caption: string;
     licensedContent: boolean;
     regionRestriction?: {
-      allowed?: string[];
-      blocked?: string[];
+      allowed?: string;
+      blocked?: string;
     };
     contentRating?: Record<string, string>;
     projection?: string;
@@ -137,14 +137,14 @@ export interface Video {
     thumbnailsAvailability?: string;
   };
   suggestions?: {
-    processingErrors?: string[];
-    processingWarnings?: string[];
-    processingHints?: string[];
+    processingErrors?: string;
+    processingWarnings?: string;
+    processingHints?: string;
     tagSuggestions?: Array<{
       tag: string;
-      categoryRestricts: string[];
+      categoryRestricts: string;
     }>;
-    editorSuggestions?: string[];
+    editorSuggestions?: string;
   };
   liveStreamingDetails?: {
     actualStartTime?: string;

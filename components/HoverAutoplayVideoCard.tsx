@@ -133,7 +133,7 @@ return duration;
     e.stopPropagation();
     setIsMuted(!isMuted);
     // Force iframe reload to apply mute setting
-    setIframeKey(prev => prev: any + 1);
+    setIframeKey(prev => prev + 1);
   };
 
   // Cleanup timeouts on unmount

@@ -28,8 +28,8 @@ const DEFAULT_CONFIG: Required<PerformanceConfig> = {
 
 // Global performance store
 class PerformanceStore {
-  private metrics: PerformanceMetrics[] = [];
-  private observers: Array<(metrics: PerformanceMetrics[]) => void> = [];
+  private metrics: PerformanceMetrics = [];
+  private observers: Array<(metrics: PerformanceMetrics) => void> = [];
 
   addMetric(metric: PerformanceMetrics) {
     this.metrics.push(metric);
@@ -43,11 +43,11 @@ class PerformanceStore {
     return [...this.metrics];
   }
 
-  getMetricsByComponent(componentName: string) {
+  getMetricsByComponent(componentName) {
     return this.metrics.filter((m) => m.componentName === componentName);
   }
 
-  subscribe(observer: (metrics: PerformanceMetrics[]) => void) {
+  subscribe(observer: (metrics: PerformanceMetrics) => void) {
     this.observers.push(observer);
     return () => {
       const index = this.observers.indexOf(observer);
@@ -87,7 +87,7 @@ return 0;
 const performanceStore = new PerformanceStore();
 
 export const usePerformanceMonitor = (
-  componentName: string,
+  componentName,
   config: PerformanceConfig = {},
 ) => {
   const opts = { ...DEFAULT_CONFIG, ...config };
@@ -148,7 +148,7 @@ return;
   // Manual tracking methods
   const trackAsyncOperation = useCallback(async <T>(
     operation: () => Promise<T>,
-    operationName: string,
+    operationName,
   ): Promise<T> => {
     const startTime = performance.now();
 
@@ -180,9 +180,9 @@ return;
     }
   }, [componentName]);
 
-  const measureFunction = useCallback(<T extends any[], R>(
+  const measureFunction = useCallback(<T extends any, R>(
     fn: (...args: T) => R,
-    functionName: string,
+    functionName,
   ) => {
     return (...args: T): R => {
       const startTime = performance.now();
@@ -215,7 +215,7 @@ export const usePerformanceData = (componentName?: string) => {
   const [metrics, setMetrics] = useState<PerformanceMetrics[]>([]);
 
   useEffect(() => {
-    const updateMetrics = (allMetrics: PerformanceMetrics[]) => {
+    const updateMetrics = (allMetrics: PerformanceMetrics) => {
       const filteredMetrics = componentName
         ? allMetrics.filter((m) => m.componentName.startsWith(componentName))
         : allMetrics;
@@ -328,7 +328,7 @@ export const usePerformanceBudget = () => {
     apiResponse: 1000, // 1 second
   };
 
-  const checkBudget = useCallback((metric: string, value: number) => {
+  const checkBudget = useCallback((metric, value) => {
     const budget = budgets[metric as keyof typeof budgets];
     if (!budget) {
 return { withinBudget: true, budget: 0, overage: 0 };

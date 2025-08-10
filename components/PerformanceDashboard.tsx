@@ -65,7 +65,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     }
   };
 
-  const getTypeColor = (type: string) => {
+  const getTypeColor = (type) => {
     switch (type) {
       case 'render':
         return 'text-blue-600';
@@ -82,7 +82,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
 
   const averageRenderTime = metrics
     .filter((m) => m.type === 'render')
-    .reduce((sum: any, m) => sum: any + m.value, 0) / Math.max(metrics.filter((m) => m.type === 'render').length, 1);
+    .reduce((sum, m) => sum + m.value, 0) / Math.max(metrics.filter((m) => m.type === 'render').length, 1);
 
   const apiCallsCount = metrics.filter((m) => m.type === 'api').length;
 
@@ -123,7 +123,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
             {metrics.length === 0 ? (
               <div className="text-gray-400">No metrics available</div>
             ) : (
-              metrics.slice().reverse().map((metric: any, index: number) => (
+              metrics.slice().reverse().map((metric, index) => (
                 <div key={index} className="flex justify-between items-center py-1 border-b border-gray-700">
                   <span className={`${getTypeColor(metric.type)} truncate max-w-32`}>
                     {metric.name}

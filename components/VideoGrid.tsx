@@ -15,7 +15,7 @@ import type { Video } from '../src/types/core';
 
 
 interface VideoGridProps {
-  videos: Video[];
+  videos: Video;
   className?: string;
   keyPrefix?: string;
   columns?: {
@@ -54,7 +54,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video: any, index: number) => (
+      {videos.map((video, index) => (
         <VideoCard
           key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
           video={video}

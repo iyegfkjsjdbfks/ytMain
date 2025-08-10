@@ -31,7 +31,7 @@ export function useStableObject<T extends object>(obj: T): T {
 /**
  * Utility for creating stable array references
  */
-export function useStableArray<T>(arr: T[]): T[] {
+export function useStableArray<T>(arr: T): T[] {
   return useMemo(() => arr, arr);
 }
 
@@ -90,7 +90,7 @@ export const listOptimizations = {
   /**
    * Generate stable keys for list items
    */
-  generateKey: (item: any, index: number, prefix = 'item'): string => {
+  generateKey: (item, index, prefix = 'item'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -103,7 +103,7 @@ return `${prefix}-${item.key}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T[], chunkSize: number): T[][] => {
+  chunkArray: <T>(array: T, chunkSize): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -120,7 +120,7 @@ export const componentPerformance = {
    * HOC to measure component render time
    */
   withRenderTime: <P extends object>(Component: ComponentType<P>, _name?: string) => {
-    return forwardRef<any, P>((props: any, ref) => {
+    return forwardRef<any, P>((props, ref) => {
       useEffect(() => {
         // Performance monitoring disabled
         // const startTime = performance.now();

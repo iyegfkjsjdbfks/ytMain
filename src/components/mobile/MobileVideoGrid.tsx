@@ -7,7 +7,7 @@ import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization'
 import type { Video } from '../../types/core';
 
 interface MobileVideoGridProps {
-  videos: Video[];
+  videos: Video;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
   loading?: boolean;
@@ -19,7 +19,7 @@ interface MobileVideoItemProps {
   index: number;
   style: React.CSSProperties;
   data: {
-    videos: Video[];
+    videos: Video;
     onVideoClick: (video: Video) => void;
   };
 }

@@ -131,7 +131,7 @@ return;
 
   // Analytics methods
   const track = useCallback((
-    eventName: string,
+    eventName,
     properties?: Record<string, any>,
     category?: AnalyticsEvent['category'],
   ) => {
@@ -142,7 +142,7 @@ return;
     }, category);
   }, [location.pathname, opts.componentName]);
 
-  const trackClick = useCallback((element: string, properties?: Record<string, any>) => {
+  const trackClick = useCallback((element, properties?: Record<string, any>) => {
     analyticsService.trackClick(element, {
       ...properties,
       componentName: opts.componentName,
@@ -151,8 +151,8 @@ return;
   }, [location.pathname, opts.componentName]);
 
   const trackVideoEvent = useCallback((
-    action: string,
-    videoId: string,
+    action,
+    videoId,
     properties?: Record<string, any>,
   ) => {
     analyticsService.trackVideoEvent(action, videoId, {
@@ -162,11 +162,11 @@ return;
     });
   }, [location.pathname, opts.componentName]);
 
-  const trackSearch = useCallback((query: string, results?: number) => {
+  const trackSearch = useCallback((query, results?: number) => {
     analyticsService.trackSearch(query, results);
   }, []);
 
-  const trackEngagement = useCallback((type: string, properties?: Record<string, any>) => {
+  const trackEngagement = useCallback((type, properties?: Record<string, any>) => {
     analyticsService.trackEngagement(type, {
       ...properties,
       componentName: opts.componentName,
@@ -176,7 +176,7 @@ return;
 
   const trackAsyncAction = useCallback(async <T>(
     action: () => Promise<T>,
-    actionName: string,
+    actionName,
     properties?: Record<string, any>,
   ): Promise<T> => {
     const startTime = Date.now();
@@ -204,9 +204,9 @@ return;
     }
   }, [track, trackAsyncOperation]);
 
-  const trackFunction = useCallback(<T extends any[], R>(
+  const trackFunction = useCallback(<T extends any, R>(
     fn: (...args: T) => R,
-    functionName: string,
+    functionName,
     properties?: Record<string, any>,
   ) => {
     return measureFunction((...args: T) => {
@@ -256,7 +256,7 @@ export const useVideoAnalytics = (videoId?: string) => {
     }
   }, [trackVideoEvent, videoId]);
 
-  const trackProgress = useCallback((currentTime: number, duration: number) => {
+  const trackProgress = useCallback((currentTime, duration) => {
     const progressPercentage = Math.round((currentTime / duration) * 100);
 
     // Track progress milestones
@@ -274,7 +274,7 @@ export const useVideoAnalytics = (videoId?: string) => {
     lastProgressUpdate.current = progressPercentage;
   }, [trackVideoEvent, videoId]);
 
-  const trackSeek = useCallback((fromTime: number, toTime: number) => {
+  const trackSeek = useCallback((fromTime, toTime) => {
     trackVideoEvent('seek', videoId || '', {
       fromTime,
       toTime,
@@ -282,9 +282,9 @@ export const useVideoAnalytics = (videoId?: string) => {
     });
   }, [trackVideoEvent, videoId]);
 
-  const trackComplete = useCallback((duration: number) => {
+  const trackComplete = useCallback((duration) => {
     const totalWatchTime = watchedSegments.current.reduce(
-      (total: any, segment) => total: any + (segment.end - segment.start),
+      (total, segment) => total + (segment.end - segment.start),
       0,
     );
 
@@ -295,21 +295,21 @@ export const useVideoAnalytics = (videoId?: string) => {
     });
   }, [trackVideoEvent, videoId]);
 
-  const trackError = useCallback((error: string) => {
+  const trackError = useCallback((error) => {
     trackVideoEvent('error', videoId || '', {
       error,
       timestamp: Date.now(),
     });
   }, [trackVideoEvent, videoId]);
 
-  const trackQualityChange = useCallback((quality: string) => {
+  const trackQualityChange = useCallback((quality) => {
     trackVideoEvent('quality_change', videoId || '', {
       quality,
       timestamp: Date.now(),
     });
   }, [trackVideoEvent, videoId]);
 
-  const trackVolumeChange = useCallback((volume: number, muted: boolean) => {
+  const trackVolumeChange = useCallback((volume, muted) => {
     trackVideoEvent('volume_change', videoId || '', {
       volume,
       muted,
@@ -317,7 +317,7 @@ export const useVideoAnalytics = (videoId?: string) => {
     });
   }, [trackVideoEvent, videoId]);
 
-  const trackFullscreen = useCallback((isFullscreen: boolean) => {
+  const trackFullscreen = useCallback((isFullscreen) => {
     trackVideoEvent(isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit', videoId || '', {
       timestamp: Date.now(),
     });
@@ -337,7 +337,7 @@ export const useVideoAnalytics = (videoId?: string) => {
 };
 
 // Hook for form analytics
-export const useFormAnalytics = (formName: string) => {
+export const useFormAnalytics = (formName) => {
   const { track } = useAnalytics();
   const formStartTime = useRef<number | null>(null);
   const fieldInteractions = useRef<Record<string, number>>({});
@@ -347,7 +347,7 @@ export const useFormAnalytics = (formName: string) => {
     track('form_start', { formName });
   }, [track, formName]);
 
-  const trackFormSubmit = useCallback((success: boolean, errors?: string[]) => {
+  const trackFormSubmit = useCallback((success, errors?: string) => {
     const duration = formStartTime.current ? Date.now() - formStartTime.current : 0;
 
     track('form_submit', {
@@ -359,7 +359,7 @@ export const useFormAnalytics = (formName: string) => {
     });
   }, [track, formName]);
 
-  const trackFieldInteraction = useCallback((fieldName: string) => {
+  const trackFieldInteraction = useCallback((fieldName) => {
     fieldInteractions.current[fieldName] = (fieldInteractions.current[fieldName] || 0) + 1;
 
     track('form_field_interaction', {
@@ -391,10 +391,10 @@ export const useFormAnalytics = (formName: string) => {
 // Utility function for throttling
 function throttle<T extends (...args) => any>(
   func: T,
-  limit: number,
+  limit,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  return function(this: any, ...args: Parameters<T>) {
+  return function(this, ...args: Parameters<T>) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;

@@ -42,7 +42,7 @@ class CommentService {
    * Get comments for a video
    */
   async getVideoComments(
-    videoId: string,
+    videoId,
     filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/videos/${videoId}/comments`, filters);
@@ -52,7 +52,7 @@ class CommentService {
    * Get replies for a comment
    */
   async getCommentReplies(
-    commentId: string,
+    commentId,
     filters: Omit<CommentFilters, 'parentId'> = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/comments/${commentId}/replies`, filters);
@@ -61,7 +61,7 @@ class CommentService {
   /**
    * Get a specific comment
    */
-  async getComment(commentId: string): Promise<ApiResponse<Comment>> {
+  async getComment(commentId): Promise<ApiResponse<Comment>> {
     return api.get(`/api/comments/${commentId}`);
   }
 
@@ -83,7 +83,7 @@ class CommentService {
   /**
    * Delete a comment
    */
-  async deleteComment(commentId: string): Promise<ApiResponse<void>> {
+  async deleteComment(commentId): Promise<ApiResponse<void>> {
     return api.delete(`/api/comments/${commentId}`);
   }
 
@@ -99,35 +99,35 @@ class CommentService {
   /**
    * Remove reaction from comment
    */
-  async removeReaction(commentId: string): Promise<ApiResponse<void>> {
+  async removeReaction(commentId): Promise<ApiResponse<void>> {
     return api.delete(`/api/comments/${commentId}/reactions`);
   }
 
   /**
    * Pin a comment (video owner only)
    */
-  async pinComment(commentId: string): Promise<ApiResponse<void>> {
+  async pinComment(commentId): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${commentId}/pin`);
   }
 
   /**
    * Unpin a comment
    */
-  async unpinComment(commentId: string): Promise<ApiResponse<void>> {
+  async unpinComment(commentId): Promise<ApiResponse<void>> {
     return api.delete(`/api/comments/${commentId}/pin`);
   }
 
   /**
    * Heart a comment (video owner only)
    */
-  async heartComment(commentId: string): Promise<ApiResponse<void>> {
+  async heartComment(commentId): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${commentId}/heart`);
   }
 
   /**
    * Remove heart from comment
    */
-  async unheartComment(commentId: string): Promise<ApiResponse<void>> {
+  async unheartComment(commentId): Promise<ApiResponse<void>> {
     return api.delete(`/api/comments/${commentId}/heart`);
   }
 
@@ -135,8 +135,8 @@ class CommentService {
    * Report a comment
    */
   async reportComment(
-    commentId: string,
-    reason: string,
+    commentId,
+    reason,
     description?: string,
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/comments/${commentId}/report`, {
@@ -149,7 +149,7 @@ class CommentService {
    * Get user's comments
    */
   async getUserComments(
-    userId: string,
+    userId,
     filters: Omit<CommentFilters, 'parentId'> = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/comments`, filters);
@@ -178,10 +178,10 @@ class CommentService {
    * Bulk moderate comments
    */
   async bulkModerateComments(
-    commentIds: string[],
+    commentIds,
     action: CommentModerationAction['action'],
     reason?: string,
-  ): Promise<ApiResponse<{ success: string[]; failed: string[] }>> {
+  ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
     return api.post('/api/comments/bulk-moderate', {
       commentIds,
       action,
@@ -193,7 +193,7 @@ class CommentService {
    * Search comments
    */
   async searchComments(
-    query: string,
+    query,
     videoId?: string,
     filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
@@ -204,7 +204,7 @@ class CommentService {
   /**
    * Get comment statistics
    */
-  async getCommentStats(videoId: string): Promise<ApiResponse<{
+  async getCommentStats(videoId): Promise<ApiResponse<{
     totalComments: number;
     totalReplies: number;
     averageRating: number;
@@ -235,9 +235,9 @@ class CommentService {
   /**
    * Get comment thread (comment + all replies)
    */
-  async getCommentThread(commentId: string): Promise<ApiResponse<{
+  async getCommentThread(commentId): Promise<ApiResponse<{
     comment: Comment;
-    replies: Comment[];
+    replies: Comment;
     totalReplies: number;
   }>> {
     return api.get(`/api/comments/${commentId}/thread`);
@@ -246,14 +246,14 @@ class CommentService {
   /**
    * Subscribe to comment notifications
    */
-  async subscribeToComments(videoId: string): Promise<ApiResponse<void>> {
+  async subscribeToComments(videoId): Promise<ApiResponse<void>> {
     return api.post(`/api/videos/${videoId}/comments/subscribe`);
   }
 
   /**
    * Unsubscribe from comment notifications
    */
-  async unsubscribeFromComments(videoId: string): Promise<ApiResponse<void>> {
+  async unsubscribeFromComments(videoId): Promise<ApiResponse<void>> {
     return api.delete(`/api/videos/${videoId}/comments/subscribe`);
   }
 
@@ -261,7 +261,7 @@ class CommentService {
    * Get comment mentions for user
    */
   async getCommentMentions(
-    userId: string,
+    userId,
     filters: CommentFilters = {},
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/mentions`, filters);
@@ -270,7 +270,7 @@ class CommentService {
   /**
    * Mark comment mentions as read
    */
-  async markMentionsAsRead(commentIds: string[]): Promise<ApiResponse<void>> {
+  async markMentionsAsRead(commentIds: string): Promise<ApiResponse<void>> {
     return api.post('/api/comments/mentions/read', { commentIds });
   }
 
@@ -278,7 +278,7 @@ class CommentService {
    * Get comment analytics for video owner
    */
   async getCommentAnalytics(
-    videoId: string,
+    videoId,
     timeframe: '7d' | '30d' | '90d' = '30d',
   ): Promise<ApiResponse<{
     totalComments: number;
@@ -295,12 +295,12 @@ class CommentService {
    * Auto-moderate comments using AI
    */
   async autoModerateComments(
-    videoId: string,
+    videoId,
     settings: {
       enableSpamDetection: boolean;
       enableToxicityDetection: boolean;
       enableLanguageFilter: boolean;
-      customKeywords?: string[];
+      customKeywords?: string;
     },
   ): Promise<ApiResponse<{
     processed: number;
@@ -315,7 +315,7 @@ class CommentService {
    * Export comments
    */
   async exportComments(
-    videoId: string,
+    videoId,
     format: 'csv' | 'json' | 'xlsx',
   ): Promise<ApiResponse<string>> {
     return api.get(`/api/videos/${videoId}/comments/export`, { format });

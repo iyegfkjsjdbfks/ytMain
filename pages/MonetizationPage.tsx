@@ -69,7 +69,7 @@ const MonetizationPage: React.FC = () => {
 
       // Generate mock revenue data
       const days = timeRange === '7d' ? 7 : timeRange === '30d' ? 30 : timeRange === '90d' ? 90 : 365;
-      const mockRevenueData: RevenueData[] = [];
+      const mockRevenueData: RevenueData = [];
 
       for (let i = days - 1; i >= 0; i--) {
         const date = new Date();
@@ -116,7 +116,7 @@ const MonetizationPage: React.FC = () => {
     generateMockData();
   }, [timeRange]);
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -124,7 +124,7 @@ const MonetizationPage: React.FC = () => {
     }).format(amount);
   };
 
-  const formatNumber = (num: number) => {
+  const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US').format(num);
   };
 
@@ -176,7 +176,7 @@ const MonetizationPage: React.FC = () => {
 return { labels: [], datasets: [] };
 }
 
-    const totals = revenueData.reduce((acc: any, day) => ({
+    const totals = revenueData.reduce((acc, day) => ({
       adRevenue: acc.adRevenue + day.adRevenue,
       membershipRevenue: acc.membershipRevenue + day.membershipRevenue,
       superChatRevenue: acc.superChatRevenue + day.superChatRevenue,
@@ -265,7 +265,7 @@ return { labels: [], datasets: [] };
       tooltip: {
         callbacks: {
           label: (context) => {
-            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           },
@@ -484,7 +484,7 @@ return { labels: [], datasets: [] };
               <div className="flex justify-between">
                 <span className="text-sm text-neutral-600 dark:text-neutral-400">Avg. Order Value</span>
                 <span className="text-sm font-medium text-neutral-900 dark:text-neutral-50">
-                  {formatCurrency(revenueData.reduce((sum: any, day) => sum: any + day.merchandiseRevenue, 0) / metrics.merchandiseSales)}
+                  {formatCurrency(revenueData.reduce((sum, day) => sum + day.merchandiseRevenue, 0) / metrics.merchandiseSales)}
                 </span>
               </div>
             </div>

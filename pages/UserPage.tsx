@@ -43,7 +43,7 @@ const UserPage: React.FC = () => {
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev: any - 1 : prev: any + 1);
+    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
   };
 
   const tabs = [

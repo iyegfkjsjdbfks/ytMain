@@ -30,10 +30,10 @@ interface VideoControlsProps {
   playbackRate: number;
   onPlayPause: () => void;
   onMuteToggle: () => void;
-  onVolumeChange: (volume: number) => void;
-  onSeek: (time: number) => void;
+  onVolumeChange: (volume) => void;
+  onSeek: (time) => void;
   onFullscreenToggle: () => void;
-  onPlaybackRateChange: (rate: number) => void;
+  onPlaybackRateChange: (rate) => void;
   onSettingsToggle: () => void;
   className?: string;
 }
@@ -55,7 +55,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
   onSettingsToggle,
   className = '',
 }) => {
-  const formatTime = (time: number) => {
+  const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

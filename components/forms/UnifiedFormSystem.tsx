@@ -17,10 +17,10 @@ interface FormContextValue {
   errors: Record<string, string>;
   touched: Record<string, boolean>;
   values: Record<string, any>;
-  setFieldValue: (name: string, value) => void;
-  setFieldError: (name: string, error: string) => void;
-  setFieldTouched: (name: string, touched: boolean) => void;
-  validateField: (name: string) => void;
+  setFieldValue: (name, value) => void;
+  setFieldError: (name, error) => void;
+  setFieldTouched: (name, touched) => void;
+  validateField: (name) => void;
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -42,7 +42,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const setFieldValue = useCallback((name: string, value) => {
+  const setFieldValue = useCallback((name, value) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -50,15 +50,15 @@ export const FormProvider: React.FC<FormProviderProps> = ({
     }
   }, [errors]);
 
-  const setFieldError = useCallback((name: string, error: string) => {
+  const setFieldError = useCallback((name, error) => {
     setErrors(prev => ({ ...prev, [name]: error }));
   }, []);
 
-  const setFieldTouched = useCallback((name: string, touched: boolean) => {
+  const setFieldTouched = useCallback((name, touched) => {
     setTouched(prev => ({ ...prev, [name]: touched }));
   }, []);
 
-  const validateField = useCallback((name: string) => {
+  const validateField = useCallback((name) => {
     const validator = validationSchema[name];
     if (validator) {
       const error = validator(values[name]);
@@ -154,7 +154,7 @@ interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   rightIcon?: React.ReactNode;
   variant?: 'default' | 'filled' | 'outline';
   inputSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value: string) => void;
+  onChange?: (value) => void;
 }
 
 const inputVariantClasses = {
@@ -267,7 +267,7 @@ interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
   variant?: 'default' | 'filled' | 'outline';
   textareaSize?: 'sm' | 'md' | 'lg';
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-  onChange?: (value: string) => void;
+  onChange?: (value) => void;
 }
 
 const textareaSizeClasses = {
@@ -362,7 +362,7 @@ interface UnifiedSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   placeholder?: string;
   variant?: 'default' | 'filled' | 'outline';
   selectSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value: string) => void;
+  onChange?: (value) => void;
 }
 
 export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({

@@ -135,7 +135,7 @@ const AdminPage: React.FC = () => {
 
       // Refresh store videos
       await loadStoreVideos();
-    } catch (error: any) {
+    } catch (error) {
       console.error('Test fetch error:', error);
       setTestResult({ error: error.message });
     } finally {
@@ -159,7 +159,7 @@ const AdminPage: React.FC = () => {
       setUnifiedServiceTest(result);
 
       console.log('🧪 Unified service result:', result);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Unified service test error:', error);
       setUnifiedServiceTest({ error: error.message });
     } finally {
@@ -244,7 +244,7 @@ const AdminPage: React.FC = () => {
           fullResponse: errorText,
         });
       }
-    } catch (error: any) {
+    } catch (error) {
       setProxyTest({
         success: false,
         error: error.message,
@@ -285,7 +285,7 @@ const AdminPage: React.FC = () => {
           fullResponse: errorData,
         });
       }
-    } catch (error: any) {
+    } catch (error) {
       setDirectApiTest({
         success: false,
         error: error.message,
@@ -331,7 +331,7 @@ const AdminPage: React.FC = () => {
           error: 'No video data returned from app service',
         });
       }
-    } catch (error: any) {
+    } catch (error) {
       setYoutubeMetadataTest({
         success: false,
         error: error.message,
@@ -462,10 +462,10 @@ const AdminPage: React.FC = () => {
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
-  const renderPlayerCard = (config: VideoPlayerConfig, isSelected: boolean, isEnabled: boolean, onSelect: () => void, onToggleEnabled: () => void) => {
+  const renderPlayerCard = (config: VideoPlayerConfig, isSelected, isEnabled, onSelect: () => void, onToggleEnabled: () => void) => {
     const usedOnPages = getPlayerUsageByPage(config.type);
 
-    const getPerformanceColor = (performance: string) => {
+    const getPerformanceColor = (performance) => {
       switch (performance) {
         case 'high': return 'text-green-600 bg-green-100';
         case 'medium': return 'text-yellow-600 bg-yellow-100';
@@ -474,7 +474,7 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getComplexityColor = (complexity: string) => {
+    const getComplexityColor = (complexity) => {
       switch (complexity) {
         case 'simple': return 'text-blue-600 bg-blue-100';
         case 'moderate': return 'text-purple-600 bg-purple-100';
@@ -483,7 +483,7 @@ const AdminPage: React.FC = () => {
       }
     };
 
-    const getCategoryIcon = (category: string) => {
+    const getCategoryIcon = (category) => {
       return category === 'youtube' ?
         <PlayIcon className="h-5 w-5 text-red-500" /> :
         <VideoCameraIcon className="h-5 w-5 text-blue-500" />;
@@ -515,7 +515,7 @@ const AdminPage: React.FC = () => {
           </div>
           <div className="flex items-center space-x-2">
             <button
-              onClick={(e: Event) => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onToggleEnabled();
               }}
@@ -670,7 +670,7 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using YouTube Players:</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType[]).map((page) => {
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
                           const pageConfig = pageConfigurations[page];
                           const isCurrentGlobalPlayer = pageConfig.youtubePlayer === playerType;
                           return (
@@ -730,7 +730,7 @@ const AdminPage: React.FC = () => {
                                   </span>
                                 </div>
                                 <button
-                                  onClick={(e: Event) => {
+                                  onClick={(e) => {
                                     e.stopPropagation();
                                     handleToggleYouTubePlayer(config.type as YouTubePlayerType);
                                   }}
@@ -801,7 +801,7 @@ const AdminPage: React.FC = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-gray-800 mb-4">Pages using Local Video Players:</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType[]).map((page) => {
+                        {(['watchPage', 'homePage', 'searchResultsPage'] as PageType).map((page) => {
                           const pageConfig = pageConfigurations[page];
                           const isCurrentGlobalPlayer = pageConfig.localPlayer === localPlayerType;
                           return (
@@ -861,7 +861,7 @@ const AdminPage: React.FC = () => {
                                   </span>
                                 </div>
                                 <button
-                                  onClick={(e: Event) => {
+                                  onClick={(e) => {
                                     e.stopPropagation();
                                     handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
                                       // Handle promise rejection silently
@@ -1562,7 +1562,7 @@ const AdminPage: React.FC = () => {
                     <p className="text-gray-500">No videos in store</p>
                   ) : (
                     <div className="space-y-3 max-h-96 overflow-y-auto">
-                      {storeVideos.map((video: any, index: number) => (
+                      {storeVideos.map((video, index) => (
                         <div key={index} className="bg-white p-3 rounded border">
                           <div className="font-medium text-sm">{video.title || 'Unknown Title'}</div>
                           <div className="text-xs text-gray-600 mt-1">

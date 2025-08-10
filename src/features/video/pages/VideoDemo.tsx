@@ -17,15 +17,15 @@ const VideoDemo: React.FC = () => {
     alert(`Video clicked: ${video.title}`);
   };
 
-  const handleVideoEdit = (videoId: string) => {
+  const handleVideoEdit = (videoId) => {
     alert(`Edit video: ${videoId}`);
   };
 
-  const handleVideoDelete = (videoId: string) => {
+  const handleVideoDelete = (videoId) => {
     alert(`Delete video: ${videoId}`);
   };
 
-  const handleVisibilityChange = (videoId: string, visibility: VideoVisibility) => {
+  const handleVisibilityChange = (videoId, visibility: VideoVisibility) => {
     alert(`Changed visibility of ${videoId} to ${visibility}`);
   };
 

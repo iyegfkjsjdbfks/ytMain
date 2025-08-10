@@ -243,7 +243,7 @@ export type DevConfig = typeof DEV_CONFIG;
 
 // Validation functions
 export const validateConfig = () => {
-  const errors: string[] = [];
+  const errors: string = [];
 
   // Validate required API keys in production
   if (ENV.PROD) {

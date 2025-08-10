@@ -24,7 +24,7 @@ interface FormField {
 }
 
 interface BaseFormProps {
-  fields: FormField[];
+  fields: FormField;
   onSubmit: (data: Record<string, any>) => void | Promise<void>;
   submitLabel?: string;
   cancelLabel?: string;
@@ -77,7 +77,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   // Validate field
-  const validateField = (field: FormField, value: any): string | null => {
+  const validateField = (field: FormField, value): string | null => {
     if (field.required && (!value || (typeof value === 'string' && !value.trim()))) {
       return `${field.label} is required`;
     }
@@ -95,7 +95,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   // Handle field blur
-  const handleBlur = (fieldName: string) => {
+  const handleBlur = (fieldName) => {
     setTouched(prev => ({ ...prev, [fieldName]: true }));
     const field = fields.find(f => f.name === fieldName);
     if (field) {

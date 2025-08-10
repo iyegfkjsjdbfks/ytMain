@@ -14,12 +14,12 @@ interface ConfigStatus {
   hasEngineId: boolean;
   apiKeyLength?: number;
   engineIdLength?: number;
-  recommendations: string[];
+  recommendations: string;
 }
 
 export const checkYouTubeAPIConfig = (): ConfigStatus => {
   const status = youtubeSearchService.getConfigStatus();
-  const recommendations: string[] = [];
+  const recommendations: string = [];
 
   // Check API key
   if (!status.hasApiKey) {

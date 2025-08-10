@@ -65,7 +65,7 @@ interface SecurityPolicy {
   id: string;
   name: string;
   type: 'access-control' | 'data-protection' | 'network-security' | 'application-security';
-  rules: SecurityRule[];
+  rules: SecurityRule;
   enabled: boolean;
   priority: number;
 }
@@ -120,7 +120,7 @@ class SecurityMonitoringEngine {
   private threats: Map<string, SecurityThreat> = new Map();
   private vulnerabilities: Map<string, VulnerabilityReport> = new Map();
   private policies: Map<string, SecurityPolicy> = new Map();
-  private auditLogs: SecurityAuditLog[] = [];
+  private auditLogs: SecurityAuditLog = [];
   private alerts: Map<string, SecurityAlert> = new Map();
   private complianceChecks: Map<string, ComplianceCheck> = new Map();
   private isMonitoring = false;
@@ -353,7 +353,7 @@ return;
    * Detect threats (simulated)
    */
   private async detectThreats(): Promise<SecurityThreat[]> {
-    const threats: SecurityThreat[] = [];
+    const threats: SecurityThreat = [];
 
     // Simulate various _threat types
     const threatTypes = ['xss', 'sql-injection', 'brute-force', 'ddos'] as const;
@@ -469,7 +469,7 @@ return;
    * Scan for vulnerabilities (simulated)
    */
   private async scanForVulnerabilities(): Promise<VulnerabilityReport[]> {
-    const vulnerabilities: VulnerabilityReport[] = [];
+    const vulnerabilities: VulnerabilityReport = [];
 
     // Simulate dependency vulnerabilities
     const dependencies = ['react', 'express', 'lodash', 'axios'];
@@ -575,8 +575,8 @@ return;
   private generateSecurityAlert(
     type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
-    title: string,
-    description: string,
+    title,
+    description,
   ): void {
     const alert: SecurityAlert = {
       id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -597,7 +597,7 @@ return;
   /**
    * Log security event
    */
-  private logSecurityEvent(event: string, metadata: Record<string, any>): void {
+  private logSecurityEvent(event, metadata: Record<string, any>): void {
     const log: SecurityAuditLog = {
       id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: Date.now(),
@@ -705,7 +705,7 @@ return;
   /**
    * Acknowledge security alert
    */
-  acknowledgeAlert(alertId: string, assignee?: string): void {
+  acknowledgeAlert(alertId, assignee?: string): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.acknowledged = true;
@@ -724,7 +724,7 @@ return;
   /**
    * Resolve security alert
    */
-  resolveAlert(alertId: string, resolution: string): void {
+  resolveAlert(alertId, resolution): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.resolution = resolution;
@@ -741,7 +741,7 @@ return;
   /**
    * Update vulnerability status
    */
-  updateVulnerabilityStatus(vulnerabilityId: string, status: VulnerabilityReport['status']): void {
+  updateVulnerabilityStatus(vulnerabilityId, status: VulnerabilityReport['status']): void {
     const vulnerability = this.vulnerabilities.get(vulnerabilityId);
     if (vulnerability) {
       vulnerability.status = status;
@@ -759,11 +759,11 @@ return;
    */
   generateSecurityReport(): {
     summary: SecurityMetrics;
-    threats: SecurityThreat[];
-    vulnerabilities: VulnerabilityReport[];
-    alerts: SecurityAlert[];
-    compliance: ComplianceCheck[];
-    recommendations: string[];
+    threats: SecurityThreat;
+    vulnerabilities: VulnerabilityReport;
+    alerts: SecurityAlert;
+    compliance: ComplianceCheck;
+    recommendations: string;
   } {
     const metrics = this.getSecurityMetrics();
     const threats = this.getActiveThreats();
@@ -771,7 +771,7 @@ return;
     const alerts = this.getSecurityAlerts(false);
     const compliance = Array.from(this.complianceChecks.values());
 
-    const recommendations: string[] = [];
+    const recommendations: string = [];
 
     // Generate recommendations based on current state
     if (metrics.vulnerabilities.critical > 0) {

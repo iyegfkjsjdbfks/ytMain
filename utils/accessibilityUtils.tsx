@@ -19,8 +19,8 @@ interface AccessibilityContextType {
   reducedMotion: boolean;
   highContrast: boolean;
   fontSize: 'small' | 'medium' | 'large' | 'extra-large';
-  announcements: string[];
-  addAnnouncement: (message: string) => void;
+  announcements: string;
+  addAnnouncement: (message) => void;
   clearAnnouncements: () => void;
 }
 
@@ -73,7 +73,7 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('accessibility-font-size', fontSize);
   }, [fontSize]);
 
-  const addAnnouncement = useCallback((message: string) => {
+  const addAnnouncement = useCallback((message) => {
     setAnnouncements(prev => [...prev, message]);
 
     // Auto-clear announcement after 5 seconds
@@ -119,7 +119,7 @@ export function ScreenReaderAnnouncer() {
       className="sr-only"
       role="status"
     >
-      {announcements.map((announcement: any, index: number) => (
+      {announcements.map((announcement, index) => (
         <div key={`${announcement}-${index}`}>
           {announcement}
         </div>
@@ -255,11 +255,11 @@ return;
 }
 
 // ARIA live region hook
-export function useAriaLiveRegion(initialMessage: string = '') {
+export function useAriaLiveRegion(initialMessage = '') {
   const [message, setMessage] = useState(initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
-  const announce = useCallback((newMessage: string, priority: 'polite' | 'assertive' = 'polite') => {
+  const announce = useCallback((newMessage, priority: 'polite' | 'assertive' = 'polite') => {
     setPoliteness(priority);
     setMessage(newMessage);
 
@@ -282,8 +282,8 @@ export function useAriaLiveRegion(initialMessage: string = '') {
 }
 
 // Color contrast utilities
-export function getContrastRatio(color1: string, color2: string): number {
-  const getLuminance = (color: string): number => {
+export function getContrastRatio(color1, color2): number {
+  const getLuminance = (color): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
     const [r = 0, g = 0, b = 0] = rgb.map(c => {
       c = c / 255;
@@ -300,7 +300,7 @@ export function getContrastRatio(color1: string, color2: string): number {
   return (brightest + 0.05) / (darkest + 0.05);
 }
 
-export function checkColorContrast(foreground: string, background: string): {
+export function checkColorContrast(foreground, background): {
   ratio: number;
   wcagAA: boolean;
   wcagAAA: boolean;
@@ -322,7 +322,7 @@ export function SkipLink({ href, children }: { href: string; children: ReactNode
     <a
       href={href}
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
-      onFocus={(e: Event) => {
+      onFocus={(e) => {
         e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }}
     >
@@ -401,12 +401,12 @@ export function useAccessibleForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { addAnnouncement } = useAccessibility();
 
-  const setFieldError = useCallback((fieldName: string, error: string) => {
+  const setFieldError = useCallback((fieldName, error) => {
     setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
-  const clearFieldError = useCallback((fieldName: string) => {
+  const clearFieldError = useCallback((fieldName) => {
     setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
@@ -414,7 +414,7 @@ export function useAccessibleForm() {
     });
   }, []);
 
-  const getFieldProps = useCallback((fieldName: string) => {
+  const getFieldProps = useCallback((fieldName) => {
     const hasError = !!errors[fieldName];
 
     return {
@@ -431,7 +431,7 @@ export function useAccessibleForm() {
     };
   }, [errors, setFieldError, clearFieldError]);
 
-  const getErrorProps = useCallback((fieldName: string) => {
+  const getErrorProps = useCallback((fieldName) => {
     const error = errors[fieldName];
 
     return error ? {

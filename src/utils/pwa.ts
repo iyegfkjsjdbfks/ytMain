@@ -270,7 +270,7 @@ return 'linux';
   /**
    * Emit PWA event
    */
-  static emitEvent(eventName: string, detail?: any): void {
+  static emitEvent(eventName, detail?: any): void {
     const event = new CustomEvent(eventName, { detail });
     window.dispatchEvent(event);
   }
@@ -278,14 +278,14 @@ return 'linux';
   /**
    * Listen to PWA events
    */
-  static addEventListener(eventName: string, handler: EventListener): void {
+  static addEventListener(eventName, handler: EventListener): void {
     window.addEventListener(eventName, handler);
   }
 
   /**
    * Remove PWA event listener
    */
-  static removeEventListener(eventName: string, handler: EventListener): void {
+  static removeEventListener(eventName, handler: EventListener): void {
     window.removeEventListener(eventName, handler);
   }
 }
@@ -311,7 +311,7 @@ export interface PWAMetrics {
   installDate?: number;
   launchCount: number;
   sessionDuration: number;
-  featuresUsed: string[];
+  featuresUsed: string;
   errors: Array<{
     timestamp: number;
     error: string;

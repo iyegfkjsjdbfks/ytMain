@@ -20,7 +20,7 @@ const ToggleSetting: React.FC<{
   label: string;
   description?: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChange: (checked) => void;
 }> = ({ label, description, checked, onChange }) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
@@ -51,8 +51,8 @@ const ToggleSetting: React.FC<{
 const SelectSetting: React.FC<{
   label: string;
   value: string;
-  options: string[];
-  onChange: (value: string) => void
+  options: string;
+  onChange: (value) => void
 }> = ({ label, value, options, onChange }) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">

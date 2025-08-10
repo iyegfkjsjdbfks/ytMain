@@ -288,7 +288,7 @@ return;
     setNewMessage('');
   };
 
-  const formatDuration = (seconds: number): string => {
+  const formatDuration = (seconds): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -619,7 +619,7 @@ return;
                       type="text"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      onKeyPress={(e: Event) => e: Event.key === 'Enter' && sendChatMessage()}
+                      onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
                       placeholder="Type a message..."
                       className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />

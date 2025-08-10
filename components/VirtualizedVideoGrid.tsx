@@ -20,12 +20,12 @@ import type { Video } from '../types';
 
 
 interface VirtualizedVideoGridProps {
-  videos: Video[];
+  videos: Video;
   loading?: boolean;
   hasMore?: boolean;
   onLoadMore?: () => void;
   onVideoClick?: (video: Video) => void;
-  onChannelClick?: (channelId: string) => void;
+  onChannelClick?: (channelId) => void;
   className?: string;
   cardSize?: 'sm' | 'md' | 'lg';
   showChannel?: boolean;
@@ -37,10 +37,10 @@ interface GridItemProps {
   rowIndex: number;
   style: React.CSSProperties;
   data: {
-    videos: Video[];
+    videos: Video;
     columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId: string) => void;
+    onChannelClick?: (channelId) => void;
     cardSize: 'sm' | 'md' | 'lg';
     showChannel: boolean;
     showDescription: boolean;

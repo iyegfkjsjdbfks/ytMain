@@ -28,7 +28,7 @@ return;
       setError(null);
       try {
         // Mock local video search function
-        const searchLocalVideos = async (_searchQuery: string): Promise<Video[]> => {
+        const searchLocalVideos = async (_searchQuery): Promise<Video[]> => {
           // Return empty array for now - this would normally search local videos
           return [];
         };
