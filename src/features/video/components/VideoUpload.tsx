@@ -87,7 +87,7 @@ return;
 
     // Simulating upload progress
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress(prev: any => {
         const newProgress = prev + 10;
         if (newProgress >= 100) {
           clearInterval(interval);

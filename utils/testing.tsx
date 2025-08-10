@@ -298,7 +298,7 @@ export const mockLocalStorage = () => {
 
 // Intersection Observer Mocking
 export const mockIntersectionObserver = () => {
-  global.IntersectionObserver = vi.fn().mockImplementation((_callback) => ({
+  global.IntersectionObserver = vi.fn().mockImplementation((_callback: any) => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
@@ -310,7 +310,7 @@ export const mockIntersectionObserver = () => {
 
 // Resize Observer Mocking
 export const mockResizeObserver = () => {
-  global.ResizeObserver = vi.fn().mockImplementation((_callback) => ({
+  global.ResizeObserver = vi.fn().mockImplementation((_callback: any) => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),

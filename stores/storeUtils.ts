@@ -69,7 +69,7 @@ const performanceMiddleware = <T>(
   config: StateCreator<T, [], [], T>,
   storeName: string,
 ): StateCreator<T, [], [], T> => {
-  return (set, get, api) => {
+  return (set: any, get: any, api: any) => {
     const originalSet = set;
 
     const wrappedSet = (partial: any, replace?: boolean) => {

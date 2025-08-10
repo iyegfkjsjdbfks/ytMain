@@ -75,7 +75,7 @@ const CommentModerationPage: React.FC = () => {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(comment =>
+      filtered = filtered.filter(comment: any =>
         comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -83,7 +83,7 @@ const CommentModerationPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a, b) => {
+    filtered.sort((a: any, b: any) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -117,14 +117,14 @@ const CommentModerationPage: React.FC = () => {
       setSelectedComments(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedComments(new Set(filteredComments.map(c => c.id)));
+      setSelectedComments(new Set(filteredComments.map(c: any => c: any.id)));
       setShowBulkActions(true);
     }
   };
 
   const handleBulkAction = (action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments =>
-      prevComments.map(comment => {
+    setComments(prevComments: any =>
+      prevComments.map(comment: any => {
         if (selectedComments.has(comment.id)) {
           if (action === 'delete') {
             return null; // Will be filtered out
@@ -142,8 +142,8 @@ const CommentModerationPage: React.FC = () => {
   };
 
   const handleSingleAction = (commentId: string, action: 'approve' | 'spam' | 'hide' | 'delete') => {
-    setComments(prevComments =>
-      prevComments.map(comment => {
+    setComments(prevComments: any =>
+      prevComments.map(comment: any => {
         if (comment.id === commentId) {
           if (action === 'delete') {
             return null; // Will be filtered out
@@ -248,13 +248,13 @@ return comments.filter((c: any) => c.flaggedReason).length;
                 type="text"
                 placeholder="Search comments..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
                 className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
               />
             </div>
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortType)}
+              onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
               className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="newest">Newest First</option>
@@ -337,7 +337,7 @@ return comments.filter((c: any) => c.flaggedReason).length;
               </p>
             </div>
           ) : (
-            filteredComments.map((comment) => (
+            filteredComments.map((comment: any) => (
               <div key={comment.id} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                 <div className="flex items-start space-x-4">
                   <input

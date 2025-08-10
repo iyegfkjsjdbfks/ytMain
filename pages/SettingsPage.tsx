@@ -60,10 +60,10 @@ const SelectSetting: React.FC<{
     </label>
     <select
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e: Event) => onChange(e: Event.target.value)}
       className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
     >
-      {options.map(option => (
+      {options.map(option: any => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>
@@ -88,7 +88,7 @@ const SettingsPage: React.FC = () => {
   });
 
   const handleNotificationChange = (key: keyof typeof notifications) => {
-    setNotifications(prev => ({
+    setNotifications(prev: any => ({
       ...prev,
       [key]: !prev[key],
     }));

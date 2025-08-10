@@ -173,7 +173,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     let filtered = subscriptions;
 
     if (searchQuery) {
-      filtered = filtered.filter(sub =>
+      filtered = filtered.filter(sub: any =>
         sub.channelName.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
@@ -190,16 +190,16 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
 
     switch (sortBy) {
       case 'alphabetical':
-        filtered.sort((a, b) => a.channelName.localeCompare(b.channelName));
+        filtered.sort((a: any, b: any) => a: any.channelName.localeCompare(b: any.channelName));
         break;
       case 'recent':
-        filtered.sort((a, b) => new Date(b.subscribedAt).getTime() - new Date(a.subscribedAt).getTime());
+        filtered.sort((a: any, b: any) => new Date(b: any.subscribedAt).getTime() - new Date(a: any.subscribedAt).getTime());
         break;
       case 'most_videos':
-        filtered.sort((a, b) => b.videoCount - a.videoCount);
+        filtered.sort((a: any, b: any) => b: any.videoCount - a: any.videoCount);
         break;
       case 'subscribers':
-        filtered.sort((a, b) => b.subscriberCount - a.subscriberCount);
+        filtered.sort((a: any, b: any) => b: any.subscriberCount - a: any.subscriberCount);
         break;
       default:
         break;
@@ -208,7 +208,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const toggleNotifications = (channelId: string) => {
-    setSubscriptions(prev => prev.map(sub =>
+    setSubscriptions(prev: any => prev: any.map(sub: any =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
         : sub,
@@ -223,7 +223,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const handleUnsubscribe = (channelId: string) => {
-    setSubscriptions(prev => prev.filter((sub: any) => sub.channelId !== channelId));
+    setSubscriptions(prev: any => prev: any.filter((sub: any) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
     delete stored[channelId];
@@ -232,7 +232,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const toggleBulkSelection = (channelId: string) => {
-    setSelectedSubscriptions(prev => {
+    setSelectedSubscriptions(prev: any => {
       const newSet = new Set(prev);
       if (newSet.has(channelId)) {
         newSet.delete(channelId);
@@ -244,7 +244,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
   };
 
   const handleBulkAction = (action: 'unsubscribe' | 'toggle_notifications') => {
-    selectedSubscriptions.forEach(channelId => {
+    selectedSubscriptions.forEach(channelId: any => {
       if (action === 'unsubscribe') {
         handleUnsubscribe(channelId);
       } else if (action === 'toggle_notifications') {
@@ -271,7 +271,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
                 type="text"
                 placeholder="Search subscriptions..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -280,7 +280,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
             {/* Sort By */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="alphabetical">Sort by: A-Z</option>
@@ -292,7 +292,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
             {/* Filter By */}
             <select
               value={filterBy}
-              onChange={(e) => setFilterBy(e.target.value as any)}
+              onChange={(e: Event) => setFilterBy(e: Event.target.value as any)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Filter: All</option>
@@ -363,7 +363,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           </div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredAndSortedSubscriptions.map((sub) => (
+            {filteredAndSortedSubscriptions.map((sub: any) => (
               <div key={sub.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                 {bulkActionMode && (
                   <div className="absolute top-2 left-2 z-10">
@@ -429,7 +429,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredAndSortedSubscriptions.map((sub) => (
+            {filteredAndSortedSubscriptions.map((sub: any) => (
               <div key={sub.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center p-4">
                 {bulkActionMode && (
                   <div className="flex-shrink-0 mr-4">
@@ -496,7 +496,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 Are you sure you want to unsubscribe from {' '}
                 <span className="font-medium text-gray-900 dark:text-white">
-                  {subscriptions.find(sub => sub.channelId === showUnsubscribeModal)?.channelName}
+                  {subscriptions.find(sub: any => sub: any.channelId === showUnsubscribeModal)?.channelName}
                 </span>?
               </p>
               <div className="flex justify-center space-x-4">

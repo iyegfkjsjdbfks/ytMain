@@ -76,7 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
     className = '',
     ...props
   },
-  ref,
+  ref: any,
 ) => {
   const isDisabled = disabled || loading;
 
@@ -136,7 +136,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((
     className,
     ...props
   },
-  ref,
+  ref: any,
 ) => {
   return (
     <Button

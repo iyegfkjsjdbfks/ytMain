@@ -77,7 +77,7 @@ return fallbackSrc;
       const delay = retryDelay * Math.pow(2, retryCount); // Exponential backoff
 
       setTimeout(() => {
-        setRetryCount(prev => prev + 1);
+        setRetryCount(prev: any => prev: any + 1);
         setCurrentSrc(src); // Retry original source
         setIsLoading(true);
       }, delay);

@@ -51,7 +51,7 @@ export function useLocalStorageSet<T>(
 
   // Add item to set
   const addItem = useCallback((item: T) => {
-    setItems(prev => {
+    setItems(prev: any => {
       if (!prev.includes(item)) {
         const newItems = [...prev, item];
         updateLocalStorage(newItems);
@@ -63,7 +63,7 @@ export function useLocalStorageSet<T>(
 
   // Remove item from set
   const removeItem = useCallback((item: T) => {
-    setItems(prev => {
+    setItems(prev: any => {
       const newItems = prev.filter((i: any) => i !== item);
       if (newItems.length !== prev.length) {
         updateLocalStorage(newItems);
@@ -75,7 +75,7 @@ export function useLocalStorageSet<T>(
 
   // Toggle item in set
   const toggleItem = useCallback((item: T) => {
-    setItems(prev => {
+    setItems(prev: any => {
       const newItems = prev.includes(item)
         ? prev.filter((i: any) => i !== item)
         : [...prev, item];
@@ -122,7 +122,7 @@ export function useLocalStorageSetState<T>(
   const set = useMemo(() => new Set(items), [items]);
 
   const setSet = useCallback((updater: (prev: Set<T>) => Set<T>) => {
-    setItems(prev => {
+    setItems(prev: any => {
       const prevSet = new Set(prev);
       const newSet = updater(prevSet);
       const newItems = Array.from(newSet);

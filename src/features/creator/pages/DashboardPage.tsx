@@ -374,7 +374,7 @@ return `${(num / 1000).toFixed(1)  }K`;
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Countries</h3>
             <div className="space-y-4">
-              {audienceData.map((country, index) => (
+              {audienceData.map((country: any, index: number) => (
                 <div key={country.country} className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="text-sm font-medium text-gray-900 w-4">{index + 1}</span>
@@ -409,7 +409,7 @@ return `${(num / 1000).toFixed(1)  }K`;
                   paddingAngle={5}
                   dataKey="percentage"
                 >
-                  {deviceData.map((entry, index) => (
+                  {deviceData.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -418,7 +418,7 @@ return `${(num / 1000).toFixed(1)  }K`;
               </PieChart>
             </ResponsiveContainer>
             <div className="grid grid-cols-2 gap-4 mt-4">
-              {deviceData.map((device) => {
+              {deviceData.map((device: any) => {
                 const Icon = device.device === 'Mobile' ? DevicePhoneMobileIcon :
                            device.device === 'Desktop' ? ComputerDesktopIcon :
                            device.device === 'TV' ? TvIcon : DevicePhoneMobileIcon;
@@ -464,7 +464,7 @@ return `${(num / 1000).toFixed(1)  }K`;
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {topVideos.map((video) => (
+                {topVideos.map((video: any) => (
                   <tr key={video.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">

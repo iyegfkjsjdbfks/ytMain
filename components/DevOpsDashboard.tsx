@@ -330,7 +330,7 @@ return <div>Loading...</div>;
             <h3 className="text-lg font-medium text-gray-900">Recent Alerts</h3>
           </div>
           <div className="divide-y divide-gray-200">
-            {alerts.slice(0, 5).map((alert) => (
+            {alerts.slice(0, 5).map((alert: any) => (
               <div key={alert.id} className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-3">

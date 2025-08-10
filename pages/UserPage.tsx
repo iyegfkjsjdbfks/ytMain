@@ -43,7 +43,7 @@ const UserPage: React.FC = () => {
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    setSubscriberCount(prev => isSubscribed ? prev - 1 : prev + 1);
+    setSubscriberCount(prev: any => isSubscribed ? prev: any - 1 : prev: any + 1);
   };
 
   const tabs = [
@@ -72,7 +72,7 @@ const UserPage: React.FC = () => {
               </div>
             ) : userVideos.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {userVideos.map(video => (
+                {userVideos.map(video: any => (
                   <VideoCard key={video.id} video={video} />
                 ))}
               </div>

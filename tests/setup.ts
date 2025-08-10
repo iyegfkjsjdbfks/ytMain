@@ -68,7 +68,7 @@ const mockSessionStorage = (() => {
   };
 })();
 
-const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
+const mockIntersectionObserver = vi.fn().mockImplementation((_callback: any) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -78,7 +78,7 @@ const mockIntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   takeRecords: vi.fn(() => []),
 }));
 
-const mockResizeObserver = vi.fn().mockImplementation((_callback) => ({
+const mockResizeObserver = vi.fn().mockImplementation((_callback: any) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -363,7 +363,7 @@ beforeAll(() => {
   // Mock crypto for security utils
   Object.defineProperty(window, 'crypto', {
     value: {
-      getRandomValues: vi.fn((arr) => {
+      getRandomValues: vi.fn((arr: any) => {
         for (let i = 0; i < arr.length; i++) {
           arr[i] = Math.floor(Math.random() * 256);
         }
@@ -557,12 +557,12 @@ export {
 };
 
 // Global error handler for unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason: any, promise: any) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 // Global error handler for uncaught exceptions
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', (error: Error) => {
   console.error('Uncaught Exception:', error);
 });
 

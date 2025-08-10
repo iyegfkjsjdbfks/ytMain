@@ -16,7 +16,7 @@ export const withPerformanceOptimization = {
    * Shallow comparison memoization
    */
   shallow: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps, nextProps) => {
+    memo(Component, (prevProps: any, nextProps: any) => {
       const prevKeys = Object.keys(prevProps);
       const nextKeys = Object.keys(nextProps);
 
@@ -38,7 +38,7 @@ export const withPerformanceOptimization = {
    */
   ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (Component: ComponentType<P>) =>
-      memo(Component, (prevProps, nextProps) => {
+      memo(Component, (prevProps: any, nextProps: any) => {
         const filteredPrev = { ...prevProps };
         const filteredNext = { ...nextProps };
 
@@ -54,7 +54,7 @@ export const withPerformanceOptimization = {
    * Memoization for components with array props
    */
   arrayOptimized: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps, nextProps) => {
+    memo(Component, (prevProps: any, nextProps: any) => {
       for (const key in prevProps) {
         const prevValue = prevProps[key];
         const nextValue = nextProps[key];

@@ -60,7 +60,7 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 
   // Memoized video grid to prevent unnecessary re-renders
   const videoGrid = useMemo(() =>
-    trendingVideos.map((video) => (
+    trendingVideos.map((video: any) => (
       <MemoizedVideoCard
         key={video.id}
         video={video}

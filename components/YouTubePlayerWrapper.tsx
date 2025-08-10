@@ -32,8 +32,8 @@ interface YouTubePlayerWrapperProps {
 export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
-  props,
-  _ref,
+  props: any,
+  _ref: any,
 ) => {
   // YouTubePlayerWrapper rendering
 

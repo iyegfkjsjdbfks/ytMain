@@ -46,7 +46,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 
   const handleSelectAll = (selected: boolean) => {
     if (selected) {
-      const allIds = videos.map(video => video.id);
+      const allIds = videos.map(video: any => video: any.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -60,7 +60,7 @@ return;
 
     // Confirm before deleting multiple videos
     if (window.confirm(`Are you sure you want to delete ${selectedVideos.size} videos?`)) {
-      selectedVideos.forEach(videoId => {
+      selectedVideos.forEach(videoId: any => {
         onDelete(videoId);
       });
       setSelectedVideos(new Set());
@@ -141,7 +141,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={filterVisibility}
-              onChange={e => setFilterVisibility(e.target.value as VideoVisibility | 'all')}
+              onChange={e: Event => setFilterVisibility(e: Event.target.value as VideoVisibility | 'all')}
             >
               <option value="all">All Videos</option>
               <option value="public">Public</option>
@@ -152,7 +152,7 @@ return;
             <select
               className="border rounded px-3 py-1 text-sm"
               value={sortBy}
-              onChange={e => setSortBy(e.target.value as 'date' | 'views' | 'comments')}
+              onChange={e: Event => setSortBy(e: Event.target.value as 'date' | 'views' | 'comments')}
             >
               <option value="date">Date</option>
               <option value="views">Views</option>
@@ -166,7 +166,7 @@ return;
               type="checkbox"
               className="h-4 w-4"
               checked={selectedVideos.size === videos.length && videos.length > 0}
-              onChange={e => handleSelectAll(e.target.checked)}
+              onChange={e: Event => handleSelectAll(e: Event.target.checked)}
             />
             <span className="text-sm text-gray-600 mr-3">
               {selectedVideos.size} selected
@@ -193,7 +193,7 @@ return;
                 type="checkbox"
                 className="h-4 w-4 mr-4"
                 checked={selectedVideos.has(video.id)}
-                onChange={e => handleVideoSelect(video.id, e.target.checked)}
+                onChange={e: Event => handleVideoSelect(video.id, e: Event.target.checked)}
               />
 
               <div className="flex flex-col md:flex-row items-start md:items-center flex-grow">
@@ -233,7 +233,7 @@ return;
                     <select
                       className="border rounded text-sm p-1"
                       value={video.visibility}
-                      onChange={e => onVisibilityChange(video.id, e.target.value as VideoVisibility)}
+                      onChange={e: Event => onVisibilityChange(video.id, e: Event.target.value as VideoVisibility)}
                     >
                       <option value="public">Public</option>
                       <option value="unlisted">Unlisted</option>

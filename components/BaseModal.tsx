@@ -115,7 +115,7 @@ return null;
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${overlayClassName}`}
       onClick={handleOverlayClick}
-      onKeyDown={(e) => {
+      onKeyDown={(e: Event) => {
         if (e.key === 'Escape') {
           onClose();
         }

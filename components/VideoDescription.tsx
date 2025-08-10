@@ -103,7 +103,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
         onClick={onToggleDescription}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={(e: Event) => {
           if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }
@@ -126,7 +126,7 @@ onToggleDescription();
           onClick={onToggleDescription}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
+          onKeyDown={(e: Event) => {
             if (e.key === 'Enter' || e.key === ' ') {
 onToggleDescription();
 }

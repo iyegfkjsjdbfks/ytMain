@@ -36,11 +36,11 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const toggleSidebar = useCallback(() => {
     if (isWatchPage) {
       // On watch page, toggle between minimized and expanded
-      setIsMinimized(prev => !prev);
+      setIsMinimized(prev: any => !prev: any);
       setIsSidebarOpen(true); // Always keep sidebar visible on watch page
     } else {
       // On other pages, toggle visibility
-      setIsSidebarOpen(prev => !prev);
+      setIsSidebarOpen(prev: any => !prev: any);
       setIsMinimized(false); // Reset minimized state
     }
   }, [isWatchPage]);

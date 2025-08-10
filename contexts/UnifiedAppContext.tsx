@@ -260,7 +260,7 @@ return false;
 
   const removeFromWatchLater = useCallback((videoId: string) => {
     dispatch({ type: 'REMOVE_FROM_WATCH_LATER', payload: videoId });
-    const updated = state.watchLaterVideos.filter(id => id !== videoId);
+    const updated = state.watchLaterVideos.filter(id: string => id: string !== videoId);
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 

@@ -10,7 +10,7 @@ export const useDropdownMenu = () => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggle = useCallback(() => {
-    setIsOpen(prev => !prev);
+    setIsOpen(prev: any => !prev: any);
   }, []);
 
   const open = useCallback(() => {

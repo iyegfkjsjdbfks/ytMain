@@ -56,7 +56,7 @@ export function useUnifiedVideo(videoId: string, config?: UseApiConfig<UnifiedVi
     refetchOnMount: false, // Don't refetch on mount if we have cached data
     refetchOnWindowFocus: false, // Don't refetch on window focus
     retry: 3, // Retry failed requests
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 ** attemptIndex: any, 30000), // Exponential backoff
     ...config, // Allow overriding these settings
   });
 

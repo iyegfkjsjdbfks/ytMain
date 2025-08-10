@@ -169,7 +169,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
         onClick={onToggleDescription}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={(e: Event) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onToggleDescription();

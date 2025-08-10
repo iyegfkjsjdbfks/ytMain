@@ -69,7 +69,7 @@ const YourDataPage: React.FC = () => {
   };
 
   const handleToggleVisibility = (dataType: keyof typeof dataVisibility) => {
-    setDataVisibility(prev => ({
+    setDataVisibility(prev: any => ({
       ...prev,
       [dataType]: !prev[dataType],
     }));

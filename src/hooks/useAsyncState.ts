@@ -31,7 +31,7 @@ export const useAsyncState = <T>(
   });
 
   const execute = useCallback(async () => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
+    setState(prev: any => ({ ...prev: any, loading: true, error: null }));
 
     try {
       const result = await asyncFunction();
@@ -51,11 +51,11 @@ export const useAsyncState = <T>(
   }, []);
 
   const setData = useCallback((data: T) => {
-    setState(prev => ({ ...prev, data }));
+    setState(prev: any => ({ ...prev: any, data }));
   }, []);
 
   const setError = useCallback((error: string) => {
-    setState(prev => ({ ...prev, error, loading: false }));
+    setState(prev: any => ({ ...prev: any, error, loading: false }));
   }, []);
 
   useEffect(() => {

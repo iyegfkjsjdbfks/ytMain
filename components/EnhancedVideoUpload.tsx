@@ -117,7 +117,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
 
     // Auto-generate title from filename
     const fileName = file.name.replace(/\.[^/.]+$/, '');
-    setUploadData(prev => ({
+    setUploadData(prev: any => ({
       ...prev,
       title: prev.title || fileName,
     }));
@@ -147,7 +147,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file?.type.startsWith('image/')) {
-      setUploadData(prev => ({
+      setUploadData(prev: any => ({
         ...prev,
         thumbnail: file,
         customThumbnail: URL.createObjectURL(file),
@@ -157,7 +157,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
 
   const addTag = (tag: string) => {
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
-      setUploadData(prev => ({
+      setUploadData(prev: any => ({
         ...prev,
         tags: [...prev.tags, tag.trim()],
       }));
@@ -165,7 +165,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   };
 
   const removeTag = (tagToRemove: string) => {
-    setUploadData(prev => ({
+    setUploadData(prev: any => ({
       ...prev,
       tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
     }));
@@ -182,7 +182,7 @@ return;
     try {
       // Simulate upload progress
       const progressInterval = setInterval(() => {
-        setUploadProgress(prev => {
+        setUploadProgress(prev: any => {
           if (prev >= 90) {
             clearInterval(progressInterval);
             return prev;
@@ -441,7 +441,7 @@ return '0:00';
                 id="video-title"
                 type="text"
                 value={uploadData.title}
-                onChange={(e) => setUploadData(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
                 placeholder="Add a title that describes your video"
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 maxLength={100}
@@ -459,7 +459,7 @@ return '0:00';
               <textarea
                 id="video-description"
                 value={uploadData.description}
-                onChange={(e) => setUploadData(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
                 placeholder="Tell viewers about your video"
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -484,7 +484,7 @@ return '0:00';
                       className="w-32 h-18 object-cover rounded border"
                     />
                     <button
-                      onClick={() => setUploadData(prev => ({
+                      onClick={() => setUploadData(prev: any => ({
                         ...prev,
                         thumbnail: null,
                         customThumbnail: null,
@@ -529,7 +529,7 @@ return '0:00';
               <select
                 id="video-category"
                 value={uploadData.category}
-                onChange={(e) => setUploadData(prev => ({ ...prev, category: e.target.value }))}
+                onChange={(e: Event) => setUploadData(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select a category</option>
@@ -550,7 +550,7 @@ return '0:00';
                   type="text"
                   placeholder="Add tags to help people find your video"
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onKeyPress={(e) => {
+                  onKeyPress={(e: Event) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       const target = e.target as HTMLInputElement;
@@ -562,7 +562,7 @@ return '0:00';
 
                 {uploadData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {uploadData.tags.map((tag, index) => (
+                    {uploadData.tags.map((tag: string, index: number) => (
                       <span
                         key={index}
                         className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
@@ -596,7 +596,7 @@ return '0:00';
 
               <div className="space-x-3">
                 <button
-                  onClick={() => setUploadData(prev => ({ ...prev, visibility: 'private' }))}
+                  onClick={() => setUploadData(prev: any => ({ ...prev: any, visibility: 'private' }))}
                   className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   Save as Draft

@@ -59,7 +59,7 @@ const StudioHeader: React.FC = () => {
                 placeholder="Search in Studio"
                 className="block w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-blue-500"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
               />
               <button
                 type="submit"

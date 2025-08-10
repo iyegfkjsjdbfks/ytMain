@@ -99,7 +99,7 @@ export const usePWA = (): UsePWAReturn => {
         offlineSupport: 'serviceWorker' in navigator,
       };
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         features,
         isInitialized: true,

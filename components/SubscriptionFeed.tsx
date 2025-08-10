@@ -147,7 +147,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {subscriptionVideos.map(video => (
+        {subscriptionVideos.map(video: any => (
           <VideoCard key={video.id} video={video} />
         ))}
       </div>

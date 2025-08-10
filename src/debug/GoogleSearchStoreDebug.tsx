@@ -120,7 +120,7 @@ const GoogleSearchStoreDebug: FC = () => {
           <input
             type="text"
             value={testVideoId}
-            onChange={(e) => setTestVideoId(e.target.value)}
+            onChange={(e: Event) => setTestVideoId(e: Event.target.value)}
             placeholder="YouTube Video ID"
             className="flex-1 px-3 py-2 border rounded"
           />
@@ -166,7 +166,7 @@ const GoogleSearchStoreDebug: FC = () => {
           <p className="text-gray-500">No videos in store</p>
         ) : (
           <div className="space-y-3">
-            {storeVideos.map((video, index) => (
+            {storeVideos.map((video: any, index: number) => (
               <div key={index} className="bg-white dark:bg-gray-700 p-3 rounded">
                 <div className="font-medium">{video.title}</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">

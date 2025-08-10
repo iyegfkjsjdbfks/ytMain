@@ -423,7 +423,7 @@ export function getVideoCaptions(video?: Partial<Video>): VideoCaption[] {
 
     // If video has captions, use them, otherwise return defaults
     if (video?.captions?.length) {
-      return video.captions.map((caption, index) => {
+      return video.captions.map((caption: any, index: number) => {
         const languageCode = caption.language?.code || 'en';
         const languageName = caption.language?.name || 'English';
 

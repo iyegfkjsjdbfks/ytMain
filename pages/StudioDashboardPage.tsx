@@ -339,7 +339,7 @@ const StudioDashboardPage: React.FC = () => {
               </Link>
             </div>
             <div className="space-y-4">
-              {recentVideos.map((video) => (
+              {recentVideos.map((video: any) => (
                 <div key={video.id} className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors">
                   <img
                     src={video.thumbnail}

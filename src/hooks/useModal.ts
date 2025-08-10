@@ -97,11 +97,11 @@ export function useModals<T extends string>() {
   const [openModals, setOpenModals] = useState<Set<T>>(new Set());
 
   const openModal = useCallback((key: T) => {
-    setOpenModals(prev => new Set([...prev, key]));
+    setOpenModals(prev: any => new Set([...prev: any, key]));
   }, []);
 
   const closeModal = useCallback((key: T) => {
-    setOpenModals(prev => {
+    setOpenModals(prev: any => {
       const newSet = new Set(prev);
       newSet.delete(key);
       return newSet;
@@ -109,7 +109,7 @@ export function useModals<T extends string>() {
   }, []);
 
   const toggleModal = useCallback((key: T) => {
-    setOpenModals(prev => {
+    setOpenModals(prev: any => {
       const newSet = new Set(prev);
       if (newSet.has(key)) {
         newSet.delete(key);

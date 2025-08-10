@@ -36,7 +36,7 @@ export function useSubscriptions() {
 
   const toggleNotifications = useCallback(async (channelId: string) => {
     try {
-      const channel = channels.find(c => c.id === channelId);
+      const channel = channels.find(c: any => c: any.id === channelId);
       if (!channel) {
 return;
 }
@@ -44,8 +44,8 @@ return;
       const newNotificationState = !channel.notificationsEnabled;
       await updateSubscriptionNotifications(channelId, newNotificationState);
 
-      setChannels(prev =>
-        prev.map(c =>
+      setChannels(prev: any =>
+        prev.map(c: any =>
           c.id === channelId
             ? { ...c, notificationsEnabled: newNotificationState }
             : c,
@@ -60,7 +60,7 @@ return;
   const unsubscribe = useCallback(async (channelId: string) => {
     try {
       await unsubscribeFromChannel(channelId);
-      setChannels(prev => prev.filter((c: any) => c.id !== channelId));
+      setChannels(prev: any => prev: any.filter((c: any) => c.id !== channelId));
     } catch (err) {
       console.error('Error unsubscribing from channel:', err);
       setError('Failed to unsubscribe from channel');
@@ -68,11 +68,11 @@ return;
   }, []);
 
   const isSubscribed = useCallback((channelId: string) => {
-    return channels.some(c => c.id === channelId);
+    return channels.some(c: any => c: any.id === channelId);
   }, [channels]);
 
   const getChannelNotificationState = useCallback((channelId: string) => {
-    const channel = channels.find(c => c.id === channelId);
+    const channel = channels.find(c: any => c: any.id === channelId);
     return channel?.notificationsEnabled || false;
   }, [channels]);
 

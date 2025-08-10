@@ -78,7 +78,7 @@ return null;
             type="text"
             id="playlistTitleModal"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e: Event) => setTitle(e: Event.target.value)}
             className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
             required
           />
@@ -88,7 +88,7 @@ return null;
           <textarea
             id="playlistDescriptionModal"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: Event) => setDescription(e: Event.target.value)}
             rows={3}
             className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
           />

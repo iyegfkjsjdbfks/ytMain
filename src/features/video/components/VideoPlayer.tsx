@@ -84,7 +84,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
 
     const handleLoadedMetadata = () => {
-      setState(prev => ({ ...prev, duration: video.duration }));
+      setState(prev: any => ({ ...prev: any, duration: video.duration }));
       if (startTime > 0) {
         video.currentTime = startTime;
       }
@@ -94,34 +94,34 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleTimeUpdate = () => {
       const { currentTime } = video;
       const { duration } = video;
-      setState(prev => ({ ...prev, currentTime }));
+      setState(prev: any => ({ ...prev: any, currentTime }));
       onTimeUpdate?.(currentTime, duration);
     };
 
     const handleProgress = () => {
       if (video.buffered.length > 0) {
         const buffered = (video.buffered.end(0) / video.duration) * 100;
-        setState(prev => ({ ...prev, buffered }));
+        setState(prev: any => ({ ...prev: any, buffered }));
       }
     };
 
     const handlePlay = () => {
-      setState(prev => ({ ...prev, isPlaying: true }));
+      setState(prev: any => ({ ...prev: any, isPlaying: true }));
       onPlay?.();
     };
 
     const handlePause = () => {
-      setState(prev => ({ ...prev, isPlaying: false }));
+      setState(prev: any => ({ ...prev: any, isPlaying: false }));
       onPause?.();
     };
 
     const handleEnded = () => {
-      setState(prev => ({ ...prev, isPlaying: false }));
+      setState(prev: any => ({ ...prev: any, isPlaying: false }));
       onEnded?.();
     };
 
     const handleVolumeChange = () => {
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         volume: video.volume,
         isMuted: video.muted,
@@ -149,7 +149,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         isFullscreen: !!document.fullscreenElement,
       }));
@@ -248,7 +248,7 @@ return;
 }
 
     video.playbackRate = rate;
-    setState(prev => ({ ...prev, playbackRate: rate }));
+    setState(prev: any => ({ ...prev: any, playbackRate: rate }));
   };
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -265,7 +265,7 @@ return;
   };
 
   const showControlsTemporarily = () => {
-    setState(prev => ({ ...prev, showControls: true }));
+    setState(prev: any => ({ ...prev: any, showControls: true }));
 
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
@@ -273,7 +273,7 @@ return;
 
     controlsTimeoutRef.current = setTimeout(() => {
       if (state.isPlaying) {
-        setState(prev => ({ ...prev, showControls: false }));
+        setState(prev: any => ({ ...prev: any, showControls: false }));
       }
     }, 3000);
   };
@@ -299,7 +299,7 @@ return;
       onMouseMove={showControlsTemporarily}
       onMouseLeave={() => {
         if (state.isPlaying) {
-          setState(prev => ({ ...prev, showControls: false }));
+          setState(prev: any => ({ ...prev: any, showControls: false }));
         }
       }}
     >
@@ -423,7 +423,7 @@ return;
                     max="1"
                     step="0.1"
                     value={state.isMuted ? 0 : state.volume}
-                    onChange={(e) => {
+                    onChange={(e: Event) => {
                       const volume = parseFloat(e.target.value);
                       setVolume(volume);
                       if (volume > 0 && state.isMuted) {
@@ -464,7 +464,7 @@ return;
                       <select
                         id="playback-speed"
                         value={state.playbackRate}
-                        onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
+                        onChange={(e: Event) => setPlaybackRate(parseFloat(e: Event.target.value))}
                         className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"
                       >
                         <option value={0.25}>0.25x</option>
@@ -486,7 +486,7 @@ return;
                       <select
                         id="video-quality"
                         value={state.quality}
-                        onChange={(e) => setState(prev => ({ ...prev, quality: e.target.value }))}
+                        onChange={(e: Event) => setState(prev: any => ({ ...prev: any, quality: e: Event.target.value }))}
                         className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"
                       >
                         <option value="auto">Auto</option>

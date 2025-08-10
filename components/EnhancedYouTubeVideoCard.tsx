@@ -91,7 +91,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
       onClick={handleClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={(e: Event) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleClick();

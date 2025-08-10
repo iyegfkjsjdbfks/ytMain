@@ -131,7 +131,7 @@ class ErrorBoundary extends Component<Props, State> {
     // Reset error boundary when resetKeys change
     if (hasError && resetKeys && prevProps.resetKeys !== resetKeys) {
       const hasResetKeyChanged = resetKeys.some(
-        (key, index) => this.prevResetKeys[index] !== key,
+        (key: string, index: number) => this.prevResetKeys[index: number] !== key: string,
       );
 
       if (hasResetKeyChanged) {
@@ -180,7 +180,7 @@ class ErrorBoundary extends Component<Props, State> {
     const { retryCount } = this.state;
 
     if (retryCount < maxRetries) {
-      this.setState(prevState => ({
+      this.setState(prevState: any => ({
         hasError: false,
         retryCount: prevState.retryCount + 1,
       }));

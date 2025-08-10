@@ -317,7 +317,7 @@ const CreatorStudioPage: React.FC = () => {
         {/* Tab Content */}
         {activeTab === 'insights' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {audienceInsights.map((insight, index) => (
+            {audienceInsights.map((insight: any, index: number) => (
               <div key={index} className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
                 <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                   {insight.metric}
@@ -345,7 +345,7 @@ const CreatorStudioPage: React.FC = () => {
 
         {activeTab === 'ideas' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {contentIdeas.map((idea) => (
+            {contentIdeas.map((idea: any) => (
               <div key={idea.id} className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -377,7 +377,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag, tagIndex) => (
+                  {idea.tags.map((tag: string, tagIndex: any) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>
@@ -466,7 +466,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {scheduledContent.map((content) => (
+                  {scheduledContent.map((content: any) => (
                     <div key={content.id} className="flex items-center justify-between p-4 border border-gray-200 dark:border-neutral-700 rounded-lg">
                       <div className="flex items-center space-x-4">
                         <div className="p-2 bg-gray-100 dark:bg-neutral-700 rounded-lg">

@@ -142,7 +142,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
   };
 
   const toggleReplies = (commentId: string) => {
-    setExpandedReplies(prev => {
+    setExpandedReplies(prev: any => {
       const newSet = new Set(prev);
       if (newSet.has(commentId)) {
         newSet.delete(commentId);
@@ -221,7 +221,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
               <div className="mb-3">
                 <textarea
                   value={editContent}
-                  onChange={(e) => setEditContent(e.target.value)}
+                  onChange={(e: Event) => setEditContent(e: Event.target.value)}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={3}
                 />
@@ -386,7 +386,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                   placeholder={`Reply to ${comment.authorName}...`}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   rows={2}
-                  onKeyDown={(e) => {
+                  onKeyDown={(e: Event) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
                       handleSubmitReply(comment.id, e.currentTarget.value);
@@ -453,7 +453,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
     const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
-    const sorted = regularComments.sort((a, b) => {
+    const sorted = regularComments.sort((a: any, b: any) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
@@ -488,7 +488,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
         <select
           value={sortBy}
-          onChange={(e) => onSortChange(e.target.value as any)}
+          onChange={(e: Event) => onSortChange(e: Event.target.value as any)}
           className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
         >
           <option value="popular">Top comments</option>
@@ -509,7 +509,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
             <textarea
               ref={textareaRef}
               value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
+              onChange={(e: Event) => setNewComment(e: Event.target.value)}
               placeholder="Add a comment..."
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
               rows={3}
@@ -535,7 +535,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
       {/* Comments List */}
       <div className="space-y-6">
-        {sortedComments.map(comment => renderComment(comment))}
+        {sortedComments.map(comment: any => renderComment(comment: any))}
       </div>
 
       {/* Report Modal */}
@@ -554,7 +554,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
                     name="reportReason"
                     value={reason}
                     checked={reportReason === reason}
-                    onChange={(e) => setReportReason(e.target.value)}
+                    onChange={(e: Event) => setReportReason(e: Event.target.value)}
                     className="mr-3"
                   />
                   <span className="text-gray-900 dark:text-white">{reason}</span>

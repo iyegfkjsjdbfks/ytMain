@@ -45,7 +45,7 @@ return 'All';
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
+          {categories.map((category: any) => (
             <button
               key={category}
               onClick={() => onCategoryChange(category)}

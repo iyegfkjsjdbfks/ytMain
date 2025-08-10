@@ -94,7 +94,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   const stopPreview = () => {
     setIsPreviewing(false);
     if (stream && !isStreaming) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach(track: any => track: any.stop());
       setStream(null);
     }
   };
@@ -151,7 +151,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
         const enabledPlatforms = streamSettings.platforms
           .filter((p: any) => p.enabled)
-          .map(p => p.name);
+          .map(p: any => p: any.name);
 
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
@@ -174,7 +174,7 @@ return;
       setCurrentStream(null);
 
       if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach(track: any => track: any.stop());
         setStream(null);
       }
       setIsPreviewing(false);
@@ -215,7 +215,7 @@ return;
     // TODO: Implement real-time stats updates
     const interval = setInterval(() => {
       if (isStreaming) {
-        setStats(prev => ({
+        setStats(prev: any => ({
           ...prev,
           viewers: Math.floor(Math.random() * 1000) + 100,
           duration: prev.duration + 1,
@@ -339,7 +339,7 @@ return;
                   id="stream-title"
                   type="text"
                   value={streamSettings.title}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={(e: Event) => setStreamSettings(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
                   placeholder="Enter stream title"
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   disabled={isStreaming}
@@ -352,7 +352,7 @@ return;
                 <select
                   id="stream-category"
                   value={streamSettings.category}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, category: e.target.value }))}
+                  onChange={(e: Event) => setStreamSettings(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   disabled={isStreaming}
                 >
@@ -372,7 +372,7 @@ return;
                 <select
                   id="stream-visibility"
                   value={streamSettings.visibility}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, visibility: e.target.value as any }))}
+                  onChange={(e: Event) => setStreamSettings(prev: any => ({ ...prev: any, visibility: e: Event.target.value as any }))}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   disabled={isStreaming}
                 >
@@ -389,7 +389,7 @@ return;
               <textarea
                 id="stream-description"
                 value={streamSettings.description}
-                onChange={(e) => setStreamSettings(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e: Event) => setStreamSettings(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
                 placeholder="Describe your stream..."
                 rows={3}
                 className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -591,7 +591,7 @@ return;
             )}
             {activeTab === 'schedule' && (
               <StreamScheduler
-                onStreamScheduled={(stream) => {
+                onStreamScheduled={(stream: any) => {
                   logger.debug('Stream scheduled:', stream);
                 }}
               />

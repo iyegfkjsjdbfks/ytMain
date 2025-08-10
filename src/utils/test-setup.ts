@@ -78,7 +78,7 @@ Object.defineProperty(global, 'ResizeObserver', {
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation(query: any => ({
     matches: false,
     media: query,
     onchange: null,
@@ -246,7 +246,7 @@ Object.defineProperty(window, 'requestAnimationFrame', {
 
 Object.defineProperty(window, 'cancelAnimationFrame', {
   writable: true,
-  value: vi.fn(id => clearTimeout(id)),
+  value: vi.fn(id: string => clearTimeout(id: string)),
 });
 
 // Mock getComputedStyle
@@ -282,7 +282,7 @@ Object.defineProperty(document, 'createRange', {
       nodeName: 'BODY',
       ownerDocument: document,
     },
-    createContextualFragment: vi.fn().mockImplementation(html => {
+    createContextualFragment: vi.fn().mockImplementation(html: any => {
       const div = document.createElement('div');
       div.innerHTML = html;
       return div;

@@ -154,7 +154,7 @@ return [];
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s => s.id === shortId);
+    const short = currentFilteredShorts.find(s: any => s: any.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
@@ -196,7 +196,7 @@ return;
   }, []);
 
   const handleNextVideo = useCallback(() => {
-    setCurrentVideoIndex(prevIndex => {
+    setCurrentVideoIndex(prevIndex: any => {
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
@@ -223,7 +223,7 @@ return;
   }, []);
 
   const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex(prevIndex => {
+    setCurrentVideoIndex(prevIndex: any => {
       if (prevIndex > 0) {
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
@@ -250,14 +250,14 @@ return;
   }, []);
 
   const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev => !prev);
+    setShowSearch(prev: any => !prev: any);
     if (showSearch) {
       setSearchQuery('');
     }
   }, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev => !prev);
+    setShowFilters(prev: any => !prev: any);
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
@@ -457,7 +457,7 @@ return;
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short => short.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short: any => short: any.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
@@ -499,7 +499,7 @@ return;
             const videoElement = entry.target as HTMLElement;
             const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
             if (index !== -1) {
-              setCurrentVideoIndex((prevIndex) => {
+              setCurrentVideoIndex((prevIndex: any) => {
                 if (index !== prevIndex) {
                   // Update URL without triggering scroll
                   const currentFilteredShorts = filteredShorts;
@@ -574,7 +574,7 @@ return;
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
                   placeholder="Search shorts..."
                   className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus
@@ -646,7 +646,7 @@ return;
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
                 placeholder="Search shorts..."
                 className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus
@@ -690,7 +690,7 @@ return;
         role="feed"
         aria-label="Shorts feed"
       >
-        {filteredShorts.map((short, index) => (
+        {filteredShorts.map((short: any, index: number) => (
           <div key={short.id || index} className="h-full w-full snap-start">
             <ShortDisplayCard
               short={short}

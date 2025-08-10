@@ -119,7 +119,7 @@ return '0 Bytes';
           type="file"
           accept={accept}
           multiple={multiple}
-          onChange={(e) => handleFileSelect(e.target.files)}
+          onChange={(e: Event) => handleFileSelect(e: Event.target.files)}
           className="hidden"
           disabled={disabled}
         />
@@ -170,7 +170,7 @@ return '0 Bytes';
                 </div>
                 {onFileRemove && (
                   <button
-                    onClick={(e) => {
+                    onClick={(e: Event) => {
                       e.stopPropagation();
                       onFileRemove(index);
                     }}

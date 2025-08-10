@@ -179,7 +179,7 @@ return;
       priority: type === 'live_stream' ? 'high' : 'medium',
     };
 
-    setNotifications(prev => {
+    setNotifications(prev: any => {
       const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
@@ -209,8 +209,8 @@ return;
   };
 
   const markAsRead = (notificationId: string) => {
-    setNotifications(prev => {
-      const updated = prev.map(n =>
+    setNotifications(prev: any => {
+      const updated = prev.map(n: any =>
         n.id === notificationId ? { ...n, isRead: true } : n,
       );
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
@@ -219,15 +219,15 @@ return;
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev => {
-      const updated = prev.map(n => ({ ...n, isRead: true }));
+    setNotifications(prev: any => {
+      const updated = prev.map(n: any => ({ ...n: any, isRead: true }));
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
   };
 
   const deleteNotification = (notificationId: string) => {
-    setNotifications(prev => {
+    setNotifications(prev: any => {
       const updated = prev.filter((n: any) => n.id !== notificationId);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
@@ -312,7 +312,7 @@ return;
                 <p className="text-sm">You're all caught up!</p>
               </div>
             ) : (
-              filteredNotifications.map((notification) => (
+              filteredNotifications.map((notification: any) => (
                 <div
                   key={notification.id}
                   className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${

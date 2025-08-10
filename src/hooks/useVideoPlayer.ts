@@ -88,32 +88,32 @@ return;
 }
 
     const handlePlay = () => {
-      setState(prev => ({ ...prev, isPlaying: true }));
+      setState(prev: any => ({ ...prev: any, isPlaying: true }));
       onPlay?.();
     };
 
     const handlePause = () => {
-      setState(prev => ({ ...prev, isPlaying: false }));
+      setState(prev: any => ({ ...prev: any, isPlaying: false }));
       onPause?.();
     };
 
     const handleTimeUpdate = () => {
       if (video) {
-        setState(prev => ({ ...prev, currentTime: video.currentTime }));
+        setState(prev: any => ({ ...prev: any, currentTime: video.currentTime }));
         onTimeUpdate?.(video.currentTime);
       }
     };
 
     const handleDurationChange = () => {
       if (video) {
-        setState(prev => ({ ...prev, duration: video.duration }));
+        setState(prev: any => ({ ...prev: any, duration: video.duration }));
         onDurationChange?.(video.duration);
       }
     };
 
     const handleVolumeChange = () => {
       if (video) {
-        setState(prev => ({
+        setState(prev: any => ({
           ...prev,
           volume: video.volume,
           isMuted: video.muted,
@@ -124,33 +124,33 @@ return;
 
     const handlePlaybackRateChange = () => {
       if (video) {
-        setState(prev => ({ ...prev, playbackRate: video.playbackRate }));
+        setState(prev: any => ({ ...prev: any, playbackRate: video.playbackRate }));
         onPlaybackRateChange?.(video.playbackRate);
       }
     };
 
     const handleFullscreenChange = () => {
       const isFullscreen = !!document.fullscreenElement;
-      setState(prev => ({ ...prev, isFullscreen }));
+      setState(prev: any => ({ ...prev: any, isFullscreen }));
       onFullscreenChange?.(isFullscreen);
     };
 
     const handleError = () => {
       const error = new Error(`Video error: ${video.error?.message || 'Unknown error'}`);
-      setState(prev => ({ ...prev, error, isLoading: false }));
+      setState(prev: any => ({ ...prev: any, error, isLoading: false }));
       onError?.(error);
     };
 
     const handleLoadedData = () => {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev: any => ({ ...prev: any, isLoading: false }));
     };
 
     const handleWaiting = () => {
-      setState(prev => ({ ...prev, isLoading: true }));
+      setState(prev: any => ({ ...prev: any, isLoading: true }));
     };
 
     const handlePlaying = () => {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev: any => ({ ...prev: any, isLoading: false }));
     };
 
     // Set initial state
@@ -170,10 +170,10 @@ return;
     video.addEventListener('volumechange', handleVolumeChange);
     video.addEventListener('ratechange', handlePlaybackRateChange);
     video.addEventListener('enterpictureinpicture', () =>
-      setState(prev => ({ ...prev, isPictureInPicture: true })),
+      setState(prev: any => ({ ...prev: any, isPictureInPicture: true })),
     );
     video.addEventListener('leavepictureinpicture', () =>
-      setState(prev => ({ ...prev, isPictureInPicture: false })),
+      setState(prev: any => ({ ...prev: any, isPictureInPicture: false })),
     );
     video.addEventListener('error', handleError);
     video.addEventListener('loadeddata', handleLoadedData);
@@ -192,10 +192,10 @@ return;
       video.removeEventListener('volumechange', handleVolumeChange);
       video.removeEventListener('ratechange', handlePlaybackRateChange);
       video.removeEventListener('enterpictureinpicture', () =>
-        setState(prev => ({ ...prev, isPictureInPicture: true })),
+        setState(prev: any => ({ ...prev: any, isPictureInPicture: true })),
       );
       video.removeEventListener('leavepictureinpicture', () =>
-        setState(prev => ({ ...prev, isPictureInPicture: false })),
+        setState(prev: any => ({ ...prev: any, isPictureInPicture: false })),
       );
       video.removeEventListener('error', handleError);
       video.removeEventListener('loadeddata', handleLoadedData);
@@ -232,7 +232,7 @@ return;
       if (error instanceof DOMException && error.name === 'AbortError') {
         // This is expected behavior, don't log as error
         logger.debug('Play request was interrupted:', error.message);
-        setState(prev => ({ ...prev, isPlaying: false }));
+        setState(prev: any => ({ ...prev: any, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
         const errorMessage = error instanceof Error ? error.message : String(error);
@@ -242,9 +242,9 @@ return;
         if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
             errorMessage.includes('ERR_NETWORK')) {
           logger.info('Video may be temporarily unavailable due to network/cache issues');
-          setState(prev => ({ ...prev, isPlaying: false }));
+          setState(prev: any => ({ ...prev: any, isPlaying: false }));
         } else {
-          setState(prev => ({ ...prev, error: error as Error }));
+          setState(prev: any => ({ ...prev: any, error: error as Error }));
           onError?.(error as Error);
         }
       }
@@ -273,7 +273,7 @@ return;
   const seek = useCallback((time: number) => {
     if (videoRef.current) {
       videoRef.current.currentTime = time;
-      setState(prev => ({ ...prev, currentTime: time }));
+      setState(prev: any => ({ ...prev: any, currentTime: time }));
     }
   }, []);
 
@@ -283,7 +283,7 @@ return;
       const newVolume = Math.min(1, Math.max(0, volume));
       videoRef.current.volume = newVolume;
       videoRef.current.muted = newVolume === 0;
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         volume: newVolume,
         isMuted: newVolume === 0,
@@ -296,7 +296,7 @@ return;
   const mute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
-      setState(prev => ({ ...prev, isMuted: true }));
+      setState(prev: any => ({ ...prev: any, isMuted: true }));
     }
   }, []);
 
@@ -304,7 +304,7 @@ return;
   const unmute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = false;
-      setState(prev => ({ ...prev, isMuted: false }));
+      setState(prev: any => ({ ...prev: any, isMuted: false }));
     }
   }, []);
 
@@ -312,7 +312,7 @@ return;
   const toggleMute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
-      setState(prev => ({ ...prev, isMuted: videoRef.current?.muted ?? false }));
+      setState(prev: any => ({ ...prev: any, isMuted: videoRef.current?.muted ?? false }));
     }
   }, []);
 
@@ -320,7 +320,7 @@ return;
   const setPlaybackRate = useCallback((rate: number) => {
     if (videoRef.current) {
       videoRef.current.playbackRate = rate;
-      setState(prev => ({ ...prev, playbackRate: rate }));
+      setState(prev: any => ({ ...prev: any, playbackRate: rate }));
       onPlaybackRateChange?.(rate);
     }
   }, [onPlaybackRateChange]);
@@ -365,7 +365,7 @@ return;
         await videoRef.current.requestPictureInPicture();
       } catch (error) {
         logger.error('Error entering Picture-in-Picture:', error);
-        setState(prev => ({ ...prev, error: error as Error }));
+        setState(prev: any => ({ ...prev: any, error: error as Error }));
         onError?.(error as Error);
       }
     }
@@ -378,7 +378,7 @@ return;
         await document.exitPictureInPicture();
       } catch (error) {
         logger.error('Error exiting Picture-in-Picture:', error);
-        setState(prev => ({ ...prev, error: error as Error }));
+        setState(prev: any => ({ ...prev: any, error: error as Error }));
         onError?.(error as Error);
       }
     }

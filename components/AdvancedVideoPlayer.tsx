@@ -353,7 +353,7 @@ return;
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={videoPlayerInstance.togglePlay}
-            onKeyDown={(e) => {
+            onKeyDown={(e: Event) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 videoPlayerInstance.togglePlay();
@@ -380,7 +380,7 @@ return;
               onClick={handleProgressClick}
               onMouseMove={handleProgressMouseMove}
               onMouseLeave={handleProgressMouseLeave}
-              onKeyDown={(e) => {
+              onKeyDown={(e: Event) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   handleProgressClick(e as any);
@@ -488,7 +488,7 @@ return;
                     min="0"
                     max="100"
                     value={volumePercentage}
-                    onChange={(e) => videoPlayerInstance.setVolume(Number(e.target.value) / 100)}
+                    onChange={(e: Event) => videoPlayerInstance.setVolume(Number(e: Event.target.value) / 100)}
                     className="w-20 h-1 bg-white bg-opacity-30 rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
@@ -628,7 +628,7 @@ return;
                         <input
                           type="checkbox"
                           checked={subtitlesEnabled}
-                          onChange={(e) => setSubtitlesEnabled(e.target.checked)}
+                          onChange={(e: Event) => setSubtitlesEnabled(e: Event.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -638,7 +638,7 @@ return;
                         <input
                           type="checkbox"
                           checked={autoplayNext}
-                          onChange={(e) => setAutoplayNext(e.target.checked)}
+                          onChange={(e: Event) => setAutoplayNext(e: Event.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -648,7 +648,7 @@ return;
                         <input
                           type="checkbox"
                           checked={annotations}
-                          onChange={(e) => setAnnotations(e.target.checked)}
+                          onChange={(e: Event) => setAnnotations(e: Event.target.checked)}
                           className="rounded"
                         />
                       </label>

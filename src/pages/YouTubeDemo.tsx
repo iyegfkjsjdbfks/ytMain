@@ -48,7 +48,7 @@ const YouTubeDemo: React.FC = () => {
               <input
                 type="text"
                 value={videoUrl}
-                onChange={(e) => setVideoUrl(e.target.value)}
+                onChange={(e: Event) => setVideoUrl(e: Event.target.value)}
                 placeholder="Enter YouTube URL"
                 className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -67,7 +67,7 @@ const YouTubeDemo: React.FC = () => {
               <input
                 type="checkbox"
                 checked={useCustomControls}
-                onChange={(e) => setUseCustomControls(e.target.checked)}
+                onChange={(e: Event) => setUseCustomControls(e: Event.target.checked)}
                 className="rounded text-blue-500"
               />
               <span>Use Custom Controls</span>
@@ -77,7 +77,7 @@ const YouTubeDemo: React.FC = () => {
               <input
                 type="checkbox"
                 checked={autoplay}
-                onChange={(e) => setAutoplay(e.target.checked)}
+                onChange={(e: Event) => setAutoplay(e: Event.target.checked)}
                 className="rounded text-blue-500"
               />
               <span>Autoplay</span>

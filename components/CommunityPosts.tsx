@@ -79,7 +79,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
   const toggleExpanded = (postId: string) => {
-    setExpandedPosts(prev => {
+    setExpandedPosts(prev: any => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
         newSet.delete(postId);
@@ -272,7 +272,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {posts.map((post) => (
+      {posts.map((post: any) => (
         <div
           key={post.id}
           className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6"

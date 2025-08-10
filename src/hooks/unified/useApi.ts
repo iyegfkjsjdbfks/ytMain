@@ -159,7 +159,7 @@ return;
     // Create new abort controller
     abortControllerRef.current = new AbortController();
 
-    setState(prev => ({ ...prev, loading: true, error: null }));
+    setState(prev: any => ({ ...prev: any, loading: true, error: null }));
 
     try {
       const response = await queryFn();
@@ -201,7 +201,7 @@ return;
         return;
       }
 
-      setState(prev => ({
+      setState(prev: any => ({
         ...prev,
         loading: false,
         error: errorMessage,
@@ -226,7 +226,7 @@ return;
     apiCache.set(cacheKey, data, staleTime);
 
     // Update state
-    setState(prev => ({
+    setState(prev: any => ({
       ...prev,
       data,
       isStale: false,
@@ -334,7 +334,7 @@ export function useMutation<T, TVariables = any>(
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
 
-      setState(prev => ({ ...prev, loading: false, error: errorMessage }));
+      setState(prev: any => ({ ...prev: any, loading: false, error: errorMessage }));
       config.onError?.(error instanceof Error ? error : new Error(errorMessage), variables);
       config.onSettled?.(undefined, error instanceof Error ? error : new Error(errorMessage), variables);
 

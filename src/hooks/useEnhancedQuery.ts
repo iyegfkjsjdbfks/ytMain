@@ -251,7 +251,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     mutationFn: enhancedMutationFn,
     retry: createRetryFn(maxRetries),
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
-    onMutate: async (variables) => {
+    onMutate: async (variables: any) => {
       // Handle optimistic updates
       if (optimisticUpdate) {
         await queryClient.cancelQueries({ queryKey: optimisticUpdate.queryKey });
@@ -267,7 +267,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
       return mutationOptions.onMutate?.(variables);
     },
-    onError: (error, variables, context) => {
+    onError: (error: Error, variables: any, context: any) => {
       // Rollback optimistic updates on error
       if (optimisticUpdate && context && typeof context === 'object' && 'previousData' in context) {
         queryClient.setQueryData(optimisticUpdate.queryKey, (context as any).previousData);
@@ -275,7 +275,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
       mutationOptions.onError?.(error, variables, context);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data: any, variables: any, context: any) => {
       // Invalidate related queries
       invalidateQueries.forEach(queryKey => {
         queryClient.invalidateQueries({ queryKey });
@@ -329,7 +329,7 @@ export function useCacheManager() {
       const cache = queryClient.getQueryCache();
       return {
         size: cache.getAll().length,
-        queries: cache.getAll().map(query => ({
+        queries: cache.getAll().map(query: any => ({
           queryKey: query.queryKey,
           state: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,

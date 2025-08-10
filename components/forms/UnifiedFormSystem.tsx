@@ -43,19 +43,19 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const setFieldValue = useCallback((name: string, value: any) => {
-    setValues(prev => ({ ...prev, [name]: value }));
+    setValues(prev: any => ({ ...prev: any, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev: any => ({ ...prev: any, [name]: '' }));
     }
   }, [errors]);
 
   const setFieldError = useCallback((name: string, error: string) => {
-    setErrors(prev => ({ ...prev, [name]: error }));
+    setErrors(prev: any => ({ ...prev: any, [name]: error }));
   }, []);
 
   const setFieldTouched = useCallback((name: string, touched: boolean) => {
-    setTouched(prev => ({ ...prev, [name]: touched }));
+    setTouched(prev: any => ({ ...prev: any, [name]: touched }));
   }, []);
 
   const validateField = useCallback((name: string) => {
@@ -426,7 +426,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
             {placeholder}
           </option>
         )}
-        {options.map((option) => (
+        {options.map((option: any) => (
           <option
             key={option.value}
             value={option.value}

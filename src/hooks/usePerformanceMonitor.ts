@@ -260,7 +260,7 @@ export const useWebVitals = () => {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1] as any;
-        setVitals(prev => ({ ...prev, LCP: lastEntry.startTime }));
+        setVitals(prev: any => ({ ...prev: any, LCP: lastEntry.startTime }));
       });
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
       return observer;
@@ -272,7 +272,7 @@ export const useWebVitals = () => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
           if (entry.name === 'first-contentful-paint') {
-            setVitals(prev => ({ ...prev, FCP: entry.startTime }));
+            setVitals(prev: any => ({ ...prev: any, FCP: entry.startTime }));
           }
         });
       });
@@ -288,7 +288,7 @@ export const useWebVitals = () => {
         entries.forEach((entry: any) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
-            setVitals(prev => ({ ...prev, CLS: clsValue }));
+            setVitals(prev: any => ({ ...prev: any, CLS: clsValue }));
           }
         });
       });
@@ -305,7 +305,7 @@ export const useWebVitals = () => {
     // TTFB from Navigation Timing
     const navigation = performance.getEntriesByType('navigation')[0] as any;
     if (navigation) {
-      setVitals(prev => ({
+      setVitals(prev: any => ({
         ...prev,
         TTFB: navigation.responseStart - navigation.requestStart,
       }));
