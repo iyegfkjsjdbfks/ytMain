@@ -103,7 +103,7 @@ interface AppActions {
   // Search Actions
   setSearchQuery: (query) => void;
   setSearchResults: (results: Video) => void;
-  setSearchSuggestions: (suggestions: string) => void;
+  setSearchSuggestions: (suggestions) => void;
   setSearchLoading: (loading) => void;
   clearSearch: () => void;
 

@@ -102,7 +102,7 @@ class NotificationService {
   /**
    * Mark multiple notifications as read
    */
-  async markMultipleAsRead(notificationIds: string): Promise<ApiResponse<void>> {
+  async markMultipleAsRead(notificationIds): Promise<ApiResponse<void>> {
     return api.patch('/api/notifications/read', { notificationIds });
   }
 
@@ -123,7 +123,7 @@ class NotificationService {
   /**
    * Delete multiple notifications
    */
-  async deleteMultiple(notificationIds: string): Promise<ApiResponse<void>> {
+  async deleteMultiple(notificationIds): Promise<ApiResponse<void>> {
     return api.delete('/api/notifications/bulk', {
       body: JSON.stringify({ notificationIds }),
       headers: { 'Content-Type': 'application/json' },

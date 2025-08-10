@@ -60,7 +60,7 @@ export const useLivePolls = (streamId?: string) => {
     return (votes / totalVotes) * 100;
   };
 
-  const createPoll = async (question, options: string) => {
+  const createPoll = async (question, options) => {
     const id = `poll_${Math.random().toString(36).slice(2, 9)}`;
     const createdAt = new Date();
     const durationMs = 60 * 1000; // default 60s

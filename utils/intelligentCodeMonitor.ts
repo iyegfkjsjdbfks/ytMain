@@ -632,7 +632,7 @@ return;
   /**
    * Auto-implement simple refactoring opportunities
    */
-  async autoImplementRefactoring(opportunityIds: string): Promise<void> {
+  async autoImplementRefactoring(opportunityIds): Promise<void> {
     const automatableOpportunities = this.opportunities.filter(
       op => opportunityIds.includes(op.id) && op.automatable,
     );

@@ -4,7 +4,7 @@ import React from 'react';
 
 declare namespace React {
   interface JSX {
-    IntrinsicElements: any;
+    IntrinsicElements;
   }
   interface Component<P = {}, S = {}> {
     props: P;

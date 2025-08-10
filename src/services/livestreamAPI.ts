@@ -328,7 +328,7 @@ export const pollsAPI = {
   /**
    * Create a poll
    */
-  async createPoll(streamId, question, options: string): Promise<LivePoll> {
+  async createPoll(streamId, question, options): Promise<LivePoll> {
     const poll: LivePoll = {
       id: `poll_${Date.now()}`,
       streamId,
@@ -531,7 +531,7 @@ export const multiPlatformAPI = {
   /**
    * Stream to multiple platforms
    */
-  async startMultiPlatformStream(streamId, platforms: string): Promise<boolean> {
+  async startMultiPlatformStream(streamId, platforms): Promise<boolean> {
     // Simulate multi-platform streaming setup
     await new Promise(resolve => setTimeout(resolve, 2000));
     return true;

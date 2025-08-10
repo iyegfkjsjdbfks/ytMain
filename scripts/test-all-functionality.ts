@@ -68,7 +68,7 @@ class TestRunner {
     this.generateReport();
   }
 
-  private async runTestSuite(suiteName, testPatterns: string): Promise<void> {
+  private async runTestSuite(suiteName, testPatterns): Promise<void> {
     const suiteStartTime = Date.now();
 
     const suite: TestSuite = {

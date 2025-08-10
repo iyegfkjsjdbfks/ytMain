@@ -115,7 +115,7 @@ throw new Error('Failed to fetch video');
   }, [queryClient, opts.staleTime, opts.cacheTime]);
 
   // Prefetch multiple videos
-  const prefetchVideos = useCallback(async (videoIds: string) => {
+  const prefetchVideos = useCallback(async (videoIds) => {
     const promises = videoIds.slice(0, opts.prefetchCount).map(prefetchVideo);
     await Promise.allSettled(promises);
   }, [prefetchVideo, opts.prefetchCount]);
@@ -168,7 +168,7 @@ throw new Error('Failed to fetch video');
   }, []);
 
   // Smart prefetch based on user behavior
-  const smartPrefetch = useCallback(async (currentVideoId, allVideoIds: string) => {
+  const smartPrefetch = useCallback(async (currentVideoId, allVideoIds) => {
     const currentIndex = allVideoIds.indexOf(currentVideoId);
     if (currentIndex === -1) {
 return;

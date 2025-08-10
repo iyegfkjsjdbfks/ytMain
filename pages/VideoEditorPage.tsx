@@ -14,7 +14,7 @@ declare namespace NodeJS {
 
 declare namespace React {
   interface JSX {
-    IntrinsicElements: any;
+    IntrinsicElements;
   }
   interface Component<P = {}, S = {}> {
     props: P;

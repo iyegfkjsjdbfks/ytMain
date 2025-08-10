@@ -606,7 +606,7 @@ const formatViewCount = (viewCount): string => {
 };
 
 // Fetch detailed video information from YouTube Data API v3 (with blocking check)
-const fetchVideoDetails = async (videoIds: string): Promise<Map<string, YouTubeVideoDetails>> => {
+const fetchVideoDetails = async (videoIds): Promise<Map<string, YouTubeVideoDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -616,7 +616,7 @@ const fetchVideoDetails = async (videoIds: string): Promise<Map<string, YouTubeV
 };
 
 // Internal function to fetch video details without blocking check
-const fetchVideoDetailsInternal = async (videoIds: string): Promise<Map<string, YouTubeVideoDetails>> => {
+const fetchVideoDetailsInternal = async (videoIds): Promise<Map<string, YouTubeVideoDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || videoIds.length === 0) {
@@ -651,7 +651,7 @@ const fetchVideoDetailsInternal = async (videoIds: string): Promise<Map<string, 
 };
 
 // Fetch channel information from YouTube Data API v3 (with blocking check)
-const fetchChannelDetails = async (channelIds: string): Promise<Map<string, YouTubeChannelDetails>> => {
+const fetchChannelDetails = async (channelIds): Promise<Map<string, YouTubeChannelDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -661,7 +661,7 @@ const fetchChannelDetails = async (channelIds: string): Promise<Map<string, YouT
 };
 
 // Internal function to fetch channel details without blocking check
-const fetchChannelDetailsInternal = async (channelIds: string): Promise<Map<string, YouTubeChannelDetails>> => {
+const fetchChannelDetailsInternal = async (channelIds): Promise<Map<string, YouTubeChannelDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || channelIds.length === 0) {

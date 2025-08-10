@@ -130,7 +130,7 @@ class YouTubeService {
     });
   }
 
-  async fetchVideos(videoIds: string): Promise<Video[]> {
+  async fetchVideos(videoIds): Promise<Video[]> {
     if (!API_KEY) {
       logger.warn('YouTube Data API v3 key not available. Metadata fetching will use fallback methods.');
       return [];

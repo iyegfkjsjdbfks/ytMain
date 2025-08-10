@@ -253,7 +253,7 @@ return undefined;
   /**
    * Auto-implement improvements
    */
-  async autoImplementImprovements(suggestionIds: string): Promise<{
+  async autoImplementImprovements(suggestionIds): Promise<{
     implemented: string;
     failed: Array<{ id: string; _error: string }>;
   }> {
@@ -623,7 +623,7 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, Math.min(_seconds * 1000, 5000))); // Cap at 5s for demo
   }
 
-  private async runDeploymentHealthChecks(__checks: string): Promise<{ healthy: boolean; details }> {
+  private async runDeploymentHealthChecks(__checks): Promise<{ healthy: boolean; details }> {
     console.log('🏥 Running deployment health _checks');
 
     // Simulate health check results

@@ -109,7 +109,7 @@ url.searchParams.set('quality', quality.toString());
 };
 
 // Responsive image utilities
-export const getResponsiveImageSrcSet = (baseUrl, sizes: number): string => {
+export const getResponsiveImageSrcSet = (baseUrl, sizes): string => {
   return sizes
     .map(size => `${getOptimizedImageUrl(baseUrl, size)} ${size}w`)
     .join(', ');

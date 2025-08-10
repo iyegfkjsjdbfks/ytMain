@@ -619,7 +619,7 @@ class AutomatedCodeReviewer {
   /**
    * Review code changes
    */
-  async reviewChanges(files: string): Promise<{
+  async reviewChanges(files): Promise<{
     approved: boolean;
     issues: Array<{
       file: string;

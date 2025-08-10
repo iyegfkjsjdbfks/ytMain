@@ -270,7 +270,7 @@ class CommentService {
   /**
    * Mark comment mentions as read
    */
-  async markMentionsAsRead(commentIds: string): Promise<ApiResponse<void>> {
+  async markMentionsAsRead(commentIds): Promise<ApiResponse<void>> {
     return api.post('/api/comments/mentions/read', { commentIds });
   }
 
