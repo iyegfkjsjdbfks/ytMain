@@ -37,7 +37,7 @@ const categories = [
   'Food',
 ];
 
-const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
+const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {className: any}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({

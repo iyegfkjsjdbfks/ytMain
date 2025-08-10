@@ -43,7 +43,7 @@ const StudioSidebar: React.FC = () => {
         <nav className="space-y-1">
           <NavLink
             to="/studio"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -60,7 +60,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/content"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -76,7 +76,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/analytics"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -92,7 +92,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/comments"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -108,7 +108,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/subtitles"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -124,7 +124,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/copyright"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -140,7 +140,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/monetization"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -156,7 +156,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/customization"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -172,7 +172,7 @@ const StudioSidebar: React.FC = () => {
 
           <NavLink
             to="/studio/audio-library"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
                   ? 'bg-gray-800 text-white'
@@ -195,7 +195,7 @@ const StudioSidebar: React.FC = () => {
           <nav className="mt-2 space-y-1">
             <NavLink
               to="/studio/settings/channel"
-              className={({ isActive }) =>
+              className={({ isActive }: {isActive: boolean}) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                   isActive
                     ? 'bg-gray-800 text-white'
@@ -211,7 +211,7 @@ const StudioSidebar: React.FC = () => {
 
             <NavLink
               to="/studio/settings/upload-defaults"
-              className={({ isActive }) =>
+              className={({ isActive }: {isActive: boolean}) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                   isActive
                     ? 'bg-gray-800 text-white'
@@ -227,7 +227,7 @@ const StudioSidebar: React.FC = () => {
 
             <NavLink
               to="/studio/settings/community"
-              className={({ isActive }) =>
+              className={({ isActive }: {isActive: boolean}) =>
                 `flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                   isActive
                     ? 'bg-gray-800 text-white'

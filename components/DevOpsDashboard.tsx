@@ -234,7 +234,7 @@ return 'text-orange-600';
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
     color?: string;
-  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }) => (
+  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }: {trend: any}: {subtitle: any}: {value: any}: {title: string}) => (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between">
         <div>

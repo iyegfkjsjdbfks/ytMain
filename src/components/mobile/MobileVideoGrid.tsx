@@ -25,7 +25,7 @@ interface MobileVideoItemProps {
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);

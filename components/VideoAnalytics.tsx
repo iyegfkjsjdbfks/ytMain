@@ -66,7 +66,7 @@ interface VideoAnalyticsProps {
   className?: string;
 }
 
-const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }) => {
+const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }: {videoId: string}) => {
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');

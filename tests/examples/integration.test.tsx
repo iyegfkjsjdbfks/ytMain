@@ -16,7 +16,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function}: {onTimeUpdate: Function}: {video: any}) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -32,7 +32,7 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }) => (
+const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean}: {onVideoSelect: Function}: {videos: any}) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
@@ -54,7 +54,7 @@ const VideoList = ({ videos, onVideoSelect, loading }) => (
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }) => {
+const CommentSection = ({ comments, onAddComment }: {onAddComment: Function}: {comments: any}) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
