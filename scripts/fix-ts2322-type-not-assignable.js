@@ -62,26 +62,57 @@ class TS2322Fixer {
 
       // Heuristic fixes per file
       const full = join(projectRoot, file);
-      let content = readFileSync(full, 'utf8');
 
-      // string -> number: wrap with Number()
-      if (fromType.includes('string') && toType.includes('number')) {
-        // naive replacement: value = '...' -> Number(value)
-        content = content.replace(/=\s*([^;]+);/g, (s) => {
-          if (s.includes('Number(') || s.includes('parseInt(') || s.includes('parseFloat(')) return s;
-          return s.replace(/=\s*([^;]+);/, '= Number($1);');
-        });
+      try {
+        // Check if file exists
+        if (!require('fs').existsSync(full)) {
+          this.log(`File not found: ${file}`);
+          continue;
+        }
+
+        let content = readFileSync(full, 'utf8');
+
+      // More conservative approach: only fix specific line mentioned in error
+      const lineNum = parseInt(lineNumStr);
+      const lines = content.split('\n');
+
+      if (lineNum > 0 && lineNum <= lines.length) {
+        const targetLine = lines[lineNum - 1];
+        let modifiedLine = targetLine;
+
+        // string -> number: wrap with Number() only if it's a simple assignment
+        if (fromType.includes('string') && toType.includes('number')) {
+          if (/=\s*['"`][^'"`]*['"`]/.test(targetLine) &&
+              !targetLine.includes('Number(') &&
+              !targetLine.includes('parseInt(') &&
+              !targetLine.includes('parseFloat(')) {
+            modifiedLine = targetLine.replace(/=\s*(['"`][^'"`]*['"`])/, '= Number($1)');
+          }
+        }
+
+        // number -> string: ensure toString() only for simple cases
+        if (fromType.includes('number') && toType.includes('string')) {
+          if (/=\s*\d+/.test(targetLine) &&
+              !targetLine.includes('toString(') &&
+              !targetLine.includes('String(')) {
+            modifiedLine = targetLine.replace(/=\s*(\d+)/, '= String($1)');
+          }
+        }
+
+        if (modifiedLine !== targetLine) {
+          lines[lineNum - 1] = modifiedLine;
+          content = lines.join('\n');
+        }
       }
 
-      // number -> string: ensure toString()
-      if (fromType.includes('number') && toType.includes('string')) {
-        content = content.replace(/=\s*([^;]+);/g, (s) => {
-          if (s.includes('toString(') || s.includes('String(')) return s;
-          return s.replace(/=\s*([^;]+);/, '= String($1);');
-        });
+        try {
+          writeFileSync(full, content);
+        } catch (writeError) {
+          this.log(`Failed to write file ${file}: ${writeError.message}`);
+        }
+      } catch (error) {
+        this.log(`Error processing ${file}: ${error.message}`);
       }
-
-      writeFileSync(full, content);
     }
 
     const final = this.getCount();

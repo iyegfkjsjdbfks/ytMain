@@ -12,11 +12,22 @@ class TS18048Fixer {
   log(message, type = 'info') {
     const prefix = {
       info: '⚠️',
-      success: '✅', 
+      success: '✅',
       error: '❌',
       warning: '🚧'
     }[type] || '⚠️';
     console.log(`${prefix} ${message}`);
+  }
+
+  normalizeFilePath(filePath) {
+    // Normalize path separators and make relative to project root
+    const normalized = filePath.replace(/\\/g, '/');
+    const projectRootNormalized = projectRoot.replace(/\\/g, '/');
+
+    if (normalized.startsWith(projectRootNormalized)) {
+      return normalized.substring(projectRootNormalized.length + 1);
+    }
+    return normalized;
   }
 
   getCount() {
@@ -56,7 +67,7 @@ class TS18048Fixer {
           const match = line.match(/^(.+?)\((\d+),(\d+)\):\s*error TS18048:\s*(.+)$/);
           if (match) {
             return {
-              filePath: match[1].replace(projectRoot + '/', '').replace(projectRoot + '\\', ''),
+              filePath: this.normalizeFilePath(match[1]),
               line: parseInt(match[2]),
               column: parseInt(match[3]),
               message: match[4]
@@ -70,9 +81,16 @@ class TS18048Fixer {
     }
   }
 
-  fixPossiblyUndefined(filePath, line, column, message) {
+  fixPossiblyUndefined(filePath, line, _column, message) {
     try {
       const fullPath = join(projectRoot, filePath);
+
+      // Check if file exists
+      if (!require('fs').existsSync(fullPath)) {
+        this.log(`File not found: ${filePath}`, 'warning');
+        return false;
+      }
+
       let content = readFileSync(fullPath, 'utf8');
       const lines = content.split('\n');
       let modified = false;
@@ -80,17 +98,21 @@ class TS18048Fixer {
       if (line <= lines.length) {
         const targetLine = lines[line - 1];
         
-        // Common patterns for possibly undefined fixes
+        // More conservative patterns for possibly undefined fixes
         if (message.includes('possibly \'undefined\'')) {
-          // Add optional chaining or null check
-          if (targetLine.includes('.') && !targetLine.includes('?.')) {
-            lines[line - 1] = targetLine.replace(/(\w+)\.(\w+)/g, '$1?.$2');
-            modified = true;
+          // Add optional chaining only for simple property access
+          if (targetLine.includes('.') && !targetLine.includes('?.') && !targetLine.includes('..')) {
+            // Only apply to simple cases like obj.prop, not complex expressions
+            const simplePropertyAccess = /(\w+)\.(\w+)(?!\()/g;
+            if (simplePropertyAccess.test(targetLine)) {
+              lines[line - 1] = targetLine.replace(simplePropertyAccess, '$1?.$2');
+              modified = true;
+            }
           }
-          // Add null check for function calls
-          else if (targetLine.includes('(') && !targetLine.includes('&&')) {
-            const varMatch = targetLine.match(/(\w+)\s*\(/);
-            if (varMatch) {
+          // Add null check for function calls (more conservative)
+          else if (targetLine.includes('(') && !targetLine.includes('&&') && !targetLine.includes('||')) {
+            const varMatch = targetLine.match(/^\s*(\w+)\s*\(/);
+            if (varMatch && !targetLine.includes('if') && !targetLine.includes('while')) {
               lines[line - 1] = targetLine.replace(varMatch[0], `${varMatch[1]} && ${varMatch[0]}`);
               modified = true;
             }
@@ -99,10 +121,15 @@ class TS18048Fixer {
       }
 
       if (modified) {
-        writeFileSync(fullPath, lines.join('\n'));
-        this.log(`Added safety checks to ${filePath}`, 'success');
-        this.fixedFiles.add(filePath);
-        return true;
+        try {
+          writeFileSync(fullPath, lines.join('\n'));
+          this.log(`Added safety checks to ${filePath}`, 'success');
+          this.fixedFiles.add(filePath);
+          return true;
+        } catch (writeError) {
+          this.log(`Failed to write file ${filePath}: ${writeError.message}`, 'error');
+          return false;
+        }
       }
 
       return false;

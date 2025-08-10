@@ -81,8 +81,14 @@ class TS2304Fixer {
 
   fixFile(filePath, errors) {
     const fullPath = join(projectRoot, filePath);
-    
+
     try {
+      // Check if file exists and is readable
+      if (!require('fs').existsSync(fullPath)) {
+        this.log(`File not found: ${filePath}`, 'warning');
+        return false;
+      }
+
       let content = readFileSync(fullPath, 'utf8');
       let modified = false;
       
@@ -106,9 +112,14 @@ class TS2304Fixer {
       }
 
       if (modified) {
-        writeFileSync(fullPath, content);
-        this.fixedFiles.add(filePath);
-        this.log(`Fixed ${errors.length} TS2304 errors in ${filePath}`, 'success');
+        try {
+          writeFileSync(fullPath, content);
+          this.fixedFiles.add(filePath);
+          this.log(`Fixed ${errors.length} TS2304 errors in ${filePath}`, 'success');
+        } catch (writeError) {
+          this.log(`Failed to write file ${filePath}: ${writeError.message}`, 'error');
+          return false;
+        }
       }
 
       return modified;

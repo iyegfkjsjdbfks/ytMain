@@ -14,6 +14,17 @@ const projectRoot = join(__dirname, '..');
 
 class TS6133Fixer {
   log(msg) { console.log(`🧹 ${msg}`); }
+
+  normalizeFilePath(filePath) {
+    // Normalize path separators and make relative to project root
+    const normalized = filePath.replace(/\\/g, '/');
+    const projectRootNormalized = projectRoot.replace(/\\/g, '/');
+
+    if (normalized.startsWith(projectRootNormalized)) {
+      return normalized.substring(projectRootNormalized.length + 1);
+    }
+    return normalized;
+  }
   getCount() {
     try {
       const run = () => {
@@ -47,10 +58,11 @@ class TS6133Fixer {
         if (match) {
           // Convert absolute path to relative from project root
           const fullPath = match[1].trim();
-          return fullPath.replace(projectRoot + '/', '').replace(projectRoot + '\\', '');
+          return this.normalizeFilePath(fullPath);
         }
         // Fallback for other formats
-        return line.split(':')[0].replace(projectRoot + '/', '').replace(projectRoot + '\\', '');
+        const filePath = line.split(':')[0];
+        return this.normalizeFilePath(filePath);
       });
     } catch { return []; }
   }
@@ -64,8 +76,16 @@ class TS6133Fixer {
 
     for (const file of files) {
       const full = join(projectRoot, file);
-      let content = readFileSync(full, 'utf8');
-      let modified = false;
+
+      try {
+        // Check if file exists
+        if (!require('fs').existsSync(full)) {
+          this.log(`File not found: ${file}`);
+          continue;
+        }
+
+        let content = readFileSync(full, 'utf8');
+        let modified = false;
 
       // Remove unused React import when not needed
       if (/['\"]react['\"]/.test(content) && /import\s+React\s+from\s+['\"]react['\"];?/.test(content)) {
@@ -76,15 +96,39 @@ class TS6133Fixer {
         }
       }
 
-      // Remove unused named imports from braces
-      content = content.replace(/import\s+\{([^}]+)\}\s+from\s+['\"][^'\"]+['\"];?/g, (match, names) => {
-        const used = names.split(',').map(n => n.trim()).filter(n => n && new RegExp(`\\b${n.split(' as ')[1] || n.split(' as ')[0]}\\b`).test(content.replace(match, '')));
-        if (used.length === 0) { modified = true; return ''; }
-        if (used.join(', ') !== names.replace(/\s+/g, ' ').trim()) { modified = true; return `import { ${used.join(', ')} } from` + match.split('from')[1]; }
-        return match;
-      });
+        // Remove unused named imports from braces (more conservative approach)
+        content = content.replace(/import\s+\{([^}]+)\}\s+from\s+['\"][^'\"]+['\"];?\n?/g, (match, names) => {
+          try {
+            const importNames = names.split(',').map(n => n.trim()).filter(Boolean);
+            const usedNames = importNames.filter(name => {
+              // Handle 'as' aliases
+              const actualName = name.includes(' as ') ? name.split(' as ')[1].trim() : name.trim();
+              // Check if the name is used in the rest of the content (excluding this import line)
+              const contentWithoutImport = content.replace(match, '');
+              return new RegExp(`\\b${actualName}\\b`).test(contentWithoutImport);
+            });
 
-      if (modified) writeFileSync(full, content);
+            if (usedNames.length === 0) {
+              modified = true;
+              return ''; // Remove entire import
+            }
+            if (usedNames.length !== importNames.length) {
+              modified = true;
+              return `import { ${usedNames.join(', ')} } from` + match.split('from')[1];
+            }
+            return match; // No changes needed
+          } catch (regexError) {
+            // If regex processing fails, keep the original import to be safe
+            return match;
+          }
+        });
+
+        if (modified) {
+          writeFileSync(full, content);
+        }
+      } catch (error) {
+        this.log(`Error processing ${file}: ${error.message}`);
+      }
     }
 
     const final = this.getCount();

@@ -129,8 +129,14 @@ class TS7019Fixer {
 
   fixFile(filePath, errors) {
     const fullPath = join(projectRoot, filePath);
-    
+
     try {
+      // Check if file exists
+      if (!require('fs').existsSync(fullPath)) {
+        this.log(`File not found: ${filePath}`, 'warning');
+        return false;
+      }
+
       let content = readFileSync(fullPath, 'utf8');
       let modified = false;
 
@@ -153,9 +159,14 @@ class TS7019Fixer {
       }
 
       if (modified) {
-        writeFileSync(fullPath, content);
-        this.fixedFiles.add(filePath);
-        this.log(`Fixed rest parameter types in ${filePath}`, 'success');
+        try {
+          writeFileSync(fullPath, content);
+          this.fixedFiles.add(filePath);
+          this.log(`Fixed rest parameter types in ${filePath}`, 'success');
+        } catch (writeError) {
+          this.log(`Failed to write file ${filePath}: ${writeError.message}`, 'error');
+          return false;
+        }
       }
 
       return modified;

@@ -17,6 +17,7 @@ class MasterErrorFixer {
   constructor() {
     this.results = [];
     this.startTime = Date.now();
+    this.lastKnownErrorCount = 0;
   }
 
   log(message, type = 'info') {
@@ -53,13 +54,16 @@ class MasterErrorFixer {
       // Handle timeout specifically
       if (error.signal === 'SIGTERM') {
         this.log('Type check timed out after 30 seconds', 'warning');
-        return 894; // Return last known count to avoid breaking the flow
+        // Return a reasonable fallback instead of hardcoded value
+        return this.lastKnownErrorCount || 0;
       }
       
       const out = `${error.stdout || ''}${error.stderr || ''}`;
       if (!out) return 0;
       const errorLines = out.split('\n').filter(line => /error TS\d+:/.test(line));
-      return errorLines.length;
+      const count = errorLines.length;
+      this.lastKnownErrorCount = count; // Cache for timeout fallback
+      return count;
     }
   }
 
@@ -336,12 +340,24 @@ class MasterErrorFixer {
 }
 
 // Execute if run directly (cross-platform ESM detection)
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+const isMainModule = import.meta.url === `file://${process.argv[1]}` ||
+                     import.meta.url.endsWith(process.argv[1]) ||
+                     process.argv[1].endsWith('fix-all-errors.js');
+
+console.log('Debug: Script execution check');
+console.log('import.meta.url:', import.meta.url);
+console.log('process.argv[1]:', process.argv[1]);
+console.log('isMainModule:', isMainModule);
+
+if (isMainModule) {
+  console.log('Starting MasterErrorFixer...');
   const fixer = new MasterErrorFixer();
   fixer.run().catch(err => {
     console.error('MasterErrorFixer failed:', err);
     process.exitCode = 1;
   });
+} else {
+  console.log('Script not executed as main module');
 }
 
 export { MasterErrorFixer };

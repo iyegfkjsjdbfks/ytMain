@@ -65,8 +65,16 @@ class TS2300Fixer {
 
   fixFile(filePath) {
     const fullPath = join(projectRoot, filePath);
-    let content = readFileSync(fullPath, 'utf8');
-    let modified = false;
+
+    try {
+      // Check if file exists
+      if (!require('fs').existsSync(fullPath)) {
+        this.log(`File not found: ${filePath}`, 'warning');
+        return false;
+      }
+
+      let content = readFileSync(fullPath, 'utf8');
+      let modified = false;
 
     // Remove duplicated React imports
     const reactImportRegex = /import\s+React\s+from\s+['"]react['"];?/g;
@@ -97,10 +105,21 @@ class TS2300Fixer {
       newContent += line + '\n';
     }
 
-    if (modified) {
-      writeFileSync(fullPath, newContent);
-      this.modifiedFiles.add(filePath);
-      this.log(`De-duplicated imports in ${filePath}`, 'success');
+      if (modified) {
+        try {
+          writeFileSync(fullPath, newContent);
+          this.modifiedFiles.add(filePath);
+          this.log(`De-duplicated imports in ${filePath}`, 'success');
+        } catch (writeError) {
+          this.log(`Failed to write file ${filePath}: ${writeError.message}`, 'error');
+          return false;
+        }
+      }
+
+      return modified;
+    } catch (error) {
+      this.log(`Error processing ${filePath}: ${error.message}`, 'error');
+      return false;
     }
   }
 
