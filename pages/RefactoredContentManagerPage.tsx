@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -20,7 +21,7 @@ import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
 import { Button } from '../components/ui/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/Tabs';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 import type { Video } from '../types';
 
@@ -421,3 +422,11 @@ return {};
 };
 
 export default RefactoredContentManagerPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

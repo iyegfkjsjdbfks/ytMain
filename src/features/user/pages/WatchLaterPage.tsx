@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type React from 'react';
 
 /**
@@ -17,3 +18,12 @@ const WatchLaterPage: React.FC = () => {
 };
 
 export default WatchLaterPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

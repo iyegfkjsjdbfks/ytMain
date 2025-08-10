@@ -28,7 +28,7 @@ interface SortFilterPanelProps {
   disabled?: boolean;
 }
 
-const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }) => {
+const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }: {disabled: boolean}: {onSortChange: Function}: {currentSortBy: any}) => {
   const [showPanel, setShowPanel] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);

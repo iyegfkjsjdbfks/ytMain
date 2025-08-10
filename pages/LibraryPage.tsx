@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useEffect, useState  } from 'react';
 
@@ -33,7 +34,7 @@ interface SectionProps {
   isPlaylistSection?: boolean;
 }
 
-const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, children, itemCount, isLoading, hasContent, emptyMessage, isPlaylistSection }) => {
+const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, children, itemCount, isLoading, hasContent, emptyMessage, isPlaylistSection }: {isPlaylistSection: boolean}: {emptyMessage: any}: {hasContent: boolean}: {isLoading: boolean}: {itemCount: number}: {children: any}: {viewAllLink: any}: {icon: any}: {title: string}) => {
   const renderSkeletonItems = () => {
     const numSkeletons = isPlaylistSection ? (itemCount || 4) : (itemCount || MAX_HORIZONTAL_VIDEOS / 2);
     return Array.from({ length: numSkeletons }).map((_, index) => (
@@ -254,3 +255,11 @@ function LibraryPage() { // Removed React.FC
 }
 
 export default LibraryPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

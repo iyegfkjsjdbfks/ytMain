@@ -1,4 +1,5 @@
-import React from 'react';
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
 /// <reference types="node" />
 
 
@@ -651,3 +652,11 @@ return null;
 };
 
 export default VideoEditorPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

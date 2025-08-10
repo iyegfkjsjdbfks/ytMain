@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
@@ -27,7 +28,7 @@ interface CommentItemProps {
   };
 }
 
-const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
+const CommentItem = memo<CommentItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
   const { comments, onReply, onLike, onDislike } = data;
   const comment = comments[index];
 
@@ -148,3 +149,11 @@ const VirtualizedCommentList = memo<VirtualizedCommentListProps>(({
 VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 
 export default VirtualizedCommentList;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

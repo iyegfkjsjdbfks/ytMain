@@ -1,3 +1,5 @@
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
 // TODO: Fix import - import type { FC } from 'react';
 
 interface LoadingSpinnerProps {
@@ -25,3 +27,11 @@ const LoadingSpinner: FC<LoadingSpinnerProps> = ({
 };
 
 export default LoadingSpinner;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

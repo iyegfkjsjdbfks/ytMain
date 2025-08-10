@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type { ReactNode } from 'react';
 
 // TODO: Fix import - import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
@@ -90,3 +91,12 @@ export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
 };
 
 export default RefactoredAppProviders;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

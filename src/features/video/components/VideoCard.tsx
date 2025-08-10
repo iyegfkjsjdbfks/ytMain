@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { Link } from 'react-router-dom';
 
@@ -243,3 +244,12 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({
 });
 
 export default VideoCard;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

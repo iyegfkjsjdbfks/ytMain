@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import * as React from 'react';
 // TODO: Fix import - import {  useState, useMemo, useCallback, Suspense  } from 'react';
 
@@ -36,7 +37,7 @@ const categories = [
   'Food',
 ];
 
-const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
+const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {className: any}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({
@@ -251,3 +252,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
 };
 
 export default OptimizedHomePage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

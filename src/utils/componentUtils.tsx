@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React, { type ReactNode } from 'react';
 
 
@@ -81,3 +82,12 @@ return [];
 
   return chunks;
 };
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

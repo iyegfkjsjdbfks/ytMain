@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type React from 'react';
 
 interface AdvancedLiveChatProps {
@@ -7,7 +8,7 @@ interface AdvancedLiveChatProps {
   isModerator?: boolean;
 }
 
-const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }) => {
+const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }: {isModerator: boolean}: {isOwner: boolean}: {className: any}: {streamId: string}) => {
   return (
     <div className={className}>
       <div className="p-4">
@@ -23,3 +24,11 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className
 };
 
 export default AdvancedLiveChat;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

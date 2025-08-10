@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState, useEffect  } from 'react';
 
@@ -103,7 +104,7 @@ const YourDataPage: React.FC = () => {
     onToggleVisibility: () => void;
     onClear: () => void;
     loading: boolean;
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading: boolean}: {onClear: Function}: {onToggleVisibility: Function}: {isVisible: boolean}: {count: number}: {description: string}: {title: string}) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
@@ -227,3 +228,11 @@ const YourDataPage: React.FC = () => {
 };
 
 export default YourDataPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

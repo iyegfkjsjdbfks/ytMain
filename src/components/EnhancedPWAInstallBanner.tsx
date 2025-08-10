@@ -1,4 +1,6 @@
 
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
 // TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
 
 // TODO: Fix import - import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';
@@ -428,3 +430,11 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 };
 
 export default EnhancedPWAInstallBanner;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

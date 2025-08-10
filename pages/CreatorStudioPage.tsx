@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -11,11 +12,11 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
+// TODO: Fix import - import React from 'react';
 
 // TODO: Fix import - import { useState, useEffect } from 'react';
 
 import {
-import React from 'react';
   UserGroupIcon,
   ChartBarIcon,
   LightBulbIcon,
@@ -523,3 +524,11 @@ const CreatorStudioPage: React.FC = () => {
 };
 
 export default CreatorStudioPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useEffect  } from 'react';
 // TODO: Fix import - import type * as React from 'react';
@@ -44,3 +45,12 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

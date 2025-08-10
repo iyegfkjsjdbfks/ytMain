@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { BrowserRouter } from 'react-router-dom';
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -61,7 +62,7 @@ export const renderWithProviders = (
   }), ...renderOptions } = options || {};
 
   return render(ui, {
-    wrapper: ({ children }) => (
+    wrapper: ({ children }: {children: any}) => (
       <TestWrapper queryClient={queryClient}>
         {children}
       </TestWrapper>
@@ -269,3 +270,11 @@ export const performanceBenchmarks = {
 };
 
 export { screen, fireEvent, waitFor, userEvent };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

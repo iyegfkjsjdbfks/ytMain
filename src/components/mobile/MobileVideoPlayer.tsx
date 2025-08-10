@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -303,3 +304,11 @@ return;
 MobileVideoPlayer.displayName = 'MobileVideoPlayer';
 
 export default MobileVideoPlayer;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

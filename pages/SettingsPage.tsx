@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type * as React from 'react';
 // TODO: Fix import - import {  useState  } from 'react';
 
@@ -7,7 +8,7 @@
 
 import { useTheme } from '../contexts/ThemeContext';
 
-const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }: {children: any}: {title: string}) => (
   <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
     <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
     <div className="space-y-4">
@@ -21,7 +22,7 @@ const ToggleSetting: React.FC<{
   description?: string;
   checked: boolean;
   onChange: (checked) => void;
-}> = ({ label, description, checked, onChange }) => (
+}> = ({ label, description, checked, onChange }: {onChange: Function}: {checked: any}: {description: string}: {label: any}) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
       <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -53,7 +54,7 @@ const SelectSetting: React.FC<{
   value: string;
   options: string;
   onChange: (value) => void
-}> = ({ label, value, options, onChange }) => (
+}> = ({ label, value, options, onChange }: {onChange: Function}: {options: any}: {value: any}: {label: any}) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
       {label}
@@ -244,3 +245,11 @@ const SettingsPage: React.FC = () => {
 };
 
 export default SettingsPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

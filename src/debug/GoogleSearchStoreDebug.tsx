@@ -1,4 +1,5 @@
 
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { useState, useEffect, type FC } from 'react';
 // TODO: Fix import - import React from "react";
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
@@ -193,3 +194,12 @@ const GoogleSearchStoreDebug: FC = () => {
 };
 
 export default GoogleSearchStoreDebug;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

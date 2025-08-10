@@ -1,5 +1,6 @@
+/// <reference types="react/jsx-runtime" />
 import type { Video } from '../types/core';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 
 declare namespace React {
@@ -75,3 +76,11 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 };
 
 export default YouTubePlayer;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

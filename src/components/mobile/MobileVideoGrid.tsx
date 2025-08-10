@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
@@ -24,7 +25,7 @@ interface MobileVideoItemProps {
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -210,3 +211,11 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
 MobileVideoGrid.displayName = 'MobileVideoGrid';
 
 export default MobileVideoGrid;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

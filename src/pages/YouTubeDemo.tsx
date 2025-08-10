@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { ErrorBoundary } from 'react-error-boundary';
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState  } from 'react';
@@ -176,3 +177,12 @@ const YouTubeDemoWithErrorBoundary = () => (
 );
 
 export default YouTubeDemoWithErrorBoundary;;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

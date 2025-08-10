@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState, useEffect  } from 'react';
 // TODO: Fix import - import type * as React from 'react';
@@ -18,11 +19,11 @@ import { ChartBarIcon,
   TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer = ({ children, width, height }) => (
+const ResponsiveContainer = ({ children, width, height }: {height: number}: {width: number}: {children: any}) => (
   <div style={{ width, height }}>{children}</div>
 );
-const PieChart = ({ children }) => <div className="flex items-center justify-center h-full">{children}</div>;
-const Pie = ({ data }) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
+const PieChart = ({ children }: {children: any}) => <div className="flex items-center justify-center h-full">{children}: {children: any}</div>;
+const Pie = ({ data }: {data: any}) => <div className="text-center">Chart Data: {data?.length || 0}: {data: any} items</div>;
 const Cell = (_props) => null;
 const Tooltip = (_props) => null;
 const Legend = (_props) => null;
@@ -568,3 +569,11 @@ return `${(num / 1000).toFixed(1)  }K`;
 };
 
 export default DashboardPage;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

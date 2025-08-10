@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useParams } from 'react-router-dom';
 // TODO: Fix import - import type React from 'react';
@@ -23,3 +24,12 @@ const ChannelPage: React.FC = () => {
 };
 
 export default ChannelPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

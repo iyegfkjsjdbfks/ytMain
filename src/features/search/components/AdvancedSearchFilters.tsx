@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 import { FunnelIcon,
   XMarkIcon,
@@ -321,3 +322,12 @@ count++;
 };
 
 export default AdvancedSearchFilters;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { memo, useState } from 'react';
 // TODO: Fix import - import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -334,3 +335,12 @@ export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(({
 UnifiedVideoCard.displayName = 'UnifiedVideoCard';
 
 export default UnifiedVideoCard;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

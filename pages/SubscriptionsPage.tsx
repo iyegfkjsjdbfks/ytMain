@@ -1,5 +1,6 @@
 
 
+/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -12,11 +13,11 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
+// TODO: Fix import - import React from 'react';
 
 // TODO: Fix import - import { useEffect, useState, useMemo } from 'react';
 
 import {
-import React from 'react';
   ViewColumnsIcon,
   Bars3Icon,
   AdjustmentsHorizontalIcon,
@@ -361,3 +362,12 @@ return [];
 };
 
 export default SubscriptionsPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

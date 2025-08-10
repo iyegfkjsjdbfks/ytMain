@@ -18,7 +18,7 @@ interface SearchSuggestionsProps {
   isVisible: boolean;
 }
 
-const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }) => {
+const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }: {isVisible: boolean}: {onSuggestionClick: Function}: {suggestions: any}) => {
   if (!isVisible || suggestions.length === 0) {
     return null;
   }

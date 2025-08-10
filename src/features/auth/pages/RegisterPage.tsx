@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import type React from 'react';
 // TODO: Fix import - import React from "react";
 import { RegisterForm } from '../components/RegisterForm';
@@ -33,3 +34,12 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

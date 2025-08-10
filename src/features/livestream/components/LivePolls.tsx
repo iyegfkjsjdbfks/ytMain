@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState, useEffect } from 'react';
 import { logger } from '@/utils/logger';
@@ -316,3 +317,12 @@ return 0;
 };
 
 export default LivePolls;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

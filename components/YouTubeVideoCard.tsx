@@ -24,7 +24,7 @@ interface YouTubeVideoCardProps {
   className?: string;
 }
 
-const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }) => {
+const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }: {video: any}) => {
   const navigate = useNavigate();
 
   // Extract video ID from the video object

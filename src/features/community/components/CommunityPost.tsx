@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useState } from 'react';
 // TODO: Fix import - import type * as React from 'react';
@@ -324,3 +325,12 @@ return `${(count / 1000).toFixed(1)}K`;
 };
 
 export default CommunityPost;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

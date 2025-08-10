@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from "react";
 // TODO: Fix import - import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
@@ -711,3 +712,12 @@ const WatchPage: React.FC = () => {
 };
 
 export default WatchPage;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
