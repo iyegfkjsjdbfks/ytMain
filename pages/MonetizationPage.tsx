@@ -12,7 +12,7 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 // TODO: Fix import - import { useState, useEffect, memo, lazy, Suspense } from 'react';
 

@@ -18,7 +18,7 @@ declare namespace React {
 // TODO: Fix import - import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import CommunityPage from '../../pages/CommunityPage';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 // Mock the hooks
 vi.mock('@hooks/useRefactoredHooks', () => ({

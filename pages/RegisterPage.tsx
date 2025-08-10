@@ -22,7 +22,7 @@ import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
 import YouTubeLogo from '../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');

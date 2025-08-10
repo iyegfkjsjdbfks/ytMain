@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 // TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
 
 // TODO: Fix import - import { X, Download, Smartphone, Wifi, WifiOff, Star, Zap, Shield } from 'lucide-react';

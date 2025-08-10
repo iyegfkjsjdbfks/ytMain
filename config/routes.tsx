@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 // TODO: Fix import - import { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';

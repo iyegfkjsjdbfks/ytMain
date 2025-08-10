@@ -21,7 +21,7 @@ declare namespace React {
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 import type { Video } from '../types';
 

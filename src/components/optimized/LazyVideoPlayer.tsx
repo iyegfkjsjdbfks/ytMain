@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 // TODO: Fix import - import { lazy, Suspense, memo } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
 import type { Video } from '../../types/core';

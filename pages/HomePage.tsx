@@ -20,7 +20,7 @@ import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
 import type { Video } from '../types';
 
