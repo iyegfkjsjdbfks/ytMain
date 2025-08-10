@@ -176,7 +176,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification: any) => {
+  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification) => {
     if (filter === 'unread' && notification.isRead) {
 return false;
 }
@@ -292,7 +292,7 @@ return false;
             <div className="mt-3">
               <select
                 value={selectedCategory}
-                onChange={(e: Event) => setSelectedCategory(e: Event.target.value)}
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm"
               >
                 {categories.map((category) => (
@@ -312,7 +312,7 @@ return false;
               </div>
             ) : filteredNotifications.length > 0 ? (
               <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredNotifications.map((notification: any) => (
+                {filteredNotifications.map((notification) => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}

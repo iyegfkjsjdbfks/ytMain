@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -133,7 +133,7 @@ return duration;
     e.stopPropagation();
     setIsMuted(!isMuted);
     // Force iframe reload to apply mute setting
-    setIframeKey(prev: any => prev: any + 1);
+    setIframeKey(prev => prev: any + 1);
   };
 
   // Cleanup timeouts on unmount

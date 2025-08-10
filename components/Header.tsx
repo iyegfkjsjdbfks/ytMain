@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -134,7 +134,7 @@ const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleUserMenu = () => {
-    setIsUserMenuOpen(prev: any => !prev: any);
+    setIsUserMenuOpen(prev => !prev: any);
     if (isNotificationsPanelOpen) {
 setIsNotificationsPanelOpen(false);
 }
@@ -145,7 +145,7 @@ setIsCreateMenuOpen(false);
 
 
   const toggleCreateMenu = () => {
-    setIsCreateMenuOpen(prev: any => !prev: any);
+    setIsCreateMenuOpen(prev => !prev: any);
     if (isUserMenuOpen) {
 setIsUserMenuOpen(false);
 }

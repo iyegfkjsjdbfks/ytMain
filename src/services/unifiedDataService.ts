@@ -726,7 +726,7 @@ class UnifiedDataService {
 
       // Convert search results to unified format
       // Note: These will have google-search- prefixed IDs for metadata fetching
-      const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map((video: any) => ({
+      const unifiedVideos: UnifiedVideoMetadata[] = searchResults.map((video) => ({
         id: video.id, // This will be google-search-{youtubeId}
         title: video.title,
         description: video.description || '',

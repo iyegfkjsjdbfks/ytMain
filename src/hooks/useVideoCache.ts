@@ -50,11 +50,11 @@ return;
 }
 
           if (entry.isIntersecting) {
-            setVisibleVideos(prev: any => new Set([...prev: any, videoId]));
+            setVisibleVideos(prev => new Set([...prev, videoId]));
             // Prefetch video data when it becomes visible
             prefetchVideo(videoId);
           } else {
-            setVisibleVideos(prev: any => {
+            setVisibleVideos(prev => {
               const newSet = new Set(prev);
               newSet.delete(videoId);
               return newSet;
@@ -150,7 +150,7 @@ throw new Error('Failed to fetch video');
       totalCached: videoQueries.length,
       visibleCount: visibleVideos.size,
       observedCount: observedElements.current.size,
-      cacheSize: videoQueries.reduce((size: any, query: any) => {
+      cacheSize: videoQueries.reduce((size: any, query) => {
         const { data } = query.state;
         return size + (data ? JSON.stringify(data).length : 0);
       }, 0),

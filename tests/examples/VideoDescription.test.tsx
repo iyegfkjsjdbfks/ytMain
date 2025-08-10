@@ -580,7 +580,7 @@ describe('VideoDescription Component', () => {
       );
 
       const links = screen.getAllByRole('link');
-      links.forEach(link: any => {
+      links.forEach(link => {
         expect(link).toHaveAttribute('rel', 'noopener noreferrer');
         expect(link).toHaveAttribute('target', '_blank');
       });

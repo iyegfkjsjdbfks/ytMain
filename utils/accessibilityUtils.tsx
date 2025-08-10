@@ -74,11 +74,11 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   }, [fontSize]);
 
   const addAnnouncement = useCallback((message: string) => {
-    setAnnouncements(prev: any => [...prev: any, message]);
+    setAnnouncements(prev => [...prev, message]);
 
     // Auto-clear announcement after 5 seconds
     setTimeout(() => {
-      setAnnouncements(prev: any => prev: any.filter((msg: any) => msg !== message));
+      setAnnouncements(prev => prev.filter((msg) => msg !== message));
     }, 5000);
   }, []);
 
@@ -402,12 +402,12 @@ export function useAccessibleForm() {
   const { addAnnouncement } = useAccessibility();
 
   const setFieldError = useCallback((fieldName: string, error: string) => {
-    setErrors(prev: any => ({ ...prev: any, [fieldName]: error }));
+    setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
   const clearFieldError = useCallback((fieldName: string) => {
-    setErrors(prev: any => {
+    setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
       return newErrors;
@@ -581,8 +581,8 @@ export function runAccessibilityAudit(element: HTMLElement): {
     }
   });
 
-  const errorCount = issues.filter((issue: any) => issue.type === 'error').length;
-  const warningCount = issues.filter((issue: any) => issue.type === 'warning').length;
+  const errorCount = issues.filter((issue) => issue.type === 'error').length;
+  const warningCount = issues.filter((issue) => issue.type === 'warning').length;
 
   // Calculate score (0-100)
   const score = Math.max(0, 100 - (errorCount * 10) - (warningCount * 5));

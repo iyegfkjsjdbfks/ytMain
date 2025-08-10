@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -52,9 +52,9 @@ interface YouTubePlayerProps {
   autoplay?: boolean;
   controls?: boolean;
   className?: string;
-  onReady?: (event: any) => void;
-  onStateChange?: (event: any) => void;
-  onError?: (event: any) => void;
+  onReady?: (event) => void;
+  onStateChange?: (event) => void;
+  onError?: (event) => void;
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -190,7 +190,7 @@ return;
           // Remove widget_referrer as it might cause origin issues
         },
         events: {
-          onReady: (event: any) => {
+          onReady: (event) => {
             if (isMounted) {
               setIsPlayerReady(true);
               setPlayerError(null);
@@ -230,7 +230,7 @@ return;
               }
             }
           },
-          onStateChange: (event: any) => {
+          onStateChange: (event) => {
             // Handle state changes if needed
             console.log('YouTube player state changed:', event.data);
 
@@ -268,11 +268,11 @@ return;
               }, 1000);
             }
           },
-          onError: (event: any) => {
+          onError: (event) => {
             if (!isMounted) {
 return;
 }
-            const errorMessages: { [key: number]: string } = {
+            const errorMessages: { [key]: string } = {
               2: 'Invalid video ID',
               5: 'HTML5 player error',
               100: 'Video not found or private',

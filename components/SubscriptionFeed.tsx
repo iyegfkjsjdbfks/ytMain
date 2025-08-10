@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -46,7 +46,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
 
         // Filter videos from subscribed channels and sort by upload date
         const subscriptionFeed = allVideos
-          .filter((video: any) => subscribedChannels.includes(video.channelName) && !video.isShort)
+          .filter((video) => subscribedChannels.includes(video.channelName) && !video.isShort)
           .sort((a, b) => {
             // Sort by most recent (this is a simple mock - in reality you'd parse actual dates)
             const timeA = a.uploadedAt.includes('hour') ? 1 :
@@ -147,7 +147,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {subscriptionVideos.map(video: any => (
+        {subscriptionVideos.map(video => (
           <VideoCard key={video.id} video={video} />
         ))}
       </div>

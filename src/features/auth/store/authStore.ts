@@ -21,13 +21,13 @@ interface AuthStore extends AuthState {
  * Replaces the previous context-based approach with a more
  * efficient and easier to use state management solution
  */
-export const useAuthStore = create<AuthStore>((set: any) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   isAuthenticated: false,
   isLoading: true,
   error: null,
 
-  setUser: (user: any) => set({
+  setUser: (user) => set({
     user,
     isAuthenticated: !!user,
     error: null,
@@ -35,9 +35,9 @@ export const useAuthStore = create<AuthStore>((set: any) => ({
 
   setError: (error: Error) => set({ error: Error }),
 
-  setLoading: (isLoading: any) => set({ isLoading: any }),
+  setLoading: (isLoading) => set({ isLoading: any }),
 
-  login: async (credentials: any) => {
+  login: async (credentials) => {
     set({ isLoading: true, error: null });
 
     try {
@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthStore>((set: any) => ({
     }
   },
 
-  register: async (data: any) => {
+  register: async (data) => {
     set({ isLoading: true, error: null });
 
     try {

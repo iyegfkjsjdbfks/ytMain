@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -42,14 +42,14 @@ const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose
 return null;
 }
 
-  const hasNewNotifications = notifications.some(n: any => n: any.isNew);
+  const hasNewNotifications = notifications.some(n => n.isNew);
 
   const markAllAsRead = () => {
-    setNotifications(prev: any => prev: any.map(notification: any => ({ ...notification: any, isNew: false })));
+    setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
   };
 
   const markAsRead = (id: string) => {
-    setNotifications(prev: any => prev: any.map(notification: any =>
+    setNotifications(prev => prev.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));
   };
@@ -77,7 +77,7 @@ return null;
       <div className="flex-grow overflow-y-auto max-h-[calc(100vh-12rem)] p-1.5">
         {notifications.length > 0 ? (
           <ul className="space-y-1">
-            {notifications.map((notification: any) => (
+            {notifications.map((notification) => (
               <li key={notification.id}>
                 <button
                   onClick={() => {

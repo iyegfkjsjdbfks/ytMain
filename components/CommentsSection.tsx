@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -167,7 +167,7 @@ return 0;
             <div className="space-y-2">
               <textarea
                 value={editText}
-                onChange={(e: Event) => setEditText(e: Event.target.value)}
+                onChange={(e) => setEditText(e.target.value)}
                 className="w-full p-2 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 resize-none"
                 rows={3}
                 maxLength={maxCommentLength}
@@ -316,7 +316,7 @@ return 0;
                   ref={replyInputRef}
                   type="text"
                   value={currentReplyText}
-                  onChange={(e: Event) => onSetCurrentReplyText(e: Event.target.value)}
+                  onChange={(e) => onSetCurrentReplyText(e.target.value)}
                   placeholder={`Replying to ${comment.userName}...`}
                   className="bg-transparent border-b border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-sky-500 w-full py-1.5 outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm transition-colors"
                   maxLength={maxCommentLength + 20}
@@ -356,7 +356,7 @@ return 0;
           {!isReply && comment.replies && comment.replies.length > 0 && (
             <div className="mt-3">
               <button
-                onClick={() => onSetExpandedReplies(prev: any => ({ ...prev: any, [comment.id]: !prev: any[comment.id] }))}
+                onClick={() => onSetExpandedReplies(prev => ({ ...prev, [comment.id]: !prev[comment.id] }))}
                 className="flex items-center text-xs font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 rounded-full px-2 py-1 hover:bg-sky-50 dark:hover:bg-sky-500/10 mb-1"
               >
                 {expandedReplies[comment.id] ?

@@ -12,7 +12,7 @@ interface UseFormStateReturn<T> {
   errors: Partial<Record<keyof T, string>>;
   isSubmitting: boolean;
   isValid: boolean;
-  setValue: (field: keyof T, value: any) => void;
+  setValue: (field: keyof T, value) => void;
   setValues: (values: Partial<T>) => void;
   setError: (field: keyof T, error: string) => void;
   clearError: (field: keyof T) => void;
@@ -33,11 +33,11 @@ export function useFormState<T extends Record<string, any>>({
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const setValue = useCallback((field: keyof T, value: any) => {
-    setValuesState(prev: any => ({ ...prev: any, [field]: value }));
+  const setValue = useCallback((field: keyof T, value) => {
+    setValuesState(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev: any => {
+      setErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[field];
         return newErrors;
@@ -46,15 +46,15 @@ export function useFormState<T extends Record<string, any>>({
   }, [errors]);
 
   const setValues = useCallback((newValues: Partial<T>) => {
-    setValuesState(prev: any => ({ ...prev: any, ...newValues }));
+    setValuesState(prev => ({ ...prev, ...newValues }));
   }, []);
 
   const setError = useCallback((field: keyof T, error: string) => {
-    setErrors(prev: any => ({ ...prev: any, [field]: error }));
+    setErrors(prev => ({ ...prev, [field]: error }));
   }, []);
 
   const clearError = useCallback((field: keyof T) => {
-    setErrors(prev: any => {
+    setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[field];
       return newErrors;

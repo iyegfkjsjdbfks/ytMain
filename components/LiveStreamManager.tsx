@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -92,7 +92,7 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track: any => track: any.stop());
+        stream.getTracks().forEach(track => track.stop());
       }
       if (statsInterval.current) {
 clearInterval(statsInterval.current);
@@ -153,7 +153,7 @@ clearInterval(chatInterval.current);
 
     // Start stats tracking
     statsInterval.current = setInterval(() => {
-      setStats(prev: any => {
+      setStats(prev => {
         const newViewers = Math.floor(Math.random() * 50) + prev.viewers + (Math.random() > 0.7 ? 1 : -1);
         const viewers = Math.max(0, newViewers);
         const duration = Math.floor((Date.now() - streamStartTime.current) / 1000);
@@ -181,7 +181,7 @@ clearInterval(chatInterval.current);
   const pauseStream = () => {
     setIsPaused(!isPaused);
     if (stream) {
-      stream.getVideoTracks().forEach(track: any => {
+      stream.getVideoTracks().forEach(track => {
         track.enabled = isPaused;
       });
     }
@@ -192,7 +192,7 @@ clearInterval(chatInterval.current);
     setIsPaused(false);
 
     if (stream) {
-      stream.getTracks().forEach(track: any => track: any.stop());
+      stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
 
@@ -211,7 +211,7 @@ clearInterval(chatInterval.current);
 
   const toggleAudio = () => {
     if (stream) {
-      stream.getAudioTracks().forEach(track: any => {
+      stream.getAudioTracks().forEach(track => {
         track.enabled = !audioEnabled;
       });
       setAudioEnabled(!audioEnabled);
@@ -220,7 +220,7 @@ clearInterval(chatInterval.current);
 
   const toggleVideo = () => {
     if (stream) {
-      stream.getVideoTracks().forEach(track: any => {
+      stream.getVideoTracks().forEach(track => {
         track.enabled = !videoEnabled;
       });
       setVideoEnabled(!videoEnabled);
@@ -261,8 +261,8 @@ clearInterval(chatInterval.current);
       }),
     };
 
-    setChatMessages(prev: any => [...prev: any.slice(-49), newMessage]);
-    setStats(prev: any => ({
+    setChatMessages(prev => [...prev.slice(-49), newMessage]);
+    setStats(prev => ({
       ...prev,
       messages: prev.messages + 1,
       totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0),
@@ -283,8 +283,8 @@ return;
       isOwner: true,
     };
 
-    setChatMessages(prev: any => [...prev: any.slice(-49), message]);
-    setStats(prev: any => ({ ...prev: any, messages: prev: any.messages + 1 }));
+    setChatMessages(prev => [...prev.slice(-49), message]);
+    setStats(prev => ({ ...prev, messages: prev.messages + 1 }));
     setNewMessage('');
   };
 
@@ -454,7 +454,7 @@ return;
                       id="stream-title"
                       type="text"
                       value={settings.title}
-                      onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev, title: e.target.value }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Enter stream title"
                     />
@@ -467,7 +467,7 @@ return;
                     <select
                       id="stream-category"
                       value={settings.category}
-                      onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev, category: e.target.value }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       {categories.map(category => (
@@ -483,7 +483,7 @@ return;
                     <select
                       id="stream-privacy"
                       value={settings.privacy}
-                      onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, privacy: e: Event.target.value as 'public' | 'unlisted' | 'private' }))}
+                      onChange={(e) => setSettings(prev => ({ ...prev, privacy: e.target.value as 'public' | 'unlisted' | 'private' }))}
                       className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="public">Public</option>
@@ -498,7 +498,7 @@ return;
                         id="enable-chat"
                         type="checkbox"
                         checked={settings.enableChat}
-                        onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, enableChat: e: Event.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev, enableChat: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Chat</span>
@@ -509,7 +509,7 @@ return;
                         id="enable-donations"
                         type="checkbox"
                         checked={settings.enableDonations}
-                        onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, enableDonations: e: Event.target.checked }))}
+                        onChange={(e) => setSettings(prev => ({ ...prev, enableDonations: e.target.checked }))}
                         className="rounded border-neutral-300 dark:border-neutral-600 text-blue-600 focus:ring-blue-500"
                       />
                       <span className="text-sm text-neutral-700 dark:text-neutral-300">Enable Donations</span>
@@ -524,7 +524,7 @@ return;
                   <textarea
                     id="stream-description"
                     value={settings.description}
-                    onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
+                    onChange={(e) => setSettings(prev => ({ ...prev, description: e.target.value }))}
                     rows={3}
                     className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Describe your stream..."
@@ -583,7 +583,7 @@ return;
                       No messages yet. Start the conversation!
                     </p>
                   ) : (
-                    chatMessages.map((message: any) => (
+                    chatMessages.map((message) => (
                       <div key={message.id} className="flex items-start space-x-2">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2">
@@ -618,7 +618,7 @@ return;
                     <input
                       type="text"
                       value={newMessage}
-                      onChange={(e: Event) => setNewMessage(e: Event.target.value)}
+                      onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={(e: Event) => e: Event.key === 'Enter' && sendChatMessage()}
                       placeholder="Type a message..."
                       className="flex-1 px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"

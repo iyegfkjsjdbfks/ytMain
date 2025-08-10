@@ -284,7 +284,7 @@ export const useVideoAnalytics = (videoId?: string) => {
 
   const trackComplete = useCallback((duration: number) => {
     const totalWatchTime = watchedSegments.current.reduce(
-      (total: any, segment: any) => total: any + (segment: any.end - segment: any.start),
+      (total: any, segment) => total: any + (segment.end - segment.start),
       0,
     );
 

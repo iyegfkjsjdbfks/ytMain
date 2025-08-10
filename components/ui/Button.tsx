@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -76,7 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
     className = '',
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   const isDisabled = disabled || loading;
 
@@ -136,7 +136,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((
     className,
     ...props
   },
-  ref: any,
+  ref,
 ) => {
   return (
     <Button

@@ -83,7 +83,7 @@ export const LiveStreamStudio: React.FC = () => {
     let interval: NodeJS.Timeout;
     if (isStreaming) {
       interval = setInterval(() => {
-        setStats(prev: any => ({
+        setStats(prev => ({
           ...prev,
           duration: prev.duration + 1,
           viewers: Math.max(0, prev.viewers + Math.floor(Math.random() * 3) - 1),
@@ -132,13 +132,13 @@ export const LiveStreamStudio: React.FC = () => {
     }
 
     setIsStreaming(true);
-    setStats(prev: any => ({ ...prev: any, duration: 0 }));
+    setStats(prev => ({ ...prev, duration: 0 }));
   };
 
   const stopStream = () => {
     setIsStreaming(false);
     if (stream) {
-      stream.getTracks().forEach(track: any => track: any.stop());
+      stream.getTracks().forEach(track => track.stop());
       setStream(null);
     }
     setIsPreviewing(false);
@@ -178,9 +178,9 @@ return;
       badges: ['owner'],
     };
 
-    setChatMessages(prev: any => [...prev: any, newMessage]);
+    setChatMessages(prev => [...prev, newMessage]);
     setChatMessage('');
-    setStats(prev: any => ({ ...prev: any, chatMessages: prev: any.chatMessages + 1 }));
+    setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
   const formatDuration = (seconds: number) => {
@@ -351,7 +351,7 @@ return;
                   <input
                     type="text"
                     value={settings.title}
-                    onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
+                    onChange={(e) => setSettings(prev => ({ ...prev, title: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     placeholder="Enter stream title..."
                   />
@@ -362,7 +362,7 @@ return;
                   </label>
                   <select
                     value={settings.category}
-                    onChange={(e: Event) => setSettings(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
+                    onChange={(e) => setSettings(prev => ({ ...prev, category: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
                     <option value="Gaming">Gaming</option>
@@ -388,7 +388,7 @@ return;
                 ref={chatContainerRef}
                 className="h-96 overflow-y-auto mb-4 space-y-2 border border-gray-200 dark:border-gray-600 rounded-lg p-3"
               >
-                {chatMessages.map((message: any) => (
+                {chatMessages.map((message) => (
                   <div key={message.id} className="text-sm">
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`font-medium ${
@@ -398,7 +398,7 @@ return;
                       }`}>
                         {message.username}
                       </span>
-                      {message.badges?.map((badge: any) => (
+                      {message.badges?.map((badge) => (
                         <span
                           key={badge}
                           className="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
@@ -416,7 +416,7 @@ return;
                 <input
                   type="text"
                   value={chatMessage}
-                  onChange={(e: Event) => setChatMessage(e: Event.target.value)}
+                  onChange={(e) => setChatMessage(e.target.value)}
                   onKeyPress={(e: Event) => e: Event.key === 'Enter' && sendChatMessage()}
                   placeholder="Type a message..."
                   className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"

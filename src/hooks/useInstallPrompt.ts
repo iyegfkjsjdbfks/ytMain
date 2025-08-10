@@ -84,7 +84,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
       return false;
     }
 
-    setState(prev: any => ({ ...prev: any, isInstalling: true, installError: null }));
+    setState(prev => ({ ...prev, isInstalling: true, installError: null }));
 
     try {
       // Show the install prompt
@@ -97,7 +97,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
         conditionalLogger.debug('User accepted PWA install prompt', undefined, 'useInstallPrompt');
 
         // Update state
-        setState(prev: any => ({
+        setState(prev => ({
           ...prev,
           isInstalling: false,
           showPrompt: false,
@@ -111,7 +111,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
         // Mark as dismissed
         PWAUtils.dismissInstallPrompt();
 
-        setState(prev: any => ({
+        setState(prev => ({
           ...prev,
           isInstalling: false,
           showPrompt: false,
@@ -129,7 +129,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
       conditionalLogger.error('PWA installation failed', componentError, 'useInstallPrompt');
 
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isInstalling: false,
         installError: error instanceof Error ? error.message : 'Installation failed',
@@ -148,7 +148,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
       sessionStorage.setItem('pwa-install-dismissed-session', 'true');
     }
 
-    setState(prev: any => ({ ...prev: any, showPrompt: false }));
+    setState(prev => ({ ...prev, showPrompt: false }));
 
     conditionalLogger.debug(
       `PWA install prompt dismissed (permanent: ${permanent})`,
@@ -159,7 +159,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
   // Reset installation error
   const resetError = useCallback((): void => {
-    setState(prev: any => ({ ...prev: any, installError: null }));
+    setState(prev => ({ ...prev, installError: null }));
   }, []);
 
   // Set up event listeners
@@ -171,7 +171,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
       const installPrompt = event as PWAInstallPrompt;
 
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         deferredPrompt: installPrompt,
         isInstallable: true,
@@ -180,7 +180,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
       // Show prompt after delay if conditions are met
       setTimeout(() => {
         if (canShowPrompt() && !sessionStorage.getItem('pwa-install-dismissed-session')) {
-          setState(prev: any => ({ ...prev: any, showPrompt: true }));
+          setState(prev => ({ ...prev, showPrompt: true }));
         }
       }, 3000);
     };
@@ -189,7 +189,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
     const handleAppInstalled = () => {
       PWAEvents.handleAppInstalled();
 
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isInstalled: true,
         isInstallable: false,

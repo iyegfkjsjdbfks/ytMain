@@ -264,7 +264,7 @@ return [...new Set(array)];
 }
 
     const seen = new Set();
-    return array.filter((item: any) => {
+    return array.filter((item) => {
       const value = item[key];
       if (seen.has(value)) {
 return false;

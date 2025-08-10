@@ -9,7 +9,7 @@ interface AsyncState<T> {
 
 interface UseAsyncStateOptions {
   initialLoading?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data) => void;
   onError?: (error: string) => void;
 }
 
@@ -31,7 +31,7 @@ export const useAsyncState = <T>(
   });
 
   const execute = useCallback(async () => {
-    setState(prev: any => ({ ...prev: any, loading: true, error: null }));
+    setState(prev => ({ ...prev, loading: true, error: null }));
 
     try {
       const result = await asyncFunction();
@@ -51,11 +51,11 @@ export const useAsyncState = <T>(
   }, []);
 
   const setData = useCallback((data: T) => {
-    setState(prev: any => ({ ...prev: any, data }));
+    setState(prev => ({ ...prev, data }));
   }, []);
 
   const setError = useCallback((error: string) => {
-    setState(prev: any => ({ ...prev: any, error, loading: false }));
+    setState(prev => ({ ...prev, error, loading: false }));
   }, []);
 
   useEffect(() => {

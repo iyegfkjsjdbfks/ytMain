@@ -44,7 +44,7 @@ class PerformanceStore {
   }
 
   getMetricsByComponent(componentName: string) {
-    return this.metrics.filter((m: any) => m.componentName === componentName);
+    return this.metrics.filter((m) => m.componentName === componentName);
   }
 
   subscribe(observer: (metrics: PerformanceMetrics[]) => void) {
@@ -80,7 +80,7 @@ return 0;
   }
 
   getSlowRenders(threshold = 16) { // 16ms = 60fps
-    return this.metrics.filter((m: any) => m.renderTime > threshold);
+    return this.metrics.filter((m) => m.renderTime > threshold);
   }
 }
 
@@ -217,7 +217,7 @@ export const usePerformanceData = (componentName?: string) => {
   useEffect(() => {
     const updateMetrics = (allMetrics: PerformanceMetrics[]) => {
       const filteredMetrics = componentName
-        ? allMetrics.filter((m: any) => m.componentName.startsWith(componentName))
+        ? allMetrics.filter((m) => m.componentName.startsWith(componentName))
         : allMetrics;
       setMetrics(filteredMetrics);
     };
@@ -260,7 +260,7 @@ export const useWebVitals = () => {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1] as any;
-        setVitals(prev: any => ({ ...prev: any, LCP: lastEntry.startTime }));
+        setVitals(prev => ({ ...prev, LCP: lastEntry.startTime }));
       });
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
       return observer;
@@ -270,9 +270,9 @@ export const useWebVitals = () => {
     const observeFCP = () => {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry) => {
           if (entry.name === 'first-contentful-paint') {
-            setVitals(prev: any => ({ ...prev: any, FCP: entry.startTime }));
+            setVitals(prev => ({ ...prev, FCP: entry.startTime }));
           }
         });
       });
@@ -285,10 +285,10 @@ export const useWebVitals = () => {
       let clsValue = 0;
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        entries.forEach((entry) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
-            setVitals(prev: any => ({ ...prev: any, CLS: clsValue }));
+            setVitals(prev => ({ ...prev, CLS: clsValue }));
           }
         });
       });
@@ -305,7 +305,7 @@ export const useWebVitals = () => {
     // TTFB from Navigation Timing
     const navigation = performance.getEntriesByType('navigation')[0] as any;
     if (navigation) {
-      setVitals(prev: any => ({
+      setVitals(prev => ({
         ...prev,
         TTFB: navigation.responseStart - navigation.requestStart,
       }));

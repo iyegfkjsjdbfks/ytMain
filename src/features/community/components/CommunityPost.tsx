@@ -170,7 +170,7 @@ return `${(count / 1000).toFixed(1)}K`;
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-2">
-              {post.media: any.slice(0, 4).map((media: any, index: number) => (
+              {post.media.slice(0, 4).map((media: any, index: number) => (
                 <div key={index} className="relative rounded-lg overflow-hidden aspect-square">
                   <img
                     src={media.type === 'image' ? media.url : media.thumbnail || media.url}
@@ -204,7 +204,7 @@ return `${(count / 1000).toFixed(1)}K`;
             {post.poll.question}
           </h4>
           <div className="space-y-2">
-            {post.poll.options.map((option: any) => (
+            {post.poll.options.map((option) => (
               <button
                 key={option.id}
                 onClick={() => handleVote(option.id)}

@@ -287,13 +287,13 @@ class TestRunner {
             </div>
         </div>
         
-        ${reportData.suites.map((suite: any) => `
+        ${reportData.suites.map((suite) => `
             <div class="suite">
                 <div class="suite-header">
                     📋 ${suite.name} (${suite.passedTests}/${suite.totalTests} passed)
                 </div>
                 <div class="suite-content">
-                    ${suite.tests.map((test: any) => `
+                    ${suite.tests.map((test) => `
                         <div class="test-item test-${test.status}">
                             <strong>${test.status === 'passed' ? '✅' : test.status === 'failed' ? '❌' : '⏭️'}</strong>
                             ${test.name}

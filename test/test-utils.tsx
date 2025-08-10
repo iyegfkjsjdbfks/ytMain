@@ -166,7 +166,7 @@ export const mockResizeObserver = () => {
 };
 
 export const mockMatchMedia = (matches = false) => {
-  const mockMatchMedia = vi.fn().mockImplementation((query: any) => ({
+  const mockMatchMedia = vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
     onchange: null,

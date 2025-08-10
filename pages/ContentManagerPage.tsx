@@ -61,12 +61,12 @@ const ContentManagerPage: React.FC = () => {
 
     // Apply filter
     if (filter !== 'all') {
-      filtered = filtered.filter((item: any) => item.status === filter);
+      filtered = filtered.filter((item) => item.status === filter);
     }
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(item: any =>
+      filtered = filtered.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())),
@@ -74,7 +74,7 @@ const ContentManagerPage: React.FC = () => {
     }
 
     // Apply sort
-    filtered.sort((a: any, b: any) => {
+    filtered.sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
@@ -115,7 +115,7 @@ const ContentManagerPage: React.FC = () => {
       setSelectedItems(new Set());
       setShowBulkActions(false);
     } else {
-      setSelectedItems(new Set(filteredContent.map(item: any => item: any.id)));
+      setSelectedItems(new Set(filteredContent.map(item => item.id)));
       setShowBulkActions(true);
     }
   };
@@ -126,8 +126,8 @@ const ContentManagerPage: React.FC = () => {
       return;
     }
 
-    setContent(prevContent: any =>
-      prevContent.map(item: any => {
+    setContent(prevContent =>
+      prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           switch (action) {
             case 'publish':
@@ -149,8 +149,8 @@ const ContentManagerPage: React.FC = () => {
     if (action === 'duplicate') {
       // Add duplicated items
       const duplicatedItems = content
-        .filter((item: any) => selectedItems.has(item.id))
-        .map(item: any => ({
+        .filter((item) => selectedItems.has(item.id))
+        .map(item => ({
           ...item,
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
@@ -158,7 +158,7 @@ const ContentManagerPage: React.FC = () => {
           uploadedAt: new Date().toISOString(),
           views: '0',
         }));
-      setContent(prev: any => [...prev: any, ...duplicatedItems]);
+      setContent(prev => [...prev, ...duplicatedItems]);
     }
 
     setSelectedItems(new Set());
@@ -172,8 +172,8 @@ return;
 
     const scheduledDateTime = new Date(`${scheduleDate}T${scheduleTime}`).toISOString();
 
-    setContent(prevContent: any =>
-      prevContent.map(item: any => {
+    setContent(prevContent =>
+      prevContent.map(item => {
         if (selectedItems.has(item.id)) {
           return {
             ...item,
@@ -220,7 +220,7 @@ return;
     if (filterType === 'all') {
 return content.length;
 }
-    return content.filter((item: any) => item.status === filterType).length;
+    return content.filter((item) => item.status === filterType).length;
   };
 
   if (loading) {
@@ -284,12 +284,12 @@ return content.length;
               type="text"
               placeholder="Search content..."
               value={searchQuery}
-              onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-3 pr-10 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
             />
             <select
               value={sortBy}
-              onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
+              onChange={(e) => setSortBy(e.target.value as SortType)}
               className="px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="newest">Newest First</option>
@@ -381,7 +381,7 @@ return content.length;
           </div>
         ) : viewMode === 'grid' ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
-            {filteredContent.map((item: any) => (
+            {filteredContent.map((item) => (
               <div key={item.id} className="group relative">
                 <div className="absolute top-2 left-2 z-10">
                   <input
@@ -466,7 +466,7 @@ return content.length;
           </div>
         ) : (
           <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-            {filteredContent.map((item: any) => (
+            {filteredContent.map((item) => (
               <div key={item.id} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/30">
                 <div className="flex items-center space-x-4">
                   <input
@@ -555,7 +555,7 @@ return content.length;
                 <input
                   type="date"
                   value={scheduleDate}
-                  onChange={(e: Event) => setScheduleDate(e: Event.target.value)}
+                  onChange={(e) => setScheduleDate(e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -567,7 +567,7 @@ return content.length;
                 <input
                   type="time"
                   value={scheduleTime}
-                  onChange={(e: Event) => setScheduleTime(e: Event.target.value)}
+                  onChange={(e) => setScheduleTime(e.target.value)}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>

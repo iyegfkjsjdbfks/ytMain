@@ -150,9 +150,9 @@ export const useBatchedUpdates = <T>(initialValue: T) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      setValue((prev: any) => {
+      setValue((prev) => {
         let result = prev;
-        pendingUpdates.current.forEach((update: any) => {
+        pendingUpdates.current.forEach((update) => {
           result = update(result);
         });
         pendingUpdates.current = [];

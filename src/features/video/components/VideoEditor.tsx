@@ -124,7 +124,7 @@ export const VideoEditor: React.FC = () => {
     let interval: NodeJS.Timeout;
     if (editorState.isPlaying) {
       interval = setInterval(() => {
-        setEditorState(prev: any => ({
+        setEditorState(prev => ({
           ...prev,
           currentTime: Math.min(prev.currentTime + 0.1, prev.duration),
         }));
@@ -134,15 +134,15 @@ export const VideoEditor: React.FC = () => {
   }, [editorState.isPlaying, editorState.duration]);
 
   const togglePlayPause = () => {
-    setEditorState(prev: any => ({
+    setEditorState(prev => ({
       ...prev,
       isPlaying: !prev.isPlaying,
     }));
   };
 
   const splitClip = (clipId: string, splitTime: number) => {
-    setEditorState(prev: any => {
-      const clipIndex = prev.clips.findIndex(c: any => c: any.id === clipId);
+    setEditorState(prev => {
+      const clipIndex = prev.clips.findIndex(c => c.id === clipId);
       if (clipIndex === -1) {
 return prev;
 }
@@ -178,9 +178,9 @@ return prev;
   };
 
   const deleteClip = (clipId: string) => {
-    setEditorState(prev: any => ({
+    setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter((c: any) => c.id !== clipId),
+      clips: prev.clips.filter((c) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };
@@ -202,7 +202,7 @@ return;
       endTime: editorState.currentTime + 5,
     };
 
-    setEditorState(prev: any => ({
+    setEditorState(prev => ({
       ...prev,
       textOverlays: [...prev.textOverlays, overlay],
     }));
@@ -272,11 +272,11 @@ return;
 
               {/* Text Overlays Preview */}
               {editorState.textOverlays
-                .filter(overlay: any =>
+                .filter(overlay =>
                   editorState.currentTime >= overlay.startTime &&
                   editorState.currentTime <= overlay.endTime,
                 )
-                .map(overlay: any => (
+                .map(overlay => (
                   <div
                     key={overlay.id}
                     className="absolute pointer-events-none"
@@ -316,7 +316,7 @@ return;
 
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setEditorState(prev: any => ({ ...prev: any, zoom: Math.max(0.5, prev: any.zoom - 0.5) }))}
+                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.max(0.5, prev.zoom - 0.5) }))}
                   className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   -
@@ -325,7 +325,7 @@ return;
                   {editorState.zoom}x
                 </span>
                 <button
-                  onClick={() => setEditorState(prev: any => ({ ...prev: any, zoom: Math.min(3, prev: any.zoom + 0.5) }))}
+                  onClick={() => setEditorState(prev => ({ ...prev, zoom: Math.min(3, prev.zoom + 0.5) }))}
                   className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   +
@@ -354,7 +354,7 @@ return;
               <div className="mt-2">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Video</div>
                 <div className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.clips.map(clip: any => (
+                  {editorState.clips.map(clip => (
                     <div
                       key={clip.id}
                       className={`absolute h-full bg-blue-500 rounded cursor-pointer border-2 ${
@@ -364,7 +364,7 @@ return;
                         left: `${clip.startTime * editorState.zoom * 10}px`,
                         width: `${clip.duration * editorState.zoom * 10}px`,
                       }}
-                      onClick={() => setEditorState(prev: any => ({ ...prev: any, selectedClip: clip.id }))}
+                      onClick={() => setEditorState(prev => ({ ...prev, selectedClip: clip.id }))}
                     >
                       <div className="p-2 text-white text-xs truncate">
                         {clip.name}
@@ -378,7 +378,7 @@ return;
               <div className="mt-4">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Audio</div>
                 <div className="relative h-12 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.audioTracks.map(track: any => (
+                  {editorState.audioTracks.map(track => (
                     <div
                       key={track.id}
                       className="absolute h-full bg-green-500 rounded"
@@ -399,7 +399,7 @@ return;
               <div className="mt-4">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Text</div>
                 <div className="relative h-8 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.textOverlays.map(overlay: any => (
+                  {editorState.textOverlays.map(overlay => (
                     <div
                       key={overlay.id}
                       className="absolute h-full bg-purple-500 rounded"
@@ -444,12 +444,12 @@ return;
                   min="0"
                   max="1"
                   step="0.1"
-                  value={editorState.clips.find(c: any => c: any.id === editorState.selectedClip)?.volume || 1}
-                  onChange={(e: Event) => {
+                  value={editorState.clips.find(c => c.id === editorState.selectedClip)?.volume || 1}
+                  onChange={(e) => {
                     const volume = parseFloat(e.target.value);
-                    setEditorState(prev: any => ({
+                    setEditorState(prev => ({
                       ...prev,
-                      clips: prev.clips.map(clip: any =>
+                      clips: prev.clips.map(clip =>
                         clip.id === prev.selectedClip ? { ...clip, volume } : clip,
                       ),
                     }));
@@ -498,7 +498,7 @@ return;
                 <input
                   type="text"
                   value={newTextOverlay.text || ''}
-                  onChange={(e: Event) => setNewTextOverlay(prev: any => ({ ...prev: any, text: e: Event.target.value }))}
+                  onChange={(e) => setNewTextOverlay(prev => ({ ...prev, text: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   placeholder="Enter text..."
                 />
@@ -516,7 +516,7 @@ return;
                   <input
                     type="number"
                     value={newTextOverlay.fontSize || 24}
-                    onChange={(e: Event) => setNewTextOverlay(prev: any => ({ ...prev: any, fontSize: parseInt(e: Event.target.value, 10) }))}
+                    onChange={(e) => setNewTextOverlay(prev => ({ ...prev, fontSize: parseInt(e.target.value, 10) }))}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
@@ -529,7 +529,7 @@ return;
                   <input
                     type="color"
                     value={newTextOverlay.color || '#ffffff'}
-                    onChange={(e: Event) => setNewTextOverlay(prev: any => ({ ...prev: any, color: e: Event.target.value }))}
+                    onChange={(e) => setNewTextOverlay(prev => ({ ...prev, color: e.target.value }))}
                     className="w-full h-10 border border-gray-300 dark:border-gray-600 rounded-md"
                   />
                 </div>

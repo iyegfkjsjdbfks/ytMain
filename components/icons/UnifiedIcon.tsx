@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -54,104 +54,104 @@ export const BaseIcon: React.FC<IconProps & { children: React.ReactNode; viewBox
 };
 
 // Unified icon components using the base
-export const HomeIcon: React.FC<IconProps> = (props: any) => (
+export const HomeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
   </BaseIcon>
 );
 
-export const SearchIcon: React.FC<IconProps> = (props: any) => (
+export const SearchIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
   </BaseIcon>
 );
 
-export const BellIcon: React.FC<IconProps> = (props: any) => (
+export const BellIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
   </BaseIcon>
 );
 
-export const UserIcon: React.FC<IconProps> = (props: any) => (
+export const UserIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
   </BaseIcon>
 );
 
-export const MenuIcon: React.FC<IconProps> = (props: any) => (
+export const MenuIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
   </BaseIcon>
 );
 
-export const ThumbsUpIcon: React.FC<IconProps> = (props: any) => (
+export const ThumbsUpIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.398.83 1.169 1.398 2.02 1.398h.718c.746 0 1.45-.102 2.126-.283a24.319 24.319 0 0 0 3.06-.723c.94-.24 1.835-.616 2.647-1.115m-9.841-4.907a2.25 2.25 0 0 0-.659-1.591l-1.591-1.591" />
   </BaseIcon>
 );
 
-export const ThumbsDownIcon: React.FC<IconProps> = (props: any) => (
+export const ThumbsDownIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.225.632.347 1.303.347 1.989 0 1.17-.131 2.316-.347 3.489m0-5.478c.898.11 1.719.603 2.126 1.384.723 1.388.726 2.98.726 4.478v.75c0 .747.563 1.386 1.288 1.5 1.235.194 2.186 1.24 2.186 2.5a2.25 2.25 0 0 1-2.25 2.25h-1.32c-.397 0-.74-.299-.74-.75v-.75a3.75 3.75 0 0 0-3.75-3.75H9.75" />
   </BaseIcon>
 );
 
-export const ShareIcon: React.FC<IconProps> = (props: any) => (
+export const ShareIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.935-2.186 2.25 2.25 0 0 0-3.935 2.186Z" />
   </BaseIcon>
 );
 
-export const SaveIcon: React.FC<IconProps> = (props: any) => (
+export const SaveIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
   </BaseIcon>
 );
 
-export const SaveIconFilled: React.FC<IconProps> = (props: any) => (
+export const SaveIconFilled: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} fill="currentColor">
     <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clipRule="evenodd" />
   </BaseIcon>
 );
 
-export const HistoryIcon: React.FC<IconProps> = (props: any) => (
+export const HistoryIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
   </BaseIcon>
 );
 
-export const PlaylistIcon: React.FC<IconProps> = (props: any) => (
+export const PlaylistIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
   </BaseIcon>
 );
 
-export const SubscriptionsIcon: React.FC<IconProps> = (props: any) => (
+export const SubscriptionsIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
   </BaseIcon>
 );
 
-export const ShortsIcon: React.FC<IconProps> = (props: any) => (
+export const ShortsIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
   </BaseIcon>
 );
 
-export const FireIcon: React.FC<IconProps> = (props: any) => (
+export const FireIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 12 18Z" />
   </BaseIcon>
 );
 
-export const VideoPlusIcon: React.FC<IconProps> = (props: any) => (
+export const VideoPlusIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
   </BaseIcon>
 );
 
-export const ClockIcon: React.FC<IconProps> = (props: any) => (
+export const ClockIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
   </BaseIcon>

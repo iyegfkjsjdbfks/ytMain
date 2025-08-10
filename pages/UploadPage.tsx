@@ -84,7 +84,7 @@ return;
     };
 
     setUploadedFile(newFile);
-    setMetadata(prev: any => ({
+    setMetadata(prev => ({
       ...prev,
       title: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
     }));
@@ -95,7 +95,7 @@ return;
 
   const simulateUpload = (_file: UploadedFile) => {
     const interval = setInterval(() => {
-      setUploadedFile(prev: any => {
+      setUploadedFile(prev => {
         if (!prev) {
 return null;
 }
@@ -120,7 +120,7 @@ return null;
 
     // Simulate processing completion
     setTimeout(() => {
-      setUploadedFile(prev: any => prev: any ? {
+      setUploadedFile(prev => prev: any ? {
         ...prev,
         status: 'completed',
       } : null);
@@ -168,9 +168,9 @@ return null;
 
 
   const removeTag = (tagToRemove: string) => {
-    setMetadata(prev: any => ({
+    setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: any) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -309,7 +309,7 @@ return null;
                         type="text"
                         id="video-title"
                         value={metadata.title}
-                        onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, title: e: Event.target.value }))}
+                        onChange={(e) => setMetadata(prev => ({ ...prev, title: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Add a title that describes your video"
                         maxLength={100}
@@ -326,7 +326,7 @@ return null;
                       <textarea
                         id="video-description"
                         value={metadata.description}
-                        onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, description: e: Event.target.value }))}
+                        onChange={(e) => setMetadata(prev => ({ ...prev, description: e.target.value }))}
                         rows={6}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                         placeholder="Tell viewers about your video"
@@ -344,7 +344,7 @@ return null;
                       <select
                         id="video-category"
                         value={metadata.category}
-                        onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, category: e: Event.target.value }))}
+                        onChange={(e) => setMetadata(prev => ({ ...prev, category: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       >
                         {categories.map(category => (
@@ -397,7 +397,7 @@ return null;
                               name="visibility"
                               value={option.value}
                               checked={metadata.visibility === option.value}
-                              onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, visibility: e: Event.target.value as any }))}
+                              onChange={(e) => setMetadata(prev => ({ ...prev, visibility: e.target.value as any }))}
                               className="mr-3"
                             />
                             <div className="flex items-center space-x-3">
@@ -422,7 +422,7 @@ return null;
                           type="checkbox"
                           id="comments-enabled"
                           checked={metadata.commentsEnabled}
-                          onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, commentsEnabled: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, commentsEnabled: e.target.checked }))}
                           className="mr-3"
                         />
                         Allow comments
@@ -433,7 +433,7 @@ return null;
                           type="checkbox"
                           id="age-restriction"
                           checked={metadata.ageRestriction}
-                          onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, ageRestriction: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, ageRestriction: e.target.checked }))}
                           className="mr-3"
                         />
                         <span className="text-gray-900 dark:text-white">Age restriction (18+)</span>
@@ -452,7 +452,7 @@ return null;
                           type="checkbox"
                           id="monetization-enabled"
                           checked={metadata.monetization}
-                          onChange={(e: Event) => setMetadata(prev: any => ({ ...prev: any, monetization: e: Event.target.checked }))}
+                          onChange={(e) => setMetadata(prev => ({ ...prev, monetization: e.target.checked }))}
                           className="mr-3"
                         />
                           <p className="font-medium text-gray-900 dark:text-white">

@@ -345,7 +345,7 @@ const CreatorStudioPage: React.FC = () => {
 
         {activeTab === 'ideas' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {contentIdeas.map((idea: any) => (
+            {contentIdeas.map((idea) => (
               <div key={idea.id} className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-neutral-700">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -377,7 +377,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag: string, tagIndex: any) => (
+                  {idea.tags.map((tag: string, tagIndex) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>
@@ -466,7 +466,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {scheduledContent.map((content: any) => (
+                  {scheduledContent.map((content) => (
                     <div key={content.id} className="flex items-center justify-between p-4 border border-gray-200 dark:border-neutral-700 rounded-lg">
                       <div className="flex items-center space-x-4">
                         <div className="p-2 bg-gray-100 dark:bg-neutral-700 rounded-lg">

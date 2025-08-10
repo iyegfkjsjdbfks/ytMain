@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -182,7 +182,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
   };
 
   const filteredItems = items
-    .filter((item: any) => {
+    .filter((item) => {
       if (filterStatus !== 'all' && item.status !== filterStatus) {
 return false;
 }
@@ -199,7 +199,7 @@ return false;
       }
       return true;
     })
-    .sort((a: any, b: any) => {
+    .sort((a: any, b) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.reportedAt).getTime() - new Date(a.reportedAt).getTime();
@@ -217,7 +217,7 @@ return false;
 
   const handleModerate = (itemId: string, action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
-    setItems(prev: any => prev: any.map(item: any =>
+    setItems(prev => prev.map(item =>
       item.id === itemId
         ? {
             ...item,
@@ -245,7 +245,7 @@ return false;
     const itemIds = Array.from(selectedItems);
     onBulkModerate(itemIds, action);
 
-    setItems(prev: any => prev: any.map(item: any =>
+    setItems(prev => prev.map(item =>
       selectedItems.has(item.id)
         ? {
             ...item,
@@ -258,7 +258,7 @@ return false;
   };
 
   const toggleSelection = (itemId: string) => {
-    setSelectedItems(prev: any => {
+    setSelectedItems(prev => {
       const newSet = new Set(prev);
       if (newSet.has(itemId)) {
         newSet.delete(itemId);
@@ -317,10 +317,10 @@ return false;
         {/* Stats */}
         <div className="grid grid-cols-4 gap-4">
           {[
-            { label: 'Pending', count: items.filter((i: any) => i.status === 'pending').length, color: 'text-yellow-600' },
-            { label: 'Flagged', count: items.filter((i: any) => i.status === 'flagged').length, color: 'text-red-600' },
-            { label: 'Critical', count: items.filter((i: any) => i.priority === 'critical').length, color: 'text-red-600' },
-            { label: 'Total Reports', count: items.reduce((sum: any, i: any) => sum: any + i: any.reportCount, 0), color: 'text-blue-600' },
+            { label: 'Pending', count: items.filter((i) => i.status === 'pending').length, color: 'text-yellow-600' },
+            { label: 'Flagged', count: items.filter((i) => i.status === 'flagged').length, color: 'text-red-600' },
+            { label: 'Critical', count: items.filter((i) => i.priority === 'critical').length, color: 'text-red-600' },
+            { label: 'Total Reports', count: items.reduce((sum: any, i) => sum: any + i.reportCount, 0), color: 'text-blue-600' },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
@@ -339,7 +339,7 @@ return false;
             <input
               type="text"
               value={searchQuery}
-              onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search content..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -348,7 +348,7 @@ return false;
           {/* Filters */}
           <select
             value={filterStatus}
-            onChange={(e: Event) => setFilterStatus(e: Event.target.value as any)}
+            onChange={(e) => setFilterStatus(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="all">All Status</option>
@@ -360,7 +360,7 @@ return false;
 
           <select
             value={filterType}
-            onChange={(e: Event) => setFilterType(e: Event.target.value as any)}
+            onChange={(e) => setFilterType(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="all">All Types</option>
@@ -372,7 +372,7 @@ return false;
 
           <select
             value={filterPriority}
-            onChange={(e: Event) => setFilterPriority(e: Event.target.value as any)}
+            onChange={(e) => setFilterPriority(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="all">All Priority</option>
@@ -384,7 +384,7 @@ return false;
 
           <select
             value={sortBy}
-            onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="newest">Newest First</option>
@@ -429,7 +429,7 @@ return false;
 
       {/* Moderation Items */}
       <div className="space-y-4">
-        {filteredItems.map((item: any) => (
+        {filteredItems.map((item) => (
           <div
             key={item.id}
             className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 ${
@@ -585,7 +585,7 @@ return false;
 
             <textarea
               value={moderationReason}
-              onChange={(e: Event) => setModerationReason(e: Event.target.value)}
+              onChange={(e) => setModerationReason(e.target.value)}
               placeholder="Enter reason for this action (optional)"
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"

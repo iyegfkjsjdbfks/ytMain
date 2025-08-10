@@ -17,15 +17,15 @@ interface YouTubePlayerWrapperProps {
   end?: number;
   quality?: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080' | 'highres' | 'default';
   className?: string;
-  onReady?: (event: any) => void;
-  onStateChange?: (event: any) => void;
-  onError?: (event: any) => void;
+  onReady?: (event) => void;
+  onStateChange?: (event) => void;
+  onError?: (event) => void;
   lazy?: boolean;
   preload?: 'none' | 'metadata' | 'auto';
   placeholder?: ReactNode;
   // IFrame API specific props
-  onPlaybackQualityChange?: (event: any) => void;
-  onPlaybackRateChange?: (event: any) => void;
+  onPlaybackQualityChange?: (event) => void;
+  onPlaybackRateChange?: (event) => void;
 }
 
 // Union type for player methods

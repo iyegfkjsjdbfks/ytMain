@@ -52,7 +52,7 @@ export const queryPresets = {
 } as const;
 
 // Enhanced error handler
-function createApiError(error: any): ApiError {
+function createApiError(error): ApiError {
   const apiError: ApiError = {
     name: 'ApiError',
     message: error?.message || 'An unexpected error occurred',
@@ -67,7 +67,7 @@ function createApiError(error: any): ApiError {
   return apiError;
 }
 
-function isRetryableError(error: any): boolean {
+function isRetryableError(error): boolean {
   const status = error?.status || error?.response?.status;
 
   // Network errors are retryable
@@ -96,7 +96,7 @@ return true;
 
 // Enhanced retry logic
 function createRetryFn(maxRetries: number = 3) {
-  return (failureCount: number, error: any) => {
+  return (failureCount: number, error) => {
     const apiError = createApiError(error);
 
     // Don't retry if error is not retryable
@@ -115,7 +115,7 @@ return false;
 
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
-  return (attemptIndex: number, error: any) => {
+  return (attemptIndex: number, error) => {
     // Create API error to ensure proper error handling
     createApiError(error);
 
@@ -251,7 +251,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     mutationFn: enhancedMutationFn,
     retry: createRetryFn(maxRetries),
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
-    onMutate: async (variables: any) => {
+    onMutate: async (variables) => {
       // Handle optimistic updates
       if (optimisticUpdate) {
         await queryClient.cancelQueries({ queryKey: optimisticUpdate.queryKey });
@@ -259,7 +259,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
         queryClient.setQueryData(
           optimisticUpdate.queryKey,
-          (oldData: any) => optimisticUpdate.updateFn(oldData, variables),
+          (oldData) => optimisticUpdate.updateFn(oldData, variables),
         );
 
         return { previousData };
@@ -267,7 +267,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
       return mutationOptions.onMutate?.(variables);
     },
-    onError: (error: Error, variables: any, context: any) => {
+    onError: (error: Error, variables: any, context) => {
       // Rollback optimistic updates on error
       if (optimisticUpdate && context && typeof context === 'object' && 'previousData' in context) {
         queryClient.setQueryData(optimisticUpdate.queryKey, (context as any).previousData);
@@ -275,7 +275,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
       mutationOptions.onError?.(error, variables, context);
     },
-    onSuccess: (data: any, variables: any, context: any) => {
+    onSuccess: (data: any, variables: any, context) => {
       // Invalidate related queries
       invalidateQueries.forEach(queryKey => {
         queryClient.invalidateQueries({ queryKey });
@@ -329,7 +329,7 @@ export function useCacheManager() {
       const cache = queryClient.getQueryCache();
       return {
         size: cache.getAll().length,
-        queries: cache.getAll().map(query: any => ({
+        queries: cache.getAll().map(query => ({
           queryKey: query.queryKey,
           state: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,

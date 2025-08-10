@@ -50,12 +50,12 @@ const PlaylistsPage: React.FC = () => {
         id: newPlaylist.id,
         title: newPlaylist.name || newPlaylistName.trim(),
         description: newPlaylist.description || '',
-        videoIds: newPlaylist.videos?.map((v: any) => v.id) || [],
+        videoIds: newPlaylist.videos?.map((v) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
         createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt,
       };
-      setPlaylists(prev: any => [playlistWithDetails, ...prev: any]);
+      setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
       setNewPlaylistName('');
     } catch (error) {
@@ -107,7 +107,7 @@ const PlaylistsPage: React.FC = () => {
         renderSkeleton()
       ) : playlists.length > 0 ? (
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6">
-          {playlists.map(playlist: any => (
+          {playlists.map(playlist => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block bg-white dark:bg-neutral-800/60 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700">
                 <img
@@ -161,7 +161,7 @@ const PlaylistsPage: React.FC = () => {
                   id="playlistName"
                   type="text"
                   value={newPlaylistName}
-                  onChange={(e: Event) => {
+                  onChange={(e) => {
                     setNewPlaylistName(e.target.value);
                     setCreateError(null);
                   }}

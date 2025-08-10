@@ -2,7 +2,7 @@
 // Analytics utility for tracking events
 
 export interface AnalyticsEvent {
-  [key: string]: any;
+  [key]: any;
 }
 
 /**

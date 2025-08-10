@@ -60,7 +60,7 @@ export function useVideoInteractions(
     mutationFn: () => videoService.toggleLike(videoId),
     onMutate: async () => {
       // Optimistic update
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isLiked: !prev.isLiked,
         isDisliked: false, // Remove dislike if liking
@@ -90,7 +90,7 @@ export function useVideoInteractions(
     mutationFn: () => videoService.toggleDislike(videoId),
     onMutate: async () => {
       // Optimistic update
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isDisliked: !prev.isDisliked,
         isLiked: false, // Remove like if disliking
@@ -120,7 +120,7 @@ export function useVideoInteractions(
     mutationFn: () => videoService.toggleSave(videoId),
     onMutate: async () => {
       // Optimistic update
-      setState(prev: any => ({
+      setState(prev => ({
         ...prev,
         isSaved: !prev.isSaved,
       }));

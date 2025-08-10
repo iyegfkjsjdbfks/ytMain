@@ -28,7 +28,7 @@ const Image = ({
   className?: string;
   fill?: boolean;
   sizes?: string;
-  [key: string]: any;
+  [key]: any;
 }) => {
   return (
     <img

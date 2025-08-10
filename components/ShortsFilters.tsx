@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -45,7 +45,7 @@ return 'All';
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {categories.map((category: any) => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => onCategoryChange(category)}

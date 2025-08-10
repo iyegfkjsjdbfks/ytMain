@@ -320,12 +320,12 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
       case 'playlists':
         return []; // Not implemented yet
       case 'live':
-        return allResults.filter((item: any) => {
+        return allResults.filter((item) => {
           const video = 'isLive' in item ? item : convertToVideo(item);
           return video.isLive;
         });
       case 'shorts':
-        return allResults.filter((item: any) => {
+        return allResults.filter((item) => {
           const video = 'duration' in item ? item : convertToVideo(item);
           if (typeof video.duration === 'string') {
             const parts = video.duration.split(':');

@@ -207,9 +207,9 @@ return;
 
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
-        const topLevelComments = videoComments.filter((c: any) => !('parentId' in c) || !c.parentId);
+        const topLevelComments = videoComments.filter((c) => !('parentId' in c) || !c.parentId);
         // Ensure comments have all required properties
-        const commentsWithDefaults = topLevelComments.map((comment: any) => ({
+        const commentsWithDefaults = topLevelComments.map((comment) => ({
           ...comment,
           isLikedByCurrentUser: 'isLikedByCurrentUser' in comment ? comment.isLikedByCurrentUser : false,
           isDislikedByCurrentUser: 'isDislikedByCurrentUser' in comment ? comment.isDislikedByCurrentUser : false,
@@ -231,7 +231,7 @@ return;
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter((v: any) => v.id !== videoId && v.category === foundVideo.category)
+          .filter((v) => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
 
@@ -412,15 +412,15 @@ return;
       replyCount: 0,
     };
 
-    setComments(prev: any => [newComment, ...prev: any]);
-    setCommentCount(prev: any => prev: any + 1);
+    setComments(prev => [newComment, ...prev]);
+    setCommentCount(prev => prev: any + 1);
   };
 
   const handleReplySubmit = (parentId: string) => {
     if (!currentReplyText.trim()) {
 return;
 }
-    const parentComment = comments.find(c: any => c: any.id === parentId);
+    const parentComment = comments.find(c => c.id === parentId);
     if (!parentComment) {
 return;
 }
@@ -439,7 +439,7 @@ return;
       replyTo: parentComment.userName,
     };
 
-    setComments(prevComments: any => prevComments: any.map(c: any => {
+    setComments(prevComments => prevComments.map(c => {
       if (c.id === parentId) {
         return {
           ...c,
@@ -487,7 +487,7 @@ return;
       return list.reduce((acc, comment) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
           if (!parentOfDeleted) {
-            setCommentCount(prev: any => prev: any - 1 - (comment.replyCount || 0));
+            setCommentCount(prev => prev: any - 1 - (comment.replyCount || 0));
           }
           return acc;
         }
@@ -504,7 +504,7 @@ return;
       }, [] as Comment[]);
     };
 
-    setComments(prevComments: any => deleteCommentFromList(prevComments: any, commentId, parentId));
+    setComments(prevComments => deleteCommentFromList(prevComments: any, commentId, parentId));
     setActiveCommentMenu(null);
   };
 

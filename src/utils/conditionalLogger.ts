@@ -130,7 +130,7 @@ class ConditionalLogger {
   }
 
   // Sanitize API responses to avoid logging sensitive data
-  private sanitizeApiResponse(response: any): any {
+  private sanitizeApiResponse(response): any {
     if (!response) return response;
 
     try {
@@ -139,14 +139,14 @@ class ConditionalLogger {
       const sanitized = { ...response };
 
       // Recursively remove sensitive fields
-      const removeSensitiveFields = (obj: any): any => {
+      const removeSensitiveFields = (obj): any => {
         if (typeof obj !== 'object' || obj === null) return obj;
 
         if (Array.isArray(obj)) {
           return obj.map(removeSensitiveFields);
         }
 
-        const result: any = {};
+        const result= {};
         for (const [key, value] of Object.entries(obj)) {
           if (sensitiveFields.some(field => key.toLowerCase().includes(field))) {
             result[key] = '[REDACTED]';
@@ -164,7 +164,7 @@ class ConditionalLogger {
   }
 
   // Sanitize error objects
-  private sanitizeError(error: any): any {
+  private sanitizeError(error): any {
     if (error instanceof Error) {
       return {
         name: error.name,

@@ -246,7 +246,7 @@ export class VideoService {
         CACHE_DURATION.MEDIUM,
       );
 
-      const videos: Video[] = response.items?.map((item: any) => ({
+      const videos: Video[] = response.items?.map((item) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -374,7 +374,7 @@ return null;
         CACHE_DURATION.SHORT,
       );
 
-      const videos: Video[] = response.items?.map((item: any) => ({
+      const videos: Video[] = response.items?.map((item) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -527,7 +527,7 @@ return null;
         CACHE_DURATION.MEDIUM,
       );
 
-      const videos: Video[] = response.items?.map((item: any) => ({
+      const videos: Video[] = response.items?.map((item) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,

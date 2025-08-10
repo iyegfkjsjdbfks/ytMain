@@ -77,7 +77,7 @@ describe('UnifiedDataService', () => {
       mockVideoServiceModule.getVideosByCategory.mockResolvedValue([]);
 
       // Mock metadata normalization
-      mockMetadataService.normalizeLocalVideo.mockImplementation((video: any) => ({
+      mockMetadataService.normalizeLocalVideo.mockImplementation((video) => ({
         ...video,
         source: 'local',
       }));
@@ -164,7 +164,7 @@ describe('UnifiedDataService', () => {
         { id: 'search-1', title: 'Search Result 1' } as any,
       ]);
 
-      mockMetadataService.normalizeLocalVideo.mockImplementation((video: any) => ({
+      mockMetadataService.normalizeLocalVideo.mockImplementation((video) => ({
         ...video,
         source: 'local',
       }));

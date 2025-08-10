@@ -56,13 +56,13 @@ return [];
 
     switch (activeTab) {
       case 'today':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= today;
         });
         break;
       case 'week':
-        filtered = filtered.filter((video: any) => {
+        filtered = filtered.filter((video) => {
           const uploadDate = new Date(video.uploadedAt);
           return uploadDate >= weekAgo;
         });
@@ -72,7 +72,7 @@ return [];
         filtered = filtered.filter((_, index) => index % 3 !== 0);
         break;
       case 'live':
-        filtered = filtered.filter((video: any) => video.isLive);
+        filtered = filtered.filter((video) => video.isLive);
         break;
       case 'posts':
         // Mock community posts filter
@@ -98,13 +98,13 @@ return [];
   }, [subscribedVideos, activeTab, sortBy]);
 
   const subscriptionStats = useMemo(() => {
-    const notificationsEnabled = subscribedChannels.filter((c: any) => c.notificationsEnabled).length;
+    const notificationsEnabled = subscribedChannels.filter((c) => c.notificationsEnabled).length;
     const totalVideos = subscribedVideos?.length || 0;
 
     // Calculate new videos today (mock calculation)
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const newVideosToday = subscribedVideos?.filter((video: any) => {
+    const newVideosToday = subscribedVideos?.filter((video) => {
       const uploadDate = new Date(video.uploadedAt);
       return uploadDate >= todayStart;
     }).length || 0;
@@ -216,7 +216,7 @@ return [];
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {subscribedChannels.map(channel: any => (
+              {subscribedChannels.map(channel => (
                 <div
                   key={channel.id}
                   className="flex items-center space-x-3 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
@@ -276,7 +276,7 @@ return [];
 
       {/* Tabs and Filters */}
       <div className="mb-6">
-        <Tabs value: any={activeTab} onValueChange={(value: any) => setActiveTab(value: any as TabType)}>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value: any as TabType)}>
           <div className="flex items-center justify-between mb-4">
             <TabsList className="flex-1">
               <TabsTrigger value="all">All</TabsTrigger>
@@ -291,7 +291,7 @@ return [];
               <AdjustmentsHorizontalIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
               <select
                 value={sortBy}
-                onChange={(e: Event) => setSortBy(e: Event.target.value as SortType)}
+                onChange={(e) => setSortBy(e.target.value as SortType)}
                 className="text-sm border border-neutral-200 dark:border-neutral-700 rounded-md px-3 py-1 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
               >
                 <option value="latest">Latest</option>
@@ -328,7 +328,7 @@ return [];
               </div>
             ) : (
               <div className={viewType === 'list' ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'}>
-                {filteredVideos.map(video: any => (
+                {filteredVideos.map(video => (
                   <SubscriptionVideoCard
                     key={`${activeTab}-${video.id}`}
                     video={video}

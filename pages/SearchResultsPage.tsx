@@ -64,7 +64,7 @@ const SearchResultsPage: React.FC = () => {
     }
 
     performanceMonitor.startMeasure('search-results-load');
-    setSearchState(prev: any => ({ ...prev: any, loading: true, youtubeLoading: true }));
+    setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
 
     // Create an AbortController for request cancellation
     const abortController = new AbortController();
@@ -128,7 +128,7 @@ const SearchResultsPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Error in search:', error);
-      setSearchState(prev: any => ({ ...prev: any, loading: false, youtubeLoading: false }));
+      setSearchState(prev => ({ ...prev, loading: false, youtubeLoading: false }));
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
       }
@@ -172,7 +172,7 @@ const SearchResultsPage: React.FC = () => {
           loading={searchState.loading || searchState.youtubeLoading}
           query={debouncedQuery}
           sortBy="relevance"
-          onVideoClick={(video: any) => {
+          onVideoClick={(video) => {
             if ('videoId' in video) {
               // YouTube video - use google-search prefix for search results
               navigate(`/watch?v=google-search-${video.videoId}`);

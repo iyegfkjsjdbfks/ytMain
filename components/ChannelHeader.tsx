@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -41,7 +41,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
           <img
             src={((channel.avatarUrl || channel.thumbnail) || channel.thumbnail) || ''}
             alt={`${((channel.name || channel.title) || channel.title)} avatar`}
-            onError={(e: Event) => (e: Event.currentTarget.src = 'https://picsum.photos/seed/default_channel_avatar/160/160')}
+            onError={(e: Event) => (e.currentTarget.src = 'https://picsum.photos/seed/default_channel_avatar/160/160')}
             className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full mr-0 sm:mr-5 object-cover border-4 border-white dark:border-neutral-950 flex-shrink-0 shadow-lg"
           />
           <div className="flex-grow mt-3 sm:mt-0 text-center sm:text-left">

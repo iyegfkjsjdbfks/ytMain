@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -28,9 +28,9 @@ interface AnalyticsData {
   clickThroughRate: number;
   retention: number[];
   demographics: {
-    ageGroups: { [key: string]: number };
-    genders: { [key: string]: number };
-    countries: { [key: string]: number };
+    ageGroups: { [key]: number };
+    genders: { [key]: number };
+    countries: { [key]: number };
   };
   devices: {
     mobile: number;

@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -488,7 +488,7 @@ return;
                     min="0"
                     max="100"
                     value={volumePercentage}
-                    onChange={(e: Event) => videoPlayerInstance.setVolume(Number(e: Event.target.value) / 100)}
+                    onChange={(e) => videoPlayerInstance.setVolume(Number(e.target.value) / 100)}
                     className="w-20 h-1 bg-white bg-opacity-30 rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
@@ -628,7 +628,7 @@ return;
                         <input
                           type="checkbox"
                           checked={subtitlesEnabled}
-                          onChange={(e: Event) => setSubtitlesEnabled(e: Event.target.checked)}
+                          onChange={(e) => setSubtitlesEnabled(e.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -638,7 +638,7 @@ return;
                         <input
                           type="checkbox"
                           checked={autoplayNext}
-                          onChange={(e: Event) => setAutoplayNext(e: Event.target.checked)}
+                          onChange={(e) => setAutoplayNext(e.target.checked)}
                           className="rounded"
                         />
                       </label>
@@ -648,7 +648,7 @@ return;
                         <input
                           type="checkbox"
                           checked={annotations}
-                          onChange={(e: Event) => setAnnotations(e: Event.target.checked)}
+                          onChange={(e) => setAnnotations(e.target.checked)}
                           className="rounded"
                         />
                       </label>

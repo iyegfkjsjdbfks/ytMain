@@ -119,9 +119,9 @@ const PlaylistManagerPage: React.FC = () => {
         totalPlaylists: playlists.length,
         totalVideos: playlists.reduce((sum, playlist) => sum + playlist.videoCount, 0),
         totalViews: playlists.reduce((sum, playlist) => sum + playlist.totalViews, 0),
-        publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
-        privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length,
+        publicPlaylists: playlists.filter((p) => p.visibility === 'public').length,
+        privatePlaylists: playlists.filter((p) => p.visibility === 'private').length,
+        unlistedPlaylists: playlists.filter((p) => p.visibility === 'unlisted').length,
       };
     };
 
@@ -134,13 +134,13 @@ const PlaylistManagerPage: React.FC = () => {
   }, []);
 
   const filteredPlaylists = playlists
-    .filter((playlist: any) => {
+    .filter((playlist) => {
       const matchesSearch = playlist.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            playlist.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesVisibility = filterVisibility === 'all' || playlist.visibility === filterVisibility;
       return matchesSearch && matchesVisibility;
     })
-    .sort((a: any, b: any) => {
+    .sort((a: any, b) => {
       switch (sortBy) {
         case 'title':
           return a.title.localeCompare(b.title);
@@ -180,7 +180,7 @@ return;
 
   const handleDeletePlaylist = (playlistId: string) => {
     if (confirm('Are you sure you want to delete this playlist?')) {
-      setPlaylists(playlists.filter((p: any) => p.id !== playlistId));
+      setPlaylists(playlists.filter((p) => p.id !== playlistId));
       if (selectedPlaylist?.id === playlistId) {
         setSelectedPlaylist(null);
       }
@@ -199,7 +199,7 @@ return;
 
       const updatedPlaylist = { ...selectedPlaylist, videos: items };
       setSelectedPlaylist(updatedPlaylist);
-      setPlaylists(playlists.map(p: any => p: any.id === selectedPlaylist.id ? updatedPlaylist : p: any));
+      setPlaylists(playlists.map(p => p.id === selectedPlaylist.id ? updatedPlaylist : p: any));
     }
   };
 
@@ -301,13 +301,13 @@ return;
                 type="text"
                 placeholder="Search playlists..."
                 value={searchTerm}
-                onChange={(e: Event) => setSearchTerm(e: Event.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
 
               <select
                 value={sortBy}
-                onChange={(e: Event) => setSortBy(e: Event.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="updated">Last Updated</option>
@@ -318,7 +318,7 @@ return;
 
               <select
                 value={filterVisibility}
-                onChange={(e: Event) => setFilterVisibility(e: Event.target.value as any)}
+                onChange={(e) => setFilterVisibility(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="all">All Visibility</option>
@@ -330,7 +330,7 @@ return;
 
             {/* Playlists Grid */}
             <div className="space-y-4">
-              {filteredPlaylists.map((playlist: any) => (
+              {filteredPlaylists.map((playlist) => (
                 <div
                   key={playlist.id}
                   className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer transition-all ${
@@ -429,11 +429,11 @@ return;
                   <h4 className="font-medium text-gray-900 dark:text-white mb-3">Videos ({selectedPlaylist.videos.length})</h4>
                   <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable droppableId="playlist-videos">
-                      {(provided: any) => (
+                      {(provided) => (
                         <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video: any, index: number) => (
+                          {selectedPlaylist.videos.map((video, index: number) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
-                              {(provided: any, snapshot: any) => (
+                              {(provided: any, snapshot) => (
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
@@ -488,7 +488,7 @@ return;
                     type="text"
                     id="new-playlist-title"
                     value={newPlaylist.title}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, title: e: Event.target.value })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     placeholder="Enter playlist title"
                   />
@@ -499,7 +499,7 @@ return;
                   <textarea
                     id="new-playlist-description"
                     value={newPlaylist.description}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, description: e: Event.target.value })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, description: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
                     rows={3}
                     placeholder="Enter playlist description"
@@ -511,7 +511,7 @@ return;
                   <select
                     id="new-playlist-visibility"
                     value={newPlaylist.visibility}
-                    onChange={(e: Event) => setNewPlaylist({ ...newPlaylist, visibility: e: Event.target.value as any })}
+                    onChange={(e) => setNewPlaylist({ ...newPlaylist, visibility: e.target.value as any })}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
                     <option value="public">Public</option>

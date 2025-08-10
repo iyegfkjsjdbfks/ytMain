@@ -128,8 +128,8 @@ export class YouTubePlayer {
       height?: number;
       playerVars?: Record<string, any>;
       events?: {
-        onReady?: (event: any) => void;
-        onStateChange?: (event: any) => void;
+        onReady?: (event) => void;
+        onStateChange?: (event) => void;
       };
     } = {},
   ) {
@@ -202,10 +202,10 @@ export class YouTubePlayer {
           ...this.options.playerVars,
         },
         events: {
-          onReady: (event: any) => {
+          onReady: (event) => {
             this.options.events?.onReady?.(event);
           },
-          onStateChange: (event: any) => {
+          onStateChange: (event) => {
             this.options.events?.onStateChange?.(event);
           },
         },

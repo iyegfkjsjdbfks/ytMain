@@ -120,7 +120,7 @@ const GoogleSearchStoreDebug: FC = () => {
           <input
             type="text"
             value={testVideoId}
-            onChange={(e: Event) => setTestVideoId(e: Event.target.value)}
+            onChange={(e) => setTestVideoId(e.target.value)}
             placeholder="YouTube Video ID"
             className="flex-1 px-3 py-2 border rounded"
           />

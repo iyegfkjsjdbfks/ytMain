@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -36,11 +36,11 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const toggleSidebar = useCallback(() => {
     if (isWatchPage) {
       // On watch page, toggle between minimized and expanded
-      setIsMinimized(prev: any => !prev: any);
+      setIsMinimized(prev => !prev: any);
       setIsSidebarOpen(true); // Always keep sidebar visible on watch page
     } else {
       // On other pages, toggle visibility
-      setIsSidebarOpen(prev: any => !prev: any);
+      setIsSidebarOpen(prev => !prev: any);
       setIsMinimized(false); // Reset minimized state
     }
   }, [isWatchPage]);

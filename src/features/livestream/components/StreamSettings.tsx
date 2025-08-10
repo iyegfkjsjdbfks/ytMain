@@ -10,7 +10,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings: any) => void;
+  onSettingsChange?: (settings) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
@@ -42,7 +42,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
           <input
             type="text"
             value={settings.title}
-            onChange={(e: Event) => updateSettings({ title: e: Event.target.value })}
+            onChange={(e) => updateSettings({ title: e.target.value })}
             className="w-full px-3 py-2 border rounded-lg"
             placeholder="Enter stream title"
           />
@@ -52,7 +52,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
           <label className="block text-sm font-medium mb-1">Description</label>
           <textarea
             value={settings.description}
-            onChange={(e: Event) => updateSettings({ description: e: Event.target.value })}
+            onChange={(e) => updateSettings({ description: e.target.value })}
             className="w-full px-3 py-2 border rounded-lg h-24"
             placeholder="Enter stream description"
           />
@@ -62,7 +62,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
           <label className="block text-sm font-medium mb-1">Category</label>
           <select
             value={settings.category}
-            onChange={(e: Event) => updateSettings({ category: e: Event.target.value })}
+            onChange={(e) => updateSettings({ category: e.target.value })}
             className="w-full px-3 py-2 border rounded-lg"
           >
             <option value="Gaming">Gaming</option>
@@ -76,7 +76,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
           <label className="block text-sm font-medium mb-1">Privacy</label>
           <select
             value={settings.privacy}
-            onChange={(e: Event) => updateSettings({ privacy: e: Event.target.value })}
+            onChange={(e) => updateSettings({ privacy: e.target.value })}
             className="w-full px-3 py-2 border rounded-lg"
           >
             <option value="public">Public</option>
@@ -90,7 +90,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <label className="block text-sm font-medium mb-1">Resolution</label>
             <select
               value={settings.quality.resolution}
-              onChange={(e: Event) => updateSettings({
+              onChange={(e) => updateSettings({
                 quality: { ...settings.quality, resolution: e.target.value }
               })}
               className="w-full px-3 py-2 border rounded-lg"
@@ -107,7 +107,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <input
               type="number"
               value={settings.quality.bitrate}
-              onChange={(e: Event) => updateSettings({
+              onChange={(e) => updateSettings({
                 quality: { ...settings.quality, bitrate: parseInt(e.target.value) }
               })}
               className="w-full px-3 py-2 border rounded-lg"
@@ -118,7 +118,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <label className="block text-sm font-medium mb-1">FPS</label>
             <select
               value={settings.quality.fps}
-              onChange={(e: Event) => updateSettings({
+              onChange={(e) => updateSettings({
                 quality: { ...settings.quality, fps: parseInt(e.target.value) }
               })}
               className="w-full px-3 py-2 border rounded-lg"
@@ -134,7 +134,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <input
               type="checkbox"
               checked={settings.enableChat}
-              onChange={(e: Event) => updateSettings({ enableChat: e: Event.target.checked })}
+              onChange={(e) => updateSettings({ enableChat: e.target.checked })}
               className="mr-2"
             />
             Enable Live Chat
@@ -144,7 +144,7 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
             <input
               type="checkbox"
               checked={settings.enableDonations}
-              onChange={(e: Event) => updateSettings({ enableDonations: e: Event.target.checked })}
+              onChange={(e) => updateSettings({ enableDonations: e.target.checked })}
               className="mr-2"
             />
             Enable Donations/Super Chat

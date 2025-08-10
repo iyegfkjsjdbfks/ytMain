@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -112,7 +112,7 @@ const DevOpsDashboard: React.FC = () => {
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes
           frequency: deploymentMetrics.deploymentFrequency,
-          activeDeployments: deploymentAutomation.getAllExecutions().filter((e: any) => e.status === 'running').length,
+          activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length,
         },
         codeQuality: {
           score: codeMetrics ? Math.round(
@@ -143,7 +143,7 @@ const DevOpsDashboard: React.FC = () => {
           acknowledged: alert.acknowledged,
         })),
         ...deploymentAutomation.getAllExecutions()
-          .filter((exec: any) => exec.status === 'failed')
+          .filter((exec) => exec.status === 'failed')
           .slice(0, 5)
           .map(exec => ({
             id: exec.id,
@@ -330,7 +330,7 @@ return <div>Loading...</div>;
             <h3 className="text-lg font-medium text-gray-900">Recent Alerts</h3>
           </div>
           <div className="divide-y divide-gray-200">
-            {alerts.slice(0, 5).map((alert: any) => (
+            {alerts.slice(0, 5).map((alert) => (
               <div key={alert.id} className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-3">

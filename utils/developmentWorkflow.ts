@@ -72,7 +72,7 @@ class IntelligentWorkflowEngine {
   private deploymentStrategies: Map<string, DeploymentStrategy> = new Map();
   private qualityGateHistory: QualityGateResult[] = [];
   private isRunning = false;
-  private currentDeployment: any = null;
+  private currentDeployment= null;
 
   constructor() {
     this.setupDefaultWorkflows();
@@ -306,14 +306,14 @@ return undefined;
     };
   } {
     const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
-    const recentResults = this.qualityGateHistory.filter((r: any) => r.timestamp > cutoff);
+    const recentResults = this.qualityGateHistory.filter((r) => r.timestamp > cutoff);
 
     const totalExecutions = recentResults.length;
-    const successfulExecutions = recentResults.filter((r: any) => r.passed).length;
+    const successfulExecutions = recentResults.filter((r) => r.passed).length;
     const successRate = totalExecutions > 0 ? successfulExecutions / totalExecutions : 0;
 
     const failuresByStage: Record<string, number> = {};
-    recentResults.filter((r: any) => !r.passed).forEach(r => {
+    recentResults.filter((r) => !r.passed).forEach(r => {
       failuresByStage[r.stage] = (failuresByStage[r.stage] || 0) + 1;
     });
 
@@ -632,7 +632,7 @@ return undefined;
     return {
       healthy,
       details: {
-        _checks: _checks.map(check: any => ({
+        _checks: _checks.map(check => ({
           name: check,
           status: healthy ? 'healthy' : 'unhealthy',
           responseTime: Math.random() * 100 + 50,
@@ -677,7 +677,7 @@ return undefined;
     return (((analysis as any)))[_source] || Math.random() * 100;
   }
 
-  private async executeAutoFix(___config: any): Promise<void> {
+  private async executeAutoFix(___config): Promise<void> {
     console.log('🔧 Executing auto-fix:', _config.type);
     // Implementation would depend on the type of fix
   }
@@ -687,12 +687,12 @@ return undefined;
     // Implementation would integrate with issue tracking system
   }
 
-  private async executeRollback(___config: any): Promise<void> {
+  private async executeRollback(___config): Promise<void> {
     console.log('⏪ Executing rollback:', _config.reason);
     // Implementation would rollback to previous _version
   }
 
-  private async executeScaling(___config: any): Promise<void> {
+  private async executeScaling(___config): Promise<void> {
     console.log('📈 Executing scaling:', _config._action);
     // Implementation would scale infrastructure
   }

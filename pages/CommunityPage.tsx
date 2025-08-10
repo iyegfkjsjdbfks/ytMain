@@ -66,7 +66,7 @@ return;
       type: newPostType,
       content: newPostContent,
       ...(newPostType === 'image' && { imageUrl: '/api/placeholder/600/400' }),
-      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt: any) => opt: any.trim()).map((opt: any, idx: any) => ({
+      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt: any, idx) => ({
         id: `option-${idx}`,
         text: opt,
         votes: 0,
@@ -89,7 +89,7 @@ return;
   };
 
   const toggleLike = (postId: string) => {
-    setPosts(posts.map(post: any =>
+    setPosts(posts.map(post =>
       post.id === postId
         ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
         : post,
@@ -286,7 +286,7 @@ return;
                   {/* Content Input */}
                   <textarea
                     value={newPostContent}
-                    onChange={(e: Event) => setNewPostContent(e: Event.target.value)}
+                    onChange={(e) => setNewPostContent(e.target.value)}
                     placeholder="What's on your mind?"
                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
                     rows={4}
@@ -299,7 +299,7 @@ return;
                         <input
                           key={index}
                           value={option}
-                          onChange={(e: Event) => {
+                          onChange={(e) => {
                             const newOptions = [...pollOptions];
                             newOptions[index] = e.target.value;
                             setPollOptions(newOptions);
@@ -341,7 +341,7 @@ return;
 
             {/* Posts List */}
             <div className="space-y-6">
-              {posts.map((post: any) => (
+              {posts.map((post) => (
                 <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                   {/* Post Header */}
                   <div className="flex items-center justify-between mb-4">
@@ -379,9 +379,9 @@ return;
 
                     {post.type === 'poll' && post.pollOptions && (
                       <div className="space-y-2 mt-3">
-                        {post.pollOptions.map((option: any) => {
+                        {post.pollOptions.map((option) => {
                           const pollOptions = post.pollOptions!;
-                          const totalVotes = pollOptions.reduce((sum: any, opt: any) => sum: any + opt: any.votes, 0);
+                          const totalVotes = pollOptions.reduce((sum: any, opt) => sum: any + opt.votes, 0);
                           const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
 
                           return (
@@ -400,7 +400,7 @@ return;
                           );
                         })}
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                          {post.pollOptions.reduce((sum: any, opt: any) => sum: any + opt: any.votes, 0)} votes
+                          {post.pollOptions.reduce((sum: any, opt) => sum: any + opt.votes, 0)} votes
                         </p>
                       </div>
                     )}

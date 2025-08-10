@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -71,7 +71,7 @@ return null;
       <div className="mb-6">
         <h4 className="text-sm font-medium mb-2 text-gray-300">Quality</h4>
         <div className="space-y-1">
-          {qualities.map((quality: any) => (
+          {qualities.map((quality) => (
             <button
               key={quality.value}
               onClick={() => onQualityChange(quality.value)}
@@ -111,7 +111,7 @@ return null;
               )}
             </div>
           </button>
-          {subtitles.map((subtitle: any) => (
+          {subtitles.map((subtitle) => (
             <button
               key={subtitle.srcLang}
               onClick={() => onSubtitleChange(subtitle.srcLang)}
@@ -139,7 +139,7 @@ return null;
           <input
             type="checkbox"
             checked={autoplay}
-            onChange={(e: Event) => onAutoplayChange(e: Event.target.checked)}
+            onChange={(e) => onAutoplayChange(e.target.checked)}
             className="w-4 h-4 text-red-600 bg-gray-700 border-gray-600 rounded focus:ring-red-500 focus:ring-2"
           />
           <span className="text-sm text-gray-300">Autoplay next video</span>

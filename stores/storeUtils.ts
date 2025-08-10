@@ -15,7 +15,7 @@ export interface StoreConfig {
   persist?: {
     enabled: boolean;
     storage?: 'localStorage' | 'sessionStorage' | 'secure';
-    partialize?: (state: any) => any;
+    partialize?: (state) => any;
     version?: number;
     migrate?: (persistedState: any, version: number) => any;
   };
@@ -69,7 +69,7 @@ const performanceMiddleware = <T>(
   config: StateCreator<T, [], [], T>,
   storeName: string,
 ): StateCreator<T, [], [], T> => {
-  return (set: any, get: any, api: any) => {
+  return (set: any, get: any, api) => {
     const originalSet = set;
 
     const wrappedSet = (partial: any, replace?: boolean) => {
@@ -101,26 +101,26 @@ export function createAsyncState<T>(initialData: T | null = null): AsyncState<T>
 
 export function createAsyncActions<T>() {
   return {
-    setLoading: (loading: boolean) => (state: any) => {
+    setLoading: (loading: boolean) => (state) => {
       state.loading = loading;
       if (loading) {
         state.error = null;
       }
     },
 
-    setData: (data: T) => (state: any) => {
+    setData: (data: T) => (state) => {
       state.data = data;
       state.loading = false;
       state.error = null;
       state.lastFetch = Date.now();
     },
 
-    setError: (error: string) => (state: any) => {
+    setError: (error: string) => (state) => {
       state.error = error;
       state.loading = false;
     },
 
-    reset: () => (state: any) => {
+    reset: () => (state) => {
       state.data = null;
       state.loading = false;
       state.error = null;
@@ -144,7 +144,7 @@ export function createPaginatedState<T>(pageSize: number = 20): PaginatedState<T
 
 export function createPaginatedActions<T>() {
   return {
-    setItems: (items: T[], total: number, page: number) => (state: any) => {
+    setItems: (items: T[], total: number, page: number) => (state) => {
       if (page === 1) {
         state.items = items;
       } else {
@@ -157,19 +157,19 @@ export function createPaginatedActions<T>() {
       state.error = null;
     },
 
-    setLoading: (loading: boolean) => (state: any) => {
+    setLoading: (loading: boolean) => (state) => {
       state.loading = loading;
       if (loading) {
         state.error = null;
       }
     },
 
-    setError: (error: string) => (state: any) => {
+    setError: (error: string) => (state) => {
       state.error = error;
       state.loading = false;
     },
 
-    reset: () => (state: any) => {
+    reset: () => (state) => {
       state.items = [];
       state.page = 1;
       state.total = 0;
@@ -178,7 +178,7 @@ export function createPaginatedActions<T>() {
       state.error = null;
     },
 
-    removeItem: (predicate: (item: T) => boolean) => (state: any) => {
+    removeItem: (predicate: (item: T) => boolean) => (state) => {
       const index = state.items.findIndex(predicate);
       if (index !== -1) {
         state.items.splice(index, 1);
@@ -186,7 +186,7 @@ export function createPaginatedActions<T>() {
       }
     },
 
-    updateItem: (predicate: (item: T) => boolean, updates: Partial<T>) => (state: any) => {
+    updateItem: (predicate: (item: T) => boolean, updates: Partial<T>) => (state) => {
       const index = state.items.findIndex(predicate);
       if (index !== -1) {
         Object.assign(state.items[index], updates);
@@ -247,7 +247,7 @@ export function createEnhancedStore<T>(
   stateCreator: StateCreator<T, [], [], T>,
   config: StoreConfig,
 ) {
-  let enhancedCreator: any = stateCreator;
+  let enhancedCreator= stateCreator;
 
   // Apply immer middleware
   if (config.immer) {
@@ -272,7 +272,7 @@ export function createEnhancedStore<T>(
       ? sessionStorage
       : localStorage;
 
-    const persistOptions: any = {
+    const persistOptions= {
       name: config.name,
       storage: storage as any, // Type assertion for storage compatibility
       version: config.persist.version || 1,
@@ -404,7 +404,7 @@ export function createValidator<T extends object>(schema: {
 
     for (const [key, validator] of Object.entries(schema)) {
       if (validator && key in state) {
-        const result = (validator as (value: any) => boolean | string)(state[key as keyof T]);
+        const result = (validator as (value) => boolean | string)(state[key as keyof T]);
 
         if (typeof result === 'string') {
           errors[key] = result;
@@ -429,7 +429,7 @@ export class StoreSynchronizer {
     this.instances.set(name, store);
   }
 
-  static sync(fromStore: string, toStore: string, mapper: (state: any) => any): void {
+  static sync(fromStore: string, toStore: string, mapper: (state) => any): void {
     const from = this.instances.get(fromStore);
     const to = this.instances.get(toStore);
 
@@ -439,7 +439,7 @@ export class StoreSynchronizer {
     }
 
     // Subscribe to changes in the source store
-    from.subscribe((state: any) => {
+    from.subscribe((state) => {
       const mappedState = mapper(state);
       to.setState(mappedState);
     });

@@ -15,7 +15,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }: any) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -31,12 +31,12 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }: any) => (
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }: any) => (
+const VideoList = ({ videos, onVideoSelect, loading }) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
     ) : (
-      videos.map((video: any) => (
+      videos.map((video) => (
         <div
           key={video.id}
           data-testid={`video-item-${video.id}`}
@@ -53,7 +53,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: any) => (
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }: any) => {
+const CommentSection = ({ comments, onAddComment }) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,7 +71,7 @@ const CommentSection = ({ comments, onAddComment }: any) => {
       <form onSubmit={handleSubmit} data-testid="comment-form">
         <textarea
           value={newComment}
-          onChange={(e: Event) => setNewComment(e: Event.target.value)}
+          onChange={(e) => setNewComment(e.target.value)}
           placeholder="Add a comment..."
           aria-label="Add a comment"
           data-testid="comment-input"
@@ -82,7 +82,7 @@ const CommentSection = ({ comments, onAddComment }: any) => {
       </form>
 
       <div className="comments-list">
-        {comments.map((comment: any) => (
+        {comments.map((comment) => (
           <div key={comment.id} data-testid={`comment-${comment.id}`} className="comment">
             <img src={comment.author.avatar} alt={comment.author.name} />
             <div>
@@ -134,7 +134,7 @@ const VideoPage = () => {
     loadData();
   }, []);
 
-  const handleVideoSelect = async (video: any) => {
+  const handleVideoSelect = async (video) => {
     setCurrentVideo(video);
     setWatchTime(0);
 
@@ -161,7 +161,7 @@ return;
       });
 
       const newComment = await response.json();
-      setComments(prev: any => [newComment.data, ...prev: any]);
+      setComments(prev => [newComment.data, ...prev]);
     } catch (error) {
       console.error('Failed to add comment:', error);
     }
@@ -521,7 +521,7 @@ describe('Integration Tests', () => {
 
       // All interactive elements should be accessible
       const buttons = screen.getAllByRole('button');
-      buttons.forEach(button: any => {
+      buttons.forEach(button => {
         const ariaLabel = button.getAttribute('aria-label');
         const { textContent } = button;
         const accessibleName = ariaLabel || textContent || 'Button';

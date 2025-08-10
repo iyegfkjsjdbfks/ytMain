@@ -34,7 +34,7 @@ const ShortsPage: React.FC = () => {
     try {
       // Ensure we have a valid array
       const validArray = Array.isArray(likedShortsArray) ? likedShortsArray : [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string'));
+      return new Set(validArray.filter((item) => typeof item === 'string'));
     } catch (error) {
       console.warn('Error creating likedShorts Set:', error);
       // Clear invalid data and return empty Set
@@ -47,7 +47,7 @@ const ShortsPage: React.FC = () => {
     try {
       // Ensure we have a valid array
       const validArray = Array.isArray(followedChannelsArray) ? followedChannelsArray : [];
-      return new Set(validArray.filter((item: any) => typeof item === 'string'));
+      return new Set(validArray.filter((item) => typeof item === 'string'));
     } catch (error) {
       console.warn('Error creating followedChannels Set:', error);
       // Clear invalid data and return empty Set
@@ -81,7 +81,7 @@ return [];
 
     // Convert Video[] to Short[] with proper type conversion
     let converted: Short[] = allShorts
-      .filter((video: any) => video.visibility !== 'scheduled') // Filter out scheduled videos
+      .filter((video) => video.visibility !== 'scheduled') // Filter out scheduled videos
       .map(video => {
         const shortVideo: Short = {
           ...video,
@@ -134,7 +134,7 @@ return [];
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
-        return currentArray.filter((id: any) => id !== shortId);
+        return currentArray.filter((id) => id !== shortId);
       }
         return [...currentArray, shortId];
 
@@ -145,7 +145,7 @@ return [];
     setFollowedChannelsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
-        return currentArray.filter((name: any) => name !== channelName);
+        return currentArray.filter((name) => name !== channelName);
       }
         return [...currentArray, channelName];
 
@@ -154,7 +154,7 @@ return [];
 
   const handleComment = useCallback((shortId: string) => {
     const currentFilteredShorts = filteredShorts;
-    const short = currentFilteredShorts.find(s: any => s: any.id === shortId);
+    const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
@@ -196,7 +196,7 @@ return;
   }, []);
 
   const handleNextVideo = useCallback(() => {
-    setCurrentVideoIndex(prevIndex: any => {
+    setCurrentVideoIndex(prevIndex => {
       const currentFilteredShorts = filteredShorts;
       if (prevIndex < currentFilteredShorts.length - 1) {
         const nextIndex = prevIndex + 1;
@@ -223,7 +223,7 @@ return;
   }, []);
 
   const handlePreviousVideo = useCallback(() => {
-    setCurrentVideoIndex(prevIndex: any => {
+    setCurrentVideoIndex(prevIndex => {
       if (prevIndex > 0) {
         const currentFilteredShorts = filteredShorts;
         const prevVideoIndex = prevIndex - 1;
@@ -250,14 +250,14 @@ return;
   }, []);
 
   const handleSearchToggle = useCallback(() => {
-    setShowSearch(prev: any => !prev: any);
+    setShowSearch(prev => !prev: any);
     if (showSearch) {
       setSearchQuery('');
     }
   }, [showSearch]);
 
   const handleFilterToggle = useCallback(() => {
-    setShowFilters(prev: any => !prev: any);
+    setShowFilters(prev => !prev: any);
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
@@ -457,7 +457,7 @@ return;
     if (targetVideoId && !initializedRef.current && containerRef.current) {
       const currentFilteredShorts = filteredShorts;
       if (currentFilteredShorts.length > 0) {
-        const targetIndex = currentFilteredShorts.findIndex(short: any => short: any.id === targetVideoId);
+        const targetIndex = currentFilteredShorts.findIndex(short => short.id === targetVideoId);
         if (targetIndex !== -1) {
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
@@ -499,7 +499,7 @@ return;
             const videoElement = entry.target as HTMLElement;
             const index = Array.from(containerRef.current?.children || []).indexOf(videoElement);
             if (index !== -1) {
-              setCurrentVideoIndex((prevIndex: any) => {
+              setCurrentVideoIndex((prevIndex) => {
                 if (index !== prevIndex) {
                   // Update URL without triggering scroll
                   const currentFilteredShorts = filteredShorts;
@@ -574,7 +574,7 @@ return;
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search shorts..."
                   className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                   autoFocus
@@ -646,7 +646,7 @@ return;
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e: Event) => setSearchQuery(e: Event.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search shorts..."
                 className="w-full bg-white/10 text-white placeholder-white/60 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-white/20"
                 autoFocus

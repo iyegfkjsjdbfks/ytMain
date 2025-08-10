@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -202,7 +202,7 @@ return 'Playlist name must be less than 100 characters';
               </div>
             ) : (
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                {existingPlaylists.map((playlist: any) => (
+                {existingPlaylists.map((playlist) => (
                   <label
                     key={playlist.id}
                     htmlFor={`playlist-${playlist.id}`}
@@ -214,7 +214,7 @@ return 'Playlist name must be less than 100 characters';
                       name="playlist"
                       value={playlist.id}
                       checked={selectedPlaylistId === playlist.id}
-                      onChange={(e: Event) => setSelectedPlaylistId(e: Event.target.value)}
+                      onChange={(e) => setSelectedPlaylistId(e.target.value)}
                       className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                     />
                     <div className="ml-3 flex-1">

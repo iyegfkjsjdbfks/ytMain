@@ -238,7 +238,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value: any): value is Record<string, any> {
+export function isObject(value): value is Record<string, any> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -247,7 +247,7 @@ export function isObject(value: any): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value: any): value is (...args) => any {
+export function isFunction(value): value is (...args) => any {
   return typeof value === 'function';
 }
 
@@ -400,7 +400,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value: any): value is string {
+export function isString(value): value is string {
   return typeof value === 'string' || value instanceof String;
 }
 
@@ -409,7 +409,7 @@ export function isString(value: any): value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value: any): value is number {
+export function isNumber(value): value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 

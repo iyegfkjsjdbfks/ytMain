@@ -128,7 +128,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
     className,
     asChild = false,
     ...props
-  }, ref: any) => {
+  }, ref) => {
     const isDisabled = disabled || loading;
 
     const buttonClasses = cn(
@@ -193,23 +193,23 @@ UnifiedButton.displayName = 'UnifiedButton';
 
 // Export convenience components for common use cases
 export const PrimaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="primary" {...props: any} />,
+  (props: any, ref) => <UnifiedButton ref={ref: any} variant="primary" {...props} />,
 );
 
 export const SecondaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="secondary" {...props: any} />,
+  (props: any, ref) => <UnifiedButton ref={ref: any} variant="secondary" {...props} />,
 );
 
 export const DangerButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="danger" {...props: any} />,
+  (props: any, ref) => <UnifiedButton ref={ref: any} variant="danger" {...props} />,
 );
 
 export const GhostButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="ghost" {...props: any} />,
+  (props: any, ref) => <UnifiedButton ref={ref: any} variant="ghost" {...props} />,
 );
 
 export const LinkButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props: any, ref: any) => <UnifiedButton ref: any={ref: any} variant="link" {...props: any} />,
+  (props: any, ref) => <UnifiedButton ref={ref: any} variant="link" {...props} />,
 );
 
 PrimaryButton.displayName = 'PrimaryButton';

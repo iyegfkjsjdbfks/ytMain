@@ -2,7 +2,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName]: any;
     }
   }
 }
@@ -54,7 +54,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
     children,
     disabled,
     ...props
-  }, ref: any) => {
+  }, ref) => {
     const isDisabled = disabled || loading;
 
     return (
@@ -108,7 +108,7 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
     className,
     id,
     ...props
-  }, ref: any) => {
+  }, ref) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
     const hasError = !!error;
 

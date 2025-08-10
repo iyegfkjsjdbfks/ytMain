@@ -211,7 +211,7 @@ return;
     }
   }
 
-  private observePerformanceEntry(entryType: string, callback: (entry: any) => void): void {
+  private observePerformanceEntry(entryType: string, callback: (entry) => void): void {
     try {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach(callback);
