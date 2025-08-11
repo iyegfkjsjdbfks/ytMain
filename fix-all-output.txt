@@ -133,3 +133,4 @@ Node.js v20.19.4
 [0m
 [36m🔧 [2025-08-11T00:31:11.042Z] Starting Type Not Assignable (Legacy) (TS2322) fixes...[0m
 [36m🔧 [2025-08-11T00:31:11.044Z] Type Not Assignable (Legacy): 153 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:11.063Z] Created checkpoint before Type Not Assignable (Legacy) (TS2322)[0m
