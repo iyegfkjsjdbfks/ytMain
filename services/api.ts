@@ -214,11 +214,11 @@ export class VideoService {
         }
 
         // Limit results and add pagination simulation
-        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0', 10)  :  ;
+        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0', 10) : 0;
         const endIndex = Math.min(startIndex + limit, videos.length);
         const paginatedVideos = videos.slice(startIndex, endIndex);
 
-        const nextPageToken = endIndex < videos.length `token_${endIndex}` : undefined;
+        const nextPageToken = endIndex < videos.length ? `token_${endIndex}` : undefined;
         return {
           videos: paginatedVideos,
           ...(nextPageToken && { nextPageToken }),
@@ -240,7 +240,7 @@ export class VideoService {
         url.searchParams.set('q', category);
       }
 
-      const response = await httpClient.getany>(
+      const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.MEDIUM,
@@ -252,8 +252,8 @@ export class VideoService {
         description: item.snippet.description,
         duration: '0',
         thumbnailUrl: item.snippet.thumbnails.medium.url,
-        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
-        views : '0,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        views: '0',
         likes: 0,
         dislikes: 0,
         uploadedAt: item.snippet.publishedAt,
@@ -296,13 +296,13 @@ export class VideoService {
       url.searchParams.set('id', id);
       url.searchParams.set('key', API_KEY || '');
 
-      const response = await httpClient.getany>(
+      const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.LONG,
       );
 
-      const item = response.items.[0];
+      const item = response.items[0];
       if (!item) {
 return null;
 }
@@ -319,7 +319,7 @@ return null;
         uploadedAt: item.snippet.publishedAt| new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        videoUrl: `https://www.youtube.comwatch ? v=${item.id}`,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
         channelId : item.snippet.channelI,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
@@ -336,10 +336,10 @@ return null;
   }
 
   static async searchVideos(
-    query,
+    query: string,
     limit: number = 20,
     pageToken?: string,
-  ) Promise<{ videos: Video; nextPageToken?: string }> {
+  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
     const cacheKey = `search_${query}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -350,7 +350,7 @@ return null;
         const { searchVideos } = await import('./realVideoService');
         const videos = await searchVideos(query);
 
-        const nextPageToken = Math.random() 0.5 `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -368,7 +368,7 @@ return null;
         url.searchParams.set('pageToken', pageToken);
       }
 
-      const response = await httpClient.getany>(
+      const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.SHORT,
@@ -380,8 +380,8 @@ return null;
         description: item.snippet.description,
         duration: '0',
         thumbnailUrl: item.snippet.thumbnails.medium.url,
-        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
-        views : '0,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        views: '0',
         likes: 0,
         dislikes: 0,
         uploadedAt: item.snippet.publishedAt,
@@ -407,7 +407,7 @@ return null;
     }
   }
 
-  private static parseDuration(duration): number {
+  private static parseDuration(duration: string): number {
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
@@ -428,13 +428,13 @@ function generateMockChannel(id): Channel {
     id,
     name: `Channel ${id}`,
     description: `Mock channel description for ${id}`,
-    avatarUrl: 'https://yt3.ggpht.coma/default-user=s88-c-k-c0x00ffffff-no-rj',
-    banner: 'https://yt3.ggpht.coma/default-user=s2560-c-k-c0x00ffffff-no-rj',
-    subscribers: Math.floor(Math.random() 1000000),
-    subscriberCount: '1.2M,
-    videoCount: Math.floor(Math.random() 500),
-    totalViews: Math.floor(Math.random() 10000000),
-    isVerified: Math.random() 0.5,
+    avatarUrl: 'https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj',
+    banner: 'https://yt3.ggpht.com/a/default-user=s2560-c-k-c0x00ffffff-no-rj',
+    subscribers: Math.floor(Math.random() * 1000000),
+    subscriberCount: '1.2M',
+    videoCount: Math.floor(Math.random() * 500),
+    totalViews: Math.floor(Math.random() * 10000000),
+    isVerified: Math.random() > 0.5,
     joinedDate: '2020-01-01',
     country: 'US',
     createdAt: new Date().toISOString(),
@@ -457,13 +457,13 @@ export class ChannelService {
       url.searchParams.set('id', id);
       url.searchParams.set('key', API_KEY || '');
 
-      const response = await httpClient.getany>(
+      const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.LONG,
       );
 
-      const item = response.items.[0];
+      const item = response.items[0];
       if (!item) {
 return null;
 }
@@ -473,10 +473,10 @@ return null;
         name: item.snippet.title,
         description: item.snippet.description,
         avatarUrl: item.snippet.thumbnails.medium.url,
-        banner: item.brandingSettings.image ? .bannerExternalUrl || '',
-        subscribers : parseInt(item.statistics.subscriberCount| '0, 10),
-        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount| 0, 10) 1000)}K`,
-        videoCount: parseInt(item.statistics.videoCount| '0', 10),
+        banner: item.brandingSettings.image?.bannerExternalUrl || '',
+        subscribers: parseInt(item.statistics.subscriberCount || '0', 10),
+        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0', 10) / 1000)}K`,
+        videoCount: parseInt(item.statistics.videoCount || '0', 10),
         isVerified: false, // Would need to check separately
         createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString(),
@@ -491,7 +491,7 @@ return null;
     channelId,
     limit: number = 20,
     pageToken?: string,
-  ) Promise<{ videos: Video; nextPageToken?: string }> {
+  ): Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `channel_videos_${channelId}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -502,7 +502,7 @@ return null;
         const { getVideosByChannelName } = await import('./realVideoService');
         const videos = await getVideosByChannelName(channelId);
 
-        const nextPageToken = Math.random() 0.4 `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -521,7 +521,7 @@ return null;
         url.searchParams.set('pageToken', pageToken);
       }
 
-      const response = await httpClient.getany>(
+      const response = await httpClient.get<any>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.MEDIUM,
@@ -539,7 +539,7 @@ return null;
         uploadedAt: item.snippet.publishedAt| new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
+        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         channelId : item.snippet.channelI,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',

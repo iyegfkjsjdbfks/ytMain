@@ -34,7 +34,7 @@ class AuthService {
   /**
    * Register a new user
    */
-  async register(data: RegisterData) Promise<User> {
+  async register(data: RegisterData): Promise<User> {
     const response = await fetch(`${this.baseUrl}/register`, {
       method: 'POST',
       headers: {
@@ -56,13 +56,13 @@ class AuthService {
   /**
    * Log out the current user
    */
-  async logout() Promise<void> {
+  async logout(): Promise<void> {
     const tokens = this.getTokens();
 
-    if (tokens ? .refreshToken) {
+    if (tokens?.refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
-          method : 'POST,
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${tokens.accessToken}`,
@@ -80,10 +80,10 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser() Promise<User | nul={true}l> {
+  async getCurrentUser(): Promise<User | nul={true}l> {
     const tokens = this.getTokens();
 
-    if (!tokens ? .accessToken) {
+    if (!tokens ?.accessToken) {
       return null;
     }
 
@@ -144,7 +144,7 @@ class AuthService {
   /**
    * Set authentication tokens in localStorage
    */
-  private setTokens(tokens: AuthTokens) void {
+  private setTokens(tokens: AuthTokens): void {
     localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
   }
 
@@ -168,7 +168,7 @@ class AuthService {
   /**
    * Clear authentication tokens from localStorage
    */
-  private clearTokens() void {
+  private clearTokens(): void {
     localStorage.removeItem(this.tokenKey);
   }
 

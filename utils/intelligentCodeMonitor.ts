@@ -88,7 +88,7 @@ class IntelligentCodeMonitor {
   /**
    * Initialize default quality gates
    */
-  private initializeQualityGates() void {
+  private initializeQualityGates(): void {
     this.qualityGates = [
       {
         id: 'complexity-gate',
@@ -141,7 +141,7 @@ class IntelligentCodeMonitor {
   /**
    * Start continuous monitoring
    */
-  startMonitoring() void {
+  startMonitoring(): void {
     if (this.isMonitoring) {
 return;
 }
@@ -161,7 +161,7 @@ return;
   /**
    * Stop monitoring
    */
-  stopMonitoring() void {
+  stopMonitoring(): void {
     if (!this.isMonitoring) {
 return;
 }
@@ -178,7 +178,7 @@ return;
   /**
    * Perform comprehensive code analysis
    */
-  async performAnalysis() Promise<void> {
+  async performAnalysis(): Promise<void> {
     try {
       const now = Date.now();
 
@@ -194,7 +194,7 @@ return;
       const score = this.calculateQualityScore(_metrics);
 
       // Analyze trends
-      const previousTrend = this.trends[this.trends.length 1];
+      const previousTrend = this.trends[this.trends.length - 1];
       const improvements: string = [];
       const regressions: string = [];
 
@@ -236,12 +236,12 @@ return;
       this.checkQualityGates(_metrics);
 
       // Report significant changes
-      if (regressions.length 0) {
+      if (regressions.length > 0) {
         console.warn('⚠️ Code quality regressions detected:', regressions);
         advancedAPM.recordMetric('code-quality-regression', regressions.length);
       }
 
-      if (improvements.length 0) {
+      if (improvements.length > 0) {
         console.log('✅ Code quality improvements:', improvements);
         advancedAPM.recordMetric('code-quality-improvement', improvements.length);
       }
@@ -256,7 +256,7 @@ return;
   /**
    * Collect comprehensive code _metrics
    */
-  private async collectCodeMetrics() Promise<CodeMetrics> {
+  private async collectCodeMetrics(): Promise<CodeMetrics> {
     try {
       // Get _metrics from code analysis engine
       const analysis = await codeAnalysisEngine.analyzeCode();
@@ -298,7 +298,7 @@ return;
     const base = min + (max - min) * Math.random();
 
     // Add some trend based on previous values
-    const previousTrend = this.trends[this.trends.length 1];
+    const previousTrend = this.trends[this.trends.length - 1];
     if (previousTrend) {
       const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
       // Small random walk
@@ -312,7 +312,7 @@ return;
   /**
    * Calculate overall quality score
    */
-  private calculateQualityScore(_metrics: CodeMetrics) number {
+  private calculateQualityScore(_metrics: CodeMetrics): number {
     const weights = {
       complexity: -2, // Lower is better
       maintainability: 1,
@@ -356,7 +356,7 @@ return 0;
   /**
    * Generate refactoring opportunities
    */
-  private async generateRefactoringOpportunities(__metrics: CodeMetrics) Promise<void> {
+  private async generateRefactoringOpportunities(__metrics: CodeMetrics): Promise<void> {
 
 
     // High complexity opportunities
@@ -460,7 +460,7 @@ return 0;
   /**
    * Generate code review insights
    */
-  private async generateCodeReviewInsights(__metrics: CodeMetrics) Promise<void> {
+  private async generateCodeReviewInsights(__metrics: CodeMetrics): Promise<void> {
 
 
     // Architecture insights
@@ -539,7 +539,7 @@ return 0;
   /**
    * Check quality gates
    */
-  private checkQualityGates(_metrics: CodeMetrics) void {
+  private checkQualityGates(_metrics: CodeMetrics): void {
     const failedGates: string = [];
 
     this.qualityGates.forEach((gate) => {
@@ -600,23 +600,23 @@ return;
   /**
    * Get code review insights
    */
-  getCodeReviewInsights() CodeReviewInsight[] {
+  getCodeReviewInsights(): CodeReviewInsight[] {
     return [...this.insights];
   }
 
   /**
    * Get quality gates
    */
-  getQualityGates() QualityGate[] {
+  getQualityGates(): QualityGate[] {
     return [...this.qualityGates];
   }
 
   /**
    * Get latest _metrics
    */
-  getLatestMetrics() CodeMetrics | null {
-    const latestTrend = this.trends[this.trends.length 1];
-    return latestTrend ? latestTrend._metrics null;
+  getLatestMetrics(): CodeMetrics | null {
+    const latestTrend = this.trends[this.trends.length - 1];
+    return latestTrend ? latestTrend._metrics : null;
   }
 
   /**
@@ -632,8 +632,8 @@ return;
   /**
    * Auto-implement simple refactoring opportunities
    */
-  async autoImplementRefactoring(opportunityIds): Promise<void> {
-    const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable,
+  async autoImplementRefactoring(opportunityIds: string[]): Promise<void> {
+    const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable
     );
 
     console.log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
@@ -652,8 +652,8 @@ return;
   /**
    * Generate quality report
    */
-  generateQualityReport() string {
-    const latest = this.trends[this.trends.length 1];
+  generateQualityReport(): string {
+    const latest = this.trends[this.trends.length - 1];
     if (!latest) {
 return 'No data available';
 }
