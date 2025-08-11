@@ -505,7 +505,7 @@ class YouTubeSearchService {
           }
           return isYouTubeVideo;
         })
-        .map((item: any, index: number) => this.convertToVideo(item: any, index: number))
+        .map((item: any, index: number) => this.convertToVideo(item, index))
         .filter((video: any) => {
           // Exclude the current video from recommendations
           const isDifferent = video.id !== currentVideo.id &&
@@ -574,7 +574,7 @@ class YouTubeSearchService {
 
       return data.items
         .filter((item: any) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
-        .map((item: any, index: number) => this.convertToVideo(item: any, index: number));
+        .map((item: any, index: number) => this.convertToVideo(item, index));
 
     } catch (error) {
       const networkError = createNetworkError(

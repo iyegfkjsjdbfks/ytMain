@@ -366,7 +366,7 @@ export function useMutation<T, TVariables = any>(
 
 // Cache utilities
 export const queryCache = {
-  invalidate: (key: string) => apiCache.invalidate(key:, string),
+  invalidate: (key:, string) => apiCache.invalidate(key:, string),
   clear: () => apiCache.clear(),
   get: <T>(key: string) => apiCache.get<T>(key: string),
   set: <T>(key: string, data: T, staleTime?: number) => apiCache.set(key: string, data, staleTime),

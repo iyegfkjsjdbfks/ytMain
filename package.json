@@ -108,7 +108,8 @@
     "fix:ts2339-enhanced": "node scripts/fix-ts2339-property-enhanced.js",
     "fix:ts6133-enhanced": "node scripts/fix-ts6133-unused-vars-enhanced.js",
     "orchestrate:comprehensive-v3": "node scripts/comprehensive-orchestrator-v3.js",
-    "fix:ts1005-final": "node scripts/fix-ts1005-syntax-final.js"
+    "fix:ts1005-final": "node scripts/fix-ts1005-syntax-final.js",
+    "fix:final-cleanup": "node scripts/final-syntax-cleanup.js"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",
