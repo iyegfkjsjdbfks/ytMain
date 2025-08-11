@@ -151,7 +151,7 @@ class AuthService {
   /**
    * Get authentication tokens from localStorage
    */
-  private getTokens() AuthTokens | null {
+  private getTokens(): AuthTokens | null {
     const tokensString = localStorage.getItem(this.tokenKey);
     if (!tokensString) {
       return null;
