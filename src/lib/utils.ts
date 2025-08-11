@@ -196,8 +196,8 @@ export function toTitleCase(str): string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str): string {
-  return str;
+export function toKebabCase(str: string): string {
+  return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
     .toLowerCase();
@@ -245,7 +245,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value) value is Record<string, a={true}n={true}y> {
+export function isObject(value: any): value is Record<string, any> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -254,7 +254,7 @@ export function isObject(value) value is Record<string, a={true}n={true}y> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value) value is (...args) => any {
+export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === 'function';
 }
 
@@ -283,14 +283,14 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
+export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait,
+  wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 
-  return function executedFunction(...args: Parameters<T>);
-    const later = () => {;
+  return function executedFunction(...args: Parameters<T>) {
+    const later = () => {
       clearTimeout(timeout);
       func(...args);
     };
@@ -298,6 +298,7 @@ export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) 
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
+}
 }
 
 /**
