@@ -1,15 +1,6 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useLocation, Navigate, useLocation } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
-import type React from 'react';
 
+import type React from 'react';
 
 import { useAuth } from '../contexts/AuthContext';
 

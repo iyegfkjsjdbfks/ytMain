@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -442,11 +441,5 @@ handleFileSelect(file);
 
 export default VideoUploadPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+
 

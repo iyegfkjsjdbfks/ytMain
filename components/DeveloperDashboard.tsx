@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 /**
  * Intelligent Developer Dashboard
  * Provides a comprehensive view of application health, development metrics,

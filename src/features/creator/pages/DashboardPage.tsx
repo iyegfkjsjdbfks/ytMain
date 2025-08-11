@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import {
@@ -683,10 +682,4 @@ const DashboardPage: React.FC = () => {
 
 export default DashboardPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

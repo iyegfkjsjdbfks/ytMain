@@ -1,6 +1,3 @@
-
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate, Link } from 'react-router-dom';
 declare namespace React {
   interface JSX {
@@ -16,7 +13,6 @@ declare namespace React {
 }
 
 import React, { useState } from 'react';
-
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
@@ -213,11 +209,5 @@ const LoginPage: React.FC = () => {
 
 export default LoginPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

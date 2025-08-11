@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 import { FixedSizeList } from 'react-window';
-
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
@@ -224,10 +222,4 @@ MobileVideoGrid.displayName = 'MobileVideoGrid';
 
 export default MobileVideoGrid;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

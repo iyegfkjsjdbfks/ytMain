@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 import { VideoGridSkeleton, ErrorState, EmptyState } from './LoadingStates';
@@ -67,10 +66,4 @@ export function DataWrapper<T>({
 
 export default DataWrapper;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

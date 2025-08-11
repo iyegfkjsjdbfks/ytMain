@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
@@ -65,10 +64,4 @@ const ProtectedYouTubePlayer: React.FC<ProtectedYouTubePlayerProps> = ({
 
 export default ProtectedYouTubePlayer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

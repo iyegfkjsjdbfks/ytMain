@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useCallback } from 'react';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
@@ -62,10 +61,4 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
 
 export default ProtectedVideoPlayer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

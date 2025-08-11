@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import type React from 'react';
 
 import {
@@ -26,7 +18,6 @@ import { IconButton } from './ui/Button';
 
 import type { Video } from '../types';
 
-
 interface SubscriptionVideoCardProps {
   video: Video;
   viewType?: 'grid' | 'list';
@@ -40,7 +31,6 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
 }) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
   const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
-
 
   const videoUrl = buildVideoUrl(video.id);
   const channelUrl = buildChannelUrl(encodeURIComponent(video.channelName));
@@ -56,7 +46,6 @@ const SubscriptionVideoCard: React.FC<SubscriptionVideoCardProps> = ({
     }
     toggleSaved();
   };
-
 
   if (viewType === 'list') {
     return (

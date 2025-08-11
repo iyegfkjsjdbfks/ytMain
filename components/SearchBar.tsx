@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import { useEffect, useState } from 'react';
 
@@ -34,7 +26,6 @@ const SearchBar: React.FC = memo(() => {
   const navigate = useNavigate();
   const searchBarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
 
   const loadRecentSearches = useCallback(async () => {
     const fetchedRecent = await getRecentSearches();

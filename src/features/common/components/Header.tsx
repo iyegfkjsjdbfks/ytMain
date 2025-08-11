@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { useNavigate, Link } from 'react-router-dom';
@@ -199,10 +198,4 @@ const Header: React.FC = () => {
 
 export default Header;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

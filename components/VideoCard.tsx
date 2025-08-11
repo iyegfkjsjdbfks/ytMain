@@ -1,16 +1,7 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link, useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import React from 'react';
-
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';
@@ -21,7 +12,6 @@ import ImageWithFallback from './ImageWithFallback';
 import { IconButton } from './ui/Button';
 
 import type { Video } from '../src/types/core';
-
 
 interface VideoCardProps {
   video: Video;

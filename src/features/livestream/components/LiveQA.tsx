@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
@@ -365,10 +364,4 @@ const LiveQA: React.FC<LiveQAProps> = ({
 
 export default LiveQA;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

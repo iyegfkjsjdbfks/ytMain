@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import type React from 'react';
 
 import { VideoGridSkeleton } from './LoadingStates';
@@ -14,7 +6,6 @@ import OptimizedVideoCard from './OptimizedVideoCard';
 import VideoCard from './VideoCard';
 
 import type { Video } from '../types';
-
 
 interface ReusableVideoGridProps {
   videos: Video;

@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useRef, useEffect } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';

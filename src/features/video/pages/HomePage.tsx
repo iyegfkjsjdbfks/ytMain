@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 /**
@@ -24,10 +23,4 @@ const HomePage: React.FC = () => {
 
 export default HomePage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

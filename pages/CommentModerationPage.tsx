@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import CheckIcon, { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
@@ -420,10 +419,4 @@ return comments.filter((c) => c.flaggedReason).length;
 
 export default CommentModerationPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

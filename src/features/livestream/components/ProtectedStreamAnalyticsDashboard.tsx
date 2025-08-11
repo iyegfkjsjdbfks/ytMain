@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useCallback } from 'react';
 
 import { conditionalLogger } from '../../../utils/conditionalLogger';
@@ -42,10 +41,4 @@ const ProtectedStreamAnalyticsDashboard: FC<
 
 export default ProtectedStreamAnalyticsDashboard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

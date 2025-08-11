@@ -1,11 +1,4 @@
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useRef, useState } from 'react';
 
 import {
@@ -17,8 +10,6 @@ import {
 import AddCommentForm from './AddCommentForm';
 import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import ThumbsUpIcon from './icons/ThumbsUpIcon';
-/// <reference types="react/jsx-runtime" />
-
 export interface Comment {
   id: string;
   parentId?: string;

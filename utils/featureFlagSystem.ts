@@ -4,7 +4,6 @@
  * with real-time monitoring and automatic rollback capabilities.
  */
 
-
 import { advancedAPM } from './advancedMonitoring';
 
 import { performanceMonitor } from './performanceMonitor';
@@ -902,7 +901,6 @@ return undefined;
 
   private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
     const _threshold = this._threshold;
-
 
     switch (_threshold.metric) {
       case 'error_rate':

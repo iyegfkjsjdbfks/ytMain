@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import { useRef, useState } from 'react';
 
 import {
@@ -135,7 +127,6 @@ return;
       setIsMuted(!isMuted);
     }
   };
-
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     if (videoRef.current && duration > 0) {

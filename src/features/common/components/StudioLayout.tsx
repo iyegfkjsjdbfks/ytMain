@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import StudioHeader from './StudioHeader';
@@ -29,10 +28,4 @@ export const StudioLayout: React.FC = () => {
 
 export default StudioLayout;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
@@ -197,10 +196,4 @@ const TestMetadataFetch: React.FC = () => {
 
 export default TestMetadataFetch;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

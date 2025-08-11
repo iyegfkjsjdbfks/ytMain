@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
@@ -153,7 +151,6 @@ const SearchResultsPage: React.FC = () => {
     performSearch(debouncedQuery);
   }, [debouncedQuery, performSearch]);
 
-
   // Early return for empty query
   if (!query) {
     return (
@@ -191,11 +188,5 @@ const SearchResultsPage: React.FC = () => {
 // Export with memo for performance
 export default React.memo(SearchResultsPage);
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

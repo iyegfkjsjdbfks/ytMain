@@ -1,17 +1,8 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useEffect, useState } from 'react';
 
 import CheckIcon, { BellIcon } from '@heroicons/react/24/outline';
 import { BellIcon } from '@heroicons/react/24/solid';
-
 
 interface SubscriptionManagerProps {
   channelName: string;

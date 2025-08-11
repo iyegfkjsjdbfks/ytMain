@@ -4,7 +4,6 @@
  * and automated security response capabilities.
  */
 
-
 import { advancedAPM } from './advancedMonitoring';
 
 // Types for security monitoring

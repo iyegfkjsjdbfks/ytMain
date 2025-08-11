@@ -1,18 +1,9 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import React, { memo } from 'react';
 
 import VideoCard from './VideoCard';
 
 import type { Video } from '../src/types/core';
-
 
 interface VideoGridProps {
   videos: Video;

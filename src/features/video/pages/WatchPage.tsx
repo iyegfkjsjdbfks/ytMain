@@ -1,8 +1,6 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import Link, { Link, useParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
-
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -904,10 +902,4 @@ const WatchPage: React.FC = () => {
 
 export default WatchPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

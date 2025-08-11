@@ -1,15 +1,6 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useLocation, useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
-import { useEffect, useState } from 'react';
 
+import { useEffect, useState } from 'react';
 
 import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 
@@ -17,7 +8,6 @@ import Header from './Header';
 import MinimizedSidebar from './MinimizedSidebar';
 import Miniplayer from './Miniplayer';
 import Sidebar from './Sidebar';
-
 
 interface LayoutProps {}
 

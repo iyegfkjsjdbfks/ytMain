@@ -1,17 +1,8 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
 import type React from 'react';
-
 
 import { buildVideoUrl } from '../utils/componentUtils';
 

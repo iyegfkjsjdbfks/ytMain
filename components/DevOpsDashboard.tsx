@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 /**
  * Comprehensive DevOps Dashboard
  * Provides unified monitoring and management interface for all system aspects:

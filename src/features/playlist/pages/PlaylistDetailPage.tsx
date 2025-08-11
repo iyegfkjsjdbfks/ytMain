@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -32,10 +31,4 @@ const PlaylistDetailPage: React.FC = () => {
 
 export default PlaylistDetailPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { BellIcon } from '@heroicons/react/24/solid';
@@ -290,10 +289,4 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
 
 export default SubscriptionButton;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

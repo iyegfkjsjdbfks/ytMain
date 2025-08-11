@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -10,7 +9,6 @@ import { parseRelativeDate } from '../utils/dateUtils';
 import VideoCard from './VideoCard';
 
 import type { Channel } from '../types';
-
 
 interface ChannelTabContentProps {
   activeTab: string;
@@ -207,11 +205,5 @@ return null;
 
 export default ChannelTabContent;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

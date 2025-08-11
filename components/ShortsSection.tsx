@@ -1,8 +1,6 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-
 
 import { getShortsVideos } from '../services/realVideoService';
 
@@ -137,11 +135,5 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
 
 export default ShortsSection;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
@@ -159,10 +158,4 @@ const PWAStatus: React.FC = () => {
 
 export default PWAStatus;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

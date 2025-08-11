@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import { useRef, useState } from 'react';
 
 import {
@@ -21,7 +13,6 @@ import SaveIcon from './icons/SaveIcon';
 import SaveIconFilled from './icons/SaveIconFilled';
 import ThumbsDownIcon from './icons/ThumbsDownIcon';
 import ThumbsUpIcon from './icons/ThumbsUpIcon';
-
 
 interface VideoActionsProps {
   liked: boolean;

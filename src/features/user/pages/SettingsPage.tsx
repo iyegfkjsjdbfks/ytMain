@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 /**
@@ -25,10 +24,4 @@ const SettingsPage: React.FC = () => {
 
 export default SettingsPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

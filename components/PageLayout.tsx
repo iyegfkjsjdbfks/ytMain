@@ -1,16 +1,7 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import type React from 'react';
 
 import { DataWrapper } from './DataWrapper';
-
 
 interface PageLayoutProps<T> {
   title: string;

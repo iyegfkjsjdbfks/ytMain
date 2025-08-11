@@ -1,15 +1,6 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
-import { useEffect, useState } from 'react';
 
+import { useEffect, useState } from 'react';
 
 import { getVideos } from '../services/realVideoService';
 

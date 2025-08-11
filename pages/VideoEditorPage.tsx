@@ -1,8 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 /// <reference types="node" />
-
-
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -25,7 +22,6 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-
 
 import PauseIcon, { PlayIcon } from '@heroicons/react/24/outline';
 
@@ -652,10 +648,4 @@ return null;
 
 export default VideoEditorPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

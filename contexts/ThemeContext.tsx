@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { createContext, useState, useContext, useEffect, type ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -57,10 +55,3 @@ export const useTheme = (): ThemeContextType => {
 };
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

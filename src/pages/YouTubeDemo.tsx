@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { ErrorBoundary } from 'react-error-boundary';
 import React, { useState } from 'react';
 import { isYouTubeUrl, getYouTubeVideoId } from '../lib/youtube-utils';
@@ -177,10 +176,4 @@ const YouTubeDemoWithErrorBoundary = () => (
 
 export default YouTubeDemoWithErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

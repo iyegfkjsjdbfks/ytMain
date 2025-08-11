@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
@@ -374,10 +373,4 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
 
 export default SuperChatPanel;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 
 import React, { useState } from 'react';
 
@@ -28,7 +20,6 @@ const mockNotifications: NotificationItem[] = [
   { id: '3', icon: BellAlertIcon, iconColorClass: 'text-yellow-500', title: 'Subscription update', description: 'Nature Explorers just went live!', time: '3h ago' },
   { id: '4', icon: VideoCameraIcon, iconColorClass: 'text-red-500', title: 'Recommended for you', description: "Check out 'Delicious & Easy Pasta Recipe' by Chef Studio.", time: 'Yesterday' },
 ];
-
 
 interface NotificationsPanelProps {
   isOpen: boolean; onClose: () => void

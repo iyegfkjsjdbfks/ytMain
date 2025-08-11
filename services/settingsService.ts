@@ -39,7 +39,6 @@ export interface Settings {
   };
 }
 
-
 const defaultSettings: Settings = {
   youtubeSearchProvider: 'hybrid',
   youtubePlayerType: 'youtube-player',

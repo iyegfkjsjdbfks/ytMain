@@ -1,8 +1,6 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-
 
 import { getVideos } from '../services/realVideoService';
 
@@ -148,11 +146,4 @@ TrendingSection.displayName = 'TrendingSection';
 export default TrendingSection;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

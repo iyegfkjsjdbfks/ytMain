@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 /**
@@ -27,10 +26,4 @@ const TrendingPage: React.FC = () => {
 
 export default TrendingPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

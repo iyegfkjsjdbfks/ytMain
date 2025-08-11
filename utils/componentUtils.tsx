@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 // Component utilities and helpers
 import React, { ReactNode } from 'react';
 
@@ -148,10 +147,3 @@ export const getAvatarFallback = (name: string): string => {
 };
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

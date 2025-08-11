@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
@@ -358,10 +357,4 @@ const LivePolls: React.FC<LivePollsProps> = ({
 
 export default LivePolls;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

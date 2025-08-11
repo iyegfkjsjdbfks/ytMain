@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
@@ -60,10 +58,3 @@ const HistoryPage: React.FC = () => {
 export default HistoryPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 import { FixedSizeList } from 'react-window';
-
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
@@ -161,10 +159,4 @@ VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 
 export default VirtualizedCommentList;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

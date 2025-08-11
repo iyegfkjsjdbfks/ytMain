@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 import { FixedSizeGrid } from 'react-window';
 
@@ -175,10 +174,4 @@ OptimizedVideoGrid.displayName = 'OptimizedVideoGrid';
 
 export default OptimizedVideoGrid;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

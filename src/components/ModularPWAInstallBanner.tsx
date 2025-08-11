@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
@@ -449,10 +448,4 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
 
 export default ModularPWAInstallBanner;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

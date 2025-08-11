@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -307,11 +306,4 @@ return duration;
 export default SimpleHoverVideoCard;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

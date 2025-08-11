@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import {
@@ -490,10 +489,4 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
 export default EnhancedPWAInstallBanner;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

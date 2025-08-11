@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useCallback } from 'react';
 
 import { useSearchParams, useParams } from 'react-router-dom';
@@ -36,10 +35,4 @@ const ProtectedWatchPage: FC = () => {
 
 export default ProtectedWatchPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import QueueListIcon, { PlayIcon } from '@heroicons/react/24/solid';
@@ -27,7 +25,6 @@ const PlaylistDetailPage: React.FC = () => {
   const [editingPlaylistTitle, setEditingPlaylistTitle] = useState('');
   const [editingPlaylistDescription, setEditingPlaylistDescription] = useState('');
   const editModalRef = useRef<HTMLFormElement>(null);
-
 
   const fetchPlaylistData = async () => {
     if (!playlistId) {
@@ -149,7 +146,6 @@ return null;
     }
   };
 
-
   if (loading) {
     return <PlaylistDetailSkeleton />;
   }
@@ -164,7 +160,6 @@ return null;
 
   const { title, description, videos, updatedAt } = playlistDetails;
   const videoCount = playlistDetails.videoIds.length;
-
 
   return (
     <div className="p-4 md:p-6 bg-white dark:bg-neutral-950">
@@ -290,11 +285,4 @@ return null;
 export default PlaylistDetailPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
 

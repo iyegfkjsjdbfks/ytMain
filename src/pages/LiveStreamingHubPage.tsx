@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { ErrorBoundary } from 'react-error-boundary';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -328,10 +327,4 @@ const LiveStreamingHubPageWithErrorBoundary = () => (
 
 export default LiveStreamingHubPageWithErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useEffect } from 'react';
 import { useLocation, Navigate, useLocation } from 'react-router-dom';
 
@@ -54,10 +53,4 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
 export default ProtectedRoute;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

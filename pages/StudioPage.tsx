@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -459,10 +458,3 @@ return `${(num / 1000).toFixed(1)}K`;
 export default StudioPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

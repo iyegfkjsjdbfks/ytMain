@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 /**
@@ -27,10 +26,4 @@ const SubscriptionsPage: React.FC = () => {
 
 export default SubscriptionsPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

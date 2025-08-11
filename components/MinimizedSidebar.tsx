@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link, useLocation } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import React, { memo } from 'react';
 
 import { QueueListIcon, ChartBarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';

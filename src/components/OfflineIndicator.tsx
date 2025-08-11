@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import Wifi, { WifiOff } from 'lucide-react';
@@ -226,10 +225,4 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
 
 export default OfflineIndicator;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

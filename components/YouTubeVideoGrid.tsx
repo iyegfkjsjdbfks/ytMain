@@ -1,18 +1,9 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import React, { memo } from 'react';
 
 import YouTubeVideoCard from './YouTubeVideoCard';
 
 import type { YouTubeSearchResult } from '../services/googleSearchService';
-
 
 interface YouTubeVideoGridProps {
   videos: YouTubeSearchResult;

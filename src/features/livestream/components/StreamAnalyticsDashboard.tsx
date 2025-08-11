@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import {
   useState,
@@ -695,10 +694,4 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
 
 export default StreamAnalyticsDashboard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

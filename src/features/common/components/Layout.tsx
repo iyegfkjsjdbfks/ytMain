@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
@@ -30,10 +29,4 @@ export const Layout: React.FC = () => {
 
 export default Layout;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

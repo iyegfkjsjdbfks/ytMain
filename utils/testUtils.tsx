@@ -1,10 +1,8 @@
-/// <reference types="react/jsx-runtime" />
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
 import React, { type ReactElement } from 'react';
-
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -484,11 +482,5 @@ export { userEvent };
 export { customRender as render };
 export { customRenderHook as renderHook };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

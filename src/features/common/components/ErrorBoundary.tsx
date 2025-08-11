@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { logger } from '../../../utils/logger';
@@ -85,10 +84,4 @@ export class ErrorBoundary extends Component<Props, State> {
 
 export default ErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

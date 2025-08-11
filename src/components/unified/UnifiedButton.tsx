@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -220,10 +219,4 @@ LinkButton.displayName = 'LinkButton';
 
 export default UnifiedButton;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

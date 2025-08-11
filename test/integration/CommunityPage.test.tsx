@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -245,10 +243,4 @@ describe('CommunityPage', () => {
   });
 });
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

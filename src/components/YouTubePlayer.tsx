@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type { Video } from '../types/core';
 import React from 'react';
 
@@ -82,10 +81,4 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
 export default YouTubePlayer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

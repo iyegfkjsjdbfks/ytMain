@@ -1,6 +1,3 @@
-
-
-/// <reference types="react/jsx-runtime" />
 import { useLocation } from 'react-router-dom';
 declare namespace React {
   interface JSX {
@@ -15,7 +12,6 @@ declare namespace React {
   }
 }
 import React, { useRef } from 'react';
-
 
 import {
   MagnifyingGlassIcon,
@@ -38,7 +34,6 @@ const ShortsPage: React.FC = () => {
   const { data: allShorts, loading, error } = useShortsVideos();
   const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-
 
   // Enhanced state management with proper Set handling and error recovery
   const [likedShortsArray, setLikedShortsArray] = useLocalStorage<string[]>('likedShorts', []);
@@ -687,7 +682,6 @@ return;
         )}
       </div>
 
-
       {/* Navigation Controls */}
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 pointer-events-auto">
         <ShortsNavigation
@@ -740,11 +734,5 @@ return;
 
 export default ShortsPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

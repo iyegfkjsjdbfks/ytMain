@@ -1,6 +1,3 @@
-
-
-/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -51,7 +48,6 @@ const HomePage: React.FC = () => {
     'Education', 'Technology', 'Travel', 'Food', 'Fashion',
     'Comedy', 'Science', 'Health', 'Business',
   ], []);
-
 
   if (error) {
     return (
@@ -135,10 +131,3 @@ const HomePage: React.FC = () => {
 export default HomePage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

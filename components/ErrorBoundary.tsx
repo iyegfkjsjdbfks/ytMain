@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 
 interface LoadingSpinnerProps {
@@ -27,10 +26,4 @@ const LoadingSpinner: FC<LoadingSpinnerProps> = ({
 
 export default LoadingSpinner;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useLocation } from 'react-router-dom';
 // @ts-nocheck - Temporary during refactoring
 import React, { useRef, useEffect } from 'react';
@@ -188,7 +187,6 @@ const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
   />
 );
 
-
 // Main component
 const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   short,
@@ -367,11 +365,5 @@ export default ShortDisplayCard;
 // Export video-specific sub-components for reuse in other parts of the application
 export { PlayPauseOverlay, VideoInfo, ActionButtons, LoadingIndicator, ErrorState };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

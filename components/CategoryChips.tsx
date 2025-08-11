@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 
 import { useEffect, useRef } from 'react';
 
@@ -169,7 +161,6 @@ return;
           </svg>
         </button>
       )}
-
 
     </div>
   );

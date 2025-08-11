@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 interface AdvancedLiveChatProps {
@@ -34,10 +33,4 @@ const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({
 
 export default AdvancedLiveChat;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

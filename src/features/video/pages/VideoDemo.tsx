@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { realVideos } from '../../../../services/realVideoService';
@@ -185,10 +184,4 @@ const VideoDemo: React.FC = () => {
 
 export default VideoDemo;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

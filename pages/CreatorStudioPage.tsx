@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
 declare namespace React {
   interface JSX {
@@ -14,7 +12,6 @@ declare namespace React {
   }
 }
 import React, { useState } from 'react';
-
 
 import {
   UserGroupIcon,
@@ -524,11 +521,5 @@ const CreatorStudioPage: React.FC = () => {
 
 export default CreatorStudioPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

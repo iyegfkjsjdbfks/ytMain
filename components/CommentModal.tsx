@@ -1,18 +1,9 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import React, { useState } from 'react';
 
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
 import BaseModal from './BaseModal';
-
 
 interface CommentModalProps {
   isOpen: boolean;

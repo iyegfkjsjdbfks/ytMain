@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import type React from 'react';
 
 import {

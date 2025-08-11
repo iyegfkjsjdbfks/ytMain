@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
 import { Link } from 'react-router-dom';
 
@@ -12,13 +10,7 @@ declare namespace NodeJS {
   }
 }
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import { useRef, useState } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
@@ -221,7 +213,6 @@ return duration;
                 </button>
               </div>
             )}
-
 
             {/* Duration Badge */}
             {video.duration && video.duration !== '0:00' && (

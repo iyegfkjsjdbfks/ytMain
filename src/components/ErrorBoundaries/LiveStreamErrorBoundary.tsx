@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -241,10 +240,4 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 
 export default LiveStreamErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

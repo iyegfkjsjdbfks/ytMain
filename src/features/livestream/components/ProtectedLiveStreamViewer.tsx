@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useCallback } from 'react';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
@@ -43,10 +42,4 @@ const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
 
 export default ProtectedLiveStreamViewer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

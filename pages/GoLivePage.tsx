@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 import { ComprehensiveLiveStudio } from '../src/features/livestream/components';
@@ -18,10 +17,4 @@ const GoLivePage: React.FC = () => {
 
 export default GoLivePage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

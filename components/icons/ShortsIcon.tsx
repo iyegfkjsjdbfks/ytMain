@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import type React from 'react';
 
 const ShortsIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { logger } from '../../../utils/logger';
@@ -493,10 +492,4 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 export { CommentSection, CommentItem };
 export default CommentSection;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

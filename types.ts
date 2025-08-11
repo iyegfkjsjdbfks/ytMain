@@ -1,4 +1,3 @@
-
 // Import and re-export VideoVisibility type
 import type { VideoVisibility } from './src/types/core';
 

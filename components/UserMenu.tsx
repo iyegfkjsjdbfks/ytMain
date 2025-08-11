@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import React, { memo } from 'react';
 
@@ -19,7 +11,6 @@ import {
 
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
-
 
 interface UserMenuProps {
   isOpen: boolean; onClose: () => void

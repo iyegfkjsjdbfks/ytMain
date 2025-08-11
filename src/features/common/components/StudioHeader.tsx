@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -205,10 +203,4 @@ const StudioHeader: React.FC = () => {
 
 export default StudioHeader;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

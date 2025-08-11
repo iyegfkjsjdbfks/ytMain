@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import { HeartIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version
@@ -61,10 +59,3 @@ const LikedVideosPage: React.FC = () => {
 export default LikedVideosPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

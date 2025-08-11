@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useCallback, useMemo } from 'react';
 
 import { FixedSizeGrid } from 'react-window';
@@ -17,7 +9,6 @@ import LoadingSpinner from './LoadingSpinner';
 import OptimizedVideoCard from './OptimizedVideoCard';
 
 import type { Video } from '../types';
-
 
 interface VirtualizedVideoGridProps {
   videos: Video;

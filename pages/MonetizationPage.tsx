@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -13,7 +11,6 @@ declare namespace React {
   }
 }
 import React, { useState } from 'react';
-
 
 import ArrowTrendingUpIcon, { BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
@@ -45,7 +42,6 @@ ChartJS.register(
   Legend,
   ArcElement,
 );
-
 
 interface RevenueData {
   date: string;
@@ -548,10 +544,4 @@ return { labels: [], datasets: [] };
 
 export default memo(MonetizationPage);
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

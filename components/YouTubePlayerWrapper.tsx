@@ -1,6 +1,4 @@
-/// <reference types="react/jsx-runtime" />
 import { forwardRef, type ReactNode } from 'react';
-
 
 import YouTubePlayer from './YouTubePlayer';
 
@@ -38,7 +36,6 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 ) => {
   // YouTubePlayerWrapper rendering
 
-
   // Create mock video object for YouTubePlayer component
   const createMockVideo = (videoId: any): YouTubeSearchResult => ({
     id: videoId,
@@ -75,10 +72,4 @@ YouTubePlayerWrapper.displayName = 'YouTubePlayerWrapper';
 
 export default YouTubePlayerWrapper;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

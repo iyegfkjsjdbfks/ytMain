@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import {
   FunnelIcon,
@@ -375,10 +374,4 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
 
 export default AdvancedSearchFilters;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

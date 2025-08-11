@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -32,10 +31,4 @@ const ChannelPage: React.FC = () => {
 
 export default ChannelPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

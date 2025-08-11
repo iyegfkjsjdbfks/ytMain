@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import { ChevronRightIcon, ClockIcon } from '@heroicons/react/24/outline';
@@ -87,7 +85,6 @@ const LibrarySection: React.FC<SectionProps> = ({ title, icon, viewAllLink, chil
     </section>
   );
 };
-
 
 function LibraryPage() { // Removed React.FC
   const [historyVideos, setHistoryVideos] = useState<Video[]>([]);
@@ -255,11 +252,5 @@ function LibraryPage() { // Removed React.FC
 
 export default LibraryPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

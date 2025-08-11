@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 interface User {
@@ -176,10 +174,4 @@ return false;
 
 export default AuthProvider;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

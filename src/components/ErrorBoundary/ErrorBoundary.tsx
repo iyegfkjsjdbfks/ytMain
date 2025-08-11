@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 
 interface ErrorBoundaryState {
@@ -79,10 +78,4 @@ class ErrorBoundary extends React.Component<
 
 export default ErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

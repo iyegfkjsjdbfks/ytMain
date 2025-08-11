@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import PlusCircleIcon, { QueueListIcon } from '@heroicons/react/24/solid';
@@ -206,11 +204,4 @@ const PlaylistsPage: React.FC = () => {
 export default PlaylistsPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

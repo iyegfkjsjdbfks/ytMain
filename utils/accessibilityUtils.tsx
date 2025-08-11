@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -574,10 +572,5 @@ export const accessibilityUtils = {
 
 export default accessibilityUtils;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any }
-  }
-}
+
 

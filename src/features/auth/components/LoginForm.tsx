@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -203,10 +202,4 @@ export const LoginForm: React.FC = () => {
 
 export default LoginForm;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import {
@@ -553,10 +552,4 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
 
 export default AdvancedAnalyticsDashboard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -276,10 +275,4 @@ export const performanceBenchmarks = {
 
 export { screen, fireEvent, waitFor, userEvent };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

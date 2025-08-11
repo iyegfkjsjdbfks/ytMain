@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import React, { type RefObject } from 'react';
 
 import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';

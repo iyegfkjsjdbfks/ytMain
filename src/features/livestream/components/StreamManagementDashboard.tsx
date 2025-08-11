@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
@@ -691,10 +690,4 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
 
 export default StreamManagementDashboard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

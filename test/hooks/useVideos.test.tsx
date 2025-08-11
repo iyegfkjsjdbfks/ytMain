@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -798,10 +797,3 @@ describe('Unified Video Hooks', () => {
 });
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

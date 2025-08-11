@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [];
-    }
-  }
-}
 import { useRef, useState } from 'react';
 
 import {
@@ -83,7 +75,6 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
     'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals',
   ];
-
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();

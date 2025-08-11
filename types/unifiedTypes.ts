@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 declare namespace React {
   interface JSX {
     IntrinsicElements;

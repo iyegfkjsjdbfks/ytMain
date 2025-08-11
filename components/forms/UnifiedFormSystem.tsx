@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useContext, createContext } from 'react';
 
 import { cn } from '../../utils/cn';
@@ -518,7 +510,6 @@ return;
     </FormProvider>
   );
 };
-
 
 // Type exports
 export type {

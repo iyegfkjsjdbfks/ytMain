@@ -1,15 +1,12 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-
 
 import { getVideos } from '../services/realVideoService';
 
 import VideoCard from './VideoCard';
 
 import type { Video } from '../types';
-
 
 interface LiveStreamsProps {
   maxStreams?: number;
@@ -151,11 +148,5 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
 
 export default LiveStreams;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

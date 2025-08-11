@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [];
-    }
-  }
-}
 import React, { useState } from 'react';
 
 import PaintBrushIcon, { PhotoIcon } from '@heroicons/react/24/outline';

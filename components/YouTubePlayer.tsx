@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useRef, useEffect } from 'react';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
@@ -15,7 +7,6 @@ import type { YouTubeSearchResult } from '../services/googleSearchService';
 import type { Video } from '../src/types/core';
 
 // YouTube Player API types
-
 
 interface YTPlayer {
   playVideo(): void;

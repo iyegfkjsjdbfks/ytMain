@@ -1,5 +1,4 @@
 /**
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
  * Example test file demonstrating comprehensive testing practices
  * for the VideoDescription component
@@ -647,11 +646,5 @@ describe('VideoDescription Component', () => {
   });
 });
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

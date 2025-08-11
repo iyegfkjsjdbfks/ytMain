@@ -1,16 +1,7 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useEffect, useState } from 'react';
 
 import { useAsyncState } from '../src/hooks';
-
 
 import BaseForm from './BaseForm';
 import BaseModal from './BaseModal';

@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useParams } from 'react-router-dom';
 declare namespace React {
   interface JSX {
@@ -242,11 +240,4 @@ const UserPage: React.FC = () => {
 export default UserPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

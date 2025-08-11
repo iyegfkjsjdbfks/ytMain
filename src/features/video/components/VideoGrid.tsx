@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
@@ -98,10 +97,4 @@ const VideoGrid: React.FC<VideoGridProps> = ({
 
 export default VideoGrid;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

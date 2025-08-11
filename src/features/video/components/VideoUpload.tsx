@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -280,10 +279,4 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
 
 export default VideoUpload;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

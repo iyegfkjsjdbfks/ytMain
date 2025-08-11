@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -175,10 +174,4 @@ const Footer: React.FC = () => {
 
 export default Footer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

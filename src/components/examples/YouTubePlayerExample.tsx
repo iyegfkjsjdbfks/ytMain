@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -8,7 +7,6 @@ declare namespace NodeJS {
     env: ProcessEnv;
   }
 }
-
 
 import { logger } from '../../utils/logger';
 /// <reference types="node" />
@@ -281,10 +279,4 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
 
 export default YouTubePlayerExample;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

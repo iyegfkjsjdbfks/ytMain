@@ -1,7 +1,4 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
-
-
 
 declare namespace React {
   interface JSX {
@@ -15,7 +12,6 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-
 
 import PencilIcon, { PlusIcon } from '@heroicons/react/24/outline';
 import Droppable, { DragDropContext } from 'react-beautiful-dnd';
@@ -562,10 +558,4 @@ return;
 
 export default PlaylistManagerPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import X, { RefreshCw } from 'lucide-react';
-
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -133,10 +131,4 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
 
 export default PWAUpdateNotification;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

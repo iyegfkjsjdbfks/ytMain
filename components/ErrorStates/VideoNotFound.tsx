@@ -1,15 +1,6 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
-import type React from 'react';
 
+import type React from 'react';
 
 const VideoNotFound: React.FC = () => {
   const navigate = useNavigate();

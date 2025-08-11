@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';
@@ -9,7 +8,6 @@ import StudioLayout from '../components/StudioLayout';
 import { Route, Routes } from 'react-router-dom';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
-
 
 // Lazy load secondary components for better performance
 // HomePage is loaded directly for faster initial render
@@ -281,11 +279,5 @@ const authRoutes: RouteObject[] = [
 // Combined route configuration
 export const routes: RouteObject[] = [...mainRoutes, ...studioRoutes, ...authRoutes];
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
 

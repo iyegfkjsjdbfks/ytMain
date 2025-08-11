@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 import { ClockIcon } from '@heroicons/react/24/outline'; // For empty state
@@ -11,7 +9,6 @@ import type { Video } from '../src/types/core'; // Keep Video import for explici
 
 const WatchLaterPage: React.FC = () => {
   const { watchLaterList } = useWatchLater(); // Use context
-
 
   return (
     <div className="p-4 md:p-6 bg-white dark:bg-neutral-950">
@@ -42,10 +39,3 @@ const WatchLaterPage: React.FC = () => {
 export default WatchLaterPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

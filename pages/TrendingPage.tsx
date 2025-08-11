@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import { FireIcon } from '@heroicons/react/24/solid';
@@ -41,10 +39,4 @@ const TrendingPage: React.FC = () => {
 
 export default TrendingPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -454,33 +453,5 @@ expect.extend({
 });
 
 // Type declarations for custom matchers
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toBeInViewport(): R;
-      toHaveAccessibleName(expectedName: any): R;
-    }
-  }
-}
 
-// Export everything for easy importing
-export {
-  render,
-  renderHook,
-  act,
-  userEvent,
-  vi,
-};
-
-export type { MockedFunction };
-
-export * from '@testing-library/react';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

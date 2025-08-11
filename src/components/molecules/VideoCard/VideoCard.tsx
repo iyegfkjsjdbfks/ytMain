@@ -1,11 +1,9 @@
 import { User } from '../types';
 
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MoreVertical, User } from 'lucide-react';
-
 
 import { Button } from '@/components/atoms/Button';
 
@@ -153,10 +151,4 @@ function formatDuration(seconds: any): string {
     .join(':');
 }
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

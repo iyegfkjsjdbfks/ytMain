@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
@@ -379,10 +378,4 @@ UnifiedVideoCard.displayName = 'UnifiedVideoCard';
 
 export default UnifiedVideoCard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

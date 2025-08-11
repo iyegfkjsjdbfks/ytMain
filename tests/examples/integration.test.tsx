@@ -1,5 +1,4 @@
 /**
-/// <reference types="react/jsx-runtime" />
  * Integration tests demonstrating how multiple components work together
  * and testing real user workflows
  */
@@ -666,9 +665,4 @@ describe('Integration Tests', () => {
   });
 });
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any }
-  }
-}
+

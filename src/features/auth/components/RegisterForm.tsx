@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -280,10 +279,4 @@ export const RegisterForm: React.FC = () => {
 
 export default RegisterForm;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

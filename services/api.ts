@@ -1,6 +1,5 @@
 import type { Video, Channel, UserPlaylist } from '../types';
 
-
 // API Configuration
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL| 'https://api.youtube.comv3';
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;

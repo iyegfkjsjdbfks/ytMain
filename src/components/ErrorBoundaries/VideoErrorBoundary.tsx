@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';
@@ -164,10 +163,4 @@ export class VideoErrorBoundary extends Component<Props, State> {
 
 export default VideoErrorBoundary;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

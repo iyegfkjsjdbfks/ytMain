@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { createContext, useState, useContext, useCallback, type ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
@@ -48,10 +46,3 @@ export const useMiniplayer = (): MiniplayerContextType => {
 };
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

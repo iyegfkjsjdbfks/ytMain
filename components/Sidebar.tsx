@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link, useLocation } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import React, { memo } from 'react';
 
@@ -21,7 +13,6 @@ import PlaylistIcon from './icons/PlaylistIcon';
 import PlaylistPlayIcon from './icons/PlaylistPlayIcon';
 import ShortsIcon from './icons/ShortsIcon';
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
-
 
 interface SidebarProps {
   isOpen: boolean;

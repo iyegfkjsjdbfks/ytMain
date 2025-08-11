@@ -1,13 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import { useRef, useState } from 'react';
 
@@ -25,7 +17,6 @@ import PWAInstallBanner from './PWAInstallBanner';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
 // UserIcon not used if avatar image is present
-
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -58,7 +49,6 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
     </button>
   );
 };
-
 
 // Component for authenticated user section
 interface AuthenticatedUserSectionProps {
@@ -142,7 +132,6 @@ setIsCreateMenuOpen(false);
 }
   };
 
-
   const toggleCreateMenu = () => {
     setIsCreateMenuOpen(prev => !prev);
     if (isUserMenuOpen) {
@@ -156,7 +145,6 @@ setIsNotificationsPanelOpen(false);
   const handleCloseUserMenu = useCallback(() => setIsUserMenuOpen(false), []);
 
   const handleCloseCreateMenu = useCallback(() => setIsCreateMenuOpen(false), []);
-
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -199,7 +187,6 @@ setIsNotificationsPanelOpen(false);
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
-
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">

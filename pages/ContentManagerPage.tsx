@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import CalendarIcon, { FolderIcon } from '@heroicons/react/24/outline';
@@ -8,7 +7,6 @@ import { parseRelativeDate } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
 import type { ContentItem } from '../types';
-
 
 type ViewMode = 'grid' | 'list';
 type FilterType = 'all' | 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted';
@@ -596,10 +594,4 @@ return content.length;
 
 export default ContentManagerPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

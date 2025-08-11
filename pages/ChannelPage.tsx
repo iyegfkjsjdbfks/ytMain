@@ -1,9 +1,6 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
-
 
 import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabContent from '../components/ChannelTabContent';
@@ -17,7 +14,6 @@ import {
 } from '../services/realVideoService';
 
 import type { Video } from '../types';
-
 
 const ChannelPage: React.FC = () => {
   const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
@@ -155,11 +151,4 @@ const ChannelPage: React.FC = () => {
 export default ChannelPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
 

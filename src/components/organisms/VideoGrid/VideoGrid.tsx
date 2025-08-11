@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -67,10 +66,4 @@ const VideoCardSkeleton = () => {
   );
 };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

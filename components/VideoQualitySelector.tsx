@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import { useRef, useState } from 'react';
 
 import {
@@ -119,7 +111,6 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
     setShowSettings(false);
     setActivePanel('main');
   };
-
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>

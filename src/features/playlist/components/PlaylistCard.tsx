@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
@@ -365,10 +364,4 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
 
 export default PlaylistCard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

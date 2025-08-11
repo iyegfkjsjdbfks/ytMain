@@ -1,19 +1,10 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import type React from 'react';
 
 import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import type { Video } from '../src/types/core';
-
 
 interface MiniplayerProps {
   video: Video | null;

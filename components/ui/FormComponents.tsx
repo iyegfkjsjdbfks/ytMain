@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import type InputHTMLAttributes, { forwardRef } from 'react';
 
 import { cn } from '../../utils/cn';

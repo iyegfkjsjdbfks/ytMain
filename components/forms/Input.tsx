@@ -1,12 +1,4 @@
 
-/// <reference types="react/jsx-runtime" />
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
 import React from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {

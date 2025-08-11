@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
@@ -677,10 +676,4 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
 export default ComprehensiveLiveStudio;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

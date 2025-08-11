@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 // @ts-nocheck
 
@@ -10,7 +9,6 @@ import EnhancedYouTubeVideoCard from './EnhancedYouTubeVideoCard';
 import OptimizedVideoCard from './OptimizedVideoCard';
 
 import type { Video } from '../types';
-
 
 interface RecommendationEngineProps {
   currentVideo?: Video;
@@ -340,10 +338,3 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 export default RecommendationEngine;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

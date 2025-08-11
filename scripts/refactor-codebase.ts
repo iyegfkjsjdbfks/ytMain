@@ -506,7 +506,6 @@ export interface ErrorWithSeverity extends AppError {
   private generateRefactoringReport(): void {
     const failedCount = this.failedTasks.length;
 
-
     if (failedCount > 0) {
       process.exit(1);
     } else {

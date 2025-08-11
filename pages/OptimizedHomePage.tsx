@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import { HomeIcon } from '@heroicons/react/24/solid';
@@ -252,10 +251,4 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
 
 export default OptimizedHomePage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

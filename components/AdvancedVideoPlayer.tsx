@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
 
 import { useRef, useCallback, useEffect, useState } from 'react';
@@ -12,13 +10,7 @@ declare namespace NodeJS {
   }
 }
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 
 import {
   PlayIcon,

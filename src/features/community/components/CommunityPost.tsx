@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import {
@@ -363,10 +362,4 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
 
 export default CommunityPost;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

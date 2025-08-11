@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -80,10 +79,4 @@ Button.displayName = 'Button';
 
 export { Button, buttonVariants };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

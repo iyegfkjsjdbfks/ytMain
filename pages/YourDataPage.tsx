@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useState } from 'react';
 
 import TrashIcon, { ShieldCheckIcon } from '@heroicons/react/24/outline';
@@ -222,9 +220,4 @@ const YourDataPage: React.FC = () => {
 
 export default YourDataPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any }
-  }
-}
+

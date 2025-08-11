@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 // @ts-nocheck
 
@@ -86,7 +85,6 @@ interface OptimizedVideoCardProps {
   priority?: 'high' | 'low';
   index?: number;
 }
-
 
 // Enhanced lazy image component with retry mechanism
 interface LazyImageProps {
@@ -662,10 +660,4 @@ export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
   );
 });
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { type ReactNode } from 'react';
 
 /**
@@ -80,10 +79,4 @@ export const chunkArray = <T,>(array: T, size: any): T[][] => {
   return chunks;
 };
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

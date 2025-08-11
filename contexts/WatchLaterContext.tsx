@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import { createContext, useContext, useState, useEffect } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
@@ -6,7 +5,6 @@ import type { Video as VideoType } from '../src/types/core';
 // Use the Video type for items in the watch later list
 // We can alias it to VideoItem if preferred, or just use VideoType directly.
 // For clarity, let's stick to VideoType where it's used for the list items.
-
 
 interface WatchLaterContextType {
   watchLaterList: VideoType;
@@ -60,10 +58,3 @@ export const useWatchLater = () => {
 };
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

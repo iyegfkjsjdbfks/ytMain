@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';
 
@@ -233,10 +231,4 @@ const SearchResultsPage: React.FC = () => {
 
 export default SearchResultsPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

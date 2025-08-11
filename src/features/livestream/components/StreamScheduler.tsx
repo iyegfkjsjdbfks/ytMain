@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import {
   liveStreamService,
@@ -539,10 +538,4 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
 
 export default StreamScheduler;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

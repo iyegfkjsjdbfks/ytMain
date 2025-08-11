@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -575,10 +574,4 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 export default VideoPlayer;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

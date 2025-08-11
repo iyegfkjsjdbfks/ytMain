@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import ChartBarIcon, { PlusIcon } from '@heroicons/react/24/outline';
@@ -97,7 +96,6 @@ return;
     ));
   };
 
-
   // Generate mock data
   useEffect(() => {
     const generateMockPosts = (): CommunityPost[] => {
@@ -188,7 +186,6 @@ return;
       setLoading(false);
     }, 1000);
   }, []);
-
 
   if (loading) {
     return (
@@ -509,10 +506,4 @@ return;
 
 export default CommunityPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

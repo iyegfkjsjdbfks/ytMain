@@ -1,18 +1,8 @@
-
-/// <reference types="react/jsx-runtime" />
 import { Link } from 'react-router-dom';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      []: any;
-    }
-  }
-}
+
 import { useState, useEffect } from 'react';
 
-
 import { getVideos } from '../services/realVideoService';
-
 
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
 import VideoCard from './VideoCard';

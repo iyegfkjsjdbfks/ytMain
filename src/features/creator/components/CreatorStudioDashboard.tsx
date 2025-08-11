@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 
 import {
@@ -493,10 +492,4 @@ export const CreatorStudioDashboard: React.FC = () => {
 
 export default CreatorStudioDashboard;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

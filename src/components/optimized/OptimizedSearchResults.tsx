@@ -1,7 +1,5 @@
-/// <reference types="react/jsx-runtime" />
 import React, { memo } from 'react';
 import { FixedSizeList } from 'react-window';
-
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';
 
@@ -259,10 +257,4 @@ OptimizedSearchResults.displayName = 'OptimizedSearchResults';
 
 export default OptimizedSearchResults;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

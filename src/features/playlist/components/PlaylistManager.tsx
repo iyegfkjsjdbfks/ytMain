@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useState } from 'react';
 import { logger } from '../../../utils/logger';
 import {
@@ -529,10 +528,4 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
 export default PlaylistManager;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
+

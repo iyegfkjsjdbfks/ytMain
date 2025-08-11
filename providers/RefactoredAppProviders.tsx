@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import type { ReactNode } from 'react';
 
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
@@ -93,10 +91,3 @@ export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
 export default RefactoredAppProviders;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}

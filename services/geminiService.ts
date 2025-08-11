@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, type GenerateContentResponse } from '@google/genai';
 
 import type { VideoIdeaResponse } from '../types'; // Import the new type
@@ -21,7 +20,6 @@ try {
     // The functions below will check for `ai` and throw if it's missing.
 }
 
-
 const checkAiInitialized = () => {
   if (!ai) {
     console.error('Gemini AI client is not initialized. API_KEY might be missing or invalid.');
@@ -43,7 +41,6 @@ const parseJsonFromText = (text: string): any => {
     throw new Error('AI returned an invalid JSON response format.');
   }
 };
-
 
 /**
  * Summarizes the given text using the Gemini API.

@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React, { useEffect } from 'react';
 
 import { LoginForm } from '../components/LoginForm';
@@ -47,10 +46,4 @@ const LoginPage: React.FC = () => {
 
 export default LoginPage;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+

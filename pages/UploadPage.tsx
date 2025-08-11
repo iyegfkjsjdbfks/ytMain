@@ -1,5 +1,3 @@
-
-/// <reference types="react/jsx-runtime" />
 import { useNavigate } from 'react-router-dom';
 declare namespace React {
   interface JSX {
@@ -14,7 +12,6 @@ declare namespace React {
   }
 }
 import React, { useState } from 'react';
-
 
 import {
   CloudArrowUpIcon,
@@ -180,7 +177,6 @@ return null;
       handleFileSelect(fakeEvent);
     }
   };
-
 
   const removeTag = (tagToRemove: any) => {
     setMetadata(prev => ({
@@ -546,11 +542,4 @@ return null;
 export default UploadPage;
 
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string];
-    }
-  }
-}
 

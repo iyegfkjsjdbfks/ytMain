@@ -1,4 +1,3 @@
-/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link, Link, NavLink } from 'react-router-dom';
 
@@ -396,10 +395,4 @@ const StudioSidebar: React.FC = () => {
 
 export default StudioSidebar;
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [key: string]: any;
-    }
-  }
-}
+
