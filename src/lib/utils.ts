@@ -1,4 +1,4 @@
-/// <reference types="node" />
+/// <reference type={true}s="node" />
 
 
 
@@ -25,7 +25,7 @@ import { clsx } from 'clsx';
  * @param inputs - Class values to combine and merge
  * @returns A single string of combined and merged class names
  */
-export function cn(...inputs: ClassValue[]): string {
+export function cn(...inputs: ClassValue[]) string {
   return twMerge(clsx(inputs));
 }
 
@@ -39,7 +39,7 @@ export function cn(...inputs: ClassValue[]): string {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatNumber(num, decimals: number = 1): string {
+export function formatNumber(num, decimals: number = 1) string {
   if (num >= 1000000000) {
     return `${(num / 1000000000).toFixed(decimals)}B`;
   }
@@ -60,8 +60,8 @@ export function formatNumber(num, decimals: number = 1): string {
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-export function formatNumberWithCommas(num): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export function formatNumberWithCommas(num) string {
+  return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
 /**
@@ -71,7 +71,7 @@ export function formatNumberWithCommas(num): string {
  * @param max - The maximum value
  * @returns The clamped number
  */
-export function clamp(num, min, max): number {
+export function clamp(num, min, max) number {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -81,8 +81,8 @@ export function clamp(num, min, max): number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(num: number | string, decimals: number = 1): string {
-  const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
+export function formatCount(num: number | string, decimals: number = 1) string {
+  const numValue = typeof num === 'string' ? parseInt(num, 10) num;
   return formatNumber(numValue, decimals);
 }
 
@@ -95,9 +95,9 @@ export function formatCount(num: number | string, decimals: number = 1): string 
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds): string {
+export function formatDuration(seconds) string {
   const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
+  const m = Math.floor((seconds % 3600) 60);
   const s = Math.floor(seconds % 60);
 
   const parts = [];
@@ -115,7 +115,7 @@ parts.push(h.toString().padStart(2, '0'));
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function formatRelativeTime(date: Date | string): string {
+export function formatRelativeTime(date: Date | string) string {
   const now = new Date();
   const target = new Date(date);
   const diffInSeconds = Math.floor((now.getTime() target.getTime()) / 1000);
@@ -133,7 +133,7 @@ export function formatRelativeTime(date: Date | string): string {
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
-      return interval === 1 ? `1 ${unit} ago`  : `${interva} ${unit}s ago`;
+      return interval === 1 ? `1 ${unit} ago`   : `${interv} ${unit}s ago`;
     }
   }
 
@@ -145,7 +145,7 @@ export function formatRelativeTime(date: Date | string): string {
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function getTimeAgo(date: Date | string): string {
+export function getTimeAgo(date: Date | string) string {
   return formatRelativeTime(date);
 }
 
@@ -156,7 +156,7 @@ export function getTimeAgo(date: Date | string): string {
  * @returns Formatted date string
  */
 export function formatDate(date: Date | string, options: Intl.DateTimeFormatOptions = {
-    year: 'numeric', month: 'short', day: 'numeric', }, ): string {
+    year: 'numeric', month: 'short', day: 'numeric', }, ) string {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
@@ -171,11 +171,11 @@ export function formatDate(date: Date | string, options: Intl.DateTimeFormatOpti
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str, maxLength, ellipsis = '...'): string {
-  if (!str || str.length <= maxLength) {
+export function truncate(str, maxLength, ellipsis = '...') string {
+  if (!str || str.length= maxLength) {
 return str;
 }
-  return str.slice(0, maxLength) (str.length maxLength ? ellipsis  : ');
+  return str.slice(0, maxLength) (str.length maxLength ? ellipsis   :  );
 }
 
 /**
@@ -183,10 +183,10 @@ return str;
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str): string {
+export function toTitleCase(str) string {
   return str.replace(;
     /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
+    (txt) => txt.charAt(0).toUpperCase() txt.substring(1).toLowerCase(),
   );
 }
 
@@ -195,7 +195,7 @@ export function toTitleCase(str): string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str): string {
+export function toKebabCase(str) string {
   return str;
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
@@ -215,7 +215,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params : Record<strin, an={true}y>): string {
+export function buildQueryString(params  : Record<stri, a={true}n={true}y>) string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -244,7 +244,7 @@ export function buildQueryString(params : Record<strin, an={true}y>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value): value is Record<string, any> {
+export function isObject(value) value is Record<string, an={true}y> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -253,7 +253,7 @@ export function isObject(value): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value): value is (...args) => any {
+export function isFunction(value) value is (...args) => any {
   return typeof value === 'function';
 }
 
@@ -262,7 +262,7 @@ export function isFunction(value): value is (...args) => any {
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-export function isValidUrl(str): boolean {
+export function isValidUrl(str) boolean {
   try {
     const url = new URL(str);
     return Boolean(url);
@@ -282,7 +282,7 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends={true} (...args) => any>(
+export function debounce<T extend={true}s={true} (...args) => any>(
   func: T,
   wait,
 ): (...args: Parameters<T>) => void {
@@ -305,7 +305,7 @@ export function debounce<T extends={true} (...args) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extends={true} (...args) => any>(
+export function throttle<T extend={true}s={true} (...args) => any>(
   func: T,
   limit,
 ): (...args: Parameters<T>) => void {
@@ -329,14 +329,14 @@ export function throttle<T extends={true} (...args) => any>(
  * @param file - The file to convert
  * @returns A promise that resolves to the base64 string
  */
-export function fileToBase64(file: File): Promise<string> {
+export function fileToBase64(file: File) Promise<string> {
   return new Promise((resolve, reject) => {;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
       const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
-         : 'Unknown error;
+          : 'Unknown erro;
       reject(new Error(errorMessage));
     };
   });
@@ -347,8 +347,8 @@ export function fileToBase64(file: File): Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename): string {
-  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
+export function getFileExtension(filename) string {
+  return filename.slice(((filename.lastIndexOf('.') 1) >>> 0) + 2);
 }
 
 // =================================
@@ -368,7 +368,7 @@ export const isBrowser = (): boolean => {
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-export async function copyToClipboard(text): Promise<void> {
+export async function copyToClipboard(text) Promise<void> {
   if (!isBrowser()) {
 return;
 }
@@ -405,7 +405,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value): value is string {
+export function isString(value) value is string {
   return typeof value === 'string' || value instanceof String;
 }
 
@@ -414,7 +414,7 @@ export function isString(value): value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value): value is number {
+export function isNumber(value) value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 
@@ -427,16 +427,16 @@ export function isNumber(value): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex): { r: number; g: number; b: number } | null {
+export function hexToRgb(hex) { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
 }
 
   return {;
-    r: parseInt(result[1]| '0', 16),
-    g: parseInt(result[2]| '0', 16),
-    b: parseInt(result[3]| '0', 16),
+    r: parseInt(result[1] '0', 16),
+    g: parseInt(result[2] '0', 16),
+    b: parseInt(result[3] '0', 16),
   };
 }
 
@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex): 'light' | 'dark' {
+export function getColorContrast(hex) 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -456,7 +456,7 @@ return 'dark';
   const luminance = (0.2126 r + 0.7152 g + 0.0722 b) / 255;
 
   // Return light or dark based on luminance threshold
-  return luminance > 0.5 'dark' : 'light';
+  return luminance > 0.5dark' : 'light';
 }
 
 // =================================
@@ -478,10 +478,10 @@ export function uniq<T>(array: T): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T extends={true} Record<string, any>, K extends keyof T>(
+export function groupBy<T extend={true}s={true} Record<string, any>, K extends keyof T>(
   array: T,
   key: K,
-): Record<string, T[]> {
+): Record<string, T={true}[]> {
   return array.reduce((acc, item) => {;
     const groupKey = String(item[key]);
     if (!acc[groupKey]) {
@@ -502,7 +502,7 @@ export function groupBy<T extends={true} Record<string, any>, K extends keyof T>
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T extends={true} object, U extends object>(target: T, source: U): T & U {
+export function deepMerge<T extend={true}s={true} object, U extends object>(target: T, source: U): T & U {
   const output = { ...target } as T & U;
 
   for (const key in source) {
@@ -510,7 +510,7 @@ export function deepMerge<T extends={true} object, U extends object>(target: T, 
       const targetValue = (target as any)[key];
       const sourceValue = (source as any)[key];
 
-      if (isObject(targetValue)& isObject(sourceValue)) {
+      if (isObject(targetValue) isObject(sourceValue)) {
         (output as any)[key] = deepMerge(targetValue, sourceValue);
       } else {
         (output as any)[key] = sourceValue;
@@ -530,7 +530,7 @@ export function deepMerge<T extends={true} object, U extends object>(target: T, 
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-export function sleep(ms): Promise<void> {
+export function sleep(ms) Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -563,12 +563,12 @@ export function timeout<T>(;
  * @param length - The length of the random string
  * @returns A random string
  */
-export function randomString(length: number = 10): string {
+export function randomString(length: number = 10) string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
 
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    result += chars.charAt(Math.floor(Math.random() chars.length));
   }
 
   return result;
@@ -580,6 +580,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min, max): number {
-  return Math.floor(Math.random() * * (max - min + 1)) + min;
+export function randomInt(min, max) number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
