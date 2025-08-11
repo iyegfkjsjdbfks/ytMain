@@ -183,7 +183,7 @@ return;
       const now = Date.now();
 
       // Skip if analysis was performed recently
-      if (now - this.lastAnalysis 2 * 60 * 1000) {
+      if (now - this.lastAnalysis < 2 * 60 * 1000) {
 return;
 } // 2 minutes
 
@@ -306,7 +306,7 @@ return;
       return Math.max(min, Math.min(max, previousValue + change));
     }
 
-    return Math.round(base * 10) 10;
+    return Math.round(base * 10) / 10;
   }
 
   /**
@@ -331,7 +331,7 @@ return;
       if (weight > 0) {
         score += (value / 100) * weight * 50;
       } else {
-        score += Math.max(0, (100 - value) 100) * Math.abs(weight) 10;
+        score += Math.max(0, (100 - value) / 100) * Math.abs(weight) / 10;
       }
     });
 
@@ -350,7 +350,7 @@ return 0;
 
     const percentChange = ((current - previous) / previous) * 100;
 
-    return lowerIsBetter.includes(metric) -percentChange : percentChange;
+    return lowerIsBetter.includes(metric) ? -percentChange : percentChange;
   }
 
   /**
@@ -360,7 +360,7 @@ return 0;
 
 
     // High complexity opportunities
-    if (_metrics.complexity 10) {
+    if (_metrics.complexity > 10) {
       opportunities.push({
         __id: 'reduce-complexity',
         __type: 'maintainability',
@@ -379,7 +379,7 @@ return 0;
     }
 
     // Low test coverage opportunities
-    if (_metrics.testCoverage 80) {
+    if (_metrics.testCoverage < 80) {
       opportunities.push({
         id: 'improve-test-coverage',
         type: 'testing',
@@ -398,7 +398,7 @@ return 0;
     }
 
     // Performance opportunities
-    if (_metrics.performanceIssues 3) {
+    if (_metrics.performanceIssues > 3) {
       opportunities.push({
         id: 'optimize-performance',
         type: 'performance',
@@ -417,7 +417,7 @@ return 0;
     }
 
     // Security opportunities
-    if (_metrics.securityVulnerabilities 0) {
+    if (_metrics.securityVulnerabilities > 0) {
       opportunities.push({
         id: 'fix-security-issues',
         type: 'security',
@@ -436,7 +436,7 @@ return 0;
     }
 
     // Accessibility opportunities
-    if (_metrics.accessibilityIssues 5) {
+    if (_metrics.accessibilityIssues > 5) {
       opportunities.push({
         id: 'improve-accessibility',
         type: 'accessibility',
@@ -464,7 +464,7 @@ return 0;
 
 
     // Architecture insights
-    if (_metrics.complexity 12) {
+    if (_metrics.complexity > 12) {
       insights.push({
         __id: 'architecture-complexity',
         __category: 'architecture',
@@ -478,7 +478,7 @@ return 0;
     }
 
     // Pattern insights
-    if (_metrics.duplicateCode 8) {
+    if (_metrics.duplicateCode > 8) {
       insights.push({
         id: 'pattern-duplication',
         category: 'patterns',
@@ -492,7 +492,7 @@ return 0;
     }
 
     // Performance insights
-    if (_metrics.performanceIssues 4) {
+    if (_metrics.performanceIssues > 4) {
       insights.push({
         id: 'performance-optimization',
         category: 'performance',
@@ -506,7 +506,7 @@ return 0;
     }
 
     // Security insights
-    if (_metrics.securityVulnerabilities 0) {
+    if (_metrics.securityVulnerabilities > 0) {
       insights.push({
         id: 'security-vulnerabilities',
         category: 'security',
@@ -520,7 +520,7 @@ return 0;
     }
 
     // Testing insights
-    if (_metrics.testCoverage 75) {
+    if (_metrics.testCoverage < 75) {
       insights.push({
         id: 'testing-coverage',
         category: 'testing',

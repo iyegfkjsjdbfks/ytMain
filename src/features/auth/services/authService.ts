@@ -89,8 +89,8 @@ class AuthService {
 
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
-        headers     : {
-          'Authorization': `Bearer ${tokens.accessT}`,
+        headers: {
+          'Authorization': `Bearer ${tokens.accessToken}`,
         },
       });
 
@@ -116,7 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken): Promise<AuthTokens | null> {
+  private async refreshToken(refreshToken: string): Promise<AuthTokens | null> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',
