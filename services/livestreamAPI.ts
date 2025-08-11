@@ -57,7 +57,7 @@ class LiveStreamService {
     return [];
   }
 
-  async getStreamById(id: string): Promise<LiveStream | null> {
+  async getStreamById(id): Promise<LiveStream | null> {
     conditionalLogger.info('Getting stream by ID:', id);
 
     // Placeholder implementation
@@ -121,7 +121,7 @@ class LiveStreamService {
     return stream;
   }
 
-  async updateStream(id: string, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
+  async updateStream(id, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
     conditionalLogger.info('Updating stream', { id, config });
 
     // Placeholder implementation
@@ -142,12 +142,12 @@ class LiveStreamService {
     return stream;
   }
 
-  async deleteStream(id: string): Promise<void> {
+  async deleteStream(id): Promise<void> {
     conditionalLogger.info('Deleting stream:', id);
     // Placeholder implementation
   }
 
-  async startStream(id: string): Promise<LiveStream> {
+  async startStream(id): Promise<LiveStream> {
     conditionalLogger.info('Starting stream:', id);
 
     // Placeholder implementation
@@ -211,18 +211,18 @@ class LiveStreamService {
     return stream;
   }
 
-  async endStream(id: string): Promise<void> {
+  async endStream(id): Promise<void> {
     conditionalLogger.info('Ending stream:', id);
     // Placeholder implementation
   }
 
-  async stopStream(id: string): Promise<void> {
+  async stopStream(id): Promise<void> {
     conditionalLogger.info('Stopping stream:', id);
     // Placeholder implementation - alias for endStream
     return this.endStream(id);
   }
 
-  async getStreamStats(id: string): Promise<any> {
+  async getStreamStats(id): Promise<any> {
     conditionalLogger.info('Getting stream stats:', id);
 
     return {
@@ -245,31 +245,31 @@ liveStreamService.streams = {
     return liveStreamService.getScheduledStreams();
   },
 
-  async getStream(id: string): Promise<LiveStream | null> {
+  async getStream(id): Promise<LiveStream | null> {
     return liveStreamService.getStreamById(id);
   },
 
-  async updateStream(id: string, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
+  async updateStream(id, config: Partial<LiveStreamConfig>): Promise<ScheduledStream> {
     return liveStreamService.updateStream(id, config);
   },
 
-  async deleteStream(id: string): Promise<void> {
+  async deleteStream(id): Promise<void> {
     return liveStreamService.deleteStream(id);
   },
 
-  async startStream(id: string): Promise<LiveStream> {
+  async startStream(id): Promise<LiveStream> {
     return liveStreamService.startStream(id);
   },
 
-  async stopStream(id: string): Promise<void> {
+  async stopStream(id): Promise<void> {
     return liveStreamService.stopStream(id);
   },
 
-  async endStream(id: string): Promise<void> {
+  async endStream(id): Promise<void> {
     return liveStreamService.endStream(id);
   },
 
-  async getStreamStats(id: string): Promise<any> {
+  async getStreamStats(id): Promise<any> {
     return liveStreamService.getStreamStats(id);
   },
 };

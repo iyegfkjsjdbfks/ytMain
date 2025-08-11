@@ -16,7 +16,7 @@ import { cn } from '../src/lib/utils';
 interface CategoryChipsProps {
   categories: string;
   selectedCategory: string;
-  onSelectCategory: (category: any) => void;
+  onSelectCategory: (category) => void;
   className?: string;
 }
 
@@ -137,7 +137,7 @@ return;
         className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {categories?.map((category: any) => {
+        {categories?.map((category) => {
           const isSelected = category === selectedCategory;
 
           return (

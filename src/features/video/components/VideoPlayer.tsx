@@ -23,7 +23,7 @@ export interface VideoPlayerProps {
   startTime?: number;
   className?: string;
   onReady?: () => void;
-  onTimeUpdate?: (currentTime: any, duration: any) => void;
+  onTimeUpdate?: (currentTime, duration) => void;
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
@@ -209,7 +209,7 @@ return;
     }
   };
 
-  const seek = (time: any) => {
+  const seek = (time) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -218,7 +218,7 @@ return;
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
 
-  const setVolume = (volume: any) => {
+  const setVolume = (volume) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -253,7 +253,7 @@ return;
     }
   };
 
-  const setPlaybackRate = (rate: any) => {
+  const setPlaybackRate = (rate) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -290,7 +290,7 @@ return;
     }, 3000);
   };
 
-  const formatTime = (time: any): string => {
+  const formatTime = (time): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);

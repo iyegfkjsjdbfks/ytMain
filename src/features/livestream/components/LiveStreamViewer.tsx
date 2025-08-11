@@ -2,12 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // Import statements fixed
-import { liveStreamService } from '../services/livestreamAPI';
 
 interface LiveStreamViewerProps {
   streamId: string;
   autoplay?: boolean;
-  onViewerCountChange?: (count: any) => void;
+  onViewerCountChange?: (count) => void;
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({

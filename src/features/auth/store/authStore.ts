@@ -13,7 +13,7 @@ interface AuthStore extends AuthState {
   checkAuth: () => Promise<void>;
   setUser: (user: User | null) => void;
   setError: (error: string | null) => void;
-  setLoading: (isLoading: any) => void;
+  setLoading: (isLoading) => void;
 }
 
 /**

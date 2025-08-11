@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import type * as React from 'react';
 
 interface VideoUploadProps {
-  onUploadComplete?: (videoId: any) => void;
+  onUploadComplete?: (videoId) => void;
   allowedTypes?: string;
   maxSizeMB?: number;
 }
@@ -175,7 +175,7 @@ return;
               onChange={handleFileChange}
             />
             <p className="text-xs text-gray-500 mt-2">
-              Accepted formats: {allowedTypes.map((type: any) => type.split('/')[1]).join(', ')}
+              Accepted formats: {allowedTypes.map((type) => type.split('/')[1]).join(', ')}
               <br />
               Maximum file size: {maxSizeMB}MB
             </p>

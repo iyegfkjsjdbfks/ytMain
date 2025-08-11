@@ -28,31 +28,31 @@ import { securityMonitoring } from '../utils/securityMonitoring';
 // Types for dashboard data
 interface DashboardMetrics {
   performance: {
-    score: number, lcp: number;
-    fid: number, cls: number;
-    memoryUsage: number, errorRate: number
+    score, lcp: number;
+    fid, cls: number;
+    memoryUsage, errorRate: number
   };
   security: {
-    score: number, threatsDetected: number;
-    vulnerabilities: number, complianceScore: number
+    score, threatsDetected: number;
+    vulnerabilities, complianceScore: number
   };
   deployment: {
-    successRate: number, averageTime: number;
-    frequency: number, activeDeployments: number
+    successRate, averageTime: number;
+    frequency, activeDeployments: number
   };
   codeQuality: {
-    score: number, complexity: number;
-    coverage: number, technicalDebt: number
+    score, complexity: number;
+    coverage, technicalDebt: number
   };
   featureFlags: {
-    totalFlags: number, activeFlags: number; experimentsRunning: number
+    totalFlags, activeFlags: number; experimentsRunning: number
   };
 }
 
 interface AlertItem {
-  id: string, type: 'performance' | 'security' | 'deployment' | 'quality';
+  id, type: 'performance' | 'security' | 'deployment' | 'quality';
   severity: 'low' | 'medium' | 'high' | 'critical', title: string;
-  description: string, timestamp: number; acknowledged: boolean
+  description, timestamp: number; acknowledged: boolean
 }
 
 const DevOpsDashboard: React.FC = () => {
@@ -182,7 +182,7 @@ const DevOpsDashboard: React.FC = () => {
   }, []);
 
   // Get severity color
-  const getSeverityColor = (severity: any) => {
+  const getSeverityColor = (severity) => {
     switch (severity) {
       case 'critical': return 'text-red-600 bg-red-100';
       case 'high': return 'text-orange-600 bg-orange-100';
@@ -192,7 +192,7 @@ const DevOpsDashboard: React.FC = () => {
   };
 
   // Get score color
-  const getScoreColor = (score: any) => {
+  const getScoreColor = (score) => {
     if (score >= 90) {
 return 'text-green-600';
 }
@@ -207,11 +207,11 @@ return 'text-orange-600';
 
   // Render metric card
   const MetricCard: React.FC<{
-    title: string, value: string | number;
+    title, value: string | number;
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
     color?: string;
-  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }: {trend: any, subtitle: any; value: any, title: string}) => (
+  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }: {trend, subtitle; value, title: string}) => (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between">
         <div>

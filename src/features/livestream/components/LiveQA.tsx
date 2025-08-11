@@ -37,7 +37,7 @@ return;
     }
   };
 
-  const handleLikeQuestion = async (questionId: any) => {
+  const handleLikeQuestion = async (questionId) => {
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
@@ -46,7 +46,7 @@ return;
     }
   };
 
-  const handlePinQuestion = async (questionId: any) => {
+  const handlePinQuestion = async (questionId) => {
     try {
       // TODO: Implement pin functionality in service
       conditionalLogger.debug('Pin question:', questionId);
@@ -56,7 +56,7 @@ return;
     }
   };
 
-  const handleAnswerQuestion = async (questionId: any) => {
+  const handleAnswerQuestion = async (questionId) => {
     if (!answerText.trim()) {
 return;
 }

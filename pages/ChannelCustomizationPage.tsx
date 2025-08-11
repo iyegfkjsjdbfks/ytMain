@@ -1,6 +1,5 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -71,12 +70,12 @@ const ChannelCustomizationPage: React.FC = () => {
   const [previewMode, setPreviewMode] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
-  const handleInputChange = (field: keyof ChannelBranding, value: any) => {
+  const handleInputChange = (field: keyof ChannelBranding, value) => {
     setBranding(prev => ({ ...prev, [field]: value }));
     setUnsavedChanges(true);
   };
 
-  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: any) => {
+  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value) => {
     setBranding(prev => ({
       ...prev,
       socialLinks: { ...prev.socialLinks, [platform]: value },
@@ -84,7 +83,7 @@ const ChannelCustomizationPage: React.FC = () => {
     setUnsavedChanges(true);
   };
 
-  const handleKeywordAdd = (keyword: any) => {
+  const handleKeywordAdd = (keyword) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
@@ -94,10 +93,10 @@ const ChannelCustomizationPage: React.FC = () => {
     }
   };
 
-  const handleKeywordRemove = (keyword: any) => {
+  const handleKeywordRemove = (keyword) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k: any) => k: any !== keyword),
+      channelKeywords: prev.channelKeywords.filter((k) => k !== keyword),
     }));
     setUnsavedChanges(true);
   };
@@ -114,7 +113,7 @@ const ChannelCustomizationPage: React.FC = () => {
     alert('Changes discarded');
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -428,7 +427,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         Channel Keywords
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {branding.channelKeywords.map((keyword: any) => (
+                        {branding.channelKeywords.map((keyword) => (
                           <span
                             key={keyword}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"

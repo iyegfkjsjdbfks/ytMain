@@ -47,7 +47,7 @@ export const queryPresets = {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retry: 3,
-    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 ** attemptIndex: any, 30000),
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   },
 } as const;
 
@@ -96,7 +96,7 @@ return true;
 
 // Enhanced retry logic
 function createRetryFn(maxRetries: number = 3) {
-  return (failureCount: any, error: Error) => {
+  return (failureCount, error: Error) => {
     const apiError = createApiError(error);
 
     // Don't retry if error is not retryable
@@ -115,7 +115,7 @@ return false;
 
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
-  return (attemptIndex: any, error: Error) => {
+  return (attemptIndex, error: Error) => {
     // Create API error to ensure proper error handling
     createApiError(error);
 
@@ -137,7 +137,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
   queryFn: () => Promise<T>,
-  queryKey: any,
+  queryKey,
 ): () => Promise<T> {
   return async () => {
     const startTime = performance.now();
@@ -163,7 +163,7 @@ function withPerformanceMonitoring<T>(
 
 // Enhanced useQuery hook
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
-  queryKey: any,
+  queryKey,
   queryFn: () => Promise<TData>,
   options: {
     preset?: keyof typeof queryPresets;
@@ -208,7 +208,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     invalidateQueries?: string[][];
     optimisticUpdate?: {
       queryKey: string;
-      updateFn: (oldData: any, variables: TVariables) => any;
+      updateFn: (oldData, variables: TVariables) => any;
     };
   } & Omit<UseMutationOptions<TData, TError, TVariables>, 'mutationFn' | 'retry' | 'retryDelay'> = {},
 ) {
@@ -259,7 +259,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
         queryClient.setQueryData(
           optimisticUpdate.queryKey,
-          (oldData: any) => optimisticUpdate.updateFn(oldData: any, variables),
+          (oldData) => optimisticUpdate.updateFn(oldData, variables),
         );
 
         return { previousData };
@@ -289,8 +289,8 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
-  _queryKey: any,
-  _queryFn: ({ pageParam }: {pageParam: any}) => Promise<TData>,
+  _queryKey,
+  _queryFn: ({ pageParam }: {pageParam}) => Promise<TData>,
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData) => unknown;
@@ -307,7 +307,7 @@ export function useCacheManager() {
 
   return {
     // Prefetch data
-    prefetch: <TData>(queryKey: any, queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
+    prefetch: <TData>(queryKey, queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
       return queryClient.prefetchQuery({
         queryKey,
         queryFn,

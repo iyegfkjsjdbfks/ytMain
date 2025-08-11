@@ -63,10 +63,10 @@ export interface CommunityPost {
 interface CommunityPostsProps {
   channelId?: string;
   posts: CommunityPost;
-  onLike: (postId: any) => void;
-  onComment: (postId: any) => void;
-  onShare: (postId: any) => void;
-  onVote?: (postId: any, optionId: any) => void;
+  onLike: (postId) => void;
+  onComment: (postId) => void;
+  onShare: (postId) => void;
+  onVote?: (postId, optionId) => void;
   className?: string;
 }
 
@@ -80,7 +80,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 }) => {
   const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set());
 
-  const toggleExpanded = (postId: any) => {
+  const toggleExpanded = (postId) => {
     setExpandedPosts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
@@ -92,7 +92,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
     });
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -140,7 +140,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
             post.images.length === 2 ? 'grid-cols-2' :
             'grid-cols-2 md:grid-cols-3'
           }`}>
-            {post.images.map((image: any, index: number) => (
+            {post.images.map((image, index) => (
               <img
                 key={index}
                 src={image}
@@ -274,7 +274,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {posts.map((post: any) => (
+      {posts.map((post) => (
         <div
           key={post.id}
           className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6"

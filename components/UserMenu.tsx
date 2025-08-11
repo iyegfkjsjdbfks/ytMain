@@ -26,7 +26,7 @@ interface UserMenuProps {
   isOpen: boolean; onClose: () => void
 }
 
-const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: {isDestructive: boolean; icon: any; to: any; onClick: Function; children: any}) => {
+const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: {isDestructive: boolean; icon; to; onClick: Function; children}) => {
   const commonClasses = `flex items-center px-4 py-3 text-sm w-full text-left transition-colors duration-150
     ${isDestructive ? 'text-red-500 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10'
                     : 'text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'}`;

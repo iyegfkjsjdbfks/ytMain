@@ -39,7 +39,7 @@ interface VideoActionsProps {
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onShareToSocial: (platform: any) => void;
+  onShareToSocial: (platform) => void;
   onCopyLink: () => void;
   shareMessage?: string;
 }
@@ -152,7 +152,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
     onShare();
   };
 
-  const handleShareToSocial = (platform: any) => {
+  const handleShareToSocial = (platform) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
 

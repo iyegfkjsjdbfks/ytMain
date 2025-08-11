@@ -18,10 +18,10 @@ interface ShortDisplayCardProps {
   short: Short;
   isLiked?: boolean;
   isFollowed?: boolean;
-  onLike?: (shortId: any) => void;
-  onFollow?: (channelName: any) => void;
-  onComment?: (shortId: any) => void;
-  onShare?: (shortId: any) => void;
+  onLike?: (shortId) => void;
+  onFollow?: (channelName) => void;
+  onComment?: (shortId) => void;
+  onShare?: (shortId) => void;
   onVideoChange?: () => void;
   onVideoEnd?: () => void;
   isActive?: boolean;

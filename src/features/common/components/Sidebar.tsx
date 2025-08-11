@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import type React from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 /**
  * Sidebar navigation component for the main application layout

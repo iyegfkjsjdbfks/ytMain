@@ -60,7 +60,7 @@ export interface VideoFilter {
 
 interface VideoEditorProps {
   videoFile: File;
-  onSave: (editedVideo: Blob, metadata: any) => void;
+  onSave: (editedVideo: Blob, metadata) => void;
   onCancel: () => void;
   className?: string;
 }
@@ -130,7 +130,7 @@ return;
     };
   }, []);
 
-  const generateThumbnail = (time: any): string => {
+  const generateThumbnail = (time): string => {
     // In a real implementation, this would capture a frame from the video
     return `https://picsum.photos/160/90?random=${Math.floor(time)}`;
   };
@@ -149,7 +149,7 @@ return;
     setIsPlaying(!isPlaying);
   };
 
-  const seekTo = (time: any) => {
+  const seekTo = (time) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -188,13 +188,13 @@ return;
     setSelectedText(newText.id);
   };
 
-  const updateTextOverlay = (id: string, updates: Partial<TextOverlay>) => {
+  const updateTextOverlay = (id, updates: Partial<TextOverlay>) => {
     setTextOverlays(prev => prev.map(text =>
       text.id === id ? { ...text, ...updates } : text,
     ));
   };
 
-  const deleteTextOverlay = (id: string) => {
+  const deleteTextOverlay = (id) => {
     setTextOverlays(prev => prev.filter((text) => text.id !== id));
     setSelectedText(null);
   };
@@ -211,13 +211,13 @@ return;
     setFilters(prev => [...prev, newFilter]);
   };
 
-  const updateFilter = (id: string, value: any) => {
+  const updateFilter = (id, value) => {
     setFilters(prev => prev.map(filter =>
       filter.id === id ? { ...filter, value } : filter,
     ));
   };
 
-  const removeFilter = (id: string) => {
+  const removeFilter = (id) => {
     setFilters(prev => prev.filter((filter) => filter.id !== id));
   };
 
@@ -263,7 +263,7 @@ return;
     }
   };
 
-  const formatTime = (time: any): string => {
+  const formatTime = (time): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

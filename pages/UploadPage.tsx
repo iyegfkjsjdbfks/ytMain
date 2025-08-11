@@ -183,10 +183,10 @@ return null;
   };
 
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag = (tagToRemove) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -206,7 +206,7 @@ return null;
     navigate('/studio');
   };
 
-  const getVisibilityIcon = (visibility: any) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public': return <GlobeAltIcon className="w-4 h-4" />;
       case 'unlisted': return <EyeIcon className="w-4 h-4" />;
@@ -376,7 +376,7 @@ return null;
                         Tags
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {metadata.tags.map((tag: string) => (
+                        {metadata.tags.map((tag) => (
                           <span
                             key={tag}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"

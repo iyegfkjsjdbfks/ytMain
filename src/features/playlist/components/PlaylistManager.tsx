@@ -14,7 +14,7 @@ interface PlaylistManagerProps {
 interface CreatePlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: (data) => void;
 }
 
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
@@ -57,10 +57,10 @@ return;
     }
   };
 
-  const removeTag = (tagToRemove: any) => {
+  const removeTag = (tagToRemove) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
@@ -140,7 +140,7 @@ return null;
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {formData.tags.map((tag: string) => (
+              {formData.tags.map((tag) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
@@ -204,7 +204,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     playlist.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleCreatePlaylist = async (data: any) => {
+  const handleCreatePlaylist = async (data) => {
     try {
       await createPlaylistMutation.mutate(data);
     } catch (error) {
@@ -212,7 +212,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const handleDeletePlaylist = async (playlistId: any) => {
+  const handleDeletePlaylist = async (playlistId) => {
     if (window.confirm('Are you sure you want to delete this playlist?')) {
       try {
         await deletePlaylistMutation.mutate(playlistId);
@@ -236,7 +236,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const getVisibilityIcon = (visibility: any) => {
+  const getVisibilityIcon = (visibility) => {
     switch (visibility) {
       case 'public':
         return <EyeIcon className="w-4 h-4" />;

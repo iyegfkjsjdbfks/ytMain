@@ -48,7 +48,7 @@ const SearchBar: React.FC = memo(() => {
     }
   }, []);
 
-  const fetchSuggestionsDebounced = useCallback(async (currentQuery: any) => {
+  const fetchSuggestionsDebounced = useCallback(async (currentQuery) => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
@@ -72,7 +72,7 @@ const SearchBar: React.FC = memo(() => {
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
 
-  const handleSearch = (searchQuery: any) => {
+  const handleSearch = (searchQuery) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
       setQuery(trimmedQuery);
@@ -116,7 +116,7 @@ inputRef.current.blur();
     }
   };
 
-  const handleRemoveRecentSearch = async (searchToRemove: any, e: React.MouseEvent) => {
+  const handleRemoveRecentSearch = async (searchToRemove, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);

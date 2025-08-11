@@ -7,7 +7,6 @@ import { realVideos } from '../../../../services/realVideoService';
 
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
 import type { Video, VideoVisibility } from '../types';
-import { Link } from 'react-router-dom';
 
 /**
  * Demo page to showcase video components
@@ -19,15 +18,15 @@ const VideoDemo: React.FC = () => {
     alert(`Video clicked: ${video.title}`);
   };
 
-  const handleVideoEdit = (videoId: any) => {
+  const handleVideoEdit = (videoId) => {
     alert(`Edit video: ${videoId}`);
   };
 
-  const handleVideoDelete = (videoId: any) => {
+  const handleVideoDelete = (videoId) => {
     alert(`Delete video: ${videoId}`);
   };
 
-  const handleVisibilityChange = (videoId: any, visibility: VideoVisibility) => {
+  const handleVisibilityChange = (videoId, visibility: VideoVisibility) => {
     alert(`Changed visibility of ${videoId} to ${visibility}`);
   };
 

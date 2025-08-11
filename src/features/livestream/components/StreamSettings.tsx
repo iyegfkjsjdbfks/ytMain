@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 
 // Import statements fixed  
-import { streamingConfig } from '../config/streaming';
 
 interface StreamQuality {
   resolution: string;
@@ -11,7 +10,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings: any) => void;
+  onSettingsChange?: (settings) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({

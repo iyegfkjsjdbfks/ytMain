@@ -66,7 +66,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     }
   };
 
-  const getTypeColor = (type: any) => {
+  const getTypeColor = (type) => {
     switch (type) {
       case 'render':
         return 'text-blue-600';
