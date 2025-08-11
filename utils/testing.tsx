@@ -480,7 +480,7 @@ export * from '@testing-library/react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName: string];
     }
   }
 }

@@ -51,7 +51,7 @@ export const renderWithProviders = (
   ui: ReactElement,
   options?: {
     queryClient?: QueryClient;
-    [key]: any;
+    [key];
   },
 ) => {
   const { queryClient = new QueryClient({
@@ -274,7 +274,7 @@ export { screen, fireEvent, waitFor, userEvent };
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName: string];
     }
   }
 }

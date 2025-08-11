@@ -193,7 +193,7 @@ return undefined;
   /**
    * Evaluate a feature _flag for a user
    */
-  evaluateFlag(flagId: any, _context: UserContext = {}, defaultValue?: any): any {
+  evaluateFlag(flagId: any, _context: UserContext = {}, defaultValue?: any) {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       console.warn(`🚩 Feature _flag '${flagId}' not found`);
@@ -668,7 +668,7 @@ continue;
     }
   }
 
-  private getContextValue(attribute: any, _context: UserContext): any {
+  private getContextValue(attribute: any, _context: UserContext) {
     switch (attribute) {
       case 'userId':
         return _context.userId;

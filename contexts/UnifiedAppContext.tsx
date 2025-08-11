@@ -371,7 +371,7 @@ export default UnifiedAppProvider;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName: string];
     }
   }
 }

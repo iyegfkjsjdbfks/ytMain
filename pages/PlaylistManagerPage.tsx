@@ -566,7 +566,7 @@ export default PlaylistManagerPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName: string];
     }
   }
 }

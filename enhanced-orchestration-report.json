@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-08-11T01:59:56.592Z",
+  "duration": "1007.49s",
+  "iterations": 0,
+  "initialErrors": 722,
+  "finalErrors": 184,
+  "totalImprovement": 538,
+  "targetAchieved": false,
+  "results": [
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 722,
+      "afterTotal": 722,
+      "beforeType": 371,
+      "afterType": 0,
+      "totalIncrease": 0,
+      "typeFixed": 371,
+      "success": true,
+      "timestamp": "2025-08-11T01:44:42.479Z",
+      "output": ""
+    },
+    {
+      "scriptName": "fix-critical-syntax-errors.js",
+      "errorType": "Critical Syntax Fixer",
+      "errorCode": "1109",
+      "beforeTotal": 722,
+      "afterTotal": 722,
+      "beforeType": 25,
+      "afterType": 0,
+      "totalIncrease": 0,
+      "typeFixed": 25,
+      "success": true,
+      "timestamp": "2025-08-11T01:52:09.501Z",
+      "output": ""
+    },
+    {
+      "scriptName": "fix-critical-syntax-errors.js",
+      "errorType": "Critical Syntax Fixer",
+      "errorCode": "1109",
+      "beforeTotal": 722,
+      "afterTotal": 209,
+      "beforeType": 25,
+      "afterType": 2,
+      "totalIncrease": -513,
+      "typeFixed": 23,
+      "success": true,
+      "timestamp": "2025-08-11T01:53:38.384Z",
+      "output": ""
+    },
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 184,
+      "afterTotal": 184,
+      "beforeType": 141,
+      "afterType": 141,
+      "totalIncrease": 0,
+      "typeFixed": 0,
+      "success": true,
+      "timestamp": "2025-08-11T01:56:46.919Z",
+      "output": ""
+    },
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 184,
+      "afterTotal": 184,
+      "beforeType": 141,
+      "afterType": 141,
+      "totalIncrease": 0,
+      "typeFixed": 0,
+      "success": true,
+      "timestamp": "2025-08-11T01:58:09.397Z",
+      "output": ""
+    }
+  ],
+  "configuration": {
+    "maxAllowedIncrease": 100,
+    "targetTotalErrors": 10,
+    "targetPerTypeErrors": 5
+  }
+}
