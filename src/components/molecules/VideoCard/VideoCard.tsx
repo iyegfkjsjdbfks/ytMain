@@ -1,17 +1,18 @@
 import { User } from '../types';
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-// TODO: Fix import - import { User, MoreVertical } from 'lucide-react';
+import { User, MoreVertical } from 'lucide-react';
 
-// TODO: Fix import - import { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/atoms/Button';
 
 import { formatNumber, getTimeAgo, cn } from '@/lib/utils';
 import type { VideoCardProps as VideoCardPropsBase } from '@/types';
+import { Link } from 'react-router-dom';
 
 // Simple image component since we're not using Next.js
 const Image = ({ src, alt, width, height, className, fill, sizes, ...props }) => {

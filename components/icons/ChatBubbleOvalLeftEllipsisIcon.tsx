@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 // Solid Chat Bubble Icon
 const SolidChatBubbleIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

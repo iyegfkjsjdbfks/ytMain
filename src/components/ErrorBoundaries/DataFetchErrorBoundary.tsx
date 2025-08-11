@@ -10,9 +10,9 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-// TODO: Fix import - import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';
+import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';
 
 import { createComponentError } from '@/utils/errorUtils';
 /// <reference types="node" />

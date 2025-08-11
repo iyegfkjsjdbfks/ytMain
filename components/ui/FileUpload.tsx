@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useRef, useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useRef, useState } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;

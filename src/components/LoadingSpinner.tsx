@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import type { FC } from 'react';
+import React from 'react';
+import type { FC } from 'react';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';

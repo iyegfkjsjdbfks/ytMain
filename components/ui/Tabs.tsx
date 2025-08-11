@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { createContext, useContext } from 'react';
-// TODO: Fix import - import React from 'react';
+import { createContext, useContext } from 'react';
+import React from 'react';
 
 interface TabsContextType {
   value: string;

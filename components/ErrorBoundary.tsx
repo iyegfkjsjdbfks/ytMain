@@ -7,9 +7,9 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-// TODO: Fix import - import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 // Error reporting service
 interface ErrorReport {

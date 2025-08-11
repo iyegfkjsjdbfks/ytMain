@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React, { useState } from 'react';
+import React, { useState } from 'react';
 
 // Import statements fixed  
-// import { streamingConfig } from '../config/streaming';
+import { streamingConfig } from '../config/streaming';
 
 interface StreamQuality {
   resolution: string;

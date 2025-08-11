@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,10 +8,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 import type { Video } from '../src/types/core';
 

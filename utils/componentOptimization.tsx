@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */

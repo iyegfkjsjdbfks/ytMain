@@ -1,7 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useEffect, useState  } from 'react';
+import type * as React from 'react';
+import {  useEffect, useState  } from 'react';
 
 import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
 import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';

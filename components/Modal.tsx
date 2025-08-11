@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useEffect, useRef } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useEffect, useRef } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
   isOpen: boolean;

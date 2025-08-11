@@ -1,18 +1,283 @@
 {
-  "timestamp": "2025-08-10T23:00:48.344Z",
-  "duration": "96.02s",
-  "iterations": 1,
-  "initialErrors": 199,
-  "finalErrors": 199,
-  "totalImprovement": 0,
-  "targetAchieved": false,
-  "results": [
+  "startTime": "2025-08-11T00:12:04.663Z",
+  "fixerRuns": [
     {
-      "iteration": 1,
-      "startErrors": 199,
-      "endErrors": 199,
-      "improvement": 0,
-      "totalImprovement": 0
+      "timestamp": "2025-08-11T00:12:04.663Z",
+      "type": "info",
+      "message": "🚀 Starting Priority-Focused TypeScript Error Fixing..."
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.673Z",
+      "type": "info",
+      "message": "Initial total errors: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.673Z",
+      "type": "info",
+      "message": "\n--- Processing Cannot find namespace errors ---"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.676Z",
+      "type": "info",
+      "message": "Starting fix-ts2503-cannot-find-namespace.js for TS2503 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.685Z",
+      "type": "info",
+      "message": "fix-ts2503-cannot-find-namespace.js (iteration 1/2): 494 TS2503 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.705Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:04.705Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2503-cannot-find-namespace.js"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:23.219Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:23.219Z",
+      "type": "success",
+      "message": "fix-ts2503-cannot-find-namespace.js: Fixed 0 TS2503 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:25.231Z",
+      "type": "info",
+      "message": "fix-ts2503-cannot-find-namespace.js (iteration 2/2): 494 TS2503 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:25.251Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:25.251Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2503-cannot-find-namespace.js"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:43.579Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:43.579Z",
+      "type": "success",
+      "message": "fix-ts2503-cannot-find-namespace.js: Fixed 0 TS2503 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:43.579Z",
+      "type": "warning",
+      "message": "fix-ts2503-cannot-find-namespace.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:43.585Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2503-cannot-find-namespace.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:44.585Z",
+      "type": "info",
+      "message": "\n--- Processing Cannot find name errors ---"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:44.589Z",
+      "type": "info",
+      "message": "Starting fix-ts2304-cannot-find-name.js for TS2304 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T00:12:44.595Z",
+      "type": "info",
+      "message": "fix-ts2304-cannot-find-name.js (iteration 1/2): 3837 TS2304 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:44.609Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:12:44.609Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2304-cannot-find-name.js"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:11.935Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:11.936Z",
+      "type": "success",
+      "message": "fix-ts2304-cannot-find-name.js: Fixed 0 TS2304 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:13.945Z",
+      "type": "info",
+      "message": "fix-ts2304-cannot-find-name.js (iteration 2/2): 3837 TS2304 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:13.960Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:13.960Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2304-cannot-find-name.js"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:41.286Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:41.286Z",
+      "type": "success",
+      "message": "fix-ts2304-cannot-find-name.js: Fixed 0 TS2304 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:41.286Z",
+      "type": "warning",
+      "message": "fix-ts2304-cannot-find-name.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:41.293Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2304-cannot-find-name.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:42.295Z",
+      "type": "info",
+      "message": "\n--- Processing Unused declarations ---"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:42.297Z",
+      "type": "info",
+      "message": "Starting fix-ts6133-declared-not-used.js for TS6133 (max 1 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T00:13:42.303Z",
+      "type": "info",
+      "message": "fix-ts6133-declared-not-used.js: 5 TS6133 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:42.319Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts6133-declared-not-used.js TS6133"
+    },
+    {
+      "timestamp": "2025-08-11T00:13:42.319Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts6133-declared-not-used.js"
+    },
+    {
+      "timestamp": "2025-08-11T00:14:09.425Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts6133-declared-not-used.js TS6133"
+    },
+    {
+      "timestamp": "2025-08-11T00:14:09.425Z",
+      "type": "success",
+      "message": "fix-ts6133-declared-not-used.js: Fixed 0 TS6133 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T00:14:09.431Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts6133-declared-not-used.js: 10435"
     }
-  ]
+  ],
+  "checkpoints": [
+    {
+      "label": "fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)",
+      "timestamp": "2025-08-11T00:12:04.705Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)",
+      "timestamp": "2025-08-11T00:12:25.251Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)",
+      "timestamp": "2025-08-11T00:12:44.609Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)",
+      "timestamp": "2025-08-11T00:13:13.959Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts6133-declared-not-used.js TS6133",
+      "timestamp": "2025-08-11T00:13:42.319Z",
+      "success": true
+    }
+  ],
+  "summary": {
+    "initialErrors": 10435,
+    "finalErrors": 10435,
+    "totalFixed": 0,
+    "improvementRate": "0.0",
+    "fixerResults": [
+      {
+        "scriptName": "fix-ts2503-cannot-find-namespace.js",
+        "errorCode": "2503",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 494,
+        "afterTotal": 10435,
+        "afterTypeCount": 494,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts2304-cannot-find-name.js",
+        "errorCode": "2304",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 3837,
+        "afterTotal": 10435,
+        "afterTypeCount": 3837,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "🔧 [2025-08-11T00:13:11.889Z] Errors fixed: 0\n🔧 [2025-08-11T00:13:11.890Z] Files modified: 1\n🔧 [2025-08-11T00:13:11.890Z] Fix rate: 0.0%\n✅ [2025-08-11T00:13:11.890Z] Error count maintained (no increase)\n"
+      },
+      {
+        "scriptName": "fix-ts6133-declared-not-used.js",
+        "errorCode": "6133",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 5,
+        "afterTotal": 10435,
+        "afterTypeCount": 5,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "🧹 Found 5 TS6133 unused declarations\n🧹 Removing unused import from ../services/livestreamAPI\n🧹 Initial: 5, Final: 5, Fixed: 0\n"
+      }
+    ]
+  },
+  "endTime": "2025-08-11T00:14:10.437Z",
+  "duration": "125.77s"
 }

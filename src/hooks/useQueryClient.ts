@@ -1,4 +1,4 @@
-// TODO: Fix import - import { QueryClient } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 // Create a single, optimized QueryClient instance with performance-focused settings
 const queryClient = new QueryClient({

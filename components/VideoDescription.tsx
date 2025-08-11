@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,10 +8,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import { BellIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { BellIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 import { formatCount } from '../utils/numberUtils';
 

@@ -1,18 +1,19 @@
+import { Route } from 'react-router-dom';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-// TODO: Fix import - import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// TODO: Fix import - import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
+import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// TODO: Fix import - import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
-// TODO: Fix import - import { vi } from 'vitest';
+import { vi } from 'vitest';
 
 // Mock data generators
 export const mockGenerators = {

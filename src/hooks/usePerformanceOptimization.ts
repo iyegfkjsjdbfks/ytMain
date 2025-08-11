@@ -11,7 +11,7 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName) => {

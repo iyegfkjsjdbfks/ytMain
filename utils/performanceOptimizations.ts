@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
+import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
 
 // Performance optimization utilities
 

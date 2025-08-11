@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { subscriptionService } from '../services/subscriptionService';
 

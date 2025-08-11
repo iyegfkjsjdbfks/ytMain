@@ -1,14 +1,15 @@
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// TODO: Fix import - import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
+import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// TODO: Fix import - import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-// TODO: Fix import - import { vi, type MockedFunction } from 'vitest';
+import { vi, type MockedFunction } from 'vitest';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Store import removed to fix circular dependency
 import type { Video, Channel } from '../src/types/core';

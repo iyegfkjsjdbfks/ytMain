@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { GoogleGenAI, type GenerateContentResponse } from '@google/genai';
+import { GoogleGenAI, type GenerateContentResponse } from '@google/genai';
 
 import type { VideoIdeaResponse } from '../types'; // Import the new type
 

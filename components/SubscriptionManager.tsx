@@ -7,11 +7,11 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { BellIcon, CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { BellIcon, CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 
 
 interface SubscriptionManagerProps {

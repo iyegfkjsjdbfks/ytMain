@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { logger } from '../../../utils/logger';
 

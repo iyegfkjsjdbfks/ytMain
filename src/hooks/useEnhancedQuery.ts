@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
 
 import { performanceMonitor } from '../utils/performanceMonitor';
 

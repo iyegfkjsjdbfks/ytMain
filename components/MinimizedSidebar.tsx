@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link, useLocation } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,10 +8,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import React, { memo } from 'react';
+import React, { memo } from 'react';
 
-// TODO: Fix import - import { QueueListIcon, ChartBarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link, useLocation } from 'react-router-dom';
+import { QueueListIcon, ChartBarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import { Link, useLocation } from 'react-router-dom';
 
 import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';

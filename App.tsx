@@ -1,10 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
+import { createBrowserRouter, RouterProvider, BrowserRouter, Route } from 'react-router-dom';
 
 // Create router with our route configuration and supported future flags
 const router = createBrowserRouter(routes, {

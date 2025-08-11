@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
-// TODO: Fix import - import React from "react";
+import type React from 'react';
+import React from "react";
 import { RegisterForm } from '../components/RegisterForm';
 
 /**

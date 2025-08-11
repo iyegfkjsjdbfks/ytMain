@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 const YouTubeLogo: React.FC<{ className?: string }> = ({ className = 'h-6' }) => (
   <svg

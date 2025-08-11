@@ -1,6 +1,6 @@
 
 import { getYouTubeSearchProvider } from '../../services/settingsService';
-// TODO: Fix import - import React from "react";
+import React from "react";
 import { logger } from './logger';
 
 

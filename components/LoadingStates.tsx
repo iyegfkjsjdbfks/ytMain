@@ -7,9 +7,9 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface VideoGridSkeletonProps {
   count?: number;

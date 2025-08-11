@@ -284,7 +284,7 @@ export type { Video, Short, User, Channel, Playlist, Comment } from '../../types
     this.fixFile('src/hooks/useLiveStream.ts', `import { useState, useEffect, useCallback } from 'react';
 
 // Import statement fixed
-// import { liveStreamService } from '../services/livestreamAPI';
+import { liveStreamService } from '../services/livestreamAPI';
 
 interface LiveStreamState {
   isLive: boolean;
@@ -472,7 +472,7 @@ export default {
     this.fixFile('src/features/livestream/components/LiveStreamViewer.tsx', `import React, { useState, useEffect, useRef } from 'react';
 
 // Import statements fixed
-// import { liveStreamService } from '../services/livestreamAPI';
+import { liveStreamService } from '../services/livestreamAPI';
 
 interface LiveStreamViewerProps {
   streamId: string;
@@ -555,7 +555,7 @@ export default LiveStreamViewer;
     this.fixFile('src/features/livestream/components/MultiplatformStreaming.tsx', `import React, { useState } from 'react';
 
 // Import statements fixed
-// import { streamingPlatforms } from '../config/platforms';
+import { streamingPlatforms } from '../config/platforms';
 
 interface Platform {
   id: string;
@@ -638,7 +638,7 @@ export default MultiplatformStreaming;
     this.fixFile('src/features/livestream/components/StreamSettings.tsx', `import React, { useState } from 'react';
 
 // Import statements fixed  
-// import { streamingConfig } from '../config/streaming';
+import { streamingConfig } from '../config/streaming';
 
 interface StreamQuality {
   resolution: string;

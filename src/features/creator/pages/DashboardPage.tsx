@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect  } from 'react';
-// TODO: Fix import - import type * as React from 'react';
+import React from "react";
+import { useState, useEffect  } from 'react';
+import type * as React from 'react';
 
 import { ChartBarIcon,
   EyeIcon,
@@ -27,7 +27,7 @@ const Pie = ({ data }) => <div className="text-center">Chart Data: {data?.length
 const Cell = (_props) => null;
 const Tooltip = (_props) => null;
 const Legend = (_props) => null;
-// import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
+import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
 

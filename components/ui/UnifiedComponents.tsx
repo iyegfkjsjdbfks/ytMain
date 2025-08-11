@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
+import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from 'react';
 
 import {
   ExclamationTriangleIcon,

@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,8 +8,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
 import {
   XMarkIcon,
@@ -19,7 +20,7 @@ import {
   ArrowsPointingOutIcon,
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface PictureInPictureProps {
   videoId: string;

@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useMemo, useCallback, useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { FixedSizeGrid as Grid } from 'react-window';
+import { FixedSizeGrid as Grid } from 'react-window';
 
 import { cn } from '../utils/cn';
 

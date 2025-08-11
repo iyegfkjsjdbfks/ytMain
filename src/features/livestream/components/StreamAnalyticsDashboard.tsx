@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
+import React from "react";
+import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
-// TODO: Fix import - import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
 
 /**
  * Props for the StreamAnalyticsDashboard component

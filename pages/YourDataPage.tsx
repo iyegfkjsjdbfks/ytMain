@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
 
-// TODO: Fix import - import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
 

@@ -1,9 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 
-// TODO: Fix import - import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
 interface CommunityPost {
   id: string;

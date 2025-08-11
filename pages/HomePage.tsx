@@ -14,13 +14,13 @@ declare namespace React {
   }
 }
 
-// TODO: Fix import - import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 import type { Video } from '../types';
 
