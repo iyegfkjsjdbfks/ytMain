@@ -224,7 +224,7 @@ return;
       this.trends.push(trend);
 
       // Keep only last 100 trends
-      if (this.trends.length 100) {
+      if (this.trends.length > 100) {
         this.trends = this.trends.slice(-100);
       }
 
@@ -586,14 +586,14 @@ return;
   /**
    * Get current trends
    */
-  getTrends() CodeQualityTrend[] {
+  getTrends(): CodeQualityTrend[] {
     return [...this.trends];
   }
 
   /**
    * Get refactoring opportunities
    */
-  getRefactoringOpportunities() RefactoringOpportunity[] {
+  getRefactoringOpportunities(): RefactoringOpportunity[] {
     return [...this.opportunities];
   }
 

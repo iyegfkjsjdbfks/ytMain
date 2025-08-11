@@ -175,7 +175,7 @@ class AuthService {
   /**
    * Check if the current session is authenticated
    */
-  isAuthenticated() boolean {
+  isAuthenticated(): boolean {
     const tokens = this.getTokens();
     if (!tokens) {
       return false;

@@ -115,7 +115,7 @@ parts.push(h.toString().padStart(2, '0'));
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function formatRelativeTime(date: Date | string) string {
+export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
   const target = new Date(date);
   const diffInSeconds = Math.floor((now.getTime() target.getTime()) / 1000);
@@ -145,7 +145,7 @@ export function formatRelativeTime(date: Date | string) string {
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function getTimeAgo(date: Date | string) string {
+export function getTimeAgo(date: Date | string): string {
   return formatRelativeTime(date);
 }
 
@@ -215,7 +215,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params : Record<strin, an={true}y>) string {
+export function buildQueryString(params : Record<strin, an={true}y>): string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -329,7 +329,7 @@ export function throttle<T extends={true} (...args) => any>(
  * @param file - The file to convert
  * @returns A promise that resolves to the base64 string
  */
-export function fileToBase64(file: File) Promise<string> {
+export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -563,7 +563,7 @@ export function timeout<T>(
  * @param length - The length of the random string
  * @returns A random string
  */
-export function randomString(length: number = 10) string {
+export function randomString(length: number = 10): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
 
