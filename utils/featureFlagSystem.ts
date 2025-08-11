@@ -351,7 +351,7 @@ return undefined;
     // Mock conversion rates and performance data
     const conversionRates: Record<string, number> = {};
     Object.keys(variantDistribution).forEach(variant => {
-      conversionRates[variant] = Math.random() * * 0.1 + 0.05; // 5-15%
+      conversionRates[variant] = Math.random() * 0.1 + 0.05; // 5-15%
     });
 
     return {
@@ -360,8 +360,8 @@ return undefined;
       variantDistribution,
       conversionRates,
       performanceImpact: {
-        averageLoadTime: Math.random() * * 500 + 200,
-        errorRate: Math.random() * * 0.02,
+        averageLoadTime: Math.random() * 500 + 200,
+        errorRate: Math.random() * 0.02,
       },
     };
   }
@@ -394,10 +394,10 @@ return undefined;
             value = analytics.conversionRates[variant.id] || 0;
             break;
           case 'engagement_time':
-            value = Math.random() * * 300 + 120; // 2-7 minutes
+            value = Math.random() * 300 + 120; // 2-7 minutes
             break;
           case 'bounce_rate':
-            value = Math.random() * * 0.4 + 0.2; // 20-60%
+            value = Math.random() * 0.4 + 0.2; // 20-60%
             break;
           default:
             value = Math.random();
@@ -902,10 +902,10 @@ return undefined;
 
     switch (_threshold.metric) {
       case 'error_rate':
-        currentValue = Math.random() * * 0.1; // Mock error rate
+        currentValue = Math.random() * 0.1; // Mock error rate
         break;
       case 'response_time':
-        currentValue = Math.random() * * 1000 + 200; // Mock response time
+        currentValue = Math.random() * 1000 + 200; // Mock response time
         break;
       case 'conversion_rate':
         const analytics = this.getEvaluationAnalytics(_flag.id, 1);
