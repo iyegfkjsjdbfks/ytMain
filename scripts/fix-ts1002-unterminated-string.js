@@ -118,6 +118,38 @@ class TS1002Fixer {
         this.log(`Fixed unterminated string in array: ${line.trim()} -> ${lines[i].trim()}`, 'success');
         continue;
       }
+      
+      // Pattern 5: Malformed string concatenation like "error.messageFailed to login')"
+      const match5 = line.match(/^(\s*)(.+?)([a-zA-Z])([A-Z][^'")]*['"])\);\s*$/);
+      if (match5) {
+        const [, indent, before, lastChar, afterPart] = match5;
+        lines[i] = `${indent}${before}${lastChar} || '${afterPart});`;
+        fixed = true;
+        this.log(`Fixed malformed string concat: ${line.trim()} -> ${lines[i].trim()}`, 'success');
+        continue;
+      }
+      
+      // Pattern 6: String with missing quote and semicolon like "'Unknown e;"
+      const match6 = line.match(/^(\s*)(['"]\w*\s*\w*)\s*;\s*$/);
+      if (match6) {
+        const [, indent, partial] = match6;
+        const quote = partial[0];
+        lines[i] = `${indent}${partial}rror${quote};`;
+        fixed = true;
+        this.log(`Fixed incomplete string: ${line.trim()} -> ${lines[i].trim()}`, 'success');
+        continue;
+      }
+      
+      // Pattern 7: Conditional string missing quote "? 'File reading failed';"
+      const match7 = line.match(/^(\s*)([^'"]*\?\s*['"])([^'"]*)\s*[;:]\s*$/);
+      if (match7) {
+        const [, indent, before, content] = match7;
+        const quote = before.slice(-1);
+        lines[i] = `${indent}${before}${content}${quote}`;
+        fixed = true;
+        this.log(`Fixed conditional string: ${line.trim()} -> ${lines[i].trim()}`, 'success');
+        continue;
+      }
     }
     
     return { content: lines.join('\n'), fixed };

@@ -23,7 +23,7 @@ class AuthService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.messageFailed to login');
+      throw new Error(error.message || 'Failed to login');
     }
 
     const data = await response.json();
@@ -45,7 +45,7 @@ class AuthService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.messageFailed to register');
+      throw new Error(error.message || 'Failed to register');
     }
 
     const responseData = await response.json();
@@ -62,7 +62,7 @@ class AuthService {
     if (tokens ? .refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
-          method   : 'PO,
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${tokens.accessToken}`,
@@ -89,8 +89,8 @@ class AuthService {
 
     try {
       const response = await fetch(`${this.baseUrl}/me`, {;
-        headers    : {
-          'Authorization': `Bearer ${tokens.accessTo}`,
+        headers     : {
+          'Authorization': `Bearer ${tokens.accessT}`,
         },
       });
 
@@ -151,7 +151,7 @@ class AuthService {
   /**
    * Get authentication tokens from localStorage
    */
-  private getTokens(): AuthTokens | null {
+  private getTokens() AuthTokens | null {
     const tokensString = localStorage.getItem(this.tokenKey);
     if (!tokensString) {
       return null;
