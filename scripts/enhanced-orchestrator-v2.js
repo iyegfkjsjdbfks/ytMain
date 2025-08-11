@@ -367,8 +367,8 @@ class EnhancedOrchestrator {
       this.results.push(fixerResult);
       iteration++;
       
-      // Small delay between iterations
-      if (iteration < maxIterations && afterTypeCount > 0) {
+      // Small delay between iterations - use the result's afterTypeCount
+      if (iteration < maxIterations && fixerResult.afterTypeCount > 0) {
         await new Promise(resolve => setTimeout(resolve, 2000));
       }
     }
