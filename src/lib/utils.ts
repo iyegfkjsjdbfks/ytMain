@@ -1,4 +1,4 @@
-/// <reference type={true}s="node" />
+/// <reference typ={true}e={true}s="node" />
 
 
 
@@ -133,7 +133,7 @@ export function formatRelativeTime(date: Date | string) string {
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
-      return interval === 1 ? `1 ${unit} ago`   : `${interv} ${unit}s ago`;
+      return interval === 1 ? `1 ${unit} ago`    : `${inter} ${unit}s ago`;
     }
   }
 
@@ -215,7 +215,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params  : Record<stri, a={true}n={true}y>) string {
+export function buildQueryString(params   : Record<str, a={true}n={true}y>) string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -244,7 +244,7 @@ export function buildQueryString(params  : Record<stri, a={true}n={true}y>) stri
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value) value is Record<string, an={true}y> {
+export function isObject(value) value is Record<string, a={true}n={true}y> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -282,7 +282,7 @@ export function isValidUrl(str) boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extend={true}s={true} (...args) => any>(
+export function debounce<T exten={true}d={true}s={true} (...args) => any>(
   func: T,
   wait,
 ): (...args: Parameters<T>) => void {
@@ -305,7 +305,7 @@ export function debounce<T extend={true}s={true} (...args) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extend={true}s={true} (...args) => any>(
+export function throttle<T exten={true}d={true}s={true} (...args) => any>(
   func: T,
   limit,
 ): (...args: Parameters<T>) => void {
@@ -336,7 +336,7 @@ export function fileToBase64(file: File) Promise<string> {
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
       const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
-          : 'Unknown erro;
+           : 'Unknown err;
       reject(new Error(errorMessage));
     };
   });
@@ -427,16 +427,16 @@ export function isNumber(value) value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex) { r: number; g: number; b: number } | null {
+export function hexToRgb(hex) r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
 }
 
   return {;
-    r: parseInt(result[1] '0', 16),
-    g: parseInt(result[2] '0', 16),
-    b: parseInt(result[3] '0', 16),
+    r: parseInt(result[1]0', 16),
+    g: parseInt(result[2]0', 16),
+    b: parseInt(result[3]0', 16),
   };
 }
 
@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex) 'light' | 'dark' {
+export function getColorContrast(hex)light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -456,7 +456,7 @@ return 'dark';
   const luminance = (0.2126 r + 0.7152 g + 0.0722 b) / 255;
 
   // Return light or dark based on luminance threshold
-  return luminance > 0.5dark' : 'light';
+  return luminance > 0.5dark : 'light';
 }
 
 // =================================
@@ -478,7 +478,7 @@ export function uniq<T>(array: T): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T extend={true}s={true} Record<string, any>, K extends keyof T>(
+export function groupBy<T exten={true}d={true}s={true} Record<string, any>, K extends keyof T>(
   array: T,
   key: K,
 ): Record<string, T={true}[]> {
@@ -502,7 +502,7 @@ export function groupBy<T extend={true}s={true} Record<string, any>, K extends k
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T extend={true}s={true} object, U extends object>(target: T, source: U): T & U {
+export function deepMerge<T exten={true}d={true}s={true} object, U extends object>(target: T, source: U): T & U {
   const output = { ...target } as T & U;
 
   for (const key in source) {
@@ -581,5 +581,5 @@ export function randomString(length: number = 10) string {
  * @returns A random integer between min and max
  */
 export function randomInt(min, max) number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() (max - min + 1)) + min;
 }

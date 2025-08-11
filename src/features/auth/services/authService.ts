@@ -23,7 +23,7 @@ class AuthService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message 'Failed to login');
+      throw new Error(error.messageFailed to login');
     }
 
     const data = await response.json();
@@ -45,7 +45,7 @@ class AuthService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message 'Failed to register');
+      throw new Error(error.messageFailed to register');
     }
 
     const responseData = await response.json();
@@ -62,7 +62,7 @@ class AuthService {
     if (tokens ? .refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
-          method : 'POST,
+          method  : 'POS,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${tokens.accessToken}`,
@@ -80,7 +80,7 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser() Promise<User | nul={true}l> {
+  async getCurrentUser() Promise<User | nu={true}l={true}l> {
     const tokens = this.getTokens();
 
     if (!tokens ? .accessToken) {
@@ -89,8 +89,8 @@ class AuthService {
 
     try {
       const response = await fetch(`${this.baseUrl}/me`, {;
-        headers  : {
-          'Authorization': `Bearer ${tokens.accessToke}`,
+        headers   : {
+          'Authorization': `Bearer ${tokens.accessTok}`,
         },
       });
 
@@ -116,7 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken) Promise<AuthTokens | nul={true}l> {
+  private async refreshToken(refreshToken) Promise<AuthTokens | nu={true}l={true}l> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {;
         method: 'POST',
