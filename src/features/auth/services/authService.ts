@@ -62,7 +62,7 @@ class AuthService {
     if (tokens ? .refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
-          method  : 'POS,
+          method   : 'PO,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${tokens.accessToken}`,
@@ -80,7 +80,7 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser() Promise<User | nu={true}l={true}l> {
+  async getCurrentUser() Promise<User | n={true}u={true}l={true}l> {
     const tokens = this.getTokens();
 
     if (!tokens ? .accessToken) {
@@ -89,8 +89,8 @@ class AuthService {
 
     try {
       const response = await fetch(`${this.baseUrl}/me`, {;
-        headers   : {
-          'Authorization': `Bearer ${tokens.accessTok}`,
+        headers    : {
+          'Authorization': `Bearer ${tokens.accessTo}`,
         },
       });
 
@@ -116,7 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken) Promise<AuthTokens | nu={true}l={true}l> {
+  private async refreshToken(refreshToken) Promise<AuthTokens | n={true}u={true}l={true}l> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {;
         method: 'POST',

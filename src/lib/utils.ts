@@ -1,4 +1,4 @@
-/// <reference typ={true}e={true}s="node" />
+/// <reference ty={true}p={true}e={true}s="node" />
 
 
 
@@ -133,7 +133,7 @@ export function formatRelativeTime(date: Date | string) string {
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
-      return interval === 1 ? `1 ${unit} ago`    : `${inter} ${unit}s ago`;
+      return interval === 1 ? `1 ${unit} ago`     : `${inte} ${unit}s ago`;
     }
   }
 
@@ -215,7 +215,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params   : Record<str, a={true}n={true}y>) string {
+export function buildQueryString(params    : Record<st, a={true}n={true}y>) string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -282,7 +282,7 @@ export function isValidUrl(str) boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T exten={true}d={true}s={true} (...args) => any>(
+export function debounce<T exte={true}n={true}d={true}s={true} (...args) => any>(
   func: T,
   wait,
 ): (...args: Parameters<T>) => void {
@@ -305,7 +305,7 @@ export function debounce<T exten={true}d={true}s={true} (...args) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T exten={true}d={true}s={true} (...args) => any>(
+export function throttle<T exte={true}n={true}d={true}s={true} (...args) => any>(
   func: T,
   limit,
 ): (...args: Parameters<T>) => void {
@@ -336,7 +336,7 @@ export function fileToBase64(file: File) Promise<string> {
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
       const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
-           : 'Unknown err;
+            : 'Unknown er;
       reject(new Error(errorMessage));
     };
   });
@@ -456,7 +456,7 @@ return 'dark';
   const luminance = (0.2126 r + 0.7152 g + 0.0722 b) / 255;
 
   // Return light or dark based on luminance threshold
-  return luminance > 0.5dark : 'light';
+  return luminance > 0.5dark 'light';
 }
 
 // =================================
@@ -478,7 +478,7 @@ export function uniq<T>(array: T): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T exten={true}d={true}s={true} Record<string, any>, K extends keyof T>(
+export function groupBy<T exte={true}n={true}d={true}s={true} Record<string, any>, K extends keyof T>(
   array: T,
   key: K,
 ): Record<string, T={true}[]> {
@@ -502,7 +502,7 @@ export function groupBy<T exten={true}d={true}s={true} Record<string, any>, K ex
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T exten={true}d={true}s={true} object, U extends object>(target: T, source: U): T & U {
+export function deepMerge<T exte={true}n={true}d={true}s={true} object, U extends object>(target: T, source: U): T & U {
   const output = { ...target } as T & U;
 
   for (const key in source) {
