@@ -25,7 +25,7 @@ import { clsx } from 'clsx';
  * @param inputs - Class values to combine and merge
  * @returns A single string of combined and merged class names
  */
-export function cn(...inputs: ClassValue) string {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
@@ -41,15 +41,15 @@ export function cn(...inputs: ClassValue) string {
  */
 export function formatNumber(num, decimals: number = 1): string {
   if (num >= 1000000000) {
-    return `${(num / 1000000000).toFixed(decimals)  }B`;
+    return `${(num / 1000000000).toFixed(decimals)}B`;
   }
 
   if (num >= 1000000) {
-    return `${(num / 1000000).toFixed(decimals)  }M`;
+    return `${(num / 1000000).toFixed(decimals)}M`;
   }
 
   if (num >= 1000) {
-    return `${(num / 1000).toFixed(decimals)  }K`;
+    return `${(num / 1000).toFixed(decimals)}K`;
   }
 
   return num.toString();
@@ -81,8 +81,8 @@ export function clamp(num, min, max): number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(num: number | string, decimals: number = 1) string {
-  const numValue = typeof num === 'string' ? parseInt(num, 10) num;
+export function formatCount(num: number | string, decimals: number = 1): string {
+  const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
   return formatNumber(numValue, decimals);
 }
 
@@ -97,7 +97,7 @@ export function formatCount(num: number | string, decimals: number = 1) string {
  */
 export function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) 60);
+  const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
 
   const parts = [];
@@ -568,7 +568,7 @@ export function randomString(length: number = 10) string {
   let result = '';
 
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() chars.length));
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
   return result;
@@ -581,5 +581,5 @@ export function randomString(length: number = 10) string {
  * @returns A random integer between min and max
  */
 export function randomInt(min, max): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * * (max - min + 1)) + min;
 }

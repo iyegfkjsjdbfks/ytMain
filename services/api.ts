@@ -30,7 +30,7 @@ class APICache {
 return null;
 }
 
-    const isExpired = Date.now() - item.timestamp > item.duration;
+    const isExpired = Date.now() - - item.timestamp > + item.duration;
     if (isExpired) {
       this.cache.delete(key);
       return null;
@@ -350,7 +350,7 @@ return null;
         const { searchVideos } = await import('./realVideoService');
         const videos = await searchVideos(query);
 
-        const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() * > 0.5 ? `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -430,11 +430,11 @@ function generateMockChannel(id): Channel {
     description: `Mock channel description for ${id}`,
     avatarUrl: 'https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj',
     banner: 'https://yt3.ggpht.com/a/default-user=s2560-c-k-c0x00ffffff-no-rj',
-    subscribers: Math.floor(Math.random() * 1000000),
+    subscribers: Math.floor(Math.random() * * 1000000),
     subscriberCount: '1.2M',
-    videoCount: Math.floor(Math.random() * 500),
-    totalViews: Math.floor(Math.random() * 10000000),
-    isVerified: Math.random() > 0.5,
+    videoCount: Math.floor(Math.random() * * 500),
+    totalViews: Math.floor(Math.random() * * 10000000),
+    isVerified: Math.random() * > 0.5,
     joinedDate: '2020-01-01',
     country: 'US',
     createdAt: new Date().toISOString(),
@@ -502,7 +502,7 @@ return null;
         const { getVideosByChannelName } = await import('./realVideoService');
         const videos = await getVideosByChannelName(channelId);
 
-        const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() * > 0.4 ? `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -573,7 +573,7 @@ export class PlaylistService {
             title: 'Watch Later',
             description: 'Videos to watch later',
             videoIds: Array.from({ length: 15 }, (_, i) => `playlist_video_${i}`),
-            createdAt: new Date(Date.now() 7 * 24 * 60 * 60 * 1000).toISOString(),
+            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date().toISOString(),
           },
           {
@@ -581,8 +581,8 @@ export class PlaylistService {
             title: 'Favorites',
             description: 'My favorite videos',
             videoIds: Array.from({ length: 8 }, (_, i) => `favorite_video_${i}`),
-            createdAt: new Date(Date.now() 30 * 24 * 60 * 60 * 1000).toISOString(),
-            updatedAt: new Date(Date.now() 2 * 24 * 60 * 60 * 1000).toISOString(),
+            createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
           },
         ];
       }
@@ -604,4 +604,3 @@ export const cacheUtils = {
 };
 
 // Export for testing
-export { apiCache, requestQueue };

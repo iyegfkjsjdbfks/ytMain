@@ -80,17 +80,17 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser(): Promise<User | nul={true}l> {
+  async getCurrentUser(): Promise<User | null> {
     const tokens = this.getTokens();
 
-    if (!tokens ?.accessToken) {
+    if (!tokens?.accessToken) {
       return null;
     }
 
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
         headers : {
-          'Authorization': `Bearer ${tokens.accessToke}`,
+          'Authorization': `Bearer ${tokens.accessToken}`,
         },
       });
 

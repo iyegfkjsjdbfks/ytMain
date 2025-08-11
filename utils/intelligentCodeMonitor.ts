@@ -302,7 +302,7 @@ return;
     if (previousTrend) {
       const previousValue = previousTrend._metrics[type as keyof CodeMetrics];
       // Small random walk
-      const change = (Math.random() 0.5) * 2; // -1 to 1
+      const change = (Math.random() * 0.5) * 2; // -1 to 1
       return Math.max(min, Math.min(max, previousValue + change));
     }
 
