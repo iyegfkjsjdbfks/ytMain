@@ -94,6 +94,7 @@
     "fix:ts1160": "node scripts/fix-ts1160-template-literals.js",
     "fix:surgical-ts1005": "node scripts/surgical-ts1005-fixer.js",
     "orchestrate:comprehensive": "node scripts/comprehensive-orchestrator.js",
+    "orchestrate:final": "node scripts/final-orchestrator.js",
     "orchestrate:typescript": "node scripts/typescript-error-orchestrator-v2.js"
   },
   "dependencies": {

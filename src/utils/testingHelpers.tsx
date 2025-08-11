@@ -7,7 +7,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import userEvent from '@testing-library/user-event';
 import type { Video, Channel, Comment } from '../types/core';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 
 

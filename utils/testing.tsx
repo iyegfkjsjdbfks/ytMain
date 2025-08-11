@@ -4,13 +4,13 @@ import type React from 'react';
 import React from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
+import { render, act, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { vi, type MockedFunction } from 'vitest';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { vi } from 'vitest';
+import { BrowserRouter } from 'react-router-dom';
 
 // Store import removed to fix circular dependency
 import type { Video, Channel } from '../src/types/core';

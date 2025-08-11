@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
-import { createBrowserRouter, RouterProvider, BrowserRouter, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, BrowserRouter } from 'react-router-dom';
 
 // Create router with our route configuration and supported future flags
 import React from 'react';

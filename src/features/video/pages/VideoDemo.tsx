@@ -7,7 +7,6 @@ import { realVideos } from '../../../../services/realVideoService';
 
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
 import type { Video, VideoVisibility } from '../types';
-import { Link } from 'react-router-dom';
 
 /**
  * Demo page to showcase video components

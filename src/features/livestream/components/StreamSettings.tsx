@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 
 // Import statements fixed  
-import { streamingConfig } from '../config/streaming';
 
 interface StreamQuality {
   resolution: string;

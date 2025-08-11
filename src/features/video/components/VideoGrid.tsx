@@ -2,7 +2,6 @@
 import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
-import { Link } from 'react-router-dom';
 
 interface VideoGridProps {
   title?: string;

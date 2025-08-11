@@ -13,7 +13,7 @@ declare namespace NodeJS {
 
 import { twMerge } from 'tailwind-merge';
 import React from "react";
-import { type ClassValue, clsx } from 'clsx';
+import { clsx } from 'clsx';
 
 
 // =================================
@@ -155,14 +155,8 @@ export function getTimeAgo(date: Date | string): string {
  * @param options - Intl.DateTimeFormat options
  * @returns Formatted date string
  */
-export function formatDate(
-  date: Date | string,
-  options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  },
-): string {
+export function formatDate(date: Date | string, options: Intl.DateTimeFormatOptions = {
+    year: 'numeric', month: 'short', day: 'numeric', }, ): string {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 

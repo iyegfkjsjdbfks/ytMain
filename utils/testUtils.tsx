@@ -1,5 +1,4 @@
 /// <reference types="react/jsx-runtime" />
-import { Route } from 'react-router-dom';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
@@ -9,7 +8,7 @@ import type { ReactElement, ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
+import { render, screen, waitFor, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -188,7 +187,7 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUser,  }) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUser }: any) {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -198,10 +197,7 @@ function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUs
   );
 }
 
-export function customRender(
-  ui: ReactElement,
-  options: CustomRenderOptions = {},
-) {
+export function customRender(_ui: ReactElement, _options: CustomRenderOptions = {}, ) {
   const {
     queryClient = createTestQueryClient(),
     initialEntries = ['/'],

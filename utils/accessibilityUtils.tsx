@@ -13,17 +13,7 @@ declare namespace NodeJS {
  */
 
 import React from "react";
-import { useEffect,
-/// <reference types="node" />
-  useRef,
-  useState,
-  useCallback,
-  createContext,
-  useContext,
-    type ReactNode,
-    type KeyboardEvent,
-    type FocusEvent,
-} from 'react';
+import { useEffect, useState, useCallback, createContext, useContext } from 'react';
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
@@ -34,7 +24,7 @@ interface AccessibilityContextType {
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }: {children}) {
+export function AccessibilityProvider({ children }: {children: React.ReactNode}) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
@@ -197,7 +187,8 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation({ onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false,  }: {onEnd: Function, onHome: Function; onArrowRight: Function, onArrowLeft: Function; onArrowDown: Function, onArrowUp: Function; onEscape: Function, onEnter: Function}) {
+export function useKeyboardNavigation(options: any) {
+  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
 return;
@@ -243,7 +234,7 @@ return;
 }
 
 // ARIA live region hook
-export function useAriaLiveRegion(initialMessage = '') {
+export function useAriaLiveRegion(_initialMessage = '') {
   const [message, setMessage] = useState(initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
@@ -302,7 +293,7 @@ export function checkColorContrast(foreground, background): {
 }
 
 // Skip link component
-export function SkipLink({ href, children }) {
+export function SkipLink({ href, children }: { href: string, children: React.ReactNode }) {
   return (
     <a
       href={href}

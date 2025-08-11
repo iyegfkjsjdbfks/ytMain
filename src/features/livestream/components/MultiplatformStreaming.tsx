@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 
 // Import statements fixed
-import { streamingPlatforms } from '../config/platforms';
 
 interface Platform {
   id: string;
