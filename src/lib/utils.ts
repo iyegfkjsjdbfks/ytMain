@@ -95,7 +95,7 @@ export function formatCount(num: number | string, decimals: number = 1): string 
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds: number): string {
+export function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
@@ -172,7 +172,7 @@ export function formatDate(date: Date | string, options: Intl.DateTimeFormatOpti
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str: string, maxLength: number, ellipsis = '...'): string {
+export function truncate(str, maxLength, ellipsis = '...'): string {
   if (!str || str.length <= maxLength) {
     return str;
   }
@@ -184,7 +184,7 @@ export function truncate(str: string, maxLength: number, ellipsis = '...'): stri
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str: string): string {
+export function toTitleCase(str): string {
   return str.replace(
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),

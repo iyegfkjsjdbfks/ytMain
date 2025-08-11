@@ -188,7 +188,7 @@ return;
 
 // Keyboard navigation hook
 <<<<<<< HEAD
-export function useKeyboardNavigation(_options: any) {
+export function useKeyboardNavigation(_options) {
 =======
 export function useKeyboardNavigation(_options) {
 >>>>>>> 982bfa585e0c84121ed9f536b48f40c598b87bea
