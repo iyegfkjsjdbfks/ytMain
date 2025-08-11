@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { FixedSizeGrid as Grid } from 'react-window';
+import React, { memo } from 'react';
+import { FixedSizeGrid } from 'react-window';
 
-import { memo, useMemo, useCallback, useState } from 'react';
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
@@ -179,7 +178,7 @@ export default OptimizedVideoGrid;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

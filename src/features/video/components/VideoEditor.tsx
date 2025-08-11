@@ -8,9 +8,7 @@ declare namespace NodeJS {
   }
 }
 
-import React from 'react';
-import { useState, useRef, useEffect } from 'react';
-import type * as React from 'react';
+import React, { useState } from 'react';
 
 import {
   PlayIcon,
@@ -636,7 +634,7 @@ export default VideoEditor;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

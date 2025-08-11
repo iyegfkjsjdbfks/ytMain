@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { RefreshCw, X, Download } from 'lucide-react';
+import React, { useState } from 'react';
+import X, { RefreshCw } from 'lucide-react';
 
-import { useState, useEffect, type FC } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -137,7 +136,7 @@ export default PWAUpdateNotification;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

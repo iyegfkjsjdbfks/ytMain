@@ -1,11 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { BellIcon } from '@heroicons/react/24/solid';
 
-import { BellIcon, BellSlashIcon } from '@heroicons/react/24/outline';
-import type * as React from 'react';
+import { BellSlashIcon, BellIcon } from '@heroicons/react/24/outline';
 
 import { useSubscription } from '../hooks/useSubscription';
 
@@ -295,7 +293,7 @@ export default SubscriptionButton;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   EyeIcon,
@@ -497,7 +496,7 @@ export default CreatorStudioDashboard;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

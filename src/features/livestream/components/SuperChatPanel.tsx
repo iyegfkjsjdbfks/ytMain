@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
@@ -378,7 +377,7 @@ export default SuperChatPanel;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -13,15 +13,14 @@ declare namespace React {
   }
 }
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import BaseForm from '../components/BaseForm';
 import BaseModal from '../components/BaseModal';
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
 import { Button } from '../components/ui/Button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/Tabs';
-import React from 'react';
+import TabsContent, { Tabs } from '../components/ui/Tabs';
 
 import type { Video } from '../types';
 
@@ -426,7 +425,7 @@ export default RefactoredContentManagerPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

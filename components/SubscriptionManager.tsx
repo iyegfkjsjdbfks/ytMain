@@ -3,15 +3,14 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { BellIcon, CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import CheckIcon, { BellIcon } from '@heroicons/react/24/outline';
+import { BellIcon } from '@heroicons/react/24/solid';
 
 
 interface SubscriptionManagerProps {

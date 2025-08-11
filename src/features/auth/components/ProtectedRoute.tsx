@@ -1,12 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, Navigate, useLocation } from 'react-router-dom';
 
-import { useEffect } from 'react';
 import LoadingSpinner from '@components/LoadingSpinner';
 
 import { useAuthStore } from '../store/authStore';
-import { useLocation } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -59,7 +57,7 @@ export default ProtectedRoute;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

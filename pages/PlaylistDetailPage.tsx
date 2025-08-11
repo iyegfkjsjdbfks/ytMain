@@ -1,17 +1,15 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState, useRef  } from 'react';
+import { useEffect } from 'react';
 
-import { PlayIcon as PlaySolidIcon, QueueListIcon, ArrowsRightLeftIcon, EllipsisVerticalIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
-import { useParams, Link } from 'react-router-dom';
+import QueueListIcon, { PlayIcon } from '@heroicons/react/24/solid';
+import { Link, Link, useParams } from 'react-router-dom';
 
 import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton'; // Added import
 import PlaylistEditModal from '../components/PlaylistEditModal';
-import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/realVideoService';
+import removeVideoFromPlaylist, { getUserPlaylistById } from '../services/realVideoService';
 
-import type { UserPlaylist, Video } from '../types';
-import { Link, useParams } from 'react-router-dom';
+import type { UserPlaylist } from '../types';
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video;
@@ -295,7 +293,7 @@ export default PlaylistDetailPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

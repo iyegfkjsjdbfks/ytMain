@@ -1,7 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 
 import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
 import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';
@@ -64,7 +63,7 @@ export default HistoryPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

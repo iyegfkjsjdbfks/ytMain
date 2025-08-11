@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import type React from 'react';
 import StudioHeader from './StudioHeader';
 import StudioSidebar from './StudioSidebar';
 
@@ -33,7 +32,7 @@ export default StudioLayout;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

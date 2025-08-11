@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -9,12 +9,11 @@ declare namespace NodeJS {
   }
 }
 
-import { useEffect, useRef, useState, type FC, type ChangeEvent } from 'react';
 
 import { logger } from '../../utils/logger';
 /// <reference types="node" />
 
-import { YouTubePlayer, YouTubePlayerState } from '../../lib/youtube-utils';
+import { YouTubePlayerState, YouTubePlayer } from '../../lib/youtube-utils';
 
 interface YouTubePlayerExampleProps {
   videoId: string;
@@ -285,7 +284,7 @@ export default YouTubePlayerExample;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

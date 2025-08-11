@@ -1,7 +1,6 @@
-import React from 'react';
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import React, { useState } from 'react';
 
-import { throttle, safeLocalStorage } from '../utils/componentUtils';
+import { safeLocalStorage, throttle } from '../utils/componentUtils';
 
 // Common hook patterns
 

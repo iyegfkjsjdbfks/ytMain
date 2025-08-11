@@ -13,9 +13,8 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -27,7 +26,7 @@ import {
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
+import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface UploadedFile {
@@ -550,7 +549,7 @@ export default UploadPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react';
-import React from 'react';
+import type InputHTMLAttributes, { forwardRef } from 'react';
 
 import { cn } from '../../utils/cn';
 

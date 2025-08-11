@@ -8,8 +8,7 @@ declare namespace NodeJS {
   }
 }
 
-import React from 'react';
-import { memo, useState, useEffect, useCallback, useRef } from 'react';
+import React, { memo } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 /// <reference types="node" />
@@ -315,7 +314,7 @@ export default MobileVideoPlayer;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,7 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
-import type * as React from 'react';
+import React, { useState } from 'react';
 
 import { realVideos } from '../../../../services/realVideoService';
 
@@ -11,7 +9,7 @@ import {
   VideoGrid,
   StudioVideoGrid,
 } from '../components';
-import type { Video, VideoVisibility } from '../types';
+import type { Video } from '../types';
 
 /**
  * Demo page to showcase video components
@@ -190,7 +188,7 @@ export default VideoDemo;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

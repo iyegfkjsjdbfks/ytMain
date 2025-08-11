@@ -14,13 +14,12 @@ declare namespace React {
   }
 }
 
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useMemo, useState } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
-import React from 'react';
 
 import type { Video } from '../types';
 
@@ -139,7 +138,7 @@ export default HomePage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

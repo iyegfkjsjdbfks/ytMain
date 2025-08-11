@@ -3,14 +3,13 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useRef, useState } from 'react';
-import React from 'react';
+import { useState, useRef } from 'react';
 
-import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import DocumentIcon, { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;

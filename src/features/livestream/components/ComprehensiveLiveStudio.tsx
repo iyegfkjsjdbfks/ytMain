@@ -1,9 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
-import type { LiveStream, StreamPlatform } from '../../../types/livestream';
+import type { LiveStream } from '../../../types/livestream';
 import {
   VideoCameraIcon,
   MicrophoneIcon,
@@ -681,7 +680,7 @@ export default ComprehensiveLiveStudio;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

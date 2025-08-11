@@ -1,12 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useRef, useCallback  } from 'react';
+import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import { uploadVideo } from '../services/realVideoService';
 
-import type { VideoUploadData, UploadProgress } from '../types';
+import type { VideoUploadData } from '../types';
 
 const VideoUploadPage: React.FC = () => {
   const navigate = useNavigate();
@@ -446,7 +445,7 @@ export default VideoUploadPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

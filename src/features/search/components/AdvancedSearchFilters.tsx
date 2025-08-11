@@ -378,7 +378,7 @@ export default AdvancedSearchFilters;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

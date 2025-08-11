@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { memo } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
 import YouTubeVideoCard from './YouTubeVideoCard';
 

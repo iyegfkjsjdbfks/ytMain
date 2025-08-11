@@ -1,18 +1,17 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from 'react';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-import { render, act, renderHook } from '@testing-library/react';
-import type { RenderOptions, RenderResult, RenderHookOptions } from '@testing-library/react';
+import act, { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { vi } from 'vitest';
 import type { MockedFunction } from 'vitest';
+import { vi } from 'vitest';
 
 // Store import removed to fix circular dependency
-import type { Video, Channel } from '../src/types/core';
+import type { Video } from '../src/types/core';
 import type { UserPlaylist } from '../types';
 
 // Test Providers
@@ -480,7 +479,7 @@ export * from '@testing-library/react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

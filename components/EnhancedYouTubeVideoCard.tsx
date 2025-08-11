@@ -3,15 +3,14 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
 
-import { memo } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
-import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { ArrowTopRightOnSquareIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
 import ImageWithFallback from './ImageWithFallback';

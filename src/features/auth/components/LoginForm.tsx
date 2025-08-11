@@ -1,9 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { useNavigate, useLocation } from 'react-router-dom';
-import type * as React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '../store/authStore';
 import type { LoginCredentials } from '../types';
@@ -208,7 +206,7 @@ export default LoginForm;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

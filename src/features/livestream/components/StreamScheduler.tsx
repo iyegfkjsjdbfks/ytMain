@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   liveStreamService,
   type ScheduledStream,
@@ -543,7 +542,7 @@ export default StreamScheduler;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

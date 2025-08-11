@@ -1,7 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 
 import { HeartIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version
 
@@ -65,7 +64,7 @@ export default LikedVideosPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

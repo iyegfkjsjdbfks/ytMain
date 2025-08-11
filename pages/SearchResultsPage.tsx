@@ -1,18 +1,17 @@
 
 /// <reference types="react/jsx-runtime" />
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useState } from 'react';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
 import { VideoService } from '../services/api';
-import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
+import type YouTubeSearchResult, { searchCombined } from '../services/googleSearchService';
 import { performanceMonitor } from '../utils/performance';
 
 import type { Video } from '../types';
-import { useNavigate } from 'react-router-dom';
 
 // Types for better performance
 interface SearchState {
@@ -195,7 +194,7 @@ export default React.memo(SearchResultsPage);
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

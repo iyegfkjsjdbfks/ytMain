@@ -9,8 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import React from 'react';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 
 // Unified state management hook
 export interface AsyncState<T> {

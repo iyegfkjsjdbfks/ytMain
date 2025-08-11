@@ -3,7 +3,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
@@ -13,8 +13,7 @@ declare global {
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-import { useState, useEffect, useMemo } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';

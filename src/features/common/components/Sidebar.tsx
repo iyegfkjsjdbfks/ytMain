@@ -1,10 +1,8 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import type React from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
-import { NavLink } from 'react-router-dom';
 
 /**
  * Sidebar navigation component for the main application layout
@@ -365,7 +363,7 @@ export default Sidebar;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

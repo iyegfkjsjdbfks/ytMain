@@ -1,12 +1,10 @@
 /// <reference types="react/jsx-runtime" />
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import type { ReactElement, ReactNode } from 'react';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import screen, { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import type { Video, Channel, Comment } from '../types/core';
-import { BrowserRouter } from 'react-router-dom';
+import type { Video } from '../types/core';
 
 // Test utilities for consistent testing
 export const createTestQueryClient = () => {
@@ -281,7 +279,7 @@ export { screen, fireEvent, waitFor, userEvent };
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

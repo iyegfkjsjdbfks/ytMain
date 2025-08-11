@@ -1,10 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import type * as React from 'react';
-import type { Video, VideoVisibility } from '../types';
+import type { Video } from '../types';
 
 interface StudioVideoGridProps {
   videos: Video;
@@ -389,7 +387,7 @@ export default StudioVideoGrid;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

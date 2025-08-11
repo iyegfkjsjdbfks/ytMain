@@ -83,7 +83,7 @@ export const chunkArray = <T,>(array: T, size: any): T[][] => {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

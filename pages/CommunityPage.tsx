@@ -1,9 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { PlusIcon, ChartBarIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import ChartBarIcon, { PlusIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 interface CommunityPost {
   id: string;
@@ -513,7 +512,7 @@ export default CommunityPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

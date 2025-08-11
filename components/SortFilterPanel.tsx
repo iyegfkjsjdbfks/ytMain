@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef, useEffect } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import { CheckIcon } from '@heroicons/react/24/solid';
 

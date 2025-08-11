@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import { BellIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
@@ -372,7 +371,7 @@ export default NotificationCenter;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

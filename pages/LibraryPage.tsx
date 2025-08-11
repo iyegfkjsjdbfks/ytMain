@@ -1,10 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 
-import { ClockIcon as OutlineClockIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as SolidHeartIcon, QueueListIcon as SolidQueueListIcon, PlayIcon as SolidPlayIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, ClockIcon } from '@heroicons/react/24/outline';
+import QueueListIcon, { HeartIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
 import LocalHistoryIcon from '../components/icons/HistoryIcon'; // Renamed to avoid clash with Heroicons
@@ -17,7 +16,7 @@ import {
   getLikedVideos,
 } from '../services/realVideoService';
 
-import type { Video, UserPlaylistDetails } from '../types';
+import type { Video } from '../types';
 
 const MAX_HORIZONTAL_VIDEOS = 8;
 const MAX_PLAYLISTS_GRID = 6;
@@ -259,7 +258,7 @@ export default LibraryPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

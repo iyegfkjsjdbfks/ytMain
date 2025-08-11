@@ -13,9 +13,8 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState, useEffect } from 'react';
 
 import {
   UserGroupIcon,
@@ -528,7 +527,7 @@ export default CreatorStudioPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { useState } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -209,7 +208,7 @@ export default StudioHeader;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

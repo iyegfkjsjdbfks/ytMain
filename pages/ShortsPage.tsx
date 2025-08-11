@@ -14,9 +14,8 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useRef } from 'react';
 
-import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -31,7 +30,7 @@ import ShortsPageSkeleton from '../components/LoadingStates/ShortsPageSkeleton';
 import ShortDisplayCard from '../components/ShortDisplayCard';
 import ShortsFilters from '../components/ShortsFilters';
 import ShortsNavigation from '../components/ShortsNavigation';
-import { useShortsVideos, useLocalStorage, useDebounce } from '../src/hooks';
+import { useLocalStorage, useShortsVideos } from '../src/hooks';
 
 import type { Short } from '../src/types/core';
 
@@ -744,7 +743,7 @@ export default ShortsPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

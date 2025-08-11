@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-nocheck
-import { useState, useRef, useEffect, useCallback } from 'react';
 
 import {
   PlayIcon,
@@ -15,7 +14,7 @@ import {
   ChevronDownIcon,
   ChatBubbleLeftIcon,
 } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 import type { Short } from '../src/types/core';
 
@@ -398,7 +397,7 @@ export default ShortsPlayer;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

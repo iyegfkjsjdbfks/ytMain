@@ -3,15 +3,14 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName];
+      [];
     }
   }
 }
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { PhotoIcon, PaintBrushIcon, EyeIcon, DocumentTextIcon, LinkIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import PaintBrushIcon, { PhotoIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid';
 
 interface ChannelBranding {
   channelArt: string;

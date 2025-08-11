@@ -1,10 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import { useState } from 'react';
 
-import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
+import CheckIcon, { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
-import { getVideos, getCommentsByVideoId } from '../services/realVideoService';
+import { getCommentsByVideoId, getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
 
 import type { Comment } from '../types';
@@ -424,7 +423,7 @@ export default CommentModerationPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

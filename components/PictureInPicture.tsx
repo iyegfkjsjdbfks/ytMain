@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef, useEffect } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import {
   XMarkIcon,

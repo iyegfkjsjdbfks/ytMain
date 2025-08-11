@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { forwardRef } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { cn } from '../../utils/cn';
 

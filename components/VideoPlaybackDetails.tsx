@@ -3,14 +3,13 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { type RefObject } from 'react';
-import React from 'react';
+import React, { type RefObject } from 'react';
 
-import { isYouTubeUrl, getYouTubeVideoId } from '../src/lib/youtube-utils';
+import { getYouTubeVideoId, isYouTubeUrl } from '../src/lib/youtube-utils';
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatCount } from '../utils/numberUtils';
 
@@ -19,7 +18,7 @@ import VideoActions from './VideoActions';
 import VideoDescription from './VideoDescription';
 import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 
-import type { Video, Channel } from '../src/types/core';
+import type { Video } from '../src/types/core';
 
 interface VideoPlaybackDetailsProps {
   video: Video;

@@ -1,12 +1,11 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 
-import { QueueListIcon as PlaylistIconSolid, PlusCircleIcon, XMarkIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
+import PlusCircleIcon, { QueueListIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
-import { getUserPlaylists, createUserPlaylist } from '../services/realVideoService';
+import { createUserPlaylist, getUserPlaylists } from '../services/realVideoService';
 
 import type { UserPlaylistDetails } from '../types';
 
@@ -210,7 +209,7 @@ export default PlaylistsPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

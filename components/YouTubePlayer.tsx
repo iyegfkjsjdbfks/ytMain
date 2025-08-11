@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useEffect, useRef, useState } from 'react';
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 

@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName];
+      [];
     }
   }
 }
-import { useState, useRef, useCallback } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import {
   CloudArrowUpIcon,

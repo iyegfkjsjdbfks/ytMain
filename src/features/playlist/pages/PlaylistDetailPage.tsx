@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import type React from 'react';
 
 /**
  * PlaylistDetailPage component for displaying a specific playlist's videos
@@ -36,7 +35,7 @@ export default PlaylistDetailPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

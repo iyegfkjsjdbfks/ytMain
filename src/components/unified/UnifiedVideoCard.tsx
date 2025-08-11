@@ -1,10 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { memo, useState } from 'react';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import React, { memo } from 'react';
+import { HeartIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
-import type * as React from 'react';
-import { cn, formatRelativeTime } from '../../lib/utils';
+import { formatRelativeTime, cn } from '../../lib/utils';
 import { UnifiedButton } from './UnifiedButton';
 import type { Video } from '../../types/core';
 import {
@@ -384,7 +382,7 @@ export default UnifiedVideoCard;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

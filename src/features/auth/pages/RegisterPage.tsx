@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
 import type React from 'react';
-import React from 'react';
 import { RegisterForm } from '../components/RegisterForm';
 
 /**
@@ -41,7 +40,7 @@ export default RegisterPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

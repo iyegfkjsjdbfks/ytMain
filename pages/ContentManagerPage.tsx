@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import { useState } from 'react';
 
-import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
+import CalendarIcon, { FolderIcon } from '@heroicons/react/24/outline';
 
 import { getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
@@ -600,7 +599,7 @@ export default ContentManagerPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

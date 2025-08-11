@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { FixedSizeList as List } from 'react-window';
+import React, { memo } from 'react';
+import { FixedSizeList } from 'react-window';
 
-import { memo, useState, useCallback, useMemo, useEffect } from 'react';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
@@ -228,7 +227,7 @@ export default MobileVideoGrid;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

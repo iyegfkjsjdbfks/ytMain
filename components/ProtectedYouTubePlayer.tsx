@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';
@@ -69,7 +68,7 @@ export default ProtectedYouTubePlayer;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

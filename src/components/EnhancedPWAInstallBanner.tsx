@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect, useCallback, useMemo, type FC } from 'react';
+import React, { useState } from 'react';
 
 import {
   X,
@@ -494,7 +493,7 @@ export default EnhancedPWAInstallBanner;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useEffect, useRef } from 'react';
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
 

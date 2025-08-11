@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   VideoCameraIcon,
@@ -14,9 +13,9 @@ import {
   ArrowUpIcon,
   PlusIcon,
 } from '@heroicons/react/24/outline';
-import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
+import { VideoCameraIcon } from '@heroicons/react/24/solid';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
+import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface StudioVideo {
@@ -463,7 +462,7 @@ export default StudioPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

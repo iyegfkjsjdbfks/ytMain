@@ -3,14 +3,13 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { PlayIcon, VideoCameraIcon, CogIcon, SparklesIcon, BugAntIcon } from '@heroicons/react/24/outline';
+import VideoCameraIcon, { PlayIcon } from '@heroicons/react/24/outline';
 
 import {
   getSettings,

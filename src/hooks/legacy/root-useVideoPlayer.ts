@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 
 interface VideoPlayerState {
   isPlaying: boolean;

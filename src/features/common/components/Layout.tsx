@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import type React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -34,7 +33,7 @@ export default Layout;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

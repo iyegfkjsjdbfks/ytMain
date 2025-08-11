@@ -1,9 +1,8 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState  } from 'react';
+import { useState } from 'react';
 
-import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import MoonIcon, { Cog8ToothIcon } from '@heroicons/react/24/outline';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
 import { useTheme } from '../contexts/ThemeContext';
@@ -244,6 +243,6 @@ export default SettingsPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any }
+      [key: string]: any }
   }
 }

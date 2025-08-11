@@ -1,11 +1,10 @@
 /// <reference types="react/jsx-runtime" />
 import type { ReactElement } from 'react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
 
 // Mock data generators
 export const mockVideo = (overrides = {}) => ({
@@ -385,7 +384,7 @@ export { customRender as render };
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

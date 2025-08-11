@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { createContext, useContext } from 'react';
-import React from 'react';
+import { useContext, createContext } from 'react';
 
 interface TabsContextType {
   value: string; onValueChange: (value: string | number) => void

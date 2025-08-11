@@ -1,14 +1,12 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useCallback, type FC } from 'react';
+import React, { useCallback } from 'react';
 
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { DataFetchErrorBoundary } from '@/components/ErrorBoundaries';
 import WatchPage from './WatchPage';
-import { useParams } from 'react-router-dom';
 
 /**
  * WatchPage wrapped with specialized error boundary
@@ -41,7 +39,7 @@ export default ProtectedWatchPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

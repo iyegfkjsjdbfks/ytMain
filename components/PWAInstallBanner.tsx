@@ -3,16 +3,15 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect, type FC } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import { PWAUtils, PWAEvents } from '../src/utils/pwa';
+import { PWAEvents, PWAUtils } from '../src/utils/pwa';
 
 interface PWAInstallBannerProps {
   className?: string;

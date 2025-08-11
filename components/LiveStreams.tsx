@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useEffect, useState } from 'react';
 
 
 import { getVideos } from '../services/realVideoService';
@@ -155,7 +154,7 @@ export default LiveStreams;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

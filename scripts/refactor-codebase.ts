@@ -126,8 +126,7 @@ class CodebaseRefactorer {
  * Consolidates all video card variants into a single component
  */
 
-import * as React from 'react';
-import {  memo  } from 'react';
+import { memo } from 'react';
 import { cn } from '../../lib/utils';
 import { Video } from '../../types/core';
 import { formatDistanceToNow } from 'date-fns';

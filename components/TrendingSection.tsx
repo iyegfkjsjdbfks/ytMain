@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect, memo, useCallback, useMemo } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 
 import { getVideos } from '../services/realVideoService';

@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import type React from 'react';
 
 /**
  * UserPage component for displaying a user's public profile
@@ -34,7 +33,7 @@ export default UserPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useState, useEffect } from 'react';
 
 
 import { getShortsVideos } from '../services/realVideoService';
@@ -141,7 +140,7 @@ export default ShortsSection;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

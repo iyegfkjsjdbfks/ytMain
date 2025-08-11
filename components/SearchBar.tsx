@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
 
-import { useState, useEffect, useRef, useCallback, memo } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 

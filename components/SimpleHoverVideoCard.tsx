@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useState, useRef, useEffect } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 
@@ -311,7 +310,7 @@ export default SimpleHoverVideoCard;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

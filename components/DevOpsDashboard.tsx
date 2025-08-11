@@ -3,7 +3,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
@@ -17,8 +17,7 @@ declare global {
  * - Feature flag management
  */
 
-import { useState, useEffect } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';

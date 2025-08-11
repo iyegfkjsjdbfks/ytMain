@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { logger } from '../utils/logger';
 import { unifiedDataService } from '../services/unifiedDataService';
@@ -201,7 +200,7 @@ export default TestMetadataFetch;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

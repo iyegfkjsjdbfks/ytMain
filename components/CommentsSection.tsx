@@ -2,12 +2,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import {
   EllipsisHorizontalIcon,

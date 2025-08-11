@@ -1,17 +1,16 @@
 import { User } from '../types';
 
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { User, MoreVertical } from 'lucide-react';
+import { MoreVertical, User } from 'lucide-react';
 
-import { useState } from 'react';
 
 import { Button } from '@/components/atoms/Button';
 
-import { formatNumber, getTimeAgo, cn } from '@/lib/utils';
-import type { VideoCardProps as VideoCardPropsBase } from '@/types';
+import getTimeAgo, { formatNumber } from '@/lib/utils';
+import type { VideoCardProps } from '@/types';
 
 // Simple image component since we're not using Next.js
 const Image = ({
@@ -157,7 +156,7 @@ function formatDuration(seconds: any): string {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

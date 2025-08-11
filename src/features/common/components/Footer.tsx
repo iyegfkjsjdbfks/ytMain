@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link } from 'react-router-dom';
-import type React from 'react';
 
 /**
  * Footer component with links to important pages and copyright information
@@ -179,7 +178,7 @@ export default Footer;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

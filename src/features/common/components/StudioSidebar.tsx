@@ -1,10 +1,8 @@
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import type React from 'react';
+import { Link, Link, NavLink } from 'react-router-dom';
 
 import { useAuthStore } from '../../auth/store/authStore';
-import { Link, NavLink } from 'react-router-dom';
 
 // Fix missing Link import
 
@@ -401,7 +399,7 @@ export default StudioSidebar;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

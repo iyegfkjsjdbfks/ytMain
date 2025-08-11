@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import * as React from 'react';
-import {  useState, useMemo, useCallback, Suspense  } from 'react';
+import { useState } from 'react';
 
 import { HomeIcon } from '@heroicons/react/24/solid';
 
@@ -256,7 +255,7 @@ export default OptimizedHomePage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

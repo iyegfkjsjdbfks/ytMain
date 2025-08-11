@@ -1,7 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ import {
   getChannelCommunityPosts,
 } from '../services/realVideoService';
 
-import type { Video, Channel, PlaylistSummary, CommunityPost } from '../types';
+import type { Video } from '../types';
 
 
 const ChannelPage: React.FC = () => {
@@ -159,7 +158,7 @@ export default ChannelPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

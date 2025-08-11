@@ -15,12 +15,11 @@ declare namespace NodeJS {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef, useEffect } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 

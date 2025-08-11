@@ -1,10 +1,9 @@
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 import { unifiedDataService } from '../services/unifiedDataService';
-import type { Video, Channel, VideoVisibility } from '../types/core';
-import { useNavigate, useParams } from 'react-router-dom';
+import type { Video } from '../types/core';
 
 interface Comment {
   id: string;

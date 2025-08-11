@@ -1,10 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import React, { useState } from 'react';
+import { HeartIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
-import * as React from 'react';
-import { cn, formatRelativeTime } from '@/lib/utils';
+import { formatRelativeTime, cn } from '@/lib/utils';
 import { UnifiedButton } from '@/components/unified';
 import type { Playlist } from '../../../types/core';
 import {
@@ -370,7 +368,7 @@ export default PlaylistCard;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

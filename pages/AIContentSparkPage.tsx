@@ -3,15 +3,14 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
 
-import type * as React from 'react';
-import {  useState  } from 'react';
+import { useState } from 'react';
 
-import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';
+import { LightBulbIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 import { generateVideoIdeas } from '../services/geminiService';
 

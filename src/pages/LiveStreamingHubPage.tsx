@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import { ErrorBoundary } from 'react-error-boundary';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Play,
@@ -11,7 +11,6 @@ import {
   Calendar,
   Zap,
 } from 'lucide-react';
-import { useState } from 'react';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import {
@@ -332,7 +331,7 @@ export default LiveStreamingHubPageWithErrorBoundary;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

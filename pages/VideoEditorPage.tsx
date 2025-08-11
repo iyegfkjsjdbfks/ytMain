@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 /// <reference types="node" />
 
 
@@ -26,9 +26,8 @@ declare namespace React {
   }
 }
 
-import { useState, useRef, useEffect } from 'react';
 
-import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import PauseIcon, { PlayIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
@@ -656,7 +655,7 @@ export default VideoEditorPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

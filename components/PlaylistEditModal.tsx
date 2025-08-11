@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect, useRef } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 interface PlaylistEditModalProps {
   isOpen: boolean;

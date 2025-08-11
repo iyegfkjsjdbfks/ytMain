@@ -1,16 +1,15 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useMemo } from 'react';
 
-import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import ChevronRightIcon, { PlayIcon } from '@heroicons/react/24/solid';
 
 import { parseRelativeDate } from '../utils/dateUtils';
 
 import VideoCard from './VideoCard';
 
-import type { Channel, Video, PlaylistSummary, CommunityPost } from '../types';
+import type { Channel } from '../types';
 
 
 interface ChannelTabContentProps {
@@ -211,7 +210,7 @@ export default ChannelTabContent;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

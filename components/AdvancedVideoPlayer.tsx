@@ -2,10 +2,7 @@
 /// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
 
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import { useRef } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -18,12 +15,10 @@ declare namespace NodeJS {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef, useEffect, useCallback } from 'react';
-import React from 'react';
 
 import {
   PlayIcon,

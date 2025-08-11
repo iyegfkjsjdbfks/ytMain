@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect, type FC } from 'react';
+import React, { useState } from 'react';
 
-import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
+import Wifi, { WifiOff } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -230,7 +229,7 @@ export default OfflineIndicator;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,7 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { forwardRef } from 'react';
-import type * as React from 'react';
+import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 import LoadingSpinner from '@components/LoadingSpinner';
@@ -225,7 +223,7 @@ export default UnifiedButton;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

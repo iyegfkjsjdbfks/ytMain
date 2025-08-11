@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName];
+      [];
     }
   }
 }
-import { useState, useEffect, useRef, useMemo } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   HeartIcon,
@@ -20,7 +19,7 @@ import {
   ChevronUpIcon,
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

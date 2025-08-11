@@ -12,11 +12,10 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState, useEffect, memo, lazy, Suspense } from 'react';
 
-import { BanknotesIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, ChartBarIcon, GiftIcon } from '@heroicons/react/24/outline';
+import ArrowTrendingUpIcon, { BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
 import {
   Chart as ChartJS,
@@ -552,7 +551,7 @@ export default memo(MonetizationPage);
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

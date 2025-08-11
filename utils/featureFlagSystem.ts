@@ -334,16 +334,16 @@ return undefined;
     };
   } {
     const cutoff = Date.now() - (hours * 60 * 60 * 1000);
-    let evaluations = this.evaluationHistory.filter((e: Event) => e.timestamp > cutoff);
+    let evaluations = this.evaluationHistory.filter((e: FlagEvaluation) => e.timestamp > cutoff);
 
     if (flagId) {
-      evaluations = evaluations.filter((e: Event) => e.flagId === flagId);
+      evaluations = evaluations.filter((e: FlagEvaluation) => e.flagId === flagId);
     }
 
-    const uniqueUsers = new Set(evaluations.map((e: Event) => e.userId).filter(Boolean)).size;
+    const uniqueUsers = new Set(evaluations.map((e: FlagEvaluation) => e.userId).filter(Boolean)).size;
 
     const variantDistribution: Record<string, number> = {};
-    evaluations.forEach((e: Event) => {
+    evaluations.forEach((e: FlagEvaluation) => {
       const variant = e.variant || 'default';
       variantDistribution[variant] = (variantDistribution[variant] || 0) + 1;
     });
@@ -672,7 +672,7 @@ continue;
     }
   }
 
-  private getContextValue(attribute: any, _context: UserContext): any {
+  private getContextValue(attribute: string, _context: UserContext): any {
     switch (attribute) {
       case 'userId':
         return _context.userId;
@@ -746,7 +746,7 @@ continue;
     }
   }
 
-  private selectVariant(variants: FlagVariant, hash: any): FlagVariant {
+  private selectVariant(variants: FlagVariant[], hash: number): FlagVariant {
     if (variants.length === 0) {
       // Return a default variant if no variants are provided
       return {
@@ -811,14 +811,14 @@ continue;
   }
 
   private startGradualRollout(_flag: FeatureFlag): void {
-
-    if (strategy.type !== 'gradual' || !_flag.rolloutStrategy?.config.incrementPercentage || !_flag.rolloutStrategy?.config.incrementInterval) {
-      return undefined;
+    const strategy = _flag.rolloutStrategy;
+    if (!strategy || strategy.type !== 'gradual' || !strategy.config.incrementPercentage || !strategy.config.incrementInterval) {
+      return;
     }
 
-    const currentPercentage = _flag.rolloutStrategy?.config.percentage || 0;
-    const { incrementPercentage } = _flag.rolloutStrategy?.config;
-    const incrementInterval = _flag.rolloutStrategy?.config.incrementInterval * 60 * 1000; // Convert to ms
+    const currentPercentage = strategy.config.percentage || 0;
+    const { incrementPercentage } = strategy.config;
+    const incrementInterval = (strategy.config.incrementInterval || 0) * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
       return undefined; // Already at 100%

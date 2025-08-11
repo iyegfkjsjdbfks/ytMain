@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { memo } from 'react';
 // @ts-nocheck
-import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
 
 import {
   PlayIcon,
@@ -19,10 +18,10 @@ import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { cn } from '../src/lib/utils';
 import { isYouTubeUrl } from '../src/lib/youtube-utils';
 import { withMemo } from '../utils/componentOptimizations';
-import { formatDuration, formatViews, formatTimeAgo } from '../utils/formatters';
+import formatViews, { formatDuration } from '../utils/formatters';
 import { performanceMonitor } from '../utils/performance';
 
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './ui/DropdownMenu';
+import DropdownMenuItem, { DropdownMenu } from './ui/DropdownMenu';
 import YouTubePlayer from './YouTubePlayer';
 
 import type { Video } from '../types';
@@ -666,7 +665,7 @@ export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

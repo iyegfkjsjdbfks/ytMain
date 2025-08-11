@@ -3,15 +3,14 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
 
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import ChatBubbleLeftRightIcon, { BellAlertIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
   id: string;

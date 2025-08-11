@@ -1,11 +1,10 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+import { useState } from 'react';
 
-import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import TrashIcon, { ShieldCheckIcon } from '@heroicons/react/24/outline';
 
-import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
+import getLikedVideos, { getWatchHistoryVideos } from '../services/realVideoService';
 
 const YourDataPage: React.FC = () => {
   const [watchHistoryCount, setWatchHistoryCount] = useState(0);
@@ -226,6 +225,6 @@ export default YourDataPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any }
+      [key: string]: any }
   }
 }

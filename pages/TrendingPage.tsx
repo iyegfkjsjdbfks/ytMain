@@ -1,7 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState  } from 'react';
+import { useState } from 'react';
 
 import { FireIcon } from '@heroicons/react/24/solid';
 
@@ -45,7 +44,7 @@ export default TrendingPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

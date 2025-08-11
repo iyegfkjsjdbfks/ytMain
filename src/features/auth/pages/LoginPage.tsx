@@ -1,7 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useEffect } from 'react';
-import type * as React from 'react';
+import React, { useEffect } from 'react';
 
 import { LoginForm } from '../components/LoginForm';
 
@@ -52,7 +50,7 @@ export default LoginPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -1,9 +1,7 @@
 /// <reference types="react/jsx-runtime" />
 import { ErrorBoundary } from 'react-error-boundary';
-import React from 'react';
-import { useState } from 'react';
-import type * as React from 'react';
-import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
+import React, { useState } from 'react';
+import { isYouTubeUrl, getYouTubeVideoId } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 
 const YouTubeDemo: React.FC = () => {
@@ -182,7 +180,7 @@ export default YouTubeDemoWithErrorBoundary;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

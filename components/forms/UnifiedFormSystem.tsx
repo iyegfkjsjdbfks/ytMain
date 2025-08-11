@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { createContext, useContext, useCallback, useState } from 'react';
-import React from 'react';
+import { useContext, createContext } from 'react';
 
 import { cn } from '../../utils/cn';
 import { UnifiedButton } from '../ui/UnifiedButton';

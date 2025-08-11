@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import { useState, useEffect, type FC } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { logger } from '../utils/logger';
@@ -219,7 +218,7 @@ export default GoogleSearchStoreDebug;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

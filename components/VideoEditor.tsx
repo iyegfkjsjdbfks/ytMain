@@ -3,12 +3,11 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useRef, useEffect, memo } from 'react';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import {
   PlayIcon,

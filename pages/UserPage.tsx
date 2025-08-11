@@ -14,14 +14,13 @@ declare namespace React {
   }
 }
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
+import PlayIcon, { UserIcon } from '@heroicons/react/24/solid';
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
-import React from 'react';
 
 import type { Video } from '../types';
 
@@ -246,7 +245,7 @@ export default UserPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

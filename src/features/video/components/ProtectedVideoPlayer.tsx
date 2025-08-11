@@ -1,12 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useCallback, type FC } from 'react';
+import React, { useCallback } from 'react';
 
 import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 
-import { VideoPlayer, type VideoPlayerProps } from './VideoPlayer';
+import { type VideoPlayerProps, VideoPlayer } from './VideoPlayer';
 
 interface ProtectedVideoPlayerProps extends VideoPlayerProps {
   // Additional props specific to the protected version can be added here
@@ -66,7 +65,7 @@ export default ProtectedVideoPlayer;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

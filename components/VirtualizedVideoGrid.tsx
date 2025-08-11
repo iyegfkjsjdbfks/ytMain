@@ -3,14 +3,13 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useMemo, useCallback, useState, useEffect } from 'react';
-import React from 'react';
+import { useCallback, useMemo } from 'react';
 
-import { FixedSizeGrid as Grid } from 'react-window';
+import { FixedSizeGrid } from 'react-window';
 
 import { cn } from '../utils/cn';
 

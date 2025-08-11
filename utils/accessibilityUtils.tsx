@@ -12,8 +12,7 @@ declare namespace NodeJS {
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React from "react";
-import { useEffect, useState, useCallback, createContext, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
@@ -578,7 +577,7 @@ export default accessibilityUtils;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any }
+      [key: string]: any }
   }
 }
 

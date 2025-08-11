@@ -1,9 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import Link, { Link, useParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 
-import { useState, useEffect } from 'react';
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -15,7 +14,6 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import type { Video } from '../../../types/core';
 import VideoCard from '../components/VideoCard';
 import YouTubePlayer from '../../../components/YouTubePlayer';
-import { Link, useParams } from 'react-router-dom';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -909,7 +907,7 @@ export default WatchPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

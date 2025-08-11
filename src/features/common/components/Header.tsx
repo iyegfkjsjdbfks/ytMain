@@ -1,9 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-import type * as React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthStore } from '../../auth/store/authStore';
 
@@ -204,7 +202,7 @@ export default Header;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

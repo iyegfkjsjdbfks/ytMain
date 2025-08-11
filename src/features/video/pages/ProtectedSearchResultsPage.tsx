@@ -1,6 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useCallback, type FC } from 'react';
+import React, { useCallback } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -39,7 +38,7 @@ export default ProtectedSearchResultsPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

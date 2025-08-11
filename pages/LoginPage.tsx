@@ -1,7 +1,7 @@
 
 
 /// <reference types="react/jsx-runtime" />
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -15,14 +15,13 @@ declare namespace React {
   }
 }
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
 import YouTubeLogo from '../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
-import React from 'react';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -217,7 +216,7 @@ export default LoginPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

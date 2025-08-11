@@ -3,14 +3,13 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName]: any;
+      []: any;
     }
   }
 }
-import { useState, useEffect, type FC } from 'react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { WifiIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon, WifiIcon } from '@heroicons/react/24/outline';
 
 interface OfflineIndicatorProps {
   className?: string;

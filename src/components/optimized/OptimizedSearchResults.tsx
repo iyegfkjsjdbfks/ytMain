@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { FixedSizeList as List } from 'react-window';
+import React, { memo } from 'react';
+import { FixedSizeList } from 'react-window';
 
-import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';
 
@@ -263,7 +262,7 @@ export default OptimizedSearchResults;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

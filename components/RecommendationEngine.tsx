@@ -1,7 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-nocheck
-import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
@@ -344,7 +343,7 @@ export default RecommendationEngine;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

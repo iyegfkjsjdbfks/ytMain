@@ -1,7 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect } from 'react';
-import type * as React from 'react';
+import React, { useState } from 'react';
 
 import {
   ChartBarIcon,
@@ -31,7 +29,7 @@ const Pie = ({ data }) => (
 const Cell = (_props: any) => null;
 const Tooltip = (_props: any) => null;
 const Legend = (_props: any) => null;
-import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
+import { dateUtils, numberUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
 
@@ -688,7 +686,7 @@ export default DashboardPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [key: string];
     }
   }
 }

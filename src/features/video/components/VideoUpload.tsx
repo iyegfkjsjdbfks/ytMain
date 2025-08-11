@@ -1,9 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import type * as React from 'react';
 
 interface VideoUploadProps {
   onUploadComplete?: (videoId: any) => void;
@@ -285,7 +283,7 @@ export default VideoUpload;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

@@ -13,9 +13,8 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState, useEffect } from 'react';
 
 
 import {
@@ -32,7 +31,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
-import { formatNumber, formatDuration } from '../utils/numberUtils';
+import { formatDuration, formatNumber } from '../utils/numberUtils';
 
 interface DashboardStats {
   totalViews: number;
@@ -397,7 +396,7 @@ export default StudioDashboardPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

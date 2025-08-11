@@ -14,9 +14,8 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useEffect, useState, useMemo } from 'react';
 
 import {
   ViewColumnsIcon,
@@ -25,15 +24,15 @@ import {
   BellIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
-import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { BellIcon } from '@heroicons/react/24/solid';
 
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SubscriptionStats from '../components/SubscriptionStats';
 import SubscriptionVideoCard from '../components/SubscriptionVideoCard';
 import { Button } from '../components/ui/Button';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
-import { useSubscriptionsFeed, useSubscriptions } from '../hooks';
+import TabsList, { Tabs } from '../components/ui/Tabs';
+import { useSubscriptions, useSubscriptionsFeed } from '../hooks';
 
 type TabType = 'all' | 'today' | 'week' | 'unwatched' | 'live' | 'posts';
 type SortType = 'latest' | 'popular' | 'oldest';
@@ -367,7 +366,7 @@ export default SubscriptionsPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [key: string]: any;
     }
   }
 }

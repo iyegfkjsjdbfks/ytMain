@@ -70,9 +70,9 @@ interface ContinuousImprovementSuggestion {
 class IntelligentWorkflowEngine {
   private workflows: Map<string, WorkflowStage[]> = new Map();
   private deploymentStrategies: Map<string, DeploymentStrategy> = new Map();
-  private qualityGateHistory: QualityGateResult = [];
+  private qualityGateHistory: QualityGateResult[] = [];
   private isRunning = false;
-  private currentDeployment= null;
+  private currentDeployment: { status: 'deploying' | 'idle'; startTime: number } | null = null;
 
   constructor() {
     this.setupDefaultWorkflows();
@@ -115,7 +115,7 @@ return undefined;
       throw new Error(`Workflow '${workflowName}' not found`);
     }
 
-    const results: QualityGateResult = [];
+    const results: QualityGateResult[] = [];
 
     console.log(`🚀 Executing workflow: ${workflowName}`);
 
@@ -618,13 +618,13 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  private async waitForStabilization(__seconds: any): Promise<void> {
-    console.log(`⏳ Waiting ${_seconds}s for stabilization`);
-    await new Promise(resolve => setTimeout(resolve, Math.min(_seconds * 1000, 5000))); // Cap at 5s for demo
+  private async waitForStabilization(seconds: number): Promise<void> {
+    console.log(`⏳ Waiting ${seconds}s for stabilization`);
+    await new Promise(resolve => setTimeout(resolve, Math.min(seconds * 1000, 5000))); // Cap at 5s for demo
   }
 
-  private async runDeploymentHealthChecks(__checks: any): Promise<{ healthy: boolean; details }> {
-    console.log('🏥 Running deployment health _checks');
+  private async runDeploymentHealthChecks(checks: string[]): Promise<{ healthy: boolean; details: { checks: Array<{ name: string; status: string; responseTime: number }> } }> {
+    console.log('🏥 Running deployment health checks');
 
     // Simulate health check results
     const healthy = Math.random() > 0.1; // 90% success rate
@@ -632,7 +632,7 @@ return undefined;
     return {
       healthy,
       details: {
-        _checks: _checks.map((check: any) => ({
+        checks: checks.map((check: string) => ({
           name: check,
           status: healthy ? 'healthy' : 'unhealthy',
           responseTime: Math.random() * 100 + 50,
@@ -641,8 +641,8 @@ return undefined;
     };
   }
 
-  private async evaluateRollback(___strategy: DeploymentStrategy, __healthStatus: any): Promise<void> {
-    for (const trigger of _strategy.rollbackTriggers) {
+  private async evaluateRollback(strategy: DeploymentStrategy, healthStatus: any): Promise<void> {
+    for (const trigger of strategy.rollbackTriggers) {
       const shouldRollback = await this.evaluateCondition(trigger, { healthStatus });
       if (shouldRollback.passed) {
         console.log('⏪ Triggering automatic rollback');
@@ -653,8 +653,8 @@ return undefined;
   }
 
   // Mock implementations for various operations
-  private async getMetricValue(___source: any): Promise<number> {
-    const metrics = advancedAPM.getAggregatedMetrics(_source);
+  private async getMetricValue(source: string): Promise<number> {
+    const metrics = advancedAPM.getAggregatedMetrics(source);
     return metrics.avg || Math.random() * 100;
   }
 
@@ -966,7 +966,7 @@ return undefined;
 export const intelligentWorkflowEngine = new IntelligentWorkflowEngine();
 
 // Auto-start in development
-if (process._env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   intelligentWorkflowEngine.start();
 }
 
