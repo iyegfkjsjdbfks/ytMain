@@ -364,7 +364,7 @@ return 0;
       opportunities.push({
         __id: 'reduce-complexity',
         __type: 'maintainability',
-        __file: 'components/ComplexComponent.tsx,
+        __file: 'components/ComplexComponent.tsx,',
         __line: 45,
         __description: 'High cyclomatic complexity detected',
         __impact: 'high',
@@ -383,7 +383,7 @@ return 0;
       opportunities.push({
         id: 'improve-test-coverage',
         type: 'testing',
-        file: 'utils/uncoveredUtils.ts,
+        file: 'utils/uncoveredUtils.ts,',
         line: 1,
         description: 'Low test coverage detected',
         impact: 'high',
@@ -402,7 +402,7 @@ return 0;
       opportunities.push({
         id: 'optimize-performance',
         type: 'performance',
-        file: 'components/SlowComponent.tsx,
+        file: 'components/SlowComponent.tsx,',
         line: 20,
         description: 'Performance bottleneck detected',
         impact: 'medium',
@@ -421,7 +421,7 @@ return 0;
       opportunities.push({
         id: 'fix-security-issues',
         type: 'security',
-        file: 'utils/apiUtils.ts,
+        file: 'utils/apiUtils.ts,',
         line: 15,
         description: 'Potential XSS vulnerability',
         impact: 'high',
@@ -430,7 +430,7 @@ return 0;
         suggestion: 'Sanitize user input before rendering',
         codeExample: {
           before: 'innerHTML = userInput',
-          after: 'innerHTML = DOMPurify.sanitize(userInput),
+          after: 'innerHTML = DOMPurify.sanitize(userInput),',
         },
       });
     }
@@ -440,7 +440,7 @@ return 0;
       opportunities.push({
         id: 'improve-accessibility',
         type: 'accessibility',
-        file: 'components/Button.tsx,
+        file: 'components/Button.tsx,',
         line: 10,
         description: 'Missing ARIA labels',
         impact: 'medium',
@@ -486,7 +486,7 @@ return 0;
         title: 'Code Duplication Detected',
         description: 'Multiple instances of similar code patterns found',
         recommendation: 'Extract common functionality into reusable hooks or utility functions',
-        files: ['components/VideoCard.tsx, 'components/PlaylistCard.tsx],
+        files: ['components/VideoCard.tsx', 'components/PlaylistCard.tsx'],
         estimatedImpact: 'Reduced bundle size and improved maintainability',
       });
     }
@@ -500,7 +500,7 @@ return 0;
         title: 'Performance Bottlenecks',
         description: 'Multiple performance issues detected that may impact user experience',
         recommendation: 'Implement code splitting, lazy loading, and memoization strategies',
-        files: ['components/VideoGrid.tsx, 'pages/Home.tsx],
+        files: ['components/VideoGrid.tsx', 'pages/Home.tsx'],
         estimatedImpact: 'Faster page loads and better user experience',
       });
     }
@@ -514,7 +514,7 @@ return 0;
         title: 'Security Vulnerabilities',
         description: 'Potential security issues that need immediate attention',
         recommendation: 'Implement input validation, output encoding, and security headers',
-        files: ['utils/apiUtils.ts, 'components/SearchBar.tsx],
+        files: ['utils/apiUtils.ts', 'components/SearchBar.tsx'],
         estimatedImpact: 'Enhanced application security and user data protection',
       });
     }

@@ -187,7 +187,7 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation(_options: any) {
+export function useKeyboardNavigation(_options) {
   const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
@@ -293,7 +293,7 @@ export function checkColorContrast(foreground, background): {
 }
 
 // Skip link component
-export function SkipLink({ href, children }: { href: string, children: React.ReactNode }) {
+export function SkipLink({ href, children }: { href, children: React.ReactNode }) {
   return (
     <a
       href={href}

@@ -213,28 +213,52 @@ class EnhancedErrorOrchestrator {
     // Define fixers for major error categories based on current analysis
     const fixers = [
       {
+        name: 'TS1109 Expression Expected',
+        script: 'fix-ts1109-expression-expected.js',
+        errorCode: '1109',
+        description: 'Fixes TS1109 expression expected errors'
+      },
+      {
+        name: 'TS1144 Curly or Semicolon Expected',
+        script: 'fix-ts1144-curly-or-semicolon.js',
+        errorCode: '1144',
+        description: 'Fixes TS1144 curly bracket or semicolon expected errors'
+      },
+      {
+        name: 'TS1068 Unexpected Token',
+        script: 'fix-ts1068-unexpected-token.js',
+        errorCode: '1068',
+        description: 'Fixes TS1068 unexpected token errors'
+      },
+      {
+        name: 'TS1002 Unterminated String',
+        script: 'fix-ts1002-unterminated-string.js',
+        errorCode: '1002',
+        description: 'Fixes TS1002 unterminated string literal errors'
+      },
+      {
+        name: 'TS1110 Type Expected',
+        script: 'fix-ts1110-type-expected.js',
+        errorCode: '1110',
+        description: 'Fixes TS1110 type expected errors'
+      },
+      {
         name: 'Enhanced TS1005 Fixer',
         script: 'fix-ts1005-enhanced.js',
         errorCode: '1005',
         description: 'Fixes comma expected errors from malformed type annotations'
       },
       {
-        name: 'Unexpected Token Fixer',
-        script: 'fix-unexpected-tokens.js',
-        errorCode: '1381',
-        description: 'Fixes TS1381/TS1382 unexpected token errors'
+        name: 'TS1128 Declaration Expected',
+        script: 'fix-ts1128-declaration-expected.js',
+        errorCode: '1128',
+        description: 'Fixes TS1128 declaration or statement expected errors'
       },
       {
-        name: 'JSX Error Fixer',
-        script: 'fix-jsx-errors.js',
-        errorCode: '2657',
-        description: 'Fixes JSX-related errors'
-      },
-      {
-        name: 'Critical Syntax Fixer',
-        script: 'fix-critical-syntax-errors.js',
-        errorCode: '1109',
-        description: 'Fixes critical syntax errors'
+        name: 'TS1434 Unexpected Keyword',
+        script: 'fix-ts1434-unexpected-token.js',
+        errorCode: '1434',
+        description: 'Fixes TS1434 unexpected keyword or identifier errors'
       },
       {
         name: 'Cannot Find Name',
