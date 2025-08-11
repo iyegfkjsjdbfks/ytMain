@@ -188,7 +188,7 @@ return;
 
 // Keyboard navigation hook
 export function useKeyboardNavigation(_options: any) {
-  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = options;
+  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
 return;
