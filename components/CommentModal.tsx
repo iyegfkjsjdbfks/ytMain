@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-import { useState } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
 import BaseModal from './BaseModal';
 
@@ -20,7 +20,7 @@ interface CommentModalProps {
   onClose: () => void;
   shortId: string;
   shortTitle?: string;
-  onCommentSubmit?: (commentText) => void;
+  onCommentSubmit?: (commentText: any) => void;
 }
 
 /**
@@ -38,7 +38,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality
 
-  const handleCommentSubmit = async (text) => {
+  const handleCommentSubmit = async (text: any) => {
     if (!text.trim()) {
 return;
 }

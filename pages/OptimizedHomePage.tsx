@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import * as React from 'react';
-import {  useState, useMemo, useCallback, Suspense  } from 'react';
+// TODO: Fix import - import * as React from 'react';
+// TODO: Fix import - import {  useState, useMemo, useCallback, Suspense  } from 'react';
 
-import { HomeIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { HomeIcon } from '@heroicons/react/24/solid';
 
 import CategoryChips from '../components/CategoryChips';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -37,7 +37,7 @@ const categories = [
   'Food',
 ];
 
-const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
+const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {className: any}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({

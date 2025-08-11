@@ -1,0 +1,89 @@
+
+> youtubex-studio-clone@2.0.0 orchestrate:typescript
+> node scripts/typescript-error-orchestrator-v2.js
+
+[36m🔧 [2025-08-11T00:54:22.254Z] 🚀 Starting TypeScript Error Orchestration...[0m
+[36m🔧 [2025-08-11T00:54:43.216Z] Initial error count: 7477[0m
+[36m🔧 [2025-08-11T00:54:43.216Z] 
+🔄 Starting orchestration cycle 1/50[0m
+[36m🔧 [2025-08-11T00:55:01.862Z] Current total errors: 7477[0m
+[33m⚠️ [2025-08-11T00:55:01.862Z] No progress made (stagnation count: 1/5)[0m
+[36m🔧 [2025-08-11T00:55:20.656Z] Targeting 3 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:55:20.657Z]   TS2304: 2971 errors[0m
+[36m🔧 [2025-08-11T00:55:20.657Z]   TS7006: 2552 errors[0m
+[36m🔧 [2025-08-11T00:55:20.657Z]   TS2339: 725 errors[0m
+[32m✅ [2025-08-11T00:55:20.657Z] Created simple fixer script: fix-ts2304-simple.js[0m
+[36m🔧 [2025-08-11T00:55:20.658Z] Running fix-ts2304-simple.js for 2971 TS2304 errors...[0m
+[36m🔧 [2025-08-11T00:55:41.492Z] Created checkpoint: fix-ts2304-simple.js execution[0m
+[32m✅ [2025-08-11T00:56:19.073Z] Committed: TS2304 fixes via fix-ts2304-simple.js[0m
+[32m✅ [2025-08-11T00:56:19.073Z] ✅ fix-ts2304-simple.js: Fixed 30 errors, total change: -30[0m
+[32m✅ [2025-08-11T00:56:19.073Z] Progress made: Fixed 30 TS2304 errors[0m
+[32m✅ [2025-08-11T00:56:22.077Z] Created simple fixer script: fix-ts7006-simple.js[0m
+[36m🔧 [2025-08-11T00:56:22.077Z] Running fix-ts7006-simple.js for 2552 TS7006 errors...[0m
+[36m🔧 [2025-08-11T00:56:40.784Z] Created checkpoint: fix-ts7006-simple.js execution[0m
+[32m✅ [2025-08-11T00:57:05.537Z] Committed: TS7006 fixes via fix-ts7006-simple.js[0m
+[32m✅ [2025-08-11T00:57:05.537Z] ✅ fix-ts7006-simple.js: Fixed 7446 errors, total change: -7446[0m
+[32m✅ [2025-08-11T00:57:05.537Z] Progress made: Fixed 7446 TS7006 errors[0m
+[32m✅ [2025-08-11T00:57:08.540Z] Created simple fixer script: fix-ts2339-simple.js[0m
+[36m🔧 [2025-08-11T00:57:08.540Z] Running fix-ts2339-simple.js for 725 TS2339 errors...[0m
+[36m🔧 [2025-08-11T00:57:11.612Z] Created checkpoint: fix-ts2339-simple.js execution[0m
+[32m✅ [2025-08-11T00:57:17.700Z] Committed: TS2339 fixes via fix-ts2339-simple.js[0m
+[32m✅ [2025-08-11T00:57:17.700Z] ✅ fix-ts2339-simple.js: Fixed 0 errors, total change: 0[0m
+[36m🔧 [2025-08-11T00:57:25.708Z] 
+🔄 Starting orchestration cycle 2/50[0m
+[36m🔧 [2025-08-11T00:57:28.780Z] Current total errors: 1[0m
+[36m🔧 [2025-08-11T00:57:31.798Z] Targeting 1 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:57:31.799Z]   TS1005: 1 errors[0m
+[36m🔧 [2025-08-11T00:57:31.799Z] Skipping TS1005 (only 1 errors)[0m
+[33m⚠️ [2025-08-11T00:57:31.799Z] No progress made in this cycle[0m
+[36m🔧 [2025-08-11T00:57:36.804Z] 
+🔄 Starting orchestration cycle 3/50[0m
+[36m🔧 [2025-08-11T00:57:39.746Z] Current total errors: 1[0m
+[33m⚠️ [2025-08-11T00:57:39.746Z] No progress made (stagnation count: 1/5)[0m
+[36m🔧 [2025-08-11T00:57:42.754Z] Targeting 1 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:57:42.754Z]   TS1005: 1 errors[0m
+[36m🔧 [2025-08-11T00:57:42.754Z] Skipping TS1005 (only 1 errors)[0m
+[33m⚠️ [2025-08-11T00:57:42.754Z] No progress made in this cycle[0m
+[36m🔧 [2025-08-11T00:57:47.759Z] 
+🔄 Starting orchestration cycle 4/50[0m
+[36m🔧 [2025-08-11T00:57:50.693Z] Current total errors: 1[0m
+[33m⚠️ [2025-08-11T00:57:50.693Z] No progress made (stagnation count: 2/5)[0m
+[36m🔧 [2025-08-11T00:57:53.723Z] Targeting 1 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:57:53.723Z]   TS1005: 1 errors[0m
+[36m🔧 [2025-08-11T00:57:53.723Z] Skipping TS1005 (only 1 errors)[0m
+[33m⚠️ [2025-08-11T00:57:53.723Z] No progress made in this cycle[0m
+[36m🔧 [2025-08-11T00:57:58.726Z] 
+🔄 Starting orchestration cycle 5/50[0m
+[36m🔧 [2025-08-11T00:58:01.725Z] Current total errors: 1[0m
+[33m⚠️ [2025-08-11T00:58:01.725Z] No progress made (stagnation count: 3/5)[0m
+[36m🔧 [2025-08-11T00:58:04.790Z] Targeting 1 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:58:04.790Z]   TS1005: 1 errors[0m
+[36m🔧 [2025-08-11T00:58:04.790Z] Skipping TS1005 (only 1 errors)[0m
+[33m⚠️ [2025-08-11T00:58:04.790Z] No progress made in this cycle[0m
+[36m🔧 [2025-08-11T00:58:09.795Z] 
+🔄 Starting orchestration cycle 6/50[0m
+[36m🔧 [2025-08-11T00:58:12.833Z] Current total errors: 1[0m
+[33m⚠️ [2025-08-11T00:58:12.833Z] No progress made (stagnation count: 4/5)[0m
+[36m🔧 [2025-08-11T00:58:15.817Z] Targeting 1 error types this cycle:[0m
+[36m🔧 [2025-08-11T00:58:15.817Z]   TS1005: 1 errors[0m
+[36m🔧 [2025-08-11T00:58:15.817Z] Skipping TS1005 (only 1 errors)[0m
+[33m⚠️ [2025-08-11T00:58:15.817Z] No progress made in this cycle[0m
+[36m🔧 [2025-08-11T00:58:20.822Z] 
+🔄 Starting orchestration cycle 7/50[0m
+[36m🔧 [2025-08-11T00:58:23.869Z] Current total errors: 1[0m
+[33m⚠️ [2025-08-11T00:58:23.869Z] No progress made (stagnation count: 5/5)[0m
+[33m⚠️ [2025-08-11T00:58:23.869Z] Stopping due to lack of progress[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 
+================================================================================[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 📊 TYPESCRIPT ERROR ORCHESTRATION REPORT[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] ================================================================================[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] ⏱️  Duration: 244.61 seconds[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 🔄 Orchestration cycles: 7[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 📉 Final errors: 1[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 🎯 Scripts run: 3[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] ✅ Successful: 3[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 🔄 Reverted: 0[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] ✨ Total fixed: 7476[0m
+[36m🔧 [2025-08-11T00:58:26.862Z] [0m
+[36m🔧 [2025-08-11T00:58:26.862Z] 📁 Detailed report saved to: /home/runner/work/ytMain/ytMain/orchestration-detailed-report.json[0m
+[33m⚠️ [2025-08-11T00:58:26.862Z] ⚠️ 1 errors remain after orchestrated fixing[0m

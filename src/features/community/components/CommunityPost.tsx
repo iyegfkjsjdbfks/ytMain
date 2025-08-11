@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { useState } from 'react';
-import type * as React from 'react';
-import { formatDistanceToNow } from 'date-fns';
-import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
 
 export interface CommunityPostData {
   id: string;

@@ -1,14 +1,14 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState  } from 'react';
 
-import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-import { CheckIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CheckIcon } from '@heroicons/react/24/solid';
 
 import { useTheme } from '../contexts/ThemeContext';
 
-const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+const SettingSection: React.FC<{ title: string, children: React.ReactNode }> = ({ title, children }: {children: any, title: string}) => (
   <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
     <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
     <div className="space-y-4">
@@ -20,9 +20,8 @@ const SettingSection: React.FC<{ title: string; children: React.ReactNode }> = (
 const ToggleSetting: React.FC<{
   label: string;
   description?: string;
-  checked: boolean;
-  onChange: (checked) => void;
-}> = ({ label, description, checked, onChange }) => (
+  checked: boolean, onChange: (checked) => void
+}> = ({ label, description, checked, onChange }: {onChange: Function, checked: any; description: string, label: any}) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
       <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -50,11 +49,9 @@ const ToggleSetting: React.FC<{
 );
 
 const SelectSetting: React.FC<{
-  label: string;
-  value: string;
-  options: string;
-  onChange: (value) => void
-}> = ({ label, value, options, onChange }) => (
+  label: string, value: string;
+  options: string, onChange: (value) => void
+}> = ({ label, value, options, onChange }: {onChange: Function, options: any; value: any, label: any}) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
       {label}
@@ -84,8 +81,7 @@ const SettingsPage: React.FC = () => {
     subscriptions: true,
     recommendedVideos: false,
     activityOnMyChannel: true,
-    repliesComments: true,
-    mentions: true,
+    repliesComments: true, mentions: true
   });
 
   const handleNotificationChange = (key: keyof typeof notifications) => {
@@ -241,15 +237,13 @@ const SettingsPage: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  ) };
 
 export default SettingsPage;
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';
 import { 

@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useMemo } from 'react';
+// TODO: Fix import - import { useMemo } from 'react';
 
-import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { parseRelativeDate } from '../utils/dateUtils';
 
@@ -207,3 +208,11 @@ return null;
 };
 
 export default ChannelTabContent;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

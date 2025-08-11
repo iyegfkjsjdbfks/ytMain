@@ -11,7 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(__dirname, '..');
-const MAX_ALLOWED_TOTAL_INCREASE = 100;
+const MAX_ALLOWED_TOTAL_INCREASE = 1;
 
 class MasterErrorFixer {
   constructor() {

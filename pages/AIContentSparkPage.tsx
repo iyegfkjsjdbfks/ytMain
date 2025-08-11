@@ -8,10 +8,10 @@ declare global {
   }
 }
 
-import type * as React from 'react';
-import {  useState  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState  } from 'react';
 
-import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { SparklesIcon as AiIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 
 import { generateVideoIdeas } from '../services/geminiService';
 

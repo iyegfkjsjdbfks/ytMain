@@ -7,24 +7,22 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 interface Tab {
-  id: string;
-  label: string;
+  id: string; label: string
 }
 
 interface ChannelTabsProps {
   tabs: Tab;
-  activeTab: string;
-  onTabClick: (tabId) => void;
+  activeTab: string; onTabClick: (tabId: any) => void
 }
 
-const ChannelTabs: React.FC<ChannelTabsProps> = ({ tabs, activeTab, onTabClick }) => {
+const ChannelTabs: React.FC<ChannelTabsProps> = ({ tabs, activeTab, onTabClick }: {onTabClick: Function; activeTab: any; tabs: any}) => {
   return (
     <div className="border-b border-neutral-300 dark:border-neutral-700/80 mb-1">
       <nav className="-mb-px flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar" aria-label="Channel tabs">
-        {tabs.map((tab) => (
+        {tabs.map((tab: any) => (
           <button
             key={tab.id}
             onClick={() => onTabClick(tab.id)}

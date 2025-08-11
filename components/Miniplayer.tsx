@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,21 +8,20 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import type { Video } from '../src/types/core';
 
 
 interface MiniplayerProps {
   video: Video | null;
-  onClose: () => void;
-  onMaximize: (videoId) => void;
+  onClose: () => void; onMaximize: (videoId) => void
 }
 
-const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {
+const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }: {onMaximize: Function; onClose: Function; video: any}) => {
   if (!video) {
 return null;
 }

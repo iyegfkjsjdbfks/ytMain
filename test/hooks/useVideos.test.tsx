@@ -1,9 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// TODO: Fix import - import { renderHook, waitFor } from '@testing-library/react';
+// TODO: Fix import - import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import {
   useUnifiedVideos,
@@ -33,7 +33,7 @@ const createWrapper = () => {
     },
   });
 
-  const Wrapper = ({ children }) => (
+  const Wrapper = ({ children }: {children: any}) => (
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>

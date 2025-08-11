@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -14,7 +14,7 @@ import { useOfflineStatus } from './useOfflineStatus';
 import { usePWANotifications } from './usePWANotifications';
 
 import { usePWAUpdates } from './usePWAUpdates';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 interface PWAState {
   isInitialized: boolean;

@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { useState } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState } from 'react';
 import { logger } from '../../../utils/logger';
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 import type { CreatePlaylistData } from '../services/playlistService';
 import type { Playlist } from '../../../types/core';
-import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
 interface PlaylistManagerProps {
   className?: string;

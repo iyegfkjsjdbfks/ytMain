@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 // @ts-nocheck
-import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
 
-import { formatDistanceToNow } from 'date-fns';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -306,3 +307,12 @@ return duration;
 };
 
 export default SimpleHoverVideoCard;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

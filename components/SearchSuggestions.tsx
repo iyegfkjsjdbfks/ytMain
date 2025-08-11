@@ -8,17 +8,16 @@ declare global {
   }
 }
 
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 import SearchIcon from './icons/SearchIcon';
 
 interface SearchSuggestionsProps {
   suggestions: string;
-  onSuggestionClick: (suggestion) => void;
-  isVisible: boolean;
+  onSuggestionClick: (suggestion) => void; isVisible: boolean
 }
 
-const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }) => {
+const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }: {isVisible: boolean; onSuggestionClick: Function; suggestions: any}) => {
   if (!isVisible || suggestions.length === 0) {
     return null;
   }

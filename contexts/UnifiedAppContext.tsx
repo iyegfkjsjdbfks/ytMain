@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React, { createContext, useReducer, useCallback, type ReactNode } from 'react';
+// TODO: Fix import - import React, { createContext, useReducer, useCallback, type ReactNode } from 'react';
 
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';
@@ -152,7 +152,7 @@ interface UnifiedAppProviderProps {
 }
 
 // Provider Component
-export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }) => {
+export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }: {children: any}) => {
   const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
 
   // Auth actions

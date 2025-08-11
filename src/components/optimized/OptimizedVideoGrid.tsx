@@ -1,13 +1,12 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { FixedSizeGrid as Grid } from 'react-window';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { FixedSizeGrid as Grid } from 'react-window';
 
-import { memo, useMemo, useCallback, useState } from 'react';
+// TODO: Fix import - import { memo, useMemo, useCallback, useState } from 'react';
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
-  videos: Video;
-  onVideoClick: (video: Video) => void;
+  videos: Video, onVideoClick: (video: Video) => void;
   loading?: boolean;
   className?: string;
   itemsPerRow?: number;
@@ -17,15 +16,11 @@ interface OptimizedVideoGridProps {
 
 // Memoized video item component
 const VideoGridItem = memo<{
-  columnIndex: number;
-  rowIndex: number;
-  style: React.CSSProperties;
-  data: {
-    videos: Video;
-    itemsPerRow: number;
-    onVideoClick:(video: Video) => void;
+  columnIndex: number, rowIndex: number;
+  style: React.CSSProperties, data: {
+    videos: Video, itemsPerRow: number; onVideoClick:(video: Video) => void
   };
-}>(({ columnIndex, rowIndex, style, data }) => {
+}>(({ columnIndex, rowIndex, style, data }: {data: any, style: any; rowIndex: number, columnIndex: number}) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];
@@ -90,8 +85,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
 
     return {
       rowCount: count,
-      columnCount: itemsPerRow,
-      itemWidth: width,
+      columnCount: itemsPerRow, itemWidth: width
     };
   }, [videos.length, itemsPerRow, containerWidth]);
 
@@ -141,8 +135,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(({
       <div className={`flex items-center justify-center h-64 ${className}`}>
         <p className="text-gray-500 dark:text-gray-400">No videos found</p>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div ref={containerRef} className={`w-full ${className}`}>
@@ -172,7 +165,6 @@ export default OptimizedVideoGrid;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

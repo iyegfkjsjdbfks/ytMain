@@ -1,7 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -19,11 +19,11 @@ declare global {
     }
   }
 }
-import { useState, useRef, useEffect } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { formatDistanceToNow } from 'date-fns';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -36,7 +36,7 @@ interface HoverAutoplayVideoCardProps {
   className?: string;
 }
 
-const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }) => {
+const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }: {video: any}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
   const [hasError, setHasError] = useState(false);

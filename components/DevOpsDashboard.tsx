@@ -17,8 +17,8 @@ declare global {
  * - Feature flag management
  */
 
-import { useState, useEffect } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
@@ -28,46 +28,31 @@ import { securityMonitoring } from '../utils/securityMonitoring';
 // Types for dashboard data
 interface DashboardMetrics {
   performance: {
-    score: number;
-    lcp: number;
-    fid: number;
-    cls: number;
-    memoryUsage: number;
-    errorRate: number;
+    score: number, lcp: number;
+    fid: number, cls: number;
+    memoryUsage: number, errorRate: number
   };
   security: {
-    score: number;
-    threatsDetected: number;
-    vulnerabilities: number;
-    complianceScore: number;
+    score: number, threatsDetected: number;
+    vulnerabilities: number, complianceScore: number
   };
   deployment: {
-    successRate: number;
-    averageTime: number;
-    frequency: number;
-    activeDeployments: number;
+    successRate: number, averageTime: number;
+    frequency: number, activeDeployments: number
   };
   codeQuality: {
-    score: number;
-    complexity: number;
-    coverage: number;
-    technicalDebt: number;
+    score: number, complexity: number;
+    coverage: number, technicalDebt: number
   };
   featureFlags: {
-    totalFlags: number;
-    activeFlags: number;
-    experimentsRunning: number;
+    totalFlags: number, activeFlags: number; experimentsRunning: number
   };
 }
 
 interface AlertItem {
-  id: string;
-  type: 'performance' | 'security' | 'deployment' | 'quality';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  title: string;
-  description: string;
-  timestamp: number;
-  acknowledged: boolean;
+  id: string, type: 'performance' | 'security' | 'deployment' | 'quality';
+  severity: 'low' | 'medium' | 'high' | 'critical', title: string;
+  description: string, timestamp: number; acknowledged: boolean
 }
 
 const DevOpsDashboard: React.FC = () => {
@@ -89,8 +74,7 @@ const DevOpsDashboard: React.FC = () => {
       const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
       const flagMetrics = {
         totalFlags: 0,
-        activeFlags: 0,
-        evaluations: 0,
+        activeFlags: 0, evaluations: 0
       }; // featureFlagManager.getMetrics();
 
       // Transform data for dashboard
@@ -100,28 +84,24 @@ const DevOpsDashboard: React.FC = () => {
           lcp: performanceMetrics.find(m => m.name === 'lcp')?.value || 1500,
           fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
           cls: performanceMetrics.find(m => m.name === 'cls')?.value || 0.05,
-          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45,
-          errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1,
+          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45, errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1
         },
         security: {
           score: Math.round(securityMetrics.securityScore),
           threatsDetected: securityMetrics.threatsDetected,
-          vulnerabilities: securityMetrics.vulnerabilities.total,
-          complianceScore: Math.round(securityMetrics.complianceScore),
+          vulnerabilities: securityMetrics.vulnerabilities.total, complianceScore: Math.round(securityMetrics.complianceScore)
         },
         deployment: {
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes
-          frequency: deploymentMetrics.deploymentFrequency,
-          activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length,
+          frequency: deploymentMetrics.deploymentFrequency, activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
         },
         codeQuality: {
           score: codeMetrics ? Math.round(
             (codeMetrics.maintainability + codeMetrics.testCoverage) / 2,
           ) : 82,
           complexity: Math.round(codeMetrics?.complexity || 15),
-          coverage: Math.round(codeMetrics?.testCoverage || 78),
-          technicalDebt: Math.round(codeMetrics?.technicalDebt || 12),
+          coverage: Math.round(codeMetrics?.testCoverage || 78), technicalDebt: Math.round(codeMetrics?.technicalDebt || 12)
         },
         featureFlags: {
           totalFlags: flagMetrics.totalFlags,
@@ -140,8 +120,7 @@ const DevOpsDashboard: React.FC = () => {
           severity: alert.severity,
           title: alert.title,
           description: alert.description,
-          timestamp: alert.timestamp,
-          acknowledged: alert.acknowledged,
+          timestamp: alert.timestamp, acknowledged: alert.acknowledged
         })),
         ...deploymentAutomation.getAllExecutions()
           .filter((exec) => exec.status === 'failed')
@@ -208,8 +187,7 @@ const DevOpsDashboard: React.FC = () => {
       case 'critical': return 'text-red-600 bg-red-100';
       case 'high': return 'text-orange-600 bg-orange-100';
       case 'medium': return 'text-yellow-600 bg-yellow-100';
-      case 'low': return 'text-blue-600 bg-blue-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'low': return 'text-blue-600 bg-blue-100'; default: return 'text-gray-600 bg-gray-100'
     }
   };
 
@@ -229,12 +207,11 @@ return 'text-orange-600';
 
   // Render metric card
   const MetricCard: React.FC<{
-    title: string;
-    value: string | number;
+    title: string, value: string | number;
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
     color?: string;
-  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }) => (
+  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }: {trend: any, subtitle: any; value: any, title: string}) => (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between">
         <div>

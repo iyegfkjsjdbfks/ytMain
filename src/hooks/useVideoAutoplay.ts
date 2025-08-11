@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+// TODO: Fix import - import { useEffect } from 'react';
 
 interface UseVideoAutoplayProps {
   isIntersecting: boolean;

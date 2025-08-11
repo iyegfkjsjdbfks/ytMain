@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 //!/usr/bin/env node
 
 /**
@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
  * Automates the refactoring process for the YouTube clone application
  */
 
-import fs from 'fs';
-import path from 'path';
+// TODO: Fix import - import fs from 'fs';
+// TODO: Fix import - import path from 'path';
 
 interface RefactorTask {
   name: string;

@@ -1,6 +1,7 @@
-import React from 'react';
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
 // @ts-nocheck
-import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
+// TODO: Fix import - import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
 
 import {
   PlayIcon,
@@ -661,3 +662,11 @@ export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
     prevProps.index === nextProps.index
   );
 });
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

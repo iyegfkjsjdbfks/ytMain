@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,10 +8,10 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { BellIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { BellIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { formatCount } from '../utils/numberUtils';
 
@@ -22,16 +22,14 @@ interface Channel {
   id: string;
   name: string;
   avatarUrl: string;
-  subscriberCount: string;
-  isVerified: boolean;
+  subscriberCount: string; isVerified: boolean
 }
 
 interface Video {
   id: string;
   title: string;
   description: string;
-  views: string;
-  uploadedAt: string;
+  views: string; uploadedAt: string
 }
 
 interface RefactoredVideoDescriptionProps {
@@ -44,8 +42,7 @@ interface RefactoredVideoDescriptionProps {
   isSummarizing: boolean;
   canSummarize: boolean;
   onSubscribe: () => void;
-  onToggleDescription: () => void;
-  onSummarizeDescription: () => void;
+  onToggleDescription: () => void; onSummarizeDescription: () => void
 }
 
 /**
@@ -62,11 +59,10 @@ interface RefactoredVideoDescriptionProps {
 // Reusable Channel Info Component
 interface ChannelInfoProps {
   channel: Channel | null;
-  isSubscribed: boolean;
-  onSubscribe: () => void;
+  isSubscribed: boolean; onSubscribe: () => void
 }
 
-const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }) => {
+const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }: {onSubscribe: Function; isSubscribed: boolean; channel: any}) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
   return (
@@ -109,11 +105,10 @@ const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubs
 
 // Reusable Subscribe Button Component
 interface SubscribeButtonProps {
-  isSubscribed: boolean;
-  onSubscribe: () => void;
+  isSubscribed: boolean; onSubscribe: () => void
 }
 
-const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }) => {
+const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }: {onSubscribe: Function; isSubscribed: boolean}) => {
   return (
     <button
       onClick={onSubscribe}
@@ -145,8 +140,7 @@ const NotificationButton: React.FC = () => {
 // Reusable Description Content Component
 interface DescriptionContentProps {
   video: Video;
-  showFullDescription: boolean;
-  onToggleDescription: () => void;
+  showFullDescription: boolean; onToggleDescription: () => void
 }
 
 const DescriptionContent: React.FC<DescriptionContentProps> = ({
@@ -203,8 +197,7 @@ interface AISummarySectionProps {
   canSummarize: boolean;
   isSummarizing: boolean;
   summary?: string;
-  summaryError?: string;
-  onSummarizeDescription: () => void;
+  summaryError?: string; onSummarizeDescription: () => void
 }
 
 const AISummarySection: React.FC<AISummarySectionProps> = ({

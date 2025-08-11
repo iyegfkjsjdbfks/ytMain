@@ -1,0 +1,76 @@
+
+> youtubex-studio-clone@2.0.0 type-check
+> tsc --noEmit
+
+components/CategoryTabs.tsx(24,127): error TS1005: ',' expected.
+components/ChannelTabs.tsx(23,105): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(237,81): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(237,112): error TS1005: ',' expected.
+components/Header.tsx(36,165): error TS1005: ',' expected.
+components/Header.tsx(36,199): error TS1005: ',' expected.
+components/HomeContent.tsx(26,93): error TS1005: ',' expected.
+components/MinimizedSidebar.tsx(32,127): error TS1005: ',' expected.
+components/MinimizedSidebar.tsx(32,161): error TS1005: ',' expected.
+components/Miniplayer.tsx(25,102): error TS1005: ',' expected.
+components/NotificationsPanel.tsx(39,104): error TS1005: ',' expected.
+components/RefactoredVideoDescription.tsx(69,113): error TS1005: ',' expected.
+components/RefactoredVideoDescription.tsx(116,112): error TS1005: ',' expected.
+components/SearchSuggestions.tsx(21,129): error TS1005: ',' expected.
+components/Sidebar.tsx(39,109): error TS1005: ',' expected.
+components/Sidebar.tsx(39,143): error TS1005: ',' expected.
+components/SortFilterPanel.tsx(31,120): error TS1005: ',' expected.
+components/UserMenu.tsx(31,216): error TS1005: ',' expected.
+components/UserMenu.tsx(31,240): error TS1005: ',' expected.
+components/UserMenu.tsx(57,89): error TS1005: ',' expected.
+components/VirtualizedVideoGrid.tsx(51,95): error TS1005: ',' expected.
+components/VirtualizedVideoGrid.tsx(51,129): error TS1005: ',' expected.
+components/VirtualizedVideoGrid.tsx(148,68): error TS1005: ',' expected.
+components/ui/Button.tsx(164,78): error TS1005: ',' expected.
+components/ui/Button.tsx(182,80): error TS1005: ',' expected.
+components/ui/Button.tsx(182,118): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(87,66): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(87,101): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(101,45): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(117,44): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(503,48): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(514,65): error TS1005: ',' expected.
+components/ui/Tabs.tsx(35,110): error TS1005: ',' expected.
+components/ui/Tabs.tsx(64,109): error TS1005: ',' expected.
+components/ui/Tabs.tsx(90,109): error TS1005: ',' expected.
+pages/AnalyticsPage.tsx(136,101): error TS1005: ',' expected.
+pages/LibraryPage.tsx(38,184): error TS1005: ',' expected.
+pages/LibraryPage.tsx(38,228): error TS1005: ',' expected.
+pages/LibraryPage.tsx(38,271): error TS1005: ',' expected.
+pages/LibraryPage.tsx(38,308): error TS1005: ',' expected.
+pages/SettingsPage.tsx(11,117): error TS1005: ',' expected.
+pages/SettingsPage.tsx(25,70): error TS1005: ',' expected.
+pages/SettingsPage.tsx(25,109): error TS1005: ',' expected.
+pages/SettingsPage.tsx(57,64): error TS1005: ',' expected.
+pages/SettingsPage.tsx(57,94): error TS1005: ',' expected.
+pages/YourDataPage.tsx(107,107): error TS1005: ',' expected.
+pages/YourDataPage.tsx(107,160): error TS1005: ',' expected.
+pages/YourDataPage.tsx(107,199): error TS1005: ',' expected.
+src/components/mobile/MobileVideoGrid.tsx(28,88): error TS1005: ',' expected.
+src/components/molecules/VideoCard/VideoCard.tsx(18,91): error TS1005: ',' expected.
+src/components/molecules/VideoCard/VideoCard.tsx(18,122): error TS1005: ',' expected.
+src/components/molecules/VideoCard/VideoCard.tsx(18,157): error TS1005: ',' expected.
+src/components/optimized/OptimizedSearchResults.tsx(32,90): error TS1005: ',' expected.
+src/components/optimized/OptimizedVideoGrid.tsx(28,56): error TS1005: ',' expected.
+src/components/optimized/OptimizedVideoGrid.tsx(28,90): error TS1005: ',' expected.
+src/components/optimized/VirtualizedCommentList.tsx(31,80): error TS1005: ',' expected.
+src/features/creator/pages/DashboardPage.tsx(22,75): error TS1005: ',' expected.
+src/features/creator/pages/DashboardPage.tsx(25,131): error TS1005: '}' expected.
+src/features/creator/pages/DashboardPage.tsx(25,136): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/features/creator/pages/DashboardPage.tsx(26,107): error TS1005: '}' expected.
+src/features/creator/pages/DashboardPage.tsx(26,112): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/features/livestream/components/AdvancedLiveChat.tsx(11,129): error TS1005: ',' expected.
+src/features/livestream/components/AdvancedLiveChat.tsx(11,167): error TS1005: ',' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(253,93): error TS1005: ',' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(253,123): error TS1005: ',' expected.
+tests/examples/integration.test.tsx(19,75): error TS1005: ',' expected.
+tests/examples/integration.test.tsx(35,74): error TS1005: ',' expected.
+tests/examples/integration.test.tsx(57,77): error TS1005: ',' expected.
+utils/accessibilityUtils.tsx(205,165): error TS1005: ',' expected.
+utils/accessibilityUtils.tsx(205,211): error TS1005: ',' expected.
+utils/accessibilityUtils.tsx(205,261): error TS1005: ',' expected.
+utils/accessibilityUtils.tsx(205,306): error TS1005: ',' expected.

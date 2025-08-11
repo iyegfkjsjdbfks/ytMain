@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { useState } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState } from 'react';
 
 import { EyeIcon,
   ClockIcon,
@@ -16,7 +16,7 @@ import { EyeIcon,
 } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
-const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
+const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
   <VideoCameraIcon className={className} />
 );
 

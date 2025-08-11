@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { FixedSizeList as List } from 'react-window';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
-import { memo, useMemo, useCallback, useState, useEffect } from 'react';
+// TODO: Fix import - import { memo, useMemo, useCallback, useState, useEffect } from 'react';
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';
 
@@ -10,8 +10,7 @@ import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformance
 import type { Video } from '../../types/core';
 
 interface OptimizedSearchResultsProps {
-  videos: Video;
-  query: string;
+  videos: Video, query: string;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
   loading?: boolean;
@@ -20,16 +19,13 @@ interface OptimizedSearchResultsProps {
 }
 
 interface SearchResultItemProps {
-  index: number;
-  style: React.CSSProperties;
+  index: number, style: React.CSSProperties;
   data: {
-    videos: Video;
-    onVideoClick: (video: Video) => void;
-    query: string;
+    videos: Video, onVideoClick: (video: Video) => void, query: string
   };
 }
 
-const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }) => {
+const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }: {data: any, style: any; index: number}) => {
   const { videos, onVideoClick, query } = data;
   const video = videos[index];
 
@@ -149,8 +145,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
 
   // Intersection observer for load more
   const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
-    threshold: 0.1,
-    rootMargin: '100px',
+    threshold: 0.1, rootMargin: '100px'
   });
 
   // Load more when intersecting
@@ -164,7 +159,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
   const listData = useMemo(() => ({
     videos,
     onVideoClick,
-    query: debouncedQuery,
+    query: debouncedQuery
   }), [videos, onVideoClick, debouncedQuery]);
 
   // Performance monitoring
@@ -202,8 +197,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(({
           Try different keywords or check your spelling
         </p>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div ref={containerRef} className={`w-full ${className}`}>
@@ -239,7 +233,6 @@ export default OptimizedSearchResults;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

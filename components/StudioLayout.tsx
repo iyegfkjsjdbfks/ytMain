@@ -7,9 +7,9 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { Outlet } from 'react-router-dom';
+// TODO: Fix import - import { Outlet } from 'react-router-dom';
 // import StudioSidebar from './StudioSidebar'; // Assuming a StudioSidebar component will be created
 // import StudioHeader from './StudioHeader'; // Assuming a StudioHeader component might be needed
 

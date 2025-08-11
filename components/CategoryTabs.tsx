@@ -7,25 +7,23 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 interface Category {
   id: 'all' | 'music' | 'gaming' | 'news' | 'movies';
-  label: string;
-  icon: string;
+  label: string; icon: string
 }
 
 interface CategoryTabsProps {
   categories: Category;
-  activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies';
-  setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void;
+  activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }) => {
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory: any; activeCategory: any; categories: any}) => {
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}

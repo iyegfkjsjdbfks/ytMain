@@ -1,0 +1,185 @@
+
+> youtubex-studio-clone@2.0.0 fix:all
+> node scripts/fix-all-errors.js
+
+[36m🔧 [2025-08-11T00:28:15.793Z] 🚀 Starting comprehensive TypeScript error fixing...[0m
+[36m🔧 [2025-08-11T00:28:15.802Z] Initial total errors: 10435[0m
+[36m🔧 [2025-08-11T00:28:15.802Z] Starting JSX Runtime Module (TS2875) fixes...[0m
+[36m🔧 [2025-08-11T00:28:15.806Z] JSX Runtime Module (iteration 1/3): 287 errors remaining[0m
+[36m🔧 [2025-08-11T00:28:15.828Z] Created checkpoint before JSX Runtime Module (TS2875) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:28:33.428Z] Committed changes for JSX Runtime Module (TS2875) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:28:35.430Z] JSX Runtime Module (iteration 2/3): 287 errors remaining[0m
+[36m🔧 [2025-08-11T00:28:35.451Z] Created checkpoint before JSX Runtime Module (TS2875) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:28:53.640Z] Committed changes for JSX Runtime Module (TS2875) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:28:53.640Z] JSX Runtime Module: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:28:54.644Z] Starting Cannot Find Module (TS2307) fixes...[0m
+[36m🔧 [2025-08-11T00:28:54.648Z] Cannot Find Module (iteration 1/3): 72 errors remaining[0m
+[36m🔧 [2025-08-11T00:28:54.670Z] Created checkpoint before Cannot Find Module (TS2307) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:29:12.918Z] Committed changes for Cannot Find Module (TS2307) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:29:14.920Z] Cannot Find Module (iteration 2/3): 72 errors remaining[0m
+[36m🔧 [2025-08-11T00:29:14.941Z] Created checkpoint before Cannot Find Module (TS2307) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:29:32.528Z] Committed changes for Cannot Find Module (TS2307) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:29:32.528Z] Cannot Find Module: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:29:33.532Z] Starting Cannot Find Namespace (TS2503) fixes...[0m
+[36m🔧 [2025-08-11T00:29:33.535Z] Cannot Find Namespace (iteration 1/3): 494 errors remaining[0m
+[36m🔧 [2025-08-11T00:29:33.554Z] Created checkpoint before Cannot Find Namespace (TS2503) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:29:51.214Z] Committed changes for Cannot Find Namespace (TS2503) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:29:53.217Z] Cannot Find Namespace (iteration 2/3): 494 errors remaining[0m
+[36m🔧 [2025-08-11T00:29:53.238Z] Created checkpoint before Cannot Find Namespace (TS2503) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:30:10.859Z] Committed changes for Cannot Find Namespace (TS2503) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:30:10.860Z] Cannot Find Namespace: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:30:11.863Z] Starting JSX Element Implicit Any (TS7026) fixes...[0m
+[32m✅ [2025-08-11T00:30:11.868Z] JSX Element Implicit Any: Successfully reduced to 0 errors after 0 iteration(s)[0m
+[36m🔧 [2025-08-11T00:30:12.869Z] Starting Binding Element Implicit Any (TS7031) fixes...[0m
+[36m🔧 [2025-08-11T00:30:12.872Z] Binding Element Implicit Any (iteration 1/3): 736 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:12.896Z] Created checkpoint before Binding Element Implicit Any (TS7031) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:30:23.742Z] Committed changes for Binding Element Implicit Any (TS7031) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:30:25.744Z] Binding Element Implicit Any (iteration 2/3): 736 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:25.765Z] Created checkpoint before Binding Element Implicit Any (TS7031) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:30:27.818Z] Committed changes for Binding Element Implicit Any (TS7031) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:30:27.818Z] Binding Element Implicit Any: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:30:28.823Z] Starting Implicit Any Parameter (TS7006) fixes...[0m
+[36m🔧 [2025-08-11T00:30:28.825Z] Implicit Any Parameter (iteration 1/3): 2874 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:28.844Z] Created checkpoint before Implicit Any Parameter (TS7006) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:30:30.944Z] Committed changes for Implicit Any Parameter (TS7006) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:30:32.946Z] Implicit Any Parameter (iteration 2/3): 2874 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:32.966Z] Created checkpoint before Implicit Any Parameter (TS7006) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:30:35.050Z] Committed changes for Implicit Any Parameter (TS7006) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:30:35.050Z] Implicit Any Parameter: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:30:36.054Z] Starting Element Implicit Any (TS7053) fixes...[0m
+[36m🔧 [2025-08-11T00:30:36.056Z] Element Implicit Any (iteration 1/3): 107 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:36.075Z] Created checkpoint before Element Implicit Any (TS7053) (iteration 1/3)[0m
+[32m✅ [2025-08-11T00:30:38.139Z] Committed changes for Element Implicit Any (TS7053) (iteration 1/3)[0m
+[36m🔧 [2025-08-11T00:30:40.141Z] Element Implicit Any (iteration 2/3): 107 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:40.161Z] Created checkpoint before Element Implicit Any (TS7053) (iteration 2/3)[0m
+[32m✅ [2025-08-11T00:30:42.226Z] Committed changes for Element Implicit Any (TS7053) (iteration 2/3)[0m
+[33m⚠️ [2025-08-11T00:30:42.226Z] Element Implicit Any: No progress made, stopping iterations[0m
+[36m🔧 [2025-08-11T00:30:43.230Z] Starting Syntax Errors (TS1003) fixes...[0m
+[32m✅ [2025-08-11T00:30:43.234Z] Syntax Errors: Successfully reduced to 0 errors after 0 iteration(s)[0m
+[36m🔧 [2025-08-11T00:30:44.236Z] Starting Property Does Not Exist (TS2339) fixes...[0m
+[36m🔧 [2025-08-11T00:30:44.238Z] Property Does Not Exist: 754 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:44.257Z] Created checkpoint before Property Does Not Exist (TS2339)[0m
+[31m❌ [2025-08-11T00:30:44.313Z] Property Does Not Exist: Failed iteration 1 - Command failed: node scripts/fix-ts2339-property-errors.js
+node:internal/modules/esm/resolve:873
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'typescript' imported from /home/runner/work/ytMain/ytMain/scripts/fix-ts2339-property-errors.js
+    at packageResolve (node:internal/modules/esm/resolve:873:9)
+    at moduleResolve (node:internal/modules/esm/resolve:946:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v20.19.4
+[0m
+[36m🔧 [2025-08-11T00:30:45.318Z] Starting Cannot Find Name (TS2304) fixes...[0m
+[36m🔧 [2025-08-11T00:30:45.321Z] Cannot Find Name: 3837 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:45.340Z] Created checkpoint before Cannot Find Name (TS2304)[0m
+[32m✅ [2025-08-11T00:30:47.388Z] Committed changes for Cannot Find Name (TS2304)[0m
+[33m⚠️ [2025-08-11T00:30:47.391Z] Cannot Find Name: Reached max iterations (1), 3837 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:48.392Z] Starting Declared But Not Used (TS6133) fixes...[0m
+[36m🔧 [2025-08-11T00:30:48.394Z] Declared But Not Used: 5 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:48.413Z] Created checkpoint before Declared But Not Used (TS6133)[0m
+[32m✅ [2025-08-11T00:30:50.475Z] Committed changes for Declared But Not Used (TS6133)[0m
+[33m⚠️ [2025-08-11T00:30:50.478Z] Declared But Not Used: Reached max iterations (1), 5 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:51.479Z] Starting Missing Properties (TS2739) fixes...[0m
+[36m🔧 [2025-08-11T00:30:51.482Z] Missing Properties: 69 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:51.500Z] Created checkpoint before Missing Properties (TS2739)[0m
+[32m✅ [2025-08-11T00:30:53.567Z] Committed changes for Missing Properties (TS2739)[0m
+[33m⚠️ [2025-08-11T00:30:53.570Z] Missing Properties: Reached max iterations (1), 69 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:54.572Z] Starting Property Suggestions (TS2551) fixes...[0m
+[36m🔧 [2025-08-11T00:30:54.574Z] Property Suggestions: 18 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:54.593Z] Created checkpoint before Property Suggestions (TS2551)[0m
+[32m✅ [2025-08-11T00:30:56.644Z] Committed changes for Property Suggestions (TS2551)[0m
+[33m⚠️ [2025-08-11T00:30:56.647Z] Property Suggestions: Reached max iterations (1), 18 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:57.648Z] Starting No Exported Member (TS2305) fixes...[0m
+[36m🔧 [2025-08-11T00:30:57.651Z] No Exported Member: 23 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:57.670Z] Created checkpoint before No Exported Member (TS2305)[0m
+[32m✅ [2025-08-11T00:30:59.735Z] Committed changes for No Exported Member (TS2305)[0m
+[33m⚠️ [2025-08-11T00:30:59.738Z] No Exported Member: Reached max iterations (1), 23 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:00.739Z] Starting Enhanced Type Not Assignable (TS2322) fixes...[0m
+[36m🔧 [2025-08-11T00:31:00.742Z] Enhanced Type Not Assignable: 153 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:00.760Z] Created checkpoint before Enhanced Type Not Assignable (TS2322)[0m
+[32m✅ [2025-08-11T00:31:02.851Z] Committed changes for Enhanced Type Not Assignable (TS2322)[0m
+[33m⚠️ [2025-08-11T00:31:02.854Z] Enhanced Type Not Assignable: Reached max iterations (1), 153 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:03.855Z] Starting Argument Type Mismatch (TS2345) fixes...[0m
+[36m🔧 [2025-08-11T00:31:03.858Z] Argument Type Mismatch: 68 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:03.876Z] Created checkpoint before Argument Type Mismatch (TS2345)[0m
+[32m✅ [2025-08-11T00:31:05.961Z] Committed changes for Argument Type Mismatch (TS2345)[0m
+[33m⚠️ [2025-08-11T00:31:05.964Z] Argument Type Mismatch: Reached max iterations (1), 68 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:06.965Z] Starting Duplicate Identifier (TS2300) fixes...[0m
+[32m✅ [2025-08-11T00:31:06.971Z] Duplicate Identifier: Successfully reduced to 0 errors after 0 iteration(s)[0m
+[36m🔧 [2025-08-11T00:31:07.972Z] Starting Implicit Any Type (TS7019) fixes...[0m
+[36m🔧 [2025-08-11T00:31:07.975Z] Implicit Any Type: 17 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:07.993Z] Created checkpoint before Implicit Any Type (TS7019)[0m
+[31m❌ [2025-08-11T00:31:10.038Z] Implicit Any Type: Failed iteration 1 - Command failed: node scripts/fix-ts7019-implicit-any.js
+file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260
+  fixer.run().catch(console.error);
+             ^
+
+TypeError: Cannot read properties of undefined (reading 'catch')
+    at file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.19.4
+[0m
+[36m🔧 [2025-08-11T00:31:11.042Z] Starting Type Not Assignable (Legacy) (TS2322) fixes...[0m
+[36m🔧 [2025-08-11T00:31:11.044Z] Type Not Assignable (Legacy): 153 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:11.063Z] Created checkpoint before Type Not Assignable (Legacy) (TS2322)[0m
+[32m✅ [2025-08-11T00:31:13.102Z] Committed changes for Type Not Assignable (Legacy) (TS2322)[0m
+[33m⚠️ [2025-08-11T00:31:13.105Z] Type Not Assignable (Legacy): Reached max iterations (1), 153 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:14.106Z] Starting Possibly Undefined (TS18048) fixes...[0m
+[36m🔧 [2025-08-11T00:31:14.109Z] Possibly Undefined: 6 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:14.128Z] Created checkpoint before Possibly Undefined (TS18048)[0m
+[32m✅ [2025-08-11T00:31:16.159Z] Committed changes for Possibly Undefined (TS18048)[0m
+[33m⚠️ [2025-08-11T00:31:16.162Z] Possibly Undefined: Reached max iterations (1), 6 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 
+================================================================================[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📊 COMPREHENSIVE ERROR FIXING REPORT[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ================================================================================[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ⏱️  Duration: 181.37 seconds[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📈 Initial errors: 10435[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📉 Final errors: 10435[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✨ Total fixed: 0[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 🎯 Success rate: 0.0%[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] [0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📋 FIXER BREAKDOWN:[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ JSX Runtime Module (iteration 1/3): 0/287 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ JSX Runtime Module (iteration 2/3): 0/287 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Module (iteration 1/3): 0/72 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Module (iteration 2/3): 0/72 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Namespace (iteration 1/3): 0/494 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Namespace (iteration 2/3): 0/494 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Binding Element Implicit Any (iteration 1/3): 0/736 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Binding Element Implicit Any (iteration 2/3): 0/736 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Implicit Any Parameter (iteration 1/3): 0/2874 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Implicit Any Parameter (iteration 2/3): 0/2874 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Element Implicit Any (iteration 1/3): 0/107 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Element Implicit Any (iteration 2/3): 0/107 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Property Does Not Exist: 0/754 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Name: 0/3837 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Declared But Not Used: 0/5 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Missing Properties: 0/69 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Property Suggestions: 0/18 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ No Exported Member: 0/23 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Enhanced Type Not Assignable: 0/153 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Argument Type Mismatch: 0/68 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Implicit Any Type: 0/17 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Type Not Assignable (Legacy): 0/153 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Possibly Undefined: 0/6 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] [0m
+[36m🔧 [2025-08-11T00:31:17.167Z] 📁 Detailed report saved to: /home/runner/work/ytMain/ytMain/error-fix-report.json[0m
+[32m✅ [2025-08-11T00:31:17.167Z] ✅ Error count maintained within allowed threshold (+100 max)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] 
+📝 NEXT STEPS:[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • 10435 errors remaining - consider manual review[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • Run npm run type-check to see remaining errors[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • Use npm run fix:all-types to rerun all fixers[0m

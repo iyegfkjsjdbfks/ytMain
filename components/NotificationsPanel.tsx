@@ -8,10 +8,10 @@ declare global {
   }
 }
 
-import { useState } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
   id: string;
@@ -32,11 +32,10 @@ const mockNotifications: NotificationItem[] = [
 
 
 interface NotificationsPanelProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean; onClose: () => void
 }
 
-const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
+const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }: {onClose: Function; isOpen: boolean}) => {
   const [notifications, setNotifications] = useState(mockNotifications);
 
   if (!isOpen) {

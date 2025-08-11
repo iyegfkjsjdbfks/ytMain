@@ -9,10 +9,10 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
 
 export interface VideoPlayerProps {
   videoId: string;

@@ -7,9 +7,9 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
-import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface ShortsNavigationProps {
   onPrevious: () => void;

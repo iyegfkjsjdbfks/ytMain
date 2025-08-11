@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { useState, useEffect } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
-import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 interface SuperChatPanelProps {
   streamId: string;

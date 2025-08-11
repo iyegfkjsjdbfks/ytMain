@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-import React, { type FormEvent, type ReactNode } from 'react';
+// TODO: Fix import - import React, { type FormEvent, type ReactNode } from 'react';
 
 import { useFormState } from '../src/hooks';
 
@@ -18,7 +18,7 @@ interface FormField {
   placeholder?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
-  validation?: (value) => string | null;
+  validation?: (value: any) => string | null;
   disabled?: boolean;
   accept?: string; // for file inputs
   rows?: number; // for textarea
@@ -96,7 +96,7 @@ const BaseForm: React.FC<BaseFormProps> = ({
   };
 
   // Handle field blur
-  const handleBlur = (fieldName) => {
+  const handleBlur = (fieldName: any) => {
     setTouched(prev => ({ ...prev, [fieldName]: true }));
     const field = fields.find(f => f.name === fieldName);
     if (field) {

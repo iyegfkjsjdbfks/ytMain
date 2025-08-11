@@ -1,6 +1,7 @@
-import React from 'react';
+/// <reference types="react/jsx-runtime" />
+// TODO: Fix import - import React from 'react';
 // @ts-nocheck
-import { useState, useEffect, useCallback, useMemo } from 'react';
+// TODO: Fix import - import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
@@ -338,3 +339,12 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 };
 
 export default RecommendationEngine;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

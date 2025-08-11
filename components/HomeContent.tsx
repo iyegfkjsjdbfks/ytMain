@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 import LiveStreams from './LiveStreams';
 import ShortsSection from './ShortsSection';
@@ -19,11 +19,10 @@ import WatchHistory from './WatchHistory';
 import type { Video } from '../types'; // Assuming Video type is in types.ts
 
 interface HomeContentProps {
-  selectedCategory: string;
-  videos: Video;
+  selectedCategory: string; videos: Video
 }
 
-const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {
+const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: {videos: any; selectedCategory: any}) => {
   return (
     <>
       {selectedCategory === 'All' && (

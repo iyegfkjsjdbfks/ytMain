@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+// TODO: Fix import - import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 import type { Video as VideoType } from '../src/types/core';
 
@@ -17,7 +17,7 @@ interface WatchLaterContextType {
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider = ({ children }) => {
+export const WatchLaterProvider = ({ children }: {children: any}) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
     const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];

@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-import { useState, useRef, useEffect } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { CheckIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { CheckIcon } from '@heroicons/react/24/solid';
 
 import AdjustmentsHorizontalIcon from './icons/AdjustmentsHorizontalIcon';
 
@@ -28,7 +28,7 @@ interface SortFilterPanelProps {
   disabled?: boolean;
 }
 
-const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }) => {
+const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSortChange, disabled }: {disabled: boolean; onSortChange: Function; currentSortBy: any}) => {
   const [showPanel, setShowPanel] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);

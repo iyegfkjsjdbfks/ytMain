@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 interface AdvancedLiveChatProps {
   streamId: string;
@@ -8,7 +8,7 @@ interface AdvancedLiveChatProps {
   isModerator?: boolean;
 }
 
-const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }) => {
+const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }: {isModerator: boolean; isOwner: boolean; className: any; streamId: string}) => {
   return (
     <div className={className}>
       <div className="p-4">

@@ -6,8 +6,8 @@ declare global {
     }
   }
 }
-import { useState, useRef } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   EllipsisHorizontalIcon,
@@ -46,8 +46,8 @@ export interface CommentsSectionProps {
   activeCommentMenu: string | null;
   expandedReplies: Record<string, boolean>;
   maxCommentLength: number;
-  onCommentSubmit: (commentText) => void;
-  onReplySubmit: (parentId) => void;
+  onCommentSubmit: (commentText: any) => void;
+  onReplySubmit: (parentId: any) => void;
   onEditSave: (commentId, newText, parentId?: string) => void;
   onDeleteComment: (commentId, parentId?: string) => void;
   onToggleLikeDislike: (id, parentId: string | undefined, action: 'like' | 'dislike') => void;

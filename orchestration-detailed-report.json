@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-08-11T00:58:26.861Z",
+  "duration": "244.61s",
+  "orchestrationCycles": 7,
+  "finalErrors": 1,
+  "results": [
+    {
+      "scriptName": "fix-ts2304-simple.js",
+      "errorCode": "2304",
+      "beforeCount": 7477,
+      "afterCount": 7447,
+      "fixed": 30,
+      "errorDelta": -30,
+      "success": true,
+      "output": "📊 Summary:\u001b[0m\n\u001b[36m🔧 • Fixed 1 errors\u001b[0m\n\u001b[36m🔧 • Modified files: 1\u001b[0m\n\u001b[36m🔧 • Fixed files: components/AdvancedVideoPlayer.tsx\u001b[0m\n"
+    },
+    {
+      "scriptName": "fix-ts7006-simple.js",
+      "errorCode": "7006",
+      "beforeCount": 7447,
+      "afterCount": 1,
+      "fixed": 7446,
+      "errorDelta": -7446,
+      "success": true,
+      "output": "📊 Summary:\u001b[0m\n\u001b[36m🔧 • Fixed 15 errors\u001b[0m\n\u001b[36m🔧 • Modified files: 7\u001b[0m\n\u001b[36m🔧 • Fixed files: components/AdvancedSearch.tsx, components/BaseForm.tsx, components/CategoryChips.tsx, components/CategoryTabs.tsx, components/ChannelTabs.tsx, components/CommentModal.tsx, components/CommentsSection.tsx\u001b[0m\n"
+    },
+    {
+      "scriptName": "fix-ts2339-simple.js",
+      "errorCode": "2339",
+      "beforeCount": 1,
+      "afterCount": 1,
+      "fixed": 0,
+      "errorDelta": 0,
+      "success": true,
+      "output": "\u001b[36m🔧 🚀 Starting simple TS2339 fixes...\u001b[0m\n\u001b[32m✅ ✨ No TS2339 errors found!\u001b[0m\n"
+    }
+  ],
+  "summary": {
+    "totalScriptsRun": 3,
+    "successfulScripts": 3,
+    "revertedScripts": 0,
+    "totalErrorsFixed": 7476
+  }
+}

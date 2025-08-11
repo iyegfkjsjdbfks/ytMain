@@ -1,5 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
+import { useState } from 'react';
+import { useRef } from 'react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,14 +9,14 @@ declare global {
     }
   }
 }
-import { useState, useRef } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText) => void;
+  onCommentSubmit: (commentText: any) => void;
   maxCommentLength: number;
 }
 

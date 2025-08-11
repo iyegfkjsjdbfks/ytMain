@@ -1,6 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,8 +11,8 @@ declare global {
     }
   }
 }
-import { useState, useEffect, useRef } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -20,7 +23,7 @@ import {
   VideoCameraIcon,
   AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 export interface SearchFilters {
   duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
@@ -79,7 +82,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     }
   }, [query]);
 
-  const generateSuggestions = (searchQuery) => {
+  const generateSuggestions = (searchQuery: any) => {
     // Mock search suggestions - in real app, this would call an API
     const mockSuggestions = [
       'react tutorial',
@@ -108,7 +111,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     if (finalQuery.trim()) {
       // Save to search history
       const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
-      const updatedHistory = [finalQuery, ...searchHistory.filter((h) => h !== finalQuery)].slice(0, 20);
+      const updatedHistory = [finalQuery, ...searchHistory.filter((h: any) => h !== finalQuery)].slice(0, 20);
       localStorage.setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
 
       onSearch(finalQuery, filters);
@@ -152,11 +155,11 @@ searchParams.set('sort_by', filters.sortBy);
     }
   };
 
-  const toggleFeature = (feature) => {
+  const toggleFeature = (feature: any) => {
     setFilters(prev => ({
       ...prev,
       features: prev.features.includes(feature)
-        ? prev.features.filter((f) => f !== feature)
+        ? prev.features.filter((f: any) => f !== feature)
         : [...prev.features, feature],
     }));
   };

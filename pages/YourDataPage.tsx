@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-import type * as React from 'react';
-import {  useState, useEffect  } from 'react';
+// TODO: Fix import - import type * as React from 'react';
+// TODO: Fix import - import {  useState, useEffect  } from 'react';
 
-import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
 
@@ -14,8 +14,7 @@ const YourDataPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dataVisibility, setDataVisibility] = useState({
     watchHistory: true,
-    searchHistory: true,
-    likedVideos: true,
+    searchHistory: true, likedVideos: true
   });
 
   useEffect(() => {
@@ -81,8 +80,7 @@ const YourDataPage: React.FC = () => {
       watchHistory: JSON.parse(localStorage.getItem('youtubeCloneWatchHistory_v1') || '[]'),
       likedVideos: JSON.parse(localStorage.getItem('youtubeCloneLikedVideos_v1') || '[]'),
       searchHistory: JSON.parse(localStorage.getItem('youtubeCloneRecentSearches_v2') || '[]'),
-      userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'),
-      exportDate: new Date().toISOString(),
+      userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -97,14 +95,10 @@ const YourDataPage: React.FC = () => {
   };
 
   const DataSection: React.FC<{
-    title: string;
-    description: string;
-    count: number;
-    isVisible: boolean;
-    onToggleVisibility: () => void;
-    onClear: () => void;
-    loading: boolean;
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
+    title: string, description: string;
+    count: number, isVisible: boolean;
+    onToggleVisibility: () => void, onClear: () => void; loading: boolean
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading: boolean, onClear: Function; onToggleVisibility: Function, isVisible: boolean; count: number, description: string; title: string}) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
@@ -232,7 +226,6 @@ export default YourDataPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

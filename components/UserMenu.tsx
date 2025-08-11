@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,26 +9,25 @@ declare global {
   }
 }
 
-import { memo } from 'react';
-import React from 'react';
+// TODO: Fix import - import { memo } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,
   QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon,
   CheckBadgeIcon,
 } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 
 interface UserMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean; onClose: () => void
 }
 
-const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }) => {
+const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: {isDestructive: boolean; icon: any; to: any; onClick: Function; children: any}) => {
   const commonClasses = `flex items-center px-4 py-3 text-sm w-full text-left transition-colors duration-150
     ${isDestructive ? 'text-red-500 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10'
                     : 'text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'}`;
@@ -54,7 +53,7 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
   );
 };
 
-const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }) => {
+const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: {onClose: Function; isOpen: boolean}) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuth();
 

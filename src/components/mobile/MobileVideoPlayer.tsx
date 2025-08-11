@@ -9,12 +9,12 @@ declare namespace NodeJS {
   }
 }
 
-import React from "react";
-import { memo, useState, useEffect, useCallback, useRef } from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { memo, useState, useEffect, useCallback, useRef } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 /// <reference types="node" />
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 interface MobileVideoPlayerProps {
   video: Video;

@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
-import { useState, useEffect, type FC } from 'react';
+// TODO: Fix import - import React from 'react';
+// TODO: Fix import - import { useState, useEffect, type FC } from 'react';
 
-import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
+// TODO: Fix import - import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 

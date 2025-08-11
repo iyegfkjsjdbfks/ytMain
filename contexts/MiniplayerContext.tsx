@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { createContext, useState, useContext, useCallback, type ReactNode } from 'react';
+// TODO: Fix import - import { createContext, useState, useContext, useCallback, type ReactNode } from 'react';
 
 import type { Video } from '../src/types/core';
 
@@ -14,7 +14,7 @@ interface MiniplayerContextType {
 
 const MiniplayerContext = createContext<MiniplayerContextType | undefined>(undefined);
 
-export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children }: {children: any}) => {
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 

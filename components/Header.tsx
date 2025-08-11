@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,11 +9,11 @@ declare global {
   }
 }
 
-import { useState, useRef, useEffect, useCallback, memo } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect, useCallback, memo } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
+// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 
@@ -33,7 +33,7 @@ interface HeaderProps {
   toggleSidebar: () => void;
 }
 
-const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }) => {
+const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }: {to: any; icon: any; onClick: Function; children: any}) => {
   const commonClasses = 'flex items-center px-4 py-3 text-sm w-full text-left text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors duration-150';
 
   const content = (
@@ -67,8 +67,7 @@ interface AuthenticatedUserSectionProps {
   userMenuRef: React.RefObject<HTMLDivElement>;
   userMenuButtonRef: React.RefObject<HTMLButtonElement>;
   toggleUserMenu: () => void;
-  isUserMenuOpen: boolean;
-  handleCloseUserMenu: () => void;
+  isUserMenuOpen: boolean; handleCloseUserMenu: () => void
 }
 
 const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
@@ -123,7 +122,7 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
   );
 };
 
-const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }: {toggleSidebar: any}) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
   const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);

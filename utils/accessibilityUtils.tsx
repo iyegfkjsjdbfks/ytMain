@@ -1,20 +1,18 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
-  }
+    [key: string]: string | undefined }
   interface Process {
-    env: ProcessEnv;
-  }
+    env: ProcessEnv }
 }
 
 /**
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React from "react";
+// TODO: Fix import - import React from "react";
 import { useEffect,
 /// <reference types="node" />
   useRef,
@@ -29,17 +27,14 @@ import { useEffect,
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
-  reducedMotion: boolean;
-  highContrast: boolean;
-  fontSize: 'small' | 'medium' | 'large' | 'extra-large';
-  announcements: string;
-  addAnnouncement: (message) => void;
-  clearAnnouncements: () => void;
+  reducedMotion: boolean, highContrast: boolean;
+  fontSize: 'small' | 'medium' | 'large' | 'extra-large', announcements: string;
+  addAnnouncement: (message) => void, clearAnnouncements: () => void
 }
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }) {
+export function AccessibilityProvider({ children }: {children: any}) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
@@ -202,7 +197,7 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation({ onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false,  }) {
+export function useKeyboardNavigation({ onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false,  }: {onEnd: Function, onHome: Function; onArrowRight: Function, onArrowLeft: Function; onArrowDown: Function, onArrowUp: Function; onEscape: Function, onEnter: Function}) {
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
 return;
@@ -294,18 +289,15 @@ export function getContrastRatio(color1, color2): number {
 }
 
 export function checkColorContrast(foreground, background): {
-  ratio: number;
-  wcagAA: boolean;
-  wcagAAA: boolean;
-  wcagAALarge: boolean;
+  ratio: number, wcagAA: boolean;
+  wcagAAA: boolean, wcagAALarge: boolean
 } {
   const ratio = getContrastRatio(foreground, background);
 
   return {
     ratio,
     wcagAA: ratio >= 4.5,
-    wcagAAA: ratio >= 7,
-    wcagAALarge: ratio >= 3,
+    wcagAAA: ratio >= 7, wcagAALarge: ratio >= 3
   };
 }
 
@@ -441,7 +433,7 @@ export function useAccessibleForm() {
     clearFieldError,
     getFieldProps,
     getErrorProps,
-    hasErrors: Object.keys(errors).length > 0,
+    hasErrors: Object.keys(errors).length > 0
   };
 }
 
@@ -455,8 +447,7 @@ export function useAccessibleTooltip() {
   const showTooltip = useCallback((e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setPosition({
-      x: rect.left + rect.width / 2,
-      y: rect.top - 8,
+      x: rect.left + rect.width / 2, y: rect.top - 8
     });
 
     clearTimeout(timeoutRef.current);
@@ -472,8 +463,7 @@ export function useAccessibleTooltip() {
     'aria-describedby': isVisible ? tooltipId.current : undefined,
     onMouseEnter: showTooltip,
     onMouseLeave: hideTooltip,
-    onFocus: showTooltip,
-    onBlur: hideTooltip,
+    onFocus: showTooltip, onBlur: hideTooltip
   };
 
   const tooltipProps = {
@@ -482,8 +472,7 @@ export function useAccessibleTooltip() {
     style: {
       position: 'absolute' as const,
       left: position.x,
-      top: position.y,
-      transform: 'translateX(-50%) translateY(-100%)',
+      top: position.y, transform: 'translateX(-50%) translateY(-100%)'
     },
   };
 
@@ -497,16 +486,11 @@ export function useAccessibleTooltip() {
 // Accessibility testing utilities
 export function runAccessibilityAudit(element: HTMLElement): {
   issues: Array<{
-    type: 'error' | 'warning';
-    message: string;
-    element: HTMLElement;
+    type: 'error' | 'warning', message: string; element: HTMLElement
   }>;
-  score: number;
-} {
+  score: number } {
   const issues: Array<{
-    type: 'error' | 'warning';
-    message: string;
-    element: HTMLElement;
+    type: 'error' | 'warning', message: string; element: HTMLElement
   }> = [];
 
   // Check for missing alt text on images
@@ -515,8 +499,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
     if (!img.alt && !img.getAttribute('aria-label')) {
       issues.push({
         type: 'error',
-        message: 'Image missing alt text',
-        element: img,
+        message: 'Image missing alt text', element: img
       });
     }
   });
@@ -530,8 +513,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
     if (!hasLabel && !hasAriaLabel) {
       issues.push({
         type: 'error',
-        message: 'Form control missing label',
-        element: input as HTMLElement,
+        message: 'Form control missing label', element: input as HTMLElement
       });
     }
   });
@@ -605,7 +587,6 @@ export default accessibilityUtils;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }
