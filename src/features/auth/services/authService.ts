@@ -12,7 +12,7 @@ class AuthService {
   /**
    * Log in with credentials
    */
-  async login(credentials: LoginCredentials) Promise<User> {
+  async login(credentials: LoginCredentials): Promise<User> {
     const response = await fetch(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: {
@@ -116,11 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-<<<<<<< HEAD
-  private async refreshToken: any(refreshToken: any) Promise<AuthTokens | nul={true}l> {
-=======
-  private async refreshToken(refreshToken): Promise<AuthTokens | null> {
->>>>>>> 9e90af169a3fdc11350addd3954c622440863596
+  private async refreshToken(refreshToken: string): Promise<AuthTokens | null> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',
