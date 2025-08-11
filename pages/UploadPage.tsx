@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -13,9 +13,9 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { useState, useRef } from 'react';
+// TODO: Fix import - import { useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -26,7 +26,7 @@ import {
   XMarkIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';

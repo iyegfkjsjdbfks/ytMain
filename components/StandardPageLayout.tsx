@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 import LoadingSpinner from './LoadingSpinner';
 import { ErrorState } from './LoadingStates';

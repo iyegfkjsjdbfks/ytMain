@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 const PlaylistIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
   <svg

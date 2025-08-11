@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect, useRef } from 'react';
-import { formatDistanceToNow } from 'date-fns';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
+// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
-import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface NotificationCenterProps {
   className?: string;

@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { FixedSizeList as List } from 'react-window';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
 
-import { memo, useState, useCallback, useMemo, useEffect } from 'react';
+// TODO: Fix import - import { memo, useState, useCallback, useMemo, useEffect } from 'react';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';

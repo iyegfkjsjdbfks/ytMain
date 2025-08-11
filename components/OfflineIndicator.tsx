@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-import { useState, useEffect, type FC } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState, useEffect, type FC } from 'react';
+// TODO: Fix import - import React from 'react';
 
-import { WifiIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { WifiIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface OfflineIndicatorProps {
   className?: string;

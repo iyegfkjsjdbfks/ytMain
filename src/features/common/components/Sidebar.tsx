@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { NavLink } from 'react-router-dom';
-import type React from 'react';
+// TODO: Fix import - import React from "react";
+// TODO: Fix import - import { NavLink } from 'react-router-dom';
+// TODO: Fix import - import type React from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
-import { Link, NavLink } from 'react-router-dom';
+// TODO: Fix import - import { Link, NavLink } from 'react-router-dom';
 
 /**
  * Sidebar navigation component for the main application layout

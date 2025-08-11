@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+// TODO: Fix import - import { useState, useEffect } from 'react';
 
 interface MobileDetectionResult {
   isMobile: boolean;

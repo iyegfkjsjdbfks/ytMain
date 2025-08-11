@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link } from 'react-router-dom';
+// TODO: Fix import - import { Link } from 'react-router-dom';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -14,7 +14,7 @@ declare namespace NodeJS {
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React from "react";
+// TODO: Fix import - import React from "react";
 import { useEffect,
 /// <reference types="node" />
   useRef,

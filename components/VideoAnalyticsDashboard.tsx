@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-import { useState } from 'react';
-import React from 'react';
+// TODO: Fix import - import { useState } from 'react';
+// TODO: Fix import - import React from 'react';
 
 import {
   ClockIcon,
@@ -31,7 +31,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
-import { Line, Doughnut } from 'react-chartjs-2';
+// TODO: Fix import - import { Line, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,

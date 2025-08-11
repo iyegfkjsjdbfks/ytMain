@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Link, NavLink } from 'react-router-dom';
+// TODO: Fix import - import { Link, NavLink } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,7 +8,7 @@ declare global {
     }
   }
 }
-import type React from 'react';
+// TODO: Fix import - import type React from 'react';
 
 import {
   Cog8ToothIcon,
@@ -16,7 +16,7 @@ import {
   DocumentTextIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Outlet, NavLink } from 'react-router-dom';
+// TODO: Fix import - import { Outlet, NavLink } from 'react-router-dom';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages

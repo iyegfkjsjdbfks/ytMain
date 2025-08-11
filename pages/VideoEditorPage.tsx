@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from 'react';
+// TODO: Fix import - import React from 'react';
 /// <reference types="node" />
 
 
@@ -26,9 +26,9 @@ declare namespace React {
   }
 }
 
-import { useState, useRef, useEffect } from 'react';
+// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
 
-import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+// TODO: Fix import - import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, DocumentArrowDownIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
