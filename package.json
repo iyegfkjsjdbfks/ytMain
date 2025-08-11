@@ -90,6 +90,10 @@
     "orchestrate:enhanced-v2": "node scripts/enhanced-orchestrator-v2.js",
     "test:orchestrator": "node scripts/test-orchestrator.js",
     "fix:ts1005-malformed": "node scripts/fix-ts1005-malformed-types.js",
+    "fix:remaining-ts1005": "node scripts/fix-remaining-ts1005.js",
+    "fix:ts1160": "node scripts/fix-ts1160-template-literals.js",
+    "fix:surgical-ts1005": "node scripts/surgical-ts1005-fixer.js",
+    "orchestrate:comprehensive": "node scripts/comprehensive-orchestrator.js",
     "orchestrate:typescript": "node scripts/typescript-error-orchestrator-v2.js"
   },
   "dependencies": {

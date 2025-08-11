@@ -199,14 +199,26 @@ class ComprehensiveErrorOrchestrator {
     
     // Define error fixing strategies in order of priority
     const errorFixers = [
-      { script: 'fix-remaining-ts1005.js', type: 'Remaining TS1005 Syntax', code: '1005' },
-      { script: 'fix-ts1160-template-literals.js', type: 'Template Literals', code: '1160' },
-      { script: 'fix-ts1005-enhanced.js', type: 'Enhanced TS1005', code: '1005' },
-      { script: 'fix-ts2304-cannot-find-name.js', type: 'Cannot Find Name', code: '2304' },
-      { script: 'fix-ts2307-cannot-find-module.js', type: 'Cannot Find Module', code: '2307' },
-      { script: 'fix-ts7006-implicit-any-param.js', type: 'Implicit Any Parameters', code: '7006' },
-      { script: 'fix-ts2503-cannot-find-namespace.js', type: 'Cannot Find Namespace', code: '2503' },
+      // High priority: Module resolution and basic setup
+      { script: 'fix-ts2307-cannot-find-module.js', type: 'Module Resolution', code: '2307' },
       { script: 'fix-ts2875-jsx-runtime.js', type: 'JSX Runtime', code: '2875' },
+      { script: 'fix-ts2688-type-definitions.js', type: 'Type Definitions', code: '2688' },
+      
+      // Medium priority: Implicit any types  
+      { script: 'fix-ts7006-implicit-any-param.js', type: 'Implicit Any Parameters', code: '7006' },
+      { script: 'fix-ts7031-binding-element-any.js', type: 'Binding Element Any', code: '7031' },
+      { script: 'fix-ts7008-member-implicit-any.js', type: 'Member Implicit Any', code: '7008' },
+      { script: 'fix-ts2304-cannot-find-name.js', type: 'Cannot Find Name', code: '2304' },
+      
+      // Lower priority: Property and type issues
+      { script: 'fix-ts2339-property-errors.js', type: 'Property Does Not Exist', code: '2339' },
+      { script: 'fix-ts2322-type-not-assignable.js', type: 'Type Not Assignable', code: '2322' },
+      { script: 'fix-ts2345-argument-type.js', type: 'Argument Type', code: '2345' },
+      { script: 'fix-ts2739-missing-properties.js', type: 'Missing Properties', code: '2739' },
+      
+      // Cleanup: Unused variables and duplicates  
+      { script: 'fix-ts6133-declared-not-used.js', type: 'Unused Variables', code: '6133' },
+      { script: 'fix-ts2300-duplicate-identifier.js', type: 'Duplicate Identifiers', code: '2300' },
     ];
 
     let iterationProgress = false;
