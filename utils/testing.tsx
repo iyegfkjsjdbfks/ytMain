@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import type React from 'react';
 
 import React from "react";
@@ -475,3 +476,11 @@ export {
 export type { MockedFunction };
 
 export * from '@testing-library/react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

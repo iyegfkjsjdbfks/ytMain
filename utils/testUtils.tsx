@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import { Route } from 'react-router-dom';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
@@ -486,3 +487,11 @@ export * from '@testing-library/react';
 export { userEvent };
 export { customRender as render };
 export { customRenderHook as renderHook };
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

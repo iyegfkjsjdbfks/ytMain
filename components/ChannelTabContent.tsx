@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -207,3 +208,11 @@ return null;
 };
 
 export default ChannelTabContent;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

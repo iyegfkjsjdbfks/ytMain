@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -137,3 +138,11 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
 };
 
 export default ShortsSection;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

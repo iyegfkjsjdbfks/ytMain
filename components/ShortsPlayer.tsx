@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import React from 'react';
 // @ts-nocheck
 import { useState, useRef, useEffect, useCallback } from 'react';
@@ -392,3 +393,12 @@ return null;
 };
 
 export default ShortsPlayer;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

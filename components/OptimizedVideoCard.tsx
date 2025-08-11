@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import React from 'react';
 // @ts-nocheck
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
@@ -661,3 +662,11 @@ export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
     prevProps.index === nextProps.index
   );
 });
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

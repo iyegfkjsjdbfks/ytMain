@@ -1,3 +1,4 @@
+/// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
@@ -147,3 +148,12 @@ const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 })
 TrendingSection.displayName = 'TrendingSection';
 
 export default TrendingSection;
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
