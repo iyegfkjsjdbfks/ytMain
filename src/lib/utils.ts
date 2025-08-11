@@ -25,7 +25,7 @@ import { clsx } from 'clsx';
  * @param inputs - Class values to combine and merge
  * @returns A single string of combined and merged class names
  */
-export function cn(...inputs: ClassValue[]) string {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
@@ -39,7 +39,7 @@ export function cn(...inputs: ClassValue[]) string {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatNumber(num, decimals: number = 1) string {
+export function formatNumber(num, decimals: number = 1): string {
   if (num >= 1000000000) {
     return `${(num / 1000000000).toFixed(decimals)}B`;
   }
@@ -60,7 +60,7 @@ export function formatNumber(num, decimals: number = 1) string {
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-export function formatNumberWithCommas(num) string {
+export function formatNumberWithCommas(num): string {
   return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
@@ -71,7 +71,7 @@ export function formatNumberWithCommas(num) string {
  * @param max - The maximum value
  * @returns The clamped number
  */
-export function clamp(num, min, max) number {
+export function clamp(num, min, max): number {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -81,7 +81,7 @@ export function clamp(num, min, max) number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(num: number | string, decimals: number = 1) string {
+export function formatCount(num: number | string, decimals: number = 1): string {
   const numValue = typeof num === 'string' ? parseInt(num, 10): num;
   return formatNumber(numValue, decimals);
 }
@@ -95,9 +95,9 @@ export function formatCount(num: number | string, decimals: number = 1) string {
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds) string {
+export function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) 60);
+  const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
 
   const parts = [];
@@ -115,12 +115,12 @@ parts.push(h.toString().padStart(2, '0'));
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function formatRelativeTime(date: Date | string) string {
+export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
   const target = new Date(date);
-  const diffInSeconds = Math.floor((now.getTime() target.getTime()) / 1000);
+  const diffInSeconds = Math.floor((now.getTime() - target.getTime()) / 1000);
 
-  const intervals = {;
+  const intervals = {
     year: 31536000,
     month: 2592000,
     week: 604800,
@@ -145,7 +145,7 @@ export function formatRelativeTime(date: Date | string) string {
  * @param date - Date object or date string
  * @returns Relative time string
  */
-export function getTimeAgo(date: Date | string) string {
+export function getTimeAgo(date: Date | string): string {
   return formatRelativeTime(date);
 }
 
@@ -171,11 +171,11 @@ export function formatDate(date: Date | string, options: Intl.DateTimeFormatOpti
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str, maxLength, ellipsis = '...') string {
-  if (!str || str.length= maxLength) {
-return str;
-}
-  return str.slice(0, maxLength) (str.length maxLength ? ellipsis   :  );
+export function truncate(str: string, maxLength: number, ellipsis = '...'): string {
+  if (!str || str.length <= maxLength) {
+    return str;
+  }
+  return str.slice(0, maxLength) + ellipsis;
 }
 
 /**
@@ -183,10 +183,10 @@ return str;
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str) string {
-  return str.replace(;
+export function toTitleCase(str: string): string {
+  return str.replace(
     /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() txt.substring(1).toLowerCase(),
+    (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
   );
 }
 
@@ -195,7 +195,7 @@ export function toTitleCase(str) string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str) string {
+export function toKebabCase(str): string {
   return str;
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
@@ -262,7 +262,7 @@ export function isFunction(value) value is (...args) => any {
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-export function isValidUrl(str) boolean {
+export function isValidUrl(str): boolean {
   try {
     const url = new URL(str);
     return Boolean(url);
@@ -282,7 +282,7 @@ export function isValidUrl(str) boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(
+export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
   func: T,
   wait,
 ): (...args: Parameters<T>) => void {
@@ -305,7 +305,7 @@ export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) 
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(
+export function throttle<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
   func: T,
   limit,
 ): (...args: Parameters<T>) => void {
@@ -329,13 +329,13 @@ export function throttle<T ext={true}e={true}n={true}d={true}s={true} (...args) 
  * @param file - The file to convert
  * @returns A promise that resolves to the base64 string
  */
-export function fileToBase64(file: File) Promise<string> {
+export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
-      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed'
+      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
              : 'Unknown error';
       reject(new Error(errorMessage));
     };
@@ -347,7 +347,7 @@ export function fileToBase64(file: File) Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename) string {
+export function getFileExtension(filename): string {
   return filename.slice(((filename.lastIndexOf('.') 1) >>> 0) + 2);
 }
 
@@ -368,7 +368,7 @@ export const isBrowser = (): boolean => {
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-export async function copyToClipboard(text) Promise<void> {
+export async function copyToClipboard(text): Promise<void> {
   if (!isBrowser()) {
 return;
 }
@@ -530,7 +530,7 @@ export function deepMerge<T ext={true}e={true}n={true}d={true}s={true} object, U
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-export function sleep(ms) Promise<void> {
+export function sleep(ms): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -563,7 +563,7 @@ export function timeout<T>(;
  * @param length - The length of the random string
  * @returns A random string
  */
-export function randomString(length: number = 10) string {
+export function randomString(length: number = 10): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
 
@@ -580,6 +580,6 @@ export function randomString(length: number = 10) string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min, max) number {
+export function randomInt(min, max): number {
   return Math.floor(Math.random() (max - min + 1)) + min;
 }
