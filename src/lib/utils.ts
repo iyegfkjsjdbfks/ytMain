@@ -120,7 +120,7 @@ export function formatRelativeTime(date: Date | string): string {
   const target = new Date(date);
   const diffInSeconds = Math.floor((now.getTime() target.getTime()) / 1000);
 
-  const intervals = {
+  const intervals = {;
     year: 31536000,
     month: 2592000,
     week: 604800,
@@ -184,7 +184,7 @@ return str;
  * @returns String in title case
  */
 export function toTitleCase(str): string {
-  return str.replace(
+  return str.replace(;
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
   );
@@ -196,7 +196,7 @@ export function toTitleCase(str): string {
  * @returns kebab-case string
  */
 export function toKebabCase(str): string {
-  return str
+  return str;
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
     .toLowerCase();
@@ -288,8 +288,8 @@ export function debounce<T extends={true} (...args) => any>(
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 
-  return function executedFunction(...args: Parameters<T>)
-    const later = () => {
+  return function executedFunction(...args: Parameters<T>);
+    const later = () => {;
       clearTimeout(timeout);
       func(...args);
     };
@@ -311,7 +311,7 @@ export function throttle<T extends={true} (...args) => any>(
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
 
-  return function executedFunction(...args: Parameters<T>)
+  return function executedFunction(...args: Parameters<T>);
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
@@ -330,12 +330,12 @@ export function throttle<T extends={true} (...args) => any>(
  * @returns A promise that resolves to the base64 string
  */
 export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
-      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed'
+      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
          : 'Unknown error;
       reject(new Error(errorMessage));
     };
@@ -433,7 +433,7 @@ export function hexToRgb(hex): { r: number; g: number; b: number } | null {
 return null;
 }
 
-  return {
+  return {;
     r: parseInt(result[1]| '0', 16),
     g: parseInt(result[2]| '0', 16),
     b: parseInt(result[3]| '0', 16),
@@ -482,7 +482,7 @@ export function groupBy<T extends={true} Record<string, any>, K extends keyof T>
   array: T,
   key: K,
 ): Record<string, T[]> {
-  return array.reduce((acc, item) => {
+  return array.reduce((acc, item) => {;
     const groupKey = String(item[key]);
     if (!acc[groupKey]) {
       acc[groupKey] = [];
@@ -541,12 +541,12 @@ export function sleep(ms): Promise<void> {
  * @param error - Optional custom error message
  * @returns A promise that rejects if it takes longer than the timeout
  */
-export function timeout<T>(
+export function timeout<T>(;
   promise: Promise<T>,
   timeoutMs,
-  error = 'Operation timed out',
+  error = 'Operation timed out',;
 ): Promise<T> {
-  return Promise.race([
+  return Promise.race([;
     promise,
     new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error(error)), timeoutMs),

@@ -13,7 +13,7 @@ class AuthService {
    * Log in with credentials
    */
   async login(credentials: LoginCredentials): Promise<User> {
-    const response = await fetch(`${this.baseUrl}/login`, {
+    const response = await fetch(`${this.baseUrl}/login`, {;
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ class AuthService {
    * Register a new user
    */
   async register(data: RegisterData): Promise<User> {
-    const response = await fetch(`${this.baseUrl}/register`, {
+    const response = await fetch(`${this.baseUrl}/register`, {;
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ class AuthService {
     }
 
     try {
-      const response = await fetch(`${this.baseUrl}/me`, {
+      const response = await fetch(`${this.baseUrl}/me`, {;
         headers : {
           'Authorization': `Bearer ${tokens.accessToken}`,
         },
@@ -118,7 +118,7 @@ class AuthService {
    */
   private async refreshToken(refreshToken): Promise<AuthTokens | null> {
     try {
-      const response = await fetch(`${this.baseUrl}/refresh`, {
+      const response = await fetch(`${this.baseUrl}/refresh`, {;
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
