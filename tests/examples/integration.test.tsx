@@ -16,7 +16,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function}: {onTimeUpdate: Function}: {video: any}) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function, onTimeUpdate: Function; video: any}) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -32,7 +32,7 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function}: {onT
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean}: {onVideoSelect: Function}: {videos: any}) => (
+const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean, onVideoSelect: Function; videos: any}) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
@@ -54,7 +54,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean}: {onVi
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }: {onAddComment: Function}: {comments: any}) => {
+const CommentSection = ({ comments, onAddComment }: {onAddComment: Function, comments: any}) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -566,7 +566,7 @@ describe('Integration Tests', () => {
           success: true,
           data: {
             ...mockVideos[0],
-            title: '<script>alert("XSS")</script>Malicious Title',
+            title: '<script>alert("XSS")</script>Malicious Title'
           },
         }),
       });
@@ -669,7 +669,6 @@ describe('Integration Tests', () => {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

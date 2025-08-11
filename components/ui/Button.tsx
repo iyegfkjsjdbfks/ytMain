@@ -32,8 +32,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
-  children: React.ReactNode;
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'; children: React.ReactNode
 }
 
 // Enhanced variant styles with YouTube-like red theme
@@ -42,8 +41,7 @@ const variantClasses = {
   secondary: 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900 border-transparent dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 focus:ring-neutral-500',
   outline: 'bg-transparent hover:bg-red-50 text-red-600 border-red-600 hover:text-red-700 focus:ring-red-500',
   ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border-transparent dark:hover:bg-neutral-800 dark:text-neutral-300 focus:ring-neutral-500',
-  danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent focus:ring-red-500',
-  link: 'bg-transparent text-red-600 border-transparent hover:text-red-700 hover:underline focus:ring-red-500 p-0',
+  danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent focus:ring-red-500', link: 'bg-transparent text-red-600 border-transparent hover:text-red-700 hover:underline focus:ring-red-500 p-0'
 };
 
 // Enhanced size classes
@@ -51,16 +49,14 @@ const sizeClasses = {
   xs: 'px-2 py-1 text-xs',
   sm: 'px-3 py-1.5 text-sm',
   md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
-  xl: 'px-8 py-4 text-lg',
+  lg: 'px-6 py-3 text-base', xl: 'px-8 py-4 text-lg'
 };
 
 const roundedClasses = {
   none: 'rounded-none',
   sm: 'rounded-sm',
   md: 'rounded-md',
-  lg: 'rounded-lg',
-  full: 'rounded-full',
+  lg: 'rounded-lg', full: 'rounded-full'
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((
@@ -161,7 +157,7 @@ export const SubscribeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isSubscribed, loading = false, onClick, className }: {className: any}: {onClick: Function}: {isSubscribed: boolean}) => (
+}> = ({ isSubscribed, loading = false, onClick, className }: {className: any, onClick: Function; isSubscribed: boolean}) => (
   <Button
     variant={isSubscribed ? 'outline' : 'primary'}
     size="sm"
@@ -179,7 +175,7 @@ export const LikeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isLiked, count, loading = false, onClick, className }: {className: any}: {onClick: Function}: {count: number}: {isLiked: boolean}) => (
+}> = ({ isLiked, count, loading = false, onClick, className }: {className: any, onClick: Function; count: number, isLiked: boolean}) => (
   <Button
     variant={isLiked ? 'primary' : 'ghost'}
     size="sm"

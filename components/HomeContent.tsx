@@ -19,11 +19,10 @@ import WatchHistory from './WatchHistory';
 import type { Video } from '../types'; // Assuming Video type is in types.ts
 
 interface HomeContentProps {
-  selectedCategory: string;
-  videos: Video;
+  selectedCategory: string; videos: Video
 }
 
-const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: {videos: any}: {selectedCategory: any}) => {
+const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: {videos: any; selectedCategory: any}) => {
   return (
     <>
       {selectedCategory === 'All' && (

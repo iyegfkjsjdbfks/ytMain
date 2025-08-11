@@ -23,12 +23,11 @@ interface CommentItemProps {
   data: {
     comments: Comment;
     onReply: (commentId, content) => void;
-    onLike: (commentId) => void;
-    onDislike: (commentId) => void;
+    onLike: (commentId) => void; onDislike: (commentId) => void
   };
 }
 
-const CommentItem = memo<CommentItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
+const CommentItem = memo<CommentItemProps>(({ index, style, data }: {data: any; style: any; index: number}) => {
   const { comments, onReply, onLike, onDislike } = data;
   const comment = comments[index];
 

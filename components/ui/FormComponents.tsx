@@ -48,7 +48,7 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
-  options: Array<{ value: string; label: string; disabled?: boolean }>;
+  options: Array<{ value: string, label: string; disabled?: boolean }>;
   placeholder?: string;
 }
 
@@ -60,20 +60,18 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 // Radio component props
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
   size?: InputSize;
-  options: Array<{ value: string; label: string; disabled?: boolean }>;
+  options: Array<{ value: string, label: string; disabled?: boolean }>;
 }
 
 // Style mappings
 const sizeStyles = {
   sm: 'px-3 py-1.5 text-sm',
-  md: 'px-3 py-2 text-base',
-  lg: 'px-4 py-3 text-lg',
+  md: 'px-3 py-2 text-base', lg: 'px-4 py-3 text-lg'
 };
 
 const variantStyles = {
   default: 'border border-gray-300 bg-white focus:border-red-500 focus:ring-red-500',
-  filled: 'border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500',
-  outlined: 'border-2 border-gray-300 bg-transparent focus:border-red-500',
+  filled: 'border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500', outlined: 'border-2 border-gray-300 bg-transparent focus:border-red-500'
 };
 
 const baseInputStyles = 'w-full rounded-md transition-colors duration-200 focus:outline-none focus:ring-1 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -82,9 +80,8 @@ const baseInputStyles = 'w-full rounded-md transition-colors duration-200 focus:
 const FieldLabel: React.FC<{
   htmlFor?: string;
   required?: boolean;
-  className?: string;
-  children: React.ReactNode;
-}> = ({ htmlFor, required, className, children }: {children: any}: {className: any}: {required: any}: {htmlFor: any}) => (
+  className?: string; children: React.ReactNode
+}> = ({ htmlFor, required, className, children }: {children: any, className: any; required: any, htmlFor: any}) => (
   <label
     htmlFor={htmlFor}
     className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
@@ -98,7 +95,7 @@ const FieldLabel: React.FC<{
 const FieldError: React.FC<{
   error?: string;
   className?: string;
-}> = ({ error, className }: {className: any}: {error: Error}) => {
+}> = ({ error, className }: {className: any, error: Error}) => {
   if (!error) {
 return null;
 }
@@ -114,7 +111,7 @@ return null;
 const FieldHint: React.FC<{
   hint?: string;
   className?: string;
-}> = ({ hint, className }: {className: any}: {hint: any}) => {
+}> = ({ hint, className }: {className: any, hint: any}) => {
   if (!hint) {
 return null;
 }
@@ -230,8 +227,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
   const resizeClasses = {
     none: 'resize-none',
     vertical: 'resize-y',
-    horizontal: 'resize-x',
-    both: 'resize',
+    horizontal: 'resize-x', both: 'resize'
   };
 
   const textareaClasses = cn(
@@ -374,8 +370,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
 
   const sizeClasses = {
     sm: 'h-3 w-3',
-    md: 'h-4 w-4',
-    lg: 'h-5 w-5',
+    md: 'h-4 w-4', lg: 'h-5 w-5'
   };
 
   const checkboxClasses = cn(
@@ -438,8 +433,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 
   const sizeClasses = {
     sm: 'h-3 w-3',
-    md: 'h-4 w-4',
-    lg: 'h-5 w-5',
+    md: 'h-4 w-4', lg: 'h-5 w-5'
   };
 
   const radioClasses = cn(
@@ -500,7 +494,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 export const FormGroup: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }: {className: any}: {children: any}) => (
+}> = ({ children, className }: {className: any, children: any}) => (
   <div className={cn('space-y-4', className)}>
     {children}
   </div>
@@ -511,11 +505,10 @@ export const FormActions: React.FC<{
   children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
-}> = ({ children, className, align = 'right' }: {className: any}: {children: any}) => {
+}> = ({ children, className, align = 'right' }: {className: any, children: any}) => {
   const alignClasses = {
     left: 'justify-start',
-    center: 'justify-center',
-    right: 'justify-end',
+    center: 'justify-center', right: 'justify-end'
   };
 
   return (

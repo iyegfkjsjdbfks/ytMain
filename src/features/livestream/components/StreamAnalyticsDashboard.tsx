@@ -38,22 +38,20 @@ interface AnalyticsData {
   realTimeStats: LiveStreamStats;
   /** Historical data for charts */
   historicalData: {
-    viewers: Array<{ time: string; count: number }>;
-    engagement: Array<{ time: string; rate: number }>;
-    revenue: Array<{ time: string; amount: number }>;
+    viewers: Array<{ time: string, count: number }>;
+    engagement: Array<{ time: string, rate: number }>;
+    revenue: Array<{ time: string, amount: number }>;
   };
   /** Audience demographic information */
   demographics: {
-    countries: Array<{ name: string; percentage: number }>;
-    devices: Array<{ type: string; percentage: number }>;
-    ageGroups: Array<{ range: string; percentage: number }>;
+    countries: Array<{ name: string, percentage: number }>;
+    devices: Array<{ type: string, percentage: number }>;
+    ageGroups: Array<{ range: string, percentage: number }>;
   };
   /** Notable moments during the stream */
   topMoments: Array<{
-    timestamp: number;
-    type: 'peak_viewers' | 'super_chat' | 'viral_moment';
-    description: string;
-    value: number;
+    timestamp: number, type: 'peak_viewers' | 'super_chat' | 'viral_moment';
+    description: string, value: number
   }>;
 }
 
@@ -87,8 +85,7 @@ const getHealthColor = (health: StreamHealth): string => {
   const healthColors: Record<StreamHealth, string> = {
     excellent: 'text-green-600',
     good: 'text-blue-600',
-    fair: 'text-yellow-600',
-    poor: 'text-red-600',
+    fair: 'text-yellow-600', poor: 'text-red-600'
   };
   return healthColors[health];
 };
@@ -100,9 +97,8 @@ const getMetricValue = (point: HistoricalDataPoint, metric: MetricType): number 
     case 'engagement':
       return point.rate ?? 0;
     case 'revenue':
-      return point.amount ?? 0;
-    default:
-      return 0;
+      return point.amount ?? 0; default:
+      return 0
   }
 };
 
@@ -122,21 +118,17 @@ const generateMockAnalytics = (): AnalyticsData => ({
     qaQuestions: 34,
     streamHealth: 'excellent',
     bitrate: 4500,
-    frameDrops: 0,
-    latency: 1800,
+    frameDrops: 0, latency: 1800
   },
   historicalData: {
     viewers: Array.from({ length: 60 }, (_, i) => ({
-      time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      count: Math.floor(Math.random() * 500) + 800,
+      time: new Date(Date.now() - (59 - i) * 60000).toISOString(), count: Math.floor(Math.random() * 500) + 800
     })),
     engagement: Array.from({ length: 60 }, (_, i) => ({
-      time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      rate: Math.random() * 20 + 10,
+      time: new Date(Date.now() - (59 - i) * 60000).toISOString(), rate: Math.random() * 20 + 10
     })),
     revenue: Array.from({ length: 60 }, (_, i) => ({
-      time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      amount: Math.random() * 50,
+      time: new Date(Date.now() - (59 - i) * 60000).toISOString(), amount: Math.random() * 50
     })),
   },
   demographics: {
@@ -166,20 +158,17 @@ const generateMockAnalytics = (): AnalyticsData => ({
     {
       timestamp: 1800,
       type: 'peak_viewers',
-      description: 'Peak viewership reached',
-      value: 2156,
+      description: 'Peak viewership reached', value: 2156
     },
     {
       timestamp: 2400,
       type: 'super_chat',
-      description: 'Largest Super Chat donation',
-      value: 50,
+      description: 'Largest Super Chat donation', value: 50
     },
     {
       timestamp: 3000,
       type: 'viral_moment',
-      description: 'Viral clip shared',
-      value: 1000,
+      description: 'Viral clip shared', value: 1000
     },
   ],
 });
@@ -250,7 +239,7 @@ interface StatsCardProps {
   trend?: ReactNode;
 }
 
-const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: {trend: any}: {subtitle: any}: {icon: any}: {value: any}: {title: string}) => (
+const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: {trend: any, subtitle: any; icon: any, value: any; title: string}) => (
   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div className="flex-1">
@@ -277,8 +266,7 @@ const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: 
  */
 interface TopMomentsProps {
   /** Array of notable stream moments */
-  moments: AnalyticsData['topMoments'];
-}
+  moments: AnalyticsData['topMoments'] }
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
   const getIcon = (type): React.ReactNode => {
@@ -288,9 +276,8 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
       case 'super_chat':
         return <CurrencyDollarIcon className="h-5 w-5 text-yellow-500" />;
       case 'viral_moment':
-        return <TrendingUpIcon className="h-5 w-5 text-green-500" />;
-      default:
-        return <ChartBarIcon className="h-5 w-5 text-gray-500" />;
+        return <TrendingUpIcon className="h-5 w-5 text-green-500" />; default:
+        return <ChartBarIcon className="h-5 w-5 text-gray-500" />
     }
   };
 
@@ -299,8 +286,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
       case 'super_chat':
         return `$${moment.value.toFixed(2)}`;
       default:
-        return formatNumber(moment.value);
-    }
+        return formatNumber(moment.value) }
   };
 
   if (moments.length === 0) {
@@ -312,8 +298,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
           <p>No notable moments yet</p>
         </div>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
@@ -350,8 +335,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
  */
 interface DemographicsProps {
   /** Audience demographic data */
-  demographics: AnalyticsData['demographics'];
-}
+  demographics: AnalyticsData['demographics'] }
 
 const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographics: any}) => (
   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
@@ -478,8 +462,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded" />
         </div>
       </div>
-    );
-  }
+    ) }
 
   if (!analytics) {
     return (
@@ -490,8 +473,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           <p className="text-sm">Analytics will appear here once your stream is live.</p>
         </div>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div className={`p-6 space-y-6 ${className}`}>
@@ -621,7 +603,6 @@ export default StreamAnalyticsDashboard;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

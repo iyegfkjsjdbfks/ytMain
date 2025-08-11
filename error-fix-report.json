@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-08-10T23:48:13.844Z",
-  "duration": "182.99s",
+  "timestamp": "2025-08-11T00:31:17.166Z",
+  "duration": "181.37s",
   "initialErrors": 10435,
   "finalErrors": 10435,
   "totalFixed": 0,
@@ -18,7 +18,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in tests/examples/VideoDescription.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentUtils.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 136 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 285 to 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testing.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 11 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 296 to 0\u001b[0m\n"
     },
     {
       "name": "JSX Runtime Module (iteration 2/3)",
@@ -32,7 +32,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in test/components/ErrorBoundary.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/hooks/useVideos.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/integration/CommunityPage.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in tests/examples/VideoDescription.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 282 to 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testing.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 296 to 0\u001b[0m\n"
     },
     {
       "name": "Cannot Find Module (iteration 1/3)",
@@ -46,7 +46,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 3 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/components/ErrorBoundary.test.tsx\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/integration/CommunityPage.test.tsx\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed 36 module import errors\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 44\u001b[0m\n"
+      "output": "\u001b[33m⚠️ Commented out broken import: @tanstack/react-query\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in vite.config.proxy.ts\u001b[0m\n\u001b[33m⚠️ Commented out broken import: vite\u001b[0m\n\u001b[33m⚠️ Commented out broken import: @vitejs/plugin-react\u001b[0m\n\u001b[36m🔧 ✅ Fixed 902 module import errors\u001b[0m\n\u001b[36m🔧 📁 Created 5 stub files\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 44\u001b[0m\n"
     },
     {
       "name": "Cannot Find Module (iteration 2/3)",
@@ -74,7 +74,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/hooks/useVideos.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 477 to 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 Fixing 2 errors in src/hooks/useFormState.ts\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
     },
     {
       "name": "Cannot Find Namespace (iteration 2/3)",
@@ -88,7 +88,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/hooks/useVideos.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 477 to 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 Fixing 2 errors in src/hooks/useFormState.ts\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
     },
     {
       "name": "Binding Element Implicit Any (iteration 1/3)",
@@ -102,7 +102,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 2 errors in src/features/video/components/VideoList.tsx\u001b[0m\n\u001b[36m🔧 Fixing 9 errors in src/features/video/components/VideoPlayer.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/features/video/components/VideoUpload.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 8 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed binding element issues in 48 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS7031 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS7031 errors from 732 to 0\u001b[0m\n"
+      "output": "\u001b[36m🔧 Fixing 1 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/components/ErrorBoundary.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/hooks/useVideos.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 8 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 9 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed binding element issues in 54 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS7031 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS7031 errors from 750 to 0\u001b[0m\n"
     },
     {
       "name": "Binding Element Implicit Any (iteration 2/3)",
@@ -200,7 +200,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🔧 [2025-08-10T23:47:40.786Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-10T23:47:42.774Z] Found 0 TS2304 errors to fix\n✅ [2025-08-10T23:47:42.774Z] No TS2304 errors found!\n"
+      "output": "🔧 [2025-08-11T00:30:45.388Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-11T00:30:47.362Z] Found 0 TS2304 errors to fix\n✅ [2025-08-11T00:30:47.362Z] No TS2304 errors found!\n"
     },
     {
       "name": "Declared But Not Used",

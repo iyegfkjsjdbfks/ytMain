@@ -34,21 +34,16 @@ interface VirtualizedVideoGridProps {
 }
 
 interface GridItemProps {
-  columnIndex: number;
-  rowIndex: number;
-  style: React.CSSProperties;
-  data: {
-    videos: Video;
-    columnsPerRow: number;
+  columnIndex: number, rowIndex: number;
+  style: React.CSSProperties, data: {
+    videos: Video, columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
     onChannelClick?: (channelId) => void;
-    cardSize: 'sm' | 'md' | 'lg';
-    showChannel: boolean;
-    showDescription: boolean;
+    cardSize: 'sm' | 'md' | 'lg', showChannel: boolean; showDescription: boolean
   };
 }
 
-const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: {data: any}: {style: any}: {rowIndex: number}: {columnIndex: number}) => {
+const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: {data: any, style: any; rowIndex: number, columnIndex: number}) => {
   const {
     videos,
     columnsPerRow,
@@ -99,14 +94,12 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
   const { columnsPerRow, columnWidth, rowHeight } = useMemo(() => {
     const cardWidths = {
       sm: 280,
-      md: 320,
-      lg: 360,
+      md: 320, lg: 360
     };
 
     const cardHeights = {
       sm: 240,
-      md: 280,
-      lg: 320,
+      md: 280, lg: 320
     };
 
     const cardWidth = cardWidths[cardSize];
@@ -119,8 +112,7 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
 
     return {
       columnsPerRow: cols,
-      columnWidth: actualColumnWidth,
-      rowHeight: cardHeight + gap,
+      columnWidth: actualColumnWidth, rowHeight: cardHeight + gap
     };
   }, [containerSize.width, cardSize]);
 
@@ -145,7 +137,7 @@ return;
 
   // Handle infinite scrolling
   const handleScroll = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }: {clientHeight: any}: {scrollHeight: any}: {scrollTop: any}) => {
+    ({ scrollTop, scrollHeight, clientHeight }: {clientHeight: any, scrollHeight: any; scrollTop: any}) => {
       if (!hasMore || loading || !onLoadMore) {
 return;
 }

@@ -24,11 +24,10 @@ import { useTheme } from '../contexts/ThemeContext';
 
 
 interface UserMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean; onClose: () => void
 }
 
-const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: {isDestructive: boolean}: {icon: any}: {to: any}: {onClick: Function}: {children: any}) => {
+const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?: string; icon?: React.ReactNode; isDestructive?: boolean }> = ({ children, onClick, to, icon, isDestructive }: {isDestructive: boolean; icon: any; to: any; onClick: Function; children: any}) => {
   const commonClasses = `flex items-center px-4 py-3 text-sm w-full text-left transition-colors duration-150
     ${isDestructive ? 'text-red-500 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10'
                     : 'text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70'}`;
@@ -54,7 +53,7 @@ const MenuItem: React.FC<{ children: React.ReactNode; onClick?: () => void; to?:
   );
 };
 
-const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: {onClose: Function}: {isOpen: boolean}) => {
+const UserMenu: React.FC<UserMenuProps> = memo(({ isOpen, onClose }: {onClose: Function; isOpen: boolean}) => {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuth();
 

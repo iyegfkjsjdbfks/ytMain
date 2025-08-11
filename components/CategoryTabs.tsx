@@ -11,17 +11,15 @@ declare global {
 
 interface Category {
   id: 'all' | 'music' | 'gaming' | 'news' | 'movies';
-  label: string;
-  icon: string;
+  label: string; icon: string
 }
 
 interface CategoryTabsProps {
   categories: Category;
-  activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies';
-  setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void;
+  activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory: any}: {activeCategory: any}: {categories: any}) => {
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory: any; activeCategory: any; categories: any}) => {
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">

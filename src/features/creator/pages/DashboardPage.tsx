@@ -19,11 +19,11 @@ import { ChartBarIcon,
   TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer = ({ children, width, height }: {height: number}: {width: number}: {children: any}) => (
+const ResponsiveContainer = ({ children, width, height }: {height: number, width: number; children: any}) => (
   <div style={{ width, height }}>{children}</div>
 );
-const PieChart = ({ children }: {children: any}) => <div className="flex items-center justify-center h-full">{children}: {children: any}</div>;
-const Pie = ({ data }: {data: any}) => <div className="text-center">Chart Data: {data?.length || 0}: {data: any} items</div>;
+const PieChart = ({ children }: {children: any}) => <div className="flex items-center justify-center h-full">{children}</div>;
+const Pie = ({ data }: {data: any}) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
 const Cell = (_props) => null;
 const Tooltip = (_props) => null;
 const Legend = (_props) => null;
@@ -32,39 +32,26 @@ import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 // Temporary utility functions
 
 interface DashboardStats {
-  totalViews: number;
-  totalSubscribers: number;
-  totalVideos: number;
-  totalWatchTime: number;
-  revenue: number;
-  avgViewDuration: number;
-  engagement: number;
-  clickThroughRate: number;
+  totalViews: number, totalSubscribers: number;
+  totalVideos: number, totalWatchTime: number;
+  revenue: number, avgViewDuration: number;
+  engagement: number, clickThroughRate: number
 }
 
 interface VideoPerformance {
-  id: string;
-  title: string;
-  views: number;
-  likes: number;
-  comments: number;
-  duration: string;
-  publishedAt: string;
-  thumbnail: string;
-  revenue: number;
-  watchTime: number;
+  id: string, title: string;
+  views: number, likes: number;
+  comments: number, duration: string;
+  publishedAt: string, thumbnail: string;
+  revenue: number, watchTime: number
 }
 
 interface AudienceData {
-  country: string;
-  percentage: number;
-  views: number;
+  country: string, percentage: number; views: number
 }
 
 interface DeviceData {
-  device: string;
-  percentage: number;
-  color: string;
+  device: string, percentage: number; color: string
 }
 
 const DashboardPage: React.FC = () => {
@@ -77,8 +64,7 @@ const DashboardPage: React.FC = () => {
     totalWatchTime: 0,
     revenue: 0,
     avgViewDuration: 0,
-    engagement: 0,
-    clickThroughRate: 0,
+    engagement: 0, clickThroughRate: 0
   });
 
   const [topVideos, setTopVideos] = useState<VideoPerformance[]>([]);
@@ -99,8 +85,7 @@ const DashboardPage: React.FC = () => {
         totalWatchTime: timeRange === '7d' ? 8500 : timeRange === '30d' ? 32000 : timeRange === '90d' ? 95000 : 420000,
         revenue: timeRange === '7d' ? 850 : timeRange === '30d' ? 3200 : timeRange === '90d' ? 9500 : 42000,
         avgViewDuration: 4.2,
-        engagement: 8.5,
-        clickThroughRate: 12.3,
+        engagement: 8.5, clickThroughRate: 12.3
       };
 
       const mockTopVideos: VideoPerformance[] = [
@@ -113,8 +98,7 @@ const DashboardPage: React.FC = () => {
           duration: '15:32',
           publishedAt: '2024-01-15',
           thumbnail: 'https://picsum.photos/320/180?random=1',
-          revenue: 1250,
-          watchTime: 95000,
+          revenue: 1250, watchTime: 95000
         },
         {
           id: '2',
@@ -125,8 +109,7 @@ const DashboardPage: React.FC = () => {
           duration: '22:45',
           publishedAt: '2024-01-10',
           thumbnail: 'https://picsum.photos/320/180?random=2',
-          revenue: 890,
-          watchTime: 78000,
+          revenue: 890, watchTime: 78000
         },
         {
           id: '3',
@@ -137,8 +120,7 @@ const DashboardPage: React.FC = () => {
           duration: '18:20',
           publishedAt: '2024-01-05',
           thumbnail: 'https://picsum.photos/320/180?random=3',
-          revenue: 670,
-          watchTime: 58000,
+          revenue: 670, watchTime: 58000
         },
         {
           id: '4',
@@ -149,8 +131,7 @@ const DashboardPage: React.FC = () => {
           duration: '25:10',
           publishedAt: '2023-12-28',
           thumbnail: 'https://picsum.photos/320/180?random=4',
-          revenue: 540,
-          watchTime: 45000,
+          revenue: 540, watchTime: 45000
         },
         {
           id: '5',
@@ -161,8 +142,7 @@ const DashboardPage: React.FC = () => {
           duration: '20:15',
           publishedAt: '2023-12-20',
           thumbnail: 'https://picsum.photos/320/180?random=5',
-          revenue: 420,
-          watchTime: 35000,
+          revenue: 420, watchTime: 35000
         },
       ];
 
@@ -215,8 +195,7 @@ return `${(num / 1000).toFixed(1)  }K`;
 
   const formatCurrency = (amount): string => {
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+      style: 'currency', currency: 'USD'
     }).format(amount);
   };
 
@@ -248,8 +227,7 @@ return `${(num / 1000).toFixed(1)  }K`;
           </div>
         </div>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -573,7 +551,6 @@ export default DashboardPage;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }

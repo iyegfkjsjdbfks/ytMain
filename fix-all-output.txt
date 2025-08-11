@@ -139,3 +139,47 @@ Node.js v20.19.4
 [36m🔧 [2025-08-11T00:31:14.106Z] Starting Possibly Undefined (TS18048) fixes...[0m
 [36m🔧 [2025-08-11T00:31:14.109Z] Possibly Undefined: 6 errors remaining[0m
 [36m🔧 [2025-08-11T00:31:14.128Z] Created checkpoint before Possibly Undefined (TS18048)[0m
+[32m✅ [2025-08-11T00:31:16.159Z] Committed changes for Possibly Undefined (TS18048)[0m
+[33m⚠️ [2025-08-11T00:31:16.162Z] Possibly Undefined: Reached max iterations (1), 6 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 
+================================================================================[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📊 COMPREHENSIVE ERROR FIXING REPORT[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ================================================================================[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ⏱️  Duration: 181.37 seconds[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📈 Initial errors: 10435[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📉 Final errors: 10435[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✨ Total fixed: 0[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 🎯 Success rate: 0.0%[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] [0m
+[36m🔧 [2025-08-11T00:31:17.166Z] 📋 FIXER BREAKDOWN:[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ JSX Runtime Module (iteration 1/3): 0/287 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ JSX Runtime Module (iteration 2/3): 0/287 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Module (iteration 1/3): 0/72 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Module (iteration 2/3): 0/72 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Namespace (iteration 1/3): 0/494 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Namespace (iteration 2/3): 0/494 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Binding Element Implicit Any (iteration 1/3): 0/736 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Binding Element Implicit Any (iteration 2/3): 0/736 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Implicit Any Parameter (iteration 1/3): 0/2874 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Implicit Any Parameter (iteration 2/3): 0/2874 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Element Implicit Any (iteration 1/3): 0/107 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Element Implicit Any (iteration 2/3): 0/107 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Property Does Not Exist: 0/754 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Cannot Find Name: 0/3837 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.166Z] ✅ Declared But Not Used: 0/5 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Missing Properties: 0/69 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Property Suggestions: 0/18 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ No Exported Member: 0/23 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Enhanced Type Not Assignable: 0/153 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Argument Type Mismatch: 0/68 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Implicit Any Type: 0/17 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Type Not Assignable (Legacy): 0/153 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] ✅ Possibly Undefined: 0/6 fixed (0.0%)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] [0m
+[36m🔧 [2025-08-11T00:31:17.167Z] 📁 Detailed report saved to: /home/runner/work/ytMain/ytMain/error-fix-report.json[0m
+[32m✅ [2025-08-11T00:31:17.167Z] ✅ Error count maintained within allowed threshold (+100 max)[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] 
+📝 NEXT STEPS:[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • 10435 errors remaining - consider manual review[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • Run npm run type-check to see remaining errors[0m
+[36m🔧 [2025-08-11T00:31:17.167Z] • Use npm run fix:all-types to rerun all fixers[0m

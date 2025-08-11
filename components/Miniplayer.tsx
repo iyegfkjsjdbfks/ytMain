@@ -18,11 +18,10 @@ import type { Video } from '../src/types/core';
 
 interface MiniplayerProps {
   video: Video | null;
-  onClose: () => void;
-  onMaximize: (videoId) => void;
+  onClose: () => void; onMaximize: (videoId) => void
 }
 
-const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }: {onMaximize: Function}: {onClose: Function}: {video: any}) => {
+const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }: {onMaximize: Function; onClose: Function; video: any}) => {
   if (!video) {
 return null;
 }

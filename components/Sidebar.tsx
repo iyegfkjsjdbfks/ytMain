@@ -36,7 +36,7 @@ interface NavItemProps {
   title?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }: {title: string}: {currentPath: any}: {label: any}: {icon: any}: {to: any}) => {
+const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }: {title: string; currentPath: any; label: any; icon: any; to: any}) => {
   const isActive = currentPath === to ||
                    (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 

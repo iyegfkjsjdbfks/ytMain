@@ -8,8 +8,7 @@ import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization'
 import type { Video } from '../../types/core';
 
 interface MobileVideoGridProps {
-  videos: Video;
-  onVideoClick: (video: Video) => void;
+  videos: Video, onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
   loading?: boolean;
   hasMore?: boolean;
@@ -17,15 +16,13 @@ interface MobileVideoGridProps {
 }
 
 interface MobileVideoItemProps {
-  index: number;
-  style: React.CSSProperties;
+  index: number, style: React.CSSProperties;
   data: {
-    videos: Video;
-    onVideoClick: (video: Video) => void;
+    videos: Video, onVideoClick: (video: Video) => void
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any, style: any; index: number}) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -136,8 +133,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
 
   // Intersection observer for load more
   const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
-    threshold: 0.1,
-    rootMargin: '100px',
+    threshold: 0.1, rootMargin: '100px'
   });
 
   // Load more when intersecting
@@ -178,8 +174,7 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(({
           No videos found
         </p>
       </div>
-    );
-  }
+    ) }
 
   return (
     <div className={`w-full ${className}`}>
@@ -215,7 +210,6 @@ export default MobileVideoGrid;
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+      [elemName: string]: any }
   }
 }
