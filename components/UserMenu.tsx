@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,15 +9,14 @@ declare global {
   }
 }
 
-// TODO: Fix import - import { memo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { memo } from 'react';
+import React from 'react';
 
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,
   QuestionMarkCircleIcon, ChatBubbleLeftEllipsisIcon, VideoCameraIcon, PresentationChartLineIcon,
   CheckBadgeIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';

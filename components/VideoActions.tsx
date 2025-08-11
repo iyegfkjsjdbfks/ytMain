@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,8 +8,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
 import {
   ShareIcon,

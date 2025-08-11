@@ -1,12 +1,11 @@
 
-// TODO: Fix import - import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
-// TODO: Fix import - import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
 
 import { usePerformanceMonitor } from './usePerformanceMonitor';
-// TODO: Fix import - import { useLocation } from 'react-router-dom';
 
 interface UseAnalyticsOptions {
   trackPageViews?: boolean;

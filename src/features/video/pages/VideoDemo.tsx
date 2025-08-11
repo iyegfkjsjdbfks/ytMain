@@ -1,13 +1,13 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState  } from 'react';
-// TODO: Fix import - import type * as React from 'react';
+import React from "react";
+import { useState  } from 'react';
+import type * as React from 'react';
 
 import { realVideos } from '../../../../services/realVideoService';
 
 import { VideoCard, VideoList, VideoGrid, StudioVideoGrid } from '../components';
 import type { Video, VideoVisibility } from '../types';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /**
  * Demo page to showcase video components
@@ -174,3 +174,4 @@ declare global {
     }
   }
 }
+

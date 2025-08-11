@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef, useMemo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import React from 'react';
 
 import {
   HeartIcon,
@@ -20,7 +20,7 @@ import {
   ChevronUpIcon,
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

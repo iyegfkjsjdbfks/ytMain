@@ -1,9 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useParams, Link, useSearchParams } from 'react-router-dom';
+import React from "react";
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -15,7 +15,7 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import type { Video } from '../../../types/core';
 import VideoCard from '../components/VideoCard';
 import YouTubePlayer from '../../../components/YouTubePlayer';
-// TODO: Fix import - import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -722,3 +722,4 @@ declare global {
     }
   }
 }
+

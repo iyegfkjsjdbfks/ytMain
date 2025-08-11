@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 import type { Video } from '../types/core';
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 
 declare namespace React {

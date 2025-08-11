@@ -1,8 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useParams } from 'react-router-dom';
-// TODO: Fix import - import type React from 'react';
-// TODO: Fix import - import { useParams } from 'react-router-dom';
+import React from "react";
+import { useParams } from 'react-router-dom';
+import type React from 'react';
 
 /**
  * UserPage component for displaying a user's public profile
@@ -34,3 +33,4 @@ declare global {
     }
   }
 }
+

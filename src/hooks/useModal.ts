@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 interface UseModalOptions {
   defaultOpen?: boolean;

@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,10 +8,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 
 import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 

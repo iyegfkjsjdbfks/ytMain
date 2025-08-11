@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 const SaveIconFilled: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
   <svg

@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useEffect, useRef, useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 

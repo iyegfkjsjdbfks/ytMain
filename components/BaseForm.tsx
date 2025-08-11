@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import React, { type FormEvent, type ReactNode } from 'react';
+import React, { type FormEvent, type ReactNode } from 'react';
 
 import { useFormState } from '../src/hooks';
 

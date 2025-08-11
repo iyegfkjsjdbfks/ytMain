@@ -1,10 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 // @ts-nocheck
-// TODO: Fix import - import { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import { useState, useEffect, memo, useCallback, useMemo } from 'react';
 
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { getVideos } from '../services/realVideoService';
 
@@ -157,3 +156,4 @@ declare global {
     }
   }
 }
+

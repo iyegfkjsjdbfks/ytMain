@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 // @ts-nocheck
-// TODO: Fix import - import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type KeyboardEvent } from 'react';
 
 import {
   PlayIcon,

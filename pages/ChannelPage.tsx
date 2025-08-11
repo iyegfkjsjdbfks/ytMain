@@ -1,16 +1,15 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useEffect, useState  } from 'react';
+import type * as React from 'react';
+import {  useEffect, useState  } from 'react';
 
-// TODO: Fix import - import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 import ChannelHeader from '../components/ChannelHeader';
 import ChannelTabContent from '../components/ChannelTabContent';
 import ChannelTabs from '../components/ChannelTabs';
 import ChannelPageSkeleton from '../components/LoadingStates/ChannelPageSkeleton';
-// TODO: Fix import - import { useParams } from 'react-router-dom';
 import {
   getChannelByName,
   getVideosByChannelName,
@@ -164,3 +163,4 @@ declare global {
     }
   }
 }
+

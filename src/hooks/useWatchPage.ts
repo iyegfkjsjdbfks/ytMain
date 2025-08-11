@@ -1,11 +1,11 @@
 
-// TODO: Fix import - import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { unifiedDataService } from '../services/unifiedDataService';
 import type { Video, Channel, VideoVisibility } from '../types/core';
-// TODO: Fix import - import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface Comment {
   id: string;

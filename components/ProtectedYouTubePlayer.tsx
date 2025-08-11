@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { useCallback } from 'react';
+import React from 'react';
+import { useCallback } from 'react';
 
 import { VideoErrorBoundary } from '../src/components/ErrorBoundaries';
 import { conditionalLogger } from '../src/utils/conditionalLogger';

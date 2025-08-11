@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,11 +9,10 @@ declare global {
   }
 }
 
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback, memo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 
 import {
   getSearchSuggestions,
@@ -254,3 +253,4 @@ inputRef.current.blur();
 SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;
+

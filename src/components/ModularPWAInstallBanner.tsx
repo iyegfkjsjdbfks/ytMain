@@ -1,7 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { useState, useEffect, useCallback, type FC } from 'react';
+import React from 'react';
+import { useState, useEffect, useCallback, type FC } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
 

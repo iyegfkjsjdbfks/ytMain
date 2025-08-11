@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,9 +9,8 @@ declare global {
   }
 }
 
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
 
 import { useWatchLater } from '../contexts/WatchLaterContext';
 import { useToggle } from '../src/hooks/unifiedHooks';
@@ -133,3 +132,4 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: {video: any})
 VideoCard.displayName = 'VideoCard'; // For better debugging
 
 export default VideoCard;
+

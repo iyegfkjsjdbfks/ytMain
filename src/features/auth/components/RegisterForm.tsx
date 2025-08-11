@@ -1,13 +1,12 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState  } from 'react';
+import React from "react";
+import { useState  } from 'react';
 
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
-// TODO: Fix import - import type * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import type * as React from 'react';
 
 import { useAuthStore } from '../store/authStore';
 import type { RegisterData } from '../types';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 /**
  * Registration form component with validation and error handling
@@ -262,3 +261,4 @@ declare global {
     }
   }
 }
+

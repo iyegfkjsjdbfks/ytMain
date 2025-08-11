@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 // @ts-nocheck
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';

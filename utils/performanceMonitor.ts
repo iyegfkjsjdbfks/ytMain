@@ -2,7 +2,7 @@
  * Performance monitoring utility for tracking Core Web Vitals and custom metrics
  */
 
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 interface PerformanceMetric {
   name: string;

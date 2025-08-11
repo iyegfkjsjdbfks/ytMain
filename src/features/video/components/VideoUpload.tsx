@@ -1,10 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useRef  } from 'react';
+import React from "react";
+import { useState, useRef  } from 'react';
 
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import type * as React from 'react';
 
 interface VideoUploadProps {
   onUploadComplete?: (videoId) => void;
@@ -284,3 +283,4 @@ declare global {
     }
   }
 }
+

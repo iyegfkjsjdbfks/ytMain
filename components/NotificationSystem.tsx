@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 
 import {
   BellIcon,
@@ -19,7 +19,7 @@ import {
   ChatBubbleLeftIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

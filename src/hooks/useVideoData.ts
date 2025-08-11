@@ -1,4 +1,4 @@
-// TODO: Fix import - import { useCallback } from 'react';
+import { useCallback } from 'react';
 import type { Video } from '../types/core';
 import { parseRelativeDate } from '../utils/dateUtils';
 import { parseViewCount } from '../utils/numberUtils';

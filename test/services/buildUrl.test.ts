@@ -1,4 +1,4 @@
-// TODO: Fix import - import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 // We need to access the private buildUrl method, so we'll test it through reflection
 // or by temporarily exposing it for testing

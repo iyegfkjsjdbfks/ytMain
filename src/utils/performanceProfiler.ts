@@ -1,4 +1,4 @@
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 // Performance monitoring utility for React components
 

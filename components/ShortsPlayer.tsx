@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 // @ts-nocheck
-// TODO: Fix import - import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 import {
   PlayIcon,
@@ -15,7 +15,7 @@ import {
   ChevronDownIcon,
   ChatBubbleLeftIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 import type { Short } from '../src/types/core';
 

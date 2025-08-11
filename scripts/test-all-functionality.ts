@@ -5,9 +5,9 @@
  * Tests all core functionalities and generates detailed reports
  */
 
-// TODO: Fix import - import { execSync } from 'child_process';
-// TODO: Fix import - import fs from 'fs';
-// TODO: Fix import - import path from 'path';
+import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 interface TestResult {
   name: string;

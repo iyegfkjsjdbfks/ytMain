@@ -1,4 +1,4 @@
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //!/usr/bin/env node
 
 /**
@@ -6,8 +6,8 @@
  * Automates the refactoring process for the YouTube clone application
  */
 
-// TODO: Fix import - import fs from 'fs';
-// TODO: Fix import - import path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 interface RefactorTask {
   name: string;
@@ -128,7 +128,6 @@ class CodebaseRefactorer {
 
 import * as React from 'react';
 import {  memo  } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { Video } from '../../types/core';
 import { formatDistanceToNow } from 'date-fns';
@@ -334,7 +333,6 @@ continue;
         importLines.push(line);
       } else if (line.trim() === '' && inImportSection) {
         // Keep empty lines in import section
-        importLines.push(line);
       } else {
         inImportSection = false;
         otherLines.push(line);
@@ -524,3 +522,4 @@ refactorer.runRefactoring().catch(error => {
   console.error('❌ Refactoring failed:', error);
   process.exit(1);
 });
+

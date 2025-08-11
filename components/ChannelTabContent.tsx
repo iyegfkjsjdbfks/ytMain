@@ -1,11 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 // @ts-nocheck
-// TODO: Fix import - import { useMemo } from 'react';
+import { useMemo } from 'react';
 
-// TODO: Fix import - import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { PlayIcon as PlaySolidIcon, ChevronRightIcon, SignalSlashIcon, CalendarDaysIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 
 import { parseRelativeDate } from '../utils/dateUtils';
 
@@ -216,3 +215,4 @@ declare global {
     }
   }
 }
+

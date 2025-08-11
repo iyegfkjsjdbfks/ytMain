@@ -1,13 +1,12 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useRef, useCallback  } from 'react';
+import type * as React from 'react';
+import {  useState, useRef, useCallback  } from 'react';
 
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { uploadVideo } from '../services/realVideoService';
 
 import type { VideoUploadData, UploadProgress } from '../types';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 const VideoUploadPage: React.FC = () => {
   const navigate = useNavigate();
@@ -451,3 +450,4 @@ declare global {
     }
   }
 }
+

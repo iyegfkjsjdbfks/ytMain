@@ -1,17 +1,17 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useEffect, useState, useRef  } from 'react';
+import type * as React from 'react';
+import {  useEffect, useState, useRef  } from 'react';
 
-// TODO: Fix import - import { PlayIcon as PlaySolidIcon, QueueListIcon, ArrowsRightLeftIcon, EllipsisVerticalIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { useParams, Link } from 'react-router-dom';
+import { PlayIcon as PlaySolidIcon, QueueListIcon, ArrowsRightLeftIcon, EllipsisVerticalIcon, TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
+import { useParams, Link } from 'react-router-dom';
 
 import PlaylistDetailSkeleton from '../components/LoadingStates/PlaylistDetailSkeleton'; // Added import
 import PlaylistEditModal from '../components/PlaylistEditModal';
 import { getUserPlaylistById, removeVideoFromPlaylist, updateUserPlaylistDetails } from '../services/realVideoService';
 
 import type { UserPlaylist, Video } from '../types';
-// TODO: Fix import - import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface PlaylistWithVideos extends UserPlaylist {
   videos: Video;
@@ -299,3 +299,4 @@ declare global {
     }
   }
 }
+

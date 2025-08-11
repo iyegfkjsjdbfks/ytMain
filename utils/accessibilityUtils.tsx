@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined }
@@ -12,7 +12,7 @@ declare namespace NodeJS {
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-// TODO: Fix import - import React from "react";
+import React from "react";
 import { useEffect,
 /// <reference types="node" />
   useRef,
@@ -590,3 +590,4 @@ declare global {
       [elemName: string]: any }
   }
 }
+
