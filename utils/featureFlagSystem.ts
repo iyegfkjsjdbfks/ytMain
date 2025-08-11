@@ -193,11 +193,7 @@ return undefined;
   /**
    * Evaluate a feature _flag for a user
    */
-<<<<<<< HEAD
-  evaluateFlag(flagId: any, _context: UserContext = {}, defaultValue?: any) {
-=======
   evaluateFlag(flagId, _context: UserContext = {}, defaultValue?: any): any {
->>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       console.warn(`🚩 Feature _flag '${flagId}' not found`);
@@ -672,11 +668,7 @@ continue;
     }
   }
 
-<<<<<<< HEAD
-  private getContextValue(attribute: any, _context: UserContext) {
-=======
   private getContextValue(attribute, _context: UserContext): any {
->>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     switch (attribute) {
       case 'userId':
         return _context.userId;
@@ -1105,17 +1097,3 @@ export type {
 };
 
 // Export class for custom implementations
-export { AdvancedFeatureFlagManager };
-
-// Convenience hooks for React components
-export const useFeatureFlag = (flagId, _context: UserContext = {}, defaultValue?) => {
-  return featureFlagManager.evaluateFlag(flagId, _context, defaultValue);
-};
-
-export const useABTest = (flagId, _context: UserContext = {}) => {
-  const evaluation = featureFlagManager.evaluateFlag(flagId, _context);
-  return {
-    value: evaluation,
-    variant: evaluation.variant || 'control',
-  };
-};

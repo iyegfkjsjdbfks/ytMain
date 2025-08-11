@@ -14,9 +14,9 @@ const CACHE_DURATION = {
 
 // Cache Implementation
 class APICache {
-  private cache = new Map<string, { data; timestamp: number; duration: number }>();
+  private cache = new Map<string, { data: any; timestamp: number; duration: number }>();
 
-  set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
+  set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -24,13 +24,13 @@ class APICache {
     });
   }
 
-  get(key): any | null {
+  get(key: string): any | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
 }
 
-    const isExpired = Date.now() - - item.timestamp > + item.duration;
+    const isExpired = Date.now() - item.timestamp > item.duration;
     if (isExpired) {
       this.cache.delete(key);
       return null;
@@ -43,11 +43,11 @@ return null;
     this.cache.clear();
   }
 
-  delete(key): void {
+  delete(key: string): void {
     this.cache.delete(key);
   }
 
-  size(): number {
+  size() number {
     return this.cache.size;
   }
 }
@@ -59,7 +59,7 @@ class RequestQueue {
   private queue: Array<() => Promise<any>> = [];
   private processing = false;
   private requestCount = 0;
-  private resetTime = Date.now() + 60000; // Reset every minute
+  private resetTime = Date.now() 60000; // Reset every minute
   private readonly maxRequestsPerMinute = 100;
 
   async add<T>(request: () => Promise<T>): Promise<T> {
@@ -76,30 +76,30 @@ class RequestQueue {
     });
   }
 
-  private async process(): Promise<void> {
-    if (this.processing || this.queue.length === 0) {
+  private async process() Promise<void> {
+    if (this.processing| this.queue.length === 0) {
 return;
 }
 
     this.processing = true;
 
-    while (this.queue.length > 0) {
+    while (this.queue.length 0) {
       // Reset counter if minute has passed
-      if (Date.now() > this.resetTime) {
+      if (Date.now() this.resetTime) {
         this.requestCount = 0;
-        this.resetTime = Date.now() + 60000;
+        this.resetTime = Date.now() 60000;
       }
 
       // Check rate limit
-      if (this.requestCount >= this.maxRequestsPerMinute) {
-        const waitTime = this.resetTime - Date.now();
+      if (this.requestCount= this.maxRequestsPerMinute) {
+        const waitTime = this.resetTime Date.now();
         await new Promise(resolve => setTimeout(resolve, waitTime));
         continue;
       }
 
       const request = this.queue.shift();
       if (request) {
-        this.requestCount++;
+        this.requestCount+;
         await request();
         // Small delay between requests
         await new Promise(resolve => setTimeout(resolve, 100));
@@ -195,7 +195,7 @@ export class VideoService {
     category = 'home',
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
+  ) Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `videos_${category}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -214,11 +214,11 @@ export class VideoService {
         }
 
         // Limit results and add pagination simulation
-        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0', 10) : 0;
+        const startIndex = pageToken ? parseInt(pageToken.split('_')[1] || '0', 10)  :  ;
         const endIndex = Math.min(startIndex + limit, videos.length);
         const paginatedVideos = videos.slice(startIndex, endIndex);
 
-        const nextPageToken = endIndex < videos.length ? `token_${endIndex}` : undefined;
+        const nextPageToken = endIndex < videos.length `token_${endIndex}` : undefined;
         return {
           videos: paginatedVideos,
           ...(nextPageToken && { nextPageToken }),
@@ -240,20 +240,24 @@ export class VideoService {
         url.searchParams.set('q', category);
       }
 
-      const response = await httpClient.get<any>(
+      const response = await httpClient.getany>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.MEDIUM,
       );
 
+<<<<<<< HEAD
+      const videos: Video[] = response.items.map((item: any) => ({
+=======
       const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
         duration: '0',
         thumbnailUrl: item.snippet.thumbnails.medium.url,
-        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-        views: '0',
+        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
+        views : '0,
         likes: 0,
         dislikes: 0,
         uploadedAt: item.snippet.publishedAt,
@@ -279,7 +283,11 @@ export class VideoService {
     }
   }
 
+<<<<<<< HEAD
+  static async getVideoById(id: string) Promise<Video | nul={true}l> {
+=======
   static async getVideoById(id): Promise<Video | null> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const cacheKey = `video_${id}`;
 
     try {
@@ -296,13 +304,13 @@ export class VideoService {
       url.searchParams.set('id', id);
       url.searchParams.set('key', API_KEY || '');
 
-      const response = await httpClient.get<any>(
+      const response = await httpClient.getany>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.LONG,
       );
 
-      const item = response.items[0];
+      const item = response.items.[0];
       if (!item) {
 return null;
 }
@@ -319,7 +327,7 @@ return null;
         uploadedAt: item.snippet.publishedAt| new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
+        videoUrl: `https://www.youtube.comwatch ? v=${item.id}`,
         channelId : item.snippet.channelI,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
@@ -339,7 +347,7 @@ return null;
     query,
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video[]; nextPageToken?: string }> {
+  ) Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `search_${query}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -350,7 +358,7 @@ return null;
         const { searchVideos } = await import('./realVideoService');
         const videos = await searchVideos(query);
 
-        const nextPageToken = Math.random() > 0.5 ? `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() 0.5 `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -368,20 +376,24 @@ return null;
         url.searchParams.set('pageToken', pageToken);
       }
 
-      const response = await httpClient.get<any>(
+      const response = await httpClient.getany>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.SHORT,
       );
 
+<<<<<<< HEAD
+      const videos: Video[] = response.items.map((item: any) => ({
+=======
       const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
         duration: '0',
         thumbnailUrl: item.snippet.thumbnails.medium.url,
-        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-        views: '0',
+        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
+        views : '0,
         likes: 0,
         dislikes: 0,
         uploadedAt: item.snippet.publishedAt,
@@ -407,7 +419,11 @@ return null;
     }
   }
 
+<<<<<<< HEAD
+  private static parseDuration(duration: any) number {
+=======
   private static parseDuration(duration): number {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
@@ -423,18 +439,22 @@ return 0;
 }
 
 // Mock data generator for development
+<<<<<<< HEAD
+function generateMockChannel(id: string) Channel {
+=======
 function generateMockChannel(id): Channel {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
   return {
     id,
     name: `Channel ${id}`,
     description: `Mock channel description for ${id}`,
-    avatarUrl: 'https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj',
-    banner: 'https://yt3.ggpht.com/a/default-user=s2560-c-k-c0x00ffffff-no-rj',
-    subscribers: Math.floor(Math.random() * 1000000),
-    subscriberCount: '1.2M',
-    videoCount: Math.floor(Math.random() * 500),
-    totalViews: Math.floor(Math.random() * 10000000),
-    isVerified: Math.random() > 0.5,
+    avatarUrl: 'https://yt3.ggpht.coma/default-user=s88-c-k-c0x00ffffff-no-rj',
+    banner: 'https://yt3.ggpht.coma/default-user=s2560-c-k-c0x00ffffff-no-rj',
+    subscribers: Math.floor(Math.random() 1000000),
+    subscriberCount: '1.2M,
+    videoCount: Math.floor(Math.random() 500),
+    totalViews: Math.floor(Math.random() 10000000),
+    isVerified: Math.random() 0.5,
     joinedDate: '2020-01-01',
     country: 'US',
     createdAt: new Date().toISOString(),
@@ -443,7 +463,11 @@ function generateMockChannel(id): Channel {
 }
 
 export class ChannelService {
+<<<<<<< HEAD
+  static async getChannel(id: string) Promise<Channel | nul={true}l> {
+=======
   static async getChannel(id): Promise<Channel | null> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const cacheKey = `channel_${id}`;
 
     try {
@@ -457,13 +481,13 @@ export class ChannelService {
       url.searchParams.set('id', id);
       url.searchParams.set('key', API_KEY || '');
 
-      const response = await httpClient.get<any>(
+      const response = await httpClient.getany>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.LONG,
       );
 
-      const item = response.items[0];
+      const item = response.items.[0];
       if (!item) {
 return null;
 }
@@ -473,10 +497,10 @@ return null;
         name: item.snippet.title,
         description: item.snippet.description,
         avatarUrl: item.snippet.thumbnails.medium.url,
-        banner: item.brandingSettings.image?.bannerExternalUrl || '',
-        subscribers: parseInt(item.statistics.subscriberCount || '0', 10),
-        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0', 10) / 1000)}K`,
-        videoCount: parseInt(item.statistics.videoCount || '0', 10),
+        banner: item.brandingSettings.image ? .bannerExternalUrl || '',
+        subscribers : parseInt(item.statistics.subscriberCount| '0, 10),
+        subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount| 0, 10) 1000)}K`,
+        videoCount: parseInt(item.statistics.videoCount| '0', 10),
         isVerified: false, // Would need to check separately
         createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString(),
@@ -491,7 +515,7 @@ return null;
     channelId,
     limit: number = 20,
     pageToken?: string,
-  ): Promise<{ videos: Video; nextPageToken?: string }> {
+  ) Promise<{ videos: Video; nextPageToken?: string }> {
     const cacheKey = `channel_videos_${channelId}_${limit}_${pageToken || 'first'}`;
 
     try {
@@ -502,7 +526,7 @@ return null;
         const { getVideosByChannelName } = await import('./realVideoService');
         const videos = await getVideosByChannelName(channelId);
 
-        const nextPageToken = Math.random() > 0.4 ? `token_${Date.now()}` : undefined;
+        const nextPageToken = Math.random() 0.4 `token_${Date.now()}` : undefined;
         return {
           videos,
           ...(nextPageToken && { nextPageToken }),
@@ -521,13 +545,17 @@ return null;
         url.searchParams.set('pageToken', pageToken);
       }
 
-      const response = await httpClient.get<any>(
+      const response = await httpClient.getany>(
         url.toString(),
         cacheKey,
         CACHE_DURATION.MEDIUM,
       );
 
+<<<<<<< HEAD
+      const videos: Video[] = response.items.map((item: any) => ({
+=======
       const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -539,7 +567,7 @@ return null;
         uploadedAt: item.snippet.publishedAt| new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        videoUrl: `https://www.youtube.comwatch ? v=${item.id.videoId}`,
         channelId : item.snippet.channelI,
         channelName: item.snippet.channelTitle,
         channelAvatarUrl: '',
@@ -562,7 +590,11 @@ return null;
 }
 
 export class PlaylistService {
+<<<<<<< HEAD
+  static async getUserPlaylists(_userId: any) Promise<UserPlaylist[]> {
+=======
   static async getUserPlaylists(_userId): Promise<UserPlaylist[]> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     try {
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -573,7 +605,7 @@ export class PlaylistService {
             title: 'Watch Later',
             description: 'Videos to watch later',
             videoIds: Array.from({ length: 15 }, (_, i) => `playlist_video_${i}`),
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+            createdAt: new Date(Date.now() 7 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date().toISOString(),
           },
           {
@@ -581,8 +613,8 @@ export class PlaylistService {
             title: 'Favorites',
             description: 'My favorite videos',
             videoIds: Array.from({ length: 8 }, (_, i) => `favorite_video_${i}`),
-            createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+            createdAt: new Date(Date.now() 30 * 24 * 60 * 60 * 1000).toISOString(),
+            updatedAt: new Date(Date.now() 2 * 24 * 60 * 60 * 1000).toISOString(),
           },
         ];
       }
@@ -604,3 +636,4 @@ export const cacheUtils = {
 };
 
 // Export for testing
+export { apiCache, requestQueue };
