@@ -11,13 +11,13 @@ import type { Video as VideoType } from '../src/types/core';
 interface WatchLaterContextType {
   watchLaterList: VideoType;
   addToWatchLater: (video: VideoType) => void;
-  removeFromWatchLater: (videoId: any) => void;
-  isWatchLater: (videoId: any) => boolean;
+  removeFromWatchLater: (videoId) => void;
+  isWatchLater: (videoId) => boolean;
 }
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider = ({ children }: {children: any}) => {
+export const WatchLaterProvider = ({ children }: {children}) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
     const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];
@@ -36,11 +36,11 @@ export const WatchLaterProvider = ({ children }: {children: any}) => {
     });
   };
 
-  const removeFromWatchLater = (videoId: any) => {
+  const removeFromWatchLater = (videoId) => {
     setWatchLaterList((prevList) => prevList.filter((video) => video.id !== videoId));
   };
 
-  const isWatchLater = (videoId: any) => {
+  const isWatchLater = (videoId) => {
     return watchLaterList.some(video => video.id === videoId);
   };
 

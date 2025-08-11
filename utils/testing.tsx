@@ -151,7 +151,7 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any));
+export const waitForTime = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
@@ -174,7 +174,7 @@ export class PerformanceTestHelper {
     if (this.measurements.length === 0) {
 return 0;
 }
-    return this.measurements.reduce((sum: any, time: any) => sum: any + time: any, 0) / this.measurements.length;
+    return this.measurements.reduce((sum, time) => sum + time, 0) / this.measurements.length;
   }
 
   getMinTime(): number {
@@ -228,7 +228,7 @@ export const createMemoryLeakTest = (testFn: () => void, iterations: number = 10
 };
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement, testId: any): HTMLElement => {
+export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
     throw new Error(`Element with test id "${testId}" not found`);
@@ -236,7 +236,7 @@ export const getByTestId = (container: HTMLElement, testId: any): HTMLElement =>
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement, testId: any): HTMLElement | null => {
+export const queryByTestId = (container: HTMLElement, testId): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
@@ -257,13 +257,13 @@ export const checkAccessibility = async (container: HTMLElement) => {
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement, name: any) => {
+export const takeSnapshot = (component: React.ReactElement, name) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response: any, status: number = 200) => {
+export const mockFetch = (response, status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: status >= 200 && status < 300,
@@ -335,7 +335,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
 
 // Test Suite Helpers
 export const describeWithSetup = (
-  name: any,
+  name,
   setup: () => void,
   tests: () => void,
 ) => {
@@ -371,7 +371,7 @@ export const testUtils = {
   simulateNetworkDelay: async (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
-  simulateKeyboardNavigation: async (element: HTMLElement, key: string) => {
+  simulateKeyboardNavigation: async (element: HTMLElement, key) => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);
@@ -390,7 +390,7 @@ export const testUtils = {
         break;
     }
   },
-  simulateFormInput: async (input: HTMLElement, value: any) => {
+  simulateFormInput: async (input: HTMLElement, value) => {
     const user = createUserEvent();
     await user.clear(input);
     await user.type(input, value);
@@ -459,7 +459,7 @@ declare global {
   namespace jest {
     interface Matchers<R> {
       toBeInViewport(): R;
-      toHaveAccessibleName(expectedName: any): R;
+      toHaveAccessibleName(expectedName): R;
     }
   }
 }

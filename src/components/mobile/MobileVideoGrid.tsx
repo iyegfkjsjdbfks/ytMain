@@ -16,13 +16,13 @@ interface MobileVideoGridProps {
 }
 
 interface MobileVideoItemProps {
-  index: number, style: React.CSSProperties;
+  index, style: React.CSSProperties;
   data: {
     videos: Video, onVideoClick: (video: Video) => void
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any, style: any; index: number}) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data, style; index: number}) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);

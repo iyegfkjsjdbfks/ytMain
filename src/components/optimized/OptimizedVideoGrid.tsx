@@ -16,11 +16,11 @@ interface OptimizedVideoGridProps {
 
 // Memoized video item component
 const VideoGridItem = memo<{
-  columnIndex: number, rowIndex: number;
+  columnIndex, rowIndex: number;
   style: React.CSSProperties, data: {
     videos: Video, itemsPerRow: number; onVideoClick:(video: Video) => void
   };
-}>(({ columnIndex, rowIndex, style, data }: {data: any, style: any; rowIndex: number, columnIndex: number}) => {
+}>(({ columnIndex, rowIndex, style, data }: {data, style; rowIndex, columnIndex: number}) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];

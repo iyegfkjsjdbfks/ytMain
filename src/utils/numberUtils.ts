@@ -8,7 +8,7 @@
  * @param viewsStr The view count string to parse.
  * @returns The parsed number.
  */
-export const parseViewCount = (viewsStr: any): number => {
+export const parseViewCount = (viewsStr): number => {
   if (!viewsStr || typeof viewsStr !== 'string') {
     return 0;
   }
@@ -33,7 +33,7 @@ export const parseViewCount = (viewsStr: any): number => {
  * @param digits The number of decimal digits (optional, default 0 for K/M/B, 1 if needed).
  * @returns A string representation of the number with suffix.
  */
-export const formatCount = (num: any, digits: number = 0): string => {
+export const formatCount = (num, digits: number = 0): string => {
   if (isNaN(num) || num < 0) {
 return '0';
 }
@@ -64,7 +64,7 @@ export const formatNumber = formatCount;
  * @param seconds The duration in seconds
  * @returns A string representation of the duration
  */
-export const formatDuration = (seconds: any): string => {
+export const formatDuration = (seconds): string => {
   if (isNaN(seconds) || seconds < 0) {
 return '0:00';
 }
@@ -85,7 +85,7 @@ return '0:00';
  * @param num The number to format
  * @returns A string with comma separators
  */
-export const formatWithCommas = (num: any): string => {
+export const formatWithCommas = (num): string => {
   if (isNaN(num)) {
 return '0';
 }
@@ -98,7 +98,7 @@ return '0';
  * @param decimals Number of decimal places
  * @returns Formatted percentage string
  */
-export const formatPercentage = (value: any, decimals: number = 1): string => {
+export const formatPercentage = (value, decimals: number = 1): string => {
   if (isNaN(value)) {
 return '0%';
 }
@@ -110,7 +110,7 @@ return '0%';
  * @param bytes The size in bytes
  * @returns Formatted file size string
  */
-export const formatFileSize = (bytes: any): string => {
+export const formatFileSize = (bytes): string => {
   if (isNaN(bytes) || bytes < 0) {
 return '0 B';
 }

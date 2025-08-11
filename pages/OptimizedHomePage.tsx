@@ -37,7 +37,7 @@ const categories = [
   'Food',
 ];
 
-const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {className: any}) => {
+const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {className}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({
@@ -61,11 +61,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video.category === selectedCategory);
+    return videos.filter((video) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   // Event handlers
-  const handleCategorySelect = useCallback((category: any) => {
+  const handleCategorySelect = useCallback((category) => {
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -75,7 +75,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     window.location.hash = `/watch/${video.id}`;
   }, []);
 
-  const handleChannelClick = useCallback((channelId: any) => {
+  const handleChannelClick = useCallback((channelId) => {
     // Navigate to channel page
     window.location.hash = `/channel/${channelId}`;
   }, []);

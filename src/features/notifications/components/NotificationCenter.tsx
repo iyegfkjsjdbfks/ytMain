@@ -13,8 +13,8 @@ interface NotificationCenterProps {
 
 interface NotificationItemProps {
   notification: Notification;
-  onMarkAsRead: (id: string) => void;
-  onDelete: (id: string) => void;
+  onMarkAsRead: (id) => void;
+  onDelete: (id) => void;
   onClick: (notification: Notification) => void;
 }
 

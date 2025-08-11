@@ -16,7 +16,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function, onTimeUpdate: Function; video: any}) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function, onTimeUpdate: Function; video}) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -32,12 +32,12 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function, onTim
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean, onVideoSelect: Function; videos: any}) => (
+const VideoList = ({ videos, onVideoSelect, loading }: {loading, onVideoSelect: Function; videos}) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
     ) : (
-      videos.map((video: any) => (
+      videos.map((video) => (
         <div
           key={video.id}
           data-testid={`video-item-${video.id}`}
@@ -54,7 +54,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean, onVide
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }: {onAddComment: Function, comments: any}) => {
+const CommentSection = ({ comments, onAddComment }: {onAddComment: Function, comments}) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,7 +83,7 @@ const CommentSection = ({ comments, onAddComment }: {onAddComment: Function, com
       </form>
 
       <div className="comments-list">
-        {comments.map((comment: any) => (
+        {comments.map((comment) => (
           <div key={comment.id} data-testid={`comment-${comment.id}`} className="comment">
             <img src={comment.author.avatar} alt={comment.author.name} />
             <div>
@@ -135,7 +135,7 @@ const VideoPage = () => {
     loadData();
   }, []);
 
-  const handleVideoSelect = async (video: any) => {
+  const handleVideoSelect = async (video) => {
     setCurrentVideo(video);
     setWatchTime(0);
 
@@ -149,7 +149,7 @@ const VideoPage = () => {
     }
   };
 
-  const handleAddComment = async (text: any) => {
+  const handleAddComment = async (text) => {
     if (!currentVideo) {
 return;
 }
@@ -413,7 +413,7 @@ describe('Integration Tests', () => {
       expect(screen.getByText(`Comments (${mockComments.length})`)).toBeInTheDocument();
 
       // Should display each comment
-      mockComments.forEach((comment: any) => {
+      mockComments.forEach((comment) => {
         expect(screen.getByTestId(`comment-${comment.id}`)).toBeInTheDocument();
         expect(screen.getByText(comment.text)).toBeInTheDocument();
         expect(screen.getByText(comment.author.name)).toBeInTheDocument();

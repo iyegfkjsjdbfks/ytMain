@@ -48,7 +48,7 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'required' | 'className'>, BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
-  options: Array<{ value: string, label: string; disabled?: boolean }>;
+  options: Array<{ value, label: string; disabled?: boolean }>;
   placeholder?: string;
 }
 
@@ -60,7 +60,7 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 // Radio component props
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'required' | 'className'>, BaseFieldProps {
   size?: InputSize;
-  options: Array<{ value: string, label: string; disabled?: boolean }>;
+  options: Array<{ value, label: string; disabled?: boolean }>;
 }
 
 // Style mappings
@@ -81,7 +81,7 @@ const FieldLabel: React.FC<{
   htmlFor?: string;
   required?: boolean;
   className?: string; children: React.ReactNode
-}> = ({ htmlFor, required, className, children }: {children: any, className: any; required: any, htmlFor: any}) => (
+}> = ({ htmlFor, required, className, children }: {children, className; required, htmlFor}) => (
   <label
     htmlFor={htmlFor}
     className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
@@ -95,7 +95,7 @@ const FieldLabel: React.FC<{
 const FieldError: React.FC<{
   error?: string;
   className?: string;
-}> = ({ error, className }: {className: any, error: Error}) => {
+}> = ({ error, className }: {className, error: Error}) => {
   if (!error) {
 return null;
 }
@@ -111,7 +111,7 @@ return null;
 const FieldHint: React.FC<{
   hint?: string;
   className?: string;
-}> = ({ hint, className }: {className: any, hint: any}) => {
+}> = ({ hint, className }: {className, hint}) => {
   if (!hint) {
 return null;
 }
@@ -494,7 +494,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 export const FormGroup: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }: {className: any, children: any}) => (
+}> = ({ children, className }: {className, children}) => (
   <div className={cn('space-y-4', className)}>
     {children}
   </div>
@@ -505,7 +505,7 @@ export const FormActions: React.FC<{
   children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
-}> = ({ children, className, align = 'right' }: {className: any, children: any}) => {
+}> = ({ children, className, align = 'right' }: {className, children}) => {
   const alignClasses = {
     left: 'justify-start',
     center: 'justify-center', right: 'justify-end'

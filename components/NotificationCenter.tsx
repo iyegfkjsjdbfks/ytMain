@@ -204,7 +204,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     return names[Math.floor(Math.random() * names.length)] || 'Unknown Channel';
   };
 
-  const markAsRead = (notificationId: any) => {
+  const markAsRead = (notificationId) => {
     const updatedNotifications = notifications.map(n =>
       n.id === notificationId ? { ...n, isRead: true } : n,
     );
@@ -220,7 +220,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
-  const deleteNotification = (notificationId: any) => {
+  const deleteNotification = (notificationId) => {
     const notification = notifications.find(n => n.id === notificationId);
     const updatedNotifications = notifications.filter((n) => n.id !== notificationId);
     setNotifications(updatedNotifications);

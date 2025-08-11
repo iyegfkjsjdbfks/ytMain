@@ -22,7 +22,7 @@ interface YTPlayer {
   playVideo(): void;
   pauseVideo(): void;
   stopVideo(): void;
-  seekTo(seconds: any, allowSeekAhead?: boolean): void;
+  seekTo(seconds, allowSeekAhead?: boolean): void;
   clearVideo(): void;
   getVideoLoadedFraction(): number;
   getPlayerState(): number;
@@ -32,16 +32,16 @@ interface YTPlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string;
   getPlaylistIndex(): number;
-  setLoop(loopPlaylists: any): void;
-  setShuffle(shufflePlaylist: any): void;
+  setLoop(loopPlaylists): void;
+  setShuffle(shufflePlaylist): void;
   getVolume(): number;
-  setVolume(volume: any): void;
+  setVolume(volume): void;
   mute(): void;
   unMute(): void;
   isMuted(): boolean;
-  setSize(width: any, height: any): object;
+  setSize(width, height): object;
   getPlaybackRate(): number;
-  setPlaybackRate(suggestedRate: any): void;
+  setPlaybackRate(suggestedRate): void;
   getAvailablePlaybackRates(): number;
   destroy(): void;
 }

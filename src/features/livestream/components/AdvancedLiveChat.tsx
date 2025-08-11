@@ -8,7 +8,7 @@ interface AdvancedLiveChatProps {
   isModerator?: boolean;
 }
 
-const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }: {isModerator: boolean; isOwner: boolean; className: any; streamId: string}) => {
+const AdvancedLiveChat: React.FC<AdvancedLiveChatProps> = ({ streamId, className, isOwner, isModerator }: {isModerator: boolean; isOwner: boolean; className; streamId: string}) => {
   return (
     <div className={className}>
       <div className="p-4">

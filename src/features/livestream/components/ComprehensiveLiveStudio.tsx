@@ -151,8 +151,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       // Enable multiplatform if configured
       if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
         const enabledPlatforms = streamSettings.platforms
-          .filter((p: any) => p.enabled)
-          .map((p: any) => p.name);
+          .filter((p) => p.enabled)
+          .map((p) => p.name);
 
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
@@ -237,7 +237,7 @@ return;
     }
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;

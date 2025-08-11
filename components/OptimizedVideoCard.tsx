@@ -33,12 +33,12 @@ class ImageCacheManager {
   private readonly maxSize = 100;
   private readonly maxAge = 30 * 60 * 1000; // 30 minutes
 
-  add(url: any) {
+  add(url) {
     this.cleanup();
     this.cache.set(url, { timestamp: Date.now(), url });
   }
 
-  has(url: any): boolean {
+  has(url): boolean {
     const entry = this.cache.get(url);
     if (!entry) {
 return false;
@@ -82,7 +82,7 @@ interface OptimizedVideoCardProps {
   showDescription?: boolean;
   className?: string;
   onClick?: (video: Video) => void;
-  onChannelClick?: (channelId: any) => void;
+  onChannelClick?: (channelId) => void;
   lazy?: boolean;
   priority?: 'high' | 'low';
   index?: number;
@@ -628,7 +628,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
         {/* Tags */}
         {video.tags && video.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2" role="list" aria-label="Video tags">
-            {video.tags.slice(0, 3).map((tag: string) => (
+            {video.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"

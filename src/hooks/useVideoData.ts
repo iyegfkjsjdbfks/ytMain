@@ -34,7 +34,7 @@ export function useTrendingVideos(category = 'all') {
     // If category-specific API available, use it, then normalize to Video[]
     if (category && category !== 'all' && typeof getVideosByCategory === 'function') {
       const byCategory = await getVideosByCategory(category);
-      const normalized = (byCategory as any).map((v: any) => ({
+      const normalized = (byCategory as any).map((v) => ({
         // realVideoService returns fields like thumbnailUrl/publishedAt etc.
         // Map to Video shape expected by UI where necessary
         ...v,
@@ -49,7 +49,7 @@ export function useTrendingVideos(category = 'all') {
 
     // Fallback: get all videos then sort/filter
     const allVideosRaw = await getVideos();
-    const allVideos = (allVideosRaw as any).map((v: any) => ({
+    const allVideos = (allVideosRaw as any).map((v) => ({
       ...v,
       thumbnail: (v as any).thumbnail ?? (v as any).thumbnailUrl ?? '',
       publishedAt: (v as any).publishedAt ?? (v as any).uploadedAt ?? '',
@@ -103,7 +103,7 @@ export function useSubscriptionsFeed() {
 /**
  * Hook for fetching videos by channel name
  */
-export function useChannelVideos(channelName: any) {
+export function useChannelVideos(channelName) {
   const fetchChannelVideos = useCallback(() =>
     getVideosByChannelName(channelName), [channelName],
   );

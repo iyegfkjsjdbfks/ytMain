@@ -30,7 +30,7 @@ return;
       setError(null);
       try {
         // Mock local video search function
-        const searchLocalVideos = async (_searchQuery: any): Promise<Video[]> => {
+        const searchLocalVideos = async (_searchQuery): Promise<Video[]> => {
           // Return empty array for now - this would normally search local videos
           return [];
         };
@@ -38,7 +38,7 @@ return;
         const results = await searchForSearchResultsPage(query, searchLocalVideos);
         // Convert search results to Video format
         const videoResults: Video[] = [
-          ...results.youtubeVideos.map((video: any) => ({
+          ...results.youtubeVideos.map((video) => ({
             id: video.id,
             title: video.title,
             description: video.description,
@@ -64,7 +64,7 @@ return;
             dislikeCount: video.dislikeCount || 0,
             commentCount: video.commentCount || 0,
           })),
-          ...(results.googleSearchVideos || []).map((video: any) => ({
+          ...(results.googleSearchVideos || []).map((video) => ({
             id: video.id,
             title: video.title,
             description: video.description,

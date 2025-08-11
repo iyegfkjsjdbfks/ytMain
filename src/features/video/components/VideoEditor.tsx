@@ -152,9 +152,9 @@ export const VideoEditor: React.FC = () => {
     }));
   };
 
-  const splitClip = (clipId: any, splitTime: any) => {
+  const splitClip = (clipId, splitTime) => {
     setEditorState(prev => {
-      const clipIndex = prev.clips.findIndex((c: any) => c.id === clipId);
+      const clipIndex = prev.clips.findIndex((c) => c.id === clipId);
       if (clipIndex === -1) {
 return prev;
 }
@@ -189,10 +189,10 @@ return prev;
     });
   };
 
-  const deleteClip = (clipId: any) => {
+  const deleteClip = (clipId) => {
     setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter((c: any) => c.id !== clipId),
+      clips: prev.clips.filter((c) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };
@@ -235,7 +235,7 @@ return;
     alert('Video export started! This would normally process the video with all edits applied.');
   };
 
-  const formatTime = (seconds: any) => {
+  const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -284,11 +284,11 @@ return;
 
               {/* Text Overlays Preview */}
               {editorState.textOverlays
-                .filter((overlay: any) =>
+                .filter((overlay) =>
                   editorState.currentTime >= overlay.startTime &&
                   editorState.currentTime <= overlay.endTime,
                 )
-                .map((overlay: any) => (
+                .map((overlay) => (
                   <div
                     key={overlay.id}
                     className="absolute pointer-events-none"
@@ -366,7 +366,7 @@ return;
               <div className="mt-2">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Video</div>
                 <div className="relative h-16 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.clips.map((clip: any) => (
+                  {editorState.clips.map((clip) => (
                     <div
                       key={clip.id}
                       className={`absolute h-full bg-blue-500 rounded cursor-pointer border-2 ${
@@ -390,7 +390,7 @@ return;
               <div className="mt-4">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Audio</div>
                 <div className="relative h-12 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.audioTracks.map((track: any) => (
+                  {editorState.audioTracks.map((track) => (
                     <div
                       key={track.id}
                       className="absolute h-full bg-green-500 rounded"
@@ -411,7 +411,7 @@ return;
               <div className="mt-4">
                 <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Text</div>
                 <div className="relative h-8 bg-gray-200 dark:bg-gray-700 rounded">
-                  {editorState.textOverlays.map((overlay: any) => (
+                  {editorState.textOverlays.map((overlay) => (
                     <div
                       key={overlay.id}
                       className="absolute h-full bg-purple-500 rounded"
@@ -456,12 +456,12 @@ return;
                   min="0"
                   max="1"
                   step="0.1"
-                  value={editorState.clips.find((c: any) => c.id === editorState.selectedClip)?.volume || 1}
+                  value={editorState.clips.find((c) => c.id === editorState.selectedClip)?.volume || 1}
                   onChange={(e) => {
                     const volume = parseFloat(e.target.value);
                     setEditorState(prev => ({
                       ...prev,
-                      clips: prev.clips.map((clip: any) =>
+                      clips: prev.clips.map((clip) =>
                         clip.id === prev.selectedClip ? { ...clip, volume } : clip,
                       ),
                     }));

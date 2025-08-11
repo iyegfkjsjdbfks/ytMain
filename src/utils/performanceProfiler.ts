@@ -4,7 +4,7 @@ import React from 'react';
 
 export const withPerformanceProfiler = <P extends object>(
   Component: React.ComponentType<P>,
-  componentName: any,
+  componentName,
 ) => {
   const WrappedComponent = (props: P) => {
     if (process.env.NODE_ENV === 'development') {
