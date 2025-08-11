@@ -560,14 +560,14 @@ multiplier = 1000000000;
 };
 
 // Helper function to extract video ID from YouTube URL
-const extractVideoIdFromUrl = (url): string | null => {
+const extractVideoIdFromUrl = (url: any): string | null => {
   const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regex);
   return match ? (match[1] || null) : null;
 };
 
 // Helper function to parse ISO 8601 duration to seconds
-const parseDuration = (duration): number => {
+const parseDuration = (duration: any): number => {
   const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
   if (!match) {
 return 0;
@@ -581,7 +581,7 @@ return 0;
 };
 
 // Helper function to format duration from seconds to MM:SS or HH:MM:SS
-const formatDuration = (seconds): string => {
+const formatDuration = (seconds: any): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
@@ -593,7 +593,7 @@ const formatDuration = (seconds): string => {
 };
 
 // Helper function to format view count for display
-const formatViewCount = (viewCount): string => {
+const formatViewCount = (viewCount: any): string => {
   if (viewCount >= 1000000000) {
     return `${(viewCount / 1000000000).toFixed(1).replace(/\.0$/, '')}B`;
   }
@@ -607,7 +607,7 @@ const formatViewCount = (viewCount): string => {
 };
 
 // Fetch detailed video information from YouTube Data API v3 (with blocking check)
-const fetchVideoDetails = async (videoIds): Promise<Map<string, YouTubeVideoDetails>> => {
+const fetchVideoDetails = async (videoIds: any): Promise<Map<string, YouTubeVideoDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -617,7 +617,7 @@ const fetchVideoDetails = async (videoIds): Promise<Map<string, YouTubeVideoDeta
 };
 
 // Internal function to fetch video details without blocking check
-const fetchVideoDetailsInternal = async (videoIds): Promise<Map<string, YouTubeVideoDetails>> => {
+const fetchVideoDetailsInternal = async (videoIds: any): Promise<Map<string, YouTubeVideoDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || videoIds.length === 0) {
@@ -640,7 +640,7 @@ const fetchVideoDetailsInternal = async (videoIds): Promise<Map<string, YouTubeV
     const data: YouTubeVideoDetailsResponse = await response.json();
     const detailsMap = new Map<string, YouTubeVideoDetails>();
 
-    data.items.forEach((item) => {
+    data.items.forEach((item: any) => {
       detailsMap.set(item.id, item);
     });
 
@@ -652,7 +652,7 @@ const fetchVideoDetailsInternal = async (videoIds): Promise<Map<string, YouTubeV
 };
 
 // Fetch channel information from YouTube Data API v3 (with blocking check)
-const fetchChannelDetails = async (channelIds): Promise<Map<string, YouTubeChannelDetails>> => {
+const fetchChannelDetails = async (channelIds: any): Promise<Map<string, YouTubeChannelDetails>> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -662,7 +662,7 @@ const fetchChannelDetails = async (channelIds): Promise<Map<string, YouTubeChann
 };
 
 // Internal function to fetch channel details without blocking check
-const fetchChannelDetailsInternal = async (channelIds): Promise<Map<string, YouTubeChannelDetails>> => {
+const fetchChannelDetailsInternal = async (channelIds: any): Promise<Map<string, YouTubeChannelDetails>> => {
 
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   if (!apiKey || channelIds.length === 0) {
@@ -685,7 +685,7 @@ const fetchChannelDetailsInternal = async (channelIds): Promise<Map<string, YouT
     const data: YouTubeChannelDetailsResponse = await response.json();
     const channelMap = new Map<string, YouTubeChannelDetails>();
 
-    data.items.forEach((item) => {
+    data.items.forEach((item: any) => {
       channelMap.set(item.id, item);
     });
 
@@ -697,7 +697,7 @@ const fetchChannelDetailsInternal = async (channelIds): Promise<Map<string, YouT
 };
 
 // Search YouTube videos using YouTube Data API v3 with enhanced metadata
-export const searchYouTubeVideos = async (query): Promise<YouTubeSearchResult[]> => {
+export const searchYouTubeVideos = async (query: any): Promise<YouTubeSearchResult[]> => {
   // Check if YouTube Data API is blocked by admin settings
   if (isYouTubeDataApiBlocked()) {
     console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -736,8 +736,8 @@ export const searchYouTubeVideos = async (query): Promise<YouTubeSearchResult[]>
     }
 
     // Extract video IDs and channel IDs for batch fetching
-    const videoIds = data.items.map((item) => item.id.videoId);
-    const channelIds = [...new Set(data.items.map((item) => item.snippet.channelId))];
+    const videoIds = data.items.map((item: any) => item.id.videoId);
+    const channelIds = [...new Set(data.items.map((item: any) => item.snippet.channelId))];
 
     // Fetch enhanced metadata in parallel
     const [videoDetailsMap, channelDetailsMap] = await Promise.all([
@@ -746,7 +746,7 @@ export const searchYouTubeVideos = async (query): Promise<YouTubeSearchResult[]>
     ]);
 
     // Convert YouTube API results to our format with enhanced metadata
-    const youtubeResults = data.items.map((item) => {
+    const youtubeResults = data.items.map((item: any) => {
       const videoDetails = videoDetailsMap.get(item.id.videoId);
       const channelDetails = channelDetailsMap.get(item.snippet.channelId);
       return convertToYouTubeResult(item, videoDetails, channelDetails);
@@ -769,7 +769,7 @@ export const searchYouTubeVideos = async (query): Promise<YouTubeSearchResult[]>
 };
 
 // Search YouTube videos using Google Custom Search JSON API with enhanced metadata
-export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearchResult[]> => {
+export const searchYouTubeWithGoogleSearch = async (query: any): Promise<GoogleSearchResult[]> => {
   // Check for Google Custom Search API key and engine ID
   const apiKey = import.meta.env.VITE_GOOGLE_SEARCH_API_KEY;
   const engineId = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
@@ -802,12 +802,12 @@ export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearch
     }
 
     // Filter for YouTube video results
-    const youtubeItems = data.items.filter((item) => item.link.includes('youtube.com/watch'));
+    const youtubeItems = data.items.filter((item: any) => item.link.includes('youtube.com/watch'));
 
     // Extract video IDs for enhanced metadata fetching
     const videoIds = youtubeItems
-      .map((item) => extractVideoIdFromUrl(item.link))
-      .filter((id): id is string => id !== null);
+      .map((item: any) => extractVideoIdFromUrl(item.link))
+      .filter((id: string): id is string => id !== null);
 
     let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
     let channelDetailsMap = new Map<string, YouTubeChannelDetails>();
@@ -841,7 +841,7 @@ export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearch
     }
 
     // Convert to our format with enhanced metadata when available
-    const youtubeResults = youtubeItems.map((item) => {
+    const youtubeResults = youtubeItems.map((item: any) => {
       const videoId = extractVideoIdFromUrl(item.link);
       const videoDetails = videoId ? videoDetailsMap.get(videoId) : undefined;
       const channelDetails = videoDetails ? channelDetailsMap.get(videoDetails.snippet.channelId) : undefined;
@@ -860,7 +860,7 @@ export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearch
 };
 
 // Search function specifically for home page - respects hybrid mode preference
-export const searchForHomePage = async (query, searchLocalVideos: (query) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+export const searchForHomePage = async (query: any, searchLocalVideos: (query: any) => Promise<Video[]>): Promise<CombinedSearchResult> => {
   console.log('🏠 searchForHomePage called with query:', query);
   try {
     // Import settings service dynamically to avoid circular dependencies
@@ -936,7 +936,7 @@ export const searchForHomePage = async (query, searchLocalVideos: (query) => Pro
 };
 
 // Search function specifically for search results page - always uses Google Custom Search for discovery
-export const searchForSearchResultsPage = async (query, searchLocalVideos: (query) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+export const searchForSearchResultsPage = async (query: any, searchLocalVideos: (query: any) => Promise<Video[]>): Promise<CombinedSearchResult> => {
   console.log('🔍 searchForSearchResultsPage called with query:', query);
   try {
     // Import settings service dynamically to avoid circular dependencies
@@ -993,14 +993,14 @@ export const searchForSearchResultsPage = async (query, searchLocalVideos: (quer
 };
 
 // Legacy combined search function - kept for backward compatibility
-export const searchCombined = async (query, searchLocalVideos: (query) => Promise<Video[]>): Promise<CombinedSearchResult> => {
+export const searchCombined = async (query: any, searchLocalVideos: (query: any) => Promise<Video[]>): Promise<CombinedSearchResult> => {
   console.log('🔍 searchCombined called with query (legacy):', query);
   // Default to search results page behavior for backward compatibility
   return searchForSearchResultsPage(query, searchLocalVideos);
 };
 
 // Fetch a single video by YouTube ID from Google Custom Search
-export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId): Promise<GoogleSearchResult | null> => {
+export const fetchSingleVideoFromGoogleSearch = async (youtubeVideoId: any): Promise<GoogleSearchResult | null> => {
   console.log(`🔍 Fetching single video from Google Custom Search: ${youtubeVideoId}`);
 
   try {
@@ -1385,7 +1385,7 @@ multiplier = 1000000000;
 };
 
 // Helper function to extract channel name from video title
-function extractChannelFromTitle(title): string | null {
+function extractChannelFromTitle(title: any): string | null {
   // Remove " - YouTube" suffix first
   const cleanTitle = title.replace(/ - YouTube$/, '').replace(/\s*\|\s*YouTube$/, '');
 
@@ -1414,7 +1414,7 @@ function extractChannelFromTitle(title): string | null {
 }
 
 // Helper function to generate a channel avatar URL
-function generateChannelAvatarUrl(channelName): string {
+function generateChannelAvatarUrl(channelName: any): string {
   // Use a placeholder avatar service
   const encodedName = encodeURIComponent(channelName);
   return `https://ui-avatars.com/api/?name=${encodedName}&size=48&background=random`;

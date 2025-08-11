@@ -25,7 +25,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
   AsyncState<T>,
   {
     setData: (data: T | null) => void;
-    setLoading: (loading) => void;
+    setLoading: (loading: any) => void;
     setError: (error: Error | null) => void;
     reset: () => void;
   }
@@ -46,7 +46,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
     }));
   }, []);
 
-  const setLoading = useCallback((loading) => {
+  const setLoading = useCallback((loading: any) => {
     setState(prev => ({ ...prev, loading }));
   }, []);
 
@@ -201,7 +201,7 @@ export interface FormActions<T extends Record<string, any>> {
   setValue: <K extends keyof T>(field: K, value: T[K]) => void;
   setError: <K extends keyof T>(field: K, error: string | null) => void;
   setTouched: <K extends keyof T>(field: K, touched?: boolean) => void;
-  setSubmitting: (submitting) => void;
+  setSubmitting: (submitting: any) => void;
   setSubmitError: (error: string | null) => void;
   reset: () => void;
   validate: () => boolean;
@@ -276,7 +276,7 @@ export function useForm<T extends Record<string, any>>(
     });
   }, []);
 
-  const setSubmitting = useCallback((submitting) => {
+  const setSubmitting = useCallback((submitting: any) => {
     setState(prev => ({ ...prev, isSubmitting: submitting }));
   }, []);
 
@@ -379,14 +379,14 @@ isValid = false;
 }
 
 // Unified toggle hook
-export function useToggle(initialValue: boolean = false): [boolean, () => void, (value) => void] {
+export function useToggle(initialValue: boolean = false): [boolean, () => void, (value: string | number) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => {
     setValue(prev => !prev);
   }, []);
 
-  const setToggle = useCallback((newValue) => {
+  const setToggle = useCallback((newValue: any) => {
     setValue(newValue);
   }, []);
 
@@ -394,7 +394,7 @@ export function useToggle(initialValue: boolean = false): [boolean, () => void, 
 }
 
 // Unified debounce hook
-export function useDebounce<T>(value: T, delay): T {
+export function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -412,7 +412,7 @@ export function useDebounce<T>(value: T, delay): T {
 
 // Unified local storage hook
 export function useLocalStorage<T>(
-  key,
+  key: string,
   initialValue: T,
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -480,7 +480,7 @@ return;
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitor(name) {
+export function usePerformanceMonitor(name: string) {
   const startTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
@@ -493,7 +493,7 @@ export function usePerformanceMonitor(name) {
     };
   }, [name]);
 
-  const mark = useCallback((__label) => {
+  const mark = useCallback((__label: any) => {
     // const __duration = Date.now() - startTimeRef.current;
     if (import.meta.env.MODE === 'development') {
       }

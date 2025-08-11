@@ -361,7 +361,7 @@ export const testUtils = {
 
     const dataTransfer = {
       files,
-      items: files.map((file) => ({
+      items: files.map((file: any) => ({
         kind: 'file',
         type: file.type,
         getAsFile: () => file,

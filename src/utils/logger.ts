@@ -87,17 +87,17 @@ return;
     }
   }
 
-  private sendToRemoteService(_message, _error: Error): void {
+  private sendToRemoteService(_message: any, _error: Error): void {
     // Implement remote logging service integration here
     // For example: Sentry, LogRocket, etc.
   }
 
   // Utility methods for common logging patterns
-  apiCall(method, url, data?: unknown): void {
+  apiCall(method: any, url: any, data?: unknown): void {
     this.debug(`API ${method} ${url}`, data);
   }
 
-  apiResponse(method, url, status, data?: unknown): void {
+  apiResponse(method: any, url: any, status: any, data?: unknown): void {
     if (status >= 400) {
       this.error(`API ${method} ${url} failed with status ${status}`, undefined, data);
     } else {
@@ -105,11 +105,11 @@ return;
     }
   }
 
-  userAction(action, data?: Record<string, unknown>): void {
+  userAction(action: any, data?: Record<string, unknown>): void {
     this.info(`User action: ${action}`, data);
   }
 
-  performance(operation, duration): void {
+  performance(operation: any, duration: any): void {
     this.debug(`Performance: ${operation} took ${duration}ms`);
   }
 }

@@ -24,9 +24,9 @@ interface VideoDescriptionProps {
   isSubscribed?: boolean;
   showFullDescription?: boolean;
   isSummarizing?: boolean;
-  onSubscribe?: (channelId) => void;
-  onLike?: (videoId) => void;
-  onShare?: (videoId) => void;
+  onSubscribe?: (channelId: any) => void;
+  onLike?: (videoId: any) => void;
+  onShare?: (videoId: any) => void;
   onToggleDescription?: () => void;
 }
 

@@ -115,7 +115,7 @@ const StudioPage: React.FC = () => {
     loadStudioData();
   }, []);
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -125,7 +125,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const getStatusColor = (status): string => {
+  const getStatusColor = (status: any): string => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/30';
       case 'draft': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/30';

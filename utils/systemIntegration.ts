@@ -481,7 +481,7 @@ return 'degraded';
   }
 
   // Event handling methods
-  private handlePerformanceAlert(data): void {
+  private handlePerformanceAlert(data: any): void {
     this.emitEvent({
       type: 'performance',
       source: 'PerformanceMonitor',
@@ -492,7 +492,7 @@ return 'degraded';
     });
   }
 
-  private handleSecurityThreat(data): void {
+  private handleSecurityThreat(data: any): void {
     this.emitEvent({
       type: 'security',
       source: 'SecurityMonitor',
@@ -503,7 +503,7 @@ return 'degraded';
     });
   }
 
-  private handleDeploymentFailure(data): void {
+  private handleDeploymentFailure(data: any): void {
     this.emitEvent({
       type: 'deployment',
       source: 'DeploymentAutomation',
@@ -514,7 +514,7 @@ return 'degraded';
     });
   }
 
-  private handleQualityDegradation(data): void {
+  private handleQualityDegradation(data: any): void {
     this.emitEvent({
       type: 'quality',
       source: 'CodeQualityMonitor',
@@ -525,7 +525,7 @@ return 'degraded';
     });
   }
 
-  private handleFeatureRollback(data): void {
+  private handleFeatureRollback(data: any): void {
     this.emitEvent({
       type: 'feature',
       source: 'FeatureFlagManager',
@@ -564,7 +564,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType, handler: (...args: unknown) => void): void {
+  private addEventListener(eventType: any, handler: (...args: unknown) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }
@@ -587,24 +587,24 @@ return 'degraded';
 
   getRecentEvents(limit: number = 50): SystemEvent[] {
     return this.events
-      .sort((a, b) => b.timestamp - a.timestamp)
+      .sort((a: any, b: any) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getEventsByType(type: SystemEvent['type'], limit: number = 20): SystemEvent[] {
     return this.events
       .filter((event: Event) => event.type === type)
-      .sort((a, b) => b.timestamp - a.timestamp)
+      .sort((a: any, b: any) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getCriticalEvents(): SystemEvent[] {
     return this.events
       .filter((event: Event) => event.severity === 'critical')
-      .sort((a, b) => b.timestamp - a.timestamp);
+      .sort((a: any, b: any) => b.timestamp - a.timestamp);
   }
 
-  acknowledgeEvent(eventId): void {
+  acknowledgeEvent(eventId: any): void {
     const event = this.events.find((e: Event) => e.id === eventId);
     if (event) {
       event.handled = true;

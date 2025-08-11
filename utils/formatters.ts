@@ -5,7 +5,7 @@
 /**
  * Format duration from seconds to MM:SS or HH:MM:SS format
  */
-export const formatDuration = (seconds): string => {
+export const formatDuration = (seconds: any): string => {
   if (isNaN(seconds) || seconds < 0) {
 return '0:00';
 }
@@ -24,7 +24,7 @@ return '0:00';
 /**
  * Format view count with appropriate suffixes (K, M, B)
  */
-export const formatViews = (views): string => {
+export const formatViews = (views: any): string => {
   if (isNaN(views) || views < 0) {
 return '0';
 }
@@ -50,7 +50,7 @@ return '0';
 /**
  * Format upload date to relative time (e.g., "2 hours ago", "3 days ago")
  */
-export const formatTimeAgo = (dateString): string => {
+export const formatTimeAgo = (dateString: any): string => {
   try {
     const date = new Date(dateString);
     const now = new Date();
@@ -96,7 +96,7 @@ export const formatTimeAgo = (dateString): string => {
 /**
  * Format file size in bytes to human readable format
  */
-export const formatFileSize = (bytes): string => {
+export const formatFileSize = (bytes: any): string => {
   if (isNaN(bytes) || bytes < 0) {
 return '0 B';
 }
@@ -115,7 +115,7 @@ return `${bytes} ${sizes[i]}`;
 /**
  * Format number with commas as thousand separators
  */
-export const formatNumber = (num): string => {
+export const formatNumber = (num: any): string => {
   if (isNaN(num)) {
 return '0';
 }
@@ -125,7 +125,7 @@ return '0';
 /**
  * Format percentage with specified decimal places
  */
-export const formatPercentage = (value, decimals: number = 1): string => {
+export const formatPercentage = (value: string | number, decimals: number = 1): string => {
   if (isNaN(value)) {
 return '0%';
 }
@@ -135,7 +135,7 @@ return '0%';
 /**
  * Format currency with specified currency code
  */
-export const formatCurrency = (amount, currency = 'USD'): string => {
+export const formatCurrency = (amount: any, currency = 'USD'): string => {
   if (isNaN(amount)) {
 return '$0.00';
 }
@@ -154,7 +154,7 @@ return '$0.00';
 /**
  * Format date to localized string
  */
-export const formatDate = (dateString, options?: Intl.DateTimeFormatOptions): string => {
+export const formatDate = (dateString: any, options?: Intl.DateTimeFormatOptions): string => {
   try {
     const date = new Date(dateString);
     const defaultOptions: Intl.DateTimeFormatOptions = {
@@ -173,7 +173,7 @@ export const formatDate = (dateString, options?: Intl.DateTimeFormatOptions): st
 /**
  * Format time to localized string
  */
-export const formatTime = (dateString, options?: Intl.DateTimeFormatOptions): string => {
+export const formatTime = (dateString: any, options?: Intl.DateTimeFormatOptions): string => {
   try {
     const date = new Date(dateString);
     const defaultOptions: Intl.DateTimeFormatOptions = {
@@ -191,7 +191,7 @@ export const formatTime = (dateString, options?: Intl.DateTimeFormatOptions): st
 /**
  * Truncate text to specified length with ellipsis
  */
-export const truncateText = (text, maxLength): string => {
+export const truncateText = (text: string, maxLength: any): string => {
   if (!text || text.length <= maxLength) {
 return text;
 }
@@ -201,7 +201,7 @@ return text;
 /**
  * Format phone number to (XXX) XXX-XXXX format
  */
-export const formatPhoneNumber = (phoneNumber): string => {
+export const formatPhoneNumber = (phoneNumber: any): string => {
   const cleaned = phoneNumber.replace(/\D/g, '');
 
   if (cleaned.length !== 10) {

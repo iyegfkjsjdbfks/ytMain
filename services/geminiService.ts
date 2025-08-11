@@ -29,7 +29,7 @@ const checkAiInitialized = () => {
   }
 };
 
-const parseJsonFromText = (text): any => {
+const parseJsonFromText = (text: string): any => {
   let jsonStr = text.trim();
   const fenceRegex = /^```(\w*)?\s*\n?(.*?)\n?\s*```$/s;
   const match = jsonStr.match(fenceRegex);
@@ -51,7 +51,7 @@ const parseJsonFromText = (text): any => {
  * @returns A promise that resolves to the summary string.
  * @throws An error if summarization fails or API key is invalid.
  */
-export async function summarizeText(textToSummarize): Promise<string> {
+export async function summarizeText(textToSummarize: any): Promise<string> {
   checkAiInitialized();
 
   const model = 'gemini-2.5-flash-preview-04-17';
@@ -88,7 +88,7 @@ export async function summarizeText(textToSummarize): Promise<string> {
  * @returns A promise that resolves to a VideoIdeaResponse object.
  * @throws An error if idea generation fails or API key is invalid.
  */
-export async function generateVideoIdeas(userInput): Promise<VideoIdeaResponse> {
+export async function generateVideoIdeas(userInput: any): Promise<VideoIdeaResponse> {
   checkAiInitialized();
 
   const model = 'gemini-2.5-flash-preview-04-17';

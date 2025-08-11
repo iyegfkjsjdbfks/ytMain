@@ -65,7 +65,7 @@ type MetricType = 'viewers' | 'engagement' | 'revenue';
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
-const formatNumber = (num): string => {
+const formatNumber = (num: any): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;
   }
@@ -75,7 +75,7 @@ const formatNumber = (num): string => {
   return num.toString();
 };
 
-const formatDuration = (seconds): string => {
+const formatDuration = (seconds: any): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
@@ -269,7 +269,7 @@ interface TopMomentsProps {
   moments: AnalyticsData['topMoments'] }
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
-  const getIcon = (type): React.ReactNode => {
+  const getIcon = (type: any): React.ReactNode => {
     switch (type) {
       case 'peak_viewers':
         return <EyeIcon className="h-5 w-5 text-blue-500" />;

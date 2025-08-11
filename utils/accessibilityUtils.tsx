@@ -19,7 +19,7 @@ import { useEffect, useState, useCallback, createContext, useContext } from 'rea
 interface AccessibilityContextType {
   reducedMotion, highContrast: boolean;
   fontSize: 'small' | 'medium' | 'large' | 'extra-large', announcements: string;
-  addAnnouncement: (message) => void, clearAnnouncements: () => void
+  addAnnouncement: (message: any) => void, clearAnnouncements: () => void
 }
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
@@ -71,7 +71,7 @@ export function AccessibilityProvider({ children }) {
     localStorage.setItem('accessibility-font-size', fontSize);
   }, [fontSize]);
 
-  const addAnnouncement = useCallback((message) => {
+  const addAnnouncement = useCallback((message: any) => {
     setAnnouncements(prev => [...prev, message]);
 
     // Auto-clear announcement after 5 seconds
@@ -117,7 +117,7 @@ export function ScreenReaderAnnouncer() {
       className="sr-only"
       role="status"
     >
-      {announcements.map((announcement, index) => (
+      {announcements.map((announcement: any, index: number) => (
         <div key={`${announcement}-${index}`}>
           {announcement}
         </div>
@@ -187,7 +187,7 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation(_options) {
+export function useKeyboardNavigation(_options: any) {
   const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
@@ -238,7 +238,7 @@ export function useAriaLiveRegion(_initialMessage = '') {
   const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
-  const announce = useCallback((newMessage, priority: 'polite' | 'assertive' = 'polite') => {
+  const announce = useCallback((newMessage: any, priority: 'polite' | 'assertive' = 'polite') => {
     setPoliteness(priority);
     setMessage(newMessage);
 
@@ -261,10 +261,10 @@ export function useAriaLiveRegion(_initialMessage = '') {
 }
 
 // Color contrast utilities
-export function getContrastRatio(color1, color2): number {
-  const getLuminance = (color): number => {
+export function getContrastRatio(color1: any, color2: any): number {
+  const getLuminance = (color: any): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
-    const [r = 0, g = 0, b = 0] = rgb.map((c) => {
+    const [r = 0, g = 0, b = 0] = rgb.map((c: any) => {
       c = c / 255;
       return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
     });
@@ -279,7 +279,7 @@ export function getContrastRatio(color1, color2): number {
   return (brightest + 0.05) / (darkest + 0.05);
 }
 
-export function checkColorContrast(foreground, background): {
+export function checkColorContrast(foreground: any, background: any): {
   ratio, wcagAA: boolean;
   wcagAAA, wcagAALarge: boolean
 } {
@@ -377,12 +377,12 @@ export function useAccessibleForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { addAnnouncement } = useAccessibility();
 
-  const setFieldError = useCallback((fieldName, error: Error) => {
+  const setFieldError = useCallback((fieldName: any, error: Error) => {
     setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
 
-  const clearFieldError = useCallback((fieldName) => {
+  const clearFieldError = useCallback((fieldName: any) => {
     setErrors(prev => {
       const newErrors = { ...prev };
       delete newErrors[fieldName];
@@ -390,7 +390,7 @@ export function useAccessibleForm() {
     });
   }, []);
 
-  const getFieldProps = useCallback((fieldName) => {
+  const getFieldProps = useCallback((fieldName: any) => {
     const hasError = !!errors[fieldName];
 
     return {
@@ -407,7 +407,7 @@ export function useAccessibleForm() {
     };
   }, [errors, setFieldError, clearFieldError]);
 
-  const getErrorProps = useCallback((fieldName) => {
+  const getErrorProps = useCallback((fieldName: any) => {
     const error = errors[fieldName];
 
     return error ? {

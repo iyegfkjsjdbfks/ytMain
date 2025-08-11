@@ -55,7 +55,7 @@ const VideoGrid: React.FC<VideoGridProps> = memo(({
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video, index) => (
+      {videos.map((video: any, index: number) => (
         <VideoCard
           key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
           video={video}

@@ -25,7 +25,7 @@ class UnifiedCache {
   private cache = new Map<string, { data; timestamp: number; ttl: number }>();
   private readonly defaultTTL = 15 * 60 * 1000; // 15 minutes
 
-  set(key, data, ttl: number = this.defaultTTL): void {
+  set(key: string, data: any, ttl: number = this.defaultTTL): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -33,7 +33,7 @@ class UnifiedCache {
     });
   }
 
-  get<T>(key): T | null {
+  get<T>(key: string): T | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -70,7 +70,7 @@ return null;
 // Unified Error Types
 export class ApiError extends Error {
   constructor(
-    message,
+    message: any,
     public status?: number,
     public code?: string,
     public details?,
@@ -81,14 +81,14 @@ export class ApiError extends Error {
 }
 
 export class NetworkError extends Error {
-  constructor(message, public originalError?: Error) {
+  constructor(message: any, public originalError?: Error) {
     super(message);
     this.name = 'NetworkError';
   }
 }
 
 export class ValidationError extends Error {
-  constructor(message, public field?: string) {
+  constructor(message: any, public field?: string) {
     super(message);
     this.name = 'ValidationError';
   }
@@ -152,7 +152,7 @@ class UnifiedApiService {
 
   // Core request method with unified error handling
   private async makeRequest<T>(
-    endpoint,
+    endpoint: any,
     options: RequestInit = {},
     cacheKey?: string,
     cacheTTL?: number,
@@ -183,7 +183,7 @@ class UnifiedApiService {
   }
 
   private async executeRequest<T>(
-    endpoint,
+    endpoint: any,
     options: RequestInit,
     cacheKey?: string,
     cacheTTL?: number,
@@ -288,7 +288,7 @@ queryParams.set('pageToken', params.pageToken);
     return this.makeRequest(`/videos?${queryParams}`, {}, cacheKey, 10 * 60 * 1000);
   }
 
-  async searchVideos(query, params: {
+  async searchVideos(query: any, params: {
     maxResults?: number;
     pageToken?: string;
     order?: string;
@@ -315,7 +315,7 @@ queryParams.set('order', params.order);
     return this.makeRequest(`/search?${queryParams}`, {}, cacheKey, 5 * 60 * 1000);
   }
 
-  async getChannel(channelId): Promise<Channel> {
+  async getChannel(channelId: any): Promise<Channel> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -346,7 +346,7 @@ queryParams.set('order', params.order);
     return channel;
   }
 
-  async getPlaylist(playlistId): Promise<Playlist> {
+  async getPlaylist(playlistId: any): Promise<Playlist> {
     // Check if YouTube Data API is blocked by admin settings
     if (isYouTubeDataApiBlocked()) {
       console.warn('YouTube Data API v3 is disabled when Google Custom Search JSON API is selected as the YouTube Search Provider.');
@@ -377,7 +377,7 @@ queryParams.set('order', params.order);
     return playlist;
   }
 
-  async getComments(videoId, params: {
+  async getComments(videoId: any, params: {
     maxResults?: number;
     pageToken?: string;
     order?: string;

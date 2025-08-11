@@ -74,7 +74,7 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const updateVideo = async (_id, _formData: VideoEditFormData) => {
+  const updateVideo = async (_id: any, _formData: VideoEditFormData) => {
     // Mock implementation
   };
 

@@ -39,7 +39,7 @@ export function cn(...inputs: ClassValue[]): string {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatNumber(num, decimals: number = 1): string {
+export function formatNumber(num: any, decimals: number = 1): string {
   if (num >= 1000000000) {
     return `${(num / 1000000000).toFixed(decimals)}B`;
   }
@@ -60,7 +60,7 @@ export function formatNumber(num, decimals: number = 1): string {
  * @param num - The number to format
  * @returns Formatted number string with commas
  */
-export function formatNumberWithCommas(num): string {
+export function formatNumberWithCommas(num: any): string {
   return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
@@ -71,7 +71,7 @@ export function formatNumberWithCommas(num): string {
  * @param max - The maximum value
  * @returns The clamped number
  */
-export function clamp(num, min, max): number {
+export function clamp(num: any, min: any, max: any): number {
   return Math.min(Math.max(num, min), max);
 }
 
@@ -95,7 +95,7 @@ export function formatCount(num: number | string, decimals: number = 1): string 
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds): string {
+export function formatDuration(seconds: any): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
@@ -172,7 +172,7 @@ export function formatDate(date: Date | string, options: Intl.DateTimeFormatOpti
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str, maxLength, ellipsis = '...'): string {
+export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
   if (!str || str.length <= maxLength) {
     return str;
   }
@@ -184,10 +184,10 @@ export function truncate(str, maxLength, ellipsis = '...'): string {
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str): string {
+export function toTitleCase(str: any): string {
   return str.replace(
     /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
+    (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
   );
 }
 
@@ -196,7 +196,7 @@ export function toTitleCase(str): string {
  * @param str - The string to convert
  * @returns kebab-case string
  */
-export function toKebabCase(str): string {
+export function toKebabCase(str: any): string {
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
@@ -245,7 +245,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value): value is Record<string, any> {
+export function isObject(value: string | number): value is Record<string, any> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -254,7 +254,7 @@ export function isObject(value): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value): value is (...args) => any {
+export function isFunction(value: string | number): value is (...args) => any {
   return typeof value === 'function';
 }
 
@@ -263,7 +263,7 @@ export function isFunction(value): value is (...args) => any {
  * @param str - The string to check
  * @returns True if the string is a valid URL
  */
-export function isValidUrl(str): boolean {
+export function isValidUrl(str: any): boolean {
   try {
     const url = new URL(str);
     return Boolean(url);
@@ -283,9 +283,9 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args) => any>(
   func: T,
-  wait: number
+  wait
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout>;
 
@@ -347,7 +347,7 @@ export function fileToBase64(file: File): Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename): string {
+export function getFileExtension(filename: any): string {
   return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
@@ -368,7 +368,7 @@ export const isBrowser = (): boolean => {
  * @param text - The text to copy
  * @returns A promise that resolves when the text is copied
  */
-export async function copyToClipboard(text): Promise<void> {
+export async function copyToClipboard(text: string): Promise<void> {
   if (!isBrowser()) {
 return;
 }
@@ -405,7 +405,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value): value is string {
+export function isString(value: string | number): value is string {
   return typeof value === 'string' || value instanceof String;
 }
 
@@ -414,7 +414,7 @@ export function isString(value): value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value): value is number {
+export function isNumber(value: string | number): value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 
@@ -427,7 +427,7 @@ export function isNumber(value): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex: string): 'light' | 'dark' {
+export function getColorContrast(hex: any): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -530,7 +530,7 @@ export function deepMerge<T extends object, U extends object>(target: T, source:
  * @param ms - The delay in milliseconds
  * @returns A promise that resolves after the delay
  */
-export function sleep(ms): Promise<void> {
+export function sleep(ms: any): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -543,7 +543,7 @@ export function sleep(ms): Promise<void> {
  */
 export function timeout<T>(
   promise: Promise<T>,
-  timeoutMs: number,
+  timeoutMs: any,
   error = 'Operation timed out',
 ): Promise<T> {
   return Promise.race([
@@ -580,6 +580,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min: number, max: number): number {
+export function randomInt(min: any, max: any): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

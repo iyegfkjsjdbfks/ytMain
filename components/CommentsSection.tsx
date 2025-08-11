@@ -46,14 +46,14 @@ export interface CommentsSectionProps {
   activeCommentMenu: string | null;
   expandedReplies: Record<string, boolean>;
   maxCommentLength: number;
-  onCommentSubmit: (commentText) => void;
-  onReplySubmit: (parentId) => void;
-  onEditSave: (commentId, newText, parentId?: string) => void;
-  onDeleteComment: (commentId, parentId?: string) => void;
-  onToggleLikeDislike: (id, parentId: string | undefined, action: 'like' | 'dislike') => void;
+  onCommentSubmit: (commentText: any) => void;
+  onReplySubmit: (parentId: any) => void;
+  onEditSave: (commentId: any, newText: any, parentId?: string) => void;
+  onDeleteComment: (commentId: any, parentId?: string) => void;
+  onToggleLikeDislike: (id: string, parentId: string | undefined, action: 'like' | 'dislike') => void;
   onSortChange: (order: 'top' | 'newest') => void;
   onSetReplyingTo: (commentId: string | null, text?: string) => void;
-  onSetCurrentReplyText: (text) => void;
+  onSetCurrentReplyText: (text: string) => void;
   onSetEditingComment: (comment: { id: string; parentId?: string } | null) => void;
   onSetActiveCommentMenu: (commentId: string | null) => void;
   onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => void;
@@ -84,7 +84,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   const replyInputRef = useRef<HTMLInputElement>(null);
   const [editText, setEditText] = useState('');
 
-  const parseRelativeDate = (timestamp): number => {
+  const parseRelativeDate = (timestamp: any): number => {
     if (timestamp.includes('Just now') || timestamp.includes('edited')) {
 return 0;
 }
@@ -368,8 +368,8 @@ return 0;
               {expandedReplies[comment.id] && (
                 <div className="space-y-3 pt-2">
                   {comment.replies
-                    .sort((a, b) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
-                    .map((reply) => renderComment(reply, true))
+                    .sort((a: any, b: any) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
+                    .map((reply: any) => renderComment(reply, true))
                   }
                 </div>
               )}

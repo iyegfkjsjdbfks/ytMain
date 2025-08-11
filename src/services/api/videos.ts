@@ -48,7 +48,7 @@ export const videoApi = {
   /**
    * Get a single video by ID
    */
-  async getVideo(videoId): Promise<ApiResponse<Video>> {
+  async getVideo(videoId: any): Promise<ApiResponse<Video>> {
     return api.get<Video>(`/api/videos/${videoId}`);
   },
 
@@ -70,7 +70,7 @@ export const videoApi = {
    * Get videos by category
    */
   async getVideosByCategory(
-    category,
+    category: any,
     params: PaginatedRequest = {},
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/category', { ...params, category } as PaginatedRequest & { category: string });
@@ -108,7 +108,7 @@ export const videoApi = {
    * Get related videos
    */
   async getRelatedVideos(
-    videoId,
+    videoId: any,
     params: PaginatedRequest = {},
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>(`/api/videos/${videoId}/related`, params);
@@ -128,7 +128,7 @@ export const videoApi = {
    * Update video metadata
    */
   async updateVideo(
-    videoId,
+    videoId: any,
     data: Partial<VideoUploadData>,
   ): Promise<ApiResponse<Video>> {
     return api.put<Video>(`/api/videos/${videoId}`, data);
@@ -137,35 +137,35 @@ export const videoApi = {
   /**
    * Delete a video
    */
-  async deleteVideo(videoId): Promise<ApiResponse<void>> {
+  async deleteVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.delete<void>(`/api/videos/${videoId}`);
   },
 
   /**
    * Like a video
    */
-  async likeVideo(videoId): Promise<ApiResponse<void>> {
+  async likeVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/like`);
   },
 
   /**
    * Unlike a video
    */
-  async unlikeVideo(videoId): Promise<ApiResponse<void>> {
+  async unlikeVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.delete<void>(`/api/videos/${videoId}/like`);
   },
 
   /**
    * Get video analytics
    */
-  async getVideoAnalytics(videoId): Promise<ApiResponse<any>> {
+  async getVideoAnalytics(videoId: any): Promise<ApiResponse<any>> {
     return api.get<any>(`/api/videos/${videoId}/analytics`);
   },
 
   /**
    * Increment video view count
    */
-  async incrementViews(videoId): Promise<ApiResponse<void>> {
+  async incrementViews(videoId: any): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/views`);
   },
 
@@ -173,8 +173,8 @@ export const videoApi = {
    * Report a video
    */
   async reportVideo(
-    videoId,
-    reason,
+    videoId: any,
+    reason: any,
     description?: string,
   ): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/report`, { reason, description });
@@ -204,14 +204,14 @@ export const videoApi = {
   /**
    * Add video to watch history
    */
-  async addToWatchHistory(videoId, watchTime?: number): Promise<ApiResponse<void>> {
+  async addToWatchHistory(videoId: any, watchTime?: number): Promise<ApiResponse<void>> {
     return api.post<void>('/api/videos/history', { videoId, watchTime });
   },
 
   /**
    * Remove video from watch history
    */
-  async removeFromWatchHistory(videoId): Promise<ApiResponse<void>> {
+  async removeFromWatchHistory(videoId: any): Promise<ApiResponse<void>> {
     return api.delete<void>(`/api/videos/history/${videoId}`);
   },
 
@@ -239,14 +239,14 @@ export const videoApi = {
   /**
    * Save video to Watch Later
    */
-  async saveVideo(videoId): Promise<ApiResponse<void>> {
+  async saveVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.post<void>(`/api/videos/${videoId}/save`);
   },
 
   /**
    * Remove video from Watch Later
    */
-  async unsaveVideo(videoId): Promise<ApiResponse<void>> {
+  async unsaveVideo(videoId: any): Promise<ApiResponse<void>> {
     return api.delete<void>(`/api/videos/${videoId}/save`);
   },
 };

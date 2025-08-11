@@ -34,7 +34,7 @@ class SubscriptionService {
   /**
    * Get subscription status for a specific channel
    */
-  async getSubscriptionStatus(channelId): Promise<Subscription | null> {
+  async getSubscriptionStatus(channelId: any): Promise<Subscription | null> {
     try {
       const response = await api.get(`/api/subscriptions/status/${channelId}`);
       return response.data as Subscription;
@@ -47,14 +47,14 @@ class SubscriptionService {
   /**
    * Subscribe to a channel
    */
-  async subscribe(channelId): Promise<ApiResponse<Subscription>> {
+  async subscribe(channelId: any): Promise<ApiResponse<Subscription>> {
     return api.post('/api/subscriptions', { channelId });
   }
 
   /**
    * Unsubscribe from a channel
    */
-  async unsubscribe(channelId): Promise<ApiResponse<void>> {
+  async unsubscribe(channelId: any): Promise<ApiResponse<void>> {
     return api.delete(`/api/subscriptions/${channelId}`);
   }
 
@@ -62,7 +62,7 @@ class SubscriptionService {
    * Update notification level for a subscription
    */
   async updateNotificationLevel(
-    channelId,
+    channelId: any,
     level: 'all' | 'personalized' | 'none',
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
@@ -189,7 +189,7 @@ class SubscriptionService {
    * Search within subscribed channels
    */
   async searchSubscriptions(
-    query,
+    query: any,
     filters: {
       includeVideos?: boolean;
       limit?: number;

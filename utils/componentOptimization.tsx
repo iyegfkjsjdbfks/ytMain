@@ -30,7 +30,7 @@ import React, {
 import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
-export function useComponentPerformance(componentName) {
+export function useComponentPerformance(componentName: any) {
   const renderStartTime = useRef<number>(0);
   const mountTime = useRef<number>(0);
   const renderCount = useRef<number>(0);
@@ -91,7 +91,7 @@ return undefined;
     elementRef,
     isVisible,
     renderCount: renderCount.current,
-    trackCustomMetric: (metricName, value) => {
+    trackCustomMetric: (metricName: any, value: string | number) => {
       performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
     },
   };
@@ -294,7 +294,7 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
 }
 
 // Image optimization hook with lazy loading
-export function useOptimizedImage(src, options: {
+export function useOptimizedImage(src: any, options: {
   placeholder?: string;
   sizes?: string;
   quality?: number;
@@ -364,7 +364,7 @@ return options.placeholder || '';
 
 // Bundle splitting utility
 export function createAsyncComponent<_P extends object>(
-  componentPath,
+  componentPath: any,
   chunkName?: string,
 ) {
   return React.lazy(() => {
@@ -413,9 +413,9 @@ export function withPerformanceMonitoring<P extends object>(
     useEffect(() => {
       if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
         (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
-          _id,
-          _root,
-          _priorityLevel,
+          _id: any,
+          _root: any,
+          _priorityLevel: any,
         ) => {
           // Custom performance tracking logic
           console.debug('Component committed to root');
