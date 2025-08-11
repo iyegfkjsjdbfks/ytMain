@@ -1,17 +1,9 @@
 
-import { useMemo, useRef,  useEffect, useState } from 'react';
+import { useMemo, useRef, useEffect, useState, memo, FC } from 'react';
 
-import {
-  HeartIcon,
-  ChatBubbleLeftIcon,
-  FlagIcon,
-  PencilIcon,
-  TrashIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  ExclamationTriangleIcon,
-} from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon, ChatBubbleLeftIcon, FlagIcon, PencilIcon, TrashIcon, ChevronDownIcon, ChevronUpIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+const HeartIconSolid = HeartSolidIcon;
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

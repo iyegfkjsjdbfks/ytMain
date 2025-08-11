@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';

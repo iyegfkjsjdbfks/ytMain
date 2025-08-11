@@ -8,6 +8,7 @@ declare namespace NodeJS {
 }
 
 import React, { useState, useRef, useEffect } from 'react';
+import { lazy, FC, MouseEvent } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
 import {

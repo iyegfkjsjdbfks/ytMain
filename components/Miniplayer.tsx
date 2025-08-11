@@ -1,8 +1,11 @@
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import type React from 'react';
 
-import { PlayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { PlayIcon as PlaySolidIcon, XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid';
+const PlayIconSolid = PlaySolidIcon;
+const XMarkIconSolid = XMarkSolidIcon;
 
 import type { Video } from '../src/types/core';
 

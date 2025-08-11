@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef, memo } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation

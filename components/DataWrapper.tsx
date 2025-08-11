@@ -1,3 +1,4 @@
+import React, { ReactNode } from 'react';
 import type React from 'react';
 
 import { VideoGridSkeleton, ErrorState, EmptyState } from './LoadingStates';

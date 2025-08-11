@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { FC } from 'react';
 
 import {
   ClockIcon,

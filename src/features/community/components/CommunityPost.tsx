@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FC } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import {
   HandThumbUpIcon,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { fetchSingleVideoFromGoogleSearch } from '../../services/googleSearchService';
 import { googleSearchVideoStore } from '../../services/googleSearchVideoStore';
 import { logger } from '../utils/logger';

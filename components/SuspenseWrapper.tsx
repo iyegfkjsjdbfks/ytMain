@@ -1,4 +1,4 @@
-import { Suspense, type ReactNode } from 'react';
+import { Suspense, type ReactNode, FC, ReactNode } from 'react';
 
 import FastLoadingSpinner from './FastLoadingSpinner';
 

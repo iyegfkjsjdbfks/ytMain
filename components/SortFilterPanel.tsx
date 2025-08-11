@@ -1,7 +1,8 @@
 
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
+const CheckIconSolid = CheckSolidIcon;
 
 import AdjustmentsHorizontalIcon from './icons/AdjustmentsHorizontalIcon';
 

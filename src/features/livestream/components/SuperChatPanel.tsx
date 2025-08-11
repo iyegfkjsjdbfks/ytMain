@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';

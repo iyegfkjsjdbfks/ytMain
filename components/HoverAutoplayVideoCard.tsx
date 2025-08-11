@@ -11,7 +11,7 @@ declare namespace NodeJS {
 }
 
 
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, FC, MouseEvent } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, KeyboardEvent } from 'react';
 
 interface UseModalOptions {
   defaultOpen?: boolean;

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 
 import React, { memo } from 'react';
+import { memo, FC, ReactNode } from 'react';
 
 import {
   UserCircleIcon, Cog8ToothIcon, ArrowRightStartOnRectangleIcon, SunIcon, MoonIcon,

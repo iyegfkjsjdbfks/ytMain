@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import type React from 'react';
 import { RegisterForm } from '../components/RegisterForm';
 

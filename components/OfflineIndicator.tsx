@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { ExclamationTriangleIcon, WifiIcon } from '@heroicons/react/24/outline';
 

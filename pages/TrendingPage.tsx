@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 
-import { FireIcon } from '@heroicons/react/24/solid';
+import { FireIcon as FireSolidIcon } from '@heroicons/react/24/solid';
+const FireIconSolid = FireSolidIcon;
 
 import CategoryTabs from '../components/CategoryTabs';
 import PageLayout from '../components/PageLayout';

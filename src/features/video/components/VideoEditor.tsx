@@ -8,6 +8,7 @@ declare namespace NodeJS {
 }
 
 import React, { useEffect, useRef,  useState } from 'react';
+import { FC } from 'react';
 
 import {
   PlayIcon,

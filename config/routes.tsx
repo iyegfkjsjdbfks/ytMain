@@ -1,11 +1,12 @@
 import React, { lazy } from 'react';
+import { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import StudioLayout from '../components/StudioLayout';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, RouteObject } from 'react-router-dom';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
 

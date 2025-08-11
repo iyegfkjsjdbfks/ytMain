@@ -1,15 +1,9 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
-import {
-  BellIcon,
-  UserMinusIcon,
-  MagnifyingGlassIcon,
-  CheckIcon,
-  Squares2X2Icon,
-  ListBulletIcon,
-} from '@heroicons/react/24/outline';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { BellIcon, UserMinusIcon, MagnifyingGlassIcon, CheckIcon, Squares2X2Icon, ListBulletIcon } from '@heroicons/react/24/outline';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

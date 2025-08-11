@@ -1,5 +1,5 @@
 
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import {
   Cog6ToothIcon,

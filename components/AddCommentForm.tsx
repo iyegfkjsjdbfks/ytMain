@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { FC } from 'react';
+import { PaperAirplaneIcon as PaperAirplaneSolidIcon } from '@heroicons/react/24/solid';
+const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;

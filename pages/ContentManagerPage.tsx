@@ -1,4 +1,4 @@
-import { useEffect,  useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { CalendarIcon, FolderIcon } from '@heroicons/react/24/outline';
 

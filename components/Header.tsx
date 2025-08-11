@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 
-import { useEffect, useCallback,  useRef, useState } from 'react';
+import { useEffect, useCallback, useRef, useState, memo, FC, ReactNode, MouseEvent } from 'react';
 
 import { ArrowUpTrayIcon, SignalIcon, PencilSquareIcon, LightBulbIcon, UserIcon } from '@heroicons/react/24/outline'; // Added LightBulbIcon
 

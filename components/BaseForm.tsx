@@ -1,5 +1,6 @@
 
 import React, { useState,  type FormEvent, type ReactNode } from 'react';
+import { FC, ReactNode, ChangeEvent } from 'react';
 
 import { useFormState } from '../src/hooks';
 

@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type React from 'react';

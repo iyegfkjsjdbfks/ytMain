@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactNode } from 'react';
 
 // Common TypeScript interfaces and types
 

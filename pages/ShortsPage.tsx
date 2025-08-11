@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useMemo, useCallback,  useRef } from 'react';
+import { FC, KeyboardEvent } from 'react';
 
 import {
   MagnifyingGlassIcon,

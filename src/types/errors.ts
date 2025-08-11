@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 /**
  * Unified Error Type Definitions
  * Standardized error interfaces for consistent error handling

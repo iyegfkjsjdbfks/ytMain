@@ -3,6 +3,7 @@
  */
 
 import React, { type ReactElement } from 'react';
+// Removed unused imports to avoid duplicate identifiers and warnings
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 

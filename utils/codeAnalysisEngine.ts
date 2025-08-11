@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, lazy } from 'react';
 /**
  * Advanced Code Analysis and Refactoring Engine
  * Provides AI-powered code quality insights, automated refactoring suggestions,

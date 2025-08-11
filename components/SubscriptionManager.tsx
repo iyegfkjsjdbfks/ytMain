@@ -1,8 +1,9 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC, ChangeEvent, MouseEvent } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionManagerProps {
   channelName: string;

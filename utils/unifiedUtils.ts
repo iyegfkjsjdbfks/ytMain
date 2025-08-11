@@ -1,3 +1,4 @@
+// No React imports needed
 // Unified Utility Functions
 
 // Error handling types

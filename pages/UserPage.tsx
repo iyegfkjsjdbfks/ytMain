@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
-import { PlayIcon, UserIcon } from '@heroicons/react/24/solid';
+import { PlayIcon as PlaySolidIcon, UserIcon as UserSolidIcon } from '@heroicons/react/24/solid';
+const PlayIconSolid = PlaySolidIcon;
+const UserIconSolid = UserSolidIcon;
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';

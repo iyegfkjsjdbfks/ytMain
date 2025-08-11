@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import StudioHeader from './StudioHeader';
 import StudioSidebar from './StudioSidebar';

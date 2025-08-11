@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback,  useState } from 'react';
+import { FC } from 'react';
 // @ts-nocheck
 
 import { realVideos } from '../services/realVideoService';

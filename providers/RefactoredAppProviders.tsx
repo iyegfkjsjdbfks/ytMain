@@ -1,3 +1,5 @@
+import React, { Suspense } from 'react';
+import { FC, ReactNode } from 'react';
 import type { ReactNode } from 'react';
 
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';

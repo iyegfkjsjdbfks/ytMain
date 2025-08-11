@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback,  useState } from 'react';
+import { FC } from 'react';
 
 import {
   X,

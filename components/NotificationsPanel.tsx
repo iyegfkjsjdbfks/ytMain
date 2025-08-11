@@ -1,6 +1,7 @@
 
 
 import React, { useState } from 'react';
+import { FC } from 'react';
 
 import { ChatBubbleLeftRightIcon, BellAlertIcon } from '@heroicons/react/24/outline';
 

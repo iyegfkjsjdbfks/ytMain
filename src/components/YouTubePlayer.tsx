@@ -1,5 +1,6 @@
 import type { Video } from '../types/core';
 import React from 'react';
+import { FC } from 'react';
 
 export interface YouTubePlayerProps {
   video: Video;

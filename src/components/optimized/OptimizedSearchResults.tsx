@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback,  memo } from 'react';
+import { memo, lazy } from 'react';
 import { FixedSizeList } from 'react-window';
 
 import { performanceMonitor } from '../../utils/performanceOptimizations';

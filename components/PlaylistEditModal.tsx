@@ -1,5 +1,5 @@
 
-import { useRef,  useEffect, useState } from 'react';
+import { useRef, useEffect, useState, FC, MouseEvent } from 'react';
 
 interface PlaylistEditModalProps {
   isOpen: boolean;

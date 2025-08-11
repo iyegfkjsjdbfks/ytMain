@@ -1,14 +1,10 @@
 import { Link } from 'react-router-dom';
 import React, { useState, useMemo,  useEffect } from 'react';
+import { FC } from 'react';
 
-import {
-  ViewColumnsIcon,
-  Bars3Icon,
-  AdjustmentsHorizontalIcon,
-  BellIcon,
-  UserGroupIcon,
-} from '@heroicons/react/24/outline';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { ViewColumnsIcon, Bars3Icon, AdjustmentsHorizontalIcon, BellIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 import SubscriptionsIcon from '../components/icons/SubscriptionsIcon';
 import LoadingSpinner from '../components/LoadingSpinner';

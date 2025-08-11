@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import React from 'react';
 import { conditionalLogger } from '../utils/conditionalLogger';
 import { usePWA, requestNotificationPermission } from '../hooks/usePWA';

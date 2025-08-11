@@ -1,7 +1,9 @@
 import React from 'react';
+// Note: Keep React import minimal to avoid unused warnings
+import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BrowserRouter } from 'react-router-dom';
@@ -11,6 +13,19 @@ import { vi } from 'vitest';
 
 // Store import removed to fix circular dependency
 import type { Video } from '../src/types/core';
+// If Channel type exists, import it; otherwise, define a minimal fallback to satisfy tests
+type Channel = {
+  id: string;
+  name: string;
+  description?: string;
+  avatarUrl?: string;
+  subscribers?: number;
+  subscriberCount?: number;
+  videoCount?: number;
+  isVerified?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+};
 import type { UserPlaylist } from '../types';
 
 // Test Providers
@@ -40,6 +55,8 @@ const TestProviders: React.FC<TestProvidersProps> = ({
 };
 
 // Custom render function
+import type { RenderOptions, RenderResult } from '@testing-library/react';
+
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 }
@@ -60,6 +77,8 @@ export const renderWithProviders = (
 };
 
 // Custom hook render function
+import type { RenderHookOptions } from '@testing-library/react';
+
 interface CustomRenderHookOptions<TProps> extends RenderHookOptions<TProps> {
   queryClient?: QueryClient;
 }

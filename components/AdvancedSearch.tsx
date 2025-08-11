@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, KeyboardEvent, MouseEvent } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 import {
   MagnifyingGlassIcon,
   FunnelIcon,

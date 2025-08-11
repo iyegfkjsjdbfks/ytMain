@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useCallback, useState, memo } from 'react';
 
 interface PerformanceMetrics {
   renderTime: number;

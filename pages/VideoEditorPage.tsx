@@ -1,4 +1,5 @@
 import React, { useEffect, useRef,  useState } from 'react';
+import { FC, MouseEvent } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {

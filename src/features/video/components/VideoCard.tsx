@@ -1,4 +1,5 @@
 import React from 'react';
+import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { formatDistanceToNow } from 'date-fns';

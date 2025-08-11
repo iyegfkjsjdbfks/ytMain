@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 /**
  * Safely render an array of items as React components

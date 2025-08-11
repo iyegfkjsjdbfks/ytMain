@@ -1,4 +1,4 @@
-import { useCallback,  useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, memo, FC } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';

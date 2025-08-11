@@ -1,18 +1,8 @@
-import { useEffect,  useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  VideoCameraIcon,
-  ChartBarIcon,
-  CogIcon,
-  BellIcon,
-  PlayIcon,
-  EyeIcon,
-  HeartIcon,
-  ChatBubbleLeftIcon,
-  ArrowUpIcon,
-  PlusIcon,
-} from '@heroicons/react/24/outline';
-import { VideoCameraIcon } from '@heroicons/react/24/solid';
+import { VideoCameraIcon, ChartBarIcon, CogIcon, BellIcon, PlayIcon, EyeIcon, HeartIcon, ChatBubbleLeftIcon, ArrowUpIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon } from '@heroicons/react/24/solid';
+const VideoCameraIconSolid = VideoCameraSolidIcon;
 
 import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';

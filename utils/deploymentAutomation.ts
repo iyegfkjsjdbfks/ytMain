@@ -17,9 +17,9 @@ interface DeploymentConfig {
   _environment: 'development' | 'staging' | 'production';
   _strategy: 'blue-green' | 'canary' | 'rolling' | 'recreate';
   autoRollback: boolean;
-  healthChecks: HealthCheck;
-  qualityGates: QualityGateConfig;
-  notifications: NotificationConfig;
+  healthChecks: HealthCheck[];
+  qualityGates: QualityGateConfig[];
+  notifications: NotificationConfig[];
 }
 
 interface HealthCheck {
@@ -95,8 +95,8 @@ interface DeploymentExecution {
   status: 'pending' | 'running' | 'success' | 'failed' | 'cancelled' | 'rolled-back';
   startTime: number;
   endTime?: number;
-  stages: StageExecution;
-  logs: DeploymentLog;
+  stages: StageExecution[];
+  logs: DeploymentLog[];
   metrics: DeploymentMetrics;
   rollbackInfo?: RollbackInfo;
 }
@@ -106,17 +106,19 @@ interface StageExecution {
   status: 'pending' | 'running' | 'success' | 'failed' | 'skipped';
   startTime?: number;
   endTime?: number;
-  logs: string;
+  logs: string[];
   artifacts?: string;
 }
 
-interface DeploymentLog {
+interface DeploymentLogEntry {
   timestamp: number;
   level: 'info' | 'warn' | 'error' | 'debug';
   message: string;
   stage?: string;
   metadata?: Record<string, any>;
 }
+
+type DeploymentLog = DeploymentLogEntry;
 
 interface DeploymentMetrics {
   duration: number;
@@ -725,16 +727,16 @@ return;
 
       // Execute stages
       for (const stage of pipeline.stages) {
-        const stageExecution = _execution.stages.find((s: any) => s.stageId === stage.id);
+        const stageExecution = _execution.stages.find((s: StageExecution) => s.stageId === stage.id);
         if (!stageExecution) {
-continue;
-}
+          continue;
+        }
 
         // Check dependencies
         if (stage.dependencies && stage.dependencies.length > 0) {
-          const dependenciesMet = stage.dependencies.every((depId: any) => {
-            const depStage = _execution.stages.find((s: any) => s.stageId === depId);
-            return depStage && depStage.status === 'success';
+          const dependenciesMet = (stage.dependencies as string[]).every((depId: string) => {
+            const depStage = _execution.stages.find((s: StageExecution) => s.stageId === depId);
+            return !!depStage && depStage.status === 'success';
           });
 
           if (!dependenciesMet) {
@@ -763,7 +765,7 @@ continue;
 
       // Check final status
       if (_execution.status === 'running') {
-        const allStagesSuccessful = _execution.stages.every((s: any) =>
+        const allStagesSuccessful = _execution.stages.every((s: StageExecution) =>
           s.status === 'success' || s.status === 'skipped',
         );
 
@@ -861,23 +863,23 @@ continue;
   /**
    * Check quality gates
    */
-  private async checkQualityGates(__environment: any): Promise<boolean> {
-    const config = this.configs.get(`${_environment}-config`);
+  private async checkQualityGates(environment: string): Promise<boolean> {
+    const config = this.configs.get(`${environment}-config`) as any;
     if (!config) {
-return true;
-}
+      return true;
+    }
 
-    console.log(`🚪 Checking quality gates for ${_environment}...`);
+    console.log(`🚪 Checking quality gates for ${environment}...`);
 
     const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
     const performanceMetrics = performanceMonitor.getMetrics();
 
-    for (const gate of config.qualityGates) {
+    for (const gate of (config.qualityGates || [])) {
       if (!gate.blocking) {
 continue;
 }
 
-      for (const criterion of gate.criteria) {
+      for (const criterion of (gate.criteria || [])) {
         let value: number;
 
         // Get metric value based on type
@@ -930,15 +932,15 @@ continue;
   /**
    * Perform health checks
    */
-  private async performHealthChecks(__environment: any, __execution: DeploymentExecution): Promise<void> {
-    const config = this.configs.get(`${_environment}-config`);
+  private async performHealthChecks(environment: string, execution: DeploymentExecution): Promise<void> {
+    const config = this.configs.get(`${environment}-config`) as any;
     if (!config) {
-return;
-}
+      return;
+    }
 
-    this.addLog(_execution, 'info', 'Performing health checks...');
+    this.addLog(execution, 'info', 'Performing health checks...');
 
-    for (const _healthCheck of config.healthChecks) {
+    for (const _healthCheck of (config.healthChecks || [])) {
       try {
         const success = await this.executeHealthCheck(_healthCheck);
 
@@ -961,13 +963,13 @@ return;
   /**
    * Execute a health check
    */
-  private async executeHealthCheck(__healthCheck: HealthCheck): Promise<boolean> {
-    const { _config: config } = _healthCheck;
-    const maxRetries = config.retries || 3;
+  private async executeHealthCheck(healthCheck: HealthCheck): Promise<boolean> {
+    const { _config: config } = (healthCheck as any);
+    const maxRetries = config?.retries || 3;
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       try {
-        switch (_healthCheck.type) {
+        switch (healthCheck.type) {
           case 'http':
             if (config.url) {
               // Simulate HTTP health check
@@ -1004,11 +1006,11 @@ return;
   /**
    * Perform rollback
    */
-  private async performRollback(__execution: DeploymentExecution, __reason: any): Promise<void> {
-    this.addLog(_execution, 'warn', `Initiating rollback: ${_reason}`);
+  private async performRollback(execution: DeploymentExecution, reason: string): Promise<void> {
+    this.addLog(execution, 'warn', `Initiating rollback: ${reason}`);
 
     const rollbackInfo: RollbackInfo = {
-      _reason,
+      _reason: reason,
       triggeredBy: 'auto',
       previousVersion: 'v1.0.0', // This would be determined dynamically
       rollbackTime: Date.now(),
@@ -1022,26 +1024,26 @@ return;
       rollbackInfo.success = Math.random() > 0.1; // 90% rollback success rate
 
       if (rollbackInfo.success) {
-        _execution.status = 'rolled-back';
-        this.addLog(_execution, 'info', 'Rollback completed successfully');
+        execution.status = 'rolled-back';
+        this.addLog(execution, 'info', 'Rollback completed successfully');
       } else {
-        this.addLog(_execution, 'error', 'Rollback failed');
+        this.addLog(execution, 'error', 'Rollback failed');
       }
 
     } catch (error) {
-      this.addLog(_execution, 'error', `Rollback _error: ${error}`);
+      this.addLog(execution, 'error', `Rollback _error: ${error}`);
     }
 
-    _execution.rollbackInfo = rollbackInfo;
+    execution.rollbackInfo = rollbackInfo;
 
     // Send rollback notification
-    const pipeline = this.pipelines.get(_execution.pipelineId);
+    const pipeline = this.pipelines.get(execution.pipelineId);
     if (pipeline) {
-      await this.sendNotifications(pipeline._environment, 'rollback', _execution);
+      await this.sendNotifications(pipeline._environment as any, 'rollback', execution);
     }
 
     advancedAPM.recordMetric('deployment-rollback', 1, {
-      _reason,
+      reason,
       success: rollbackInfo.success.toString(),
     });
   }
@@ -1050,30 +1052,30 @@ return;
    * Send notifications
    */
   private async sendNotifications(
-    _environment: any,
+    environment: string,
     event: 'start' | 'success' | 'failure' | 'rollback',
-    _execution: DeploymentExecution,
+    execution: DeploymentExecution,
   ): Promise<void> {
-    const config = this.configs.get(`${_environment}-config`);
-    if (!config) {
+    const config = this.configs.get(`${environment}-config`);
+    if (!config || !Array.isArray((config as any).notifications)) {
       return;
     }
 
-    const relevantNotifications = config.notifications.filter((n: any) => n.events.includes(event));
+    const relevantNotifications = (config as any).notifications.filter((n: any) => n.events?.includes(event));
 
     for (const notification of relevantNotifications) {
       try {
         // Simulate notification sending
         console.log(`📢 Sending ${notification.type} notification for ${event}:`, {
-          _execution: _execution.id,
-          status: _execution.status,
-          _environment,
+          execution: execution.id,
+          status: execution.status,
+          environment,
         });
 
         advancedAPM.recordMetric('notification-sent', 1, {
           type: notification.type,
           event,
-          _environment,
+          environment,
         });
       } catch (error) {
         console.error(`Failed to send ${notification.type} notification:`, error);
@@ -1085,23 +1087,23 @@ return;
    * Add log entry
    */
   private addLog(
-    _execution: DeploymentExecution,
+    execution: DeploymentExecution,
     level: 'info' | 'warn' | 'error' | 'debug',
     message: any,
     stage?: string,
   ): void {
-    const log: DeploymentLog = {
+    const log: DeploymentLogEntry = {
       timestamp: Date.now(),
       level,
       message,
       ...(stage && { stage }),
     };
 
-    _execution.logs.push(log);
+    execution.logs.push(log);
 
     // Keep only last 1000 logs
-    if (_execution.logs.length > 1000) {
-      _execution.logs = _execution.logs.slice(-1000);
+    if (execution.logs.length > 1000) {
+      execution.logs = execution.logs.slice(-1000);
     }
   }
 

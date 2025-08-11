@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FC, ChangeEvent } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 

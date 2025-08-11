@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useRef,  memo, useMemo, useState, useEffect } from 'react';
+import { memo, lazy, FC, MouseEvent } from 'react';
 
 import { useIntersectionObserver } from '../src/hooks/useIntersectionObserver';
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';

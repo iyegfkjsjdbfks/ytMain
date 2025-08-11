@@ -1,5 +1,5 @@
 
-import { useContext, createContext } from 'react';
+import { useContext, createContext, FC, ReactNode } from 'react';
 
 interface TabsContextType {
   value: string; onValueChange: (value: string | number) => void

@@ -1,3 +1,5 @@
+import React, { memo } from 'react';
+import { KeyboardEvent } from 'react';
 /**
  * Comprehensive testing setup and configuration
  */

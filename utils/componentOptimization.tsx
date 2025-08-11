@@ -8,6 +8,7 @@ declare namespace NodeJS {
 }
 
 import React from 'react';
+import { memo, lazy, Suspense, ReactNode } from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */

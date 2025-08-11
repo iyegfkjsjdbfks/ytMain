@@ -10,10 +10,12 @@ declare namespace NodeJS {
 }
 
 
-import { useRef,  useEffect, useState } from 'react';
+import { useRef, useEffect, useState, FC } from 'react';
 
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { VideoCameraIcon, MicrophoneIcon } from '@heroicons/react/24/solid';
+import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
+const VideoCameraIconSolid = VideoCameraSolidIcon;
+const MicrophoneIconSolid = MicrophoneSolidIcon;
 
 interface LiveStreamSettings {
   title: string;

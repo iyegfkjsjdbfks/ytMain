@@ -1,7 +1,9 @@
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 
 import { ChartBarIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+const HeartIconSolid = HeartSolidIcon;
 
 interface CommunityPost {
   id: string;

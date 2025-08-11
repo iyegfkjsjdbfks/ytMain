@@ -1,8 +1,11 @@
 
 import React, { useState } from 'react';
+import { FC } from 'react';
 
 import { PaintBrushIcon, PhotoIcon } from '@heroicons/react/24/outline';
-import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon as XMarkSolidIcon, CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
+const XMarkIconSolid = XMarkSolidIcon;
+const CheckIconSolid = CheckSolidIcon;
 
 interface ChannelBranding {
   channelArt: string;

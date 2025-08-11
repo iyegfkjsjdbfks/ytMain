@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { FC, ReactNode } from 'react';
 import { useLocation, Navigate, useLocation } from 'react-router-dom';
 
 import LoadingSpinner from '@components/LoadingSpinner';

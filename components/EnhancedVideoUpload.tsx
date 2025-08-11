@@ -1,5 +1,5 @@
 
-import { useCallback,  useRef, useState } from 'react';
+import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
 
 import {
   CloudArrowUpIcon,

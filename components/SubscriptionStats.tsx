@@ -1,13 +1,11 @@
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import type React from 'react';
 
-import {
-  UserGroupIcon,
-  VideoCameraIcon,
-  ClockIcon,
-} from '@heroicons/react/24/outline';
-import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { UserGroupIcon, VideoCameraIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionStatsProps {
   totalChannels: number;

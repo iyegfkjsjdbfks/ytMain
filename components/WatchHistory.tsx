@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
 import { getVideos } from '../services/realVideoService';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import {
   Cog8ToothIcon,

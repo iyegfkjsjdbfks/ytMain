@@ -11,6 +11,7 @@ declare namespace NodeJS {
  */
 
 import React, { useState, useCallback, useRef,  useEffect } from 'react';
+import { createContext, useContext, KeyboardEvent, MouseEvent } from 'react';
 
 // Accessibility context for global settings
 interface AccessibilityContextType {

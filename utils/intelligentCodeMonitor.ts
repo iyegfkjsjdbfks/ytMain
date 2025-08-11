@@ -1,3 +1,4 @@
+// No React imports needed here
 /**
  * Intelligent Code Quality Monitoring System
  * Provides real-time code analysis, automated refactoring suggestions,

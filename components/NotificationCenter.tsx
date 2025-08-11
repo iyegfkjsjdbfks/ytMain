@@ -1,8 +1,9 @@
 
-import { useCallback, useRef,  useEffect, useState } from 'react';
+import { useCallback, useRef, useEffect, useState, FC, MouseEvent } from 'react';
 
 import { XMarkIcon, BellIcon } from '@heroicons/react/24/outline';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

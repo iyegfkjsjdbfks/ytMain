@@ -1,5 +1,5 @@
 
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo, FC, MouseEvent } from 'react';
 
 import {
   PlayIcon,

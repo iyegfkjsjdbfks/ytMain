@@ -7,7 +7,7 @@ declare namespace NodeJS {
   }
 }
 
-import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode, ReactNode } from 'react';
 
 import {
   SignalSlashIcon,

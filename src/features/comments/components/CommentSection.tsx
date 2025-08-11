@@ -1,4 +1,5 @@
 import React, { useEffect, useRef,  useState } from 'react';
+import { FC, MouseEvent } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { logger } from '../../../utils/logger';
 import {
@@ -7,19 +8,10 @@ import {
   useReactToComment,
 } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
-import {
-  HandThumbUpIcon,
-  HandThumbDownIcon,
-  ChatBubbleLeftIcon,
-  EllipsisVerticalIcon,
-  FlagIcon,
-  HeartIcon,
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
-import {
-  MapPinIcon as PinSolidIcon,
-  HeartIcon as HeartSolidIcon,
-} from '@heroicons/react/24/solid';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon as MapPinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+const MapPinIconSolid = MapPinSolidIcon;
+const HeartIconSolid = HeartSolidIcon;
 
 interface CommentSectionProps {
   videoId: string;

@@ -1,4 +1,5 @@
 import React, { useEffect,  createContext, useReducer, useCallback, type ReactNode } from 'react';
+import { createContext, FC, ReactNode } from 'react';
 
 import type { User } from '../src/types/core';
 import type { MiniplayerVideo, StrictNotification } from '../types/strictTypes';

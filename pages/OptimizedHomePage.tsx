@@ -1,6 +1,8 @@
-import { useMemo, useCallback,  useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useMemo, useCallback, useState, lazy, Suspense, FC } from 'react';
 
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon as HomeSolidIcon } from '@heroicons/react/24/solid';
+const HomeIconSolid = HomeSolidIcon;
 
 import CategoryChips from '../components/CategoryChips';
 import ErrorBoundary from '../components/ErrorBoundary';

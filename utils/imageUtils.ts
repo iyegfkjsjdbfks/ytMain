@@ -1,3 +1,4 @@
+import React from 'react';
 // Image utility functions for handling placeholders and fallbacks
 
 export const getImageWithFallback = (
@@ -123,7 +124,7 @@ export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }):
 
 // Image lazy loading utilities
 export const createIntersectionObserver = (
-  callback: (entries: IntersectionObserverEntry) => void,
+  callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit,
 ): IntersectionObserver => {
   const defaultOptions: IntersectionObserverInit = {
@@ -133,7 +134,7 @@ export const createIntersectionObserver = (
     ...options,
   };
 
-  return new IntersectionObserver((entries: IntersectionObserverEntry[]) => callback(entries), defaultOptions);
+  return new IntersectionObserver(callback, defaultOptions);
 };
 
 // Image format detection

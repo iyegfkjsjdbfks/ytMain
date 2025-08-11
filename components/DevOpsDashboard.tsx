@@ -9,7 +9,7 @@
  * - Feature flag management
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo, FC } from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';

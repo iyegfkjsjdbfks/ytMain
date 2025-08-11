@@ -1,4 +1,4 @@
-import { useState,  useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
 import HistoryIcon from '../components/icons/HistoryIcon'; // Using local icon
 import HistoryPageSkeleton from '../components/LoadingStates/HistoryPageSkeleton';

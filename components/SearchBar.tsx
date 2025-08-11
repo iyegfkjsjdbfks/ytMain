@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
 
-import { useCallback, useRef,  useEffect, useState } from 'react';
+import { useCallback, useRef, useEffect, useState, memo, FC, ChangeEvent, MouseEvent } from 'react';
 
-import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
+import { XMarkIcon as XMarkSolidIcon } from '@heroicons/react/24/solid'; // For remove button
+const XMarkIconSolid = XMarkSolidIcon;
 
 import {
   getSearchSuggestions,

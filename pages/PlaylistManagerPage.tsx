@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 
 import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
 import Droppable, { DragDropContext } from 'react-beautiful-dnd';

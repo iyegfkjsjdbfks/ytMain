@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 import {
   XMarkIcon,

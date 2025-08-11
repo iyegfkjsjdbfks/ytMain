@@ -1,3 +1,4 @@
+import React, { FC, MouseEvent } from 'react';
 
 import type React from 'react';
 

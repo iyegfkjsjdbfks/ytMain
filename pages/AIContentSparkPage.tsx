@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react';
+import { useState, FC } from 'react';
 
 import { LightBulbIcon, SparklesIcon } from '@heroicons/react/24/outline';
 

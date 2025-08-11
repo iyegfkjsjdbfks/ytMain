@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { FC } from 'react';
 
 import { LoginForm } from '../components/LoginForm';
 

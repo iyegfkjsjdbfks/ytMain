@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactNode, KeyboardEvent, MouseEvent } from 'react';
 
 // Strict Type Definitions to Replace 'any' Types
 

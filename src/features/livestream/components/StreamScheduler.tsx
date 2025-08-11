@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 import {
   liveStreamService,
   type ScheduledStream,

@@ -5,7 +5,7 @@
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-import { useMemo,  useEffect, useState } from 'react';
+import { useMemo, useEffect, useState, memo, FC } from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';

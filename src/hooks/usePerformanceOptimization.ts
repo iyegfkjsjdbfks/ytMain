@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import { useMemo,  useCallback, useEffect, useRef, useState } from 'react';
+import { useMemo, useCallback, useEffect, useRef, useState, memo, lazy } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: any) => {

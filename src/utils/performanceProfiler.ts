@@ -1,4 +1,5 @@
 import React from 'react';
+import { memo } from 'react';
 
 // Performance monitoring utility for React components
 

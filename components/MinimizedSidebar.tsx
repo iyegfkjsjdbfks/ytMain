@@ -1,8 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import React, { memo } from 'react';
+import { memo, FC, ReactNode } from 'react';
 
-import { QueueListIcon, ChartBarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import { QueueListIcon as QueueListSolidIcon, ChartBarIcon as ChartBarSolidIcon, VideoCameraIcon as VideoCameraSolidIcon } from '@heroicons/react/24/solid';
+const QueueListIconSolid = QueueListSolidIcon;
+const ChartBarIconSolid = ChartBarSolidIcon;
+const VideoCameraIconSolid = VideoCameraSolidIcon;
 
 import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';

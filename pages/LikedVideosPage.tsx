@@ -1,6 +1,7 @@
-import { useState,  useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
-import { HeartIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'; // Using Heroicons solid version
+const HeartIconSolid = HeartSolidIcon;
 
 import LikedVideosPageSkeleton from '../components/LoadingStates/LikedVideosPageSkeleton';
 import VideoCard from '../components/VideoCard';

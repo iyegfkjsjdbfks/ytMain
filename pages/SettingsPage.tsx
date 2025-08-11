@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, FC, ReactNode, ChangeEvent, MouseEvent } from 'react';
 
 import { MoonIcon, Cog8ToothIcon } from '@heroicons/react/24/outline';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { CheckIcon as CheckSolidIcon } from '@heroicons/react/24/solid';
+const CheckIconSolid = CheckSolidIcon;
 
 import { useTheme } from '../contexts/ThemeContext';
 

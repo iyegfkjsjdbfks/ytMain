@@ -284,7 +284,9 @@ return undefined;
       throw new Error(`Feature _flag '${flagId}' not found`);
     }
 
-    _flag.rolloutStrategy?.config.percentage = Math.max(0, Math.min(100, percentage));
+    if (_flag.rolloutStrategy && _flag.rolloutStrategy.config) {
+      _flag.rolloutStrategy.config.percentage = Math.max(0, Math.min(100, percentage));
+    }
     _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -726,7 +728,9 @@ continue;
         };
 
       case 'geographic':
-        const geoTargets = _flag.rolloutStrategy?.config.geoTargets || [];
+        const rawGeo = _flag.rolloutStrategy?.config.geoTargets as unknown;
+        const geoTargets: string[] = Array.isArray(rawGeo) ? (rawGeo as string[]) : [];
+
         const userCountry = _context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
 

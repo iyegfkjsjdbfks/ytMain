@@ -1,3 +1,4 @@
+import React, { FC, TextareaHTMLAttributes } from 'react';
 
 import type React from 'react';
 

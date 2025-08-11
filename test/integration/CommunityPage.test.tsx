@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import CommunityPage from '../../pages/CommunityPage';
-import { useRef } from 'react';
+import { useRef, ReactElement } from 'react';
 import React from 'react';
 
 // Mock the hooks

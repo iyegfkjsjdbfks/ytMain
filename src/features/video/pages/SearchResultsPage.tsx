@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { lazy, FC } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { getYouTubeVideoId } from '@/lib/youtube-utils';

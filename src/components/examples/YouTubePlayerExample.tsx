@@ -1,4 +1,5 @@
 import React, { useState, useRef,  useEffect } from 'react';
+import { FC, ChangeEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;

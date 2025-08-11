@@ -1,3 +1,4 @@
+import React, { memo, lazy } from 'react';
 /**
  * Comprehensive code quality configuration and utilities
  */

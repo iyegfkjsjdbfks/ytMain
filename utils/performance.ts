@@ -1,5 +1,7 @@
 // / <reference types="vite/client" />
 // Performance monitoring utilities for React components
+import React, { useEffect } from 'react';
+import { memo, forwardRef } from 'react';
 
 interface PerformanceMetric {
   name: string;
@@ -243,7 +245,7 @@ export function withPerformanceMonitoring<P extends object>(
   const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
 
-    React.useEffect(() => {
+    useEffect(() => {
       startRender();
       return () => {
         endRender();
@@ -283,19 +285,21 @@ export const analyzeBundleSize = () => {
 return;
 }
 
-  const scripts = Array.from(document.querySelectorAll('script[src]'));
-  const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+  const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
+  const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
   console.group('📦 Bundle Analysis');
   // Estimate bundle sizes (this is approximate)
   scripts.forEach((script) => {
-    if (script.src as any && !script.src.includes('chrome-extension')) {
-      }
+    if (script.src && !script.src.includes('chrome-extension')) {
+      // Placeholder for size analysis if needed
+    }
   });
 
   styles.forEach((style) => {
-    if (style.href as any && !style.href.includes('chrome-extension')) {
-      }
+    if (style.href && !style.href.includes('chrome-extension')) {
+      // Placeholder for size analysis if needed
+    }
   });
 
   console.groupEnd();
@@ -312,5 +316,4 @@ export const monitorMemoryUsage = () => {
 
   };
 
-// Ensure valid React imports
-import { useEffect } from 'react';
+// End of utilities

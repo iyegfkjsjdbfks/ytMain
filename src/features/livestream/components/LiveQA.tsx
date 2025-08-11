@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FC } from 'react';
 import { conditionalLogger } from '@/utils/conditionalLogger';
 import { createComponentError } from '@/utils/errorUtils';
 import { useLiveQA } from '@/hooks/useLiveStream';

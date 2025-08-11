@@ -1,19 +1,10 @@
 import React, { useEffect, useCallback, useRef,  useState } from 'react';
+import { FC, KeyboardEvent, MouseEvent } from 'react';
 // @ts-nocheck
 
-import {
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-  HeartIcon,
-  ShareIcon,
-  EllipsisVerticalIcon,
-  ChevronUpIcon,
-  ChevronDownIcon,
-  ChatBubbleLeftIcon,
-} from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ShareIcon, EllipsisVerticalIcon, ChevronUpIcon, ChevronDownIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+const HeartIconSolid = HeartSolidIcon;
 
 import type { Short } from '../src/types/core';
 

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback,  memo } from 'react';
+import { memo, lazy } from 'react';
 import { FixedSizeGrid } from 'react-window';
 
 import type { Video } from '../../types/core';

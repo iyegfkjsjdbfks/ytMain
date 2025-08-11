@@ -8,6 +8,7 @@ declare namespace NodeJS {
 }
 
 import React, { useState, useEffect, useCallback, useRef,  memo } from 'react';
+import { memo, ChangeEvent } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 /// <reference types="node" />

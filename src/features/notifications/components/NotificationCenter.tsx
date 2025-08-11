@@ -1,14 +1,11 @@
 import React, { useEffect, useRef,  useState } from 'react';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { FC, MouseEvent } from 'react';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
-import {
-  BellIcon,
-  XMarkIcon,
-  CheckIcon,
-  TrashIcon,
-} from '@heroicons/react/24/outline';
+import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface NotificationCenterProps {
   className?: string;

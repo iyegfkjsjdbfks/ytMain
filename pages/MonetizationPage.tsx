@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { memo, lazy, Suspense, FC } from 'react';
 
 import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed

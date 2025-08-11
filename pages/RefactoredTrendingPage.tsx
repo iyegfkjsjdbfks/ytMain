@@ -1,3 +1,5 @@
+import React, { FC } from 'react';
+import { Navigate } from 'react-router-dom';
 import type React from 'react';
 
 import ReusableVideoGrid from '../components/ReusableVideoGrid';

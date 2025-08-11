@@ -1,5 +1,5 @@
 
-import { useRef, useState } from 'react';
+import { useRef, useState, FC } from 'react';
 
 import {
   EllipsisHorizontalIcon,

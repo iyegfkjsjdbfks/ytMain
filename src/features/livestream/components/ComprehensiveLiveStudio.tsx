@@ -1,4 +1,5 @@
 import React, { useEffect, useRef,  useState } from 'react';
+import { FC } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
 import type { LiveStream } from '../../../types/livestream';

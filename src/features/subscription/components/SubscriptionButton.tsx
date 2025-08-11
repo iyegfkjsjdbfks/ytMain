@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { FC } from 'react';
 
-import { BellIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+const BellIconSolid = BellSolidIcon;
 
 import { BellSlashIcon, BellIcon } from '@heroicons/react/24/outline';
 

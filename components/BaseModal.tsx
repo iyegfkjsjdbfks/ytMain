@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, FC, ReactNode, KeyboardEvent, MouseEvent } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
 

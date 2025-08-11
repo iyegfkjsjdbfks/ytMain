@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useRef,  useState } from 'react';
+import { FC, ChangeEvent } from 'react';
 
 import {
   CloudArrowUpIcon,

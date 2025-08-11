@@ -1,17 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import React, { useState } from 'react';
+import { FC } from 'react';
 
-import {
-  HeartIcon,
-  ChatBubbleLeftIcon,
-  ShareIcon,
-  EllipsisHorizontalIcon,
-  PhotoIcon,
-  VideoCameraIcon,
-  LinkIcon,
-} from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PhotoIcon, VideoCameraIcon, LinkIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+const HeartIconSolid = HeartSolidIcon;
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

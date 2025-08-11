@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useRef,  useState } from 'react';
+import { KeyboardEvent, MouseEvent } from 'react';
 
 import { safeLocalStorage, throttle } from '../utils/componentUtils';
 

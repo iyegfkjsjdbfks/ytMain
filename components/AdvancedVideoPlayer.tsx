@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useCallback, useEffect, useState, FC, KeyboardEvent, MouseEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;

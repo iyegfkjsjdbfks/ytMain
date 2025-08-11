@@ -1,4 +1,4 @@
-import { useEffect,  useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { CheckIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 

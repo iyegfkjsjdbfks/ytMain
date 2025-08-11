@@ -1,4 +1,6 @@
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 import Link, { Link, useParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 

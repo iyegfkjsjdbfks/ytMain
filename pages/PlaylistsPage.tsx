@@ -1,6 +1,8 @@
-import { useState,  useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
-import { PlusCircleIcon, QueueListIcon } from '@heroicons/react/24/solid';
+import { PlusCircleIcon as PlusCircleSolidIcon, QueueListIcon as QueueListSolidIcon } from '@heroicons/react/24/solid';
+const PlusCircleIconSolid = PlusCircleSolidIcon;
+const QueueListIconSolid = QueueListSolidIcon;
 import { Link } from 'react-router-dom';
 
 import { createUserPlaylist, getUserPlaylists } from '../services/realVideoService';

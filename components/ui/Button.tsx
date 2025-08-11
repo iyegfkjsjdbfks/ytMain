@@ -1,5 +1,6 @@
 
 import React, { forwardRef } from 'react';
+import { forwardRef, FC, ReactNode } from 'react';
 
 import { cn } from '../../utils/cn';
 

@@ -1,5 +1,5 @@
 
-import { useCallback,  useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, lazy, FC } from 'react';
 
 interface ImageWithFallbackProps {
   src: string;

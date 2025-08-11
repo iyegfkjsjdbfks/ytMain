@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback,  memo } from 'react';
+import { memo } from 'react';
 import { FixedSizeList } from 'react-window';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';

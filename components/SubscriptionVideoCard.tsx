@@ -1,3 +1,5 @@
+import React, { lazy } from 'react';
+import { FC, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import type React from 'react';

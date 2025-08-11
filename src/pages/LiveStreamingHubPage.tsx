@@ -1,5 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import React, { useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Play,

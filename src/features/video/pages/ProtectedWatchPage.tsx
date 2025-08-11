@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { FC } from 'react';
 
 import { useSearchParams, useParams } from 'react-router-dom';
 

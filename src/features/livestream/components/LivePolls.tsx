@@ -1,4 +1,5 @@
 import React, { useEffect,  useState } from 'react';
+import { FC } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';

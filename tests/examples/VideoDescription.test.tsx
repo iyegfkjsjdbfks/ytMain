@@ -1,5 +1,7 @@
+import { Navigate } from 'react-router-dom';
 /**
 import React from 'react';
+import { memo } from 'react';
  * Example test file demonstrating comprehensive testing practices
  * for the VideoDescription component
  */
