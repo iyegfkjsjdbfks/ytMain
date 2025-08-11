@@ -235,7 +235,7 @@ return;
 
 // ARIA live region hook
 export function useAriaLiveRegion(_initialMessage = '') {
-  const [message, setMessage] = useState(initialMessage);
+  const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
   const announce = useCallback((newMessage, priority: 'polite' | 'assertive' = 'polite') => {
