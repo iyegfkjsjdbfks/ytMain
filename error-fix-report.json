@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-08-11T00:31:17.166Z",
-  "duration": "181.37s",
+  "timestamp": "2025-08-11T02:30:49.823Z",
+  "duration": "667.24s",
   "initialErrors": 10435,
   "finalErrors": 10435,
   "totalFixed": 0,
@@ -18,7 +18,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testing.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 11 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 296 to 0\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "JSX Runtime Module (iteration 2/3)",
@@ -32,7 +32,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentOptimization.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/componentUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testUtils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in utils/testing.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed JSX runtime issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2875 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2875 errors from 296 to 0\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Cannot Find Module (iteration 1/3)",
@@ -46,7 +46,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[33m⚠️ Commented out broken import: @tanstack/react-query\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[33m⚠️ Commented out broken import: react\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in vite.config.proxy.ts\u001b[0m\n\u001b[33m⚠️ Commented out broken import: vite\u001b[0m\n\u001b[33m⚠️ Commented out broken import: @vitejs/plugin-react\u001b[0m\n\u001b[36m🔧 ✅ Fixed 902 module import errors\u001b[0m\n\u001b[36m🔧 📁 Created 5 stub files\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 44\u001b[0m\n"
+      "output": "\u001b[36m🔧 🔍 Analyzing TS2307 module not found errors...\u001b[0m\n\u001b[36m🔧 Found 0 module not found errors\u001b[0m\n\u001b[36m🔧 No TS2307 errors to fix\u001b[0m\n"
     },
     {
       "name": "Cannot Find Module (iteration 2/3)",
@@ -60,7 +60,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in src/features/creator/pages/DashboardPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/features/moderation/components/ModerationDashboard.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/features/playlist/components/PlaylistCard.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/features/search/components/AdvancedSearchFilters.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/features/video/components/VideoEditor.tsx\u001b[0m\n\u001b[36m🔧 Fixing 3 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed 0 module import errors\u001b[0m\n\u001b[36m🔧 Remaining TS2307 errors: 44\u001b[0m\n"
+      "output": "\u001b[36m🔧 🔍 Analyzing TS2307 module not found errors...\u001b[0m\n\u001b[36m🔧 Found 0 module not found errors\u001b[0m\n\u001b[36m🔧 No TS2307 errors to fix\u001b[0m\n"
     },
     {
       "name": "Cannot Find Namespace (iteration 1/3)",
@@ -74,7 +74,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 2 errors in src/hooks/useFormState.ts\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Cannot Find Namespace (iteration 2/3)",
@@ -88,7 +88,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 2 errors in src/hooks/useFormState.ts\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/LiveStreamingHubPage.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in src/pages/YouTubeDemo.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in src/utils/performanceProfiler.ts\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Binding Element Implicit Any (iteration 1/3)",
@@ -102,7 +102,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Fixing 1 errors in src/utils/testingHelpers.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/components/ErrorBoundary.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/hooks/useVideos.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 1 errors in test/test-utils.tsx\u001b[0m\n\u001b[36m🔧 Fixing 8 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 Fixing 9 errors in utils/accessibilityUtils.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed binding element issues in 54 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS7031 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS7031 errors from 750 to 0\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Binding Element Implicit Any (iteration 2/3)",
@@ -116,7 +116,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Starting TS7031 (binding element implicit any) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS7031 errors to fix\u001b[0m\n\u001b[32m✅ No TS7031 errors found!\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Implicit Any Parameter (iteration 1/3)",
@@ -158,7 +158,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Starting TS7053 (element implicit any) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS7053 errors to fix\u001b[0m\n\u001b[32m✅ No TS7053 errors found!\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Element Implicit Any (iteration 2/3)",
@@ -172,7 +172,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "\u001b[36m🔧 Starting TS7053 (element implicit any) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS7053 errors to fix\u001b[0m\n\u001b[32m✅ No TS7053 errors found!\u001b[0m\n"
+      "output": ""
     },
     {
       "name": "Property Does Not Exist",
@@ -186,7 +186,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "error": "Command failed: node scripts/fix-ts2339-property-errors.js\nnode:internal/modules/esm/resolve:873\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'typescript' imported from /home/runner/work/ytMain/ytMain/scripts/fix-ts2339-property-errors.js\n    at packageResolve (node:internal/modules/esm/resolve:873:9)\n    at moduleResolve (node:internal/modules/esm/resolve:946:18)\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)\n    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\nNode.js v20.19.4\n"
+      "output": "🔍 Analyzing TS2339 property errors...\nFound 0 property errors\n✅ Fixed 0 property errors\n⚠️ 0 TS2339 errors remaining\n"
     },
     {
       "name": "Cannot Find Name",
@@ -200,7 +200,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🔧 [2025-08-11T00:30:45.388Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-11T00:30:47.362Z] Found 0 TS2304 errors to fix\n✅ [2025-08-11T00:30:47.362Z] No TS2304 errors found!\n"
+      "output": "🔧 [2025-08-11T02:24:03.523Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-11T02:24:56.049Z] Found 0 TS2304 errors to fix\n✅ [2025-08-11T02:24:56.051Z] No TS2304 errors found!\n"
     },
     {
       "name": "Declared But Not Used",
@@ -214,7 +214,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🧹 Found 0 TS6133 unused declarations\n"
+      "output": ""
     },
     {
       "name": "Missing Properties",
@@ -298,7 +298,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "error": "Command failed: node scripts/fix-ts7019-implicit-any.js\nfile:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260\n  fixer.run().catch(console.error);\n             ^\n\nTypeError: Cannot read properties of undefined (reading 'catch')\n    at file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260:14\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v20.19.4\n"
+      "output": ""
     },
     {
       "name": "Type Not Assignable (Legacy)",
@@ -312,7 +312,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "🧰 Found 0 TS2322 errors\n"
+      "output": ""
     },
     {
       "name": "Possibly Undefined",
@@ -326,7 +326,7 @@
       "totalImprovement": 0,
       "totalDelta": 0,
       "success": true,
-      "output": "⚠️ Found 0 TS18048 possibly undefined errors\n⚠️ No TS18048 errors to fix\n"
+      "output": ""
     }
   ]
 }
