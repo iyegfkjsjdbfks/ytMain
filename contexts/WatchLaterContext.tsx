@@ -17,7 +17,7 @@ interface WatchLaterContextType {
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);
 
-export const WatchLaterProvider = ({ children }) => {
+export const WatchLaterProvider = ({ children }: {children: any}) => {
   const [watchLaterList, setWatchLaterList] = useState<VideoType[]>(() => {
     const storedList = localStorage.getItem('youtubeCloneWatchLater_v1');
     return storedList ? JSON.parse(storedList) : [];

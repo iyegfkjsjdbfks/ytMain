@@ -33,7 +33,7 @@ const createWrapper = () => {
     },
   });
 
-  const Wrapper = ({ children }) => (
+  const Wrapper = ({ children }: {children: any}) => (
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>

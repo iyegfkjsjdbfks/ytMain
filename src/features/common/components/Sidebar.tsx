@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
           {/* Main navigation links */}
           <NavLink
             to="/"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -36,7 +36,7 @@ const Sidebar: React.FC = () => {
 
           <NavLink
             to="/trending"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
 
           <NavLink
             to="/shorts"
-            className={({ isActive }) =>
+            className={({ isActive }: {isActive: boolean}) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
             <>
               <NavLink
                 to="/subscriptions"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -93,7 +93,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/history"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -109,7 +109,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/watch-later"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -125,7 +125,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/liked-videos"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -141,7 +141,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/playlists"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -163,7 +163,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/studio"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -179,7 +179,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/upload"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -195,7 +195,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/go-live"
-                className={({ isActive }) =>
+                className={({ isActive }: {isActive: boolean}) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'

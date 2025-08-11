@@ -73,7 +73,7 @@ const AccountLayout: React.FC = () => {
                     <li key={item.path}>
                       <NavLink
                         to={item.path}
-                        className={({ isActive }) =>
+                        className={({ isActive }: {isActive: boolean}) =>
                           `flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                             isActive
                               ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'

@@ -39,7 +39,7 @@ interface AccessibilityContextType {
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }) {
+export function AccessibilityProvider({ children }: {children: any}) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
@@ -202,7 +202,7 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation({ onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false,  }) {
+export function useKeyboardNavigation({ onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false,  }: {onEnd: Function}: {onHome: Function}: {onArrowRight: Function}: {onArrowLeft: Function}: {onArrowDown: Function}: {onArrowUp: Function}: {onEscape: Function}: {onEnter: Function}) {
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
 return;

@@ -28,7 +28,7 @@ interface VideoCardProps {
   video: Video;
 }
 
-const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {
+const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }: {video: any}) => {
   const { addToWatchLater, removeFromWatchLater, isWatchLater } = useWatchLater();
   const [isSaved, toggleSaved] = useToggle(isWatchLater(video.id));
   const navigate = useNavigate();

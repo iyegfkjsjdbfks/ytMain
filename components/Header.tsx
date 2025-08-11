@@ -33,7 +33,7 @@ interface HeaderProps {
   toggleSidebar: () => void;
 }
 
-const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }) => {
+const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }: {to: any}: {icon: any}: {onClick: Function}: {children: any}) => {
   const commonClasses = 'flex items-center px-4 py-3 text-sm w-full text-left text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-700/70 transition-colors duration-150';
 
   const content = (
@@ -123,7 +123,7 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
   );
 };
 
-const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = memo(({ toggleSidebar }: {toggleSidebar: any}) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
   const [isCreateMenuOpen, setIsCreateMenuOpen] = useState(false);

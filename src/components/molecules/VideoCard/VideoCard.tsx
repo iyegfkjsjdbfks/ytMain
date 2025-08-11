@@ -15,7 +15,7 @@ import type { VideoCardProps as VideoCardPropsBase } from '@/types';
 // TODO: Fix import - import { Link } from 'react-router-dom';
 
 // Simple image component since we're not using Next.js
-const Image = ({ src, alt, width, height, className, fill, sizes, ...props }) => {
+const Image = ({ src, alt, width, height, className, fill, sizes, ...props }: {sizes: any}: {fill: any}: {className: any}: {height: number}: {width: number}: {alt: any}: {src: any}) => {
   return (
     <img
       src={src}
