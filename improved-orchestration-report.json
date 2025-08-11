@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-08-11T10:26:01.188Z",
+  "duration": "54.17s",
+  "initialErrors": 86,
+  "finalErrors": 123,
+  "totalImprovement": -37,
+  "improvementRate": "-43.0",
+  "results": [
+    {
+      "script": "fix-utils-systematic.js",
+      "description": "Final utils.ts fixes",
+      "beforeCount": 86,
+      "afterCount": 108,
+      "improvement": -22,
+      "success": false,
+      "output": "\n✅ Run `npm run type-check` to verify the fixes\n"
+    },
+    {
+      "script": "fix-ts1005-enhanced.js",
+      "description": "TS1005 syntax errors",
+      "beforeCount": 108,
+      "afterCount": 108,
+      "improvement": 0,
+      "success": true,
+      "output": "\u001b[36m🔧 [2025-08-11T10:25:20.884Z] ✨ Total fixes applied: 22\u001b[0m\n\u001b[32m✅ [2025-08-11T10:25:20.884Z] 🎉 Successfully fixed 22 enhanced TS1005 syntax errors!\u001b[0m\n"
+    },
+    {
+      "script": "fix-ts1128-declaration-expected.js",
+      "description": "TS1128 declaration errors",
+      "beforeCount": 108,
+      "afterCount": 123,
+      "improvement": -15,
+      "success": false,
+      "output": "\u001b[36m[TS1128] Errors fixed: -2\u001b[0m\n\u001b[33m[TS1128] No errors were fixed. Manual intervention may be needed.\u001b[0m\n"
+    },
+    {
+      "script": "fix-ts1109-expression-expected.js",
+      "description": "TS1109 expression errors",
+      "beforeCount": 123,
+      "afterCount": 123,
+      "improvement": 0,
+      "success": true,
+      "output": "\u001b[36m🔧 [2025-08-11T10:25:43.072Z] Errors fixed: 0\u001b[0m\n\u001b[33m⚠️ [2025-08-11T10:25:43.072Z] ⚠️ Some TS1109 errors may require manual review\u001b[0m\n"
+    },
+    {
+      "script": "fix-ts1144-curly-or-semicolon.js",
+      "description": "TS1144 curly brace errors",
+      "beforeCount": 123,
+      "afterCount": 123,
+      "improvement": 0,
+      "success": true,
+      "output": "\u001b[36m🔧 [2025-08-11T10:25:54.159Z] Errors fixed: 0\u001b[0m\n\u001b[33m⚠️ [2025-08-11T10:25:54.159Z] ⚠️ Some TS1144 errors may require manual review\u001b[0m\n"
+    }
+  ]
+}
