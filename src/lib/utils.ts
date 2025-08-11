@@ -299,7 +299,6 @@ export function debounce<T extends (...args: any[]) => any>(
     timeout = setTimeout(later, wait);
   };
 }
-}
 
 /**
  * Creates a throttled function that only invokes `func` at most once per every `limit` milliseconds
@@ -307,13 +306,13 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
+export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit,
+  limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
 
-  return function executedFunction(...args: Parameters<T>);
+  return function executedFunction(...args: Parameters<T>) {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
@@ -337,8 +336,7 @@ export function fileToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
-      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
-             : 'Unknown error';
+      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed' : 'Unknown error';
       reject(new Error(errorMessage));
     };
   });
@@ -349,8 +347,8 @@ export function fileToBase64(file: File): Promise<string> {
  * @param filename - The filename
  * @returns The file extension (without the dot)
  */
-export function getFileExtension(filename): string {
-  return filename.slice(((filename.lastIndexOf('.') 1) >>> 0) + 2);
+export function getFileExtension(filename: string): string {
+  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
 // =================================
@@ -407,7 +405,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value) value is string {
+export function isString(value: any): value is string {
   return typeof value === 'string' || value instanceof String;
 }
 
@@ -416,7 +414,7 @@ export function isString(value) value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value) value is number {
+export function isNumber(value: any): value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 
@@ -429,7 +427,7 @@ export function isNumber(value) value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex) r: number; g: number; b: number } | null {
+export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
