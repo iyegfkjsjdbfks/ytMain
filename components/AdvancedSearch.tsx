@@ -20,7 +20,7 @@ export interface SearchFilters {
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query: string, filters: SearchFilters) => void;
+  onSearch: (query, filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }

@@ -283,9 +283,9 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args) => any>(
   func: T,
-  wait: number
+  wait
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout>;
 
@@ -427,7 +427,7 @@ export function isNumber(value): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+export function hexToRgb(hex): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex: string): 'light' | 'dark' {
+export function getColorContrast(hex): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -543,7 +543,7 @@ export function sleep(ms): Promise<void> {
  */
 export function timeout<T>(
   promise: Promise<T>,
-  timeoutMs: number,
+  timeoutMs,
   error = 'Operation timed out',
 ): Promise<T> {
   return Promise.race([
@@ -580,6 +580,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min: number, max: number): number {
+export function randomInt(min, max): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

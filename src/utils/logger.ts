@@ -34,13 +34,13 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(level: LogLevel, message: any, ...args: unknown[]): string {
+  private formatMessage(level: LogLevel, message, ...args: unknown[]): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
     return `${prefix} ${message}`;
   }
 
-  debug(message: any, ...args: unknown[]): void {
+  debug(message, ...args: unknown[]): void {
     if (!this.shouldLog('debug')) {
 return;
 }
@@ -51,7 +51,7 @@ return;
     }
   }
 
-  info(message: any, ...args: unknown[]): void {
+  info(message, ...args: unknown[]): void {
     if (!this.shouldLog('info')) {
 return;
 }
@@ -62,7 +62,7 @@ return;
     }
   }
 
-  warn(message: any, ...args: unknown[]): void {
+  warn(message, ...args: unknown[]): void {
     if (!this.shouldLog('warn')) {
 return;
 }
@@ -72,7 +72,7 @@ return;
     }
   }
 
-  error(message: any, error?: Error | unknown, ...args: unknown[]): void {
+  error(message, error?: Error | unknown, ...args: unknown[]): void {
     if (!this.shouldLog('error')) {
 return;
 }
