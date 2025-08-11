@@ -290,7 +290,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
   _queryKey,
-  _queryFn: ({ pageParam }: {pageParam}) => Promise<TData>,
+  _queryFn: ({ pageParam }) => Promise<TData>,
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData) => unknown;

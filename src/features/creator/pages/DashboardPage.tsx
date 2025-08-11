@@ -19,11 +19,11 @@ import { ChartBarIcon,
   TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer = ({ children, width, height }: {height, width: number; children}) => (
+const ResponsiveContainer = ({ children, width, height }) => (
   <div style={{ width, height }}>{children}</div>
 );
-const PieChart = ({ children }: {children}) => <div className="flex items-center justify-center h-full">{children}</div>;
-const Pie = ({ data }: {data}) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
+const PieChart = ({ children }) => <div className="flex items-center justify-center h-full">{children}</div>;
+const Pie = ({ data }) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
 const Cell = (_props) => null;
 const Tooltip = (_props) => null;
 const Legend = (_props) => null;

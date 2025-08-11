@@ -35,7 +35,7 @@ interface NavItemProps {
   title?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }: {title: string; currentPath; label; icon; to}) => {
+const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
   const isActive = currentPath === to ||
                    (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 
@@ -54,7 +54,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
 });
 NavItem.displayName = 'NavItem'; // For better debugging
 
-const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }: {isOpen: boolean}) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
   const location = useLocation();
 
   return (

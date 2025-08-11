@@ -20,7 +20,7 @@ const VideoGridItem = memo<{
   style: React.CSSProperties, data: {
     videos: Video, itemsPerRow: number; onVideoClick:(video: Video) => void
   };
-}>(({ columnIndex, rowIndex, style, data }: {data, style; rowIndex, columnIndex: number}) => {
+}>(({ columnIndex, rowIndex, style, data }) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];

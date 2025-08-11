@@ -22,7 +22,7 @@ interface MobileVideoItemProps {
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data, style; index: number}) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);

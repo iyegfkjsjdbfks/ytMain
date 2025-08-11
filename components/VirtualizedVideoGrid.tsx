@@ -43,7 +43,7 @@ interface GridItemProps {
   };
 }
 
-const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: {data, style; rowIndex, columnIndex: number}) => {
+const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }) => {
   const {
     videos,
     columnsPerRow,
@@ -137,7 +137,7 @@ return;
 
   // Handle infinite scrolling
   const handleScroll = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }: {clientHeight, scrollHeight; scrollTop}) => {
+    ({ scrollTop, scrollHeight, clientHeight }) => {
       if (!hasMore || loading || !onLoadMore) {
 return;
 }

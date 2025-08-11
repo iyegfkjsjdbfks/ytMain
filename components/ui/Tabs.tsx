@@ -31,7 +31,7 @@ export interface TabsProps {
   className?: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children, className = '' }: {children; onValueChange: Function; value}) => {
+export const Tabs: React.FC<TabsProps> = ({ value, onValueChange, children, className = '' }) => {
   return (
     <TabsContext.Provider value={{ value, onValueChange }}>
       <div className={className}>
@@ -46,7 +46,7 @@ interface TabsListProps {
   className?: string;
 }
 
-export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }: {children}) => {
+export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }) => {
   return (
     <div className={`flex space-x-1 border-b border-neutral-200 dark:border-neutral-700 ${className}`}>
       {children}
@@ -60,7 +60,7 @@ interface TabsTriggerProps {
   className?: string;
 }
 
-export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className = '' }: {children; value}) => {
+export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className = '' }) => {
   const { value: activeValue, onValueChange } = useTabsContext();
   const isActive = activeValue === value;
 
@@ -86,7 +86,7 @@ interface TabsContentProps {
   className?: string;
 }
 
-export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className = '' }: {children; value}) => {
+export const TabsContent: React.FC<TabsContentProps> = ({ value, children, className = '' }) => {
   const { value: activeValue } = useTabsContext();
 
   if (activeValue !== value) {

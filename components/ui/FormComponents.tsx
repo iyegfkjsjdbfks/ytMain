@@ -81,7 +81,7 @@ const FieldLabel: React.FC<{
   htmlFor?: string;
   required?: boolean;
   className?: string; children: React.ReactNode
-}> = ({ htmlFor, required, className, children }: {children, className; required, htmlFor}) => (
+}> = ({ htmlFor, required, className, children }) => (
   <label
     htmlFor={htmlFor}
     className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
@@ -95,7 +95,7 @@ const FieldLabel: React.FC<{
 const FieldError: React.FC<{
   error?: string;
   className?: string;
-}> = ({ error, className }: {className, error: Error}) => {
+}> = ({ error, className }) => {
   if (!error) {
 return null;
 }
@@ -111,7 +111,7 @@ return null;
 const FieldHint: React.FC<{
   hint?: string;
   className?: string;
-}> = ({ hint, className }: {className, hint}) => {
+}> = ({ hint, className }) => {
   if (!hint) {
 return null;
 }
@@ -494,7 +494,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 export const FormGroup: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }: {className, children}) => (
+}> = ({ children, className }) => (
   <div className={cn('space-y-4', className)}>
     {children}
   </div>
@@ -505,7 +505,7 @@ export const FormActions: React.FC<{
   children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
-}> = ({ children, className, align = 'right' }: {className, children}) => {
+}> = ({ children, className, align = 'right' }) => {
   const alignClasses = {
     left: 'justify-start',
     center: 'justify-center', right: 'justify-end'

@@ -19,7 +19,7 @@ interface CategoryTabsProps {
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory; activeCategory; categories}) => {
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }) => {
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">

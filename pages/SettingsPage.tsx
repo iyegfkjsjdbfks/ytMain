@@ -8,7 +8,7 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 
 import { useTheme } from '../contexts/ThemeContext';
 
-const SettingSection: React.FC<{ title, children: React.ReactNode }> = ({ title, children }: {children, title: string}) => (
+const SettingSection: React.FC<{ title, children: React.ReactNode }> = ({ title, children }) => (
   <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
     <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
     <div className="space-y-4">
@@ -21,7 +21,7 @@ const ToggleSetting: React.FC<{
   label: string;
   description?: string;
   checked, onChange: (checked: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
-}> = ({ label, description, checked, onChange }: {onChange: Function, checked; description, label}) => (
+}> = ({ label, description, checked, onChange }) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
       <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -51,7 +51,7 @@ const ToggleSetting: React.FC<{
 const SelectSetting: React.FC<{
   label, value: string;
   options, onChange: (value) => void
-}> = ({ label, value, options, onChange }: {onChange: Function, options; value, label}) => (
+}> = ({ label, value, options, onChange }) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
       {label}

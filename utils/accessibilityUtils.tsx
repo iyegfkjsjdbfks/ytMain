@@ -24,7 +24,7 @@ interface AccessibilityContextType {
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }: {children: React.ReactNode}) {
+export function AccessibilityProvider({ children }) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
@@ -297,7 +297,7 @@ export function checkColorContrast(foreground, background): {
 }
 
 // Skip link component
-export function SkipLink({ href, children }: { href, children: React.ReactNode }) {
+export function SkipLink({ href, children }) {
   return (
     <a
       href={href}

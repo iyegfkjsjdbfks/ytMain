@@ -131,7 +131,7 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
     </div>
   );
 
-  const SimpleChart: React.FC<{ data: number; labels: string[] }> = ({ data, labels }: {labels; data}) => {
+  const SimpleChart: React.FC<{ data: number; labels: string[] }> = ({ data, labels }) => {
     const maxValue = Math.max(...data);
     const minValue = Math.min(...data);
     const range = maxValue - minValue || 1;
