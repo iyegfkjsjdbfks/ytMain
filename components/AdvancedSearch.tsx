@@ -1,6 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {

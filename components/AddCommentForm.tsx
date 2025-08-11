@@ -1,5 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
+import { useState } from 'react';
+import { useRef } from 'react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
