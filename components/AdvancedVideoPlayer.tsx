@@ -2,6 +2,10 @@
 /// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
 
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
