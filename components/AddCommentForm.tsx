@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;

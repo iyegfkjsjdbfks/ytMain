@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useEffect, useRef, useState, useCallback, type RefObject } from 'react';
+import { useEffect, useRef, useState, useCallback, type RefObject } from 'react';
 
 interface UseIntersectionObserverOptions {
   threshold?: number | number;
@@ -135,15 +135,7 @@ export const useIntersectionVideoAutoplay = ({
 /**
  * Hook for lazy loading images based on visibility
  */
-export const useLazyImage = ({
-  src,
-  threshold = 0.1,
-  rootMargin = '50px',
-}: {
-  src: string;
-  threshold?: number;
-  rootMargin?: string;
-}) => {
+export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -184,19 +176,7 @@ export const useLazyImage = ({
 /**
  * Hook for infinite scrolling
  */
-export const useInfiniteScroll = ({
-  hasNextPage = true,
-  isFetchingNextPage = false,
-  fetchNextPage,
-  threshold = 1.0,
-  rootMargin = '100px',
-}: {
-  hasNextPage?: boolean;
-  isFetchingNextPage?: boolean;
-  fetchNextPage: () => void;
-  threshold?: number;
-  rootMargin?: string;
-}) => {
+export const useInfiniteScroll = ({ hasNextPage = true, isFetchingNextPage = false, fetchNextPage, threshold = 1.0, rootMargin = '100px',  }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
     rootMargin,

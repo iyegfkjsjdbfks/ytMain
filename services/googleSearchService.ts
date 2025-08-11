@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 // / <reference types="vite/client" />
 // Google Custom Search API service for YouTube video search
 import { isYouTubeDataApiBlocked } from '../src/utils/youtubeApiUtils';

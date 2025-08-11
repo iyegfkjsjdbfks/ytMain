@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import { ComprehensiveLiveStudio } from '../src/features/livestream/components';
 

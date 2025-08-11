@@ -1,10 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
-// TODO: Fix import - import { useState } from 'react';
+import { useState } from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * Studio-specific header component with studio navigation and controls

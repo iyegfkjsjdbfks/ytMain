@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import { cn } from '../../utils/cn';
 
@@ -178,7 +178,7 @@ export const Loading: React.FC<LoadingProps> = ({
 };
 
 // Specialized Loading Components for common use cases
-export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
+export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn('space-y-3', className)}>
     <Skeleton height="h-48" rounded="lg" />
     <div className="space-y-2">
@@ -189,7 +189,7 @@ export const VideoCardSkeleton: React.FC<{ className?: string }> = ({ className 
   </div>
 );
 
-export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
+export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn('flex space-x-3', className)}>
     <Skeleton width="w-8" height="h-8" rounded="full" />
     <div className="flex-1 space-y-2">
@@ -200,7 +200,7 @@ export const CommentSkeleton: React.FC<{ className?: string }> = ({ className }:
   </div>
 );
 
-export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
+export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn('flex items-center space-x-3', className)}>
     <Skeleton width="w-12" height="h-12" rounded="full" />
     <div className="flex-1 space-y-2">
@@ -210,7 +210,7 @@ export const ChannelSkeleton: React.FC<{ className?: string }> = ({ className }:
   </div>
 );
 
-export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
+export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn('space-y-3', className)}>
     <Skeleton height="h-32" rounded="lg" />
     <div className="space-y-2">
@@ -224,7 +224,7 @@ export const PlaylistSkeleton: React.FC<{ className?: string }> = ({ className }
 export const LoadingScreen: React.FC<{
   message?: string;
   className?: string;
-}> = ({ message = 'Loading...', className }: {className: any}) => (
+}> = ({ message = 'Loading...', className }) => (
   <div className={cn('flex items-center justify-center min-h-screen', className)}>
     <Loading size="lg" text={message} />
   </div>
@@ -234,7 +234,7 @@ export const LoadingScreen: React.FC<{
 export const PageLoading: React.FC<{
   message?: string;
   className?: string;
-}> = ({ message = 'Loading...', className }: {className: any}) => (
+}> = ({ message = 'Loading...', className }) => (
   <div className={cn('flex items-center justify-center py-12', className)}>
     <Loading size="md" text={message} />
   </div>

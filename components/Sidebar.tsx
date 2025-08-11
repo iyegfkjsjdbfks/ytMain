@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link, useLocation } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,10 +9,10 @@ declare global {
   }
 }
 
-// TODO: Fix import - import React, { memo } from 'react';
+import React, { memo } from 'react';
 
-// TODO: Fix import - import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
-// TODO: Fix import - import { Link, useLocation } from 'react-router-dom';
+import { QueueListIcon, ChartBarIcon, CogIcon, CurrencyDollarIcon, DocumentTextIcon, VideoCameraIcon, ChatBubbleLeftRightIcon, UserGroupIcon, PaintBrushIcon, FilmIcon } from '@heroicons/react/24/solid'; // Added for Library and Studio
+import { Link, useLocation } from 'react-router-dom';
 
 import ClockIcon from './icons/ClockIcon';
 import FireIcon from './icons/FireIcon';
@@ -35,7 +36,7 @@ interface NavItemProps {
   title?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }: {title: string}: {currentPath: any}: {label: any}: {icon: any}: {to: any}) => {
+const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPath, title }) => {
   const isActive = currentPath === to ||
                    (to === '/' && (currentPath.startsWith('/watch') || currentPath.startsWith('/channel') || currentPath.startsWith('/search') || currentPath.startsWith('/library')));
 
@@ -54,7 +55,7 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
 });
 NavItem.displayName = 'NavItem'; // For better debugging
 
-const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }: {isOpen: boolean}) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ isOpen }) => {
   const location = useLocation();
 
   return (

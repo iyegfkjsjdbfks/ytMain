@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import LiveStreams from './LiveStreams';
 import ShortsSection from './ShortsSection';
@@ -23,7 +23,7 @@ interface HomeContentProps {
   videos: Video;
 }
 
-const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: {videos: any}: {selectedCategory: any}) => {
+const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {
   return (
     <>
       {selectedCategory === 'All' && (

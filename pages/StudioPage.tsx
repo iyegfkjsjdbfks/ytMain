@@ -1,23 +1,20 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
-
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
+import { Link } from 'react-router-dom';
 import {
   VideoCameraIcon,
   ChartBarIcon,
   CogIcon,
-
   BellIcon,
   PlayIcon,
   EyeIcon,
   HeartIcon,
   ChatBubbleLeftIcon,
   ArrowUpIcon,
-
   PlusIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';

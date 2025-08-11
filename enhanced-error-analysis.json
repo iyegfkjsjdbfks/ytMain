@@ -1,0 +1,1709 @@
+{
+  "timestamp": "2025-08-11T00:07:47.333Z",
+  "totalErrors": 10435,
+  "errorsByType": {
+    "Cannot Find Namespace": {
+      "code": "2503",
+      "count": 494,
+      "percentage": "4.7",
+      "priority": 2,
+      "examples": [
+        {
+          "message": "Cannot find namespace 'React'.",
+          "line": "App.tsx(31,12): error TS2503: Cannot find namespace 'React'."
+        },
+        {
+          "message": "Cannot find namespace 'React'.",
+          "line": "components/AccountLayout.tsx(24,22): error TS2503: Cannot find namespace 'React'."
+        },
+        {
+          "message": "Cannot find namespace 'React'.",
+          "line": "components/AddCommentForm.tsx(21,23): error TS2503: Cannot find namespace 'React'."
+        },
+        {
+          "message": "Cannot find namespace 'React'.",
+          "line": "components/AddCommentForm.tsx(30,28): error TS2503: Cannot find namespace 'React'."
+        },
+        {
+          "message": "Cannot find namespace 'React'.",
+          "line": "components/AdvancedSearch.tsx(39,23): error TS2503: Cannot find namespace 'React'."
+        }
+      ],
+      "fixScript": "fix-ts2503-cannot-find-namespace.js"
+    },
+    "JSX Runtime Module": {
+      "code": "2875",
+      "count": 287,
+      "percentage": "2.8",
+      "priority": 2,
+      "examples": [
+        {
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package inst",
+          "line": "App.tsx(33,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed."
+        },
+        {
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package inst",
+          "line": "components/AccountLayout.tsx(48,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed."
+        },
+        {
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package inst",
+          "line": "components/AddCommentForm.tsx(54,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed."
+        },
+        {
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package inst",
+          "line": "components/AdvancedSearch.tsx(184,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed."
+        },
+        {
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package inst",
+          "line": "components/AdvancedVideoPlayer.tsx(308,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed."
+        }
+      ],
+      "fixScript": "fix-ts2875-jsx-runtime.js"
+    },
+    "Cannot Find Module": {
+      "code": "2307",
+      "count": 72,
+      "percentage": "0.7",
+      "priority": 2,
+      "examples": [
+        {
+          "message": "Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations.",
+          "line": "components/AccountLayout.tsx(17,8): error TS2307: Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations."
+        },
+        {
+          "message": "Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations.",
+          "line": "components/AdvancedSearch.tsx(21,8): error TS2307: Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations."
+        },
+        {
+          "message": "Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations.",
+          "line": "components/AdvancedVideoPlayer.tsx(35,8): error TS2307: Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations."
+        },
+        {
+          "message": "Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations.",
+          "line": "components/CommentsSection.tsx(16,8): error TS2307: Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations."
+        },
+        {
+          "message": "Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations.",
+          "line": "components/CommunityPosts.tsx(21,8): error TS2307: Cannot find module '@heroicons/react/24/outline' or its corresponding type declarations."
+        }
+      ],
+      "fixScript": "fix-ts2307-cannot-find-module.js"
+    },
+    "Cannot Find Name/Variable": {
+      "code": "2304",
+      "count": 3837,
+      "percentage": "36.8",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Cannot find name 'createBrowserRouter'.",
+          "line": "App.tsx(10,16): error TS2304: Cannot find name 'createBrowserRouter'."
+        },
+        {
+          "message": "Cannot find name 'RouterProvider'.",
+          "line": "App.tsx(34,8): error TS2304: Cannot find name 'RouterProvider'."
+        },
+        {
+          "message": "Cannot find name 'elemName'.",
+          "line": "components/AccountLayout.tsx(6,8): error TS2304: Cannot find name 'elemName'."
+        },
+        {
+          "message": "Cannot find name 'NavLink'.",
+          "line": "components/AccountLayout.tsx(73,24): error TS2304: Cannot find name 'NavLink'."
+        },
+        {
+          "message": "Cannot find name 'NavLink'.",
+          "line": "components/AccountLayout.tsx(92,25): error TS2304: Cannot find name 'NavLink'."
+        }
+      ],
+      "fixScript": "fix-ts2304-cannot-find-name.js"
+    },
+    "Implicit Any Parameter": {
+      "code": "7006",
+      "count": 2874,
+      "percentage": "27.5",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Parameter 'commentText' implicitly has an 'any' type.",
+          "line": "components/AddCommentForm.tsx(17,21): error TS7006: Parameter 'commentText' implicitly has an 'any' type."
+        },
+        {
+          "message": "Parameter 'e' implicitly has an 'any' type.",
+          "line": "components/AddCommentForm.tsx(66,24): error TS7006: Parameter 'e' implicitly has an 'any' type."
+        },
+        {
+          "message": "Parameter 'query' implicitly has an 'any' type.",
+          "line": "components/AdvancedSearch.tsx(34,14): error TS7006: Parameter 'query' implicitly has an 'any' type."
+        },
+        {
+          "message": "Parameter 'searchQuery' implicitly has an 'any' type.",
+          "line": "components/AdvancedSearch.tsx(81,32): error TS7006: Parameter 'searchQuery' implicitly has an 'any' type."
+        },
+        {
+          "message": "Parameter 'h' implicitly has an 'any' type.",
+          "line": "components/AdvancedSearch.tsx(110,68): error TS7006: Parameter 'h' implicitly has an 'any' type."
+        }
+      ],
+      "fixScript": "fix-ts7006-implicit-any-param.js"
+    },
+    "Property Does Not Exist": {
+      "code": "2339",
+      "count": 754,
+      "percentage": "7.2",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Property 'startTime' does not exist on type 'never'.",
+          "line": "components/AdvancedVideoPlayer.tsx(141,63): error TS2339: Property 'startTime' does not exist on type 'never'."
+        },
+        {
+          "message": "Property 'endTime' does not exist on type 'never'.",
+          "line": "components/AdvancedVideoPlayer.tsx(141,118): error TS2339: Property 'endTime' does not exist on type 'never'."
+        },
+        {
+          "message": "Property 'startTime' does not exist on type 'never'.",
+          "line": "components/AdvancedVideoPlayer.tsx(428,80): error TS2339: Property 'startTime' does not exist on type 'never'."
+        },
+        {
+          "message": "Property 'title' does not exist on type 'never'.",
+          "line": "components/AdvancedVideoPlayer.tsx(434,36): error TS2339: Property 'title' does not exist on type 'never'."
+        },
+        {
+          "message": "Property 'title' does not exist on type 'never'.",
+          "line": "components/AdvancedVideoPlayer.tsx(535,73): error TS2339: Property 'title' does not exist on type 'never'."
+        }
+      ],
+      "fixScript": "fix-ts2339-property-errors.js"
+    },
+    "Binding Element Implicit Any": {
+      "code": "7031",
+      "count": 736,
+      "percentage": "7.1",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Binding element 'isActive' implicitly has an 'any' type.",
+          "line": "components/AccountLayout.tsx(75,39): error TS7031: Binding element 'isActive' implicitly has an 'any' type."
+        },
+        {
+          "message": "Binding element 'currentUserAvatarUrl' implicitly has an 'any' type.",
+          "line": "components/AddCommentForm.tsx(22,3): error TS7031: Binding element 'currentUserAvatarUrl' implicitly has an 'any' type."
+        },
+        {
+          "message": "Binding element 'onCommentSubmit' implicitly has an 'any' type.",
+          "line": "components/AddCommentForm.tsx(23,3): error TS7031: Binding element 'onCommentSubmit' implicitly has an 'any' type."
+        },
+        {
+          "message": "Binding element 'maxCommentLength' implicitly has an 'any' type.",
+          "line": "components/AddCommentForm.tsx(24,3): error TS7031: Binding element 'maxCommentLength' implicitly has an 'any' type."
+        },
+        {
+          "message": "Binding element 'onSearch' implicitly has an 'any' type.",
+          "line": "components/AdvancedSearch.tsx(40,3): error TS7031: Binding element 'onSearch' implicitly has an 'any' type."
+        }
+      ],
+      "fixScript": "fix-ts7031-binding-element-any.js"
+    },
+    "Element Implicit Any": {
+      "code": "7053",
+      "count": 107,
+      "percentage": "1.0",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.",
+          "line": "components/BaseForm.tsx(103,42): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
+        },
+        {
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.",
+          "line": "components/BaseForm.tsx(117,42): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
+        },
+        {
+          "message": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.",
+          "line": "components/BaseForm.tsx(140,67): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'."
+        },
+        {
+          "message": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.",
+          "line": "components/BaseForm.tsx(141,24): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'."
+        },
+        {
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.",
+          "line": "components/BaseForm.tsx(263,71): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'."
+        }
+      ],
+      "fixScript": "fix-ts7053-element-implicit-any.js"
+    },
+    "No Exported Member": {
+      "code": "2305",
+      "count": 23,
+      "percentage": "0.2",
+      "priority": 3,
+      "examples": [
+        {
+          "message": "Module '\"./VideoGrid\"' has no exported member 'default'.",
+          "line": "src/components/organisms/VideoGrid/index.ts(2,10): error TS2305: Module '\"./VideoGrid\"' has no exported member 'default'."
+        },
+        {
+          "message": "Module '\"./VideoGrid\"' has no exported member 'default'.",
+          "line": "src/components/organisms/VideoGrid/index.ts(3,10): error TS2305: Module '\"./VideoGrid\"' has no exported member 'default'."
+        },
+        {
+          "message": "Module '\"../../../types/core\"' has no exported member 'ApiResponse'.",
+          "line": "src/features/comments/services/commentService.ts(3,24): error TS2305: Module '\"../../../types/core\"' has no exported member 'ApiResponse'."
+        },
+        {
+          "message": "Module '\"../../../types/core\"' has no exported member 'ApiResponse'.",
+          "line": "src/features/notifications/services/notificationService.ts(3,15): error TS2305: Module '\"../../../types/core\"' has no exported member 'ApiResponse'."
+        },
+        {
+          "message": "Module '\"../../../types/core\"' has no exported member 'ApiResponse'.",
+          "line": "src/features/playlist/services/playlistService.ts(3,32): error TS2305: Module '\"../../../types/core\"' has no exported member 'ApiResponse'."
+        }
+      ],
+      "fixScript": "fix-ts2305-no-exported-member.js"
+    },
+    "Type Not Assignable": {
+      "code": "2322",
+      "count": 153,
+      "percentage": "1.5",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "line": "components/ModerationDashboard.tsx(107,9): error TS2322: Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "line": "components/ModerationDashboard.tsx(122,11): error TS2322: Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "line": "components/ModerationDashboard.tsx(136,9): error TS2322: Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "line": "components/ModerationDashboard.tsx(148,11): error TS2322: Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "line": "components/ModerationDashboard.tsx(170,9): error TS2322: Type 'string[]' is not assignable to type 'string'."
+        }
+      ],
+      "fixScript": "fix-ts2322-enhanced.js"
+    },
+    "Missing Properties": {
+      "code": "2739",
+      "count": 69,
+      "percentage": "0.7",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'RefactorTask': name, description, execute, priority",
+          "line": "scripts/refactor-codebase.ts(19,11): error TS2739: Type 'never[]' is missing the following properties from type 'RefactorTask': name, description, execute, priority"
+        },
+        {
+          "message": "Type '{ name: string; description: string; priority: string; execute: () => Promise<void>; }[]' is missing the following properties from type 'Refacto",
+          "line": "scripts/refactor-codebase.ts(28,5): error TS2739: Type '{ name: string; description: string; priority: string; execute: () => Promise<void>; }[]' is missing the following properties from type 'RefactorTask': name, description, execute, priority"
+        },
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'TestResult': name, status, duration",
+          "line": "scripts/test-all-functionality.ts(76,7): error TS2739: Type 'never[]' is missing the following properties from type 'TestResult': name, status, duration"
+        },
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'TestResult': name, status, duration",
+          "line": "scripts/test-all-functionality.ts(130,11): error TS2739: Type 'never[]' is missing the following properties from type 'TestResult': name, status, duration"
+        },
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'AnalyticsEvent': name, timestamp, sessionId, category",
+          "line": "services/analyticsService.ts(60,11): error TS2739: Type 'never[]' is missing the following properties from type 'AnalyticsEvent': name, timestamp, sessionId, category"
+        }
+      ],
+      "fixScript": "fix-ts2739-missing-properties.js"
+    },
+    "Argument Type Mismatch": {
+      "code": "2345",
+      "count": 68,
+      "percentage": "0.7",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'.",
+          "line": "components/BaseForm.tsx(95,14): error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'.",
+          "line": "components/BaseForm.tsx(105,18): error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'.",
+          "line": "components/BaseForm.tsx(120,18): error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "message": "Argument of type 'string' is not assignable to parameter of type 'never'.",
+          "line": "components/BaseForm.tsx(218,39): error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'."
+        },
+        {
+          "message": "Argument of type 'CommunityPost[]' is not assignable to parameter of type 'CommunityPost'.",
+          "line": "pages/CommunityPage.tsx(188,34): error TS2345: Argument of type 'CommunityPost[]' is not assignable to parameter of type 'CommunityPost'."
+        }
+      ],
+      "fixScript": "fix-ts2345-argument-type.js"
+    },
+    "Property Suggestion": {
+      "code": "2551",
+      "count": 18,
+      "percentage": "0.2",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "Property 'thumbnailUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'. Did you mean 'thumbnail'?",
+          "line": "src/hooks/useTrendingSearch.ts(25,26): error TS2551: Property 'thumbnailUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'. Did you mean 'thumbnail'?"
+        },
+        {
+          "message": "Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?",
+          "line": "src/services/unifiedDataService.ts(285,28): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?"
+        },
+        {
+          "message": "Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?",
+          "line": "src/services/unifiedDataService.ts(524,37): error TS2551: Property 'likeCount' does not exist on type 'Video'. Did you mean 'dislikeCount'?"
+        },
+        {
+          "message": "Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?",
+          "line": "src/services/unifiedDataService.ts(530,78): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?"
+        },
+        {
+          "message": "Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?",
+          "line": "src/services/unifiedDataService.ts(533,44): error TS2551: Property 'channel' does not exist on type 'Video'. Did you mean 'channelId'?"
+        }
+      ],
+      "fixScript": "fix-ts2551-property-does-not-exist.js"
+    },
+    "Implicit Any Type": {
+      "code": "7019",
+      "count": 17,
+      "percentage": "0.2",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type.",
+          "line": "src/hooks/optimizedHooks.ts(323,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type.",
+          "line": "src/hooks/optimizedHooks.ts(339,23): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type.",
+          "line": "src/hooks/useAnalytics.ts(392,30): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type.",
+          "line": "src/hooks/useDebounce.ts(45,49): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type.",
+          "line": "src/hooks/usePerformanceOptimization.ts(54,40): error TS7019: Rest parameter 'args' implicitly has an 'any[]' type."
+        }
+      ],
+      "fixScript": "fix-ts7019-implicit-any.js"
+    },
+    "Declared But Not Used": {
+      "code": "6133",
+      "count": 5,
+      "percentage": "0.0",
+      "priority": 4,
+      "examples": [
+        {
+          "message": "'error' is declared but its value is never read.",
+          "line": "src/features/auth/store/authStore.ts(36,14): error TS6133: 'error' is declared but its value is never read."
+        },
+        {
+          "message": "'streamId' is declared but its value is never read.",
+          "line": "src/hooks/useLiveStream.ts(15,31): error TS6133: 'streamId' is declared but its value is never read."
+        },
+        {
+          "message": "'channelId' is declared but its value is never read.",
+          "line": "src/hooks/useSubscriptions.ts(6,48): error TS6133: 'channelId' is declared but its value is never read."
+        },
+        {
+          "message": "'enabled' is declared but its value is never read.",
+          "line": "src/hooks/useSubscriptions.ts(6,59): error TS6133: 'enabled' is declared but its value is never read."
+        },
+        {
+          "message": "'channelId' is declared but its value is never read.",
+          "line": "src/hooks/useSubscriptions.ts(7,39): error TS6133: 'channelId' is declared but its value is never read."
+        }
+      ],
+      "fixScript": "fix-ts6133-declared-not-used.js"
+    },
+    "TS2582": {
+      "code": "2582",
+      "count": 215,
+      "percentage": "2.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types",
+          "line": "test/components/ErrorBoundary.test.tsx(24,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`."
+        },
+        {
+          "message": "Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha",
+          "line": "test/components/ErrorBoundary.test.tsx(25,3): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`."
+        },
+        {
+          "message": "Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha",
+          "line": "test/components/ErrorBoundary.test.tsx(35,3): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`."
+        },
+        {
+          "message": "Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha",
+          "line": "test/components/ErrorBoundary.test.tsx(47,3): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`."
+        },
+        {
+          "message": "Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha",
+          "line": "test/components/ErrorBoundary.test.tsx(59,3): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2688": {
+      "code": "2688",
+      "count": 157,
+      "percentage": "1.5",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot find type definition file for 'react/jsx-runtime'.",
+          "line": "App.tsx(1,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "message": "Cannot find type definition file for 'react/jsx-runtime'.",
+          "line": "components/AccountLayout.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "message": "Cannot find type definition file for 'react/jsx-runtime'.",
+          "line": "components/AddCommentForm.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "message": "Cannot find type definition file for 'react/jsx-runtime'.",
+          "line": "components/AdvancedSearch.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "message": "Cannot find type definition file for 'react/jsx-runtime'.",
+          "line": "components/AdvancedVideoPlayer.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2740": {
+      "code": "2740",
+      "count": 111,
+      "percentage": "1.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'AlertItem': id, type, category, message, and 3 more.",
+          "line": "components/DeveloperDashboard.tsx(197,11): error TS2740: Type 'never[]' is missing the following properties from type 'AlertItem': id, type, category, message, and 3 more."
+        },
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more.",
+          "line": "contexts/OptimizedMiniplayerContext.tsx(46,3): error TS2740: Type 'never[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more."
+        },
+        {
+          "message": "Type 'Video[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more.",
+          "line": "contexts/OptimizedMiniplayerContext.tsx(115,9): error TS2740: Type 'Video[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more."
+        },
+        {
+          "message": "Type 'any[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more.",
+          "line": "contexts/OptimizedMiniplayerContext.tsx(122,9): error TS2740: Type 'any[]' is missing the following properties from type 'Video': id, title, thumbnail, duration, and 4 more."
+        },
+        {
+          "message": "Type 'never[]' is missing the following properties from type 'StrictNotification': id, type, data, timestamp, and 2 more.",
+          "line": "contexts/UnifiedAppContext.tsx(52,3): error TS2740: Type 'never[]' is missing the following properties from type 'StrictNotification': id, type, data, timestamp, and 2 more."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2694": {
+      "code": "2694",
+      "count": 65,
+      "percentage": "0.6",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'.",
+          "line": "components/AdvancedVideoPlayer.tsx(116,44): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'.",
+          "line": "components/HoverAutoplayVideoCard.tsx(44,41): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'.",
+          "line": "components/HoverAutoplayVideoCard.tsx(45,40): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'.",
+          "line": "components/LiveStreamManager.tsx(101,39): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'.",
+          "line": "components/LiveStreamManager.tsx(102,38): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS7008": {
+      "code": "7008",
+      "count": 52,
+      "percentage": "0.5",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Member 'IntrinsicElements' implicitly has an 'any' type.",
+          "line": "pages/CreatorStudioPage.tsx(4,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type."
+        },
+        {
+          "message": "Member 'IntrinsicElements' implicitly has an 'any' type.",
+          "line": "pages/HomePage.tsx(5,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type."
+        },
+        {
+          "message": "Member 'IntrinsicElements' implicitly has an 'any' type.",
+          "line": "pages/LoginPage.tsx(5,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type."
+        },
+        {
+          "message": "Member 'IntrinsicElements' implicitly has an 'any' type.",
+          "line": "pages/MonetizationPage.tsx(4,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type."
+        },
+        {
+          "message": "Member 'IntrinsicElements' implicitly has an 'any' type.",
+          "line": "pages/PlaylistManagerPage.tsx(7,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2488": {
+      "code": "2488",
+      "count": 44,
+      "percentage": "0.4",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Type 'Video' must have a '[Symbol.iterator]()' method that returns an iterator.",
+          "line": "contexts/OptimizedMiniplayerContext.tsx(122,20): error TS2488: Type 'Video' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "message": "Type 'StrictNotification' must have a '[Symbol.iterator]()' method that returns an iterator.",
+          "line": "contexts/UnifiedAppContext.tsx(103,28): error TS2488: Type 'StrictNotification' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "message": "Type 'TestSuite' must have a '[Symbol.iterator]()' method that returns an iterator.",
+          "line": "scripts/test-all-functionality.ts(189,25): error TS2488: Type 'TestSuite' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "message": "Type 'AnalyticsEvent' must have a '[Symbol.iterator]()' method that returns an iterator.",
+          "line": "services/analyticsService.ts(396,30): error TS2488: Type 'AnalyticsEvent' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "message": "Type 'RequestInterceptor' must have a '[Symbol.iterator]()' method that returns an iterator.",
+          "line": "services/apiService.ts(250,31): error TS2488: Type 'RequestInterceptor' must have a '[Symbol.iterator]()' method that returns an iterator."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2580": {
+      "code": "2580",
+      "count": 35,
+      "percentage": "0.3",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+          "line": "scripts/refactor-codebase.ts(107,34): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+        },
+        {
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+          "line": "scripts/refactor-codebase.ts(244,32): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+        },
+        {
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+          "line": "scripts/refactor-codebase.ts(278,33): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+        },
+        {
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+          "line": "scripts/refactor-codebase.ts(370,32): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+        },
+        {
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+          "line": "scripts/refactor-codebase.ts(451,32): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS18046": {
+      "code": "18046",
+      "count": 34,
+      "percentage": "0.3",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "'file' is of type 'unknown'.",
+          "line": "components/EnhancedVideoUpload.tsx(134,66): error TS18046: 'file' is of type 'unknown'."
+        },
+        {
+          "message": "'percentage' is of type 'unknown'.",
+          "line": "components/VideoAnalytics.tsx(324,20): error TS18046: 'percentage' is of type 'unknown'."
+        },
+        {
+          "message": "'percentage' is of type 'unknown'.",
+          "line": "components/VideoAnalytics.tsx(374,22): error TS18046: 'percentage' is of type 'unknown'."
+        },
+        {
+          "message": "'err' is of type 'unknown'.",
+          "line": "pages/AIContentSparkPage.tsx(39,16): error TS18046: 'err' is of type 'unknown'."
+        },
+        {
+          "message": "'error' is of type 'unknown'.",
+          "line": "pages/AdminPage.tsx(141,30): error TS18046: 'error' is of type 'unknown'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2614": {
+      "code": "2614",
+      "count": 29,
+      "percentage": "0.3",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Module '\"../../types/core\"' has no exported member 'VideoItem'. Did you mean to use 'import VideoItem from \"../../types/core\"' instead?",
+          "line": "src/components/organisms/VideoGrid/index.ts(7,15): error TS2614: Module '\"../../types/core\"' has no exported member 'VideoItem'. Did you mean to use 'import VideoItem from \"../../types/core\"' instead?"
+        },
+        {
+          "message": "Module '\"./components/Layout\"' has no exported member 'LayoutProps'. Did you mean to use 'import LayoutProps from \"./components/Layout\"' instead?",
+          "line": "src/features/common/index.ts(20,15): error TS2614: Module '\"./components/Layout\"' has no exported member 'LayoutProps'. Did you mean to use 'import LayoutProps from \"./components/Layout\"' instead?"
+        },
+        {
+          "message": "Module '\"./components/Header\"' has no exported member 'HeaderProps'. Did you mean to use 'import HeaderProps from \"./components/Header\"' instead?",
+          "line": "src/features/common/index.ts(21,15): error TS2614: Module '\"./components/Header\"' has no exported member 'HeaderProps'. Did you mean to use 'import HeaderProps from \"./components/Header\"' instead?"
+        },
+        {
+          "message": "Module '\"./components/Footer\"' has no exported member 'FooterProps'. Did you mean to use 'import FooterProps from \"./components/Footer\"' instead?",
+          "line": "src/features/common/index.ts(22,15): error TS2614: Module '\"./components/Footer\"' has no exported member 'FooterProps'. Did you mean to use 'import FooterProps from \"./components/Footer\"' instead?"
+        },
+        {
+          "message": "Module '\"./components/Sidebar\"' has no exported member 'SidebarProps'. Did you mean to use 'import SidebarProps from \"./components/Sidebar\"' instead?",
+          "line": "src/features/common/index.ts(23,15): error TS2614: Module '\"./components/Sidebar\"' has no exported member 'SidebarProps'. Did you mean to use 'import SidebarProps from \"./components/Sidebar\"' instead?"
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2374": {
+      "code": "2374",
+      "count": 17,
+      "percentage": "0.2",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Duplicate index signature for type 'string'.",
+          "line": "App.tsx(45,7): error TS2374: Duplicate index signature for type 'string'."
+        },
+        {
+          "message": "Duplicate index signature for type 'string'.",
+          "line": "components/DataWrapper.tsx(73,7): error TS2374: Duplicate index signature for type 'string'."
+        },
+        {
+          "message": "Duplicate index signature for type 'string'.",
+          "line": "components/ProtectedYouTubePlayer.tsx(72,7): error TS2374: Duplicate index signature for type 'string'."
+        },
+        {
+          "message": "Duplicate index signature for type 'string'.",
+          "line": "components/SuspenseWrapper.tsx(29,7): error TS2374: Duplicate index signature for type 'string'."
+        },
+        {
+          "message": "Duplicate index signature for type 'string'.",
+          "line": "components/YouTubePlayerWrapper.tsx(81,7): error TS2374: Duplicate index signature for type 'string'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2370": {
+      "code": "2370",
+      "count": 17,
+      "percentage": "0.2",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "A rest parameter must be of an array type.",
+          "line": "src/hooks/useAnalytics.ts(208,10): error TS2370: A rest parameter must be of an array type."
+        },
+        {
+          "message": "A rest parameter must be of an array type.",
+          "line": "src/hooks/useAnalytics.ts(212,29): error TS2370: A rest parameter must be of an array type."
+        },
+        {
+          "message": "A rest parameter must be of an array type.",
+          "line": "src/hooks/useCommon.ts(61,40): error TS2370: A rest parameter must be of an array type."
+        },
+        {
+          "message": "A rest parameter must be of an array type.",
+          "line": "src/hooks/usePerformanceMonitor.ts(184,10): error TS2370: A rest parameter must be of an array type."
+        },
+        {
+          "message": "A rest parameter must be of an array type.",
+          "line": "src/hooks/usePerformanceMonitor.ts(187,13): error TS2370: A rest parameter must be of an array type."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS4112": {
+      "code": "4112",
+      "count": 15,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class.",
+          "line": "components/ErrorBoundary.tsx(109,19): error TS4112: This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class."
+        },
+        {
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class.",
+          "line": "components/ErrorBoundary.tsx(128,19): error TS4112: This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class."
+        },
+        {
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class.",
+          "line": "components/ErrorBoundary.tsx(150,19): error TS4112: This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class."
+        },
+        {
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class.",
+          "line": "components/ErrorBoundary.tsx(162,19): error TS4112: This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class."
+        },
+        {
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class.",
+          "line": "components/ErrorBoundary.tsx(208,19): error TS4112: This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not extend another class."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS7005": {
+      "code": "7005",
+      "count": 15,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Variable 'cachedDeps' implicitly has an 'any' type.",
+          "line": "stores/storeUtils.ts(327,12): error TS7005: Variable 'cachedDeps' implicitly has an 'any' type."
+        },
+        {
+          "message": "Variable 'mockVideos' implicitly has an 'any' type.",
+          "line": "tests/examples/integration.test.tsx(243,53): error TS7005: Variable 'mockVideos' implicitly has an 'any' type."
+        },
+        {
+          "message": "Variable 'mockComments' implicitly has an 'any' type.",
+          "line": "tests/examples/integration.test.tsx(258,53): error TS7005: Variable 'mockComments' implicitly has an 'any' type."
+        },
+        {
+          "message": "Variable 'mockVideos' implicitly has an 'any' type.",
+          "line": "tests/examples/integration.test.tsx(289,31): error TS7005: Variable 'mockVideos' implicitly has an 'any' type."
+        },
+        {
+          "message": "Variable 'mockVideos' implicitly has an 'any' type.",
+          "line": "tests/examples/integration.test.tsx(305,64): error TS7005: Variable 'mockVideos' implicitly has an 'any' type."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2353": {
+      "code": "2353",
+      "count": 14,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Object literal may only specify known properties, and ''13-17'' does not exist in type '{ [x: number]: number; }'.",
+          "line": "components/VideoAnalytics.tsx(119,11): error TS2353: Object literal may only specify known properties, and ''13-17'' does not exist in type '{ [x: number]: number; }'."
+        },
+        {
+          "message": "Object literal may only specify known properties, and ''Male'' does not exist in type '{ [x: number]: number; }'.",
+          "line": "components/VideoAnalytics.tsx(128,11): error TS2353: Object literal may only specify known properties, and ''Male'' does not exist in type '{ [x: number]: number; }'."
+        },
+        {
+          "message": "Object literal may only specify known properties, and ''United States'' does not exist in type '{ [x: number]: number; }'.",
+          "line": "components/VideoAnalytics.tsx(133,11): error TS2353: Object literal may only specify known properties, and ''United States'' does not exist in type '{ [x: number]: number; }'."
+        },
+        {
+          "message": "Object literal may only specify known properties, and 'username' does not exist in type 'User'.",
+          "line": "contexts/UnifiedAppContext.tsx(172,9): error TS2353: Object literal may only specify known properties, and 'username' does not exist in type 'User'."
+        },
+        {
+          "message": "Object literal may only specify known properties, and 'source' does not exist in type 'AnalyticsEvent'.",
+          "line": "src/components/PWAInstallBanner.tsx(89,11): error TS2353: Object literal may only specify known properties, and 'source' does not exist in type 'AnalyticsEvent'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS18004": {
+      "code": "18004",
+      "count": 14,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "No value exists in scope for the shorthand property 'isPlaying'. Either declare one or provide an initializer.",
+          "line": "src/hooks/useVideoPlayer.ts(404,7): error TS18004: No value exists in scope for the shorthand property 'isPlaying'. Either declare one or provide an initializer."
+        },
+        {
+          "message": "No value exists in scope for the shorthand property 'isMuted'. Either declare one or provide an initializer.",
+          "line": "src/hooks/useVideoPlayer.ts(405,7): error TS18004: No value exists in scope for the shorthand property 'isMuted'. Either declare one or provide an initializer."
+        },
+        {
+          "message": "No value exists in scope for the shorthand property 'volume'. Either declare one or provide an initializer.",
+          "line": "src/hooks/useVideoPlayer.ts(406,7): error TS18004: No value exists in scope for the shorthand property 'volume'. Either declare one or provide an initializer."
+        },
+        {
+          "message": "No value exists in scope for the shorthand property 'currentTime'. Either declare one or provide an initializer.",
+          "line": "src/hooks/useVideoPlayer.ts(407,7): error TS18004: No value exists in scope for the shorthand property 'currentTime'. Either declare one or provide an initializer."
+        },
+        {
+          "message": "No value exists in scope for the shorthand property 'duration'. Either declare one or provide an initializer.",
+          "line": "src/hooks/useVideoPlayer.ts(408,7): error TS18004: No value exists in scope for the shorthand property 'duration'. Either declare one or provide an initializer."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2663": {
+      "code": "2663",
+      "count": 12,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?",
+          "line": "utils/intelligentCodeMonitor.ts(364,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?",
+          "line": "utils/intelligentCodeMonitor.ts(383,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?",
+          "line": "utils/intelligentCodeMonitor.ts(402,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?",
+          "line": "utils/intelligentCodeMonitor.ts(421,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?",
+          "line": "utils/intelligentCodeMonitor.ts(440,7): error TS2663: Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2352": {
+      "code": "2352",
+      "count": 11,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, ",
+          "line": "pages/AdminPage.tsx(674,27): error TS2352: Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first."
+        },
+        {
+          "message": "Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, ",
+          "line": "pages/AdminPage.tsx(805,27): error TS2352: Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first."
+        },
+        {
+          "message": "Conversion of type 'string[]' to type 'FilterType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional",
+          "line": "pages/CommentModerationPage.tsx(230,15): error TS2352: Conversion of type 'string[]' to type 'FilterType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first."
+        },
+        {
+          "message": "Conversion of type 'string[]' to type 'FilterType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional",
+          "line": "pages/ContentManagerPage.tsx(267,15): error TS2352: Conversion of type 'string[]' to type 'FilterType' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first."
+        },
+        {
+          "message": "Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, conv",
+          "line": "pages/SubscriptionsPage.tsx(101,44): error TS2352: Conversion of type 'number' to type 'string' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2769": {
+      "code": "2769",
+      "count": 9,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "No overload matches this call.",
+          "line": "pages/SubscriptionsPage.tsx(75,39): error TS2769: No overload matches this call."
+        },
+        {
+          "message": "No overload matches this call.",
+          "line": "pages/SubscriptionsPage.tsx(81,39): error TS2769: No overload matches this call."
+        },
+        {
+          "message": "No overload matches this call.",
+          "line": "pages/SubscriptionsPage.tsx(104,42): error TS2769: No overload matches this call."
+        },
+        {
+          "message": "No overload matches this call.",
+          "line": "pages/SubscriptionsPage.tsx(104,77): error TS2769: No overload matches this call."
+        },
+        {
+          "message": "No overload matches this call.",
+          "line": "pages/SubscriptionsPage.tsx(108,42): error TS2769: No overload matches this call."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2531": {
+      "code": "2531",
+      "count": 7,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Object is possibly 'null'.",
+          "line": "utils/developmentWorkflow.ts(197,7): error TS2531: Object is possibly 'null'."
+        },
+        {
+          "message": "Object is possibly 'null'.",
+          "line": "utils/developmentWorkflow.ts(198,7): error TS2531: Object is possibly 'null'."
+        },
+        {
+          "message": "Object is possibly 'null'.",
+          "line": "utils/developmentWorkflow.ts(203,20): error TS2531: Object is possibly 'null'."
+        },
+        {
+          "message": "Object is possibly 'null'.",
+          "line": "utils/developmentWorkflow.ts(203,53): error TS2531: Object is possibly 'null'."
+        },
+        {
+          "message": "Object is possibly 'null'.",
+          "line": "utils/developmentWorkflow.ts(215,7): error TS2531: Object is possibly 'null'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2724": {
+      "code": "2724",
+      "count": 6,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "'\"../hooks\"' has no exported member named 'useVideosData'. Did you mean 'useVideos'?",
+          "line": "pages/RefactoredTrendingPage.tsx(5,10): error TS2724: '\"../hooks\"' has no exported member named 'useVideosData'. Did you mean 'useVideos'?"
+        },
+        {
+          "message": "'\"./components/ErrorBoundary\"' has no exported member named 'ErrorBoundaryProps'. Did you mean 'ErrorBoundary'?",
+          "line": "src/features/common/index.ts(19,15): error TS2724: '\"./components/ErrorBoundary\"' has no exported member named 'ErrorBoundaryProps'. Did you mean 'ErrorBoundary'?"
+        },
+        {
+          "message": "'\"./LiveStreamViewer\"' has no exported member named 'LiveStreamViewerProps'. Did you mean 'LiveStreamViewer'?",
+          "line": "src/features/livestream/components/index.ts(20,15): error TS2724: '\"./LiveStreamViewer\"' has no exported member named 'LiveStreamViewerProps'. Did you mean 'LiveStreamViewer'?"
+        },
+        {
+          "message": "'\"./LiveStreamStudio\"' has no exported member named 'LiveStreamStudioProps'. Did you mean 'LiveStreamStudio'?",
+          "line": "src/features/livestream/components/index.ts(21,15): error TS2724: '\"./LiveStreamStudio\"' has no exported member named 'LiveStreamStudioProps'. Did you mean 'LiveStreamStudio'?"
+        },
+        {
+          "message": "'\"./MultiplatformStreaming\"' has no exported member named 'MultiplatformStreamingProps'. Did you mean 'MultiplatformStreaming'?",
+          "line": "src/features/livestream/components/index.ts(24,15): error TS2724: '\"./MultiplatformStreaming\"' has no exported member named 'MultiplatformStreamingProps'. Did you mean 'MultiplatformStreaming'?"
+        }
+      ],
+      "fixScript": null
+    },
+    "Possibly Undefined": {
+      "code": "18048",
+      "count": 6,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "'short.category' is possibly 'undefined'.",
+          "line": "pages/ShortsPage.tsx(121,9): error TS18048: 'short.category' is possibly 'undefined'."
+        },
+        {
+          "message": "'short.channelName' is possibly 'undefined'.",
+          "line": "pages/ShortsPage.tsx(130,9): error TS18048: 'short.channelName' is possibly 'undefined'."
+        },
+        {
+          "message": "'short.description' is possibly 'undefined'.",
+          "line": "pages/ShortsPage.tsx(131,9): error TS18048: 'short.description' is possibly 'undefined'."
+        },
+        {
+          "message": "'event' is possibly 'undefined'.",
+          "line": "utils/componentOptimization.tsx(294,18): error TS18048: 'event' is possibly 'undefined'."
+        },
+        {
+          "message": "'video.tags' is possibly 'undefined'.",
+          "line": "utils/videoUtils.ts(62,8): error TS18048: 'video.tags' is possibly 'undefined'."
+        }
+      ],
+      "fixScript": "fix-ts18048-possibly-undefined.js"
+    },
+    "TS18047": {
+      "code": "18047",
+      "count": 6,
+      "percentage": "0.1",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "'event.currentTarget' is possibly 'null'.",
+          "line": "utils/componentOptimization.tsx(294,18): error TS18047: 'event.currentTarget' is possibly 'null'."
+        },
+        {
+          "message": "'testValue' is possibly 'null'.",
+          "line": "utils/featureFlagSystem.ts(425,37): error TS18047: 'testValue' is possibly 'null'."
+        },
+        {
+          "message": "'controlValue' is possibly 'null'.",
+          "line": "utils/featureFlagSystem.ts(425,49): error TS18047: 'controlValue' is possibly 'null'."
+        },
+        {
+          "message": "'controlValue' is possibly 'null'.",
+          "line": "utils/featureFlagSystem.ts(426,49): error TS18047: 'controlValue' is possibly 'null'."
+        },
+        {
+          "message": "'testValue' is possibly 'null'.",
+          "line": "utils/featureFlagSystem.ts(432,32): error TS18047: 'testValue' is possibly 'null'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2451": {
+      "code": "2451",
+      "count": 4,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot redeclare block-scoped variable '_strategy'.",
+          "line": "utils/developmentWorkflow.ts(166,11): error TS2451: Cannot redeclare block-scoped variable '_strategy'."
+        },
+        {
+          "message": "Cannot redeclare block-scoped variable '_strategy'.",
+          "line": "utils/developmentWorkflow.ts(167,11): error TS2451: Cannot redeclare block-scoped variable '_strategy'."
+        },
+        {
+          "message": "Cannot redeclare block-scoped variable '_batchSize'.",
+          "line": "utils/developmentWorkflow.ts(525,11): error TS2451: Cannot redeclare block-scoped variable '_batchSize'."
+        },
+        {
+          "message": "Cannot redeclare block-scoped variable '_batchSize'.",
+          "line": "utils/developmentWorkflow.ts(528,11): error TS2451: Cannot redeclare block-scoped variable '_batchSize'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS6192": {
+      "code": "6192",
+      "count": 3,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "All imports in import declaration are unused.",
+          "line": "src/components/ErrorBoundaries/index.tsx(1,1): error TS6192: All imports in import declaration are unused."
+        },
+        {
+          "message": "All imports in import declaration are unused.",
+          "line": "src/components/ErrorBoundaries/index.tsx(2,1): error TS6192: All imports in import declaration are unused."
+        },
+        {
+          "message": "All imports in import declaration are unused.",
+          "line": "src/components/ErrorBoundaries/index.tsx(3,1): error TS6192: All imports in import declaration are unused."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS7034": {
+      "code": "7034",
+      "count": 3,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Variable 'cachedDeps' implicitly has type 'any' in some locations where its type cannot be determined.",
+          "line": "stores/storeUtils.ts(321,7): error TS7034: Variable 'cachedDeps' implicitly has type 'any' in some locations where its type cannot be determined."
+        },
+        {
+          "message": "Variable 'mockVideos' implicitly has type 'any' in some locations where its type cannot be determined.",
+          "line": "tests/examples/integration.test.tsx(226,7): error TS7034: Variable 'mockVideos' implicitly has type 'any' in some locations where its type cannot be determined."
+        },
+        {
+          "message": "Variable 'mockComments' implicitly has type 'any' in some locations where its type cannot be determined.",
+          "line": "tests/examples/integration.test.tsx(227,7): error TS7034: Variable 'mockComments' implicitly has type 'any' in some locations where its type cannot be determined."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2779": {
+      "code": "2779",
+      "count": 3,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "The left-hand side of an assignment expression may not be an optional property access.",
+          "line": "utils/featureFlagSystem.ts(288,5): error TS2779: The left-hand side of an assignment expression may not be an optional property access."
+        },
+        {
+          "message": "The left-hand side of an assignment expression may not be an optional property access.",
+          "line": "utils/featureFlagSystem.ts(530,7): error TS2779: The left-hand side of an assignment expression may not be an optional property access."
+        },
+        {
+          "message": "The left-hand side of an assignment expression may not be an optional property access.",
+          "line": "utils/featureFlagSystem.ts(556,5): error TS2779: The left-hand side of an assignment expression may not be an optional property access."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2308": {
+      "code": "2308",
+      "count": 2,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Module './unifiedHooks' has already exported a member named 'useApi'. Consider explicitly re-exporting to resolve the ambiguity.",
+          "line": "src/hooks/index.ts(30,1): error TS2308: Module './unifiedHooks' has already exported a member named 'useApi'. Consider explicitly re-exporting to resolve the ambiguity."
+        },
+        {
+          "message": "Module './core' has already exported a member named 'Video'. Consider explicitly re-exporting to resolve the ambiguity.",
+          "line": "src/types/unified.ts(6,1): error TS2308: Module './core' has already exported a member named 'Video'. Consider explicitly re-exporting to resolve the ambiguity."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2552": {
+      "code": "2552",
+      "count": 2,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot find name 'useState'. Did you mean 'setState'?",
+          "line": "src/hooks/useInstallPrompt.ts(51,29): error TS2552: Cannot find name 'useState'. Did you mean 'setState'?"
+        },
+        {
+          "message": "Cannot find name 'useState'. Did you mean 'setState'?",
+          "line": "src/hooks/useOfflineStatus.ts(66,29): error TS2552: Cannot find name 'useState'. Did you mean 'setState'?"
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2375": {
+      "code": "2375",
+      "count": 2,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Type '{ id: string; streamId: string | undefined; question: any; options: any; isActive: true; totalVotes: number; createdAt: Date; duration: number; ",
+          "line": "src/hooks/useLiveStream.ts(68,11): error TS2375: Type '{ id: string; streamId: string | undefined; question: any; options: any; isActive: true; totalVotes: number; createdAt: Date; duration: number; }' is not assignable to type 'LivePoll' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties."
+        },
+        {
+          "message": "Type '{ id: string; streamId: string | undefined; userId: string; username: string; question: any; answer: undefined; answered: false; isAnswered: fal",
+          "line": "src/hooks/useLiveStream.ts(118,11): error TS2375: Type '{ id: string; streamId: string | undefined; userId: string; username: string; question: any; answer: undefined; answered: false; isAnswered: false; timestamp: Date; answeredAt: undefined; isHighlighted: false; upvotes: number; }' is not assignable to type 'QAQuestion' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS1205": {
+      "code": "1205",
+      "count": 2,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'.",
+          "line": "src/utils/index.ts(4,18): error TS1205: Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'."
+        },
+        {
+          "message": "Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'.",
+          "line": "src/utils/index.ts(4,43): error TS1205: Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2315": {
+      "code": "2315",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Type 'MouseEvent' is not generic.",
+          "line": "components/ui/DropdownMenu.tsx(24,17): error TS2315: Type 'MouseEvent' is not generic."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2367": {
+      "code": "2367",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "This comparison appears to be unintentional because the types '\"public\" | \"private\" | \"unlisted\"' and '\"scheduled\"' have no overlap.",
+          "line": "pages/ShortsPage.tsx(99,26): error TS2367: This comparison appears to be unintentional because the types '\"public\" | \"private\" | \"unlisted\"' and '\"scheduled\"' have no overlap."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2693": {
+      "code": "2693",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "'number' only refers to a type, but is being used as a value here.",
+          "line": "src/features/subscription/services/subscriptionService.ts(1,15): error TS2693: 'number' only refers to a type, but is being used as a value here."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2561": {
+      "code": "2561",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Object literal may only specify known properties, but 'dislikeCount' does not exist in type '{ viewCount?: number; likeCount?: number; commentCount?: ",
+          "line": "src/features/video/pages/WatchPage.tsx(207,11): error TS2561: Object literal may only specify known properties, but 'dislikeCount' does not exist in type '{ viewCount?: number; likeCount?: number; commentCount?: number; favoriteCount?: number; contentDetails?: { definition?: string; dimension?: string; caption?: string; licensedContent?: boolean; projection?: string; privacyStatus?: string; isShort?: boolean; createdAt?: string; updatedAt?: string; }; ... 4 more ...; ...'. Did you mean to write 'likeCount'?"
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2862": {
+      "code": "2862",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Type 'T' is generic and can only be indexed for reading.",
+          "line": "src/hooks/unifiedHooks.ts(354,11): error TS2862: Type 'T' is generic and can only be indexed for reading."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2554": {
+      "code": "2554",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Expected 1 arguments, but got 2.",
+          "line": "src/hooks/useTrendingSearch.ts(105,9): error TS2554: Expected 1 arguments, but got 2."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2698": {
+      "code": "2698",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Spread types may only be created from object types.",
+          "line": "src/hooks/useWatchPage.ts(213,11): error TS2698: Spread types may only be created from object types."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS2661": {
+      "code": "2661",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "Cannot export 'screen'. Only local declarations can be exported from a module.",
+          "line": "src/utils/testingHelpers.tsx(271,10): error TS2661: Cannot export 'screen'. Only local declarations can be exported from a module."
+        }
+      ],
+      "fixScript": null
+    },
+    "TS1016": {
+      "code": "1016",
+      "count": 1,
+      "percentage": "0.0",
+      "priority": 5,
+      "examples": [
+        {
+          "message": "A required parameter cannot follow an optional parameter.",
+          "line": "utils/featureFlagSystem.ts(771,40): error TS1016: A required parameter cannot follow an optional parameter."
+        }
+      ],
+      "fixScript": null
+    }
+  },
+  "errorsByFile": {
+    "tests/examples/integration.test.tsx": {
+      "count": 229,
+      "errors": [
+        "tests/examples/integration.test.tsx(18,24): error TS7031: Binding element 'video' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(18,31): error TS7031: Binding element 'onTimeUpdate' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(18,45): error TS7031: Binding element 'onEnded' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(19,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+        "tests/examples/integration.test.tsx(34,22): error TS7031: Binding element 'videos' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(34,30): error TS7031: Binding element 'onVideoSelect' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(34,45): error TS7031: Binding element 'loading' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(39,19): error TS7006: Parameter 'video' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(56,27): error TS7031: Binding element 'comments' implicitly has an 'any' type.",
+        "tests/examples/integration.test.tsx(56,37): error TS7031: Binding element 'onAddComment' implicitly has an 'any' type."
+      ]
+    },
+    "utils/developmentWorkflow.ts": {
+      "count": 152,
+      "errors": [
+        "utils/developmentWorkflow.ts(26,3): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/developmentWorkflow.ts(49,5): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/developmentWorkflow.ts(50,5): error TS7008: Member 'threshold' implicitly has an 'any' type.",
+        "utils/developmentWorkflow.ts(73,11): error TS2739: Type 'never[]' is missing the following properties from type 'QualityGateResult': passed, stage, results, timestamp",
+        "utils/developmentWorkflow.ts(107,25): error TS7006: Parameter 'workflowName' implicitly has an 'any' type.",
+        "utils/developmentWorkflow.ts(118,11): error TS2739: Type 'never[]' is missing the following properties from type 'QualityGateResult': passed, stage, results, timestamp",
+        "utils/developmentWorkflow.ts(124,31): error TS2339: Property '_context' does not exist on type 'IntelligentWorkflowEngine'.",
+        "utils/developmentWorkflow.ts(126,17): error TS2339: Property 'push' does not exist on type 'QualityGateResult'.",
+        "utils/developmentWorkflow.ts(160,27): error TS7006: Parameter 'strategyName' implicitly has an 'any' type.",
+        "utils/developmentWorkflow.ts(160,41): error TS7006: Parameter '_version' implicitly has an 'any' type."
+      ]
+    },
+    "test/hooks/useVideos.test.tsx": {
+      "count": 131,
+      "errors": [
+        "test/hooks/useVideos.test.tsx(19,1): error TS2304: Cannot find name 'vi'.",
+        "test/hooks/useVideos.test.tsx(21,32): error TS2304: Cannot find name 'vi'.",
+        "test/hooks/useVideos.test.tsx(25,27): error TS2304: Cannot find name 'QueryClient'.",
+        "test/hooks/useVideos.test.tsx(35,46): error TS2503: Cannot find namespace 'React'.",
+        "test/hooks/useVideos.test.tsx(36,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+        "test/hooks/useVideos.test.tsx(36,6): error TS2304: Cannot find name 'QueryClientProvider'.",
+        "test/hooks/useVideos.test.tsx(38,7): error TS2304: Cannot find name 'QueryClientProvider'.",
+        "test/hooks/useVideos.test.tsx(44,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "test/hooks/useVideos.test.tsx(45,3): error TS2304: Cannot find name 'beforeEach'.",
+        "test/hooks/useVideos.test.tsx(46,5): error TS2304: Cannot find name 'vi'."
+      ]
+    },
+    "test/services/unifiedDataService.test.ts": {
+      "count": 126,
+      "errors": [
+        "test/services/unifiedDataService.test.ts(9,1): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(10,1): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(11,1): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(13,28): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(14,29): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(15,32): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(20,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "test/services/unifiedDataService.test.ts(21,3): error TS2304: Cannot find name 'beforeEach'.",
+        "test/services/unifiedDataService.test.ts(22,5): error TS2304: Cannot find name 'vi'.",
+        "test/services/unifiedDataService.test.ts(26,3): error TS2304: Cannot find name 'afterEach'."
+      ]
+    },
+    "tests/examples/VideoDescription.test.tsx": {
+      "count": 119,
+      "errors": [
+        "tests/examples/VideoDescription.test.tsx(37,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "tests/examples/VideoDescription.test.tsx(40,3): error TS2304: Cannot find name 'beforeEach'.",
+        "tests/examples/VideoDescription.test.tsx(51,3): error TS2304: Cannot find name 'afterEach'.",
+        "tests/examples/VideoDescription.test.tsx(55,3): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "tests/examples/VideoDescription.test.tsx(56,5): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "tests/examples/VideoDescription.test.tsx(58,9): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+        "tests/examples/VideoDescription.test.tsx(72,7): error TS2304: Cannot find name 'expect'.",
+        "tests/examples/VideoDescription.test.tsx(72,21): error TS2339: Property 'getByText' does not exist on type 'Screen'.",
+        "tests/examples/VideoDescription.test.tsx(75,7): error TS2304: Cannot find name 'expect'.",
+        "tests/examples/VideoDescription.test.tsx(75,21): error TS2339: Property 'getByText' does not exist on type 'Screen'."
+      ]
+    },
+    "test/integration/CommunityPage.test.tsx": {
+      "count": 116,
+      "errors": [
+        "test/integration/CommunityPage.test.tsx(4,5): error TS7008: Member 'IntrinsicElements' implicitly has an 'any' type.",
+        "test/integration/CommunityPage.test.tsx(11,21): error TS2694: Namespace 'global.JSX' has no exported member 'Element'.",
+        "test/integration/CommunityPage.test.tsx(20,19): error TS2307: Cannot find module 'react' or its corresponding type declarations.",
+        "test/integration/CommunityPage.test.tsx(23,1): error TS2304: Cannot find name 'vi'.",
+        "test/integration/CommunityPage.test.tsx(47,17): error TS2304: Cannot find name 'vi'.",
+        "test/integration/CommunityPage.test.tsx(48,15): error TS2304: Cannot find name 'vi'.",
+        "test/integration/CommunityPage.test.tsx(49,17): error TS2304: Cannot find name 'vi'.",
+        "test/integration/CommunityPage.test.tsx(53,41): error TS2304: Cannot find name 'QueryClient'.",
+        "test/integration/CommunityPage.test.tsx(60,49): error TS2694: Namespace 'React' has no exported member 'ReactElement'.",
+        "test/integration/CommunityPage.test.tsx(62,10): error TS2304: Cannot find name 'render'."
+      ]
+    },
+    "test/services/youtubeService.test.ts": {
+      "count": 116,
+      "errors": [
+        "test/services/youtubeService.test.ts(6,1): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(8,11): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(9,12): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(10,12): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(14,1): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(22,19): error TS2304: Cannot find name 'vi'.",
+        "test/services/youtubeService.test.ts(23,1): error TS2304: Cannot find name 'global'.",
+        "test/services/youtubeService.test.ts(60,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "test/services/youtubeService.test.ts(61,3): error TS2304: Cannot find name 'beforeEach'.",
+        "test/services/youtubeService.test.ts(62,5): error TS2304: Cannot find name 'vi'."
+      ]
+    },
+    "utils/testing.tsx": {
+      "count": 109,
+      "errors": [
+        "utils/testing.tsx(19,13): error TS2503: Cannot find namespace 'React'.",
+        "utils/testing.tsx(20,17): error TS2304: Cannot find name 'QueryClient'.",
+        "utils/testing.tsx(23,22): error TS2503: Cannot find namespace 'React'.",
+        "utils/testing.tsx(24,3): error TS7031: Binding element 'children' implicitly has an 'any' type.",
+        "utils/testing.tsx(25,21): error TS2304: Cannot find name 'QueryClient'.",
+        "utils/testing.tsx(35,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+        "utils/testing.tsx(35,6): error TS2304: Cannot find name 'QueryClientProvider'.",
+        "utils/testing.tsx(36,8): error TS2304: Cannot find name 'BrowserRouter'.",
+        "utils/testing.tsx(38,9): error TS2304: Cannot find name 'BrowserRouter'.",
+        "utils/testing.tsx(39,7): error TS2304: Cannot find name 'QueryClientProvider'."
+      ]
+    },
+    "store/index.ts": {
+      "count": 107,
+      "errors": [
+        "store/index.ts(73,25): error TS7006: Parameter 'collapsed' implicitly has an 'any' type.",
+        "store/index.ts(84,26): error TS7006: Parameter 'videoId' implicitly has an 'any' type.",
+        "store/index.ts(88,17): error TS7006: Parameter 'videoId' implicitly has an 'any' type.",
+        "store/index.ts(93,28): error TS7006: Parameter 'channelId' implicitly has an 'any' type.",
+        "store/index.ts(98,20): error TS7006: Parameter 'id' implicitly has an 'any' type.",
+        "store/index.ts(99,20): error TS7006: Parameter 'id' implicitly has an 'any' type.",
+        "store/index.ts(100,24): error TS7006: Parameter 'playlistId' implicitly has an 'any' type.",
+        "store/index.ts(101,29): error TS7006: Parameter 'playlistId' implicitly has an 'any' type.",
+        "store/index.ts(101,41): error TS7006: Parameter 'videoId' implicitly has an 'any' type.",
+        "store/index.ts(104,20): error TS7006: Parameter 'query' implicitly has an 'any' type."
+      ]
+    },
+    "utils/featureFlagSystem.ts": {
+      "count": 107,
+      "errors": [
+        "utils/featureFlagSystem.ts(18,3): error TS7008: Member 'defaultValue' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(59,3): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(66,3): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(72,3): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(99,3): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(122,42): error TS7008: Member 'value' implicitly has an 'any' type.",
+        "utils/featureFlagSystem.ts(123,11): error TS2739: Type 'never[]' is missing the following properties from type 'FlagEvaluation': flagId, value, reason, timestamp, _context",
+        "utils/featureFlagSystem.ts(126,38): error TS2503: Cannot find namespace 'NodeJS'.",
+        "utils/featureFlagSystem.ts(171,9): error TS2322: Type 'string | never[]' is not assignable to type 'string'.",
+        "utils/featureFlagSystem.ts(172,22): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`."
+      ]
+    },
+    "test/services/buildUrl.test.ts": {
+      "count": 106,
+      "errors": [
+        "test/services/buildUrl.test.ts(7,19): error TS7006: Parameter 'endpoint' implicitly has an 'any' type.",
+        "test/services/buildUrl.test.ts(24,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "test/services/buildUrl.test.ts(27,26): error TS2304: Cannot find name 'global'.",
+        "test/services/buildUrl.test.ts(29,3): error TS2304: Cannot find name 'beforeEach'.",
+        "test/services/buildUrl.test.ts(31,5): error TS2304: Cannot find name 'vi'.",
+        "test/services/buildUrl.test.ts(34,3): error TS2304: Cannot find name 'afterEach'.",
+        "test/services/buildUrl.test.ts(40,5): error TS2304: Cannot find name 'global'.",
+        "test/services/buildUrl.test.ts(43,3): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.",
+        "test/services/buildUrl.test.ts(44,5): error TS2304: Cannot find name 'beforeEach'.",
+        "test/services/buildUrl.test.ts(46,7): error TS2304: Cannot find name 'vi'."
+      ]
+    },
+    "components/forms/UnifiedFormSystem.tsx": {
+      "count": 104,
+      "errors": [
+        "components/forms/UnifiedFormSystem.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'.",
+        "components/forms/UnifiedFormSystem.tsx(6,8): error TS2304: Cannot find name 'elemName'.",
+        "components/forms/UnifiedFormSystem.tsx(21,19): error TS7006: Parameter 'name' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(21,25): error TS7006: Parameter 'value' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(22,19): error TS7006: Parameter 'name' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(22,25): error TS7006: Parameter 'error' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(23,21): error TS7006: Parameter 'name' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(23,27): error TS7006: Parameter 'touched' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(24,19): error TS7006: Parameter 'name' implicitly has an 'any' type.",
+        "components/forms/UnifiedFormSystem.tsx(27,21): error TS2304: Cannot find name 'createContext'."
+      ]
+    },
+    "components/ui/FormComponents.tsx": {
+      "count": 104,
+      "errors": [
+        "components/ui/FormComponents.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'.",
+        "components/ui/FormComponents.tsx(6,8): error TS2304: Cannot find name 'elemName'.",
+        "components/ui/FormComponents.tsx(32,42): error TS2304: Cannot find name 'InputHTMLAttributes'.",
+        "components/ui/FormComponents.tsx(35,14): error TS2503: Cannot find namespace 'React'.",
+        "components/ui/FormComponents.tsx(36,15): error TS2503: Cannot find namespace 'React'.",
+        "components/ui/FormComponents.tsx(41,45): error TS2304: Cannot find name 'TextareaHTMLAttributes'.",
+        "components/ui/FormComponents.tsx(48,43): error TS2503: Cannot find namespace 'React'.",
+        "components/ui/FormComponents.tsx(56,45): error TS2304: Cannot find name 'InputHTMLAttributes'.",
+        "components/ui/FormComponents.tsx(61,42): error TS2304: Cannot find name 'InputHTMLAttributes'.",
+        "components/ui/FormComponents.tsx(82,19): error TS2503: Cannot find namespace 'React'."
+      ]
+    },
+    "pages/AdminPage.tsx": {
+      "count": 90,
+      "errors": [
+        "pages/AdminPage.tsx(2,23): error TS2688: Cannot find type definition file for 'react/jsx-runtime'.",
+        "pages/AdminPage.tsx(6,8): error TS2304: Cannot find name 'elemName'.",
+        "pages/AdminPage.tsx(51,18): error TS2503: Cannot find namespace 'React'.",
+        "pages/AdminPage.tsx(52,35): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(53,39): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(54,49): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(55,66): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(56,62): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(57,37): error TS2304: Cannot find name 'useState'.",
+        "pages/AdminPage.tsx(58,35): error TS2304: Cannot find name 'useState'."
+      ]
+    },
+    "src/utils/test-setup.ts": {
+      "count": 87,
+      "errors": [
+        "src/utils/test-setup.ts(21,1): error TS2304: Cannot find name 'afterEach'.",
+        "src/utils/test-setup.ts(22,3): error TS2304: Cannot find name 'cleanup'.",
+        "src/utils/test-setup.ts(26,1): error TS2304: Cannot find name 'beforeAll'.",
+        "src/utils/test-setup.ts(31,1): error TS2304: Cannot find name 'afterAll'.",
+        "src/utils/test-setup.ts(36,1): error TS2304: Cannot find name 'afterEach'.",
+        "src/utils/test-setup.ts(42,13): error TS2304: Cannot find name 'vi'.",
+        "src/utils/test-setup.ts(43,16): error TS2304: Cannot find name 'vi'.",
+        "src/utils/test-setup.ts(44,15): error TS2304: Cannot find name 'vi'.",
+        "src/utils/test-setup.ts(53,23): error TS2304: Cannot find name 'global'.",
+        "src/utils/test-setup.ts(61,13): error TS2304: Cannot find name 'vi'."
+      ]
+    },
+    "config/index.ts": {
+      "count": 86,
+      "errors": [
+        "config/index.ts(3,29): error TS2339: Property 'NODE_ENV' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(6,24): error TS2339: Property 'SSR' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(11,29): error TS2339: Property 'VITE_API_BASE_URL' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(12,37): error TS2339: Property 'VITE_API_TIMEOUT' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(13,44): error TS2339: Property 'VITE_API_RETRY_ATTEMPTS' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(14,41): error TS2339: Property 'VITE_API_RETRY_DELAY' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(18,35): error TS2339: Property 'VITE_GEMINI_API_KEY' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(23,49): error TS2339: Property 'VITE_RATE_LIMIT_REQUESTS' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(24,47): error TS2339: Property 'VITE_RATE_LIMIT_WINDOW' does not exist on type 'ImportMetaEnv'.",
+        "config/index.ts(30,39): error TS2339: Property 'VITE_CACHE_TTL' does not exist on type 'ImportMetaEnv'."
+      ]
+    },
+    "tests/setup.ts": {
+      "count": 84,
+      "errors": [
+        "tests/setup.ts(33,14): error TS2304: Cannot find name 'vi'.",
+        "tests/setup.ts(33,21): error TS7006: Parameter 'key' implicitly has an 'any' type.",
+        "tests/setup.ts(34,14): error TS2304: Cannot find name 'vi'.",
+        "tests/setup.ts(34,21): error TS7006: Parameter 'key' implicitly has an 'any' type.",
+        "tests/setup.ts(34,26): error TS7006: Parameter 'value' implicitly has an 'any' type.",
+        "tests/setup.ts(37,17): error TS2304: Cannot find name 'vi'.",
+        "tests/setup.ts(37,24): error TS7006: Parameter 'key' implicitly has an 'any' type.",
+        "tests/setup.ts(40,12): error TS2304: Cannot find name 'vi'.",
+        "tests/setup.ts(46,10): error TS2304: Cannot find name 'vi'.",
+        "tests/setup.ts(46,17): error TS7006: Parameter 'index' implicitly has an 'any' type."
+      ]
+    },
+    "src/hooks/optimizedHooks.ts": {
+      "count": 81,
+      "errors": [
+        "src/hooks/optimizedHooks.ts(1,23): error TS2688: Cannot find type definition file for 'node'.",
+        "src/hooks/optimizedHooks.ts(19,51): error TS7006: Parameter 'delay' implicitly has an 'any' type.",
+        "src/hooks/optimizedHooks.ts(20,47): error TS2304: Cannot find name 'useState'.",
+        "src/hooks/optimizedHooks.ts(21,22): error TS2304: Cannot find name 'useRef'.",
+        "src/hooks/optimizedHooks.ts(21,36): error TS2694: Namespace 'NodeJS' has no exported member 'Timeout'.",
+        "src/hooks/optimizedHooks.ts(23,3): error TS2304: Cannot find name 'useEffect'.",
+        "src/hooks/optimizedHooks.ts(50,3): error TS7006: Parameter 'delay' implicitly has an 'any' type.",
+        "src/hooks/optimizedHooks.ts(54,47): error TS2304: Cannot find name 'useState'.",
+        "src/hooks/optimizedHooks.ts(55,19): error TS2304: Cannot find name 'useRef'.",
+        "src/hooks/optimizedHooks.ts(56,22): error TS2304: Cannot find name 'useRef'."
+      ]
+    },
+    "test/test-utils.tsx": {
+      "count": 80,
+      "errors": [
+        "test/test-utils.tsx(67,13): error TS2503: Cannot find namespace 'React'.",
+        "test/test-utils.tsx(68,17): error TS2304: Cannot find name 'QueryClient'.",
+        "test/test-utils.tsx(76,46): error TS2304: Cannot find name 'QueryClient'.",
+        "test/test-utils.tsx(90,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+        "test/test-utils.tsx(90,6): error TS2304: Cannot find name 'QueryClientProvider'.",
+        "test/test-utils.tsx(91,8): error TS2304: Cannot find name 'BrowserRouter'.",
+        "test/test-utils.tsx(93,9): error TS2304: Cannot find name 'BrowserRouter'.",
+        "test/test-utils.tsx(94,7): error TS2304: Cannot find name 'QueryClientProvider'.",
+        "test/test-utils.tsx(99,44): error TS2304: Cannot find name 'RenderOptions'.",
+        "test/test-utils.tsx(100,17): error TS2304: Cannot find name 'QueryClient'."
+      ]
+    },
+    "src/hooks/useCommon.ts": {
+      "count": 79,
+      "errors": [
+        "src/hooks/useCommon.ts(4,10): error TS2305: Module '\"../utils/componentUtils\"' has no exported member 'throttle'.",
+        "src/hooks/useCommon.ts(4,20): error TS2305: Module '\"../utils/componentUtils\"' has no exported member 'safeLocalStorage'.",
+        "src/hooks/useCommon.ts(10,3): error TS7006: Parameter 'key' implicitly has an 'any' type.",
+        "src/hooks/useCommon.ts(13,41): error TS2304: Cannot find name 'useState'.",
+        "src/hooks/useCommon.ts(18,20): error TS2304: Cannot find name 'useCallback'.",
+        "src/hooks/useCommon.ts(31,23): error TS2304: Cannot find name 'useCallback'.",
+        "src/hooks/useCommon.ts(44,42): error TS7006: Parameter 'delay' implicitly has an 'any' type.",
+        "src/hooks/useCommon.ts(45,47): error TS2304: Cannot find name 'useState'.",
+        "src/hooks/useCommon.ts(47,3): error TS2304: Cannot find name 'useEffect'.",
+        "src/hooks/useCommon.ts(61,40): error TS2370: A rest parameter must be of an array type."
+      ]
+    }
+  },
+  "topFiles": [
+    {
+      "file": "tests/examples/integration.test.tsx",
+      "errorCount": 229
+    },
+    {
+      "file": "utils/developmentWorkflow.ts",
+      "errorCount": 152
+    },
+    {
+      "file": "test/hooks/useVideos.test.tsx",
+      "errorCount": 131
+    },
+    {
+      "file": "test/services/unifiedDataService.test.ts",
+      "errorCount": 126
+    },
+    {
+      "file": "tests/examples/VideoDescription.test.tsx",
+      "errorCount": 119
+    },
+    {
+      "file": "test/integration/CommunityPage.test.tsx",
+      "errorCount": 116
+    },
+    {
+      "file": "test/services/youtubeService.test.ts",
+      "errorCount": 116
+    },
+    {
+      "file": "utils/testing.tsx",
+      "errorCount": 109
+    },
+    {
+      "file": "store/index.ts",
+      "errorCount": 107
+    },
+    {
+      "file": "utils/featureFlagSystem.ts",
+      "errorCount": 107
+    }
+  ],
+  "recommendations": [
+    "🔧 Run fixes in this priority order:",
+    "2. Fix Cannot Find Namespace (494 errors) - npm run node scripts/fix-ts2503-cannot-find-namespace.js",
+    "2. Fix JSX Runtime Module (287 errors) - npm run node scripts/fix-ts2875-jsx-runtime.js",
+    "2. Fix Cannot Find Module (72 errors) - npm run node scripts/fix-ts2307-cannot-find-module.js",
+    "3. Fix Cannot Find Name/Variable (3837 errors) - npm run node scripts/fix-ts2304-cannot-find-name.js",
+    "3. Fix Implicit Any Parameter (2874 errors) - npm run node scripts/fix-ts7006-implicit-any-param.js",
+    "\n📁 Files with most errors:",
+    "   • tests/examples/integration.test.tsx: 229 errors",
+    "   • utils/developmentWorkflow.ts: 152 errors",
+    "   • test/hooks/useVideos.test.tsx: 131 errors",
+    "\n⚡ Strategy: Start with syntax errors (TS1005, TS1003) before type errors"
+  ]
+}

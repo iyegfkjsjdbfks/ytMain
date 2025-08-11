@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,8 +8,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState } from 'react';
+import React from 'react';
 
 import {
   HeartIcon,
@@ -19,7 +20,7 @@ import {
   VideoCameraIcon,
   LinkIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 

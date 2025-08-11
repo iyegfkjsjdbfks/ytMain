@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
 
-// TODO: Fix import - import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, TrashIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 import { getWatchHistoryVideos, getLikedVideos, getRecentSearches, clearAllRecentSearches } from '../services/realVideoService';
 
@@ -104,7 +104,7 @@ const YourDataPage: React.FC = () => {
     onToggleVisibility: () => void;
     onClear: () => void;
     loading: boolean;
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading: boolean}: {onClear: Function}: {onToggleVisibility: Function}: {isVisible: boolean}: {count: number}: {description: string}: {title: string}) => (
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">

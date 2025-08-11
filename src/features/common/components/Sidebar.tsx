@@ -1,9 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { NavLink } from 'react-router-dom';
-// TODO: Fix import - import type React from 'react';
+import React from "react";
+import { NavLink } from 'react-router-dom';
+import type React from 'react';
 
 import { useAuthStore } from '../../auth/store/authStore';
+import { Link, NavLink } from 'react-router-dom';
 
 /**
  * Sidebar navigation component for the main application layout
@@ -18,7 +19,7 @@ const Sidebar: React.FC = () => {
           {/* Main navigation links */}
           <NavLink
             to="/"
-            className={({ isActive }: {isActive: boolean}) =>
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -35,7 +36,7 @@ const Sidebar: React.FC = () => {
 
           <NavLink
             to="/trending"
-            className={({ isActive }: {isActive: boolean}) =>
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -51,7 +52,7 @@ const Sidebar: React.FC = () => {
 
           <NavLink
             to="/shorts"
-            className={({ isActive }: {isActive: boolean}) =>
+            className={({ isActive }) =>
               `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                 isActive
                   ? 'text-red-700 bg-red-50'
@@ -70,7 +71,7 @@ const Sidebar: React.FC = () => {
             <>
               <NavLink
                 to="/subscriptions"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -92,7 +93,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/history"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -108,7 +109,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/watch-later"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -124,7 +125,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/liked-videos"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -140,7 +141,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/playlists"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -162,7 +163,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/studio"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -178,7 +179,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/upload"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'
@@ -194,7 +195,7 @@ const Sidebar: React.FC = () => {
 
               <NavLink
                 to="/go-live"
-                className={({ isActive }: {isActive: boolean}) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
                       ? 'text-red-700 bg-red-50'

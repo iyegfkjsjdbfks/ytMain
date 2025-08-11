@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { StrictMode } from 'react';
+import React from 'react';
+import { StrictMode } from 'react';
 
-// TODO: Fix import - import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 
 import './src/styles.css';
 import App from './App';

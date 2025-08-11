@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
+import React from "react";
+import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
-// TODO: Fix import - import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -250,7 +250,7 @@ interface StatsCardProps {
   trend?: ReactNode;
 }
 
-const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: {trend: any}: {subtitle: any}: {icon: any}: {value: any}: {title: string}) => (
+const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }) => (
   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div className="flex-1">
@@ -280,7 +280,7 @@ interface TopMomentsProps {
   moments: AnalyticsData['topMoments'];
 }
 
-const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
+const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
   const getIcon = (type): React.ReactNode => {
     switch (type) {
       case 'peak_viewers':
@@ -353,7 +353,7 @@ interface DemographicsProps {
   demographics: AnalyticsData['demographics'];
 }
 
-const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographics: any}) => (
+const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Audience Demographics</h3>
     <div className="space-y-6">

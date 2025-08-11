@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
+import React from "react";
+import { FixedSizeList as List } from 'react-window';
 
-// TODO: Fix import - import { memo, useState, useCallback, useMemo, useEffect } from 'react';
+import { memo, useState, useCallback, useMemo, useEffect } from 'react';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
@@ -25,7 +25,7 @@ interface MobileVideoItemProps {
   };
 }
 
-const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
+const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
   const { videos, onVideoClick } = data;
   const video = videos[index];
   const [imageLoaded, setImageLoaded] = useState(false);

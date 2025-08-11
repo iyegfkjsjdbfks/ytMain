@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 import { cn } from '@/lib/utils';
 
 import { VideoCard } from '@/components/molecules/VideoCard';

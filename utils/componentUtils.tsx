@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
 // Component utilities and helpers
-// TODO: Fix import - import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 // Type definitions
 export interface TruncateOptions {

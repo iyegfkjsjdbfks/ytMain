@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
+import React from "react";
+import { FixedSizeList as List } from 'react-window';
 
-// TODO: Fix import - import { memo, useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
@@ -28,7 +28,7 @@ interface CommentItemProps {
   };
 }
 
-const CommentItem = memo<CommentItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
+const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
   const { comments, onReply, onLike, onDislike } = data;
   const comment = comments[index];
 

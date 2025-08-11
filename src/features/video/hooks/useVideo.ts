@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { unifiedDataService } from '../../../services/unifiedDataService';
 

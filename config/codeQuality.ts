@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 /**
  * Comprehensive code quality configuration and utilities
  */

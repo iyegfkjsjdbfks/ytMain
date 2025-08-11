@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
@@ -66,7 +66,7 @@ interface VideoAnalyticsProps {
   className?: string;
 }
 
-const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }: {videoId: string}) => {
+const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = '' }) => {
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'7d' | '28d' | '90d' | '365d'>('28d');

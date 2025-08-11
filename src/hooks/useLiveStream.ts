@@ -1,9 +1,8 @@
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
 
 // Import statement fixed
-// import { liveStreamService } from '../services/livestreamAPI';
-
+// 
 interface LiveStreamState {
   isLive: boolean;
   viewerCount: number;

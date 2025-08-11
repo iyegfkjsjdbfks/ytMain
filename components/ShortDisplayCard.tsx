@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 // @ts-nocheck - Temporary during refactoring
 import React, { useRef, useEffect } from 'react';
 

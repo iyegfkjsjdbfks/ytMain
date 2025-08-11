@@ -17,8 +17,8 @@ declare global {
  * - Feature flag management
  */
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
@@ -234,7 +234,7 @@ return 'text-orange-600';
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
     color?: string;
-  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }: {trend: any}: {subtitle: any}: {value: any}: {title: string}) => (
+  }> = ({ title, value, subtitle, trend, color = 'text-gray-900' }) => (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between">
         <div>

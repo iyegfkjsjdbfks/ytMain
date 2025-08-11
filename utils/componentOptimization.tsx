@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 /**
  * Component optimization utilities for React performance enhancement
  */
@@ -265,17 +265,7 @@ export function createLazyComponent<P extends Record<string, any>>(
 }
 
 // Virtual scrolling hook for large lists
-export function useVirtualScrolling({
-  itemCount,
-  itemHeight,
-  containerHeight,
-  overscan = 5,
-}: {
-  itemCount: number;
-  itemHeight: number;
-  containerHeight: number;
-  overscan?: number;
-}) {
+export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5,  }) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const visibleRange = useMemo(() => {

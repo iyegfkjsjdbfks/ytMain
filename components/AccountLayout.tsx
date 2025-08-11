@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { Link, NavLink } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -7,7 +8,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import {
   Cog8ToothIcon,
@@ -15,7 +16,7 @@ import {
   DocumentTextIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 
 /**
  * AccountLayout component provides a consistent layout for account-related pages
@@ -72,7 +73,7 @@ const AccountLayout: React.FC = () => {
                     <li key={item.path}>
                       <NavLink
                         to={item.path}
-                        className={({ isActive }: {isActive: boolean}) =>
+                        className={({ isActive }) =>
                           `flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                             isActive
                               ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'

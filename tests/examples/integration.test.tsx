@@ -4,11 +4,11 @@
  * and testing real user workflows
  */
 
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { screen, fireEvent, waitFor } from '@testing-library/react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
-// TODO: Fix import - import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import VideoDescription from '../../components/VideoDescription';
 import { performanceMonitor } from '../../utils/performanceMonitor';
@@ -16,7 +16,7 @@ import { testUtils, customRender } from '../../utils/testUtils';
 import { TestPerformanceTracker } from '../setup';
 
 // Mock components for integration testing
-const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function}: {onTimeUpdate: Function}: {video: any}) => (
+const VideoPlayer = ({ video, onTimeUpdate, onEnded }) => (
   <div data-testid="video-player">
     <video
       src={video.url}
@@ -32,7 +32,7 @@ const VideoPlayer = ({ video, onTimeUpdate, onEnded }: {onEnded: Function}: {onT
   </div>
 );
 
-const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean}: {onVideoSelect: Function}: {videos: any}) => (
+const VideoList = ({ videos, onVideoSelect, loading }) => (
   <div data-testid="video-list">
     {loading ? (
       <div>Loading videos...</div>
@@ -54,7 +54,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean}: {onVi
   </div>
 );
 
-const CommentSection = ({ comments, onAddComment }: {onAddComment: Function}: {comments: any}) => {
+const CommentSection = ({ comments, onAddComment }) => {
   const [newComment, setNewComment] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {

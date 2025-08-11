@@ -1,12 +1,13 @@
-#!/usr/bin/env node
+import { Link } from 'react-router-dom';
+//!/usr/bin/env node
 
 /**
  * Comprehensive Codebase Refactoring Script
  * Automates the refactoring process for the YouTube clone application
  */
 
-// TODO: Fix import - import fs from 'fs';
-// TODO: Fix import - import path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 interface RefactorTask {
   name: string;

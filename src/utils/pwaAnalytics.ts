@@ -1,6 +1,6 @@
 
 import { conditionalLogger } from './conditionalLogger';
-// TODO: Fix import - import React from "react";
+import React from "react";
 import { createNetworkError } from '../types/errors';
 
 // PWA Analytics Utilities

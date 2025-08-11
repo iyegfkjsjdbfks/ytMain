@@ -1,7 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { Link } from 'react-router-dom';
-// TODO: Fix import - import type React from 'react';
+import React from "react";
+import { Link } from 'react-router-dom';
+import type React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Footer component with links to important pages and copyright information

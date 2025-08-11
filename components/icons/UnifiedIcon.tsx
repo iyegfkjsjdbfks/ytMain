@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 // Base icon props interface
 export interface IconProps {

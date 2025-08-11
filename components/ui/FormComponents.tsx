@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react';
-// TODO: Fix import - import React from 'react';
+import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from 'react';
+import React from 'react';
 
 import { cn } from '../../utils/cn';
 
@@ -84,7 +84,7 @@ const FieldLabel: React.FC<{
   required?: boolean;
   className?: string;
   children: React.ReactNode;
-}> = ({ htmlFor, required, className, children }: {children: any}: {className: any}: {required: any}: {htmlFor: any}) => (
+}> = ({ htmlFor, required, className, children }) => (
   <label
     htmlFor={htmlFor}
     className={cn('block text-sm font-medium text-gray-700 mb-1', className)}
@@ -98,7 +98,7 @@ const FieldLabel: React.FC<{
 const FieldError: React.FC<{
   error?: string;
   className?: string;
-}> = ({ error, className }: {className: any}: {error: Error}) => {
+}> = ({ error, className }) => {
   if (!error) {
 return null;
 }
@@ -114,7 +114,7 @@ return null;
 const FieldHint: React.FC<{
   hint?: string;
   className?: string;
-}> = ({ hint, className }: {className: any}: {hint: any}) => {
+}> = ({ hint, className }) => {
   if (!hint) {
 return null;
 }
@@ -500,7 +500,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
 export const FormGroup: React.FC<{
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }: {className: any}: {children: any}) => (
+}> = ({ children, className }) => (
   <div className={cn('space-y-4', className)}>
     {children}
   </div>
@@ -511,7 +511,7 @@ export const FormActions: React.FC<{
   children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
-}> = ({ children, className, align = 'right' }: {className: any}: {children: any}) => {
+}> = ({ children, className, align = 'right' }) => {
   const alignClasses = {
     left: 'justify-start',
     center: 'justify-center',

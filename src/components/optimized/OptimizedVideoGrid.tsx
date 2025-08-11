@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { FixedSizeGrid as Grid } from 'react-window';
+import React from "react";
+import { FixedSizeGrid as Grid } from 'react-window';
 
-// TODO: Fix import - import { memo, useMemo, useCallback, useState } from 'react';
+import { memo, useMemo, useCallback, useState } from 'react';
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
@@ -25,7 +25,7 @@ const VideoGridItem = memo<{
     itemsPerRow: number;
     onVideoClick:(video: Video) => void;
   };
-}>(({ columnIndex, rowIndex, style, data }: {data: any}: {style: any}: {rowIndex: number}: {columnIndex: number}) => {
+}>(({ columnIndex, rowIndex, style, data }) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];

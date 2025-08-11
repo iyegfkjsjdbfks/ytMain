@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+import React from "react";
+import { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
 import type { LiveStream, StreamPlatform } from '../../../types/livestream';
-// TODO: Fix import - import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, SignalIcon, ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
+import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, SignalIcon, ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
 import { AdvancedLiveChat, LivePolls, LiveQA, SuperChatPanel, StreamScheduler, MultiplatformStreaming } from '.';
 
 interface ComprehensiveLiveStudioProps {

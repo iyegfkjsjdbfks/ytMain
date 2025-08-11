@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 
 interface PerformanceMetrics {
   renderTime: number;

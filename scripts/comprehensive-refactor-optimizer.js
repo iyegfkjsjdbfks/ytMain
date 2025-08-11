@@ -1,3 +1,4 @@
+import { Route } from 'react-router-dom';
 #!/usr/bin/env node
 /**
  * Comprehensive Codebase Refactoring and Optimization Script

@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 
-// TODO: Fix import - import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { useSearchParams, useNavigate } from 'react-router-dom';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import OptimizedSearchResults from '../components/OptimizedSearchResults';
 import { useDebounce } from '../src/hooks/useDebounce';
@@ -12,6 +12,7 @@ import { searchCombined, type YouTubeSearchResult, type GoogleSearchResult } fro
 import { performanceMonitor } from '../utils/performance';
 
 import type { Video } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 // Types for better performance
 interface SearchState {

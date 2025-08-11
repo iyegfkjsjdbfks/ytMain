@@ -1,5 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
+import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,9 +10,9 @@ declare global {
 }
 // YouTube Video Card component for displaying YouTube search results
 // YouTube Video Card component for displaying YouTube search results
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { buildVideoUrl } from '../utils/componentUtils';
 
@@ -24,7 +25,7 @@ interface YouTubeVideoCardProps {
   className?: string;
 }
 
-const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }: {video: any}) => {
+const YouTubeVideoCard: React.FC<YouTubeVideoCardProps> = ({ video, className = '' }) => {
   const navigate = useNavigate();
 
   // Extract video ID from the video object

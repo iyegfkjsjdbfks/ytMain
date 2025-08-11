@@ -1,18 +1,19 @@
+import { Route } from 'react-router-dom';
 /**
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-// TODO: Fix import - import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// TODO: Fix import - import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
+import { render, screen, waitFor, type RenderOptions, renderHook, type RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// TODO: Fix import - import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
-// TODO: Fix import - import { vi } from 'vitest';
+import { vi } from 'vitest';
 
 // Mock data generators
 export const mockGenerators = {
@@ -166,7 +167,7 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 
   // Custom wrapper
-  wrapper?: ({ children }: { children: ReactNode }) => ReactElement;
+  wrapper?: ({ children }) => ReactElement;
 
   // Mock user for authentication
   mockUser?: any;
@@ -186,17 +187,7 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({
-  children,
-  queryClient,
-  initialEntries = ['/'],
-  mockUser: _mockUser,
-}: {
-  children: ReactNode;
-  queryClient: QueryClient;
-  initialEntries?: string;
-  mockUser?: any;
-}) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUser,  }) {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -218,7 +209,7 @@ export function customRender(
     ...renderOptions
   } = options;
 
-  const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
+  const Wrapper = wrapper || (({ children }) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}
@@ -254,7 +245,7 @@ export function customRenderHook<TResult, TProps>(
     ...renderHookOptions
   } = options;
 
-  const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
+  const Wrapper = wrapper || (({ children }) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}
