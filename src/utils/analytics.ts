@@ -1,4 +1,3 @@
-
 // Analytics utility for tracking events
 
 export interface AnalyticsEvent {
@@ -10,12 +9,14 @@ export interface AnalyticsEvent {
  * @param eventName - Name of the event to track
  * @param properties - Additional properties to include with the event
  */
-export const trackEvent = (eventName: any, properties?: AnalyticsEvent): void => {
+export const trackEvent = (
+  eventName: any,
+  properties?: AnalyticsEvent
+): void => {
   try {
     // In a real implementation, this would send to your analytics service
     // For now, we'll just log to console in development
     if (process.env.NODE_ENV === 'development') {
-
     }
 
     // Example integrations you might add:

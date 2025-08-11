@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import type React from 'react';
 import Footer from './Footer';
@@ -12,13 +12,13 @@ import Sidebar from './Sidebar';
  */
 export const Layout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className='flex flex-col min-h-screen bg-gray-100'>
       <Header />
 
-      <div className="flex flex-1">
+      <div className='flex flex-1'>
         <Sidebar />
 
-        <main className="flex-1 p-4 overflow-auto">
+        <main className='flex-1 p-4 overflow-auto'>
           {/* The Outlet component renders the current route's element */}
           <Outlet />
         </main>
@@ -30,7 +30,6 @@ export const Layout: React.FC = () => {
 };
 
 export default Layout;
-
 
 declare global {
   namespace JSX {

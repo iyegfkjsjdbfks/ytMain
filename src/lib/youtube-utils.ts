@@ -1,8 +1,6 @@
-
 import { logger } from '../utils/logger';
 
 // YouTube utilities for video handling and API integration
-
 
 // YouTube API type declarations
 interface YT {
@@ -44,7 +42,10 @@ interface YTPlayerConfig {
   events?: {
     onReady?: (event: { target: YTPlayer }) => void;
     onStateChange?: (event: { target: YTPlayer; data: number }) => void;
-    onPlaybackQualityChange?: (event: { target: YTPlayer; data: string }) => void;
+    onPlaybackQualityChange?: (event: {
+      target: YTPlayer;
+      data: string;
+    }) => void;
     onPlaybackRateChange?: (event: { target: YTPlayer; data: number }) => void;
     onError?: (event: { target: YTPlayer; data: number }) => void;
     onApiChange?: (event: { target: YTPlayer }) => void;
@@ -92,10 +93,12 @@ declare global {
  * @param url - YouTube URL (can be null or undefined)
  * @returns Video ID or null if not found
  */
-export function getYouTubeVideoId(url: string | null | undefined): string | null {
+export function getYouTubeVideoId(
+  url: string | null | undefined
+): string | null {
   if (!url) {
-return null;
-}
+    return null;
+  }
 
   try {
     // Handle youtu.be URLs (shortened)
@@ -105,7 +108,8 @@ return null;
     }
 
     // Handle regular YouTube URLs
-    const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
+    const regExp =
+      /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch(?:\?v=|\/))([^#&?]*).*/;
     const match = url.match(regExp);
     return match?.[1] ? match[1].substring(0, 11) : null;
   } catch (e) {
@@ -131,7 +135,7 @@ export class YouTubePlayer {
         onReady?: (event: Event) => void;
         onStateChange?: (event: Event) => void;
       };
-    } = {},
+    } = {}
   ) {
     this.initPlayer().catch(() => {
       // Handle initialization failure silently
@@ -139,7 +143,7 @@ export class YouTubePlayer {
   }
 
   private loadYouTubeAPI(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (window.YT?.Player) {
         resolve();
         return;
@@ -175,7 +179,7 @@ export class YouTubePlayer {
 
       // Wait for YT.Player to be available
       const checkYT = () => {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>(resolve => {
           const check = () => {
             if (window.YT?.Player) {
               resolve();
@@ -202,10 +206,10 @@ export class YouTubePlayer {
           ...this.options.playerVars,
         },
         events: {
-          onReady: (event) => {
+          onReady: event => {
             this.options.events?.onReady?.(event);
           },
-          onStateChange: (event) => {
+          onStateChange: event => {
             this.options.events?.onStateChange?.(event);
           },
         },
@@ -405,7 +409,7 @@ export function embedYouTubeVideo(
     modestbranding?: boolean;
     rel?: boolean;
     showinfo?: boolean;
-  } = {},
+  } = {}
 ): YouTubePlayer {
   // Validate container exists
   if (!document.getElementById(containerId)) {
@@ -441,8 +445,8 @@ export function embedYouTubeVideo(
 // Type-safe function to check if a string is a valid YouTube URL
 export function isYouTubeUrl(url: any): boolean {
   if (!url) {
-return false;
-}
+    return false;
+  }
 
   const patterns = [
     /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
@@ -452,14 +456,16 @@ return false;
     /^https?:\/\/(?:www\.)?youtube\.com\/user\/[^/]+#p\/u\/\d+\/\w+/,
   ];
 
-  return patterns.some((pattern) => pattern.test(url));
+  return patterns.some(pattern => pattern.test(url));
 }
 
 // Type-safe function to get video ID from various YouTube URL formats
-export function extractVideoIdFromUrl(url: string | null | undefined): string | null {
+export function extractVideoIdFromUrl(
+  url: string | null | undefined
+): string | null {
   if (!url) {
-return null;
-}
+    return null;
+  }
 
   interface Pattern {
     regex: RegExp;
@@ -470,22 +476,22 @@ return null;
     // youtu.be/ID
     {
       regex: /youtu\.be\/([^#&?/]+)/,
-      getter: (match) => match[1] || null,
+      getter: match => match[1] || null,
     },
     // youtube.com/watch?v=ID
     {
       regex: /[?&]v=([^&#]+)/,
-      getter: (match) => match[1] || null,
+      getter: match => match[1] || null,
     },
     // youtube.com/embed/ID
     {
       regex: /\/embed\/([^#&?/]+)/,
-      getter: (match) => match[1] || null,
+      getter: match => match[1] || null,
     },
     // youtube.com/v/ID
     {
       regex: /\/v\/([^#&?/]+)/,
-      getter: (match) => match[1] || null,
+      getter: match => match[1] || null,
     },
   ];
 

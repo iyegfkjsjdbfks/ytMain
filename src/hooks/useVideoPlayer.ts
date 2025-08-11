@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { logger } from '../utils/logger';
@@ -47,7 +46,9 @@ export interface VideoPlayerControls {
   setQuality: (quality: any) => void;
 }
 
-export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerState & VideoPlayerControls => {
+export const useVideoPlayer = (
+  options: VideoPlayerOptions = {}
+): VideoPlayerState & VideoPlayerControls => {
   const {
     autoplay = false,
     muted = false,
@@ -84,8 +85,8 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): VideoPlayerSta
   useEffect(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     const handlePlay = () => {
       setState(prev => ({ ...prev, isPlaying: true }));
@@ -136,7 +137,9 @@ return;
     };
 
     const handleError = () => {
-      const error = new Error(`Video error: ${video.error?.message || 'Unknown error'}`);
+      const error = new Error(
+        `Video error: ${video.error?.message || 'Unknown error'}`
+      );
       setState(prev => ({ ...prev, error, isLoading: false }));
       onError?.(error);
     };
@@ -170,10 +173,10 @@ return;
     video.addEventListener('volumechange', handleVolumeChange);
     video.addEventListener('ratechange', handlePlaybackRateChange);
     video.addEventListener('enterpictureinpicture', () =>
-      setState(prev => ({ ...prev, isPictureInPicture: true })),
+      setState(prev => ({ ...prev, isPictureInPicture: true }))
     );
     video.addEventListener('leavepictureinpicture', () =>
-      setState(prev => ({ ...prev, isPictureInPicture: false })),
+      setState(prev => ({ ...prev, isPictureInPicture: false }))
     );
     video.addEventListener('error', handleError);
     video.addEventListener('loadeddata', handleLoadedData);
@@ -192,10 +195,10 @@ return;
       video.removeEventListener('volumechange', handleVolumeChange);
       video.removeEventListener('ratechange', handlePlaybackRateChange);
       video.removeEventListener('enterpictureinpicture', () =>
-        setState(prev => ({ ...prev, isPictureInPicture: true })),
+        setState(prev => ({ ...prev, isPictureInPicture: true }))
       );
       video.removeEventListener('leavepictureinpicture', () =>
-        setState(prev => ({ ...prev, isPictureInPicture: false })),
+        setState(prev => ({ ...prev, isPictureInPicture: false }))
       );
       video.removeEventListener('error', handleError);
       video.removeEventListener('loadeddata', handleLoadedData);
@@ -235,13 +238,18 @@ return;
         setState(prev => ({ ...prev, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
         logger.warn('Video playback issue:', errorMessage);
 
         // Don't treat network/cache errors as critical errors
-        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
-            errorMessage.includes('ERR_NETWORK')) {
-          logger.info('Video may be temporarily unavailable due to network/cache issues');
+        if (
+          errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
+          errorMessage.includes('ERR_NETWORK')
+        ) {
+          logger.info(
+            'Video may be temporarily unavailable due to network/cache issues'
+          );
           setState(prev => ({ ...prev, isPlaying: false }));
         } else {
           setState(prev => ({ ...prev, error: error as Error }));
@@ -278,19 +286,22 @@ return;
   }, []);
 
   // Set volume (0-1)
-  const setVolume = useCallback((volume: any) => {
-    if (videoRef.current) {
-      const newVolume = Math.min(1, Math.max(0, volume));
-      videoRef.current.volume = newVolume;
-      videoRef.current.muted = newVolume === 0;
-      setState(prev => ({
-        ...prev,
-        volume: newVolume,
-        isMuted: newVolume === 0,
-      }));
-      onVolumeChange?.(newVolume);
-    }
-  }, [onVolumeChange]);
+  const setVolume = useCallback(
+    (volume: any) => {
+      if (videoRef.current) {
+        const newVolume = Math.min(1, Math.max(0, volume));
+        videoRef.current.volume = newVolume;
+        videoRef.current.muted = newVolume === 0;
+        setState(prev => ({
+          ...prev,
+          volume: newVolume,
+          isMuted: newVolume === 0,
+        }));
+        onVolumeChange?.(newVolume);
+      }
+    },
+    [onVolumeChange]
+  );
 
   // Mute the video
   const mute = useCallback(() => {
@@ -312,18 +323,24 @@ return;
   const toggleMute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
-      setState(prev => ({ ...prev, isMuted: videoRef.current?.muted ?? false }));
+      setState(prev => ({
+        ...prev,
+        isMuted: videoRef.current?.muted ?? false,
+      }));
     }
   }, []);
 
   // Set playback rate
-  const setPlaybackRate = useCallback((rate: any) => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = rate;
-      setState(prev => ({ ...prev, playbackRate: rate }));
-      onPlaybackRateChange?.(rate);
-    }
-  }, [onPlaybackRateChange]);
+  const setPlaybackRate = useCallback(
+    (rate: any) => {
+      if (videoRef.current) {
+        videoRef.current.playbackRate = rate;
+        setState(prev => ({ ...prev, playbackRate: rate }));
+        onPlaybackRateChange?.(rate);
+      }
+    },
+    [onPlaybackRateChange]
+  );
 
   // Request fullscreen
   const requestFullscreen = useCallback(async () => {
@@ -407,7 +424,7 @@ return;
       currentTime,
       duration,
       isLoading,
-      error
+      error,
     },
     actions: {
       play,
@@ -422,7 +439,7 @@ return;
       togglePictureInPicture,
       setVideoRef,
       seek,
-      reset
-    }
+      reset,
+    },
   };
 };

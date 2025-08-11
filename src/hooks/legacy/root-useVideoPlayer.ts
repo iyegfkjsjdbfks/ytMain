@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 interface VideoPlayerState {
@@ -81,7 +81,9 @@ interface UseVideoPlayerReturn {
  *
  * Reduces code duplication across video player components
  */
-export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayerReturn => {
+export const useVideoPlayer = (
+  options: VideoPlayerOptions = {}
+): UseVideoPlayerReturn => {
   const {
     autoplay = false,
     muted = false,
@@ -112,8 +114,8 @@ export const useVideoPlayer = (options: VideoPlayerOptions = {}): UseVideoPlayer
   const play = useCallback(async () => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     try {
       await video.play();
@@ -126,16 +128,25 @@ return;
         setState(prev => ({ ...prev, isPlaying: false }));
       } else {
         // More specific error handling for network and cache issues
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
         console.warn('Video playback issue:', errorMessage);
 
         // Don't treat network/cache errors as critical errors
-        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
-            errorMessage.includes('ERR_NETWORK')) {
-          console.info('Video may be temporarily unavailable due to network/cache issues');
+        if (
+          errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
+          errorMessage.includes('ERR_NETWORK')
+        ) {
+          console.info(
+            'Video may be temporarily unavailable due to network/cache issues'
+          );
           setState(prev => ({ ...prev, isPlaying: false }));
         } else {
-          setState(prev => ({ ...prev, error: 'Failed to play video', isPlaying: false }));
+          setState(prev => ({
+            ...prev,
+            error: 'Failed to play video',
+            isPlaying: false,
+          }));
         }
       }
     }
@@ -144,8 +155,8 @@ return;
   const pause = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.pause();
     setState(prev => ({ ...prev, isPlaying: false }));
@@ -162,8 +173,8 @@ return;
   const mute = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.muted = true;
     setState(prev => ({ ...prev, isMuted: true }));
@@ -172,8 +183,8 @@ return;
   const unmute = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.muted = false;
     setState(prev => ({ ...prev, isMuted: false }));
@@ -190,8 +201,8 @@ return;
   const setVolume = useCallback((volume: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     const clampedVolume = Math.max(0, Math.min(1, volume));
     video.volume = clampedVolume;
@@ -201,8 +212,8 @@ return;
   const seek = useCallback((time: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.currentTime = time;
     setState(prev => ({ ...prev, currentTime: time }));
@@ -211,8 +222,8 @@ return;
   const setPlaybackRate = useCallback((rate: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.playbackRate = rate;
     setState(prev => ({ ...prev, playbackRate: rate }));
@@ -225,8 +236,8 @@ return;
   const enterFullscreen = useCallback(async () => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     try {
       if (video.requestFullscreen) {
@@ -260,8 +271,8 @@ return;
   const reset = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.currentTime = 0;
     video.pause();
@@ -282,8 +293,8 @@ return;
     onLoadedMetadata: useCallback(() => {
       const video = videoRef.current;
       if (!video) {
-return;
-}
+        return;
+      }
 
       setState(prev => ({
         ...prev,
@@ -307,8 +318,8 @@ return;
     onTimeUpdate: useCallback(() => {
       const video = videoRef.current;
       if (!video) {
-return;
-}
+        return;
+      }
 
       setState(prev => ({ ...prev, currentTime: video.currentTime }));
     }, []),
@@ -316,8 +327,8 @@ return;
     onDurationChange: useCallback(() => {
       const video = videoRef.current;
       if (!video) {
-return;
-}
+        return;
+      }
 
       setState(prev => ({ ...prev, duration: video.duration }));
     }, []),
@@ -325,8 +336,8 @@ return;
     onVolumeChange: useCallback(() => {
       const video = videoRef.current;
       if (!video) {
-return;
-}
+        return;
+      }
 
       setState(prev => ({
         ...prev,
@@ -352,8 +363,8 @@ return;
     onProgress: useCallback(() => {
       const video = videoRef.current;
       if (!video?.buffered.length) {
-return;
-}
+        return;
+      }
 
       const buffered = video.buffered.end(video.buffered.length - 1);
       setState(prev => ({ ...prev, buffered }));
@@ -372,8 +383,8 @@ return;
   useEffect(() => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     // Set initial properties
     video.autoplay = autoplay;
@@ -415,16 +426,29 @@ return;
       video.removeEventListener('waiting', events.onWaiting);
       video.removeEventListener('canplaythrough', events.onCanPlayThrough);
     };
-  }, [autoplay, muted, loop, preload, playsinline, initialVolume, initialPlaybackRate, events]);
+  }, [
+    autoplay,
+    muted,
+    loop,
+    preload,
+    playsinline,
+    initialVolume,
+    initialPlaybackRate,
+    events,
+  ]);
 
   // Handle fullscreen changes
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setState(prev => ({ ...prev, isFullscreen: !!document.fullscreenElement }));
+      setState(prev => ({
+        ...prev,
+        isFullscreen: !!document.fullscreenElement,
+      }));
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    return () =>
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
   return {

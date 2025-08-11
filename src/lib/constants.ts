@@ -1,4 +1,3 @@
-
 /**
  * Application Constants
  * Centralized configuration and constants for the YouTube clone
@@ -208,4 +207,3 @@ export const CONSTANTS = {
   REGEX_PATTERNS,
   DATE_FORMATS,
 } as const;
-

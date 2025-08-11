@@ -15,22 +15,22 @@ interface FeatureFlag {
   name: string;
   description: string;
   type: 'boolean' | 'string' | 'number' | 'json' | 'percentage';
-  defaultValue;
+  defaultValue: any;
   enabled: boolean;
   rolloutStrategy: RolloutStrategy;
-  targeting: TargetingRule;
-  variants?: FlagVariant;
+  targeting: TargetingRule[];
+  variants?: FlagVariant[];
   metadata: {
     createdAt: number;
     updatedAt: number;
     createdBy: string;
-    tags: string;
+    tags: string[];
     environment: string;
   };
   monitoring: {
     trackEvents: boolean;
     trackPerformance: boolean;
-    alertThresholds: AlertThreshold;
+    alertThresholds: AlertThreshold[];
   };
   schedule?: {
     startTime?: number;
@@ -54,22 +54,22 @@ interface RolloutStrategy {
 interface TargetingRule {
   id: string;
   name: string;
-  conditions: TargetingCondition;
+  conditions: TargetingCondition[];
   operator: 'AND' | 'OR';
-  value;
+  value: any;
   enabled: boolean;
 }
 
 interface TargetingCondition {
   attribute: string;
   operator: 'equals' | 'not_equals' | 'contains' | 'not_contains' | 'greater_than' | 'less_than' | 'in' | 'not_in' | 'regex';
-  value;
+  value: any;
 }
 
 interface FlagVariant {
   id: string;
   name: string;
-  value;
+  value: any;
   weight: number; // 0-100
   description?: string;
 }
@@ -96,7 +96,7 @@ interface UserContext {
 interface FlagEvaluation {
   flagId: string;
   userId?: string;
-  value;
+  value: any;
   variant?: string;
   reason: string;
   timestamp: number;
@@ -119,8 +119,8 @@ interface ABTestResult {
  */
 class AdvancedFeatureFlagManager {
   private flags: Map<string, FeatureFlag> = new Map();
-  private evaluationCache: Map<string, { value; expiry: number }> = new Map();
-  private evaluationHistory: FlagEvaluation = [];
+  private evaluationCache: Map<string, { value: any; expiry: number }> = new Map();
+  private evaluationHistory: FlagEvaluation[] = [];
   private abTestResults: Map<string, ABTestResult[]> = new Map();
   private isRunning = false;
   private rolloutTimers: Map<string, NodeJS.Timeout> = new Map();
@@ -285,7 +285,7 @@ return undefined;
       throw new Error(`Feature _flag '${flagId}' not found`);
     }
 
-    _flag.rolloutStrategy?._config.percentage = Math.max(0, Math.min(100, percentage));
+    _flag.rolloutStrategy?.config.percentage = Math.max(0, Math.min(100, percentage));
     _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -375,7 +375,7 @@ return undefined;
       throw new Error('Flag must have at least 2 variants for A/B testing');
     }
 
-    const results: ABTestResult = [];
+    const results: ABTestResult[] = [];
     const analytics = this.getEvaluationAnalytics(flagId);
 
     // Analyze each metric for each variant
@@ -419,8 +419,8 @@ return undefined;
 return [];
 }
 
-        const controlValue = controlData.value;
-        const testValue = testData.value;
+        const controlValue = controlData.value as any;
+        const testValue = testData.value as any;
 
         const difference = Math.abs(testValue - controlValue);
         const relativeDifference = difference / controlValue;
@@ -526,8 +526,8 @@ return undefined;
 }
 
       // Update _flag to use winning variant as default
-      _flag.defaultValue = winningVariant.value;
-      _flag.rolloutStrategy?._config.percentage = 100;
+      _flag.defaultValue = winningVariant.value as any;
+      _flag.rolloutStrategy && (_flag.rolloutStrategy.config.percentage = 100);
       _flag.metadata.updatedAt = Date.now();
 
       this.clearEvaluationCache(flagId);
@@ -553,7 +553,7 @@ return undefined;
 
     // Disable _flag or set to safe default
     _flag.enabled = false;
-    _flag.rolloutStrategy?._config.percentage = 0;
+    _flag.rolloutStrategy && (_flag.rolloutStrategy.config.percentage = 0);
     _flag.metadata.updatedAt = Date.now();
 
     this.clearEvaluationCache(flagId);
@@ -607,7 +607,7 @@ continue;
 
       const ruleMatches = this.evaluateTargetingRule(rule, _context);
       if (ruleMatches) {
-        evaluation.value = rule.value;
+        evaluation.value = rule.value as any;
         evaluation.reason = `targeting_rule_${rule.id}`;
         break;
       }
@@ -616,7 +616,7 @@ continue;
     // Apply rollout strategy
     const rolloutResult = this.applyRolloutStrategy(_flag, _context);
     if (rolloutResult.shouldApply) {
-      evaluation.value = rolloutResult.value;
+      evaluation.value = rolloutResult.value as any;
       if (rolloutResult.variant) {
         evaluation.variant = rolloutResult.variant;
       }
@@ -641,9 +641,13 @@ continue;
 
     switch (condition.operator) {
       case 'equals':
-        return contextValue === condition.value;
+        return contextValue === (condition.value as any);
+      switch (condition.operator) {
+      case 'equals':
+        return contextValue === (condition.value as any);
       case 'not_equals':
-        return contextValue !== condition.value;
+        return contextValue !== (condition.value as any);
+      case 'contains':
       case 'contains':
         return String(contextValue).includes(String(condition.value));
       case 'not_contains':
@@ -685,7 +689,7 @@ continue;
 
   private applyRolloutStrategy(_flag: FeatureFlag, _context: UserContext): {
     shouldApply: boolean;
-    value;
+    value: any;
     variant?: string;
     reason: string;
   } {
@@ -702,7 +706,7 @@ continue;
 
       case 'gradual':
       case 'user-based':
-        const percentage = strategy?._config.percentage || 0;
+        const percentage = _flag.rolloutStrategy?.config.percentage || 0;
         const hash = this.getUserHash(_context.userId || _context.sessionId || 'anonymous', _flag.id);
         const shouldInclude = hash < percentage;
 
@@ -723,7 +727,7 @@ continue;
         };
 
       case 'geographic':
-        const geoTargets = strategy?._config.geoTargets || [];
+        const geoTargets = _flag.rolloutStrategy?.config.geoTargets || [];
         const userCountry = _context.country;
         const geoMatch = !userCountry || geoTargets.length === 0 || geoTargets.includes(userCountry);
 
@@ -768,7 +772,7 @@ continue;
     return variants[0] || { id: 'default', name: 'Default', value: false, weight: 100 };
   }
 
-  private getUserHash(userId?: string, flagId: any): number {
+  private getUserHash(flagId: string, userId?: string): number {
     // Simple hash function for consistent user bucketing
     const str = `${userId}:${flagId}`;
     let hash = 0;
@@ -793,7 +797,7 @@ continue;
   private clearEvaluationCache(flagId?: string): void {
     if (flagId) {
       // Clear cache entries for specific _flag
-      const keysToDelete: string = [];
+      const keysToDelete: string[] = [];
       this.evaluationCache.forEach((_, key) => {
         if (key.startsWith(`${flagId}:`)) {
           keysToDelete.push(key);
@@ -808,13 +812,13 @@ continue;
 
   private startGradualRollout(_flag: FeatureFlag): void {
 
-    if (strategy.type !== 'gradual' || !strategy?._config.incrementPercentage || !strategy?._config.incrementInterval) {
+    if (strategy.type !== 'gradual' || !_flag.rolloutStrategy?.config.incrementPercentage || !_flag.rolloutStrategy?.config.incrementInterval) {
       return undefined;
     }
 
-    const currentPercentage = strategy?._config.percentage || 0;
-    const { incrementPercentage } = strategy?._config;
-    const incrementInterval = strategy?._config.incrementInterval * 60 * 1000; // Convert to ms
+    const currentPercentage = _flag.rolloutStrategy?.config.percentage || 0;
+    const { incrementPercentage } = _flag.rolloutStrategy?.config;
+    const incrementInterval = _flag.rolloutStrategy?.config.incrementInterval * 60 * 1000; // Convert to ms
 
     if (currentPercentage >= 100) {
       return undefined; // Already at 100%
@@ -918,13 +922,13 @@ return undefined;
     let shouldTrigger = false;
     switch (_threshold.operator) {
       case 'gt':
-        shouldTrigger = currentValue > _threshold.value;
+        shouldTrigger = currentValue > (_threshold.value as any);
         break;
       case 'lt':
-        shouldTrigger = currentValue < _threshold.value;
+        shouldTrigger = currentValue < (_threshold.value as any);
         break;
       case 'eq':
-        shouldTrigger = currentValue === _threshold.value;
+        shouldTrigger = currentValue === (_threshold.value as any);
         break;
     }
 

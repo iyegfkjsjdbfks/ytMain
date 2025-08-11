@@ -1,9 +1,6 @@
-
 import { getYouTubeSearchProvider } from '../../services/settingsService';
-import React from "react";
+import React from 'react';
 import { logger } from './logger';
-
-
 
 /**
  * Utility functions for managing YouTube Data API usage based on admin settings
@@ -16,7 +13,9 @@ import { logger } from './logger';
  */
 export function isYouTubeDataApiBlocked(): boolean {
   const provider = getYouTubeSearchProvider();
-  logger.debug(`🔒 YouTube API Blocking Check: Current provider = "${provider}"`);
+  logger.debug(
+    `🔒 YouTube API Blocking Check: Current provider = "${provider}"`
+  );
 
   // Only block YouTube Data API if API key is not available
   // Allow YouTube API as primary source with Google Custom Search as fallback
@@ -25,7 +24,9 @@ export function isYouTubeDataApiBlocked(): boolean {
 
   logger.debug(`🔒 YouTube API Available: ${!!apiKey}`);
   logger.debug(`🔒 YouTube API Blocked: ${isBlocked}`);
-  logger.debug('🎯 Strategy: YouTube Data API (primary) → Google Custom Search (fallback)');
+  logger.debug(
+    '🎯 Strategy: YouTube Data API (primary) → Google Custom Search (fallback)'
+  );
 
   return isBlocked;
 }
@@ -55,7 +56,7 @@ export function getYouTubeApiBlockedMessage(): string {
  */
 export async function conditionalYouTubeApiCall<T>(
   apiCall: () => Promise<T>,
-  fallbackValue: T | null = null,
+  fallbackValue: T | null = null
 ): Promise<T | null> {
   if (isYouTubeDataApiBlocked()) {
     logger.warn(getYouTubeApiBlockedMessage());
@@ -78,7 +79,7 @@ export async function conditionalYouTubeApiCall<T>(
  */
 export function conditionalYouTubeOperation<T>(
   operation: () => T,
-  fallbackValue: T,
+  fallbackValue: T
 ): T {
   if (isYouTubeDataApiBlocked()) {
     logger.warn(getYouTubeApiBlockedMessage());

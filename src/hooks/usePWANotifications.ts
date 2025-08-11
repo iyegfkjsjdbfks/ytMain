@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
@@ -83,56 +82,62 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   });
 
   // Check if notifications can be shown
-  const canShowNotifications = state.permission === 'granted' && state.isSupported;
+  const canShowNotifications =
+    state.permission === 'granted' && state.isSupported;
 
   // Request notification permission
-  const requestPermission = useCallback(async (): Promise<NotificationPermission> => {
-    if (!state.isSupported) {
-      conditionalLogger.warn('Notifications not supported', undefined, 'usePWANotifications');
-      return 'denied';
-    }
+  const requestPermission =
+    useCallback(async (): Promise<NotificationPermission> => {
+      if (!state.isSupported) {
+        conditionalLogger.warn(
+          'Notifications not supported',
+          undefined,
+          'usePWANotifications'
+        );
+        return 'denied';
+      }
 
-    if (state.permission === 'granted') {
-      return 'granted';
-    }
+      if (state.permission === 'granted') {
+        return 'granted';
+      }
 
-    setState(prev => ({ ...prev, isRequesting: true }));
+      setState(prev => ({ ...prev, isRequesting: true }));
 
-    try {
-      const permission = await Notification.requestPermission();
+      try {
+        const permission = await Notification.requestPermission();
 
-      setState(prev => ({
-        ...prev,
-        permission: permission as NotificationPermission,
-        isRequesting: false,
-      }));
+        setState(prev => ({
+          ...prev,
+          permission: permission as NotificationPermission,
+          isRequesting: false,
+        }));
 
-      conditionalLogger.info(
-        'Notification permission requested',
-        { permission },
-        'usePWANotifications',
-      );
+        conditionalLogger.info(
+          'Notification permission requested',
+          { permission },
+          'usePWANotifications'
+        );
 
-      // Track permission request
-      trackNotificationEvent('permission_requested', { result: permission });
+        // Track permission request
+        trackNotificationEvent('permission_requested', { result: permission });
 
-      return permission as NotificationPermission;
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        permission: 'denied',
-        isRequesting: false,
-      }));
+        return permission as NotificationPermission;
+      } catch (error) {
+        setState(prev => ({
+          ...prev,
+          permission: 'denied',
+          isRequesting: false,
+        }));
 
-      conditionalLogger.error(
-        'Failed to request notification permission',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications',
-      );
+        conditionalLogger.error(
+          'Failed to request notification permission',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'usePWANotifications'
+        );
 
-      return 'denied';
-    }
-  }, [state.isSupported, state.permission]);
+        return 'denied';
+      }
+    }, [state.isSupported, state.permission]);
 
   // Check quiet hours
   const isQuietHours = useCallback((): boolean => {
@@ -153,14 +158,13 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
       if (startMinutes <= endMinutes) {
         return currentTime >= startMinutes && currentTime <= endMinutes;
       }
-        // Quiet hours span midnight
-        return currentTime >= startMinutes || currentTime <= endMinutes;
-
+      // Quiet hours span midnight
+      return currentTime >= startMinutes || currentTime <= endMinutes;
     } catch (error) {
       conditionalLogger.error(
         'Failed to parse quiet hours',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications',
+        'usePWANotifications'
       );
 
       return false;
@@ -177,7 +181,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
     try {
       const maxPerHour = parseInt(frequencyLimit, 10);
-      const oneHourAgo = Date.now() - (60 * 60 * 1000);
+      const oneHourAgo = Date.now() - 60 * 60 * 1000;
 
       // Get notifications sent in the last hour
       const recentNotifications = getRecentNotifications(oneHourAgo);
@@ -189,175 +193,189 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   }, []);
 
   // Show notification
-  const showNotification = useCallback(async (options: NotificationOptions): Promise<boolean> => {
-    if (!canShowNotifications) {
-      conditionalLogger.warn(
-        'Cannot show notification - permission not granted or not supported',
-        undefined,
-        'usePWANotifications',
-      );
+  const showNotification = useCallback(
+    async (options: NotificationOptions): Promise<boolean> => {
+      if (!canShowNotifications) {
+        conditionalLogger.warn(
+          'Cannot show notification - permission not granted or not supported',
+          undefined,
+          'usePWANotifications'
+        );
 
-      return false;
-    }
-
-    // Check quiet hours
-    if (isQuietHours()) {
-      conditionalLogger.debug(
-        'Notification blocked - quiet hours active',
-        undefined,
-        'usePWANotifications',
-      );
-
-      // Queue for later
-      setState(prev => ({
-        ...prev,
-        pendingNotifications: [...prev.pendingNotifications, options],
-      }));
-
-      return false;
-    }
-
-    // Check frequency limits
-    if (!canSendNotification()) {
-      conditionalLogger.debug(
-        'Notification blocked - frequency limit reached',
-        undefined,
-        'usePWANotifications',
-      );
-
-      return false;
-    }
-
-    try {
-      // Use service worker for better notification handling
-      const registration = await navigator.serviceWorker.getRegistration();
-
-      if (registration) {
-        await registration.showNotification(options.title, {
-          body: options.body,
-          icon: options.icon || '/icons/icon-192x192.png',
-          badge: options.badge || '/icons/badge-72x72.png',
-          ...(options.image && { image: options.image } as any),
-          tag: options.tag,
-          data: options.data,
-          requireInteraction: options.requireInteraction,
-          silent: options.silent,
-          ...(options.vibrate && { vibrate: options.vibrate } as any),
-          actions: options.actions,
-          timestamp: options.timestamp || Date.now(),
-        });
-      } else {
-        // Fallback to regular notification
-        const notification = new Notification(options.title, {
-          body: options.body,
-          icon: options.icon || '/icons/icon-192x192.png',
-          tag: options.tag,
-          data: options.data,
-          requireInteraction: options.requireInteraction,
-          silent: options.silent,
-          ...(options.vibrate && { vibrate: options.vibrate } as any),
-        });
-
-        // Handle notification events
-        notification.onclick = () => {
-          trackNotificationEvent('clicked', { tag: options.tag });
-          notification.close();
-
-          // Focus the app window
-          if (window.focus) {
-            window.focus();
-          }
-        };
-
-        notification.onclose = () => {
-          trackNotificationEvent('dismissed', { tag: options.tag });
-        };
+        return false;
       }
 
-      // Update state
-      setState(prev => ({
-        ...prev,
-        lastNotificationTime: Date.now(),
-        notificationCount: prev.notificationCount + 1,
-      }));
+      // Check quiet hours
+      if (isQuietHours()) {
+        conditionalLogger.debug(
+          'Notification blocked - quiet hours active',
+          undefined,
+          'usePWANotifications'
+        );
 
-      // Track notification
-      trackNotificationEvent('sent', {
-        tag: options.tag,
-        title: options.title,
-        hasActions: !!(options.actions && options.actions.length > 0),
-      });
+        // Queue for later
+        setState(prev => ({
+          ...prev,
+          pendingNotifications: [...prev.pendingNotifications, options],
+        }));
 
-      conditionalLogger.debug(
-        'Notification sent',
-        { title: options.title, tag: options.tag },
-        'usePWANotifications',
-      );
+        return false;
+      }
 
-      return true;
-    } catch (error) {
-      conditionalLogger.error(
-        'Failed to show notification',
-        {
-          error: error instanceof Error ? error.message : 'Unknown error',
+      // Check frequency limits
+      if (!canSendNotification()) {
+        conditionalLogger.debug(
+          'Notification blocked - frequency limit reached',
+          undefined,
+          'usePWANotifications'
+        );
+
+        return false;
+      }
+
+      try {
+        // Use service worker for better notification handling
+        const registration = await navigator.serviceWorker.getRegistration();
+
+        if (registration) {
+          await registration.showNotification(options.title, {
+            body: options.body,
+            icon: options.icon || '/icons/icon-192x192.png',
+            badge: options.badge || '/icons/badge-72x72.png',
+            ...(options.image && ({ image: options.image } as any)),
+            tag: options.tag,
+            data: options.data,
+            requireInteraction: options.requireInteraction,
+            silent: options.silent,
+            ...(options.vibrate && ({ vibrate: options.vibrate } as any)),
+            actions: options.actions,
+            timestamp: options.timestamp || Date.now(),
+          });
+        } else {
+          // Fallback to regular notification
+          const notification = new Notification(options.title, {
+            body: options.body,
+            icon: options.icon || '/icons/icon-192x192.png',
+            tag: options.tag,
+            data: options.data,
+            requireInteraction: options.requireInteraction,
+            silent: options.silent,
+            ...(options.vibrate && ({ vibrate: options.vibrate } as any)),
+          });
+
+          // Handle notification events
+          notification.onclick = () => {
+            trackNotificationEvent('clicked', { tag: options.tag });
+            notification.close();
+
+            // Focus the app window
+            if (window.focus) {
+              window.focus();
+            }
+          };
+
+          notification.onclose = () => {
+            trackNotificationEvent('dismissed', { tag: options.tag });
+          };
+        }
+
+        // Update state
+        setState(prev => ({
+          ...prev,
+          lastNotificationTime: Date.now(),
+          notificationCount: prev.notificationCount + 1,
+        }));
+
+        // Track notification
+        trackNotificationEvent('sent', {
+          tag: options.tag,
           title: options.title,
-        },
-        'usePWANotifications',
-      );
-
-      return false;
-    }
-  }, [canShowNotifications, isQuietHours, canSendNotification]);
-
-  // Schedule notification
-  const scheduleNotification = useCallback((options: NotificationOptions, delay: any) => {
-    setTimeout(() => {
-      showNotification(options);
-    }, delay);
-
-    conditionalLogger.debug(
-      'Notification scheduled',
-      { title: options.title, delay },
-      'usePWANotifications',
-    );
-  }, [showNotification]);
-
-  // Clear notifications
-  const clearNotifications = useCallback(async (tag?: string): Promise<void> => {
-    try {
-      const registration = await navigator.serviceWorker.getRegistration();
-
-      if (registration) {
-        const notifications = await registration.getNotifications(tag ? { tag } : {});
-
-        notifications.forEach(notification => {
-          notification.close();
+          hasActions: !!(options.actions && options.actions.length > 0),
         });
 
         conditionalLogger.debug(
-          'Notifications cleared',
-          { count: notifications.length, tag },
-          'usePWANotifications',
+          'Notification sent',
+          { title: options.title, tag: options.tag },
+          'usePWANotifications'
+        );
+
+        return true;
+      } catch (error) {
+        conditionalLogger.error(
+          'Failed to show notification',
+          {
+            error: error instanceof Error ? error.message : 'Unknown error',
+            title: options.title,
+          },
+          'usePWANotifications'
+        );
+
+        return false;
+      }
+    },
+    [canShowNotifications, isQuietHours, canSendNotification]
+  );
+
+  // Schedule notification
+  const scheduleNotification = useCallback(
+    (options: NotificationOptions, delay: any) => {
+      setTimeout(() => {
+        showNotification(options);
+      }, delay);
+
+      conditionalLogger.debug(
+        'Notification scheduled',
+        { title: options.title, delay },
+        'usePWANotifications'
+      );
+    },
+    [showNotification]
+  );
+
+  // Clear notifications
+  const clearNotifications = useCallback(
+    async (tag?: string): Promise<void> => {
+      try {
+        const registration = await navigator.serviceWorker.getRegistration();
+
+        if (registration) {
+          const notifications = await registration.getNotifications(
+            tag ? { tag } : {}
+          );
+
+          notifications.forEach(notification => {
+            notification.close();
+          });
+
+          conditionalLogger.debug(
+            'Notifications cleared',
+            { count: notifications.length, tag },
+            'usePWANotifications'
+          );
+        }
+      } catch (error) {
+        conditionalLogger.error(
+          'Failed to clear notifications',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'usePWANotifications'
         );
       }
-    } catch (error) {
-      conditionalLogger.error(
-        'Failed to clear notifications',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications',
-      );
-    }
-  }, []);
+    },
+    []
+  );
 
   // Enable quiet hours
   const enableQuietHours = useCallback((start: any, end: any) => {
     const quietHours = { start, end };
-    localStorage.setItem('notification-quiet-hours', JSON.stringify(quietHours));
+    localStorage.setItem(
+      'notification-quiet-hours',
+      JSON.stringify(quietHours)
+    );
 
     conditionalLogger.debug(
       'Quiet hours enabled',
       { start, end },
-      'usePWANotifications',
+      'usePWANotifications'
     );
   }, []);
 
@@ -368,7 +386,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     conditionalLogger.debug(
       'Quiet hours disabled',
       undefined,
-      'usePWANotifications',
+      'usePWANotifications'
     );
   }, []);
 
@@ -379,7 +397,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     conditionalLogger.debug(
       'Notification frequency limit set',
       { maxPerHour },
-      'usePWANotifications',
+      'usePWANotifications'
     );
   }, []);
 
@@ -395,13 +413,16 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
           totalClicked: parsed.totalClicked || 0,
           totalDismissed: parsed.totalDismissed || 0,
           lastSent: parsed.lastSent || null,
-          clickRate: parsed.totalSent > 0 ? (parsed.totalClicked / parsed.totalSent) * 100 : 0,
+          clickRate:
+            parsed.totalSent > 0
+              ? (parsed.totalClicked / parsed.totalSent) * 100
+              : 0,
         };
       } catch (error) {
         conditionalLogger.error(
           'Failed to parse notification stats',
           { error: error instanceof Error ? error.message : 'Unknown error' },
-          'usePWANotifications',
+          'usePWANotifications'
         );
       }
     }
@@ -423,7 +444,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     conditionalLogger.debug(
       'Notification stats reset',
       undefined,
-      'usePWANotifications',
+      'usePWANotifications'
     );
   }, []);
 
@@ -435,7 +456,9 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
 
   const trackNotificationEvent = (event: Event, data: any) => {
     try {
-      const events = JSON.parse(localStorage.getItem('notification-events') || '[]');
+      const events = JSON.parse(
+        localStorage.getItem('notification-events') || '[]'
+      );
       events.push({
         event,
         data,
@@ -461,23 +484,26 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
         stats.totalDismissed += 1;
       }
 
-      stats.clickRate = stats.totalSent > 0 ? (stats.totalClicked / stats.totalSent) * 100 : 0;
+      stats.clickRate =
+        stats.totalSent > 0 ? (stats.totalClicked / stats.totalSent) * 100 : 0;
 
       localStorage.setItem('notification-stats', JSON.stringify(stats));
     } catch (error) {
       conditionalLogger.error(
         'Failed to track notification event',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWANotifications',
+        'usePWANotifications'
       );
     }
   };
 
   const getRecentNotifications = (since: any): any[] => {
     try {
-      const events = JSON.parse(localStorage.getItem('notification-events') || '[]');
-      return events.filter((event: Event) =>
-        event.event === 'sent' && event.timestamp >= since,
+      const events = JSON.parse(
+        localStorage.getItem('notification-events') || '[]'
+      );
+      return events.filter(
+        (event: Event) => event.event === 'sent' && event.timestamp >= since
       );
     } catch (error) {
       return [];

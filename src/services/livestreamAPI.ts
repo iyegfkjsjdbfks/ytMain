@@ -1,16 +1,15 @@
 // @ts-nocheck
 import type {
+  /**
+   * Mock Live Streaming API Service
+   * This is a mock implementation for development and testing.
+   * In production, this would be replaced with actual API calls.
+   *
+   * Note: Some strict TypeScript checks are bypassed for mock implementation simplicity
+   */
 
-/**
- * Mock Live Streaming API Service
- * This is a mock implementation for development and testing.
- * In production, this would be replaced with actual API calls.
- *
- * Note: Some strict TypeScript checks are bypassed for mock implementation simplicity
- */
-
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
+  // @ts-nocheck
 
   LiveStream,
   ChatMessage,
@@ -99,7 +98,9 @@ export const streamAPI = {
       tags: streamData.tags || [],
       visibility: streamData.visibility || 'public',
       status: 'scheduled',
-      ...(streamData.scheduledStartTime && { scheduledStartTime: streamData.scheduledStartTime }),
+      ...(streamData.scheduledStartTime && {
+        scheduledStartTime: streamData.scheduledStartTime,
+      }),
       creatorId: streamData.creatorId || 'user_123',
       creatorName: streamData.creatorName || 'Streamer',
       creatorAvatar: streamData.creatorAvatar || '/api/placeholder/40/40',
@@ -124,7 +125,7 @@ export const streamAPI = {
    */
   async getUserStreams(userId): Promise<LiveStream[]> {
     // In a real implementation, filter by userId
-    return mockStreams.filter((stream) => stream.creatorId === userId);
+    return mockStreams.filter(stream => stream.creatorId === userId);
   },
 
   /**
@@ -182,8 +183,11 @@ export const streamAPI = {
     }
 
     const endTime = new Date();
-    const duration = stream.actualStartTime ?
-      Math.floor((endTime.getTime() - stream.actualStartTime.getTime()) / 1000) : 0;
+    const duration = stream.actualStartTime
+      ? Math.floor(
+          (endTime.getTime() - stream.actualStartTime.getTime()) / 1000
+        )
+      : 0;
 
     const updatedStream = await this.updateStream(id, {
       status: 'ended',
@@ -213,7 +217,7 @@ export const streamAPI = {
    * Delete a stream
    */
   async deleteStream(id): Promise<void> {
-    mockStreams = mockStreams.filter((stream) => stream.id !== id);
+    mockStreams = mockStreams.filter(stream => stream.id !== id);
   },
 };
 
@@ -246,7 +250,13 @@ export const chatAPI = {
   /**
    * Send a Super Chat
    */
-  async sendSuperChat(streamId, message, amount, userId, username): Promise<SuperChat> {
+  async sendSuperChat(
+    streamId,
+    message,
+    amount,
+    userId,
+    username
+  ): Promise<SuperChat> {
     const superChat: SuperChat = {
       id: `super_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
       userId,
@@ -293,8 +303,13 @@ export const chatAPI = {
   /**
    * Moderate a chat message
    */
-  async moderateMessage(messageId, action: ChatModerationAction): Promise<void> {
-    const messageIndex = mockChatMessages.findIndex(msg => msg.id === messageId);
+  async moderateMessage(
+    messageId,
+    action: ChatModerationAction
+  ): Promise<void> {
+    const messageIndex = mockChatMessages.findIndex(
+      msg => msg.id === messageId
+    );
     if (messageIndex !== -1) {
       const message = mockChatMessages[messageIndex];
       switch (action.type) {
@@ -384,7 +399,7 @@ export const pollsAPI = {
    * Get polls for a stream
    */
   async getStreamPolls(streamId): Promise<LivePoll[]> {
-    return mockPolls.filter((poll) => poll.streamId === streamId);
+    return mockPolls.filter(poll => poll.streamId === streamId);
   },
 };
 
@@ -395,7 +410,12 @@ export const qaAPI = {
   /**
    * Submit a question
    */
-  async submitQuestion(streamId, question, userId, username): Promise<QAQuestion> {
+  async submitQuestion(
+    streamId,
+    question,
+    userId,
+    username
+  ): Promise<QAQuestion> {
     const qaQuestion: QAQuestion = {
       id: `qa_${Date.now()}`,
       streamId,
@@ -437,7 +457,8 @@ export const qaAPI = {
   async upvoteQuestion(questionId): Promise<QAQuestion> {
     const questionIndex = mockQuestions.findIndex(q => q.id === questionId);
     if (questionIndex !== -1) {
-      mockQuestions[questionIndex].upvotes = (mockQuestions[questionIndex].upvotes || 0) + 1;
+      mockQuestions[questionIndex].upvotes =
+        (mockQuestions[questionIndex].upvotes || 0) + 1;
     }
     return mockQuestions[questionIndex];
   },
@@ -447,7 +468,7 @@ export const qaAPI = {
    */
   async getStreamQuestions(streamId): Promise<QAQuestion[]> {
     return mockQuestions
-      .filter((q) => q.streamId === streamId)
+      .filter(q => q.streamId === streamId)
       .sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
   },
 };
@@ -499,7 +520,7 @@ export const replayAPI = {
    * Get replays for a stream
    */
   async getStreamReplays(streamId): Promise<StreamReplay[]> {
-    return mockReplays.filter((replay) => replay.streamId === streamId);
+    return mockReplays.filter(replay => replay.streamId === streamId);
   },
 };
 
@@ -515,7 +536,12 @@ export const multiPlatformAPI = {
       { id: 'youtube', name: 'YouTube', icon: '📺', isConnected: true },
       { id: 'twitch', name: 'Twitch', icon: '🎮', isConnected: false },
       { id: 'facebook', name: 'Facebook', icon: '📘', isConnected: false },
-      { id: 'custom_rtmp', name: 'Custom RTMP', icon: '🔗', isConnected: false },
+      {
+        id: 'custom_rtmp',
+        name: 'Custom RTMP',
+        icon: '🔗',
+        isConnected: false,
+      },
     ];
   },
 
@@ -545,7 +571,10 @@ export const schedulingAPI = {
   /**
    * Schedule a stream
    */
-  async scheduleStream(streamData: Partial<LiveStream>, scheduledTime: Date): Promise<LiveStream> {
+  async scheduleStream(
+    streamData: Partial<LiveStream>,
+    scheduledTime: Date
+  ): Promise<LiveStream> {
     const stream = await streamAPI.createStream({
       ...streamData,
       scheduledStartTime: scheduledTime,
@@ -559,7 +588,7 @@ export const schedulingAPI = {
    * Get scheduled streams
    */
   async getScheduledStreams(): Promise<LiveStream[]> {
-    return mockStreams.filter((stream) => stream.status === 'scheduled');
+    return mockStreams.filter(stream => stream.status === 'scheduled');
   },
 
   /**

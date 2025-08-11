@@ -22,7 +22,9 @@ export interface GoogleSearchResult {
 }
 
 // Placeholder implementation
-export const searchForHomePage = async (query: any): Promise<(YouTubeSearchResult | GoogleSearchResult)[]> => {
+export const searchForHomePage = async (
+  query: any
+): Promise<(YouTubeSearchResult | GoogleSearchResult)[]> => {
   // Mock data for development
   return [
     {
@@ -34,11 +36,11 @@ export const searchForHomePage = async (query: any): Promise<(YouTubeSearchResul
       views: 1000,
       publishedAt: new Date().toISOString(),
       channelId: 'channel1',
-      channelTitle: 'Mock Channel'
-    }
+      channelTitle: 'Mock Channel',
+    },
   ];
 };
 
 export default {
-  searchForHomePage
+  searchForHomePage,
 };

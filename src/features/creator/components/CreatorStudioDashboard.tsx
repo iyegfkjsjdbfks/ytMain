@@ -1,8 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { useState } from 'react';
 
-import { EyeIcon,
+import {
+  EyeIcon,
   ClockIcon,
   UserGroupIcon,
   CurrencyDollarIcon,
@@ -16,9 +17,9 @@ import { EyeIcon,
 } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
-const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
-  <VideoCameraIcon className={className} />
-);
+const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({
+  className,
+}) => <VideoCameraIcon className={className} />;
 
 interface DashboardMetrics {
   views: {
@@ -166,11 +167,11 @@ export const CreatorStudioDashboard: React.FC = () => {
 
   const formatNumber = (num: any): string => {
     if (num >= 1000000) {
-return `${(num / 1000000).toFixed(1)}M`;
-}
+      return `${(num / 1000000).toFixed(1)}M`;
+    }
     if (num >= 1000) {
-return `${(num / 1000).toFixed(1)}K`;
-}
+      return `${(num / 1000).toFixed(1)}K`;
+    }
     return num.toString();
   };
 
@@ -182,173 +183,208 @@ return `${(num / 1000).toFixed(1)}K`;
 
   const getStatusColor = (status: any) => {
     switch (status) {
-      case 'published': return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
-      case 'processing': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300';
-      case 'scheduled': return 'text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300';
-      case 'draft': return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
-      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
+      case 'published':
+        return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
+      case 'processing':
+        return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'scheduled':
+        return 'text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300';
+      case 'draft':
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
+      default:
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
     }
   };
 
   const getNotificationIcon = (type: any) => {
     switch (type) {
-      case 'milestone': return CheckCircleIcon;
-      case 'comment': return ChatBubbleLeftIcon;
-      case 'copyright': return ExclamationTriangleIcon;
-      case 'monetization': return CurrencyDollarIcon;
-      case 'system': return BellIcon;
-      default: return BellIcon;
+      case 'milestone':
+        return CheckCircleIcon;
+      case 'comment':
+        return ChatBubbleLeftIcon;
+      case 'copyright':
+        return ExclamationTriangleIcon;
+      case 'monetization':
+        return CurrencyDollarIcon;
+      case 'system':
+        return BellIcon;
+      default:
+        return BellIcon;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className='min-h-screen bg-gray-50 dark:bg-gray-900 p-6'>
+      <div className='max-w-7xl mx-auto'>
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className='flex items-center justify-between mb-8'>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className='text-3xl font-bold text-gray-900 dark:text-white'>
               Creator Studio
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">
+            <p className='text-gray-600 dark:text-gray-400 mt-2'>
               Manage your channel and track performance
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className='flex items-center gap-4'>
             <select
               value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value as any)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              onChange={e => setTimeRange(e.target.value as any)}
+              className='px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
             >
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
+              <option value='7d'>Last 7 days</option>
+              <option value='30d'>Last 30 days</option>
+              <option value='90d'>Last 90 days</option>
             </select>
           </div>
         </div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
+          <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between'>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Views</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
+                  Views
+                </p>
+                <p className='text-2xl font-bold text-gray-900 dark:text-white'>
                   {formatNumber(metrics.views.total)}
                 </p>
-                <div className={`flex items-center mt-2 text-sm ${
-                  metrics.views.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                }`}>
+                <div
+                  className={`flex items-center mt-2 text-sm ${
+                    metrics.views.trend === 'up'
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                  }`}
+                >
                   {metrics.views.trend === 'up' ? (
-                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
                   ) : (
-                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
                   )}
                   {Math.abs(metrics.views.change)}%
                 </div>
               </div>
-              <div className="p-3 rounded-full bg-blue-500">
-                <EyeIcon className="w-6 h-6 text-white" />
+              <div className='p-3 rounded-full bg-blue-500'>
+                <EyeIcon className='w-6 h-6 text-white' />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
+          <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between'>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Watch Time</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
+                  Watch Time
+                </p>
+                <p className='text-2xl font-bold text-gray-900 dark:text-white'>
                   {formatDuration(metrics.watchTime.total)}
                 </p>
-                <div className={`flex items-center mt-2 text-sm ${
-                  metrics.watchTime.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                }`}>
+                <div
+                  className={`flex items-center mt-2 text-sm ${
+                    metrics.watchTime.trend === 'up'
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                  }`}
+                >
                   {metrics.watchTime.trend === 'up' ? (
-                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
                   ) : (
-                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
                   )}
                   {Math.abs(metrics.watchTime.change)}%
                 </div>
               </div>
-              <div className="p-3 rounded-full bg-green-500">
-                <ClockIcon className="w-6 h-6 text-white" />
+              <div className='p-3 rounded-full bg-green-500'>
+                <ClockIcon className='w-6 h-6 text-white' />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
+          <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between'>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Subscribers</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
+                  Subscribers
+                </p>
+                <p className='text-2xl font-bold text-gray-900 dark:text-white'>
                   {formatNumber(metrics.subscribers.total)}
                 </p>
-                <div className={`flex items-center mt-2 text-sm ${
-                  metrics.subscribers.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                }`}>
+                <div
+                  className={`flex items-center mt-2 text-sm ${
+                    metrics.subscribers.trend === 'up'
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                  }`}
+                >
                   {metrics.subscribers.trend === 'up' ? (
-                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
                   ) : (
-                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
                   )}
                   {Math.abs(metrics.subscribers.change)}%
                 </div>
               </div>
-              <div className="p-3 rounded-full bg-purple-500">
-                <UserGroupIcon className="w-6 h-6 text-white" />
+              <div className='p-3 rounded-full bg-purple-500'>
+                <UserGroupIcon className='w-6 h-6 text-white' />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
+          <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between'>
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Revenue</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className='text-sm font-medium text-gray-600 dark:text-gray-400'>
+                  Revenue
+                </p>
+                <p className='text-2xl font-bold text-gray-900 dark:text-white'>
                   ${metrics.revenue.total.toLocaleString()}
                 </p>
-                <div className={`flex items-center mt-2 text-sm ${
-                  metrics.revenue.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                }`}>
+                <div
+                  className={`flex items-center mt-2 text-sm ${
+                    metrics.revenue.trend === 'up'
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                  }`}
+                >
                   {metrics.revenue.trend === 'up' ? (
-                    <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingUpIcon className='w-4 h-4 mr-1' />
                   ) : (
-                    <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
+                    <ArrowTrendingDownIcon className='w-4 h-4 mr-1' />
                   )}
                   {Math.abs(metrics.revenue.change)}%
                 </div>
               </div>
-              <div className="p-3 rounded-full bg-orange-500">
-                <CurrencyDollarIcon className="w-6 h-6 text-white" />
+              <div className='p-3 rounded-full bg-orange-500'>
+                <CurrencyDollarIcon className='w-6 h-6 text-white' />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {/* Quick Actions */}
-          <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className='lg:col-span-2'>
+            <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8'>
+              <h2 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
                 Quick Actions
               </h2>
-              <div className="grid grid-cols-2 gap-4">
-                {quickActions.map((action) => (
+              <div className='grid grid-cols-2 gap-4'>
+                {quickActions.map(action => (
                   <button
                     key={action.id}
                     onClick={action.action}
-                    className="flex items-center gap-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left"
+                    className='flex items-center gap-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left'
                   >
                     <div className={`p-3 rounded-full ${action.color}`}>
-                      <action.icon className="w-6 h-6 text-white" />
+                      <action.icon className='w-6 h-6 text-white' />
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900 dark:text-white">
+                      <h3 className='font-medium text-gray-900 dark:text-white'>
                         {action.title}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className='text-sm text-gray-600 dark:text-gray-400'>
                         {action.description}
                       </p>
                     </div>
@@ -358,38 +394,40 @@ return `${(num / 1000).toFixed(1)}K`;
             </div>
 
             {/* Recent Videos */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+              <div className='flex items-center justify-between mb-4'>
+                <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
                   Recent Videos
                 </h2>
-                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                <button className='text-blue-600 hover:text-blue-700 text-sm font-medium'>
                   View all
                 </button>
               </div>
-              <div className="space-y-4">
-                {recentVideos.map((video) => (
-                  <div key={video.id} className="flex items-center gap-4">
+              <div className='space-y-4'>
+                {recentVideos.map(video => (
+                  <div key={video.id} className='flex items-center gap-4'>
                     <img
                       src={video.thumbnail}
                       alt={video.title}
-                      className="w-20 h-12 object-cover rounded"
+                      className='w-20 h-12 object-cover rounded'
                     />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 dark:text-white truncate">
+                    <div className='flex-1 min-w-0'>
+                      <h3 className='font-medium text-gray-900 dark:text-white truncate'>
                         {video.title}
                       </h3>
-                      <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
+                      <div className='flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400'>
                         <span>{formatNumber(video.views)} views</span>
                         <span>{formatNumber(video.likes)} likes</span>
                         <span>{formatNumber(video.comments)} comments</span>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(video.status)}`}>
+                    <div className='text-right'>
+                      <span
+                        className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(video.status)}`}
+                      >
                         {video.status}
                       </span>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      <p className='text-xs text-gray-500 dark:text-gray-400 mt-1'>
                         {new Date(video.publishedAt).toLocaleDateString()}
                       </p>
                     </div>
@@ -400,17 +438,17 @@ return `${(num / 1000).toFixed(1)}K`;
           </div>
 
           {/* Notifications */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className='bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between mb-4'>
+              <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
                 Notifications
               </h2>
-              <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+              <button className='text-blue-600 hover:text-blue-700 text-sm font-medium'>
                 Mark all read
               </button>
             </div>
-            <div className="space-y-4">
-              {notifications.map((notification) => {
+            <div className='space-y-4'>
+              {notifications.map(notification => {
                 const IconComponent = getNotificationIcon(notification.type);
                 return (
                   <div
@@ -421,20 +459,24 @@ return `${(num / 1000).toFixed(1)}K`;
                         : 'border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20'
                     }`}
                   >
-                    <div className="flex items-start gap-3">
-                      <IconComponent className={`w-5 h-5 mt-0.5 ${
-                        notification.priority === 'high' ? 'text-red-500' :
-                        notification.priority === 'medium' ? 'text-yellow-500' :
-                        'text-blue-500'
-                      }`} />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-gray-900 dark:text-white text-sm">
+                    <div className='flex items-start gap-3'>
+                      <IconComponent
+                        className={`w-5 h-5 mt-0.5 ${
+                          notification.priority === 'high'
+                            ? 'text-red-500'
+                            : notification.priority === 'medium'
+                              ? 'text-yellow-500'
+                              : 'text-blue-500'
+                        }`}
+                      />
+                      <div className='flex-1 min-w-0'>
+                        <h4 className='font-medium text-gray-900 dark:text-white text-sm'>
                           {notification.title}
                         </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        <p className='text-sm text-gray-600 dark:text-gray-400 mt-1'>
                           {notification.message}
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                        <p className='text-xs text-gray-500 dark:text-gray-400 mt-2'>
                           {new Date(notification.timestamp).toLocaleString()}
                         </p>
                       </div>
@@ -451,7 +493,6 @@ return `${(num / 1000).toFixed(1)}K`;
 };
 
 export default CreatorStudioDashboard;
-
 
 declare global {
   namespace JSX {

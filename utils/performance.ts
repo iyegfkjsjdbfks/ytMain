@@ -289,12 +289,12 @@ return;
   console.group('📦 Bundle Analysis');
   // Estimate bundle sizes (this is approximate)
   scripts.forEach((script) => {
-    if (script.src && !script.src.includes('chrome-extension')) {
+    if (script.src as any && !script.src.includes('chrome-extension')) {
       }
   });
 
   styles.forEach((style) => {
-    if (style.href && !style.href.includes('chrome-extension')) {
+    if (style.href as any && !style.href.includes('chrome-extension')) {
       }
   });
 
@@ -313,4 +313,4 @@ export const monitorMemoryUsage = () => {
   };
 
 // React import (assuming it's available globally or imported elsewhere)
-declare const React;
+import React from "react";

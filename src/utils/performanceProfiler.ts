@@ -4,7 +4,7 @@ import React from 'react';
 
 export const withPerformanceProfiler = <P extends object>(
   Component: React.ComponentType<P>,
-  componentName: any,
+  componentName: any
 ) => {
   const WrappedComponent = (props: P) => {
     if (process.env.NODE_ENV === 'development') {
@@ -15,12 +15,12 @@ export const withPerformanceProfiler = <P extends object>(
           onRender: (id, phase, actualDuration) => {
             if (actualDuration > 16) {
               console.warn(
-                `⚡ Slow render detected: ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`,
+                `⚡ Slow render detected: ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`
               );
             }
           },
         },
-        React.createElement(Component, props),
+        React.createElement(Component, props)
       );
     }
     return React.createElement(Component, props);

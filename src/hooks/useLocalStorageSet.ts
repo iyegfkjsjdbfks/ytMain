@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useMemo } from 'react';
 
 /**
@@ -12,14 +11,14 @@ import { useState, useCallback, useMemo } from 'react';
  */
 export function useLocalStorageSet<T>(
   key: string,
-  initialValue: Set<T> = new Set(),
+  initialValue: Set<T> = new Set()
 ): [
   Set<T>,
   (item: T) => void,
   (item: T) => void,
   (item: T) => void,
   () => void,
-  (item: T) => boolean
+  (item: T) => boolean,
 ] {
   // Initialize state from localStorage
   const [items, setItems] = useState<T[]>(() => {
@@ -40,49 +39,61 @@ export function useLocalStorageSet<T>(
   const set = useMemo(() => new Set(items), [items]);
 
   // Update localStorage whenever items change
-  const updateLocalStorage = useCallback((newItems: T) => {
-    try {
-      localStorage.setItem(key, JSON.stringify(newItems));
-      setItems(newItems);
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key]);
+  const updateLocalStorage = useCallback(
+    (newItems: T) => {
+      try {
+        localStorage.setItem(key, JSON.stringify(newItems));
+        setItems(newItems);
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key]
+  );
 
   // Add item to set
-  const addItem = useCallback((item: T) => {
-    setItems(prev => {
-      if (!prev.includes(item)) {
-        const newItems = [...prev, item];
-        updateLocalStorage(newItems);
-        return newItems;
-      }
-      return prev;
-    });
-  }, [updateLocalStorage]);
+  const addItem = useCallback(
+    (item: T) => {
+      setItems(prev => {
+        if (!prev.includes(item)) {
+          const newItems = [...prev, item];
+          updateLocalStorage(newItems);
+          return newItems;
+        }
+        return prev;
+      });
+    },
+    [updateLocalStorage]
+  );
 
   // Remove item from set
-  const removeItem = useCallback((item: T) => {
-    setItems(prev => {
-      const newItems = prev.filter((i) => i !== item);
-      if (newItems.length !== prev.length) {
-        updateLocalStorage(newItems);
-        return newItems;
-      }
-      return prev;
-    });
-  }, [updateLocalStorage]);
+  const removeItem = useCallback(
+    (item: T) => {
+      setItems(prev => {
+        const newItems = prev.filter(i => i !== item);
+        if (newItems.length !== prev.length) {
+          updateLocalStorage(newItems);
+          return newItems;
+        }
+        return prev;
+      });
+    },
+    [updateLocalStorage]
+  );
 
   // Toggle item in set
-  const toggleItem = useCallback((item: T) => {
-    setItems(prev => {
-      const newItems = prev.includes(item)
-        ? prev.filter((i) => i !== item)
-        : [...prev, item];
-      updateLocalStorage(newItems);
-      return newItems;
-    });
-  }, [updateLocalStorage]);
+  const toggleItem = useCallback(
+    (item: T) => {
+      setItems(prev => {
+        const newItems = prev.includes(item)
+          ? prev.filter(i => i !== item)
+          : [...prev, item];
+        updateLocalStorage(newItems);
+        return newItems;
+      });
+    },
+    [updateLocalStorage]
+  );
 
   // Clear all items
   const clearSet = useCallback(() => {
@@ -90,9 +101,12 @@ export function useLocalStorageSet<T>(
   }, [updateLocalStorage]);
 
   // Check if item exists in set
-  const hasItem = useCallback((item: T) => {
-    return set.has(item);
-  }, [set]);
+  const hasItem = useCallback(
+    (item: T) => {
+      return set.has(item);
+    },
+    [set]
+  );
 
   return [set, addItem, removeItem, toggleItem, clearSet, hasItem];
 }
@@ -103,7 +117,7 @@ export function useLocalStorageSet<T>(
  */
 export function useLocalStorageSetState<T>(
   key: string,
-  initialValue: Set<T> = new Set(),
+  initialValue: Set<T> = new Set()
 ): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {
     try {
@@ -121,21 +135,24 @@ export function useLocalStorageSetState<T>(
 
   const set = useMemo(() => new Set(items), [items]);
 
-  const setSet = useCallback((updater: (prev: Set<T>) => Set<T>) => {
-    setItems(prev => {
-      const prevSet = new Set(prev);
-      const newSet = updater(prevSet);
-      const newItems = Array.from(newSet);
+  const setSet = useCallback(
+    (updater: (prev: Set<T>) => Set<T>) => {
+      setItems(prev => {
+        const prevSet = new Set(prev);
+        const newSet = updater(prevSet);
+        const newItems = Array.from(newSet);
 
-      try {
-        localStorage.setItem(key, JSON.stringify(newItems));
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
-      }
+        try {
+          localStorage.setItem(key, JSON.stringify(newItems));
+        } catch (error) {
+          console.warn(`Error setting localStorage key "${key}":`, error);
+        }
 
-      return newItems;
-    });
-  }, [key]);
+        return newItems;
+      });
+    },
+    [key]
+  );
 
   return [set, setSet];
 }

@@ -13,7 +13,12 @@ export { useWatchPage } from './useWatchPage';
 
 // Video hooks
 export { useVideoPlayer } from './useVideoPlayer';
-export { useVideos, useTrendingVideos, useSubscriptionsFeed, useChannelVideos } from './useVideoData';
+export {
+  useVideos,
+  useTrendingVideos,
+  useSubscriptionsFeed,
+  useChannelVideos,
+} from './useVideoData';
 export { useVideosData } from './useVideosData';
 
 // Shorts and specialized hooks

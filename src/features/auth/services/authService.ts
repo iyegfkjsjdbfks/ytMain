@@ -1,6 +1,10 @@
-
 import { logger } from '../../../utils/logger';
-import type { AuthTokens, LoginCredentials, RegisterData, User } from '../types';
+import type {
+  AuthTokens,
+  LoginCredentials,
+  RegisterData,
+  User,
+} from '../types';
 
 /**
  * Service for handling authentication-related API requests
@@ -65,7 +69,7 @@ class AuthService {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${tokens.accessToken}`,
+            Authorization: `Bearer ${tokens.accessToken}`,
           },
           body: JSON.stringify({ refreshToken: tokens.refreshToken }),
         });
@@ -90,7 +94,7 @@ class AuthService {
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
         headers: {
-          'Authorization': `Bearer ${tokens.accessToken}`,
+          Authorization: `Bearer ${tokens.accessToken}`,
         },
       });
 

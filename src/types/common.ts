@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -81,5 +80,10 @@ export interface SearchFilters {
 }
 
 export type ComponentSize = 'small' | 'medium' | 'large';
-export type ComponentVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+export type ComponentVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'error';
 export type ThemeMode = 'light' | 'dark' | 'system';

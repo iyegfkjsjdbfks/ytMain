@@ -1,4 +1,3 @@
-
 import { useContext } from 'react';
 
 import { UnifiedAppContext } from '../contexts/UnifiedAppContext';

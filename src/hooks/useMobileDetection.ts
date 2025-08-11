@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 interface MobileDetectionResult {
@@ -36,39 +35,46 @@ export const useMobileDetection = (): MobileDetectionResult => {
     // Screen size detection
     let screenSize: MobileDetectionResult['screenSize'] = 'lg';
     if (width < 640) {
-screenSize = 'xs';
-} else if (width < 768) {
-screenSize = 'sm';
-} else if (width < 1024) {
-screenSize = 'md';
-} else if (width < 1280) {
-screenSize = 'lg';
-} else if (width < 1536) {
-screenSize = 'xl';
-} else {
-screenSize = '2xl';
-}
+      screenSize = 'xs';
+    } else if (width < 768) {
+      screenSize = 'sm';
+    } else if (width < 1024) {
+      screenSize = 'md';
+    } else if (width < 1280) {
+      screenSize = 'lg';
+    } else if (width < 1536) {
+      screenSize = 'xl';
+    } else {
+      screenSize = '2xl';
+    }
 
     // Device type detection
-    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const isMobileUA =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        userAgent
+      );
     const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(userAgent);
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     // More accurate mobile detection
-    const isMobile = (width <= 768 && isTouchDevice) || (isMobileUA && !isTabletUA);
-    const isTablet = (width > 768 && width <= 1024 && isTouchDevice) || isTabletUA;
+    const isMobile =
+      (width <= 768 && isTouchDevice) || (isMobileUA && !isTabletUA);
+    const isTablet =
+      (width > 768 && width <= 1024 && isTouchDevice) || isTabletUA;
     const isDesktop = !isMobile && !isTablet;
 
     // Orientation
-    const orientation: 'portrait' | 'landscape' = height > width ? 'portrait' : 'landscape';
+    const orientation: 'portrait' | 'landscape' =
+      height > width ? 'portrait' : 'landscape';
 
     // Device type
     let deviceType: MobileDetectionResult['deviceType'] = 'desktop';
     if (isMobile) {
-deviceType = 'mobile';
-} else if (isTablet) {
-deviceType = 'tablet';
-}
+      deviceType = 'mobile';
+    } else if (isTablet) {
+      deviceType = 'tablet';
+    }
 
     return {
       isMobile,
@@ -124,8 +130,12 @@ export const useBreakpoint = () => {
 export const useTouchInteractions = () => {
   const { isTouchDevice } = useMobileDetection();
 
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
-  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(
+    null
+  );
 
   const handleTouchStart = (e: TouchEvent) => {
     const touch = e.touches[0];
@@ -143,8 +153,8 @@ export const useTouchInteractions = () => {
 
   const getSwipeDirection = (): 'left' | 'right' | 'up' | 'down' | null => {
     if (!touchStart || !touchEnd) {
-return null;
-}
+      return null;
+    }
 
     const deltaX = touchEnd.x - touchStart.x;
     const deltaY = touchEnd.y - touchStart.y;

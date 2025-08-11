@@ -115,7 +115,7 @@ export const getResponsiveImageSrcSet = (baseUrl: any, sizes: any): string => {
     .join(', ');
 };
 
-export const getResponsiveImageSizes = (breakpoints: { [key]: string }): string => {
+export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }): string => {
   return Object.entries(breakpoints)
     .map(([breakpoint, size]) => `(${breakpoint}) ${size}`)
     .join(', ');
@@ -133,7 +133,7 @@ export const createIntersectionObserver = (
     ...options,
   };
 
-  return new IntersectionObserver(callback, defaultOptions);
+  return new IntersectionObserver((entries: IntersectionObserverEntry[]) => callback(entries), defaultOptions);
 };
 
 // Image format detection

@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -12,9 +12,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-input hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'underline-offset-4 hover:underline text-primary',
       },
@@ -29,7 +32,7 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -40,7 +43,18 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, isLoading = false, children, ...props }: {children, size: number}, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      isLoading = false,
+      children,
+      ...props
+    }: { children; size: number },
+    ref
+  ) => {
     const Comp = asChild ? 'span' : 'button';
 
     return (
@@ -52,7 +66,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading ? (
           <>
-            <span className="mr-2 h-4 w-4 animate-spin" />
+            <span className='mr-2 h-4 w-4 animate-spin' />
             Loading...
           </>
         ) : (
@@ -60,13 +74,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </Comp>
     );
-  },
+  }
 );
 
 Button.displayName = 'Button';
 
 export { Button, buttonVariants };
-
 
 declare global {
   namespace JSX {

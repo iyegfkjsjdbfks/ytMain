@@ -1,17 +1,12 @@
-
 /// <reference types="react/jsx-runtime" />
 import { BrowserRouter } from 'react-router-dom';
-import React from "react";
+import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import userEvent from '@testing-library/user-event';
 import type { Video, Channel, Comment } from '../types/core';
 import { BrowserRouter } from 'react-router-dom';
-
-
-
-
 
 // Test utilities for consistent testing
 export const createTestQueryClient = () => {
@@ -39,9 +34,7 @@ export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
 
   return (
     <QueryClientProvider client={client}>
-      <BrowserRouter>
-        {children}
-      </BrowserRouter>
+      <BrowserRouter>{children}</BrowserRouter>
     </QueryClientProvider>
   );
 };
@@ -52,20 +45,21 @@ export const renderWithProviders = (
   options?: {
     queryClient?: QueryClient;
     [key];
-  },
+  }
 ) => {
-  const { queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  }), ...renderOptions } = options || {};
+  const {
+    queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    }),
+    ...renderOptions
+  } = options || {};
 
   return render(ui, {
     wrapper: ({ children }) => (
-      <TestWrapper queryClient={queryClient}>
-        {children}
-      </TestWrapper>
+      <TestWrapper queryClient={queryClient}>{children}</TestWrapper>
     ),
     ...renderOptions,
   });
@@ -95,7 +89,9 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   ...overrides,
 });
 
-export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => ({
+export const createMockChannel = (
+  overrides: Partial<Channel> = {}
+): Channel => ({
   id: 'test-channel-1',
   name: 'Test Channel',
   description: 'Test channel description',
@@ -111,7 +107,9 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   ...overrides,
 });
 
-export const createMockComment = (overrides: Partial<Comment> = {}): Comment => ({
+export const createMockComment = (
+  overrides: Partial<Comment> = {}
+): Comment => ({
   id: 'test-comment-1',
   userAvatarUrl: 'https://example.com/user-avatar.jpg',
   userName: 'Test User',
@@ -139,7 +137,9 @@ export const createMockComment = (overrides: Partial<Comment> = {}): Comment => 
 });
 
 // Performance testing utilities
-export const measureRenderTime = async (renderFn: () => void): Promise<number> => {
+export const measureRenderTime = async (
+  renderFn: () => void
+): Promise<number> => {
   const start = performance.now();
   renderFn();
   await waitFor(() => {
@@ -161,7 +161,9 @@ export const checkAccessibility = async (_container: HTMLElement) => {
 // User interaction helpers
 export const userInteraction = {
   clickVideo: async (videoTitle: any) => {
-    const video = screen.getByRole('button', { name: new RegExp(videoTitle, 'i') });
+    const video = screen.getByRole('button', {
+      name: new RegExp(videoTitle, 'i'),
+    });
     await userEvent.click(video);
   },
 
@@ -202,7 +204,8 @@ export const mockApiResponses = {
   },
 
   channels: {
-    byId: (id: string) => createMockChannel({ id: string, name: `Channel ${id}` }),
+    byId: (id: string) =>
+      createMockChannel({ id: string, name: `Channel ${id}` }),
   },
 
   comments: {
@@ -217,7 +220,9 @@ export const testScenarios = {
   videoPlayback: {
     'should play video when clicked': async () => {
       await userInteraction.clickVideo('Test Video');
-      expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /pause/i })
+      ).toBeInTheDocument();
     },
 
     'should show video controls': () => {
@@ -229,7 +234,9 @@ export const testScenarios = {
   userInteractions: {
     'should allow liking videos': async () => {
       await userInteraction.likeVideo();
-      expect(screen.getByRole('button', { name: /liked/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /liked/i })
+      ).toBeInTheDocument();
     },
 
     'should allow adding comments': async () => {
@@ -278,4 +285,3 @@ declare global {
     }
   }
 }
-

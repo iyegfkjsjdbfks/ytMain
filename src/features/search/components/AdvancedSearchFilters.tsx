@@ -1,6 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { FunnelIcon,
+import React from 'react';
+import {
+  FunnelIcon,
   XMarkIcon,
   VideoCameraIcon,
   UserIcon,
@@ -35,10 +36,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   onToggle,
   className = '',
 }) => {
-
   const updateFilter = <K extends keyof SearchFilters>(
     key: K,
-    value: SearchFilters[K],
+    value: SearchFilters[K]
   ) => {
     onFiltersChange({
       ...filters,
@@ -81,26 +81,26 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   const getActiveFilterCount = () => {
     let count = 0;
     if (filters.type !== 'all') {
-count++;
-}
+      count++;
+    }
     if (filters.uploadDate !== 'any') {
-count++;
-}
+      count++;
+    }
     if (filters.duration !== 'any') {
-count++;
-}
+      count++;
+    }
     if (filters.features.length > 0) {
-count += filters.features.length;
-}
+      count += filters.features.length;
+    }
     if (filters.sortBy !== 'relevance') {
-count++;
-}
+      count++;
+    }
     if (filters.quality !== 'any') {
-count++;
-}
+      count++;
+    }
     if (filters.captions !== 'any') {
-count++;
-}
+      count++;
+    }
     return count;
   };
 
@@ -109,12 +109,12 @@ count++;
       {/* Filter Toggle Button */}
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        className='flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors'
       >
-        <FunnelIcon className="w-5 h-5" />
+        <FunnelIcon className='w-5 h-5' />
         <span>Filters</span>
         {hasActiveFilters() && (
-          <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+          <span className='bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full'>
             {getActiveFilterCount()}
           </span>
         )}
@@ -122,34 +122,36 @@ count++;
 
       {/* Filter Panel */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <div className='absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10 p-6'>
+          <div className='flex items-center justify-between mb-6'>
+            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
               Search Filters
             </h3>
-            <div className="flex items-center gap-2">
+            <div className='flex items-center gap-2'>
               {hasActiveFilters() && (
                 <button
                   onClick={resetFilters}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className='text-sm text-blue-600 hover:text-blue-700 font-medium'
                 >
                   Clear all
                 </button>
               )}
               <button
                 onClick={onToggle}
-                className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
               >
-                <XMarkIcon className="w-5 h-5" />
+                <XMarkIcon className='w-5 h-5' />
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {/* Type Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Type</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Type
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'all', label: 'All', icon: DocumentTextIcon },
                   { value: 'video', label: 'Video', icon: VideoCameraIcon },
@@ -157,17 +159,24 @@ count++;
                   { value: 'playlist', label: 'Playlist', icon: PlayIcon },
                   { value: 'live', label: 'Live', icon: PlayIcon },
                 ].map(({ value, label, icon: Icon }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="radio"
-                      name="type"
+                      type='radio'
+                      name='type'
                       value={value}
                       checked={filters.type === value}
-                      onChange={(e) => updateFilter('type', e.target.value as any)}
-                      className="text-blue-600"
+                      onChange={e =>
+                        updateFilter('type', e.target.value as any)
+                      }
+                      className='text-blue-600'
                     />
-                    <Icon className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <Icon className='w-4 h-4 text-gray-500' />
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -175,8 +184,10 @@ count++;
 
             {/* Upload Date Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Upload Date</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Upload Date
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'any', label: 'Any time' },
                   { value: 'hour', label: 'Last hour' },
@@ -185,16 +196,23 @@ count++;
                   { value: 'month', label: 'This month' },
                   { value: 'year', label: 'This year' },
                 ].map(({ value, label }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="radio"
-                      name="uploadDate"
+                      type='radio'
+                      name='uploadDate'
                       value={value}
                       checked={filters.uploadDate === value}
-                      onChange={(e) => updateFilter('uploadDate', e.target.value as any)}
-                      className="text-blue-600"
+                      onChange={e =>
+                        updateFilter('uploadDate', e.target.value as any)
+                      }
+                      className='text-blue-600'
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -202,24 +220,33 @@ count++;
 
             {/* Duration Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Duration</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Duration
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'any', label: 'Any duration' },
                   { value: 'short', label: 'Under 4 minutes' },
                   { value: 'medium', label: '4-20 minutes' },
                   { value: 'long', label: 'Over 20 minutes' },
                 ].map(({ value, label }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="radio"
-                      name="duration"
+                      type='radio'
+                      name='duration'
                       value={value}
                       checked={filters.duration === value}
-                      onChange={(e) => updateFilter('duration', e.target.value as any)}
-                      className="text-blue-600"
+                      onChange={e =>
+                        updateFilter('duration', e.target.value as any)
+                      }
+                      className='text-blue-600'
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -227,8 +254,10 @@ count++;
 
             {/* Features Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Features</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Features
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'live', label: 'Live' },
                   { value: '4k', label: '4K' },
@@ -242,14 +271,19 @@ count++;
                   { value: 'location', label: 'Location' },
                   { value: 'purchased', label: 'Purchased' },
                 ].map(({ value, label }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={filters.features.includes(value)}
                       onChange={() => toggleFeature(value)}
-                      className="text-blue-600"
+                      className='text-blue-600'
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -257,24 +291,33 @@ count++;
 
             {/* Sort By Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Sort by</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Sort by
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'relevance', label: 'Relevance' },
                   { value: 'upload_date', label: 'Upload date' },
                   { value: 'view_count', label: 'View count' },
                   { value: 'rating', label: 'Rating' },
                 ].map(({ value, label }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="radio"
-                      name="sortBy"
+                      type='radio'
+                      name='sortBy'
                       value={value}
                       checked={filters.sortBy === value}
-                      onChange={(e) => updateFilter('sortBy', e.target.value as any)}
-                      className="text-blue-600"
+                      onChange={e =>
+                        updateFilter('sortBy', e.target.value as any)
+                      }
+                      className='text-blue-600'
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -282,24 +325,33 @@ count++;
 
             {/* Quality Filter */}
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white mb-3">Quality</h4>
-              <div className="space-y-2">
+              <h4 className='font-medium text-gray-900 dark:text-white mb-3'>
+                Quality
+              </h4>
+              <div className='space-y-2'>
                 {[
                   { value: 'any', label: 'Any quality' },
                   { value: 'hd', label: 'HD' },
                   { value: '4k', label: '4K' },
                   { value: 'hdr', label: 'HDR' },
                 ].map(({ value, label }) => (
-                  <label key={value} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={value}
+                    className='flex items-center gap-2 cursor-pointer'
+                  >
                     <input
-                      type="radio"
-                      name="quality"
+                      type='radio'
+                      name='quality'
                       value={value}
                       checked={filters.quality === value}
-                      onChange={(e) => updateFilter('quality', e.target.value as any)}
-                      className="text-blue-600"
+                      onChange={e =>
+                        updateFilter('quality', e.target.value as any)
+                      }
+                      className='text-blue-600'
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
+                    <span className='text-sm text-gray-700 dark:text-gray-300'>
+                      {label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -307,10 +359,10 @@ count++;
           </div>
 
           {/* Apply Button */}
-          <div className="flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div className='flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
             <button
               onClick={onToggle}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
             >
               Apply Filters
             </button>
@@ -322,7 +374,6 @@ count++;
 };
 
 export default AdvancedSearchFilters;
-
 
 declare global {
   namespace JSX {

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useCallback, useState } from 'react';
 
 interface PerformanceMetrics {
@@ -72,14 +71,18 @@ class PerformanceStore {
       : this.metrics;
 
     if (relevantMetrics.length === 0) {
-return 0;
-}
+      return 0;
+    }
 
-    const totalTime = relevantMetrics.reduce((sum: any, m: any) => sum + m.renderTime, 0);
+    const totalTime = relevantMetrics.reduce(
+      (sum: any, m: any) => sum + m.renderTime,
+      0
+    );
     return totalTime / relevantMetrics.length;
   }
 
-  getSlowRenders(threshold = 16) { // 16ms = 60fps
+  getSlowRenders(threshold = 16) {
+    // 16ms = 60fps
     return this.metrics.filter((m: any) => m.renderTime > threshold);
   }
 }
@@ -88,7 +91,7 @@ const performanceStore = new PerformanceStore();
 
 export const usePerformanceMonitor = (
   componentName: any,
-  config: PerformanceConfig = {},
+  config: PerformanceConfig = {}
 ) => {
   const opts = { ...DEFAULT_CONFIG, ...config };
   const renderStartTime = useRef<number>(0);
@@ -105,16 +108,16 @@ export const usePerformanceMonitor = (
   // Track render start
   const startRender = useCallback(() => {
     if (!isTracking || !opts.enableRenderTracking) {
-return;
-}
+      return;
+    }
     renderStartTime.current = performance.now();
   }, [isTracking, opts.enableRenderTracking]);
 
   // Track render end and collect metrics
   const endRender = useCallback(() => {
     if (!isTracking || !opts.enableRenderTracking || !renderStartTime.current) {
-return;
-}
+      return;
+    }
 
     const renderTime = performance.now() - renderStartTime.current;
     updateCount.current++;
@@ -129,13 +132,18 @@ return;
 
     // Add memory usage if available and enabled
     if (opts.enableMemoryTracking && 'memory' in performance) {
-      const { memory } = (performance as any);
+      const { memory } = performance as any;
       metric.memoryUsage = memory.usedJSHeapSize;
     }
 
     performanceStore.addMetric(metric);
     renderStartTime.current = 0;
-  }, [isTracking, opts.enableRenderTracking, opts.enableMemoryTracking, componentName]);
+  }, [
+    isTracking,
+    opts.enableRenderTracking,
+    opts.enableMemoryTracking,
+    componentName,
+  ]);
 
   // Auto-track renders
   useEffect(() => {
@@ -146,60 +154,60 @@ return;
   });
 
   // Manual tracking methods
-  const trackAsyncOperation = useCallback(async <T>(
-    operation: () => Promise<T>,
-    operationName: any,
-  ): Promise<T> => {
-    const startTime = performance.now();
-
-    try {
-      const result = await operation();
-      const duration = performance.now() - startTime;
-
-      performanceStore.addMetric({
-        renderTime: duration,
-        mountTime: 0,
-        updateCount: 0,
-        componentName: `${componentName}.${operationName}`,
-        timestamp: Date.now(),
-      });
-
-      return result;
-    } catch (error) {
-      const duration = performance.now() - startTime;
-
-      performanceStore.addMetric({
-        renderTime: duration,
-        mountTime: 0,
-        updateCount: 0,
-        componentName: `${componentName}.${operationName}.error`,
-        timestamp: Date.now(),
-      });
-
-      throw error;
-    }
-  }, [componentName]);
-
-  const measureFunction = useCallback(<T extends any, R>(
-    fn: (...args: T) => R,
-    functionName: any,
-  ) => {
-    return (...args: T): R => {
+  const trackAsyncOperation = useCallback(
+    async <T>(operation: () => Promise<T>, operationName: any): Promise<T> => {
       const startTime = performance.now();
-      const result = fn(...args);
-      const duration = performance.now() - startTime;
 
-      performanceStore.addMetric({
-        renderTime: duration,
-        mountTime: 0,
-        updateCount: 0,
-        componentName: `${componentName}.${functionName}`,
-        timestamp: Date.now(),
-      });
+      try {
+        const result = await operation();
+        const duration = performance.now() - startTime;
 
-      return result;
-    };
-  }, [componentName]);
+        performanceStore.addMetric({
+          renderTime: duration,
+          mountTime: 0,
+          updateCount: 0,
+          componentName: `${componentName}.${operationName}`,
+          timestamp: Date.now(),
+        });
+
+        return result;
+      } catch (error) {
+        const duration = performance.now() - startTime;
+
+        performanceStore.addMetric({
+          renderTime: duration,
+          mountTime: 0,
+          updateCount: 0,
+          componentName: `${componentName}.${operationName}.error`,
+          timestamp: Date.now(),
+        });
+
+        throw error;
+      }
+    },
+    [componentName]
+  );
+
+  const measureFunction = useCallback(
+    <T extends any, R>(fn: (...args: T) => R, functionName: any) => {
+      return (...args: T): R => {
+        const startTime = performance.now();
+        const result = fn(...args);
+        const duration = performance.now() - startTime;
+
+        performanceStore.addMetric({
+          renderTime: duration,
+          mountTime: 0,
+          updateCount: 0,
+          componentName: `${componentName}.${functionName}`,
+          timestamp: Date.now(),
+        });
+
+        return result;
+      };
+    },
+    [componentName]
+  );
 
   return {
     startRender,
@@ -217,7 +225,9 @@ export const usePerformanceData = (componentName?: string) => {
   useEffect(() => {
     const updateMetrics = (allMetrics: PerformanceMetrics) => {
       const filteredMetrics = componentName
-        ? allMetrics.filter((m: any) => m.componentName.startsWith(componentName))
+        ? allMetrics.filter((m: any) =>
+            m.componentName.startsWith(componentName)
+          )
         : allMetrics;
       setMetrics(filteredMetrics);
     };
@@ -230,9 +240,11 @@ export const usePerformanceData = (componentName?: string) => {
 
   const stats = {
     averageRenderTime: performanceStore.getAverageRenderTime(componentName),
-    slowRenders: performanceStore.getSlowRenders().filter((m: any) =>
-      !componentName || m.componentName.startsWith(componentName),
-    ),
+    slowRenders: performanceStore
+      .getSlowRenders()
+      .filter(
+        (m: any) => !componentName || m.componentName.startsWith(componentName)
+      ),
     totalRenders: metrics.length,
     lastRender: metrics[metrics.length - 1],
   };
@@ -257,7 +269,7 @@ export const useWebVitals = () => {
   useEffect(() => {
     // Largest Contentful Paint
     const observeLCP = () => {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1] as any;
         setVitals(prev => ({ ...prev, LCP: lastEntry.startTime }));
@@ -268,9 +280,9 @@ export const useWebVitals = () => {
 
     // First Contentful Paint
     const observeFCP = () => {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.name === 'first-contentful-paint') {
             setVitals(prev => ({ ...prev, FCP: entry.startTime }));
           }
@@ -283,9 +295,9 @@ export const useWebVitals = () => {
     // Cumulative Layout Shift
     const observeCLS = () => {
       let clsValue = 0;
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
             setVitals(prev => ({ ...prev, CLS: clsValue }));
@@ -296,11 +308,7 @@ export const useWebVitals = () => {
       return observer;
     };
 
-    const observers = [
-      observeLCP(),
-      observeFCP(),
-      observeCLS(),
-    ];
+    const observers = [observeLCP(), observeFCP(), observeCLS()];
 
     // TTFB from Navigation Timing
     const navigation = performance.getEntriesByType('navigation')[0] as any;
@@ -331,8 +339,8 @@ export const usePerformanceBudget = () => {
   const checkBudget = useCallback((metric: any, value: string | number) => {
     const budget = budgets[metric as keyof typeof budgets];
     if (!budget) {
-return { withinBudget: true, budget: 0, overage: 0 };
-}
+      return { withinBudget: true, budget: 0, overage: 0 };
+    }
 
     const withinBudget = value <= budget;
     const overage = withinBudget ? 0 : value - budget;

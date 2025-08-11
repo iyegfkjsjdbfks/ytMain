@@ -1,4 +1,3 @@
-
 // Enhanced Live Streaming Types
 export interface LiveStream {
   id: string;

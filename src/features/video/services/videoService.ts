@@ -1,7 +1,12 @@
 import { logger } from '../../../utils/logger';
 
 import { youtubeService } from '../../../services/api/youtubeService';
-import type { Video, VideoMetrics, VideoEngagement, VideoStats } from '../types';
+import type {
+  Video,
+  VideoMetrics,
+  VideoEngagement,
+  VideoStats,
+} from '../types';
 
 interface VideoInteractionResponse {
   isLiked: boolean;
@@ -33,7 +38,10 @@ class VideoService {
   /**
    * Fetch trending videos with optional category filter
    */
-  async getTrendingVideos(category?: string, limit: number = 20): Promise<Video[]> {
+  async getTrendingVideos(
+    category?: string,
+    limit: number = 20
+  ): Promise<Video[]> {
     const url = new URL(this.baseUrl);
     url.pathname += '/trending';
 
@@ -46,7 +54,9 @@ class VideoService {
     const response = await fetch(url.toString());
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch trending videos: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch trending videos: ${response.statusText}`
+      );
     }
 
     return response.json() as Promise<Video[]>;
@@ -55,7 +65,10 @@ class VideoService {
   /**
    * Fetch recommended videos based on a video ID
    */
-  async getRecommendedVideos(videoId: any, limit: number = 10): Promise<Video[]> {
+  async getRecommendedVideos(
+    videoId: any,
+    limit: number = 10
+  ): Promise<Video[]> {
     const url = new URL(this.baseUrl);
     url.pathname += '/recommended';
     url.searchParams.append('videoId', videoId);
@@ -64,7 +77,9 @@ class VideoService {
     const response = await fetch(url.toString());
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch recommended videos: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch recommended videos: ${response.statusText}`
+      );
     }
 
     return response.json() as Promise<Video[]>;
@@ -179,7 +194,9 @@ class VideoService {
     const response = await fetch(`${this.baseUrl}/${videoId}/interactions`);
 
     if (!response.ok) {
-      throw new Error(`Failed to get video interactions: ${response.statusText}`);
+      throw new Error(
+        `Failed to get video interactions: ${response.statusText}`
+      );
     }
 
     return response.json() as Promise<VideoInteractionResponse>;
@@ -262,7 +279,10 @@ class VideoService {
           };
         } catch (interactionError) {
           // If interactions fail, return YouTube data without local state
-          logger.warn('Failed to fetch local video interactions:', interactionError);
+          logger.warn(
+            'Failed to fetch local video interactions:',
+            interactionError
+          );
           return youtubeVideo;
         }
       }

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
 // import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
@@ -48,55 +47,59 @@ export const useOptimizedVideoData = ({
     return `videos-${category || 'all'}-${limit}`;
   }, [category, limit]);
 
-  const fetchVideos = useCallback(async (pageNum: number = 1, append: boolean = false) => {
-    try {
-      setLoading(true);
-      setError(null);
+  const fetchVideos = useCallback(
+    async (pageNum: number = 1, append: boolean = false) => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      // Check cache first
-      if (enableCache && pageNum === 1) {
-        const cached = videoCache.get(cacheKey);
-        if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-          setData(cached.data);
-          setLoading(false);
-          return;
+        // Check cache first
+        if (enableCache && pageNum === 1) {
+          const cached = videoCache.get(cacheKey);
+          if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+            setData(cached.data);
+            setLoading(false);
+            return;
+          }
         }
+
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // Fetch real video data
+        const allVideos = await fetchRealVideos(category);
+
+        // Simulate pagination with real videos
+        const startIndex = (pageNum - 1) * limit;
+        const endIndex = startIndex + limit;
+        const newVideos = allVideos.slice(startIndex, endIndex);
+
+        // Check if there are more videos
+        if (endIndex >= allVideos.length) {
+          setHasMore(false);
+        }
+
+        const updatedData = append ? [...data, ...newVideos] : newVideos;
+        setData(updatedData);
+
+        // Cache the data
+        if (enableCache && pageNum === 1) {
+          videoCache.set(cacheKey, {
+            data: updatedData,
+            timestamp: Date.now(),
+          });
+        }
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : 'Failed to fetch videos';
+        setError(errorMessage);
+        console.error('Error fetching videos:', err);
+      } finally {
+        setLoading(false);
       }
-
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      // Fetch real video data
-      const allVideos = await fetchRealVideos(category);
-
-      // Simulate pagination with real videos
-      const startIndex = (pageNum - 1) * limit;
-      const endIndex = startIndex + limit;
-      const newVideos = allVideos.slice(startIndex, endIndex);
-
-      // Check if there are more videos
-      if (endIndex >= allVideos.length) {
-        setHasMore(false);
-      }
-
-      const updatedData = append ? [...data, ...newVideos] : newVideos;
-      setData(updatedData);
-
-      // Cache the data
-      if (enableCache && pageNum === 1) {
-        videoCache.set(cacheKey, {
-          data: updatedData,
-          timestamp: Date.now(),
-        });
-      }
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch videos';
-      setError(errorMessage);
-      console.error('Error fetching videos:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [category, limit, enableCache, cacheKey, data]);
+    },
+    [category, limit, enableCache, cacheKey, data]
+  );
 
   const refetch = useCallback(async () => {
     setPage(1);
@@ -120,8 +123,8 @@ export const useOptimizedVideoData = ({
   // Auto-refetch interval
   useEffect(() => {
     if (!refetchInterval) {
-return;
-}
+      return;
+    }
 
     const interval = setInterval(() => {
       refetch();

@@ -1,5 +1,3 @@
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -72,10 +70,10 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
   const [cacheInfo, setCacheInfo] = useState<CacheInfo | null>(null);
   const [autoUpdateEnabled, setAutoUpdateEnabled] = useState<boolean>(
-    localStorage.getItem('pwa-auto-update') === 'true',
+    localStorage.getItem('pwa-auto-update') === 'true'
   );
   const [updateInterval, setUpdateIntervalState] = useState<number>(
-    parseInt(localStorage.getItem('pwa-update-interval') || '60', 10),
+    parseInt(localStorage.getItem('pwa-update-interval') || '60', 10)
   );
 
   // Check for service worker updates
@@ -112,13 +110,14 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         conditionalLogger.info(
           'PWA update available',
           { version: updateInfo.version, size: updateInfo.size },
-          'usePWAUpdates',
+          'usePWAUpdates'
         );
       }
 
       return hasUpdate;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
 
       setState(prev => ({
         ...prev,
@@ -128,7 +127,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.error(
         'Failed to check for updates',
         { error: errorMessage },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
 
       return false;
@@ -151,17 +150,26 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       setState(prev => ({ ...prev, skipWaiting: true }));
 
       // Wait for the new service worker to take control
-      await new Promise<void>((resolve) => {
+      await new Promise<void>(resolve => {
         const handleControllerChange = () => {
-          navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);
+          navigator.serviceWorker.removeEventListener(
+            'controllerchange',
+            handleControllerChange
+          );
           resolve();
         };
 
-        navigator.serviceWorker.addEventListener('controllerchange', handleControllerChange);
+        navigator.serviceWorker.addEventListener(
+          'controllerchange',
+          handleControllerChange
+        );
 
         // Fallback timeout
         setTimeout(() => {
-          navigator.serviceWorker.removeEventListener('controllerchange', handleControllerChange);
+          navigator.serviceWorker.removeEventListener(
+            'controllerchange',
+            handleControllerChange
+          );
           resolve();
         }, 5000);
       });
@@ -176,12 +184,17 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
         skipWaiting: false,
       }));
 
-      conditionalLogger.info('PWA update installed successfully', undefined, 'usePWAUpdates');
+      conditionalLogger.info(
+        'PWA update installed successfully',
+        undefined,
+        'usePWAUpdates'
+      );
 
       // Reload the page to use the new version
       window.location.reload();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Update failed';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Update failed';
 
       setState(prev => ({
         ...prev,
@@ -192,7 +205,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.error(
         'Failed to install update',
         { error: errorMessage },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
     }
   }, []);
@@ -218,7 +231,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     conditionalLogger.debug(
       'PWA update skipped',
       { version: state.updateVersion },
-      'usePWAUpdates',
+      'usePWAUpdates'
     );
   }, [state.updateVersion]);
 
@@ -259,7 +272,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.error(
         'Failed to calculate cache size',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
 
       return 0;
@@ -275,9 +288,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
       const cacheNames = await caches.keys();
 
-      await Promise.all(
-        cacheNames.map(cacheName => caches.delete(cacheName)),
-      );
+      await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
 
       // Update cache info
       setCacheInfo({
@@ -289,13 +300,13 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.info(
         'All caches cleared',
         { clearedCaches: cacheNames.length },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
     } catch (error) {
       conditionalLogger.error(
         'Failed to clear cache',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
     }
   }, []);
@@ -308,7 +319,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     conditionalLogger.debug(
       `Auto-update ${enabled ? 'enabled' : 'disabled'}`,
       undefined,
-      'usePWAUpdates',
+      'usePWAUpdates'
     );
   }, []);
 
@@ -320,50 +331,50 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
     conditionalLogger.debug(
       'Update interval changed',
       { minutes },
-      'usePWAUpdates',
+      'usePWAUpdates'
     );
   }, []);
 
   // Get update information from service worker
-  const getUpdateInfo = useCallback(async (registration: ServiceWorkerRegistration) => {
-    try {
-      // Try to get version from service worker
-      const worker = registration.waiting || registration.installing;
+  const getUpdateInfo = useCallback(
+    async (registration: ServiceWorkerRegistration) => {
+      try {
+        // Try to get version from service worker
+        const worker = registration.waiting || registration.installing;
 
-      if (worker) {
-        // Send message to get version info
-        const messageChannel = new MessageChannel();
+        if (worker) {
+          // Send message to get version info
+          const messageChannel = new MessageChannel();
 
-        const versionPromise = new Promise<string>((resolve) => {
-          messageChannel.port1.onmessage = (event) => {
-            resolve(event.data.version || 'unknown');
+          const versionPromise = new Promise<string>(resolve => {
+            messageChannel.port1.onmessage = event => {
+              resolve(event.data.version || 'unknown');
+            };
+
+            setTimeout(() => resolve('unknown'), 1000);
+          });
+
+          worker.postMessage({ type: 'GET_VERSION' }, [messageChannel.port2]);
+
+          const version = await versionPromise;
+
+          return {
+            version,
+            size: null, // Size calculation would require more complex implementation
           };
-
-          setTimeout(() => resolve('unknown'), 1000);
-        });
-
-        worker.postMessage(
-          { type: 'GET_VERSION' },
-          [messageChannel.port2],
+        }
+      } catch (error) {
+        conditionalLogger.debug(
+          'Could not get update info',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'usePWAUpdates'
         );
-
-        const version = await versionPromise;
-
-        return {
-          version,
-          size: null, // Size calculation would require more complex implementation
-        };
       }
-    } catch (error) {
-      conditionalLogger.debug(
-        'Could not get update info',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates',
-      );
-    }
 
-    return { version: 'unknown', size: null };
-  }, []);
+      return { version: 'unknown', size: null };
+    },
+    []
+  );
 
   // Update cache information
   const updateCacheInfo = useCallback(async () => {
@@ -384,7 +395,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       conditionalLogger.error(
         'Failed to update cache info',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'usePWAUpdates',
+        'usePWAUpdates'
       );
     }
   }, [getCacheSize]);
@@ -410,9 +421,12 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
 
     // Set up auto-update timer
     if (autoUpdateEnabled && updateInterval > 0) {
-      updateTimer = setInterval(() => {
-        checkForUpdates();
-      }, updateInterval * 60 * 1000); // Convert minutes to milliseconds
+      updateTimer = setInterval(
+        () => {
+          checkForUpdates();
+        },
+        updateInterval * 60 * 1000
+      ); // Convert minutes to milliseconds
     }
 
     // Initial cache info update

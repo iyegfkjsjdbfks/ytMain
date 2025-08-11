@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { useState, useCallback } from 'react';
 
 interface UseFormStateOptions<T> {
@@ -33,17 +33,20 @@ export function useFormState<T extends Record<string, any>>({
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const setValue = useCallback((field: keyof T, value: string | number) => {
-    setValuesState(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[field];
-        return newErrors;
-      });
-    }
-  }, [errors]);
+  const setValue = useCallback(
+    (field: keyof T, value: string | number) => {
+      setValuesState(prev => ({ ...prev, [field]: value }));
+      // Clear error when user starts typing
+      if (errors[field]) {
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[field];
+          return newErrors;
+        });
+      }
+    },
+    [errors]
+  );
 
   const setValues = useCallback((newValues: Partial<T>) => {
     setValuesState(prev => ({ ...prev, ...newValues }));
@@ -71,35 +74,38 @@ export function useFormState<T extends Record<string, any>>({
     setIsSubmitting(false);
   }, [initialValues]);
 
-  const handleSubmit = useCallback(async (e?: React.FormEvent) => {
-    if (e) {
-      e.preventDefault();
-    }
+  const handleSubmit = useCallback(
+    async (e?: React.FormEvent) => {
+      if (e) {
+        e.preventDefault();
+      }
 
-    // Run validation if provided
-    if (validate) {
-      const validationErrors = validate(values);
-      setErrors(validationErrors);
+      // Run validation if provided
+      if (validate) {
+        const validationErrors = validate(values);
+        setErrors(validationErrors);
 
-      if (Object.keys(validationErrors).length > 0) {
+        if (Object.keys(validationErrors).length > 0) {
+          return;
+        }
+      }
+
+      if (!onSubmit) {
         return;
       }
-    }
 
-    if (!onSubmit) {
-return;
-}
-
-    setIsSubmitting(true);
-    try {
-      await onSubmit(values);
-    } catch (error) {
-      console.error('Form submission error:', error);
-      // You might want to set a general error here
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [values, validate, onSubmit]);
+      setIsSubmitting(true);
+      try {
+        await onSubmit(values);
+      } catch (error) {
+        console.error('Form submission error:', error);
+        // You might want to set a general error here
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [values, validate, onSubmit]
+  );
 
   const isValid = Object.keys(errors).length === 0;
 

@@ -29,18 +29,20 @@ class PerformanceMonitor {
 
     const endTime = performance.now();
     const duration = endTime - startTime;
-    
+
     this.metrics.delete(name);
-    
+
     const metrics: PerformanceMetrics = {
       name,
       duration,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     // Log slow operations in development
     if (process.env.NODE_ENV === 'development' && duration > 100) {
-      console.warn(`Slow operation detected: ${name} took ${duration.toFixed(2)}ms`);
+      console.warn(
+        `Slow operation detected: ${name} took ${duration.toFixed(2)}ms`
+      );
     }
 
     return metrics;
@@ -71,6 +73,7 @@ export function usePerformanceMonitor(name: string) {
     startMeasure: () => performanceMonitor.startMeasure(name),
     endMeasure: () => performanceMonitor.endMeasure(name),
     measure: <T>(fn: () => T) => performanceMonitor.measure(name, fn),
-    measureAsync: <T>(fn: () => Promise<T>) => performanceMonitor.measureAsync(name, fn)
+    measureAsync: <T>(fn: () => Promise<T>) =>
+      performanceMonitor.measureAsync(name, fn),
   };
 }

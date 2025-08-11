@@ -1,4 +1,3 @@
-
 /**
  * Error utilities for component error handling
  */
@@ -21,7 +20,7 @@ export function createComponentError(
   component: any,
   message: any,
   originalError?: unknown,
-  context?: string,
+  context?: string
 ): ComponentError {
   const error = new Error(message) as ComponentError;
   error.component = component;
@@ -53,13 +52,13 @@ export function createComponentError(
 export function createAsyncError(
   component: any,
   operation: any,
-  originalError?: unknown,
+  originalError?: unknown
 ): ComponentError {
   return createComponentError(
     component,
     `Async operation failed: ${operation}`,
     originalError,
-    'async',
+    'async'
   );
 }
 
@@ -73,13 +72,13 @@ export function createAsyncError(
 export function createNetworkError(
   component: any,
   url: any,
-  originalError?: unknown,
+  originalError?: unknown
 ): ComponentError {
   return createComponentError(
     component,
     `Network request failed: ${url}`,
     originalError,
-    'network',
+    'network'
   );
 }
 
@@ -93,13 +92,13 @@ export function createNetworkError(
 export function createValidationError(
   component: any,
   field: any,
-  value: unknown,
+  value: unknown
 ): ComponentError {
   return createComponentError(
     component,
     `Validation failed for field: ${field}`,
     new Error(`Invalid value: ${JSON.stringify(value)}`),
-    'validation',
+    'validation'
   );
 }
 

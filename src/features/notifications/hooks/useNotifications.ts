@@ -1,17 +1,23 @@
-
 import { useEffect, useCallback } from 'react';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { logger } from '../../../utils/logger';
 
-import { notificationService, type Notification } from '../services/notificationService';
+import {
+  notificationService,
+  type Notification,
+} from '../services/notificationService';
 
 export function useNotifications() {
   const queryClient = useQueryClient();
 
   // Fetch notifications
-  const { data: notifications = [], isLoading, error } = useQuery({
+  const {
+    data: notifications = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['notifications'],
     queryFn: () => notificationService.getNotifications(),
     refetchInterval: 30000, // Refetch every 30 seconds as fallback
@@ -19,7 +25,8 @@ export function useNotifications() {
 
   // Mark as read mutation
   const markAsReadMutation = useMutation({
-    mutationFn: (notificationId) => notificationService.markAsRead(notificationId),
+    mutationFn: notificationId =>
+      notificationService.markAsRead(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
@@ -35,7 +42,8 @@ export function useNotifications() {
 
   // Delete notification mutation
   const deleteNotificationMutation = useMutation({
-    mutationFn: (notificationId) => notificationService.deleteNotification(notificationId),
+    mutationFn: notificationId =>
+      notificationService.deleteNotification(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
@@ -50,39 +58,51 @@ export function useNotifications() {
   });
 
   // Real-time notification handler
-  const handleRealTimeNotification = useCallback((notification: Notification) => {
-    // Add new notification to the cache
-    queryClient.setQueryData(['notifications'], (oldData: Notification = []) => {
-      return [notification, ...oldData];
-    });
+  const handleRealTimeNotification = useCallback(
+    (notification: Notification) => {
+      // Add new notification to the cache
+      queryClient.setQueryData(
+        ['notifications'],
+        (oldData: Notification = []) => {
+          return [notification, ...oldData];
+        }
+      );
 
-    // Show browser notification if permission granted
-    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-      const browserNotification = new Notification(notification.title, {
-        body: notification.message,
-        icon: notification.fromUserAvatar || '/favicon.ico',
-        tag: notification.id,
-      });
-      // Auto-close after 5 seconds
-      setTimeout(() => browserNotification.close(), 5000);
-    }
+      // Show browser notification if permission granted
+      if (
+        typeof Notification !== 'undefined' &&
+        Notification.permission === 'granted'
+      ) {
+        const browserNotification = new Notification(notification.title, {
+          body: notification.message,
+          icon: notification.fromUserAvatar || '/favicon.ico',
+          tag: notification.id,
+        });
+        // Auto-close after 5 seconds
+        setTimeout(() => browserNotification.close(), 5000);
+      }
 
-    // Play notification sound (optional)
-    if (notification.priority === 'high' || notification.priority === 'urgent') {
-      const audio = new Audio('/notification-sound.mp3');
-      audio.play().catch(() => {
-        // Ignore audio play errors (user interaction required)
-      });
-    }
-  }, [queryClient]);
+      // Play notification sound (optional)
+      if (
+        notification.priority === 'high' ||
+        notification.priority === 'urgent'
+      ) {
+        const audio = new Audio('/notification-sound.mp3');
+        audio.play().catch(() => {
+          // Ignore audio play errors (user interaction required)
+        });
+      }
+    },
+    [queryClient]
+  );
 
   // Set up real-time connection
   useEffect(() => {
     const cleanup = notificationService.subscribeToRealTime(
       handleRealTimeNotification,
-      (error) => {
+      error => {
         logger.error('Real-time notification error:', error);
-      },
+      }
     );
 
     return () => {
@@ -100,7 +120,9 @@ export function useNotifications() {
   }, []);
 
   // Calculate unread count
-  const unreadCount = Array.isArray(notifications) ? notifications.filter((n) => !n.isRead).length : 0;
+  const unreadCount = Array.isArray(notifications)
+    ? notifications.filter(n => !n.isRead).length
+    : 0;
 
   return {
     notifications,
@@ -125,7 +147,8 @@ export function useNotificationSettings() {
   });
 
   const updateSettingsMutation = useMutation({
-    mutationFn: (newSettings) => notificationService.updateNotificationSettings(newSettings),
+    mutationFn: newSettings =>
+      notificationService.updateNotificationSettings(newSettings),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notification-settings'] });
     },

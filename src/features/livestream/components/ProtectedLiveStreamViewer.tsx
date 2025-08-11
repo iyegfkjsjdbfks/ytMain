@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useCallback, type FC } from 'react';
@@ -38,10 +37,7 @@ const ProtectedLiveStreamViewer: FC<ProtectedLiveStreamViewerProps> = ({
       onRetry={handleRetry}
       onReconnect={handleReconnect}
     >
-      <LiveStreamViewer
-        streamId={streamId}
-        {...(className && { className })}
-      />
+      <LiveStreamViewer streamId={streamId} {...(className && { className })} />
     </LiveStreamErrorBoundary>
   );
 };

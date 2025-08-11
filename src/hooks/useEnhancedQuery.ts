@@ -1,5 +1,10 @@
-
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  type UseQueryOptions,
+  type UseMutationOptions,
+} from '@tanstack/react-query';
 
 import { performanceMonitor } from '../utils/performanceMonitor';
 
@@ -47,7 +52,8 @@ export const queryPresets = {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retry: 3,
-    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    retryDelay: (attemptIndex: any) =>
+      Math.min(1000 * 2 ** attemptIndex, 30000),
   },
 } as const;
 
@@ -72,23 +78,23 @@ function isRetryableError(error: Error): boolean {
 
   // Network errors are retryable
   if (!status) {
-return true;
-}
+    return true;
+  }
 
   // Server errors (5xx) are retryable
   if (status >= 500) {
-return true;
-}
+    return true;
+  }
 
   // Rate limiting is retryable
   if (status === 429) {
-return true;
-}
+    return true;
+  }
 
   // Timeout errors are retryable
   if (status === 408) {
-return true;
-}
+    return true;
+  }
 
   // Client errors (4xx) are generally not retryable
   return false;
@@ -101,13 +107,13 @@ function createRetryFn(maxRetries: number = 3) {
 
     // Don't retry if error is not retryable
     if (!apiError.retryable) {
-return false;
-}
+      return false;
+    }
 
     // Don't retry if we've exceeded max retries
     if (failureCount >= maxRetries) {
-return false;
-}
+      return false;
+    }
 
     return true;
   };
@@ -137,7 +143,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
   queryFn: () => Promise<T>,
-  queryKey: any,
+  queryKey: any
 ): () => Promise<T> {
   return async () => {
     const startTime = performance.now();
@@ -171,7 +177,10 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
     baseRetryDelay?: number;
     maxRetryDelay?: number;
     enablePerformanceMonitoring?: boolean;
-  } & Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn' | 'retry' | 'retryDelay'> = {},
+  } & Omit<
+    UseQueryOptions<TData, TError>,
+    'queryKey' | 'queryFn' | 'retry' | 'retryDelay'
+  > = {}
 ) {
   const {
     preset = 'standard',
@@ -198,7 +207,11 @@ export function useEnhancedQuery<TData = unknown, TError = ApiError>(
 }
 
 // Enhanced useMutation hook
-export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariables = void>(
+export function useEnhancedMutation<
+  TData = unknown,
+  TError = ApiError,
+  TVariables = void,
+>(
   mutationFn: (variables: TVariables) => Promise<TData>,
   options: {
     maxRetries?: number;
@@ -210,7 +223,10 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
       queryKey: string;
       updateFn: (oldData: any, variables: TVariables) => any;
     };
-  } & Omit<UseMutationOptions<TData, TError, TVariables>, 'mutationFn' | 'retry' | 'retryDelay'> = {},
+  } & Omit<
+    UseMutationOptions<TData, TError, TVariables>,
+    'mutationFn' | 'retry' | 'retryDelay'
+  > = {}
 ) {
   const {
     maxRetries = 1, // Mutations typically shouldn't auto-retry
@@ -251,15 +267,18 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     mutationFn: enhancedMutationFn,
     retry: createRetryFn(maxRetries),
     retryDelay: createRetryDelay(baseRetryDelay, maxRetryDelay),
-    onMutate: async (variables) => {
+    onMutate: async variables => {
       // Handle optimistic updates
       if (optimisticUpdate) {
-        await queryClient.cancelQueries({ queryKey: optimisticUpdate.queryKey });
-        const previousData = queryClient.getQueryData(optimisticUpdate.queryKey);
+        await queryClient.cancelQueries({
+          queryKey: optimisticUpdate.queryKey,
+        });
+        const previousData = queryClient.getQueryData(
+          optimisticUpdate.queryKey
+        );
 
-        queryClient.setQueryData(
-          optimisticUpdate.queryKey,
-          (oldData: any) => optimisticUpdate.updateFn(oldData, variables),
+        queryClient.setQueryData(optimisticUpdate.queryKey, (oldData: any) =>
+          optimisticUpdate.updateFn(oldData, variables)
         );
 
         return { previousData };
@@ -269,8 +288,16 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     },
     onError: (error: Error, variables, context) => {
       // Rollback optimistic updates on error
-      if (optimisticUpdate && context && typeof context === 'object' && 'previousData' in context) {
-        queryClient.setQueryData(optimisticUpdate.queryKey, (context as any).previousData);
+      if (
+        optimisticUpdate &&
+        context &&
+        typeof context === 'object' &&
+        'previousData' in context
+      ) {
+        queryClient.setQueryData(
+          optimisticUpdate.queryKey,
+          (context as any).previousData
+        );
       }
 
       mutationOptions.onError?.(error, variables, context);
@@ -294,7 +321,7 @@ export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
     getPreviousPageParam?: (firstPage: TData, allPages: TData) => unknown;
-  } = {},
+  } = {}
 ) {
   // Implementation would use useInfiniteQuery with similar enhancements
   // This is a placeholder for the infinite query pattern
@@ -307,7 +334,11 @@ export function useCacheManager() {
 
   return {
     // Prefetch data
-    prefetch: <TData>(queryKey: any, queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
+    prefetch: <TData>(
+      queryKey: any,
+      queryFn: () => Promise<TData>,
+      preset: keyof typeof queryPresets = 'standard'
+    ) => {
       return queryClient.prefetchQuery({
         queryKey,
         queryFn,

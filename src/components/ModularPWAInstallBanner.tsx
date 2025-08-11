@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useState, useEffect, useCallback, type FC } from 'react';
@@ -67,16 +66,18 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
   const notifications = usePWANotifications();
 
   // Determine what to show
-  const shouldShowInstall = installPrompt.isInstallable && !installPrompt.isInstalled;
+  const shouldShowInstall =
+    installPrompt.isInstallable && !installPrompt.isInstalled;
   const shouldShowUpdate = pwaUpdates.updateAvailable && showUpdateStatus;
   const shouldShowOffline = offlineStatus.isOffline && showNetworkStatus;
-  const shouldShowNotification = !notifications.canShowNotifications && notifications.isSupported;
+  const shouldShowNotification =
+    !notifications.canShowNotifications && notifications.isSupported;
 
   // Auto-show logic
   useEffect(() => {
     if (!autoShow) {
-return;
-}
+      return;
+    }
 
     const checkAutoShow = () => {
       // Don't show if recently dismissed (within 24 hours)
@@ -135,7 +136,11 @@ return;
       const success = await installPrompt.installApp();
 
       if (success) {
-        conditionalLogger.info('PWA installed successfully', undefined, 'ModularPWAInstallBanner');
+        conditionalLogger.info(
+          'PWA installed successfully',
+          undefined,
+          'ModularPWAInstallBanner'
+        );
         onInstallSuccess?.();
 
         setState(prev => ({
@@ -150,7 +155,7 @@ return;
       conditionalLogger.error(
         'Failed to install PWA',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner',
+        'ModularPWAInstallBanner'
       );
       setState(prev => ({ ...prev, isAnimating: false }));
     }
@@ -167,7 +172,7 @@ return;
       conditionalLogger.error(
         'Failed to install update',
         { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner',
+        'ModularPWAInstallBanner'
       );
     }
 
@@ -235,40 +240,47 @@ return;
     switch (state.currentView) {
       case 'install':
         return (
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1" style={{ color: theme.textColor }}>
+          <div className='flex items-center justify-between'>
+            <div className='flex-1'>
+              <h3
+                className='font-semibold text-lg mb-1'
+                style={{ color: theme.textColor }}
+              >
                 Install YouTubeX
               </h3>
-              <p className="text-sm opacity-80" style={{ color: theme.textColor }}>
-                Get the full app experience with offline access and notifications.
+              <p
+                className='text-sm opacity-80'
+                style={{ color: theme.textColor }}
+              >
+                Get the full app experience with offline access and
+                notifications.
               </p>
               {showBenefits && variant !== 'minimal' && (
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <span className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                <div className='mt-2 flex flex-wrap gap-2'>
+                  <span className='text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded'>
                     📱 Home Screen Access
                   </span>
-                  <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
+                  <span className='text-xs px-2 py-1 bg-green-100 text-green-800 rounded'>
                     🔔 Push Notifications
                   </span>
-                  <span className="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                  <span className='text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded'>
                     📶 Offline Support
                   </span>
                 </div>
               )}
             </div>
-            <div className="flex gap-2 ml-4">
+            <div className='flex gap-2 ml-4'>
               <button
                 onClick={handleInstall}
                 disabled={state.isAnimating}
-                className="px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
               >
                 {state.isAnimating ? 'Installing...' : 'Install'}
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕
               </button>
@@ -278,32 +290,41 @@ return;
 
       case 'update':
         return (
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1" style={{ color: theme.textColor }}>
+          <div className='flex items-center justify-between'>
+            <div className='flex-1'>
+              <h3
+                className='font-semibold text-lg mb-1'
+                style={{ color: theme.textColor }}
+              >
                 Update Available
               </h3>
-              <p className="text-sm opacity-80" style={{ color: theme.textColor }}>
+              <p
+                className='text-sm opacity-80'
+                style={{ color: theme.textColor }}
+              >
                 A new version of YouTubeX is ready to install.
               </p>
               {pwaUpdates.updateVersion && (
-                <p className="text-xs mt-1 opacity-60" style={{ color: theme.textColor }}>
+                <p
+                  className='text-xs mt-1 opacity-60'
+                  style={{ color: theme.textColor }}
+                >
                   Version: {pwaUpdates.updateVersion}
                 </p>
               )}
             </div>
-            <div className="flex gap-2 ml-4">
+            <div className='flex gap-2 ml-4'>
               <button
                 onClick={handleUpdate}
                 disabled={state.isAnimating}
-                className="px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
               >
                 {state.isAnimating ? 'Updating...' : 'Update'}
               </button>
               <button
                 onClick={() => pwaUpdates.skipUpdate()}
-                className="px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 Skip
               </button>
@@ -313,27 +334,33 @@ return;
 
       case 'notification':
         return (
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1" style={{ color: theme.textColor }}>
+          <div className='flex items-center justify-between'>
+            <div className='flex-1'>
+              <h3
+                className='font-semibold text-lg mb-1'
+                style={{ color: theme.textColor }}
+              >
                 Enable Notifications
               </h3>
-              <p className="text-sm opacity-80" style={{ color: theme.textColor }}>
+              <p
+                className='text-sm opacity-80'
+                style={{ color: theme.textColor }}
+              >
                 Stay updated with new videos and important updates.
               </p>
             </div>
-            <div className="flex gap-2 ml-4">
+            <div className='flex gap-2 ml-4'>
               <button
                 onClick={handleNotificationPermission}
                 disabled={state.isAnimating}
-                className="px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
                 style={{ backgroundColor: theme.primaryColor }}
               >
                 {state.isAnimating ? 'Requesting...' : 'Enable'}
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕
               </button>
@@ -343,31 +370,41 @@ return;
 
       case 'offline':
         return (
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1" style={{ color: theme.textColor }}>
+          <div className='flex items-center justify-between'>
+            <div className='flex-1'>
+              <h3
+                className='font-semibold text-lg mb-1'
+                style={{ color: theme.textColor }}
+              >
                 You're Offline
               </h3>
-              <p className="text-sm opacity-80" style={{ color: theme.textColor }}>
+              <p
+                className='text-sm opacity-80'
+                style={{ color: theme.textColor }}
+              >
                 Some features may be limited. Check your connection.
               </p>
               {offlineStatus.offlineDuration > 0 && (
-                <p className="text-xs mt-1 opacity-60" style={{ color: theme.textColor }}>
-                  Offline for: {Math.floor(offlineStatus.offlineDuration / 1000)}s
+                <p
+                  className='text-xs mt-1 opacity-60'
+                  style={{ color: theme.textColor }}
+                >
+                  Offline for:{' '}
+                  {Math.floor(offlineStatus.offlineDuration / 1000)}s
                 </p>
               )}
             </div>
-            <div className="flex gap-2 ml-4">
+            <div className='flex gap-2 ml-4'>
               <button
                 onClick={() => offlineStatus.testConnection()}
-                className="px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity"
+                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity'
                 style={{ backgroundColor: theme.primaryColor }}
               >
                 Retry
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
               >
                 ✕
               </button>
@@ -394,7 +431,7 @@ return;
 
       {/* Network status indicator */}
       {showNetworkStatus && (
-        <div className="absolute top-2 right-2">
+        <div className='absolute top-2 right-2'>
           <div
             className={`w-2 h-2 rounded-full ${
               offlineStatus.isOnline

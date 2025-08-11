@@ -1,4 +1,4 @@
-    imported: number;
+imported: number;
 
 import { api } from '../../../services/api/base';
 
@@ -63,7 +63,7 @@ class SubscriptionService {
    */
   async updateNotificationLevel(
     channelId: any,
-    level: 'all' | 'personalized' | 'none',
+    level: 'all' | 'personalized' | 'none'
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
       notificationLevel: level,
@@ -79,7 +79,7 @@ class SubscriptionService {
       category?: string;
       limit?: number;
       offset?: number;
-    } = {},
+    } = {}
   ): Promise<Subscription[]> {
     try {
       const response = await api.get('/api/subscriptions', filters);
@@ -100,7 +100,7 @@ class SubscriptionService {
       timeframe?: '24h' | '7d' | '30d';
       includeShorts?: boolean;
       includeLive?: boolean;
-    } = {},
+    } = {}
   ): Promise<Video[]> {
     try {
       const response = await api.get('/api/subscriptions/feed', filters);
@@ -139,7 +139,7 @@ class SubscriptionService {
     updates: Array<{
       channelId: string;
       notificationLevel: 'all' | 'personalized' | 'none';
-    }>,
+    }>
   ): Promise<ApiResponse<void>> {
     return api.patch('/api/subscriptions/bulk-notifications', { updates });
   }
@@ -152,33 +152,37 @@ class SubscriptionService {
       category?: string;
       limit?: number;
       excludeSubscribed?: boolean;
-    } = {},
-  ): Promise<Array<{
-    channelId: string;
-    channelName: string;
-    channelAvatar: string;
-    channelHandle: string;
-    subscriberCount: number;
-    videoCount: number;
-    category: string;
-    description: string;
-    isVerified: boolean;
-    recentVideos: Video;
-  }>> {
+    } = {}
+  ): Promise<
+    Array<{
+      channelId: string;
+      channelName: string;
+      channelAvatar: string;
+      channelHandle: string;
+      subscriberCount: number;
+      videoCount: number;
+      category: string;
+      description: string;
+      isVerified: boolean;
+      recentVideos: Video;
+    }>
+  > {
     try {
       const response = await api.get('/api/subscriptions/recommended', filters);
-      return (response.data as Array<{
-        channelId: string;
-        channelName: string;
-        channelAvatar: string;
-        channelHandle: string;
-        subscriberCount: number;
-        videoCount: number;
-        category: string;
-        description: string;
-        isVerified: boolean;
-        recentVideos: Video;
-      }>) || [];
+      return (
+        (response.data as Array<{
+          channelId: string;
+          channelName: string;
+          channelAvatar: string;
+          channelHandle: string;
+          subscriberCount: number;
+          videoCount: number;
+          category: string;
+          description: string;
+          isVerified: boolean;
+          recentVideos: Video;
+        }>) || []
+      );
     } catch (error) {
       logger.error('Failed to get recommended channels:', error);
       return [];
@@ -193,7 +197,7 @@ class SubscriptionService {
     filters: {
       includeVideos?: boolean;
       limit?: number;
-    } = {},
+    } = {}
   ): Promise<{
     channels: Subscription;
     videos: Video;
@@ -221,35 +225,39 @@ class SubscriptionService {
       timeframe?: '1h' | '6h' | '24h' | '7d';
       types?: Array<'upload' | 'live' | 'premiere' | 'community'>;
       limit?: number;
-    } = {},
-  ): Promise<Array<{
-    id: string;
-    type: 'upload' | 'live' | 'premiere' | 'community';
-    channelId: string;
-    channelName: string;
-    channelAvatar: string;
-    title: string;
-    description?: string;
-    thumbnail?: string;
-    url: string;
-    timestamp: string;
-    isNew: boolean;
-  }>> {
+    } = {}
+  ): Promise<
+    Array<{
+      id: string;
+      type: 'upload' | 'live' | 'premiere' | 'community';
+      channelId: string;
+      channelName: string;
+      channelAvatar: string;
+      title: string;
+      description?: string;
+      thumbnail?: string;
+      url: string;
+      timestamp: string;
+      isNew: boolean;
+    }>
+  > {
     try {
       const response = await api.get('/api/subscriptions/activity', filters);
-      return (response.data as Array<{
-        id: string;
-        type: 'upload' | 'live' | 'premiere' | 'community';
-        channelId: string;
-        channelName: string;
-        channelAvatar: string;
-        title: string;
-        description?: string;
-        thumbnail?: string;
-        url: string;
-        timestamp: string;
-        isNew: boolean;
-      }>) || [];
+      return (
+        (response.data as Array<{
+          id: string;
+          type: 'upload' | 'live' | 'premiere' | 'community';
+          channelId: string;
+          channelName: string;
+          channelAvatar: string;
+          title: string;
+          description?: string;
+          thumbnail?: string;
+          url: string;
+          timestamp: string;
+          isNew: boolean;
+        }>) || []
+      );
     } catch (error) {
       logger.error('Failed to get subscription activity:', error);
       return [];
@@ -274,11 +282,13 @@ class SubscriptionService {
    */
   async importSubscriptions(
     file: File,
-    format: 'json' | 'csv' | 'opml',
-  ): Promise<ApiResponse<{
-    skipped: number;
-    errors: string;
-  }>> {
+    format: 'json' | 'csv' | 'opml'
+  ): Promise<
+    ApiResponse<{
+      skipped: number;
+      errors: string;
+    }>
+  > {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('format', format);
@@ -294,10 +304,14 @@ class SubscriptionService {
    * Get subscription trends and insights
    */
   async getSubscriptionInsights(
-    timeframe: '7d' | '30d' | '90d' = '30d',
+    timeframe: '7d' | '30d' | '90d' = '30d'
   ): Promise<{
     growthRate: number;
-    topCategories: Array<{ category: string; count: number; percentage: number }>;
+    topCategories: Array<{
+      category: string;
+      count: number;
+      percentage: number;
+    }>;
     activityTrends: Array<{ date: string; uploads: number; views: number }>;
     engagementMetrics: {
       averageViewsPerVideo: number;
@@ -306,10 +320,16 @@ class SubscriptionService {
     };
   }> {
     try {
-      const response = await api.get('/api/subscriptions/insights', { timeframe });
+      const response = await api.get('/api/subscriptions/insights', {
+        timeframe,
+      });
       return response.data as {
         growthRate: number;
-        topCategories: Array<{ category: string; count: number; percentage: number }>;
+        topCategories: Array<{
+          category: string;
+          count: number;
+          percentage: number;
+        }>;
         activityTrends: Array<{ date: string; uploads: number; views: number }>;
         engagementMetrics: {
           averageViewsPerVideo: number;

@@ -1,5 +1,3 @@
-
-
 /// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -12,7 +10,11 @@ declare namespace NodeJS {
 
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-import { SignalSlashIcon, ArrowPathIcon, HomeIcon } from '@heroicons/react/24/outline';
+import {
+  SignalSlashIcon,
+  ArrowPathIcon,
+  HomeIcon,
+} from '@heroicons/react/24/outline';
 
 import { createComponentError } from '@/utils/errorUtils';
 /// <reference types="node" />
@@ -72,10 +74,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
         streamId: this.props.streamId,
         retryCount: this.state.retryCount,
         componentStack: errorInfo.componentStack,
-      }),
+      })
     );
 
-    conditionalLogger.error('Live stream component error caught:', componentError);
+    conditionalLogger.error(
+      'Live stream component error caught:',
+      componentError
+    );
 
     this.setState({
       errorInfo,
@@ -141,14 +146,14 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
 
       if (this.state.isReconnecting) {
         return (
-          <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-              <ArrowPathIcon className="w-8 h-8 text-blue-600 animate-spin" />
+          <div className='flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200'>
+            <div className='flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4'>
+              <ArrowPathIcon className='w-8 h-8 text-blue-600 animate-spin' />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className='text-lg font-semibold text-gray-900 mb-2'>
               Reconnecting...
             </h3>
-            <p className="text-sm text-gray-600 text-center">
+            <p className='text-sm text-gray-600 text-center'>
               Attempting to reconnect to the live stream
             </p>
           </div>
@@ -156,70 +161,69 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200">
-          <div className="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-            <SignalSlashIcon className="w-8 h-8 text-red-600" />
+        <div className='flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200'>
+          <div className='flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4'>
+            <SignalSlashIcon className='w-8 h-8 text-red-600' />
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className='text-lg font-semibold text-gray-900 mb-2'>
             Live Stream Error
           </h3>
 
-          <p className="text-sm text-gray-600 text-center mb-6 max-w-md">
+          <p className='text-sm text-gray-600 text-center mb-6 max-w-md'>
             {this.props.streamId
               ? `There was an error with live stream ${this.props.streamId}. This might be due to network issues or the stream being offline.`
-              : 'There was an error with the live stream. The stream might be offline or experiencing technical difficulties.'
-            }
+              : 'There was an error with the live stream. The stream might be offline or experiencing technical difficulties.'}
           </p>
 
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className='flex flex-wrap gap-3 justify-center'>
             {canRetry && (
               <button
                 onClick={this.handleRetry}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
               >
-                <ArrowPathIcon className="w-4 h-4" />
+                <ArrowPathIcon className='w-4 h-4' />
                 Retry ({this.maxRetries - this.state.retryCount} left)
               </button>
             )}
 
             <button
               onClick={this.handleReconnect}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              className='flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
             >
-              <SignalSlashIcon className="w-4 h-4" />
+              <SignalSlashIcon className='w-4 h-4' />
               Reconnect
             </button>
 
             <button
               onClick={this.handleGoHome}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className='flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors'
             >
-              <HomeIcon className="w-4 h-4" />
+              <HomeIcon className='w-4 h-4' />
               Go Home
             </button>
           </div>
 
-          <div className="mt-4 text-xs text-gray-500 text-center">
+          <div className='mt-4 text-xs text-gray-500 text-center'>
             Stream errors: {this.state.retryCount} / {this.maxRetries}
           </div>
 
           {import.meta.env.MODE === 'development' && this.state.error && (
-            <details className="mt-6 w-full">
-              <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">
+            <details className='mt-6 w-full'>
+              <summary className='cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900'>
                 Error Details (Development)
               </summary>
-              <div className="mt-2 p-3 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40">
-                <div className="font-semibold text-red-600 mb-2">
+              <div className='mt-2 p-3 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40'>
+                <div className='font-semibold text-red-600 mb-2'>
                   {this.state.error.name}: {this.state.error.message}
                 </div>
-                <pre className="whitespace-pre-wrap text-xs">
+                <pre className='whitespace-pre-wrap text-xs'>
                   {this.state.error.stack}
                 </pre>
                 {this.state.errorInfo && (
-                  <div className="mt-2 pt-2 border-t border-gray-300">
-                    <div className="font-semibold mb-1">Component Stack:</div>
-                    <pre className="whitespace-pre-wrap text-xs">
+                  <div className='mt-2 pt-2 border-t border-gray-300'>
+                    <div className='font-semibold mb-1'>Component Stack:</div>
+                    <pre className='whitespace-pre-wrap text-xs'>
                       {this.state.errorInfo.componentStack}
                     </pre>
                   </div>

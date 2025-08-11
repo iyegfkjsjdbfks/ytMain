@@ -1,5 +1,3 @@
-
-
 /// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -12,7 +10,11 @@ declare namespace NodeJS {
 
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-import { ExclamationCircleIcon, ArrowPathIcon, WifiIcon } from '@heroicons/react/24/outline';
+import {
+  ExclamationCircleIcon,
+  ArrowPathIcon,
+  WifiIcon,
+} from '@heroicons/react/24/outline';
 
 import { createComponentError } from '@/utils/errorUtils';
 /// <reference types="node" />
@@ -73,10 +75,13 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
         retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
         componentStack: errorInfo.componentStack,
-      }),
+      })
     );
 
-    conditionalLogger.error('Data fetching component error caught:', componentError);
+    conditionalLogger.error(
+      'Data fetching component error caught:',
+      componentError
+    );
 
     this.setState({
       errorInfo,
@@ -141,10 +146,10 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
     const isOffline = !navigator.onLine;
 
     if (isOffline) {
-      return <WifiIcon className="w-8 h-8 text-orange-600" />;
+      return <WifiIcon className='w-8 h-8 text-orange-600' />;
     }
 
-    return <ExclamationCircleIcon className="w-8 h-8 text-red-600" />;
+    return <ExclamationCircleIcon className='w-8 h-8 text-red-600' />;
   };
 
   private getErrorIconBg = (): string => {
@@ -163,14 +168,14 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
 
       if (this.state.isRetrying) {
         return (
-          <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-              <ArrowPathIcon className="w-8 h-8 text-blue-600 animate-spin" />
+          <div className='flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200'>
+            <div className='flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4'>
+              <ArrowPathIcon className='w-8 h-8 text-blue-600 animate-spin' />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className='text-lg font-semibold text-gray-900 mb-2'>
               Retrying...
             </h3>
-            <p className="text-sm text-gray-600 text-center">
+            <p className='text-sm text-gray-600 text-center'>
               Attempting to reload {this.props.dataType || 'data'}
             </p>
           </div>
@@ -178,71 +183,75 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200">
-          <div className={`flex items-center justify-center w-16 h-16 ${this.getErrorIconBg()} rounded-full mb-4`}>
+        <div className='flex flex-col items-center justify-center p-8 bg-gray-50 rounded-lg border border-gray-200'>
+          <div
+            className={`flex items-center justify-center w-16 h-16 ${this.getErrorIconBg()} rounded-full mb-4`}
+          >
             {this.getErrorIcon()}
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className='text-lg font-semibold text-gray-900 mb-2'>
             {isOffline ? 'Connection Error' : 'Data Loading Error'}
           </h3>
 
-          <p className="text-sm text-gray-600 text-center mb-6 max-w-md">
+          <p className='text-sm text-gray-600 text-center mb-6 max-w-md'>
             {this.getErrorMessage()}
           </p>
 
-          <div className="flex gap-3">
+          <div className='flex gap-3'>
             {canRetry && (
               <button
                 onClick={this.handleRetry}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className='flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
               >
-                <ArrowPathIcon className="w-4 h-4" />
+                <ArrowPathIcon className='w-4 h-4' />
                 Try Again ({this.maxRetries - this.state.retryCount} left)
               </button>
             )}
 
             <button
               onClick={this.handleRefresh}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className='px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors'
             >
               Refresh Page
             </button>
           </div>
 
           {this.state.retryCount > 0 && (
-            <div className="mt-4 text-xs text-gray-500 text-center">
+            <div className='mt-4 text-xs text-gray-500 text-center'>
               Retry attempts: {this.state.retryCount} / {this.maxRetries}
             </div>
           )}
 
           {isOffline && this.props.showOfflineMessage && (
-            <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-              <p className="text-sm text-orange-800 text-center">
-                Some features may be limited while offline. Data will sync when connection is restored.
+            <div className='mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg'>
+              <p className='text-sm text-orange-800 text-center'>
+                Some features may be limited while offline. Data will sync when
+                connection is restored.
               </p>
             </div>
           )}
 
           {import.meta.env.MODE === 'development' && this.state.error && (
-            <details className="mt-6 w-full">
-              <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">
+            <details className='mt-6 w-full'>
+              <summary className='cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900'>
                 Error Details (Development)
               </summary>
-              <div className="mt-2 p-3 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40">
-                <div className="font-semibold text-red-600 mb-2">
+              <div className='mt-2 p-3 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40'>
+                <div className='font-semibold text-red-600 mb-2'>
                   {this.state.error.name}: {this.state.error.message}
                 </div>
-                <div className="mb-2">
-                  <strong>Network Status:</strong> {navigator.onLine ? 'Online' : 'Offline'}
+                <div className='mb-2'>
+                  <strong>Network Status:</strong>{' '}
+                  {navigator.onLine ? 'Online' : 'Offline'}
                 </div>
-                <pre className="whitespace-pre-wrap text-xs">
+                <pre className='whitespace-pre-wrap text-xs'>
                   {this.state.error.stack}
                 </pre>
                 {this.state.errorInfo && (
-                  <div className="mt-2 pt-2 border-t border-gray-300">
-                    <div className="font-semibold mb-1">Component Stack:</div>
-                    <pre className="whitespace-pre-wrap text-xs">
+                  <div className='mt-2 pt-2 border-t border-gray-300'>
+                    <div className='font-semibold mb-1'>Component Stack:</div>
+                    <pre className='whitespace-pre-wrap text-xs'>
                       {this.state.errorInfo.componentStack}
                     </pre>
                   </div>

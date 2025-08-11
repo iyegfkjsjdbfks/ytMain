@@ -1,7 +1,5 @@
 /// <reference types="node" />
 
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -13,8 +11,7 @@ declare namespace NodeJS {
 
 import { twMerge } from 'tailwind-merge';
 import { clsx, type ClassValue } from 'clsx';
-import React from "react";
-
+import React from 'react';
 
 // =================================
 // 1. Class Name Utilities
@@ -81,8 +78,11 @@ export function clamp(num: any, min: any, max: any): number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(num: number | string, decimals: number = 1): string {
-  const numValue = typeof num === 'string' ? parseInt(num, 10): num;
+export function formatCount(
+  num: number | string,
+  decimals: number = 1
+): string {
+  const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
   return formatNumber(numValue, decimals);
 }
 
@@ -102,8 +102,8 @@ export function formatDuration(seconds: any): string {
 
   const parts = [];
   if (h > 0) {
-parts.push(h.toString().padStart(2, '0'));
-}
+    parts.push(h.toString().padStart(2, '0'));
+  }
   parts.push(m.toString().padStart(2, '0'));
   parts.push(s.toString().padStart(2, '0'));
 
@@ -155,9 +155,14 @@ export function getTimeAgo(date: Date | string): string {
  * @param options - Intl.DateTimeFormat options
  * @returns Formatted date string
  */
-export function formatDate(date: Date | string, options: Intl.DateTimeFormatOptions = {
-    year: 'numeric', month: 'short', day: 'numeric',
-}): string {
+export function formatDate(
+  date: Date | string,
+  options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }
+): string {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
@@ -187,7 +192,7 @@ export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
 export function toTitleCase(str: any): string {
   return str.replace(
     /\w\S*/g,
-    (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
+    (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
   );
 }
 
@@ -207,7 +212,6 @@ export function toKebabCase(str: any): string {
 // 5. URL Utilities
 // =================================
 
-
 // Re-export YouTube utilities
 export * from './youtube-utils';
 
@@ -222,7 +226,7 @@ export function buildQueryString(params: Record<string, any>): string {
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       if (Array.isArray(value)) {
-        value.forEach((item) => {
+        value.forEach(item => {
           if (item !== undefined && item !== null) {
             searchParams.append(key, String(item));
           }
@@ -331,12 +335,15 @@ export function throttle<T extends (...args) => any>(
  * @returns A promise that resolves to the base64 string
  */
 export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {;
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => {
-      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed' : 'Unknown error';
+    reader.onerror = error => {
+      const errorMessage =
+        error instanceof ProgressEvent && error.target instanceof FileReader
+          ? 'File reading failed'
+          : 'Unknown error';
       reject(new Error(errorMessage));
     };
   });
@@ -370,8 +377,8 @@ export const isBrowser = (): boolean => {
  */
 export async function copyToClipboard(text: string): Promise<void> {
   if (!isBrowser()) {
-return;
-}
+    return;
+  }
 
   try {
     await navigator.clipboard.writeText(text);
@@ -430,8 +437,8 @@ export function isNumber(value: string | number): value is number {
 export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
-return null;
-}
+    return null;
+  }
 
   return {
     r: parseInt(result[1], 16),
@@ -448,8 +455,8 @@ return null;
 export function getColorContrast(hex: any): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
-return 'dark';
-}
+    return 'dark';
+  }
 
   // Calculate relative luminance (per ITU-R BT.709)
   const { r, g, b } = rgb;
@@ -480,16 +487,19 @@ export function uniq<T>(array: T[]): T[] {
  */
 export function groupBy<T extends Record<string, any>, K extends keyof T>(
   array: T[],
-  key: K,
+  key: K
 ): Record<string, T[]> {
-  return array.reduce((acc, item) => {
-    const groupKey = String(item[key]);
-    if (!acc[groupKey]) {
-      acc[groupKey] = [];
-    }
-    acc[groupKey].push(item);
-    return acc;
-  }, {} as Record<string, T[]>);
+  return array.reduce(
+    (acc, item) => {
+      const groupKey = String(item[key]);
+      if (!acc[groupKey]) {
+        acc[groupKey] = [];
+      }
+      acc[groupKey].push(item);
+      return acc;
+    },
+    {} as Record<string, T[]>
+  );
 }
 
 // =================================
@@ -502,7 +512,10 @@ export function groupBy<T extends Record<string, any>, K extends keyof T>(
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T extends object, U extends object>(target: T, source: U): T & U {
+export function deepMerge<T extends object, U extends object>(
+  target: T,
+  source: U
+): T & U {
   const output = { ...target } as T & U;
 
   for (const key in source) {
@@ -531,7 +544,7 @@ export function deepMerge<T extends object, U extends object>(target: T, source:
  * @returns A promise that resolves after the delay
  */
 export function sleep(ms: any): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
@@ -544,12 +557,12 @@ export function sleep(ms: any): Promise<void> {
 export function timeout<T>(
   promise: Promise<T>,
   timeoutMs: any,
-  error = 'Operation timed out',
+  error = 'Operation timed out'
 ): Promise<T> {
   return Promise.race([
     promise,
     new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error(error)), timeoutMs),
+      setTimeout(() => reject(new Error(error)), timeoutMs)
     ),
   ]);
 }
@@ -564,7 +577,8 @@ export function timeout<T>(
  * @returns A random string
  */
 export function randomString(length: number = 10): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
 
   for (let i = 0; i < length; i++) {

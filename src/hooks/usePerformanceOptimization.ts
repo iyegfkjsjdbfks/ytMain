@@ -1,7 +1,5 @@
 /// <reference types="node" />
 
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -24,7 +22,9 @@ export const usePerformanceMonitor = (componentName: any) => {
     const renderTime = endTime - startTime.current;
 
     if (import.meta.env.MODE === 'development') {
-      console.log(`${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`);
+      console.log(
+        `${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`
+      );
     }
 
     startTime.current = performance.now();
@@ -53,7 +53,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args) => any>(
   callback: T,
-  delay: any,
+  delay: any
 ): T => {
   const lastCall = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -66,14 +66,16 @@ export const useThrottle = <T extends (...args) => any>(
         lastCall.current = now;
         return callback(...args);
       }
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(
+        () => {
           lastCall.current = Date.now();
           callback(...args);
-        }, delay - (now - lastCall.current));
-
+        },
+        delay - (now - lastCall.current)
+      );
     }) as T,
-    [callback, delay],
+    [callback, delay]
   );
 };
 
@@ -88,7 +90,7 @@ export const useMemoryMonitor = () => {
   useEffect(() => {
     const updateMemoryInfo = () => {
       if ('memory' in performance) {
-        const { memory } = (performance as any);
+        const { memory } = performance as any;
         setMemoryInfo({
           usedJSHeapSize: memory.usedJSHeapSize,
           totalJSHeapSize: memory.totalJSHeapSize,
@@ -108,7 +110,7 @@ export const useMemoryMonitor = () => {
 
 // Intersection observer for lazy loading
 export const useIntersectionObserver = (
-  options: IntersectionObserverInit = {},
+  options: IntersectionObserverInit = {}
 ) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -121,8 +123,8 @@ export const useIntersectionObserver = (
   useEffect(() => {
     const element = elementRef.current;
     if (!element) {
-return;
-}
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -135,7 +137,7 @@ return;
         threshold: 0.1,
         rootMargin: '50px',
         ...options,
-      },
+      }
     );
 
     observer.observe(element);
@@ -162,9 +164,9 @@ export const useBatchedUpdates = <T>(initialValue: T) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      setValue((prev) => {
+      setValue(prev => {
         let result = prev;
-        pendingUpdates.current.forEach((update) => {
+        pendingUpdates.current.forEach(update => {
           result = update(result);
         });
         pendingUpdates.current = [];

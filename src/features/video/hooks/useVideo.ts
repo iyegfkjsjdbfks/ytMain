@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 
 import { unifiedDataService } from '../../../services/unifiedDataService';
@@ -9,13 +8,15 @@ import { videoService } from '../services/videoService';
 const videoKeys = {
   all: ['videos'] as const,
   lists: () => [...videoKeys.all, 'list'] as const,
-  list: (filters: Record<string, unknown>) => [...videoKeys.lists(), filters] as const,
+  list: (filters: Record<string, unknown>) =>
+    [...videoKeys.lists(), filters] as const,
   details: () => [...videoKeys.all, 'detail'] as const,
   detail: (id: string) => [...videoKeys.details(), id] as const,
   unified: {
     all: ['unified-videos'] as const,
     lists: () => [...videoKeys.unified.all, 'list'] as const,
-    list: (filters: Record<string, unknown>) => [...videoKeys.unified.lists(), filters] as const,
+    list: (filters: Record<string, unknown>) =>
+      [...videoKeys.unified.lists(), filters] as const,
     details: () => [...videoKeys.unified.all, 'detail'] as const,
     detail: (id: string) => [...videoKeys.unified.details(), id] as const,
   },
@@ -85,7 +86,10 @@ export const useUnifiedTrendingVideos = (limit: number = 50, filters = {}) => {
   return useQuery({
     queryKey: videoKeys.unified.list({ type: 'trending', limit, filters }),
     queryFn: async () => {
-      const response = await unifiedDataService.getTrendingVideos(limit, filters);
+      const response = await unifiedDataService.getTrendingVideos(
+        limit,
+        filters
+      );
       return response.data;
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -109,11 +113,19 @@ export const useUnifiedShorts = (limit: number = 30) => {
 /**
  * Hook for searching videos using unified service
  */
-export const useUnifiedSearchVideos = (query: any, filters = {}, limit: number = 50) => {
+export const useUnifiedSearchVideos = (
+  query: any,
+  filters = {},
+  limit: number = 50
+) => {
   return useQuery({
     queryKey: videoKeys.unified.list({ type: 'search', query, filters, limit }),
     queryFn: async () => {
-      const response = await unifiedDataService.searchVideos(query, filters, limit);
+      const response = await unifiedDataService.searchVideos(
+        query,
+        filters,
+        limit
+      );
       return response.data;
     },
     enabled: !!query && query.length > 2,

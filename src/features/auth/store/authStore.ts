@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 
 import { authService } from '../services/authService';
@@ -21,23 +20,24 @@ interface AuthStore extends AuthState {
  * Replaces the previous context-based approach with a more
  * efficient and easier to use state management solution
  */
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore>(set => ({
   user: null,
   isAuthenticated: false,
   isLoading: true,
   error: null,
 
-  setUser: (user) => set({
-    user,
-    isAuthenticated: !!user,
-    error: null,
-  }),
+  setUser: user =>
+    set({
+      user,
+      isAuthenticated: !!user,
+      error: null,
+    }),
 
   setError: (error: Error) => set({ error: Error }),
 
-  setLoading: (isLoading) => set({ isLoading }),
+  setLoading: isLoading => set({ isLoading }),
 
-  login: async (credentials) => {
+  login: async credentials => {
     set({ isLoading: true, error: null });
 
     try {
@@ -45,13 +45,14 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ user, isAuthenticated: true, isLoading: false });
       return user;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to login';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to login';
       set({ error: errorMessage, isLoading: false });
       throw error;
     }
   },
 
-  register: async (data) => {
+  register: async data => {
     set({ isLoading: true, error: null });
 
     try {
@@ -59,7 +60,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ user, isAuthenticated: true, isLoading: false });
       return user;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to register';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to register';
       set({ error: errorMessage, isLoading: false });
       throw error;
     }

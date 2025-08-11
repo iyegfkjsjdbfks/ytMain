@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useEffect } from 'react';
@@ -37,7 +37,13 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   // For routes that require authentication (most app routes)
   if (requireAuth && !isAuthenticated) {
-    return <Navigate to={redirectTo || '/login'} state={{ from: location }} replace />;
+    return (
+      <Navigate
+        to={redirectTo || '/login'}
+        state={{ from: location }}
+        replace
+      />
+    );
   }
 
   // For routes that should NOT be accessible when authenticated (login/register)
@@ -50,7 +56,6 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
 export default ProtectedRoute;
 
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -58,4 +63,3 @@ declare global {
     }
   }
 }
-

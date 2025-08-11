@@ -1,6 +1,5 @@
 /// <reference types="node" />
 
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -10,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import React from "react";
+import React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 // Unified state management hook
@@ -28,7 +27,7 @@ export function useAsyncState<T>(initialData: T | null = null): [
     setLoading: (loading: any) => void;
     setError: (error: Error | null) => void;
     reset: () => void;
-  }
+  },
 ] {
   const [state, setState] = useState<AsyncState<T>>({
     data: initialData,
@@ -82,7 +81,7 @@ export interface UseApiOptions {
 
 export function useApi<T>(
   apiCall: () => Promise<T>,
-  options: UseApiOptions = {},
+  options: UseApiOptions = {}
 ): AsyncState<T> & {
   refetch: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -103,8 +102,8 @@ export function useApi<T>(
 
   const fetchData = useCallback(async () => {
     if (!mountedRef.current) {
-return;
-}
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -117,24 +116,35 @@ return;
       }
     } catch (error) {
       if (!mountedRef.current) {
-return;
-}
+        return;
+      }
 
       const apiError = error as Error;
 
       if (retryOnError && retryCountRef.current < maxRetries) {
         retryCountRef.current++;
-        setTimeout(() => {
-          if (mountedRef.current) {
-            fetchData();
-          }
-        }, retryDelay * Math.pow(2, retryCountRef.current - 1));
+        setTimeout(
+          () => {
+            if (mountedRef.current) {
+              fetchData();
+            }
+          },
+          retryDelay * Math.pow(2, retryCountRef.current - 1)
+        );
       } else {
         setError(apiError);
         retryCountRef.current = 0;
       }
     }
-  }, [apiCall, setData, setLoading, setError, retryOnError, maxRetries, retryDelay]);
+  }, [
+    apiCall,
+    setData,
+    setLoading,
+    setError,
+    retryOnError,
+    maxRetries,
+    retryDelay,
+  ]);
 
   const refetch = useCallback(async () => {
     retryCountRef.current = 0;
@@ -205,12 +215,14 @@ export interface FormActions<T extends Record<string, any>> {
   setSubmitError: (error: string | null) => void;
   reset: () => void;
   validate: () => boolean;
-  handleSubmit: (onSubmit: (values: T) => Promise<void> | void) => (e?: React.FormEvent) => Promise<void>;
+  handleSubmit: (
+    onSubmit: (values: T) => Promise<void> | void
+  ) => (e?: React.FormEvent) => Promise<void>;
 }
 
 export function useForm<T extends Record<string, any>>(
   initialValues: T,
-  validators?: { [K in keyof T]?: (value: T[K]) => string | null },
+  validators?: { [K in keyof T]?: (value: T[K]) => string | null }
 ): [FormState<T>, FormActions<T>] {
   const [state, setState] = useState<FormState<T>>(() => {
     const fields = {} as { [K in keyof T]: FormField<T[K]> };
@@ -230,51 +242,60 @@ export function useForm<T extends Record<string, any>>(
     };
   });
 
-  const setValue = useCallback(<K extends keyof T>(field: K, value: T[K]) => {
-    setState(prev => {
-      const newFields = { ...prev.fields };
-      newFields[field] = {
-        ...newFields[field],
-        value,
-        dirty: value !== initialValues[field],
-        error: validators?.[field] ? validators[field](value) : null,
-      };
+  const setValue = useCallback(
+    <K extends keyof T>(field: K, value: T[K]) => {
+      setState(prev => {
+        const newFields = { ...prev.fields };
+        newFields[field] = {
+          ...newFields[field],
+          value,
+          dirty: value !== initialValues[field],
+          error: validators?.[field] ? validators[field](value) : null,
+        };
 
-      const isValid = Object.values(newFields).every(f => !f.error);
+        const isValid = Object.values(newFields).every(f => !f.error);
 
-      return {
-        ...prev,
-        fields: newFields,
-        isValid,
-      };
-    });
-  }, [initialValues, validators]);
+        return {
+          ...prev,
+          fields: newFields,
+          isValid,
+        };
+      });
+    },
+    [initialValues, validators]
+  );
 
-  const setError = useCallback(<K extends keyof T>(field: K, error: string | null) => {
-    setState(prev => {
-      const newFields = { ...prev.fields };
-      newFields[field] = { ...newFields[field], error };
-      const isValid = Object.values(newFields).every(f => !f.error);
+  const setError = useCallback(
+    <K extends keyof T>(field: K, error: string | null) => {
+      setState(prev => {
+        const newFields = { ...prev.fields };
+        newFields[field] = { ...newFields[field], error };
+        const isValid = Object.values(newFields).every(f => !f.error);
 
-      return {
-        ...prev,
-        fields: newFields,
-        isValid,
-      };
-    });
-  }, []);
+        return {
+          ...prev,
+          fields: newFields,
+          isValid,
+        };
+      });
+    },
+    []
+  );
 
-  const setTouched = useCallback(<K extends keyof T>(field: K, touched = true) => {
-    setState(prev => {
-      const newFields = { ...prev.fields };
-      newFields[field] = { ...newFields[field], touched };
+  const setTouched = useCallback(
+    <K extends keyof T>(field: K, touched = true) => {
+      setState(prev => {
+        const newFields = { ...prev.fields };
+        newFields[field] = { ...newFields[field], touched };
 
-      return {
-        ...prev,
-        fields: newFields,
-      };
-    });
-  }, []);
+        return {
+          ...prev,
+          fields: newFields,
+        };
+      });
+    },
+    []
+  );
 
   const setSubmitting = useCallback((submitting: any) => {
     setState(prev => ({ ...prev, isSubmitting: submitting }));
@@ -307,8 +328,8 @@ export function useForm<T extends Record<string, any>>(
 
   const validate = useCallback(() => {
     if (!validators) {
-return true;
-}
+      return true;
+    }
 
     let isValid = true;
     setState(prev => {
@@ -320,8 +341,8 @@ return true;
           const error = validator(newFields[key].value);
           newFields[key] = { ...newFields[key], error };
           if (error) {
-isValid = false;
-}
+            isValid = false;
+          }
         }
       }
 
@@ -335,33 +356,38 @@ isValid = false;
     return isValid;
   }, [validators]);
 
-  const handleSubmit = useCallback((onSubmit: (values: T) => Promise<void> | void) => {
-    return async (e?: React.FormEvent) => {
-      if (e) {
-        e.preventDefault();
-      }
-
-      if (!validate()) {
-        return;
-      }
-
-      setSubmitting(true);
-      setSubmitError(null);
-
-      try {
-        const values = {} as T;
-        for (const key in state.fields) {
-          values[key] = state.fields[key].value;
+  const handleSubmit = useCallback(
+    (onSubmit: (values: T) => Promise<void> | void) => {
+      return async (e?: React.FormEvent) => {
+        if (e) {
+          e.preventDefault();
         }
 
-        await onSubmit(values);
-      } catch (error) {
-        setSubmitError(error instanceof Error ? error.message : 'An error occurred');
-      } finally {
-        setSubmitting(false);
-      }
-    };
-  }, [state.fields, validate, setSubmitting, setSubmitError]);
+        if (!validate()) {
+          return;
+        }
+
+        setSubmitting(true);
+        setSubmitError(null);
+
+        try {
+          const values = {} as T;
+          for (const key in state.fields) {
+            values[key] = state.fields[key].value;
+          }
+
+          await onSubmit(values);
+        } catch (error) {
+          setSubmitError(
+            error instanceof Error ? error.message : 'An error occurred'
+          );
+        } finally {
+          setSubmitting(false);
+        }
+      };
+    },
+    [state.fields, validate, setSubmitting, setSubmitError]
+  );
 
   return [
     state,
@@ -379,7 +405,9 @@ isValid = false;
 }
 
 // Unified toggle hook
-export function useToggle(initialValue: boolean = false): [boolean, () => void, (value: string | number) => void] {
+export function useToggle(
+  initialValue: boolean = false
+): [boolean, () => void, (value: string | number) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => {
@@ -413,7 +441,7 @@ export function useDebounce<T>(value: T, delay: any): T {
 // Unified local storage hook
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T,
+  initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -425,15 +453,19 @@ export function useLocalStorage<T>(
     }
   });
 
-  const setValue = useCallback((value: T | ((prev: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+  const setValue = useCallback(
+    (value: T | ((prev: T) => T)) => {
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   const removeValue = useCallback(() => {
     try {
@@ -449,7 +481,7 @@ export function useLocalStorage<T>(
 
 // Unified intersection observer hook
 export function useIntersectionObserver(
-  options: IntersectionObserverInit = {},
+  options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const targetRef = useRef<HTMLElement>(null);
@@ -457,17 +489,14 @@ export function useIntersectionObserver(
   useEffect(() => {
     const target = targetRef.current;
     if (!target) {
-return;
-}
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry) {
-          setIsIntersecting(entry.isIntersecting);
-        }
-      },
-      options,
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry) {
+        setIsIntersecting(entry.isIntersecting);
+      }
+    }, options);
 
     observer.observe(target);
 
@@ -489,15 +518,18 @@ export function usePerformanceMonitor(name: string) {
     return () => {
       // const __duration = Date.now() - startTimeRef.current;
       if (import.meta.env.MODE === 'development') {
-        }
+      }
     };
   }, [name]);
 
-  const mark = useCallback((__label: any) => {
-    // const __duration = Date.now() - startTimeRef.current;
-    if (import.meta.env.MODE === 'development') {
+  const mark = useCallback(
+    (__label: any) => {
+      // const __duration = Date.now() - startTimeRef.current;
+      if (import.meta.env.MODE === 'development') {
       }
-  }, [name]);
+    },
+    [name]
+  );
 
   return { mark };
 }

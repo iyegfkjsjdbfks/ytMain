@@ -1,4 +1,3 @@
-
 /**
  * PWA (Progressive Web App) utilities and configuration
  */
@@ -69,17 +68,21 @@ export class PWAUtils {
    * Check if PWA installation is supported
    */
   static isInstallSupported(): boolean {
-    return 'beforeinstallprompt' in window ||
-           (navigator as any).standalone !== undefined;
+    return (
+      'beforeinstallprompt' in window ||
+      (navigator as any).standalone !== undefined
+    );
   }
 
   /**
    * Check if app is installed as PWA
    */
   static isInstalled(): boolean {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           (navigator as any).standalone === true ||
-           document.referrer.includes('android-app://');
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (navigator as any).standalone === true ||
+      document.referrer.includes('android-app://')
+    );
   }
 
   /**
@@ -107,8 +110,10 @@ export class PWAUtils {
    * Check if background sync is supported
    */
   static isBackgroundSyncSupported(): boolean {
-    return 'serviceWorker' in navigator &&
-           'sync' in window.ServiceWorkerRegistration.prototype;
+    return (
+      'serviceWorker' in navigator &&
+      'sync' in window.ServiceWorkerRegistration.prototype
+    );
   }
 
   /**
@@ -140,7 +145,11 @@ export class PWAUtils {
   static getDeviceType(): 'mobile' | 'tablet' | 'desktop' {
     const userAgent = navigator.userAgent.toLowerCase();
 
-    if (/mobile|android|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent)) {
+    if (
+      /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/i.test(
+        userAgent
+      )
+    ) {
       return 'mobile';
     }
 
@@ -158,20 +167,20 @@ export class PWAUtils {
     const userAgent = navigator.userAgent.toLowerCase();
 
     if (userAgent.includes('android')) {
-return 'android';
-}
+      return 'android';
+    }
     if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
-return 'ios';
-}
+      return 'ios';
+    }
     if (userAgent.includes('windows')) {
-return 'windows';
-}
+      return 'windows';
+    }
     if (userAgent.includes('mac')) {
-return 'macos';
-}
+      return 'macos';
+    }
     if (userAgent.includes('linux')) {
-return 'linux';
-}
+      return 'linux';
+    }
 
     return 'unknown';
   }
@@ -223,7 +232,7 @@ return 'linux';
       if ('caches' in window) {
         const cacheNames = await caches.keys();
         await Promise.all(
-          cacheNames.map(cacheName => caches.delete(cacheName)),
+          cacheNames.map(cacheName => caches.delete(cacheName))
         );
         return true;
       }
@@ -244,9 +253,10 @@ return 'linux';
     rtt: number;
     saveData: boolean;
   } {
-    const connection = (navigator as any).connection ||
-                      (navigator as any).mozConnection ||
-                      (navigator as any).webkitConnection;
+    const connection =
+      (navigator as any).connection ||
+      (navigator as any).mozConnection ||
+      (navigator as any).webkitConnection;
 
     if (connection) {
       return {
@@ -291,7 +301,7 @@ return 'linux';
 }
 
 // Export types
-export type PWAEventType = typeof PWAEvents[keyof typeof PWAEvents];
+export type PWAEventType = (typeof PWAEvents)[keyof typeof PWAEvents];
 
 export interface PWAInstallPromptEvent extends Event {
   prompt(): Promise<void>;

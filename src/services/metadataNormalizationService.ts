@@ -1,11 +1,15 @@
 // @ts-nocheck
 import { logger } from '../utils/logger';
 import { youtubeService } from './api/youtubeService';
-import type { Video as LocalVideo, Channel as LocalChannel } from '../types/core';
-import type { YouTubeVideo, YouTubeChannel, YouTubeThumbnails } from '../types/youtube';
-
-
-
+import type {
+  Video as LocalVideo,
+  Channel as LocalChannel,
+} from '../types/core';
+import type {
+  YouTubeVideo,
+  YouTubeChannel,
+  YouTubeThumbnails,
+} from '../types/youtube';
 
 /**
  * Unified Video Metadata Interface
@@ -101,13 +105,14 @@ export interface UnifiedChannelMetadata {
  * Service for normalizing metadata from different sources
  */
 class MetadataNormalizationService {
-
   /**
    * Normalize local video data to unified format
    */
   normalizeLocalVideo(localVideo: LocalVideo): UnifiedVideoMetadata {
     const viewCount = this.parseViewCount(localVideo.views || '0');
-    const subscriberCount = this.parseSubscriberCount(localVideo.channel?.subscribers || 0);
+    const subscriberCount = this.parseSubscriberCount(
+      localVideo.channel?.subscribers || 0
+    );
 
     return {
       id: localVideo.id,
@@ -123,14 +128,18 @@ class MetadataNormalizationService {
       channel: {
         id: localVideo.channelId,
         name: localVideo.channelName,
-        avatarUrl: localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
+        avatarUrl:
+          localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
         subscribers: subscriberCount,
         subscribersFormatted: this.formatSubscribers(subscriberCount),
         isVerified: localVideo.channel?.isVerified || false,
       },
       duration: this.normalizeDuration(localVideo.duration),
-      publishedAt: localVideo.publishedAt || localVideo.uploadedAt || localVideo.createdAt,
-      publishedAtFormatted: this.formatTimeAgo(localVideo.uploadedAt || localVideo.createdAt),
+      publishedAt:
+        localVideo.publishedAt || localVideo.uploadedAt || localVideo.createdAt,
+      publishedAtFormatted: this.formatTimeAgo(
+        localVideo.uploadedAt || localVideo.createdAt
+      ),
       category: localVideo.category || 'Entertainment',
       tags: localVideo.tags || [],
       isLive: localVideo.isLive || false,
@@ -139,17 +148,28 @@ class MetadataNormalizationService {
       source: 'local',
       metadata: {
         ...(localVideo.definition && { quality: localVideo.definition }),
-        ...(localVideo.contentDetails?.definition && { definition: localVideo.contentDetails.definition }),
-        captions: Boolean(localVideo.captions?.length || localVideo.subtitles?.length),
-        ...(localVideo.contentDetails?.caption && { language: localVideo.contentDetails.caption }),
+        ...(localVideo.contentDetails?.definition && {
+          definition: localVideo.contentDetails.definition,
+        }),
+        captions: Boolean(
+          localVideo.captions?.length || localVideo.subtitles?.length
+        ),
+        ...(localVideo.contentDetails?.caption && {
+          language: localVideo.contentDetails.caption,
+        }),
         ...(localVideo.license && { license: localVideo.license }),
       },
       // Required properties for Video interface compatibility
-      uploadedAt: localVideo.uploadedAt || localVideo.publishedAt || localVideo.createdAt,
+      uploadedAt:
+        localVideo.uploadedAt || localVideo.publishedAt || localVideo.createdAt,
       channelName: localVideo.channelName,
       channelId: localVideo.channelId,
-      channelAvatarUrl: localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
-      createdAt: localVideo.createdAt || localVideo.publishedAt || new Date().toISOString(),
+      channelAvatarUrl:
+        localVideo.channelAvatarUrl || localVideo.channel?.avatarUrl || '',
+      createdAt:
+        localVideo.createdAt ||
+        localVideo.publishedAt ||
+        new Date().toISOString(),
       updatedAt: localVideo.updatedAt || new Date().toISOString(),
     };
   }
@@ -157,28 +177,46 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube video data to unified format
    */
-  async normalizeYouTubeVideo(youtubeVideo: YouTubeVideo, channelData?: YouTubeChannel): Promise<UnifiedVideoMetadata> {
-    logger.debug('normalizeYouTubeVideo - Full input data structure:', youtubeVideo);
+  async normalizeYouTubeVideo(
+    youtubeVideo: YouTubeVideo,
+    channelData?: YouTubeChannel
+  ): Promise<UnifiedVideoMetadata> {
+    logger.debug(
+      'normalizeYouTubeVideo - Full input data structure:',
+      youtubeVideo
+    );
     logger.debug('normalizeYouTubeVideo - Input data:', {
       videoId: youtubeVideo.id,
       channelTitle: youtubeVideo.snippet?.channelTitle,
       channelId: youtubeVideo.snippet?.channelId,
       title: youtubeVideo.snippet?.title,
       hasSnippet: !!youtubeVideo.snippet,
-      snippetKeys: youtubeVideo.snippet ? Object.keys(youtubeVideo.snippet) : 'no snippet',
+      snippetKeys: youtubeVideo.snippet
+        ? Object.keys(youtubeVideo.snippet)
+        : 'no snippet',
     });
 
     const viewCount = parseInt(youtubeVideo.statistics?.viewCount || '0', 10);
     const likeCount = parseInt(youtubeVideo.statistics?.likeCount || '0', 10);
-    const dislikeCount = parseInt(youtubeVideo.statistics?.dislikeCount || '0', 10);
-    const commentCount = parseInt(youtubeVideo.statistics?.commentCount || '0', 10);
+    const dislikeCount = parseInt(
+      youtubeVideo.statistics?.dislikeCount || '0',
+      10
+    );
+    const commentCount = parseInt(
+      youtubeVideo.statistics?.commentCount || '0',
+      10
+    );
 
     // Fetch channel data if not provided
     let channel = channelData;
     if (!channel && youtubeVideo.snippet?.channelId) {
       try {
-        logger.debug(`Fetching channel data for channelId: ${youtubeVideo.snippet.channelId}`);
-        const fetchedChannel = await youtubeService.fetchChannel(youtubeVideo.snippet.channelId);
+        logger.debug(
+          `Fetching channel data for channelId: ${youtubeVideo.snippet.channelId}`
+        );
+        const fetchedChannel = await youtubeService.fetchChannel(
+          youtubeVideo.snippet.channelId
+        );
         channel = (fetchedChannel as unknown as YouTubeChannel) || undefined;
         logger.debug('Fetched channel data:', channel);
       } catch (error) {
@@ -186,7 +224,10 @@ class MetadataNormalizationService {
       }
     }
 
-    const subscriberCount = parseInt(channel?.statistics?.subscriberCount || '0', 10);
+    const subscriberCount = parseInt(
+      channel?.statistics?.subscriberCount || '0',
+      10
+    );
 
     const normalizedVideo: UnifiedVideoMetadata = {
       id: youtubeVideo.id,
@@ -207,9 +248,13 @@ class MetadataNormalizationService {
         subscribersFormatted: this.formatSubscribers(subscriberCount),
         isVerified: false, // YouTube API doesn't provide verification status directly
       },
-      duration: this.parseDuration(youtubeVideo.contentDetails?.duration || 'PT0S'),
+      duration: this.parseDuration(
+        youtubeVideo.contentDetails?.duration || 'PT0S'
+      ),
       publishedAt: youtubeVideo.snippet?.publishedAt || '',
-      publishedAtFormatted: this.formatTimeAgo(youtubeVideo.snippet?.publishedAt || ''),
+      publishedAtFormatted: this.formatTimeAgo(
+        youtubeVideo.snippet?.publishedAt || ''
+      ),
       category: youtubeVideo.snippet?.categoryId || 'Entertainment',
       tags: youtubeVideo.snippet?.tags || [],
       isLive: youtubeVideo.snippet?.liveBroadcastContent === 'live',
@@ -217,12 +262,23 @@ class MetadataNormalizationService {
       visibility: this.mapYouTubeVisibility(youtubeVideo.status?.privacyStatus),
       source: 'youtube',
       metadata: {
-        ...(youtubeVideo.contentDetails?.definition && { quality: youtubeVideo.contentDetails.definition }),
-        ...(youtubeVideo.contentDetails?.definition && { definition: youtubeVideo.contentDetails.definition }),
+        ...(youtubeVideo.contentDetails?.definition && {
+          quality: youtubeVideo.contentDetails.definition,
+        }),
+        ...(youtubeVideo.contentDetails?.definition && {
+          definition: youtubeVideo.contentDetails.definition,
+        }),
         captions: youtubeVideo.contentDetails?.caption === 'true',
-        ...(youtubeVideo.snippet?.defaultLanguage && { language: youtubeVideo.snippet.defaultLanguage }),
-        ...(!youtubeVideo.snippet?.defaultLanguage && youtubeVideo.snippet?.defaultAudioLanguage && { language: youtubeVideo.snippet.defaultAudioLanguage }),
-        ...(youtubeVideo.status?.license && { license: youtubeVideo.status.license }),
+        ...(youtubeVideo.snippet?.defaultLanguage && {
+          language: youtubeVideo.snippet.defaultLanguage,
+        }),
+        ...(!youtubeVideo.snippet?.defaultLanguage &&
+          youtubeVideo.snippet?.defaultAudioLanguage && {
+            language: youtubeVideo.snippet.defaultAudioLanguage,
+          }),
+        ...(youtubeVideo.status?.license && {
+          license: youtubeVideo.status.license,
+        }),
       },
       // Required properties for Video interface compatibility
       uploadedAt: youtubeVideo.snippet?.publishedAt || '',
@@ -255,7 +311,9 @@ class MetadataNormalizationService {
       avatarUrl: localChannel.avatarUrl,
       ...(localChannel.banner && { bannerUrl: localChannel.banner }),
       subscribers: localChannel.subscribers || 0,
-      subscribersFormatted: localChannel.subscriberCount || this.formatSubscribers(localChannel.subscribers || 0),
+      subscribersFormatted:
+        localChannel.subscriberCount ||
+        this.formatSubscribers(localChannel.subscribers || 0),
       videoCount: localChannel.videoCount || 0,
       totalViews: localChannel.totalViews || 0,
       isVerified: localChannel.isVerified || false,
@@ -268,10 +326,21 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube channel data to unified format
    */
-  normalizeYouTubeChannel(youtubeChannel: YouTubeChannel): UnifiedChannelMetadata {
-    const subscriberCount = parseInt(youtubeChannel.statistics?.subscriberCount || '0', 10);
-    const videoCount = parseInt(youtubeChannel.statistics?.videoCount || '0', 10);
-    const totalViews = parseInt(youtubeChannel.statistics?.viewCount || '0', 10);
+  normalizeYouTubeChannel(
+    youtubeChannel: YouTubeChannel
+  ): UnifiedChannelMetadata {
+    const subscriberCount = parseInt(
+      youtubeChannel.statistics?.subscriberCount || '0',
+      10
+    );
+    const videoCount = parseInt(
+      youtubeChannel.statistics?.videoCount || '0',
+      10
+    );
+    const totalViews = parseInt(
+      youtubeChannel.statistics?.viewCount || '0',
+      10
+    );
 
     const result: UnifiedChannelMetadata = {
       id: youtubeChannel.id,
@@ -290,11 +359,16 @@ class MetadataNormalizationService {
     if (youtubeChannel.snippet?.customUrl) {
       result.handle = youtubeChannel.snippet.customUrl;
     }
-    if (youtubeChannel.brandingSettings && 'image' in youtubeChannel.brandingSettings &&
-        youtubeChannel.brandingSettings.image &&
-        typeof youtubeChannel.brandingSettings.image === 'object' &&
-        'bannerExternalUrl' in youtubeChannel.brandingSettings.image) {
-      result.bannerUrl = (youtubeChannel.brandingSettings.image as any).bannerExternalUrl;
+    if (
+      youtubeChannel.brandingSettings &&
+      'image' in youtubeChannel.brandingSettings &&
+      youtubeChannel.brandingSettings.image &&
+      typeof youtubeChannel.brandingSettings.image === 'object' &&
+      'bannerExternalUrl' in youtubeChannel.brandingSettings.image
+    ) {
+      result.bannerUrl = (
+        youtubeChannel.brandingSettings.image as any
+      ).bannerExternalUrl;
     }
     if (youtubeChannel.snippet?.publishedAt) {
       result.joinedDate = youtubeChannel.snippet.publishedAt;
@@ -309,7 +383,12 @@ class MetadataNormalizationService {
   /**
    * Batch normalize multiple videos from mixed sources
    */
-  async normalizeVideosBatch(videos: Array<{ data: LocalVideo | YouTubeVideo; source: 'local' | 'youtube' }>): Promise<UnifiedVideoMetadata[]> {
+  async normalizeVideosBatch(
+    videos: Array<{
+      data: LocalVideo | YouTubeVideo;
+      source: 'local' | 'youtube';
+    }>
+  ): Promise<UnifiedVideoMetadata[]> {
     const normalized: UnifiedVideoMetadata = [];
 
     for (const { data, source } of videos) {
@@ -317,7 +396,9 @@ class MetadataNormalizationService {
         if (source === 'local') {
           normalized.push(this.normalizeLocalVideo(data as LocalVideo));
         } else if (source === 'youtube') {
-          normalized.push(await this.normalizeYouTubeVideo(data as YouTubeVideo));
+          normalized.push(
+            await this.normalizeYouTubeVideo(data as YouTubeVideo)
+          );
         }
       } catch (error) {
         logger.error(`Failed to normalize ${source} video:`, error);
@@ -332,8 +413,8 @@ class MetadataNormalizationService {
 
   private parseViewCount(views: string | number): number {
     if (typeof views === 'number') {
-return views;
-}
+      return views;
+    }
     if (typeof views === 'string') {
       // Remove commas and non-numeric characters except K, M, B
       const cleanViews = views.replace(/[^\d.KMB]/gi, '');
@@ -341,14 +422,14 @@ return views;
       const num = parseFloat(cleanViews);
 
       if (multiplier.includes('B')) {
-return Math.floor(num * 1000000000);
-}
+        return Math.floor(num * 1000000000);
+      }
       if (multiplier.includes('M')) {
-return Math.floor(num * 1000000);
-}
+        return Math.floor(num * 1000000);
+      }
       if (multiplier.includes('K')) {
-return Math.floor(num * 1000);
-}
+        return Math.floor(num * 1000);
+      }
 
       return parseInt(cleanViews, 10) || 0;
     }
@@ -357,41 +438,41 @@ return Math.floor(num * 1000);
 
   private parseSubscriberCount(subscribers: string | number): number {
     if (typeof subscribers === 'number') {
-return subscribers;
-}
+      return subscribers;
+    }
     return this.parseViewCount(subscribers);
   }
 
   private formatViews(count): string {
     if (count >= 1000000000) {
-return `${(count / 1000000000).toFixed(1)}B views`;
-}
+      return `${(count / 1000000000).toFixed(1)}B views`;
+    }
     if (count >= 1000000) {
-return `${(count / 1000000).toFixed(1)}M views`;
-}
+      return `${(count / 1000000).toFixed(1)}M views`;
+    }
     if (count >= 1000) {
-return `${(count / 1000).toFixed(1)}K views`;
-}
+      return `${(count / 1000).toFixed(1)}K views`;
+    }
     return `${count} views`;
   }
 
   private formatSubscribers(count): string {
     if (count >= 1000000000) {
-return `${(count / 1000000000).toFixed(1)}B subscribers`;
-}
+      return `${(count / 1000000000).toFixed(1)}B subscribers`;
+    }
     if (count >= 1000000) {
-return `${(count / 1000000).toFixed(1)}M subscribers`;
-}
+      return `${(count / 1000000).toFixed(1)}M subscribers`;
+    }
     if (count >= 1000) {
-return `${(count / 1000).toFixed(1)}K subscribers`;
-}
+      return `${(count / 1000).toFixed(1)}K subscribers`;
+    }
     return `${count} subscribers`;
   }
 
   private formatTimeAgo(dateString): string {
     if (!dateString) {
-return '';
-}
+      return '';
+    }
 
     const date = new Date(dateString);
     const now = new Date();
@@ -406,23 +487,23 @@ return '';
     const years = Math.floor(days / 365);
 
     if (years > 0) {
-return `${years} year${years > 1 ? 's' : ''} ago`;
-}
+      return `${years} year${years > 1 ? 's' : ''} ago`;
+    }
     if (months > 0) {
-return `${months} month${months > 1 ? 's' : ''} ago`;
-}
+      return `${months} month${months > 1 ? 's' : ''} ago`;
+    }
     if (weeks > 0) {
-return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-}
+      return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+    }
     if (days > 0) {
-return `${days} day${days > 1 ? 's' : ''} ago`;
-}
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    }
     if (hours > 0) {
-return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-}
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    }
     if (minutes > 0) {
-return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-}
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    }
     return 'Just now';
   }
 
@@ -444,8 +525,8 @@ return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
     // Parse ISO 8601 duration format (PT#H#M#S)
     const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
-return '0:00';
-}
+      return '0:00';
+    }
 
     const hours = parseInt(match[1] || '0', 10);
     const minutes = parseInt(match[2] || '0', 10);
@@ -459,13 +540,13 @@ return '0:00';
 
   private isShortVideo(duration?: string): boolean {
     if (!duration) {
-return false;
-}
+      return false;
+    }
 
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
-return false;
-}
+      return false;
+    }
 
     const hours = parseInt(match[1] || '0', 10);
     const minutes = parseInt(match[2] || '0', 10);
@@ -475,13 +556,21 @@ return false;
     return totalSeconds <= 60; // YouTube Shorts are 60 seconds or less
   }
 
-  private selectBestThumbnail(thumbnails: YouTubeThumbnails | undefined): string {
+  private selectBestThumbnail(
+    thumbnails: YouTubeThumbnails | undefined
+  ): string {
     if (!thumbnails) {
-return '';
-}
+      return '';
+    }
 
     // Prefer higher quality thumbnails
-    const priorities: Array<keyof YouTubeThumbnails> = ['maxres', 'standard', 'high', 'medium', 'default'];
+    const priorities: Array<keyof YouTubeThumbnails> = [
+      'maxres',
+      'standard',
+      'high',
+      'medium',
+      'default',
+    ];
 
     for (const quality of priorities) {
       if (thumbnails[quality]?.url) {
@@ -492,7 +581,9 @@ return '';
     return '';
   }
 
-  private mapYouTubeVisibility(privacyStatus?: string): 'public' | 'unlisted' | 'private' {
+  private mapYouTubeVisibility(
+    privacyStatus?: string
+  ): 'public' | 'unlisted' | 'private' {
     switch (privacyStatus) {
       case 'public':
         return 'public';

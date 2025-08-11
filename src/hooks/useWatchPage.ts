@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -36,11 +35,14 @@ const YOUTUBE_URL_PATTERNS = [
 // Type guard to detect YouTube videos
 const isYouTubeVideo = (video: Video | null): boolean => {
   if (!video) {
-return false;
-}
+    return false;
+  }
 
   // Check video URL
-  if (video.videoUrl && YOUTUBE_URL_PATTERNS.some(pattern => pattern.test(video.videoUrl))) {
+  if (
+    video.videoUrl &&
+    YOUTUBE_URL_PATTERNS.some(pattern => pattern.test(video.videoUrl))
+  ) {
     return true;
   }
 
@@ -83,14 +85,25 @@ export const useWatchPage = () => {
   // UI state
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
-  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>('top');
+  const [commentSortOrder, setCommentSortOrder] = useState<'top' | 'newest'>(
+    'top'
+  );
 
   // Comment interaction state
-  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(null);
+  const [replyingToCommentId, setReplyingToCommentId] = useState<string | null>(
+    null
+  );
   const [currentReplyText, setCurrentReplyText] = useState('');
-  const [editingComment, setEditingComment] = useState<{ id: string; parentId?: string } | null>(null);
-  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(null);
-  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
+  const [editingComment, setEditingComment] = useState<{
+    id: string;
+    parentId?: string;
+  } | null>(null);
+  const [activeCommentMenu, setActiveCommentMenu] = useState<string | null>(
+    null
+  );
+  const [expandedReplies, setExpandedReplies] = useState<
+    Record<string, boolean>
+  >({});
 
   // Modal and loading state
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
@@ -107,13 +120,12 @@ export const useWatchPage = () => {
   useEffect(() => {
     const loadVideoData = async () => {
       if (!videoId) {
-return;
-}
+        return;
+      }
 
       setLoading(true);
 
       try {
-
         // Try unified data service first (handles both local and YouTube)
         let foundVideo = null;
 
@@ -128,7 +140,9 @@ return;
               views: unifiedVideo.views.toString(),
               uploadedAt: unifiedVideo.publishedAt,
               thumbnailUrl: unifiedVideo.thumbnailUrl,
-              videoUrl: unifiedVideo.videoUrl || `https://www.youtube.com/watch?v=${unifiedVideo.id.replace('youtube-', '')}`,
+              videoUrl:
+                unifiedVideo.videoUrl ||
+                `https://www.youtube.com/watch?v=${unifiedVideo.id.replace('youtube-', '')}`,
               channelId: unifiedVideo.channel.id,
               channelName: unifiedVideo.channel.name,
               channelAvatarUrl: unifiedVideo.channel.avatarUrl,
@@ -143,18 +157,24 @@ return;
               createdAt: unifiedVideo.publishedAt,
               updatedAt: unifiedVideo.publishedAt,
             };
-
           }
         } catch (error) {
-          console.warn('Failed to load from unified service, trying real video service:', error);
+          console.warn(
+            'Failed to load from unified service, trying real video service:',
+            error
+          );
         }
 
         // Fallback to real video service if unified service didn't find the video
         if (!foundVideo) {
-          const cleanVideoId = videoId.replace(/^(youtube-|google-search-)/, '');
+          const cleanVideoId = videoId.replace(
+            /^(youtube-|google-search-)/,
+            ''
+          );
 
           // Check if this looks like a YouTube video ID (11 characters, alphanumeric)
-          const isYouTubeVideoId = cleanVideoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(cleanVideoId);
+          const isYouTubeVideoId =
+            cleanVideoId.length === 11 && /^[a-zA-Z0-9_-]+$/.test(cleanVideoId);
 
           if (isYouTubeVideoId) {
             // Create a YouTube video object
@@ -180,11 +200,9 @@ return;
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),
             };
-
           } else {
             // Try real video service for non-YouTube videos
             foundVideo = await getVideoById(cleanVideoId);
-
           }
         }
 
@@ -198,7 +216,8 @@ return;
         const videoWithChannelInfo = {
           ...foundVideo,
           channelName: foundVideo.channelName || 'Unknown Channel',
-          channelAvatarUrl: foundVideo.channelAvatarUrl || '/default-avatar.png',
+          channelAvatarUrl:
+            foundVideo.channelAvatarUrl || '/default-avatar.png',
         };
 
         setVideo(videoWithChannelInfo);
@@ -208,23 +227,46 @@ return;
 
         // Load comments
         const videoComments = await getCommentsByVideoId(videoId);
-        const topLevelComments = videoComments.filter((c) => !('parentId' in c) || !c.parentId);
+        const topLevelComments = videoComments.filter(
+          c => !('parentId' in c) || !c.parentId
+        );
         // Ensure comments have all required properties
-        const commentsWithDefaults = topLevelComments.map((comment) => ({
+        const commentsWithDefaults = topLevelComments.map(comment => ({
           ...comment,
-          isLikedByCurrentUser: 'isLikedByCurrentUser' in comment ? comment.isLikedByCurrentUser : false,
-          isDislikedByCurrentUser: 'isDislikedByCurrentUser' in comment ? comment.isDislikedByCurrentUser : false,
+          isLikedByCurrentUser:
+            'isLikedByCurrentUser' in comment
+              ? comment.isLikedByCurrentUser
+              : false,
+          isDislikedByCurrentUser:
+            'isDislikedByCurrentUser' in comment
+              ? comment.isDislikedByCurrentUser
+              : false,
           isEdited: 'isEdited' in comment ? comment.isEdited : false,
           replies: 'replies' in comment ? comment.replies : [],
           replyCount: 'replyCount' in comment ? comment.replyCount : 0,
-          content: 'content' in comment ? comment.content : ('commentText' in comment ? comment.commentText : ''),
+          content:
+            'content' in comment
+              ? comment.content
+              : 'commentText' in comment
+                ? comment.commentText
+                : '',
           dislikes: 'dislikes' in comment ? comment.dislikes : 0,
           isPinned: 'isPinned' in comment ? comment.isPinned : false,
           isHearted: 'isHearted' in comment ? comment.isHearted : false,
           videoId: 'videoId' in comment ? comment.videoId : videoId,
           authorId: 'authorId' in comment ? comment.authorId : '',
-          authorName: 'authorName' in comment ? comment.authorName : ('userName' in comment ? comment.userName : ''),
-          authorAvatar: 'authorAvatar' in comment ? comment.authorAvatar : ('userAvatarUrl' in comment ? comment.userAvatarUrl : ''),
+          authorName:
+            'authorName' in comment
+              ? comment.authorName
+              : 'userName' in comment
+                ? comment.userName
+                : '',
+          authorAvatar:
+            'authorAvatar' in comment
+              ? comment.authorAvatar
+              : 'userAvatarUrl' in comment
+                ? comment.userAvatarUrl
+                : '',
         }));
         setComments(commentsWithDefaults);
         setCommentCount(videoComments.length);
@@ -232,10 +274,9 @@ return;
         // Load related videos
         const allVideos = await getVideos();
         const related = allVideos
-          .filter((v) => v.id !== videoId && v.category === foundVideo.category)
+          .filter(v => v.id !== videoId && v.category === foundVideo.category)
           .slice(0, 20);
         setAllRelatedVideos(related);
-
       } catch (error) {
         console.error('Error loading video data:', error);
       } finally {
@@ -250,15 +291,15 @@ return;
   const handleLike = () => {
     setLiked(!liked);
     if (disliked) {
-setDisliked(false);
-}
+      setDisliked(false);
+    }
   };
 
   const handleDislike = () => {
     setDisliked(!disliked);
     if (liked) {
-setLiked(false);
-}
+      setLiked(false);
+    }
   };
 
   const handleSubscribe = () => {
@@ -372,8 +413,8 @@ setLiked(false);
 
   const handleSummarizeDescription = async () => {
     if (!video?.description) {
-return;
-}
+      return;
+    }
 
     setIsSummarizing(true);
     setSummaryError('');
@@ -396,8 +437,8 @@ return;
   // Comment handlers
   const handleMainCommentSubmitCallback = (commentText: any) => {
     if (!commentText.trim()) {
-return;
-}
+      return;
+    }
 
     const newComment: Comment = {
       id: `comment-${Date.now()}`,
@@ -419,12 +460,12 @@ return;
 
   const handleReplySubmit = (parentId: any) => {
     if (!currentReplyText.trim()) {
-return;
-}
+      return;
+    }
     const parentComment = comments.find(c => c.id === parentId);
     if (!parentComment) {
-return;
-}
+      return;
+    }
 
     const newReply: Comment = {
       id: `reply-${Date.now()}`,
@@ -440,24 +481,26 @@ return;
       replyTo: parentComment.userName,
     };
 
-    setComments(prevComments => prevComments.map(c => {
-      if (c.id === parentId) {
-        return {
-          ...c,
-          replies: [newReply, ...(c.replies || [])],
-          replyCount: (c.replyCount || 0) + 1,
-        };
-      }
-      return c;
-    }));
+    setComments(prevComments =>
+      prevComments.map(c => {
+        if (c.id === parentId) {
+          return {
+            ...c,
+            replies: [newReply, ...(c.replies || [])],
+            replyCount: (c.replyCount || 0) + 1,
+          };
+        }
+        return c;
+      })
+    );
     setCurrentReplyText('');
     setReplyingToCommentId(null);
   };
 
   const handleEditSave = (commentId: any, newText: any, parentId?: string) => {
     if (!newText.trim()) {
-return;
-}
+      return;
+    }
 
     const updateCommentState = (prevComments: Comment): Comment[] =>
       prevComments.map((comment: any) => {
@@ -480,11 +523,19 @@ return;
   };
 
   const handleDeleteComment = (commentId: any, parentId?: string) => {
-    if (!window.confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
-return;
-}
+    if (
+      !window.confirm(
+        'Are you sure you want to delete this comment? This action cannot be undone.'
+      )
+    ) {
+      return;
+    }
 
-    const deleteCommentFromList = (list: Comment, idToDelete: any, parentOfDeleted?: string): Comment[] => {
+    const deleteCommentFromList = (
+      list: Comment,
+      idToDelete: any,
+      parentOfDeleted?: string
+    ): Comment[] => {
       return list.reduce((acc: any, comment: any) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
           if (!parentOfDeleted) {
@@ -494,9 +545,18 @@ return;
         }
         if (comment.replies) {
           const originalReplyCount = comment.replies.length;
-          const updatedReplies = deleteCommentFromList(comment.replies, idToDelete, comment.id);
-          if (updatedReplies.length < originalReplyCount && comment.id === parentOfDeleted) {
-            comment.replyCount = (comment.replyCount || 0) - (originalReplyCount - updatedReplies.length);
+          const updatedReplies = deleteCommentFromList(
+            comment.replies,
+            idToDelete,
+            comment.id
+          );
+          if (
+            updatedReplies.length < originalReplyCount &&
+            comment.id === parentOfDeleted
+          ) {
+            comment.replyCount =
+              (comment.replyCount || 0) -
+              (originalReplyCount - updatedReplies.length);
           }
           comment.replies = updatedReplies;
         }
@@ -505,11 +565,17 @@ return;
       }, [] as Comment);
     };
 
-    setComments(prevComments => deleteCommentFromList(prevComments, commentId, parentId));
+    setComments(prevComments =>
+      deleteCommentFromList(prevComments, commentId, parentId)
+    );
     setActiveCommentMenu(null);
   };
 
-  const toggleLikeDislikeForCommentOrReply = (id: string, parentId: string | undefined, action: 'like' | 'dislike') => {
+  const toggleLikeDislikeForCommentOrReply = (
+    id: string,
+    parentId: string | undefined,
+    action: 'like' | 'dislike'
+  ) => {
     const updateList = (list: Comment): Comment[] => {
       return list.map((item: any) => {
         if (item.id === id && item.parentId === parentId) {
@@ -561,10 +627,15 @@ return;
   // Utility functions
   const addToWatchHistory = useCallback(() => {
     // Add to watch history logic
-    }, []);
+  }, []);
 
-  const canSummarize = video?.description && video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
-  const displayedRelatedVideos = allRelatedVideos.slice(0, RELATED_VIDEOS_INITIAL_COUNT);
+  const canSummarize =
+    video?.description &&
+    video.description.length > MIN_DESC_LENGTH_FOR_SUMMARY;
+  const displayedRelatedVideos = allRelatedVideos.slice(
+    0,
+    RELATED_VIDEOS_INITIAL_COUNT
+  );
 
   // YouTube video detection flag
   const isYouTubeVideoFlag = isYouTubeVideo(video);
@@ -651,4 +722,8 @@ return;
 };
 
 export default useWatchPage;
-import { getVideoById, getCommentsByVideoId, getVideos } from '../../services/realVideoService';
+import {
+  getVideoById,
+  getCommentsByVideoId,
+  getVideos,
+} from '../../services/realVideoService';

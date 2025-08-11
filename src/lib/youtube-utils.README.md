@@ -1,6 +1,8 @@
 # YouTube Utilities
 
-A collection of TypeScript utilities for working with YouTube videos in a React application. This package provides type-safe functions and components for handling YouTube video embeds, extracting video IDs, and managing YouTube player state.
+A collection of TypeScript utilities for working with YouTube videos in a React application. This
+package provides type-safe functions and components for handling YouTube video embeds, extracting
+video IDs, and managing YouTube player state.
 
 ## Features
 
@@ -30,33 +32,29 @@ import { YouTubePlayer } from './youtube-utils';
 // In your component
 const MyVideoPlayer = () => {
   const playerRef = useRef<YouTubePlayer | null>(null);
-  
+
   useEffect(() => {
     // Initialize player when component mounts
-    const player = new YouTubePlayer(
-      'youtube-player',
-      'dQw4w9WgXcQ',
-      {
-        width: 800,
-        height: 450,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          modestbranding: 1,
+    const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
+      width: 800,
+      height: 450,
+      playerVars: {
+        autoplay: 0,
+        controls: 1,
+        modestbranding: 1,
+      },
+      events: {
+        onReady: event => {
+          console.log('Player is ready', event);
         },
-        events: {
-          onReady: (event) => {
-            console.log('Player is ready', event);
-          },
-          onStateChange: (event) => {
-            console.log('Player state changed:', event.data);
-          },
+        onStateChange: event => {
+          console.log('Player state changed:', event.data);
         },
-      }
-    );
-    
+      },
+    });
+
     playerRef.current = player;
-    
+
     // Cleanup on unmount
     return () => {
       if (playerRef.current) {
@@ -64,8 +62,8 @@ const MyVideoPlayer = () => {
       }
     };
   }, []);
-  
-  return <div id="youtube-player" />;
+
+  return <div id='youtube-player' />;
 };
 ```
 
@@ -231,7 +229,7 @@ import { YouTubePlayer } from './youtube-utils';
 // In your component
 const MyVideoPlayer = () => {
   const playerRef = useRef<YouTubePlayer | null>(null);
-  
+
   useEffect(() => {
     // Initialize player when component mounts
     const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
@@ -243,17 +241,17 @@ const MyVideoPlayer = () => {
         modestbranding: 1,
       },
       events: {
-        onReady: (event) => {
+        onReady: event => {
           console.log('Player is ready', event);
         },
-        onStateChange: (event) => {
+        onStateChange: event => {
           console.log('Player state changed:', event.data);
         },
       },
     });
-    
+
     playerRef.current = player;
-    
+
     // Cleanup on unmount
     return () => {
       if (playerRef.current) {
@@ -261,8 +259,8 @@ const MyVideoPlayer = () => {
       }
     };
   }, []);
-  
-  return <div id="youtube-player" />;
+
+  return <div id='youtube-player' />;
 };
 ```
 

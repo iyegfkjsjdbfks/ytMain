@@ -1,4 +1,3 @@
-
 /**
  * YouTube API Type Definitions
  * Comprehensive interfaces for YouTube Data API v3 responses
@@ -77,8 +76,24 @@ export interface YouTubeVideoContentDetails {
 
 export interface YouTubeVideoStatus {
   uploadStatus: 'uploaded' | 'processed' | 'failed' | 'rejected' | 'deleted';
-  failureReason?: 'conversion' | 'invalidFile' | 'emptyFile' | 'tooSmall' | 'codec' | 'uploadAborted';
-  rejectionReason?: 'copyright' | 'inappropriate' | 'duplicate' | 'termsOfUse' | 'uploaderAccountSuspended' | 'length' | 'claim' | 'uploaderAccountClosed' | 'trademark' | 'legal';
+  failureReason?:
+    | 'conversion'
+    | 'invalidFile'
+    | 'emptyFile'
+    | 'tooSmall'
+    | 'codec'
+    | 'uploadAborted';
+  rejectionReason?:
+    | 'copyright'
+    | 'inappropriate'
+    | 'duplicate'
+    | 'termsOfUse'
+    | 'uploaderAccountSuspended'
+    | 'length'
+    | 'claim'
+    | 'uploaderAccountClosed'
+    | 'trademark'
+    | 'legal';
   privacyStatus: 'public' | 'unlisted' | 'private';
   publishAt?: string;
   license: 'youtube' | 'creativeCommon';
@@ -96,10 +111,13 @@ export interface YouTubeVideo {
   statistics?: YouTubeVideoStatistics;
   contentDetails?: YouTubeVideoContentDetails;
   status?: YouTubeVideoStatus;
-  localizations?: Record<string, {
-    title: string;
-    description: string;
-  }>;
+  localizations?: Record<
+    string,
+    {
+      title: string;
+      description: string;
+    }
+  >;
   player?: {
     embedHtml: string;
   };
@@ -123,7 +141,12 @@ export interface YouTubeVideo {
       aspectRatio: number;
       codec: string;
       bitrateBps: string;
-      rotation: 'none' | 'clockwise' | 'upsideDown' | 'counterClockwise' | 'other';
+      rotation:
+        | 'none'
+        | 'clockwise'
+        | 'upsideDown'
+        | 'counterClockwise'
+        | 'other';
       vendor: string;
     }>;
     audioStreams: Array<{
@@ -143,7 +166,11 @@ export interface YouTubeVideo {
       partsProcessed: string;
       timeLeftMs: string;
     };
-    processingFailureReason: 'uploadFailed' | 'transcodeFailed' | 'streamingFailed' | 'other';
+    processingFailureReason:
+      | 'uploadFailed'
+      | 'transcodeFailed'
+      | 'streamingFailed'
+      | 'other';
     fileDetailsAvailability: 'processing' | 'available' | 'unavailable';
     processingIssuesAvailability: 'processing' | 'available' | 'unavailable';
     tagSuggestionsAvailability: 'processing' | 'available' | 'unavailable';
@@ -243,10 +270,13 @@ export interface YouTubeChannel {
     contentOwner: string;
     timeLinked: string;
   };
-  localizations?: Record<string, {
-    title: string;
-    description: string;
-  }>;
+  localizations?: Record<
+    string,
+    {
+      title: string;
+      description: string;
+    }
+  >;
   topicDetails?: {
     topicIds: string;
     topicCategories: string;
@@ -307,10 +337,13 @@ export interface YouTubePlaylist {
   snippet?: YouTubePlaylistSnippet;
   status?: YouTubePlaylistStatus;
   contentDetails?: YouTubePlaylistContentDetails;
-  localizations?: Record<string, {
-    title: string;
-    description: string;
-  }>;
+  localizations?: Record<
+    string,
+    {
+      title: string;
+      description: string;
+    }
+  >;
   player?: {
     embedHtml: string;
   };
@@ -420,8 +453,10 @@ export type YouTubeVideosResponse = YouTubeApiResponse<YouTubeVideo>;
 export type YouTubeChannelsResponse = YouTubeApiResponse<YouTubeChannel>;
 export type YouTubeSearchResponse = YouTubeApiResponse<YouTubeSearchResult>;
 export type YouTubePlaylistsResponse = YouTubeApiResponse<YouTubePlaylist>;
-export type YouTubePlaylistItemsResponse = YouTubeApiResponse<YouTubePlaylistItem>;
-export type YouTubeCommentThreadsResponse = YouTubeApiResponse<YouTubeCommentThread>;
+export type YouTubePlaylistItemsResponse =
+  YouTubeApiResponse<YouTubePlaylistItem>;
+export type YouTubeCommentThreadsResponse =
+  YouTubeApiResponse<YouTubeCommentThread>;
 export type YouTubeCommentsResponse = YouTubeApiResponse<YouTubeComment>;
 
 // Error Interfaces
@@ -482,8 +517,14 @@ export interface YouTubePlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string;
   getPlaylistIndex(): number;
-  addEventListener(event: Event, listener: (event: YouTubePlayerEvent) => void): void;
-  removeEventListener(event: Event, listener: (event: YouTubePlayerEvent) => void): void;
+  addEventListener(
+    event: Event,
+    listener: (event: YouTubePlayerEvent) => void
+  ): void;
+  removeEventListener(
+    event: Event,
+    listener: (event: YouTubePlayerEvent) => void
+  ): void;
   getIframe(): HTMLIFrameElement;
   destroy(): void;
 }
@@ -495,7 +536,7 @@ export enum YouTubePlayerState {
   PLAYING = 1,
   PAUSED = 2,
   BUFFERING = 3,
-  CUED = 5
+  CUED = 5,
 }
 
 // Player Events
@@ -505,7 +546,7 @@ export enum YouTubePlayerEvents {
   PLAYBACK_QUALITY_CHANGE = 'onPlaybackQualityChange',
   PLAYBACK_RATE_CHANGE = 'onPlaybackRateChange',
   ERROR = 'onError',
-  API_CHANGE = 'onApiChange'
+  API_CHANGE = 'onApiChange',
 }
 
 // Player Error Codes
@@ -514,5 +555,5 @@ export enum YouTubePlayerError {
   HTML5_ERROR = 5,
   VIDEO_NOT_FOUND = 100,
   EMBED_NOT_ALLOWED = 101,
-  EMBED_NOT_ALLOWED_DISGUISE = 150
+  EMBED_NOT_ALLOWED_DISGUISE = 150,
 }

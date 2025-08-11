@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { FixedSizeList as List } from 'react-window';
 
 import { memo, useMemo, useCallback } from 'react';
@@ -23,7 +23,8 @@ interface CommentItemProps {
   data: {
     comments: Comment;
     onReply: (commentId: any, content: any) => void;
-    onLike: (commentId: any) => void; onDislike: (commentId: any) => void
+    onLike: (commentId: any) => void;
+    onDislike: (commentId: any) => void;
   };
 }
 
@@ -55,42 +56,49 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
   }
 
   return (
-    <div style={style} className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-      <div className="flex space-x-3">
+    <div
+      style={style}
+      className='px-4 py-3 border-b border-gray-200 dark:border-gray-700'
+    >
+      <div className='flex space-x-3'>
         <img
-          src={comment.authorAvatar || comment.authorAvatarUrl || 'https://via.placeholder.com/32'}
+          src={
+            comment.authorAvatar ||
+            comment.authorAvatarUrl ||
+            'https://via.placeholder.com/32'
+          }
           alt={comment.authorName}
-          className="w-8 h-8 rounded-full flex-shrink-0"
+          className='w-8 h-8 rounded-full flex-shrink-0'
         />
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-2">
-            <span className="font-medium text-sm text-gray-900 dark:text-white">
+        <div className='flex-1 min-w-0'>
+          <div className='flex items-center space-x-2'>
+            <span className='font-medium text-sm text-gray-900 dark:text-white'>
               {comment.authorName}
             </span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
+            <span className='text-xs text-gray-500 dark:text-gray-400'>
               {comment.publishedAt}
             </span>
           </div>
-          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+          <p className='text-sm text-gray-700 dark:text-gray-300 mt-1'>
             {comment.content}
           </p>
-          <div className="flex items-center space-x-4 mt-2">
+          <div className='flex items-center space-x-4 mt-2'>
             <button
               onClick={handleLike}
-              className="flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               <span>👍</span>
               <span>{comment.likeCount || 0}</span>
             </button>
             <button
               onClick={handleDislike}
-              className="flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className='flex items-center space-x-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               <span>👎</span>
             </button>
             <button
               onClick={handleReply}
-              className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className='text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
             >
               Reply
             </button>
@@ -103,47 +111,52 @@ const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
 
 CommentItem.displayName = 'CommentItem';
 
-const VirtualizedCommentList = memo<VirtualizedCommentListProps>(({
-  comments,
-  onReply,
-  onLike,
-  onDislike,
-  className = '',
-  height = 400,
-  itemHeight = 120,
-}) => {
-  usePerformanceMonitor('VirtualizedCommentList');
-
-  const listData = useMemo(() => ({
+const VirtualizedCommentList = memo<VirtualizedCommentListProps>(
+  ({
     comments,
     onReply,
     onLike,
     onDislike,
-  }), [comments, onReply, onLike, onDislike]);
+    className = '',
+    height = 400,
+    itemHeight = 120,
+  }) => {
+    usePerformanceMonitor('VirtualizedCommentList');
 
-  if (comments.length === 0) {
+    const listData = useMemo(
+      () => ({
+        comments,
+        onReply,
+        onLike,
+        onDislike,
+      }),
+      [comments, onReply, onLike, onDislike]
+    );
+
+    if (comments.length === 0) {
+      return (
+        <div className={`flex items-center justify-center h-32 ${className}`}>
+          <p className='text-gray-500 dark:text-gray-400'>No comments yet</p>
+        </div>
+      );
+    }
+
     return (
-      <div className={`flex items-center justify-center h-32 ${className}`}>
-        <p className="text-gray-500 dark:text-gray-400">No comments yet</p>
+      <div className={className}>
+        <List
+          height={height}
+          width='100%'
+          itemCount={comments.length}
+          itemSize={itemHeight}
+          itemData={listData}
+          overscanCount={5}
+        >
+          {CommentItem}
+        </List>
       </div>
     );
   }
-
-  return (
-    <div className={className}>
-      <List
-        height={height}
-        width="100%"
-        itemCount={comments.length}
-        itemSize={itemHeight}
-        itemData={listData}
-        overscanCount={5}
-      >
-        {CommentItem}
-      </List>
-    </div>
-  );
-});
+);
 
 VirtualizedCommentList.displayName = 'VirtualizedCommentList';
 

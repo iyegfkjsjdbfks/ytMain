@@ -1,9 +1,12 @@
-
 import { useState, useEffect, useCallback } from 'react';
 
 import { getInitialSearchKeyword } from '../services/settingsService';
 
-import { searchForHomePage, type YouTubeSearchResult, type GoogleSearchResult } from '../services/googleSearchService';
+import {
+  searchForHomePage,
+  type YouTubeSearchResult,
+  type GoogleSearchResult,
+} from '../services/googleSearchService';
 
 import { VideoService } from '../services/api';
 import type { Video } from '../types';
@@ -11,17 +14,18 @@ import type { Video } from '../types';
 // Convert search results to Video format for HomePage compatibility
 const convertSearchResultToVideo = (
   result: YouTubeSearchResult | GoogleSearchResult,
-  index: number,
+  index: number
 ): Video => {
   // Generate a unique ID that preserves the source information
-  const videoId = result.id.startsWith('youtube-') || result.id.startsWith('google-search-')
-    ? result.id
-    : `trending-${result.id}-${index}`;
+  const videoId =
+    result.id.startsWith('youtube-') || result.id.startsWith('google-search-')
+      ? result.id
+      : `trending-${result.id}-${index}`;
 
   return {
     id: videoId,
     title: result.title,
-    description: result?.description || "",
+    description: result?.description || '',
     thumbnailUrl: result.thumbnailUrl,
     videoUrl: result.videoUrl,
     duration: result.duration || '0:00',
@@ -57,7 +61,9 @@ const convertSearchResultToVideo = (
       topicCategories: [],
     },
     contentDetails: {
-      duration: result.duration ? `PT${result.duration.replace(':', 'M')}S` : 'PT0M0S',
+      duration: result.duration
+        ? `PT${result.duration.replace(':', 'M')}S`
+        : 'PT0M0S',
       dimension: '2d',
       definition: 'hd',
       caption: 'false',
@@ -102,7 +108,8 @@ export function useTrendingSearch(): UseInitialSearchResult {
       // Use home page specific search logic (YouTube API first in hybrid mode)
       const combinedResults = await searchForHomePage(
         initialKeyword,
-        (query: any) => VideoService.searchVideos(query).then(result => result.videos),
+        (query: any) =>
+          VideoService.searchVideos(query).then(result => result.videos)
       );
 
       // Combine all results and convert to Video format
@@ -113,7 +120,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
 
       // Convert search results to Video format
       const convertedVideos = allResults.map((result, index) =>
-        convertSearchResultToVideo(result, index),
+        convertSearchResultToVideo(result, index)
       );
 
       // Add local videos if any
@@ -122,16 +129,30 @@ export function useTrendingSearch(): UseInitialSearchResult {
       // Combine and sort by view count (trending)
       const allVideos = [...localVideos, ...convertedVideos];
       const sortedVideos = allVideos.sort((a, b) => {
-        const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : a.statistics?.viewCount || 0;
-        const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : b.statistics?.viewCount || 0;
+        const viewsA =
+          typeof a.views === 'string'
+            ? parseInt(a.views, 10) || 0
+            : a.statistics?.viewCount || 0;
+        const viewsB =
+          typeof b.views === 'string'
+            ? parseInt(b.views, 10) || 0
+            : b.statistics?.viewCount || 0;
         return viewsB - viewsA;
       });
 
-      console.log(`✅ Successfully fetched ${sortedVideos.length} ${getInitialSearchKeyword()} videos`);
+      console.log(
+        `✅ Successfully fetched ${sortedVideos.length} ${getInitialSearchKeyword()} videos`
+      );
       setData(sortedVideos);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : `Failed to fetch ${getInitialSearchKeyword()} videos`;
-      console.error(`❌ Error fetching ${getInitialSearchKeyword()} videos:`, errorMessage);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : `Failed to fetch ${getInitialSearchKeyword()} videos`;
+      console.error(
+        `❌ Error fetching ${getInitialSearchKeyword()} videos:`,
+        errorMessage
+      );
       setError(errorMessage);
     } finally {
       setLoading(false);

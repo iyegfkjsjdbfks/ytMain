@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react';
 
 interface UseModalOptions {
@@ -52,8 +51,8 @@ export function useModal({
   // Handle escape key
   useEffect(() => {
     if (!closeOnEscape || !isOpen) {
-return;
-}
+      return;
+    }
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -124,9 +123,12 @@ export function useModals<T extends string>() {
     setOpenModals(new Set());
   }, []);
 
-  const isModalOpen = useCallback((key: T) => {
-    return openModals.has(key);
-  }, [openModals]);
+  const isModalOpen = useCallback(
+    (key: T) => {
+      return openModals.has(key);
+    },
+    [openModals]
+  );
 
   return {
     openModal,

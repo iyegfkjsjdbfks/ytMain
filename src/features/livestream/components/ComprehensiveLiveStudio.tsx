@@ -1,12 +1,34 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
 import { useLiveStream } from '@/hooks/useLiveStream';
 import type { LiveStream, StreamPlatform } from '../../../types/livestream';
-import { VideoCameraIcon, MicrophoneIcon, StopIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, SignalIcon, ClockIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
-import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon, PlayIcon as PlaySolidIcon } from '@heroicons/react/24/solid';
-import { AdvancedLiveChat, LivePolls, LiveQA, SuperChatPanel, StreamScheduler, MultiplatformStreaming } from '.';
+import {
+  VideoCameraIcon,
+  MicrophoneIcon,
+  StopIcon,
+  Cog6ToothIcon,
+  ChatBubbleLeftRightIcon,
+  EyeIcon,
+  HeartIcon,
+  SignalIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
+} from '@heroicons/react/24/outline';
+import {
+  VideoCameraIcon as VideoCameraSolidIcon,
+  MicrophoneIcon as MicrophoneSolidIcon,
+  PlayIcon as PlaySolidIcon,
+} from '@heroicons/react/24/solid';
+import {
+  AdvancedLiveChat,
+  LivePolls,
+  LiveQA,
+  SuperChatPanel,
+  StreamScheduler,
+  MultiplatformStreaming,
+} from '.';
 
 interface ComprehensiveLiveStudioProps {
   className?: string;
@@ -22,7 +44,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
   const [isVideoEnabled, setIsVideoEnabled] = useState(true);
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
-  const [activeTab, setActiveTab] = useState<'chat' | 'polls' | 'qa' | 'superchat' | 'schedule' | 'multiplatform'>('chat');
+  const [activeTab, setActiveTab] = useState<
+    'chat' | 'polls' | 'qa' | 'superchat' | 'schedule' | 'multiplatform'
+  >('chat');
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const { createStream, startStream, endStream } = useLiveStream();
@@ -80,7 +104,9 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       setIsPreviewing(true);
     } catch (error) {
       logger.error('Failed to access media devices:', error);
-      alert('Could not access camera and microphone. Please check permissions.');
+      alert(
+        'Could not access camera and microphone. Please check permissions.'
+      );
     }
   };
 
@@ -149,7 +175,10 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
       setIsStreaming(true);
 
       // Enable multiplatform if configured
-      if (streamSettings.enableMultiplatform && streamSettings.platforms.length > 0) {
+      if (
+        streamSettings.enableMultiplatform &&
+        streamSettings.platforms.length > 0
+      ) {
         const enabledPlatforms = streamSettings.platforms
           .filter((p: any) => p.enabled)
           .map((p: any) => p.name);
@@ -157,7 +186,6 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
       }
-
     } catch (error) {
       logger.error('Failed to start stream:', error);
       alert('Failed to start stream. Please try again.');
@@ -166,8 +194,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
   const handleEndStream = async () => {
     if (!currentStream) {
-return;
-}
+      return;
+    }
 
     try {
       await endStream();
@@ -210,8 +238,8 @@ return;
   // Listen for stream stats updates
   useEffect(() => {
     if (!currentStream) {
-return;
-}
+      return;
+    }
 
     // TODO: Implement real-time stats updates
     const interval = setInterval(() => {
@@ -229,11 +257,16 @@ return;
 
   const getStreamHealthColor = () => {
     switch (stats.streamHealth) {
-      case 'excellent': return 'text-green-500';
-      case 'good': return 'text-yellow-500';
-      case 'fair': return 'text-orange-500';
-      case 'poor': return 'text-red-500';
-      default: return 'text-gray-500';
+      case 'excellent':
+        return 'text-green-500';
+      case 'good':
+        return 'text-yellow-500';
+      case 'fair':
+        return 'text-orange-500';
+      case 'poor':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
     }
   };
 
@@ -247,153 +280,185 @@ return;
   return (
     <div className={`max-w-7xl mx-auto p-6 space-y-6 ${className}`}>
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6'>
+        <div className='flex items-center justify-between mb-4'>
+          <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
             Live Studio
           </h1>
-          <div className="flex items-center space-x-2">
+          <div className='flex items-center space-x-2'>
             {isStreaming && (
-              <div className="flex items-center space-x-2 text-red-500">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium">LIVE</span>
+              <div className='flex items-center space-x-2 text-red-500'>
+                <div className='w-2 h-2 bg-red-500 rounded-full animate-pulse' />
+                <span className='text-sm font-medium'>LIVE</span>
               </div>
             )}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className='p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors'
             >
-              <Cog6ToothIcon className="w-5 h-5" />
+              <Cog6ToothIcon className='w-5 h-5' />
             </button>
           </div>
         </div>
 
         {/* Stream Stats */}
         {isStreaming && (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4">
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
-                <EyeIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+          <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4'>
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
+                <EyeIcon className='w-4 h-4 text-gray-500' />
+                <span className='text-lg font-bold text-gray-900 dark:text-white'>
                   {stats.viewers.toLocaleString()}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Viewers</p>
+              <p className='text-xs text-gray-500'>Viewers</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
-                <ClockIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
+                <ClockIcon className='w-4 h-4 text-gray-500' />
+                <span className='text-lg font-bold text-gray-900 dark:text-white'>
                   {formatDuration(stats.duration)}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Duration</p>
+              <p className='text-xs text-gray-500'>Duration</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
-                <HeartIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
+                <HeartIcon className='w-4 h-4 text-gray-500' />
+                <span className='text-lg font-bold text-gray-900 dark:text-white'>
                   {stats.likes.toLocaleString()}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Likes</p>
+              <p className='text-xs text-gray-500'>Likes</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
-                <ChatBubbleLeftRightIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
+                <ChatBubbleLeftRightIcon className='w-4 h-4 text-gray-500' />
+                <span className='text-lg font-bold text-gray-900 dark:text-white'>
                   {stats.chatMessages.toLocaleString()}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Messages</p>
+              <p className='text-xs text-gray-500'>Messages</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
-                <CurrencyDollarIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-lg font-bold text-gray-900 dark:text-white">
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
+                <CurrencyDollarIcon className='w-4 h-4 text-gray-500' />
+                <span className='text-lg font-bold text-gray-900 dark:text-white'>
                   ${stats.superChatAmount.toFixed(2)}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Super Chat</p>
+              <p className='text-xs text-gray-500'>Super Chat</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-1">
+            <div className='text-center'>
+              <div className='flex items-center justify-center space-x-1'>
                 <SignalIcon className={`w-4 h-4 ${getStreamHealthColor()}`} />
                 <span className={`text-lg font-bold ${getStreamHealthColor()}`}>
                   {stats.streamHealth.toUpperCase()}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">Health</p>
+              <p className='text-xs text-gray-500'>Health</p>
             </div>
           </div>
         )}
 
         {/* Settings Panel */}
         {showSettings && (
-          <div className="border-t pt-4 space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className='border-t pt-4 space-y-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               <div>
-                <label htmlFor="stream-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor='stream-title'
+                  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'
+                >
                   Stream Title *
                 </label>
                 <input
-                  id="stream-title"
-                  type="text"
+                  id='stream-title'
+                  type='text'
                   value={streamSettings.title}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="Enter stream title"
-                  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  onChange={e =>
+                    setStreamSettings(prev => ({
+                      ...prev,
+                      title: e.target.value,
+                    }))
+                  }
+                  placeholder='Enter stream title'
+                  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   disabled={isStreaming}
                 />
               </div>
               <div>
-                <label htmlFor="stream-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor='stream-category'
+                  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'
+                >
                   Category
                 </label>
                 <select
-                  id="stream-category"
+                  id='stream-category'
                   value={streamSettings.category}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, category: e.target.value }))}
-                  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  onChange={e =>
+                    setStreamSettings(prev => ({
+                      ...prev,
+                      category: e.target.value,
+                    }))
+                  }
+                  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   disabled={isStreaming}
                 >
-                  <option value="Gaming">Gaming</option>
-                  <option value="Just Chatting">Just Chatting</option>
-                  <option value="Music">Music</option>
-                  <option value="Art">Art</option>
-                  <option value="Technology">Technology</option>
-                  <option value="Education">Education</option>
-                  <option value="Sports">Sports</option>
+                  <option value='Gaming'>Gaming</option>
+                  <option value='Just Chatting'>Just Chatting</option>
+                  <option value='Music'>Music</option>
+                  <option value='Art'>Art</option>
+                  <option value='Technology'>Technology</option>
+                  <option value='Education'>Education</option>
+                  <option value='Sports'>Sports</option>
                 </select>
               </div>
               <div>
-                <label htmlFor="stream-visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor='stream-visibility'
+                  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'
+                >
                   Visibility
                 </label>
                 <select
-                  id="stream-visibility"
+                  id='stream-visibility'
                   value={streamSettings.visibility}
-                  onChange={(e) => setStreamSettings(prev => ({ ...prev, visibility: e.target.value as any }))}
-                  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  onChange={e =>
+                    setStreamSettings(prev => ({
+                      ...prev,
+                      visibility: e.target.value as any,
+                    }))
+                  }
+                  className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                   disabled={isStreaming}
                 >
-                  <option value="public">Public</option>
-                  <option value="unlisted">Unlisted</option>
-                  <option value="private">Private</option>
+                  <option value='public'>Public</option>
+                  <option value='unlisted'>Unlisted</option>
+                  <option value='private'>Private</option>
                 </select>
               </div>
             </div>
             <div>
-              <label htmlFor="stream-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label
+                htmlFor='stream-description'
+                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'
+              >
                 Description
               </label>
               <textarea
-                id="stream-description"
+                id='stream-description'
                 value={streamSettings.description}
-                onChange={(e) => setStreamSettings(prev => ({ ...prev, description: e.target.value }))}
-                placeholder="Describe your stream..."
+                onChange={e =>
+                  setStreamSettings(prev => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
+                placeholder='Describe your stream...'
                 rows={3}
-                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className='w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 disabled={isStreaming}
               />
             </div>
@@ -401,26 +466,26 @@ return;
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
         {/* Video Preview */}
-        <div className="lg:col-span-2">
-          <div className="bg-black rounded-lg overflow-hidden aspect-video relative">
+        <div className='lg:col-span-2'>
+          <div className='bg-black rounded-lg overflow-hidden aspect-video relative'>
             <video
               ref={videoRef}
               autoPlay
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className='w-full h-full object-cover'
             />
 
             {!isPreviewing && !isStreaming && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-                <div className="text-center">
-                  <VideoCameraIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-400 mb-4">Camera Preview Off</p>
+              <div className='absolute inset-0 flex items-center justify-center bg-gray-900'>
+                <div className='text-center'>
+                  <VideoCameraIcon className='w-16 h-16 text-gray-400 mx-auto mb-4' />
+                  <p className='text-gray-400 mb-4'>Camera Preview Off</p>
                   <button
                     onClick={startPreview}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
                   >
                     Start Preview
                   </button>
@@ -429,9 +494,9 @@ return;
             )}
 
             {/* Stream Controls Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
+            <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4'>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center space-x-2'>
                   <button
                     onClick={toggleVideo}
                     className={`p-2 rounded-lg transition-colors ${
@@ -441,9 +506,9 @@ return;
                     }`}
                   >
                     {isVideoEnabled ? (
-                      <VideoCameraSolidIcon className="w-5 h-5" />
+                      <VideoCameraSolidIcon className='w-5 h-5' />
                     ) : (
-                      <VideoCameraIcon className="w-5 h-5" />
+                      <VideoCameraIcon className='w-5 h-5' />
                     )}
                   </button>
                   <button
@@ -455,18 +520,18 @@ return;
                     }`}
                   >
                     {isAudioEnabled ? (
-                      <MicrophoneSolidIcon className="w-5 h-5" />
+                      <MicrophoneSolidIcon className='w-5 h-5' />
                     ) : (
-                      <MicrophoneIcon className="w-5 h-5" />
+                      <MicrophoneIcon className='w-5 h-5' />
                     )}
                   </button>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className='flex items-center space-x-2'>
                   {isPreviewing && !isStreaming && (
                     <button
                       onClick={stopPreview}
-                      className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+                      className='px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
                     >
                       Stop Preview
                     </button>
@@ -476,17 +541,17 @@ return;
                     <button
                       onClick={handleStartStream}
                       disabled={!stream || !streamSettings.title.trim()}
-                      className="px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2"
+                      className='px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white rounded-lg transition-colors flex items-center space-x-2'
                     >
-                      <PlaySolidIcon className="w-4 h-4" />
+                      <PlaySolidIcon className='w-4 h-4' />
                       <span>Go Live</span>
                     </button>
                   ) : (
                     <button
                       onClick={handleEndStream}
-                      className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                      className='px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center space-x-2'
                     >
-                      <StopIcon className="w-4 h-4" />
+                      <StopIcon className='w-4 h-4' />
                       <span>End Stream</span>
                     </button>
                   )}
@@ -497,10 +562,10 @@ return;
         </div>
 
         {/* Side Panel */}
-        <div className="space-y-4">
+        <div className='space-y-4'>
           {/* Tab Navigation */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-1">
-            <div className="grid grid-cols-3 gap-1">
+          <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-1'>
+            <div className='grid grid-cols-3 gap-1'>
               <button
                 onClick={() => setActiveTab('chat')}
                 className={`p-2 rounded-lg text-xs font-medium transition-colors ${
@@ -532,7 +597,7 @@ return;
                 Q&A
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-1 mt-1">
+            <div className='grid grid-cols-3 gap-1 mt-1'>
               <button
                 onClick={() => setActiveTab('superchat')}
                 className={`p-2 rounded-lg text-xs font-medium transition-colors ${
@@ -567,7 +632,7 @@ return;
           </div>
 
           {/* Tab Content */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+          <div className='bg-white dark:bg-gray-800 rounded-lg shadow-lg'>
             {activeTab === 'chat' && currentStream && (
               <AdvancedLiveChat
                 streamId={currentStream.id}
@@ -576,38 +641,34 @@ return;
               />
             )}
             {activeTab === 'polls' && currentStream && (
-              <LivePolls
-                streamId={currentStream.id}
-                isOwner={true}
-              />
+              <LivePolls streamId={currentStream.id} isOwner={true} />
             )}
             {activeTab === 'qa' && currentStream && (
-              <LiveQA
-                streamId={currentStream.id}
-                isOwner={true}
-              />
+              <LiveQA streamId={currentStream.id} isOwner={true} />
             )}
             {activeTab === 'superchat' && currentStream && (
               <SuperChatPanel streamId={currentStream.id} />
             )}
             {activeTab === 'schedule' && (
               <StreamScheduler
-                onStreamScheduled={(stream) => {
+                onStreamScheduled={stream => {
                   logger.debug('Stream scheduled:', stream);
                 }}
               />
             )}
             {activeTab === 'multiplatform' && (
-              <MultiplatformStreaming
-                isStreaming={isStreaming}
-              />
+              <MultiplatformStreaming isStreaming={isStreaming} />
             )}
 
-            {!currentStream && activeTab !== 'schedule' && activeTab !== 'multiplatform' && (
-              <div className="p-6 text-center">
-                <p className="text-gray-500">Start a stream to access this feature</p>
-              </div>
-            )}
+            {!currentStream &&
+              activeTab !== 'schedule' &&
+              activeTab !== 'multiplatform' && (
+                <div className='p-6 text-center'>
+                  <p className='text-gray-500'>
+                    Start a stream to access this feature
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>
@@ -616,7 +677,6 @@ return;
 };
 
 export default ComprehensiveLiveStudio;
-
 
 declare global {
   namespace JSX {

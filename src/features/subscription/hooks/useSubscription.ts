@@ -1,4 +1,3 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { subscriptionService } from '../services/subscriptionService';
@@ -50,7 +49,10 @@ export function useSubscription(channelId: any) {
   return {
     isSubscribed: subscription?.isSubscribed || false,
     notificationLevel: subscription?.notificationLevel || 'personalized',
-    isLoading: isQueryLoading || subscribeMutation.isPending || unsubscribeMutation.isPending,
+    isLoading:
+      isQueryLoading ||
+      subscribeMutation.isPending ||
+      unsubscribeMutation.isPending,
     subscribe: subscribeMutation.mutateAsync,
     unsubscribe: unsubscribeMutation.mutateAsync,
     updateNotificationLevel: updateNotificationMutation.mutateAsync,
@@ -59,7 +61,11 @@ export function useSubscription(channelId: any) {
 }
 
 export function useSubscriptions() {
-  const { data: subscriptions, isLoading, error } = useQuery({
+  const {
+    data: subscriptions,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['subscriptions'],
     queryFn: () => subscriptionService.getSubscriptions(),
   });
@@ -72,7 +78,11 @@ export function useSubscriptions() {
 }
 
 export function useSubscriptionFeed() {
-  const { data: videos, isLoading, error } = useQuery({
+  const {
+    data: videos,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['subscription-feed'],
     queryFn: () => subscriptionService.getSubscriptionFeed(),
     refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes

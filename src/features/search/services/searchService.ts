@@ -1,6 +1,11 @@
-
 import { api } from '../../../services/api/base';
-import type { Video, Channel, Playlist, User, ApiResponse } from '../../../types/core';
+import type {
+  Video,
+  Channel,
+  Playlist,
+  User,
+  ApiResponse,
+} from '../../../types/core';
 
 /**
  * Advanced Search Service
@@ -12,7 +17,16 @@ export interface SearchFilters {
   duration?: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
   uploadDate?: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   sortBy?: 'relevance' | 'upload_date' | 'view_count' | 'rating' | 'title';
-  features?: Array<'live' | 'hd' | '4k' | 'subtitles' | 'creative_commons' | 'vr180' | '360' | 'hdr'>;
+  features?: Array<
+    | 'live'
+    | 'hd'
+    | '4k'
+    | 'subtitles'
+    | 'creative_commons'
+    | 'vr180'
+    | '360'
+    | 'hdr'
+  >;
   category?: string;
   language?: string;
   region?: string;
@@ -54,7 +68,7 @@ class SearchService {
     query: any,
     filters: SearchFilters = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<SearchResult[]>> {
     return api.get('/api/search', {
       q: query,
@@ -69,7 +83,7 @@ class SearchService {
    */
   async getSearchSuggestions(
     query: any,
-    limit: number = 10,
+    limit: number = 10
   ): Promise<ApiResponse<SearchSuggestion[]>> {
     return api.get('/api/search/suggestions', { q: query, limit });
   }
@@ -79,7 +93,7 @@ class SearchService {
    */
   async getTrendingSearches(
     region?: string,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/trending', { region, limit });
   }
@@ -91,7 +105,7 @@ class SearchService {
     query: any,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Video[]>> {
     return api.get('/api/search/videos', {
       q: query,
@@ -108,7 +122,7 @@ class SearchService {
     query: any,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Channel[]>> {
     return api.get('/api/search/channels', {
       q: query,
@@ -125,7 +139,7 @@ class SearchService {
     query: any,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/search/playlists', {
       q: query,
@@ -148,7 +162,7 @@ class SearchService {
       filters?: SearchFilters;
     } = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Video[]>> {
     return api.post('/api/search/videos/advanced', {
       query,
@@ -163,7 +177,7 @@ class SearchService {
    */
   async searchByImage(
     image: File,
-    filters: SearchFilters = {},
+    filters: SearchFilters = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.upload('/api/search/image', image, filters);
   }
@@ -173,7 +187,7 @@ class SearchService {
    */
   async searchByAudio(
     audio: File,
-    filters: SearchFilters = {},
+    filters: SearchFilters = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.upload('/api/search/audio', audio, filters);
   }
@@ -182,7 +196,7 @@ class SearchService {
    * Get search history for user
    */
   async getSearchHistory(
-    limit: number = 50,
+    limit: number = 50
   ): Promise<ApiResponse<SearchAnalytics[]>> {
     return api.get('/api/search/history', { limit });
   }
@@ -197,20 +211,27 @@ class SearchService {
   /**
    * Save search query
    */
-  async saveSearch(query: any, filters: SearchFilters = {}): Promise<ApiResponse<void>> {
+  async saveSearch(
+    query: any,
+    filters: SearchFilters = {}
+  ): Promise<ApiResponse<void>> {
     return api.post('/api/search/save', { query, filters });
   }
 
   /**
    * Get saved searches
    */
-  async getSavedSearches(): Promise<ApiResponse<Array<{
-    id: string;
-    query: string;
-    filters: SearchFilters;
-    createdAt: string;
-    lastUsed: string;
-  }>>> {
+  async getSavedSearches(): Promise<
+    ApiResponse<
+      Array<{
+        id: string;
+        query: string;
+        filters: SearchFilters;
+        createdAt: string;
+        lastUsed: string;
+      }>
+    >
+  > {
     return api.get('/api/search/saved');
   }
 
@@ -224,16 +245,16 @@ class SearchService {
   /**
    * Get search analytics (for content creators)
    */
-  async getSearchAnalytics(
-    timeframe: '7d' | '30d' | '90d' = '30d',
-  ): Promise<ApiResponse<{
-    topQueries: Array<{ query: string; count: number; growth: number }>;
-    searchVolume: Array<{ date: string; searches: number }>;
-    clickThroughRate: number;
-    averagePosition: number;
-    impressions: number;
-    clicks: number;
-  }>> {
+  async getSearchAnalytics(timeframe: '7d' | '30d' | '90d' = '30d'): Promise<
+    ApiResponse<{
+      topQueries: Array<{ query: string; count: number; growth: number }>;
+      searchVolume: Array<{ date: string; searches: number }>;
+      clickThroughRate: number;
+      averagePosition: number;
+      impressions: number;
+      clicks: number;
+    }>
+  > {
     return api.get('/api/search/analytics', { timeframe });
   }
 
@@ -242,7 +263,7 @@ class SearchService {
    */
   async getRelatedSearches(
     query: any,
-    limit: number = 10,
+    limit: number = 10
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/related', { q: query, limit });
   }
@@ -250,12 +271,14 @@ class SearchService {
   /**
    * Get search filters for a category
    */
-  async getCategoryFilters(category: any): Promise<ApiResponse<{
-    duration: Array<{ label: string; value: string; count: number }>;
-    features: Array<{ label: string; value: string; count: number }>;
-    languages: Array<{ label: string; value: string; count: number }>;
-    uploadDate: Array<{ label: string; value: string; count: number }>;
-  }>> {
+  async getCategoryFilters(category: any): Promise<
+    ApiResponse<{
+      duration: Array<{ label: string; value: string; count: number }>;
+      features: Array<{ label: string; value: string; count: number }>;
+      languages: Array<{ label: string; value: string; count: number }>;
+      uploadDate: Array<{ label: string; value: string; count: number }>;
+    }>
+  > {
     return api.get(`/api/search/filters/${category}`);
   }
 
@@ -264,7 +287,7 @@ class SearchService {
    */
   async autocomplete(
     query: any,
-    limit: number = 8,
+    limit: number = 8
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/autocomplete', { q: query, limit });
   }
@@ -277,7 +300,7 @@ class SearchService {
     query: any,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Video[]>> {
     return api.get(`/api/channels/${channelId}/search`, {
       q: query,
@@ -294,7 +317,7 @@ class SearchService {
     playlistId: any,
     query: any,
     page: number = 1,
-    limit: number = 20,
+    limit: number = 20
   ): Promise<ApiResponse<Video[]>> {
     return api.get(`/api/playlists/${playlistId}/search`, {
       q: query,
@@ -307,7 +330,7 @@ class SearchService {
    * Get search suggestions based on user's watch history
    */
   async getPersonalizedSuggestions(
-    limit: number = 10,
+    limit: number = 10
   ): Promise<ApiResponse<SearchSuggestion[]>> {
     return api.get('/api/search/suggestions/personalized', { limit });
   }
@@ -317,8 +340,12 @@ class SearchService {
    */
   async reportSearchIssue(
     query: any,
-    issue: 'irrelevant_results' | 'missing_content' | 'inappropriate_content' | 'technical_error',
-    description?: string,
+    issue:
+      | 'irrelevant_results'
+      | 'missing_content'
+      | 'inappropriate_content'
+      | 'technical_error',
+    description?: string
   ): Promise<ApiResponse<void>> {
     return api.post('/api/search/report', {
       query,
@@ -330,13 +357,15 @@ class SearchService {
   /**
    * Get search performance metrics
    */
-  async getSearchMetrics(): Promise<ApiResponse<{
-    totalSearches: number;
-    uniqueQueries: number;
-    averageResultsPerQuery: number;
-    popularCategories: Array<{ category: string; percentage: number }>;
-    searchSuccessRate: number;
-  }>> {
+  async getSearchMetrics(): Promise<
+    ApiResponse<{
+      totalSearches: number;
+      uniqueQueries: number;
+      averageResultsPerQuery: number;
+      popularCategories: Array<{ category: string; percentage: number }>;
+      searchSuccessRate: number;
+    }>
+  > {
     return api.get('/api/search/metrics');
   }
 
@@ -345,7 +374,7 @@ class SearchService {
    */
   async exportSearchData(
     format: 'csv' | 'json',
-    timeframe: '7d' | '30d' | '90d' = '30d',
+    timeframe: '7d' | '30d' | '90d' = '30d'
   ): Promise<ApiResponse<string>> {
     return api.get('/api/search/export', { format, timeframe });
   }

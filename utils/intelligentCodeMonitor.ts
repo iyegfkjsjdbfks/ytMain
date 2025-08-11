@@ -25,8 +25,8 @@ interface CodeQualityTrend {
   timestamp: number;
   _metrics: CodeMetrics;
   score: number;
-  improvements: string;
-  regressions: string;
+  improvements: string[];
+  regressions: string[];
 }
 
 interface RefactoringOpportunity {
@@ -52,7 +52,7 @@ interface CodeReviewInsight {
   title: string;
   description: string;
   recommendation: string;
-  files: string;
+  files: string[];
   estimatedImpact: string;
 }
 
@@ -362,17 +362,17 @@ return 0;
     // High complexity opportunities
     if (metrics.complexity > 10) {
       opportunities.push({
-        __id: 'reduce-complexity',
-        __type: 'maintainability',
-        __file: 'components/ComplexComponent.tsx,',
-        __line: 45,
-        __description: 'High cyclomatic complexity detected',
-        __impact: 'high',
-        __effort: 'medium',
-        __automatable: false,
-        __suggestion: 'Consider breaking down large functions into smaller, more focused functions',
-        __codeExample: {
-          __before: 'function complexFunction() /* 50+ lines of code */ }',
+        id: 'reduce-complexity',
+        type: 'maintainability',
+        file: 'components/ComplexComponent.tsx,',
+        line: 45,
+        description: 'High cyclomatic complexity detected',
+        impact: 'high',
+        effort: 'medium',
+        automatable: false,
+        suggestion: 'Consider breaking down large functions into smaller, more focused functions',
+        codeExample: {
+          before: 'function complexFunction() /* 50+ lines of code */ }',
           after: 'function mainFunction() helper1(); helper2(); helper3(); }',
         },
       });
@@ -466,14 +466,14 @@ return 0;
     // Architecture insights
     if (metrics.complexity > 12) {
       insights.push({
-        __id: 'architecture-complexity',
-        __category: 'architecture',
-        __severity: 'warning',
-        __title: 'High System Complexity',
-        __description: 'The overall system complexity is higher than recommended',
-        __recommendation: 'Consider implementing Domain-Driven Design patterns to better organize code',
-        __files: ['src/components/', 'src/utils/', 'src/services/'],
-        __estimatedImpact: 'Improved maintainability and reduced development time',
+        id: 'architecture-complexity',
+        category: 'architecture',
+        severity: 'warning',
+        title: 'High System Complexity',
+        description: 'The overall system complexity is higher than recommended',
+        recommendation: 'Consider implementing Domain-Driven Design patterns to better organize code',
+        files: ['src/components/', 'src/utils/', 'src/services/'],
+        estimatedImpact: 'Improved maintainability and reduced development time',
       });
     }
 

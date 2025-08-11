@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 
 type SetValue<T> = T | ((val: T) => T);
@@ -11,7 +10,7 @@ type SetValue<T> = T | ((val: T) => T);
  */
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T,
+  initialValue: T
 ): [T, (value: SetValue<T>) => void, () => void] {
   // Get from local storage then parse stored json or return initialValue
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -33,7 +32,8 @@ export function useLocalStorage<T>(
     (value: SetValue<T>) => {
       try {
         // Allow value to be a function so we have the same API as useState
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
 
         // Save state
         setStoredValue(valueToStore);
@@ -46,7 +46,7 @@ export function useLocalStorage<T>(
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue],
+    [key, storedValue]
   );
 
   // Remove from localStorage
@@ -74,7 +74,7 @@ export function useLocalStorage<T>(
 export function useLocalStorageWithExpiry<T>(
   key: string,
   initialValue: T,
-  ttl: any,
+  ttl: any
 ): [T, (value: SetValue<T>) => void, () => void, boolean] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
@@ -84,8 +84,8 @@ export function useLocalStorageWithExpiry<T>(
     try {
       const item = window.localStorage.getItem(key);
       if (!item) {
-return initialValue;
-}
+        return initialValue;
+      }
 
       const parsed = JSON.parse(item);
       const now = new Date().getTime();
@@ -108,7 +108,8 @@ return initialValue;
   const setValue = useCallback(
     (value: SetValue<T>) => {
       try {
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
         const now = new Date().getTime();
         const expiry = now + ttl;
 
@@ -127,7 +128,7 @@ return initialValue;
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue, ttl],
+    [key, storedValue, ttl]
   );
 
   const removeValue = useCallback(() => {
@@ -146,14 +147,14 @@ return initialValue;
   useEffect(() => {
     const checkExpiry = () => {
       if (typeof window === 'undefined') {
-return;
-}
+        return;
+      }
 
       try {
         const item = window.localStorage.getItem(key);
         if (!item) {
-return;
-}
+          return;
+        }
 
         const parsed = JSON.parse(item);
         const now = new Date().getTime();
@@ -163,7 +164,10 @@ return;
           removeValue();
         }
       } catch (error) {
-        console.warn(`Error checking expiry for localStorage key "${key}":`, error);
+        console.warn(
+          `Error checking expiry for localStorage key "${key}":`,
+          error
+        );
       }
     };
 

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
@@ -94,7 +93,11 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
       const choiceResult = await state.deferredPrompt.userChoice;
 
       if (choiceResult.outcome === 'accepted') {
-        conditionalLogger.debug('User accepted PWA install prompt', undefined, 'useInstallPrompt');
+        conditionalLogger.debug(
+          'User accepted PWA install prompt',
+          undefined,
+          'useInstallPrompt'
+        );
 
         // Update state
         setState(prev => ({
@@ -106,33 +109,41 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
         return true;
       }
-        conditionalLogger.debug('User dismissed PWA install prompt', undefined, 'useInstallPrompt');
-
-        // Mark as dismissed
-        PWAUtils.dismissInstallPrompt();
-
-        setState(prev => ({
-          ...prev,
-          isInstalling: false,
-          showPrompt: false,
-          deferredPrompt: null,
-        }));
-
-        return false;
-
-    } catch (error) {
-      const componentError = createComponentError(
-        'useInstallPrompt',
-        'Failed to install PWA',
-        error,
+      conditionalLogger.debug(
+        'User dismissed PWA install prompt',
+        undefined,
+        'useInstallPrompt'
       );
 
-      conditionalLogger.error('PWA installation failed', componentError, 'useInstallPrompt');
+      // Mark as dismissed
+      PWAUtils.dismissInstallPrompt();
 
       setState(prev => ({
         ...prev,
         isInstalling: false,
-        installError: error instanceof Error ? error.message : 'Installation failed',
+        showPrompt: false,
+        deferredPrompt: null,
+      }));
+
+      return false;
+    } catch (error) {
+      const componentError = createComponentError(
+        'useInstallPrompt',
+        'Failed to install PWA',
+        error
+      );
+
+      conditionalLogger.error(
+        'PWA installation failed',
+        componentError,
+        'useInstallPrompt'
+      );
+
+      setState(prev => ({
+        ...prev,
+        isInstalling: false,
+        installError:
+          error instanceof Error ? error.message : 'Installation failed',
       }));
 
       return false;
@@ -153,7 +164,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
     conditionalLogger.debug(
       `PWA install prompt dismissed (permanent: ${permanent})`,
       undefined,
-      'useInstallPrompt',
+      'useInstallPrompt'
     );
   }, []);
 
@@ -179,7 +190,10 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
       // Show prompt after delay if conditions are met
       setTimeout(() => {
-        if (canShowPrompt() && !sessionStorage.getItem('pwa-install-dismissed-session')) {
+        if (
+          canShowPrompt() &&
+          !sessionStorage.getItem('pwa-install-dismissed-session')
+        ) {
           setState(prev => ({ ...prev, showPrompt: true }));
         }
       }, 3000);
@@ -218,7 +232,10 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
 
     // Cleanup
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt
+      );
       window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, [canShowPrompt]);

@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 interface UseVideoAutoplayProps {
@@ -31,8 +30,8 @@ export const useVideoAutoplay = ({
 }: UseVideoAutoplayProps) => {
   useEffect(() => {
     if (!enableAutoplay) {
-return;
-}
+      return;
+    }
 
     if (isIntersecting && !isPlaying && !isManuallyPaused) {
       // Auto-play when video comes into view and hasn't been manually paused
@@ -44,9 +43,14 @@ return;
         // More specific handling for common video playback issues
         const errorMessage = error.message || String(error);
 
-        if (errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
-            errorMessage.includes('ERR_NETWORK')) {
-          console.info('Autoplay skipped due to network/cache issues:', errorMessage);
+        if (
+          errorMessage.includes('CACHE_OPERATION_NOT_SUPPORTED') ||
+          errorMessage.includes('ERR_NETWORK')
+        ) {
+          console.info(
+            'Autoplay skipped due to network/cache issues:',
+            errorMessage
+          );
         } else {
           console.warn('Autoplay failed:', errorMessage);
         }
@@ -57,7 +61,15 @@ return;
       // Don't reset manual pause state to preserve user intent
       actions.pause();
     }
-  }, [isIntersecting, isPlaying, actions, isManuallyPaused, setIsManuallyPaused, enableAutoplay, unmuteOnAutoplay]);
+  }, [
+    isIntersecting,
+    isPlaying,
+    actions,
+    isManuallyPaused,
+    setIsManuallyPaused,
+    enableAutoplay,
+    unmuteOnAutoplay,
+  ]);
 };
 
 export default useVideoAutoplay;

@@ -32,7 +32,11 @@ export function useVideos() {
 export function useTrendingVideos(category = 'all') {
   const fetchTrendingVideos = useCallback(async (): Promise<Video[]> => {
     // If category-specific API available, use it, then normalize to Video[]
-    if (category && category !== 'all' && typeof getVideosByCategory === 'function') {
+    if (
+      category &&
+      category !== 'all' &&
+      typeof getVideosByCategory === 'function'
+    ) {
       const byCategory = await getVideosByCategory(category);
       const normalized = (byCategory as any).map((v: any) => ({
         // realVideoService returns fields like thumbnailUrl/publishedAt etc.
@@ -43,7 +47,11 @@ export function useTrendingVideos(category = 'all') {
         channelTitle: (v as any).channelTitle ?? (v as any).channelName ?? '',
       })) as Video;
       return [...normalized]
-        .sort((a, b) => Number(parseViewCount((b as any).views)) - Number(parseViewCount((a as any).views)))
+        .sort(
+          (a, b) =>
+            Number(parseViewCount((b as any).views)) -
+            Number(parseViewCount((a as any).views))
+        )
         .slice(0, 50);
     }
 
@@ -81,14 +89,17 @@ export function useSubscriptionsFeed() {
       return [];
     }
 
-    const videosPromises = channelNames.map((name) => getVideosByChannelName(name));
+    const videosPromises = channelNames.map(name =>
+      getVideosByChannelName(name)
+    );
     const videosByChannel = await Promise.all(videosPromises);
 
     const allVideos: Video[] = videosByChannel.flat();
 
     // Sort by upload date
-    const sortedVideos = allVideos.sort((a: Video, b: Video) =>
-      parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt),
+    const sortedVideos = allVideos.sort(
+      (a: Video, b: Video) =>
+        parseRelativeDate(b.uploadedAt) - parseRelativeDate(a.uploadedAt)
     );
 
     return sortedVideos;
@@ -104,8 +115,9 @@ export function useSubscriptionsFeed() {
  * Hook for fetching videos by channel name
  */
 export function useChannelVideos(channelName: any) {
-  const fetchChannelVideos = useCallback(() =>
-    getVideosByChannelName(channelName), [channelName],
+  const fetchChannelVideos = useCallback(
+    () => getVideosByChannelName(channelName),
+    [channelName]
   );
 
   return useAsyncData<Video[]>(fetchChannelVideos, {

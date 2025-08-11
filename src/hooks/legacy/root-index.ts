@@ -29,5 +29,5 @@ export { useOfflineStatus } from '../useOfflineStatus';
 // Intersection observer hooks
 export { useIntersectionObserver } from '../useIntersectionObserver';
 
-// Video autoplay hooks  
+// Video autoplay hooks
 export { useVideoAutoplay } from '../useVideoAutoplay';

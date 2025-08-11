@@ -1,4 +1,3 @@
-
 /**
  * Video feature type definitions
  */
@@ -90,4 +89,11 @@ export interface VideoPlaybackState {
   error: MediaError | null;
 }
 
-export type VideoCategory = 'all' | 'music' | 'gaming' | 'news' | 'sports' | 'learning' | 'entertainment';
+export type VideoCategory =
+  | 'all'
+  | 'music'
+  | 'gaming'
+  | 'news'
+  | 'sports'
+  | 'learning'
+  | 'entertainment';

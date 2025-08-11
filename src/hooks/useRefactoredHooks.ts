@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { useUnifiedApp } from './useUnifiedApp';
@@ -9,7 +9,7 @@ import { useUnifiedApp } from './useUnifiedApp';
  */
 export function useLocalStorage<T>(
   key,
-  initialValue: T,
+  initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -21,15 +21,19 @@ export function useLocalStorage<T>(
     }
   });
 
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   const removeValue = useCallback(() => {
     try {
@@ -91,12 +95,12 @@ export function useThrottle<T>(value: T, delay): T {
  * Enhanced useToggle hook with callback support
  */
 export function useToggle(
-  initialValue: boolean = false,
+  initialValue: boolean = false
 ): [boolean, () => void, (value) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
-  const setToggle = useCallback((newValue) => setValue(newValue), []);
+  const setToggle = useCallback(newValue => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 }
@@ -123,11 +127,8 @@ export function useArray<T>(initialArray: T = []) {
     ]);
   }, []);
 
-  const remove = useCallback((index) => {
-    setArray(arr => [
-      ...arr.slice(0, index),
-      ...arr.slice(index + 1),
-    ]);
+  const remove = useCallback(index => {
+    setArray(arr => [...arr.slice(0, index), ...arr.slice(index + 1)]);
   }, []);
 
   const clear = useCallback(() => {
@@ -150,9 +151,11 @@ export function useArray<T>(initialArray: T = []) {
  */
 export function useAsync<T, E = string>(
   asyncFunction: () => Promise<T>,
-  immediate: boolean = true,
+  immediate: boolean = true
 ) {
-  const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    'idle' | 'pending' | 'success' | 'error'
+  >('idle');
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<E | null>(null);
 
@@ -195,7 +198,7 @@ export function useAsync<T, E = string>(
  * Enhanced useIntersectionObserver hook
  */
 export function useIntersectionObserver(
-  options: IntersectionObserverInit = {},
+  options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -206,7 +209,7 @@ export function useIntersectionObserver(
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       const entry = entries[0];
       if (entry) {
         setIsIntersecting(entry.isIntersecting);
@@ -227,7 +230,7 @@ export function useIntersectionObserver(
  * Enhanced useClickOutside hook
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-  handler: () => void,
+  handler: () => void
 ): React.RefObject<T> {
   const ref = useRef<T>(null);
 

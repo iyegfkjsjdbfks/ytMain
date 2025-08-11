@@ -1,11 +1,9 @@
-
 import { memo, type ComponentType } from 'react';
-
 
 // Enhanced memoization with custom comparison
 export const withMemo = <P extends object>(
   Component: ComponentType<P>,
-  propsAreEqual?: (prevProps: P, nextProps: P) => boolean,
+  propsAreEqual?: (prevProps: P, nextProps: P) => boolean
 ) => {
   const MemoizedComponent = memo(Component, propsAreEqual);
   MemoizedComponent.displayName = `Memo(${Component.displayName || Component.name})`;
@@ -15,35 +13,35 @@ export const withMemo = <P extends object>(
 // Deep comparison for complex props
 export const deepEqual = (a: any, b: any): boolean => {
   if (a === b) {
-return true;
-}
+    return true;
+  }
 
   if (a == null || b == null) {
-return false;
-}
+    return false;
+  }
 
   if (typeof a !== typeof b) {
-return false;
-}
+    return false;
+  }
 
   if (typeof a !== 'object') {
-return false;
-}
+    return false;
+  }
 
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
 
   if (keysA.length !== keysB.length) {
-return false;
-}
+    return false;
+  }
 
   for (const key of keysA) {
     if (!keysB.includes(key)) {
-return false;
-}
+      return false;
+    }
     if (!deepEqual(a[key], b[key])) {
-return false;
-}
+      return false;
+    }
   }
 
   return true;
@@ -55,13 +53,13 @@ export const shallowEqual = <T extends object>(a: T, b: T): boolean => {
   const keysB = Object.keys(b) as Array<keyof T>;
 
   if (keysA.length !== keysB.length) {
-return false;
-}
+    return false;
+  }
 
   for (const key of keysA) {
     if (a[key] !== b[key]) {
-return false;
-}
+      return false;
+    }
   }
 
   return true;
@@ -103,7 +101,7 @@ export class PerformanceMonitor {
 
   observeLCP(callback: (entry: PerformanceEntry) => void) {
     if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
         if (lastEntry) {
@@ -118,7 +116,7 @@ export class PerformanceMonitor {
 
   observeFID(callback: (entry: PerformanceEntry) => void) {
     if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         list.getEntries().forEach(callback);
       });
 
@@ -129,7 +127,7 @@ export class PerformanceMonitor {
 
   observeCLS(callback: (entry: PerformanceEntry) => void) {
     if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         list.getEntries().forEach(callback);
       });
 
@@ -139,7 +137,7 @@ export class PerformanceMonitor {
   }
 
   disconnect() {
-    this.observers.forEach((observer) => observer.disconnect());
+    this.observers.forEach(observer => observer.disconnect());
     this.observers.clear();
   }
 
@@ -152,22 +150,27 @@ export class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
-export const optimizeImageUrl = (url: any, width?: number, height?: number, quality = 80): string => {
+export const optimizeImageUrl = (
+  url: any,
+  width?: number,
+  height?: number,
+  quality = 80
+): string => {
   if (!url) {
-return url;
-}
+    return url;
+  }
 
   // For YouTube thumbnails, use different quality versions
   if (url.includes('youtube.com') || url.includes('ytimg.com')) {
     if (width && width <= 120) {
-return url.replace(/maxresdefault|hqdefault|mqdefault/, 'default');
-}
+      return url.replace(/maxresdefault|hqdefault|mqdefault/, 'default');
+    }
     if (width && width <= 320) {
-return url.replace(/maxresdefault|hqdefault/, 'mqdefault');
-}
+      return url.replace(/maxresdefault|hqdefault/, 'mqdefault');
+    }
     if (width && width <= 480) {
-return url.replace(/maxresdefault/, 'hqdefault');
-}
+      return url.replace(/maxresdefault/, 'hqdefault');
+    }
     return url;
   }
 
@@ -176,20 +179,22 @@ return url.replace(/maxresdefault/, 'hqdefault');
   const params = [];
 
   if (width) {
-params.push(`w=${width}`);
-}
+    params.push(`w=${width}`);
+  }
   if (height) {
-params.push(`h=${height}`);
-}
+    params.push(`h=${height}`);
+  }
   if (quality !== 80) {
-params.push(`q=${quality}`);
-}
+    params.push(`q=${quality}`);
+  }
 
   return params.length > 0 ? `${url}${separator}${params.join('&')}` : url;
 };
 
 // Bundle size optimization
-export const preloadComponent = (componentImport: () => Promise<{ default: ComponentType<any> }>) => {
+export const preloadComponent = (
+  componentImport: () => Promise<{ default: ComponentType<any> }>
+) => {
   // Preload component during idle time
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => {

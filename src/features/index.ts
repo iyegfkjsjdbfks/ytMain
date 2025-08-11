@@ -9,7 +9,7 @@ export * from './video';
 // Auth features
 export * from './auth';
 
-// Playlist features 
+// Playlist features
 export * from './playlist';
 
 // Channel features

@@ -1,4 +1,3 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useState, useEffect } from 'react';
@@ -23,7 +22,7 @@ interface UseVideoInteractionsOptions {
 
 export function useVideoInteractions(
   videoId: any,
-  options: UseVideoInteractionsOptions = {},
+  options: UseVideoInteractionsOptions = {}
 ) {
   const queryClient = useQueryClient();
 
@@ -81,7 +80,9 @@ export function useVideoInteractions(
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['video-interactions', videoId] });
+      queryClient.invalidateQueries({
+        queryKey: ['video-interactions', videoId],
+      });
     },
   });
 
@@ -111,7 +112,9 @@ export function useVideoInteractions(
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['video-interactions', videoId] });
+      queryClient.invalidateQueries({
+        queryKey: ['video-interactions', videoId],
+      });
     },
   });
 
@@ -138,22 +141,28 @@ export function useVideoInteractions(
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['video-interactions', videoId] });
+      queryClient.invalidateQueries({
+        queryKey: ['video-interactions', videoId],
+      });
       queryClient.invalidateQueries({ queryKey: ['watch-later'] });
     },
   });
 
   // Report mutation
   const reportMutation = useMutation({
-    mutationFn: (reason) => videoService.reportVideo(videoId, reason),
+    mutationFn: reason => videoService.reportVideo(videoId, reason),
     onSuccess: () => {
       // Show success message
-      },
+    },
   });
 
   return {
     ...state,
-    isLoading: isLoadingInteractions || likeMutation.isPending || dislikeMutation.isPending || saveMutation.isPending,
+    isLoading:
+      isLoadingInteractions ||
+      likeMutation.isPending ||
+      dislikeMutation.isPending ||
+      saveMutation.isPending,
     toggleLike: likeMutation.mutateAsync,
     toggleDislike: dislikeMutation.mutateAsync,
     toggleSave: saveMutation.mutateAsync,

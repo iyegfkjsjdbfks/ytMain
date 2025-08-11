@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useCallback } from 'react';
 
 interface UsePaginationProps {
@@ -48,7 +47,7 @@ export function usePagination({
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
     const rightSiblingIndex = Math.min(
       currentPage + siblingCount,
-      totalPageCount,
+      totalPageCount
     );
 
     /*
@@ -80,7 +79,7 @@ export function usePagination({
       const rightItemCount = 3 + 2 * siblingCount;
       const rightRange = range(
         totalPageCount - rightItemCount + 1,
-        totalPageCount,
+        totalPageCount
       );
       return [firstPageIndex, DOTS, ...rightRange];
     }
@@ -95,13 +94,15 @@ export function usePagination({
 
     // Should not happen, but as a fallback
     return range(1, totalPageCount);
-
   }, [totalCount, pageSize, siblingCount, currentPage]);
 
-  const goToPage = useCallback((pageNumber: any) => {
-    const totalPageCount = Math.ceil(totalCount / pageSize);
-    setCurrentPage(Math.max(1, Math.min(pageNumber, totalPageCount)));
-  }, [totalCount, pageSize]);
+  const goToPage = useCallback(
+    (pageNumber: any) => {
+      const totalPageCount = Math.ceil(totalCount / pageSize);
+      setCurrentPage(Math.max(1, Math.min(pageNumber, totalPageCount)));
+    },
+    [totalCount, pageSize]
+  );
 
   const nextPage = useCallback(() => {
     goToPage(currentPage + 1);
@@ -111,7 +112,10 @@ export function usePagination({
     goToPage(currentPage - 1);
   }, [currentPage, goToPage]);
 
-  const canNextPage = useMemo(() => currentPage < Math.ceil(totalCount / pageSize), [currentPage, totalCount, pageSize]);
+  const canNextPage = useMemo(
+    () => currentPage < Math.ceil(totalCount / pageSize),
+    [currentPage, totalCount, pageSize]
+  );
   const canPrevPage = useMemo(() => currentPage > 1, [currentPage]);
 
   return {

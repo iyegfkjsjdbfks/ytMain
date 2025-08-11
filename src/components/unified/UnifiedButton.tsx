@@ -1,6 +1,6 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
-import { forwardRef  } from 'react';
+import React from 'react';
+import { forwardRef } from 'react';
 import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -12,7 +12,8 @@ import LoadingSpinner from '@components/LoadingSpinner';
  */
 
 // Button variant types
-export type ButtonVariant = | 'primary'
+export type ButtonVariant =
+  | 'primary'
   | 'secondary'
   | 'ghost'
   | 'danger'
@@ -23,7 +24,8 @@ export type ButtonVariant = | 'primary'
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface UnifiedButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -117,19 +119,22 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
-  ({
-    variant = 'primary',
-    size = 'md',
-    loading = false,
-    disabled = false,
-    fullWidth = false,
-    leftIcon,
-    rightIcon,
-    children,
-    className,
-    asChild = false,
-    ...props
-  }, ref) => {
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      disabled = false,
+      fullWidth = false,
+      leftIcon,
+      rightIcon,
+      children,
+      className,
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
     const isDisabled = disabled || loading;
 
     const buttonClasses = cn(
@@ -137,7 +142,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
       sizeStyles[size],
       variantStyles[variant],
       fullWidth && 'w-full',
-      className,
+      className
     );
 
     const content = (
@@ -145,36 +150,27 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
         {loading && (
           <LoadingSpinner
             size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-            className="absolute inset-0 m-auto"
+            className='absolute inset-0 m-auto'
           />
         )}
 
-        <span className={cn('flex items-center gap-inherit', loading && 'opacity-0')}>
-          {leftIcon && (
-            <span className="flex-shrink-0">
-              {leftIcon}
-            </span>
+        <span
+          className={cn(
+            'flex items-center gap-inherit',
+            loading && 'opacity-0'
           )}
+        >
+          {leftIcon && <span className='flex-shrink-0'>{leftIcon}</span>}
 
-          <span className="flex-1">
-            {children}
-          </span>
+          <span className='flex-1'>{children}</span>
 
-          {rightIcon && (
-            <span className="flex-shrink-0">
-              {rightIcon}
-            </span>
-          )}
+          {rightIcon && <span className='flex-shrink-0'>{rightIcon}</span>}
         </span>
       </>
     );
 
     if (asChild) {
-      return (
-        <span className={buttonClasses}>
-          {content}
-        </span>
-      );
+      return <span className={buttonClasses}>{content}</span>;
     }
 
     return (
@@ -187,31 +183,36 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
         {content}
       </button>
     );
-  },
+  }
 );
 
 UnifiedButton.displayName = 'UnifiedButton';
 
 // Export convenience components for common use cases
-export const PrimaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="primary" {...props} />,
-);
+export const PrimaryButton = forwardRef<
+  HTMLButtonElement,
+  Omit<UnifiedButtonProps, 'variant'>
+>((props, ref) => <UnifiedButton ref={ref} variant='primary' {...props} />);
 
-export const SecondaryButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="secondary" {...props} />,
-);
+export const SecondaryButton = forwardRef<
+  HTMLButtonElement,
+  Omit<UnifiedButtonProps, 'variant'>
+>((props, ref) => <UnifiedButton ref={ref} variant='secondary' {...props} />);
 
-export const DangerButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="danger" {...props} />,
-);
+export const DangerButton = forwardRef<
+  HTMLButtonElement,
+  Omit<UnifiedButtonProps, 'variant'>
+>((props, ref) => <UnifiedButton ref={ref} variant='danger' {...props} />);
 
-export const GhostButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="ghost" {...props} />,
-);
+export const GhostButton = forwardRef<
+  HTMLButtonElement,
+  Omit<UnifiedButtonProps, 'variant'>
+>((props, ref) => <UnifiedButton ref={ref} variant='ghost' {...props} />);
 
-export const LinkButton = forwardRef<HTMLButtonElement, Omit<UnifiedButtonProps, 'variant'>>(
-  (props, ref) => <UnifiedButton ref={ref} variant="link" {...props} />,
-);
+export const LinkButton = forwardRef<
+  HTMLButtonElement,
+  Omit<UnifiedButtonProps, 'variant'>
+>((props, ref) => <UnifiedButton ref={ref} variant='link' {...props} />);
 
 PrimaryButton.displayName = 'PrimaryButton';
 SecondaryButton.displayName = 'SecondaryButton';
@@ -221,7 +222,6 @@ LinkButton.displayName = 'LinkButton';
 
 export default UnifiedButton;
 
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -229,4 +229,3 @@ declare global {
     }
   }
 }
-

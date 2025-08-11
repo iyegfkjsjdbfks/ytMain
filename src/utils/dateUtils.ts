@@ -1,10 +1,8 @@
-
 import { logger } from './logger';
 
 /**
  * Date and time formatting utilities
  */
-
 
 /**
  * Formats a date to a relative time string (e.g., "2 hours ago")
@@ -20,7 +18,9 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
       return 'Invalid date';
     }
 
-    const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000);
+    const diffInSeconds = Math.floor(
+      (now.getTime() - targetDate.getTime()) / 1000
+    );
 
     if (diffInSeconds < 0) {
       return 'in the future';
@@ -63,7 +63,9 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
  * @param date Date object, date string, or timestamp
  * @returns Short relative time string
  */
-export const formatShortDistanceToNow = (date: string | Date | number): string => {
+export const formatShortDistanceToNow = (
+  date: string | Date | number
+): string => {
   try {
     const now = new Date();
     const targetDate = new Date(date);
@@ -72,7 +74,9 @@ export const formatShortDistanceToNow = (date: string | Date | number): string =
       return 'Invalid';
     }
 
-    const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000);
+    const diffInSeconds = Math.floor(
+      (now.getTime() - targetDate.getTime()) / 1000
+    );
 
     if (diffInSeconds < 0) {
       return 'future';
@@ -116,7 +120,10 @@ export const formatShortDistanceToNow = (date: string | Date | number): string =
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-export const formatDate = (date: string | Date | number, options?: Intl.DateTimeFormatOptions): string => {
+export const formatDate = (
+  date: string | Date | number,
+  options?: Intl.DateTimeFormatOptions
+): string => {
   try {
     const targetDate = new Date(date);
 
@@ -143,7 +150,10 @@ export const formatDate = (date: string | Date | number, options?: Intl.DateTime
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-export const formatTime = (date: string | Date | number, options?: Intl.DateTimeFormatOptions): string => {
+export const formatTime = (
+  date: string | Date | number,
+  options?: Intl.DateTimeFormatOptions
+): string => {
   try {
     const targetDate = new Date(date);
 
@@ -168,12 +178,14 @@ export const formatTime = (date: string | Date | number, options?: Intl.DateTime
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-export const parseRelativeDate = (relativeDate: string | null | undefined): number => {
+export const parseRelativeDate = (
+  relativeDate: string | null | undefined
+): number => {
   const now = new Date().getTime();
 
   // Safety check for null or undefined input
   if (relativeDate == null) {
-    return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago as a fallback
+    return now - 10 * 365 * 24 * 60 * 60 * 1000; // Approx 10 years ago as a fallback
   }
 
   const lowerDate = relativeDate.toLowerCase();
@@ -190,15 +202,15 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
 
     switch (unit) {
       case 'hour':
-        return now - (value * 60 * 60 * 1000);
+        return now - value * 60 * 60 * 1000;
       case 'day':
-        return now - (value * 24 * 60 * 60 * 1000);
+        return now - value * 24 * 60 * 60 * 1000;
       case 'week':
-        return now - (value * 7 * 24 * 60 * 60 * 1000);
+        return now - value * 7 * 24 * 60 * 60 * 1000;
       case 'month':
-        return now - (value * 30 * 24 * 60 * 60 * 1000); // Approximate
+        return now - value * 30 * 24 * 60 * 60 * 1000; // Approximate
       case 'year':
-        return now - (value * 365 * 24 * 60 * 60 * 1000); // Approximate
+        return now - value * 365 * 24 * 60 * 60 * 1000; // Approximate
       default:
         break;
     }
@@ -211,5 +223,5 @@ export const parseRelativeDate = (relativeDate: string | null | undefined): numb
   }
 
   // Final fallback for unparsable dates: treat as very old
-  return now - (10 * 365 * 24 * 60 * 60 * 1000); // Approx 10 years ago
+  return now - 10 * 365 * 24 * 60 * 60 * 1000; // Approx 10 years ago
 };

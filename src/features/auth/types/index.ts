@@ -1,4 +1,3 @@
-
 /**
  * Auth feature type definitions
  */

@@ -1,5 +1,3 @@
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -121,7 +119,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       try {
         return JSON.parse(stats);
       } catch (error) {
-        conditionalLogger.error('Failed to parse offline stats', error, 'useOfflineStatus');
+        conditionalLogger.error(
+          'Failed to parse offline stats',
+          error,
+          'useOfflineStatus'
+        );
       }
     }
 
@@ -133,34 +135,37 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, []);
 
   // Ping server to test connectivity
-  const pingServer = useCallback(async (url = '/api/ping'): Promise<boolean> => {
-    try {
-      const startTime = Date.now();
-      const response = await fetch(url, {
-        method: 'HEAD',
-        cache: 'no-cache',
-        signal: AbortSignal.timeout(5000), // 5 second timeout
-      });
+  const pingServer = useCallback(
+    async (url = '/api/ping'): Promise<boolean> => {
+      try {
+        const startTime = Date.now();
+        const response = await fetch(url, {
+          method: 'HEAD',
+          cache: 'no-cache',
+          signal: AbortSignal.timeout(5000), // 5 second timeout
+        });
 
-      const latency = Date.now() - startTime;
+        const latency = Date.now() - startTime;
 
-      conditionalLogger.debug(
-        'Server ping successful',
-        { latency, status: response.status },
-        'useOfflineStatus',
-      );
+        conditionalLogger.debug(
+          'Server ping successful',
+          { latency, status: response.status },
+          'useOfflineStatus'
+        );
 
-      return response.ok;
-    } catch (error) {
-      conditionalLogger.debug(
-        'Server ping failed',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'useOfflineStatus',
-      );
+        return response.ok;
+      } catch (error) {
+        conditionalLogger.debug(
+          'Server ping failed',
+          { error: error instanceof Error ? error.message : 'Unknown error' },
+          'useOfflineStatus'
+        );
 
-      return false;
-    }
-  }, []);
+        return false;
+      }
+    },
+    []
+  );
 
   // Test connection speed and quality
   const testConnection = useCallback(async (): Promise<{
@@ -198,33 +203,41 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [state.isOnline, getNetworkQuality]);
 
   // Update offline statistics
-  const updateOfflineStats = useCallback((isOffline: any) => {
-    const stats = getOfflineStats();
+  const updateOfflineStats = useCallback(
+    (isOffline: any) => {
+      const stats = getOfflineStats();
 
-    if (isOffline && !state.wasOffline) {
-      // Going offline
-      stats.offlineEvents += 1;
-      stats.lastOfflineTime = Date.now();
-    } else if (!isOffline && state.wasOffline) {
-      // Coming back online
-      if (stats.lastOfflineTime) {
-        const offlineTime = Date.now() - stats.lastOfflineTime;
-        stats.totalOfflineTime += offlineTime;
+      if (isOffline && !state.wasOffline) {
+        // Going offline
+        stats.offlineEvents += 1;
+        stats.lastOfflineTime = Date.now();
+      } else if (!isOffline && state.wasOffline) {
+        // Coming back online
+        if (stats.lastOfflineTime) {
+          const offlineTime = Date.now() - stats.lastOfflineTime;
+          stats.totalOfflineTime += offlineTime;
+        }
       }
-    }
 
-    try {
-      localStorage.setItem('offline-stats', JSON.stringify(stats));
-    } catch (error) {
-      conditionalLogger.error('Failed to save offline stats', error, 'useOfflineStatus');
-    }
-  }, [state.wasOffline, getOfflineStats]);
+      try {
+        localStorage.setItem('offline-stats', JSON.stringify(stats));
+      } catch (error) {
+        conditionalLogger.error(
+          'Failed to save offline stats',
+          error,
+          'useOfflineStatus'
+        );
+      }
+    },
+    [state.wasOffline, getOfflineStats]
+  );
 
   // Get network information
   const getNetworkInfo = useCallback((): NetworkConnection | null => {
-    const connection = (navigator as any).connection ||
-                      (navigator as any).mozConnection ||
-                      (navigator as any).webkitConnection;
+    const connection =
+      (navigator as any).connection ||
+      (navigator as any).mozConnection ||
+      (navigator as any).webkitConnection;
 
     if (!connection) {
       return null;
@@ -246,9 +259,10 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       const now = Date.now();
 
       setState(prev => {
-        const offlineDuration = prev.wasOffline && prev.lastOnlineTime
-          ? now - prev.lastOnlineTime
-          : 0;
+        const offlineDuration =
+          prev.wasOffline && prev.lastOnlineTime
+            ? now - prev.lastOnlineTime
+            : 0;
 
         return {
           ...prev,
@@ -265,7 +279,11 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
         offlineTimer = null;
       }
 
-      conditionalLogger.debug('Connection restored', undefined, 'useOfflineStatus');
+      conditionalLogger.debug(
+        'Connection restored',
+        undefined,
+        'useOfflineStatus'
+      );
     };
 
     const handleOffline = () => {
@@ -281,7 +299,9 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       offlineTimer = setInterval(() => {
         setState(prev => ({
           ...prev,
-          offlineDuration: prev.lastOnlineTime ? Date.now() - prev.lastOnlineTime : 0,
+          offlineDuration: prev.lastOnlineTime
+            ? Date.now() - prev.lastOnlineTime
+            : 0,
         }));
       }, 1000);
 
@@ -301,7 +321,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
       conditionalLogger.debug(
         'Network connection changed',
         { connectionType, networkInfo },
-        'useOfflineStatus',
+        'useOfflineStatus'
       );
     };
 
@@ -310,7 +330,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
     window.addEventListener('offline', handleOffline);
 
     // Listen for connection changes
-    const { connection } = (navigator as any);
+    const { connection } = navigator as any;
     if (connection) {
       connection.addEventListener('change', handleConnectionChange);
     }

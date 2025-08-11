@@ -1,11 +1,8 @@
-
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import React from "react";
+import React from 'react';
 import { afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { server } from './mocks/server';
-
-
 
 // Global type declarations
 declare global {
@@ -157,12 +154,12 @@ beforeAll(() => {
     const message = args[0];
     if (
       typeof message === 'string' &&
-      (
-        message.includes('Warning: ReactDOM.render is no longer supported') ||
+      (message.includes('Warning: ReactDOM.render is no longer supported') ||
         message.includes('Warning: validateDOMNesting') ||
-        message.includes('Warning: Each child in a list should have a unique "key" prop') ||
-        message.includes('act()')
-      )
+        message.includes(
+          'Warning: Each child in a list should have a unique "key" prop'
+        ) ||
+        message.includes('act()'))
     ) {
       return;
     }
@@ -173,11 +170,9 @@ beforeAll(() => {
     const message = args[0];
     if (
       typeof message === 'string' &&
-      (
-        message.includes('componentWillReceiveProps') ||
+      (message.includes('componentWillReceiveProps') ||
         message.includes('componentWillUpdate') ||
-        message.includes('componentWillMount')
-      )
+        message.includes('componentWillMount'))
     ) {
       return;
     }
@@ -349,12 +344,21 @@ Object.defineProperty(window, 'FileReader', {
     result: string | ArrayBuffer | null = null;
     error: DOMException | null = null;
     readyState: number = 0;
-    onload: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
-    onerror: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
-    onabort: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
-    onloadstart: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
-    onloadend: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
-    onprogress: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null = null;
+    onload: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null =
+      null;
+    onerror: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null =
+      null;
+    onabort: ((this: FileReader, ev: ProgressEvent<FileReader>) => any) | null =
+      null;
+    onloadstart:
+      | ((this: FileReader, ev: ProgressEvent<FileReader>) => any)
+      | null = null;
+    onloadend:
+      | ((this: FileReader, ev: ProgressEvent<FileReader>) => any)
+      | null = null;
+    onprogress:
+      | ((this: FileReader, ev: ProgressEvent<FileReader>) => any)
+      | null = null;
 
     readAsText = vi.fn().mockImplementation(() => {
       this.result = 'mock file content';
@@ -413,28 +417,31 @@ global.testUtils = {
 expect.extend({
   toBeInViewport(received: Element) {
     const rect = received.getBoundingClientRect();
-    const isInViewport = (
+    const isInViewport =
       rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth);
 
     return {
-      message: () => `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
+      message: () =>
+        `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
       pass: isInViewport,
     };
   },
 
   toHaveAccessibleName(received: Element, expectedName) {
-    const accessibleName = received.getAttribute('aria-label') ||
-                          received.getAttribute('aria-labelledby') ||
-                          received.textContent;
+    const accessibleName =
+      received.getAttribute('aria-label') ||
+      received.getAttribute('aria-labelledby') ||
+      received.textContent;
 
     const hasExpectedName = accessibleName === expectedName;
 
     return {
-      message: () => `expected element to have accessible name "${expectedName}" but got "${accessibleName}"`,
+      message: () =>
+        `expected element to have accessible name "${expectedName}" but got "${accessibleName}"`,
       pass: hasExpectedName,
     };
   },
@@ -448,6 +455,4 @@ declare global {
       toHaveAccessibleName(expectedName: any): T;
     }
   }
-
-
 }

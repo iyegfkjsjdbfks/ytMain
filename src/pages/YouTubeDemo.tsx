@@ -1,12 +1,10 @@
 /// <reference types="react/jsx-runtime" />
 import { ErrorBoundary } from 'react-error-boundary';
-import React from "react";
-import { useState  } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import type * as React from 'react';
 import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
-
-
 
 const YouTubeDemo: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState('');
@@ -38,77 +36,77 @@ const YouTubeDemo: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">YouTube Player Demo</h1>
+    <div className='container mx-auto p-4 max-w-4xl'>
+      <h1 className='text-3xl font-bold mb-6'>YouTube Player Demo</h1>
 
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <form onSubmit={handleSubmit} className="mb-6">
-          <div className="flex flex-col md:flex-row gap-4 mb-4">
-            <div className="flex-1">
+      <div className='bg-white rounded-lg shadow-md p-6 mb-8'>
+        <form onSubmit={handleSubmit} className='mb-6'>
+          <div className='flex flex-col md:flex-row gap-4 mb-4'>
+            <div className='flex-1'>
               <input
-                type="text"
+                type='text'
                 value={videoUrl}
-                onChange={(e) => setVideoUrl(e.target.value)}
-                placeholder="Enter YouTube URL"
-                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                onChange={e => setVideoUrl(e.target.value)}
+                placeholder='Enter YouTube URL'
+                className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               />
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+              {error && <p className='text-red-500 text-sm mt-1'>{error}</p>}
             </div>
             <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded transition-colors"
+              type='submit'
+              className='bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded transition-colors'
             >
               Load Video
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-6">
-            <label className="flex items-center space-x-2">
+          <div className='flex flex-wrap gap-6'>
+            <label className='flex items-center space-x-2'>
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={useCustomControls}
-                onChange={(e) => setUseCustomControls(e.target.checked)}
-                className="rounded text-blue-500"
+                onChange={e => setUseCustomControls(e.target.checked)}
+                className='rounded text-blue-500'
               />
               <span>Use Custom Controls</span>
             </label>
 
-            <label className="flex items-center space-x-2">
+            <label className='flex items-center space-x-2'>
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={autoplay}
-                onChange={(e) => setAutoplay(e.target.checked)}
-                className="rounded text-blue-500"
+                onChange={e => setAutoplay(e.target.checked)}
+                className='rounded text-blue-500'
               />
               <span>Autoplay</span>
             </label>
           </div>
         </form>
 
-        <div className="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden">
+        <div className='aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden'>
           <YouTubePlayerExample
             videoId={videoId}
             controls={!useCustomControls}
             autoplay={autoplay}
-            className="w-full h-full"
+            className='w-full h-full'
           />
         </div>
 
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Current Video Info</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className='mt-6 p-4 bg-gray-50 rounded-lg'>
+          <h2 className='text-xl font-semibold mb-3'>Current Video Info</h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div>
-              <h3 className="font-medium text-gray-700">Video ID:</h3>
-              <p className="font-mono bg-gray-100 p-2 rounded">{videoId}</p>
+              <h3 className='font-medium text-gray-700'>Video ID:</h3>
+              <p className='font-mono bg-gray-100 p-2 rounded'>{videoId}</p>
             </div>
             <div>
-              <h3 className="font-medium text-gray-700">Video URL:</h3>
-              <p className="break-all">
+              <h3 className='font-medium text-gray-700'>Video URL:</h3>
+              <p className='break-all'>
                 <a
                   href={`https://www.youtube.com/watch?v=${videoId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-500 hover:underline'
                 >
                   https://www.youtube.com/watch?v={videoId}
                 </a>
@@ -118,13 +116,14 @@ const YouTubeDemo: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4">How to Use</h2>
+      <div className='bg-white rounded-lg shadow-md p-6'>
+        <h2 className='text-2xl font-bold mb-4'>How to Use</h2>
 
-        <div className="prose max-w-none">
-          <h3 className="text-xl font-semibold mt-4">Basic Usage</h3>
-          <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-            import { `import { YouTubePlayer  } from './lib/youtube-utils';
+        <div className='prose max-w-none'>
+          <h3 className='text-xl font-semibold mt-4'>Basic Usage</h3>
+          <pre className='bg-gray-100 p-4 rounded-lg overflow-x-auto'>
+            import{' '}
+            {`import { YouTubePlayer  } from './lib/youtube-utils';
 
 // Initialize player
 const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
@@ -149,9 +148,12 @@ player.pauseVideo();
 player.seekTo(60); // Seek to 1 minute`}
           </pre>
 
-          <h3 className="text-xl font-semibold mt-6">Using the React Component</h3>
-          <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-            import { `import { YouTubePlayerExample  } from './components/examples/YouTubePlayerExample';
+          <h3 className='text-xl font-semibold mt-6'>
+            Using the React Component
+          </h3>
+          <pre className='bg-gray-100 p-4 rounded-lg overflow-x-auto'>
+            import{' '}
+            {`import { YouTubePlayerExample  } from './components/examples/YouTubePlayerExample';
 
 // In your component
 <YouTubePlayerExample 
@@ -175,8 +177,7 @@ const YouTubeDemoWithErrorBoundary = () => (
   </ErrorBoundary>
 );
 
-export default YouTubeDemoWithErrorBoundary;;
-
+export default YouTubeDemoWithErrorBoundary;
 
 declare global {
   namespace JSX {
@@ -185,4 +186,3 @@ declare global {
     }
   }
 }
-

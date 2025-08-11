@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import type { LivePoll, QAQuestion } from '@/types/livestream';
 
 // Import statement fixed
-// 
+//
 interface LiveStreamState {
   isLive: boolean;
   viewerCount: number;
@@ -133,12 +133,26 @@ export const useLiveQA = (streamId?: string) => {
 
   const answerQuestion = async (questionId: any, answer: any) => {
     setQuestions(prev =>
-      prev.map(q => (q.id === questionId ? { ...q, answer, answered: true, isAnswered: true, answeredAt: new Date() } : q))
+      prev.map(q =>
+        q.id === questionId
+          ? {
+              ...q,
+              answer,
+              answered: true,
+              isAnswered: true,
+              answeredAt: new Date(),
+            }
+          : q
+      )
     );
   };
 
   const upvoteQuestion = async (questionId: any) => {
-    setQuestions(prev => prev.map(q => (q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q)));
+    setQuestions(prev =>
+      prev.map(q =>
+        q.id === questionId ? { ...q, upvotes: (q.upvotes || 0) + 1 } : q
+      )
+    );
   };
 
   return { questions, submitQuestion, answerQuestion, upvoteQuestion } as const;

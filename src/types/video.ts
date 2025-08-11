@@ -1,4 +1,3 @@
-
 export interface VideoQuality {
   name: string;
   value: string;
@@ -154,10 +153,13 @@ export interface Video {
     concurrentViewers?: string;
     activeLiveChatId?: string;
   };
-  localizations?: Record<string, {
-    title: string;
-    description: string;
-  }>;
+  localizations?: Record<
+    string,
+    {
+      title: string;
+      description: string;
+    }
+  >;
   // Required timestamp fields
   createdAt: string;
   updatedAt: string;

@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useCallback, type FC } from 'react';
@@ -41,13 +40,10 @@ const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
   // Removed unused handleReload function
 
   return (
-    <VideoErrorBoundary
-        videoId={videoId || 'unknown'}
-        onRetry={handleRetry}
-      >
+    <VideoErrorBoundary videoId={videoId || 'unknown'} onRetry={handleRetry}>
       <VideoPlayer
         videoId={videoId}
-        {...(src && { src } as any)}
+        {...(src && ({ src } as any))}
         {...(poster && { poster })}
         {...(title && { title })}
         autoplay={autoplay}

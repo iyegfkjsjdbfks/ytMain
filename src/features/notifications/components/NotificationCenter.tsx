@@ -1,11 +1,16 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 import { useState, useEffect, useRef } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';
 import type { Notification } from '../services/notificationService';
-import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
+import {
+  BellIcon,
+  XMarkIcon,
+  CheckIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
 
 interface NotificationCenterProps {
   className?: string;
@@ -67,78 +72,84 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
       }`}
       onClick={() => onClick(notification)}
     >
-      <div className="flex items-start gap-3">
+      <div className='flex items-start gap-3'>
         {/* Avatar/Icon */}
-        <div className="flex-shrink-0">
+        <div className='flex-shrink-0'>
           {notification.fromUserAvatar ? (
             <img
               src={notification.fromUserAvatar}
               alt={notification.fromUserName || 'User'}
-              className="w-10 h-10 rounded-full object-cover"
+              className='w-10 h-10 rounded-full object-cover'
             />
           ) : (
-            <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-lg">
+            <div className='w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-lg'>
               {getNotificationIcon()}
             </div>
           )}
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h4 className={`text-sm font-medium ${
-                !notification.isRead ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
-              }`}>
+        <div className='flex-1 min-w-0'>
+          <div className='flex items-start justify-between'>
+            <div className='flex-1'>
+              <h4
+                className={`text-sm font-medium ${
+                  !notification.isRead
+                    ? 'text-gray-900 dark:text-white'
+                    : 'text-gray-700 dark:text-gray-300'
+                }`}
+              >
                 {notification.title}
               </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+              <p className='text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2'>
                 {notification.message}
               </p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs text-gray-500 dark:text-gray-400">
-                  {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+              <div className='flex items-center gap-2 mt-2'>
+                <span className='text-xs text-gray-500 dark:text-gray-400'>
+                  {formatDistanceToNow(new Date(notification.createdAt), {
+                    addSuffix: true,
+                  })}
                 </span>
                 {!notification.isRead && (
-                  <span className="w-2 h-2 bg-blue-600 rounded-full" />
+                  <span className='w-2 h-2 bg-blue-600 rounded-full' />
                 )}
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-1 ml-2">
+            <div className='flex items-center gap-1 ml-2'>
               {!notification.isRead && (
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     onMarkAsRead(notification.id);
                   }}
-                  className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  title="Mark as read"
+                  className='p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors'
+                  title='Mark as read'
                 >
-                  <CheckIcon className="w-4 h-4 text-gray-500" />
+                  <CheckIcon className='w-4 h-4 text-gray-500' />
                 </button>
               )}
               <button
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation();
                   onDelete(notification.id);
                 }}
-                className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                title="Delete"
+                className='p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors'
+                title='Delete'
               >
-                <TrashIcon className="w-4 h-4 text-gray-500" />
+                <TrashIcon className='w-4 h-4 text-gray-500' />
               </button>
             </div>
           </div>
 
           {/* Thumbnail */}
           {notification.thumbnail && (
-            <div className="mt-2">
+            <div className='mt-2'>
               <img
                 src={notification.thumbnail}
-                alt="Notification thumbnail"
-                className="w-16 h-12 object-cover rounded"
+                alt='Notification thumbnail'
+                className='w-16 h-12 object-cover rounded'
               />
             </div>
           )}
@@ -168,7 +179,10 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -177,15 +191,20 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredNotifications = Array.isArray(notifications) ? notifications.filter((notification) => {
-    if (filter === 'unread' && notification.isRead) {
-return false;
-}
-    if (selectedCategory !== 'all' && notification.category !== selectedCategory) {
-return false;
-}
-    return true;
-  }) : [];
+  const filteredNotifications = Array.isArray(notifications)
+    ? notifications.filter(notification => {
+        if (filter === 'unread' && notification.isRead) {
+          return false;
+        }
+        if (
+          selectedCategory !== 'all' &&
+          notification.category !== selectedCategory
+        ) {
+          return false;
+        }
+        return true;
+      })
+    : [];
 
   const handleNotificationClick = (notification: Notification) => {
     if (!notification.isRead) {
@@ -212,16 +231,16 @@ return false;
       {/* Notification Bell */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        className='relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
       >
         {unreadCount > 0 ? (
-          <BellSolidIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+          <BellSolidIcon className='w-6 h-6 text-gray-700 dark:text-gray-300' />
         ) : (
-          <BellIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+          <BellIcon className='w-6 h-6 text-gray-700 dark:text-gray-300' />
         )}
 
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          <span className='absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center'>
             {unreadCount > 99 ? '99+' : unreadCount}
           </span>
         )}
@@ -229,26 +248,26 @@ return false;
 
       {/* Notification Dropdown */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden">
+        <div className='absolute top-full right-0 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 max-h-96 overflow-hidden'>
           {/* Header */}
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className='p-4 border-b border-gray-200 dark:border-gray-700'>
+            <div className='flex items-center justify-between mb-3'>
+              <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
                 Notifications
               </h3>
-              <div className="flex items-center gap-2">
+              <div className='flex items-center gap-2'>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className='p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700'
                 >
-                  <XMarkIcon className="w-5 h-5" />
+                  <XMarkIcon className='w-5 h-5' />
                 </button>
               </div>
             </div>
 
             {/* Filters */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center gap-2'>
                 <button
                   onClick={() => setFilter('all')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
@@ -271,18 +290,18 @@ return false;
                 </button>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className='flex items-center gap-2'>
                 {unreadCount > 0 && (
                   <button
                     onClick={() => markAllAsRead()}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                    className='text-sm text-blue-600 hover:text-blue-700 font-medium'
                   >
                     Mark all read
                   </button>
                 )}
                 <button
                   onClick={() => clearAll()}
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className='text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 >
                   Clear all
                 </button>
@@ -290,13 +309,13 @@ return false;
             </div>
 
             {/* Category Filter */}
-            <div className="mt-3">
+            <div className='mt-3'>
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm"
+                onChange={e => setSelectedCategory(e.target.value)}
+                className='w-full px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm'
               >
-                {categories.map((category) => (
+                {categories.map(category => (
                   <option key={category.value} value={category.value}>
                     {category.label}
                   </option>
@@ -306,14 +325,14 @@ return false;
           </div>
 
           {/* Notifications List */}
-          <div className="max-h-80 overflow-y-auto">
+          <div className='max-h-80 overflow-y-auto'>
             {isLoading ? (
-              <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+              <div className='p-4 text-center text-gray-500 dark:text-gray-400'>
                 Loading notifications...
               </div>
             ) : filteredNotifications.length > 0 ? (
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredNotifications.map((notification) => (
+              <div className='divide-y divide-gray-200 dark:divide-gray-700'>
+                {filteredNotifications.map(notification => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}
@@ -324,11 +343,11 @@ return false;
                 ))}
               </div>
             ) : (
-              <div className="p-8 text-center text-gray-500 dark:text-gray-400">
-                <BellIcon className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <div className='p-8 text-center text-gray-500 dark:text-gray-400'>
+                <BellIcon className='w-12 h-12 mx-auto mb-4 opacity-50' />
                 <p>No notifications found</p>
                 {filter === 'unread' && (
-                  <p className="text-sm mt-1">All caught up! 🎉</p>
+                  <p className='text-sm mt-1'>All caught up! 🎉</p>
                 )}
               </div>
             )}
@@ -336,8 +355,8 @@ return false;
 
           {/* Footer */}
           {filteredNotifications.length > 0 && (
-            <div className="p-3 border-t border-gray-200 dark:border-gray-700 text-center">
-              <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+            <div className='p-3 border-t border-gray-200 dark:border-gray-700 text-center'>
+              <button className='text-sm text-blue-600 hover:text-blue-700 font-medium'>
                 View all notifications
               </button>
             </div>
@@ -349,7 +368,6 @@ return false;
 };
 
 export default NotificationCenter;
-
 
 declare global {
   namespace JSX {

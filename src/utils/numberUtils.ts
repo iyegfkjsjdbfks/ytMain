@@ -1,4 +1,3 @@
-
 /**
  * Number formatting utilities
  */
@@ -35,8 +34,8 @@ export const parseViewCount = (viewsStr: any): number => {
  */
 export const formatCount = (num: any, digits: number = 0): string => {
   if (isNaN(num) || num < 0) {
-return '0';
-}
+    return '0';
+  }
 
   const lookup = [
     { value: 1, symbol: '' },
@@ -47,11 +46,16 @@ return '0';
   ];
 
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-  const item = lookup.slice().reverse().find((item) => {
-    return num >= item.value;
-  });
+  const item = lookup
+    .slice()
+    .reverse()
+    .find(item => {
+      return num >= item.value;
+    });
 
-  return item ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0';
+  return item
+    ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
+    : '0';
 };
 
 /**
@@ -66,8 +70,8 @@ export const formatNumber = formatCount;
  */
 export const formatDuration = (seconds: any): string => {
   if (isNaN(seconds) || seconds < 0) {
-return '0:00';
-}
+    return '0:00';
+  }
 
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -76,8 +80,7 @@ return '0:00';
   if (hours > 0) {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
-    return `${minutes}:${secs.toString().padStart(2, '0')}`;
-
+  return `${minutes}:${secs.toString().padStart(2, '0')}`;
 };
 
 /**
@@ -87,8 +90,8 @@ return '0:00';
  */
 export const formatWithCommas = (num: any): string => {
   if (isNaN(num)) {
-return '0';
-}
+    return '0';
+  }
   return num.toLocaleString();
 };
 
@@ -98,10 +101,13 @@ return '0';
  * @param decimals Number of decimal places
  * @returns Formatted percentage string
  */
-export const formatPercentage = (value: string | number, decimals: number = 1): string => {
+export const formatPercentage = (
+  value: string | number,
+  decimals: number = 1
+): string => {
   if (isNaN(value)) {
-return '0%';
-}
+    return '0%';
+  }
   return `${value.toFixed(decimals)}%`;
 };
 
@@ -112,15 +118,15 @@ return '0%';
  */
 export const formatFileSize = (bytes: any): string => {
   if (isNaN(bytes) || bytes < 0) {
-return '0 B';
-}
+    return '0 B';
+  }
 
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
 
   if (i === 0) {
-return `${bytes} ${sizes[i]}`;
-}
+    return `${bytes} ${sizes[i]}`;
+  }
 
   const formatted = (bytes / Math.pow(1024, i)).toFixed(1);
   return `${formatted.endsWith('.0') ? formatted.slice(0, -2) : formatted} ${sizes[i]}`;

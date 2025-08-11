@@ -1,4 +1,3 @@
-
 import { conditionalLogger } from '../utils/conditionalLogger';
 
 // PWA Configuration and Utilities
@@ -91,8 +90,10 @@ export const PWA_CONFIG = {
 export const PWAUtils = {
   // Check if app is installed as PWA
   isInstalled(): boolean {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           (window.navigator as any).standalone === true;
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true
+    );
   },
 
   // Check if PWA installation is supported
@@ -103,7 +104,7 @@ export const PWAUtils = {
   // Check if device is mobile
   isMobile(): boolean {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent,
+      navigator.userAgent
     );
   },
 
@@ -114,7 +115,10 @@ export const PWAUtils = {
 
   // Check if device supports background sync
   supportsBackgroundSync(): boolean {
-    return 'serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype;
+    return (
+      'serviceWorker' in navigator &&
+      'sync' in window.ServiceWorkerRegistration.prototype
+    );
   },
 
   // Get installation prompt storage key
@@ -124,21 +128,23 @@ export const PWAUtils = {
 
   // Check if install prompt was dismissed recently
   isInstallPromptDismissed(): boolean {
-    const dismissed = localStorage.getItem(PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY);
+    const dismissed = localStorage.getItem(
+      PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY
+    );
     if (!dismissed) {
-return false;
-}
+      return false;
+    }
 
     const dismissedTime = parseInt(dismissed, 10);
     const now = Date.now();
-    return (now - dismissedTime) < PWA_CONFIG.INSTALL_PROMPT.DISMISS_DURATION;
+    return now - dismissedTime < PWA_CONFIG.INSTALL_PROMPT.DISMISS_DURATION;
   },
 
   // Mark install prompt as dismissed
   dismissInstallPrompt(): void {
     localStorage.setItem(
       PWA_CONFIG.INSTALL_PROMPT.STORAGE_KEY,
-      Date.now().toString(),
+      Date.now().toString()
     );
   },
 

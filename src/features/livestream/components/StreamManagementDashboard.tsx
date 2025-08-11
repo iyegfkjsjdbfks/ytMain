@@ -1,11 +1,29 @@
 /// <reference types="react/jsx-runtime" />
-import React from "react";
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 import type { LiveStream } from '../../../types/livestream';
-import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
+import {
+  PlayIcon,
+  StopIcon,
+  PencilIcon,
+  TrashIcon,
+  EyeIcon,
+  CalendarIcon,
+  ClockIcon,
+  VideoCameraIcon,
+  ChartBarIcon,
+  Cog6ToothIcon,
+  DocumentDuplicateIcon,
+  ShareIcon,
+  ArchiveBoxIcon,
+} from '@heroicons/react/24/outline';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  XCircleIcon,
+} from '@heroicons/react/24/solid';
 
 interface StreamManagementDashboardProps {
   className?: string;
@@ -13,7 +31,14 @@ interface StreamManagementDashboardProps {
 
 interface StreamAction {
   id: string;
-  type: 'start' | 'stop' | 'edit' | 'delete' | 'duplicate' | 'analytics' | 'share';
+  type:
+    | 'start'
+    | 'stop'
+    | 'edit'
+    | 'delete'
+    | 'duplicate'
+    | 'analytics'
+    | 'share';
   label: string;
   icon: React.ComponentType<any>;
   color: string;
@@ -26,8 +51,12 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   const [streams, setStreams] = useState<LiveStream[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStreams, setSelectedStreams] = useState<string[]>([]);
-  const [filter, setFilter] = useState<'all' | 'live' | 'scheduled' | 'ended'>('all');
-  const [sortBy, setSortBy] = useState<'date' | 'viewers' | 'duration' | 'revenue'>('date');
+  const [filter, setFilter] = useState<'all' | 'live' | 'scheduled' | 'ended'>(
+    'all'
+  );
+  const [sortBy, setSortBy] = useState<
+    'date' | 'viewers' | 'duration' | 'revenue'
+  >('date');
 
   useEffect(() => {
     const fetchStreams = async () => {
@@ -38,7 +67,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           {
             id: 'stream_1',
             title: 'Gaming Session - Exploring New Worlds',
-            description: 'Join me as we explore the latest game releases and have fun together!',
+            description:
+              'Join me as we explore the latest game releases and have fun together!',
             thumbnailUrl: '/api/placeholder/320/180',
             streamUrl: 'rtmp://localhost:1935/live/gaming_session',
             streamKey: 'key_abc123',
@@ -74,7 +104,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               likes: 342,
               dislikes: 12,
               chatMessages: 1567,
-              superChatAmount: 234.50,
+              superChatAmount: 234.5,
               superChatCount: 23,
               pollVotes: 456,
               qaQuestions: 34,
@@ -84,8 +114,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
               latency: 1800,
             },
             monetization: {
-              totalRevenue: 234.50,
-              superChatRevenue: 234.50,
+              totalRevenue: 234.5,
+              superChatRevenue: 234.5,
               adRevenue: 0,
               membershipRevenue: 0,
               donationRevenue: 0,
@@ -95,7 +125,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           {
             id: 'stream_2',
             title: 'Weekly Q&A Session',
-            description: 'Ask me anything about content creation, streaming tips, and more!',
+            description:
+              'Ask me anything about content creation, streaming tips, and more!',
             thumbnailUrl: '/api/placeholder/320/180',
             streamUrl: 'rtmp://localhost:1935/live/qa_session',
             streamKey: 'key_def456',
@@ -155,7 +186,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           {
             id: 'stream_3',
             title: 'Music Production Masterclass',
-            description: 'Learn music production techniques and create beats together!',
+            description:
+              'Learn music production techniques and create beats together!',
             thumbnailUrl: '/api/placeholder/320/180',
             streamUrl: 'rtmp://localhost:1935/live/music_production',
             streamKey: 'key_ghi789',
@@ -229,35 +261,45 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         id: 'edit',
         type: 'edit',
         label: 'Edit',
-        icon: PencilIcon as React.ComponentType<{ className?: string | undefined }>,
+        icon: PencilIcon as React.ComponentType<{
+          className?: string | undefined;
+        }>,
         color: 'text-blue-600 hover:text-blue-800',
       },
       {
         id: 'duplicate',
         type: 'duplicate',
         label: 'Duplicate',
-        icon: DocumentDuplicateIcon as React.ComponentType<{ className?: string | undefined }>,
+        icon: DocumentDuplicateIcon as React.ComponentType<{
+          className?: string | undefined;
+        }>,
         color: 'text-green-600 hover:text-green-800',
       },
       {
         id: 'analytics',
         type: 'analytics',
         label: 'Analytics',
-        icon: ChartBarIcon as React.ComponentType<{ className?: string | undefined }>,
+        icon: ChartBarIcon as React.ComponentType<{
+          className?: string | undefined;
+        }>,
         color: 'text-purple-600 hover:text-purple-800',
       },
       {
         id: 'share',
         type: 'share',
         label: 'Share',
-        icon: ShareIcon as React.ComponentType<{ className?: string | undefined }>,
+        icon: ShareIcon as React.ComponentType<{
+          className?: string | undefined;
+        }>,
         color: 'text-indigo-600 hover:text-indigo-800',
       },
       {
         id: 'delete',
         type: 'delete',
         label: 'Delete',
-        icon: TrashIcon as React.ComponentType<{ className?: string | undefined }>,
+        icon: TrashIcon as React.ComponentType<{
+          className?: string | undefined;
+        }>,
         color: 'text-red-600 hover:text-red-800',
       },
     ];
@@ -268,10 +310,12 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           id: 'stop',
           type: 'stop',
           label: 'End Stream',
-          icon: StopIcon as React.ComponentType<{ className?: string | undefined }>,
+          icon: StopIcon as React.ComponentType<{
+            className?: string | undefined;
+          }>,
           color: 'text-red-600 hover:text-red-800',
         },
-        ...baseActions.filter((a) => a.id !== 'delete'),
+        ...baseActions.filter(a => a.id !== 'delete'),
       ];
     }
 
@@ -281,7 +325,9 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           id: 'start',
           type: 'start',
           label: 'Start Now',
-          icon: PlayIcon as React.ComponentType<{ className?: string | undefined }>,
+          icon: PlayIcon as React.ComponentType<{
+            className?: string | undefined;
+          }>,
           color: 'text-green-600 hover:text-green-800',
         },
         ...baseActions,
@@ -291,7 +337,10 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     return baseActions;
   };
 
-  const handleStreamAction = async (stream: LiveStream, action: StreamAction) => {
+  const handleStreamAction = async (
+    stream: LiveStream,
+    action: StreamAction
+  ) => {
     try {
       switch (action.type) {
         case 'start':
@@ -307,17 +356,19 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Edit stream:', stream.id);
           break;
         case 'duplicate':
-          const duplicatedStream = await liveStreamService.streams.createStream({
-            ...stream,
-            title: `${stream.title} (Copy)`,
-            status: 'scheduled',
-          });
+          const duplicatedStream = await liveStreamService.streams.createStream(
+            {
+              ...stream,
+              title: `${stream.title} (Copy)`,
+              status: 'scheduled',
+            }
+          );
           setStreams(prev => [...prev, duplicatedStream]);
           break;
         case 'delete':
           if (confirm('Are you sure you want to delete this stream?')) {
             // In production, call delete API
-            setStreams(prev => prev.filter((s) => s.id !== stream.id));
+            setStreams(prev => prev.filter(s => s.id !== stream.id));
           }
           break;
         case 'analytics':
@@ -338,8 +389,14 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     try {
       switch (action) {
         case 'delete':
-          if (confirm(`Are you sure you want to delete ${selectedStreams.length} streams?`)) {
-            setStreams(prev => prev.filter((s) => !selectedStreams.includes(s.id)));
+          if (
+            confirm(
+              `Are you sure you want to delete ${selectedStreams.length} streams?`
+            )
+          ) {
+            setStreams(prev =>
+              prev.filter(s => !selectedStreams.includes(s.id))
+            );
             setSelectedStreams([]);
           }
           break;
@@ -356,32 +413,37 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
   const getStatusIcon = (status: LiveStream['status']) => {
     switch (status) {
       case 'live':
-        return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
+        return <CheckCircleIcon className='h-5 w-5 text-green-500' />;
       case 'scheduled':
-        return <ClockIcon className="h-5 w-5 text-blue-500" />;
+        return <ClockIcon className='h-5 w-5 text-blue-500' />;
       case 'ended':
-        return <ArchiveBoxIcon className="h-5 w-5 text-gray-500" />;
+        return <ArchiveBoxIcon className='h-5 w-5 text-gray-500' />;
       case 'error':
-        return <XCircleIcon className="h-5 w-5 text-red-500" />;
+        return <XCircleIcon className='h-5 w-5 text-red-500' />;
       default:
-        return <ExclamationCircleIcon className="h-5 w-5 text-yellow-500" />;
+        return <ExclamationCircleIcon className='h-5 w-5 text-yellow-500' />;
     }
   };
 
   const getStatusColor = (status: LiveStream['status']) => {
     switch (status) {
-      case 'live': return 'bg-green-100 text-green-800';
-      case 'scheduled': return 'bg-blue-100 text-blue-800';
-      case 'ended': return 'bg-gray-100 text-gray-800';
-      case 'error': return 'bg-red-100 text-red-800';
-      default: return 'bg-yellow-100 text-yellow-800';
+      case 'live':
+        return 'bg-green-100 text-green-800';
+      case 'scheduled':
+        return 'bg-blue-100 text-blue-800';
+      case 'ended':
+        return 'bg-gray-100 text-gray-800';
+      case 'error':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-yellow-100 text-yellow-800';
     }
   };
 
-  const filteredStreams = streams.filter((stream) => {
+  const filteredStreams = streams.filter(stream => {
     if (filter === 'all') {
-return true;
-}
+      return true;
+    }
     return stream.status === filter;
   });
 
@@ -404,11 +466,11 @@ return true;
 
   const formatNumber = (num: any) => {
     if (num >= 1000000) {
-return `${(num / 1000000).toFixed(1)}M`;
-}
+      return `${(num / 1000000).toFixed(1)}M`;
+    }
     if (num >= 1000) {
-return `${(num / 1000).toFixed(1)}K`;
-}
+      return `${(num / 1000).toFixed(1)}K`;
+    }
     return num.toString();
   };
 
@@ -416,19 +478,19 @@ return `${(num / 1000).toFixed(1)}K`;
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     if (hours > 0) {
-return `${hours}h ${minutes}m`;
-}
+      return `${hours}h ${minutes}m`;
+    }
     return `${minutes}m`;
   };
 
   if (loading) {
     return (
       <div className={`p-6 ${className}`}>
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/3" />
-          <div className="space-y-3">
+        <div className='animate-pulse space-y-4'>
+          <div className='h-8 bg-gray-200 rounded w-1/3' />
+          <div className='space-y-3'>
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-20 bg-gray-200 rounded" />
+              <div key={i} className='h-20 bg-gray-200 rounded' />
             ))}
           </div>
         </div>
@@ -439,55 +501,55 @@ return `${hours}h ${minutes}m`;
   return (
     <div className={`p-6 space-y-6 ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className='flex items-center justify-between'>
+        <h2 className='text-2xl font-bold text-gray-900 dark:text-white'>
           Stream Management
         </h2>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
           Create New Stream
         </button>
       </div>
 
       {/* Filters and Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
+      <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0'>
+        <div className='flex items-center space-x-4'>
           <select
             value={filter}
-            onChange={(e) => setFilter(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={e => setFilter(e.target.value as any)}
+            className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
           >
-            <option value="all">All Streams</option>
-            <option value="live">Live</option>
-            <option value="scheduled">Scheduled</option>
-            <option value="ended">Ended</option>
+            <option value='all'>All Streams</option>
+            <option value='live'>Live</option>
+            <option value='scheduled'>Scheduled</option>
+            <option value='ended'>Ended</option>
           </select>
 
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={e => setSortBy(e.target.value as any)}
+            className='px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
           >
-            <option value="date">Sort by Date</option>
-            <option value="viewers">Sort by Viewers</option>
-            <option value="duration">Sort by Duration</option>
-            <option value="revenue">Sort by Revenue</option>
+            <option value='date'>Sort by Date</option>
+            <option value='viewers'>Sort by Viewers</option>
+            <option value='duration'>Sort by Duration</option>
+            <option value='revenue'>Sort by Revenue</option>
           </select>
         </div>
 
         {selectedStreams.length > 0 && (
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">
+          <div className='flex items-center space-x-2'>
+            <span className='text-sm text-gray-600'>
               {selectedStreams.length} selected
             </span>
             <button
               onClick={() => handleBulkAction('archive')}
-              className="px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700"
+              className='px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700'
             >
               Archive
             </button>
             <button
               onClick={() => handleBulkAction('delete')}
-              className="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
+              className='px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700'
             >
               Delete
             </button>
@@ -496,100 +558,109 @@ return `${hours}h ${minutes}m`;
       </div>
 
       {/* Streams List */}
-      <div className="space-y-4">
-        {sortedStreams.map((stream) => (
+      <div className='space-y-4'>
+        {sortedStreams.map(stream => (
           <div
             key={stream.id}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+            className='bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow'
           >
-            <div className="flex items-start space-x-4">
+            <div className='flex items-start space-x-4'>
               {/* Checkbox */}
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={selectedStreams.includes(stream.id)}
-                onChange={(e) => {
+                onChange={e => {
                   if (e.target.checked) {
                     setSelectedStreams(prev => [...prev, stream.id]);
                   } else {
-                    setSelectedStreams(prev => prev.filter((id) => id !== stream.id));
+                    setSelectedStreams(prev =>
+                      prev.filter(id => id !== stream.id)
+                    );
                   }
                 }}
-                className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className='mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
               />
 
               {/* Thumbnail */}
               <img
                 src={stream.thumbnailUrl}
                 alt={stream.title}
-                className="w-24 h-14 object-cover rounded"
+                className='w-24 h-14 object-cover rounded'
               />
 
               {/* Stream Info */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center space-x-2 mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+              <div className='flex-1 min-w-0'>
+                <div className='flex items-center space-x-2 mb-2'>
+                  <h3 className='text-lg font-semibold text-gray-900 dark:text-white truncate'>
                     {stream.title}
                   </h3>
-                  <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(stream.status)}`}>
+                  <div
+                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(stream.status)}`}
+                  >
                     {getStatusIcon(stream.status)}
-                    <span className="ml-1 capitalize">{stream.status}</span>
+                    <span className='ml-1 capitalize'>{stream.status}</span>
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                <p className='text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2'>
                   {stream.description}
                 </p>
 
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
-                  <div className="flex items-center space-x-1">
-                    <EyeIcon className="h-4 w-4" />
-                    <span>{formatNumber(stream.stats.peakViewers)} peak viewers</span>
+                <div className='flex items-center space-x-6 text-sm text-gray-500'>
+                  <div className='flex items-center space-x-1'>
+                    <EyeIcon className='h-4 w-4' />
+                    <span>
+                      {formatNumber(stream.stats.peakViewers)} peak viewers
+                    </span>
                   </div>
 
                   {stream.stats.duration > 0 && (
-                    <div className="flex items-center space-x-1">
-                      <ClockIcon className="h-4 w-4" />
+                    <div className='flex items-center space-x-1'>
+                      <ClockIcon className='h-4 w-4' />
                       <span>{formatDuration(stream.stats.duration)}</span>
                     </div>
                   )}
 
                   {stream.monetization.totalRevenue > 0 && (
-                    <div className="flex items-center space-x-1">
-                      <span className="text-green-600 font-medium">
+                    <div className='flex items-center space-x-1'>
+                      <span className='text-green-600 font-medium'>
                         ${stream.monetization.totalRevenue.toFixed(2)}
                       </span>
                     </div>
                   )}
 
-                  <div className="flex items-center space-x-1">
-                    <CalendarIcon className="h-4 w-4" />
+                  <div className='flex items-center space-x-1'>
+                    <CalendarIcon className='h-4 w-4' />
                     <span>
                       {stream.actualStartTime
                         ? stream.actualStartTime.toLocaleDateString()
-                        : stream.scheduledStartTime?.toLocaleDateString() || 'No date'}
+                        : stream.scheduledStartTime?.toLocaleDateString() ||
+                          'No date'}
                     </span>
                   </div>
                 </div>
               </div>
 
               {/* Actions */}
-              <div className="flex items-center space-x-2">
-                {getStreamActions(stream).slice(0, 3).map((action) => (
-                  <button
-                    key={action.id}
-                    onClick={() => handleStreamAction(stream, action)}
-                    disabled={action.disabled}
-                    className={`p-2 rounded-lg transition-colors ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
-                    title={action.label}
-                  >
-                    <action.icon className="h-4 w-4" />
-                  </button>
-                ))}
+              <div className='flex items-center space-x-2'>
+                {getStreamActions(stream)
+                  .slice(0, 3)
+                  .map(action => (
+                    <button
+                      key={action.id}
+                      onClick={() => handleStreamAction(stream, action)}
+                      disabled={action.disabled}
+                      className={`p-2 rounded-lg transition-colors ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                      title={action.label}
+                    >
+                      <action.icon className='h-4 w-4' />
+                    </button>
+                  ))}
 
                 {getStreamActions(stream).length > 3 && (
-                  <div className="relative">
-                    <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600">
-                      <Cog6ToothIcon className="h-4 w-4" />
+                  <div className='relative'>
+                    <button className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600'>
+                      <Cog6ToothIcon className='h-4 w-4' />
                     </button>
                   </div>
                 )}
@@ -600,15 +671,17 @@ return `${hours}h ${minutes}m`;
       </div>
 
       {sortedStreams.length === 0 && (
-        <div className="text-center py-12">
-          <VideoCameraIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+        <div className='text-center py-12'>
+          <VideoCameraIcon className='h-12 w-12 text-gray-400 mx-auto mb-4' />
+          <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-2'>
             No streams found
           </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            {filter === 'all' ? 'You haven\'t created any streams yet.' : `No ${filter} streams found.`}
+          <p className='text-gray-600 dark:text-gray-400 mb-4'>
+            {filter === 'all'
+              ? "You haven't created any streams yet."
+              : `No ${filter} streams found.`}
           </p>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
             Create Your First Stream
           </button>
         </div>

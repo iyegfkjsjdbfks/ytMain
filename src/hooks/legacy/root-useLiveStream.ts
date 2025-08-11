@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import type { LiveStream } from '../types/livestream';
 
@@ -81,10 +80,14 @@ export function useLiveStream(streamId?: string) {
 
   const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
     if (stream) {
-      setStream((prev: any) => prev ? {
-        ...prev,
-        stats: { ...prev.stats, ...newStats },
-      } : null);
+      setStream((prev: any) =>
+        prev
+          ? {
+              ...prev,
+              stats: { ...prev.stats, ...newStats },
+            }
+          : null
+      );
     }
   };
 
@@ -101,24 +104,30 @@ export function useLiveStream(streamId?: string) {
         duration: 5000,
       };
 
-      setStream((prev: any) => prev ? {
-        ...prev,
-        monetization: {
-          ...prev.monetization,
-          superChats: [...prev.monetization.superChats, superChat],
-          superChatRevenue: prev.monetization.superChatRevenue + amount,
-          totalRevenue: prev.monetization.totalRevenue + amount,
-        },
-        stats: {
-          ...prev.stats,
-          superChatCount: prev.stats.superChatCount + 1,
-          superChatAmount: prev.stats.superChatAmount + amount,
-        },
-      } : null);
+      setStream((prev: any) =>
+        prev
+          ? {
+              ...prev,
+              monetization: {
+                ...prev.monetization,
+                superChats: [...prev.monetization.superChats, superChat],
+                superChatRevenue: prev.monetization.superChatRevenue + amount,
+                totalRevenue: prev.monetization.totalRevenue + amount,
+              },
+              stats: {
+                ...prev.stats,
+                superChatCount: prev.stats.superChatCount + 1,
+                superChatAmount: prev.stats.superChatAmount + amount,
+              },
+            }
+          : null
+      );
     }
   };
 
-  const createStream = async (streamData: Partial<LiveStream>): Promise<LiveStream | null> => {
+  const createStream = async (
+    streamData: Partial<LiveStream>
+  ): Promise<LiveStream | null> => {
     setLoading(true);
     setError(null);
 
@@ -194,15 +203,15 @@ export function useLiveStream(streamId?: string) {
 
   const startStream = async (): Promise<boolean> => {
     if (!stream) {
-return false;
-}
+      return false;
+    }
 
     setLoading(true);
     setError(null);
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => prev ? { ...prev, status: 'live' } : null);
+      setStream((prev: any) => (prev ? { ...prev, status: 'live' } : null));
       setLoading(false);
       return true;
     } catch (err) {
@@ -214,15 +223,15 @@ return false;
 
   const endStream = async (): Promise<boolean> => {
     if (!stream) {
-return false;
-}
+      return false;
+    }
 
     setLoading(true);
     setError(null);
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => prev ? { ...prev, status: 'ended' } : null);
+      setStream((prev: any) => (prev ? { ...prev, status: 'ended' } : null));
       setLoading(false);
       return true;
     } catch (err) {
@@ -248,7 +257,9 @@ export function useCreateLiveStream() {
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createStream = async (streamData: Partial<LiveStream>): Promise<LiveStream | null> => {
+  const createStream = async (
+    streamData: Partial<LiveStream>
+  ): Promise<LiveStream | null> => {
     setCreating(true);
     setError(null);
 

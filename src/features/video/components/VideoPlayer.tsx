@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -12,7 +11,17 @@ declare namespace NodeJS {
 import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon, Cog6ToothIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/outline';
+import {
+  PlayIcon,
+  PauseIcon,
+  SpeakerWaveIcon,
+  SpeakerXMarkIcon,
+  ArrowsPointingOutIcon,
+  ArrowsPointingInIcon,
+  Cog6ToothIcon,
+  ForwardIcon,
+  BackwardIcon,
+} from '@heroicons/react/24/outline';
 
 export interface VideoPlayerProps {
   videoId: string;
@@ -157,7 +166,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('volumechange', handleVolumeChange);
     };
-  }, [onTimeUpdate, onPlay, onPause, onEnded, onReady, startTime, useYouTube, src, videoId]);
+  }, [
+    onTimeUpdate,
+    onPlay,
+    onPause,
+    onEnded,
+    onReady,
+    startTime,
+    useYouTube,
+    src,
+    videoId,
+  ]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -179,15 +198,15 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     return (
       <div className={`video-player-container ${className}`}>
-        <div className="video-player-wrapper relative">
+        <div className='video-player-wrapper relative'>
           <iframe
             src={videoUrl}
             title={title || `Video ${videoId}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
             allowFullScreen
-            className="w-full aspect-video"
-            loading="lazy"
-            frameBorder="0"
+            className='w-full aspect-video'
+            loading='lazy'
+            frameBorder='0'
             onLoad={onReady}
           />
         </div>
@@ -199,8 +218,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     if (state.isPlaying) {
       video.pause();
@@ -212,8 +231,8 @@ return;
   const seek = (time: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
@@ -221,8 +240,8 @@ return;
   const setVolume = (volume: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.volume = Math.max(0, Math.min(1, volume));
   };
@@ -230,8 +249,8 @@ return;
   const toggleMute = () => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.muted = !video.muted;
   };
@@ -239,8 +258,8 @@ return;
   const toggleFullscreen = async () => {
     const container = containerRef.current;
     if (!container) {
-return;
-}
+      return;
+    }
 
     try {
       if (state.isFullscreen) {
@@ -256,8 +275,8 @@ return;
   const setPlaybackRate = (rate: any) => {
     const video = videoRef.current;
     if (!video) {
-return;
-}
+      return;
+    }
 
     video.playbackRate = rate;
     setState(prev => ({ ...prev, playbackRate: rate }));
@@ -266,8 +285,8 @@ return;
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const progressBar = progressRef.current;
     if (!progressBar) {
-return;
-}
+      return;
+    }
 
     const rect = progressBar.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -301,7 +320,8 @@ return;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const progressPercentage = state.duration > 0 ? (state.currentTime / state.duration) * 100 : 0;
+  const progressPercentage =
+    state.duration > 0 ? (state.currentTime / state.duration) * 100 : 0;
   const bufferedPercentage = state.buffered;
 
   return (
@@ -318,31 +338,31 @@ return;
       {/* Video Element */}
       <video
         ref={videoRef}
-        className="w-full h-full object-contain"
+        className='w-full h-full object-contain'
         poster={poster}
         autoPlay={autoplay}
         playsInline
         onClick={togglePlay}
       >
-        {src && <source src={src} type="video/mp4" />}
+        {src && <source src={src} type='video/mp4' />}
         Your browser does not support the video tag.
       </video>
 
       {/* Loading Overlay */}
       {!state.duration && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
+        <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-white' />
         </div>
       )}
 
       {/* Play Button Overlay */}
       {!state.isPlaying && state.duration > 0 && (
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className='absolute inset-0 flex items-center justify-center'>
           <button
             onClick={togglePlay}
-            className="bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full p-4 transition-all duration-200 transform hover:scale-110"
+            className='bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full p-4 transition-all duration-200 transform hover:scale-110'
           >
-            <PlayIcon className="w-12 h-12 text-white ml-1" />
+            <PlayIcon className='w-12 h-12 text-white ml-1' />
           </button>
         </div>
       )}
@@ -354,130 +374,135 @@ return;
         }`}
       >
         {/* Progress Bar */}
-        <div className="mb-4">
+        <div className='mb-4'>
           <div
             ref={progressRef}
-            className="relative h-1 bg-white bg-opacity-30 rounded-full cursor-pointer hover:h-2 transition-all duration-200"
+            className='relative h-1 bg-white bg-opacity-30 rounded-full cursor-pointer hover:h-2 transition-all duration-200'
             onClick={handleProgressClick}
           >
             {/* Buffered Progress */}
             <div
-              className="absolute top-0 left-0 h-full bg-white bg-opacity-50 rounded-full"
+              className='absolute top-0 left-0 h-full bg-white bg-opacity-50 rounded-full'
               style={{ width: `${bufferedPercentage}%` }}
             />
             {/* Current Progress */}
             <div
-              className="absolute top-0 left-0 h-full bg-red-600 rounded-full"
+              className='absolute top-0 left-0 h-full bg-red-600 rounded-full'
               style={{ width: `${progressPercentage}%` }}
             />
             {/* Progress Handle */}
             <div
-              className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              className='absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200'
               style={{ left: `${progressPercentage}%`, marginLeft: '-6px' }}
             />
           </div>
         </div>
 
         {/* Control Buttons */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-2'>
             {/* Play/Pause */}
             <button
               onClick={togglePlay}
-              className="text-white hover:text-red-400 transition-colors p-1"
+              className='text-white hover:text-red-400 transition-colors p-1'
             >
               {state.isPlaying ? (
-                <PauseIcon className="w-6 h-6" />
+                <PauseIcon className='w-6 h-6' />
               ) : (
-                <PlayIcon className="w-6 h-6" />
+                <PlayIcon className='w-6 h-6' />
               )}
             </button>
 
             {/* Skip Backward */}
             <button
               onClick={() => seek(state.currentTime - 10)}
-              className="text-white hover:text-red-400 transition-colors p-1"
+              className='text-white hover:text-red-400 transition-colors p-1'
             >
-              <BackwardIcon className="w-5 h-5" />
+              <BackwardIcon className='w-5 h-5' />
             </button>
 
             {/* Skip Forward */}
             <button
               onClick={() => seek(state.currentTime + 10)}
-              className="text-white hover:text-red-400 transition-colors p-1"
+              className='text-white hover:text-red-400 transition-colors p-1'
             >
-              <ForwardIcon className="w-5 h-5" />
+              <ForwardIcon className='w-5 h-5' />
             </button>
 
             {/* Volume */}
             <div
-              className="flex items-center gap-2 relative"
+              className='flex items-center gap-2 relative'
               onMouseEnter={() => setShowVolumeSlider(true)}
               onMouseLeave={() => setShowVolumeSlider(false)}
             >
               <button
                 onClick={toggleMute}
-                className="text-white hover:text-red-400 transition-colors p-1"
+                className='text-white hover:text-red-400 transition-colors p-1'
               >
                 {state.isMuted || state.volume === 0 ? (
-                  <SpeakerXMarkIcon className="w-5 h-5" />
+                  <SpeakerXMarkIcon className='w-5 h-5' />
                 ) : (
-                  <SpeakerWaveIcon className="w-5 h-5" />
+                  <SpeakerWaveIcon className='w-5 h-5' />
                 )}
               </button>
 
               {/* Volume Slider */}
               {showVolumeSlider && (
-                <div className="absolute bottom-full left-0 mb-2 bg-black bg-opacity-80 p-2 rounded">
+                <div className='absolute bottom-full left-0 mb-2 bg-black bg-opacity-80 p-2 rounded'>
                   <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
+                    type='range'
+                    min='0'
+                    max='1'
+                    step='0.1'
                     value={state.isMuted ? 0 : state.volume}
-                    onChange={(e) => {
+                    onChange={e => {
                       const volume = parseFloat(e.target.value);
                       setVolume(volume);
                       if (volume > 0 && state.isMuted) {
                         toggleMute();
                       }
                     }}
-                    className="w-20 h-1 bg-white bg-opacity-30 rounded-full appearance-none cursor-pointer"
+                    className='w-20 h-1 bg-white bg-opacity-30 rounded-full appearance-none cursor-pointer'
                   />
                 </div>
               )}
             </div>
 
             {/* Time Display */}
-            <span className="text-white text-sm font-mono">
+            <span className='text-white text-sm font-mono'>
               {formatTime(state.currentTime)} / {formatTime(state.duration)}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className='flex items-center gap-2'>
             {/* Settings */}
-            <div className="relative">
+            <div className='relative'>
               <button
                 onClick={() => setShowSettings(!showSettings)}
-                className="text-white hover:text-red-400 transition-colors p-1"
+                className='text-white hover:text-red-400 transition-colors p-1'
               >
-                <Cog6ToothIcon className="w-5 h-5" />
+                <Cog6ToothIcon className='w-5 h-5' />
               </button>
 
               {/* Settings Menu */}
               {showSettings && (
-                <div className="absolute bottom-full right-0 mb-2 bg-black bg-opacity-90 rounded-lg p-3 min-w-48">
-                  <div className="space-y-3">
+                <div className='absolute bottom-full right-0 mb-2 bg-black bg-opacity-90 rounded-lg p-3 min-w-48'>
+                  <div className='space-y-3'>
                     {/* Playback Speed */}
                     <div>
-                      <label htmlFor="playback-speed" className="text-white text-sm font-medium block mb-1">
+                      <label
+                        htmlFor='playback-speed'
+                        className='text-white text-sm font-medium block mb-1'
+                      >
                         Playback Speed
                       </label>
                       <select
-                        id="playback-speed"
+                        id='playback-speed'
                         value={state.playbackRate}
-                        onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
-                        className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"
+                        onChange={e =>
+                          setPlaybackRate(parseFloat(e.target.value))
+                        }
+                        className='w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm'
                       >
                         <option value={0.25}>0.25x</option>
                         <option value={0.5}>0.5x</option>
@@ -492,20 +517,28 @@ return;
 
                     {/* Quality */}
                     <div>
-                      <label htmlFor="video-quality" className="text-white text-sm font-medium block mb-1">
+                      <label
+                        htmlFor='video-quality'
+                        className='text-white text-sm font-medium block mb-1'
+                      >
                         Quality
                       </label>
                       <select
-                        id="video-quality"
+                        id='video-quality'
                         value={state.quality}
-                        onChange={(e) => setState(prev => ({ ...prev, quality: e.target.value }))}
-                        className="w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm"
+                        onChange={e =>
+                          setState(prev => ({
+                            ...prev,
+                            quality: e.target.value,
+                          }))
+                        }
+                        className='w-full bg-white bg-opacity-20 text-white rounded px-2 py-1 text-sm'
                       >
-                        <option value="auto">Auto</option>
-                        <option value="1080p">1080p</option>
-                        <option value="720p">720p</option>
-                        <option value="480p">480p</option>
-                        <option value="360p">360p</option>
+                        <option value='auto'>Auto</option>
+                        <option value='1080p'>1080p</option>
+                        <option value='720p'>720p</option>
+                        <option value='480p'>480p</option>
+                        <option value='360p'>360p</option>
                       </select>
                     </div>
                   </div>
@@ -516,12 +549,12 @@ return;
             {/* Fullscreen */}
             <button
               onClick={toggleFullscreen}
-              className="text-white hover:text-red-400 transition-colors p-1"
+              className='text-white hover:text-red-400 transition-colors p-1'
             >
               {state.isFullscreen ? (
-                <ArrowsPointingInIcon className="w-5 h-5" />
+                <ArrowsPointingInIcon className='w-5 h-5' />
               ) : (
-                <ArrowsPointingOutIcon className="w-5 h-5" />
+                <ArrowsPointingOutIcon className='w-5 h-5' />
               )}
             </button>
           </div>
@@ -530,8 +563,8 @@ return;
 
       {/* Title Overlay */}
       {title && state.showControls && (
-        <div className="absolute top-4 left-4 right-4">
-          <h2 className="text-white text-lg font-medium truncate bg-black bg-opacity-50 px-3 py-2 rounded">
+        <div className='absolute top-4 left-4 right-4'>
+          <h2 className='text-white text-lg font-medium truncate bg-black bg-opacity-50 px-3 py-2 rounded'>
             {title}
           </h2>
         </div>
@@ -541,7 +574,6 @@ return;
 };
 
 export default VideoPlayer;
-
 
 declare global {
   namespace JSX {

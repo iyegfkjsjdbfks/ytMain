@@ -2,18 +2,18 @@
 
 // Unified Button
 export { default as UnifiedButton } from './UnifiedButton';
-export type { 
+export type {
   UnifiedButtonProps,
   ButtonVariant,
-  ButtonSize 
+  ButtonSize,
 } from './UnifiedButton';
 
 // Unified Video Card
 export { default as UnifiedVideoCard } from './UnifiedVideoCard';
-export type { 
+export type {
   UnifiedVideoCardProps,
   VideoCardVariant,
-  VideoCardSize 
+  VideoCardSize,
 } from './UnifiedVideoCard';
 
 // Core type re-exports

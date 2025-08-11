@@ -3,9 +3,6 @@ import { CACHE_CONFIG } from '../../lib/constants';
 import { logger } from '../../utils/logger';
 import type { Video, Channel } from '../../types/core';
 
-
-
-
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const GOOGLE_API_URL = 'https://www.googleapis.com/youtube/v3';
 
@@ -100,7 +97,10 @@ class YouTubeService {
 
   private buildUrl(endpoint: any, params: Record<string, string>): string {
     const isDevelopment = import.meta.env.MODE === 'development';
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
+    const origin =
+      typeof window !== 'undefined'
+        ? window.location.origin
+        : 'http://localhost:5173';
     const baseUrl = isDevelopment ? `${origin}/api/youtube/v3` : GOOGLE_API_URL;
 
     const url = new URL(`${baseUrl}/${endpoint}`);
@@ -132,7 +132,9 @@ class YouTubeService {
 
   async fetchVideos(videoIds: any): Promise<Video[]> {
     if (!API_KEY) {
-      logger.warn('YouTube Data API v3 key not available. Metadata fetching will use fallback methods.');
+      logger.warn(
+        'YouTube Data API v3 key not available. Metadata fetching will use fallback methods.'
+      );
       return [];
     }
 
@@ -157,7 +159,7 @@ class YouTubeService {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
           response.status,
-          'youtube_api_error',
+          'youtube_api_error'
         );
       }
 
@@ -169,8 +171,13 @@ class YouTubeService {
           id: item.id,
           title: snippet?.title || 'Untitled Video',
           description: snippet?.description || '',
-          thumbnailUrl: snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.high?.url || '',
-          duration: contentDetails?.duration ? this.parseDuration(contentDetails.duration) : '0:00',
+          thumbnailUrl:
+            snippet?.thumbnails?.medium?.url ||
+            snippet?.thumbnails?.high?.url ||
+            '',
+          duration: contentDetails?.duration
+            ? this.parseDuration(contentDetails.duration)
+            : '0:00',
           views: statistics?.viewCount || '0',
           viewCount: parseInt(statistics?.viewCount || '0', 10),
           likes: parseInt(statistics?.likeCount || '0', 10),
@@ -183,10 +190,14 @@ class YouTubeService {
           channelId: snippet?.channelId || '',
           channelName: snippet?.channelTitle || 'Unknown Channel',
           channelAvatarUrl: '',
-          category: snippet?.categoryId ? this.getCategoryName(snippet.categoryId) : 'Unknown',
+          category: snippet?.categoryId
+            ? this.getCategoryName(snippet.categoryId)
+            : 'Unknown',
           tags: snippet?.tags || [],
           isLive: snippet?.liveBroadcastContent === 'live',
-          isShort: contentDetails?.duration ? this.isShortVideo(contentDetails.duration) : false,
+          isShort: contentDetails?.duration
+            ? this.isShortVideo(contentDetails.duration)
+            : false,
           createdAt: snippet?.publishedAt || new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           videoUrl: `https://www.youtube.com/watch?v=${item.id}`,
@@ -200,13 +211,20 @@ class YouTubeService {
       if (error instanceof ApiError) {
         throw error;
       }
-      throw new ApiError('Failed to fetch video data', 500, 'fetchVideosError', error);
+      throw new ApiError(
+        'Failed to fetch video data',
+        500,
+        'fetchVideosError',
+        error
+      );
     }
   }
 
   async fetchChannel(channelId: any): Promise<Channel | null> {
     if (!API_KEY) {
-      logger.warn('YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.');
+      logger.warn(
+        'YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.'
+      );
       return null;
     }
 
@@ -231,7 +249,7 @@ class YouTubeService {
         throw new ApiError(
           `YouTube API error: ${response.statusText}`,
           response.status,
-          'youtube_api_error',
+          'youtube_api_error'
         );
       }
 
@@ -246,10 +264,15 @@ class YouTubeService {
         id: item.id,
         name: item.snippet?.title || 'Unknown Channel',
         description: item.snippet?.description || '',
-        avatarUrl: item.snippet?.thumbnails?.medium?.url || item.snippet?.thumbnails?.high?.url || '',
+        avatarUrl:
+          item.snippet?.thumbnails?.medium?.url ||
+          item.snippet?.thumbnails?.high?.url ||
+          '',
         banner: item.snippet?.thumbnails?.high?.url || '',
         subscribers: parseInt(item.statistics?.subscriberCount || '0', 10),
-        subscriberCount: this.formatSubscriberCount(parseInt(item.statistics?.subscriberCount || 0, 10)),
+        subscriberCount: this.formatSubscriberCount(
+          parseInt(item.statistics?.subscriberCount || 0, 10)
+        ),
         videoCount: parseInt(item.statistics?.videoCount || '0', 10),
         totalViews: parseInt(item.statistics?.viewCount || '0', 10),
         isVerified: false, // This would require a separate mechanism to verify
@@ -327,9 +350,14 @@ class YouTubeService {
     return categories[categoryId] || 'Unknown';
   }
 
-  async searchVideos(query: any, options: { maxResults?: number } = {}): Promise<Video[]> {
+  async searchVideos(
+    query: any,
+    options: { maxResults?: number } = {}
+  ): Promise<Video[]> {
     if (!API_KEY) {
-      logger.warn('YouTube Data API v3 key not available. Video search will use fallback methods.');
+      logger.warn(
+        'YouTube Data API v3 key not available. Video search will use fallback methods.'
+      );
       return [];
     }
 
@@ -356,12 +384,14 @@ class YouTubeService {
         throw new ApiError(
           `YouTube Search API error: ${searchResponse.statusText}`,
           searchResponse.status,
-          'youtube_search_error',
+          'youtube_search_error'
         );
       }
 
       const searchData: YouTubeSearchResponse = await searchResponse.json();
-      const videoIds = (searchData.items || []).map(item => item.id.videoId).filter(Boolean);
+      const videoIds = (searchData.items || [])
+        .map(item => item.id.videoId)
+        .filter(Boolean);
 
       if (videoIds.length === 0) {
         return [];
@@ -376,7 +406,12 @@ class YouTubeService {
       if (error instanceof ApiError) {
         throw error;
       }
-      throw new ApiError('Failed to search videos', 500, 'searchVideosError', error);
+      throw new ApiError(
+        'Failed to search videos',
+        500,
+        'searchVideosError',
+        error
+      );
     }
   }
 
@@ -386,4 +421,3 @@ class YouTubeService {
 }
 
 export const youtubeService = new YouTubeService();
-

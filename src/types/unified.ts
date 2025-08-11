@@ -2,17 +2,13 @@
 // Core types
 export * from './core';
 
-// Video and media types  
+// Video and media types
 export * from './video';
 export * from './playlist';
 export * from './channel';
 
 // Error types
-export type {
-  ErrorInfo,
-  ErrorBoundaryState,
-  ErrorCode,
-} from './errors';
+export type { ErrorInfo, ErrorBoundaryState, ErrorCode } from './errors';
 
 // Livestream types
 export * from './livestream';

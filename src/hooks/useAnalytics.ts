@@ -1,9 +1,11 @@
-
 import { useEffect, useCallback, useRef } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import { analyticsService, type AnalyticsEvent } from '../services/analyticsService';
+import {
+  analyticsService,
+  type AnalyticsEvent,
+} from '../services/analyticsService';
 
 import { usePerformanceMonitor } from './usePerformanceMonitor';
 
@@ -33,7 +35,7 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 
   const { trackAsyncOperation, measureFunction } = usePerformanceMonitor(
     opts.componentName || 'Unknown',
-    { enableRenderTracking: opts.trackPerformance ?? false },
+    { enableRenderTracking: opts.trackPerformance ?? false }
   );
 
   // Track page views
@@ -49,16 +51,20 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   // Track time on page
   useEffect(() => {
     if (!opts.trackTimeOnPage) {
-return;
-}
+      return;
+    }
 
     const handleBeforeUnload = () => {
       const timeOnPage = Date.now() - pageStartTime.current;
-      analyticsService.track('time_on_page', {
-        duration: timeOnPage,
-        path: location.pathname,
-        maxScrollDepth: maxScrollDepth.current,
-      }, 'engagement');
+      analyticsService.track(
+        'time_on_page',
+        {
+          duration: timeOnPage,
+          path: location.pathname,
+          maxScrollDepth: maxScrollDepth.current,
+        },
+        'engagement'
+      );
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -68,25 +74,37 @@ return;
   // Track scroll depth
   useEffect(() => {
     if (!opts.trackScrollDepth) {
-return;
-}
+      return;
+    }
 
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const documentHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = Math.round((scrollTop / documentHeight) * 100);
 
-      maxScrollDepth.current = Math.max(maxScrollDepth.current, scrollPercentage);
+      maxScrollDepth.current = Math.max(
+        maxScrollDepth.current,
+        scrollPercentage
+      );
 
       // Track milestone markers (25%, 50%, 75%, 100%)
       const markers = [25, 50, 75, 100];
       markers.forEach(marker => {
-        if (scrollPercentage >= marker && !scrollDepthMarkers.current.has(marker)) {
+        if (
+          scrollPercentage >= marker &&
+          !scrollDepthMarkers.current.has(marker)
+        ) {
           scrollDepthMarkers.current.add(marker);
-          analyticsService.track('scroll_depth', {
-            percentage: marker,
-            path: location.pathname,
-          }, 'engagement');
+          analyticsService.track(
+            'scroll_depth',
+            {
+              percentage: marker,
+              path: location.pathname,
+            },
+            'engagement'
+          );
         }
       });
     };
@@ -99,8 +117,8 @@ return;
   // Track clicks
   useEffect(() => {
     if (!opts.trackClicks) {
-return;
-}
+      return;
+    }
 
     const handleClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -110,7 +128,11 @@ return;
       const text = target.textContent?.slice(0, 100); // Limit text length
 
       // Only track meaningful clicks
-      if (['button', 'a', 'input'].includes(tagName) || target.onclick || className.includes('clickable')) {
+      if (
+        ['button', 'a', 'input'].includes(tagName) ||
+        target.onclick ||
+        className.includes('clickable')
+      ) {
         analyticsService.trackClick('element', {
           tagName,
           className,
@@ -130,93 +152,111 @@ return;
   }, [location.pathname, opts.trackClicks]);
 
   // Analytics methods
-  const track = useCallback((
-    eventName: any,
-    properties?: Record<string, any>,
-    category?: AnalyticsEvent['category'],
-  ) => {
-    analyticsService.track(eventName, {
-      ...properties,
-      componentName: opts.componentName,
-      path: location.pathname,
-    }, category);
-  }, [location.pathname, opts.componentName]);
+  const track = useCallback(
+    (
+      eventName: any,
+      properties?: Record<string, any>,
+      category?: AnalyticsEvent['category']
+    ) => {
+      analyticsService.track(
+        eventName,
+        {
+          ...properties,
+          componentName: opts.componentName,
+          path: location.pathname,
+        },
+        category
+      );
+    },
+    [location.pathname, opts.componentName]
+  );
 
-  const trackClick = useCallback((element: HTMLElement, properties?: Record<string, any>) => {
-    analyticsService.trackClick(element, {
-      ...properties,
-      componentName: opts.componentName,
-      path: location.pathname,
-    });
-  }, [location.pathname, opts.componentName]);
+  const trackClick = useCallback(
+    (element: HTMLElement, properties?: Record<string, any>) => {
+      analyticsService.trackClick(element, {
+        ...properties,
+        componentName: opts.componentName,
+        path: location.pathname,
+      });
+    },
+    [location.pathname, opts.componentName]
+  );
 
-  const trackVideoEvent = useCallback((
-    action: any,
-    videoId: any,
-    properties?: Record<string, any>,
-  ) => {
-    analyticsService.trackVideoEvent(action, videoId, {
-      ...properties,
-      componentName: opts.componentName,
-      path: location.pathname,
-    });
-  }, [location.pathname, opts.componentName]);
+  const trackVideoEvent = useCallback(
+    (action: any, videoId: any, properties?: Record<string, any>) => {
+      analyticsService.trackVideoEvent(action, videoId, {
+        ...properties,
+        componentName: opts.componentName,
+        path: location.pathname,
+      });
+    },
+    [location.pathname, opts.componentName]
+  );
 
   const trackSearch = useCallback((query: any, results?: number) => {
     analyticsService.trackSearch(query, results);
   }, []);
 
-  const trackEngagement = useCallback((type: any, properties?: Record<string, any>) => {
-    analyticsService.trackEngagement(type, {
-      ...properties,
-      componentName: opts.componentName,
-      path: location.pathname,
-    });
-  }, [location.pathname, opts.componentName]);
-
-  const trackAsyncAction = useCallback(async <T>(
-    action: () => Promise<T>,
-    actionName: any,
-    properties?: Record<string, any>,
-  ): Promise<T> => {
-    const startTime = Date.now();
-
-    try {
-      const result = await trackAsyncOperation(action, actionName);
-      const duration = Date.now() - startTime;
-
-      track(`${actionName}_success`, {
-        duration,
+  const trackEngagement = useCallback(
+    (type: any, properties?: Record<string, any>) => {
+      analyticsService.trackEngagement(type, {
         ...properties,
+        componentName: opts.componentName,
+        path: location.pathname,
       });
+    },
+    [location.pathname, opts.componentName]
+  );
 
-      return result;
-    } catch (error) {
-      const duration = Date.now() - startTime;
+  const trackAsyncAction = useCallback(
+    async <T>(
+      action: () => Promise<T>,
+      actionName: any,
+      properties?: Record<string, any>
+    ): Promise<T> => {
+      const startTime = Date.now();
 
-      track(`${actionName}_error`, {
-        duration,
-        error: error instanceof Error ? error.message : String(error),
-        ...properties,
-      });
+      try {
+        const result = await trackAsyncOperation(action, actionName);
+        const duration = Date.now() - startTime;
 
-      throw error;
-    }
-  }, [track, trackAsyncOperation]);
+        track(`${actionName}_success`, {
+          duration,
+          ...properties,
+        });
 
-  const trackFunction = useCallback(<T extends any, R>(
-    fn: (...args: T) => R,
-    functionName: any,
-    properties?: Record<string, any>,
-  ) => {
-    return measureFunction((...args: T) => {
-      track(`function_${functionName}`, {
-        args: args.length,
-        ...properties,
-      });
-      return fn(...args);
-    }, functionName);
-  }, [track, measureFunction]);
+        return result;
+      } catch (error) {
+        const duration = Date.now() - startTime;
+
+        track(`${actionName}_error`, {
+          duration,
+          error: error instanceof Error ? error.message : String(error),
+          ...properties,
+        });
+
+        throw error;
+      }
+    },
+    [track, trackAsyncOperation]
+  );
+
+  const trackFunction = useCallback(
+    <T extends any, R>(
+      fn: (...args: T) => R,
+      functionName: any,
+      properties?: Record<string, any>
+    ) => {
+      return measureFunction((...args: T) => {
+        track(`function_${functionName}`, {
+          args: args.length,
+          ...properties,
+        });
+        return fn(...args);
+      }, functionName);
+    },
+    [track, measureFunction]
+  );
 
   return {
     track,
@@ -236,92 +276,126 @@ export const useVideoAnalytics = (videoId?: string) => {
   const lastProgressUpdate = useRef<number>(0);
   const watchedSegments = useRef<Array<{ start: number; end: number }>>([]);
 
-  const trackPlay = useCallback((currentTime: number = 0) => {
-    watchStartTime.current = Date.now();
-    trackVideoEvent('play', videoId || '', {
-      currentTime,
-      timestamp: Date.now(),
-    });
-  }, [trackVideoEvent, videoId]);
-
-  const trackPause = useCallback((currentTime: number = 0) => {
-    if (watchStartTime.current) {
-      const watchDuration = Date.now() - watchStartTime.current;
-      trackVideoEvent('pause', videoId || '', {
+  const trackPlay = useCallback(
+    (currentTime: number = 0) => {
+      watchStartTime.current = Date.now();
+      trackVideoEvent('play', videoId || '', {
         currentTime,
-        watchDuration,
         timestamp: Date.now(),
       });
-      watchStartTime.current = null;
-    }
-  }, [trackVideoEvent, videoId]);
+    },
+    [trackVideoEvent, videoId]
+  );
 
-  const trackProgress = useCallback((currentTime: any, duration: any) => {
-    const progressPercentage = Math.round((currentTime / duration) * 100);
-
-    // Track progress milestones
-    const milestones = [25, 50, 75, 90, 100];
-    milestones.forEach(milestone => {
-      if (progressPercentage >= milestone && lastProgressUpdate.current < milestone) {
-        trackVideoEvent('progress', videoId || '', {
-          percentage: milestone,
+  const trackPause = useCallback(
+    (currentTime: number = 0) => {
+      if (watchStartTime.current) {
+        const watchDuration = Date.now() - watchStartTime.current;
+        trackVideoEvent('pause', videoId || '', {
           currentTime,
-          duration,
+          watchDuration,
+          timestamp: Date.now(),
         });
+        watchStartTime.current = null;
       }
-    });
+    },
+    [trackVideoEvent, videoId]
+  );
 
-    lastProgressUpdate.current = progressPercentage;
-  }, [trackVideoEvent, videoId]);
+  const trackProgress = useCallback(
+    (currentTime: any, duration: any) => {
+      const progressPercentage = Math.round((currentTime / duration) * 100);
 
-  const trackSeek = useCallback((fromTime: any, toTime: any) => {
-    trackVideoEvent('seek', videoId || '', {
-      fromTime,
-      toTime,
-      seekDistance: Math.abs(toTime - fromTime),
-    });
-  }, [trackVideoEvent, videoId]);
+      // Track progress milestones
+      const milestones = [25, 50, 75, 90, 100];
+      milestones.forEach(milestone => {
+        if (
+          progressPercentage >= milestone &&
+          lastProgressUpdate.current < milestone
+        ) {
+          trackVideoEvent('progress', videoId || '', {
+            percentage: milestone,
+            currentTime,
+            duration,
+          });
+        }
+      });
 
-  const trackComplete = useCallback((duration: any) => {
-    const totalWatchTime = watchedSegments.current.reduce(
-      (total, segment) => total + (segment.end - segment.start),
-      0,
-    );
+      lastProgressUpdate.current = progressPercentage;
+    },
+    [trackVideoEvent, videoId]
+  );
 
-    trackVideoEvent('complete', videoId || '', {
-      duration,
-      totalWatchTime,
-      completionRate: (totalWatchTime / duration) * 100,
-    });
-  }, [trackVideoEvent, videoId]);
+  const trackSeek = useCallback(
+    (fromTime: any, toTime: any) => {
+      trackVideoEvent('seek', videoId || '', {
+        fromTime,
+        toTime,
+        seekDistance: Math.abs(toTime - fromTime),
+      });
+    },
+    [trackVideoEvent, videoId]
+  );
 
-  const trackError = useCallback((error: Error) => {
-    trackVideoEvent('error', videoId || '', {
-      error,
-      timestamp: Date.now(),
-    });
-  }, [trackVideoEvent, videoId]);
+  const trackComplete = useCallback(
+    (duration: any) => {
+      const totalWatchTime = watchedSegments.current.reduce(
+        (total, segment) => total + (segment.end - segment.start),
+        0
+      );
 
-  const trackQualityChange = useCallback((quality: any) => {
-    trackVideoEvent('quality_change', videoId || '', {
-      quality,
-      timestamp: Date.now(),
-    });
-  }, [trackVideoEvent, videoId]);
+      trackVideoEvent('complete', videoId || '', {
+        duration,
+        totalWatchTime,
+        completionRate: (totalWatchTime / duration) * 100,
+      });
+    },
+    [trackVideoEvent, videoId]
+  );
 
-  const trackVolumeChange = useCallback((volume: any, muted: any) => {
-    trackVideoEvent('volume_change', videoId || '', {
-      volume,
-      muted,
-      timestamp: Date.now(),
-    });
-  }, [trackVideoEvent, videoId]);
+  const trackError = useCallback(
+    (error: Error) => {
+      trackVideoEvent('error', videoId || '', {
+        error,
+        timestamp: Date.now(),
+      });
+    },
+    [trackVideoEvent, videoId]
+  );
 
-  const trackFullscreen = useCallback((isFullscreen: any) => {
-    trackVideoEvent(isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit', videoId || '', {
-      timestamp: Date.now(),
-    });
-  }, [trackVideoEvent, videoId]);
+  const trackQualityChange = useCallback(
+    (quality: any) => {
+      trackVideoEvent('quality_change', videoId || '', {
+        quality,
+        timestamp: Date.now(),
+      });
+    },
+    [trackVideoEvent, videoId]
+  );
+
+  const trackVolumeChange = useCallback(
+    (volume: any, muted: any) => {
+      trackVideoEvent('volume_change', videoId || '', {
+        volume,
+        muted,
+        timestamp: Date.now(),
+      });
+    },
+    [trackVideoEvent, videoId]
+  );
+
+  const trackFullscreen = useCallback(
+    (isFullscreen: any) => {
+      trackVideoEvent(
+        isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit',
+        videoId || '',
+        {
+          timestamp: Date.now(),
+        }
+      );
+    },
+    [trackVideoEvent, videoId]
+  );
 
   return {
     trackPlay,
@@ -347,38 +421,52 @@ export const useFormAnalytics = (formName: any) => {
     track('form_start', { formName });
   }, [track, formName]);
 
-  const trackFormSubmit = useCallback((success: any, errors?: string) => {
-    const duration = formStartTime.current ? Date.now() - formStartTime.current : 0;
+  const trackFormSubmit = useCallback(
+    (success: any, errors?: string) => {
+      const duration = formStartTime.current
+        ? Date.now() - formStartTime.current
+        : 0;
 
-    track('form_submit', {
-      formName,
-      success,
-      duration,
-      errors,
-      fieldInteractions: Object.keys(fieldInteractions.current).length,
-    });
-  }, [track, formName]);
+      track('form_submit', {
+        formName,
+        success,
+        duration,
+        errors,
+        fieldInteractions: Object.keys(fieldInteractions.current).length,
+      });
+    },
+    [track, formName]
+  );
 
-  const trackFieldInteraction = useCallback((fieldName: any) => {
-    fieldInteractions.current[fieldName] = (fieldInteractions.current[fieldName] || 0) + 1;
+  const trackFieldInteraction = useCallback(
+    (fieldName: any) => {
+      fieldInteractions.current[fieldName] =
+        (fieldInteractions.current[fieldName] || 0) + 1;
 
-    track('form_field_interaction', {
-      formName,
-      fieldName,
-      interactionCount: fieldInteractions.current[fieldName],
-    });
-  }, [track, formName]);
+      track('form_field_interaction', {
+        formName,
+        fieldName,
+        interactionCount: fieldInteractions.current[fieldName],
+      });
+    },
+    [track, formName]
+  );
 
-  const trackFormAbandon = useCallback((lastField?: string) => {
-    const duration = formStartTime.current ? Date.now() - formStartTime.current : 0;
+  const trackFormAbandon = useCallback(
+    (lastField?: string) => {
+      const duration = formStartTime.current
+        ? Date.now() - formStartTime.current
+        : 0;
 
-    track('form_abandon', {
-      formName,
-      duration,
-      lastField,
-      fieldInteractions: Object.keys(fieldInteractions.current).length,
-    });
-  }, [track, formName]);
+      track('form_abandon', {
+        formName,
+        duration,
+        lastField,
+        fieldInteractions: Object.keys(fieldInteractions.current).length,
+      });
+    },
+    [track, formName]
+  );
 
   return {
     trackFormStart,
@@ -391,14 +479,14 @@ export const useFormAnalytics = (formName: any) => {
 // Utility function for throttling
 function throttle<T extends (...args) => any>(
   func: T,
-  limit: any,
+  limit: any
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  return function(this: any, ...args: Parameters<T>) {
+  return function (this: any, ...args: Parameters<T>) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }

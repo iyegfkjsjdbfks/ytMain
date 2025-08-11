@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseAsyncDataOptions<T> {
@@ -22,7 +21,7 @@ interface UseAsyncDataReturn<T> {
  */
 export function useAsyncData<T>(
   asyncFunction: () => Promise<T>,
-  options: UseAsyncDataOptions<T> = {},
+  options: UseAsyncDataOptions<T> = {}
 ): UseAsyncDataReturn<T> {
   const { initialData, dependencies = [] } = options;
 
@@ -46,13 +45,16 @@ export function useAsyncData<T>(
       const result = await asyncFunctionRef.current();
       // Handle empty or null results gracefully
       if (result === null || result === undefined) {
-        console.warn('useAsyncData: Received null/undefined result, using initial data');
+        console.warn(
+          'useAsyncData: Received null/undefined result, using initial data'
+        );
         setData(initialData as T);
       } else {
         setData(result);
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      const errorMessage =
+        err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       console.error('useAsyncData error:', err);
       // On error, use initial data if available
@@ -72,9 +74,8 @@ export function useAsyncData<T>(
       const timeoutId = setTimeout(fetchData, 100);
       return () => clearTimeout(timeoutId);
     }
-      fetchData();
-      return undefined; // Explicit return for all code paths
-
+    fetchData();
+    return undefined; // Explicit return for all code paths
   }, [fetchData, JSON.stringify(dependencies)]);
 
   const refetch = useCallback(() => fetchData(), [fetchData]);

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 
 interface AsyncState<T> {
@@ -20,7 +19,7 @@ interface UseAsyncStateOptions {
 export const useAsyncState = <T>(
   asyncFunction: () => Promise<T>,
   dependencies = [],
-  options: UseAsyncStateOptions = {},
+  options: UseAsyncStateOptions = {}
 ) => {
   const { initialLoading = true, onSuccess, onError } = options;
 
@@ -39,7 +38,8 @@ export const useAsyncState = <T>(
       onSuccess?.(result);
       return result;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      const errorMessage =
+        err instanceof Error ? err.message : 'An error occurred';
       setState({ data: null, loading: false, error: errorMessage });
       onError?.(errorMessage);
       throw err;

@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useCallback, type FC } from 'react';
@@ -28,7 +27,7 @@ const ProtectedWatchPage: FC = () => {
 
   return (
     <DataFetchErrorBoundary
-      dataType="video and recommendations"
+      dataType='video and recommendations'
       onRetry={handleRetry}
       showOfflineMessage={true}
     >
@@ -46,4 +45,3 @@ declare global {
     }
   }
 }
-

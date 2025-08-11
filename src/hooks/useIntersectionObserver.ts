@@ -1,5 +1,10 @@
-
-import { useEffect, useRef, useState, useCallback, type RefObject } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  type RefObject,
+} from 'react';
 
 interface UseIntersectionObserverOptions {
   threshold?: number | number;
@@ -45,24 +50,27 @@ export const useIntersectionObserver = ({
   const [isIntersecting, setIsIntersecting] = useState(initialIsIntersecting);
   const frozen = useRef(false);
 
-  const updateEntry = useCallback((entries: IntersectionObserverEntry) => {
-    const [entry] = entries;
+  const updateEntry = useCallback(
+    (entries: IntersectionObserverEntry) => {
+      const [entry] = entries;
 
-    if (!entry) {
-return;
-}
+      if (!entry) {
+        return;
+      }
 
-    if (frozen.current && entry.isIntersecting) {
-      return;
-    }
+      if (frozen.current && entry.isIntersecting) {
+        return;
+      }
 
-    setEntry(entry);
-    setIsIntersecting(entry.isIntersecting);
+      setEntry(entry);
+      setIsIntersecting(entry.isIntersecting);
 
-    if (freezeOnceVisible && entry.isIntersecting) {
-      frozen.current = true;
-    }
-  }, [freezeOnceVisible]);
+      if (freezeOnceVisible && entry.isIntersecting) {
+        frozen.current = true;
+      }
+    },
+    [freezeOnceVisible]
+  );
 
   useEffect(() => {
     const node = ref.current;
@@ -119,7 +127,6 @@ export const useIntersectionVideoAutoplay = ({
     // Video play/pause functionality disabled to prevent loading errors
     // const video = videoRef.current;
     // if (!video || !enabled) return;
-
     // if (isIntersecting) {
     //   video.play().catch(error => {
     //     console.warn('Video autoplay failed:', error);
@@ -135,7 +142,7 @@ export const useIntersectionVideoAutoplay = ({
 /**
  * Hook for lazy loading images based on visibility
  */
-export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }) => {
+export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px' }) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -176,7 +183,13 @@ export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }) =>
 /**
  * Hook for infinite scrolling
  */
-export const useInfiniteScroll = ({ hasNextPage = true, isFetchingNextPage = false, fetchNextPage, threshold = 1.0, rootMargin = '100px',  }) => {
+export const useInfiniteScroll = ({
+  hasNextPage = true,
+  isFetchingNextPage = false,
+  fetchNextPage,
+  threshold = 1.0,
+  rootMargin = '100px',
+}) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
     rootMargin,

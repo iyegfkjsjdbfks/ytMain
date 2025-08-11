@@ -1,4 +1,3 @@
-
 /// <reference types="react/jsx-runtime" />
 import React from 'react';
 import { useCallback, type FC } from 'react';
@@ -26,7 +25,7 @@ const ProtectedSearchResultsPage: FC = () => {
 
   return (
     <DataFetchErrorBoundary
-      dataType="search results"
+      dataType='search results'
       onRetry={handleRetry}
       showOfflineMessage={true}
     >

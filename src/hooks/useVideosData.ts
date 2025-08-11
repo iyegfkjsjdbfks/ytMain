@@ -1,4 +1,3 @@
-
 import { useCallback } from 'react';
 
 // import { getVideos, getShortsVideos } // // from '../services/realVideoService' // Service not found // Service not found;
@@ -16,7 +15,7 @@ import type { Video } from '../types/core';
  */
 export function useVideosData(
   type: 'trending' | 'shorts' | 'all' = 'all',
-  useUnified: boolean = true,
+  useUnified: boolean = true
 ) {
   const fetchVideos = useCallback(async () => {
     if (useUnified) {
@@ -46,7 +45,9 @@ export function useVideosData(
     }
   }, [type, useUnified]);
 
-  return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, { initialData: [] });
+  return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, {
+    initialData: [],
+  });
 }
 
 /**
@@ -54,7 +55,7 @@ export function useVideosData(
  */
 export function useUnifiedVideosData(
   type: 'trending' | 'shorts' | 'all' = 'all',
-  limit: number = 50,
+  limit: number = 50
 ) {
   const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
     switch (type) {

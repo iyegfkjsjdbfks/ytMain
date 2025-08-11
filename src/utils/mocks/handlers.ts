@@ -1,6 +1,4 @@
-
 import { http, HttpResponse } from 'msw';
-
 
 const mockYouTubeVideoResponse = {
   items: [

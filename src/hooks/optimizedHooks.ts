@@ -1,7 +1,5 @@
 /// <reference types="node" />
 
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -48,7 +46,7 @@ export function useOptimizedDebounce<T>(value: T, delay: any): T {
 export function useOptimizedThrottle<T>(
   value: T,
   delay: any,
-  options: { leading?: boolean; trailing?: boolean } = {},
+  options: { leading?: boolean; trailing?: boolean } = {}
 ): T {
   const { leading = true, trailing = true } = options;
   const [throttledValue, setThrottledValue] = useState<T>(value);
@@ -66,10 +64,13 @@ export function useOptimizedThrottle<T>(
         clearTimeout(timeoutRef.current);
       }
 
-      timeoutRef.current = setTimeout(() => {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }, delay - (now - lastRan.current));
+      timeoutRef.current = setTimeout(
+        () => {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        },
+        delay - (now - lastRan.current)
+      );
     }
 
     return () => {
@@ -87,7 +88,7 @@ export function useOptimizedThrottle<T>(
  */
 export function useOptimizedLocalStorage<T>(
   key: string,
-  initialValue: T,
+  initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
@@ -102,14 +103,15 @@ export function useOptimizedLocalStorage<T>(
   const setValue = useCallback(
     (value: T | ((val: T) => T)) => {
       try {
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       } catch (error) {
         console.error(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue],
+    [key, storedValue]
   );
 
   const removeValue = useCallback(() => {
@@ -140,7 +142,7 @@ export function useOptimizedAsync<T>(
     immediate?: boolean;
     onSuccess?: (data: T) => void;
     onError?: (error: Error) => void;
-  } = {},
+  } = {}
 ): AsyncState<T> & { execute: () => Promise<void>; reset: () => void } {
   const { immediate = true, onSuccess, onError } = options;
   const [state, setState] = useState<AsyncState<T>>({
@@ -157,7 +159,8 @@ export function useOptimizedAsync<T>(
       setState({ data: result, loading: false, error: null });
       onSuccess?.(result);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      const errorMessage =
+        err instanceof Error ? err.message : 'An error occurred';
       setState({ data: null, loading: false, error: errorMessage });
       onError?.(err instanceof Error ? err : new Error(errorMessage));
     }
@@ -181,7 +184,7 @@ export function useOptimizedAsync<T>(
  */
 export function useOptimizedIntersectionObserver(
   options: IntersectionObserverInit = {},
-  dependencies = [],
+  dependencies = []
 ): {
   ref: (node: Element | null) => void;
   isIntersecting: boolean;
@@ -209,13 +212,13 @@ export function useOptimizedIntersectionObserver(
             threshold: 0.1,
             rootMargin: '50px',
             ...options,
-          },
+          }
         );
 
         observer.current.observe(node);
       }
     },
-    [options, ...dependencies],
+    [options, ...dependencies]
   );
 
   useEffect(() => {
@@ -233,8 +236,14 @@ export function useOptimizedIntersectionObserver(
  * Enhanced toggle hook with multiple states
  */
 export function useOptimizedToggle(
-  initialValue: boolean = false,
-): [boolean, () => void, (value: string | number) => void, () => void, () => void] {
+  initialValue: boolean = false
+): [
+  boolean,
+  () => void,
+  (value: string | number) => void,
+  () => void,
+  () => void,
+] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(prev => !prev), []);
@@ -258,17 +267,31 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     setArray(prev => prev.filter((_, i) => i !== index));
   }, []);
 
-  const removeById = useCallback((id: string | number, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.filter((item) => item[idKey] !== id));
-  }, []);
+  const removeById = useCallback(
+    (id: string | number, idKey: keyof T = 'id' as keyof T) => {
+      setArray(prev => prev.filter(item => item[idKey] !== id));
+    },
+    []
+  );
 
   const update = useCallback((index: number, newItem: Partial<T>) => {
-    setArray(prev => prev.map((item, i) => i=== index ? { ...item, ...newItem } : item));
+    setArray(prev =>
+      prev.map((item, i) => (i === index ? { ...item, ...newItem } : item))
+    );
   }, []);
 
-  const updateById = useCallback((id: string | number, newItem: Partial<T>, idKey: keyof T = 'id' as keyof T) => {
-    setArray(prev => prev.map(item => item[idKey] === id ? { ...item, ...newItem } : item));
-  }, []);
+  const updateById = useCallback(
+    (
+      id: string | number,
+      newItem: Partial<T>,
+      idKey: keyof T = 'id' as keyof T
+    ) => {
+      setArray(prev =>
+        prev.map(item => (item[idKey] === id ? { ...item, ...newItem } : item))
+      );
+    },
+    []
+  );
 
   const clear = useCallback(() => {
     setArray([]);
@@ -298,7 +321,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
 export function useOptimizedMemo<T>(
   factory: () => T,
   deps: any,
-  compare?: (a: any, b: any) => boolean,
+  compare?: (a: any, b: any) => boolean
 ): T {
   const memoizedValue = useMemo(factory, deps);
   const lastDeps = useRef<any[]>(deps);
@@ -322,14 +345,16 @@ export function useOptimizedMemo<T>(
  */
 export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
-  deps: any,
+  deps: any
 ): T {
   const callbackRef = useRef<T>(callback);
   const depsRef = useRef<any[]>(deps);
 
   // Update callback if dependencies changed
   useEffect(() => {
-    const depsChanged = deps.some((dep: any, index: number) => dep !== depsRef.current[index]);
+    const depsChanged = deps.some(
+      (dep: any, index: number) => dep !== depsRef.current[index]
+    );
     if (depsChanged) {
       callbackRef.current = callback;
       depsRef.current = deps;
@@ -344,21 +369,28 @@ export function useOptimizedCallback<T extends (...args) => any>(
  */
 export function useOptimizedForm<T extends Record<string, any>>(
   initialValues: T,
-  validationRules?: Partial<Record<keyof T, (value: string | number) => string | null>>,
+  validationRules?: Partial<
+    Record<keyof T, (value: string | number) => string | null>
+  >
 ) {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
-  const [touched, setTouchedState] = useState<Partial<Record<keyof T, boolean>>>({});
+  const [touched, setTouchedState] = useState<
+    Partial<Record<keyof T, boolean>>
+  >({});
 
-  const setValue = useCallback((name: keyof T, value: string | number) => {
-    setValues(prev => ({ ...prev, [name]: value }));
+  const setValue = useCallback(
+    (name: keyof T, value: string | number) => {
+      setValues(prev => ({ ...prev, [name]: value }));
 
-    // Validate field if rules exist
-    if (validationRules?.[name]) {
-      const error = validationRules[name](value);
-      setErrors(prev => ({ ...prev, [name]: error || undefined }));
-    }
-  }, [validationRules]);
+      // Validate field if rules exist
+      if (validationRules?.[name]) {
+        const error = validationRules[name](value);
+        setErrors(prev => ({ ...prev, [name]: error || undefined }));
+      }
+    },
+    [validationRules]
+  );
 
   const setTouched = useCallback((name: keyof T, isTouched: boolean = true) => {
     setTouchedState(prev => ({ ...prev, [name]: isTouched }));
@@ -372,13 +404,13 @@ export function useOptimizedForm<T extends Record<string, any>>(
 
   const validate = useCallback(() => {
     if (!validationRules) {
-return true;
-}
+      return true;
+    }
 
     const newErrors: Partial<Record<keyof T, string>> = {};
     let isValid = true;
 
-    Object.keys(validationRules).forEach((key) => {
+    Object.keys(validationRules).forEach(key => {
       const rule = validationRules[key as keyof T];
       if (rule) {
         const error = rule(values[key as keyof T]);

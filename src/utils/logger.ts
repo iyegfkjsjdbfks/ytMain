@@ -1,4 +1,3 @@
-
 /**
  * Centralized logging utility for the application
  * Provides different log levels and can be configured for production
@@ -24,7 +23,9 @@ class Logger {
   constructor(config: Partial<LoggerConfig> = {}) {
     this.config = {
       level: 'info',
-      enableConsole: typeof window !== 'undefined' && window.location.hostname === 'localhost',
+      enableConsole:
+        typeof window !== 'undefined' &&
+        window.location.hostname === 'localhost',
       enableRemote: false,
       ...config,
     };
@@ -34,7 +35,11 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(level: LogLevel, message: any, ...args: unknown[]): string {
+  private formatMessage(
+    level: LogLevel,
+    message: any,
+    ...args: unknown[]
+  ): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
     return `${prefix} ${message}`;
@@ -42,8 +47,8 @@ class Logger {
 
   debug(message: any, ...args: unknown[]): void {
     if (!this.shouldLog('debug')) {
-return;
-}
+      return;
+    }
 
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
@@ -53,8 +58,8 @@ return;
 
   info(message: any, ...args: unknown[]): void {
     if (!this.shouldLog('info')) {
-return;
-}
+      return;
+    }
 
     if (this.config.enableConsole) {
       // eslint-disable-next-line no-console
@@ -64,8 +69,8 @@ return;
 
   warn(message: any, ...args: unknown[]): void {
     if (!this.shouldLog('warn')) {
-return;
-}
+      return;
+    }
 
     if (this.config.enableConsole) {
       console.warn(this.formatMessage('warn', message), ...args);
@@ -74,8 +79,8 @@ return;
 
   error(message: any, error?: Error | unknown, ...args: unknown[]): void {
     if (!this.shouldLog('error')) {
-return;
-}
+      return;
+    }
 
     if (this.config.enableConsole) {
       console.error(this.formatMessage('error', message), error, ...args);
@@ -99,7 +104,11 @@ return;
 
   apiResponse(method: any, url: any, status: any, data?: unknown): void {
     if (status >= 400) {
-      this.error(`API ${method} ${url} failed with status ${status}`, undefined, data);
+      this.error(
+        `API ${method} ${url} failed with status ${status}`,
+        undefined,
+        data
+      );
     } else {
       this.debug(`API ${method} ${url} succeeded with status ${status}`, data);
     }

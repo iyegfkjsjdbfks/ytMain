@@ -1,5 +1,3 @@
-
-
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -52,11 +50,14 @@ export interface UseApiReturn<T> extends UseApiState<T> {
 
 // Cache implementation
 class ApiCache {
-  private cache = new Map<string, {
-    data;
-    timestamp: number;
-    staleTime: number;
-  }>();
+  private cache = new Map<
+    string,
+    {
+      data;
+      timestamp: number;
+      staleTime: number;
+    }
+  >();
 
   set<T>(key: string, data: T, staleTime: number = 0): void {
     this.cache.set(key, {
@@ -77,8 +78,8 @@ class ApiCache {
   get<T>(key: string): T | undefined {
     const entry = this.cache.get(key);
     if (!entry) {
-return undefined;
-}
+      return undefined;
+    }
 
     const now = Date.now();
     const age = now - entry.timestamp;
@@ -95,8 +96,8 @@ return undefined;
   isStale(key: string): boolean {
     const entry = this.cache.get(key);
     if (!entry) {
-return true;
-}
+      return true;
+    }
 
     const now = Date.now();
     const age = now - entry.timestamp;
@@ -121,7 +122,7 @@ const apiCache = new ApiCache();
 export function useApi<T>(
   queryKey: string | string,
   queryFn: () => Promise<ApiResponse<T>>,
-  config: UseApiConfig<T> = {},
+  config: UseApiConfig<T> = {}
 ): UseApiReturn<T> {
   const {
     initialData,
@@ -157,71 +158,86 @@ export function useApi<T>(
   const mountedRef = useRef(true);
 
   // Fetch function
-  const fetchData = useCallback(async (retryCount = 0): Promise<void> => {
-    if (!enabled || !mountedRef.current) {
-return;
-}
-
-    // Cancel previous request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    // Create new abort controller
-    abortControllerRef.current = new AbortController();
-
-    setState(prev => ({ ...prev, loading: true, error: null }));
-
-    try {
-      const response = await queryFn();
-
-      if (!mountedRef.current) {
-return;
-}
-
-      const newData = response.data;
-      const timestamp = Date.now();
-
-      // Update cache
-      apiCache.set(cacheKey, newData, staleTime);
-
-      // Update state
-      setState({
-        data: newData,
-        loading: false,
-        error: null,
-        isStale: false,
-        lastUpdated: timestamp,
-      });
-
-      // Call success callback
-      onSuccess?.(newData);
-
-    } catch (error) {
-      if (!mountedRef.current) {
-return;
-}
-
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
-
-      // Retry logic
-      if (retryCount < retry && (error as Error).name !== 'AbortError') {
-        retryTimeoutRef.current = setTimeout(() => {
-          fetchData(retryCount + 1);
-        }, retryDelay * Math.pow(2, retryCount)); // Exponential backoff
+  const fetchData = useCallback(
+    async (retryCount = 0): Promise<void> => {
+      if (!enabled || !mountedRef.current) {
         return;
       }
 
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: errorMessage,
-      }));
+      // Cancel previous request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
 
-      // Call error callback
-      onError?.(error instanceof Error ? error : new Error(errorMessage));
-    }
-  }, [queryFn, enabled, cacheKey, staleTime, retry, retryDelay, onSuccess, onError]);
+      // Create new abort controller
+      abortControllerRef.current = new AbortController();
+
+      setState(prev => ({ ...prev, loading: true, error: null }));
+
+      try {
+        const response = await queryFn();
+
+        if (!mountedRef.current) {
+          return;
+        }
+
+        const newData = response.data;
+        const timestamp = Date.now();
+
+        // Update cache
+        apiCache.set(cacheKey, newData, staleTime);
+
+        // Update state
+        setState({
+          data: newData,
+          loading: false,
+          error: null,
+          isStale: false,
+          lastUpdated: timestamp,
+        });
+
+        // Call success callback
+        onSuccess?.(newData);
+      } catch (error) {
+        if (!mountedRef.current) {
+          return;
+        }
+
+        const errorMessage =
+          error instanceof Error ? error.message : 'An error occurred';
+
+        // Retry logic
+        if (retryCount < retry && (error as Error).name !== 'AbortError') {
+          retryTimeoutRef.current = setTimeout(
+            () => {
+              fetchData(retryCount + 1);
+            },
+            retryDelay * Math.pow(2, retryCount)
+          ); // Exponential backoff
+          return;
+        }
+
+        setState(prev => ({
+          ...prev,
+          loading: false,
+          error: errorMessage,
+        }));
+
+        // Call error callback
+        onError?.(error instanceof Error ? error : new Error(errorMessage));
+      }
+    },
+    [
+      queryFn,
+      enabled,
+      cacheKey,
+      staleTime,
+      retry,
+      retryDelay,
+      onSuccess,
+      onError,
+    ]
+  );
 
   // Refetch function
   const refetch = useCallback(async (): Promise<void> => {
@@ -230,20 +246,23 @@ return;
   }, [fetchData, cacheKey]);
 
   // Mutate function (optimistic updates)
-  const mutate = useCallback((data: T): void => {
-    const timestamp = Date.now();
+  const mutate = useCallback(
+    (data: T): void => {
+      const timestamp = Date.now();
 
-    // Update cache
-    apiCache.set(cacheKey, data, staleTime);
+      // Update cache
+      apiCache.set(cacheKey, data, staleTime);
 
-    // Update state
-    setState(prev => ({
-      ...prev,
-      data,
-      isStale: false,
-      lastUpdated: timestamp,
-    }));
-  }, [cacheKey, staleTime]);
+      // Update state
+      setState(prev => ({
+        ...prev,
+        data,
+        isStale: false,
+        lastUpdated: timestamp,
+      }));
+    },
+    [cacheKey, staleTime]
+  );
 
   // Reset function
   const reset = useCallback((): void => {
@@ -267,8 +286,8 @@ return;
   // Window focus refetch
   useEffect(() => {
     if (!refetchOnWindowFocus) {
-return;
-}
+      return;
+    }
 
     const handleFocus = () => {
       if (state.isStale) {
@@ -307,7 +326,7 @@ return;
 export function useQuery<T>(
   queryKey: string | string,
   queryFn: () => Promise<ApiResponse<T>>,
-  config?: UseApiConfig<T>,
+  config?: UseApiConfig<T>
 ) {
   return useApi(queryKey, queryFn, config);
 }
@@ -317,8 +336,12 @@ export function useMutation<T, TVariables = any>(
   config: {
     onSuccess?: (data: T, variables: TVariables) => void;
     onError?: (error: Error, variables: TVariables) => void;
-    onSettled?: (data: T | undefined, error: Error | null, variables: TVariables) => void;
-  } = {},
+    onSettled?: (
+      data: T | undefined,
+      error: Error | null,
+      variables: TVariables
+    ) => void;
+  } = {}
 ) {
   const [state, setState] = useState<{
     data: T | undefined;
@@ -330,28 +353,39 @@ export function useMutation<T, TVariables = any>(
     error: null,
   });
 
-  const mutate = useCallback(async (variables: TVariables): Promise<T> => {
-    setState({ data: undefined, loading: true, error: null });
+  const mutate = useCallback(
+    async (variables: TVariables): Promise<T> => {
+      setState({ data: undefined, loading: true, error: null });
 
-    try {
-      const response = await mutationFn(variables);
-      const { data } = response;
+      try {
+        const response = await mutationFn(variables);
+        const { data } = response;
 
-      setState({ data, loading: false, error: null });
-      config.onSuccess?.(data, variables);
-      config.onSettled?.(data, null, variables);
+        setState({ data, loading: false, error: null });
+        config.onSuccess?.(data, variables);
+        config.onSettled?.(data, null, variables);
 
-      return data;
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+        return data;
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'An error occurred';
 
-      setState(prev => ({ ...prev, loading: false, error: errorMessage }));
-      config.onError?.(error instanceof Error ? error : new Error(errorMessage), variables);
-      config.onSettled?.(undefined, error instanceof Error ? error : new Error(errorMessage), variables);
+        setState(prev => ({ ...prev, loading: false, error: errorMessage }));
+        config.onError?.(
+          error instanceof Error ? error : new Error(errorMessage),
+          variables
+        );
+        config.onSettled?.(
+          undefined,
+          error instanceof Error ? error : new Error(errorMessage),
+          variables
+        );
 
-      throw error;
-    }
-  }, [mutationFn, config]);
+        throw error;
+      }
+    },
+    [mutationFn, config]
+  );
 
   const reset = useCallback(() => {
     setState({ data: undefined, loading: false, error: null });
@@ -369,7 +403,8 @@ export const queryCache = {
   invalidate: (key: string) => apiCache.invalidate(key),
   clear: () => apiCache.clear(),
   get: <T>(key: string) => apiCache.get<T>(key),
-  set: <T>(key: string, data: T, staleTime?: number) => apiCache.set(key, data, staleTime),
+  set: <T>(key: string, data: T, staleTime?: number) =>
+    apiCache.set(key, data, staleTime),
 };
 
 export default useApi;

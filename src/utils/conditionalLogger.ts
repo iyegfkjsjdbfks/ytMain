@@ -2,7 +2,7 @@ enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3
+  DEBUG = 3,
 }
 
 class ConditionalLogger {
@@ -52,7 +52,11 @@ class ConditionalLogger {
     return level <= this.logLevel;
   }
 
-  private formatMessage(level: LogLevel, message: any, source?: string): string {
+  private formatMessage(
+    level: LogLevel,
+    message: any,
+    source?: string
+  ): string {
     const timestamp = new Date().toISOString();
     const levelName = LogLevel[level];
     const sourcePrefix = source ? `[${source}]` : '';
@@ -61,28 +65,44 @@ class ConditionalLogger {
 
   error(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.ERROR)) {
-      const formattedMessage = this.formatMessage(LogLevel.ERROR, message, source);
+      const formattedMessage = this.formatMessage(
+        LogLevel.ERROR,
+        message,
+        source
+      );
       console.error(formattedMessage, data || '');
     }
   }
 
   warn(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.WARN)) {
-      const formattedMessage = this.formatMessage(LogLevel.WARN, message, source);
+      const formattedMessage = this.formatMessage(
+        LogLevel.WARN,
+        message,
+        source
+      );
       console.warn(formattedMessage, data || '');
     }
   }
 
   info(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.INFO)) {
-      const formattedMessage = this.formatMessage(LogLevel.INFO, message, source);
+      const formattedMessage = this.formatMessage(
+        LogLevel.INFO,
+        message,
+        source
+      );
       console.info(formattedMessage, data || '');
     }
   }
 
   debug(message: any, data?: unknown, source?: string): void {
     if (this.shouldLog(LogLevel.DEBUG)) {
-      const formattedMessage = this.formatMessage(LogLevel.DEBUG, message, source);
+      const formattedMessage = this.formatMessage(
+        LogLevel.DEBUG,
+        message,
+        source
+      );
       console.debug(formattedMessage, data || '');
     }
   }
@@ -146,9 +166,11 @@ class ConditionalLogger {
           return obj.map(removeSensitiveFields);
         }
 
-        const result= {};
+        const result = {};
         for (const [key, value] of Object.entries(obj)) {
-          if (sensitiveFields.some(field => key.toLowerCase().includes(field))) {
+          if (
+            sensitiveFields.some(field => key.toLowerCase().includes(field))
+          ) {
             result[key] = '[REDACTED]';
           } else {
             result[key] = removeSensitiveFields(value);
@@ -169,7 +191,7 @@ class ConditionalLogger {
       return {
         name: error.name,
         message: error.message,
-        stack: this.isDebugMode ? error.stack : '[Stack trace hidden]'
+        stack: this.isDebugMode ? error.stack : '[Stack trace hidden]',
       };
     }
     return error;

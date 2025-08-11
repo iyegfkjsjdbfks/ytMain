@@ -1,4 +1,3 @@
-
 import { CONSTANTS } from '../../lib/constants';
 import type { ApiResponse, PaginationInfo } from '../../types/core';
 
@@ -6,8 +5,6 @@ import type { ApiResponse, PaginationInfo } from '../../types/core';
  * Base API Service
  * Centralized API configuration and utilities
  */
-
-
 
 // API Configuration
 export const API_BASE_URL = CONSTANTS.API_CONFIG.BASE_URL;
@@ -33,7 +30,7 @@ export class ApiError extends Error {
     message: any,
     public status: any,
     public code?: string,
-    public details?,
+    public details?
   ) {
     super(message);
     this.name = 'ApiError';
@@ -55,14 +52,24 @@ export class TimeoutError extends Error {
 }
 
 // Utility functions
-export function createApiUrl(endpoint: any, params?: Record<string, any>): string {
+export function createApiUrl(
+  endpoint: any,
+  params?: Record<string, any>
+): string {
   let fullUrl: string;
 
   // Handle relative base URLs (like '/api/youtube/v3') and absolute URLs
-  if (API_BASE_URL.startsWith('http://') || API_BASE_URL.startsWith('https://')) {
+  if (
+    API_BASE_URL.startsWith('http://') ||
+    API_BASE_URL.startsWith('https://')
+  ) {
     // Absolute URL - use new URL() constructor
-    const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL : `${API_BASE_URL}/`;
-    const relativeEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+    const baseUrl = API_BASE_URL.endsWith('/')
+      ? API_BASE_URL
+      : `${API_BASE_URL}/`;
+    const relativeEndpoint = endpoint.startsWith('/')
+      ? endpoint.slice(1)
+      : endpoint;
     const url = new URL(relativeEndpoint, baseUrl);
 
     if (params) {
@@ -79,39 +86,35 @@ export function createApiUrl(endpoint: any, params?: Record<string, any>): strin
 
     return url.toString();
   }
-    // Relative URL - use string concatenation
-    const baseUrl = API_BASE_URL.endsWith('/') ? API_BASE_URL : `${API_BASE_URL}/`;
-    const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
-    fullUrl = `${baseUrl}${cleanEndpoint}`;
+  // Relative URL - use string concatenation
+  const baseUrl = API_BASE_URL.endsWith('/')
+    ? API_BASE_URL
+    : `${API_BASE_URL}/`;
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+  fullUrl = `${baseUrl}${cleanEndpoint}`;
 
-    if (params) {
-      const searchParams = new URLSearchParams();
-      Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          if (Array.isArray(value)) {
-            value.forEach(item => searchParams.append(key, String(item)));
-          } else {
-            searchParams.append(key, String(value));
-          }
+  if (params) {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        if (Array.isArray(value)) {
+          value.forEach(item => searchParams.append(key, String(item)));
+        } else {
+          searchParams.append(key, String(value));
         }
-      });
-      const queryString = searchParams.toString();
-      if (queryString) {
-        fullUrl += `?${queryString}`;
       }
+    });
+    const queryString = searchParams.toString();
+    if (queryString) {
+      fullUrl += `?${queryString}`;
     }
+  }
 
-    return fullUrl;
-
+  return fullUrl;
 }
 
 export function createRequestConfig(config: RequestConfig = {}): RequestInit {
-  const {
-    timeout = API_TIMEOUT,
-    retries,
-    retryDelay,
-    ...fetchConfig
-  } = config;
+  const { timeout = API_TIMEOUT, retries, retryDelay, ...fetchConfig } = config;
 
   return {
     headers: {
@@ -125,7 +128,7 @@ export function createRequestConfig(config: RequestConfig = {}): RequestInit {
 // Request wrapper with timeout and retry logic
 export async function apiRequest<T>(
   url: any,
-  config: RequestConfig = {},
+  config: RequestConfig = {}
 ): Promise<ApiResponse<T>> {
   const {
     timeout = API_TIMEOUT,
@@ -155,24 +158,25 @@ export async function apiRequest<T>(
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new ApiError(
-          errorData.message || `HTTP ${response.status}: ${response.statusText}`,
+          errorData.message ||
+            `HTTP ${response.status}: ${response.statusText}`,
           response.status,
           errorData.code,
-          errorData.details,
+          errorData.details
         );
       }
 
       // Parse response
       const data = await response.json();
       return data;
-
     } catch (error) {
       lastError = error as Error;
 
       // Don't retry on certain errors
       if (
         error instanceof ApiError &&
-        (error.status >= 400 && error.status < 500)
+        error.status >= 400 &&
+        error.status < 500
       ) {
         throw error;
       }
@@ -191,7 +195,9 @@ export async function apiRequest<T>(
 
   // Convert network errors
   if (lastError instanceof TypeError) {
-    throw new NetworkError('Failed to fetch data. Please check your connection.');
+    throw new NetworkError(
+      'Failed to fetch data. Please check your connection.'
+    );
   }
 
   throw lastError || new Error('Unknown error occurred');
@@ -201,7 +207,7 @@ export async function apiRequest<T>(
 export async function get<T>(
   endpoint: any,
   params?: Record<string, any>,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint, params);
   return apiRequest<T>(url, { ...config, method: 'GET' });
@@ -211,7 +217,7 @@ export async function get<T>(
 export async function post<T>(
   endpoint: any,
   data?,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -225,7 +231,7 @@ export async function post<T>(
 export async function put<T>(
   endpoint: any,
   data?,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -239,7 +245,7 @@ export async function put<T>(
 export async function patch<T>(
   endpoint: any,
   data?,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, {
@@ -252,7 +258,7 @@ export async function patch<T>(
 // DELETE request
 export async function del<T>(
   endpoint: any,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   return apiRequest<T>(url, { ...config, method: 'DELETE' });
@@ -263,7 +269,7 @@ export async function upload<T>(
   endpoint: any,
   file: File,
   additionalData?: Record<string, any>,
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
   const formData = new FormData();
@@ -291,7 +297,7 @@ export async function upload<T>(
 export async function getPaginated<T>(
   endpoint: any,
   params: PaginatedRequest = {},
-  config?: RequestConfig,
+  config?: RequestConfig
 ): Promise<ApiResponse<T[]> & { pagination: PaginationInfo }> {
   const {
     page = 1,

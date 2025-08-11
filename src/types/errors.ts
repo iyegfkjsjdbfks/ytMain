@@ -1,4 +1,3 @@
-
 /**
  * Unified Error Type Definitions
  * Standardized error interfaces for consistent error handling
@@ -92,7 +91,12 @@ export interface PerformanceError extends BaseError {
 
 // Service Worker Error Types
 export interface ServiceWorkerError extends BaseError {
-  swState: 'installing' | 'installed' | 'activating' | 'activated' | 'redundant';
+  swState:
+    | 'installing'
+    | 'installed'
+    | 'activating'
+    | 'activated'
+    | 'redundant';
   operation: 'install' | 'activate' | 'fetch' | 'message';
   url?: string;
 }
@@ -157,7 +161,7 @@ export enum ErrorSeverity {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
-  CRITICAL = 'critical'
+  CRITICAL = 'critical',
 }
 
 // Error Categories
@@ -173,7 +177,7 @@ export enum ErrorCategory {
   CONFIGURATION = 'configuration',
   COMPONENT = 'component',
   BUSINESS_LOGIC = 'business_logic',
-  EXTERNAL_SERVICE = 'external_service'
+  EXTERNAL_SERVICE = 'external_service',
 }
 
 // Enhanced Error Interface with Metadata
@@ -223,8 +227,14 @@ export interface ErrorContext {
 }
 
 // Error Handler Function Types
-export type ErrorHandler<T extends BaseError = BaseError> = (error: T, context?: ErrorContext) => void;
-export type AsyncErrorHandler<T extends BaseError = BaseError> = (error: T, context?: ErrorContext) => Promise<void>;
+export type ErrorHandler<T extends BaseError = BaseError> = (
+  error: T,
+  context?: ErrorContext
+) => void;
+export type AsyncErrorHandler<T extends BaseError = BaseError> = (
+  error: T,
+  context?: ErrorContext
+) => Promise<void>;
 
 // Error Recovery Strategy
 export interface ErrorRecoveryStrategy {
@@ -243,7 +253,10 @@ export interface ErrorReportingConfig {
   includeContext: boolean;
   samplingRate: number;
   ignoredErrors: string;
-  beforeSend?: (error: EnhancedError, context?: ErrorContext) => EnhancedError | null;
+  beforeSend?: (
+    error: EnhancedError,
+    context?: ErrorContext
+  ) => EnhancedError | null;
 }
 
 // Common Error Codes
@@ -307,7 +320,7 @@ export const ERROR_CODES = {
   FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED',
 } as const;
 
-export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];
+export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 // Error Factory Functions
 export const createApiError = (
@@ -315,7 +328,7 @@ export const createApiError = (
   endpoint: any,
   method: ApiError['method'],
   statusCode?: number,
-  details?: Record<string, unknown>,
+  details?: Record<string, unknown>
 ): ApiError => {
   const error: ApiError = {
     code: ERROR_CODES.API_SERVER_ERROR,
@@ -340,7 +353,7 @@ export const createValidationError = (
   field: any,
   message: any,
   value?: unknown,
-  constraint?: string,
+  constraint?: string
 ): ValidationError => ({
   code: ERROR_CODES.VALIDATION_INVALID_FORMAT,
   message,
@@ -354,7 +367,7 @@ export const createNetworkError = (
   message: any,
   url: any,
   timeout = false,
-  offline = false,
+  offline = false
 ): NetworkError => ({
   code: timeout ? ERROR_CODES.NETWORK_TIMEOUT : ERROR_CODES.NETWORK_ERROR,
   message,
@@ -368,7 +381,12 @@ export const createYouTubeError = (
   message: any,
   endpoint: any,
   videoId?: string,
-  errorType?: 'unavailable' | 'embed_disabled' | 'region_blocked' | 'private' | 'deleted',
+  errorType?:
+    | 'unavailable'
+    | 'embed_disabled'
+    | 'region_blocked'
+    | 'private'
+    | 'deleted'
 ): YouTubeApiError => {
   let code: ErrorCode = ERROR_CODES.API_SERVER_ERROR;
 
