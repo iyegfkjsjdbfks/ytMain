@@ -204,7 +204,7 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
     mockUser,
     wrapper,
     ...renderOptions
-  } = options;
+  } = _options;
 
   const Wrapper = wrapper || (({ children }) => (
     <AllTheProviders
@@ -216,7 +216,7 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
     </AllTheProviders>
   ));
 
-  const result = render(ui, { wrapper: Wrapper, ...renderOptions });
+  const result = render(_ui, { wrapper: Wrapper, ...renderOptions });
 
   return {
     ...result,

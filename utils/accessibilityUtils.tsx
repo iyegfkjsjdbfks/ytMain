@@ -187,8 +187,8 @@ return;
 }
 
 // Keyboard navigation hook
-export function useKeyboardNavigation(options: any) {
-  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = options;
+export function useKeyboardNavigation(_options: any) {
+  const { onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd, disabled = false } = _options;
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (disabled) {
 return;
@@ -235,7 +235,7 @@ return;
 
 // ARIA live region hook
 export function useAriaLiveRegion(_initialMessage = '') {
-  const [message, setMessage] = useState(initialMessage);
+  const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
   const announce = useCallback((newMessage, priority: 'polite' | 'assertive' = 'polite') => {
