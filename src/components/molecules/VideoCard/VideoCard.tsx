@@ -1,3 +1,4 @@
+import { User } from '../types';
 
 /// <reference types="react/jsx-runtime" />
 // TODO: Fix import - import React from 'react';
