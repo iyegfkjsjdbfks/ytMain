@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex: string): 'light' | 'dark' {
+export function getColorContrast(hex): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
