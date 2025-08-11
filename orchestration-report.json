@@ -1,221 +1,1161 @@
 {
-  "startTime": "2025-08-11T00:12:04.663Z",
+  "startTime": "2025-08-11T09:22:59.032Z",
   "fixerRuns": [
     {
-      "timestamp": "2025-08-11T00:12:04.663Z",
+      "timestamp": "2025-08-11T09:22:59.033Z",
       "type": "info",
-      "message": "🚀 Starting Priority-Focused TypeScript Error Fixing..."
+      "message": "🚀 Starting Enhanced TypeScript Error Fixing Orchestration..."
     },
     {
-      "timestamp": "2025-08-11T00:12:04.673Z",
+      "timestamp": "2025-08-11T09:22:59.042Z",
       "type": "info",
       "message": "Initial total errors: 10435"
     },
     {
-      "timestamp": "2025-08-11T00:12:04.673Z",
+      "timestamp": "2025-08-11T09:22:59.042Z",
       "type": "info",
-      "message": "\n--- Processing Cannot find namespace errors ---"
+      "message": "Starting fix-malformed-type-annotations.js for TS1005 (max 3 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:12:04.676Z",
+      "timestamp": "2025-08-11T09:22:59.050Z",
+      "type": "info",
+      "message": "fix-malformed-type-annotations.js (iteration 1/3): 0 TS1005 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:22:59.050Z",
+      "type": "success",
+      "message": "fix-malformed-type-annotations.js: No TS1005 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:22:59.054Z",
+      "type": "info",
+      "message": "Current total errors after fix-malformed-type-annotations.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:00.057Z",
+      "type": "info",
+      "message": "Starting fix-ts1005-enhanced.js for TS1005 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:00.064Z",
+      "type": "info",
+      "message": "fix-ts1005-enhanced.js (iteration 1/2): 0 TS1005 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:00.064Z",
+      "type": "success",
+      "message": "fix-ts1005-enhanced.js: No TS1005 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:00.068Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts1005-enhanced.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:01.069Z",
+      "type": "info",
+      "message": "Starting fix-ts1003-syntax-errors.js for TS1003 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:01.077Z",
+      "type": "info",
+      "message": "fix-ts1003-syntax-errors.js (iteration 1/2): 0 TS1003 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:01.077Z",
+      "type": "success",
+      "message": "fix-ts1003-syntax-errors.js: No TS1003 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:01.081Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts1003-syntax-errors.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:02.083Z",
+      "type": "info",
+      "message": "Starting fix-unexpected-tokens.js for TS1381 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:02.089Z",
+      "type": "info",
+      "message": "fix-unexpected-tokens.js (iteration 1/2): 0 TS1381 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:02.089Z",
+      "type": "success",
+      "message": "fix-unexpected-tokens.js: No TS1381 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:02.093Z",
+      "type": "info",
+      "message": "Current total errors after fix-unexpected-tokens.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:03.095Z",
+      "type": "info",
+      "message": "Starting fix-ts2875-jsx-runtime.js for TS2875 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:03.101Z",
+      "type": "info",
+      "message": "fix-ts2875-jsx-runtime.js (iteration 1/2): 287 TS2875 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:03.117Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2875-jsx-runtime.js TS2875 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:03.117Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2875-jsx-runtime.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:05.206Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2875-jsx-runtime.js TS2875 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:05.206Z",
+      "type": "success",
+      "message": "fix-ts2875-jsx-runtime.js: Fixed 0 TS2875 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:07.212Z",
+      "type": "info",
+      "message": "fix-ts2875-jsx-runtime.js (iteration 2/2): 287 TS2875 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:07.226Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2875-jsx-runtime.js TS2875 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:07.226Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2875-jsx-runtime.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:09.362Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2875-jsx-runtime.js TS2875 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:09.362Z",
+      "type": "success",
+      "message": "fix-ts2875-jsx-runtime.js: Fixed 0 TS2875 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:09.362Z",
+      "type": "warning",
+      "message": "fix-ts2875-jsx-runtime.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:09.365Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2875-jsx-runtime.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:10.366Z",
+      "type": "info",
+      "message": "Starting fix-ts2307-cannot-find-module.js for TS2307 (max 3 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:10.372Z",
+      "type": "info",
+      "message": "fix-ts2307-cannot-find-module.js (iteration 1/3): 72 TS2307 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:10.387Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2307-cannot-find-module.js TS2307 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:10.387Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2307-cannot-find-module.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:12.499Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2307-cannot-find-module.js TS2307 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:12.499Z",
+      "type": "success",
+      "message": "fix-ts2307-cannot-find-module.js: Fixed 0 TS2307 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:14.506Z",
+      "type": "info",
+      "message": "fix-ts2307-cannot-find-module.js (iteration 2/3): 72 TS2307 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:14.521Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2307-cannot-find-module.js TS2307 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:14.521Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2307-cannot-find-module.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:16.644Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2307-cannot-find-module.js TS2307 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:16.644Z",
+      "type": "success",
+      "message": "fix-ts2307-cannot-find-module.js: Fixed 0 TS2307 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:16.644Z",
+      "type": "warning",
+      "message": "fix-ts2307-cannot-find-module.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:16.647Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2307-cannot-find-module.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:17.649Z",
       "type": "info",
       "message": "Starting fix-ts2503-cannot-find-namespace.js for TS2503 (max 2 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:12:04.685Z",
+      "timestamp": "2025-08-11T09:23:17.654Z",
       "type": "info",
       "message": "fix-ts2503-cannot-find-namespace.js (iteration 1/2): 494 TS2503 errors, 10435 total errors"
     },
     {
-      "timestamp": "2025-08-11T00:12:04.705Z",
+      "timestamp": "2025-08-11T09:23:17.668Z",
       "type": "info",
       "message": "Created checkpoint: fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)"
     },
     {
-      "timestamp": "2025-08-11T00:12:04.705Z",
+      "timestamp": "2025-08-11T09:23:17.668Z",
       "type": "info",
       "message": "Running: node scripts/fix-ts2503-cannot-find-namespace.js"
     },
     {
-      "timestamp": "2025-08-11T00:12:23.219Z",
+      "timestamp": "2025-08-11T09:23:19.778Z",
       "type": "success",
       "message": "Committed changes for fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)"
     },
     {
-      "timestamp": "2025-08-11T00:12:23.219Z",
+      "timestamp": "2025-08-11T09:23:19.778Z",
       "type": "success",
       "message": "fix-ts2503-cannot-find-namespace.js: Fixed 0 TS2503 errors, total change: 0"
     },
     {
-      "timestamp": "2025-08-11T00:12:25.231Z",
+      "timestamp": "2025-08-11T09:23:21.784Z",
       "type": "info",
       "message": "fix-ts2503-cannot-find-namespace.js (iteration 2/2): 494 TS2503 errors, 10435 total errors"
     },
     {
-      "timestamp": "2025-08-11T00:12:25.251Z",
+      "timestamp": "2025-08-11T09:23:21.798Z",
       "type": "info",
       "message": "Created checkpoint: fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)"
     },
     {
-      "timestamp": "2025-08-11T00:12:25.251Z",
+      "timestamp": "2025-08-11T09:23:21.798Z",
       "type": "info",
       "message": "Running: node scripts/fix-ts2503-cannot-find-namespace.js"
     },
     {
-      "timestamp": "2025-08-11T00:12:43.579Z",
+      "timestamp": "2025-08-11T09:23:23.885Z",
       "type": "success",
       "message": "Committed changes for fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)"
     },
     {
-      "timestamp": "2025-08-11T00:12:43.579Z",
+      "timestamp": "2025-08-11T09:23:23.885Z",
       "type": "success",
       "message": "fix-ts2503-cannot-find-namespace.js: Fixed 0 TS2503 errors, total change: 0"
     },
     {
-      "timestamp": "2025-08-11T00:12:43.579Z",
+      "timestamp": "2025-08-11T09:23:23.885Z",
       "type": "warning",
       "message": "fix-ts2503-cannot-find-namespace.js: No further improvement, stopping iterations"
     },
     {
-      "timestamp": "2025-08-11T00:12:43.585Z",
+      "timestamp": "2025-08-11T09:23:23.888Z",
       "type": "info",
       "message": "Current total errors after fix-ts2503-cannot-find-namespace.js: 10435"
     },
     {
-      "timestamp": "2025-08-11T00:12:44.585Z",
+      "timestamp": "2025-08-11T09:23:24.888Z",
       "type": "info",
-      "message": "\n--- Processing Cannot find name errors ---"
+      "message": "Starting fix-ts7026-jsx-implicit-any.js for TS7026 (max 3 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:12:44.589Z",
+      "timestamp": "2025-08-11T09:23:24.893Z",
+      "type": "info",
+      "message": "fix-ts7026-jsx-implicit-any.js (iteration 1/3): 0 TS7026 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:24.893Z",
+      "type": "success",
+      "message": "fix-ts7026-jsx-implicit-any.js: No TS7026 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:24.896Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts7026-jsx-implicit-any.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:25.897Z",
+      "type": "info",
+      "message": "Starting fix-ts7031-binding-element-any.js for TS7031 (max 3 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:25.902Z",
+      "type": "info",
+      "message": "fix-ts7031-binding-element-any.js (iteration 1/3): 736 TS7031 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:25.919Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7031-binding-element-any.js TS7031 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:25.920Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7031-binding-element-any.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:28.026Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7031-binding-element-any.js TS7031 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:28.026Z",
+      "type": "success",
+      "message": "fix-ts7031-binding-element-any.js: Fixed 0 TS7031 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:30.034Z",
+      "type": "info",
+      "message": "fix-ts7031-binding-element-any.js (iteration 2/3): 736 TS7031 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:30.049Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7031-binding-element-any.js TS7031 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:30.049Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7031-binding-element-any.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:32.156Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7031-binding-element-any.js TS7031 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:32.156Z",
+      "type": "success",
+      "message": "fix-ts7031-binding-element-any.js: Fixed 0 TS7031 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:32.156Z",
+      "type": "warning",
+      "message": "fix-ts7031-binding-element-any.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:32.159Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts7031-binding-element-any.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:33.160Z",
+      "type": "info",
+      "message": "Starting fix-ts7006-implicit-any-param.js for TS7006 (max 3 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:33.165Z",
+      "type": "info",
+      "message": "fix-ts7006-implicit-any-param.js (iteration 1/3): 2874 TS7006 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:33.179Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7006-implicit-any-param.js TS7006 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:33.179Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7006-implicit-any-param.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:35.309Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7006-implicit-any-param.js TS7006 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:35.309Z",
+      "type": "success",
+      "message": "fix-ts7006-implicit-any-param.js: Fixed 0 TS7006 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:37.318Z",
+      "type": "info",
+      "message": "fix-ts7006-implicit-any-param.js (iteration 2/3): 2874 TS7006 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:37.332Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7006-implicit-any-param.js TS7006 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:37.332Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7006-implicit-any-param.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:39.547Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7006-implicit-any-param.js TS7006 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:39.547Z",
+      "type": "success",
+      "message": "fix-ts7006-implicit-any-param.js: Fixed 0 TS7006 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:39.547Z",
+      "type": "warning",
+      "message": "fix-ts7006-implicit-any-param.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:39.552Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts7006-implicit-any-param.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:40.553Z",
+      "type": "info",
+      "message": "Starting fix-ts7053-element-implicit-any.js for TS7053 (max 3 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:40.557Z",
+      "type": "info",
+      "message": "fix-ts7053-element-implicit-any.js (iteration 1/3): 107 TS7053 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:40.572Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7053-element-implicit-any.js TS7053 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:40.572Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7053-element-implicit-any.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:42.655Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7053-element-implicit-any.js TS7053 (iteration 1/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:42.655Z",
+      "type": "success",
+      "message": "fix-ts7053-element-implicit-any.js: Fixed 0 TS7053 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:44.662Z",
+      "type": "info",
+      "message": "fix-ts7053-element-implicit-any.js (iteration 2/3): 107 TS7053 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:44.677Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7053-element-implicit-any.js TS7053 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:44.677Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7053-element-implicit-any.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:46.812Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts7053-element-implicit-any.js TS7053 (iteration 2/3)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:46.812Z",
+      "type": "success",
+      "message": "fix-ts7053-element-implicit-any.js: Fixed 0 TS7053 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:46.812Z",
+      "type": "warning",
+      "message": "fix-ts7053-element-implicit-any.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:46.815Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts7053-element-implicit-any.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:47.817Z",
       "type": "info",
       "message": "Starting fix-ts2304-cannot-find-name.js for TS2304 (max 2 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:12:44.595Z",
+      "timestamp": "2025-08-11T09:23:47.822Z",
       "type": "info",
       "message": "fix-ts2304-cannot-find-name.js (iteration 1/2): 3837 TS2304 errors, 10435 total errors"
     },
     {
-      "timestamp": "2025-08-11T00:12:44.609Z",
+      "timestamp": "2025-08-11T09:23:47.836Z",
       "type": "info",
       "message": "Created checkpoint: fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)"
     },
     {
-      "timestamp": "2025-08-11T00:12:44.609Z",
+      "timestamp": "2025-08-11T09:23:47.836Z",
       "type": "info",
       "message": "Running: node scripts/fix-ts2304-cannot-find-name.js"
     },
     {
-      "timestamp": "2025-08-11T00:13:11.935Z",
+      "timestamp": "2025-08-11T09:23:49.961Z",
       "type": "success",
       "message": "Committed changes for fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)"
     },
     {
-      "timestamp": "2025-08-11T00:13:11.936Z",
+      "timestamp": "2025-08-11T09:23:49.961Z",
       "type": "success",
       "message": "fix-ts2304-cannot-find-name.js: Fixed 0 TS2304 errors, total change: 0"
     },
     {
-      "timestamp": "2025-08-11T00:13:13.945Z",
+      "timestamp": "2025-08-11T09:23:51.968Z",
       "type": "info",
       "message": "fix-ts2304-cannot-find-name.js (iteration 2/2): 3837 TS2304 errors, 10435 total errors"
     },
     {
-      "timestamp": "2025-08-11T00:13:13.960Z",
+      "timestamp": "2025-08-11T09:23:51.982Z",
       "type": "info",
       "message": "Created checkpoint: fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)"
     },
     {
-      "timestamp": "2025-08-11T00:13:13.960Z",
+      "timestamp": "2025-08-11T09:23:51.982Z",
       "type": "info",
       "message": "Running: node scripts/fix-ts2304-cannot-find-name.js"
     },
     {
-      "timestamp": "2025-08-11T00:13:41.286Z",
+      "timestamp": "2025-08-11T09:23:54.107Z",
       "type": "success",
       "message": "Committed changes for fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)"
     },
     {
-      "timestamp": "2025-08-11T00:13:41.286Z",
+      "timestamp": "2025-08-11T09:23:54.107Z",
       "type": "success",
       "message": "fix-ts2304-cannot-find-name.js: Fixed 0 TS2304 errors, total change: 0"
     },
     {
-      "timestamp": "2025-08-11T00:13:41.286Z",
+      "timestamp": "2025-08-11T09:23:54.107Z",
       "type": "warning",
       "message": "fix-ts2304-cannot-find-name.js: No further improvement, stopping iterations"
     },
     {
-      "timestamp": "2025-08-11T00:13:41.293Z",
+      "timestamp": "2025-08-11T09:23:54.110Z",
       "type": "info",
       "message": "Current total errors after fix-ts2304-cannot-find-name.js: 10435"
     },
     {
-      "timestamp": "2025-08-11T00:13:42.295Z",
+      "timestamp": "2025-08-11T09:23:55.112Z",
       "type": "info",
-      "message": "\n--- Processing Unused declarations ---"
+      "message": "Starting fix-ts2339-property-errors.js for TS2339 (max 2 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:13:42.297Z",
+      "timestamp": "2025-08-11T09:23:55.116Z",
+      "type": "info",
+      "message": "fix-ts2339-property-errors.js (iteration 1/2): 754 TS2339 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:55.130Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2339-property-errors.js TS2339 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:55.130Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2339-property-errors.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:55.184Z",
+      "type": "error",
+      "message": "fix-ts2339-property-errors.js: Failed - Command failed: node scripts/fix-ts2339-property-errors.js\nnode:internal/modules/esm/resolve:873\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'typescript' imported from /home/runner/work/ytMain/ytMain/scripts/fix-ts2339-property-errors.js\n    at packageResolve (node:internal/modules/esm/resolve:873:9)\n    at moduleResolve (node:internal/modules/esm/resolve:946:18)\n    at defaultResolve (node:internal/modules/esm/resolve:1188:11)\n    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)\n    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {\n  code: 'ERR_MODULE_NOT_FOUND'\n}\n\nNode.js v20.19.4\n"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:55.196Z",
+      "type": "warning",
+      "message": "Reverted to previous checkpoint"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:55.199Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2339-property-errors.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:56.200Z",
+      "type": "info",
+      "message": "Starting fix-ts2305-no-exported-member.js for TS2305 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:23:56.204Z",
+      "type": "info",
+      "message": "fix-ts2305-no-exported-member.js (iteration 1/2): 23 TS2305 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:56.219Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2305-no-exported-member.js TS2305 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:56.219Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2305-no-exported-member.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:58.319Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2305-no-exported-member.js TS2305 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:23:58.319Z",
+      "type": "success",
+      "message": "fix-ts2305-no-exported-member.js: Fixed 0 TS2305 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:00.326Z",
+      "type": "info",
+      "message": "fix-ts2305-no-exported-member.js (iteration 2/2): 23 TS2305 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:00.341Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2305-no-exported-member.js TS2305 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:00.341Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2305-no-exported-member.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:02.492Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2305-no-exported-member.js TS2305 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:02.492Z",
+      "type": "success",
+      "message": "fix-ts2305-no-exported-member.js: Fixed 0 TS2305 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:02.492Z",
+      "type": "warning",
+      "message": "fix-ts2305-no-exported-member.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:02.495Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2305-no-exported-member.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:03.496Z",
+      "type": "info",
+      "message": "Starting fix-ts2322-enhanced.js for TS2322 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:03.501Z",
+      "type": "info",
+      "message": "fix-ts2322-enhanced.js (iteration 1/2): 153 TS2322 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:03.515Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2322-enhanced.js TS2322 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:03.515Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2322-enhanced.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:05.878Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2322-enhanced.js TS2322 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:05.878Z",
+      "type": "success",
+      "message": "fix-ts2322-enhanced.js: Fixed 0 TS2322 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:07.888Z",
+      "type": "info",
+      "message": "fix-ts2322-enhanced.js (iteration 2/2): 153 TS2322 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:07.909Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2322-enhanced.js TS2322 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:07.909Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2322-enhanced.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:10.114Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2322-enhanced.js TS2322 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:10.114Z",
+      "type": "success",
+      "message": "fix-ts2322-enhanced.js: Fixed 0 TS2322 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:10.114Z",
+      "type": "warning",
+      "message": "fix-ts2322-enhanced.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:10.118Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2322-enhanced.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:11.119Z",
+      "type": "info",
+      "message": "Starting fix-ts2345-argument-type.js for TS2345 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:11.125Z",
+      "type": "info",
+      "message": "fix-ts2345-argument-type.js (iteration 1/2): 68 TS2345 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:11.139Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2345-argument-type.js TS2345 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:11.139Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2345-argument-type.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:13.261Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2345-argument-type.js TS2345 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:13.261Z",
+      "type": "success",
+      "message": "fix-ts2345-argument-type.js: Fixed 0 TS2345 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:15.268Z",
+      "type": "info",
+      "message": "fix-ts2345-argument-type.js (iteration 2/2): 68 TS2345 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:15.283Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2345-argument-type.js TS2345 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:15.283Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2345-argument-type.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:17.382Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2345-argument-type.js TS2345 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:17.382Z",
+      "type": "success",
+      "message": "fix-ts2345-argument-type.js: Fixed 0 TS2345 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:17.382Z",
+      "type": "warning",
+      "message": "fix-ts2345-argument-type.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:17.386Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2345-argument-type.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:18.387Z",
+      "type": "info",
+      "message": "Starting fix-ts2739-missing-properties.js for TS2739 (max 2 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:18.392Z",
+      "type": "info",
+      "message": "fix-ts2739-missing-properties.js (iteration 1/2): 69 TS2739 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:18.406Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2739-missing-properties.js TS2739 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:18.406Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2739-missing-properties.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:20.548Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2739-missing-properties.js TS2739 (iteration 1/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:20.548Z",
+      "type": "success",
+      "message": "fix-ts2739-missing-properties.js: Fixed 0 TS2739 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:22.558Z",
+      "type": "info",
+      "message": "fix-ts2739-missing-properties.js (iteration 2/2): 69 TS2739 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:22.572Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2739-missing-properties.js TS2739 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:22.572Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2739-missing-properties.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:24.676Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2739-missing-properties.js TS2739 (iteration 2/2)"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:24.676Z",
+      "type": "success",
+      "message": "fix-ts2739-missing-properties.js: Fixed 0 TS2739 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:24.676Z",
+      "type": "warning",
+      "message": "fix-ts2739-missing-properties.js: No further improvement, stopping iterations"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:24.679Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2739-missing-properties.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:25.680Z",
       "type": "info",
       "message": "Starting fix-ts6133-declared-not-used.js for TS6133 (max 1 iterations)..."
     },
     {
-      "timestamp": "2025-08-11T00:13:42.303Z",
+      "timestamp": "2025-08-11T09:24:25.684Z",
       "type": "info",
       "message": "fix-ts6133-declared-not-used.js: 5 TS6133 errors, 10435 total errors"
     },
     {
-      "timestamp": "2025-08-11T00:13:42.319Z",
+      "timestamp": "2025-08-11T09:24:25.698Z",
       "type": "info",
       "message": "Created checkpoint: fix-ts6133-declared-not-used.js TS6133"
     },
     {
-      "timestamp": "2025-08-11T00:13:42.319Z",
+      "timestamp": "2025-08-11T09:24:25.699Z",
       "type": "info",
       "message": "Running: node scripts/fix-ts6133-declared-not-used.js"
     },
     {
-      "timestamp": "2025-08-11T00:14:09.425Z",
+      "timestamp": "2025-08-11T09:24:27.865Z",
       "type": "success",
       "message": "Committed changes for fix-ts6133-declared-not-used.js TS6133"
     },
     {
-      "timestamp": "2025-08-11T00:14:09.425Z",
+      "timestamp": "2025-08-11T09:24:27.865Z",
       "type": "success",
       "message": "fix-ts6133-declared-not-used.js: Fixed 0 TS6133 errors, total change: 0"
     },
     {
-      "timestamp": "2025-08-11T00:14:09.431Z",
+      "timestamp": "2025-08-11T09:24:27.868Z",
       "type": "info",
       "message": "Current total errors after fix-ts6133-declared-not-used.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:28.870Z",
+      "type": "info",
+      "message": "Starting fix-ts2551-property-does-not-exist.js for TS2551 (max 1 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:28.874Z",
+      "type": "info",
+      "message": "fix-ts2551-property-does-not-exist.js: 18 TS2551 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:28.888Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts2551-property-does-not-exist.js TS2551"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:28.888Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts2551-property-does-not-exist.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:31.062Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts2551-property-does-not-exist.js TS2551"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:31.063Z",
+      "type": "success",
+      "message": "fix-ts2551-property-does-not-exist.js: Fixed 0 TS2551 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:31.065Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2551-property-does-not-exist.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:32.067Z",
+      "type": "info",
+      "message": "Starting fix-ts7019-implicit-any.js for TS7019 (max 1 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:32.073Z",
+      "type": "info",
+      "message": "fix-ts7019-implicit-any.js: 17 TS7019 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:32.087Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts7019-implicit-any.js TS7019"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:32.087Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts7019-implicit-any.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:34.263Z",
+      "type": "error",
+      "message": "fix-ts7019-implicit-any.js: Failed - Command failed: node scripts/fix-ts7019-implicit-any.js\nfile:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260\n  fixer.run().catch(console.error);\n             ^\n\nTypeError: Cannot read properties of undefined (reading 'catch')\n    at file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260:14\n    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v20.19.4\n"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:34.272Z",
+      "type": "warning",
+      "message": "Reverted to previous checkpoint"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:34.275Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts7019-implicit-any.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:35.276Z",
+      "type": "info",
+      "message": "Starting fix-ts18048-possibly-undefined.js for TS18048 (max 1 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:35.280Z",
+      "type": "info",
+      "message": "fix-ts18048-possibly-undefined.js: 6 TS18048 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:35.294Z",
+      "type": "info",
+      "message": "Created checkpoint: fix-ts18048-possibly-undefined.js TS18048"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:35.294Z",
+      "type": "info",
+      "message": "Running: node scripts/fix-ts18048-possibly-undefined.js"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:37.527Z",
+      "type": "success",
+      "message": "Committed changes for fix-ts18048-possibly-undefined.js TS18048"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:37.527Z",
+      "type": "success",
+      "message": "fix-ts18048-possibly-undefined.js: Fixed 0 TS18048 errors, total change: 0"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:37.530Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts18048-possibly-undefined.js: 10435"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:38.531Z",
+      "type": "info",
+      "message": "Starting fix-ts2300-duplicate-identifier.js for TS2300 (max 1 iterations)..."
+    },
+    {
+      "timestamp": "2025-08-11T09:24:38.535Z",
+      "type": "info",
+      "message": "fix-ts2300-duplicate-identifier.js: 0 TS2300 errors, 10435 total errors"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:38.535Z",
+      "type": "success",
+      "message": "fix-ts2300-duplicate-identifier.js: No TS2300 errors remaining, skipping"
+    },
+    {
+      "timestamp": "2025-08-11T09:24:38.537Z",
+      "type": "info",
+      "message": "Current total errors after fix-ts2300-duplicate-identifier.js: 10435"
     }
   ],
   "checkpoints": [
     {
+      "label": "fix-ts2875-jsx-runtime.js TS2875 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:23:03.117Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2875-jsx-runtime.js TS2875 (iteration 2/2)",
+      "timestamp": "2025-08-11T09:23:07.226Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2307-cannot-find-module.js TS2307 (iteration 1/3)",
+      "timestamp": "2025-08-11T09:23:10.387Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2307-cannot-find-module.js TS2307 (iteration 2/3)",
+      "timestamp": "2025-08-11T09:23:14.521Z",
+      "success": true
+    },
+    {
       "label": "fix-ts2503-cannot-find-namespace.js TS2503 (iteration 1/2)",
-      "timestamp": "2025-08-11T00:12:04.705Z",
+      "timestamp": "2025-08-11T09:23:17.668Z",
       "success": true
     },
     {
       "label": "fix-ts2503-cannot-find-namespace.js TS2503 (iteration 2/2)",
-      "timestamp": "2025-08-11T00:12:25.251Z",
+      "timestamp": "2025-08-11T09:23:21.798Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7031-binding-element-any.js TS7031 (iteration 1/3)",
+      "timestamp": "2025-08-11T09:23:25.919Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7031-binding-element-any.js TS7031 (iteration 2/3)",
+      "timestamp": "2025-08-11T09:23:30.049Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7006-implicit-any-param.js TS7006 (iteration 1/3)",
+      "timestamp": "2025-08-11T09:23:33.179Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7006-implicit-any-param.js TS7006 (iteration 2/3)",
+      "timestamp": "2025-08-11T09:23:37.332Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7053-element-implicit-any.js TS7053 (iteration 1/3)",
+      "timestamp": "2025-08-11T09:23:40.572Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7053-element-implicit-any.js TS7053 (iteration 2/3)",
+      "timestamp": "2025-08-11T09:23:44.677Z",
       "success": true
     },
     {
       "label": "fix-ts2304-cannot-find-name.js TS2304 (iteration 1/2)",
-      "timestamp": "2025-08-11T00:12:44.609Z",
+      "timestamp": "2025-08-11T09:23:47.836Z",
       "success": true
     },
     {
       "label": "fix-ts2304-cannot-find-name.js TS2304 (iteration 2/2)",
-      "timestamp": "2025-08-11T00:13:13.959Z",
+      "timestamp": "2025-08-11T09:23:51.982Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2339-property-errors.js TS2339 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:23:55.130Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2305-no-exported-member.js TS2305 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:23:56.219Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2305-no-exported-member.js TS2305 (iteration 2/2)",
+      "timestamp": "2025-08-11T09:24:00.341Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2322-enhanced.js TS2322 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:24:03.515Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2322-enhanced.js TS2322 (iteration 2/2)",
+      "timestamp": "2025-08-11T09:24:07.909Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2345-argument-type.js TS2345 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:24:11.139Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2345-argument-type.js TS2345 (iteration 2/2)",
+      "timestamp": "2025-08-11T09:24:15.283Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2739-missing-properties.js TS2739 (iteration 1/2)",
+      "timestamp": "2025-08-11T09:24:18.406Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2739-missing-properties.js TS2739 (iteration 2/2)",
+      "timestamp": "2025-08-11T09:24:22.572Z",
       "success": true
     },
     {
       "label": "fix-ts6133-declared-not-used.js TS6133",
-      "timestamp": "2025-08-11T00:13:42.319Z",
+      "timestamp": "2025-08-11T09:24:25.698Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts2551-property-does-not-exist.js TS2551",
+      "timestamp": "2025-08-11T09:24:28.888Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts7019-implicit-any.js TS7019",
+      "timestamp": "2025-08-11T09:24:32.087Z",
+      "success": true
+    },
+    {
+      "label": "fix-ts18048-possibly-undefined.js TS18048",
+      "timestamp": "2025-08-11T09:24:35.294Z",
       "success": true
     }
   ],
@@ -225,6 +1165,40 @@
     "totalFixed": 0,
     "improvementRate": "0.0",
     "fixerResults": [
+      {
+        "scriptName": "fix-ts2875-jsx-runtime.js",
+        "errorCode": "2875",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 287,
+        "afterTotal": 10435,
+        "afterTypeCount": 287,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 Starting TS2875 (JSX runtime module) error fixes...\u001b[0m\n\u001b[31m❌ Error updating tsconfig.json: Expected double-quoted property name in JSON at position 219\u001b[0m\n\u001b[36m🔧 Found 0 TS2875 errors to fix\u001b[0m\n\u001b[32m✅ No TS2875 errors found!\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts2307-cannot-find-module.js",
+        "errorCode": "2307",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 72,
+        "afterTotal": 10435,
+        "afterTypeCount": 72,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 🔍 Analyzing TS2307 module not found errors...\u001b[0m\n\u001b[36m🔧 Found 0 module not found errors\u001b[0m\n\u001b[36m🔧 No TS2307 errors to fix\u001b[0m\n"
+      },
       {
         "scriptName": "fix-ts2503-cannot-find-namespace.js",
         "errorCode": "2503",
@@ -240,7 +1214,58 @@
         "reverted": false,
         "timeout": false,
         "error": null,
-        "output": "\u001b[36m🔧 Fixing 2 errors in tests/examples/integration.test.tsx\u001b[0m\n\u001b[36m🔧 ✅ Fixed namespace issues in 0 files\u001b[0m\n\u001b[36m🔧 ⚠️ 0 TS2503 errors remaining\u001b[0m\n\u001b[32m✅ Reduced TS2503 errors from 476 to 0\u001b[0m\n"
+        "output": "\u001b[36m🔧 Starting TS2503 (cannot find namespace) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS2503 errors to fix\u001b[0m\n\u001b[32m✅ No TS2503 errors found!\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts7031-binding-element-any.js",
+        "errorCode": "7031",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 736,
+        "afterTotal": 10435,
+        "afterTypeCount": 736,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 Starting TS7031 (binding element implicit any) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS7031 errors to fix\u001b[0m\n\u001b[32m✅ No TS7031 errors found!\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts7006-implicit-any-param.js",
+        "errorCode": "7006",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 2874,
+        "afterTotal": 10435,
+        "afterTypeCount": 2874,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 🔍 Analyzing TS7006 implicit any parameter errors...\u001b[0m\n\u001b[36m🔧 Found 0 implicit any parameter errors\u001b[0m\n\u001b[36m🔧 No TS7006 errors to fix\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts7053-element-implicit-any.js",
+        "errorCode": "7053",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 107,
+        "afterTotal": 10435,
+        "afterTypeCount": 107,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 Starting TS7053 (element implicit any) error fixes...\u001b[0m\n\u001b[36m🔧 Found 0 TS7053 errors to fix\u001b[0m\n\u001b[32m✅ No TS7053 errors found!\u001b[0m\n"
       },
       {
         "scriptName": "fix-ts2304-cannot-find-name.js",
@@ -257,7 +1282,75 @@
         "reverted": false,
         "timeout": false,
         "error": null,
-        "output": "🔧 [2025-08-11T00:13:11.889Z] Errors fixed: 0\n🔧 [2025-08-11T00:13:11.890Z] Files modified: 1\n🔧 [2025-08-11T00:13:11.890Z] Fix rate: 0.0%\n✅ [2025-08-11T00:13:11.890Z] Error count maintained (no increase)\n"
+        "output": "🔧 [2025-08-11T09:23:47.885Z] Starting TS2304 (Cannot find name) error fixes...\n🔧 [2025-08-11T09:23:49.937Z] Found 0 TS2304 errors to fix\n✅ [2025-08-11T09:23:49.937Z] No TS2304 errors found!\n"
+      },
+      {
+        "scriptName": "fix-ts2305-no-exported-member.js",
+        "errorCode": "2305",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 23,
+        "afterTotal": 10435,
+        "afterTypeCount": 23,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 🔍 Analyzing TS2305 no exported member errors...\u001b[0m\n\u001b[36m🔧 Found 0 no exported member errors\u001b[0m\n\u001b[36m🔧 No TS2305 errors to fix\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts2322-enhanced.js",
+        "errorCode": "2322",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 153,
+        "afterTotal": 10435,
+        "afterTypeCount": 153,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "🔧 Found 0 TS2322 type assignment errors\n✅ No TS2322 errors found!\n"
+      },
+      {
+        "scriptName": "fix-ts2345-argument-type.js",
+        "errorCode": "2345",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 68,
+        "afterTotal": 10435,
+        "afterTypeCount": 68,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "🔧 Found 0 TS2345 argument type errors\n✅ No TS2345 errors found!\n"
+      },
+      {
+        "scriptName": "fix-ts2739-missing-properties.js",
+        "errorCode": "2739",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 69,
+        "afterTotal": 10435,
+        "afterTypeCount": 69,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 🔍 Analyzing TS2739 missing properties errors...\u001b[0m\n\u001b[36m🔧 Found 0 missing properties errors\u001b[0m\n\u001b[36m🔧 No TS2739 errors to fix\u001b[0m\n"
       },
       {
         "scriptName": "fix-ts6133-declared-not-used.js",
@@ -274,10 +1367,44 @@
         "reverted": false,
         "timeout": false,
         "error": null,
-        "output": "🧹 Found 5 TS6133 unused declarations\n🧹 Removing unused import from ../services/livestreamAPI\n🧹 Initial: 5, Final: 5, Fixed: 0\n"
+        "output": "🧹 Found 0 TS6133 unused declarations\n"
+      },
+      {
+        "scriptName": "fix-ts2551-property-does-not-exist.js",
+        "errorCode": "2551",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 18,
+        "afterTotal": 10435,
+        "afterTypeCount": 18,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "\u001b[36m🔧 🔍 Analyzing TS2551 property suggestion errors...\u001b[0m\n\u001b[36m🔧 Found 0 property suggestion errors\u001b[0m\n\u001b[36m🔧 No TS2551 errors to fix\u001b[0m\n"
+      },
+      {
+        "scriptName": "fix-ts18048-possibly-undefined.js",
+        "errorCode": "18048",
+        "iteration": 1,
+        "beforeTotal": 10435,
+        "beforeTypeCount": 6,
+        "afterTotal": 10435,
+        "afterTypeCount": 6,
+        "totalImprovement": 0,
+        "typeImprovement": 0,
+        "success": true,
+        "skipped": false,
+        "reverted": false,
+        "timeout": false,
+        "error": null,
+        "output": "⚠️ Found 0 TS18048 possibly undefined errors\n⚠️ No TS18048 errors to fix\n"
       }
     ]
   },
-  "endTime": "2025-08-11T00:14:10.437Z",
-  "duration": "125.77s"
+  "endTime": "2025-08-11T09:24:39.541Z",
+  "duration": "100.51s"
 }

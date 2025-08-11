@@ -82,7 +82,7 @@ export function clamp(num, min, max) number {
  * @returns Formatted number as string with suffix
  */
 export function formatCount(num: number | string, decimals: number = 1) string {
-  const numValue = typeof num === 'string' ? parseInt(num, 10) num;
+  const numValue = typeof num === 'string' ? parseInt(num, 10): num;
   return formatNumber(numValue, decimals);
 }
 
@@ -215,7 +215,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params     : Record<s, a={true}n={true}y>) string {
+export function buildQueryString(params     : Record<s, a={true}n={true}y>): string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {

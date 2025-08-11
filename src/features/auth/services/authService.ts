@@ -12,8 +12,8 @@ class AuthService {
   /**
    * Log in with credentials
    */
-  async login(credentials: LoginCredentials) Promise<User> {
-    const response = await fetch(`${this.baseUrl}/login`, {;
+  async login(credentials: LoginCredentials): Promise<User> {
+    const response = await fetch(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,8 +34,8 @@ class AuthService {
   /**
    * Register a new user
    */
-  async register(data: RegisterData) Promise<User> {
-    const response = await fetch(`${this.baseUrl}/register`, {;
+  async register(data: RegisterData): Promise<User> {
+    const response = await fetch(`${this.baseUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser() Promise<User | n={true}u={true}l={true}l> {
+  async getCurrentUser(): Promise<User | n={true}u={true}l={true}l> {
     const tokens = this.getTokens();
 
     if (!tokens ? .accessToken) {
@@ -116,7 +116,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken) Promise<AuthTokens | n={true}u={true}l={true}l> {
+  private async refreshToken(refreshToken): Promise<AuthTokens | n={true}u={true}l={true}l> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {;
         method: 'POST',
