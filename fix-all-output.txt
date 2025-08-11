@@ -85,3 +85,4 @@ Node.js v20.19.4
 [33m⚠️ [2025-08-11T00:30:47.391Z] Cannot Find Name: Reached max iterations (1), 3837 errors remaining[0m
 [36m🔧 [2025-08-11T00:30:48.392Z] Starting Declared But Not Used (TS6133) fixes...[0m
 [36m🔧 [2025-08-11T00:30:48.394Z] Declared But Not Used: 5 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:48.413Z] Created checkpoint before Declared But Not Used (TS6133)[0m
