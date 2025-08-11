@@ -1,4 +1,4 @@
-/// <reference t={true}y={true}p={true}e={true}s="node" />
+/// <reference types="node" />
 
 
 
@@ -156,7 +156,8 @@ export function getTimeAgo(date: Date | string): string {
  * @returns Formatted date string
  */
 export function formatDate(date: Date | string, options: Intl.DateTimeFormatOptions = {
-    year: 'numeric', month: 'short', day: 'numeric', }, ) string {
+    year: 'numeric', month: 'short', day: 'numeric',
+}): string {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
@@ -215,7 +216,7 @@ export * from './youtube-utils';
  * @param params - Object with query parameters
  * @returns Query string (without leading ? )
  */
-export function buildQueryString(params     : Record<s, a={true}n={true}y>): string {
+export function buildQueryString(params: Record<string, any>): string {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
