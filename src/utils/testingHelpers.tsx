@@ -62,7 +62,7 @@ export const renderWithProviders = (
   }), ...renderOptions } = options || {};
 
   return render(ui, {
-    wrapper: ({ children }: {children}) => (
+    wrapper: ({ children }) => (
       <TestWrapper queryClient={queryClient}>
         {children}
       </TestWrapper>

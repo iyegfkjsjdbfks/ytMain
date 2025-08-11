@@ -98,7 +98,7 @@ const YourDataPage: React.FC = () => {
     title, description: string;
     count, isVisible: boolean;
     onToggleVisibility: () => void, onClear: () => void; loading: boolean
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading, onClear: Function; onToggleVisibility: Function, isVisible: boolean; count, description: string; title: string}) => (
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">

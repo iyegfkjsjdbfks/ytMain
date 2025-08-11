@@ -110,7 +110,7 @@ const customRender = (
   const { queryClient, initialEntries, ...renderOptions } = options;
 
   return render(ui, {
-    wrapper: ({ children }: {children}) => (
+    wrapper: ({ children }) => (
       <AllTheProviders
         queryClient={queryClient || new QueryClient({
           defaultOptions: {

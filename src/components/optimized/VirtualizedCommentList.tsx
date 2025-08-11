@@ -27,7 +27,7 @@ interface CommentItemProps {
   };
 }
 
-const CommentItem = memo<CommentItemProps>(({ index, style, data }: {data; style; index: number}) => {
+const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
   const { comments, onReply, onLike, onDislike } = data;
   const comment = comments[index];
 

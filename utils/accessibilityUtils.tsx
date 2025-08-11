@@ -24,7 +24,7 @@ interface AccessibilityContextType {
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
 
-export function AccessibilityProvider({ children }: {children: React.ReactNode}) {
+export function AccessibilityProvider({ children }) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState<AccessibilityContextType['fontSize']>('medium');
@@ -188,7 +188,7 @@ return;
 
 // Keyboard navigation hook
 <<<<<<< HEAD
-export function useKeyboardNavigation(_options: any) {
+export function useKeyboardNavigation(_options) {
 =======
 export function useKeyboardNavigation(_options) {
 >>>>>>> 982bfa585e0c84121ed9f536b48f40c598b87bea
@@ -297,7 +297,7 @@ export function checkColorContrast(foreground, background): {
 }
 
 // Skip link component
-export function SkipLink({ href, children }: { href, children: React.ReactNode }) {
+export function SkipLink({ href, children }) {
   return (
     <a
       href={href}

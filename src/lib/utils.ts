@@ -95,7 +95,7 @@ export function formatCount(num: number | string, decimals: number = 1): string 
  * @param seconds - Duration in seconds
  * @returns Formatted time string
  */
-export function formatDuration(seconds: number): string {
+export function formatDuration(seconds): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
@@ -172,7 +172,7 @@ export function formatDate(date: Date | string, options: Intl.DateTimeFormatOpti
  * @param ellipsis - The ellipsis string to append (default: '...')
  * @returns Truncated string with ellipsis if needed
  */
-export function truncate(str: string, maxLength: number, ellipsis = '...'): string {
+export function truncate(str, maxLength, ellipsis = '...'): string {
   if (!str || str.length <= maxLength) {
     return str;
   }
@@ -184,7 +184,7 @@ export function truncate(str: string, maxLength: number, ellipsis = '...'): stri
  * @param str - The string to convert
  * @returns String in title case
  */
-export function toTitleCase(str: string): string {
+export function toTitleCase(str): string {
   return str.replace(
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
@@ -197,7 +197,7 @@ export function toTitleCase(str: string): string {
  * @returns kebab-case string
  */
 export function toKebabCase(str): string {
-  return str;
+  return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/[\s_]+/g, '-')
     .toLowerCase();
@@ -245,7 +245,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @param value - The value to check
  * @returns True if the value is an object (and not null/array)
  */
-export function isObject(value) value is Record<string, a={true}n={true}y> {
+export function isObject(value): value is Record<string, any> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -254,7 +254,7 @@ export function isObject(value) value is Record<string, a={true}n={true}y> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value) value is (...args) => any {
+export function isFunction(value): value is (...args) => any {
   return typeof value === 'function';
 }
 
@@ -283,14 +283,14 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
+export function debounce<T extends (...args) => any>(
   func: T,
-  wait,
+  wait
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 
-  return function executedFunction(...args: Parameters<T>);
-    const later = () => {;
+  return function executedFunction(...args: Parameters<T>) {
+    const later = () => {
       clearTimeout(timeout);
       func(...args);
     };
@@ -306,13 +306,13 @@ export function debounce<T ext={true}e={true}n={true}d={true}s={true} (...args) 
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T ext={true}e={true}n={true}d={true}s={true} (...args) => any>(;
+export function throttle<T extends (...args) => any>(
   func: T,
-  limit,
+  limit
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
 
-  return function executedFunction(...args: Parameters<T>);
+  return function executedFunction(...args: Parameters<T>) {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
@@ -336,8 +336,7 @@ export function fileToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => {
-      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed';
-             : 'Unknown error';
+      const errorMessage = error instanceof ProgressEvent && error.target instanceof FileReader ? 'File reading failed' : 'Unknown error';
       reject(new Error(errorMessage));
     };
   });
@@ -349,7 +348,7 @@ export function fileToBase64(file: File): Promise<string> {
  * @returns The file extension (without the dot)
  */
 export function getFileExtension(filename): string {
-  return filename.slice(((filename.lastIndexOf('.') 1) >>> 0) + 2);
+  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
 // =================================
@@ -406,7 +405,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @param value - The value to check
  * @returns True if the value is a string
  */
-export function isString(value) value is string {
+export function isString(value): value is string {
   return typeof value === 'string' || value instanceof String;
 }
 
@@ -415,7 +414,7 @@ export function isString(value) value is string {
  * @param value - The value to check
  * @returns True if the value is a number
  */
-export function isNumber(value) value is number {
+export function isNumber(value): value is number {
   return typeof value === 'number' && !isNaN(value);
 }
 
@@ -428,7 +427,7 @@ export function isNumber(value) value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex) r: number; g: number; b: number } | null {
+export function hexToRgb(hex): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;

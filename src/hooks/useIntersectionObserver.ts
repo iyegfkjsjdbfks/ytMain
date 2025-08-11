@@ -135,7 +135,7 @@ export const useIntersectionVideoAutoplay = ({
 /**
  * Hook for lazy loading images based on visibility
  */
-export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }: {src}) => {
+export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -176,7 +176,7 @@ export const useLazyImage = ({ src, threshold = 0.1, rootMargin = '50px',  }: {s
 /**
  * Hook for infinite scrolling
  */
-export const useInfiniteScroll = ({ hasNextPage = true, isFetchingNextPage = false, fetchNextPage, threshold = 1.0, rootMargin = '100px',  }: {fetchNextPage}) => {
+export const useInfiniteScroll = ({ hasNextPage = true, isFetchingNextPage = false, fetchNextPage, threshold = 1.0, rootMargin = '100px',  }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold,
     rootMargin,
