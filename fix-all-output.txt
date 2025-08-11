@@ -117,3 +117,19 @@ Node.js v20.19.4
 [32m✅ [2025-08-11T00:31:06.971Z] Duplicate Identifier: Successfully reduced to 0 errors after 0 iteration(s)[0m
 [36m🔧 [2025-08-11T00:31:07.972Z] Starting Implicit Any Type (TS7019) fixes...[0m
 [36m🔧 [2025-08-11T00:31:07.975Z] Implicit Any Type: 17 errors remaining[0m
+[36m🔧 [2025-08-11T00:31:07.993Z] Created checkpoint before Implicit Any Type (TS7019)[0m
+[31m❌ [2025-08-11T00:31:10.038Z] Implicit Any Type: Failed iteration 1 - Command failed: node scripts/fix-ts7019-implicit-any.js
+file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260
+  fixer.run().catch(console.error);
+             ^
+
+TypeError: Cannot read properties of undefined (reading 'catch')
+    at file:///home/runner/work/ytMain/ytMain/scripts/fix-ts7019-implicit-any.js:260:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.19.4
+[0m
+[36m🔧 [2025-08-11T00:31:11.042Z] Starting Type Not Assignable (Legacy) (TS2322) fixes...[0m
+[36m🔧 [2025-08-11T00:31:11.044Z] Type Not Assignable (Legacy): 153 errors remaining[0m
