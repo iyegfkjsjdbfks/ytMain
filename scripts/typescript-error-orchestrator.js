@@ -221,7 +221,7 @@ class TS${errorCode}Fixer {
       reset: '\\x1b[0m'
     };
     const prefix = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '🔧';
-    console.log(\`\${colors[type]}\${prefix} \${message}\${colors.reset}\`);
+    console.log(`${colors[type]}${prefix} ${message}${colors.reset}`);
   }
 
   getTS${errorCode}Errors() {
@@ -258,7 +258,7 @@ class TS${errorCode}Fixer {
     const filePath = join(projectRoot, error.file);
     
     if (!existsSync(filePath)) {
-      this.log(\`File not found: \${error.file}\`, 'warning');
+      this.log(`File not found: ${error.file}`, 'warning');
       return false;
     }
 
@@ -274,13 +274,13 @@ class TS${errorCode}Fixer {
         writeFileSync(filePath, newContent);
         this.fixedFiles.add(error.file);
         this.fixedCount++;
-        this.log(\`Fixed TS${errorCode} in \${error.file}\`);
+        this.log(`Fixed TS${errorCode} in ${error.file}`);
         return true;
       }
       
       return false;
     } catch (err) {
-      this.log(\`Error fixing \${error.file}: \${err.message}\`, 'error');
+      this.log(`Error fixing ${error.file}: ${err.message}`, 'error');
       return false;
     }
   }
@@ -295,7 +295,7 @@ class TS${errorCode}Fixer {
       return;
     }
 
-    this.log(\`Found \${errors.length} TS${errorCode} errors to fix\`);
+    this.log(`Found ${errors.length} TS${errorCode} errors to fix`);
 
     let totalFixed = 0;
     for (const error of errors) {
@@ -305,12 +305,12 @@ class TS${errorCode}Fixer {
       }
     }
 
-    this.log(\`\\n📊 Summary:\`);
-    this.log(\`• Fixed \${totalFixed} errors\`);
-    this.log(\`• Modified files: \${this.fixedFiles.size}\`);
+    this.log(`\\n📊 Summary:`);
+    this.log(`• Fixed ${totalFixed} errors`);
+    this.log(`• Modified files: ${this.fixedFiles.size}`);
     
     if (this.fixedFiles.size > 0) {
-      this.log(\`• Fixed files: \${Array.from(this.fixedFiles).join(', ')}\`);
+      this.log(`• Fixed files: ${Array.from(this.fixedFiles).join(', ')}`);
     }
 
     // Verify the fixes
@@ -318,13 +318,13 @@ class TS${errorCode}Fixer {
     if (remainingErrors.length === 0) {
       this.log('🎉 All TS${errorCode} errors have been fixed!', 'success');
     } else {
-      this.log(\`⚠️ \${remainingErrors.length} TS${errorCode} errors still remain\`, 'warning');
+      this.log(`⚠️ ${remainingErrors.length} TS${errorCode} errors still remain`, 'warning');
     }
   }
 }
 
 // Execute if run directly
-if (import.meta.url === \`file://\${process.argv[1]}\` || process.argv[1].endsWith('fix-ts${errorCode}-bulk.js')) {
+if (import.meta.url === `file://${process.argv[1]}` || process.argv[1].endsWith('fix-ts${errorCode}-bulk.js')) {
   const fixer = new TS${errorCode}Fixer();
   fixer.run().catch(console.error);
 }
@@ -392,9 +392,9 @@ export { TS${errorCode}Fixer };
           const paramName = paramMatch[1];
           // Add basic type annotation
           const patterns = [
-            { regex: new RegExp(\`\\\\(\${paramName}\\\\)\\\\s*=>\`, 'g'), replacement: \`(\${paramName}: any) =>\` },
-            { regex: new RegExp(\`\\\\(\${paramName}\\\\)\\\\s*:\`, 'g'), replacement: \`(\${paramName}: any):\` },
-            { regex: new RegExp(\`\\\\(\${paramName}\\\\)\\\\s*\\\\{\`, 'g'), replacement: \`(\${paramName}: any) {\` }
+            { regex: new RegExp(`\\\\(${paramName}\\\\)\\\\s*=>`, 'g'), replacement: `(${paramName}: any) =>` },
+            { regex: new RegExp(`\\\\(${paramName}\\\\)\\\\s*:`, 'g'), replacement: `(${paramName}: any):` },
+            { regex: new RegExp(`\\\\(${paramName}\\\\)\\\\s*\\\\{`, 'g'), replacement: `(${paramName}: any) {` }
           ];
           
           for (const pattern of patterns) {
@@ -414,10 +414,10 @@ export { TS${errorCode}Fixer };
         if (unusedMatch) {
           const unusedName = unusedMatch[1];
           // Remove unused imports
-          newContent = newContent.replace(new RegExp(\`import\\\\s+\${unusedName}\\\\s+from[^;]+;\\\\s*\`, 'g'), '');
-          newContent = newContent.replace(new RegExp(\`import\\\\s*\\\\{[^}]*\${unusedName}[^}]*\\\\}[^;]+;\\\\s*\`, 'g'), '');
-          newContent = newContent.replace(new RegExp(\`,\\\\s*\${unusedName}\\\\s*\`, 'g'), '');
-          newContent = newContent.replace(new RegExp(\`\${unusedName}\\\\s*,\\\\s*\`, 'g'), '');
+          newContent = newContent.replace(new RegExp(`import\\\\s+${unusedName}\\\\s+from[^;]+;\\\\s*`, 'g'), '');
+          newContent = newContent.replace(new RegExp(`import\\\\s*\\\\{[^}]*${unusedName}[^}]*\\\\}[^;]+;\\\\s*`, 'g'), '');
+          newContent = newContent.replace(new RegExp(`,\\\\s*${unusedName}\\\\s*`, 'g'), '');
+          newContent = newContent.replace(new RegExp(`${unusedName}\\\\s*,\\\\s*`, 'g'), '');
           fixed = true;
         }
       }`,
@@ -433,7 +433,7 @@ export { TS${errorCode}Fixer };
           if (assignment.length === 2) {
             const rightSide = assignment[1].trim();
             if (!rightSide.includes(' as ') && !rightSide.includes('<')) {
-              assignment[1] = \` \${rightSide.replace(/;$/, '')} as any;\`;
+              assignment[1] = ` ${rightSide.replace(/;$/, '')} as any;`;
               lines[error.line - 1] = assignment.join('=');
               newContent = lines.join('\\n');
               fixed = true;
@@ -626,7 +626,7 @@ export { TS${errorCode}Fixer };
     
     const report = {
       timestamp: new Date().toISOString(),
-      duration: \`\${duration}s\`,
+      duration: `${duration}s`,
       orchestrationCycles: this.orchestrationCycle,
       finalErrors: finalErrorCount,
       results: this.results,
@@ -644,20 +644,20 @@ export { TS${errorCode}Fixer };
     this.log('\\n' + '='.repeat(80));
     this.log('📊 TYPESCRIPT ERROR ORCHESTRATION REPORT');
     this.log('='.repeat(80));
-    this.log(\`⏱️  Duration: \${duration} seconds\`);
-    this.log(\`🔄 Orchestration cycles: \${this.orchestrationCycle}\`);
-    this.log(\`📉 Final errors: \${finalErrorCount}\`);
-    this.log(\`🎯 Scripts run: \${report.summary.totalScriptsRun}\`);
-    this.log(\`✅ Successful: \${report.summary.successfulScripts}\`);
-    this.log(\`🔄 Reverted: \${report.summary.revertedScripts}\`);
-    this.log(\`✨ Total fixed: \${report.summary.totalErrorsFixed}\`);
+    this.log(`⏱️  Duration: ${duration} seconds`);
+    this.log(`🔄 Orchestration cycles: ${this.orchestrationCycle}`);
+    this.log(`📉 Final errors: ${finalErrorCount}`);
+    this.log(`🎯 Scripts run: ${report.summary.totalScriptsRun}`);
+    this.log(`✅ Successful: ${report.summary.successfulScripts}`);
+    this.log(`🔄 Reverted: ${report.summary.revertedScripts}`);
+    this.log(`✨ Total fixed: ${report.summary.totalErrorsFixed}`);
     this.log('');
-    this.log(\`📁 Detailed report saved to: \${reportPath}\`);
+    this.log(`📁 Detailed report saved to: ${reportPath}`);
     
     if (finalErrorCount === 0) {
       this.log('🎉 All TypeScript errors have been successfully resolved!', 'success');
     } else {
-      this.log(\`⚠️ \${finalErrorCount} errors remain after orchestrated fixing\`, 'warning');
+      this.log(`⚠️ ${finalErrorCount} errors remain after orchestrated fixing`, 'warning');
     }
   }
 
@@ -665,7 +665,7 @@ export { TS${errorCode}Fixer };
     this.log('🚀 Starting TypeScript Error Orchestration...');
     
     const initialErrorCount = await this.getErrorCount();
-    this.log(\`Initial error count: \${initialErrorCount}\`);
+    this.log(`Initial error count: ${initialErrorCount}`);
     this.previousErrorCount = initialErrorCount;
     
     if (initialErrorCount === 0) {
@@ -679,7 +679,7 @@ export { TS${errorCode}Fixer };
 }
 
 // Execute if run directly
-if (import.meta.url === \`file://\${process.argv[1]}\` || process.argv[1].endsWith('typescript-error-orchestrator.js')) {
+if (import.meta.url === `file://${process.argv[1]}` || process.argv[1].endsWith('typescript-error-orchestrator.js')) {
   const orchestrator = new TypeScriptErrorOrchestrator();
   orchestrator.run().catch(err => {
     console.error('Orchestrator failed:', err);
