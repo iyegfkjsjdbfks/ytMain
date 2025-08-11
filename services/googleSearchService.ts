@@ -807,7 +807,7 @@ export const searchYouTubeWithGoogleSearch = async (query): Promise<GoogleSearch
     // Extract video IDs for enhanced metadata fetching
     const videoIds = youtubeItems
       .map((item) => extractVideoIdFromUrl(item.link))
-      .filter((id): id: string is string => id: string !== null);
+      .filter((id): id is string => id !== null);
 
     let videoDetailsMap = new Map<string, YouTubeVideoDetails>();
     let channelDetailsMap = new Map<string, YouTubeChannelDetails>();

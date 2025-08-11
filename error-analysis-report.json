@@ -1,40 +1,996 @@
 {
-  "timestamp": "2025-08-11T02:02:59.305Z",
-  "totalErrors": 28,
+  "timestamp": "2025-08-11T02:12:14.980Z",
+  "totalErrors": 7500,
   "errorsByType": {
-    "Expected token": {
-      "count": 27,
-      "percentage": "96.4",
-      "affectedFiles": 14,
+    "TS7006": {
+      "count": 2838,
+      "percentage": "37.8",
+      "affectedFiles": 265,
       "examples": [
         {
-          "file": "EnhancedVideoUpload.tsx",
-          "message": "',' expected."
+          "file": "AddCommentForm.tsx",
+          "message": "Parameter 'commentText' implicitly has an 'any' type."
         },
         {
-          "file": "OptimizedMiniplayerContext.tsx",
-          "message": "',' expected."
+          "file": "AddCommentForm.tsx",
+          "message": "Parameter 'e' implicitly has an 'any' type."
         },
         {
-          "file": "UnifiedAppContext.tsx",
-          "message": "',' expected."
+          "file": "AdvancedSearch.tsx",
+          "message": "Parameter 'query' implicitly has an 'any' type."
         }
       ]
     },
-    "TS1160": {
-      "count": 1,
-      "percentage": "3.6",
+    "TS2307": {
+      "count": 899,
+      "percentage": "12.0",
+      "affectedFiles": 329,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "Cannot find module 'react' or its corresponding type declarations."
+        },
+        {
+          "file": "App.tsx",
+          "message": "Cannot find module 'react-router-dom' or its corresponding type declarations."
+        },
+        {
+          "file": "App.tsx",
+          "message": "Cannot find module 'react-router-dom' or its corresponding type declarations."
+        }
+      ]
+    },
+    "Property does not exist": {
+      "count": 702,
+      "percentage": "9.4",
+      "affectedFiles": 91,
+      "examples": [
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'startTime' does not exist on type 'never'."
+        },
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'endTime' does not exist on type 'never'."
+        },
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Property 'startTime' does not exist on type 'never'."
+        }
+      ]
+    },
+    "TS7031": {
+      "count": 587,
+      "percentage": "7.8",
+      "affectedFiles": 108,
+      "examples": [
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Binding element 'currentUserAvatarUrl' implicitly has an 'any' type."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Binding element 'onCommentSubmit' implicitly has an 'any' type."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Binding element 'maxCommentLength' implicitly has an 'any' type."
+        }
+      ]
+    },
+    "TS2688": {
+      "count": 301,
+      "percentage": "4.0",
+      "affectedFiles": 255,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "Cannot find type definition file for 'react/jsx-runtime'."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Cannot find type definition file for 'react/jsx-runtime'."
+        }
+      ]
+    },
+    "Cannot find name": {
+      "count": 300,
+      "percentage": "4.0",
+      "affectedFiles": 152,
+      "examples": [
+        {
+          "file": "AccountLayout.tsx",
+          "message": "Cannot find name 'elemName'."
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "Cannot find name 'elemName'."
+        },
+        {
+          "file": "AdvancedSearch.tsx",
+          "message": "Cannot find name 'elemName'."
+        }
+      ]
+    },
+    "TS2875": {
+      "count": 296,
+      "percentage": "3.9",
+      "affectedFiles": 252,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        },
+        {
+          "file": "AddCommentForm.tsx",
+          "message": "This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make su"
+        }
+      ]
+    },
+    "TS7008": {
+      "count": 224,
+      "percentage": "3.0",
+      "affectedFiles": 79,
+      "examples": [
+        {
+          "file": "CategoryTabs.tsx",
+          "message": "Member 'setActiveCategory' implicitly has an 'any' type."
+        },
+        {
+          "file": "CategoryTabs.tsx",
+          "message": "Member 'activeCategory' implicitly has an 'any' type."
+        },
+        {
+          "file": "CategoryTabs.tsx",
+          "message": "Member 'categories' implicitly has an 'any' type."
+        }
+      ]
+    },
+    "TS2374": {
+      "count": 164,
+      "percentage": "2.2",
+      "affectedFiles": 141,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "Duplicate index signature for type 'string'."
+        },
+        {
+          "file": "ChannelTabContent.tsx",
+          "message": "Duplicate index signature for type 'string'."
+        },
+        {
+          "file": "DataWrapper.tsx",
+          "message": "Duplicate index signature for type 'string'."
+        }
+      ]
+    },
+    "Type not assignable": {
+      "count": 157,
+      "percentage": "2.1",
+      "affectedFiles": 51,
+      "examples": [
+        {
+          "file": "ModerationDashboard.tsx",
+          "message": "Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "file": "ModerationDashboard.tsx",
+          "message": "Type 'string[]' is not assignable to type 'string'."
+        },
+        {
+          "file": "ModerationDashboard.tsx",
+          "message": "Type 'string[]' is not assignable to type 'string'."
+        }
+      ]
+    },
+    "Duplicate identifier": {
+      "count": 131,
+      "percentage": "1.7",
+      "affectedFiles": 42,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "Duplicate identifier 'React'."
+        },
+        {
+          "file": "App.tsx",
+          "message": "Duplicate identifier 'createBrowserRouter'."
+        },
+        {
+          "file": "App.tsx",
+          "message": "Duplicate identifier 'RouterProvider'."
+        }
+      ]
+    },
+    "TS2740": {
+      "count": 119,
+      "percentage": "1.6",
+      "affectedFiles": 33,
+      "examples": [
+        {
+          "file": "DeveloperDashboard.tsx",
+          "message": "Type 'never[]' is missing the following properties from type 'AlertItem': id, type, category, messag"
+        },
+        {
+          "file": "RecommendationEngine.tsx",
+          "message": "Type 'never[]' is missing the following properties from type 'Video': id, title, thumbnail, duration"
+        },
+        {
+          "file": "RecommendationEngine.tsx",
+          "message": "Type '{ id: string; title: string; description: string; thumbnailUrl: string; videoUrl: string; dura"
+        }
+      ]
+    },
+    "TS7053": {
+      "count": 108,
+      "percentage": "1.4",
+      "affectedFiles": 32,
+      "examples": [
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{"
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{"
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type"
+        }
+      ]
+    },
+    "TS2345": {
+      "count": 86,
+      "percentage": "1.1",
+      "affectedFiles": 25,
+      "examples": [
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'."
+        },
+        {
+          "file": "BaseForm.tsx",
+          "message": "Argument of type 'any' is not assignable to parameter of type 'never'."
+        }
+      ]
+    },
+    "TS2739": {
+      "count": 71,
+      "percentage": "0.9",
+      "affectedFiles": 21,
+      "examples": [
+        {
+          "file": "refactor-codebase.ts",
+          "message": "Type 'never[]' is missing the following properties from type 'RefactorTask': name, description, exec"
+        },
+        {
+          "file": "refactor-codebase.ts",
+          "message": "Type '{ name: string; description: string; priority: string; execute: () => Promise<void>; }[]' is m"
+        },
+        {
+          "file": "test-all-functionality.ts",
+          "message": "Type 'never[]' is missing the following properties from type 'TestResult': name, status, duration"
+        }
+      ]
+    },
+    "TS2694": {
+      "count": 65,
+      "percentage": "0.9",
+      "affectedFiles": 39,
+      "examples": [
+        {
+          "file": "AdvancedVideoPlayer.tsx",
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "file": "HoverAutoplayVideoCard.tsx",
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'."
+        },
+        {
+          "file": "HoverAutoplayVideoCard.tsx",
+          "message": "Namespace 'NodeJS' has no exported member 'Timeout'."
+        }
+      ]
+    },
+    "TS2488": {
+      "count": 48,
+      "percentage": "0.6",
+      "affectedFiles": 25,
+      "examples": [
+        {
+          "file": "ChannelTabContent.tsx",
+          "message": "Type 'Video' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "file": "ChannelTabContent.tsx",
+          "message": "Type 'Video' must have a '[Symbol.iterator]()' method that returns an iterator."
+        },
+        {
+          "file": "RecommendationEngine.tsx",
+          "message": "Type 'Video' must have a '[Symbol.iterator]()' method that returns an iterator."
+        }
+      ]
+    },
+    "Declared but never used": {
+      "count": 47,
+      "percentage": "0.6",
+      "affectedFiles": 40,
+      "examples": [
+        {
+          "file": "App.tsx",
+          "message": "'BrowserRouter' is declared but its value is never read."
+        },
+        {
+          "file": "App.tsx",
+          "message": "'Route' is declared but its value is never read."
+        },
+        {
+          "file": "AccountLayout.tsx",
+          "message": "'Link' is declared but its value is never read."
+        }
+      ]
+    },
+    "TS2580": {
+      "count": 35,
+      "percentage": "0.5",
+      "affectedFiles": 16,
+      "examples": [
+        {
+          "file": "refactor-codebase.ts",
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev "
+        },
+        {
+          "file": "refactor-codebase.ts",
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev "
+        },
+        {
+          "file": "refactor-codebase.ts",
+          "message": "Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev "
+        }
+      ]
+    },
+    "TS2614": {
+      "count": 35,
+      "percentage": "0.5",
+      "affectedFiles": 9,
+      "examples": [
+        {
+          "file": "VideoCard.tsx",
+          "message": "Module '\"../types\"' has no exported member 'User'. Did you mean to use 'import User from \"../types\"'"
+        },
+        {
+          "file": "index.ts",
+          "message": "Module '\"../../types/core\"' has no exported member 'VideoItem'. Did you mean to use 'import VideoIte"
+        },
+        {
+          "file": "index.ts",
+          "message": "Module '\"./components/Layout\"' has no exported member 'LayoutProps'. Did you mean to use 'import Lay"
+        }
+      ]
+    },
+    "TS18046": {
+      "count": 34,
+      "percentage": "0.5",
+      "affectedFiles": 10,
+      "examples": [
+        {
+          "file": "EnhancedVideoUpload.tsx",
+          "message": "'file' is of type 'unknown'."
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "'percentage' is of type 'unknown'."
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "'percentage' is of type 'unknown'."
+        }
+      ]
+    },
+    "TS2503": {
+      "count": 23,
+      "percentage": "0.3",
+      "affectedFiles": 15,
+      "examples": [
+        {
+          "file": "SimpleHoverVideoCard.tsx",
+          "message": "Cannot find namespace 'NodeJS'."
+        },
+        {
+          "file": "SimpleHoverVideoCard.tsx",
+          "message": "Cannot find namespace 'NodeJS'."
+        },
+        {
+          "file": "SuspenseWrapper.tsx",
+          "message": "Cannot find namespace 'React'."
+        }
+      ]
+    },
+    "TS2305": {
+      "count": 23,
+      "percentage": "0.3",
+      "affectedFiles": 15,
+      "examples": [
+        {
+          "file": "index.ts",
+          "message": "Module '\"./VideoGrid\"' has no exported member 'default'."
+        },
+        {
+          "file": "index.ts",
+          "message": "Module '\"./VideoGrid\"' has no exported member 'default'."
+        },
+        {
+          "file": "commentService.ts",
+          "message": "Module '\"../../../types/core\"' has no exported member 'ApiResponse'."
+        }
+      ]
+    },
+    "Property does not exist on type": {
+      "count": 22,
+      "percentage": "0.3",
+      "affectedFiles": 8,
+      "examples": [
+        {
+          "file": "analyticsService.ts",
+          "message": "Property 'timestamp' does not exist on type 'Event'. Did you mean 'timeStamp'?"
+        },
+        {
+          "file": "usePWANotifications.ts",
+          "message": "Property 'timestamp' does not exist on type 'Event'. Did you mean 'timeStamp'?"
+        },
+        {
+          "file": "useTrendingSearch.ts",
+          "message": "Property 'thumbnailUrl' does not exist on type 'YouTubeSearchResult | GoogleSearchResult'. Did you m"
+        }
+      ]
+    },
+    "Implicitly has any type": {
+      "count": 17,
+      "percentage": "0.2",
+      "affectedFiles": 10,
+      "examples": [
+        {
+          "file": "optimizedHooks.ts",
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "file": "optimizedHooks.ts",
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type."
+        },
+        {
+          "file": "useAnalytics.ts",
+          "message": "Rest parameter 'args' implicitly has an 'any[]' type."
+        }
+      ]
+    },
+    "TS2370": {
+      "count": 17,
+      "percentage": "0.2",
+      "affectedFiles": 7,
+      "examples": [
+        {
+          "file": "useAnalytics.ts",
+          "message": "A rest parameter must be of an array type."
+        },
+        {
+          "file": "useAnalytics.ts",
+          "message": "A rest parameter must be of an array type."
+        },
+        {
+          "file": "useCommon.ts",
+          "message": "A rest parameter must be of an array type."
+        }
+      ]
+    },
+    "TS4112": {
+      "count": 15,
+      "percentage": "0.2",
+      "affectedFiles": 4,
+      "examples": [
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        },
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        },
+        {
+          "file": "ErrorBoundary.tsx",
+          "message": "This member cannot have an 'override' modifier because its containing class 'ErrorBoundary' does not"
+        }
+      ]
+    },
+    "TS2353": {
+      "count": 15,
+      "percentage": "0.2",
+      "affectedFiles": 9,
+      "examples": [
+        {
+          "file": "ShortDisplayCard.tsx",
+          "message": "Object literal may only specify known properties, and 'loop' does not exist in type 'VideoPlayerOpti"
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "Object literal may only specify known properties, and ''13-17'' does not exist in type '{ [x: number"
+        },
+        {
+          "file": "VideoAnalytics.tsx",
+          "message": "Object literal may only specify known properties, and ''Male'' does not exist in type '{ [x: number]"
+        }
+      ]
+    },
+    "TS7005": {
+      "count": 15,
+      "percentage": "0.2",
+      "affectedFiles": 3,
+      "examples": [
+        {
+          "file": "storeUtils.ts",
+          "message": "Variable 'cachedDeps' implicitly has an 'any' type."
+        },
+        {
+          "file": "integration.test.tsx",
+          "message": "Variable 'mockVideos' implicitly has an 'any' type."
+        },
+        {
+          "file": "integration.test.tsx",
+          "message": "Variable 'mockComments' implicitly has an 'any' type."
+        }
+      ]
+    },
+    "TS18004": {
+      "count": 14,
+      "percentage": "0.2",
+      "affectedFiles": 5,
+      "examples": [
+        {
+          "file": "useVideoPlayer.ts",
+          "message": "No value exists in scope for the shorthand property 'isPlaying'. Either declare one or provide an in"
+        },
+        {
+          "file": "useVideoPlayer.ts",
+          "message": "No value exists in scope for the shorthand property 'isMuted'. Either declare one or provide an init"
+        },
+        {
+          "file": "useVideoPlayer.ts",
+          "message": "No value exists in scope for the shorthand property 'volume'. Either declare one or provide an initi"
+        }
+      ]
+    },
+    "TS2663": {
+      "count": 12,
+      "percentage": "0.2",
       "affectedFiles": 1,
       "examples": [
         {
-          "file": "testingHelpers.tsx",
-          "message": "Unterminated template literal."
+          "file": "intelligentCodeMonitor.ts",
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "file": "intelligentCodeMonitor.ts",
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        },
+        {
+          "file": "intelligentCodeMonitor.ts",
+          "message": "Cannot find name 'opportunities'. Did you mean the instance member 'this.opportunities'?"
+        }
+      ]
+    },
+    "TS2352": {
+      "count": 11,
+      "percentage": "0.1",
+      "affectedFiles": 9,
+      "examples": [
+        {
+          "file": "AdminPage.tsx",
+          "message": "Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently "
+        },
+        {
+          "file": "AdminPage.tsx",
+          "message": "Conversion of type 'string[]' to type 'PageType' may be a mistake because neither type sufficiently "
+        },
+        {
+          "file": "CommentModerationPage.tsx",
+          "message": "Conversion of type 'string[]' to type 'FilterType' may be a mistake because neither type sufficientl"
+        }
+      ]
+    },
+    "TS2769": {
+      "count": 10,
+      "percentage": "0.1",
+      "affectedFiles": 4,
+      "examples": [
+        {
+          "file": "SubscriptionsPage.tsx",
+          "message": "No overload matches this call."
+        },
+        {
+          "file": "SubscriptionsPage.tsx",
+          "message": "No overload matches this call."
+        },
+        {
+          "file": "SubscriptionsPage.tsx",
+          "message": "No overload matches this call."
+        }
+      ]
+    },
+    "TS2531": {
+      "count": 7,
+      "percentage": "0.1",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Object is possibly 'null'."
+        },
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Object is possibly 'null'."
+        },
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Object is possibly 'null'."
+        }
+      ]
+    },
+    "TS2724": {
+      "count": 6,
+      "percentage": "0.1",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "RefactoredTrendingPage.tsx",
+          "message": "'\"../hooks\"' has no exported member named 'useVideosData'. Did you mean 'useVideos'?"
+        },
+        {
+          "file": "index.ts",
+          "message": "'\"./components/ErrorBoundary\"' has no exported member named 'ErrorBoundaryProps'. Did you mean 'Erro"
+        },
+        {
+          "file": "index.ts",
+          "message": "'\"./LiveStreamViewer\"' has no exported member named 'LiveStreamViewerProps'. Did you mean 'LiveStrea"
+        }
+      ]
+    },
+    "Possibly undefined": {
+      "count": 6,
+      "percentage": "0.1",
+      "affectedFiles": 3,
+      "examples": [
+        {
+          "file": "ShortsPage.tsx",
+          "message": "'short.category' is possibly 'undefined'."
+        },
+        {
+          "file": "ShortsPage.tsx",
+          "message": "'short.channelName' is possibly 'undefined'."
+        },
+        {
+          "file": "ShortsPage.tsx",
+          "message": "'short.description' is possibly 'undefined'."
+        }
+      ]
+    },
+    "TS18047": {
+      "count": 6,
+      "percentage": "0.1",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "componentOptimization.tsx",
+          "message": "'event.currentTarget' is possibly 'null'."
+        },
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "'testValue' is possibly 'null'."
+        },
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "'controlValue' is possibly 'null'."
+        }
+      ]
+    },
+    "TS6192": {
+      "count": 5,
+      "percentage": "0.1",
+      "affectedFiles": 3,
+      "examples": [
+        {
+          "file": "routes.tsx",
+          "message": "All imports in import declaration are unused."
+        },
+        {
+          "file": "index.tsx",
+          "message": "All imports in import declaration are unused."
+        },
+        {
+          "file": "index.tsx",
+          "message": "All imports in import declaration are unused."
+        }
+      ]
+    },
+    "TS2367": {
+      "count": 4,
+      "percentage": "0.1",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "ShortsPage.tsx",
+          "message": "This comparison appears to be unintentional because the types '\"public\" | \"private\" | \"unlisted\"' an"
+        },
+        {
+          "file": "usePWANotifications.ts",
+          "message": "This comparison appears to be unintentional because the types 'Event' and 'string' have no overlap."
+        },
+        {
+          "file": "usePWANotifications.ts",
+          "message": "This comparison appears to be unintentional because the types 'Event' and 'string' have no overlap."
+        }
+      ]
+    },
+    "TS2451": {
+      "count": 4,
+      "percentage": "0.1",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Cannot redeclare block-scoped variable '_strategy'."
+        },
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Cannot redeclare block-scoped variable '_strategy'."
+        },
+        {
+          "file": "developmentWorkflow.ts",
+          "message": "Cannot redeclare block-scoped variable '_batchSize'."
+        }
+      ]
+    },
+    "TS2375": {
+      "count": 3,
+      "percentage": "0.0",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "useEnhancedQuery.ts",
+          "message": "Type '{ name: string; message: string; status: any; code: any; details: any; timestamp: number; retr"
+        },
+        {
+          "file": "useLiveStream.ts",
+          "message": "Type '{ id: string; streamId: string | undefined; question: any; options: any; isActive: true; total"
+        },
+        {
+          "file": "useLiveStream.ts",
+          "message": "Type '{ id: string; streamId: string | undefined; userId: string; username: string; question: any; a"
+        }
+      ]
+    },
+    "TS7034": {
+      "count": 3,
+      "percentage": "0.0",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "storeUtils.ts",
+          "message": "Variable 'cachedDeps' implicitly has type 'any' in some locations where its type cannot be determine"
+        },
+        {
+          "file": "integration.test.tsx",
+          "message": "Variable 'mockVideos' implicitly has type 'any' in some locations where its type cannot be determine"
+        },
+        {
+          "file": "integration.test.tsx",
+          "message": "Variable 'mockComments' implicitly has type 'any' in some locations where its type cannot be determi"
+        }
+      ]
+    },
+    "Assignment to optional property": {
+      "count": 3,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "The left-hand side of an assignment expression may not be an optional property access."
+        },
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "The left-hand side of an assignment expression may not be an optional property access."
+        },
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "The left-hand side of an assignment expression may not be an optional property access."
+        }
+      ]
+    },
+    "TS2308": {
+      "count": 2,
+      "percentage": "0.0",
+      "affectedFiles": 2,
+      "examples": [
+        {
+          "file": "index.ts",
+          "message": "Module './unifiedHooks' has already exported a member named 'useApi'. Consider explicitly re-exporti"
+        },
+        {
+          "file": "unified.ts",
+          "message": "Module './core' has already exported a member named 'Video'. Consider explicitly re-exporting to res"
+        }
+      ]
+    },
+    "TS1205": {
+      "count": 2,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "index.ts",
+          "message": "Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'."
+        },
+        {
+          "file": "index.ts",
+          "message": "Re-exporting a type when 'isolatedModules' is enabled requires using 'export type'."
+        }
+      ]
+    },
+    "TS2693": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "subscriptionService.ts",
+          "message": "'number' only refers to a type, but is being used as a value here."
+        }
+      ]
+    },
+    "TS2561": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "WatchPage.tsx",
+          "message": "Object literal may only specify known properties, but 'dislikeCount' does not exist in type '{ viewC"
+        }
+      ]
+    },
+    "TS2862": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "unifiedHooks.ts",
+          "message": "Type 'T' is generic and can only be indexed for reading."
+        }
+      ]
+    },
+    "TS2554": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "useTrendingSearch.ts",
+          "message": "Expected 1 arguments, but got 2."
+        }
+      ]
+    },
+    "TS2698": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "useWatchPage.ts",
+          "message": "Spread types may only be created from object types."
+        }
+      ]
+    },
+    "TS1016": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "featureFlagSystem.ts",
+          "message": "A required parameter cannot follow an optional parameter."
+        }
+      ]
+    },
+    "TS6196": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "testUtils.tsx",
+          "message": "'ReactNode' is declared but never used."
+        }
+      ]
+    },
+    "TS2582": {
+      "count": 1,
+      "percentage": "0.0",
+      "affectedFiles": 1,
+      "examples": [
+        {
+          "file": "testing.tsx",
+          "message": "Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i -"
         }
       ]
     }
   },
   "summary": [
-    "Expected token: 27 errors (14 files)",
-    "TS1160: 1 errors (1 files)"
+    "TS7006: 2838 errors (265 files)",
+    "TS2307: 899 errors (329 files)",
+    "Property does not exist: 702 errors (91 files)",
+    "TS7031: 587 errors (108 files)",
+    "TS2688: 301 errors (255 files)",
+    "Cannot find name: 300 errors (152 files)",
+    "TS2875: 296 errors (252 files)",
+    "TS7008: 224 errors (79 files)",
+    "TS2374: 164 errors (141 files)",
+    "Type not assignable: 157 errors (51 files)",
+    "Duplicate identifier: 131 errors (42 files)",
+    "TS2740: 119 errors (33 files)",
+    "TS7053: 108 errors (32 files)",
+    "TS2345: 86 errors (25 files)",
+    "TS2739: 71 errors (21 files)",
+    "TS2694: 65 errors (39 files)",
+    "TS2488: 48 errors (25 files)",
+    "Declared but never used: 47 errors (40 files)",
+    "TS2580: 35 errors (16 files)",
+    "TS2614: 35 errors (9 files)",
+    "TS18046: 34 errors (10 files)",
+    "TS2503: 23 errors (15 files)",
+    "TS2305: 23 errors (15 files)",
+    "Property does not exist on type: 22 errors (8 files)",
+    "Implicitly has any type: 17 errors (10 files)",
+    "TS2370: 17 errors (7 files)",
+    "TS4112: 15 errors (4 files)",
+    "TS2353: 15 errors (9 files)",
+    "TS7005: 15 errors (3 files)",
+    "TS18004: 14 errors (5 files)",
+    "TS2663: 12 errors (1 files)",
+    "TS2352: 11 errors (9 files)",
+    "TS2769: 10 errors (4 files)",
+    "TS2531: 7 errors (1 files)",
+    "TS2724: 6 errors (2 files)",
+    "Possibly undefined: 6 errors (3 files)",
+    "TS18047: 6 errors (2 files)",
+    "TS6192: 5 errors (3 files)",
+    "TS2367: 4 errors (2 files)",
+    "TS2451: 4 errors (1 files)",
+    "TS2375: 3 errors (2 files)",
+    "TS7034: 3 errors (2 files)",
+    "Assignment to optional property: 3 errors (1 files)",
+    "TS2308: 2 errors (2 files)",
+    "TS1205: 2 errors (1 files)",
+    "TS2693: 1 errors (1 files)",
+    "TS2561: 1 errors (1 files)",
+    "TS2862: 1 errors (1 files)",
+    "TS2554: 1 errors (1 files)",
+    "TS2698: 1 errors (1 files)",
+    "TS1016: 1 errors (1 files)",
+    "TS6196: 1 errors (1 files)",
+    "TS2582: 1 errors (1 files)"
   ]
 }

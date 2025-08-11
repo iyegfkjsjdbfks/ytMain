@@ -329,7 +329,7 @@ export function useOptimizedCallback<T extends (...args) => any>(
 
   // Update callback if dependencies changed
   useEffect(() => {
-    const depsChanged = deps.some((dep, index) => dep !== depsRef.current[index: number]);
+    const depsChanged = deps.some((dep, index) => dep !== depsRef.current[index]);
     if (depsChanged) {
       callbackRef.current = callback;
       depsRef.current = deps;

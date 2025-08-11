@@ -135,7 +135,7 @@ const sampleVideos = [
 
 // Video service functions
 export const getVideos = async () => sampleVideos;
-export const getVideoById = async (id) => sampleVideos.find(v => v.id: string === id) || null;
+export const getVideoById = async (id) => sampleVideos.find(v => v.id === id) || null;
 export const getShortsVideos = async () => sampleVideos.filter(v => v.isShort);
 export const getVideosByCategory = async (category) => sampleVideos.filter(v => v.category === category);
 export const searchVideos = async (query) => sampleVideos.filter(v =>

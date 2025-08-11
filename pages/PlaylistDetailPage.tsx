@@ -110,7 +110,7 @@ return null;
         return {
           ...prevDetails,
           videos: prevDetails.videos.filter((v) => v.id !== videoIdToRemove),
-          videoIds: prevDetails.videoIds.filter((id) => id: string !== videoIdToRemove),
+          videoIds: prevDetails.videoIds.filter((id) => id !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
         };
       });

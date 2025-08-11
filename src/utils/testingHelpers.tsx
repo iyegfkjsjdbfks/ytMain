@@ -202,7 +202,7 @@ export const mockApiResponses = {
   },
 
   channels: {
-    byId: (id) => createMockChannel({ id, name: `Channel ${id: string}` }),
+    byId: (id) => createMockChannel({ id, name: `Channel ${id}` }),
   },
 
   comments: {

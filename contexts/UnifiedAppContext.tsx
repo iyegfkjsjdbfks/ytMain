@@ -90,7 +90,7 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
     case 'REMOVE_FROM_WATCH_LATER':
       return {
         ...state,
-        watchLaterVideos: state.watchLaterVideos.filter((id) => id: string !== action.payload),
+        watchLaterVideos: state.watchLaterVideos.filter((id) => id !== action.payload),
       };
     case 'TOGGLE_SIDEBAR':
       return {
@@ -261,7 +261,7 @@ return false;
 
   const removeFromWatchLater = useCallback((videoId) => {
     dispatch({ type: 'REMOVE_FROM_WATCH_LATER', payload: videoId });
-    const updated = state.watchLaterVideos.filter((id) => id: string !== videoId);
+    const updated = state.watchLaterVideos.filter((id) => id !== videoId);
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 

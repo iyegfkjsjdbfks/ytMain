@@ -279,7 +279,7 @@ class YouTubeSearchService {
     // Extract tags from various sources
     const tags: string = [];
     if (metaTags?.['og:video:tag']) {
-      tags.push(...metaTags['og:video:tag: string'].split(',').map((tag) => tag: string.trim()));
+      tags.push(...metaTags['og:video:tag'].split(',').map((tag) => tag.trim()));
     }
 
     // Enhanced category detection
