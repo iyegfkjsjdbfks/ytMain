@@ -103,7 +103,7 @@ return fallbackSrc;
     onLoad?.();
   };
 
-  const generatePlaceholderDataUrl = (w, h, text): string => {
+  const generatePlaceholderDataUrl = (w: any, h: any, text: any): string => {
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;

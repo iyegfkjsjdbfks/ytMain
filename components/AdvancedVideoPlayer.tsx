@@ -428,7 +428,7 @@ return;
               />
 
               {/* Chapter Markers */}
-              {chapters.map((chapter, index: any) => {
+              {chapters.map((chapter: any, index: any) => {
                 const markerPosition = videoPlayerInstance.duration ? (chapter.startTime / videoPlayerInstance.duration) * 100 : 0;
                 return (
                   <div
@@ -530,7 +530,7 @@ return;
 
                   {showChapters && (
                     <div className="absolute bottom-full right-0 mb-2 w-64 max-h-48 overflow-y-auto bg-black bg-opacity-90 rounded-lg">
-                      {chapters.map((chapter, index: any) => (
+                      {chapters.map((chapter: any, index: any) => (
                         <button
                           key={index}
                           onClick={() => goToChapter(chapter)}

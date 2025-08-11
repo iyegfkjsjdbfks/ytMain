@@ -82,7 +82,7 @@ class YouTubeSearchService {
   /**
    * Extract YouTube video ID from various YouTube URL formats
    */
-  private extractVideoId(url): string | null {
+  private extractVideoId(url: any): string | null {
     const patterns = [
       /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n?#]+)/,
       /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^&\n?#]+)/,
@@ -103,7 +103,7 @@ class YouTubeSearchService {
   /**
    * Convert search result to Video object with enhanced metadata
    */
-  private convertToVideo(item: YouTubeSearchItem, index): Video {
+  private convertToVideo(item: YouTubeSearchItem, index: number): Video {
     const extractedVideoId = this.extractVideoId(item.link);
     // Ensure Google Custom Search videos have the google-search- prefix
     const videoId = extractedVideoId ? `google-search-${extractedVideoId}` : `google-search-${Date.now()}-${index}`;
@@ -279,7 +279,7 @@ class YouTubeSearchService {
     // Extract tags from various sources
     const tags: string = [];
     if (metaTags?.['og:video:tag']) {
-      tags.push(...metaTags['og:video:tag'].split(',').map(tag => tag.trim()));
+      tags.push(...metaTags['og:video:tag: string'].split(',').map((tag: string) => tag: string.trim()));
     }
 
     // Enhanced category detection
@@ -497,7 +497,7 @@ class YouTubeSearchService {
 
       // Convert search results to Video objects
       const videos = data.items
-        .filter(item => {
+        .filter((item: any) => {
           // Only include YouTube video URLs
           const isYouTubeVideo = item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/');
           if (!isYouTubeVideo) {
@@ -505,8 +505,8 @@ class YouTubeSearchService {
           }
           return isYouTubeVideo;
         })
-        .map((item, index) => this.convertToVideo(item, index))
-        .filter(video => {
+        .map((item: any, index: number) => this.convertToVideo(item: any, index: number))
+        .filter((video: any) => {
           // Exclude the current video from recommendations
           const isDifferent = video.id !== currentVideo.id &&
                              !video.videoUrl.includes(currentVideo.id);
@@ -519,7 +519,7 @@ class YouTubeSearchService {
       conditionalLogger.debug('Final recommendation results', { count: videos.length }, 'YouTubeSearchService');
       if (videos.length > 0) {
         conditionalLogger.debug('Sample recommendations', {
-          samples: videos.slice(0, 3).map(v => ({ title: v.title, url: v.videoUrl })),
+          samples: videos.slice(0, 3).map((v: any) => ({ title: v.title, url: v.videoUrl })),
         }, 'YouTubeSearchService');
       }
 
@@ -539,7 +539,7 @@ class YouTubeSearchService {
    * Search for YouTube videos by specific query
    */
   async searchVideos(
-    query,
+    query: any,
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
@@ -573,8 +573,8 @@ class YouTubeSearchService {
       }
 
       return data.items
-        .filter(item => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
-        .map((item, index) => this.convertToVideo(item, index));
+        .filter((item: any) => item.link.includes('youtube.com/watch') || item.link.includes('youtu.be/'))
+        .map((item: any, index: number) => this.convertToVideo(item: any, index: number));
 
     } catch (error) {
       const networkError = createNetworkError(

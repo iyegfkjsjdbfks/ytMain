@@ -167,7 +167,7 @@ return false;
 // PWA Event Handlers
 export const PWAEvents = {
   // Handle beforeinstallprompt event
-  handleBeforeInstallPrompt(event): void {
+  handleBeforeInstallPrompt(event: Event): void {
     event.preventDefault();
     // Store the event for later use
     (window as any).deferredPrompt = event;

@@ -61,11 +61,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video) => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   // Event handlers
-  const handleCategorySelect = useCallback((category) => {
+  const handleCategorySelect = useCallback((category: any) => {
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -75,7 +75,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     window.location.hash = `/watch/${video.id}`;
   }, []);
 
-  const handleChannelClick = useCallback((channelId) => {
+  const handleChannelClick = useCallback((channelId: any) => {
     // Navigate to channel page
     window.location.hash = `/channel/${channelId}`;
   }, []);

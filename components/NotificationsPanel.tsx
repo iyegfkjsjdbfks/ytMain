@@ -48,7 +48,7 @@ return null;
     setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
   };
 
-  const markAsRead = (id) => {
+  const markAsRead = (id: string) => {
     setNotifications(prev => prev.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));

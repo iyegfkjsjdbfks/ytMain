@@ -19,7 +19,7 @@ interface SubscriptionManagerProps {
   channelAvatarUrl: string;
   channelId: string;
   subscriberCount: string;
-  onSubscriptionChange?: (isSubscribed) => void;
+  onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void;
 }
 
 const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
@@ -78,7 +78,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
     }
   };
 
-  const handleNotificationToggle = async (enabled) => {
+  const handleNotificationToggle = async (enabled: any) => {
     try {
       const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
       if (subscriptions[channelId]) {

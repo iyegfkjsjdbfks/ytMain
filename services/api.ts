@@ -16,7 +16,7 @@ const CACHE_DURATION = {
 class APICache {
   private cache = new Map<string, { data; timestamp: number; duration: number }>();
 
-  set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
+  set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -24,7 +24,7 @@ class APICache {
     });
   }
 
-  get(key): any | null {
+  get(key: string): any | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -43,7 +43,7 @@ return null;
     this.cache.clear();
   }
 
-  delete(key): void {
+  delete(key: string): void {
     this.cache.delete(key);
   }
 
@@ -115,7 +115,7 @@ const requestQueue = new RequestQueue();
 // HTTP Client
 class HTTPClient {
   private async request<T>(
-    url,
+    url: any,
     options: RequestInit = {},
     cacheKey?: string,
     cacheDuration?: number,
@@ -151,7 +151,7 @@ return cached;
   }
 
   async get<T>(
-    url,
+    url: any,
     cacheKey?: string,
     cacheDuration?: number,
   ): Promise<T> {
@@ -160,7 +160,7 @@ return cached;
     );
   }
 
-  async post<T>(url, data): Promise<T> {
+  async post<T>(url: any, data: any): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, {
         method: 'POST',
@@ -169,7 +169,7 @@ return cached;
     );
   }
 
-  async put<T>(url, data): Promise<T> {
+  async put<T>(url: any, data: any): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, {
         method: 'PUT',
@@ -178,7 +178,7 @@ return cached;
     );
   }
 
-  async delete<T>(url): Promise<T> {
+  async delete<T>(url: any): Promise<T> {
     return requestQueue.add(() =>
       this.request<T>(url, { method: 'DELETE' }),
     );
@@ -246,7 +246,7 @@ export class VideoService {
         CACHE_DURATION.MEDIUM,
       );
 
-      const videos: Video[] = response.items?.map((item) => ({
+      const videos: Video[] = response.items?.map((item: any) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -279,7 +279,7 @@ export class VideoService {
     }
   }
 
-  static async getVideoById(id): Promise<Video | null> {
+  static async getVideoById(id: string): Promise<Video | null> {
     const cacheKey = `video_${id}`;
 
     try {
@@ -336,7 +336,7 @@ return null;
   }
 
   static async searchVideos(
-    query,
+    query: any,
     limit: number = 20,
     pageToken?: string,
   ): Promise<{ videos: Video; nextPageToken?: string }> {
@@ -374,7 +374,7 @@ return null;
         CACHE_DURATION.SHORT,
       );
 
-      const videos: Video[] = response.items?.map((item) => ({
+      const videos: Video[] = response.items?.map((item: any) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -407,7 +407,7 @@ return null;
     }
   }
 
-  private static parseDuration(duration): number {
+  private static parseDuration(duration: any): number {
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
@@ -423,7 +423,7 @@ return 0;
 }
 
 // Mock data generator for development
-function generateMockChannel(id): Channel {
+function generateMockChannel(id: string): Channel {
   return {
     id,
     name: `Channel ${id}`,
@@ -443,7 +443,7 @@ function generateMockChannel(id): Channel {
 }
 
 export class ChannelService {
-  static async getChannel(id): Promise<Channel | null> {
+  static async getChannel(id: string): Promise<Channel | null> {
     const cacheKey = `channel_${id}`;
 
     try {
@@ -488,7 +488,7 @@ return null;
   }
 
   static async getChannelVideos(
-    channelId,
+    channelId: any,
     limit: number = 20,
     pageToken?: string,
   ): Promise<{ videos: Video; nextPageToken?: string }> {
@@ -527,7 +527,7 @@ return null;
         CACHE_DURATION.MEDIUM,
       );
 
-      const videos: Video[] = response.items?.map((item) => ({
+      const videos: Video[] = response.items?.map((item: any) => ({
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -562,7 +562,7 @@ return null;
 }
 
 export class PlaylistService {
-  static async getUserPlaylists(_userId): Promise<UserPlaylist[]> {
+  static async getUserPlaylists(_userId: any): Promise<UserPlaylist[]> {
     try {
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -599,7 +599,7 @@ export class PlaylistService {
 // Export cache utilities
 export const cacheUtils = {
   clear: () => apiCache.clear(),
-  delete: (key) => apiCache.delete(key),
+  delete: (key: string) => apiCache.delete(key: string),
   size: () => apiCache.size(),
 };
 

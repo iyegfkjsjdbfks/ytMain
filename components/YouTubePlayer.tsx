@@ -22,7 +22,7 @@ interface YTPlayer {
   playVideo(): void;
   pauseVideo(): void;
   stopVideo(): void;
-  seekTo(seconds, allowSeekAhead?: boolean): void;
+  seekTo(seconds: any, allowSeekAhead?: boolean): void;
   clearVideo(): void;
   getVideoLoadedFraction(): number;
   getPlayerState(): number;
@@ -32,16 +32,16 @@ interface YTPlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string;
   getPlaylistIndex(): number;
-  setLoop(loopPlaylists): void;
-  setShuffle(shufflePlaylist): void;
+  setLoop(loopPlaylists: any): void;
+  setShuffle(shufflePlaylist: any): void;
   getVolume(): number;
-  setVolume(volume): void;
+  setVolume(volume: any): void;
   mute(): void;
   unMute(): void;
   isMuted(): boolean;
-  setSize(width, height): object;
+  setSize(width: any, height: any): object;
   getPlaybackRate(): number;
-  setPlaybackRate(suggestedRate): void;
+  setPlaybackRate(suggestedRate: any): void;
   getAvailablePlaybackRates(): number;
   destroy(): void;
 }
@@ -53,9 +53,9 @@ interface YouTubePlayerProps {
   autoplay?: boolean;
   controls?: boolean;
   className?: string;
-  onReady?: (event) => void;
-  onStateChange?: (event) => void;
-  onError?: (event) => void;
+  onReady?: (event: Event) => void;
+  onStateChange?: (event: Event) => void;
+  onError?: (event: Event) => void;
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({

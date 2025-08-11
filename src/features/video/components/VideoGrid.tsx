@@ -57,7 +57,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({
       {/* Video grid */}
       {videos.length > 0 ? (
         <div className={`grid ${getGridClass()} gap-4`}>
-          {videos.map((video) => (
+          {videos.map((video: any) => (
             <VideoCard
               key={video.id}
               video={video}

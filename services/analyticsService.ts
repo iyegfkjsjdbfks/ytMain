@@ -293,7 +293,7 @@ return;
 
   // Public API
   track(
-    eventName,
+    eventName: any,
     properties: Record<string, any> = {},
     category: AnalyticsEvent['category'] = 'user_action',
   ) {
@@ -340,21 +340,21 @@ return;
     }, 'navigation');
   }
 
-  trackClick(element, properties: Record<string, any> = {}) {
+  trackClick(element: any, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
       ...properties,
     });
   }
 
-  trackVideoEvent(action, videoId, properties: Record<string, any> = {}) {
+  trackVideoEvent(action: any, videoId: any, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
       ...properties,
     }, 'video');
   }
 
-  trackSearch(query, results?: number) {
+  trackSearch(query: any, results?: number) {
     this.track('search', {
       query,
       results,
@@ -362,11 +362,11 @@ return;
     });
   }
 
-  trackEngagement(type, properties: Record<string, any> = {}) {
+  trackEngagement(type: any, properties: Record<string, any> = {}) {
     this.track(type, properties, 'engagement');
   }
 
-  trackPerformance(metric, value, properties: Record<string, any> = {}) {
+  trackPerformance(metric: any, value: any, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
       ...properties,
@@ -374,7 +374,7 @@ return;
   }
 
   // Session management
-  setUserId(userId) {
+  setUserId(userId: any) {
     this.session.userId = userId;
     this.track('user_identified', { userId });
   }
@@ -447,7 +447,7 @@ return;
 
   getEvents(category?: AnalyticsEvent['category']): AnalyticsEvent[] {
     const { events } = this.session;
-    return category ? events.filter(e => e.category === category) : events;
+    return category ? events.filter((e: Event) => e: Event.category === category) : events;
   }
 
   getEventStats() {
@@ -457,14 +457,14 @@ return;
 
     return {
       total: events.length,
-      lastHour: events.filter(e => e.timestamp > oneHourAgo).length,
+      lastHour: events.filter((e: Event) => e: Event.timestamp > oneHourAgo).length,
       byCategory: {
-        user_action: events.filter(e => e.category === 'user_action').length,
-        performance: events.filter(e => e.category === 'performance').length,
-        error: events.filter(e => e.category === 'error').length,
-        navigation: events.filter(e => e.category === 'navigation').length,
-        video: events.filter(e => e.category === 'video').length,
-        engagement: events.filter(e => e.category === 'engagement').length,
+        user_action: events.filter((e: Event) => e: Event.category === 'user_action').length,
+        performance: events.filter((e: Event) => e: Event.category === 'performance').length,
+        error: events.filter((e: Event) => e: Event.category === 'error').length,
+        navigation: events.filter((e: Event) => e: Event.category === 'navigation').length,
+        video: events.filter((e: Event) => e: Event.category === 'video').length,
+        engagement: events.filter((e: Event) => e: Event.category === 'engagement').length,
       },
       sessionDuration: now - this.session.startTime,
       pageViews: this.session.pageViews,

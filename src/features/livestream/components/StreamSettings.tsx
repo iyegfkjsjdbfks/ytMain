@@ -11,7 +11,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings) => void;
+  onSettingsChange?: (settings: any) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({

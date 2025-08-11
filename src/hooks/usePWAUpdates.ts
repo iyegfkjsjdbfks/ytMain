@@ -51,8 +51,8 @@ interface UsePWAUpdatesReturn {
   getCacheSize: () => Promise<number>;
 
   // Auto-update settings
-  enableAutoUpdate: (enabled) => void;
-  setUpdateInterval: (minutes) => void;
+  enableAutoUpdate: (enabled: any) => void;
+  setUpdateInterval: (minutes: any) => void;
 }
 
 /**
@@ -301,7 +301,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   }, []);
 
   // Enable/disable auto-update
-  const enableAutoUpdate = useCallback((enabled) => {
+  const enableAutoUpdate = useCallback((enabled: any) => {
     setAutoUpdateEnabled(enabled);
     localStorage.setItem('pwa-auto-update', enabled.toString());
 
@@ -313,7 +313,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   }, []);
 
   // Set update check interval
-  const setUpdateInterval = useCallback((minutes) => {
+  const setUpdateInterval = useCallback((minutes: any) => {
     setUpdateIntervalState(minutes);
     localStorage.setItem('pwa-update-interval', minutes.toString());
 

@@ -46,9 +46,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     });
   };
 
-  const toggleFeature = (feature) => {
+  const toggleFeature = (feature: any) => {
     const newFeatures = filters.features.includes(feature)
-      ? filters.features.filter((f) => f !== feature)
+      ? filters.features.filter((f: any) => f: any !== feature)
       : [...filters.features, feature];
 
     updateFilter('features', newFeatures);

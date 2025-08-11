@@ -19,7 +19,7 @@ export const getInitialSearchKeyword = (): string => {
 /**
  * Allows updating the initial search keyword at runtime.
  */
-export const setInitialSearchKeyword = (keyword) => {
+export const setInitialSearchKeyword = (keyword: any) => {
   _settings.initialSearchKeyword = keyword?.trim() || 'trending';
 };
 

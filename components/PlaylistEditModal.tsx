@@ -15,7 +15,7 @@ interface PlaylistEditModalProps {
   onClose: () => void;
   initialTitle: string;
   initialDescription: string;
-  onSaveChanges: (title, description) => Promise<void>;
+  onSaveChanges: (title: any, description: any) => Promise<void>;
 }
 
 const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({

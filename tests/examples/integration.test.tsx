@@ -37,7 +37,7 @@ const VideoList = ({ videos, onVideoSelect, loading }: {loading: boolean, onVide
     {loading ? (
       <div>Loading videos...</div>
     ) : (
-      videos.map((video) => (
+      videos.map((video: any) => (
         <div
           key={video.id}
           data-testid={`video-item-${video.id}`}
@@ -83,7 +83,7 @@ const CommentSection = ({ comments, onAddComment }: {onAddComment: Function, com
       </form>
 
       <div className="comments-list">
-        {comments.map((comment) => (
+        {comments.map((comment: any) => (
           <div key={comment.id} data-testid={`comment-${comment.id}`} className="comment">
             <img src={comment.author.avatar} alt={comment.author.name} />
             <div>
@@ -135,7 +135,7 @@ const VideoPage = () => {
     loadData();
   }, []);
 
-  const handleVideoSelect = async (video) => {
+  const handleVideoSelect = async (video: any) => {
     setCurrentVideo(video);
     setWatchTime(0);
 
@@ -149,7 +149,7 @@ const VideoPage = () => {
     }
   };
 
-  const handleAddComment = async (text) => {
+  const handleAddComment = async (text: any) => {
     if (!currentVideo) {
 return;
 }
@@ -413,7 +413,7 @@ describe('Integration Tests', () => {
       expect(screen.getByText(`Comments (${mockComments.length})`)).toBeInTheDocument();
 
       // Should display each comment
-      mockComments.forEach(comment => {
+      mockComments.forEach((comment: any) => {
         expect(screen.getByTestId(`comment-${comment.id}`)).toBeInTheDocument();
         expect(screen.getByText(comment.text)).toBeInTheDocument();
         expect(screen.getByText(comment.author.name)).toBeInTheDocument();

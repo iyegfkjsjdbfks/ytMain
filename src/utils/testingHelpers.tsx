@@ -160,12 +160,12 @@ export const checkAccessibility = async (_container: HTMLElement) => {
 
 // User interaction helpers
 export const userInteraction = {
-  clickVideo: async (videoTitle) => {
+  clickVideo: async (videoTitle: any) => {
     const video = screen.getByRole('button', { name: new RegExp(videoTitle, 'i') });
     await userEvent.click(video);
   },
 
-  searchFor: async (query) => {
+  searchFor: async (query: any) => {
     const searchInput = screen.getByRole('searchbox');
     await userEvent.clear(searchInput);
     await userEvent.type(searchInput, query);
@@ -177,7 +177,7 @@ export const userInteraction = {
     await userEvent.click(likeButton);
   },
 
-  addComment: async (content) => {
+  addComment: async (content: any) => {
     const commentInput = screen.getByRole('textbox', { name: /add.*comment/i });
     await userEvent.clear(commentInput);
     await userEvent.type(commentInput, content);
@@ -196,17 +196,17 @@ export const userInteraction = {
 export const mockApiResponses = {
   videos: {
     trending: [createMockVideo({ id: '1', title: 'Trending Video 1' })],
-    search: (query) => [
+    search: (query: any) => [
       createMockVideo({ id: '2', title: `Search Result for ${query}` }),
     ],
   },
 
   channels: {
-    byId: (id) => createMockChannel({ id, name: `Channel ${id}` }),
+    byId: (id: string) => createMockChannel({ id: string, name: `Channel ${id: string}` }),
   },
 
   comments: {
-    byVideoId: (videoId) => [
+    byVideoId: (videoId: any) => [
       createMockComment({ id: '1', content: `Comment for video ${videoId}` }),
     ],
   },

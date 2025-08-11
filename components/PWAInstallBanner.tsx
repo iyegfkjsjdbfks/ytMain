@@ -35,7 +35,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
     }
 
     // Listen for beforeinstallprompt event
-    const handleBeforeInstallPrompt = (e) => {
+    const handleBeforeInstallPrompt = (e: Event) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
 

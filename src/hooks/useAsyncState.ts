@@ -9,8 +9,8 @@ interface AsyncState<T> {
 
 interface UseAsyncStateOptions {
   initialLoading?: boolean;
-  onSuccess?: (data) => void;
-  onError?: (error) => void;
+  onSuccess?: (data: any) => void;
+  onError?: (error: Error) => void;
 }
 
 /**
@@ -54,7 +54,7 @@ export const useAsyncState = <T>(
     setState(prev => ({ ...prev, data }));
   }, []);
 
-  const setError = useCallback((error) => {
+  const setError = useCallback((error: Error) => {
     setState(prev => ({ ...prev, error, loading: false }));
   }, []);
 

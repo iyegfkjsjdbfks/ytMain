@@ -165,7 +165,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
   // Set up event listeners
   useEffect(() => {
     // Handle beforeinstallprompt event
-    const handleBeforeInstallPrompt = (event) => {
+    const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       PWAEvents.handleBeforeInstallPrompt(event);
 

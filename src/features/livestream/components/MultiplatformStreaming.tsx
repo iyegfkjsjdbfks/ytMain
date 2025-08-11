@@ -12,7 +12,7 @@ interface Platform {
 }
 
 interface MultiplatformStreamingProps {
-  onPlatformToggle?: (platformId, enabled) => void;
+  onPlatformToggle?: (platformId: any, enabled: any) => void;
 }
 
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
@@ -25,7 +25,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
     { id: 'twitter', name: 'Twitter', enabled: false },
   ]);
 
-  const togglePlatform = (platformId) => {
+  const togglePlatform = (platformId: any) => {
     setPlatforms(prev => prev.map(platform => {
       if (platform.id === platformId) {
         const enabled = !platform.enabled;

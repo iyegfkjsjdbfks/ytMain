@@ -85,12 +85,12 @@ const PlaylistDetailPage: React.FC = () => {
     };
   }, [activeVideoMenuId, isEditModalOpen]);
 
-  const handleToggleVideoMenu = (videoId, e: React.MouseEvent) => {
+  const handleToggleVideoMenu = (videoId: any, e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveVideoMenuId(prevId => (prevId=== videoId ? null : videoId));
   };
 
-  const handleRemoveVideo = async (videoIdToRemove) => {
+  const handleRemoveVideo = async (videoIdToRemove: any) => {
     if (!playlistId || !playlistDetails) {
 return;
 }
@@ -109,8 +109,8 @@ return null;
 }
         return {
           ...prevDetails,
-          videos: prevDetails.videos.filter((v) => v.id !== videoIdToRemove),
-          videoIds: prevDetails.videoIds.filter((id) => id !== videoIdToRemove),
+          videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
+          videoIds: prevDetails.videoIds.filter((id: string) => id: string !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
         };
       });
@@ -129,7 +129,7 @@ return null;
     }
   };
 
-  const handleSaveChanges = async (title, description) => {
+  const handleSaveChanges = async (title: any, description: any) => {
     if (!playlistId || !title.trim()) {
       alert('Playlist title cannot be empty.');
       return;
@@ -232,7 +232,7 @@ return null;
 
       {videos.length > 0 ? (
         <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
-          {videos.map((video, index) => (
+          {videos.map((video: any, index: number) => (
             <li key={video.id} className="py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900/70 transition-colors rounded-md -mx-2 px-2 group flex items-center justify-between">
               <Link to={`/watch/${video.id}`} className="flex items-center space-x-3 flex-grow min-w-0">
                 <div className="w-8 text-right text-xs text-neutral-500 dark:text-neutral-400 pr-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">{index + 1}</div>

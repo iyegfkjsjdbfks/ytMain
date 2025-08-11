@@ -121,7 +121,7 @@ const VideoEditorPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const formatTime = (seconds): string => {
+  const formatTime = (seconds: any): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -148,11 +148,11 @@ const VideoEditorPage: React.FC = () => {
     }
   };
 
-  const handleClipSelect = (clipId) => {
+  const handleClipSelect = (clipId: any) => {
     setSelectedClip(selectedClip === clipId ? null : clipId);
   };
 
-  const handleClipSplit = (clipId, splitTime) => {
+  const handleClipSplit = (clipId: any, splitTime: any) => {
     const clip = clips.find(c => c.id === clipId);
     if (!clip) {
 return;
@@ -183,7 +183,7 @@ return;
     }]);
   };
 
-  const handleVolumeChange = (clipId, volume) => {
+  const handleVolumeChange = (clipId: any, volume: any) => {
     setClips(prev => prev.map(clip =>
       clip.id === clipId ? { ...clip, volume } : clip,
     ));
@@ -288,7 +288,7 @@ return;
     }
   };
 
-  const getTrackLabel = (track): string => {
+  const getTrackLabel = (track: any): string => {
     switch (track) {
       case 0: return 'Video';
       case 1: return 'Audio';

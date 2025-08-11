@@ -10,7 +10,7 @@ export interface AnalyticsEvent {
  * @param eventName - Name of the event to track
  * @param properties - Additional properties to include with the event
  */
-export const trackEvent = (eventName, properties?: AnalyticsEvent): void => {
+export const trackEvent = (eventName: any, properties?: AnalyticsEvent): void => {
   try {
     // In a real implementation, this would send to your analytics service
     // For now, we'll just log to console in development
@@ -38,7 +38,7 @@ export const trackEvent = (eventName, properties?: AnalyticsEvent): void => {
  * @param pagePath - Path of the page being viewed
  * @param pageTitle - Title of the page
  */
-export const trackPageView = (pagePath, pageTitle?: string): void => {
+export const trackPageView = (pagePath: any, pageTitle?: string): void => {
   trackEvent('page_view', {
     page_path: pagePath,
     page_title: pageTitle,
@@ -50,7 +50,7 @@ export const trackPageView = (pagePath, pageTitle?: string): void => {
  * @param element - Element that was interacted with
  * @param action - Type of interaction (click, hover, etc.)
  */
-export const trackInteraction = (element, action): void => {
+export const trackInteraction = (element: any, action: any): void => {
   trackEvent('user_interaction', {
     element,
     action,

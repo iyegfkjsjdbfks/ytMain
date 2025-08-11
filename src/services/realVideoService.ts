@@ -33,22 +33,22 @@ export const getShortsVideos = async (): Promise<Video[]> => {
   return [];
 };
 
-export const getVideosByCategory = async (_category): Promise<Video[]> => {
+export const getVideosByCategory = async (_category: any): Promise<Video[]> => {
   // Mock implementation - returns empty array
   return [];
 };
 
-export const searchVideos = async (_query): Promise<Video[]> => {
+export const searchVideos = async (_query: any): Promise<Video[]> => {
   // Mock implementation - returns empty array
   return [];
 };
 
-export const getVideoById = async (_id): Promise<Video | null> => {
+export const getVideoById = async (_id: any): Promise<Video | null> => {
   // Mock implementation - returns null
   return null;
 };
 
-export const getChannelById = async (_id): Promise<Channel | null> => {
+export const getChannelById = async (_id: any): Promise<Channel | null> => {
   // Mock implementation - returns null
   return null;
 };

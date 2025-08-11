@@ -90,7 +90,7 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
     case 'REMOVE_FROM_WATCH_LATER':
       return {
         ...state,
-        watchLaterVideos: state.watchLaterVideos.filter(id => id !== action.payload),
+        watchLaterVideos: state.watchLaterVideos.filter((id: string) => id: string !== action.payload),
       };
     case 'TOGGLE_SIDEBAR':
       return {
@@ -105,7 +105,7 @@ function unifiedAppReducer(state: UnifiedAppState, action: UnifiedAppAction): Un
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
-        notifications: state.notifications.filter(n => n.id !== action.payload),
+        notifications: state.notifications.filter((n: any) => n.id !== action.payload),
       };
     default:
       return state;
@@ -117,7 +117,7 @@ interface UnifiedAppContextType {
   state: UnifiedAppState;
 
   // Auth actions
-  login: (email, password) => Promise<boolean>;
+  login: (email: any, password: any) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => Promise<boolean>;
 
@@ -130,14 +130,14 @@ interface UnifiedAppContextType {
   toggleMiniplayer: () => void;
 
   // Watch Later actions
-  addToWatchLater: (videoId) => void;
-  removeFromWatchLater: (videoId) => void;
-  isInWatchLater: (videoId) => boolean;
+  addToWatchLater: (videoId: any) => void;
+  removeFromWatchLater: (videoId: any) => void;
+  isInWatchLater: (videoId: any) => boolean;
 
   // UI actions
   toggleSidebar: () => void;
   addNotification: (notification: Omit<StrictNotification, 'id' | 'timestamp'>) => void;
-  removeNotification: (id) => void;
+  removeNotification: (id: string) => void;
 }
 
 // Create Context
@@ -156,7 +156,7 @@ export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children
   const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
 
   // Auth actions
-  const login = useCallback(async (email, password): Promise<boolean> => {
+  const login = useCallback(async (email: any, password: any): Promise<boolean> => {
     dispatch({ type: 'SET_AUTH_LOADING', payload: true });
 
     try {
@@ -253,19 +253,19 @@ return false;
   }, []);
 
   // Watch Later actions
-  const addToWatchLater = useCallback((videoId) => {
+  const addToWatchLater = useCallback((videoId: any) => {
     dispatch({ type: 'ADD_TO_WATCH_LATER', payload: videoId });
     const updated = [...state.watchLaterVideos, videoId];
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
-  const removeFromWatchLater = useCallback((videoId) => {
+  const removeFromWatchLater = useCallback((videoId: any) => {
     dispatch({ type: 'REMOVE_FROM_WATCH_LATER', payload: videoId });
-    const updated = state.watchLaterVideos.filter(id => id !== videoId);
+    const updated = state.watchLaterVideos.filter((id: string) => id: string !== videoId);
     localStorage.setItem('youtube_clone_watch_later', JSON.stringify(updated));
   }, [state.watchLaterVideos]);
 
-  const isInWatchLater = useCallback((videoId) => {
+  const isInWatchLater = useCallback((videoId: any) => {
     return state.watchLaterVideos.includes(videoId);
   }, [state.watchLaterVideos]);
 
@@ -283,7 +283,7 @@ return false;
     dispatch({ type: 'ADD_NOTIFICATION', payload: notificationWithId });
   }, []);
 
-  const removeNotification = useCallback((id) => {
+  const removeNotification = useCallback((id: string) => {
     dispatch({ type: 'REMOVE_NOTIFICATION', payload: id });
   }, []);
 

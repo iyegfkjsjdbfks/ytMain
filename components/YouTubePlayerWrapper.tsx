@@ -18,15 +18,15 @@ interface YouTubePlayerWrapperProps {
   end?: number;
   quality?: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080' | 'highres' | 'default';
   className?: string;
-  onReady?: (event) => void;
-  onStateChange?: (event) => void;
-  onError?: (event) => void;
+  onReady?: (event: Event) => void;
+  onStateChange?: (event: Event) => void;
+  onError?: (event: Event) => void;
   lazy?: boolean;
   preload?: 'none' | 'metadata' | 'auto';
   placeholder?: ReactNode;
   // IFrame API specific props
-  onPlaybackQualityChange?: (event) => void;
-  onPlaybackRateChange?: (event) => void;
+  onPlaybackQualityChange?: (event: Event) => void;
+  onPlaybackRateChange?: (event: Event) => void;
 }
 
 // Union type for player methods
@@ -40,7 +40,7 @@ const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlay
 
 
   // Create mock video object for YouTubePlayer component
-  const createMockVideo = (videoId): YouTubeSearchResult => ({
+  const createMockVideo = (videoId: any): YouTubeSearchResult => ({
     id: videoId,
     title: 'Video',
     description: '',
