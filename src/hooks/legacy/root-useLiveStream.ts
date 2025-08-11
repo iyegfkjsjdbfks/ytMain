@@ -202,11 +202,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-<<<<<<< HEAD
-      setStream((prev: any) => prev: any ? { ...prev, status: 'live' } : null);
-=======
       setStream((prev) => prev ? { ...prev, status: 'live' } : null);
->>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       setLoading(false);
       return true;
     } catch (err) {
@@ -226,11 +222,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-<<<<<<< HEAD
-      setStream((prev: any) => prev: any ? { ...prev, status: 'ended' } : null);
-=======
       setStream((prev) => prev ? { ...prev, status: 'ended' } : null);
->>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       setLoading(false);
       return true;
     } catch (err) {
