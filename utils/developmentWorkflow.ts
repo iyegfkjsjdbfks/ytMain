@@ -16,8 +16,8 @@ interface WorkflowStage {
   required: boolean;
   timeout: number; // _seconds
   retries: number;
-  conditions: WorkflowCondition;
-  actions: WorkflowAction;
+  conditions: WorkflowCondition[];
+  actions: WorkflowAction[];
 }
 
 interface WorkflowCondition {
@@ -36,8 +36,8 @@ interface DeploymentStrategy {
   name: string;
   type: 'blue-green' | 'canary' | 'rolling' | 'feature-flag';
   _config: Record<string, any>;
-  healthChecks: string;
-  rollbackTriggers: WorkflowCondition;
+  healthChecks: string[];
+  rollbackTriggers: WorkflowCondition[];
 }
 
 interface QualityGateResult {

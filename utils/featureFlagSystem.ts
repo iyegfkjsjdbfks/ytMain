@@ -642,7 +642,7 @@ continue;
     switch (condition.operator) {
       case 'equals':
         return contextValue === (condition.value as any);
-      switch (condition.operator) {
+  
       case 'equals':
         return contextValue === (condition.value as any);
       case 'not_equals':
