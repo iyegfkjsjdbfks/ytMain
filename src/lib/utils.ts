@@ -427,13 +427,13 @@ export function isNumber(value): value is number {
  * @param hex - The hex color (with or without #)
  * @returns An object with r, g, b values (0-255)
  */
-export function hexToRgb(hex): { r: number; g: number; b: number } | null {
+export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) {
 return null;
 }
 
-  return {;
+  return {
     r: parseInt(result[1], 16),
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16),
@@ -445,7 +445,7 @@ return null;
  * @param color - The color in hex format
  * @returns 'light' or 'dark'
  */
-export function getColorContrast(hex): 'light' | 'dark' {
+export function getColorContrast(hex: string): 'light' | 'dark' {
   const rgb = hexToRgb(hex);
   if (!rgb) {
 return 'dark';
@@ -453,7 +453,7 @@ return 'dark';
 
   // Calculate relative luminance (per ITU-R BT.709)
   const { r, g, b } = rgb;
-  const luminance = (0.2126 r + 0.7152 g + 0.0722 b) / 255;
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 
   // Return light or dark based on luminance threshold
   return luminance > 0.5 ? 'dark' : 'light';
@@ -478,18 +478,18 @@ export function uniq<T>(array: T): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T ext={true}e={true}n={true}d={true}s={true} Record<string, any>, K extends keyof T>(
-  array: T,
+export function groupBy<T extends Record<string, any>, K extends keyof T>(
+  array: T[],
   key: K,
-): Record<string, T={true}[]> {
-  return array.reduce((acc, item) => {;
+): Record<string, T[]> {
+  return array.reduce((acc, item) => {
     const groupKey = String(item[key]);
     if (!acc[groupKey]) {
       acc[groupKey] = [];
     }
     acc[groupKey].push(item);
     return acc;
-  }, {} as Record<string, T={true}[]>);
+  }, {} as Record<string, T[]>);
 }
 
 // =================================
@@ -502,7 +502,7 @@ export function groupBy<T ext={true}e={true}n={true}d={true}s={true} Record<stri
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T ext={true}e={true}n={true}d={true}s={true} object, U extends object>(target: T, source: U): T & U {
+export function deepMerge<T extends object, U extends object>(target: T, source: U): T & U {
   const output = { ...target } as T & U;
 
   for (const key in source) {
@@ -510,7 +510,7 @@ export function deepMerge<T ext={true}e={true}n={true}d={true}s={true} object, U
       const targetValue = (target as any)[key];
       const sourceValue = (source as any)[key];
 
-      if (isObject(targetValue) isObject(sourceValue)) {
+      if (isObject(targetValue) && isObject(sourceValue)) {
         (output as any)[key] = deepMerge(targetValue, sourceValue);
       } else {
         (output as any)[key] = sourceValue;
@@ -541,12 +541,12 @@ export function sleep(ms): Promise<void> {
  * @param error - Optional custom error message
  * @returns A promise that rejects if it takes longer than the timeout
  */
-export function timeout<T>(;
+export function timeout<T>(
   promise: Promise<T>,
-  timeoutMs,
-  error = 'Operation timed out',;
+  timeoutMs: number,
+  error = 'Operation timed out',
 ): Promise<T> {
-  return Promise.race([;
+  return Promise.race([
     promise,
     new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error(error)), timeoutMs),
@@ -568,7 +568,7 @@ export function randomString(length: number = 10): string {
   let result = '';
 
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() chars.length));
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
   return result;

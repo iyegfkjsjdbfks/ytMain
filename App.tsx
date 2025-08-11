@@ -1,16 +1,8 @@
-/// <reference types="react/jsx-runtime" />
-import type React from 'react';
-
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { routes } from './config/routes';
 import { RefactoredAppProviders } from './providers/RefactoredAppProviders';
-import { createBrowserRouter, RouterProvider, BrowserRouter } from 'react-router-dom';
-
-// Create router with our route configuration and supported future flags
-import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router-dom';
 const router = createBrowserRouter(routes, {
   future: {
     // Only include future flags supported in react-router-dom v6.20.1
@@ -41,13 +33,4 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
-}
 
