@@ -58,3 +58,25 @@
 [32m✅ [2025-08-11T00:30:43.234Z] Syntax Errors: Successfully reduced to 0 errors after 0 iteration(s)[0m
 [36m🔧 [2025-08-11T00:30:44.236Z] Starting Property Does Not Exist (TS2339) fixes...[0m
 [36m🔧 [2025-08-11T00:30:44.238Z] Property Does Not Exist: 754 errors remaining[0m
+[36m🔧 [2025-08-11T00:30:44.257Z] Created checkpoint before Property Does Not Exist (TS2339)[0m
+[31m❌ [2025-08-11T00:30:44.313Z] Property Does Not Exist: Failed iteration 1 - Command failed: node scripts/fix-ts2339-property-errors.js
+node:internal/modules/esm/resolve:873
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'typescript' imported from /home/runner/work/ytMain/ytMain/scripts/fix-ts2339-property-errors.js
+    at packageResolve (node:internal/modules/esm/resolve:873:9)
+    at moduleResolve (node:internal/modules/esm/resolve:946:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:642:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:591:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:574:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:236:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:130:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v20.19.4
+[0m
+[36m🔧 [2025-08-11T00:30:45.318Z] Starting Cannot Find Name (TS2304) fixes...[0m
+[36m🔧 [2025-08-11T00:30:45.321Z] Cannot Find Name: 3837 errors remaining[0m
