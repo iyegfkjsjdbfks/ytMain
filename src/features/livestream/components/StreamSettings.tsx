@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React, { useState } from 'react';
+import React, { useState } from 'react';
 
 // Import statements fixed  
 import { streamingConfig } from '../config/streaming';
@@ -11,7 +11,7 @@ interface StreamQuality {
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings) => void;
+  onSettingsChange?: (settings: any) => void;
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({

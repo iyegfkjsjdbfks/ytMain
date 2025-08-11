@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
+import { Link } from 'react-router-dom';
 import {
   VideoCameraIcon,
   ChartBarIcon,
@@ -14,7 +14,7 @@ import {
   ArrowUpIcon,
   PlusIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
+import { VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
@@ -115,7 +115,7 @@ const StudioPage: React.FC = () => {
     loadStudioData();
   }, []);
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -125,7 +125,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const getStatusColor = (status): string => {
+  const getStatusColor = (status: any): string => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/30';
       case 'draft': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/30';

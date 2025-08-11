@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 // import { getVideos, getVideosByCategory } // // from '../services/realVideoService' // Service not found // Service not found;
 import type { Video } from '../types';
@@ -158,7 +158,7 @@ export const useTrendingVideos = () => {
   });
 };
 
-export const useChannelVideos = (channelId) => {
+export const useChannelVideos = (channelId: any) => {
   return useOptimizedVideoData({
     category: `channel-${channelId}`,
     limit: 15,
@@ -166,7 +166,7 @@ export const useChannelVideos = (channelId) => {
   });
 };
 
-export const useSearchVideos = (query) => {
+export const useSearchVideos = (query: any) => {
   return useOptimizedVideoData({
     category: `search-${query}`,
     limit: 20,

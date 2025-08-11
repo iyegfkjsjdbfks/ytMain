@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Suspense, type ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 
 import FastLoadingSpinner from './FastLoadingSpinner';
 

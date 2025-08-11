@@ -1,9 +1,9 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { useState, useEffect, type FC } from 'react';
+import React from 'react';
+import { useState, useEffect, type FC } from 'react';
 
-// TODO: Fix import - import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
+import { WifiOff, Wifi, Download, Clock, AlertCircle } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -58,7 +58,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
   };
 
-  const formatBytes = (bytes): string => {
+  const formatBytes = (bytes: any): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }

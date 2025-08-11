@@ -1,11 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 // @ts-nocheck
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -316,3 +315,4 @@ declare global {
     }
   }
 }
+

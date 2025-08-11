@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -13,9 +13,9 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 
 import {
@@ -30,7 +30,6 @@ import {
   HeartIcon,
   ShareIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatNumber, formatDuration } from '../utils/numberUtils';
@@ -174,7 +173,7 @@ const StudioDashboardPage: React.FC = () => {
     },
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
@@ -402,3 +401,4 @@ declare global {
     }
   }
 }
+

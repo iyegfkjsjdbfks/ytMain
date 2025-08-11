@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState } from 'react';
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
-// TODO: Fix import - import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
+import React from "react";
+import { useState } from 'react';
+import type * as React from 'react';
+import { formatDistanceToNow } from 'date-fns';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, EllipsisHorizontalIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
 
 export interface CommunityPostData {
   id: string;
@@ -47,11 +47,11 @@ export interface CommunityPostData {
 
 interface CommunityPostProps {
   post: CommunityPostData;
-  onLike: (postId) => void;
-  onDislike: (postId) => void;
-  onComment: (postId) => void;
-  onShare: (postId) => void;
-  onVote?: (postId, optionId) => void;
+  onLike: (postId: any) => void;
+  onDislike: (postId: any) => void;
+  onComment: (postId: any) => void;
+  onShare: (postId: any) => void;
+  onVote?: (postId: any, optionId: any) => void;
   className?: string;
 }
 
@@ -67,7 +67,7 @@ export const CommunityPost: React.FC<CommunityPostProps> = ({
   const [showFullContent, setShowFullContent] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const formatCount = (count): string => {
+  const formatCount = (count: any): string => {
     if (count >= 1000000) {
 return `${(count / 1000000).toFixed(1)}M`;
 }
@@ -82,7 +82,7 @@ return `${(count / 1000).toFixed(1)}K`;
     ? `${post.content.slice(0, 300)}...`
     : post.content;
 
-  const handleVote = (optionId) => {
+  const handleVote = (optionId: any) => {
     if (post.poll && !post.poll.hasVoted && onVote) {
       onVote(post.id, optionId);
     }

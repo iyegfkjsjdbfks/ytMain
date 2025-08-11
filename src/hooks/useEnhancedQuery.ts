@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
 
 import { performanceMonitor } from '../utils/performanceMonitor';
 
@@ -47,12 +47,12 @@ export const queryPresets = {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retry: 3,
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 ** attemptIndex: any, 30000),
   },
 } as const;
 
 // Enhanced error handler
-function createApiError(error): ApiError {
+function createApiError(error: Error): ApiError {
   const apiError: ApiError = {
     name: 'ApiError',
     message: error?.message || 'An unexpected error occurred',
@@ -67,7 +67,7 @@ function createApiError(error): ApiError {
   return apiError;
 }
 
-function isRetryableError(error): boolean {
+function isRetryableError(error: Error): boolean {
   const status = error?.status || error?.response?.status;
 
   // Network errors are retryable
@@ -96,7 +96,7 @@ return true;
 
 // Enhanced retry logic
 function createRetryFn(maxRetries: number = 3) {
-  return (failureCount, error) => {
+  return (failureCount: any, error: Error) => {
     const apiError = createApiError(error);
 
     // Don't retry if error is not retryable
@@ -115,7 +115,7 @@ return false;
 
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
-  return (attemptIndex, error) => {
+  return (attemptIndex: any, error: Error) => {
     // Create API error to ensure proper error handling
     createApiError(error);
 
@@ -137,7 +137,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
   queryFn: () => Promise<T>,
-  queryKey,
+  queryKey: any,
 ): () => Promise<T> {
   return async () => {
     const startTime = performance.now();
@@ -163,7 +163,7 @@ function withPerformanceMonitoring<T>(
 
 // Enhanced useQuery hook
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
-  queryKey,
+  queryKey: any,
   queryFn: () => Promise<TData>,
   options: {
     preset?: keyof typeof queryPresets;
@@ -208,7 +208,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
     invalidateQueries?: string[][];
     optimisticUpdate?: {
       queryKey: string;
-      updateFn: (oldData, variables: TVariables) => any;
+      updateFn: (oldData: any, variables: TVariables) => any;
     };
   } & Omit<UseMutationOptions<TData, TError, TVariables>, 'mutationFn' | 'retry' | 'retryDelay'> = {},
 ) {
@@ -259,7 +259,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
         queryClient.setQueryData(
           optimisticUpdate.queryKey,
-          (oldData) => optimisticUpdate.updateFn(oldData, variables),
+          (oldData: any) => optimisticUpdate.updateFn(oldData: any, variables),
         );
 
         return { previousData };
@@ -289,7 +289,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
-  _queryKey,
+  _queryKey: any,
   _queryFn: ({ pageParam }: {pageParam: any}) => Promise<TData>,
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
@@ -307,7 +307,7 @@ export function useCacheManager() {
 
   return {
     // Prefetch data
-    prefetch: <TData>(queryKey, queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
+    prefetch: <TData>(queryKey: any, queryFn: () => Promise<TData>, preset: keyof typeof queryPresets = 'standard') => {
       return queryClient.prefetchQuery({
         queryKey,
         queryFn,

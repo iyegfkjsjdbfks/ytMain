@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 /**
  * LikedVideosPage component for displaying videos the user has liked

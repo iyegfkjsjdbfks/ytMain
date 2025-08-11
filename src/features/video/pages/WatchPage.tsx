@@ -1,9 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useParams, Link, useSearchParams } from 'react-router-dom';
+import React from "react";
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { queryClient } from '@/hooks/useQueryClient';
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { isYouTubeUrl } from '@/lib/youtube-utils';
 
@@ -15,7 +15,7 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import type { Video } from '../../../types/core';
 import VideoCard from '../components/VideoCard';
 import YouTubePlayer from '../../../components/YouTubePlayer';
-// TODO: Fix import - import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const WatchPage: React.FC = () => {
   const { videoId: paramVideoId } = useParams<{ videoId: string }>();
@@ -111,10 +111,10 @@ const WatchPage: React.FC = () => {
 
       const unifiedVideos = response.data;
       logger.debug(`📺 Loaded ${unifiedVideos.length} recommendations with unified metadata`);
-      logger.debug('📺 First few recommendations:', unifiedVideos.slice(0, 3).map(v => ({ id: v.id, title: v.title })));
+      logger.debug('📺 First few recommendations:', unifiedVideos.slice(0, 3).map((v: any) => ({ id: v.id, title: v.title })));
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
-      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({
+      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo: any) => ({
         id: unifiedVideo.id,
         createdAt: unifiedVideo.publishedAt,
         updatedAt: unifiedVideo.publishedAt,
@@ -574,7 +574,7 @@ const WatchPage: React.FC = () => {
 
                     {/* Tags */}                        {video.tags && video.tags.length > 0 && (
                           <div className="mt-4 flex flex-wrap gap-2">
-                            {video.tags.map((tag, index) => (
+                            {video.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
                             className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
@@ -722,3 +722,4 @@ declare global {
     }
   }
 }
+

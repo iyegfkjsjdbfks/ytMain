@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from 'react';
 import { logger } from '@/utils/logger';
 import { useLivePolls } from '@/hooks/useLiveStream';
 import type { LivePoll } from '@/types/livestream';
-// TODO: Fix import - import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
 
 interface LivePollsProps {
   streamId: string;
@@ -50,7 +50,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleVote = async (pollId, optionId) => {
+  const handleVote = async (pollId: any, optionId: any) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -58,7 +58,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleEndPoll = async (pollId) => {
+  const handleEndPoll = async (pollId: any) => {
     try {
       // TODO: Implement end poll functionality
       logger.debug('End poll:', pollId);
@@ -73,7 +73,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const removeOption = (index) => {
+  const removeOption = (index: number) => {
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
@@ -82,14 +82,14 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const updateOption = (index, value) => {
+  const updateOption = (index: number, value: any) => {
     setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt, i) => i=== index ? value : opt),
     }));
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -232,7 +232,7 @@ return 0;
           <p className="text-gray-900 mb-3 font-medium">{activePoll.question}</p>
 
           <div className="space-y-2">
-            {activePoll.options.map((option) => (
+            {activePoll.options.map((option: any) => (
               <div key={option.id} className="relative">
                 <button
                   onClick={() => handleVote(activePoll.id, option.id)}
@@ -282,7 +282,7 @@ return 0;
                 </div>
 
                 <div className="space-y-2">
-                  {poll.options.map((option) => (
+                  {poll.options.map((option: any) => (
                     <div key={option.id} className="flex items-center justify-between text-sm">
                       <span className="text-gray-700">{option.text}</span>
                       <div className="flex items-center space-x-2">

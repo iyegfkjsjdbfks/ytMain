@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState } from 'react';
+import React from 'react';
 
 import {
   ClockIcon,
@@ -31,7 +31,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
-// TODO: Fix import - import { Line, Doughnut } from 'react-chartjs-2';
+import { Line, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -101,7 +101,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'audience' | 'engagement' | 'revenue'>('overview');
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -110,7 +110,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return num.toLocaleString();
   };
 
-  const formatDuration = (seconds): string => {
+  const formatDuration = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -123,7 +123,7 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
     return `${secs}s`;
   };
 
-  const formatCurrency = (amount): string => {
+  const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

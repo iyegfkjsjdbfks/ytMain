@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// TODO: Fix import - import { render, type RenderOptions } from '@testing-library/react';
-// TODO: Fix import - import { BrowserRouter } from 'react-router-dom';
-// TODO: Fix import - import { vi } from 'vitest';
-// TODO: Fix import - import { BrowserRouter, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, type RenderOptions } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { vi } from 'vitest';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Mock data generators
 export const mockVideo = (overrides = {}) => ({
@@ -243,7 +243,7 @@ export const mockSessionStorage = () => {
 export const mockFetch = () => {
   const mockFetch = vi.fn();
 
-  const mockResponse = (data, options: { status?: number; ok?: boolean } = {}) => ({
+  const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
     status: options.status ?? 200,
     json: vi.fn().mockResolvedValue(data),
@@ -389,3 +389,4 @@ declare global {
     }
   }
 }
+

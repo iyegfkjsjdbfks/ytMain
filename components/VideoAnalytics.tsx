@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HandThumbUpIcon, ChatBubbleLeftIcon, ShareIcon, ClockIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, TvIcon } from '@heroicons/react/24/outline';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
@@ -91,7 +91,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     }
   };
 
-  const generateMockAnalyticsData = (videoId): AnalyticsData => {
+  const generateMockAnalyticsData = (videoId: any): AnalyticsData => {
     const baseViews = Math.floor(Math.random() * 1000000) + 10000;
     const likes = Math.floor(baseViews * (0.02 + Math.random() * 0.08));
     const dislikes = Math.floor(likes * (0.05 + Math.random() * 0.15));
@@ -178,7 +178,7 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return data;
   };
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -188,7 +188,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds): string => {
+  const formatDuration = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
@@ -199,7 +199,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const formatCurrency = (amount): string => {
+  const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -288,7 +288,7 @@ return `${(num / 1000).toFixed(1)}K`;
       <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700">
         <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Audience Retention</h3>
         <div className="h-64 flex items-end space-x-1">
-          {analyticsData.retention.map((value, index) => (
+          {analyticsData.retention.map((value: any, index: number) => (
             <div
               key={index}
               className="bg-blue-500 rounded-t flex-1 transition-all hover:bg-blue-600"

@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { createComponentError } from '@/utils/errorUtils';
 
@@ -165,7 +165,7 @@ export const useInstallPrompt = (): UseInstallPromptReturn => {
   // Set up event listeners
   useEffect(() => {
     // Handle beforeinstallprompt event
-    const handleBeforeInstallPrompt = (event) => {
+    const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       PWAEvents.handleBeforeInstallPrompt(event);
 

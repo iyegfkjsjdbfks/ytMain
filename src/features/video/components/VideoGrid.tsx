@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface VideoGridProps {
   title?: string;
@@ -57,7 +57,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({
       {/* Video grid */}
       {videos.length > 0 ? (
         <div className={`grid ${getGridClass()} gap-4`}>
-          {videos.map((video) => (
+          {videos.map((video: any) => (
             <VideoCard
               key={video.id}
               video={video}
@@ -100,3 +100,4 @@ declare global {
     }
   }
 }
+

@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { getInitialSearchKeyword } from '../services/settingsService';
 
@@ -11,7 +11,7 @@ import type { Video } from '../types';
 // Convert search results to Video format for HomePage compatibility
 const convertSearchResultToVideo = (
   result: YouTubeSearchResult | GoogleSearchResult,
-  index,
+  index: number,
 ): Video => {
   // Generate a unique ID that preserves the source information
   const videoId = result.id.startsWith('youtube-') || result.id.startsWith('google-search-')
@@ -102,7 +102,7 @@ export function useTrendingSearch(): UseInitialSearchResult {
       // Use home page specific search logic (YouTube API first in hybrid mode)
       const combinedResults = await searchForHomePage(
         initialKeyword,
-        (query) => VideoService.searchVideos(query).then(result => result.videos),
+        (query: any) => VideoService.searchVideos(query: any).then(result => result.videos),
       );
 
       // Combine all results and convert to Video format

@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
   BellIcon,
@@ -18,7 +18,7 @@ import {
   Squares2X2Icon,
   ListBulletIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
@@ -208,7 +208,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     return filtered;
   };
 
-  const toggleNotifications = (channelId) => {
+  const toggleNotifications = (channelId: any) => {
     setSubscriptions(prev => prev.map(sub =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
@@ -223,7 +223,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
   };
 
-  const handleUnsubscribe = (channelId) => {
+  const handleUnsubscribe = (channelId: any) => {
     setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
@@ -232,7 +232,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     setShowUnsubscribeModal(null);
   };
 
-  const toggleBulkSelection = (channelId) => {
+  const toggleBulkSelection = (channelId: any) => {
     setSelectedSubscriptions(prev => {
       const newSet = new Set(prev);
       if (newSet.has(channelId)) {

@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from 'react';
 import { liveStreamService } from '@/services/livestreamAPI';
 import { logger } from '@/utils/logger';
 import type { SuperChat } from '@/types/livestream';
-// TODO: Fix import - import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon, HeartIcon, SparklesIcon, TrophyIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 interface SuperChatPanelProps {
   streamId: string;
@@ -70,7 +70,7 @@ return;
     }
   };
 
-  const getTierColor = (amount) => {
+  const getTierColor = (amount: any) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -78,7 +78,7 @@ return;
     return tier?.color || 'bg-blue-500';
   };
 
-  const getTierDuration = (amount) => {
+  const getTierDuration = (amount: any) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -86,7 +86,7 @@ return;
     return tier?.duration || 30;
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

@@ -1,18 +1,17 @@
 import { User } from '../types';
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-// TODO: Fix import - import { User, MoreVertical } from 'lucide-react';
+import { User, MoreVertical } from 'lucide-react';
 
-// TODO: Fix import - import { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/atoms/Button';
 
 import { formatNumber, getTimeAgo, cn } from '@/lib/utils';
 import type { VideoCardProps as VideoCardPropsBase } from '@/types';
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 // Simple image component since we're not using Next.js
 const Image = ({ src, alt, width, height, className, fill, sizes, ...props }: {sizes: any; fill: any; className: any; height: number; width: number; alt: any; src: any}) => {
@@ -29,7 +28,7 @@ const Image = ({ src, alt, width, height, className, fill, sizes, ...props }: {s
 };
 
 export interface VideoCardProps extends Omit<VideoCardPropsBase, 'onMoreClick'> {
-  onMoreClick: (videoId) => void;
+  onMoreClick: (videoId: any) => void;
 }
 
 export const VideoCard = ({
@@ -131,7 +130,7 @@ export const VideoCard = ({
 };
 
 // Helper function to format duration (moved from utils.ts for self-containment)
-function formatDuration(seconds): string {
+function formatDuration(seconds: any): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
@@ -150,3 +149,4 @@ declare global {
     }
   }
 }
+

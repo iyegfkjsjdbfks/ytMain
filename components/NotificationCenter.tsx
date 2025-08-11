@@ -7,11 +7,11 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
+import { BellIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
@@ -204,7 +204,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     return names[Math.floor(Math.random() * names.length)] || 'Unknown Channel';
   };
 
-  const markAsRead = (notificationId) => {
+  const markAsRead = (notificationId: any) => {
     const updatedNotifications = notifications.map(n =>
       n.id === notificationId ? { ...n, isRead: true } : n,
     );
@@ -220,7 +220,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
   };
 
-  const deleteNotification = (notificationId) => {
+  const deleteNotification = (notificationId: any) => {
     const notification = notifications.find(n => n.id === notificationId);
     const updatedNotifications = notifications.filter((n) => n.id !== notificationId);
     setNotifications(updatedNotifications);

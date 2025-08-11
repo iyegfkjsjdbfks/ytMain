@@ -1,8 +1,8 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-// TODO: Fix import - import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon, PlayIcon } from '@heroicons/react/24/outline';
 
 import { createComponentError } from '@/utils/errorUtils';
 

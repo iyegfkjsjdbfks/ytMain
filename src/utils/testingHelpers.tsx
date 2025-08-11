@@ -1,14 +1,13 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { BrowserRouter } from 'react-router-dom';
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-// TODO: Fix import - import type { ReactElement, ReactNode } from 'react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import type { ReactElement, ReactNode } from 'react';
+import userEvent from '@testing-library/user-event';
 import type { Video, Channel, Comment } from '../types/core';
-// TODO: Fix import - import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 
 
@@ -161,12 +160,12 @@ export const checkAccessibility = async (_container: HTMLElement) => {
 
 // User interaction helpers
 export const userInteraction = {
-  clickVideo: async (videoTitle) => {
+  clickVideo: async (videoTitle: any) => {
     const video = screen.getByRole('button', { name: new RegExp(videoTitle, 'i') });
     await userEvent.click(video);
   },
 
-  searchFor: async (query) => {
+  searchFor: async (query: any) => {
     const searchInput = screen.getByRole('searchbox');
     await userEvent.clear(searchInput);
     await userEvent.type(searchInput, query);
@@ -178,7 +177,7 @@ export const userInteraction = {
     await userEvent.click(likeButton);
   },
 
-  addComment: async (content) => {
+  addComment: async (content: any) => {
     const commentInput = screen.getByRole('textbox', { name: /add.*comment/i });
     await userEvent.clear(commentInput);
     await userEvent.type(commentInput, content);
@@ -197,17 +196,17 @@ export const userInteraction = {
 export const mockApiResponses = {
   videos: {
     trending: [createMockVideo({ id: '1', title: 'Trending Video 1' })],
-    search: (query) => [
+    search: (query: any) => [
       createMockVideo({ id: '2', title: `Search Result for ${query}` }),
     ],
   },
 
   channels: {
-    byId: (id) => createMockChannel({ id, name: `Channel ${id}` }),
+    byId: (id: string) => createMockChannel({ id: string, name: `Channel ${id: string}` }),
   },
 
   comments: {
-    byVideoId: (videoId) => [
+    byVideoId: (videoId: any) => [
       createMockComment({ id: '1', content: `Comment for video ${videoId}` }),
     ],
   },
@@ -279,3 +278,4 @@ declare global {
     }
   }
 }
+

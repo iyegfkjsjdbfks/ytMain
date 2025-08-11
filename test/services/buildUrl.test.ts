@@ -1,10 +1,10 @@
-// TODO: Fix import - import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 // We need to access the private buildUrl method, so we'll test it through reflection
 // or by temporarily exposing it for testing
 class TestableYouTubeService {
   // Copy the exact buildUrl implementation from the original service
-  public buildUrl(endpoint, params: Record<string, string>): string {
+  public buildUrl(endpoint: any, params: Record<string, string>): string {
     // Use proxy endpoint in development to avoid CORS issues
     const baseUrl = import.meta.env.MODE === 'development'
       ? `${window.location.origin  }/api/youtube/v3/`

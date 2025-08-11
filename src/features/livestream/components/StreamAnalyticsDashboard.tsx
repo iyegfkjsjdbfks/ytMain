@@ -1,10 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
+import React from "react";
+import { useState, useEffect, useCallback, useMemo, type FC, type ReactNode } from 'react';
 import { conditionalLogger } from '../../../utils/conditionalLogger';
 import { createComponentError } from '../../../utils/errorUtils';
 import type { LiveStreamStats } from '../../../types/livestream';
-// TODO: Fix import - import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDollarIcon, ClockIcon, SignalIcon, ArrowTrendingUpIcon as TrendingUpIcon } from '@heroicons/react/24/outline';
 
 /**
  * Props for the StreamAnalyticsDashboard component
@@ -65,7 +65,7 @@ type MetricType = 'viewers' | 'engagement' | 'revenue';
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
-const formatNumber = (num): string => {
+const formatNumber = (num: any): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;
   }
@@ -75,7 +75,7 @@ const formatNumber = (num): string => {
   return num.toString();
 };
 
-const formatDuration = (seconds): string => {
+const formatDuration = (seconds: any): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
@@ -269,7 +269,7 @@ interface TopMomentsProps {
   moments: AnalyticsData['topMoments'] }
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
-  const getIcon = (type): React.ReactNode => {
+  const getIcon = (type: any): React.ReactNode => {
     switch (type) {
       case 'peak_viewers':
         return <EyeIcon className="h-5 w-5 text-blue-500" />;
@@ -304,7 +304,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
-        {moments.map((moment) => (
+        {moments.map((moment: any) => (
           <div
             key={`moment-${moment.type}-${moment.timestamp}`}
             className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
@@ -344,7 +344,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographi
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Top Countries</h4>
         <div className="space-y-3">
-          {demographics.countries.slice(0, 3).map((country) => (
+          {demographics.countries.slice(0, 3).map((country: any) => (
             <div key={`country-${country.name}`} className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 {country.name}
@@ -368,7 +368,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographi
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Devices</h4>
         <div className="grid grid-cols-2 gap-3">
-          {demographics.devices.map((device) => (
+          {demographics.devices.map((device: any) => (
             <div
               key={`device-${device.type}`}
               className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"

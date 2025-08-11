@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 import type { Video } from '../types';
 import VideoCard from './VideoCard';
 
@@ -49,7 +49,7 @@ const VideoList: React.FC<VideoListProps> = ({
   if (layout === 'list') {
     return (
       <div className="space-y-4">
-        {videos.map((video) => (
+        {videos.map((video: any) => (
           <VideoCard
             key={video.id}
             video={video}
@@ -68,7 +68,7 @@ const VideoList: React.FC<VideoListProps> = ({
         ? 'sm:grid-cols-1'
         : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
     }`}>
-      {videos.map((video) => (
+      {videos.map((video: any) => (
         <VideoCard
           key={video.id}
           video={video}

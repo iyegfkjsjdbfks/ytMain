@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,15 +8,14 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import {
   UserGroupIcon,
   VideoCameraIcon,
   ClockIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid';
 
 interface SubscriptionStatsProps {
   totalChannels: number;
@@ -117,3 +116,4 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
 };
 
 export default SubscriptionStats;
+

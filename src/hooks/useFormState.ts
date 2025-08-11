@@ -1,5 +1,5 @@
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useCallback } from 'react';
+import React from "react";
+import { useState, useCallback } from 'react';
 
 interface UseFormStateOptions<T> {
   initialValues: T;
@@ -12,9 +12,9 @@ interface UseFormStateReturn<T> {
   errors: Partial<Record<keyof T, string>>;
   isSubmitting: boolean;
   isValid: boolean;
-  setValue: (field: keyof T, value) => void;
+  setValue: (field: keyof T, value: any) => void;
   setValues: (values: Partial<T>) => void;
-  setError: (field: keyof T, error) => void;
+  setError: (field: keyof T, error: Error) => void;
   clearError: (field: keyof T) => void;
   clearErrors: () => void;
   handleSubmit: (e?: React.FormEvent) => Promise<void>;
@@ -33,7 +33,7 @@ export function useFormState<T extends Record<string, any>>({
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const setValue = useCallback((field: keyof T, value) => {
+  const setValue = useCallback((field: keyof T, value: any) => {
     setValuesState(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -49,7 +49,7 @@ export function useFormState<T extends Record<string, any>>({
     setValuesState(prev => ({ ...prev, ...newValues }));
   }, []);
 
-  const setError = useCallback((field: keyof T, error) => {
+  const setError = useCallback((field: keyof T, error: Error) => {
     setErrors(prev => ({ ...prev, [field]: error }));
   }, []);
 

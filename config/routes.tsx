@@ -1,17 +1,17 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
-// TODO: Fix import - import { lazy } from 'react';
+import React from 'react';
+import { lazy } from 'react';
 
 import AccountLayout from '../components/AccountLayout';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import StudioLayout from '../components/StudioLayout';
-// TODO: Fix import - import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
 
-// TODO: Fix import - import type { RouteObject } from 'react-router-dom';
+import type { RouteObject } from 'react-router-dom';
 
 // Lazy load secondary components for better performance
 // HomePage is loaded directly for faster initial render
@@ -290,3 +290,4 @@ declare global {
     }
   }
 }
+

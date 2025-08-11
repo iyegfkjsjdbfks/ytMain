@@ -7,15 +7,15 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
 interface PlaylistEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialTitle: string;
   initialDescription: string;
-  onSaveChanges: (title, description) => Promise<void>;
+  onSaveChanges: (title: any, description: any) => Promise<void>;
 }
 
 const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({

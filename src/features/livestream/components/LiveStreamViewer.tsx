@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Import statements fixed
 import { liveStreamService } from '../services/livestreamAPI';
@@ -7,7 +7,7 @@ import { liveStreamService } from '../services/livestreamAPI';
 interface LiveStreamViewerProps {
   streamId: string;
   autoplay?: boolean;
-  onViewerCountChange?: (count) => void;
+  onViewerCountChange?: (count: any) => void;
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({

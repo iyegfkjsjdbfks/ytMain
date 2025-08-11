@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 
 interface ImageWithFallbackProps {
   src: string;
@@ -103,7 +103,7 @@ return fallbackSrc;
     onLoad?.();
   };
 
-  const generatePlaceholderDataUrl = (w, h, text): string => {
+  const generatePlaceholderDataUrl = (w: any, h: any, text: any): string => {
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;

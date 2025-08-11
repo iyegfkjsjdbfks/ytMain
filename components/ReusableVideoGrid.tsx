@@ -7,7 +7,7 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import { VideoGridSkeleton } from './LoadingStates';
 import OptimizedVideoCard from './OptimizedVideoCard';
@@ -137,7 +137,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 
   return (
     <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
-      {videos.map((video) => (
+      {videos.map((video: any) => (
         <VideoComponent
           key={video.id}
           video={video}

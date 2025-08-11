@@ -1,17 +1,17 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { FixedSizeList as List } from 'react-window';
+import React from "react";
+import { FixedSizeList as List } from 'react-window';
 
-// TODO: Fix import - import { memo, useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 
 import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
   comments: Comment;
-  onReply: (commentId, content) => void;
-  onLike: (commentId) => void;
-  onDislike: (commentId) => void;
+  onReply: (commentId: any, content: any) => void;
+  onLike: (commentId: any) => void;
+  onDislike: (commentId: any) => void;
   className?: string;
   height?: number;
   itemHeight?: number;
@@ -22,8 +22,8 @@ interface CommentItemProps {
   style: React.CSSProperties;
   data: {
     comments: Comment;
-    onReply: (commentId, content) => void;
-    onLike: (commentId) => void; onDislike: (commentId) => void
+    onReply: (commentId: any, content: any) => void;
+    onLike: (commentId: any) => void; onDislike: (commentId: any) => void
   };
 }
 

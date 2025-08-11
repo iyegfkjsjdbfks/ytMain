@@ -1,7 +1,7 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 // @ts-nocheck
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { realVideos } from '../services/realVideoService';
 import { getYouTubeSearchProvider } from '../services/settingsService';
@@ -17,7 +17,7 @@ interface RecommendationEngineProps {
   currentVideo?: Video;
   currentVideoId?: string;
   maxRecommendations?: number;
-  onVideoSelect?: (videoId) => void;
+  onVideoSelect?: (videoId: any) => void;
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -207,7 +207,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
           const remaining = availableVideos.filter(
-            video => !recommended.find(r => r.id === video.id),
+            video => !recommended.find((r: any) => r.id === video.id),
           );
           recommended = [...recommended, ...remaining];
         }

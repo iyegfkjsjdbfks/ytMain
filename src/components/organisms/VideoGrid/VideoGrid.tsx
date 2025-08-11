@@ -1,13 +1,13 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 import { cn } from '@/lib/utils';
 
 import { VideoCard } from '@/components/molecules/VideoCard';
 import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 
 export interface VideoGridProps extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
-  onVideoMoreClick: (videoId) => void;
+  onVideoMoreClick: (videoId: any) => void;
 }
 
 export const VideoGrid = ({
@@ -39,7 +39,7 @@ export const VideoGrid = ({
         className,
       )}
     >
-      {videos.map((video) => (
+      {videos.map((video: any) => (
         <VideoCard
           key={video.id}
           {...video}

@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useMemo, useCallback, useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { FixedSizeGrid as Grid } from 'react-window';
+import { FixedSizeGrid as Grid } from 'react-window';
 
 import { cn } from '../utils/cn';
 
@@ -26,7 +26,7 @@ interface VirtualizedVideoGridProps {
   hasMore?: boolean;
   onLoadMore?: () => void;
   onVideoClick?: (video: Video) => void;
-  onChannelClick?: (channelId) => void;
+  onChannelClick?: (channelId: any) => void;
   className?: string;
   cardSize?: 'sm' | 'md' | 'lg';
   showChannel?: boolean;
@@ -38,7 +38,7 @@ interface GridItemProps {
   style: React.CSSProperties, data: {
     videos: Video, columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId) => void;
+    onChannelClick?: (channelId: any) => void;
     cardSize: 'sm' | 'md' | 'lg', showChannel: boolean; showDescription: boolean
   };
 }

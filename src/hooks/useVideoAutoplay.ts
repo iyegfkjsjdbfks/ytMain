@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface UseVideoAutoplayProps {
   isIntersecting: boolean;
@@ -10,7 +10,7 @@ interface UseVideoAutoplayProps {
     pause: () => void;
     unmute: () => void;
   };
-  setIsManuallyPaused: (paused) => void;
+  setIsManuallyPaused: (paused: any) => void;
   threshold?: number; // Intersection threshold for autoplay
   enableAutoplay?: boolean; // Allow disabling autoplay entirely
   unmuteOnAutoplay?: boolean; // Whether to unmute video when autoplay starts

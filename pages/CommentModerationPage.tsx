@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
 
-// TODO: Fix import - import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon, CheckIcon, ExclamationTriangleIcon, EyeSlashIcon, TrashIcon, FlagIcon } from '@heroicons/react/24/outline';
 
 import { getVideos, getCommentsByVideoId } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
@@ -102,7 +102,7 @@ const CommentModerationPage: React.FC = () => {
     setFilteredComments(filtered);
   }, [comments, filter, searchQuery, sortBy]);
 
-  const handleSelectComment = (commentId) => {
+  const handleSelectComment = (commentId: any) => {
     const newSelected = new Set(selectedComments);
     if (newSelected.has(commentId)) {
       newSelected.delete(commentId);
@@ -142,7 +142,7 @@ const CommentModerationPage: React.FC = () => {
     setShowBulkActions(false);
   };
 
-  const handleSingleAction = (commentId, action: 'approve' | 'spam' | 'hide' | 'delete') => {
+  const handleSingleAction = (commentId: any, action: 'approve' | 'spam' | 'hide' | 'delete') => {
     setComments(prevComments =>
       prevComments.map(comment => {
         if (comment.id === commentId) {
@@ -159,7 +159,7 @@ const CommentModerationPage: React.FC = () => {
     );
   };
 
-  const getStatusBadge = (status, flaggedReason?: string) => {
+  const getStatusBadge = (status: any, flaggedReason?: string) => {
     const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
     if (flaggedReason) {
@@ -227,7 +227,7 @@ return comments.filter((c) => c.flaggedReason).length;
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Filter Tabs */}
           <div className="flex flex-wrap gap-2">
-            {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType) => (
+            {(['all', 'pending', 'approved', 'spam', 'hidden', 'flagged'] as FilterType).map((filterType: any) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}

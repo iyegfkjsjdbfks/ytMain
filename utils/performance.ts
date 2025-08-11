@@ -49,7 +49,7 @@ class PerformanceMonitor {
     }
   }
 
-  startMeasure(name, metadata?: Record<string, any>): void {
+  startMeasure(name: any, metadata?: Record<string, any>): void {
     if (!this.isEnabled) {
 return;
 }
@@ -67,11 +67,11 @@ return;
     }
   }
 
-  hasMetric(name): boolean {
+  hasMetric(name: any): boolean {
     return this.metrics.has(name);
   }
 
-  endMeasure(name): number | null {
+  endMeasure(name: any): number | null {
     if (!this.isEnabled) {
 return null;
 }
@@ -96,7 +96,7 @@ return null;
     }
 
     // Log slow operations with different thresholds for different operation types
-    const getThreshold = (operationName): number => {
+    const getThreshold = (operationName: any): number => {
       if (operationName.startsWith('image-load')) {
 return 2000;
 } // 2s for images
@@ -126,7 +126,7 @@ return 1500;
     }
   }
 
-  getAverageTime(name): number | null {
+  getAverageTime(name: any): number | null {
     const metrics = this.getMetrics().filter((m) => m.name === name);
     if (metrics.length === 0) {
 return null;
@@ -170,7 +170,7 @@ return;
   }
 
   disconnect(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer: any) => observer.disconnect());
     this.observers = [];
   }
 }
@@ -179,7 +179,7 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React Hook for component performance monitoring
-export function usePerformanceMonitor(componentName) {
+export function usePerformanceMonitor(componentName: any) {
   const startRender = () => {
     performanceMonitor.startMeasure(`${componentName}-render`);
   };
@@ -191,7 +191,7 @@ export function usePerformanceMonitor(componentName) {
       : null;
   };
 
-  const measureAsync = async <T>(operationName, operation: () => Promise<T>): Promise<T> => {
+  const measureAsync = async <T>(operationName: any, operation: () => Promise<T>): Promise<T> => {
     const fullName = `${componentName}-${operationName}`;
     performanceMonitor.startMeasure(fullName);
     try {
@@ -208,7 +208,7 @@ export function usePerformanceMonitor(componentName) {
     }
   };
 
-  const measureSync = <T>(operationName, operation: () => T): T => {
+  const measureSync = <T>(operationName: any, operation: () => T): T => {
     const fullName = `${componentName}-${operationName}`;
     performanceMonitor.startMeasure(fullName);
     try {
@@ -240,7 +240,7 @@ export function withPerformanceMonitoring<P extends object>(
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const MonitoredComponent = React.forwardRef((props: P, ref) => {
+  const MonitoredComponent = React.forwardRef((props: P, ref: any) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
 
     React.useEffect(() => {
@@ -259,8 +259,8 @@ export function withPerformanceMonitoring<P extends object>(
 }
 
 // Utility functions
-export const measureRenderTime = (componentName) => {
-  return (_target, propertyKey, descriptor: PropertyDescriptor) => {
+export const measureRenderTime = (componentName: any) => {
+  return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args) {

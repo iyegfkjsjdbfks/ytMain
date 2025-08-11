@@ -1,7 +1,7 @@
 
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -15,15 +15,14 @@ declare namespace React {
   }
 }
 
-// TODO: Fix import - import { useState } from 'react';
+import { useState } from 'react';
 
-// TODO: Fix import - import { Link, useNavigate } from 'react-router-dom';
 
 import Button from '../components/forms/Button';
 import Input from '../components/forms/Input';
 import YouTubeLogo from '../components/icons/YouTubeLogo';
 import { useAuth } from '../contexts/AuthContext';
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -273,3 +272,4 @@ declare global {
     }
   }
 }
+

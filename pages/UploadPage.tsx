@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -13,9 +13,9 @@ declare namespace React {
     (props: P): JSX.Element;
   }
 }
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -26,7 +26,6 @@ import {
   XMarkIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
@@ -184,10 +183,10 @@ return null;
   };
 
 
-  const removeTag = (tagToRemove) => {
+  const removeTag = (tagToRemove: any) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
     }));
   };
 
@@ -207,7 +206,7 @@ return null;
     navigate('/studio');
   };
 
-  const getVisibilityIcon = (visibility) => {
+  const getVisibilityIcon = (visibility: any) => {
     switch (visibility) {
       case 'public': return <GlobeAltIcon className="w-4 h-4" />;
       case 'unlisted': return <EyeIcon className="w-4 h-4" />;
@@ -377,7 +376,7 @@ return null;
                         Tags
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {metadata.tags.map(tag => (
+                        {metadata.tags.map((tag: string) => (
                           <span
                             key={tag}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
@@ -555,3 +554,4 @@ declare global {
     }
   }
 }
+

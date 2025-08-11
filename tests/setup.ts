@@ -2,8 +2,8 @@
  * Comprehensive testing setup and configuration
  */
 
-// TODO: Fix import - import { cleanup } from '@testing-library/react';
-// TODO: Fix import - import { beforeAll, afterAll, beforeEach, afterEach, vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { beforeAll, afterAll, beforeEach, afterEach, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
 // // import { performanceMonitor } from '../utils/performanceMonitor'; // Unused import // Unused import
@@ -258,7 +258,7 @@ class TestPerformanceTracker {
     testDuration: number;
   }>();
 
-  static startTest(testName): () => void {
+  static startTest(testName: any): () => void {
     const startTime = performance.now();
     const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
@@ -274,7 +274,7 @@ class TestPerformanceTracker {
     };
   }
 
-  static trackRender(testName, renderTime): void {
+  static trackRender(testName: any, renderTime: any): void {
     const metrics = this.testMetrics.get(testName);
     if (metrics) {
       metrics.renderTime = renderTime;
@@ -458,7 +458,7 @@ export const testHelpers = {
   },
 
   // API mocking
-  mockApiSuccess: (data) => {
+  mockApiSuccess: (data: any) => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
@@ -475,21 +475,21 @@ export const testHelpers = {
   },
 
   // Storage helpers
-  setLocalStorageItem: (key, value) => {
+  setLocalStorageItem: (key: string, value: any) => {
     mockLocalStorage.setItem(key, value);
   },
 
-  getLocalStorageItem: (key) => {
+  getLocalStorageItem: (key: string) => {
     return mockLocalStorage.getItem(key);
   },
 
   // Async helpers
   waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
 
-  waitForTime: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
+  waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any)),
 
   // Error boundary testing
-  triggerError: (component) => {
+  triggerError: (component: any) => {
     const error = new Error('Test error');
     component.componentDidCatch?.(error, { componentStack: 'test stack' });
     throw error;
@@ -522,19 +522,19 @@ export const testHelpers = {
       return testHelpers.waitForNextTick();
     },
 
-    type: async (element: HTMLInputElement, text) => {
+    type: async (element: HTMLInputElement, text: any) => {
       element.focus();
       element.value = text;
       element.dispatchEvent(new Event('input', { bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    keyPress: (element: HTMLElement, key) => {
+    keyPress: (element: HTMLElement, key: string) => {
       element.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    scroll: (element: HTMLElement, scrollTop) => {
+    scroll: (element: HTMLElement, scrollTop: any) => {
       element.scrollTop = scrollTop;
       element.dispatchEvent(new Event('scroll', { bubbles: true }));
       return testHelpers.waitForNextTick();

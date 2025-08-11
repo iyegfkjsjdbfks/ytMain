@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from 'react';
 import { liveStreamService } from '../../../services/livestreamAPI';
 import { logger } from '../../../utils/logger';
 import type { LiveStream } from '../../../types/livestream';
-// TODO: Fix import - import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, StopIcon, PencilIcon, TrashIcon, EyeIcon, CalendarIcon, ClockIcon, VideoCameraIcon, ChartBarIcon, Cog6ToothIcon, DocumentDuplicateIcon, ShareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 
 interface StreamManagementDashboardProps {
   className?: string;
@@ -334,7 +334,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     }
   };
 
-  const handleBulkAction = async (action) => {
+  const handleBulkAction = async (action: any) => {
     try {
       switch (action) {
         case 'delete':
@@ -402,7 +402,7 @@ return true;
     }
   });
 
-  const formatNumber = (num) => {
+  const formatNumber = (num: any) => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -412,7 +412,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     if (hours > 0) {

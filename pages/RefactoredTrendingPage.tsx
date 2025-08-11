@@ -1,5 +1,5 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import ReusableVideoGrid from '../components/ReusableVideoGrid';
 import StandardPageLayout from '../components/StandardPageLayout';
@@ -21,7 +21,7 @@ const RefactoredTrendingPage: React.FC = () => {
   const { data: unifiedVideos, loading, error } = useVideosData('trending');
 
   // Convert UnifiedVideoMetadata to Video format for compatibility
-  const videos: Video[] = unifiedVideos ? unifiedVideos.map(video => ({
+  const videos: Video[] = unifiedVideos ? unifiedVideos.map((video: any) => ({
     id: video.id,
     title: video.title,
     description: video.description,

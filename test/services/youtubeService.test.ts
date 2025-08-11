@@ -1,4 +1,4 @@
-// TODO: Fix import - import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { youtubeService } from '../../src/services/api/youtubeService';
 

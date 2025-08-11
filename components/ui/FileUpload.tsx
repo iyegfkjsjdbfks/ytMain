@@ -7,17 +7,17 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useRef, useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useRef, useState } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;
   multiple?: boolean;
   maxSize?: number; // in bytes
   onFileSelect: (files: File) => void;
-  onFileRemove?: (index) => void;
+  onFileRemove?: (index: number) => void;
   disabled?: boolean;
   className?: string;
   label?: string;
@@ -88,7 +88,7 @@ return;
     }
   };
 
-  const formatFileSize = (bytes): string => {
+  const formatFileSize = (bytes: any): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -153,7 +153,7 @@ return '0 Bytes';
             Selected Files ({files.length})
           </h4>
           <div className="space-y-2">
-            {files.map((file, index) => (
+            {files.map((file: any, index: number) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"

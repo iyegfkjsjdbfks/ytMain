@@ -17,8 +17,8 @@ declare global {
  * - Feature flag management
  */
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
 import { deploymentAutomation } from '../utils/deploymentAutomation';
 import { intelligentCodeMonitor } from '../utils/intelligentCodeMonitor';
@@ -182,7 +182,7 @@ const DevOpsDashboard: React.FC = () => {
   }, []);
 
   // Get severity color
-  const getSeverityColor = (severity) => {
+  const getSeverityColor = (severity: any) => {
     switch (severity) {
       case 'critical': return 'text-red-600 bg-red-100';
       case 'high': return 'text-orange-600 bg-orange-100';
@@ -192,7 +192,7 @@ const DevOpsDashboard: React.FC = () => {
   };
 
   // Get score color
-  const getScoreColor = (score) => {
+  const getScoreColor = (score: any) => {
     if (score >= 90) {
 return 'text-green-600';
 }

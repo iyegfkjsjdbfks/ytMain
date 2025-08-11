@@ -14,13 +14,13 @@ declare namespace React {
   }
 }
 
-// TODO: Fix import - import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';
 import { useTrendingSearch } from '../src/hooks';
 import { getInitialSearchKeyword } from '../services/settingsService';
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 import type { Video } from '../types';
 
@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
 
-  const handleSelectCategory = useCallback((category) => {
+  const handleSelectCategory = useCallback((category: any) => {
     setSelectedCategory(category);
     window.scrollTo(0, 0);
   }, []);
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video) => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [

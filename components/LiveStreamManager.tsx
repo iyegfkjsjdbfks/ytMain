@@ -18,11 +18,11 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
+import { PlayIcon, PauseIcon, StopIcon, MicrophoneIcon, VideoCameraIcon, ChatBubbleLeftIcon, EyeIcon, HeartIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon as MicrophoneIconSolid, VideoCameraIcon as VideoCameraIconSolid } from '@heroicons/react/24/solid';
 
 interface LiveStreamSettings {
   title: string;
@@ -300,7 +300,7 @@ return;
     setNewMessage('');
   };
 
-  const formatDuration = (seconds): string => {
+  const formatDuration = (seconds: any): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;

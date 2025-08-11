@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, memo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, memo } from 'react';
+import React from 'react';
 
 import { performanceMonitor } from '../utils/performance';
 
@@ -66,7 +66,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
     }
   };
 
-  const getTypeColor = (type) => {
+  const getTypeColor = (type: any) => {
     switch (type) {
       case 'render':
         return 'text-blue-600';

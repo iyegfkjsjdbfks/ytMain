@@ -1,9 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { ErrorBoundary } from 'react-error-boundary';
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState  } from 'react';
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import React from "react";
+import { ErrorBoundary } from 'react-error-boundary';
+import React from "react";
+import { useState  } from 'react';
+import type * as React from 'react';
 import { getYouTubeVideoId, isYouTubeUrl } from '../lib/youtube-utils';
 import YouTubePlayerExample from '../components/examples/YouTubePlayerExample';
 
@@ -186,3 +185,4 @@ declare global {
     }
   }
 }
+

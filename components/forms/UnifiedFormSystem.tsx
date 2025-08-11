@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { createContext, useContext, useCallback, useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { createContext, useContext, useCallback, useState } from 'react';
+import React from 'react';
 
 import { cn } from '../../utils/cn';
 import { UnifiedButton } from '../ui/UnifiedButton';
@@ -18,10 +18,10 @@ interface FormContextValue {
   errors: Record<string, string>;
   touched: Record<string, boolean>;
   values: Record<string, any>;
-  setFieldValue: (name, value) => void;
-  setFieldError: (name, error) => void;
-  setFieldTouched: (name, touched) => void;
-  validateField: (name) => void;
+  setFieldValue: (name: any, value: any) => void;
+  setFieldError: (name: any, error: Error) => void;
+  setFieldTouched: (name: any, touched: any) => void;
+  validateField: (name: any) => void;
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -30,7 +30,7 @@ const FormContext = createContext<FormContextValue | null>(null);
 interface FormProviderProps {
   children: React.ReactNode;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value) => string | undefined>;
+  validationSchema?: Record<string, (value: any) => string | undefined>;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
 }
 
@@ -43,7 +43,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const setFieldValue = useCallback((name, value) => {
+  const setFieldValue = useCallback((name: any, value: any) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -51,15 +51,15 @@ export const FormProvider: React.FC<FormProviderProps> = ({
     }
   }, [errors]);
 
-  const setFieldError = useCallback((name, error) => {
+  const setFieldError = useCallback((name: any, error: Error) => {
     setErrors(prev => ({ ...prev, [name]: error }));
   }, []);
 
-  const setFieldTouched = useCallback((name, touched) => {
+  const setFieldTouched = useCallback((name: any, touched: any) => {
     setTouched(prev => ({ ...prev, [name]: touched }));
   }, []);
 
-  const validateField = useCallback((name) => {
+  const validateField = useCallback((name: any) => {
     const validator = validationSchema[name];
     if (validator) {
       const error = validator(values[name]);
@@ -155,7 +155,7 @@ interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   rightIcon?: React.ReactNode;
   variant?: 'default' | 'filled' | 'outline';
   inputSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value) => void;
+  onChange?: (value: any) => void;
 }
 
 const inputVariantClasses = {
@@ -268,7 +268,7 @@ interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
   variant?: 'default' | 'filled' | 'outline';
   textareaSize?: 'sm' | 'md' | 'lg';
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-  onChange?: (value) => void;
+  onChange?: (value: any) => void;
 }
 
 const textareaSizeClasses = {
@@ -363,7 +363,7 @@ interface UnifiedSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   placeholder?: string;
   variant?: 'default' | 'filled' | 'outline';
   selectSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value) => void;
+  onChange?: (value: any) => void;
 }
 
 export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
@@ -461,7 +461,7 @@ interface UnifiedFormProps {
   children: React.ReactNode;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value) => string | undefined>;
+  validationSchema?: Record<string, (value: any) => string | undefined>;
   className?: string;
 }
 

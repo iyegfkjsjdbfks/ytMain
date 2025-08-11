@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState, useEffect  } from 'react';
+import type * as React from 'react';
+import {  useState, useEffect  } from 'react';
 
-// TODO: Fix import - import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
+import { FolderIcon, CalendarIcon, EyeIcon, ClockIcon, PencilIcon, TrashIcon, DocumentDuplicateIcon, ShareIcon, ChartBarIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline';
 
 import { getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';
@@ -100,7 +100,7 @@ const ContentManagerPage: React.FC = () => {
     setFilteredContent(filtered);
   }, [content, filter, searchQuery, sortBy]);
 
-  const handleSelectItem = (itemId) => {
+  const handleSelectItem = (itemId: any) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(itemId)) {
       newSelected.delete(itemId);
@@ -193,7 +193,7 @@ return;
     setScheduleTime('');
   };
 
-  const getStatusBadge = (status, scheduledDate?: string) => {
+  const getStatusBadge = (status: any, scheduledDate?: string) => {
     const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
     switch (status) {
@@ -264,7 +264,7 @@ return content.length;
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Filter Tabs */}
           <div className="flex flex-wrap gap-2">
-            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType) => (
+            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType: any) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}

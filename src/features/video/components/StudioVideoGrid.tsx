@@ -1,20 +1,19 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState  } from 'react';
+import React from "react";
+import { useState  } from 'react';
 
-// TODO: Fix import - import { Link } from 'react-router-dom';
-// TODO: Fix import - import type * as React from 'react';
+import { Link } from 'react-router-dom';
+import type * as React from 'react';
 import type { Video, VideoVisibility } from '../types';
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 interface StudioVideoGridProps {
   videos: Video;
   title?: string;
   loading?: boolean;
   emptyMessage?: string;
-  onEdit?: (videoId) => void;
-  onDelete?: (videoId) => void;
-  onVisibilityChange?: (videoId, visibility: VideoVisibility) => void;
+  onEdit?: (videoId: any) => void;
+  onDelete?: (videoId: any) => void;
+  onVisibilityChange?: (videoId: any, visibility: VideoVisibility) => void;
 }
 
 /**
@@ -34,7 +33,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const [sortBy, setSortBy] = useState<'date' | 'views' | 'comments'>('date');
   const [filterVisibility, setFilterVisibility] = useState<VideoVisibility | 'all'>('all');
 
-  const handleVideoSelect = (videoId, selected) => {
+  const handleVideoSelect = (videoId: any, selected: any) => {
     const newSelection = new Set(selectedVideos);
 
     if (selected) {
@@ -46,9 +45,9 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     setSelectedVideos(newSelection);
   };
 
-  const handleSelectAll = (selected) => {
+  const handleSelectAll = (selected: any) => {
     if (selected) {
-      const allIds = videos.map(video => video.id);
+      const allIds = videos.map((video: any) => video.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -69,7 +68,7 @@ return;
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: any) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -81,7 +80,7 @@ return;
   // Filter videos based on visibility
   const filteredVideos = filterVisibility === 'all'
     ? videos
-    : videos.filter((video) => video.visibility === filterVisibility);
+    : videos.filter((video: any) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {
@@ -312,3 +311,4 @@ declare global {
     }
   }
 }
+

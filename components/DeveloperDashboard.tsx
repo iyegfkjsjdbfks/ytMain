@@ -13,8 +13,8 @@ declare global {
  * feature flags, workflow status, and continuous improvement insights.
  */
 
-// TODO: Fix import - import { useState, useEffect, useMemo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 
 import { advancedAPM } from '../utils/advancedMonitoring';
 import { codeAnalysisEngine } from '../utils/codeAnalysisEngine';
@@ -272,7 +272,7 @@ export const DeveloperDashboard: React.FC = () => {
       });
     }
 
-    return alerts.sort((a, b) => b.severity - a.severity);
+    return alerts.sort((a: any, b: any) => b.severity - a.severity);
   };
 
   // Computed values

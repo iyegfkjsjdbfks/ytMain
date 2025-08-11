@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 /**
  * Custom hook for storing and managing Sets in localStorage
@@ -11,7 +11,7 @@
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
 export function useLocalStorageSet<T>(
-  key,
+  key: string,
   initialValue: Set<T> = new Set(),
 ): [
   Set<T>,
@@ -102,7 +102,7 @@ export function useLocalStorageSet<T>(
  * Similar to useState but for Sets stored in localStorage
  */
 export function useLocalStorageSetState<T>(
-  key,
+  key: string,
   initialValue: Set<T> = new Set(),
 ): [Set<T>, (updater: (prev: Set<T>) => Set<T>) => void] {
   const [items, setItems] = useState<T[]>(() => {

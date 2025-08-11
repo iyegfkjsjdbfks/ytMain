@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -9,11 +9,10 @@ declare global {
   }
 }
 
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback, memo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { XMarkIcon } from '@heroicons/react/24/solid'; // For remove button
 
 import {
   getSearchSuggestions,
@@ -49,7 +48,7 @@ const SearchBar: React.FC = memo(() => {
     }
   }, []);
 
-  const fetchSuggestionsDebounced = useCallback(async (currentQuery) => {
+  const fetchSuggestionsDebounced = useCallback(async (currentQuery: any) => {
     if (currentQuery.trim().length > 1) {
       const fetched = await getSearchSuggestions(currentQuery);
       setSuggestions(fetched);
@@ -73,7 +72,7 @@ const SearchBar: React.FC = memo(() => {
     return () => clearTimeout(debounceTimer);
   }, [query, fetchSuggestionsDebounced]);
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = (searchQuery: any) => {
     if (searchQuery.trim()) {
       const trimmedQuery = searchQuery.trim();
       setQuery(trimmedQuery);
@@ -93,7 +92,7 @@ inputRef.current.blur();
     handleSearch(query);
   };
 
-  const handleSuggestionClick = (suggestion) => {
+  const handleSuggestionClick = (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => {
     handleSearch(suggestion);
   };
 
@@ -117,7 +116,7 @@ inputRef.current.blur();
     }
   };
 
-  const handleRemoveRecentSearch = async (searchToRemove, e: React.MouseEvent) => {
+  const handleRemoveRecentSearch = async (searchToRemove: any, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);
@@ -254,3 +253,4 @@ inputRef.current.blur();
 SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;
+

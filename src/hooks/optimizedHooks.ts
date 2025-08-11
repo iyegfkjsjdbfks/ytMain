@@ -11,12 +11,12 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
  */
-export function useOptimizedDebounce<T>(value: T, delay): T {
+export function useOptimizedDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -47,7 +47,7 @@ export function useOptimizedDebounce<T>(value: T, delay): T {
  */
 export function useOptimizedThrottle<T>(
   value: T,
-  delay,
+  delay: any,
   options: { leading?: boolean; trailing?: boolean } = {},
 ): T {
   const { leading = true, trailing = true } = options;
@@ -86,7 +86,7 @@ export function useOptimizedThrottle<T>(
  * Enhanced useLocalStorage with JSON support and error handling
  */
 export function useOptimizedLocalStorage<T>(
-  key,
+  key: string,
   initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -234,7 +234,7 @@ export function useOptimizedIntersectionObserver(
  */
 export function useOptimizedToggle(
   initialValue: boolean = false,
-): [boolean, () => void, (value) => void, () => void, () => void] {
+): [boolean, () => void, (value: any) => void, () => void, () => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(prev => !prev), []);
@@ -254,7 +254,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     setArray(prev => [...prev, item]);
   }, []);
 
-  const remove = useCallback((index) => {
+  const remove = useCallback((index: number) => {
     setArray(prev => prev.filter((_, i) => i !== index));
   }, []);
 
@@ -262,7 +262,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     setArray(prev => prev.filter((item) => item[idKey] !== id));
   }, []);
 
-  const update = useCallback((index, newItem: Partial<T>) => {
+  const update = useCallback((index: number, newItem: Partial<T>) => {
     setArray(prev => prev.map((item, i) => i=== index ? { ...item, ...newItem } : item));
   }, []);
 
@@ -297,8 +297,8 @@ export function useOptimizedArray<T>(initialArray: T = []) {
  */
 export function useOptimizedMemo<T>(
   factory: () => T,
-  deps,
-  compare?: (a, b) => boolean,
+  deps: any,
+  compare?: (a: any, b: any) => boolean,
 ): T {
   const memoizedValue = useMemo(factory, deps);
   const lastDeps = useRef<any[]>(deps);
@@ -322,14 +322,14 @@ export function useOptimizedMemo<T>(
  */
 export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
-  deps,
+  deps: any,
 ): T {
   const callbackRef = useRef<T>(callback);
   const depsRef = useRef<any[]>(deps);
 
   // Update callback if dependencies changed
   useEffect(() => {
-    const depsChanged = deps.some((dep, index) => dep !== depsRef.current[index]);
+    const depsChanged = deps.some((dep: any, index: number) => dep: any !== depsRef.current[index: number]);
     if (depsChanged) {
       callbackRef.current = callback;
       depsRef.current = deps;
@@ -344,13 +344,13 @@ export function useOptimizedCallback<T extends (...args) => any>(
  */
 export function useOptimizedForm<T extends Record<string, any>>(
   initialValues: T,
-  validationRules?: Partial<Record<keyof T, (value) => string | null>>,
+  validationRules?: Partial<Record<keyof T, (value: any) => string | null>>,
 ) {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [touched, setTouchedState] = useState<Partial<Record<keyof T, boolean>>>({});
 
-  const setValue = useCallback((name: keyof T, value) => {
+  const setValue = useCallback((name: keyof T, value: any) => {
     setValues(prev => ({ ...prev, [name]: value }));
 
     // Validate field if rules exist

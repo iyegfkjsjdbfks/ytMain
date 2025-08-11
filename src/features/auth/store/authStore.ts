@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { create } from 'zustand';
+import { create } from 'zustand';
 
 import { authService } from '../services/authService';
 
@@ -13,7 +13,7 @@ interface AuthStore extends AuthState {
   checkAuth: () => Promise<void>;
   setUser: (user: User | null) => void;
   setError: (error: string | null) => void;
-  setLoading: (isLoading) => void;
+  setLoading: (isLoading: any) => void;
 }
 
 /**

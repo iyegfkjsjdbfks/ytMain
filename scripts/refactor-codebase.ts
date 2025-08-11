@@ -1,4 +1,4 @@
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //!/usr/bin/env node
 
 /**
@@ -6,8 +6,8 @@
  * Automates the refactoring process for the YouTube clone application
  */
 
-// TODO: Fix import - import fs from 'fs';
-// TODO: Fix import - import path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 interface RefactorTask {
   name: string;
@@ -80,7 +80,7 @@ class CodebaseRefactorer {
 
   async runRefactoring(): Promise<void> {
     // Sort tasks by priority
-    const sortedTasks = this.tasks.sort((a, b) => {
+    const sortedTasks = this.tasks.sort((a: any, b: any) => {
       const priorityOrder = { high: 3, medium: 2, low: 1 };
       return priorityOrder[b.priority] - priorityOrder[a.priority];
     });
@@ -128,7 +128,6 @@ class CodebaseRefactorer {
 
 import * as React from 'react';
 import {  memo  } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { Video } from '../../types/core';
 import { formatDistanceToNow } from 'date-fns';
@@ -289,7 +288,7 @@ export type { Video, User, Channel, Playlist, Comment } from '../../types/core';
     }
   }
 
-  private async optimizeFileImports(filePath): Promise<void> {
+  private async optimizeFileImports(filePath: any): Promise<void> {
     const content = fs.readFileSync(filePath, 'utf8');
     let optimizedContent = content;
 
@@ -323,7 +322,7 @@ continue;
     }
   }
 
-  private sortImports(content): string {
+  private sortImports(content: any): string {
     const lines = content.split('\n');
     const importLines: string = [];
     const otherLines: string = [];
@@ -334,7 +333,6 @@ continue;
         importLines.push(line);
       } else if (line.trim() === '' && inImportSection) {
         // Keep empty lines in import section
-        importLines.push(line);
       } else {
         inImportSection = false;
         otherLines.push(line);
@@ -342,19 +340,19 @@ continue;
     }
 
     // Sort imports: React first, then libraries, then local imports
-    const reactImports = importLines.filter(line => line.includes("'react'") || line.includes('"react"'));
-    const libraryImports = importLines.filter(line =>
+    const reactImports = importLines.filter((line: any) => line.includes("'react'") || line.includes('"react"'));
+    const libraryImports = importLines.filter((line: any) =>
       !line.includes("'react'") &&
       !line.includes('"react"') &&
       !line.includes('./') &&
       !line.includes('../') &&
       line.trim().startsWith('import '),
     );
-    const localImports = importLines.filter(line =>
+    const localImports = importLines.filter((line: any) =>
       (line.includes('./') || line.includes('../')) &&
       line.trim().startsWith('import '),
     );
-    const emptyLines = importLines.filter(line => line.trim() === '');
+    const emptyLines = importLines.filter((line: any) => line.trim() === '');
 
     const sortedImports = [
       ...reactImports.sort(),
@@ -478,19 +476,19 @@ export interface ErrorWithSeverity extends AppError {
     // This would involve implementing code splitting and lazy loading
   }
 
-  private findFiles(directories, extensions, exclude: string = []): string[] {
+  private findFiles(directories: any, extensions: any, exclude: string = []): string[] {
     const files: string = [];
 
-    function searchDirectory(dir): void {
+    function searchDirectory(dir: any): void {
       const items = fs.readdirSync(dir);
 
       for (const item of items) {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
-        if (stat.isDirectory() && !exclude.some(ex => fullPath.includes(ex))) {
+        if (stat.isDirectory() && !exclude.some((ex: any) => fullPath.includes(ex: any))) {
           searchDirectory(fullPath);
-        } else if (stat.isFile() && extensions.some(ext => item.endsWith(ext))) {
+        } else if (stat.isFile() && extensions.some((ext: any) => item.endsWith(ext: any))) {
           files.push(fullPath);
         }
       }
@@ -524,3 +522,4 @@ refactorer.runRefactoring().catch(error => {
   console.error('❌ Refactoring failed:', error);
   process.exit(1);
 });
+

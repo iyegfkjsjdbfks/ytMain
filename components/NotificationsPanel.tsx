@@ -8,10 +8,10 @@ declare global {
   }
 }
 
-// TODO: Fix import - import { useState } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { BellAlertIcon, ChatBubbleLeftRightIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
   id: string;
@@ -48,7 +48,7 @@ return null;
     setNotifications(prev => prev.map(notification => ({ ...notification, isNew: false })));
   };
 
-  const markAsRead = (id) => {
+  const markAsRead = (id: string) => {
     setNotifications(prev => prev.map(notification =>
       notification.id === id ? { ...notification, isNew: false } : notification,
     ));

@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { conditionalLogger } from '../utils/conditionalLogger';
 /// <reference types="node" />
@@ -198,7 +198,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [state.isOnline, getNetworkQuality]);
 
   // Update offline statistics
-  const updateOfflineStats = useCallback((isOffline) => {
+  const updateOfflineStats = useCallback((isOffline: any) => {
     const stats = getOfflineStats();
 
     if (isOffline && !state.wasOffline) {

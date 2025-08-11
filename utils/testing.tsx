@@ -1,16 +1,16 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// TODO: Fix import - import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
-// TODO: Fix import - import userEvent from '@testing-library/user-event';
+import { render, act, renderHook, type RenderOptions, type RenderResult, type RenderHookOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// TODO: Fix import - import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-// TODO: Fix import - import { vi, type MockedFunction } from 'vitest';
-// TODO: Fix import - import { BrowserRouter, Route } from 'react-router-dom';
+import { vi, type MockedFunction } from 'vitest';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Store import removed to fix circular dependency
 import type { Video, Channel } from '../src/types/core';
@@ -151,7 +151,7 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export const waitForTime = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
@@ -174,7 +174,7 @@ export class PerformanceTestHelper {
     if (this.measurements.length === 0) {
 return 0;
 }
-    return this.measurements.reduce((sum, time) => sum + time, 0) / this.measurements.length;
+    return this.measurements.reduce((sum: any, time: any) => sum: any + time: any, 0) / this.measurements.length;
   }
 
   getMinTime(): number {
@@ -228,7 +228,7 @@ export const createMemoryLeakTest = (testFn: () => void, iterations: number = 10
 };
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
+export const getByTestId = (container: HTMLElement, testId: any): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
     throw new Error(`Element with test id "${testId}" not found`);
@@ -236,7 +236,7 @@ export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement, testId): HTMLElement | null => {
+export const queryByTestId = (container: HTMLElement, testId: any): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
@@ -257,13 +257,13 @@ export const checkAccessibility = async (container: HTMLElement) => {
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement, name) => {
+export const takeSnapshot = (component: React.ReactElement, name: any) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response, status: number = 200) => {
+export const mockFetch = (response: any, status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: status >= 200 && status < 300,
@@ -274,7 +274,7 @@ export const mockFetch = (response, status: number = 200) => {
   );
 };
 
-export const mockFetchError = (error) => {
+export const mockFetchError = (error: Error) => {
   global.fetch = vi.fn(() => Promise.reject(new Error(error)));
 };
 
@@ -335,7 +335,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
 
 // Test Suite Helpers
 export const describeWithSetup = (
-  name,
+  name: any,
   setup: () => void,
   tests: () => void,
 ) => {
@@ -371,7 +371,7 @@ export const testUtils = {
   simulateNetworkDelay: async (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
-  simulateKeyboardNavigation: async (element: HTMLElement, key) => {
+  simulateKeyboardNavigation: async (element: HTMLElement, key: string) => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);
@@ -390,7 +390,7 @@ export const testUtils = {
         break;
     }
   },
-  simulateFormInput: async (input: HTMLElement, value) => {
+  simulateFormInput: async (input: HTMLElement, value: any) => {
     const user = createUserEvent();
     await user.clear(input);
     await user.type(input, value);
@@ -459,7 +459,7 @@ declare global {
   namespace jest {
     interface Matchers<R> {
       toBeInViewport(): R;
-      toHaveAccessibleName(expectedName): R;
+      toHaveAccessibleName(expectedName: any): R;
     }
   }
 }
@@ -484,3 +484,4 @@ declare global {
     }
   }
 }
+

@@ -1,3 +1,4 @@
+import { createBrowserRouter, RouterProvider, BrowserRouter, Route, Link, NavLink, useNavigate } from 'react-router-dom';
 #!/usr/bin/env node
 /**
  * TypeScript Error Fixing Orchestrator

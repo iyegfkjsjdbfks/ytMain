@@ -7,11 +7,11 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { createContext, useContext } from 'react';
-// TODO: Fix import - import React from 'react';
+import { createContext, useContext } from 'react';
+import React from 'react';
 
 interface TabsContextType {
-  value: string; onValueChange: (value) => void
+  value: string; onValueChange: (value: any) => void
 }
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
@@ -26,7 +26,7 @@ const useTabsContext = () => {
 
 export interface TabsProps {
   value: string;
-  onValueChange: (value) => void;
+  onValueChange: (value: any) => void;
   children: React.ReactNode;
   className?: string;
 }

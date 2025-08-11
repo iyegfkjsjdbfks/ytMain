@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 type SetValue<T> = T | ((val: T) => T);
 
@@ -10,7 +10,7 @@ type SetValue<T> = T | ((val: T) => T);
  * @returns [storedValue, setValue, removeValue]
  */
 export function useLocalStorage<T>(
-  key,
+  key: string,
   initialValue: T,
 ): [T, (value: SetValue<T>) => void, () => void] {
   // Get from local storage then parse stored json or return initialValue
@@ -72,9 +72,9 @@ export function useLocalStorage<T>(
  * @returns [storedValue, setValue, removeValue, isExpired]
  */
 export function useLocalStorageWithExpiry<T>(
-  key,
+  key: string,
   initialValue: T,
-  ttl,
+  ttl: any,
 ): [T, (value: SetValue<T>) => void, () => void, boolean] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {

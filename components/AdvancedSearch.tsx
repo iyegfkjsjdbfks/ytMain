@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -11,8 +11,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
 import {
   MagnifyingGlassIcon,
@@ -23,7 +23,6 @@ import {
   VideoCameraIcon,
   AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { useNavigate } from 'react-router-dom';
 
 export interface SearchFilters {
   duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
@@ -35,7 +34,7 @@ export interface SearchFilters {
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query, filters: SearchFilters) => void;
+  onSearch: (query: any, filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }
@@ -403,3 +402,4 @@ searchParams.set('sort_by', filters.sortBy);
 };
 
 export default AdvancedSearch;
+

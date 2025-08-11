@@ -1,8 +1,8 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import * as React from 'react';
-// TODO: Fix import - import {  useState, useMemo, useCallback, Suspense  } from 'react';
+import * as React from 'react';
+import {  useState, useMemo, useCallback, Suspense  } from 'react';
 
-// TODO: Fix import - import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon } from '@heroicons/react/24/solid';
 
 import CategoryChips from '../components/CategoryChips';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -61,11 +61,11 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video) => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   // Event handlers
-  const handleCategorySelect = useCallback((category) => {
+  const handleCategorySelect = useCallback((category: any) => {
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -75,7 +75,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }: {cla
     window.location.hash = `/watch/${video.id}`;
   }, []);
 
-  const handleChannelClick = useCallback((channelId) => {
+  const handleChannelClick = useCallback((channelId: any) => {
     // Navigate to channel page
     window.location.hash = `/channel/${channelId}`;
   }, []);

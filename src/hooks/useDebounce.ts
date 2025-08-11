@@ -10,8 +10,8 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback } from 'react';
+import React from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
  * Hook that debounces a value
@@ -19,7 +19,7 @@ declare namespace NodeJS {
  * @param delay - The delay in milliseconds
  * @returns The debounced value
  */
-export function useDebounce<T>(value: T, delay): T {
+export function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function useDebounce<T>(value: T, delay): T {
  */
 export function useDebouncedCallback<T extends (...args) => any>(
   callback: T,
-  delay,
+  delay: any,
   deps: React.DependencyList = [],
 ): T {
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -81,7 +81,7 @@ export function useDebouncedCallback<T extends (...args) => any>(
  * @returns Object with search state and functions
  */
 export function useDebouncedSearch<T>(
-  searchFunction: (query) => Promise<T[]>,
+  searchFunction: (query: any) => Promise<T[]>,
   delay: number = 300,
 ) {
   const [query, setQuery] = useState('');
@@ -92,7 +92,7 @@ export function useDebouncedSearch<T>(
   const debouncedQuery = useDebounce(query, delay);
   const abortControllerRef = useRef<AbortController>();
 
-  const search = useCallback(async (searchQuery) => {
+  const search = useCallback(async (searchQuery: any) => {
     if (!searchQuery.trim()) {
       setResults([]);
       setLoading(false);

@@ -1,14 +1,13 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { memo, useState } from 'react';
-// TODO: Fix import - import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { Link } from 'react-router-dom';
-// TODO: Fix import - import type * as React from 'react';
+import React from "react";
+import { memo, useState } from 'react';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import type * as React from 'react';
 import { cn, formatRelativeTime } from '../../lib/utils';
 import { UnifiedButton } from './UnifiedButton';
 import type { Video } from '../../types/core';
 import { /**
-import { Link } from 'react-router-dom';
  * Unified Video Card Component
  * Consolidates all video card variants into a single, comprehensive component
  */
@@ -30,10 +29,10 @@ export interface UnifiedVideoCardProps {
   showDate?: boolean;
   isLiked?: boolean;
   isSaved?: boolean;
-  onLike?: (videoId) => void;
+  onLike?: (videoId: any) => void;
   onSave?: (video: Video) => void;
   onShare?: (video: Video) => void;
-  onChannelClick?: (channelName) => void;
+  onChannelClick?: (channelName: any) => void;
   className?: string;
   keyPrefix?: string;
 }
@@ -345,3 +344,4 @@ declare global {
     }
   }
 }
+

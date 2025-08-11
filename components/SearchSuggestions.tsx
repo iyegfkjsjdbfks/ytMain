@@ -8,13 +8,13 @@ declare global {
   }
 }
 
-// TODO: Fix import - import type React from 'react';
+import type React from 'react';
 
 import SearchIcon from './icons/SearchIcon';
 
 interface SearchSuggestionsProps {
   suggestions: string;
-  onSuggestionClick: (suggestion) => void; isVisible: boolean
+  onSuggestionClick: (suggestion: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void; isVisible: boolean
 }
 
 const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSuggestionClick, isVisible }: {isVisible: boolean; onSuggestionClick: Function; suggestions: any}) => {
@@ -27,7 +27,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ suggestions, onSu
         className="absolute top-full left-0 right-0 mt-0.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-b-xl shadow-2xl z-[101] py-1 overflow-y-auto max-h-80 animate-fade-in-fast"
         aria-label="Search suggestions"
     >
-      {suggestions.map((suggestion, index) => (
+      {suggestions.map((suggestion: any, index: number) => (
         <li key={index}>
           <button
             onClick={() => onSuggestionClick(suggestion)}

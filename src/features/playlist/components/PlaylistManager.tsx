@@ -1,11 +1,11 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState } from 'react';
+import React from "react";
+import { useState } from 'react';
 import { logger } from '../../../utils/logger';
 import { usePlaylists, useCreatePlaylist, useDeletePlaylist } from '../hooks/usePlaylists';
 import type { CreatePlaylistData } from '../services/playlistService';
 import type { Playlist } from '../../../types/core';
-// TODO: Fix import - import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+import { PlusIcon, MagnifyingGlassIcon, EllipsisVerticalIcon, PlayIcon, ShareIcon, PencilIcon, TrashIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, FolderIcon, ListBulletIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
 interface PlaylistManagerProps {
   className?: string;
@@ -14,7 +14,7 @@ interface PlaylistManagerProps {
 interface CreatePlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data) => void;
+  onSubmit: (data: any) => void;
 }
 
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
@@ -57,10 +57,10 @@ return;
     }
   };
 
-  const removeTag = (tagToRemove) => {
+  const removeTag = (tagToRemove: any) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
     }));
   };
 
@@ -140,7 +140,7 @@ return null;
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {formData.tags.map((tag) => (
+              {formData.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
@@ -204,7 +204,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     playlist.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleCreatePlaylist = async (data) => {
+  const handleCreatePlaylist = async (data: any) => {
     try {
       await createPlaylistMutation.mutate(data);
     } catch (error) {
@@ -212,7 +212,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const handleDeletePlaylist = async (playlistId) => {
+  const handleDeletePlaylist = async (playlistId: any) => {
     if (window.confirm('Are you sure you want to delete this playlist?')) {
       try {
         await deletePlaylistMutation.mutate(playlistId);
@@ -236,7 +236,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
     }
   };
 
-  const getVisibilityIcon = (visibility) => {
+  const getVisibilityIcon = (visibility: any) => {
     switch (visibility) {
       case 'public':
         return <EyeIcon className="w-4 h-4" />;

@@ -1,10 +1,10 @@
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 // Performance monitoring utility for React components
 
 export const withPerformanceProfiler = <P extends object>(
   Component: React.ComponentType<P>,
-  componentName,
+  componentName: any,
 ) => {
   const WrappedComponent = (props: P) => {
     if (process.env.NODE_ENV === 'development') {

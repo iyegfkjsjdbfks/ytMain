@@ -1,11 +1,10 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // @ts-nocheck - Temporary during refactoring
-// TODO: Fix import - import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-// TODO: Fix import - import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { useLocation } from 'react-router-dom';
+import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, HeartIcon, ChatBubbleOvalLeftIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
 import { useIntersectionObserver, useVideoAutoplay } from '../hooks';
 import { useVideoPlayer } from '../src/hooks/useVideoPlayer';
@@ -19,10 +18,10 @@ interface ShortDisplayCardProps {
   short: Short;
   isLiked?: boolean;
   isFollowed?: boolean;
-  onLike?: (shortId) => void;
-  onFollow?: (channelName) => void;
-  onComment?: (shortId) => void;
-  onShare?: (shortId) => void;
+  onLike?: (shortId: any) => void;
+  onFollow?: (channelName: any) => void;
+  onComment?: (shortId: any) => void;
+  onShare?: (shortId: any) => void;
   onVideoChange?: () => void;
   onVideoEnd?: () => void;
   isActive?: boolean;
@@ -375,3 +374,4 @@ declare global {
     }
   }
 }
+

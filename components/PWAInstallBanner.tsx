@@ -7,10 +7,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, type FC } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, type FC } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 import { PWAUtils, PWAEvents } from '../src/utils/pwa';
 
@@ -35,7 +35,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
     }
 
     // Listen for beforeinstallprompt event
-    const handleBeforeInstallPrompt = (e) => {
+    const handleBeforeInstallPrompt = (e: Event) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
 

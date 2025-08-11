@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef, useCallback } from 'react';
+import React from 'react';
 
 import {
   CloudArrowUpIcon,
@@ -156,7 +156,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }
   };
 
-  const addTag = (tag) => {
+  const addTag = (tag: string) => {
     if (tag.trim() && !uploadData.tags.includes(tag.trim())) {
       setUploadData(prev => ({
         ...prev,
@@ -165,10 +165,10 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
     }
   };
 
-  const removeTag = (tagToRemove) => {
+  const removeTag = (tagToRemove: any) => {
     setUploadData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag) => tag !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
     }));
   };
 
@@ -202,7 +202,7 @@ return;
     }
   };
 
-  const formatFileSize = (bytes): string => {
+  const formatFileSize = (bytes: any): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }
@@ -563,7 +563,7 @@ return '0:00';
 
                 {uploadData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {uploadData.tags.map((tag, index) => (
+                    {uploadData.tags.map((tag: string, index: number) => (
                       <span
                         key={index}
                         className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

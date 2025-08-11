@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 declare namespace React {
   interface JSX {
     IntrinsicElements;
@@ -14,15 +14,14 @@ declare namespace React {
   }
 }
 
-// TODO: Fix import - import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-// TODO: Fix import - import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
-// TODO: Fix import - import { useParams } from 'react-router-dom';
+import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { UserIcon, PlayIcon, QueueListIcon, ChatBubbleLeftRightIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';
-// TODO: Fix import - import React from 'react';
+import React from 'react';
 
 import type { Video } from '../types';
 
@@ -251,3 +250,4 @@ declare global {
     }
   }
 }
+

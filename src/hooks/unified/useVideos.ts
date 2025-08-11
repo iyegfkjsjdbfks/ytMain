@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery as useReactQuery } from '@tanstack/react-query';
+import { useQuery as useReactQuery } from '@tanstack/react-query';
 
 import { logger } from '../../utils/logger';
 
@@ -36,7 +36,7 @@ export function useUnifiedVideos(
   );
 }
 
-export function useUnifiedVideo(videoId, config?: UseApiConfig<UnifiedVideoMetadata>) {
+export function useUnifiedVideo(videoId: any, config?: UseApiConfig<UnifiedVideoMetadata>) {
   logger.debug(`🎬 useUnifiedVideo hook called with videoId: ${videoId}`);
   logger.debug(`🎬 useUnifiedVideo hook enabled: ${!!videoId}`);
 
@@ -104,7 +104,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useVideosByCategory(category, config?: UseApiConfig<Video[]>) {
+export function useVideosByCategory(category: any, config?: UseApiConfig<Video[]>) {
   return useQuery(
     ['videos', 'category', category],
     () => videoApi.getVideosByCategory(category),
@@ -128,7 +128,7 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useRelatedVideos(videoId, config?: UseApiConfig<Video[]>) {
+export function useRelatedVideos(videoId: any, config?: UseApiConfig<Video[]>) {
   return useQuery(
     ['videos', 'related', videoId],
     () => videoApi.getRelatedVideos(videoId),
@@ -231,7 +231,7 @@ export function useTrendingShorts(config?: UseApiConfig<Short[]>) {
 
 // Unified Search hook
 export function useUnifiedSearchVideos(
-  query,
+  query: any,
   filters: UnifiedSearchFilters = {},
   limit: number = 50,
   config?: UseApiConfig<{ data: UnifiedVideoMetadata; success: boolean; message: string }>,
@@ -251,7 +251,7 @@ export function useUnifiedSearchVideos(
 }
 
 // Legacy search hook (for backward compatibility)
-export function useSearchVideos(query, config?: UseApiConfig<Video[]>) {
+export function useSearchVideos(query: any, config?: UseApiConfig<Video[]>) {
   return useQuery(
     ['videos', 'search', query],
     () => videoApi.searchVideos({ query }),
@@ -377,7 +377,7 @@ export function useVideos(params = {}, config?: UseApiConfig<Video[]>) {
   );
 }
 
-export function useVideo(videoId, config?: UseApiConfig<Video>) {
+export function useVideo(videoId: any, config?: UseApiConfig<Video>) {
   return useQuery(
     ['video', videoId],
     () => videoApi.getVideo(videoId),
@@ -402,7 +402,7 @@ export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
 }
 
 // Combined hooks for common patterns
-export function useVideoWithRelated(videoId) {
+export function useVideoWithRelated(videoId: any) {
   const video = useVideo(videoId);
   const relatedVideos = useRelatedVideos(videoId, {
     enabled: !!video.data,

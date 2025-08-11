@@ -1,13 +1,13 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+import React from "react";
+import { useState, useRef, useEffect } from 'react';
+import type * as React from 'react';
+import { formatDistanceToNow } from 'date-fns';
 import { logger } from '../../../utils/logger';
 import { useVideoComments, useCreateComment, useReactToComment } from '../hooks/useComments';
 import type { Comment } from '../../../types/core';
-// TODO: Fix import - import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, EllipsisVerticalIcon, FlagIcon, HeartIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon as PinSolidIcon, HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 
 interface CommentSectionProps {
   videoId: string;
@@ -19,11 +19,11 @@ interface CommentSectionProps {
 interface CommentItemProps {
   comment: Comment;
   isChannelOwner?: boolean;
-  onReply: (parentId, content) => void;
-  onReact: (commentId, type: 'like' | 'dislike') => void;
-  onPin: (commentId) => void | Promise<void>;
-  onHeart: (commentId) => void | Promise<void>;
-  onReport: (commentId, reason) => void | Promise<void>;
+  onReply: (parentId: any, content: any) => void;
+  onReact: (commentId: any, type: 'like' | 'dislike') => void;
+  onPin: (commentId: any) => void | Promise<void>;
+  onHeart: (commentId: any) => void | Promise<void>;
+  onReport: (commentId: any, reason: any) => void | Promise<void>;
   level?: number;
 }
 
@@ -63,7 +63,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
     }
   };
 
-  const formatCount = (count): string => {
+  const formatCount = (count: any): string => {
     if (count >= 1000000) {
 return `${(count / 1000000).toFixed(1)}M`;
 }
@@ -247,7 +247,7 @@ return `${(count / 1000).toFixed(1)}K`;
 
             {showReplies && (
               <div className="mt-3 space-y-4">
-                {comment.replies.map((reply) => (
+                {comment.replies.map((reply: any) => (
                   <CommentItem
                     key={reply.id}
                     comment={reply}
@@ -299,7 +299,7 @@ return;
     }
   };
 
-  const handleReply = async (parentId, content) => {
+  const handleReply = async (parentId: any, content: any) => {
     try {
       await createCommentMutation.mutate({
         content,
@@ -311,7 +311,7 @@ return;
     }
   };
 
-  const handleReact = async (commentId, type: 'like' | 'dislike') => {
+  const handleReact = async (commentId: any, type: 'like' | 'dislike') => {
     try {
       await reactToCommentMutation.mutate({
         commentId,
@@ -322,15 +322,15 @@ return;
     }
   };
 
-  const handlePin = async (_commentId) => {
+  const handlePin = async (_commentId: any) => {
     // Implementation for pinning comments
     };
 
-  const handleHeart = async (_commentId) => {
+  const handleHeart = async (_commentId: any) => {
     // Implementation for hearting comments
     };
 
-  const handleReport = async (_commentId, _reason) => {
+  const handleReport = async (_commentId: any, _reason: any) => {
     // Implementation for reporting comments
     };
 

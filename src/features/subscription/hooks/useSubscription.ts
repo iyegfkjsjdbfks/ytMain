@@ -1,5 +1,5 @@
 
-// TODO: Fix import - import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { subscriptionService } from '../services/subscriptionService';
 
@@ -14,7 +14,7 @@ export interface SubscriptionData {
   isSubscribed: boolean;
 }
 
-export function useSubscription(channelId) {
+export function useSubscription(channelId: any) {
   const queryClient = useQueryClient();
 
   const { data: subscription, isLoading: isQueryLoading } = useQuery({

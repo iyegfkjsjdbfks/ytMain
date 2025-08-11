@@ -8,11 +8,11 @@ declare global {
   }
 }
 
-// TODO: Fix import - import { memo } from 'react';
-// TODO: Fix import - import React from 'react';
+import { memo } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { formatDistanceToNow } from 'date-fns';
 
 import ImageWithFallback from './ImageWithFallback';
 
@@ -20,7 +20,7 @@ import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {
   video: Video;
-  onVideoSelect?: ((videoId) => void) | undefined;
+  onVideoSelect?: ((videoId: any) => void) | undefined;
   showChannel?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -52,7 +52,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr): string => {
+  const formatTimeAgo = (dateStr: any): string => {
     try {
       return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
     } catch {

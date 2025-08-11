@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect, useRef, useCallback } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 
 import {
   BellIcon,
@@ -19,7 +19,7 @@ import {
   ChatBubbleLeftIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
+import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 
 import { formatDistanceToNow } from '../utils/dateUtils';
 
@@ -209,7 +209,7 @@ return;
     }
   };
 
-  const markAsRead = (notificationId) => {
+  const markAsRead = (notificationId: any) => {
     setNotifications(prev => {
       const updated = prev.map(n =>
         n.id === notificationId ? { ...n, isRead: true } : n,
@@ -227,7 +227,7 @@ return;
     });
   };
 
-  const deleteNotification = (notificationId) => {
+  const deleteNotification = (notificationId: any) => {
     setNotifications(prev => {
       const updated = prev.filter((n) => n.id !== notificationId);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));

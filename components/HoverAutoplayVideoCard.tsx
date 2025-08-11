@@ -1,7 +1,7 @@
 
 /// <reference types="react/jsx-runtime" />
 /// <reference types="node" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -19,11 +19,10 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 
 import { getYouTubeVideoId } from '../src/lib/youtube-utils';
 
@@ -303,3 +302,4 @@ return duration;
 };
 
 export default HoverAutoplayVideoCard;
+

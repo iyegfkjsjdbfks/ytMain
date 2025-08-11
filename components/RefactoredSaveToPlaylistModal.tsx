@@ -7,8 +7,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 
 import { useAsyncState } from '../src/hooks';
 
@@ -23,8 +23,8 @@ interface RefactoredSaveToPlaylistModalProps {
   onClose: () => void;
   videoId: string;
   existingPlaylists: Playlist;
-  onSaveToPlaylist: (videoId, playlistId) => Promise<void>;
-  onCreatePlaylist: (name, description?: string) => Promise<Playlist>;
+  onSaveToPlaylist: (videoId: any, playlistId: any) => Promise<void>;
+  onCreatePlaylist: (name: any, description?: string) => Promise<Playlist>;
 }
 
 /**
@@ -106,7 +106,7 @@ return;
       type: 'text' as const,
       placeholder: 'Enter playlist name',
       required: true,
-      validation: (value) => {
+      validation: (value: any) => {
         if (value.length < 3) {
 return 'Playlist name must be at least 3 characters';
 }
@@ -203,7 +203,7 @@ return 'Playlist name must be less than 100 characters';
               </div>
             ) : (
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                {existingPlaylists.map((playlist) => (
+                {existingPlaylists.map((playlist: any) => (
                   <label
                     key={playlist.id}
                     htmlFor={`playlist-${playlist.id}`}

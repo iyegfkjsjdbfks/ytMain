@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -8,8 +8,8 @@ declare global {
     }
   }
 }
-// TODO: Fix import - import { useState, useRef, useEffect } from 'react';
-// TODO: Fix import - import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
 import {
   ShareIcon,
@@ -39,7 +39,7 @@ interface VideoActionsProps {
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onShareToSocial: (platform) => void;
+  onShareToSocial: (platform: any) => void;
   onCopyLink: () => void;
   shareMessage?: string;
 }
@@ -152,7 +152,7 @@ const VideoActions: React.FC<VideoActionsProps> = ({
     onShare();
   };
 
-  const handleShareToSocial = (platform) => {
+  const handleShareToSocial = (platform: any) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
 

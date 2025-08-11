@@ -1,10 +1,10 @@
 
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import type * as React from 'react';
-// TODO: Fix import - import {  useState  } from 'react';
+import type * as React from 'react';
+import {  useState  } from 'react';
 
-// TODO: Fix import - import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { CheckIcon } from '@heroicons/react/24/solid';
+import { Cog8ToothIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { CheckIcon } from '@heroicons/react/24/solid';
 
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -20,7 +20,7 @@ const SettingSection: React.FC<{ title: string, children: React.ReactNode }> = (
 const ToggleSetting: React.FC<{
   label: string;
   description?: string;
-  checked: boolean, onChange: (checked) => void
+  checked: boolean, onChange: (checked: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
 }> = ({ label, description, checked, onChange }: {onChange: Function, checked: any; description: string, label: any}) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex-1">
@@ -50,7 +50,7 @@ const ToggleSetting: React.FC<{
 
 const SelectSetting: React.FC<{
   label: string, value: string;
-  options: string, onChange: (value) => void
+  options: string, onChange: (value: any) => void
 }> = ({ label, value, options, onChange }: {onChange: Function, options: any; value: any, label: any}) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -61,7 +61,7 @@ const SelectSetting: React.FC<{
       onChange={(e) => onChange(e.target.value)}
       className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
     >
-      {options.map(option => (
+      {options.map((option: any) => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>

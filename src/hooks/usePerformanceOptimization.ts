@@ -11,10 +11,10 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Performance monitoring hook
-export const usePerformanceMonitor = (componentName) => {
+export const usePerformanceMonitor = (componentName: any) => {
   const renderCount = useRef(0);
   const startTime = useRef(performance.now());
 
@@ -34,7 +34,7 @@ export const usePerformanceMonitor = (componentName) => {
 };
 
 // Debounced value hook
-export const useDebounce = <T>(value: T, delay): T => {
+export const useDebounce = <T>(value: T, delay: any): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const useDebounce = <T>(value: T, delay): T => {
 // Throttled callback hook
 export const useThrottle = <T extends (...args) => any>(
   callback: T,
-  delay,
+  delay: any,
 ): T => {
   const lastCall = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>();

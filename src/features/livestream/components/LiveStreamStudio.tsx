@@ -9,11 +9,11 @@ declare namespace NodeJS {
   }
 }
 
-// TODO: Fix import - import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { logger } from '../../../utils/logger';
 /// <reference types="node" />
-// TODO: Fix import - import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
-// TODO: Fix import - import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
+import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, ChatBubbleLeftRightIcon, EyeIcon, HeartIcon, ShareIcon, SignalIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
 interface StreamSettings {
   title: string;
@@ -195,7 +195,7 @@ return;
     setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -410,7 +410,7 @@ return;
                       }`}>
                         {message.username}
                       </span>
-                      {message.badges?.map((badge) => (
+                      {message.badges?.map((badge: any) => (
                         <span
                           key={badge}
                           className="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"

@@ -1,10 +1,9 @@
 /// <reference types="react/jsx-runtime" />
-// TODO: Fix import - import React from "react";
-// TODO: Fix import - import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 
-// TODO: Fix import - import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import type { Video } from '../types';
-// TODO: Fix import - import { Link } from 'react-router-dom';
 
 interface VideoCardProps {
   video: Video;
@@ -64,7 +63,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(({
     ? `${(commentCount / 1000).toFixed(1)}K`
     : commentCount?.toString() || '0';
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = seconds % 60;
@@ -254,3 +253,4 @@ declare global {
     }
   }
 }
+
