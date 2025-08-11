@@ -258,7 +258,7 @@ class TestPerformanceTracker {
     testDuration: number;
   }>();
 
-  static startTest(testName: any): () => void {
+  static startTest(testName): () => void {
     const startTime = performance.now();
     const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
@@ -274,7 +274,7 @@ class TestPerformanceTracker {
     };
   }
 
-  static trackRender(testName: any, renderTime: any): void {
+  static trackRender(testName, renderTime): void {
     const metrics = this.testMetrics.get(testName);
     if (metrics) {
       metrics.renderTime = renderTime;
@@ -458,7 +458,7 @@ export const testHelpers = {
   },
 
   // API mocking
-  mockApiSuccess: (data: any) => {
+  mockApiSuccess: (data) => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
@@ -475,21 +475,21 @@ export const testHelpers = {
   },
 
   // Storage helpers
-  setLocalStorageItem: (key: string, value: any) => {
+  setLocalStorageItem: (key, value) => {
     mockLocalStorage.setItem(key, value);
   },
 
-  getLocalStorageItem: (key: string) => {
+  getLocalStorageItem: (key) => {
     return mockLocalStorage.getItem(key);
   },
 
   // Async helpers
   waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
 
-  waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any)),
+  waitForTime: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
 
   // Error boundary testing
-  triggerError: (component: any) => {
+  triggerError: (component) => {
     const error = new Error('Test error');
     component.componentDidCatch?.(error, { componentStack: 'test stack' });
     throw error;
@@ -522,19 +522,19 @@ export const testHelpers = {
       return testHelpers.waitForNextTick();
     },
 
-    type: async (element: HTMLInputElement, text: any) => {
+    type: async (element: HTMLInputElement, text) => {
       element.focus();
       element.value = text;
       element.dispatchEvent(new Event('input', { bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    keyPress: (element: HTMLElement, key: string) => {
+    keyPress: (element: HTMLElement, key) => {
       element.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
       return testHelpers.waitForNextTick();
     },
 
-    scroll: (element: HTMLElement, scrollTop: any) => {
+    scroll: (element: HTMLElement, scrollTop) => {
       element.scrollTop = scrollTop;
       element.dispatchEvent(new Event('scroll', { bubbles: true }));
       return testHelpers.waitForNextTick();

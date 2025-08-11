@@ -158,7 +158,7 @@ export const useTrendingVideos = () => {
   });
 };
 
-export const useChannelVideos = (channelId: any) => {
+export const useChannelVideos = (channelId) => {
   return useOptimizedVideoData({
     category: `channel-${channelId}`,
     limit: 15,
@@ -166,7 +166,7 @@ export const useChannelVideos = (channelId: any) => {
   });
 };
 
-export const useSearchVideos = (query: any) => {
+export const useSearchVideos = (query) => {
   return useOptimizedVideoData({
     category: `search-${query}`,
     limit: 20,

@@ -158,7 +158,7 @@ class UnifiedDataService {
    * Search videos across all enabled sources
    */
   async searchVideos(
-    query: any,
+    query,
     filters: UnifiedSearchFilters = {},
     limit: number = 50,
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
@@ -217,7 +217,7 @@ class UnifiedDataService {
   /**
    * Check if ID is a YouTube video format and extract actual YouTube ID
    */
-  private extractYouTubeId(id: string): string | null {
+  private extractYouTubeId(id): string | null {
     // Handle youtube-prefixed IDs (e.g., youtube-YQHsXMglC9A)
     if (id.startsWith('youtube-')) {
       return id.substring(8); // Remove 'youtube-' prefix
@@ -246,7 +246,7 @@ class UnifiedDataService {
    * Get video by ID from any source
    * NEW STRATEGY: Always prioritize YouTube Data API v3 for metadata, regardless of video source
    */
-  async getVideoById(id: string): Promise<UnifiedVideoMetadata | null> {
+  async getVideoById(id): Promise<UnifiedVideoMetadata | null> {
     logger.debug(`🚀 UnifiedDataService.getVideoById called with ID: ${id}`);
     const cacheKey = `video:${id}`;
     const cached = this.getCachedData<UnifiedVideoMetadata>(cacheKey);
@@ -637,7 +637,7 @@ class UnifiedDataService {
   /**
    * Get channel by ID from any source
    */
-  async getChannelById(id: string): Promise<UnifiedChannelMetadata | null> {
+  async getChannelById(id): Promise<UnifiedChannelMetadata | null> {
     const cacheKey = `channel:${id}`;
     const cached = this.getCachedData<UnifiedChannelMetadata>(cacheKey);
 
@@ -705,7 +705,7 @@ class UnifiedDataService {
     }
   }
 
-  private async searchLocalVideos(query: any, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
+  private async searchLocalVideos(query, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     // Local video search disabled - returning empty array
     logger.debug('Local video search disabled for query:', query, filters);
     return [];
@@ -715,7 +715,7 @@ class UnifiedDataService {
    * NEW: Search using Google Custom Search for discovery
    * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
    */
-  private async searchGoogleCustomSearchVideos(query: any, _filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
+  private async searchGoogleCustomSearchVideos(query, _filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       logger.debug('🔍 Using Google Custom Search for video discovery with query:', query);
 
@@ -775,7 +775,7 @@ class UnifiedDataService {
     }
   }
 
-  private async searchYouTubeVideos(query: any, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
+  private async searchYouTubeVideos(query, filters: UnifiedSearchFilters): Promise<UnifiedVideoMetadata[]> {
     try {
       logger.debug('🎯 Using YouTube Data API v3 for video discovery (fallback)');
 
@@ -848,7 +848,7 @@ class UnifiedDataService {
   private mixVideoResults(
     localVideos: UnifiedVideoMetadata,
     youtubeVideos: UnifiedVideoMetadata,
-    limit: any,
+    limit,
   ): UnifiedVideoMetadata[] {
     switch (this.config.mixing.strategy) {
       case 'round-robin':
@@ -865,7 +865,7 @@ class UnifiedDataService {
   private roundRobinMix(
     localVideos: UnifiedVideoMetadata,
     youtubeVideos: UnifiedVideoMetadata,
-    limit: any,
+    limit,
   ): UnifiedVideoMetadata[] {
     const mixed: UnifiedVideoMetadata = [];
     const maxLength = Math.max(localVideos.length, youtubeVideos.length);
@@ -885,7 +885,7 @@ class UnifiedDataService {
   private sourcePriorityMix(
     localVideos: UnifiedVideoMetadata,
     youtubeVideos: UnifiedVideoMetadata,
-    limit: any,
+    limit,
   ): UnifiedVideoMetadata[] {
     const priority = this.config.mixing.sourcePriority || ['local', 'youtube'];
     const mixed: UnifiedVideoMetadata = [];
@@ -906,7 +906,7 @@ class UnifiedDataService {
   private relevanceMix(
     localVideos: UnifiedVideoMetadata,
     youtubeVideos: UnifiedVideoMetadata,
-    limit: any,
+    limit,
   ): UnifiedVideoMetadata[] {
     // Combine all videos and sort by relevance (views, likes, recency)
     const allVideos = [...localVideos, ...youtubeVideos];
@@ -923,7 +923,7 @@ class UnifiedDataService {
 
   // Cache management
 
-  private getCachedData<T>(key: string): T | null {
+  private getCachedData<T>(key): T | null {
     if (!this.config.caching.enabled) {
       return null;
     }
@@ -942,7 +942,7 @@ class UnifiedDataService {
     return cached.data as T;
   }
 
-  private setCachedData(key: string, data: any): void {
+  private setCachedData(key, data): void {
     if (!this.config.caching.enabled) {
       return;
     }
@@ -986,7 +986,7 @@ class UnifiedDataService {
 
   // Utility methods
 
-  private formatViews(count: any): string {
+  private formatViews(count): string {
     if (count >= 1000000000) {
       return `${(count / 1000000000).toFixed(1)}B views`;
     }
@@ -999,7 +999,7 @@ class UnifiedDataService {
     return `${count} views`;
   }
 
-  private formatTimeAgo(dateString: any): string {
+  private formatTimeAgo(dateString): string {
     if (!dateString) {
       return '';
     }

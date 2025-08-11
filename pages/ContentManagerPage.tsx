@@ -100,7 +100,7 @@ const ContentManagerPage: React.FC = () => {
     setFilteredContent(filtered);
   }, [content, filter, searchQuery, sortBy]);
 
-  const handleSelectItem = (itemId: any) => {
+  const handleSelectItem = (itemId) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(itemId)) {
       newSelected.delete(itemId);
@@ -193,7 +193,7 @@ return;
     setScheduleTime('');
   };
 
-  const getStatusBadge = (status: any, scheduledDate?: string) => {
+  const getStatusBadge = (status, scheduledDate?: string) => {
     const baseClasses = 'px-2 py-1 rounded-full text-xs font-medium';
 
     switch (status) {
@@ -264,7 +264,7 @@ return content.length;
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Filter Tabs */}
           <div className="flex flex-wrap gap-2">
-            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType: any) => (
+            {(['all', 'published', 'scheduled', 'draft', 'private', 'unlisted'] as FilterType).map((filterType) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}

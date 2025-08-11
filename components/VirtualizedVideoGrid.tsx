@@ -26,7 +26,7 @@ interface VirtualizedVideoGridProps {
   hasMore?: boolean;
   onLoadMore?: () => void;
   onVideoClick?: (video: Video) => void;
-  onChannelClick?: (channelId: any) => void;
+  onChannelClick?: (channelId) => void;
   className?: string;
   cardSize?: 'sm' | 'md' | 'lg';
   showChannel?: boolean;
@@ -34,16 +34,16 @@ interface VirtualizedVideoGridProps {
 }
 
 interface GridItemProps {
-  columnIndex: number, rowIndex: number;
+  columnIndex, rowIndex: number;
   style: React.CSSProperties, data: {
     videos: Video, columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId: any) => void;
+    onChannelClick?: (channelId) => void;
     cardSize: 'sm' | 'md' | 'lg', showChannel: boolean; showDescription: boolean
   };
 }
 
-const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: {data: any, style: any; rowIndex: number, columnIndex: number}) => {
+const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }: {data, style; rowIndex, columnIndex: number}) => {
   const {
     videos,
     columnsPerRow,
@@ -137,7 +137,7 @@ return;
 
   // Handle infinite scrolling
   const handleScroll = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }: {clientHeight: any, scrollHeight: any; scrollTop: any}) => {
+    ({ scrollTop, scrollHeight, clientHeight }: {clientHeight, scrollHeight; scrollTop}) => {
       if (!hasMore || loading || !onLoadMore) {
 return;
 }

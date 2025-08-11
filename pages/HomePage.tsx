@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const currentKeyword = getInitialSearchKeyword();
 
-  const handleSelectCategory = useCallback((category: any) => {
+  const handleSelectCategory = useCallback((category) => {
     setSelectedCategory(category);
     window.scrollTo(0, 0);
   }, []);
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video.category === selectedCategory);
+    return videos.filter((video) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [

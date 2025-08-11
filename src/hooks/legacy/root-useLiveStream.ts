@@ -81,14 +81,14 @@ export function useLiveStream(streamId?: string) {
 
   const updateStreamStats = (newStats: Partial<LiveStream['stats']>) => {
     if (stream) {
-      setStream((prev: any) => prev: any ? {
+      setStream((prev) => prev ? {
         ...prev,
         stats: { ...prev.stats, ...newStats },
       } : null);
     }
   };
 
-  const addSuperChat = (amount: any, message: any, username: any) => {
+  const addSuperChat = (amount, message, username) => {
     if (stream) {
       const superChat = {
         id: Date.now().toString(),
@@ -101,7 +101,7 @@ export function useLiveStream(streamId?: string) {
         duration: 5000,
       };
 
-      setStream((prev: any) => prev: any ? {
+      setStream((prev) => prev ? {
         ...prev,
         monetization: {
           ...prev.monetization,
@@ -202,7 +202,11 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
+<<<<<<< HEAD
       setStream((prev: any) => prev: any ? { ...prev, status: 'live' } : null);
+=======
+      setStream((prev) => prev ? { ...prev, status: 'live' } : null);
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       setLoading(false);
       return true;
     } catch (err) {
@@ -222,7 +226,11 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
+<<<<<<< HEAD
       setStream((prev: any) => prev: any ? { ...prev, status: 'ended' } : null);
+=======
+      setStream((prev) => prev ? { ...prev, status: 'ended' } : null);
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       setLoading(false);
       return true;
     } catch (err) {

@@ -68,7 +68,7 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
     return () => window.removeEventListener('resize', handleResize);
   }, [isSidebarOpen]);
 
-  const handleMaximizeMiniplayer = (videoId: any) => {
+  const handleMaximizeMiniplayer = (videoId) => {
     miniplayerContext.actions.hideMiniplayer();
     navigate(`/watch/${videoId}`);
   };

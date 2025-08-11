@@ -38,20 +38,20 @@ interface AnalyticsData {
   realTimeStats: LiveStreamStats;
   /** Historical data for charts */
   historicalData: {
-    viewers: Array<{ time: string, count: number }>;
-    engagement: Array<{ time: string, rate: number }>;
-    revenue: Array<{ time: string, amount: number }>;
+    viewers: Array<{ time, count: number }>;
+    engagement: Array<{ time, rate: number }>;
+    revenue: Array<{ time, amount: number }>;
   };
   /** Audience demographic information */
   demographics: {
-    countries: Array<{ name: string, percentage: number }>;
-    devices: Array<{ type: string, percentage: number }>;
-    ageGroups: Array<{ range: string, percentage: number }>;
+    countries: Array<{ name, percentage: number }>;
+    devices: Array<{ type, percentage: number }>;
+    ageGroups: Array<{ range, percentage: number }>;
   };
   /** Notable moments during the stream */
   topMoments: Array<{
-    timestamp: number, type: 'peak_viewers' | 'super_chat' | 'viral_moment';
-    description: string, value: number
+    timestamp, type: 'peak_viewers' | 'super_chat' | 'viral_moment';
+    description, value: number
   }>;
 }
 
@@ -65,7 +65,7 @@ type MetricType = 'viewers' | 'engagement' | 'revenue';
 type StreamHealth = 'excellent' | 'good' | 'fair' | 'poor';
 
 // Utility functions for better modularity
-const formatNumber = (num: any): string => {
+const formatNumber = (num): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;
   }
@@ -75,7 +75,7 @@ const formatNumber = (num: any): string => {
   return num.toString();
 };
 
-const formatDuration = (seconds: any): string => {
+const formatDuration = (seconds): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
@@ -239,7 +239,7 @@ interface StatsCardProps {
   trend?: ReactNode;
 }
 
-const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: {trend: any, subtitle: any; icon: any, value: any; title: string}) => (
+const StatsCard: FC<StatsCardProps> = ({ title, value, icon, subtitle, trend }: {trend, subtitle; icon, value; title: string}) => (
   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div className="flex-1">
@@ -268,8 +268,8 @@ interface TopMomentsProps {
   /** Array of notable stream moments */
   moments: AnalyticsData['topMoments'] }
 
-const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
-  const getIcon = (type: any): React.ReactNode => {
+const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments}) => {
+  const getIcon = (type): React.ReactNode => {
     switch (type) {
       case 'peak_viewers':
         return <EyeIcon className="h-5 w-5 text-blue-500" />;
@@ -304,7 +304,7 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }: {moments: any}) => {
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Moments</h3>
       <div className="space-y-3">
-        {moments.map((moment: any) => (
+        {moments.map((moment) => (
           <div
             key={`moment-${moment.type}-${moment.timestamp}`}
             className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
@@ -337,14 +337,14 @@ interface DemographicsProps {
   /** Audience demographic data */
   demographics: AnalyticsData['demographics'] }
 
-const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographics: any}) => (
+const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographics}) => (
   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700">
     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Audience Demographics</h3>
     <div className="space-y-6">
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Top Countries</h4>
         <div className="space-y-3">
-          {demographics.countries.slice(0, 3).map((country: any) => (
+          {demographics.countries.slice(0, 3).map((country) => (
             <div key={`country-${country.name}`} className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 {country.name}
@@ -368,7 +368,7 @@ const Demographics: React.FC<DemographicsProps> = ({ demographics }: {demographi
       <div>
         <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Devices</h4>
         <div className="grid grid-cols-2 gap-3">
-          {demographics.devices.map((device: any) => (
+          {demographics.devices.map((device) => (
             <div
               key={`device-${device.type}`}
               className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"

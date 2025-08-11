@@ -78,7 +78,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
     }
   };
 
-  const handleNotificationToggle = async (enabled: any) => {
+  const handleNotificationToggle = async (enabled) => {
     try {
       const subscriptions = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
       if (subscriptions[channelId]) {

@@ -70,7 +70,7 @@ return;
     }
   };
 
-  const getTierColor = (amount: any) => {
+  const getTierColor = (amount) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -78,7 +78,7 @@ return;
     return tier?.color || 'bg-blue-500';
   };
 
-  const getTierDuration = (amount: any) => {
+  const getTierDuration = (amount) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -86,7 +86,7 @@ return;
     return tier?.duration || 30;
   };
 
-  const formatCurrency = (amount: any) => {
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

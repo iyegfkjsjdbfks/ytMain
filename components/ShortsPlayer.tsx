@@ -22,11 +22,11 @@ import type { Short } from '../src/types/core';
 interface ShortsPlayerProps {
   shorts: Short;
   currentIndex: number;
-  onIndexChange: (index: number) => void;
-  onLike: (shortId: any) => void;
-  onSubscribe: (channelId: any) => void;
-  onComment: (shortId: any) => void;
-  onShare: (shortId: any) => void;
+  onIndexChange: (index) => void;
+  onLike: (shortId) => void;
+  onSubscribe: (channelId) => void;
+  onComment: (shortId) => void;
+  onShare: (shortId) => void;
   className?: string;
 }
 
@@ -181,7 +181,7 @@ return;
     video.currentTime = newTime;
   };
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -305,7 +305,7 @@ return null;
         {/* Hashtags */}
         {currentShort.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
-            {currentShort.tags.slice(0, 3).map((tag: string, index: number) => (
+            {currentShort.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
                 className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer"

@@ -294,7 +294,11 @@ return;
   /**
    * Generate realistic metric values with some variation
    */
+<<<<<<< HEAD
   private generateRealisticMetric(type: any, min: any, max: any) number {
+=======
+  private generateRealisticMetric(type, min, max): number {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const base = min + (max - min) * Math.random();
 
     // Add some trend based on previous values
@@ -341,7 +345,11 @@ return;
   /**
    * Check if a metric change is an improvement
    */
+<<<<<<< HEAD
   private isImprovement(metric: keyof CodeMetrics, current: any, previous: any) number {
+=======
+  private isImprovement(metric: keyof CodeMetrics, current, previous): number {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const lowerIsBetter = ['complexity', 'duplicateCode', 'technicalDebt', 'securityVulnerabilities', 'performanceIssues', 'accessibilityIssues'];
 
     if (previous === 0) {
@@ -542,12 +550,12 @@ return 0;
   private checkQualityGates(_metrics: CodeMetrics) void {
     const failedGates: string = [];
 
-    this.qualityGates.forEach((gate: any) => {
+    this.qualityGates.forEach((gate) => {
       if (!gate.enabled) {
 return;
 }
 
-      const failed = gate.criteria.some((criterion: any) => {
+      const failed = gate.criteria.some((criterion) => {
         const value = _metrics[criterion.metric];
 
         switch (criterion.operator) {
@@ -622,8 +630,13 @@ return;
   /**
    * Get quality score trend
    */
+<<<<<<< HEAD
   getQualityScoreTrend() Array<{ timestamp : numbe; score: number }> {
     return this.trends.map((trend: any) => ({
+=======
+  getQualityScoreTrend(): Array<{ timestamp: number; score: number }> {
+    return this.trends.map((trend) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       timestamp: trend.timestamp,
       score: trend.score,
     }));
@@ -632,8 +645,13 @@ return;
   /**
    * Auto-implement simple refactoring opportunities
    */
+<<<<<<< HEAD
   async autoImplementRefactoring(opportunityIds: any) Promise<void> {
     const automatableOpportunities = this.opportunities.filter((op: any) => opportunityIds.includes(op.id)& op.automatable,
+=======
+  async autoImplementRefactoring(opportunityIds): Promise<void> {
+    const automatableOpportunities = this.opportunities.filter((op) => opportunityIds.includes(op.id) && op.automatable,
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     );
 
     console.log(`🔧 Auto-implementing ${automatableOpportunities.length} refactoring opportunities...`);
@@ -674,6 +692,7 @@ return 'No data available';
       `- Accessibility Issues: ${latest._metrics.accessibilityIssues}`,
       '',
       '## Recent Changes',
+<<<<<<< HEAD
       latest.improvements.length 0 ? '### Improvements'  : ',
       ...latest.improvements.map((imp: any) => `- ${imp: any}`),
       latest.regressions.length 0 ? '### Regressions'  : ',
@@ -682,10 +701,20 @@ return 'No data available';
       '## Refactoring Opportunities',
       ...this.opportunities.slice(0, 5).map((op: any) =>
         `- ${op.description} (${op.impact} impact, ${op.effort} effort)${op.automatable ' [Auto-fixable]' : ''}`,
+=======
+      latest.improvements.length > 0 ? '### Improvements' : '',
+      ...latest.improvements.map((imp) => `- ${imp}`),
+      latest.regressions.length > 0 ? '### Regressions' : '',
+      ...latest.regressions.map((reg) => `- ${reg}`),
+      '',
+      '## Refactoring Opportunities',
+      ...this.opportunities.slice(0, 5).map((op) =>
+        `- ${op.description} (${op.impact} impact, ${op.effort} effort)${op.automatable ? ' [Auto-fixable]' : ''}`,
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
       ),
       '',
       '## Code Review Insights',
-      ...this.insights.slice(0, 3).map((insight: any) =>
+      ...this.insights.slice(0, 3).map((insight) =>
         `- ${insight.title}: ${insight.description}`,
       ),
     ].filter((line) => line !== undefined);

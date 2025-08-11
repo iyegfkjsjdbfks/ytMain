@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "timestamp": "2025-08-11T02:27:30.025Z",
   "duration": "844.19s",
   "iterations": 0,
@@ -7,6 +8,73 @@
   "totalImprovement": 182,
   "targetAchieved": false,
   "results": [],
+=======
+  "timestamp": "2025-08-11T02:02:14.889Z",
+  "duration": "111.39s",
+  "iterations": 0,
+  "initialErrors": 184,
+  "finalErrors": 28,
+  "totalImprovement": 156,
+  "targetAchieved": false,
+  "results": [
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 184,
+      "afterTotal": 28,
+      "beforeType": 141,
+      "afterType": 27,
+      "totalIncrease": -156,
+      "typeFixed": 114,
+      "success": true,
+      "timestamp": "2025-08-11T02:00:41.441Z",
+      "output": "\u001b[36m🔧 [2025-08-11T02:00:37.153Z] 📁 Files processed: 514\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:00:37.153Z] 🔧 Files fixed: 261\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:00:37.153Z] ✨ Total fixes applied: 1997\u001b[0m\n\u001b[32m✅ [2025-08-11T02:00:37.153Z] 🎉 Successfully fixed 1997 enhanced TS1005 syntax errors!\u001b[0m\n"
+    },
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 28,
+      "afterTotal": 28,
+      "beforeType": 27,
+      "afterType": 27,
+      "totalIncrease": 0,
+      "typeFixed": 0,
+      "success": true,
+      "timestamp": "2025-08-11T02:00:56.139Z",
+      "output": "\u001b[36m🔧 [2025-08-11T02:00:51.929Z] 📁 Files processed: 514\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:00:51.929Z] 🔧 Files fixed: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:00:51.929Z] ✨ Total fixes applied: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:00:51.929Z] No enhanced TS1005 syntax errors found\u001b[0m\n"
+    },
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 28,
+      "afterTotal": 28,
+      "beforeType": 27,
+      "afterType": 27,
+      "totalIncrease": 0,
+      "typeFixed": 0,
+      "success": true,
+      "timestamp": "2025-08-11T02:01:33.869Z",
+      "output": "\u001b[36m🔧 [2025-08-11T02:01:29.731Z] 📁 Files processed: 514\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:29.732Z] 🔧 Files fixed: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:29.732Z] ✨ Total fixes applied: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:29.732Z] No enhanced TS1005 syntax errors found\u001b[0m\n"
+    },
+    {
+      "scriptName": "fix-ts1005-enhanced.js",
+      "errorType": "Enhanced TS1005 Fixer",
+      "errorCode": "1005",
+      "beforeTotal": 28,
+      "afterTotal": 28,
+      "beforeType": 27,
+      "afterType": 27,
+      "totalIncrease": 0,
+      "typeFixed": 0,
+      "success": true,
+      "timestamp": "2025-08-11T02:01:48.142Z",
+      "output": "\u001b[36m🔧 [2025-08-11T02:01:43.968Z] 📁 Files processed: 514\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:43.968Z] 🔧 Files fixed: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:43.968Z] ✨ Total fixes applied: 0\u001b[0m\n\u001b[36m🔧 [2025-08-11T02:01:43.968Z] No enhanced TS1005 syntax errors found\u001b[0m\n"
+    }
+  ],
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
   "configuration": {
     "maxAllowedIncrease": 100,
     "targetTotalErrors": 10,

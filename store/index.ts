@@ -70,7 +70,7 @@ interface AppActions {
   // UI Actions
   setTheme: (theme: AppState['theme']) => void;
   toggleSidebar: () => void;
-  setSidebarCollapsed: (collapsed: any) => void;
+  setSidebarCollapsed: (collapsed) => void;
   showMiniplayer: (video: Video) => void;
   hideMiniplayer: () => void;
 
@@ -81,34 +81,34 @@ interface AppActions {
   // Video Actions
   setVideos: (category: keyof AppState['videos'], videos: Video) => void;
   addToWatchLater: (video: Video) => void;
-  removeFromWatchLater: (videoId: any) => void;
+  removeFromWatchLater: (videoId) => void;
   addToHistory: (video: Video) => void;
   clearHistory: () => void;
   likeVideo: (video: Video) => void;
-  unlikeVideo: (videoId: any) => void;
+  unlikeVideo: (videoId) => void;
 
   // Channel Actions
   setChannels: (category: keyof AppState['channels'], channels: Channel) => void;
   subscribeToChannel: (channel: Channel) => void;
-  unsubscribeFromChannel: (channelId: any) => void;
+  unsubscribeFromChannel: (channelId) => void;
 
   // Playlist Actions
   setPlaylists: (playlists: UserPlaylist) => void;
   createPlaylist: (playlist: Omit<UserPlaylist, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  updatePlaylist: (id: string, updates: Partial<UserPlaylist>) => void;
-  deletePlaylist: (id: string) => void;
-  addVideoToPlaylist: (playlistId: any, video: Video) => void;
-  removeVideoFromPlaylist: (playlistId: any, videoId: any) => void;
+  updatePlaylist: (id, updates: Partial<UserPlaylist>) => void;
+  deletePlaylist: (id) => void;
+  addVideoToPlaylist: (playlistId, video: Video) => void;
+  removeVideoFromPlaylist: (playlistId, videoId) => void;
 
   // Search Actions
-  setSearchQuery: (query: any) => void;
+  setSearchQuery: (query) => void;
   setSearchResults: (results: Video) => void;
-  setSearchSuggestions: (suggestions: any) => void;
-  setSearchLoading: (loading: any) => void;
+  setSearchSuggestions: (suggestions) => void;
+  setSearchLoading: (loading) => void;
   clearSearch: () => void;
 
   // Loading Actions
-  setLoading: (category: keyof AppState['loading: any'], loading: any) => void;
+  setLoading: (category: keyof AppState['loading'], loading) => void;
 
   // Error Actions
   setError: (category: keyof AppState['errors'], error: string | null) => void;
@@ -264,14 +264,14 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           subscribeToChannel: (channel) => set((state) => {
-            const exists = state.channels.subscribed.find((c: any) => c.id === channel.id);
+            const exists = state.channels.subscribed.find((c) => c.id === channel.id);
             if (!exists) {
               state.channels.subscribed.push(channel);
             }
           }),
 
           unsubscribeFromChannel: (channelId) => set((state) => {
-            state.channels.subscribed = state.channels.subscribed.filter((c: any) => c.id !== channelId);
+            state.channels.subscribed = state.channels.subscribed.filter((c) => c.id !== channelId);
           }),
 
           // Playlist Actions
@@ -290,7 +290,7 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           updatePlaylist: (id, updates) => set((state) => {
-            const index = state.playlists.findIndex((p: any) => p.id === id);
+            const index = state.playlists.findIndex((p) => p.id === id);
             if (index !== -1) {
               Object.assign(state.playlists[index], updates, {
                 updatedAt: new Date().toISOString(),
@@ -299,11 +299,11 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           deletePlaylist: (id) => set((state) => {
-            state.playlists = state.playlists.filter((p: any) => p.id !== id);
+            state.playlists = state.playlists.filter((p) => p.id !== id);
           }),
 
           addVideoToPlaylist: (playlistId, video) => set((state) => {
-            const playlist = state.playlists.find((p: any) => p.id === playlistId);
+            const playlist = state.playlists.find((p) => p.id === playlistId);
             if (playlist) {
               const exists = playlist.videos?.find((v: Video) => v.id === video.id);
               if (!exists) {
@@ -318,7 +318,7 @@ playlist.videos = [];
           }),
 
           removeVideoFromPlaylist: (playlistId, videoId) => set((state) => {
-            const playlist = state.playlists.find((p: any) => p.id === playlistId);
+            const playlist = state.playlists.find((p) => p.id === playlistId);
             if (playlist?.videos) {
               playlist.videos = playlist.videos.filter((v: Video) => v.id !== videoId);
               playlist.videoCount = playlist.videos.length;

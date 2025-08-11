@@ -20,7 +20,7 @@ interface CommentModalProps {
   onClose: () => void;
   shortId: string;
   shortTitle?: string;
-  onCommentSubmit?: (commentText: any) => void;
+  onCommentSubmit?: (commentText) => void;
 }
 
 /**
@@ -38,7 +38,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   // shortId is currently not used but kept for future functionality
 
-  const handleCommentSubmit = async (text: any) => {
+  const handleCommentSubmit = async (text) => {
     if (!text.trim()) {
 return;
 }

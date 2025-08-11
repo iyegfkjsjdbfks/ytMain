@@ -58,7 +58,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     }
   };
 
-  const formatBytes = (bytes: any): string => {
+  const formatBytes = (bytes): string => {
     if (bytes === 0) {
 return '0 Bytes';
 }

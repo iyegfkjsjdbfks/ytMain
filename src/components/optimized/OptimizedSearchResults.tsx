@@ -19,13 +19,13 @@ interface OptimizedSearchResultsProps {
 }
 
 interface SearchResultItemProps {
-  index: number, style: React.CSSProperties;
+  index, style: React.CSSProperties;
   data: {
     videos: Video, onVideoClick: (video: Video) => void, query: string
   };
 }
 
-const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }: {data: any, style: any; index: number}) => {
+const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }: {data, style; index: number}) => {
   const { videos, onVideoClick, query } = data;
   const video = videos[index];
 

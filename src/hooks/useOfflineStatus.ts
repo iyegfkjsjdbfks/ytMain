@@ -198,7 +198,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [state.isOnline, getNetworkQuality]);
 
   // Update offline statistics
-  const updateOfflineStats = useCallback((isOffline: any) => {
+  const updateOfflineStats = useCallback((isOffline) => {
     const stats = getOfflineStats();
 
     if (isOffline && !state.wasOffline) {

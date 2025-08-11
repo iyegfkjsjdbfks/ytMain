@@ -16,7 +16,11 @@ const CACHE_DURATION = {
 class APICache {
   private cache = new Map<string, { data={true}; timestamp: number; duration: number }>();
 
+<<<<<<< HEAD
   set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM) void {
+=======
+  set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -24,7 +28,11 @@ class APICache {
     });
   }
 
+<<<<<<< HEAD
   get(key: string) null {
+=======
+  get(key): any | null {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -43,7 +51,11 @@ return null;
     this.cache.clear();
   }
 
+<<<<<<< HEAD
   delete(key: string) void {
+=======
+  delete(key): void {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     this.cache.delete(key);
   }
 
@@ -115,7 +127,7 @@ const requestQueue = new RequestQueue();
 // HTTP Client
 class HTTPClient {
   private async request<T>(
-    url: any,
+    url,
     options: RequestInit = {},
     cacheKey?: string,
     cacheDuration?: number,
@@ -151,7 +163,7 @@ return cached;
   }
 
   async get<T>(
-    url: any,
+    url,
     cacheKey?: string,
     cacheDuration?: number,
   ): Promise<T> {
@@ -160,7 +172,7 @@ return cached;
     );
   }
 
-  async post<T>(url: any, data: any): Promise<T> {
+  async post<T>(url, data): Promise<T> {
     return requestQueue.add(() =>
       this.requestT>(url, {
         method: 'POST',
@@ -169,7 +181,7 @@ return cached;
     );
   }
 
-  async put<T>(url: any, data: any): Promise<T> {
+  async put<T>(url, data): Promise<T> {
     return requestQueue.add(() =>
       this.requestT>(url, {
         method: 'PUT',
@@ -178,7 +190,7 @@ return cached;
     );
   }
 
-  async delete<T>(url: any): Promise<T> {
+  async delete<T>(url): Promise<T> {
     return requestQueue.add(() =>
       this.requestT>(url, { method: 'DELETE' }),
     );
@@ -246,7 +258,11 @@ export class VideoService {
         CACHE_DURATION.MEDIUM,
       );
 
+<<<<<<< HEAD
       const videos: Video[] = response.items.map((item: any) => ({
+=======
+      const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -279,7 +295,11 @@ export class VideoService {
     }
   }
 
+<<<<<<< HEAD
   static async getVideoById(id: string) Promise<Video | nul={true}l> {
+=======
+  static async getVideoById(id): Promise<Video | null> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const cacheKey = `video_${id}`;
 
     try {
@@ -336,7 +356,7 @@ return null;
   }
 
   static async searchVideos(
-    query: any,
+    query,
     limit: number = 20,
     pageToken?: string,
   ) Promise<{ videos: Video; nextPageToken?: string }> {
@@ -374,7 +394,11 @@ return null;
         CACHE_DURATION.SHORT,
       );
 
+<<<<<<< HEAD
       const videos: Video[] = response.items.map((item: any) => ({
+=======
+      const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -407,7 +431,11 @@ return null;
     }
   }
 
+<<<<<<< HEAD
   private static parseDuration(duration: any) number {
+=======
+  private static parseDuration(duration): number {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
@@ -423,7 +451,11 @@ return 0;
 }
 
 // Mock data generator for development
+<<<<<<< HEAD
 function generateMockChannel(id: string) Channel {
+=======
+function generateMockChannel(id): Channel {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
   return {
     id,
     name: `Channel ${id}`,
@@ -443,7 +475,11 @@ function generateMockChannel(id: string) Channel {
 }
 
 export class ChannelService {
+<<<<<<< HEAD
   static async getChannel(id: string) Promise<Channel | nul={true}l> {
+=======
+  static async getChannel(id): Promise<Channel | null> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     const cacheKey = `channel_${id}`;
 
     try {
@@ -488,7 +524,7 @@ return null;
   }
 
   static async getChannelVideos(
-    channelId: any,
+    channelId,
     limit: number = 20,
     pageToken?: string,
   ) Promise<{ videos: Video; nextPageToken?: string }> {
@@ -527,7 +563,11 @@ return null;
         CACHE_DURATION.MEDIUM,
       );
 
+<<<<<<< HEAD
       const videos: Video[] = response.items.map((item: any) => ({
+=======
+      const videos: Video[] = response.items?.map((item) => ({
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
         id: item.id.videoId,
         title: item.snippet.title,
         description: item.snippet.description,
@@ -562,7 +602,11 @@ return null;
 }
 
 export class PlaylistService {
+<<<<<<< HEAD
   static async getUserPlaylists(_userId: any) Promise<UserPlaylist[]> {
+=======
+  static async getUserPlaylists(_userId): Promise<UserPlaylist[]> {
+>>>>>>> 9e90af169a3fdc11350addd3954c622440863596
     try {
       if (import.meta.env.MODE === 'development') {
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -599,7 +643,7 @@ export class PlaylistService {
 // Export cache utilities
 export const cacheUtils = {
   clear: () => apiCache.clear(),
-  delete: (key: string) => apiCache.delete(key: string),
+  delete: (key) => apiCache.delete(key),
   size: () => apiCache.size(),
 };
 

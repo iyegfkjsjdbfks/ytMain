@@ -16,7 +16,7 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText: any) => void;
+  onCommentSubmit: (commentText) => void;
   maxCommentLength: number;
 }
 

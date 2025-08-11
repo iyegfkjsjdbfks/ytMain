@@ -1,6 +1,6 @@
 
 /// <reference types="react/jsx-runtime" />
-import { Route, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 declare global {
   namespace JSX {
     interface IntrinsicElements {

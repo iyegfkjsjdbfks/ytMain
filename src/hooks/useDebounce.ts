@@ -19,7 +19,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
  * @param delay - The delay in milliseconds
  * @returns The debounced value
  */
-export function useDebounce<T>(value: T, delay: any): T {
+export function useDebounce<T>(value: T, delay): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function useDebounce<T>(value: T, delay: any): T {
  */
 export function useDebouncedCallback<T extends (...args) => any>(
   callback: T,
-  delay: any,
+  delay,
   deps: React.DependencyList = [],
 ): T {
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -81,7 +81,7 @@ export function useDebouncedCallback<T extends (...args) => any>(
  * @returns Object with search state and functions
  */
 export function useDebouncedSearch<T>(
-  searchFunction: (query: any) => Promise<T[]>,
+  searchFunction: (query) => Promise<T[]>,
   delay: number = 300,
 ) {
   const [query, setQuery] = useState('');
@@ -92,7 +92,7 @@ export function useDebouncedSearch<T>(
   const debouncedQuery = useDebounce(query, delay);
   const abortControllerRef = useRef<AbortController>();
 
-  const search = useCallback(async (searchQuery: any) => {
+  const search = useCallback(async (searchQuery) => {
     if (!searchQuery.trim()) {
       setResults([]);
       setLoading(false);

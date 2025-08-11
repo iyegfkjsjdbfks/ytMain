@@ -16,7 +16,7 @@ interface MetricData {
 interface AlertRule {
   id: string;
   name: string;
-  condition: (value: any, threshold: any) => boolean;
+  condition: (value, threshold) => boolean;
   threshold: number;
   severity: 'low' | 'medium' | 'high' | 'critical';
   cooldown: number; // minutes
@@ -93,7 +93,7 @@ return undefined;
   /**
    * Record a custom metric
    */
-  recordMetric(name: any, value: any, tags?: Record<string, string>): void {
+  recordMetric(name, value, tags?: Record<string, string>): void {
     const metric: MetricData = {
       timestamp: Date.now(),
       value,
@@ -124,7 +124,7 @@ return undefined;
   /**
    * Get metrics for a specific name
    */
-  getMetrics(name: any, timeRange?: { start: number; end: number }): MetricData[] {
+  getMetrics(name, timeRange?: { start: number; end: number }): MetricData[] {
     const metrics = this.metrics.get(name) || [];
 
     if (!timeRange) {
@@ -139,7 +139,7 @@ return metrics;
   /**
    * Get aggregated metrics
    */
-  getAggregatedMetrics(name: any, timeRange?: { start: number; end: number }): {
+  getAggregatedMetrics(name, timeRange?: { start: number; end: number }): {
     count: number;
     avg: number;
     min: number;
@@ -500,7 +500,7 @@ return undefined;
     }, 10000); // Check every 10 seconds
   }
 
-  private checkAlerts(metricName: any, value: any): void {
+  private checkAlerts(metricName, value): void {
     for (const [alertId, alert] of this.alerts) {
       const alertPrefix = alertId?.split('-')[0];
       if ((alertPrefix && metricName.includes(alertPrefix)) || alertId === metricName) {
@@ -511,7 +511,7 @@ return undefined;
     }
   }
 
-  private triggerAlert(alert: AlertRule, value: any): void {
+  private triggerAlert(alert: AlertRule, value): void {
     const now = Date.now();
     const lastAlert = this.lastAlertTime.get(alert.id) || 0;
     const cooldownMs = alert.cooldown * 60 * 1000;
@@ -527,7 +527,7 @@ return undefined;
     }
   }
 
-  private executeAlertAction(action: AlertAction, alert: AlertRule, value: any): void {
+  private executeAlertAction(action: AlertAction, alert: AlertRule, value): void {
     switch (action.type) {
       case 'console':
         console.warn(`🚨 Alert: ${alert.name} - Value: ${value}, Threshold: ${alert.threshold}`);
@@ -557,7 +557,7 @@ return undefined;
     }
   }
 
-  private evaluateRule(value: any, rule: QualityRule): boolean {
+  private evaluateRule(value, rule: QualityRule): boolean {
     switch (rule.operator) {
       case 'gt': return value > rule.threshold;
       case 'lt': return value < rule.threshold;
@@ -577,7 +577,7 @@ return undefined;
     return sessionId;
   }
 
-  private generateSecureToken(length: any): string {
+  private generateSecureToken(length): string {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {

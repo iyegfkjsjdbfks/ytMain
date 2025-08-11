@@ -19,39 +19,39 @@ import { ChartBarIcon,
   TvIcon,
 } from '@heroicons/react/24/outline';
 // Mock chart components since recharts is not available
-const ResponsiveContainer = ({ children, width, height }: {height: number, width: number; children: any}) => (
+const ResponsiveContainer = ({ children, width, height }: {height, width: number; children}) => (
   <div style={{ width, height }}>{children}</div>
 );
-const PieChart = ({ children }: {children: any}) => <div className="flex items-center justify-center h-full">{children}</div>;
-const Pie = ({ data }: {data: any}) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = (_props: any) => null;
-const Tooltip = (_props: any) => null;
-const Legend = (_props: any) => null;
+const PieChart = ({ children }: {children}) => <div className="flex items-center justify-center h-full">{children}</div>;
+const Pie = ({ data }: {data}) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
+const Cell = (_props) => null;
+const Tooltip = (_props) => null;
+const Legend = (_props) => null;
 import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
 
 interface DashboardStats {
-  totalViews: number, totalSubscribers: number;
-  totalVideos: number, totalWatchTime: number;
-  revenue: number, avgViewDuration: number;
-  engagement: number, clickThroughRate: number
+  totalViews, totalSubscribers: number;
+  totalVideos, totalWatchTime: number;
+  revenue, avgViewDuration: number;
+  engagement, clickThroughRate: number
 }
 
 interface VideoPerformance {
-  id: string, title: string;
-  views: number, likes: number;
-  comments: number, duration: string;
-  publishedAt: string, thumbnail: string;
-  revenue: number, watchTime: number
+  id, title: string;
+  views, likes: number;
+  comments, duration: string;
+  publishedAt, thumbnail: string;
+  revenue, watchTime: number
 }
 
 interface AudienceData {
-  country: string, percentage: number; views: number
+  country, percentage: number; views: number
 }
 
 interface DeviceData {
-  device: string, percentage: number; color: string
+  device, percentage: number; color: string
 }
 
 const DashboardPage: React.FC = () => {
@@ -178,7 +178,7 @@ const DashboardPage: React.FC = () => {
     fetchDashboardData();
   }, [timeRange]);
 
-  const formatNumber = (num: any): string => {
+  const formatNumber = (num): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)  }M`;
 }
@@ -187,13 +187,13 @@ return `${(num / 1000).toFixed(1)  }K`;
 }
     return num.toString();
   };
-  const formatDuration = (minutes: any): string => {
+  const formatDuration = (minutes): string => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
-  const formatCurrency = (amount: any): string => {
+  const formatCurrency = (amount): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency', currency: 'USD'
     }).format(amount);
@@ -392,7 +392,7 @@ return `${(num / 1000).toFixed(1)  }K`;
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value: any) => [`${value: any}%`, 'Usage']} />
+                <Tooltip formatter={(value) => [`${value}%`, 'Usage']} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>

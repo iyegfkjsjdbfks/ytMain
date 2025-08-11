@@ -35,7 +35,7 @@ interface HoverAutoplayVideoCardProps {
   className?: string;
 }
 
-const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }: {video: any}) => {
+const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, className = '' }: {video}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
   const [hasError, setHasError] = useState(false);

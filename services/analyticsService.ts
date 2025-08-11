@@ -1,5 +1,4 @@
 /// <reference types="node" />
-import { Route } from 'react-router-dom';
 
 
 declare namespace NodeJS {
@@ -293,7 +292,7 @@ return;
 
   // Public API
   track(
-    eventName: any,
+    eventName,
     properties: Record<string, any> = {},
     category: AnalyticsEvent['category'] = 'user_action',
   ) {
@@ -340,21 +339,21 @@ return;
     }, 'navigation');
   }
 
-  trackClick(element: any, properties: Record<string, any> = {}) {
+  trackClick(element, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
       ...properties,
     });
   }
 
-  trackVideoEvent(action: any, videoId: any, properties: Record<string, any> = {}) {
+  trackVideoEvent(action, videoId, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
       ...properties,
     }, 'video');
   }
 
-  trackSearch(query: any, results?: number) {
+  trackSearch(query, results?: number) {
     this.track('search', {
       query,
       results,
@@ -362,11 +361,11 @@ return;
     });
   }
 
-  trackEngagement(type: any, properties: Record<string, any> = {}) {
+  trackEngagement(type, properties: Record<string, any> = {}) {
     this.track(type, properties, 'engagement');
   }
 
-  trackPerformance(metric: any, value: any, properties: Record<string, any> = {}) {
+  trackPerformance(metric, value, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
       ...properties,
@@ -374,7 +373,7 @@ return;
   }
 
   // Session management
-  setUserId(userId: any) {
+  setUserId(userId) {
     this.session.userId = userId;
     this.track('user_identified', { userId });
   }
@@ -447,7 +446,7 @@ return;
 
   getEvents(category?: AnalyticsEvent['category']): AnalyticsEvent[] {
     const { events } = this.session;
-    return category ? events.filter((e: Event) => e: Event.category === category) : events;
+    return category ? events.filter((e: Event) => e.category === category) : events;
   }
 
   getEventStats() {
@@ -457,14 +456,14 @@ return;
 
     return {
       total: events.length,
-      lastHour: events.filter((e: Event) => e: Event.timestamp > oneHourAgo).length,
+      lastHour: events.filter((e: Event) => e.timestamp > oneHourAgo).length,
       byCategory: {
-        user_action: events.filter((e: Event) => e: Event.category === 'user_action').length,
-        performance: events.filter((e: Event) => e: Event.category === 'performance').length,
-        error: events.filter((e: Event) => e: Event.category === 'error').length,
-        navigation: events.filter((e: Event) => e: Event.category === 'navigation').length,
-        video: events.filter((e: Event) => e: Event.category === 'video').length,
-        engagement: events.filter((e: Event) => e: Event.category === 'engagement').length,
+        user_action: events.filter((e: Event) => e.category === 'user_action').length,
+        performance: events.filter((e: Event) => e.category === 'performance').length,
+        error: events.filter((e: Event) => e.category === 'error').length,
+        navigation: events.filter((e: Event) => e.category === 'navigation').length,
+        video: events.filter((e: Event) => e.category === 'video').length,
+        engagement: events.filter((e: Event) => e.category === 'engagement').length,
       },
       sessionDuration: now - this.session.startTime,
       pageViews: this.session.pageViews,

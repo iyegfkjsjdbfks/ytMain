@@ -50,7 +50,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleVote = async (pollId: any, optionId: any) => {
+  const handleVote = async (pollId, optionId) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -58,7 +58,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleEndPoll = async (pollId: any) => {
+  const handleEndPoll = async (pollId) => {
     try {
       // TODO: Implement end poll functionality
       logger.debug('End poll:', pollId);
@@ -73,7 +73,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const removeOption = (index: number) => {
+  const removeOption = (index) => {
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
@@ -82,14 +82,14 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const updateOption = (index: number, value: any) => {
+  const updateOption = (index, value) => {
     setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt, i) => i=== index ? value : opt),
     }));
   };
 
-  const formatDuration = (seconds: any) => {
+  const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -232,7 +232,7 @@ return 0;
           <p className="text-gray-900 mb-3 font-medium">{activePoll.question}</p>
 
           <div className="space-y-2">
-            {activePoll.options.map((option: any) => (
+            {activePoll.options.map((option) => (
               <div key={option.id} className="relative">
                 <button
                   onClick={() => handleVote(activePoll.id, option.id)}
@@ -282,7 +282,7 @@ return 0;
                 </div>
 
                 <div className="space-y-2">
-                  {poll.options.map((option: any) => (
+                  {poll.options.map((option) => (
                     <div key={option.id} className="flex items-center justify-between text-sm">
                       <span className="text-gray-700">{option.text}</span>
                       <div className="flex items-center space-x-2">

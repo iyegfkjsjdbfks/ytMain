@@ -95,10 +95,10 @@ const YourDataPage: React.FC = () => {
   };
 
   const DataSection: React.FC<{
-    title: string, description: string;
-    count: number, isVisible: boolean;
+    title, description: string;
+    count, isVisible: boolean;
     onToggleVisibility: () => void, onClear: () => void; loading: boolean
-  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading: boolean, onClear: Function; onToggleVisibility: Function, isVisible: boolean; count: number, description: string; title: string}) => (
+  }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }: {loading, onClear: Function; onToggleVisibility: Function, isVisible: boolean; count, description: string; title: string}) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">

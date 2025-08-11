@@ -19,11 +19,11 @@ interface CategoryTabsProps {
   activeCategory: 'all' | 'music' | 'gaming' | 'news' | 'movies'; setActiveCategory: (category: 'all' | 'music' | 'gaming' | 'news' | 'movies') => void
 }
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory: any; activeCategory: any; categories: any}) => {
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory, setActiveCategory }: {setActiveCategory; activeCategory; categories}) => {
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">
-        {categories.map((category: any) => (
+        {categories.map((category) => (
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
