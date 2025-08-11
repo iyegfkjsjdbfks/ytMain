@@ -164,7 +164,7 @@ const WatchPage: React.FC = () => {
   const [metadataExpanded, setMetadataExpanded] = React.useState(false);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId, playlistId) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: any, playlistId: any) => {
     // Call the original handler
     await handleSaveToPlaylist(playlistId);
 

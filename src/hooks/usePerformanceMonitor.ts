@@ -43,8 +43,8 @@ class PerformanceStore {
     return [...this.metrics];
   }
 
-  getMetricsByComponent(componentName) {
-    return this.metrics.filter((m) => m.componentName === componentName);
+  getMetricsByComponent(componentName: any) {
+    return this.metrics.filter((m: any) => m.componentName === componentName);
   }
 
   subscribe(observer: (metrics: PerformanceMetrics) => void) {
@@ -75,19 +75,19 @@ class PerformanceStore {
 return 0;
 }
 
-    const totalTime = relevantMetrics.reduce((sum, m) => sum + m.renderTime, 0);
+    const totalTime = relevantMetrics.reduce((sum: any, m: any) => sum + m.renderTime, 0);
     return totalTime / relevantMetrics.length;
   }
 
   getSlowRenders(threshold = 16) { // 16ms = 60fps
-    return this.metrics.filter((m) => m.renderTime > threshold);
+    return this.metrics.filter((m: any) => m.renderTime > threshold);
   }
 }
 
 const performanceStore = new PerformanceStore();
 
 export const usePerformanceMonitor = (
-  componentName,
+  componentName: any,
   config: PerformanceConfig = {},
 ) => {
   const opts = { ...DEFAULT_CONFIG, ...config };
@@ -148,7 +148,7 @@ return;
   // Manual tracking methods
   const trackAsyncOperation = useCallback(async <T>(
     operation: () => Promise<T>,
-    operationName,
+    operationName: any,
   ): Promise<T> => {
     const startTime = performance.now();
 
@@ -182,7 +182,7 @@ return;
 
   const measureFunction = useCallback(<T extends any, R>(
     fn: (...args: T) => R,
-    functionName,
+    functionName: any,
   ) => {
     return (...args: T): R => {
       const startTime = performance.now();
@@ -217,7 +217,7 @@ export const usePerformanceData = (componentName?: string) => {
   useEffect(() => {
     const updateMetrics = (allMetrics: PerformanceMetrics) => {
       const filteredMetrics = componentName
-        ? allMetrics.filter((m) => m.componentName.startsWith(componentName))
+        ? allMetrics.filter((m: any) => m.componentName.startsWith(componentName))
         : allMetrics;
       setMetrics(filteredMetrics);
     };
@@ -230,7 +230,7 @@ export const usePerformanceData = (componentName?: string) => {
 
   const stats = {
     averageRenderTime: performanceStore.getAverageRenderTime(componentName),
-    slowRenders: performanceStore.getSlowRenders().filter((m) =>
+    slowRenders: performanceStore.getSlowRenders().filter((m: any) =>
       !componentName || m.componentName.startsWith(componentName),
     ),
     totalRenders: metrics.length,
@@ -328,7 +328,7 @@ export const usePerformanceBudget = () => {
     apiResponse: 1000, // 1 second
   };
 
-  const checkBudget = useCallback((metric, value) => {
+  const checkBudget = useCallback((metric: any, value: string | number) => {
     const budget = budgets[metric as keyof typeof budgets];
     if (!budget) {
 return { withinBudget: true, budget: 0, overage: 0 };

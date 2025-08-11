@@ -17,7 +17,7 @@ import type { Video } from '../src/types/core';
 
 interface MiniplayerProps {
   video: Video | null;
-  onClose: () => void; onMaximize: (videoId) => void
+  onClose: () => void; onMaximize: (videoId: any) => void
 }
 
 const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {

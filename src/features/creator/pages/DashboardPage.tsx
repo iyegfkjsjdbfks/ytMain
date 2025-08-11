@@ -24,9 +24,9 @@ const ResponsiveContainer = ({ children, width, height }) => (
 );
 const PieChart = ({ children }) => <div className="flex items-center justify-center h-full">{children}</div>;
 const Pie = ({ data }) => <div className="text-center">Chart Data: {data?.length || 0} items</div>;
-const Cell = (_props) => null;
-const Tooltip = (_props) => null;
-const Legend = (_props) => null;
+const Cell = (_props: any) => null;
+const Tooltip = (_props: any) => null;
+const Legend = (_props: any) => null;
 import { numberUtils, dateUtils } from '../../../utils/unifiedUtils';
 
 // Temporary utility functions
@@ -178,7 +178,7 @@ const DashboardPage: React.FC = () => {
     fetchDashboardData();
   }, [timeRange]);
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)  }M`;
 }
@@ -187,13 +187,13 @@ return `${(num / 1000).toFixed(1)  }K`;
 }
     return num.toString();
   };
-  const formatDuration = (minutes): string => {
+  const formatDuration = (minutes: any): string => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   };
 
-  const formatCurrency = (amount): string => {
+  const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency', currency: 'USD'
     }).format(amount);
@@ -392,7 +392,7 @@ return `${(num / 1000).toFixed(1)  }K`;
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => [`${value}%`, 'Usage']} />
+                <Tooltip formatter={(value: string | number) => [`${value}%`, 'Usage']} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>

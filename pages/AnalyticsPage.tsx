@@ -83,7 +83,7 @@ const AnalyticsPage: React.FC = () => {
     });
   }, [timeRange]);
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
 return `${(num / 1000000).toFixed(1)}M`;
 }
@@ -93,7 +93,7 @@ return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
-  const formatDuration = (hours): string => {
+  const formatDuration = (hours: any): string => {
     if (hours >= 24) {
 return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 }
@@ -138,7 +138,7 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 
     return (
       <div className="h-64 flex items-end space-x-1 p-4">
-        {data.map((value, index) => {
+        {data.map((value: string | number, index: number) => {
           const height = ((value - minValue) / range) * 200 + 20;
           return (
             <div key={index} className="flex-1 flex flex-col items-center">

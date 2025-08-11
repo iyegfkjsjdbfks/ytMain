@@ -272,7 +272,7 @@ export const DeveloperDashboard: React.FC = () => {
       });
     }
 
-    return alerts.sort((a, b) => b.severity - a.severity);
+    return alerts.sort((a: any, b: any) => b.severity - a.severity);
   };
 
   // Computed values

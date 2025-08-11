@@ -24,7 +24,7 @@ class GoogleSearchVideoStore {
    * Store multiple Google Custom Search video results
    */
   storeVideos(videos: GoogleSearchResult): void {
-    videos.forEach((video) => {
+    videos.forEach((video: any) => {
       this.videos.set(video.id, video);
     });
     this.saveToStorage();
@@ -34,7 +34,7 @@ class GoogleSearchVideoStore {
   /**
    * Get a Google Custom Search video by ID
    */
-  getVideo(id): GoogleSearchResult | null {
+  getVideo(id: string): GoogleSearchResult | null {
     const video = this.videos.get(id);
     if (video) {
       console.log(`✅ Retrieved Google Search video: ${id} - ${video.title}`);
@@ -47,7 +47,7 @@ class GoogleSearchVideoStore {
   /**
    * Check if a video exists in the store
    */
-  hasVideo(id): boolean {
+  hasVideo(id: string): boolean {
     return this.videos.has(id);
   }
 

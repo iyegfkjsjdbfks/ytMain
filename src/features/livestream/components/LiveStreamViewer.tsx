@@ -6,7 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 interface LiveStreamViewerProps {
   streamId: string;
   autoplay?: boolean;
-  onViewerCountChange?: (count) => void;
+  onViewerCountChange?: (count: number) => void;
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({

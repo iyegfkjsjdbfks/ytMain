@@ -69,8 +69,8 @@ export interface ModerationItem {
 }
 
 interface ModerationDashboardProps {
-  onModerate: (itemId, action: 'approve' | 'reject' | 'remove' | 'flag', reason?: string) => void;
-  onBulkModerate: (itemIds, action: 'approve' | 'reject' | 'remove') => void;
+  onModerate: (itemId: any, action: 'approve' | 'reject' | 'remove' | 'flag', reason?: string) => void;
+  onBulkModerate: (itemIds: any, action: 'approve' | 'reject' | 'remove') => void;
   className?: string;
 }
 
@@ -216,7 +216,7 @@ return false;
       }
     });
 
-  const handleModerate = (itemId, action: 'approve' | 'reject' | 'remove' | 'flag') => {
+  const handleModerate = (itemId: any, action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
     setItems(prev => prev.map(item =>
       item.id === itemId
@@ -258,7 +258,7 @@ return false;
     setSelectedItems(new Set());
   };
 
-  const toggleSelection = (itemId) => {
+  const toggleSelection = (itemId: any) => {
     setSelectedItems(prev => {
       const newSet = new Set(prev);
       if (newSet.has(itemId)) {
@@ -270,7 +270,7 @@ return false;
     });
   };
 
-  const getPriorityColor = (priority) => {
+  const getPriorityColor = (priority: any) => {
     switch (priority) {
       case 'critical': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'high': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
@@ -280,7 +280,7 @@ return false;
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case 'pending': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
       case 'approved': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
@@ -291,7 +291,7 @@ return false;
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: any) => {
     switch (type) {
       case 'video': return <VideoCameraIcon className="w-5 h-5" />;
       case 'comment': return <ChatBubbleLeftIcon className="w-5 h-5" />;
@@ -514,7 +514,7 @@ return false;
                         <div>
                           <span className="text-gray-600 dark:text-gray-400">Categories:</span>
                           <div className="mt-1">
-                            {item.aiAnalysis.categories.map((category, index) => (
+                            {item.aiAnalysis.categories.map((category: any, index: number) => (
                               <span
                                 key={index}
                                 className="inline-block bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs mr-1 mb-1"

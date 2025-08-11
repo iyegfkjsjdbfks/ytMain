@@ -19,11 +19,11 @@ class PerformanceMonitor {
     return PerformanceMonitor.instance;
   }
 
-  startMeasure(name): void {
+  startMeasure(name: string): void {
     this.metrics.set(name, performance.now());
   }
 
-  endMeasure(name): PerformanceMetrics | null {
+  endMeasure(name: string): PerformanceMetrics | null {
     const startTime = this.metrics.get(name);
     if (!startTime) return null;
 
@@ -46,14 +46,14 @@ class PerformanceMonitor {
     return metrics;
   }
 
-  measureAsync<T>(name, fn: () => Promise<T>): Promise<T> {
+  measureAsync<T>(name: string, fn: () => Promise<T>): Promise<T> {
     this.startMeasure(name);
     return fn().finally(() => {
       this.endMeasure(name);
     });
   }
 
-  measure<T>(name, fn: () => T): T {
+  measure<T>(name: string, fn: () => T): T {
     this.startMeasure(name);
     try {
       return fn();
@@ -66,7 +66,7 @@ class PerformanceMonitor {
 export const performanceMonitor = PerformanceMonitor.getInstance();
 
 // React hook for performance monitoring
-export function usePerformanceMonitor(name) {
+export function usePerformanceMonitor(name: string) {
   return {
     startMeasure: () => performanceMonitor.startMeasure(name),
     endMeasure: () => performanceMonitor.endMeasure(name),

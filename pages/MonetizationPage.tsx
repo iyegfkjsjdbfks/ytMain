@@ -104,12 +104,12 @@ const MonetizationPage: React.FC = () => {
       setRevenueData(mockRevenueData);
 
       // Generate mock metrics
-      const totalRevenue = mockRevenueData.reduce((sum, day) =>
+      const totalRevenue = mockRevenueData.reduce((sum: any, day: any) =>
         sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0,
       );
 
-      const membershipRevenue = mockRevenueData.reduce((sum, day) => sum + day.membershipRevenue, 0);
-      const superChatRevenue = mockRevenueData.reduce((sum, day) => sum + day.superChatRevenue, 0);
+      const membershipRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.membershipRevenue, 0);
+      const superChatRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.superChatRevenue, 0);
 
       setMetrics({
         totalRevenue,
@@ -132,7 +132,7 @@ const MonetizationPage: React.FC = () => {
     generateMockData();
   }, [timeRange]);
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -140,7 +140,7 @@ const MonetizationPage: React.FC = () => {
     }).format(amount);
   };
 
-  const formatNumber = (num) => {
+  const formatNumber = (num: any) => {
     return new Intl.NumberFormat('en-US').format(num);
   };
 
@@ -246,7 +246,7 @@ return { labels: [], datasets: [] };
         mode: 'index' as const,
         intersect: false,
         callbacks: {
-          label: (context) => {
+          label: (context: any) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
           },
         },
@@ -261,7 +261,7 @@ return { labels: [], datasets: [] };
       y: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => formatCurrency(value),
+          callback: (value: string | number) => formatCurrency(value as number),
         },
       },
     },
@@ -280,8 +280,8 @@ return { labels: [], datasets: [] };
       },
       tooltip: {
         callbacks: {
-          label: (context) => {
-            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+          label: (context: any) => {
+            const total = context.dataset.data.reduce((a: any, b: any) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           },

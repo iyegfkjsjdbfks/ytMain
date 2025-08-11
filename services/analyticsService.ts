@@ -292,7 +292,7 @@ return;
 
   // Public API
   track(
-    eventName,
+    eventName: any,
     properties: Record<string, any> = {},
     category: AnalyticsEvent['category'] = 'user_action',
   ) {
@@ -339,21 +339,21 @@ return;
     }, 'navigation');
   }
 
-  trackClick(element, properties: Record<string, any> = {}) {
+  trackClick(element: HTMLElement, properties: Record<string, any> = {}) {
     this.track('click', {
       element,
       ...properties,
     });
   }
 
-  trackVideoEvent(action, videoId, properties: Record<string, any> = {}) {
+  trackVideoEvent(action: any, videoId: any, properties: Record<string, any> = {}) {
     this.track(`video_${action}`, {
       videoId,
       ...properties,
     }, 'video');
   }
 
-  trackSearch(query, results?: number) {
+  trackSearch(query: any, results?: number) {
     this.track('search', {
       query,
       results,
@@ -361,11 +361,11 @@ return;
     });
   }
 
-  trackEngagement(type, properties: Record<string, any> = {}) {
+  trackEngagement(type: any, properties: Record<string, any> = {}) {
     this.track(type, properties, 'engagement');
   }
 
-  trackPerformance(metric, value, properties: Record<string, any> = {}) {
+  trackPerformance(metric: any, value: string | number, properties: Record<string, any> = {}) {
     this.track(`performance_${metric}`, {
       value,
       ...properties,
@@ -373,7 +373,7 @@ return;
   }
 
   // Session management
-  setUserId(userId) {
+  setUserId(userId: any) {
     this.session.userId = userId;
     this.track('user_identified', { userId });
   }

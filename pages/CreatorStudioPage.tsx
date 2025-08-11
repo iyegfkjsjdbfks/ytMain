@@ -248,7 +248,7 @@ const CreatorStudioPage: React.FC = () => {
     },
   ];
 
-  const getDifficultyColor = (difficulty) => {
+  const getDifficultyColor = (difficulty: any) => {
     switch (difficulty) {
       case 'Easy': return 'text-green-600 bg-green-100';
       case 'Medium': return 'text-yellow-600 bg-yellow-100';
@@ -257,7 +257,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case 'ready': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
@@ -266,7 +266,7 @@ const CreatorStudioPage: React.FC = () => {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: any) => {
     switch (type) {
       case 'video': return <CameraIcon className="w-4 h-4" />;
       case 'short': return <ClockIcon className="w-4 h-4" />;
@@ -393,7 +393,7 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag, tagIndex) => (
+                  {idea.tags.map((tag: any, tagIndex: any) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>

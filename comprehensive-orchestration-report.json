@@ -1,0 +1,57 @@
+{
+  "timestamp": "2025-08-11T11:39:36.189Z",
+  "duration": "57.06s",
+  "initialErrors": 32,
+  "finalErrors": 32,
+  "totalFixed": 0,
+  "improvementRate": "0.0%",
+  "results": [
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    },
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    },
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    },
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    },
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    },
+    {
+      "success": true,
+      "skipped": true,
+      "beforeTotal": 32,
+      "afterTotal": 32,
+      "iteration": 1
+    }
+  ],
+  "summary": {
+    "totalRuns": 6,
+    "successfulRuns": 6,
+    "revertedRuns": 0
+  }
+}

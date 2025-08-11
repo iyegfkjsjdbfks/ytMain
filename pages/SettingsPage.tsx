@@ -50,7 +50,7 @@ const ToggleSetting: React.FC<{
 
 const SelectSetting: React.FC<{
   label, value: string;
-  options, onChange: (value) => void
+  options, onChange: (value: string | number) => void
 }> = ({ label, value, options, onChange }) => (
   <div className="flex items-center justify-between py-2">
     <label className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
@@ -61,7 +61,7 @@ const SelectSetting: React.FC<{
       onChange={(e) => onChange(e.target.value)}
       className="px-3 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
     >
-      {options.map((option) => (
+      {options.map((option: any) => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>

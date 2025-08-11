@@ -6,7 +6,7 @@ import { logger } from '../utils/logger';
 
 // YouTube API type declarations
 interface YT {
-  Player: new (elementId, config: YTPlayerConfig) => YTPlayer;
+  Player: new (elementId: any, config: YTPlayerConfig) => YTPlayer;
   PlayerState: {
     UNSTARTED: number;
     ENDED: number;
@@ -55,7 +55,7 @@ interface YTPlayer {
   playVideo(): void;
   pauseVideo(): void;
   stopVideo(): void;
-  seekTo(seconds, allowSeekAhead?: boolean): void;
+  seekTo(seconds: any, allowSeekAhead?: boolean): void;
   clearVideo(): void;
   getVideoLoadedFraction(): number;
   getPlayerState(): number;
@@ -65,16 +65,16 @@ interface YTPlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string;
   getPlaylistIndex(): number;
-  setLoop(loopPlaylists): void;
-  setShuffle(shufflePlaylist): void;
+  setLoop(loopPlaylists: any): void;
+  setShuffle(shufflePlaylist: any): void;
   getVolume(): number;
-  setVolume(volume): void;
+  setVolume(volume: any): void;
   mute(): void;
   unMute(): void;
   isMuted(): boolean;
-  setSize(width, height): object;
+  setSize(width: any, height: any): object;
   getPlaybackRate(): number;
-  setPlaybackRate(suggestedRate): void;
+  setPlaybackRate(suggestedRate: any): void;
   getAvailablePlaybackRates(): number;
   destroy(): void;
 }
@@ -121,8 +121,8 @@ export class YouTubePlayer {
   private player;
 
   constructor(
-    private readonly elementId,
-    private readonly videoId,
+    private readonly elementId: any,
+    private readonly videoId: any,
     private readonly options: {
       width?: number;
       height?: number;
@@ -261,7 +261,7 @@ export class YouTubePlayer {
     });
   }
 
-  seekTo(seconds, allowSeekAhead: boolean = true): Promise<void> {
+  seekTo(seconds: any, allowSeekAhead: boolean = true): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this.player) {
         try {
@@ -322,7 +322,7 @@ export class YouTubePlayer {
     });
   }
 
-  setVolume(volume): Promise<void> {
+  setVolume(volume: any): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this.player) {
         try {
@@ -392,8 +392,8 @@ export class YouTubePlayer {
 
 // Utility function to safely handle YouTube embeds
 export function embedYouTubeVideo(
-  containerId,
-  videoId,
+  containerId: any,
+  videoId: any,
   options: {
     width?: number;
     height?: number;
@@ -439,7 +439,7 @@ export function embedYouTubeVideo(
 }
 
 // Type-safe function to check if a string is a valid YouTube URL
-export function isYouTubeUrl(url): boolean {
+export function isYouTubeUrl(url: any): boolean {
   if (!url) {
 return false;
 }

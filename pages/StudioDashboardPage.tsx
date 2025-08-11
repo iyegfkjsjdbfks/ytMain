@@ -173,7 +173,7 @@ const StudioDashboardPage: React.FC = () => {
     },
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: any) => {
     switch (status) {
       case 'published': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
