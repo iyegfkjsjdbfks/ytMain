@@ -193,7 +193,7 @@ return undefined;
   /**
    * Evaluate a feature _flag for a user
    */
-  evaluateFlag(flagId: string, _context: UserContext = {}, defaultValue?: any): any {
+  evaluateFlag(flagId, _context: UserContext = {}, defaultValue?: any): any {
     const _flag = this.flags.get(flagId);
     if (!_flag) {
       console.warn(`🚩 Feature _flag '${flagId}' not found`);

@@ -14,9 +14,9 @@ const CACHE_DURATION = {
 
 // Cache Implementation
 class APICache {
-  private cache = new Map<string, { data: any; timestamp: number; duration: number }>();
+  private cache = new Map<string, { data; timestamp: number; duration: number }>();
 
-  set(key: string, data: any, duration: number = CACHE_DURATION.MEDIUM): void {
+  set(key, data, duration: number = CACHE_DURATION.MEDIUM): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -24,7 +24,7 @@ class APICache {
     });
   }
 
-  get(key: string): any | null {
+  get(key): any | null {
     const item = this.cache.get(key);
     if (!item) {
 return null;
@@ -43,7 +43,7 @@ return null;
     this.cache.clear();
   }
 
-  delete(key: string): void {
+  delete(key): void {
     this.cache.delete(key);
   }
 
@@ -279,7 +279,7 @@ export class VideoService {
     }
   }
 
-  static async getVideoById(id: string): Promise<Video | null> {
+  static async getVideoById(id): Promise<Video | null> {
     const cacheKey = `video_${id}`;
 
     try {
@@ -336,7 +336,7 @@ return null;
   }
 
   static async searchVideos(
-    query: string,
+    query,
     limit: number = 20,
     pageToken?: string,
   ): Promise<{ videos: Video[]; nextPageToken?: string }> {
@@ -407,7 +407,7 @@ return null;
     }
   }
 
-  private static parseDuration(duration: string): number {
+  private static parseDuration(duration): number {
     // Parse ISO 8601 duration (PT4M13S) to seconds
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
