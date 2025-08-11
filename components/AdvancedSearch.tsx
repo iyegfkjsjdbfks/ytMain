@@ -1,19 +1,5 @@
-
-/// <reference types="react/jsx-runtime" />
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName]: any;
-    }
-  }
-}
-import { useState, useEffect, useRef } from 'react';
-import React from 'react';
-
 import {
   MagnifyingGlassIcon,
   FunnelIcon,
@@ -29,12 +15,12 @@ export interface SearchFilters {
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
   type: 'any' | 'video' | 'channel' | 'playlist' | 'live';
   quality: 'any' | 'hd' | '4k';
-  features: string; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr
+  features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr
   sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query, filters: SearchFilters) => void;
+  onSearch: (query: string, filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }

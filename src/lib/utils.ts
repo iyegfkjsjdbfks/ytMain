@@ -12,8 +12,8 @@ declare namespace NodeJS {
 }
 
 import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from 'clsx';
 import React from "react";
-import { clsx } from 'clsx';
 
 
 // =================================
@@ -133,7 +133,7 @@ export function formatRelativeTime(date: Date | string): string {
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
-      return interval === 1 ? `1 ${unit} ago`      : `${int} ${unit}s ago`;
+      return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
     }
   }
 
@@ -283,11 +283,11 @@ export function isValidUrl(str): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args) => any>(
+export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait
+  wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
+  let timeout: ReturnType<typeof setTimeout>;
 
   return function executedFunction(...args: Parameters<T>) {
     const later = () => {
@@ -468,7 +468,7 @@ return 'dark';
  * @param array - The array to deduplicate
  * @returns A new array with unique values
  */
-export function uniq<T>(array: T): T[] {
+export function uniq<T>(array: T[]): T[] {
   return [...new Set(array)];
 }
 
@@ -580,6 +580,6 @@ export function randomString(length: number = 10): string {
  * @param max - The maximum value (inclusive)
  * @returns A random integer between min and max
  */
-export function randomInt(min, max): number {
-  return Math.floor(Math.random() (max - min + 1)) + min;
+export function randomInt(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
