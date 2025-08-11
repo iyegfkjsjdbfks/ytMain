@@ -53,7 +53,7 @@ const iconSizeClasses = {
   lg: 'w-5 h-5',
 };
 
-const LoadingSpinner: React.FC<{ size: string }> = ({ size }: {size: number}) => (
+const LoadingSpinner: React.FC<{ size: string }> = ({ size }) => (
   <svg
     className={cn('animate-spin text-current', size)}
     xmlns="http://www.w3.org/2000/svg"

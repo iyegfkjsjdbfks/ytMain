@@ -161,7 +161,7 @@ export const SubscribeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isSubscribed, loading = false, onClick, className }: {className: any}: {onClick: Function}: {isSubscribed: boolean}) => (
+}> = ({ isSubscribed, loading = false, onClick, className }) => (
   <Button
     variant={isSubscribed ? 'outline' : 'primary'}
     size="sm"
@@ -179,7 +179,7 @@ export const LikeButton: React.FC<{
   loading?: boolean;
   onClick?: () => void;
   className?: string;
-}> = ({ isLiked, count, loading = false, onClick, className }: {className: any}: {onClick: Function}: {count: number}: {isLiked: boolean}) => (
+}> = ({ isLiked, count, loading = false, onClick, className }) => (
   <Button
     variant={isLiked ? 'primary' : 'ghost'}
     size="sm"

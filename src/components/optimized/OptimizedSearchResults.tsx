@@ -29,7 +29,7 @@ interface SearchResultItemProps {
   };
 }
 
-const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }: {data: any}: {style: any}: {index: number}) => {
+const SearchResultItem = memo<SearchResultItemProps>(({ index, style, data }) => {
   const { videos, onVideoClick, query } = data;
   const video = videos[index];
 

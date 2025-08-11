@@ -65,7 +65,7 @@ interface ChannelInfoProps {
   onSubscribe: () => void;
 }
 
-const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }: {onSubscribe: Function}: {isSubscribed: boolean}: {channel: any}) => {
+const ChannelInfo: React.FC<ChannelInfoProps> = ({ channel, isSubscribed, onSubscribe }) => {
   const channelLink = channel ? `/channel/${encodeURIComponent(channel.name)}` : '#';
 
   return (
@@ -112,7 +112,7 @@ interface SubscribeButtonProps {
   onSubscribe: () => void;
 }
 
-const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }: {onSubscribe: Function}: {isSubscribed: boolean}) => {
+const SubscribeButton: React.FC<SubscribeButtonProps> = ({ isSubscribed, onSubscribe }) => {
   return (
     <button
       onClick={onSubscribe}

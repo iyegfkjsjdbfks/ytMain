@@ -21,7 +21,7 @@ interface MiniplayerProps {
   onMaximize: (videoId) => void;
 }
 
-const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }: {onMaximize: Function}: {onClose: Function}: {video: any}) => {
+const Miniplayer: React.FC<MiniplayerProps> = ({ video, onClose, onMaximize }) => {
   if (!video) {
 return null;
 }

@@ -36,7 +36,7 @@ interface NotificationsPanelProps {
   onClose: () => void;
 }
 
-const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }: {onClose: Function}: {isOpen: boolean}) => {
+const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
   const [notifications, setNotifications] = useState(mockNotifications);
 
   if (!isOpen) {

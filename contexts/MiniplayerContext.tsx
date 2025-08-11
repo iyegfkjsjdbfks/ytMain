@@ -14,7 +14,7 @@ interface MiniplayerContextType {
 
 const MiniplayerContext = createContext<MiniplayerContextType | undefined>(undefined);
 
-export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children }: {children: any}) => {
+export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 

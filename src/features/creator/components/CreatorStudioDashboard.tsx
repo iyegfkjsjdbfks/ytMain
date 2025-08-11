@@ -16,7 +16,7 @@ import { EyeIcon,
 } from '@heroicons/react/24/outline';
 
 // Icon wrapper components to fix type compatibility
-const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }: {className: any}) => (
+const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({ className }) => (
   <VideoCameraIcon className={className} />
 );
 

@@ -166,7 +166,7 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 
   // Custom wrapper
-  wrapper?: ({ children }: { children: ReactNode }) => ReactElement;
+  wrapper?: ({ children }) => ReactElement;
 
   // Mock user for authentication
   mockUser?: any;
@@ -186,17 +186,7 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({
-  children,
-  queryClient,
-  initialEntries = ['/'],
-  mockUser: _mockUser,
-}: {
-  children: ReactNode;
-  queryClient: QueryClient;
-  initialEntries?: string;
-  mockUser?: any;
-}) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUser,  }) {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -218,7 +208,7 @@ export function customRender(
     ...renderOptions
   } = options;
 
-  const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
+  const Wrapper = wrapper || (({ children }) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}
@@ -254,7 +244,7 @@ export function customRenderHook<TResult, TProps>(
     ...renderHookOptions
   } = options;
 
-  const Wrapper = wrapper || (({ children }: { children: ReactNode }) => (
+  const Wrapper = wrapper || (({ children }) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}

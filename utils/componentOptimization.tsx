@@ -265,17 +265,7 @@ export function createLazyComponent<P extends Record<string, any>>(
 }
 
 // Virtual scrolling hook for large lists
-export function useVirtualScrolling({
-  itemCount,
-  itemHeight,
-  containerHeight,
-  overscan = 5,
-}: {
-  itemCount: number;
-  itemHeight: number;
-  containerHeight: number;
-  overscan?: number;
-}) {
+export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5,  }) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const visibleRange = useMemo(() => {

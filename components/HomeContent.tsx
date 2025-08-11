@@ -23,7 +23,7 @@ interface HomeContentProps {
   videos: Video;
 }
 
-const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }: {videos: any}: {selectedCategory: any}) => {
+const HomeContent: React.FC<HomeContentProps> = ({ selectedCategory, videos }) => {
   return (
     <>
       {selectedCategory === 'All' && (

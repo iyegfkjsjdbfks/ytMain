@@ -25,7 +25,7 @@ const VideoGridItem = memo<{
     itemsPerRow: number;
     onVideoClick:(video: Video) => void;
   };
-}>(({ columnIndex, rowIndex, style, data }: {data: any}: {style: any}: {rowIndex: number}: {columnIndex: number}) => {
+}>(({ columnIndex, rowIndex, style, data }) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];

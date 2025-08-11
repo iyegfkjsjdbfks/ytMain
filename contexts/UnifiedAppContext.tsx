@@ -152,7 +152,7 @@ interface UnifiedAppProviderProps {
 }
 
 // Provider Component
-export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }: {children: any}) => {
+export const UnifiedAppProvider: React.FC<UnifiedAppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(unifiedAppReducer, initialState);
 
   // Auth actions
