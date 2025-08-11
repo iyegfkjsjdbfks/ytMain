@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-08-11T09:39:07.431Z",
+  "duration": "54.76s",
+  "initialErrors": 166,
+  "finalErrors": 168,
+  "totalFixed": 0,
+  "successRate": "0.0",
+  "fixerResults": [
+    {
+      "script": "fix-comprehensive-syntax.js",
+      "description": "Comprehensive syntax fixes",
+      "improvement": 0,
+      "success": false,
+      "iterations": 0
+    },
+    {
+      "script": "fix-ts1005-critical-syntax.js",
+      "description": "Critical TS1005 fixes",
+      "improvement": 0,
+      "success": false,
+      "iterations": 0
+    },
+    {
+      "script": "fix-ts1144-critical.js",
+      "description": "TS1144 brace/semicolon fixes",
+      "improvement": 0,
+      "success": false,
+      "iterations": 0
+    },
+    {
+      "script": "fix-ts1128-declaration-expected.js",
+      "description": "TS1128 declaration fixes",
+      "improvement": 0,
+      "success": false,
+      "iterations": 0
+    },
+    {
+      "script": "fix-ts1109-expression-expected.js",
+      "description": "TS1109 expression fixes",
+      "improvement": 0,
+      "success": false,
+      "iterations": 0
+    }
+  ]
+}

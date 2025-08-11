@@ -12,8 +12,8 @@ class AuthService {
   /**
    * Log in with credentials
    */
-  async login(credentials: LoginCredentials) Promise<User> {
-    const response = await fetch(`${this.baseUrl}/login`, {;
+  async login(credentials: LoginCredentials): Promise<User> {
+    const response = await fetch(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,8 +34,8 @@ class AuthService {
   /**
    * Register a new user
    */
-  async register(data: RegisterData) Promise<User> {
-    const response = await fetch(`${this.baseUrl}/register`, {;
+  async register(data: RegisterData): Promise<User> {
+    const response = await fetch(`${this.baseUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,10 +56,10 @@ class AuthService {
   /**
    * Log out the current user
    */
-  async logout() Promise<void> {
+  async logout(): Promise<void> {
     const tokens = this.getTokens();
 
-    if (tokens ? .refreshToken) {
+    if (tokens?.refreshToken) {
       try {
         await fetch(`${this.baseUrl}/logout`, {
           method: 'POST',
@@ -80,15 +80,15 @@ class AuthService {
   /**
    * Get the current user
    */
-  async getCurrentUser() Promise<User | n={true}u={true}l={true}l> {
+  async getCurrentUser(): Promise<User | null> {
     const tokens = this.getTokens();
 
-    if (!tokens ? .accessToken) {
+    if (!tokens?.accessToken) {
       return null;
     }
 
     try {
-      const response = await fetch(`${this.baseUrl}/me`, {;
+      const response = await fetch(`${this.baseUrl}/me`, {
         headers     : {
           'Authorization': `Bearer ${tokens.accessT}`,
         },
@@ -116,9 +116,9 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken(refreshToken) Promise<AuthTokens | n={true}u={true}l={true}l> {
+  private async refreshToken(refreshToken: string): Promise<AuthTokens | null> {
     try {
-      const response = await fetch(`${this.baseUrl}/refresh`, {;
+      const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ class AuthService {
   /**
    * Set authentication tokens in localStorage
    */
-  private setTokens(tokens: AuthTokens) void {
+  private setTokens(tokens: AuthTokens): void {
     localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
   }
 
@@ -168,21 +168,21 @@ class AuthService {
   /**
    * Clear authentication tokens from localStorage
    */
-  private clearTokens() void {
+  private clearTokens(): void {
     localStorage.removeItem(this.tokenKey);
   }
 
   /**
    * Check if the current session is authenticated
    */
-  isAuthenticated() boolean {
+  isAuthenticated(): boolean {
     const tokens = this.getTokens();
     if (!tokens) {
       return false;
     }
 
     // Check if token is expired
-    return tokens.expiresAt Date.now();
+    return tokens.expiresAt > Date.now();
   }
 }
 
