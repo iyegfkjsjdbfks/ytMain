@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useCallback,  useEffect, useState } from 'react';
 
 import { unifiedDataService } from '../services/unifiedDataService';
 import type { Video } from '../types/core';

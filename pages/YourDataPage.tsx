@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect,  useState } from 'react';
 
-import TrashIcon, { ShieldCheckIcon } from '@heroicons/react/24/outline';
+import { TrashIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 import getLikedVideos, { getWatchHistoryVideos } from '../services/realVideoService';
 

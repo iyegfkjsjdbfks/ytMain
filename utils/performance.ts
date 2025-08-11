@@ -240,7 +240,7 @@ export function withPerformanceMonitoring<P extends object>(
 ) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const MonitoredComponent = React.forwardRef((props: P, ref: any) => {
+  const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {
     const { startRender, endRender } = usePerformanceMonitor(displayName);
 
     React.useEffect(() => {
@@ -263,7 +263,7 @@ export const measureRenderTime = (componentName: any) => {
   return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args) {
+    descriptor.value = function (...args: any[]) {
       const metricName = `${componentName}-${propertyKey}`;
       performanceMonitor.startMeasure(metricName);
       const result = originalMethod.apply(this, args);
@@ -312,5 +312,5 @@ export const monitorMemoryUsage = () => {
 
   };
 
-// React import (assuming it's available globally or imported elsewhere)
-import React from "react";
+// Ensure valid React imports
+import { useEffect } from 'react';

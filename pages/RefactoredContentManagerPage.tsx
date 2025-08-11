@@ -1,16 +1,3 @@
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-
 import React, { useState } from 'react';
 
 import BaseForm from '../components/BaseForm';

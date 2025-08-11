@@ -2,6 +2,7 @@
  * Performance monitoring utility for tracking Core Web Vitals and custom metrics
  */
 
+import { useEffect } from 'react';
 import React from 'react';
 
 interface PerformanceMetric {

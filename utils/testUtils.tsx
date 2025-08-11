@@ -157,7 +157,7 @@ export const apiMocks = {
 };
 
 // Custom render function with providers
-interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
+interface CustomRenderOptions extends Omit<any, 'wrapper'> {
   // Router options
   initialEntries?: string;
 
@@ -226,7 +226,7 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
 // Custom render hook function
 export function customRenderHook<TResult, TProps>(
   hook: (props: TProps) => TResult,
-  options: RenderHookOptions<TProps> & {
+  options: any & {
     queryClient?: QueryClient;
     initialEntries?: string;
     mockUser?: any;
@@ -250,14 +250,14 @@ export function customRenderHook<TResult, TProps>(
     </AllTheProviders>
   ));
 
-  return renderHook(hook, { wrapper: Wrapper, ...renderHookOptions });
+  return (global as any).renderHook(hook, { wrapper: Wrapper, ...renderHookOptions });
 }
 
 // Testing utilities for common patterns
 export const testUtils = {
   // Wait for loading states to complete
   waitForLoadingToFinish: async () => {
-    await waitFor(() => {
+    await (global as any).waitFor(() => {
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
       expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
@@ -266,7 +266,7 @@ export const testUtils = {
 
   // Wait for error states
   waitForError: async (errorMessage?: string) => {
-    await waitFor(() => {
+    await (global as any).waitFor(() => {
       if (errorMessage) {
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
       } else {

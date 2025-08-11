@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect,  useState } from 'react';
 
-import CheckIcon, { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
 import { getCommentsByVideoId, getVideos } from '../services/realVideoService';
 import { parseRelativeDate } from '../utils/dateUtils';

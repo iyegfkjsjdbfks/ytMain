@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef,  useState } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
 
@@ -18,8 +18,8 @@ interface SimpleHoverVideoCardProps {
 const SimpleHoverVideoCard: React.FC<SimpleHoverVideoCardProps> = ({ video, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Configuration constants
   const HIDE_DELAY = 150;  // Delay before hiding preview

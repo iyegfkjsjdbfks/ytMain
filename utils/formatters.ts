@@ -126,10 +126,11 @@ return '0';
  * Format percentage with specified decimal places
  */
 export const formatPercentage = (value: string | number, decimals: number = 1): string => {
-  if (isNaN(value)) {
-return '0%';
-}
-  return `${value.toFixed(decimals)}%`;
+  const num = typeof value === 'string' ? Number(value) : value;
+  if (Number.isNaN(num)) {
+    return '0%';
+  }
+  return `${num.toFixed(decimals)}%`;
 };
 
 /**

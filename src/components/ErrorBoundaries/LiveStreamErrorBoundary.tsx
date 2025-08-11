@@ -44,7 +44,7 @@ interface State {
  */
 export class LiveStreamErrorBoundary extends Component<Props, State> {
   private maxRetries = 5;
-  private reconnectTimeout: NodeJS.Timeout | null = null;
+  private reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
 
   constructor(props: Props) {
     super(props);

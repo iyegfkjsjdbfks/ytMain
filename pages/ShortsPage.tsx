@@ -1,17 +1,5 @@
 import { useLocation } from 'react-router-dom';
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback,  useRef } from 'react';
 
 import {
   MagnifyingGlassIcon,

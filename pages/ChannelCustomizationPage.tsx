@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-import PaintBrushIcon, { PhotoIcon } from '@heroicons/react/24/outline';
+import { PaintBrushIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid';
 
 interface ChannelBranding {

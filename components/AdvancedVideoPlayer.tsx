@@ -104,7 +104,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const controlsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
 
   // Connect videoRef to video player instance

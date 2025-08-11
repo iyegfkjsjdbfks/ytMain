@@ -1,16 +1,4 @@
 import { useNavigate, Link } from 'react-router-dom';
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
 
 import React, { useState } from 'react';
 

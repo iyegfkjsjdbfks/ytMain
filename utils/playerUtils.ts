@@ -515,8 +515,8 @@ export function getVideoEndScreenItems(video?: Partial<Video>): EndScreenItem[] 
         videoId: video.id ? `${video.id}-rec-${i}` : `video-${Date.now()}-${i}`,
         channelId: video.channelId || `channel-${Date.now()}-${i}`,
         publishedAt: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000).toISOString(),
-        channelThumbnail: video.channel?.avatarUrl || '',
-        isVerified: video.channel?.isVerified || false,
+        channelThumbnail: (video as any)?.channelThumbnail || '',
+        isVerified: (video as any)?.isVerified || false,
         viewCountNumber: isLive ? 0 : viewCount,
       };
     });

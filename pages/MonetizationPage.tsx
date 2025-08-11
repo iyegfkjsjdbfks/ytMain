@@ -1,18 +1,6 @@
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-import React, { useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 
-import ArrowTrendingUpIcon, { BanknotesIcon } from '@heroicons/react/24/outline';
+import { ArrowTrendingUpIcon, BanknotesIcon } from '@heroicons/react/24/outline';
 // Register Chart.js components when needed
 import {
   Chart as ChartJS,

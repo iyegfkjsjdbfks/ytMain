@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 /**
  * Advanced Code Analysis and Refactoring Engine
  * Provides AI-powered code quality insights, automated refactoring suggestions,

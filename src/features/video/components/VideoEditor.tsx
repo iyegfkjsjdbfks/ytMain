@@ -7,7 +7,7 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef,  useState } from 'react';
 
 import {
   PlayIcon,
@@ -130,7 +130,7 @@ export const VideoEditor: React.FC = () => {
   });
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setTimeout>;
     if (editorState.isPlaying) {
       interval = setInterval(() => {
         setEditorState(prev => ({

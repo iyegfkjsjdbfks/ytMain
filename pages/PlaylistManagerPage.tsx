@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-
-import PencilIcon, { PlusIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, PlusIcon } from '@heroicons/react/24/outline';
 import Droppable, { DragDropContext } from 'react-beautiful-dnd';
 
 interface PlaylistVideo {

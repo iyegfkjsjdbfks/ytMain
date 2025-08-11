@@ -122,7 +122,7 @@ class AdvancedFeatureFlagManager {
   private evaluationHistory: FlagEvaluation[] = [];
   private abTestResults: Map<string, ABTestResult[]> = new Map();
   private isRunning = false;
-  private rolloutTimers: Map<string, NodeJS.Timeout> = new Map();
+  private rolloutTimers: Map<string, ReturnType<typeof setTimeout>> = new Map();
 
   constructor() {
     this.setupDefaultFlags();
@@ -899,49 +899,50 @@ return undefined;
     }, 30000); // Check every 30 seconds
   }
 
-  private async checkAlertThreshold(__flag: FeatureFlag, __threshold: AlertThreshold): Promise<void> {
-    const _threshold = this._threshold;
+  private async checkAlertThreshold(flag: FeatureFlag, threshold: AlertThreshold): Promise<void> {
+    let currentValue = 0;
 
-    switch (_threshold.metric) {
+    switch (threshold.metric) {
       case 'error_rate':
         currentValue = Math.random() * 0.1; // Mock error rate
         break;
       case 'response_time':
         currentValue = Math.random() * 1000 + 200; // Mock response time
         break;
-      case 'conversion_rate':
-        const analytics = this.getEvaluationAnalytics(_flag.id, 1);
-        currentValue = Object.values(analytics.conversionRates)[0] || 0;
+      case 'conversion_rate': {
+        const analytics = this.getEvaluationAnalytics(flag.id, 1);
+        currentValue = Object.values(analytics.conversionRates)[0] ?? 0;
         break;
+      }
       default:
-        return undefined;
+        return;
     }
 
     let shouldTrigger = false;
-    switch (_threshold.operator) {
+    switch (threshold.operator) {
       case 'gt':
-        shouldTrigger = currentValue > (_threshold.value as any);
+        shouldTrigger = currentValue > (threshold.value as any);
         break;
       case 'lt':
-        shouldTrigger = currentValue < (_threshold.value as any);
+        shouldTrigger = currentValue < (threshold.value as any);
         break;
       case 'eq':
-        shouldTrigger = currentValue === (_threshold.value as any);
+        shouldTrigger = currentValue === (threshold.value as any);
         break;
     }
 
     if (shouldTrigger) {
-      console.warn(`🚨 Alert _threshold triggered for _flag '${_flag.id}': ${_threshold.metric} ${_threshold.operator} ${_threshold.value} (current: ${currentValue})`);
+      console.warn(`🚨 Alert threshold triggered for flag '${flag.id}': ${threshold.metric} ${threshold.operator} ${threshold.value} (current: ${currentValue})`);
 
-      switch (_threshold.action) {
+      switch (threshold.action) {
         case 'notify':
           // Send notification (implementation would depend on notification system)
           break;
         case 'disable':
-          this.toggleFlag(_flag.id, false);
+          this.toggleFlag(flag.id, false);
           break;
         case 'rollback':
-          this.emergencyRollback(_flag.id, `Alert _threshold: ${_threshold.metric} ${_threshold.operator} ${_threshold.value}`);
+          this.emergencyRollback(flag.id, `Alert threshold: ${threshold.metric} ${threshold.operator} ${threshold.value}`);
           break;
       }
     }

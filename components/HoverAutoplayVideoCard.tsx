@@ -11,7 +11,7 @@ declare namespace NodeJS {
 }
 
 
-import { useRef, useState } from 'react';
+import { useEffect,  useRef, useState } from 'react';
 
 import { formatDistanceToNow } from 'date-fns';
 
@@ -32,8 +32,8 @@ const HoverAutoplayVideoCard: React.FC<HoverAutoplayVideoCardProps> = ({ video, 
   const [hasError, setHasError] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [iframeKey, setIframeKey] = useState(0);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Configuration constants
   const HOVER_DELAY = 500; // Delay before showing video preview in milliseconds

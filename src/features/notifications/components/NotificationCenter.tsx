@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef,  useState } from 'react';
 import { BellIcon } from '@heroicons/react/24/solid';
 import { formatDistanceToNow } from 'date-fns';
 import { useNotifications } from '../hooks/useNotifications';

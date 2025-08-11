@@ -349,7 +349,7 @@ export const performanceUtils = {
     func: T,
     delay: any,
   ): (...args: Parameters<T>) => void => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func(...args), delay);

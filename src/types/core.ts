@@ -6,7 +6,7 @@ export interface Video {
   thumbnail: string;
   thumbnailUrl?: string; // Alias for thumbnail
   duration: string;
-  views: number;
+  views: number | string;
   publishedAt: string;
   channelId: string;
   channelTitle: string;
@@ -23,7 +23,8 @@ export interface Video {
   dislikeCount?: number; // Dislike count
   categoryId?: string; // Category ID
   buffered?: TimeRanges; // Buffered time ranges
-  tags?: string; // Video tags
+  tags?: string | string[]; // Video tags
+  likeCount?: number; // Some code uses likeCount
   visibility?: string;
   metadata?: any;
   statistics?: {
@@ -112,7 +113,7 @@ export interface Comment {
   authorAvatar?: string;
   publishedAt: string;
   likeCount: number;
-  replies?: Comment;
+  replies?: Comment[];
   content?: string;
   likes?: number;
   isPinned?: boolean;

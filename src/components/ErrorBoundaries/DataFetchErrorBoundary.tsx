@@ -44,7 +44,7 @@ interface State {
  */
 export class DataFetchErrorBoundary extends Component<Props, State> {
   private maxRetries = 3;
-  private retryTimeout: NodeJS.Timeout | null = null;
+  private retryTimeout: ReturnType<typeof setTimeout> | null = null;
 
   constructor(props: Props) {
     super(props);

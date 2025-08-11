@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // @ts-nocheck
 
-import ChevronRightIcon, { PlayIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, PlayIcon } from '@heroicons/react/24/solid';
 
 import { parseRelativeDate } from '../utils/dateUtils';
 

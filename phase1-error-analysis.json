@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2025-08-11T18:32:44.571Z",
+  "totalErrors": 72,
+  "perCode": {
+    "TS1128": 36,
+    "TS1005": 36
+  },
+  "perCategory": {
+    "syntax": 72
+  },
+  "samples": {
+    "TS1128": "pages/CreatorStudioPage.tsx(2,1): error TS1128: Declaration or statement expected.",
+    "TS1005": "pages/CreatorStudioPage.tsx(3,13): error TS1005: ',' expected."
+  },
+  "rootCauseHypotheses": {
+    "syntax": "Likely residual malformed edits from automated scripts (placeholders, missing punctuation).",
+    "unused": "Dead code / leftover imports from refactors.",
+    "duplicate": "Multiple identical import/variable declarations (often multiple React imports).",
+    "missingName": "Placeholders like elemName or variables removed during refactor; need declaration or removal.",
+    "missingModule": "Incorrect import paths or deleted files.",
+    "missingExport": "Imported symbol no longer exported; stale usage.",
+    "typeAssign": "Union narrowing issues or incorrect field types in model interfaces.",
+    "property": "Interfaces define singular object but code treats variable as array or richer shape.",
+    "structure": "Model/interface mismatch: arrays defined as single object types.",
+    "implicitAny": "Missing parameter / member annotations due to aggressive code insertion.",
+    "narrowing": "Optional chaining or undefined risk not guarded.",
+    "jsx": "Dynamic component values typed too loosely (ElementType confusion).",
+    "other": "Miscellaneous."
+  }
+}

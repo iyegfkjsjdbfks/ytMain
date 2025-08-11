@@ -1,18 +1,5 @@
 import React from 'react';
 
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-
 // Common TypeScript interfaces and types
 
 export interface BaseComponent {

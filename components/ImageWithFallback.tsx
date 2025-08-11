@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useCallback,  useEffect, useState } from 'react';
 
 interface ImageWithFallbackProps {
   src: string;

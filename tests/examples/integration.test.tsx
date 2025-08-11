@@ -3,6 +3,7 @@
  * and testing real user workflows
  */
 
+import { useState, useEffect } from 'react';
 import React from 'react';
 
 import { screen, fireEvent, waitFor } from '@testing-library/react';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-import act, { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BrowserRouter } from 'react-router-dom';
@@ -76,7 +76,7 @@ export const renderHookWithProviders = <TResult, TProps>(
     </TestProviders>
   );
 
-  return renderHook(hook, { wrapper, ...renderHookOptions });
+  return (global as any).renderHook(hook, { wrapper, ...renderHookOptions });
 };
 
 // Mock Data Factories

@@ -19,31 +19,46 @@ import { securityMonitoring } from '../utils/securityMonitoring';
 // Types for dashboard data
 interface DashboardMetrics {
   performance: {
-    score, lcp: number;
-    fid, cls: number;
-    memoryUsage, errorRate: number
+    score: number;
+    lcp: number;
+    fid: number;
+    cls: number;
+    memoryUsage: number;
+    errorRate: number;
   };
   security: {
-    score, threatsDetected: number;
-    vulnerabilities, complianceScore: number
+    score: number;
+    threatsDetected: number;
+    vulnerabilities: number;
+    complianceScore: number;
   };
   deployment: {
-    successRate, averageTime: number;
-    frequency, activeDeployments: number
+    successRate: number;
+    averageTime: number;
+    frequency: number;
+    activeDeployments: number;
   };
   codeQuality: {
-    score, complexity: number;
-    coverage, technicalDebt: number
+    score: number;
+    complexity: number;
+    coverage: number;
+    technicalDebt: number;
   };
   featureFlags: {
-    totalFlags, activeFlags: number; experimentsRunning: number
+    totalFlags: number;
+    activeFlags: number;
+    experimentsRunning: number;
   };
 }
 
 interface AlertItem {
-  id, type: 'performance' | 'security' | 'deployment' | 'quality';
-  severity: 'low' | 'medium' | 'high' | 'critical', title: string;
-  description, timestamp: number; acknowledged: boolean
+  id: string;
+  type: 'performance' | 'security' | 'deployment' | 'quality';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  description: string;
+  timestamp: number;
+  acknowledged: boolean;
 }
 
 const DevOpsDashboard: React.FC = () => {

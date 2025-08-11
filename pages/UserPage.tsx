@@ -1,21 +1,9 @@
 import { useParams } from 'react-router-dom';
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
 
 import { useEffect, useState } from 'react';
 
 import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
-import PlayIcon, { UserIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, UserIcon } from '@heroicons/react/24/solid';
 
 import VideoCard from '../components/VideoCard';
 import { getVideos } from '../services/realVideoService';

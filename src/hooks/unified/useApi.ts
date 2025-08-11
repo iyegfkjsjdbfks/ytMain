@@ -154,7 +154,7 @@ export function useApi<T>(
 
   // Refs
   const abortControllerRef = useRef<AbortController | null>(null);
-  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mountedRef = useRef(true);
 
   // Fetch function

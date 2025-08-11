@@ -251,7 +251,7 @@ export const eventOptimizations = {
     func: T,
     delay: number,
   ): T => {
-    let timeoutId: NodeJS.Timeout | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
 
     return ((...args: any[]) => {
@@ -279,7 +279,7 @@ clearTimeout(timeoutId);
     func: T,
     delay: number,
   ): T => {
-    let timeoutId: NodeJS.Timeout | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     return ((...args: any[]) => {
       if (timeoutId) {

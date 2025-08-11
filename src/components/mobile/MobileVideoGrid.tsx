@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback,  memo } from 'react';
 import { FixedSizeList } from 'react-window';
 
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';

@@ -253,7 +253,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
 
   // Set up event listeners and state management
   useEffect(() => {
-    let offlineTimer: NodeJS.Timeout | null = null;
+    let offlineTimer: ReturnType<typeof setTimeout> | null = null;
 
     const handleOnline = () => {
       const now = Date.now();

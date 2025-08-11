@@ -57,7 +57,7 @@ class AnalyticsService {
   private config: AnalyticsConfig;
   private session: UserSession;
   private eventQueue: AnalyticsEvent = [];
-  private flushTimer?: NodeJS.Timeout;
+  private flushTimer?: ReturnType<typeof setTimeout>;
   private listeners: Array<(event: AnalyticsEvent) => void> = [];
 
   constructor(config: Partial<AnalyticsConfig> = {}) {

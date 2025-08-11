@@ -104,7 +104,7 @@ export const LiveStreamStudio: React.FC = () => {
   ]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setTimeout>;
     if (isStreaming) {
       interval = setInterval(() => {
         setStats(prev => ({

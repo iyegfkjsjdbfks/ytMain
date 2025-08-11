@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import React, { useState } from 'react';
+import React, { useEffect, useCallback, useRef,  useState } from 'react';
 
 // Unified state management hook
 export interface AsyncState<T> {
@@ -96,7 +96,7 @@ export function useApi<T>(
 
   const [state, { setData, setLoading, setError }] = useAsyncState<T>();
   const retryCountRef = useRef(0);
-  const refreshIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const refreshIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mountedRef = useRef(true);
 
   const fetchData = useCallback(async () => {

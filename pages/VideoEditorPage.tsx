@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef,  useState } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
@@ -10,20 +10,7 @@ declare namespace NodeJS {
   }
 }
 
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-
-import PauseIcon, { PlayIcon } from '@heroicons/react/24/outline';
+import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
   id: string;
@@ -293,7 +280,7 @@ return;
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setTimeout>;
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentTime(prev => {

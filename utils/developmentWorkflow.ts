@@ -597,23 +597,23 @@ return undefined;
     await new Promise(resolve => setTimeout(resolve, 1500));
   }
 
-  private async rollbackBatch(__startIndex: any, ___batchSize: any): Promise<void> {
+  private async rollbackBatch(_startIndex: number, _batchSize: number): Promise<void> {
     console.log(`⏪ Rolling back batch starting at ${_startIndex}`);
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async deployWithFeatureFlag(___version: any, __enabled: any): Promise<void> {
-    console.log(`🚀 Deploying ${_version} with feature flag ${_enabled ? '_enabled' : 'disabled'}`);
+  private async deployWithFeatureFlag(_version: string, enabled: boolean): Promise<void> {
+    console.log(`🚀 Deploying ${_version} with feature flag ${enabled ? 'enabled' : 'disabled'}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
   }
 
-  private async updateFeatureFlag(__flagName: any, __percentage: any): Promise<void> {
-    console.log(`🎯 Updating feature flag ${_flagName} to ${_percentage}%`);
+  private async updateFeatureFlag(flagName: string, percentage: number): Promise<void> {
+    console.log(`🎯 Updating feature flag ${flagName} to ${percentage}%`);
     await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  private async disableFeatureFlag(__flagName: any): Promise<void> {
-    console.log(`🚫 Disabling feature flag ${_flagName}`);
+  private async disableFeatureFlag(flagName: string): Promise<void> {
+    console.log(`🚫 Disabling feature flag ${flagName}`);
     await new Promise(resolve => setTimeout(resolve, 500));
   }
 
@@ -657,47 +657,47 @@ return undefined;
     return metrics.avg || Math.random() * 100;
   }
 
-  private async getTestResult(___source: any): Promise<number> {
-    console.log(`Getting test results for _source: ${_source}`);
+  private async getTestResult(source: string): Promise<number> {
+    console.log(`Getting test results for source: ${source}`);
     return Math.random() > 0.1 ? 100 : 75; // 90% pass rate
   }
 
-  private async getSecurityScanResult(___source: any): Promise<number> {
-    console.log(`Getting security scan results for _source: ${_source}`);
+  private async getSecurityScanResult(source: string): Promise<number> {
+    console.log(`Getting security scan results for source: ${source}`);
     return Math.random() > 0.05 ? 0 : 1; // 95% clean rate
   }
 
-  private async getPerformanceMetric(___source: any): Promise<number> {
-    return performanceMonitor.getMetrics().find(m => m.name === _source)?.value || Math.random() * 1000;
+  private async getPerformanceMetric(source: string): Promise<number> {
+    return performanceMonitor.getMetrics().find(m => m.name === source)?.value ?? Math.random() * 1000;
   }
 
-  private async getCodeQualityMetric(___source: any): Promise<number> {
+  private async getCodeQualityMetric(source: string): Promise<number> {
     const analysis = await codeAnalysisEngine.analyzeCode();
-    return (((analysis as any)))[_source] || Math.random() * 100;
+    return ((analysis as any))[source] ?? Math.random() * 100;
   }
 
-  private async executeAutoFix(___config: any): Promise<void> {
-    console.log('🔧 Executing auto-fix:', _config.type);
+  private async executeAutoFix(config: { type: string }): Promise<void> {
+    console.log('🔧 Executing auto-fix:', config.type);
     // Implementation would depend on the type of fix
   }
 
-  private async createIssue(___config: any, ___context: any): Promise<void> {
-    console.log('📝 Creating issue:', _config.title, 'for _context:', _context.workflowName || 'unknown');
+  private async createIssue(config: { title: string }, context: { workflowName?: string }): Promise<void> {
+    console.log('📝 Creating issue:', config.title, 'for context:', context.workflowName || 'unknown');
     // Implementation would integrate with issue tracking system
   }
 
-  private async executeRollback(___config: any): Promise<void> {
-    console.log('⏪ Executing rollback:', _config.reason);
-    // Implementation would rollback to previous _version
+  private async executeRollback(config: { reason: string }): Promise<void> {
+    console.log('⏪ Executing rollback:', config.reason);
+    // Implementation would rollback to previous version
   }
 
-  private async executeScaling(___config: any): Promise<void> {
-    console.log('📈 Executing scaling:', _config._action);
+  private async executeScaling(config: { action: string }): Promise<void> {
+    console.log('📈 Executing scaling:', config.action);
     // Implementation would scale infrastructure
   }
 
   private async analyzePerformanceMetrics(): Promise<ContinuousImprovementSuggestion[]> {
-    const suggestions: ContinuousImprovementSuggestion = [];
+    const suggestions: ContinuousImprovementSuggestion[] = [];
 
     // Analyze performance trends
     const memoryMetrics = advancedAPM.getAggregatedMetrics('memory-usage');
@@ -718,7 +718,7 @@ return undefined;
   }
 
   private async analyzeCodeQuality(): Promise<ContinuousImprovementSuggestion[]> {
-    const suggestions: ContinuousImprovementSuggestion = [];
+    const suggestions: ContinuousImprovementSuggestion[] = [];
 
     const analysis = await codeAnalysisEngine.analyzeCode();
     if (analysis.complexity > 8) {
@@ -738,7 +738,7 @@ return undefined;
   }
 
   private async analyzeDeploymentPatterns(): Promise<ContinuousImprovementSuggestion[]> {
-    const suggestions: ContinuousImprovementSuggestion = [];
+    const suggestions: ContinuousImprovementSuggestion[] = [];
 
     const analytics = this.getWorkflowAnalytics();
     if (analytics.successRate < 0.9) {
@@ -758,7 +758,7 @@ return undefined;
   }
 
   private async analyzeTestingEffectiveness(): Promise<ContinuousImprovementSuggestion[]> {
-    const suggestions: ContinuousImprovementSuggestion = [];
+    const suggestions: ContinuousImprovementSuggestion[] = [];
 
     // Mock analysis of test coverage and effectiveness
     const testCoverage = Math.random() * 30 + 70; // 70-100%

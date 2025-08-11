@@ -97,7 +97,7 @@ class SystemIntegrationHub {
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
   private eventHandlers: Map<string, Array<(data: any) => void>> = new Map();
-  private healthCheckInterval?: NodeJS.Timeout;
+  private healthCheckInterval?: ReturnType<typeof setTimeout>;
   private isInitialized = false;
 
   constructor() {

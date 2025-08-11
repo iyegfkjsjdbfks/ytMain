@@ -411,7 +411,7 @@ return;
       const response: SecurityResponse = {
         id: `response-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         threatId: threat.id,
-        action,
+        action: action as SecurityResponse['action'],
         timestamp: Date.now(),
         success: Math.random() > 0.1, // 90% success rate
         details: `Automated ${action} response executed`,

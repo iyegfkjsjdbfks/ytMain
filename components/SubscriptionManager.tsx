@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 
-import CheckIcon, { BellIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, BellIcon } from '@heroicons/react/24/outline';
 import { BellIcon } from '@heroicons/react/24/solid';
 
 interface SubscriptionManagerProps {

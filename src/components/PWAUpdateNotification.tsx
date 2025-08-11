@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 import X, { RefreshCw } from 'lucide-react';
 
 import { createComponentError } from '@/utils/errorUtils';

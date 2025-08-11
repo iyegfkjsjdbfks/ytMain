@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useRef,  useEffect } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
     [key: string]: string | undefined;
@@ -39,7 +39,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   const [volume, setVolume] = useState(100);
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(autoplay);
-  const progressInterval = useRef<NodeJS.Timeout | null>(null);
+  const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Format time in seconds to MM:SS format
   const formatTime = (timeInSeconds: any): string => {

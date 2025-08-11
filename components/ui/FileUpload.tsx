@@ -1,7 +1,7 @@
 
 import { useState, useRef } from 'react';
 
-import DocumentIcon, { CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import { DocumentIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
 
 export interface FileUploadProps {
   accept?: string;

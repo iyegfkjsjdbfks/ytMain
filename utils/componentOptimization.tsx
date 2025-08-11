@@ -454,7 +454,7 @@ export function useThrottledCallback<T extends (...args) => any>(
   delay: number = 100,
 ): T {
   const lastCall = useRef(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   return useCallback((...args: Parameters<T>) => {
     const now = Date.now();

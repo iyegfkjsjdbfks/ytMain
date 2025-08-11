@@ -10,10 +10,10 @@ declare namespace NodeJS {
 }
 
 
-import { useEffect, useState } from 'react';
+import { useRef,  useEffect, useState } from 'react';
 
-import PauseIcon, { PlayIcon } from '@heroicons/react/24/outline';
-import VideoCameraIcon, { MicrophoneIcon } from '@heroicons/react/24/solid';
+import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { VideoCameraIcon, MicrophoneIcon } from '@heroicons/react/24/solid';
 
 interface LiveStreamSettings {
   title: string;
@@ -89,8 +89,8 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const streamStartTime = useRef<number>(0);
-  const statsInterval = useRef<NodeJS.Timeout | null>(null);
-  const chatInterval = useRef<NodeJS.Timeout | null>(null);
+  const statsInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const chatInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {

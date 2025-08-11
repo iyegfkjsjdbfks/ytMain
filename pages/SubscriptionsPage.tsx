@@ -1,17 +1,5 @@
 import { Link } from 'react-router-dom';
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-import React, { useEffect } from 'react';
+import React, { useState, useMemo,  useEffect } from 'react';
 
 import {
   ViewColumnsIcon,

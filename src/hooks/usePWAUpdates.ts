@@ -406,7 +406,7 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
       return;
     }
 
-    let updateTimer: NodeJS.Timeout | null = null;
+    let updateTimer: ReturnType<typeof setTimeout> | null = null;
 
     // Service worker update handler removed - unused
 

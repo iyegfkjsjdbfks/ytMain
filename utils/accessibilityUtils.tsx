@@ -10,7 +10,7 @@ declare namespace NodeJS {
  * Accessibility utilities for WCAG compliance and enhanced user experience
  */
 
-import React, { useEffect } from 'react';
+import React, { useState, useCallback, useRef,  useEffect } from 'react';
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
@@ -430,7 +430,7 @@ export function useAccessibleTooltip() {
   const [isVisible, setIsVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const tooltipId = useRef(`tooltip-${Math.random().toString(36).substr(2, 9)}`);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const showTooltip = useCallback((e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();

@@ -9,7 +9,7 @@ declare namespace NodeJS {
   }
 }
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMemo,  useCallback, useEffect, useRef, useState } from 'react';
 
 // Performance monitoring hook
 export const usePerformanceMonitor = (componentName: any) => {
@@ -56,7 +56,7 @@ export const useThrottle = <T extends (...args) => any>(
   delay: any
 ): T => {
   const lastCall = useRef(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   return useCallback(
     ((...args: Parameters<T>) => {
@@ -154,7 +154,7 @@ export const useIntersectionObserver = (
 export const useBatchedUpdates = <T>(initialValue: T) => {
   const [value, setValue] = useState(initialValue);
   const pendingUpdates = useRef<Array<(prev: T) => T>>([]);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const batchedSetValue = useCallback((updater: (prev: T) => T) => {
     pendingUpdates.current.push(updater);

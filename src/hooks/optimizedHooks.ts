@@ -16,7 +16,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
  */
 export function useOptimizedDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     // Clear existing timeout
@@ -51,7 +51,7 @@ export function useOptimizedThrottle<T>(
   const { leading = true, trailing = true } = options;
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRan = useRef<number>(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const now = Date.now();

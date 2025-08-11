@@ -7,7 +7,7 @@ declare namespace NodeJS {
   }
 }
 
-import React, { memo } from 'react';
+import React, { useState, useEffect, useCallback, useRef,  memo } from 'react';
 import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization';
 import type { Video } from '../../types/core';
 /// <reference types="node" />
@@ -41,7 +41,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const controlsTimeoutRef = useRef<NodeJS.Timeout>();
+    const controlsTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
     // Intersection observer for autoplay on mobile
     const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({

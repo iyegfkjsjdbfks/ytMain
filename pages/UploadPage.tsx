@@ -1,17 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-import React, { useState } from 'react';
+import React, { useRef,  useState } from 'react';
 
 import {
   CloudArrowUpIcon,

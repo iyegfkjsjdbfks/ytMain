@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 
-import ChartBarIcon, { PlusIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/solid';
 
 interface CommunityPost {

@@ -1,17 +1,4 @@
-declare namespace React {
-  interface JSX {
-    IntrinsicElements;
-  }
-  interface Component<P = {}, S = {}> {
-    props: P;
-    state: S;
-  }
-  interface FC<P = {}> {
-    (props: P): JSX.Element;
-  }
-}
-
-import { useMemo, useState } from 'react';
+import { useCallback,  useMemo, useState } from 'react';
 
 import CategoryChips from '../components/CategoryChips';
 import HoverAutoplayVideoCard from '../components/HoverAutoplayVideoCard';

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useCallback,  useEffect, useState } from 'react';
 
 import { useOptimizedMiniplayer } from '../contexts/OptimizedMiniplayerContext';
 

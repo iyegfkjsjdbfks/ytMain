@@ -76,7 +76,7 @@ class IntelligentCodeMonitor {
   private insights: CodeReviewInsight[] = [];
   private qualityGates: QualityGate[] = [];
   private isMonitoring = false;
-  private monitoringInterval: NodeJS.Timeout | null = null;
+  private monitoringInterval: ReturnType<typeof setTimeout> | null = null;
   private lastAnalysis: number = 0;
 
   constructor() {
