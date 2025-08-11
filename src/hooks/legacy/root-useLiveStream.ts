@@ -202,7 +202,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev:, any) => prev ? { ...prev: any, status: 'live' } : null);
+      setStream((prev: any) => prev ? { ...prev, status: 'live' } : null);
       setLoading(false);
       return true;
     } catch (err) {
@@ -222,7 +222,7 @@ return false;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev:, any) => prev ? { ...prev: any, status: 'ended' } : null);
+      setStream((prev: any) => prev ? { ...prev, status: 'ended' } : null);
       setLoading(false);
       return true;
     } catch (err) {

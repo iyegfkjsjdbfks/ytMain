@@ -103,13 +103,13 @@ export const hookOptimizations = {
   /**
    * Create stable array reference
    */
-  useStableArray: <T>(arr: T): T[] =>
+  useStableArray: <T extends any[]>(arr: T): T =>
     useMemo(() => arr, arr),
 
   /**
    * Create stable callback with dependency optimization
    */
-  useOptimizedCallback: <T extends (...args) => any>(
+  useOptimizedCallback: <T extends (...args: any[]) => any>(
     callback: T,
     deps: any,
   ): T => useCallback(callback, deps),
@@ -155,7 +155,7 @@ return `${prefix}-${item.name}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T, chunkSize: any): T[][] => {
+  chunkArray: <T>(array: T[], chunkSize: number): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -167,9 +167,9 @@ return `${prefix}-${item.name}`;
    * Virtual scrolling helper for large lists
    */
   getVisibleItems: <T>(
-    items: T,
-    startIndex: any,
-    visibleCount: any,
+    items: T[],
+    startIndex: number,
+    visibleCount: number,
   ): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
   },
@@ -231,10 +231,10 @@ export const bundleOptimizations = {
    */
   selectiveImport: <T, K extends keyof T>(
     module: T,
-    keys: K,
+    keys: K[],
   ): Pick<T, K> => {
     const result = {} as Pick<T, K>;
-    keys.forEach((key: string) => {
+    keys.forEach((key: K) => {
       result[key] = module[key];
     });
     return result;
@@ -248,14 +248,14 @@ export const eventOptimizations = {
   /**
    * Throttled event handler
    */
-  throttle: <T extends (...args) => any>(
+  throttle: <T extends (...args: any[]) => any>(
     func: T,
-    delay: any,
+    delay: number,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
     let lastExecTime = 0;
 
-    return ((...args) => {
+    return ((...args: any[]) => {
       const currentTime = Date.now();
 
       if (currentTime - lastExecTime > delay) {
@@ -276,13 +276,13 @@ clearTimeout(timeoutId);
   /**
    * Debounced event handler
    */
-  debounce: <T extends (...args) => any>(
+  debounce: <T extends (...args: any[]) => any>(
     func: T,
-    delay: any,
+    delay: number,
   ): T => {
     let timeoutId: NodeJS.Timeout | null = null;
 
-    return ((...args) => {
+    return ((...args: any[]) => {
       if (timeoutId) {
 clearTimeout(timeoutId);
 }
@@ -295,7 +295,7 @@ clearTimeout(timeoutId);
    */
   addPassiveListener: (
     element: Element,
-    event: Event,
+    event: string,
     handler: EventListener,
     options?: AddEventListenerOptions,
   ): void => {

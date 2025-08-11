@@ -65,7 +65,7 @@ interface SecurityPolicy {
   id: string;
   name: string;
   type: 'access-control' | 'data-protection' | 'network-security' | 'application-security';
-  rules: SecurityRule;
+  rules: SecurityRule[];
   enabled: boolean;
   priority: number;
 }
@@ -120,7 +120,7 @@ class SecurityMonitoringEngine {
   private threats: Map<string, SecurityThreat> = new Map();
   private vulnerabilities: Map<string, VulnerabilityReport> = new Map();
   private policies: Map<string, SecurityPolicy> = new Map();
-  private auditLogs: SecurityAuditLog = [];
+  private auditLogs: SecurityAuditLog[] = [];
   private alerts: Map<string, SecurityAlert> = new Map();
   private complianceChecks: Map<string, ComplianceCheck> = new Map();
   private isMonitoring = false;
@@ -353,7 +353,7 @@ return;
    * Detect threats (simulated)
    */
   private async detectThreats(): Promise<SecurityThreat[]> {
-    const threats: SecurityThreat = [];
+    const threats: SecurityThreat[] = [];
 
     // Simulate various _threat types
     const threatTypes = ['xss', 'sql-injection', 'brute-force', 'ddos'] as const;
@@ -364,8 +364,8 @@ return;
       const threatType = threatTypes[Math.floor(Math.random() * threatTypes.length)] ?? 'xss';
       const severity = severities[Math.floor(Math.random() * severities.length)] ?? 'medium';
 
-      const _threat: SecurityThreat = {
-        id: `_threat-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      const threat: SecurityThreat = {
+        id: `threat-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         type: threatType,
         severity,
         source: `192.168.1.${Math.floor(Math.random() * 255)}`,
@@ -379,7 +379,7 @@ return;
         status: 'detected',
       };
 
-      threats.push(_threat);
+      threats.push(threat);
     }
 
     return threats;
@@ -388,15 +388,15 @@ return;
   /**
    * Respond to _threat automatically
    */
-  private async respondToThreat(__threat: SecurityThreat): Promise<SecurityResponse | null> {
+  private async respondToThreat(threat: SecurityThreat): Promise<SecurityResponse | null> {
     try {
+      let action: string;
 
-
-      // Determine response action based on _threat type and severity
-      switch (_threat.type) {
+      // Determine response action based on threat type and severity
+      switch (threat.type) {
         case 'ddos':
         case 'brute-force':
-          action = _threat.severity === 'critical' ? 'block' : 'rate-limit';
+          action = threat.severity === 'critical' ? 'block' : 'rate-limit';
           break;
         case 'xss':
         case 'sql-injection':
@@ -411,7 +411,7 @@ return;
 
       const response: SecurityResponse = {
         id: `response-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-        threatId: _threat.id,
+        threatId: threat.id,
         action,
         timestamp: Date.now(),
         success: Math.random() > 0.1, // 90% success rate
@@ -419,7 +419,7 @@ return;
         automated: true,
       };
 
-      console.log(`🚨 Security response: ${action} for ${_threat.type} _threat`);
+      console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
       advancedAPM.recordMetric('security-response', 1, { action, success: response.success.toString() });
 
       return response;
@@ -469,7 +469,7 @@ return;
    * Scan for vulnerabilities (simulated)
    */
   private async scanForVulnerabilities(): Promise<VulnerabilityReport[]> {
-    const vulnerabilities: VulnerabilityReport = [];
+    const vulnerabilities: VulnerabilityReport[] = [];
 
     // Simulate dependency vulnerabilities
     const dependencies = ['react', 'express', 'lodash', 'axios'];
@@ -597,7 +597,7 @@ return;
   /**
    * Log security event
    */
-  private logSecurityEvent(event: Event, metadata: Record<string, any>): void {
+  private logSecurityEvent(event: string, metadata: Record<string, any>): void {
     const log: SecurityAuditLog = {
       id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: Date.now(),
@@ -759,11 +759,11 @@ return;
    */
   generateSecurityReport(): {
     summary: SecurityMetrics;
-    threats: SecurityThreat;
-    vulnerabilities: VulnerabilityReport;
-    alerts: SecurityAlert;
-    compliance: ComplianceCheck;
-    recommendations: string;
+    threats: SecurityThreat[];
+    vulnerabilities: VulnerabilityReport[];
+    alerts: SecurityAlert[];
+    compliance: ComplianceCheck[];
+    recommendations: string[];
   } {
     const metrics = this.getSecurityMetrics();
     const threats = this.getActiveThreats();
@@ -771,7 +771,7 @@ return;
     const alerts = this.getSecurityAlerts(false);
     const compliance = Array.from(this.complianceChecks.values());
 
-    const recommendations: string = [];
+    const recommendations: string[] = [];
 
     // Generate recommendations based on current state
     if (metrics.vulnerabilities.critical > 0) {

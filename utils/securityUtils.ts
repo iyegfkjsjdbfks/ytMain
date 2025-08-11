@@ -31,7 +31,7 @@ export class CSPManager {
   generateCSPHeader(options: {
     allowInlineStyles?: boolean;
     allowInlineScripts?: boolean;
-    allowedDomains?: string;
+    allowedDomains?: string[];
     reportUri?: string;
   } = {}): string {
     const directives: string[] = [
@@ -101,9 +101,9 @@ export class InputValidator {
   static validatePasswordStrength(password: any): {
     isValid: boolean;
     score: number;
-    feedback: string;
+    feedback: string[];
   } {
-    const feedback: string = [];
+    const feedback: string[] = [];
     let score = 0;
 
     if (password.length < 8) {
@@ -376,10 +376,10 @@ export class SecureStorage {
 
       if (encrypt) {
         // Simple obfuscation (not true encryption for localStorage)
-        const obfuscated = btoa(encodeURIComponent(value));
+        const obfuscated = btoa(encodeURIComponent(String(value)));
         localStorage.setItem(storageKey, obfuscated);
       } else {
-        localStorage.setItem(storageKey, value);
+        localStorage.setItem(storageKey, String(value));
       }
     } catch (error) {
       console.error('Failed to store data securely:', error);
@@ -427,7 +427,7 @@ return null;
   static setSecureSession(key: string, value: string | number): void {
     try {
       const storageKey = this.prefix + key;
-      sessionStorage.setItem(storageKey, value);
+      sessionStorage.setItem(storageKey, String(value));
     } catch (error) {
       console.error('Failed to store session data securely:', error);
     }
@@ -448,11 +448,11 @@ return null;
 export class SecurityHeaders {
   static validateResponse(response: Response): {
     isSecure: boolean;
-    issues: string;
-    recommendations: string;
+    issues: string[];
+    recommendations: string[];
   } {
-    const issues: string = [];
-    const recommendations: string = [];
+    const issues: string[] = [];
+    const recommendations: string[] = [];
 
     // Check for security headers
     const { headers } = response;
@@ -528,11 +528,11 @@ export class CSRFProtection {
 export class SecurityAudit {
   static auditLocalStorage(): {
     sensitiveDataFound: boolean;
-    issues: string;
-    recommendations: string;
+    issues: string[];
+    recommendations: string[];
   } {
-    const issues: string = [];
-    const recommendations: string = [];
+    const issues: string[] = [];
+    const recommendations: string[] = [];
     const sensitivePatterns = [
       /password/i,
       /secret/i,
@@ -577,11 +577,11 @@ continue;
   }
 
   static auditCookies(): {
-    insecureCookies: string;
-    recommendations: string;
+    insecureCookies: string[];
+    recommendations: string[];
   } {
-    const insecureCookies: string = [];
-    const recommendations: string = [];
+    const insecureCookies: string[] = [];
+    const recommendations: string[] = [];
 
     document.cookie.split(';').forEach(cookie => {
       const [name] = cookie.trim().split('=');

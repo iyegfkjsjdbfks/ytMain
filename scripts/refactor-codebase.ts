@@ -486,9 +486,9 @@ export interface ErrorWithSeverity extends AppError {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
-        if (stat.isDirectory() && !exclude.some((ex:, any) => fullPath.includes(ex:, any))) {
+        if (stat.isDirectory() && !exclude.some((ex: any) => fullPath.includes(ex))) {
           searchDirectory(fullPath);
-        } else, if (stat.isFile() && extensions.some((ext:, any) => item.endsWith(ext:, any))) {
+        } else if (stat.isFile() && extensions.some((ext: any) => item.endsWith(ext))) {
           files.push(fullPath);
         }
       }

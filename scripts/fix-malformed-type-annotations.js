@@ -40,70 +40,102 @@ class MalformedTypeAnnotationFixer {
     let fixedContent = content;
     let fixes = 0;
 
-    // Pattern 1: Fix malformed type annotations in function parameters
-    // ({ param1, param2, param3 }: {param3: any}: {param2: any}: {param1: any}) =>
-    const pattern1 = /\(\s*\{\s*([^}]+)\s*\}\s*:\s*\{[^}]+\}(?:\s*:\s*\{[^}]+\})*\s*\)\s*=>/g;
-    fixedContent = fixedContent.replace(pattern1, (match, params) => {
+    // Pattern 1: Fix malformed parameter type annotations like (ex:, any) => (ex: any)
+    const pattern1 = /\(([^:)]+):,\s*([^)]+)\)/g;
+    fixedContent = fixedContent.replace(pattern1, (match, param, type) => {
       fixes++;
-      // Clean up the parameters by removing any type annotations within them
-      const cleanParams = params
-        .split(',')
-        .map(param => param.trim().split(':')[0].trim())
-        .join(', ');
-      return `({ ${cleanParams} }) =>`;
+      return `(${param.trim()}: ${type.trim()})`;
     });
 
-    // Pattern 2: Fix malformed type annotations in React.FC component definitions
-    // React.FC<Props> = ({ param1, param2 }: {param2: any}: {param1: any}) =>
-    const pattern2 = /(React\.FC<[^>]*>\s*=\s*)\(\s*\{\s*([^}]+)\s*\}\s*:\s*\{[^}]+\}(?:\s*:\s*\{[^}]+\})*\s*\)\s*=>/g;
-    fixedContent = fixedContent.replace(pattern2, (match, prefix, params) => {
+    // Pattern 2: Fix malformed function calls like func(param:, type) => func(param: type)
+    const pattern2 = /(\w+)\(([^:)]+):,\s*([^)]+)\)/g;
+    fixedContent = fixedContent.replace(pattern2, (match, funcName, param, type) => {
       fixes++;
-      // Clean up the parameters by removing any type annotations within them
-      const cleanParams = params
-        .split(',')
-        .map(param => param.trim().split(':')[0].trim())
-        .join(', ');
-      return `${prefix}({ ${cleanParams} }) =>`;
+      return `${funcName}(${param.trim()}: ${type.trim()})`;
     });
 
-    // Pattern 3: Fix malformed type annotations in arrow function definitions
-    // const Component = ({ param1, param2 }: {param2: any}: {param1: any}) =>
-    const pattern3 = /(const\s+\w+\s*=\s*)\(\s*\{\s*([^}]+)\s*\}\s*:\s*\{[^}]+\}(?:\s*:\s*\{[^}]+\})*\s*\)\s*=>/g;
-    fixedContent = fixedContent.replace(pattern3, (match, prefix, params) => {
+    // Pattern 3: Fix malformed variable declarations like const, varName => const varName
+    const pattern3 = /const,\s+(\w+)/g;
+    fixedContent = fixedContent.replace(pattern3, (match, varName) => {
       fixes++;
-      // Clean up the parameters by removing any type annotations within them
-      const cleanParams = params
-        .split(',')
-        .map(param => param.trim().split(':')[0].trim())
-        .join(', ');
-      return `${prefix}({ ${cleanParams} }) =>`;
+      return `const ${varName}`;
     });
 
-    // Pattern 4: Fix malformed type annotations in function declarations
-    // function Component({ param1, param2 }: {param2: any}: {param1: any})
-    const pattern4 = /(function\s+\w+\s*)\(\s*\{\s*([^}]+)\s*\}\s*:\s*\{[^}]+\}(?:\s*:\s*\{[^}]+\})*\s*\)/g;
-    fixedContent = fixedContent.replace(pattern4, (match, prefix, params) => {
+    // Pattern 4: Fix malformed else if statements like } else, if => } else if
+    const pattern4 = /\}\s*else,\s*if/g;
+    fixedContent = fixedContent.replace(pattern4, (match) => {
       fixes++;
-      // Clean up the parameters by removing any type annotations within them
-      const cleanParams = params
-        .split(',')
-        .map(param => param.trim().split(':')[0].trim())
-        .join(', ');
-      return `${prefix}({ ${cleanParams} })`;
+      return '} else if';
     });
 
-    // Pattern 5: Fix remaining malformed `: any}:` patterns
-    const pattern5 = /:\s*any\}\s*:\s*\{/g;
-    fixedContent = fixedContent.replace(pattern5, (match) => {
+    // Pattern 5: Fix malformed object spread like { ...prev: any, => { ...prev,
+    const pattern5 = /\{\s*\.\.\.([^:]+):\s*any,/g;
+    fixedContent = fixedContent.replace(pattern5, (match, varName) => {
       fixes++;
-      return ', ';
+      return `{ ...${varName.trim()},`;
     });
 
-    // Pattern 6: Clean up remaining orphaned type annotations
-    const pattern6 = /\}\s*:\s*\{[^}]*any[^}]*\}/g;
-    fixedContent = fixedContent.replace(pattern6, (match) => {
+    // Pattern 6: Fix malformed new constructor calls like new, Promise => new Promise
+    const pattern6 = /new,\s+(\w+)/g;
+    fixedContent = fixedContent.replace(pattern6, (match, className) => {
       fixes++;
-      return '}';
+      return `new ${className}`;
+    });
+
+    // Pattern 7: Fix malformed arrow function expressions like result =>, result => result =>
+    const pattern7 = /(\w+)\s*=>,\s*(\w+)/g;
+    fixedContent = fixedContent.replace(pattern7, (match, param, result) => {
+      fixes++;
+      return `${param} => ${result}`;
+    });
+
+    // Pattern 8: Fix malformed exponentiation like 2 **, attemptIndex => 2 ** attemptIndex
+    const pattern8 = /(\d+)\s*\*\*,\s*(\w+)/g;
+    fixedContent = fixedContent.replace(pattern8, (match, base, exponent) => {
+      fixes++;
+      return `${base} ** ${exponent}`;
+    });
+
+    // Pattern 9: Fix malformed function parameter calls like setValue(newValue: any) => setValue(newValue)
+    const pattern9 = /(\w+)\(([^)]+):\s*any\)/g;
+    fixedContent = fixedContent.replace(pattern9, (match, funcName, param) => {
+      fixes++;
+      return `${funcName}(${param.trim()})`;
+    });
+
+    // Pattern 10: Fix malformed export statements like export, const => export const
+    const pattern10 = /export,\s+const/g;
+    fixedContent = fixedContent.replace(pattern10, (match) => {
+      fixes++;
+      return 'export const';
+    });
+
+    // Pattern 11: Fix specific malformed patterns like .some((ex:, any) =>
+    const pattern11 = /\.some\(\(([^:)]+):,\s*([^)]+)\)\s*=>/g;
+    fixedContent = fixedContent.replace(pattern11, (match, param, type) => {
+      fixes++;
+      return `.some((${param.trim()}: ${type.trim()}) =>`;
+    });
+
+    // Pattern 12: Fix specific malformed patterns like .includes(ex:, any)
+    const pattern12 = /\.includes\(([^:)]+):,\s*([^)]+)\)/g;
+    fixedContent = fixedContent.replace(pattern12, (match, param, type) => {
+      fixes++;
+      return `.includes(${param.trim()})`;
+    });
+
+    // Pattern 13: Fix specific malformed patterns like .endsWith(ext:, any)
+    const pattern13 = /\.endsWith\(([^:)]+):,\s*([^)]+)\)/g;
+    fixedContent = fixedContent.replace(pattern13, (match, param, type) => {
+      fixes++;
+      return `.endsWith(${param.trim()})`;
+    });
+
+    // Pattern 14: Fix return statements like return, this => return this
+    const pattern14 = /return,\s+(\w+)/g;
+    fixedContent = fixedContent.replace(pattern14, (match, varName) => {
+      fixes++;
+      return `return ${varName}`;
     });
 
     return { content: fixedContent, fixes };
@@ -148,7 +180,8 @@ class MalformedTypeAnnotationFixer {
 
   async run() {
     this.log('🚀 Starting malformed type annotation fixes...');
-    
+    this.log(`Working directory: ${process.cwd()}`);
+
     const startTime = Date.now();
     await this.findAndProcessFiles(process.cwd());
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);

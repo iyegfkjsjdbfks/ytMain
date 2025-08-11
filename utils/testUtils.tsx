@@ -3,12 +3,13 @@
  * Comprehensive testing utilities for React components with enhanced setup
  */
 
-import type { ReactElement, ReactNode } from 'react';
+import React, { type ReactElement } from 'react';
 
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { render, screen, waitFor, renderHook } from '@testing-library/react';
+import type { RenderOptions, RenderHookOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -139,7 +140,7 @@ export const apiMocks = {
   },
 
   // Mock paginated responses
-  mockPaginatedResponse<T>(items: T, page: number = 1, pageSize: number = 10) {
+  mockPaginatedResponse<T extends any[]>(items: T, page: number = 1, pageSize: number = 10) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
@@ -167,7 +168,7 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 
   // Custom wrapper
-  wrapper?: ({ children }) => ReactElement;
+  wrapper?: ({ children }: { children: React.ReactNode }) => ReactElement;
 
   // Mock user for authentication
   mockUser?: any;
@@ -187,7 +188,7 @@ function createTestQueryClient(): QueryClient {
   });
 }
 
-function AllTheProviders({ children, queryClient, initialEntries = ['/'], mockUser }: any) {
+function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockUser }: any) {
   return (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={initialEntries}>
@@ -242,7 +243,7 @@ export function customRenderHook<TResult, TProps>(
     ...renderHookOptions
   } = options;
 
-  const Wrapper = wrapper || (({ children }) => (
+  const Wrapper = wrapper || (({ children }: { children: React.ReactNode }) => (
     <AllTheProviders
       queryClient={queryClient}
       initialEntries={initialEntries}
@@ -356,7 +357,7 @@ export const testUtils = {
   },
 
   // Simulate drag and drop events
-  simulateDragAndDrop: async (element: HTMLElement, files: File) => {
+  simulateDragAndDrop: async (element: HTMLElement, files: File[]) => {
     const user = userEvent.setup();
 
     const dataTransfer = {
@@ -456,7 +457,7 @@ export const a11yUtils = {
   // Test keyboard navigation
   testKeyboardNavigation: async (startElement?: HTMLElement) => {
     const user = userEvent.setup();
-    const focusableElements: HTMLElement = [];
+    const focusableElements: HTMLElement[] = [];
 
     if (startElement) {
       startElement.focus();

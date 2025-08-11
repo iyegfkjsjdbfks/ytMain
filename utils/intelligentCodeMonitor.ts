@@ -72,10 +72,10 @@ interface QualityGate {
  * Intelligent Code Quality Monitor
  */
 class IntelligentCodeMonitor {
-  private trends: CodeQualityTrend = [];
-  private opportunities: RefactoringOpportunity = [];
-  private insights: CodeReviewInsight = [];
-  private qualityGates: QualityGate = [];
+  private trends: CodeQualityTrend[] = [];
+  private opportunities: RefactoringOpportunity[] = [];
+  private insights: CodeReviewInsight[] = [];
+  private qualityGates: QualityGate[] = [];
   private isMonitoring = false;
   private monitoringInterval: NodeJS.Timeout | null = null;
   private lastAnalysis: number = 0;
@@ -195,8 +195,8 @@ return;
 
       // Analyze trends
       const previousTrend = this.trends[this.trends.length - 1];
-      const improvements: string = [];
-      const regressions: string = [];
+      const improvements: string[] = [];
+      const regressions: string[] = [];
 
       if (previousTrend) {
         // Compare with previous _metrics
@@ -356,11 +356,11 @@ return 0;
   /**
    * Generate refactoring opportunities
    */
-  private async generateRefactoringOpportunities(__metrics: CodeMetrics): Promise<void> {
-
+  private async generateRefactoringOpportunities(metrics: CodeMetrics): Promise<void> {
+    const opportunities: RefactoringOpportunity[] = [];
 
     // High complexity opportunities
-    if (_metrics.complexity > 10) {
+    if (metrics.complexity > 10) {
       opportunities.push({
         __id: 'reduce-complexity',
         __type: 'maintainability',
@@ -379,7 +379,7 @@ return 0;
     }
 
     // Low test coverage opportunities
-    if (_metrics.testCoverage < 80) {
+    if (metrics.testCoverage < 80) {
       opportunities.push({
         id: 'improve-test-coverage',
         type: 'testing',
@@ -398,7 +398,7 @@ return 0;
     }
 
     // Performance opportunities
-    if (_metrics.performanceIssues > 3) {
+    if (metrics.performanceIssues > 3) {
       opportunities.push({
         id: 'optimize-performance',
         type: 'performance',
@@ -417,7 +417,7 @@ return 0;
     }
 
     // Security opportunities
-    if (_metrics.securityVulnerabilities > 0) {
+    if (metrics.securityVulnerabilities > 0) {
       opportunities.push({
         id: 'fix-security-issues',
         type: 'security',
@@ -436,7 +436,7 @@ return 0;
     }
 
     // Accessibility opportunities
-    if (_metrics.accessibilityIssues > 5) {
+    if (metrics.accessibilityIssues > 5) {
       opportunities.push({
         id: 'improve-accessibility',
         type: 'accessibility',
@@ -460,11 +460,11 @@ return 0;
   /**
    * Generate code review insights
    */
-  private async generateCodeReviewInsights(__metrics: CodeMetrics): Promise<void> {
-
+  private async generateCodeReviewInsights(metrics: CodeMetrics): Promise<void> {
+    const insights: CodeReviewInsight[] = [];
 
     // Architecture insights
-    if (_metrics.complexity > 12) {
+    if (metrics.complexity > 12) {
       insights.push({
         __id: 'architecture-complexity',
         __category: 'architecture',
@@ -478,7 +478,7 @@ return 0;
     }
 
     // Pattern insights
-    if (_metrics.duplicateCode > 8) {
+    if (metrics.duplicateCode > 8) {
       insights.push({
         id: 'pattern-duplication',
         category: 'patterns',
@@ -492,7 +492,7 @@ return 0;
     }
 
     // Performance insights
-    if (_metrics.performanceIssues > 4) {
+    if (metrics.performanceIssues > 4) {
       insights.push({
         id: 'performance-optimization',
         category: 'performance',
@@ -506,7 +506,7 @@ return 0;
     }
 
     // Security insights
-    if (_metrics.securityVulnerabilities > 0) {
+    if (metrics.securityVulnerabilities > 0) {
       insights.push({
         id: 'security-vulnerabilities',
         category: 'security',
@@ -520,7 +520,7 @@ return 0;
     }
 
     // Testing insights
-    if (_metrics.testCoverage < 75) {
+    if (metrics.testCoverage < 75) {
       insights.push({
         id: 'testing-coverage',
         category: 'testing',
@@ -539,8 +539,8 @@ return 0;
   /**
    * Check quality gates
    */
-  private checkQualityGates(_metrics: CodeMetrics): void {
-    const failedGates: string = [];
+  private checkQualityGates(metrics: CodeMetrics): void {
+    const failedGates: string[] = [];
 
     this.qualityGates.forEach((gate: any) => {
       if (!gate.enabled) {
@@ -548,7 +548,7 @@ return;
 }
 
       const failed = gate.criteria.some((criterion: any) => {
-        const value = _metrics[criterion.metric];
+        const value = metrics[criterion.metric as keyof CodeMetrics];
 
         switch (criterion.operator) {
           case '>':

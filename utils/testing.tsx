@@ -1,16 +1,15 @@
 /// <reference types="react/jsx-runtime" />
-import type React from 'react';
-
 import React from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { render, act, renderHook } from '@testing-library/react';
+import type { RenderOptions, RenderResult, RenderHookOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BrowserRouter } from 'react-router-dom';
 
 import { vi } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
+import type { MockedFunction } from 'vitest';
 
 // Store import removed to fix circular dependency
 import type { Video, Channel } from '../src/types/core';
@@ -87,10 +86,11 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   id: `video_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Video Title',
   description: 'Test video description',
+  thumbnail: 'https://example.com/thumbnail.jpg',
   thumbnailUrl: 'https://example.com/thumbnail.jpg',
   videoUrl: 'https://example.com/video.mp4',
   duration: '5:00',
-  views: '1,000',
+  views: 1000,
   likes: 50,
   dislikes: 5,
   uploadedAt: new Date().toISOString(),
@@ -98,7 +98,7 @@ export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   channelId: 'channel_123',
   channelAvatarUrl: 'https://example.com/avatar.jpg',
   category: 'Entertainment',
-  tags: ['test', 'video'],
+  tags: 'test,video',
   visibility: 'public',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
@@ -110,9 +110,9 @@ export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => 
   name: 'Test Channel',
   description: 'Test channel description',
   avatarUrl: 'https://example.com/avatar.jpg',
-  banner: 'https://example.com/banner.jpg',
+
   subscribers: 10000,
-  subscriberCount: '10K',
+  subscriberCount: 10000,
   videoCount: 100,
   isVerified: false,
   createdAt: new Date().toISOString(),
@@ -124,7 +124,7 @@ export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserP
   id: `playlist_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Playlist',
   description: 'Test playlist description',
-  videoIds: ['video1', 'video2', 'video3'],
+  videoIds: 'video1,video2,video3',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   ...overrides,
@@ -142,7 +142,7 @@ export const createUserEvent = () => userEvent.setup();
 // Store Test Utilities removed to fix circular dependency
 
 // Mock Functions
-export const createMockFunction = <T extends (...args) => any>(
+export const createMockFunction = <T extends (...args: any[]) => any>(
   implementation?: T,
 ): MockedFunction<T> => {
   return vi.fn(implementation || (() => {})) as MockedFunction<T>;
@@ -151,13 +151,13 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export, const waitForTime = (ms: any) => new, Promise(resolve => setTimeout(resolve, ms: any));
+export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
   private startTime: number = 0;
   private endTime: number = 0;
-  private measurements: number = [];
+  private measurements: number[] = [];
 
   start(): void {
     this.startTime = performance.now();
@@ -174,7 +174,7 @@ export class PerformanceTestHelper {
     if (this.measurements.length === 0) {
 return 0;
 }
-    return, this.measurements.reduce((sum: any, time: any) => sum + time: any, 0) / this.measurements.length;
+    return this.measurements.reduce((sum: any, time: any) => sum + time, 0) / this.measurements.length;
   }
 
   getMinTime(): number {
@@ -274,7 +274,7 @@ export const mockFetch = (response: any, status: number = 200) => {
   );
 };
 
-export const mockFetchError = (error: Error) => {
+export const mockFetchError = (error: string) => {
   global.fetch = vi.fn(() => Promise.reject(new Error(error)));
 };
 
@@ -393,7 +393,7 @@ export const testUtils = {
   simulateFormInput: async (input: HTMLElement, value: string | number) => {
     const user = createUserEvent();
     await user.clear(input);
-    await user.type(input, value);
+    await user.type(input, String(value));
   },
   simulateDragAndDrop: async (element: HTMLElement, files: File) => {
     const user = createUserEvent();
@@ -480,7 +480,7 @@ export * from '@testing-library/react';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string];
+      [elemName: string]: any;
     }
   }
 }

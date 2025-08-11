@@ -102,9 +102,9 @@ return '0 B';
 
   formatPercentage: (value: string | number, total: any): string => {
     if (total === 0) {
-return '0%';
-}
-    return `${((value / total) * 100).toFixed(1)}%`;
+      return '0%';
+    }
+    return `${((Number(value) / total) * 100).toFixed(1)}%`;
   },
 };
 
@@ -209,7 +209,7 @@ export const validationUtils = {
   },
 
   isStrongPassword: (password: any): { isValid: boolean; errors: string[] } => {
-    const errors: string = [];
+    const errors: string[] = [];
 
     if (password.length < 8) {
 errors.push('Password must be at least 8 characters long');
@@ -241,7 +241,7 @@ errors.push('Password must contain at least one special character');
 
 // Array Utilities
 export const arrayUtils = {
-  chunk: <T>(array: T, size: any): T[][] => {
+  chunk: <T>(array: T[], size: number): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += size) {
       chunks.push(array.slice(i, i + size));
@@ -249,7 +249,7 @@ export const arrayUtils = {
     return chunks;
   },
 
-  shuffle: <T>(array: T): T[] => {
+  shuffle: <T>(array: T[]): T[] => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -258,23 +258,23 @@ export const arrayUtils = {
     return shuffled;
   },
 
-  unique: <T>(array: T, key?: keyof T): T[] => {
+  unique: <T>(array: T[], key?: keyof T): T[] => {
     if (!key) {
-return [...new Set(array)];
-}
+      return [...new Set(array)];
+    }
 
     const seen = new Set();
     return array.filter((item: any) => {
       const value = item[key];
       if (seen.has(value)) {
-return false;
-}
+        return false;
+      }
       seen.add(value);
       return true;
     });
   },
 
-  groupBy: <T, K extends keyof T>(array: T, key: K): Record<string, T[]> => {
+  groupBy: <T, K extends keyof T>(array: T[], key: K): Record<string, T[]> => {
     return array.reduce((groups: any, item: any) => {
       const groupKey = String(item[key]);
       groups[groupKey] ??= [];
@@ -283,16 +283,16 @@ return false;
     }, {} as Record<string, T[]>);
   },
 
-  sortBy: <T>(array: T, key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] => {
+  sortBy: <T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] => {
     return [...array].sort((a, b) => {
       const aVal = a[key];
       const bVal = b[key];
 
       if (aVal < bVal) {
-return direction === 'asc' ? -1 : 1;
-}
+        return direction === 'asc' ? -1 : 1;
+      }
       if (aVal > bVal) {
-return direction === 'asc' ? 1 : -1;
+        return direction === 'asc' ? 1 : -1;
 }
       return 0;
     });
@@ -345,7 +345,7 @@ export const storageUtils = {
 
 // Performance Utilities
 export const performanceUtils = {
-  debounce: <T extends (...args: unknown) => unknown>(
+  debounce: <T extends (...args: unknown[]) => unknown>(
     func: T,
     delay: any,
   ): (...args: Parameters<T>) => void => {
@@ -356,7 +356,7 @@ export const performanceUtils = {
     };
   },
 
-  throttle: <T extends (...args: unknown) => unknown>(
+  throttle: <T extends (...args: unknown[]) => unknown>(
     func: T,
     delay: any,
   ): (...args: Parameters<T>) => void => {
@@ -370,7 +370,7 @@ export const performanceUtils = {
     };
   },
 
-  memoize: <T extends (...args: unknown) => unknown>(func: T): T => {
+  memoize: <T extends (...args: unknown[]) => unknown>(func: T): T => {
     const cache = new Map<string, ReturnType<T>>();
     return ((...args: Parameters<T>) => {
       const key = JSON.stringify(args);

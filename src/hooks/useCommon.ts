@@ -86,7 +86,7 @@ export const useToggle = (
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
-  const, setToggle = useCallback((newValue: any) => setValue(newValue: any), []);
+  const setToggle = useCallback((newValue: any) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 };
@@ -106,7 +106,7 @@ export const useCounter = (
   const increment = useCallback(() => setCount(c => c + 1), []);
   const decrement = useCallback(() => setCount(c => c - 1), []);
   const reset = useCallback(() => setCount(initialValue), [initialValue]);
-  const, set = useCallback((value: string | number) => setCount(value: string | number), []);
+  const set = useCallback((value: string | number) => setCount(value), []);
 
   return { count, increment, decrement, reset, set };
 };

@@ -632,8 +632,8 @@ continue;
     );
 
     return rule.operator === 'AND'
-      ? results.every((r: any) =>, r: any)
-      : results.some((r: any) =>, r: any);
+      ? results.every((r: any) => r)
+      : results.some((r: any) => r);
   }
 
   private evaluateTargetingCondition(condition: TargetingCondition, _context: UserContext): boolean {
@@ -799,7 +799,7 @@ continue;
           keysToDelete.push(key);
         }
       });
-      keysToDelete.forEach((key: string) => this.evaluationCache.delete(key:, string));
+      keysToDelete.forEach((key: string) => this.evaluationCache.delete(key));
     } else {
       // Clear all cache
       this.evaluationCache.clear();

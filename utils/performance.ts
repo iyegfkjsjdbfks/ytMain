@@ -11,7 +11,7 @@ interface PerformanceMetric {
 
 class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetric> = new Map();
-  private observers: PerformanceObserver = [];
+  private observers: PerformanceObserver[] = [];
   private isEnabled: boolean = import.meta.env.MODE === 'development';
 
   constructor() {

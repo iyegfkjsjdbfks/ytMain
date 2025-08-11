@@ -47,7 +47,7 @@ export const queryPresets = {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retry: 3,
-    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 **, attemptIndex: any, 30000),
+    retryDelay: (attemptIndex: any) => Math.min(1000 * 2 ** attemptIndex, 30000),
   },
 } as const;
 
@@ -259,7 +259,7 @@ export function useEnhancedMutation<TData = unknown, TError = ApiError, TVariabl
 
         queryClient.setQueryData(
           optimisticUpdate.queryKey,
-          (oldData: any) => optimisticUpdate.updateFn(oldData: any, variables),
+          (oldData: any) => optimisticUpdate.updateFn(oldData, variables),
         );
 
         return { previousData };

@@ -13,7 +13,7 @@ interface PerformanceMetric {
 }
 
 class PerformanceMonitor {
-  private metrics: PerformanceMetric = [];
+  private metrics: PerformanceMetric[] = [];
   private isEnabled: boolean;
 
   constructor() {
@@ -74,7 +74,7 @@ return;
 
     this.recordMetric({
       name,
-      value,
+      value: typeof value === 'string' ? parseFloat(value) || 0 : value,
       timestamp: Date.now(),
       url: window.location.href,
       userAgent: navigator.userAgent,

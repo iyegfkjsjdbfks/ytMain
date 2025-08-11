@@ -59,17 +59,18 @@ return null;
 }
 
 export function getVideoTags(video: Video): string[] {
-  if (!video.tags.length) {
+  if (!video.tags || !video.tags.length) {
     return [];
   }
-  return video.tags.slice(0, 5); // Return first 5 tags
+  // Split comma-separated tags and return first 5
+  return video.tags.split(',').map(tag => tag.trim()).slice(0, 5);
 }
 
 export function getVideoUploadDate(video: Video): string {
   return video.uploadedAt || '';
 }
 
-export function isVideoMonetized(video: Video): boolean {
+export function isVideoMonetized(video: any): boolean {
   return !!(video.monetization?.enabled);
 }
 

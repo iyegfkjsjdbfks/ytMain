@@ -25,7 +25,7 @@ interface SystemEvent {
   severity: 'low' | 'medium' | 'high' | 'critical';
   title: string;
   description: string;
-  data;
+  data: any;
   timestamp: number;
   handled: boolean;
 }
@@ -93,11 +93,11 @@ interface SystemMetrics {
 }
 
 class SystemIntegrationHub {
-  private events: SystemEvent = [];
+  private events: SystemEvent[] = [];
   private health: SystemHealth;
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
-  private eventHandlers: Map<string, Array<(...args: unknown) => void>> = new Map();
+  private eventHandlers: Map<string, Array<(data: any) => void>> = new Map();
   private healthCheckInterval?: NodeJS.Timeout;
   private isInitialized = false;
 
@@ -115,7 +115,7 @@ class SystemIntegrationHub {
         email: false,
         slack: false,
       },
-      emergencyContacts: [],
+      emergencyContacts: '',
     };
 
     this.health = {
@@ -564,7 +564,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType: any, handler: (...args: unknown) => void): void {
+  private addEventListener(eventType: any, handler: (data: any) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }
@@ -573,7 +573,7 @@ return 'degraded';
 
   private cleanupOldEvents(): void {
     const cutoffTime = Date.now() - (this.config.eventRetentionDays * 24 * 60 * 60 * 1000);
-    this.events = this.events.filter((event: Event) => event.timestamp > cutoffTime);
+    this.events = this.events.filter((event: SystemEvent) => event.timestamp > cutoffTime);
   }
 
   // Public API methods
@@ -593,19 +593,19 @@ return 'degraded';
 
   getEventsByType(type: SystemEvent['type'], limit: number = 20): SystemEvent[] {
     return this.events
-      .filter((event: Event) => event.type === type)
+      .filter((event: SystemEvent) => event.type === type)
       .sort((a: any, b: any) => b.timestamp - a.timestamp)
       .slice(0, limit);
   }
 
   getCriticalEvents(): SystemEvent[] {
     return this.events
-      .filter((event: Event) => event.severity === 'critical')
+      .filter((event: SystemEvent) => event.severity === 'critical')
       .sort((a: any, b: any) => b.timestamp - a.timestamp);
   }
 
   acknowledgeEvent(eventId: any): void {
-    const event = this.events.find((e: Event) => e.id === eventId);
+    const event = this.events.find((e: SystemEvent) => e.id === eventId);
     if (event) {
       event.handled = true;
     }
@@ -629,9 +629,9 @@ return 'degraded';
   generateSystemReport(): {
     health: SystemHealth;
     metrics: SystemMetrics;
-    recentEvents: SystemEvent;
+    recentEvents: SystemEvent[];
     summary: string;
-    recommendations: string;
+    recommendations: string[];
   } {
     const recentEvents = this.getRecentEvents(10);
     const criticalEvents = this.getCriticalEvents();
@@ -643,7 +643,7 @@ return 'degraded';
     summary += `Security Score: ${Math.round(this.metrics.security.score)}\n`;
     summary += `Deployment Success Rate: ${Math.round(this.metrics.deployment.successRate * 100)}%`;
 
-    const recommendations: string = [];
+    const recommendations: string[] = [];
 
     if (this.metrics.performance.score < 70) {
       recommendations.push('Performance optimization needed - consider code splitting and caching improvements');
