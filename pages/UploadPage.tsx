@@ -160,7 +160,7 @@ return null;
   const removeTag = (tagToRemove: any) => {
     setMetadata(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
     }));
   };
 

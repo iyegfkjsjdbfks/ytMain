@@ -45,7 +45,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
 
   const handleSelectAll = (selected: any) => {
     if (selected) {
-      const allIds = videos.map((video: any) => video: any.id);
+      const allIds = videos.map((video: any) => video.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -83,7 +83,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const filteredVideos =
     filterVisibility === 'all'
       ? videos
-      : videos.filter((video: any) => video: any.visibility === filterVisibility);
+      : videos.filter((video: any) => video.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {

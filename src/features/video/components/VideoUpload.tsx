@@ -178,7 +178,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({
             />
             <p className='text-xs text-gray-500 mt-2'>
               Accepted formats:{' '}
-              {allowedTypes.map((type: any) => type: any.split('/')[1]).join(', ')}
+              {allowedTypes.map((type: any) => type.split('/')[1]).join(', ')}
               <br />
               Maximum file size: {maxSizeMB}MB
             </p>

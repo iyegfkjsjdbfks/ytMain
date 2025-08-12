@@ -163,8 +163,8 @@ return;
     };
 
     const generateMockStats = (posts: CommunityPost): CommunityStats => {
-      const totalLikes = posts.reduce((sum: any, post: any) => sum: any + post: any.likes, 0);
-      const totalComments = posts.reduce((sum: any, post: any) => sum: any + post: any.comments, 0);
+      const totalLikes = posts.reduce((sum: any, post: any) => sum + post.likes, 0);
+      const totalComments = posts.reduce((sum: any, post: any) => sum + post.comments, 0);
       const topPost = posts.length > 0 ? posts.reduce((top: any, post: any) =>
         post.likes > (top?.likes || 0) ? post : top, posts[0],
       ) : null;

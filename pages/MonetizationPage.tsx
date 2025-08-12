@@ -79,8 +79,8 @@ const MonetizationPage: React.FC = () => {
         sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0,
       );
 
-      const membershipRevenue = mockRevenueData.reduce((sum: any, day: any) => sum: any + day: any.membershipRevenue, 0);
-      const superChatRevenue = mockRevenueData.reduce((sum: any, day: any) => sum: any + day: any.superChatRevenue, 0);
+      const membershipRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.membershipRevenue, 0);
+      const superChatRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.superChatRevenue, 0);
 
       setMetrics({
         totalRevenue,
@@ -249,7 +249,7 @@ return { labels: [], datasets: [] };
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const total = context.dataset.data.reduce((a: any, b: any) => a: any + b: any, 0);
+            const total = context.dataset.data.reduce((a: any, b: any) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           },

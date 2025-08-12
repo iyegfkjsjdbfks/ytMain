@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video: any.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [

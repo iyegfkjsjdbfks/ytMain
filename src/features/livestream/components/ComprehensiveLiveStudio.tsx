@@ -41,7 +41,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
     quality: '1080p' as '720p' | '1080p' | '1440p' | '4k',
     bitrate: 4500,
     frameRate: 30 as 30 | 60,
-    platforms: [] as StreamPlatform,
+    platforms: [] as any[],
     scheduledStartTime: undefined as Date | undefined,
   });
 
@@ -156,8 +156,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         streamSettings.platforms.length > 0
       ) {
         const enabledPlatforms = streamSettings.platforms
-          .filter((p: any) => p: any.enabled)
-          .map((p: any) => p: any.name);
+          .filter((p: any) => p.enabled)
+          .map((p: any) => p.name);
 
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);

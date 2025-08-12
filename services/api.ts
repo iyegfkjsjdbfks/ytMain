@@ -594,7 +594,7 @@ export class PlaylistService {
 // Export cache utilities
 export const cacheUtils = {
   clear: () => apiCache.clear(),
-  delete: (key: string) => apiCache.delete(key: string),
+  delete: (key: string) => apiCache.delete(key),
   size: () => apiCache.size(),
 };
 

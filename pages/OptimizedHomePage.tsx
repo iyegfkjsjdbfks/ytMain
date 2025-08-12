@@ -61,7 +61,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video: any.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory);
   }, [videos, selectedCategory]);
 
   // Event handlers

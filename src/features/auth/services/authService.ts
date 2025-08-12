@@ -120,7 +120,7 @@ class AuthService {
   /**
    * Refresh the access token
    */
-  private async refreshToken: any(refreshToken: any): Promise<AuthTokens | null> {
+  private async refreshToken(refreshToken: any): Promise<AuthTokens | null> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',

@@ -108,9 +108,9 @@ class TestRunner {
 
       // Calculate suite statistics
       suite.totalTests = suite.tests.length;
-      suite.passedTests = suite.tests.filter((t: any) => t: any.status === 'passed').length;
-      suite.failedTests = suite.tests.filter((t: any) => t: any.status === 'failed').length;
-      suite.skippedTests = suite.tests.filter((t: any) => t: any.status === 'skipped').length;
+      suite.passedTests = suite.tests.filter((t: any) => t.status === 'passed').length;
+      suite.failedTests = suite.tests.filter((t: any) => t.status === 'failed').length;
+      suite.skippedTests = suite.tests.filter((t: any) => t.status === 'skipped').length;
       suite.duration = Date.now() - suiteStartTime;
 
       } catch (error) {

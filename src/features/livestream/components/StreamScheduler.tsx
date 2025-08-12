@@ -165,7 +165,7 @@ const StreamScheduler: React.FC<StreamSchedulerProps> = ({
   const removeTag = (tagToRemove: any) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
     }));
   };
 

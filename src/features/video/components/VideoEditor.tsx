@@ -143,7 +143,7 @@ export const VideoEditor: React.FC = () => {
 
   const splitClip = (clipId: any, splitTime: any) => {
     setEditorState(prev => {
-      const clipIndex = prev.clips.findIndex((c: any) => c: any.id === clipId);
+      const clipIndex = prev.clips.findIndex((c: any) => c.id === clipId);
       if (clipIndex === -1) {
         return prev;
       }
@@ -181,7 +181,7 @@ export const VideoEditor: React.FC = () => {
   const deleteClip = (clipId: any) => {
     setEditorState(prev => ({
       ...prev,
-      clips: prev.clips.filter((c: any) => c: any.id !== clipId),
+      clips: prev.clips.filter((c: any) => c.id !== clipId),
       selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip,
     }));
   };

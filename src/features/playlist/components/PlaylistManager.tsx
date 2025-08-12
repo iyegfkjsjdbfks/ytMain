@@ -58,7 +58,7 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   const removeTag = (tagToRemove: any) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter((tag: string) => tag: string !== tagToRemove),
+      tags: prev.tags.filter((tag: string) => tag !== tagToRemove),
     }));
   };
 

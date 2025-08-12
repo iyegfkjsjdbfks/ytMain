@@ -125,7 +125,7 @@ const WatchPage: React.FC = () => {
         '📺 First few recommendations:',
         unifiedVideos
           .slice(0, 3)
-          .map((v: any) => ({ id: v: any.id, title: v: any.title }))
+          .map((v: any) => ({ id: v.id, title: v.title }))
       );
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
