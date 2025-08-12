@@ -4,7 +4,7 @@ export interface Video {
   title: string;
   description?: string;
   thumbnail: string;
-  thumbnailUrl?: string; // Alias for thumbnail
+  thumbnailUrl?: string; // Alias for thumbnail,
   duration: string;
   views: number | string;
   publishedAt: string;
@@ -65,7 +65,7 @@ export interface Video {
 }
 
 export interface Short extends Video {
-  isShort: true;
+  isShort: true
 }
 
 export interface User {

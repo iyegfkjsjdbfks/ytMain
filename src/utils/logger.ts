@@ -8,7 +8,7 @@ type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 interface LoggerConfig {
   level: LogLevel;
   enableConsole: boolean;
-  enableRemote: boolean;
+  enableRemote: boolean
 }
 
 class Logger {
@@ -33,8 +33,8 @@ class Logger {
     return this.logLevels[level] >= this.logLevels[this.config.level];
   }
 
-  private formatMessage(
-    level: LogLevel,
+  private formatMessage(,
+  level: LogLevel,
     message: any,
     ...args: unknown[]
   ): string {

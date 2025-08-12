@@ -26,7 +26,7 @@ interface SystemEvent {
   description: string;
   data;
   timestamp: number;
-  handled: boolean;
+  handled: boolean
 }
 
 interface SystemHealth {
@@ -37,9 +37,9 @@ interface SystemHealth {
     deployment: 'healthy' | 'degraded' | 'critical';
     codeQuality: 'healthy' | 'degraded' | 'critical';
     featureFlags: 'healthy' | 'degraded' | 'critical';
-    monitoring: 'healthy' | 'degraded' | 'critical';
+    monitoring: 'healthy' | 'degraded' | 'critical'
   };
-  lastCheck: number;
+  lastCheck: number
 }
 
 interface IntegrationConfig {
@@ -49,14 +49,14 @@ interface IntegrationConfig {
   alertThresholds: {
     performance: number;
     security: number;
-    quality: number;
+    quality: number
   };
   notifications: {
     email: boolean;
     slack: boolean;
     webhook?: string;
   };
-  emergencyContacts: string;
+  emergencyContacts: string
 }
 
 interface SystemMetrics {
@@ -64,13 +64,13 @@ interface SystemMetrics {
     score: number;
     responseTime: number;
     errorRate: number;
-    throughput: number;
+    throughput: number
   };
   security: {
     score: number;
     threats: number;
     vulnerabilities: number;
-    compliance: number;
+    compliance: number
   };
   deployment: {
     successRate: number;
@@ -82,12 +82,12 @@ interface SystemMetrics {
     score: number;
     coverage: number;
     complexity: number;
-    debt: number;
+    debt: number
   };
   features: {
     totalFlags: number;
     activeExperiments: number;
-    conversionRate: number;
+    conversionRate: number
   };
 }
 
@@ -103,8 +103,8 @@ class SystemIntegrationHub {
   constructor() {
     this.config = {
       autoStart: true,
-      healthCheckInterval: 60000, // 1 minute
-      eventRetentionDays: 30,
+      healthCheckInterval: 60000, // 1 minute,
+  eventRetentionDays: 30,
       alertThresholds: {
         performance: 70,
         security: 80,
@@ -391,8 +391,7 @@ return 'degraded';
       const checks = [
         advancedAPM.getMetrics('system').length > 0,
         performanceMonitor.getMetrics().length > 0,
-        securityMonitoring.getSecurityMetrics() !== null,
-      ];
+        securityMonitoring.getSecurityMetrics() !== null];
 
       const failedChecks = checks.filter((check) => !check).length;
 
@@ -553,7 +552,7 @@ return 'degraded';
 
   private cleanupOldEvents(): void {
     const cutoffTime = Date.now() - (this.config.eventRetentionDays * 24 * 60 * 60 * 1000);
-    this.events = this.events.filter((event: SystemEvent) => event.timestamp > cutoffTime);
+    this.events = this.events.filter((event: SystemEvent) => event.timestamp > cutoffTime)
   }
 
   // Public API methods
@@ -611,7 +610,7 @@ return 'degraded';
     metrics: SystemMetrics;
     recentEvents: SystemEvent[];
     summary: string;
-    recommendations: string[];
+    recommendations: string[]
   } {
     const recentEvents = this.getRecentEvents(10);
     const criticalEvents = this.getCriticalEvents();

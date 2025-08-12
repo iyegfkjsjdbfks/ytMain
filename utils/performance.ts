@@ -232,10 +232,9 @@ export function usePerformanceMonitor(componentName: any) {
 }
 
 // Higher-order component for automatic performance monitoring
-export function withPerformanceMonitoring<P extends object>(
+export function withPerformanceMonitoring<P extends object>(,
   WrappedComponent: React.ComponentType<P>
-  componentName?: string,
-) {
+  componentName?: string) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   const MonitoredComponent = React.forwardRef<any, P>((props, ref) => {

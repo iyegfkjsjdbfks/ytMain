@@ -17,10 +17,11 @@ type SortType = 'latest' | 'popular' | 'oldest';
 type ViewType = 'grid' | 'list';
 
 const SubscriptionsPage: React.FC = () => {
-  const { data: subscribedVideos, loading: videosLoading, error: videosError } = useSubscriptionsFeed();
+  const { data: subscribedVideos,
+          loading: videosLoading, error: videosError } = useSubscriptionsFeed();
   const {
     channels: subscribedChannels,
-    loading: channelsLoading,
+          loading: channelsLoading,
     error: channelsError,
     toggleNotifications,
     unsubscribe } = useSubscriptions();
@@ -80,8 +81,8 @@ return [];
       case 'oldest':
         filtered.sort((a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime());
         break;
-      case 'latest':
-      default:
+      case 'latest':,
+  default:
         filtered.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
         break;
     }
@@ -105,8 +106,7 @@ return [];
       totalChannels: subscribedChannels.length,
       notificationsEnabled,
       totalVideos,
-      newVideosToday };
-  }, [subscribedChannels, subscribedVideos]);
+      newVideosToday }}, [subscribedChannels, subscribedVideos]);
 
   const loading = videosLoading || channelsLoading;
   const error = videosError || channelsError;

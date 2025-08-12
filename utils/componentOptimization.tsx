@@ -2,7 +2,7 @@ import React, { memo, lazy, Suspense, ReactNode, /// <reference types="node" />
   memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -34,8 +34,7 @@ export function useComponentPerformance(componentName: any) {
       if (import.meta.env.DEV) {
         console.log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
       }
-    };
-  }, [componentName]);
+    }}, [componentName]);
 
   // Track render performance
   useEffect(() => {
@@ -63,8 +62,7 @@ return undefined;
           setIsVisible(entry.isIntersecting);
         }
       },
-      { threshold: 0.1 },
-    );
+      { threshold: 0.1 });
 
     observer.observe(elementRef.current);
     return () => observer.disconnect();
@@ -77,20 +75,20 @@ return undefined;
     elementRef,
     isVisible,
     renderCount: renderCount.current,
-    trackCustomMetric: (metricName: any, value: string | number) => {
+          trackCustomMetric: (metricName: any,
+          value: string | number) => {
       performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
-    } };
-}
+    } }}
 
 // Smart memo wrapper that includes performance tracking
-export function smartMemo<P extends object>(
+export function smartMemo<P extends object>(,
   Component: ComponentType<P>
-  propsAreEqual?: (prevProps: P, nextProps: P) => boolean,
-  componentName?: string,
-): MemoExoticComponent<ComponentType<P>> {
+  propsAreEqual?: (prevProps: P,
+          nextProps: P) => boolean,
+  componentName?: string): MemoExoticComponent<ComponentType<P>> {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component, (prevProps, nextProps) => {
+  const MemoizedComponent = memo(Component(prevProps, nextProps) => {
     const startTime = performance.now();
 
     // Use custom comparison if provided
@@ -132,11 +130,10 @@ export function smartMemo<P extends object>(
 }
 
 // Optimized callback hook with dependency tracking
-export function useOptimizedCallback<T extends (...args) => any>(
+export function useOptimizedCallback<T extends (...args) => any>(,
   callback: T,
-  deps: React.DependencyList,
-  debugName?: string,
-): T {
+          deps: React.DependencyList,
+  debugName?: string): T {
   const callbackRef = useRef(callback);
   const depsRef = useRef(deps);
   const creationTime = useRef(performance.now());
@@ -166,11 +163,10 @@ export function useOptimizedCallback<T extends (...args) => any>(
 }
 
 // Optimized memo hook with size tracking
-export function useOptimizedMemo<T>(
+export function useOptimizedMemo<T>(,
   factory: () => T,
-  deps: React.DependencyList,
-  debugName?: string,
-): T {
+          deps: React.DependencyList,
+  debugName?: string): T {
   const valueRef = useRef<T>();
   const depsRef = useRef(deps);
   const creationTime = useRef(performance.now());
@@ -211,11 +207,10 @@ export function useOptimizedMemo<T>(
 }
 
 // Lazy component wrapper with loading states
-export function createLazyComponent<P extends Record<string, any>>(
+export function createLazyComponent<P extends Record<string, any>>(,
   importFn: () => Promise<{ default: ComponentType<P> }>
   fallback?: ReactNode,
-  errorFallback?: ReactNode,
-) {
+  errorFallback?: ReactNode) {
   const LazyComponent = React.lazy(importFn);
 
   return function LazyWrapper(props: P) {
@@ -246,8 +241,7 @@ export function createLazyComponent<P extends Record<string, any>>(
         <LazyComponent {...((props as any))} />
       </React.Suspense>
     );
-  };
-}
+  }}
 
 // Virtual scrolling hook for large lists
 export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5 }) {
@@ -257,11 +251,9 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
     const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
     const endIndex = Math.min(
       itemCount - 1,
-      Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan,
-    );
+      Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan);
 
-    return { startIndex, endIndex };
-  }, [scrollTop, itemHeight, containerHeight, itemCount, overscan]);
+    return { startIndex, endIndex }}, [scrollTop, itemHeight, containerHeight, itemCount, overscan]);
 
   const totalHeight = itemCount * itemHeight;
   const offsetY = visibleRange.startIndex * itemHeight;
@@ -274,11 +266,11 @@ export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, ov
     visibleRange,
     totalHeight,
     offsetY,
-    handleScroll };
-}
+    handleScroll }}
 
 // Image optimization hook with lazy loading
-export function useOptimizedImage(src: any, options: {
+export function useOptimizedImage(src: any,
+          options: {
   placeholder?: string;
   sizes?: string;
   quality?: number;
@@ -303,8 +295,7 @@ return undefined;
           observer.disconnect();
         }
       },
-      { threshold: 0.1 },
-    );
+      { threshold: 0.1 });
 
     observer.observe(imgRef.current);
     return () => observer.disconnect();
@@ -342,14 +333,12 @@ return options.placeholder || '';
     isError,
     isVisible,
     onLoad: handleLoad,
-    onError: handleError };
-}
+          onError: handleError }}
 
 // Bundle splitting utility
-export function createAsyncComponent<_P extends object>(
+export function createAsyncComponent<_P extends object>(,
   componentPath: any,
-  chunkName?: string,
-) {
+  chunkName?: string) {
   return React.lazy(() => {
     const startTime = performance.now();
 
@@ -363,8 +352,7 @@ export function createAsyncComponent<_P extends object>(
 
         performanceMonitor.trackCustomMetric(
           `chunk_load_${chunkName || componentPath.replace(/[^a-zA-Z0-9]/g, '_')}`,
-          loadTime,
-        );
+          loadTime);
 
         return module;
       })
@@ -376,10 +364,9 @@ export function createAsyncComponent<_P extends object>(
 }
 
 // Performance monitoring wrapper for components
-export function withPerformanceMonitoring<P extends object>(
+export function withPerformanceMonitoring<P extends object>(,
   Component: ComponentType<P>
-  componentName?: string,
-) {
+  componentName?: string) {
   const displayName = componentName || Component.displayName || Component.name || 'Component';
 
   return function PerformanceMonitoredComponent(props: P) {
@@ -390,19 +377,20 @@ export function withPerformanceMonitoring<P extends object>(
       if (isVisible) {
         trackCustomMetric('visibility_time', performance.now());
       }
-    }, [isVisible, trackCustomMetric]);
+    
+        }, [isVisible, trackCustomMetric]);
 
     // Add performance data to dev tools
     useEffect(() => {
       if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-        (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (
-          _id: any,
+        (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
+  _id: any,
           _root: any,
           _priorityLevel: any) => {
           // Custom performance tracking logic
           console.debug('Component committed to root');
-        };
-      }
+        
+        }}
     }, []);
 
     return (
@@ -410,14 +398,12 @@ export function withPerformanceMonitoring<P extends object>(
         <Component {...props} />
       </div>
     );
-  };
-}
+  }}
 
 // Debounced state hook for performance
-export function useDebouncedState<T>(
+export function useDebouncedState<T>(,
   initialValue: T,
-  delay: number = 300,
-): [T, T, (value: T) => void] {
+          delay: number = 300): [T, T(value: T) => void] {
   const [value, setValue] = useState(initialValue);
   const [debouncedValue, setDebouncedValue] = useState(initialValue);
 
@@ -433,10 +419,9 @@ export function useDebouncedState<T>(
 }
 
 // Throttled callback hook
-export function useThrottledCallback<T extends (...args) => any>(
+export function useThrottledCallback<T extends (...args) => any>(,
   callback: T,
-  delay: number = 100,
-): T {
+          delay: number = 100): T {
   const lastCall = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 

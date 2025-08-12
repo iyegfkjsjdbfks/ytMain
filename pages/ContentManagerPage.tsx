@@ -42,7 +42,7 @@ const ContentManagerPage: React.FC = () => {
           const item: ContentItem = {
             ...video,
             status: status as 'published' | 'scheduled' | 'draft' | 'private' | 'unlisted',
-            lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString() };
+          lastModified: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString() };
           if (Math.random() > 0.9) {
             item.scheduledDate = new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString();
           }
@@ -72,8 +72,7 @@ const ContentManagerPage: React.FC = () => {
       filtered = filtered.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())),
-      );
+        (item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())));
     }
 
     // Apply sort
@@ -94,10 +93,10 @@ const ContentManagerPage: React.FC = () => {
           const bDurationParts = b.duration?.split(':') || ['0', '0'];
           return parseInt(bDurationParts[0] || '0', 10) * 60 + parseInt(bDurationParts[1] || '0', 10) -
           (parseInt(aDurationParts[0] || '0', 10) * 60 + parseInt(aDurationParts[1] || '0', 10));
-        default:
-          return 0;
+        default: return 0
       }
-    });
+    
+        });
 
     setFilteredContent(filtered);
   }, [content, filter, searchQuery, sortBy]);
@@ -141,13 +140,12 @@ const ContentManagerPage: React.FC = () => {
               return null; // Will be filtered out
             case 'duplicate':
               return item;
-            default:
-              return item;
+            default: return item
           }
+        
         }
         return item;
-      }).filter(Boolean) as ContentItem,
-    );
+      }).filter(Boolean) as ContentItem);
 
     if (action === 'duplicate') {
       // Add duplicated items
@@ -157,7 +155,8 @@ const ContentManagerPage: React.FC = () => {
           ...item,
           id: `${item.id}-copy`,
           title: `${item.title} (Copy)`,
-          status: 'draft' as const, uploadedAt: new Date().toISOString(),
+          status: 'draft' as const,
+          uploadedAt: new Date().toISOString(),
           views: '0' }));
       setContent(prev => [...prev, ...duplicatedItems]);
     }
@@ -178,11 +177,10 @@ return;
         if (selectedItems.has(item.id)) {
           return {
             ...item,
-            status: 'scheduled' as const, scheduledDate: scheduledDateTime };
-        }
+            status: 'scheduled' as const,
+          scheduledDate: scheduledDateTime }}
         return item;
-      }),
-    );
+      }));
 
     setSelectedItems(new Set());
     setShowBulkActions(false);
@@ -210,8 +208,7 @@ return;
         return <span className={`${baseClasses} bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400`}>Private</span>;
       case 'unlisted':
         return <span className={`${baseClasses} bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400`}>Unlisted</span>;
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -451,7 +448,8 @@ return content.length;
                           if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                             // Delete video logic here
                           }
-                        }}
+                        
+        }}
                         className="p-1 text-neutral-500 hover:text-red-500 transition-colors"
                         title="Delete video"
                       >
@@ -525,7 +523,8 @@ return content.length;
                         if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                           // Delete video logic here
                         }
-                      }}
+                      
+        }}
                       className="p-2 text-neutral-500 hover:text-red-500 transition-colors"
                       title="Delete video"
                     >

@@ -63,7 +63,7 @@ export const formatDistanceToNow = (date: string | Date | number): string => {
  * @param date Date object, date string, or timestamp
  * @returns Short relative time string
  */
-export const formatShortDistanceToNow = (
+export const formatShortDistanceToNow = (,
   date: string | Date | number
 ): string => {
   try {
@@ -120,7 +120,7 @@ export const formatShortDistanceToNow = (
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted date string
  */
-export const formatDate = (
+export const formatDate = (,
   date: string | Date | number,
   options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -149,7 +149,7 @@ export const formatDate = (
  * @param options Intl.DateTimeFormatOptions
  * @returns Formatted time string
  */
-export const formatTime = (
+export const formatTime = (,
   date: string | Date | number,
   options?: Intl.DateTimeFormatOptions
 ): string => {
@@ -176,7 +176,7 @@ export const formatTime = (
  * @param relativeDate Relative date string like "2 hours ago"
  * @returns Timestamp in milliseconds
  */
-export const parseRelativeDate = (
+export const parseRelativeDate = (,
   relativeDate: string | null | undefined
 ): number => {
   const now = new Date().getTime();
@@ -208,9 +208,8 @@ export const parseRelativeDate = (
       case 'month':
         return now - value * 30 * 24 * 60 * 60 * 1000; // Approximate
       case 'year':
-        return now - value * 365 * 24 * 60 * 60 * 1000; // Approximate
-      default:
-        break;
+        return now - value * 365 * 24 * 60 * 60 * 1000; // Approximate,
+  default: break
     }
   }
 

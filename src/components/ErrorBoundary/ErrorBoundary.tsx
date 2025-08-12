@@ -8,7 +8,8 @@ interface ErrorBoundaryState {
 interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ComponentType<{ error?: Error; resetError: () => void }>;
-  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  onError?: (error: Error,
+          errorInfo: React.ErrorInfo) => void
 }
 
 class ErrorBoundary extends React.Component<
@@ -17,16 +18,15 @@ class ErrorBoundary extends React.Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
-  }
+    this.state = { hasError: false }}
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return {
       hasError: true,
-      error };
-  }
+      error }}
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error,
+          errorInfo: React.ErrorInfo) {
     this.setState({
       error,
       errorInfo });
@@ -38,10 +38,12 @@ class ErrorBoundary extends React.Component<
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
     }
-  }
+  
+        }
 
   resetError = () => {
-    this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+    this.setState({ hasError: false,
+          error: undefined, errorInfo: undefined });
   };
 
   render() {

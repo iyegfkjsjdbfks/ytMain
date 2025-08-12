@@ -24,7 +24,7 @@ export interface VideoPlayerState {
   isLoading: boolean;
   error: Error | null;
   buffered?: TimeRanges;
-  setQuality?: (quality: any) => void;
+  setQuality?: (quality: any) => void
 }
 
 export interface VideoPlayerControls {
@@ -44,7 +44,7 @@ export interface VideoPlayerControls {
   exitPictureInPicture: () => Promise<void>;
   togglePictureInPicture: () => Promise<void>;
   setVideoRef: (element: HTMLVideoElement | null) => void;
-  setQuality: (quality: any) => void;
+  setQuality: (quality: any) => void
 }
 
 export const useVideoPlayer = (;

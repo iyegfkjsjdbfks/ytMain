@@ -16,7 +16,7 @@ interface ErrorReport {
   severity: 'low' | 'medium' | 'high' | 'critical';
   context: ErrorContext;
   resolved: boolean;
-  occurrenceCount: number;
+  occurrenceCount: number
 }
 
 interface ErrorServiceConfig {
@@ -26,7 +26,7 @@ interface ErrorServiceConfig {
   maxStoredErrors: number;
   apiEndpoint?: string | undefined;
   apiKey?: string | undefined;
-  enablePerformanceTracking: boolean;
+  enablePerformanceTracking: boolean
 }
 
 const DEFAULT_CONFIG: ErrorServiceConfig = {
@@ -134,7 +134,7 @@ class ErrorService {
     stack?: string;
     type: ErrorReport['type'];
     severity: ErrorReport['severity'];
-    context: Partial<ErrorContext>;
+    context: Partial<ErrorContext>
   }) {
     const errorId = this.generateErrorId(errorData.message, errorData.stack);
     const existingError = this.errors.get(errorId);
@@ -215,13 +215,13 @@ class ErrorService {
     }
   }
 
-  private getConsoleMethod(severity: ErrorReport['severity'],) {
+  private getConsoleMethod(severity: ErrorReport['severity']) {
     switch (severity) {
       case 'low': return console.info;
       case 'medium': return console.warn;
       case 'high':
       case 'critical': return console.error;
-      default: return console.log;
+      default: return console.log
     }
   }
 
@@ -326,7 +326,7 @@ return;
   }
 
   // Utility methods for manual error reporting
-  reportValidationError(message: any, field?: string, value: any?,) {
+  reportValidationError(message: any, field?: string, value: any?) {
     this.captureError({
       message: `Validation Error: ${message}`,
       type: 'validation',

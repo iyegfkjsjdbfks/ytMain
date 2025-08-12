@@ -15,12 +15,12 @@ export function useVideoComments(videoId: any, filters: CommentFilters = {}) {
     () => commentService.getVideoComments(videoId, filters),
     {
       enabled: !!videoId,
-      staleTime: 30 * 1000, // 30 seconds
-      refetchOnWindowFocus: true }
+      staleTime: 30 * 1000, // 30 seconds,
+  refetchOnWindowFocus: true }
   );
 }
 
-export function useCommentReplies(
+export function useCommentReplies(,
   commentId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
 ) {
@@ -56,7 +56,7 @@ export function useCommentThread(commentId: any) {
   );
 }
 
-export function useUserComments(
+export function useUserComments(,
   userId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
 ) {
@@ -78,8 +78,8 @@ export function usePendingComments(
     ['comments', 'pending', videoId || '', JSON.stringify(filters)],
     () => commentService.getPendingComments(videoId, filters),
     {
-      staleTime: 30 * 1000, // 30 seconds
-      refetchOnWindowFocus: true }
+      staleTime: 30 * 1000, // 30 seconds,
+  refetchOnWindowFocus: true }
   );
 }
 
@@ -94,7 +94,7 @@ export function useCommentStats(videoId: any) {
   );
 }
 
-export function useTrendingComments(
+export function useTrendingComments(,
   timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
   limit: number = 20
 ) {
@@ -113,12 +113,12 @@ export function useCommentMentions(userId: any, filters: CommentFilters = {}) {
     () => commentService.getCommentMentions(userId, filters),
     {
       enabled: !!userId,
-      staleTime: 60 * 1000, // 1 minute
-      refetchOnWindowFocus: true }
+      staleTime: 60 * 1000, // 1 minute,
+  refetchOnWindowFocus: true }
   );
 }
 
-export function useCommentAnalytics(
+export function useCommentAnalytics(,
   videoId: any,
   timeframe: '7d' | '30d' | '90d' = '30d'
 ) {
@@ -132,7 +132,7 @@ export function useCommentAnalytics(
   );
 }
 
-export function useSearchComments(
+export function useSearchComments(,
   query: any,
   videoId?: string,
   filters: CommentFilters = {}
@@ -198,7 +198,7 @@ export function useReactToComment() {
     void,
     {
       commentId: string;
-      type: 'like' | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad';
+      type: 'like' | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad'
     }
   >(data => commentService.reactToComment(data), {
     onSuccess: (_, { commentId }) => {
@@ -225,7 +225,7 @@ export function usePinComment() {
       onSuccess: (_, commentId) => {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
-        queryCache.invalidate('comments:video');
+        queryCache.invalidate('comments: video')
       } }
   );
 }
@@ -237,7 +237,7 @@ export function useUnpinComment() {
       onSuccess: (_, commentId) => {
         // Invalidate comment and video comments cache
         queryCache.invalidate(`comment:${commentId}`);
-        queryCache.invalidate('comments:video');
+        queryCache.invalidate('comments: video')
       } }
   );
 }
@@ -288,7 +288,7 @@ export function useModerateComment() {
     onSuccess: (_, { commentId }) => {
       // Invalidate moderation-related caches
       queryCache.invalidate(`comment:${commentId}`);
-      queryCache.invalidate('comments:pending');
+      queryCache.invalidate('comments: pending')
     } });
 }
 
@@ -320,7 +320,7 @@ export function useAutoModerateComments() {
       onSuccess: (_, { videoId }) => {
         // Invalidate video comments cache
         queryCache.invalidate(`comments:video:${videoId}`);
-        queryCache.invalidate('comments:pending');
+        queryCache.invalidate('comments: pending')
       } }
   );
 }
@@ -331,7 +331,7 @@ export function useMarkMentionsAsRead() {
     {
       onSuccess: () => {
         // Invalidate mentions cache
-        queryCache.invalidate('comments:mentions');
+        queryCache.invalidate('comments: mentions')
       } }
   );
 }

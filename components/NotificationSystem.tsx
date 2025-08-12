@@ -8,17 +8,17 @@ const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Notification {
-  id: string;
+  id: string;,
   type: 'video_upload' | 'like' | 'comment' | 'subscription' | 'live_stream' | 'community_post';
-  title: string;
+  title: string;,
   message: string;
   thumbnail?: string;
   channelName?: string;
   channelAvatar?: string;
   videoId?: string;
-  timestamp: string;
+  timestamp: string;,
   isRead: boolean;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'low' | 'medium' | 'high'
 }
 
 interface NotificationSystemProps {
@@ -40,7 +40,8 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
       if (Math.random() > 0.8) { // 20% chance every 30 seconds
         generateMockNotification();
       }
-    }, 30000);
+    
+        }, 30000);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,7 +74,8 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
         setNotifications(initialNotifications);
         localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(initialNotifications));
       }
-    } catch (error) {
+    
+        } catch (error) {
       console.error('Error loading notifications:', error);
     }
   }, []);
@@ -82,59 +84,58 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
     return [
       {
         id: '1',
-        type: 'video_upload',
+          type: 'video_upload',
         title: 'New video from TechReviews',
-        message: 'iPhone 15 Pro Max Review - Is it worth the upgrade?',
+          message: 'iPhone 15 Pro Max Review - Is it worth the upgrade?',
         thumbnail: 'https://picsum.photos/120/68?random=1',
-        channelName: 'TechReviews',
+          channelName: 'TechReviews',
         channelAvatar: 'https://picsum.photos/40/40?random=1',
-        videoId: 'tech-review-1',
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
-        isRead: false,
-        priority: 'medium' },
+          videoId: 'tech-review-1',
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago,
+  isRead: false,
+          priority: 'medium' },
       {
         id: '2',
-        type: 'like',
+          type: 'like',
         title: 'Your video got 100 likes!',
-        message: 'React Tutorial for Beginners reached 100 likes',
+          message: 'React Tutorial for Beginners reached 100 likes',
         thumbnail: 'https://picsum.photos/120/68?random=2',
-        timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
-        isRead: false,
-        priority: 'low' },
+          timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago,
+  isRead: false,
+          priority: 'low' },
       {
         id: '3',
-        type: 'comment',
+          type: 'comment',
         title: 'New comment on your video',
-        message: 'John Doe commented: "Great tutorial! Very helpful."',
-        thumbnail: 'https://picsum.photos/120/68?random=3',
-        channelName: 'John Doe',
+          message: 'John Doe commented: "Great tutorial! Very helpful."',
+          thumbnail: 'https://picsum.photos/120/68?random=3',
+          channelName: 'John Doe',
         channelAvatar: 'https://picsum.photos/40/40?random=3',
-        videoId: 'my-video-1',
-        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
-        isRead: true,
-        priority: 'medium' },
+          videoId: 'my-video-1',
+        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago,
+  isRead: true,
+          priority: 'medium' },
       {
         id: '4',
-        type: 'subscription',
+          type: 'subscription',
         title: 'New subscriber!',
-        message: 'CodingMaster subscribed to your channel',
+          message: 'CodingMaster subscribed to your channel',
         channelName: 'CodingMaster',
-        channelAvatar: 'https://picsum.photos/40/40?random=4',
-        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
-        isRead: true,
-        priority: 'medium' },
+          channelAvatar: 'https://picsum.photos/40/40?random=4',
+          timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago,
+  isRead: true,
+          priority: 'medium' },
       {
         id: '5',
-        type: 'live_stream',
+          type: 'live_stream',
         title: 'GameStreamer is live!',
-        message: 'Playing the latest AAA game - Join now!',
+          message: 'Playing the latest AAA game - Join now!',
         thumbnail: 'https://picsum.photos/120/68?random=5',
-        channelName: 'GameStreamer',
+          channelName: 'GameStreamer',
         channelAvatar: 'https://picsum.photos/40/40?random=5',
-        timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
-        isRead: false,
-        priority: 'high' },
-    ];
+          timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago,
+  isRead: false,
+          priority: 'high' }];
   };
 
   const generateMockNotification = useCallback(() => {
@@ -145,18 +146,18 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({ className = '' 
 return;
 } // Safety check
 
-    const newNotification: Notification = {
+    const newNotification: Notification = {,
       id: Date.now().toString(),
       type,
       title: getNotificationTitle(type),
-      message: getNotificationMessage(type),
+          message: getNotificationMessage(type),
       ...(type !== 'subscription' && { thumbnail: `https://picsum.photos/120/68?random=${Date.now()}` }),
-      channelName: `Channel${Math.floor(Math.random() * 100)}`,
+          channelName: `Channel${Math.floor(Math.random() * 100)}`,
       channelAvatar: `https://picsum.photos/40/40?random=${Date.now()}`,
       ...(type === 'video_upload' ? { videoId: `video-${Date.now()}` } : {}),
-      timestamp: new Date().toISOString(),
+          timestamp: new Date().toISOString(),
       isRead: false,
-      priority: type === 'live_stream' ? 'high' : 'medium' };
+          priority: type === 'live_stream' ? 'high' : 'medium' };
 
     setNotifications(prev => {
       const updated = [newNotification, ...prev].slice(0, 50); // Keep only latest 50
@@ -172,7 +173,7 @@ return;
       case 'comment': return 'New comment on your video';
       case 'subscription': return 'New subscriber!';
       case 'live_stream': return 'Live stream started';
-      default: return 'New notification';
+      default: return 'New notification'
     }
   };
 
@@ -183,15 +184,14 @@ return;
       case 'comment': return 'Someone left a comment on your video';
       case 'subscription': return 'A new user subscribed to your channel';
       case 'live_stream': return 'Your favorite creator is now live!';
-      default: return 'You have a new notification';
+      default: return 'You have a new notification'
     }
   };
 
   const markAsRead = (notificationId: any) => {
     setNotifications(prev => {
       const updated = prev.map(n =>
-        n.id === notificationId ? { ...n, isRead: true } : n,
-      );
+        n.id === notificationId ? { ...n, isRead: true } : n);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updated));
       return updated;
     });
@@ -220,7 +220,7 @@ return;
       case 'comment': return <ChatBubbleLeftIcon className="w-4 h-4" />;
       case 'subscription': return <UserPlusIcon className="w-4 h-4" />;
       case 'live_stream': return <PlayIcon className="w-4 h-4 text-red-500" />;
-      default: return <BellIcon className="w-4 h-4" />;
+      default: return <BellIcon className="w-4 h-4" />
     }
   };
 

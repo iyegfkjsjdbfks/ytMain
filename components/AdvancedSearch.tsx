@@ -3,16 +3,17 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon, ClockIcon, CalendarDaysIcon, VideoCameraIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
-  duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min
-  uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
+  duration: 'any' | 'short' | 'medium' | 'long'; // <4min, 4-20min, >20min,
+  uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';,
   type: 'any' | 'video' | 'channel' | 'playlist' | 'live';
-  quality: 'any' | 'hd' | '4k';
-  features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr
-  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
+  quality: 'any' | 'hd' | '4k';,
+  features: string[]; // subtitles, creative_commons, 3d, live, purchased, 4k, 360, location, hdr,
+  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating'
 }
 
 interface AdvancedSearchProps {
-  onSearch: (query: any, filters: SearchFilters) => void;
+  onSearch: (query: any,
+          filters: SearchFilters) => void;
   initialQuery?: string;
   className?: string;
 }
@@ -27,11 +28,11 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filters, setFilters] = useState<SearchFilters>({
     duration: 'any',
-    uploadDate: 'any',
+          uploadDate: 'any',
     type: 'any',
-    quality: 'any',
+          quality: 'any',
     features: [],
-    sortBy: 'relevance' });
+          sortBy: 'relevance' });
 
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,13 +70,11 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       'programming basics',
       'coding interview',
       'algorithm tutorial',
-      'data structures',
-    ];
+      'data structures'];
 
     const filtered = mockSuggestions
       .filter(suggestion =>
-        suggestion.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+        suggestion.toLowerCase().includes(searchQuery.toLowerCase()))
       .slice(0, 8);
 
     setSuggestions(filtered);
@@ -141,11 +140,11 @@ searchParams.set('sort_by', filters.sortBy);
   const clearFilters = () => {
     setFilters({
       duration: 'any',
-      uploadDate: 'any',
+          uploadDate: 'any',
       type: 'any',
-      quality: 'any',
+          quality: 'any',
       features: [],
-      sortBy: 'relevance' });
+          sortBy: 'relevance' });
   };
 
   const hasActiveFilters = () => {
@@ -337,15 +336,22 @@ searchParams.set('sort_by', filters.sortBy);
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {[
-                { id: 'subtitles', label: 'Subtitles/CC' },
-                { id: 'creative_commons', label: 'Creative Commons' },
-                { id: '3d', label: '3D' },
-                { id: 'live', label: 'Live' },
-                { id: '4k', label: '4K' },
-                { id: '360', label: '360°' },
-                { id: 'location', label: 'Location' },
-                { id: 'hdr', label: 'HDR' },
-              ].map((feature) => (
+                { id: 'subtitles',
+          label: 'Subtitles/CC' },
+                { id: 'creative_commons',
+          label: 'Creative Commons' },
+                { id: '3d',
+          label: '3D' },
+                { id: 'live',
+          label: 'Live' },
+                { id: '4k',
+          label: '4K' },
+                { id: '360',
+          label: '360°' },
+                { id: 'location',
+          label: 'Location' },
+                { id: 'hdr',
+          label: 'HDR' }].map((feature) => (
                 <label key={feature.id} htmlFor={feature.id} className="flex items-center space-x-2 cursor-pointer">
                   <input
                     id={feature.id}

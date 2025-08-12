@@ -52,8 +52,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         return <LockClosedIcon className='w-4 h-4' />;
       case 'unlisted':
         return <EyeSlashIcon className='w-4 h-4' />;
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -65,8 +64,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
         return 'Unlisted';
       case 'public':
         return 'Public';
-      default:
-        return '';
+      default: return ''
     }
   };
 

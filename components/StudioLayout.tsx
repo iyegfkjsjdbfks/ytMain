@@ -13,7 +13,8 @@ const StudioLayout: React.FC = () => {
           id="studio-main-content"
           role="main"
           className="flex-1 overflow-y-auto bg-white dark:bg-neutral-900 p-4 md:p-6"
-          // Add margin-left if StudioSidebar is present and fixed: e.g., md:ml-64
+          // Add margin-left if StudioSidebar is present and fixed: e.g.,
+          md:ml-64
         >
           <Outlet /> {/* This is where the nested studio routes will render their components */}
         </main>

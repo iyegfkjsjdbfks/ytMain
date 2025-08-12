@@ -314,7 +314,7 @@ describe('buildUrl function with different MODE values', () => {
       const url = testService.buildUrl('search', {
         part: 'snippet' });
 
-      expect(url).toContain('https://www.googleapis.com/youtube/v3/search');
+      expect(url).toContain('https: //www.googleapis.com/youtube/v3/search')
     });
   });
 

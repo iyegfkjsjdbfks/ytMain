@@ -18,7 +18,7 @@ import UserMenu from './UserMenu';
 // UserIcon not used if avatar image is present
 
 interface HeaderProps {
-  toggleSidebar: () => void;
+  toggleSidebar: () => void
 }
 
 const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void; icon: React.ReactNode; to?: string }> = ({ children, onClick, icon, to }) => {
@@ -51,9 +51,9 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
 
 // Component for authenticated user section
 interface AuthenticatedUserSectionProps {
-  userMenuRef: React.RefObject<HTMLDivElement>;
+  userMenuRef: React.RefObject<HTMLDivElement>;,
   userMenuButtonRef: React.RefObject<HTMLButtonElement>;
-  toggleUserMenu: () => void;
+  toggleUserMenu: () => void;,
   isUserMenuOpen: boolean; handleCloseUserMenu: () => void
 }
 
@@ -173,7 +173,8 @@ setIsNotificationsPanelOpen(false);
       ) {
         setIsCreateMenuOpen(false);
       }
-    };
+    
+        };
 
     if (isUserMenuOpen || isNotificationsPanelOpen || isCreateMenuOpen) {
       document.addEventListener('mousedown', handleClickOutside as EventListener);
@@ -183,8 +184,7 @@ setIsNotificationsPanelOpen(false);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
-    };
-  }, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
+    }}, [isUserMenuOpen, isNotificationsPanelOpen, isCreateMenuOpen]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
@@ -240,7 +240,8 @@ setIsNotificationsPanelOpen(false);
                     <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={handleCloseCreateMenu}>Go live</CreateMenuItem>
                     <CreateMenuItem icon={<PencilSquareIcon />} onClick={() => {
  window.open('https://studio.youtube.com/channel/community', '_blank'); handleCloseCreateMenu();
-}}>Create post</CreateMenuItem>
+
+        }}>Create post</CreateMenuItem>
                     <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
                     <CreateMenuItem
                         icon={<LightBulbIcon />}

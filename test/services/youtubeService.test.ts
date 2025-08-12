@@ -11,8 +11,8 @@ vi.mock('../../src/utils/logger', () => ({
 
 vi.mock('../../src/lib/constants', () => ({
   CACHE_CONFIG: {
-    VIDEO_DATA_TTL: 300000, // 5 minutes
-    USER_DATA_TTL: 3600000, // 1 hour
+    VIDEO_DATA_TTL: 300000, // 5 minutes,
+  USER_DATA_TTL: 3600000, // 1 hour
   } }));
 
 // Mock fetch globally
@@ -45,8 +45,7 @@ const mockYouTubeVideoResponse = {
         duration: 'PT5M30S',
         dimension: '2d',
         definition: 'hd',
-        caption: 'false' } },
-  ] };
+        caption: 'false' } }] };
 
 describe('YouTubeService', () => {
   beforeEach(() => {
@@ -96,7 +95,7 @@ describe('YouTubeService', () => {
         status: 403,
         statusText: 'Forbidden' });
 
-      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('YouTube API error: Forbidden');
+      await expect(youtubeService.fetchVideos(['test-video'])).rejects.toThrow('YouTube API error: Forbidden')
     });
 
     it('should handle network errors gracefully', async () => {
@@ -124,8 +123,7 @@ describe('YouTubeService', () => {
         { input: 'PT45S', expected: '0:45' },
         { input: 'PT2H', expected: '2:00:00' },
         { input: 'PT10M', expected: '10:00' },
-        { input: 'INVALID', expected: '0:00' },
-      ];
+        { input: 'INVALID', expected: '0:00' }];
 
       for (const testCase of testCases) {
         const mockResponse = {
@@ -194,8 +192,7 @@ describe('YouTubeService', () => {
           statistics: {
             subscriberCount: '10000',
             videoCount: '50',
-            viewCount: '500000' } },
-      ] };
+            viewCount: '500000' } }] };
 
     it('should fetch channel successfully', async () => {
       mockFetch.mockResolvedValueOnce({
@@ -244,8 +241,7 @@ describe('YouTubeService', () => {
         { input: 999, expected: '999' },
         { input: 1500, expected: '1.5K' },
         { input: 1500000, expected: '1.5M' },
-        { input: 10000000, expected: '10M' },
-      ];
+        { input: 10000000, expected: '10M' }];
 
       for (const testCase of testCases) {
         const mockResponse = {
@@ -487,7 +483,7 @@ describe('YouTubeService', () => {
       expect(url.searchParams.get('id')).toBe('video1,video2,video3');
       expect(url.searchParams.get('key')).toBe('test-key');
       expect(url.pathname).toBe('/youtube/v3/videos');
-      expect(url.origin).toBe('https://www.googleapis.com');
+      expect(url.origin).toBe('https: //www.googleapis.com')
     });
   });
 
@@ -557,7 +553,7 @@ describe('YouTubeService', () => {
         json: () => Promise.resolve(mockResponse) });
 
       const result = await youtubeService.fetchVideos(['test-video']);
-      expect(result[0]?.duration).toBe('0:00');
+      expect(result[0]?.duration).toBe('0: 00')
     });
   });
 });

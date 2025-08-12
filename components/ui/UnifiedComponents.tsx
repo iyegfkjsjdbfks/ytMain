@@ -17,14 +17,14 @@ export interface UnifiedButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
 
 const buttonVariants = {
   primary: 'bg-red-600 hover:bg-red-700 text-white border-transparent',
-  secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 border-transparent dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white',
-  ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 border-transparent dark:hover:bg-gray-800 dark:text-gray-300',
-  danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent',
-  success: 'bg-green-600 hover:bg-green-700 text-white border-transparent' };
+          secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 border-transparent dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white',
+          ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 border-transparent dark:hover:bg-gray-800 dark:text-gray-300',
+          danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent',
+          success: 'bg-green-600 hover:bg-green-700 text-white border-transparent' };
 
 const buttonSizes = {
   sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
+          md: 'px-4 py-2 text-sm',
   lg: 'px-6 py-3 text-base' };
 
 export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
@@ -50,8 +50,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
           buttonVariants[variant],
           buttonSizes[size],
           fullWidth && 'w-full',
-          className,
-        )}
+          className)}
         disabled={isDisabled}
         {...props}
       >
@@ -67,8 +66,7 @@ export const UnifiedButton = forwardRef<HTMLButtonElement, UnifiedButtonProps>(
         )}
       </button>
     );
-  },
-);
+  });
 
 UnifiedButton.displayName = 'UnifiedButton';
 
@@ -123,8 +121,7 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
                 : 'border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
-              className,
-            )}
+              className)}
             {...props}
           />
           {rightIcon && (
@@ -144,8 +141,7 @@ export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
         )}
       </div>
     );
-  },
-);
+  });
 
 UnifiedInput.displayName = 'UnifiedInput';
 
@@ -161,15 +157,15 @@ export interface UnifiedCardProps {
 
 const cardPadding = {
   none: '',
-  sm: 'p-3',
+          sm: 'p-3',
   md: 'p-4',
-  lg: 'p-6' };
+          lg: 'p-6' };
 
 const cardShadow = {
   none: '',
-  sm: 'shadow-sm',
+          sm: 'shadow-sm',
   md: 'shadow-md',
-  lg: 'shadow-lg' };
+          lg: 'shadow-lg' };
 
 export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   children,
@@ -186,8 +182,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         cardShadow[shadow],
         border && 'border border-gray-200 dark:border-gray-700',
         hover && 'hover:shadow-md hover:scale-[1.02]',
-        className,
-      )}
+        className)}
     >
       {children}
     </div>
@@ -205,30 +200,30 @@ export interface UnifiedAlertProps {
 }
 
 const alertStyles = {
-  info: {
+  info: {,
     container: 'bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800',
-    icon: 'text-blue-400',
+          icon: 'text-blue-400',
     title: 'text-blue-800 dark:text-blue-200',
-    content: 'text-blue-700 dark:text-blue-300',
-    IconComponent: InformationCircleIcon },
-  success: {
+          content: 'text-blue-700 dark:text-blue-300',
+          IconComponent: InformationCircleIcon },
+  success: {,
     container: 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800',
-    icon: 'text-green-400',
+          icon: 'text-green-400',
     title: 'text-green-800 dark:text-green-200',
-    content: 'text-green-700 dark:text-green-300',
-    IconComponent: CheckCircleIcon },
-  warning: {
+          content: 'text-green-700 dark:text-green-300',
+          IconComponent: CheckCircleIcon },
+  warning: {,
     container: 'bg-yellow-50 border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-800',
-    icon: 'text-yellow-400',
+          icon: 'text-yellow-400',
     title: 'text-yellow-800 dark:text-yellow-200',
-    content: 'text-yellow-700 dark:text-yellow-300',
-    IconComponent: ExclamationTriangleIcon },
-  error: {
+          content: 'text-yellow-700 dark:text-yellow-300',
+          IconComponent: ExclamationTriangleIcon },
+  error: {,
     container: 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800',
-    icon: 'text-red-400',
+          icon: 'text-red-400',
     title: 'text-red-800 dark:text-red-200',
-    content: 'text-red-700 dark:text-red-300',
-    IconComponent: ExclamationTriangleIcon } };
+          content: 'text-red-700 dark:text-red-300',
+          IconComponent: ExclamationTriangleIcon } };
 
 export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
   type = 'info',
@@ -244,8 +239,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
     <div className={cn(
       'rounded-md border p-4',
       styles.container,
-      className,
-    )}>
+      className)}>
       <div className="flex">
         <div className="flex-shrink-0">
           <IconComponent className={cn('h-5 w-5', styles.icon)} />
@@ -268,8 +262,7 @@ export const UnifiedAlert: React.FC<UnifiedAlertProps> = ({
                 className={cn(
                   'inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors',
                   styles.icon,
-                  'hover:bg-black/5 dark:hover:bg-white/5',
-                )}
+                  'hover:bg-black/5 dark:hover:bg-white/5')}
                 onClick={onDismiss}
               >
                 <span className="sr-only">Dismiss</span>
@@ -293,7 +286,7 @@ export interface UnifiedLoadingProps {
 
 const loadingSizes = {
   sm: 'w-4 h-4',
-  md: 'w-6 h-6',
+          md: 'w-6 h-6',
   lg: 'w-8 h-8' };
 
 export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
@@ -319,11 +312,10 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
                 key={i}
                 className={cn(
                   'bg-gray-400 rounded-full animate-pulse',
-                  size === 'sm' ? 'w-1 h-1' : size === 'md' ? 'w-2 h-2' : 'w-3 h-3',
-                )}
+                  size === 'sm' ? 'w-1 h-1' : size === 'md' ? 'w-2 h-2' : 'w-3 h-3')}
                 style={{
                   animationDelay: `${i * 0.2}s`,
-                  animationDuration: '1s' }}
+          animationDuration: '1s' }}
               />
             ))}
           </div>
@@ -334,12 +326,10 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
             className={cn(
               'bg-gray-300 dark:bg-gray-600 rounded animate-pulse',
               sizeClass,
-              className,
-            )}
+              className)}
           />
         );
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -355,7 +345,7 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
 
 // Unified Modal Component
 export interface UnifiedModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
   title?: string;
   children: ReactNode;
@@ -367,9 +357,9 @@ export interface UnifiedModalProps {
 
 const modalSizes = {
   sm: 'max-w-md',
-  md: 'max-w-lg',
+          md: 'max-w-lg',
   lg: 'max-w-2xl',
-  xl: 'max-w-4xl' };
+          xl: 'max-w-4xl' };
 
 export const UnifiedModal: React.FC<UnifiedModalProps> = ({
   isOpen,
@@ -399,8 +389,7 @@ return null;
         className={cn(
           'bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full',
           modalSizes[size],
-          className,
-        )}
+          className)}
       >
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">

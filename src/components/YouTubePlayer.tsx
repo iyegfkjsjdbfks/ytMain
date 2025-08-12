@@ -7,7 +7,7 @@ export interface YouTubePlayerProps {
   height?: string | number;
   controls?: boolean;
   className?: string;
-  onStateChange?: (state: any) => void;
+  onStateChange?: (state: any) => void
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -43,9 +43,9 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const embedUrl = `https://www.youtube.com/embed/${videoId}?${new URLSearchParams(
     {
       autoplay: autoplay ? '1' : '0',
-      controls: controls ? '1' : '0',
+          controls: controls ? '1' : '0',
       rel: '0',
-      modestbranding: '1' }
+          modestbranding: '1' }
   ).toString()}`;
 
   return (

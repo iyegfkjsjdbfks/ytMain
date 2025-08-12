@@ -9,7 +9,7 @@ const MapPinIconSolid = MapPinSolidIcon;
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommentSectionProps {
-  videoId: string;
+  videoId: string;,
   channelId: string;
   isChannelOwner?: boolean;
   className?: string;
@@ -18,11 +18,14 @@ interface CommentSectionProps {
 interface CommentItemProps {
   comment: Comment;
   isChannelOwner?: boolean;
-  onReply: (parentId: any, content: any) => void;
-  onReact: (commentId: any, type: 'like' | 'dislike') => void;
-  onPin: (commentId: any) => void | Promise<void>;
-  onHeart: (commentId: any) => void | Promise<void>;
-  onReport: (commentId: any, reason: any) => void | Promise<void>;
+  onReply: (parentId: any,
+          content: any) => void;,
+  onReact: (commentId: any,
+          type: 'like' | 'dislike') => void;,
+  onPin: (commentId: any) => void | Promise<void>;,
+  onHeart: (commentId: any) => void | Promise<void>;,
+  onReport: (commentId: any,
+          reason: any) => void | Promise<void>;
   level?: number;
 }
 
@@ -306,7 +309,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     }
   };
 
-  const handleReply = async (parentId: any, content: any) => {
+  const handleReply = async (parentId: any,
+          content: any) => {
     try {
       await createCommentMutation.mutate({
         content,
@@ -317,7 +321,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     }
   };
 
-  const handleReact = async (commentId: any, type: 'like' | 'dislike') => {
+  const handleReact = async (commentId: any,
+          type: 'like' | 'dislike') => {
     try {
       await reactToCommentMutation.mutate({
         commentId,
@@ -335,7 +340,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     // Implementation for hearting comments
   };
 
-  const handleReport = async (_commentId: any, _reason: any) => {
+  const handleReport = async (_commentId: any,
+          _reason: any) => {
     // Implementation for reporting comments
   };
 

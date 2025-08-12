@@ -5,11 +5,11 @@ import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 import BaseModal from './BaseModal';
 
 interface CommentModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
   shortId: string;
   shortTitle?: string;
-  onCommentSubmit?: (commentText: any) => void;
+  onCommentSubmit?: (commentText: any) => void
 }
 
 /**

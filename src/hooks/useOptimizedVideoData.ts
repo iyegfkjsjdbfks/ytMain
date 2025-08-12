@@ -16,7 +16,7 @@ interface UseVideoDataReturn {
   error: string | null;
   refetch: () => Promise<void>;
   hasMore: boolean;
-  loadMore: () => Promise<void>;
+  loadMore: () => Promise<void>
 }
 
 // Simple in-memory cache

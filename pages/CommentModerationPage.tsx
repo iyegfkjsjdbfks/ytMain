@@ -9,7 +9,7 @@ import type { Comment } from '../types';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface CommentWithVideo extends Comment {
-  videoTitle: string;
+  videoTitle: string;,
   videoId: string;
   status: 'approved' | 'pending' | 'spam' | 'hidden';
   flaggedReason?: string;
@@ -41,9 +41,9 @@ const CommentModerationPage: React.FC = () => {
           const commentsWithVideo = videoComments.map(comment => ({
             ...(comment as any),
             videoTitle: video.title,
-            videoId: video.id,
+          videoId: video.id,
             status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.8 ? 'spam' : 'approved' as any,
-            flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected' }));
+          flaggedReason: Math.random() > 0.9 ? 'Inappropriate content' : 'No issues detected' }));
           allComments.push(...commentsWithVideo);
         }
 
@@ -77,8 +77,7 @@ const CommentModerationPage: React.FC = () => {
       filtered = filtered.filter(comment =>
         comment.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
         comment.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
+        comment.videoTitle.toLowerCase().includes(searchQuery.toLowerCase()));
     }
 
     // Apply sort
@@ -92,10 +91,10 @@ const CommentModerationPage: React.FC = () => {
           return b.likes - a.likes;
         case 'mostReplies':
           return (b.replyCount || 0) - (a.replyCount || 0);
-        default:
-          return 0;
+        default: return 0
       }
-    });
+    
+        });
 
     setFilteredComments(filtered);
   }, [comments, filter, searchQuery, sortBy]);
@@ -130,16 +129,15 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' };
-        }
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' }}
         return comment;
-      }).filter(Boolean) as CommentWithVideo,
-    );
+      }).filter(Boolean) as CommentWithVideo);
     setSelectedComments(new Set());
     setShowBulkActions(false);
   };
 
-  const handleSingleAction = (commentId: any, action: 'approve' | 'spam' | 'hide' | 'delete') => {
+  const handleSingleAction = (commentId: any,
+          action: 'approve' | 'spam' | 'hide' | 'delete') => {
     setComments(prevComments =>
       prevComments.map(comment => {
         if (comment.id === commentId) {
@@ -148,11 +146,9 @@ const CommentModerationPage: React.FC = () => {
           }
           return {
             ...comment,
-            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' };
-        }
+            status: action === 'approve' ? 'approved' : action === 'spam' ? 'spam' : 'hidden' }}
         return comment;
-      }).filter(Boolean) as CommentWithVideo,
-    );
+      }).filter(Boolean) as CommentWithVideo);
   };
 
   const getStatusBadge = (status: any, flaggedReason?: string) => {
@@ -176,8 +172,7 @@ const CommentModerationPage: React.FC = () => {
         return <span className={`${baseClasses} bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400`}>Spam</span>;
       case 'hidden':
         return <span className={`${baseClasses} bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400`}>Hidden</span>;
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -369,8 +364,8 @@ return comments.filter((c) => c.flaggedReason).length;
                     {comment.flaggedReason && (
                       <div className="mt-2 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded">
                         <span className="text-sm text-red-800 dark:text-red-400">
-                          <FlagIcon className="w-4 h-4 inline mr-1" />
-                          Flagged: {comment.flaggedReason}
+                          <FlagIcon className="w-4 h-4 inline mr-1" />,
+  Flagged: {comment.flaggedReason}
                         </span>
                       </div>
                     )}

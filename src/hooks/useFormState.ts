@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 interface UseFormStateOptions<T> {
   initialValues: T;
   validate?: (values: T) => Partial<Record<keyof T, string>>;
-  onSubmit?: (values: T) => Promise<void> | void;
+  onSubmit?: (values: T) => Promise<void> | void
 }
 
 interface UseFormStateReturn<T> {
@@ -16,7 +16,7 @@ interface UseFormStateReturn<T> {
   clearError: (field: keyof T) => void;
   clearErrors: () => void;
   handleSubmit: (e?: React.FormEvent) => Promise<void>;
-  reset: () => void;
+  reset: () => void
 }
 
 /**

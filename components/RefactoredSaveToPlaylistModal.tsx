@@ -9,11 +9,12 @@ import BaseModal from './BaseModal';
 import type { Playlist } from '../src/types/core';
 
 interface RefactoredSaveToPlaylistModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
-  videoId: string;
+  videoId: string;,
   existingPlaylists: Playlist;
-  onSaveToPlaylist: (videoId: any, playlistId: any) => Promise<void>;
+  onSaveToPlaylist: (videoId: any,
+          playlistId: any) => Promise<void>;,
   onCreatePlaylist: (name: any, description?: string) => Promise<Playlist>;
 }
 
@@ -42,7 +43,8 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
     if (isOpen && existingPlaylists.length > 0 && !selectedPlaylistId && existingPlaylists[0]) {
       setSelectedPlaylistId(existingPlaylists[0].id);
     }
-  }, [isOpen, existingPlaylists, selectedPlaylistId]);
+  
+        }, [isOpen, existingPlaylists, selectedPlaylistId]);
 
   // Reset state when modal closes
   useEffect(() => {
@@ -50,15 +52,16 @@ const RefactoredSaveToPlaylistModal: React.FC<RefactoredSaveToPlaylistModalProps
       setSelectedPlaylistId('');
       setShowCreateForm(false);
     }
-  }, [isOpen]);
+  
+        }, [isOpen]);
 
   const {
     loading: saveLoading,
-    error: saveError } = useAsyncState(async () => {}, [], { initialLoading: false });
+          error: saveError } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   const {
     loading: createLoading,
-    error: createError } = useAsyncState(async () => {}, [], { initialLoading: false });
+          error: createError } = useAsyncState(async () => {}, [], { initialLoading: false });
 
   // Handle saving to existing playlist
   const handleSaveToExisting = async () => {
@@ -89,10 +92,11 @@ return;
   const createPlaylistFields = [
     {
       name: 'name',
-      label: 'Playlist Name',
-      type: 'text' as const, placeholder: 'Enter playlist name',
+          label: 'Playlist Name',
+      type: 'text' as const,
+          placeholder: 'Enter playlist name',
       required: true,
-      validation: (value: string | number) => {
+          validation: (value: string | number) => {
         if (value.length < 3) {
 return 'Playlist name must be at least 3 characters';
 }
@@ -103,10 +107,10 @@ return 'Playlist name must be less than 100 characters';
       } },
     {
       name: 'description',
-      label: 'Description (Optional)',
-      type: 'textarea' as const, placeholder: 'Enter playlist description',
-      rows: 3 },
-  ];
+          label: 'Description (Optional)',
+      type: 'textarea' as const,
+          placeholder: 'Enter playlist description',
+      rows: 3 }];
 
   const modalFooter = (
     <div className="flex gap-3">

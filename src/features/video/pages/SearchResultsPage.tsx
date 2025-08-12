@@ -27,7 +27,7 @@ const SearchResultsPage: React.FC = () => {
       try {
         // Mock local video search function
         const searchLocalVideos = async (
-          _searchQuery: any
+  _searchQuery: any
         ): Promise<Video[]> => {
           // Return empty array for now - this would normally search local videos
           return [];
@@ -39,59 +39,60 @@ const SearchResultsPage: React.FC = () => {
         );
         // Convert search results to Video format
         const videoResults: Video[] = [
-          ...results.youtubeVideos.map((video: any) => ({
+          ...results.youtubeVideos.map((video: any) => ({,
             id: video.id,
-            title: video.title,
+          title: video.title,
             description: video.description,
-            thumbnailUrl: video.thumbnailUrl,
+          thumbnailUrl: video.thumbnailUrl,
             videoUrl: video.videoUrl,
-            duration: video.duration || '0:00',
-            views: video.viewCount?.toString() || '0',
+          duration: video.duration || '0:00',
+          views: video.viewCount?.toString() || '0',
             likes: video.likeCount || 0,
-            dislikes: video.dislikeCount || 0,
+          dislikes: video.dislikeCount || 0,
             uploadedAt: video.uploadedAt || new Date().toISOString(),
-            channelName: video.channelName,
+          channelName: video.channelName,
             channelId: video.channelId || '',
-            channelAvatarUrl: video.channelAvatarUrl || '',
+          channelAvatarUrl: video.channelAvatarUrl || '',
             category: video.categoryId || 'Entertainment',
-            tags: video.tags || [],
-            visibility: 'public' as const, createdAt: new Date().toISOString(),
+          tags: video.tags || [],
+            visibility: 'public' as const,
+          createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            isLive: false,
+          isLive: false,
             isShort: false,
-            viewCount: video.viewCount || 0,
+          viewCount: video.viewCount || 0,
             likeCount: video.likeCount || 0,
-            dislikeCount: video.dislikeCount || 0,
+          dislikeCount: video.dislikeCount || 0,
             commentCount: video.commentCount || 0 })),
-          ...(results.googleSearchVideos || []).map((video: any) => ({
+          ...(results.googleSearchVideos || []).map((video: any) => ({,
             id: video.id,
-            title: video.title,
+          title: video.title,
             description: video.description,
-            duration:
+          duration:
               typeof video.duration === 'string'
                 ? video.duration
                 : String(video.duration || 0),
             thumbnailUrl: video.thumbnailUrl,
-            videoUrl:
+          videoUrl:
               video.videoUrl || `https://www.youtube.com/watch?v=${video.id}`,
-            channelId: video.channelId || '',
+          channelId: video.channelId || '',
             channelName: video.channelName,
-            channelAvatarUrl: video.channelAvatarUrl || '',
+          channelAvatarUrl: video.channelAvatarUrl || '',
             views: video.viewCount?.toString() || '0',
-            likes: video.likeCount || 0,
+          likes: video.likeCount || 0,
             dislikes: video.dislikeCount || 0,
-            uploadedAt: video.uploadedAt || new Date().toISOString(),
+          uploadedAt: video.uploadedAt || new Date().toISOString(),
             tags: video.tags || [],
-            category: video.categoryId || 'Entertainment',
-            visibility: 'public' as const, createdAt: new Date().toISOString(),
+          category: video.categoryId || 'Entertainment',
+            visibility: 'public' as const,
+          createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            isLive: false,
+          isLive: false,
             isShort: video.isShort || false,
-            viewCount: video.viewCount || 0,
+          viewCount: video.viewCount || 0,
             likeCount: video.likeCount || 0,
-            dislikeCount: video.dislikeCount || 0,
-            commentCount: video.commentCount || 0 })),
-        ];
+          dislikeCount: video.dislikeCount || 0,
+            commentCount: video.commentCount || 0 }))];
         setVideos(videoResults);
       } catch (err) {
         setError(
@@ -149,7 +150,8 @@ const SearchResultsPage: React.FC = () => {
               if (lastPart && lastPart.length === 11) {
                 videoId = lastPart;
               }
-            }
+            
+        }
 
             // Video ID logging removed for cleaner output
 

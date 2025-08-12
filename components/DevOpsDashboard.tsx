@@ -18,47 +18,46 @@ import { securityMonitoring } from '../utils/securityMonitoring';
 
 // Types for dashboard data
 interface DashboardMetrics {
-  performance: {
-    score: number;
-    lcp: number;
-    fid: number;
-    cls: number;
-    memoryUsage: number;
+  performance: {,
+          score: number;,
+    lcp: number;,
+          fid: number;,
+    cls: number;,
+          memoryUsage: number;,
     errorRate: number;
   };
-  security: {
-    score: number;
-    threatsDetected: number;
-    vulnerabilities: number;
+  security: {,
+          score: number;,
+    threatsDetected: number;,
+          vulnerabilities: number;,
     complianceScore: number;
   };
-  deployment: {
-    successRate: number;
-    averageTime: number;
-    frequency: number;
+  deployment: {,
+          successRate: number;,
+    averageTime: number;,
+          frequency: number;,
     activeDeployments: number;
   };
-  codeQuality: {
-    score: number;
-    complexity: number;
-    coverage: number;
+  codeQuality: {,
+          score: number;,
+    complexity: number;,
+          coverage: number;,
     technicalDebt: number;
   };
-  featureFlags: {
-    totalFlags: number;
-    activeFlags: number;
-    experimentsRunning: number;
-  };
-}
+  featureFlags: {,
+          totalFlags: number;,
+    activeFlags: number;,
+          experimentsRunning: number;
+  }}
 
 interface AlertItem {
-  id: string;
-  type: 'performance' | 'security' | 'deployment' | 'quality';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  title: string;
-  description: string;
-  timestamp: number;
-  acknowledged: boolean;
+  id: string;,
+          type: 'performance' | 'security' | 'deployment' | 'quality';,
+  severity: 'low' | 'medium' | 'high' | 'critical';,
+          title: string;,
+  description: string;,
+          timestamp: number;,
+  acknowledged: boolean
 }
 
 const DevOpsDashboard: React.FC = () => {
@@ -80,39 +79,43 @@ const DevOpsDashboard: React.FC = () => {
       const codeMetrics = intelligentCodeMonitor.getLatestMetrics();
       const flagMetrics = {
         totalFlags: 0,
-        activeFlags: 0, evaluations: 0
+          activeFlags: 0;
       }; // featureFlagManager.getMetrics();
 
       // Transform data for dashboard
-      const dashboardMetrics: DashboardMetrics = {
-        performance: {
-          score: Math.round(performanceMetrics.find(m => m.name === 'performance-score',)?.value || 85),
-          lcp: performanceMetrics.find(m => m.name === 'lcp',)?.value || 1500,
-          fid: performanceMetrics.find(m => m.name === 'fid',)?.value || 50,
-          cls: performanceMetrics.find(m => m.name === 'cls',)?.value || 0.05,
-          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage',)?.value || 45, errorRate: performanceMetrics.find(m => m.name === 'error-rate',)?.value || 0.1
+      const dashboardMetrics: DashboardMetrics = {,
+          performance: {,
+          score: Math.round(performanceMetrics.find(m => m.name === 'performance-score')?.value || 85),
+          lcp: performanceMetrics.find(m => m.name === 'lcp')?.value || 1500,
+          fid: performanceMetrics.find(m => m.name === 'fid')?.value || 50,
+          cls: performanceMetrics.find(m => m.name === 'cls')?.value || 0.05,
+          memoryUsage: performanceMetrics.find(m => m.name === 'memory-usage')?.value || 45,
+          errorRate: performanceMetrics.find(m => m.name === 'error-rate')?.value || 0.1
         },
-        security: {
+        security: {,
           score: Math.round(securityMetrics.securityScore),
           threatsDetected: securityMetrics.threatsDetected,
-          vulnerabilities: securityMetrics.vulnerabilities.total, complianceScore: Math.round(securityMetrics.complianceScore)
+          vulnerabilities: securityMetrics.vulnerabilities.total,
+          complianceScore: Math.round(securityMetrics.complianceScore)
         },
-        deployment: {
+        deployment: {,
           successRate: Math.round(deploymentMetrics.successRate * 100),
           averageTime: Math.round(deploymentMetrics.averageDeployTime / 1000 / 60), // Convert to minutes,
-          frequency: deploymentMetrics.deploymentFrequency, activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
+          frequency: deploymentMetrics.deploymentFrequency,
+          activeDeployments: deploymentAutomation.getAllExecutions().filter((e) => e.status === 'running').length
         },
-        codeQuality: {
+        codeQuality: {,
           score: codeMetrics ? Math.round(
-            (codeMetrics.maintainability + codeMetrics.testCoverage) / 2,
-          ) : 82,
+            (codeMetrics.maintainability + codeMetrics.testCoverage) / 2) : 82,
           complexity: Math.round(codeMetrics?.complexity || 15),
           coverage: Math.round(codeMetrics?.testCoverage || 78), technicalDebt: Math.round(codeMetrics?.technicalDebt || 12)
         },
-        featureFlags: {
+        featureFlags: {,
           totalFlags: flagMetrics.totalFlags,
           activeFlags: flagMetrics.activeFlags,
-          experimentsRunning: 0, // flagMetrics.experimentsRunning } };
+          experimentsRunning: 0, // flagMetrics.experimentsRunning } 
+        
+        };
 
       setMetrics(dashboardMetrics);
 
@@ -130,9 +133,10 @@ const DevOpsDashboard: React.FC = () => {
           .slice(0, 5)
           .map(exec => ({
             id: exec.id,
-            type: 'deployment' as const, severity: 'high' as const, title: 'Deployment Failed',
+          type: 'deployment' as const, severity: 'high' as const,
+          title: 'Deployment Failed',
             description: `Pipeline ${exec.pipelineId} failed`,
-            timestamp: exec.endTime || exec.startTime,
+          timestamp: exec.endTime || exec.startTime,
             acknowledged: false }))
       ];
 
@@ -187,7 +191,9 @@ const DevOpsDashboard: React.FC = () => {
       case 'medium': return 'text-yellow-600 bg-yellow-100';
       case 'low': return 'text-blue-600 bg-blue-100'; default: return 'text-gray-600 bg-gray-100'
     }
-  };
+  
+        
+        };
 
   // Get score color
   const getScoreColor = (score: any) => {
@@ -204,8 +210,9 @@ return 'text-orange-600';
   };
 
   // Render metric card
-  const MetricCard: React.FC<{
-    title, value: string | number;
+  const MetricCard: React.FC<{,
+          title: string;,
+    value: string | number;
     subtitle?: string;
     trend?: 'up' | 'down' | 'stable';
     color?: string;
@@ -215,15 +222,14 @@ return 'text-orange-600';
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
           <p className={`text-2xl font-semibold ${color}`}>{value}</p>
-          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>},
+          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
         </div>
-        {trend && (,
+        {trend && (
           <div className={`text-sm ${
-            trend === 'up' ? 'text-green-600' :,
+            trend === 'up' ? 'text-green-600'  :
             trend === 'down' ? 'text-red-600' : 'text-gray-600'
           }`}>
-            {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'},
-          </div>
+            {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '→'}</div>
         )}
       </div>
     </div>
@@ -237,11 +243,10 @@ return <div>Loading...</div>;
 
     return (
       <div className="space-y-6">
-        {/* Key Metrics Grid */},
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard,
+        {/* Key Metrics Grid */}<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <MetricCard
             title="Performance Score",
-            value={metrics.performance.score},
+            value={metrics.performance.score}
             color={getScoreColor(metrics.performance.score)}
             trend="stable"
           />
@@ -352,17 +357,15 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <MetricCard,
+          <MetricCard
             title="Largest Contentful Paint",
             value={`${metrics.performance.lcp}ms`},
-            color={metrics.performance.lcp < 2500 ? 'text-green-600' : 'text-red-600'},
-          />
-          <MetricCard,
+            color={metrics.performance.lcp < 2500 ? 'text-green-600' : 'text-red-600'} />
+          <MetricCard
             title="First Input Delay",
             value={`${metrics.performance.fid}ms`},
-            color={metrics.performance.fid < 100 ? 'text-green-600' : 'text-red-600'},
-          />
-          <MetricCard,
+            color={metrics.performance.fid < 100 ? 'text-green-600' : 'text-red-600'} />
+          <MetricCard
             title="Cumulative Layout Shift",
             value={metrics.performance.cls.toFixed(3)}
             color={metrics.performance.cls < 0.1 ? 'text-green-600' : 'text-red-600'}
@@ -391,17 +394,16 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard,
+          <MetricCard
             title="Threats Detected",
-            value={metrics.security.threatsDetected},
+            value={metrics.security.threatsDetected}
             color="text-red-600",
           />
-          <MetricCard,
+          <MetricCard
             title="Vulnerabilities",
-            value={metrics.security.vulnerabilities},
-            color={metrics.security.vulnerabilities === 0 ? 'text-green-600' : 'text-red-600'},
-          />
-          <MetricCard,
+            value={metrics.security.vulnerabilities}
+            color={metrics.security.vulnerabilities === 0 ? 'text-green-600' : 'text-red-600'} />
+          <MetricCard
             title="Compliance Score",
             value={`${metrics.security.complianceScore}%`},
             color={getScoreColor(metrics.security.complianceScore)}
@@ -425,7 +427,7 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard,
+          <MetricCard
             title="Success Rate",
             value={`${metrics.deployment.successRate}%`},
             color={getScoreColor(metrics.deployment.successRate)}
@@ -459,9 +461,9 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard,
+          <MetricCard
             title="Code Quality Score",
-            value={metrics.codeQuality.score},
+            value={metrics.codeQuality.score}
             color={getScoreColor(metrics.codeQuality.score)}
           />
           <MetricCard
@@ -493,19 +495,19 @@ return <div>Loading...</div>;
     return (
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <MetricCard,
+          <MetricCard
             title="Total Flags",
-            value={metrics.featureFlags.totalFlags},
+            value={metrics.featureFlags.totalFlags}
             color="text-blue-600",
           />
-          <MetricCard,
+          <MetricCard
             title="Active Flags",
-            value={metrics.featureFlags.activeFlags},
+            value={metrics.featureFlags.activeFlags}
             color="text-green-600",
           />
-          <MetricCard,
+          <MetricCard
             title="Running Experiments",
-            value={metrics.featureFlags.experimentsRunning},
+            value={metrics.featureFlags.experimentsRunning}
             color="text-purple-600",
           />
         </div>
@@ -526,8 +528,7 @@ return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */},
-      <div className="bg-white shadow">
+      {/* Header */}<div className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
@@ -554,16 +555,22 @@ return <div>Loading...</div>;
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8">
             {[
-              { id: 'overview', label: 'Overview' },
-              { id: 'performance', label: 'Performance' },
-              { id: 'security', label: 'Security' },
-              { id: 'deployment', label: 'Deployment' },
-              { id: 'quality', label: 'Code Quality' },
-              { id: 'features', label: 'Feature Flags' }
+              { id: 'overview',
+          label: 'Overview' },
+              { id: 'performance',
+          label: 'Performance' },
+              { id: 'security',
+          label: 'Security' },
+              { id: 'deployment',
+          label: 'Deployment' },
+              { id: 'quality',
+          label: 'Code Quality' },
+              { id: 'features',
+          label: 'Feature Flags' }
             ].map((tab) => (
               <button,
-                key={tab.id},
-                onClick={() => setActiveTab(tab.id as any)}
+                key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'

@@ -34,7 +34,8 @@ const ShortsPage: React.FC = () => {
       setLikedShortsArray([]);
       return new Set<string>();
     }
-  }, [likedShortsArray, setLikedShortsArray]);
+  
+        }, [likedShortsArray, setLikedShortsArray]);
 
   const followedChannels = useMemo(() => {
     try {
@@ -47,7 +48,8 @@ const ShortsPage: React.FC = () => {
       setFollowedChannelsArray([]);
       return new Set<string>();
     }
-  }, [followedChannelsArray, setFollowedChannelsArray]);
+  
+        }, [followedChannelsArray, setFollowedChannelsArray]);
   const [commentModalOpen, setCommentModalOpen] = useState(false);
   const [selectedShortForComment, setSelectedShortForComment] = useState<{ id: string; title: string } | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -84,8 +86,8 @@ return [];
           visibility: video.visibility || 'public',
           createdAt: video.createdAt || new Date().toISOString(),
           updatedAt: video.updatedAt || new Date().toISOString(),
-          // Additional properties for Short type compatibility
-          viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
+          // Additional properties for Short type compatibility,
+  viewCount: typeof video.views === 'string' ? parseInt(video.views.replace(/[^0-9]/g, ''), 10) : video.views || 0,
           commentCount: 0,
           likeCount: video.likes || 0,
           definition: 'hd' as 'hd' | 'sd' };
@@ -95,8 +97,7 @@ return [];
     // Apply category filter
     if (selectedCategory !== 'all') {
       converted = converted.filter(short =>
-        short.category.toLowerCase() === selectedCategory.toLowerCase(),
-      );
+        short.category.toLowerCase() === selectedCategory.toLowerCase());
     }
 
     // Apply search filter
@@ -105,8 +106,7 @@ return [];
       converted = converted.filter(short =>
         short.title.toLowerCase().includes(query) ||
         short.channelName.toLowerCase().includes(query) ||
-        short.description.toLowerCase().includes(query),
-      );
+        short.description.toLowerCase().includes(query));
     }
 
     return converted;
@@ -147,7 +147,8 @@ return [];
   const handleComment = useCallback((shortId: any) => {
     const currentFilteredShorts = filteredShorts;
     const short = currentFilteredShorts.find(s => s.id === shortId);
-    setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
+    setSelectedShortForComment({ id: shortId,
+          title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
 
@@ -202,7 +203,7 @@ return;
           if (targetElement) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
-              block: 'start',
+          block: 'start',
               inline: 'nearest' });
           }
         }
@@ -228,7 +229,7 @@ return;
           if (targetElement) {
             targetElement.scrollIntoView({
               behavior: 'smooth',
-              block: 'start',
+          block: 'start',
               inline: 'nearest' });
           }
         }
@@ -290,11 +291,13 @@ return;
         // Fallback to clipboard if share fails
         copyToClipboard(shareUrl);
       }
-    } else {
+    
+        } else {
       // Fallback for browsers that don't support Web Share API
       copyToClipboard(shareUrl);
     }
-  };
+  
+        };
 
   const copyToClipboard = async (text: any) => {
     try {
@@ -319,7 +322,8 @@ return;
           localStorage.removeItem('likedShorts');
           setLikedShortsArray([]);
         }
-      }
+      
+        }
 
       if (followedChannelsRaw && followedChannelsRaw !== 'null') {
         const parsed = JSON.parse(followedChannelsRaw);
@@ -337,7 +341,8 @@ return;
       setLikedShortsArray([]);
       setFollowedChannelsArray([]);
     }
-  }, []); // Run only once on mount
+  
+        }, []); // Run only once on mount
 
   // Touch handling for mobile scroll navigation
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
@@ -369,7 +374,8 @@ return;
       // Reset scrolling flag after a delay
       setTimeout(() => setIsScrolling(false), 500);
     }
-  }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
+  
+        }, [commentModalOpen, showSearch, showFilters, isScrolling, handleNextVideo, handlePreviousVideo]);
 
   // Touch event handlers for mobile navigation
   const handleTouchStart = useCallback((event: TouchEvent) => {
@@ -404,7 +410,8 @@ return;
         // Reset scrolling flag after a delay
         setTimeout(() => setIsScrolling(false), 500);
       }
-    }
+    
+        }
 
     setTouchStartY(null);
   }, [commentModalOpen, showSearch, showFilters, touchStartY, isScrolling, handleNextVideo, handlePreviousVideo]);
@@ -434,8 +441,7 @@ return;
       return () => {
         container.removeEventListener('touchstart', handleTouchStart as EventListener);
         container.removeEventListener('touchend', handleTouchEnd as EventListener);
-      };
-    }
+      }}
     return () => {}; // Return empty cleanup function if no container
   }, [handleTouchStart, handleTouchEnd]);
 
@@ -450,7 +456,8 @@ return;
           setCurrentVideoIndex(targetIndex);
           const targetElement = containerRef.current.children[targetIndex] as HTMLElement;
           if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            targetElement.scrollIntoView({ behavior: 'smooth',
+          block: 'start' });
           }
           initializedRef.current = true;
         }
@@ -465,7 +472,8 @@ return;
       // This would be triggered by video end event in ShortDisplayCard
       // Implementation would be in the video player component
     }
-  }, [isAutoAdvanceEnabled, currentVideoIndex]);
+  
+        }, [isAutoAdvanceEnabled, currentVideoIndex]);
 
   // Set up intersection observer to track which video is currently in view
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -505,9 +513,8 @@ return;
       },
       {
         root: containerRef.current,
-        threshold: 0.5,
-        rootMargin: '0px' },
-    );
+          threshold: 0.5,
+        rootMargin: '0px' });
 
     // Observe all video elements
     Array.from(containerRef.current.children).forEach((child) => {
@@ -518,8 +525,7 @@ return;
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
-    };
-  }, [filteredShorts.length]); // Only depend on length, not the entire array
+    }}, [filteredShorts.length]); // Only depend on length, not the entire array
 
   if (loading) {
     return <ShortsPageSkeleton />;

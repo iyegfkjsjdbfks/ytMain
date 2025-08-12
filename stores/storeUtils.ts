@@ -17,7 +17,7 @@ export interface StoreConfig {
     storage?: 'localStorage' | 'sessionStorage' | 'secure';
     partialize?: (state: any) => any;
     version?: number;
-    migrate?: (persistedState: any, version: any) => any;
+    migrate?: (persistedState: any, version: any) => any
   };
   devtools?: boolean;
   immer?: boolean;
@@ -29,7 +29,7 @@ export interface AsyncState<T> {
   data: T | null;
   loading: boolean;
   error: string | null;
-  lastFetch: number | null;
+  lastFetch: number | null
 }
 
 export interface PaginatedState<T> {
@@ -39,14 +39,14 @@ export interface PaginatedState<T> {
   total: number;
   hasMore: boolean;
   loading: boolean;
-  error: string | null;
+  error: string | null
 }
 
 export interface OptimisticUpdate<T> {
   id: string;
   data: T;
   timestamp: number;
-  rollback: () => void;
+  rollback: () => void
 }
 
 // Storage implementations
@@ -65,8 +65,8 @@ class SecureStorage {
 }
 
 // Performance monitoring middleware
-const performanceMiddleware = <T>(
-  config: StateCreator<T, [], [], T>
+const performanceMiddleware = <T>(,
+  config: StateCreator<T, [], [], T>,
   storeName: any): StateCreator<T, [], [], T> => {
   return (set, get, api) => {
     const originalSet = set;
@@ -237,8 +237,8 @@ export class OptimisticUpdatesManager<T> {
 }
 
 // Enhanced store creator
-export function createEnhancedStore<T>(
-  stateCreator: StateCreator<T, [], [], T>
+export function createEnhancedStore<T>(,
+  stateCreator: StateCreator<T, [], [], T>,
   config: StoreConfig) {
   let enhancedCreator= stateCreator;
 
@@ -267,8 +267,8 @@ export function createEnhancedStore<T>(
 
     const persistOptions= {
       name: config.name,
-      storage: storage as any, // Type assertion for storage compatibility
-      version: config.persist.version || 1 };
+      storage: storage as any, // Type assertion for storage compatibility,
+  version: config.persist.version || 1 };
 
     if (config.persist.partialize) {
       persistOptions.partialize = config.persist.partialize;
@@ -290,7 +290,7 @@ export function createEnhancedStore<T>(
 }
 
 // Store composition utilities
-export function combineStores<T extends Record<string, any>>(
+export function combineStores<T extends Record<string, any>>(,
   stores: T): () => { [K in keyof T]: ReturnType<T[K]> } {
   return () => {
     const combined = {} as { [K in keyof T]: ReturnType<T[K]> };
@@ -304,7 +304,7 @@ export function combineStores<T extends Record<string, any>>(
 }
 
 // Computed values utility
-export function createComputed<T, R>(
+export function createComputed<T, R>(,
   selector: (state: T) => R,
   dependencies?: (state: T) => any,
 ) {
@@ -387,7 +387,7 @@ return;
 
 // Store validation utilities
 export function createValidator<T extends object>(schema: {
-  [K in keyof T]?: (value: T[K]) => boolean | string;
+  [K in keyof T]?: (value: T[K]) => boolean | string
 }) {
   return (state: T): { isValid: boolean; errors: Record<string, string> } => {
     const errors: Record<string, string> = {};
@@ -450,7 +450,7 @@ export class StorePerformanceAnalyzer {
     totalTime: number;
     averageTime: number;
     maxTime: number;
-    minTime: number;
+    minTime: number
   }>();
 
   static trackUpdate(storeName: any, duration: any): void {

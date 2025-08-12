@@ -18,7 +18,7 @@ interface CodeMetrics {
   technicalDebt: number;
   securityVulnerabilities: number;
   performanceIssues: number;
-  accessibilityIssues: number;
+  accessibilityIssues: number
 }
 
 interface CodeQualityTrend {
@@ -26,7 +26,7 @@ interface CodeQualityTrend {
   _metrics: CodeMetrics;
   score: number;
   improvements: string[];
-  regressions: string[];
+  regressions: string[]
 }
 
 interface RefactoringOpportunity {
@@ -41,7 +41,7 @@ interface RefactoringOpportunity {
   suggestion: string;
   codeExample?: {
     before: string;
-    after: string;
+    after: string
   };
 }
 
@@ -53,7 +53,7 @@ interface CodeReviewInsight {
   description: string;
   recommendation: string;
   files: string[];
-  estimatedImpact: string;
+  estimatedImpact: string
 }
 
 interface QualityGate {
@@ -62,10 +62,10 @@ interface QualityGate {
   criteria: Array<{
     metric: keyof CodeMetrics;
     operator: '>' | '<' | '>=' | '<=' | '==';
-    threshold: number;
+    threshold: number
   }>;
   blocking: boolean;
-  enabled: boolean;
+  enabled: boolean
 }
 
 /**
@@ -94,43 +94,37 @@ class IntelligentCodeMonitor {
         id: 'complexity-gate',
         name: 'Code Complexity',
         criteria: [
-          { metric: 'complexity', operator: '<=', threshold: 10 },
-        ],
+          { metric: 'complexity', operator: '<=', threshold: 10 }],
         blocking: true,
         enabled: true },
       {
         id: 'coverage-gate',
         name: 'Test Coverage',
         criteria: [
-          { metric: 'testCoverage', operator: '>=', threshold: 80 },
-        ],
+          { metric: 'testCoverage', operator: '>=', threshold: 80 }],
         blocking: true,
         enabled: true },
       {
         id: 'security-gate',
         name: 'Security Vulnerabilities',
         criteria: [
-          { metric: 'securityVulnerabilities', operator: '==', threshold: 0 },
-        ],
+          { metric: 'securityVulnerabilities', operator: '==', threshold: 0 }],
         blocking: true,
         enabled: true },
       {
         id: 'maintainability-gate',
         name: 'Maintainability Index',
         criteria: [
-          { metric: 'maintainability', operator: '>=', threshold: 70 },
-        ],
+          { metric: 'maintainability', operator: '>=', threshold: 70 }],
         blocking: false,
         enabled: true },
       {
         id: 'duplicate-code-gate',
         name: 'Duplicate Code',
         criteria: [
-          { metric: 'duplicateCode', operator: '<=', threshold: 5 },
-        ],
+          { metric: 'duplicateCode', operator: '<=', threshold: 5 }],
         blocking: false,
-        enabled: true },
-    ];
+        enabled: true }];
   }
 
   /**
@@ -306,14 +300,14 @@ return;
    */
   private calculateQualityScore(_metrics: CodeMetrics): number {
     const weights = {
-      complexity: -2, // Lower is better
-      maintainability: 1,
+      complexity: -2, // Lower is better,
+  maintainability: 1,
       testCoverage: 1,
-      duplicateCode: -1, // Lower is better
-      technicalDebt: -1, // Lower is better
-      securityVulnerabilities: -5, // Lower is better
-      performanceIssues: -2, // Lower is better
-      accessibilityIssues: -1, // Lower is better
+      duplicateCode: -1, // Lower is better,
+  technicalDebt: -1, // Lower is better,
+  securityVulnerabilities: -5, // Lower is better,
+  performanceIssues: -2, // Lower is better,
+  accessibilityIssues: -1, // Lower is better
     };
 
     let score = 50; // Base score
@@ -323,7 +317,7 @@ return;
       if (weight > 0) {
         score += (value / 100) * weight * 50;
       } else {
-        score += Math.max(0, (100 - value) / 100) * Math.abs(weight) / 10;
+        score += Math.max(0(100 - value) / 100) * Math.abs(weight) / 10;
       }
     });
 
@@ -365,7 +359,7 @@ return 0;
         suggestion: 'Consider breaking down large functions into smaller, more focused functions',
         codeExample: {
           before: 'function complexFunction() /* 50+ lines of code */ }',
-          after: 'function mainFunction() helper1(); helper2(); helper3(); }' } });
+          after: 'function mainFunction() helper1(); helper2(); helper3() }' } });
     }
 
     // Low test coverage opportunities
@@ -538,8 +532,7 @@ return;
             return value > criterion.threshold;
           case '==':
             return value !== criterion.threshold;
-          default:
-            return false;
+          default: return false
         }
       });
 
@@ -663,8 +656,7 @@ return 'No data available';
       '## Code Review Insights',
       ...this.insights.slice(0, 3).map((insight) =>
         `- ${insight.title}: ${insight.description}`,
-      ),
-    ].filter((line) => line !== undefined);
+      )].filter((line) => line !== undefined);
 
     return report.join('\n');
   }

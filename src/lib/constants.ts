@@ -27,7 +27,7 @@ export const VIDEO_CONFIG = {
     LARGE: { width: 480, height: 270 },
     EXTRA_LARGE: { width: 640, height: 360 } },
   SUPPORTED_FORMATS: ['mp4', 'webm', 'ogg'],
-  MAX_FILE_SIZE: 100 * 1024 * 1024, // 100MB
+  MAX_FILE_SIZE: 100 * 1024 * 1024, // 100MB,
   QUALITY_LEVELS: ['144p', '240p', '360p', '480p', '720p', '1080p'],
   AUTOPLAY_THRESHOLD: 0.5, // 50% visibility
 } as const;
@@ -40,9 +40,9 @@ export const PAGINATION = {
 
 // Cache Configuration
 export const CACHE_CONFIG = {
-  VIDEO_DATA_TTL: 5 * 60 * 1000, // 5 minutes
-  SEARCH_RESULTS_TTL: 2 * 60 * 1000, // 2 minutes
-  USER_DATA_TTL: 10 * 60 * 1000, // 10 minutes
+  VIDEO_DATA_TTL: 5 * 60 * 1000, // 5 minutes,
+  SEARCH_RESULTS_TTL: 2 * 60 * 1000, // 2 minutes,
+  USER_DATA_TTL: 10 * 60 * 1000, // 10 minutes,
   MAX_CACHE_SIZE: 50, // Maximum number of cached items
 } as const;
 
@@ -132,8 +132,7 @@ export const CATEGORIES = [
   'Autos & Vehicles',
   'Pets & Animals',
   'Howto & Style',
-  'Nonprofits & Activism',
-] as const;
+  'Nonprofits & Activism'] as const;
 
 // Video Qualities
 export const VIDEO_QUALITIES = [
@@ -143,8 +142,7 @@ export const VIDEO_QUALITIES = [
   { label: '480p', value: '480' },
   { label: '360p', value: '360' },
   { label: '240p', value: '240' },
-  { label: '144p', value: '144' },
-] as const;
+  { label: '144p', value: '144' }] as const;
 
 // Playback Speeds
 export const PLAYBACK_SPEEDS = [
@@ -155,8 +153,7 @@ export const PLAYBACK_SPEEDS = [
   { label: '1.25x', value: 1.25 },
   { label: '1.5x', value: 1.5 },
   { label: '1.75x', value: 1.75 },
-  { label: '2x', value: 2 },
-] as const;
+  { label: '2x', value: 2 }] as const;
 
 // Regex Patterns
 export const REGEX_PATTERNS = {

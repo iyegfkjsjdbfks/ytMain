@@ -16,7 +16,7 @@ export interface ComponentError extends Error {
  * @param context - Additional context about the error
  * @returns ComponentError object
  */
-export function createComponentError(
+export function createComponentError(,
   component: any,
   message: any,
   originalError?: unknown,
@@ -49,7 +49,7 @@ export function createComponentError(
  * @param originalError - The original error
  * @returns ComponentError object
  */
-export function createAsyncError(
+export function createAsyncError(,
   component: any,
   operation: any,
   originalError?: unknown
@@ -69,7 +69,7 @@ export function createAsyncError(
  * @param originalError - The original error
  * @returns ComponentError object
  */
-export function createNetworkError(
+export function createNetworkError(,
   component: any,
   url: any,
   originalError?: unknown
@@ -89,7 +89,7 @@ export function createNetworkError(
  * @param value - The invalid value
  * @returns ComponentError object
  */
-export function createValidationError(
+export function createValidationError(,
   component: any,
   field: any,
   value: unknown

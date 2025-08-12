@@ -9,10 +9,13 @@ interface FormContextValue {
   errors: Record<string, string>;
   touched: Record<string, boolean>;
   values: Record<string, any>;
-  setFieldValue: (name: any, value: string | number) => void;
-  setFieldError: (name: any, error: Error) => void;
-  setFieldTouched: (name: any, touched: any) => void;
-  validateField: (name: any) => void;
+  setFieldValue: (name: any,
+          value: string | number) => void;,
+  setFieldError: (name: any,
+          error: Error) => void;,
+  setFieldTouched: (name: any,
+          touched: any) => void;,
+  validateField: (name: any) => void
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -21,7 +24,7 @@ const FormContext = createContext<FormContextValue | null>(null);
 interface FormProviderProps {
   children: React.ReactNode;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value: string | number) => string | undefined>;
+  validationSchema?: Record<string(value: string | number) => string | undefined>;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
 }
 
@@ -33,7 +36,8 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const setFieldValue = useCallback((name: any, value: string | number) => {
+  const setFieldValue = useCallback((name: any,
+          value: string | number) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -41,11 +45,13 @@ export const FormProvider: React.FC<FormProviderProps> = ({
     }
   }, [errors]);
 
-  const setFieldError = useCallback((name: any, error: Error) => {
+  const setFieldError = useCallback((name: any,
+          error: Error) => {
     setErrors(prev => ({ ...prev, [name]: error }));
   }, []);
 
-  const setFieldTouched = useCallback((name: any, touched: any) => {
+  const setFieldTouched = useCallback((name: any,
+          touched: any) => {
     setTouched(prev => ({ ...prev, [name]: touched }));
   }, []);
 
@@ -143,17 +149,17 @@ interface UnifiedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   rightIcon?: React.ReactNode;
   variant?: 'default' | 'filled' | 'outline';
   inputSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value: string | number) => void;
+  onChange?: (value: string | number) => void
 }
 
 const inputVariantClasses = {
   default: 'border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500',
-  filled: 'border-transparent bg-neutral-100 dark:bg-neutral-800 focus:border-sky-500 focus:ring-sky-500',
-  outline: 'border-2 border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500' };
+          filled: 'border-transparent bg-neutral-100 dark:bg-neutral-800 focus:border-sky-500 focus:ring-sky-500',
+          outline: 'border-2 border-neutral-300 dark:border-neutral-600 focus:border-sky-500 focus:ring-sky-500' };
 
 const inputSizeClasses = {
   sm: 'px-3 py-2 text-sm',
-  md: 'px-4 py-2.5 text-sm',
+          md: 'px-4 py-2.5 text-sm',
   lg: 'px-4 py-3 text-base' };
 
 export const UnifiedInput: React.FC<UnifiedInputProps> = ({
@@ -195,8 +201,7 @@ export const UnifiedInput: React.FC<UnifiedInputProps> = ({
       'border-red-500 focus:border-red-500 focus:ring-red-500': error,
       'pl-10': leftIcon,
       'pr-10': rightIcon },
-    className,
-  );
+    className);
 
   const input = (
     <div className="relative">
@@ -253,19 +258,19 @@ interface UnifiedTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
   variant?: 'default' | 'filled' | 'outline';
   textareaSize?: 'sm' | 'md' | 'lg';
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-  onChange?: (value: string | number) => void;
+  onChange?: (value: string | number) => void
 }
 
 const textareaSizeClasses = {
   sm: 'px-3 py-2 text-sm min-h-[80px]',
-  md: 'px-4 py-2.5 text-sm min-h-[100px]',
+          md: 'px-4 py-2.5 text-sm min-h-[100px]',
   lg: 'px-4 py-3 text-base min-h-[120px]' };
 
 const resizeClasses = {
   none: 'resize-none',
-  vertical: 'resize-y',
+          vertical: 'resize-y',
   horizontal: 'resize-x',
-  both: 'resize' };
+          both: 'resize' };
 
 export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
   name,
@@ -304,8 +309,7 @@ export const UnifiedTextarea: React.FC<UnifiedTextareaProps> = ({
     resizeClasses[resize],
     {
       'border-red-500 focus:border-red-500 focus:ring-red-500': error },
-    className,
-  );
+    className);
 
   const textarea = (
     <textarea
@@ -345,7 +349,7 @@ interface UnifiedSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   placeholder?: string;
   variant?: 'default' | 'filled' | 'outline';
   selectSize?: 'sm' | 'md' | 'lg';
-  onChange?: (value: string | number) => void;
+  onChange?: (value: string | number) => void
 }
 
 export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
@@ -386,8 +390,7 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
     inputSizeClasses[selectSize],
     {
       'border-red-500 focus:border-red-500 focus:ring-red-500': error },
-    className,
-  );
+    className);
 
   const select = (
     <div className="relative">
@@ -400,7 +403,9 @@ export const UnifiedSelect: React.FC<UnifiedSelectProps> = ({
         onBlur={handleBlur}
         className={selectClasses}
         style={{
-          backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")' }}
+          backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")' 
+        
+        }}
       >
         {placeholder && (
           <option value="" disabled>
@@ -441,7 +446,7 @@ interface UnifiedFormProps {
   children: React.ReactNode;
   onSubmit?: (values: Record<string, any>) => void | Promise<void>;
   initialValues?: Record<string, any>;
-  validationSchema?: Record<string, (value: string | number) => string | undefined>;
+  validationSchema?: Record<string(value: string | number) => string | undefined>;
   className?: string;
 }
 

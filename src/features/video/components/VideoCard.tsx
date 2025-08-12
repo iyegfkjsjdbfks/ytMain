@@ -7,7 +7,7 @@ import type { Video } from '../types';
 interface VideoCardProps {
   video: Video;
   variant?: 'default' | 'compact' | 'studio';
-  onClick?: ((video: Video) => void) | undefined;
+  onClick?: ((video: Video) => void) | undefined
 }
 
 /**

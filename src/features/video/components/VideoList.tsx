@@ -7,7 +7,7 @@ interface VideoListProps {
   layout?: 'grid' | 'list';
   variant?: 'default' | 'compact' | 'studio';
   emptyMessage?: string;
-  onVideoClick?: (video: Video) => void;
+  onVideoClick?: (video: Video) => void
 }
 
 /**

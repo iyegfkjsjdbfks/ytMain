@@ -145,8 +145,8 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
 
   // Analytics methods
   const track = useCallback(
-    (
-      eventName: any,
+    (,
+  eventName: any,
       properties?: Record<string, any>
       category?: AnalyticsEvent['category']
     ) => {
@@ -197,9 +197,9 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   );
 
   const trackAsyncAction = useCallback(
-    async <T>(
-      action: () => Promise<T>
-      actionName: any,
+    async <T>(,
+  action: () => Promise<T>,
+  actionName: any,
       properties?: Record<string, any>
     ): Promise<T> => {
       const startTime = Date.now();
@@ -228,8 +228,8 @@ export const useAnalytics = (options: UseAnalyticsOptions = {}) => {
   );
 
   const trackFunction = useCallback(
-    <T extends any, R>(
-      fn: (...args: T) => R,
+    <T extends any, R>(,
+  fn: (...args: T) => R,
       functionName: any,
       properties?: Record<string, any>
     ) => {
@@ -440,7 +440,7 @@ export const useFormAnalytics = (formName: any) => {
 };
 
 // Utility function for throttling
-function throttle<T extends (...args) => any>(
+function throttle<T extends (...args) => any>(,
   func: T,
   limit: any
 ): (...args: Parameters<T>) => void {

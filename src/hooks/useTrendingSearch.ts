@@ -8,7 +8,7 @@ import { VideoService } from '../services/api';
 import type { Video } from '../types';
 
 // Convert search results to Video format for HomePage compatibility
-const convertSearchResultToVideo = (
+const convertSearchResultToVideo = (,
   result: YouTubeSearchResult | GoogleSearchResult,
   index: number
 ): Video => {
@@ -34,16 +34,16 @@ const convertSearchResultToVideo = (
     channelAvatarUrl: result.channelAvatarUrl || '',
     category: result.categoryId || 'Entertainment',
     tags: result.tags || [],
-    // Required Video interface properties
-    visibility: 'public' as const, createdAt: new Date().toISOString(),
+    // Required Video interface properties,
+  visibility: 'public' as const, createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     isLive: false,
     // isUpcoming: false, // Removed as it's not part of Video interface
     // Properties removed from Video type that don't exist
     // allowedRegions, blockedRegions, isAgeRestricted, embeddable,
     // defaultLanguage, defaultAudioLanguage, recordingStatus,
-    // uploadStatus, selfDeclaredMadeForKids - these are not part of Video interface
-    statistics: {
+    // uploadStatus, selfDeclaredMadeForKids - these are not part of Video interface,
+  statistics: {
       viewCount: result.viewCount || 0,
       likeCount: result.likeCount || 0,
       dislikeCount: result.dislikeCount || 0,
@@ -69,7 +69,7 @@ interface UseInitialSearchResult {
   data: Video;
   loading: boolean;
   error: string | null;
-  refetch: () => Promise<void>;
+  refetch: () => Promise<void>
 }
 
 /**
@@ -97,16 +97,14 @@ export function useTrendingSearch(): UseInitialSearchResult {
       const initialKeyword = getInitialSearchKeyword();
 
       // Use home page specific search logic (YouTube API first in hybrid mode)
-      const combinedResults = await searchForHomePage(initialKeyword,
-        (query: any) =>
+      const combinedResults = await searchForHomePage(initialKeyword(query: any) =>
           VideoService.searchVideos(query).then(result => result.videos)
       );
 
       // Combine all results and convert to Video format
       const allResults: Array<YouTubeSearchResult | GoogleSearchResult> = [
         ...(combinedResults.youtubeVideos || []),
-        ...(combinedResults.googleSearchVideos || []),
-      ];
+        ...(combinedResults.googleSearchVideos || [])];
 
       // Convert search results to Video format
       const convertedVideos = allResults.map((result, index) =>

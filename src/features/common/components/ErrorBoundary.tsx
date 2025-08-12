@@ -7,9 +7,9 @@ interface Props {
 }
 
 interface State {
-  hasError: boolean;
+  hasError: boolean;,
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: ErrorInfo | null
 }
 
 /**
@@ -21,19 +21,19 @@ export class ErrorBoundary extends Component<Props, State> {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
-      errorInfo: null };
-  }
+          error: null,
+      errorInfo: null }}
 
   static getDerivedStateFromError(error: Error): State {
     // Update state so the next render will show the fallback UI
     return {
       hasError: true,
       error,
-      errorInfo: null };
-  }
+      errorInfo: null 
+        }}
 
-  override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  override componentDidCatch(error: Error,
+          errorInfo: ErrorInfo): void {
     // You can also log the error to an error reporting service
     logger.error('Error caught by ErrorBoundary:', error, errorInfo);
     this.setState({

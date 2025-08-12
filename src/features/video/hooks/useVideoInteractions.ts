@@ -9,7 +9,7 @@ interface VideoInteractionState {
   isDisliked: boolean;
   isSaved: boolean;
   likes: number;
-  dislikes: number;
+  dislikes: number
 }
 
 interface UseVideoInteractionsOptions {
@@ -20,7 +20,7 @@ interface UseVideoInteractionsOptions {
   initialIsSaved?: boolean;
 }
 
-export function useVideoInteractions(
+export function useVideoInteractions(,
   videoId: any,
   options: UseVideoInteractionsOptions = {}
 ) {
@@ -59,8 +59,8 @@ export function useVideoInteractions(
       setState(prev => ({
         ...prev,
         isLiked: !prev.isLiked,
-        isDisliked: false, // Remove dislike if liking
-        likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
+        isDisliked: false, // Remove dislike if liking,
+  likes: prev.isLiked ? prev.likes - 1 : prev.likes + 1,
         dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes }));
     },
     onError: () => {
@@ -87,8 +87,8 @@ export function useVideoInteractions(
       setState(prev => ({
         ...prev,
         isDisliked: !prev.isDisliked,
-        isLiked: false, // Remove like if disliking
-        dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes + 1,
+        isLiked: false, // Remove like if disliking,
+  dislikes: prev.isDisliked ? prev.dislikes - 1 : prev.dislikes + 1,
         likes: prev.isLiked ? prev.likes - 1 : prev.likes }));
     },
     onError: () => {

@@ -18,13 +18,13 @@ export function getAudienceRetention(video: Video): number {
   const totalSeconds = durationParts.length === 2
     ? (parseInt(durationParts[0] ?? '0', 10) || 0) * 60 + (parseInt(durationParts[1] ?? '0', 10) || 0)
     : (parseInt(durationParts[0] ?? '0', 10) || 0);
-  return totalSeconds ? Math.min(100, (totalSeconds / 60) * 100) : 0;
+  return totalSeconds ? Math.min(100(totalSeconds / 60) * 100) : 0;
 }
 
 export function getImpressionsCTR(video: Video): number {
   // This is a placeholder - in a real app, this would come from your analytics API
   const viewCount = parseInt((video.views ?? '0').replace(/,/g, ''), 10) || 0;
-  return viewCount ? Math.min(100, (viewCount / 1000) * 2) : 0;
+  return viewCount ? Math.min(100(viewCount / 1000) * 2) : 0;
 }
 
 export function getWatchTime(video: Video): number {
@@ -52,13 +52,11 @@ export function getAudienceDemographics() {
       { name: '25-34', value: 35 },
       { name: '35-44', value: 20 },
       { name: '45-54', value: 7 },
-      { name: '55-64', value: 3 },
-    ],
+      { name: '55-64', value: 3 }],
     genders: [
       { name: 'Male', value: 60 },
       { name: 'Female', value: 38 },
-      { name: 'Other', value: 2 },
-    ] };
+      { name: 'Other', value: 2 }] };
 }
 
 export function getTrafficSources() {
@@ -68,8 +66,7 @@ export function getTrafficSources() {
     { name: 'External', value: 25 },
     { name: 'Suggested Videos', value: 20 },
     { name: 'Playlists', value: 10 },
-    { name: 'Other', value: 5 },
-  ];
+    { name: 'Other', value: 5 }];
 }
 
 export function getGeographicData() {
@@ -80,6 +77,5 @@ export function getGeographicData() {
     { country: 'United Kingdom', value: 10 },
     { country: 'Canada', value: 8 },
     { country: 'Australia', value: 7 },
-    { country: 'Other', value: 30 },
-  ];
+    { country: 'Other', value: 30 }];
 }

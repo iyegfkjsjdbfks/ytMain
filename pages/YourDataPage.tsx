@@ -12,7 +12,7 @@ const YourDataPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dataVisibility, setDataVisibility] = useState({
     watchHistory: true,
-    searchHistory: true, likedVideos: true
+          searchHistory: true, likedVideos: true;
   });
 
   useEffect(() => {
@@ -22,8 +22,7 @@ const YourDataPage: React.FC = () => {
         const [watchHistory, likedVideos, searchHistory] = await Promise.all([
           getWatchHistoryVideos(),
           getLikedVideos(),
-          getRecentSearches(),
-        ]);
+          getRecentSearches()]);
 
         setWatchHistoryCount(watchHistory.length);
         setLikedVideosCount(likedVideos.length);
@@ -75,9 +74,9 @@ const YourDataPage: React.FC = () => {
   const handleDownloadData = () => {
     const data = {
       watchHistory: JSON.parse(localStorage.getItem('youtubeCloneWatchHistory_v1') || '[]'),
-      likedVideos: JSON.parse(localStorage.getItem('youtubeCloneLikedVideos_v1') || '[]'),
+          likedVideos: JSON.parse(localStorage.getItem('youtubeCloneLikedVideos_v1') || '[]'),
       searchHistory: JSON.parse(localStorage.getItem('youtubeCloneRecentSearches_v2') || '[]'),
-      userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
+          userPlaylists: JSON.parse(localStorage.getItem('youtubeCloneUserPlaylists_v1') || '[]'), exportDate: new Date().toISOString()
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -93,8 +92,9 @@ const YourDataPage: React.FC = () => {
 
   const DataSection: React.FC<{
     title, description: string;
-    count, isVisible: boolean;
-    onToggleVisibility: () => void, onClear: () => void; loading: boolean
+    count, isVisible: boolean;,
+    onToggleVisibility: () => void,
+          onClear: () => void; loading: boolean;
   }> = ({ title, description, count, isVisible, onToggleVisibility, onClear, loading }) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-start justify-between mb-4">

@@ -3,7 +3,7 @@ import React, { useState, type FormEvent, type ReactNode, FC, ReactNode, ChangeE
 import { useFormState } from '../src/hooks';
 
 interface FormField {
-  name: string;
+  name: string;,
   label: string;
   type: 'text' | 'email' | 'password' | 'textarea' | 'select' | 'checkbox' | 'file';
   placeholder?: string;
@@ -16,7 +16,7 @@ interface FormField {
 }
 
 interface BaseFormProps {
-  fields: FormField;
+  fields: FormField;,
   onSubmit: (data: Record<string, any>) => void | Promise<void>;
   submitLabel?: string;
   cancelLabel?: string;
@@ -67,7 +67,8 @@ const BaseForm: React.FC<BaseFormProps> = ({
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   // Validate field
-  const validateField = (field: FormField, value: string | number): string | null => {
+  const validateField = (field: FormField,
+          value: string | number): string | null => {
     if (field.required && (!value || (typeof value === 'string' && !value.trim()))) {
       return `${field.label} is required`;
     }
@@ -130,9 +131,9 @@ const BaseForm: React.FC<BaseFormProps> = ({
     const fieldValue = values[field.name] || '';
 
     const baseInputClasses = `
-      w-full px-3 py-2 border rounded-lg transition-colors
-      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-      disabled:bg-gray-100 disabled:cursor-not-allowed
+      w-full px-3 py-2 border rounded-lg transition-colors,
+  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent,
+          disabled:bg-gray-100 disabled:cursor-not-allowed
       ${fieldError
         ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
         : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700'

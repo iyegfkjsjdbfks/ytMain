@@ -2,10 +2,10 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -78,7 +78,7 @@ export function clamp(num: any, min: any, max: any): number {
  * @param decimals - Number of decimal places to show (default: 1)
  * @returns Formatted number as string with suffix
  */
-export function formatCount(
+export function formatCount(,
   num: number | string,
   decimals: number = 1
 ): string {
@@ -154,7 +154,7 @@ export function getTimeAgo(date: Date | string): string {
  * @param options - Intl.DateTimeFormat options
  * @returns Formatted date string
  */
-export function formatDate(
+export function formatDate(,
   date: Date | string,
   options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -188,8 +188,7 @@ export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
  * @returns String in title case
  */
 export function toTitleCase(str: any): string {
-  return str.replace(/\w\S*/g,
-    (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+  return str.replace(/\w\S*/g(txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
   );
 }
 
@@ -284,7 +283,7 @@ export function isValidUrl(str: any): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: any[]) => any>(,
   func: T,
   wait: any
 ): (...args: Parameters<T>) => void {
@@ -307,7 +306,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: any[]) => any>(,
   func: T,
   limit: any
 ): (...args: Parameters<T>) => void {
@@ -481,7 +480,7 @@ export function uniq<T>(array: T[]): T[] {
  * @param key - The key to group by
  * @returns An object with keys and arrays of grouped items
  */
-export function groupBy<T extends Record<string, any> K extends keyof T>(
+export function groupBy<T extends Record<string, any> K extends keyof T>(,
   array: T[],
   key: K
 ): Record<string, T[]> {
@@ -508,7 +507,7 @@ export function groupBy<T extends Record<string, any> K extends keyof T>(
  * @param source - The source object
  * @returns A new merged object
  */
-export function deepMerge<T extends object, U extends object>(
+export function deepMerge<T extends object, U extends object>(,
   target: T,
   source: U
 ): T & U {
@@ -550,8 +549,8 @@ export function sleep(ms: any): Promise<void> {
  * @param error - Optional custom error message
  * @returns A promise that rejects if it takes longer than the timeout
  */
-export function timeout<T>(
-  promise: Promise<T>
+export function timeout<T>(,
+  promise: Promise<T>,
   timeoutMs: any,
   error = 'Operation timed out'
 ): Promise<T> {
@@ -559,8 +558,7 @@ export function timeout<T>(
     promise,
     new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error(error)), timeoutMs)
-    ),
-  ]);
+    )]);
 }
 
 // =================================

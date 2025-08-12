@@ -11,7 +11,7 @@ interface UseIntersectionObserverOptions {
 interface UseIntersectionObserverReturn {
   ref: RefObject<Element>;
   isIntersecting: boolean;
-  entry: IntersectionObserverEntry | null;
+  entry: IntersectionObserverEntry | null
 }
 
 /**

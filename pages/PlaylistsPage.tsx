@@ -47,13 +47,13 @@ const PlaylistsPage: React.FC = () => {
     try {
       const newPlaylist = await createUserPlaylist(newPlaylistName.trim());
       // Ensure the new playlist has all required UserPlaylistDetails properties
-      const playlistWithDetails: UserPlaylistDetails = {
+      const playlistWithDetails: UserPlaylistDetails = {,
         id: newPlaylist.id,
-        title: newPlaylist.name || newPlaylistName.trim(),
+          title: newPlaylist.name || newPlaylistName.trim(),
         description: newPlaylist.description || '',
-        videoIds: newPlaylist.videos?.map((v) => v.id) || [],
+          videoIds: newPlaylist.videos?.map((v) => v.id) || [],
         videoCount: newPlaylist.videos?.length || 0,
-        createdAt: newPlaylist.createdAt,
+          createdAt: newPlaylist.createdAt,
         updatedAt: newPlaylist.updatedAt };
       setPlaylists(prev => [playlistWithDetails, ...prev]);
       setIsCreateModalOpen(false);
@@ -175,8 +175,8 @@ const PlaylistsPage: React.FC = () => {
                 )}
               </div>
 
-              <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                Privacy: Public (default)
+              <div className="text-sm text-neutral-500 dark:text-neutral-400">,
+          Privacy: Public (default)
               </div>
 
               <div className="flex justify-end space-x-3 pt-2">

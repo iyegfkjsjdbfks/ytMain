@@ -8,8 +8,8 @@ const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 // Cache Configuration
 const CACHE_DURATION = {
-  SHORT: 5 * 60 * 1000, // 5 minutes
-  MEDIUM: 15 * 60 * 1000, // 15 minutes
+  SHORT: 5 * 60 * 1000, // 5 minutes,
+  MEDIUM: 15 * 60 * 1000, // 15 minutes,
   LONG: 60 * 60 * 1000, // 1 hour
 };
 
@@ -114,8 +114,8 @@ const requestQueue = new RequestQueue();
 
 // HTTP Client
 class HTTPClient {
-  private async request<T>(
-    url: any,
+  private async request<T>(,
+  url: any,
     options: RequestInit = {},
     cacheKey?: string,
     cacheDuration?: number,
@@ -148,8 +148,8 @@ return cached;
     return data;
   }
 
-  async get<T>(
-    url: any,
+  async get<T>(,
+  url: any,
     cacheKey?: string,
     cacheDuration?: number,
   ): Promise<T> {
@@ -325,8 +325,8 @@ return null;
     }
   }
 
-  static async searchVideos(
-    query: any,
+  static async searchVideos(,
+  query: any,
     limit: number = 20,
     pageToken?: string,
   ): Promise<{ videos: Video[]; nextPageToken?: string }> {
@@ -462,8 +462,8 @@ return null;
         subscribers: parseInt(item.statistics.subscriberCount || '0', 10),
         subscriberCount: `${Math.floor(parseInt(item.statistics.subscriberCount || '0', 10) / 1000)}K`,
         videoCount: parseInt(item.statistics.videoCount || '0', 10),
-        isVerified: false, // Would need to check separately
-        createdAt: item.snippet.publishedAt,
+        isVerified: false, // Would need to check separately,
+  createdAt: item.snippet.publishedAt,
         updatedAt: new Date().toISOString() };
     } catch (error) {
       console.error('Error fetching channel:', error);
@@ -471,8 +471,8 @@ return null;
     }
   }
 
-  static async getChannelVideos(
-    channelId: any,
+  static async getChannelVideos(,
+  channelId: any,
     limit: number = 20,
     pageToken?: string,
   ): Promise<{ videos: Video; nextPageToken?: string }> {
@@ -561,8 +561,7 @@ export class PlaylistService {
             description: 'My favorite videos',
             videoIds: Array.from({ length: 8 }, (_, i) => `favorite_video_${i}`),
             createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() },
-        ];
+            updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() }];
       }
 
       // Production implementation would go here

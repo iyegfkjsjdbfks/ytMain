@@ -8,14 +8,14 @@ import { memo, useMemo, useCallback, lazy, type ComponentType } from 'react';
 export const withPerformanceOptimization = {
   /**
    * Basic memoization for functional components
-   */
+   */,
   basic: <P extends object>(Component: ComponentType<P>) => memo(Component),
 
   /**
    * Shallow comparison memoization
-   */
+   */,
   shallow: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps, nextProps) => {
+    memo(Component(prevProps, nextProps) => {
       const prevKeys = Object.keys(prevProps);
       const nextKeys = Object.keys(nextProps);
 
@@ -34,10 +34,10 @@ export const withPerformanceOptimization = {
 
   /**
    * Memoization that ignores specific props
-   */
+   */,
   ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (Component: ComponentType<P>) =>
-      memo(Component, (prevProps, nextProps) => {
+      memo(Component(prevProps, nextProps) => {
         const filteredPrev = { ...prevProps };
         const filteredNext = { ...nextProps };
 
@@ -51,9 +51,9 @@ export const withPerformanceOptimization = {
 
   /**
    * Memoization for components with array props
-   */
+   */,
   arrayOptimized: <P extends object>(Component: ComponentType<P>) =>
-    memo(Component, (prevProps, nextProps) => {
+    memo(Component(prevProps, nextProps) => {
       for (const key in prevProps) {
         const prevValue = prevProps[key];
         const nextValue = nextProps[key];
@@ -80,9 +80,9 @@ export const withPerformanceOptimization = {
 export const lazyWithFallback = {
   /**
    * Create a lazy component
-   */
-  create: <P extends object>(
-    importFunc: () => Promise<{ default: ComponentType<P> }>
+   */,
+  create: <P extends object>(,
+  importFunc: () => Promise<{ default: ComponentType<P> }>
   ) => {
     return lazy(importFunc);
   } };
@@ -93,28 +93,28 @@ export const lazyWithFallback = {
 export const hookOptimizations = {
   /**
    * Create stable object reference
-   */
+   */,
   useStableObject: <T extends object>(obj: T): T =>
     useMemo(() => obj, Object.values(obj)),
 
   /**
    * Create stable array reference
-   */
+   */,
   useStableArray: <T extends any[]>(arr: T): T =>
     useMemo(() => arr, arr),
 
   /**
    * Create stable callback with dependency optimization
-   */
-  useOptimizedCallback: <T extends (...args) => any>(
-    callback: T,
+   */,
+  useOptimizedCallback: <T extends (...args) => any>(,
+  callback: T,
     deps: any): T => useCallback(callback, deps),
 
   /**
    * Memoized expensive computation
-   */
-  useExpensiveComputation: <T>(
-    computeFn: () => T,
+   */,
+  useExpensiveComputation: <T>(,
+  computeFn: () => T,
     deps: any,
     shouldRecompute?: (newDeps: any, oldDeps: any) => boolean,
   ): T => {
@@ -133,7 +133,7 @@ export const hookOptimizations = {
 export const listOptimizations = {
   /**
    * Generate stable keys for list items
-   */
+   */,
   generateStableKey: (item: any, index: number, prefix = 'item: any'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
@@ -149,7 +149,7 @@ return `${prefix}-${item.name}`;
 
   /**
    * Chunk large arrays for better performance
-   */
+   */,
   chunkArray: <T>(array: T[], chunkSize: any): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -160,9 +160,9 @@ return `${prefix}-${item.name}`;
 
   /**
    * Virtual scrolling helper for large lists
-   */
-  getVisibleItems: <T>(
-    items: T[],
+   */,
+  getVisibleItems: <T>(,
+  items: T[],
     startIndex: any,
     visibleCount: any): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
@@ -174,7 +174,7 @@ return `${prefix}-${item.name}`;
 export const imageOptimizations = {
   /**
    * Preload critical images
-   */
+   */,
   preloadImage: (src: any): Promise<void> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -186,9 +186,9 @@ export const imageOptimizations = {
 
   /**
    * Lazy load image with intersection observer
-   */
-  createLazyImageObserver: (
-    callback: (entry: IntersectionObserverEntry) => void,
+   */,
+  createLazyImageObserver: (,
+  callback: (entry: IntersectionObserverEntry) => void,
     options?: IntersectionObserverInit,
   ): IntersectionObserver => {
     return new IntersectionObserver((entries) => {
@@ -205,9 +205,9 @@ export const imageOptimizations = {
 export const bundleOptimizations = {
   /**
    * Dynamic import with error handling
-   */
-  dynamicImport: async <T>(
-    importFunc: () => Promise<T>
+   */,
+  dynamicImport: async <T>(,
+  importFunc: () => Promise<T>
   ): Promise<T | null> => {
     try {
       return await importFunc();
@@ -219,9 +219,9 @@ export const bundleOptimizations = {
 
   /**
    * Tree-shaking friendly import helper
-   */
-  selectiveImport: <T, K extends keyof T>(
-    module: T,
+   */,
+  selectiveImport: <T, K extends keyof T>(,
+  module: T,
     keys: K[],
   ): Pick<T, K> => {
     const result = {} as Pick<T, K>;
@@ -237,9 +237,9 @@ export const bundleOptimizations = {
 export const eventOptimizations = {
   /**
    * Throttled event handler
-   */
-  throttle: <T extends (...args) => any>(
-    func: T,
+   */,
+  throttle: <T extends (...args) => any>(,
+  func: T,
     delay: any): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
@@ -264,9 +264,9 @@ clearTimeout(timeoutId);
 
   /**
    * Debounced event handler
-   */
-  debounce: <T extends (...args) => any>(
-    func: T,
+   */,
+  debounce: <T extends (...args) => any>(,
+  func: T,
     delay: any): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -280,9 +280,9 @@ clearTimeout(timeoutId);
 
   /**
    * Passive event listener helper
-   */
-  addPassiveListener: (
-    element: Element,
+   */,
+  addPassiveListener: (,
+  element: Element,
     event: Event,
     handler: EventListener,
     options?: AddEventListenerOptions,
@@ -298,12 +298,12 @@ clearTimeout(timeoutId);
 export const memoryOptimizations = {
   /**
    * WeakMap cache for component instances
-   */
+   */,
   createWeakCache: <K extends object, V>(): {
     get: (key: K) => V | undefined;
     set: (key: K, value: V) => void;
     has: (key: K) => boolean;
-    delete: (key: K) => boolean;
+    delete: (key: K) => boolean
   } => {
     const cache = new WeakMap<K, V>();
 
@@ -316,7 +316,7 @@ export const memoryOptimizations = {
 
   /**
    * LRU cache implementation
-   */
+   */,
   createLRUCache: <K, V>(maxSize: any) => {
     const cache = new Map<K, V>();
 

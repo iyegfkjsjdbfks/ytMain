@@ -1,9 +1,9 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -29,7 +29,7 @@ export interface UseApiConfig<T> {
   retry?: number;
   retryDelay?: number;
   onSuccess?: (data: T) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void
 }
 
 // Hook state
@@ -38,14 +38,14 @@ export interface UseApiState<T> {
   loading: boolean;
   error: string | null;
   isStale: boolean;
-  lastUpdated: number | null;
+  lastUpdated: number | null
 }
 
 // Hook return type
 export interface UseApiReturn<T> extends UseApiState<T> {
   refetch: () => Promise<void>;
   mutate: (data: T) => void;
-  reset: () => void;
+  reset: () => void
 }
 
 // Cache implementation
@@ -55,7 +55,7 @@ class ApiCache {
     {
       data;
       timestamp: number;
-      staleTime: number;
+      staleTime: number
     }
   >();
 
@@ -118,9 +118,9 @@ const apiCache = new ApiCache();
 /**
  * Unified API hook for data fetching with advanced features
  */
-export function useApi<T>(
+export function useApi<T>(,
   queryKey: string | string[],
-  queryFn: () => Promise<ApiResponse<T>>
+  queryFn: () => Promise<ApiResponse<T>>,
   config: UseApiConfig<T> = {}
 ): UseApiReturn<T> {
   const {
@@ -230,8 +230,7 @@ export function useApi<T>(
       retry,
       retryDelay,
       onSuccess,
-      onError,
-    ]
+      onError]
   );
 
   // Refetch function
@@ -315,7 +314,7 @@ export function useApi<T>(
 }
 
 // Specialized hooks for common patterns
-export function useQuery<T>(
+export function useQuery<T>(,
   queryKey: string | string[],
   queryFn: () => Promise<ApiResponse<T>>
   config?: UseApiConfig<T>
@@ -323,13 +322,13 @@ export function useQuery<T>(
   return useApi(queryKey, queryFn, config);
 }
 
-export function useMutation<T, TVariables = any>(
-  mutationFn: (variables: TVariables) => Promise<ApiResponse<T>>
+export function useMutation<T, TVariables = any>(,
+  mutationFn: (variables: TVariables) => Promise<ApiResponse<T>>,
   config: {
     onSuccess?: (data: T, variables: TVariables) => void;
     onError?: (error: Error, variables: TVariables) => void;
-    onSettled?: (
-      data: T | undefined,
+    onSettled?: (,
+  data: T | undefined,
       error: Error | null,
       variables: TVariables
     ) => void;
@@ -338,7 +337,7 @@ export function useMutation<T, TVariables = any>(
   const [state, setState] = useState<{
     data: T | undefined;
     loading: boolean;
-    error: string | null;
+    error: string | null
   }>({
     data: undefined,
     loading: false,

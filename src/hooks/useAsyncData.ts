@@ -10,7 +10,7 @@ interface UseAsyncDataReturn<T> {
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
-  setData: (data: T) => void;
+  setData: (data: T) => void
 }
 
 /**
@@ -19,8 +19,8 @@ interface UseAsyncDataReturn<T> {
  * @param options - Configuration options
  * @returns Object containing data, loading, error states and utility functions
  */
-export function useAsyncData<T>(
-  asyncFunction: () => Promise<T>
+export function useAsyncData<T>(,
+  asyncFunction: () => Promise<T>,
   options: UseAsyncDataOptions<T> = {}
 ): UseAsyncDataReturn<T> {
   const { initialData, dependencies = [] } = options;

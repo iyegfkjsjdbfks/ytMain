@@ -9,9 +9,9 @@ import { BellIcon as BellSolidIcon } from '@heroicons/react/24/solid';
 const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionStatsProps {
-  totalChannels: number;
+  totalChannels: number;,
   notificationsEnabled: number;
-  totalVideos: number;
+  totalVideos: number;,
   newVideosToday: number;
   className?: string;
 }
@@ -25,29 +25,28 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
   const stats = [
     {
       label: 'Subscribed Channels',
-      value: totalChannels,
+          value: totalChannels,
       icon: UserGroupIcon,
-      color: 'text-blue-600 dark:text-blue-400',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20' },
+          color: 'text-blue-600 dark:text-blue-400',
+          bgColor: 'bg-blue-50 dark:bg-blue-900/20' },
     {
       label: 'With Notifications',
-      value: notificationsEnabled,
+          value: notificationsEnabled,
       icon: BellIconSolid,
-      color: 'text-yellow-600 dark:text-yellow-400',
-      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20' },
+          color: 'text-yellow-600 dark:text-yellow-400',
+          bgColor: 'bg-yellow-50 dark:bg-yellow-900/20' },
     {
       label: 'Total Videos',
-      value: totalVideos,
+          value: totalVideos,
       icon: VideoCameraIcon,
-      color: 'text-green-600 dark:text-green-400',
-      bgColor: 'bg-green-50 dark:bg-green-900/20' },
+          color: 'text-green-600 dark:text-green-400',
+          bgColor: 'bg-green-50 dark:bg-green-900/20' },
     {
       label: 'New Today',
-      value: newVideosToday,
+          value: newVideosToday,
       icon: ClockIcon,
-      color: 'text-red-600 dark:text-red-400',
-      bgColor: 'bg-red-50 dark:bg-red-900/20' },
-  ];
+          color: 'text-red-600 dark:text-red-400',
+          bgColor: 'bg-red-50 dark:bg-red-900/20' }];
 
   if (totalChannels === 0) {
     return (

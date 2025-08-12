@@ -6,7 +6,8 @@ const CheckIconSolid = CheckSolidIcon;
 
 import { useTheme } from '../contexts/ThemeContext';
 
-const SettingSection: React.FC<{ title, children: React.ReactNode }> = ({ title, children }) => (
+const SettingSection: React.FC<{ title,
+          children: React.ReactNode }> = ({ title, children }) => (
   <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
     <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{title}</h3>
     <div className="space-y-4">
@@ -15,7 +16,7 @@ const SettingSection: React.FC<{ title, children: React.ReactNode }> = ({ title,
   </div>
 );
 
-const ToggleSetting: React.FC<{
+const ToggleSetting: React.FC<{,
   label: string;
   description?: string;
   checked, onChange: (checked: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
@@ -77,9 +78,9 @@ const SettingsPage: React.FC = () => {
   const [videoQuality, setVideoQuality] = useState('Auto');
   const [notifications, setNotifications] = useState({
     subscriptions: true,
-    recommendedVideos: false,
+          recommendedVideos: false,
     activityOnMyChannel: true,
-    repliesComments: true, mentions: true
+          repliesComments: true, mentions: true;
   });
 
   const handleNotificationChange = (key: keyof typeof notifications) => {

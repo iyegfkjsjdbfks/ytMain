@@ -26,7 +26,7 @@ export interface SubscriptionStats {
   notificationSettings: {
     all: number;
     personalized: number;
-    none: number;
+    none: number
   };
 }
 
@@ -61,8 +61,8 @@ class SubscriptionService {
   /**
    * Update notification level for a subscription
    */
-  async updateNotificationLevel(
-    channelId: any,
+  async updateNotificationLevel(,
+  channelId: any,
     level: 'all' | 'personalized' | 'none'
   ): Promise<ApiResponse<Subscription>> {
     return api.patch(`/api/subscriptions/${channelId}/notifications`, {
@@ -72,8 +72,8 @@ class SubscriptionService {
   /**
    * Get all user subscriptions
    */
-  async getSubscriptions(
-    filters: {
+  async getSubscriptions(,
+  filters: {
       sortBy?: 'recent' | 'alphabetical' | 'most_relevant';
       category?: string;
       limit?: number;
@@ -92,8 +92,8 @@ class SubscriptionService {
   /**
    * Get subscription feed (videos from subscribed channels)
    */
-  async getSubscriptionFeed(
-    filters: {
+  async getSubscriptionFeed(,
+  filters: {
       limit?: number;
       offset?: number;
       timeframe?: '24h' | '7d' | '30d';
@@ -132,10 +132,10 @@ class SubscriptionService {
   /**
    * Bulk update notification settings
    */
-  async bulkUpdateNotifications(
-    updates: Array<{
+  async bulkUpdateNotifications(,
+  updates: Array<{
       channelId: string;
-      notificationLevel: 'all' | 'personalized' | 'none';
+      notificationLevel: 'all' | 'personalized' | 'none'
     }>
   ): Promise<ApiResponse<void>> {
     return api.patch('/api/subscriptions/bulk-notifications', { updates });
@@ -144,8 +144,8 @@ class SubscriptionService {
   /**
    * Get recommended channels to subscribe to
    */
-  async getRecommendedChannels(
-    filters: {
+  async getRecommendedChannels(,
+  filters: {
       category?: string;
       limit?: number;
       excludeSubscribed?: boolean;
@@ -161,7 +161,7 @@ class SubscriptionService {
       category: string;
       description: string;
       isVerified: boolean;
-      recentVideos: Video;
+      recentVideos: Video
     }>
   > {
     try {
@@ -177,7 +177,7 @@ class SubscriptionService {
           category: string;
           description: string;
           isVerified: boolean;
-          recentVideos: Video;
+          recentVideos: Video
         }>) || []
       );
     } catch (error) {
@@ -189,15 +189,15 @@ class SubscriptionService {
   /**
    * Search within subscribed channels
    */
-  async searchSubscriptions(
-    query: any,
+  async searchSubscriptions(,
+  query: any,
     filters: {
       includeVideos?: boolean;
       limit?: number;
     } = {}
   ): Promise<{
     channels: Subscription;
-    videos: Video;
+    videos: Video
   }> {
     try {
       const response = await api.get('/api/subscriptions/search', {
@@ -215,8 +215,8 @@ class SubscriptionService {
   /**
    * Get subscription activity (new uploads, live streams, etc.)
    */
-  async getSubscriptionActivity(
-    filters: {
+  async getSubscriptionActivity(,
+  filters: {
       timeframe?: '1h' | '6h' | '24h' | '7d';
       types?: Array<'upload' | 'live' | 'premiere' | 'community'>;
       limit?: number;
@@ -233,7 +233,7 @@ class SubscriptionService {
       thumbnail?: string;
       url: string;
       timestamp: string;
-      isNew: boolean;
+      isNew: boolean
     }>
   > {
     try {
@@ -250,7 +250,7 @@ class SubscriptionService {
           thumbnail?: string;
           url: string;
           timestamp: string;
-          isNew: boolean;
+          isNew: boolean
         }>) || []
       );
     } catch (error) {
@@ -275,13 +275,13 @@ class SubscriptionService {
   /**
    * Import subscription list
    */
-  async importSubscriptions(
-    file: File,
+  async importSubscriptions(,
+  file: File,
     format: 'json' | 'csv' | 'opml'
   ): Promise<
     ApiResponse<{
       skipped: number;
-      errors: string;
+      errors: string
     }>
   > {
     const formData = new FormData();
@@ -296,20 +296,20 @@ class SubscriptionService {
   /**
    * Get subscription trends and insights
    */
-  async getSubscriptionInsights(
-    timeframe: '7d' | '30d' | '90d' = '30d'
+  async getSubscriptionInsights(,
+  timeframe: '7d' | '30d' | '90d' = '30d'
   ): Promise<{
     growthRate: number;
     topCategories: Array<{
       category: string;
       count: number;
-      percentage: number;
+      percentage: number
     }>;
     activityTrends: Array<{ date: string; uploads: number; views: number }>;
     engagementMetrics: {
       averageViewsPerVideo: number;
       averageLikesPerVideo: number;
-      averageCommentsPerVideo: number;
+      averageCommentsPerVideo: number
     };
   }> {
     try {
@@ -320,13 +320,13 @@ class SubscriptionService {
         topCategories: Array<{
           category: string;
           count: number;
-          percentage: number;
+          percentage: number
         }>;
         activityTrends: Array<{ date: string; uploads: number; views: number }>;
         engagementMetrics: {
           averageViewsPerVideo: number;
           averageLikesPerVideo: number;
-          averageCommentsPerVideo: number;
+          averageCommentsPerVideo: number
         };
       };
     } catch (error) {

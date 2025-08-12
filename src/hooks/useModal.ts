@@ -15,7 +15,7 @@ interface UseModalReturn {
   toggle: () => void;
   modalProps: {
     isOpen: boolean;
-    onClose: () => void;
+    onClose: () => void
   };
 }
 

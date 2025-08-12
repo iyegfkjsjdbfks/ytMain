@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, FC, ChangeEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -65,14 +65,14 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
         const player = new YouTubePlayer('youtube-player', videoId, {
           width,
           height,
-          playerVars: {
+          playerVars: {,
             autoplay: autoplay ? 1 : 0,
-            controls: controls ? 1 : 0,
+          controls: controls ? 1 : 0,
             modestbranding: 1,
-            rel: 0,
+          rel: 0,
             enablejsapi: 1,
-            origin: window.location.origin },
-          events: {
+          origin: window.location.origin },
+          events: {,
             onReady: async _event => {
               if (!isMounted) {
                 return;
@@ -86,8 +86,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
                       playerRef.current.getCurrentTime(),
                       playerRef.current.getDuration(),
                       playerRef.current.getVolume(),
-                      playerRef.current.isMuted(),
-                    ]);
+                      playerRef.current.isMuted()]);
 
                     if (isMounted) {
                       setCurrentTime(time);
@@ -95,7 +94,8 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
                       setVolume(vol);
                       setIsMuted(muted);
                     }
-                  } catch (error) {
+                  
+        } catch (error) {
                     logger.error('Error updating player state:', error);
                   }
                 }
@@ -135,8 +135,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
         playerRef.current.destroy();
         playerRef.current = null;
       }
-    };
-  }, [videoId, autoplay, controls, height, width]);
+    }}, [videoId, autoplay, controls, height, width]);
 
   // Player control methods
   const togglePlay = async () => {

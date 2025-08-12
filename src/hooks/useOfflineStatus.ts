@@ -1,9 +1,9 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -25,11 +25,11 @@ interface OfflineState {
   offlineDuration: number;
   lastOnlineTime: number | null;
   connectionType: string | null;
-  networkInfo: NetworkConnection | null;
+  networkInfo: NetworkConnection | null
 }
 
 interface UseOfflineStatusReturn {
-  // State
+  // State,
   isOnline: boolean;
   isOffline: boolean;
   wasOffline: boolean;
@@ -37,22 +37,22 @@ interface UseOfflineStatusReturn {
   connectionType: string | null;
   networkInfo: NetworkConnection | null;
 
-  // Utilities
+  // Utilities,
   getNetworkQuality: () => 'fast' | 'slow' | 'offline';
   isSlowConnection: () => boolean;
   shouldReduceData: () => boolean;
   getOfflineStats: () => {
     totalOfflineTime: number;
     offlineEvents: number;
-    lastOfflineTime: number | null;
+    lastOfflineTime: number | null
   };
 
-  // Actions
+  // Actions,
   pingServer: (url?: string) => Promise<boolean>;
   testConnection: () => Promise<{
     online: boolean;
     latency: number;
-    speed: 'fast' | 'slow' | 'offline';
+    speed: 'fast' | 'slow' | 'offline'
   }>;
 }
 
@@ -169,7 +169,7 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   const testConnection = useCallback(async (): Promise<{
     online: boolean;
     latency: number;
-    speed: 'fast' | 'slow' | 'offline';
+    speed: 'fast' | 'slow' | 'offline'
   }> => {
     if (!state.isOnline) {
       return { online: false, latency: -1, speed: 'offline' };
@@ -345,8 +345,8 @@ export const useOfflineStatus = (): UseOfflineStatusReturn => {
   }, [getNetworkInfo, updateOfflineStats]);
 
   return {
-    // State
-    isOnline: state.isOnline,
+    // State,
+  isOnline: state.isOnline,
     isOffline: !state.isOnline,
     wasOffline: state.wasOffline,
     offlineDuration: state.offlineDuration,

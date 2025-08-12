@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -14,21 +14,21 @@ import { PauseIcon, PlayIcon  } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface VideoProject {
-  id: string;
+  id: string;,
   name: string;
-  duration: number;
+  duration: number;,
   resolution: string;
-  fps: number;
+  fps: number;,
   lastModified: Date;
-  thumbnail: string;
+  thumbnail: string
 }
 
 interface TimelineClip {
-  id: string;
+  id: string;,
   type: 'video' | 'audio' | 'text' | 'image';
-  name: string;
+  name: string;,
   startTime: number;
-  duration: number;
+  duration: number;,
   track: number;
   thumbnail?: string;
   volume?: number;
@@ -36,56 +36,55 @@ interface TimelineClip {
 }
 
 interface EditAction {
-  type: 'cut' | 'trim' | 'volume' | 'effect' | 'text';
+  type: 'cut' | 'trim' | 'volume' | 'effect' | 'text';,
   timestamp: number;
-  description: string;
+  description: string
 }
 
 const VideoEditorPage: React.FC = () => {
   const [currentProject, _setCurrentProject] = useState<VideoProject>({
     id: '1',
-    name: 'My Video Project',
+          name: 'My Video Project',
     duration: 180,
-    resolution: '1920x1080',
+          resolution: '1920x1080',
     fps: 30,
-    lastModified: new Date(),
+          lastModified: new Date(),
     thumbnail: '/api/placeholder/320/180' });
 
   const [clips, setClips] = useState<TimelineClip[]>([
     {
       id: '1',
-      type: 'video',
+          type: 'video',
       name: 'Main Video.mp4',
-      startTime: 0,
+          startTime: 0,
       duration: 120,
-      track: 0,
+          track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 80 },
+          volume: 80 },
     {
       id: '2',
-      type: 'audio',
+          type: 'audio',
       name: 'Background Music.mp3',
-      startTime: 0,
+          startTime: 0,
       duration: 180,
-      track: 1,
+          track: 1,
       volume: 40 },
     {
       id: '3',
-      type: 'video',
+          type: 'video',
       name: 'Intro Clip.mp4',
-      startTime: 120,
+          startTime: 120,
       duration: 30,
-      track: 0,
+          track: 0,
       thumbnail: '/api/placeholder/160/90',
-      volume: 90 },
+          volume: 90 },
     {
       id: '4',
-      type: 'text',
+          type: 'text',
       name: 'Title Text',
-      startTime: 5,
+          startTime: 5,
       duration: 10,
-      track: 2 },
-  ]);
+          track: 2 }]);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -130,7 +129,8 @@ const VideoEditorPage: React.FC = () => {
     setSelectedClip(selectedClip === clipId ? null : clipId);
   };
 
-  const handleClipSplit = (clipId: any, splitTime: any) => {
+  const handleClipSplit = (clipId: any,
+          splitTime: any) => {
     const clip = clips.find(c => c.id === clipId);
     if (!clip) {
 return;
@@ -144,29 +144,28 @@ return;
     const newClip: TimelineClip = {
       ...clip,
       id: `${clipId}_split_${Date.now()}`,
-      startTime: clip.startTime + relativeTime,
+          startTime: clip.startTime + relativeTime,
       duration: clip.duration - relativeTime };
 
     setClips(prev => [
       ...prev.filter((c) => c.id !== clipId),
       { ...clip, duration: relativeTime },
-      newClip,
-    ]);
+      newClip]);
 
     setEditHistory(prev => [...prev, {
       type: 'cut',
-      timestamp: Date.now(),
+          timestamp: Date.now(),
       description: `Split ${clip.name} at ${formatTime(splitTime)}` }]);
   };
 
-  const handleVolumeChange = (clipId: any, volume: any) => {
+  const handleVolumeChange = (clipId: any,
+          volume: any) => {
     setClips(prev => prev.map(clip =>
-      clip.id === clipId ? { ...clip, volume } : clip,
-    ));
+      clip.id === clipId ? { ...clip, volume } : clip));
 
     setEditHistory(prev => [...prev, {
       type: 'volume',
-      timestamp: Date.now(),
+          timestamp: Date.now(),
       description: `Changed volume to ${volume}%` }]);
   };
 
@@ -202,6 +201,7 @@ return;
           if (originalClip) {
             setClips(prev => prev.filter((c) => !c.id.includes('_split_') && c.id !== originalId));
           }
+        
         }
       }
     }
@@ -226,11 +226,11 @@ return;
           const exportData = {
             project: currentProject,
             clips,
-            exportSettings: {
+            exportSettings: {,
               format: 'mp4',
-              quality: '1080p',
+          quality: '1080p',
               fps: currentProject.fps },
-            exportDate: new Date().toISOString() };
+          exportDate: new Date().toISOString() };
 
           const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
@@ -256,7 +256,7 @@ return;
       case 'audio': return 'bg-green-500';
       case 'text': return 'bg-purple-500';
       case 'image': return 'bg-yellow-500';
-      default: return 'bg-gray-500';
+      default: return 'bg-gray-500'
     }
   };
 
@@ -264,7 +264,7 @@ return;
     switch (track) {
       case 0: return 'Video';
       case 1: return 'Audio';
-      case 2: return 'Text/Graphics';
+      case 2: return 'Text/Graphics';,
       default: return `Track ${track + 1}`;
     }
   };
@@ -470,7 +470,7 @@ return;
                           } ${getClipColor(clip.type)}`}
                           style={{
                             left: `${(clip.startTime / currentProject.duration) * 100}%`,
-                            width: `${(clip.duration / currentProject.duration) * 100}%` }}
+          width: `${(clip.duration / currentProject.duration) * 100}%` }}
                           onClick={() => handleClipSelect(clip.id)}
                           onDoubleClick={() => handleClipSplit(clip.id, currentTime)}
                         >
@@ -533,8 +533,8 @@ return null;
 
                       {clip.volume !== undefined && (
                         <div>
-                          <div className="block text-sm text-gray-400 mb-1">
-                            Volume: {clip.volume}%
+                          <div className="block text-sm text-gray-400 mb-1">,
+  Volume: {clip.volume}%
                           </div>
                           <input
                             type="range"
@@ -559,7 +559,8 @@ return null;
                           onClick={() => {
                             // Delete the selected clip
                             // setClips(clips.filter((c) => c.id !== clip.id));
-                          }}
+                          
+        }}
                           className="flex-1 flex items-center justify-center px-3 py-2 bg-red-600 rounded hover:bg-red-700 text-white"
                           title="Delete clip"
                         >

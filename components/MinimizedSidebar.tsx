@@ -15,9 +15,9 @@ import ShortsIcon from './icons/ShortsIcon';
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
 
 interface MinimizedNavItemProps {
-  to: string;
+  to: string;,
   icon: React.ReactNode;
-  label: string;
+  label: string;,
   currentPath: string;
   title?: string;
 }

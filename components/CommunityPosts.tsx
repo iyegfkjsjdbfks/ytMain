@@ -8,11 +8,11 @@ const HeartIconSolid = HeartSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface CommunityPost {
-  id: string;
+  id: string;,
   channelId: string;
-  channelName: string;
+  channelName: string;,
   channelAvatar: string;
-  channelVerified: boolean;
+  channelVerified: boolean;,
   type: 'text' | 'image' | 'video' | 'poll' | 'link';
   content: string;
   images?: string;
@@ -20,9 +20,9 @@ export interface CommunityPost {
   videoThumbnail?: string;
   videoTitle?: string;
   poll?: {
-    question: string;
+    question: string;,
     options: Array<{
-      id: string;
+      id: string;,
       text: string;
       votes: number;
     }>;
@@ -30,14 +30,14 @@ export interface CommunityPost {
     userVote?: string;
   };
   link?: {
-    url: string;
+    url: string;,
     title: string;
-    description: string;
+    description: string;,
     thumbnail: string;
   };
-  likes: number;
+  likes: number;,
   comments: number;
-  shares: number;
+  shares: number;,
   timestamp: string;
   isLiked: boolean;
   isPinned?: boolean;
@@ -45,11 +45,12 @@ export interface CommunityPost {
 
 interface CommunityPostsProps {
   channelId?: string;
-  posts: CommunityPost;
-  onLike: (postId: any) => void;
-  onComment: (postId: any) => void;
+  posts: CommunityPost;,
+  onLike: (postId: any) => void;,
+  onComment: (postId: any) => void;,
   onShare: (postId: any) => void;
-  onVote?: (postId: any, optionId: any) => void;
+  onVote?: (postId: any,
+          optionId: any) => void;
   className?: string;
 }
 
@@ -89,7 +90,7 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
       case 'video': return <VideoCameraIcon className="w-4 h-4" />;
       case 'poll': return <ChatBubbleLeftIcon className="w-4 h-4" />;
       case 'link': return <LinkIcon className="w-4 h-4" />;
-      default: return null;
+      default: return null
     }
   };
 
@@ -122,7 +123,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
             post.images.length === 2 ? 'grid-cols-2' :
             'grid-cols-2 md:grid-cols-3'
           }`}>
-            {post.images.map((image: any, index: number) => (
+            {post.images.map((image: any,
+          index: number) => (
               <img
                 key={index}
                 src={image}
@@ -130,7 +132,8 @@ const CommunityPosts: React.FC<CommunityPostsProps> = ({
                 className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => {
                   // Open image in modal/lightbox
-                  }}
+                  
+        }}
               />
             ))}
           </div>

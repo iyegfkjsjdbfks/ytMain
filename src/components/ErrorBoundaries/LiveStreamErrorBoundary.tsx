@@ -1,6 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -27,11 +27,11 @@ export interface LiveStreamErrorBoundaryProps {
 type Props = LiveStreamErrorBoundaryProps;
 
 interface State {
-  hasError: boolean;
+  hasError: boolean;,
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: ErrorInfo | null;,
   retryCount: number;
-  isReconnecting: boolean;
+  isReconnecting: boolean
 }
 
 /**
@@ -46,26 +46,25 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
+          error: null,
       errorInfo: null,
-      retryCount: 0,
-      isReconnecting: false };
-  }
+          retryCount: 0,
+      isReconnecting: false }}
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return {
       hasError: true,
-      error };
-  }
+      error }}
 
-  override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  override componentDidCatch(error: Error,
+          errorInfo: ErrorInfo): void {
     const componentError = createComponentError(
       'LiveStreamErrorBoundary',
       'Live stream component error',
       error,
       JSON.stringify({
         streamId: this.props.streamId,
-        retryCount: this.state.retryCount,
+          retryCount: this.state.retryCount,
         componentStack: errorInfo.componentStack })
     );
 
@@ -88,13 +87,13 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     if (this.state.retryCount < this.maxRetries) {
       conditionalLogger.debug('Retrying live stream component', {
         streamId: this.props.streamId,
-        attempt: this.state.retryCount + 1 });
+          attempt: this.state.retryCount + 1 });
 
       this.setState({
         hasError: false,
-        error: null,
+          error: null,
         errorInfo: null,
-        retryCount: this.state.retryCount + 1 });
+          retryCount: this.state.retryCount + 1 });
 
       this.props.onRetry?.();
     }
@@ -110,9 +109,9 @@ export class LiveStreamErrorBoundary extends Component<Props, State> {
     this.reconnectTimeout = setTimeout(() => {
       this.setState({
         hasError: false,
-        error: null,
+          error: null,
         errorInfo: null,
-        isReconnecting: false,
+          isReconnecting: false,
         retryCount: 0, // Reset retry count on manual reconnect
       });
 

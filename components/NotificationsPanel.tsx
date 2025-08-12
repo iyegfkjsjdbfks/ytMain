@@ -5,21 +5,32 @@ import { ChatBubbleLeftRightIcon, BellAlertIcon  } from '@heroicons/react/24/out
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface NotificationItem {
-  id: string;
+  id: string;,
   icon: React.ElementType;
-  iconColorClass: string;
+  iconColorClass: string;,
   title: string;
-  description: string;
+  description: string;,
   time: string;
   isNew?: boolean;
 }
 
 const mockNotifications: NotificationItem[] = [
-  { id: '1', icon: VideoCameraIcon, iconColorClass: 'text-red-500', title: 'New video from TechLevelUp!', description: "'Ultimate Gaming Setup Tour 2024' was just uploaded.", time: '15m ago', isNew: true },
-  { id: '2', icon: ChatBubbleLeftRightIcon, iconColorClass: 'text-blue-500', title: 'Comment reply', description: "Alice W. replied to your comment on 'Exploring the Alps'.", time: '1h ago', isNew: true },
-  { id: '3', icon: BellAlertIcon, iconColorClass: 'text-yellow-500', title: 'Subscription update', description: 'Nature Explorers just went live!', time: '3h ago' },
-  { id: '4', icon: VideoCameraIcon, iconColorClass: 'text-red-500', title: 'Recommended for you', description: "Check out 'Delicious & Easy Pasta Recipe' by Chef Studio.", time: 'Yesterday' },
-];
+  { id: '1',
+          icon: VideoCameraIcon, iconColorClass: 'text-red-500',
+          title: 'New video from TechLevelUp!', description: "'Ultimate Gaming Setup Tour 2024' was just uploaded.",
+          time: '15m ago', isNew: true },
+  { id: '2',
+          icon: ChatBubbleLeftRightIcon, iconColorClass: 'text-blue-500',
+          title: 'Comment reply', description: "Alice W. replied to your comment on 'Exploring the Alps'.",
+          time: '1h ago', isNew: true },
+  { id: '3',
+          icon: BellAlertIcon, iconColorClass: 'text-yellow-500',
+          title: 'Subscription update', description: 'Nature Explorers just went live!',
+          time: '3h ago' },
+  { id: '4',
+          icon: VideoCameraIcon, iconColorClass: 'text-red-500',
+          title: 'Recommended for you', description: "Check out 'Delicious & Easy Pasta Recipe' by Chef Studio.",
+          time: 'Yesterday' }];
 
 interface NotificationsPanelProps {
   isOpen: boolean; onClose: () => void
@@ -40,8 +51,7 @@ return null;
 
   const markAsRead = (id: string) => {
     setNotifications(prev => prev.map(notification =>
-      notification.id === id ? { ...notification, isNew: false } : notification,
-    ));
+      notification.id === id ? { ...notification, isNew: false } : notification));
   };
 
   return (

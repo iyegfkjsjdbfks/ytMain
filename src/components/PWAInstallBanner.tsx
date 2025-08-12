@@ -64,14 +64,16 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
           setIsVisible(false);
           return;
         }
-      }
+      
+        }
 
       // Check visit count
       const visitCount = PWAUtils.getVisitCount();
       if (visitCount >= 3) {
         setIsVisible(true);
       }
-    };
+    
+        };
 
     checkVisibility();
   }, [canInstall, isInstalled, isDismissed, autoShow]);
@@ -114,7 +116,7 @@ export const PWAInstallBanner: FC<PWAInstallBannerProps> = ({
       await installUpdate();
       trackEvent('pwa_update_installed', {
         source: 'banner',
-        timestamp: Date.now() });
+          timestamp: Date.now() });
     } catch (error) {
       console.error('Failed to install update:', error);
     }

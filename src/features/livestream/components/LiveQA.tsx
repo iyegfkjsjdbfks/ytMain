@@ -5,7 +5,7 @@ import { useLiveQA } from '@/hooks/useLiveStream';
 import { QuestionMarkCircleIcon, HeartIcon, CheckCircleIcon, ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 
 interface LiveQAProps {
-  streamId: string;
+  streamId: string;,
   isOwner: boolean;
   className?: string;
 }
@@ -90,7 +90,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
   const formatTimestamp = (timestamp: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
-      minute: '2-digit' }).format(timestamp);
+          minute: '2-digit' }).format(timestamp);
   };
 
   const filteredQuestions = questions.filter(question => {
@@ -100,11 +100,11 @@ const LiveQA: React.FC<LiveQAProps> = ({
       case 'answered':
         return question.answered;
       case 'pinned':
-        return question.isHighlighted; // Use isHighlighted as pinned
-      default:
-        return true;
+        return question.isHighlighted; // Use isHighlighted as pinned,
+  default: return true
     }
-  });
+  
+        });
 
   const sortedQuestions = filteredQuestions.sort((a, b) => {
     // Highlighted questions first
@@ -164,20 +164,20 @@ const LiveQA: React.FC<LiveQAProps> = ({
       {/* Filter Tabs */}
       <div className='flex space-x-1 mb-4 p-1 bg-gray-100 rounded-lg'>
         {[
-          { key: 'all', label: 'All', count: questions.length },
+          { key: 'all',
+          label: 'All', count: questions.length },
           {
             key: 'unanswered',
-            label: 'Unanswered',
+          label: 'Unanswered',
             count: questions.filter(q => !q.answered).length },
           {
             key: 'answered',
-            label: 'Answered',
+          label: 'Answered',
             count: questions.filter(q => q.answered).length },
           {
             key: 'pinned',
-            label: 'Pinned',
-            count: questions.filter(q => q.isHighlighted).length },
-        ].map(tab => (
+          label: 'Pinned',
+            count: questions.filter(q => q.isHighlighted).length }].map(tab => (
           <button
             key={tab.key}
             onClick={() => setFilter(tab.key as any)}

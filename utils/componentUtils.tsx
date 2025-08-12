@@ -14,7 +14,8 @@ export interface ComponentWrapperProps {
 }
 
 // Utility functions for components
-export const truncateText = (text: any, maxLength: number = 100, suffix = '...') => {
+export const truncateText = (text: any,
+          maxLength: number = 100, suffix = '...') => {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength) + suffix;
 };
@@ -67,7 +68,7 @@ export const ComponentWrapper: React.FC<ComponentWrapperProps> = ({
 };
 
 // Build truncate classes utility
-export const buildTruncateClasses = (
+export const buildTruncateClasses = (,
   lines: number = 1,
   baseClasses = ''
 ): string => {
@@ -82,13 +83,15 @@ export const safeLocalStorage = {
       if (typeof window !== 'undefined') {
         return localStorage.getItem(key);
       }
-    } catch (error) {
+    
+        } catch (error) {
       console.warn('localStorage getItem failed:', error);
     }
     return null;
   },
   
-  setItem: (key: string, value: string | number): boolean => {
+  setItem: (key: string,
+          value: string | number): boolean => {
     try {
       if (typeof window !== 'undefined') {
         localStorage.setItem(key, String(value));
@@ -128,7 +131,7 @@ export default {
   buildTruncateClasses,
   safeLocalStorage,
   memo: React.memo,
-  useMemo: React.useMemo,
+          useMemo: React.useMemo,
   useCallback: React.useCallback };
 
 // Additional utility functions

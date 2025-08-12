@@ -12,7 +12,7 @@ import { IconButton } from './ui/Button';
 import type { Video } from '../src/types/core';
 
 interface VideoCardProps {
-  video: Video;
+  video: Video
 }
 
 const VideoCard: React.FC<VideoCardProps> = React.memo(({ video }) => {

@@ -36,8 +36,7 @@ export const formatCount = (num: any, digits: number = 0): string => {
     { value: 1e3, symbol: 'K' },
     { value: 1e6, symbol: 'M' },
     { value: 1e9, symbol: 'B' },
-    { value: 1e12, symbol: 'T' },
-  ];
+    { value: 1e12, symbol: 'T' }];
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
   const item = lookup.slice().reverse().find(item => num >= item.value);
   if (!item) {

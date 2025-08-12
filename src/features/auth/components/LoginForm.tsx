@@ -7,8 +7,7 @@ import type { LoginCredentials } from '../types';
 interface LocationState {
   from?: {
     pathname: string;
-  };
-}
+  }}
 
 /**
  * Login form component with validation and error handling
@@ -20,12 +19,12 @@ export const LoginForm: React.FC = () => {
 
   const [formData, setFormData] = useState<LoginCredentials>({
     email: '',
-    password: '',
+          password: '',
     rememberMe: false });
 
   const [formErrors, setFormErrors] = useState({
     email: '',
-    password: '' });
+          password: '' });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,7 +32,7 @@ export const LoginForm: React.FC = () => {
     let isValid = true;
     const errors = {
       email: '',
-      password: '' };
+          password: '' };
 
     // Email validation
     if (!formData.email) {

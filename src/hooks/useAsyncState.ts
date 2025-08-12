@@ -3,20 +3,20 @@ import { useState, useEffect, useCallback } from 'react';
 interface AsyncState<T> {
   data: T | null;
   loading: boolean;
-  error: string | null;
+  error: string | null
 }
 
 interface UseAsyncStateOptions {
   initialLoading?: boolean;
   onSuccess?: (data: any) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void
 }
 
 /**
  * Custom hook for managing async operations with loading, error, and data states
  * Reduces code duplication across components that fetch data
  */
-export const useAsyncState = <T>(
+export const useAsyncState = <T>(,
   asyncFunction: () => Promise<T>
   dependencies = [],
   options: UseAsyncStateOptions = {}

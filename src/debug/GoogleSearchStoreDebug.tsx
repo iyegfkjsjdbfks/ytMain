@@ -30,9 +30,10 @@ const GoogleSearchStoreDebug: FC = () => {
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
           error: 'Google Custom Search API not configured',
-          details: {
+          details: {,
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId } });
+          engineId: !!searchEngineId } 
+        });
         return;
       }
 
@@ -185,18 +186,18 @@ const GoogleSearchStoreDebug: FC = () => {
                 className='bg-white dark:bg-gray-700 p-3 rounded'
               >
                 <div className='font-medium'>{video.title}</div>
-                <div className='text-sm text-gray-600 dark:text-gray-400'>
-                  ID: {video.id}
+                <div className='text-sm text-gray-600 dark:text-gray-400'>,
+          ID: {video.id}
                 </div>
-                <div className='text-sm text-gray-600 dark:text-gray-400'>
-                  Channel: {video.channelName}
+                <div className='text-sm text-gray-600 dark:text-gray-400'>,
+          Channel: {video.channelName}
                 </div>
-                <div className='text-sm text-gray-600 dark:text-gray-400'>
-                  URL: {video.videoUrl}
+                <div className='text-sm text-gray-600 dark:text-gray-400'>,
+          URL: {video.videoUrl}
                 </div>
                 {video.viewCount && (
-                  <div className='text-sm text-gray-600 dark:text-gray-400'>
-                    Views: {video.viewCount.toLocaleString()}
+                  <div className='text-sm text-gray-600 dark:text-gray-400'>,
+          Views: {video.viewCount.toLocaleString()}
                   </div>
                 )}
               </div>

@@ -3,25 +3,25 @@ import { conditionalLogger } from '../utils/conditionalLogger';
 // PWA Configuration and Utilities
 
 export const PWA_CONFIG = {
-  // App Information
+  // App Information,
   APP_NAME: 'YouTubeX',
   APP_SHORT_NAME: 'YouTubeX',
   APP_DESCRIPTION: 'Enhanced YouTube experience with advanced features',
 
-  // URLs and Paths
+  // URLs and Paths,
   START_URL: '/',
   SCOPE: '/',
   MANIFEST_PATH: '/manifest.json',
   SERVICE_WORKER_PATH: '/sw.js',
 
-  // Display Settings
+  // Display Settings,
   DISPLAY: 'standalone' as const, ORIENTATION: 'portrait-primary' as const,
 
-  // Theme Colors
+  // Theme Colors,
   THEME_COLOR: '#dc2626',
   BACKGROUND_COLOR: '#ffffff',
 
-  // Cache Settings
+  // Cache Settings,
   CACHE_NAMES: {
     STATIC: 'youtubex-static-v1',
     DYNAMIC: 'youtubex-dynamic-v1',
@@ -30,28 +30,28 @@ export const PWA_CONFIG = {
 
   // Cache Durations (in milliseconds)
   CACHE_DURATIONS: {
-    STATIC: 30 * 24 * 60 * 60 * 1000, // 30 days
-    DYNAMIC: 7 * 24 * 60 * 60 * 1000, // 7 days
-    IMAGES: 14 * 24 * 60 * 60 * 1000, // 14 days
-    API: 5 * 60 * 1000, // 5 minutes
+    STATIC: 30 * 24 * 60 * 60 * 1000, // 30 days,
+  DYNAMIC: 7 * 24 * 60 * 60 * 1000, // 7 days,
+  IMAGES: 14 * 24 * 60 * 60 * 1000, // 14 days,
+  API: 5 * 60 * 1000, // 5 minutes
   },
 
-  // Installation Settings
+  // Installation Settings,
   INSTALL_PROMPT: {
     SHOW_AFTER_VISITS: 3,
-    DISMISS_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 days
-    STORAGE_KEY: 'pwa-install-dismissed' },
+    DISMISS_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 days,
+  STORAGE_KEY: 'pwa-install-dismissed' },
 
-  // Update Settings
+  // Update Settings,
   UPDATE_CHECK_INTERVAL: 60 * 60 * 1000, // 1 hour
 
-  // Notification Settings
+  // Notification Settings,
   NOTIFICATION_SETTINGS: {
     BADGE: '/icons/badge-72x72.svg',
     DEFAULT_ICON: '/icons/icon-192x192.svg',
     VIBRATE_PATTERN: [200, 100, 200] },
 
-  // Offline Storage Settings
+  // Offline Storage Settings,
   OFFLINE_STORAGE: {
     DB_NAME: 'YouTubeXOfflineDB',
     DB_VERSION: 1,
@@ -61,16 +61,16 @@ export const PWA_CONFIG = {
     CLEANUP_THRESHOLD: 0.8, // Clean up when 80% full
   },
 
-  // Background Sync Settings
+  // Background Sync Settings,
   BACKGROUND_SYNC: {
     TAGS: {
       VIDEO_UPLOAD: 'video-upload',
       USER_ACTION: 'user-action',
       ANALYTICS: 'analytics' },
-    RETRY_DELAY: 5 * 60 * 1000, // 5 minutes
-    MAX_RETRIES: 3 },
+    RETRY_DELAY: 5 * 60 * 1000, // 5 minutes,
+  MAX_RETRIES: 3 },
 
-  // Feature Flags
+  // Feature Flags,
   FEATURES: {
     OFFLINE_VIDEO_CACHING: true,
     BACKGROUND_SYNC: true,
@@ -244,8 +244,7 @@ export const generateManifest = () => ({
       src: '/icons/icon-512x512.svg',
       sizes: '512x512',
       type: 'image/svg+xml',
-      purpose: 'any maskable' },
-  ],
+      purpose: 'any maskable' }],
   shortcuts: [
     {
       name: 'Upload Video',
@@ -270,7 +269,6 @@ export const generateManifest = () => ({
       short_name: 'Library',
       description: 'Access your library',
       url: '/library',
-      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] },
-  ] });
+      icons: [{ src: '/icons/icon-192x192.svg', sizes: '192x192' }] }] });
 
 export default PWA_CONFIG;

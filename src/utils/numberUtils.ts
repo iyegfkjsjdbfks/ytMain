@@ -42,8 +42,7 @@ export const formatCount = (num: any, digits: number = 0): string => {
     { value: 1e3, symbol: 'K' },
     { value: 1e6, symbol: 'M' },
     { value: 1e9, symbol: 'B' },
-    { value: 1e12, symbol: 'T' },
-  ];
+    { value: 1e12, symbol: 'T' }];
 
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
   const item = lookup
@@ -70,7 +69,7 @@ export const formatNumber = formatCount;
  */
 export const formatDuration = (seconds: any): string => {
   if (isNaN(seconds) || seconds < 0) {
-    return '0:00';
+    return '0: 00'
   }
 
   const hours = Math.floor(seconds / 3600);
@@ -101,7 +100,7 @@ export const formatWithCommas = (num: any): string => {
  * @param decimals Number of decimal places
  * @returns Formatted percentage string
  */
-export const formatPercentage = (
+export const formatPercentage = (,
   value: string | number,
   decimals: number = 1
 ): string => {

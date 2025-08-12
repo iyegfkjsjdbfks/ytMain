@@ -3,11 +3,11 @@ import React, { FC } from 'react';
 import { FunnelIcon, XMarkIcon, VideoCameraIcon, UserIcon, PlayIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
 export interface SearchFilters {
-  type: 'all' | 'video' | 'channel' | 'playlist' | 'live';
+  type: 'all' | 'video' | 'channel' | 'playlist' | 'live';,
   uploadDate: 'any' | 'hour' | 'today' | 'week' | 'month' | 'year';
-  duration: 'any' | 'short' | 'medium' | 'long';
+  duration: 'any' | 'short' | 'medium' | 'long';,
   features: string;
-  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';
+  sortBy: 'relevance' | 'upload_date' | 'view_count' | 'rating';,
   quality: 'any' | 'hd' | '4k' | 'hdr';
   captions: 'any' | 'with_captions' | 'without_captions';
   location?: string;
@@ -15,8 +15,8 @@ export interface SearchFilters {
 }
 
 interface AdvancedSearchFiltersProps {
-  filters: SearchFilters;
-  onFiltersChange: (filters: SearchFilters) => void;
+  filters: SearchFilters;,
+  onFiltersChange: (filters: SearchFilters) => void;,
   isOpen: boolean;
   onToggle: () => void;
   className?: string;
@@ -28,9 +28,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   isOpen,
   onToggle,
   className = '' }) => {
-  const updateFilter = <K extends keyof SearchFilters>(
-    key: K,
-    value: SearchFilters[K]
+  const updateFilter = <K extends keyof SearchFilters>(,
+  key: K,
+          value: SearchFilters[K]
   ) => {
     onFiltersChange({
       ...filters,
@@ -48,11 +48,11 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   const resetFilters = () => {
     onFiltersChange({
       type: 'all',
-      uploadDate: 'any',
+          uploadDate: 'any',
       duration: 'any',
-      features: [],
+          features: [],
       sortBy: 'relevance',
-      quality: 'any',
+          quality: 'any',
       captions: 'any' });
   };
 
@@ -143,12 +143,16 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'all', label: 'All', icon: DocumentTextIcon },
-                  { value: 'video', label: 'Video', icon: VideoCameraIcon },
-                  { value: 'channel', label: 'Channel', icon: UserIcon },
-                  { value: 'playlist', label: 'Playlist', icon: PlayIcon },
-                  { value: 'live', label: 'Live', icon: PlayIcon },
-                ].map(({ value, label, icon: Icon }) => (
+                  { value: 'all',
+          label: 'All', icon: DocumentTextIcon },
+                  { value: 'video',
+          label: 'Video', icon: VideoCameraIcon },
+                  { value: 'channel',
+          label: 'Channel', icon: UserIcon },
+                  { value: 'playlist',
+          label: 'Playlist', icon: PlayIcon },
+                  { value: 'live',
+          label: 'Live', icon: PlayIcon }].map(({ value, label, icon: Icon }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -179,13 +183,18 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'any', label: 'Any time' },
-                  { value: 'hour', label: 'Last hour' },
-                  { value: 'today', label: 'Today' },
-                  { value: 'week', label: 'This week' },
-                  { value: 'month', label: 'This month' },
-                  { value: 'year', label: 'This year' },
-                ].map(({ value, label }) => (
+                  { value: 'any',
+          label: 'Any time' },
+                  { value: 'hour',
+          label: 'Last hour' },
+                  { value: 'today',
+          label: 'Today' },
+                  { value: 'week',
+          label: 'This week' },
+                  { value: 'month',
+          label: 'This month' },
+                  { value: 'year',
+          label: 'This year' }].map(({ value, label }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -215,11 +224,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'any', label: 'Any duration' },
-                  { value: 'short', label: 'Under 4 minutes' },
-                  { value: 'medium', label: '4-20 minutes' },
-                  { value: 'long', label: 'Over 20 minutes' },
-                ].map(({ value, label }) => (
+                  { value: 'any',
+          label: 'Any duration' },
+                  { value: 'short',
+          label: 'Under 4 minutes' },
+                  { value: 'medium',
+          label: '4-20 minutes' },
+                  { value: 'long',
+          label: 'Over 20 minutes' }].map(({ value, label }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -249,18 +261,28 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'live', label: 'Live' },
-                  { value: '4k', label: '4K' },
-                  { value: 'hd', label: 'HD' },
-                  { value: 'subtitles', label: 'Subtitles/CC' },
-                  { value: 'creative_commons', label: 'Creative Commons' },
-                  { value: '360', label: '360°' },
-                  { value: 'vr180', label: 'VR180' },
-                  { value: '3d', label: '3D' },
-                  { value: 'hdr', label: 'HDR' },
-                  { value: 'location', label: 'Location' },
-                  { value: 'purchased', label: 'Purchased' },
-                ].map(({ value, label }) => (
+                  { value: 'live',
+          label: 'Live' },
+                  { value: '4k',
+          label: '4K' },
+                  { value: 'hd',
+          label: 'HD' },
+                  { value: 'subtitles',
+          label: 'Subtitles/CC' },
+                  { value: 'creative_commons',
+          label: 'Creative Commons' },
+                  { value: '360',
+          label: '360°' },
+                  { value: 'vr180',
+          label: 'VR180' },
+                  { value: '3d',
+          label: '3D' },
+                  { value: 'hdr',
+          label: 'HDR' },
+                  { value: 'location',
+          label: 'Location' },
+                  { value: 'purchased',
+          label: 'Purchased' }].map(({ value, label }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -286,11 +308,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'relevance', label: 'Relevance' },
-                  { value: 'upload_date', label: 'Upload date' },
-                  { value: 'view_count', label: 'View count' },
-                  { value: 'rating', label: 'Rating' },
-                ].map(({ value, label }) => (
+                  { value: 'relevance',
+          label: 'Relevance' },
+                  { value: 'upload_date',
+          label: 'Upload date' },
+                  { value: 'view_count',
+          label: 'View count' },
+                  { value: 'rating',
+          label: 'Rating' }].map(({ value, label }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'
@@ -320,11 +345,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
               </h4>
               <div className='space-y-2'>
                 {[
-                  { value: 'any', label: 'Any quality' },
-                  { value: 'hd', label: 'HD' },
-                  { value: '4k', label: '4K' },
-                  { value: 'hdr', label: 'HDR' },
-                ].map(({ value, label }) => (
+                  { value: 'any',
+          label: 'Any quality' },
+                  { value: 'hd',
+          label: 'HD' },
+                  { value: '4k',
+          label: '4K' },
+                  { value: 'hdr',
+          label: 'HDR' }].map(({ value, label }) => (
                   <label
                     key={value}
                     className='flex items-center gap-2 cursor-pointer'

@@ -3,7 +3,7 @@ import { memo, useMemo, forwardRef, lazy, createElement, useEffect, type Compone
 /**
  * Higher-order component that adds React.memo with custom comparison
  */
-export function withMemo<P extends object>(
+export function withMemo<P extends object>(,
   Component: ComponentType<P>
   areEqual?: (prevProps: P, nextProps: P) => boolean,
 ): ComponentType<P> {
@@ -13,7 +13,7 @@ export function withMemo<P extends object>(
 /**
  * Higher-order component for lazy loading components
  */
-export function withLazyLoading<P extends object>(
+export function withLazyLoading<P extends object>(,
   importFunc: () => Promise<{ default: ComponentType<P> }>
   _fallback?: ComponentType<any>
 ): LazyExoticComponent<ComponentType<P>> {
@@ -40,7 +40,7 @@ export function useStableArray<T>(arr: T): T[] {
 export const memoComparisons = {
   /**
    * Shallow comparison for props
-   */
+   */,
   shallow: <P extends object>(prevProps: P, nextProps: P): boolean => {
     const prevKeys = Object.keys(prevProps);
     const nextKeys = Object.keys(nextProps);
@@ -60,14 +60,14 @@ export const memoComparisons = {
 
   /**
    * Deep comparison for props (use sparingly)
-   */
+   */,
   deep: <P extends object>(prevProps: P, nextProps: P): boolean => {
     return JSON.stringify(prevProps) === JSON.stringify(nextProps);
   },
 
   /**
    * Comparison that ignores specific props
-   */
+   */,
   ignoring: <P extends object>(ignoredProps: Array<keyof P>) =>
     (prevProps: P, nextProps: P): boolean => {
       const filteredPrev = { ...prevProps };
@@ -87,7 +87,7 @@ export const memoComparisons = {
 export const listOptimizations = {
   /**
    * Generate stable keys for list items
-   */
+   */,
   generateKey: (item: any, index: number, prefix = 'item: any'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
@@ -100,7 +100,7 @@ return `${prefix}-${item.key}`;
 
   /**
    * Chunk large arrays for better performance
-   */
+   */,
   chunkArray: <T>(array: T, chunkSize: any): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -115,7 +115,7 @@ return `${prefix}-${item.key}`;
 export const componentPerformance = {
   /**
    * HOC to measure component render time
-   */
+   */,
   withRenderTime: <P extends object>(Component: ComponentType<P> _name?: string) => {
     return forwardRef<any, P>((props, ref) => {
       useEffect(() => {
@@ -135,7 +135,7 @@ export const componentPerformance = {
 
   /**
    * Hook to measure effect execution time
-   */
+   */,
   useMeasuredEffect: (effect: EffectCallback, deps: DependencyList, _effectName = 'Effect') => {
     useEffect(() => {
       // Performance monitoring disabled
@@ -154,7 +154,7 @@ export const componentPerformance = {
 export const bundleOptimizations = {
   /**
    * Dynamic import with error handling
-   */
+   */,
   dynamicImport: async <T>(importFunc: () => Promise<T>): Promise<T | null> => {
     try {
       return await importFunc();
@@ -166,7 +166,7 @@ export const bundleOptimizations = {
 
   /**
    * Preload component for better UX
-   */
+   */,
   preloadComponent: (importFunc: () => Promise<any>) => {
     // Start loading the component but don't wait for it
     importFunc().catch(error => {

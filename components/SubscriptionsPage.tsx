@@ -8,25 +8,25 @@ const BellIconSolid = BellSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface SubscriptionData {
-  id: string;
+  id: string;,
   channelId: string;
-  channelName: string;
+  channelName: string;,
   channelAvatar: string;
   channelArt?: string;
-  channelVerified: boolean;
+  channelVerified: boolean;,
   subscriberCount: number;
-  videoCount: number;
+  videoCount: number;,
   subscribedAt: string;
   notificationsEnabled: boolean;
   lastVideoUpload?: string;
-  category: string;
+  category: string;,
   description: string;
   isLive?: boolean;
-  recentVideos: Array<{
+  recentVideos: Array<{,
     id: string;
-    title: string;
+    title: string;,
     thumbnail: string;
-    views: number;
+    views: number;,
     uploadedAt: string;
     duration: string;
   }>;
@@ -69,9 +69,14 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           description: 'Your daily dose of technology news and reviews.',
           isLive: false,
           recentVideos: [
-            { id: 'v1', title: 'Latest Gadgets Review', thumbnail: 'https://via.placeholder.com/300x180?text=Gadgets', views: 15000, uploadedAt: '2024-06-20T14:30:00Z', duration: '12:34' },
-            { id: 'v2', title: 'AI Explained', thumbnail: 'https://via.placeholder.com/300x180?text=AI', views: 25000, uploadedAt: '2024-06-18T10:00:00Z', duration: '08:10' },
-          ] },
+            { id: 'v1',
+          title: 'Latest Gadgets Review', thumbnail: 'https://via.placeholder.com/300x180?text=Gadgets',
+          views: 15000, uploadedAt: '2024-06-20T14:30:00Z',
+          duration: '12:34' },
+            { id: 'v2',
+          title: 'AI Explained', thumbnail: 'https://via.placeholder.com/300x180?text=AI',
+          views: 25000, uploadedAt: '2024-06-18T10:00:00Z',
+          duration: '08:10' }] },
         {
           id: '2',
           channelId: 'channel2',
@@ -87,9 +92,14 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           description: 'Exploring delicious recipes from around the world.',
           isLive: true,
           recentVideos: [
-            { id: 'v3', title: 'Pasta Perfection', thumbnail: 'https://via.placeholder.com/300x180?text=Pasta', views: 10000, uploadedAt: '2024-06-22T09:00:00Z', duration: '05:20' },
-            { id: 'v4', title: 'Baking Basics', thumbnail: 'https://via.placeholder.com/300x180?text=Baking', views: 8000, uploadedAt: '2024-06-15T16:00:00Z', duration: '10:00' },
-          ] },
+            { id: 'v3',
+          title: 'Pasta Perfection', thumbnail: 'https://via.placeholder.com/300x180?text=Pasta',
+          views: 10000, uploadedAt: '2024-06-22T09:00:00Z',
+          duration: '05:20' },
+            { id: 'v4',
+          title: 'Baking Basics', thumbnail: 'https://via.placeholder.com/300x180?text=Baking',
+          views: 8000, uploadedAt: '2024-06-15T16:00:00Z',
+          duration: '10:00' }] },
         {
           id: '3',
           channelId: 'channel3',
@@ -105,9 +115,14 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           description: 'Journeying through the most beautiful places on Earth.',
           isLive: false,
           recentVideos: [
-            { id: 'v5', title: 'Paris in 4K', thumbnail: 'https://via.placeholder.com/300x180?text=Paris', views: 50000, uploadedAt: '2024-06-19T11:00:00Z', duration: '20:00' },
-            { id: 'v6', title: 'Tokyo Food Tour', thumbnail: 'https://via.placeholder.com/300x180?text=Tokyo', views: 30000, uploadedAt: '2024-06-10T13:00:00Z', duration: '15:00' },
-          ] },
+            { id: 'v5',
+          title: 'Paris in 4K', thumbnail: 'https://via.placeholder.com/300x180?text=Paris',
+          views: 50000, uploadedAt: '2024-06-19T11:00:00Z',
+          duration: '20:00' },
+            { id: 'v6',
+          title: 'Tokyo Food Tour', thumbnail: 'https://via.placeholder.com/300x180?text=Tokyo',
+          views: 30000, uploadedAt: '2024-06-10T13:00:00Z',
+          duration: '15:00' }] },
         {
           id: '4',
           channelId: 'channel4',
@@ -123,9 +138,14 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           description: 'Daily gaming content, streams, and reviews.',
           isLive: true,
           recentVideos: [
-            { id: 'v7', title: 'New Game Release', thumbnail: 'https://via.placeholder.com/300x180?text=Game', views: 40000, uploadedAt: '2024-06-21T17:00:00Z', duration: '30:00' },
-            { id: 'v8', title: 'Live Stream Highlights', thumbnail: 'https://via.placeholder.com/300x180?text=Stream', views: 20000, uploadedAt: '2024-06-17T20:00:00Z', duration: '45:00' },
-          ] },
+            { id: 'v7',
+          title: 'New Game Release', thumbnail: 'https://via.placeholder.com/300x180?text=Game',
+          views: 40000, uploadedAt: '2024-06-21T17:00:00Z',
+          duration: '30:00' },
+            { id: 'v8',
+          title: 'Live Stream Highlights', thumbnail: 'https://via.placeholder.com/300x180?text=Stream',
+          views: 20000, uploadedAt: '2024-06-17T20:00:00Z',
+          duration: '45:00' }] },
         {
           id: '5',
           channelId: 'channel5',
@@ -141,10 +161,14 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
           description: 'Making complex science concepts easy to understand.',
           isLive: false,
           recentVideos: [
-            { id: 'v9', title: 'Quantum Physics Basics', thumbnail: 'https://via.placeholder.com/300x180?text=Quantum', views: 60000, uploadedAt: '2024-06-15T10:00:00Z', duration: '18:00' },
-            { id: 'v10', title: 'The Universe Explained', thumbnail: 'https://via.placeholder.com/300x180?text=Universe', views: 70000, uploadedAt: '2024-06-08T14:00:00Z', duration: '25:00' },
-          ] },
-      ];
+            { id: 'v9',
+          title: 'Quantum Physics Basics', thumbnail: 'https://via.placeholder.com/300x180?text=Quantum',
+          views: 60000, uploadedAt: '2024-06-15T10:00:00Z',
+          duration: '18:00' },
+            { id: 'v10',
+          title: 'The Universe Explained', thumbnail: 'https://via.placeholder.com/300x180?text=Universe',
+          views: 70000, uploadedAt: '2024-06-08T14:00:00Z',
+          duration: '25:00' }] }];
       setSubscriptions(mockSubscriptions);
       localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(mockSubscriptions));
     }
@@ -155,8 +179,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
 
     if (searchQuery) {
       filtered = filtered.filter(sub =>
-        sub.channelName.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
+        sub.channelName.toLowerCase().includes(searchQuery.toLowerCase()));
     }
 
     if (filterBy === 'notifications_on') {
@@ -182,8 +205,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
       case 'subscribers':
         filtered.sort((a, b) => b.subscriberCount - a.subscriberCount);
         break;
-      default:
-        break;
+      default: break;
     }
     return filtered;
   };
@@ -192,8 +214,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     setSubscriptions(prev => prev.map(sub =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
-        : sub,
-    ));
+        : sub));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
     const updatedStored = { ...stored };

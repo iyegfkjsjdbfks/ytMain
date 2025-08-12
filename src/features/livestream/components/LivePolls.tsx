@@ -5,7 +5,7 @@ import type { LivePoll } from '@/types/livestream';
 import { PlusIcon, ClockIcon, CheckCircleIcon, ChartBarIcon, TrashIcon, StopIcon } from '@heroicons/react/24/outline';
 
 interface LivePollsProps {
-  streamId: string;
+  streamId: string;,
   isOwner: boolean;
   className?: string;
 }
@@ -19,7 +19,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newPoll, setNewPoll] = useState({
     question: '',
-    options: ['', ''],
+          options: ['', ''],
     duration: 60, // seconds
   });
 
@@ -40,14 +40,16 @@ const LivePolls: React.FC<LivePollsProps> = ({
         newPoll.options.filter(opt => opt.trim())
       );
 
-      setNewPoll({ question: '', options: ['', ''], duration: 60 });
+      setNewPoll({ question: '',
+          options: ['', ''], duration: 60 });
       setShowCreateForm(false);
     } catch (error) {
       logger.error('Failed to create poll:', error);
     }
   };
 
-  const handleVote = async (pollId: any, optionId: any) => {
+  const handleVote = async (pollId: any,
+          optionId: any) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -78,7 +80,8 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const updateOption = (index: number, value: string | number) => {
+  const updateOption = (index: number,
+          value: string | number) => {
     setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt, i) => (i === index ? value : opt)) }));

@@ -139,8 +139,8 @@ export const streamAPI = {
     mockStreams[streamIndex] = {
       ...currentStream,
       ...updates,
-      // Ensure required fields aren't overwritten with undefined
-      id: currentStream.id,
+      // Ensure required fields aren't overwritten with undefined,
+  id: currentStream.id,
       title: updates.title || currentStream.title,
       description: updates.description || currentStream.description,
       creatorId: updates.creatorId || currentStream.creatorId,
@@ -520,8 +520,7 @@ export const multiPlatformAPI = {
         id: 'custom_rtmp',
         name: 'Custom RTMP',
         icon: '🔗',
-        isConnected: false },
-    ];
+        isConnected: false }];
   },
 
   /**
@@ -549,9 +548,9 @@ export const schedulingAPI = {
   /**
    * Schedule a stream
    */
-  async scheduleStream(
-    streamData: Partial<LiveStream>
-    scheduledTime: Date
+  async scheduleStream(,
+  streamData: Partial<LiveStream>,
+  scheduledTime: Date
   ): Promise<LiveStream> {
     const stream = await streamAPI.createStream({
       ...streamData,

@@ -8,10 +8,10 @@ import type { Video as VideoType } from '../src/types/core';
 // For clarity, let's stick to VideoType where it's used for the list items.
 
 interface WatchLaterContextType {
-  watchLaterList: VideoType;
-  addToWatchLater: (video: VideoType) => void;
-  removeFromWatchLater: (videoId: any) => void;
-  isWatchLater: (videoId: any) => boolean;
+  watchLaterList: VideoType;,
+  addToWatchLater: (video: VideoType) => void;,
+  removeFromWatchLater: (videoId: any) => void;,
+  isWatchLater: (videoId: any) => boolean
 }
 
 const WatchLaterContext = createContext<WatchLaterContextType | undefined>(undefined);

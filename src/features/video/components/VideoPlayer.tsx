@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, lazy, FC, MouseEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -21,7 +21,8 @@ export interface VideoPlayerProps {
   startTime?: number;
   className?: string;
   onReady?: () => void;
-  onTimeUpdate?: (currentTime: any, duration: any) => void;
+  onTimeUpdate?: (currentTime: any,
+          duration: any) => void;
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
@@ -29,16 +30,16 @@ export interface VideoPlayerProps {
 }
 
 interface VideoState {
-  isPlaying: boolean;
+  isPlaying: boolean;,
   currentTime: number;
-  duration: number;
+  duration: number;,
   volume: number;
-  isMuted: boolean;
+  isMuted: boolean;,
   isFullscreen: boolean;
-  showControls: boolean;
+  showControls: boolean;,
   buffered: number;
-  playbackRate: number;
-  quality: string;
+  playbackRate: number;,
+  quality: string
 }
 
 /**
@@ -66,15 +67,15 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const [state, setState] = useState<VideoState>({
     isPlaying: false,
-    currentTime: 0,
+          currentTime: 0,
     duration: 0,
-    volume: 1,
+          volume: 1,
     isMuted: false,
-    isFullscreen: false,
+          isFullscreen: false,
     showControls: true,
-    buffered: 0,
+          buffered: 0,
     playbackRate: 1,
-    quality: 'auto' });
+          quality: 'auto' });
 
   const [showSettings, setShowSettings] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
@@ -132,7 +133,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setState(prev => ({
         ...prev,
         volume: video.volume,
-        isMuted: video.muted }));
+          isMuted: video.muted }));
     };
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
@@ -151,8 +152,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('pause', handlePause as EventListener);
       video.removeEventListener('ended', handleEnded as EventListener);
       video.removeEventListener('volumechange', handleVolumeChange as EventListener);
-    };
-  }, [
+    }}, [
     onTimeUpdate,
     onPlay,
     onPause,
@@ -161,8 +161,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     startTime,
     useYouTube,
     src,
-    videoId,
-  ]);
+    videoId]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -174,8 +173,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     document.addEventListener('fullscreenchange', handleFullscreenChange as EventListener);
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange as EventListener);
-    };
-  }, []);
+    }}, []);
 
   // If using YouTube, render iframe
   if (useYouTube || (!src && videoId)) {
@@ -378,7 +376,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
             {/* Progress Handle */}
             <div
               className='absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200'
-              style={{ left: `${progressPercentage}%`, marginLeft: '-6px' }}
+              style={{ left: `${progressPercentage}%`,
+          marginLeft: '-6px' }}
             />
           </div>
         </div>

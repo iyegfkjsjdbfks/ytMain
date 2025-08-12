@@ -12,29 +12,29 @@ import { formatCount } from '../utils/numberUtils';
 import { SummarizeIcon } from './icons/SummarizeIcon';
 
 interface Channel {
-  id: string;
+  id: string;,
   name: string;
-  avatarUrl: string;
+  avatarUrl: string;,
   subscriberCount: string; isVerified: boolean
 }
 
 interface Video {
-  id: string;
+  id: string;,
   title: string;
-  description: string;
+  description: string;,
   views: string; uploadedAt: string
 }
 
 interface RefactoredVideoDescriptionProps {
-  video: Video;
+  video: Video;,
   channel: Channel | null;
-  isSubscribed: boolean;
+  isSubscribed: boolean;,
   showFullDescription: boolean;
   summary?: string;
   summaryError?: string;
-  isSummarizing: boolean;
+  isSummarizing: boolean;,
   canSummarize: boolean;
-  onSubscribe: () => void;
+  onSubscribe: () => void;,
   onToggleDescription: () => void; onSummarizeDescription: () => void
 }
 
@@ -51,7 +51,7 @@ interface RefactoredVideoDescriptionProps {
 
 // Reusable Channel Info Component
 interface ChannelInfoProps {
-  channel: Channel | null;
+  channel: Channel | null;,
   isSubscribed: boolean; onSubscribe: () => void
 }
 
@@ -132,7 +132,7 @@ const NotificationButton: React.FC = () => {
 
 // Reusable Description Content Component
 interface DescriptionContentProps {
-  video: Video;
+  video: Video;,
   showFullDescription: boolean; onToggleDescription: () => void
 }
 
@@ -186,7 +186,7 @@ const DescriptionContent: React.FC<DescriptionContentProps> = ({
 
 // Reusable AI Summary Section Component
 interface AISummarySectionProps {
-  canSummarize: boolean;
+  canSummarize: boolean;,
   isSummarizing: boolean;
   summary?: string;
   summaryError?: string; onSummarizeDescription: () => void

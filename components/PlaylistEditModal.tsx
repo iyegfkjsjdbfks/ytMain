@@ -2,11 +2,12 @@
 import { useRef, useEffect, useState, FC, MouseEvent } from 'react';
 
 interface PlaylistEditModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
-  initialTitle: string;
+  initialTitle: string;,
   initialDescription: string;
-  onSaveChanges: (title: any, description: any) => Promise<void>;
+  onSaveChanges: (title: any,
+          description: any) => Promise<void>
 }
 
 const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
@@ -35,8 +36,7 @@ const PlaylistEditModal: React.FC<PlaylistEditModalProps> = ({
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
-    };
-  }, [isOpen, onClose]);
+    }}, [isOpen, onClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

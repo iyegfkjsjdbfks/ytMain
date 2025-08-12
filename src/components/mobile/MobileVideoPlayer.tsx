@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef, memo, ChangeEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -39,7 +39,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
     // Intersection observer for autoplay on mobile
     const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.5,
-      rootMargin: '0px' });
+          rootMargin: '0px' });
 
     // Combined ref callback using a mutable ref
     const setRefs = useCallback(
@@ -140,7 +140,8 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
       if (videoRef.current) {
         setDuration(videoRef.current.duration);
       }
-    }, []);
+    
+        }, []);
 
     const handleTimeUpdate = useCallback(() => {
       if (videoRef.current) {
@@ -155,7 +156,8 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
             : 0;
         setBuffered(bufferedEnd);
       }
-    }, []);
+    
+        }, []);
 
     const handleEnded = useCallback(() => {
       setIsPlaying(false);
@@ -273,7 +275,7 @@ const MobileVideoPlayer = memo<MobileVideoPlayerProps>(
                 className='absolute h-1 bg-white/50 rounded-lg pointer-events-none'
                 style={{
                   width: `${(buffered / duration) * 100}%`,
-                  marginTop: '-4px' }}
+          marginTop: '-4px' }}
               />
             </div>
 

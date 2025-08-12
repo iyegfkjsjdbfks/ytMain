@@ -17,16 +17,21 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   const [showSendForm, setShowSendForm] = useState(false);
   const [newSuperChat, setNewSuperChat] = useState({
     amount: 5,
-    message: '' });
+          message: '' });
 
   const superChatTiers = [
-    { amount: 2, color: 'bg-blue-500', duration: 30 },
-    { amount: 5, color: 'bg-green-500', duration: 60 },
-    { amount: 10, color: 'bg-yellow-500', duration: 120 },
-    { amount: 20, color: 'bg-orange-500', duration: 300 },
-    { amount: 50, color: 'bg-red-500', duration: 600 },
-    { amount: 100, color: 'bg-purple-500', duration: 1200 },
-  ];
+    { amount: 2,
+          color: 'bg-blue-500', duration: 30 },
+    { amount: 5,
+          color: 'bg-green-500', duration: 60 },
+    { amount: 10,
+          color: 'bg-yellow-500', duration: 120 },
+    { amount: 20,
+          color: 'bg-orange-500', duration: 300 },
+    { amount: 50,
+          color: 'bg-red-500', duration: 600 },
+    { amount: 100,
+          color: 'bg-purple-500', duration: 1200 }];
 
   useEffect(() => {
     // Load existing super chats from API
@@ -61,7 +66,8 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
         'Current User'
       );
 
-      setNewSuperChat({ amount: 5, message: '' });
+      setNewSuperChat({ amount: 5,
+          message: '' });
       setShowSendForm(false);
     } catch (error) {
       logger.error('Failed to send Super Chat:', error);
@@ -87,13 +93,13 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
   const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD' }).format(amount);
+          currency: 'USD' }).format(amount);
   };
 
   const formatTimestamp = (timestamp: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       hour: '2-digit',
-      minute: '2-digit' }).format(timestamp);
+          minute: '2-digit' }).format(timestamp);
   };
 
   const topSuperChats = superChats

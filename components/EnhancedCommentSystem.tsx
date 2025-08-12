@@ -8,45 +8,48 @@ const HeartIconSolid = HeartSolidIcon;
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface Comment {
-  id: string;
+  id: string;,
   content: string;
-  authorId: string;
+  authorId: string;,
   authorName: string;
-  authorAvatar: string;
+  authorAvatar: string;,
   authorVerified: boolean;
-  isChannelOwner: boolean;
+  isChannelOwner: boolean;,
   isCreator: boolean;
-  timestamp: string;
+  timestamp: string;,
   likes: number;
-  dislikes: number;
+  dislikes: number;,
   isLiked: boolean;
-  isDisliked: boolean;
+  isDisliked: boolean;,
   isPinned: boolean;
-  isEdited: boolean;
+  isEdited: boolean;,
   replies: Comment;
   parentId?: string;
-  isReported: boolean;
+  isReported: boolean;,
   moderationStatus: 'approved' | 'pending' | 'flagged' | 'removed';
-  mentions: string;
-  hashtags: string;
+  mentions: string;,
+  hashtags: string
 }
 
 interface EnhancedCommentSystemProps {
-  videoId: string;
+  videoId: string;,
   comments: Comment;
   currentUserId?: string;
   isChannelOwner?: boolean;
   isModerator?: boolean;
-  commentsEnabled: boolean;
+  commentsEnabled: boolean;,
   sortBy: 'newest' | 'oldest' | 'popular';
   onAddComment: (content: any, parentId?: string) => void;
-  onEditComment: (commentId: any, content: any) => void;
-  onDeleteComment: (commentId: any) => void;
-  onLikeComment: (commentId: any) => void;
-  onDislikeComment: (commentId: any) => void;
-  onPinComment: (commentId: any) => void;
-  onReportComment: (commentId: any, reason: any) => void;
-  onModerateComment: (commentId: any, action: 'approve' | 'flag' | 'remove') => void;
+  onEditComment: (commentId: any,
+          content: any) => void;,
+  onDeleteComment: (commentId: any) => void;,
+  onLikeComment: (commentId: any) => void;,
+  onDislikeComment: (commentId: any) => void;,
+  onPinComment: (commentId: any) => void;,
+  onReportComment: (commentId: any,
+          reason: any) => void;,
+  onModerateComment: (commentId: any,
+          action: 'approve' | 'flag' | 'remove') => void;,
   onSortChange: (sort: 'newest' | 'oldest' | 'popular') => void;
   className?: string;
 }
@@ -85,8 +88,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     'Inappropriate content',
     'Copyright infringement',
     'Violence or dangerous content',
-    'Other',
-  ];
+    'Other'];
 
   useEffect(() => {
     if (replyingTo && replyTextareaRef.current) {
@@ -101,7 +103,8 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleSubmitReply = (parentId: any, content: any) => {
+  const handleSubmitReply = (parentId: any,
+          content: any) => {
     if (content.trim()) {
       onAddComment(content.trim(), parentId);
       setReplyingTo(null);
@@ -436,7 +439,8 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     const pinnedComments = topLevelComments.filter((comment: any) => comment.isPinned);
     const regularComments = topLevelComments.filter((comment: any) => !comment.isPinned);
 
-    const sorted = regularComments.sort((a: any, b: any) => {
+    const sorted = regularComments.sort((a: any,
+          b: any) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
@@ -444,10 +448,10 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
           return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
         case 'popular':
           return b.likes - a.likes;
-        default:
-          return 0;
+        default: return 0
       }
-    });
+    
+        });
 
     return [...pinnedComments, ...sorted];
   }, [comments, sortBy]);

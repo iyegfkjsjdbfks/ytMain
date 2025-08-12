@@ -22,7 +22,7 @@ export interface VideoMetrics {
   watchTime: number;
   averageViewDuration: number;
   subscribersGained: number;
-  subscribersLost: number;
+  subscribersLost: number
 }
 
 export interface VideoEngagement {
@@ -36,11 +36,11 @@ export interface VideoEngagement {
     cardsShown: number;
     cardClicks: number;
     cardTeaserClicks: number;
-    cardTeaserImpressions: number;
+    cardTeaserImpressions: number
   };
   endScreen: {
     endScreenShown: number;
-    endScreenClicks: number;
+    endScreenClicks: number
   };
 }
 
@@ -70,7 +70,7 @@ export interface VideoStats {
   cardTeaserImpressions: number;
   endScreenElementImpressions: number;
   endScreenElementClicks: number;
-  endScreenElementClickThroughRate: number;
+  endScreenElementClickThroughRate: number
 }
 
 export interface VideoPlaybackState {
@@ -86,7 +86,7 @@ export interface VideoPlaybackState {
   isPictureInPicture: boolean;
   buffered: TimeRanges | null;
   duration: number;
-  error: MediaError | null;
+  error: MediaError | null
 }
 
 export type VideoCategory =

@@ -13,7 +13,7 @@ interface ConfigStatus {
   hasEngineId: boolean;
   apiKeyLength?: number;
   engineIdLength?: number;
-  recommendations: string[];
+  recommendations: string[]
 }
 
 export const checkYouTubeAPIConfig = (): ConfigStatus => {
@@ -23,13 +23,13 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
   // Check API key
   if (!status.hasApiKey) {
     recommendations.push('Add VITE_GOOGLE_SEARCH_API_KEY to your .env file');
-    recommendations.push('Get API key from: https://console.developers.google.com/');
+    recommendations.push('Get API key from: https://console.developers.google.com/')
   }
 
   // Check Engine ID
   if (!status.hasEngineId) {
     recommendations.push('Add VITE_GOOGLE_SEARCH_ENGINE_ID to your .env file');
-    recommendations.push('Create Custom Search Engine at: https://cse.google.com/');
+    recommendations.push('Create Custom Search Engine at: https://cse.google.com/')
   }
 
   // Additional recommendations
@@ -38,7 +38,7 @@ export const checkYouTubeAPIConfig = (): ConfigStatus => {
     recommendations.push('Recommendations will use live YouTube search results');
   } else {
     recommendations.push('📋 Setup Guide: See GOOGLE_SEARCH_SETUP.md for detailed instructions');
-    recommendations.push('🔄 Fallback: Using static sample videos until API is configured');
+    recommendations.push('🔄 Fallback: Using static sample videos until API is configured')
   }
 
   return {

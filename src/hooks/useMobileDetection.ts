@@ -7,7 +7,7 @@ interface MobileDetectionResult {
   isTouchDevice: boolean;
   screenSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   orientation: 'portrait' | 'landscape';
-  deviceType: 'mobile' | 'tablet' | 'desktop';
+  deviceType: 'mobile' | 'tablet' | 'desktop'
 }
 
 export const useMobileDetection = (): MobileDetectionResult => {

@@ -52,7 +52,7 @@ describe('UnifiedDataService', () => {
 
     it('should clear cache successfully', () => {
       expect(() => unifiedDataService.clearCache()).not.toThrow();
-      expect(() => unifiedDataService.clearCache('video:')).not.toThrow();
+      expect(() => unifiedDataService.clearCache('video: ')).not.toThrow()
     });
   });
 

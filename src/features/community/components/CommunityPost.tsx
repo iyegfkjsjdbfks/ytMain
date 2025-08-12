@@ -4,26 +4,26 @@ import { HandThumbUpIcon, HandThumbDownIcon, ChatBubbleLeftIcon, ShareIcon, Elli
 import { HandThumbUpIcon as HandThumbUpSolidIcon, HandThumbDownIcon as HandThumbDownSolidIcon } from '@heroicons/react/24/solid';
 
 export interface CommunityPostData {
-  id: string;
+  id: string;,
   channelId: string;
-  channelName: string;
+  channelName: string;,
   channelAvatar: string;
-  channelHandle: string;
+  channelHandle: string;,
   isVerified: boolean;
-  content: string;
+  content: string;,
   type: 'text' | 'image' | 'video' | 'poll' | 'quiz';
   media?: Array<{
-    type: 'image' | 'video';
+    type: 'image' | 'video';,
     url: string;
     thumbnail?: string;
     alt?: string;
   }>;
   poll?: {
-    question: string;
+    question: string;,
     options: Array<{
-      id: string;
+      id: string;,
       text: string;
-      votes: number;
+      votes: number;,
       percentage: number;
     }>;
     totalVotes: number;
@@ -31,11 +31,11 @@ export interface CommunityPostData {
     hasVoted: boolean;
     userVote?: string;
   };
-  likes: number;
+  likes: number;,
   dislikes: number;
-  comments: number;
+  comments: number;,
   shares: number;
-  isLiked: boolean;
+  isLiked: boolean;,
   isDisliked: boolean;
   createdAt: string;
   updatedAt?: string;
@@ -43,12 +43,13 @@ export interface CommunityPostData {
 }
 
 interface CommunityPostProps {
-  post: CommunityPostData;
-  onLike: (postId: any) => void;
-  onDislike: (postId: any) => void;
-  onComment: (postId: any) => void;
+  post: CommunityPostData;,
+  onLike: (postId: any) => void;,
+  onDislike: (postId: any) => void;,
+  onComment: (postId: any) => void;,
   onShare: (postId: any) => void;
-  onVote?: (postId: any, optionId: any) => void;
+  onVote?: (postId: any,
+          optionId: any) => void;
   className?: string;
 }
 

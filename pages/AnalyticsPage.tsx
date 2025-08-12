@@ -8,26 +8,26 @@ import { ArrowTrendingUpIcon } from '@heroicons/react/24/outline';
 import { ArrowTrendingDownIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
-  totalViews: number;
+  totalViews: number;,
   totalVideos: number;
-  totalWatchTime: number;
+  totalWatchTime: number;,
   totalLikes: number;
-  totalComments: number;
+  totalComments: number;,
   subscriberGrowth: number;
-  topPerformingVideo: Video | null;
+  topPerformingVideo: Video | null;,
   recentPerformance: {
-    views: number;
+    views: number;,
     watchTime: number;
-    subscribers: number; labels: string
+    subscribers: number; labels: string;
   };
-  videoPerformance: Array<{
+  videoPerformance: Array<{,
     video: Video;
-    views: number;
+    views: number;,
     likes: number;
-    comments: number;
+    comments: number;,
     watchTime: number;
-    ctr: number; // Click-through rate
-    retention: number; // Average view duration percentage
+    ctr: number; // Click-through rate,
+          retention: number; // Average view duration percentage
   }>;
 }
 
@@ -42,22 +42,23 @@ const AnalyticsPage: React.FC = () => {
       setLoading(true);
       try {
         // Generate mock analytics data without fetching videos
-        const mockAnalytics: AnalyticsData = {
+        const mockAnalytics: AnalyticsData = {,
           totalViews: Math.floor(Math.random() * 1000000) + 100000,
           totalVideos: Math.floor(Math.random() * 100) + 10,
-          totalWatchTime: Math.floor(Math.random() * 10000) + 5000, // Mock hours
-          totalLikes: Math.floor(Math.random() * 50000) + 10000,
+          totalWatchTime: Math.floor(Math.random() * 10000) + 5000, // Mock hours,
+  totalLikes: Math.floor(Math.random() * 50000) + 10000,
           totalComments: Math.floor(Math.random() * 5000) + 1000,
           subscriberGrowth: Math.floor(Math.random() * 1000) + 100,
-          topPerformingVideo: null, // No local videos available
-          recentPerformance: {
+          topPerformingVideo: null, // No local videos available,
+  recentPerformance: {,
             views: Array.from({ length: 30 }, () => Math.floor(Math.random() * 10000) + 1000),
             watchTime: Array.from({ length: 30 }, () => Math.floor(Math.random() * 500) + 100),
             subscribers: Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 10),
             labels: Array.from({ length: 30 }, (_, i) => {
               const date = new Date();
               date.setDate(date.getDate() - (29 - i));
-              return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+              return date.toLocaleDateString('en-US', { month: 'short',
+          day: 'numeric' });
             }) },
           videoPerformance: [], // No local videos available
         };
@@ -92,11 +93,11 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
     return `${hours}h`;
   };
 
-  const StatCard: React.FC<{
+  const StatCard: React.FC<{,
     title: string;
     value: string;
     change?: number;
-    icon: React.ElementType; iconColor: string
+    icon: React.ElementType; iconColor: string;
   }> = ({ title, value, change, icon: Icon, iconColor }) => (
     <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-center justify-between">
@@ -130,7 +131,8 @@ return `${Math.floor(hours / 24)}d ${hours % 24}h`;
 
     return (
       <div className="h-64 flex items-end space-x-1 p-4">
-        {data.map((value: string | number, index: number) => {
+        {data.map((value: string | number,
+          index: number) => {
           const height = ((value - minValue) / range) * 200 + 20;
           return (
             <div key={index} className="flex-1 flex flex-col items-center">

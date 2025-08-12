@@ -4,37 +4,37 @@
 
 // PWA Configuration
 export const PWA_CONFIG = {
-  // App metadata
+  // App metadata,
   name: 'YouTubeX',
   shortName: 'YouTubeX',
   description: 'Advanced YouTube client with enhanced features',
 
-  // Installation
+  // Installation,
   installPrompt: {
     showAfterVisits: 3,
     showAfterDays: 7,
     dismissedDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
   },
 
-  // Updates
+  // Updates,
   updates: {
-    checkInterval: 60 * 60 * 1000, // 1 hour
-    promptDelay: 5 * 1000, // 5 seconds
-    autoUpdate: false },
+    checkInterval: 60 * 60 * 1000, // 1 hour,
+  promptDelay: 5 * 1000, // 5 seconds,
+  autoUpdate: false },
 
-  // Notifications
+  // Notifications,
   notifications: {
     enabled: true,
     badge: '/icons/badge-72x72.png',
     icon: '/icons/icon-192x192.png' },
 
-  // Caching
+  // Caching,
   cache: {
-    maxVideoSize: 100 * 1024 * 1024, // 100MB
-    maxTotalSize: 500 * 1024 * 1024, // 500MB
-    videoQuality: 'medium' },
+    maxVideoSize: 100 * 1024 * 1024, // 100MB,
+  maxTotalSize: 500 * 1024 * 1024, // 500MB,
+  videoQuality: 'medium' },
 
-  // Analytics
+  // Analytics,
   analytics: {
     trackInstalls: true,
     trackUsage: true,
@@ -83,7 +83,7 @@ export class PWAUtils {
    * Check if running in standalone mode
    */
   static isStandalone(): boolean {
-    return window.matchMedia('(display-mode: standalone)').matches;
+    return window.matchMedia('(display-mode: standalone)').matches
   }
 
   /**
@@ -200,7 +200,7 @@ export class PWAUtils {
   static async getStorageUsage(): Promise<{
     used: number;
     available: number;
-    percentage: number;
+    percentage: number
   }> {
     try {
       if ('storage' in navigator && 'estimate' in navigator.storage) {
@@ -245,7 +245,7 @@ export class PWAUtils {
     effectiveType: string;
     downlink: number;
     rtt: number;
-    saveData: boolean;
+    saveData: boolean
   } {
     const connection =
       (navigator as any).connection ||
@@ -306,7 +306,7 @@ export interface PWACapabilities {
   backgroundSync: boolean;
   webShare: boolean;
   serviceWorker: boolean;
-  offlineSupport: boolean;
+  offlineSupport: boolean
 }
 
 export interface PWAMetrics {
@@ -317,6 +317,6 @@ export interface PWAMetrics {
   errors: Array<{
     timestamp: number;
     error: string;
-    context: string;
+    context: string
   }>;
 }

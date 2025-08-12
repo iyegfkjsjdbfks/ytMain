@@ -6,22 +6,22 @@ import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface UploadedFile {
-  file: File;
+  file: File;,
   preview: string;
-  progress: number;
-  status: 'uploading' | 'processing' | 'completed' | 'error';
+  progress: number;,
+  status: 'uploading' | 'processing' | 'completed' | 'error'
 }
 
 interface VideoMetadata {
-  title: string;
+  title: string;,
   description: string;
-  visibility: 'public' | 'unlisted' | 'private';
+  visibility: 'public' | 'unlisted' | 'private';,
   category: string;
-  tags: string;
+  tags: string;,
   thumbnail: string | null;
-  monetization: boolean;
+  monetization: boolean;,
   commentsEnabled: boolean;
-  ageRestriction: boolean;
+  ageRestriction: boolean
 }
 
 const UploadPage: React.FC = () => {
@@ -31,21 +31,20 @@ const UploadPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('details');
   const [metadata, setMetadata] = useState<VideoMetadata>({
     title: '',
-    description: '',
+          description: '',
     visibility: 'public',
-    category: 'Entertainment',
+          category: 'Entertainment',
     tags: [],
-    thumbnail: null,
+          thumbnail: null,
     monetization: false,
-    commentsEnabled: true,
+          commentsEnabled: true,
     ageRestriction: false });
   // const [tagInput, setTagInput] = useState(''); // Commented out as unused
 
   const categories = [
     'Entertainment', 'Education', 'Gaming', 'Music', 'News & Politics',
     'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
-    'Comedy', 'Film & Animation', 'Autos & Vehicles',
-  ];
+    'Comedy', 'Film & Animation', 'Autos & Vehicles'];
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -70,7 +69,7 @@ return;
       file,
       preview,
       progress: 0,
-      status: 'uploading' };
+          status: 'uploading' };
 
     setUploadedFile(newFile);
     setMetadata(prev => ({
@@ -96,13 +95,11 @@ return null;
           return {
             ...prev,
             progress: 100,
-            status: 'processing' };
-        }
+          status: 'processing' }}
 
         return {
           ...prev,
-          progress: newProgress };
-      });
+          progress: newProgress }});
     }, 200);
 
     // Simulate processing completion
@@ -124,28 +121,29 @@ return null;
       // Create a proper FileList-like object
       const fileList = {
         0: file,
-        length: 1,
+          length: 1,
         item: (index) => index === 0 ? file : null,
         *[Symbol.iterator] () {
           yield file;
-        } } as FileList;
+        } 
+        } as FileList;
 
       const fakeEvent = {
         target: { files: fileList },
-        currentTarget: { files: fileList },
-        preventDefault: () => {},
+          currentTarget: { files: fileList },
+          preventDefault: () => {},
         stopPropagation: () => {},
-        nativeEvent: new Event('change'),
+          nativeEvent: new Event('change'),
         bubbles: false,
-        cancelable: false,
+          cancelable: false,
         defaultPrevented: false,
-        eventPhase: 0,
+          eventPhase: 0,
         isTrusted: false,
-        timeStamp: Date.now(),
+          timeStamp: Date.now(),
         type: 'change',
-        persist: () => {},
+          persist: () => {},
         isDefaultPrevented: () => false,
-        isPropagationStopped: () => false } as React.ChangeEvent<HTMLInputElement>;
+          isPropagationStopped: () => false } as React.ChangeEvent<HTMLInputElement>;
       handleFileSelect(fakeEvent);
     }
   };
@@ -177,7 +175,7 @@ return null;
       case 'public': return <GlobeAltIcon className="w-4 h-4" />;
       case 'unlisted': return <EyeIcon className="w-4 h-4" />;
       case 'private': return <LockClosedIcon className="w-4 h-4" />;
-      default: return <GlobeAltIcon className="w-4 h-4" />;
+      default: return <GlobeAltIcon className="w-4 h-4" />
     }
   };
 
@@ -366,10 +364,12 @@ return null;
 
                       <div className="space-y-3">
                         {[
-                          { value: 'public', label: 'Public', description: 'Anyone can search for and view' },
-                          { value: 'unlisted', label: 'Unlisted', description: 'Anyone with the link can view' },
-                          { value: 'private', label: 'Private', description: 'Only you can view' },
-                        ].map(option => (
+                          { value: 'public',
+          label: 'Public', description: 'Anyone can search for and view' },
+                          { value: 'unlisted',
+          label: 'Unlisted', description: 'Anyone with the link can view' },
+                          { value: 'private',
+          label: 'Private', description: 'Only you can view' }].map(option => (
                           <label
                             key={option.value}
                             className="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800"

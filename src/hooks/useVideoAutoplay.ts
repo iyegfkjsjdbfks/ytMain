@@ -7,7 +7,7 @@ interface UseVideoAutoplayProps {
   actions: {
     play: () => Promise<void>;
     pause: () => void;
-    unmute: () => void;
+    unmute: () => void
   };
   setIsManuallyPaused: (paused: any) => void;
   threshold?: number; // Intersection threshold for autoplay
@@ -67,8 +67,7 @@ export const useVideoAutoplay = ({
     isManuallyPaused,
     setIsManuallyPaused,
     enableAutoplay,
-    unmuteOnAutoplay,
-  ]);
+    unmuteOnAutoplay]);
 };
 
 export default useVideoAutoplay;

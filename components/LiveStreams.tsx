@@ -32,13 +32,13 @@ const LiveStreams: React.FC<LiveStreamsProps> = ({ maxStreams = 4 }) => {
               return {
                 ...video,
                 id: `live-${video.id}`,
-                title: `🔴 LIVE: ${video.title}`,
-                views: `${Math.floor(Math.random() * 5000) + 500} watching now`,
+          title: `🔴 LIVE: ${video.title}`,
+          views: `${Math.floor(Math.random() * 5000) + 500} watching now`,
                 publishedAt: 'Live now',
-                duration: 'LIVE',
+          duration: 'LIVE',
                 thumbnail: video.thumbnailUrl, // Keep original thumbnail
-              };
-            }
+              
+        }}
             return video;
           })
           .slice(0, maxStreams);

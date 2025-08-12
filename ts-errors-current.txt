@@ -1,0 +1,1405 @@
+
+> youtubex-studio-clone@2.0.0 type-check
+> tsc --noEmit
+
+components/DevOpsDashboard.tsx(120,7): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(120,13): error TS1005: ':' expected.
+components/DevOpsDashboard.tsx(120,22): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(120,33): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(120,34): error TS1109: Expression expected.
+components/DevOpsDashboard.tsx(120,36): error TS1005: ':' expected.
+components/DevOpsDashboard.tsx(137,8): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(140,27): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(140,50): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(140,52): error TS1136: Property assignment expected.
+components/DevOpsDashboard.tsx(141,18): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(141,23): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(152,7): error TS1472: 'catch' or 'finally' expected.
+components/DevOpsDashboard.tsx(166,7): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(220,20): error TS1109: Expression expected.
+components/DevOpsDashboard.tsx(222,48): error TS1109: Expression expected.
+components/DevOpsDashboard.tsx(242,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(247,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(355,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(359,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(360,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(364,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(365,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(369,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(394,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(398,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(399,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(403,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(404,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(408,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(428,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(432,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(462,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(466,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(496,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(500,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(501,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(505,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(506,22): error TS1003: Identifier expected.
+components/DevOpsDashboard.tsx(510,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(565,22): error TS1131: Property or signature expected.
+components/DevOpsDashboard.tsx(565,25): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(565,28): error TS1005: ',' expected.
+components/DevOpsDashboard.tsx(572,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/DevOpsDashboard.tsx(574,17): error TS17002: Expected corresponding JSX closing tag for 'nav'.
+components/DevOpsDashboard.tsx(575,15): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/DevOpsDashboard.tsx(576,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+components/DevOpsDashboard.tsx(580,7): error TS1005: ')' expected.
+components/DevOpsDashboard.tsx(589,5): error TS1128: Declaration or statement expected.
+components/DevOpsDashboard.tsx(590,3): error TS1109: Expression expected.
+components/DevOpsDashboard.tsx(591,1): error TS1128: Declaration or statement expected.
+components/forms/UnifiedFormSystem.tsx(24,35): error TS1005: '>' expected.
+components/forms/UnifiedFormSystem.tsx(24,60): error TS1005: ':' expected.
+components/forms/UnifiedFormSystem.tsx(24,81): error TS1005: ';' expected.
+components/forms/UnifiedFormSystem.tsx(24,82): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(25,12): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(25,52): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(26,1): error TS1128: Declaration or statement expected.
+components/forms/UnifiedFormSystem.tsx(137,86): error TS1005: '>' expected.
+components/forms/UnifiedFormSystem.tsx(137,96): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(138,15): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(139,17): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(140,21): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(141,20): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(142,29): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(143,30): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(144,45): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(145,33): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(147,1): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(248,95): error TS1005: '>' expected.
+components/forms/UnifiedFormSystem.tsx(248,105): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(249,15): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(250,17): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(251,21): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(252,20): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(253,45): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(254,36): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(255,55): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(257,1): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(339,89): error TS1005: '>' expected.
+components/forms/UnifiedFormSystem.tsx(339,99): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(340,15): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(341,17): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(342,21): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(343,20): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(344,71): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(345,23): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(346,45): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(347,34): error TS1005: ',' expected.
+components/forms/UnifiedFormSystem.tsx(349,1): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(444,35): error TS1005: '>' expected.
+components/forms/UnifiedFormSystem.tsx(444,60): error TS1005: ':' expected.
+components/forms/UnifiedFormSystem.tsx(444,81): error TS1005: ';' expected.
+components/forms/UnifiedFormSystem.tsx(444,82): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(445,13): error TS1109: Expression expected.
+components/forms/UnifiedFormSystem.tsx(446,1): error TS1128: Declaration or statement expected.
+components/OptimizedSearchResults.tsx(334,18): error TS1129: Statement expected.
+components/OptimizedVideoCard.tsx(631,66): error TS1005: ',' expected.
+components/OptimizedVideoCard.tsx(633,14): error TS1005: ',' expected.
+components/OptimizedVideoCard.tsx(644,3): error TS1005: ',' expected.
+components/OptimizedVideoCard.tsx(645,1): error TS1128: Declaration or statement expected.
+components/OptimizedVideoCard.tsx(645,2): error TS1128: Declaration or statement expected.
+components/ui/FormComponents.tsx(23,80): error TS1005: '>' expected.
+components/ui/FormComponents.tsx(23,87): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(23,130): error TS1005: ';' expected.
+components/ui/FormComponents.tsx(24,11): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(25,8): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(26,12): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(27,13): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(28,11): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(32,89): error TS1005: '>' expected.
+components/ui/FormComponents.tsx(32,100): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(32,130): error TS1005: ';' expected.
+components/ui/FormComponents.tsx(33,11): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(34,8): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(35,10): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(39,89): error TS1005: '>' expected.
+components/ui/FormComponents.tsx(39,96): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(39,139): error TS1005: ';' expected.
+components/ui/FormComponents.tsx(40,11): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(41,8): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(43,15): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(47,83): error TS1005: '>' expected.
+components/ui/FormComponents.tsx(47,90): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(47,142): error TS1005: ';' expected.
+components/ui/FormComponents.tsx(48,8): error TS1109: Expression expected.
+components/ui/FormComponents.tsx(52,80): error TS1005: '>' expected.
+components/ui/FormComponents.tsx(52,87): error TS1005: ',' expected.
+components/ui/FormComponents.tsx(52,139): error TS1005: ';' expected.
+components/ui/FormComponents.tsx(53,8): error TS1109: Expression expected.
+pages/SearchResultsPage.tsx(85,30): error TS1005: ',' expected.
+pages/SearchResultsPage.tsx(86,9): error TS1109: Expression expected.
+pages/SearchResultsPage.tsx(99,7): error TS1128: Declaration or statement expected.
+pages/SearchResultsPage.tsx(99,9): error TS1128: Declaration or statement expected.
+pages/SearchResultsPage.tsx(102,30): error TS1005: ',' expected.
+pages/SearchResultsPage.tsx(103,9): error TS1109: Expression expected.
+pages/SearchResultsPage.tsx(121,5): error TS1128: Declaration or statement expected.
+pages/SearchResultsPage.tsx(121,7): error TS1005: 'try' expected.
+pages/SearchResultsPage.tsx(133,3): error TS1128: Declaration or statement expected.
+pages/SearchResultsPage.tsx(133,4): error TS1128: Declaration or statement expected.
+pages/SearchResultsPage.tsx(133,8): error TS1005: ';' expected.
+pages/SearchResultsPage.tsx(179,1): error TS1128: Declaration or statement expected.
+pages/SubscriptionsPage.tsx(83,21): error TS1129: Statement expected.
+pages/VideoUploadPage.tsx(110,50): error TS1005: ',' expected.
+pages/VideoUploadPage.tsx(112,8): error TS1128: Declaration or statement expected.
+pages/VideoUploadPage.tsx(119,5): error TS1128: Declaration or statement expected.
+pages/VideoUploadPage.tsx(119,7): error TS1005: 'try' expected.
+pages/VideoUploadPage.tsx(125,3): error TS1128: Declaration or statement expected.
+pages/VideoUploadPage.tsx(433,1): error TS1128: Declaration or statement expected.
+services/analyticsService.ts(102,56): error TS1005: ')' expected.
+services/analyticsService.ts(102,71): error TS1005: ';' expected.
+services/analyticsService.ts(109,6): error TS1128: Declaration or statement expected.
+services/analyticsService.ts(112,50): error TS1005: ')' expected.
+services/analyticsService.ts(112,65): error TS1005: ';' expected.
+services/analyticsService.ts(115,6): error TS1128: Declaration or statement expected.
+services/analyticsService.ts(133,42): error TS1005: ')' expected.
+services/analyticsService.ts(133,57): error TS1005: ';' expected.
+services/analyticsService.ts(145,6): error TS1128: Declaration or statement expected.
+services/analyticsService.ts(195,50): error TS1005: ')' expected.
+services/analyticsService.ts(195,65): error TS1005: ';' expected.
+services/analyticsService.ts(197,6): error TS1128: Declaration or statement expected.
+services/analyticsService.ts(213,63): error TS1005: ',' expected.
+services/analyticsService.ts(214,11): error TS1005: ':' expected.
+services/analyticsService.ts(219,46): error TS1005: ',' expected.
+services/analyticsService.ts(222,76): error TS1005: ',' expected.
+services/analyticsService.ts(223,11): error TS1005: ':' expected.
+services/analyticsService.ts(225,47): error TS1005: ',' expected.
+services/analyticsService.ts(286,9): error TS1138: Parameter declaration expected.
+services/api.ts(117,28): error TS1138: Parameter declaration expected.
+services/api.ts(151,16): error TS1138: Parameter declaration expected.
+services/api.ts(328,29): error TS1138: Parameter declaration expected.
+services/api.ts(474,33): error TS1138: Parameter declaration expected.
+services/apiService.ts(228,26): error TS1138: Parameter declaration expected.
+services/apiService.ts(277,77): error TS1109: Expression expected.
+services/apiService.ts(327,35): error TS1138: Parameter declaration expected.
+services/apiService.ts(476,23): error TS1138: Parameter declaration expected.
+services/apiService.ts(502,47): error TS1005: ')' expected.
+services/apiService.ts(502,62): error TS1005: ';' expected.
+services/apiService.ts(502,83): error TS1005: ';' expected.
+services/apiService.ts(504,6): error TS1128: Declaration or statement expected.
+services/apiService.ts(507,3): error TS1128: Declaration or statement expected.
+services/apiService.ts(510,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(510,15): error TS1005: ';' expected.
+services/apiService.ts(510,25): error TS1005: ')' expected.
+services/apiService.ts(510,39): error TS1109: Expression expected.
+services/apiService.ts(510,54): error TS1005: ';' expected.
+services/apiService.ts(510,55): error TS1128: Declaration or statement expected.
+services/apiService.ts(511,12): error TS1005: ':' expected.
+services/apiService.ts(511,62): error TS1005: ',' expected.
+services/apiService.ts(514,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(514,16): error TS1005: ';' expected.
+services/apiService.ts(514,26): error TS1005: ')' expected.
+services/apiService.ts(514,37): error TS1005: ';' expected.
+services/apiService.ts(514,43): error TS1109: Expression expected.
+services/apiService.ts(514,52): error TS1109: Expression expected.
+services/apiService.ts(514,67): error TS1005: ';' expected.
+services/apiService.ts(514,68): error TS1128: Declaration or statement expected.
+services/apiService.ts(515,12): error TS1005: ':' expected.
+services/apiService.ts(515,75): error TS1005: ',' expected.
+services/apiService.ts(518,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(518,15): error TS1005: ';' expected.
+services/apiService.ts(518,25): error TS1005: ')' expected.
+services/apiService.ts(518,36): error TS1005: ';' expected.
+services/apiService.ts(518,42): error TS1109: Expression expected.
+services/apiService.ts(518,51): error TS1109: Expression expected.
+services/apiService.ts(518,66): error TS1005: ';' expected.
+services/apiService.ts(518,67): error TS1128: Declaration or statement expected.
+services/apiService.ts(519,12): error TS1005: ':' expected.
+services/apiService.ts(519,74): error TS1005: ',' expected.
+services/apiService.ts(522,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(522,17): error TS1005: ';' expected.
+services/apiService.ts(522,27): error TS1005: ')' expected.
+services/apiService.ts(522,38): error TS1005: ';' expected.
+services/apiService.ts(522,44): error TS1109: Expression expected.
+services/apiService.ts(522,53): error TS1109: Expression expected.
+services/apiService.ts(522,68): error TS1005: ';' expected.
+services/apiService.ts(522,69): error TS1128: Declaration or statement expected.
+services/apiService.ts(523,12): error TS1005: ':' expected.
+services/apiService.ts(523,76): error TS1005: ',' expected.
+services/apiService.ts(526,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(526,18): error TS1005: '>' expected.
+services/apiService.ts(526,28): error TS1005: ')' expected.
+services/apiService.ts(526,42): error TS1109: Expression expected.
+services/apiService.ts(526,57): error TS1005: ';' expected.
+services/apiService.ts(526,58): error TS1128: Declaration or statement expected.
+services/apiService.ts(527,12): error TS1005: ':' expected.
+services/apiService.ts(527,65): error TS1005: ',' expected.
+services/apiService.ts(531,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(531,22): error TS1005: ';' expected.
+services/apiService.ts(531,29): error TS1109: Expression expected.
+services/apiService.ts(532,6): error TS1005: ')' expected.
+services/apiService.ts(533,9): error TS1005: ';' expected.
+services/apiService.ts(534,12): error TS1109: Expression expected.
+services/apiService.ts(535,25): error TS1005: ',' expected.
+services/apiService.ts(536,48): error TS1005: ',' expected.
+services/apiService.ts(538,3): error TS1109: Expression expected.
+services/apiService.ts(538,4): error TS1128: Declaration or statement expected.
+services/apiService.ts(539,11): error TS1005: ':' expected.
+services/apiService.ts(539,36): error TS1005: ',' expected.
+services/apiService.ts(540,13): error TS1005: ',' expected.
+services/apiService.ts(540,55): error TS1005: ',' expected.
+services/apiService.ts(543,15): error TS1005: ',' expected.
+services/apiService.ts(549,5): error TS1005: ',' expected.
+services/apiService.ts(549,12): error TS1005: ':' expected.
+services/apiService.ts(552,24): error TS1005: ',' expected.
+services/apiService.ts(556,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(556,17): error TS1005: ';' expected.
+services/apiService.ts(556,32): error TS1005: ')' expected.
+services/apiService.ts(559,5): error TS1005: ';' expected.
+services/apiService.ts(559,6): error TS1128: Declaration or statement expected.
+services/apiService.ts(560,11): error TS1005: ':' expected.
+services/apiService.ts(562,6): error TS1005: ',' expected.
+services/apiService.ts(564,12): error TS1005: ':' expected.
+services/apiService.ts(564,33): error TS1005: ',' expected.
+services/apiService.ts(568,3): error TS1434: Unexpected keyword or identifier.
+services/apiService.ts(568,42): error TS1005: ';' expected.
+services/apiService.ts(569,36): error TS1005: ',' expected.
+services/apiService.ts(570,25): error TS1005: ',' expected.
+services/apiService.ts(573,11): error TS1005: ':' expected.
+services/apiService.ts(573,40): error TS1005: ',' expected.
+services/apiService.ts(575,9): error TS1005: ':' expected.
+services/apiService.ts(576,13): error TS1005: ',' expected.
+services/apiService.ts(576,17): error TS1005: ':' expected.
+services/apiService.ts(576,64): error TS1005: ',' expected.
+services/apiService.ts(577,13): error TS1005: ':' expected.
+services/apiService.ts(577,57): error TS1005: ',' expected.
+services/apiService.ts(579,14): error TS1005: ':' expected.
+services/apiService.ts(582,32): error TS1005: ',' expected.
+services/apiService.ts(583,7): error TS1005: ',' expected.
+services/apiService.ts(592,1): error TS1128: Declaration or statement expected.
+services/errorService.ts(58,63): error TS1005: ',' expected.
+services/errorService.ts(59,11): error TS1005: ':' expected.
+services/errorService.ts(69,38): error TS1005: ',' expected.
+services/errorService.ts(73,76): error TS1005: ',' expected.
+services/errorService.ts(74,11): error TS1005: ':' expected.
+services/errorService.ts(82,40): error TS1005: ',' expected.
+services/errorService.ts(231,9): error TS1128: Declaration or statement expected.
+services/googleSearchService.ts(291,33): error TS1109: Expression expected.
+services/googleSearchService.ts(292,7): error TS1005: ')' expected.
+services/googleSearchService.ts(293,15): error TS1005: ',' expected.
+services/googleSearchService.ts(293,16): error TS1134: Variable declaration expected.
+services/googleSearchService.ts(294,17): error TS1005: ',' expected.
+services/googleSearchService.ts(294,18): error TS1134: Variable declaration expected.
+services/googleSearchService.ts(295,1): error TS1128: Declaration or statement expected.
+services/googleSearchService.ts(295,2): error TS1128: Declaration or statement expected.
+services/googleSearchService.ts(331,38): error TS1109: Expression expected.
+services/googleSearchService.ts(332,7): error TS1005: ')' expected.
+services/googleSearchService.ts(333,15): error TS1005: ',' expected.
+services/googleSearchService.ts(333,16): error TS1134: Variable declaration expected.
+services/googleSearchService.ts(334,17): error TS1005: ',' expected.
+services/googleSearchService.ts(334,18): error TS1134: Variable declaration expected.
+services/googleSearchService.ts(335,1): error TS1128: Declaration or statement expected.
+services/googleSearchService.ts(335,2): error TS1128: Declaration or statement expected.
+services/unifiedApiService.ts(72,15): error TS1138: Parameter declaration expected.
+services/unifiedApiService.ts(152,32): error TS1138: Parameter declaration expected.
+services/unifiedApiService.ts(183,35): error TS1138: Parameter declaration expected.
+services/youtubeSearchService.ts(422,29): error TS1138: Parameter declaration expected.
+services/youtubeSearchService.ts(531,22): error TS1138: Parameter declaration expected.
+src/components/atoms/Button/Button.tsx(32,5): error TS1005: ',' expected.
+src/components/EnhancedPWAInstallBanner.tsx(193,21): error TS1129: Statement expected.
+src/features/comments/hooks/useComments.ts(23,35): error TS1138: Parameter declaration expected.
+src/features/comments/hooks/useComments.ts(59,33): error TS1138: Parameter declaration expected.
+src/features/comments/hooks/useComments.ts(97,37): error TS1138: Parameter declaration expected.
+src/features/comments/hooks/useComments.ts(121,37): error TS1138: Parameter declaration expected.
+src/features/comments/hooks/useComments.ts(135,35): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(43,26): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(53,27): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(135,23): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(148,25): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(169,25): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(179,30): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(193,24): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(228,29): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(265,28): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(282,29): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(301,30): error TS1138: Parameter declaration expected.
+src/features/comments/services/commentService.ts(323,24): error TS1138: Parameter declaration expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(11,42): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(21,23): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(35,37): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(37,36): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(43,42): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(49,43): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(93,25): error TS1109: Expression expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(94,8): error TS1005: ')' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(96,1): error TS1128: Declaration or statement expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(96,2): error TS1128: Declaration or statement expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(234,26): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(236,31): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(238,24): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(279,41): error TS1131: Property or signature expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(296,30): error TS1109: Expression expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(297,9): error TS1005: ')' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(297,24): error TS1005: ',' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(297,25): error TS1181: Array element destructuring pattern expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(297,37): error TS1005: ';' expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(298,3): error TS1128: Declaration or statement expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(298,4): error TS1128: Declaration or statement expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(350,1): error TS1128: Declaration or statement expected.
+src/features/livestream/components/StreamAnalyticsDashboard.tsx(356,35): error TS1131: Property or signature expected.
+src/features/notifications/services/notificationService.ts(89,26): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(184,27): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(193,25): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(213,26): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(223,28): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(232,31): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(306,30): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(318,37): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(343,28): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(367,33): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(398,29): error TS1138: Parameter declaration expected.
+src/features/notifications/services/notificationService.ts(408,23): error TS1138: Parameter declaration expected.
+src/features/playlist/hooks/usePlaylists.ts(33,35): error TS1138: Parameter declaration expected.
+src/features/playlist/hooks/usePlaylists.ts(100,36): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(43,26): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(59,27): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(70,24): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(79,24): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(96,28): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(107,33): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(117,31): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(130,27): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(141,32): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(152,25): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(162,30): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(172,27): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(196,24): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(206,24): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(216,33): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(237,30): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(247,25): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(257,28): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(284,23): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(291,26): error TS1138: Parameter declaration expected.
+src/features/playlist/services/playlistService.ts(310,25): error TS1138: Parameter declaration expected.
+src/features/search/components/AdvancedSearchFilters.tsx(31,56): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(67,16): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(83,30): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(103,22): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(119,24): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(135,25): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(151,29): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(173,23): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(183,23): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(193,26): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(209,20): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(259,28): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(283,22): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(293,25): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(310,26): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(325,36): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(334,27): error TS1138: Parameter declaration expected.
+src/features/search/services/searchService.ts(367,26): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(64,33): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(75,26): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(95,29): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(135,33): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(147,32): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(192,29): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(218,33): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(278,29): error TS1138: Parameter declaration expected.
+src/features/subscription/services/subscriptionService.ts(299,33): error TS1138: Parameter declaration expected.
+src/features/video/components/StudioVideoGrid.tsx(98,19): error TS1129: Statement expected.
+src/features/video/hooks/useVideo.ts(101,40): error TS1109: Expression expected.
+src/features/video/hooks/useVideo.ts(102,8): error TS1005: ')' expected.
+src/features/video/hooks/useVideo.ts(105,1): error TS1128: Declaration or statement expected.
+src/features/video/hooks/useVideo.ts(105,3): error TS1128: Declaration or statement expected.
+src/features/video/hooks/useVideoInteractions.ts(23,38): error TS1138: Parameter declaration expected.
+src/features/video/pages/VideoDemo.tsx(27,35): error TS1109: Expression expected.
+src/features/video/pages/VideoDemo.tsx(28,10): error TS1005: ')' expected.
+src/features/video/pages/VideoDemo.tsx(30,3): error TS1128: Declaration or statement expected.
+src/features/video/pages/VideoDemo.tsx(30,5): error TS1128: Declaration or statement expected.
+src/features/video/pages/VideoDemo.tsx(177,1): error TS1128: Declaration or statement expected.
+src/features/video/services/videoService.ts(67,30): error TS1138: Parameter declaration expected.
+src/hooks/legacy/root-useVideoPlayer.ts(83,32): error TS1109: Expression expected.
+src/hooks/legacy/root-useVideoPlayer.ts(84,10): error TS1005: ')' expected.
+src/hooks/legacy/root-useVideoPlayer.ts(85,1): error TS1128: Declaration or statement expected.
+src/hooks/legacy/root-useVideoPlayer.ts(85,2): error TS1128: Declaration or statement expected.
+src/hooks/optimizedHooks.ts(46,41): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(89,45): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(92,6): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(92,42): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(138,38): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(140,3): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(184,50): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(236,36): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(239,10): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(239,20): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(239,52): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(239,62): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(277,6): error TS1109: Expression expected.
+src/hooks/optimizedHooks.ts(278,5): error TS1005: ')' expected.
+src/hooks/optimizedHooks.ts(279,14): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(280,8): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(280,16): error TS1005: ',' expected.
+src/hooks/optimizedHooks.ts(281,7): error TS1005: ';' expected.
+src/hooks/optimizedHooks.ts(285,6): error TS1128: Declaration or statement expected.
+src/hooks/optimizedHooks.ts(287,3): error TS1128: Declaration or statement expected.
+src/hooks/optimizedHooks.ts(313,37): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(338,66): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(362,65): error TS1138: Parameter declaration expected.
+src/hooks/optimizedHooks.ts(365,19): error TS1005: '>' expected.
+src/hooks/optimizedHooks.ts(366,3): error TS1109: Expression expected.
+src/hooks/optimizedHooks.ts(367,1): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(121,27): error TS1138: Parameter declaration expected.
+src/hooks/unified/useApi.ts(317,29): error TS1138: Parameter declaration expected.
+src/hooks/unified/useApi.ts(320,3): error TS1005: ',' expected.
+src/hooks/unified/useApi.ts(325,50): error TS1138: Parameter declaration expected.
+src/hooks/unified/useApi.ts(330,18): error TS1110: Type expected.
+src/hooks/unified/useApi.ts(334,5): error TS1131: Property or signature expected.
+src/hooks/unified/useApi.ts(334,7): error TS1144: '{' or ';' expected.
+src/hooks/unified/useApi.ts(334,14): error TS1109: Expression expected.
+src/hooks/unified/useApi.ts(335,3): error TS1128: Declaration or statement expected.
+src/hooks/unified/useApi.ts(335,5): error TS1128: Declaration or statement expected.
+src/hooks/unified/useApi.ts(336,1): error TS1128: Declaration or statement expected.
+src/hooks/unified/useVideos.ts(21,34): error TS1138: Parameter declaration expected.
+src/hooks/unified/useVideos.ts(50,33): error TS1138: Parameter declaration expected.
+src/hooks/unified/useVideos.ts(96,42): error TS1138: Parameter declaration expected.
+src/hooks/unified/useVideos.ts(132,37): error TS1138: Parameter declaration expected.
+src/hooks/unified/useVideos.ts(198,34): error TS1138: Parameter declaration expected.
+src/hooks/unified/useVideos.ts(240,40): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(23,3): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(75,27): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(208,18): error TS1110: Type expected.
+src/hooks/unifiedHooks.ts(210,3): error TS1131: Property or signature expected.
+src/hooks/unifiedHooks.ts(210,5): error TS1131: Property or signature expected.
+src/hooks/unifiedHooks.ts(210,30): error TS1005: ':' expected.
+src/hooks/unifiedHooks.ts(213,56): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(216,18): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(387,27): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(389,12): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(389,22): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(421,36): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(424,6): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(424,43): error TS1005: ',' expected.
+src/hooks/unifiedHooks.ts(462,41): error TS1138: Parameter declaration expected.
+src/hooks/unifiedHooks.ts(464,34): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(148,6): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(149,12): error TS1005: ')' expected.
+src/hooks/useAnalytics.ts(150,18): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(151,7): error TS1005: ',' expected.
+src/hooks/useAnalytics.ts(151,16): error TS1109: Expression expected.
+src/hooks/useAnalytics.ts(152,7): error TS1005: ';' expected.
+src/hooks/useAnalytics.ts(161,6): error TS1128: Declaration or statement expected.
+src/hooks/useAnalytics.ts(163,3): error TS1128: Declaration or statement expected.
+src/hooks/useAnalytics.ts(200,15): error TS1138: Parameter declaration expected.
+src/hooks/useAnalytics.ts(231,24): error TS1138: Parameter declaration expected.
+src/hooks/useAnalytics.ts(254,1): error TS1128: Declaration or statement expected.
+src/hooks/useAnalytics.ts(443,47): error TS1138: Parameter declaration expected.
+src/hooks/useAsyncData.ts(22,33): error TS1138: Parameter declaration expected.
+src/hooks/useAsyncState.ts(19,34): error TS1138: Parameter declaration expected.
+src/hooks/useAsyncState.ts(21,3): error TS1005: ',' expected.
+src/hooks/useCommon.ts(7,36): error TS1138: Parameter declaration expected.
+src/hooks/useCommon.ts(10,6): error TS1005: ',' expected.
+src/hooks/useCommon.ts(10,42): error TS1005: ',' expected.
+src/hooks/useCommon.ts(60,70): error TS1138: Parameter declaration expected.
+src/hooks/useCommon.ts(82,27): error TS1109: Expression expected.
+src/hooks/useCommon.ts(83,15): error TS1005: ')' expected.
+src/hooks/useCommon.ts(84,1): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(84,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(84,15): error TS1005: ',' expected.
+src/hooks/useCommon.ts(84,28): error TS1005: ')' expected.
+src/hooks/useCommon.ts(84,45): error TS1005: ',' expected.
+src/hooks/useCommon.ts(84,47): error TS1137: Expression or comma expected.
+src/hooks/useCommon.ts(84,54): error TS1109: Expression expected.
+src/hooks/useCommon.ts(84,56): error TS1005: ';' expected.
+src/hooks/useCommon.ts(94,28): error TS1109: Expression expected.
+src/hooks/useCommon.ts(95,15): error TS1005: ')' expected.
+src/hooks/useCommon.ts(96,1): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(96,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(98,24): error TS1109: Expression expected.
+src/hooks/useCommon.ts(99,24): error TS1109: Expression expected.
+src/hooks/useCommon.ts(100,20): error TS1109: Expression expected.
+src/hooks/useCommon.ts(102,1): error TS1109: Expression expected.
+src/hooks/useCommon.ts(102,3): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(114,29): error TS1138: Parameter declaration expected.
+src/hooks/useCommon.ts(163,41): error TS1138: Parameter declaration expected.
+src/hooks/useCommon.ts(199,33): error TS1109: Expression expected.
+src/hooks/useCommon.ts(200,6): error TS1005: ')' expected.
+src/hooks/useCommon.ts(200,13): error TS1005: ',' expected.
+src/hooks/useCommon.ts(200,23): error TS1005: ',' expected.
+src/hooks/useCommon.ts(200,36): error TS1109: Expression expected.
+src/hooks/useCommon.ts(201,10): error TS1005: ';' expected.
+src/hooks/useCommon.ts(202,1): error TS1109: Expression expected.
+src/hooks/useCommon.ts(202,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(202,9): error TS1109: Expression expected.
+src/hooks/useCommon.ts(222,29): error TS1109: Expression expected.
+src/hooks/useCommon.ts(223,12): error TS1005: ')' expected.
+src/hooks/useCommon.ts(231,1): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(231,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(231,9): error TS1109: Expression expected.
+src/hooks/useCommon.ts(301,41): error TS1109: Expression expected.
+src/hooks/useCommon.ts(302,13): error TS1005: ')' expected.
+src/hooks/useCommon.ts(302,20): error TS1005: ',' expected.
+src/hooks/useCommon.ts(302,30): error TS1005: ',' expected.
+src/hooks/useCommon.ts(302,39): error TS1109: Expression expected.
+src/hooks/useCommon.ts(303,10): error TS1005: ';' expected.
+src/hooks/useCommon.ts(304,1): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(304,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(304,37): error TS1005: ';' expected.
+src/hooks/useCommon.ts(344,68): error TS1005: '?' expected.
+src/hooks/useCommon.ts(344,70): error TS1109: Expression expected.
+src/hooks/useCommon.ts(345,16): error TS1005: ')' expected.
+src/hooks/useCommon.ts(346,42): error TS1005: '>' expected.
+src/hooks/useCommon.ts(347,1): error TS1109: Expression expected.
+src/hooks/useCommon.ts(347,2): error TS1128: Declaration or statement expected.
+src/hooks/useCommon.ts(351,56): error TS1109: Expression expected.
+src/hooks/useCommon.ts(352,80): error TS1109: Expression expected.
+src/hooks/useCommon.ts(354,1): error TS1109: Expression expected.
+src/hooks/useCommon.ts(354,3): error TS1128: Declaration or statement expected.
+src/hooks/useDebounce.ts(42,66): error TS1138: Parameter declaration expected.
+src/hooks/useDebounce.ts(80,39): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(132,39): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(159,70): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(170,5): error TS1005: '>' expected.
+src/hooks/useEnhancedQuery.ts(170,16): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(170,18): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(170,28): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(170,30): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(170,38): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(170,40): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(171,3): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(171,5): error TS1109: Expression expected.
+src/hooks/useEnhancedQuery.ts(172,1): error TS1128: Declaration or statement expected.
+src/hooks/useEnhancedQuery.ts(201,3): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(215,5): error TS1005: '>' expected.
+src/hooks/useEnhancedQuery.ts(215,18): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(215,20): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(215,28): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(215,30): error TS1003: Identifier expected.
+src/hooks/useEnhancedQuery.ts(216,3): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(216,5): error TS1109: Expression expected.
+src/hooks/useEnhancedQuery.ts(217,1): error TS1128: Declaration or statement expected.
+src/hooks/useEnhancedQuery.ts(266,67): error TS1005: ',' expected.
+src/hooks/useEnhancedQuery.ts(266,74): error TS1005: ',' expected.
+src/hooks/useEnhancedQuery.ts(302,79): error TS1138: Parameter declaration expected.
+src/hooks/useEnhancedQuery.ts(321,21): error TS1138: Parameter declaration expected.
+src/hooks/useInstallPrompt.ts(126,51): error TS1005: ')' expected.
+src/hooks/useInstallPrompt.ts(130,7): error TS1109: Expression expected.
+src/hooks/useInstallPrompt.ts(141,22): error TS1109: Expression expected.
+src/hooks/useInstallPrompt.ts(142,17): error TS1005: ',' expected.
+src/hooks/useInstallPrompt.ts(142,28): error TS1005: ':' expected.
+src/hooks/useInstallPrompt.ts(146,3): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(146,4): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(146,48): error TS1005: ';' expected.
+src/hooks/useInstallPrompt.ts(214,53): error TS1005: ')' expected.
+src/hooks/useInstallPrompt.ts(214,68): error TS1005: ';' expected.
+src/hooks/useInstallPrompt.ts(214,91): error TS1005: ';' expected.
+src/hooks/useInstallPrompt.ts(215,7): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(216,5): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(233,3): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(233,4): error TS1128: Declaration or statement expected.
+src/hooks/useInstallPrompt.ts(233,21): error TS1005: ';' expected.
+src/hooks/useInstallPrompt.ts(251,1): error TS1128: Declaration or statement expected.
+src/hooks/useLocalStorage.ts(11,36): error TS1138: Parameter declaration expected.
+src/hooks/useLocalStorage.ts(14,6): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(14,34): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(74,46): error TS1138: Parameter declaration expected.
+src/hooks/useLocalStorage.ts(78,6): error TS1005: ',' expected.
+src/hooks/useLocalStorage.ts(78,34): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(12,39): error TS1138: Parameter declaration expected.
+src/hooks/useLocalStorageSet.ts(17,3): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(17,20): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(17,37): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(17,54): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(17,64): error TS1005: ',' expected.
+src/hooks/useLocalStorageSet.ts(113,44): error TS1138: Parameter declaration expected.
+src/hooks/useLocalStorageSet.ts(116,12): error TS1005: ',' expected.
+src/hooks/usePerformanceMonitor.ts(90,39): error TS1109: Expression expected.
+src/hooks/usePerformanceMonitor.ts(91,16): error TS1005: ')' expected.
+src/hooks/usePerformanceMonitor.ts(93,1): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceMonitor.ts(93,3): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceMonitor.ts(154,43): error TS1005: ',' expected.
+src/hooks/usePerformanceOptimization.ts(54,57): error TS1138: Parameter declaration expected.
+src/hooks/usePerformanceOptimization.ts(111,41): error TS1109: Expression expected.
+src/hooks/usePerformanceOptimization.ts(112,10): error TS1005: ')' expected.
+src/hooks/usePerformanceOptimization.ts(113,1): error TS1128: Declaration or statement expected.
+src/hooks/usePerformanceOptimization.ts(113,3): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(148,41): error TS1005: ')' expected.
+src/hooks/usePWA.ts(150,9): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(159,9): error TS1005: ',' expected.
+src/hooks/usePWA.ts(166,8): error TS1134: Variable declaration expected.
+src/hooks/usePWA.ts(166,11): error TS1005: ';' expected.
+src/hooks/usePWA.ts(169,3): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(169,4): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(169,43): error TS1005: ';' expected.
+src/hooks/usePWA.ts(172,36): error TS1005: ')' expected.
+src/hooks/usePWA.ts(209,3): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(263,34): error TS1005: ')' expected.
+src/hooks/usePWA.ts(275,41): error TS1005: ')' expected.
+src/hooks/usePWA.ts(277,9): error TS1109: Expression expected.
+src/hooks/usePWA.ts(304,3): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(404,1): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(429,34): error TS1109: Expression expected.
+src/hooks/usePWA.ts(431,11): error TS1109: Expression expected.
+src/hooks/usePWA.ts(432,1): error TS1109: Expression expected.
+src/hooks/usePWA.ts(432,2): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(432,9): error TS1109: Expression expected.
+src/hooks/usePWA.ts(441,49): error TS1005: ')' expected.
+src/hooks/usePWA.ts(441,64): error TS1005: ';' expected.
+src/hooks/usePWA.ts(441,87): error TS1005: ';' expected.
+src/hooks/usePWA.ts(460,51): error TS1005: ')' expected.
+src/hooks/usePWA.ts(464,7): error TS1109: Expression expected.
+src/hooks/usePWA.ts(467,5): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(468,3): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(477,51): error TS1005: ')' expected.
+src/hooks/usePWA.ts(481,7): error TS1109: Expression expected.
+src/hooks/usePWA.ts(492,1): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(499,21): error TS1109: Expression expected.
+src/hooks/usePWA.ts(512,36): error TS1109: Expression expected.
+src/hooks/usePWA.ts(519,53): error TS1005: ')' expected.
+src/hooks/usePWA.ts(523,9): error TS1109: Expression expected.
+src/hooks/usePWA.ts(529,8): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(531,1): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(533,34): error TS1005: ')' expected.
+src/hooks/usePWA.ts(535,10): error TS1005: ';' expected.
+src/hooks/usePWA.ts(535,12): error TS1434: Unexpected keyword or identifier.
+src/hooks/usePWA.ts(535,15): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(535,16): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(535,35): error TS1005: ';' expected.
+src/hooks/usePWA.ts(546,51): error TS1005: ')' expected.
+src/hooks/usePWA.ts(550,7): error TS1109: Expression expected.
+src/hooks/usePWA.ts(558,38): error TS1005: ')' expected.
+src/hooks/usePWA.ts(559,12): error TS1434: Unexpected keyword or identifier.
+src/hooks/usePWA.ts(559,15): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(559,16): error TS1128: Declaration or statement expected.
+src/hooks/usePWA.ts(559,43): error TS1005: ';' expected.
+src/hooks/usePWA.ts(566,51): error TS1005: ')' expected.
+src/hooks/usePWA.ts(570,7): error TS1109: Expression expected.
+src/hooks/useRefactoredHooks.ts(8,36): error TS1138: Parameter declaration expected.
+src/hooks/useRefactoredHooks.ts(11,6): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(11,42): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(95,27): error TS1138: Parameter declaration expected.
+src/hooks/useRefactoredHooks.ts(97,12): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(97,22): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(148,41): error TS1138: Parameter declaration expected.
+src/hooks/useRefactoredHooks.ts(195,41): error TS1138: Parameter declaration expected.
+src/hooks/useRefactoredHooks.ts(197,34): error TS1005: ',' expected.
+src/hooks/useRefactoredHooks.ts(227,70): error TS1138: Parameter declaration expected.
+src/hooks/useServiceWorker.ts(99,51): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(103,7): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(118,3): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(118,4): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(118,45): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(153,51): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(157,7): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(165,5): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(166,3): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(166,4): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(166,26): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(187,51): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(191,7): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(198,5): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(199,3): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(199,4): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(199,26): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(257,59): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(257,74): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(267,60): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(267,75): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(269,51): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(285,14): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(286,11): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(287,9): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(287,10): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(298,44): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(303,9): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(308,7): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(308,9): error TS1005: 'try' expected.
+src/hooks/useServiceWorker.ts(309,53): error TS1005: ')' expected.
+src/hooks/useServiceWorker.ts(313,9): error TS1109: Expression expected.
+src/hooks/useServiceWorker.ts(327,5): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(353,3): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(353,4): error TS1128: Declaration or statement expected.
+src/hooks/useServiceWorker.ts(353,42): error TS1005: ';' expected.
+src/hooks/useServiceWorker.ts(372,1): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(11,37): error TS1109: Expression expected.
+src/hooks/useTrendingSearch.ts(12,9): error TS1005: ')' expected.
+src/hooks/useTrendingSearch.ts(12,31): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(13,8): error TS1005: ';' expected.
+src/hooks/useTrendingSearch.ts(14,1): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(14,2): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(100,75): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(100,82): error TS1005: ',' expected.
+src/hooks/useTrendingSearch.ts(102,7): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(135,7): error TS1005: 'try' expected.
+src/hooks/useTrendingSearch.ts(148,3): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(148,4): error TS1128: Declaration or statement expected.
+src/hooks/useTrendingSearch.ts(148,8): error TS1005: ';' expected.
+src/hooks/useTrendingSearch.ts(173,1): error TS1128: Declaration or statement expected.
+src/hooks/useVideoCache.ts(228,32): error TS1109: Expression expected.
+src/hooks/useVideoCache.ts(229,10): error TS1005: ')' expected.
+src/hooks/useVideoCache.ts(231,1): error TS1128: Declaration or statement expected.
+src/hooks/useVideoCache.ts(231,3): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(50,32): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(52,1): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(52,2): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(52,43): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(138,31): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(140,7): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(173,58): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(173,73): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(175,5): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(176,58): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(176,73): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(178,5): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(183,42): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(183,57): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(183,71): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(195,63): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(195,78): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(197,7): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(198,63): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(198,78): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(200,7): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(205,47): error TS1005: ')' expected.
+src/hooks/useVideoPlayer.ts(205,62): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(205,76): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(209,3): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(209,4): error TS1128: Declaration or statement expected.
+src/hooks/useVideoPlayer.ts(223,4): error TS1005: ';' expected.
+src/hooks/useVideoPlayer.ts(239,29): error TS1109: Expression expected.
+src/hooks/useVideoPlayer.ts(436,1): error TS1128: Declaration or statement expected.
+src/hooks/useVideosData.ts(16,31): error TS1138: Parameter declaration expected.
+src/hooks/useVideosData.ts(29,20): error TS1129: Statement expected.
+src/hooks/useVideosData.ts(41,20): error TS1129: Statement expected.
+src/hooks/useVideosData.ts(54,38): error TS1138: Parameter declaration expected.
+src/hooks/useVideosData.ts(65,18): error TS1129: Statement expected.
+src/hooks/useWatchPage.ts(519,36): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(520,7): error TS1005: ')' expected.
+src/hooks/useWatchPage.ts(522,22): error TS1005: ',' expected.
+src/hooks/useWatchPage.ts(522,23): error TS1134: Variable declaration expected.
+src/hooks/useWatchPage.ts(523,5): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(523,6): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(523,16): error TS1011: An element access expression should take an argument.
+src/hooks/useWatchPage.ts(523,18): error TS1005: ';' expected.
+src/hooks/useWatchPage.ts(557,3): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(559,47): error TS1109: Expression expected.
+src/hooks/useWatchPage.ts(560,5): error TS1005: ')' expected.
+src/hooks/useWatchPage.ts(563,3): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(563,5): error TS1128: Declaration or statement expected.
+src/hooks/useWatchPage.ts(706,1): error TS1128: Declaration or statement expected.
+src/lib/utils.ts(81,29): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(157,28): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(191,34): error TS1005: ',' expected.
+src/lib/utils.ts(191,41): error TS1005: ',' expected.
+src/lib/utils.ts(286,61): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(309,61): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(483,55): error TS1005: ',' expected.
+src/lib/utils.ts(483,74): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(510,63): error TS1138: Parameter declaration expected.
+src/lib/utils.ts(552,28): error TS1138: Parameter declaration expected.
+src/lib/youtube-utils.ts(96,35): error TS1138: Parameter declaration expected.
+src/lib/youtube-utils.ts(395,35): error TS1138: Parameter declaration expected.
+src/lib/youtube-utils.ts(457,39): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(29,15): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(55,30): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(127,37): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(204,30): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(207,3): error TS1005: ',' expected.
+src/services/api/base.ts(214,31): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(227,30): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(240,32): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(253,30): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(262,33): error TS1138: Parameter declaration expected.
+src/services/api/base.ts(266,3): error TS1005: ',' expected.
+src/services/api/base.ts(289,39): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(60,27): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(69,27): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(78,29): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(90,29): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(106,27): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(115,22): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(124,26): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(134,21): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(144,21): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(189,21): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(209,28): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(218,25): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(227,27): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(251,24): error TS1138: Parameter declaration expected.
+src/services/api/videos.ts(260,24): error TS1138: Parameter declaration expected.
+src/services/api/youtubeService.ts(349,22): error TS1138: Parameter declaration expected.
+src/services/livestreamAPI.ts(551,24): error TS1138: Parameter declaration expected.
+src/services/metadataNormalizationService.ts(173,31): error TS1138: Parameter declaration expected.
+src/services/metadataNormalizationService.ts(312,27): error TS1138: Parameter declaration expected.
+src/services/metadataNormalizationService.ts(368,30): error TS1138: Parameter declaration expected.
+src/services/metadataNormalizationService.ts(541,31): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(104,27): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(162,22): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(768,25): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(777,42): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(784,44): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(828,35): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(841,48): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(926,37): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(1009,27): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(1026,25): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(1050,29): error TS1138: Parameter declaration expected.
+src/services/unifiedDataService.ts(1071,24): error TS1138: Parameter declaration expected.
+src/types/errors.ts(229,62): error TS1110: Type expected.
+src/types/errors.ts(231,11): error TS1109: Expression expected.
+src/types/errors.ts(232,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(232,3): error TS1128: Declaration or statement expected.
+src/types/errors.ts(232,10): error TS1109: Expression expected.
+src/types/errors.ts(233,67): error TS1110: Type expected.
+src/types/errors.ts(235,11): error TS1109: Expression expected.
+src/types/errors.ts(236,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(236,3): error TS1128: Declaration or statement expected.
+src/types/errors.ts(255,17): error TS1110: Type expected.
+src/types/errors.ts(258,3): error TS1131: Property or signature expected.
+src/types/errors.ts(258,5): error TS1131: Property or signature expected.
+src/types/errors.ts(258,8): error TS1131: Property or signature expected.
+src/types/errors.ts(259,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(324,32): error TS1109: Expression expected.
+src/types/errors.ts(325,10): error TS1005: ')' expected.
+src/types/errors.ts(328,13): error TS1005: ',' expected.
+src/types/errors.ts(328,14): error TS1134: Variable declaration expected.
+src/types/errors.ts(329,10): error TS1005: ',' expected.
+src/types/errors.ts(329,11): error TS1134: Variable declaration expected.
+src/types/errors.ts(329,19): error TS1005: ',' expected.
+src/types/errors.ts(329,26): error TS1005: '>' expected.
+src/types/errors.ts(330,1): error TS1109: Expression expected.
+src/types/errors.ts(330,2): error TS1128: Declaration or statement expected.
+src/types/errors.ts(349,39): error TS1109: Expression expected.
+src/types/errors.ts(350,8): error TS1005: ')' expected.
+src/types/errors.ts(352,8): error TS1005: ',' expected.
+src/types/errors.ts(352,9): error TS1134: Variable declaration expected.
+src/types/errors.ts(353,13): error TS1005: ',' expected.
+src/types/errors.ts(353,14): error TS1134: Variable declaration expected.
+src/types/errors.ts(354,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(354,2): error TS1128: Declaration or statement expected.
+src/types/errors.ts(362,36): error TS1109: Expression expected.
+src/types/errors.ts(363,10): error TS1005: ')' expected.
+src/types/errors.ts(367,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(367,2): error TS1128: Declaration or statement expected.
+src/types/errors.ts(375,36): error TS1109: Expression expected.
+src/types/errors.ts(376,10): error TS1005: ')' expected.
+src/types/errors.ts(378,10): error TS1005: ',' expected.
+src/types/errors.ts(378,11): error TS1134: Variable declaration expected.
+src/types/errors.ts(379,12): error TS1005: ',' expected.
+src/types/errors.ts(379,13): error TS1134: Variable declaration expected.
+src/types/errors.ts(380,5): error TS1109: Expression expected.
+src/types/errors.ts(385,1): error TS1128: Declaration or statement expected.
+src/types/errors.ts(385,2): error TS1128: Declaration or statement expected.
+src/types/youtube.ts(520,20): error TS1138: Parameter declaration expected.
+src/types/youtube.ts(524,23): error TS1138: Parameter declaration expected.
+src/utils/analytics.ts(12,28): error TS1109: Expression expected.
+src/utils/analytics.ts(13,12): error TS1005: ')' expected.
+src/utils/analytics.ts(14,13): error TS1005: ',' expected.
+src/utils/analytics.ts(14,14): error TS1134: Variable declaration expected.
+src/utils/analytics.ts(15,1): error TS1128: Declaration or statement expected.
+src/utils/analytics.ts(15,2): error TS1128: Declaration or statement expected.
+src/utils/analytics.ts(15,9): error TS1109: Expression expected.
+src/utils/componentUtils.tsx(15,37): error TS1138: Parameter declaration expected.
+src/utils/componentUtils.tsx(42,26): error TS1109: Expression expected.
+src/utils/componentUtils.tsx(43,12): error TS1005: ')' expected.
+src/utils/componentUtils.tsx(46,1): error TS1128: Declaration or statement expected.
+src/utils/componentUtils.tsx(46,2): error TS1128: Declaration or statement expected.
+src/utils/conditionalLogger.ts(54,25): error TS1138: Parameter declaration expected.
+src/utils/dateUtils.ts(66,42): error TS1109: Expression expected.
+src/utils/dateUtils.ts(67,7): error TS1005: ')' expected.
+src/utils/dateUtils.ts(67,16): error TS1005: ',' expected.
+src/utils/dateUtils.ts(68,1): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(68,2): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(123,28): error TS1109: Expression expected.
+src/utils/dateUtils.ts(124,7): error TS1005: ')' expected.
+src/utils/dateUtils.ts(124,16): error TS1005: ',' expected.
+src/utils/dateUtils.ts(125,11): error TS1109: Expression expected.
+src/utils/dateUtils.ts(126,1): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(126,2): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(152,28): error TS1109: Expression expected.
+src/utils/dateUtils.ts(153,7): error TS1005: ')' expected.
+src/utils/dateUtils.ts(153,16): error TS1005: ',' expected.
+src/utils/dateUtils.ts(154,11): error TS1109: Expression expected.
+src/utils/dateUtils.ts(155,1): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(155,2): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(179,35): error TS1109: Expression expected.
+src/utils/dateUtils.ts(180,15): error TS1005: ')' expected.
+src/utils/dateUtils.ts(180,24): error TS1005: ',' expected.
+src/utils/dateUtils.ts(181,1): error TS1128: Declaration or statement expected.
+src/utils/dateUtils.ts(181,2): error TS1128: Declaration or statement expected.
+src/utils/errorUtils.ts(19,38): error TS1138: Parameter declaration expected.
+src/utils/errorUtils.ts(52,34): error TS1138: Parameter declaration expected.
+src/utils/errorUtils.ts(72,36): error TS1138: Parameter declaration expected.
+src/utils/errorUtils.ts(92,39): error TS1138: Parameter declaration expected.
+src/utils/logger.ts(36,25): error TS1138: Parameter declaration expected.
+src/utils/numberUtils.ts(103,34): error TS1109: Expression expected.
+src/utils/numberUtils.ts(104,8): error TS1005: ')' expected.
+src/utils/numberUtils.ts(104,17): error TS1005: ',' expected.
+src/utils/numberUtils.ts(105,11): error TS1005: ';' expected.
+src/utils/numberUtils.ts(106,1): error TS1128: Declaration or statement expected.
+src/utils/numberUtils.ts(106,2): error TS1128: Declaration or statement expected.
+src/utils/offlineStorage.ts(137,26): error TS1138: Parameter declaration expected.
+src/utils/offlineStorage.ts(190,24): error TS1138: Parameter declaration expected.
+src/utils/offlineStorage.ts(350,27): error TS1138: Parameter declaration expected.
+src/utils/offlineStorage.ts(379,28): error TS1138: Parameter declaration expected.
+src/utils/offlineStorage.ts(395,25): error TS1135: Argument expression expected.
+src/utils/offlineStorage.ts(421,24): error TS1138: Parameter declaration expected.
+src/utils/offlineStorage.ts(529,40): error TS1005: ')' expected.
+src/utils/offlineStorage.ts(529,55): error TS1005: ';' expected.
+src/utils/offlineStorage.ts(533,2): error TS1128: Declaration or statement expected.
+src/utils/performanceOptimizations.ts(4,44): error TS1138: Parameter declaration expected.
+src/utils/performanceOptimizations.ts(6,3): error TS1005: ',' expected.
+src/utils/performanceOptimizations.ts(153,34): error TS1109: Expression expected.
+src/utils/performanceOptimizations.ts(154,6): error TS1005: ')' expected.
+src/utils/performanceOptimizations.ts(155,8): error TS1005: ',' expected.
+src/utils/performanceOptimizations.ts(155,9): error TS1134: Variable declaration expected.
+src/utils/performanceOptimizations.ts(156,9): error TS1005: ',' expected.
+src/utils/performanceOptimizations.ts(156,10): error TS1134: Variable declaration expected.
+src/utils/performanceOptimizations.ts(158,1): error TS1128: Declaration or statement expected.
+src/utils/performanceOptimizations.ts(158,2): error TS1128: Declaration or statement expected.
+src/utils/performanceOptimizations.ts(195,34): error TS1109: Expression expected.
+src/utils/performanceOptimizations.ts(196,18): error TS1005: ')' expected.
+src/utils/performanceOptimizations.ts(196,20): error TS1134: Variable declaration expected.
+src/utils/performanceOptimizations.ts(197,1): error TS1128: Declaration or statement expected.
+src/utils/performanceOptimizations.ts(197,3): error TS1128: Declaration or statement expected.
+src/utils/performanceProfiler.ts(4,59): error TS1138: Parameter declaration expected.
+src/utils/testingHelpers.tsx(38,37): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(39,5): error TS1005: ')' expected.
+src/utils/testingHelpers.tsx(40,10): error TS1005: ',' expected.
+src/utils/testingHelpers.tsx(40,11): error TS1134: Variable declaration expected.
+src/utils/testingHelpers.tsx(41,16): error TS1005: ',' expected.
+src/utils/testingHelpers.tsx(41,17): error TS1180: Property destructuring pattern expected.
+src/utils/testingHelpers.tsx(41,30): error TS1005: ',' expected.
+src/utils/testingHelpers.tsx(43,3): error TS1128: Declaration or statement expected.
+src/utils/testingHelpers.tsx(44,1): error TS1128: Declaration or statement expected.
+src/utils/testingHelpers.tsx(44,3): error TS1128: Declaration or statement expected.
+src/utils/testingHelpers.tsx(83,35): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(84,12): error TS1005: ')' expected.
+src/utils/testingHelpers.tsx(84,21): error TS1005: ',' expected.
+src/utils/testingHelpers.tsx(84,22): error TS17008: JSX element 'Channel' has no corresponding closing tag.
+src/utils/testingHelpers.tsx(85,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(86,5): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(98,16): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(101,22): error TS17008: JSX element 'Comment' has no corresponding closing tag.
+src/utils/testingHelpers.tsx(102,13): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(103,5): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(126,16): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(130,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(131,12): error TS17008: JSX element 'number' has no corresponding closing tag.
+src/utils/testingHelpers.tsx(131,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(132,3): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(134,21): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(139,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(142,68): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(143,3): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(148,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(152,13): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(152,40): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(153,5): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(154,11): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(154,41): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(156,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(158,34): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(159,5): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(163,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(165,24): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(166,5): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(166,57): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(166,67): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(168,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(170,37): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(171,5): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(171,60): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(171,78): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(175,59): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(175,72): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(177,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(179,33): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(180,5): error TS1109: Expression expected.
+src/utils/testingHelpers.tsx(180,62): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(180,77): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(182,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(182,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(186,9): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(187,13): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(187,36): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(187,69): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(188,27): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(189,27): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(189,70): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(189,74): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(192,9): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(192,25): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(193,35): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(193,53): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(193,56): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(196,14): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(196,32): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(197,29): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(197,76): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(197,80): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(197,82): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(201,16): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(202,37): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(202,49): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(203,53): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(205,42): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(205,53): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(207,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(209,39): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(210,80): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(211,47): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(211,57): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(212,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(212,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(215,33): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(215,45): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(216,40): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(218,42): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(218,53): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(220,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(222,47): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(223,55): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(225,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(225,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(228,36): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(228,48): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(229,53): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(231,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(233,43): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/utils/testingHelpers.tsx(234,52): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(236,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(236,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(236,9): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(240,18): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(241,18): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(243,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(246,16): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(248,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(251,18): error TS1005: '}' expected.
+src/utils/testingHelpers.tsx(253,3): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(253,5): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/utils/testingHelpers.tsx(257,1): error TS1005: '</' expected.
+src/utils/youtubeApiUtils.ts(57,52): error TS1138: Parameter declaration expected.
+src/utils/youtubeApiUtils.ts(80,48): error TS1138: Parameter declaration expected.
+stores/storeUtils.ts(68,35): error TS1138: Parameter declaration expected.
+stores/storeUtils.ts(240,40): error TS1138: Parameter declaration expected.
+stores/storeUtils.ts(293,62): error TS1138: Parameter declaration expected.
+stores/storeUtils.ts(307,38): error TS1138: Parameter declaration expected.
+test/test-utils.tsx(94,23): error TS1109: Expression expected.
+test/test-utils.tsx(95,5): error TS1005: ')' expected.
+test/test-utils.tsx(96,36): error TS1005: ',' expected.
+test/test-utils.tsx(96,38): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(200,7): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(201,7): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(599,50): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(600,13): error TS1003: Identifier expected.
+utils/advancedMonitoring.ts(600,18): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(600,29): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(600,31): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(608,6): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+utils/advancedMonitoring.ts(611,3): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(611,27): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(613,9): error TS1005: ':' expected.
+utils/advancedMonitoring.ts(616,40): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(619,11): error TS1005: ':' expected.
+utils/advancedMonitoring.ts(619,62): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(620,11): error TS1005: ':' expected.
+utils/advancedMonitoring.ts(620,68): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(622,12): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(629,6): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(631,12): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(638,6): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(641,3): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(641,24): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(642,11): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(642,63): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(643,11): error TS1003: Identifier expected.
+utils/advancedMonitoring.ts(643,16): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(643,27): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(643,29): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(653,5): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(653,6): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(655,76): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(656,11): error TS1003: Identifier expected.
+utils/advancedMonitoring.ts(656,16): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(656,27): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(656,29): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(662,5): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(662,6): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(663,3): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(665,3): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(665,29): error TS1005: ';' expected.
+utils/advancedMonitoring.ts(667,9): error TS1003: Identifier expected.
+utils/advancedMonitoring.ts(673,5): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(673,11): error TS1005: ':' expected.
+utils/advancedMonitoring.ts(686,7): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(688,13): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(688,74): error TS1005: ',' expected.
+utils/advancedMonitoring.ts(690,1): error TS1128: Declaration or statement expected.
+utils/advancedMonitoring.ts(746,79): error TS1109: Expression expected.
+utils/advancedMonitoring.ts(798,19): error TS1005: ',' expected.
+utils/componentOptimization.tsx(86,45): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(88,3): error TS1005: ',' expected.
+utils/componentOptimization.tsx(93,66): error TS1005: ',' expected.
+utils/componentOptimization.tsx(128,4): error TS1128: Declaration or statement expected.
+utils/componentOptimization.tsx(135,66): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(169,37): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(214,68): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(216,3): error TS1005: ',' expected.
+utils/componentOptimization.tsx(349,57): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(378,61): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(380,3): error TS1005: ',' expected.
+utils/componentOptimization.tsx(396,81): error TS1109: Expression expected.
+utils/componentOptimization.tsx(397,6): error TS1005: ')' expected.
+utils/componentOptimization.tsx(398,16): error TS1005: ';' expected.
+utils/componentOptimization.tsx(399,25): error TS1005: ';' expected.
+utils/componentOptimization.tsx(399,27): error TS1434: Unexpected keyword or identifier.
+utils/componentOptimization.tsx(399,30): error TS1128: Declaration or statement expected.
+utils/componentOptimization.tsx(399,32): error TS1005: ';' expected.
+utils/componentOptimization.tsx(404,6): error TS1128: Declaration or statement expected.
+utils/componentOptimization.tsx(404,10): error TS1005: ';' expected.
+utils/componentOptimization.tsx(411,3): error TS1128: Declaration or statement expected.
+utils/componentOptimization.tsx(412,1): error TS1128: Declaration or statement expected.
+utils/componentOptimization.tsx(415,38): error TS1138: Parameter declaration expected.
+utils/componentOptimization.tsx(418,9): error TS1005: ',' expected.
+utils/componentOptimization.tsx(434,66): error TS1138: Parameter declaration expected.
+utils/componentOptimizations.ts(6,44): error TS1138: Parameter declaration expected.
+utils/componentOptimizations.ts(8,3): error TS1005: ',' expected.
+utils/componentOptimizations.ts(16,51): error TS1138: Parameter declaration expected.
+utils/componentOptimizations.ts(18,3): error TS1005: ',' expected.
+utils/componentOptimizations.ts(43,6): error TS1136: Property assignment expected.
+utils/componentOptimizations.ts(44,58): error TS1005: '=>' expected.
+utils/componentOptimizations.ts(44,68): error TS1005: ';' expected.
+utils/componentOptimizations.ts(59,4): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(63,6): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(70,6): error TS1109: Expression expected.
+utils/componentOptimizations.ts(71,11): error TS1005: ';' expected.
+utils/componentOptimizations.ts(82,7): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(90,6): error TS1136: Property assignment expected.
+utils/componentOptimizations.ts(91,64): error TS1005: '=>' expected.
+utils/componentOptimizations.ts(91,73): error TS1005: ';' expected.
+utils/componentOptimizations.ts(99,4): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(103,6): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(110,5): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(118,6): error TS1136: Property assignment expected.
+utils/componentOptimizations.ts(119,66): error TS1005: ',' expected.
+utils/componentOptimizations.ts(120,5): error TS1131: Property or signature expected.
+utils/componentOptimizations.ts(134,3): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(134,4): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(138,6): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(149,5): error TS1128: Declaration or statement expected.
+utils/componentOptimizations.ts(157,6): error TS1136: Property assignment expected.
+utils/componentOptimizations.ts(158,27): error TS1005: ',' expected.
+utils/componentOptimizations.ts(169,6): error TS1109: Expression expected.
+utils/componentOptimizations.ts(170,19): error TS1005: ';' expected.
+utils/componentOptimizations.ts(175,5): error TS1128: Declaration or statement expected.
+utils/componentUtils.tsx(70,38): error TS1109: Expression expected.
+utils/componentUtils.tsx(71,8): error TS1005: ')' expected.
+utils/componentUtils.tsx(73,1): error TS1128: Declaration or statement expected.
+utils/componentUtils.tsx(73,2): error TS1128: Declaration or statement expected.
+utils/deploymentAutomation.ts(734,30): error TS1138: Parameter declaration expected.
+utils/deploymentAutomation.ts(972,35): error TS1138: Parameter declaration expected.
+utils/deploymentAutomation.ts(1004,18): error TS1138: Parameter declaration expected.
+utils/imageUtils.ts(4,38): error TS1109: Expression expected.
+utils/imageUtils.ts(5,13): error TS1005: ')' expected.
+utils/imageUtils.ts(6,14): error TS1005: ',' expected.
+utils/imageUtils.ts(6,15): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(7,8): error TS1005: ',' expected.
+utils/imageUtils.ts(7,9): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(8,9): error TS1005: ',' expected.
+utils/imageUtils.ts(8,10): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(9,1): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(9,2): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(88,38): error TS1109: Expression expected.
+utils/imageUtils.ts(89,14): error TS1005: ')' expected.
+utils/imageUtils.ts(90,8): error TS1005: ',' expected.
+utils/imageUtils.ts(90,9): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(91,9): error TS1005: ',' expected.
+utils/imageUtils.ts(91,10): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(93,1): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(93,2): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(126,44): error TS1109: Expression expected.
+utils/imageUtils.ts(127,11): error TS1005: ')' expected.
+utils/imageUtils.ts(128,10): error TS1005: ',' expected.
+utils/imageUtils.ts(128,11): error TS1134: Variable declaration expected.
+utils/imageUtils.ts(129,1): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(129,2): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(188,31): error TS1109: Expression expected.
+utils/imageUtils.ts(189,7): error TS1005: ')' expected.
+utils/imageUtils.ts(193,1): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(193,2): error TS1128: Declaration or statement expected.
+utils/imageUtils.ts(193,18): error TS1005: ';' expected.
+utils/performance.ts(235,61): error TS1138: Parameter declaration expected.
+utils/performance.ts(237,3): error TS1005: ',' expected.
+utils/performanceMonitor.ts(88,42): error TS1005: ')' expected.
+utils/performanceMonitor.ts(88,57): error TS1005: ';' expected.
+utils/performanceMonitor.ts(113,6): error TS1128: Declaration or statement expected.
+utils/performanceMonitor.ts(238,59): error TS1138: Parameter declaration expected.
+utils/performanceMonitor.ts(240,3): error TS1005: ',' expected.
+utils/performanceMonitor.ts(269,48): error TS1005: ')' expected.
+utils/performanceMonitor.ts(269,63): error TS1005: ';' expected.
+utils/performanceMonitor.ts(271,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(11,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(12,65): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(16,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(17,10): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(18,42): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(19,13): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(19,46): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(20,13): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(20,46): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(22,19): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(22,46): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(22,48): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(33,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(33,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(33,7): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(37,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(40,44): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(41,15): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(41,46): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(42,15): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(42,46): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(44,21): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(47,11): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(49,16): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(49,77): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(54,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(55,17): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(56,42): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(57,12): error TS1359: Identifier expected. 'const' is a reserved word that cannot be used here.
+utils/performanceOptimizations.ts(57,18): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(57,22): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(74,7): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(74,14): error TS1005: ':' expected.
+utils/performanceOptimizations.ts(74,18): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(75,8): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(83,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(84,30): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(87,5): error TS1131: Property or signature expected.
+utils/performanceOptimizations.ts(88,3): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(88,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(96,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(97,46): error TS1005: '=>' expected.
+utils/performanceOptimizations.ts(97,50): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(102,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(103,17): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(108,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(109,23): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(109,54): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(115,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(116,26): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(116,32): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(128,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(136,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(137,70): error TS1005: '=>' expected.
+utils/performanceOptimizations.ts(137,79): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(148,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(152,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(163,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(164,18): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(164,24): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(169,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(177,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(178,27): error TS1005: '=>' expected.
+utils/performanceOptimizations.ts(178,36): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(178,43): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(185,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(189,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(190,29): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(191,11): error TS1005: ')' expected.
+utils/performanceOptimizations.ts(191,55): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(192,13): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(193,3): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(193,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(200,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(208,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(209,27): error TS1005: ',' expected.
+utils/performanceOptimizations.ts(209,28): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(210,13): error TS1005: ')' expected.
+utils/performanceOptimizations.ts(211,3): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(211,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(211,24): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(218,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(222,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(223,43): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(232,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(240,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(241,42): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(243,16): error TS1005: '=>' expected.
+utils/performanceOptimizations.ts(243,20): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(263,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(267,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(268,42): error TS1138: Parameter declaration expected.
+utils/performanceOptimizations.ts(283,6): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(284,21): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(284,24): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(285,10): error TS1005: ')' expected.
+utils/performanceOptimizations.ts(286,10): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(287,12): error TS1005: ';' expected.
+utils/performanceOptimizations.ts(288,13): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(289,3): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(289,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(289,11): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(293,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(301,6): error TS1136: Property assignment expected.
+utils/performanceOptimizations.ts(302,43): error TS1005: '=>' expected.
+utils/performanceOptimizations.ts(303,10): error TS1003: Identifier expected.
+utils/performanceOptimizations.ts(304,36): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(306,11): error TS1109: Expression expected.
+utils/performanceOptimizations.ts(307,3): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(307,5): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(315,4): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(319,6): error TS1128: Declaration or statement expected.
+utils/performanceOptimizations.ts(347,5): error TS1128: Declaration or statement expected.
+utils/playerUtils.ts(437,51): error TS1131: Property or signature expected.
+utils/playerUtils.ts(439,40): error TS1131: Property or signature expected.
+utils/playerUtils.ts(441,44): error TS1131: Property or signature expected.
+utils/playerUtils.ts(443,75): error TS1131: Property or signature expected.
+utils/playerUtils.ts(445,63): error TS1131: Property or signature expected.
+utils/playerUtils.ts(447,50): error TS1131: Property or signature expected.
+utils/playerUtils.ts(449,53): error TS1131: Property or signature expected.
+utils/playerUtils.ts(451,47): error TS1131: Property or signature expected.
+utils/playerUtils.ts(453,41): error TS1131: Property or signature expected.
+utils/playerUtils.ts(455,44): error TS1131: Property or signature expected.
+utils/playerUtils.ts(457,41): error TS1131: Property or signature expected.
+utils/playerUtils.ts(459,43): error TS1131: Property or signature expected.
+utils/playerUtils.ts(461,52): error TS1131: Property or signature expected.
+utils/securityMonitoring.ts(546,33): error TS1138: Parameter declaration expected.
+utils/securityUtils.ts(287,70): error TS1005: ',' expected.
+utils/securityUtils.ts(288,13): error TS1005: ':' expected.
+utils/securityUtils.ts(288,39): error TS1005: ',' expected.
+utils/securityUtils.ts(289,13): error TS1005: ':' expected.
+utils/securityUtils.ts(289,48): error TS1005: ',' expected.
+utils/securityUtils.ts(290,14): error TS1005: ':' expected.
+utils/securityUtils.ts(290,28): error TS1005: ',' expected.
+utils/securityUtils.ts(340,24): error TS1138: Parameter declaration expected.
+utils/testing.tsx(61,37): error TS1109: Expression expected.
+utils/testing.tsx(62,5): error TS1005: ')' expected.
+utils/testing.tsx(62,12): error TS1005: ',' expected.
+utils/testing.tsx(64,1): error TS1128: Declaration or statement expected.
+utils/testing.tsx(64,2): error TS1128: Declaration or statement expected.
+utils/testing.tsx(83,58): error TS1138: Parameter declaration expected.
+utils/testing.tsx(342,35): error TS1109: Expression expected.
+utils/testing.tsx(343,7): error TS1005: ')' expected.
+utils/testing.tsx(346,1): error TS1128: Declaration or statement expected.
+utils/testing.tsx(346,3): error TS1128: Declaration or statement expected.
+utils/testing.tsx(347,19): error TS1005: ',' expected.
+utils/testing.tsx(348,16): error TS1138: Parameter declaration expected.
+utils/testing.tsx(348,19): error TS1005: ',' expected.
+utils/testing.tsx(357,4): error TS1128: Declaration or statement expected.
+utils/testing.tsx(358,1): error TS1128: Declaration or statement expected.
+utils/testUtils.tsx(208,51): error TS1138: Parameter declaration expected.
+utils/unifiedUtils.ts(116,42): error TS1005: ',' expected.
+utils/unifiedUtils.ts(116,54): error TS1005: ',' expected.
+utils/unifiedUtils.ts(116,64): error TS1005: ',' expected.
+utils/unifiedUtils.ts(118,8): error TS1128: Declaration or statement expected.
+utils/unifiedUtils.ts(119,7): error TS1128: Declaration or statement expected.
+utils/unifiedUtils.ts(120,3): error TS1128: Declaration or statement expected.
+utils/unifiedUtils.ts(120,4): error TS1128: Declaration or statement expected.
+utils/unifiedUtils.ts(129,10): error TS1005: ';' expected.
+utils/unifiedUtils.ts(137,18): error TS1005: ';' expected.
+utils/unifiedUtils.ts(142,18): error TS1005: ';' expected.
+utils/unifiedUtils.ts(145,5): error TS1128: Declaration or statement expected.
+utils/unifiedUtils.ts(335,57): error TS1138: Parameter declaration expected.
+utils/unifiedUtils.ts(345,57): error TS1138: Parameter declaration expected.
+utils/uploadUtils.ts(25,29): error TS1138: Parameter declaration expected.
+utils/uploadUtils.ts(185,35): error TS1138: Parameter declaration expected.

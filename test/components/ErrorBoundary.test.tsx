@@ -69,8 +69,7 @@ describe('ErrorBoundary', () => {
     expect(consoleSpy).toHaveBeenCalledWith(
       'ErrorBoundary caught an error:',
       expect.any(Error),
-      expect.any(Object),
-    );
+      expect.any(Object));
 
     consoleSpy.mockRestore();
   });

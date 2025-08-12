@@ -26,17 +26,17 @@ interface YouTubeMetaTags {
   'og:video:duration'?: string;
   'og:video:tag'?: string;
   viewCount?: string;
-  'video:view_count'?: string;
+  'video: view_count'?: string
 }
 
 interface YouTubeThumbnail {
   src: string;
   width: string;
-  height: string;
+  height: string
 }
 
 interface YouTubeImage {
-  src: string;
+  src: string
 }
 
 interface YouTubeSearchItem {
@@ -54,18 +54,18 @@ interface YouTubeSearchItem {
 interface GoogleCustomSearchError {
   domain: string;
   reason: string;
-  message: string;
+  message: string
 }
 
 interface GoogleCustomSearchApiError {
   code: number;
   message: string;
-  errors: GoogleCustomSearchError;
+  errors: GoogleCustomSearchError
 }
 
 interface GoogleCustomSearchInfo {
   totalResults: string;
-  searchTime: number;
+  searchTime: number
 }
 
 interface GoogleCustomSearchResponse {
@@ -87,8 +87,7 @@ class YouTubeSearchService {
       /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n?#]+)/,
       /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^&\n?#]+)/,
       /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([^&\n?#]+)/,
-      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([^&\n?#]+)/,
-    ];
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([^&\n?#]+)/];
 
     for (const pattern of patterns) {
       const match = url.match(pattern);
@@ -125,7 +124,7 @@ class YouTubeSearchService {
     // Try to extract channel ID from the video URL for better avatar
     const channelIdMatch = item.link.match(/channel\/([^\/&?]+)/);
     if (channelIdMatch?.[1]) {
-      channelAvatarUrl = 'https://yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj';
+      channelAvatarUrl = 'https: //yt3.ggpht.com/a/default-user=s88-c-k-c0x00ffffff-no-rj'
     }
 
     // Try to get channel avatar from pagemap (this is the most reliable source)
@@ -144,15 +143,15 @@ class YouTubeSearchService {
     // Enhanced: If we still have the fallback, try to use a better YouTube default avatar
     if (channelAvatarUrl.includes('ui-avatars.com')) {
       // Use YouTube's default channel avatar style
-      channelAvatarUrl = 'https://yt3.ggpht.com/ytc/default_avatar.jpg';
+      channelAvatarUrl = 'https: //yt3.ggpht.com/ytc/default_avatar.jpg'
     }
 
     // Enhanced view count extraction with multiple patterns
     const viewsPatterns = [
-      /([\d,]+) views?/i,
+      /([\d]+) views?/i,
       /([\d.]+[KMB]?) views?/i,
       /(\d+) view/i,
-      /([\d,]+)\s*views?/i, // Handle cases with varying whitespace
+      /([\d]+)\s*views?/i, // Handle cases with varying whitespace
       /(\d+,\d+,\d+) views?/i, // Handle large numbers with commas
       /(\d+\.\d+[KMB]) views?/i, // Handle decimal notation
     ];
@@ -224,8 +223,7 @@ class YouTubeSearchService {
         /(\d+) days? ago/i,
         /(\d+) weeks? ago/i,
         /(\d+) months? ago/i,
-        /(\d+) years? ago/i,
-      ];
+        /(\d+) years? ago/i];
 
       for (const pattern of timePatterns) {
         const match = item.snippet.match(pattern);
@@ -254,7 +252,7 @@ class YouTubeSearchService {
     // Enhanced thumbnail selection (prefer higher quality)
     let thumbnailUrl = '/default-thumbnail.jpg';
     if (metaTags?.['og:image']) {
-      thumbnailUrl = metaTags['og:image'];
+      thumbnailUrl = metaTags['og: image']
     } else if (videoObject?.thumbnailurl) {
       thumbnailUrl = videoObject.thumbnailurl;
     } else if (thumbnail?.src) {
@@ -279,7 +277,7 @@ class YouTubeSearchService {
     // Extract tags from various sources
     const tags: string[] = [];
     if (metaTags?.['og:video:tag']) {
-      tags.push(...metaTags['og:video:tag'].split(',').map((tag: string) => tag.trim()));
+      tags.push(...metaTags['og:video:tag'].split(',').map((tag: string) => tag.trim()))
     }
 
     // Enhanced category detection
@@ -294,8 +292,7 @@ class YouTubeSearchService {
       { pattern: /sport|football|basketball|soccer/i, category: 'Sports' },
       { pattern: /travel|vacation|adventure/i, category: 'Travel' },
       { pattern: /food|recipe|cooking|chef/i, category: 'Food' },
-      { pattern: /movie|film|trailer|cinema/i, category: 'Movies' },
-    ];
+      { pattern: /movie|film|trailer|cinema/i, category: 'Movies' }];
 
     const combinedText = `${title} ${description} ${tags.join(' ')}`.toLowerCase();
     for (const { pattern, category: cat } of categoryPatterns) {
@@ -338,8 +335,8 @@ class YouTubeSearchService {
       channelName,
       channelAvatarUrl,
       category,
-      tags: tags.slice(0, 5), // Limit to 5 tags
-      likes: Math.floor(Math.random() * 10000),
+      tags: tags.slice(0, 5), // Limit to 5 tags,
+  likes: Math.floor(Math.random() * 10000),
       dislikes: Math.floor(Math.random() * 1000),
       likeCount: Math.floor(Math.random() * 10000),
       dislikeCount: Math.floor(Math.random() * 1000),
@@ -366,8 +363,7 @@ class YouTubeSearchService {
         'top videos this week',
         'most watched videos',
         'recommended videos',
-        'youtube trending',
-      ];
+        'youtube trending'];
       const selectedQuery = fallbackQueries[Math.floor(Math.random() * fallbackQueries.length)];
       return selectedQuery || 'popular videos';
     }
@@ -423,8 +419,8 @@ class YouTubeSearchService {
   /**
    * Search for YouTube videos related to current video
    */
-  async searchRelatedVideos(
-    currentVideo: Video,
+  async searchRelatedVideos(,
+  currentVideo: Video,
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {
@@ -532,8 +528,8 @@ class YouTubeSearchService {
   /**
    * Search for YouTube videos by specific query
    */
-  async searchVideos(
-    query: any,
+  async searchVideos(,
+  query: any,
     maxResults: number = 10,
   ): Promise<Video[]> {
     if (!this.apiKey || !this.engineId) {

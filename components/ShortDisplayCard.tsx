@@ -30,8 +30,8 @@ interface ShortDisplayCardProps {
 
 // Extracted PlayPauseOverlay component
 interface PlayPauseOverlayProps {
-  isPlaying: boolean;
-  onToggle: () => void;
+  isPlaying: boolean;,
+  onToggle: () => void
 }
 
 const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle }) => (
@@ -62,11 +62,11 @@ const PlayPauseOverlay: React.FC<PlayPauseOverlayProps> = ({ isPlaying, onToggle
 
 // Extracted VideoInfo component
 interface VideoInfoProps {
-  title: string;
+  title: string;,
   channelName: string;
-  views: string;
+  views: string;,
   isFollowed: boolean;
-  onFollow: (() => void) | undefined;
+  onFollow: (() => void) | undefined
 }
 
 const VideoInfo: React.FC<VideoInfoProps> = ({
@@ -102,12 +102,12 @@ const VideoInfo: React.FC<VideoInfoProps> = ({
 
 // Extracted ActionButtons component
 interface ActionButtonsProps {
-  isMuted: boolean;
+  isMuted: boolean;,
   isLiked: boolean;
-  onToggleMute: () => void;
-  onLike: (e: React.MouseEvent) => void;
-  onComment: (e: React.MouseEvent) => void;
-  onShare: (e: React.MouseEvent) => void;
+  onToggleMute: () => void;,
+  onLike: (e: React.MouseEvent) => void;,
+  onComment: (e: React.MouseEvent) => void;,
+  onShare: (e: React.MouseEvent) => void
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({
@@ -172,8 +172,8 @@ const LoadingIndicator: React.FC = () => (
 
 // Extracted ErrorState component
 interface ErrorStateProps {
-  error: string;
-  onRetry: () => void;
+  error: string;,
+  onRetry: () => void
 }
 
 const ErrorState: React.FC<ErrorStateProps> = ({ error, onRetry }) => (
@@ -204,7 +204,7 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
   // Real video player implementation
   const videoPlayer = useVideoPlayer({
     autoplay: false,
-    muted: true,
+          muted: true,
     loop: true });
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -214,25 +214,26 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     if (videoRef.current) {
       videoPlayer.setVideoRef(videoRef.current);
     }
-  }, [videoPlayer]);
+  
+        }, [videoPlayer]);
 
   // Use intersection observer for visibility tracking and autoplay
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.7,
-    rootMargin: '0px' });
+          rootMargin: '0px' });
 
   // Enable autoplay when video is in view (both on shorts page and home page)
   useVideoAutoplay({
     isIntersecting,
     isPlaying: videoPlayer.isPlaying,
     isManuallyPaused,
-    actions: {
+    actions: {,
       play: videoPlayer.play,
-      pause: videoPlayer.pause,
+          pause: videoPlayer.pause,
       unmute: videoPlayer.unmute },
     setIsManuallyPaused,
-    enableAutoplay: true, // Enable autoplay on both shorts page and home page
-    unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page
+    enableAutoplay: true, // Enable autoplay on both shorts page and home page,
+  unmuteOnAutoplay: isOnShortsPage, // Only unmute on autoplay when on shorts page
   });
 
   // Event handlers
@@ -284,7 +285,8 @@ const ShortDisplayCard: React.FC<ShortDisplayCardProps> = ({
     if (isActive && onVideoChange) {
       onVideoChange();
     }
-  }, [isActive, onVideoChange]);
+  
+        }, [isActive, onVideoChange]);
 
   return (
     <div

@@ -7,7 +7,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 export interface FileUploadProps {
   accept?: string;
   multiple?: boolean;
-  maxSize?: number; // in bytes
+  maxSize?: number; // in bytes,
   onFileSelect: (files: File) => void;
   onFileRemove?: (index: number) => void;
   disabled?: boolean;
@@ -144,7 +144,8 @@ return '0 Bytes';
             Selected Files ({files.length})
           </h4>
           <div className="space-y-2">
-            {files.map((file: any, index: number) => (
+            {files.map((file: any,
+          index: number) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"

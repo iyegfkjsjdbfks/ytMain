@@ -27,7 +27,7 @@ interface SecurityResponse {
   timestamp: number;
   success: boolean;
   details: string;
-  automated: boolean;
+  automated: boolean
 }
 
 interface VulnerabilityReport {
@@ -41,7 +41,7 @@ interface VulnerabilityReport {
   fixAvailable: boolean;
   fixVersion?: string;
   detectedAt: number;
-  status: 'open' | 'in-progress' | 'fixed' | 'accepted-risk' | 'false-positive';
+  status: 'open' | 'in-progress' | 'fixed' | 'accepted-risk' | 'false-positive'
 }
 
 interface SecurityMetrics {
@@ -52,12 +52,12 @@ interface SecurityMetrics {
     critical: number;
     high: number;
     medium: number;
-    low: number;
+    low: number
   };
   securityScore: number;
   complianceScore: number;
   incidentResponseTime: number;
-  falsePositiveRate: number;
+  falsePositiveRate: number
 }
 
 interface SecurityPolicy {
@@ -66,7 +66,7 @@ interface SecurityPolicy {
   type: 'access-control' | 'data-protection' | 'network-security' | 'application-security';
   rules: SecurityRule[];
   enabled: boolean;
-  priority: number;
+  priority: number
 }
 
 interface SecurityRule {
@@ -83,7 +83,7 @@ interface ComplianceCheck {
   status: 'compliant' | 'non-compliant' | 'partial' | 'not-applicable';
   evidence?: string;
   lastChecked: number;
-  nextCheck: number;
+  nextCheck: number
 }
 
 interface SecurityAuditLog {
@@ -157,8 +157,7 @@ class SecurityMonitoringEngine {
           id: 'require-auth-admin',
           condition: 'request.path.startsWith("/admin/")',
           action: 'deny',
-          parameters: { requireAuth: true, requireRole: 'admin' } },
-      ] };
+          parameters: { requireAuth: true, requireRole: 'admin' } }] };
 
     const dataProtectionPolicy: SecurityPolicy = {
       id: 'data-protection-policy',
@@ -176,8 +175,7 @@ class SecurityMonitoringEngine {
           id: 'audit-data-access',
           condition: 'action === "data-access"',
           action: 'log',
-          parameters: { auditLevel: 'detailed' } },
-      ] };
+          parameters: { auditLevel: 'detailed' } }] };
 
     const applicationSecurityPolicy: SecurityPolicy = {
       id: 'app-security-policy',
@@ -200,8 +198,7 @@ class SecurityMonitoringEngine {
           id: 'validate-csrf-token',
           condition: 'request.method in ["POST", "PUT", "DELETE"]',
           action: 'deny',
-          parameters: { requireCSRFToken: true } },
-      ] };
+          parameters: { requireCSRFToken: true } }] };
 
     this.policies.set(accessControlPolicy.id, accessControlPolicy);
     this.policies.set(dataProtectionPolicy.id, dataProtectionPolicy);
@@ -234,8 +231,7 @@ class SecurityMonitoringEngine {
         requirement: 'Data retention policies must be implemented',
         status: 'partial',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 86400000 },
-    ];
+        nextCheck: Date.now() + 86400000 }];
 
     const iso27001Checks: ComplianceCheck[] = [
       {
@@ -252,8 +248,7 @@ class SecurityMonitoringEngine {
         requirement: 'Incident response procedures must be documented',
         status: 'compliant',
         lastChecked: Date.now(),
-        nextCheck: Date.now() + 604800000 },
-    ];
+        nextCheck: Date.now() + 604800000 }];
 
     [...gdprChecks, ...iso27001Checks].forEach(check => {
       this.complianceChecks.set(check.id, check);
@@ -384,8 +379,7 @@ return;
         case 'sql-injection':
           action = 'block';
           break;
-        default:
-          action = 'alert';
+        default: action = 'alert'
       }
 
       // Simulate response execution
@@ -396,8 +390,8 @@ return;
         threatId: threat.id,
         action: action as SecurityResponse['action'],
         timestamp: Date.now(),
-        success: Math.random() > 0.1, // 90% success rate
-        details: `Automated ${action} response executed`,
+        success: Math.random() > 0.1, // 90% success rate,
+  details: `Automated ${action} response executed`,
         automated: true };
 
       console.log(`🚨 Security response: ${action} for ${threat.type} threat`);
@@ -549,8 +543,8 @@ return;
   /**
    * Generate security alert
    */
-  private generateSecurityAlert(
-    type: SecurityAlert['type'],
+  private generateSecurityAlert(,
+  type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
     title: any,
     description: any): void {
@@ -633,8 +627,8 @@ return;
       vulnerabilities: vulnCounts,
       securityScore,
       complianceScore,
-      incidentResponseTime: 300, // 5 minutes average
-      falsePositiveRate: 0.05, // 5%
+      incidentResponseTime: 300, // 5 minutes average,
+  falsePositiveRate: 0.05, // 5%
     };
   }
 
@@ -734,7 +728,7 @@ return;
     vulnerabilities: VulnerabilityReport[];
     alerts: SecurityAlert[];
     compliance: ComplianceCheck[];
-    recommendations: string[];
+    recommendations: string[]
   } {
     const metrics = this.getSecurityMetrics();
     const threats = this.getActiveThreats();

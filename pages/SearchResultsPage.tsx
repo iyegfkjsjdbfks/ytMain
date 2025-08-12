@@ -12,11 +12,11 @@ import type { Video } from '../types';
 
 // Types for better performance
 interface SearchState {
-  videos: Video;
+  videos: Video;,
   youtubeVideos: YouTubeSearchResult;
-  googleSearchVideos: GoogleSearchResult;
+  googleSearchVideos: GoogleSearchResult;,
   loading: boolean;
-  youtubeLoading: boolean;
+  youtubeLoading: boolean
 }
 
 // Memoized empty state component
@@ -42,9 +42,9 @@ const SearchResultsPage: React.FC = () => {
   // Consolidated state
   const [searchState, setSearchState] = useState<SearchState>({
     videos: [],
-    youtubeVideos: [],
+          youtubeVideos: [],
     googleSearchVideos: [],
-    loading: false,
+          loading: false,
     youtubeLoading: false });
 
   // Memoized search function with performance monitoring
@@ -52,15 +52,16 @@ const SearchResultsPage: React.FC = () => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],
-        youtubeVideos: [],
+          youtubeVideos: [],
         googleSearchVideos: [],
-        loading: false,
+          loading: false,
         youtubeLoading: false });
       return;
     }
 
     performanceMonitor.startMeasure('search-results-load');
-    setSearchState(prev => ({ ...prev, loading: true, youtubeLoading: true }));
+    setSearchState(prev => ({ ...prev, loading: true,
+          youtubeLoading: true }));
 
     // Create an AbortController for request cancellation
     const abortController = new AbortController();
@@ -82,9 +83,7 @@ const SearchResultsPage: React.FC = () => {
 
         // Use Google Custom Search for discovery with YouTube API for metadata enhancement
         const combinedResults = await searchCombined(
-          searchQuery,
-          (query) => VideoService.searchVideos(query).then(result => result.videos),
-        );
+          searchQuery(query) => VideoService.searchVideos(query).then(result => result.videos));
 
         // Check if request was cancelled
         if (abortController.signal.aborted) {
@@ -100,9 +99,7 @@ const SearchResultsPage: React.FC = () => {
       } else {
         // Use the original combined search for other modes
         const combinedResults = await searchCombined(
-          searchQuery,
-          (query) => VideoService.searchVideos(query).then(result => result.videos),
-        );
+          searchQuery(query) => VideoService.searchVideos(query).then(result => result.videos));
 
         // Check if request was cancelled
         if (abortController.signal.aborted) {
@@ -122,7 +119,8 @@ const SearchResultsPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Error in search:', error);
-      setSearchState(prev => ({ ...prev, loading: false, youtubeLoading: false }));
+      setSearchState(prev => ({ ...prev, loading: false,
+          youtubeLoading: false }));
       if (performanceMonitor.hasMetric('search-results-load')) {
         performanceMonitor.endMeasure('search-results-load');
       }
@@ -131,15 +129,15 @@ const SearchResultsPage: React.FC = () => {
     // Return cleanup function
     return () => {
       currentController.abort();
-    };
-  }, []);
+    
+        }}, []);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       // Cancel any ongoing requests when component unmounts
-    };
-  }, []);
+    
+        }}, []);
 
   // Effect for debounced search
   useEffect(() => {

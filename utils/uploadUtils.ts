@@ -5,7 +5,7 @@ interface UploadProgress {
   percentage: number;
   uploadedBytes: number;
   totalBytes: number;
-  speed: number; // bytes per second
+  speed: number; // bytes per second,
   timeRemaining: number; // in seconds
 }
 
@@ -13,16 +13,16 @@ interface UploadResponse {
   success: boolean;
   videoId?: string;
   message?: string;
-  [key: string]: unknown;
+  [key: string]: unknown
 }
 
 interface UploadOptions {
   onProgress?: (progress: UploadProgress) => void;
   onComplete?: (response: UploadResponse) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error) => void
 }
 
-export function uploadVideo(
+export function uploadVideo(,
   videoData: VideoUploadData,
   options: UploadOptions = {},
 ): void {
@@ -57,8 +57,8 @@ export function uploadVideo(
           percentage: Math.round((event.loaded / event.total) * 100),
           uploadedBytes: event.loaded,
           totalBytes: event.total,
-          speed: event.loaded / ((Date.now() - startTime) / 1000), // bytes per second
-          timeRemaining: (event.total - event.loaded) / (event.loaded / ((Date.now() - startTime) / 1000)) };
+          speed: event.loaded / ((Date.now() - startTime) / 1000), // bytes per second,
+  timeRemaining: (event.total - event.loaded) / (event.loaded / ((Date.now() - startTime) / 1000)) };
         onProgress(progress);
       }
     };
@@ -103,8 +103,7 @@ export function validateVideoFile(file: File): { valid: boolean; error?: string 
     'video/x-ms-wmv',
     'video/x-matroska',
     'video/3gpp',
-    'video/3gpp2',
-  ];
+    'video/3gpp2'];
 
   const maxSize = 128 * 1024 * 1024; // 128MB
 
@@ -149,7 +148,7 @@ export function getVideoMetadata(file: File): Promise<{
   aspectRatio: number;
   bitrate: number;
   codec: string;
-  container: string;
+  container: string
 }> {
   return new Promise((resolve, reject) => {
     const video = document.createElement('video');
@@ -171,8 +170,8 @@ export function getVideoMetadata(file: File): Promise<{
         height,
         aspectRatio,
         bitrate,
-        codec: '', // Would require more complex extraction
-        container: file.type });
+        codec: '', // Would require more complex extraction,
+  container: file.type });
     };
 
     video.onerror = () => {
@@ -183,7 +182,7 @@ export function getVideoMetadata(file: File): Promise<{
   });
 }
 
-export function generateThumbnail(
+export function generateThumbnail(,
   videoFile: File,
   timeInSeconds: number = 0,
 ): Promise<string> {

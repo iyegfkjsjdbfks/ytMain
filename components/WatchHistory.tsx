@@ -28,8 +28,7 @@ const WatchHistory: React.FC<WatchHistoryProps> = ({ maxVideos = 6 }) => {
         // Simulate recently watched videos by taking a random subset
         const watchedVideoIds = [
           '1', '2', '3', '4', '5',
-          '6', '7', '8', '9', '10',
-        ];
+          '6', '7', '8', '9', '10'];
 
         const historyFeed = allVideos
           .filter((video) => watchedVideoIds.includes(video.id) && !video.isShort)

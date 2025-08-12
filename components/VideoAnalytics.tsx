@@ -14,51 +14,49 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { TvIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
-  videoId: string;
+  videoId: string;,
   title: string;
-  thumbnail: string;
+  thumbnail: string;,
   publishedAt: string;
-  views: number;
+  views: number;,
   likes: number;
-  dislikes: number;
+  dislikes: number;,
   comments: number;
-  shares: number;
+  shares: number;,
   watchTime: number;
-  averageViewDuration: number;
+  averageViewDuration: number;,
   clickThroughRate: number;
-  retention: number;
+  retention: number;,
   demographics: {
     ageGroups: { [key]: number };
     genders: { [key]: number };
-    countries: { [key]: number };
-  };
-  devices: {
+    countries: { [key]: number }};
+  devices: {,
     mobile: number;
-    desktop: number;
+    desktop: number;,
     tablet: number;
     tv: number;
   };
-  trafficSources: {
+  trafficSources: {,
     search: number;
-    suggested: number;
+    suggested: number;,
     external: number;
-    direct: number;
+    direct: number;,
     playlist: number;
   };
-  revenueData: {
+  revenueData: {,
     estimatedRevenue: number;
-    rpm: number;
+    rpm: number;,
     cpm: number;
     adViews: number;
   };
-  engagement: {
+  engagement: {,
     likeRate: number;
-    dislikeRate: number;
+    dislikeRate: number;,
     commentRate: number;
-    shareRate: number;
+    shareRate: number;,
     subscribeRate: number;
-  };
-}
+  }}
 
 interface VideoAnalyticsProps {
   videoId: string;
@@ -102,8 +100,8 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
     return {
       videoId,
       title: `Video Analytics for ${videoId}`,
-      thumbnail: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=320&h=180&fit=crop`,
-      publishedAt: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString(),
+          thumbnail: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=320&h=180&fit=crop`,
+          publishedAt: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString(),
       views: baseViews,
       likes,
       dislikes,
@@ -112,8 +110,8 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
       watchTime,
       averageViewDuration,
       clickThroughRate: 2 + Math.random() * 8,
-      retention: generateRetentionData(),
-      demographics: {
+          retention: generateRetentionData(),
+      demographics: {,
         ageGroups: {
           '13-17': Math.floor(Math.random() * 15),
           '18-24': Math.floor(Math.random() * 25) + 15,
@@ -134,29 +132,28 @@ const VideoAnalytics: React.FC<VideoAnalyticsProps> = ({ videoId, className = ''
           'Australia': 3 + Math.random() * 5,
           'Germany': 3 + Math.random() * 5,
           'Other': 20 + Math.random() * 15 } },
-      devices: {
+      devices: {,
         mobile: 60 + Math.random() * 20,
-        desktop: 25 + Math.random() * 15,
+          desktop: 25 + Math.random() * 15,
         tablet: 8 + Math.random() * 7,
-        tv: 2 + Math.random() * 5 },
-      trafficSources: {
+          tv: 2 + Math.random() * 5 },
+      trafficSources: {,
         search: 30 + Math.random() * 20,
-        suggested: 25 + Math.random() * 15,
+          suggested: 25 + Math.random() * 15,
         external: 15 + Math.random() * 10,
-        direct: 10 + Math.random() * 10,
+          direct: 10 + Math.random() * 10,
         playlist: 5 + Math.random() * 10 },
-      revenueData: {
+          revenueData: {,
         estimatedRevenue: Math.floor(baseViews * (0.001 + Math.random() * 0.005)),
-        rpm: 1 + Math.random() * 4,
+          rpm: 1 + Math.random() * 4,
         cpm: 2 + Math.random() * 8,
-        adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)) },
-      engagement: {
+          adViews: Math.floor(baseViews * (0.7 + Math.random() * 0.2)) },
+      engagement: {,
         likeRate: (likes / baseViews) * 100,
-        dislikeRate: (dislikes / baseViews) * 100,
+          dislikeRate: (dislikes / baseViews) * 100,
         commentRate: (comments / baseViews) * 100,
-        shareRate: (shares / baseViews) * 100,
-        subscribeRate: Math.random() * 2 } };
-  };
+          shareRate: (shares / baseViews) * 100,
+        subscribeRate: Math.random() * 2 } }};
 
   const generateRetentionData = (): number[] => {
     const data = [];
@@ -192,7 +189,7 @@ return `${(num / 1000).toFixed(1)}K`;
   const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+          currency: 'USD',
       minimumFractionDigits: 2 }).format(amount);
   };
 
@@ -277,7 +274,8 @@ return `${(num / 1000).toFixed(1)}K`;
       <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700">
         <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Audience Retention</h3>
         <div className="h-64 flex items-end space-x-1">
-          {analyticsData.retention.map((value: string | number, index: number) => (
+          {analyticsData.retention.map((value: string | number,
+          index: number) => (
             <div
               key={index}
               className="bg-blue-500 rounded-t flex-1 transition-all hover:bg-blue-600"

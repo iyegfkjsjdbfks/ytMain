@@ -22,31 +22,31 @@ const RefactoredTrendingPage: React.FC = () => {
   const { data: unifiedVideos, loading, error } = useVideosData('trending');
 
   // Convert UnifiedVideoMetadata to Video format for compatibility
-  const videos: Video[] = unifiedVideos ? unifiedVideos.map((video: any) => ({
+  const videos: Video[] = unifiedVideos ? unifiedVideos.map((video: any) => ({,
     id: video.id,
-    title: video.title,
+          title: video.title,
     description: video.description,
-    thumbnailUrl: video.thumbnailUrl,
+          thumbnailUrl: video.thumbnailUrl,
     videoUrl: video.videoUrl,
-    duration: video.duration,
+          duration: video.duration,
     views: video.views?.toString() || '0',
-    viewCount: typeof video.views === 'number' ? video.views : parseInt(video.views?.toString() || '0', 10) || 0,
+          viewCount: typeof video.views === 'number' ? video.views : parseInt(video.views?.toString() || '0', 10) || 0,
     likes: video.likes,
-    likeCount: video.likes,
+          likeCount: video.likes,
     dislikes: video.dislikes || 0,
-    dislikeCount: video.dislikes || 0,
+          dislikeCount: video.dislikes || 0,
     commentCount: video.commentCount || 0,
-    uploadedAt: video.publishedAt || '',
+          uploadedAt: video.publishedAt || '',
     channelName: video.channel?.name || 'Unknown Channel',
-    channelId: video.channel?.id || '',
+          channelId: video.channel?.id || '',
     channelAvatarUrl: video.channel?.avatarUrl || '',
-    category: video.category || 'General',
+          category: video.category || 'General',
     tags: video.tags || [],
-    visibility: video.visibility as 'public' | 'private' | 'unlisted' | 'scheduled',
+          visibility: video.visibility as 'public' | 'private' | 'unlisted' | 'scheduled',
     isLive: video.isLive || false,
-    isShort: video.isShort || false,
+          isShort: video.isShort || false,
     createdAt: video.publishedAt || '',
-    updatedAt: video.publishedAt || '' })) : [];
+          updatedAt: video.publishedAt || '' })) : [];
 
   const handleVideoClick = (video: Video) => {
     // Navigate to video or handle click

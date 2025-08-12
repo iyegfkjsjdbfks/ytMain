@@ -7,17 +7,16 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   test: {
-    // Test environment
-    environment: 'jsdom',
+    // Test environment,
+  environment: 'jsdom',
     
-    // Global test setup
-    globals: true,
+    // Global test setup,
+  globals: true,
     setupFiles: ['./src/utils/test-setup.ts'],
     
-    // File patterns
-    include: [
-      'test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-    ],
+    // File patterns,
+  include: [
+      'test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [
       'node_modules',
       'dist',
@@ -54,8 +53,8 @@ export default defineConfig({
     ],
     hookTimeout: 10000,
     
-    // Coverage configuration
-    coverage: {
+    // Coverage configuration,
+  coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
       reportsDirectory: './coverage',
@@ -82,8 +81,8 @@ export default defineConfig({
       statements: 80
     },
     
-    // Reporter configuration
-    reporter: [
+    // Reporter configuration,
+  reporter: [
       'default',
       'json',
       'html'
@@ -93,11 +92,11 @@ export default defineConfig({
       html: './coverage/test-results.html'
     },
     
-    // Watch mode
-    watch: false,
+    // Watch mode,
+  watch: false,
     
-    // Memory-safe test execution
-    pool: 'threads',
+    // Memory-safe test execution,
+  pool: 'threads',
     poolOptions: {
       threads: {
         singleThread: true,
@@ -106,8 +105,8 @@ export default defineConfig({
       }
     },
     
-    // Mock configuration
-    server: {
+    // Mock configuration,
+  server: {
       deps: {
         inline: [
         '@testing-library/jest-dom'
@@ -115,8 +114,8 @@ export default defineConfig({
       }
     },
     
-    // Environment variables for memory management
-    env: {
+    // Environment variables for memory management,
+  env: {
       NODE_ENV: 'test',
       VITE_APP_ENV: 'test',
       VITE_USE_MOCK_DATA: 'true',
@@ -124,17 +123,17 @@ export default defineConfig({
       NODE_OPTIONS: "--max-old-space-size=8192"
     },
     
-    // Retry configuration
-    retry: 2,
+    // Retry configuration,
+  retry: 2,
     
-    // Bail configuration
-    bail: 0,
+    // Bail configuration,
+  bail: 0,
     
-    // Silent mode
-    silent: false,
+    // Silent mode,
+  silent: false,
     
-    // UI configuration
-    ui: true,
+    // UI configuration,
+  ui: true,
     open: false,
     
     // Browser configuration (for browser testing)
@@ -145,15 +144,15 @@ export default defineConfig({
       headless: true
     },
     
-    // Benchmark configuration
-    benchmark: {
+    // Benchmark configuration,
+  benchmark: {
       include: ['**/*.{bench,benchmark}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
       exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
       reporter: ['default']
     },
     
-    // Type checking
-    typecheck: {
+    // Type checking,
+  typecheck: {
       enabled: false,
       tsconfig: './tsconfig.json',
       include: ['**/*.{test,spec}-d.{ts,js}'],
@@ -164,7 +163,7 @@ export default defineConfig({
     // workspace: "./vitest.workspace.ts" // Deprecated, using test.projects instead
   },
   
-  // Resolve configuration
+  // Resolve configuration,
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -183,14 +182,14 @@ export default defineConfig({
     }
   },
   
-  // Define configuration
+  // Define configuration,
   define: {
     __TEST__: true,
     __DEV__: false,
     __PROD__: false
   },
   
-  // ESBuild configuration
+  // ESBuild configuration,
   esbuild: {
     target: 'node14'
   }

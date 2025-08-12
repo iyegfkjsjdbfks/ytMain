@@ -7,7 +7,7 @@ import type { VideoGridProps as VideoGridPropsBase } from '@/types';
 
 export interface VideoGridProps
   extends Omit<VideoGridPropsBase, 'onVideoMoreClick'> {
-  onVideoMoreClick: (videoId: any) => void;
+  onVideoMoreClick: (videoId: any) => void
 }
 
 export const VideoGrid = ({

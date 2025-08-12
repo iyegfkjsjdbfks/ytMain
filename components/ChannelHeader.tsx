@@ -4,10 +4,10 @@ import BellIcon from './icons/BellIcon';
 import type { Channel } from '../src/types/core';
 
 interface ChannelHeaderProps {
-  channel: Channel;
+  channel: Channel;,
   videoCount: number;
-  isSubscribed: boolean;
-  onSubscribeToggle: () => void;
+  isSubscribed: boolean;,
+  onSubscribeToggle: () => void
 }
 
 const ChannelHeader: React.FC<ChannelHeaderProps> = ({

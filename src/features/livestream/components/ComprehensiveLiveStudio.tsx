@@ -28,41 +28,41 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
   const [streamSettings, setStreamSettings] = useState({
     title: '',
-    description: '',
+          description: '',
     category: 'Gaming',
-    visibility: 'public' as 'public' | 'unlisted' | 'private',
+          visibility: 'public' as 'public' | 'unlisted' | 'private',
     enableChat: true,
-    enableSuperChat: true,
+          enableSuperChat: true,
     enablePolls: true,
-    enableQA: true,
+          enableQA: true,
     enableRecording: true,
-    enableMultiplatform: false,
+          enableMultiplatform: false,
     quality: '1080p' as '720p' | '1080p' | '1440p' | '4k',
-    bitrate: 4500,
+          bitrate: 4500,
     frameRate: 30 as 30 | 60,
-    platforms: [] as any[],
+          platforms: [] as any[],
     scheduledStartTime: undefined as Date | undefined });
 
   const [stats, setStats] = useState({
     viewers: 0,
-    peakViewers: 0,
+          peakViewers: 0,
     duration: 0,
-    likes: 0,
+          likes: 0,
     chatMessages: 0,
-    superChatAmount: 0,
+          superChatAmount: 0,
     streamHealth: 'excellent' as 'excellent' | 'good' | 'fair' | 'poor',
-    bitrate: 4500,
+          bitrate: 4500,
     latency: 2000 });
 
   // Setup camera and microphone
   const setupMedia = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
+        video: {,
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: streamSettings.frameRate } },
-        audio: {
+          audio: {,
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -104,12 +104,12 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
 
     try {
       // Create stream in service
-      const streamData: Partial<LiveStream> = {
+      const streamData: Partial<LiveStream> = {,
         title: streamSettings.title,
-        description: streamSettings.description,
+          description: streamSettings.description,
         category: streamSettings.category,
-        visibility: streamSettings.visibility,
-        settings: {
+          visibility: streamSettings.visibility,
+        settings: {,
           enableChat: streamSettings.enableChat,
           enableSuperChat: streamSettings.enableSuperChat,
           enablePolls: streamSettings.enablePolls,
@@ -123,7 +123,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
           frameRate: streamSettings.frameRate,
           enableRecording: streamSettings.enableRecording,
           enableMultiplatform: streamSettings.enableMultiplatform,
-          platforms: streamSettings.platforms } };
+          platforms: streamSettings.platforms } 
+        };
 
       if (streamSettings.scheduledStartTime) {
         streamData.scheduledStartTime = streamSettings.scheduledStartTime;
@@ -154,7 +155,8 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         // TODO: Implement multiplatform streaming
         logger.debug('Multiplatform streaming enabled for:', enabledPlatforms);
       }
-    } catch (error) {
+    
+        } catch (error) {
       logger.error('Failed to start stream:', error);
       alert('Failed to start stream. Please try again.');
     }
@@ -232,8 +234,7 @@ const ComprehensiveLiveStudio: React.FC<ComprehensiveLiveStudioProps> = ({
         return 'text-orange-500';
       case 'poor':
         return 'text-red-500';
-      default:
-        return 'text-gray-500';
+      default: return 'text-gray-500'
     }
   };
 

@@ -51,7 +51,8 @@ const PWAUpdateNotification: FC<PWAUpdateNotificationProps> = ({
         if (updateAvailable) {
           setIsVisible(true);
         }
-      },
+      
+        },
       60 * 60 * 1000
     );
   };

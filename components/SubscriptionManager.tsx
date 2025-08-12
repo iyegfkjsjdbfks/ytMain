@@ -7,11 +7,11 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 const BellIconSolid = BellSolidIcon;
 
 interface SubscriptionManagerProps {
-  channelName: string;
+  channelName: string;,
   channelAvatarUrl: string;
-  channelId: string;
+  channelId: string;,
   subscriberCount: string;
-  onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void;
+  onSubscriptionChange?: (isSubscribed: React.MouseEvent | React.ChangeEvent | React.FormEvent) => void
 }
 
 const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({

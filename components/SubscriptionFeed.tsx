@@ -31,8 +31,7 @@ const SubscriptionFeed: React.FC<SubscriptionFeedProps> = ({ maxVideos = 8 }) =>
           'Chef Studio',
           'Science Explained',
           'Fitness Journey',
-          'Music Vibes',
-        ];
+          'Music Vibes'];
 
         // Filter videos from subscribed channels and sort by upload date
         const subscriptionFeed = allVideos

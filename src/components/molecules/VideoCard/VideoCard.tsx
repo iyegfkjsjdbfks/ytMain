@@ -36,7 +36,7 @@ const Image = ({
 
 export interface VideoCardProps
   extends Omit<VideoCardPropsBase, 'onMoreClick'> {
-  onMoreClick: (videoId: any) => void;
+  onMoreClick: (videoId: any) => void
 }
 
 export const VideoCard = ({
@@ -70,7 +70,7 @@ export const VideoCard = ({
               'object-cover transition-transform duration-300',
               isHovered ? 'scale-105' : 'scale-100'
             )}
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            sizes='(max-width: 768px) 100vw(max-width: 1200px) 50vw, 33vw'
           />
         </Link>
         <div className='absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded'>

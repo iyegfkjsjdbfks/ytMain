@@ -14,24 +14,24 @@ import YouTubePlayerWrapper from './YouTubePlayerWrapper';
 import type { Video } from '../src/types/core';
 
 interface VideoPlaybackDetailsProps {
-  video: Video;
-  channel: Channel | null; // Channel can be null initially
-  liked: boolean;
+  video: Video;,
+  channel: Channel | null; // Channel can be null initially,
+          liked: boolean;,
   disliked: boolean;
-  isSubscribed: boolean;
+  isSubscribed: boolean;,
   isSavedToAnyList: boolean;
   showFullDescription: boolean;
   summary?: string | null;
   summaryError?: string | null;
   isSummarizing?: boolean;
   canSummarize?: boolean;
-  isSaveModalOpen: boolean;
+  isSaveModalOpen: boolean;,
   saveModalLoading: boolean;
-  saveButtonRef: RefObject<HTMLButtonElement>;
+  saveButtonRef: RefObject<HTMLButtonElement>;,
   saveModalRef: RefObject<HTMLDivElement>;
-  handleLike: () => void;
+  handleLike: () => void;,
   handleDislike: () => void;
-  handleSubscribe: () => void;
+  handleSubscribe: () => void;,
   openSaveModal: () => void;
   handleToggleDescription: () => void;
   handleSummarizeDescription?: () => void; // Optional as per VideoDescription

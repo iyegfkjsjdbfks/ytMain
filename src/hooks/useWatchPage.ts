@@ -393,8 +393,7 @@ export const useWatchPage = () => {
       tags: [],
       thumbnailUrl: '',
       createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: '2024-01-01T00:00:00Z' },
-  ];
+      updatedAt: '2024-01-01T00:00:00Z' }];
 
   // Description handlers
   const handleToggleDescription = () => {
@@ -517,8 +516,8 @@ export const useWatchPage = () => {
       return;
     }
 
-    const deleteCommentFromList = (
-      list: Comment,
+    const deleteCommentFromList = (,
+  list: Comment,
       idToDelete: any,
       parentOfDeleted?: string
     ): Comment[] => {
@@ -557,8 +556,8 @@ export const useWatchPage = () => {
     setActiveCommentMenu(null);
   };
 
-  const toggleLikeDislikeForCommentOrReply = (
-    id: string,
+  const toggleLikeDislikeForCommentOrReply = (,
+  id: string,
     parentId: string | undefined,
     action: 'like' | 'dislike'
   ) => {
@@ -666,8 +665,8 @@ export const useWatchPage = () => {
     allRelatedVideos,
     displayedRelatedVideos,
 
-    // YouTube video detection
-    isYouTubeVideo: isYouTubeVideoFlag,
+    // YouTube video detection,
+  isYouTubeVideo: isYouTubeVideoFlag,
 
     // Constants
     MAX_COMMENT_LENGTH,

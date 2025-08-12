@@ -5,45 +5,46 @@ import { useEffect, useRef, useState, memo, FC, MouseEvent } from 'react';
 import { PlayIcon, PauseIcon, ScissorsIcon, SpeakerWaveIcon, SpeakerXMarkIcon, DocumentTextIcon, AdjustmentsHorizontalIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline';
 
 export interface VideoClip {
-  id: string;
+  id: string;,
   startTime: number;
-  endTime: number;
+  endTime: number;,
   duration: number;
-  thumbnail: string;
+  thumbnail: string
 }
 
 export interface AudioTrack {
-  id: string;
+  id: string;,
   name: string;
-  url: string;
+  url: string;,
   volume: number;
-  startTime: number;
-  duration: number;
+  startTime: number;,
+  duration: number
 }
 
 export interface TextOverlay {
-  id: string;
+  id: string;,
   text: string;
-  x: number;
+  x: number;,
   y: number;
-  fontSize: number;
+  fontSize: number;,
   color: string;
-  fontFamily: string;
+  fontFamily: string;,
   startTime: number;
   endTime: number;
   animation?: 'fade' | 'slide' | 'bounce';
 }
 
 export interface VideoFilter {
-  id: string;
+  id: string;,
   name: string;
-  type: 'brightness' | 'contrast' | 'saturation' | 'blur' | 'sepia' | 'grayscale';
-  value: number;
+  type: 'brightness' | 'contrast' | 'saturation' | 'blur' | 'sepia' | 'grayscale';,
+  value: number
 }
 
 interface VideoEditorProps {
-  videoFile: File;
-  onSave: (editedVideo: Blob, metadata: any) => void;
+  videoFile: File;,
+  onSave: (editedVideo: Blob,
+          metadata: any) => void;,
   onCancel: () => void;
   className?: string;
 }
@@ -89,11 +90,11 @@ return;
       setTrimEnd(video.duration);
 
       // Create initial clip
-      const initialClip: VideoClip = {
+      const initialClip: VideoClip = {,
         id: 'main',
-        startTime: 0,
+          startTime: 0,
         endTime: video.duration,
-        duration: video.duration,
+          duration: video.duration,
         thumbnail: generateThumbnail(0) };
       setClips([initialClip]);
     };
@@ -108,8 +109,7 @@ return;
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata as EventListener);
       video.removeEventListener('timeupdate', handleTimeUpdate as EventListener);
-    };
-  }, []);
+    }}, []);
 
   const generateThumbnail = (time: any): string => {
     // In a real implementation, this would capture a frame from the video
@@ -153,25 +153,25 @@ return;
   };
 
   const addTextOverlay = () => {
-    const newText: TextOverlay = {
+    const newText: TextOverlay = {,
       id: `text-${Date.now()}`,
-      text: 'New Text',
+          text: 'New Text',
       x: 50,
-      y: 50,
+          y: 50,
       fontSize: 24,
-      color: '#ffffff',
+          color: '#ffffff',
       fontFamily: 'Arial',
-      startTime: currentTime,
+          startTime: currentTime,
       endTime: currentTime + 5,
-      animation: 'fade' };
+          animation: 'fade' };
     setTextOverlays(prev => [...prev, newText]);
     setSelectedText(newText.id);
   };
 
-  const updateTextOverlay = (id: string, updates: Partial<TextOverlay>) => {
+  const updateTextOverlay = (id: string,
+          updates: Partial<TextOverlay>) => {
     setTextOverlays(prev => prev.map(text =>
-      text.id === id ? { ...text, ...updates } : text,
-    ));
+      text.id === id ? { ...text, ...updates } : text));
   };
 
   const deleteTextOverlay = (id: string) => {
@@ -180,9 +180,9 @@ return;
   };
 
   const addFilter = (type: VideoFilter['type']) => {
-    const newFilter: VideoFilter = {
+    const newFilter: VideoFilter = {,
       id: `filter-${Date.now()}`,
-      name: type.charAt(0).toUpperCase() + type.slice(1),
+          name: type.charAt(0).toUpperCase() + type.slice(1),
       type,
       value: type === 'brightness' || type === 'contrast' ? 100 :
              type === 'saturation' ? 100 :
@@ -190,10 +190,10 @@ return;
     setFilters(prev => [...prev, newFilter]);
   };
 
-  const updateFilter = (id: string, value: string | number) => {
+  const updateFilter = (id: string,
+          value: string | number) => {
     setFilters(prev => prev.map(filter =>
-      filter.id === id ? { ...filter, value } : filter,
-    ));
+      filter.id === id ? { ...filter, value } : filter));
   };
 
   const removeFilter = (id: string) => {
@@ -201,11 +201,11 @@ return;
   };
 
   const trimVideo = () => {
-    const newClip: VideoClip = {
+    const newClip: VideoClip = {,
       id: `clip-${Date.now()}`,
-      startTime: trimStart,
+          startTime: trimStart,
       endTime: trimEnd,
-      duration: trimEnd - trimStart,
+          duration: trimEnd - trimStart,
       thumbnail: generateThumbnail(trimStart) };
     setClips([newClip]);
   };
@@ -268,7 +268,7 @@ return;
               className="bg-blue-500 h-full flex items-center justify-center text-white text-xs"
               style={{
                 left: `${(clip.startTime / duration) * 100}%`,
-                width: `${(clip.duration / duration) * 100}%` }}
+          width: `${(clip.duration / duration) * 100}%` }}
             >
               Clip {index + 1}
             </div>
@@ -393,7 +393,7 @@ return;
       </div>
 
       <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">,
           Duration: {formatTime(trimEnd - trimStart)}
         </p>
       </div>
@@ -581,10 +581,12 @@ return null;
           {/* Tab Navigation */}
           <div className="flex flex-wrap gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
             {[
-              { id: 'trim', icon: ScissorsIcon, label: 'Trim' },
-              { id: 'text', icon: DocumentTextIcon, label: 'Text' },
-              { id: 'filters', icon: AdjustmentsHorizontalIcon, label: 'Filters' },
-            ].map((tab) => (
+              { id: 'trim',
+          icon: ScissorsIcon, label: 'Trim' },
+              { id: 'text',
+          icon: DocumentTextIcon, label: 'Text' },
+              { id: 'filters',
+          icon: AdjustmentsHorizontalIcon, label: 'Filters' }].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}

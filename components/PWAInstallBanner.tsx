@@ -43,7 +43,8 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
         if (daysSinceDismissed < 30) {
           return;
         }
-      }
+      
+        }
 
       // Show the banner after a delay
       setTimeout(() => {
@@ -68,8 +69,7 @@ const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }) => {
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
       window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
-    };
-  }, []);
+    }}, []);
 
   const handleInstall = async () => {
     if (!deferredPrompt) {

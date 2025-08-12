@@ -19,7 +19,7 @@ interface DeploymentConfig {
   autoRollback: boolean;
   healthChecks: HealthCheck[];
   qualityGates: QualityGateConfig[];
-  notifications: NotificationConfig[];
+  notifications: NotificationConfig[]
 }
 
 interface HealthCheck {
@@ -34,7 +34,7 @@ interface HealthCheck {
     retries?: number;
     interval?: number;
   };
-  critical: boolean;
+  critical: boolean
 }
 
 interface QualityGateConfig {
@@ -44,9 +44,9 @@ interface QualityGateConfig {
   criteria: Array<{
     metric: string;
     operator: '>' | '<' | '>=' | '<=' | '==';
-    threshold: number;
+    threshold: number
   }>;
-  blocking: boolean;
+  blocking: boolean
 }
 
 interface NotificationConfig {
@@ -56,7 +56,7 @@ interface NotificationConfig {
     channel?: string;
     recipients?: string[];
   };
-  events: Array<'start' | 'success' | 'failure' | 'rollback'>;
+  events: Array<'start' | 'success' | 'failure' | 'rollback'>
 }
 
 interface DeploymentPipeline {
@@ -65,7 +65,7 @@ interface DeploymentPipeline {
   stages: PipelineStage[];
   triggers: PipelineTrigger[];
   _environment: string;
-  parallelExecution: boolean;
+  parallelExecution: boolean
 }
 
 interface PipelineStage {
@@ -128,7 +128,7 @@ interface DeploymentMetrics {
   averageDeployTime: number;
   deploymentFrequency: number;
   leadTime: number;
-  recoveryTime: number;
+  recoveryTime: number
 }
 
 interface RollbackInfo {
@@ -136,7 +136,7 @@ interface RollbackInfo {
   triggeredBy: 'auto' | 'manual';
   previousVersion: string;
   rollbackTime: number;
-  success: boolean;
+  success: boolean
 }
 
 /**
@@ -170,40 +170,39 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'push',
-          _config: { branches: ['develop', 'feature/*'] } },
-      ],
+          _config: { branches: ['develop', 'feature/*'] } }],
       stages: [
         {
           id: 'install',
           name: 'Install Dependencies',
           type: 'build',
           commands: ['npm ci'],
-          timeout: 300000, // 5 minutes
-          retries: 2,
+          timeout: 300000, // 5 minutes,
+  retries: 2,
           continueOnFailure: false },
         {
           id: 'lint',
           name: 'Code Linting',
           type: 'quality-check',
           commands: ['npm run lint'],
-          timeout: 120000, // 2 minutes
-          retries: 1,
+          timeout: 120000, // 2 minutes,
+  retries: 1,
           continueOnFailure: false },
         {
           id: 'test',
           name: 'Unit Tests',
           type: 'test',
           commands: ['npm run test:unit'],
-          timeout: 600000, // 10 minutes
-          retries: 1,
+          timeout: 600000, // 10 minutes,
+  retries: 1,
           continueOnFailure: false },
         {
           id: 'build',
           name: 'Build Application',
           type: 'build',
           commands: ['npm run build'],
-          timeout: 600000, // 10 minutes
-          retries: 1,
+          timeout: 600000, // 10 minutes,
+  retries: 1,
           continueOnFailure: false,
           artifacts: ['dist/'] },
         {
@@ -211,11 +210,10 @@ class DeploymentAutomationEngine {
           name: 'Deploy to Development',
           type: 'deploy',
           commands: ['npm run deploy:dev'],
-          timeout: 300000, // 5 minutes
-          retries: 2,
+          timeout: 300000, // 5 minutes,
+  retries: 2,
           continueOnFailure: false,
-          dependencies: ['build'] },
-      ] };
+          dependencies: ['build'] }] };
 
     // Staging pipeline
     const stagingPipeline: DeploymentPipeline = {
@@ -226,8 +224,7 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'push',
-          _config: { branches: ['main', 'release/*'] } },
-      ],
+          _config: { branches: ['main', 'release/*'] } }],
       stages: [
         {
           id: 'install',
@@ -266,8 +263,8 @@ class DeploymentAutomationEngine {
           name: 'Integration Tests',
           type: 'test',
           commands: ['npm run test:integration'],
-          timeout: 900000, // 15 minutes
-          retries: 1,
+          timeout: 900000, // 15 minutes,
+  retries: 1,
           continueOnFailure: false },
         {
           id: 'build',
@@ -292,11 +289,10 @@ class DeploymentAutomationEngine {
           name: 'Verify Deployment',
           type: 'verify',
           commands: ['npm run test:e2e:staging'],
-          timeout: 1200000, // 20 minutes
-          retries: 2,
+          timeout: 1200000, // 20 minutes,
+  retries: 2,
           continueOnFailure: false,
-          dependencies: ['deploy-staging'] },
-      ] };
+          dependencies: ['deploy-staging'] }] };
 
     // Production pipeline
     const prodPipeline: DeploymentPipeline = {
@@ -307,8 +303,7 @@ class DeploymentAutomationEngine {
       triggers: [
         {
           type: 'manual',
-          _config: {} },
-      ],
+          _config: {} }],
       stages: [
         {
           id: 'pre-deployment-checks',
@@ -370,8 +365,7 @@ class DeploymentAutomationEngine {
           timeout: 600000,
           retries: 2,
           continueOnFailure: false,
-          dependencies: ['switch-traffic'] },
-      ] };
+          dependencies: ['switch-traffic'] }] };
 
     this.pipelines.set(devPipeline.id, devPipeline);
     this.pipelines.set(stagingPipeline.id, stagingPipeline);
@@ -398,24 +392,20 @@ class DeploymentAutomationEngine {
             timeout: 5000,
             retries: 3,
             interval: 10000 },
-          critical: true },
-      ],
+          critical: true }],
       qualityGates: [
         {
           id: 'test-coverage',
           name: 'Test Coverage',
           type: 'quality',
           criteria: [
-            { metric: 'coverage', operator: '>=', threshold: 70 },
-          ],
-          blocking: false },
-      ],
+            { metric: 'coverage', operator: '>=', threshold: 70 }],
+          blocking: false }],
       notifications: [
         {
           type: 'webhook',
           _config: { url: 'http://localhost:3001/api/notifications' },
-          events: ['failure'] },
-      ] };
+          events: ['failure'] }] };
 
     const stagingConfig: DeploymentConfig = {
       id: 'staging-config',
@@ -443,16 +433,14 @@ class DeploymentAutomationEngine {
             timeout: 5000,
             retries: 3,
             interval: 15000 },
-          critical: true },
-      ],
+          critical: true }],
       qualityGates: [
         {
           id: 'test-coverage',
           name: 'Test Coverage',
           type: 'quality',
           criteria: [
-            { metric: 'coverage', operator: '>=', threshold: 80 },
-          ],
+            { metric: 'coverage', operator: '>=', threshold: 80 }],
           blocking: true },
         {
           id: 'performance',
@@ -460,16 +448,13 @@ class DeploymentAutomationEngine {
           type: 'performance',
           criteria: [
             { metric: 'lcp', operator: '<=', threshold: 2500 },
-            { metric: 'fid', operator: '<=', threshold: 100 },
-          ],
-          blocking: true },
-      ],
+            { metric: 'fid', operator: '<=', threshold: 100 }],
+          blocking: true }],
       notifications: [
         {
           type: 'slack',
           _config: { channel: '#deployments' },
-          events: ['start', 'success', 'failure', 'rollback'] },
-      ] };
+          events: ['start', 'success', 'failure', 'rollback'] }] };
 
     const prodConfig: DeploymentConfig = {
       id: 'prod-config',
@@ -507,16 +492,14 @@ class DeploymentAutomationEngine {
             timeout: 5000,
             retries: 3,
             interval: 60000 },
-          critical: true },
-      ],
+          critical: true }],
       qualityGates: [
         {
           id: 'test-coverage',
           name: 'Test Coverage',
           type: 'quality',
           criteria: [
-            { metric: 'coverage', operator: '>=', threshold: 90 },
-          ],
+            { metric: 'coverage', operator: '>=', threshold: 90 }],
           blocking: true },
         {
           id: 'performance',
@@ -525,18 +508,15 @@ class DeploymentAutomationEngine {
           criteria: [
             { metric: 'lcp', operator: '<=', threshold: 2000 },
             { metric: 'fid', operator: '<=', threshold: 50 },
-            { metric: 'cls', operator: '<=', threshold: 0.1 },
-          ],
+            { metric: 'cls', operator: '<=', threshold: 0.1 }],
           blocking: true },
         {
           id: 'security',
           name: 'Security',
           type: 'security',
           criteria: [
-            { metric: 'vulnerabilities', operator: '==', threshold: 0 },
-          ],
-          blocking: true },
-      ],
+            { metric: 'vulnerabilities', operator: '==', threshold: 0 }],
+          blocking: true }],
       notifications: [
         {
           type: 'slack',
@@ -545,8 +525,7 @@ class DeploymentAutomationEngine {
         {
           type: 'email',
           _config: { recipients: ['devops@example.com', 'team-lead@example.com'] },
-          events: ['failure', 'rollback'] },
-      ] };
+          events: ['failure', 'rollback'] }] };
 
     this.configs.set(devConfig.id, devConfig);
     this.configs.set(stagingConfig.id, stagingConfig);
@@ -626,8 +605,7 @@ return;
           timestamp: Date.now(),
           level: 'info',
           message: `Deployment triggered (${trigger})`,
-          metadata: { pipelineId, trigger } },
-      ],
+          metadata: { pipelineId, trigger } }],
       metrics: {
         duration: 0,
         successRate: 0,
@@ -753,8 +731,8 @@ return;
   /**
    * Execute a single stage
    */
-  private async executeStage(
-    _execution: DeploymentExecution,
+  private async executeStage(,
+  _execution: DeploymentExecution,
     stage: PipelineStage,
     stageExecution: StageExecution): Promise<boolean> {
     stageExecution.status = 'running';
@@ -835,8 +813,7 @@ continue;
             const perfMetric = performanceMetrics.find(m => m.name === criterion.metric);
             value = perfMetric?.value || 0;
             break;
-          default:
-            value = 0;
+          default: value = 0
         }
 
         // Check criterion
@@ -868,8 +845,7 @@ continue;
         return value <= threshold;
       case '==':
         return value === threshold;
-      default:
-        return false;
+      default: return false
     }
   }
 
@@ -956,8 +932,8 @@ continue;
     const rollbackInfo: RollbackInfo = {
       _reason: reason,
       triggeredBy: 'auto',
-      previousVersion: 'v1.0.0', // This would be determined dynamically
-      rollbackTime: Date.now(),
+      previousVersion: 'v1.0.0', // This would be determined dynamically,
+  rollbackTime: Date.now(),
       success: false };
 
     try {
@@ -993,8 +969,8 @@ continue;
   /**
    * Send notifications
    */
-  private async sendNotifications(
-    environment: any,
+  private async sendNotifications(,
+  environment: any,
     event: 'start' | 'success' | 'failure' | 'rollback',
     execution: DeploymentExecution): Promise<void> {
     const config = this.configs.get(`${environment}-config`);
@@ -1025,8 +1001,8 @@ continue;
   /**
    * Add log entry
    */
-  private addLog(
-    execution: DeploymentExecution,
+  private addLog(,
+  execution: DeploymentExecution,
     level: 'info' | 'warn' | 'error' | 'debug',
     message: any,
     stage?: string,
@@ -1104,8 +1080,8 @@ continue;
       rollbackRate: rolledBackDeployments.length / completedExecutions.length,
       averageDeployTime,
       deploymentFrequency: recentDeployments.length,
-      leadTime: averageDeployTime, // Simplified
-      recoveryTime: averageDeployTime * 0.1, // Simplified
+      leadTime: averageDeployTime, // Simplified,
+  recoveryTime: averageDeployTime * 0.1, // Simplified
     };
   }
 

@@ -2,7 +2,7 @@ import type { Video } from '../types';
 import React, { useEffect, useRef, useState, FC } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -12,47 +12,47 @@ declare namespace NodeJS {
 import { PlayIcon, PauseIcon, ScissorsIcon, DocumentArrowDownIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 
 interface VideoClip {
-  id: string;
+  id: string;,
   name: string;
-  startTime: number;
+  startTime: number;,
   endTime: number;
-  duration: number;
+  duration: number;,
   thumbnail: string;
-  volume: number;
-  effects: string;
+  volume: number;,
+  effects: string
 }
 
 interface AudioTrack {
-  id: string;
+  id: string;,
   name: string;
-  url: string;
+  url: string;,
   volume: number;
-  startTime: number;
-  duration: number;
+  startTime: number;,
+  duration: number
 }
 
 interface TextOverlay {
-  id: string;
+  id: string;,
   text: string;
-  x: number;
+  x: number;,
   y: number;
-  fontSize: number;
+  fontSize: number;,
   color: string;
-  startTime: number;
+  startTime: number;,
   endTime: number;
   fontFamily: string;
   animation?: 'fadeIn' | 'slideIn' | 'bounce';
 }
 
 interface EditorState {
-  currentTime: number;
+  currentTime: number;,
   duration: number;
-  isPlaying: boolean;
+  isPlaying: boolean;,
   zoom: number;
-  selectedClip: string | null;
+  selectedClip: string | null;,
   clips: VideoClip;
-  audioTracks: AudioTrack;
-  textOverlays: TextOverlay;
+  audioTracks: AudioTrack;,
+  textOverlays: TextOverlay
 }
 
 export const VideoEditor: React.FC = () => {
@@ -60,61 +60,58 @@ export const VideoEditor: React.FC = () => {
 
   const [editorState, setEditorState] = useState<EditorState>({
     currentTime: 0,
-    duration: 120, // 2 minutes default
-    isPlaying: false,
-    zoom: 1,
+          duration: 120, // 2 minutes default,
+  isPlaying: false,
+          zoom: 1,
     selectedClip: null,
-    clips: [
+          clips: [
       {
         id: 'clip1',
-        name: 'Main Video',
+          name: 'Main Video',
         startTime: 0,
-        endTime: 60,
+          endTime: 60,
         duration: 60,
-        thumbnail: 'https://picsum.photos/160/90?random=1',
-        volume: 1,
+          thumbnail: 'https://picsum.photos/160/90?random=1',
+          volume: 1,
         effects: [] },
       {
         id: 'clip2',
-        name: 'Intro Clip',
+          name: 'Intro Clip',
         startTime: 60,
-        endTime: 120,
+          endTime: 120,
         duration: 60,
-        thumbnail: 'https://picsum.photos/160/90?random=2',
-        volume: 0.8,
-        effects: ['fadeIn'] },
-    ],
-    audioTracks: [
+          thumbnail: 'https://picsum.photos/160/90?random=2',
+          volume: 0.8,
+        effects: ['fadeIn'] }],
+          audioTracks: [
       {
         id: 'audio1',
-        name: 'Background Music',
+          name: 'Background Music',
         url: '/audio/background.mp3',
-        volume: 0.3,
+          volume: 0.3,
         startTime: 0,
-        duration: 120 },
-    ],
+          duration: 120 }],
     textOverlays: [
       {
         id: 'text1',
-        text: 'Welcome to my video!',
+          text: 'Welcome to my video!',
         x: 50,
-        y: 20,
+          y: 20,
         fontSize: 24,
-        color: '#ffffff',
+          color: '#ffffff',
         startTime: 5,
-        endTime: 10,
+          endTime: 10,
         fontFamily: 'Arial',
-        animation: 'fadeIn' },
-    ] });
+          animation: 'fadeIn' }] });
 
   const [showTextEditor, setShowTextEditor] = useState(false);
   const [newTextOverlay, setNewTextOverlay] = useState<Partial<TextOverlay>>({
     text: '',
-    x: 50,
+          x: 50,
     y: 50,
-    fontSize: 24,
+          fontSize: 24,
     color: '#ffffff',
-    fontFamily: 'Arial' });
+          fontFamily: 'Arial' });
 
   useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
@@ -134,7 +131,8 @@ export const VideoEditor: React.FC = () => {
       isPlaying: !prev.isPlaying }));
   };
 
-  const splitClip = (clipId: any, splitTime: any) => {
+  const splitClip = (clipId: any,
+          splitTime: any) => {
     setEditorState(prev => {
       const clipIndex = prev.clips.findIndex((c: any) => c.id === clipId);
       if (clipIndex === -1) {
@@ -149,30 +147,29 @@ export const VideoEditor: React.FC = () => {
       const firstPart: VideoClip = {
         ...originalClip,
         id: `${clipId}_1`,
-        name: originalClip.name || `${originalClip.name || 'Clip'} Part 1`,
+          name: originalClip.name || `${originalClip.name || 'Clip'} Part 1`,
         endTime: splitTime,
-        duration: splitTime - originalClip.startTime };
+          duration: splitTime - originalClip.startTime };
       const secondPart: VideoClip = {
         ...originalClip,
         id: `${clipId}_2`,
-        name: originalClip.name || `${originalClip.name || 'Clip'} Part 2`,
+          name: originalClip.name || `${originalClip.name || 'Clip'} Part 2`,
         startTime: splitTime,
-        duration: originalClip.endTime - splitTime };
+          duration: originalClip.endTime - splitTime };
 
       const newClips = [...prev.clips];
       newClips.splice(clipIndex, 1, firstPart, secondPart);
 
       return {
         ...prev,
-        clips: newClips };
-    });
+        clips: newClips }});
   };
 
   const deleteClip = (clipId: any) => {
     setEditorState(prev => ({
       ...prev,
       clips: prev.clips.filter((c: any) => c.id !== clipId),
-      selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip }));
+          selectedClip: prev.selectedClip === clipId ? null : prev.selectedClip }));
   };
 
   const addTextOverlay = () => {
@@ -180,15 +177,15 @@ export const VideoEditor: React.FC = () => {
       return;
     }
 
-    const overlay: TextOverlay = {
+    const overlay: TextOverlay = {,
       id: `text_${Date.now()}`,
-      text: newTextOverlay.text,
+          text: newTextOverlay.text,
       x: newTextOverlay.x || 50,
-      y: newTextOverlay.y || 50,
+          y: newTextOverlay.y || 50,
       fontSize: newTextOverlay.fontSize || 24,
-      color: newTextOverlay.color || '#ffffff',
+          color: newTextOverlay.color || '#ffffff',
       fontFamily: newTextOverlay.fontFamily || 'Arial',
-      startTime: editorState.currentTime,
+          startTime: editorState.currentTime,
       endTime: editorState.currentTime + 5 };
 
     setEditorState(prev => ({
@@ -197,11 +194,11 @@ export const VideoEditor: React.FC = () => {
 
     setNewTextOverlay({
       text: '',
-      x: 50,
+          x: 50,
       y: 50,
-      fontSize: 24,
+          fontSize: 24,
       color: '#ffffff',
-      fontFamily: 'Arial' });
+          fontFamily: 'Arial' });
     setShowTextEditor(false);
   };
 
@@ -271,11 +268,11 @@ export const VideoEditor: React.FC = () => {
                     className='absolute pointer-events-none'
                     style={{
                       left: `${overlay.x}%`,
-                      top: `${overlay.y}%`,
+          top: `${overlay.y}%`,
                       fontSize: `${overlay.fontSize}px`,
-                      color: overlay.color,
+          color: overlay.color,
                       fontFamily: overlay.fontFamily,
-                      transform: 'translate(-50%, -50%)' }}
+          transform: 'translate(-50%, -50%)' }}
                   >
                     {overlay.text}
                   </div>
@@ -334,7 +331,8 @@ export const VideoEditor: React.FC = () => {
           <div className='bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 overflow-x-auto'>
             <div
               className='relative'
-              style={{ width: `${timelineWidth}px`, minHeight: '200px' }}
+              style={{ width: `${timelineWidth}px`,
+          minHeight: '200px' }}
             >
               {/* Time Ruler */}
               <div className='h-6 border-b border-gray-300 dark:border-gray-600 relative'>
@@ -368,7 +366,7 @@ export const VideoEditor: React.FC = () => {
                       }`}
                       style={{
                         left: `${clip.startTime * editorState.zoom * 10}px`,
-                        width: `${clip.duration * editorState.zoom * 10}px` }}
+          width: `${clip.duration * editorState.zoom * 10}px` }}
                       onClick={() =>
                         setEditorState(prev => ({
                           ...prev,
@@ -395,7 +393,7 @@ export const VideoEditor: React.FC = () => {
                       className='absolute h-full bg-green-500 rounded'
                       style={{
                         left: `${track.startTime * editorState.zoom * 10}px`,
-                        width: `${track.duration * editorState.zoom * 10}px` }}
+          width: `${track.duration * editorState.zoom * 10}px` }}
                     >
                       <div className='p-2 text-white text-xs truncate'>
                         {track.name}
@@ -417,7 +415,7 @@ export const VideoEditor: React.FC = () => {
                       className='absolute h-full bg-purple-500 rounded'
                       style={{
                         left: `${overlay.startTime * editorState.zoom * 10}px`,
-                        width: `${(overlay.endTime - overlay.startTime) * editorState.zoom * 10}px` }}
+          width: `${(overlay.endTime - overlay.startTime) * editorState.zoom * 10}px` }}
                     >
                       <div className='p-1 text-white text-xs truncate'>
                         {overlay.text}

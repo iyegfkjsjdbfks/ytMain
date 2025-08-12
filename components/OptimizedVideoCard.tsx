@@ -45,7 +45,7 @@ return false;
   private cleanup() {
     if (this.cache.size >= this.maxSize) {
       const entries = Array.from(this.cache.entries())
-        .sort(([, a], [, b]) => a.timestamp - b.timestamp);
+        .sort(([ a], [ b]) => a.timestamp - b.timestamp);
 
       // Remove oldest 20% of entries
       const toRemove = Math.floor(this.maxSize * 0.2);
@@ -54,7 +54,8 @@ return false;
         if (entry?.[0]) {
           this.cache.delete(entry[0]);
         }
-      }
+      
+        }
     }
   }
 }
@@ -81,7 +82,7 @@ interface OptimizedVideoCardProps {
 
 // Enhanced lazy image component with retry mechanism
 interface LazyImageProps {
-  src: string;
+  src: string;,
   alt: string;
   className?: string;
   priority?: 'high' | 'low';
@@ -97,7 +98,7 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
 
   const { ref: intersectionRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '50px',
+          rootMargin: '50px',
     freezeOnceVisible: true });
 
   const handleLoad = useCallback(() => {
@@ -149,12 +150,12 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
 
       return () => {
         clearTimeout(timeoutId);
-      };
-    }
+      
+        }}
 
     // Return empty cleanup function for else case
-    return () => {};
-  }, [shouldLoad, loaded, error, src, handleError]);
+    return () => {
+        }}, [shouldLoad, loaded, error, src, handleError]);
 
   return (
     <div ref={intersectionRef as any} className={`relative overflow-hidden ${className}`}>
@@ -201,23 +202,23 @@ const LazyImage = memo<LazyImageProps>(({ src, alt, className, priority = 'low',
 LazyImage.displayName = 'LazyImage';
 
 const sizeClasses = {
-  sm: {
+  sm: {,
     container: 'w-full max-w-sm',
-    thumbnail: 'aspect-video',
+          thumbnail: 'aspect-video',
     title: 'text-sm font-medium line-clamp-2',
-    channel: 'text-xs text-gray-600',
+          channel: 'text-xs text-gray-600',
     meta: 'text-xs text-gray-500' },
-  md: {
+          md: {,
     container: 'w-full max-w-md',
-    thumbnail: 'aspect-video',
+          thumbnail: 'aspect-video',
     title: 'text-base font-medium line-clamp-2',
-    channel: 'text-sm text-gray-600',
+          channel: 'text-sm text-gray-600',
     meta: 'text-sm text-gray-500' },
-  lg: {
+          lg: {,
     container: 'w-full max-w-lg',
-    thumbnail: 'aspect-video',
+          thumbnail: 'aspect-video',
     title: 'text-lg font-semibold line-clamp-2',
-    channel: 'text-base text-gray-600',
+          channel: 'text-base text-gray-600',
     meta: 'text-base text-gray-500' } };
 
 const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
@@ -312,7 +313,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
     }
   }, [handleVideoClick]);
 
-  const { isOpen: showMenu, toggle: toggleMenu, close: closeMenu, menuRef } = useDropdownMenu();
+  const { isOpen: showMenu,
+          toggle: toggleMenu, close: closeMenu, menuRef } = useDropdownMenu();
 
   const handleMenuClick = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -324,8 +326,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
       className={cn(
         classes.container,
         'group cursor-pointer transition-transform hover:scale-105',
-        className,
-      )}
+        className)}
       onClick={handleVideoClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -362,8 +363,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               alt={video.title}
               className={cn(
                 classes.thumbnail,
-                'transition-transform group-hover:scale-110',
-              )}
+                'transition-transform group-hover:scale-110')}
               priority={index < 4 ? 'high' : priority}
               lazy={lazy}
             />
@@ -443,7 +443,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               e.stopPropagation();
               closeMenu();
               // Open save to playlist modal
-              const event = new CustomEvent('openSaveToPlaylist', { detail: { video } });
+              const event = new CustomEvent('openSaveToPlaylist', { detail: { video } 
+        });
               window.dispatchEvent(event);
             }}
             icon={<PlusIcon className="w-4 h-4" />}
@@ -458,8 +459,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               // Share video functionality
               const shareData = {
                 title: video.title,
-                text: `Check out this video: ${video.title}`,
-                url: `${window.location.origin}/watch?v=${video.id}` };
+          text: `Check out this video: ${video.title}`,
+          url: `${window.location.origin}/watch?v=${video.id}` };
 
               if (navigator.share) {
                 navigator.share(shareData).catch(console.error);
@@ -494,7 +495,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 localStorage.setItem('youtubeCloneNotInterested_v1', JSON.stringify(notInterestedVideos));
 
                 // Dispatch event to remove video from current view
-                const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } });
+                const event = new CustomEvent('videoNotInterested', { detail: { videoId: video.id } 
+        });
                 window.dispatchEvent(event);
 
                 // Show feedback
@@ -504,7 +506,8 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                 document.body.appendChild(feedback);
                 setTimeout(() => feedback.remove(), 3000);
               }
-            }}
+            
+        }}
             icon={
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
@@ -528,8 +531,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                   'Promotes terrorism',
                   'Spam or scams',
                   'Infringes my rights',
-                  'Captions issue',
-                ];
+                  'Captions issue'];
 
                 const reason = prompt(`Report this video for:\n\n${reportReasons.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n\nEnter the number (1-${reportReasons.length}):`);
 
@@ -540,9 +542,9 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
                   const reports = JSON.parse(localStorage.getItem('youtubeCloneReports_v1') || '[]');
                   reports.push({
                     videoId: video.id,
-                    reason: selectedReason,
+          reason: selectedReason,
                     timestamp: new Date().toISOString(),
-                    videoTitle: video.title });
+          videoTitle: video.title });
                   localStorage.setItem('youtubeCloneReports_v1', JSON.stringify(reports));
 
                   alert(`Thank you for your report. We'll review this video for: ${selectedReason}`);
@@ -582,8 +584,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
               onClick={handleChannelClick}
               className={cn(
                 classes.channel,
-                'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded',
-              )}
+                'hover:text-gray-900 transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 rounded')}
               aria-label={`Go to ${video.channelName} channel`}
             >
               {video.channelName}
@@ -629,7 +630,7 @@ const OptimizedVideoCard = memo<OptimizedVideoCardProps>(
 OptimizedVideoCard.displayName = 'OptimizedVideoCard';
 
 // Export with enhanced memoization
-export default withMemo(OptimizedVideoCard, (prevProps, nextProps) => {
+export default withMemo(OptimizedVideoCard(prevProps, nextProps) => {
   return (
     prevProps.video.id === nextProps.video.id &&
     prevProps.video.title === nextProps.video.title &&

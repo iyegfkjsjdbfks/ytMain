@@ -19,21 +19,21 @@ export const mockGenerators = {
   video: (overrides: Partial<any> = {}) => ({
     id: `video-${Math.random().toString(36).substr(2, 9)}`,
     title: 'Test Video Title',
-    description: 'Test video description',
+          description: 'Test video description',
     thumbnailUrl: 'https://example.com/thumbnail.jpg',
-    videoUrl: 'https://example.com/video.mp4',
-    duration: '5:00',
-    views: '1,000',
+          videoUrl: 'https://example.com/video.mp4',
+          duration: '5:00',
+          views: '1,000',
     likes: 50,
-    dislikes: 5,
+          dislikes: 5,
     uploadedAt: new Date().toISOString(),
-    publishedAt: new Date().toISOString(),
+          publishedAt: new Date().toISOString(),
     channelName: 'Test Channel',
-    channelId: 'channel-123',
+          channelId: 'channel-123',
     channelAvatarUrl: 'https://example.com/avatar.jpg',
-    createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    category: 'Entertainment',
+          category: 'Entertainment',
     tags: ['test', 'video'],
     visibility: 'public' as const,
     ...overrides }),
@@ -41,106 +41,108 @@ export const mockGenerators = {
   channel: (overrides: Partial<any> = {}) => ({
     id: `channel-${Math.random().toString(36).substr(2, 9)}`,
     name: 'Test Channel',
-    description: 'Test channel description',
+          description: 'Test channel description',
     avatarUrl: 'https://example.com/avatar.jpg',
-    banner: 'https://example.com/banner.jpg',
-    subscribers: 10000,
+          banner: 'https://example.com/banner.jpg',
+          subscribers: 10000,
     subscriberCount: '10K',
-    videoCount: 100,
+          videoCount: 100,
     isVerified: false,
-    createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     ...overrides }),
 
   user: (overrides: Partial<any> = {}) => ({
     id: `user-${Math.random().toString(36).substr(2, 9)}`,
     username: 'testuser',
-    email: 'test@example.com',
+          email: 'test@example.com',
     displayName: 'Test User',
-    avatar: 'https://example.com/user-avatar.jpg',
-    isVerified: false,
+          avatar: 'https://example.com/user-avatar.jpg',
+          isVerified: false,
     subscriberCount: 0,
-    preferences: {
-      theme: 'system' as const, language: 'en',
+          preferences: {,
+      theme: 'system' as const,
+          language: 'en',
       autoplay: true,
-      notifications: {
+          notifications: {,
         email: true,
-        push: true,
+          push: true,
         subscriptions: true,
-        comments: true,
+          comments: true,
         likes: true,
-        mentions: true },
-      privacy: {
+          mentions: true },
+      privacy: {,
         showSubscriptions: true,
-        showPlaylists: true,
+          showPlaylists: true,
         allowComments: true,
-        restrictedMode: false } },
+          restrictedMode: false } },
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
     ...overrides }),
 
   comment: (overrides: Partial<any> = {}) => ({
     id: `comment-${Math.random().toString(36).substr(2, 9)}`,
     text: 'This is a test comment',
-    authorId: `user-${Math.random().toString(36).substr(2, 9)}`,
+          authorId: `user-${Math.random().toString(36).substr(2, 9)}`,
     authorName: 'Test User',
-    authorAvatar: 'https://example.com/user-avatar.jpg',
-    createdAt: new Date().toISOString(),
+          authorAvatar: 'https://example.com/user-avatar.jpg',
+          createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    likes: 10,
+          likes: 10,
     replies: [],
     ...overrides }),
 
   playlist: (overrides: Partial<any> = {}) => ({
     id: `playlist-${Math.random().toString(36).substr(2, 9)}`,
     title: 'Test Playlist',
-    description: 'Test playlist description',
+          description: 'Test playlist description',
     thumbnail: 'https://example.com/playlist-thumb.jpg',
-    videos: [mockGenerators.video()],
+          videos: [mockGenerators.video()],
     owner: mockGenerators.user(),
-    isPublic: true,
+          isPublic: true,
     createdAt: new Date().toISOString(),
     ...overrides }) };
 
 // API mocking utilities
 export const apiMocks = {
   // Mock successful API responses
-  mockApiSuccess<T>(data: T, delay: number = 0) {
+  mockApiSuccess<T>(data: T,
+          delay: number = 0) {
     return vi.fn().mockImplementation(() =>
-      new Promise(resolve => setTimeout(() => resolve(data), delay)),
-    );
+      new Promise(resolve => setTimeout(() => resolve(data), delay)));
   },
 
-  // Mock API errors
-  mockApiError: (error: { status?: number; message?: string } = {}, delay: number = 0) => {
+  // Mock API errors,
+  mockApiError: (error: { status?: number; message?: string } = {},
+          delay: number = 0) => {
     const apiError = {
       status: error.status || 500,
-      message: error.message || 'Internal Server Error',
-      response: {
+          message: error.message || 'Internal Server Error',
+      response: {,
         status: error.status || 500,
-        data: { message: error.message || 'Internal Server Error' } } };
+          data: { message: error.message || 'Internal Server Error' } } };
 
     return vi.fn().mockImplementation(() =>
-      new Promise((_, reject) => setTimeout(() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError))), delay)),
-    );
+      new Promise((_, reject) => setTimeout(() => reject(apiError instanceof Error ? apiError : new Error(JSON.stringify(apiError))), delay)));
   },
 
   // Mock paginated responses
-  mockPaginatedResponse<T extends any[]>(items: T, page: number = 1, pageSize: number = 10) {
+  mockPaginatedResponse<T extends any[]>(items: T,
+          page: number = 1, pageSize: number = 10) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedItems = items.slice(startIndex, endIndex);
 
     return {
       data: paginatedItems,
-      pagination: {
+          pagination: {
         page,
         pageSize,
         total: items.length,
-        totalPages: Math.ceil(items.length / pageSize),
+          totalPages: Math.ceil(items.length / pageSize),
         hasNext: endIndex < items.length,
-        hasPrev: page > 1 } };
-  } };
+          hasPrev: page > 1 } 
+        }} };
 
 // Custom render function with providers
 interface CustomRenderOptions extends Omit<any, 'wrapper'> {
@@ -159,11 +161,11 @@ interface CustomRenderOptions extends Omit<any, 'wrapper'> {
 
 function createTestQueryClient(): QueryClient {
   return new QueryClient({
-    defaultOptions: {
+    defaultOptions: {,
       queries: {
         retry: false,
-        gcTime: 0 },
-      mutations: {
+          gcTime: 0 },
+      mutations: {,
         retry: false } } });
 }
 
@@ -177,7 +179,8 @@ function AllTheProviders({ children, queryClient, initialEntries = ['/'], _mockU
   );
 }
 
-export function customRender(_ui: ReactElement, _options: CustomRenderOptions = {}, ) {
+export function customRender(_ui: ReactElement,
+          _options: CustomRenderOptions = {}) {
   const {
     queryClient = createTestQueryClient(),
     initialEntries = ['/'],
@@ -201,19 +204,17 @@ export function customRender(_ui: ReactElement, _options: CustomRenderOptions = 
   return {
     ...result,
     user: userEvent.setup(),
-    queryClient };
-}
+    queryClient }}
 
 // Custom render hook function
-export function customRenderHook<TResult, TProps>(
+export function customRenderHook<TResult, TProps>(,
   hook: (props: TProps) => TResult,
-  options: {
+          options: {
     queryClient?: QueryClient;
     initialEntries?: string;
     mockUser?: any;
     wrapper?: ({ children }: { children: React.ReactNode }) => ReactElement;
-  } & any = {},
-) {
+  } & any = {}) {
   const {
     queryClient = createTestQueryClient(),
     initialEntries = ['/'],
@@ -237,7 +238,7 @@ export function customRenderHook<TResult, TProps>(
 
 // Testing utilities for common patterns
 export const testUtils = {
-  // Wait for loading states to complete
+  // Wait for loading states to complete,
   waitForLoadingToFinish: async () => {
     await (global as any).waitFor(() => {
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
@@ -246,7 +247,7 @@ export const testUtils = {
     });
   },
 
-  // Wait for error states
+  // Wait for error states,
   waitForError: async (errorMessage?: string) => {
     await (global as any).waitFor(() => {
       if (errorMessage) {
@@ -257,59 +258,59 @@ export const testUtils = {
     });
   },
 
-  // Simulate network delays
+  // Simulate network delays,
   simulateNetworkDelay: (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
 
-  // Mock intersection observer for lazy loading tests
+  // Mock intersection observer for lazy loading tests,
   mockIntersectionObserver: () => {
     const mockIntersectionObserver = vi.fn();
     mockIntersectionObserver.mockReturnValue({
       observe: () => null,
-      unobserve: () => null,
+          unobserve: () => null,
       disconnect: () => null });
     window.IntersectionObserver = mockIntersectionObserver;
     return mockIntersectionObserver;
   },
 
-  // Mock resize observer
+  // Mock resize observer,
   mockResizeObserver: () => {
     const mockResizeObserver = vi.fn();
     mockResizeObserver.mockReturnValue({
       observe: () => null,
-      unobserve: () => null,
+          unobserve: () => null,
       disconnect: () => null });
     window.ResizeObserver = mockResizeObserver;
     return mockResizeObserver;
   },
 
-  // Mock media query
+  // Mock media query,
   mockMediaQuery: (matches: boolean = false) => {
     const mockMatchMedia = vi.fn().mockImplementation((query) => ({
       matches,
       media: query,
-      onchange: null,
+          onchange: null,
       addListener: vi.fn(),
-      removeListener: vi.fn(),
+          removeListener: vi.fn(),
       addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
       dispatchEvent: vi.fn() }));
 
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: mockMatchMedia });
+          value: mockMatchMedia });
 
     return mockMatchMedia;
   },
 
-  // Mock local storage
+  // Mock local storage,
   mockLocalStorage: () => {
     const localStorageMock = {
       getItem: vi.fn(),
-      setItem: vi.fn(),
+          setItem: vi.fn(),
       removeItem: vi.fn(),
-      clear: vi.fn() };
+          clear: vi.fn() };
 
     Object.defineProperty(window, 'localStorage', {
       value: localStorageMock });
@@ -317,34 +318,35 @@ export const testUtils = {
     return localStorageMock;
   },
 
-  // Mock fetch API
+  // Mock fetch API,
   mockFetch: () => {
     const mockFetch = vi.fn();
     global.fetch = mockFetch;
     return mockFetch;
   },
 
-  // Create mock file for upload tests
+  // Create mock file for upload tests,
   createMockFile: (name = 'test.mp4', type = 'video/mp4') => {
     return new File(['test content'], name, { type, lastModified: Date.now() });
   },
 
-  // Simulate drag and drop events
-  simulateDragAndDrop: async (element: HTMLElement, files: File[]) => {
+  // Simulate drag and drop events,
+  simulateDragAndDrop: async (element: HTMLElement,
+          files: File[]) => {
     const user = userEvent.setup();
 
     const dataTransfer = {
       files,
-      items: files.map((file) => ({
+      items: files.map((file) => ({,
         kind: 'file',
-        type: file.type,
+          type: file.type,
         getAsFile: () => file })),
-      types: ['Files'] };
+          types: ['Files'] };
 
     await user.pointer([
       { target: element },
-      { keys: '[MouseLeft>]', target: element },
-    ]);
+      { keys: '[MouseLeft>]',
+          target: element }]);
 
     // Simulate drop event
     const dropEvent = new Event('drop', { bubbles: true });
@@ -354,15 +356,15 @@ export const testUtils = {
     element.dispatchEvent(dropEvent);
   },
 
-  // Mock data generators
+  // Mock data generators,
   generateMockVideo: mockGenerators.video,
-  generateMockChannel: mockGenerators.channel,
+          generateMockChannel: mockGenerators.channel,
   generateMockComment: mockGenerators.comment,
-  generateMockUser: mockGenerators.user };
+          generateMockUser: mockGenerators.user };
 
 // Performance testing utilities
 export const performanceUtils = {
-  // Measure component render time
+  // Measure component render time,
   measureRenderTime: async (renderFn: () => void) => {
     const startTime = performance.now();
     renderFn();
@@ -371,8 +373,9 @@ export const performanceUtils = {
     return endTime - startTime;
   },
 
-  // Test for memory leaks
-  checkForMemoryLeaks: (component: ReactElement, iterations: number = 100) => {
+  // Test for memory leaks,
+  checkForMemoryLeaks: (component: ReactElement,
+          iterations: number = 100) => {
     const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
     for (let i = 0; i < iterations; i++) {
@@ -393,12 +396,12 @@ export const performanceUtils = {
       finalMemory,
       memoryIncrease,
       potentialLeak: memoryIncrease > 1024 * 1024, // 1MB threshold
-    };
-  } };
+    
+        }} };
 
 // Accessibility testing utilities
 export const a11yUtils = {
-  // Check for basic accessibility requirements
+  // Check for basic accessibility requirements,
   checkBasicA11y: async () => {
     // Check for proper heading hierarchy
     const headings = screen.getAllByRole('heading');
@@ -418,10 +421,9 @@ export const a11yUtils = {
     return {
       headingLevels,
       imagesWithoutAlt: imagesWithoutAlt.length,
-      inputsWithoutLabels: inputsWithoutLabels.length };
-  },
+          inputsWithoutLabels: inputsWithoutLabels.length }},
 
-  // Test keyboard navigation
+  // Test keyboard navigation,
   testKeyboardNavigation: async (startElement?: HTMLElement) => {
     const user = userEvent.setup();
     const focusableElements: HTMLElement[] = [];

@@ -14,30 +14,30 @@ interface UnifiedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantClasses = {
   primary: 'bg-sky-600 hover:bg-sky-700 text-white border-transparent focus-visible:ring-sky-500',
-  secondary: 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-100 border-transparent focus-visible:ring-neutral-500',
-  outline: 'bg-transparent hover:bg-neutral-50 text-neutral-700 border-neutral-300 dark:hover:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-600 focus-visible:ring-sky-500',
-  ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border-transparent dark:hover:bg-neutral-800 dark:text-neutral-300 focus-visible:ring-sky-500',
-  danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent focus-visible:ring-red-500',
-  action: 'bg-black bg-opacity-50 hover:bg-opacity-70 text-white border-transparent focus-visible:ring-white focus-visible:ring-opacity-50',
-  link: 'bg-transparent hover:underline text-sky-600 dark:text-sky-400 border-transparent focus-visible:ring-sky-500 p-0' };
+          secondary: 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-100 border-transparent focus-visible:ring-neutral-500',
+          outline: 'bg-transparent hover:bg-neutral-50 text-neutral-700 border-neutral-300 dark:hover:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-600 focus-visible:ring-sky-500',
+          ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border-transparent dark:hover:bg-neutral-800 dark:text-neutral-300 focus-visible:ring-sky-500',
+          danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent focus-visible:ring-red-500',
+          action: 'bg-black bg-opacity-50 hover:bg-opacity-70 text-white border-transparent focus-visible:ring-white focus-visible:ring-opacity-50',
+          link: 'bg-transparent hover:underline text-sky-600 dark:text-sky-400 border-transparent focus-visible:ring-sky-500 p-0' };
 
 const sizeClasses = {
   xs: 'px-2.5 py-1.5 text-xs',
-  sm: 'px-3 py-2 text-sm',
+          sm: 'px-3 py-2 text-sm',
   md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base' };
+          lg: 'px-6 py-3 text-base' };
 
 const roundedClasses = {
   sm: 'rounded-sm',
-  md: 'rounded-md',
+          md: 'rounded-md',
   lg: 'rounded-lg',
-  full: 'rounded-full' };
+          full: 'rounded-full' };
 
 const iconSizeClasses = {
   xs: 'w-3.5 h-3.5',
-  sm: 'w-4 h-4',
+          sm: 'w-4 h-4',
   md: 'w-5 h-5',
-  lg: 'w-5 h-5' };
+          lg: 'w-5 h-5' };
 
 const LoadingSpinner: React.FC<{ size: string }> = ({ size }) => (
   <svg
@@ -95,8 +95,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
     // Size and variant classes
     !isLinkVariant && sizeClasses[size],
     variantClasses[variant],
-    roundedClasses[rounded],
-  );
+    roundedClasses[rounded]);
 
   const iconSize = iconSizeClasses[size];
   const spinnerSize = iconSizeClasses[size];
@@ -112,8 +111,7 @@ export const UnifiedButton: React.FC<UnifiedButtonProps> = ({
         <LoadingSpinner
           size={cn(
             spinnerSize,
-            children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '',
-          )}
+            children ? (leftIcon ? 'mr-2' : '-ml-1 mr-2') : '')}
         />
       )}
 

@@ -17,7 +17,7 @@ interface InstallPromptState {
   showPrompt: boolean;
   isInstalling: boolean;
   installError: string | null;
-  deferredPrompt: PWAInstallPrompt | null;
+  deferredPrompt: PWAInstallPrompt | null
 }
 
 interface UseInstallPromptReturn {
@@ -38,7 +38,7 @@ interface UseInstallPromptReturn {
   getInstallStats: () => {
     visitCount: number;
     lastDismissed: number | null;
-    canShow: boolean;
+    canShow: boolean
   };
 }
 

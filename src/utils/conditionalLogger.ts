@@ -51,8 +51,8 @@ class ConditionalLogger {
     return level <= this.logLevel;
   }
 
-  private formatMessage(
-    level: LogLevel,
+  private formatMessage(,
+  level: LogLevel,
     message: any,
     source?: string
   ): string {

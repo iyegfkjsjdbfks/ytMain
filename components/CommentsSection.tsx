@@ -9,13 +9,13 @@ import ThumbsUpIcon from './icons/ThumbsUpIcon';
 export interface Comment {
   id: string;
   parentId?: string;
-  userAvatarUrl: string;
+  userAvatarUrl: string;,
   userName: string;
-  commentText: string;
+  commentText: string;,
   timestamp: string;
-  likes: number;
+  likes: number;,
   isLikedByCurrentUser: boolean;
-  isDislikedByCurrentUser: boolean;
+  isDislikedByCurrentUser: boolean;,
   isEdited: boolean;
   replyTo?: string;
   replies?: Comment;
@@ -23,25 +23,27 @@ export interface Comment {
 }
 
 export interface CommentsSectionProps {
-  comments: Comment;
+  comments: Comment;,
   commentCount: number;
-  commentSortOrder: 'top' | 'newest';
+  commentSortOrder: 'top' | 'newest';,
   replyingToCommentId: string | null;
-  currentReplyText: string;
+  currentReplyText: string;,
   editingComment: { id: string; parentId?: string } | null;
-  activeCommentMenu: string | null;
+  activeCommentMenu: string | null;,
   expandedReplies: Record<string, boolean>;
-  maxCommentLength: number;
-  onCommentSubmit: (commentText: any) => void;
-  onReplySubmit: (parentId: any) => void;
-  onEditSave: (commentId: any, newText: any, parentId?: string) => void;
+  maxCommentLength: number;,
+  onCommentSubmit: (commentText: any) => void;,
+  onReplySubmit: (parentId: any) => void;,
+  onEditSave: (commentId: any,
+          newText: any, parentId?: string) => void;
   onDeleteComment: (commentId: any, parentId?: string) => void;
-  onToggleLikeDislike: (id: string, parentId: string | undefined, action: 'like' | 'dislike') => void;
-  onSortChange: (order: 'top' | 'newest') => void;
+  onToggleLikeDislike: (id: string,
+          parentId: string | undefined, action: 'like' | 'dislike') => void;,
+  onSortChange: (order: 'top' | 'newest') => void;,
   onSetReplyingTo: (commentId: string | null, text?: string) => void;
-  onSetCurrentReplyText: (text: any) => void;
+  onSetCurrentReplyText: (text: any) => void;,
   onSetEditingComment: (comment: { id: string; parentId?: string } | null) => void;
-  onSetActiveCommentMenu: (commentId: string | null) => void;
+  onSetActiveCommentMenu: (commentId: string | null) => void;,
   onSetExpandedReplies: (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => void;
 }
 
@@ -78,18 +80,18 @@ return 0;
 return 0;
 }
 
-    const [, num, unit] = match;
+    const [ num, unit] = match;
     if (!num || !unit) {
 return 0;
 }
     const value = parseInt(num, 10);
     const multipliers = {
       second: 1,
-      minute: 60,
+          minute: 60,
       hour: 3600,
-      day: 86400,
+          day: 86400,
       week: 604800,
-      month: 2592000,
+          month: 2592000,
       year: 31536000 };
     return value * (multipliers[unit as keyof typeof multipliers] || 0);
   };
@@ -351,7 +353,8 @@ return 0;
               {expandedReplies[comment.id] && (
                 <div className="space-y-3 pt-2">
                   {comment.replies
-                    .sort((a: any, b: any) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
+                    .sort((a: any,
+          b: any) => parseRelativeDate(a.timestamp) - parseRelativeDate(b.timestamp))
                     .map((reply: any) => renderComment(reply, true))
                   }
                 </div>

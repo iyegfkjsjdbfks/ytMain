@@ -1,6 +1,6 @@
 import React from 'react';
 interface ShortsProgressIndicatorProps {
-  currentIndex: number;
+  currentIndex: number;,
   totalCount: number;
   className?: string;
 }

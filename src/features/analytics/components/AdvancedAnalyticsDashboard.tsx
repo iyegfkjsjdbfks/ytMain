@@ -2,57 +2,56 @@ import React, { useMemo, useState, FC } from 'react';
 import { EyeIcon, ClockIcon, UserGroupIcon, HeartIcon, ChatBubbleLeftIcon, ShareIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, GlobeAltIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 interface AnalyticsData {
-  overview: {
+  overview: {,
     totalViews: number;
-    totalWatchTime: number;
+    totalWatchTime: number;,
     subscribers: number;
-    totalVideos: number;
+    totalVideos: number;,
     averageViewDuration: number;
     clickThroughRate: number;
   };
-  timeSeriesData: Array<{
+  timeSeriesData: Array<{,
     date: string;
-    views: number;
+    views: number;,
     watchTime: number;
-    subscribers: number;
+    subscribers: number;,
     revenue: number;
   }>;
-  demographics: {
+  demographics: {,
     ageGroups: Array<{ range: string; percentage: number }>;
     genders: Array<{ gender: string; percentage: number }>;
     countries: Array<{ country: string; percentage: number; views: number }>;
   };
-  devices: {
+  devices: {,
     mobile: number;
-    desktop: number;
+    desktop: number;,
     tablet: number;
     tv: number;
   };
-  topVideos: Array<{
+  topVideos: Array<{,
     id: string;
-    title: string;
+    title: string;,
     views: number;
-    watchTime: number;
+    watchTime: number;,
     likes: number;
-    comments: number;
+    comments: number;,
     thumbnail: string;
     publishedAt: string;
   }>;
-  engagement: {
+  engagement: {,
     likes: number;
-    dislikes: number;
+    dislikes: number;,
     comments: number;
-    shares: number;
+    shares: number;,
     subscribersGained: number;
     subscribersLost: number;
-  };
-}
+  }}
 
 interface MetricCardProps {
-  title: string;
+  title: string;,
   value: string | number;
   change?: number;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<any>;,
   iconColor: string;
   format?: 'number' | 'duration' | 'percentage' | 'currency';
 }
@@ -78,8 +77,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
         return `${val.toFixed(1)}%`;
       case 'currency':
         return `$${val.toLocaleString()}`;
-      default:
-        return val.toLocaleString();
+      default: return val.toLocaleString()
     }
   };
 
@@ -127,13 +125,13 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
   // Mock analytics data
   const analyticsData: AnalyticsData = useMemo(
     () => ({
-      overview: {
+      overview: {,
         totalViews: 1250000,
-        totalWatchTime: 45000000, // seconds
-        subscribers: 125000,
-        totalVideos: 156,
-        averageViewDuration: 4.2, // minutes
-        clickThroughRate: 12.5, // percentage
+          totalWatchTime: 45000000, // seconds,
+  subscribers: 125000,
+          totalVideos: 156,
+        averageViewDuration: 4.2, // minutes,
+  clickThroughRate: 12.5, // percentage
       },
       timeSeriesData: Array.from({ length: 30 }, (_, i) => ({
         date:
@@ -141,35 +139,46 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
             .toISOString()
             .split('T')[0] || '',
         views: Math.floor(Math.random() * 50000) + 20000,
-        watchTime: Math.floor(Math.random() * 2000000) + 500000,
+          watchTime: Math.floor(Math.random() * 2000000) + 500000,
         subscribers: Math.floor(Math.random() * 500) + 100,
-        revenue: Math.floor(Math.random() * 1000) + 200 })),
-      demographics: {
+          revenue: Math.floor(Math.random() * 1000) + 200 })),
+      demographics: {,
         ageGroups: [
-          { range: '13-17', percentage: 15.2 },
-          { range: '18-24', percentage: 28.7 },
-          { range: '25-34', percentage: 32.1 },
-          { range: '35-44', percentage: 16.8 },
-          { range: '45-54', percentage: 5.9 },
-          { range: '55+', percentage: 1.3 },
-        ],
+          { range: '13-17',
+          percentage: 15.2 },
+          { range: '18-24',
+          percentage: 28.7 },
+          { range: '25-34',
+          percentage: 32.1 },
+          { range: '35-44',
+          percentage: 16.8 },
+          { range: '45-54',
+          percentage: 5.9 },
+          { range: '55+',
+          percentage: 1.3 }],
         genders: [
-          { gender: 'Male', percentage: 62.4 },
-          { gender: 'Female', percentage: 35.8 },
-          { gender: 'Other', percentage: 1.8 },
-        ],
+          { gender: 'Male',
+          percentage: 62.4 },
+          { gender: 'Female',
+          percentage: 35.8 },
+          { gender: 'Other',
+          percentage: 1.8 }],
         countries: [
-          { country: 'United States', percentage: 35.2, views: 440000 },
-          { country: 'United Kingdom', percentage: 12.8, views: 160000 },
-          { country: 'Canada', percentage: 8.9, views: 111250 },
-          { country: 'Australia', percentage: 6.7, views: 83750 },
-          { country: 'Germany', percentage: 5.4, views: 67500 },
-        ] },
-      devices: {
+          { country: 'United States',
+          percentage: 35.2, views: 440000 },
+          { country: 'United Kingdom',
+          percentage: 12.8, views: 160000 },
+          { country: 'Canada',
+          percentage: 8.9, views: 111250 },
+          { country: 'Australia',
+          percentage: 6.7, views: 83750 },
+          { country: 'Germany',
+          percentage: 5.4, views: 67500 }] },
+          devices: {,
         mobile: 68.5,
-        desktop: 24.3,
+          desktop: 24.3,
         tablet: 5.8,
-        tv: 1.4 },
+          tv: 1.4 },
       topVideos: [
         {
           id: '1',
@@ -197,15 +206,14 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
           likes: 6800,
           comments: 750,
           thumbnail: 'https://picsum.photos/160/90?random=3',
-          publishedAt: '2024-01-08' },
-      ],
-      engagement: {
+          publishedAt: '2024-01-08' }],
+      engagement: {,
         likes: 45600,
-        dislikes: 1200,
+          dislikes: 1200,
         comments: 12800,
-        shares: 8900,
+          shares: 8900,
         subscribersGained: 2400,
-        subscribersLost: 180 } }),
+          subscribersLost: 180 } }),
     []
   );
 
@@ -312,7 +320,7 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
                 className='bg-blue-500 rounded-t flex-1 min-w-0 transition-all hover:bg-blue-600'
                 style={{
                   height: `${(item.value / Math.max(...chartData.map(d => d.value))) * 100}%`,
-                  minHeight: '4px' }}
+          minHeight: '4px' }}
                 title={`${new Date(item.date).toLocaleDateString()}: ${item.value.toLocaleString()}`}
               />
             ))}

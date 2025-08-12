@@ -207,7 +207,7 @@ export interface ErrorContext {
   userAgent: string;
   viewport: {
     width: number;
-    height: number;
+    height: number
   };
   network: {
     online: boolean;
@@ -226,11 +226,11 @@ export interface ErrorContext {
 }
 
 // Error Handler Function Types
-export type ErrorHandler<T extends BaseError = BaseError> = (
+export type ErrorHandler<T extends BaseError = BaseError> = (,
   error: T,
   context?: ErrorContext
 ) => void;
-export type AsyncErrorHandler<T extends BaseError = BaseError> = (
+export type AsyncErrorHandler<T extends BaseError = BaseError> = (,
   error: T,
   context?: ErrorContext
 ) => Promise<void>;
@@ -252,20 +252,20 @@ export interface ErrorReportingConfig {
   includeContext: boolean;
   samplingRate: number;
   ignoredErrors: string;
-  beforeSend?: (
-    error: EnhancedError,
+  beforeSend?: (,
+  error: EnhancedError,
     context?: ErrorContext
   ) => EnhancedError | null;
 }
 
 // Common Error Codes
 export const ERROR_CODES = {
-  // Network Errors
+  // Network Errors,
   NETWORK_TIMEOUT: 'NETWORK_TIMEOUT',
   NETWORK_OFFLINE: 'NETWORK_OFFLINE',
   NETWORK_ERROR: 'NETWORK_ERROR',
 
-  // API Errors
+  // API Errors,
   API_QUOTA_EXCEEDED: 'API_QUOTA_EXCEEDED',
   API_RATE_LIMITED: 'API_RATE_LIMITED',
   API_UNAUTHORIZED: 'API_UNAUTHORIZED',
@@ -274,46 +274,46 @@ export const ERROR_CODES = {
   API_SERVER_ERROR: 'API_SERVER_ERROR',
   API_BAD_REQUEST: 'API_BAD_REQUEST',
 
-  // YouTube Specific
+  // YouTube Specific,
   YOUTUBE_VIDEO_UNAVAILABLE: 'YOUTUBE_VIDEO_UNAVAILABLE',
   YOUTUBE_EMBED_DISABLED: 'YOUTUBE_EMBED_DISABLED',
   YOUTUBE_REGION_BLOCKED: 'YOUTUBE_REGION_BLOCKED',
   YOUTUBE_PRIVATE_VIDEO: 'YOUTUBE_PRIVATE_VIDEO',
   YOUTUBE_DELETED_VIDEO: 'YOUTUBE_DELETED_VIDEO',
 
-  // Validation Errors
+  // Validation Errors,
   VALIDATION_REQUIRED: 'VALIDATION_REQUIRED',
   VALIDATION_INVALID_FORMAT: 'VALIDATION_INVALID_FORMAT',
   VALIDATION_OUT_OF_RANGE: 'VALIDATION_OUT_OF_RANGE',
   VALIDATION_INVALID_TYPE: 'VALIDATION_INVALID_TYPE',
 
-  // Storage Errors
+  // Storage Errors,
   STORAGE_QUOTA_EXCEEDED: 'STORAGE_QUOTA_EXCEEDED',
   STORAGE_NOT_AVAILABLE: 'STORAGE_NOT_AVAILABLE',
   STORAGE_PERMISSION_DENIED: 'STORAGE_PERMISSION_DENIED',
 
-  // Media Errors
+  // Media Errors,
   MEDIA_LOAD_ERROR: 'MEDIA_LOAD_ERROR',
   MEDIA_DECODE_ERROR: 'MEDIA_DECODE_ERROR',
   MEDIA_NETWORK_ERROR: 'MEDIA_NETWORK_ERROR',
   MEDIA_SRC_NOT_SUPPORTED: 'MEDIA_SRC_NOT_SUPPORTED',
 
-  // Component Errors
+  // Component Errors,
   COMPONENT_RENDER_ERROR: 'COMPONENT_RENDER_ERROR',
   COMPONENT_MOUNT_ERROR: 'COMPONENT_MOUNT_ERROR',
   COMPONENT_UPDATE_ERROR: 'COMPONENT_UPDATE_ERROR',
 
-  // Configuration Errors
+  // Configuration Errors,
   CONFIG_MISSING: 'CONFIG_MISSING',
   CONFIG_INVALID: 'CONFIG_INVALID',
   CONFIG_LOAD_ERROR: 'CONFIG_LOAD_ERROR',
 
-  // Performance Errors
+  // Performance Errors,
   PERFORMANCE_SLOW_LOAD: 'PERFORMANCE_SLOW_LOAD',
   PERFORMANCE_MEMORY_LEAK: 'PERFORMANCE_MEMORY_LEAK',
   PERFORMANCE_LARGE_BUNDLE: 'PERFORMANCE_LARGE_BUNDLE',
 
-  // Generic Errors
+  // Generic Errors,
   UNKNOWN_ERROR: 'UNKNOWN_ERROR',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
   FEATURE_NOT_SUPPORTED: 'FEATURE_NOT_SUPPORTED' } as const;
@@ -321,7 +321,7 @@ export const ERROR_CODES = {
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 // Error Factory Functions
-export const createApiError = (
+export const createApiError = (,
   message: any,
   endpoint: any,
   method: ApiError['method'],
@@ -346,7 +346,7 @@ export const createApiError = (
   return error;
 };
 
-export const createValidationError = (
+export const createValidationError = (,
   field: any,
   message: any,
   value?: unknown,
@@ -359,7 +359,7 @@ export const createValidationError = (
   constraint: constraint || 'unknown',
   timestamp: new Date() });
 
-export const createNetworkError = (
+export const createNetworkError = (,
   message: any,
   url: any,
   timeout = false,
@@ -372,7 +372,7 @@ export const createNetworkError = (
   offline,
   timestamp: new Date() });
 
-export const createYouTubeError = (
+export const createYouTubeError = (,
   message: any,
   endpoint: any,
   videoId?: string,

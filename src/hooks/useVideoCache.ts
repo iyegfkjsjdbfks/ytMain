@@ -23,8 +23,8 @@ interface VideoCacheOptions {
 
 const DEFAULT_OPTIONS: Required<VideoCacheOptions> = {
   prefetchCount: 5,
-  cacheTime: 1000 * 60 * 30, // 30 minutes
-  staleTime: 1000 * 60 * 5, // 5 minutes
+  cacheTime: 1000 * 60 * 30, // 30 minutes,
+  staleTime: 1000 * 60 * 5, // 5 minutes,
   enableIntersectionObserver: true };
 
 export const useVideoCache = (options: VideoCacheOptions = {}) => {
@@ -62,8 +62,8 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
         });
       },
       {
-        rootMargin: '100px', // Start loading 100px before element is visible
-        threshold: 0.1 }
+        rootMargin: '100px', // Start loading 100px before element is visible,
+  threshold: 0.1 }
     );
 
     return () => {
@@ -220,12 +220,12 @@ export const useVideoCache = (options: VideoCacheOptions = {}) => {
     visibleVideos,
     getCacheStats,
 
-    // Configuration
-    options: opts };
+    // Configuration,
+  options: opts };
 };
 
 // Hook for individual video with caching
-export const useCachedVideo = (
+export const useCachedVideo = (,
   videoId: any,
   options: VideoCacheOptions = {}
 ) => {

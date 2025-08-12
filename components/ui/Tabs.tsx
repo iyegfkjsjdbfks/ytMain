@@ -16,8 +16,8 @@ const useTabsContext = () => {
 };
 
 export interface TabsProps {
-  value: string;
-  onValueChange: (value: string | number) => void;
+  value: string;,
+  onValueChange: (value: string | number) => void;,
   children: React.ReactNode;
   className?: string;
 }
@@ -46,7 +46,7 @@ export const TabsList: React.FC<TabsListProps> = ({ children, className = '' }) 
 };
 
 interface TabsTriggerProps {
-  value: string;
+  value: string;,
   children: React.ReactNode;
   className?: string;
 }
@@ -72,7 +72,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, class
 };
 
 interface TabsContentProps {
-  value: string;
+  value: string;,
   children: React.ReactNode;
   className?: string;
 }

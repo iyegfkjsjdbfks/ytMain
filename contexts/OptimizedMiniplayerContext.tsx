@@ -4,15 +4,15 @@ import type { Video } from '../src/types/core';
 
 // State interface
 interface MiniplayerState {
-  isVisible: boolean;
+  isVisible: boolean;,
   currentVideo: Video | null;
-  isPlaying: boolean;
+  isPlaying: boolean;,
   volume: number;
-  currentTime: number;
+  currentTime: number;,
   duration: number;
-  isMaximized: boolean;
+  isMaximized: boolean;,
   queue: Video;
-  currentIndex: number;
+  currentIndex: number
 }
 
 // Action types
@@ -34,34 +34,35 @@ type MiniplayerAction =
   | { type: 'SET_CURRENT_INDEX'; payload: number };
 
 // Initial state
-const initialState: MiniplayerState = {
+const initialState: MiniplayerState = {,
   isVisible: false,
-  currentVideo: null,
+          currentVideo: null,
   isPlaying: false,
-  volume: 1,
+          volume: 1,
   currentTime: 0,
-  duration: 0,
+          duration: 0,
   isMaximized: false,
-  queue: [],
+          queue: [],
   currentIndex: -1 };
 
 // Reducer
-const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): MiniplayerState => {
+const miniplayerReducer = (state: MiniplayerState,
+          action: MiniplayerAction): MiniplayerState => {
   switch (action.type) {
     case 'SHOW_MINIPLAYER':
       return {
         ...state,
         isVisible: true,
-        currentVideo: action.payload,
+          currentVideo: action.payload,
         isPlaying: true };
 
     case 'HIDE_MINIPLAYER':
       return {
         ...state,
         isVisible: false,
-        currentVideo: null,
+          currentVideo: null,
         isPlaying: false,
-        currentTime: 0 };
+          currentTime: 0 };
 
     case 'TOGGLE_PLAY':
       return {
@@ -102,7 +103,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       return {
         ...state,
         queue: action.payload,
-        currentIndex: action.payload.length > 0 ? 0 : -1 };
+          currentIndex: action.payload.length > 0 ? 0 : -1 };
 
     case 'ADD_TO_QUEUE':
       return {
@@ -115,8 +116,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
       return {
         ...state,
         queue: newQueue,
-        currentIndex: newIndex };
-    }
+          currentIndex: newIndex }}
 
     case 'NEXT_VIDEO': {
       const nextIndex = state.currentIndex + 1;
@@ -125,8 +125,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: nextIndex,
           currentVideo: state.queue[nextIndex] || null,
-          currentTime: 0 };
-      }
+          currentTime: 0 }}
       return state;
     }
 
@@ -137,8 +136,7 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: prevIndex,
           currentVideo: state.queue[prevIndex] || null,
-          currentTime: 0 };
-      }
+          currentTime: 0 }}
       return state;
     }
 
@@ -148,43 +146,41 @@ const miniplayerReducer = (state: MiniplayerState, action: MiniplayerAction): Mi
           ...state,
           currentIndex: action.payload,
           currentVideo: state.queue[action.payload] || null,
-          currentTime: 0 };
-      }
+          currentTime: 0 }}
       return state;
 
-    default:
-      return state;
+    default: return state
   }
 };
 
 // Context interface
 interface MiniplayerContextValue {
-  state: MiniplayerState;
+  state: MiniplayerState;,
   actions: {
-    showMiniplayer: (video: Video) => void;
+    showMiniplayer: (video: Video) => void;,
     hideMiniplayer: () => void;
-    togglePlay: () => void;
-    setPlaying: (playing: any) => void;
-    setVolume: (volume: any) => void;
-    setCurrentTime: (time: any) => void;
-    setDuration: (duration: any) => void;
+    togglePlay: () => void;,
+    setPlaying: (playing: any) => void;,
+    setVolume: (volume: any) => void;,
+    setCurrentTime: (time: any) => void;,
+    setDuration: (duration: any) => void;,
     toggleMaximize: () => void;
-    setMaximized: (maximized: any) => void;
-    setQueue: (queue: Video) => void;
-    addToQueue: (video: Video) => void;
-    removeFromQueue: (videoId: any) => void;
+    setMaximized: (maximized: any) => void;,
+    setQueue: (queue: Video) => void;,
+    addToQueue: (video: Video) => void;,
+    removeFromQueue: (videoId: any) => void;,
     nextVideo: () => void;
-    previousVideo: () => void;
-    setCurrentIndex: (index: number) => void;
-  };
-}
+    previousVideo: () => void;,
+    setCurrentIndex: (index: number) => void
+  
+        }}
 
 // Create contexts
 const MiniplayerContext = createContext<MiniplayerContextValue | null>(null);
 
 // Provider component
 interface MiniplayerProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProps) => {
@@ -192,21 +188,31 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
 
   // Memoized actions to prevent unnecessary re-renders
   const actions = useMemo(() => ({
-    showMiniplayer: (video: Video) => dispatch({ type: 'SHOW_MINIPLAYER', payload: video }),
+    showMiniplayer: (video: Video) => dispatch({ type: 'SHOW_MINIPLAYER',
+          payload: video }),
     hideMiniplayer: () => dispatch({ type: 'HIDE_MINIPLAYER' }),
-    togglePlay: () => dispatch({ type: 'TOGGLE_PLAY' }),
-    setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING', payload: playing }),
-    setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME', payload: volume }),
-    setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
-    setDuration: (duration: any) => dispatch({ type: 'SET_DURATION', payload: duration }),
+          togglePlay: () => dispatch({ type: 'TOGGLE_PLAY' }),
+          setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING',
+          payload: playing }),
+    setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME',
+          payload: volume }),
+    setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME',
+          payload: time }),
+    setDuration: (duration: any) => dispatch({ type: 'SET_DURATION',
+          payload: duration }),
     toggleMaximize: () => dispatch({ type: 'TOGGLE_MAXIMIZE' }),
-    setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
-    setQueue: (queue: Video) => dispatch({ type: 'SET_QUEUE', payload: queue }),
-    addToQueue: (video: Video) => dispatch({ type: 'ADD_TO_QUEUE', payload: video }),
-    removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
+          setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED',
+          payload: maximized }),
+    setQueue: (queue: Video) => dispatch({ type: 'SET_QUEUE',
+          payload: queue }),
+    addToQueue: (video: Video) => dispatch({ type: 'ADD_TO_QUEUE',
+          payload: video }),
+    removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE',
+          payload: videoId }),
     nextVideo: () => dispatch({ type: 'NEXT_VIDEO' }),
-    previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
-    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }) }), []);
+          previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
+          setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX',
+          payload: index }) }), []);
 
   const value = useMemo(() => ({ state, actions }), [state]);
 
@@ -241,17 +247,15 @@ export const useMiniplayerPlayback = () => {
   const { state } = useOptimizedMiniplayer();
   return {
     isPlaying: state.isPlaying,
-    currentTime: state.currentTime,
+          currentTime: state.currentTime,
     duration: state.duration,
-    volume: state.volume };
-};
+          volume: state.volume }};
 
 export const useMiniplayerQueue = () => {
   const { state } = useOptimizedMiniplayer();
   return {
     queue: state.queue,
-    currentIndex: state.currentIndex };
-};
+          currentIndex: state.currentIndex }};
 
 export const useMiniplayerActions = () => {
   const { actions } = useOptimizedMiniplayer();

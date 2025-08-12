@@ -18,7 +18,7 @@ export interface LiveStream {
   creatorAvatar: string;
   settings: LiveStreamSettings;
   stats: LiveStreamStats;
-  monetization: LiveStreamMonetization;
+  monetization: LiveStreamMonetization
 }
 
 export interface LiveStreamSettings {
@@ -27,7 +27,7 @@ export interface LiveStreamSettings {
   enablePolls: boolean;
   enableQA: boolean;
   chatMode: 'live' | 'top' | 'off';
-  slowMode: number; // seconds between messages
+  slowMode: number; // seconds between messages,
   subscribersOnly: boolean;
   moderationLevel: 'strict' | 'moderate' | 'relaxed';
   quality: '720p' | '1080p' | '1440p' | '4k';
@@ -35,7 +35,7 @@ export interface LiveStreamSettings {
   frameRate: 30 | 60;
   enableRecording: boolean;
   enableMultiplatform: boolean;
-  platforms: StreamPlatform;
+  platforms: StreamPlatform
 }
 
 export interface StreamPlatform {
@@ -60,7 +60,7 @@ export interface LiveStreamStats {
   streamHealth: 'excellent' | 'good' | 'fair' | 'poor';
   bitrate: number;
   frameDrops: number;
-  latency: number;
+  latency: number
 }
 
 export interface LiveStreamMonetization {
@@ -69,7 +69,7 @@ export interface LiveStreamMonetization {
   adRevenue: number;
   membershipRevenue: number;
   donationRevenue: number;
-  superChats: SuperChat;
+  superChats: SuperChat
 }
 
 export interface ChatMessage {
@@ -100,7 +100,7 @@ export interface SuperChat {
   message: string;
   timestamp?: Date;
   color: string;
-  duration: number;
+  duration: number
 }
 
 export interface ChatBadge {
@@ -112,9 +112,9 @@ export interface ChatBadge {
 
 export interface MembershipInfo {
   level: string;
-  duration: number; // months
+  duration: number; // months,
   badge: string;
-  perks: string;
+  perks: string
 }
 
 export interface LivePoll {
@@ -133,7 +133,7 @@ export interface PollOption {
   id: string;
   text: string;
   votes: number;
-  percentage: number;
+  percentage: number
 }
 
 export interface QAQuestion {
@@ -156,8 +156,8 @@ export interface ChatModerationAction {
   userId: string;
   moderatorId: string;
   reason: string;
-  duration?: number; // minutes for timeout
-  timestamp: Date;
+  duration?: number; // minutes for timeout,
+  timestamp: Date
 }
 
 export interface StreamReplay {
@@ -175,7 +175,7 @@ export interface StreamReplay {
 
 export interface StreamHighlight {
   id: string;
-  timestamp: number; // seconds from start
+  timestamp: number; // seconds from start,
   title: string;
   description?: string;
   type: 'moment' | 'super_chat' | 'poll' | 'qa' | 'milestone';

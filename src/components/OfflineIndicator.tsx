@@ -18,10 +18,11 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [offlineData, setOfflineData] = useState({
     videos: 0,
-    watchHistory: 0,
+          watchHistory: 0,
     pendingActions: 0,
-    pendingUploads: 0 });
-  const [storageUsage, setStorageUsage] = useState({ used: 0, quota: 0 });
+          pendingUploads: 0 });
+  const [storageUsage, setStorageUsage] = useState({ used: 0,
+          quota: 0 });
 
   useEffect(() => {
     if (!isOnline) {
@@ -37,14 +38,13 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
           offlineStorage.getWatchHistory(100),
           offlineStorage.getPendingActions(),
           offlineStorage.getPendingUploads(),
-          offlineStorage.getStorageUsage(),
-        ]);
+          offlineStorage.getStorageUsage()]);
 
       setOfflineData({
         videos: videos.length,
-        watchHistory: watchHistory.length,
+          watchHistory: watchHistory.length,
         pendingActions: pendingActions.length,
-        pendingUploads: pendingUploads.length });
+          pendingUploads: pendingUploads.length });
 
       setStorageUsage(storage);
     } catch (error) {

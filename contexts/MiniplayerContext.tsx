@@ -3,11 +3,11 @@ import { createContext, useState, useContext, useCallback, type ReactNode, FC, R
 import type { Video } from '../src/types/core';
 
 interface MiniplayerContextType {
-  miniplayerVideo: Video | null;
+  miniplayerVideo: Video | null;,
   isMiniplayerVisible: boolean;
-  showMiniplayer: (video: Video) => void;
-  hideMiniplayer: () => void; // Hides but keeps video in state
-  clearMiniplayer: () => void; // Clears video and hides
+  showMiniplayer: (video: Video) => void;,
+  hideMiniplayer: () => void; // Hides but keeps video in state,
+          clearMiniplayer: () => void; // Clears video and hides
 }
 
 const MiniplayerContext = createContext<MiniplayerContextType | undefined>(undefined);
@@ -31,7 +31,8 @@ export const MiniplayerProvider: React.FC<{ children: ReactNode }> = ({ children
   }, []);
 
   return (
-    <MiniplayerContext.Provider value={{ miniplayerVideo: currentVideo, isMiniplayerVisible: isVisible, showMiniplayer, hideMiniplayer, clearMiniplayer }}>
+    <MiniplayerContext.Provider value={{ miniplayerVideo: currentVideo,
+          isMiniplayerVisible: isVisible, showMiniplayer, hideMiniplayer, clearMiniplayer }}>
       {children}
     </MiniplayerContext.Provider>
   );

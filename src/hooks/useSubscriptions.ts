@@ -14,7 +14,7 @@ export interface SubscribedChannel {
   avatar: string;
   subscribers: string;
   notificationsEnabled: boolean;
-  subscribedAt: string;
+  subscribedAt: string
 }
 
 export function useSubscriptions() {

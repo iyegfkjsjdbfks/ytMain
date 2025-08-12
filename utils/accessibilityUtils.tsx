@@ -13,9 +13,11 @@ declare namespace NodeJS {
 
 // Accessibility context for global settings
 interface AccessibilityContextType {
-  reducedMotion, highContrast: boolean;
-  fontSize: 'small' | 'medium' | 'large' | 'extra-large', announcements: string;
-  addAnnouncement: (message: any) => void, clearAnnouncements: () => void
+  reducedMotion, highContrast: boolean;,
+  fontSize: 'small' | 'medium' | 'large' | 'extra-large',
+          announcements: string;,
+  addAnnouncement: (message: any) => void,
+          clearAnnouncements: () => void
 }
 
 const AccessibilityContext = createContext<AccessibilityContextType | null>(null);
@@ -51,8 +53,7 @@ export function AccessibilityProvider({ children }) {
     return () => {
       motionQuery.removeEventListener('change', handleMotionChange as EventListener);
       contrastQuery.removeEventListener('change', handleContrastChange as EventListener);
-    };
-  }, []);
+    }}, []);
 
   // Apply font size to document
   useEffect(() => {
@@ -111,7 +112,8 @@ export function ScreenReaderAnnouncer() {
       className="sr-only"
       role="status"
     >
-      {announcements.map((announcement: any, index: number) => (
+      {announcements.map((announcement: any,
+          index: number) => (
         <div key={`${announcement}-${index}`}>
           {announcement}
         </div>
@@ -129,8 +131,7 @@ export function useFocusManagement() {
     'input:not([disabled])',
     'select:not([disabled])',
     '[tabindex]:not([tabindex="-1"])',
-    '[contenteditable="true"]',
-  ].join(', ');
+    '[contenteditable="true"]'].join(', ');
 
   const getFocusableElements = useCallback((container: HTMLElement) => {
     return Array.from(container.querySelectorAll(focusableElementsSelector));
@@ -164,8 +165,7 @@ return;
 
     return () => {
       container.removeEventListener('keydown', handleKeyDown as any as EventListener);
-    };
-  }, [getFocusableElements]);
+    }}, [getFocusableElements]);
 
   const restoreFocus = useCallback((previousElement: HTMLElement | null) => {
     if (previousElement && document.contains(previousElement)) {
@@ -176,8 +176,7 @@ return;
   return {
     getFocusableElements,
     trapFocus,
-    restoreFocus };
-}
+    restoreFocus }}
 
 // Keyboard navigation hook
 export function useKeyboardNavigation(_options: any) {
@@ -223,15 +222,15 @@ return;
     }
   }, [disabled, onEnter, onEscape, onArrowUp, onArrowDown, onArrowLeft, onArrowRight, onHome, onEnd]);
 
-  return { handleKeyDown };
-}
+  return { handleKeyDown }}
 
 // ARIA live region hook
 export function useAriaLiveRegion(_initialMessage = '') {
   const [message, setMessage] = useState(_initialMessage);
   const [politeness, setPoliteness] = useState<'polite' | 'assertive'>('polite');
 
-  const announce = useCallback((newMessage: any, priority: 'polite' | 'assertive' = 'polite') => {
+  const announce = useCallback((newMessage: any,
+          priority: 'polite' | 'assertive' = 'polite') => {
     setPoliteness(priority);
     setMessage(newMessage);
 
@@ -250,11 +249,11 @@ export function useAriaLiveRegion(_initialMessage = '') {
     </div>
   ), [message, politeness]);
 
-  return { announce, LiveRegion };
-}
+  return { announce, LiveRegion }}
 
 // Color contrast utilities
-export function getContrastRatio(color1: any, color2: any): number {
+export function getContrastRatio(color1: any,
+          color2: any): number {
   const getLuminance = (color: any): number => {
     const rgb = color.match(/\d+/g)?.map(Number) || [0, 0, 0];
     const [r = 0, g = 0, b = 0] = rgb.map((c: any) => {
@@ -272,7 +271,8 @@ export function getContrastRatio(color1: any, color2: any): number {
   return (brightest + 0.05) / (darkest + 0.05);
 }
 
-export function checkColorContrast(foreground: any, background: any): {
+export function checkColorContrast(foreground: any,
+          background: any): {
   ratio, wcagAA: boolean;
   wcagAAA, wcagAALarge: boolean
 } {
@@ -281,9 +281,8 @@ export function checkColorContrast(foreground: any, background: any): {
   return {
     ratio,
     wcagAA: ratio >= 4.5,
-    wcagAAA: ratio >= 7, wcagAALarge: ratio >= 3
-  };
-}
+          wcagAAA: ratio >= 7, wcagAALarge: ratio >= 3
+  }}
 
 // Skip link component
 export function SkipLink({ href, children }) {
@@ -292,7 +291,8 @@ export function SkipLink({ href, children }) {
       href={href}
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:shadow-lg"
       onFocus={(e) => {
-        e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        e.currentTarget.scrollIntoView({ behavior: 'smooth',
+          block: 'center' });
       }}
     >
       {children}
@@ -331,8 +331,8 @@ export function useAccessibleModal() {
       return () => {
         cleanup();
         document.body.style.overflow = '';
-      };
-    }
+      
+        }}
     return undefined;
   }, [isOpen, trapFocus]);
 
@@ -342,7 +342,8 @@ export function useAccessibleModal() {
       if (e.key === 'Escape' && isOpen) {
         closeModal();
       }
-    };
+    
+        };
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape as any as EventListener);
@@ -356,19 +357,19 @@ export function useAccessibleModal() {
     openModal,
     closeModal,
     modalRef,
-    modalProps: {
+    modalProps: {,
       role: 'dialog',
       'aria-modal': true,
       'aria-labelledby': 'modal-title',
-      'aria-describedby': 'modal-description' } };
-}
+      'aria-describedby': 'modal-description' } }}
 
 // Accessible form validation
 export function useAccessibleForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { addAnnouncement } = useAccessibility();
 
-  const setFieldError = useCallback((fieldName: any, error: Error) => {
+  const setFieldError = useCallback((fieldName: any,
+          error: Error) => {
     setErrors(prev => ({ ...prev, [fieldName]: error }));
     addAnnouncement(`Error in ${fieldName}: ${error}`);
   }, [addAnnouncement]);
@@ -394,15 +395,14 @@ export function useAccessibleForm() {
         } else {
           clearFieldError(fieldName);
         }
-      } };
-  }, [errors, setFieldError, clearFieldError]);
+      } }}, [errors, setFieldError, clearFieldError]);
 
   const getErrorProps = useCallback((fieldName: any) => {
     const error = errors[fieldName];
 
     return error ? {
       id: `${fieldName}-error`,
-      role: 'alert',
+          role: 'alert',
       'aria-live': 'polite' as const, children: error } : null;
   }, [errors]);
 
@@ -413,20 +413,21 @@ export function useAccessibleForm() {
     getFieldProps,
     getErrorProps,
     hasErrors: Object.keys(errors).length > 0
-  };
-}
+  }}
 
 // Accessible tooltip hook
 export function useAccessibleTooltip() {
   const [isVisible, setIsVisible] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0,
+          y: 0 });
   const tooltipId = useRef(`tooltip-${Math.random().toString(36).substr(2, 9)}`);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const showTooltip = useCallback((e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setPosition({
-      x: rect.left + rect.width / 2, y: rect.top - 8
+      x: rect.left + rect.width / 2,
+          y: rect.top - 8
     });
 
     clearTimeout(timeoutRef.current);
@@ -441,32 +442,36 @@ export function useAccessibleTooltip() {
   const triggerProps = {
     'aria-describedby': isVisible ? tooltipId.current : undefined,
     onMouseEnter: showTooltip,
-    onMouseLeave: hideTooltip,
-    onFocus: showTooltip, onBlur: hideTooltip
+          onMouseLeave: hideTooltip,
+    onFocus: showTooltip,
+          onBlur: hideTooltip;
   };
 
   const tooltipProps = {
     id: tooltipId.current,
-    role: 'tooltip',
-    style: {
-      position: 'absolute' as const, left: position.x,
-      top: position.y, transform: 'translateX(-50%) translateY(-100%)'
+          role: 'tooltip',
+    style: {,
+      position: 'absolute' as const,
+          left: position.x,
+      top: position.y,
+          transform: 'translateX(-50%) translateY(-100%)'
     } };
 
   return {
     isVisible,
     triggerProps,
-    tooltipProps };
-}
+    tooltipProps }}
 
 // Accessibility testing utilities
-export function runAccessibilityAudit(element: HTMLElement): {
+export function runAccessibilityAudit(element: HTMLElement): {,
   issues: Array<{
-    type: 'error' | 'warning', message: string; element: HTMLElement
+    type: 'error' | 'warning',
+          message: string; element: HTMLElement;
   }>;
   score: number } {
-  const issues: Array<{
-    type: 'error' | 'warning', message: string; element: HTMLElement
+  const issues: Array<{,
+    type: 'error' | 'warning',
+          message: string; element: HTMLElement;
   }> = [];
 
   // Check for missing alt text on images
@@ -475,7 +480,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
     if (!img.alt && !img.getAttribute('aria-label')) {
       issues.push({
         type: 'error',
-        message: 'Image missing alt text', element: img
+          message: 'Image missing alt text', element: img;
       });
     }
   });
@@ -489,7 +494,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
     if (!hasLabel && !hasAriaLabel) {
       issues.push({
         type: 'error',
-        message: 'Form control missing label', element: input as HTMLElement
+          message: 'Form control missing label', element: input as HTMLElement
       });
     }
   });
@@ -504,7 +509,7 @@ export function runAccessibilityAudit(element: HTMLElement): {
     if (level > previousLevel + 1) {
       issues.push({
         type: 'warning',
-        message: `Heading level skipped from h${previousLevel} to h${level}`,
+          message: `Heading level skipped from h${previousLevel} to h${level}`,
         element: heading as HTMLElement });
     }
 
@@ -536,8 +541,8 @@ export function runAccessibilityAudit(element: HTMLElement): {
   // Calculate score (0-100)
   const score = Math.max(0, 100 - (errorCount * 10) - (warningCount * 5));
 
-  return { issues, score };
-}
+  return { issues, score 
+        }}
 
 // Export all utilities
 export const accessibilityUtils = {

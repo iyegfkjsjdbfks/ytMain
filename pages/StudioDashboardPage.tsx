@@ -6,46 +6,46 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatDuration, formatNumber } from '../utils/numberUtils';
 
 interface DashboardStats {
-  totalViews: number;
-  totalSubscribers: number;
-  totalVideos: number;
-  totalRevenue: number;
-  avgWatchTime: number;
-  totalComments: number;
-  totalLikes: number;
-  totalShares: number;
+  totalViews: number;,
+          totalSubscribers: number;,
+  totalVideos: number;,
+          totalRevenue: number;,
+  avgWatchTime: number;,
+          totalComments: number;,
+  totalLikes: number;,
+          totalShares: number
 }
 
 interface RecentVideo {
-  id: string;
-  title: string;
-  thumbnail: string;
-  views: number;
-  likes: number;
-  comments: number;
-  uploadDate: Date;
-  duration: number;
-  status: 'published' | 'processing' | 'scheduled' | 'draft';
+  id: string;,
+          title: string;,
+  thumbnail: string;,
+          views: number;,
+  likes: number;,
+          comments: number;,
+  uploadDate: Date;,
+          duration: number;,
+  status: 'published' | 'processing' | 'scheduled' | 'draft'
 }
 
 interface QuickAction {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  link: string;
-  color: string;
+  title: string;,
+          description: string;,
+  icon: React.ReactNode;,
+          link: string;,
+  color: string
 }
 
 const StudioDashboardPage: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats>({
     totalViews: 0,
-    totalSubscribers: 0,
+          totalSubscribers: 0,
     totalVideos: 0,
-    totalRevenue: 0,
+          totalRevenue: 0,
     avgWatchTime: 0,
-    totalComments: 0,
+          totalComments: 0,
     totalLikes: 0,
-    totalShares: 0 });
+          totalShares: 0 });
 
   const [recentVideos, setRecentVideos] = useState<RecentVideo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,15 +56,15 @@ const StudioDashboardPage: React.FC = () => {
       setLoading(true);
 
       // Mock data generation
-      const mockStats: DashboardStats = {
-        totalViews: Math.floor(Math.random() * 10000000) + 1000000,
-        totalSubscribers: Math.floor(Math.random() * 500000) + 50000,
-        totalVideos: Math.floor(Math.random() * 200) + 50,
-        totalRevenue: Math.floor(Math.random() * 50000) + 5000,
-        avgWatchTime: Math.floor(Math.random() * 600) + 120,
-        totalComments: Math.floor(Math.random() * 100000) + 10000,
-        totalLikes: Math.floor(Math.random() * 500000) + 50000,
-        totalShares: Math.floor(Math.random() * 50000) + 5000 };
+      const mockStats: DashboardStats = {,
+          totalViews: Math.floor(Math.random() * 10000000) + 1000000,
+          totalSubscribers: Math.floor(Math.random() * 500000) + 50000,
+          totalVideos: Math.floor(Math.random() * 200) + 50,
+          totalRevenue: Math.floor(Math.random() * 50000) + 5000,
+          avgWatchTime: Math.floor(Math.random() * 600) + 120,
+          totalComments: Math.floor(Math.random() * 100000) + 10000,
+          totalLikes: Math.floor(Math.random() * 500000) + 50000,
+          totalShares: Math.floor(Math.random() * 50000) + 5000 };
 
       const mockVideos: RecentVideo[] = Array.from({ length: 5 }, (_, i) => {
         const titles = [
@@ -72,19 +72,17 @@ const StudioDashboardPage: React.FC = () => {
           'Advanced TypeScript Tips and Tricks',
           'Web Development Best Practices 2024',
           'Creating Beautiful UI Components',
-          'JavaScript Performance Optimization',
-        ];
+          'JavaScript Performance Optimization'];
         return {
         id: `video-${i + 1}`,
-        title: titles[i] || `Video ${i + 1}`,
+          title: titles[i] || `Video ${i + 1}`,
         thumbnail: `https://picsum.photos/320/180?random=${i + 1}`,
-        views: Math.floor(Math.random() * 100000) + 1000,
+          views: Math.floor(Math.random() * 100000) + 1000,
         likes: Math.floor(Math.random() * 5000) + 100,
-        comments: Math.floor(Math.random() * 500) + 10,
+          comments: Math.floor(Math.random() * 500) + 10,
         uploadDate: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-        duration: Math.floor(Math.random() * 1800) + 300,
-        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any };
-      });
+          duration: Math.floor(Math.random() * 1800) + 300,
+        status: ['published', 'processing', 'scheduled', 'draft'][Math.floor(Math.random() * 4)] as any }});
 
       setTimeout(() => {
         setStats(mockStats);
@@ -99,41 +97,40 @@ const StudioDashboardPage: React.FC = () => {
   const quickActions: QuickAction[] = [
     {
       title: 'Upload Video',
-      description: 'Share your content with the world',
-      icon: <VideoCameraIcon className="w-6 h-6" />
-      link: '/upload',
+          description: 'Share your content with the world',
+      icon: <VideoCameraIcon className="w-6 h-6" />,
+          link: '/upload',
       color: 'bg-red-500 hover:bg-red-600' },
     {
       title: 'Analytics',
-      description: 'Track your channel performance',
-      icon: <ChartBarIcon className="w-6 h-6" />
-      link: '/analytics',
+          description: 'Track your channel performance',
+      icon: <ChartBarIcon className="w-6 h-6" />,
+          link: '/analytics',
       color: 'bg-blue-500 hover:bg-blue-600' },
     {
       title: 'Content Manager',
-      description: 'Manage your videos and playlists',
-      icon: <DocumentTextIcon className="w-6 h-6" />
-      link: '/studio/content',
+          description: 'Manage your videos and playlists',
+      icon: <DocumentTextIcon className="w-6 h-6" />,
+          link: '/studio/content',
       color: 'bg-green-500 hover:bg-green-600' },
     {
       title: 'Monetization',
-      description: 'Track earnings and revenue',
-      icon: <CurrencyDollarIcon className="w-6 h-6" />
-      link: '/monetization',
+          description: 'Track earnings and revenue',
+      icon: <CurrencyDollarIcon className="w-6 h-6" />,
+          link: '/monetization',
       color: 'bg-yellow-500 hover:bg-yellow-600' },
     {
       title: 'Comments',
-      description: 'Moderate and respond to comments',
-      icon: <ChatBubbleLeftRightIcon className="w-6 h-6" />
-      link: '/comment-moderation',
+          description: 'Moderate and respond to comments',
+      icon: <ChatBubbleLeftRightIcon className="w-6 h-6" />,
+          link: '/comment-moderation',
       color: 'bg-purple-500 hover:bg-purple-600' },
     {
       title: 'Go Live',
-      description: 'Start a live stream',
-      icon: <UserGroupIcon className="w-6 h-6" />
-      link: '/go-live',
-      color: 'bg-pink-500 hover:bg-pink-600' },
-  ];
+          description: 'Start a live stream',
+      icon: <UserGroupIcon className="w-6 h-6" />,
+          link: '/go-live',
+      color: 'bg-pink-500 hover:bg-pink-600' }];
 
   const getStatusColor = (status: any) => {
     switch (status) {
@@ -141,7 +138,7 @@ const StudioDashboardPage: React.FC = () => {
       case 'processing': return 'text-yellow-600 bg-yellow-100';
       case 'scheduled': return 'text-blue-600 bg-blue-100';
       case 'draft': return 'text-gray-600 bg-gray-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-600 bg-gray-100'
     }
   };
 

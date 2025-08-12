@@ -3,10 +3,10 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -39,7 +39,7 @@ export function useDebounce<T>(value: T, delay: any): T {
  * @param deps - Dependencies array for the callback
  * @returns The debounced callback function
  */
-export function useDebouncedCallback<T extends (...args) => any>(
+export function useDebouncedCallback<T extends (...args) => any>(,
   callback: T,
   delay: any,
   deps: React.DependencyList = []
@@ -77,8 +77,8 @@ export function useDebouncedCallback<T extends (...args) => any>(
  * @param delay - The debounce delay in milliseconds
  * @returns Object with search state and functions
  */
-export function useDebouncedSearch<T>(
-  searchFunction: (query: any) => Promise<T[]>
+export function useDebouncedSearch<T>(,
+  searchFunction: (query: any) => Promise<T[]>,
   delay: number = 300
 ) {
   const [query, setQuery] = useState('');

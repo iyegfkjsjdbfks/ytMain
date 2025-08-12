@@ -14,7 +14,7 @@ interface CodeMetrics {
   technicalDebt: number;
   testCoverage: number;
   duplicateCode: number;
-  codeSmells: CodeSmell;
+  codeSmells: CodeSmell
 }
 
 interface CodeSmell {
@@ -24,7 +24,7 @@ interface CodeSmell {
   line: number;
   description: string;
   suggestion: string;
-  effort: 'low' | 'medium' | 'high';
+  effort: 'low' | 'medium' | 'high'
 }
 
 interface RefactoringOpportunity {
@@ -34,9 +34,9 @@ interface RefactoringOpportunity {
   description: string;
   benefits: string;
   risks: string;
-  estimatedEffort: number; // hours
+  estimatedEffort: number; // hours,
   automatable: boolean;
-  files: string;
+  files: string
 }
 
 interface ArchitecturalInsight {
@@ -44,7 +44,7 @@ interface ArchitecturalInsight {
   insight: string;
   impact: 'low' | 'medium' | 'high';
   actionItems: string;
-  resources: string;
+  resources: string
 }
 
 interface DependencyAnalysis {
@@ -129,7 +129,7 @@ return;
    */
   async getRefactoringOpportunities(): Promise<RefactoringOpportunity[]> {
     await this.identifyRefactoringOpportunities();
-    return this.refactoringOpportunities.sort((a: any, b: any) => b.priority - a.priority);
+    return this.refactoringOpportunities.sort((a: any, b: any) => b.priority - a.priority)
   }
 
   /**
@@ -160,7 +160,7 @@ return;
       type: string;
       description: string;
       code: string;
-      confidence: number;
+      confidence: number
     }>;
   }> {
     const fileContent = await this.getFileContent(_filePath);
@@ -182,7 +182,7 @@ return;
     complexity: number;
     maintainability: number;
     technicalDebt: number;
-    timestamps: number;
+    timestamps: number
   } {
     const key = _filePath || 'project';
     const history = this.analysisHistory.get(key) || [];
@@ -206,14 +206,13 @@ return;
     opportunities: RefactoringOpportunity;
     insights: ArchitecturalInsight;
     dependencies: DependencyAnalysis;
-    timestamp: number;
+    timestamp: number
   }> {
     const [summary, opportunities, insights, dependencies] = await Promise.all([
       this.analyzeCode(),
       this.getRefactoringOpportunities(),
       this.getArchitecturalInsights(),
-      this.analyzeDependencies(),
-    ]);
+      this.analyzeDependencies()]);
 
     return {
       summary,
@@ -292,12 +291,10 @@ return;
         benefits: [
           'Improved code organization',
           'Better testability',
-          'Reduced coupling',
-        ],
+          'Reduced coupling'],
         risks: [
           'Breaking changes to existing imports',
-          'Need to update tests',
-        ],
+          'Need to update tests'],
         estimatedEffort: 4,
         automatable: true,
         files: ['utils/videoUtils.ts', 'components/VideoPlayer.tsx'] },
@@ -309,11 +306,9 @@ return;
         benefits: [
           'Reduced complexity',
           'Easier debugging',
-          'Better performance',
-        ],
+          'Better performance'],
         risks: [
-          'Potential state synchronization issues',
-        ],
+          'Potential state synchronization issues'],
         estimatedEffort: 6,
         automatable: false,
         files: ['components/VideoPlayer.tsx', 'stores/videoStore.ts'] },
@@ -325,15 +320,12 @@ return;
         benefits: [
           'DRY principle compliance',
           'Consistent error handling',
-          'Easier maintenance',
-        ],
+          'Easier maintenance'],
         risks: [
-          'Minor performance overhead',
-        ],
+          'Minor performance overhead'],
         estimatedEffort: 3,
         automatable: true,
-        files: ['services/apiService.ts'] },
-    ];
+        files: ['services/apiService.ts'] }];
   }
 
   private async generateArchitecturalInsights(): Promise<void> {
@@ -345,12 +337,10 @@ return;
         actionItems: [
           'Implement react-window or react-virtualized',
           'Optimize video thumbnail loading',
-          'Add intersection observer for lazy loading',
-        ],
+          'Add intersection observer for lazy loading'],
         resources: [
           'https://react-window.vercel.app/',
-          'https://web.dev/virtualize-long-lists-react-window/',
-        ] },
+          'https://web.dev/virtualize-long-lists-react-window/'] },
       {
         category: 'maintainability',
         insight: 'Component composition could be improved using compound component patterns',
@@ -358,11 +348,9 @@ return;
         actionItems: [
           'Refactor VideoPlayer to use compound components',
           'Create reusable form components',
-          'Implement consistent prop interfaces',
-        ],
+          'Implement consistent prop interfaces'],
         resources: [
-          'https://kentcdodds.com/blog/compound-components-with-react-hooks',
-        ] },
+          'https://kentcdodds.com/blog/compound-components-with-react-hooks'] },
       {
         category: 'security',
         insight: 'API endpoints need additional rate limiting and input validation',
@@ -370,11 +358,9 @@ return;
         actionItems: [
           'Implement request throttling',
           'Add input sanitization middleware',
-          'Set up API monitoring and alerting',
-        ],
+          'Set up API monitoring and alerting'],
         resources: [
-          'https://owasp.org/www-project-api-security/',
-        ] },
+          'https://owasp.org/www-project-api-security/'] },
       {
         category: 'scalability',
         insight: 'Consider implementing micro-frontend architecture for better team scalability',
@@ -382,12 +368,9 @@ return;
         actionItems: [
           'Evaluate module federation',
           'Design component sharing strategy',
-          'Plan gradual migration approach',
-        ],
+          'Plan gradual migration approach'],
         resources: [
-          'https://webpack.js.org/concepts/module-federation/',
-        ] },
-    ];
+          'https://webpack.js.org/concepts/module-federation/'] }];
   }
 
   private async findOutdatedDependencies(): Promise<Array<{ name: string; current: string; latest: string; severity: string }>> {
@@ -395,8 +378,7 @@ return;
     return [
       { name: 'react', current: '18.2.0', latest: '18.3.1', severity: 'low' },
       { name: 'typescript', current: '5.0.0', latest: '5.3.3', severity: 'medium' },
-      { name: 'vite', current: '4.0.0', latest: '5.0.10', severity: 'high' },
-    ];
+      { name: 'vite', current: '4.0.0', latest: '5.0.10', severity: 'high' }];
   }
 
   private async findVulnerabilities(): Promise<Array<{ name: string; severity: string; description: string }>> {
@@ -405,8 +387,7 @@ return;
       {
         name: 'lodash',
         severity: 'moderate',
-        description: 'Prototype pollution vulnerability' },
-    ];
+        description: 'Prototype pollution vulnerability' }];
   }
 
   private async findUnusedDependencies(): Promise<string[]> {
@@ -417,8 +398,7 @@ return;
   private async findCircularDependencies(): Promise<string[][]> {
     // Mock implementation - in real scenario, this would analyze import graph
     return [
-      ['components/VideoPlayer.tsx', 'utils/videoUtils.ts', 'components/VideoPlayer.tsx'],
-    ];
+      ['components/VideoPlayer.tsx', 'utils/videoUtils.ts', 'components/VideoPlayer.tsx']];
   }
 
   private async analyzeBundleImpact(): Promise<Array<{ name: string; size: number; impact: string }>> {
@@ -426,8 +406,7 @@ return;
     return [
       { name: 'react', size: 45000, impact: 'high' },
       { name: 'lodash', size: 70000, impact: 'medium' },
-      { name: 'moment', size: 67000, impact: 'low' },
-    ];
+      { name: 'moment', size: 67000, impact: 'low' }];
   }
 
   private async getFileContent(__filePath: any): Promise<string> {
@@ -442,8 +421,7 @@ return;
         type: 'extract-method',
         description: 'Extract validation logic into separate method',
         code: 'const validateInput = (input) => { /* validation logic */ };',
-        confidence: 0.85 },
-    ];
+        confidence: 0.85 }];
   }
 
   private async suggestSimplifyConditions(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
@@ -452,8 +430,7 @@ return;
         type: 'simplify-condition',
         description: 'Simplify complex boolean expression',
         code: 'const isValid = hasValue && isCorrectType && !isExpired;',
-        confidence: 0.75 },
-    ];
+        confidence: 0.75 }];
   }
 
   private async suggestRemoveDuplication(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
@@ -462,8 +439,7 @@ return;
         type: 'remove-duplication',
         description: 'Extract common error handling pattern',
         code: 'const handleApiError = (_error: Error) => { /* common error handling */ };',
-        confidence: 0.90 },
-    ];
+        confidence: 0.90 }];
   }
 
   private async suggestImproveNaming(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
@@ -472,8 +448,7 @@ return;
         type: 'improve-naming',
         description: 'Use more descriptive variable names',
         code: 'const videoMetadata = data; // instead of const d = data;',
-        confidence: 0.95 },
-    ];
+        confidence: 0.95 }];
   }
 
   private setupAnalysisRules(): void {
@@ -555,7 +530,7 @@ class TechnicalDebtTracker {
     byType: Record<string, number>;
     byImpact: Record<string, number>;
     totalEffort: number;
-    averageAge: number;
+    averageAge: number
   } {
     const items = Array.from(this.debtItems.values()).filter((item) => item.status === 'open');
     const now = Date.now();
@@ -608,7 +583,7 @@ class AutomatedCodeReviewer {
     suggestions: Array<{
       type: string;
       description: string;
-      confidence: number;
+      confidence: number
     }>;
   }> {
     const issues = [];

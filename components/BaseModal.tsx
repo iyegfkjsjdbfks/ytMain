@@ -4,7 +4,7 @@ import { useRef, useEffect, FC, ReactNode, KeyboardEvent, MouseEvent } from 'rea
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface BaseModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
@@ -51,9 +51,10 @@ const BaseModal: React.FC<BaseModalProps> = ({
       case 'lg': return 'max-w-4xl';
       case 'xl': return 'max-w-6xl';
       case 'full': return 'max-w-full mx-4';
-      default: return 'max-w-2xl';
+      default: return 'max-w-2xl'
     }
-  };
+  
+        };
 
   // Handle escape key
   useEffect(() => {
@@ -61,7 +62,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
       if (closeOnEscape && event.key === 'Escape') {
         onClose();
       }
-    };
+    
+        };
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape as EventListener);
@@ -76,8 +78,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = 'unset';
-      };
-    }
+      
+        }}
     return undefined;
   }, [isOpen, preventBodyScroll]);
 
@@ -96,7 +98,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
     if (closeOnOverlayClick && event.target === event.currentTarget) {
       onClose();
     }
-  };
+  
+        };
 
   if (!isOpen) {
 return null;

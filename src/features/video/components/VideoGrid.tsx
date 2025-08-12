@@ -8,7 +8,7 @@ interface VideoGridProps {
   columns?: number;
   showMoreLink?: string;
   emptyMessage?: string;
-  onVideoClick?: (video: Video) => void;
+  onVideoClick?: (video: Video) => void
 }
 
 /**
@@ -35,11 +35,11 @@ const VideoGrid: React.FC<VideoGridProps> = ({
       case 5:
         return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
       case 6:
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6';
-      default:
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6';,
+      default: return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
     }
-  };
+  
+        };
 
   return (
     <div className='mb-8'>

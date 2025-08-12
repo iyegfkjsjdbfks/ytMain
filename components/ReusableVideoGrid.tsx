@@ -51,7 +51,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
   // Grid column classes
   const getGridColumns = () => {
     if (columns === 'auto') {
-      return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6';
+      return 'grid-cols-1 sm: grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
     }
     return `grid-cols-${columns}`;
   };
@@ -61,9 +61,10 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
     switch (gap) {
       case 'sm': return 'gap-3';
       case 'lg': return 'gap-6';
-      default: return 'gap-4';
+      default: return 'gap-4'
     }
-  };
+  
+        };
 
   // Loading state
   if (loading) {

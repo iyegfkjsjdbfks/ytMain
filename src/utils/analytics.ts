@@ -9,7 +9,7 @@ export interface AnalyticsEvent {
  * @param eventName - Name of the event to track
  * @param properties - Additional properties to include with the event
  */
-export const trackEvent = (
+export const trackEvent = (,
   eventName: any,
   properties?: AnalyticsEvent
 ): void => {

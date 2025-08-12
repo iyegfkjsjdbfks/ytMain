@@ -19,17 +19,17 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   variant = 'overlay' }) => {
   const variantClasses = {
     overlay: 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 cursor-pointer',
-    inline: 'flex items-center space-x-2 p-4 bg-red-50 border border-red-200 rounded-md',
+          inline: 'flex items-center space-x-2 p-4 bg-red-50 border border-red-200 rounded-md',
     card: 'p-6 bg-white border border-red-200 rounded-lg shadow-sm' };
 
   const textColorClasses = {
     overlay: 'text-white',
-    inline: 'text-red-800',
+          inline: 'text-red-800',
     card: 'text-red-800' };
 
   const iconColorClasses = {
     overlay: 'text-white',
-    inline: 'text-red-500',
+          inline: 'text-red-500',
     card: 'text-red-500' };
 
   const handleClick = (e: React.MouseEvent) => {

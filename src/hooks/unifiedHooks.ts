@@ -3,10 +3,10 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -15,7 +15,7 @@ export interface AsyncState<T> {
   data: T | null;
   loading: boolean;
   error: Error | null;
-  lastFetch: number | null;
+  lastFetch: number | null
 }
 
 export function useAsyncState<T>(initialData: T | null = null): [
@@ -24,9 +24,8 @@ export function useAsyncState<T>(initialData: T | null = null): [
     setData: (data: T | null) => void;
     setLoading: (loading: any) => void;
     setError: (error: Error | null) => void;
-    reset: () => void;
-  },
-] {
+    reset: () => void
+  }] {
   const [state, setState] = useState<AsyncState<T>>({
     data: initialData,
     loading: false,
@@ -73,12 +72,12 @@ export interface UseApiOptions {
   dependencies?: any;
 }
 
-export function useApi<T>(
-  apiCall: () => Promise<T>
+export function useApi<T>(,
+  apiCall: () => Promise<T>,
   options: UseApiOptions = {}
 ): AsyncState<T> & {
   refetch: () => Promise<void>;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<void>
 } {
   const {
     immediate = true,
@@ -136,8 +135,7 @@ export function useApi<T>(
     setError,
     retryOnError,
     maxRetries,
-    retryDelay,
-  ]);
+    retryDelay]);
 
   const refetch = useCallback(async () => {
     retryCountRef.current = 0;
@@ -189,14 +187,14 @@ export interface FormField<T> {
   value: T;
   error: string | null;
   touched: boolean;
-  dirty: boolean;
+  dirty: boolean
 }
 
 export interface FormState<T extends Record<string, any>> {
   fields: { [K in keyof T]: FormField<T[K]> };
   isValid: boolean;
   isSubmitting: boolean;
-  submitError: string | null;
+  submitError: string | null
 }
 
 export interface FormActions<T extends Record<string, any>> {
@@ -207,12 +205,12 @@ export interface FormActions<T extends Record<string, any>> {
   setSubmitError: (error: string | null) => void;
   reset: () => void;
   validate: () => boolean;
-  handleSubmit: (
-    onSubmit: (values: T) => Promise<void> | void
+  handleSubmit: (,
+  onSubmit: (values: T) => Promise<void> | void
   ) => (e?: React.FormEvent) => Promise<void>;
 }
 
-export function useForm<T extends Record<string, any>>(
+export function useForm<T extends Record<string, any>>(,
   initialValues: T,
   validators?: { [K in keyof T]?: (value: T[K]) => string | null }
 ): [FormState<T> FormActions<T>] {
@@ -382,14 +380,13 @@ export function useForm<T extends Record<string, any>>(
       setSubmitError,
       reset,
       validate,
-      handleSubmit },
-  ];
+      handleSubmit }];
 }
 
 // Unified toggle hook
-export function useToggle(
+export function useToggle(,
   initialValue: boolean = false
-): [boolean, () => void, (value: string | number) => void] {
+): [boolean() => void(value: string | number) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => {
@@ -421,10 +418,10 @@ export function useDebounce<T>(value: T, delay: any): T {
 }
 
 // Unified local storage hook
-export function useLocalStorage<T>(
+export function useLocalStorage<T>(,
   key: string,
   initialValue: T
-): [T, (value: T | ((prev: T) => T)) => void, () => void] {
+): [T(value: T | ((prev: T) => T)) => void() => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -462,7 +459,7 @@ export function useLocalStorage<T>(
 }
 
 // Unified intersection observer hook
-export function useIntersectionObserver(
+export function useIntersectionObserver(,
   options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement> boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);

@@ -53,8 +53,7 @@ return null;
       return 'Private';
     case 'unlisted':
       return 'Unlisted';
-    default:
-      return null;
+    default: return null
   }
 }
 

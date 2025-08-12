@@ -6,24 +6,24 @@ import { ShieldCheckIcon, TrashIcon, CheckIcon, XMarkIcon, FlagIcon, ChatBubbleL
 import { formatDistanceToNow } from '../utils/dateUtils';
 
 export interface ModerationItem {
-  id: string;
+  id: string;,
   type: 'video' | 'comment' | 'user' | 'community_post';
-  status: 'pending' | 'approved' | 'rejected' | 'flagged' | 'removed';
+  status: 'pending' | 'approved' | 'rejected' | 'flagged' | 'removed';,
   priority: 'low' | 'medium' | 'high' | 'critical';
-  reportReason: string;
+  reportReason: string;,
   reportCount: number;
-  reportedAt: string;
+  reportedAt: string;,
   reportedBy: string;
 
-  // Content details
-  content: {
+  // Content details,
+  content: {,
     id: string;
     title?: string;
     text?: string;
     thumbnail?: string;
-    authorId: string;
+    authorId: string;,
     authorName: string;
-    authorAvatar: string;
+    authorAvatar: string;,
     createdAt: string;
     views?: number;
     likes?: number;
@@ -32,16 +32,16 @@ export interface ModerationItem {
 
   // AI Analysis
   aiAnalysis?: {
-    toxicityScore: number;
+    toxicityScore: number;,
     categories: string;
-    confidence: number;
-    suggestedAction: 'approve' | 'review' | 'remove';
+    confidence: number;,
+    suggestedAction: 'approve' | 'review' | 'remove'
   };
 
-  // Moderation history
-  moderationHistory: Array<{
+  // Moderation history,
+  moderationHistory: Array<{,
     action: string;
-    moderatorId: string;
+    moderatorId: string;,
     moderatorName: string;
     timestamp: string;
     reason?: string;
@@ -49,8 +49,10 @@ export interface ModerationItem {
 }
 
 interface ModerationDashboardProps {
-  onModerate: (itemId: any, action: 'approve' | 'reject' | 'remove' | 'flag', reason?: string) => void;
-  onBulkModerate: (itemIds: any, action: 'approve' | 'reject' | 'remove') => void;
+  onModerate: (itemId: any,
+          action: 'approve' | 'reject' | 'remove' | 'flag', reason?: string) => void;
+  onBulkModerate: (itemIds: any,
+          action: 'approve' | 'reject' | 'remove') => void;
   className?: string;
 }
 
@@ -77,14 +79,14 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
     const mockItems: ModerationItem[] = [
       {
         id: '1',
-        type: 'video',
+          type: 'video',
         status: 'pending',
-        priority: 'high',
+          priority: 'high',
         reportReason: 'Inappropriate content',
-        reportCount: 5,
+          reportCount: 5,
         reportedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-        reportedBy: ['user1', 'user2', 'user3'],
-        content: {
+          reportedBy: ['user1', 'user2', 'user3'],
+        content: {,
           id: 'video1',
           title: 'Controversial Video Title',
           thumbnail: 'https://picsum.photos/320/180?random=1',
@@ -95,7 +97,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           views: 15000,
           likes: 200,
           comments: 45 },
-        aiAnalysis: {
+          aiAnalysis: {,
           toxicityScore: 0.75,
           categories: ['harassment', 'hate_speech'],
           confidence: 0.85,
@@ -103,14 +105,14 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
         moderationHistory: [] },
       {
         id: '2',
-        type: 'comment',
+          type: 'comment',
         status: 'flagged',
-        priority: 'critical',
+          priority: 'critical',
         reportReason: 'Hate speech',
-        reportCount: 12,
+          reportCount: 12,
         reportedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-        reportedBy: ['user4', 'user5', 'user6'],
-        content: {
+          reportedBy: ['user4', 'user5', 'user6'],
+        content: {,
           id: 'comment1',
           text: 'This is an inappropriate comment that violates community guidelines...',
           authorId: 'user123',
@@ -118,7 +120,7 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
           authorAvatar: 'https://picsum.photos/40/40?random=2',
           createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           likes: 0 },
-        aiAnalysis: {
+          aiAnalysis: {,
           toxicityScore: 0.92,
           categories: ['hate_speech', 'harassment'],
           confidence: 0.95,
@@ -126,28 +128,26 @@ const ModerationDashboard: React.FC<ModerationDashboardProps> = ({
         moderationHistory: [
           {
             action: 'flagged',
-            moderatorId: 'ai_system',
+          moderatorId: 'ai_system',
             moderatorName: 'AI Moderator',
-            timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
-            reason: 'High toxicity score detected' },
-        ] },
+          timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
+            reason: 'High toxicity score detected' }] },
       {
         id: '3',
-        type: 'user',
+          type: 'user',
         status: 'pending',
-        priority: 'medium',
+          priority: 'medium',
         reportReason: 'Spam account',
-        reportCount: 3,
+          reportCount: 3,
         reportedAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
-        reportedBy: ['user7', 'user8'],
-        content: {
+          reportedBy: ['user7', 'user8'],
+        content: {,
           id: 'user456',
           authorId: 'user456',
           authorName: 'Suspicious Account',
           authorAvatar: 'https://picsum.photos/40/40?random=3',
           createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() },
-        moderationHistory: [] },
-    ];
+        moderationHistory: [] }];
 
     setItems(mockItems);
   };
@@ -177,16 +177,18 @@ return false;
         case 'oldest':
           return new Date(a.reportedAt).getTime() - new Date(b.reportedAt).getTime();
         case 'priority':
-          const priorityOrder = { critical: 4, high: 3, medium: 2, low: 1 };
+          const priorityOrder = { critical: 4,
+          high: 3, medium: 2,
+          low: 1 };
           return priorityOrder[b.priority] - priorityOrder[a.priority];
         case 'reports':
           return b.reportCount - a.reportCount;
-        default:
-          return 0;
+        default: return 0
       }
     });
 
-  const handleModerate = (itemId: any, action: 'approve' | 'reject' | 'remove' | 'flag') => {
+  const handleModerate = (itemId: any,
+          action: 'approve' | 'reject' | 'remove' | 'flag') => {
     onModerate(itemId, action, moderationReason);
     setItems(prev => prev.map(item =>
       item.id === itemId
@@ -200,12 +202,10 @@ return false;
               {
                 action,
                 moderatorId: 'current_user',
-                moderatorName: 'Current Moderator',
+          moderatorName: 'Current Moderator',
                 timestamp: new Date().toISOString(),
-                reason: moderationReason },
-            ] }
-        : item,
-    ));
+          reason: moderationReason }] }
+        : item));
     setShowModerationModal(null);
     setModerationReason('');
   };
@@ -220,8 +220,7 @@ return false;
             ...item,
             status: action === 'approve' ? 'approved' :
                    action === 'reject' ? 'rejected' : 'removed' }
-        : item,
-    ));
+        : item));
     setSelectedItems(new Set());
   };
 
@@ -242,8 +241,8 @@ return false;
       case 'critical': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'high': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
       case 'medium': return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20';
-      case 'low': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
-      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20';
+      case 'low': return 'text-green-600 bg-green-100 dark:bg-green-900/20';,
+      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
     }
   };
 
@@ -253,8 +252,8 @@ return false;
       case 'approved': return 'text-green-600 bg-green-100 dark:bg-green-900/20';
       case 'rejected': return 'text-red-600 bg-red-100 dark:bg-red-900/20';
       case 'flagged': return 'text-orange-600 bg-orange-100 dark:bg-orange-900/20';
-      case 'removed': return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20';
-      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20';
+      case 'removed': return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20';,
+      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
     }
   };
 
@@ -264,7 +263,7 @@ return false;
       case 'comment': return <ChatBubbleLeftIcon className="w-5 h-5" />;
       case 'user': return <UserIcon className="w-5 h-5" />;
       case 'community_post': return <FlagIcon className="w-5 h-5" />;
-      default: return <FlagIcon className="w-5 h-5" />;
+      default: return <FlagIcon className="w-5 h-5" />
     }
   };
 
@@ -285,11 +284,14 @@ return false;
         {/* Stats */}
         <div className="grid grid-cols-4 gap-4">
           {[
-            { label: 'Pending', count: items.filter((i) => i.status === 'pending').length, color: 'text-yellow-600' },
-            { label: 'Flagged', count: items.filter((i) => i.status === 'flagged').length, color: 'text-red-600' },
-            { label: 'Critical', count: items.filter((i) => i.priority === 'critical').length, color: 'text-red-600' },
-            { label: 'Total Reports', count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' },
-          ].map((stat, index) => (
+            { label: 'Pending',
+          count: items.filter((i) => i.status === 'pending').length, color: 'text-yellow-600' },
+            { label: 'Flagged',
+          count: items.filter((i) => i.status === 'flagged').length, color: 'text-red-600' },
+            { label: 'Critical',
+          count: items.filter((i) => i.priority === 'critical').length, color: 'text-red-600' },
+            { label: 'Total Reports',
+          count: items.reduce((sum, i) => sum + i.reportCount, 0), color: 'text-blue-600' }].map((stat, index) => (
             <div key={index} className="text-center">
               <div className={`text-2xl font-bold ${stat.color}`}>{stat.count}</div>
               <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
@@ -481,7 +483,8 @@ return false;
                         <div>
                           <span className="text-gray-600 dark:text-gray-400">Categories:</span>
                           <div className="mt-1">
-                            {item.aiAnalysis.categories.map((category: any, index: number) => (
+                            {item.aiAnalysis.categories.map((category: any,
+          index: number) => (
                               <span
                                 key={index}
                                 className="inline-block bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs mr-1 mb-1"

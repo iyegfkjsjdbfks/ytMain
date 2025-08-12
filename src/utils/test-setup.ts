@@ -8,7 +8,7 @@ import { server } from './mocks/server';
 declare global {
   var testUtils: {
     mockConsole: () => {
-      restore: () => void;
+      restore: () => void
     };
   };
 }
@@ -74,9 +74,9 @@ Object.defineProperty(window, 'matchMedia', {
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
+    addListener: vi.fn(), // deprecated,
+  removeListener: vi.fn(), // deprecated,
+  addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn() })) });
 
@@ -290,7 +290,7 @@ Object.defineProperty(window, 'File', {
     name: string;
     size: number;
     type: string;
-    lastModified: number;
+    lastModified: number
   } });
 
 // Mock FileReader
@@ -356,7 +356,7 @@ process.env.VITE_TEST_MODE = 'true';
 
 // Global test utilities
 global.testUtils = {
-  // Add any global test utilities here
+  // Add any global test utilities here,
   mockConsole: () => {
     const originalLog = console.log;
     const originalError = console.error;
@@ -410,7 +410,7 @@ declare global {
   namespace Vi {
     interface JestAssertion<T = any> {
       toBeInViewport(): T;
-      toHaveAccessibleName(expectedName: any): T;
+      toHaveAccessibleName(expectedName: any): T
     }
   }
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import { ChevronUpIcon, ChevronDownIcon  } from '@heroicons/react/24/outline';
 
 interface ShortsNavigationProps {
-  onPrevious: () => void;
+  onPrevious: () => void;,
   onNext: () => void;
-  canGoPrevious: boolean;
+  canGoPrevious: boolean;,
   canGoNext: boolean;
   className?: string;
 }

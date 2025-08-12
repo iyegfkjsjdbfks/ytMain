@@ -9,13 +9,15 @@ import AdjustmentsHorizontalIcon from './icons/AdjustmentsHorizontalIcon';
 export type SortByType = 'relevance' | 'uploadDate' | 'viewCount';
 
 export const sortOptions: Array<{ value: SortByType; label: string }> = [
-  { value: 'relevance', label: 'Relevance' },
-  { value: 'uploadDate', label: 'Upload date' },
-  { value: 'viewCount', label: 'View count' },
-];
+  { value: 'relevance',
+          label: 'Relevance' },
+  { value: 'uploadDate',
+          label: 'Upload date' },
+  { value: 'viewCount',
+          label: 'View count' }];
 
 interface SortFilterPanelProps {
-  currentSortBy: SortByType;
+  currentSortBy: SortByType;,
   onSortChange: (newSortBy: SortByType) => void;
   disabled?: boolean;
 }
@@ -41,8 +43,7 @@ const SortFilterPanel: React.FC<SortFilterPanelProps> = ({ currentSortBy, onSort
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
-    };
-  }, [showPanel]);
+    }}, [showPanel]);
 
   const handleSortOptionClick = (newSortBy: SortByType) => {
     onSortChange(newSortBy);

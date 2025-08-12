@@ -4,7 +4,7 @@ import { useRef, useEffect, FC, ReactNode, MouseEvent } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
@@ -40,8 +40,7 @@ const Modal: React.FC<ModalProps> = ({
 
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick as EventListener);
-    };
-  }, [isOpen, onClose, closeOnOutsideClick]);
+    }}, [isOpen, onClose, closeOnOutsideClick]);
 
   useEffect(() => {
     if (isOpen) {
@@ -51,8 +50,7 @@ const Modal: React.FC<ModalProps> = ({
     }
     return () => {
       document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+    }}, [isOpen]);
 
   if (!isOpen) {
 return null;
@@ -60,9 +58,9 @@ return null;
 
   const sizeClasses = {
     sm: 'max-w-sm',
-    md: 'max-w-md',
+          md: 'max-w-md',
     lg: 'max-w-lg',
-    xl: 'max-w-xl',
+          xl: 'max-w-xl',
     full: 'max-w-full h-full' };
 
   return (

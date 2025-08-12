@@ -10,11 +10,11 @@ import type { Video } from '../types/core';
 // Test utilities for consistent testing
 export const createTestQueryClient = () => {
   return new QueryClient({
-    defaultOptions: {
+    defaultOptions: {,
       queries: {
         retry: false,
-        gcTime: 0 },
-      mutations: {
+          gcTime: 0 },
+      mutations: {,
         retry: false } } });
 };
 
@@ -35,7 +35,7 @@ export const TestWrapper = ({ children, queryClient }: TestWrapperProps) => {
 };
 
 // Custom render function
-export const renderWithProviders = (
+export const renderWithProviders = (,
   ui: ReactElement,
   options?: {
     queryClient?: QueryClient;
@@ -44,9 +44,9 @@ export const renderWithProviders = (
 ) => {
   const {
     queryClient = new QueryClient({
-      defaultOptions: {
+      defaultOptions: {,
         queries: { retry: false },
-        mutations: { retry: false } } }),
+          mutations: { retry: false } } }),
     ...renderOptions
   } = options || {};
 
@@ -60,69 +60,69 @@ export const renderWithProviders = (
 // Mock data factories
 export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   id: 'test-video-1',
-  title: 'Test Video Title',
+          title: 'Test Video Title',
   description: 'Test video description',
-  thumbnailUrl: 'https://example.com/thumbnail.jpg',
-  videoUrl: 'https://example.com/video.mp4',
-  duration: '300',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          videoUrl: 'https://example.com/video.mp4',
+          duration: '300',
   views: 1000,
-  likes: 50,
+          likes: 50,
   dislikes: 2,
-  uploadedAt: '2024-01-01T00:00:00Z',
-  publishedAt: '2024-01-01T00:00:00Z',
-  channelId: 'test-channel-1',
+          uploadedAt: '2024-01-01T00:00:00Z',
+          publishedAt: '2024-01-01T00:00:00Z',
+          channelId: 'test-channel-1',
   channelName: 'Test Channel',
-  channelAvatarUrl: 'https://example.com/avatar.jpg',
-  category: 'Entertainment',
+          channelAvatarUrl: 'https://example.com/avatar.jpg',
+          category: 'Entertainment',
   tags: ['test', 'video'],
   visibility: 'public',
-  createdAt: '2024-01-01T00:00:00Z',
-  updatedAt: '2024-01-01T00:00:00Z',
+          createdAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
   ...overrides });
 
-export const createMockChannel = (
+export const createMockChannel = (,
   overrides: Partial<Channel> = {}
 ): Channel => ({
   id: 'test-channel-1',
-  name: 'Test Channel',
+          name: 'Test Channel',
   description: 'Test channel description',
-  avatarUrl: 'https://example.com/avatar.jpg',
-  banner: 'https://example.com/banner.jpg',
-  subscribers: 1000,
+          avatarUrl: 'https://example.com/avatar.jpg',
+          banner: 'https://example.com/banner.jpg',
+          subscribers: 1000,
   subscriberCount: 1000,
-  videoCount: 50,
+          videoCount: 50,
   isVerified: false,
-  joinedDate: '2023-01-01',
+          joinedDate: '2023-01-01',
   createdAt: '2023-01-01T00:00:00Z',
-  updatedAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
   ...overrides });
 
-export const createMockComment = (
+export const createMockComment = (,
   overrides: Partial<Comment> = {}
 ): Comment => ({
   id: 'test-comment-1',
-  userAvatarUrl: 'https://example.com/user-avatar.jpg',
-  userName: 'Test User',
+          userAvatarUrl: 'https://example.com/user-avatar.jpg',
+          userName: 'Test User',
   commentText: 'Test comment content',
-  timestamp: '2024-01-01T00:00:00Z',
-  likes: 5,
+          timestamp: '2024-01-01T00:00:00Z',
+          likes: 5,
   isLikedByCurrentUser: false,
-  isDislikedByCurrentUser: false,
+          isDislikedByCurrentUser: false,
   isEdited: false,
-  replies: [],
+          replies: [],
   replyCount: 2,
-  videoId: 'test-video-1',
+          videoId: 'test-video-1',
   authorId: 'test-user-1',
-  authorName: 'Test User',
+          authorName: 'Test User',
   authorAvatar: 'https://example.com/user-avatar.jpg',
-  content: 'Test comment content',
+          content: 'Test comment content',
   dislikes: 0,
-  isPinned: false,
+          isPinned: false,
   isHearted: false,
-  createdAt: '2024-01-01T00:00:00Z',
-  likeCount: 5,
+          createdAt: '2024-01-01T00:00:00Z',
+          likeCount: 5,
   publishedAt: '2024-01-01T00:00:00Z',
-  updatedAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
   ...overrides });
 
 // Performance testing utilities
@@ -183,20 +183,20 @@ export const userInteraction = {
 
 // Mock API responses
 export const mockApiResponses = {
-  videos: {
-    trending: [createMockVideo({ id: '1', title: 'Trending Video 1' })],
+  videos: {,
+    trending: [createMockVideo({ id: '1',
+          title: 'Trending Video 1' })],
     search: (query: any) => [
-      createMockVideo({ id: '2', title: `Search Result for ${query}` }),
-    ] },
+      createMockVideo({ id: '2',
+          title: `Search Result for ${query}` })] },
 
-  channels: {
+  channels: {,
     byId: (id: string) =>
       createMockChannel({ id, name: `Channel ${id}` }) },
-
-  comments: {
+          comments: {,
     byVideoId: (videoId: any) => [
-      createMockComment({ id: '1', content: `Comment for video ${videoId}` }),
-    ] } };
+      createMockComment({ id: '1',
+          content: `Comment for video ${videoId}` })] } };
 
 // Test scenarios
 export const testScenarios = {
@@ -239,20 +239,21 @@ export const testScenarios = {
 
 // Performance benchmarks
 export const performanceBenchmarks = {
-  videoGridRender: {
-    maxRenderTime: 100, // ms
-    maxMemoryUsage: 50 * 1024 * 1024, // 50MB
+  videoGridRender: {,
+    maxRenderTime: 100, // ms,
+  maxMemoryUsage: 50 * 1024 * 1024, // 50MB
   },
 
-  videoPlayerLoad: {
-    maxLoadTime: 500, // ms
-    maxBundleSize: 200 * 1024, // 200KB
+  videoPlayerLoad: {,
+    maxLoadTime: 500, // ms,
+  maxBundleSize: 200 * 1024, // 200KB
   },
 
-  commentSection: {
-    maxRenderTime: 50, // ms per 100 comments
-    maxScrollPerformance: 60, // fps
-  } };
+  commentSection: {,
+    maxRenderTime: 50, // ms per 100 comments,
+  maxScrollPerformance: 60, // fps
+  } 
+        };
 
 export { screen, fireEvent, waitFor, userEvent  };
 

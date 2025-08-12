@@ -1,9 +1,9 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -19,17 +19,17 @@ interface UpdateState {
   lastUpdateCheck: number | null;
   updateSize: number | null;
   updateVersion: string | null;
-  skipWaiting: boolean;
+  skipWaiting: boolean
 }
 
 interface CacheInfo {
   totalSize: number;
   cacheNames: string;
-  lastCacheUpdate: number | null;
+  lastCacheUpdate: number | null
 }
 
 interface UsePWAUpdatesReturn {
-  // Update state
+  // Update state,
   updateAvailable: boolean;
   isUpdating: boolean;
   updateError: string | null;
@@ -37,10 +37,10 @@ interface UsePWAUpdatesReturn {
   updateSize: number | null;
   updateVersion: string | null;
 
-  // Cache info
+  // Cache info,
   cacheInfo: CacheInfo | null;
 
-  // Actions
+  // Actions,
   checkForUpdates: () => Promise<boolean>;
   installUpdate: () => Promise<void>;
   skipUpdate: () => void;
@@ -48,9 +48,9 @@ interface UsePWAUpdatesReturn {
   clearCache: () => Promise<void>;
   getCacheSize: () => Promise<number>;
 
-  // Auto-update settings
+  // Auto-update settings,
   enableAutoUpdate: (enabled: any) => void;
-  setUpdateInterval: (minutes: any) => void;
+  setUpdateInterval: (minutes: any) => void
 }
 
 /**
@@ -435,8 +435,8 @@ export const usePWAUpdates = (): UsePWAUpdatesReturn => {
   }, [autoUpdateEnabled, updateInterval, checkForUpdates, updateCacheInfo]);
 
   return {
-    // Update state
-    updateAvailable: state.updateAvailable,
+    // Update state,
+  updateAvailable: state.updateAvailable,
     isUpdating: state.isUpdating,
     updateError: state.updateError,
     lastUpdateCheck: state.lastUpdateCheck,

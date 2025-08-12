@@ -14,7 +14,7 @@ export interface CreateCommentData {
 
 export interface UpdateCommentData {
   commentId: string;
-  content: string;
+  content: string
 }
 
 export interface CommentFilters {
@@ -27,7 +27,7 @@ export interface CommentFilters {
 
 export interface CommentReaction {
   type: 'like' | 'dislike' | 'heart' | 'laugh' | 'angry' | 'sad';
-  commentId: string;
+  commentId: string
 }
 
 export interface CommentModerationAction {
@@ -40,8 +40,8 @@ class CommentService {
   /**
    * Get comments for a video
    */
-  async getVideoComments(
-    videoId: any,
+  async getVideoComments(,
+  videoId: any,
     filters: CommentFilters = {}
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/videos/${videoId}/comments`, filters);
@@ -50,8 +50,8 @@ class CommentService {
   /**
    * Get replies for a comment
    */
-  async getCommentReplies(
-    commentId: any,
+  async getCommentReplies(,
+  commentId: any,
     filters: Omit<CommentFilters, 'parentId'> = {}
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/comments/${commentId}/replies`, filters);
@@ -132,8 +132,8 @@ class CommentService {
   /**
    * Report a comment
    */
-  async reportComment(
-    commentId: any,
+  async reportComment(,
+  commentId: any,
     reason: any,
     description?: string
   ): Promise<ApiResponse<void>> {
@@ -145,8 +145,8 @@ class CommentService {
   /**
    * Get user's comments
    */
-  async getUserComments(
-    userId: any,
+  async getUserComments(,
+  userId: any,
     filters: Omit<CommentFilters, 'parentId'> = {}
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/comments`, filters);
@@ -166,8 +166,8 @@ class CommentService {
   /**
    * Moderate a comment
    */
-  async moderateComment(
-    data: CommentModerationAction
+  async moderateComment(,
+  data: CommentModerationAction
   ): Promise<ApiResponse<void>> {
     const { commentId, ...moderationData } = data;
     return api.post(`/api/comments/${commentId}/moderate`, moderationData);
@@ -176,8 +176,8 @@ class CommentService {
   /**
    * Bulk moderate comments
    */
-  async bulkModerateComments(
-    commentIds: any,
+  async bulkModerateComments(,
+  commentIds: any,
     action: CommentModerationAction['action'],
     reason?: string
   ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
@@ -190,8 +190,8 @@ class CommentService {
   /**
    * Search comments
    */
-  async searchComments(
-    query: any,
+  async searchComments(,
+  query: any,
     videoId?: string,
     filters: CommentFilters = {}
   ): Promise<ApiResponse<Comment[]>> {
@@ -210,12 +210,12 @@ class CommentService {
       topCommenters: Array<{
         userId: string;
         username: string;
-        commentCount: number;
+        commentCount: number
       }>;
       sentimentAnalysis: {
         positive: number;
         negative: number;
-        neutral: number;
+        neutral: number
       };
     }>
   > {
@@ -225,8 +225,8 @@ class CommentService {
   /**
    * Get trending comments
    */
-  async getTrendingComments(
-    timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
+  async getTrendingComments(,
+  timeframe: '1h' | '24h' | '7d' | '30d' = '24h',
     limit: number = 20
   ): Promise<ApiResponse<Comment[]>> {
     return api.get('/api/comments/trending', { timeframe, limit });
@@ -239,7 +239,7 @@ class CommentService {
     ApiResponse<{
       comment: Comment;
       replies: Comment;
-      totalReplies: number;
+      totalReplies: number
     }>
   > {
     return api.get(`/api/comments/${commentId}/thread`);
@@ -262,8 +262,8 @@ class CommentService {
   /**
    * Get comment mentions for user
    */
-  async getCommentMentions(
-    userId: any,
+  async getCommentMentions(,
+  userId: any,
     filters: CommentFilters = {}
   ): Promise<ApiResponse<Comment[]>> {
     return api.get(`/api/users/${userId}/mentions`, filters);
@@ -279,8 +279,8 @@ class CommentService {
   /**
    * Get comment analytics for video owner
    */
-  async getCommentAnalytics(
-    videoId: any,
+  async getCommentAnalytics(,
+  videoId: any,
     timeframe: '7d' | '30d' | '90d' = '30d'
   ): Promise<
     ApiResponse<{
@@ -289,7 +289,7 @@ class CommentService {
       topKeywords: Array<{ keyword: string; count: number }>;
       engagementRate: number;
       responseRate: number;
-      averageResponseTime: number;
+      averageResponseTime: number
     }>
   > {
     return api.get(`/api/videos/${videoId}/comments/analytics`, { timeframe });
@@ -298,8 +298,8 @@ class CommentService {
   /**
    * Auto-moderate comments using AI
    */
-  async autoModerateComments(
-    videoId: any,
+  async autoModerateComments(,
+  videoId: any,
     settings: {
       enableSpamDetection: boolean;
       enableToxicityDetection: boolean;
@@ -311,7 +311,7 @@ class CommentService {
       processed: number;
       flagged: number;
       approved: number;
-      rejected: number;
+      rejected: number
     }>
   > {
     return api.post(`/api/videos/${videoId}/comments/auto-moderate`, settings);
@@ -320,8 +320,8 @@ class CommentService {
   /**
    * Export comments
    */
-  async exportComments(
-    videoId: any,
+  async exportComments(,
+  videoId: any,
     format: 'csv' | 'json' | 'xlsx'
   ): Promise<ApiResponse<string>> {
     return api.get(`/api/videos/${videoId}/comments/export`, { format });

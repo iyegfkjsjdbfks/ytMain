@@ -12,10 +12,12 @@ import React, { type ReactNode, Fragment, ReactNode } from 'react';
  * @param keyExtractor Function to extract unique key for each item
  * @returns Array of React nodes
  */
-export const safeArrayRender = <T,>(
+export const safeArrayRender = <T,>(,
   items: T[] | null | undefined,
-  renderItem: (item: T, index: number) => ReactNode,
-  keyExtractor?: (item: T, index: number) => string | number
+          renderItem: (item: T,
+          index: number) => ReactNode,
+  keyExtractor?: (item: T,
+          index: number) => string | number
 ): ReactNode[] => {
   if (!items || !Array.isArray(items)) {
     return [];
@@ -39,9 +41,9 @@ export const safeArrayRender = <T,>(
  * @param fallback Optional fallback component if condition is false
  * @returns React node or null
  */
-export const renderIf = (
+export const renderIf = (,
   condition: any,
-  component: ReactNode,
+          component: ReactNode,
   fallback: ReactNode = null
 ): ReactNode => {
   return condition ? component : fallback;
@@ -65,7 +67,8 @@ export const createUniqueId = (prefix = 'component'): string => {
  * @param size Size of each chunk
  * @returns Array of chunks
  */
-export const chunkArray = <T,>(array: T, size: any): T[][] => {
+export const chunkArray = <T,>(array: T,
+          size: any): T[][] => {
   if (!array.length) {
     return [];
   }

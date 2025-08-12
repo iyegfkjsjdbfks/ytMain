@@ -15,7 +15,7 @@ const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 interface UnifiedDataConfig {
   sources: {
     local: boolean;
-    youtube: boolean;
+    youtube: boolean
   };
   limits: {
     local?: number;
@@ -24,7 +24,7 @@ interface UnifiedDataConfig {
   };
   caching: {
     enabled: boolean;
-    ttl: number;
+    ttl: number
   };
   mixing: {
     strategy: 'round-robin' | 'source-priority' | 'relevance';
@@ -70,7 +70,7 @@ export interface UnifiedDataResponse<T> {
   sources: {
     local: {
       count: number;
-      hasMore: boolean;
+      hasMore: boolean
     };
     youtube: {
       count: number;
@@ -83,7 +83,7 @@ export interface UnifiedDataResponse<T> {
   pagination?: {
     page: number;
     limit: number;
-    total: number;
+    total: number
   };
 }
 
@@ -101,8 +101,8 @@ class UnifiedDataService {
   /**
    * Fetch trending videos from all enabled sources
    */
-  async getTrendingVideos(
-    limit: number = 50,
+  async getTrendingVideos(,
+  limit: number = 50,
     filters: UnifiedSearchFilters = {}
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
     const cacheKey = `trending:${JSON.stringify({ limit, filters })}`;
@@ -125,8 +125,7 @@ class UnifiedDataService {
         : []),
       ...(sources.includes('youtube')
         ? [this.fetchYouTubeTrendingVideos(filters)]
-        : []),
-    ]);
+        : [])]);
 
     const localResult = sources.includes('local') ? results[0] : null;
     const youtubeResult = sources.includes('youtube')
@@ -160,8 +159,8 @@ class UnifiedDataService {
   /**
    * Search videos across all enabled sources
    */
-  async searchVideos(
-    query: string,
+  async searchVideos(,
+  query: string,
     filters: UnifiedSearchFilters = {},
     limit: number = 50
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
@@ -194,8 +193,7 @@ class UnifiedDataService {
         : []),
       ...(sources.includes('youtube')
         ? [this.searchGoogleCustomSearchVideos(query, filters)]
-        : []),
-    ]);
+        : [])]);
 
     const localResult = sources.includes('local') ? results[0] : null;
     const youtubeResult = sources.includes('youtube')
@@ -326,15 +324,15 @@ class UnifiedDataService {
               isLive: video.isLive || false,
               isShort: video.isShort || false,
               visibility: video.visibility || 'public',
-              source: 'youtube' as const, // Metadata source is YouTube
-              metadata: {
+              source: 'youtube' as const, // Metadata source is YouTube,
+  metadata: {
                 quality: 'hd',
                 definition: 'hd',
                 captions: false,
                 language: 'en',
                 license: 'youtube' },
-              // Required properties for Video interface compatibility
-              uploadedAt: video.publishedAt || new Date().toISOString(),
+              // Required properties for Video interface compatibility,
+  uploadedAt: video.publishedAt || new Date().toISOString(),
               channelName: video.channelName || '',
               channelId: video.channelId || '',
               channelAvatarUrl:
@@ -424,8 +422,8 @@ class UnifiedDataService {
           visibility: 'public' as const, source: 'google-search' as const, metadata: {
             quality: 'hd',
             definition: 'high' },
-          // Required properties for Video interface compatibility
-          uploadedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
+          // Required properties for Video interface compatibility,
+  uploadedAt: googleSearchVideo.uploadedAt || new Date().toISOString(),
           channelName: googleSearchVideo.channelName || 'YouTube Channel',
           channelId:
             googleSearchVideo.channelId ||
@@ -513,8 +511,8 @@ class UnifiedDataService {
             visibility: 'public' as const, source: 'google-search' as const, metadata: {
               quality: 'hd',
               definition: 'high' },
-            // Required properties for Video interface compatibility
-            uploadedAt:
+            // Required properties for Video interface compatibility,
+  uploadedAt:
               googleSearchVideo.uploadedAt || new Date().toISOString(),
             channelName: googleSearchVideo.channelName || 'YouTube Channel',
             channelId:
@@ -610,8 +608,8 @@ class UnifiedDataService {
                   processedVideo.channelAvatarUrl ||
                   processedVideo.channel?.avatarUrl ||
                   '',
-                subscribers: 0, // Will be fetched separately if needed
-                subscribersFormatted: '0 subscribers',
+                subscribers: 0, // Will be fetched separately if needed,
+  subscribersFormatted: '0 subscribers',
                 isVerified: processedVideo.channel?.isVerified || false },
               duration: processedVideo.duration,
               publishedAt:
@@ -631,8 +629,8 @@ class UnifiedDataService {
                 captions: false,
                 language: 'en',
                 license: 'youtube' },
-              // Required properties for Video interface compatibility
-              uploadedAt:
+              // Required properties for Video interface compatibility,
+  uploadedAt:
                 processedVideo.publishedAt ||
                 processedVideo.uploadedAt ||
                 new Date().toISOString(),
@@ -707,8 +705,8 @@ class UnifiedDataService {
                 captions: false,
                 language: 'en',
                 license: 'youtube' },
-              // Required properties for Video interface compatibility
-              uploadedAt:
+              // Required properties for Video interface compatibility,
+  uploadedAt:
                 processedVideo.publishedAt ||
                 processedVideo.uploadedAt ||
                 new Date().toISOString(),
@@ -767,8 +765,8 @@ class UnifiedDataService {
   /**
    * Get shorts videos from all sources
    */
-  async getShortsVideos(
-    limit: number = 30
+  async getShortsVideos(,
+  limit: number = 30
   ): Promise<UnifiedDataResponse<UnifiedVideoMetadata>> {
     const filters: UnifiedSearchFilters = { type: 'short' };
     return this.getTrendingVideos(limit, filters);
@@ -776,15 +774,15 @@ class UnifiedDataService {
 
   // Private methods for fetching from specific sources
 
-  private async fetchLocalTrendingVideos(
-    _filters: UnifiedSearchFilters
+  private async fetchLocalTrendingVideos(,
+  _filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     // Local trending videos disabled - returning empty array
     return [];
   }
 
-  private async fetchYouTubeTrendingVideos(
-    filters: UnifiedSearchFilters
+  private async fetchYouTubeTrendingVideos(,
+  filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     try {
       logger.debug(
@@ -816,8 +814,7 @@ class UnifiedDataService {
           'music',
           'gaming',
           'tech',
-          'news',
-        ];
+          'news'];
         const randomQuery =
           trendingQueries[Math.floor(Math.random() * trendingQueries.length)];
         if (randomQuery) {
@@ -828,8 +825,8 @@ class UnifiedDataService {
     }
   }
 
-  private async searchLocalVideos(
-    query: string,
+  private async searchLocalVideos(,
+  query: string,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     // Local video search disabled - returning empty array
@@ -841,8 +838,8 @@ class UnifiedDataService {
    * NEW: Search using Google Custom Search for discovery
    * Note: Metadata will still be fetched using YouTube Data API v3 via getVideoById
    */
-  private async searchGoogleCustomSearchVideos(
-    query: string,
+  private async searchGoogleCustomSearchVideos(,
+  query: string,
     _filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     try {
@@ -896,12 +893,12 @@ class UnifiedDataService {
           tags: video.tags || [],
           isLive: false,
           isShort: false,
-          visibility: 'public' as const, source: 'google-search' as const, // Discovery source
-          metadata: {
+          visibility: 'public' as const, source: 'google-search' as const, // Discovery source,
+  metadata: {
             quality: 'hd',
             definition: 'high' },
-          // Required properties for Video interface compatibility
-          uploadedAt: video.uploadedAt || new Date().toISOString(),
+          // Required properties for Video interface compatibility,
+  uploadedAt: video.uploadedAt || new Date().toISOString(),
           channelName: video.channelName || 'YouTube Channel',
           channelId:
             video.channelId ||
@@ -926,8 +923,8 @@ class UnifiedDataService {
     }
   }
 
-  private async searchYouTubeVideos(
-    query: string,
+  private async searchYouTubeVideos(,
+  query: string,
     filters: UnifiedSearchFilters
   ): Promise<UnifiedVideoMetadata[]> {
     try {
@@ -986,8 +983,8 @@ class UnifiedDataService {
             captions: false,
             language: 'en',
             license: 'youtube' },
-          // Required properties for Video interface compatibility
-          uploadedAt:
+          // Required properties for Video interface compatibility,
+  uploadedAt:
             video.publishedAt || video.uploadedAt || new Date().toISOString(),
           channelName: video.channelName,
           channelId: video.channelId,
@@ -1009,8 +1006,8 @@ class UnifiedDataService {
 
   // Video mixing strategies
 
-  private mixVideoResults(
-    localVideos: UnifiedVideoMetadata[],
+  private mixVideoResults(,
+  localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
     limit: number
   ): UnifiedVideoMetadata[] {
@@ -1026,8 +1023,8 @@ class UnifiedDataService {
     }
   }
 
-  private roundRobinMix(
-    localVideos: UnifiedVideoMetadata[],
+  private roundRobinMix(,
+  localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
     limit: number
   ): UnifiedVideoMetadata[] {
@@ -1050,8 +1047,8 @@ class UnifiedDataService {
     return mixed;
   }
 
-  private sourcePriorityMix(
-    localVideos: UnifiedVideoMetadata[],
+  private sourcePriorityMix(,
+  localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
     limit: number
   ): UnifiedVideoMetadata[] {
@@ -1071,8 +1068,8 @@ class UnifiedDataService {
     return mixed;
   }
 
-  private relevanceMix(
-    localVideos: UnifiedVideoMetadata[],
+  private relevanceMix(,
+  localVideos: UnifiedVideoMetadata[],
     youtubeVideos: UnifiedVideoMetadata[],
     limit: number
   ): UnifiedVideoMetadata[] {

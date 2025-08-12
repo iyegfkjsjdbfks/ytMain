@@ -4,13 +4,13 @@ import { DataWrapper } from './DataWrapper';
 interface PageLayoutProps<T> {
   title: string;
   icon?: React.ReactNode;
-  data: T;
+  data: T;,
   loading: boolean;
-  error: string | null;
+  error: string | null;,
   children: (data: T) => React.ReactNode;
   headerActions?: React.ReactNode;
   emptyState?: {
-    title: string;
+    title: string;,
     message: string;
     icon?: React.ReactNode;
   };

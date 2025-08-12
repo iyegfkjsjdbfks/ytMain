@@ -8,7 +8,7 @@ interface LiveStreamState {
   viewerCount: number;
   chatMessages;
   streamQuality: string;
-  error: string | null;
+  error: string | null
 }
 
 export const useLiveStream = (streamId?: string) => {

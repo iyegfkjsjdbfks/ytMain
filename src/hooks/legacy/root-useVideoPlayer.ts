@@ -11,7 +11,7 @@ interface VideoPlayerState {
   error: string | null;
   playbackRate: number;
   quality: string;
-  buffered: number;
+  buffered: number
 }
 
 interface VideoPlayerOptions {
@@ -46,7 +46,7 @@ interface UseVideoPlayerReturn {
     enterFullscreen: () => Promise<void>;
     exitFullscreen: () => Promise<void>;
     toggleFullscreen: () => Promise<void>;
-    reset: () => void;
+    reset: () => void
   };
   events: {
     onLoadStart: () => void;
@@ -61,7 +61,7 @@ interface UseVideoPlayerReturn {
     onEnded: () => void;
     onProgress: () => void;
     onWaiting: () => void;
-    onCanPlayThrough: () => void;
+    onCanPlayThrough: () => void
   };
 }
 
@@ -80,7 +80,7 @@ interface UseVideoPlayerReturn {
  *
  * Reduces code duplication across video player components
  */
-export const useVideoPlayer = (
+export const useVideoPlayer = (,
   options: VideoPlayerOptions = {}
 ): UseVideoPlayerReturn => {
   const {
@@ -425,8 +425,7 @@ export const useVideoPlayer = (
     playsinline,
     initialVolume,
     initialPlaybackRate,
-    events,
-  ]);
+    events]);
 
   // Handle fullscreen changes
   useEffect(() => {

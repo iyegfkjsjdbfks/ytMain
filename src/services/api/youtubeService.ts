@@ -32,7 +32,7 @@ interface YouTubeVideoResponse {
       likeCount: string;
       dislikeCount?: string;
       favoriteCount?: string;
-      commentCount: string;
+      commentCount: string
     };
     contentDetails: {
       duration: string;
@@ -51,7 +51,7 @@ interface YouTubeSearchResponse {
   items: Array<{
     id: {
       kind: string;
-      videoId: string;
+      videoId: string
     };
     snippet: {
       title: string;
@@ -62,13 +62,13 @@ interface YouTubeSearchResponse {
       };
       publishedAt: string;
       channelId: string;
-      channelTitle: string;
+      channelTitle: string
     };
   }>;
   nextPageToken?: string;
   pageInfo: {
     totalResults: number;
-    resultsPerPage: number;
+    resultsPerPage: number
   };
 }
 
@@ -89,7 +89,7 @@ interface YouTubeChannelResponse {
     statistics: {
       subscriberCount: string;
       videoCount: string;
-      viewCount: string;
+      viewCount: string
     };
   }>;
 }
@@ -273,8 +273,8 @@ class YouTubeService {
         ),
         videoCount: parseInt(item.statistics?.videoCount || '0', 10),
         totalViews: parseInt(item.statistics?.viewCount || '0', 10),
-        isVerified: false, // This would require a separate mechanism to verify
-        joinedDate: item.snippet?.publishedAt || new Date().toISOString(),
+        isVerified: false, // This would require a separate mechanism to verify,
+  joinedDate: item.snippet?.publishedAt || new Date().toISOString(),
         country: item.snippet?.country || 'Unknown',
         createdAt: item.snippet?.publishedAt || new Date().toISOString(),
         updatedAt: new Date().toISOString() };
@@ -290,7 +290,7 @@ class YouTubeService {
   private parseDuration(duration: any): string {
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
     if (!match) {
-      return '0:00';
+      return '0: 00'
     }
 
     const hours = parseInt(match[1]?.replace('H', '') || '0', 10);
@@ -346,8 +346,8 @@ class YouTubeService {
     return categories[categoryId] || 'Unknown';
   }
 
-  async searchVideos(
-    query: any,
+  async searchVideos(,
+  query: any,
     options: { maxResults?: number } = {}
   ): Promise<Video[]> {
     if (!API_KEY) {

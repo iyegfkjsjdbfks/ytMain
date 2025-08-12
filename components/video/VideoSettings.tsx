@@ -3,26 +3,26 @@ import React from 'react';
 import { XMarkIcon, CheckIcon  } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
-  label: string;
+  label: string;,
   value: string;
-  height: number;
+  height: number
 }
 
 export interface Subtitle {
-  label: string;
+  label: string;,
   src: string;
-  srcLang: string;
+  srcLang: string
 }
 
 interface VideoSettingsProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
-  qualities: VideoQuality;
+  qualities: VideoQuality;,
   currentQuality: string;
-  onQualityChange: (quality: any) => void;
+  onQualityChange: (quality: any) => void;,
   subtitles: Subtitle;
-  currentSubtitle: string | null;
-  onSubtitleChange: (subtitle: string | null) => void;
+  currentSubtitle: string | null;,
+  onSubtitleChange: (subtitle: string | null) => void;,
   autoplay: boolean;
   onAutoplayChange: (autoplay: any) => void;
   className?: string;

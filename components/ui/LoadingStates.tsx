@@ -12,18 +12,23 @@ export interface LoadingProps {
 
 // Size mappings
 const sizeMap = {
-  xs: { spinner: 'w-3 h-3', text: 'text-xs' },
-  sm: { spinner: 'w-4 h-4', text: 'text-sm' },
-  md: { spinner: 'w-5 h-5', text: 'text-base' },
-  lg: { spinner: 'w-6 h-6', text: 'text-lg' },
-  xl: { spinner: 'w-8 h-8', text: 'text-xl' } };
+  xs: { spinner: 'w-3 h-3',
+          text: 'text-xs' },
+  sm: { spinner: 'w-4 h-4',
+          text: 'text-sm' },
+  md: { spinner: 'w-5 h-5',
+          text: 'text-base' },
+  lg: { spinner: 'w-6 h-6',
+          text: 'text-lg' },
+  xl: { spinner: 'w-8 h-8',
+          text: 'text-xl' } };
 
 // Color mappings
 const colorMap = {
   primary: 'text-red-600',
-  secondary: 'text-gray-600',
+          secondary: 'text-gray-600',
   white: 'text-white',
-  gray: 'text-gray-400' };
+          gray: 'text-gray-400' };
 
 // Base Spinner Component
 export const Spinner: React.FC<LoadingProps> = ({
@@ -39,8 +44,7 @@ export const Spinner: React.FC<LoadingProps> = ({
         'animate-spin rounded-full border-2 border-current border-t-transparent',
         sizeClass,
         colorClass,
-        className,
-      )}
+        className)}
       role="status"
       aria-label="Loading"
     />
@@ -64,11 +68,10 @@ export const DotsLoader: React.FC<LoadingProps> = ({
             'rounded-full animate-pulse',
             dotSize,
             colorClass,
-            'bg-current',
-          )}
+            'bg-current')}
           style={{
             animationDelay: `${i * 0.2}s`,
-            animationDuration: '1s' }}
+          animationDuration: '1s' }}
         />
       ))}
     </div>
@@ -99,9 +102,9 @@ export const Skeleton: React.FC<{
   rounded = 'md' }) => {
   const roundedClass = {
     none: 'rounded-none',
-    sm: 'rounded-sm',
+          sm: 'rounded-sm',
     md: 'rounded-md',
-    lg: 'rounded-lg',
+          lg: 'rounded-lg',
     full: 'rounded-full' }[rounded];
 
   return (
@@ -111,8 +114,7 @@ export const Skeleton: React.FC<{
         width,
         height,
         roundedClass,
-        className,
-      )}
+        className)}
       role="status"
       aria-label="Loading"
     />

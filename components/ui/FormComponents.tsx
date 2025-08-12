@@ -39,7 +39,8 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement> 'size' | 'required' | 'className'> BaseFieldProps {
   variant?: InputVariant;
   size?: InputSize;
-  options: Array<{ value, label: string; disabled?: boolean }>;
+  options: Array<{ value,
+          label: string; disabled?: boolean }>;
   placeholder?: string;
 }
 
@@ -51,18 +52,20 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 // Radio component props
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement> 'type' | 'size' | 'required' | 'className'> BaseFieldProps {
   size?: InputSize;
-  options: Array<{ value, label: string; disabled?: boolean }>;
+  options: Array<{ value,
+          label: string; disabled?: boolean }>;
 }
 
 // Style mappings
 const sizeStyles = {
   sm: 'px-3 py-1.5 text-sm',
-  md: 'px-3 py-2 text-base', lg: 'px-4 py-3 text-lg'
+          md: 'px-3 py-2 text-base', lg: 'px-4 py-3 text-lg'
 };
 
 const variantStyles = {
   default: 'border border-gray-300 bg-white focus:border-red-500 focus:ring-red-500',
-  filled: 'border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500', outlined: 'border-2 border-gray-300 bg-transparent focus:border-red-500'
+          filled: 'border-0 bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500',
+          outlined: 'border-2 border-gray-300 bg-transparent focus:border-red-500'
 };
 
 const baseInputStyles = 'w-full rounded-md transition-colors duration-200 focus:outline-none focus:ring-1 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -133,8 +136,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
     id,
     ...props
   },
-  ref,
-) => {
+  ref) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
 
@@ -145,8 +147,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
     leftIcon && 'pl-10',
     rightIcon && 'pr-10',
-    className,
-  );
+    className);
 
   return (
     <div className="w-full">
@@ -210,15 +211,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
     id,
     ...props
   },
-  ref,
-) => {
+  ref) => {
   const textareaId = id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
 
   const resizeClasses = {
     none: 'resize-none',
-    vertical: 'resize-y',
-    horizontal: 'resize-x', both: 'resize'
+          vertical: 'resize-y',
+    horizontal: 'resize-x',
+          both: 'resize'
   };
 
   const textareaClasses = cn(
@@ -227,8 +228,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
     variantStyles[variant],
     resizeClasses[resize],
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
-    className,
-  );
+    className);
 
   return (
     <div className="w-full">
@@ -275,8 +275,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
     id,
     ...props
   },
-  ref,
-) => {
+  ref) => {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
 
@@ -286,8 +285,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>((
     variantStyles[variant],
     hasError && 'border-red-500 focus:border-red-500 focus:ring-red-500',
     'pr-10 appearance-none bg-no-repeat bg-right',
-    className,
-  );
+    className);
 
   return (
     <div className="w-full">
@@ -354,22 +352,20 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
     id,
     ...props
   },
-  ref,
-) => {
+  ref) => {
   const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = !!error;
 
   const sizeClasses = {
     sm: 'h-3 w-3',
-    md: 'h-4 w-4', lg: 'h-5 w-5'
+          md: 'h-4 w-4', lg: 'h-5 w-5'
   };
 
   const checkboxClasses = cn(
     'rounded border-gray-300 text-red-600 focus:ring-red-500',
     sizeClasses[size],
     hasError && 'border-red-500',
-    className,
-  );
+    className);
 
   return (
     <div className="w-full">
@@ -424,14 +420,13 @@ export const RadioGroup: React.FC<RadioProps> = ({
 
   const sizeClasses = {
     sm: 'h-3 w-3',
-    md: 'h-4 w-4', lg: 'h-5 w-5'
+          md: 'h-4 w-4', lg: 'h-5 w-5'
   };
 
   const radioClasses = cn(
     'border-gray-300 text-red-600 focus:ring-red-500',
     sizeClasses[size],
-    hasError && 'border-red-500',
-  );
+    hasError && 'border-red-500');
 
   return (
     <div className={cn('w-full', className)}>
@@ -465,8 +460,7 @@ export const RadioGroup: React.FC<RadioProps> = ({
                 htmlFor={radioId}
                 className={cn(
                   'ml-2 text-sm text-gray-700',
-                  option.disabled && 'opacity-50 cursor-not-allowed',
-                )}
+                  option.disabled && 'opacity-50 cursor-not-allowed')}
               >
                 {option.label}
               </label>
@@ -482,8 +476,8 @@ export const RadioGroup: React.FC<RadioProps> = ({
 };
 
 // Form Group Component
-export const FormGroup: React.FC<{
-  children: React.ReactNode;
+export const FormGroup: React.FC<{,
+          children: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => (
   <div className={cn('space-y-4', className)}>
@@ -492,14 +486,14 @@ export const FormGroup: React.FC<{
 );
 
 // Form Actions Component
-export const FormActions: React.FC<{
-  children: React.ReactNode;
+export const FormActions: React.FC<{,
+          children: React.ReactNode;
   className?: string;
   align?: 'left' | 'center' | 'right';
 }> = ({ children, className, align = 'right' }) => {
   const alignClasses = {
     left: 'justify-start',
-    center: 'justify-center', right: 'justify-end'
+          center: 'justify-center', right: 'justify-end'
   };
 
   return (

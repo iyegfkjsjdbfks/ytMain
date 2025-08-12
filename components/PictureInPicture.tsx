@@ -5,12 +5,12 @@ import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 import { XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 interface PictureInPictureProps {
-  videoId: string;
+  videoId: string;,
   videoTitle: string;
-  channelName: string;
+  channelName: string;,
   thumbnailUrl: string;
   videoUrl?: string;
-  isVisible: boolean;
+  isVisible: boolean;,
   onClose: () => void;
   onExpand?: () => void;
   className?: string;
@@ -30,8 +30,10 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 20, y: 20 });
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 20,
+          y: 20 });
+  const [dragOffset, setDragOffset] = useState({ x: 0,
+          y: 0 });
   const [isMinimized, setIsMinimized] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -66,8 +68,7 @@ const PictureInPicture: React.FC<PictureInPictureProps> = ({
     return () => {
       document.removeEventListener('mousemove', handleMouseMove as EventListener);
       document.removeEventListener('mouseup', handleMouseUp as EventListener);
-    };
-  }, [isDragging, dragOffset]);
+    }}, [isDragging, dragOffset]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -84,15 +85,14 @@ return;
     return () => {
       video.removeEventListener('timeupdate', updateTime as EventListener);
       video.removeEventListener('loadedmetadata', updateDuration as EventListener);
-    };
-  }, []);
+    }}, []);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       setDragOffset({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top });
+          y: e.clientY - rect.top });
       setIsDragging(true);
     }
   };
@@ -150,7 +150,7 @@ return null;
       } ${className}`}
       style={{
         left: `${position.x}px`,
-        top: `${position.y}px`,
+          top: `${position.y}px`,
         cursor: isDragging ? 'grabbing' : 'grab' }}
       onMouseDown={handleMouseDown}
     >
@@ -161,7 +161,8 @@ return null;
             onClick={(e) => {
               e.stopPropagation();
               setIsMinimized(false);
-            }}
+            
+        }}
             className="text-white hover:text-gray-300"
           >
             <PlayIcon className="w-6 h-6" />

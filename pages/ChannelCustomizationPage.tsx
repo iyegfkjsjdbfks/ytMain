@@ -8,65 +8,67 @@ const XMarkIconSolid = XMarkSolidIcon;
 const CheckIconSolid = CheckSolidIcon;
 
 interface ChannelBranding {
-  channelArt: string;
+  channelArt: string;,
   profilePicture: string;
-  channelName: string;
+  channelName: string;,
   channelDescription: string;
-  channelKeywords: string;
+  channelKeywords: string;,
   channelTrailer: string;
-  featuredChannels: string;
+  featuredChannels: string;,
   socialLinks: {
-    website: string;
+    website: string;,
     twitter: string;
-    instagram: string;
+    instagram: string;,
     facebook: string;
   };
-  channelLayout: 'default' | 'compact' | 'showcase';
+  channelLayout: 'default' | 'compact' | 'showcase';,
   watermark: string;
-  endScreenTemplate: string;
+  endScreenTemplate: string
 }
 
 interface ChannelStats {
-  subscribers: number;
+  subscribers: number;,
   totalViews: number;
-  videosCount: number;
-  joinDate: string;
+  videosCount: number;,
+  joinDate: string
 }
 
 const ChannelCustomizationPage: React.FC = () => {
   const [branding, setBranding] = useState<ChannelBranding>({
     channelArt: '/api/placeholder/2560/1440',
-    profilePicture: '/api/placeholder/800/800',
+          profilePicture: '/api/placeholder/800/800',
     channelName: 'My Awesome Channel',
-    channelDescription: 'Welcome to my channel! Here you\'ll find amazing content about technology, tutorials, and more.',
+          channelDescription: 'Welcome to my channel! Here you\'ll find amazing content about technology, tutorials, and more.',
     channelKeywords: ['technology', 'tutorials', 'reviews', 'gaming'],
     channelTrailer: '',
-    featuredChannels: [],
-    socialLinks: {
+          featuredChannels: [],
+    socialLinks: {,
       website: '',
-      twitter: '',
+          twitter: '',
       instagram: '',
-      facebook: '' },
+          facebook: '' },
     channelLayout: 'default',
-    watermark: '',
+          watermark: '',
     endScreenTemplate: 'default' });
 
   const [stats] = useState<ChannelStats>({
     subscribers: 125000,
-    totalViews: 2500000,
+          totalViews: 2500000,
     videosCount: 156,
-    joinDate: 'Jan 15, 2020' });
+          joinDate: 'Jan 15, 2020' });
 
   const [activeTab, setActiveTab] = useState<'branding' | 'layout' | 'info' | 'featured'>('branding');
   const [previewMode, setPreviewMode] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
-  const handleInputChange = (field: keyof ChannelBranding, value: string | number) => {
+  const handleInputChange = (field: keyof ChannelBranding,
+          value: string | number) => {
     setBranding(prev => ({ ...prev, [field]: value }));
     setUnsavedChanges(true);
   };
 
-  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'], value: string | number) => {
+  const handleSocialLinkChange = (platform: keyof ChannelBranding['socialLinks'],
+          value: string | number) => {
     setBranding(prev => ({
       ...prev,
       socialLinks: { ...prev.socialLinks, [platform]: value } }));
@@ -157,11 +159,14 @@ const ChannelCustomizationPage: React.FC = () => {
           <div className="lg:col-span-1">
             <nav className="space-y-2">
               {[
-                { id: 'branding', label: 'Branding', icon: PaintBrushIcon },
-                { id: 'layout', label: 'Layout', icon: DocumentTextIcon },
-                { id: 'info', label: 'Basic Info', icon: DocumentTextIcon },
-                { id: 'featured', label: 'Featured Content', icon: LinkIcon },
-              ].map((tab) => (
+                { id: 'branding',
+          label: 'Branding', icon: PaintBrushIcon },
+                { id: 'layout',
+          label: 'Layout', icon: DocumentTextIcon },
+                { id: 'info',
+          label: 'Basic Info', icon: DocumentTextIcon },
+                { id: 'featured',
+          label: 'Featured Content', icon: LinkIcon }].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
@@ -231,7 +236,8 @@ const ChannelCustomizationPage: React.FC = () => {
                             if (file) {
                               // Handle file upload
                             }
-                          };
+                          
+        };
                           input.click();
                         }}
                         className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-lg opacity-0 hover:opacity-100 transition-opacity"
@@ -268,7 +274,8 @@ const ChannelCustomizationPage: React.FC = () => {
                               if (file) {
                                 // Handle file upload
                               }
-                            };
+                            
+        };
                             input.click();
                           }}
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity"
@@ -309,7 +316,8 @@ const ChannelCustomizationPage: React.FC = () => {
                             if (file) {
                               // Handle file upload
                             }
-                          };
+                          
+        };
                           input.click();
                         }}
                         className="text-red-600 hover:text-red-700 text-sm font-medium"
@@ -334,10 +342,12 @@ const ChannelCustomizationPage: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-labelledby="layout-style-label">
                         {[
-                          { id: 'default', name: 'Default', description: 'Standard YouTube layout' },
-                          { id: 'compact', name: 'Compact', description: 'More videos visible' },
-                          { id: 'showcase', name: 'Showcase', description: 'Highlight featured content' },
-                        ].map((layout) => (
+                          { id: 'default',
+          name: 'Default', description: 'Standard YouTube layout' },
+                          { id: 'compact',
+          name: 'Compact', description: 'More videos visible' },
+                          { id: 'showcase',
+          name: 'Showcase', description: 'Highlight featured content' }].map((layout) => (
                           <button
                             key={layout.id}
                             onClick={() => handleInputChange('channelLayout', layout.id)}

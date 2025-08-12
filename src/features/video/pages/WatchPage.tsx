@@ -41,41 +41,41 @@ const WatchPage: React.FC = () => {
   if (video) {
     logger.debug('📊 WatchPage: Metadata debug:', {
       title: video.title,
-      channelName: video.channel?.name,
+          channelName: video.channel?.name,
       channelAvatar: video.channel?.avatarUrl,
-      subscribers: video.channel?.subscribersFormatted,
+          subscribers: video.channel?.subscribersFormatted,
       views: video.viewsFormatted,
-      likes: video.likes,
+          likes: video.likes,
       dislikes: video.dislikes,
-      publishedAt: video.publishedAt,
+          publishedAt: video.publishedAt,
       source: video.source });
 
     // Enhanced debugging for Google Custom Search videos
     if (video.source === 'google-search') {
       logger.debug('🔍 Google Custom Search Video Debug:', {
         id: video.id,
-        title: video.title,
+          title: video.title,
         description: `${video.description?.substring(0, 100)}...`,
-        channel: {
+        channel: {,
           id: video.channel?.id,
           name: video.channel?.name,
           avatarUrl: video.channel?.avatarUrl,
           subscribers: video.channel?.subscribersFormatted,
           isVerified: video.channel?.isVerified },
-        stats: {
+          stats: {,
           views: video.views,
           viewsFormatted: video.viewsFormatted,
           likes: video.likes,
           dislikes: video.dislikes,
           commentCount: video.commentCount },
-        metadata: {
+          metadata: {,
           duration: video.duration,
           publishedAt: video.publishedAt,
           publishedAtFormatted: video.publishedAtFormatted,
           category: video.category,
           tags: video.tags,
           source: video.source },
-        technicalData: {
+        technicalData: {,
           videoUrl: video.videoUrl,
           thumbnailUrl: video.thumbnailUrl,
           visibility: video.visibility } });
@@ -118,11 +118,12 @@ const WatchPage: React.FC = () => {
         '📺 First few recommendations:',
         unifiedVideos
           .slice(0, 3)
-          .map((v: any) => ({ id: v.id, title: v.title }))
+          .map((v: any) => ({ id: v.id,
+          title: v.title }))
       );
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
-      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo: any) => ({
+      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo: any) => ({,
           id: unifiedVideo.id,
           createdAt: unifiedVideo.publishedAt,
           updatedAt: unifiedVideo.publishedAt,
@@ -148,23 +149,23 @@ const WatchPage: React.FC = () => {
           isLive: unifiedVideo.isLive,
           isShort: unifiedVideo.isShort,
           visibility: unifiedVideo.visibility,
-          statistics: {
+          statistics: {,
             viewCount: unifiedVideo.views,
-            likeCount: unifiedVideo.likes,
+          likeCount: unifiedVideo.likes,
             dislikeCount: unifiedVideo.dislikes,
-            favoriteCount: 0,
+          favoriteCount: 0,
             commentCount: unifiedVideo.commentCount },
-          topicDetails: {
+          topicDetails: {,
             topicIds: [],
-            relevantTopicIds: [],
+          relevantTopicIds: [],
             topicCategories: [] },
-          contentDetails: {
+          contentDetails: {,
             duration: unifiedVideo.duration,
-            dimension: '2d',
+          dimension: '2d',
             definition: unifiedVideo.metadata?.quality === 'hd' ? 'hd' : 'sd',
-            caption: 'false',
+          caption: 'false',
             licensedContent: false,
-            contentRating: {},
+          contentRating: {},
             projection: 'rectangular' } })
       );
 
@@ -189,43 +190,43 @@ const WatchPage: React.FC = () => {
       logger.error('❌ Error details:', error);
 
       // Fallback to a simple mock video for testing
-      const fallbackVideo: Video = {
+      const fallbackVideo: Video = {,
         id: 'fallback-1',
-        createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        title: 'Fallback Test Video',
+          title: 'Fallback Test Video',
         description: 'This is a fallback video for testing',
-        thumbnailUrl: 'https://picsum.photos/320/180',
-        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        duration: '3:30',
-        views: '1M',
+          thumbnailUrl: 'https://picsum.photos/320/180',
+          videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          duration: '3:30',
+          views: '1M',
         viewCount: 1000000,
-        likes: 1000,
+          likes: 1000,
         likeCount: 1000,
-        dislikeCount: 10,
+          dislikeCount: 10,
         commentCount: 100,
-        dislikes: 10,
+          dislikes: 10,
         uploadedAt: new Date().toISOString(),
-        publishedAt: new Date().toISOString(),
+          publishedAt: new Date().toISOString(),
         channelName: 'Test Channel',
-        channelId: 'test-channel',
+          channelId: 'test-channel',
         channelAvatarUrl: 'https://picsum.photos/48/48',
-        category: 'Entertainment',
+          category: 'Entertainment',
         tags: ['test'],
-        isLive: false,
+          isLive: false,
         isShort: false,
-        visibility: 'public',
-        statistics: {
+          visibility: 'public',
+        statistics: {,
           viewCount: 1000000,
           likeCount: 1000,
           dislikeCount: 10,
           favoriteCount: 0,
           commentCount: 100 },
-        topicDetails: {
+          topicDetails: {,
           topicIds: [],
           relevantTopicIds: [],
           topicCategories: [] },
-        contentDetails: {
+          contentDetails: {,
           duration: 'PT3M30S',
           dimension: '2d',
           definition: 'hd',
@@ -279,7 +280,8 @@ const WatchPage: React.FC = () => {
         logger.debug('📦 Videos in Google Search store:', allVideos.length);
         logger.debug(
           '📦 Store contents:',
-          allVideos.map(v => ({ id: v.id, title: v.title }))
+          allVideos.map(v => ({ id: v.id,
+          title: v.title }))
         );
 
         // Check if our specific video is in the store
@@ -399,20 +401,20 @@ const WatchPage: React.FC = () => {
                 <strong>Environment Check:</strong>
               </div>
               <div className='ml-4'>
-                <div>
-                  VITE_GOOGLE_SEARCH_API_KEY:{' '}
+                <div>,
+  VITE_GOOGLE_SEARCH_API_KEY:{' '}
                   {import.meta.env.VITE_GOOGLE_SEARCH_API_KEY
                     ? '✅ Set'
                     : '❌ Missing'}
                 </div>
-                <div>
-                  VITE_GOOGLE_SEARCH_ENGINE_ID:{' '}
+                <div>,
+  VITE_GOOGLE_SEARCH_ENGINE_ID:{' '}
                   {import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID
                     ? '✅ Set'
                     : '❌ Missing'}
                 </div>
-                <div>
-                  VITE_YOUTUBE_API_KEY:{' '}
+                <div>,
+  VITE_YOUTUBE_API_KEY:{' '}
                   {import.meta.env.VITE_YOUTUBE_API_KEY
                     ? '✅ Set'
                     : '❌ Missing'}
@@ -521,7 +523,7 @@ const WatchPage: React.FC = () => {
                     {
                       ...video,
                       viewCount: video.views,
-                      duration:
+          duration:
                         typeof video.duration === 'string'
                           ? parseInt(
                               video.duration
@@ -552,10 +554,12 @@ const WatchPage: React.FC = () => {
                   useYouTube={false}
                   onTimeUpdate={(_currentTime, _duration) => {
                     // Track watch progress
-                  }}
+                  
+        }}
                   onPlay={() => {
                     // Handle play event
-                  }}
+                  
+        }}
                 />
               )}
             </div>
@@ -714,7 +718,8 @@ const WatchPage: React.FC = () => {
                     {/* Tags */}{' '}
                     {video.tags && video.tags.length > 0 && (
                       <div className='mt-4 flex flex-wrap gap-2'>
-                        {video.tags.map((tag: string, index: number) => (
+                        {video.tags.map((tag: string,
+          index: number) => (
                           <span
                             key={index}
                             className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full'

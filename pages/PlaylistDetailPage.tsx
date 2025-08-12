@@ -14,7 +14,7 @@ import type { UserPlaylist } from '../types';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface PlaylistWithVideos extends UserPlaylist {
-  videos: Video;
+  videos: Video
 }
 
 const PlaylistDetailPage: React.FC = () => {
@@ -81,10 +81,10 @@ const PlaylistDetailPage: React.FC = () => {
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
-    };
-  }, [activeVideoMenuId, isEditModalOpen]);
+    }}, [activeVideoMenuId, isEditModalOpen]);
 
-  const handleToggleVideoMenu = (videoId: any, e: React.MouseEvent) => {
+  const handleToggleVideoMenu = (videoId: any,
+          e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveVideoMenuId(prevId => (prevId=== videoId ? null : videoId));
   };
@@ -111,14 +111,15 @@ return null;
           videos: prevDetails.videos.filter((v: any) => v.id !== videoIdToRemove),
           videoIds: prevDetails.videoIds.filter((id: string) => id !== videoIdToRemove),
           // The count will be derived from videoIds.length, and updatedAt is handled by service
-        };
-      });
+        
+        }});
       setActiveVideoMenuId(null); // Close menu
     } catch (err) {
       console.error('Failed to remove video from playlist:', err);
       alert('Error removing video. Please try again.'); // Or use a more sophisticated notification
     }
-  };
+  
+        };
 
   const handleOpenEditModal = () => {
     if (playlistDetails) {
@@ -128,7 +129,8 @@ return null;
     }
   };
 
-  const handleSaveChanges = async (title: any, description: any) => {
+  const handleSaveChanges = async (title: any,
+          description: any) => {
     if (!playlistId || !title.trim()) {
       alert('Playlist title cannot be empty.');
       return;
@@ -158,7 +160,7 @@ return null;
   }
 
   if (!playlistDetails) {
-    return <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">Playlist not found.</div>;
+    return <div className="p-6 text-center text-neutral-600 dark: text-neutral-400 text-lg">Playlist not found.</div>
   }
 
   const { title, description, videos, updatedAt } = playlistDetails;
@@ -228,7 +230,8 @@ return null;
 
       {videos.length > 0 ? (
         <ul className="divide-y divide-neutral-200 dark:divide-neutral-800">
-          {videos.map((video: any, index: number) => (
+          {videos.map((video: any,
+          index: number) => (
             <li key={video.id} className="py-3 hover:bg-neutral-50 dark:hover:bg-neutral-900/70 transition-colors rounded-md -mx-2 px-2 group flex items-center justify-between">
               <Link to={`/watch/${video.id}`} className="flex items-center space-x-3 flex-grow min-w-0">
                 <div className="w-8 text-right text-xs text-neutral-500 dark:text-neutral-400 pr-1 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">{index + 1}</div>

@@ -39,66 +39,66 @@ export interface UnifiedVideoCardProps {
 const variantStyles: Record<
   VideoCardVariant,
   {
-    container: string;
+    container: string;,
     thumbnail: string;
-    content: string;
+    content: string;,
     title: string;
     meta: string;
   }
 > = {
-  default: {
+  default: {,
     container: 'flex flex-col space-y-3',
-    thumbnail: 'aspect-video w-full',
+          thumbnail: 'aspect-video w-full',
     content: 'flex space-x-3',
-    title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
-    meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
-  compact: {
+          title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
+          meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
+          compact: {,
     container: 'flex space-x-3',
-    thumbnail: 'w-40 aspect-video flex-shrink-0',
+          thumbnail: 'w-40 aspect-video flex-shrink-0',
     content: 'flex-1 min-w-0',
-    title:
+          title:
       'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 text-sm',
-    meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
-  list: {
+          meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
+          list: {,
     container: 'flex space-x-4 p-4',
-    thumbnail: 'w-48 aspect-video flex-shrink-0',
+          thumbnail: 'w-48 aspect-video flex-shrink-0',
     content: 'flex-1 min-w-0',
-    title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
-    meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
-  grid: {
+          title: 'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2',
+          meta: 'text-sm text-neutral-600 dark:text-neutral-400' },
+          grid: {,
     container: 'flex flex-col space-y-2',
-    thumbnail: 'aspect-video w-full',
+          thumbnail: 'aspect-video w-full',
     content: 'space-y-1',
-    title:
+          title:
       'font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2 text-sm',
-    meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
-  shorts: {
+          meta: 'text-xs text-neutral-600 dark:text-neutral-400' },
+          shorts: {,
     container: 'flex flex-col',
-    thumbnail: 'aspect-[9/16] w-full',
+          thumbnail: 'aspect-[9/16] w-full',
     content: 'p-3 space-y-2',
-    title: 'font-medium text-white line-clamp-2 text-sm',
+          title: 'font-medium text-white line-clamp-2 text-sm',
     meta: 'text-xs text-white/80' } };
 
 // Size-specific styles
 const sizeStyles: Record<
   VideoCardSize,
   {
-    thumbnail: string;
+    thumbnail: string;,
     title: string;
     avatar: string;
   }
 > = {
-  sm: {
+  sm: {,
     thumbnail: 'rounded-md',
-    title: 'text-sm',
+          title: 'text-sm',
     avatar: 'w-6 h-6' },
-  md: {
+          md: {,
     thumbnail: 'rounded-lg',
-    title: 'text-base',
+          title: 'text-base',
     avatar: 'w-8 h-8' },
-  lg: {
+          lg: {,
     thumbnail: 'rounded-xl',
-    title: 'text-lg',
+          title: 'text-lg',
     avatar: 'w-10 h-10' } };
 
 export const UnifiedVideoCard = memo<UnifiedVideoCardProps>(

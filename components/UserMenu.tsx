@@ -115,10 +115,12 @@ return null;
       <div className="py-1">
         <MenuItem onClick={() => {
  window.open('https://accounts.google.com/AccountChooser', '_blank'); handleGenericClick();
-}} icon={<UserCircleIcon />}>Switch account</MenuItem>
+
+        }} icon={<UserCircleIcon />}>Switch account</MenuItem>
         <MenuItem onClick={() => {
  window.open('https://studio.youtube.com', '_blank'); handleGenericClick();
-}} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>
+
+        }} icon={<VideoCameraIcon />}>YouTube Studio</MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
@@ -126,8 +128,8 @@ return null;
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
       <div className="py-1">
-         <MenuItem onClick={handleThemeToggle} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>
-            Appearance: {theme === 'dark' ? 'Light' : 'Dark'}
+         <MenuItem onClick={handleThemeToggle} icon={theme === 'dark' ? <SunIcon className="text-yellow-500 dark:text-yellow-400" /> : <MoonIcon className="text-sky-500 dark:text-sky-400" />}>,
+          Appearance: {theme === 'dark' ? 'Light' : 'Dark'}
          </MenuItem>
       </div>
       <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />

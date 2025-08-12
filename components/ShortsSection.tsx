@@ -29,36 +29,36 @@ const ShortsSection: React.FC<ShortsSectionProps> = ({ maxShorts = 10 }) => {
 
         // Convert Video objects to Short objects
         const convertedShorts: Short[] = shortsVideos.map(video => {
-          const shortVideo: Short = {
+          const shortVideo: Short = {,
              id: video.id,
-             title: video.title,
+          title: video.title,
              description: video.description,
-             thumbnailUrl: video.thumbnailUrl,
+          thumbnailUrl: video.thumbnailUrl,
              videoUrl: video.videoUrl,
-             duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
+          duration: typeof video.duration === 'string' ? parseInt(video.duration, 10) || 60 : video.duration,
              views: video.views,
-             likes: video.likes,
+          likes: video.likes,
              dislikes: video.dislikes,
-             uploadedAt: video.uploadedAt,
+          uploadedAt: video.uploadedAt,
              channelName: video.channelName,
-             channelId: video.channelId,
+          channelId: video.channelId,
              channelAvatarUrl: video.channelAvatarUrl,
-             category: video.category,
+          category: video.category,
              tags: video.tags || [],
-             isLive: false,
+          isLive: false,
              isShort: true,
-             isLiked: false,
+          isLiked: false,
              isDisliked: false,
-             isSaved: false,
+          isSaved: false,
              visibility: video.visibility || 'public',
-             createdAt: video.createdAt || new Date().toISOString(),
+          createdAt: video.createdAt || new Date().toISOString(),
              updatedAt: video.updatedAt || new Date().toISOString(),
-             isVertical: true,
+          isVertical: true,
              definition: 'hd' as 'hd' | 'sd',
-             // Additional properties for Short type compatibility
-             viewCount: parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0,
+             // Additional properties for Short type compatibility,
+  viewCount: parseInt(video.views.replace(/[^0-9]/g, ''), 10) || 0,
              commentCount: 0,
-             likeCount: video.likes || 0 };
+          likeCount: video.likes || 0 };
           return shortVideo;
         });
 

@@ -4,7 +4,7 @@ import type { ReactNode, RefObject, MouseEvent } from 'react';
 import { cn } from '../../utils/cn';
 
 interface DropdownMenuProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
   children: ReactNode;
   className?: string;
@@ -13,7 +13,7 @@ interface DropdownMenuProps {
 }
 
 interface DropdownMenuItemProps {
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;,
   children: ReactNode;
   className?: string;
   variant?: 'default' | 'danger';
@@ -47,8 +47,7 @@ return null;
       className={cn(
         'absolute z-50 min-w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2',
         positionClasses[position],
-        className,
-      )}
+        className)}
     >
       {children}
     </div>
@@ -64,7 +63,7 @@ const DropdownMenuItem = ({
   disabled = false }: DropdownMenuItemProps) => {
   const variantClasses = {
     default: 'text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700',
-    danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20' };
+          danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20' };
 
   return (
     <button
@@ -74,8 +73,7 @@ const DropdownMenuItem = ({
         'w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors',
         variantClasses[variant],
         disabled && 'opacity-50 cursor-not-allowed',
-        className,
-      )}
+        className)}
     >
       {icon && <span className="flex-shrink-0">{icon}</span>}
       <span>{children}</span>

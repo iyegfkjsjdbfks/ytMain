@@ -18,31 +18,30 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement,
-);
+  ArcElement);
 
 interface RevenueData {
-  date: string;
+  date: string;,
   adRevenue: number;
-  membershipRevenue: number;
+  membershipRevenue: number;,
   superChatRevenue: number;
-  merchandiseRevenue: number;
-  sponsorshipRevenue: number;
+  merchandiseRevenue: number;,
+  sponsorshipRevenue: number
 }
 
 interface MonetizationMetrics {
-  totalRevenue: number;
+  totalRevenue: number;,
   monthlyRevenue: number;
-  revenueGrowth: number;
+  revenueGrowth: number;,
   rpm: number; // Revenue per mille (thousand views)
-  cpm: number; // Cost per mille
-  adImpressions: number;
+  cpm: number; // Cost per mille,
+          adImpressions: number;,
   clickThroughRate: number;
-  memberCount: number;
+  memberCount: number;,
   superChatCount: number;
-  merchandiseSales: number;
+  merchandiseSales: number;,
   membershipRevenue: number;
-  superChatRevenue: number;
+  superChatRevenue: number
 }
 
 const MonetizationPage: React.FC = () => {
@@ -76,23 +75,25 @@ const MonetizationPage: React.FC = () => {
       setRevenueData(mockRevenueData);
 
       // Generate mock metrics
-      const totalRevenue = mockRevenueData.reduce((sum: any, day: any) =>
-        sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0,
-      );
+      const totalRevenue = mockRevenueData.reduce((sum: any,
+          day: any) =>
+        sum + day.adRevenue + day.membershipRevenue + day.superChatRevenue + day.merchandiseRevenue + day.sponsorshipRevenue, 0);
 
-      const membershipRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.membershipRevenue, 0);
-      const superChatRevenue = mockRevenueData.reduce((sum: any, day: any) => sum + day.superChatRevenue, 0);
+      const membershipRevenue = mockRevenueData.reduce((sum: any,
+          day: any) => sum + day.membershipRevenue, 0);
+      const superChatRevenue = mockRevenueData.reduce((sum: any,
+          day: any) => sum + day.superChatRevenue, 0);
 
       setMetrics({
         totalRevenue,
         monthlyRevenue: totalRevenue * (30 / days),
-        revenueGrowth: Math.random() * 20 + 5,
+          revenueGrowth: Math.random() * 20 + 5,
         rpm: Math.random() * 5 + 2,
-        cpm: Math.random() * 3 + 1,
+          cpm: Math.random() * 3 + 1,
         adImpressions: Math.floor(Math.random() * 100000 + 50000),
-        clickThroughRate: Math.random() * 3 + 1,
+          clickThroughRate: Math.random() * 3 + 1,
         memberCount: Math.floor(Math.random() * 1000 + 500),
-        superChatCount: Math.floor(Math.random() * 200 + 50),
+          superChatCount: Math.floor(Math.random() * 200 + 50),
         merchandiseSales: Math.floor(Math.random() * 50 + 10),
         membershipRevenue,
         superChatRevenue });
@@ -106,7 +107,7 @@ const MonetizationPage: React.FC = () => {
   const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+          currency: 'USD',
       minimumFractionDigits: 2 }).format(amount);
   };
 
@@ -118,8 +119,10 @@ const MonetizationPage: React.FC = () => {
     const labels = revenueData.map(data => {
       const date = new Date(data.date);
       return timeRange === '7d' || timeRange === '30d'
-        ? date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-        : date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+        ? date.toLocaleDateString('en-US', { month: 'short',
+          day: 'numeric' })
+        : date.toLocaleDateString('en-US', { month: 'short',
+          year: '2-digit' });
     });
 
     return {
@@ -148,21 +151,21 @@ const MonetizationPage: React.FC = () => {
           data: revenueData.map(d => d.sponsorshipRevenue),
           borderColor: 'rgb(139, 92, 246)',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
-          tension: 0.4 },
-      ] };
-  };
+          tension: 0.4 }] }};
 
   const getRevenueSourcesData = () => {
     if (!revenueData.length) {
-return { labels: [], datasets: [] };
-}
+return { labels: [],
+          datasets: [] }}
 
     const totals = revenueData.reduce((acc, day) => ({
       adRevenue: acc.adRevenue + day.adRevenue,
-      membershipRevenue: acc.membershipRevenue + day.membershipRevenue,
+          membershipRevenue: acc.membershipRevenue + day.membershipRevenue,
       superChatRevenue: acc.superChatRevenue + day.superChatRevenue,
-      merchandiseRevenue: acc.merchandiseRevenue + day.merchandiseRevenue,
-      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue }), { adRevenue: 0, membershipRevenue: 0, superChatRevenue: 0, merchandiseRevenue: 0, sponsorshipRevenue: 0 });
+          merchandiseRevenue: acc.merchandiseRevenue + day.merchandiseRevenue,
+      sponsorshipRevenue: acc.sponsorshipRevenue + day.sponsorshipRevenue }), { adRevenue: 0,
+          membershipRevenue: 0, superChatRevenue: 0,
+          merchandiseRevenue: 0, sponsorshipRevenue: 0 });
 
     return {
       labels: ['Ad Revenue', 'Memberships', 'Super Chat', 'Merchandise', 'Sponsorships'],
@@ -173,61 +176,60 @@ return { labels: [], datasets: [] };
             totals.membershipRevenue,
             totals.superChatRevenue,
             totals.merchandiseRevenue,
-            totals.sponsorshipRevenue,
-          ],
+            totals.sponsorshipRevenue],
           backgroundColor: [
             'rgba(59, 130, 246, 0.8)',
             'rgba(16, 185, 129, 0.8)',
             'rgba(245, 158, 11, 0.8)',
             'rgba(239, 68, 68, 0.8)',
-            'rgba(139, 92, 246, 0.8)',
-          ],
+            'rgba(139, 92, 246, 0.8)'],
           borderColor: [
             'rgb(59, 130, 246)',
             'rgb(16, 185, 129)',
             'rgb(245, 158, 11)',
             'rgb(239, 68, 68)',
-            'rgb(139, 92, 246)',
-          ],
-          borderWidth: 2 },
-      ] };
-  };
+            'rgb(139, 92, 246)'],
+          borderWidth: 2 }] }};
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
+          maintainAspectRatio: false,
+    plugins: {,
       legend: {
-        position: 'top' as const, labels: {
+        position: 'top' as const,
+          labels: {,
           usePointStyle: true,
           padding: 20 } },
-      tooltip: {
-        mode: 'index' as const, intersect: false,
-        callbacks: {
+      tooltip: {,
+        mode: 'index' as const,
+          intersect: false,
+        callbacks: {,
           label: (context: any) => {
             return `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`;
           } } } },
-    scales: {
+    scales: {,
       x: {
-        grid: {
+        grid: {,
           display: false } },
-      y: {
+          y: {,
         beginAtZero: true,
-        ticks: {
+          ticks: {,
           callback: (value: string | number) => formatCurrency(value as number) } } } };
 
   const doughnutOptions = {
     responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
+          maintainAspectRatio: false,
+    plugins: {,
       legend: {
-        position: 'bottom' as const, labels: {
+        position: 'bottom' as const,
+          labels: {,
           usePointStyle: true,
           padding: 20 } },
-      tooltip: {
+      tooltip: {,
         callbacks: {
           label: (context: any) => {
-            const total = context.dataset.data.reduce((a: any, b: any) => a + b, 0);
+            const total = context.dataset.data.reduce((a: any,
+          b: any) => a + b, 0);
             const percentage = ((context.parsed / total) * 100).toFixed(1);
             return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
           } } } } };

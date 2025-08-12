@@ -23,13 +23,13 @@ import ShortsIcon from './icons/ShortsIcon';
 import SubscriptionsIcon from './icons/SubscriptionsIcon';
 
 interface SidebarProps {
-  isOpen: boolean;
+  isOpen: boolean
 }
 
 interface NavItemProps {
-  to: string;
+  to: string;,
   icon: React.ReactNode;
-  label: string;
+  label: string;,
   currentPath: string;
   title?: string;
 }

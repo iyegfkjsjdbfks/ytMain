@@ -10,14 +10,14 @@ import { CheckIcon } from '@heroicons/react/24/outline';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface Notification {
-  id: string;
+  id: string;,
   type: 'video_upload' | 'comment_reply' | 'like' | 'subscription' | 'live_stream' | 'community_post';
-  title: string;
+  title: string;,
   message: string;
-  channelName: string;
+  channelName: string;,
   channelAvatar: string;
   videoThumbnail?: string;
-  timestamp: string;
+  timestamp: string;,
   isRead: boolean;
   actionUrl?: string;
 }
@@ -41,7 +41,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       if (Math.random() < 0.1) { // 10% chance every 30 seconds
         generateRandomNotification();
       }
-    }, 30000);
+    
+        }, 30000);
 
     return () => clearInterval(interval);
   }, []);
@@ -62,7 +63,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
     if (stored) {
       const parsedNotifications = JSON.parse(stored);
       setNotifications(parsedNotifications);
-      setUnreadCount(parsedNotifications.filter((n: Notification) => !n.isRead).length);
+      setUnreadCount(parsedNotifications.filter((n: Notification) => !n.isRead).length)
     } else {
       // Generate initial mock notifications
       const mockNotifications = generateMockNotifications();
@@ -70,66 +71,66 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       setUnreadCount(mockNotifications.filter((n) => !n.isRead).length);
       localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(mockNotifications));
     }
-  }, []);
+  
+        }, []);
 
   const generateMockNotifications = (): Notification[] => {
     return [
       {
         id: '1',
-        type: 'video_upload',
+          type: 'video_upload',
         title: 'New video uploaded',
-        message: 'TechReview uploaded: "iPhone 15 Pro Max Review - Is it worth it?"',
-        channelName: 'TechReview',
+          message: 'TechReview uploaded: "iPhone 15 Pro Max Review - Is it worth it?"',
+          channelName: 'TechReview',
         channelAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face',
-        videoThumbnail: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=120&h=68&fit=crop',
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          videoThumbnail: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=120&h=68&fit=crop',
+          timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=abc123' },
+          actionUrl: '/watch?v=abc123' },
       {
         id: '2',
-        type: 'comment_reply',
+          type: 'comment_reply',
         title: 'New reply to your comment',
-        message: 'CodeMaster replied to your comment on "React Best Practices 2024"',
+          message: 'CodeMaster replied to your comment on "React Best Practices 2024"',
         channelName: 'CodeMaster',
-        channelAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
-        timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+          channelAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
+          timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
         isRead: false,
-        actionUrl: '/watch?v=def456' },
+          actionUrl: '/watch?v=def456' },
       {
         id: '3',
-        type: 'live_stream',
+          type: 'live_stream',
         title: 'Live stream started',
-        message: 'GameStreamer is now live: "Epic Gaming Session - Join Now!"',
-        channelName: 'GameStreamer',
+          message: 'GameStreamer is now live: "Epic Gaming Session - Join Now!"',
+          channelName: 'GameStreamer',
         channelAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face',
-        videoThumbnail: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=68&fit=crop',
-        timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+          videoThumbnail: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=68&fit=crop',
+          timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
         isRead: true,
-        actionUrl: '/watch?v=live123' },
+          actionUrl: '/watch?v=live123' },
       {
         id: '4',
-        type: 'subscription',
+          type: 'subscription',
         title: 'New subscriber',
-        message: 'You have 5 new subscribers this week!',
+          message: 'You have 5 new subscribers this week!',
         channelName: 'YouTube',
-        channelAvatar: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=40&h=40&fit=crop',
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-        isRead: true },
-    ];
+          channelAvatar: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=40&h=40&fit=crop',
+          timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+        isRead: true }];
   };
 
   const generateRandomNotification = useCallback(() => {
     const types: Array<Notification['type']> = ['video_upload', 'comment_reply', 'like', 'live_stream', 'subscription', 'community_post'];
     const randomType = types[Math.floor(Math.random() * types.length)] || 'video_upload';
 
-    const newNotification: Notification = {
+    const newNotification: Notification = {,
       id: Date.now().toString(),
-      type: randomType,
+          type: randomType,
       title: getNotificationTitle(randomType),
-      message: getNotificationMessage(randomType),
+          message: getNotificationMessage(randomType),
       channelName: getRandomChannelName(),
-      channelAvatar: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=40&h=40&fit=crop&crop=face`,
-      timestamp: new Date().toISOString(),
+          channelAvatar: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=40&h=40&fit=crop&crop=face`,
+          timestamp: new Date().toISOString(),
       isRead: false };
 
     const updatedNotifications = [newNotification, ...notifications].slice(0, 50); // Keep only latest 50
@@ -146,7 +147,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       case 'live_stream': return 'Live stream started';
       case 'subscription': return 'New subscriber';
       case 'community_post': return 'New community post';
-      default: return 'New notification';
+      default: return 'New notification'
     }
   };
 
@@ -155,33 +156,27 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       video_upload: [
         'uploaded: "Amazing Tutorial - You Need to See This!"',
         'uploaded: "Breaking News - Latest Updates"',
-        'uploaded: "Epic Compilation - Best Moments"',
-      ],
-      comment_reply: [
+        'uploaded: "Epic Compilation - Best Moments"'],
+          comment_reply: [
         'replied to your comment on "Tutorial Video"',
         'mentioned you in a comment',
-        'replied to your comment on "Review Video"',
-      ],
+        'replied to your comment on "Review Video"'],
       like: [
         'liked your video "My Latest Creation"',
         'and 10 others liked your comment',
-        'liked your community post',
-      ],
+        'liked your community post'],
       live_stream: [
         'is now live: "Live Q&A Session"',
         'started streaming: "Gaming Marathon"',
-        'is live: "Special Announcement"',
-      ],
-      subscription: [
+        'is live: "Special Announcement"'],
+          subscription: [
         'subscribed to your channel',
         'is now following you',
-        'joined your community',
-      ],
+        'joined your community'],
       community_post: [
         'posted in the community',
         'shared a new update',
-        'created a poll',
-      ] };
+        'created a poll'] };
 
     const typeMessages = messages[type] || ['sent you a notification'];
     return typeMessages[Math.floor(Math.random() * typeMessages.length)] || 'sent you a notification';
@@ -194,8 +189,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
 
   const markAsRead = (notificationId: any) => {
     const updatedNotifications = notifications.map(n =>
-      n.id === notificationId ? { ...n, isRead: true } : n,
-    );
+      n.id === notificationId ? { ...n, isRead: true } : n);
     setNotifications(updatedNotifications);
     setUnreadCount(prev => Math.max(0, prev - 1));
     localStorage.setItem('youtubeCloneNotifications_v1', JSON.stringify(updatedNotifications));
@@ -230,7 +224,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className = '' 
       case 'subscription': return '👥';
       case 'live_stream': return '🔴';
       case 'community_post': return '📝';
-      default: return '🔔';
+      default: return '🔔'
     }
   };
 

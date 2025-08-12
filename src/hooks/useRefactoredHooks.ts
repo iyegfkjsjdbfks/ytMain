@@ -5,10 +5,10 @@ import { useUnifiedApp } from './useUnifiedApp';
 /**
  * Enhanced useLocalStorage hook with error handling and type safety
  */
-export function useLocalStorage<T>(
+export function useLocalStorage<T>(,
   key: string,
   initialValue: T
-): [T, (value: T | ((val: T) => T)) => void, () => void] {
+): [T(value: T | ((val: T) => T)) => void() => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -92,9 +92,9 @@ export function useThrottle<T>(value: T, delay: any): T {
 /**
  * Enhanced useToggle hook with callback support
  */
-export function useToggle(
+export function useToggle(,
   initialValue: boolean = false
-): [boolean, () => void, (value: any) => void] {
+): [boolean() => void(value: any) => void] {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
@@ -121,8 +121,7 @@ export function useArray<T>(initialArray: T[] = []) {
     setArray(arr => [
       ...arr.slice(0, index),
       newElement,
-      ...arr.slice(index + 1),
-    ]);
+      ...arr.slice(index + 1)]);
   }, []);
 
   const remove = useCallback((index: number) => {
@@ -146,8 +145,8 @@ export function useArray<T>(initialArray: T[] = []) {
 /**
  * Enhanced useAsync hook for async operations
  */
-export function useAsync<T, E = string>(
-  asyncFunction: () => Promise<T>
+export function useAsync<T, E = string>(,
+  asyncFunction: () => Promise<T>,
   immediate: boolean = true
 ) {
   const [status, setStatus] = useState<
@@ -193,7 +192,7 @@ export function useAsync<T, E = string>(
 /**
  * Enhanced useIntersectionObserver hook
  */
-export function useIntersectionObserver(
+export function useIntersectionObserver(,
   options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement> boolean] {
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -225,7 +224,7 @@ export function useIntersectionObserver(
 /**
  * Enhanced useClickOutside hook
  */
-export function useClickOutside<T extends HTMLElement = HTMLElement>(
+export function useClickOutside<T extends HTMLElement = HTMLElement>(,
   handler: () => void
 ): React.RefObject<T> {
   const ref = useRef<T>(null);
@@ -288,36 +287,36 @@ export function useUnifiedAppState() {
   const context = useUnifiedApp();
 
   return {
-    // Auth state
-    user: context.state.user,
+    // Auth state,
+  user: context.state.user,
     isAuthenticated: context.state.isAuthenticated,
     login: context.login,
     logout: context.logout,
 
-    // Theme state
-    theme: context.state.theme,
+    // Theme state,
+  theme: context.state.theme,
     setTheme: context.setTheme,
     isDarkMode: context.state.theme === 'dark',
 
-    // Miniplayer state
-    miniplayerVideo: context.state.miniplayerVideo,
+    // Miniplayer state,
+  miniplayerVideo: context.state.miniplayerVideo,
     isMiniplayerOpen: context.state.isMiniplayerOpen,
     openMiniplayer: context.openMiniplayer,
     closeMiniplayer: context.closeMiniplayer,
     toggleMiniplayer: context.toggleMiniplayer,
 
-    // Watch Later state
-    watchLaterVideos: context.state.watchLaterVideos,
+    // Watch Later state,
+  watchLaterVideos: context.state.watchLaterVideos,
     addToWatchLater: context.addToWatchLater,
     removeFromWatchLater: context.removeFromWatchLater,
     isInWatchLater: context.isInWatchLater,
 
-    // UI state
-    sidebarCollapsed: context.state.sidebarCollapsed,
+    // UI state,
+  sidebarCollapsed: context.state.sidebarCollapsed,
     toggleSidebar: context.toggleSidebar,
 
-    // Notifications state
-    notifications: context.state.notifications,
+    // Notifications state,
+  notifications: context.state.notifications,
     addNotification: context.addNotification,
     removeNotification: context.removeNotification };
 }

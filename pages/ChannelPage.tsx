@@ -23,14 +23,20 @@ const ChannelPage: React.FC = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const tabs = [
-    { id: 'HOME', label: 'Home' },
-    { id: 'VIDEOS', label: 'Videos' },
-    { id: 'SHORTS', label: 'Shorts' },
-    { id: 'LIVE', label: 'Live' },
-    { id: 'PLAYLISTS', label: 'Playlists' },
-    { id: 'COMMUNITY', label: 'Community' },
-    { id: 'ABOUT', label: 'About' },
-  ];
+    { id: 'HOME',
+          label: 'Home' },
+    { id: 'VIDEOS',
+          label: 'Videos' },
+    { id: 'SHORTS',
+          label: 'Shorts' },
+    { id: 'LIVE',
+          label: 'Live' },
+    { id: 'PLAYLISTS',
+          label: 'Playlists' },
+    { id: 'COMMUNITY',
+          label: 'Community' },
+    { id: 'ABOUT',
+          label: 'About' }];
 
   useEffect(() => {
     const fetchChannelData = async () => {
@@ -54,12 +60,10 @@ const ChannelPage: React.FC = () => {
           const [
             fetchedVideos,
             fetchedPlaylists,
-            fetchedCommunityPosts,
-          ] = await Promise.all([
+            fetchedCommunityPosts] = await Promise.all([
             getVideosByChannelName((fetchedChannel as any).name || decodedName),
             getChannelPlaylists((fetchedChannel as any).name || decodedName),
-            getChannelCommunityPosts((fetchedChannel as any).name || decodedName),
-          ]);
+            getChannelCommunityPosts((fetchedChannel as any).name || decodedName)]);
           setVideos(fetchedVideos);
           setChannelPlaylists(fetchedPlaylists);
           setChannelCommunityPosts(fetchedCommunityPosts);
@@ -68,15 +72,15 @@ const ChannelPage: React.FC = () => {
           // Create a mock channel if not found
           const mockChannel = {
             id: decodedName,
-            name: decodedName,
+          name: decodedName,
             description: `Channel for ${decodedName}`,
-            avatarUrl: 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=CH',
-            banner: 'https://via.placeholder.com/1280/320/4ECDC4/FFFFFF?text=Channel+Banner',
-            subscribers: 0,
+          avatarUrl: 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=CH',
+          banner: 'https://via.placeholder.com/1280/320/4ECDC4/FFFFFF?text=Channel+Banner',
+          subscribers: 0,
             subscriberCount: '0',
-            videoCount: 0,
+          videoCount: 0,
             isVerified: false,
-            createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() };
           setChannel(mockChannel);
 
@@ -86,7 +90,8 @@ const ChannelPage: React.FC = () => {
           setChannelPlaylists([]);
           setChannelCommunityPosts([]);
         }
-      } catch (err) {
+      
+        } catch (err) {
         console.error('Error fetching channel data:', err);
         setError('Failed to load channel data. Please try again later.');
       } finally {
@@ -113,7 +118,7 @@ const ChannelPage: React.FC = () => {
   }
 
   if (!channel) {
-    return <div className="p-6 text-center text-neutral-600 dark:text-neutral-400 text-lg">Channel not found.</div>;
+    return <div className="p-6 text-center text-neutral-600 dark: text-neutral-400 text-lg">Channel not found.</div>
   }
 
   return (

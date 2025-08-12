@@ -14,7 +14,7 @@ interface StreamManagementDashboardProps {
 }
 
 interface StreamAction {
-  id: string;
+  id: string;,
   type:
     | 'start'
     | 'stop'
@@ -23,7 +23,7 @@ interface StreamAction {
     | 'duplicate'
     | 'analytics'
     | 'share';
-  label: string;
+  label: string;,
   icon: React.ComponentType<any>;
   color: string;
   disabled?: boolean;
@@ -49,171 +49,173 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         const mockStreams: LiveStream[] = [
           {
             id: 'stream_1',
-            title: 'Gaming Session - Exploring New Worlds',
+          title: 'Gaming Session - Exploring New Worlds',
             description:
               'Join me as we explore the latest game releases and have fun together!',
-            thumbnailUrl: '/api/placeholder/320/180',
+          thumbnailUrl: '/api/placeholder/320/180',
             streamUrl: 'rtmp://localhost:1935/live/gaming_session',
-            streamKey: 'key_abc123',
+          streamKey: 'key_abc123',
             category: 'Gaming',
-            tags: ['gaming', 'live', 'interactive'],
+          tags: ['gaming', 'live', 'interactive'],
             visibility: 'public',
-            status: 'live',
-            actualStartTime: new Date(Date.now() - 3600000), // 1 hour ago
-            creatorId: 'user_123',
-            creatorName: 'StreamerPro',
+          status: 'live',
+            actualStartTime: new Date(Date.now() - 3600000), // 1 hour ago,
+  creatorId: 'user_123',
+          creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-            settings: {
+          settings: {,
               enableChat: true,
-              enableSuperChat: true,
+          enableSuperChat: true,
               enablePolls: true,
-              enableQA: true,
+          enableQA: true,
               chatMode: 'live',
-              slowMode: 0,
+          slowMode: 0,
               subscribersOnly: false,
-              moderationLevel: 'moderate',
+          moderationLevel: 'moderate',
               quality: '1080p',
-              bitrate: 4500,
+          bitrate: 4500,
               frameRate: 30,
-              enableRecording: true,
+          enableRecording: true,
               enableMultiplatform: false,
-              platforms: [{ name: 'youtube', enabled: true }] },
-            stats: {
+          platforms: [{ name: 'youtube',
+          enabled: true }] },
+            stats: {,
               viewers: 1247,
-              peakViewers: 2156,
+          peakViewers: 2156,
               averageViewers: 987,
-              duration: 3600,
+          duration: 3600,
               likes: 342,
-              dislikes: 12,
+          dislikes: 12,
               chatMessages: 1567,
-              superChatAmount: 234.5,
+          superChatAmount: 234.5,
               superChatCount: 23,
-              pollVotes: 456,
+          pollVotes: 456,
               qaQuestions: 34,
-              streamHealth: 'excellent',
+          streamHealth: 'excellent',
               bitrate: 4500,
-              frameDrops: 0,
+          frameDrops: 0,
               latency: 1800 },
-            monetization: {
+          monetization: {,
               totalRevenue: 234.5,
-              superChatRevenue: 234.5,
+          superChatRevenue: 234.5,
               adRevenue: 0,
-              membershipRevenue: 0,
+          membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [] } },
+          superChats: [] } },
           {
             id: 'stream_2',
-            title: 'Weekly Q&A Session',
+          title: 'Weekly Q&A Session',
             description:
               'Ask me anything about content creation, streaming tips, and more!',
             thumbnailUrl: '/api/placeholder/320/180',
-            streamUrl: 'rtmp://localhost:1935/live/qa_session',
-            streamKey: 'key_def456',
+          streamUrl: 'rtmp://localhost:1935/live/qa_session',
+          streamKey: 'key_def456',
             category: 'Education',
-            tags: ['qa', 'education', 'tips'],
+          tags: ['qa', 'education', 'tips'],
             visibility: 'public',
-            status: 'scheduled',
-            scheduledStartTime: new Date(Date.now() + 86400000), // Tomorrow
-            creatorId: 'user_123',
-            creatorName: 'StreamerPro',
+          status: 'scheduled',
+            scheduledStartTime: new Date(Date.now() + 86400000), // Tomorrow,
+  creatorId: 'user_123',
+          creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-            settings: {
+          settings: {,
               enableChat: true,
-              enableSuperChat: true,
+          enableSuperChat: true,
               enablePolls: true,
-              enableQA: true,
+          enableQA: true,
               chatMode: 'live',
-              slowMode: 5,
+          slowMode: 5,
               subscribersOnly: false,
-              moderationLevel: 'moderate',
+          moderationLevel: 'moderate',
               quality: '1080p',
-              bitrate: 4500,
+          bitrate: 4500,
               frameRate: 30,
-              enableRecording: true,
+          enableRecording: true,
               enableMultiplatform: true,
-              platforms: [
-                { name: 'youtube', enabled: true },
-                { name: 'twitch', enabled: true },
-              ] },
-            stats: {
+          platforms: [
+                { name: 'youtube',
+          enabled: true },
+                { name: 'twitch',
+          enabled: true }] },
+            stats: {,
               viewers: 0,
-              peakViewers: 0,
+          peakViewers: 0,
               averageViewers: 0,
-              duration: 0,
+          duration: 0,
               likes: 0,
-              dislikes: 0,
+          dislikes: 0,
               chatMessages: 0,
-              superChatAmount: 0,
+          superChatAmount: 0,
               superChatCount: 0,
-              pollVotes: 0,
+          pollVotes: 0,
               qaQuestions: 0,
-              streamHealth: 'good',
+          streamHealth: 'good',
               bitrate: 4500,
-              frameDrops: 0,
+          frameDrops: 0,
               latency: 2000 },
-            monetization: {
+          monetization: {,
               totalRevenue: 0,
-              superChatRevenue: 0,
+          superChatRevenue: 0,
               adRevenue: 0,
-              membershipRevenue: 0,
+          membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [] } },
+          superChats: [] } },
           {
             id: 'stream_3',
-            title: 'Music Production Masterclass',
+          title: 'Music Production Masterclass',
             description:
               'Learn music production techniques and create beats together!',
-            thumbnailUrl: '/api/placeholder/320/180',
+          thumbnailUrl: '/api/placeholder/320/180',
             streamUrl: 'rtmp://localhost:1935/live/music_production',
-            streamKey: 'key_ghi789',
+          streamKey: 'key_ghi789',
             category: 'Music',
-            tags: ['music', 'production', 'tutorial'],
+          tags: ['music', 'production', 'tutorial'],
             visibility: 'public',
-            status: 'ended',
-            actualStartTime: new Date(Date.now() - 172800000), // 2 days ago
-            endTime: new Date(Date.now() - 169200000), // 2 days ago + 1 hour
-            creatorId: 'user_123',
-            creatorName: 'StreamerPro',
+          status: 'ended',
+            actualStartTime: new Date(Date.now() - 172800000), // 2 days ago,
+  endTime: new Date(Date.now() - 169200000), // 2 days ago + 1 hour,
+  creatorId: 'user_123',
+          creatorName: 'StreamerPro',
             creatorAvatar: '/api/placeholder/40/40',
-            settings: {
+          settings: {,
               enableChat: true,
-              enableSuperChat: true,
+          enableSuperChat: true,
               enablePolls: false,
-              enableQA: true,
+          enableQA: true,
               chatMode: 'live',
-              slowMode: 0,
+          slowMode: 0,
               subscribersOnly: false,
-              moderationLevel: 'moderate',
+          moderationLevel: 'moderate',
               quality: '1080p',
-              bitrate: 4500,
+          bitrate: 4500,
               frameRate: 30,
-              enableRecording: true,
+          enableRecording: true,
               enableMultiplatform: false,
-              platforms: [{ name: 'youtube', enabled: true }] },
-            stats: {
+          platforms: [{ name: 'youtube',
+          enabled: true }] },
+            stats: {,
               viewers: 0,
-              peakViewers: 1834,
+          peakViewers: 1834,
               averageViewers: 1245,
-              duration: 3600,
+          duration: 3600,
               likes: 567,
-              dislikes: 8,
+          dislikes: 8,
               chatMessages: 2341,
-              superChatAmount: 456.75,
+          superChatAmount: 456.75,
               superChatCount: 34,
-              pollVotes: 0,
+          pollVotes: 0,
               qaQuestions: 67,
-              streamHealth: 'excellent',
+          streamHealth: 'excellent',
               bitrate: 4500,
-              frameDrops: 2,
+          frameDrops: 2,
               latency: 1900 },
-            monetization: {
+          monetization: {,
               totalRevenue: 456.75,
-              superChatRevenue: 456.75,
+          superChatRevenue: 456.75,
               adRevenue: 0,
-              membershipRevenue: 0,
+          membershipRevenue: 0,
               donationRevenue: 0,
-              superChats: [] } },
-        ];
+          superChats: [] } }];
 
         setStreams(mockStreams);
       } catch (error) {
@@ -230,45 +232,44 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
     const baseActions: StreamAction[] = [
       {
         id: 'edit',
-        type: 'edit',
+          type: 'edit',
         label: 'Edit',
-        icon: PencilIcon as React.ComponentType<{
+          icon: PencilIcon as React.ComponentType<{
           className?: string | undefined;
-        }>
-        color: 'text-blue-600 hover:text-blue-800' },
+        }>,
+  color: 'text-blue-600 hover:text-blue-800' },
       {
         id: 'duplicate',
-        type: 'duplicate',
+          type: 'duplicate',
         label: 'Duplicate',
-        icon: DocumentDuplicateIcon as React.ComponentType<{
+          icon: DocumentDuplicateIcon as React.ComponentType<{
           className?: string | undefined;
-        }>
-        color: 'text-green-600 hover:text-green-800' },
+        }>,
+  color: 'text-green-600 hover:text-green-800' },
       {
         id: 'analytics',
-        type: 'analytics',
+          type: 'analytics',
         label: 'Analytics',
-        icon: ChartBarIcon as React.ComponentType<{
+          icon: ChartBarIcon as React.ComponentType<{
           className?: string | undefined;
-        }>
-        color: 'text-purple-600 hover:text-purple-800' },
+        }>,
+  color: 'text-purple-600 hover:text-purple-800' },
       {
         id: 'share',
-        type: 'share',
+          type: 'share',
         label: 'Share',
-        icon: ShareIcon as React.ComponentType<{
+          icon: ShareIcon as React.ComponentType<{
           className?: string | undefined;
-        }>
-        color: 'text-indigo-600 hover:text-indigo-800' },
+        }>,
+  color: 'text-indigo-600 hover:text-indigo-800' },
       {
         id: 'delete',
-        type: 'delete',
+          type: 'delete',
         label: 'Delete',
-        icon: TrashIcon as React.ComponentType<{
+          icon: TrashIcon as React.ComponentType<{
           className?: string | undefined;
-        }>
-        color: 'text-red-600 hover:text-red-800' },
-    ];
+        }>,
+  color: 'text-red-600 hover:text-red-800' }];
 
     if (stream.status === 'live') {
       return [
@@ -278,10 +279,9 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           label: 'End Stream',
           icon: StopIcon as React.ComponentType<{
             className?: string | undefined;
-          }>
-          color: 'text-red-600 hover:text-red-800' },
-        ...baseActions.filter(a => a.id !== 'delete'),
-      ];
+          }>,
+  color: 'text-red-600 hover:text-red-800' },
+        ...baseActions.filter(a => a.id !== 'delete')];
     }
 
     if (stream.status === 'scheduled') {
@@ -292,18 +292,17 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           label: 'Start Now',
           icon: PlayIcon as React.ComponentType<{
             className?: string | undefined;
-          }>
-          color: 'text-green-600 hover:text-green-800' },
-        ...baseActions,
-      ];
+          }>,
+  color: 'text-green-600 hover:text-green-800' },
+        ...baseActions];
     }
 
     return baseActions;
   };
 
   const handleStreamAction = async (
-    stream: LiveStream,
-    action: StreamAction
+  stream: LiveStream,
+          action: StreamAction
   ) => {
     try {
       switch (action.type) {
@@ -324,7 +323,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
             {
               ...stream,
               title: `${stream.title} (Copy)`,
-              status: 'scheduled' }
+          status: 'scheduled' }
           );
           setStreams(prev => [...prev, duplicatedStream]);
           break;
@@ -343,7 +342,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Share stream:', stream.id);
           break;
       }
-    } catch (error) {
+    
+        } catch (error) {
       logger.error('Failed to perform action:', error);
     }
   };
@@ -368,7 +368,8 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
           logger.debug('Archive streams:', selectedStreams);
           break;
       }
-    } catch (error) {
+    
+        } catch (error) {
       logger.error('Failed to perform bulk action:', error);
     }
   };
@@ -383,8 +384,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         return <ArchiveBoxIcon className='h-5 w-5 text-gray-500' />;
       case 'error':
         return <XCircleIcon className='h-5 w-5 text-red-500' />;
-      default:
-        return <ExclamationCircleIcon className='h-5 w-5 text-yellow-500' />;
+      default: return <ExclamationCircleIcon className='h-5 w-5 text-yellow-500' />
     }
   };
 
@@ -398,8 +398,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         return 'bg-gray-100 text-gray-800';
       case 'error':
         return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-yellow-100 text-yellow-800'
     }
   };
 
@@ -422,8 +421,7 @@ const StreamManagementDashboard: React.FC<StreamManagementDashboardProps> = ({
         return b.stats.duration - a.stats.duration;
       case 'revenue':
         return b.monetization.totalRevenue - a.monetization.totalRevenue;
-      default:
-        return 0;
+      default: return 0
     }
   });
 

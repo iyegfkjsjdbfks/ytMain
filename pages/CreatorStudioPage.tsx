@@ -6,36 +6,36 @@ import { formatDistanceToNow } from '../utils/dateUtils';
 import { formatNumber } from '../utils/numberUtils';
 
 interface AudienceInsight {
-  metric: string;
+  metric: string;,
   value: string | number;
-  change: number;
-  period: string;
+  change: number;,
+  period: string
 }
 
 interface ContentIdea {
-  id: string;
+  id: string;,
   title: string;
-  category: string;
+  category: string;,
   trending: boolean;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficulty: 'Easy' | 'Medium' | 'Hard';,
   estimatedViews: number;
-  tags: string;
+  tags: string
 }
 
 interface CreatorResource {
-  title: string;
+  title: string;,
   description: string;
-  type: 'tutorial' | 'template' | 'tool' | 'guide';
+  type: 'tutorial' | 'template' | 'tool' | 'guide';,
   link: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode
 }
 
 interface ScheduledContent {
-  id: string;
+  id: string;,
   title: string;
-  type: 'video' | 'short' | 'live';
+  type: 'video' | 'short' | 'live';,
   scheduledDate: Date;
-  status: 'scheduled' | 'processing' | 'ready';
+  status: 'scheduled' | 'processing' | 'ready'
 }
 
 const CreatorStudioPage: React.FC = () => {
@@ -80,8 +80,7 @@ const CreatorStudioPage: React.FC = () => {
           metric: 'Click-through Rate',
           value: '4.2%',
           change: 3.8,
-          period: 'vs last month' },
-      ];
+          period: 'vs last month' }];
 
       // Mock content ideas
       const mockIdeas: ContentIdea[] = [
@@ -124,8 +123,7 @@ const CreatorStudioPage: React.FC = () => {
           trending: false,
           difficulty: 'Easy',
           estimatedViews: 15000,
-          tags: ['Productivity', 'Development', 'Tips'] },
-      ];
+          tags: ['Productivity', 'Development', 'Tips'] }];
 
       // Mock scheduled content
       const mockScheduled: ScheduledContent[] = [
@@ -146,8 +144,7 @@ const CreatorStudioPage: React.FC = () => {
           title: 'Live Q&A Session',
           type: 'live',
           scheduledDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-          status: 'scheduled' },
-      ];
+          status: 'scheduled' }];
 
       setTimeout(() => {
         setAudienceInsights(mockInsights);
@@ -163,48 +160,47 @@ const CreatorStudioPage: React.FC = () => {
   const creatorResources: CreatorResource[] = [
     {
       title: 'Thumbnail Templates',
-      description: 'Professional thumbnail designs for your videos',
+          description: 'Professional thumbnail designs for your videos',
       type: 'template',
-      link: '/resources/thumbnails',
+          link: '/resources/thumbnails',
       icon: <CameraIcon className="w-5 h-5" /> },
     {
       title: 'Content Calendar',
-      description: 'Plan and schedule your content strategy',
+          description: 'Plan and schedule your content strategy',
       type: 'tool',
-      link: '/resources/calendar',
+          link: '/resources/calendar',
       icon: <CalendarDaysIcon className="w-5 h-5" /> },
     {
       title: 'SEO Optimization Guide',
-      description: 'Improve your video discoverability',
+          description: 'Improve your video discoverability',
       type: 'guide',
-      link: '/resources/seo-guide',
+          link: '/resources/seo-guide',
       icon: <AcademicCapIcon className="w-5 h-5" /> },
     {
       title: 'Video Editing Tutorial',
-      description: 'Learn professional editing techniques',
+          description: 'Learn professional editing techniques',
       type: 'tutorial',
-      link: '/resources/editing-tutorial',
+          link: '/resources/editing-tutorial',
       icon: <PencilSquareIcon className="w-5 h-5" /> },
     {
       title: 'Analytics Deep Dive',
-      description: 'Understanding your channel metrics',
+          description: 'Understanding your channel metrics',
       type: 'guide',
-      link: '/analytics',
+          link: '/analytics',
       icon: <ChartBarIcon className="w-5 h-5" /> },
     {
       title: 'Community Building',
-      description: 'Strategies to grow your audience',
+          description: 'Strategies to grow your audience',
       type: 'guide',
-      link: '/resources/community',
-      icon: <UserGroupIcon className="w-5 h-5" /> },
-  ];
+          link: '/resources/community',
+      icon: <UserGroupIcon className="w-5 h-5" /> }];
 
   const getDifficultyColor = (difficulty: any) => {
     switch (difficulty) {
       case 'Easy': return 'text-green-600 bg-green-100';
       case 'Medium': return 'text-yellow-600 bg-yellow-100';
       case 'Hard': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-600 bg-gray-100'
     }
   };
 
@@ -213,7 +209,7 @@ const CreatorStudioPage: React.FC = () => {
       case 'ready': return 'text-green-600 bg-green-100';
       case 'processing': return 'text-yellow-600 bg-yellow-100';
       case 'scheduled': return 'text-blue-600 bg-blue-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-600 bg-gray-100'
     }
   };
 
@@ -222,7 +218,7 @@ const CreatorStudioPage: React.FC = () => {
       case 'video': return <CameraIcon className="w-4 h-4" />;
       case 'short': return <ClockIcon className="w-4 h-4" />;
       case 'live': return <GlobeAltIcon className="w-4 h-4" />;
-      default: return <CameraIcon className="w-4 h-4" />;
+      default: return <CameraIcon className="w-4 h-4" />
     }
   };
 
@@ -260,11 +256,14 @@ const CreatorStudioPage: React.FC = () => {
         <div className="mb-8">
           <nav className="flex space-x-8 border-b border-gray-200 dark:border-neutral-700">
             {[
-              { id: 'insights', label: 'Audience Insights', icon: <ChartBarIcon className="w-5 h-5" /> },
-              { id: 'ideas', label: 'Content Ideas', icon: <LightBulbIcon className="w-5 h-5" /> },
-              { id: 'resources', label: 'Creator Resources', icon: <AcademicCapIcon className="w-5 h-5" /> },
-              { id: 'schedule', label: 'Content Schedule', icon: <CalendarDaysIcon className="w-5 h-5" /> },
-            ].map((tab) => (
+              { id: 'insights',
+          label: 'Audience Insights', icon: <ChartBarIcon className="w-5 h-5" /> },
+              { id: 'ideas',
+          label: 'Content Ideas', icon: <LightBulbIcon className="w-5 h-5" /> },
+              { id: 'resources',
+          label: 'Creator Resources', icon: <AcademicCapIcon className="w-5 h-5" /> },
+              { id: 'schedule',
+          label: 'Content Schedule', icon: <CalendarDaysIcon className="w-5 h-5" /> }].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
@@ -344,7 +343,8 @@ const CreatorStudioPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {idea.tags.map((tag: string, tagIndex: any) => (
+                  {idea.tags.map((tag: string,
+          tagIndex: any) => (
                     <span key={tagIndex} className="px-2 py-1 bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 text-xs rounded">
                       #{tag}
                     </span>

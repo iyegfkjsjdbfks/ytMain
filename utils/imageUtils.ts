@@ -1,7 +1,7 @@
 import React from 'react';
 // Image utility functions for handling placeholders and fallbacks
 
-export const getImageWithFallback = (
+export const getImageWithFallback = (,
   primaryUrl: any,
   fallbackUrl?: string,
   width?: number,
@@ -85,7 +85,7 @@ return '';
 };
 
 // Image optimization utilities
-export const getOptimizedImageUrl = (
+export const getOptimizedImageUrl = (,
   originalUrl: any,
   width?: number,
   height?: number,
@@ -123,7 +123,7 @@ export const getResponsiveImageSizes = (breakpoints: { [key: string]: string }):
 };
 
 // Image lazy loading utilities
-export const createIntersectionObserver = (
+export const createIntersectionObserver = (,
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit,
 ): IntersectionObserver => {
@@ -141,14 +141,14 @@ export const supportsWebP = (): boolean => {
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
-  return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  return canvas.toDataURL('image/webp').indexOf('data: image/webp') === 0
 };
 
 export const supportsAvif = (): boolean => {
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
-  return canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0;
+  return canvas.toDataURL('image/avif').indexOf('data: image/avif') === 0
 };
 
 // Get the best supported image format
@@ -185,7 +185,7 @@ return '#000000';
 };
 
 // Image compression utilities (for upload)
-export const compressImage = (
+export const compressImage = (,
   file: File,
   maxWidth: number = 1920,
   maxHeight: number = 1080,

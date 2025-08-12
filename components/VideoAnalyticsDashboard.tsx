@@ -14,52 +14,51 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement,
-);
+  ArcElement);
 
 export interface VideoAnalytics {
-  videoId: string;
+  videoId: string;,
   title: string;
-  thumbnail: string;
+  thumbnail: string;,
   publishedAt: string;
 
-  // Core metrics
-  views: number;
+  // Core metrics,
+  views: number;,
   likes: number;
-  dislikes: number;
+  dislikes: number;,
   comments: number;
-  shares: number;
+  shares: number;,
   subscribers: number;
 
-  // Engagement metrics
-  averageViewDuration: number; // in seconds
-  totalWatchTime: number; // in seconds
-  clickThroughRate: number; // percentage
-  engagementRate: number; // percentage
+  // Engagement metrics,
+  averageViewDuration: number; // in seconds,
+          totalWatchTime: number; // in seconds,
+  clickThroughRate: number; // percentage,
+          engagementRate: number; // percentage
 
-  // Time series data
+  // Time series data,
   viewsOverTime: Array<{ date: string; views: number }>;
   watchTimeOverTime: Array<{ date: string; watchTime: number }>;
 
-  // Demographics
+  // Demographics,
   ageGroups: Array<{ range: string; percentage: number }>;
   genderDistribution: Array<{ gender: string; percentage: number }>;
   topCountries: Array<{ country: string; views: number; percentage: number }>;
 
-  // Device/Platform data
+  // Device/Platform data,
   deviceTypes: Array<{ device: string; percentage: number }>;
   trafficSources: Array<{ source: string; percentage: number }>;
 
   // Revenue (if monetized)
   revenue?: {
-    total: number;
-    rpm: number; // Revenue per mille
-    cpm: number; // Cost per mille
-  };
-}
+    total: number;,
+    rpm: number; // Revenue per mille,
+          cpm: number; // Cost per mille
+  
+        }}
 
 interface VideoAnalyticsDashboardProps {
-  analytics: VideoAnalytics;
+  analytics: VideoAnalytics;,
   timeRange: '7d' | '28d' | '90d' | '365d';
   onTimeRangeChange: (range: '7d' | '28d' | '90d' | '365d') => void;
   className?: string;
@@ -97,81 +96,75 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
   const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD' }).format(amount);
+          currency: 'USD' }).format(amount);
   };
 
   // Chart configurations
   const viewsChartData = {
     labels: analytics.viewsOverTime.map(d => new Date(d.date).toLocaleDateString()),
-    datasets: [
+          datasets: [
       {
         label: 'Views',
-        data: analytics.viewsOverTime.map(d => d.views),
+          data: analytics.viewsOverTime.map(d => d.views),
         borderColor: 'rgb(59, 130, 246)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
-        fill: true },
-    ] };
+          fill: true }] };
 
   const watchTimeChartData = {
     labels: analytics.watchTimeOverTime.map(d => new Date(d.date).toLocaleDateString()),
-    datasets: [
+          datasets: [
       {
         label: 'Watch Time (hours)',
-        data: analytics.watchTimeOverTime.map(d => d.watchTime / 3600),
+          data: analytics.watchTimeOverTime.map(d => d.watchTime / 3600),
         borderColor: 'rgb(16, 185, 129)',
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.4,
-        fill: true },
-    ] };
+          fill: true }] };
 
   const deviceChartData = {
     labels: analytics.deviceTypes.map(d => d.device),
-    datasets: [
+          datasets: [
       {
         data: analytics.deviceTypes.map(d => d.percentage),
-        backgroundColor: [
+          backgroundColor: [
           'rgba(59, 130, 246, 0.8)',
           'rgba(16, 185, 129, 0.8)',
           'rgba(245, 158, 11, 0.8)',
-          'rgba(239, 68, 68, 0.8)',
-        ],
-        borderWidth: 0 },
-    ] };
+          'rgba(239, 68, 68, 0.8)'],
+        borderWidth: 0 }] };
 
   const trafficSourcesChartData = {
     labels: analytics.trafficSources.map(d => d.source),
-    datasets: [
+          datasets: [
       {
         data: analytics.trafficSources.map(d => d.percentage),
-        backgroundColor: [
+          backgroundColor: [
           'rgba(139, 92, 246, 0.8)',
           'rgba(236, 72, 153, 0.8)',
           'rgba(34, 197, 94, 0.8)',
           'rgba(251, 146, 60, 0.8)',
-          'rgba(156, 163, 175, 0.8)',
-        ],
-        borderWidth: 0 },
-    ] };
+          'rgba(156, 163, 175, 0.8)'],
+        borderWidth: 0 }] };
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
+          maintainAspectRatio: false,
+    plugins: {,
       legend: {
         display: false } },
-    scales: {
+          scales: {,
       x: {
-        grid: {
+        grid: {,
           display: false } },
-      y: {
+          y: {,
         grid: {
           color: 'rgba(156, 163, 175, 0.2)' } } } };
 
   const doughnutOptions = {
     responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
+          maintainAspectRatio: false,
+    plugins: {,
       legend: {
         position: 'bottom' as const } } };
 
@@ -228,11 +221,14 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
       <div className="flex justify-between items-center">
         <div className="flex space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
           {[
-            { value: '7d', label: '7 days' },
-            { value: '28d', label: '28 days' },
-            { value: '90d', label: '90 days' },
-            { value: '365d', label: '1 year' },
-          ].map((option) => (
+            { value: '7d',
+          label: '7 days' },
+            { value: '28d',
+          label: '28 days' },
+            { value: '90d',
+          label: '90 days' },
+            { value: '365d',
+          label: '1 year' }].map((option) => (
             <button
               key={option.value}
               onClick={() => onTimeRangeChange(option.value as any)}
@@ -250,11 +246,14 @@ const VideoAnalyticsDashboard: React.FC<VideoAnalyticsDashboardProps> = ({
         {/* Tab Navigation */}
         <div className="flex space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
           {[
-            { value: 'overview', label: 'Overview' },
-            { value: 'audience', label: 'Audience' },
-            { value: 'engagement', label: 'Engagement' },
-            ...(analytics.revenue ? [{ value: 'revenue', label: 'Revenue' }] : []),
-          ].map((tab) => (
+            { value: 'overview',
+          label: 'Overview' },
+            { value: 'audience',
+          label: 'Audience' },
+            { value: 'engagement',
+          label: 'Engagement' },
+            ...(analytics.revenue ? [{ value: 'revenue',
+          label: 'Revenue' }]: [])].map((tab) => (
             <button
               key={tab.value}
               onClick={() => setActiveTab(tab.value as any)}

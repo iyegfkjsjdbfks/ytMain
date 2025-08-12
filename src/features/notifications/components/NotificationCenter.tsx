@@ -11,10 +11,10 @@ interface NotificationCenterProps {
 }
 
 interface NotificationItemProps {
-  notification: Notification;
-  onMarkAsRead: (id: string) => void;
-  onDelete: (id: string) => void;
-  onClick: (notification: Notification) => void;
+  notification: Notification;,
+  onMarkAsRead: (id: string) => void;,
+  onDelete: (id: string) => void;,
+  onClick: (notification: Notification) => void
 }
 
 const NotificationItem: React.FC<NotificationItemProps> = ({
@@ -40,8 +40,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
         return '🎉';
       case 'system':
         return 'ℹ️';
-      default:
-        return '📢';
+      default: return '📢'
     }
   };
 
@@ -53,8 +52,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
         return 'border-l-orange-500';
       case 'medium':
         return 'border-l-blue-500';
-      default:
-        return 'border-l-gray-300';
+      default: return 'border-l-gray-300'
     }
   };
 
@@ -209,12 +207,16 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   };
 
   const categories = [
-    { value: 'all', label: 'All' },
-    { value: 'engagement', label: 'Engagement' },
-    { value: 'content', label: 'Content' },
-    { value: 'social', label: 'Social' },
-    { value: 'system', label: 'System' },
-  ];
+    { value: 'all',
+          label: 'All' },
+    { value: 'engagement',
+          label: 'Engagement' },
+    { value: 'content',
+          label: 'Content' },
+    { value: 'social',
+          label: 'Social' },
+    { value: 'system',
+          label: 'System' }];
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>

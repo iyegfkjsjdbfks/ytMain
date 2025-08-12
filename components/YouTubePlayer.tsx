@@ -29,7 +29,8 @@ interface YTPlayer {
   mute(): void;
   unMute(): void;
   isMuted(): boolean;
-  setSize(width: any, height: any): object;
+  setSize(width: any,
+          height: any): object;
   getPlaybackRate(): number;
   setPlaybackRate(suggestedRate: any): void;
   getAvailablePlaybackRates(): number;
@@ -45,7 +46,7 @@ interface YouTubePlayerProps {
   className?: string;
   onReady?: (event: Event) => void;
   onStateChange?: (event: Event) => void;
-  onError?: (event: Event) => void;
+  onError?: (event: Event) => void
 }
 
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -61,7 +62,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<YTPlayer | null>(null);
   const [isAPIReady, setIsAPIReady] = useState(false);
-  const [, setIsPlayerReady] = useState(false);
+  const [ setIsPlayerReady] = useState(false);
   const [playerError, setPlayerError] = useState<string | null>(null);
   const playerIdRef = useRef(`youtube-player-${Math.random().toString(36).substr(2, 9)}`);
 
@@ -113,7 +114,8 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (originalCallback) {
         originalCallback();
       }
-    };
+    
+        };
 
     document.head.appendChild(script);
 
@@ -122,8 +124,8 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (originalCallback) {
         window.onYouTubeIframeAPIReady = originalCallback;
       }
-    };
-  }, []);
+    
+        }}, []);
 
   // Initialize player when API is ready
   useEffect(() => {
@@ -153,6 +155,7 @@ return;
           if (container.parentNode) {
             container.innerHTML = '';
           }
+        
         } catch (error) {
           console.debug('Error clearing container:', error);
         }
@@ -166,7 +169,7 @@ return;
         height,
         width,
         videoId,
-        playerVars: {
+        playerVars: {,
           autoplay: autoplay ? 1 : 0,
           controls: controls ? 1 : 0,
           modestbranding: 1,
@@ -174,12 +177,12 @@ return;
           enablejsapi: 1,
           origin: window.location.origin,
           playsinline: 1,
-          fs: 1, // Enable fullscreen button
-          iv_load_policy: 3, // Hide video annotations
-          disablekb: 0, // Enable keyboard controls
+          fs: 1, // Enable fullscreen button,
+  iv_load_policy: 3, // Hide video annotations,
+  disablekb: 0, // Enable keyboard controls
           // Remove widget_referrer as it might cause origin issues
         },
-        events: {
+        events: {,
           onReady: (event) => {
             if (isMounted) {
               setIsPlayerReady(true);
@@ -210,7 +213,8 @@ return;
                         console.log('Retrying autoplay...');
                         event.target.playVideo();
                       }
-                    } catch (retryError) {
+                    
+        } catch (retryError) {
                       console.warn('Autoplay retry failed:', retryError);
                     }
                   }, 1000);
@@ -248,7 +252,8 @@ return;
                         console.log('Resuming playback after unmute...');
                         event.target.playVideo();
                       }
-                    } catch (playError) {
+                    
+        } catch (playError) {
                       console.warn('Failed to resume playback after unmute:', playError);
                     }
                   }, 100); // Short delay to let unmute complete
@@ -264,9 +269,9 @@ return;
 }
             const errorMessages: { [key]: string } = {
               2: 'Invalid video ID',
-              5: 'HTML5 player error',
+          5: 'HTML5 player error',
               100: 'Video not found or private',
-              101: 'Video not available in embedded players',
+          101: 'Video not available in embedded players',
               150: 'Video not available in embedded players' };
             const message = errorMessages[event.data] || 'Unknown error occurred';
 
@@ -303,6 +308,7 @@ return;
           if (typeof ytPlayerRef.current.destroy === 'function') {
             ytPlayerRef.current.destroy();
           }
+        
         } catch (error) {
           // Silently handle cleanup errors
           console.debug('YouTube player cleanup error:', error);
@@ -310,8 +316,7 @@ return;
           ytPlayerRef.current = null;
         }
       }
-    };
-  }, [isAPIReady, videoId, height, width, autoplay, controls, isValidVideoId, onError, onReady, onStateChange]);
+    }}, [isAPIReady, videoId, height, width, autoplay, controls, isValidVideoId, onError, onReady, onStateChange]);
 
   if (!isValidVideoId) {
     return (

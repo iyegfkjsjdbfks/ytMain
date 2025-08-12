@@ -22,7 +22,7 @@ interface PWAState {
     notifications: boolean;
     backgroundSync: boolean;
     sharing: boolean;
-    offlineSupport: boolean;
+    offlineSupport: boolean
   };
 }
 
@@ -64,7 +64,7 @@ interface UsePWAReturn {
 
   // State,
   isInitialized: boolean;
-  supportedFeatures: string;
+  supportedFeatures: string
 }
 
 export const usePWA = (): UsePWAReturn => {
@@ -510,14 +510,13 @@ export const getNetworkStatus = (): {
 export const enableBackgroundSync = (tag: string): void => {
   if (
     'serviceWorker' in navigator &&,
-    'sync' in window.ServiceWorkerRegistration.prototype,
-  ) {
+    'sync' in window.ServiceWorkerRegistration.prototype) {
     navigator.serviceWorker.ready
       .then(registration => {
         return (registration as any).sync.register(tag);
       })
       .catch(error => {
-        const componentError = createComponentError(,;
+        const componentError = createComponentError(;
           `Background sync registration failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
           'usePWA',
           'enableBackgroundSync',

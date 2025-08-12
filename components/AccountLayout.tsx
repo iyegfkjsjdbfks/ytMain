@@ -11,20 +11,19 @@ const AccountLayout: React.FC = () => {
   const accountNavItems = [
     {
       path: '/account/settings',
-      label: 'General Settings',
+          label: 'General Settings',
       icon: Cog8ToothIcon,
-      description: 'Manage your account preferences' },
+          description: 'Manage your account preferences' },
     {
       path: '/account/privacy',
-      label: 'Privacy & Security',
+          label: 'Privacy & Security',
       icon: ShieldCheckIcon,
-      description: 'Control your privacy settings' },
+          description: 'Control your privacy settings' },
     {
       path: '/account/data',
-      label: 'Your Data',
+          label: 'Your Data',
       icon: DocumentTextIcon,
-      description: 'Download and manage your data' },
-  ];
+          description: 'Download and manage your data' }];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -87,7 +86,8 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle account backup
-                    }}
+                    
+        }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Download account data
@@ -95,7 +95,8 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle password change
-                    }}
+                    
+        }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Change password
@@ -103,7 +104,8 @@ const AccountLayout: React.FC = () => {
                 <button
                   onClick={() => {
                     // Handle two-factor auth
-                    }}
+                    
+        }}
                   className="w-full text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   Enable 2FA

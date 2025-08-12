@@ -16,7 +16,7 @@ import PWAStatus from '../src/components/PWAStatus';
 import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
 
 interface RefactoredAppProvidersProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 /**

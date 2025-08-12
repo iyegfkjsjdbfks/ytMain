@@ -7,7 +7,7 @@
  */
 export const formatDuration = (seconds: any): string => {
   if (isNaN(seconds) || seconds < 0) {
-return '0:00';
+return '0: 00'
 }
 
   const hours = Math.floor(seconds / 3600);

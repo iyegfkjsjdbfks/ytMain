@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, FC } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -14,30 +14,30 @@ import { VideoCameraIcon, MicrophoneIcon, StopIcon, PlayIcon, Cog6ToothIcon, Cha
 import { VideoCameraIcon as VideoCameraSolidIcon, MicrophoneIcon as MicrophoneSolidIcon } from '@heroicons/react/24/solid';
 
 interface StreamSettings {
-  title: string;
+  title: string;,
   description: string;
-  category: string;
+  category: string;,
   visibility: 'public' | 'unlisted' | 'private';
-  enableChat: boolean;
+  enableChat: boolean;,
   enableDonations: boolean;
-  quality: '720p' | '1080p' | '1440p' | '4k';
+  quality: '720p' | '1080p' | '1440p' | '4k';,
   bitrate: number;
-  frameRate: 30 | 60;
+  frameRate: 30 | 60
 }
 
 interface StreamStats {
-  viewers: number;
+  viewers: number;,
   peakViewers: number;
-  duration: number;
+  duration: number;,
   likes: number;
-  chatMessages: number;
-  streamHealth: 'excellent' | 'good' | 'poor';
+  chatMessages: number;,
+  streamHealth: 'excellent' | 'good' | 'poor'
 }
 
 interface ChatMessage {
-  id: string;
+  id: string;,
   username: string;
-  message: string;
+  message: string;,
   timestamp: Date;
   isModerator?: boolean;
   isOwner?: boolean;
@@ -59,32 +59,31 @@ export const LiveStreamStudio: React.FC = () => {
 
   const [settings, setSettings] = useState<StreamSettings>({
     title: '',
-    description: '',
+          description: '',
     category: 'Gaming',
-    visibility: 'public',
+          visibility: 'public',
     enableChat: true,
-    enableDonations: false,
+          enableDonations: false,
     quality: '1080p',
-    bitrate: 4500,
+          bitrate: 4500,
     frameRate: 30 });
 
   const [stats, setStats] = useState<StreamStats>({
     viewers: 0,
-    peakViewers: 0,
+          peakViewers: 0,
     duration: 0,
-    likes: 0,
+          likes: 0,
     chatMessages: 0,
-    streamHealth: 'excellent' });
+          streamHealth: 'excellent' });
 
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      username: 'StreamMod',
+          username: 'StreamMod',
       message: 'Welcome to the stream! Please follow the community guidelines.',
-      timestamp: new Date(),
+          timestamp: new Date(),
       isModerator: true,
-      badges: ['moderator'] },
-  ]);
+          badges: ['moderator'] }]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setTimeout>;
@@ -106,11 +105,11 @@ export const LiveStreamStudio: React.FC = () => {
   const setupCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
+        video: {,
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: settings.frameRate } },
-        audio: {
+          audio: {,
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -175,13 +174,13 @@ export const LiveStreamStudio: React.FC = () => {
       return;
     }
 
-    const newMessage: ChatMessage = {
+    const newMessage: ChatMessage = {,
       id: Date.now().toString(),
-      username: 'You',
+          username: 'You',
       message: chatMessage,
-      timestamp: new Date(),
+          timestamp: new Date(),
       isOwner: true,
-      badges: ['owner'] };
+          badges: ['owner'] };
 
     setChatMessages(prev => [...prev, newMessage]);
     setChatMessage('');

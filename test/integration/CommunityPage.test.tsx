@@ -6,35 +6,34 @@ import { describe, it, expect, vi, beforeEach  } from 'vitest';
 import CommunityPage from '../../pages/CommunityPage';
 // Mock the hooks
 vi.mock('@hooks/useRefactoredHooks', () => ({
-  useRefactoredHooks: () => ({
+  useRefactoredHooks: () => ({,
     posts: [
       {
         id: '1',
-        author: 'Test User',
+          author: 'Test User',
         content: 'Test post content',
-        timestamp: '2024-01-01T00:00:00Z',
-        likes: 10,
+          timestamp: '2024-01-01T00:00:00Z',
+          likes: 10,
         comments: 5,
-        avatar: 'https://example.com/avatar.jpg' },
+          avatar: 'https://example.com/avatar.jpg' },
       {
         id: '2',
-        author: 'Another User',
+          author: 'Another User',
         content: 'Another test post',
-        timestamp: '2024-01-02T00:00:00Z',
-        likes: 25,
+          timestamp: '2024-01-02T00:00:00Z',
+          likes: 25,
         comments: 12,
-        avatar: 'https://example.com/avatar2.jpg' },
-    ],
-    loading: false,
+          avatar: 'https://example.com/avatar2.jpg' }],
+          loading: false,
     error: null,
-    createPost: vi.fn(),
+          createPost: vi.fn(),
     likePost: vi.fn(),
-    addComment: vi.fn() }) }));
+          addComment: vi.fn() }) }));
 
 const createTestQueryClient = () => new QueryClient({
-  defaultOptions: {
+  defaultOptions: {,
     queries: { retry: false },
-    mutations: { retry: false } } });
+          mutations: { retry: false } } });
 
 const renderWithQueryClient = (component: React.ReactElement) => {
   const queryClient = createTestQueryClient();
@@ -82,24 +81,25 @@ describe('CommunityPage', () => {
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
       user: null,
-      isAuthenticated: false,
+          isAuthenticated: false,
       login: vi.fn(),
-      logout: vi.fn(),
-      theme: 'light' as const, setTheme: vi.fn(),
+          logout: vi.fn(),
+      theme: 'light' as const,
+          setTheme: vi.fn(),
       isDarkMode: false,
-      miniplayerVideo: null,
+          miniplayerVideo: null,
       isMiniplayerOpen: false,
-      openMiniplayer: vi.fn(),
+          openMiniplayer: vi.fn(),
       closeMiniplayer: vi.fn(),
-      toggleMiniplayer: vi.fn(),
+          toggleMiniplayer: vi.fn(),
       watchLaterVideos: [],
-      addToWatchLater: vi.fn(),
+          addToWatchLater: vi.fn(),
       removeFromWatchLater: vi.fn(),
-      isInWatchLater: vi.fn(),
+          isInWatchLater: vi.fn(),
       sidebarCollapsed: false,
-      toggleSidebar: vi.fn(),
+          toggleSidebar: vi.fn(),
       notifications: [],
-      addNotification: vi.fn(),
+          addNotification: vi.fn(),
       removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
@@ -121,26 +121,27 @@ describe('CommunityPage', () => {
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
       user: null,
-      isAuthenticated: false,
+          isAuthenticated: false,
       login: vi.fn(),
-      logout: vi.fn(),
-      theme: 'light' as const, setTheme: vi.fn(),
+          logout: vi.fn(),
+      theme: 'light' as const,
+          setTheme: vi.fn(),
       isDarkMode: false,
-      miniplayerVideo: null,
+          miniplayerVideo: null,
       isMiniplayerOpen: false,
-      openMiniplayer: vi.fn(),
+          openMiniplayer: vi.fn(),
       closeMiniplayer: vi.fn(),
-      toggleMiniplayer: vi.fn(),
+          toggleMiniplayer: vi.fn(),
       watchLaterVideos: [],
-      addToWatchLater: vi.fn(),
+          addToWatchLater: vi.fn(),
       removeFromWatchLater: vi.fn(),
-      isInWatchLater: vi.fn(),
+          isInWatchLater: vi.fn(),
       sidebarCollapsed: false,
-      toggleSidebar: vi.fn(),
+          toggleSidebar: vi.fn(),
       notifications: [
       ],
       addNotification: vi.fn(),
-      removeNotification: vi.fn() });
+          removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
 
@@ -159,24 +160,25 @@ describe('CommunityPage', () => {
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
       user: null,
-      isAuthenticated: false,
+          isAuthenticated: false,
       login: vi.fn(),
-      logout: vi.fn(),
-      theme: 'light' as const, setTheme: vi.fn(),
+          logout: vi.fn(),
+      theme: 'light' as const,
+          setTheme: vi.fn(),
       isDarkMode: false,
-      miniplayerVideo: null,
+          miniplayerVideo: null,
       isMiniplayerOpen: false,
-      openMiniplayer: vi.fn(),
+          openMiniplayer: vi.fn(),
       toggleMiniplayer: vi.fn(),
-      closeMiniplayer: vi.fn(),
+          closeMiniplayer: vi.fn(),
       watchLaterVideos: [],
-      addToWatchLater: vi.fn(),
+          addToWatchLater: vi.fn(),
       removeFromWatchLater: vi.fn(),
-      isInWatchLater: vi.fn(),
+          isInWatchLater: vi.fn(),
       sidebarCollapsed: false,
-      toggleSidebar: vi.fn(),
+          toggleSidebar: vi.fn(),
       notifications: [],
-      addNotification: vi.fn(),
+          addNotification: vi.fn(),
       removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);
@@ -189,24 +191,25 @@ describe('CommunityPage', () => {
 
     vi.mocked(useRefactoredHooks).mockReturnValue({
       user: null,
-      isAuthenticated: false,
+          isAuthenticated: false,
       login: vi.fn(),
-      logout: vi.fn(),
-      theme: 'light' as const, setTheme: vi.fn(),
+          logout: vi.fn(),
+      theme: 'light' as const,
+          setTheme: vi.fn(),
       isDarkMode: false,
-      miniplayerVideo: null,
+          miniplayerVideo: null,
       isMiniplayerOpen: false,
-      openMiniplayer: vi.fn(),
+          openMiniplayer: vi.fn(),
       toggleMiniplayer: vi.fn(),
-      closeMiniplayer: vi.fn(),
+          closeMiniplayer: vi.fn(),
       watchLaterVideos: [],
-      addToWatchLater: vi.fn(),
+          addToWatchLater: vi.fn(),
       removeFromWatchLater: vi.fn(),
-      isInWatchLater: vi.fn(),
+          isInWatchLater: vi.fn(),
       sidebarCollapsed: false,
-      toggleSidebar: vi.fn(),
+          toggleSidebar: vi.fn(),
       notifications: [],
-      addNotification: vi.fn(),
+          addNotification: vi.fn(),
       removeNotification: vi.fn() });
 
     renderWithQueryClient(<CommunityPage />);

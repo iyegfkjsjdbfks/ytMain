@@ -19,32 +19,32 @@ const convertToVideo = (item: Video | YouTubeSearchResult | GoogleSearchResult):
   const now = new Date().toISOString();
   return {
     id: searchResult.id,
-    title: searchResult.title,
+          title: searchResult.title,
     description: searchResult.description || '',
-    thumbnailUrl: searchResult.thumbnailUrl,
+          thumbnailUrl: searchResult.thumbnailUrl,
     videoUrl: searchResult.videoUrl,
-    duration: searchResult.duration || '0:00',
-    views: (("viewCount" in searchResult && (("viewCount" in searchResult) ? searchResult.viewCount : searchResult.views)) || ("views" in searchResult && searchResult.views) || 0).toString(),
+          duration: searchResult.duration || '0:00',
+          views: (("viewCount" in searchResult && (("viewCount" in searchResult) ? searchResult.viewCount : searchResult.views)) || ("views" in searchResult && searchResult.views) || 0).toString(),
     likes: (("likeCount" in searchResult && (("likeCount" in searchResult) ? searchResult.likeCount : searchResult.likes)) || ("likes" in searchResult && searchResult.likes) || 0),
-    dislikes: (("dislikeCount" in searchResult && (("dislikeCount" in searchResult && searchResult.dislikeCount) || ("dislikes" in searchResult && searchResult.dislikes) || 0)) || ("dislikes" in searchResult && searchResult.dislikes) || 0) || 0,
+          dislikes: (("dislikeCount" in searchResult && (("dislikeCount" in searchResult && searchResult.dislikeCount) || ("dislikes" in searchResult && searchResult.dislikes) || 0)) || ("dislikes" in searchResult && searchResult.dislikes) || 0) || 0,
     uploadedAt: searchResult.uploadedAt || now,
-    channelName: searchResult.channelName,
+          channelName: searchResult.channelName,
     channelId: searchResult.channelId || 'unknown',
-    channelAvatarUrl: searchResult.channelAvatarUrl || '',
+          channelAvatarUrl: searchResult.channelAvatarUrl || '',
     category: (("categoryId" in searchResult && (("categoryId" in searchResult && searchResult.categoryId) || ("category" in searchResult && searchResult.category) || "general")) || ("category" in searchResult && searchResult.category) || "general") || '',
-    tags: searchResult.tags || [],
+          tags: searchResult.tags || [],
     visibility: 'public' as const,
-    // Required BaseEntity properties
-    createdAt: now,
-    updatedAt: now };
-};
+    // Required BaseEntity properties,
+  createdAt: now,
+          updatedAt: now 
+        }};
 
 interface OptimizedSearchResultsProps {
-  videos: Video;
+  videos: Video;,
   youtubeVideos: YouTubeSearchResult;
-  googleSearchVideos: GoogleSearchResult;
+  googleSearchVideos: GoogleSearchResult;,
   loading: boolean;
-  query: string;
+  query: string;,
   sortBy: string;
   onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
   onLoadMore?: () => void;
@@ -52,7 +52,8 @@ interface OptimizedSearchResultsProps {
 }
 
 // Debounce hook for search optimization
-function useDebounce<T>(value: T, delay: any): T {
+function useDebounce<T>(value: T,
+          delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -62,30 +63,33 @@ function useDebounce<T>(value: T, delay: any): T {
 
     return () => {
       clearTimeout(handler);
-    };
-  }, [value, delay]);
+    }}, [value, delay]);
 
   return debouncedValue;
 }
 
 // Memoized sorting functions
 const sortingFunctions = {
-  relevance: (items: any, query: any) => {
-    return items.sort((a: any, b: any) => {
+  relevance: (items: any,
+          query: any) => {
+    return items.sort((a: any,
+          b: any) => {
       const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       return bRelevance - aRelevance;
     });
   },
   date: (items: any) => {
-    return items.sort((a: any, b: any) => {
+    return items.sort((a: any,
+          b: any) => {
       const dateA = a.uploadedAt || a.publishedAt || '';
       const dateB = b.uploadedAt || b.publishedAt || '';
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
   },
   views: (items: any) => {
-    return items.sort((a: any, b: any) => {
+    return items.sort((a: any,
+          b: any) => {
       const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
       const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
       return viewsB - viewsA;
@@ -103,15 +107,16 @@ const extractVideoId = (video: Video) => {
       if (lastPart && lastPart.length === 11) {
         videoId = lastPart;
       }
-    }
+    
+        }
   }
   return videoId && videoId.length === 11 ? videoId : null;
 };
 
 // YouTube-style search result card component
-const YouTubeSearchResultCard: React.FC<{
+const YouTubeSearchResultCard: React.FC<{,
   item: Video | YouTubeSearchResult | GoogleSearchResult;
-  onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void;
+  onVideoClick: (video: Video | YouTubeSearchResult | GoogleSearchResult) => void
 }> = memo(({ item, onVideoClick }) => {
   const convertedVideo = convertToVideo(item);
 
@@ -124,7 +129,7 @@ return duration;
       const seconds = duration % 60;
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    return '0:00';
+    return '0: 00'
   };
 
   const formatViews = (views: string | number) => {
@@ -283,17 +288,19 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
   // Intersection observer for infinite scroll
   const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
-    rootMargin: '100px' });
+          rootMargin: '100px' });
 
   // Combine and sort all results
   const allResults = useMemo(() => {
     performanceMonitor.startMeasure('search-results-processing');
 
     const combined = [
-      ...(videos || []).map(v => ({ ...v, source: 'local' as const, contentType: 'video' as const })),
-      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const, contentType: 'video' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const, contentType: 'video' as const })),
-    ];
+      ...(videos || []).map(v => ({ ...v, source: 'local' as const,
+          contentType: 'video' as const })),
+      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const,
+          contentType: 'video' as const })),
+      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const,
+          contentType: 'video' as const }))];
 
     let sorted = combined;
     if (sortingFunctions[sortBy as keyof typeof sortingFunctions]) {
@@ -332,9 +339,8 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
           }
           return false;
         });
-      case 'all':
-      default:
-        return allResults;
+      case 'all':,
+  default: return allResults
     }
   }, [allResults, activeTab]);
 
@@ -343,7 +349,8 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     if (isIntersecting && hasMore && !loading && onLoadMore) {
       onLoadMore();
     }
-  }, [isIntersecting, hasMore, loading, onLoadMore]);
+  
+        }, [isIntersecting, hasMore, loading, onLoadMore]);
 
   // Loading skeleton
   const LoadingSkeleton = memo(() => (

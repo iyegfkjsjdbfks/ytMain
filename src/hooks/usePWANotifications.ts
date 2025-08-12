@@ -31,7 +31,7 @@ interface NotificationState {
   isRequesting: boolean;
   lastNotificationTime: number | null;
   notificationCount: number;
-  pendingNotifications: NotificationOptions;
+  pendingNotifications: NotificationOptions
 }
 
 interface NotificationStats {
@@ -39,11 +39,11 @@ interface NotificationStats {
   totalClicked: number;
   totalDismissed: number;
   lastSent: number | null;
-  clickRate: number;
+  clickRate: number
 }
 
 interface UsePWANotificationsReturn {
-  // State
+  // State,
   permission: NotificationPermission;
   isSupported: boolean;
   isRequesting: boolean;
@@ -51,20 +51,20 @@ interface UsePWANotificationsReturn {
   notificationCount: number;
   pendingNotifications: NotificationOptions;
 
-  // Actions
+  // Actions,
   requestPermission: () => Promise<NotificationPermission>;
   showNotification: (options: NotificationOptions) => Promise<boolean>;
   scheduleNotification: (options: NotificationOptions, delay: any) => void;
   clearNotifications: (tag?: string) => Promise<void>;
 
-  // Settings
+  // Settings,
   enableQuietHours: (start: any, end: any) => void;
   disableQuietHours: () => void;
   setNotificationFrequency: (maxPerHour: any) => void;
 
-  // Analytics
+  // Analytics,
   getNotificationStats: () => NotificationStats;
-  resetStats: () => void;
+  resetStats: () => void
 }
 
 /**
@@ -522,8 +522,8 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   }, [isQuietHours, state.pendingNotifications, showNotification]);
 
   return {
-    // State
-    permission: state.permission,
+    // State,
+  permission: state.permission,
     isSupported: state.isSupported,
     isRequesting: state.isRequesting,
     canShowNotifications,

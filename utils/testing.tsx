@@ -16,7 +16,7 @@ import { vi } from 'vitest';
 import type { Video } from '../src/types/core';
 // If Channel type exists, import it; otherwise, define a minimal fallback to satisfy tests
 type Channel = {
-  id: string;
+  id: string;,
   name: string;
   description?: string;
   avatarUrl?: string;
@@ -38,10 +38,10 @@ interface TestProvidersProps {
 const TestProviders: React.FC<TestProvidersProps> = ({
   children,
   queryClient = new QueryClient({
-    defaultOptions: {
+    defaultOptions: {,
       queries: {
         retry: false,
-        gcTime: 0 } } }) }) => {
+          gcTime: 0 } } }) }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -58,10 +58,9 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   queryClient?: QueryClient;
 }
 
-export const renderWithProviders = (
+export const renderWithProviders = (,
   ui: React.ReactElement,
-  options: CustomRenderOptions = {},
-): RenderResult => {
+          options: CustomRenderOptions = {}): RenderResult => {
   const { queryClient, ...renderOptions } = options;
 
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -80,10 +79,9 @@ interface CustomRenderHookOptions<TProps> extends RenderHookOptions<TProps> {
   queryClient?: QueryClient;
 }
 
-export const renderHookWithProviders = <TResult, TProps>(
+export const renderHookWithProviders = <TResult, TProps>(,
   hook: (props: TProps) => TResult,
-  options: CustomRenderHookOptions<TProps> = {},
-) => {
+          options: CustomRenderHookOptions<TProps> = {}) => {
   const { queryClient, ...renderHookOptions } = options;
 
   const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -99,50 +97,49 @@ export const renderHookWithProviders = <TResult, TProps>(
 export const createMockVideo = (overrides: Partial<Video> = {}): Video => ({
   id: `video_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Video Title',
-  description: 'Test video description',
+          description: 'Test video description',
   thumbnail: 'https://example.com/thumbnail.jpg',
-  thumbnailUrl: 'https://example.com/thumbnail.jpg',
-  videoUrl: 'https://example.com/video.mp4',
-  duration: '5:00',
-  views: 1000,
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          videoUrl: 'https://example.com/video.mp4',
+          duration: '5:00',
+          views: 1000,
   likes: 50,
-  dislikes: 5,
+          dislikes: 5,
   uploadedAt: new Date().toISOString(),
-  channelName: 'Test Channel',
+          channelName: 'Test Channel',
   channelId: 'channel_123',
-  channelAvatarUrl: 'https://example.com/avatar.jpg',
-  category: 'Entertainment',
+          channelAvatarUrl: 'https://example.com/avatar.jpg',
+          category: 'Entertainment',
   tags: 'test,video',
   visibility: 'public',
-  createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   ...overrides });
 
 export const createMockChannel = (overrides: Partial<Channel> = {}): Channel => ({
   id: `channel_${Math.random().toString(36).substr(2, 9)}`,
   name: 'Test Channel',
-  description: 'Test channel description',
+          description: 'Test channel description',
   avatarUrl: 'https://example.com/avatar.jpg',
-
-  subscribers: 10000,
+          subscribers: 10000,
   subscriberCount: 10000,
-  videoCount: 100,
+          videoCount: 100,
   isVerified: false,
-  createdAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   ...overrides });
 
 export const createMockPlaylist = (overrides: Partial<UserPlaylist> = {}): UserPlaylist => ({
   id: `playlist_${Math.random().toString(36).substr(2, 9)}`,
   title: 'Test Playlist',
-  description: 'Test playlist description',
+          description: 'Test playlist description',
   videoIds: 'video1,video2,video3',
   createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
   ...overrides });
 
 // Mock API Responses
-export const createMockVideoResponse = (count: number = 10) => ({
+export const createMockVideoResponse = (count: number = 10) => ({,
   videos: Array.from({ length: count }, () => createMockVideo()),
   nextPageToken: Math.random() > 0.5 ? 'next_page_token' : undefined });
 
@@ -153,8 +150,7 @@ export const createUserEvent = () => userEvent.setup();
 
 // Mock Functions
 export const createMockFunction = <T extends (...args) => any>(
-  implementation?: T,
-): MockedFunction<T> => {
+  implementation?: T): MockedFunction<T> => {
   return vi.fn(implementation || (() => {})) as MockedFunction<T>;
 };
 
@@ -209,12 +205,14 @@ return 0;
 // Memory Testing Utilities
 export const measureMemoryUsage = (): number => {
   if ('memory' in performance) {
-    return (performance as Performance & { memory: { usedJSHeapSize: number } }).memory.usedJSHeapSize;
+    return (performance as Performance & { memory: { usedJSHeapSize: number } 
+        }).memory.usedJSHeapSize;
   }
   return 0;
 };
 
-export const createMemoryLeakTest = (testFn: () => void, iterations: number = 100) => {
+export const createMemoryLeakTest = (testFn: () => void,
+          iterations: number = 100) => {
   return async () => {
     const initialMemory = measureMemoryUsage();
 
@@ -234,11 +232,12 @@ export const createMemoryLeakTest = (testFn: () => void, iterations: number = 10
 
     // Memory increase should be reasonable (less than 10MB for most tests)
     expect(memoryIncrease).toBeLessThan(10 * 1024 * 1024);
-  };
-};
+  
+        }};
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement, testId: any): HTMLElement => {
+export const getByTestId = (container: HTMLElement,
+          testId: any): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
     throw new Error(`Element with test id "${testId}" not found`);
@@ -246,7 +245,8 @@ export const getByTestId = (container: HTMLElement, testId: any): HTMLElement =>
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement, testId: any): HTMLElement | null => {
+export const queryByTestId = (container: HTMLElement,
+          testId: any): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
@@ -267,20 +267,21 @@ export const checkAccessibility = async (container: HTMLElement) => {
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement, name: any) => {
+export const takeSnapshot = (component: React.ReactElement,
+          name: any) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response: any, status: number = 200) => {
+export const mockFetch = (response: any,
+          status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: status >= 200 && status < 300,
       status,
       json: () => Promise.resolve(response),
-      text: () => Promise.resolve(JSON.stringify(response)) } as Response),
-  );
+          text: () => Promise.resolve(JSON.stringify(response)) } as Response));
 };
 
 export const mockFetchError = (error: Error) => {
@@ -293,7 +294,7 @@ export const mockLocalStorage = () => {
 
   global.localStorage = {
     getItem: vi.fn((key) => store[key] ?? null),
-    setItem: vi.fn((key, value) => {
+          setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
     removeItem: vi.fn((key) => {
@@ -303,25 +304,24 @@ export const mockLocalStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn() };
-};
+          key: vi.fn() }};
 
 // Intersection Observer Mocking
 export const mockIntersectionObserver = () => {
   global.IntersectionObserver = vi.fn().mockImplementation((_callback) => ({
     observe: vi.fn(),
-    unobserve: vi.fn(),
+          unobserve: vi.fn(),
     disconnect: vi.fn(),
-    root: null,
+          root: null,
     rootMargin: '',
-    thresholds: [] }));
+          thresholds: [] }));
 };
 
 // Resize Observer Mocking
 export const mockResizeObserver = () => {
   global.ResizeObserver = vi.fn().mockImplementation((_callback) => ({
     observe: vi.fn(),
-    unobserve: vi.fn(),
+          unobserve: vi.fn(),
     disconnect: vi.fn() }));
 };
 
@@ -330,21 +330,20 @@ export const mockMatchMedia = (matches: boolean = false) => {
   global.matchMedia = vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
-    onchange: null,
+          onchange: null,
     addListener: vi.fn(),
-    removeListener: vi.fn(),
+          removeListener: vi.fn(),
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
     dispatchEvent: vi.fn() }));
 };
 
 // Test Suite Helpers
-export const describeWithSetup = (
+export const describeWithSetup = (,
   name: any,
-  setup: () => void,
-  tests: () => void,
-) => {
-  describe(name, () => {
+          setup: () => void,
+  tests: () => void) => {
+  describe(name() => {
     beforeEach(() => {
       setup();
     });
@@ -365,9 +364,9 @@ export const generateMockPlaylist = createMockPlaylist;
 // Mock Testing Utilities
 export const testUtils = {
   generateMockVideo: createMockVideo,
-  generateMockChannel: createMockChannel,
+          generateMockChannel: createMockChannel,
   generateMockPlaylist: createMockPlaylist,
-  waitForLoadingToFinish: async () => {
+          waitForLoadingToFinish: async () => {
     await waitForTime(100);
   },
   waitForError: async (_errorMessage?: string) => {
@@ -376,12 +375,14 @@ export const testUtils = {
   simulateNetworkDelay: async (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
-  simulateKeyboardNavigation: async (element: HTMLElement, key: string) => {
+  simulateKeyboardNavigation: async (element: HTMLElement,
+          key: string) => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);
   },
-  simulateMouseInteraction: async (element: HTMLElement, interaction: 'click' | 'hover' | 'doubleClick' = 'click') => {
+  simulateMouseInteraction: async (element: HTMLElement,
+          interaction: 'click' | 'hover' | 'doubleClick' = 'click') => {
     const user = createUserEvent();
     switch (interaction) {
       case 'click':
@@ -395,12 +396,14 @@ export const testUtils = {
         break;
     }
   },
-  simulateFormInput: async (input: HTMLElement, value: string | number) => {
+  simulateFormInput: async (input: HTMLElement,
+          value: string | number) => {
     const user = createUserEvent();
     await user.clear(input);
     await user.type(input, String(value));
   },
-  simulateDragAndDrop: async (element: HTMLElement, files: File) => {
+  simulateDragAndDrop: async (element: HTMLElement,
+          files: File) => {
     const user = createUserEvent();
     await user.upload(element, files);
   } };
@@ -413,17 +416,16 @@ export const runAccessibilityAudit = async (_container: HTMLElement) => {
 
     // Return a compatible result format
     return {
-      issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>
-      score: 100,
+      issues: [] as Array<{ type: 'error' | 'warning'; message: string; element: HTMLElement }>,
+          score: 100,
       violations: [], // For backward compatibility
-    };
-  } catch (error) {
+    
+        }} catch (error) {
     console.warn('Accessibility testing not available:', error);
     return {
       issues: [],
-      score: 100,
-      violations: [] };
-  }
+          score: 100,
+      violations: [] }}
 };
 
 // Custom Matchers
@@ -439,8 +441,7 @@ expect.extend({
 
     return {
       message: () => `expected element to ${isInViewport ? 'not ' : ''}be in viewport`,
-      pass: isInViewport };
-  },
+          pass: isInViewport }},
 
   toHaveAccessibleName(received: HTMLElement, expectedName) {
     const accessibleName = received.getAttribute('aria-label') ??
@@ -451,8 +452,7 @@ expect.extend({
 
     return {
       message: () => `expected element to have accessible name "${expectedName}", but got "${accessibleName}"`,
-      pass: hasExpectedName };
-  } });
+      pass: hasExpectedName }} });
 
 // Type declarations for custom matchers
 

@@ -18,13 +18,13 @@ import type { Video, Short } from '../../types/core';
  */
 
 // Unified Video hooks using normalized metadata
-export function useUnifiedVideos(
+export function useUnifiedVideos(,
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
   config?: UseApiConfig<{
     data: UnifiedVideoMetadata;
     success: boolean;
-    message: string;
+    message: string
   }>
 ) {
   return useQuery(
@@ -47,7 +47,7 @@ export function useUnifiedVideos(
   );
 }
 
-export function useUnifiedVideo(
+export function useUnifiedVideo(,
   videoId: any,
   config?: UseApiConfig<UnifiedVideoMetadata>
 ) {
@@ -56,8 +56,8 @@ export function useUnifiedVideo(
 
   // Use standard React Query hook with proper caching
   const result = useReactQuery({
-    queryKey: ['unified-video', videoId], // Stable cache key
-    queryFn: async () => {
+    queryKey: ['unified-video', videoId], // Stable cache key,
+  queryFn: async () => {
       logger.debug(
         `🔍 useUnifiedVideo: Query function executing for ID: ${videoId}`
       );
@@ -70,12 +70,12 @@ export function useUnifiedVideo(
       return video;
     },
     enabled: !!videoId,
-    staleTime: 5 * 60 * 1000, // 5 minutes - reasonable cache time
-    gcTime: 10 * 60 * 1000, // 10 minutes - keep in cache longer
-    refetchOnMount: false, // Don't refetch on mount if we have cached data
-    refetchOnWindowFocus: false, // Don't refetch on window focus
-    retry: 3, // Retry failed requests
-    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+    staleTime: 5 * 60 * 1000, // 5 minutes - reasonable cache time,
+  gcTime: 10 * 60 * 1000, // 10 minutes - keep in cache longer,
+  refetchOnMount: false, // Don't refetch on mount if we have cached data,
+  refetchOnWindowFocus: false, // Don't refetch on window focus,
+  retry: 3, // Retry failed requests,
+  retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
     ...config, // Allow overriding these settings
   });
 
@@ -93,13 +93,13 @@ export function useUnifiedVideo(
   return customResult;
 }
 
-export function useUnifiedTrendingVideos(
+export function useUnifiedTrendingVideos(,
   limit: number = 50,
   filters: UnifiedSearchFilters = {},
   config?: UseApiConfig<{
     data: UnifiedVideoMetadata;
     success: boolean;
-    message: string;
+    message: string
   }>
 ) {
   return useQuery(
@@ -117,8 +117,8 @@ export function useUnifiedTrendingVideos(
         success: true };
     },
     {
-      staleTime: 2 * 60 * 1000, // 2 minutes
-      refetchOnWindowFocus: true,
+      staleTime: 2 * 60 * 1000, // 2 minutes,
+  refetchOnWindowFocus: true,
       ...config }
   );
 }
@@ -129,7 +129,7 @@ export function useFeaturedVideos(config?: UseApiConfig<Video[]>) {
     ...config });
 }
 
-export function useVideosByCategory(
+export function useVideosByCategory(,
   category: any,
   config?: UseApiConfig<Video[]>
 ) {
@@ -148,8 +148,8 @@ export function useSubscriptionFeed(config?: UseApiConfig<Video[]>) {
     ['videos', 'subscriptions'],
     () => videoApi.getSubscriptionFeed(),
     {
-      staleTime: 1 * 60 * 1000, // 1 minute
-      refetchOnWindowFocus: true,
+      staleTime: 1 * 60 * 1000, // 1 minute,
+  refetchOnWindowFocus: true,
       ...config }
   );
 }
@@ -170,8 +170,8 @@ export function useRecommendations(config?: UseApiConfig<Video[]>) {
     ['videos', 'recommendations'],
     () => videoApi.getRecommendations(),
     {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      refetchOnWindowFocus: true,
+      staleTime: 5 * 60 * 1000, // 5 minutes,
+  refetchOnWindowFocus: true,
       ...config }
   );
 }
@@ -195,12 +195,12 @@ export function useSavedVideos(config?: UseApiConfig<Video[]>) {
 }
 
 // Unified Shorts hooks
-export function useUnifiedShorts(
+export function useUnifiedShorts(,
   limit: number = 30,
   config?: UseApiConfig<{
     data: UnifiedVideoMetadata;
     success: boolean;
-    message: string;
+    message: string
   }>
 ) {
   return useQuery(
@@ -215,8 +215,8 @@ export function useUnifiedShorts(
         success: true };
     },
     {
-      staleTime: 2 * 60 * 1000, // 2 minutes
-      refetchOnWindowFocus: true,
+      staleTime: 2 * 60 * 1000, // 2 minutes,
+  refetchOnWindowFocus: true,
       ...config }
   );
 }
@@ -224,27 +224,27 @@ export function useUnifiedShorts(
 // Legacy shorts hooks (for backward compatibility)
 export function useShorts(config?: UseApiConfig<Short[]>) {
   return useQuery(['shorts'], () => videoApi.getShorts(), {
-    staleTime: 2 * 60 * 1000, // 2 minutes
-    refetchOnWindowFocus: true,
+    staleTime: 2 * 60 * 1000, // 2 minutes,
+  refetchOnWindowFocus: true,
     ...config });
 }
 
 export function useTrendingShorts(config?: UseApiConfig<Short[]>) {
   return useQuery(['shorts', 'trending'], () => videoApi.getTrendingShorts(), {
-    staleTime: 1 * 60 * 1000, // 1 minute
-    refetchOnWindowFocus: true,
+    staleTime: 1 * 60 * 1000, // 1 minute,
+  refetchOnWindowFocus: true,
     ...config });
 }
 
 // Unified Search hook
-export function useUnifiedSearchVideos(
+export function useUnifiedSearchVideos(,
   query: any,
   filters: UnifiedSearchFilters = {},
   limit: number = 50,
   config?: UseApiConfig<{
     data: UnifiedVideoMetadata;
     success: boolean;
-    message: string;
+    message: string
   }>
 ) {
   return useQuery(
@@ -369,8 +369,8 @@ export function useVideo(videoId: any, config?: UseApiConfig<Video>) {
 
 export function useTrendingVideos(config?: UseApiConfig<Video[]>) {
   return useQuery(['videos', 'trending'], () => videoApi.getTrendingVideos(), {
-    staleTime: 2 * 60 * 1000, // 2 minutes
-    refetchOnWindowFocus: true,
+    staleTime: 2 * 60 * 1000, // 2 minutes,
+  refetchOnWindowFocus: true,
     ...config });
 }
 

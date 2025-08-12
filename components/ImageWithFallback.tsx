@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState, lazy, FC } from 'react';
 
 interface ImageWithFallbackProps {
-  src: string;
+  src: string;,
   alt: string;
   fallbackSrc?: string;
   width?: number;
@@ -93,7 +93,8 @@ return fallbackSrc;
     onLoad?.();
   };
 
-  const generatePlaceholderDataUrl = (w: any, h: any, text: any): string => {
+  const generatePlaceholderDataUrl = (w: any,
+          h: any, text: any): string => {
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;

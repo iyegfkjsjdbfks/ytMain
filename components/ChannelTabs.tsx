@@ -4,7 +4,7 @@ interface Tab {
 }
 
 interface ChannelTabsProps {
-  tabs: Tab;
+  tabs: Tab;,
   activeTab: string; onTabClick: (tabId: any) => void
 }
 

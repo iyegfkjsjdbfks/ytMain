@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -72,7 +72,7 @@ return duration;
       const seconds = duration % 60;
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    return '0:00';
+    return '0: 00'
   };
 
   const formatViews = (views: string | number) => {
@@ -147,8 +147,7 @@ return duration;
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
       }
-    };
-  }, []);
+    }}, []);
 
   return (
     <div
@@ -185,7 +184,7 @@ return duration;
                   loading="lazy"
                   style={{
                     pointerEvents: 'none',
-                    border: 'none',
+          border: 'none',
                     outline: 'none' }}
                   onError={handleIframeError}
                 />

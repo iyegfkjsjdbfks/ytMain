@@ -4,10 +4,10 @@ import { safeLocalStorage, throttle  } from '../utils/componentUtils';
 // Common hook patterns
 
 // Enhanced local storage hook with error handling
-export const useLocalStorage = <T>(
+export const useLocalStorage = <T>(,
   key: string,
   initialValue: T
-): [T, (value: T | ((val: T) => T)) => void, () => void] => {
+): [T(value: T | ((val: T) => T)) => void() => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     const item = safeLocalStorage.getJSON<T>(key);
     return item ?? initialValue;
@@ -57,7 +57,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args: unknown) => unknown>(
+export const useThrottle = <T extends (...args: unknown) => unknown>(,
   callback: T,
   delay: any
 ): T => {
@@ -79,9 +79,9 @@ export const usePrevious = <T>(value: T): T | undefined => {
 };
 
 // Toggle hook
-export const useToggle = (
+export const useToggle = (,
   initialValue: boolean = false
-): [boolean, () => void, (value: string | number) => void] => {
+): [boolean() => void(value: string | number) => void] => {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
@@ -91,14 +91,14 @@ export const useToggle = (
 };
 
 // Counter hook
-export const useCounter = (
+export const useCounter = (,
   initialValue: number = 0
 ): {
   count: number;
   increment: () => void;
   decrement: () => void;
   reset: () => void;
-  set: (value: string | number) => void;
+  set: (value: string | number) => void
 } => {
   const [count, setCount] = useState(initialValue);
 
@@ -111,7 +111,7 @@ export const useCounter = (
 };
 
 // Array state hook
-export const useArray = <T>(
+export const useArray = <T>(,
   initialArray: T = []
 ): {
   array: T;
@@ -120,7 +120,7 @@ export const useArray = <T>(
   filter: (callback: (item: T, index: number) => boolean) => void;
   update: (index: number, newElement: T) => void;
   remove: (index: number) => void;
-  clear: () => void;
+  clear: () => void
 } => {
   const [array, setArray] = useState<T[]>(initialArray);
 
@@ -160,14 +160,14 @@ export const useArray = <T>(
 };
 
 // Async state hook
-export const useAsync = <T, E = string>(
-  asyncFunction: () => Promise<T>
+export const useAsync = <T, E = string>(,
+  asyncFunction: () => Promise<T>,
   immediate: boolean = true
 ): {
   execute: () => Promise<void>;
   loading: boolean;
   data: T | null;
-  error: E | null;
+  error: E | null
 } => {
   const [loading, setLoading] = useState<boolean>(immediate);
   const [data, setData] = useState<T | null>(null);
@@ -196,8 +196,8 @@ export const useAsync = <T, E = string>(
 };
 
 // Click outside hook
-export const useClickOutside = (
-  ref: React.RefObject<HTMLElement>
+export const useClickOutside = (,
+  ref: React.RefObject<HTMLElement>,
   handler: (event: MouseEvent | TouchEvent) => void
 ): void => {
   useEffect(() => {
@@ -219,7 +219,7 @@ export const useClickOutside = (
 };
 
 // Keyboard shortcut hook
-export const useKeyPress = (
+export const useKeyPress = (,
   targetKey: any,
   handler: () => void,
   options: {
@@ -298,8 +298,8 @@ export const useMediaQuery = (query: any): boolean => {
 };
 
 // Intersection observer hook
-export const useIntersectionObserver = (
-  elementRef: React.RefObject<Element>
+export const useIntersectionObserver = (,
+  elementRef: React.RefObject<Element>,
   options: IntersectionObserverInit = {}
 ): IntersectionObserverEntry | null => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -341,16 +341,16 @@ export const useScrollPosition = (): { x: number; y: number } => {
 };
 
 // Form validation hook
-export const useFormValidation = <T extends Record<string, unknown>>(
+export const useFormValidation = <T extends Record<string, unknown>>(,
   initialValues: T,
-  validationRules: Partial<Record<keyof T, (value: unknown) => string | null>>
+  validationRules: Partial<Record<keyof T(value: unknown) => string | null>>
 ): {
   values: T;
   errors: Partial<Record<keyof T, string>>;
   isValid: boolean;
   handleChange: (name: keyof T, value: unknown) => void;
   handleSubmit: (onSubmit: (values: T) => void) => (e: React.FormEvent) => void;
-  reset: () => void;
+  reset: () => void
 } => {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});

@@ -13,17 +13,17 @@ export const RegisterForm: React.FC = () => {
 
   const [formData, setFormData] = useState<RegisterData>({
     username: '',
-    email: '',
+          email: '',
     password: '',
-    displayName: '' });
+          displayName: '' });
 
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [formErrors, setFormErrors] = useState({
     username: '',
-    email: '',
+          email: '',
     password: '',
-    confirmPassword: '',
+          confirmPassword: '',
     displayName: '' });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,9 +32,9 @@ export const RegisterForm: React.FC = () => {
     let isValid = true;
     const errors = {
       username: '',
-      email: '',
+          email: '',
       password: '',
-      confirmPassword: '',
+          confirmPassword: '',
       displayName: '' };
 
     // Username validation

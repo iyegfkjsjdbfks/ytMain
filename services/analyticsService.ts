@@ -2,10 +2,10 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -15,7 +15,7 @@ interface AnalyticsEvent {
   timestamp: number;
   sessionId: string;
   userId?: string | undefined;
-  category: 'user_action' | 'performance' | 'error' | 'navigation' | 'video' | 'engagement';
+  category: 'user_action' | 'performance' | 'error' | 'navigation' | 'video' | 'engagement'
 }
 
 interface UserSession {
@@ -39,7 +39,7 @@ interface AnalyticsConfig {
   batchSize: number;
   flushInterval: number; // milliseconds,
   maxStoredEvents: number;
-  enableDebugMode: boolean;
+  enableDebugMode: boolean
 }
 
 const DEFAULT_CONFIG: AnalyticsConfig = {
@@ -283,11 +283,10 @@ return;
   }
 
   // Public API
-  track(
-    eventName: any,
+  track(,
+  eventName: any,
     properties: Record<string, any> = {},
-    category: AnalyticsEvent['category'] = 'user_action',
-  ) {
+    category: AnalyticsEvent['category'] = 'user_action') {
     const event: AnalyticsEvent = {
       name: eventName,
       properties: {
@@ -426,7 +425,7 @@ return;
 
   getEvents(category?: AnalyticsEvent['category']): AnalyticsEvent[] {
     const { events } = this.session;
-    return category ? events.filter((e: Event) => e.category === category) : events;
+    return category ? events.filter((e: Event) => e.category === category) : events
   }
 
   getEventStats() {

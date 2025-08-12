@@ -33,7 +33,8 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
       setIsSidebarOpen(prev => !prev);
       setIsMinimized(false); // Reset minimized state
     }
-  }, [isWatchPage]);
+  
+        }, [isWatchPage]);
 
   useEffect(() => {
     // Update sidebar state when navigating to/from watch page
@@ -69,11 +70,11 @@ const Layout: React.FC<LayoutProps> = () => { // Removed children from props
   const getSidebarMargin = () => {
     if (isWatchPage) {
       // On watch page, use minimized or expanded sidebar
-      return isMinimized ? 'md:ml-16' : 'md:ml-60';
+      return isMinimized ? 'md: ml-16' : 'md:ml-60'
     }
       // On other pages, use normal sidebar behavior
       if (isSidebarOpen) {
-        return 'md:ml-60';
+        return 'md: ml-60'
       }
       return 'ml-0';
 

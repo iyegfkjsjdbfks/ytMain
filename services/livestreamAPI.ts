@@ -23,7 +23,7 @@ export interface ScheduledStream {
   tags: string;
   visibility: 'public' | 'unlisted' | 'private';
   thumbnailUrl: string;
-  reminderSet: boolean;
+  reminderSet: boolean
 }
 
 class LiveStreamService {

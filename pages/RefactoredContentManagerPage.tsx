@@ -24,9 +24,9 @@ import type { Video } from '../types';
  */
 
 interface VideoUploadFormData {
-  title: string;
+  title: string;,
   description: string;
-  tags: string;
+  tags: string;,
   category: string;
   visibility: 'public' | 'unlisted' | 'private';
   thumbnail?: File;
@@ -34,9 +34,9 @@ interface VideoUploadFormData {
 }
 
 interface VideoEditFormData {
-  title: string;
+  title: string;,
   description: string;
-  tags: string;
+  tags: string;,
   category: string;
   visibility: 'public' | 'unlisted' | 'private';
   thumbnail?: File;
@@ -47,7 +47,7 @@ const RefactoredContentManagerPage: React.FC = () => {
   const [videos, _setVideos] = useState<Video[]>([]);
   const [videosLoading, _setVideosLoading] = useState(false);
   const [videosError, _setVideosError] = useState<string | null>(null);
-  const [, _setUploadProgress] = useState<Record<string, any>>({});
+  const [ _setUploadProgress] = useState<Record<string, any>>({});
 
   const refreshVideos = async () => {
     // Mock implementation
@@ -57,7 +57,8 @@ const RefactoredContentManagerPage: React.FC = () => {
     // Mock implementation
   };
 
-  const updateVideo = async (_id: any, _formData: VideoEditFormData) => {
+  const updateVideo = async (_id: any,
+          _formData: VideoEditFormData) => {
     // Mock implementation
   };
 
@@ -78,10 +79,10 @@ const RefactoredContentManagerPage: React.FC = () => {
   // Async operations
   const {
     loading: actionLoading,
-    error: actionError,
+          error: actionError,
     execute: executeAction } = {
     loading: false,
-    error: null,
+          error: null,
     execute: async (action: () => Promise<void>) => {
       try {
         await action();
@@ -89,7 +90,8 @@ const RefactoredContentManagerPage: React.FC = () => {
         console.error('Action failed:', error);
         // Handle error if needed
       }
-    } };
+    
+        } };
 
   // Filter videos based on active tab
   const filteredVideos = videos.filter((video) => {
@@ -102,58 +104,65 @@ const RefactoredContentManagerPage: React.FC = () => {
         return video.visibility === 'private';
       case 'drafts':
         return video.visibility === 'private';
-      default:
-        return true;
+      default: return true
     }
-  });
+  
+        });
 
   // Video upload form configuration
   const uploadFormFields = [
     {
       name: 'videoFile',
-      type: 'file' as const, label: 'Video File',
-      required: true,
+          type: 'file' as const, label: 'Video File',
+          required: true,
       accept: 'video/*',
-      placeholder: 'Select video file to upload' },
+          placeholder: 'Select video file to upload' },
     {
       name: 'title',
-      type: 'text' as const, label: 'Title',
-      required: true,
+          type: 'text' as const, label: 'Title',
+          required: true,
       placeholder: 'Enter video title' },
     {
       name: 'description',
-      type: 'textarea' as const, label: 'Description',
-      placeholder: 'Enter video description' },
+          type: 'textarea' as const, label: 'Description',
+          placeholder: 'Enter video description' },
     {
       name: 'tags',
-      type: 'text' as const, label: 'Tags',
-      placeholder: 'Enter tags separated by commas' },
+          type: 'text' as const, label: 'Tags',
+          placeholder: 'Enter tags separated by commas' },
     {
       name: 'category',
-      type: 'select' as const, label: 'Category',
-      options: [
-        { value: 'entertainment', label: 'Entertainment' },
-        { value: 'education', label: 'Education' },
-        { value: 'music', label: 'Music' },
-        { value: 'gaming', label: 'Gaming' },
-        { value: 'news', label: 'News' },
-        { value: 'sports', label: 'Sports' },
-        { value: 'technology', label: 'Technology' },
-      ] },
+          type: 'select' as const, label: 'Category',
+          options: [
+        { value: 'entertainment',
+          label: 'Entertainment' },
+        { value: 'education',
+          label: 'Education' },
+        { value: 'music',
+          label: 'Music' },
+        { value: 'gaming',
+          label: 'Gaming' },
+        { value: 'news',
+          label: 'News' },
+        { value: 'sports',
+          label: 'Sports' },
+        { value: 'technology',
+          label: 'Technology' }] },
     {
       name: 'visibility',
-      type: 'select' as const, label: 'Visibility',
-      options: [
-        { value: 'public', label: 'Public' },
-        { value: 'unlisted', label: 'Unlisted' },
-        { value: 'private', label: 'Private' },
-      ] },
+          type: 'select' as const, label: 'Visibility',
+          options: [
+        { value: 'public',
+          label: 'Public' },
+        { value: 'unlisted',
+          label: 'Unlisted' },
+        { value: 'private',
+          label: 'Private' }] },
     {
       name: 'thumbnail',
-      type: 'file' as const, label: 'Thumbnail (Optional)',
-      accept: 'image/*',
-      placeholder: 'Select thumbnail image' },
-  ];
+          type: 'file' as const, label: 'Thumbnail (Optional)',
+          accept: 'image/*',
+      placeholder: 'Select thumbnail image' }];
 
   // Video edit form configuration
   const editFormFields = uploadFormFields.filter((field) => field.name !== 'videoFile');
@@ -208,16 +217,15 @@ return;
   // Get initial values for edit form
   const getEditFormInitialValues = () => {
     if (!selectedVideo) {
-return {};
-}
+return {
+        }}
 
     return {
       title: selectedVideo.title,
-      description: selectedVideo.description || '',
+          description: selectedVideo.description || '',
       tags: selectedVideo.tags?.join(', ') || '',
       category: selectedVideo.category || '',
-      visibility: selectedVideo.visibility || 'public' };
-  };
+          visibility: selectedVideo.visibility || 'public' }};
 
   // Custom video card with management actions
   // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }) => (
@@ -273,9 +281,9 @@ return {};
   // Tab counts
   const tabCounts = {
     all: videos.length,
-    published: videos.filter((v) => v.visibility === 'public').length,
+          published: videos.filter((v) => v.visibility === 'public').length,
     unlisted: videos.filter((v) => v.visibility === 'unlisted').length,
-    private: videos.filter((v) => v.visibility === 'private').length,
+          private: videos.filter((v) => v.visibility === 'private').length,
     drafts: videos.filter((v) => v.visibility === 'private').length };
 
   return (

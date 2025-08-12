@@ -1,6 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -27,11 +27,11 @@ export interface DataFetchErrorBoundaryProps {
 type Props = DataFetchErrorBoundaryProps;
 
 interface State {
-  hasError: boolean;
+  hasError: boolean;,
   error: Error | null;
-  errorInfo: ErrorInfo | null;
+  errorInfo: ErrorInfo | null;,
   retryCount: number;
-  isRetrying: boolean;
+  isRetrying: boolean
 }
 
 /**
@@ -46,28 +46,27 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
+          error: null,
       errorInfo: null,
-      retryCount: 0,
-      isRetrying: false };
-  }
+          retryCount: 0,
+      isRetrying: false }}
 
   static getDerivedStateFromError(error: Error): Partial<State> {
     return {
       hasError: true,
-      error };
-  }
+      error }}
 
-  override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+  override componentDidCatch(error: Error,
+          errorInfo: ErrorInfo): void {
     const componentError = createComponentError(
       'DataFetchErrorBoundary',
       'Data fetching component error',
       error,
       JSON.stringify({
         dataType: this.props.dataType,
-        retryCount: this.state.retryCount,
+          retryCount: this.state.retryCount,
         isOnline: navigator.onLine,
-        componentStack: errorInfo.componentStack })
+          componentStack: errorInfo.componentStack })
     );
 
     conditionalLogger.error(
@@ -91,7 +90,7 @@ export class DataFetchErrorBoundary extends Component<Props, State> {
 
       conditionalLogger.debug('Retrying data fetch component', {
         dataType: this.props.dataType,
-        attempt: this.state.retryCount + 1,
+          attempt: this.state.retryCount + 1,
         isOnline: navigator.onLine });
 
       // Add a small delay to prevent immediate retry

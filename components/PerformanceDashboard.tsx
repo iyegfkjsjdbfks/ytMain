@@ -4,10 +4,10 @@ import { useCallback, useEffect, useState, memo, FC } from 'react';
 import { performanceMonitor } from '../utils/performance';
 
 interface PerformanceMetric {
-  name: string;
+  name: string;,
   value: number;
-  timestamp: number;
-  type: 'render' | 'api' | 'user-interaction' | 'navigation';
+  timestamp: number;,
+  type: 'render' | 'api' | 'user-interaction' | 'navigation'
 }
 
 interface PerformanceDashboardProps {
@@ -31,7 +31,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
       const formattedMetrics: PerformanceMetric[] = Object.entries(allMetrics).map(([name, value]) => ({
         name,
         value: typeof value === 'number' ? value : 0,
-        timestamp: Date.now(),
+          timestamp: Date.now(),
         type: name.includes('render') ? 'render' :
               name.includes('api') ? 'api' :
               name.includes('click') || name.includes('hover') ? 'user-interaction' : 'navigation' }));
@@ -50,8 +50,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
         return 'bottom-4 left-4';
       case 'bottom-right':
         return 'bottom-4 right-4';
-      default:
-        return 'top-4 right-4';
+      default: return 'top-4 right-4'
     }
   };
 
@@ -65,8 +64,7 @@ const PerformanceDashboard: React.FC<PerformanceDashboardProps> = memo(({
         return 'text-purple-600';
       case 'navigation':
         return 'text-orange-600';
-      default:
-        return 'text-gray-600';
+      default: return 'text-gray-600'
     }
   };
 

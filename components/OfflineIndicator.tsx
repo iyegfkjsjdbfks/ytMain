@@ -34,8 +34,7 @@ const OfflineIndicator: FC<OfflineIndicatorProps> = ({ className = '' }) => {
     return () => {
       window.removeEventListener('online', handleOnline as EventListener);
       window.removeEventListener('offline', handleOffline as EventListener);
-    };
-  }, []);
+    }}, []);
 
   // Auto-hide offline message after 5 seconds when back online
   useEffect(() => {

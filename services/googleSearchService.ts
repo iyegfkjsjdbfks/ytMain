@@ -24,10 +24,10 @@ interface GoogleSearchItem {
     cse_thumbnail?: Array<{
       src: string;
       width: string;
-      height: string;
+      height: string
     }>;
     cse_image?: Array<{
-      src: string;
+      src: string
     }>;
     videoobject?: Array<{
       embedurl?: string;
@@ -81,7 +81,7 @@ interface GoogleSearchResponse {
   kind: string;
   url: {
     type: string;
-    template: string;
+    template: string
   };
   queries: {
     request: Array<{
@@ -93,7 +93,7 @@ interface GoogleSearchResponse {
       inputEncoding: string;
       outputEncoding: string;
       safe: string;
-      cx: string;
+      cx: string
     }>;
     nextPage?: Array<{
       title: string;
@@ -104,17 +104,17 @@ interface GoogleSearchResponse {
       inputEncoding: string;
       outputEncoding: string;
       safe: string;
-      cx: string;
+      cx: string
     }>;
   };
   context: {
-    title: string;
+    title: string
   };
   searchInformation: {
     searchTime: number;
     formattedSearchTime: string;
     totalResults: string;
-    formattedTotalResults: string;
+    formattedTotalResults: string
   };
   items?: GoogleSearchItem;
 }
@@ -123,7 +123,7 @@ interface GoogleSearchResponse {
 interface YouTubeSearchItem {
   id: {
     kind: string;
-    videoId: string;
+    videoId: string
   };
   snippet: {
     publishedAt: string;
@@ -138,7 +138,7 @@ interface YouTubeSearchItem {
     };
     channelTitle: string;
     liveBroadcastContent: string;
-    publishTime: string;
+    publishTime: string
   };
 }
 
@@ -149,9 +149,9 @@ interface YouTubeSearchResponse {
   regionCode: string;
   pageInfo: {
     totalResults: number;
-    resultsPerPage: number;
+    resultsPerPage: number
   };
-  items: YouTubeSearchItem;
+  items: YouTubeSearchItem
 }
 
 // Enhanced YouTube Video Details API response
@@ -201,7 +201,7 @@ interface YouTubeVideoDetails {
 interface YouTubeVideoDetailsResponse {
   kind: string;
   etag: string;
-  items: YouTubeVideoDetails;
+  items: YouTubeVideoDetails
 }
 
 // YouTube Channel Details API response
@@ -223,14 +223,14 @@ interface YouTubeChannelDetails {
     viewCount: string;
     subscriberCount: string;
     hiddenSubscriberCount: boolean;
-    videoCount: string;
+    videoCount: string
   };
 }
 
 interface YouTubeChannelDetailsResponse {
   kind: string;
   etag: string;
-  items: YouTubeChannelDetails;
+  items: YouTubeChannelDetails
 }
 
 // YouTube video result type
@@ -252,7 +252,7 @@ export interface YouTubeSearchResult {
   commentCount?: number;
   tags?: string;
   categoryId?: string;
-  isYouTube: true;
+  isYouTube: true
 }
 
 // Google Custom Search result type
@@ -276,8 +276,8 @@ export interface GoogleSearchResult {
   tags?: string;
   categoryId?: string;
   isYouTube: true;
-  isShort?: boolean; // Whether the video is a YouTube Short
-  source: 'google-search';
+  isShort?: boolean; // Whether the video is a YouTube Short,
+  source: 'google-search'
 }
 
 // Combined search result type
@@ -288,7 +288,7 @@ export interface CombinedSearchResult {
 }
 
 // Convert YouTube Data API result to YouTube video result with enhanced metadata
-const convertToYouTubeResult = (
+const convertToYouTubeResult = (,
   item: YouTubeSearchItem,
   videoDetails?: YouTubeVideoDetails,
   channelDetails?: YouTubeChannelDetails,
@@ -328,7 +328,7 @@ const convertToYouTubeResult = (
 };
 
 // Convert Google Custom Search result to YouTube video result with YouTube API as primary, Google Custom Search as fallback
-const convertToGoogleSearchResult = (
+const convertToGoogleSearchResult = (,
   item: GoogleSearchItem,
   videoDetails?: YouTubeVideoDetails,
   channelDetails?: YouTubeChannelDetails,
@@ -736,8 +736,7 @@ export const searchYouTubeVideos = async (query: any): Promise<YouTubeSearchResu
     // Fetch enhanced metadata in parallel
     const [videoDetailsMap, channelDetailsMap] = await Promise.all([
       fetchVideoDetails(videoIds),
-      fetchChannelDetails(channelIds),
-    ]);
+      fetchChannelDetails(channelIds)]);
 
     // Convert YouTube API results to our format with enhanced metadata
     const youtubeResults = data.items.map((item: any) => {

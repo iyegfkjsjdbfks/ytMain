@@ -4,19 +4,19 @@ import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ArrowsPointingO
 import { ActionButton } from '../ui';
 
 interface VideoControlsProps {
-  isPlaying: boolean;
+  isPlaying: boolean;,
   isMuted: boolean;
-  isFullscreen: boolean;
+  isFullscreen: boolean;,
   volume: number;
-  currentTime: number;
+  currentTime: number;,
   duration: number;
-  playbackRate: number;
+  playbackRate: number;,
   onPlayPause: () => void;
-  onMuteToggle: () => void;
-  onVolumeChange: (volume: any) => void;
-  onSeek: (time: any) => void;
+  onMuteToggle: () => void;,
+  onVolumeChange: (volume: any) => void;,
+  onSeek: (time: any) => void;,
   onFullscreenToggle: () => void;
-  onPlaybackRateChange: (rate: any) => void;
+  onPlaybackRateChange: (rate: any) => void;,
   onSettingsToggle: () => void;
   className?: string;
 }

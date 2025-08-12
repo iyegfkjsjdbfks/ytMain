@@ -65,8 +65,7 @@ return `0:${seconds.toString().padStart(2, '0')}`;
           day: 'numeric' });
       case 'relative':
         return dateUtils.formatTimeAgo(targetDate);
-      default:
-        return targetDate.toLocaleDateString();
+      default: return targetDate.toLocaleDateString()
     }
   } };
 
@@ -107,15 +106,14 @@ return '0 B';
 
 // String Utilities
 export const stringUtils = {
-  // truncate function moved to src/lib/utils.ts to avoid duplication
-
+  // truncate function moved to src/lib/utils.ts to avoid duplication,
   capitalize: (text: any): string => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   },
 
   camelCase: (text: any): string => {
     return text
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, (word: any, index: number) => {
+      .replace(/(?:^\w|[A-Z]|\b\w)/g(word: any, index: number) => {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
       })
       .replace(/\s+/g, '');
@@ -162,8 +160,7 @@ export const mediaUtils = {
     const patterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/,
       /youtube\.com\/embed\/([\w-]+)/,
-      /youtube\.com\/v\/([\w-]+)/,
-    ];
+      /youtube\.com\/v\/([\w-]+)/];
 
     for (const pattern of patterns) {
       const match = url.match(pattern);
@@ -335,8 +332,8 @@ export const storageUtils = {
 
 // Performance Utilities
 export const performanceUtils = {
-  debounce: <T extends (...args: unknown[]) => unknown>(
-    func: T,
+  debounce: <T extends (...args: unknown[]) => unknown>(,
+  func: T,
     delay: any): (...args: Parameters<T>) => void => {
     let timeoutId: ReturnType<typeof setTimeout>;
     return (...args: Parameters<T>) => {
@@ -345,8 +342,8 @@ export const performanceUtils = {
     };
   },
 
-  throttle: <T extends (...args: unknown[]) => unknown>(
-    func: T,
+  throttle: <T extends (...args: unknown[]) => unknown>(,
+  func: T,
     delay: any): (...args: Parameters<T>) => void => {
     let lastCall = 0;
     return (...args: Parameters<T>) => {

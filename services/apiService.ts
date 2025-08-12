@@ -11,7 +11,7 @@ export interface ApiResponse<T = any> {
   status: number;
   statusText: string;
   headers: Headers;
-  timestamp: number;
+  timestamp: number
 }
 
 export interface ApiError {
@@ -225,8 +225,8 @@ export class ApiService {
   }
 
   // Main request method
-  async request<T = any>(
-    url: any,
+  async request<T = any>(,
+  url: any,
     config: RequestConfig = {},
   ): Promise<ApiResponse<T>> {
     const fullConfig = { ...this.defaultConfig, ...config };
@@ -308,8 +308,7 @@ export class ApiService {
             // If interceptor returns non-Error, create a proper Error with name
             interceptedError = this.createError(
               result?.message || 'Intercepted error',
-              (result as any)?.status || 0,
-              (result as any)?.code || 'INTERCEPTED_ERROR',
+              (result as any)?.status || 0(result as any)?.code || 'INTERCEPTED_ERROR',
               result,
             );
           }
@@ -317,7 +316,7 @@ export class ApiService {
 
         // Track error
         const duration = performance.now() - startTime;
-        performanceMonitor.trackApiCall(interceptedConfig.url, duration, (interceptedError as any).status || 0);
+        performanceMonitor.trackApiCall(interceptedConfig.url, duration(interceptedError as any).status || 0);
 
         throw interceptedError;
       }
@@ -325,8 +324,8 @@ export class ApiService {
   }
 
   // Execute the actual HTTP request
-  private async executeRequest<T>(
-    config: RequestConfig & { url: string },
+  private async executeRequest<T>(,
+  config: RequestConfig & { url: string },
     requestId: any): Promise<ApiResponse<T>> {
     const { url, method = 'GET', headers = {}, body, timeout, retries = 0, retryDelay = 1000 } = config;
 
@@ -365,7 +364,7 @@ export class ApiService {
     const timeoutId = setTimeout(() => timeoutController.abort(), timeout);
 
     // Combine signals
-    const combinedSignal = this.combineAbortSignals([,;
+    const combinedSignal = this.combineAbortSignals([
       config.signal,
       timeoutController.signal
     ].filter(Boolean) as AbortSignal);
@@ -474,8 +473,8 @@ export class ApiService {
     return `${url}?${params.toString()}`;
   }
 
-  private createError(
-    message: any,
+  private createError(,
+  message: any,
     status?: number,
     code?: string,
     details: any?,
@@ -529,8 +528,8 @@ export class ApiService {
   }
 
   // File upload with progress
-  async uploadFile<T = any>(
-    url: any,
+  async uploadFile<T = any>(,
+  url: any,
     file: File,
     config?: RequestConfig & {
       fieldName?: string;
@@ -569,7 +568,7 @@ export class ApiService {
   async healthCheck(endpoint = '/health'): Promise<{
     status: 'healthy' | 'unhealthy';
     responseTime: number;
-    timestamp: number;
+    timestamp: number
   }> {
     const startTime = performance.now();
 

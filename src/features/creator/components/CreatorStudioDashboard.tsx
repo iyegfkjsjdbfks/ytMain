@@ -7,140 +7,140 @@ const VideoCameraIconWrapper: React.FC<{ className?: string }> = ({
   className }) => <VideoCameraIcon className={className} />;
 
 interface DashboardMetrics {
-  views: {
+  views: {,
     total: number;
-    change: number;
-    trend: 'up' | 'down';
+    change: number;,
+    trend: 'up' | 'down'
   };
-  watchTime: {
-    total: number; // in seconds
-    change: number;
-    trend: 'up' | 'down';
+  watchTime: {,
+    total: number; // in seconds,
+          change: number;,
+    trend: 'up' | 'down'
   };
-  subscribers: {
+  subscribers: {,
     total: number;
-    change: number;
-    trend: 'up' | 'down';
+    change: number;,
+    trend: 'up' | 'down'
   };
-  revenue: {
+  revenue: {,
     total: number;
-    change: number;
-    trend: 'up' | 'down';
-  };
-}
+    change: number;,
+    trend: 'up' | 'down'
+  }}
 
 interface RecentVideo {
-  id: string;
+  id: string;,
   title: string;
-  thumbnail: string;
+  thumbnail: string;,
   views: number;
-  likes: number;
+  likes: number;,
   comments: number;
-  publishedAt: string;
+  publishedAt: string;,
   status: 'published' | 'processing' | 'scheduled' | 'draft';
-  visibility: 'public' | 'unlisted' | 'private';
+  visibility: 'public' | 'unlisted' | 'private'
 }
 
 interface Notification {
-  id: string;
+  id: string;,
   type: 'milestone' | 'comment' | 'copyright' | 'monetization' | 'system';
-  title: string;
+  title: string;,
   message: string;
-  timestamp: string;
+  timestamp: string;,
   isRead: boolean;
-  priority: 'low' | 'medium' | 'high';
+  priority: 'low' | 'medium' | 'high'
 }
 
 interface QuickAction {
-  id: string;
+  id: string;,
   title: string;
-  description: string;
+  description: string;,
   icon: React.ComponentType<{ className?: string }>;
-  action: () => void;
-  color: string;
+  action: () => void;,
+  color: string
 }
 
 export const CreatorStudioDashboard: React.FC = () => {
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('30d');
 
   // Mock data
-  const metrics: DashboardMetrics = {
-    views: { total: 1250000, change: 12.5, trend: 'up' },
-    watchTime: { total: 45000000, change: 8.3, trend: 'up' },
-    subscribers: { total: 125000, change: -2.1, trend: 'down' },
-    revenue: { total: 3450, change: 15.7, trend: 'up' } };
+  const metrics: DashboardMetrics = {,
+    views: { total: 1250000,
+          change: 12.5, trend: 'up' },
+          watchTime: { total: 45000000,
+          change: 8.3, trend: 'up' },
+          subscribers: { total: 125000,
+          change: -2.1, trend: 'down' },
+          revenue: { total: 3450,
+          change: 15.7, trend: 'up' } };
 
   const recentVideos: RecentVideo[] = [
     {
       id: '1',
-      title: 'How to Build a React App in 2024',
+          title: 'How to Build a React App in 2024',
       thumbnail: 'https://picsum.photos/160/90?random=1',
-      views: 125000,
+          views: 125000,
       likes: 8900,
-      comments: 1200,
+          comments: 1200,
       publishedAt: '2024-01-15T10:00:00Z',
-      status: 'published',
+          status: 'published',
       visibility: 'public' },
     {
       id: '2',
-      title: 'Advanced TypeScript Tips',
+          title: 'Advanced TypeScript Tips',
       thumbnail: 'https://picsum.photos/160/90?random=2',
-      views: 98000,
+          views: 98000,
       likes: 7200,
-      comments: 890,
+          comments: 890,
       publishedAt: '2024-01-10T14:30:00Z',
-      status: 'published',
+          status: 'published',
       visibility: 'public' },
     {
       id: '3',
-      title: 'CSS Grid vs Flexbox',
+          title: 'CSS Grid vs Flexbox',
       thumbnail: 'https://picsum.photos/160/90?random=3',
-      views: 0,
+          views: 0,
       likes: 0,
-      comments: 0,
+          comments: 0,
       publishedAt: '2024-01-20T09:00:00Z',
-      status: 'scheduled',
-      visibility: 'public' },
-  ];
+          status: 'scheduled',
+      visibility: 'public' }];
 
   const notifications: Notification[] = [
     {
       id: '1',
-      type: 'milestone',
+          type: 'milestone',
       title: 'Congratulations!',
-      message: 'Your video "React Tutorial" reached 100K views!',
+          message: 'Your video "React Tutorial" reached 100K views!',
       timestamp: '2024-01-15T12:00:00Z',
-      isRead: false,
+          isRead: false,
       priority: 'high' },
     {
       id: '2',
-      type: 'comment',
+          type: 'comment',
       title: 'New comment',
-      message: 'Someone commented on your video "TypeScript Guide"',
+          message: 'Someone commented on your video "TypeScript Guide"',
       timestamp: '2024-01-15T11:30:00Z',
-      isRead: false,
+          isRead: false,
       priority: 'medium' },
     {
       id: '3',
-      type: 'copyright',
+          type: 'copyright',
       title: 'Copyright claim',
-      message: 'A copyright claim was made on your video',
+          message: 'A copyright claim was made on your video',
       timestamp: '2024-01-14T16:20:00Z',
-      isRead: true,
-      priority: 'high' },
-  ];
+          isRead: true,
+      priority: 'high' }];
 
   const quickActions: QuickAction[] = [
     {
       id: '1',
-      title: 'Upload Video',
+          title: 'Upload Video',
       description: 'Upload a new video to your channel',
-      icon: VideoCameraIconWrapper,
+          icon: VideoCameraIconWrapper,
       action: () => {
         // Handle upload video action
       },
-      color: 'bg-purple-500' },
-  ];
+      color: 'bg-purple-500' }];
 
   const formatNumber = (num: any): string => {
     if (num >= 1000000) {
@@ -167,9 +167,8 @@ export const CreatorStudioDashboard: React.FC = () => {
       case 'scheduled':
         return 'text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300';
       case 'draft':
-        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
-      default:
-        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
+        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';,
+      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
     }
   };
 
@@ -185,8 +184,7 @@ export const CreatorStudioDashboard: React.FC = () => {
         return CurrencyDollarIcon;
       case 'system':
         return BellIcon;
-      default:
-        return BellIcon;
+      default: return BellIcon
     }
   };
 

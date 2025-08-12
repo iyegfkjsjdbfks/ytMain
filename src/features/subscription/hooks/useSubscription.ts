@@ -10,7 +10,7 @@ export interface SubscriptionData {
   channelAvatar: string;
   subscribedAt: string;
   notificationLevel: 'all' | 'personalized' | 'none';
-  isSubscribed: boolean;
+  isSubscribed: boolean
 }
 
 export function useSubscription(channelId: any) {

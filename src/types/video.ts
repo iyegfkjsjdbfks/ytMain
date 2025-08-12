@@ -2,14 +2,14 @@ export interface VideoQuality {
   name: string;
   value: string;
   resolution: string;
-  bitrate: string;
+  bitrate: string
 }
 
 export interface Subtitle {
   language: string;
   languageCode: string;
   url: string;
-  isDefault: boolean;
+  isDefault: boolean
 }
 
 export interface Chapter {
@@ -58,12 +58,12 @@ export interface Video {
     likeCount: string;
     dislikeCount: string;
     favoriteCount: string;
-    commentCount: string;
+    commentCount: string
   };
   topicDetails?: {
     topicIds: string;
     relevantTopicIds: string;
-    topicCategories: string;
+    topicCategories: string
   };
   contentDetails?: {
     duration: string;
@@ -109,24 +109,24 @@ export interface Video {
       codec: string;
       bitrateBps: string;
       rotation: string;
-      vendor: string;
+      vendor: string
     }>;
     audioStreams: Array<{
       channelCount: number;
       codec: string;
       bitrateBps: string;
-      vendor: string;
+      vendor: string
     }>;
     durationMs: string;
     bitrateBps: string;
-    creationTime: string;
+    creationTime: string
   };
   processingDetails?: {
     processingStatus: string;
     processingProgress?: {
       partsTotal: string;
       partsProcessed: string;
-      timeLeftMs: string;
+      timeLeftMs: string
     };
     processingFailureReason?: string;
     fileDetailsAvailability?: string;
@@ -141,7 +141,7 @@ export interface Video {
     processingHints?: string;
     tagSuggestions?: Array<{
       tag: string;
-      categoryRestricts: string;
+      categoryRestricts: string
     }>;
     editorSuggestions?: string;
   };
@@ -157,10 +157,10 @@ export interface Video {
     string,
     {
       title: string;
-      description: string;
+      description: string
     }
   >;
-  // Required timestamp fields
+  // Required timestamp fields,
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string
 }

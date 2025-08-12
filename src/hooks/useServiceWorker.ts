@@ -13,7 +13,7 @@ interface ServiceWorkerState {
   isUpdating: boolean;
   registration: ServiceWorkerRegistration | null;
   waitingWorker: ServiceWorker | null;
-  error: string | null;
+  error: string | null
 }
 
 interface UseServiceWorkerReturn {
@@ -34,7 +34,7 @@ interface UseServiceWorkerReturn {
   checkForUpdates: () => Promise<void>;
   getCacheInfo: () => Promise<{
     caches: string;
-    totalSize: number;
+    totalSize: number
   }>;
 }
 
@@ -201,7 +201,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
   // Get cache information
   const getCacheInfo = useCallback(async (): Promise<{
     caches: string;
-    totalSize: number;
+    totalSize: number
   }> => {
     if (!('caches' in window)) {
       return { caches: [], totalSize: 0 };
@@ -267,8 +267,7 @@ export const useServiceWorker = (): UseServiceWorkerReturn => {
             newWorker.addEventListener('statechange', ( as EventListener) => {
               if (
                 newWorker.state === 'installed' &&,
-                navigator.serviceWorker.controller,
-              ) {
+                navigator.serviceWorker.controller) {
                 // New service worker is available
                 setState(prev => ({
                   ...prev,

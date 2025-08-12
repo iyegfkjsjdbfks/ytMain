@@ -20,7 +20,7 @@ interface AlertRule {
   threshold: number;
   severity: 'low' | 'medium' | 'high' | 'critical';
   cooldown: number; // minutes,
-  actions: AlertAction;
+  actions: AlertAction
 }
 
 interface AlertAction {
@@ -33,20 +33,20 @@ interface HealthCheck {
   check: () => Promise<{ healthy: boolean; details?: any }>;
   interval: number; // seconds,
   timeout: number; // seconds,
-  retries: number;
+  retries: number
 }
 
 interface QualityGate {
   name: string;
   rules: QualityRule;
-  blocking: boolean;
+  blocking: boolean
 }
 
 interface QualityRule {
   metric: string;
   operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte';
   threshold: number;
-  message: string;
+  message: string
 }
 
 /**
@@ -143,7 +143,7 @@ return metrics;
     min: number;
     max: number;
     p95: number;
-    p99: number;
+    p99: number
   } {
     const metrics = this.getMetrics(name, timeRange);
     const values = metrics.map(m => m.value).sort((a, b) => a - b);
@@ -238,7 +238,7 @@ continue;
 
     for (const [name, healthCheck] of this.healthChecks) {
       try {
-        const result = await Promise.race([,;
+        const result = await Promise.race([
           healthCheck.check(),
           new Promise<{ healthy: boolean }>((_, reject) =>
             setTimeout(() => reject(new Error('Timeout')), healthCheck.timeout * 1000),
@@ -271,7 +271,7 @@ continue;
   exportData(): {
     metrics: Record<string, MetricData[]>;
     alerts: AlertRule;
-    timestamp: number;
+    timestamp: number
   } {
     return {
       metrics: Object.fromEntries(this.metrics),
@@ -303,8 +303,8 @@ continue;
       id: 'high-error-rate',
       name: 'High Error Rate',
       condition: (value, threshold) => value > threshold,
-      threshold: 0.05, // 5%
-      severity: 'critical',
+      threshold: 0.05, // 5%,
+  severity: 'critical',
       cooldown: 1,
       actions: [{ type: 'console', _config: {} }] });
   }
@@ -375,7 +375,7 @@ return { healthy: true };
     this.addQualityGate({
       name: 'performance',
       blocking: true,
-      rules: [,
+      rules: [
         {
           metric: 'page-load-time',
           operator: 'lt',
@@ -397,7 +397,7 @@ return { healthy: true };
     this.addQualityGate({
       name: 'reliability',
       blocking: true,
-      rules: [,
+      rules: [
         {
           metric: 'error-rate',
           operator: 'lt',
@@ -539,7 +539,7 @@ return undefined;
       case 'eq': return value === rule.threshold;
       case 'gte': return value >= rule.threshold;
       case 'lte': return value <= rule.threshold;
-      default: return false;
+      default: return false
     }
   }
 
@@ -596,7 +596,7 @@ return undefined;
     const events = ['click', 'scroll', 'keydown', 'touchstart'];
 
     events.forEach(eventType => {
-      document.addEventListener(eventType, (event) => {
+      document.addEventListener(eventType(event) => {
         if (!this.isTracking) {
 return undefined;
 }
@@ -707,7 +707,7 @@ class CodeQualityMetrics {
     accessibility;
     security;
   }> {
-    const [bundle, performance, accessibility, security] = await Promise.all([,;
+    const [bundle, performance, accessibility, security] = await Promise.all([
       this.bundleAnalyzer.analyze(),
       this.collectPerformanceMetrics(),
       this.collectAccessibilityMetrics(),
@@ -759,7 +759,7 @@ class BundleAnalyzer {
     totalSize: number;
     gzippedSize: number;
     chunks: Array<{ name: string; size: number }>;
-    duplicates: string;
+    duplicates: string
   }> {
     // This would integrate with webpack-bundle-analyzer or similar
     // For now, return mock data
@@ -795,6 +795,6 @@ export type {
   QualityRule };
 
 // Export classes for custom implementations
-export { APMSystem,;
+export { APMSystem;
   RUMSystem,
   CodeQualityMetrics, BundleAnalyzer };

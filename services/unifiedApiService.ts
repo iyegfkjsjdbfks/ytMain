@@ -11,7 +11,7 @@ interface ApiConfig {
   apiKey?: string;
   timeout: number;
   retryAttempts: number;
-  retryDelay: number;
+  retryDelay: number
 }
 
 const defaultConfig: ApiConfig = {
@@ -69,12 +69,11 @@ return null;
 
 // Unified Error Types
 export class ApiError extends Error {
-  constructor(
-    message: any,
+  constructor(,
+  message: any,
     public status?: number,
     public code?: string,
-    public details: any?,
-  ) {
+    public details: any?) {
     super(message);
     this.name = 'ApiError';
   }
@@ -102,7 +101,7 @@ type ErrorInterceptor = (error: Error) => Error | Promise<Error>;
 interface Interceptors {
   request: RequestInterceptor;
   response: ResponseInterceptor;
-  error: ErrorInterceptor;
+  error: ErrorInterceptor
 }
 
 // Unified API Service
@@ -150,8 +149,8 @@ class UnifiedApiService {
   }
 
   // Core request method with unified error handling
-  private async makeRequest<T>(
-    endpoint: any,
+  private async makeRequest<T>(,
+  endpoint: any,
     options: RequestInit = {},
     cacheKey?: string,
     cacheTTL?: number,
@@ -181,8 +180,8 @@ class UnifiedApiService {
     }
   }
 
-  private async executeRequest<T>(
-    endpoint: any,
+  private async executeRequest<T>(,
+  endpoint: any,
     options: RequestInit,
     cacheKey?: string,
     cacheTTL?: number,

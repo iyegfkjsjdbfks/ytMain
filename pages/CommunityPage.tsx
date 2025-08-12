@@ -6,30 +6,29 @@ import { ShareIcon } from '@heroicons/react/24/outline';
 const HeartIconSolid = HeartSolidIcon;
 
 interface CommunityPost {
-  id: string;
+  id: string;,
   type: 'text' | 'image' | 'poll' | 'video';
   content: string;
   imageUrl?: string;
   videoUrl?: string;
   pollOptions?: Array<{ id: string; text: string; votes: number }>;
-  likes: number;
+  likes: number;,
   comments: number;
-  shares: number;
+  shares: number;,
   isLiked: boolean;
-  createdAt: Date;
+  createdAt: Date;,
   engagement: {
-    views: number;
+    views: number;,
     clickThroughRate: number;
-  };
-}
+  }}
 
 interface CommunityStats {
-  totalPosts: number;
+  totalPosts: number;,
   totalEngagement: number;
-  averageLikes: number;
+  averageLikes: number;,
   averageComments: number;
-  topPerformingPost: string;
-  reachGrowth: number;
+  topPerformingPost: string;,
+  reachGrowth: number
 }
 
 const formatDate = (date: Date) => {
@@ -63,23 +62,23 @@ const CommunityPage: React.FC = () => {
 return;
 }
 
-    const newPost: CommunityPost = {
+    const newPost: CommunityPost = {,
       id: `post-${Date.now()}`,
-      type: newPostType,
+          type: newPostType,
       content: newPostContent,
       ...(newPostType === 'image' && { imageUrl: '/api/placeholder/600/400' }),
-      pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt, idx) => ({
+          pollOptions: newPostType === 'poll' ? pollOptions.filter((opt) => opt.trim()).map((opt, idx) => ({
         id: `option-${idx}`,
-        text: opt,
+          text: opt,
         votes: 0 })) : [],
-      likes: 0,
+          likes: 0,
       comments: 0,
-      shares: 0,
+          shares: 0,
       isLiked: false,
-      createdAt: new Date(),
-      engagement: {
+          createdAt: new Date(),
+      engagement: {,
         views: 0,
-        clickThroughRate: 0 } };
+          clickThroughRate: 0 } };
 
     setPosts([newPost, ...posts]);
     setNewPostContent('');
@@ -90,9 +89,9 @@ return;
   const toggleLike = (postId: any) => {
     setPosts(posts.map(post =>
       post.id === postId
-        ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
-        : post,
-    ));
+        ? { ...post, isLiked: !post.isLiked,
+          likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
+        : post));
   };
 
   // Generate mock data
@@ -105,8 +104,7 @@ return;
         'Which topic should I cover next?',
         'Thank you for 100K subscribers! 🎉 This journey has been incredible.',
         'Quick tip: Always backup your footage before editing!',
-        "New video dropping tomorrow! Can you guess what it's about? 🤔",
-      ];
+        "New video dropping tomorrow! Can you guess what it's about? 🤔"];
 
       const pollQuestions = [
         {
@@ -117,8 +115,7 @@ return;
           options: ['Morning', 'Afternoon', 'Evening', 'Late night'] },
         {
           content: 'Which collaboration would you like to see?',
-          options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'] },
-      ];
+          options: ['Tech reviewer', 'Gaming channel', 'Lifestyle vlogger', 'Educational creator'] }];
 
       return Array.from({ length: 12 }, (_, i) => {
         const type = postTypes[Math.floor(Math.random() * postTypes.length)] || 'text';
@@ -129,11 +126,12 @@ return;
         if (type === 'poll') {
           const pollQuestion = pollQuestions[Math.floor(Math.random() * pollQuestions.length)];
           if (pollQuestion) {
-            const { content: pollContentValue, options: pollOptionsData } = pollQuestion;
+            const { content: pollContentValue,
+          options: pollOptionsData } = pollQuestion;
             content = pollContentValue;
             pollOptions = pollOptionsData.map((option, idx) => ({
               id: `option-${idx}`,
-              text: option,
+          text: option,
               votes: Math.floor(Math.random() * 500) + 50 }));
           }
         }
@@ -149,27 +147,27 @@ return;
           shares: Math.floor(Math.random() * 100) + (i < 3 ? 20 : 5),
           isLiked: Math.random() > 0.7,
           createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-          engagement: {
+          engagement: {,
             views: Math.floor(Math.random() * 10000) + (i < 3 ? 2000 : 500),
-            clickThroughRate: Math.random() * 15 + 2 } };
-      }).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+          clickThroughRate: Math.random() * 15 + 2 } }}).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     };
 
     const generateMockStats = (posts: CommunityPost): CommunityStats => {
-      const totalLikes = posts.reduce((sum: any, post: any) => sum + post.likes, 0);
-      const totalComments = posts.reduce((sum: any, post: any) => sum + post.comments, 0);
-      const topPost = posts.length > 0 ? posts.reduce((top: any, post: any) =>
-        post.likes > (top?.likes || 0) ? post : top, posts[0],
-      ) : null;
+      const totalLikes = posts.reduce((sum: any,
+          post: any) => sum + post.likes, 0);
+      const totalComments = posts.reduce((sum: any,
+          post: any) => sum + post.comments, 0);
+      const topPost = posts.length > 0 ? posts.reduce((top: any,
+          post: any) =>
+        post.likes > (top?.likes || 0) ? post : top, posts[0]) : null;
 
       return {
         totalPosts: posts.length,
-        totalEngagement: totalLikes + totalComments,
+          totalEngagement: totalLikes + totalComments,
         averageLikes: posts.length > 0 ? Math.round(totalLikes / posts.length) : 0,
-        averageComments: posts.length > 0 ? Math.round(totalComments / posts.length) : 0,
+          averageComments: posts.length > 0 ? Math.round(totalComments / posts.length) : 0,
         topPerformingPost: topPost ? `${topPost.content.substring(0, 50)  }...` : 'No posts yet',
-        reachGrowth: Math.random() * 20 + 5 };
-    };
+        reachGrowth: Math.random() * 20 + 5 }};
 
     setTimeout(() => {
       const mockPosts = generateMockPosts();
@@ -347,7 +345,8 @@ return;
                     <button
                       onClick={() => {
                         // Show post options menu
-                      }}
+                      
+        }}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                       title="Post options"
                     >
@@ -384,7 +383,8 @@ return;
                               </div>
                               <div
                                 className="absolute left-0 top-0 h-full bg-blue-100 dark:bg-blue-900 rounded-lg transition-all duration-300"
-                                style={{ width: `${percentage}%`, zIndex: -1 }}
+                                style={{ width: `${percentage}%`,
+          zIndex: -1 }}
                               />
                             </div>
                           );
@@ -413,7 +413,8 @@ return;
                     <button
                       onClick={() => {
                         // Show comments for this post
-                      }}
+                      
+        }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       title="View comments"
                     >
@@ -424,7 +425,8 @@ return;
                     <button
                       onClick={() => {
                         // Share this post
-                      }}
+                      
+        }}
                       className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                       title="Share post"
                     >

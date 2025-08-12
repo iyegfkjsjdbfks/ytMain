@@ -2,24 +2,28 @@ import React, { useState, FC } from 'react';
 // Import statements fixed
 
 interface Platform {
-  id: string;
+  id: string;,
   name: string;
   enabled: boolean;
   streamKey?: string;
 }
 
 interface MultiplatformStreamingProps {
-  onPlatformToggle?: (platformId: any, enabled: any) => void;
+  onPlatformToggle?: (platformId: any,
+          enabled: any) => void
 }
 
 export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
   onPlatformToggle }) => {
   const [platforms, setPlatforms] = useState<Platform[]>([
-    { id: 'youtube', name: 'YouTube', enabled: true },
-    { id: 'twitch', name: 'Twitch', enabled: false },
-    { id: 'facebook', name: 'Facebook', enabled: false },
-    { id: 'twitter', name: 'Twitter', enabled: false },
-  ]);
+    { id: 'youtube',
+          name: 'YouTube', enabled: true },
+    { id: 'twitch',
+          name: 'Twitch', enabled: false },
+    { id: 'facebook',
+          name: 'Facebook', enabled: false },
+    { id: 'twitter',
+          name: 'Twitter', enabled: false }]);
 
   const togglePlatform = (platformId: any) => {
     setPlatforms(prev =>
@@ -27,8 +31,7 @@ export const MultiplatformStreaming: React.FC<MultiplatformStreamingProps> = ({
         if (platform.id === platformId) {
           const enabled = !platform.enabled;
           onPlatformToggle?.(platformId, enabled);
-          return { ...platform, enabled };
-        }
+          return { ...platform, enabled }}
         return platform;
       })
     );

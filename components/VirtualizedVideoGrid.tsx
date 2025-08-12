@@ -24,14 +24,16 @@ interface VirtualizedVideoGridProps {
 }
 
 interface GridItemProps {
-  columnIndex, rowIndex: number;
-  style: React.CSSProperties, data: {
-    videos: Video, columnsPerRow: number;
+  columnIndex, rowIndex: number;,
+  style: React.CSSProperties,
+          data: {,
+    videos: Video,
+          columnsPerRow: number;
     onVideoClick?: (video: Video) => void;
-    onChannelClick?: (channelId: any) => void;
-    cardSize: 'sm' | 'md' | 'lg', showChannel: boolean; showDescription: boolean
-  };
-}
+    onChannelClick?: (channelId: any) => void;,
+    cardSize: 'sm' | 'md' | 'lg',
+          showChannel: boolean; showDescription: boolean;
+  }}
 
 const GridItem: React.FC<GridItemProps> = ({ columnIndex, rowIndex, style, data }) => {
   const {
@@ -75,19 +77,20 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
   cardSize = 'md',
   showChannel = true,
   showDescription = false }) => {
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [containerSize, setContainerSize] = useState({ width: 0,
+          height: 0 });
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
 
   // Calculate grid dimensions based on card size and container width
   const { columnsPerRow, columnWidth, rowHeight } = useMemo(() => {
     const cardWidths = {
       sm: 280,
-      md: 320, lg: 360
+          md: 320, lg: 360;
     };
 
     const cardHeights = {
       sm: 240,
-      md: 280, lg: 320
+          md: 280, lg: 320;
     };
 
     const cardWidth = cardWidths[cardSize];
@@ -100,9 +103,9 @@ const VirtualizedVideoGrid: React.FC<VirtualizedVideoGridProps> = ({
 
     return {
       columnsPerRow: cols,
-      columnWidth: actualColumnWidth, rowHeight: cardHeight + gap
-    };
-  }, [containerSize.width, cardSize]);
+          columnWidth: actualColumnWidth, rowHeight: cardHeight + gap
+    
+        }}, [containerSize.width, cardSize]);
 
   const rowCount = Math.ceil(videos.length / columnsPerRow);
 
@@ -135,8 +138,7 @@ return;
         onLoadMore();
       }
     },
-    [hasMore, loading, onLoadMore],
-  );
+    [hasMore, loading, onLoadMore]);
 
   // Grid item data
   const itemData = useMemo(
@@ -148,8 +150,7 @@ return;
       cardSize,
       showChannel,
       showDescription }),
-    [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription],
-  );
+    [videos, columnsPerRow, onVideoClick, onChannelClick, cardSize, showChannel, showDescription]);
 
   if (videos.length === 0 && !loading) {
     return (

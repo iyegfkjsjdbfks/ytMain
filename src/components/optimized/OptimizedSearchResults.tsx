@@ -7,7 +7,7 @@ import { useDebounce, useIntersectionObserver } from '../../hooks/usePerformance
 import type { Video } from '../../types/core';
 
 interface OptimizedSearchResultsProps {
-  videos: Video;
+  videos: Video;,
   query: string;
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
@@ -18,13 +18,12 @@ interface OptimizedSearchResultsProps {
 
 interface SearchResultItemProps {
   index;
-  style: React.CSSProperties;
+  style: React.CSSProperties;,
   data: {
-    videos: Video;
-    onVideoClick: (video: Video) => void;
+    videos: Video;,
+    onVideoClick: (video: Video) => void;,
     query: string;
-  };
-}
+  }}
 
 const SearchResultItem = memo<SearchResultItemProps>(
   ({ index, style, data }) => {
@@ -141,6 +140,7 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
           if (entry) {
             setContainerHeight(Math.min(entry.contentRect.height, 800));
           }
+        
         });
 
         resizeObserver.observe(node);
@@ -148,22 +148,22 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
 
         return () => {
           resizeObserver.disconnect();
-        };
-      }
+        }}
       return undefined;
     }, []);
 
     // Intersection observer for load more
     const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.1,
-      rootMargin: '100px' });
+          rootMargin: '100px' });
 
     // Load more when intersecting
     useEffect(() => {
       if (isIntersecting && hasMore && !loading && onLoadMore) {
         onLoadMore();
       }
-    }, [isIntersecting, hasMore, loading, onLoadMore]);
+    
+        }, [isIntersecting, hasMore, loading, onLoadMore]);
 
     // Memoized list data
     const listData = useMemo(
@@ -179,8 +179,8 @@ const OptimizedSearchResults = memo<OptimizedSearchResultsProps>(
       performanceMonitor.startMeasure('search-results-render');
       return () => {
         performanceMonitor.endMeasure('search-results-render');
-      };
-    }, [videos.length]);
+      
+        }}, [videos.length]);
 
     if (loading && videos.length === 0) {
       return (

@@ -17,12 +17,12 @@ import { ChartBarIcon } from '@heroicons/react/24/outline';
 import { SignalSlashIcon } from '@heroicons/react/24/outline';
 
 interface ChannelTabContentProps {
-  activeTab: string;
+  activeTab: string;,
   channel: Channel | null;
-  videos: Video;
+  videos: Video;,
   playlists: PlaylistSummary;
-  communityPosts: CommunityPost;
-  onPlaylistTabSelect: () => void;
+  communityPosts: CommunityPost;,
+  onPlaylistTabSelect: () => void
 }
 
 const ChannelTabContent = ({
@@ -124,7 +124,7 @@ const ChannelTabContent = ({
         </div>
       );
     }
-    return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no playlists yet.</p>;
+    return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">This channel has no playlists yet.</p>
   };
 
   const renderCommunityTab = () => {
@@ -151,7 +151,7 @@ const ChannelTabContent = ({
         </div>
       );
     }
-    return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">No community posts yet.</p>;
+    return <p className="text-neutral-600 dark: text-neutral-400 mt-8 text-center py-10 text-lg">No community posts yet.</p>
   };
 
   const renderAboutTab = () => {
@@ -203,8 +203,7 @@ return null;
     case 'PLAYLISTS': return renderPlaylistsTab();
     case 'COMMUNITY': return renderCommunityTab();
     case 'ABOUT': return renderAboutTab();
-    default:
-      return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">Content not available.</p>;
+    default: return <p className="text-neutral-600 dark:text-neutral-400 mt-8 text-center py-10 text-lg">Content not available.</p>
   }
 };
 

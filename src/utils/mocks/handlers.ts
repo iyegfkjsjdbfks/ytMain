@@ -24,8 +24,7 @@ const mockYouTubeVideoResponse = {
         duration: 'PT5M30S',
         dimension: '2d',
         definition: 'hd',
-        caption: 'false' } },
-  ] };
+        caption: 'false' } }] };
 
 const mockYouTubeChannelResponse = {
   items: [
@@ -43,8 +42,7 @@ const mockYouTubeChannelResponse = {
       statistics: {
         subscriberCount: '10000',
         videoCount: '50',
-        viewCount: '500000' } },
-  ] };
+        viewCount: '500000' } }] };
 
 export const handlers = [
   http.get('https://www.googleapis.com/youtube/v3/videos', () => {
@@ -56,8 +54,7 @@ export const handlers = [
       items: [
         {
           id: { videoId: 'test-video-1' },
-          snippet: { title: 'Test Search Result' } },
-      ] });
+          snippet: { title: 'Test Search Result' } }] });
   }),
 
   http.get('https://www.googleapis.com/youtube/v3/channels', () => {
@@ -74,5 +71,4 @@ export const handlers = [
 
   http.get('/api/channels/:id', () => {
     return HttpResponse.json(null);
-  }),
-];
+  })];

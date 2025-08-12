@@ -5,7 +5,7 @@ import type { Video } from '../types/core';
 
 // Define interfaces for offline storage
 interface CachedVideo extends Video {
-  cachedAt: number;
+  cachedAt: number
 }
 
 interface UserAction {
@@ -17,7 +17,7 @@ interface UserAction {
   endpoint: string;
   method: string;
   timestamp: number;
-  synced: boolean;
+  synced: boolean
 }
 
 interface WatchHistoryEntry {
@@ -28,7 +28,7 @@ interface WatchHistoryEntry {
   channelName: string;
   duration: number;
   watchedAt: number;
-  progress: number;
+  progress: number
 }
 
 interface Playlist {
@@ -44,7 +44,7 @@ interface Subscription {
   channelId: string;
   channelName: string;
   channelAvatar: string;
-  subscribedAt: number;
+  subscribedAt: number
 }
 
 interface PendingUpload {
@@ -134,8 +134,8 @@ class OfflineStorage {
     });
   }
 
-  private async getStore(
-    storeName: any,
+  private async getStore(,
+  storeName: any,
     mode: IDBTransactionMode = 'readonly',
   ): Promise<IDBObjectStore> {
     if (!this.db) {
@@ -187,8 +187,8 @@ class OfflineStorage {
   }
 
   // User actions operations (for background sync)
-  async saveUserAction(
-    action: Omit<UserAction, 'id' | 'timestamp' | 'synced'>
+  async saveUserAction(,
+  action: Omit<UserAction, 'id' | 'timestamp' | 'synced'>
   ): Promise<void> {
     const store = await this.getStore('userActions', 'readwrite');
     return new Promise((resolve, reject) => {
@@ -347,8 +347,8 @@ class OfflineStorage {
   }
 
   // Pending uploads operations
-  async savePendingUpload(
-    upload: Omit<PendingUpload, 'id' | 'createdAt' | 'status'>
+  async savePendingUpload(,
+  upload: Omit<PendingUpload, 'id' | 'createdAt' | 'status'>
   ): Promise<number> {
     const store = await this.getStore('pendingUploads', 'readwrite');
     return new Promise((resolve, reject) => {
@@ -376,8 +376,8 @@ class OfflineStorage {
     });
   }
 
-  async updateUploadStatus(
-    id: string,
+  async updateUploadStatus(,
+  id: string,
     status: 'pending' | 'uploading' | 'completed' | 'failed',
   ): Promise<void> {
     const store = await this.getStore('pendingUploads', 'readwrite');
@@ -418,8 +418,8 @@ class OfflineStorage {
   }
 
   // Cleanup operations
-  async cleanupOldData(
-    maxAge: number = 7 * 24 * 60 * 60 * 1000,
+  async cleanupOldData(,
+  maxAge: number = 7 * 24 * 60 * 60 * 1000,
   ): Promise<void> {
     const cutoffTime = Date.now() - maxAge;
 

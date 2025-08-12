@@ -9,7 +9,8 @@ interface StudioVideoGridProps {
   emptyMessage?: string;
   onEdit?: (videoId: any) => void;
   onDelete?: (videoId: any) => void;
-  onVisibilityChange?: (videoId: any, visibility: VideoVisibility) => void;
+  onVisibilityChange?: (videoId: any,
+          visibility: VideoVisibility) => void
 }
 
 /**
@@ -30,7 +31,8 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     VideoVisibility | 'all'
   >('all');
 
-  const handleVideoSelect = (videoId: any, selected: any) => {
+  const handleVideoSelect = (videoId: any,
+          selected: any) => {
     const newSelection = new Set(selectedVideos);
 
     if (selected) {
@@ -73,7 +75,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'short',
+          month: 'short',
       day: 'numeric' });
   };
 
@@ -95,13 +97,14 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
       case 'comments':
         // If we had comments count, we'd use it here
         return 0;
-      case 'date':
-      default:
+      case 'date':,
+  default:
         return (
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
     }
-  });
+  
+        });
 
   // Show loading indicator if data is being fetched
   if (loading) {

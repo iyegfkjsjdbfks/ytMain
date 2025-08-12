@@ -49,7 +49,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
 );
 
 interface EmptyStateProps {
-  title: string;
+  title: string;,
   message: string;
   icon?: React.ReactNode;
   className?: string;

@@ -2,10 +2,10 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
-    env: ProcessEnv;
+    env: ProcessEnv
   }
 }
 
@@ -51,7 +51,7 @@ export const useDebounce = <T>(value: T, delay: any): T => {
 };
 
 // Throttled callback hook
-export const useThrottle = <T extends (...args) => any>(
+export const useThrottle = <T extends (...args) => any>(,
   callback: T,
   delay: any
 ): T => {
@@ -84,7 +84,7 @@ export const useMemoryMonitor = () => {
   const [memoryInfo, setMemoryInfo] = useState<{
     usedJSHeapSize: number;
     totalJSHeapSize: number;
-    jsHeapSizeLimit: number;
+    jsHeapSizeLimit: number
   } | null>(null);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export const useMemoryMonitor = () => {
 };
 
 // Intersection observer for lazy loading
-export const useIntersectionObserver = (
+export const useIntersectionObserver = (,
   options: IntersectionObserverInit = {}
 ) => {
   const [isIntersecting, setIsIntersecting] = useState(false);

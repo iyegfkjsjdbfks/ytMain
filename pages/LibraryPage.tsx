@@ -17,12 +17,12 @@ const MAX_HORIZONTAL_VIDEOS = 8;
 const MAX_PLAYLISTS_GRID = 6;
 
 interface SectionProps {
-  title: string;
+  title: string;,
   icon: React.ReactNode;
-  viewAllLink: string;
+  viewAllLink: string;,
   children: React.ReactNode;
   itemCount?: number;
-  isLoading: boolean;
+  isLoading: boolean;,
   hasContent: boolean;
   emptyMessage: string;
   isPlaylistSection?: boolean;
@@ -119,7 +119,8 @@ function LibraryPage() { // Removed React.FC
         setError('Could not load library content. Please try again later.');
         // Individual loading states will handle UI for sections that might have loaded
       }
-    };
+    
+        };
     fetchAllData();
     window.scrollTo(0, 0);
   }, []);
@@ -205,7 +206,8 @@ function LibraryPage() { // Removed React.FC
               <div className="p-2.5">
                 <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-50 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2 mb-0.5">{playlist.title}</h3>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                  Updated {new Date(playlist.updatedAt).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' })}
+                  Updated {new Date(playlist.updatedAt).toLocaleDateString([], { year: 'numeric',
+          month: 'short', day: 'numeric' })}
                 </p>
               </div>
             </Link>

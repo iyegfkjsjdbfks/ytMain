@@ -3,9 +3,9 @@ import { PaperAirplaneIcon as PaperAirplaneSolidIcon } from '@heroicons/react/24
 const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
 
 interface AddCommentFormProps {
-  currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText: any) => void;
-  maxCommentLength: number;
+  currentUserAvatarUrl: string;,
+  onCommentSubmit: (commentText: any) => void;,
+  maxCommentLength: number
 }
 
 const AddCommentForm: React.FC<AddCommentFormProps> = ({

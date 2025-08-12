@@ -98,7 +98,7 @@ export const useUnifiedShorts = (limit: number = 30) => {
 /**
  * Hook for searching videos using unified service
  */
-export const useUnifiedSearchVideos = (
+export const useUnifiedSearchVideos = (,
   query: any,
   filters = {},
   limit: number = 50

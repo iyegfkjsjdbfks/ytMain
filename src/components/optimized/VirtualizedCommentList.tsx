@@ -5,9 +5,10 @@ import { usePerformanceMonitor } from '../../hooks/usePerformanceOptimization';
 import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
-  comments: Comment;
-  onReply: (commentId: any, content: any) => void;
-  onLike: (commentId: any) => void;
+  comments: Comment;,
+  onReply: (commentId: any,
+          content: any) => void;,
+  onLike: (commentId: any) => void;,
   onDislike: (commentId: any) => void;
   className?: string;
   height?: number;
@@ -15,15 +16,15 @@ interface VirtualizedCommentListProps {
 }
 
 interface CommentItemProps {
-  index: number;
+  index: number;,
   style: React.CSSProperties;
-  data: {
+  data: {,
     comments: Comment;
-    onReply: (commentId: any, content: any) => void;
-    onLike: (commentId: any) => void;
-    onDislike: (commentId: any) => void;
-  };
-}
+    onReply: (commentId: any,
+          content: any) => void;,
+    onLike: (commentId: any) => void;,
+    onDislike: (commentId: any) => void
+  }}
 
 const CommentItem = memo<CommentItemProps>(({ index, style, data }) => {
   const { comments, onReply, onLike, onDislike } = data;

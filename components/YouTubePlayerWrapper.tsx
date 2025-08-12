@@ -24,7 +24,7 @@ interface YouTubePlayerWrapperProps {
   placeholder?: ReactNode;
   // IFrame API specific props
   onPlaybackQualityChange?: (event: Event) => void;
-  onPlaybackRateChange?: (event: Event) => void;
+  onPlaybackRateChange?: (event: Event) => void
 }
 
 // Union type for player methods
@@ -32,23 +32,22 @@ export interface YouTubePlayerWrapperMethods {}
 
 const YouTubePlayerWrapper = forwardRef<YouTubePlayerWrapperMethods, YouTubePlayerWrapperProps>((
   props,
-  _ref,
-) => {
+  _ref) => {
   // YouTubePlayerWrapper rendering
 
   // Create mock video object for YouTubePlayer component
-  const createMockVideo = (videoId: any): YouTubeSearchResult => ({
+  const createMockVideo = (videoId: any): YouTubeSearchResult => ({,
     id: videoId,
-    title: 'Video',
+          title: 'Video',
     description: '',
-    thumbnailUrl: '',
+          thumbnailUrl: '',
     channelName: '',
-    channelId: '',
+          channelId: '',
     channelAvatarUrl: '',
-    videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
-    embedUrl: `https://www.youtube.com/embed/${videoId}`,
-    duration: '0:00',
-    uploadedAt: new Date().toISOString(),
+          videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
+          embedUrl: `https://www.youtube.com/embed/${videoId}`,
+          duration: '0:00',
+          uploadedAt: new Date().toISOString(),
     isYouTube: true as const });
 
   // Use YouTube Player - Best for simple YouTube integration

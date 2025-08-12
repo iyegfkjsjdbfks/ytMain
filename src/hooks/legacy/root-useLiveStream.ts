@@ -116,7 +116,7 @@ export function useLiveStream(streamId?: string) {
   };
 
   const createStream = async (
-    streamData: Partial<LiveStream>
+  streamData: Partial<LiveStream>
   ): Promise<LiveStream | null> => {
     setLoading(true);
     setError(null);
@@ -243,7 +243,7 @@ export function useCreateLiveStream() {
   const [error, setError] = useState<string | null>(null);
 
   const createStream = async (
-    streamData: Partial<LiveStream>
+  streamData: Partial<LiveStream>
   ): Promise<LiveStream | null> => {
     setCreating(true);
     setError(null);

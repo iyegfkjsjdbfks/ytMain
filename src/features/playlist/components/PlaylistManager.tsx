@@ -10,9 +10,9 @@ interface PlaylistManagerProps {
 }
 
 interface CreatePlaylistModalProps {
-  isOpen: boolean;
+  isOpen: boolean;,
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: any) => void
 }
 
 const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
@@ -21,9 +21,9 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
   onSubmit }) => {
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
+          description: '',
     visibility: 'public' as 'public' | 'unlisted' | 'private',
-    tags: [] as string });
+          tags: [] as string });
   const [tagInput, setTagInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,9 +35,9 @@ const CreatePlaylistModal: React.FC<CreatePlaylistModalProps> = ({
     onSubmit(formData);
     setFormData({
       title: '',
-      description: '',
+          description: '',
       visibility: 'public',
-      tags: [] });
+          tags: [] });
     setTagInput('');
     onClose();
   };
@@ -233,9 +233,9 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 
   const handleDuplicatePlaylist = async (playlist: Playlist) => {
     try {
-      const duplicateData: CreatePlaylistData = {
+      const duplicateData: CreatePlaylistData = {,
         title: `${playlist.title} (Copy)`,
-        visibility: playlist.visibility,
+          visibility: playlist.visibility,
         ...(playlist.description && { description: playlist.description }),
         ...(playlist.tags && { tags: playlist.tags }) };
       await createPlaylistMutation.mutate(duplicateData);
@@ -252,8 +252,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
         return <EyeSlashIcon className='w-4 h-4' />;
       case 'private':
         return <EyeSlashIcon className='w-4 h-4' />;
-      default:
-        return <EyeIcon className='w-4 h-4' />;
+      default: return <EyeIcon className='w-4 h-4' />
     }
   };
 

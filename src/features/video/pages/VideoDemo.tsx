@@ -24,9 +24,9 @@ const VideoDemo: React.FC = () => {
     alert(`Delete video: ${videoId}`);
   };
 
-  const handleVisibilityChange = (
-    videoId: any,
-    visibility: VideoVisibility
+  const handleVisibilityChange = (,
+  videoId: any,
+          visibility: VideoVisibility
   ) => {
     alert(`Changed visibility of ${videoId} to ${visibility}`);
   };

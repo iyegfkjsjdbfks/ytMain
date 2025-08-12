@@ -9,13 +9,13 @@ interface LoadingSpinnerProps {
 
 const sizeClasses = {
   sm: 'w-4 h-4',
-  md: 'w-6 h-6',
+          md: 'w-6 h-6',
   lg: 'w-8 h-8',
-  xl: 'w-12 h-12' };
+          xl: 'w-12 h-12' };
 
 const colorClasses = {
   primary: 'text-blue-600',
-  secondary: 'text-gray-600',
+          secondary: 'text-gray-600',
   white: 'text-white' };
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
@@ -28,8 +28,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         className={cn(
           'animate-spin',
           sizeClasses[size],
-          colorClasses[color],
-        )}
+          colorClasses[color])}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

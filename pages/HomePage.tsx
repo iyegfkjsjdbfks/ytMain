@@ -27,14 +27,13 @@ const HomePage: React.FC = () => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory)
   }, [videos, selectedCategory]);
 
   const categories = useMemo(() => [
     'All', 'Music', 'Gaming', 'Sports', 'News', 'Entertainment',
     'Education', 'Technology', 'Travel', 'Food', 'Fashion',
-    'Comedy', 'Science', 'Health', 'Business',
-  ], []);
+    'Comedy', 'Science', 'Health', 'Business'], []);
 
   if (error) {
     return (

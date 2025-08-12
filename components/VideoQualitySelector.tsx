@@ -5,19 +5,19 @@ import { useEffect, useRef, useState, FC, MouseEvent } from 'react';
 import { Cog6ToothIcon, CheckIcon, PlayIcon, SpeakerWaveIcon, SpeakerXMarkIcon, ForwardIcon, BackwardIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/react/24/outline';
 
 export interface VideoQuality {
-  label: string;
+  label: string;,
   value: string;
   resolution: string;
   bitrate?: number;
 }
 
 export interface PlaybackSpeed {
-  label: string;
-  value: number;
+  label: string;,
+  value: number
 }
 
 interface VideoQualitySelectorProps {
-  qualities: VideoQuality;
+  qualities: VideoQuality;,
   currentQuality: string;
   onQualityChange: (quality: any) => void;
   playbackSpeeds?: PlaybackSpeed;
@@ -39,15 +39,22 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   currentQuality,
   onQualityChange,
   playbackSpeeds = [
-    { label: '0.25x', value: 0.25 },
-    { label: '0.5x', value: 0.5 },
-    { label: '0.75x', value: 0.75 },
-    { label: 'Normal', value: 1 },
-    { label: '1.25x', value: 1.25 },
-    { label: '1.5x', value: 1.5 },
-    { label: '1.75x', value: 1.75 },
-    { label: '2x', value: 2 },
-  ],
+    { label: '0.25x',
+          value: 0.25 },
+    { label: '0.5x',
+          value: 0.5 },
+    { label: '0.75x',
+          value: 0.75 },
+    { label: 'Normal',
+          value: 1 },
+    { label: '1.25x',
+          value: 1.25 },
+    { label: '1.5x',
+          value: 1.5 },
+    { label: '1.75x',
+          value: 1.75 },
+    { label: '2x',
+          value: 2 }],
   currentSpeed = 1,
   onSpeedChange,
   volume = 100,
@@ -167,7 +174,8 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 value={volume}
                 onChange={(e) => onVolumeChange?.(parseInt(e.target.value, 10))}
                 className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider-vertical"
-                style={{ writingMode: 'vertical-lr' as const, WebkitAppearance: 'slider-vertical' }}
+                style={{ writingMode: 'vertical-lr' as const,
+          WebkitAppearance: 'slider-vertical' }}
               />
             </div>
           </div>

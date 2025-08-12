@@ -155,7 +155,7 @@ return;
     try {
       const response = await fetch(`/api/videos/${currentVideo.id}/comments`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }) });
 
       const newComment = await response.json();
@@ -238,24 +238,24 @@ describe('Integration Tests', () => {
       if (url.includes('/api/videos') && !url.includes('/comments')) {
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockVideos }) };
-      }
+          json: async () => ({ success: true,
+          data: mockVideos }) }}
 
       if (url.includes('/comments')) {
         if (options?.method === 'POST') {
           const newComment = testUtils.generateMockComment();
           return {
             ok: true,
-            json: async () => ({ success: true, data: newComment }) };
-        }
+          json: async () => ({ success: true,
+          data: newComment }) }}
 
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockComments }) };
-      }
+          json: async () => ({ success: true,
+          data: mockComments }) }}
 
-      return { ok: false, status: 404 };
-    });
+      return { ok: false,
+          status: 404 }});
   });
 
   afterEach(() => {
@@ -307,8 +307,7 @@ describe('Integration Tests', () => {
 
       // Should load comments for new video
       expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining(`/api/videos/${mockVideos[1].id}/comments`),
-      );
+        expect.stringContaining(`/api/videos/${mockVideos[1].id}/comments`));
     });
 
     it('should handle video player interactions', async () => {
@@ -359,8 +358,7 @@ describe('Integration Tests', () => {
           expect.stringContaining('/comments'),
           expect.objectContaining({
             method: 'POST',
-            body: JSON.stringify({ text: 'This is a test comment' }) }),
-        );
+          body: JSON.stringify({ text: 'This is a test comment' }) }));
       });
 
       // Input should be cleared
@@ -432,8 +430,7 @@ describe('Integration Tests', () => {
         'video_completed',
         1,
         expect.objectContaining({
-          videoId: mockVideos[0].id }),
-      );
+          videoId: mockVideos[0].id }));
     });
 
     it('should track watch time', async () => {
@@ -445,7 +442,8 @@ describe('Integration Tests', () => {
 
       // Simulate time update
       const video = screen.getByRole('video');
-      Object.defineProperty(video, 'currentTime', { value: 30, writable: true });
+      Object.defineProperty(video, 'currentTime', { value: 30,
+          writable: true });
       fireEvent.timeUpdate(video);
 
       // Watch time should be tracked internally
@@ -464,8 +462,7 @@ describe('Integration Tests', () => {
       await waitFor(() => {
         expect(consoleSpy).toHaveBeenCalledWith(
           'Failed to load data:',
-          expect.any(Error),
-        );
+          expect.any(Error));
       });
 
       // Should show loading state ends
@@ -544,8 +541,7 @@ describe('Integration Tests', () => {
         expect(global.fetch).toHaveBeenCalledWith(
           expect.any(String),
           expect.objectContaining({
-            body: expect.not.stringContaining('<script>') }),
-        );
+            body: expect.not.stringContaining('<script>') }));
       });
     });
 
@@ -553,12 +549,13 @@ describe('Integration Tests', () => {
       // Mock malicious API response
       global.fetch = vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({
+          json: async () => ({,
           success: true,
           data: {
             ...mockVideos[0],
             title: '<script>alert("XSS")</script>Malicious Title'
-          } }) });
+          } 
+        }) });
 
       customRender(<VideoPage />);
 
@@ -633,8 +630,8 @@ describe('Integration Tests', () => {
         await testUtils.simulateNetworkDelay(2000); // 2 second delay
         return {
           ok: true,
-          json: async () => ({ success: true, data: mockVideos }) };
-      });
+          json: async () => ({ success: true,
+          data: mockVideos }) }});
 
       customRender(<VideoPage />);
 
@@ -646,8 +643,7 @@ describe('Integration Tests', () => {
         () => {
           expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
         },
-        { timeout: 3000 },
-      );
+        { timeout: 3000 });
 
       expect(screen.getByTestId('video-player')).toBeInTheDocument();
     });

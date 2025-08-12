@@ -4,7 +4,7 @@ import { FixedSizeGrid } from 'react-window';
 import type { Video } from '../../types/core';
 
 interface OptimizedVideoGridProps {
-  videos: Video;
+  videos: Video;,
   onVideoClick: (video: Video) => void;
   loading?: boolean;
   className?: string;
@@ -16,14 +16,14 @@ interface OptimizedVideoGridProps {
 // Memoized video item component
 const VideoGridItem = memo<{
   columnIndex;
-  rowIndex: number;
+  rowIndex: number;,
   style: React.CSSProperties;
-  data: {
+  data: {,
     videos: Video;
-    itemsPerRow: number;
-    onVideoClick: (video: Video) => void;
-  };
-}>(({ columnIndex, rowIndex, style, data }) => {
+    itemsPerRow: number;,
+    onVideoClick: (video: Video) => void
+  
+        }}>(({ columnIndex, rowIndex, style, data }) => {
   const { videos, itemsPerRow, onVideoClick } = data;
   const index = rowIndex * itemsPerRow + columnIndex;
   const video = videos[index];
@@ -88,9 +88,8 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
 
       return {
         rowCount: count,
-        columnCount: itemsPerRow,
-        itemWidth: width };
-    }, [videos.length, itemsPerRow, containerWidth]);
+          columnCount: itemsPerRow,
+        itemWidth: width }}, [videos.length, itemsPerRow, containerWidth]);
 
     // Memoized grid data
     const gridData = useMemo(
@@ -109,6 +108,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
           if (entry) {
             setContainerWidth(entry.contentRect.width);
           }
+        
         });
 
         resizeObserver.observe(node);
@@ -116,8 +116,7 @@ const OptimizedVideoGrid = memo<OptimizedVideoGridProps>(
 
         return () => {
           resizeObserver.disconnect();
-        };
-      }
+        }}
       return undefined;
     }, []);
 

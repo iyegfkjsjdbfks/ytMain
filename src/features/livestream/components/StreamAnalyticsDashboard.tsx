@@ -8,7 +8,7 @@ import { ChartBarIcon, EyeIcon, HeartIcon, ChatBubbleLeftRightIcon, CurrencyDoll
  * Props for the StreamAnalyticsDashboard component
  */
 interface StreamAnalyticsDashboardProps {
-  /** Stream ID to fetch analytics for */
+  /** Stream ID to fetch analytics for */,
   streamId: string;
   /** Additional CSS classes */
   className?: string;
@@ -18,7 +18,7 @@ interface StreamAnalyticsDashboardProps {
  * Historical data point structure for charts
  */
 interface HistoricalDataPoint {
-  /** ISO timestamp */
+  /** ISO timestamp */,
   time: string;
   /** Count value for viewers metric */
   count?: number;
@@ -32,21 +32,21 @@ interface HistoricalDataPoint {
  * Complete analytics data structure
  */
 interface AnalyticsData {
-  /** Real-time stream statistics */
+  /** Real-time stream statistics */,
   realTimeStats: LiveStreamStats;
-  /** Historical data for charts */
-  historicalData: {
+  /** Historical data for charts */,
+  historicalData: {,
     viewers: Array<{ time; count: number }>;
     engagement: Array<{ time; rate: number }>;
     revenue: Array<{ time; amount: number }>;
   };
-  /** Audience demographic information */
-  demographics: {
+  /** Audience demographic information */,
+  demographics: {,
     countries: Array<{ name; percentage: number }>;
     devices: Array<{ type; percentage: number }>;
     ageGroups: Array<{ range; percentage: number }>;
   };
-  /** Notable moments during the stream */
+  /** Notable moments during the stream */,
   topMoments: Array<{
     timestamp;
     type: 'peak_viewers' | 'super_chat' | 'viral_moment';
@@ -84,15 +84,15 @@ const formatDuration = (seconds: any): string => {
 const getHealthColor = (health: StreamHealth): string => {
   const healthColors: Record<StreamHealth, string> = {
     excellent: 'text-green-600',
-    good: 'text-blue-600',
+          good: 'text-blue-600',
     fair: 'text-yellow-600',
-    poor: 'text-red-600' };
+          poor: 'text-red-600' };
   return healthColors[health];
 };
 
-const getMetricValue = (
+const getMetricValue = (,
   point: HistoricalDataPoint,
-  metric: MetricType
+          metric: MetricType
 ): number => {
   switch (metric) {
     case 'viewers':
@@ -101,78 +101,88 @@ const getMetricValue = (
       return point.rate ?? 0;
     case 'revenue':
       return point.amount ?? 0;
-    default:
-      return 0;
+    default: return 0
   }
 };
 
 // Mock data generation for development
 const generateMockAnalytics = (): AnalyticsData => ({
-  realTimeStats: {
+  realTimeStats: {,
     viewers: 1247,
-    peakViewers: 2156,
+          peakViewers: 2156,
     averageViewers: 987,
-    duration: 3600,
+          duration: 3600,
     likes: 342,
-    dislikes: 12,
+          dislikes: 12,
     chatMessages: 1567,
-    superChatAmount: 234.5,
+          superChatAmount: 234.5,
     superChatCount: 23,
-    pollVotes: 456,
+          pollVotes: 456,
     qaQuestions: 34,
-    streamHealth: 'excellent',
+          streamHealth: 'excellent',
     bitrate: 4500,
-    frameDrops: 0,
+          frameDrops: 0,
     latency: 1800 },
-  historicalData: {
+          historicalData: {,
     viewers: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      count: Math.floor(Math.random() * 500) + 800 })),
+          count: Math.floor(Math.random() * 500) + 800 })),
     engagement: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      rate: Math.random() * 20 + 10 })),
+          rate: Math.random() * 20 + 10 })),
     revenue: Array.from({ length: 60 }, (_, i) => ({
       time: new Date(Date.now() - (59 - i) * 60000).toISOString(),
-      amount: Math.random() * 50 })) },
-  demographics: {
+          amount: Math.random() * 50 })) },
+  demographics: {,
     countries: [
-      { name: 'United States', percentage: 35 },
-      { name: 'United Kingdom', percentage: 18 },
-      { name: 'Canada', percentage: 12 },
-      { name: 'Australia', percentage: 8 },
-      { name: 'Germany', percentage: 7 },
-      { name: 'Others', percentage: 20 },
-    ],
+      { name: 'United States',
+          percentage: 35 },
+      { name: 'United Kingdom',
+          percentage: 18 },
+      { name: 'Canada',
+          percentage: 12 },
+      { name: 'Australia',
+          percentage: 8 },
+      { name: 'Germany',
+          percentage: 7 },
+      { name: 'Others',
+          percentage: 20 }],
     devices: [
-      { type: 'Desktop', percentage: 45 },
-      { type: 'Mobile', percentage: 40 },
-      { type: 'Tablet', percentage: 10 },
-      { type: 'TV', percentage: 5 },
-    ],
+      { type: 'Desktop',
+          percentage: 45 },
+      { type: 'Mobile',
+          percentage: 40 },
+      { type: 'Tablet',
+          percentage: 10 },
+      { type: 'TV',
+          percentage: 5 }],
     ageGroups: [
-      { range: '13-17', percentage: 15 },
-      { range: '18-24', percentage: 28 },
-      { range: '25-34', percentage: 32 },
-      { range: '35-44', percentage: 15 },
-      { range: '45+', percentage: 10 },
-    ] },
+      { range: '13-17',
+          percentage: 15 },
+      { range: '18-24',
+          percentage: 28 },
+      { range: '25-34',
+          percentage: 32 },
+      { range: '35-44',
+          percentage: 15 },
+      { range: '45+',
+          percentage: 10 }] },
   topMoments: [
     {
       timestamp: 1800,
-      type: 'peak_viewers',
+          type: 'peak_viewers',
       description: 'Peak viewership reached',
-      value: 2156 },
+          value: 2156 },
     {
       timestamp: 2400,
-      type: 'super_chat',
+          type: 'super_chat',
       description: 'Largest Super Chat donation',
-      value: 50 },
+          value: 50 },
     {
       timestamp: 3000,
-      type: 'viral_moment',
+          type: 'viral_moment',
       description: 'Viral clip shared',
-      value: 1000 },
-  ] });
+          value: 1000 }] });
 
 // Custom hook for analytics data management
 const useStreamAnalytics = (
@@ -224,11 +234,9 @@ const useStreamAnalytics = (
 
     return () => {
       clearInterval(interval);
-    };
-  }, [fetchAnalytics, timeRange]);
+    }}, [fetchAnalytics, timeRange]);
 
-  return { analytics, loading, error, refetch: fetchAnalytics };
-};
+  return { analytics, loading, error, refetch: fetchAnalytics }};
 
 // Sub-components for better modularity
 
@@ -236,11 +244,11 @@ const useStreamAnalytics = (
  * Props for the StatsCard component
  */
 interface StatsCardProps {
-  /** Card title/label */
+  /** Card title/label */,
   title: string;
-  /** Main value to display */
+  /** Main value to display */,
   value: string | number;
-  /** Icon component */
+  /** Icon component */,
   icon: ReactNode;
   /** Optional subtitle text */
   subtitle?: string;
@@ -281,8 +289,8 @@ const StatsCard: FC<StatsCardProps> = ({
  * Props for the TopMoments component
  */
 interface TopMomentsProps {
-  /** Array of notable stream moments */
-  moments: AnalyticsData['topMoments'];
+  /** Array of notable stream moments */,
+  moments: AnalyticsData['topMoments']
 }
 
 const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
@@ -294,19 +302,17 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
         return <CurrencyDollarIcon className='h-5 w-5 text-yellow-500' />;
       case 'viral_moment':
         return <TrendingUpIcon className='h-5 w-5 text-green-500' />;
-      default:
-        return <ChartBarIcon className='h-5 w-5 text-gray-500' />;
+      default: return <ChartBarIcon className='h-5 w-5 text-gray-500' />
     }
   };
 
-  const formatMomentValue = (
-    moment: AnalyticsData['topMoments'][0]
+  const formatMomentValue = (,
+  moment: AnalyticsData['topMoments'][0]
   ): string => {
     switch (moment.type) {
       case 'super_chat':
         return `$${moment.value.toFixed(2)}`;
-      default:
-        return formatNumber(moment.value);
+      default: return formatNumber(moment.value)
     }
   };
 
@@ -360,8 +366,8 @@ const TopMoments: React.FC<TopMomentsProps> = ({ moments }) => {
  * Props for the Demographics component
  */
 interface DemographicsProps {
-  /** Audience demographic data */
-  demographics: AnalyticsData['demographics'];
+  /** Audience demographic data */,
+  demographics: AnalyticsData['demographics']
 }
 
 const Demographics: React.FC<DemographicsProps> = ({ demographics }) => (
@@ -472,8 +478,7 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           height: Math.max(height, 2), // Minimum height for visibility
           value,
           time: point.time,
-          id: `chart-${selectedMetric}-${index}` };
-      });
+          id: `chart-${selectedMetric}-${index}` }});
     } catch (error) {
       const componentError = createComponentError(
         'StreamAnalyticsDashboard',
@@ -557,8 +562,8 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
           trend={
             <>
               <TrendingUpIcon className='h-4 w-4 text-green-500 mr-1' />
-              <span className='text-green-600'>
-                Peak: {formatNumber(analytics.realTimeStats.peakViewers)}
+              <span className='text-green-600'>,
+  Peak: {formatNumber(analytics.realTimeStats.peakViewers)}
               </span>
             </>
           }
@@ -635,7 +640,8 @@ const StreamAnalyticsDashboard: FC<StreamAnalyticsDashboardProps> = ({
                 <div
                   key={point.id}
                   className='bg-blue-500 rounded-t hover:bg-blue-600 transition-colors cursor-pointer'
-                  style={{ height: `${point.height}%`, width: '4%' }}
+                  style={{ height: `${point.height}%`,
+          width: '4%' }}
                   title={`${point.value} at ${new Date(point.time).toLocaleTimeString()}`}
                   role='presentation'
                 />

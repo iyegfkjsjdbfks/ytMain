@@ -5,7 +5,7 @@
 interface PerformanceMetrics {
   name: string;
   duration: number;
-  timestamp: number;
+  timestamp: number
 }
 
 class PerformanceMonitor {

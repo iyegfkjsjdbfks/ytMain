@@ -2,7 +2,7 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -22,36 +22,35 @@ const VideoCameraIconSolid = VideoCameraSolidIcon;
 const MicrophoneIconSolid = MicrophoneSolidIcon;
 
 interface LiveStreamSettings {
-  title: string;
+  title: string;,
   description: string;
-  category: string;
+  category: string;,
   privacy: 'public' | 'unlisted' | 'private';
-  enableChat: boolean;
+  enableChat: boolean;,
   enableDonations: boolean;
   maxViewers?: number;
   scheduledStartTime?: string;
 }
 
 interface ChatMessage {
-  id: string;
+  id: string;,
   username: string;
-  message: string;
+  message: string;,
   timestamp: string;
-  isModerator: boolean;
+  isModerator: boolean;,
   isOwner: boolean;
   donation?: {
-    amount: number;
+    amount: number;,
     currency: string;
-  };
-}
+  }}
 
 interface LiveStreamStats {
-  viewers: number;
+  viewers: number;,
   likes: number;
-  messages: number;
+  messages: number;,
   duration: number;
-  peakViewers: number;
-  totalDonations: number;
+  peakViewers: number;,
+  totalDonations: number
 }
 
 interface LiveStreamManagerProps {
@@ -70,20 +69,20 @@ const LiveStreamManager: React.FC<LiveStreamManagerProps> = ({
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [settings, setSettings] = useState<LiveStreamSettings>({
     title: '',
-    description: '',
+          description: '',
     category: 'Gaming',
-    privacy: 'public',
+          privacy: 'public',
     enableChat: true,
-    enableDonations: true });
+          enableDonations: true });
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [stats, setStats] = useState<LiveStreamStats>({
     viewers: 0,
-    likes: 0,
+          likes: 0,
     messages: 0,
-    duration: 0,
+          duration: 0,
     peakViewers: 0,
-    totalDonations: 0 });
+          totalDonations: 0 });
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
@@ -106,8 +105,7 @@ clearInterval(statsInterval.current);
       if (chatInterval.current) {
 clearInterval(chatInterval.current);
 }
-    };
-  }, [stream]);
+    }}, [stream]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -119,11 +117,11 @@ clearInterval(chatInterval.current);
     setIsSettingUp(true);
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
+        video: {,
           width: { ideal: 1920 },
           height: { ideal: 1080 },
           frameRate: { ideal: 30 } },
-        audio: {
+          audio: {,
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true } });
@@ -166,8 +164,8 @@ clearInterval(chatInterval.current);
           viewers,
           duration,
           peakViewers: Math.max(prev.peakViewers, viewers),
-          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0) };
-      });
+          likes: prev.likes + (Math.random() > 0.9 ? 1 : 0) 
+        }});
     }, 2000);
 
     // Start chat simulation
@@ -175,7 +173,8 @@ clearInterval(chatInterval.current);
       if (Math.random() > 0.7) {
         generateRandomChatMessage();
       }
-    }, 3000);
+    
+        }, 3000);
 
     onStreamStart?.(settings);
   };
@@ -241,22 +240,21 @@ clearInterval(chatInterval.current);
       'This is so cool!',
       'Thanks for streaming!',
       'How long have you been doing this?',
-      'Your setup is incredible!',
-    ];
+      'Your setup is incredible!'];
 
     const username = usernames[Math.floor(Math.random() * usernames.length)] || 'Anonymous';
     const message = messages[Math.floor(Math.random() * messages.length)] || 'Hello!';
     const isDonation = Math.random() > 0.95;
 
-    const newMessage: ChatMessage = {
+    const newMessage: ChatMessage = {,
       id: Date.now().toString(),
       username,
       message: isDonation ? `${message} 💰` : message,
-      timestamp: new Date().toISOString(),
+          timestamp: new Date().toISOString(),
       isModerator: Math.random() > 0.9,
-      isOwner: false,
+          isOwner: false,
       ...(isDonation && {
-        donation: {
+        donation: {,
           amount: Math.floor(Math.random() * 50) + 5,
           currency: 'USD' } }) };
 
@@ -264,7 +262,7 @@ clearInterval(chatInterval.current);
     setStats(prev => ({
       ...prev,
       messages: prev.messages + 1,
-      totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0) }));
+          totalDonations: prev.totalDonations + (newMessage.donation?.amount || 0) }));
   };
 
   const sendChatMessage = () => {
@@ -272,13 +270,13 @@ clearInterval(chatInterval.current);
 return;
 }
 
-    const message: ChatMessage = {
+    const message: ChatMessage = {,
       id: Date.now().toString(),
-      username: 'You',
+          username: 'You',
       message: newMessage,
-      timestamp: new Date().toISOString(),
+          timestamp: new Date().toISOString(),
       isModerator: false,
-      isOwner: true };
+          isOwner: true };
 
     setChatMessages(prev => [...prev.slice(-49), message]);
     setStats(prev => ({ ...prev, messages: prev.messages + 1 }));

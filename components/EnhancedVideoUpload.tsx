@@ -5,24 +5,25 @@ import { useCallback, useRef, useState, FC, ChangeEvent } from 'react';
 import { CloudArrowUpIcon, XMarkIcon, PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon, PhotoIcon, VideoCameraIcon, TagIcon } from '@heroicons/react/24/outline';
 
 export interface VideoUploadData {
-  title: string;
+  title: string;,
   description: string;
-  tags: string;
+  tags: string;,
   category: string;
   thumbnail?: File | null;
   customThumbnail?: string | null;
   visibility: 'public' | 'unlisted' | 'private' | 'scheduled';
   scheduledDate?: string;
-  monetization: boolean;
+  monetization: boolean;,
   ageRestriction: boolean;
-  commentsEnabled: boolean;
+  commentsEnabled: boolean;,
   likesVisible: boolean;
   language: string;
   captions?: File;
 }
 
 interface EnhancedVideoUploadProps {
-  onUpload: (file: File, data: VideoUploadData) => Promise<void>;
+  onUpload: (file: File,
+          data: VideoUploadData) => Promise<void>;
   onCancel?: () => void;
   maxSizeGB?: number;
   allowedFormats?: string;
@@ -45,15 +46,15 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
 
   const [uploadData, setUploadData] = useState<VideoUploadData>({
     title: '',
-    description: '',
+          description: '',
     tags: [],
-    category: '',
+          category: '',
     visibility: 'public',
-    monetization: false,
+          monetization: false,
     ageRestriction: false,
-    commentsEnabled: true,
+          commentsEnabled: true,
     likesVisible: true,
-    language: 'en' });
+          language: 'en' });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -62,8 +63,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
   const categories = [
     'Education', 'Entertainment', 'Gaming', 'Music', 'News & Politics',
     'Science & Technology', 'Sports', 'Travel & Events', 'People & Blogs',
-    'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals',
-  ];
+    'Comedy', 'Film & Animation', 'Autos & Vehicles', 'Pets & Animals'];
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -129,7 +129,7 @@ const EnhancedVideoUpload: React.FC<EnhancedVideoUploadProps> = ({
       setUploadData(prev => ({
         ...prev,
         thumbnail: file,
-        customThumbnail: URL.createObjectURL(file) }));
+          customThumbnail: URL.createObjectURL(file) }));
     }
   };
 
@@ -189,7 +189,7 @@ return '0 Bytes';
 
   const getVideoDuration = (): string => {
     if (!videoRef.current) {
-return '0:00';
+return '0: 00'
 }
     const { duration } = videoRef.current;
     const minutes = Math.floor(duration / 60);
@@ -463,7 +463,7 @@ return '0:00';
                       onClick={() => setUploadData(prev => ({
                         ...prev,
                         thumbnail: null,
-                        customThumbnail: null }))}
+          customThumbnail: null }))}
                       className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                     >
                       <XMarkIcon className="w-3 h-3" />
@@ -537,7 +537,8 @@ return '0:00';
 
                 {uploadData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {uploadData.tags.map((tag: string, index: number) => (
+                    {uploadData.tags.map((tag: string,
+          index: number) => (
                       <span
                         key={index}
                         className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

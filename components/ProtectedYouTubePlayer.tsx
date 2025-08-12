@@ -16,7 +16,7 @@ interface ProtectedYouTubePlayerProps {
   className?: string;
   onReady?: (event: Event) => void;
   onStateChange?: (event: Event) => void;
-  onError?: (event: Event) => void;
+  onError?: (event: Event) => void
 }
 
 /**

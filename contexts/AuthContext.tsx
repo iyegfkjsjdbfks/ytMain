@@ -1,23 +1,25 @@
 import { createContext, useContext, useState, useEffect, type ReactNode, FC, ReactNode } from 'react';
 
 interface User {
-  id: string;
+  id: string;,
   username: string;
   email: string;
   avatar?: string;
   isVerified: boolean;
   subscriberCount?: number;
-  createdAt: string;
+  createdAt: string
 }
 
 interface AuthContextType {
-  user: User | null;
+  user: User | null;,
   isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (email: any, password: any) => Promise<boolean>;
-  register: (username: any, email: any, password: any) => Promise<boolean>;
+  isLoading: boolean;,
+  login: (email: any,
+          password: any) => Promise<boolean>;,
+  register: (username: any,
+          email: any, password: any) => Promise<boolean>;,
   logout: () => void;
-  updateProfile: (updates: Partial<User>) => Promise<boolean>;
+  updateProfile: (updates: Partial<User>) => Promise<boolean>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -31,7 +33,7 @@ export const useAuth = () => {
 };
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -48,7 +50,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (storedUser && token) {
           setUser(JSON.parse(storedUser));
         }
-      } catch (error) {
+      
+        } catch (error) {
         console.error('Error checking auth status:', error);
         // Clear invalid data
         localStorage.removeItem('youtube_clone_user');
@@ -61,14 +64,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-  const login = async (email: any, password: any): Promise<boolean> => {
+  const login = async (email: any,
+          password: any): Promise<boolean> => {
     try {
       setIsLoading(true);
 
       // Mock authentication - in real app, this would be an API call
       if (email && password.length >= 6) {
         const username = email.split('@')[0] || 'user';
-        const mockUser: User = {
+        const mockUser: User = {,
           id: `user_${Date.now()}`,
           username,
           email,
@@ -96,13 +100,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (username: any, email: any, password: any): Promise<boolean> => {
+  const register = async (username: any,
+          email: any, password: any): Promise<boolean> => {
     try {
       setIsLoading(true);
 
       // Mock registration - in real app, this would be an API call
       if (username && email && password.length >= 6) {
-        const mockUser: User = {
+        const mockUser: User = {,
           id: `user_${Date.now()}`,
           username,
           email,

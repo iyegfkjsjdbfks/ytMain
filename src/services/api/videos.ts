@@ -57,8 +57,8 @@ export const videoApi = {
   /**
    * Get trending videos
    */
-  async getTrendingVideos(
-    params: PaginatedRequest = {}
+  async getTrendingVideos(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/trending', params);
   },
@@ -66,8 +66,8 @@ export const videoApi = {
   /**
    * Get featured videos
    */
-  async getFeaturedVideos(
-    params: PaginatedRequest = {}
+  async getFeaturedVideos(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/featured', params);
   },
@@ -75,8 +75,8 @@ export const videoApi = {
   /**
    * Get videos by category
    */
-  async getVideosByCategory(
-    category: any,
+  async getVideosByCategory(,
+  category: any,
     params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/category', {
@@ -87,8 +87,8 @@ export const videoApi = {
   /**
    * Get videos from subscribed channels
    */
-  async getSubscriptionFeed(
-    params: PaginatedRequest = {}
+  async getSubscriptionFeed(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/subscriptions', params);
   },
@@ -103,8 +103,8 @@ export const videoApi = {
   /**
    * Get trending shorts
    */
-  async getTrendingShorts(
-    params: PaginatedRequest = {}
+  async getTrendingShorts(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Short[]>> {
     return api.getPaginated<Short>('/api/shorts/trending', params);
   },
@@ -112,8 +112,8 @@ export const videoApi = {
   /**
    * Search videos
    */
-  async searchVideos(
-    params: SearchVideosParams
+  async searchVideos(,
+  params: SearchVideosParams
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/search', params);
   },
@@ -121,8 +121,8 @@ export const videoApi = {
   /**
    * Get related videos
    */
-  async getRelatedVideos(
-    videoId: any,
+  async getRelatedVideos(,
+  videoId: any,
     params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>(`/api/videos/${videoId}/related`, params);
@@ -131,8 +131,8 @@ export const videoApi = {
   /**
    * Upload a new video
    */
-  async uploadVideo(
-    videoFile: File,
+  async uploadVideo(,
+  videoFile: File,
     data: VideoUploadData
   ): Promise<ApiResponse<Video>> {
     return api.upload<Video>('/api/videos/upload', videoFile, data);
@@ -141,8 +141,8 @@ export const videoApi = {
   /**
    * Update video metadata
    */
-  async updateVideo(
-    videoId: any,
+  async updateVideo(,
+  videoId: any,
     data: Partial<VideoUploadData>
   ): Promise<ApiResponse<Video>> {
     return api.put<Video>(`/api/videos/${videoId}`, data);
@@ -186,8 +186,8 @@ export const videoApi = {
   /**
    * Report a video
    */
-  async reportVideo(
-    videoId: any,
+  async reportVideo(,
+  videoId: any,
     reason: any,
     description?: string
   ): Promise<ApiResponse<void>> {
@@ -206,8 +206,8 @@ export const videoApi = {
   /**
    * Get video recommendations for user
    */
-  async getRecommendations(
-    params: PaginatedRequest = {}
+  async getRecommendations(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/recommendations', params);
   },
@@ -215,8 +215,8 @@ export const videoApi = {
   /**
    * Get watch history
    */
-  async getWatchHistory(
-    params: PaginatedRequest = {}
+  async getWatchHistory(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/history', params);
   },
@@ -224,8 +224,8 @@ export const videoApi = {
   /**
    * Add video to watch history
    */
-  async addToWatchHistory(
-    videoId: any,
+  async addToWatchHistory(,
+  videoId: any,
     watchTime?: number
   ): Promise<ApiResponse<void>> {
     return api.post<void>('/api/videos/history', { videoId, watchTime });
@@ -248,8 +248,8 @@ export const videoApi = {
   /**
    * Get liked videos
    */
-  async getLikedVideos(
-    params: PaginatedRequest = {}
+  async getLikedVideos(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/liked', params);
   },
@@ -257,8 +257,8 @@ export const videoApi = {
   /**
    * Get saved videos (Watch Later)
    */
-  async getSavedVideos(
-    params: PaginatedRequest = {}
+  async getSavedVideos(,
+  params: PaginatedRequest = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.getPaginated<Video>('/api/videos/saved', params);
   },

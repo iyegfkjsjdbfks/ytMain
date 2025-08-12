@@ -64,8 +64,8 @@ class SearchService {
   /**
    * Perform a comprehensive search
    */
-  async search(
-    query: any,
+  async search(,
+  query: any,
     filters: SearchFilters = {},
     page: number = 1,
     limit: number = 20
@@ -80,8 +80,8 @@ class SearchService {
   /**
    * Get search suggestions as user types
    */
-  async getSearchSuggestions(
-    query: any,
+  async getSearchSuggestions(,
+  query: any,
     limit: number = 10
   ): Promise<ApiResponse<SearchSuggestion[]>> {
     return api.get('/api/search/suggestions', { q: query, limit });
@@ -100,8 +100,8 @@ class SearchService {
   /**
    * Search videos specifically
    */
-  async searchVideos(
-    query: any,
+  async searchVideos(,
+  query: any,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
     limit: number = 20
@@ -116,8 +116,8 @@ class SearchService {
   /**
    * Search channels specifically
    */
-  async searchChannels(
-    query: any,
+  async searchChannels(,
+  query: any,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
     limit: number = 20
@@ -132,8 +132,8 @@ class SearchService {
   /**
    * Search playlists specifically
    */
-  async searchPlaylists(
-    query: any,
+  async searchPlaylists(,
+  query: any,
     filters: Pick<SearchFilters, 'sortBy' | 'region' | 'language'> = {},
     page: number = 1,
     limit: number = 20
@@ -148,8 +148,8 @@ class SearchService {
   /**
    * Advanced video search with AI-powered features
    */
-  async advancedVideoSearch(
-    query: any,
+  async advancedVideoSearch(,
+  query: any,
     options: {
       semanticSearch?: boolean; // Use AI to understand intent
       visualSearch?: boolean; // Search by visual content
@@ -170,8 +170,8 @@ class SearchService {
   /**
    * Search by image (reverse image search)
    */
-  async searchByImage(
-    image: File,
+  async searchByImage(,
+  image: File,
     filters: SearchFilters = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.upload('/api/search/image', image, filters);
@@ -180,8 +180,8 @@ class SearchService {
   /**
    * Search by audio/music
    */
-  async searchByAudio(
-    audio: File,
+  async searchByAudio(,
+  audio: File,
     filters: SearchFilters = {}
   ): Promise<ApiResponse<Video[]>> {
     return api.upload('/api/search/audio', audio, filters);
@@ -190,8 +190,8 @@ class SearchService {
   /**
    * Get search history for user
    */
-  async getSearchHistory(
-    limit: number = 50
+  async getSearchHistory(,
+  limit: number = 50
   ): Promise<ApiResponse<SearchAnalytics[]>> {
     return api.get('/api/search/history', { limit });
   }
@@ -206,8 +206,8 @@ class SearchService {
   /**
    * Save search query
    */
-  async saveSearch(
-    query: any,
+  async saveSearch(,
+  query: any,
     filters: SearchFilters = {}
   ): Promise<ApiResponse<void>> {
     return api.post('/api/search/save', { query, filters });
@@ -223,7 +223,7 @@ class SearchService {
         query: string;
         filters: SearchFilters;
         createdAt: string;
-        lastUsed: string;
+        lastUsed: string
       }>
     >
   > {
@@ -247,7 +247,7 @@ class SearchService {
       clickThroughRate: number;
       averagePosition: number;
       impressions: number;
-      clicks: number;
+      clicks: number
     }>
   > {
     return api.get('/api/search/analytics', { timeframe });
@@ -256,8 +256,8 @@ class SearchService {
   /**
    * Get related searches
    */
-  async getRelatedSearches(
-    query: any,
+  async getRelatedSearches(,
+  query: any,
     limit: number = 10
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/related', { q: query, limit });
@@ -280,8 +280,8 @@ class SearchService {
   /**
    * Auto-complete search query
    */
-  async autocomplete(
-    query: any,
+  async autocomplete(,
+  query: any,
     limit: number = 8
   ): Promise<ApiResponse<string[]>> {
     return api.get('/api/search/autocomplete', { q: query, limit });
@@ -290,8 +290,8 @@ class SearchService {
   /**
    * Search within a specific channel
    */
-  async searchInChannel(
-    channelId: any,
+  async searchInChannel(,
+  channelId: any,
     query: any,
     filters: Omit<SearchFilters, 'type'> = {},
     page: number = 1,
@@ -307,8 +307,8 @@ class SearchService {
   /**
    * Search within a playlist
    */
-  async searchInPlaylist(
-    playlistId: any,
+  async searchInPlaylist(,
+  playlistId: any,
     query: any,
     page: number = 1,
     limit: number = 20
@@ -322,8 +322,8 @@ class SearchService {
   /**
    * Get search suggestions based on user's watch history
    */
-  async getPersonalizedSuggestions(
-    limit: number = 10
+  async getPersonalizedSuggestions(,
+  limit: number = 10
   ): Promise<ApiResponse<SearchSuggestion[]>> {
     return api.get('/api/search/suggestions/personalized', { limit });
   }
@@ -331,8 +331,8 @@ class SearchService {
   /**
    * Report search quality issue
    */
-  async reportSearchIssue(
-    query: any,
+  async reportSearchIssue(,
+  query: any,
     issue:
       | 'irrelevant_results'
       | 'missing_content'
@@ -355,7 +355,7 @@ class SearchService {
       uniqueQueries: number;
       averageResultsPerQuery: number;
       popularCategories: Array<{ category: string; percentage: number }>;
-      searchSuccessRate: number;
+      searchSuccessRate: number
     }>
   > {
     return api.get('/api/search/metrics');
@@ -364,8 +364,8 @@ class SearchService {
   /**
    * Export search data
    */
-  async exportSearchData(
-    format: 'csv' | 'json',
+  async exportSearchData(,
+  format: 'csv' | 'json',
     timeframe: '7d' | '30d' | '90d' = '30d'
   ): Promise<ApiResponse<string>> {
     return api.get('/api/search/export', { format, timeframe });

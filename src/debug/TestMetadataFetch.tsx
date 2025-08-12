@@ -12,7 +12,7 @@ const TestMetadataFetch: React.FC = () => {
   // Test with standard React Query hook
   const {
     data: reactQueryData,
-    isLoading: reactQueryLoading,
+          isLoading: reactQueryLoading,
     error: reactQueryError } = useQuery({
     queryKey: ['test-video', 'google-search-bnVUHWCynig'],
     queryFn: async () => {
@@ -41,7 +41,8 @@ const TestMetadataFetch: React.FC = () => {
 
       const result = await fetchSingleVideoFromGoogleSearch('bnVUHWCynig');
       logger.debug('📊 Direct API result:', result);
-      setResult({ type: 'direct', data: result });
+      setResult({ type: 'direct',
+          data: result });
     } catch (err) {
       logger.error('❌ Direct API error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
@@ -71,7 +72,8 @@ const TestMetadataFetch: React.FC = () => {
         'google-search-bnVUHWCynig'
       );
       logger.debug('📊 Unified service result:', result);
-      setResult({ type: 'unified', data: result });
+      setResult({ type: 'unified',
+          data: result });
     } catch (err) {
       logger.error('❌ Unified service error:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');

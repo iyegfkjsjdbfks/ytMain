@@ -34,15 +34,14 @@ const categories = [
   'Comedy',
   'Science',
   'Travel',
-  'Food',
-];
+  'Food'];
 
 const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showSections] = useState({
     shorts: true,
-    trending: true,
+          trending: true,
     subscriptions: true });
 
   // Use optimized video data hook
@@ -59,13 +58,14 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
     if (selectedCategory === 'All') {
       return videos;
     }
-    return videos.filter((video: any) => video.category === selectedCategory);
+    return videos.filter((video: any) => video.category === selectedCategory)
   }, [videos, selectedCategory]);
 
   // Event handlers
   const handleCategorySelect = useCallback((category: any) => {
     setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0,
+          behavior: 'smooth' });
   }, []);
 
   const handleVideoClick = useCallback((video: Video) => {
@@ -128,8 +128,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
                     'px-3 py-1 rounded text-sm font-medium transition-colors',
                     viewMode === 'grid'
                       ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900',
-                  )}
+                      : 'text-gray-600 hover:text-gray-900')}
                 >
                   Grid
                 </button>
@@ -139,8 +138,7 @@ const OptimizedHomePage: React.FC<OptimizedHomePageProps> = ({ className }) => {
                     'px-3 py-1 rounded text-sm font-medium transition-colors',
                     viewMode === 'list'
                       ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900',
-                  )}
+                      : 'text-gray-600 hover:text-gray-900')}
                 >
                   List
                 </button>

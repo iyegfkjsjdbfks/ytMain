@@ -24,17 +24,17 @@ interface FeatureFlag {
     updatedAt: number;
     createdBy: string;
     tags: string[];
-    environment: string;
+    environment: string
   };
   monitoring: {
     trackEvents: boolean;
     trackPerformance: boolean;
-    alertThresholds: AlertThreshold[];
+    alertThresholds: AlertThreshold[]
   };
   schedule?: {
     startTime?: number;
     endTime?: number;
-    timezone: string;
+    timezone: string
   };
 }
 
@@ -56,7 +56,7 @@ interface TargetingRule {
   conditions: TargetingCondition[];
   operator: 'AND' | 'OR';
   value;
-  enabled: boolean;
+  enabled: boolean
 }
 
 interface TargetingCondition {
@@ -77,7 +77,7 @@ interface AlertThreshold {
   metric: string;
   operator: 'gt' | 'lt' | 'eq';
   value: number;
-  action: 'notify' | 'disable' | 'rollback';
+  action: 'notify' | 'disable' | 'rollback'
 }
 
 interface UserContext {
@@ -99,7 +99,7 @@ interface FlagEvaluation {
   variant?: string;
   reason: string;
   timestamp: number;
-  _context: UserContext;
+  _context: UserContext
 }
 
 interface ABTestResult {
@@ -324,14 +324,14 @@ return undefined;
     conversionRates: Record<string, number>;
     performanceImpact: {
       averageLoadTime: number;
-      errorRate: number;
+      errorRate: number
     };
   } {
     const cutoff = Date.now() - (hours * 60 * 60 * 1000);
     let evaluations = this.evaluationHistory.filter((e: FlagEvaluation) => e.timestamp > cutoff);
 
     if (flagId) {
-      evaluations = evaluations.filter((e: FlagEvaluation) => e.flagId === flagId);
+      evaluations = evaluations.filter((e: FlagEvaluation) => e.flagId === flagId)
     }
 
     const uniqueUsers = new Set(evaluations.map((e: FlagEvaluation) => e.userId).filter(Boolean)).size;
@@ -391,8 +391,7 @@ return undefined;
           case 'bounce_rate':
             value = Math.random() * 0.4 + 0.2; // 20-60%
             break;
-          default:
-            value = Math.random();
+          default: value = Math.random()
         }
 
         variantResults[variant.id] = { value, sampleSize };
@@ -449,7 +448,7 @@ return [];
     action: 'continue' | 'promote_winner' | 'stop_test' | 'extend_test';
     reason: string;
     winningVariant?: string;
-    confidence: number;
+    confidence: number
   } {
     const results = this.abTestResults.get(flagId) || [];
 
@@ -479,7 +478,7 @@ return [];
     });
 
     const topWinner = Object.entries(winnerCounts)
-      .sort(([, a], [, b]) => b - a)[0];
+      .sort(([ a], [ b]) => b - a)[0];
 
     if (topWinner && topWinner[1] >= significantResults.length * 0.7) {
       return {
@@ -651,8 +650,7 @@ continue;
         } catch {
           return false;
         }
-      default:
-        return false;
+      default: return false
     }
   }
 
@@ -666,8 +664,7 @@ continue;
         return _context.deviceType;
       case 'browserType':
         return _context.browserType;
-      default:
-        return _context.customAttributes?.[attribute];
+      default: return _context.customAttributes?.[attribute]
     }
   }
 
@@ -675,7 +672,7 @@ continue;
     shouldApply: boolean;
     value;
     variant?: string;
-    reason: string;
+    reason: string
   } {
     const _strategy = _flag.rolloutStrategy;
     const strategy = _strategy; // Use the rollout strategy
@@ -769,8 +766,7 @@ continue;
       flagId,
       _context.userId || 'anonymous',
       _context.country || 'unknown',
-      _context.deviceType || 'unknown',
-    ];
+      _context.deviceType || 'unknown'];
     return keyParts.join(':');
   }
 
@@ -894,8 +890,7 @@ return undefined;
         currentValue = Object.values(analytics.conversionRates)[0] ?? 0;
         break;
       }
-      default:
-        return;
+      default: return
     }
 
     let shouldTrigger = false;
@@ -952,12 +947,10 @@ return undefined;
             {
               attribute: 'userType',
               operator: 'equals',
-              value: 'premium' },
-          ],
+              value: 'premium' }],
           operator: 'AND',
           value: true,
-          enabled: true },
-      ],
+          enabled: true }],
       variants: [
         {
           id: 'control',
@@ -968,8 +961,7 @@ return undefined;
           id: 'treatment',
           name: 'Treatment (New Player)',
           value: true,
-          weight: 50 },
-      ],
+          weight: 50 }],
       monitoring: {
         trackEvents: true,
         trackPerformance: true,
@@ -978,8 +970,7 @@ return undefined;
             metric: 'error_rate',
             operator: 'gt',
             value: 0.05,
-            action: 'rollback' },
-        ] } });
+            action: 'rollback' }] } });
 
     this.createFlag({
       id: 'dark-mode',
@@ -1024,8 +1015,7 @@ return undefined;
           id: 'hybrid',
           name: 'Hybrid Approach',
           value: 'hybrid',
-          weight: 34 },
-      ],
+          weight: 34 }],
       monitoring: {
         trackEvents: true,
         trackPerformance: true,
@@ -1034,8 +1024,7 @@ return undefined;
             metric: 'conversion_rate',
             operator: 'lt',
             value: 0.05,
-            action: 'notify' },
-        ] } });
+            action: 'notify' }] } });
   }
 }
 

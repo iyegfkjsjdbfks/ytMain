@@ -16,22 +16,23 @@ import { testHelpers, TestPerformanceTracker  } from '../setup';
 // Mock data
 const mockVideo = testUtils.generateMockVideo({
   title: 'Test Video Title',
-  description: 'This is a test video description with some content to test the expand/collapse functionality.',
+          description: 'This is a test video description with some content to test the expand/collapse functionality.',
   viewCount: 1000000,
-  likeCount: 50000,
+          likeCount: 50000,
   publishedAt: '2024-01-15T10:00:00Z',
-  channel: {
+          channel: {,
     id: 'channel-1',
-    name: 'Test Channel',
+          name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
-    subscriberCount: 100000,
-    isVerified: true } });
+          subscriberCount: 100000,
+    isVerified: true } 
+        });
 
 const mockChannel = testUtils.generateMockChannel({
   id: 'channel-1',
-  name: 'Test Channel',
+          name: 'Test Channel',
   subscriberCount: 100000,
-  isVerified: true });
+          isVerified: true });
 
 describe('VideoDescription Component', () => {
   let endPerformanceTracking: () => void;
@@ -43,7 +44,7 @@ describe('VideoDescription Component', () => {
     // Setup API mocks
     testHelpers.mockApiSuccess({
       video: mockVideo,
-      channel: mockChannel });
+          channel: mockChannel });
   });
 
   afterEach(() => {
@@ -353,7 +354,7 @@ describe('VideoDescription Component', () => {
       const malformedVideo = {
         ...mockVideo,
         views: '0',
-        likes: 0,
+          likes: 0,
         publishedAt: 'invalid-date' };
 
       expect(() => {
@@ -382,7 +383,7 @@ describe('VideoDescription Component', () => {
       // Mock mobile viewport
       Object.defineProperty(window, 'innerWidth', {
         writable: true,
-        configurable: true,
+          configurable: true,
         value: 375 });
 
       window.dispatchEvent(new Event('resize'));
@@ -410,7 +411,7 @@ describe('VideoDescription Component', () => {
       // Mock tablet viewport
       Object.defineProperty(window, 'innerWidth', {
         writable: true,
-        configurable: true,
+          configurable: true,
         value: 768 });
 
       window.dispatchEvent(new Event('resize'));
@@ -514,8 +515,7 @@ describe('VideoDescription Component', () => {
 
       const auditResults = await testHelpers.checkAccessibility(container);
       const contrastIssues = auditResults.issues.filter(
-        issue => issue.message.includes('color-contrast'),
-      );
+        issue => issue.message.includes('color-contrast'));
 
       expect(contrastIssues).toHaveLength(0);
     });
@@ -599,15 +599,14 @@ describe('VideoDescription Component', () => {
       expect(performanceSpy).toHaveBeenCalledWith(
         'component_mount',
         expect.any(Number),
-        { component: 'VideoDescription' },
-      );
+        { component: 'VideoDescription' });
     });
 
     it('should work with React Query', async () => {
       // Mock React Query response
       testHelpers.mockApiSuccess({
         video: mockVideo,
-        relatedVideos: [testUtils.generateMockVideo()] });
+          relatedVideos: [testUtils.generateMockVideo()] });
 
       customRender(
         <VideoDescription

@@ -13,7 +13,7 @@ import type { Video } from '../types/core';
  * @param type - The type of videos to fetch ('trending', 'shorts', 'all')
  * @param useUnified - Whether to use the unified data service (default: true)
  */
-export function useVideosData(
+export function useVideosData(,
   type: 'trending' | 'shorts' | 'all' = 'all',
   useUnified: boolean = true
 ) {
@@ -26,8 +26,8 @@ export function useVideosData(
           return response.data;
         }
         case 'trending':
-        case 'all':
-        default: {
+        case 'all':,
+  default: {
           const response = await unifiedDataService.getTrendingVideos(50);
           return response.data;
         }
@@ -38,9 +38,8 @@ export function useVideosData(
         case 'shorts':
           return getShortsVideos();
         case 'trending':
-        case 'all':
-        default:
-          return getVideos();
+        case 'all':,
+  default: return getVideos()
       }
     }
   }, [type, useUnified]);
@@ -52,7 +51,7 @@ export function useVideosData(
 /**
  * Hook specifically for unified video data with better typing
  */
-export function useUnifiedVideosData(
+export function useUnifiedVideosData(,
   type: 'trending' | 'shorts' | 'all' = 'all',
   limit: number = 50
 ) {
@@ -63,8 +62,8 @@ export function useUnifiedVideosData(
         return response.data;
       }
       case 'trending':
-      case 'all':
-      default: {
+      case 'all':,
+  default: {
         const response = await unifiedDataService.getTrendingVideos(limit);
         return response.data;
       }

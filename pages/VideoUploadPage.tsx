@@ -13,17 +13,17 @@ const VideoUploadPage: React.FC = () => {
 
   const [uploadData, setUploadData] = useState<VideoUploadData>({
     title: '',
-    description: '',
+          description: '',
     category: 'Entertainment',
-    tags: [],
+          tags: [],
     visibility: 'public',
-    videoFile: null,
+          videoFile: null,
     thumbnailFile: null,
-    isShorts: false });
+          isShorts: false });
 
   const [progress, setProgress] = useState<UploadProgress>({
     percentage: 0,
-    status: 'idle',
+          status: 'idle',
     message: '' });
 
   const [tagInput, setTagInput] = useState('');
@@ -33,8 +33,7 @@ const VideoUploadPage: React.FC = () => {
   const categories = [
     'Entertainment', 'Music', 'Gaming', 'Sports', 'News & Politics',
     'Education', 'Science & Technology', 'Comedy', 'Film & Animation',
-    'Howto & Style', 'Travel & Events', 'Pets & Animals',
-  ];
+    'Howto & Style', 'Travel & Events', 'Pets & Animals'];
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -106,13 +105,15 @@ return;
 }
 
     try {
-      setProgress({ percentage: 0, status: 'uploading', message: 'Starting upload...' });
+      setProgress({ percentage: 0,
+          status: 'uploading', message: 'Starting upload...' });
 
-      await uploadVideo(uploadData, (progressData) => {
+      await uploadVideo(uploadData(progressData) => {
         setProgress(progressData);
       });
 
-      setProgress({ percentage: 100, status: 'completed', message: 'Upload completed successfully!' });
+      setProgress({ percentage: 100,
+          status: 'completed', message: 'Upload completed successfully!' });
 
       setTimeout(() => {
         navigate('/');
@@ -120,7 +121,7 @@ return;
     } catch (error) {
       setProgress({
         percentage: 0,
-        status: 'error',
+          status: 'error',
         message: 'Upload failed. Please try again.' });
     }
   };
@@ -360,7 +361,8 @@ handleFileSelect(file);
 
               {uploadData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {uploadData.tags.map((tag: string, index: number) => (
+                  {uploadData.tags.map((tag: string,
+          index: number) => (
                     <span
                       key={index}
                       className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"

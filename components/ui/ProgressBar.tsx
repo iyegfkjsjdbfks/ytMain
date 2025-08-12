@@ -11,14 +11,14 @@ export interface ProgressBarProps {
 
 const sizeClasses = {
   sm: 'h-1',
-  md: 'h-2',
+          md: 'h-2',
   lg: 'h-3' };
 
 const variantClasses = {
   default: 'bg-blue-500',
-  success: 'bg-green-500',
+          success: 'bg-green-500',
   warning: 'bg-yellow-500',
-  error: 'bg-red-500' };
+          error: 'bg-red-500' };
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   value,

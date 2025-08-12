@@ -54,8 +54,8 @@ export function getYouTubeApiBlockedMessage(): string {
  * @param fallbackValue - Value to return when API is blocked (default: null)
  * @returns API result or fallback value
  */
-export async function conditionalYouTubeApiCall<T>(
-  apiCall: () => Promise<T>
+export async function conditionalYouTubeApiCall<T>(,
+  apiCall: () => Promise<T>,
   fallbackValue: T | null = null
 ): Promise<T | null> {
   if (isYouTubeDataApiBlocked()) {
@@ -77,7 +77,7 @@ export async function conditionalYouTubeApiCall<T>(
  * @param fallbackValue - Value to return when API is blocked
  * @returns Operation result or fallback value
  */
-export function conditionalYouTubeOperation<T>(
+export function conditionalYouTubeOperation<T>(,
   operation: () => T,
   fallbackValue: T
 ): T {

@@ -45,7 +45,8 @@ const SearchBar: React.FC = memo(() => {
       if (currentQuery.trim().length === 0 && inputRef.current === document.activeElement) {
         loadRecentSearches().catch(console.error);
       }
-    }
+    
+        }
   }, [loadRecentSearches]);
 
   useEffect(() => {
@@ -69,7 +70,8 @@ const SearchBar: React.FC = memo(() => {
 inputRef.current.blur();
 } // Optionally blur input after search
     }
-  };
+  
+        };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,16 +100,19 @@ inputRef.current.blur();
       setShowRecentSearches(false); // Hide recent if user starts typing
       // Suggestions will be handled by the debounced useEffect
     }
-  };
+  
+        };
 
-  const handleRemoveRecentSearch = async (searchToRemove: any, e: React.MouseEvent) => {
+  const handleRemoveRecentSearch = async (searchToRemove: any,
+          e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click on list item
     const updatedSearches = await removeRecentSearch(searchToRemove);
     setRecentSearches(updatedSearches);
     if (updatedSearches.length === 0) {
       setShowRecentSearches(false);
     }
-  };
+  
+        };
 
   const handleClearAllRecent = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -126,8 +131,7 @@ inputRef.current.blur();
     document.addEventListener('mousedown', handleClickOutside as EventListener);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
-    };
-  }, []);
+    }}, []);
 
   const isDropdownOpen = (showSuggestions && suggestions.length > 0) || (showRecentSearches && recentSearches.length > 0);
 
@@ -149,9 +153,9 @@ inputRef.current.blur();
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           placeholder="Search"
-          className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300 
-            dark:bg-neutral-900 dark:border-neutral-700 
-            focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-black
+          className={`w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2 sm:py-2.5 bg-white border border-neutral-300,
+          dark:bg-neutral-900 dark:border-neutral-700,
+          focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white dark:focus:bg-black
             outline-none text-neutral-900 dark:text-neutral-50 placeholder-neutral-500 dark:placeholder-neutral-400 text-sm shadow-sm
             transition-all duration-100 ease-in-out
             ${inputBorderRadiusClass}

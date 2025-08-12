@@ -46,8 +46,7 @@ export class CSPManager {
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
-      'upgrade-insecure-requests',
-    ];
+      'upgrade-insecure-requests'];
 
     if (options.allowInlineStyles) {
       directives[2] += " 'unsafe-inline'";
@@ -101,7 +100,7 @@ export class InputValidator {
   static validatePasswordStrength(password: any): {
     isValid: boolean;
     score: number;
-    feedback: string[];
+    feedback: string[]
   } {
     const feedback: string[] = [];
     let score = 0;
@@ -285,7 +284,7 @@ export class TokenGenerator {
   }
 
   static generateUUID(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g(c) => {
       const r = Math.random() * 16 | 0;
       const v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
@@ -322,7 +321,7 @@ export class ClientEncryption {
 
   static async encrypt(data: any, key: CryptoKey): Promise<{
     encrypted: ArrayBuffer;
-    iv: Uint8Array;
+    iv: Uint8Array
   }> {
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const encodedData = this.encoder.encode(data);
@@ -338,8 +337,8 @@ export class ClientEncryption {
     return { encrypted, iv };
   }
 
-  static async decrypt(
-    encrypted: ArrayBuffer,
+  static async decrypt(,
+  encrypted: ArrayBuffer,
     key: CryptoKey,
     iv: Uint8Array): Promise<string> {
     const decrypted = await crypto.subtle.decrypt(
@@ -444,7 +443,7 @@ export class SecurityHeaders {
   static validateResponse(response: Response): {
     isSecure: boolean;
     issues: string[];
-    recommendations: string[];
+    recommendations: string[]
   } {
     const issues: string[] = [];
     const recommendations: string[] = [];
@@ -464,7 +463,7 @@ export class SecurityHeaders {
 
     if (!headers.get('X-Content-Type-Options')) {
       issues.push('Missing X-Content-Type-Options header');
-      recommendations.push('Add X-Content-Type-Options: nosniff');
+      recommendations.push('Add X-Content-Type-Options: nosniff')
     }
 
     if (!headers.get('Referrer-Policy')) {
@@ -523,7 +522,7 @@ export class SecurityAudit {
   static auditLocalStorage(): {
     sensitiveDataFound: boolean;
     issues: string[];
-    recommendations: string[];
+    recommendations: string[]
   } {
     const issues: string[] = [];
     const recommendations: string[] = [];
@@ -534,8 +533,7 @@ export class SecurityAudit {
       /key/i,
       /credit.*card/i,
       /ssn/i,
-      /social.*security/i,
-    ];
+      /social.*security/i];
 
     let sensitiveDataFound = false;
 
@@ -572,7 +570,7 @@ continue;
 
   static auditCookies(): {
     insecureCookies: string[];
-    recommendations: string[];
+    recommendations: string[]
   } {
     const insecureCookies: string[] = [];
     const recommendations: string[] = [];

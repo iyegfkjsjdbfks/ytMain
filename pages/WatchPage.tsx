@@ -161,7 +161,8 @@ const WatchPage: React.FC = () => {
   const [metadataExpanded, setMetadataExpanded] = React.useState(false);
 
   // Enhanced save to playlist handler that integrates with Watch Later context
-  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: any, playlistId: any) => {
+  const enhancedHandleSaveToPlaylist = useCallback(async (_videoId: any,
+          playlistId: any) => {
     // Call the original handler
     await handleSaveToPlaylist(playlistId);
 
@@ -169,7 +170,8 @@ const WatchPage: React.FC = () => {
     if (playlistId === 'playlist-1' && video) {
       addToWatchLater(video);
     }
-  }, [handleSaveToPlaylist, video, addToWatchLater]);
+  
+        }, [handleSaveToPlaylist, video, addToWatchLater]);
 
   // Add to watch history when video loads
   React.useEffect(() => {
@@ -177,7 +179,8 @@ const WatchPage: React.FC = () => {
       addToWatchHistory();
       showMiniplayer(video);
     }
-  }, [video, addToWatchHistory, showMiniplayer]);
+  
+        }, [video, addToWatchHistory, showMiniplayer]);
 
   // Scroll to top when page loads or video changes
   React.useEffect(() => {

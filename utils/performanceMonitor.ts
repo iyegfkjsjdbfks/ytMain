@@ -9,7 +9,7 @@ interface PerformanceMetric {
   value: number;
   timestamp: number;
   url: string;
-  userAgent: string;
+  userAgent: string
 }
 
 class PerformanceMonitor {
@@ -237,8 +237,7 @@ export function usePerformanceTracking(componentName: any) {
 // Higher-order component for automatic performance tracking
 export function withPerformanceTracking<P extends object>(;
   WrappedComponent: React.ComponentType<P>
-  componentName?: string,
-) {
+  componentName?: string) {
   const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   const WithPerformanceTracking = (props: P) => {

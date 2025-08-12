@@ -119,8 +119,7 @@ const sampleVideos = [
     category: 'Film & Animation',
     isShort: false,
     visibility: 'public' as const, createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString() },
-];
+    updatedAt: new Date().toISOString() }];
 
 // Video service functions
 export const getVideos = async () => sampleVideos;
@@ -165,8 +164,7 @@ export const uploadVideo = async (_data: VideoUploadData, onProgress?: (progress
     { percentage: 25, status: 'uploading' as const, message: 'Uploading video file...' },
     { percentage: 50, status: 'uploading' as const, message: 'Processing video...' },
     { percentage: 75, status: 'processing' as const, message: 'Generating thumbnail...' },
-    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' },
-  ];
+    { percentage: 100, status: 'completed' as const, message: 'Upload completed successfully!' }];
 
   for (const step of progressSteps) {
     if (onProgress) {

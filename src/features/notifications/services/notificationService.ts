@@ -40,19 +40,19 @@ export interface NotificationPreferences {
   email: {
     enabled: boolean;
     frequency: 'instant' | 'daily' | 'weekly';
-    types: NotificationType;
+    types: NotificationType
   };
   push: {
     enabled: boolean;
-    types: NotificationType;
+    types: NotificationType
   };
   inApp: {
     enabled: boolean;
-    types: NotificationType;
+    types: NotificationType
   };
   sms: {
     enabled: boolean;
-    types: NotificationType;
+    types: NotificationType
   };
 }
 
@@ -86,8 +86,8 @@ class NotificationService {
   /**
    * Get user notifications
    */
-  async getNotifications(
-    filters: NotificationFilters = {}
+  async getNotifications(,
+  filters: NotificationFilters = {}
   ): Promise<ApiResponse<Notification[]>> {
     return api.get('/api/notifications', filters);
   }
@@ -181,8 +181,8 @@ class NotificationService {
   /**
    * Update notification preferences
    */
-  async updatePreferences(
-    preferences: Partial<NotificationPreferences>
+  async updatePreferences(,
+  preferences: Partial<NotificationPreferences>
   ): Promise<ApiResponse<NotificationPreferences>> {
     return api.put('/api/notifications/preferences', preferences);
   }
@@ -190,8 +190,8 @@ class NotificationService {
   /**
    * Subscribe to push notifications
    */
-  async subscribeToPush(
-    subscription: PushSubscription
+  async subscribeToPush(,
+  subscription: PushSubscription
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/push/subscribe', {
       endpoint: subscription.endpoint,
@@ -210,8 +210,8 @@ class NotificationService {
   /**
    * Test notification delivery
    */
-  async testNotification(
-    type: 'email' | 'push' | 'sms',
+  async testNotification(,
+  type: 'email' | 'push' | 'sms',
     message?: string
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/test', { type, message });
@@ -220,8 +220,8 @@ class NotificationService {
   /**
    * Create notification (admin/system use)
    */
-  async createNotification(
-    data: CreateNotificationData
+  async createNotification(,
+  data: CreateNotificationData
   ): Promise<ApiResponse<Notification>> {
     return api.post('/api/notifications', data);
   }
@@ -229,8 +229,8 @@ class NotificationService {
   /**
    * Send bulk notifications
    */
-  async sendBulkNotifications(
-    userIds: any,
+  async sendBulkNotifications(,
+  userIds: any,
     notification: Omit<CreateNotificationData, 'userId'>
   ): Promise<ApiResponse<{ sent: number; failed: number }>> {
     return api.post('/api/notifications/bulk', {
@@ -248,7 +248,7 @@ class NotificationService {
         name: string;
         type: NotificationType;
         template: string;
-        variables: string;
+        variables: string
       }>
     >
   > {
@@ -262,7 +262,7 @@ class NotificationService {
     name: string;
     type: NotificationType;
     template: string;
-    variables: string;
+    variables: string
   }): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/templates', template);
   }
@@ -281,19 +281,19 @@ class NotificationService {
         type: NotificationType;
         sent: number;
         read: number;
-        clicked: number;
+        clicked: number
       }>;
       byChannel: Array<{
         channel: 'email' | 'push' | 'inApp' | 'sms';
         sent: number;
         delivered: number;
-        read: number;
+        read: number
       }>;
       engagement: Array<{
         date: string;
         sent: number;
         read: number;
-        clicked: number;
+        clicked: number
       }>;
     }>
   > {
@@ -303,8 +303,8 @@ class NotificationService {
   /**
    * Schedule notification
    */
-  async scheduleNotification(
-    data: CreateNotificationData,
+  async scheduleNotification(,
+  data: CreateNotificationData,
     scheduledFor: any
   ): Promise<ApiResponse<void>> {
     return api.post('/api/notifications/schedule', {
@@ -315,8 +315,8 @@ class NotificationService {
   /**
    * Cancel scheduled notification
    */
-  async cancelScheduledNotification(
-    notificationId: any
+  async cancelScheduledNotification(,
+  notificationId: any
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/notifications/schedule/${notificationId}`);
   }
@@ -330,7 +330,7 @@ class NotificationService {
         id: string;
         notification: CreateNotificationData;
         scheduledFor: string;
-        status: 'pending' | 'sent' | 'cancelled';
+        status: 'pending' | 'sent' | 'cancelled'
       }>
     >
   > {
@@ -340,8 +340,8 @@ class NotificationService {
   /**
    * Snooze notification
    */
-  async snoozeNotification(
-    notificationId: any,
+  async snoozeNotification(,
+  notificationId: any,
     snoozeUntil: any
   ): Promise<ApiResponse<void>> {
     return api.patch(`/api/notifications/${notificationId}/snooze`, {
@@ -364,8 +364,8 @@ class NotificationService {
   /**
    * Archive old notifications
    */
-  async archiveOldNotifications(
-    olderThan: any
+  async archiveOldNotifications(,
+  olderThan: any
   ): Promise<ApiResponse<{ archived: number }>> {
     return api.post('/api/notifications/archive', { olderThan });
   }
@@ -385,7 +385,7 @@ class NotificationService {
       trends: Array<{
         type: NotificationType;
         change: number;
-        trend: 'up' | 'down' | 'stable';
+        trend: 'up' | 'down' | 'stable'
       }>;
     }>
   > {
@@ -395,8 +395,8 @@ class NotificationService {
   /**
    * Export notifications
    */
-  async exportNotifications(
-    format: 'csv' | 'json',
+  async exportNotifications(,
+  format: 'csv' | 'json',
     filters: NotificationFilters = {}
   ): Promise<ApiResponse<string>> {
     return api.get('/api/notifications/export', { format, ...filters });
@@ -405,8 +405,8 @@ class NotificationService {
   /**
    * Real-time notification subscription (WebSocket)
    */
-  subscribeToRealTime(
-    onNotification: (notification: Notification) => void,
+  subscribeToRealTime(,
+  onNotification: (notification: Notification) => void,
     onError?: (error: Error) => void
   ): () => void {
     const ws = new WebSocket(

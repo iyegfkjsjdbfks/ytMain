@@ -9,17 +9,12 @@ import { useState, useCallback, useMemo } from 'react';
  * @param initialValue - Initial Set value (defaults to empty Set)
  * @returns [set, addItem, removeItem, toggleItem, clearSet, hasItem]
  */
-export function useLocalStorageSet<T>(
+export function useLocalStorageSet<T>(,
   key: string,
   initialValue: Set<T> = new Set()
 ): [
   Set<T>
-  (item: T) => void,
-  (item: T) => void,
-  (item: T) => void,
-  () => void,
-  (item: T) => boolean,
-] {
+  (item: T) => void(item: T) => void(item: T) => void() => void(item: T) => boolean] {
   // Initialize state from localStorage
   const [items, setItems] = useState<T[]>(() => {
     try {
@@ -115,7 +110,7 @@ export function useLocalStorageSet<T>(
  * Simplified version that just returns the Set and a setter function
  * Similar to useState but for Sets stored in localStorage
  */
-export function useLocalStorageSetState<T>(
+export function useLocalStorageSetState<T>(,
   key: string,
   initialValue: Set<T> = new Set()
 ): [Set<T> (updater: (prev: Set<T>) => Set<T>) => void] {

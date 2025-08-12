@@ -7,7 +7,7 @@ import { BellSlashIcon, BellIcon  } from '@heroicons/react/24/outline';
 import { useSubscription } from '../hooks/useSubscription';
 
 interface SubscriptionButtonProps {
-  channelId: string;
+  channelId: string;,
   channelName: string;
   subscriberCount?: number;
   className?: string;
@@ -43,7 +43,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
   };
 
   const handleNotificationChange = async (
-    level: 'all' | 'personalized' | 'none'
+  level: 'all' | 'personalized' | 'none'
   ) => {
     await updateNotificationLevel(level);
     setShowNotificationMenu(false);
@@ -68,8 +68,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
         return 'px-3 py-1.5 text-sm';
       case 'lg':
         return 'px-6 py-3 text-lg';
-      default:
-        return 'px-4 py-2 text-base';
+      default: return 'px-4 py-2 text-base'
     }
   };
 
@@ -81,8 +80,7 @@ export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({
         return <BellIcon className='w-4 h-4' />;
       case 'none':
         return <BellSlashIcon className='w-4 h-4' />;
-      default:
-        return <BellIcon className='w-4 h-4' />;
+      default: return <BellIcon className='w-4 h-4' />
     }
   };
 

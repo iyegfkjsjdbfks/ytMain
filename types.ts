@@ -25,7 +25,7 @@ export interface CommunityPost {
   createdAt: Date;
   engagement: {
     views: number;
-    clickThroughRate: number;
+    clickThroughRate: number
   };
   // Legacy fields for backward compatibility
   channelName?: string;
@@ -43,12 +43,12 @@ export interface ExtendedVideo {
   id: string;
   title: string;
   thumbnailUrl: string;
-  thumbnail?: string; // Alternative to thumbnailUrl
+  thumbnail?: string; // Alternative to thumbnailUrl,
   channelName: string;
   channelAvatarUrl: string;
-  channelAvatar?: string; // Alternative to channelAvatarUrl
+  channelAvatar?: string; // Alternative to channelAvatarUrl,
   views: string;
-  viewCount?: number; // Alternative to views as string
+  viewCount?: number; // Alternative to views as string,
   uploadedAt: string;
   duration: string;
   videoUrl: string;
@@ -99,7 +99,7 @@ export interface ExtendedVideo {
   defaultLanguage?: string;
   localized?: {
     title: string;
-    description: string;
+    description: string
   };
 }
 
@@ -132,7 +132,7 @@ export interface UserPlaylist {
   title: string;
   description?: string;
   videoIds: string;
-  createdAt: string; // ISO date string
+  createdAt: string; // ISO date string,
   updatedAt: string; // ISO date string
 }
 
@@ -159,13 +159,13 @@ export interface VideoUploadData {
   visibility: 'public' | 'unlisted' | 'private';
   videoFile: File | null;
   thumbnailFile: File | null;
-  isShorts: boolean;
+  isShorts: boolean
 }
 
 export interface UploadProgress {
   percentage: number;
   status: 'idle' | 'uploading' | 'processing' | 'completed' | 'error';
-  message: string;
+  message: string
 }
 
 // Type alias for shorts (videos with isShort: true)

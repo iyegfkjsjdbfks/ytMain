@@ -11,7 +11,7 @@ interface YT {
     PLAYING: number;
     PAUSED: number;
     BUFFERING: number;
-    CUED: number;
+    CUED: number
   };
 }
 
@@ -44,7 +44,7 @@ interface YTPlayerConfig {
     onStateChange?: (event: { target: YTPlayer; data: number }) => void;
     onPlaybackQualityChange?: (event: {
       target: YTPlayer;
-      data: string;
+      data: string
     }) => void;
     onPlaybackRateChange?: (event: { target: YTPlayer; data: number }) => void;
     onError?: (event: { target: YTPlayer; data: number }) => void;
@@ -93,7 +93,7 @@ declare global {
  * @param url - YouTube URL (can be null or undefined)
  * @returns Video ID or null if not found
  */
-export function getYouTubeVideoId(
+export function getYouTubeVideoId(,
   url: string | null | undefined
 ): string | null {
   if (!url) {
@@ -133,7 +133,7 @@ export class YouTubePlayer {
       playerVars?: Record<string, any>;
       events?: {
         onReady?: (event: Event) => void;
-        onStateChange?: (event: Event) => void;
+        onStateChange?: (event: Event) => void
       };
     } = {}
   ) {
@@ -392,7 +392,7 @@ export class YouTubePlayer {
 }
 
 // Utility function to safely handle YouTube embeds
-export function embedYouTubeVideo(
+export function embedYouTubeVideo(,
   containerId: any,
   videoId: any,
   options: {
@@ -448,14 +448,13 @@ export function isYouTubeUrl(url: any): boolean {
     /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([^?]+)/,
     /^https?:\/\/youtu\.be\/([^?]+)/,
     /^https?:\/\/(?:www\.)?youtube\.com\/v\/([^?]+)/,
-    /^https?:\/\/(?:www\.)?youtube\.com\/user\/[^/]+#p\/u\/\d+\/\w+/,
-  ];
+    /^https?:\/\/(?:www\.)?youtube\.com\/user\/[^/]+#p\/u\/\d+\/\w+/];
 
   return patterns.some(pattern => pattern.test(url));
 }
 
 // Type-safe function to get video ID from various YouTube URL formats
-export function extractVideoIdFromUrl(
+export function extractVideoIdFromUrl(,
   url: string | null | undefined
 ): string | null {
   if (!url) {
@@ -464,7 +463,7 @@ export function extractVideoIdFromUrl(
 
   interface Pattern {
     regex: RegExp;
-    getter: (match: RegExpMatchArray) => string | null;
+    getter: (match: RegExpMatchArray) => string | null
   }
 
   const patterns: Pattern[] = [
@@ -483,8 +482,7 @@ export function extractVideoIdFromUrl(
     // youtube.com/v/ID
     {
       regex: /\/v\/([^#&?/]+)/,
-      getter: match => match[1] || null },
-  ];
+      getter: match => match[1] || null }];
 
   for (const { regex, getter } of patterns) {
     try {
@@ -516,7 +514,7 @@ export enum YouTubePlayerState {
 // Type-safe interface for YouTube player events
 export interface YouTubePlayerEvent {
   target;
-  data: number;
+  data: number
 }
 
 // Type-safe interface for YouTube player parameters

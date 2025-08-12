@@ -13,9 +13,9 @@ import StreamManagementDashboard from '../features/livestream/components/StreamM
 // Import live streaming components
 
 interface QuickAction {
-  title: string;
+  title: string;,
   description: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode;,
   action: () => void;
   variant?: 'default' | 'destructive' | 'outline' | 'secondary';
 }
@@ -28,50 +28,48 @@ const LiveStreamingHubPage: React.FC = () => {
   const quickActions: QuickAction[] = [
     {
       title: 'Go Live Now',
-      description: 'Start streaming immediately',
-      icon: <Play className='h-5 w-5' />
-      action: () => (window.location.href = '/go-live'),
+          description: 'Start streaming immediately',
+      icon: <Play className='h-5 w-5' />,
+          action: () => (window.location.href = '/go-live'),
       variant: 'default' },
     {
       title: 'Schedule Stream',
-      description: 'Plan your next live stream',
-      icon: <Calendar className='h-5 w-5' />
-      action: () => setActiveTab('management') },
+          description: 'Plan your next live stream',
+      icon: <Calendar className='h-5 w-5' />,
+          action: () => setActiveTab('management') },
     {
       title: 'Stream Settings',
-      description: 'Configure your streaming setup',
-      icon: <Settings className='h-5 w-5' />
-      action: () => setActiveTab('settings') },
+          description: 'Configure your streaming setup',
+      icon: <Settings className='h-5 w-5' />,
+          action: () => setActiveTab('settings') },
     {
       title: 'View Analytics',
-      description: 'Check your streaming performance',
-      icon: <BarChart3 className='h-5 w-5' />
-      action: () => setActiveTab('analytics') },
-  ];
+          description: 'Check your streaming performance',
+      icon: <BarChart3 className='h-5 w-5' />,
+          action: () => setActiveTab('analytics') }];
 
   const liveStreams = [
     {
       id: '1',
-      title: 'Building a React App Live!',
+          title: 'Building a React App Live!',
       thumbnail: '/api/placeholder/320/180',
-      viewers: 1247,
+          viewers: 1247,
       duration: '2:34:15',
-      status: 'live' as const },
+          status: 'live' as const },
     {
       id: '2',
-      title: 'Q&A Session with Viewers',
+          title: 'Q&A Session with Viewers',
       thumbnail: '/api/placeholder/320/180',
-      viewers: 892,
+          viewers: 892,
       duration: '1:15:30',
-      status: 'live' as const },
+          status: 'live' as const },
     {
       id: '3',
-      title: 'Gaming Stream - New Release',
+          title: 'Gaming Stream - New Release',
       thumbnail: '/api/placeholder/320/180',
-      viewers: 2156,
+          viewers: 2156,
       duration: '3:45:22',
-      status: 'live' as const },
-  ];
+          status: 'live' as const }];
 
   return (
     <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>

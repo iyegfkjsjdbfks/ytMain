@@ -13,7 +13,7 @@ export interface VideoMetadata {
   duration: number;
   thumbnailUrl: string;
   uploadDate: string;
-  lastModified: string;
+  lastModified: string
 }
 
 export interface VideoStats {
@@ -23,7 +23,7 @@ export interface VideoStats {
   comments: number;
   shares: number;
   watchTime: number;
-  averageViewDuration: number;
+  averageViewDuration: number
 }
 
 export interface VideoFile {
@@ -32,7 +32,7 @@ export interface VideoFile {
   format: 'mp4' | 'webm' | 'avi' | 'mov';
   size: number;
   bitrate: number;
-  codec: string;
+  codec: string
 }
 
 export interface StrictVideo {
@@ -45,13 +45,13 @@ export interface StrictVideo {
   monetization: {
     enabled: boolean;
     adTypes: string;
-    revenue: number;
+    revenue: number
   };
   analytics: {
     impressions: number;
     clickThroughRate: number;
     retentionRate: number;
-    engagementRate: number;
+    engagementRate: number
   };
 }
 
@@ -61,7 +61,7 @@ export interface ChannelBranding {
   logoUrl: string;
   watermarkUrl: string;
   primaryColor: string;
-  secondaryColor: string;
+  secondaryColor: string
 }
 
 export interface ChannelStats {
@@ -69,7 +69,7 @@ export interface ChannelStats {
   totalViews: number;
   totalVideos: number;
   averageViews: number;
-  engagementRate: number;
+  engagementRate: number
 }
 
 export interface StrictChannel {
@@ -83,7 +83,7 @@ export interface StrictChannel {
   createdAt: string;
   country: string;
   language: string;
-  categories: string;
+  categories: string
 }
 
 // Playlist Related Types
@@ -91,7 +91,7 @@ export interface PlaylistSettings {
   privacy: 'public' | 'unlisted' | 'private';
   allowComments: boolean;
   allowRatings: boolean;
-  defaultLanguage: string;
+  defaultLanguage: string
 }
 
 export interface StrictPlaylist {
@@ -107,7 +107,7 @@ export interface StrictPlaylist {
   stats: {
     views: number;
     likes: number;
-    shares: number;
+    shares: number
   };
 }
 
@@ -117,7 +117,7 @@ export interface CommentAuthor {
   name: string;
   avatarUrl: string;
   channelUrl: string;
-  verified: boolean;
+  verified: boolean
 }
 
 export interface StrictComment {
@@ -130,7 +130,7 @@ export interface StrictComment {
   replies: StrictComment;
   edited: boolean;
   pinned: boolean;
-  heartedByCreator: boolean;
+  heartedByCreator: boolean
 }
 
 // Notification Types
@@ -148,7 +148,7 @@ export interface StrictNotification {
   data: NotificationData;
   timestamp: string;
   read: boolean;
-  persistent: boolean;
+  persistent: boolean
 }
 
 // Miniplayer Types
@@ -159,7 +159,7 @@ export interface MiniplayerVideo {
   thumbnailUrl: string;
   duration: number;
   currentTime: number;
-  quality: string;
+  quality: string
 }
 
 // Form Types
@@ -167,7 +167,7 @@ export interface FormFieldValue {
   value: string | number | boolean | string;
   error?: string;
   touched: boolean;
-  dirty: boolean;
+  dirty: boolean
 }
 
 export interface StrictFormState {
@@ -183,7 +183,7 @@ export interface FormValidationRule {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  custom?: (value: FormFieldValue['value']) => string | undefined;
+  custom?: (value: FormFieldValue['value']) => string | undefined
 }
 
 export interface FormFieldConfig {
@@ -228,7 +228,7 @@ export interface ApiResponse<T> {
     limit: number;
     total: number;
     hasNext: boolean;
-    hasPrev: boolean;
+    hasPrev: boolean
   };
   metadata?: Record<string, string | number | boolean>;
 }
@@ -246,7 +246,7 @@ export interface CacheConfig {
   defaultTTL: number;
   maxSize: number;
   cleanupInterval: number;
-  enableCompression: boolean;
+  enableCompression: boolean
 }
 
 // Event Types
@@ -261,7 +261,7 @@ export interface StrictCustomEvent {
   type: string;
   data: CustomEventData;
   timestamp: string;
-  id: string;
+  id: string
 }
 
 // Storage Types
@@ -274,7 +274,7 @@ export interface StorageItem {
 export interface StorageConfig {
   prefix: string;
   enableEncryption: boolean;
-  compressionThreshold: number;
+  compressionThreshold: number
 }
 
 // Analytics Types
@@ -284,14 +284,14 @@ export interface AnalyticsEvent {
   properties: Record<string, string | number | boolean>;
   timestamp: string;
   userId?: string;
-  sessionId: string;
+  sessionId: string
 }
 
 export interface AnalyticsConfig {
   trackingId: string;
   enableDebug: boolean;
   sampleRate: number;
-  cookieExpiry: number;
+  cookieExpiry: number
 }
 
 // Utility Types

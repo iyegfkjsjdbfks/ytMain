@@ -10,9 +10,9 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 import { BugAntIcon } from '@heroicons/react/24/outline';
 
 interface StoreVideo {
-  id: string;
+  id: string;,
   title: string;
-  channelName: string;
+  channelName: string;,
   videoUrl: string;
   viewCount?: number;
 }
@@ -63,11 +63,11 @@ const AdminPage: React.FC = () => {
       const googleVideos = googleSearchVideoStore.getAllVideos();
 
       // Convert GoogleSearchResult[] to StoreVideo[]
-      const videos: StoreVideo[] = googleVideos.map(video => ({
+      const videos: StoreVideo[] = googleVideos.map(video => ({,
         id: video.id,
-        title: video.title,
+          title: video.title,
         channelName: video.channelName,
-        videoUrl: video.videoUrl,
+          videoUrl: video.videoUrl,
         viewCount: video.viewCount || 0 }));
 
       setStoreVideos(videos);
@@ -90,9 +90,10 @@ const AdminPage: React.FC = () => {
       if (!searchApiKey || !searchEngineId) {
         setTestResult({
           error: 'Google Custom Search API not configured',
-          details: {
+          details: {,
             apiKey: !!searchApiKey,
-            engineId: !!searchEngineId } });
+          engineId: !!searchEngineId } 
+        });
         return;
       }
 
@@ -151,15 +152,15 @@ const AdminPage: React.FC = () => {
 
     setEnvironmentCheck({
       mode: isDevelopment ? 'Development' : 'Production',
-      host: window.location.hostname,
+          host: window.location.hostname,
       port: window.location.port,
-      protocol: window.location.protocol,
+          protocol: window.location.protocol,
       origin: window.location.origin,
       proxyUrl,
       proxyActive: isDevelopment,
-      youtubeApiKey: !!import.meta.env.VITE_YOUTUBE_API_KEY,
+          youtubeApiKey: !!import.meta.env.VITE_YOUTUBE_API_KEY,
       googleSearchApiKey: !!import.meta.env.VITE_GOOGLE_SEARCH_API_KEY,
-      googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID });
+          googleSearchEngineId: !!import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID });
   };
 
   const testProxyEndpoint = async () => {
@@ -179,22 +180,22 @@ const AdminPage: React.FC = () => {
           const video = data.items[0];
           setProxyTest({
             success: true,
-            status: response.status,
+          status: response.status,
             url: proxyUrl,
-            video: {
+          video: {,
               title: video.snippet.title,
-              channel: video.snippet.channelTitle,
+          channel: video.snippet.channelTitle,
               views: parseInt(video.statistics.viewCount, 10).toLocaleString(),
               likes: parseInt(video.statistics.likeCount || 0, 10).toLocaleString(),
               published: video.snippet.publishedAt,
-              duration: video.contentDetails.duration },
+          duration: video.contentDetails.duration },
             fullResponse: data });
         } else {
           setProxyTest({
             success: false,
-            status: response.status,
+          status: response.status,
             url: proxyUrl,
-            error: 'No video data in response',
+          error: 'No video data in response',
             fullResponse: data });
         }
       } else {
@@ -209,7 +210,7 @@ const AdminPage: React.FC = () => {
     } catch (error) {
       setProxyTest({
         success: false,
-        error: error.message,
+          error: error.message,
         note: 'This might indicate proxy configuration issues or that the dev server is not running.' });
     } finally {
       setLoading(false);
@@ -247,7 +248,7 @@ const AdminPage: React.FC = () => {
     } catch (error) {
       setDirectApiTest({
         success: false,
-        error: error.message,
+          error: error.message,
         note: 'This is expected due to CORS restrictions. The proxy should handle this.' });
     } finally {
       setLoading(false);
@@ -271,15 +272,15 @@ const AdminPage: React.FC = () => {
       if (video) {
         setYoutubeMetadataTest({
           success: true,
-          video: {
+          video: {,
             id: video.id,
-            title: video.title,
+          title: video.title,
             channel: video.channel.name,
-            views: video.viewsFormatted,
+          views: video.viewsFormatted,
             source: video.source,
-            channelAvatar: video.channel.avatarUrl,
+          channelAvatar: video.channel.avatarUrl,
             publishedAt: video.publishedAtFormatted,
-            duration: video.duration },
+          duration: video.duration },
           fullVideo: video });
       } else {
         setYoutubeMetadataTest({
@@ -289,7 +290,7 @@ const AdminPage: React.FC = () => {
     } catch (error) {
       setYoutubeMetadataTest({
         success: false,
-        error: error.message,
+          error: error.message,
         stack: error.stack });
     } finally {
       setLoading(false);
@@ -321,7 +322,8 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout(() => setSaveMessage(''), 3000);
     }
-  };
+  
+        };
 
   const handlePlayerTypeChange = async (newPlayerType: YouTubePlayerType) => {
     setIsSaving(true);
@@ -341,7 +343,8 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout(() => setSaveMessage(''), 3000);
     }
-  };
+  
+        };
 
   const handleLocalPlayerTypeChange = async (newPlayerType: LocalVideoPlayerType) => {
     setIsSaving(true);
@@ -359,7 +362,8 @@ const AdminPage: React.FC = () => {
       // Clear message after 3 seconds
       setTimeout(() => setSaveMessage(''), 3000);
     }
-  };
+  
+        };
 
   const handleToggleYouTubePlayer = async (playerType: YouTubePlayerType) => {
     setIsSaving(true);
@@ -416,7 +420,9 @@ const AdminPage: React.FC = () => {
   const googleSearchAvailable = isGoogleSearchAvailable();
   const hybridModeAvailable = isHybridModeAvailable();
 
-  const renderPlayerCard = (config: VideoPlayerConfig, isSelected: any, isEnabled: any, onSelect: () => void, onToggleEnabled: () => void) => {
+  const renderPlayerCard = (config: VideoPlayerConfig,
+          isSelected: any, isEnabled: any,
+          onSelect: () => void, onToggleEnabled: () => void) => {
     const usedOnPages = getPlayerUsageByPage(config.type);
 
     const getPerformanceColor = (performance: any) => {
@@ -424,7 +430,7 @@ const AdminPage: React.FC = () => {
         case 'high': return 'text-green-600 bg-green-100';
         case 'medium': return 'text-yellow-600 bg-yellow-100';
         case 'low': return 'text-red-600 bg-red-100';
-        default: return 'text-gray-600 bg-gray-100';
+        default: return 'text-gray-600 bg-gray-100'
       }
     };
 
@@ -433,7 +439,7 @@ const AdminPage: React.FC = () => {
         case 'simple': return 'text-blue-600 bg-blue-100';
         case 'moderate': return 'text-purple-600 bg-purple-100';
         case 'advanced': return 'text-orange-600 bg-orange-100';
-        default: return 'text-gray-600 bg-gray-100';
+        default: return 'text-gray-600 bg-gray-100'
       }
     };
 
@@ -515,7 +521,8 @@ const AdminPage: React.FC = () => {
         <div className="mb-3">
           <h4 className="text-sm font-medium text-gray-700 mb-1">Features:</h4>
           <div className="flex flex-wrap gap-1">
-            {config.features.map((feature: any, index: number) => (
+            {config.features.map((feature: any,
+          index: number) => (
               <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                 {feature}
               </span>
@@ -526,7 +533,8 @@ const AdminPage: React.FC = () => {
         <div>
           <h4 className="text-sm font-medium text-gray-700 mb-1">Best for:</h4>
           <ul className="text-xs text-gray-600 list-disc list-inside">
-            {config.useCases.slice(0, 2).map((useCase: any, index: number) => (
+            {config.useCases.slice(0, 2).map((useCase: any,
+          index: number) => (
               <li key={index}>{useCase}</li>
             ))}
           </ul>
@@ -560,13 +568,18 @@ const AdminPage: React.FC = () => {
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
               {[
-                { id: 'overview', name: 'Overview', icon: CogIcon },
-                { id: 'player-config', name: 'Player Configuration', icon: PlayIcon },
-                { id: 'youtube-players', name: 'YouTube Players', icon: PlayIcon },
-                { id: 'local-players', name: 'Local Video Players', icon: VideoCameraIcon },
-                { id: 'search', name: 'Search Settings', icon: SparklesIcon },
-                { id: 'api-testing', name: 'API Testing', icon: BugAntIcon },
-              ].map((tab) => {
+                { id: 'overview',
+          name: 'Overview', icon: CogIcon },
+                { id: 'player-config',
+          name: 'Player Configuration', icon: PlayIcon },
+                { id: 'youtube-players',
+          name: 'YouTube Players', icon: PlayIcon },
+                { id: 'local-players',
+          name: 'Local Video Players', icon: VideoCameraIcon },
+                { id: 'search',
+          name: 'Search Settings', icon: SparklesIcon },
+                { id: 'api-testing',
+          name: 'API Testing', icon: BugAntIcon }].map((tab) => {
                 const Icon = tab.icon;
                 return (
                   <button
@@ -658,8 +671,7 @@ const AdminPage: React.FC = () => {
                           const isCurrentPlayer = config.type === playerType;
                           const isEnabled = enabledYouTubePlayers.includes(config.type as YouTubePlayerType);
                           const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
-                            pageConfigurations[page].youtubePlayer === config.type,
-                          );
+                            pageConfigurations[page].youtubePlayer === config.type);
 
                           return (
                             <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
@@ -716,7 +728,8 @@ const AdminPage: React.FC = () => {
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
                                   <div className="flex flex-wrap gap-1">
-                                    {config.features.slice(0, 3).map((feature: any, index: number) => (
+                                    {config.features.slice(0, 3).map((feature: any,
+          index: number) => (
                                       <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                                         {feature}
                                       </span>
@@ -789,8 +802,7 @@ const AdminPage: React.FC = () => {
                           const isCurrentPlayer = config.type === localPlayerType;
                           const isEnabled = enabledLocalPlayers.includes(config.type as LocalVideoPlayerType);
                           const usedOnPages = getPlayerUsageByPage(config.type).filter(page =>
-                            pageConfigurations[page].localPlayer === config.type,
-                          );
+                            pageConfigurations[page].localPlayer === config.type);
 
                           return (
                             <div key={config.type} className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
@@ -849,7 +861,8 @@ const AdminPage: React.FC = () => {
                                 <div>
                                   <h6 className="text-sm font-medium text-gray-700 mb-1">Features:</h6>
                                   <div className="flex flex-wrap gap-1">
-                                    {config.features.slice(0, 3).map((feature: any, index: number) => (
+                                    {config.features.slice(0, 3).map((feature: any,
+          index: number) => (
                                       <span key={index} className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">
                                         {feature}
                                       </span>
@@ -972,9 +985,7 @@ const AdminPage: React.FC = () => {
                       playerType === config.type,
                       enabledYouTubePlayers.includes(config.type as YouTubePlayerType),
                       () => handlePlayerTypeChange(config.type as YouTubePlayerType),
-                      () => handleToggleYouTubePlayer(config.type as YouTubePlayerType),
-                    ),
-                  )}
+                      () => handleToggleYouTubePlayer(config.type as YouTubePlayerType)))}
                 </div>
               </div>
             )}
@@ -1003,9 +1014,7 @@ const AdminPage: React.FC = () => {
                         handleToggleLocalPlayer(config.type as LocalVideoPlayerType).catch(() => {
                           // Handle promise rejection silently
                         });
-                      },
-                    ),
-                  )}
+                      }))}
                 </div>
               </div>
             )}

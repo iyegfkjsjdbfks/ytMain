@@ -104,8 +104,8 @@ const YouTubeDemo: React.FC = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   className='text-blue-500 hover:underline'
-                >
-                  https://www.youtube.com/watch?v={videoId}
+                >,
+  https://www.youtube.com/watch?v={videoId}
                 </a>
               </p>
             </div>
@@ -125,12 +125,12 @@ const YouTubeDemo: React.FC = () => {
 // Initialize player
 const player = new YouTubePlayer('youtube-player', 'dQw4w9WgXcQ', {
   width: 800,
-  height: 450,
-  playerVars: {
+          height: 450,
+  playerVars: {,
     autoplay: 0,
-    controls: 1,
+          controls: 1,
     modestbranding: 1 },
-  events: {
+          events: {,
     onReady: (event) => {
       },
     onStateChange: (event) => {

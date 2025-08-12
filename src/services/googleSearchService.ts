@@ -10,7 +10,7 @@ export interface YouTubeSearchResult {
   views: number;
   publishedAt: string;
   channelId: string;
-  channelTitle: string;
+  channelTitle: string
 }
 
 export interface GoogleSearchResult {
@@ -36,8 +36,7 @@ export const searchForHomePage = async (
       views: 1000,
       publishedAt: new Date().toISOString(),
       channelId: 'channel1',
-      channelTitle: 'Mock Channel' },
-  ];
+      channelTitle: 'Mock Channel' }];
 };
 
 export default {

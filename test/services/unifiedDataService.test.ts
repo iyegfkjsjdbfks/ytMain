@@ -69,8 +69,7 @@ describe('UnifiedDataService', () => {
       // Mock local video service
       mockVideoServiceModule.getVideos.mockResolvedValue([
         { id: 'local-1', title: 'Local Video 1' } as any,
-        { id: 'local-2', title: 'Local Video 2' } as any,
-      ]);
+        { id: 'local-2', title: 'Local Video 2' } as any]);
       mockVideoServiceModule.getShortsVideos.mockResolvedValue([]);
       mockVideoServiceModule.getVideosByCategory.mockResolvedValue([]);
 
@@ -91,8 +90,7 @@ describe('UnifiedDataService', () => {
 
     it('should filter by type when specified', async () => {
       mockVideoServiceModule.getShortsVideos.mockResolvedValue([
-        { id: 'short-1', title: 'Short Video 1', isShort: true } as any,
-      ]);
+        { id: 'short-1', title: 'Short Video 1', isShort: true } as any]);
 
       const result = await service.getTrendingVideos(10, { type: 'short' });
 
@@ -102,8 +100,7 @@ describe('UnifiedDataService', () => {
 
     it('should filter by category when specified', async () => {
       mockVideoServiceModule.getVideosByCategory.mockResolvedValue([
-        { id: 'music-1', title: 'Music Video 1', category: 'Music' } as any,
-      ]);
+        { id: 'music-1', title: 'Music Video 1', category: 'Music' } as any]);
 
       const result = await service.getTrendingVideos(10, { category: 'Music' });
 
@@ -158,8 +155,7 @@ describe('UnifiedDataService', () => {
   describe('searchVideos', () => {
     beforeEach(() => {
       mockVideoServiceModule.searchVideos.mockResolvedValue([
-        { id: 'search-1', title: 'Search Result 1' } as any,
-      ]);
+        { id: 'search-1', title: 'Search Result 1' } as any]);
 
       mockMetadataService.normalizeLocalVideo.mockImplementation((video) => ({
         ...video,
@@ -176,8 +172,7 @@ describe('UnifiedDataService', () => {
 
     it('should return trending videos for empty query', async () => {
       mockVideoServiceModule.getVideos.mockResolvedValue([
-        { id: 'trending-1', title: 'Trending Video 1' } as any,
-      ]);
+        { id: 'trending-1', title: 'Trending Video 1' } as any]);
 
       const result = await service.searchVideos('', {}, 10);
 
@@ -188,8 +183,7 @@ describe('UnifiedDataService', () => {
     it('should apply filters to search results', async () => {
       mockVideoServiceModule.searchVideos.mockResolvedValue([
         { id: 'search-1', title: 'Search Result 1', isShort: true, category: 'Music' } as any,
-        { id: 'search-2', title: 'Search Result 2', isShort: false, category: 'Gaming' } as any,
-      ]);
+        { id: 'search-2', title: 'Search Result 2', isShort: false, category: 'Gaming' } as any]);
 
       const result = await service.searchVideos('test', { type: 'short', category: 'Music' }, 10);
 
@@ -314,13 +308,11 @@ describe('UnifiedDataService', () => {
   describe('Video Mixing Strategies', () => {
     const localVideos = [
       { id: 'local-1', title: 'Local 1', views: 1000 },
-      { id: 'local-2', title: 'Local 2', views: 2000 },
-    ];
+      { id: 'local-2', title: 'Local 2', views: 2000 }];
 
     const youtubeVideos = [
       { id: 'yt-1', title: 'YouTube 1', views: 1500 },
-      { id: 'yt-2', title: 'YouTube 2', views: 2500 },
-    ];
+      { id: 'yt-2', title: 'YouTube 2', views: 2500 }];
 
     it('should mix videos using round-robin strategy', async () => {
       service.updateConfig({ mixing: { strategy: 'round-robin' } });
@@ -357,8 +349,7 @@ describe('UnifiedDataService', () => {
         { ...localVideos[0], likes: 100, commentCount: 10 },
         { ...localVideos[1], likes: 200, commentCount: 20 },
         { ...youtubeVideos[0], likes: 150, commentCount: 15 },
-        { ...youtubeVideos[1], likes: 250, commentCount: 25 },
-      ];
+        { ...youtubeVideos[1], likes: 250, commentCount: 25 }];
 
       const mixedVideos = (service as any).mixVideoResults(
         videosWithEngagement.slice(0, 2),

@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect, useRef, FC } from 'react';
 import { cn } from '../src/lib/utils';
 
 interface CategoryChipsProps {
-  categories: string;
+  categories: string;,
   selectedCategory: string;
   onSelectCategory: (category: any) => void;
   className?: string;
@@ -41,7 +41,7 @@ return;
 
     container.scrollBy({
       left: -200,
-      behavior: 'smooth' });
+          behavior: 'smooth' });
   }, []);
 
   const scrollRight = useCallback(() => {
@@ -52,7 +52,7 @@ return;
 
     container.scrollBy({
       left: 200,
-      behavior: 'smooth' });
+          behavior: 'smooth' });
   }, []);
 
   // Set up scroll event listener
@@ -72,8 +72,8 @@ return;
     return () => {
       container.removeEventListener('scroll', checkScrollPosition as EventListener);
       resizeObserver.disconnect();
-    };
-  }, [checkScrollPosition]);
+    
+        }}, [checkScrollPosition]);
 
   // Scroll to selected category when it changes
   useEffect(() => {
@@ -122,7 +122,8 @@ return;
       <div
         ref={scrollContainerRef}
         className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        style={{ scrollbarWidth: 'none',
+          msOverflowStyle: 'none' }}
       >
         {categories?.map((category: any) => {
           const isSelected = category === selectedCategory;
@@ -136,8 +137,7 @@ return;
                 'flex-shrink-0 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap touch-manipulation min-h-[36px] sm:min-h-[40px]',
                 isSelected
                   ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
-              )}
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700')}
             >
               {category}
             </button>

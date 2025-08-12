@@ -9,52 +9,52 @@ import { vi } from 'vitest';
 // Mock data generators
 export const mockVideo = (overrides = {}) => ({
   id: 'video-1',
-  title: 'Test Video',
+          title: 'Test Video',
   description: 'Test video description',
-  thumbnail: 'https://example.com/thumbnail.jpg',
-  duration: 300,
+          thumbnail: 'https://example.com/thumbnail.jpg',
+          duration: 300,
   views: 1000,
-  likes: 50,
+          likes: 50,
   dislikes: 5,
-  uploadDate: '2024-01-01T00:00:00Z',
-  channel: {
+          uploadDate: '2024-01-01T00:00:00Z',
+          channel: {,
     id: 'channel-1',
-    name: 'Test Channel',
+          name: 'Test Channel',
     avatar: 'https://example.com/avatar.jpg',
-    subscribers: 10000 },
+          subscribers: 10000 },
   url: 'https://example.com/video.mp4',
   ...overrides });
 
 export const mockUser = (overrides = {}) => ({
   id: 'user-1',
-  username: 'testuser',
+          username: 'testuser',
   email: 'test@example.com',
-  avatar: 'https://example.com/user-avatar.jpg',
-  subscriptions: [],
+          avatar: 'https://example.com/user-avatar.jpg',
+          subscriptions: [],
   watchHistory: [],
-  preferences: {
+          preferences: {,
     theme: 'light',
-    autoplay: true,
+          autoplay: true,
     quality: 'auto' },
   ...overrides });
 
 export const mockComment = (overrides = {}) => ({
   id: 'comment-1',
-  content: 'Test comment',
+          content: 'Test comment',
   author: mockUser(),
-  timestamp: '2024-01-01T00:00:00Z',
-  likes: 10,
+          timestamp: '2024-01-01T00:00:00Z',
+          likes: 10,
   replies: [],
   ...overrides });
 
 export const mockPost = (overrides = {}) => ({
   id: 'post-1',
-  author: 'Test User',
+          author: 'Test User',
   content: 'Test post content',
-  timestamp: '2024-01-01T00:00:00Z',
-  likes: 10,
+          timestamp: '2024-01-01T00:00:00Z',
+          likes: 10,
   comments: 5,
-  avatar: 'https://example.com/avatar.jpg',
+          avatar: 'https://example.com/avatar.jpg',
   ...overrides });
 
 // Test providers wrapper
@@ -68,12 +68,12 @@ const AllTheProviders = ({
   children,
   queryClient }: AllTheProvidersProps) => {
   const testQueryClient = queryClient || new QueryClient({
-    defaultOptions: {
+    defaultOptions: {,
       queries: {
         retry: false,
-        gcTime: 0,
+          gcTime: 0,
         staleTime: 0 },
-      mutations: {
+          mutations: {,
         retry: false } } });
 
   return (
@@ -91,19 +91,19 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   initialEntries?: string;
 }
 
-const customRender = (
+const customRender = (,
   ui: ReactElement,
-  options: CustomRenderOptions = {},
-) => {
+          options: CustomRenderOptions = {}) => {
   const { queryClient, initialEntries, ...renderOptions } = options;
 
   return render(ui, {
     wrapper: ({ children }) => (
       <AllTheProviders
         queryClient={queryClient || new QueryClient({
-          defaultOptions: {
-            queries: { retry: false, gcTime: 0, staleTime: 0 },
-            mutations: { retry: false } } })}
+          defaultOptions: {,
+            queries: { retry: false,
+          gcTime: 0, staleTime: 0 },
+          mutations: { retry: false } } })}
       >
         {children}
       </AllTheProviders>
@@ -116,17 +116,17 @@ export const mockIntersectionObserver = () => {
   const mockIntersectionObserver = vi.fn();
   mockIntersectionObserver.mockReturnValue({
     observe: vi.fn(),
-    unobserve: vi.fn(),
+          unobserve: vi.fn(),
     disconnect: vi.fn() });
 
   Object.defineProperty(window, 'IntersectionObserver', {
     writable: true,
-    configurable: true,
+          configurable: true,
     value: mockIntersectionObserver });
 
   Object.defineProperty(global, 'IntersectionObserver', {
     writable: true,
-    configurable: true,
+          configurable: true,
     value: mockIntersectionObserver });
 
   return mockIntersectionObserver;
@@ -136,12 +136,12 @@ export const mockResizeObserver = () => {
   const mockResizeObserver = vi.fn();
   mockResizeObserver.mockReturnValue({
     observe: vi.fn(),
-    unobserve: vi.fn(),
+          unobserve: vi.fn(),
     disconnect: vi.fn() });
 
   Object.defineProperty(window, 'ResizeObserver', {
     writable: true,
-    configurable: true,
+          configurable: true,
     value: mockResizeObserver });
 
   return mockResizeObserver;
@@ -151,16 +151,16 @@ export const mockMatchMedia = (matches = false) => {
   const mockMatchMedia = vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
-    onchange: null,
+          onchange: null,
     addListener: vi.fn(),
-    removeListener: vi.fn(),
+          removeListener: vi.fn(),
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
     dispatchEvent: vi.fn() }));
 
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: mockMatchMedia });
+          value: mockMatchMedia });
 
   return mockMatchMedia;
 };
@@ -170,7 +170,7 @@ export const mockLocalStorage = () => {
 
   const mockStorage = {
     getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+          setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
     removeItem: vi.fn((key) => {
@@ -180,11 +180,11 @@ export const mockLocalStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn() };
+          key: vi.fn() };
 
   Object.defineProperty(window, 'localStorage', {
     value: mockStorage,
-    writable: true });
+          writable: true });
 
   return mockStorage;
 };
@@ -194,7 +194,7 @@ export const mockSessionStorage = () => {
 
   const mockStorage = {
     getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+          setItem: vi.fn((key, value) => {
       store[key] = value;
     }),
     removeItem: vi.fn((key) => {
@@ -204,11 +204,11 @@ export const mockSessionStorage = () => {
       Object.keys(store).forEach(key => delete store[key]);
     }),
     length: 0,
-    key: vi.fn() };
+          key: vi.fn() };
 
   Object.defineProperty(window, 'sessionStorage', {
     value: mockStorage,
-    writable: true });
+          writable: true });
 
   return mockStorage;
 };
@@ -217,42 +217,43 @@ export const mockSessionStorage = () => {
 export const mockFetch = () => {
   const mockFetch = vi.fn();
 
-  const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
+  const mockResponse = (data: any,
+          options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
-    status: options.status ?? 200,
+          status: options.status ?? 200,
     json: vi.fn().mockResolvedValue(data),
-    text: vi.fn().mockResolvedValue(JSON.stringify(data)),
+          text: vi.fn().mockResolvedValue(JSON.stringify(data)),
     blob: vi.fn().mockResolvedValue(new Blob([JSON.stringify(data)])),
-    headers: new Headers(),
+          headers: new Headers(),
     statusText: 'OK' });
 
   mockFetch.mockResolvedValue(mockResponse({}));
 
   Object.defineProperty(global, 'fetch', {
     value: mockFetch,
-    writable: true });
+          writable: true });
 
-  return { mockFetch, mockResponse };
-};
+  return { mockFetch, mockResponse }};
 
 // Performance mock
 export const mockPerformance = () => {
   const mockPerformance = {
     now: vi.fn(() => Date.now()),
-    mark: vi.fn(),
+          mark: vi.fn(),
     measure: vi.fn(),
-    getEntriesByType: vi.fn(() => []),
+          getEntriesByType: vi.fn(() => []),
     getEntriesByName: vi.fn(() => []),
-    clearMarks: vi.fn(),
+          clearMarks: vi.fn(),
     clearMeasures: vi.fn(),
-    memory: {
+          memory: {,
       usedJSHeapSize: 1000000,
-      totalJSHeapSize: 2000000,
-      jsHeapSizeLimit: 4000000 } };
+          totalJSHeapSize: 2000000,
+      jsHeapSizeLimit: 4000000 } 
+        };
 
   Object.defineProperty(global, 'performance', {
     value: mockPerformance,
-    writable: true });
+          writable: true });
 
   return mockPerformance;
 };
@@ -261,11 +262,11 @@ export const mockPerformance = () => {
 export const mockURL = () => {
   const mockURL = {
     createObjectURL: vi.fn(() => 'blob:mock-url'),
-    revokeObjectURL: vi.fn() };
+          revokeObjectURL: vi.fn() };
 
   Object.defineProperty(global, 'URL', {
     value: mockURL,
-    writable: true });
+          writable: true });
 
   return mockURL;
 };
@@ -274,26 +275,26 @@ export const mockURL = () => {
 export const mockVideoElement = () => {
   const mockVideo = {
     play: vi.fn().mockResolvedValue(undefined),
-    pause: vi.fn(),
+          pause: vi.fn(),
     load: vi.fn(),
-    currentTime: 0,
+          currentTime: 0,
     duration: 100,
-    paused: true,
+          paused: true,
     ended: false,
-    volume: 1,
+          volume: 1,
     muted: false,
-    playbackRate: 1,
+          playbackRate: 1,
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
     dispatchEvent: vi.fn() };
 
   Object.defineProperty(global.HTMLMediaElement.prototype, 'play', {
     value: mockVideo.play,
-    writable: true });
+          writable: true });
 
   Object.defineProperty(global.HTMLMediaElement.prototype, 'pause', {
     value: mockVideo.pause,
-    writable: true });
+          writable: true });
 
   return mockVideo;
 };
@@ -305,12 +306,12 @@ export const waitForLoadingToFinish = () => {
 
 export const createMockQueryClient = () => {
   return new QueryClient({
-    defaultOptions: {
+    defaultOptions: {,
       queries: {
         retry: false,
-        gcTime: 0,
+          gcTime: 0,
         staleTime: 0 },
-      mutations: {
+          mutations: {,
         retry: false } } });
 };
 

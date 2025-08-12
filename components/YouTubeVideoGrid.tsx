@@ -14,8 +14,7 @@ interface YouTubeVideoGridProps {
     lg?: number;
     xl?: number;
     '2xl'?: number;
-  };
-}
+  }}
 
 const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
   videos,
@@ -23,9 +22,9 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
   keyPrefix = '',
   columns = {
     sm: 1,
-    md: 2,
+          md: 2,
     lg: 3,
-    xl: 3,
+          xl: 3,
     '2xl': 4 } }) => {
   const getGridClasses = () => {
     const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
@@ -34,15 +33,15 @@ const YouTubeVideoGrid: React.FC<YouTubeVideoGridProps> = memo(({
       columns.md && `md:grid-cols-${columns.md}`,
       columns.lg && `lg:grid-cols-${columns.lg}`,
       columns.xl && `xl:grid-cols-${columns.xl}`,
-      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`,
-    ].filter(Boolean).join(' ');
+      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`].filter(Boolean).join(' ');
 
     return `${baseClasses} ${responsiveClasses} ${className}`;
   };
 
   return (
     <div className={getGridClasses()}>
-      {videos.map((video: any, index: number) => {
+      {videos.map((video: any,
+          index: number) => {
         // Generate a stable key using available identifiers
         const videoKey = video.id || (video as any).videoId || `video-${index}`;
         return (

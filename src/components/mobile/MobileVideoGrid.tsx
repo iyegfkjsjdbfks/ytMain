@@ -5,7 +5,7 @@ import { useIntersectionObserver } from '../../hooks/usePerformanceOptimization'
 import type { Video } from '../../types/core';
 
 interface MobileVideoGridProps {
-  videos: Video;
+  videos: Video;,
   onVideoClick: (video: Video) => void;
   onLoadMore?: () => void;
   loading?: boolean;
@@ -15,12 +15,11 @@ interface MobileVideoGridProps {
 
 interface MobileVideoItemProps {
   index;
-  style: React.CSSProperties;
+  style: React.CSSProperties;,
   data: {
-    videos: Video;
-    onVideoClick: (video: Video) => void;
-  };
-}
+    videos: Video;,
+    onVideoClick: (video: Video) => void
+  }}
 
 const MobileVideoItem = memo<MobileVideoItemProps>(({ index, style, data }) => {
   const { videos, onVideoClick } = data;
@@ -137,14 +136,15 @@ const MobileVideoGrid = memo<MobileVideoGridProps>(
     // Intersection observer for load more
     const { ref: loadMoreRef, isIntersecting } = useIntersectionObserver({
       threshold: 0.1,
-      rootMargin: '100px' });
+          rootMargin: '100px' });
 
     // Load more when intersecting
     useEffect(() => {
       if (isIntersecting && hasMore && !loading && onLoadMore) {
         onLoadMore();
       }
-    }, [isIntersecting, hasMore, loading, onLoadMore]);
+    
+        }, [isIntersecting, hasMore, loading, onLoadMore]);
 
     if (loading && videos.length === 0) {
       return (

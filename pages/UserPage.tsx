@@ -51,11 +51,14 @@ const UserPage: React.FC = () => {
   };
 
   const tabs = [
-    { id: 'videos' as const, label: 'Videos', icon: PlayIcon },
-    { id: 'playlists' as const, label: 'Playlists', icon: QueueListIcon },
-    { id: 'community' as const, label: 'Community', icon: ChatBubbleLeftRightIcon },
-    { id: 'about' as const, label: 'About', icon: InformationCircleIcon },
-  ];
+    { id: 'videos' as const,
+          label: 'Videos', icon: PlayIcon },
+    { id: 'playlists' as const,
+          label: 'Playlists', icon: QueueListIcon },
+    { id: 'community' as const,
+          label: 'Community', icon: ChatBubbleLeftRightIcon },
+    { id: 'about' as const,
+          label: 'About', icon: InformationCircleIcon }];
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -132,8 +135,7 @@ const UserPage: React.FC = () => {
           </div>
         );
 
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -185,7 +187,8 @@ const UserPage: React.FC = () => {
                 <button
                   onClick={() => {
                     // Toggle notification settings for this channel
-                  }}
+                  
+        }}
                   className="p-2.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded-full transition-colors"
                   title="Notification settings"
                 >

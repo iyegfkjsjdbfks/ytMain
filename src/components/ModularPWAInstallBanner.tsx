@@ -30,10 +30,10 @@ interface ModularPWAInstallBannerProps {
 }
 
 interface BannerState {
-  isVisible: boolean;
+  isVisible: boolean;,
   currentView: 'install' | 'update' | 'offline' | 'notification';
-  isAnimating: boolean;
-  dismissedAt: number | null;
+  isAnimating: boolean;,
+  dismissedAt: number | null
 }
 
 const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
@@ -49,9 +49,9 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
   onUpdateInstall }) => {
   const [state, setState] = useState<BannerState>({
     isVisible: false,
-    currentView: 'install',
+          currentView: 'install',
     isAnimating: false,
-    dismissedAt: null });
+          dismissedAt: null });
 
   // Use modular hooks
   const pwa = usePWA();
@@ -83,7 +83,8 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
         if (Date.now() - dismissedTime < dayInMs) {
           return;
         }
-      }
+      
+        }
 
       // Determine priority view
       let currentView: BannerState['currentView'] = 'install';
@@ -119,8 +120,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
     shouldShowInstall,
     shouldShowUpdate,
     shouldShowOffline,
-    shouldShowNotification,
-  ]);
+    shouldShowNotification]);
 
   // Handle install
   const handleInstall = useCallback(async () => {
@@ -181,7 +181,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       setState(prev => ({
         ...prev,
         isVisible: false,
-        isAnimating: false }));
+          isAnimating: false }));
     } catch (error) {
       setState(prev => ({ ...prev, isAnimating: false }));
     }
@@ -192,7 +192,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
     setState(prev => ({
       ...prev,
       isVisible: false,
-      dismissedAt: Date.now() }));
+          dismissedAt: Date.now() }));
 
     localStorage.setItem('pwa-banner-dismissed', Date.now().toString());
     onInstallDismiss?.();
@@ -206,22 +206,22 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
   // Theme styles
   const theme = {
     primaryColor: customTheme?.primaryColor || '#007bff',
-    backgroundColor: customTheme?.backgroundColor || '#ffffff',
+          backgroundColor: customTheme?.backgroundColor || '#ffffff',
     textColor: customTheme?.textColor || '#333333',
-    borderRadius: customTheme?.borderRadius || '8px' };
+          borderRadius: customTheme?.borderRadius || '8px' };
 
   // Position classes
   const positionClasses = {
     top: 'top-4 left-4 right-4',
-    bottom: 'bottom-4 left-4 right-4',
+          bottom: 'bottom-4 left-4 right-4',
     center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' };
 
   // Variant classes
   const variantClasses = {
     default: 'p-4 shadow-lg',
-    minimal: 'p-2 shadow-md',
+          minimal: 'p-2 shadow-md',
     detailed: 'p-6 shadow-xl',
-    floating: 'p-4 shadow-2xl rounded-full' };
+          floating: 'p-4 shadow-2xl rounded-full' };
 
   // Content based on current view
   const renderContent = () => {
@@ -232,7 +232,8 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
             <div className='flex-1'>
               <h3
                 className='font-semibold text-lg mb-1'
-                style={{ color: theme.textColor }}
+                style={{ color: theme.textColor 
+        }}
               >
                 Install YouTubeX
               </h3>
@@ -296,8 +297,8 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
                 <p
                   className='text-xs mt-1 opacity-60'
                   style={{ color: theme.textColor }}
-                >
-                  Version: {pwaUpdates.updateVersion}
+                >,
+  Version: {pwaUpdates.updateVersion}
                 </p>
               )}
             </div>
@@ -400,8 +401,7 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
           </div>
         );
 
-      default:
-        return null;
+      default: return null
     }
   };
 
@@ -410,9 +410,9 @@ const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
       className={`fixed z-50 ${positionClasses[position]} ${variantClasses[variant]} transition-all duration-300 ease-in-out`}
       style={{
         backgroundColor: theme.backgroundColor,
-        borderRadius: theme.borderRadius,
+          borderRadius: theme.borderRadius,
         transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
-        opacity: state.isVisible ? 1 : 0 }}
+          opacity: state.isVisible ? 1 : 0 }}
     >
       {renderContent()}
 

@@ -11,9 +11,9 @@ export interface YouTubeApiResponse<T> {
   prevPageToken?: string;
   pageInfo: {
     totalResults: number;
-    resultsPerPage: number;
+    resultsPerPage: number
   };
-  items: T;
+  items: T
 }
 
 // Video Interfaces
@@ -29,7 +29,7 @@ export interface YouTubeVideoSnippet {
   liveBroadcastContent: 'none' | 'upcoming' | 'live';
   localized: {
     title: string;
-    description: string;
+    description: string
   };
   defaultAudioLanguage?: string;
   defaultLanguage?: string;
@@ -71,7 +71,7 @@ export interface YouTubeVideoContentDetails {
     rtcRating?: string;
     ytRating?: string;
   };
-  projection: 'rectangular' | '360';
+  projection: 'rectangular' | '360'
 }
 
 export interface YouTubeVideoStatus {
@@ -115,19 +115,19 @@ export interface YouTubeVideo {
     string,
     {
       title: string;
-      description: string;
+      description: string
     }
   >;
   player?: {
-    embedHtml: string;
+    embedHtml: string
   };
   topicDetails?: {
     topicIds: string;
     relevantTopicIds: string;
-    topicCategories: string;
+    topicCategories: string
   };
   recordingDetails?: {
-    recordingDate: string;
+    recordingDate: string
   };
   fileDetails?: {
     fileName: string;
@@ -147,24 +147,24 @@ export interface YouTubeVideo {
         | 'upsideDown'
         | 'counterClockwise'
         | 'other';
-      vendor: string;
+      vendor: string
     }>;
     audioStreams: Array<{
       channelCount: number;
       codec: string;
       bitrateBps: string;
-      vendor: string;
+      vendor: string
     }>;
     durationMs: string;
     bitrateBps: string;
-    creationTime: string;
+    creationTime: string
   };
   processingDetails?: {
     processingStatus: 'processing' | 'succeeded' | 'failed' | 'terminated';
     processingProgress: {
       partsTotal: string;
       partsProcessed: string;
-      timeLeftMs: string;
+      timeLeftMs: string
     };
     processingFailureReason:
       | 'uploadFailed'
@@ -175,7 +175,7 @@ export interface YouTubeVideo {
     processingIssuesAvailability: 'processing' | 'available' | 'unavailable';
     tagSuggestionsAvailability: 'processing' | 'available' | 'unavailable';
     editorSuggestionsAvailability: 'processing' | 'available' | 'unavailable';
-    thumbnailsAvailability: 'processing' | 'available' | 'unavailable';
+    thumbnailsAvailability: 'processing' | 'available' | 'unavailable'
   };
   suggestions?: {
     processingErrors: string;
@@ -183,9 +183,9 @@ export interface YouTubeVideo {
     processingHints: string;
     tagSuggestions: Array<{
       tag: string;
-      categoryRestricts: string;
+      categoryRestricts: string
     }>;
-    editorSuggestions: string;
+    editorSuggestions: string
   };
   liveStreamingDetails?: {
     actualStartTime?: string;
@@ -207,7 +207,7 @@ export interface YouTubeChannelSnippet {
   defaultLanguage?: string;
   localized: {
     title: string;
-    description: string;
+    description: string
   };
   country?: string;
 }
@@ -216,7 +216,7 @@ export interface YouTubeChannelStatistics {
   viewCount: string;
   subscriberCount: string;
   hiddenSubscriberCount: boolean;
-  videoCount: string;
+  videoCount: string
 }
 
 export interface YouTubeChannelContentDetails {
@@ -252,34 +252,34 @@ export interface YouTubeChannel {
       moderateComments: boolean;
       unsubscribedTrailer: string;
       defaultLanguage: string;
-      country: string;
+      country: string
     };
     watch: {
       textColor: string;
       backgroundColor: string;
-      featuredPlaylistId: string;
+      featuredPlaylistId: string
     };
   };
   auditDetails?: {
     overallGoodStanding: boolean;
     communityGuidelinesGoodStanding: boolean;
     copyrightStrikesGoodStanding: boolean;
-    contentIdClaimsGoodStanding: boolean;
+    contentIdClaimsGoodStanding: boolean
   };
   contentOwnerDetails?: {
     contentOwner: string;
-    timeLinked: string;
+    timeLinked: string
   };
   localizations?: Record<
     string,
     {
       title: string;
-      description: string;
+      description: string
     }
   >;
   topicDetails?: {
     topicIds: string;
-    topicCategories: string;
+    topicCategories: string
   };
 }
 
@@ -292,7 +292,7 @@ export interface YouTubeSearchResultSnippet {
   thumbnails: YouTubeThumbnails;
   channelTitle: string;
   liveBroadcastContent: 'none' | 'upcoming' | 'live';
-  publishTime: string;
+  publishTime: string
 }
 
 export interface YouTubeSearchResult {
@@ -304,7 +304,7 @@ export interface YouTubeSearchResult {
     channelId?: string;
     playlistId?: string;
   };
-  snippet: YouTubeSearchResultSnippet;
+  snippet: YouTubeSearchResultSnippet
 }
 
 // Playlist Interfaces
@@ -318,16 +318,16 @@ export interface YouTubePlaylistSnippet {
   defaultLanguage?: string;
   localized: {
     title: string;
-    description: string;
+    description: string
   };
 }
 
 export interface YouTubePlaylistStatus {
-  privacyStatus: 'public' | 'unlisted' | 'private';
+  privacyStatus: 'public' | 'unlisted' | 'private'
 }
 
 export interface YouTubePlaylistContentDetails {
-  itemCount: number;
+  itemCount: number
 }
 
 export interface YouTubePlaylist {
@@ -341,11 +341,11 @@ export interface YouTubePlaylist {
     string,
     {
       title: string;
-      description: string;
+      description: string
     }
   >;
   player?: {
-    embedHtml: string;
+    embedHtml: string
   };
 }
 
@@ -361,7 +361,7 @@ export interface YouTubePlaylistItemSnippet {
   position: number;
   resourceId: {
     kind: 'youtube#video';
-    videoId: string;
+    videoId: string
   };
   videoOwnerChannelTitle?: string;
   videoOwnerChannelId?: string;
@@ -372,11 +372,11 @@ export interface YouTubePlaylistItemContentDetails {
   startAt?: string;
   endAt?: string;
   note?: string;
-  videoPublishedAt: string;
+  videoPublishedAt: string
 }
 
 export interface YouTubePlaylistItemStatus {
-  privacyStatus: 'public' | 'unlisted' | 'private';
+  privacyStatus: 'public' | 'unlisted' | 'private'
 }
 
 export interface YouTubePlaylistItem {
@@ -394,7 +394,7 @@ export interface YouTubeCommentSnippet {
   authorProfileImageUrl: string;
   authorChannelUrl: string;
   authorChannelId: {
-    value: string;
+    value: string
   };
   videoId: string;
   textDisplay: string;
@@ -404,14 +404,14 @@ export interface YouTubeCommentSnippet {
   likeCount: number;
   moderationStatus?: 'heldForReview' | 'likelySpam' | 'published';
   publishedAt: string;
-  updatedAt: string;
+  updatedAt: string
 }
 
 export interface YouTubeComment {
   kind: 'youtube#comment';
   etag: string;
   id: string;
-  snippet: YouTubeCommentSnippet;
+  snippet: YouTubeCommentSnippet
 }
 
 export interface YouTubeCommentThreadSnippet {
@@ -420,7 +420,7 @@ export interface YouTubeCommentThreadSnippet {
   topLevelComment: YouTubeComment;
   canReply: boolean;
   totalReplyCount: number;
-  isPublic: boolean;
+  isPublic: boolean
 }
 
 export interface YouTubeCommentThread {
@@ -429,7 +429,7 @@ export interface YouTubeCommentThread {
   id: string;
   snippet: YouTubeCommentThreadSnippet;
   replies?: {
-    comments: YouTubeComment;
+    comments: YouTubeComment
   };
 }
 
@@ -445,7 +445,7 @@ export interface YouTubeThumbnails {
 export interface YouTubeThumbnail {
   url: string;
   width: number;
-  height: number;
+  height: number
 }
 
 // API Response Types
@@ -517,12 +517,12 @@ export interface YouTubePlayer {
   getVideoEmbedCode(): string;
   getPlaylist(): string;
   getPlaylistIndex(): number;
-  addEventListener(
-    event: Event,
+  addEventListener(,
+  event: Event,
     listener: (event: YouTubePlayerEvent) => void
   ): void;
-  removeEventListener(
-    event: Event,
+  removeEventListener(,
+  event: Event,
     listener: (event: YouTubePlayerEvent) => void
   ): void;
   getIframe(): HTMLIFrameElement;

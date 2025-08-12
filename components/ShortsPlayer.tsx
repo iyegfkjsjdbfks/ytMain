@@ -8,12 +8,12 @@ const HeartIconSolid = HeartSolidIcon;
 import type { Short } from '../src/types/core';
 
 interface ShortsPlayerProps {
-  shorts: Short;
+  shorts: Short;,
   currentIndex: number;
-  onIndexChange: (index: number) => void;
-  onLike: (shortId: any) => void;
-  onSubscribe: (channelId: any) => void;
-  onComment: (shortId: any) => void;
+  onIndexChange: (index: number) => void;,
+  onLike: (shortId: any) => void;,
+  onSubscribe: (channelId: any) => void;,
+  onComment: (shortId: any) => void;,
   onShare: (shortId: any) => void;
   className?: string;
 }
@@ -58,7 +58,8 @@ return;
         // Loop back to first short
         onIndexChange(0);
       }
-    };
+    
+        };
 
     const handleLoadStart = () => setIsLoading(true);
     const handleCanPlay = () => setIsLoading(false);
@@ -73,8 +74,7 @@ return;
       video.removeEventListener('ended', handleEnded as EventListener);
       video.removeEventListener('loadstart', handleLoadStart as EventListener);
       video.removeEventListener('canplay', handleCanPlay as EventListener);
-    };
-  }, [currentIndex, shorts.length, onIndexChange]);
+    }}, [currentIndex, shorts.length, onIndexChange]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -86,7 +86,8 @@ return;
     if (isPlaying) {
       video.play().catch(console.error);
     }
-  }, [currentIndex, isPlaying]);
+  
+        }, [currentIndex, isPlaying]);
 
   useEffect(() => {
     // Handle keyboard navigation
@@ -110,7 +111,8 @@ return;
           toggleMute();
           break;
       }
-    };
+    
+        };
 
     document.addEventListener('keydown', handleKeyDown as EventListener);
     return () => document.removeEventListener('keydown', handleKeyDown as EventListener);
@@ -292,7 +294,8 @@ return null;
         {/* Hashtags */}
         {currentShort.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
-            {currentShort.tags.slice(0, 3).map((tag: string, index: number) => (
+            {currentShort.tags.slice(0, 3).map((tag: string,
+          index: number) => (
               <span
                 key={index}
                 className="text-blue-400 text-sm hover:text-blue-300 cursor-pointer"

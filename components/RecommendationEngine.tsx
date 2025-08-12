@@ -14,7 +14,7 @@ interface RecommendationEngineProps {
   currentVideo?: Video;
   currentVideoId?: string;
   maxRecommendations?: number;
-  onVideoSelect?: (videoId: any) => void;
+  onVideoSelect?: (videoId: any) => void
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -51,7 +51,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
     console.log('   Strategy: Google Custom Search (discovery) + YouTube Data API v3 (metadata)');
 
     if (googleSearchConfigured && youtubeApiKey) {
-      console.log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata');
+      console.log('✅ Optimal setup: Google Custom Search discovery with YouTube Data API v3 metadata')
     } else if (googleSearchConfigured) {
       console.log('⚠️ Google Custom Search discovery only (YouTube API metadata not available)');
     } else if (youtubeApiKey) {
@@ -86,8 +86,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
             .split(' ')
             .filter(word =>
               word.length > 3 &&
-              !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()),
-            )
+              !['the', 'and', 'or', 'but', 'with', 'this', 'that', 'from', 'they', 'have', 'been', 'were', 'said', 'each', 'which', 'their', 'time', 'will', 'about', 'official', 'video', 'music'].includes(word.toLowerCase()))
             .slice(0, 3); // Take first 3 meaningful words
 
           if (titleWords.length > 0) {
@@ -101,7 +100,8 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           }
 
           console.log('🔍 Searching for related videos with intelligent query:', searchQuery);
-          console.log('🔍 Generated from video:', { title: currentVideo.title, channel: currentVideo.channelName, category: currentVideo.category });
+          console.log('🔍 Generated from video:', { title: currentVideo.title,
+          channel: currentVideo.channelName, category: currentVideo.category });
 
           // Use Google Custom Search directly for better recommendations
           const { searchYouTubeWithGoogleSearch } = await import('../services/googleSearchService');
@@ -111,26 +111,27 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           // Convert Google Custom Search results to Video format
           recommendedVideos = googleSearchResults.map((googleVideo) => ({
             id: googleVideo.id,
-            title: googleVideo.title,
+          title: googleVideo.title,
             description: googleVideo.description,
-            thumbnailUrl: googleVideo.thumbnailUrl,
+          thumbnailUrl: googleVideo.thumbnailUrl,
             videoUrl: googleVideo.videoUrl,
-            duration: googleVideo.duration || '0:00',
-            views: googleVideo.views,
+          duration: googleVideo.duration || '0:00',
+          views: googleVideo.views,
             viewCount: googleVideo.viewCount || 0,
-            channelName: googleVideo.channelName,
+          channelName: googleVideo.channelName,
             channelId: googleVideo.channelId || '',
-            channelAvatarUrl: googleVideo.channelAvatarUrl || '',
+          channelAvatarUrl: googleVideo.channelAvatarUrl || '',
             category: googleVideo.categoryId || 'Entertainment',
-            tags: googleVideo.tags || [],
+          tags: googleVideo.tags || [],
             likes: googleVideo.likeCount || 0,
-            dislikes: googleVideo.dislikeCount || 0,
+          dislikes: googleVideo.dislikeCount || 0,
             uploadedAt: googleVideo.uploadedAt || new Date().toISOString(),
-            isShort: googleVideo.isShort || false,
-            isLive: false, // GoogleSearchResult doesn't have isLive property
-            commentCount: googleVideo.commentCount || 0,
-            // Required Video interface properties
-            visibility: 'public' as const, createdAt: new Date().toISOString(),
+          isShort: googleVideo.isShort || false,
+            isLive: false, // GoogleSearchResult doesn't have isLive property,
+  commentCount: googleVideo.commentCount || 0,
+            // Required Video interface properties,
+  visibility: 'public' as const,
+          createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }));
         } else {
           // Get trending videos using Google Custom Search
@@ -142,26 +143,27 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
           // Convert Google Custom Search results to Video format
           recommendedVideos = trendingResults.map((googleVideo) => ({
             id: googleVideo.id,
-            title: googleVideo.title,
+          title: googleVideo.title,
             description: googleVideo.description,
-            thumbnailUrl: googleVideo.thumbnailUrl,
+          thumbnailUrl: googleVideo.thumbnailUrl,
             videoUrl: googleVideo.videoUrl,
-            duration: googleVideo.duration || '0:00',
-            views: googleVideo.views,
+          duration: googleVideo.duration || '0:00',
+          views: googleVideo.views,
             viewCount: googleVideo.viewCount || 0,
-            channelName: googleVideo.channelName,
+          channelName: googleVideo.channelName,
             channelId: googleVideo.channelId || '',
-            channelAvatarUrl: googleVideo.channelAvatarUrl || '',
+          channelAvatarUrl: googleVideo.channelAvatarUrl || '',
             category: googleVideo.categoryId || 'Entertainment',
-            tags: googleVideo.tags || [],
+          tags: googleVideo.tags || [],
             likes: googleVideo.likeCount || 0,
-            dislikes: googleVideo.dislikeCount || 0,
+          dislikes: googleVideo.dislikeCount || 0,
             uploadedAt: googleVideo.uploadedAt || new Date().toISOString(),
-            isShort: googleVideo.isShort || false,
-            isLive: false, // GoogleSearchResult doesn't have isLive property
-            commentCount: googleVideo.commentCount || 0,
-            // Required Video interface properties
-            visibility: 'public' as const, createdAt: new Date().toISOString(),
+          isShort: googleVideo.isShort || false,
+            isLive: false, // GoogleSearchResult doesn't have isLive property,
+  commentCount: googleVideo.commentCount || 0,
+            // Required Video interface properties,
+  visibility: 'public' as const,
+          createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString() }));
         }
 
@@ -171,8 +173,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         if (recommendedVideos.length === 0) {
           console.log('⚠️ No results from Google Custom Search, falling back to local videos');
           const availableVideos = realVideos.filter(video =>
-            !activeVideoId || video.id !== activeVideoId,
-          );
+            !activeVideoId || video.id !== activeVideoId);
           recommendedVideos = availableVideos.slice(0, maxRecommendations);
         } else {
           console.log(`✅ Using ${recommendedVideos.length} recommendations from Google Custom Search`);
@@ -181,8 +182,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         // Fallback to real videos with basic recommendation logic
         console.log('Using fallback recommendation system');
         const availableVideos = realVideos.filter(video =>
-          !activeVideoId || video.id !== activeVideoId,
-        );
+          !activeVideoId || video.id !== activeVideoId);
 
         // Simple recommendation logic - prioritize similar categories if available
         let recommended: Video = [];
@@ -190,15 +190,13 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
         if (currentVideo?.category) {
           // First, try to get videos from the same category
           const sameCategory = availableVideos.filter(
-            video => video.category === currentVideo.category,
-          );
+            video => video.category === currentVideo.category);
           recommended = [...sameCategory];
         }
 
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
-          const remaining = availableVideos.filter(video => !recommended.find((r: any) => r.id === video.id),
-          );
+          const remaining = availableVideos.filter(video => !recommended.find((r: any) => r.id === video.id));
           recommended = [...recommended, ...remaining];
         }
 
@@ -213,8 +211,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
       // Fallback to real videos in case of error
       const availableVideos = realVideos.filter(video =>
-        !activeVideoId || video.id !== activeVideoId,
-      );
+        !activeVideoId || video.id !== activeVideoId);
       const fallbackVideos = availableVideos.slice(0, maxRecommendations);
       setRecommendations(fallbackVideos);
     } finally {

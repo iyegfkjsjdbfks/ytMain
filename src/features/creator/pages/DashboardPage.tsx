@@ -26,7 +26,7 @@ interface DashboardStats {
   revenue;
   avgViewDuration: number;
   engagement;
-  clickThroughRate: number;
+  clickThroughRate: number
 }
 
 interface VideoPerformance {
@@ -39,19 +39,19 @@ interface VideoPerformance {
   publishedAt;
   thumbnail: string;
   revenue;
-  watchTime: number;
+  watchTime: number
 }
 
 interface AudienceData {
   country;
-  percentage: number;
-  views: number;
+  percentage: number;,
+  views: number
 }
 
 interface DeviceData {
   device;
-  percentage: number;
-  color: string;
+  percentage: number;,
+  color: string
 }
 
 const DashboardPage: React.FC = () => {
@@ -61,13 +61,13 @@ const DashboardPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats>({
     totalViews: 0,
-    totalSubscribers: 0,
+          totalSubscribers: 0,
     totalVideos: 0,
-    totalWatchTime: 0,
+          totalWatchTime: 0,
     revenue: 0,
-    avgViewDuration: 0,
+          avgViewDuration: 0,
     engagement: 0,
-    clickThroughRate: 0 });
+          clickThroughRate: 0 });
 
   const [topVideos, setTopVideos] = useState<VideoPerformance[]>([]);
 
@@ -80,7 +80,7 @@ const DashboardPage: React.FC = () => {
       setLoading(true);
 
       // Mock data based on time range
-      const mockStats: DashboardStats = {
+      const mockStats: DashboardStats = {,
         totalViews:
           timeRange === '7d'
             ? 125000
@@ -98,7 +98,7 @@ const DashboardPage: React.FC = () => {
                 ? 12000
                 : 58000,
         totalVideos: 24,
-        totalWatchTime:
+          totalWatchTime:
           timeRange === '7d'
             ? 8500
             : timeRange === '30d'
@@ -115,7 +115,7 @@ const DashboardPage: React.FC = () => {
                 ? 9500
                 : 42000,
         avgViewDuration: 4.2,
-        engagement: 8.5,
+          engagement: 8.5,
         clickThroughRate: 12.3 };
 
       const mockTopVideos: VideoPerformance[] = [
@@ -173,26 +173,35 @@ const DashboardPage: React.FC = () => {
           publishedAt: '2023-12-20',
           thumbnail: 'https://picsum.photos/320/180?random=5',
           revenue: 420,
-          watchTime: 35000 },
-      ];
+          watchTime: 35000 }];
 
       const mockAudienceData: AudienceData[] = [
-        { country: 'United States', percentage: 35, views: 157500 },
-        { country: 'United Kingdom', percentage: 18, views: 81000 },
-        { country: 'Canada', percentage: 12, views: 54000 },
-        { country: 'Australia', percentage: 8, views: 36000 },
-        { country: 'Germany', percentage: 7, views: 31500 },
-        { country: 'India', percentage: 6, views: 27000 },
-        { country: 'France', percentage: 5, views: 22500 },
-        { country: 'Others', percentage: 9, views: 40500 },
-      ];
+        { country: 'United States',
+          percentage: 35, views: 157500 },
+        { country: 'United Kingdom',
+          percentage: 18, views: 81000 },
+        { country: 'Canada',
+          percentage: 12, views: 54000 },
+        { country: 'Australia',
+          percentage: 8, views: 36000 },
+        { country: 'Germany',
+          percentage: 7, views: 31500 },
+        { country: 'India',
+          percentage: 6, views: 27000 },
+        { country: 'France',
+          percentage: 5, views: 22500 },
+        { country: 'Others',
+          percentage: 9, views: 40500 }];
 
       const mockDeviceData: DeviceData[] = [
-        { device: 'Mobile', percentage: 65, color: '#3B82F6' },
-        { device: 'Desktop', percentage: 28, color: '#10B981' },
-        { device: 'Tablet', percentage: 5, color: '#F59E0B' },
-        { device: 'TV', percentage: 2, color: '#EF4444' },
-      ];
+        { device: 'Mobile',
+          percentage: 65, color: '#3B82F6' },
+        { device: 'Desktop',
+          percentage: 28, color: '#10B981' },
+        { device: 'Tablet',
+          percentage: 5, color: '#F59E0B' },
+        { device: 'TV',
+          percentage: 2, color: '#EF4444' }];
 
       // Simulate loading delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -226,7 +235,7 @@ const DashboardPage: React.FC = () => {
   const formatCurrency = (amount: any): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD' }).format(amount);
+          currency: 'USD' }).format(amount);
   };
 
   if (loading) {

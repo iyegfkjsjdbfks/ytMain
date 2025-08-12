@@ -10,7 +10,7 @@ export interface User {
   avatarUrl?: string;
   isVerified: boolean;
   role: UserRole;
-  createdAt: string;
+  createdAt: string
 }
 
 export type UserRole = 'user' | 'creator' | 'admin';
@@ -19,7 +19,7 @@ export interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  error: string | null;
+  error: string | null
 }
 
 export interface LoginCredentials {
@@ -32,11 +32,11 @@ export interface RegisterData {
   username: string;
   email: string;
   password: string;
-  displayName: string;
+  displayName: string
 }
 
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
-  expiresAt: number;
+  expiresAt: number
 }

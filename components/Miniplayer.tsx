@@ -10,7 +10,7 @@ const XMarkIconSolid = XMarkSolidIcon;
 import type { Video } from '../src/types/core';
 
 interface MiniplayerProps {
-  video: Video | null;
+  video: Video | null;,
   onClose: () => void; onMaximize: (videoId: any) => void
 }
 

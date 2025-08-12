@@ -2,10 +2,10 @@ import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ShortsFiltersProps {
-  categories: string;
+  categories: string;,
   selectedCategory: string;
-  onCategoryChange: (category: any) => void;
-  onClose: () => void;
+  onCategoryChange: (category: any) => void;,
+  onClose: () => void
 }
 
 const ShortsFilters: React.FC<ShortsFiltersProps> = ({

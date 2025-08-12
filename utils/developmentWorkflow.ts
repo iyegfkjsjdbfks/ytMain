@@ -14,17 +14,17 @@ interface WorkflowStage {
   name: string;
   type: 'quality-gate' | 'test' | 'build' | 'deploy' | 'monitor';
   required: boolean;
-  timeout: number; // _seconds
+  timeout: number; // _seconds,
   retries: number;
   conditions: WorkflowCondition[];
-  actions: WorkflowAction[];
+  actions: WorkflowAction[]
 }
 
 interface WorkflowCondition {
   type: 'metric' | 'test-result' | 'security-scan' | 'performance' | 'code-quality';
   operator: 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'contains' | 'not-contains';
   value: unknown;
-  _source: string;
+  _source: string
 }
 
 interface WorkflowAction {
@@ -37,7 +37,7 @@ interface DeploymentStrategy {
   type: 'blue-green' | 'canary' | 'rolling' | 'feature-flag';
   _config: Record<string, any>;
   healthChecks: string[];
-  rollbackTriggers: WorkflowCondition[];
+  rollbackTriggers: WorkflowCondition[]
 }
 
 interface QualityGateResult {
@@ -48,9 +48,9 @@ interface QualityGateResult {
     passed: boolean;
     value: unknown;
     threshold: unknown;
-    message: string;
+    message: string
   }>;
-  timestamp: number;
+  timestamp: number
 }
 
 interface ContinuousImprovementSuggestion {
@@ -61,7 +61,7 @@ interface ContinuousImprovementSuggestion {
   implementation: string;
   estimatedImpact: string;
   automatable: boolean;
-  dependencies: string[];
+  dependencies: string[]
 }
 
 /**
@@ -293,7 +293,7 @@ return undefined;
       executions: number[];
       successRates: number[];
       durations: number[];
-      timestamps: number[];
+      timestamps: number[]
     };
   } {
     const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
@@ -369,7 +369,7 @@ return undefined;
     passed: boolean;
     value;
     threshold;
-    message: string;
+    message: string
   }> {
     let value;
     let passed = false;
@@ -391,8 +391,7 @@ return undefined;
       case 'code-quality':
         value = await this.getCodeQualityMetric(condition._source);
         break;
-      default:
-        value = _context[condition._source];
+      default: value = _context[condition._source]
     }
 
     // Evaluate condition
@@ -803,14 +802,11 @@ return undefined;
             type: 'security-scan',
             operator: 'eq',
             value: 0,
-            _source: 'vulnerabilities' },
-        ],
+            _source: 'vulnerabilities' }],
         actions: [
           {
             type: 'block',
-            _config: { message: 'Code quality standards not met' } },
-        ] },
-    ]);
+            _config: { message: 'Code quality standards not met' } }] }]);
 
     // CI/CD workflow
     this.workflows.set('ci-cd', [
@@ -825,13 +821,11 @@ return undefined;
             type: 'test-result',
             operator: 'gte',
             value: 95,
-            _source: 'test-coverage' },
-        ],
+            _source: 'test-coverage' }],
         actions: [
           {
             type: 'block',
-            _config: { message: 'Test coverage below threshold' } },
-        ] },
+            _config: { message: 'Test coverage below threshold' } }] },
       {
         name: 'performance-check',
         type: 'quality-gate',
@@ -843,14 +837,11 @@ return undefined;
             type: 'performance',
             operator: 'lt',
             value: 3000,
-            _source: 'page-load-time' },
-        ],
+            _source: 'page-load-time' }],
         actions: [
           {
             type: 'notify',
-            _config: { message: 'Performance degradation detected' } },
-        ] },
-    ]);
+            _config: { message: 'Performance degradation detected' } }] }]);
   }
 
   private setupDefaultDeploymentStrategies(): void {
@@ -867,8 +858,7 @@ return undefined;
           type: 'metric',
           operator: 'gt',
           value: 0.05,
-          _source: 'error-rate' },
-      ] });
+          _source: 'error-rate' }] });
 
     // Canary deployment
     this.deploymentStrategies.set('canary', {
@@ -888,8 +878,7 @@ return undefined;
           type: 'performance',
           operator: 'gt',
           value: 2000,
-          _source: 'response-time' },
-      ] });
+          _source: 'response-time' }] });
   }
 
   private generateSecureToken(length: any): string {

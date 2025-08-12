@@ -2,24 +2,25 @@ import React, { useState, FC } from 'react';
 // Import statements fixed
 
 interface StreamQuality {
-  resolution: string;
+  resolution: string;,
   bitrate: number;
-  fps: number;
+  fps: number
 }
 
 interface StreamSettingsProps {
-  onSettingsChange?: (settings: any) => void;
+  onSettingsChange?: (settings: any) => void
 }
 
 export const StreamSettings: React.FC<StreamSettingsProps> = ({
   onSettingsChange }) => {
   const [settings, setSettings] = useState({
     title: '',
-    description: '',
+          description: '',
     category: 'Gaming',
-    privacy: 'public',
-    quality: { resolution: '1080p', bitrate: 5000, fps: 30 } as StreamQuality,
-    enableChat: true,
+          privacy: 'public',
+    quality: { resolution: '1080p',
+          bitrate: 5000, fps: 30 } as StreamQuality,
+          enableChat: true,
     enableDonations: false });
 
   const updateSettings = (newSettings: Partial<typeof settings>) => {
@@ -88,7 +89,8 @@ export const StreamSettings: React.FC<StreamSettingsProps> = ({
               value={settings.quality.resolution}
               onChange={e =>
                 updateSettings({
-                  quality: { ...settings.quality, resolution: e.target.value } })
+                  quality: { ...settings.quality,
+          resolution: e.target.value } })
               }
               className='w-full px-3 py-2 border rounded-lg'
             >

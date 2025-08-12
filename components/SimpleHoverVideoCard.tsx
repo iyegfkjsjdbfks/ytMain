@@ -58,7 +58,7 @@ return duration;
       const seconds = duration % 60;
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    return '0:00';
+    return '0: 00'
   };
 
   const formatViews = (views: string | number) => {
@@ -88,7 +88,8 @@ return duration;
     //     setShowPreview(true);
     //   }, HOVER_DELAY);
     // }
-  };
+  
+        };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
@@ -114,8 +115,7 @@ return duration;
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
       }
-    };
-  }, []);
+    }}, []);
 
   return (
     <div
@@ -273,30 +273,30 @@ return duration;
       <style>{`
         @keyframes fade-in {
           from {
-            opacity: 0;
-            transform: translateY(-10px);
+            opacity: 0;,
+            transform: translateY(-10px)
           }
           to {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1;,
+            transform: translateY(0)
           }
         }
         
         @keyframes progress-bar {
           from {
-            width: 0%;
+            width: 0%
           }
           to {
-            width: 100%;
+            width: 100%
           }
         }
         
         .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
+          animation: fade-in 0.3s ease-out
         }
         
         .animate-progress-bar {
-          animation: progress-bar 3s linear infinite;
+          animation: progress-bar 3s linear infinite
         }
       `}</style>
     </div>

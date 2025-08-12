@@ -13,12 +13,16 @@ const TrendingPage: React.FC = () => {
   const { data: trendingVideos, loading, error } = useTrendingVideos(activeCategory);
 
   const categories = [
-    { id: 'all' as const, label: 'All', icon: '🔥' },
-    { id: 'music' as const, label: 'Music', icon: '🎵' },
-    { id: 'gaming' as const, label: 'Gaming', icon: '🎮' },
-    { id: 'news' as const, label: 'News', icon: '📰' },
-    { id: 'movies' as const, label: 'Movies', icon: '🎬' },
-  ];
+    { id: 'all' as const,
+          label: 'All', icon: '🔥' },
+    { id: 'music' as const,
+          label: 'Music', icon: '🎵' },
+    { id: 'gaming' as const,
+          label: 'Gaming', icon: '🎮' },
+    { id: 'news' as const,
+          label: 'News', icon: '📰' },
+    { id: 'movies' as const,
+          label: 'Movies', icon: '🎬' }];
 
   return (
     <PageLayout
@@ -29,7 +33,7 @@ const TrendingPage: React.FC = () => {
       error={error}
       emptyState={{
         title: 'No trending videos found',
-        message: 'Check back later for the latest trending content.' }}
+          message: 'Check back later for the latest trending content.' }}
       headerActions={<CategoryTabs categories={categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />}
     >
       {(videos) => <VideoGrid videos={videos || []} />}

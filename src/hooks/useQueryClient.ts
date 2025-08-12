@@ -17,11 +17,11 @@ const queryClient = new QueryClient({
         return failureCount < 1; // Reduced from 2 for faster failures
       },
       refetchOnWindowFocus: false,
-      refetchOnReconnect: false, // Disabled for faster perceived performance
-      networkMode: 'offlineFirst', // Try cache first
+      refetchOnReconnect: false, // Disabled for faster perceived performance,
+  networkMode: 'offlineFirst', // Try cache first
     },
     mutations: {
-      retry: 0, // No retries for mutations for faster UX
-      networkMode: 'offlineFirst' } } });
+      retry: 0, // No retries for mutations for faster UX,
+  networkMode: 'offlineFirst' } } });
 
 export { queryClient };

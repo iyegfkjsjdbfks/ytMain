@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, FC } from 'react';
 interface LiveStreamViewerProps {
   streamId: string;
   autoplay?: boolean;
-  onViewerCountChange?: (count: any) => void;
+  onViewerCountChange?: (count: any) => void
 }
 
 export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
@@ -53,8 +53,8 @@ export const LiveStreamViewer: React.FC<LiveStreamViewerProps> = ({
 
   if (error) {
     return (
-      <div className='flex items-center justify-center h-64 text-red-500'>
-        Error: {error}
+      <div className='flex items-center justify-center h-64 text-red-500'>,
+  Error: {error}
       </div>
     );
   }

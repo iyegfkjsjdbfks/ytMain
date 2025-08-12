@@ -6,34 +6,34 @@ import { UserGroupIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
 interface PlaylistVideo {
-  id: string;
+  id: string;,
   title: string;
-  thumbnail: string;
+  thumbnail: string;,
   duration: string;
-  views: number;
-  uploadDate: Date;
+  views: number;,
+  uploadDate: Date
 }
 
 interface Playlist {
-  id: string;
+  id: string;,
   title: string;
-  description: string;
+  description: string;,
   thumbnail: string;
-  videoCount: number;
+  videoCount: number;,
   totalViews: number;
-  visibility: 'public' | 'unlisted' | 'private';
+  visibility: 'public' | 'unlisted' | 'private';,
   createdDate: Date;
-  lastUpdated: Date;
-  videos: PlaylistVideo;
+  lastUpdated: Date;,
+  videos: PlaylistVideo
 }
 
 interface PlaylistStats {
-  totalPlaylists: number;
+  totalPlaylists: number;,
   totalVideos: number;
-  totalViews: number;
+  totalViews: number;,
   publicPlaylists: number;
-  privatePlaylists: number;
-  unlistedPlaylists: number;
+  privatePlaylists: number;,
+  unlistedPlaylists: number
 }
 
 const PlaylistManagerPage: React.FC = () => {
@@ -48,7 +48,7 @@ const PlaylistManagerPage: React.FC = () => {
   const [filterVisibility, setFilterVisibility] = useState<'all' | 'public' | 'unlisted' | 'private'>('all');
   const [newPlaylist, setNewPlaylist] = useState({
     title: '',
-    description: '',
+          description: '',
     visibility: 'public' as 'public' | 'unlisted' | 'private' });
 
   // Generate mock data
@@ -64,16 +64,15 @@ const PlaylistManagerPage: React.FC = () => {
         'CSS Grid vs Flexbox',
         'Modern JavaScript Features',
         'API Integration Strategies',
-        'Deployment and DevOps',
-      ];
+        'Deployment and DevOps'];
 
       return Array.from({ length: count }, (_, i) => ({
         id: `video-${i + 1}`,
-        title: titles[Math.floor(Math.random() * titles.length)] || `Video ${i + 1}`,
+          title: titles[Math.floor(Math.random() * titles.length)] || `Video ${i + 1}`,
         thumbnail: `https://picsum.photos/320/180?random=${i}`,
-        duration: `${Math.floor(Math.random() * 20) + 5}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
+          duration: `${Math.floor(Math.random() * 20) + 5}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
         views: Math.floor(Math.random() * 100000) + 1000,
-        uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000) }));
+          uploadDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000) }));
     };
 
     const generateMockPlaylists = (): Playlist[] => {
@@ -87,8 +86,7 @@ const PlaylistManagerPage: React.FC = () => {
         'Mobile Development',
         'DevOps and Deployment',
         'UI/UX Design Principles',
-        'Programming Challenges',
-      ];
+        'Programming Challenges'];
 
       const visibilityOptions: Array<'public' | 'unlisted' | 'private'> = ['public', 'unlisted', 'private'];
 
@@ -108,19 +106,19 @@ const PlaylistManagerPage: React.FC = () => {
           visibility: visibilityOptions[Math.floor(Math.random() * visibilityOptions.length)] || 'public',
           createdDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000),
           lastUpdated: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-          videos };
-      }).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
+          videos }}).sort((a, b) => b.lastUpdated.getTime() - a.lastUpdated.getTime());
     };
 
     const generateMockStats = (playlists: Playlist): PlaylistStats => {
       return {
         totalPlaylists: playlists.length,
-        totalVideos: playlists.reduce((sum: any, playlist: any) => sum + playlist.videoCount, 0),
-        totalViews: playlists.reduce((sum: any, playlist: any) => sum + playlist.totalViews, 0),
+          totalVideos: playlists.reduce((sum: any,
+          playlist: any) => sum + playlist.videoCount, 0),
+        totalViews: playlists.reduce((sum: any,
+          playlist: any) => sum + playlist.totalViews, 0),
         publicPlaylists: playlists.filter((p: any) => p.visibility === 'public').length,
-        privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length };
-    };
+          privatePlaylists: playlists.filter((p: any) => p.visibility === 'private').length,
+          unlistedPlaylists: playlists.filter((p: any) => p.visibility === 'unlisted').length }};
 
     setTimeout(() => {
       const mockPlaylists = generateMockPlaylists();
@@ -147,8 +145,7 @@ const PlaylistManagerPage: React.FC = () => {
           return b.lastUpdated.getTime() - a.lastUpdated.getTime();
         case 'views':
           return b.totalViews - a.totalViews;
-        default:
-          return 0;
+        default: return 0
       }
     });
 
@@ -157,20 +154,21 @@ const PlaylistManagerPage: React.FC = () => {
 return;
 }
 
-    const playlist: Playlist = {
+    const playlist: Playlist = {,
       id: `playlist-${Date.now()}`,
-      title: newPlaylist.title,
+          title: newPlaylist.title,
       description: newPlaylist.description,
-      thumbnail: `https://picsum.photos/480/270?random=${Date.now()}`,
-      videoCount: 0,
+          thumbnail: `https://picsum.photos/480/270?random=${Date.now()}`,
+          videoCount: 0,
       totalViews: 0,
-      visibility: newPlaylist.visibility,
+          visibility: newPlaylist.visibility,
       createdDate: new Date(),
-      lastUpdated: new Date(),
+          lastUpdated: new Date(),
       videos: [] };
 
     setPlaylists([playlist, ...playlists]);
-    setNewPlaylist({ title: '', description: '', visibility: 'public' });
+    setNewPlaylist({ title: '',
+          description: '', visibility: 'public' });
     setShowCreateModal(false);
   };
 
@@ -207,15 +205,14 @@ return;
         return <EyeSlashIcon className="w-4 h-4" />;
       case 'private':
         return <LockClosedIcon className="w-4 h-4" />;
-      default:
-        return <GlobeAltIcon className="w-4 h-4" />;
+      default: return <GlobeAltIcon className="w-4 h-4" />
     }
   };
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'short',
+          month: 'short',
       day: 'numeric' });
   };
 
@@ -426,9 +423,11 @@ return;
                     <Droppable droppableId="playlist-videos">
                       {(provided: any) => (
                         <div { ...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video: any, index: number) => (
+                          {selectedPlaylist.videos.map((video: any,
+          index: number) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
-                              {(provided: any, snapshot: any) => (
+                              {(provided: any,
+          snapshot: any) => (
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}

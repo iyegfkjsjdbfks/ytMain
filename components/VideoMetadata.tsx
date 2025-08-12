@@ -20,9 +20,9 @@ return 'N/A';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'long',
+          month: 'long',
       day: 'numeric',
-      hour: '2-digit',
+          hour: '2-digit',
       minute: '2-digit' });
   };
 
@@ -45,75 +45,73 @@ return `${(num / 1000).toFixed(1)}K`;
       case 'hd': return 'HD (720p+)';
       case 'sd': return 'SD (480p)';
       case 'hfr': return 'High Frame Rate';
-      default: return definition || 'Unknown';
+      default: return definition || 'Unknown'
     }
   };
 
   const basicMetadata = [
     {
       icon: EyeIcon,
-      label: 'Views',
+          label: 'Views',
       value: formatNumber(video.viewCount || parseInt(video.views, 10) || 0),
       color: 'text-blue-600 dark:text-blue-400' },
     {
       icon: HandThumbUpIcon,
-      label: 'Likes',
+          label: 'Likes',
       value: formatNumber(video.likes || video.likeCount || 0),
-      color: 'text-green-600 dark:text-green-400' },
+          color: 'text-green-600 dark:text-green-400' },
     {
       icon: ChatBubbleLeftIcon,
-      label: 'Comments',
+          label: 'Comments',
       value: formatNumber(video.commentCount || video.statistics?.commentCount || 0),
-      color: 'text-purple-600 dark:text-purple-400' },
+          color: 'text-purple-600 dark:text-purple-400' },
     {
       icon: ClockIcon,
-      label: 'Duration',
+          label: 'Duration',
       value: video.duration || 'N/A',
-      color: 'text-orange-600 dark:text-orange-400' },
-  ];
+          color: 'text-orange-600 dark:text-orange-400' }];
 
   const detailedMetadata = [
     {
       icon: CalendarIcon,
-      label: 'Published',
+          label: 'Published',
       value: formatDate(video.publishedAt || video.uploadedAt),
-      condition: video.publishedAt || video.uploadedAt },
+          condition: video.publishedAt || video.uploadedAt },
     {
       icon: TagIcon,
-      label: 'Category',
+          label: 'Category',
       value: video.category,
-      condition: video.category },
+          condition: video.category },
     {
       icon: TvIcon,
-      label: 'Quality',
+          label: 'Quality',
       value: getVideoQuality(),
-      condition: video.definition || video.contentDetails?.definition },
+          condition: video.definition || video.contentDetails?.definition },
     {
       icon: LanguageIcon,
-      label: 'Language',
+          label: 'Language',
       value: video.metadata?.defaultLanguage || 'Not specified',
-      condition: video.metadata?.defaultLanguage },
+          condition: video.metadata?.defaultLanguage },
     {
       icon: GlobeAltIcon,
-      label: 'Privacy',
+          label: 'Privacy',
       value: video.privacyStatus || video.visibility || 'Public',
-      condition: true },
+          condition: true },
     {
       icon: ShieldCheckIcon,
-      label: 'Content Rating',
+          label: 'Content Rating',
       value: video.metadata?.madeForKids ? 'Made for Kids' : 'General Audience',
-      condition: video.metadata?.madeForKids !== undefined },
+          condition: video.metadata?.madeForKids !== undefined },
     {
       icon: CameraIcon,
-      label: 'Dimension',
+          label: 'Dimension',
       value: video.contentDetails?.dimension === '2d' ? '2D' : '3D/VR',
-      condition: video.contentDetails?.dimension },
+          condition: video.contentDetails?.dimension },
     {
       icon: BoltIcon,
-      label: 'Type',
+          label: 'Type',
       value: video.isLive ? 'Live Stream' : video.isShort ? 'YouTube Short' : 'Regular Video',
-      condition: true },
-  ];
+          condition: true }];
 
   const streamingDetails = video.metadata?.actualStartTime || video.metadata?.scheduledStartTime || video.metadata?.actualEndTime;
 
@@ -170,7 +168,8 @@ return `${(num / 1000).toFixed(1)}K`;
             <div className="mb-4">
               <h5 className="text-sm font-medium text-neutral-900 dark:text-white mb-2">Tags</h5>
               <div className="flex flex-wrap gap-2">
-                {video.tags.slice(0, 10).map((tag: string, index: number) => (
+                {video.tags.slice(0, 10).map((tag: string,
+          index: number) => (
                   <span
                     key={index}
                     className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"

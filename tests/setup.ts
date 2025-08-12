@@ -232,7 +232,7 @@ class TestPerformanceTracker {
   private static testMetrics = new Map<string, {
     renderTime: number;
     memoryUsage: number;
-    testDuration: number;
+    testDuration: number
   }>();
 
   static startTest(testName: any): () => void {
@@ -244,8 +244,8 @@ class TestPerformanceTracker {
       const endMemory = (performance as any).memory?.usedJSHeapSize || 0;
 
       this.testMetrics.set(testName, {
-        renderTime: 0, // Will be set by render tracking
-        memoryUsage: endMemory - startMemory,
+        renderTime: 0, // Will be set by render tracking,
+  memoryUsage: endMemory - startMemory,
         testDuration: endTime - startTime });
     };
   }
@@ -412,18 +412,18 @@ afterEach(() => {
 
 // Custom test utilities
 export const testHelpers = {
-  // Performance tracking
+  // Performance tracking,
   trackTestPerformance: (...args: Parameters<typeof TestPerformanceTracker.startTest>) => TestPerformanceTracker.startTest(...args),
   getTestMetrics: () => TestPerformanceTracker.getMetrics(),
 
-  // Mock management
+  // Mock management,
   resetMocks: () => {
     vi.clearAllMocks();
     mockLocalStorage.clear();
     mockSessionStorage.clear();
   },
 
-  // API mocking
+  // API mocking,
   mockApiSuccess: (data: any) => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
@@ -438,7 +438,7 @@ export const testHelpers = {
       json: async () => ({ success: false, error: message }) });
   },
 
-  // Storage helpers
+  // Storage helpers,
   setLocalStorageItem: (key: string, value: string | number) => {
     mockLocalStorage.setItem(key, value);
   },
@@ -447,25 +447,25 @@ export const testHelpers = {
     return mockLocalStorage.getItem(key);
   },
 
-  // Async helpers
+  // Async helpers,
   waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
 
   waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms)),
 
-  // Error boundary testing
+  // Error boundary testing,
   triggerError: (component: any) => {
     const error = new Error('Test error');
     component.componentDidCatch?.(error, { componentStack: 'test stack' });
     throw error;
   },
 
-  // Accessibility testing
+  // Accessibility testing,
   checkAccessibility: async (container: HTMLElement) => {
     const { runAccessibilityAudit } = await import('../utils/accessibilityUtils');
     return runAccessibilityAudit(container);
   },
 
-  // Security testing
+  // Security testing,
   auditSecurity: () => {
     if (TEST_CONFIG.enableSecurityAudits) {
       const storageAudit = securityUtils.SecurityAudit.auditLocalStorage();
@@ -478,7 +478,7 @@ export const testHelpers = {
     return null;
   },
 
-  // Component testing helpers
+  // Component testing helpers,
   simulateUserInteraction: {
     click: (element: HTMLElement) => {
       element.click();

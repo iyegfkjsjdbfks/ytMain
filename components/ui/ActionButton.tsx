@@ -1,6 +1,6 @@
 import React from 'react';
 interface ActionButtonProps {
-  onClick: (e: React.MouseEvent) => void;
+  onClick: (e: React.MouseEvent) => void;,
   ariaLabel: string;
   children: React.ReactNode;
   className?: string;
@@ -19,12 +19,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 
   const variantClasses = {
     default: 'bg-black bg-opacity-50',
-    primary: 'bg-blue-600 bg-opacity-80',
+          primary: 'bg-blue-600 bg-opacity-80',
     secondary: 'bg-gray-600 bg-opacity-80' };
 
   const sizeClasses = {
     sm: 'p-1.5',
-    md: 'p-2',
+          md: 'p-2',
     lg: 'p-3' };
 
   return (

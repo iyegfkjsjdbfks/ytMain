@@ -22,31 +22,30 @@ interface EnhancedPWAInstallBannerProps {
 }
 
 interface BannerState {
-  isVisible: boolean;
+  isVisible: boolean;,
   isDismissed: boolean;
-  isAnimating: boolean;
+  isAnimating: boolean;,
   showDetails: boolean;
-  installProgress: 'idle' | 'installing' | 'success' | 'error';
+  installProgress: 'idle' | 'installing' | 'success' | 'error'
 }
 
 const BENEFITS = [
   {
     icon: Smartphone,
-    title: 'Offline Access',
+          title: 'Offline Access',
     description: 'Watch videos even without internet' },
   {
     icon: Zap,
-    title: 'Faster Loading',
+          title: 'Faster Loading',
     description: 'Lightning-fast app performance' },
   {
     icon: Shield,
-    title: 'Secure & Private',
+          title: 'Secure & Private',
     description: 'Enhanced security and privacy' },
   {
     icon: Star,
-    title: 'Native Experience',
-    description: 'App-like experience on any device' },
-];
+          title: 'Native Experience',
+    description: 'App-like experience on any device' }];
 
 const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
   onDismiss,
@@ -68,9 +67,9 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
   const [state, setState] = useState<BannerState>({
     isVisible: false,
-    isDismissed: false,
+          isDismissed: false,
     isAnimating: false,
-    showDetails: false,
+          showDetails: false,
     installProgress: 'idle' });
 
   // Memoized theme detection
@@ -100,7 +99,8 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
     }
 
     const timer = setTimeout(() => {
-      setState(prev => ({ ...prev, isVisible: true, isAnimating: true }));
+      setState(prev => ({ ...prev, isVisible: true,
+          isAnimating: true }));
 
       // Track banner impression
       conditionalLogger.debug(
@@ -122,7 +122,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
       setState(prev => ({
         ...prev,
         installProgress: 'success',
-        isVisible: false }));
+          isVisible: false }));
       onInstall?.();
 
       // Track successful installation
@@ -153,7 +153,7 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
     setState(prev => ({
       ...prev,
       isVisible: false,
-      isDismissed: true,
+          isDismissed: true,
       isAnimating: false }));
     PWAUtils.dismissInstallPrompt();
     onDismiss?.();
@@ -167,7 +167,8 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
 
   // Handle "Not now" action
   const handleNotNow = useCallback(() => {
-    setState(prev => ({ ...prev, isVisible: false, isAnimating: false }));
+    setState(prev => ({ ...prev, isVisible: false,
+          isAnimating: false }));
     // Don't permanently dismiss, just hide for this session
     sessionStorage.setItem('pwa-banner-hidden', 'true');
   }, []);
@@ -191,9 +192,9 @@ const EnhancedPWAInstallBanner: FC<EnhancedPWAInstallBannerProps> = ({
         return `${base} top-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm`;
       case 'center':
         return `${base} top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-md`;
-      case 'bottom':
-      default:
-        return `${base} bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm`;
+      case 'bottom':,
+  default:
+        return `${base} bottom-4 left-4 right-4 md: left-auto md:right-4 md:max-w-sm`
     }
   }, [position]);
 

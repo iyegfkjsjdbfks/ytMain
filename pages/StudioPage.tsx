@@ -8,26 +8,26 @@ import TabsList, { Tabs } from '../components/ui/Tabs';
 import { UnifiedButton } from '../components/ui/UnifiedButton';
 
 interface StudioVideo {
-  id: string;
-  title: string;
-  thumbnail: string;
-  status: 'published' | 'draft' | 'scheduled' | 'processing';
-  views: number;
-  likes: number;
-  comments: number;
-  uploadDate: string;
-  duration: string;
-  visibility: 'public' | 'unlisted' | 'private';
+  id: string;,
+          title: string;,
+  thumbnail: string;,
+          status: 'published' | 'draft' | 'scheduled' | 'processing';,
+  views: number;,
+          likes: number;,
+  comments: number;,
+          uploadDate: string;,
+  duration: string;,
+          visibility: 'public' | 'unlisted' | 'private'
 }
 
 interface AnalyticsData {
-  totalViews: number;
-  totalSubscribers: number;
-  totalVideos: number;
-  totalRevenue: number;
-  viewsChange: number;
-  subscribersChange: number;
-  recentViews: number;
+  totalViews: number;,
+          totalSubscribers: number;,
+  totalVideos: number;,
+          totalRevenue: number;,
+  viewsChange: number;,
+          subscribersChange: number;,
+  recentViews: number
 }
 
 const StudioPage: React.FC = () => {
@@ -78,18 +78,17 @@ const StudioPage: React.FC = () => {
           comments: 0,
           uploadDate: '2024-01-20',
           duration: '15:22',
-          visibility: 'private' },
-      ];
+          visibility: 'private' }];
 
       // Mock analytics data
-      const mockAnalytics: AnalyticsData = {
-        totalViews: 125430,
-        totalSubscribers: 5420,
-        totalVideos: 23,
-        totalRevenue: 1250.50,
-        viewsChange: 12.5,
-        subscribersChange: 8.3,
-        recentViews: [1200, 1500, 1800, 2100, 1900, 2300, 2500] };
+      const mockAnalytics: AnalyticsData = {,
+          totalViews: 125430,
+          totalSubscribers: 5420,
+          totalVideos: 23,
+          totalRevenue: 1250.50,
+          viewsChange: 12.5,
+          subscribersChange: 8.3,
+          recentViews: [1200, 1500, 1800, 2100, 1900, 2300, 2500] };
 
       setVideos(mockVideos);
       setAnalytics(mockAnalytics);
@@ -114,37 +113,36 @@ return `${(num / 1000).toFixed(1)}K`;
       case 'published': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/30';
       case 'draft': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/30';
       case 'scheduled': return 'text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-900/30';
-      case 'processing': return 'text-purple-600 bg-purple-100 dark:text-purple-400 dark:bg-purple-900/30';
-      default: return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-900/30';
+      case 'processing': return 'text-purple-600 bg-purple-100 dark:text-purple-400 dark:bg-purple-900/30';,
+          default: return 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-900/30'
     }
   };
 
   const quickActions = [
     {
       title: 'Upload Video',
-      description: 'Upload and publish new content',
-      icon: <VideoCameraIcon className="w-6 h-6" />
-      link: '/studio/upload',
+          description: 'Upload and publish new content',
+      icon: <VideoCameraIcon className="w-6 h-6" />,
+          link: '/studio/upload',
       color: 'bg-red-500 hover:bg-red-600' },
     {
       title: 'Go Live',
-      description: 'Start a live stream',
-      icon: <PlayIcon className="w-6 h-6" />
-      link: '/studio/live',
+          description: 'Start a live stream',
+      icon: <PlayIcon className="w-6 h-6" />,
+          link: '/studio/live',
       color: 'bg-blue-500 hover:bg-blue-600' },
     {
       title: 'Create Short',
-      description: 'Upload a short video',
-      icon: <VideoCameraIconSolid className="w-6 h-6" />
-      link: '/studio/shorts',
+          description: 'Upload a short video',
+      icon: <VideoCameraIconSolid className="w-6 h-6" />,
+          link: '/studio/shorts',
       color: 'bg-purple-500 hover:bg-purple-600' },
     {
       title: 'Analytics',
-      description: 'View detailed analytics',
-      icon: <ChartBarIcon className="w-6 h-6" />
-      link: '/studio/analytics',
-      color: 'bg-green-500 hover:bg-green-600' },
-  ];
+          description: 'View detailed analytics',
+      icon: <ChartBarIcon className="w-6 h-6" />,
+          link: '/studio/analytics',
+      color: 'bg-green-500 hover:bg-green-600' }];
 
   if (loading) {
     return (

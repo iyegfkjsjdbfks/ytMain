@@ -9,10 +9,10 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react({
-      // Include .tsx files
-      include: '**/*.{jsx,tsx}',
-      // Enable automatic JSX runtime
-      jsxRuntime: 'automatic' }),
+      // Include .tsx files,
+  include: '**/*.{jsx,tsx}',
+      // Enable automatic JSX runtime,
+  jsxRuntime: 'automatic' }),
     // Gzip compression for production
     viteCompression({
       algorithm: 'gzip',
@@ -34,8 +34,7 @@ export default defineConfig(({ mode }) => ({
       open: true,
       gzipSize: true,
       brotliSize: true,
-      template: 'treemap' })] : []),
-  ],
+      template: 'treemap' })] : [])],
   
   resolve: {
     alias: {
@@ -50,22 +49,22 @@ export default defineConfig(({ mode }) => ({
       '@types': resolve(__dirname, './types'),
       '@config': resolve(__dirname, './config') } },
   
-  // Development server configuration
+  // Development server configuration,
   server: {
     port: 3000,
-    host: true, // Listen on all addresses
-    open: false, // Don't auto-open browser to prevent reload loops
-    cors: true, // Enable CORS
-    // Optimize HMR to prevent reload loops
-    hmr: {
+    host: true, // Listen on all addresses,
+  open: false, // Don't auto-open browser to prevent reload loops,
+  cors: true, // Enable CORS
+    // Optimize HMR to prevent reload loops,
+  hmr: {
       overlay: false, // Disable error overlay that might cause reloads
     },
-    // Add headers for YouTube iframe compatibility
-    headers: {
+    // Add headers for YouTube iframe compatibility,
+  headers: {
       'Cross-Origin-Embedder-Policy': 'unsafe-none',
       'Cross-Origin-Opener-Policy': 'unsafe-none' },
-    // Proxy configuration for API calls
-    proxy: {
+    // Proxy configuration for API calls,
+  proxy: {
       '/api/youtube': {
         target: 'https://www.googleapis.com',
         changeOrigin: true,
@@ -86,7 +85,7 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
         secure: false } } },
   
-  // Build configuration
+  // Build configuration,
   build: {
     target: 'esnext',
     outDir: 'dist',
@@ -94,20 +93,20 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development',
     minify: 'terser',
     cssCodeSplit: true,
-    reportCompressedSize: false, // Faster builds
-    chunkSizeWarningLimit: 1000,
+    reportCompressedSize: false, // Faster builds,
+  chunkSizeWarningLimit: 1000,
     terserOptions: {
       compress: {
         drop_console: mode === 'production',
         drop_debugger: true } },
     
-    // Rollup options
-    rollupOptions: {
+    // Rollup options,
+  rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html') },
       output: {
-        // Manual chunk splitting for better caching
-        manualChunks: (id) => {
+        // Manual chunk splitting for better caching,
+  manualChunks: (id) => {
           // Vendor chunks
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom')) {
@@ -149,8 +148,8 @@ export default defineConfig(({ mode }) => ({
           }
         },
         
-        // Asset naming
-        chunkFileNames: (chunkInfo) => {
+        // Asset naming,
+  chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId
             ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
             : 'chunk';
@@ -170,17 +169,17 @@ export default defineConfig(({ mode }) => ({
         },
         entryFileNames: 'js/[name]-[hash].js' } } },
   
-  // CSS configuration
+  // CSS configuration,
   css: {
     postcss: './postcss.config.js',
     devSourcemap: true },
   
-  // Environment variables
+  // Environment variables,
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()) },
   
-  // Optimization
+  // Optimization,
   optimizeDeps: {
     include: [
       'react',
@@ -191,8 +190,7 @@ export default defineConfig(({ mode }) => ({
       'zustand',
       '@tanstack/react-query',
       'react-window',
-      'react-window-infinite-loader',
-    ],
+      'react-window-infinite-loader'],
     exclude: [
       // Exclude large dependencies that should be loaded dynamically
     ] },
@@ -203,7 +201,7 @@ export default defineConfig(({ mode }) => ({
     host: true,
     cors: true },
   
-  // Test configuration
+  // Test configuration,
   test: {
     globals: true,
     environment: 'jsdom',
@@ -215,15 +213,14 @@ export default defineConfig(({ mode }) => ({
         'node_modules/',
         '**/*.d.ts',
         '**/*.test.{ts,tsx}',
-        '**/*.spec.{ts,tsx}',
-      ] } },
+        '**/*.spec.{ts,tsx}'] } },
   
-  // ESBuild configuration
+  // ESBuild configuration,
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
     target: 'esnext',
     platform: 'browser' },
   
-  // Worker configuration
+  // Worker configuration,
   worker: {
     format: 'es' } }));

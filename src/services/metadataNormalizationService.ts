@@ -16,52 +16,52 @@ import type {
  * should conform to, regardless of source (local, YouTube, etc.)
  */
 export interface UnifiedVideoMetadata {
-  // Core identification
+  // Core identification,
   id: string;
   title: string;
   description: string;
 
-  // Media assets
+  // Media assets,
   thumbnailUrl: string;
   videoUrl: string;
 
-  // View metrics
+  // View metrics,
   views: number;
   viewsFormatted: string; // e.g., "1.2M views"
 
-  // Engagement metrics
+  // Engagement metrics,
   likes: number;
   dislikes: number;
   commentCount: number;
 
-  // Channel information
+  // Channel information,
   channel: {
     id: string;
     name: string;
     avatarUrl: string;
     subscribers: number;
-    subscribersFormatted: string; // e.g., "2.5M subscribers"
-    isVerified: boolean;
+    subscribersFormatted: string; // e.g., "2.5M subscribers",
+  isVerified: boolean
   };
 
-  // Temporal data
-  duration: string; // e.g., "12:34"
+  // Temporal data,
+  duration: string; // e.g., "12:34",
   publishedAt: string;
   publishedAtFormatted: string; // e.g., "2 weeks ago"
 
-  // Content metadata
+  // Content metadata,
   category: string;
   tags: string;
   isLive: boolean;
   isShort: boolean;
 
-  // Content visibility
+  // Content visibility,
   visibility: 'public' | 'unlisted' | 'private' | 'scheduled';
 
-  // Source information
+  // Source information,
   source: 'local' | 'youtube' | 'external' | 'google-search';
 
-  // Additional metadata
+  // Additional metadata,
   metadata: {
     quality?: string;
     definition?: string;
@@ -70,13 +70,13 @@ export interface UnifiedVideoMetadata {
     license?: string;
   };
 
-  // Required properties for Video interface compatibility
+  // Required properties for Video interface compatibility,
   uploadedAt: string;
   channelName: string;
   channelId: string;
   channelAvatarUrl: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string
 }
 
 /**
@@ -96,7 +96,7 @@ export interface UnifiedChannelMetadata {
   isVerified: boolean;
   joinedDate?: string;
   country?: string;
-  source: 'local' | 'youtube' | 'external';
+  source: 'local' | 'youtube' | 'external'
 }
 
 /**
@@ -153,8 +153,8 @@ class MetadataNormalizationService {
         ...(localVideo.contentDetails?.caption && {
           language: localVideo.contentDetails.caption }),
         ...(localVideo.license && { license: localVideo.license }) },
-      // Required properties for Video interface compatibility
-      uploadedAt:
+      // Required properties for Video interface compatibility,
+  uploadedAt:
         localVideo.uploadedAt || localVideo.publishedAt || localVideo.createdAt,
       channelName: localVideo.channelName,
       channelId: localVideo.channelId,
@@ -170,8 +170,8 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube video data to unified format
    */
-  async normalizeYouTubeVideo(
-    youtubeVideo: YouTubeVideo,
+  async normalizeYouTubeVideo(,
+  youtubeVideo: YouTubeVideo,
     channelData?: YouTubeChannel
   ): Promise<UnifiedVideoMetadata> {
     logger.debug(
@@ -266,8 +266,8 @@ class MetadataNormalizationService {
             language: youtubeVideo.snippet.defaultAudioLanguage }),
         ...(youtubeVideo.status?.license && {
           license: youtubeVideo.status.license }) },
-      // Required properties for Video interface compatibility
-      uploadedAt: youtubeVideo.snippet?.publishedAt || '',
+      // Required properties for Video interface compatibility,
+  uploadedAt: youtubeVideo.snippet?.publishedAt || '',
       channelName: youtubeVideo.snippet?.channelTitle || '',
       channelId: youtubeVideo.snippet?.channelId || '',
       channelAvatarUrl: channel?.snippet?.thumbnails?.default?.url || '',
@@ -309,8 +309,8 @@ class MetadataNormalizationService {
   /**
    * Normalize YouTube channel data to unified format
    */
-  normalizeYouTubeChannel(
-    youtubeChannel: YouTubeChannel
+  normalizeYouTubeChannel(,
+  youtubeChannel: YouTubeChannel
   ): UnifiedChannelMetadata {
     const subscriberCount = parseInt(
       youtubeChannel.statistics?.subscriberCount || '0',
@@ -334,8 +334,8 @@ class MetadataNormalizationService {
       subscribersFormatted: this.formatSubscribers(subscriberCount),
       videoCount,
       totalViews,
-      isVerified: false, // Would need additional verification data
-      source: 'youtube' };
+      isVerified: false, // Would need additional verification data,
+  source: 'youtube' };
 
     // Add optional properties only if they exist
     if (youtubeChannel.snippet?.customUrl) {
@@ -365,10 +365,10 @@ class MetadataNormalizationService {
   /**
    * Batch normalize multiple videos from mixed sources
    */
-  async normalizeVideosBatch(
-    videos: Array<{
+  async normalizeVideosBatch(,
+  videos: Array<{
       data: LocalVideo | YouTubeVideo;
-      source: 'local' | 'youtube';
+      source: 'local' | 'youtube'
     }>
   ): Promise<UnifiedVideoMetadata[]> {
     const normalized: UnifiedVideoMetadata = [];
@@ -500,14 +500,14 @@ class MetadataNormalizationService {
       }
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    return duration || '0:00';
+    return duration || '0: 00'
   }
 
   private parseDuration(isoDuration): string {
     // Parse ISO 8601 duration format (PT#H#M#S)
     const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
-      return '0:00';
+      return '0: 00'
     }
 
     const hours = parseInt(match[1] || '0', 10);
@@ -538,8 +538,8 @@ class MetadataNormalizationService {
     return totalSeconds <= 60; // YouTube Shorts are 60 seconds or less
   }
 
-  private selectBestThumbnail(
-    thumbnails: YouTubeThumbnails | undefined
+  private selectBestThumbnail(,
+  thumbnails: YouTubeThumbnails | undefined
   ): string {
     if (!thumbnails) {
       return '';
@@ -551,8 +551,7 @@ class MetadataNormalizationService {
       'standard',
       'high',
       'medium',
-      'default',
-    ];
+      'default'];
 
     for (const quality of priorities) {
       if (thumbnails[quality]?.url) {
@@ -573,8 +572,7 @@ class MetadataNormalizationService {
         return 'unlisted';
       case 'private':
         return 'private';
-      default:
-        return 'public';
+      default: return 'public'
     }
   }
 }

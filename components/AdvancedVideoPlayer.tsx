@@ -3,7 +3,7 @@
 import { useRef, useCallback, useEffect, useState, FC, KeyboardEvent, MouseEvent } from 'react';
 declare namespace NodeJS {
   interface ProcessEnv {
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
   }
   interface Process {
     env: ProcessEnv;
@@ -17,9 +17,9 @@ import { useVideoPlayer } from '../src/hooks';
 import type { Video } from '../src/types/core';
 
 interface Chapter {
-  title: string;
+  title: string;,
   startTime: number;
-  endTime: number;
+  endTime: number
 }
 
 interface AdvancedVideoPlayerProps {
@@ -35,19 +35,24 @@ interface AdvancedVideoPlayerProps {
 }
 
 interface VideoQuality {
-  label: string;
+  label: string;,
   value: string;
-  resolution: string;
+  resolution: string
 }
 
 const VIDEO_QUALITIES: VideoQuality[] = [
-  { label: 'Auto', value: 'auto', resolution: 'Auto' },
-  { label: '1080p', value: '1080p', resolution: '1920x1080' },
-  { label: '720p', value: '720p', resolution: '1280x720' },
-  { label: '480p', value: '480p', resolution: '854x480' },
-  { label: '360p', value: '360p', resolution: '640x360' },
-  { label: '240p', value: '240p', resolution: '426x240' },
-];
+  { label: 'Auto',
+          value: 'auto', resolution: 'Auto' },
+  { label: '1080p',
+          value: '1080p', resolution: '1920x1080' },
+  { label: '720p',
+          value: '720p', resolution: '1280x720' },
+  { label: '480p',
+          value: '480p', resolution: '854x480' },
+  { label: '360p',
+          value: '360p', resolution: '640x360' },
+  { label: '240p',
+          value: '240p', resolution: '426x240' }];
 
 const PLAYBACK_RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
@@ -97,7 +102,8 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
     if (videoRef.current) {
       videoPlayerInstance.setVideoRef(videoRef.current);
     }
-  }, [videoPlayerInstance]);
+  
+        }, [videoPlayerInstance]);
 
   // Format time for display
   const formatTime = (time: any): string => {
@@ -222,7 +228,8 @@ return;
       setShowQualityMenu(false);
       setShowSpeedMenu(false);
     }
-  }, []);
+  
+        }, []);
 
   // Chapter navigation
   const goToChapter = useCallback((chapter: Chapter) => {
@@ -267,8 +274,8 @@ return;
       if (controlsTimeoutRef.current) {
         clearTimeout(controlsTimeoutRef.current);
       }
-    };
-  }, [handleKeyDown, handleClickOutside]);
+    
+        }}, [handleKeyDown, handleClickOutside]);
 
   useEffect(() => {
     resetControlsTimeout();
@@ -399,7 +406,8 @@ return;
               />
 
               {/* Chapter Markers */}
-              {chapters.map((chapter: any, index: number) => {
+              {chapters.map((chapter: any,
+          index: number) => {
                 const markerPosition = videoPlayerInstance.duration ? (chapter.startTime / videoPlayerInstance.duration) * 100 : 0;
                 return (
                   <div
@@ -501,7 +509,8 @@ return;
 
                   {showChapters && (
                     <div className="absolute bottom-full right-0 mb-2 w-64 max-h-48 overflow-y-auto bg-black bg-opacity-90 rounded-lg">
-                      {chapters.map((chapter: any, index: number) => (
+                      {chapters.map((chapter: any,
+          index: number) => (
                         <button
                           key={index}
                           onClick={() => goToChapter(chapter)}

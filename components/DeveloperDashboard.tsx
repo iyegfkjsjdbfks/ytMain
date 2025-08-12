@@ -15,57 +15,56 @@ import { performanceMonitor } from '../utils/performanceMonitor';
 
 // Types for dashboard data
 interface DashboardMetrics {
-  performance: {
-    coreWebVitals: {
-      lcp: number;
-      fid: number;
+  performance: {,
+          coreWebVitals: {,
+      lcp: number;,
+          fid: number;,
       cls: number;
     };
-    memoryUsage: number;
-    errorRate: number;
+    memoryUsage: number;,
+          errorRate: number;,
     responseTime: number;
   };
-  codeQuality: {
-    complexity: number;
-    maintainability: number;
-    testCoverage: number;
+  codeQuality: {,
+          complexity: number;,
+    maintainability: number;,
+          testCoverage: number;,
     technicalDebt: number;
   };
-  workflow: {
-    successRate: number;
-    averageDuration: number;
-    totalExecutions: number;
+  workflow: {,
+          successRate: number;,
+    averageDuration: number;,
+          totalExecutions: number;,
     failuresByStage: Record<string, number>;
   };
-  featureFlags: {
-    totalFlags: number;
-    activeFlags: number;
-    rolloutProgress: Array<{ id: string; name: string; percentage: number }>;
+  featureFlags: {,
+          totalFlags: number;,
+    activeFlags: number;,
+          rolloutProgress: Array<{ id: string; name: string; percentage: number }>;
   };
-  security: {
-    vulnerabilities: number;
-    lastScan: number;
-    riskLevel: 'low' | 'medium' | 'high';
-  };
-}
+  security: {,
+          vulnerabilities: number;,
+    lastScan: number;,
+          riskLevel: 'low' | 'medium' | 'high'
+  }}
 
 interface AlertItem {
-  id: string;
-  type: 'error' | 'warning' | 'info';
-  category: 'performance' | 'security' | 'quality' | 'workflow' | 'feature-flags';
-  message: string;
-  timestamp: number;
-  severity: number;
-  actionable: boolean;
+  id: string;,
+          type: 'error' | 'warning' | 'info';,
+  category: 'performance' | 'security' | 'quality' | 'workflow' | 'feature-flags';,
+          message: string;,
+  timestamp: number;,
+          severity: number;,
+  actionable: boolean
 }
 
 interface ImprovementSuggestion {
-  id: string;
-  category: string;
-  priority: number;
-  description: string;
-  estimatedImpact: string;
-  automatable: boolean;
+  id: string;,
+          category: string;,
+  priority: number;,
+          description: string;,
+  estimatedImpact: string;,
+          automatable: boolean
 }
 
 /**
@@ -90,38 +89,38 @@ export const DeveloperDashboard: React.FC = () => {
         getPerformanceMetrics(),
         codeAnalysisEngine.analyzeCode(),
         intelligentWorkflowEngine.getWorkflowAnalytics(),
-        getFeatureFlagMetrics(),
-      ]);
+        getFeatureFlagMetrics()]);
 
-      const dashboardMetrics: DashboardMetrics = {
-        performance: {
-          coreWebVitals: {
-            lcp: performanceMetrics.lcp || 0,
-            fid: performanceMetrics.fid || 0,
-            cls: performanceMetrics.cls || 0 },
+      const dashboardMetrics: DashboardMetrics = {,
+          performance: {,
+          coreWebVitals: {,
+          lcp: performanceMetrics.lcp || 0,
+          fid: performanceMetrics.fid || 0,
+          cls: performanceMetrics.cls || 0 },
           memoryUsage: performanceMetrics.memoryUsage || 0,
           errorRate: performanceMetrics.errorRate || 0,
           responseTime: performanceMetrics.responseTime || 0 },
-        codeQuality: {
+          codeQuality: {,
           complexity: codeAnalysis.complexity || 0,
           maintainability: codeAnalysis.maintainabilityIndex || 0,
           testCoverage: codeAnalysis.testCoverage || 0,
           technicalDebt: 0, // technicalDebtTracker.getTechnicalDebtSummary().totalItems
         },
         workflow: workflowAnalytics,
-        featureFlags: flagsData,
-        security: {
-          vulnerabilities: Math.floor(Math.random() * 3), // Mock data
-          lastScan: Date.now() - Math.random() * 24 * 60 * 60 * 1000,
-          riskLevel: 'low' } };
+          featureFlags: flagsData,
+        security: {,
+          vulnerabilities: Math.floor(Math.random() * 3), // Mock data,
+  lastScan: Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          riskLevel: 'low' } 
+        
+        };
 
       setMetrics(dashboardMetrics);
 
       // Fetch alerts and suggestions
       const [alertsData, suggestionsData] = await Promise.all([
         generateAlerts(dashboardMetrics),
-        intelligentWorkflowEngine.getContinuousImprovementSuggestions(),
-      ]);
+        intelligentWorkflowEngine.getContinuousImprovementSuggestions()]);
 
       setAlerts(alertsData);
       setSuggestions(suggestionsData);
@@ -153,12 +152,13 @@ export const DeveloperDashboard: React.FC = () => {
 
     return {
       lcp: metrics.find(m => m.name === 'lcp')?.value || 0,
-      fid: metrics.find(m => m.name === 'fid')?.value || 0,
+          fid: metrics.find(m => m.name === 'fid')?.value || 0,
       cls: metrics.find(m => m.name === 'cls')?.value || 0,
-      memoryUsage: (apmMetrics as any)?.['memory-usage']?.avg || 0,
+          memoryUsage: (apmMetrics as any)?.['memory-usage']?.avg || 0,
       errorRate: (apmMetrics as any)?.['error-rate']?.avg || 0,
-      responseTime: (apmMetrics as any)?.['response-time']?.avg || 0 };
-  };
+          responseTime: (apmMetrics as any)?.['response-time']?.avg || 0 
+        
+        }};
 
   const getFeatureFlagMetrics = async () => {
     const flags = featureFlagManager.getAllFlags();
@@ -168,14 +168,13 @@ export const DeveloperDashboard: React.FC = () => {
       .filter((f) => f.rolloutStrategy.type === 'gradual')
       .map(f => ({
         id: f.id,
-        name: f.name,
+          name: f.name,
         percentage: f.rolloutStrategy?.config.percentage || 0 }));
 
     return {
       totalFlags: flags.length,
-      activeFlags: activeFlags.length,
-      rolloutProgress };
-  };
+          activeFlags: activeFlags.length,
+      rolloutProgress }};
 
   const generateAlerts = async (metrics: DashboardMetrics): Promise<AlertItem[]> => {
     const alerts: AlertItem[] = [];
@@ -184,73 +183,74 @@ export const DeveloperDashboard: React.FC = () => {
     if (metrics.performance.coreWebVitals.lcp > 2500) {
       alerts.push({
         id: 'lcp-warning',
-        type: 'warning',
+          type: 'warning',
         category: 'performance',
-        message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,
-        timestamp: Date.now(),
+          message: `LCP is ${metrics.performance.coreWebVitals.lcp}ms (target: <2500ms)`,
+          timestamp: Date.now(),
         severity: 6,
-        actionable: true });
+          actionable: true });
     }
 
     if (metrics.performance.errorRate > 0.05) {
       alerts.push({
         id: 'error-rate-high',
-        type: 'error',
+          type: 'error',
         category: 'performance',
-        message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,
-        timestamp: Date.now(),
+          message: `Error rate is ${(metrics.performance.errorRate * 100).toFixed(2)}% (target: <5%)`,
+          timestamp: Date.now(),
         severity: 8,
-        actionable: true });
+          actionable: true });
     }
 
     // Code quality alerts
     if (metrics.codeQuality.complexity > 8) {
       alerts.push({
         id: 'complexity-high',
-        type: 'warning',
+          type: 'warning',
         category: 'quality',
-        message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,
-        timestamp: Date.now(),
+          message: `Code complexity is ${metrics.codeQuality.complexity} (target: <8)`,
+          timestamp: Date.now(),
         severity: 5,
-        actionable: true });
+          actionable: true });
     }
 
     if (metrics.codeQuality.testCoverage < 80) {
       alerts.push({
         id: 'coverage-low',
-        type: 'warning',
+          type: 'warning',
         category: 'quality',
-        message: `Test coverage is ${metrics.codeQuality.testCoverage}% (target: >80%)`,
-        timestamp: Date.now(),
+          message: `Test coverage is ${metrics.codeQuality.testCoverage}% (target: >80%)`,
+          timestamp: Date.now(),
         severity: 6,
-        actionable: true });
+          actionable: true });
     }
 
     // Workflow alerts
     if (metrics.workflow.successRate < 0.9) {
       alerts.push({
         id: 'workflow-failures',
-        type: 'error',
+          type: 'error',
         category: 'workflow',
-        message: `Workflow success rate is ${(metrics.workflow.successRate * 100).toFixed(1)}% (target: >90%)`,
-        timestamp: Date.now(),
+          message: `Workflow success rate is ${(metrics.workflow.successRate * 100).toFixed(1)}% (target: >90%)`,
+          timestamp: Date.now(),
         severity: 7,
-        actionable: true });
+          actionable: true });
     }
 
     // Security alerts
     if (metrics.security.vulnerabilities > 0) {
       alerts.push({
         id: 'security-vulnerabilities',
-        type: 'error',
+          type: 'error',
         category: 'security',
-        message: `${metrics.security.vulnerabilities} security vulnerabilities detected`,
+          message: `${metrics.security.vulnerabilities} security vulnerabilities detected`,
         timestamp: Date.now(),
-        severity: 9,
+          severity: 9,
         actionable: true });
     }
 
-    return alerts.sort((a: any, b: any) => b.severity - a.severity);
+    return alerts.sort((a: any,
+          b: any) => b.severity - a.severity)
   };
 
   // Computed values
@@ -262,7 +262,7 @@ export const DeveloperDashboard: React.FC = () => {
     const scores = {
       performance: Math.max(0, 100 - (metrics.performance.errorRate * 1000)),
       quality: metrics.codeQuality.maintainability,
-      workflow: metrics.workflow.successRate * 100,
+          workflow: metrics.workflow.successRate * 100,
       security: metrics.security.vulnerabilities === 0 ? 100 : Math.max(0, 100 - (metrics.security.vulnerabilities * 20)) };
 
     return Math.round(Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length);
@@ -442,8 +442,7 @@ export const DeveloperDashboard: React.FC = () => {
               {actionableSuggestions.length > 0 && (
                 <button
                   onClick={() => intelligentWorkflowEngine.autoImplementImprovements(
-                    actionableSuggestions.slice(0, 3).map(s => s.id),
-                  )}
+                    actionableSuggestions.slice(0, 3).map(s => s.id))}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
                 >
                   Auto-implement {actionableSuggestions.length} improvements
@@ -614,13 +613,18 @@ export const DeveloperDashboard: React.FC = () => {
         <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
           <nav className="-mb-px flex space-x-8">
             {[
-              { id: 'overview', label: 'Overview' },
-              { id: 'performance', label: 'Performance' },
-              { id: 'quality', label: 'Code Quality' },
-              { id: 'workflow', label: 'Workflow' },
-              { id: 'flags', label: 'Feature Flags' },
-              { id: 'security', label: 'Security' },
-            ].map((tab) => (
+              { id: 'overview',
+          label: 'Overview' },
+              { id: 'performance',
+          label: 'Performance' },
+              { id: 'quality',
+          label: 'Code Quality' },
+              { id: 'workflow',
+          label: 'Workflow' },
+              { id: 'flags',
+          label: 'Feature Flags' },
+              { id: 'security',
+          label: 'Security' }].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setSelectedTab(tab.id as any)}

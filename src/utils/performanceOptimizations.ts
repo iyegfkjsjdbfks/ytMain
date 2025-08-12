@@ -1,7 +1,7 @@
 import { memo, type ComponentType } from 'react';
 
 // Enhanced memoization with custom comparison
-export const withMemo = <P extends object>(
+export const withMemo = <P extends object>(,
   Component: ComponentType<P>
   propsAreEqual?: (prevProps: P, nextProps: P) => boolean
 ) => {
@@ -150,7 +150,7 @@ export class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
-export const optimizeImageUrl = (
+export const optimizeImageUrl = (,
   url: any,
   width?: number,
   height?: number,
@@ -192,7 +192,7 @@ export const optimizeImageUrl = (
 };
 
 // Bundle size optimization
-export const preloadComponent = (
+export const preloadComponent = (,
   componentImport: () => Promise<{ default: ComponentType<any> }>
 ) => {
   // Preload component during idle time

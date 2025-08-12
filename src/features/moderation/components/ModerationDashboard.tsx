@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 import { FlagIcon, EyeIcon, CheckIcon, XMarkIcon, ExclamationTriangleIcon, ShieldCheckIcon, ClockIcon, UserIcon, ChatBubbleLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 
 interface ModerationItem {
-  id: string;
+  id: string;,
   type: 'video' | 'comment' | 'user' | 'community_post';
-  title: string;
+  title: string;,
   content: string;
-  author: {
+  author: {,
     id: string;
-    name: string;
+    name: string;,
     avatar: string;
     isVerified: boolean;
   };
-  reportedBy: {
+  reportedBy: {,
     id: string;
-    name: string;
+    name: string;,
     count: number;
   };
-  reportReason: string;
+  reportReason: string;,
   severity: 'low' | 'medium' | 'high' | 'critical';
-  status: 'pending' | 'approved' | 'rejected' | 'escalated';
+  status: 'pending' | 'approved' | 'rejected' | 'escalated';,
   createdAt: string;
   reportedAt: string;
   thumbnail?: string;
@@ -29,8 +29,7 @@ interface ModerationItem {
     likes?: number;
     comments?: number;
     duration?: number;
-  };
-}
+  }}
 
 interface ModerationAction {
   action: 'approve' | 'reject' | 'remove' | 'restrict' | 'ban' | 'escalate';
@@ -51,69 +50,69 @@ export const ModerationDashboard: React.FC = () => {
   const moderationItems: ModerationItem[] = [
     {
       id: '1',
-      type: 'video',
+          type: 'video',
       title: 'Controversial Gaming Video',
-      content: 'Video contains inappropriate language and behavior',
-      author: {
+          content: 'Video contains inappropriate language and behavior',
+      author: {,
         id: 'user1',
-        name: 'GamerPro123',
+          name: 'GamerPro123',
         avatar: 'https://picsum.photos/40/40?random=1',
-        isVerified: false },
-      reportedBy: {
+          isVerified: false },
+      reportedBy: {,
         id: 'reporter1',
-        name: 'ConcernedViewer',
+          name: 'ConcernedViewer',
         count: 15 },
-      reportReason: 'Inappropriate content',
+          reportReason: 'Inappropriate content',
       severity: 'high',
-      status: 'pending',
+          status: 'pending',
       createdAt: '2024-01-15T10:30:00Z',
-      reportedAt: '2024-01-15T14:20:00Z',
-      thumbnail: 'https://picsum.photos/160/90?random=1',
-      metadata: {
+          reportedAt: '2024-01-15T14:20:00Z',
+          thumbnail: 'https://picsum.photos/160/90?random=1',
+          metadata: {,
         views: 25000,
-        likes: 1200,
+          likes: 1200,
         comments: 340,
-        duration: 720 } },
+          duration: 720 } 
+        },
     {
       id: '2',
-      type: 'comment',
+          type: 'comment',
       title: 'Spam Comment',
-      content:
+          content:
         'Check out my channel! Subscribe for amazing content! Link in bio!',
-      author: {
+      author: {,
         id: 'user2',
-        name: 'SpamBot2024',
+          name: 'SpamBot2024',
         avatar: 'https://picsum.photos/40/40?random=2',
-        isVerified: false },
-      reportedBy: {
+          isVerified: false },
+      reportedBy: {,
         id: 'reporter2',
-        name: 'RegularUser',
+          name: 'RegularUser',
         count: 8 },
-      reportReason: 'Spam',
+          reportReason: 'Spam',
       severity: 'medium',
-      status: 'pending',
+          status: 'pending',
       createdAt: '2024-01-15T12:45:00Z',
-      reportedAt: '2024-01-15T13:10:00Z' },
+          reportedAt: '2024-01-15T13:10:00Z' },
     {
       id: '3',
-      type: 'user',
+          type: 'user',
       title: 'Suspicious User Activity',
-      content: 'User has been mass-uploading copyrighted content',
-      author: {
+          content: 'User has been mass-uploading copyrighted content',
+      author: {,
         id: 'user3',
-        name: 'ContentThief',
+          name: 'ContentThief',
         avatar: 'https://picsum.photos/40/40?random=3',
-        isVerified: false },
-      reportedBy: {
+          isVerified: false },
+      reportedBy: {,
         id: 'reporter3',
-        name: 'ContentCreator',
+          name: 'ContentCreator',
         count: 25 },
-      reportReason: 'Copyright infringement',
+          reportReason: 'Copyright infringement',
       severity: 'critical',
-      status: 'pending',
+          status: 'pending',
       createdAt: '2024-01-14T09:15:00Z',
-      reportedAt: '2024-01-15T08:30:00Z' },
-  ];
+          reportedAt: '2024-01-15T08:30:00Z' }];
 
   const filteredItems = moderationItems.filter(item => {
     if (item.status !== selectedTab) {
@@ -144,7 +143,8 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const handleModerationAction = (_itemId: any, _action: ModerationAction) => {
+  const handleModerationAction = (_itemId: any,
+          _action: ModerationAction) => {
     // In a real app, this would make an API call
   };
 
@@ -164,9 +164,8 @@ export const ModerationDashboard: React.FC = () => {
       case 'high':
         return 'text-orange-600 bg-orange-100 dark:bg-orange-900 dark:text-orange-300';
       case 'critical':
-        return 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300';
-      default:
-        return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300';
+        return 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300';,
+      default: return 'text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
     }
   };
 
@@ -180,8 +179,7 @@ export const ModerationDashboard: React.FC = () => {
         return UserIcon;
       case 'community_post':
         return ChatBubbleLeftIcon;
-      default:
-        return FlagIcon;
+      default: return FlagIcon
     }
   };
 

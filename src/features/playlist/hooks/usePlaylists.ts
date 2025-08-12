@@ -14,8 +14,8 @@ export function usePlaylists(filters: PlaylistFilters = {}) {
     ['playlists', JSON.stringify(filters)],
     () => playlistService.getUserPlaylists(filters),
     {
-      staleTime: 2 * 60 * 1000, // 2 minutes
-      refetchOnWindowFocus: true }
+      staleTime: 2 * 60 * 1000, // 2 minutes,
+  refetchOnWindowFocus: true }
   );
 }
 
@@ -30,7 +30,7 @@ export function usePlaylist(playlistId: any) {
   );
 }
 
-export function usePlaylistVideos(
+export function usePlaylistVideos(,
   playlistId: any,
   page: number = 1,
   limit: number = 50
@@ -97,7 +97,7 @@ export function usePlaylistCollaborators(playlistId: any) {
   );
 }
 
-export function useSearchPlaylists(
+export function useSearchPlaylists(,
   query: any,
   filters: Omit<PlaylistFilters, 'search'> = {}
 ) {
@@ -201,7 +201,7 @@ export function useFollowPlaylist() {
     {
       onSuccess: () => {
         // Invalidate followed playlists cache
-        queryCache.invalidate('playlists:followed');
+        queryCache.invalidate('playlists: followed')
       } }
   );
 }
@@ -212,7 +212,7 @@ export function useUnfollowPlaylist() {
     {
       onSuccess: () => {
         // Invalidate followed playlists cache
-        queryCache.invalidate('playlists:followed');
+        queryCache.invalidate('playlists: followed')
       } }
   );
 }

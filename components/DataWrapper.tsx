@@ -2,18 +2,18 @@ import React from 'react';
 import { VideoGridSkeleton, ErrorState, EmptyState  } from './LoadingStates';
 
 interface DataWrapperProps<T> {
-  data: T;
+  data: T;,
   loading: boolean;
-  error: string | null;
+  error: string | null;,
   children: (data: T) => React.ReactNode;
   loadingSkeleton?: React.ReactNode;
   emptyState?: {
-    title: string;
+    title: string;,
     message: string;
     icon?: React.ReactNode;
   };
   errorTitle?: string;
-  isEmpty?: (data: T) => boolean;
+  isEmpty?: (data: T) => boolean
 }
 
 /**

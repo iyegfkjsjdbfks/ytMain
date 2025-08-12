@@ -8,8 +8,8 @@ import App from './App';
 if (typeof window !== 'undefined') {
   const style = document.createElement('style');
   style.textContent = `
-    * { pointer-events: auto !important; }
-    button, [role="button"] { cursor: pointer !important; pointer-events: auto !important; }
+    * { pointer-events: auto !important }
+    button, [role="button"] { cursor: pointer !important; pointer-events: auto !important }
   `;
   document.head.appendChild(style);
 }

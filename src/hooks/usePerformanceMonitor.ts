@@ -6,7 +6,7 @@ interface PerformanceMetrics {
   updateCount: number;
   memoryUsage?: number;
   componentName: string;
-  timestamp: number;
+  timestamp: number
 }
 
 interface PerformanceConfig {
@@ -21,7 +21,7 @@ const DEFAULT_CONFIG: Required<PerformanceConfig> = {
   enableMemoryTracking: true,
   enableRenderTracking: true,
   enableNetworkTracking: true,
-  sampleRate: 0.1, // Track 10% of renders
+  sampleRate: 0.1, // Track 10% of renders,
   maxMetricsHistory: 100 };
 
 // Global performance store
@@ -42,7 +42,7 @@ class PerformanceStore {
   }
 
   getMetricsByComponent(componentName: any) {
-    return this.metrics.filter((m: any) => m.componentName === componentName);
+    return this.metrics.filter((m: any) => m.componentName === componentName)
   }
 
   subscribe(observer: (metrics: PerformanceMetrics) => void) {
@@ -81,13 +81,13 @@ class PerformanceStore {
 
   getSlowRenders(threshold = 16) {
     // 16ms = 60fps
-    return this.metrics.filter((m: any) => m.renderTime > threshold);
+    return this.metrics.filter((m: any) => m.renderTime > threshold)
   }
 }
 
 const performanceStore = new PerformanceStore();
 
-export const usePerformanceMonitor = (
+export const usePerformanceMonitor = (,
   componentName: any,
   config: PerformanceConfig = {}
 ) => {
@@ -139,8 +139,7 @@ export const usePerformanceMonitor = (
     isTracking,
     opts.enableRenderTracking,
     opts.enableMemoryTracking,
-    componentName,
-  ]);
+    componentName]);
 
   // Auto-track renders
   useEffect(() => {
@@ -319,10 +318,10 @@ export const useWebVitals = () => {
 // Performance budget checker
 export const usePerformanceBudget = () => {
   const budgets = {
-    renderTime: 16, // 60fps
-    bundleSize: 250 * 1024, // 250KB
-    imageSize: 100 * 1024, // 100KB
-    apiResponse: 1000, // 1 second
+    renderTime: 16, // 60fps,
+  bundleSize: 250 * 1024, // 250KB,
+  imageSize: 100 * 1024, // 100KB,
+  apiResponse: 1000, // 1 second
   };
 
   const checkBudget = useCallback((metric: any, value: string | number) => {
