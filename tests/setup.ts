@@ -484,7 +484,7 @@ export const testHelpers = {
   // Async helpers
   waitForNextTick: () => new Promise(resolve => setTimeout(resolve, 0)),
 
-  waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any)),
+  waitForTime: (ms: any) => new Promise(resolve => setTimeout(resolve, ms)),
 
   // Error boundary testing
   triggerError: (component: any) => {
