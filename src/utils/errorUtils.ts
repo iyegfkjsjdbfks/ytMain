@@ -3,9 +3,9 @@
  */
 
 export interface ComponentError extends Error {
-  component: string;
-  context?: string;
-  originalError?: unknown;
+ component: string;
+ context?: string;
+ originalError?: unknown;
 }
 
 /**
@@ -17,29 +17,27 @@ export interface ComponentError extends Error {
  * @returns ComponentError object
  */
 export function createComponentError(,
-  component: any,
-  message: any,
-  originalError?: unknown,
-  context?: string
+ component: any,
+ message: any,
+ originalError?: unknown,
+ context?: string
 ): ComponentError {
-  const error = new Error(message) as ComponentError;
-  error.component = component;
-  if (context !== undefined) {
-    error.context = context;
-  }
-  if (originalError !== undefined) {
-    error.originalError = originalError;
-  }
+ const error = new Error(message) as ComponentError;
+ error.component = component;
+ if (context !== undefined) {
+ error.context = context;
+ }
+ if (originalError !== undefined) {
+ error.originalError = originalError;
+ }
 
-  // Include original error message if available
-  if (originalError instanceof Error) {
-    error.message = `${message}: ${originalError.message}`;
-    if (originalError.stack !== undefined) {
-      error.stack = originalError.stack;
-    }
-  }
-
-  return error;
+ // Include original error message if available
+ if (originalError instanceof Error) {
+ error.message = `${message}: ${originalError.message}`;
+ if (originalError.stack !== undefined) {
+ error.stack = originalError.stack;
+ }
+ return error;
 }
 
 /**
@@ -50,16 +48,16 @@ export function createComponentError(,
  * @returns ComponentError object
  */
 export function createAsyncError(,
-  component: any,
-  operation: any,
-  originalError?: unknown
+ component: any,
+ operation: any,
+ originalError?: unknown
 ): ComponentError {
-  return createComponentError(
-    component,
-    `Async operation failed: ${operation}`,
-    originalError,
-    'async'
-  );
+ return createComponentError(
+ component,
+ `Async operation failed: ${operation}`,
+ originalError,
+ 'async'
+ );
 }
 
 /**
@@ -70,16 +68,16 @@ export function createAsyncError(,
  * @returns ComponentError object
  */
 export function createNetworkError(,
-  component: any,
-  url: any,
-  originalError?: unknown
+ component: any,
+ url: any,
+ originalError?: unknown
 ): ComponentError {
-  return createComponentError(
-    component,
-    `Network request failed: ${url}`,
-    originalError,
-    'network'
-  );
+ return createComponentError(
+ component,
+ `Network request failed: ${url}`,
+ originalError,
+ 'network'
+ );
 }
 
 /**
@@ -90,16 +88,16 @@ export function createNetworkError(,
  * @returns ComponentError object
  */
 export function createValidationError(,
-  component: any,
-  field: any,
-  value: unknown
+ component: any,
+ field: any,
+ value: unknown
 ): ComponentError {
-  return createComponentError(
-    component,
-    `Validation failed for field: ${field}`,
-    new Error(`Invalid value: ${JSON.stringify(value)}`),
-    'validation'
-  );
+ return createComponentError(
+ component,
+ `Validation failed for field: ${field}`,
+ new Error(`Invalid value: ${JSON.stringify(value)}`),
+ 'validation'
+ );
 }
 
 /**
@@ -108,13 +106,13 @@ export function createValidationError(,
  * @returns Error message string
  */
 export function getErrorMessage(error: unknown): string {
-  if (error instanceof Error) {
-    return error.message;
-  }
-  if (typeof error === 'string') {
-    return error;
-  }
-  return 'Unknown error occurred';
+ if (error instanceof Error) {
+ return error.message;
+ }
+ if (typeof error === 'string') {
+ return error;
+ }
+ return 'Unknown error occurred';
 }
 
 /**
@@ -123,5 +121,5 @@ export function getErrorMessage(error: unknown): string {
  * @returns True if error is a ComponentError
  */
 export function isComponentError(error: unknown): error is ComponentError {
-  return error instanceof Error && 'component' in error;
+ return error instanceof Error && 'component' in error;
 }

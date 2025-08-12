@@ -1,121 +1,119 @@
 import React, { useCallback, useState, FormEvent } from 'react';
 interface UseFormStateOptions<T> {
-  initialValues: T;
-  validate?: (values: T) => Partial<Record<keyof T, string>>;
-  onSubmit?: (values: T) => Promise<void> | void
+ initialValues: T;
+ validate?: (values: T) => Partial<Record<keyof T, string>>;
+ onSubmit?: (values: T) => Promise<void> | void
 }
 
 interface UseFormStateReturn<T> {
-  values: T;
-  errors: Partial<Record<keyof T, string>>;
-  isSubmitting: boolean;
-  isValid: boolean;
-  setValue: (field: keyof T, value: string | number) => void;
-  setValues: (values: Partial<T>) => void;
-  setError: (field: keyof T, error: Error) => void;
-  clearError: (field: keyof T) => void;
-  clearErrors: () => void;
-  handleSubmit: (e?: React.FormEvent) => Promise<void>;
-  reset: () => void
+ values: T;
+ errors: Partial<Record<keyof T, string>>;
+ isSubmitting: boolean;
+ isValid: boolean;
+ setValue: (field: keyof T, value: string | number) => void;
+ setValues: (values: Partial<T>) => void;
+ setError: (field: keyof T, error: Error) => void;
+ clearError: (field: keyof T) => void;
+ clearErrors: () => void;
+ handleSubmit: (e?: React.FormEvent) => Promise<void>;
+ reset: () => void
 }
 
 /**
  * Custom hook for managing form state with validation and submission
  */
 export function useFormState<T extends Record<string, any>>({
-  initialValues,
-  validate,
-  onSubmit }: UseFormStateOptions<T>): UseFormStateReturn<T> {
-  const [values, setValuesState] = useState<T>(initialValues);
-  const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+ initialValues,
+ validate,
+ onSubmit }: UseFormStateOptions<T>): UseFormStateReturn<T> {
+ const [values, setValuesState] = useState<T>(initialValues);
+ const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
+ const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const setValue = useCallback(
-    (field: keyof T, value: string | number) => {
-      setValuesState(prev => ({ ...prev as any, [field]: value }));
-      // Clear error when user starts typing
-      if (errors[field]) {
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[field];
-          return newErrors;
-        });
-      }
-    },
-    [errors]
-  );
+ const setValue = useCallback(
+ (field: keyof T, value: string | number) => {
+ setValuesState(prev => ({ ...prev as any, [field]: value }));
+ // Clear error when user starts typing
+ if (errors[field]) {
+ setErrors(prev => {
+ const newErrors = { ...prev };
+ delete newErrors[field];
+ return newErrors;
+ });
+ }
+ },
+ [errors]
+ );
 
-  const setValues = useCallback((newValues: Partial<T>) => {
-    setValuesState(prev => ({ ...prev as any, ...newValues }));
-  }, []);
+ const setValues = useCallback((newValues: Partial<T>) => {
+ setValuesState(prev => ({ ...prev as any, ...newValues }));
+ }, []);
 
-  const setError = useCallback((field: keyof T, error: Error) => {
-    setErrors(prev => ({ ...prev as any, [field]: error }));
-  }, []);
+ const setError = useCallback((field: keyof T, error: Error) => {
+ setErrors(prev => ({ ...prev as any, [field]: error }));
+ }, []);
 
-  const clearError = useCallback((field: keyof T) => {
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[field];
-      return newErrors;
-    });
-  }, []);
+ const clearError = useCallback((field: keyof T) => {
+ setErrors(prev => {
+ const newErrors = { ...prev };
+ delete newErrors[field];
+ return newErrors;
+ });
+ }, []);
 
-  const clearErrors = useCallback(() => {
-    setErrors({});
-  }, []);
+ const clearErrors = useCallback(() => {
+ setErrors({});
+ }, []);
 
-  const reset = useCallback(() => {
-    setValuesState(initialValues);
-    setErrors({});
-    setIsSubmitting(false);
-  }, [initialValues]);
+ const reset = useCallback(() => {
+ setValuesState(initialValues);
+ setErrors({});
+ setIsSubmitting(false);
+ }, [initialValues]);
 
-  const handleSubmit = useCallback(
-    async (e?: React.FormEvent): Promise<any> => {
-      if (e as any) {
-        e.preventDefault();
-      }
+ const handleSubmit = useCallback(
+ async (e?: React.FormEvent): Promise<any> => {
+ if (e as any) {
+ e.preventDefault();
+ }
 
-      // Run validation if provided
-      if (validate as any) {
-        const validationErrors = validate(values);
-        setErrors(validationErrors);
+ // Run validation if provided
+ if (validate as any) {
+ const validationErrors = validate(values);
+ setErrors(validationErrors);
 
-        if (Object.keys(validationErrors).length > 0) {
-          return;
-        }
-      }
+ if (Object.keys(validationErrors).length > 0) {
+ return;
+ }
+ if (!onSubmit) {
+ return;
+ }
 
-      if (!onSubmit) {
-        return;
-      }
+ setIsSubmitting(true);
+ try {
+ await onSubmit(values);
+ } catch (error: any) {
+ (console as any).error('Form submission error:', error);
+ // You might want to set a general error here
+ } finally {
+ setIsSubmitting(false);
+ }
+ },
+ [values, validate, onSubmit]
+ );
 
-      setIsSubmitting(true);
-      try {
-        await onSubmit(values);
-      } catch (error: any) {
-        (console as any).error('Form submission error:', error);
-        // You might want to set a general error here
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [values, validate, onSubmit]
-  );
+ const isValid = Object.keys(errors).length === 0;
 
-  const isValid = Object.keys(errors).length === 0;
-
-  return {
-    values,
-    errors,
-    isSubmitting,
-    isValid,
-    setValue,
-    setValues,
-    setError,
-    clearError,
-    clearErrors,
-    handleSubmit,
-    reset };
+ return {
+ values,
+ errors,
+ isSubmitting,
+ isValid,
+ setValue,
+ setValues,
+ setError,
+ clearError,
+ clearErrors,
+ handleSubmit,
+ reset };
 }

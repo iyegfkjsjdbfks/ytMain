@@ -12,427 +12,422 @@ import { usePWANotifications } from '../hooks/usePWANotifications';
 import { usePWAUpdates } from '../hooks/usePWAUpdates';
 
 interface ModularPWAInstallBannerProps {
-  variant?: 'default' | 'minimal' | 'detailed' | 'floating';
-  position?: 'top' | 'bottom' | 'center';
-  autoShow?: boolean;
-  showBenefits?: boolean;
-  showNetworkStatus?: boolean;
-  showUpdateStatus?: boolean;
-  customTheme?: {
-    primaryColor?: string;
-    backgroundColor?: string;
-    textColor?: string;
-    borderRadius?: string;
-  };
-  onInstallSuccess?: () => void;
-  onInstallDismiss?: () => void;
-  onUpdateInstall?: () => void;
+ variant?: 'default' | 'minimal' | 'detailed' | 'floating';
+ position?: 'top' | 'bottom' | 'center';
+ autoShow?: boolean;
+ showBenefits?: boolean;
+ showNetworkStatus?: boolean;
+ showUpdateStatus?: boolean;
+ customTheme?: {
+ primaryColor?: string;
+ backgroundColor?: string;
+ textColor?: string;
+ borderRadius?: string;
+ };
+ onInstallSuccess?: () => void;
+ onInstallDismiss?: () => void;
+ onUpdateInstall?: () => void;
 }
 
 interface BannerState {
-  isVisible: boolean;
-  currentView: 'install' | 'update' | 'offline' | 'notification';
-  isAnimating: boolean;
-  dismissedAt: number | null
+ isVisible: boolean;
+ currentView: 'install' | 'update' | 'offline' | 'notification';
+ isAnimating: boolean;
+ dismissedAt: number | null
 }
 
 const ModularPWAInstallBanner: FC<ModularPWAInstallBannerProps> = ({
-  variant = 'default',
-  position = 'bottom',
-  autoShow = true,
-  showBenefits = true,
-  showNetworkStatus = false,
-  showUpdateStatus = true,
-  customTheme,
-  onInstallSuccess,
-  onInstallDismiss,
-  onUpdateInstall }) => {
-  const [state, setState] = useState<BannerState>({
-    isVisible: false,
-          currentView: 'install',
-    isAnimating: false,
-          dismissedAt: null });
+ variant = 'default',
+ position = 'bottom',
+ autoShow = true,
+ showBenefits = true,
+ showNetworkStatus = false,
+ showUpdateStatus = true,
+ customTheme,
+ onInstallSuccess,
+ onInstallDismiss,
+ onUpdateInstall }) => {
+ const [state, setState] = useState<BannerState>({
+ isVisible: false,
+ currentView: 'install',
+ isAnimating: false,
+ dismissedAt: null });
 
-  // Use modular hooks
-  const pwa = usePWA();
-  const installPrompt = useInstallPrompt();
-  const offlineStatus = useOfflineStatus();
-  const pwaUpdates = usePWAUpdates();
-  const notifications = usePWANotifications();
+ // Use modular hooks
+ const pwa = usePWA();
+ const installPrompt = useInstallPrompt();
+ const offlineStatus = useOfflineStatus();
+ const pwaUpdates = usePWAUpdates();
+ const notifications = usePWANotifications();
 
-  // Determine what to show
-  const shouldShowInstall =
-    installPrompt.isInstallable && !installPrompt.isInstalled;
-  const shouldShowUpdate = pwaUpdates.updateAvailable && showUpdateStatus;
-  const shouldShowOffline = offlineStatus.isOffline && showNetworkStatus;
-  const shouldShowNotification =
-    !notifications.canShowNotifications && notifications.isSupported;
+ // Determine what to show
+ const shouldShowInstall =
+ installPrompt.isInstallable && !installPrompt.isInstalled;
+ const shouldShowUpdate = pwaUpdates.updateAvailable && showUpdateStatus;
+ const shouldShowOffline = offlineStatus.isOffline && showNetworkStatus;
+ const shouldShowNotification =
+ !notifications.canShowNotifications && notifications.isSupported;
 
-  // Auto-show logic
-  useEffect(() => {
-    if (!autoShow) {
-      return;
-    }
+ // Auto-show logic
+ useEffect(() => {
+ if (!autoShow) {
+ return;
+ }
 
-    const checkAutoShow: any = () => {
-      // Don't show if recently dismissed (within 24 hours)
-      const dismissedAt = (localStorage as any).getItem('pwa-banner-dismissed');
-      if (dismissedAt as any) {
-        const dismissedTime = parseInt(dismissedAt, 10);
-        const dayInMs = 24 * 60 * 60 * 1000;
-        if (Date.now() - dismissedTime < dayInMs) {
-          return;
-        }
+ const checkAutoShow: any = () => {
+ // Don't show if recently dismissed (within 24 hours)
+ const dismissedAt = (localStorage as any).getItem('pwa-banner-dismissed');
+ if (dismissedAt as any) {
+ const dismissedTime = parseInt(dismissedAt, 10);
+ const dayInMs = 24 * 60 * 60 * 1000;
+ if (Date.now() - dismissedTime < dayInMs) {
+ return;
+ }
+ // Determine priority view
+ let currentView: BannerState['currentView'] = 'install';
+ let shouldShow = false;
 
-        }
+ if (shouldShowUpdate as any) {
+ currentView = 'update';
+ shouldShow = true;
+ } else if (shouldShowInstall as any) {
+ currentView = 'install';
+ shouldShow = true;
+ } else if (shouldShowNotification as any) {
+ currentView = 'notification';
+ shouldShow = true;
+ } else if (shouldShowOffline as any) {
+ currentView = 'offline';
+ shouldShow = true;
+ }
 
-      // Determine priority view
-      let currentView: BannerState['currentView'] = 'install';
-      let shouldShow = false;
+ if (shouldShow as any) {
+ setState(prev => ({
+ ...prev as any,
+ isVisible: true,
+ currentView }));
+ };
 
-      if (shouldShowUpdate as any) {
-        currentView = 'update';
-        shouldShow = true;
-      } else if (shouldShowInstall as any) {
-        currentView = 'install';
-        shouldShow = true;
-      } else if (shouldShowNotification as any) {
-        currentView = 'notification';
-        shouldShow = true;
-      } else if (shouldShowOffline as any) {
-        currentView = 'offline';
-        shouldShow = true;
-      }
+ // Delay auto-show to avoid immediate popup
+ const timer = setTimeout((checkAutoShow) as any, 2000);
+ return () => clearTimeout(timer);
+ }, [
+ autoShow,
+ shouldShowInstall,
+ shouldShowUpdate,
+ shouldShowOffline,
+ shouldShowNotification]);
 
-      if (shouldShow as any) {
-        setState(prev => ({
-          ...prev as any,
-          isVisible: true,
-          currentView }));
-      }
-    };
+ // Handle install
+ const handleInstall = useCallback(async (): Promise<void> => {
+ setState(prev => ({ ...prev as any, isAnimating: true }));
 
-    // Delay auto-show to avoid immediate popup
-    const timer = setTimeout((checkAutoShow) as any, 2000);
-    return () => clearTimeout(timer);
-  }, [
-    autoShow,
-    shouldShowInstall,
-    shouldShowUpdate,
-    shouldShowOffline,
-    shouldShowNotification]);
+ try {
+ const success = await installPrompt.installApp();
 
-  // Handle install
-  const handleInstall = useCallback(async (): Promise<void> => {
-    setState(prev => ({ ...prev as any, isAnimating: true }));
+ if (success as any) {
+ conditionalLogger.info(
+ 'PWA installed successfully',
+ undefined,
+ 'ModularPWAInstallBanner'
+ );
+ onInstallSuccess?.();
 
-    try {
-      const success = await installPrompt.installApp();
+ setState(prev => ({
+ ...prev as any,
+ isVisible: false,
+ isAnimating: false }));
+ } else {
+ setState(prev => ({ ...prev as any, isAnimating: false }));
+ }
+ } catch (error: any) {
+ conditionalLogger.error(
+ 'Failed to install PWA',
+ { error: error instanceof Error ? error.message : 'Unknown error' },
+ 'ModularPWAInstallBanner'
+ );
+ setState(prev => ({ ...prev as any, isAnimating: false }));
+ }
+ }, [installPrompt.installApp, onInstallSuccess]);
 
-      if (success as any) {
-        conditionalLogger.info(
-          'PWA installed successfully',
-          undefined,
-          'ModularPWAInstallBanner'
-        );
-        onInstallSuccess?.();
+ // Handle update
+ const handleUpdate = useCallback(async (): Promise<void> => {
+ setState(prev => ({ ...prev as any, isAnimating: true }));
 
-        setState(prev => ({
-          ...prev as any,
-          isVisible: false,
-          isAnimating: false }));
-      } else {
-        setState(prev => ({ ...prev as any, isAnimating: false }));
-      }
-    } catch (error: any) {
-      conditionalLogger.error(
-        'Failed to install PWA',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner'
-      );
-      setState(prev => ({ ...prev as any, isAnimating: false }));
-    }
-  }, [installPrompt.installApp, onInstallSuccess]);
+ try {
+ await pwaUpdates.installUpdate();
+ onUpdateInstall?.();
+ } catch (error: any) {
+ conditionalLogger.error(
+ 'Failed to install update',
+ { error: error instanceof Error ? error.message : 'Unknown error' },
+ 'ModularPWAInstallBanner'
+ );
+ }
 
-  // Handle update
-  const handleUpdate = useCallback(async (): Promise<void> => {
-    setState(prev => ({ ...prev as any, isAnimating: true }));
+ setState(prev => ({ ...prev as any, isAnimating: false }));
+ }, [pwaUpdates.installUpdate, onUpdateInstall]);
 
-    try {
-      await pwaUpdates.installUpdate();
-      onUpdateInstall?.();
-    } catch (error: any) {
-      conditionalLogger.error(
-        'Failed to install update',
-        { error: error instanceof Error ? error.message : 'Unknown error' },
-        'ModularPWAInstallBanner'
-      );
-    }
+ // Handle notification permission
+ const handleNotificationPermission = useCallback(async (): Promise<void> => {
+ setState(prev => ({ ...prev as any, isAnimating: true }));
 
-    setState(prev => ({ ...prev as any, isAnimating: false }));
-  }, [pwaUpdates.installUpdate, onUpdateInstall]);
+ try {
+ await notifications.requestPermission();
+ setState(prev => ({
+ ...prev as any,
+ isVisible: false,
+ isAnimating: false }));
+ } catch (error: any) {
+ setState(prev => ({ ...prev as any, isAnimating: false }));
+ }
+ }, [notifications.requestPermission]);
 
-  // Handle notification permission
-  const handleNotificationPermission = useCallback(async (): Promise<void> => {
-    setState(prev => ({ ...prev as any, isAnimating: true }));
+ // Handle dismiss
+ const handleDismiss = useCallback(() => {
+ setState(prev => ({
+ ...prev as any,
+ isVisible: false,
+ dismissedAt: Date.now() }));
 
-    try {
-      await notifications.requestPermission();
-      setState(prev => ({
-        ...prev as any,
-        isVisible: false,
-          isAnimating: false }));
-    } catch (error: any) {
-      setState(prev => ({ ...prev as any, isAnimating: false }));
-    }
-  }, [notifications.requestPermission]);
+ (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
+ onInstallDismiss?.();
+ }, [onInstallDismiss]);
 
-  // Handle dismiss
-  const handleDismiss = useCallback(() => {
-    setState(prev => ({
-      ...prev as any,
-      isVisible: false,
-          dismissedAt: Date.now() }));
+ // Don't render if not visible or not initialized
+ if (!state.isVisible || !pwa.isInitialized) {
+ return null;
+ }
 
-    (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
-    onInstallDismiss?.();
-  }, [onInstallDismiss]);
+ // Theme styles
+ const theme = {
+ primaryColor: customTheme?.primaryColor || '#007bff',
+ backgroundColor: customTheme?.backgroundColor || '#ffffff',
+ textColor: customTheme?.textColor || '#333333',
+ borderRadius: customTheme?.borderRadius || '8px' };
 
-  // Don't render if not visible or not initialized
-  if (!state.isVisible || !pwa.isInitialized) {
-    return null;
-  }
+ // Position classes
+ const positionClasses = {
+ top: 'top-4 left-4 right-4',
+ bottom: 'bottom-4 left-4 right-4',
+ center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' };
 
-  // Theme styles
-  const theme = {
-    primaryColor: customTheme?.primaryColor || '#007bff',
-          backgroundColor: customTheme?.backgroundColor || '#ffffff',
-    textColor: customTheme?.textColor || '#333333',
-          borderRadius: customTheme?.borderRadius || '8px' };
+ // Variant classes
+ const variantClasses = {
+ default: 'p-4 shadow-lg',
+ minimal: 'p-2 shadow-md',
+ detailed: 'p-6 shadow-xl',
+ floating: 'p-4 shadow-2xl rounded-full' };
 
-  // Position classes
-  const positionClasses = {
-    top: 'top-4 left-4 right-4',
-          bottom: 'bottom-4 left-4 right-4',
-    center: 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' };
+ // Content based on current view
+ const renderContent: any = () => {
+ switch (state.currentView) {
+ case 'install':
+ return (
+ <div className='flex items-center justify-between'>
+ <div className='flex-1'>
+ <h3
+ className='font-semibold text-lg mb-1'
+ style={{ color: theme.textColor 
+ }
+ >
+ Install YouTubeX
+ </h3>
+ <p
+ className='text-sm opacity-80'
+ style={{ color: theme.textColor }
+ >
+ Get the full app experience with offline access and
+ notifications.
+ </p>
+ {showBenefits && variant !== 'minimal' && (
+ <div className='mt-2 flex flex-wrap gap-2'>
+ <span className='text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded'>
+ 📱 Home Screen Access
+ </span>
+ <span className='text-xs px-2 py-1 bg-green-100 text-green-800 rounded'>
+ 🔔 Push Notifications
+ </span>
+ <span className='text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded'>
+ 📶 Offline Support
+ </span>
+ </div>
+ )}
+ </div>
+ <div className='flex gap-2 ml-4'>
+ <button
+ onClick={(e: any) => handleInstall(e)}
+ disabled={state.isAnimating}
+ className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+ style={{ backgroundColor: theme.primaryColor }
+ >
+ {state.isAnimating ? 'Installing...' : 'Install'}
+ </button>
+ <button
+ onClick={(e: any) => handleDismiss(e)}
+ className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+ >
+ ✕
+ </button>
+ </div>
+ </div>
+ );
 
-  // Variant classes
-  const variantClasses = {
-    default: 'p-4 shadow-lg',
-          minimal: 'p-2 shadow-md',
-    detailed: 'p-6 shadow-xl',
-          floating: 'p-4 shadow-2xl rounded-full' };
+ case 'update':
+ return (
+ <div className='flex items-center justify-between'>
+ <div className='flex-1'>
+ <h3
+ className='font-semibold text-lg mb-1'
+ style={{ color: theme.textColor }
+ >
+ Update Available
+ </h3>
+ <p
+ className='text-sm opacity-80'
+ style={{ color: theme.textColor }
+ >
+ A new version of YouTubeX is ready to install.
+ </p>
+ {pwaUpdates.updateVersion && (
+ <p
+ className='text-xs mt-1 opacity-60'
+ style={{ color: theme.textColor }
+ >,
+ Version: {pwaUpdates.updateVersion}
+ </p>
+ )}
+ </div>
+ <div className='flex gap-2 ml-4'>
+ <button
+ onClick={(e: any) => handleUpdate(e)}
+ disabled={state.isAnimating}
+ className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+ style={{ backgroundColor: theme.primaryColor }
+ >
+ {state.isAnimating ? 'Updating...' : 'Update'}
+ </button>
+ <button
+ onClick={() => pwaUpdates.skipUpdate()}
+ className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+ >
+ Skip
+ </button>
+ </div>
+ </div>
+ );
 
-  // Content based on current view
-  const renderContent: any = () => {
-    switch (state.currentView) {
-      case 'install':
-        return (
-          <div className='flex items-center justify-between'>
-            <div className='flex-1'>
-              <h3
-                className='font-semibold text-lg mb-1'
-                style={{ color: theme.textColor 
-        }}
-              >
-                Install YouTubeX
-              </h3>
-              <p
-                className='text-sm opacity-80'
-                style={{ color: theme.textColor }}
-              >
-                Get the full app experience with offline access and
-                notifications.
-              </p>
-              {showBenefits && variant !== 'minimal' && (
-                <div className='mt-2 flex flex-wrap gap-2'>
-                  <span className='text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded'>
-                    📱 Home Screen Access
-                  </span>
-                  <span className='text-xs px-2 py-1 bg-green-100 text-green-800 rounded'>
-                    🔔 Push Notifications
-                  </span>
-                  <span className='text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded'>
-                    📶 Offline Support
-                  </span>
-                </div>
-              )}
-            </div>
-            <div className='flex gap-2 ml-4'>
-              <button
-                onClick={(e: any) => handleInstall(e)}
-                disabled={state.isAnimating}
-                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
-                style={{ backgroundColor: theme.primaryColor }}
-              >
-                {state.isAnimating ? 'Installing...' : 'Install'}
-              </button>
-              <button
-                onClick={(e: any) => handleDismiss(e)}
-                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-        );
+ case 'notification':
+ return (
+ <div className='flex items-center justify-between'>
+ <div className='flex-1'>
+ <h3
+ className='font-semibold text-lg mb-1'
+ style={{ color: theme.textColor }
+ >
+ Enable Notifications
+ </h3>
+ <p
+ className='text-sm opacity-80'
+ style={{ color: theme.textColor }
+ >
+ Stay updated with new videos and important updates.
+ </p>
+ </div>
+ <div className='flex gap-2 ml-4'>
+ <button
+ onClick={(e: any) => handleNotificationPermission(e)}
+ disabled={state.isAnimating}
+ className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
+ style={{ backgroundColor: theme.primaryColor }
+ >
+ {state.isAnimating ? 'Requesting...' : 'Enable'}
+ </button>
+ <button
+ onClick={(e: any) => handleDismiss(e)}
+ className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+ >
+ ✕
+ </button>
+ </div>
+ </div>
+ );
 
-      case 'update':
-        return (
-          <div className='flex items-center justify-between'>
-            <div className='flex-1'>
-              <h3
-                className='font-semibold text-lg mb-1'
-                style={{ color: theme.textColor }}
-              >
-                Update Available
-              </h3>
-              <p
-                className='text-sm opacity-80'
-                style={{ color: theme.textColor }}
-              >
-                A new version of YouTubeX is ready to install.
-              </p>
-              {pwaUpdates.updateVersion && (
-                <p
-                  className='text-xs mt-1 opacity-60'
-                  style={{ color: theme.textColor }}
-                >,
-  Version: {pwaUpdates.updateVersion}
-                </p>
-              )}
-            </div>
-            <div className='flex gap-2 ml-4'>
-              <button
-                onClick={(e: any) => handleUpdate(e)}
-                disabled={state.isAnimating}
-                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
-                style={{ backgroundColor: theme.primaryColor }}
-              >
-                {state.isAnimating ? 'Updating...' : 'Update'}
-              </button>
-              <button
-                onClick={() => pwaUpdates.skipUpdate()}
-                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
-              >
-                Skip
-              </button>
-            </div>
-          </div>
-        );
+ case 'offline':
+ return (
+ <div className='flex items-center justify-between'>
+ <div className='flex-1'>
+ <h3
+ className='font-semibold text-lg mb-1'
+ style={{ color: theme.textColor }
+ >
+ You're Offline
+ </h3>
+ <p
+ className='text-sm opacity-80'
+ style={{ color: theme.textColor }
+ >
+ Some features may be limited. Check your connection.
+ </p>
+ {offlineStatus.offlineDuration > 0 && (
+ <p
+ className='text-xs mt-1 opacity-60'
+ style={{ color: theme.textColor }
+ >
+ Offline for:{' '}
+ {Math.floor(offlineStatus.offlineDuration / 1000)}s
+ </p>
+ )}
+ </div>
+ <div className='flex gap-2 ml-4'>
+ <button
+ onClick={() => offlineStatus.testConnection()}
+ className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity'
+ style={{ backgroundColor: theme.primaryColor }
+ >
+ Retry
+ </button>
+ <button
+ onClick={(e: any) => handleDismiss(e)}
+ className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
+ >
+ ✕
+ </button>
+ </div>
+ </div>
+ );
 
-      case 'notification':
-        return (
-          <div className='flex items-center justify-between'>
-            <div className='flex-1'>
-              <h3
-                className='font-semibold text-lg mb-1'
-                style={{ color: theme.textColor }}
-              >
-                Enable Notifications
-              </h3>
-              <p
-                className='text-sm opacity-80'
-                style={{ color: theme.textColor }}
-              >
-                Stay updated with new videos and important updates.
-              </p>
-            </div>
-            <div className='flex gap-2 ml-4'>
-              <button
-                onClick={(e: any) => handleNotificationPermission(e)}
-                disabled={state.isAnimating}
-                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity disabled:opacity-50'
-                style={{ backgroundColor: theme.primaryColor }}
-              >
-                {state.isAnimating ? 'Requesting...' : 'Enable'}
-              </button>
-              <button
-                onClick={(e: any) => handleDismiss(e)}
-                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-        );
+ default: return null
+ };
 
-      case 'offline':
-        return (
-          <div className='flex items-center justify-between'>
-            <div className='flex-1'>
-              <h3
-                className='font-semibold text-lg mb-1'
-                style={{ color: theme.textColor }}
-              >
-                You're Offline
-              </h3>
-              <p
-                className='text-sm opacity-80'
-                style={{ color: theme.textColor }}
-              >
-                Some features may be limited. Check your connection.
-              </p>
-              {offlineStatus.offlineDuration > 0 && (
-                <p
-                  className='text-xs mt-1 opacity-60'
-                  style={{ color: theme.textColor }}
-                >
-                  Offline for:{' '}
-                  {Math.floor(offlineStatus.offlineDuration / 1000)}s
-                </p>
-              )}
-            </div>
-            <div className='flex gap-2 ml-4'>
-              <button
-                onClick={() => offlineStatus.testConnection()}
-                className='px-4 py-2 text-white rounded font-medium hover:opacity-90 transition-opacity'
-                style={{ backgroundColor: theme.primaryColor }}
-              >
-                Retry
-              </button>
-              <button
-                onClick={(e: any) => handleDismiss(e)}
-                className='px-3 py-2 text-gray-500 hover:text-gray-700 transition-colors'
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-        );
+ return (
+ <div
+ className={`fixed z-50 ${positionClasses[position]} ${variantClasses[variant]} transition-all duration-300 ease-in-out`}
+ style={{
+ backgroundColor: theme.backgroundColor,
+ borderRadius: theme.borderRadius,
+ transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
+ opacity: state.isVisible ? 1 : 0 }
+ >
+ {renderContent()}
 
-      default: return null
-    }
-  };
-
-  return (
-    <div
-      className={`fixed z-50 ${positionClasses[position]} ${variantClasses[variant]} transition-all duration-300 ease-in-out`}
-      style={{
-        backgroundColor: theme.backgroundColor,
-          borderRadius: theme.borderRadius,
-        transform: state.isVisible ? 'translateY(0)' : 'translateY(100%)',
-          opacity: state.isVisible ? 1 : 0 }}
-    >
-      {renderContent()}
-
-      {/* Network status indicator */}
-      {showNetworkStatus && (
-        <div className='absolute top-2 right-2'>
-          <div
-            className={`w-2 h-2 rounded-full ${
-              offlineStatus.isOnline
-                ? offlineStatus.getNetworkQuality() === 'fast'
-                  ? 'bg-green-500'
-                  : 'bg-yellow-500'
-                : 'bg-red-500'
-            }`}
-            title={`Network: ${offlineStatus.getNetworkQuality()}`}
-          />
-        </div>
-      )}
-    </div>
-  );
+ {/* Network status indicator */}
+ {showNetworkStatus && (
+ <div className='absolute top-2 right-2'>
+ <div
+ className={`w-2 h-2 rounded-full ${
+ offlineStatus.isOnline
+ ? offlineStatus.getNetworkQuality() === 'fast'
+ ? 'bg-green-500'
+ : 'bg-yellow-500'
+ : 'bg-red-500'
+ }`}
+ title={`Network: ${offlineStatus.getNetworkQuality()}`}
+ />
+ </div>
+ )}
+ </div>
+ );
 };
 
 export default ModularPWAInstallBanner;

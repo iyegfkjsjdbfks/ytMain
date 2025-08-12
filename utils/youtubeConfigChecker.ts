@@ -8,105 +8,104 @@ import { API_CONFIG } from '../config';
 import { youtubeSearchService } from '../services/youtubeSearchService';
 
 interface ConfigStatus {
-  isConfigured: boolean;
-  hasApiKey: boolean;
-  hasEngineId: boolean;
-  apiKeyLength?: number;
-  engineIdLength?: number;
-  recommendations: string[]
+ isConfigured: boolean;
+ hasApiKey: boolean;
+ hasEngineId: boolean;
+ apiKeyLength?: number;
+ engineIdLength?: number;
+ recommendations: string[]
 }
 
 export const checkYouTubeAPIConfig: any = (): ConfigStatus => {
-  const status = youtubeSearchService.getConfigStatus();
-  const recommendations: string[] = [];
+ const status = youtubeSearchService.getConfigStatus();
+ const recommendations: string[] = [];
 
-  // Check API key
-  if (!status.hasApiKey) {
-    recommendations.push('Add VITE_GOOGLE_SEARCH_API_KEY to your .env file');
-    recommendations.push('Get API key from: https://console.developers.google.com/')
-  }
+ // Check API key
+ if (!status.hasApiKey) {
+ recommendations.push('Add VITE_GOOGLE_SEARCH_API_KEY to your .env file');
+ recommendations.push('Get API key from: https://console.developers.google.com/')
+ }
 
-  // Check Engine ID
-  if (!status.hasEngineId) {
-    recommendations.push('Add VITE_GOOGLE_SEARCH_ENGINE_ID to your .env file');
-    recommendations.push('Create Custom Search Engine at: https://cse.google.com/')
-  }
+ // Check Engine ID
+ if (!status.hasEngineId) {
+ recommendations.push('Add VITE_GOOGLE_SEARCH_ENGINE_ID to your .env file');
+ recommendations.push('Create Custom Search Engine at: https://cse.google.com/')
+ }
 
-  // Additional recommendations
-  if (status.configured) {
-    recommendations.push('✅ YouTube API is properly configured');
-    recommendations.push('Recommendations will use live YouTube search results');
-  } else {
-    recommendations.push('📋 Setup Guide: See GOOGLE_SEARCH_SETUP.md for detailed instructions');
-    recommendations.push('🔄 Fallback: Using static sample videos until API is configured')
-  }
+ // Additional recommendations
+ if (status.configured) {
+ recommendations.push('✅ YouTube API is properly configured');
+ recommendations.push('Recommendations will use live YouTube search results');
+ } else {
+ recommendations.push('📋 Setup Guide: See GOOGLE_SEARCH_SETUP.md for detailed instructions');
+ recommendations.push('🔄 Fallback: Using static sample videos until API is configured')
+ }
 
-  return {
-    isConfigured: status.configured,
-    hasApiKey: status.hasApiKey,
-    hasEngineId: status.hasEngineId,
-    apiKeyLength: API_CONFIG.GOOGLE_SEARCH_API_KEY?.length,
-    engineIdLength: API_CONFIG.GOOGLE_SEARCH_ENGINE_ID?.length,
-    recommendations };
+ return {
+ isConfigured: status.configured,
+ hasApiKey: status.hasApiKey,
+ hasEngineId: status.hasEngineId,
+ apiKeyLength: API_CONFIG.GOOGLE_SEARCH_API_KEY?.length,
+ engineIdLength: API_CONFIG.GOOGLE_SEARCH_ENGINE_ID?.length,
+ recommendations };
 };
 
 /**
  * Test the YouTube Search API with a simple query
  */
 export const testYouTubeAPI = async (): Promise<{
-  success: boolean;
-  message: string;
-  results?: number;
-  error?: string;
+ success: boolean;
+ message: string;
+ results?: number;
+ error?: string;
 }> => {
-  try {
-    const results = await youtubeSearchService.searchVideos('javascript tutorial', 3);
+ try {
+ const results = await youtubeSearchService.searchVideos('javascript tutorial', 3);
 
-    if (results.length > 0) {
-      return {
-        success: true,
-        message: 'YouTube Search API is working correctly',
-        results: results.length };
-    }
-      return {
-        success: false,
-        message: 'API responded but returned no results',
-        results: 0 };
+ if (results.length > 0) {
+ return {
+ success: true,
+ message: 'YouTube Search API is working correctly',
+ results: results.length };
+ }
+ return {
+ success: false,
+ message: 'API responded but returned no results',
+ results: 0 };
 
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'YouTube Search API test failed',
-      error: error instanceof Error ? error.message : 'Unknown error' };
-  }
-};
+ } catch (error: any) {
+ return {
+ success: false,
+ message: 'YouTube Search API test failed',
+ error: error instanceof Error ? error.message : 'Unknown error' };
+ };
 
 /**
  * Log configuration status to console for debugging
  */
 export const logConfigStatus: any = (): void => {
-  const config = checkYouTubeAPIConfig();
+ const config = checkYouTubeAPIConfig();
 
-  (console as any).group('🎯 YouTube API Configuration Status');
-  (console as any).log('Configured:', config.isConfigured ? '✅' : '❌');
-  (console as any).log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
-  (console as any).log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
+ (console as any).group('🎯 YouTube API Configuration Status');
+ (console as any).log('Configured:', config.isConfigured ? '✅' : '❌');
+ (console as any).log('API Key:', config.hasApiKey ? '✅' : '❌', config.hasApiKey ? `(${config.apiKeyLength} chars)` : '');
+ (console as any).log('Engine ID:', config.hasEngineId ? '✅' : '❌', config.hasEngineId ? `(${config.engineIdLength} chars)` : '');
 
-  (console as any).group('📋 Recommendations:');
-  config.recommendations.forEach((rec) => (console as any).log(`• ${rec}`));
-  (console as any).groupEnd();
+ (console as any).group('📋 Recommendations:');
+ config.recommendations.forEach((rec) => (console as any).log(`• ${rec}`));
+ (console as any).groupEnd();
 
-  (console as any).groupEnd();
+ (console as any).groupEnd();
 };
 
 /**
  * Show configuration info in development mode
  */
 if (import.meta.env.DEV) {
-  logConfigStatus();
+ logConfigStatus();
 }
 
 export default {
-  checkYouTubeAPIConfig,
-  testYouTubeAPI,
-  logConfigStatus };
+ checkYouTubeAPIConfig,
+ testYouTubeAPI,
+ logConfigStatus };

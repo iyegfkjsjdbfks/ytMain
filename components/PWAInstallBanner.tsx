@@ -5,177 +5,173 @@ import { ArrowDownTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { PWAEvents, PWAUtils } from '../src/utils/pwa';
 
 interface PWAInstallBannerProps {
-  className?: string;
+ className?: string;
 }
 
 const PWAInstallBanner: FC<PWAInstallBannerProps> = ({ className = '' }: any) => {
-  const [showBanner, setShowBanner] = useState<boolean>(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [isInstalling, setIsInstalling] = useState<boolean>(false);
+ const [showBanner, setShowBanner] = useState<boolean>(false);
+ const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+ const [isInstalling, setIsInstalling] = useState<boolean>(false);
 
-  useEffect(() => {
-    // Check if PWA is already installed
-    if (PWAUtils.isInstalled()) {
-      return;
-    }
+ useEffect(() => {
+ // Check if PWA is already installed
+ if (PWAUtils.isInstalled()) {
+ return;
+ }
 
-    // Check if installation is supported
-    if (!PWAUtils.canInstall()) {
-      return;
-    }
+ // Check if installation is supported
+ if (!PWAUtils.canInstall()) {
+ return;
+ }
 
-    // Listen for beforeinstallprompt event
-    const handleBeforeInstallPrompt: any = (e: Event) => {
-      // Prevent the mini-infobar from appearing on mobile
-      e.preventDefault();
+ // Listen for beforeinstallprompt event
+ const handleBeforeInstallPrompt: any = (e: Event) => {
+ // Prevent the mini-infobar from appearing on mobile
+ e.preventDefault();
 
-      // Save the event so it can be triggered later
-      setDeferredPrompt(e);
+ // Save the event so it can be triggered later
+ setDeferredPrompt(e);
 
-      // Check if user has previously dismissed the banner
-      const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
-      if (dismissedTime as any) {
-        const dismissedDate = new Date(parseInt(dismissedTime, 10));
-        const daysSinceDismissed: any = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+ // Check if user has previously dismissed the banner
+ const dismissedTime = (localStorage as any).getItem('pwa-banner-dismissed');
+ if (dismissedTime as any) {
+ const dismissedDate = new Date(parseInt(dismissedTime, 10));
+ const daysSinceDismissed: any = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
 
-        // Don't show banner if dismissed within last 30 days
-        if (daysSinceDismissed < 30) {
-          return;
-        }
+ // Don't show banner if dismissed within last 30 days
+ if (daysSinceDismissed < 30) {
+ return;
+ }
+ // Show the banner after a delay
+ setTimeout((() => {
+ setShowBanner(true);
+ PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_SHOWN);
+ }) as any, 3000);
+ };
 
-        }
+ // Listen for app installed event
+ const handleAppInstalled: any = () => {
+ setShowBanner(false);
+ setDeferredPrompt(null);
+ PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
 
-      // Show the banner after a delay
-      setTimeout((() => {
-        setShowBanner(true);
-        PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_SHOWN);
-      }) as any, 3000);
-    };
+ // Store install date
+ (localStorage as any).setItem('pwa-install-date', Date.now().toString());
+ };
 
-    // Listen for app installed event
-    const handleAppInstalled: any = () => {
-      setShowBanner(false);
-      setDeferredPrompt(null);
-      PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
+ window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+ window.addEventListener('appinstalled', handleAppInstalled as EventListener);
 
-      // Store install date
-      (localStorage as any).setItem('pwa-install-date', Date.now().toString());
-    };
+ return () => {
+ window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+ window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
+ }}, []);
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
-    window.addEventListener('appinstalled', handleAppInstalled as EventListener);
+ const handleInstall = async (): Promise<void> => {
+ if (!deferredPrompt) {
+ return;
+ }
 
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
-      window.removeEventListener('appinstalled', handleAppInstalled as EventListener);
-    }}, []);
+ setIsInstalling(true);
 
-  const handleInstall = async (): Promise<void> => {
-    if (!deferredPrompt) {
-      return;
-    }
+ try {
+ // Show the install prompt
+ await deferredPrompt.prompt();
 
-    setIsInstalling(true);
+ // Wait for the user to respond to the prompt
+ const { outcome } = await deferredPrompt.userChoice;
 
-    try {
-      // Show the install prompt
-      await deferredPrompt.prompt();
+ if (outcome === 'accepted') {
+ PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
+ } else {
+ PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { reason: 'User dismissed' });
+ }
 
-      // Wait for the user to respond to the prompt
-      const { outcome } = await deferredPrompt.userChoice;
+ // Clear the deferredPrompt
+ setDeferredPrompt(null);
+ setShowBanner(false);
+ } catch (error: any) {
+ (console as any).error('Error during PWA installation:', error);
+ PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { error });
+ } finally {
+ setIsInstalling(false);
+ };
 
-      if (outcome === 'accepted') {
-        PWAUtils.emitEvent(PWAEvents.INSTALL_SUCCESS);
-      } else {
-        PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { reason: 'User dismissed' });
-      }
+ const handleDismiss: any = () => {
+ setShowBanner(false);
 
-      // Clear the deferredPrompt
-      setDeferredPrompt(null);
-      setShowBanner(false);
-    } catch (error: any) {
-      (console as any).error('Error during PWA installation:', error);
-      PWAUtils.emitEvent(PWAEvents.INSTALL_FAILED, { error });
-    } finally {
-      setIsInstalling(false);
-    }
-  };
+ // Store dismissal time
+ (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
 
-  const handleDismiss: any = () => {
-    setShowBanner(false);
+ PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
+ };
 
-    // Store dismissal time
-    (localStorage as any).setItem('pwa-banner-dismissed', Date.now().toString());
+ const getInstallText: any = () => {
+ const platform = PWAUtils.getPlatform();
+ const deviceType = PWAUtils.getDeviceType();
 
-    PWAUtils.emitEvent(PWAEvents.INSTALL_PROMPT_DISMISSED);
-  };
+ if (platform === 'ios') {
+ return deviceType === 'mobile'
+ ? 'Add to Home Screen for the best experience'
+ : 'Install YouTubeX for quick access';
+ }
 
-  const getInstallText: any = () => {
-    const platform = PWAUtils.getPlatform();
-    const deviceType = PWAUtils.getDeviceType();
+ return 'Install YouTubeX app for faster access and offline features';
+ };
 
-    if (platform === 'ios') {
-      return deviceType === 'mobile'
-        ? 'Add to Home Screen for the best experience'
-        : 'Install YouTubeX for quick access';
-    }
+ const getInstallInstructions: any = () => {
+ const platform = PWAUtils.getPlatform();
 
-    return 'Install YouTubeX app for faster access and offline features';
-  };
+ if (platform === 'ios') {
+ return 'Tap the Share button and select "Add to Home Screen"';
+ }
 
-  const getInstallInstructions: any = () => {
-    const platform = PWAUtils.getPlatform();
+ return 'Click the install button to add YouTubeX to your device';
+ };
 
-    if (platform === 'ios') {
-      return 'Tap the Share button and select "Add to Home Screen"';
-    }
+ if (!showBanner) {
+ return null;
+ }
 
-    return 'Click the install button to add YouTubeX to your device';
-  };
+ return (
+ <div className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform transition-transform duration-300 ${className}`}>
+ <div className="max-w-7xl mx-auto px-4 py-3">
+ <div className="flex items-center justify-between">
+ <div className="flex items-center space-x-3">
+ <ArrowDownTrayIcon className="h-6 w-6 flex-shrink-0" />
+ <div className="flex-1">
+ <p className="text-sm font-medium">
+ {getInstallText()}
+ </p>
+ <p className="text-xs opacity-90 mt-1">
+ {getInstallInstructions()}
+ </p>
+ </div>
+ </div>
 
-  if (!showBanner) {
-    return null;
-  }
+ <div className="flex items-center space-x-2">
+ {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
+ <button
+ onClick={(e: any) => handleInstall(e)}
+ disabled={isInstalling}
+ className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+ >
+ {isInstalling ? 'Installing...' : 'Install'}
+ </button>
+ )}
 
-  return (
-    <div className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform transition-transform duration-300 ${className}`}>
-      <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <ArrowDownTrayIcon className="h-6 w-6 flex-shrink-0" />
-            <div className="flex-1">
-              <p className="text-sm font-medium">
-                {getInstallText()}
-              </p>
-              <p className="text-xs opacity-90 mt-1">
-                {getInstallInstructions()}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            {deferredPrompt && PWAUtils.getPlatform() !== 'ios' && (
-              <button
-                onClick={(e: any) => handleInstall(e)}
-                disabled={isInstalling}
-                className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isInstalling ? 'Installing...' : 'Install'}
-              </button>
-            )}
-
-            <button
-              onClick={(e: any) => handleDismiss(e)}
-              className="p-1 hover:bg-white/20 rounded-lg transition-colors"
-              aria-label="Dismiss install banner"
-            >
-              <XMarkIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+ <button
+ onClick={(e: any) => handleDismiss(e)}
+ className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+ aria-label="Dismiss install banner"
+ >
+ <XMarkIcon className="h-5 w-5" />
+ </button>
+ </div>
+ </div>
+ </div>
+ </div>
+ );
 };
 
 export default PWAInstallBanner;

@@ -2,512 +2,504 @@ import React, { useEffect, useCallback, useRef, useState, FormEvent } from 'reac
 /// <reference types="node" />
 
 declare namespace NodeJS {
-  interface ProcessEnv {
-    [key: string]: string | undefined
-  }
-  interface Process {
-    env: ProcessEnv
-  }
-}
-
+ interface ProcessEnv {
+ [key: string]: string | undefined
+ }
+ interface Process {
+ env: ProcessEnv
+ }
 // Unified state management hook
 export interface AsyncState<T> {
-  data: T | null;
-  loading: boolean;
-  error: Error | null;
-  lastFetch: number | null
+ data: T | null;
+ loading: boolean;
+ error: Error | null;
+ lastFetch: number | null
 }
 
 export function useAsyncState<T>(initialData: T | null = null): [
-  AsyncState<T>
-  {
-    setData: (data: T | null) => void;
-    setLoading: (loading: any) => void;
-    setError: (error: Error | null) => void;
-    reset: () => void
-  }] {
-  const [state, setState] = useState<AsyncState<T>>({
-    data: initialData,
-    loading: false,
-    error: null,
-    lastFetch: null });
+ AsyncState<T>
+ {
+ setData: (data: T | null) => void;
+ setLoading: (loading: any) => void;
+ setError: (error: Error | null) => void;
+ reset: () => void
+ }] {
+ const [state, setState] = useState<AsyncState<T>>({
+ data: initialData,
+ loading: false,
+ error: null,
+ lastFetch: null });
 
-  const setData = useCallback((data: T | null) => {
-    setState(prev => ({
-      ...prev as any,
-      data,
-      error: null,
-      lastFetch: Date.now() }));
-  }, []);
+ const setData = useCallback((data: T | null) => {
+ setState(prev => ({
+ ...prev as any,
+ data,
+ error: null,
+ lastFetch: Date.now() }));
+ }, []);
 
-  const setLoading = useCallback((loading: any) => {
-    setState(prev => ({ ...prev as any, loading }));
-  }, []);
+ const setLoading = useCallback((loading: any) => {
+ setState(prev => ({ ...prev as any, loading }));
+ }, []);
 
-  const setError = useCallback((error: Error | null) => {
-    setState(prev => ({
-      ...prev as any,
-      error,
-      loading: false }));
-  }, []);
+ const setError = useCallback((error: Error | null) => {
+ setState(prev => ({
+ ...prev as any,
+ error,
+ loading: false }));
+ }, []);
 
-  const reset = useCallback(() => {
-    setState({
-      data: initialData,
-      loading: false,
-      error: null,
-      lastFetch: null });
-  }, [initialData]);
+ const reset = useCallback(() => {
+ setState({
+ data: initialData,
+ loading: false,
+ error: null,
+ lastFetch: null });
+ }, [initialData]);
 
-  return [state, { setData, setLoading, setError, reset }];
+ return [state, { setData, setLoading, setError, reset }];
 }
 
 // Unified API data fetching hook
 export interface UseApiOptions {
-  immediate?: boolean;
-  refreshInterval?: number;
-  retryOnError?: boolean;
-  retryDelay?: number;
-  maxRetries?: number;
-  dependencies?: any;
+ immediate?: boolean;
+ refreshInterval?: number;
+ retryOnError?: boolean;
+ retryDelay?: number;
+ maxRetries?: number;
+ dependencies?: any;
 }
 
 export function useApi<T>(,
-  apiCall: () => Promise<T>,
-  options: UseApiOptions = {}
+ apiCall: () => Promise<T>,
+ options: UseApiOptions = {}
 ): AsyncState<T> & {
-  refetch: () => Promise<void>;
-  refresh: () => Promise<void>
+ refetch: () => Promise<void>;
+ refresh: () => Promise<void>
 } {
-  const {
-    immediate = true,
-    refreshInterval,
-    retryOnError = false,
-    retryDelay = 1000,
-    maxRetries = 3,
-    dependencies = [] } = options;
+ const {
+ immediate = true,
+ refreshInterval,
+ retryOnError = false,
+ retryDelay = 1000,
+ maxRetries = 3,
+ dependencies = [] } = options;
 
-  const [state, { setData, setLoading, setError }] = useAsyncState<T>();
-  const retryCountRef = useRef(0);
-  const refreshIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const mountedRef = useRef(true);
+ const [state, { setData, setLoading, setError }] = useAsyncState<T>();
+ const retryCountRef = useRef(0);
+ const refreshIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+ const mountedRef = useRef(true);
 
-  const fetchData = useCallback(async (): Promise<void> => {
-    if (!mountedRef.current) {
-      return;
-    }
+ const fetchData = useCallback(async (): Promise<void> => {
+ if (!mountedRef.current) {
+ return;
+ }
 
-    setLoading(true);
-    setError(null);
+ setLoading(true);
+ setError(null);
 
-    try {
-      const result = await apiCall();
-      if (mountedRef.current) {
-        setData(result);
-        retryCountRef.current = 0;
-      }
-    } catch (error: any) {
-      if (!mountedRef.current) {
-        return;
-      }
+ try {
+ const result = await apiCall();
+ if (mountedRef.current) {
+ setData(result);
+ retryCountRef.current = 0;
+ }
+ } catch (error: any) {
+ if (!mountedRef.current) {
+ return;
+ }
 
-      const apiError = error as Error;
+ const apiError = error as Error;
 
-      if (retryOnError && retryCountRef.current < maxRetries) {
-        retryCountRef.current++;
-        setTimeout((
-          () => {
-            if (mountedRef.current) {
-              fetchData();
-            }
-          }) as any,
-          retryDelay * Math.pow(2, retryCountRef.current - 1)
-        );
-      } else {
-        setError(apiError);
-        retryCountRef.current = 0;
-      }
-    }
-  }, [
-    apiCall,
-    setData,
-    setLoading,
-    setError,
-    retryOnError,
-    maxRetries,
-    retryDelay]);
+ if (retryOnError && retryCountRef.current < maxRetries) {
+ retryCountRef.current++;
+ setTimeout((
+ () => {
+ if (mountedRef.current) {
+ fetchData();
+ }
+ }) as any,
+ retryDelay * Math.pow(2, retryCountRef.current - 1)
+ );
+ } else {
+ setError(apiError);
+ retryCountRef.current = 0;
+ }
+ }, [
+ apiCall,
+ setData,
+ setLoading,
+ setError,
+ retryOnError,
+ maxRetries,
+ retryDelay]);
 
-  const refetch = useCallback(async (): Promise<void> => {
-    retryCountRef.current = 0;
-    await fetchData();
-  }, [fetchData]);
+ const refetch = useCallback(async (): Promise<void> => {
+ retryCountRef.current = 0;
+ await fetchData();
+ }, [fetchData]);
 
-  const refresh = useCallback(async (): Promise<void> => {
-    await re(fetch as any)();
-  }, [refetch]);
+ const refresh = useCallback(async (): Promise<void> => {
+ await re(fetch as any)();
+ }, [refetch]);
 
-  // Initial fetch
-  useEffect(() => {
-    if (immediate as any) {
-      fetchData();
-    }
-  }, [immediate, ...dependencies]);
+ // Initial fetch
+ useEffect(() => {
+ if (immediate as any) {
+ fetchData();
+ }
+ }, [immediate, ...dependencies]);
 
-  // Refresh interval
-  useEffect(() => {
-    if (refreshInterval && refreshInterval > 0) {
-      refreshIntervalRef.current = setInterval((fetchData) as any, refreshInterval);
-      return () => {
-        if (refreshIntervalRef.current) {
-          clearInterval(refreshIntervalRef.current);
-        }
-      };
-    }
-    return undefined;
-  }, [refreshInterval, fetchData]);
+ // Refresh interval
+ useEffect(() => {
+ if (refreshInterval && refreshInterval > 0) {
+ refreshIntervalRef.current = setInterval((fetchData) as any, refreshInterval);
+ return () => {
+ if (refreshIntervalRef.current) {
+ clearInterval(refreshIntervalRef.current);
+ };
+ }
+ return undefined;
+ }, [refreshInterval, fetchData]);
 
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false;
-      if (refreshIntervalRef.current) {
-        clearInterval(refreshIntervalRef.current);
-      }
-    };
-  }, []);
+ // Cleanup
+ useEffect(() => {
+ return () => {
+ mountedRef.current = false;
+ if (refreshIntervalRef.current) {
+ clearInterval(refreshIntervalRef.current);
+ };
+ }, []);
 
-  return {
-    ...state as any,
-    refetch,
-    refresh };
+ return {
+ ...state as any,
+ refetch,
+ refresh };
 }
 
 // Unified form state management
 export interface FormField<T> {
-  value: T;
-  error: string | null;
-  touched: boolean;
-  dirty: boolean
+ value: T;
+ error: string | null;
+ touched: boolean;
+ dirty: boolean
 }
 
 export interface FormState<T extends Record<string, any>> {
-  fields: { [K in keyof T]: FormField<T[K]> };
-  isValid: boolean;
-  isSubmitting: boolean;
-  submitError: string | null
+ fields: { [K in keyof T]: FormField<T[K]> };
+ isValid: boolean;
+ isSubmitting: boolean;
+ submitError: string | null
 }
 
 export interface FormActions<T extends Record<string, any>> {
-  setValue: <K extends keyof T>(field: K, value: T[K]) => void;
-  setError: <K extends keyof T>(field: K, error: string | null) => void;
-  setTouched: <K extends keyof T>(field: K, touched?: boolean) => void;
-  setSubmitting: (submitting: any) => void;
-  setSubmitError: (error: string | null) => void;
-  reset: () => void;
-  validate: () => boolean;
-  handleSubmit: (,
-  onSubmit: (values: T) => Promise<void> | void
-  ) => (e?: React.FormEvent) => Promise<void>;
+ setValue: <K extends keyof T>(field: K, value: T[K]) => void;
+ setError: <K extends keyof T>(field: K, error: string | null) => void;
+ setTouched: <K extends keyof T>(field: K, touched?: boolean) => void;
+ setSubmitting: (submitting: any) => void;
+ setSubmitError: (error: string | null) => void;
+ reset: () => void;
+ validate: () => boolean;
+ handleSubmit: (,
+ onSubmit: (values: T) => Promise<void> | void
+ ) => (e?: React.FormEvent) => Promise<void>;
 }
 
 export function useForm<T extends Record<string, any>>(,
-  initialValues: T,
-  validators?: { [K in keyof T]?: (value: T[K]) => string | null }
+ initialValues: T,
+ validators?: { [K in keyof T]?: (value: T[K]) => string | null }
 ): [FormState<T> FormActions<T>] {
-  const [state, setState] = useState<FormState<T>>(() => {
-    const fields = {} as { [K in keyof T]: FormField<T[K]> };
-    for (const key in initialValues) {
-      fields[key] = {
-        value: initialValues[key],
-        error: null,
-        touched: false,
-        dirty: false };
-    }
-    return {
-      fields,
-      isValid: true,
-      isSubmitting: false,
-      submitError: null };
-  });
+ const [state, setState] = useState<FormState<T>>(() => {
+ const fields = {} as { [K in keyof T]: FormField<T[K]> };
+ for (const key in initialValues) {
+ fields[key] = {
+ value: initialValues[key],
+ error: null,
+ touched: false,
+ dirty: false };
+ }
+ return {
+ fields,
+ isValid: true,
+ isSubmitting: false,
+ submitError: null };
+ });
 
-  const setValue = useCallback(
-    <K extends keyof T>(field: K, value: T[K]) => {
-      setState(prev => {
-        const newFields = { ...prev.fields };
-        newFields[field] = {
-          ...newFields[field],
-          value,
-          dirty: value !== initialValues[field],
-          error: validators?.[field] ? validators[field](value) : null };
+ const setValue = useCallback(
+ <K extends keyof T>(field: K, value: T[K]) => {
+ setState(prev => {
+ const newFields = { ...prev.fields };
+ newFields[field] = {
+ ...newFields[field],
+ value,
+ dirty: value !== initialValues[field],
+ error: validators?.[field] ? validators[field](value) : null };
 
-        const isValid = Object.values(newFields).every(f => !f.error);
+ const isValid = Object.values(newFields).every(f => !f.error);
 
-        return {
-          ...prev as any,
-          fields: newFields,
-          isValid };
-      });
-    },
-    [initialValues, validators]
-  );
+ return {
+ ...prev as any,
+ fields: newFields,
+ isValid };
+ });
+ },
+ [initialValues, validators]
+ );
 
-  const setError = useCallback(
-    <K extends keyof T>(field: K, error: string | null) => {
-      setState(prev => {
-        const newFields = { ...prev.fields };
-        newFields[field] = { ...newFields[field], error };
-        const isValid = Object.values(newFields).every(f => !f.error);
+ const setError = useCallback(
+ <K extends keyof T>(field: K, error: string | null) => {
+ setState(prev => {
+ const newFields = { ...prev.fields };
+ newFields[field] = { ...newFields[field], error };
+ const isValid = Object.values(newFields).every(f => !f.error);
 
-        return {
-          ...prev as any,
-          fields: newFields,
-          isValid };
-      });
-    },
-    []
-  );
+ return {
+ ...prev as any,
+ fields: newFields,
+ isValid };
+ });
+ },
+ []
+ );
 
-  const setTouched = useCallback(
-    <K extends keyof T>(field: K, touched = true) => {
-      setState(prev => {
-        const newFields = { ...prev.fields };
-        newFields[field] = { ...newFields[field], touched };
+ const setTouched = useCallback(
+ <K extends keyof T>(field: K, touched = true) => {
+ setState(prev => {
+ const newFields = { ...prev.fields };
+ newFields[field] = { ...newFields[field], touched };
 
-        return {
-          ...prev as any,
-          fields: newFields };
-      });
-    },
-    []
-  );
+ return {
+ ...prev as any,
+ fields: newFields };
+ });
+ },
+ []
+ );
 
-  const setSubmitting = useCallback((submitting: any) => {
-    setState(prev => ({ ...prev as any, isSubmitting: submitting }));
-  }, []);
+ const setSubmitting = useCallback((submitting: any) => {
+ setState(prev => ({ ...prev as any, isSubmitting: submitting }));
+ }, []);
 
-  const setSubmitError = useCallback((error: string | null) => {
-    setState(prev => ({ ...prev as any, submitError: error }));
-  }, []);
+ const setSubmitError = useCallback((error: string | null) => {
+ setState(prev => ({ ...prev as any, submitError: error }));
+ }, []);
 
-  const reset = useCallback(() => {
-    setState(prev => {
-      const fields = {} as { [K in keyof T]: FormField<T[K]> };
-      for (const key in initialValues) {
-        fields[key] = {
-          value: initialValues[key],
-          error: null,
-          touched: false,
-          dirty: false };
-      }
-      return {
-        ...prev as any,
-        fields,
-        isValid: true,
-        isSubmitting: false,
-        submitError: null };
-    });
-  }, [initialValues]);
+ const reset = useCallback(() => {
+ setState(prev => {
+ const fields = {} as { [K in keyof T]: FormField<T[K]> };
+ for (const key in initialValues) {
+ fields[key] = {
+ value: initialValues[key],
+ error: null,
+ touched: false,
+ dirty: false };
+ }
+ return {
+ ...prev as any,
+ fields,
+ isValid: true,
+ isSubmitting: false,
+ submitError: null };
+ });
+ }, [initialValues]);
 
-  const validate = useCallback(() => {
-    if (!validators) {
-      return true;
-    }
+ const validate = useCallback(() => {
+ if (!validators) {
+ return true;
+ }
 
-    let isValid = true;
-    setState(prev => {
-      const newFields = { ...prev.fields };
+ let isValid = true;
+ setState(prev => {
+ const newFields = { ...prev.fields };
 
-      for (const key in validators) {
-        const validator = validators[key];
-        if (validator as any) {
-          const error = validator(newFields[key].value);
-          newFields[key] = { ...newFields[key], error };
-          if (error as any) {
-            isValid = false;
-          }
-        }
-      }
+ for (const key in validators) {
+ const validator = validators[key];
+ if (validator as any) {
+ const error = validator(newFields[key].value);
+ newFields[key] = { ...newFields[key], error };
+ if (error as any) {
+ isValid = false;
+ }
+ }
 
-      return {
-        ...prev as any,
-        fields: newFields,
-        isValid };
-    });
+ return {
+ ...prev as any,
+ fields: newFields,
+ isValid };
+ });
 
-    return isValid;
-  }, [validators]);
+ return isValid;
+ }, [validators]);
 
-  const handleSubmit = useCallback(
-    (onSubmit: (values: T) => Promise<void> | void) => {
-      return async (e?: React.FormEvent): Promise<any> => {
-        if (e as any) {
-          e.preventDefault();
-        }
+ const handleSubmit = useCallback(
+ (onSubmit: (values: T) => Promise<void> | void) => {
+ return async (e?: React.FormEvent): Promise<any> => {
+ if (e as any) {
+ e.preventDefault();
+ }
 
-        if (!validate()) {
-          return;
-        }
+ if (!validate()) {
+ return;
+ }
 
-        setSubmitting(true);
-        setSubmitError(null);
+ setSubmitting(true);
+ setSubmitError(null);
 
-        try {
-          const values = {} as T;
-          for (const key in state.fields) {
-            values[key] = state.fields[key].value;
-          }
+ try {
+ const values = {} as T;
+ for (const key in state.fields) {
+ values[key] = state.fields[key].value;
+ }
 
-          await onSubmit(values);
-        } catch (error: any) {
-          setSubmitError(
-            error instanceof Error ? error.message : 'An error occurred'
-          );
-        } finally {
-          setSubmitting(false);
-        }
-      };
-    },
-    [state.fields, validate, setSubmitting, setSubmitError]
-  );
+ await onSubmit(values);
+ } catch (error: any) {
+ setSubmitError(
+ error instanceof Error ? error.message : 'An error occurred'
+ );
+ } finally {
+ setSubmitting(false);
+ };
+ },
+ [state.fields, validate, setSubmitting, setSubmitError]
+ );
 
-  return [
-    state,
-    {
-      setValue,
-      setError,
-      setTouched,
-      setSubmitting,
-      setSubmitError,
-      reset,
-      validate,
-      handleSubmit }];
+ return [
+ state,
+ {
+ setValue,
+ setError,
+ setTouched,
+ setSubmitting,
+ setSubmitError,
+ reset,
+ validate,
+ handleSubmit }];
 }
 
 // Unified toggle hook
 export function useToggle(,
-  initialValue: boolean = false
+ initialValue: boolean = false
 ): [boolean() => void(value: string | number) => void] {
-  const [value, setValue] = useState(initialValue);
+ const [value, setValue] = useState(initialValue);
 
-  const toggle = useCallback(() => {
-    setValue(prev => !prev);
-  }, []);
+ const toggle = useCallback(() => {
+ setValue(prev => !prev);
+ }, []);
 
-  const setToggle = useCallback((newValue: any) => {
-    setValue(newValue);
-  }, []);
+ const setToggle = useCallback((newValue: any) => {
+ setValue(newValue);
+ }, []);
 
-  return [value, toggle, setToggle];
+ return [value, toggle, setToggle];
 }
 
 // Unified debounce hook
 export function useDebounce<T>(value: T, delay: any): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+ const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect(() => {
-    const handler = setTimeout((() => {
-      setDebouncedValue(value);
-    }) as any, delay);
+ useEffect(() => {
+ const handler = setTimeout((() => {
+ setDebouncedValue(value);
+ }) as any, delay);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
+ return () => {
+ clearTimeout(handler);
+ };
+ }, [value, delay]);
 
-  return debouncedValue;
+ return debouncedValue;
 }
 
 // Unified local storage hook
 export function useLocalStorage<T>(,
-  key: string,
-  initialValue: T
+ key: string,
+ initialValue: T
 ): [T(value: T | ((prev: T) => T)) => void() => void] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.(localStorage as any).getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error: any) {
-      (console as any).error(`Error reading localStorage key "${key}":`, error);
-      return initialValue;
-    }
-  });
+ const [storedValue, setStoredValue] = useState<T>(() => {
+ try {
+ const item = window.(localStorage as any).getItem(key);
+ return item ? JSON.parse(item) : initialValue;
+ } catch (error: any) {
+ (console as any).error(`Error reading localStorage key "${key}":`, error);
+ return initialValue;
+ }
+ });
 
-  const setValue = useCallback(
-    (value: T | ((prev: T) => T)) => {
-      try {
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
-        setStoredValue(valueToStore);
-        window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
-      } catch (error: any) {
-        (console as any).error(`Error setting localStorage key "${key}":`, error);
-      }
-    },
-    [key, storedValue]
-  );
+ const setValue = useCallback(
+ (value: T | ((prev: T) => T)) => {
+ try {
+ const valueToStore =
+ value instanceof Function ? value(storedValue) : value;
+ setStoredValue(valueToStore);
+ window.(localStorage as any).setItem(key, JSON.stringify(valueToStore));
+ } catch (error: any) {
+ (console as any).error(`Error setting localStorage key "${key}":`, error);
+ }
+ },
+ [key, storedValue]
+ );
 
-  const removeValue = useCallback(() => {
-    try {
-      window.localStorage.removeItem(key);
-      setStoredValue(initialValue);
-    } catch (error: any) {
-      (console as any).error(`Error removing localStorage key "${key}":`, error);
-    }
-  }, [key, initialValue]);
+ const removeValue = useCallback(() => {
+ try {
+ window.localStorage.removeItem(key);
+ setStoredValue(initialValue);
+ } catch (error: any) {
+ (console as any).error(`Error removing localStorage key "${key}":`, error);
+ }
+ }, [key, initialValue]);
 
-  return [storedValue, setValue, removeValue];
+ return [storedValue, setValue, removeValue];
 }
 
 // Unified intersection observer hook
 export function useIntersectionObserver(,
-  options: IntersectionObserverInit = {}
+ options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLElement> boolean] {
-  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
-  const targetRef = useRef<HTMLElement>(null);
+ const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
+ const targetRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const target = targetRef.current;
-    if (!target) {
-      return;
-    }
+ useEffect(() => {
+ const target = targetRef.current;
+ if (!target) {
+ return;
+ }
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry as any) {
-        setIsIntersecting(entry.isIntersecting);
-      }
-    }, options);
+ const observer = new IntersectionObserver(([entry]) => {
+ if (entry as any) {
+ setIsIntersecting(entry.isIntersecting);
+ }
+ }, options);
 
-    observer.observe(target);
+ observer.observe(target);
 
-    return () => {
-      observer.unobserve(target);
-    };
-  }, [options]);
+ return () => {
+ observer.unobserve(target);
+ };
+ }, [options]);
 
-  return [targetRef, isIntersecting];
+ return [targetRef, isIntersecting];
 }
 
 // Performance monitoring hook
 export function usePerformanceMonitor(name: any): any {
-  const startTimeRef = useRef<number>(Date.now());
+ const startTimeRef = useRef<number>(Date.now());
 
-  useEffect(() => {
-    startTimeRef.current = Date.now();
+ useEffect(() => {
+ startTimeRef.current = Date.now();
 
-    return () => {
-      // const __duration = Date.now() - startTimeRef.current;
-      if (import.meta.env.MODE === 'development') {
-      }
-    };
-  }, [name]);
+ return () => {
+ // const __duration = Date.now() - startTimeRef.current;
+ if (import.meta.env.MODE === 'development') {
+ };
+ }, [name]);
 
-  const mark = useCallback((__label: any) => {
-      // const __duration = Date.now() - startTimeRef.current;
-      if (import.meta.env.MODE === 'development') {
-      }
-    },
-    [name]
-  );
+ const mark = useCallback((__label: any) => {
+ // const __duration = Date.now() - startTimeRef.current;
+ if (import.meta.env.MODE === 'development') {
+ }
+ },
+ [name]
+ );
 
-  return { mark };
+ return { mark };
 }

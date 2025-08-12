@@ -7,9 +7,9 @@ import { UnifiedAppContext } from '../contexts/UnifiedAppContext';
  * Provides access to all app state and actions
  */
 export function useUnifiedApp(): any {
-  const context = useContext<any>(UnifiedAppContext);
-  if (context === undefined) {
-    throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
-  }
-  return context;
+ const context = useContext<any>(UnifiedAppContext);
+ if (context === undefined) {
+ throw new Error('useUnifiedApp must be used within a UnifiedAppProvider');
+ }
+ return context;
 }

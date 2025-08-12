@@ -1,203 +1,199 @@
 import { useState, useEffect } from 'react';
 
 interface MobileDetectionResult {
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-  isTouchDevice: boolean;
-  screenSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-  orientation: 'portrait' | 'landscape';
-  deviceType: 'mobile' | 'tablet' | 'desktop'
+ isMobile: boolean;
+ isTablet: boolean;
+ isDesktop: boolean;
+ isTouchDevice: boolean;
+ screenSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+ orientation: 'portrait' | 'landscape';
+ deviceType: 'mobile' | 'tablet' | 'desktop'
 }
 
 export const useMobileDetection: any = (): MobileDetectionResult => {
-  const [detection, setDetection] = useState<MobileDetectionResult>(() => {
-    if (typeof window === 'undefined') {
-      return {
-        isMobile: false,
-        isTablet: false,
-        isDesktop: true,
-        isTouchDevice: false,
-        screenSize: 'lg',
-        orientation: 'landscape',
-        deviceType: 'desktop' };
-    }
+ const [detection, setDetection] = useState<MobileDetectionResult>(() => {
+ if (typeof window === 'undefined') {
+ return {
+ isMobile: false,
+ isTablet: false,
+ isDesktop: true,
+ isTouchDevice: false,
+ screenSize: 'lg',
+ orientation: 'landscape',
+ deviceType: 'desktop' };
+ }
 
-    return getDetectionResult();
-  });
+ return getDetectionResult();
+ });
 
-  function getDetectionResult(): MobileDetectionResult {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const { userAgent } = navigator;
+ function getDetectionResult(): MobileDetectionResult {
+ const width = window.innerWidth;
+ const height = window.innerHeight;
+ const { userAgent } = navigator;
 
-    // Screen size detection
-    let screenSize: MobileDetectionResult['screenSize'] = 'lg';
-    if (width < 640) {
-      screenSize = 'xs';
-    } else if (width < 768) {
-      screenSize = 'sm';
-    } else if (width < 1024) {
-      screenSize = 'md';
-    } else if (width < 1280) {
-      screenSize = 'lg';
-    } else if (width < 1536) {
-      screenSize = 'xl';
-    } else {
-      screenSize = '2xl';
-    }
+ // Screen size detection
+ let screenSize: MobileDetectionResult['screenSize'] = 'lg';
+ if (width < 640) {
+ screenSize = 'xs';
+ } else if (width < 768) {
+ screenSize = 'sm';
+ } else if (width < 1024) {
+ screenSize = 'md';
+ } else if (width < 1280) {
+ screenSize = 'lg';
+ } else if (width < 1536) {
+ screenSize = 'xl';
+ } else {
+ screenSize = '2xl';
+ }
 
-    // Device type detection
-    const isMobileUA =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        userAgent
-      );
-    const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(userAgent);
-    const isTouchDevice =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+ // Device type detection
+ const isMobileUA =
+ /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+ userAgent
+ );
+ const isTabletUA = /iPad|Android(?!.*Mobile)/i.test(userAgent);
+ const isTouchDevice =
+ 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    // More accurate mobile detection
-    const isMobile =
-      (width <= 768 && isTouchDevice) || (isMobileUA && !isTabletUA);
-    const isTablet =
-      (width > 768 && width <= 1024 && isTouchDevice) || isTabletUA;
-    const isDesktop = !isMobile && !isTablet;
+ // More accurate mobile detection
+ const isMobile =
+ (width <= 768 && isTouchDevice) || (isMobileUA && !isTabletUA);
+ const isTablet =
+ (width > 768 && width <= 1024 && isTouchDevice) || isTabletUA;
+ const isDesktop = !isMobile && !isTablet;
 
-    // Orientation
-    const orientation: 'portrait' | 'landscape' =
-      height > width ? 'portrait' : 'landscape';
+ // Orientation
+ const orientation: 'portrait' | 'landscape' =
+ height > width ? 'portrait' : 'landscape';
 
-    // Device type
-    let deviceType: MobileDetectionResult['deviceType'] = 'desktop';
-    if (isMobile as any) {
-      deviceType = 'mobile';
-    } else if (isTablet as any) {
-      deviceType = 'tablet';
-    }
+ // Device type
+ let deviceType: MobileDetectionResult['deviceType'] = 'desktop';
+ if (isMobile as any) {
+ deviceType = 'mobile';
+ } else if (isTablet as any) {
+ deviceType = 'tablet';
+ }
 
-    return {
-      isMobile,
-      isTablet,
-      isDesktop,
-      isTouchDevice,
-      screenSize,
-      orientation,
-      deviceType };
-  }
+ return {
+ isMobile,
+ isTablet,
+ isDesktop,
+ isTouchDevice,
+ screenSize,
+ orientation,
+ deviceType };
+ }
 
-  useEffect(() => {
-    const handleResize: any = () => {
-      setDetection(getDetectionResult());
-    };
+ useEffect(() => {
+ const handleResize: any = () => {
+ setDetection(getDetectionResult());
+ };
 
-    const handleOrientationChange: any = () => {
-      // Delay to ensure dimensions are updated
-      setTimeout((() => {
-        setDetection(getDetectionResult());
-      }) as any, 100);
-    };
+ const handleOrientationChange: any = () => {
+ // Delay to ensure dimensions are updated
+ setTimeout((() => {
+ setDetection(getDetectionResult());
+ }) as any, 100);
+ };
 
-    window.addEventListener('resize', handleResize as EventListener);
-    window.addEventListener('orientationchange', handleOrientationChange as EventListener);
+ window.addEventListener('resize', handleResize as EventListener);
+ window.addEventListener('orientationchange', handleOrientationChange as EventListener);
 
-    return () => {
-      window.removeEventListener('resize', handleResize as EventListener);
-      window.removeEventListener('orientationchange', handleOrientationChange as EventListener);
-    };
-  }, []);
+ return () => {
+ window.removeEventListener('resize', handleResize as EventListener);
+ window.removeEventListener('orientationchange', handleOrientationChange as EventListener);
+ };
+ }, []);
 
-  return detection;
+ return detection;
 };
 
 // Hook for responsive breakpoints
 export const useBreakpoint: any = () => {
-  const { screenSize } = useMobileDetection();
+ const { screenSize } = useMobileDetection();
 
-  return {
-    isXs: screenSize === 'xs',
-    isSm: screenSize === 'sm',
-    isMd: screenSize === 'md',
-    isLg: screenSize === 'lg',
-    isXl: screenSize === 'xl',
-    is2Xl: screenSize === '2xl',
-    screenSize };
+ return {
+ isXs: screenSize === 'xs',
+ isSm: screenSize === 'sm',
+ isMd: screenSize === 'md',
+ isLg: screenSize === 'lg',
+ isXl: screenSize === 'xl',
+ is2Xl: screenSize === '2xl',
+ screenSize };
 };
 
 // Hook for touch interactions
 export const useTouchInteractions: any = () => {
-  const { isTouchDevice } = useMobileDetection();
+ const { isTouchDevice } = useMobileDetection();
 
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
-    null
-  );
-  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(
-    null
-  );
+ const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
+ null
+ );
+ const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(
+ null
+ );
 
-  const handleTouchStart: any = (e: TouchEvent) => {
-    const touch = e.touches[0];
-    if (touch as any) {
-      setTouchStart({ x: touch.clientX, y: touch.clientY });
-    }
-  };
+ const handleTouchStart: any = (e: TouchEvent) => {
+ const touch = e.touches[0];
+ if (touch as any) {
+ setTouchStart({ x: touch.clientX, y: touch.clientY });
+ };
 
-  const handleTouchEnd: any = (e: TouchEvent) => {
-    const touch = e.changedTouches[0];
-    if (touch as any) {
-      setTouchEnd({ x: touch.clientX, y: touch.clientY });
-    }
-  };
+ const handleTouchEnd: any = (e: TouchEvent) => {
+ const touch = e.changedTouches[0];
+ if (touch as any) {
+ setTouchEnd({ x: touch.clientX, y: touch.clientY });
+ };
 
-  const getSwipeDirection: any = (): 'left' | 'right' | 'up' | 'down' | null => {
-    if (!touchStart || !touchEnd) {
-      return null;
-    }
+ const getSwipeDirection: any = (): 'left' | 'right' | 'up' | 'down' | null => {
+ if (!touchStart || !touchEnd) {
+ return null;
+ }
 
-    const deltaX = touchEnd.x - touchStart.x;
-    const deltaY = touchEnd.y - touchStart.y;
-    const minSwipeDistance = 50;
+ const deltaX = touchEnd.x - touchStart.x;
+ const deltaY = touchEnd.y - touchStart.y;
+ const minSwipeDistance = 50;
 
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      // Horizontal swipe
-      if (Math.abs(deltaX) > minSwipeDistance) {
-        return deltaX > 0 ? 'right' : 'left';
-      }
-    } else {
-      // Vertical swipe
-      if (Math.abs(deltaY) > minSwipeDistance) {
-        return deltaY > 0 ? 'down' : 'up';
-      }
-    }
+ if (Math.abs(deltaX) > Math.abs(deltaY)) {
+ // Horizontal swipe
+ if (Math.abs(deltaX) > minSwipeDistance) {
+ return deltaX > 0 ? 'right' : 'left';
+ }
+ } else {
+ // Vertical swipe
+ if (Math.abs(deltaY) > minSwipeDistance) {
+ return deltaY > 0 ? 'down' : 'up';
+ }
+ return null;
+ };
 
-    return null;
-  };
-
-  return {
-    isTouchDevice,
-    touchStart,
-    touchEnd,
-    handleTouchStart,
-    handleTouchEnd,
-    getSwipeDirection };
+ return {
+ isTouchDevice,
+ touchStart,
+ touchEnd,
+ handleTouchStart,
+ handleTouchEnd,
+ getSwipeDirection };
 };
 
 // Hook for viewport dimensions
 export const useViewport: any = () => {
-  const [viewport, setViewport] = useState(() => {
-    if (typeof window === 'undefined') {
-      return { width: 1024, height: 768 };
-    }
-    return { width: window.innerWidth, height: window.innerHeight };
-  });
+ const [viewport, setViewport] = useState(() => {
+ if (typeof window === 'undefined') {
+ return { width: 1024, height: 768 };
+ }
+ return { width: window.innerWidth, height: window.innerHeight };
+ });
 
-  useEffect(() => {
-    const handleResize: any = () => {
-      setViewport({ width: window.innerWidth, height: window.innerHeight });
-    };
+ useEffect(() => {
+ const handleResize: any = () => {
+ setViewport({ width: window.innerWidth, height: window.innerHeight });
+ };
 
-    window.addEventListener('resize', handleResize as EventListener);
-    return () => window.removeEventListener('resize', handleResize as EventListener);
-  }, []);
+ window.addEventListener('resize', handleResize as EventListener);
+ return () => window.removeEventListener('resize', handleResize as EventListener);
+ }, []);
 
-  return viewport;
+ return viewport;
 };

@@ -1,15 +1,13 @@
 import { ReactNode, useState, useEffect, useCallback, useMemo } from 'react';
 import React, { memo, lazy, Suspense, ReactNode, /// <reference types="node" />
-  memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
+ memo, useMemo, useCallback, useRef, useEffect, useState, type ComponentType, type ReactNode, type MemoExoticComponent } from 'react';
 declare namespace NodeJS {
-  interface ProcessEnv {
-    [key: string]: string | undefined
-  }
-  interface Process {
-    env: ProcessEnv;
-  }
-}
-
+ interface ProcessEnv {
+ [key: string]: string | undefined
+ }
+ interface Process {
+ env: ProcessEnv;
+ }
 /**
  * Component optimization utilities for React performance enhancement
  */
@@ -18,445 +16,437 @@ import { performanceMonitor } from './performanceMonitor';
 
 // Performance monitoring hook for components
 export function useComponentPerformance(componentName: any): any {
-  const renderStartTime = useRef<number>(0);
-  const mountTime = useRef<number>(0);
-  const renderCount = useRef<number>(0);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const elementRef = useRef<HTMLDivElement>(null);
+ const renderStartTime = useRef<number>(0);
+ const mountTime = useRef<number>(0);
+ const renderCount = useRef<number>(0);
+ const [isVisible, setIsVisible] = useState<boolean>(false);
+ const elementRef = useRef<HTMLDivElement>(null);
 
-  // Track component mount time
-  useEffect(() => {
-    mountTime.current = performance.now();
+ // Track component mount time
+ useEffect(() => {
+ mountTime.current = performance.now();
 
-    return () => {
-      const unmountTime = performance.now();
-      const totalLifetime = unmountTime - mountTime.current;
+ return () => {
+ const unmountTime = performance.now();
+ const totalLifetime = unmountTime - mountTime.current;
 
-      if (import.meta.env.DEV) {
-        (console as any).log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
-      }
-    }}, [componentName]);
+ if (import.meta.env.DEV) {
+ (console as any).log(`Component ${componentName} lifetime: ${totalLifetime.toFixed(2)}ms`);
+ }
+ }}, [componentName]);
 
-  // Track render performance
-  useEffect(() => {
-    renderCount.current += 1;
-    const renderEndTime = performance.now();
-    const renderDuration = renderEndTime - renderStartTime.current;
+ // Track render performance
+ useEffect(() => {
+ renderCount.current += 1;
+ const renderEndTime = performance.now();
+ const renderDuration = renderEndTime - renderStartTime.current;
 
-    performanceMonitor.trackComponentRender(componentName, renderDuration);
+ performanceMonitor.trackComponentRender(componentName, renderDuration);
 
-    if (import.meta.env.DEV && renderDuration > 16) {
-      (console as any).warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
-    }
-  });
+ if (import.meta.env.DEV && renderDuration > 16) {
+ (console as any).warn(`Slow render detected in ${componentName}: ${renderDuration.toFixed(2)}ms`);
+ }
+ });
 
-  // Track visibility for lazy loading optimization
-  useEffect(() => {
-    if (!elementRef.current) {
+ // Track visibility for lazy loading optimization
+ useEffect(() => {
+ if (!elementRef.current) {
 return undefined;
 }
 
-    const observer = new IntersectionObserver(
-      (entries: any) => {
-        const entry = entries[0];
-        if (entry as any) {
-          setIsVisible(entry.isIntersecting);
-        }
-      },
-      { threshold: 0.1 });
+ const observer = new IntersectionObserver(
+ (entries: any) => {
+ const entry = entries[0];
+ if (entry as any) {
+ setIsVisible(entry.isIntersecting);
+ }
+ },
+ { threshold: 0.1 });
 
-    observer.observe(elementRef.current);
-    return () => observer.disconnect();
-  }, []);
+ observer.observe(elementRef.current);
+ return () => observer.disconnect();
+ }, []);
 
-  // Mark render start time
-  renderStartTime.current = performance.now();
+ // Mark render start time
+ renderStartTime.current = performance.now();
 
-  return {
-    elementRef,
-    isVisible,
-    renderCount: renderCount.current,
-          trackCustomMetric: (metricName: any,
-          value: string | number) => {
-      performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
-    } }}
-
+ return {
+ elementRef,
+ isVisible,
+ renderCount: renderCount.current,
+ trackCustomMetric: (metricName: any,
+ value: string | number) => {
+ performanceMonitor.trackCustomMetric(`${componentName}_${metricName}`, value);
+ } }
 // Smart memo wrapper that includes performance tracking
 export function smartMemo<P extends object>(,
-  Component: ComponentType<P>
-  propsAreEqual?: (prevProps: P,
-          nextProps: P) => boolean,
-  componentName?: string): MemoExoticComponent<ComponentType<P>> {
-  const displayName = componentName || Component.displayName || Component.name || 'Component';
+ Component: ComponentType<P>
+ propsAreEqual?: (prevProps: P,
+ nextProps: P) => boolean,
+ componentName?: string): MemoExoticComponent<ComponentType<P>> {
+ const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  const MemoizedComponent = memo(Component(prevProps: any, nextProps: any) => {
-    const startTime = performance.now();
+ const MemoizedComponent = memo(Component(prevProps: any, nextProps: any) => {
+ const startTime = performance.now();
 
-    // Use custom comparison if provided
-    if (propsAreEqual as any) {
-      const result = propsAreEqual(prevProps, nextProps);
-      const comparisonTime = performance.now() - startTime;
+ // Use custom comparison if provided
+ if (propsAreEqual as any) {
+ const result = propsAreEqual(prevProps, nextProps);
+ const comparisonTime = performance.now() - startTime;
 
-      if (import.meta.env.DEV && comparisonTime > 1) {
-        (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
-      }
+ if (import.meta.env.DEV && comparisonTime > 1) {
+ (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+ }
 
-      return result;
-    }
+ return result;
+ }
 
-    // Default shallow comparison with performance tracking
-    const prevKeys = Object.keys(prevProps);
-    const nextKeys = Object.keys(nextProps);
+ // Default shallow comparison with performance tracking
+ const prevKeys = Object.keys(prevProps);
+ const nextKeys = Object.keys(nextProps);
 
-    if (prevKeys.length !== nextKeys.length) {
-      return false;
-    }
+ if (prevKeys.length !== nextKeys.length) {
+ return false;
+ }
 
-    for (const key of prevKeys) {
-      if (prevProps[key as keyof P] !== nextProps[key as keyof P]) {
-        return false;
-      }
-    }
+ for (const key of prevKeys) {
+ if (prevProps[key as keyof P] !== nextProps[key as keyof P]) {
+ return false;
+ }
+ const comparisonTime = performance.now() - startTime;
+ if (import.meta.env.DEV && comparisonTime > 1) {
+ (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
+ }
 
-    const comparisonTime = performance.now() - startTime;
-    if (import.meta.env.DEV && comparisonTime > 1) {
-      (console as any).warn(`Slow props comparison in ${displayName}: ${comparisonTime.toFixed(2)}ms`);
-    }
+ return true;
+ });
 
-    return true;
-  });
-
-  MemoizedComponent.displayName = `SmartMemo(${displayName})`;
-  return MemoizedComponent;
+ MemoizedComponent.displayName = `SmartMemo(${displayName})`;
+ return MemoizedComponent;
 }
 
 // Optimized callback hook with dependency tracking
 export function useOptimizedCallback<T extends (...args) => any>(,
-  callback: T,
-          deps: React.DependencyList,
-  debugName?: string): T {
-  const callbackRef = useRef(callback);
-  const depsRef = useRef(deps);
-  const creationTime = useRef(performance.now());
+ callback: T,
+ deps: React.DependencyList,
+ debugName?: string): T {
+ const callbackRef = useRef(callback);
+ const depsRef = useRef(deps);
+ const creationTime = useRef(performance.now());
 
-  // Track dependency changes
-  useMemo(() => {
-    if (!depsRef.current) {
-      return true;
-    }
+ // Track dependency changes
+ useMemo(() => {
+ if (!depsRef.current) {
+ return true;
+ }
 
-    const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
+ const changed = deps.some((dep, index) => dep !== depsRef.current[index]);
 
-    if (changed && import.meta.env.DEV && debugName) {
-      const timeSinceCreation = performance.now() - creationTime.current;
-      (console as any).log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
-      creationTime.current = performance.now();
-    }
+ if (changed && import.meta.env.DEV && debugName) {
+ const timeSinceCreation = performance.now() - creationTime.current;
+ (console as any).log(`Callback ${debugName} recreated after ${timeSinceCreation.toFixed(2)}ms`);
+ creationTime.current = performance.now();
+ }
 
-    // Update refs
-    callbackRef.current = callback;
-    depsRef.current = deps;
+ // Update refs
+ callbackRef.current = callback;
+ depsRef.current = deps;
 
-    return changed;
-  }, deps);
+ return changed;
+ }, deps);
 
-  return useCallback(callback, deps);
+ return useCallback(callback, deps);
 }
 
 // Optimized memo hook with size tracking
 export function useOptimizedMemo<T>(,
-  factory: () => T,
-          deps: React.DependencyList,
-  debugName?: string): T {
-  const valueRef = useRef<T>();
-  const depsRef = useRef(deps);
-  const creationTime = useRef(performance.now());
-  const computationTime = useRef(0);
+ factory: () => T,
+ deps: React.DependencyList,
+ debugName?: string): T {
+ const valueRef = useRef<T>();
+ const depsRef = useRef(deps);
+ const creationTime = useRef(performance.now());
+ const computationTime = useRef(0);
 
-  return useMemo(() => {
-    const startTime = performance.now();
-    const result = factory();
-    const endTime = performance.now();
+ return useMemo(() => {
+ const startTime = performance.now();
+ const result = factory();
+ const endTime = performance.now();
 
-    computationTime.current = endTime - startTime;
+ computationTime.current = endTime - startTime;
 
-    // Update refs to track values
-    valueRef.current = result;
-    depsRef.current = deps;
+ // Update refs to track values
+ valueRef.current = result;
+ depsRef.current = deps;
 
-    // Update creation time if this is a new computation
-    if (computationTime.current > 0) {
-      creationTime.current = endTime;
-    }
+ // Update creation time if this is a new computation
+ if (computationTime.current > 0) {
+ creationTime.current = endTime;
+ }
 
-    if (import.meta.env.DEV) {
-      if (computationTime.current > 5) {
-        (console as any).warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
-      }
+ if (import.meta.env.DEV) {
+ if (computationTime.current > 5) {
+ (console as any).warn(`Expensive memo computation${debugName ? ` in ${debugName}` : ''}: ${computationTime.current.toFixed(2)}ms`);
+ }
 
-      // Estimate memory usage for objects
-      if (typeof result === 'object' && result !== null) {
-        const jsonSize = JSON.stringify(result).length;
-        if (jsonSize > 10000) { // 10KB threshold
-          (console as any).warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
-        }
-      }
-    }
+ // Estimate memory usage for objects
+ if (typeof result === 'object' && result !== null) {
+ const jsonSize = JSON.stringify(result).length;
+ if (jsonSize > 10000) { // 10KB threshold
+ (console as any).warn(`Large memo value${debugName ? ` in ${debugName}` : ''}: ~${(jsonSize / 1024).toFixed(1)}KB`);
+ }
+ }
 
-    return result;
-  }, deps);
+ return result;
+ }, deps);
 }
 
 // Lazy component wrapper with loading states
 export function createLazyComponent<P extends Record<string, any>>(,
-  importFn: () => Promise<{ default: ComponentType<P> }>
-  fallback?: ReactNode,
-  errorFallback?: ReactNode) {
-  const LazyComponent = React.lazy(importFn);
+ importFn: () => Promise<{ default: ComponentType<P> }>
+ fallback?: ReactNode,
+ errorFallback?: ReactNode) {
+ const LazyComponent = React.lazy(importFn);
 
-  return function LazyWrapper(props: P): any {
-    const [error, setError] = useState<Error | null>(null);
+ return function LazyWrapper(props: P): any {
+ const [error, setError] = useState<Error | null>(null);
 
-    if (error as any) {
-      return errorFallback || (
-        <div className="p-4 text-center text-red-600">
-          <p>Failed to load component</p>
-          <button
-            onClick={() => setError(null)}
-            className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-          >
-            Retry
-          </button>
-        </div>
-      );
-    }
+ if (error as any) {
+ return errorFallback || (
+ <div className="p-4 text-center text-red-600">
+ <p>Failed to load component</p>
+ <button
+ onClick={() => setError(null)}
+ className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+ >
+ Retry
+ </button>
+ </div>
+ );
+ }
 
-    return (
-      <React.Suspense
-        fallback={fallback || (
-          <div className="flex items-center justify-center p-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
-          </div>
-        )}
-      >
-        <LazyComponent {...((props as any))} />
-      </React.Suspense>
-    );
-  }}
-
+ return (
+ <React.Suspense
+ fallback={fallback || (
+ <div className="flex items-center justify-center p-8">
+ <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+ </div>
+ )}
+ >
+ <LazyComponent {...((props as any))} />
+ </React.Suspense>
+ );
+ }
 // Virtual scrolling hook for large lists
 export function useVirtualScrolling({ itemCount, itemHeight, containerHeight, overscan = 5 }): any {
-  const [scrollTop, setScrollTop] = useState<number>(0);
+ const [scrollTop, setScrollTop] = useState<number>(0);
 
-  const visibleRange = useMemo(() => {
-    const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
-    const endIndex = Math.min(
-      itemCount - 1,
-      Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan);
+ const visibleRange = useMemo(() => {
+ const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
+ const endIndex = Math.min(
+ itemCount - 1,
+ Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan);
 
-    return { startIndex, endIndex }}, [scrollTop, itemHeight, containerHeight, itemCount, overscan]);
+ return { startIndex, endIndex }}, [scrollTop, itemHeight, containerHeight, itemCount, overscan]);
 
-  const totalHeight = itemCount * itemHeight;
-  const offsetY = visibleRange.startIndex * itemHeight;
+ const totalHeight = itemCount * itemHeight;
+ const offsetY = visibleRange.startIndex * itemHeight;
 
-  const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
-    setScrollTop(event.currentTarget.scrollTop);
-  }, []);
+ const handleScroll = useCallback((_event: React.UIEvent<HTMLDivElement>) => {
+ setScrollTop(event.currentTarget.scrollTop);
+ }, []);
 
-  return {
-    visibleRange,
-    totalHeight,
-    offsetY,
-    handleScroll }}
-
+ return {
+ visibleRange,
+ totalHeight,
+ offsetY,
+ handleScroll }
 // Image optimization hook with lazy loading
 export function useOptimizedImage(src: any,
-          options: {
-  placeholder?: string;
-  sizes?: string;
-  quality?: number;
-  priority?: boolean;
+ options: {
+ placeholder?: string;
+ sizes?: string;
+ quality?: number;
+ priority?: boolean;
 } = {}): any {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState(options.priority || false);
-  const imgRef = useRef<HTMLImageElement>(null);
+ const [isLoaded, setIsLoaded] = useState<boolean>(false);
+ const [isError, setIsError] = useState<boolean>(false);
+ const [isVisible, setIsVisible] = useState(options.priority || false);
+ const imgRef = useRef<HTMLImageElement>(null);
 
-  // Intersection observer for lazy loading
-  useEffect(() => {
-    if (options.priority || !imgRef.current) {
+ // Intersection observer for lazy loading
+ useEffect(() => {
+ if (options.priority || !imgRef.current) {
 return undefined;
 }
 
-    const observer = new IntersectionObserver(
-      (entries: any) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 });
+ const observer = new IntersectionObserver(
+ (entries: any) => {
+ const entry = entries[0];
+ if (entry?.isIntersecting) {
+ setIsVisible(true);
+ observer.disconnect();
+ }
+ },
+ { threshold: 0.1 });
 
-    observer.observe(imgRef.current);
-    return () => observer.disconnect();
-  }, [options.priority]);
+ observer.observe(imgRef.current);
+ return () => observer.disconnect();
+ }, [options.priority]);
 
-  // Generate optimized image URL
-  const optimizedSrc = useMemo(() => {
-    if (!isVisible) {
+ // Generate optimized image URL
+ const optimizedSrc = useMemo(() => {
+ if (!isVisible) {
 return options.placeholder || '';
 }
 
-    // Add optimization parameters if supported
-    const url = new URL(src, window.location.origin);
-    if (options.quality) {
-      url.searchParams.set('quality', options.quality.toString());
-    }
+ // Add optimization parameters if supported
+ const url = new URL(src, window.location.origin);
+ if (options.quality) {
+ url.searchParams.set('quality', options.quality.toString());
+ }
 
-    return url.toString();
-  }, [src, isVisible, options.placeholder, options.quality]);
+ return url.toString();
+ }, [src, isVisible, options.placeholder, options.quality]);
 
-  const handleLoad = useCallback(() => {
-    setIsLoaded(true);
-    setIsError(false);
-  }, []);
+ const handleLoad = useCallback(() => {
+ setIsLoaded(true);
+ setIsError(false);
+ }, []);
 
-  const handleError = useCallback(() => {
-    setIsError(true);
-    setIsLoaded(false);
-  }, []);
+ const handleError = useCallback(() => {
+ setIsError(true);
+ setIsLoaded(false);
+ }, []);
 
-  return {
-    imgRef,
-    src: optimizedSrc,
-    isLoaded,
-    isError,
-    isVisible,
-    onLoad: handleLoad,
-          onError: handleError }}
-
+ return {
+ imgRef,
+ src: optimizedSrc,
+ isLoaded,
+ isError,
+ isVisible,
+ onLoad: handleLoad,
+ onError: handleError }
 // Bundle splitting utility
 export function createAsyncComponent<_P extends object>(,
-  componentPath: any,
-  chunkName?: string) {
-  return React.lazy(() => {
-    const startTime = performance.now();
+ componentPath: any,
+ chunkName?: string) {
+ return React.lazy(() => {
+ const startTime = performance.now();
 
-    return import(/* webpackChunkName: "[request]" */ componentPath)
-      .then(module => {
-        const loadTime = performance.now() - startTime;
+ return import(/* webpackChunkName: "[request]" */ componentPath)
+ .then(module => {
+ const loadTime = performance.now() - startTime;
 
-        if (import.meta.env.DEV) {
-          (console as any).log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
-        }
+ if (import.meta.env.DEV) {
+ (console as any).log(`Loaded chunk ${chunkName || componentPath} in ${loadTime.toFixed(2)}ms`);
+ }
 
-        performanceMonitor.trackCustomMetric(
-          `chunk_load_${chunkName || componentPath.replace(/[^a-zA-Z0-9]/g, '_')}`,
-          loadTime);
+ performanceMonitor.trackCustomMetric(
+ `chunk_load_${chunkName || componentPath.replace(/[^a-zA-Z0-9]/g, '_')}`,
+ loadTime);
 
-        return module;
-      })
-      .catch(error => {
-        (console as any).error(`Failed to load chunk ${chunkName || componentPath}:`, error);
-        throw error;
-      });
-  });
+ return module;
+ })
+ .catch(error => {
+ (console as any).error(`Failed to load chunk ${chunkName || componentPath}:`, error);
+ throw error;
+ });
+ });
 }
 
 // Performance monitoring wrapper for components
 export function withPerformanceMonitoring<P extends object>(,
-  Component: ComponentType<P>
-  componentName?: string) {
-  const displayName = componentName || Component.displayName || Component.name || 'Component';
+ Component: ComponentType<P>
+ componentName?: string) {
+ const displayName = componentName || Component.displayName || Component.name || 'Component';
 
-  return function PerformanceMonitoredComponent(props: P): any {
-    const { elementRef, isVisible, renderCount, trackCustomMetric } = useComponentPerformance(displayName);
+ return function PerformanceMonitoredComponent(props: P): any {
+ const { elementRef, isVisible, renderCount, trackCustomMetric } = useComponentPerformance(displayName);
 
-    // Track visibility changes
-    useEffect(() => {
-      if (isVisible as any) {
-        trackCustomMetric('visibility_time', performance.now());
-      }
+ // Track visibility changes
+ useEffect(() => {
+ if (isVisible as any) {
+ trackCustomMetric('visibility_time', performance.now());
+ }
 
-        }, [isVisible, trackCustomMetric]);
+ }, [isVisible, trackCustomMetric]);
 
-    // Add performance data to dev tools
-    useEffect(() => {
-      if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-        (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
-  _id: any,
-          _root: any,
-          _priorityLevel: any) => {
-          // Custom performance tracking logic
-          (console as any).debug('Component committed to root');
+ // Add performance data to dev tools
+ useEffect(() => {
+ if (import.meta.env.DEV && (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+ (((window as any))).__REACT_DEVTOOLS_GLOBAL_HOOK__.onCommitFiberRoot = (,
+ _id: any,
+ _root: any,
+ _priorityLevel: any) => {
+ // Custom performance tracking logic
+ (console as any).debug('Component committed to root');
 
-        }}
-    }, []);
+ }
+ }, []);
 
-    return (
-      <div ref={elementRef} data-component={displayName} data-render-count={renderCount}>
-        <Component {...props} />
-      </div>
-    );
-  }}
-
+ return (
+ <div ref={elementRef} data-component={displayName} data-render-count={renderCount}>
+ <Component {...props} />
+ </div>
+ );
+ }
 // Debounced state hook for performance
 export function useDebouncedState<T>(,
-  initialValue: T,
-          delay: number = 300): [T, T(value: T) => void] {
-  const [value, setValue] = useState(initialValue);
-  const [debouncedValue, setDebouncedValue] = useState(initialValue);
+ initialValue: T,
+ delay: number = 300): [T, T(value: T) => void] {
+ const [value, setValue] = useState(initialValue);
+ const [debouncedValue, setDebouncedValue] = useState(initialValue);
 
-  useEffect(() => {
-    const timer = setTimeout((() => {
-      setDebouncedValue(value);
-    }) as any, delay);
+ useEffect(() => {
+ const timer = setTimeout((() => {
+ setDebouncedValue(value);
+ }) as any, delay);
 
-    return () => clearTimeout(timer);
-  }, [value, delay]);
+ return () => clearTimeout(timer);
+ }, [value, delay]);
 
-  return [value, debouncedValue, setValue];
+ return [value, debouncedValue, setValue];
 }
 
 // Throttled callback hook
 export function useThrottledCallback<T extends (...args) => any>(,
-  callback: T,
-          delay: number = 100): T {
-  const lastCall = useRef(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+ callback: T,
+ delay: number = 100): T {
+ const lastCall = useRef(0);
+ const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-  return useCallback((...args: Parameters<T>) => {
-    const now = Date.now();
+ return useCallback((...args: Parameters<T>) => {
+ const now = Date.now();
 
-    if (now - lastCall.current >= delay) {
-      lastCall.current = now;
-      return callback(...args);
-    }
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+ if (now - lastCall.current >= delay) {
+ lastCall.current = now;
+ return callback(...args);
+ }
+ if (timeoutRef.current) {
+ clearTimeout(timeoutRef.current);
+ }
 
-      timeoutRef.current = setTimeout((() => {
-        lastCall.current = Date.now();
-        callback(...args);
-      }) as any, delay - (now - lastCall.current));
+ timeoutRef.current = setTimeout((() => {
+ lastCall.current = Date.now();
+ callback(...args);
+ }) as any, delay - (now - lastCall.current));
 
-  }, [callback, delay]) as T;
+ }, [callback, delay]) as T;
 }
 
 // Export optimization utilities
 export const optimizationUtils = {
-  smartMemo,
-  useOptimizedCallback,
-  useOptimizedMemo,
-  createLazyComponent,
-  useVirtualScrolling,
-  useOptimizedImage,
-  createAsyncComponent,
-  withPerformanceMonitoring,
-  useDebouncedState,
-  useThrottledCallback,
-  useComponentPerformance };
+ smartMemo,
+ useOptimizedCallback,
+ useOptimizedMemo,
+ createLazyComponent,
+ useVirtualScrolling,
+ useOptimizedImage,
+ createAsyncComponent,
+ withPerformanceMonitoring,
+ useDebouncedState,
+ useThrottledCallback,
+ useComponentPerformance };
 
 export default optimizationUtils;

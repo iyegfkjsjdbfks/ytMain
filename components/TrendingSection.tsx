@@ -9,118 +9,118 @@ import VideoCard from './VideoCard';
 import type { Video } from '../types';
 
 interface TrendingSectionProps {
-  maxVideos?: number;
+ maxVideos?: number;
 }
 
 // Memoized VideoCard for better performance
 const MemoizedVideoCard = memo(VideoCard);
 
 const TrendingSection: React.FC<TrendingSectionProps> = memo(({ maxVideos = 6 }: any) => {
-  const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+ const [trendingVideos, setTrendingVideos] = useState<Video[]>([]);
+ const [loading, setLoading] = useState<boolean>(true);
+ const [error, setError] = useState<string | null>(null);
 
-  const fetchTrendingVideos = useCallback(async (): Promise<void> => {
-    try {
-      setLoading(true);
-      const allVideos = await getVideos();
-      // Sort by views (convert string to number for sorting)
-      const sortedByViews = allVideos
-        .filter((video) => !video.isShort) // Exclude shorts from trending
-        .sort((a: any, b: any) => {
-          const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
-          const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
-          return viewsB - viewsA;
-        })
-        .slice(0, maxVideos);
+ const fetchTrendingVideos = useCallback(async (): Promise<void> => {
+ try {
+ setLoading(true);
+ const allVideos = await getVideos();
+ // Sort by views (convert string to number for sorting)
+ const sortedByViews = allVideos
+ .filter((video) => !video.isShort) // Exclude shorts from trending
+ .sort((a: any, b: any) => {
+ const viewsA = typeof a.views === 'string' ? parseInt(a.views.replace(/,/g, ''), 10) : a.views;
+ const viewsB = typeof b.views === 'string' ? parseInt(b.views.replace(/,/g, ''), 10) : b.views;
+ return viewsB - viewsA;
+ })
+ .slice(0, maxVideos);
 
-      setTrendingVideos(sortedByViews);
-      setError(null);
-    } catch (err: any) {
-      setError('Failed to load trending videos');
-      (console as any).error('Error fetching trending videos:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [maxVideos]);
+ setTrendingVideos(sortedByViews);
+ setError(null);
+ } catch (err: any) {
+ setError('Failed to load trending videos');
+ (console as any).error('Error fetching trending videos:', err);
+ } finally {
+ setLoading(false);
+ }
+ }, [maxVideos]);
 
-  useEffect(() => {
-    fetchTrendingVideos();
-  }, [fetchTrendingVideos]);
+ useEffect(() => {
+ fetchTrendingVideos();
+ }, [fetchTrendingVideos]);
 
-  // Memoized video grid to prevent unnecessary re-renders
-  const videoGrid = useMemo(() =>
-    trendingVideos.map((video) => (
-      <MemoizedVideoCard
-        key={video.id}
-        video={video}
-      />
-    ))
-  , [trendingVideos]);
+ // Memoized video grid to prevent unnecessary re-renders
+ const videoGrid = useMemo(() =>
+ trendingVideos.map((video) => (
+ <MemoizedVideoCard
+ key={video.id}
+ video={video}
+ />
+ ))
+ , [trendingVideos]);
 
-  if (loading as any) {
-    return (
-      <div className="mb-8 px-4">
-        <div className="flex items-center mb-4">
-          <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
-          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
-              <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
-              <div className="p-3">
-                <div className="flex items-start space-x-3">
-                  <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0" />
-                  <div className="flex-grow space-y-1.5 pt-0.5">
-                    <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
-                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
-                    <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+ if (loading as any) {
+ return (
+ <div className="mb-8 px-4">
+ <div className="flex items-center mb-4">
+ <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
+ <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
+ </div>
+ <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+ {Array.from({ length: 6 }).map((_, index) => (
+ <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl animate-pulse">
+ <div className="aspect-video bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
+ <div className="p-3">
+ <div className="flex items-start space-x-3">
+ <div className="w-9 h-9 rounded-full bg-neutral-300 dark:bg-neutral-700/80 mt-0.5 flex-shrink-0" />
+ <div className="flex-grow space-y-1.5 pt-0.5">
+ <div className="h-4 bg-neutral-300 dark:bg-neutral-700/80 rounded w-5/6" />
+ <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-3/4" />
+ <div className="h-3 bg-neutral-300 dark:bg-neutral-700/80 rounded w-1/2" />
+ </div>
+ </div>
+ </div>
+ </div>
+ ))}
+ </div>
+ </div>
+ );
+ }
 
-  if (error as any) {
-    return (
-      <div className="mb-8 px-4">
-        <div className="flex items-center mb-4">
-          <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
-          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
-        </div>
-        <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
-      </div>
-    );
-  }
+ if (error as any) {
+ return (
+ <div className="mb-8 px-4">
+ <div className="flex items-center mb-4">
+ <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
+ <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
+ </div>
+ <p className="text-neutral-600 dark:text-neutral-400">{error}</p>
+ </div>
+ );
+ }
 
-  if (trendingVideos.length === 0) {
-    return null;
-  }
+ if (trendingVideos.length === 0) {
+ return null;
+ }
 
-  return (
-    <div className="mb-8 px-4">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center">
-          <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
-          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
-        </div>
-        <Link
-          to="/trending"
-          className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
-        >
-          View All
-        </Link>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {videoGrid}
-      </div>
-    </div>
-  );
+ return (
+ <div className="mb-8 px-4">
+ <div className="flex items-center justify-between mb-4">
+ <div className="flex items-center">
+ <FireIcon className="w-6 h-6 mr-2 text-red-600 dark:text-red-500" />
+ <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Trending</h2>
+ </div>
+ <Link
+ to="/trending"
+ className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+ >
+ View All
+ </Link>
+ </div>
+ <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+ {videoGrid}
+ </div>
+ </div>
+ );
 });
 
 export default TrendingSection;

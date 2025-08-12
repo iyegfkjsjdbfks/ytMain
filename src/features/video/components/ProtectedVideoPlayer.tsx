@@ -3,10 +3,10 @@ import { conditionalLogger } from '@/utils/conditionalLogger';
 
 import { VideoErrorBoundary } from '@/components/ErrorBoundaries';
 
-import { type VideoPlayerProps, VideoPlayer  } from './VideoPlayer';
+import { type VideoPlayerProps, VideoPlayer } from './VideoPlayer';
 
 interface ProtectedVideoPlayerProps extends VideoPlayerProps {
-  // Additional props specific to the protected version can be added here
+ // Additional props specific to the protected version can be added here
 }
 
 /**
@@ -14,48 +14,48 @@ interface ProtectedVideoPlayerProps extends VideoPlayerProps {
  * Provides enhanced error handling for video playback
  */
 const ProtectedVideoPlayer: FC<ProtectedVideoPlayerProps> = ({
-  videoId,
-  src,
-  poster,
-  title,
-  autoplay = false,
-  startTime = 0,
-  className = '',
-  onReady,
-  onTimeUpdate,
-  onPlay,
-  onPause,
-  onEnded,
-  useYouTube = false,
-  ...otherProps
+ videoId,
+ src,
+ poster,
+ title,
+ autoplay = false,
+ startTime = 0,
+ className = '',
+ onReady,
+ onTimeUpdate,
+ onPlay,
+ onPause,
+ onEnded,
+ useYouTube = false,
+ ...otherProps
 }) => {
-  const handleRetry = useCallback(() => {
-    conditionalLogger.debug('Retrying video player', { videoId, src });
-    // The error boundary will reset and re-render the component
-  }, [videoId, src]);
+ const handleRetry = useCallback(() => {
+ conditionalLogger.debug('Retrying video player', { videoId, src });
+ // The error boundary will reset and re-render the component
+ }, [videoId, src]);
 
-  // Removed unused handleReload function
+ // Removed unused handleReload function
 
-  return (
-    <VideoErrorBoundary videoId={videoId || 'unknown'} onRetry={handleRetry}>
-      <VideoPlayer
-        videoId={videoId}
-        {...(src && ({ src } as any))}
-        {...(poster && { poster })}
-        {...(title && { title })}
-        autoplay={autoplay}
-        startTime={startTime}
-        className={className}
-        {...(onReady && { onReady })}
-        {...(onTimeUpdate && { onTimeUpdate })}
-        {...(onPlay && { onPlay })}
-        {...(onPause && { onPause })}
-        {...(onEnded && { onEnded })}
-        useYouTube={useYouTube}
-        {...otherProps}
-      />
-    </VideoErrorBoundary>
-  );
+ return (
+ <VideoErrorBoundary videoId={videoId || 'unknown'} onRetry={handleRetry}>
+ <VideoPlayer
+ videoId={videoId}
+ {...(src && ({ src } as any))}
+ {...(poster && { poster })}
+ {...(title && { title })}
+ autoplay={autoplay}
+ startTime={startTime}
+ className={className}
+ {...(onReady && { onReady })}
+ {...(onTimeUpdate && { onTimeUpdate })}
+ {...(onPlay && { onPlay })}
+ {...(onPause && { onPause })}
+ {...(onEnded && { onEnded })}
+ useYouTube={useYouTube}
+ {...otherProps}
+ />
+ </VideoErrorBoundary>
+ );
 };
 
 export default ProtectedVideoPlayer;

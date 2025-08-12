@@ -5,50 +5,49 @@ import VideoCard from './VideoCard';
 import type { Video } from '../src/types/core';
 
 interface VideoGridProps {
-  videos: Video;
-  className?: string;
-  keyPrefix?: string;
-  columns?: {
-    sm?: number;
-    md?: number;
-    lg?: number;
-    xl?: number;
-    '2xl'?: number;
-  }}
-
+ videos: Video;
+ className?: string;
+ keyPrefix?: string;
+ columns?: {
+ sm?: number;
+ md?: number;
+ lg?: number;
+ xl?: number;
+ '2xl'?: number;
+ }
 const VideoGrid: React.FC<VideoGridProps> = memo(({
-  videos,
-  className = '',
-  keyPrefix = '',
-  columns = {
-    sm: 2,
-          md: 3,
-    lg: 4,
-          xl: 5,
-    '2xl': 6 } }) => {
-  const getGridClasses: any = () => {
-    const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
-    const responsiveClasses = [
-      columns.sm && `sm:grid-cols-${columns.sm}`,
-      columns.md && `md:grid-cols-${columns.md}`,
-      columns.lg && `lg:grid-cols-${columns.lg}`,
-      columns.xl && `xl:grid-cols-${columns.xl}`,
-      columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`].filter(Boolean).join(' ');
+ videos,
+ className = '',
+ keyPrefix = '',
+ columns = {
+ sm: 2,
+ md: 3,
+ lg: 4,
+ xl: 5,
+ '2xl': 6 } }) => {
+ const getGridClasses: any = () => {
+ const baseClasses = 'grid grid-cols-1 gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6';
+ const responsiveClasses = [
+ columns.sm && `sm:grid-cols-${columns.sm}`,
+ columns.md && `md:grid-cols-${columns.md}`,
+ columns.lg && `lg:grid-cols-${columns.lg}`,
+ columns.xl && `xl:grid-cols-${columns.xl}`,
+ columns['2xl'] && `2xl:grid-cols-${columns['2xl']}`].filter(Boolean).join(' ');
 
-    return `${baseClasses} ${responsiveClasses} ${className}`;
-  };
+ return `${baseClasses} ${responsiveClasses} ${className}`;
+ };
 
-  return (
-    <div className={getGridClasses()}>
-      {videos.map((video: any,
-          index: number) => (
-        <VideoCard
-          key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
-          video={video}
-        />
-      ))}
-    </div>
-  );
+ return (
+ <div className={getGridClasses()}>
+ {videos.map((video: any,
+ index: number) => (
+ <VideoCard
+ key={keyPrefix ? `${keyPrefix}-${video.id}` : `${video.id}-${index}`}
+ video={video}
+ />
+ ))}
+ </div>
+ );
 });
 
 export default VideoGrid;

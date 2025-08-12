@@ -4,50 +4,50 @@
  */
 
 export interface Video {
-  id: string;
-  title: string;
-  description?: string;
-  thumbnailUrl?: string;
-  duration?: string;
-  views?: number;
-  category?: string;
-  isShort?: boolean;
-  isLive?: boolean;
+ id: string;
+ title: string;
+ description?: string;
+ thumbnailUrl?: string;
+ duration?: string;
+ views?: number;
+ category?: string;
+ isShort?: boolean;
+ isLive?: boolean;
 }
 
 export interface Channel {
-  id: string;
-  name: string;
-  avatarUrl?: string;
-  description?: string;
+ id: string;
+ name: string;
+ avatarUrl?: string;
+ description?: string;
 }
 
 export const getVideos = async (): Promise<Video[]> => {
-  // Mock implementation - returns empty array
-  return [];
+ // Mock implementation - returns empty array
+ return [];
 };
 
 export const getShortsVideos = async (): Promise<Video[]> => {
-  // Mock implementation - returns empty array
-  return [];
+ // Mock implementation - returns empty array
+ return [];
 };
 
 export const getVideosByCategory = async (_category: any): Promise<Video[]> => {
-  // Mock implementation - returns empty array
-  return [];
+ // Mock implementation - returns empty array
+ return [];
 };
 
 export const searchVideos = async (_query: any): Promise<Video[]> => {
-  // Mock implementation - returns empty array
-  return [];
+ // Mock implementation - returns empty array
+ return [];
 };
 
 export const getVideoById = async (_id: any): Promise<Video | null> => {
-  // Mock implementation - returns null
-  return null;
+ // Mock implementation - returns null
+ return null;
 };
 
 export const getChannelById = async (_id: any): Promise<Channel | null> => {
-  // Mock implementation - returns null
-  return null;
+ // Mock implementation - returns null
+ return null;
 };

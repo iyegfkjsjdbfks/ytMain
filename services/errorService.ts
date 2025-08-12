@@ -1,395 +1,375 @@
 interface ErrorContext {
-  userId?: string | undefined;
-  sessionId?: string;
-  userAgent?: string;
-  url?: string;
-  timestamp: number;
-  componentStack?: string | undefined;
-  additionalData?: Record<string, any>;
+ userId?: string | undefined;
+ sessionId?: string;
+ userAgent?: string;
+ url?: string;
+ timestamp: number;
+ componentStack?: string | undefined;
+ additionalData?: Record<string, any>;
 }
 
 interface ErrorReport {
-  id: string;
-  message: string;
-  stack?: string | undefined;
-  type: "javascript" as const | 'network' | 'validation' | 'api' | 'performance';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  context: ErrorContext;
-  resolved: boolean;
-  occurrenceCount: number
+ id: string;
+ message: string;
+ stack?: string | undefined;
+ type: "javascript" | 'network' | 'validation' | 'api' | 'performance';
+ severity: 'low' | 'medium' | 'high' | 'critical';
+ context: ErrorContext;
+ resolved: boolean;
+ occurrenceCount: number
 }
 
 interface ErrorServiceConfig {
-  enableConsoleLogging: boolean;
-  enableRemoteLogging: boolean;
-  enableLocalStorage: boolean;
-  maxStoredErrors: number;
-  apiEndpoint?: string | undefined;
-  apiKey?: string | undefined;
-  enablePerformanceTracking: boolean
+ enableConsoleLogging: boolean;
+ enableRemoteLogging: boolean;
+ enableLocalStorage: boolean;
+ maxStoredErrors: number;
+ apiEndpoint?: string | undefined;
+ apiKey?: string | undefined;
+ enablePerformanceTracking: boolean
 }
 
 const DEFAULT_CONFIG: ErrorServiceConfig = {
-  enableConsoleLogging: true,
-  enableRemoteLogging: false,
-  enableLocalStorage: true,
-  maxStoredErrors: 100,
-  enablePerformanceTracking: true };
+ enableConsoleLogging: true,
+ enableRemoteLogging: false,
+ enableLocalStorage: true,
+ maxStoredErrors: 100,
+ enablePerformanceTracking: true };
 
 class ErrorService {
-  private config: ErrorServiceConfig;
-  private errors: Map<string, ErrorReport> = new Map();
-  private listeners: Array<(error: ErrorReport) => void> = [];
-  private sessionId: string;
+ private config: ErrorServiceConfig;
+ private errors: Map<string, ErrorReport> = new Map();
+ private listeners: Array<(error: ErrorReport) => void> = [];
+ private sessionId: string;
 
-  constructor(config: Partial<ErrorServiceConfig> = {}) {
-    this.config = { ...DEFAULT_CONFIG as any, ...config };
-    this.sessionId = this.generateSessionId();
-    this.initializeErrorHandlers();
-    this.loadStoredErrors();
-  }
+ constructor(config: Partial<ErrorServiceConfig> = {}) {
+ this.config = { ...DEFAULT_CONFIG as any, ...config };
+ this.sessionId = this.generateSessionId();
+ this.initializeErrorHandlers();
+ this.loadStoredErrors();
+ }
 
-  private generateSessionId(): string {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
+ private generateSessionId(): string {
+ return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+ }
 
-  private initializeErrorHandlers() {
-    // Global error handler
-    window.addEventListener('error', (event as EventListener) => {
-      this.captureError({
-        message: event.message,
-        stack: event.error?.stack,
-        type: "javascript" as const,
-        severity: 'high',
-        context: {
-          url: event.filename,
-          timestamp: Date.now(),
-          additionalData: {
-            lineno: event.lineno,
-            colno: event.colno } } });
-    });
+ private initializeErrorHandlers() {
+ // Global error handler
+ window.addEventListener('error', (event as EventListener) => {
+ this.captureError({
+ message: event.message,
+ stack: event.error?.stack,
+ type: "javascript",
+ severity: 'high',
+ context: {
+ url: event.filename,
+ timestamp: Date.now(),
+ additionalData: {
+ lineno: event.lineno,
+ colno: event.colno } } });
+ });
 
-    // Unhandled promise rejection handler
-    window.addEventListener('unhandledrejection', (event as EventListener) => {
-      this.captureError({
-        message: `Unhandled Promise Rejection: ${event.reason}`,
-        stack: event.reason?.stack,
-        type: "javascript" as const,
-        severity: 'high',
-        context: {
-          timestamp: Date.now(),
-          additionalData: {
-            reason: event.reason } } });
-    });
+ // Unhandled promise rejection handler
+ window.addEventListener('unhandledrejection', (event as EventListener) => {
+ this.captureError({
+ message: `Unhandled Promise Rejection: ${event.reason}`,
+ stack: event.reason?.stack,
+ type: "javascript",
+ severity: 'high',
+ context: {
+ timestamp: Date.now(),
+ additionalData: {
+ reason: event.reason } } });
+ });
 
-    // Network error monitoring
-    if (this.config.enablePerformanceTracking) {
-      this.monitorNetworkErrors();
-    }
-  }
+ // Network error monitoring
+ if (this.config.enablePerformanceTracking) {
+ this.monitorNetworkErrors();
+ }
+ private monitorNetworkErrors() {
+ const originalFetch = window.fetch;
+ (window as any).fetch = async (...args): Promise<any> => {
+ const startTime = performance.now();
+ try {
+ const response = await originalFetch(...args);
+ const duration = performance.now() - startTime;
 
-  private monitorNetworkErrors() {
-    const originalFetch = window.fetch;
-    (window as any).fetch = async (...args): Promise<any> => {
-      const startTime = performance.now();
-      try {
-        const response = await originalFetch(...args);
-        const duration = performance.now() - startTime;
+ if (!response.ok) {
+ this.captureError({
+ message: `Network Error: ${response.status} ${response.statusText}`,
+ type: "network",
+ severity: response.status >= 500 ? 'high' : 'medium',
+ context: {
+ timestamp: Date.now(),
+ url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
+ additionalData: {
+ status: response.status,
+ statusText: response.statusText,
+ duration } } });
+ }
 
-        if (!response.ok) {
-          this.captureError({
-            message: `Network Error: ${response.status} ${response.statusText}`,
-            type: "network" as const,
-            severity: response.status >= 500 ? 'high' : 'medium',
-            context: {
-              timestamp: Date.now(),
-              url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
-              additionalData: {
-                status: response.status,
-                statusText: response.statusText,
-                duration } } });
-        }
+ return response;
+ } catch (error: any) {
+ const duration = performance.now() - startTime;
+ this.captureError({
+ message: `Network Request Failed: ${error}`,
+ ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
+ type: "network",
+ severity: 'high',
+ context: {
+ timestamp: Date.now(),
+ url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
+ additionalData: {
+ duration,
+ error: error instanceof Error ? error.message : String(error) } } });
+ throw error;
+ };
+ }
 
-        return response;
-      } catch (error: any) {
-        const duration = performance.now() - startTime;
-        this.captureError({
-          message: `Network Request Failed: ${error}`,
-          ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
-          type: "network" as const,
-          severity: 'high',
-          context: {
-            timestamp: Date.now(),
-            url: typeof args[0] === 'string' ? args[0] : (args[0] as Request).url,
-            additionalData: {
-              duration,
-              error: error instanceof Error ? error.message : String(error) } } });
-        throw error;
-      }
-    };
-  }
+ captureError(errorData: {
+ message: string;
+ stack?: string;
+ type: ErrorReport['type'];
+ severity: ErrorReport['severity'];
+ context: Partial<ErrorContext>
+ }) {
+ const errorId = this.generateErrorId(errorData.message, errorData.stack);
+ const existingError = this.errors.get(errorId);
 
-  captureError(errorData: {
-    message: string;
-    stack?: string;
-    type: ErrorReport['type'];
-    severity: ErrorReport['severity'];
-    context: Partial<ErrorContext>
-  }) {
-    const errorId = this.generateErrorId(errorData.message, errorData.stack);
-    const existingError = this.errors.get(errorId);
+ const context: ErrorContext = {
+ userId: this.getCurrentUserId(),
+ sessionId: this.sessionId,
+ userAgent: navigator.userAgent,
+ url: window.location.href,
+ timestamp: Date.now(),
+ ...errorData.context };
 
-    const context: ErrorContext = {
-      userId: this.getCurrentUserId(),
-      sessionId: this.sessionId,
-      userAgent: navigator.userAgent,
-      url: window.location.href,
-      timestamp: Date.now(),
-      ...errorData.context };
+ if (existingError as any) {
+ // Update existing error
+ existingError.occurrenceCount++;
+ existingError.context = context; // Update with latest context
+ } else {
+ // Create new error report
+ const errorReport: ErrorReport = {
+ id: errorId,
+ message: errorData.message,
+ stack: errorData.stack,
+ type: errorData.type,
+ severity: errorData.severity,
+ context,
+ resolved: false,
+ occurrenceCount: 1 };
 
-    if (existingError as any) {
-      // Update existing error
-      existingError.occurrenceCount++;
-      existingError.context = context; // Update with latest context
-    } else {
-      // Create new error report
-      const errorReport: ErrorReport = {
-        id: errorId,
-        message: errorData.message,
-        stack: errorData.stack,
-        type: errorData.type,
-        severity: errorData.severity,
-        context,
-        resolved: false,
-        occurrenceCount: 1 };
+ this.errors.set(errorId, errorReport);
+ this.notifyListeners(errorReport);
+ }
 
-      this.errors.set(errorId, errorReport);
-      this.notifyListeners(errorReport);
-    }
+ this.processError(this.errors.get(errorId)!);
+ }
 
-    this.processError(this.errors.get(errorId)!);
-  }
+ private generateErrorId(message: any, stack?: string): string {
+ const content = `${message}${stack || ''}`;
+ let hash = 0;
+ for (let i = 0; i < content.length; i++) {
+ const char = content.charCodeAt(i);
+ hash = ((hash << 5) - hash) + char;
+ hash = hash & hash; // Convert to 32-bit integer
+ }
+ return `error_${Math.abs(hash).toString(36)}`;
+ }
 
-  private generateErrorId(message: any, stack?: string): string {
-    const content = `${message}${stack || ''}`;
-    let hash = 0;
-    for (let i = 0; i < content.length; i++) {
-      const char = content.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32-bit integer
-    }
-    return `error_${Math.abs(hash).toString(36)}`;
-  }
+ private getCurrentUserId(): string | undefined {
+ // Try to get user ID from various sources
+ try {
+ const authData = (localStorage as any).getItem('auth');
+ if (authData as any) {
+ const parsed = JSON.parse(authData);
+ return parsed.userId || parsed.id;
+ }
+ } catch (e) {
+ // Ignore parsing errors
+ }
+ return undefined;
+ }
 
-  private getCurrentUserId(): string | undefined {
-    // Try to get user ID from various sources
-    try {
-      const authData = (localStorage as any).getItem('auth');
-      if (authData as any) {
-        const parsed = JSON.parse(authData);
-        return parsed.userId || parsed.id;
-      }
-    } catch (e) {
-      // Ignore parsing errors
-    }
-    return undefined;
-  }
+ private processError(error: ErrorReport) {
+ // Console logging
+ if (this.config.enableConsoleLogging) {
+ const logMethod = this.getConsoleMethod(error.severity);
+ logMethod(`[ErrorService] ${error.type.toUpperCase()}: ${error.message}`, {
+ error,
+ stack: error.stack });
+ }
 
-  private processError(error: ErrorReport) {
-    // Console logging
-    if (this.config.enableConsoleLogging) {
-      const logMethod = this.getConsoleMethod(error.severity);
-      logMethod(`[ErrorService] ${error.type.toUpperCase()}: ${error.message}`, {
-        error,
-        stack: error.stack });
-    }
+ // Local storage
+ if (this.config.enableLocalStorage) {
+ this.saveToLocalStorage();
+ }
 
-    // Local storage
-    if (this.config.enableLocalStorage) {
-      this.saveToLocalStorage();
-    }
+ // Remote logging
+ if (this.config.enableRemoteLogging && this.config.apiEndpoint) {
+ this.sendToRemote(error);
+ }
+ private getConsoleMethod(severity: ErrorReport['severity']) {
+ switch (severity as any) {
+ case 'low': return console.info;
+ case 'medium': return console.warn;
+ case 'high':
+ case 'critical': return console.error;
+ default: return console.log
+ }
+ private saveToLocalStorage() {
+ try {
+ const errorsArray = Array.from(this.errors.values());
+ .sort((a, b) => b.context.timestamp - a.context.timestamp)
+ .slice(0, this.config.maxStoredErrors);
 
-    // Remote logging
-    if (this.config.enableRemoteLogging && this.config.apiEndpoint) {
-      this.sendToRemote(error);
-    }
-  }
-
-  private getConsoleMethod(severity: ErrorReport['severity']) {
-    switch (severity as any) {
-      case 'low': return console.info;
-      case 'medium': return console.warn;
-      case 'high':
-      case 'critical': return console.error;
-      default: return console.log
-    }
-  }
-
-  private saveToLocalStorage() {
-    try {
-      const errorsArray = Array.from(this.errors.values());
-        .sort((a, b) => b.context.timestamp - a.context.timestamp)
-        .slice(0, this.config.maxStoredErrors);
-
-      (localStorage as any).setItem('errorService_errors', JSON.stringify(errorsArray));
-    } catch (error: any) {
-      (console as any).warn('Failed to save errors to localStorage:', error);
-    }
-  }
-
-  private loadStoredErrors() {
-    if (!this.config.enableLocalStorage) {
+ (localStorage as any).setItem('errorService_errors', JSON.stringify(errorsArray));
+ } catch (error: any) {
+ (console as any).warn('Failed to save errors to localStorage:', error);
+ }
+ private loadStoredErrors() {
+ if (!this.config.enableLocalStorage) {
 return;
 }
 
-    try {
-      const stored = (localStorage as any).getItem('errorService_errors');
-      if (stored as any) {
-        const errors: ErrorReport[] = JSON.parse(stored);
-        errors.forEach(error => {
-          this.errors.set(error.id, error);
-        });
-      }
-    } catch (error: any) {
-      (console as any).warn('Failed to load stored errors:', error);
-    }
-  }
-
-  private async sendToRemote(error: ErrorReport) {
-    if (!this.config.apiEndpoint) {
+ try {
+ const stored = (localStorage as any).getItem('errorService_errors');
+ if (stored as any) {
+ const errors: ErrorReport[] = JSON.parse(stored);
+ errors.forEach(error => {
+ this.errors.set(error.id, error);
+ });
+ }
+ } catch (error: any) {
+ (console as any).warn('Failed to load stored errors:', error);
+ }
+ private async sendToRemote(error: ErrorReport) {
+ if (!this.config.apiEndpoint) {
 return;
 }
 
-    try {
-      await (fetch as any)(this.config.apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
-        body: JSON.stringify(error) });
-    } catch (networkError: any) {
-      (console as any).warn('Failed to send error to remote service:', networkError);
-    }
-  }
+ try {
+ await (fetch as any)(this.config.apiEndpoint, {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }) },
+ body: JSON.stringify(error) });
+ } catch (networkError: any) {
+ (console as any).warn('Failed to send error to remote service:', networkError);
+ }
+ private notifyListeners(error: ErrorReport) {
+ this.listeners.forEach(listener => {
+ try {
+ listener(error);
+ } catch (listenerError: any) {
+ (console as any).warn('Error in error listener:', listenerError);
+ }
+ });
+ }
 
-  private notifyListeners(error: ErrorReport) {
-    this.listeners.forEach(listener => {
-      try {
-        listener(error);
-      } catch (listenerError: any) {
-        (console as any).warn('Error in error listener:', listenerError);
-      }
-    });
-  }
+ // Public API
+ getErrors(): ErrorReport[] {
+ return Array.from(this.errors.values())
+ .sort((a, b) => b.context.timestamp - a.context.timestamp);
+ }
 
-  // Public API
-  getErrors(): ErrorReport[] {
-    return Array.from(this.errors.values())
-      .sort((a, b) => b.context.timestamp - a.context.timestamp);
-  }
+ getErrorsByType(type: ErrorReport['type'],): ErrorReport[] {
+ return this.getErrors().filter((error: any) => error.type === type);
+ }
 
-  getErrorsByType(type: ErrorReport['type'],): ErrorReport[] {
-    return this.getErrors().filter((error: any) => error.type === type);
-  }
+ getErrorsBySeverity(severity: ErrorReport['severity'],): ErrorReport[] {
+ return this.getErrors().filter((error: any) => error.severity === severity);
+ }
 
-  getErrorsBySeverity(severity: ErrorReport['severity'],): ErrorReport[] {
-    return this.getErrors().filter((error: any) => error.severity === severity);
-  }
+ getUnresolvedErrors(): ErrorReport[] {
+ return this.getErrors().filter((error: any) => !error.resolved);
+ }
 
-  getUnresolvedErrors(): ErrorReport[] {
-    return this.getErrors().filter((error: any) => !error.resolved);
-  }
+ markAsResolved(errorId: any) {
+ const error = this.errors.get(errorId);
+ if (error as any) {
+ error.resolved = true;
+ this.saveToLocalStorage();
+ }
+ clearErrors() {
+ this.errors.clear();
+ if (this.config.enableLocalStorage) {
+ localStorage.removeItem('errorService_errors');
+ }
+ subscribe(listener: (error: ErrorReport) => void): () => void {
+ this.listeners.push(listener);
+ return () => {
+ const index = this.listeners.indexOf(listener);
+ if (index > -1) {
+ this.listeners.splice(index, 1);
+ };
+ }
 
-  markAsResolved(errorId: any) {
-    const error = this.errors.get(errorId);
-    if (error as any) {
-      error.resolved = true;
-      this.saveToLocalStorage();
-    }
-  }
+ // Utility methods for manual error reporting
+ reportValidationError(message: any, field?: string, value: any?) {
+ this.captureError({
+ message: `Validation Error: ${message}`,
+ type: "validation",
+ severity: 'medium',
+ context: {
+ timestamp: Date.now(),
+ additionalData: { field, value } } });
+ }
 
-  clearErrors() {
-    this.errors.clear();
-    if (this.config.enableLocalStorage) {
-      localStorage.removeItem('errorService_errors');
-    }
-  }
+ reportApiError(message: any, endpoint: any, status?: number) {
+ this.captureError({
+ message: `API Error: ${message}`,
+ type: "api",
+ severity: status && status >= 500 ? 'high' : 'medium',
+ context: {
+ timestamp: Date.now(),
+ url: endpoint,
+ additionalData: { status } } });
+ }
 
-  subscribe(listener: (error: ErrorReport) => void): () => void {
-    this.listeners.push(listener);
-    return () => {
-      const index = this.listeners.indexOf(listener);
-      if (index > -1) {
-        this.listeners.splice(index, 1);
-      }
-    };
-  }
+ reportPerformanceIssue(message: any, metric: any, value: string | number) {
+ this.captureError({
+ message: `Performance Issue: ${message}`,
+ type: "performance",
+ severity: 'medium',
+ context: {
+ timestamp: Date.now(),
+ additionalData: { metric, value } } });
+ }
 
-  // Utility methods for manual error reporting
-  reportValidationError(message: any, field?: string, value: any?) {
-    this.captureError({
-      message: `Validation Error: ${message}`,
-      type: "validation" as const,
-      severity: 'medium',
-      context: {
-        timestamp: Date.now(),
-        additionalData: { field, value } } });
-  }
+ getErrorStats() {
+ const errors = this.getErrors();
+ const now = Date.now();
+ const oneHourAgo = now - (60 * 60 * 1000);
+ const oneDayAgo = now - (24 * 60 * 60 * 1000);
 
-  reportApiError(message: any, endpoint: any, status?: number) {
-    this.captureError({
-      message: `API Error: ${message}`,
-      type: "api" as const,
-      severity: status && status >= 500 ? 'high' : 'medium',
-      context: {
-        timestamp: Date.now(),
-        url: endpoint,
-        additionalData: { status } } });
-  }
-
-  reportPerformanceIssue(message: any, metric: any, value: string | number) {
-    this.captureError({
-      message: `Performance Issue: ${message}`,
-      type: "performance" as const,
-      severity: 'medium',
-      context: {
-        timestamp: Date.now(),
-        additionalData: { metric, value } } });
-  }
-
-  getErrorStats() {
-    const errors = this.getErrors();
-    const now = Date.now();
-    const oneHourAgo = now - (60 * 60 * 1000);
-    const oneDayAgo = now - (24 * 60 * 60 * 1000);
-
-    return {
-      total: errors.length,
-      unresolved: this.getUnresolvedErrors().length,
-      lastHour: errors.filter((e: any) => e.context.timestamp > oneHourAgo).length,
-      lastDay: errors.filter((e: any) => e.context.timestamp > oneDayAgo).length,
-      byType: {
-        javascript: this.getErrorsByType('javascript',).length,
-        network: this.getErrorsByType('network',).length,
-        validation: this.getErrorsByType('validation',).length,
-        api: this.getErrorsByType('api',).length,
-        performance: this.getErrorsByType('performance',).length },
-      bySeverity: {
-        low: this.getErrorsBySeverity('low',).length,
-        medium: this.getErrorsBySeverity('medium',).length,
-        high: this.getErrorsBySeverity('high',).length,
-        critical: this.getErrorsBySeverity('critical',).length } };
-  }
-}
-
+ return {
+ total: errors.length,
+ unresolved: this.getUnresolvedErrors().length,
+ lastHour: errors.filter((e: any) => e.context.timestamp > oneHourAgo).length,
+ lastDay: errors.filter((e: any) => e.context.timestamp > oneDayAgo).length,
+ byType: {
+ javascript: this.getErrorsByType('javascript',).length,
+ network: this.getErrorsByType('network',).length,
+ validation: this.getErrorsByType('validation',).length,
+ api: this.getErrorsByType('api',).length,
+ performance: this.getErrorsByType('performance',).length },
+ bySeverity: {
+ low: this.getErrorsBySeverity('low',).length,
+ medium: this.getErrorsBySeverity('medium',).length,
+ high: this.getErrorsBySeverity('high',).length,
+ critical: this.getErrorsBySeverity('critical',).length };
+ }
 // Create singleton instance
 export const errorService = new ErrorService({
-  enableConsoleLogging: import.meta.env.MODE === 'development',
-  enableRemoteLogging: import.meta.env.MODE === 'production',
-  enableLocalStorage: true,
-  maxStoredErrors: 100,
-  apiEndpoint: import.meta.env.VITE_ERROR_REPORTING_ENDPOINT,
-  apiKey: import.meta.env.VITE_ERROR_REPORTING_API_KEY });
+ enableConsoleLogging: import.meta.env.MODE === 'development',
+ enableRemoteLogging: import.meta.env.MODE === 'production',
+ enableLocalStorage: true,
+ maxStoredErrors: 100,
+ apiEndpoint: import.meta.env.VITE_ERROR_REPORTING_ENDPOINT,
+ apiKey: import.meta.env.VITE_ERROR_REPORTING_API_KEY });
 
 export default ErrorService;
 export type { ErrorReport, ErrorContext, ErrorServiceConfig };

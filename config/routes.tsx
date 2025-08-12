@@ -4,7 +4,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import StudioLayout from '../components/StudioLayout';
-import { Route, Routes, RouteObject  } from 'react-router-dom';
+import { Route, Routes, RouteObject } from 'react-router-dom';
 // Import HomePage directly for faster initial load
 import HomePage from '../pages/HomePage';
 
@@ -53,174 +53,174 @@ const GoogleSearchStoreDebug = lazy(() => import('../src/debug/GoogleSearchStore
 
 // Route configuration for main application
 export const mainRoutes: RouteObject[] = [
-  {
-    path: '/',
-          element: <Layout />,
-  errorElement: <ErrorBoundary />,
-          children: [
-      {
-        index: true,
-          element: <HomePage /> },
-      {
-        path: 'watch/:videoId',
-          element: <WatchPage /> },
-      {
-        path: 'watch',
-          element: <WatchPage /> },
-      {
-        path: 'search',
-          element: <SearchResultsPage /> },
-      {
-        path: 'trending',
-          element: <TrendingPage /> },
-      {
-        path: 'shorts',
-          element: <ShortsPage /> },
-      {
-        path: 'subscriptions',
-          element: <SubscriptionsPage /> },
-      {
-        path: 'history',
-          element: <HistoryPage /> },
-      {
-        path: 'watch-history',
-          element: <HistoryPage /> },
-      {
-        path: 'playlists',
-          element: <PlaylistsPage /> },
-      {
-        path: 'playlist/:playlistId',
-          element: <PlaylistDetailPage /> },
-      {
-        path: 'watch-later',
-          element: <WatchLaterPage /> },
-      {
-        path: 'liked-videos',
-          element: <LikedVideosPage /> },
-      {
-        path: 'channel/:channelIdOrName',
-          element: <ChannelPage /> },
-      {
-        path: 'user/:userName',
-          element: <UserPage /> },
-      {
-        path: 'library',
-          element: <LibraryPage /> },
-      {
-        path: 'your-data',
-          element: <YourDataPage /> },
-      {
-        path: 'go-live',
-          element: <GoLivePage /> },
-      {
-        path: 'live-hub',
-          element: <LiveStreamingHubPage /> },
-      {
-        path: 'live',
-          element: <LiveStreamingHubPage /> },
-      {
-        path: 'ai-content-spark',
-          element: <AIContentSparkPage /> },
-      {
-        path: 'upload',
-          element: <VideoUploadPage /> },
-      {
-        path: 'debug-metadata',
-          element: <TestMetadataFetch /> },
-      {
-        path: 'debug-google-search',
-          element: <GoogleSearchStoreDebug /> },
-      {
-        path: 'settings',
-          element: <SettingsPage /> },
-      {
-        path: 'admin',
-          element: <AdminPage /> },
-      {
-        path: 'studio',
-          element: <StudioPage /> },
-      {
-        path: 'studio/upload',
-          element: <UploadPage /> },
-      // Account section with nested routes and dedicated layout
-      {
-        path: 'account',
-          element: <AccountLayout />,
-  children: [
-          {
-            path: 'settings',
-          element: <SettingsPage /> },
-          {
-            path: 'privacy',
-          element: <SettingsPage /> // Can be replaced with dedicated privacy page later
-          },
-          {
-            path: 'data',
-          element: <YourDataPage /> }] },
-      {
-        path: 'analytics',
-          element: <AnalyticsPage /> },
-      // Redirect for legacy content-manager route
-      {
-        path: 'content-manager',
-          element: <ContentManagerPage /> }] }];
+ {
+ path: '/',
+ element: <Layout />,
+ errorElement: <ErrorBoundary />,
+ children: [
+ {
+ index: true,
+ element: <HomePage /> },
+ {
+ path: 'watch/:videoId',
+ element: <WatchPage /> },
+ {
+ path: 'watch',
+ element: <WatchPage /> },
+ {
+ path: 'search',
+ element: <SearchResultsPage /> },
+ {
+ path: 'trending',
+ element: <TrendingPage /> },
+ {
+ path: 'shorts',
+ element: <ShortsPage /> },
+ {
+ path: 'subscriptions',
+ element: <SubscriptionsPage /> },
+ {
+ path: 'history',
+ element: <HistoryPage /> },
+ {
+ path: 'watch-history',
+ element: <HistoryPage /> },
+ {
+ path: 'playlists',
+ element: <PlaylistsPage /> },
+ {
+ path: 'playlist/:playlistId',
+ element: <PlaylistDetailPage /> },
+ {
+ path: 'watch-later',
+ element: <WatchLaterPage /> },
+ {
+ path: 'liked-videos',
+ element: <LikedVideosPage /> },
+ {
+ path: 'channel/:channelIdOrName',
+ element: <ChannelPage /> },
+ {
+ path: 'user/:userName',
+ element: <UserPage /> },
+ {
+ path: 'library',
+ element: <LibraryPage /> },
+ {
+ path: 'your-data',
+ element: <YourDataPage /> },
+ {
+ path: 'go-live',
+ element: <GoLivePage /> },
+ {
+ path: 'live-hub',
+ element: <LiveStreamingHubPage /> },
+ {
+ path: 'live',
+ element: <LiveStreamingHubPage /> },
+ {
+ path: 'ai-content-spark',
+ element: <AIContentSparkPage /> },
+ {
+ path: 'upload',
+ element: <VideoUploadPage /> },
+ {
+ path: 'debug-metadata',
+ element: <TestMetadataFetch /> },
+ {
+ path: 'debug-google-search',
+ element: <GoogleSearchStoreDebug /> },
+ {
+ path: 'settings',
+ element: <SettingsPage /> },
+ {
+ path: 'admin',
+ element: <AdminPage /> },
+ {
+ path: 'studio',
+ element: <StudioPage /> },
+ {
+ path: 'studio/upload',
+ element: <UploadPage /> },
+ // Account section with nested routes and dedicated layout
+ {
+ path: 'account',
+ element: <AccountLayout />,
+ children: [
+ {
+ path: 'settings',
+ element: <SettingsPage /> },
+ {
+ path: 'privacy',
+ element: <SettingsPage /> // Can be replaced with dedicated privacy page later
+ },
+ {
+ path: 'data',
+ element: <YourDataPage /> }] },
+ {
+ path: 'analytics',
+ element: <AnalyticsPage /> },
+ // Redirect for legacy content-manager route
+ {
+ path: 'content-manager',
+ element: <ContentManagerPage /> }] }];
 
 // Route configuration for studio
 export const studioRoutes: RouteObject[] = [
-  {
-    path: 'studio',
-          element: <StudioLayout />,
-  errorElement: <ErrorBoundary />,
-          children: [
-      {
-        index: true,
-          element: <StudioDashboardPage /> },
-      {
-        path: 'analytics',
-          element: <AnalyticsPage /> },
-      {
-        path: 'comments',
-          element: <CommentModerationPage /> },
-      {
-        path: 'monetization',
-          element: <MonetizationPage /> },
-      {
-        path: 'content',
-          element: <ContentManagerPage /> },
-      {
-        path: 'creator',
-          element: <CreatorStudioPage /> },
-      {
-        path: 'community',
-          element: <CommunityPage /> },
-      {
-        path: 'playlists',
-          element: <PlaylistManagerPage /> },
-      {
-        path: 'customization',
-          element: <ChannelCustomizationPage /> },
-      {
-        path: 'editor',
-          element: <VideoEditorPage /> }] }];
+ {
+ path: 'studio',
+ element: <StudioLayout />,
+ errorElement: <ErrorBoundary />,
+ children: [
+ {
+ index: true,
+ element: <StudioDashboardPage /> },
+ {
+ path: 'analytics',
+ element: <AnalyticsPage /> },
+ {
+ path: 'comments',
+ element: <CommentModerationPage /> },
+ {
+ path: 'monetization',
+ element: <MonetizationPage /> },
+ {
+ path: 'content',
+ element: <ContentManagerPage /> },
+ {
+ path: 'creator',
+ element: <CreatorStudioPage /> },
+ {
+ path: 'community',
+ element: <CommunityPage /> },
+ {
+ path: 'playlists',
+ element: <PlaylistManagerPage /> },
+ {
+ path: 'customization',
+ element: <ChannelCustomizationPage /> },
+ {
+ path: 'editor',
+ element: <VideoEditorPage /> }] }];
 
 // Authentication routes (outside main layout)
 const authRoutes: RouteObject[] = [
-  {
-    path: '/login',
-          element: (
-      <ProtectedRoute requireAuth={false}>
-        <LoginPage />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorBoundary /> },
-  {
-    path: '/register',
-          element: (
-      <ProtectedRoute requireAuth={false}>
-        <RegisterPage />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorBoundary /> }];
+ {
+ path: '/login',
+ element: (
+ <ProtectedRoute requireAuth={false}>
+ <LoginPage />
+ </ProtectedRoute>
+ ),
+ errorElement: <ErrorBoundary /> },
+ {
+ path: '/register',
+ element: (
+ <ProtectedRoute requireAuth={false}>
+ <RegisterPage />
+ </ProtectedRoute>
+ ),
+ errorElement: <ErrorBoundary /> }];
 
 // Combined route configuration
 export const routes: RouteObject[] = [...mainRoutes as any, ...studioRoutes as any, ...authRoutes];

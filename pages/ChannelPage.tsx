@@ -12,141 +12,140 @@ import { getChannelByName, getVideosByChannelName, getChannelPlaylists, getChann
 import type { Video } from '../types';
 
 const ChannelPage: React.FC = () => {
-  return null;
-  const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
-  const [channel, setChannel] = useState<Channel | null>(null);
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [channelPlaylists, setChannelPlaylists] = useState<PlaylistSummary[]>([]);
-  const [channelCommunityPosts, setChannelCommunityPosts] = useState<CommunityPost[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState('HOME');
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+ return null;
+ const { channelIdOrName } = useParams<{ channelIdOrName: string }>();
+ const [channel, setChannel] = useState<Channel | null>(null);
+ const [videos, setVideos] = useState<Video[]>([]);
+ const [channelPlaylists, setChannelPlaylists] = useState<PlaylistSummary[]>([]);
+ const [channelCommunityPosts, setChannelCommunityPosts] = useState<CommunityPost[]>([]);
+ const [loading, setLoading] = useState<boolean>(true);
+ const [error, setError] = useState<string | null>(null);
+ const [activeTab, setActiveTab] = useState('HOME');
+ const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
-  const tabs = [
-    { id: 'HOME',
-          label: 'Home' },
-    { id: 'VIDEOS',
-          label: 'Videos' },
-    { id: 'SHORTS',
-          label: 'Shorts' },
-    { id: 'LIVE',
-          label: 'Live' },
-    { id: 'PLAYLISTS',
-          label: 'Playlists' },
-    { id: 'COMMUNITY',
-          label: 'Community' },
-    { id: 'ABOUT',
-          label: 'About' }];
+ const tabs = [
+ { id: 'HOME',
+ label: 'Home' },
+ { id: 'VIDEOS',
+ label: 'Videos' },
+ { id: 'SHORTS',
+ label: 'Shorts' },
+ { id: 'LIVE',
+ label: 'Live' },
+ { id: 'PLAYLISTS',
+ label: 'Playlists' },
+ { id: 'COMMUNITY',
+ label: 'Community' },
+ { id: 'ABOUT',
+ label: 'About' }];
 
-  useEffect(() => {
-    const fetchChannelData = async (): Promise<void> => {
-      if (!channelIdOrName) {
-        setError('Channel identifier is missing.');
-        setLoading(false);
-        return;
-      }
-      setLoading(true);
-      setError(null);
-      setActiveTab('HOME'); // Reset to home on new channel load
-      setIsSubscribed(Math.random() > 0.5);
+ useEffect(() => {
+ const fetchChannelData = async (): Promise<void> => {
+ if (!channelIdOrName) {
+ setError('Channel identifier is missing.');
+ setLoading(false);
+ return;
+ }
+ setLoading(true);
+ setError(null);
+ setActiveTab('HOME'); // Reset to home on new channel load
+ setIsSubscribed(Math.random() > 0.5);
 
-      try {
-        const decodedName = decodeURIComponent(channelIdOrName);
-        const fetchedChannel = await getChannelByName(decodedName);
+ try {
+ const decodedName = decodeURIComponent(channelIdOrName);
+ const fetchedChannel = await getChannelByName(decodedName);
 
-        if (fetchedChannel as any) {
-          setChannel(fetchedChannel);
-          // Fetch all data concurrently
-          const [
-            fetchedVideos,
-            fetchedPlaylists,
-            fetchedCommunityPosts] = await Promise.all([
-            getVideosByChannelName((fetchedChannel as any).name || decodedName),
-            getChannelPlaylists((fetchedChannel as any).name || decodedName),
-            getChannelCommunityPosts((fetchedChannel as any).name || decodedName)]);
-          setVideos(fetchedVideos);
-          setChannelPlaylists(fetchedPlaylists);
-          setChannelCommunityPosts(fetchedCommunityPosts);
+ if (fetchedChannel as any) {
+ setChannel(fetchedChannel);
+ // Fetch all data concurrently
+ const [
+ fetchedVideos,
+ fetchedPlaylists,
+ fetchedCommunityPosts] = await Promise.all([
+ getVideosByChannelName((fetchedChannel as any).name || decodedName),
+ getChannelPlaylists((fetchedChannel as any).name || decodedName),
+ getChannelCommunityPosts((fetchedChannel as any).name || decodedName)]);
+ setVideos(fetchedVideos);
+ setChannelPlaylists(fetchedPlaylists);
+ setChannelCommunityPosts(fetchedCommunityPosts);
 
-        } else {
-          // Create a mock channel if not found
-          const mockChannel = {
-            id: decodedName,
-          name: decodedName,
-            description: `Channel for ${decodedName}`,
-          avatarUrl: 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=CH',
-          banner: 'https://via.placeholder.com/1280/320/4ECDC4/FFFFFF?text=Channel+Banner',
-          subscribers: 0,
-            subscriberCount: '0',
-          videoCount: 0,
-            isVerified: false,
-          createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString() };
-          setChannel(mockChannel);
+ } else {
+ // Create a mock channel if not found
+ const mockChannel = {
+ id: decodedName,
+ name: decodedName,
+ description: `Channel for ${decodedName}`,
+ avatarUrl: 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=CH',
+ banner: 'https://via.placeholder.com/1280/320/4ECDC4/FFFFFF?text=Channel+Banner',
+ subscribers: 0,
+ subscriberCount: '0',
+ videoCount: 0,
+ isVerified: false,
+ createdAt: new Date().toISOString(),
+ updatedAt: new Date().toISOString() };
+ setChannel(mockChannel);
 
-          // Fetch videos for the channel name
-          const fetchedVideos = await getVideosByChannelName(decodedName);
-          setVideos(fetchedVideos);
-          setChannelPlaylists([]);
-          setChannelCommunityPosts([]);
-        }
+ // Fetch videos for the channel name
+ const fetchedVideos = await getVideosByChannelName(decodedName);
+ setVideos(fetchedVideos);
+ setChannelPlaylists([]);
+ setChannelCommunityPosts([]);
+ }
 
-        } catch (err: any) {
-        (console as any).error('Error fetching channel data:', err);
-        setError('Failed to load channel data. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
+ } catch (err: any) {
+ (console as any).error('Error fetching channel data:', err);
+ setError('Failed to load channel data. Please try again later.');
+ } finally {
+ setLoading(false);
+ };
 
-    fetchChannelData().catch(() => {
-      // Handle promise rejection silently
-    });
-    window.scrollTo(0, 0);
-  }, [channelIdOrName]);
+ fetchChannelData().catch(() => {
+ // Handle promise rejection silently
+ });
+ window.scrollTo(0, 0);
+ }, [channelIdOrName]);
 
-  const handleSubscribeToggle: any = () => {
-    setIsSubscribed(prev => !prev);
-  };
+ const handleSubscribeToggle: any = () => {
+ setIsSubscribed(prev => !prev);
+ };
 
-  if (loading as any) {
-    return <ChannelPageSkeleton />;
-  }
+ if (loading as any) {
+ return <ChannelPageSkeleton />;
+ }
 
-  if (error as any) {
-    return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}</div>;
-  }
+ if (error as any) {
+ return <div className="p-6 text-center text-red-500 dark:text-red-400 text-lg">{error}</div>;
+ }
 
-  if (!channel) {
-    return <div className="p-6 text-center text-neutral-600 dark: text-neutral-400 text-lg">Channel not found.</div>
-  }
+ if (!channel) {
+ return <div className="p-6 text-center text-neutral-600 dark: text-neutral-400 text-lg">Channel not found.</div>
+ }
 
-  return (
-    <div className="bg-white dark:bg-neutral-950 min-h-full">
-      <ChannelHeader
-        channel={channel}
-        videoCount={videos.length}
-        isSubscribed={isSubscribed}
-        onSubscribeToggle={handleSubscribeToggle}
-      />
+ return (
+ <div className="bg-white dark:bg-neutral-950 min-h-full">
+ <ChannelHeader
+ channel={channel}
+ videoCount={videos.length}
+ isSubscribed={isSubscribed}
+ onSubscribeToggle={handleSubscribeToggle}
+ />
 
-      <div className="px-4 md:px-6 lg:px-8">
-        <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
-      </div>
+ <div className="px-4 md:px-6 lg:px-8">
+ <ChannelTabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+ </div>
 
-      <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"> {/* Reduced py for less space */}
-        <ChannelTabContent
-          activeTab={activeTab}
-          channel={channel}
-          videos={videos}
-          playlists={channelPlaylists}
-          communityPosts={channelCommunityPosts}
-          onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
-        />
-      </div>
-    </div>
-  );
+ <div className="px-4 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3"> {/* Reduced py for less space */}
+ <ChannelTabContent
+ activeTab={activeTab}
+ channel={channel}
+ videos={videos}
+ playlists={channelPlaylists}
+ communityPosts={channelCommunityPosts}
+ onPlaylistTabSelect={() => setActiveTab('PLAYLISTS')}
+ />
+ </div>
+ </div>
+ );
 };
 
 export default ChannelPage;

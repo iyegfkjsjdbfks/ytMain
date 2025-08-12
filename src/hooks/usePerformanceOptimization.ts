@@ -2,175 +2,172 @@ import { useMemo, useCallback, useEffect, useRef, useState, lazy } from 'react';
 /// <reference types="node" />
 
 declare namespace NodeJS {
-  interface ProcessEnv {
-    [key: string]: string | undefined
-  }
-  interface Process {
-    env: ProcessEnv
-  }
-}
-
+ interface ProcessEnv {
+ [key: string]: string | undefined
+ }
+ interface Process {
+ env: ProcessEnv
+ }
 // Performance monitoring hook
 export const usePerformanceMonitor: any = (componentName: any) => {
-  const renderCount = useRef(0);
-  const startTime = useRef(performance.now());
+ const renderCount = useRef(0);
+ const startTime = useRef(performance.now());
 
-  useEffect(() => {
-    renderCount.current += 1;
-    const endTime = performance.now();
-    const renderTime = endTime - startTime.current;
+ useEffect(() => {
+ renderCount.current += 1;
+ const endTime = performance.now();
+ const renderTime = endTime - startTime.current;
 
-    if (import.meta.env.MODE === 'development') {
-      (console as any).log(
-        `${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`
-      );
-    }
+ if (import.meta.env.MODE === 'development') {
+ (console as any).log(
+ `${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`
+ );
+ }
 
-    startTime.current = performance.now();
-  });
+ startTime.current = performance.now();
+ });
 
-  return { renderCount: renderCount.current };
+ return { renderCount: renderCount.current };
 };
 
 // Debounced value hook
 export const useDebounce = <T>(value: T, delay: any): T => {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+ const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect(() => {
-    const handler = setTimeout((() => {
-      setDebouncedValue(value);
-    }) as any, delay);
+ useEffect(() => {
+ const handler = setTimeout((() => {
+ setDebouncedValue(value);
+ }) as any, delay);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
+ return () => {
+ clearTimeout(handler);
+ };
+ }, [value, delay]);
 
-  return debouncedValue;
+ return debouncedValue;
 };
 
 // Throttled callback hook
 export const useThrottle = <T extends (...args) => any>(,
-  callback: T,
-  delay: any
+ callback: T,
+ delay: any
 ): T => {
-  const lastCall = useRef(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+ const lastCall = useRef(0);
+ const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-  return useCallback(
-    ((...args: Parameters<T>) => {
-      const now = Date.now();
+ return useCallback(
+ ((...args: Parameters<T>) => {
+ const now = Date.now();
 
-      if (now - lastCall.current >= delay) {
-        lastCall.current = now;
-        return callback(...args);
-      }
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout((
-        () => {
-          lastCall.current = Date.now();
-          callback(...args);
-        }) as any,
-        delay - (now - lastCall.current)
-      );
-    }) as T,
-    [callback, delay]
-  );
+ if (now - lastCall.current >= delay) {
+ lastCall.current = now;
+ return callback(...args);
+ }
+ clearTimeout(timeoutRef.current);
+ timeoutRef.current = setTimeout((
+ () => {
+ lastCall.current = Date.now();
+ callback(...args);
+ }) as any,
+ delay - (now - lastCall.current)
+ );
+ }) as T,
+ [callback, delay]
+ );
 };
 
 // Memory usage monitoring
 export const useMemoryMonitor: any = () => {
-  const [memoryInfo, setMemoryInfo] = useState<{
-    usedJSHeapSize: number;
-    totalJSHeapSize: number;
-    jsHeapSizeLimit: number
-  } | null>(null);
+ const [memoryInfo, setMemoryInfo] = useState<{
+ usedJSHeapSize: number;
+ totalJSHeapSize: number;
+ jsHeapSizeLimit: number
+ } | null>(null);
 
-  useEffect(() => {
-    const updateMemoryInfo: any = () => {
-      if ('memory' in performance) {
-        const { memory } = performance as any;
-        setMemoryInfo({
-          usedJSHeapSize: memory.usedJSHeapSize,
-          totalJSHeapSize: memory.totalJSHeapSize,
-          jsHeapSizeLimit: memory.jsHeapSizeLimit });
-      }
-    };
+ useEffect(() => {
+ const updateMemoryInfo: any = () => {
+ if ('memory' in performance) {
+ const { memory } = performance as any;
+ setMemoryInfo({
+ usedJSHeapSize: memory.usedJSHeapSize,
+ totalJSHeapSize: memory.totalJSHeapSize,
+ jsHeapSizeLimit: memory.jsHeapSizeLimit });
+ };
 
-    updateMemoryInfo();
-    const interval = setInterval((updateMemoryInfo) as any, 5000);
+ updateMemoryInfo();
+ const interval = setInterval((updateMemoryInfo) as any, 5000);
 
-    return () => clearInterval(interval);
-  }, []);
+ return () => clearInterval(interval);
+ }, []);
 
-  return memoryInfo;
+ return memoryInfo;
 };
 
 // Intersection observer for lazy loading
 export const useIntersectionObserver: any = (,
-  options: IntersectionObserverInit = {}
+ options: IntersectionObserverInit = {}
 ) => {
-  const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
-  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
-  const elementRef = useRef<Element | null>(null);
+ const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
+ const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
+ const elementRef = useRef<Element | null>(null);
 
-  const setRef = useCallback((element: Element | null) => {
-    elementRef.current = element;
-  }, []);
+ const setRef = useCallback((element: Element | null) => {
+ elementRef.current = element;
+ }, []);
 
-  useEffect(() => {
-    const element = elementRef.current;
-    if (!element) {
-      return;
-    }
+ useEffect(() => {
+ const element = elementRef.current;
+ if (!element) {
+ return;
+ }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry as any) {
-          setIsIntersecting(entry.isIntersecting);
-          setEntry(entry);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '50px',
-        ...options }
-    );
+ const observer = new IntersectionObserver(
+ ([entry]) => {
+ if (entry as any) {
+ setIsIntersecting(entry.isIntersecting);
+ setEntry(entry);
+ }
+ },
+ {
+ threshold: 0.1,
+ rootMargin: '50px',
+ ...options }
+ );
 
-    observer.observe(element);
+ observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [options]);
+ return () => {
+ observer.disconnect();
+ };
+ }, [options]);
 
-  return { ref: setRef, isIntersecting, entry };
+ return { ref: setRef, isIntersecting, entry };
 };
 
 // Optimized state updates
 export const useBatchedUpdates = <T>(initialValue: T) => {
-  const [value, setValue] = useState(initialValue);
-  const pendingUpdates = useRef<Array<(prev: T) => T>>([]);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+ const [value, setValue] = useState(initialValue);
+ const pendingUpdates = useRef<Array<(prev: T) => T>>([]);
+ const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-  const batchedSetValue = useCallback((updater: (prev: T) => T) => {
-    pendingUpdates.current.push(updater);
+ const batchedSetValue = useCallback((updater: (prev: T) => T) => {
+ pendingUpdates.current.push(updater);
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+ if (timeoutRef.current) {
+ clearTimeout(timeoutRef.current);
+ }
 
-    timeoutRef.current = setTimeout((() => {
-      setValue(prev => {
-        let result = prev;
-        pendingUpdates.current.forEach(update => {
-          result = update(result);
-        });
-        pendingUpdates.current = [];
-        return result;
-      });
-    }) as any, 0);
-  }, []);
+ timeoutRef.current = setTimeout((() => {
+ setValue(prev => {
+ let result = prev;
+ pendingUpdates.current.forEach(update => {
+ result = update(result);
+ });
+ pendingUpdates.current = [];
+ return result;
+ });
+ }) as any, 0);
+ }, []);
 
-  return [value, batchedSetValue] as const;
+ return [value, batchedSetValue] as const;
 };

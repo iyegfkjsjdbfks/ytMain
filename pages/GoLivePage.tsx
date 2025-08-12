@@ -7,11 +7,11 @@ import { ComprehensiveLiveStudio } from '../src/features/livestream/components';
  * multi-platform streaming, scheduled streams, and live replays.
  */
 const GoLivePage: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <ComprehensiveLiveStudio />
-    </div>
-  );
+ return (
+ <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+ <ComprehensiveLiveStudio />
+ </div>
+ );
 };
 
 export default GoLivePage;

@@ -7,313 +7,311 @@ import type { Playlist, Video, ApiResponse } from '../../../types/core';
  */
 
 export interface CreatePlaylistData {
-  title: string;
-  description?: string;
-  visibility: 'public' | 'unlisted' | 'private';
-  tags?: string;
+ title: string;
+ description?: string;
+ visibility: 'public' | 'unlisted' | 'private';
+ tags?: string;
 }
 
 export interface UpdatePlaylistData extends Partial<CreatePlaylistData> {
-  id: string
+ id: string
 }
 
 export interface AddVideoToPlaylistData {
-  playlistId: string;
-  videoId: string;
-  position?: number;
+ playlistId: string;
+ videoId: string;
+ position?: number;
 }
 
 export interface ReorderPlaylistData {
-  playlistId: string;
-  videoId: string;
-  newPosition: number
+ playlistId: string;
+ videoId: string;
+ newPosition: number
 }
 
 export interface PlaylistFilters {
-  visibility?: 'public' | 'unlisted' | 'private' | 'all';
-  sortBy?: 'created' | 'updated' | 'title' | 'videoCount';
-  sortOrder?: 'asc' | 'desc';
-  search?: string;
+ visibility?: 'public' | 'unlisted' | 'private' | 'all';
+ sortBy?: 'created' | 'updated' | 'title' | 'videoCount';
+ sortOrder?: 'asc' | 'desc';
+ search?: string;
 }
 
 class PlaylistService {
-  /**
-   * Get user's playlists
-   */
-  async getUserPlaylists(,
-  filters: PlaylistFilters = {}
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get('/api/playlists', filters);
-  }
+ /**
+ * Get user's playlists
+ */
+ async getUserPlaylists(,
+ filters: PlaylistFilters = {}
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get('/api/playlists', filters);
+ }
 
-  /**
-   * Get a specific playlist by ID
-   */
-  async getPlaylist(playlistId: any): Promise<ApiResponse<Playlist>> {
-    return api.get(`/api/playlists/${playlistId}`);
-  }
+ /**
+ * Get a specific playlist by ID
+ */
+ async getPlaylist(playlistId: any): Promise<ApiResponse<Playlist>> {
+ return api.get(`/api/playlists/${playlistId}`);
+ }
 
-  /**
-   * Get playlist videos
-   */
-  async getPlaylistVideos(,
-  playlistId: any,
-    page: number = 1,
-    limit: number = 50
-  ): Promise<ApiResponse<Video[]>> {
-    return api.get(`/api/playlists/${playlistId}/videos`, { page, limit });
-  }
+ /**
+ * Get playlist videos
+ */
+ async getPlaylistVideos(,
+ playlistId: any,
+ page: number = 1,
+ limit: number = 50
+ ): Promise<ApiResponse<Video[]>> {
+ return api.get(`/api/playlists/${playlistId}/videos`, { page, limit });
+ }
 
-  /**
-   * Create a new playlist
-   */
-  async createPlaylist(,
-  data: CreatePlaylistData
-  ): Promise<ApiResponse<Playlist>> {
-    return api.post('/api/playlists', data);
-  }
+ /**
+ * Create a new playlist
+ */
+ async createPlaylist(,
+ data: CreatePlaylistData
+ ): Promise<ApiResponse<Playlist>> {
+ return api.post('/api/playlists', data);
+ }
 
-  /**
-   * Update playlist metadata
-   */
-  async updatePlaylist(,
-  data: UpdatePlaylistData
-  ): Promise<ApiResponse<Playlist>> {
-    const { id, ...updateData } = data;
-    return api.put(`/api/playlists/${id}`, updateData);
-  }
+ /**
+ * Update playlist metadata
+ */
+ async updatePlaylist(,
+ data: UpdatePlaylistData
+ ): Promise<ApiResponse<Playlist>> {
+ const { id, ...updateData } = data;
+ return api.put(`/api/playlists/${id}`, updateData);
+ }
 
-  /**
-   * Delete a playlist
-   */
-  async deletePlaylist(playlistId: any): Promise<ApiResponse<void>> {
-    return api.delete(`/api/playlists/${playlistId}`);
-  }
+ /**
+ * Delete a playlist
+ */
+ async deletePlaylist(playlistId: any): Promise<ApiResponse<void>> {
+ return api.delete(`/api/playlists/${playlistId}`);
+ }
 
-  /**
-   * Add video to playlist
-   */
-  async addVideoToPlaylist(,
-  data: AddVideoToPlaylistData
-  ): Promise<ApiResponse<void>> {
-    return api.post(`/api/playlists/${data.playlistId}/videos`, {
-      videoId: data.videoId,
-      position: data.position });
-  }
+ /**
+ * Add video to playlist
+ */
+ async addVideoToPlaylist(,
+ data: AddVideoToPlaylistData
+ ): Promise<ApiResponse<void>> {
+ return api.post(`/api/playlists/${data.playlistId}/videos`, {
+ videoId: data.videoId,
+ position: data.position });
+ }
 
-  /**
-   * Remove video from playlist
-   */
-  async removeVideoFromPlaylist(,
-  playlistId: any,
-    videoId: any
-  ): Promise<ApiResponse<void>> {
-    return api.delete(`/api/playlists/${playlistId}/videos/${videoId}`);
-  }
+ /**
+ * Remove video from playlist
+ */
+ async removeVideoFromPlaylist(,
+ playlistId: any,
+ videoId: any
+ ): Promise<ApiResponse<void>> {
+ return api.delete(`/api/playlists/${playlistId}/videos/${videoId}`);
+ }
 
-  /**
-   * Reorder videos in playlist
-   */
-  async reorderPlaylistVideos(,
-  data: ReorderPlaylistData
-  ): Promise<ApiResponse<void>> {
-    return api.patch(
-      `/api/playlists/${data.playlistId}/videos/${data.videoId}/position`,
-      {
-        newPosition: data.newPosition }
-    );
-  }
+ /**
+ * Reorder videos in playlist
+ */
+ async reorderPlaylistVideos(,
+ data: ReorderPlaylistData
+ ): Promise<ApiResponse<void>> {
+ return api.patch(
+ `/api/playlists/${data.playlistId}/videos/${data.videoId}/position`,
+ {
+ newPosition: data.newPosition }
+ );
+ }
 
-  /**
-   * Duplicate a playlist
-   */
-  async duplicatePlaylist(,
-  playlistId: any,
-    newTitle?: string
-  ): Promise<ApiResponse<Playlist>> {
-    return api.post(`/api/playlists/${playlistId}/duplicate`, {
-      title: newTitle });
-  }
+ /**
+ * Duplicate a playlist
+ */
+ async duplicatePlaylist(,
+ playlistId: any,
+ newTitle?: string
+ ): Promise<ApiResponse<Playlist>> {
+ return api.post(`/api/playlists/${playlistId}/duplicate`, {
+ title: newTitle });
+ }
 
-  /**
-   * Get public playlists by user
-   */
-  async getUserPublicPlaylists(,
-  userId: any,
-    page: number = 1,
-    limit: number = 20
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get(`/api/users/${userId}/playlists`, { page, limit });
-  }
+ /**
+ * Get public playlists by user
+ */
+ async getUserPublicPlaylists(,
+ userId: any,
+ page: number = 1,
+ limit: number = 20
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get(`/api/users/${userId}/playlists`, { page, limit });
+ }
 
-  /**
-   * Search playlists
-   */
-  async searchPlaylists(,
-  query: any,
-    filters: Omit<PlaylistFilters, 'search'> = {}
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get('/api/playlists/search', { query, ...filters });
-  }
+ /**
+ * Search playlists
+ */
+ async searchPlaylists(,
+ query: any,
+ filters: Omit<PlaylistFilters, 'search'> = {}
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get('/api/playlists/search', { query, ...filters });
+ }
 
-  /**
-   * Get featured/trending playlists
-   */
-  async getFeaturedPlaylists(,
-  page: number = 1,
-    limit: number = 20
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get('/api/playlists/featured', { page, limit });
-  }
+ /**
+ * Get featured/trending playlists
+ */
+ async getFeaturedPlaylists(,
+ page: number = 1,
+ limit: number = 20
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get('/api/playlists/featured', { page, limit });
+ }
 
-  /**
-   * Check if video is in playlist
-   */
-  async isVideoInPlaylist(,
-  playlistId: any,
-    videoId: any
-  ): Promise<ApiResponse<boolean>> {
-    return api.get(`/api/playlists/${playlistId}/videos/${videoId}/exists`);
-  }
+ /**
+ * Check if video is in playlist
+ */
+ async isVideoInPlaylist(,
+ playlistId: any,
+ videoId: any
+ ): Promise<ApiResponse<boolean>> {
+ return api.get(`/api/playlists/${playlistId}/videos/${videoId}/exists`);
+ }
 
-  /**
-   * Get playlist statistics
-   */
-  async getPlaylistStats(playlistId: any): Promise<
-    ApiResponse<{
-      totalViews: number;
-      totalDuration: number;
-      averageRating: number;
-      lastUpdated: string
-    }>
-  > {
-    return api.get(`/api/playlists/${playlistId}/stats`);
-  }
+ /**
+ * Get playlist statistics
+ */
+ async getPlaylistStats(playlistId: any): Promise<
+ ApiResponse<{
+ totalViews: number;
+ totalDuration: number;
+ averageRating: number;
+ lastUpdated: string
+ }>
+ > {
+ return api.get(`/api/playlists/${playlistId}/stats`);
+ }
 
-  /**
-   * Export playlist
-   */
-  async exportPlaylist(,
-  playlistId: any,
-    format: 'json' | 'csv' | 'm3u'
-  ): Promise<ApiResponse<string>> {
-    return api.get(`/api/playlists/${playlistId}/export`, { format });
-  }
+ /**
+ * Export playlist
+ */
+ async exportPlaylist(,
+ playlistId: any,
+ format: 'json' | 'csv' | 'm3u'
+ ): Promise<ApiResponse<string>> {
+ return api.get(`/api/playlists/${playlistId}/export`, { format });
+ }
 
-  /**
-   * Import playlist
-   */
-  async importPlaylist(,
-  file: File,
-    format: 'json' | 'csv' | 'm3u'
-  ): Promise<ApiResponse<Playlist>> {
-    return api.upload('/api/playlists/import', file, { format });
-  }
+ /**
+ * Import playlist
+ */
+ async importPlaylist(,
+ file: File,
+ format: 'json' | 'csv' | 'm3u'
+ ): Promise<ApiResponse<Playlist>> {
+ return api.upload('/api/playlists/import', file, { format });
+ }
 
-  /**
-   * Get recommended playlists
-   */
-  async getRecommendedPlaylists(,
-  page: number = 1,
-    limit: number = 20
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get('/api/playlists/recommendations', { page, limit });
-  }
+ /**
+ * Get recommended playlists
+ */
+ async getRecommendedPlaylists(,
+ page: number = 1,
+ limit: number = 20
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get('/api/playlists/recommendations', { page, limit });
+ }
 
-  /**
-   * Follow/unfollow a playlist
-   */
-  async followPlaylist(playlistId: any): Promise<ApiResponse<void>> {
-    return api.post(`/api/playlists/${playlistId}/follow`);
-  }
+ /**
+ * Follow/unfollow a playlist
+ */
+ async followPlaylist(playlistId: any): Promise<ApiResponse<void>> {
+ return api.post(`/api/playlists/${playlistId}/follow`);
+ }
 
-  async unfollowPlaylist(playlistId: any): Promise<ApiResponse<void>> {
-    return api.delete(`/api/playlists/${playlistId}/follow`);
-  }
+ async unfollowPlaylist(playlistId: any): Promise<ApiResponse<void>> {
+ return api.delete(`/api/playlists/${playlistId}/follow`);
+ }
 
-  /**
-   * Get followed playlists
-   */
-  async getFollowedPlaylists(,
-  page: number = 1,
-    limit: number = 20
-  ): Promise<ApiResponse<Playlist[]>> {
-    return api.get('/api/playlists/followed', { page, limit });
-  }
+ /**
+ * Get followed playlists
+ */
+ async getFollowedPlaylists(,
+ page: number = 1,
+ limit: number = 20
+ ): Promise<ApiResponse<Playlist[]>> {
+ return api.get('/api/playlists/followed', { page, limit });
+ }
 
-  /**
-   * Collaborate on playlist (add collaborators)
-   */
-  async addCollaborator(,
-  playlistId: any,
-    userId: any,
-    permissions: Array<'view' | 'edit' | 'manage'>
-  ): Promise<ApiResponse<void>> {
-    return api.post(`/api/playlists/${playlistId}/collaborators`, {
-      userId,
-      permissions });
-  }
+ /**
+ * Collaborate on playlist (add collaborators)
+ */
+ async addCollaborator(,
+ playlistId: any,
+ userId: any,
+ permissions: Array<'view' | 'edit' | 'manage'>
+ ): Promise<ApiResponse<void>> {
+ return api.post(`/api/playlists/${playlistId}/collaborators`, {
+ userId,
+ permissions });
+ }
 
-  async removeCollaborator(,
-  playlistId: any,
-    userId: any
-  ): Promise<ApiResponse<void>> {
-    return api.delete(`/api/playlists/${playlistId}/collaborators/${userId}`);
-  }
+ async removeCollaborator(,
+ playlistId: any,
+ userId: any
+ ): Promise<ApiResponse<void>> {
+ return api.delete(`/api/playlists/${playlistId}/collaborators/${userId}`);
+ }
 
-  /**
-   * Get playlist collaborators
-   */
-  async getPlaylistCollaborators(playlistId: any): Promise<
-    ApiResponse<
-      Array<{
-        userId: string;
-        username: string;
-        avatar?: string;
-        permissions: string;
-        addedAt: string
-      }>
-    >
-  > {
-    return api.get(`/api/playlists/${playlistId}/collaborators`);
-  }
+ /**
+ * Get playlist collaborators
+ */
+ async getPlaylistCollaborators(playlistId: any): Promise<
+ ApiResponse<
+ Array<{
+ userId: string;
+ username: string;
+ avatar?: string;
+ permissions: string;
+ addedAt: string
+ }>
+ >
+ > {
+ return api.get(`/api/playlists/${playlistId}/collaborators`);
+ }
 
-  /**
-   * Bulk operations
-   */
-  async bulkAddVideos(,
-  playlistId: any,
-    videoIds: any
-  ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
-    return api.post(`/api/playlists/${playlistId}/videos/bulk`, { videoIds });
-  }
+ /**
+ * Bulk operations
+ */
+ async bulkAddVideos(,
+ playlistId: any,
+ videoIds: any
+ ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
+ return api.post(`/api/playlists/${playlistId}/videos/bulk`, { videoIds });
+ }
 
-  async bulkRemoveVideos(,
-  playlistId: any,
-    videoIds: any
-  ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
-    return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
-      body: JSON.stringify({ videoIds }),
-      headers: { 'Content-Type': 'application/json' } });
-  }
+ async bulkRemoveVideos(,
+ playlistId: any,
+ videoIds: any
+ ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
+ return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
+ body: JSON.stringify({ videoIds }),
+ headers: { 'Content-Type': 'application/json' } });
+ }
 
-  /**
-   * Generate playlist thumbnail
-   */
-  async generateThumbnail(playlistId: any): Promise<ApiResponse<string>> {
-    return api.post(`/api/playlists/${playlistId}/thumbnail/generate`);
-  }
+ /**
+ * Generate playlist thumbnail
+ */
+ async generateThumbnail(playlistId: any): Promise<ApiResponse<string>> {
+ return api.post(`/api/playlists/${playlistId}/thumbnail/generate`);
+ }
 
-  /**
-   * Upload custom playlist thumbnail
-   */
-  async uploadThumbnail(,
-  playlistId: any,
-    thumbnail: File
-  ): Promise<ApiResponse<string>> {
-    return api.upload(`/api/playlists/${playlistId}/thumbnail`, thumbnail);
-  }
-}
-
+ /**
+ * Upload custom playlist thumbnail
+ */
+ async uploadThumbnail(,
+ playlistId: any,
+ thumbnail: File
+ ): Promise<ApiResponse<string>> {
+ return api.upload(`/api/playlists/${playlistId}/thumbnail`, thumbnail);
+ }
 export const playlistService = new PlaylistService();
 export default playlistService;

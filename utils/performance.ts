@@ -2,313 +2,301 @@ import React, { useEffect, forwardRef } from 'react';
 // / <reference types="vite/client" />
 // Performance monitoring utilities for React components
 interface PerformanceMetric {
-  name: string;
-  startTime: number;
-  endTime?: number;
-  duration?: number;
-  metadata?: Record<string, any>;
+ name: string;
+ startTime: number;
+ endTime?: number;
+ duration?: number;
+ metadata?: Record<string, any>;
 }
 
 class PerformanceMonitor {
-  private metrics: Map<string, PerformanceMetric> = new Map();
-  private observers: PerformanceObserver[] = [];
-  private isEnabled: boolean = import.meta.env.MODE === 'development';
+ private metrics: Map<string, PerformanceMetric> = new Map();
+ private observers: PerformanceObserver[] = [];
+ private isEnabled: boolean = import.meta.env.MODE === 'development';
 
-  constructor() {
-    if (this.isEnabled && typeof window !== 'undefined' && 'PerformanceObserver' in window) {
-      this.setupObservers();
-    }
-  }
+ constructor() {
+ if (this.isEnabled && typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+ this.setupObservers();
+ }
+ private setupObservers() {
+ // Observe paint metrics
+ try {
+ const paintObserver = new PerformanceObserver((list: any) => {
+ list.getEntries().forEach((_entry: any) => {
+ });
+ });
+ paintObserver.observe({ entryTypes: ['paint'] });
+ this.observers.push(paintObserver);
+ } catch (e) {
+ // PerformanceObserver not supported
+ }
 
-  private setupObservers() {
-    // Observe paint metrics
-    try {
-      const paintObserver = new PerformanceObserver((list: any) => {
-        list.getEntries().forEach((_entry: any) => {
-          });
-      });
-      paintObserver.observe({ entryTypes: ['paint'] });
-      this.observers.push(paintObserver);
-    } catch (e) {
-      // PerformanceObserver not supported
-    }
-
-    // Observe navigation metrics
-    try {
-      const navigationObserver = new PerformanceObserver((list: any) => {
-        list.getEntries().forEach((_entry: any) => {
-          // Performance monitoring disabled
-          // const navigation = _entry as PerformanceNavigationTiming;
-          // (console as any).log('Navigation timing:', navigation);
-          });
-      });
-      navigationObserver.observe({ entryTypes: ['navigation'] });
-      this.observers.push(navigationObserver);
-    } catch (e) {
-      // PerformanceObserver not supported
-    }
-  }
-
-  startMeasure(name: any, metadata?: Record<string, any>): void {
-    if (!this.isEnabled) {
+ // Observe navigation metrics
+ try {
+ const navigationObserver = new PerformanceObserver((list: any) => {
+ list.getEntries().forEach((_entry: any) => {
+ // Performance monitoring disabled
+ // const navigation = _entry as PerformanceNavigationTiming;
+ // (console as any).log('Navigation timing:', navigation);
+ });
+ });
+ navigationObserver.observe({ entryTypes: ['navigation'] });
+ this.observers.push(navigationObserver);
+ } catch (e) {
+ // PerformanceObserver not supported
+ }
+ startMeasure(name: any, metadata?: Record<string, any>): void {
+ if (!this.isEnabled) {
 return;
 }
 
-    const metric: PerformanceMetric = {
-      name,
-      startTime: performance.now(),
-      metadata: metadata || {} };
+ const metric: PerformanceMetric = {
+ name,
+ startTime: performance.now(),
+ metadata: metadata || {};
 
-    this.metrics.set(name, metric);
+ this.metrics.set(name, metric);
 
-    if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
-      performance.mark(`${name}-start`);
-    }
-  }
+ if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function') {
+ performance.mark(`${name}-start`);
+ }
+ hasMetric(name: any): boolean {
+ return this.metrics.has(name);
+ }
 
-  hasMetric(name: any): boolean {
-    return this.metrics.has(name);
-  }
-
-  endMeasure(name: any): number | null {
-    if (!this.isEnabled) {
+ endMeasure(name: any): number | null {
+ if (!this.isEnabled) {
 return null;
 }
 
-    const metric = this.metrics.get(name);
-    if (!metric) {
-      if (import.meta.env.MODE === 'development') {
-        (console as any).warn(`Performance metric '${name}' not found`);
-      }
-      return null;
-    }
+ const metric = this.metrics.get(name);
+ if (!metric) {
+ if (import.meta.env.MODE === 'development') {
+ (console as any).warn(`Performance metric '${name}' not found`);
+ }
+ return null;
+ }
 
-    const endTime = performance.now();
-    const duration = endTime - metric.startTime;
+ const endTime = performance.now();
+ const duration = endTime - metric.startTime;
 
-    metric.endTime = endTime;
-    metric.duration = duration;
+ metric.endTime = endTime;
+ metric.duration = duration;
 
-    if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function' && typeof window.performance.measure === 'function') {
-      performance.mark(`${name}-end`);
-      performance.measure(name, `${name}-start`, `${name}-end`);
-    }
+ if (typeof window !== 'undefined' && window.performance && typeof window.performance.mark === 'function' && typeof window.performance.measure === 'function') {
+ performance.mark(`${name}-end`);
+ performance.measure(name, `${name}-start`, `${name}-end`);
+ }
 
-    // Log slow operations with different thresholds for different operation types
-    const getThreshold: any = (operationName: any): number => {
-      if (operationName.startsWith('image-load')) {
+ // Log slow operations with different thresholds for different operation types
+ const getThreshold: any = (operationName: any): number => {
+ if (operationName.startsWith('image-load')) {
 return 2000;
 } // 2s for images
-      if (operationName.includes('search')) {
+ if (operationName.includes('search')) {
 return 1500;
 } // 1.5s for search
-      return 100; // Default 100ms
-    };
+ return 100; // Default 100ms
+ };
 
-    const threshold = getThreshold(name);
-    if (duration > threshold) {
-      (console as any).warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
-    }
+ const threshold = getThreshold(name);
+ if (duration > threshold) {
+ (console as any).warn(`⚠️ Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, metric.metadata);
+ }
 
-    return duration;
-  }
+ return duration;
+ }
 
-  getMetrics(): PerformanceMetric[] {
-    return Array.from(this.metrics.values()).filter((m) => m.duration !== undefined);
-  }
+ getMetrics(): PerformanceMetric[] {
+ return Array.from(this.metrics.values()).filter((m) => m.duration !== undefined);
+ }
 
-  clearMetrics(): void {
-    this.metrics.clear();
-    if (typeof window !== 'undefined' && window.performance && typeof window.performance.clearMarks === 'function') {
-      performance.clearMarks();
-      performance.clearMeasures();
-    }
-  }
-
-  getAverageTime(name: any): number | null {
-    const metrics = this.getMetrics().filter((m) => m.name === name);
-    if (metrics.length === 0) {
+ clearMetrics(): void {
+ this.metrics.clear();
+ if (typeof window !== 'undefined' && window.performance && typeof window.performance.clearMarks === 'function') {
+ performance.clearMarks();
+ performance.clearMeasures();
+ }
+ getAverageTime(name: any): number | null {
+ const metrics = this.getMetrics().filter((m) => m.name === name);
+ if (metrics.length === 0) {
 return null;
 }
 
-    const total = metrics.reduce((sum, m) => sum + (m.duration || 0), 0);
-    return total / metrics.length;
-  }
+ const total = metrics.reduce((sum, m) => sum + (m.duration || 0), 0);
+ return total / metrics.length;
+ }
 
-  logSummary(): void {
-    if (!this.isEnabled) {
+ logSummary(): void {
+ if (!this.isEnabled) {
 return;
 }
 
-    const metrics = this.getMetrics();
-    if (metrics.length === 0) {
-      return;
-    }
+ const metrics = this.getMetrics();
+ if (metrics.length === 0) {
+ return;
+ }
 
-    (console as any).group('📊 Performance Summary');
+ (console as any).group('📊 Performance Summary');
 
-    // Group by name and calculate averages
-    const grouped = metrics.reduce((acc: any, metric: any) => {
-      if (metric.name && !acc[metric.name]) {
-        acc[metric.name] = [];
-      }
-      if (metric.name && metric.duration !== undefined && acc[metric.name]) {
-        acc[metric.name]!.push(metric.duration);
-      }
-      return acc;
-    }, {} as Record<string, number[]>);
+ // Group by name and calculate averages
+ const grouped = metrics.reduce((acc: any, metric: any) => {
+ if (metric.name && !acc[metric.name]) {
+ acc[metric.name] = [];
+ }
+ if (metric.name && metric.duration !== undefined && acc[metric.name]) {
+ acc[metric.name]!.push(metric.duration);
+ }
+ return acc;
+ }, {} as Record<string, number[]>);
 
-    Object.entries(grouped).forEach(([_name, _durations]) => {
-      // const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
-      // const _min = Math.min(...durations);
-      // const _max = Math.max(...durations);
+ Object.entries(grouped).forEach(([_name, _durations]) => {
+ // const _avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+ // const _min = Math.min(...durations);
+ // const _max = Math.max(...durations);
 
-      });
+ });
 
-    (console as any).groupEnd();
-  }
+ (console as any).groupEnd();
+ }
 
-  disconnect(): void {
-    this.observers.forEach((observer) => observer.disconnect());
-    this.observers = [];
-  }
-}
-
+ disconnect(): void {
+ this.observers.forEach((observer) => observer.disconnect());
+ this.observers = [];
+ }
 // Global instance
 export const performanceMonitor = new PerformanceMonitor();
 
 // React Hook for component performance monitoring
 export function usePerformanceMonitor(componentName: any): any {
-  const startRender: any = () => {
-    performanceMonitor.startMeasure(`${componentName}-render`);
-  };
+ const startRender: any = () => {
+ performanceMonitor.startMeasure(`${componentName}-render`);
+ };
 
-  const endRender: any = () => {
-    const metricName = `${componentName}-render`;
-    return performanceMonitor.hasMetric(metricName)
-      ? performanceMonitor.endMeasure(metricName)
-      : null;
-  };
+ const endRender: any = () => {
+ const metricName = `${componentName}-render`;
+ return performanceMonitor.hasMetric(metricName)
+ ? performanceMonitor.endMeasure(metricName)
+ : null;
+ };
 
-  const measureAsync = async <T>(operationName: any, operation: () => Promise<T>): Promise<T> => {
-    const fullName = `${componentName}-${operationName}`;
-    performanceMonitor.startMeasure(fullName);
-    try {
-      const result = await operation();
-      if (performanceMonitor.hasMetric(fullName)) {
-        performanceMonitor.endMeasure(fullName);
-      }
-      return result;
-    } catch (error: any) {
-      if (performanceMonitor.hasMetric(fullName)) {
-        performanceMonitor.endMeasure(fullName);
-      }
-      throw error;
-    }
-  };
+ const measureAsync = async <T>(operationName: any, operation: () => Promise<T>): Promise<T> => {
+ const fullName = `${componentName}-${operationName}`;
+ performanceMonitor.startMeasure(fullName);
+ try {
+ const result = await operation();
+ if (performanceMonitor.hasMetric(fullName)) {
+ performanceMonitor.endMeasure(fullName);
+ }
+ return result;
+ } catch (error: any) {
+ if (performanceMonitor.hasMetric(fullName)) {
+ performanceMonitor.endMeasure(fullName);
+ }
+ throw error;
+ };
 
-  const measureSync = <T>(operationName: any, operation: () => T): T => {
-    const fullName = `${componentName}-${operationName}`;
-    performanceMonitor.startMeasure(fullName);
-    try {
-      const result = operation();
-      if (performanceMonitor.hasMetric(fullName)) {
-        performanceMonitor.endMeasure(fullName);
-      }
-      return result;
-    } catch (error: any) {
-      if (performanceMonitor.hasMetric(fullName)) {
-        performanceMonitor.endMeasure(fullName);
-      }
-      throw error;
-    }
-  };
+ const measureSync = <T>(operationName: any, operation: () => T): T => {
+ const fullName = `${componentName}-${operationName}`;
+ performanceMonitor.startMeasure(fullName);
+ try {
+ const result = operation();
+ if (performanceMonitor.hasMetric(fullName)) {
+ performanceMonitor.endMeasure(fullName);
+ }
+ return result;
+ } catch (error: any) {
+ if (performanceMonitor.hasMetric(fullName)) {
+ performanceMonitor.endMeasure(fullName);
+ }
+ throw error;
+ };
 
-  return {
-    startRender,
-    endRender,
-    measureAsync,
-    measureSync };
+ return {
+ startRender,
+ endRender,
+ measureAsync,
+ measureSync };
 }
 
 // Higher-order component for automatic performance monitoring
 export function withPerformanceMonitoring<P extends object>(,
-  WrappedComponent: React.ComponentType<P>
-  componentName?: string) {
-  const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
+ WrappedComponent: React.ComponentType<P>
+ componentName?: string) {
+ const displayName = componentName || WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const MonitoredComponent = React.forwardRef<any, P>((props: any, ref: any) => {
-    const { startRender, endRender } = usePerformanceMonitor(displayName);
+ const MonitoredComponent = React.forwardRef<any, P>((props: any, ref: any) => {
+ const { startRender, endRender } = usePerformanceMonitor(displayName);
 
-    useEffect(() => {
-      startRender();
-      return () => {
-        endRender();
-      };
-    });
+ useEffect(() => {
+ startRender();
+ return () => {
+ endRender();
+ };
+ });
 
-    return React.createElement(WrappedComponent, { ...props as any, ref });
-  });
+ return React.createElement(WrappedComponent, { ...props as any, ref });
+ });
 
-  MonitoredComponent.displayName = `withPerformanceMonitoring(${displayName})`;
+ MonitoredComponent.displayName = `withPerformanceMonitoring(${displayName})`;
 
-  return MonitoredComponent;
+ return MonitoredComponent;
 }
 
 // Utility functions
 export const measureRenderTime: any = (componentName: any) => {
-  return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
-    const originalMethod = descriptor.value;
+ return (_target: any, propertyKey: any, descriptor: PropertyDescriptor) => {
+ const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args) {
-      const metricName = `${componentName}-${propertyKey}`;
-      performanceMonitor.startMeasure(metricName);
-      const result = originalMethod.apply(this, args);
-      if (performanceMonitor.hasMetric(metricName)) {
-        performanceMonitor.endMeasure(metricName);
-      }
-      return result;
-    };
+ descriptor.value = function (...args) {
+ const metricName = `${componentName}-${propertyKey}`;
+ performanceMonitor.startMeasure(metricName);
+ const result = originalMethod.apply(this, args);
+ if (performanceMonitor.hasMetric(metricName)) {
+ performanceMonitor.endMeasure(metricName);
+ }
+ return result;
+ };
 
-    return descriptor;
-  };
+ return descriptor;
+ };
 };
 
 // Bundle size analyzer
 export const analyzeBundleSize: any = () => {
-  if (typeof window === 'undefined') {
+ if (typeof window === 'undefined') {
 return;
 }
 
-  const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
-  const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
+ const scripts = Array.from(document.querySelectorAll<HTMLScriptElement>('script[src]'));
+ const styles = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'));
 
-  (console as any).group('📦 Bundle Analysis');
-  // Estimate bundle sizes (this is approximate)
-  scripts.forEach((script: any) => {
-    if (script.src && !script.src.includes('chrome-extension')) {
-      // Placeholder for size analysis if needed
-    }
-  });
+ (console as any).group('📦 Bundle Analysis');
+ // Estimate bundle sizes (this is approximate)
+ scripts.forEach((script: any) => {
+ if (script.src && !script.src.includes('chrome-extension')) {
+ // Placeholder for size analysis if needed
+ }
+ });
 
-  styles.forEach((style: any) => {
-    if (style.href && !style.href.includes('chrome-extension')) {
-      // Placeholder for size analysis if needed
-    }
-  });
+ styles.forEach((style: any) => {
+ if (style.href && !style.href.includes('chrome-extension')) {
+ // Placeholder for size analysis if needed
+ }
+ });
 
-  (console as any).groupEnd();
+ (console as any).groupEnd();
 };
 
 // Memory usage monitoring
 export const monitorMemoryUsage: any = () => {
-  if (typeof window === 'undefined' || !(window.performance as any)?.memory) {
-    (console as any).warn('Memory monitoring not supported in this browser');
-    return;
-  }
+ if (typeof window === 'undefined' || !(window.performance as any)?.memory) {
+ (console as any).warn('Memory monitoring not supported in this browser');
+ return;
+ }
 
-  // const _memory: any = (window.performance as any).memory;
+ // const _memory: any = (window.performance as any).memory;
 
-  };
+ };
 
 // End of utilities

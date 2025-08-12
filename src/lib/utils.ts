@@ -1,14 +1,12 @@
 /// <reference types="node" />
 
 declare namespace NodeJS {
-  interface ProcessEnv {
-    [key: string]: string | undefined
-  }
-  interface Process {
-    env: ProcessEnv
-  }
-}
-
+ interface ProcessEnv {
+ [key: string]: string | undefined
+ }
+ interface Process {
+ env: ProcessEnv
+ }
 import { twMerge } from 'tailwind-merge';
 import { clsx, type ClassValue } from 'clsx';
 import React from 'react';
@@ -23,7 +21,7 @@ import React from 'react';
  * @returns A single string of combined and merged class names
  */
 export function cn(...inputs: ClassValue[]): string {
-  return twMerge(clsx(inputs));
+ return twMerge(clsx(inputs));
 }
 
 // =================================
@@ -37,19 +35,19 @@ export function cn(...inputs: ClassValue[]): string {
  * @returns Formatted number as string with suffix
  */
 export function formatNumber(num: any, decimals: number = 1): string {
-  if (num >= 1000000000) {
-    return `${(num / 1000000000).toFixed(decimals)}B`;
-  }
+ if (num >= 1000000000) {
+ return `${(num / 1000000000).toFixed(decimals)}B`;
+ }
 
-  if (num >= 1000000) {
-    return `${(num / 1000000).toFixed(decimals)}M`;
-  }
+ if (num >= 1000000) {
+ return `${(num / 1000000).toFixed(decimals)}M`;
+ }
 
-  if (num >= 1000) {
-    return `${(num / 1000).toFixed(decimals)}K`;
-  }
+ if (num >= 1000) {
+ return `${(num / 1000).toFixed(decimals)}K`;
+ }
 
-  return num.toString();
+ return num.toString();
 }
 
 /**
@@ -58,7 +56,7 @@ export function formatNumber(num: any, decimals: number = 1): string {
  * @returns Formatted number string with commas
  */
 export function formatNumberWithCommas(num: any): string {
-  return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
+ return num.toString().replace(/\B(?=(\d{3})(?!\d))/g, ',');
 }
 
 /**
@@ -69,7 +67,7 @@ export function formatNumberWithCommas(num: any): string {
  * @returns The clamped number
  */
 export function clamp(num: any, min: any, max: any): number {
-  return Math.min(Math.max(num, min), max);
+ return Math.min(Math.max(num, min), max);
 }
 
 /**
@@ -79,11 +77,11 @@ export function clamp(num: any, min: any, max: any): number {
  * @returns Formatted number as string with suffix
  */
 export function formatCount(,
-  num: number | string,
-  decimals: number = 1
+ num: number | string,
+ decimals: number = 1
 ): string {
-  const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
-  return formatNumber(numValue, decimals);
+ const numValue = typeof num === 'string' ? parseInt(num, 10) : num;
+ return formatNumber(numValue, decimals);
 }
 
 // =================================
@@ -96,18 +94,18 @@ export function formatCount(,
  * @returns Formatted time string
  */
 export function formatDuration(seconds: any): string {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = Math.floor(seconds % 60);
+ const h = Math.floor(seconds / 3600);
+ const m = Math.floor((seconds % 3600) / 60);
+ const s = Math.floor(seconds % 60);
 
-  const parts = [];
-  if (h > 0) {
-    parts.push(h.toString().padStart(2, '0'));
-  }
-  parts.push(m.toString().padStart(2, '0'));
-  parts.push(s.toString().padStart(2, '0'));
+ const parts = [];
+ if (h > 0) {
+ parts.push(h.toString().padStart(2, '0'));
+ }
+ parts.push(m.toString().padStart(2, '0'));
+ parts.push(s.toString().padStart(2, '0'));
 
-  return parts.join(':');
+ return parts.join(':');
 }
 
 /**
@@ -116,27 +114,25 @@ export function formatDuration(seconds: any): string {
  * @returns Relative time string
  */
 export function formatRelativeTime(date: Date | string): string {
-  const now = new Date();
-  const target = new Date(date);
-  const diffInSeconds = Math.floor((now.getTime() - target.getTime()) / 1000);
+ const now = new Date();
+ const target = new Date(date);
+ const diffInSeconds = Math.floor((now.getTime() - target.getTime()) / 1000);
 
-  const intervals = {
-    year: 31536000,
-    month: 2592000,
-    week: 604800,
-    day: 86400,
-    hour: 3600,
-    minute: 60,
-    second: 1 };
+ const intervals = {
+ year: 31536000,
+ month: 2592000,
+ week: 604800,
+ day: 86400,
+ hour: 3600,
+ minute: 60,
+ second: 1 };
 
-  for (const [unit, seconds] of Object.entries(intervals)) {
-    const interval = Math.floor(diffInSeconds / seconds);
-    if (interval >= 1) {
-      return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
-    }
-  }
-
-  return 'just now';
+ for (const [unit, seconds] of Object.entries(intervals)) {
+ const interval = Math.floor(diffInSeconds / seconds);
+ if (interval >= 1) {
+ return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
+ }
+ return 'just now';
 }
 
 /**
@@ -145,7 +141,7 @@ export function formatRelativeTime(date: Date | string): string {
  * @returns Relative time string
  */
 export function getTimeAgo(date: Date | string): string {
-  return formatRelativeTime(date);
+ return formatRelativeTime(date);
 }
 
 /**
@@ -155,13 +151,13 @@ export function getTimeAgo(date: Date | string): string {
  * @returns Formatted date string
  */
 export function formatDate(,
-  date: Date | string,
-  options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric' }
+ date: Date | string,
+ options: Intl.DateTimeFormatOptions = {
+ year: 'numeric',
+ month: 'short',
+ day: 'numeric' }
 ): string {
-  return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+ return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
 // =================================
@@ -176,10 +172,10 @@ export function formatDate(,
  * @returns Truncated string with ellipsis if needed
  */
 export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
-  if (!str || str.length <= maxLength) {
-    return str;
-  }
-  return str.slice(0, maxLength) + ellipsis;
+ if (!str || str.length <= maxLength) {
+ return str;
+ }
+ return str.slice(0, maxLength) + ellipsis;
 }
 
 /**
@@ -188,8 +184,8 @@ export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
  * @returns String in title case
  */
 export function toTitleCase(str: any): string {
-  return str.replace(/\w\S*/g(txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
-  );
+ return str.replace(/\w\S*/g(txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+ );
 }
 
 /**
@@ -198,10 +194,10 @@ export function toTitleCase(str: any): string {
  * @returns kebab-case string
  */
 export function toKebabCase(str: any): string {
-  return str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
+ return str
+ .replace(/([a-z])([A-Z])/g, '$1-$2')
+ .replace(/[\s_]+/g, '-')
+ .toLowerCase();
 }
 
 // =================================
@@ -217,23 +213,22 @@ export * from './youtube-utils';
  * @returns Query string (without leading ? )
  */
 export function buildQueryString(params: Record<string, any>): string {
-  const searchParams = new URLSearchParams();
+ const searchParams = new URLSearchParams();
 
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      if (Array.isArray(value)) {
-        value.forEach(item => {
-          if (item !== undefined && item !== null) {
-            searchParams.append(key, String(item));
-          }
-        });
-      } else {
-        searchParams.append(key, String(value));
-      }
-    }
-  });
+ Object.entries(params).forEach(([key, value]) => {
+ if (value !== undefined && value !== null) {
+ if (Array.isArray(value)) {
+ value.forEach(item => {
+ if (item !== undefined && item !== null) {
+ searchParams.append(key, String(item));
+ }
+ });
+ } else {
+ searchParams.append(key, String(value));
+ }
+ });
 
-  return searchParams.toString();
+ return searchParams.toString();
 }
 
 // =================================
@@ -246,7 +241,7 @@ export function buildQueryString(params: Record<string, any>): string {
  * @returns True if the value is an object (and not null/array)
  */
 export function isObject(value: string | number): value is Record<string, any> {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
+ return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
 /**
@@ -255,7 +250,7 @@ export function isObject(value: string | number): value is Record<string, any> {
  * @returns True if the value is a function
  */
 export function isFunction(value: string | number): value is (...args: any[]) => any {
-  return typeof value === 'function';
+ return typeof value === 'function';
 }
 
 /**
@@ -264,14 +259,12 @@ export function isFunction(value: string | number): value is (...args: any[]) =>
  * @returns True if the string is a valid URL
  */
 export function isValidUrl(str: any): boolean {
-  try {
-    const url = new URL(str);
-    return Boolean(url);
-  } catch (e) {
-    return false;
-  }
-}
-
+ try {
+ const url = new URL(str);
+ return Boolean(url);
+ } catch (e) {
+ return false;
+ }
 // =================================
 // 7. Debounce & Throttle
 // =================================
@@ -284,20 +277,20 @@ export function isValidUrl(str: any): boolean {
  * @returns A new debounced function
  */
 export function debounce<T extends (...args: any[]) => any>(,
-  func: T,
-  wait: any
+ func: T,
+ wait: any
 ): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout>;
+ let timeout: ReturnType<typeof setTimeout>;
 
-  return function executedFunction(...args: Parameters<T>): any {
-    const later: any = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
+ return function executedFunction(...args: Parameters<T>): any {
+ const later: any = () => {
+ clearTimeout(timeout);
+ func(...args);
+ };
 
-    clearTimeout(timeout);
-    timeout = setTimeout((later) as any, wait);
-  };
+ clearTimeout(timeout);
+ timeout = setTimeout((later) as any, wait);
+ };
 }
 
 /**
@@ -307,18 +300,17 @@ export function debounce<T extends (...args: any[]) => any>(,
  * @returns A new throttled function
  */
 export function throttle<T extends (...args: any[]) => any>(,
-  func: T,
-  limit: any
+ func: T,
+ limit: any
 ): (...args: Parameters<T>) => void {
-  let inThrottle = false;
+ let inThrottle = false;
 
-  return function executedFunction(...args: Parameters<T>): any {
-    if (!inThrottle) {
-      func(...args);
-      inThrottle = true;
-      setTimeout((() => (inThrottle = false)) as any, limit);
-    }
-  };
+ return function executedFunction(...args: Parameters<T>): any {
+ if (!inThrottle) {
+ func(...args);
+ inThrottle = true;
+ setTimeout((() => (inThrottle = false)) as any, limit);
+ };
 }
 
 // =================================
@@ -331,18 +323,18 @@ export function throttle<T extends (...args: any[]) => any>(,
  * @returns A promise that resolves to the base64 string
  */
 export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve: any, reject: any) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => {
-      const errorMessage =
-        error instanceof ProgressEvent && error.target instanceof FileReader
-          ? 'File reading failed'
-          : 'Unknown error';
-      reject(new Error(errorMessage));
-    };
-  });
+ return new Promise((resolve: any, reject: any) => {
+ const reader = new FileReader();
+ reader.readAsDataURL(file);
+ reader.onload = () => resolve(reader.result as string);
+ reader.onerror = error => {
+ const errorMessage =
+ error instanceof ProgressEvent && error.target instanceof FileReader
+ ? 'File reading failed'
+ : 'Unknown error';
+ reject(new Error(errorMessage));
+ };
+ });
 }
 
 /**
@@ -351,7 +343,7 @@ export function fileToBase64(file: File): Promise<string> {
  * @returns The file extension (without the dot)
  */
 export function getFileExtension(filename: any): string {
-  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
+ return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
 // =================================
@@ -363,7 +355,7 @@ export function getFileExtension(filename: any): string {
  * @returns True if running in a browser
  */
 export const isBrowser: any = (): boolean => {
-  return typeof window !== 'undefined' && typeof document !== 'undefined';
+ return typeof window !== 'undefined' && typeof document !== 'undefined';
 };
 
 /**
@@ -372,24 +364,22 @@ export const isBrowser: any = (): boolean => {
  * @returns A promise that resolves when the text is copied
  */
 export async function copyToClipboard(text: any): Promise<void> {
-  if (!isBrowser()) {
-    return;
-  }
+ if (!isBrowser()) {
+ return;
+ }
 
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (err: any) {
-    // Fallback for older browsers
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-  }
-}
-
+ try {
+ await navigator.clipboard.writeText(text);
+ } catch (err: any) {
+ // Fallback for older browsers
+ const textarea = document.createElement('textarea');
+ textarea.value = text;
+ textarea.style.position = 'fixed';
+ document.body.appendChild(textarea);
+ textarea.select();
+ document.execCommand('copy');
+ document.body.removeChild(textarea);
+ }
 // =================================
 // 10. Type Guards & Type Utilities
 // =================================
@@ -400,7 +390,7 @@ export async function copyToClipboard(text: any): Promise<void> {
  * @returns True if the value is not null or undefined
  */
 export function isDefined<T>(value: T | null | undefined): value is T {
-  return value !== null && value !== undefined;
+ return value !== null && value !== undefined;
 }
 
 /**
@@ -409,7 +399,7 @@ export function isDefined<T>(value: T | null | undefined): value is T {
  * @returns True if the value is a string
  */
 export function isString(value: string | number): value is string {
-  return typeof value === 'string' || value instanceof String;
+ return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -418,7 +408,7 @@ export function isString(value: string | number): value is string {
  * @returns True if the value is a number
  */
 export function isNumber(value: string | number): value is number {
-  return typeof value === 'number' && !isNaN(value);
+ return typeof value === 'number' && !isNaN(value);
 }
 
 // =================================
@@ -431,15 +421,15 @@ export function isNumber(value: string | number): value is number {
  * @returns An object with r, g, b values (0-255)
  */
 export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  if (!result) {
-    return null;
-  }
+ const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+ if (!result) {
+ return null;
+ }
 
-  return {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16) };
+ return {
+ r: parseInt(result[1], 16),
+ g: parseInt(result[2], 16),
+ b: parseInt(result[3], 16) };
 }
 
 /**
@@ -448,17 +438,17 @@ export function hexToRgb(hex: any): { r: number; g: number; b: number } | null {
  * @returns 'light' or 'dark'
  */
 export function getColorContrast(hex: any): 'light' | 'dark' {
-  const rgb = hexToRgb(hex);
-  if (!rgb) {
-    return 'dark';
-  }
+ const rgb = hexToRgb(hex);
+ if (!rgb) {
+ return 'dark';
+ }
 
-  // Calculate relative luminance (per ITU-R BT.709)
-  const { r, g, b } = rgb;
-  const luminance: any = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+ // Calculate relative luminance (per ITU-R BT.709)
+ const { r, g, b } = rgb;
+ const luminance: any = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 
-  // Return light or dark based on luminance threshold
-  return luminance > 0.5 ? 'dark' : 'light';
+ // Return light or dark based on luminance threshold
+ return luminance > 0.5 ? 'dark' : 'light';
 }
 
 // =================================
@@ -471,7 +461,7 @@ export function getColorContrast(hex: any): 'light' | 'dark' {
  * @returns A new array with unique values
  */
 export function uniq<T>(array: T[]): T[] {
-  return [...new Set(array)];
+ return [...new Set(array)];
 }
 
 /**
@@ -481,20 +471,20 @@ export function uniq<T>(array: T[]): T[] {
  * @returns An object with keys and arrays of grouped items
  */
 export function groupBy<T extends Record<string, any> K extends keyof T>(,
-  array: T[],
-  key: K
+ array: T[],
+ key: K
 ): Record<string, T[]> {
-  return array.reduce(
-    (acc: any, item: any) => {
-      const groupKey = String(item[key]);
-      if (!acc[groupKey]) {
-        acc[groupKey] = [];
-      }
-      acc[groupKey].push(item);
-      return acc;
-    },
-    {} as Record<string, T[]>
-  );
+ return array.reduce(
+ (acc: any, item: any) => {
+ const groupKey = String(item[key]);
+ if (!acc[groupKey]) {
+ acc[groupKey] = [];
+ }
+ acc[groupKey].push(item);
+ return acc;
+ },
+ {} as Record<string, T[]>
+ );
 }
 
 // =================================
@@ -508,25 +498,24 @@ export function groupBy<T extends Record<string, any> K extends keyof T>(,
  * @returns A new merged object
  */
 export function deepMerge<T extends object, U extends object>(,
-  target: T,
-  source: U
+ target: T,
+ source: U
 ): T & U {
-  const output = { ...target } as T & U;
+ const output = { ...target } as T & U;
 
-  for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      const targetValue: any = (target as any)[key];
-      const sourceValue: any = (source as any)[key];
+ for (const key in source) {
+ if (Object.prototype.hasOwnProperty.call(source, key)) {
+ const targetValue: any = (target as any)[key];
+ const sourceValue: any = (source as any)[key];
 
-      if (isObject(targetValue) && isObject(sourceValue)) {
-        (output as any)[key] = deepMerge(targetValue, sourceValue);
-      } else {
-        (output as any)[key] = sourceValue;
-      }
-    }
-  }
+ if (isObject(targetValue) && isObject(sourceValue)) {
+ (output as any)[key] = deepMerge(targetValue, sourceValue);
+ } else {
+ (output as any)[key] = sourceValue;
+ }
+ }
 
-  return output;
+ return output;
 }
 
 // =================================
@@ -539,7 +528,7 @@ export function deepMerge<T extends object, U extends object>(,
  * @returns A promise that resolves after the delay
  */
 export function sleep(ms: any): Promise<void> {
-  return new Promise(resolve => setTimeout((resolve) as any, ms));
+ return new Promise(resolve => setTimeout((resolve) as any, ms));
 }
 
 /**
@@ -550,15 +539,15 @@ export function sleep(ms: any): Promise<void> {
  * @returns A promise that rejects if it takes longer than the timeout
  */
 export function timeout<T>(,
-  promise: Promise<T>,
-  timeoutMs: any,
-  error = 'Operation timed out'
+ promise: Promise<T>,
+ timeoutMs: any,
+ error = 'Operation timed out'
 ): Promise<T> {
-  return Promise.race([
-    promise,
-    new Promise<never>((_, reject) =>
-      setTimeout((() => reject(new Error(error))) as any, timeoutMs)
-    )]);
+ return Promise.race([
+ promise,
+ new Promise<never>((_, reject) =>
+ setTimeout((() => reject(new Error(error))) as any, timeoutMs)
+ )]);
 }
 
 // =================================
@@ -571,15 +560,15 @@ export function timeout<T>(,
  * @returns A random string
  */
 export function randomString(length: number = 10): string {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+ const chars =
+ 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+ let result = '';
 
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+ for (let i = 0; i < length; i++) {
+ result += chars.charAt(Math.floor(Math.random() * chars.length));
+ }
 
-  return result;
+ return result;
 }
 
 /**
@@ -589,5 +578,5 @@ export function randomString(length: number = 10): string {
  * @returns A random integer between min and max
  */
 export function randomInt(min: any, max: any): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+ return Math.floor(Math.random() * (max - min + 1)) + min;
 }

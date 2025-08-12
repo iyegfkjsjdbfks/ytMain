@@ -14,10 +14,10 @@ export { useWatchPage } from './useWatchPage';
 // Video hooks
 export { useVideoPlayer } from './useVideoPlayer';
 export {
-  useVideos,
-  useTrendingVideos,
-  useSubscriptionsFeed,
-  useChannelVideos } from './useVideoData';
+ useVideos,
+ useTrendingVideos,
+ useSubscriptionsFeed,
+ useChannelVideos } from './useVideoData';
 export { useVideosData } from './useVideosData';
 
 // Shorts and specialized hooks
@@ -25,8 +25,8 @@ export { useShortsVideos } from './useShortsData';
 
 // Helper function for missing hooks
 export const useHomeVideos: any = () => {
-  // Placeholder implementation
-  return [];
+ // Placeholder implementation
+ return [];
 };
 
 // Re-export from unified hooks

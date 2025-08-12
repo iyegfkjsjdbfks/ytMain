@@ -23,375 +23,374 @@ import type { Video } from '../types';
  */
 
 interface VideoUploadFormData {
-  title: string;
-  description: string;
-  tags: string;
-  category: string;
-  visibility: 'public' | 'unlisted' | 'private';
-  thumbnail?: File;
-  videoFile?: File;
+ title: string;
+ description: string;
+ tags: string;
+ category: string;
+ visibility: 'public' | 'unlisted' | 'private';
+ thumbnail?: File;
+ videoFile?: File;
 }
 
 interface VideoEditFormData {
-  title: string;
-  description: string;
-  tags: string;
-  category: string;
-  visibility: 'public' | 'unlisted' | 'private';
-  thumbnail?: File;
+ title: string;
+ description: string;
+ tags: string;
+ category: string;
+ visibility: 'public' | 'unlisted' | 'private';
+ thumbnail?: File;
 }
 
 const RefactoredContentManagerPage: React.FC = () => {
-  return null;
-  // Mock content manager hook implementation
-  const [videos, _setVideos] = useState<Video[]>([]);
-  const [videosLoading, _setVideosLoading] = useState<boolean>(false);
-  const [videosError, _setVideosError] = useState<string | null>(null);
-  const [ _setUploadProgress] = useState<Record<string, any>>({});
+ return null;
+ // Mock content manager hook implementation
+ const [videos, _setVideos] = useState<Video[]>([]);
+ const [videosLoading, _setVideosLoading] = useState<boolean>(false);
+ const [videosError, _setVideosError] = useState<string | null>(null);
+ const [ _setUploadProgress] = useState<Record<string, any>>({});
 
-  const refreshVideos = async (): Promise<void> => {
-    // Mock implementation
-  };
+ const refreshVideos = async (): Promise<void> => {
+ // Mock implementation
+ };
 
-  const uploadVideo = async (_formData: VideoUploadFormData): Promise<any> => {
-    // Mock implementation
-  };
+ const uploadVideo = async (_formData: VideoUploadFormData): Promise<any> => {
+ // Mock implementation
+ };
 
-  const updateVideo = async (_id: any,
-          _formData: VideoEditFormData): Promise<any> => {
-    // Mock implementation
-  };
+ const updateVideo = async (_id: any,
+ _formData: VideoEditFormData): Promise<any> => {
+ // Mock implementation
+ };
 
-  // const deleteVideo = async (_id: any): Promise<any> => {
-  //   // Mock implementation
-  // };
+ // const deleteVideo = async (_id: any): Promise<any> => {
+ // // Mock implementation
+ // };
 
-  // const toggleVideoVisibility = async (_id: any, _visibility: any): Promise<any> => {
-  //   // Mock implementation
-  // };
+ // const toggleVideoVisibility = async (_id: any, _visibility: any): Promise<any> => {
+ // // Mock implementation
+ // };
 
-  // Modal and form state
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-  const [activeTab, setActiveTab] = useState('all');
+ // Modal and form state
+ const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
+ const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+ const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+ const [activeTab, setActiveTab] = useState('all');
 
-  // Async operations
-  const {
-    loading: actionLoading,
-          error: actionError,
-    execute: executeAction } = {
-    loading: false,
-          error: null,
-    execute: async (action: () => Promise<void>) => {
-      try {
-        await action();
-      } catch (error: any) {
-        (console as any).error('Action failed:', error);
-        // Handle error if needed
-      }
+ // Async operations
+ const {
+ loading: actionLoading,
+ error: actionError,
+ execute: executeAction } = {
+ loading: false,
+ error: null,
+ execute: async (action: () => Promise<void>) => {
+ try {
+ await action();
+ } catch (error: any) {
+ (console as any).error('Action failed:', error);
+ // Handle error if needed
+ }
 
-        } };
+ };
 
-  // Filter videos based on active tab
-  const filteredVideos = videos.filter((video: any) => {
-    switch (activeTab as any) {
-      case 'published':
-        return video.visibility === 'public';
-      case 'unlisted':
-        return video.visibility === 'unlisted';
-      case 'private':
-        return video.visibility === 'private';
-      case 'drafts':
-        return video.visibility === 'private';
-      default: return true
-    }
+ // Filter videos based on active tab
+ const filteredVideos = videos.filter((video: any) => {
+ switch (activeTab as any) {
+ case 'published':
+ return video.visibility === 'public';
+ case 'unlisted':
+ return video.visibility === 'unlisted';
+ case 'private':
+ return video.visibility === 'private';
+ case 'drafts':
+ return video.visibility === 'private';
+ default: return true
+ }
 
-        });
+ });
 
-  // Video upload form configuration
-  const uploadFormFields = [
-    {
-      name: 'videoFile',
-          type: "file" as const as const, label: 'Video File',
-          required: true,
-      accept: 'video/*',
-          placeholder: 'Select video file to upload' },
-    {
-      name: 'title',
-          type: "text" as const as const, label: 'Title',
-          required: true,
-      placeholder: 'Enter video title' },
-    {
-      name: 'description',
-          type: "textarea" as const as const, label: 'Description',
-          placeholder: 'Enter video description' },
-    {
-      name: 'tags',
-          type: "text" as const as const, label: 'Tags',
-          placeholder: 'Enter tags separated by commas' },
-    {
-      name: 'category',
-          type: "select" as const as const, label: 'Category',
-          options: [
-        { value: 'entertainment',
-          label: 'Entertainment' },
-        { value: 'education',
-          label: 'Education' },
-        { value: 'music',
-          label: 'Music' },
-        { value: 'gaming',
-          label: 'Gaming' },
-        { value: 'news',
-          label: 'News' },
-        { value: 'sports',
-          label: 'Sports' },
-        { value: 'technology',
-          label: 'Technology' }] },
-    {
-      name: 'visibility',
-          type: "select" as const as const, label: 'Visibility',
-          options: [
-        { value: 'public',
-          label: 'Public' },
-        { value: 'unlisted',
-          label: 'Unlisted' },
-        { value: 'private',
-          label: 'Private' }] },
-    {
-      name: 'thumbnail',
-          type: "file" as const as const, label: 'Thumbnail (Optional)',
-          accept: 'image/*',
-      placeholder: 'Select thumbnail image' }];
+ // Video upload form configuration
+ const uploadFormFields = [
+ {
+ name: 'videoFile',
+ type: "file" as const, label: 'Video File',
+ required: true,
+ accept: 'video/*',
+ placeholder: 'Select video file to upload' },
+ {
+ name: 'title',
+ type: "text" as const, label: 'Title',
+ required: true,
+ placeholder: 'Enter video title' },
+ {
+ name: 'description',
+ type: "textarea" as const, label: 'Description',
+ placeholder: 'Enter video description' },
+ {
+ name: 'tags',
+ type: "text" as const, label: 'Tags',
+ placeholder: 'Enter tags separated by commas' },
+ {
+ name: 'category',
+ type: "select" as const, label: 'Category',
+ options: [
+ { value: 'entertainment',
+ label: 'Entertainment' },
+ { value: 'education',
+ label: 'Education' },
+ { value: 'music',
+ label: 'Music' },
+ { value: 'gaming',
+ label: 'Gaming' },
+ { value: 'news',
+ label: 'News' },
+ { value: 'sports',
+ label: 'Sports' },
+ { value: 'technology',
+ label: 'Technology' }] },
+ {
+ name: 'visibility',
+ type: "select" as const, label: 'Visibility',
+ options: [
+ { value: 'public',
+ label: 'Public' },
+ { value: 'unlisted',
+ label: 'Unlisted' },
+ { value: 'private',
+ label: 'Private' }] },
+ {
+ name: 'thumbnail',
+ type: "file" as const, label: 'Thumbnail (Optional)',
+ accept: 'image/*',
+ placeholder: 'Select thumbnail image' }];
 
-  // Video edit form configuration
-  const editFormFields = uploadFormFields.filter((field) => field.name !== 'videoFile');
+ // Video edit form configuration
+ const editFormFields = uploadFormFields.filter((field) => field.name !== 'videoFile');
 
-  // Handle video upload
-  const handleVideoUpload = async (formData: Record<string, any>): Promise<any> => {
-    await executeAction(async (): Promise<void> => {
-      await uploadVideo(formData as VideoUploadFormData);
-      setIsUploadModalOpen(false);
-      await refreshVideos();
-    });
-  };
+ // Handle video upload
+ const handleVideoUpload = async (formData: Record<string, any>): Promise<any> => {
+ await executeAction(async (): Promise<void> => {
+ await uploadVideo(formData as VideoUploadFormData);
+ setIsUploadModalOpen(false);
+ await refreshVideos();
+ });
+ };
 
-  // Handle video edit
-  const handleVideoEdit = async (formData: Record<string, any>): Promise<any> => {
-    if (!selectedVideo) {
+ // Handle video edit
+ const handleVideoEdit = async (formData: Record<string, any>): Promise<any> => {
+ if (!selectedVideo) {
 return;
 }
 
-    await executeAction(async (): Promise<void> => {
-      await updateVideo(selectedVideo.id, formData as VideoEditFormData);
-      setIsEditModalOpen(false);
-      setSelectedVideo(null);
-      await refreshVideos();
-    });
-  };
+ await executeAction(async (): Promise<void> => {
+ await updateVideo(selectedVideo.id, formData as VideoEditFormData);
+ setIsEditModalOpen(false);
+ setSelectedVideo(null);
+ await refreshVideos();
+ });
+ };
 
-  // Handle video delete
-  // const handleVideoDelete = async (videoId: any): Promise<any> => {
-  //   if (!confirm('Are you sure you want to delete this video?')) return;
-  //
-  //   await executeAction(async (): Promise<void> => {
-  //     await deleteVideo(videoId);
-  //     await refreshVideos();
-  //   });
-  // };
+ // Handle video delete
+ // const handleVideoDelete = async (videoId: any): Promise<any> => {
+ // if (!confirm('Are you sure you want to delete this video?')) return;
+ //
+ // await executeAction(async (): Promise<void> => {
+ // await deleteVideo(videoId);
+ // await refreshVideos();
+ // });
+ // };
 
-  // Handle video visibility toggle
-  // const _handleVisibilityToggle = async (videoId: any, newVisibility: any): Promise<any> => {
-  //   await executeAction(async (): Promise<void> => {
-  //     await toggleVideoVisibility(videoId, newVisibility);
-  //     await refreshVideos();
-  //   });
-  // };
+ // Handle video visibility toggle
+ // const _handleVisibilityToggle = async (videoId: any, newVisibility: any): Promise<any> => {
+ // await executeAction(async (): Promise<void> => {
+ // await toggleVideoVisibility(videoId, newVisibility);
+ // await refreshVideos();
+ // });
+ // };
 
-  // Open edit modal
-  // const openEditModal: any = (video: Video) => {
-  //   setSelectedVideo(video);
-  //   setIsEditModalOpen(true);
-  // };
+ // Open edit modal
+ // const openEditModal: any = (video: Video) => {
+ // setSelectedVideo(video);
+ // setIsEditModalOpen(true);
+ // };
 
-  // Get initial values for edit form
-  const getEditFormInitialValues: any = () => {
-    if (!selectedVideo) {
+ // Get initial values for edit form
+ const getEditFormInitialValues: any = () => {
+ if (!selectedVideo) {
 return {
-        }}
+ }
+ return {
+ title: selectedVideo.title,
+ description: selectedVideo.description || '',
+ tags: selectedVideo.tags?.join(', ') || '',
+ category: selectedVideo.category || '',
+ visibility: selectedVideo.visibility || 'public' };
 
-    return {
-      title: selectedVideo.title,
-          description: selectedVideo.description || '',
-      tags: selectedVideo.tags?.join(', ') || '',
-      category: selectedVideo.category || '',
-          visibility: selectedVideo.visibility || 'public' }};
+ // Custom video card with management actions
+ // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }: any) => (
+ // <div className="relative group">
+ // <VideoCard video={video} />
+ //
+ // {/* Management Overlay */}
+ // <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
+ // <Button
+ // size="sm"
+ // variant="secondary"
+ // onClick={() => openEditModal(video)}
+ // disabled={actionLoading}
+ // >
+ // Edit
+ // </Button>
+ // <Button
+ // size="sm"
+ // variant="danger"
+ // onClick={() => handleVideoDelete(video.id)}
+ // disabled={actionLoading}
+ // >
+ // Delete
+ // </Button>
+ // </div>
+ //
+ // {/* Status Badge */}
+ // <div className="absolute top-2 right-2">
+ // <Badge
+ // variant={video.visibility === 'public' ? 'default' : 'secondary'}
+ // className="text-xs"
+ // >
+ // {video.visibility}
+ // </Badge>
+ // </div>
+ //
+ // {/* Upload Progress */}
+ // {uploadProgress[video.id] && (
+ // <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/75">
+ // <ProgressBar
+ // value={uploadProgress[video.id].progress || 0}
+ // size="sm"
+ // className="h-1"
+ // />
+ // <p className="text-white text-xs mt-1">
+ // {uploadProgress[video.id].status}
+ // </p>
+ // </div>
+ // )}
+ // </div>
+ // );
 
-  // Custom video card with management actions
-  // const _ManagementVideoCard: React.FC<{ video: Video }> = ({ video }: any) => (
-  //   <div className="relative group">
-  //     <VideoCard video={video} />
-  //
-  //     {/* Management Overlay */}
-  //     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center space-x-2">
-  //       <Button
-  //         size="sm"
-  //         variant="secondary"
-  //         onClick={() => openEditModal(video)}
-  //         disabled={actionLoading}
-  //       >
-  //         Edit
-  //       </Button>
-  //       <Button
-  //         size="sm"
-  //         variant="danger"
-  //         onClick={() => handleVideoDelete(video.id)}
-  //         disabled={actionLoading}
-  //       >
-  //         Delete
-  //       </Button>
-  //     </div>
-  //
-  //     {/* Status Badge */}
-  //     <div className="absolute top-2 right-2">
-  //       <Badge
-  //         variant={video.visibility === 'public' ? 'default' : 'secondary'}
-  //         className="text-xs"
-  //       >
-  //         {video.visibility}
-  //       </Badge>
-  //     </div>
-  //
-  //     {/* Upload Progress */}
-  //     {uploadProgress[video.id] && (
-  //       <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/75">
-  //         <ProgressBar
-  //           value={uploadProgress[video.id].progress || 0}
-  //           size="sm"
-  //           className="h-1"
-  //         />
-  //         <p className="text-white text-xs mt-1">
-  //           {uploadProgress[video.id].status}
-  //         </p>
-  //       </div>
-  //     )}
-  //   </div>
-  // );
+ // Tab counts
+ const tabCounts = {
+ all: videos.length,
+ published: videos.filter((v) => v.visibility === 'public').length,
+ unlisted: videos.filter((v) => v.visibility === 'unlisted').length,
+ private: videos.filter((v) => v.visibility === 'private').length,
+ drafts: videos.filter((v) => v.visibility === 'private').length };
 
-  // Tab counts
-  const tabCounts = {
-    all: videos.length,
-          published: videos.filter((v) => v.visibility === 'public').length,
-    unlisted: videos.filter((v) => v.visibility === 'unlisted').length,
-          private: videos.filter((v) => v.visibility === 'private').length,
-    drafts: videos.filter((v) => v.visibility === 'private').length };
+ return (
+ <StandardPageLayout
+ loading={videosLoading}
+ error={videosError}
+ isEmpty={videos.length === 0}
+ title="Content Manager"
+ headerActions={
+ <Button onClick={() => setIsUploadModalOpen(true)}>
+ Upload Video
+ </Button>
+ }
+ emptyComponent={
+ <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+ <div className="text-gray-400 mb-4">
+ <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+ </svg>
+ </div>
+ <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+ No videos found
+ </h3>
+ <p className="text-gray-500 dark:text-gray-400 mb-4">
+ Upload your first video to get started!
+ </p>
+ <Button onClick={() => setIsUploadModalOpen(true)}>
+ Upload Video
+ </Button>
+ </div>
+ }
+ >
+ {/* Action Error */}
+ {actionError && (
+ <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+ <p className="text-red-600 dark:text-red-400 text-sm">{actionError}</p>
+ </div>
+ )}
 
-  return (
-    <StandardPageLayout
-      loading={videosLoading}
-      error={videosError}
-      isEmpty={videos.length === 0}
-      title="Content Manager"
-      headerActions={
-        <Button onClick={() => setIsUploadModalOpen(true)}>
-          Upload Video
-        </Button>
-      }
-      emptyComponent={
-        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-          <div className="text-gray-400 mb-4">
-            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-            No videos found
-          </h3>
-          <p className="text-gray-500 dark:text-gray-400 mb-4">
-            Upload your first video to get started!
-          </p>
-          <Button onClick={() => setIsUploadModalOpen(true)}>
-            Upload Video
-          </Button>
-        </div>
-      }
-    >
-      {/* Action Error */}
-      {actionError && (
-        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-red-600 dark:text-red-400 text-sm">{actionError}</p>
-        </div>
-      )}
+ {/* Content Tabs */}
+ <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+ <TabsList className="grid w-full grid-cols-5">
+ <TabsTrigger value="all">
+ All ({tabCounts.all})
+ </TabsTrigger>
+ <TabsTrigger value="published">
+ Published ({tabCounts.published})
+ </TabsTrigger>
+ <TabsTrigger value="unlisted">
+ Unlisted ({tabCounts.unlisted})
+ </TabsTrigger>
+ <TabsTrigger value="private">
+ Private ({tabCounts.private})
+ </TabsTrigger>
+ <TabsTrigger value="drafts">
+ Drafts ({tabCounts.drafts})
+ </TabsTrigger>
+ </TabsList>
 
-      {/* Content Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="all">
-            All ({tabCounts.all})
-          </TabsTrigger>
-          <TabsTrigger value="published">
-            Published ({tabCounts.published})
-          </TabsTrigger>
-          <TabsTrigger value="unlisted">
-            Unlisted ({tabCounts.unlisted})
-          </TabsTrigger>
-          <TabsTrigger value="private">
-            Private ({tabCounts.private})
-          </TabsTrigger>
-          <TabsTrigger value="drafts">
-            Drafts ({tabCounts.drafts})
-          </TabsTrigger>
-        </TabsList>
+ <TabsContent value={activeTab} className="mt-6">
+ <ReusableVideoGrid
+ videos={filteredVideos}
+ loading={false}
+ error={null}
+ emptyMessage={`No ${activeTab} videos found.`}
+ columns={4}
+ className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+ />
+ </TabsContent>
+ </Tabs>
 
-        <TabsContent value={activeTab} className="mt-6">
-          <ReusableVideoGrid
-            videos={filteredVideos}
-            loading={false}
-            error={null}
-            emptyMessage={`No ${activeTab} videos found.`}
-            columns={4}
-            className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          />
-        </TabsContent>
-      </Tabs>
+ {/* Upload Modal */}
+ <BaseModal
+ isOpen={isUploadModalOpen}
+ onClose={() => setIsUploadModalOpen(false)}
+ title="Upload Video"
+ size="lg"
+ >
+ <BaseForm
+ fields={uploadFormFields}
+ onSubmit={(e: any) => handleVideoUpload(e)}
+ submitLabel="Upload Video"
+ loading={actionLoading}
+ error={actionError}
+ />
+ </BaseModal>
 
-      {/* Upload Modal */}
-      <BaseModal
-        isOpen={isUploadModalOpen}
-        onClose={() => setIsUploadModalOpen(false)}
-        title="Upload Video"
-        size="lg"
-      >
-        <BaseForm
-          fields={uploadFormFields}
-          onSubmit={(e: any) => handleVideoUpload(e)}
-          submitLabel="Upload Video"
-          loading={actionLoading}
-          error={actionError}
-        />
-      </BaseModal>
-
-      {/* Edit Modal */}
-      <BaseModal
-        isOpen={isEditModalOpen}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setSelectedVideo(null);
-        }}
-        title="Edit Video"
-        size="lg"
-      >
-        <BaseForm
-          fields={editFormFields}
-          onSubmit={(e: any) => handleVideoEdit(e)}
-          submitLabel="Update Video"
-          loading={actionLoading}
-          error={actionError}
-          initialValues={getEditFormInitialValues()}
-        />
-      </BaseModal>
-    </StandardPageLayout>
-  );
+ {/* Edit Modal */}
+ <BaseModal
+ isOpen={isEditModalOpen}
+ onClose={() => {
+ setIsEditModalOpen(false);
+ setSelectedVideo(null);
+ }
+ title="Edit Video"
+ size="lg"
+ >
+ <BaseForm
+ fields={editFormFields}
+ onSubmit={(e: any) => handleVideoEdit(e)}
+ submitLabel="Update Video"
+ loading={actionLoading}
+ error={actionError}
+ initialValues={getEditFormInitialValues()}
+ />
+ </BaseModal>
+ </StandardPageLayout>
+ );
 };
 
 export default RefactoredContentManagerPage;

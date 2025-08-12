@@ -13,24 +13,24 @@ import React, { type ReactNode, Fragment, ReactNode } from 'react';
  * @returns Array of React nodes
  */
 export const safeArrayRender = <T>(,
-  items: T[] | null | undefined,
-          renderItem: (item: T,
-          index: number) => ReactNode,
-  keyExtractor?: (item: T,
-          index: number) => string | number
+ items: T[] | null | undefined,
+ renderItem: (item: T,
+ index: number) => ReactNode,
+ keyExtractor?: (item: T,
+ index: number) => string | number
 ): ReactNode[] => {
-  if (!items || !Array.isArray(items)) {
-    return [];
-  }
+ if (!items || !Array.isArray(items)) {
+ return [];
+ }
 
-  return items
-    .filter((item): item is T => item !== undefined && item !== null)
-    .map((item: any, index: any) => {
-      const key = keyExtractor ? keyExtractor(item, index) : index;
-      return (
-        <React.Fragment key={key}>{renderItem(item, index)}</React.Fragment>
-      );
-    });
+ return items
+ .filter((item): item is T => item !== undefined && item !== null)
+ .map((item: any, index: any) => {
+ const key = keyExtractor ? keyExtractor(item, index) : index;
+ return (
+ <React.Fragment key={key}>{renderItem(item, index)}</React.Fragment>
+ );
+ });
 };
 
 /**
@@ -42,11 +42,11 @@ export const safeArrayRender = <T>(,
  * @returns React node or null
  */
 export const renderIf: any = (,
-  condition: any,
-          component: ReactNode,
-  fallback: ReactNode = null
+ condition: any,
+ component: ReactNode,
+ fallback: ReactNode = null
 ): ReactNode => {
-  return condition ? component : fallback;
+ return condition ? component : fallback;
 };
 
 /**
@@ -56,7 +56,7 @@ export const renderIf: any = (,
  * @returns Unique ID string
  */
 export const createUniqueId: any = (prefix = 'component'): string => {
-  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+ return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
 /**
@@ -68,15 +68,15 @@ export const createUniqueId: any = (prefix = 'component'): string => {
  * @returns Array of chunks
  */
 export const chunkArray = <T>(array: T,
-          size: any): T[][] => {
-  if (!array.length) {
-    return [];
-  }
+ size: any): T[][] => {
+ if (!array.length) {
+ return [];
+ }
 
-  const chunks: T[][] = [];
-  for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size));
-  }
+ const chunks: T[][] = [];
+ for (let i = 0; i < array.length; i += size) {
+ chunks.push(array.slice(i, i + size));
+ }
 
-  return chunks;
+ return chunks;
 };

@@ -11,24 +11,24 @@ import SearchResultsPage from './SearchResultsPage';
  * Provides enhanced error handling for search data fetching
  */
 const ProtectedSearchResultsPage: FC = () => {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('q') || '';
+ const [searchParams] = useSearchParams();
+ const query = searchParams.get('q') || '';
 
-  const handleRetry = useCallback(() => {
-    conditionalLogger.debug('Retrying search results data fetch', { query });
-    // The error boundary will reset and re-render the component
-    // Additional retry logic can be implemented here if needed
-  }, [query]);
+ const handleRetry = useCallback(() => {
+ conditionalLogger.debug('Retrying search results data fetch', { query });
+ // The error boundary will reset and re-render the component
+ // Additional retry logic can be implemented here if needed
+ }, [query]);
 
-  return (
-    <DataFetchErrorBoundary
-      dataType='search results'
-      onRetry={handleRetry}
-      showOfflineMessage={true}
-    >
-      <SearchResultsPage />
-    </DataFetchErrorBoundary>
-  );
+ return (
+ <DataFetchErrorBoundary
+ dataType='search results'
+ onRetry={handleRetry}
+ showOfflineMessage={true}
+ >
+ <SearchResultsPage />
+ </DataFetchErrorBoundary>
+ );
 };
 
 export default ProtectedSearchResultsPage;

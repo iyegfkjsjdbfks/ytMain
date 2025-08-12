@@ -14,61 +14,58 @@ import type { Video } from '../types/core';
  * @param useUnified - Whether to use the unified data service (default: true)
  */
 export function useVideosData(,
-  type: "trending" as const | 'shorts' | 'all' = 'all',
-  useUnified: boolean = true
+ type: "trending" | 'shorts' | 'all' = 'all',
+ useUnified: boolean = true
 ): any {
-  const fetchVideos = useCallback(async (): Promise<void> => {
-    if (useUnified as any) {
-      // Use unified data service for normalized results
-      switch (type as any) {
-        case 'shorts': {
-          const response = await unifiedDataService.getShortsVideos(30);
-          return response.data;
-        }
-        case 'trending':
-        case 'all':
-  default: {
-          const response = await unifiedDataService.getTrendingVideos(50);
-          return response.data;
-        }
-      }
-    } else {
-      // Legacy mode - use original mock service
-      switch (type as any) {
-        case 'shorts':
-          return getShortsVideos();
-        case 'trending':
-        case 'all':
-  default: return getVideos()
-      }
-    }
-  }, [type, useUnified]);
+ const fetchVideos = useCallback(async (): Promise<void> => {
+ if (useUnified as any) {
+ // Use unified data service for normalized results
+ switch (type as any) {
+ case 'shorts': {
+ const response = await unifiedDataService.getShortsVideos(30);
+ return response.data;
+ }
+ case 'trending':
+ case 'all':
+ default: {
+ const response = await unifiedDataService.getTrendingVideos(50);
+ return response.data;
+ }
+ } else {
+ // Legacy mode - use original mock service
+ switch (type as any) {
+ case 'shorts':
+ return getShortsVideos();
+ case 'trending':
+ case 'all':
+ default: return getVideos()
+ }
+ }, [type, useUnified]);
 
-  return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, {
-    initialData: [] });
+ return useAsyncData<UnifiedVideoMetadata[] | Video[]>(fetchVideos, {
+ initialData: [] });
 }
 
 /**
  * Hook specifically for unified video data with better typing
  */
 export function useUnifiedVideosData(,
-  type: "trending" as const | 'shorts' | 'all' = 'all',
-  limit: number = 50
+ type: "trending" | 'shorts' | 'all' = 'all',
+ limit: number = 50
 ): any {
-  const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
-    switch (type as any) {
-      case 'shorts': {
-        const response = await unifiedDataService.getShortsVideos(limit);
-        return response.data;
-      }
-      case 'trending':
-      case 'all':
-  default: {
-        const response = await unifiedDataService.getTrendingVideos(limit);
-        return response.data;
-      }
-    }
-  }, [type, limit]);
+ const fetchVideos = useCallback(async (): Promise<UnifiedVideoMetadata[]> => {
+ switch (type as any) {
+ case 'shorts': {
+ const response = await unifiedDataService.getShortsVideos(limit);
+ return response.data;
+ }
+ case 'trending':
+ case 'all':
+ default: {
+ const response = await unifiedDataService.getTrendingVideos(limit);
+ return response.data;
+ }
+ }, [type, limit]);
 
-  return useAsyncData<UnifiedVideoMetadata[]>(fetchVideos, { initialData: [] });
+ return useAsyncData<UnifiedVideoMetadata[]>(fetchVideos, { initialData: [] });
 }

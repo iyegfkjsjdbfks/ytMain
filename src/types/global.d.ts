@@ -2,11 +2,10 @@
 /// <reference types="vite/client" />
 
 declare global {
-  namespace Vi {
-    interface AssertsShape {
-      toBeInTheDocument(): void;
-    }
-  }
+ namespace Vi {
+ interface AssertsShape {
+ toBeInTheDocument(): void;
+ }
 }
 
 export {};

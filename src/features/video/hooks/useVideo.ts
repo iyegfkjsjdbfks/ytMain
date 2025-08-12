@@ -6,48 +6,48 @@ import { videoService } from '../services/videoService';
 
 // Video query key factory
 const videoKeys = {
-  all: ['videos'] as const, lists: () => [...videoKeys.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
-    [...videoKeys.lists(), filters] as const, details: () => [...videoKeys.all, 'detail'] as const, detail: (id: string) => [...videoKeys.details(), id] as const, unified: {
-    all: ['unified-videos'] as const, lists: () => [...videoKeys.unified.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
-      [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const } };
+ all: ['videos'] as const, lists: () => [...videoKeys.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
+ [...videoKeys.lists(), filters] as const, details: () => [...videoKeys.all, 'detail'] as const, detail: (id: string) => [...videoKeys.details(), id] as const, unified: {
+ all: ['unified-videos'] as const, lists: () => [...videoKeys.unified.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
+ [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const };
 
 /**
  * Hook for fetching a single video by ID
  */
 export const useVideo: any = (videoId: any) => {
-  return useQuery({
-    queryKey: videoKeys.detail(videoId),
-    queryFn: () => videoService.getVideo(videoId),
-    enabled: !!videoId });
+ return useQuery({
+ queryKey: videoKeys.detail(videoId),
+ queryFn: () => videoService.getVideo(videoId),
+ enabled: !!videoId });
 };
 
 /**
  * Hook for fetching trending videos
  */
 export const useTrendingVideos: any = (category?: string, limit: number = 20) => {
-  return useQuery({
-    queryKey: videoKeys.list({ type: "trending" as const, category, limit }),
-    queryFn: () => videoService.getTrendingVideos(category, limit) });
+ return useQuery({
+ queryKey: videoKeys.list({ type: "trending", category, limit }),
+ queryFn: () => videoService.getTrendingVideos(category, limit) });
 };
 
 /**
  * Hook for fetching recommended videos
  */
 export const useRecommendedVideos: any = (videoId: any, limit: number = 10) => {
-  return useQuery({
-    queryKey: videoKeys.list({ type: "recommended" as const, videoId, limit }),
-    queryFn: () => videoService.getRecommendedVideos(videoId, limit),
-    enabled: !!videoId });
+ return useQuery({
+ queryKey: videoKeys.list({ type: "recommended", videoId, limit }),
+ queryFn: () => videoService.getRecommendedVideos(videoId, limit),
+ enabled: !!videoId });
 };
 
 /**
  * Hook for searching videos
  */
 export const useSearchVideos: any = (query: any, limit: number = 20) => {
-  return useQuery({
-    queryKey: videoKeys.list({ type: "search" as const, query, limit }),
-    queryFn: () => videoService.searchVideos(query, limit),
-    enabled: !!query });
+ return useQuery({
+ queryKey: videoKeys.list({ type: "search", query, limit }),
+ queryFn: () => videoService.searchVideos(query, limit),
+ enabled: !!query });
 };
 
 // Unified video hooks for normalized metadata
@@ -56,64 +56,64 @@ export const useSearchVideos: any = (query: any, limit: number = 20) => {
  * Hook for fetching a single video by ID using unified service
  */
 export const useUnifiedVideo: any = (videoId: any) => {
-  return useQuery({
-    queryKey: videoKeys.unified.detail(videoId),
-    queryFn: () => unifiedDataService.getVideoById(videoId),
-    enabled: !!videoId,
-    staleTime: 10 * 60 * 1000, // 10 minutes
-  });
+ return useQuery({
+ queryKey: videoKeys.unified.detail(videoId),
+ queryFn: () => unifiedDataService.getVideoById(videoId),
+ enabled: !!videoId,
+ staleTime: 10 * 60 * 1000, // 10 minutes
+ });
 };
 
 /**
  * Hook for fetching trending videos using unified service
  */
 export const useUnifiedTrendingVideos: any = (limit: number = 50, filters = {}) => {
-  return useQuery({
-    queryKey: videoKeys.unified.list({ type: "trending" as const, limit, filters }),
-    queryFn: async (): Promise<void> => {
-      const response = await unifiedDataService.getTrendingVideos(
-        limit,
-        filters
-      );
-      return response.data;
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+ return useQuery({
+ queryKey: videoKeys.unified.list({ type: "trending", limit, filters }),
+ queryFn: async (): Promise<void> => {
+ const response = await unifiedDataService.getTrendingVideos(
+ limit,
+ filters
+ );
+ return response.data;
+ },
+ staleTime: 5 * 60 * 1000, // 5 minutes
+ });
 };
 
 /**
  * Hook for fetching shorts using unified service
  */
 export const useUnifiedShorts: any = (limit: number = 30) => {
-  return useQuery({
-    queryKey: videoKeys.unified.list({ type: "shorts" as const, limit }),
-    queryFn: async (): Promise<void> => {
-      const response = await unifiedDataService.getShortsVideos(limit);
-      return response.data;
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+ return useQuery({
+ queryKey: videoKeys.unified.list({ type: "shorts", limit }),
+ queryFn: async (): Promise<void> => {
+ const response = await unifiedDataService.getShortsVideos(limit);
+ return response.data;
+ },
+ staleTime: 5 * 60 * 1000, // 5 minutes
+ });
 };
 
 /**
  * Hook for searching videos using unified service
  */
 export const useUnifiedSearchVideos: any = (,
-  query: any,
-  filters = {},
-  limit: number = 50
+ query: any,
+ filters = {},
+ limit: number = 50
 ) => {
-  return useQuery({
-    queryKey: videoKeys.unified.list({ type: "search" as const, query, filters, limit }),
-    queryFn: async (): Promise<void> => {
-      const response = await unifiedDataService.searchVideos(
-        query,
-        filters,
-        limit
-      );
-      return response.data;
-    },
-    enabled: !!query && query.length > 2,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+ return useQuery({
+ queryKey: videoKeys.unified.list({ type: "search", query, filters, limit }),
+ queryFn: async (): Promise<void> => {
+ const response = await unifiedDataService.searchVideos(
+ query,
+ filters,
+ limit
+ );
+ return response.data;
+ },
+ enabled: !!query && query.length > 2,
+ staleTime: 5 * 60 * 1000, // 5 minutes
+ });
 };

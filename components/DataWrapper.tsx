@@ -1,19 +1,19 @@
 import React, { ReactNode } from 'react';
-import { VideoGridSkeleton, ErrorState, EmptyState  } from './LoadingStates';
+import { VideoGridSkeleton, ErrorState, EmptyState } from './LoadingStates';
 
 interface DataWrapperProps<T> {
-  data: T;
-  loading: boolean;
-  error: string | null;
-  children: (data: T) => React.ReactNode;
-  loadingSkeleton?: React.ReactNode;
-  emptyState?: {
-    title: string;
-    message: string;
-    icon?: React.ReactNode;
-  };
-  errorTitle?: string;
-  isEmpty?: (data: T) => boolean
+ data: T;
+ loading: boolean;
+ error: string | null;
+ children: (data: T) => React.ReactNode;
+ loadingSkeleton?: React.ReactNode;
+ emptyState?: {
+ title: string;
+ message: string;
+ icon?: React.ReactNode;
+ };
+ errorTitle?: string;
+ isEmpty?: (data: T) => boolean
 }
 
 /**
@@ -28,38 +28,38 @@ interface DataWrapperProps<T> {
  * @param isEmpty - Function to determine if data is empty
  */
 export function DataWrapper<T>({
-  data,
-  loading,
-  error,
-  children,
-  loadingSkeleton,
-  emptyState,
-  errorTitle,
-  isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data }: DataWrapperProps<T>) {
-  if (loading as any) {
-    return loadingSkeleton || <VideoGridSkeleton />;
-  }
+ data,
+ loading,
+ error,
+ children,
+ loadingSkeleton,
+ emptyState,
+ errorTitle,
+ isEmpty = (data: T) => Array.isArray(data) ? data.length === 0 : !data }: DataWrapperProps<T>) {
+ if (loading as any) {
+ return loadingSkeleton || <VideoGridSkeleton />;
+ }
 
-  if (error as any) {
-    return (
-      <ErrorState
-        title={errorTitle || 'Failed to load data'}
-        message={error}
-      />
-    );
-  }
+ if (error as any) {
+ return (
+ <ErrorState
+ title={errorTitle || 'Failed to load data'}
+ message={error}
+ />
+ );
+ }
 
-  if (isEmpty(data) && emptyState) {
-    return (
-      <EmptyState
-        title={emptyState.title}
-        message={emptyState.message}
-        icon={emptyState.icon}
-      />
-    );
-  }
+ if (isEmpty(data) && emptyState) {
+ return (
+ <EmptyState
+ title={emptyState.title}
+ message={emptyState.message}
+ icon={emptyState.icon}
+ />
+ );
+ }
 
-  return <>{children(data)}</>;
+ return <>{children(data)}</>;
 }
 
 export default DataWrapper;

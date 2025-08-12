@@ -14,7 +14,7 @@ import PWAStatus from '../src/components/PWAStatus';
 import PWAUpdateNotification from '../src/components/PWAUpdateNotification';
 
 interface RefactoredAppProvidersProps {
-  children?: React.ReactNode
+ children?: React.ReactNode
 }
 
 /**
@@ -28,28 +28,28 @@ interface RefactoredAppProvidersProps {
  * - Reduced provider nesting for better performance
  */
 export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
-  children }) => {
-  return (
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <AuthProvider>
-            <OptimizedMiniplayerProvider>
-              <WatchLaterProvider>
-                <UnifiedAppProvider>
-                  <SuspenseWrapper fallback={<FastLoadingSpinner />}>
-                    {children}
-                    <PWAStatus />
-                    <PWAUpdateNotification />
-                  </SuspenseWrapper>
-                </UnifiedAppProvider>
-              </WatchLaterProvider>
-            </OptimizedMiniplayerProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
-  );
+ children }) => {
+ return (
+ <ErrorBoundary>
+ <QueryClientProvider client={queryClient}>
+ <ThemeProvider>
+ <AuthProvider>
+ <OptimizedMiniplayerProvider>
+ <WatchLaterProvider>
+ <UnifiedAppProvider>
+ <SuspenseWrapper fallback={<FastLoadingSpinner />}>
+ {children}
+ <PWAStatus />
+ <PWAUpdateNotification />
+ </SuspenseWrapper>
+ </UnifiedAppProvider>
+ </WatchLaterProvider>
+ </OptimizedMiniplayerProvider>
+ </AuthProvider>
+ </ThemeProvider>
+ </QueryClientProvider>
+ </ErrorBoundary>
+ );
 };
 
 /**
@@ -57,32 +57,32 @@ export const RefactoredAppProviders: React.FC<RefactoredAppProvidersProps> = ({
  * Allows injection of custom QueryClient for testing
  */
 interface TestAppProvidersProps {
-  children?: React.ReactNode;
-  queryClient?: QueryClient;
+ children?: React.ReactNode;
+ queryClient?: QueryClient;
 }
 
 export const TestAppProviders: React.FC<TestAppProvidersProps> = ({
-  children,
-  queryClient: customQueryClient }) => {
-  const client = customQueryClient || queryClient;
+ children,
+ queryClient: customQueryClient }) => {
+ const client = customQueryClient || queryClient;
 
-  return (
-    <ErrorBoundary>
-      <QueryClientProvider client={client}>
-        <ThemeProvider>
-          <AuthProvider>
-            <OptimizedMiniplayerProvider>
-              <WatchLaterProvider>
-                <UnifiedAppProvider>
-                  {children}
-                </UnifiedAppProvider>
-              </WatchLaterProvider>
-            </OptimizedMiniplayerProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
-  );
+ return (
+ <ErrorBoundary>
+ <QueryClientProvider client={client}>
+ <ThemeProvider>
+ <AuthProvider>
+ <OptimizedMiniplayerProvider>
+ <WatchLaterProvider>
+ <UnifiedAppProvider>
+ {children}
+ </UnifiedAppProvider>
+ </WatchLaterProvider>
+ </OptimizedMiniplayerProvider>
+ </AuthProvider>
+ </ThemeProvider>
+ </QueryClientProvider>
+ </ErrorBoundary>
+ );
 };
 
 export default RefactoredAppProviders;
