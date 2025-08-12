@@ -14,7 +14,6 @@ export const useWatchLater = () => {
   const context = useContext(WatchLaterContext);
   if (!context) {
     throw new Error('useWatchLater must be used within a WatchLaterProvider');
-}
   }
   return context;
 };
@@ -47,13 +46,11 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
     setWatchLaterVideos(prev => {
       if (prev.includes(videoId)) return prev;
       return [...prev, videoId];
-}
     });
   };
 
   const removeFromWatchLater = (videoId: string) => {
     setWatchLaterVideos(prev => prev.filter(id => id !== videoId));
-}
   };
 
   const isInWatchLater = (videoId: string): boolean => {
@@ -62,7 +59,6 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
 
   const clearWatchLater = () => {
     setWatchLaterVideos([]);
-}
   };
 
   const value = {
@@ -76,7 +72,7 @@ export const WatchLaterProvider: React.FC<WatchLaterProviderProps> = ({ children
   return (
     <WatchLaterContext.Provider value={value}>
       {children}
-// FIXED:     </WatchLaterContext.Provider>
+    </WatchLaterContext.Provider>
   );
 };
 

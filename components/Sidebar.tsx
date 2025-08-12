@@ -42,9 +42,8 @@ const NavItem: React.FC<NavItemProps> = React.memo(({ to, icon, label, currentPa
  <Link
  to={to}
  title={title || label}
-// FIXED:  className={`flex items-center px-3 py-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors duration-150 group 
- ${isActive ? 'bg-neutral-200 dark:bg-neutral-800 font-medium text-neutral-900 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100'}`}
-// FIXED:  aria-current={isActive ? 'page' : undefined} />
+ className={`flex items-center px-3 py-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors duration-150 group ${isActive ? 'bg-neutral-200 dark:bg-neutral-800 font-medium text-neutral-900 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100'}`}
+ aria-current={isActive ? 'page' : undefined}
  >
  <span className={`mr-5 ${isActive ? 'text-neutral-800 dark:text-neutral-50' : 'text-neutral-600 dark:text-neutral-300 group-hover:text-neutral-800 dark:group-hover:text-neutral-100'}`}>{icon}</span>
  <span className={`text-sm ${isActive ? 'text-neutral-900 dark:text-neutral-50' : 'text-neutral-700 dark:text-neutral-100 group-hover:text-neutral-900 dark:group-hover:text-neutral-50'}`}>{label}</span>

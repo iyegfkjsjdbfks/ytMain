@@ -13,7 +13,7 @@ import type { Video } from '../types/core';
  * @param type - The type of videos to fetch ('trending', 'shorts', 'all')
  * @param useUnified - Whether to use the unified data service (default: true)
  */
-export function useVideosData(,
+export function useVideosData(
  type: "trending" | 'shorts' | 'all' = 'all',
  useUnified: boolean = true
 ): any {

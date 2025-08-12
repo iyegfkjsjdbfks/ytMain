@@ -238,7 +238,6 @@ export const useOptimizedMiniplayer = () => {
   const context = useContext(MiniplayerContext);
   if (!context) {
     throw new Error('useOptimizedMiniplayer must be used within an OptimizedMiniplayerProvider');
-}
   }
   return context;
 };

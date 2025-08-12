@@ -14,7 +14,6 @@ export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
-}
   }
   return context;
 };
@@ -41,7 +40,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       
       if (theme === 'system') {
         effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
       } else {
         effectiveTheme = theme;
       }
@@ -62,7 +60,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const handleChange = () => {
       if (theme === 'system') {
         applyTheme();
-}
       }
     };
 
@@ -73,7 +70,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem('theme', newTheme);
-}
   };
 
   const value = {
@@ -85,7 +81,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <ThemeContext.Provider value={value}>
       {children}
-// FIXED:     </ThemeContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

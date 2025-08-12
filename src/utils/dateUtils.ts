@@ -62,7 +62,7 @@ export const formatDistanceToNow: any = (date: string | Date | number): string =
  * @param date Date object, date string, or timestamp
  * @returns Short relative time string
  */
-export const formatShortDistanceToNow: any = (,
+export const formatShortDistanceToNow: any = (
  date: string | Date | number
 ): string => {
  try {

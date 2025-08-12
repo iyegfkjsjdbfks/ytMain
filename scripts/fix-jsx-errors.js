@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 #!/usr/bin/env node
 /**
  * JSX Error Fixer

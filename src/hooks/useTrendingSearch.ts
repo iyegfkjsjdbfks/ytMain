@@ -8,7 +8,7 @@ import { VideoService } from '../services/api';
 import type { Video } from '../types';
 
 // Convert search results to Video format for HomePage compatibility
-const convertSearchResultToVideo: any = (,
+const convertSearchResultToVideo: any = (
  result: YouTubeSearchResult | GoogleSearchResult,
  index: number
 ): Video => {

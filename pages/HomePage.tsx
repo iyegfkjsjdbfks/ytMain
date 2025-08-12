@@ -11,7 +11,6 @@ import type { Video } from '../types';
 const MemoizedVideoCard = memo(HoverAutoplayVideoCard);
 
 const HomePage: React.FC = () => {
- return null;
  const { data: videos, loading, error } = useTrendingSearch();
  const [selectedCategory, setSelectedCategory] = useState<string>('All');
  const currentKeyword = getInitialSearchKeyword();
@@ -43,8 +42,8 @@ const HomePage: React.FC = () => {
  <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Unable to load {currentKeyword} videos</h1>
  <p className="text-gray-600 dark:text-gray-400">{error}</p>
  <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">Please check your internet connection and try again.</p>
-// FIXED:  </div>
-// FIXED:  </div>
+</div>
+</div>
  );
  }
 
@@ -56,10 +55,9 @@ const HomePage: React.FC = () => {
  <CategoryChips
  categories={categories}
  selectedCategory={selectedCategory}
- onSelectCategory={handleSelectCategory} />
- />
-// FIXED:  </div>
-// FIXED:  </div>
+          onSelectCategory={handleSelectCategory} />
+</div>
+</div>
 
  {/* Main Content */}
  <div className="max-w-[1440px] mx-auto px-6 py-6">
@@ -68,7 +66,7 @@ const HomePage: React.FC = () => {
  <div>
  <div className="flex items-center gap-2 mb-6">
  <div className="text-sm text-gray-500 dark:text-gray-400">🔥 Loading {currentKeyword} videos...</div>
-// FIXED:  </div>
+</div>
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
  {Array.from({ length: 12 }).map((_, index) => (
  <div key={index} className="animate-pulse">
@@ -79,23 +77,22 @@ const HomePage: React.FC = () => {
  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
-// FIXED:  </div>
-// FIXED:  </div>
-// FIXED:  </div>
+</div>
+</div>
+</div>
  ))}
-// FIXED:  </div>
-// FIXED:  </div>
+</div>
+</div>
  ) : (
  /* Video Grid with Enhanced Hover Effects - YouTube style */
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 p-3 sm:p-4">
  {filteredVideos.map((video: Video) => (
  <MemoizedVideoCard
  key={video.id}
- video={video}
-// FIXED:  className="" />
- />
+          video={video}
+          className="" />
  ))}
-// FIXED:  </div>
+</div>
  )}
 
  {/* Empty State */}
@@ -107,11 +104,11 @@ const HomePage: React.FC = () => {
  {selectedCategory === 'All'
  ? `Unable to load ${currentKeyword} videos at the moment. Please try again later.`
  : `No ${currentKeyword} videos found for "${selectedCategory}". Try selecting another category.`}
-// FIXED:  </p>
-// FIXED:  </div>
+</p>
+</div>
  )}
-// FIXED:  </div>
-// FIXED:  </div>
+</div>
+</div>
  );
 };
 

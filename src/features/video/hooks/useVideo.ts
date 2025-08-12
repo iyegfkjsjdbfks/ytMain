@@ -9,7 +9,9 @@ const videoKeys = {
  all: ['videos'] as const, lists: () => [...videoKeys.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
  [...videoKeys.lists(), filters] as const, details: () => [...videoKeys.all, 'detail'] as const, detail: (id: string) => [...videoKeys.details(), id] as const, unified: {
  all: ['unified-videos'] as const, lists: () => [...videoKeys.unified.all, 'list'] as const, list: (filters: Record<string, unknown>) =>
- [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const };
+ [...videoKeys.unified.lists(), filters] as const, details: () => [...videoKeys.unified.all, 'detail'] as const, detail: (id: string) => [...videoKeys.unified.details(), id] as const
+ }
+};
 
 /**
  * Hook for fetching a single video by ID

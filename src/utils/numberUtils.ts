@@ -100,7 +100,7 @@ export const formatWithCommas: any = (num: any): string => {
  * @param decimals Number of decimal places
  * @returns Formatted percentage string
  */
-export const formatPercentage: any = (,
+export const formatPercentage: any = (
  value: string | number,
  decimals: number = 1
 ): string => {

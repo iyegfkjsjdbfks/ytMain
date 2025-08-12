@@ -37,7 +37,7 @@ export function useDebounce<T>(value: T, delay: any): T {
  * @param deps - Dependencies array for the callback
  * @returns The debounced callback function
  */
-export function useDebouncedCallback<T extends (...args) => any>(,
+export function useDebouncedCallback<T extends (...args: any[]) => any>(
  callback: T,
  delay: any,
  deps: React.DependencyList = []

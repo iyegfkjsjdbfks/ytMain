@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, type React } from 'react';
-import { useLocation, Navigate, useLocation } from 'react-router-dom';
+import React, { FC, ReactNode } from 'react';
+import { useLocation, Navigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 

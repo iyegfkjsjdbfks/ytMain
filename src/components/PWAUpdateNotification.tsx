@@ -28,20 +28,20 @@ const PWAUpdateNotification: React.FC = () => {
       <p className="font-semibold mb-2">Update Available!</p>
       <p className="text-sm mb-3">A new version of the app is available.</p>
       <div className="flex gap-2">
-        <button />
-// FIXED:           onClick={() => window.location.reload()}
-// FIXED:           className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-100"
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-100"
         >
           Update Now
-// FIXED:         </button>
-        <button />
-// FIXED:           onClick={() => setShowUpdate(false)}
-// FIXED:           className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-800"
+        </button>
+        <button
+          onClick={() => setShowUpdate(false)}
+          className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-800"
         >
           Later
-// FIXED:         </button>
-// FIXED:       </div>
-// FIXED:     </div>
+        </button>
+      </div>
+    </div>
   );
 };
 

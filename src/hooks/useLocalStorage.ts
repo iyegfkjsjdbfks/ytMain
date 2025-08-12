@@ -8,7 +8,7 @@ type SetValue<T> = T | ((val: T) => T);
  * @param initialValue - The initial value if no stored value exists
  * @returns [storedValue, setValue, removeValue]
  */
-export function useLocalStorage<T>(,
+export function useLocalStorage<T>(
  key: string,
  initialValue: T
 ): [T(value: SetValue<T>) => void() => void] {

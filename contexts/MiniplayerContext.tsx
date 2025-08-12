@@ -23,7 +23,6 @@ export const useMiniplayer = () => {
   const context = useContext(MiniplayerContext);
   if (!context) {
     throw new Error('useMiniplayer must be used within a MiniplayerProvider');
-}
   }
   return context;
 };
@@ -41,19 +40,16 @@ export const MiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children
     setCurrentVideo(video);
     setIsOpen(true);
     setIsPlaying(true);
-}
   };
 
   const closeMiniplayer = () => {
     setIsOpen(false);
     setCurrentVideo(null);
     setIsPlaying(false);
-}
   };
 
   const togglePlay = () => {
     setIsPlaying(prev => !prev);
-}
   };
 
   const value = {
@@ -68,7 +64,7 @@ export const MiniplayerProvider: React.FC<MiniplayerProviderProps> = ({ children
   return (
     <MiniplayerContext.Provider value={value}>
       {children}
-// FIXED:     </MiniplayerContext.Provider>
+    </MiniplayerContext.Provider>
   );
 };
 

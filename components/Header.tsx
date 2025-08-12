@@ -27,24 +27,24 @@ const CreateMenuItem: React.FC<{ children: React.ReactNode; onClick: () => void;
  <>
  {icon && <span className="mr-3.5 w-5 h-5 text-neutral-500 dark:text-neutral-300">{icon}</span>}
  {children}
-// FIXED:  </>
+ </>  
  );
 
  if (to as any) {
  return (
  <Link to={to} onClick={(e: any) => onClick(e)} className={commonClasses} role="menuitem">
  {content}
-// FIXED:  </Link>
+ </Link>
  );
  }
  return (
- <button />
-// FIXED:  onClick={(e: any) => onClick(e)}
-// FIXED:  className={commonClasses}
- role="menuitem"
- >
- {content}
-// FIXED:  </button>
+  <button
+   onClick={onClick}
+   className={commonClasses}
+   role="menuitem"
+  >
+   {content}
+  </button>
  );
 };
 
@@ -71,27 +71,27 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
  <Button
  variant="secondary"
  size="sm"
-// FIXED:  className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20" />
+className="text-blue-600 border border-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-900/20" >
  >
  <UserIcon className="w-4 h-4 mr-1" />
  Sign in
-// FIXED:  </Button>
-// FIXED:  </Link>
-// FIXED:  </div>
+</Button>
+</Link>
+</div>
  );
  }
 
  return (
  <div className="relative" ref={userMenuRef}>
  <button
- ref={userMenuButtonRef} />
-// FIXED:  onClick={(e: any) => toggleUserMenu(e)}
-// FIXED:  className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
-// FIXED:  aria-label="User account options"
-// FIXED:  aria-expanded={isUserMenuOpen}
-// FIXED:  aria-haspopup="true"
-// FIXED:  aria-controls="user-menu"
-// FIXED:  id="user-menu-button"
+ ref={userMenuButtonRef}
+ onClick={toggleUserMenu}
+ className={`p-1.5 rounded-full transition-colors ${isUserMenuOpen ? 'bg-neutral-300 dark:bg-neutral-700' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}`}
+ aria-label="User account options"
+ aria-expanded={isUserMenuOpen}
+ aria-haspopup="true"
+ aria-controls="user-menu"
+ id="user-menu-button"
  title="Your Account"
  >
  {user.avatar ? (
@@ -99,11 +99,11 @@ const AuthenticatedUserSection: React.FC<AuthenticatedUserSectionProps> = ({
  ) : (
  <div className="w-8 h-8 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center">
  <UserIcon className="w-5 h-5 text-white" />
-// FIXED:  </div>
+</div>
  )}
-// FIXED:  </button>
+</button>
  <UserMenu isOpen={isUserMenuOpen} onClose={handleCloseUserMenu} />
-// FIXED:  </div>
+</div>
  );
 };
 
@@ -126,7 +126,8 @@ setIsNotificationsPanelOpen(false);
 }
  if (isCreateMenuOpen as any) {
 setIsCreateMenuOpen(false);
-};
+ }
+ };
 
  const toggleCreateMenu: any = () => {
  setIsCreateMenuOpen(prev => !prev);
@@ -135,7 +136,8 @@ setIsUserMenuOpen(false);
 }
  if (isNotificationsPanelOpen as any) {
 setIsNotificationsPanelOpen(false);
-};
+ }
+ };
 
  const handleCloseUserMenu = useCallback(() => setIsUserMenuOpen(false), []);
 
@@ -184,23 +186,23 @@ setIsNotificationsPanelOpen(false);
  return (
  <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm h-14 flex items-center justify-between px-2 sm:px-4 border-b border-neutral-200 dark:border-neutral-800">
  <div className="flex items-center">
- <button />
-// FIXED:  onClick={(e: any) => toggleSidebar(e)}
-// FIXED:  className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
-// FIXED:  aria-label="Toggle sidebar menu"
+ <button
+onClick={(e: any) => toggleSidebar(e)}
+className="p-1.5 sm:p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700/80 mr-1 sm:mr-3 text-neutral-700 dark:text-neutral-100 transition-colors"
+aria-label="Toggle sidebar menu"
  title="Menu"
  >
  <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-// FIXED:  </button>
+</button>
  <Link to="/" className="flex items-center" aria-label="YoutubeX Home">
  <YouTubeLogo className="h-4 sm:h-5 md:h-[22px]" />
  <span className="ml-1 text-base sm:text-lg md:text-xl font-semibold text-black dark:text-white hidden sm:block tracking-tighter relative top-[-1px]">YoutubeX</span>
-// FIXED:  </Link>
-// FIXED:  </div>
+</Link>
+</div>
 
  <div className="flex-1 flex justify-center px-1 sm:px-2 md:px-4">
  <SearchBar />
-// FIXED:  </div>
+</div>
 
  <div className="flex items-center space-x-0.5 sm:space-x-1 md:space-x-1.5">
  {/* PWA Offline Indicator */}
@@ -208,28 +210,28 @@ setIsNotificationsPanelOpen(false);
 
  <div className="relative">
  <button
- ref={createButtonRef} />
-// FIXED:  onClick={(e: any) => toggleCreateMenu(e)}
-// FIXED:  className={`p-2 rounded-full text-neutral-700 dark:text-neutral-100 transition-all duration-150 ease-in-out
+ ref={createButtonRef}
+ onClick={toggleCreateMenu}
+className={`p-2 rounded-full text-neutral-700 dark:text-neutral-100 transition-all duration-150 ease-in-out
  ${isCreateMenuOpen ? 'bg-neutral-300 dark:bg-neutral-600 scale-95' : 'hover:bg-neutral-200 dark:hover:bg-neutral-700/80'}
  `}
-// FIXED:  aria-label="Create video or post"
-// FIXED:  aria-expanded={isCreateMenuOpen}
-// FIXED:  aria-haspopup="true"
-// FIXED:  aria-controls="create-menu"
-// FIXED:  id="create-button"
+aria-label="Create video or post"
+aria-expanded={isCreateMenuOpen}
+aria-haspopup="true"
+aria-controls="create-menu"
+id="create-button"
  title="Create"
  >
  <VideoPlusIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-// FIXED:  </button>
+</button>
  {isCreateMenuOpen && (
  <div
  ref={createMenuRef}
-// FIXED:  id="create-menu"
-// FIXED:  className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 rounded-xl shadow-2xl z-[100] py-1.5 animate-fade-in-down-menu"
+id="create-menu"
+className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/80 rounded-xl shadow-2xl z-[100] py-1.5 animate-fade-in-down-menu"
  role="menu"
-// FIXED:  aria-orientation="vertical"
-// FIXED:  aria-labelledby="create-button" />
+aria-orientation="vertical"
+aria-labelledby="create-button" >
  >
  <CreateMenuItem icon={<ArrowUpTrayIcon />} to="/upload" onClick={(e: any) => handleCloseCreateMenu(e)}>Upload video</CreateMenuItem>
  <CreateMenuItem icon={<SignalIcon />} to="/go-live" onClick={(e: any) => handleCloseCreateMenu(e)}>Go live</CreateMenuItem>
@@ -238,21 +240,21 @@ setIsNotificationsPanelOpen(false);
 
  }}>Create post</CreateMenuItem>
  <hr className="border-neutral-200 dark:border-neutral-700/70 my-1" />
- <CreateMenuItem />
+ <CreateMenuItem
  icon={<LightBulbIcon />}
  to="/ai-content-spark"
-// FIXED:  onClick={(e: any) => handleCloseCreateMenu(e)}
+ onClick={handleCloseCreateMenu}
  >
  AI Content Spark ✨
-// FIXED:  </CreateMenuItem>
-// FIXED:  </div>
+</CreateMenuItem>
+</div>
  )}
-// FIXED:  </div>
+</div>
 
  {/* Enhanced Notification System */}
  <div className="hidden sm:block">
  <NotificationSystem className="relative" />
-// FIXED:  </div>
+</div>
 
  <AuthenticatedUserSection
  userMenuRef={userMenuRef}
@@ -261,11 +263,11 @@ setIsNotificationsPanelOpen(false);
  isUserMenuOpen={isUserMenuOpen}
  handleCloseUserMenu={handleCloseUserMenu} />
  />
-// FIXED:  </div>
+</div>
 
  {/* PWA Install Banner */}
  <PWAInstallBanner />
-// FIXED:  </header>
+</header>
  );
 });
 

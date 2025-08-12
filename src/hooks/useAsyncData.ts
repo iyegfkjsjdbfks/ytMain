@@ -19,7 +19,7 @@ interface UseAsyncDataReturn<T> {
  * @param options - Configuration options
  * @returns Object containing data, loading, error states and utility functions
  */
-export function useAsyncData<T>(,
+export function useAsyncData<T>(
  asyncFunction: () => Promise<T>,
  options: UseAsyncDataOptions<T> = {}
 ): UseAsyncDataReturn<T> {

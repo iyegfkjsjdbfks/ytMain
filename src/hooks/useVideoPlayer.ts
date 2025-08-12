@@ -47,7 +47,7 @@ export interface VideoPlayerControls {
  setQuality: (quality: any) => void
 }
 
-export const useVideoPlayer: any = (;
+export const useVideoPlayer: any = (
  options: VideoPlayerOptions = {},
 ): VideoPlayerState & VideoPlayerControls => {
  const {

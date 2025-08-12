@@ -129,7 +129,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000): a
 }
 
 // Performance monitoring wrapper
-function withPerformanceMonitoring<T>(,
+function withPerformanceMonitoring<T>(
  queryFn: () => Promise<T>,
  queryKey: any
 ): () => Promise<T> {

@@ -119,9 +119,8 @@ return;
  {/* Category chips container */}
  <div
  ref={scrollContainerRef}
-// FIXED:  className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
-// FIXED:  style={{ scrollbarWidth: 'none',
- msOverflowStyle: 'none' } />
+ className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-10 sm:px-12"
+ style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
  >
  {categories?.map((category: any) => {
  const isSelected = category === selectedCategory;
