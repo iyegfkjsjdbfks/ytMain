@@ -98,7 +98,7 @@ export function useToggle(
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => setValue(v => !v), []);
-  const setToggle = useCallback(newValue: any => setValue(newValue: any), []);
+  const setToggle = useCallback((newValue: any) => setValue(newValue), []);
 
   return [value, toggle, setToggle];
 }
@@ -106,7 +106,7 @@ export function useToggle(
 /**
  * Enhanced useArray hook for array state management
  */
-export function useArray<T>(initialArray: T = []) {
+export function useArray<T>(initialArray: T[] = []) {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = useCallback((element: T) => {
@@ -125,7 +125,7 @@ export function useArray<T>(initialArray: T = []) {
     ]);
   }, []);
 
-  const remove = useCallback(index: number => {
+  const remove = useCallback((index: number) => {
     setArray(arr => [...arr.slice(0, index), ...arr.slice(index + 1)]);
   }, []);
 
@@ -291,7 +291,7 @@ export function useUnifiedAppState() {
 
   return {
     // Auth state
-    user,
+    user: context.state.user,
     isAuthenticated: context.state.isAuthenticated,
     login: context.login,
     logout: context.logout,

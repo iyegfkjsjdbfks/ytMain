@@ -191,7 +191,7 @@ export function truncate(str: any, maxLength: any, ellipsis = '...'): string {
  */
 export function toTitleCase(str: any): string {
   return str.replace(/\w\S*/g,
-    (txt: any) => txt: any.charAt(0).toUpperCase() + txt: any.substring(1).toLowerCase()
+    (txt: any) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
   );
 }
 
@@ -257,7 +257,7 @@ export function isObject(value: string | number): value is Record<string, any> {
  * @param value - The value to check
  * @returns True if the value is a function
  */
-export function isFunction(value: string | number): value is (...args) => any {
+export function isFunction(value: string | number): value is (...args: any[]) => any {
   return typeof value === 'function';
 }
 
@@ -286,7 +286,7 @@ export function isValidUrl(str: any): boolean {
  * @param wait - The number of milliseconds to delay
  * @returns A new debounced function
  */
-export function debounce<T extends (...args) => any>(
+export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: any
 ): (...args: Parameters<T>) => void {
@@ -309,7 +309,7 @@ export function debounce<T extends (...args) => any>(
  * @param limit - The number of milliseconds to throttle invocations to
  * @returns A new throttled function
  */
-export function throttle<T extends (...args) => any>(
+export function throttle<T extends (...args: any[]) => any>(
   func: T,
   limit: any
 ): (...args: Parameters<T>) => void {

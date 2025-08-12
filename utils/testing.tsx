@@ -168,7 +168,7 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any));
+export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {

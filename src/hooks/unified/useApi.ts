@@ -120,7 +120,7 @@ const apiCache = new ApiCache();
  * Unified API hook for data fetching with advanced features
  */
 export function useApi<T>(
-  queryKey: string | string,
+  queryKey: string | string[],
   queryFn: () => Promise<ApiResponse<T>>,
   config: UseApiConfig<T> = {}
 ): UseApiReturn<T> {
@@ -324,7 +324,7 @@ export function useApi<T>(
 
 // Specialized hooks for common patterns
 export function useQuery<T>(
-  queryKey: string | string,
+  queryKey: string | string[],
   queryFn: () => Promise<ApiResponse<T>>,
   config?: UseApiConfig<T>
 ) {
@@ -400,9 +400,9 @@ export function useMutation<T, TVariables = any>(
 
 // Cache utilities
 export const queryCache = {
-  invalidate: (key: string) => apiCache.invalidate(key: string),
+  invalidate: (key: string) => apiCache.invalidate(key),
   clear: () => apiCache.clear(),
-  get: <T>(key: string) => apiCache.get<T>(key: string),
+  get: <T>(key: string) => apiCache.get<T>(key),
   set: <T>(key: string, data: T, staleTime?: number) =>
     apiCache.set(key, data, staleTime),
 };

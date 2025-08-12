@@ -23,28 +23,28 @@ interface AppState {
 
   // Video State
   videos: {
-    home: Video;
-    trending: Video;
-    subscriptions: Video;
-    watchLater: Video;
-    history: Video;
-    liked: Video;
+    home: Video[];
+    trending: Video[];
+    subscriptions: Video[];
+    watchLater: Video[];
+    history: Video[];
+    liked: Video[];
   };
 
   // Channel State
   channels: {
-    subscribed: Channel;
-    recommended: Channel;
+    subscribed: Channel[];
+    recommended: Channel[];
   };
 
   // Playlist State
-  playlists: UserPlaylist;
+  playlists: UserPlaylist[];
 
   // Search State
   search: {
     query: string;
-    results: Video;
-    suggestions: string;
+    results: Video[];
+    suggestions: string[];
     isLoading: boolean;
   };
 
@@ -79,7 +79,7 @@ interface AppActions {
   logout: () => void;
 
   // Video Actions
-  setVideos: (category: keyof AppState['videos'], videos: Video) => void;
+  setVideos: (category: keyof AppState['videos'], videos: Video[]) => void;
   addToWatchLater: (video: Video) => void;
   removeFromWatchLater: (videoId: any) => void;
   addToHistory: (video: Video) => void;
@@ -88,12 +88,12 @@ interface AppActions {
   unlikeVideo: (videoId: any) => void;
 
   // Channel Actions
-  setChannels: (category: keyof AppState['channels'], channels: Channel) => void;
+  setChannels: (category: keyof AppState['channels'], channels: Channel[]) => void;
   subscribeToChannel: (channel: Channel) => void;
   unsubscribeFromChannel: (channelId: any) => void;
 
   // Playlist Actions
-  setPlaylists: (playlists: UserPlaylist) => void;
+  setPlaylists: (playlists: UserPlaylist[]) => void;
   createPlaylist: (playlist: Omit<UserPlaylist, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updatePlaylist: (id: string, updates: Partial<UserPlaylist>) => void;
   deletePlaylist: (id: string) => void;
@@ -102,13 +102,13 @@ interface AppActions {
 
   // Search Actions
   setSearchQuery: (query: any) => void;
-  setSearchResults: (results: Video) => void;
+  setSearchResults: (results: Video[]) => void;
   setSearchSuggestions: (suggestions: any) => void;
   setSearchLoading: (loading: any) => void;
   clearSearch: () => void;
 
   // Loading Actions
-  setLoading: (category: keyof AppState['loading: any'], loading: any) => void;
+  setLoading: (category: keyof AppState['loading'], loading: any) => void;
 
   // Error Actions
   setError: (category: keyof AppState['errors'], error: string | null) => void;
@@ -264,14 +264,14 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           subscribeToChannel: (channel) => set((state) => {
-            const exists = state.channels.subscribed.find((c: any) => c: any.id === channel.id);
+            const exists = state.channels.subscribed.find((c: any) => c.id === channel.id);
             if (!exists) {
               state.channels.subscribed.push(channel);
             }
           }),
 
           unsubscribeFromChannel: (channelId) => set((state) => {
-            state.channels.subscribed = state.channels.subscribed.filter((c: any) => c: any.id !== channelId);
+            state.channels.subscribed = state.channels.subscribed.filter((c: any) => c.id !== channelId);
           }),
 
           // Playlist Actions
@@ -290,7 +290,7 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           updatePlaylist: (id, updates) => set((state) => {
-            const index = state.playlists.findIndex((p: any) => p: any.id === id);
+            const index = state.playlists.findIndex((p: any) => p.id === id);
             if (index !== -1) {
               Object.assign(state.playlists[index], updates, {
                 updatedAt: new Date().toISOString(),
@@ -299,17 +299,17 @@ export const useAppStore = create<AppState & AppActions>()(
           }),
 
           deletePlaylist: (id) => set((state) => {
-            state.playlists = state.playlists.filter((p: any) => p: any.id !== id);
+            state.playlists = state.playlists.filter((p: any) => p.id !== id);
           }),
 
           addVideoToPlaylist: (playlistId, video) => set((state) => {
-            const playlist = state.playlists.find((p: any) => p: any.id === playlistId);
+            const playlist = state.playlists.find((p: any) => p.id === playlistId);
             if (playlist) {
               const exists = playlist.videos?.find((v: Video) => v.id === video.id);
               if (!exists) {
                 if (!playlist.videos) {
-playlist.videos = [];
-}
+                  playlist.videos = [];
+                }
                 playlist.videos.push(video);
                 playlist.videoCount = playlist.videos.length;
                 playlist.updatedAt = new Date().toISOString();
@@ -318,7 +318,7 @@ playlist.videos = [];
           }),
 
           removeVideoFromPlaylist: (playlistId, videoId) => set((state) => {
-            const playlist = state.playlists.find((p: any) => p: any.id === playlistId);
+            const playlist = state.playlists.find((p: any) => p.id === playlistId);
             if (playlist?.videos) {
               playlist.videos = playlist.videos.filter((v: Video) => v.id !== videoId);
               playlist.videoCount = playlist.videos.length;
@@ -356,7 +356,7 @@ playlist.videos = [];
           }),
 
           // Error Actions
-          setError: (category, error: Error) => set((state) => {
+          setError: (category, error) => set((state) => {
             state.errors[category] = error;
           }),
 

@@ -88,7 +88,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     if (finalQuery.trim()) {
       // Save to search history
       const searchHistory = JSON.parse(localStorage.getItem('youtubeCloneSearchHistory_v1') || '[]');
-      const updatedHistory = [finalQuery, ...searchHistory.filter((h: any) => h: any !== finalQuery)].slice(0, 20);
+      const updatedHistory = [finalQuery, ...searchHistory.filter((h: any) => h !== finalQuery)].slice(0, 20);
       localStorage.setItem('youtubeCloneSearchHistory_v1', JSON.stringify(updatedHistory));
 
       onSearch(finalQuery, filters);

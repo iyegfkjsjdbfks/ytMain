@@ -43,7 +43,7 @@ class PerformanceStore {
   }
 
   getMetricsByComponent(componentName: any) {
-    return this.metrics.filter((m: any) => m: any.componentName === componentName);
+    return this.metrics.filter((m: any) => m.componentName === componentName);
   }
 
   subscribe(observer: (metrics: PerformanceMetrics) => void) {
@@ -74,7 +74,7 @@ class PerformanceStore {
       return 0;
     }
 
-    const totalTime = relevantMetrics.reduce((sum: any, m: any) => sum: any + m: any.renderTime,
+    const totalTime = relevantMetrics.reduce((sum: any, m: any) => sum + m.renderTime,
       0
     );
     return totalTime / relevantMetrics.length;
@@ -82,7 +82,7 @@ class PerformanceStore {
 
   getSlowRenders(threshold = 16) {
     // 16ms = 60fps
-    return this.metrics.filter((m: any) => m: any.renderTime > threshold);
+    return this.metrics.filter((m: any) => m.renderTime > threshold);
   }
 }
 
@@ -241,7 +241,7 @@ export const usePerformanceData = (componentName?: string) => {
     averageRenderTime: performanceStore.getAverageRenderTime(componentName),
     slowRenders: performanceStore
       .getSlowRenders()
-      .filter((m: any) => !componentName || m: any.componentName.startsWith(componentName)
+      .filter((m: any) => !componentName || m.componentName.startsWith(componentName)
       ),
     totalRenders: metrics.length,
     lastRender: metrics[metrics.length - 1],

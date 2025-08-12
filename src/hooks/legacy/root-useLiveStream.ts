@@ -174,7 +174,8 @@ export function useLiveStream(streamId?: string) {
           superChatCount: 0,
           pollVotes: 0,
           qaQuestions: 0,
-          streamHealth: 'excellent' as const, bitrate: 5000,
+          streamHealth: 'excellent' as const,
+          bitrate: 5000,
           frameDrops: 0,
           latency: 0,
         },
@@ -209,7 +210,7 @@ export function useLiveStream(streamId?: string) {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => (prev: any ? { ...prev: any, status: 'live' } : null));
+      setStream((prev: any) => (prev ? { ...prev, status: 'live' } : null));
       setLoading(false);
       return true;
     } catch (err) {
@@ -229,7 +230,7 @@ export function useLiveStream(streamId?: string) {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setStream((prev: any) => (prev: any ? { ...prev: any, status: 'ended' } : null));
+      setStream((prev: any) => (prev ? { ...prev, status: 'ended' } : null));
       setLoading(false);
       return true;
     } catch (err) {
