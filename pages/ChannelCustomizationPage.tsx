@@ -88,7 +88,7 @@ const ChannelCustomizationPage: React.FC = () => {
   const handleKeywordRemove = (keyword: any) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k: any) => k: any !== keyword),
+      channelKeywords: prev.channelKeywords.filter((k: any) => k !== keyword),
     }));
     setUnsavedChanges(true);
   };

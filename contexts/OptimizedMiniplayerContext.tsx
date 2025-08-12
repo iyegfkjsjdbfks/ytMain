@@ -214,15 +214,15 @@ export const OptimizedMiniplayerProvider = ({ children }: MiniplayerProviderProp
     setPlaying: (playing: any) => dispatch({ type: 'SET_PLAYING', payload: playing: any }),
     setVolume: (volume: any) => dispatch({ type: 'SET_VOLUME', payload: volume: any }),
     setCurrentTime: (time: any) => dispatch({ type: 'SET_CURRENT_TIME', payload: time: any }),
-    setDuration: (duration: any) => dispatch({ type: 'SET_DURATION', payload: duration: any }),
+    setDuration: (duration: any) => dispatch({ type: 'SET_DURATION', payload: duration }),
     toggleMaximize: () => dispatch({ type: 'TOGGLE_MAXIMIZE' }),
-    setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized: any }),
+    setMaximized: (maximized: any) => dispatch({ type: 'SET_MAXIMIZED', payload: maximized }),
     setQueue: (queue: Video) => dispatch({ type: 'SET_QUEUE', payload: queue }),
     addToQueue: (video: Video) => dispatch({ type: 'ADD_TO_QUEUE', payload: video }),
-    removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId: any }),
+    removeFromQueue: (videoId: any) => dispatch({ type: 'REMOVE_FROM_QUEUE', payload: videoId }),
     nextVideo: () => dispatch({ type: 'NEXT_VIDEO' }),
     previousVideo: () => dispatch({ type: 'PREVIOUS_VIDEO' }),
-    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index: number }),
+    setCurrentIndex: (index: number) => dispatch({ type: 'SET_CURRENT_INDEX', payload: index }),
   }), []);
 
   const value = useMemo(() => ({ state, actions }), [state]);

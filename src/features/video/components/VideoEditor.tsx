@@ -479,7 +479,7 @@ export const VideoEditor: React.FC = () => {
                   max='1'
                   step='0.1'
                   value={
-                    editorState.clips.find((c: any) => c: any.id === editorState.selectedClip
+                    editorState.clips.find((c: any) => c.id === editorState.selectedClip
                     )?.volume || 1
                   }
                   onChange={e => {
