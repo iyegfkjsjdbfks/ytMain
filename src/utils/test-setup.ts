@@ -307,9 +307,9 @@ Object.defineProperty(navigator, 'clipboard', {
 Object.defineProperty(window, 'File', {
   writable: true,
   value: class MockFile {
-    constructor(bits: BlobPart, name, options?: FilePropertyBag) {
+    constructor(bits: BlobPart, name: any, options?: FilePropertyBag) {
       this.name = name;
-      this.size = bits.reduce((acc, bit) => {
+      this.size = bits.reduce((acc: any, bit: any) => {
         if (typeof bit === 'string') {
           return acc + bit.length;
         } else if (bit instanceof ArrayBuffer) {
@@ -452,7 +452,7 @@ declare global {
   namespace Vi {
     interface JestAssertion<T = any> {
       toBeInViewport(): T;
-      toHaveAccessibleName(expectedName): T;
+      toHaveAccessibleName(expectedName: any): T;
     }
   }
 }

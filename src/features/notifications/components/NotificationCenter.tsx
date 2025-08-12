@@ -12,8 +12,8 @@ interface NotificationCenterProps {
 
 interface NotificationItemProps {
   notification: Notification;
-  onMarkAsRead: (id) => void;
-  onDelete: (id) => void;
+  onMarkAsRead: (id: string) => void;
+  onDelete: (id: string) => void;
   onClick: (notification: Notification) => void;
 }
 

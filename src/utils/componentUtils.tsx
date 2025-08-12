@@ -14,8 +14,8 @@ import React, { type ReactNode, Fragment, ReactNode } from 'react';
  */
 export const safeArrayRender = <T,>(
   items: T[] | null | undefined,
-  renderItem: (item: T, index) => ReactNode,
-  keyExtractor?: (item: T, index) => string | number
+  renderItem: (item: T, index: number) => ReactNode,
+  keyExtractor?: (item: T, index: number) => string | number
 ): ReactNode[] => {
   if (!items || !Array.isArray(items)) {
     return [];
@@ -40,7 +40,7 @@ export const safeArrayRender = <T,>(
  * @returns React node or null
  */
 export const renderIf = (
-  condition,
+  condition: any,
   component: ReactNode,
   fallback: ReactNode = null
 ): ReactNode => {
@@ -65,7 +65,7 @@ export const createUniqueId = (prefix = 'component'): string => {
  * @param size Size of each chunk
  * @returns Array of chunks
  */
-export const chunkArray = <T,>(array: T, size): T[][] => {
+export const chunkArray = <T,>(array: T, size: any): T[][] => {
   if (!array.length) {
     return [];
   }

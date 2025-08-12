@@ -13,7 +13,7 @@ export interface VideoItem {
 export interface VideoCardProps extends VideoItem {
   showChannelInfo?: boolean;
   className?: string;
-  onMoreClick: (videoId) => void;
+  onMoreClick: (videoId: any) => void;
 }
 
 export interface VideoGridProps {
@@ -21,7 +21,7 @@ export interface VideoGridProps {
   className?: string;
   loading?: boolean;
   skeletonCount?: number;
-  onVideoMoreClick: (videoId) => void;
+  onVideoMoreClick: (videoId: any) => void;
 }
 
 // Re-export all types for convenience

@@ -294,7 +294,7 @@ return;
   /**
    * Generate realistic metric values with some variation
    */
-  private generateRealisticMetric(type, min, max): number {
+  private generateRealisticMetric(type: any, min: any, max: any): number {
     const base = min + (max - min) * Math.random();
 
     // Add some trend based on previous values
@@ -341,7 +341,7 @@ return;
   /**
    * Check if a metric change is an improvement
    */
-  private isImprovement(metric: keyof CodeMetrics, current, previous): number {
+  private isImprovement(metric: keyof CodeMetrics, current: any, previous: any): number {
     const lowerIsBetter = ['complexity', 'duplicateCode', 'technicalDebt', 'securityVulnerabilities', 'performanceIssues', 'accessibilityIssues'];
 
     if (previous === 0) {

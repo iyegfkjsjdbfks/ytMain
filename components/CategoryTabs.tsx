@@ -15,7 +15,7 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeCategory,
   return (
     <div className="mb-6">
       <div className="flex space-x-1 overflow-x-auto no-scrollbar">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}

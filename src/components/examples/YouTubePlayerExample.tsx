@@ -42,7 +42,7 @@ export const YouTubePlayerExample: FC<YouTubePlayerExampleProps> = ({
   const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Format time in seconds to MM:SS format
-  const formatTime = (timeInSeconds): string => {
+  const formatTime = (timeInSeconds: any): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

@@ -9,7 +9,7 @@ interface UsePaginationProps {
 
 export const DOTS = '...';
 
-const range = (start, end) => {
+const range = (start: any, end: any) => {
   const length = end - start + 1;
   return Array.from({ length }, (_, idx) => idx + start);
 };
@@ -96,7 +96,7 @@ export function usePagination({
     return range(1, totalPageCount);
   }, [totalCount, pageSize, siblingCount, currentPage]);
 
-  const goToPage = useCallback((pageNumber) => {
+  const goToPage = useCallback((pageNumber: any) => {
       const totalPageCount = Math.ceil(totalCount / pageSize);
       setCurrentPage(Math.max(1, Math.min(pageNumber, totalPageCount)));
     },

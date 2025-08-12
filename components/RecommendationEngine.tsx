@@ -14,7 +14,7 @@ interface RecommendationEngineProps {
   currentVideo?: Video;
   currentVideoId?: string;
   maxRecommendations?: number;
-  onVideoSelect?: (videoId) => void;
+  onVideoSelect?: (videoId: any) => void;
 }
 
 const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
@@ -201,7 +201,7 @@ const RecommendationEngine: React.FC<RecommendationEngineProps> = ({
 
         // Fill remaining slots with other videos
         if (recommended.length < maxRecommendations) {
-          const remaining = availableVideos.filter(video => !recommended.find((r) => r.id === video.id),
+          const remaining = availableVideos.filter(video => !recommended.find((r: any) => r: any.id === video.id),
           );
           recommended = [...recommended, ...remaining];
         }

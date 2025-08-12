@@ -193,7 +193,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     return filtered;
   };
 
-  const toggleNotifications = (channelId) => {
+  const toggleNotifications = (channelId: any) => {
     setSubscriptions(prev => prev.map(sub =>
       sub.channelId === channelId
         ? { ...sub, notificationsEnabled: !sub.notificationsEnabled }
@@ -208,7 +208,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     localStorage.setItem('youtubeCloneSubscriptions_v1', JSON.stringify(updatedStored));
   };
 
-  const handleUnsubscribe = (channelId) => {
+  const handleUnsubscribe = (channelId: any) => {
     setSubscriptions(prev => prev.filter((sub) => sub.channelId !== channelId));
     // Update localStorage
     const stored = JSON.parse(localStorage.getItem('youtubeCloneSubscriptions_v1') || '{}');
@@ -217,7 +217,7 @@ const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ className = '' })
     setShowUnsubscribeModal(null);
   };
 
-  const toggleBulkSelection = (channelId) => {
+  const toggleBulkSelection = (channelId: any) => {
     setSelectedSubscriptions(prev => {
       const newSet = new Set(prev);
       if (newSet.has(channelId)) {

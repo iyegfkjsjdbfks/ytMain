@@ -48,7 +48,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleVote = async (pollId, optionId) => {
+  const handleVote = async (pollId: any, optionId: any) => {
     try {
       await votePoll(pollId, optionId);
     } catch (error) {
@@ -56,7 +56,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const handleEndPoll = async (pollId) => {
+  const handleEndPoll = async (pollId: any) => {
     try {
       // TODO: Implement end poll functionality
       logger.debug('End poll:', pollId);
@@ -71,7 +71,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const removeOption = (index) => {
+  const removeOption = (index: number) => {
     if (newPoll.options.length > 2) {
       setNewPoll(prev => ({
         ...prev,
@@ -80,14 +80,14 @@ const LivePolls: React.FC<LivePollsProps> = ({
     }
   };
 
-  const updateOption = (index, value: string | number) => {
+  const updateOption = (index: number, value: string | number) => {
     setNewPoll(prev => ({
       ...prev,
       options: prev.options.map((opt, i) => (i === index ? value : opt)),
     }));
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -250,7 +250,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
           </p>
 
           <div className='space-y-2'>
-            {activePoll.options.map((option) => (
+            {activePoll.options.map((option: any) => (
               <div key={option.id} className='relative'>
                 <button
                   onClick={() => handleVote(activePoll.id, option.id)}
@@ -305,7 +305,7 @@ const LivePolls: React.FC<LivePollsProps> = ({
                   </div>
 
                   <div className='space-y-2'>
-                    {poll.options.map((option) => (
+                    {poll.options.map((option: any) => (
                       <div
                         key={option.id}
                         className='flex items-center justify-between text-sm'

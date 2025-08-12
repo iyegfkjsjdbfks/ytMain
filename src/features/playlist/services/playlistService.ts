@@ -49,7 +49,7 @@ class PlaylistService {
   /**
    * Get a specific playlist by ID
    */
-  async getPlaylist(playlistId): Promise<ApiResponse<Playlist>> {
+  async getPlaylist(playlistId: any): Promise<ApiResponse<Playlist>> {
     return api.get(`/api/playlists/${playlistId}`);
   }
 
@@ -57,7 +57,7 @@ class PlaylistService {
    * Get playlist videos
    */
   async getPlaylistVideos(
-    playlistId,
+    playlistId: any,
     page: number = 1,
     limit: number = 50
   ): Promise<ApiResponse<Video[]>> {
@@ -86,7 +86,7 @@ class PlaylistService {
   /**
    * Delete a playlist
    */
-  async deletePlaylist(playlistId): Promise<ApiResponse<void>> {
+  async deletePlaylist(playlistId: any): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}`);
   }
 
@@ -106,8 +106,8 @@ class PlaylistService {
    * Remove video from playlist
    */
   async removeVideoFromPlaylist(
-    playlistId,
-    videoId
+    playlistId: any,
+    videoId: any
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}/videos/${videoId}`);
   }
@@ -130,7 +130,7 @@ class PlaylistService {
    * Duplicate a playlist
    */
   async duplicatePlaylist(
-    playlistId,
+    playlistId: any,
     newTitle?: string
   ): Promise<ApiResponse<Playlist>> {
     return api.post(`/api/playlists/${playlistId}/duplicate`, {
@@ -142,7 +142,7 @@ class PlaylistService {
    * Get public playlists by user
    */
   async getUserPublicPlaylists(
-    userId,
+    userId: any,
     page: number = 1,
     limit: number = 20
   ): Promise<ApiResponse<Playlist[]>> {
@@ -153,7 +153,7 @@ class PlaylistService {
    * Search playlists
    */
   async searchPlaylists(
-    query,
+    query: any,
     filters: Omit<PlaylistFilters, 'search'> = {}
   ): Promise<ApiResponse<Playlist[]>> {
     return api.get('/api/playlists/search', { query, ...filters });
@@ -173,8 +173,8 @@ class PlaylistService {
    * Check if video is in playlist
    */
   async isVideoInPlaylist(
-    playlistId,
-    videoId
+    playlistId: any,
+    videoId: any
   ): Promise<ApiResponse<boolean>> {
     return api.get(`/api/playlists/${playlistId}/videos/${videoId}/exists`);
   }
@@ -182,7 +182,7 @@ class PlaylistService {
   /**
    * Get playlist statistics
    */
-  async getPlaylistStats(playlistId): Promise<
+  async getPlaylistStats(playlistId: any): Promise<
     ApiResponse<{
       totalViews: number;
       totalDuration: number;
@@ -197,7 +197,7 @@ class PlaylistService {
    * Export playlist
    */
   async exportPlaylist(
-    playlistId,
+    playlistId: any,
     format: 'json' | 'csv' | 'm3u'
   ): Promise<ApiResponse<string>> {
     return api.get(`/api/playlists/${playlistId}/export`, { format });
@@ -226,11 +226,11 @@ class PlaylistService {
   /**
    * Follow/unfollow a playlist
    */
-  async followPlaylist(playlistId): Promise<ApiResponse<void>> {
+  async followPlaylist(playlistId: any): Promise<ApiResponse<void>> {
     return api.post(`/api/playlists/${playlistId}/follow`);
   }
 
-  async unfollowPlaylist(playlistId): Promise<ApiResponse<void>> {
+  async unfollowPlaylist(playlistId: any): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}/follow`);
   }
 
@@ -248,8 +248,8 @@ class PlaylistService {
    * Collaborate on playlist (add collaborators)
    */
   async addCollaborator(
-    playlistId,
-    userId,
+    playlistId: any,
+    userId: any,
     permissions: Array<'view' | 'edit' | 'manage'>
   ): Promise<ApiResponse<void>> {
     return api.post(`/api/playlists/${playlistId}/collaborators`, {
@@ -259,8 +259,8 @@ class PlaylistService {
   }
 
   async removeCollaborator(
-    playlistId,
-    userId
+    playlistId: any,
+    userId: any
   ): Promise<ApiResponse<void>> {
     return api.delete(`/api/playlists/${playlistId}/collaborators/${userId}`);
   }
@@ -268,7 +268,7 @@ class PlaylistService {
   /**
    * Get playlist collaborators
    */
-  async getPlaylistCollaborators(playlistId): Promise<
+  async getPlaylistCollaborators(playlistId: any): Promise<
     ApiResponse<
       Array<{
         userId: string;
@@ -286,15 +286,15 @@ class PlaylistService {
    * Bulk operations
    */
   async bulkAddVideos(
-    playlistId,
-    videoIds
+    playlistId: any,
+    videoIds: any
   ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
     return api.post(`/api/playlists/${playlistId}/videos/bulk`, { videoIds });
   }
 
   async bulkRemoveVideos(
-    playlistId,
-    videoIds
+    playlistId: any,
+    videoIds: any
   ): Promise<ApiResponse<{ success: string; failed: string[] }>> {
     return api.delete(`/api/playlists/${playlistId}/videos/bulk`, {
       body: JSON.stringify({ videoIds }),
@@ -305,7 +305,7 @@ class PlaylistService {
   /**
    * Generate playlist thumbnail
    */
-  async generateThumbnail(playlistId): Promise<ApiResponse<string>> {
+  async generateThumbnail(playlistId: any): Promise<ApiResponse<string>> {
     return api.post(`/api/playlists/${playlistId}/thumbnail/generate`);
   }
 
@@ -313,7 +313,7 @@ class PlaylistService {
    * Upload custom playlist thumbnail
    */
   async uploadThumbnail(
-    playlistId,
+    playlistId: any,
     thumbnail: File
   ): Promise<ApiResponse<string>> {
     return api.upload(`/api/playlists/${playlistId}/thumbnail`, thumbnail);

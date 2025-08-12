@@ -96,7 +96,7 @@ class SystemIntegrationHub {
   private health: SystemHealth;
   private config: IntegrationConfig;
   private metrics: SystemMetrics;
-  private eventHandlers: Map<string, Array<(data) => void>> = new Map();
+  private eventHandlers: Map<string, Array<(data: any) => void>> = new Map();
   private healthCheckInterval?: ReturnType<typeof setTimeout>;
   private isInitialized = false;
 
@@ -480,7 +480,7 @@ return 'degraded';
   }
 
   // Event handling methods
-  private handlePerformanceAlert(data): void {
+  private handlePerformanceAlert(data: any): void {
     this.emitEvent({
       type: 'performance',
       source: 'PerformanceMonitor',
@@ -491,7 +491,7 @@ return 'degraded';
     });
   }
 
-  private handleSecurityThreat(data): void {
+  private handleSecurityThreat(data: any): void {
     this.emitEvent({
       type: 'security',
       source: 'SecurityMonitor',
@@ -502,7 +502,7 @@ return 'degraded';
     });
   }
 
-  private handleDeploymentFailure(data): void {
+  private handleDeploymentFailure(data: any): void {
     this.emitEvent({
       type: 'deployment',
       source: 'DeploymentAutomation',
@@ -513,7 +513,7 @@ return 'degraded';
     });
   }
 
-  private handleQualityDegradation(data): void {
+  private handleQualityDegradation(data: any): void {
     this.emitEvent({
       type: 'quality',
       source: 'CodeQualityMonitor',
@@ -524,7 +524,7 @@ return 'degraded';
     });
   }
 
-  private handleFeatureRollback(data): void {
+  private handleFeatureRollback(data: any): void {
     this.emitEvent({
       type: 'feature',
       source: 'FeatureFlagManager',
@@ -563,7 +563,7 @@ return 'degraded';
     }
   }
 
-  private addEventListener(eventType, handler: (data) => void): void {
+  private addEventListener(eventType: any, handler: (data: any) => void): void {
     if (!this.eventHandlers.has(eventType)) {
       this.eventHandlers.set(eventType, []);
     }
@@ -603,7 +603,7 @@ return 'degraded';
       .sort((a, b) => b.timestamp - a.timestamp);
   }
 
-  acknowledgeEvent(eventId): void {
+  acknowledgeEvent(eventId: any): void {
     const event = this.events.find((e: SystemEvent) => e.id === eventId);
     if (event) {
       event.handled = true;

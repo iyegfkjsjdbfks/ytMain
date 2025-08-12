@@ -42,7 +42,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleLikeQuestion = async (questionId) => {
+  const handleLikeQuestion = async (questionId: any) => {
     try {
       await upvoteQuestion(questionId);
     } catch (error) {
@@ -55,7 +55,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handlePinQuestion = async (questionId) => {
+  const handlePinQuestion = async (questionId: any) => {
     try {
       // TODO: Implement pin functionality in service
       conditionalLogger.debug('Pin question:', questionId);
@@ -69,7 +69,7 @@ const LiveQA: React.FC<LiveQAProps> = ({
     }
   };
 
-  const handleAnswerQuestion = async (questionId) => {
+  const handleAnswerQuestion = async (questionId: any) => {
     if (!answerText.trim()) {
       return;
     }

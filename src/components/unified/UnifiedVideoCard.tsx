@@ -27,10 +27,10 @@ export interface UnifiedVideoCardProps {
   showDate?: boolean;
   isLiked?: boolean;
   isSaved?: boolean;
-  onLike?: (videoId) => void;
+  onLike?: (videoId: any) => void;
   onSave?: (video: Video) => void;
   onShare?: (video: Video) => void;
-  onChannelClick?: (channelName) => void;
+  onChannelClick?: (channelName: any) => void;
   className?: string;
   keyPrefix?: string;
 }

@@ -6,9 +6,9 @@ import type { Comment } from '../../types/core';
 
 interface VirtualizedCommentListProps {
   comments: Comment;
-  onReply: (commentId, content) => void;
-  onLike: (commentId) => void;
-  onDislike: (commentId) => void;
+  onReply: (commentId: any, content: any) => void;
+  onLike: (commentId: any) => void;
+  onDislike: (commentId: any) => void;
   className?: string;
   height?: number;
   itemHeight?: number;
@@ -19,9 +19,9 @@ interface CommentItemProps {
   style: React.CSSProperties;
   data: {
     comments: Comment;
-    onReply: (commentId, content) => void;
-    onLike: (commentId) => void;
-    onDislike: (commentId) => void;
+    onReply: (commentId: any, content: any) => void;
+    onLike: (commentId: any) => void;
+    onDislike: (commentId: any) => void;
   };
 }
 

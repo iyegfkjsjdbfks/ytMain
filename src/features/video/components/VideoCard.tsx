@@ -68,7 +68,7 @@ const VideoCard: React.FC<VideoCardProps> = React.memo(
         ? `${(commentCount / 1000).toFixed(1)}K`
         : commentCount?.toString() || '0';
 
-    const formatDuration = (seconds) => {
+    const formatDuration = (seconds: any) => {
       const hours = Math.floor(seconds / 3600);
       const minutes = Math.floor((seconds % 3600) / 60);
       const remainingSeconds = seconds % 60;

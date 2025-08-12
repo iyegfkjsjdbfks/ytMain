@@ -27,10 +27,10 @@ export interface PaginatedRequest {
 // Error classes
 export class ApiError extends Error {
   constructor(
-    message,
-    public status,
+    message: any,
+    public status: any,
     public code?: string,
-    public details?
+    public details: any?
   ) {
     super(message);
     this.name = 'ApiError';
@@ -53,7 +53,7 @@ export class TimeoutError extends Error {
 
 // Utility functions
 export function createApiUrl(
-  endpoint,
+  endpoint: any,
   params?: Record<string, any>
 ): string {
   let fullUrl: string;
@@ -127,7 +127,7 @@ export function createRequestConfig(config: RequestConfig = {}): RequestInit {
 
 // Request wrapper with timeout and retry logic
 export async function apiRequest<T>(
-  url,
+  url: any,
   config: RequestConfig = {}
 ): Promise<ApiResponse<T>> {
   const {
@@ -205,7 +205,7 @@ export async function apiRequest<T>(
 
 // GET request
 export async function get<T>(
-  endpoint,
+  endpoint: any,
   params?: Record<string, any>,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
@@ -215,8 +215,8 @@ export async function get<T>(
 
 // POST request
 export async function post<T>(
-  endpoint,
-  data?,
+  endpoint: any,
+  data: any?,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
@@ -229,8 +229,8 @@ export async function post<T>(
 
 // PUT request
 export async function put<T>(
-  endpoint,
-  data?,
+  endpoint: any,
+  data: any?,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
@@ -243,8 +243,8 @@ export async function put<T>(
 
 // PATCH request
 export async function patch<T>(
-  endpoint,
-  data?,
+  endpoint: any,
+  data: any?,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
@@ -257,7 +257,7 @@ export async function patch<T>(
 
 // DELETE request
 export async function del<T>(
-  endpoint,
+  endpoint: any,
   config?: RequestConfig
 ): Promise<ApiResponse<T>> {
   const url = createApiUrl(endpoint);
@@ -266,7 +266,7 @@ export async function del<T>(
 
 // Upload file
 export async function upload<T>(
-  endpoint,
+  endpoint: any,
   file: File,
   additionalData?: Record<string, any>,
   config?: RequestConfig
@@ -295,7 +295,7 @@ export async function upload<T>(
 
 // Paginated request helper
 export async function getPaginated<T>(
-  endpoint,
+  endpoint: any,
   params: PaginatedRequest = {},
   config?: RequestConfig
 ): Promise<ApiResponse<T[]> & { pagination: PaginationInfo }> {

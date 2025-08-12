@@ -46,7 +46,7 @@ export const queryPresets = {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     retry: 3,
-    retryDelay: (attemptIndex) =>
+    retryDelay: (attemptIndex: any) =>
       Math.min(1000 * 2 ** attemptIndex, 30000),
   },
 } as const;
@@ -96,7 +96,7 @@ function isRetryableError(error: Error): boolean {
 
 // Enhanced retry logic
 function createRetryFn(maxRetries: number = 3) {
-  return (failureCount, error: Error) => {
+  return (failureCount: any, error: Error) => {
     const apiError = createApiError(error);
 
     // Don't retry if error is not retryable
@@ -115,7 +115,7 @@ function createRetryFn(maxRetries: number = 3) {
 
 // Enhanced delay function with exponential backoff and jitter
 function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
-  return (attemptIndex, error: Error) => {
+  return (attemptIndex: any, error: Error) => {
     // Create API error to ensure proper error handling
     createApiError(error);
 
@@ -137,7 +137,7 @@ function createRetryDelay(baseDelay: number = 1000, maxDelay: number = 30000) {
 // Performance monitoring wrapper
 function withPerformanceMonitoring<T>(
   queryFn: () => Promise<T>,
-  queryKey
+  queryKey: any
 ): () => Promise<T> {
   return async () => {
     const startTime = performance.now();
@@ -163,7 +163,7 @@ function withPerformanceMonitoring<T>(
 
 // Enhanced useQuery hook
 export function useEnhancedQuery<TData = unknown, TError = ApiError>(
-  queryKey,
+  queryKey: any,
   queryFn: () => Promise<TData>,
   options: {
     preset?: keyof typeof queryPresets;
@@ -215,7 +215,7 @@ export function useEnhancedMutation<
     invalidateQueries?: string[][];
     optimisticUpdate?: {
       queryKey: string;
-      updateFn: (oldData, variables: TVariables) => any;
+      updateFn: (oldData: any, variables: TVariables) => any;
     };
   } & Omit<
     UseMutationOptions<TData, TError, TVariables>,
@@ -271,7 +271,7 @@ export function useEnhancedMutation<
           optimisticUpdate.queryKey
         );
 
-        queryClient.setQueryData(optimisticUpdate.queryKey, (oldData) =>
+        queryClient.setQueryData(optimisticUpdate.queryKey, (oldData: any) =>
           optimisticUpdate.updateFn(oldData, variables)
         );
 
@@ -310,7 +310,7 @@ export function useEnhancedMutation<
 
 // Utility hooks for common patterns
 export function useInfiniteEnhancedQuery<TData = unknown, _TError = ApiError>(
-  _queryKey,
+  _queryKey: any,
   _queryFn: ({ pageParam }) => Promise<TData>,
   _options: Parameters<typeof useEnhancedQuery>[2] & {
     getNextPageParam?: (lastPage: TData, allPages: TData) => unknown;
@@ -329,7 +329,7 @@ export function useCacheManager() {
   return {
     // Prefetch data
     prefetch: <TData>(
-      queryKey,
+      queryKey: any,
       queryFn: () => Promise<TData>,
       preset: keyof typeof queryPresets = 'standard'
     ) => {

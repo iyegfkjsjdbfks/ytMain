@@ -53,7 +53,7 @@ interface OptimizedSearchResultsProps {
 }
 
 // Debounce hook for search optimization
-function useDebounce<T>(value: T, delay): T {
+function useDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -71,22 +71,22 @@ function useDebounce<T>(value: T, delay): T {
 
 // Memoized sorting functions
 const sortingFunctions = {
-  relevance: (items, query) => {
-    return items.sort((a, b) => {
+  relevance: (items: any, query: any) => {
+    return items.sort((a: any, b: any) => {
       const aRelevance = a.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       const bRelevance = b.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
       return bRelevance - aRelevance;
     });
   },
-  date: (items) => {
-    return items.sort((a, b) => {
+  date: (items: any) => {
+    return items.sort((a: any, b: any) => {
       const dateA = a.uploadedAt || a.publishedAt || '';
       const dateB = b.uploadedAt || b.publishedAt || '';
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
   },
-  views: (items) => {
-    return items.sort((a, b) => {
+  views: (items: any) => {
+    return items.sort((a: any, b: any) => {
       const viewsA = typeof a.views === 'string' ? parseInt(a.views, 10) || 0 : (a.views || 0);
       const viewsB = typeof b.views === 'string' ? parseInt(b.views, 10) || 0 : (b.views || 0);
       return viewsB - viewsA;
@@ -141,7 +141,7 @@ return duration;
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr) => {
+  const formatTimeAgo = (dateStr: any) => {
     try {
       const date = new Date(dateStr);
       const now = new Date();
@@ -294,9 +294,9 @@ const OptimizedSearchResults: React.FC<OptimizedSearchResultsProps> = ({
     performanceMonitor.startMeasure('search-results-processing');
 
     const combined = [
-      ...(videos || []).map(v => ({ ...v, source: 'local' as const, contentType: 'video' as const })),
-      ...(youtubeVideos || []).map(v => ({ ...v, source: 'youtube' as const, contentType: 'video' as const })),
-      ...(googleSearchVideos || []).map(v => ({ ...v, source: 'google-search' as const, contentType: 'video' as const })),
+      ...(videos || []).map(v: any => ({ ...v: any, source: 'local' as const, contentType: 'video' as const })),
+      ...(youtubeVideos || []).map(v: any => ({ ...v: any, source: 'youtube' as const, contentType: 'video' as const })),
+      ...(googleSearchVideos || []).map(v: any => ({ ...v: any, source: 'google-search' as const, contentType: 'video' as const })),
     ];
 
     let sorted = combined;

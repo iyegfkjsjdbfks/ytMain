@@ -331,7 +331,7 @@ export const useWatchPage = () => {
     }
   };
 
-  const handleSaveToPlaylist = async (playlistId) => {
+  const handleSaveToPlaylist = async (playlistId: any) => {
     // Simulate API call to save video to playlist
     await new Promise(resolve => setTimeout(resolve, 300));
 
@@ -348,7 +348,7 @@ export const useWatchPage = () => {
     // Note: Modal will handle closing itself via the executeSave wrapper
   };
 
-  const handleCreatePlaylist = async (name, description?: string) => {
+  const handleCreatePlaylist = async (name: any, description?: string) => {
     // Simulate API call to create new playlist
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -431,7 +431,7 @@ export const useWatchPage = () => {
   };
 
   // Comment handlers
-  const handleMainCommentSubmitCallback = (commentText) => {
+  const handleMainCommentSubmitCallback = (commentText: any) => {
     if (!commentText.trim()) {
       return;
     }
@@ -454,7 +454,7 @@ export const useWatchPage = () => {
     setCommentCount(prev => prev + 1);
   };
 
-  const handleReplySubmit = (parentId) => {
+  const handleReplySubmit = (parentId: any) => {
     if (!currentReplyText.trim()) {
       return;
     }
@@ -493,13 +493,13 @@ export const useWatchPage = () => {
     setReplyingToCommentId(null);
   };
 
-  const handleEditSave = (commentId, newText, parentId?: string) => {
+  const handleEditSave = (commentId: any, newText: any, parentId?: string) => {
     if (!newText.trim()) {
       return;
     }
 
     const updateCommentState = (prevComments: Comment): Comment[] =>
-      prevComments.map((comment) => {
+      prevComments.map((comment: any) => {
         if (comment.id === commentId && comment.parentId === parentId) {
           return {
             ...comment,
@@ -518,7 +518,7 @@ export const useWatchPage = () => {
     setEditingComment(null);
   };
 
-  const handleDeleteComment = (commentId, parentId?: string) => {
+  const handleDeleteComment = (commentId: any, parentId?: string) => {
     if (
       !window.confirm(
         'Are you sure you want to delete this comment? This action cannot be undone.'
@@ -529,10 +529,10 @@ export const useWatchPage = () => {
 
     const deleteCommentFromList = (
       list: Comment,
-      idToDelete,
+      idToDelete: any,
       parentOfDeleted?: string
     ): Comment[] => {
-      return list.reduce((acc, comment) => {
+      return list.reduce((acc: any, comment: any) => {
         if (comment.id === idToDelete && comment.parentId === parentOfDeleted) {
           if (!parentOfDeleted) {
             setCommentCount(prev => prev - 1 - (comment.replyCount || 0));
@@ -568,12 +568,12 @@ export const useWatchPage = () => {
   };
 
   const toggleLikeDislikeForCommentOrReply = (
-    id,
+    id: string,
     parentId: string | undefined,
     action: 'like' | 'dislike'
   ) => {
     const updateList = (list: Comment): Comment[] => {
-      return list.map((item) => {
+      return list.map((item: any) => {
         if (item.id === id && item.parentId === parentId) {
           let newLiked = item.isLikedByCurrentUser;
           let newDisliked = item.isDislikedByCurrentUser;

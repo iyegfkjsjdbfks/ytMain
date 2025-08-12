@@ -20,12 +20,12 @@ interface VideoSettingsProps {
   onClose: () => void;
   qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality) => void;
+  onQualityChange: (quality: any) => void;
   subtitles: Subtitle;
   currentSubtitle: string | null;
   onSubtitleChange: (subtitle: string | null) => void;
   autoplay: boolean;
-  onAutoplayChange: (autoplay) => void;
+  onAutoplayChange: (autoplay: any) => void;
   className?: string;
 }
 
@@ -64,7 +64,7 @@ return null;
       <div className="mb-6">
         <h4 className="text-sm font-medium mb-2 text-gray-300">Quality</h4>
         <div className="space-y-1">
-          {qualities.map((quality) => (
+          {qualities.map((quality: any) => (
             <button
               key={quality.value}
               onClick={() => onQualityChange(quality.value)}
@@ -104,7 +104,7 @@ return null;
               )}
             </div>
           </button>
-          {subtitles.map((subtitle) => (
+          {subtitles.map((subtitle: any) => (
             <button
               key={subtitle.srcLang}
               onClick={() => onSubtitleChange(subtitle.srcLang)}

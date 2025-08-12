@@ -49,7 +49,7 @@ const SearchResultsPage: React.FC = () => {
   });
 
   // Memoized search function with performance monitoring
-  const performSearch = useCallback(async (searchQuery) => {
+  const performSearch = useCallback(async (searchQuery: any) => {
     if (!searchQuery.trim()) {
       setSearchState({
         videos: [],

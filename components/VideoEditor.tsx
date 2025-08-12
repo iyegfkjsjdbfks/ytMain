@@ -42,7 +42,7 @@ export interface VideoFilter {
 
 interface VideoEditorProps {
   videoFile: File;
-  onSave: (editedVideo: Blob, metadata) => void;
+  onSave: (editedVideo: Blob, metadata: any) => void;
   onCancel: () => void;
   className?: string;
 }
@@ -112,7 +112,7 @@ return;
     };
   }, []);
 
-  const generateThumbnail = (time): string => {
+  const generateThumbnail = (time: any): string => {
     // In a real implementation, this would capture a frame from the video
     return `https://picsum.photos/160/90?random=${Math.floor(time)}`;
   };
@@ -131,7 +131,7 @@ return;
     setIsPlaying(!isPlaying);
   };
 
-  const seekTo = (time) => {
+  const seekTo = (time: any) => {
     const video = videoRef.current;
     if (!video) {
 return;
@@ -170,13 +170,13 @@ return;
     setSelectedText(newText.id);
   };
 
-  const updateTextOverlay = (id, updates: Partial<TextOverlay>) => {
+  const updateTextOverlay = (id: string, updates: Partial<TextOverlay>) => {
     setTextOverlays(prev => prev.map(text =>
       text.id === id ? { ...text, ...updates } : text,
     ));
   };
 
-  const deleteTextOverlay = (id) => {
+  const deleteTextOverlay = (id: string) => {
     setTextOverlays(prev => prev.filter((text) => text.id !== id));
     setSelectedText(null);
   };
@@ -193,13 +193,13 @@ return;
     setFilters(prev => [...prev, newFilter]);
   };
 
-  const updateFilter = (id, value: string | number) => {
+  const updateFilter = (id: string, value: string | number) => {
     setFilters(prev => prev.map(filter =>
       filter.id === id ? { ...filter, value } : filter,
     ));
   };
 
-  const removeFilter = (id) => {
+  const removeFilter = (id: string) => {
     setFilters(prev => prev.filter((filter) => filter.id !== id));
   };
 
@@ -245,7 +245,7 @@ return;
     }
   };
 
-  const formatTime = (time): string => {
+  const formatTime = (time: any): string => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;

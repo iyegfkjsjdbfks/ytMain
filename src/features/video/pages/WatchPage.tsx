@@ -125,11 +125,11 @@ const WatchPage: React.FC = () => {
         '📺 First few recommendations:',
         unifiedVideos
           .slice(0, 3)
-          .map((v) => ({ id: v.id, title: v.title }))
+          .map((v: any) => ({ id: v: any.id, title: v: any.title }))
       );
 
       // Convert UnifiedVideoMetadata to Video format for compatibility
-      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo) => ({
+      const convertedRecommendations: Video[] = unifiedVideos.map((unifiedVideo: any) => ({
           id: unifiedVideo.id,
           createdAt: unifiedVideo.publishedAt,
           updatedAt: unifiedVideo.publishedAt,
@@ -731,7 +731,7 @@ const WatchPage: React.FC = () => {
                     {/* Tags */}{' '}
                     {video.tags && video.tags.length > 0 && (
                       <div className='mt-4 flex flex-wrap gap-2'>
-                        {video.tags.map((tag, index) => (
+                        {video.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
                             className='px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full'

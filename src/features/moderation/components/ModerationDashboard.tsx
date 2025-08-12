@@ -138,7 +138,7 @@ export const ModerationDashboard: React.FC = () => {
     return true;
   });
 
-  const handleSelectItem = (itemId) => {
+  const handleSelectItem = (itemId: any) => {
     setSelectedItems(prev =>
       prev.includes(itemId)
         ? prev.filter(id => id !== itemId)
@@ -154,7 +154,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const handleModerationAction = (_itemId, _action: ModerationAction) => {
+  const handleModerationAction = (_itemId: any, _action: ModerationAction) => {
     // In a real app, this would make an API call
   };
 
@@ -165,7 +165,7 @@ export const ModerationDashboard: React.FC = () => {
     setSelectedItems([]);
   };
 
-  const getSeverityColor = (severity) => {
+  const getSeverityColor = (severity: any) => {
     switch (severity) {
       case 'low':
         return 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300';
@@ -180,7 +180,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: any) => {
     switch (type) {
       case 'video':
         return VideoCameraIcon;
@@ -195,7 +195,7 @@ export const ModerationDashboard: React.FC = () => {
     }
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;

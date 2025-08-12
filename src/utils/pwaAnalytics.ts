@@ -146,7 +146,7 @@ class PWAAnalytics {
   }
 
   // Cache Events
-  trackCacheHit(resource) {
+  trackCacheHit(resource: any) {
     this.trackEvent({
       action: 'cache_hit',
       category: 'PWA',
@@ -155,7 +155,7 @@ class PWAAnalytics {
     });
   }
 
-  trackCacheMiss(resource) {
+  trackCacheMiss(resource: any) {
     this.trackEvent({
       action: 'cache_miss',
       category: 'PWA',
@@ -174,7 +174,7 @@ class PWAAnalytics {
   }
 
   // Background Sync Events
-  trackBackgroundSync(tag) {
+  trackBackgroundSync(tag: string) {
     this.trackEvent({
       action: 'background_sync',
       category: 'PWA',
@@ -183,7 +183,7 @@ class PWAAnalytics {
     });
   }
 
-  trackBackgroundSyncSuccess(tag) {
+  trackBackgroundSyncSuccess(tag: string) {
     this.trackEvent({
       action: 'background_sync_success',
       category: 'PWA',
@@ -192,7 +192,7 @@ class PWAAnalytics {
     });
   }
 
-  trackBackgroundSyncError(tag, error: Error) {
+  trackBackgroundSyncError(tag: string, error: Error) {
     this.trackEvent({
       action: 'background_sync_error',
       category: 'PWA',
@@ -243,7 +243,7 @@ class PWAAnalytics {
   }
 
   // Offline Storage Events
-  trackOfflineVideoSaved(videoId) {
+  trackOfflineVideoSaved(videoId: any) {
     this.trackEvent({
       action: 'offline_video_saved',
       category: 'PWA',
@@ -252,7 +252,7 @@ class PWAAnalytics {
     });
   }
 
-  trackOfflineVideoPlayed(videoId) {
+  trackOfflineVideoPlayed(videoId: any) {
     this.trackEvent({
       action: 'offline_video_played',
       category: 'PWA',
@@ -269,7 +269,7 @@ class PWAAnalytics {
     });
   }
 
-  trackStorageCleanup(itemsRemoved) {
+  trackStorageCleanup(itemsRemoved: any) {
     this.trackEvent({
       action: 'storage_cleanup',
       category: 'PWA',
@@ -304,7 +304,7 @@ class PWAAnalytics {
   }
 
   // Share Events
-  trackShareAttempt(method) {
+  trackShareAttempt(method: any) {
     this.trackEvent({
       action: 'share_attempt',
       category: 'PWA',
@@ -313,7 +313,7 @@ class PWAAnalytics {
     });
   }
 
-  trackShareSuccess(method) {
+  trackShareSuccess(method: any) {
     this.trackEvent({
       action: 'share_success',
       category: 'PWA',
@@ -322,7 +322,7 @@ class PWAAnalytics {
     });
   }
 
-  trackShareError(method, error: Error) {
+  trackShareError(method: any, error: Error) {
     this.trackEvent({
       action: 'share_error',
       category: 'PWA',
@@ -332,7 +332,7 @@ class PWAAnalytics {
   }
 
   // Performance Events
-  trackPerformanceMetric(metric, value: string | number, unit) {
+  trackPerformanceMetric(metric: any, value: string | number, unit: any) {
     this.trackEvent({
       action: 'performance_metric',
       category: 'PWA',
@@ -380,7 +380,7 @@ class PWAAnalytics {
   }
 
   // Enable/disable analytics
-  setEnabled(enabled): void {
+  setEnabled(enabled: any): void {
     this.isEnabled = enabled;
   }
 

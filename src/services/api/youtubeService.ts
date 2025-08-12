@@ -95,7 +95,7 @@ interface YouTubeChannelResponse {
 class YouTubeService {
   private cache = new Map<string, { data; timestamp: number; ttl: number }>();
 
-  private buildUrl(endpoint, params: Record<string, string>): string {
+  private buildUrl(endpoint: any, params: Record<string, string>): string {
     const isDevelopment = import.meta.env.MODE === 'development';
     const origin =
       typeof window !== 'undefined'
@@ -113,7 +113,7 @@ class YouTubeService {
     return url.toString();
   }
 
-  private getCachedData<T>(key): T | null {
+  private getCachedData<T>(key: string): T | null {
     const cached = this.cache.get(key);
     if (cached && Date.now() - cached.timestamp < cached.ttl) {
       return cached.data as T;
@@ -122,7 +122,7 @@ class YouTubeService {
     return null;
   }
 
-  private setCachedData(key, data, ttl): void {
+  private setCachedData(key: string, data: any, ttl: any): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -130,7 +130,7 @@ class YouTubeService {
     });
   }
 
-  async fetchVideos(videoIds): Promise<Video[]> {
+  async fetchVideos(videoIds: any): Promise<Video[]> {
     if (!API_KEY) {
       logger.warn(
         'YouTube Data API v3 key not available. Metadata fetching will use fallback methods.'
@@ -220,7 +220,7 @@ class YouTubeService {
     }
   }
 
-  async fetchChannel(channelId): Promise<Channel | null> {
+  async fetchChannel(channelId: any): Promise<Channel | null> {
     if (!API_KEY) {
       logger.warn(
         'YouTube Data API v3 key not available. Channel metadata fetching will use fallback methods.'
@@ -290,7 +290,7 @@ class YouTubeService {
     }
   }
 
-  private parseDuration(duration): string {
+  private parseDuration(duration: any): string {
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
     if (!match) {
       return '0:00';
@@ -306,7 +306,7 @@ class YouTubeService {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
 
-  private formatSubscriberCount(count): string {
+  private formatSubscriberCount(count: any): string {
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     }
@@ -316,7 +316,7 @@ class YouTubeService {
     return count.toString();
   }
 
-  private isShortVideo(duration): boolean {
+  private isShortVideo(duration: any): boolean {
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
     if (!match) {
       return false;
@@ -330,7 +330,7 @@ class YouTubeService {
     return totalSeconds > 0 && totalSeconds <= 60;
   }
 
-  private getCategoryName(categoryId): string {
+  private getCategoryName(categoryId: any): string {
     const categories: Record<string, string> = {
       '1': 'Film & Animation',
       '2': 'Autos & Vehicles',
@@ -351,7 +351,7 @@ class YouTubeService {
   }
 
   async searchVideos(
-    query,
+    query: any,
     options: { maxResults?: number } = {}
   ): Promise<Video[]> {
     if (!API_KEY) {

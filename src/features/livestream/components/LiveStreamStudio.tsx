@@ -196,7 +196,7 @@ export const LiveStreamStudio: React.FC = () => {
     setStats(prev => ({ ...prev, chatMessages: prev.chatMessages + 1 }));
   };
 
-  const formatDuration = (seconds) => {
+  const formatDuration = (seconds: any) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -430,7 +430,7 @@ export const LiveStreamStudio: React.FC = () => {
                       >
                         {message.username}
                       </span>
-                      {message.badges?.map((badge) => (
+                      {message.badges?.map((badge: any) => (
                         <span
                           key={badge}
                           className='text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded'

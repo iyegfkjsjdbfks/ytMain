@@ -14,7 +14,7 @@ import { useState, useEffect, useCallback, useMemo, useRef, memo } from 'react';
 /**
  * Enhanced useDebounce hook with cleanup and cancellation
  */
-export function useOptimizedDebounce<T>(value: T, delay): T {
+export function useOptimizedDebounce<T>(value: T, delay: any): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -45,7 +45,7 @@ export function useOptimizedDebounce<T>(value: T, delay): T {
  */
 export function useOptimizedThrottle<T>(
   value: T,
-  delay,
+  delay: any,
   options: { leading?: boolean; trailing?: boolean } = {}
 ): T {
   const { leading = true, trailing = true } = options;
@@ -87,7 +87,7 @@ export function useOptimizedThrottle<T>(
  * Enhanced useLocalStorage with JSON support and error handling
  */
 export function useOptimizedLocalStorage<T>(
-  key,
+  key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -263,7 +263,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     setArray(prev => [...prev, item]);
   }, []);
 
-  const remove = useCallback((index) => {
+  const remove = useCallback((index: number) => {
     setArray(prev => prev.filter((_, i) => i !== index));
   }, []);
 
@@ -274,7 +274,7 @@ export function useOptimizedArray<T>(initialArray: T = []) {
     []
   );
 
-  const update = useCallback((index, newItem: Partial<T>) => {
+  const update = useCallback((index: number, newItem: Partial<T>) => {
     setArray(prev =>
       prev.map((item, i) => (i === index ? { ...item, ...newItem } : item))
     );
@@ -320,8 +320,8 @@ export function useOptimizedArray<T>(initialArray: T = []) {
  */
 export function useOptimizedMemo<T>(
   factory: () => T,
-  deps,
-  compare?: (a, b) => boolean
+  deps: any,
+  compare?: (a: any, b: any) => boolean
 ): T {
   const memoizedValue = useMemo(factory, deps);
   const lastDeps = useRef<any[]>(deps);
@@ -345,7 +345,7 @@ export function useOptimizedMemo<T>(
  */
 export function useOptimizedCallback<T extends (...args) => any>(
   callback: T,
-  deps
+  deps: any
 ): T {
   const callbackRef = useRef<T>(callback);
   const depsRef = useRef<any[]>(deps);
@@ -353,7 +353,7 @@ export function useOptimizedCallback<T extends (...args) => any>(
   // Update callback if dependencies changed
   useEffect(() => {
     const depsChanged = deps.some(
-      (dep, index) => dep !== depsRef.current[index]
+      (dep: any, index: number) => dep: any !== depsRef.current[index: number]
     );
     if (depsChanged) {
       callbackRef.current = callback;

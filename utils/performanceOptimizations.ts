@@ -110,7 +110,7 @@ export const hookOptimizations = {
    */
   useOptimizedCallback: <T extends (...args) => any>(
     callback: T,
-    deps,
+    deps: any,
   ): T => useCallback(callback, deps),
 
   /**
@@ -118,8 +118,8 @@ export const hookOptimizations = {
    */
   useExpensiveComputation: <T>(
     computeFn: () => T,
-    deps,
-    shouldRecompute?: (newDeps, oldDeps) => boolean,
+    deps: any,
+    shouldRecompute?: (newDeps: any, oldDeps: any) => boolean,
   ): T => {
     return useMemo(() => {
       if (shouldRecompute) {
@@ -138,7 +138,7 @@ export const listOptimizations = {
   /**
    * Generate stable keys for list items
    */
-  generateStableKey: (item, index, prefix = 'item'): string => {
+  generateStableKey: (item: any, index: number, prefix = 'item: any'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -154,7 +154,7 @@ return `${prefix}-${item.name}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T[], chunkSize): T[][] => {
+  chunkArray: <T>(array: T[], chunkSize: any): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -167,8 +167,8 @@ return `${prefix}-${item.name}`;
    */
   getVisibleItems: <T>(
     items: T[],
-    startIndex,
-    visibleCount,
+    startIndex: any,
+    visibleCount: any,
   ): T[] => {
     return items.slice(startIndex, startIndex + visibleCount);
   },
@@ -181,7 +181,7 @@ export const imageOptimizations = {
   /**
    * Preload critical images
    */
-  preloadImage: (src): Promise<void> => {
+  preloadImage: (src: any): Promise<void> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve();
@@ -249,7 +249,7 @@ export const eventOptimizations = {
    */
   throttle: <T extends (...args) => any>(
     func: T,
-    delay,
+    delay: any,
   ): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
@@ -277,7 +277,7 @@ clearTimeout(timeoutId);
    */
   debounce: <T extends (...args) => any>(
     func: T,
-    delay,
+    delay: any,
   ): T => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -294,7 +294,7 @@ clearTimeout(timeoutId);
    */
   addPassiveListener: (
     element: Element,
-    event,
+    event: Event,
     handler: EventListener,
     options?: AddEventListenerOptions,
   ): void => {
@@ -331,7 +331,7 @@ export const memoryOptimizations = {
   /**
    * LRU cache implementation
    */
-  createLRUCache: <K, V>(maxSize) => {
+  createLRUCache: <K, V>(maxSize: any) => {
     const cache = new Map<K, V>();
 
     return {

@@ -18,12 +18,12 @@ export interface PlaybackSpeed {
 interface VideoQualitySelectorProps {
   qualities: VideoQuality;
   currentQuality: string;
-  onQualityChange: (quality) => void;
+  onQualityChange: (quality: any) => void;
   playbackSpeeds?: PlaybackSpeed;
   currentSpeed?: number;
-  onSpeedChange?: (speed) => void;
+  onSpeedChange?: (speed: any) => void;
   volume?: number;
-  onVolumeChange?: (volume) => void;
+  onVolumeChange?: (volume: any) => void;
   isPlaying?: boolean;
   onPlayPause?: () => void;
   isFullscreen?: boolean;
@@ -81,22 +81,22 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
   }, []);
 
   const getCurrentQualityLabel = () => {
-    const quality = qualities.find((q) => q.value === currentQuality);
+    const quality = qualities.find((q: any) => q: any.value === currentQuality);
     return quality?.label || 'Auto';
   };
 
   const getCurrentSpeedLabel = () => {
-    const speed = playbackSpeeds.find((s) => s.value === currentSpeed);
+    const speed = playbackSpeeds.find((s: any) => s: any.value === currentSpeed);
     return speed?.label || 'Normal';
   };
 
-  const handleQualitySelect = (qualityValue) => {
+  const handleQualitySelect = (qualityValue: any) => {
     onQualityChange(qualityValue);
     setShowSettings(false);
     setActivePanel('main');
   };
 
-  const handleSpeedSelect = (speedValue) => {
+  const handleSpeedSelect = (speedValue: any) => {
     onSpeedChange?.(speedValue);
     setShowSettings(false);
     setActivePanel('main');
@@ -264,7 +264,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 </button>
 
                 {/* Quality Options */}
-                {qualities.map((quality) => (
+                {qualities.map((quality: any) => (
                   <button
                     key={quality.value}
                     onClick={() => handleQualitySelect(quality.value)}
@@ -291,7 +291,7 @@ const VideoQualitySelector: React.FC<VideoQualitySelectorProps> = ({
                 </button>
 
                 {/* Speed Options */}
-                {playbackSpeeds.map((speed) => (
+                {playbackSpeeds.map((speed: any) => (
                   <button
                     key={speed.value}
                     onClick={() => handleSpeedSelect(speed.value)}

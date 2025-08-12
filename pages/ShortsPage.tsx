@@ -123,7 +123,7 @@ return [];
   }, [allShorts]);
 
   // Enhanced event handlers with proper type checking
-  const handleLike = useCallback((shortId) => {
+  const handleLike = useCallback((shortId: any) => {
     setLikedShortsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(shortId)) {
@@ -134,7 +134,7 @@ return [];
     });
   }, [setLikedShortsArray]);
 
-  const handleFollow = useCallback((channelName) => {
+  const handleFollow = useCallback((channelName: any) => {
     setFollowedChannelsArray(prev => {
       const currentArray = Array.isArray(prev) ? prev : [];
       if (currentArray.includes(channelName)) {
@@ -145,14 +145,14 @@ return [];
     });
   }, [setFollowedChannelsArray]);
 
-  const handleComment = useCallback((shortId) => {
+  const handleComment = useCallback((shortId: any) => {
     const currentFilteredShorts = filteredShorts;
     const short = currentFilteredShorts.find(s => s.id === shortId);
     setSelectedShortForComment({ id: shortId, title: short?.title || 'Short video' });
     setCommentModalOpen(true);
   }, []);
 
-  const handleCommentSubmit = useCallback(async (_commentText) => {
+  const handleCommentSubmit = useCallback(async (_commentText: any) => {
     if (!selectedShortForComment) {
 return;
 }
@@ -165,7 +165,7 @@ return;
     }
   }, [selectedShortForComment]);
 
-  const handleVideoChange = useCallback((index) => {
+  const handleVideoChange = useCallback((index: number) => {
     setCurrentVideoIndex(index);
 
     // Update URL with current video ID
@@ -253,7 +253,7 @@ return;
     setShowFilters(prev => !prev);
   }, []);
 
-  const handleCategoryChange = useCallback((category) => {
+  const handleCategoryChange = useCallback((category: any) => {
     setSelectedCategory(category);
     setCurrentVideoIndex(0);
   }, []);
@@ -282,7 +282,7 @@ return;
     }
   }, [commentModalOpen, handlePreviousVideo, handleNextVideo, showSearch, showFilters, handleSearchToggle, handleFilterToggle]);
 
-  const handleShare = async (shortId) => {
+  const handleShare = async (shortId: any) => {
     const shareUrl = `${window.location.origin}/shorts?v=${shortId}`;
 
     if (navigator.share) {
@@ -301,7 +301,7 @@ return;
     }
   };
 
-  const copyToClipboard = async (text) => {
+  const copyToClipboard = async (text: any) => {
     try {
       await navigator.clipboard.writeText(text);
       // You could add a toast notification here

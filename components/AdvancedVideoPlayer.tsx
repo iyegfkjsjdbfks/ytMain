@@ -30,7 +30,7 @@ interface AdvancedVideoPlayerProps {
   autoplay?: boolean;
   muted?: boolean;
   className?: string;
-  onTimeUpdate?: (currentTime) => void;
+  onTimeUpdate?: (currentTime: any) => void;
   onEnded?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
@@ -104,7 +104,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
   }, [videoPlayerInstance]);
 
   // Format time for display
-  const formatTime = (time): string => {
+  const formatTime = (time: any): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);
@@ -117,7 +117,7 @@ const AdvancedVideoPlayer: React.FC<AdvancedVideoPlayerProps> = ({
 
   // Get current chapter
   const getCurrentChapter = (): Chapter | undefined => {
-    return chapters.find((chapter) => videoPlayerInstance.currentTime >= chapter.startTime && videoPlayerInstance.currentTime < chapter.endTime,
+    return chapters.find((chapter: any) => videoPlayerInstance.currentTime >= chapter: any.startTime && videoPlayerInstance.currentTime < chapter: any.endTime,
     );
   };
 
@@ -403,7 +403,7 @@ return;
               />
 
               {/* Chapter Markers */}
-              {chapters.map((chapter, index) => {
+              {chapters.map((chapter: any, index: number) => {
                 const markerPosition = videoPlayerInstance.duration ? (chapter.startTime / videoPlayerInstance.duration) * 100 : 0;
                 return (
                   <div
@@ -505,7 +505,7 @@ return;
 
                   {showChapters && (
                     <div className="absolute bottom-full right-0 mb-2 w-64 max-h-48 overflow-y-auto bg-black bg-opacity-90 rounded-lg">
-                      {chapters.map((chapter, index) => (
+                      {chapters.map((chapter: any, index: number) => (
                         <button
                           key={index}
                           onClick={() => goToChapter(chapter)}

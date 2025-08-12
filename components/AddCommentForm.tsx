@@ -4,7 +4,7 @@ const PaperAirplaneIconSolid = PaperAirplaneSolidIcon;
 
 interface AddCommentFormProps {
   currentUserAvatarUrl: string;
-  onCommentSubmit: (commentText) => void;
+  onCommentSubmit: (commentText: any) => void;
   maxCommentLength: number;
 }
 

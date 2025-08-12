@@ -11,7 +11,7 @@ export const withMemo = <P extends object>(
 };
 
 // Deep comparison for complex props
-export const deepEqual = (a, b): boolean => {
+export const deepEqual = (a: any, b: any): boolean => {
   if (a === b) {
     return true;
   }
@@ -70,12 +70,12 @@ export class PerformanceMonitor {
   private metrics = new Map<string, number>();
   private observers = new Map<string, PerformanceObserver>();
 
-  startMeasure(name) {
+  startMeasure(name: any) {
     performance.mark(`${name}-start`);
     this.metrics.set(`${name}-start`, performance.now());
   }
 
-  endMeasure(name) {
+  endMeasure(name: any) {
     const startTime = this.metrics.get(`${name}-start`);
     if (startTime) {
       const endTime = performance.now();
@@ -95,7 +95,7 @@ export class PerformanceMonitor {
     return 0;
   }
 
-  getMeasure(name): number | undefined {
+  getMeasure(name: any): number | undefined {
     return this.metrics.get(name);
   }
 
@@ -141,7 +141,7 @@ export class PerformanceMonitor {
     this.observers.clear();
   }
 
-  hasMetric(name): boolean {
+  hasMetric(name: any): boolean {
     return this.metrics.has(name);
   }
 }
@@ -151,7 +151,7 @@ export const performanceMonitor = new PerformanceMonitor();
 
 // Image optimization utilities
 export const optimizeImageUrl = (
-  url,
+  url: any,
   width?: number,
   height?: number,
   quality = 80
@@ -219,7 +219,7 @@ export const createMemoryManager = () => {
   const accessOrder = new Set();
 
   return {
-    set(key, value: string | number) {
+    set(key: string, value: string | number) {
       if (cache.size >= maxSize) {
         // Remove least recently used item
         const firstKey = accessOrder.values().next().value;
@@ -234,7 +234,7 @@ export const createMemoryManager = () => {
       accessOrder.add(key);
     },
 
-    get(key) {
+    get(key: string) {
       if (cache.has(key)) {
         // Update access order
         accessOrder.delete(key);
@@ -244,11 +244,11 @@ export const createMemoryManager = () => {
       return undefined;
     },
 
-    has(key) {
+    has(key: string) {
       return cache.has(key);
     },
 
-    delete(key) {
+    delete(key: string) {
       cache.delete(key);
       accessOrder.delete(key);
     },
@@ -269,7 +269,7 @@ export const createRequestDeduplicator = () => {
   const pendingRequests = new Map<string, Promise<any>>();
 
   return {
-    deduplicate<T>(key, requestFn: () => Promise<T>): Promise<T> {
+    deduplicate<T>(key: string, requestFn: () => Promise<T>): Promise<T> {
       if (pendingRequests.has(key)) {
         return pendingRequests.get(key) as Promise<T>;
       }

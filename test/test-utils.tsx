@@ -242,7 +242,7 @@ export const mockSessionStorage = () => {
 export const mockFetch = () => {
   const mockFetch = vi.fn();
 
-  const mockResponse = (data, options: { status?: number; ok?: boolean } = {}) => ({
+  const mockResponse = (data: any, options: { status?: number; ok?: boolean } = {}) => ({
     ok: options.ok ?? true,
     status: options.status ?? 200,
     json: vi.fn().mockResolvedValue(data),

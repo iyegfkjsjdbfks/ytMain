@@ -22,7 +22,7 @@ interface VideoPlayerOptions {
   initialVolume?: number;
   initialPlaybackRate?: number;
   initialQuality?: string;
-  onTimeUpdate?: ((currentTime) => void) | undefined;
+  onTimeUpdate?: ((currentTime: any) => void) | undefined;
   onEnded?: (() => void) | undefined;
   onPlay?: (() => void) | undefined;
   onPause?: (() => void) | undefined;
@@ -38,10 +38,10 @@ interface UseVideoPlayerReturn {
     mute: () => void;
     unmute: () => void;
     toggleMute: () => void;
-    setVolume: (volume) => void;
-    seek: (time) => void;
-    setPlaybackRate: (rate) => void;
-    setQuality: (quality) => void;
+    setVolume: (volume: any) => void;
+    seek: (time: any) => void;
+    setPlaybackRate: (rate: any) => void;
+    setQuality: (quality: any) => void;
     enterFullscreen: () => Promise<void>;
     exitFullscreen: () => Promise<void>;
     toggleFullscreen: () => Promise<void>;
@@ -196,7 +196,7 @@ export const useVideoPlayer = (
     }
   }, [state.isMuted, mute, unmute]);
 
-  const setVolume = useCallback((volume) => {
+  const setVolume = useCallback((volume: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -207,7 +207,7 @@ export const useVideoPlayer = (
     setState(prev => ({ ...prev, volume: clampedVolume }));
   }, []);
 
-  const seek = useCallback((time) => {
+  const seek = useCallback((time: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -217,7 +217,7 @@ export const useVideoPlayer = (
     setState(prev => ({ ...prev, currentTime: time }));
   }, []);
 
-  const setPlaybackRate = useCallback((rate) => {
+  const setPlaybackRate = useCallback((rate: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -227,7 +227,7 @@ export const useVideoPlayer = (
     setState(prev => ({ ...prev, playbackRate: rate }));
   }, []);
 
-  const setQuality = useCallback((quality) => {
+  const setQuality = useCallback((quality: any) => {
     setState(prev => ({ ...prev, quality }));
   }, []);
 

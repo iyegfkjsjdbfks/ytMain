@@ -574,8 +574,8 @@ return;
   private generateSecurityAlert(
     type: SecurityAlert['type'],
     severity: SecurityAlert['severity'],
-    title,
-    description,
+    title: any,
+    description: any,
   ): void {
     const alert: SecurityAlert = {
       id: `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -596,7 +596,7 @@ return;
   /**
    * Log security event
    */
-  private logSecurityEvent(event, metadata: Record<string, any>): void {
+  private logSecurityEvent(event: Event, metadata: Record<string, any>): void {
     const log: SecurityAuditLog = {
       id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: Date.now(),
@@ -704,7 +704,7 @@ return;
   /**
    * Acknowledge security alert
    */
-  acknowledgeAlert(alertId, assignee?: string): void {
+  acknowledgeAlert(alertId: any, assignee?: string): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.acknowledged = true;
@@ -723,7 +723,7 @@ return;
   /**
    * Resolve security alert
    */
-  resolveAlert(alertId, resolution): void {
+  resolveAlert(alertId: any, resolution: any): void {
     const alert = this.alerts.get(alertId);
     if (alert) {
       alert.resolution = resolution;
@@ -740,7 +740,7 @@ return;
   /**
    * Update vulnerability status
    */
-  updateVulnerabilityStatus(vulnerabilityId, status: VulnerabilityReport['status']): void {
+  updateVulnerabilityStatus(vulnerabilityId: any, status: VulnerabilityReport['status']): void {
     const vulnerability = this.vulnerabilities.get(vulnerabilityId);
     if (vulnerability) {
       vulnerability.status = status;

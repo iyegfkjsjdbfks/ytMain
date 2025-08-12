@@ -70,7 +70,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
     }
   };
 
-  const getTierColor = (amount) => {
+  const getTierColor = (amount: any) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -78,7 +78,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
     return tier?.color || 'bg-blue-500';
   };
 
-  const getTierDuration = (amount) => {
+  const getTierDuration = (amount: any) => {
     const tier = superChatTiers
       .slice()
       .reverse()
@@ -86,7 +86,7 @@ const SuperChatPanel: React.FC<SuperChatPanelProps> = ({
     return tier?.duration || 30;
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

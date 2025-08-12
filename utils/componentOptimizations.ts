@@ -89,7 +89,7 @@ export const listOptimizations = {
   /**
    * Generate stable keys for list items
    */
-  generateKey: (item, index, prefix = 'item'): string => {
+  generateKey: (item: any, index: number, prefix = 'item: any'): string => {
     if (item.id) {
 return `${prefix}-${item.id}`;
 }
@@ -102,7 +102,7 @@ return `${prefix}-${item.key}`;
   /**
    * Chunk large arrays for better performance
    */
-  chunkArray: <T>(array: T, chunkSize): T[][] => {
+  chunkArray: <T>(array: T, chunkSize: any): T[][] => {
     const chunks: T[][] = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));

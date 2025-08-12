@@ -39,14 +39,14 @@ interface EnhancedCommentSystemProps {
   isModerator?: boolean;
   commentsEnabled: boolean;
   sortBy: 'newest' | 'oldest' | 'popular';
-  onAddComment: (content, parentId?: string) => void;
-  onEditComment: (commentId, content) => void;
-  onDeleteComment: (commentId) => void;
-  onLikeComment: (commentId) => void;
-  onDislikeComment: (commentId) => void;
-  onPinComment: (commentId) => void;
-  onReportComment: (commentId, reason) => void;
-  onModerateComment: (commentId, action: 'approve' | 'flag' | 'remove') => void;
+  onAddComment: (content: any, parentId?: string) => void;
+  onEditComment: (commentId: any, content: any) => void;
+  onDeleteComment: (commentId: any) => void;
+  onLikeComment: (commentId: any) => void;
+  onDislikeComment: (commentId: any) => void;
+  onPinComment: (commentId: any) => void;
+  onReportComment: (commentId: any, reason: any) => void;
+  onModerateComment: (commentId: any, action: 'approve' | 'flag' | 'remove') => void;
   onSortChange: (sort: 'newest' | 'oldest' | 'popular') => void;
   className?: string;
 }
@@ -102,14 +102,14 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleSubmitReply = (parentId, content) => {
+  const handleSubmitReply = (parentId: any, content: any) => {
     if (content.trim()) {
       onAddComment(content.trim(), parentId);
       setReplyingTo(null);
     }
   };
 
-  const handleEditSubmit = (commentId) => {
+  const handleEditSubmit = (commentId: any) => {
     if (editContent.trim()) {
       onEditComment(commentId, editContent.trim());
       setEditingComment(null);
@@ -117,7 +117,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const handleReport = (commentId) => {
+  const handleReport = (commentId: any) => {
     if (reportReason) {
       onReportComment(commentId, reportReason);
       setShowReportModal(null);
@@ -125,7 +125,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     }
   };
 
-  const toggleReplies = (commentId) => {
+  const toggleReplies = (commentId: any) => {
     setExpandedReplies(prev => {
       const newSet = new Set(prev);
       if (newSet.has(commentId)) {
@@ -137,7 +137,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
     });
   };
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -420,7 +420,7 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
                 {expandedReplies.has(comment.id) && (
                   <div className="mt-3">
-                    {comment.replies.map((reply) => renderComment(reply, true))}
+                    {comment.replies.map((reply: any) => renderComment(reply: any, true))}
                   </div>
                 )}
               </div>
@@ -433,11 +433,11 @@ const EnhancedCommentSystem: React.FC<EnhancedCommentSystemProps> = ({
 
   // Filter and sort comments with memoization
   const sortedComments = useMemo(() => {
-    const topLevelComments = comments.filter((comment) => !comment.parentId);
-    const pinnedComments = topLevelComments.filter((comment) => comment.isPinned);
-    const regularComments = topLevelComments.filter((comment) => !comment.isPinned);
+    const topLevelComments = comments.filter((comment: any) => !comment: any.parentId);
+    const pinnedComments = topLevelComments.filter((comment: any) => comment: any.isPinned);
+    const regularComments = topLevelComments.filter((comment: any) => !comment: any.isPinned);
 
-    const sorted = regularComments.sort((a, b) => {
+    const sorted = regularComments.sort((a: any, b: any) => {
       switch (sortBy) {
         case 'newest':
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();

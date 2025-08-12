@@ -128,7 +128,7 @@ const ReusableVideoGrid: React.FC<ReusableVideoGridProps> = ({
 
   return (
     <div className={`grid ${getGridColumns()} ${getGapClass()} ${className}`}>
-      {videos.map((video) => (
+      {videos.map((video: any) => (
         <VideoComponent
           key={video.id}
           video={video}

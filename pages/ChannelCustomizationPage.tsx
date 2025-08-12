@@ -75,7 +75,7 @@ const ChannelCustomizationPage: React.FC = () => {
     setUnsavedChanges(true);
   };
 
-  const handleKeywordAdd = (keyword) => {
+  const handleKeywordAdd = (keyword: any) => {
     if (keyword.trim() && !branding.channelKeywords.includes(keyword.trim())) {
       setBranding(prev => ({
         ...prev,
@@ -85,10 +85,10 @@ const ChannelCustomizationPage: React.FC = () => {
     }
   };
 
-  const handleKeywordRemove = (keyword) => {
+  const handleKeywordRemove = (keyword: any) => {
     setBranding(prev => ({
       ...prev,
-      channelKeywords: prev.channelKeywords.filter((k) => k !== keyword),
+      channelKeywords: prev.channelKeywords.filter((k: any) => k: any !== keyword),
     }));
     setUnsavedChanges(true);
   };
@@ -105,7 +105,7 @@ const ChannelCustomizationPage: React.FC = () => {
     alert('Changes discarded');
   };
 
-  const formatNumber = (num): string => {
+  const formatNumber = (num: any): string => {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)  }M`;
     } else if (num >= 1000) {
@@ -419,7 +419,7 @@ const ChannelCustomizationPage: React.FC = () => {
                         Channel Keywords
                       </label>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {branding.channelKeywords.map((keyword) => (
+                        {branding.channelKeywords.map((keyword: any) => (
                           <span
                             key={keyword}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"

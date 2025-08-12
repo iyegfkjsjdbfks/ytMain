@@ -168,7 +168,7 @@ export const createMockFunction = <T extends (...args) => any>(
 // Async Testing Utilities
 export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-export const waitForTime = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+export const waitForTime = (ms: any) => new Promise(resolve => setTimeout(resolve, ms: any));
 
 // Performance Testing Utilities
 export class PerformanceTestHelper {
@@ -245,7 +245,7 @@ export const createMemoryLeakTest = (testFn: () => void, iterations: number = 10
 };
 
 // Component Testing Utilities
-export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
+export const getByTestId = (container: HTMLElement, testId: any): HTMLElement => {
   const element = container.querySelector(`[data-testid="${testId}"]`);
   if (!element) {
     throw new Error(`Element with test id "${testId}" not found`);
@@ -253,7 +253,7 @@ export const getByTestId = (container: HTMLElement, testId): HTMLElement => {
   return element as HTMLElement;
 };
 
-export const queryByTestId = (container: HTMLElement, testId): HTMLElement | null => {
+export const queryByTestId = (container: HTMLElement, testId: any): HTMLElement | null => {
   return container.querySelector(`[data-testid="${testId}"]`);
 };
 
@@ -274,13 +274,13 @@ export const checkAccessibility = async (container: HTMLElement) => {
 };
 
 // Visual Regression Testing Utilities
-export const takeSnapshot = (component: React.ReactElement, name) => {
+export const takeSnapshot = (component: React.ReactElement, name: any) => {
   const { container } = renderWithProviders(component);
   expect(container.firstChild).toMatchSnapshot(name);
 };
 
 // API Mocking Utilities
-export const mockFetch = (response, status: number = 200) => {
+export const mockFetch = (response: any, status: number = 200) => {
   global.fetch = vi.fn(() =>
     Promise.resolve({
       ok: status >= 200 && status < 300,
@@ -291,7 +291,7 @@ export const mockFetch = (response, status: number = 200) => {
   );
 };
 
-export const mockFetchError = (error) => {
+export const mockFetchError = (error: Error) => {
   global.fetch = vi.fn(() => Promise.reject(new Error(error)));
 };
 
@@ -352,7 +352,7 @@ export const mockMatchMedia = (matches: boolean = false) => {
 
 // Test Suite Helpers
 export const describeWithSetup = (
-  name,
+  name: any,
   setup: () => void,
   tests: () => void,
 ) => {
@@ -388,7 +388,7 @@ export const testUtils = {
   simulateNetworkDelay: async (ms: number = 100) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   },
-  simulateKeyboardNavigation: async (element: HTMLElement, key) => {
+  simulateKeyboardNavigation: async (element: HTMLElement, key: string) => {
     const user = createUserEvent();
     element.focus();
     await user.keyboard(`{${key}}`);

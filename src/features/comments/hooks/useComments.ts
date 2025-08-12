@@ -9,7 +9,7 @@ import type { Comment } from '../../../types/core';
  */
 
 // Query hooks
-export function useVideoComments(videoId, filters: CommentFilters = {}) {
+export function useVideoComments(videoId: any, filters: CommentFilters = {}) {
   return useQuery(
     ['comments', 'video', videoId, JSON.stringify(filters)],
     () => commentService.getVideoComments(videoId, filters),
@@ -22,7 +22,7 @@ export function useVideoComments(videoId, filters: CommentFilters = {}) {
 }
 
 export function useCommentReplies(
-  commentId,
+  commentId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
 ) {
   return useQuery(
@@ -35,7 +35,7 @@ export function useCommentReplies(
   );
 }
 
-export function useComment(commentId) {
+export function useComment(commentId: any) {
   return useQuery(
     ['comment', commentId],
     () => commentService.getComment(commentId),
@@ -46,7 +46,7 @@ export function useComment(commentId) {
   );
 }
 
-export function useCommentThread(commentId) {
+export function useCommentThread(commentId: any) {
   return useQuery(
     ['comment', 'thread', commentId],
     () => commentService.getCommentThread(commentId),
@@ -58,7 +58,7 @@ export function useCommentThread(commentId) {
 }
 
 export function useUserComments(
-  userId,
+  userId: any,
   filters: Omit<CommentFilters, 'parentId'> = {}
 ) {
   return useQuery(
@@ -85,7 +85,7 @@ export function usePendingComments(
   );
 }
 
-export function useCommentStats(videoId) {
+export function useCommentStats(videoId: any) {
   return useQuery(
     ['comments', 'stats', videoId],
     () => commentService.getCommentStats(videoId),
@@ -109,7 +109,7 @@ export function useTrendingComments(
   );
 }
 
-export function useCommentMentions(userId, filters: CommentFilters = {}) {
+export function useCommentMentions(userId: any, filters: CommentFilters = {}) {
   return useQuery(
     ['comments', 'mentions', userId, JSON.stringify(filters)],
     () => commentService.getCommentMentions(userId, filters),
@@ -122,7 +122,7 @@ export function useCommentMentions(userId, filters: CommentFilters = {}) {
 }
 
 export function useCommentAnalytics(
-  videoId,
+  videoId: any,
   timeframe: '7d' | '30d' | '90d' = '30d'
 ) {
   return useQuery(
@@ -136,7 +136,7 @@ export function useCommentAnalytics(
 }
 
 export function useSearchComments(
-  query,
+  query: any,
   videoId?: string,
   filters: CommentFilters = {}
 ) {
@@ -354,7 +354,7 @@ export function useMarkMentionsAsRead() {
 }
 
 // Combined hooks for common patterns
-export function useCommentManagement(videoId) {
+export function useCommentManagement(videoId: any) {
   const comments = useVideoComments(videoId);
   const stats = useCommentStats(videoId);
   const createComment = useCreateComment();
@@ -380,7 +380,7 @@ export function useCommentManagement(videoId) {
   };
 }
 
-export function useCommentInteractions(_commentId) {
+export function useCommentInteractions(_commentId: any) {
   const reactToComment = useReactToComment();
   const removeReaction = useRemoveReaction();
   const pinComment = usePinComment();

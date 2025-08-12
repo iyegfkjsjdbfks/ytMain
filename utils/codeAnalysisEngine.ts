@@ -130,7 +130,7 @@ return;
    */
   async getRefactoringOpportunities(): Promise<RefactoringOpportunity[]> {
     await this.identifyRefactoringOpportunities();
-    return this.refactoringOpportunities.sort((a, b) => b.priority - a.priority);
+    return this.refactoringOpportunities.sort((a: any, b: any) => b: any.priority - a: any.priority);
   }
 
   /**
@@ -157,7 +157,7 @@ return;
   /**
    * Generate automated refactoring suggestions
    */
-  async generateRefactoringSuggestions(_filePath): Promise<{
+  async generateRefactoringSuggestions(_filePath: any): Promise<{
     suggestions: Array<{
       type: string;
       description: string;
@@ -446,12 +446,12 @@ return;
     ];
   }
 
-  private async getFileContent(__filePath): Promise<string> {
+  private async getFileContent(__filePath: any): Promise<string> {
     // Mock implementation - in real scenario, this would read actual file
     return `// Mock file content for ${_filePath}`;
   }
 
-  private async suggestExtractMethod(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestExtractMethod(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     // Mock implementation - in real scenario, this would analyze AST
     return [
       {
@@ -463,7 +463,7 @@ return;
     ];
   }
 
-  private async suggestSimplifyConditions(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestSimplifyConditions(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'simplify-condition',
@@ -474,7 +474,7 @@ return;
     ];
   }
 
-  private async suggestRemoveDuplication(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestRemoveDuplication(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'remove-duplication',
@@ -485,7 +485,7 @@ return;
     ];
   }
 
-  private async suggestImproveNaming(___content): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
+  private async suggestImproveNaming(___content: any): Promise<Array<{ type: string; description: string; code: string; confidence: number }>> {
     return [
       {
         type: 'improve-naming',
@@ -557,7 +557,7 @@ class TechnicalDebtTracker {
   /**
    * Mark debt item as resolved
    */
-  resolveDebt(id): void {
+  resolveDebt(id: string): void {
     const item = this.debtItems.get(id);
     if (item) {
       item.status = 'resolved';
@@ -619,7 +619,7 @@ class AutomatedCodeReviewer {
   /**
    * Review code changes
    */
-  async reviewChanges(files): Promise<{
+  async reviewChanges(files: any): Promise<{
     approved: boolean;
     issues: Array<{
       file: string;
@@ -650,7 +650,7 @@ class AutomatedCodeReviewer {
     return { approved, issues, suggestions };
   }
 
-  private async reviewFile(__file): Promise<{
+  private async reviewFile(__file: any): Promise<{
     issues;
     suggestions;
   }> {

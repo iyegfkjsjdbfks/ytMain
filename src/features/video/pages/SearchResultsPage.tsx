@@ -27,7 +27,7 @@ const SearchResultsPage: React.FC = () => {
       try {
         // Mock local video search function
         const searchLocalVideos = async (
-          _searchQuery
+          _searchQuery: any
         ): Promise<Video[]> => {
           // Return empty array for now - this would normally search local videos
           return [];
@@ -39,7 +39,7 @@ const SearchResultsPage: React.FC = () => {
         );
         // Convert search results to Video format
         const videoResults: Video[] = [
-          ...results.youtubeVideos.map((video) => ({
+          ...results.youtubeVideos.map((video: any) => ({
             id: video.id,
             title: video.title,
             description: video.description,
@@ -64,7 +64,7 @@ const SearchResultsPage: React.FC = () => {
             dislikeCount: video.dislikeCount || 0,
             commentCount: video.commentCount || 0,
           })),
-          ...(results.googleSearchVideos || []).map((video) => ({
+          ...(results.googleSearchVideos || []).map((video: any) => ({
             id: video.id,
             title: video.title,
             description: video.description,

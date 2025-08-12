@@ -10,7 +10,7 @@ import type { Video } from '../types';
 
 interface EnhancedYouTubeVideoCardProps {
   video: Video;
-  onVideoSelect?: ((videoId) => void) | undefined;
+  onVideoSelect?: ((videoId: any) => void) | undefined;
   showChannel?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -42,7 +42,7 @@ const EnhancedYouTubeVideoCard: React.FC<EnhancedYouTubeVideoCardProps> = ({
     return num.toString();
   };
 
-  const formatTimeAgo = (dateStr): string => {
+  const formatTimeAgo = (dateStr: any): string => {
     try {
       return formatDistanceToNow(new Date(dateStr || Date.now()), { addSuffix: true });
     } catch {

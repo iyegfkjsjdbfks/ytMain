@@ -7,9 +7,9 @@ interface StudioVideoGridProps {
   title?: string;
   loading?: boolean;
   emptyMessage?: string;
-  onEdit?: (videoId) => void;
-  onDelete?: (videoId) => void;
-  onVisibilityChange?: (videoId, visibility: VideoVisibility) => void;
+  onEdit?: (videoId: any) => void;
+  onDelete?: (videoId: any) => void;
+  onVisibilityChange?: (videoId: any, visibility: VideoVisibility) => void;
 }
 
 /**
@@ -31,7 +31,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     VideoVisibility | 'all'
   >('all');
 
-  const handleVideoSelect = (videoId, selected) => {
+  const handleVideoSelect = (videoId: any, selected: any) => {
     const newSelection = new Set(selectedVideos);
 
     if (selected) {
@@ -43,9 +43,9 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     setSelectedVideos(newSelection);
   };
 
-  const handleSelectAll = (selected) => {
+  const handleSelectAll = (selected: any) => {
     if (selected) {
-      const allIds = videos.map((video) => video.id);
+      const allIds = videos.map((video: any) => video: any.id);
       setSelectedVideos(new Set(allIds));
     } else {
       setSelectedVideos(new Set());
@@ -70,7 +70,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: any) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -83,7 +83,7 @@ const StudioVideoGrid: React.FC<StudioVideoGridProps> = ({
   const filteredVideos =
     filterVisibility === 'all'
       ? videos
-      : videos.filter((video) => video.visibility === filterVisibility);
+      : videos.filter((video: any) => video: any.visibility === filterVisibility);
 
   // Sort videos based on selected sort option
   const sortedVideos = [...filteredVideos].sort((a, b) => {

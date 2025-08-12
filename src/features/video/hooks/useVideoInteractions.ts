@@ -21,7 +21,7 @@ interface UseVideoInteractionsOptions {
 }
 
 export function useVideoInteractions(
-  videoId,
+  videoId: any,
   options: UseVideoInteractionsOptions = {}
 ) {
   const queryClient = useQueryClient();
@@ -171,7 +171,7 @@ export function useVideoInteractions(
   };
 }
 
-export function useVideoStats(videoId) {
+export function useVideoStats(videoId: any) {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['video-stats', videoId],
     queryFn: () => videoService.getVideoStats(videoId),
@@ -185,7 +185,7 @@ export function useVideoStats(videoId) {
   };
 }
 
-export function useVideoEngagement(videoId) {
+export function useVideoEngagement(videoId: any) {
   const { data: engagement, isLoading } = useQuery({
     queryKey: ['video-engagement', videoId],
     queryFn: () => videoService.getVideoEngagement(videoId),

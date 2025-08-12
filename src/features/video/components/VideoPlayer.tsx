@@ -21,7 +21,7 @@ export interface VideoPlayerProps {
   startTime?: number;
   className?: string;
   onReady?: () => void;
-  onTimeUpdate?: (currentTime, duration) => void;
+  onTimeUpdate?: (currentTime: any, duration: any) => void;
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
@@ -217,7 +217,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
-  const seek = (time) => {
+  const seek = (time: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -226,7 +226,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     video.currentTime = Math.max(0, Math.min(time, state.duration));
   };
 
-  const setVolume = (volume) => {
+  const setVolume = (volume: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -261,7 +261,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
-  const setPlaybackRate = (rate) => {
+  const setPlaybackRate = (rate: any) => {
     const video = videoRef.current;
     if (!video) {
       return;
@@ -298,7 +298,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }, 3000);
   };
 
-  const formatTime = (time): string => {
+  const formatTime = (time: any): string => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.floor(time % 60);

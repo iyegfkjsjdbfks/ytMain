@@ -51,7 +51,7 @@ const PlaylistManagerPage: React.FC = () => {
 
   // Generate mock data
   useEffect(() => {
-    const generateMockVideos = (count): PlaylistVideo[] => {
+    const generateMockVideos = (count: any): PlaylistVideo[] => {
       const titles = [
         'Getting Started with React Hooks',
         'Advanced TypeScript Patterns',
@@ -115,11 +115,11 @@ const PlaylistManagerPage: React.FC = () => {
     const generateMockStats = (playlists: Playlist): PlaylistStats => {
       return {
         totalPlaylists: playlists.length,
-        totalVideos: playlists.reduce((sum, playlist) => sum + playlist.videoCount, 0),
-        totalViews: playlists.reduce((sum, playlist) => sum + playlist.totalViews, 0),
-        publicPlaylists: playlists.filter((p) => p.visibility === 'public').length,
-        privatePlaylists: playlists.filter((p) => p.visibility === 'private').length,
-        unlistedPlaylists: playlists.filter((p) => p.visibility === 'unlisted').length,
+        totalVideos: playlists.reduce((sum: any, playlist: any) => sum: any + playlist: any.videoCount, 0),
+        totalViews: playlists.reduce((sum: any, playlist: any) => sum: any + playlist: any.totalViews, 0),
+        publicPlaylists: playlists.filter((p: any) => p: any.visibility === 'public').length,
+        privatePlaylists: playlists.filter((p: any) => p: any.visibility === 'private').length,
+        unlistedPlaylists: playlists.filter((p: any) => p: any.visibility === 'unlisted').length,
       };
     };
 
@@ -176,7 +176,7 @@ return;
     setShowCreateModal(false);
   };
 
-  const handleDeletePlaylist = (playlistId) => {
+  const handleDeletePlaylist = (playlistId: any) => {
     if (confirm('Are you sure you want to delete this playlist?')) {
       setPlaylists(playlists.filter((p) => p.id !== playlistId));
       if (selectedPlaylist?.id === playlistId) {
@@ -201,7 +201,7 @@ return;
     }
   };
 
-  const getVisibilityIcon = (visibility) => {
+  const getVisibilityIcon = (visibility: any) => {
     switch (visibility) {
       case 'public':
         return <GlobeAltIcon className="w-4 h-4" />;
@@ -427,11 +427,11 @@ return;
                   <h4 className="font-medium text-gray-900 dark:text-white mb-3">Videos ({selectedPlaylist.videos.length})</h4>
                   <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable droppableId="playlist-videos">
-                      {(provided) => (
+                      {(provided: any) => (
                         <div { ...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-                          {selectedPlaylist.videos.map((video, index) => (
+                          {selectedPlaylist.videos.map((video: any, index: number) => (
                             <Draggable key={video.id} draggableId={video.id} index={index}>
-                              {(provided, snapshot) => (
+                              {(provided: any, snapshot: any) => (
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}

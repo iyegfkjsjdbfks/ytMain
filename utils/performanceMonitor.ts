@@ -67,7 +67,7 @@ return;
   /**
    * Track custom performance metrics
    */
-  public trackCustomMetric(name, value: string | number): void {
+  public trackCustomMetric(name: any, value: string | number): void {
     if (!this.isEnabled) {
 return;
 }
@@ -123,7 +123,7 @@ return;
   /**
    * Track React component render performance
    */
-  public trackComponentRender(componentName, renderTime): void {
+  public trackComponentRender(componentName: any, renderTime: any): void {
     if (!this.isEnabled) {
 return;
 }
@@ -140,7 +140,7 @@ return;
   /**
    * Track API call performance
    */
-  public trackApiCall(endpoint, duration, status): void {
+  public trackApiCall(endpoint: any, duration: any, status: any): void {
     if (!this.isEnabled) {
 return;
 }
@@ -211,7 +211,7 @@ return;
     }
   }
 
-  private observePerformanceEntry(entryType, callback: (entry) => void): void {
+  private observePerformanceEntry(entryType: any, callback: (entry: any) => void): void {
     try {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach(callback);
@@ -236,8 +236,8 @@ return;
 export const performanceMonitor = new PerformanceMonitor();
 
 // React hook for component performance tracking
-export function usePerformanceTracking(componentName) {
-  const trackRender = (renderTime) => {
+export function usePerformanceTracking(componentName: any) {
+  const trackRender = (renderTime: any) => {
     performanceMonitor.trackComponentRender(componentName, renderTime);
   };
 

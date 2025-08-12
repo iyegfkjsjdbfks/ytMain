@@ -75,11 +75,11 @@ const ChannelTabContent = ({
   };
 
   const renderVideosTab = (isShorts: boolean = false) => {
-    const filteredVideos = videos.filter((v) => isShorts ? v.isShort : !v.isShort);
+    const filteredVideos = videos.filter((v: any) => isShorts ? v: any.isShort : !v: any.isShort);
     if (filteredVideos.length > 0) {
       return (
         <div className={`grid grid-cols-1 ${isShorts ? 'xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7' : 'xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} 2xl:${isShorts ? 'grid-cols-8' : 'grid-cols-5'} gap-x-3 md:gap-x-4 gap-y-5 md:gap-y-6 pt-4`}>
-          {filteredVideos.map((video) => (
+          {filteredVideos.map((video: any) => (
             <VideoCard key={video.id} video={video} />
           ))}
         </div>
@@ -93,7 +93,7 @@ const ChannelTabContent = ({
      if (playlistsToRender.length > 0) {
       return (
         <div className={`grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${isHomePageSlice ? 'xl:grid-cols-4' : 'xl:grid-cols-5'} gap-x-4 md:gap-x-5 gap-y-5 md:gap-y-6 pt-4`}>
-          {playlistsToRender.map((playlist) => (
+          {playlistsToRender.map((playlist: any) => (
             <Link to={`/playlist/${playlist.id}`} key={playlist.id} className="group block">
               <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 rounded-xl overflow-hidden">
                 <img
@@ -128,7 +128,7 @@ const ChannelTabContent = ({
     if (communityPosts.length > 0) {
       return (
         <div className="max-w-2xl mx-auto space-y-6 py-6">
-          {communityPosts.map((post) => (
+          {communityPosts.map((post: any) => (
             <div key={post.id} className="bg-white dark:bg-neutral-800/70 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700/50">
               <div className="flex items-center mb-3">
                 <img src={post.channelAvatarUrl} alt={post.channelName} className="w-10 h-10 rounded-full mr-3"/>

@@ -54,13 +54,13 @@ interface UsePWANotificationsReturn {
   // Actions
   requestPermission: () => Promise<NotificationPermission>;
   showNotification: (options: NotificationOptions) => Promise<boolean>;
-  scheduleNotification: (options: NotificationOptions, delay) => void;
+  scheduleNotification: (options: NotificationOptions, delay: any) => void;
   clearNotifications: (tag?: string) => Promise<void>;
 
   // Settings
-  enableQuietHours: (start, end) => void;
+  enableQuietHours: (start: any, end: any) => void;
   disableQuietHours: () => void;
-  setNotificationFrequency: (maxPerHour) => void;
+  setNotificationFrequency: (maxPerHour: any) => void;
 
   // Analytics
   getNotificationStats: () => NotificationStats;
@@ -317,7 +317,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   );
 
   // Schedule notification
-  const scheduleNotification = useCallback((options: NotificationOptions, delay) => {
+  const scheduleNotification = useCallback((options: NotificationOptions, delay: any) => {
       setTimeout(() => {
         showNotification(options);
       }, delay);
@@ -364,7 +364,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   );
 
   // Enable quiet hours
-  const enableQuietHours = useCallback((start, end) => {
+  const enableQuietHours = useCallback((start: any, end: any) => {
     const quietHours = { start, end };
     localStorage.setItem(
       'notification-quiet-hours',
@@ -390,7 +390,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   }, []);
 
   // Set notification frequency limit
-  const setNotificationFrequency = useCallback((maxPerHour) => {
+  const setNotificationFrequency = useCallback((maxPerHour: any) => {
     localStorage.setItem('notification-frequency-limit', maxPerHour.toString());
 
     conditionalLogger.debug(
@@ -448,12 +448,12 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   }, []);
 
   // Helper functions
-  const parseTimeString = (timeStr): number => {
+  const parseTimeString = (timeStr: any): number => {
     const [hours, minutes] = timeStr.split(':').map(Number);
     return (hours || 0) * 60 + (minutes || 0);
   };
 
-  const trackNotificationEvent = (event: Event, data) => {
+  const trackNotificationEvent = (event: Event, data: any) => {
     try {
       const events = JSON.parse(
         localStorage.getItem('notification-events') || '[]'
@@ -496,7 +496,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
     }
   };
 
-  const getRecentNotifications = (since): any[] => {
+  const getRecentNotifications = (since: any): any[] => {
     try {
       const events = JSON.parse(
         localStorage.getItem('notification-events') || '[]'
@@ -523,7 +523,7 @@ export const usePWANotifications = (): UsePWANotificationsReturn => {
   useEffect(() => {
     if (!isQuietHours() && state.pendingNotifications.length > 0) {
       // Show pending notifications
-      state.pendingNotifications.forEach((notification) => {
+      state.pendingNotifications.forEach((notification: any) => {
         showNotification(notification);
       });
 

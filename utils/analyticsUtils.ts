@@ -7,7 +7,7 @@ return 0;
   return (video.likes / video.viewCount) * 100;
 }
 
-export function formatEngagementRate(rate): string {
+export function formatEngagementRate(rate: any): string {
   return `${rate.toFixed(2)  }%`;
 }
 
@@ -33,7 +33,7 @@ export function getWatchTime(video: Video): number {
   return viewCount ? viewCount * 2.5 : 0;
 }
 
-export function formatWatchTime(seconds): string {
+export function formatWatchTime(seconds: any): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
 

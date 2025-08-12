@@ -9,10 +9,10 @@ interface FormContextValue {
   errors: Record<string, string>;
   touched: Record<string, boolean>;
   values: Record<string, any>;
-  setFieldValue: (name, value: string | number) => void;
-  setFieldError: (name, error: Error) => void;
-  setFieldTouched: (name, touched) => void;
-  validateField: (name) => void;
+  setFieldValue: (name: any, value: string | number) => void;
+  setFieldError: (name: any, error: Error) => void;
+  setFieldTouched: (name: any, touched: any) => void;
+  validateField: (name: any) => void;
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -34,7 +34,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const setFieldValue = useCallback((name, value: string | number) => {
+  const setFieldValue = useCallback((name: any, value: string | number) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -42,15 +42,15 @@ export const FormProvider: React.FC<FormProviderProps> = ({
     }
   }, [errors]);
 
-  const setFieldError = useCallback((name, error: Error) => {
+  const setFieldError = useCallback((name: any, error: Error) => {
     setErrors(prev => ({ ...prev, [name]: error }));
   }, []);
 
-  const setFieldTouched = useCallback((name, touched) => {
+  const setFieldTouched = useCallback((name: any, touched: any) => {
     setTouched(prev => ({ ...prev, [name]: touched }));
   }, []);
 
-  const validateField = useCallback((name) => {
+  const validateField = useCallback((name: any) => {
     const validator = validationSchema[name];
     if (validator) {
       const error = validator(values[name]);

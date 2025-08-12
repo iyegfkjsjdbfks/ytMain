@@ -649,7 +649,7 @@ return;
   /**
    * Trigger a deployment pipeline
    */
-  async triggerDeployment(pipelineId, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
+  async triggerDeployment(pipelineId: any, trigger: 'manual' | 'auto' = 'manual'): Promise<string> {
     const pipeline = this.pipelines.get(pipelineId);
     if (!pipeline) {
       throw new Error(`Pipeline ${pipelineId} not found`);
@@ -668,7 +668,7 @@ return;
       pipelineId,
       status: 'pending',
       startTime: Date.now(),
-      stages: pipeline.stages.map((stage) => ({
+      stages: pipeline.stages.map((stage: any) => ({
         stageId: stage.id,
         status: 'pending',
         logs: [],
@@ -705,7 +705,7 @@ return;
   /**
    * Execute a deployment
    */
-  private async executeDeployment(__executionId): Promise<void> {
+  private async executeDeployment(__executionId: any): Promise<void> {
     const _execution = this.executions.get(_executionId);
     if (!_execution) {
 return;
@@ -863,7 +863,7 @@ return;
   /**
    * Check quality gates
    */
-  private async checkQualityGates(environment): Promise<boolean> {
+  private async checkQualityGates(environment: any): Promise<boolean> {
     const config = this.configs.get(`${environment}-config`) as any;
     if (!config) {
       return true;
@@ -912,7 +912,7 @@ continue;
   /**
    * Evaluate a criterion
    */
-  private evaluateCriterion(value: string | number, operator, threshold): boolean {
+  private evaluateCriterion(value: string | number, operator: any, threshold: any): boolean {
     switch (operator) {
       case '>':
         return value > threshold;
@@ -932,7 +932,7 @@ continue;
   /**
    * Perform health checks
    */
-  private async performHealthChecks(environment, execution: DeploymentExecution): Promise<void> {
+  private async performHealthChecks(environment: any, execution: DeploymentExecution): Promise<void> {
     const config = this.configs.get(`${environment}-config`) as any;
     if (!config) {
       return;
@@ -1006,7 +1006,7 @@ continue;
   /**
    * Perform rollback
    */
-  private async performRollback(execution: DeploymentExecution, reason): Promise<void> {
+  private async performRollback(execution: DeploymentExecution, reason: any): Promise<void> {
     this.addLog(execution, 'warn', `Initiating rollback: ${reason}`);
 
     const rollbackInfo: RollbackInfo = {
@@ -1052,7 +1052,7 @@ continue;
    * Send notifications
    */
   private async sendNotifications(
-    environment,
+    environment: any,
     event: 'start' | 'success' | 'failure' | 'rollback',
     execution: DeploymentExecution,
   ): Promise<void> {
@@ -1061,7 +1061,7 @@ continue;
       return;
     }
 
-    const relevantNotifications = (config as any).notifications.filter((n) => n.events?.includes(event));
+    const relevantNotifications = (config as any).notifications.filter((n: any) => n: any.events?.includes(event));
 
     for (const notification of relevantNotifications) {
       try {
@@ -1089,7 +1089,7 @@ continue;
   private addLog(
     execution: DeploymentExecution,
     level: 'info' | 'warn' | 'error' | 'debug',
-    message,
+    message: any,
     stage?: string,
   ): void {
     const log: DeploymentLogEntry = {
@@ -1110,7 +1110,7 @@ continue;
   /**
    * Get deployment _execution
    */
-  getExecution(_executionId): DeploymentExecution | undefined {
+  getExecution(_executionId: any): DeploymentExecution | undefined {
     return this.executions.get(_executionId);
   }
 
@@ -1175,7 +1175,7 @@ continue;
   /**
    * Cancel deployment
    */
-  async cancelDeployment(_executionId): Promise<void> {
+  async cancelDeployment(_executionId: any): Promise<void> {
     const _execution = this.executions.get(_executionId);
     if (!_execution) {
       throw new Error(`Execution ${_executionId} not found`);

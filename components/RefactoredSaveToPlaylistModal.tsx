@@ -13,8 +13,8 @@ interface RefactoredSaveToPlaylistModalProps {
   onClose: () => void;
   videoId: string;
   existingPlaylists: Playlist;
-  onSaveToPlaylist: (videoId, playlistId) => Promise<void>;
-  onCreatePlaylist: (name, description?: string) => Promise<Playlist>;
+  onSaveToPlaylist: (videoId: any, playlistId: any) => Promise<void>;
+  onCreatePlaylist: (name: any, description?: string) => Promise<Playlist>;
 }
 
 /**
@@ -191,7 +191,7 @@ return 'Playlist name must be less than 100 characters';
               </div>
             ) : (
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                {existingPlaylists.map((playlist) => (
+                {existingPlaylists.map((playlist: any) => (
                   <label
                     key={playlist.id}
                     htmlFor={`playlist-${playlist.id}`}
